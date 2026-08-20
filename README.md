@@ -1,50 +1,68 @@
-# Welcome to your Expo app 👋
+# Escuadra
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A football squad quiz for iOS. Expo SDK 54 + expo-router, TypeScript strict,
+Zustand, Reanimated. Dark-only.
 
-## Get started
+Runs in **Expo Go** — no Xcode, no Apple Developer account, no native build.
 
-1. Install dependencies
-
-   ```bash
-   npm install
-   ```
-
-2. Start the app
-
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
+## Daily loop
 
 ```bash
-npm run reset-project
+npm run check
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+```bash
+npx expo start
+```
 
-## Learn more
+Scan the QR with the iPhone Camera app; it offers to open in Expo Go. Edit, save,
+see it on the phone.
 
-To learn more about developing your project with Expo, look at the following resources:
+Useful keys in the Metro terminal: `r` reload · `m` dev menu · `j` DevTools ·
+`Ctrl+C` stop. `npx expo start -c` clears the bundler cache.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Scripts
 
-## Join the community
+| Script              | Does                                                        |
+| ------------------- | ----------------------------------------------------------- |
+| `npm run check`     | `typecheck` then `lint` — must be green before every commit |
+| `npm run typecheck` | `tsc --noEmit`                                              |
+| `npm run lint`      | `expo lint`                                                 |
+| `npm run format`    | Prettier, write mode                                        |
 
-Join our community of developers creating universal apps.
+## Layout
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+```
+app/          expo-router routes (files = routes)
+components/   shared UI; ui/ holds primitives
+data/         static squad JSON
+lib/          pure logic — no React, no store imports
+stores/       Zustand: progress (persisted), session (ephemeral)
+theme/        design tokens + font map
+types/        shared domain types
+```
+
+`lib/` stays pure so the question engine and answer matching are unit-testable
+without a renderer.
+
+## Constraints worth knowing
+
+- **Pinned to SDK 54 on purpose.** App Store Expo Go stops at 54; a newer SDK
+  gives `Project is incompatible with this version of Expo Go`. The SDK 57
+  upgrade belongs with the move to a dev client.
+- **Fonts load at runtime** via `useFonts` in `app/_layout.tsx`. Expo Go cannot
+  use the expo-font config plugin — that needs a prebuild.
+- **Import fonts from per-weight subpaths** (`@expo-google-fonts/inter/700Bold`),
+  never the package root. The root barrel pulls in every weight and italic.
+- **No Moti.** It is built against Reanimated 3; this project is on Reanimated 4.
+  Use Reanimated directly.
+
+## Troubleshooting
+
+| Symptom                               | Fix                                                                   |
+| ------------------------------------- | --------------------------------------------------------------------- |
+| QR scans but never connects           | Allow Node.js on **private** networks in Windows Firewall (port 8081) |
+| Connects once then dies               | Settings → Privacy & Security → Local Network → Expo Go → on          |
+| Phone and laptop can't see each other | Same Wi-Fi, no client isolation; else `npx expo start --tunnel`       |
+| Animations do nothing                 | `npx expo start -c`                                                   |
+| Stale code after adding a package     | `npx expo start -c`                                                   |
