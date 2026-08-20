@@ -1,0 +1,82 @@
+[
+  {
+    "id": "ars",
+    "kind": "club",
+    "name": "Arsenal",
+    "season": "2025/26",
+    "accentId": "ars",
+    "verified": true
+  },
+  {
+    "id": "rma",
+    "kind": "club",
+    "name": "Real Madrid",
+    "season": "2025/26",
+    "accentId": "rma",
+    "verified": true
+  },
+  {
+    "id": "bar",
+    "kind": "club",
+    "name": "Barcelona",
+    "season": "2025/26",
+    "accentId": "bar",
+    "verified": true
+  },
+  {
+    "id": "int",
+    "kind": "club",
+    "name": "Inter Milan",
+    "season": "2025/26",
+    "accentId": "int",
+    "verified": true
+  },
+  {
+    "id": "psg",
+    "kind": "club",
+    "name": "Paris Saint-Germain",
+    "season": "2025/26",
+    "accentId": "psg",
+    "verified": true
+  },
+  {
+    "id": "bra",
+    "kind": "nation",
+    "name": "Brazil",
+    "season": "2026",
+    "accentId": "bra",
+    "verified": true
+  },
+  {
+    "id": "arg",
+    "kind": "nation",
+    "name": "Argentina",
+    "season": "2026",
+    "accentId": "arg",
+    "verified": true
+  },
+  {
+    "id": "esp",
+    "kind": "nation",
+    "name": "Spain",
+    "season": "2026",
+    "accentId": "esp",
+    "verified": true
+  },
+  {
+    "id": "fra",
+    "kind": "nation",
+    "name": "France",
+    "season": "2026",
+    "accentId": "fra",
+    "verified": true
+  },
+  {
+    "id": "jpn",
+    "kind": "nation",
+    "name": "Japan",
+    "season": "2026",
+    "accentId": "jpn",
+    "verified": true
+  }
+]

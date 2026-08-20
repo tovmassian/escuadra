@@ -1,0 +1,29 @@
+{
+  "id": "bar",
+  "kind": "club",
+  "name": "Barcelona",
+  "season": "2025/26",
+  "accentId": "bar",
+  "verified": true,
+  "members": [
+    { "playerId": "joan-garcia", "no": 13, "apps": 15 },
+    { "playerId": "szczesny", "no": 25, "apps": 10 },
+    { "playerId": "cubarsi", "no": 5, "apps": 75 },
+    { "playerId": "kounde", "no": 23, "apps": 145 },
+    { "playerId": "araujo", "no": 4, "apps": 140 },
+    { "playerId": "balde", "no": 3, "apps": 130 },
+    { "playerId": "eric-garcia", "no": 24, "apps": 60 },
+    { "playerId": "martin", "no": 18, "apps": 15 },
+    { "playerId": "pedri", "no": 8, "apps": 175, "captain": true },
+    { "playerId": "gavi", "no": 6, "apps": 110 },
+    { "playerId": "de-jong", "no": 21, "apps": 245 },
+    { "playerId": "bernal", "no": 22, "apps": 8 },
+    { "playerId": "fermin", "no": 16, "apps": 55 },
+    { "playerId": "dani-olmo", "no": 20, "apps": 45 },
+    { "playerId": "lewandowski", "no": 9, "apps": 140 },
+    { "playerId": "raphinha", "no": 11, "apps": 95 },
+    { "playerId": "yamal", "no": 10, "apps": 85 },
+    { "playerId": "rashford", "no": 14, "apps": 15 },
+    { "playerId": "bardghji", "no": 28, "apps": 10 }
+  ]
+}

@@ -1,0 +1,32 @@
+{
+  "id": "bra",
+  "kind": "nation",
+  "name": "Brazil",
+  "season": "2026",
+  "accentId": "bra",
+  "verified": true,
+  "members": [
+    { "playerId": "alisson", "no": 1, "apps": 85 },
+    { "playerId": "bento", "no": 12, "apps": 8 },
+    { "playerId": "hugo-souza", "no": 22, "apps": 3 },
+    { "playerId": "douglas-santos", "no": 2, "apps": 20 },
+    { "playerId": "gabriel", "no": 3, "apps": 25 },
+    { "playerId": "marquinhos", "no": 4, "apps": 90, "captain": true },
+    { "playerId": "casemiro", "no": 5, "apps": 80 },
+    { "playerId": "alexsandro", "no": 6, "apps": 5 },
+    { "playerId": "vinicius", "no": 7, "apps": 40 },
+    { "playerId": "bruno-guimaraes", "no": 8, "apps": 45 },
+    { "playerId": "raphinha", "no": 9, "apps": 45 },
+    { "playerId": "paqueta", "no": 10, "apps": 50 },
+    { "playerId": "rodrygo", "no": 11, "apps": 35 },
+    { "playerId": "alex-sandro", "no": 14, "apps": 15 },
+    { "playerId": "andrey-santos", "no": 15, "apps": 6 },
+    { "playerId": "caio-henrique", "no": 16, "apps": 12 },
+    { "playerId": "wesley", "no": 17, "apps": 5 },
+    { "playerId": "endrick", "no": 18, "apps": 15 },
+    { "playerId": "joelinton", "no": 19, "apps": 22 },
+    { "playerId": "savinho", "no": 20, "apps": 15 },
+    { "playerId": "richarlison", "no": 21, "apps": 55 },
+    { "playerId": "vanderson", "no": 23, "apps": 10 }
+  ]
+}

@@ -1,0 +1,31 @@
+{
+  "id": "int",
+  "kind": "club",
+  "name": "Inter Milan",
+  "season": "2025/26",
+  "accentId": "int",
+  "verified": true,
+  "members": [
+    { "playerId": "sommer", "no": 1, "apps": 75 },
+    { "playerId": "j-martinez", "no": 16, "apps": 5 },
+    { "playerId": "bastoni", "no": 95, "apps": 245 },
+    { "playerId": "de-vrij", "no": 6, "apps": 285 },
+    { "playerId": "acerbi", "no": 15, "apps": 90 },
+    { "playerId": "bisseck", "no": 31, "apps": 60 },
+    { "playerId": "akanji", "no": 25, "apps": 15 },
+    { "playerId": "dimarco", "no": 32, "apps": 220 },
+    { "playerId": "dumfries", "no": 2, "apps": 190 },
+    { "playerId": "carlos-augusto", "no": 30, "apps": 70 },
+    { "playerId": "barella", "no": 23, "apps": 285 },
+    { "playerId": "calhanoglu", "no": 20, "apps": 195 },
+    { "playerId": "mkhitaryan", "no": 22, "apps": 220 },
+    { "playerId": "frattesi", "no": 8, "apps": 95 },
+    { "playerId": "zielinski", "no": 17, "apps": 40 },
+    { "playerId": "sucic", "no": 19, "apps": 15 },
+    { "playerId": "lautaro", "no": 10, "apps": 260, "captain": true },
+    { "playerId": "thuram", "no": 9, "apps": 90 },
+    { "playerId": "luis-henrique", "no": 11, "apps": 8 },
+    { "playerId": "pio-esposito", "no": 94, "apps": 45 },
+    { "playerId": "bonny", "no": 70, "apps": 10 }
+  ]
+}

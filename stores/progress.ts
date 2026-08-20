@@ -3,9 +3,23 @@ import { useEffect, useState } from 'react';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 
+interface LastPlayed {
+  squadId: string;
+  level: number;
+}
+
 interface ProgressState {
   bestScores: Record<string, number>; // key: `${squadId}:${level}`
+  /** Set true the moment a level is finished, independent of `bestScores` —
+   *  a legitimate 0/10 round wouldn't raise `bestScores` above its default
+   *  of 0, which would otherwise make the difficulty ladder's "unlocked once
+   *  the prior level has a recorded score" gate impossible to clear. */
+  completedLevels: Record<string, true>;
+  /** Backs Home's "continue" card — the most recent team+level a round was
+   *  started for, regardless of how it finished. */
+  lastPlayed: LastPlayed | null;
   recordScore: (squadId: string, level: number, score: number) => void;
+  setLastPlayed: (squadId: string, level: number) => void;
   reset: () => void;
 }
 
@@ -15,13 +29,19 @@ export const useProgress = create<ProgressState>()(
   persist(
     (set) => ({
       bestScores: {},
+      completedLevels: {},
+      lastPlayed: null,
       recordScore: (squadId, level, score) =>
         set((s) => {
           const key = scoreKey(squadId, level);
           const prev = s.bestScores[key] ?? 0;
-          return score > prev ? { bestScores: { ...s.bestScores, [key]: score } } : s;
+          return {
+            bestScores: score > prev ? { ...s.bestScores, [key]: score } : s.bestScores,
+            completedLevels: { ...s.completedLevels, [key]: true },
+          };
         }),
-      reset: () => set({ bestScores: {} }),
+      setLastPlayed: (squadId, level) => set({ lastPlayed: { squadId, level } }),
+      reset: () => set({ bestScores: {}, completedLevels: {}, lastPlayed: null }),
     }),
     {
       name: 'escuadra-progress',

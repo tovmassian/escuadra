@@ -1,0 +1,30 @@
+{
+  "id": "arg",
+  "kind": "nation",
+  "name": "Argentina",
+  "season": "2026",
+  "accentId": "arg",
+  "verified": true,
+  "members": [
+    { "playerId": "e-martinez", "no": 1, "apps": 65 },
+    { "playerId": "musso", "no": 12, "apps": 15 },
+    { "playerId": "rulli", "no": 23, "apps": 30 },
+    { "playerId": "tagliafico", "no": 3, "apps": 60 },
+    { "playerId": "paredes", "no": 5, "apps": 45 },
+    { "playerId": "de-paul", "no": 7, "apps": 75 },
+    { "playerId": "acuna", "no": 8, "apps": 55 },
+    { "playerId": "alvarez", "no": 9, "apps": 45 },
+    { "playerId": "gonzalez", "no": 11, "apps": 35 },
+    { "playerId": "dybala", "no": 21, "apps": 40 },
+    { "playerId": "romero", "no": 13, "apps": 55 },
+    { "playerId": "otamendi", "no": 19, "apps": 115 },
+    { "playerId": "lisandro-martinez", "no": 25, "apps": 35 },
+    { "playerId": "molina", "no": 26, "apps": 45 },
+    { "playerId": "enzo-fernandez", "no": 24, "apps": 45 },
+    { "playerId": "mac-allister", "no": 20, "apps": 40 },
+    { "playerId": "lo-celso", "no": 18, "apps": 40 },
+    { "playerId": "mastantuono", "no": 16, "apps": 12 },
+    { "playerId": "lautaro", "no": 22, "apps": 75 },
+    { "playerId": "messi", "no": 10, "apps": 195, "captain": true }
+  ]
+}
