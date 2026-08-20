@@ -36,7 +36,7 @@ export default function MotionCheck() {
     const next = (index + 1) % TOTAL;
     setIndex(next);
     progress.value = withTiming(next / (TOTAL - 1), {
-      duration: 320,
+      duration: 280,
       easing: Easing.out(Easing.cubic),
     });
   };
@@ -92,7 +92,7 @@ export default function MotionCheck() {
         {visibleChips.map((c) => (
           <Animated.View
             key={c}
-            layout={LinearTransition.springify()}
+            layout={LinearTransition.duration(220)}
             entering={FadeIn.duration(180)}
             style={styles.chip}
           >

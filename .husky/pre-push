@@ -1,0 +1,3 @@
+# Gate: nothing reaches the remote unless types, lint and formatting are clean.
+# Bypass in a genuine emergency with `git push --no-verify`.
+npm run check
