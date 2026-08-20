@@ -1,4 +1,4 @@
-// Squad Trainer — design tokens
+// Escuadra — design tokens
 // Plain exported objects. No styling library, no CSS-in-JS. Spacing is unitless (RN dp).
 
 export const colors = {

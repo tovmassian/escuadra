@@ -1,3 +1,8 @@
+// PROVISIONAL — sample output from the design pass, wired into the setup-check
+// screen so the token set can be verified on device. It is the one place that
+// still breaks hard constraint 5 (raw fontSize / borderWidth / marginTop
+// literals). Expect the real design to replace this file wholesale; do not build
+// on it or copy its hardcoded values.
 import * as Haptics from 'expo-haptics';
 import React, { useCallback, useEffect } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';

@@ -42,18 +42,30 @@ introduce a second styling approach alongside the tokens.
 That is the whole of v0. **Deferred, do not build or scaffold for:** App Store
 and Play Store distribution, player photos, image licensing, advertising,
 monetisation, authentication, any backend or network call, multiplayer,
-leaderboards.
+leaderboards, and Exam mode (a full-squad run on shirt numbers alone — worth
+reviving after v0 as a standalone feature, but not a fourth difficulty level).
 
 ## Difficulty levels
 
-| Level | Prompt               | Answer                                                                                                                               |
-| ----- | -------------------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| 1     | Shirt number + stats | Player name, 4 options                                                                                                               |
-| 2     | Shirt number + stats | Name (4 options), then position (GK / DF / MF / FW chips)                                                                            |
-| 3     | Shirt number only    | Name (6 options, distractors drawn from the **same squad** so they're genuinely confusable), then position, then club or nationality |
+| Level | Prompt               | Answer                                                                |
+| ----- | -------------------- | --------------------------------------------------------------------- |
+| 1     | Shirt number + stats | Player name, 4 options                                                |
+| 2     | Shirt number + stats | Name (4 options), then position (GK / DF / MF / FW chips)             |
+| 3     | Shirt number only    | Name (6 options), then position, then club or nationality — see below |
+
+On level 3 the third part depends on `squad.kind`: a **club** squad asks the
+player's **nationality**, a **nation** squad asks their **club**. Asking a nation
+squad for nationality is a non-question, since every member shares it.
+
+**One question, up to three parts.** A round is 10 questions at every level. A
+level-2 or level-3 question is a single scored unit: it counts as correct only
+when _every_ part is answered correctly. There is no partial credit. The progress
+bar counts questions, not parts, so all three levels show 1..10.
 
 Distractor quality is what makes or breaks this. Random wrong answers make the
-game trivial; same-position and same-squad distractors make it a real test.
+game trivial; same-position and same-squad distractors make it a real test. On
+level 3 the name distractors are drawn from the **same squad**, so they are
+genuinely confusable.
 
 ## Hard constraints
 
@@ -75,6 +87,9 @@ Product-defining. Flag a conflict rather than working around any of these.
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
    rather than inlining a value.
+6. **The product is called Escuadra.** "Squad Trainer", "Squad Game", "Squad
+   Quiz" and similar all predate the name and are stale wherever they survive —
+   including code comments, file headers and docs. Fix them on sight.
 
 ## Data model
 
@@ -83,10 +98,16 @@ different numbers for club and country. Do not denormalise it onto the player.
 
 ```
 data/index.json        squad manifest
-data/players.json      { id, name, birth, positions, photo: null }
+data/players.json      { id, name, birth, position, nationality, photo: null }
 data/squads/<id>.json  { id, kind: 'club'|'nation', name, season, verified,
                          members: [{ playerId, no, captain? }] }
 ```
+
+A player has **exactly one** position, not an array. Real players are more
+flexible than that, but the quiz asks for one answer through one chip, and
+same-position distractor selection needs a single key to group on.
+
+`nationality` exists so a club squad can ask for it on level 3.
 
 One file per squad, so a future contribution touches exactly one file.
 

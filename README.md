@@ -1,6 +1,6 @@
 # Escuadra
 
-A football squad quiz for iOS. Expo SDK 54 + expo-router, TypeScript strict,
+Escuadra — a football squad memorisation trainer for iOS. Expo SDK 54 + expo-router, TypeScript strict,
 Zustand, Reanimated. Dark-only.
 
 Runs in **Expo Go** — no Xcode, no Apple Developer account, no native build.
