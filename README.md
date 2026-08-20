@@ -23,12 +23,18 @@ Useful keys in the Metro terminal: `r` reload · `m` dev menu · `j` DevTools ·
 
 ## Scripts
 
-| Script              | Does                                                        |
-| ------------------- | ----------------------------------------------------------- |
-| `npm run check`     | `typecheck` then `lint` — must be green before every commit |
-| `npm run typecheck` | `tsc --noEmit`                                              |
-| `npm run lint`      | `expo lint`                                                 |
-| `npm run format`    | Prettier, write mode                                        |
+| Script                 | Does                                                |
+| ---------------------- | --------------------------------------------------- |
+| `npm run check`        | typecheck + lint + format check — the pre-push gate |
+| `npm run typecheck`    | `tsc --noEmit`                                      |
+| `npm run lint`         | `expo lint`                                         |
+| `npm run format`       | Prettier, write mode                                |
+| `npm run format:check` | Prettier, verify only                               |
+
+A husky `pre-push` hook runs `npm run check`, so nothing reaches the remote with
+broken types, lint errors or unformatted code. `git push --no-verify` bypasses it
+in an emergency. Hooks install themselves through the `prepare` script on
+`npm install`.
 
 ## Layout
 
