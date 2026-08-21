@@ -7,6 +7,7 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
+    "shots": "node scripts/capture-screens.mjs",
     "lint": "expo lint",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
@@ -53,6 +54,7 @@
     "eslint-config-expo": "~10.0.0",
     "eslint-config-prettier": "^10.1.8",
     "husky": "^9.1.7",
+    "playwright": "^1.62.1",
     "prettier": "^3.9.6",
     "typescript": "~5.9.2",
     "vitest": "^3.2.4"

@@ -17,6 +17,7 @@ export function Button({ label, variant, onPress, disabled, large }: ButtonProps
   if (variant === 'text') {
     return (
       <Pressable
+        testID="app-button"
         onPress={onPress}
         disabled={disabled}
         accessibilityRole="button"
@@ -29,6 +30,7 @@ export function Button({ label, variant, onPress, disabled, large }: ButtonProps
 
   return (
     <Pressable
+      testID="app-button"
       onPress={onPress}
       disabled={disabled}
       accessibilityRole="button"

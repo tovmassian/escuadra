@@ -133,6 +133,7 @@ export function AnswerOption({ label, verdict, disabled, onPress }: AnswerOption
 
   return (
     <Pressable
+      testID="answer-option"
       onPress={onPress}
       onPressIn={handlePressIn}
       onPressOut={handlePressOut}
