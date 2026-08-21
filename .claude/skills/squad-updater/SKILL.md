@@ -77,7 +77,7 @@ roster.
    also on a national roster) must not be duplicated. Do this for **every**
    member of the squad you just parsed, not only the ones that look new to
    you — an existing player's `club` can be stale from a prior session even
-   if nothing about *this* team's fetch changed for them:
+   if nothing about _this_ team's fetch changed for them:
    - Match by name (case-insensitive, ignoring diacritics) against existing
      entries first.
    - If found, reuse its `id` and update whichever fields changed (`club`,
@@ -90,7 +90,7 @@ roster.
      of `players.json` already does before inventing a new pattern.
    - `nationality`: the FIFA `nat` code (club squads) mapped to the country
      name, or the squad's own country (national squads — every member shares
-     it, that's *why* level-3 nation questions ask for club instead).
+     it, that's _why_ level-3 nation questions ask for club instead).
    - `birth`: use the exact date from `age={{birth date and age|...}}` when
      present (national squad pages carry this). Club squad templates don't
      carry it — if the player is new to `players.json`, fetch their date of
@@ -114,14 +114,14 @@ roster.
     sync; the picker reads this file only, never the full squad JSON.
 
 10a. **If this is a brand-new squad** (no prior entry in `data/index.json`),
-    it also needs wiring into `lib/squads.ts`: add a static `import` for the
-    new `data/squads/<id>.json` and a matching entry in `SQUAD_FILES`. Metro
-    requires string-literal imports, so this can't be done dynamically — the
-    file's own header comment says as much. Skipping this step doesn't error
-    at write time; it silently makes `getRoster()` return an empty array for
-    the new squad, which only surfaces later as failing
-    `lib/squads.test.ts` assertions. Do it in the same pass as writing the
-    squad file, not as a follow-up fix.
+it also needs wiring into `lib/squads.ts`: add a static `import` for the
+new `data/squads/<id>.json` and a matching entry in `SQUAD_FILES`. Metro
+requires string-literal imports, so this can't be done dynamically — the
+file's own header comment says as much. Skipping this step doesn't error
+at write time; it silently makes `getRoster()` return an empty array for
+the new squad, which only surfaces later as failing
+`lib/squads.test.ts` assertions. Do it in the same pass as writing the
+squad file, not as a follow-up fix.
 
 11. **Run `npm run check`** before reporting the team done, and report its
     actual output. On Windows, `node`/`npm` may not be on the shell's PATH by
@@ -135,14 +135,14 @@ roster.
 
 ## Quick reference
 
-| Field | Club squad source | Nation squad source |
-|---|---|---|
-| Shirt number | `no=` | `no=` |
-| Position | `pos=` | `pos=` |
-| Player nationality | `nat=` (FIFA code) | implied by the page itself |
-| Current club | n/a (it's this team) | `club=` / `clubnat=` |
-| Birth date | not in template — check player's own page if new | `age={{birth date and age|...}}` |
-| Captain | `other=captain` | `other=captain` |
+| Field              | Club squad source                                | Nation squad source               |
+| ------------------ | ------------------------------------------------ | --------------------------------- |
+| Shirt number       | `no=`                                            | `no=`                             |
+| Position           | `pos=`                                           | `pos=`                            |
+| Player nationality | `nat=` (FIFA code)                               | implied by the page itself        |
+| Current club       | n/a (it's this team)                             | `club=` / `clubnat=`              |
+| Birth date         | not in template — check player's own page if new | `age={{birth date and age\|...}}` |
+| Captain            | `other=captain`                                  | `other=captain`                   |
 
 ## Common mistakes
 
