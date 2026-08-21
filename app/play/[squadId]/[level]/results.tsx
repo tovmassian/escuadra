@@ -14,12 +14,33 @@ import {
 } from '@/stores/session';
 import { colors, radii, sizes, spacing, typography } from '@/theme/tokens';
 
+const MAX_LEVEL: Level = 3;
+const PASS_RATIO = 0.8;
+
 function verdictSentence(correct: number, total: number): string {
   const ratio = total === 0 ? 0 : correct / total;
   if (ratio === 1) return 'A la escuadra — a flawless round.';
   if (ratio >= 0.8) return 'You knew most of the starting XI.';
   if (ratio >= 0.5) return 'Solid — a few names to brush up on.';
   return 'Time to get back in the study screen.';
+}
+
+type ActionId = 'nextLevel' | 'retry' | 'study' | 'chooseTeam';
+
+/**
+ * Primary action reflects readiness to advance: pass a level below the ceiling
+ * and it's "play the next one"; pass the ceiling level and there's nowhere to
+ * advance to, so the prompt becomes "go test yourself on a new team"; anything
+ * short of passing means "retry." Whatever's left of [retry, study,
+ * chooseTeam] follows in that fixed order, so every case is one rule instead
+ * of four hand-written lists.
+ */
+function actionOrder(passed: boolean, hasNextLevel: boolean): ActionId[] {
+  const primary: ActionId = passed ? (hasNextLevel ? 'nextLevel' : 'chooseTeam') : 'retry';
+  const rest: ActionId[] = (['retry', 'study', 'chooseTeam'] as const).filter(
+    (id) => id !== primary,
+  );
+  return [primary, ...rest];
 }
 
 export default function Results() {
@@ -34,15 +55,40 @@ export default function Results() {
   const score = selectScore(session.results);
   const missed = selectMissed(session.results);
 
-  const retry = () => {
+  const passed = score.attempted > 0 && score.correct / score.attempted >= PASS_RATIO;
+  const hasNextLevel = level < MAX_LEVEL;
+  const actions = actionOrder(passed, hasNextLevel);
+
+  const retry = (atLevel: Level) => {
     const roster = getRoster(squadId);
-    session.startRound(squad, roster, level);
-    router.replace({ pathname: '/play/[squadId]/[level]', params: { squadId, level: levelParam } });
+    session.startRound(squad, roster, atLevel);
+    router.replace({
+      pathname: '/play/[squadId]/[level]',
+      params: { squadId, level: String(atLevel) },
+    });
   };
 
   const chooseDifferentTeam = () => {
     session.reset();
     router.replace('/team-picker');
+  };
+
+  const studySquad = () => {
+    router.push({ pathname: '/team/[squadId]/study', params: { squadId } });
+  };
+
+  const actionHandlers: Record<ActionId, () => void> = {
+    nextLevel: () => retry((level + 1) as Level),
+    retry: () => retry(level),
+    study: studySquad,
+    chooseTeam: chooseDifferentTeam,
+  };
+
+  const actionLabels: Record<ActionId, string> = {
+    nextLevel: `Play Level ${level + 1}`,
+    retry: 'Retry This Round',
+    study: 'Study This Squad',
+    chooseTeam: 'Choose Different Team',
   };
 
   return (
@@ -75,8 +121,14 @@ export default function Results() {
       )}
 
       <View style={styles.actions}>
-        <Button label="Retry This Round" variant="filled" onPress={retry} />
-        <Button label="Choose Different Team" variant="outline" onPress={chooseDifferentTeam} />
+        {actions.map((id, index) => (
+          <Button
+            key={id}
+            label={actionLabels[id]}
+            variant={index === 0 ? 'filled' : index === 1 ? 'outline' : 'text'}
+            onPress={actionHandlers[id]}
+          />
+        ))}
       </View>
     </View>
   );
