@@ -27,6 +27,28 @@ export interface SquadMember {
   captain?: boolean;
 }
 
+/** A nation's flag as declarative geometry rather than an asset.
+ *
+ *  Deliberately not the Unicode regional-indicator emoji (🇦🇷): that depends
+ *  on an OS flag-emoji font, and Windows ships none — the Playwright capture
+ *  step of the design loop runs on Windows Chrome and would hand the design
+ *  side "AR" instead of a flag. Geometry renders identically everywhere.
+ *
+ *  National emblems and coats of arms are omitted. Spain without its arms is
+ *  the civil flag; Argentina without the sun and Brazil without the celestial
+ *  globe stay unambiguous at this size, and omitting them keeps the marker
+ *  consistent with the app's geometric language. */
+export interface Flag {
+  /** Band fills, in draw order: top-to-bottom for `horizontal`,
+   *  left-to-right for `vertical`. A single-entry array is a plain field. */
+  bands: string[];
+  orientation: 'horizontal' | 'vertical';
+  /** Relative band sizes. Omit for equal bands. Spain is [1, 2, 1]. */
+  weights?: number[];
+  /** A centred device over the field — Japan's disc, Brazil's diamond. */
+  overlay?: { shape: 'disc' | 'diamond'; color: string };
+}
+
 export interface Squad {
   id: string;
   kind: 'club' | 'nation';
@@ -38,6 +60,9 @@ export interface Squad {
   primaryColor: string;
   secondaryColor: string;
   verified: boolean; // false = not fact-checked
+  /** Nation squads only. Clubs are identified by colour alone, per the
+   *  "no crests, ever" constraint. */
+  flag?: Flag;
   members: SquadMember[];
 }
 
@@ -51,6 +76,9 @@ export interface SquadManifestEntry {
   primaryColor: string;
   secondaryColor: string;
   verified: boolean;
+  /** Nation squads only — mirrors the squad file's `flag`, since the picker
+   *  never imports full squad JSON. Kept in sync by lib/squads.test.ts. */
+  flag?: Flag;
 }
 
 /** A squad member joined with their player record. */

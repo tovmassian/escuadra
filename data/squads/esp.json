@@ -6,6 +6,11 @@
   "primaryColor": "#C60B1E",
   "secondaryColor": "#FFC400",
   "verified": false,
+  "flag": {
+    "bands": ["#AA151B", "#F1BF00", "#AA151B"],
+    "orientation": "horizontal",
+    "weights": [1, 2, 1]
+  },
   "members": [
     {
       "playerId": "raya",

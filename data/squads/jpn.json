@@ -6,6 +6,11 @@
   "primaryColor": "#000B8C",
   "secondaryColor": "#BC002D",
   "verified": true,
+  "flag": {
+    "bands": ["#FFFFFF"],
+    "orientation": "horizontal",
+    "overlay": { "shape": "disc", "color": "#BC002D" }
+  },
   "members": [
     {
       "playerId": "suzuki-zion",

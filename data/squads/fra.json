@@ -6,6 +6,10 @@
   "primaryColor": "#0055A4",
   "secondaryColor": "#EF4135",
   "verified": true,
+  "flag": {
+    "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
+    "orientation": "vertical"
+  },
   "members": [
     {
       "playerId": "maignan",

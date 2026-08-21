@@ -97,9 +97,18 @@ roster.
      birth from their own Wikipedia infobox rather than leaving it blank.
 
 8. **Write `data/squads/<id>.json`**, matching the existing shape exactly:
-   `id, kind, name, season, primaryColor, secondaryColor, verified, members`.
+   `id, kind, name, season, primaryColor, secondaryColor, verified, flag?, members`.
    `members` is `[{ playerId, no, captain? }]` — shirt number lives on the
    membership, never on the player.
+
+   - `flag` — **nation squads only.** Declarative band geometry, not an asset and
+     not an emoji: `{ bands: string[], orientation: 'horizontal' | 'vertical',
+weights?: number[], overlay?: { shape: 'disc' | 'diamond', color: string } }`.
+     Bands run top-to-bottom for `horizontal`, left-to-right for `vertical`.
+     Omit `weights` for equal bands. National emblems and coats of arms are
+     omitted by design — use the plain field. The same object must be copied into
+     the matching `data/index.json` entry; `lib/squads.test.ts` compares them.
+     Hand-check flag colours against a real source rather than generating them.
 
 9. **Set `verified: false`.** Always — for a brand-new squad and for one
    you're overwriting, even if it was previously `true`. Scraping + LLM

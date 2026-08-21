@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { getRoster, listSquads } from './squads';
+import { getRoster, getSquad, listSquads } from './squads';
 
 // Squad data is either LLM-generated or research-backed (CLAUDE.md) — either
 // way, shirt numbers and current clubs are the fields most likely to drift
@@ -46,6 +46,35 @@ describe('squad data integrity', () => {
         const positions = new Set(roster.map((r) => r.player.position));
         expect(positions.size).toBeGreaterThan(0);
       });
+
+      if (manifest.kind === 'nation') {
+        it('has flag geometry on both the manifest and the squad file', () => {
+          expect(manifest.flag, 'manifest entry').toBeDefined();
+          expect(getSquad(manifest.id)?.flag, 'squad file').toBeDefined();
+        });
+
+        it('has a flag whose bands are valid hex', () => {
+          const flag = manifest.flag;
+          if (!flag) throw new Error('flag must be defined');
+          expect(flag.bands.length).toBeGreaterThan(0);
+          for (const band of flag.bands) expect(band).toMatch(/^#[0-9a-fA-F]{6}$/);
+          if (flag.overlay) expect(flag.overlay.color).toMatch(/^#[0-9a-fA-F]{6}$/);
+        });
+
+        it('has band weights matching the band count, when weights are given', () => {
+          const flag = manifest.flag;
+          if (!flag) throw new Error('flag must be defined');
+          if (flag.weights) expect(flag.weights.length).toBe(flag.bands.length);
+        });
+
+        it('agrees between the manifest and the squad file', () => {
+          expect(getSquad(manifest.id)?.flag).toEqual(manifest.flag);
+        });
+      } else {
+        it('carries no flag — flags identify nations only', () => {
+          expect(manifest.flag).toBeUndefined();
+        });
+      }
     });
   }
 });

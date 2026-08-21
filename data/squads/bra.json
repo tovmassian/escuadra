@@ -6,6 +6,11 @@
   "primaryColor": "#FFDF00",
   "secondaryColor": "#009739",
   "verified": true,
+  "flag": {
+    "bands": ["#009739"],
+    "orientation": "horizontal",
+    "overlay": { "shape": "diamond", "color": "#FFDF00" }
+  },
   "members": [
     {
       "playerId": "alisson",

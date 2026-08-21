@@ -51,7 +51,12 @@
     "season": "2026",
     "primaryColor": "#FFDF00",
     "secondaryColor": "#009739",
-    "verified": true
+    "verified": true,
+    "flag": {
+      "bands": ["#009739"],
+      "orientation": "horizontal",
+      "overlay": { "shape": "diamond", "color": "#FFDF00" }
+    }
   },
   {
     "id": "arg",
@@ -60,7 +65,11 @@
     "season": "2026",
     "primaryColor": "#75AADB",
     "secondaryColor": "#FFFFFF",
-    "verified": true
+    "verified": true,
+    "flag": {
+      "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
+      "orientation": "horizontal"
+    }
   },
   {
     "id": "esp",
@@ -69,7 +78,12 @@
     "season": "2026",
     "primaryColor": "#C60B1E",
     "secondaryColor": "#FFC400",
-    "verified": false
+    "verified": false,
+    "flag": {
+      "bands": ["#AA151B", "#F1BF00", "#AA151B"],
+      "orientation": "horizontal",
+      "weights": [1, 2, 1]
+    }
   },
   {
     "id": "fra",
@@ -78,7 +92,11 @@
     "season": "2026",
     "primaryColor": "#0055A4",
     "secondaryColor": "#EF4135",
-    "verified": true
+    "verified": true,
+    "flag": {
+      "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
+      "orientation": "vertical"
+    }
   },
   {
     "id": "jpn",
@@ -87,7 +105,12 @@
     "season": "2026",
     "primaryColor": "#000B8C",
     "secondaryColor": "#BC002D",
-    "verified": true
+    "verified": true,
+    "flag": {
+      "bands": ["#FFFFFF"],
+      "orientation": "horizontal",
+      "overlay": { "shape": "disc", "color": "#BC002D" }
+    }
   },
   {
     "id": "arm",
@@ -96,6 +119,10 @@
     "season": "2026",
     "primaryColor": "#B70000",
     "secondaryColor": "#FFFFFF",
-    "verified": false
+    "verified": false,
+    "flag": {
+      "bands": ["#D90012", "#0033A0", "#F2A800"],
+      "orientation": "horizontal"
+    }
   }
 ]

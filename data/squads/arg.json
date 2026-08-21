@@ -6,6 +6,10 @@
   "primaryColor": "#75AADB",
   "secondaryColor": "#FFFFFF",
   "verified": true,
+  "flag": {
+    "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
+    "orientation": "horizontal"
+  },
   "members": [
     {
       "playerId": "e-martinez",

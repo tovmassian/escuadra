@@ -6,6 +6,10 @@
   "primaryColor": "#B70000",
   "secondaryColor": "#FFFFFF",
   "verified": false,
+  "flag": {
+    "bands": ["#D90012", "#0033A0", "#F2A800"],
+    "orientation": "horizontal"
+  },
   "members": [
     {
       "playerId": "cancarevic",
