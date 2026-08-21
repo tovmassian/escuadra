@@ -6,7 +6,7 @@ import { Button } from '@/components/Button';
 import { getRoster, getSquad } from '@/lib/squads';
 import { scoreKey, useProgress, useProgressHydrated } from '@/stores/progress';
 import { useSession } from '@/stores/session';
-import { colors, iconSize, radii, sizes, spacing, teamAccents, typography } from '@/theme/tokens';
+import { colors, iconSize, radii, sizes, spacing, typography } from '@/theme/tokens';
 
 export default function Home() {
   const insets = useSafeAreaInsets();
@@ -61,7 +61,7 @@ export default function Home() {
           <View
             style={[
               styles.dot,
-              { backgroundColor: teamAccents[continueSquad.accentId] ?? colors.textMuted },
+              { backgroundColor: continueSquad.primaryColor ?? colors.textMuted },
             ]}
           />
           <View style={styles.continueText}>

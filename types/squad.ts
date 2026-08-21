@@ -35,9 +35,11 @@ export interface Squad {
   kind: 'club' | 'nation';
   name: string;
   season: string;
-  /** Key into `theme/tokens.ts`'s `teamAccents` — decoupled from `id` so
-   *  squad ids don't have to match the accent palette's key set. */
-  accentId: string;
+  /** The team's real identity colours (hex). Content, not a design-system
+   *  choice — see CLAUDE.md's colour rule. Never invented or rotated; the
+   *  club/nation's actual colours, sourced same as any other squad fact. */
+  primaryColor: string;
+  secondaryColor: string;
   verified: boolean; // false = not fact-checked
   members: SquadMember[];
 }
@@ -49,7 +51,8 @@ export interface SquadManifestEntry {
   kind: 'club' | 'nation';
   name: string;
   season: string;
-  accentId: string;
+  primaryColor: string;
+  secondaryColor: string;
   verified: boolean;
 }
 

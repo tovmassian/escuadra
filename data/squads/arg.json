@@ -3,7 +3,8 @@
   "kind": "nation",
   "name": "Argentina",
   "season": "2026",
-  "accentId": "arg",
+  "primaryColor": "#75AADB",
+  "secondaryColor": "#FFFFFF",
   "verified": true,
   "members": [
     { "playerId": "e-martinez", "no": 1, "apps": 65 },

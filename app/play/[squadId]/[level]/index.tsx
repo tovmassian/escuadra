@@ -15,7 +15,7 @@ import type { Level, QuestionPart } from '@/lib/questionEngine';
 import { getRoster, getSquad } from '@/lib/squads';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
-import { colors, durations, sizes, spacing, teamAccents, typography } from '@/theme/tokens';
+import { colors, durations, sizes, spacing, typography } from '@/theme/tokens';
 
 export default function Question() {
   const insets = useSafeAreaInsets();
@@ -66,7 +66,7 @@ export default function Question() {
 
   const score = selectScore(session.results);
   const questionComplete = result.correct !== null;
-  const accent = teamAccents[squad.accentId] ?? colors.accent;
+  const accent = squad.primaryColor ?? colors.accent;
 
   const statChips: { label: string; value: string }[] =
     level === 1

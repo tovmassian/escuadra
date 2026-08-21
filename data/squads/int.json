@@ -3,7 +3,8 @@
   "kind": "club",
   "name": "Inter Milan",
   "season": "2025/26",
-  "accentId": "int",
+  "primaryColor": "#0068A8",
+  "secondaryColor": "#000000",
   "verified": true,
   "members": [
     { "playerId": "sommer", "no": 1, "apps": 75 },

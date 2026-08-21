@@ -49,7 +49,7 @@ export default function TeamPicker() {
         renderItem={({ item }) => (
           <TeamRow
             name={item.name}
-            accentId={item.accentId}
+            primaryColor={item.primaryColor}
             best={bestFor(item.id)}
             onPress={() =>
               router.push({ pathname: '/team/[squadId]/difficulty', params: { squadId: item.id } })

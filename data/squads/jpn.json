@@ -3,7 +3,8 @@
   "kind": "nation",
   "name": "Japan",
   "season": "2026",
-  "accentId": "jpn",
+  "primaryColor": "#000B8C",
+  "secondaryColor": "#BC002D",
   "verified": true,
   "members": [
     { "playerId": "suzuki-zion", "no": 1, "apps": 15 },

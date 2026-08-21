@@ -30,7 +30,8 @@ const squad: Squad = {
   kind: 'club',
   name: 'Test FC',
   season: '2025/26',
-  accentId: 'ars',
+  primaryColor: '#EF0107',
+  secondaryColor: '#FFFFFF',
   verified: false,
   members: [],
 };

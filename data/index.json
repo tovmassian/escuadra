@@ -4,7 +4,8 @@
     "kind": "club",
     "name": "Arsenal",
     "season": "2025/26",
-    "accentId": "ars",
+    "primaryColor": "#EF0107",
+    "secondaryColor": "#FFFFFF",
     "verified": true
   },
   {
@@ -12,7 +13,8 @@
     "kind": "club",
     "name": "Real Madrid",
     "season": "2025/26",
-    "accentId": "rma",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#FEBE10",
     "verified": true
   },
   {
@@ -20,7 +22,8 @@
     "kind": "club",
     "name": "Barcelona",
     "season": "2025/26",
-    "accentId": "bar",
+    "primaryColor": "#A50044",
+    "secondaryColor": "#004D98",
     "verified": true
   },
   {
@@ -28,7 +31,8 @@
     "kind": "club",
     "name": "Inter Milan",
     "season": "2025/26",
-    "accentId": "int",
+    "primaryColor": "#0068A8",
+    "secondaryColor": "#000000",
     "verified": true
   },
   {
@@ -36,7 +40,8 @@
     "kind": "club",
     "name": "Paris Saint-Germain",
     "season": "2025/26",
-    "accentId": "psg",
+    "primaryColor": "#004170",
+    "secondaryColor": "#DA291C",
     "verified": true
   },
   {
@@ -44,7 +49,8 @@
     "kind": "nation",
     "name": "Brazil",
     "season": "2026",
-    "accentId": "bra",
+    "primaryColor": "#FFDF00",
+    "secondaryColor": "#009739",
     "verified": true
   },
   {
@@ -52,7 +58,8 @@
     "kind": "nation",
     "name": "Argentina",
     "season": "2026",
-    "accentId": "arg",
+    "primaryColor": "#75AADB",
+    "secondaryColor": "#FFFFFF",
     "verified": true
   },
   {
@@ -60,7 +67,8 @@
     "kind": "nation",
     "name": "Spain",
     "season": "2026",
-    "accentId": "esp",
+    "primaryColor": "#C60B1E",
+    "secondaryColor": "#FFC400",
     "verified": true
   },
   {
@@ -68,7 +76,8 @@
     "kind": "nation",
     "name": "France",
     "season": "2026",
-    "accentId": "fra",
+    "primaryColor": "#0055A4",
+    "secondaryColor": "#EF4135",
     "verified": true
   },
   {
@@ -76,7 +85,8 @@
     "kind": "nation",
     "name": "Japan",
     "season": "2026",
-    "accentId": "jpn",
+    "primaryColor": "#000B8C",
+    "secondaryColor": "#BC002D",
     "verified": true
   }
 ]

@@ -3,7 +3,8 @@
   "kind": "nation",
   "name": "Spain",
   "season": "2026",
-  "accentId": "esp",
+  "primaryColor": "#C60B1E",
+  "secondaryColor": "#FFC400",
   "verified": true,
   "members": [
     { "playerId": "raya", "no": 1, "apps": 15 },

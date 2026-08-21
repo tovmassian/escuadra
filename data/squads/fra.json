@@ -3,7 +3,8 @@
   "kind": "nation",
   "name": "France",
   "season": "2026",
-  "accentId": "fra",
+  "primaryColor": "#0055A4",
+  "secondaryColor": "#EF4135",
   "verified": true,
   "members": [
     { "playerId": "maignan", "no": 16, "apps": 40 },

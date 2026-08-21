@@ -3,7 +3,8 @@
   "kind": "nation",
   "name": "Brazil",
   "season": "2026",
-  "accentId": "bra",
+  "primaryColor": "#FFDF00",
+  "secondaryColor": "#009739",
   "verified": true,
   "members": [
     { "playerId": "alisson", "no": 1, "apps": 85 },

@@ -21,38 +21,6 @@ export const colors = {
   errorTextDim: '#a15a58',
 } as const;
 
-// Every team accent shares the same lightness/chroma as `colors.accent` (OKLCH
-// 78% L / 0.14 C), rotated in hue. Decorative identity only — never a button,
-// selection, or correct/incorrect colour. Keyed by a short id, not the full name.
-export const teamAccents: Record<string, string> = {
-  ars: '#ff8faa', // Arsenal
-  rma: '#ff9577', // Real Madrid
-  bay: '#fe9b5f', // Bayern Munich
-  boc: '#f3a44a', // Boca Juniors
-  aln: '#e5ad3c', // Al Nassr
-  mci: '#d2b63c', // Manchester City
-  juv: '#bbbf49', // Juventus
-  bar: '#a1c75e', // Barcelona
-  fla: '#60d291', // Flamengo
-  psg: '#37d4ab', // Paris Saint-Germain
-  bra: '#00d4c5', // Brazil
-  ger: '#00cdf0', // Germany
-  arg: '#3dc6ff', // Argentina
-  jpn: '#63bfff', // Japan
-  nga: '#83b7ff', // Nigeria
-  por: '#9faeff', // Portugal
-  ned: '#b8a6ff', // Netherlands
-  mar: '#ce9ffe', // Morocco
-  kor: '#e098ee', // South Korea
-  esp: '#ef93d9', // Spain
-  // Added for the 10-squad roster — same OKLCH 78% L / 0.14 C formula,
-  // slotted into the two largest unused hue gaps in the wheel above (the
-  // other large gaps sit deliberately close to accent/success/error and were
-  // already skipped by the original 20).
-  int: '#00d1dc', // Inter Milan
-  fra: '#fa90c3', // France
-};
-
 export const typography = {
   heroNumber: { fontFamily: 'IBMPlexMono-Bold', fontWeight: '700' as const, fontSize: 96 },
   // Results screen's giant score readout.
@@ -205,5 +173,3 @@ export const elevation = {
     elevation: 8,
   },
 } as const;
-
-export type TeamId = keyof typeof teamAccents;

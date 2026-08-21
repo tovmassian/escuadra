@@ -1,11 +1,11 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { ScorePill } from './ScorePill';
-import { colors, iconSize, sizes, spacing, teamAccents, typography } from '@/theme/tokens';
+import { colors, iconSize, sizes, spacing, typography } from '@/theme/tokens';
 
 interface TeamRowProps {
   name: string;
-  accentId: string;
+  primaryColor: string;
   best: { correct: number; total: number } | null;
   onPress: () => void;
 }
@@ -14,10 +14,10 @@ interface TeamRowProps {
 // edge is a fixed-width score pill, so both edges stay clean regardless of
 // name length — the accent dot is the team's only visual identity marker,
 // per the "no crests, ever" constraint.
-export function TeamRow({ name, accentId, best, onPress }: TeamRowProps) {
+export function TeamRow({ name, primaryColor, best, onPress }: TeamRowProps) {
   return (
     <Pressable onPress={onPress} accessibilityRole="button" style={styles.row}>
-      <View style={[styles.dot, { backgroundColor: teamAccents[accentId] ?? colors.textMuted }]} />
+      <View style={[styles.dot, { backgroundColor: primaryColor ?? colors.textMuted }]} />
       <Text style={styles.name} numberOfLines={1}>
         {name}
       </Text>

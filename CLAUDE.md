@@ -86,7 +86,12 @@ Product-defining. Flag a conflict rather than working around any of these.
    offline.
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
-   rather than inlining a value.
+   rather than inlining a value. This governs the app's own design system —
+   backgrounds, text, spacing, semantic accent/success/error — never invented
+   or arbitrary colour. It does **not** apply to team identity colour, which
+   is real-world fact about a specific club or nation, not a design choice —
+   see the data model section below. Never invent, rotate, or arbitrarily
+   assign a team's colour; it must be the team's actual real colour.
 6. **The product is called Escuadra.** "Squad Trainer", "Squad Game", "Squad
    Quiz" and similar all predate the name and are stale wherever they survive —
    including code comments, file headers and docs. Fix them on sight.
@@ -100,6 +105,7 @@ different numbers for club and country. Do not denormalise it onto the player.
 data/index.json        squad manifest
 data/players.json      { id, name, birth, position, nationality, photo: null }
 data/squads/<id>.json  { id, kind: 'club'|'nation', name, season, verified,
+                         primaryColor, secondaryColor,
                          members: [{ playerId, no, captain? }] }
 ```
 
@@ -108,6 +114,14 @@ flexible than that, but the quiz asks for one answer through one chip, and
 same-position distractor selection needs a single key to group on.
 
 `nationality` exists so a club squad can ask for it on level 3.
+
+`primaryColor`/`secondaryColor` are the team's **real** identity colours
+(hex), carried directly on the squad — content, not a design token. This is
+the team's only visual identity marker in the app, since crests/badges/shields
+are never used (hard constraint #2). Get the actual colour right; do not
+invent or rotate an arbitrary hue. Both `data/index.json` (the picker
+manifest) and each squad file carry these fields, since the picker never
+imports full squad JSON.
 
 One file per squad, so a future contribution touches exactly one file.
 

@@ -3,7 +3,8 @@
   "kind": "club",
   "name": "Barcelona",
   "season": "2025/26",
-  "accentId": "bar",
+  "primaryColor": "#A50044",
+  "secondaryColor": "#004D98",
   "verified": true,
   "members": [
     { "playerId": "joan-garcia", "no": 13, "apps": 15 },
