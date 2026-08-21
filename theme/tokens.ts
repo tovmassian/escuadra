@@ -169,6 +169,9 @@ export const sizes = {
   controlHeight: 52,
   controlHeightLarge: 56,
   teamDot: 10,
+  // Escuadra wordmark's mark, matching the 30px mark beside 23px type in the
+  // design source's lockup.
+  wordmarkMark: 30,
   rowHeight: 56,
   teamUnderline: { width: 28, height: 2 },
   missedNumberWidth: 24,

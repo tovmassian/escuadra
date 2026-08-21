@@ -3,6 +3,7 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
+import { Wordmark } from '@/components/Wordmark';
 import { getRoster, getSquad } from '@/lib/squads';
 import { scoreKey, useProgress, useProgressHydrated } from '@/stores/progress';
 import { useSession } from '@/stores/session';
@@ -42,7 +43,7 @@ export default function Home() {
         { paddingTop: insets.top + spacing.xl, paddingBottom: insets.bottom + spacing.xl },
       ]}
     >
-      <Text style={styles.eyebrow}>ESCUADRA</Text>
+      <Wordmark />
       <View style={styles.spacer} />
       <Text style={styles.title}>Ready to train?</Text>
       <Text style={styles.subtitle}>Pick up where you left off, or jump into a new team.</Text>
@@ -89,7 +90,6 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.xl },
-  eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, textAlign: 'center' },
   spacer: { flex: 1 },
   title: {
     ...typography.screenTitle,
