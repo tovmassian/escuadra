@@ -82,11 +82,17 @@ export const useSession = create<SessionState>()((set, get) => ({
     const existing = results[currentIndex];
     if (!question || !part || !existing) return;
 
+    const isCorrect = pickedIndex === part.correctIndex;
     const nextParts = existing.parts.slice();
-    nextParts[currentPartIndex] = { pickedIndex, correct: pickedIndex === part.correctIndex };
+    nextParts[currentPartIndex] = { pickedIndex, correct: isCorrect };
 
     const isLastPart = currentPartIndex === question.parts.length - 1;
-    const overallCorrect = isLastPart
+    // No partial credit, so a wrong pick already dooms the question — stop
+    // asking the remaining parts and grade it immediately instead of
+    // marching through position/nationality/club for a question that's
+    // already lost.
+    const isQuestionOver = !isCorrect || isLastPart;
+    const overallCorrect = isQuestionOver
       ? isQuestionCorrect(
           question,
           nextParts.map((p) => p?.pickedIndex ?? null),
@@ -98,7 +104,7 @@ export const useSession = create<SessionState>()((set, get) => ({
 
     set({
       results: nextResults,
-      currentPartIndex: isLastPart ? currentPartIndex : currentPartIndex + 1,
+      currentPartIndex: isQuestionOver ? currentPartIndex : currentPartIndex + 1,
     });
   },
 

@@ -78,6 +78,21 @@ describe('session store', () => {
     expect(useSession.getState().results[0]?.correct).toBe(false);
   });
 
+  it('stops asking parts the moment one is wrong, grading immediately', () => {
+    useSession.getState().startRound(squad, roster(), 3);
+    const q = useSession.getState().questions[0];
+    if (!q) throw new Error('no question');
+
+    const wrongNameIndex = q.parts[0]!.correctIndex === 0 ? 1 : 0;
+    useSession.getState().answerPart(wrongNameIndex);
+
+    const state = useSession.getState();
+    expect(state.currentPartIndex).toBe(0);
+    expect(state.results[0]?.correct).toBe(false);
+    expect(state.results[0]?.parts[1]).toBeNull();
+    expect(state.results[0]?.parts[2]).toBeNull();
+  });
+
   it('advanceQuestion moves forward and completes after the last question', () => {
     useSession.getState().startRound(squad, roster(), 1);
     for (let i = 0; i < 10; i++) {
