@@ -19,7 +19,45 @@ export const colors = {
   // Dimmed error text for an "incorrect-picked" option — visually quieter
   // than `error` so the correct answer stays the loudest thing on screen.
   errorTextDim: '#a15a58',
+  // Brand palette — the Escuadra mark's own colours, from the 2a design
+  // direction. These are design tokens, not team-identity content: the mark
+  // belongs to the app's design system, unlike a club's real colours.
+  brandBright: '#5b63d6',
+  brandDeep: '#2f3585',
+  brandSoft: '#8f97ea',
+  brandLift: '#6d76e6',
+  // The icon plate's gradient ends. Distinct from the mark's own stops —
+  // the plate sits behind the mark, so it runs deeper.
+  brandPlateTop: '#4a52c4',
+  brandPlateBottom: '#252a6b',
 } as const;
+
+// Gradient stops for the Escuadra mark and its icon plate. React Native
+// cannot paint a gradient from a plain View, so these are declarative data
+// consumed by <BrandGradient>, which wraps expo-linear-gradient.
+//
+// `start`/`end` are unit-square coordinates. The design source specified the
+// plate as CSS `linear-gradient(140deg, ...)`; 140deg points down and to the
+// right, which is {x:0,y:0} → {x:0.64,y:1} here.
+export const gradients = {
+  mark: {
+    colors: [colors.brandBright, colors.brandDeep],
+    start: { x: 0, y: 0 },
+    end: { x: 1, y: 1 },
+  },
+  markSoft: {
+    colors: [colors.accent, colors.brandLift],
+    start: { x: 0, y: 1 },
+    end: { x: 1, y: 0 },
+  },
+  plate: {
+    colors: [colors.brandPlateTop, colors.brandPlateBottom],
+    start: { x: 0, y: 0 },
+    end: { x: 0.64, y: 1 },
+  },
+} as const;
+
+export type GradientName = keyof typeof gradients;
 
 export const typography = {
   heroNumber: { fontFamily: 'IBMPlexMono-Bold', fontWeight: '700' as const, fontSize: 96 },
@@ -39,6 +77,14 @@ export const typography = {
   // Team-row names, chip labels — one step down from `body`.
   rowTitle: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 15 },
   chipLabel: { fontFamily: 'Inter-Bold', fontWeight: '700' as const, fontSize: 14 },
+  // The wordmark's "escuadra" lockup. ExtraBold at -0.02em, per the 2a
+  // design source. The only place Inter 800 is used.
+  wordmark: {
+    fontFamily: 'Inter-ExtraBold',
+    fontWeight: '800' as const,
+    fontSize: 23,
+    letterSpacing: -0.46,
+  },
   // Segmented-control / filter-pill labels.
   segmentLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 13 },
   filterLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },

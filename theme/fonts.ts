@@ -10,11 +10,13 @@ import { IBMPlexMono_700Bold } from '@expo-google-fonts/ibm-plex-mono/700Bold';
 import { Inter_500Medium } from '@expo-google-fonts/inter/500Medium';
 import { Inter_600SemiBold } from '@expo-google-fonts/inter/600SemiBold';
 import { Inter_700Bold } from '@expo-google-fonts/inter/700Bold';
+import { Inter_800ExtraBold } from '@expo-google-fonts/inter/800ExtraBold';
 
 export const fontAssets = {
   'Inter-Medium': Inter_500Medium,
   'Inter-SemiBold': Inter_600SemiBold,
   'Inter-Bold': Inter_700Bold,
+  'Inter-ExtraBold': Inter_800ExtraBold,
   'IBMPlexMono-SemiBold': IBMPlexMono_600SemiBold,
   'IBMPlexMono-Bold': IBMPlexMono_700Bold,
 } as const;
