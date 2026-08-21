@@ -8,6 +8,7 @@
 import indexData from '@/data/index.json';
 import playersData from '@/data/players.json';
 import squadArg from '@/data/squads/arg.json';
+import squadArm from '@/data/squads/arm.json';
 import squadArs from '@/data/squads/ars.json';
 import squadBar from '@/data/squads/bar.json';
 import squadBra from '@/data/squads/bra.json';
@@ -23,6 +24,7 @@ export { getAge } from './age';
 
 const SQUAD_FILES: Record<string, Squad> = {
   ars: squadArs as Squad,
+  arm: squadArm as Squad,
   rma: squadRma as Squad,
   bar: squadBar as Squad,
   int: squadInt as Squad,
