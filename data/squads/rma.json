@@ -7,31 +7,109 @@
   "secondaryColor": "#FEBE10",
   "verified": false,
   "members": [
-    { "playerId": "courtois", "no": 1 },
-    { "playerId": "asencio", "no": 2 },
-    { "playerId": "militao", "no": 3 },
-    { "playerId": "huijsen", "no": 4 },
-    { "playerId": "bellingham", "no": 5 },
-    { "playerId": "camavinga", "no": 6 },
-    { "playerId": "vinicius", "no": 7 },
-    { "playerId": "valverde", "no": 8 },
-    { "playerId": "endrick", "no": 9 },
-    { "playerId": "mbappe", "no": 10 },
-    { "playerId": "rodrygo", "no": 11 },
-    { "playerId": "alexander-arnold", "no": 12 },
-    { "playerId": "lunin", "no": 13 },
-    { "playerId": "tchouameni", "no": 14 },
-    { "playerId": "guler", "no": 15 },
-    { "playerId": "konate", "no": 16 },
-    { "playerId": "cucurella", "no": 17 },
-    { "playerId": "carreras", "no": 18 },
-    { "playerId": "carlos-espi", "no": 19 },
-    { "playerId": "bernardo-silva", "no": 20 },
-    { "playerId": "brahim", "no": 21 },
-    { "playerId": "rudiger", "no": 22 },
-    { "playerId": "mendy", "no": 23 },
-    { "playerId": "dumfries", "no": 24 },
-    { "playerId": "yan-diomande", "no": 25 },
-    { "playerId": "thiago-pitarch", "no": 27 }
+    {
+      "playerId": "courtois",
+      "no": 1
+    },
+    {
+      "playerId": "asencio",
+      "no": 2
+    },
+    {
+      "playerId": "militao",
+      "no": 3
+    },
+    {
+      "playerId": "huijsen",
+      "no": 4
+    },
+    {
+      "playerId": "bellingham",
+      "no": 5
+    },
+    {
+      "playerId": "camavinga",
+      "no": 6
+    },
+    {
+      "playerId": "vinicius",
+      "no": 7
+    },
+    {
+      "playerId": "valverde",
+      "no": 8
+    },
+    {
+      "playerId": "endrick",
+      "no": 9
+    },
+    {
+      "playerId": "mbappe",
+      "no": 10
+    },
+    {
+      "playerId": "rodrygo",
+      "no": 11
+    },
+    {
+      "playerId": "alexander-arnold",
+      "no": 12
+    },
+    {
+      "playerId": "lunin",
+      "no": 13
+    },
+    {
+      "playerId": "tchouameni",
+      "no": 14
+    },
+    {
+      "playerId": "guler",
+      "no": 15
+    },
+    {
+      "playerId": "konate",
+      "no": 16
+    },
+    {
+      "playerId": "cucurella",
+      "no": 17
+    },
+    {
+      "playerId": "carreras",
+      "no": 18
+    },
+    {
+      "playerId": "carlos-espi",
+      "no": 19
+    },
+    {
+      "playerId": "bernardo-silva",
+      "no": 20
+    },
+    {
+      "playerId": "brahim",
+      "no": 21
+    },
+    {
+      "playerId": "rudiger",
+      "no": 22
+    },
+    {
+      "playerId": "mendy",
+      "no": 23
+    },
+    {
+      "playerId": "dumfries",
+      "no": 24
+    },
+    {
+      "playerId": "yan-diomande",
+      "no": 25
+    },
+    {
+      "playerId": "thiago-pitarch",
+      "no": 27
+    }
   ]
 }

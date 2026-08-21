@@ -7,30 +7,106 @@
   "secondaryColor": "#000000",
   "verified": false,
   "members": [
-    { "playerId": "j-martinez", "no": 1 },
-    { "playerId": "stankovic", "no": 5 },
-    { "playerId": "stones", "no": 6 },
-    { "playerId": "zielinski", "no": 7 },
-    { "playerId": "sucic", "no": 8 },
-    { "playerId": "thuram", "no": 9 },
-    { "playerId": "lautaro", "no": 10, "captain": true },
-    { "playerId": "luis-henrique", "no": 11 },
-    { "playerId": "di-gennaro", "no": 12 },
-    { "playerId": "bonny", "no": 14 },
-    { "playerId": "diouf", "no": 17 },
-    { "playerId": "calhanoglu", "no": 20 },
-    { "playerId": "asllani", "no": 21 },
-    { "playerId": "mkhitaryan", "no": 22 },
-    { "playerId": "barella", "no": 23 },
-    { "playerId": "akanji", "no": 25 },
-    { "playerId": "pavard", "no": 28 },
-    { "playerId": "carlos-augusto", "no": 30 },
-    { "playerId": "bisseck", "no": 31 },
-    { "playerId": "dimarco", "no": 32 },
-    { "playerId": "massolin", "no": 34 },
-    { "playerId": "provedel", "no": 49 },
-    { "playerId": "pio-esposito", "no": 94 },
-    { "playerId": "bastoni", "no": 95 },
-    { "playerId": "spence", "no": 99 }
+    {
+      "playerId": "j-martinez",
+      "no": 1
+    },
+    {
+      "playerId": "stankovic",
+      "no": 5
+    },
+    {
+      "playerId": "stones",
+      "no": 6
+    },
+    {
+      "playerId": "zielinski",
+      "no": 7
+    },
+    {
+      "playerId": "sucic",
+      "no": 8
+    },
+    {
+      "playerId": "thuram",
+      "no": 9
+    },
+    {
+      "playerId": "lautaro",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "luis-henrique",
+      "no": 11
+    },
+    {
+      "playerId": "di-gennaro",
+      "no": 12
+    },
+    {
+      "playerId": "bonny",
+      "no": 14
+    },
+    {
+      "playerId": "diouf",
+      "no": 17
+    },
+    {
+      "playerId": "calhanoglu",
+      "no": 20
+    },
+    {
+      "playerId": "asllani",
+      "no": 21
+    },
+    {
+      "playerId": "mkhitaryan",
+      "no": 22
+    },
+    {
+      "playerId": "barella",
+      "no": 23
+    },
+    {
+      "playerId": "akanji",
+      "no": 25
+    },
+    {
+      "playerId": "pavard",
+      "no": 28
+    },
+    {
+      "playerId": "carlos-augusto",
+      "no": 30
+    },
+    {
+      "playerId": "bisseck",
+      "no": 31
+    },
+    {
+      "playerId": "dimarco",
+      "no": 32
+    },
+    {
+      "playerId": "massolin",
+      "no": 34
+    },
+    {
+      "playerId": "provedel",
+      "no": 49
+    },
+    {
+      "playerId": "pio-esposito",
+      "no": 94
+    },
+    {
+      "playerId": "bastoni",
+      "no": 95
+    },
+    {
+      "playerId": "spence",
+      "no": 99
+    }
   ]
 }

@@ -21,7 +21,7 @@ function roster(): RosterEntry[] {
       name: `Player ${i}`,
       position: positions[i % positions.length] as Player['position'],
     });
-    return { member: { playerId: p.id, no: i + 1, apps: 10 }, player: p };
+    return { member: { playerId: p.id, no: i + 1 }, player: p };
   });
 }
 

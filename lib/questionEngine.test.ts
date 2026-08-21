@@ -13,8 +13,8 @@ function player(overrides: Partial<Player> & Pick<Player, 'id' | 'name' | 'posit
   };
 }
 
-function member(player: Player, no: number, apps = 10): RosterEntry {
-  return { member: { playerId: player.id, no, apps }, player };
+function member(player: Player, no: number): RosterEntry {
+  return { member: { playerId: player.id, no }, player };
 }
 
 function squad(overrides: Partial<Squad> = {}): Squad {

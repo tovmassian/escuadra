@@ -20,11 +20,16 @@ export interface Question {
   playerId: string;
   playerName: string;
   memberNo: number;
-  apps: number;
   age: number;
   /** The subject's actual position — always present, even at level 1 where
    *  no `position` part is asked, so the level-1 stat chip has something to show. */
   position: Position;
+  /** Nationality on a club squad, club on a nation squad — the same
+   *  conditional as the level-3 third part (`squad.kind` decides which),
+   *  surfaced here as a stat chip on levels 1-2 too, where it isn't the
+   *  thing being tested. Falls back to '—' for the rare nation-squad player
+   *  missing club data. */
+  affiliation: string;
   parts: QuestionPart[];
 }
 
@@ -180,9 +185,10 @@ export function buildRound(opts: BuildRoundOptions): Question[] {
       playerId: subject.player.id,
       playerName: subject.player.name,
       memberNo: subject.member.no,
-      apps: subject.member.apps,
       age: getAge(subject.player.birth, now),
       position: subject.player.position,
+      affiliation:
+        squad.kind === 'club' ? subject.player.nationality : (subject.player.club ?? '—'),
       parts,
     };
   });

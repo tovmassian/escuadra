@@ -7,31 +7,110 @@
   "secondaryColor": "#FFC400",
   "verified": false,
   "members": [
-    { "playerId": "raya", "no": 1, "apps": 14 },
-    { "playerId": "pubill", "no": 2, "apps": 3 },
-    { "playerId": "grimaldo", "no": 3, "apps": 14 },
-    { "playerId": "eric-garcia", "no": 4, "apps": 22 },
-    { "playerId": "llorente", "no": 5, "apps": 27 },
-    { "playerId": "merino", "no": 6, "apps": 51 },
-    { "playerId": "torres", "no": 7, "apps": 65 },
-    { "playerId": "fabian-ruiz", "no": 8, "apps": 50 },
-    { "playerId": "gavi", "no": 9, "apps": 32 },
-    { "playerId": "dani-olmo", "no": 10, "apps": 58 },
-    { "playerId": "pino", "no": 11, "apps": 25 },
-    { "playerId": "porro", "no": 12, "apps": 24 },
-    { "playerId": "joan-garcia", "no": 13, "apps": 2 },
-    { "playerId": "laporte", "no": 14, "apps": 54 },
-    { "playerId": "baena", "no": 15, "apps": 24 },
-    { "playerId": "rodri", "no": 16, "apps": 70, "captain": true },
-    { "playerId": "nico-williams", "no": 17, "apps": 36 },
-    { "playerId": "zubimendi", "no": 18, "apps": 27 },
-    { "playerId": "yamal", "no": 19, "apps": 33 },
-    { "playerId": "pedri", "no": 20, "apps": 49 },
-    { "playerId": "oyarzabal", "no": 21, "apps": 61 },
-    { "playerId": "cubarsi", "no": 22, "apps": 20 },
-    { "playerId": "unai-simon", "no": 23, "apps": 66 },
-    { "playerId": "cucurella", "no": 24, "apps": 32 },
-    { "playerId": "victor-munoz", "no": 25, "apps": 2 },
-    { "playerId": "borja-iglesias", "no": 26, "apps": 9 }
+    {
+      "playerId": "raya",
+      "no": 1
+    },
+    {
+      "playerId": "pubill",
+      "no": 2
+    },
+    {
+      "playerId": "grimaldo",
+      "no": 3
+    },
+    {
+      "playerId": "eric-garcia",
+      "no": 4
+    },
+    {
+      "playerId": "llorente",
+      "no": 5
+    },
+    {
+      "playerId": "merino",
+      "no": 6
+    },
+    {
+      "playerId": "torres",
+      "no": 7
+    },
+    {
+      "playerId": "fabian-ruiz",
+      "no": 8
+    },
+    {
+      "playerId": "gavi",
+      "no": 9
+    },
+    {
+      "playerId": "dani-olmo",
+      "no": 10
+    },
+    {
+      "playerId": "pino",
+      "no": 11
+    },
+    {
+      "playerId": "porro",
+      "no": 12
+    },
+    {
+      "playerId": "joan-garcia",
+      "no": 13
+    },
+    {
+      "playerId": "laporte",
+      "no": 14
+    },
+    {
+      "playerId": "baena",
+      "no": 15
+    },
+    {
+      "playerId": "rodri",
+      "no": 16,
+      "captain": true
+    },
+    {
+      "playerId": "nico-williams",
+      "no": 17
+    },
+    {
+      "playerId": "zubimendi",
+      "no": 18
+    },
+    {
+      "playerId": "yamal",
+      "no": 19
+    },
+    {
+      "playerId": "pedri",
+      "no": 20
+    },
+    {
+      "playerId": "oyarzabal",
+      "no": 21
+    },
+    {
+      "playerId": "cubarsi",
+      "no": 22
+    },
+    {
+      "playerId": "unai-simon",
+      "no": 23
+    },
+    {
+      "playerId": "cucurella",
+      "no": 24
+    },
+    {
+      "playerId": "victor-munoz",
+      "no": 25
+    },
+    {
+      "playerId": "borja-iglesias",
+      "no": 26
+    }
   ]
 }

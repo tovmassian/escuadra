@@ -7,19 +7,62 @@
   "secondaryColor": "#BC002D",
   "verified": true,
   "members": [
-    { "playerId": "suzuki-zion", "no": 1, "apps": 15 },
-    { "playerId": "gonda", "no": 12, "apps": 60 },
-    { "playerId": "itakura", "no": 5, "apps": 45 },
-    { "playerId": "nagatomo", "no": 6, "apps": 120 },
-    { "playerId": "taniguchi", "no": 3, "apps": 50 },
-    { "playerId": "tomiyasu", "no": 22, "apps": 50 },
-    { "playerId": "sugawara", "no": 19, "apps": 40 },
-    { "playerId": "endo", "no": 7, "apps": 65, "captain": true },
-    { "playerId": "morita", "no": 8, "apps": 45 },
-    { "playerId": "tanaka", "no": 14, "apps": 30 },
-    { "playerId": "kubo", "no": 15, "apps": 40 },
-    { "playerId": "ueda", "no": 9, "apps": 25 },
-    { "playerId": "doan", "no": 10, "apps": 50 },
-    { "playerId": "junya-ito", "no": 11, "apps": 55 }
+    {
+      "playerId": "suzuki-zion",
+      "no": 1
+    },
+    {
+      "playerId": "gonda",
+      "no": 12
+    },
+    {
+      "playerId": "itakura",
+      "no": 5
+    },
+    {
+      "playerId": "nagatomo",
+      "no": 6
+    },
+    {
+      "playerId": "taniguchi",
+      "no": 3
+    },
+    {
+      "playerId": "tomiyasu",
+      "no": 22
+    },
+    {
+      "playerId": "sugawara",
+      "no": 19
+    },
+    {
+      "playerId": "endo",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "morita",
+      "no": 8
+    },
+    {
+      "playerId": "tanaka",
+      "no": 14
+    },
+    {
+      "playerId": "kubo",
+      "no": 15
+    },
+    {
+      "playerId": "ueda",
+      "no": 9
+    },
+    {
+      "playerId": "doan",
+      "no": 10
+    },
+    {
+      "playerId": "junya-ito",
+      "no": 11
+    }
   ]
 }

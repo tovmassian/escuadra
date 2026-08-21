@@ -7,31 +7,110 @@
   "secondaryColor": "#FFFFFF",
   "verified": false,
   "members": [
-    { "playerId": "cancarevic", "no": 1, "apps": 21 },
-    { "playerId": "bandikyan", "no": 2, "apps": 2 },
-    { "playerId": "piloyan", "no": 3, "apps": 10 },
-    { "playerId": "arutyunyan", "no": 4, "apps": 31 },
-    { "playerId": "davidyan", "no": 5, "apps": 5 },
-    { "playerId": "avanesyan", "no": 6, "apps": 5 },
-    { "playerId": "sevikyan", "no": 7, "apps": 21 },
-    { "playerId": "karlen-hovhannisyan", "no": 8, "apps": 3 },
-    { "playerId": "serobyan", "no": 9, "apps": 28 },
-    { "playerId": "spertsyan", "no": 10, "apps": 42, "captain": true },
-    { "playerId": "shaghoyan", "no": 11, "apps": 24 },
-    { "playerId": "mishiev", "no": 12, "apps": 1 },
-    { "playerId": "kamo-hovhannisyan", "no": 13, "apps": 97 },
-    { "playerId": "manvelyan", "no": 14, "apps": 10 },
-    { "playerId": "petrosyan", "no": 15, "apps": 0 },
-    { "playerId": "avagyan", "no": 16, "apps": 8 },
-    { "playerId": "ranos", "no": 17, "apps": 26 },
-    { "playerId": "miranyan", "no": 18, "apps": 20 },
-    { "playerId": "edgar-grigoryan", "no": 19, "apps": 10 },
-    { "playerId": "bueno", "no": 20, "apps": 3 },
-    { "playerId": "tiknizyan", "no": 21, "apps": 31 },
-    { "playerId": "narek-grigoryan", "no": 22, "apps": 12 },
-    { "playerId": "narek-hovhannisyan", "no": 23, "apps": 2 },
-    { "playerId": "hakobyan", "no": 24, "apps": 0 },
-    { "playerId": "ghazaryan", "no": 25, "apps": 2 },
-    { "playerId": "khamoyan", "no": 26, "apps": 1 }
+    {
+      "playerId": "cancarevic",
+      "no": 1
+    },
+    {
+      "playerId": "bandikyan",
+      "no": 2
+    },
+    {
+      "playerId": "piloyan",
+      "no": 3
+    },
+    {
+      "playerId": "arutyunyan",
+      "no": 4
+    },
+    {
+      "playerId": "davidyan",
+      "no": 5
+    },
+    {
+      "playerId": "avanesyan",
+      "no": 6
+    },
+    {
+      "playerId": "sevikyan",
+      "no": 7
+    },
+    {
+      "playerId": "karlen-hovhannisyan",
+      "no": 8
+    },
+    {
+      "playerId": "serobyan",
+      "no": 9
+    },
+    {
+      "playerId": "spertsyan",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "shaghoyan",
+      "no": 11
+    },
+    {
+      "playerId": "mishiev",
+      "no": 12
+    },
+    {
+      "playerId": "kamo-hovhannisyan",
+      "no": 13
+    },
+    {
+      "playerId": "manvelyan",
+      "no": 14
+    },
+    {
+      "playerId": "petrosyan",
+      "no": 15
+    },
+    {
+      "playerId": "avagyan",
+      "no": 16
+    },
+    {
+      "playerId": "ranos",
+      "no": 17
+    },
+    {
+      "playerId": "miranyan",
+      "no": 18
+    },
+    {
+      "playerId": "edgar-grigoryan",
+      "no": 19
+    },
+    {
+      "playerId": "bueno",
+      "no": 20
+    },
+    {
+      "playerId": "tiknizyan",
+      "no": 21
+    },
+    {
+      "playerId": "narek-grigoryan",
+      "no": 22
+    },
+    {
+      "playerId": "narek-hovhannisyan",
+      "no": 23
+    },
+    {
+      "playerId": "hakobyan",
+      "no": 24
+    },
+    {
+      "playerId": "ghazaryan",
+      "no": 25
+    },
+    {
+      "playerId": "khamoyan",
+      "no": 26
+    }
   ]
 }

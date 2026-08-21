@@ -98,9 +98,8 @@ roster.
 
 8. **Write `data/squads/<id>.json`**, matching the existing shape exactly:
    `id, kind, name, season, primaryColor, secondaryColor, verified, members`.
-   `members` is `[{ playerId, no, apps?, captain? }]` — shirt number lives on
-   the membership, never on the player. `apps` (caps for nations) is optional;
-   include it when Wikipedia gives one.
+   `members` is `[{ playerId, no, captain? }]` — shirt number lives on the
+   membership, never on the player.
 
 9. **Set `verified: false`.** Always — for a brand-new squad and for one
    you're overwriting, even if it was previously `true`. Scraping + LLM

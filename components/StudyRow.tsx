@@ -6,10 +6,12 @@ interface StudyRowProps {
   number: number;
   name: string;
   position: string;
-  apps: number;
+  /** Nationality (club squads) or club (nation squads) — see
+   *  `Question.affiliation` in the question engine for the same conditional. */
+  affiliation: string;
 }
 
-export function StudyRow({ number, name, position, apps }: StudyRowProps) {
+export function StudyRow({ number, name, position, affiliation }: StudyRowProps) {
   return (
     <View style={styles.row}>
       <Text style={[styles.number, { width: sizes.studyColumn.no }]}>{number}</Text>
@@ -17,12 +19,17 @@ export function StudyRow({ number, name, position, apps }: StudyRowProps) {
         {name}
       </Text>
       <Text style={[styles.position, { width: sizes.studyColumn.position }]}>{position}</Text>
-      <Text style={[styles.apps, { width: sizes.studyColumn.apps }]}>{apps}</Text>
+      <Text
+        style={[styles.affiliation, { width: sizes.studyColumn.affiliation }]}
+        numberOfLines={1}
+      >
+        {affiliation}
+      </Text>
     </View>
   );
 }
 
-export function StudyHeaderRow() {
+export function StudyHeaderRow({ affiliationLabel }: { affiliationLabel: 'NAT' | 'CLUB' }) {
   return (
     <View style={styles.headerRow}>
       <Text style={[styles.headerLabel, { width: sizes.studyColumn.no }]}>#</Text>
@@ -32,8 +39,10 @@ export function StudyHeaderRow() {
       >
         POS
       </Text>
-      <Text style={[styles.headerLabel, { width: sizes.studyColumn.apps, textAlign: 'right' }]}>
-        APPS
+      <Text
+        style={[styles.headerLabel, { width: sizes.studyColumn.affiliation, textAlign: 'right' }]}
+      >
+        {affiliationLabel}
       </Text>
     </View>
   );
@@ -50,7 +59,7 @@ const styles = StyleSheet.create({
   number: { ...typography.statMonoSmall, color: colors.textMuted },
   name: { flex: 1, ...typography.tableName, color: colors.textPrimary, marginLeft: spacing.sm },
   position: { ...typography.tableCell, color: colors.textSecondary, textAlign: 'center' },
-  apps: { ...typography.tableCell, color: colors.textMuted, textAlign: 'right' },
+  affiliation: { ...typography.tableCell, color: colors.textMuted, textAlign: 'right' },
   headerRow: {
     flexDirection: 'row',
     alignItems: 'center',

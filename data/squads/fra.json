@@ -7,27 +7,94 @@
   "secondaryColor": "#EF4135",
   "verified": true,
   "members": [
-    { "playerId": "maignan", "no": 16, "apps": 40 },
-    { "playerId": "chevalier", "no": 23, "apps": 8 },
-    { "playerId": "samba", "no": 30, "apps": 5 },
-    { "playerId": "kounde", "no": 5, "apps": 35 },
-    { "playerId": "konate", "no": 4, "apps": 25 },
-    { "playerId": "saliba", "no": 17, "apps": 40 },
-    { "playerId": "l-hernandez", "no": 21, "apps": 40 },
-    { "playerId": "digne", "no": 13, "apps": 45 },
-    { "playerId": "mendy", "no": 22, "apps": 15 },
-    { "playerId": "tchouameni", "no": 8, "apps": 40 },
-    { "playerId": "camavinga", "no": 6, "apps": 35 },
-    { "playerId": "kante", "no": 14, "apps": 55 },
-    { "playerId": "rabiot", "no": 26, "apps": 65 },
-    { "playerId": "zaire-emery", "no": 9, "apps": 15 },
-    { "playerId": "akliouche", "no": 20, "apps": 3 },
-    { "playerId": "mbappe", "no": 10, "apps": 95, "captain": true },
-    { "playerId": "dembele", "no": 11, "apps": 45 },
-    { "playerId": "doue", "no": 18, "apps": 8 },
-    { "playerId": "barcola", "no": 12, "apps": 15 },
-    { "playerId": "griezmann", "no": 7, "apps": 145 },
-    { "playerId": "mateta", "no": 15, "apps": 3 },
-    { "playerId": "cherki", "no": 19, "apps": 12 }
+    {
+      "playerId": "maignan",
+      "no": 16
+    },
+    {
+      "playerId": "chevalier",
+      "no": 23
+    },
+    {
+      "playerId": "samba",
+      "no": 30
+    },
+    {
+      "playerId": "kounde",
+      "no": 5
+    },
+    {
+      "playerId": "konate",
+      "no": 4
+    },
+    {
+      "playerId": "saliba",
+      "no": 17
+    },
+    {
+      "playerId": "l-hernandez",
+      "no": 21
+    },
+    {
+      "playerId": "digne",
+      "no": 13
+    },
+    {
+      "playerId": "mendy",
+      "no": 22
+    },
+    {
+      "playerId": "tchouameni",
+      "no": 8
+    },
+    {
+      "playerId": "camavinga",
+      "no": 6
+    },
+    {
+      "playerId": "kante",
+      "no": 14
+    },
+    {
+      "playerId": "rabiot",
+      "no": 26
+    },
+    {
+      "playerId": "zaire-emery",
+      "no": 9
+    },
+    {
+      "playerId": "akliouche",
+      "no": 20
+    },
+    {
+      "playerId": "mbappe",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "dembele",
+      "no": 11
+    },
+    {
+      "playerId": "doue",
+      "no": 18
+    },
+    {
+      "playerId": "barcola",
+      "no": 12
+    },
+    {
+      "playerId": "griezmann",
+      "no": 7
+    },
+    {
+      "playerId": "mateta",
+      "no": 15
+    },
+    {
+      "playerId": "cherki",
+      "no": 19
+    }
   ]
 }

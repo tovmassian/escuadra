@@ -24,9 +24,6 @@ export interface Player {
 export interface SquadMember {
   playerId: string;
   no: number;
-  /** Appearances for THIS squad specifically — club caps and country caps
-   *  differ, so this lives on membership, same reasoning as shirt number. */
-  apps: number;
   captain?: boolean;
 }
 

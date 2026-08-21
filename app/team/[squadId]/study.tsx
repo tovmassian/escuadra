@@ -23,6 +23,8 @@ export default function Study() {
     .filter((r) => filter === 'ALL' || r.player.position === filter)
     .sort((a, b) => a.member.no - b.member.no);
 
+  const affiliationLabel = squad.kind === 'club' ? 'NAT' : 'CLUB';
+
   return (
     <View style={[styles.root, { paddingTop: insets.top + spacing.xl }]}>
       <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
@@ -37,7 +39,7 @@ export default function Study() {
         ))}
       </View>
 
-      <StudyHeaderRow />
+      <StudyHeaderRow affiliationLabel={affiliationLabel} />
       <FlatList
         data={rows}
         keyExtractor={(r) => r.player.id}
@@ -46,7 +48,9 @@ export default function Study() {
             number={item.member.no}
             name={item.player.name}
             position={item.player.position}
-            apps={item.member.apps}
+            affiliation={
+              squad.kind === 'club' ? item.player.nationality : (item.player.club ?? '—')
+            }
           />
         )}
       />

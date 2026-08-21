@@ -117,7 +117,7 @@ export const sizes = {
   // Horizontal offset of the difficulty ladder's connector line — centred
   // under the badge column regardless of level (badges vary 40-56px wide).
   difficultyConnectorOffset: 27,
-  studyColumn: { no: 26, position: 34, apps: 40 },
+  studyColumn: { no: 26, position: 34, affiliation: 92 },
   // Home's "Start Training" is the one 56px control; every other button
   // (Continue, Results actions) is 52px.
   controlHeight: 52,
