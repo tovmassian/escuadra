@@ -26,6 +26,7 @@ function squad(overrides: Partial<Squad> = {}): Squad {
     primaryColor: '#EF0107',
     secondaryColor: '#FFFFFF',
     verified: false,
+    marker: { bands: ['#EF0107'], orientation: 'vertical' },
     members: [],
     ...overrides,
   };

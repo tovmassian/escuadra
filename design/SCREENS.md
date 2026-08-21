@@ -31,9 +31,11 @@ deliberate constraint is distinguishable from an accident.
    v1, so the question screen keeps a hero slot that a square portrait can drop
    into without a redesign. It currently holds a large shirt number.
 2. **No club crests, badges, logos or shield shapes. Ever.** Trademark
-   exposure. Clubs are identified by text and colour alone. National flags are
-   not covered by this rule — flags carry no trademark — and are used
-   deliberately as the nation identity marker.
+   exposure. Clubs are identified by text and colour, drawn as banded
+   rectangles — the same marker shape used for national flags. National
+   flags are not covered by this rule — flags carry no trademark — and are
+   used deliberately as the nation identity marker; the rendering is unified
+   under one `TeamMarker` concept for both kinds.
 3. **No text input anywhere. No keyboard.** Every answer is a tap: option cards
    and chip selectors are the entire input vocabulary. Typing player names on a
    phone is the worst possible version of this app.

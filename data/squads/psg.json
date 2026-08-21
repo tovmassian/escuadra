@@ -6,6 +6,11 @@
   "primaryColor": "#004170",
   "secondaryColor": "#DA291C",
   "verified": true,
+  "marker": {
+    "bands": ["#004170", "#DA291C", "#004170"],
+    "orientation": "vertical",
+    "weights": [2, 1, 2]
+  },
   "members": [
     {
       "playerId": "hakimi",

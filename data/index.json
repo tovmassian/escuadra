@@ -6,7 +6,11 @@
     "season": "2025/26",
     "primaryColor": "#EF0107",
     "secondaryColor": "#FFFFFF",
-    "verified": true
+    "verified": true,
+    "marker": {
+      "bands": ["#EF0107"],
+      "orientation": "vertical"
+    }
   },
   {
     "id": "rma",
@@ -15,7 +19,11 @@
     "season": "2026/27",
     "primaryColor": "#FFFFFF",
     "secondaryColor": "#FEBE10",
-    "verified": false
+    "verified": false,
+    "marker": {
+      "bands": ["#FFFFFF"],
+      "orientation": "vertical"
+    }
   },
   {
     "id": "bar",
@@ -24,7 +32,11 @@
     "season": "2025/26",
     "primaryColor": "#A50044",
     "secondaryColor": "#004D98",
-    "verified": true
+    "verified": true,
+    "marker": {
+      "bands": ["#A50044", "#004D98"],
+      "orientation": "vertical"
+    }
   },
   {
     "id": "int",
@@ -33,7 +45,11 @@
     "season": "2026/27",
     "primaryColor": "#0068A8",
     "secondaryColor": "#000000",
-    "verified": false
+    "verified": false,
+    "marker": {
+      "bands": ["#0068A8", "#000000"],
+      "orientation": "vertical"
+    }
   },
   {
     "id": "psg",
@@ -42,7 +58,12 @@
     "season": "2025/26",
     "primaryColor": "#004170",
     "secondaryColor": "#DA291C",
-    "verified": true
+    "verified": true,
+    "marker": {
+      "bands": ["#004170", "#DA291C", "#004170"],
+      "orientation": "vertical",
+      "weights": [2, 1, 2]
+    }
   },
   {
     "id": "bra",
@@ -52,7 +73,7 @@
     "primaryColor": "#FFDF00",
     "secondaryColor": "#009739",
     "verified": true,
-    "flag": {
+    "marker": {
       "bands": ["#009739"],
       "orientation": "horizontal",
       "overlay": { "shape": "diamond", "color": "#FFDF00" }
@@ -66,7 +87,7 @@
     "primaryColor": "#75AADB",
     "secondaryColor": "#FFFFFF",
     "verified": true,
-    "flag": {
+    "marker": {
       "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
       "orientation": "horizontal"
     }
@@ -79,7 +100,7 @@
     "primaryColor": "#C60B1E",
     "secondaryColor": "#FFC400",
     "verified": false,
-    "flag": {
+    "marker": {
       "bands": ["#AA151B", "#F1BF00", "#AA151B"],
       "orientation": "horizontal",
       "weights": [1, 2, 1]
@@ -93,7 +114,7 @@
     "primaryColor": "#0055A4",
     "secondaryColor": "#EF4135",
     "verified": true,
-    "flag": {
+    "marker": {
       "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
       "orientation": "vertical"
     }
@@ -106,7 +127,7 @@
     "primaryColor": "#000B8C",
     "secondaryColor": "#BC002D",
     "verified": true,
-    "flag": {
+    "marker": {
       "bands": ["#FFFFFF"],
       "orientation": "horizontal",
       "overlay": { "shape": "disc", "color": "#BC002D" }
@@ -120,7 +141,7 @@
     "primaryColor": "#B70000",
     "secondaryColor": "#FFFFFF",
     "verified": false,
-    "flag": {
+    "marker": {
       "bands": ["#D90012", "#0033A0", "#F2A800"],
       "orientation": "horizontal"
     }

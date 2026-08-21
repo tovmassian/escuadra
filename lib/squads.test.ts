@@ -47,32 +47,36 @@ describe('squad data integrity', () => {
         expect(positions.size).toBeGreaterThan(0);
       });
 
-      if (manifest.kind === 'nation') {
-        it('has flag geometry on both the manifest and the squad file', () => {
-          expect(manifest.flag, 'manifest entry').toBeDefined();
-          expect(getSquad(manifest.id)?.flag, 'squad file').toBeDefined();
-        });
+      // Every squad — club or nation — carries a marker: the app's sole
+      // visual identity element, since crests/badges/shields are never used.
+      // For a nation the marker is the national flag; for a club it's the
+      // club's colours as bands, never an emblem.
+      it('has marker geometry on both the manifest and the squad file', () => {
+        expect(manifest.marker, 'manifest entry').toBeDefined();
+        expect(getSquad(manifest.id)?.marker, 'squad file').toBeDefined();
+      });
 
-        it('has a flag whose bands are valid hex', () => {
-          const flag = manifest.flag;
-          if (!flag) throw new Error('flag must be defined');
-          expect(flag.bands.length).toBeGreaterThan(0);
-          for (const band of flag.bands) expect(band).toMatch(/^#[0-9a-fA-F]{6}$/);
-          if (flag.overlay) expect(flag.overlay.color).toMatch(/^#[0-9a-fA-F]{6}$/);
-        });
+      it('has a marker whose bands are valid hex', () => {
+        const marker = manifest.marker;
+        if (!marker) throw new Error('marker must be defined');
+        expect(marker.bands.length).toBeGreaterThan(0);
+        for (const band of marker.bands) expect(band).toMatch(/^#[0-9a-fA-F]{6}$/);
+        if (marker.overlay) expect(marker.overlay.color).toMatch(/^#[0-9a-fA-F]{6}$/);
+      });
 
-        it('has band weights matching the band count, when weights are given', () => {
-          const flag = manifest.flag;
-          if (!flag) throw new Error('flag must be defined');
-          if (flag.weights) expect(flag.weights.length).toBe(flag.bands.length);
-        });
+      it('has band weights matching the band count, when weights are given', () => {
+        const marker = manifest.marker;
+        if (!marker) throw new Error('marker must be defined');
+        if (marker.weights) expect(marker.weights.length).toBe(marker.bands.length);
+      });
 
-        it('agrees between the manifest and the squad file', () => {
-          expect(getSquad(manifest.id)?.flag).toEqual(manifest.flag);
-        });
-      } else {
-        it('carries no flag — flags identify nations only', () => {
-          expect(manifest.flag).toBeUndefined();
+      it('agrees between the manifest and the squad file', () => {
+        expect(getSquad(manifest.id)?.marker).toEqual(manifest.marker);
+      });
+
+      if (manifest.kind === 'club') {
+        it('never carries an overlay device — those are for national flags only', () => {
+          expect(manifest.marker?.overlay).toBeUndefined();
         });
       }
     });

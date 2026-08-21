@@ -168,13 +168,16 @@ export const sizes = {
   // (Continue, Results actions) is 52px.
   controlHeight: 52,
   controlHeightLarge: 56,
+  // Plain colour dot for Home's "continue" card — a different, simpler
+  // element than the team identity marker below.
   teamDot: 10,
-  // A flag needs more area than a colour swatch to read at all, so the nation
-  // marker is larger than the club dot and rectangular rather than round.
-  teamFlag: { width: 22, height: 15 },
-  teamFlagRadius: 2,
-  // Japan's disc and Brazil's diamond, as a fraction of the flag's height.
-  teamFlagOverlayScale: 0.6,
+  // The team identity marker — a banded rectangle, shared shape for both
+  // clubs and nations. Needs more area than a small swatch to read the bands
+  // at all, so it's larger than teamDot and rectangular rather than round.
+  teamMarker: { width: 22, height: 15 },
+  teamMarkerRadius: 2,
+  // Japan's disc and Brazil's diamond, as a fraction of the marker's height.
+  teamMarkerOverlayScale: 0.6,
   // Escuadra wordmark's mark, matching the 30px mark beside 23px type in the
   // design source's lockup.
   wordmarkMark: 30,

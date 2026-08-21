@@ -6,6 +6,10 @@
   "primaryColor": "#0068A8",
   "secondaryColor": "#000000",
   "verified": false,
+  "marker": {
+    "bands": ["#0068A8", "#000000"],
+    "orientation": "vertical"
+  },
   "members": [
     {
       "playerId": "j-martinez",

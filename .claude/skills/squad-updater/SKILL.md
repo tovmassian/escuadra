@@ -97,18 +97,29 @@ roster.
      birth from their own Wikipedia infobox rather than leaving it blank.
 
 8. **Write `data/squads/<id>.json`**, matching the existing shape exactly:
-   `id, kind, name, season, primaryColor, secondaryColor, verified, flag?, members`.
+   `id, kind, name, season, primaryColor, secondaryColor, verified, marker, members`.
    `members` is `[{ playerId, no, captain? }]` — shirt number lives on the
    membership, never on the player.
 
-   - `flag` — **nation squads only.** Declarative band geometry, not an asset and
-     not an emoji: `{ bands: string[], orientation: 'horizontal' | 'vertical',
+   - `marker` — **required on every squad**, club or nation alike; it's the
+     team's sole visual identity element, since crests/badges/shields are
+     never used. Declarative band geometry, not an asset and not an emoji:
+     `{ bands: string[], orientation: 'horizontal' | 'vertical',
 weights?: number[], overlay?: { shape: 'disc' | 'diamond', color: string } }`.
      Bands run top-to-bottom for `horizontal`, left-to-right for `vertical`.
-     Omit `weights` for equal bands. National emblems and coats of arms are
-     omitted by design — use the plain field. The same object must be copied into
-     the matching `data/index.json` entry; `lib/squads.test.ts` compares them.
-     Hand-check flag colours against a real source rather than generating them.
+     Omit `weights` for equal bands.
+     - **Nation squads**: the marker _is_ the national flag. National
+       emblems and coats of arms are omitted by design — use the plain
+       field. `overlay` is for a centred device on a flag (Japan's disc,
+       Brazil's diamond) — clubs never carry one.
+     - **Club squads**: the marker is the club's own colours as bands —
+       never an emblem, per the "no crests, ever" constraint. A
+       single-colour club (e.g. Arsenal, Real Madrid) gets a one-entry
+       `bands` array, not a two-tone split; don't manufacture a second
+       band from a trim colour that isn't a real second identity colour.
+       The same object must be copied into the matching `data/index.json`
+       entry; `lib/squads.test.ts` compares them. Hand-check marker colours
+       against a real source rather than generating them.
 
 9. **Set `verified: false`.** Always — for a brand-new squad and for one
    you're overwriting, even if it was previously `true`. Scraping + LLM

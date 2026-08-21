@@ -1,16 +1,13 @@
 import React from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import { ScorePill } from './ScorePill';
-import { TeamIdentityDot } from './TeamIdentityDot';
-import type { Flag } from '@/types/squad';
+import { TeamMarker } from './TeamMarker';
+import type { TeamMarker as TeamMarkerData } from '@/types/squad';
 import { colors, iconSize, sizes, spacing, typography } from '@/theme/tokens';
 
 interface TeamRowProps {
   name: string;
-  kind: 'club' | 'nation';
-  primaryColor: string;
-  secondaryColor: string;
-  flag?: Flag;
+  marker: TeamMarkerData;
   best: { correct: number; total: number } | null;
   onPress: () => void;
 }
@@ -19,23 +16,10 @@ interface TeamRowProps {
 // edge is a fixed-width score pill, so both edges stay clean regardless of
 // name length — the identity marker is the team's only visual identifier,
 // per the "no crests, ever" constraint.
-export function TeamRow({
-  name,
-  kind,
-  primaryColor,
-  secondaryColor,
-  flag,
-  best,
-  onPress,
-}: TeamRowProps) {
+export function TeamRow({ name, marker, best, onPress }: TeamRowProps) {
   return (
     <Pressable onPress={onPress} accessibilityRole="button" style={styles.row}>
-      <TeamIdentityDot
-        kind={kind}
-        primaryColor={primaryColor}
-        secondaryColor={secondaryColor}
-        flag={flag}
-      />
+      <TeamMarker marker={marker} />
       <Text style={styles.name} numberOfLines={1}>
         {name}
       </Text>

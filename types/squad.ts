@@ -27,18 +27,26 @@ export interface SquadMember {
   captain?: boolean;
 }
 
-/** A nation's flag as declarative geometry rather than an asset.
+/** A team's sole visual identity element, as declarative geometry rather
+ *  than an asset — every squad, club or nation, carries one.
  *
+ *  For a nation the marker *is* the national flag. National flags are
+ *  exempt from the "no crests, badges, logos or shield shapes" rule: that
+ *  rule exists for trademark exposure, and a flag carries no trademark.
  *  Deliberately not the Unicode regional-indicator emoji (🇦🇷): that depends
  *  on an OS flag-emoji font, and Windows ships none — the Playwright capture
  *  step of the design loop runs on Windows Chrome and would hand the design
  *  side "AR" instead of a flag. Geometry renders identically everywhere.
- *
  *  National emblems and coats of arms are omitted. Spain without its arms is
  *  the civil flag; Argentina without the sun and Brazil without the celestial
  *  globe stay unambiguous at this size, and omitting them keeps the marker
- *  consistent with the app's geometric language. */
-export interface Flag {
+ *  consistent with the app's geometric language.
+ *
+ *  For a club the marker is the club's own colours laid out as bands — never
+ *  an emblem, per the "no crests, ever" constraint. A single-colour club
+ *  (Arsenal, Real Madrid) is a one-entry `bands` array: a plain field, not a
+ *  split shape. */
+export interface TeamMarker {
   /** Band fills, in draw order: top-to-bottom for `horizontal`,
    *  left-to-right for `vertical`. A single-entry array is a plain field. */
   bands: string[];
@@ -60,9 +68,9 @@ export interface Squad {
   primaryColor: string;
   secondaryColor: string;
   verified: boolean; // false = not fact-checked
-  /** Nation squads only. Clubs are identified by colour alone, per the
-   *  "no crests, ever" constraint. */
-  flag?: Flag;
+  /** The team's sole visual identity element — see `TeamMarker`. Present on
+   *  every squad, since crests/badges/shields are never used. */
+  marker: TeamMarker;
   members: SquadMember[];
 }
 
@@ -76,9 +84,9 @@ export interface SquadManifestEntry {
   primaryColor: string;
   secondaryColor: string;
   verified: boolean;
-  /** Nation squads only — mirrors the squad file's `flag`, since the picker
-   *  never imports full squad JSON. Kept in sync by lib/squads.test.ts. */
-  flag?: Flag;
+  /** Mirrors the squad file's `marker`, since the picker never imports full
+   *  squad JSON. Kept in sync by lib/squads.test.ts. */
+  marker: TeamMarker;
 }
 
 /** A squad member joined with their player record. */

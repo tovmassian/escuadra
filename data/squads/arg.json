@@ -6,7 +6,7 @@
   "primaryColor": "#75AADB",
   "secondaryColor": "#FFFFFF",
   "verified": true,
-  "flag": {
+  "marker": {
     "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
     "orientation": "horizontal"
   },

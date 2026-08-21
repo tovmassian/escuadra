@@ -6,6 +6,10 @@
   "primaryColor": "#FFFFFF",
   "secondaryColor": "#FEBE10",
   "verified": false,
+  "marker": {
+    "bands": ["#FFFFFF"],
+    "orientation": "vertical"
+  },
   "members": [
     {
       "playerId": "courtois",

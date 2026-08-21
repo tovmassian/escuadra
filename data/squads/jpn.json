@@ -6,7 +6,7 @@
   "primaryColor": "#000B8C",
   "secondaryColor": "#BC002D",
   "verified": true,
-  "flag": {
+  "marker": {
     "bands": ["#FFFFFF"],
     "orientation": "horizontal",
     "overlay": { "shape": "disc", "color": "#BC002D" }
