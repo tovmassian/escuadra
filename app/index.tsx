@@ -42,7 +42,7 @@ export default function Home() {
         { paddingTop: insets.top + spacing.xl, paddingBottom: insets.bottom + spacing.xl },
       ]}
     >
-      <Text style={styles.eyebrow}>SQUAD TRAINER</Text>
+      <Text style={styles.eyebrow}>ESCUADRA</Text>
       <View style={styles.spacer} />
       <Text style={styles.title}>Ready to train?</Text>
       <Text style={styles.subtitle}>Pick up where you left off, or jump into a new team.</Text>

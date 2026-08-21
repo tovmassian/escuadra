@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React, { useEffect } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { AnswerOption } from '@/components/AnswerOption';
@@ -131,7 +131,11 @@ export default function Question() {
         )}
       </Animated.View>
 
-      <View style={styles.partsBlock}>
+      <ScrollView
+        style={styles.partsBlock}
+        contentContainerStyle={styles.partsContent}
+        showsVerticalScrollIndicator={false}
+      >
         {question.parts.map((part, i) => (
           <QuestionPartView
             key={i}
@@ -143,7 +147,7 @@ export default function Question() {
             onAnswer={(pickedIndex) => session.answerPart(pickedIndex)}
           />
         ))}
-      </View>
+      </ScrollView>
 
       <View style={styles.footer}>
         <Button
@@ -312,7 +316,12 @@ const styles = StyleSheet.create({
     paddingVertical: spacing.lg,
   },
   chipRow: { flexDirection: 'row', gap: spacing.xs },
-  partsBlock: { flex: 1, paddingHorizontal: spacing.lg, gap: spacing.md - 2 },
+  partsBlock: { flex: 1 },
+  partsContent: {
+    paddingHorizontal: spacing.lg,
+    paddingBottom: spacing.md,
+    gap: spacing.md - 2,
+  },
   part: { gap: spacing.xs },
   partLabel: { ...typography.captionEyebrow, color: colors.textSecondary },
   optionsColumn: { gap: spacing.xs + 2 },
