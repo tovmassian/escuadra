@@ -1,23 +1,41 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text } from 'react-native';
 import { ScorePill } from './ScorePill';
+import { TeamIdentityDot } from './TeamIdentityDot';
+import type { Flag } from '@/types/squad';
 import { colors, iconSize, sizes, spacing, typography } from '@/theme/tokens';
 
 interface TeamRowProps {
   name: string;
+  kind: 'club' | 'nation';
   primaryColor: string;
+  secondaryColor: string;
+  flag?: Flag;
   best: { correct: number; total: number } | null;
   onPress: () => void;
 }
 
-// Left edge (dot + name) stays put; name truncates with an ellipsis. Right
+// Left edge (marker + name) stays put; name truncates with an ellipsis. Right
 // edge is a fixed-width score pill, so both edges stay clean regardless of
-// name length — the accent dot is the team's only visual identity marker,
+// name length — the identity marker is the team's only visual identifier,
 // per the "no crests, ever" constraint.
-export function TeamRow({ name, primaryColor, best, onPress }: TeamRowProps) {
+export function TeamRow({
+  name,
+  kind,
+  primaryColor,
+  secondaryColor,
+  flag,
+  best,
+  onPress,
+}: TeamRowProps) {
   return (
     <Pressable onPress={onPress} accessibilityRole="button" style={styles.row}>
-      <View style={[styles.dot, { backgroundColor: primaryColor ?? colors.textMuted }]} />
+      <TeamIdentityDot
+        kind={kind}
+        primaryColor={primaryColor}
+        secondaryColor={secondaryColor}
+        flag={flag}
+      />
       <Text style={styles.name} numberOfLines={1}>
         {name}
       </Text>
@@ -41,7 +59,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: colors.surfaceRaised,
   },
-  dot: { width: sizes.teamDot, height: sizes.teamDot, borderRadius: sizes.teamDot },
   name: { flex: 1, ...typography.rowTitle, color: colors.textPrimary },
   chevron: { fontSize: iconSize.chevron, color: colors.border },
 });
