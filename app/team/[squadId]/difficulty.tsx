@@ -80,13 +80,16 @@ export default function Difficulty() {
         </View>
       </View>
 
-      <Button
-        label="Study This Squad"
-        variant="text"
-        onPress={() =>
-          router.push({ pathname: '/team/[squadId]/study', params: { squadId: squad.id } })
-        }
-      />
+      <View style={styles.studyButton}>
+        <Button
+          label="Study This Squad"
+          variant="outline"
+          large
+          onPress={() =>
+            router.push({ pathname: '/team/[squadId]/study', params: { squadId: squad.id } })
+          }
+        />
+      </View>
     </View>
   );
 }
@@ -109,4 +112,5 @@ const styles = StyleSheet.create({
     bottom: spacing.xxxl,
   },
   rows: { flex: 1, gap: spacing.lg },
+  studyButton: { marginTop: spacing.lg },
 });

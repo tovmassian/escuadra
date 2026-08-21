@@ -5,6 +5,7 @@ import {
   colors,
   difficultyTitleSize,
   difficultyTitleWeight,
+  iconSize,
   opacity,
   radii,
   spacing,
@@ -34,6 +35,7 @@ export function DifficultyRow({
   onPress,
 }: DifficultyRowProps) {
   const locked = status === 'locked';
+  const best = status === 'best';
   const size = badgeSize[level];
 
   return (
@@ -42,26 +44,30 @@ export function DifficultyRow({
       disabled={locked || !onPress}
       accessibilityRole="button"
       accessibilityState={{ disabled: locked }}
-      style={styles.row}
+      style={[styles.row, locked && styles.rowLocked]}
     >
       <View
         style={[
           styles.badge,
-          { width: size, height: size, borderColor: locked ? colors.border : colors.accent },
+          { width: size, height: size },
+          locked && styles.badgeLocked,
+          status === 'unlocked' && styles.badgeUnlocked,
+          best && styles.badgeBest,
         ]}
       >
-        <Text
-          style={[styles.badgeLabel, { color: locked ? colors.textMuted : colors.textPrimary }]}
-        >
-          {level}
-        </Text>
+        {locked ? (
+          <Text style={styles.badgeLock}>🔒</Text>
+        ) : best ? (
+          <Text style={[styles.badgeCheck, { color: colors.accentOn }]}>✓</Text>
+        ) : (
+          <Text style={[styles.badgeLabel, { color: colors.accentOn }]}>{level}</Text>
+        )}
       </View>
       <View
         style={[
           styles.card,
           status === 'unlocked' && styles.cardRaised,
           level === 3 && styles.cardEmphasis,
-          locked && styles.cardLocked,
         ]}
       >
         <View style={styles.headerRow}>
@@ -73,7 +79,13 @@ export function DifficultyRow({
           >
             {title}
           </Text>
-          <StatusPill status={status} bestScore={bestScore} />
+          {best && bestScore && (
+            <View style={styles.statusPillBest}>
+              <Text style={styles.statusLabelBest}>
+                BEST {bestScore.correct}/{bestScore.total}
+              </Text>
+            </View>
+          )}
         </View>
         <Text style={styles.description}>{description}</Text>
       </View>
@@ -81,38 +93,24 @@ export function DifficultyRow({
   );
 }
 
-function StatusPill({
-  status,
-  bestScore,
-}: {
-  status: DifficultyStatus;
-  bestScore?: { correct: number; total: number };
-}) {
-  if (status === 'best' && bestScore) {
-    return (
-      <View style={styles.statusPillBest}>
-        <Text style={styles.statusLabelBest}>
-          BEST {bestScore.correct}/{bestScore.total}
-        </Text>
-      </View>
-    );
-  }
-  return (
-    <Text style={styles.statusLabelMuted}>{status === 'locked' ? '🔒 LOCKED' : 'UNLOCKED'}</Text>
-  );
-}
-
 const styles = StyleSheet.create({
-  row: { flexDirection: 'row', gap: spacing.sm + 2, alignItems: 'flex-start' },
+  row: { flex: 1, flexDirection: 'row', gap: spacing.sm + 2, alignItems: 'center' },
+  rowLocked: { opacity: opacity.disabled },
   badge: {
     borderRadius: radii.pill,
     borderWidth: 1.5,
+    borderColor: colors.border,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.background,
     flexShrink: 0,
   },
+  badgeLocked: { backgroundColor: colors.surface },
+  badgeUnlocked: { backgroundColor: colors.accent, borderColor: colors.accent },
+  badgeBest: { backgroundColor: colors.success, borderColor: colors.success },
   badgeLabel: { ...typography.badgeNumber },
+  badgeLock: { fontSize: iconSize.lockGlyph },
+  badgeCheck: { ...typography.badgeNumber },
   card: {
     flex: 1,
     padding: spacing.md - 1,
@@ -127,7 +125,6 @@ const styles = StyleSheet.create({
     borderColor: colors.accent,
     backgroundColor: colors.surfaceRaised,
   },
-  cardLocked: { opacity: opacity.disabled },
   headerRow: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -148,5 +145,4 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   },
   statusLabelBest: { ...typography.captionEyebrow, color: colors.success },
-  statusLabelMuted: { ...typography.captionEyebrow, color: colors.textMuted, flexShrink: 0 },
 });

@@ -133,6 +133,7 @@ export const iconSize = {
   markSmall: 13, // AnswerOption's incorrect ✕
   chevron: 16, // TeamRow / DifficultyRow disclosure chevron
   chevronLarge: 18, // Home's continue-card chevron
+  lockGlyph: 16, // DifficultyRow's locked-badge lock glyph
 } as const;
 
 // Base unit 4. Use spacing[n], not raw numbers, in component styles.
