@@ -77,7 +77,11 @@ Product-defining. Flag a conflict rather than working around any of these.
    `photo: string | null` on the player type from day one.
 2. **No club crests, badges, logos, or shield shapes. Ever.** Trademark
    exposure, and this constraint outlives v0. Teams are identified by text and
-   accent colour only.
+   a banded colour marker (see `TeamMarker` in the data model section) — never
+   an emblem. National flags are the one carve-out: a nation's marker _is_ its
+   flag, rendered as geometry rather than an asset, because the rule exists
+   for trademark exposure and a flag carries none. Crests, badges, logos, and
+   shield shapes remain banned forever.
 3. **No text input anywhere. No keyboard.** Every answer is a tap — option cards
    and chip selectors are the entire input vocabulary. This is deliberate:
    typing player names on a phone is the worst possible version of this app. Do
@@ -105,7 +109,7 @@ different numbers for club and country. Do not denormalise it onto the player.
 data/index.json        squad manifest
 data/players.json      { id, name, birth, position, nationality, photo: null }
 data/squads/<id>.json  { id, kind: 'club'|'nation', name, season, verified,
-                         primaryColor, secondaryColor,
+                         primaryColor, secondaryColor, marker,
                          members: [{ playerId, no, captain? }] }
 ```
 
@@ -116,12 +120,21 @@ same-position distractor selection needs a single key to group on.
 `nationality` exists so a club squad can ask for it on level 3.
 
 `primaryColor`/`secondaryColor` are the team's **real** identity colours
-(hex), carried directly on the squad — content, not a design token. This is
-the team's only visual identity marker in the app, since crests/badges/shields
-are never used (hard constraint #2). Get the actual colour right; do not
-invent or rotate an arbitrary hue. Both `data/index.json` (the picker
-manifest) and each squad file carry these fields, since the picker never
-imports full squad JSON.
+(hex), carried directly on the squad — content, not a design token. Get the
+actual colour right; do not invent or rotate an arbitrary hue.
+
+`marker` (`TeamMarker`, see `types/squad.ts`) is the team's sole visual
+identity element — required on every squad, club or nation, since
+crests/badges/shields are never used (hard constraint #2). It's declarative
+band geometry, not an asset: `bands` (fills, in draw order), `orientation`
+(`horizontal` | `vertical`), an optional `weights` array for uneven bands, and
+an optional `overlay` (a centred `disc` or `diamond` device, e.g. Japan's
+disc or Brazil's diamond). For a nation the marker _is_ the national flag;
+for a club it's the club's own colours laid out as bands — never an emblem.
+Both `data/index.json` (the picker manifest) and each squad file carry
+`primaryColor`/`secondaryColor`/`marker`, since the picker never imports full
+squad JSON — `marker` must be duplicated identically into `data/index.json`
+(`lib/squads.test.ts` asserts the two agree).
 
 One file per squad, so a future contribution touches exactly one file.
 
@@ -163,7 +176,15 @@ npx expo start -c     # same, clearing Metro cache
 npm run typecheck
 npm run lint
 npm run check         # run before reporting any work complete
+npm run shots          # capture design/screens/ from the running web build
 ```
+
+`design/` is the handoff surface pushed to the Claude Design project.
+`design/tokens.ts` and `design/brand.ts` re-export from `theme/tokens.ts` and
+`theme/brand.ts` rather than copy — `design/handoff.test.ts` pins object
+identity so they cannot quietly drift into a duplicate. `design/screens/`
+holds PNGs captured by `npm run shots`; after any change to a screen,
+regenerate them, or the design side is working from a stale picture.
 
 ## Working conventions
 
