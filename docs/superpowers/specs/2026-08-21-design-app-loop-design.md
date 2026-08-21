@@ -97,8 +97,10 @@ Seeded from CLAUDE.md's hard constraints:
 
 1. No player photographs in v0, but the question screen keeps a hero slot a
    square portrait can drop into without a redesign.
-2. No club crests, badges, logos or shield shapes, ever. Teams are identified by
-   text and accent colour alone.
+2. No club crests, badges, logos or shield shapes, ever. Clubs are identified by
+   text and colour alone. National flags are **not** covered by this rule — the
+   constraint's stated rationale is trademark exposure, which flags do not
+   carry — and are used deliberately; see "Team identity marker" below.
 3. No text input anywhere, no keyboard. Option cards and chip selectors are the
    entire input vocabulary.
 4. Never hardcode a colour, spacing value or font size — everything from tokens.
@@ -116,6 +118,66 @@ And from the five recent device-driven fixes:
    levels read 1..10.
 10. Results screen CTAs differ by pass/fail and by whether the level ceiling is
     reached.
+
+## Team identity marker
+
+A requirement for the re-pass, not an invariant — invariants preserve existing
+behaviour, and this is new.
+
+Today `components/TeamRow.tsx` renders a single flat dot filled with
+`primaryColor`. `secondaryColor` is present on every squad and in
+`data/index.json` and is **rendered nowhere**. The marker should carry more
+identity than one flat colour, and should differ by `squad.kind`:
+
+- **Clubs** keep colour as the identifier, but use both colours where the club
+  genuinely has two — Barcelona `#A50044/#004D98`, Inter `#0068A8/#000000`,
+  PSG `#004170/#DA291C`, Juventus if added. Split dot, halved or diagonal; the
+  design side picks the treatment. Still no emblems, per invariant 2. This needs
+  **no new data** — both fields already exist and are already correct.
+- **Nations** get their flag, and the marker may be larger than the current dot
+  to make a flag legible.
+
+### Flags need their own data field
+
+The existing colour fields are **kit colours, not flag colours**. Japan is
+`#000B8C` (the blue kit) against a white-and-red flag; Armenia is
+`#B70000/#FFFFFF` against a red/blue/orange tricolour. Deriving flags from
+`primaryColor`/`secondaryColor` would render roughly half the nations wrong.
+
+So a `flag` field is added to nation squads and to `data/index.json` (the picker
+never imports full squad JSON, so both carry it, exactly as the colour fields
+already do). It is declarative geometry, not an asset:
+
+```
+flag?: { bands: string[]; orientation: 'horizontal' | 'vertical';
+         overlay?: { shape: 'disc' | 'diamond'; color: string } }
+```
+
+That covers every nation currently in the repo: France and Armenia as bands,
+Spain as bands, Japan as a white field with a red disc, Brazil as a green field
+with a yellow diamond, Argentina as bands. National emblems and coats of arms
+are omitted — Spain without its arms is the civil flag, Argentina without the
+sun and Brazil without the celestial globe remain unambiguous at this size, and
+omitting them keeps the marker consistent with the app's geometric language.
+
+### Why not emoji flags
+
+The cheap option is the Unicode regional-indicator flag (🇦🇷), and it is
+rejected for a concrete reason: it depends on an OS flag-emoji font. **Windows
+has none.** The Playwright captures in this very loop run against Chrome on
+Windows, so design would receive screenshots showing the letter pair `AR`
+instead of a flag — the new requirement would break the loop on its first
+iteration. Declarative geometry renders identically on web and on iOS, which is
+what the app→design direction depends on.
+
+### Consequences
+
+- `types/squad.ts`, `data/index.json` and the six nation squad files change.
+  This is Turn 0 work, because design needs the flag data to design against.
+- The `squad-updater` skill must learn to populate `flag` when adding a nation.
+- Flag values should be **hand-checked**, not accepted from generation. Unlike
+  shirt numbers they are small in number, stable, and trivially verifiable, so
+  the `verified: false` caveat need not extend to them.
 
 ## The 2a mark
 
@@ -149,7 +211,8 @@ holds — to be verified at install, not assumed.
 ## Turn protocol
 
 **Turn 0 — repo.** Build `design/`. Add gradient tokens and Inter 800.
-Transcribe 2a into `brand.ts`. Add Playwright and an `npm run shots` script.
+Transcribe 2a into `brand.ts`. Add the `flag` field to the nation squads and the
+manifest. Add Playwright and an `npm run shots` script.
 Capture the app as it stands today, unbranded.
 
 **Turn 1 — design.** Push `design/` to the Claude Design project via
