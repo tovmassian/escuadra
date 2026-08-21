@@ -135,4 +135,32 @@ describe('session store', () => {
     expect(useSession.getState().phase).toBe('idle');
     expect(useSession.getState().questions).toHaveLength(0);
   });
+
+  it('produces an identical round for the same explicit seed', () => {
+    useSession.getState().startRound(squad, roster(), 1, 4242);
+    const first = JSON.stringify(useSession.getState().questions);
+
+    useSession.getState().reset();
+    useSession.getState().startRound(squad, roster(), 1, 4242);
+    const second = JSON.stringify(useSession.getState().questions);
+
+    expect(second).toEqual(first);
+  });
+
+  it('produces a different round for a different seed', () => {
+    useSession.getState().startRound(squad, roster(), 1, 1);
+    const a = useSession
+      .getState()
+      .questions.map((q) => q.playerId)
+      .join(',');
+
+    useSession.getState().reset();
+    useSession.getState().startRound(squad, roster(), 1, 2);
+    const b = useSession
+      .getState()
+      .questions.map((q) => q.playerId)
+      .join(',');
+
+    expect(b).not.toEqual(a);
+  });
 });

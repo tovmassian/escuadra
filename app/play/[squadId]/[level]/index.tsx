@@ -19,8 +19,19 @@ import { colors, durations, sizes, spacing, typography } from '@/theme/tokens';
 
 export default function Question() {
   const insets = useSafeAreaInsets();
-  const { squadId, level: levelParam } = useLocalSearchParams<{ squadId: string; level: string }>();
+  const {
+    squadId,
+    level: levelParam,
+    seed: seedParam,
+  } = useLocalSearchParams<{
+    squadId: string;
+    level: string;
+    seed?: string;
+  }>();
   const level = Number(levelParam) as Level;
+  // Optional `?seed=` makes a round reproducible — used by the design-loop
+  // screenshot capture, and handy for reproducing a specific round by hand.
+  const seed = seedParam === undefined ? undefined : Number(seedParam);
 
   const session = useSession();
   const setLastPlayed = useProgress((s) => s.setLastPlayed);
@@ -32,13 +43,13 @@ export default function Question() {
     if (!squad) return;
     if (session.squadId !== squadId || session.level !== level || session.phase === 'idle') {
       const roster = getRoster(squadId);
-      session.startRound(squad, roster, level);
+      session.startRound(squad, roster, level, Number.isFinite(seed) ? seed : undefined);
     }
     setLastPlayed(squadId, level);
     // Only re-run when the route target changes — starting a round mutates
     // `session`, so including it here would loop.
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [squadId, level]);
+  }, [squadId, level, seedParam]);
 
   useEffect(() => {
     if (session.phase === 'complete' && session.squadId === squadId && session.level === level) {

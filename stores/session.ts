@@ -34,7 +34,7 @@ interface SessionState {
   results: QuestionResult[];
   phase: SessionPhase;
 
-  startRound: (squad: Squad, roster: RosterEntry[], level: Level) => void;
+  startRound: (squad: Squad, roster: RosterEntry[], level: Level, seed?: number) => void;
   /** Grades the current part, advances to the next part, or finalizes the
    *  question (via `isQuestionCorrect` — no partial credit) on the last part. */
   answerPart: (pickedIndex: number) => void;
@@ -57,8 +57,8 @@ const initialState = {
 export const useSession = create<SessionState>()((set, get) => ({
   ...initialState,
 
-  startRound: (squad, roster, level) => {
-    const questions = buildRound({ squad, roster, level, seed: Date.now() });
+  startRound: (squad, roster, level, seed) => {
+    const questions = buildRound({ squad, roster, level, seed: seed ?? Date.now() });
     set({
       squadId: squad.id,
       squadName: squad.name,
