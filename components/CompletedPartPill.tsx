@@ -4,17 +4,29 @@ import { colors, radii, spacing, typography } from '@/theme/tokens';
 
 interface CompletedPartPillProps {
   label: string;
+  /** Whether the picked option was actually correct — drives the pill's
+   *  mark and colour. The label shown is always the correct answer, so the
+   *  player learns it immediately either way; only the verdict styling
+   *  differs. */
+  correct: boolean;
 }
 
-// The L2/L3 progressive-reveal collapse state: once a part is answered
-// correctly it shrinks to this single check pill and the next part slides
-// in below. Deliberately a different component from AnswerOption — this
-// summarizes a whole finished part, not one option among several.
-export function CompletedPartPill({ label }: CompletedPartPillProps) {
+// The L2/L3 progressive-reveal collapse state: once a part is answered it
+// shrinks to this single pill and the next part slides in below.
+// Deliberately a different component from AnswerOption — this summarizes a
+// whole finished part, not one option among several — but it must still
+// reflect the real verdict (CLAUDE.md requires instant feedback); collapsing
+// straight to a green check regardless of correctness was the bug this
+// `correct` prop exists to fix.
+export function CompletedPartPill({ label, correct }: CompletedPartPillProps) {
   return (
-    <View style={styles.pill}>
-      <Text style={styles.check}>✓</Text>
-      <Text style={styles.label}>{label}</Text>
+    <View style={[styles.pill, correct ? styles.pillCorrect : styles.pillIncorrect]}>
+      <Text style={[styles.mark, correct ? styles.markCorrect : styles.markIncorrect]}>
+        {correct ? '✓' : '✕'}
+      </Text>
+      <Text style={[styles.label, correct ? styles.labelCorrect : styles.labelIncorrect]}>
+        {label}
+      </Text>
     </View>
   );
 }
@@ -26,11 +38,15 @@ const styles = StyleSheet.create({
     gap: spacing.xs,
     paddingVertical: spacing.sm,
     paddingHorizontal: spacing.md - 2,
-    backgroundColor: colors.successBg,
     borderWidth: 1,
-    borderColor: colors.success,
     borderRadius: radii.lg,
   },
-  check: { color: colors.success, fontWeight: '700' },
-  label: { ...typography.rowTitle, color: colors.success },
+  pillCorrect: { backgroundColor: colors.successBg, borderColor: colors.success },
+  pillIncorrect: { backgroundColor: colors.errorBg, borderColor: colors.error },
+  mark: { fontWeight: '700' },
+  markCorrect: { color: colors.success },
+  markIncorrect: { color: colors.error },
+  label: { ...typography.rowTitle },
+  labelCorrect: { color: colors.success },
+  labelIncorrect: { color: colors.error },
 });

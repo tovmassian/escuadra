@@ -68,17 +68,18 @@ export default function Question() {
   const questionComplete = result.correct !== null;
   const accent = squad.primaryColor ?? colors.accent;
 
+  const affiliationLabel = squad.kind === 'club' ? 'NAT' : 'CLUB';
   const statChips: { label: string; value: string }[] =
     level === 1
       ? [
           { label: 'POS', value: question.position },
           { label: 'AGE', value: String(question.age) },
-          { label: 'APPS', value: String(question.apps) },
+          { label: affiliationLabel, value: question.affiliation },
         ]
       : level === 2
         ? [
             { label: 'AGE', value: String(question.age) },
-            { label: 'APPS', value: String(question.apps) },
+            { label: affiliationLabel, value: question.affiliation },
           ]
         : [];
 
@@ -156,6 +157,19 @@ export default function Question() {
   );
 }
 
+type OptionVerdict =
+  'idle' | 'correct-picked' | 'correct-unpicked' | 'incorrect-picked' | 'incorrect-other';
+
+function verdictForOption(
+  part: QuestionPart,
+  answeredIndex: number | null,
+  i: number,
+): OptionVerdict {
+  if (answeredIndex === null) return 'idle';
+  if (i === part.correctIndex) return i === answeredIndex ? 'correct-picked' : 'correct-unpicked';
+  return i === answeredIndex ? 'incorrect-picked' : 'incorrect-other';
+}
+
 function partLabel(part: QuestionPart): string {
   switch (part.kind) {
     case 'name':
@@ -191,25 +205,64 @@ function QuestionPartView({
   if (!isActive && !isAnswered) return null; // future part, not revealed yet
 
   // Level 1 has a single part: it stays expanded and shows the full
-  // idle/correct/incorrect reveal, per the interaction-state spec. Levels
-  // 2-3 collapse each answered part to a pill immediately, always showing
-  // the correct answer — misses are what the Results screen is for.
+  // idle/correct/incorrect reveal, per the interaction-state spec. On
+  // levels 2-3 the name part still collapses to a summary pill once
+  // answered (up to 6 options — keeping them all on screen through the
+  // remaining parts is too much vertical weight), but the position and
+  // nationality/club parts keep their option row in place and grey out the
+  // options the player didn't pick, matching level 1's instant-feedback
+  // treatment instead of a collapsed pill.
   if (isMultiPart) {
+    if (part.kind === 'name') {
+      return (
+        <View style={styles.part}>
+          <Text style={styles.partLabel}>{partLabel(part)}</Text>
+          {isAnswered ? (
+            <CompletedPartPill
+              label={part.options[part.correctIndex] ?? ''}
+              correct={answeredIndex === part.correctIndex}
+            />
+          ) : (
+            <View style={styles.optionsColumn}>
+              {part.options.map((label, i) => (
+                <AnswerOption
+                  key={label}
+                  label={label}
+                  verdict="idle"
+                  onPress={() => onAnswer(i)}
+                />
+              ))}
+            </View>
+          )}
+        </View>
+      );
+    }
+
     return (
       <View style={styles.part}>
         <Text style={styles.partLabel}>{partLabel(part)}</Text>
-        {isAnswered ? (
-          <CompletedPartPill label={part.options[part.correctIndex] ?? ''} />
-        ) : part.kind === 'position' ? (
+        {part.kind === 'position' ? (
           <View style={styles.chipOptionsRow}>
             {part.options.map((label, i) => (
-              <ChipOption key={label} label={label} verdict="idle" onPress={() => onAnswer(i)} />
+              <ChipOption
+                key={label}
+                label={label}
+                verdict={verdictForOption(part, answeredIndex, i)}
+                disabled={isAnswered}
+                onPress={() => onAnswer(i)}
+              />
             ))}
           </View>
         ) : (
           <View style={styles.optionsColumn}>
             {part.options.map((label, i) => (
-              <AnswerOption key={label} label={label} verdict="idle" onPress={() => onAnswer(i)} />
+              <AnswerOption
+                key={label}
+                label={label}
+                verdict={verdictForOption(part, answeredIndex, i)}
+                disabled={isAnswered}
+                onPress={() => onAnswer(i)}
+              />
             ))}
           </View>
         )}
@@ -219,25 +272,15 @@ function QuestionPartView({
 
   return (
     <View style={styles.optionsColumn}>
-      {part.options.map((label, i) => {
-        let verdict:
-          'idle' | 'correct-picked' | 'correct-unpicked' | 'incorrect-picked' | 'incorrect-other' =
-          'idle';
-        if (isAnswered) {
-          if (i === part.correctIndex)
-            verdict = i === answeredIndex ? 'correct-picked' : 'correct-unpicked';
-          else verdict = i === answeredIndex ? 'incorrect-picked' : 'incorrect-other';
-        }
-        return (
-          <AnswerOption
-            key={label}
-            label={label}
-            verdict={verdict}
-            disabled={isAnswered}
-            onPress={() => onAnswer(i)}
-          />
-        );
-      })}
+      {part.options.map((label, i) => (
+        <AnswerOption
+          key={label}
+          label={label}
+          verdict={verdictForOption(part, answeredIndex, i)}
+          disabled={isAnswered}
+          onPress={() => onAnswer(i)}
+        />
+      ))}
     </View>
   );
 }
