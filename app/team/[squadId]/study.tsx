@@ -5,6 +5,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FilterPill } from '@/components/FilterPill';
 import { StudyHeaderRow, StudyRow } from '@/components/StudyRow';
 import { getRoster, getSquad } from '@/lib/squads';
+import { parsePlayerIds, studyRows } from '@/lib/studyView';
 import type { Position } from '@/types/squad';
 import { colors, spacing, typography } from '@/theme/tokens';
 
@@ -12,16 +13,15 @@ const FILTERS: ('ALL' | Position)[] = ['ALL', 'GK', 'DF', 'MF', 'FW'];
 
 export default function Study() {
   const insets = useSafeAreaInsets();
-  const { squadId } = useLocalSearchParams<{ squadId: string }>();
+  const { squadId, players } = useLocalSearchParams<{ squadId: string; players?: string }>();
   const [filter, setFilter] = useState<'ALL' | Position>('ALL');
 
   const squad = getSquad(squadId);
   const roster = useMemo(() => getRoster(squadId), [squadId]);
   if (!squad) return null;
 
-  const rows = roster
-    .filter((r) => filter === 'ALL' || r.player.position === filter)
-    .sort((a, b) => a.member.no - b.member.no);
+  const playerIds = parsePlayerIds(players);
+  const rows = studyRows(roster, filter, playerIds);
 
   const affiliationLabel = squad.kind === 'club' ? 'NAT' : 'CLUB';
 
@@ -31,13 +31,15 @@ export default function Study() {
         <Text style={styles.back}>‹ Exit</Text>
       </Pressable>
       <Text style={styles.eyebrow}>{squad.name.toUpperCase()}</Text>
-      <Text style={styles.title}>Full Squad</Text>
+      <Text style={styles.title}>{playerIds === null ? 'Full Squad' : 'Missed Players'}</Text>
 
-      <View style={styles.filters}>
-        {FILTERS.map((f) => (
-          <FilterPill key={f} label={f} active={filter === f} onPress={() => setFilter(f)} />
-        ))}
-      </View>
+      {playerIds === null && (
+        <View style={styles.filters}>
+          {FILTERS.map((f) => (
+            <FilterPill key={f} label={f} active={filter === f} onPress={() => setFilter(f)} />
+          ))}
+        </View>
+      )}
 
       <StudyHeaderRow affiliationLabel={affiliationLabel} />
       <FlatList
