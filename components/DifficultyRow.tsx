@@ -2,6 +2,7 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import {
   badgeSize,
+  borderWidths,
   colors,
   difficultyTitleSize,
   difficultyTitleWeight,
@@ -12,8 +13,9 @@ import {
 } from '@/theme/tokens';
 import type { Level } from '@/lib/questionEngine';
 import { LockGlyph } from '@/components/LockGlyph';
+import { type DifficultyStatus } from '@/lib/ladderView';
 
-export type DifficultyStatus = 'best' | 'unlocked' | 'locked';
+export type { DifficultyStatus };
 
 interface DifficultyRowProps {
   level: Level;
@@ -21,6 +23,8 @@ interface DifficultyRowProps {
   description: string;
   status: DifficultyStatus;
   bestScore?: { correct: number; total: number };
+  /** Locked rows only — states what clears the gate. */
+  unlockHint?: string;
   onPress?: () => void;
 }
 
@@ -32,6 +36,7 @@ export function DifficultyRow({
   description,
   status,
   bestScore,
+  unlockHint,
   onPress,
 }: DifficultyRowProps) {
   const locked = status === 'locked';
@@ -63,13 +68,7 @@ export function DifficultyRow({
           <Text style={[styles.badgeLabel, { color: colors.accentOn }]}>{level}</Text>
         )}
       </View>
-      <View
-        style={[
-          styles.card,
-          status === 'unlocked' && styles.cardRaised,
-          level === 3 && styles.cardEmphasis,
-        ]}
-      >
+      <View style={[styles.card, status === 'unlocked' && styles.cardEmphasis]}>
         <View style={styles.headerRow}>
           <Text
             style={[
@@ -86,6 +85,7 @@ export function DifficultyRow({
               </Text>
             </View>
           )}
+          {locked && unlockHint && <Text style={styles.unlockHint}>{unlockHint}</Text>}
         </View>
         <Text style={styles.description}>{description}</Text>
       </View>
@@ -94,7 +94,7 @@ export function DifficultyRow({
 }
 
 const styles = StyleSheet.create({
-  row: { flex: 1, flexDirection: 'row', gap: spacing.sm + 2, alignItems: 'center' },
+  row: { flexDirection: 'row', gap: spacing.sm + 2, alignItems: 'center' },
   rowLocked: { opacity: opacity.disabled },
   badge: {
     borderRadius: radii.pill,
@@ -118,9 +118,8 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     borderRadius: radii.lg,
   },
-  cardRaised: { backgroundColor: colors.surfaceRaised },
   cardEmphasis: {
-    borderWidth: 1.5,
+    borderWidth: borderWidths.thick,
     borderColor: colors.accent,
     backgroundColor: colors.surfaceRaised,
   },
@@ -144,4 +143,5 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   },
   statusLabelBest: { ...typography.captionEyebrow, color: colors.success },
+  unlockHint: { ...typography.captionEyebrow, color: colors.textMuted, flexShrink: 0 },
 });
