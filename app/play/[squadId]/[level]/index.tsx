@@ -12,6 +12,7 @@ import { ProgressDots } from '@/components/ProgressDots';
 import { ScorePill } from '@/components/ScorePill';
 import { StatChip } from '@/components/StatChip';
 import type { Level, QuestionPart } from '@/lib/questionEngine';
+import { progressOutcomes } from '@/lib/roundView';
 import { getRoster, getSquad } from '@/lib/squads';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
@@ -123,7 +124,7 @@ export default function Question() {
           </Text>
           <Text style={styles.difficultyLabel}>DIFFICULTY {level}</Text>
         </View>
-        <ProgressDots total={session.questions.length} current={session.currentIndex} />
+        <ProgressDots outcomes={progressOutcomes(session.results, session.currentIndex)} />
       </View>
 
       <Animated.View
