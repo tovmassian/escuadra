@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { actionOrder, PASS_RATIO } from './resultsView';
+import { actionOrder, isFlawless, PASS_RATIO } from './resultsView';
 
 describe('actionOrder', () => {
   it('offers the next level first when the player passed below the ceiling', () => {
@@ -43,10 +43,44 @@ describe('actionOrder', () => {
     const actions = actionOrder({ passed: false, hasNextLevel: true, missedCount: 3 });
     expect(new Set(actions).size).toBe(actions.length);
   });
+
+  it('never offers both studyMissed and study in the same list', () => {
+    // studyMissed strictly supersedes study when it's on offer: studying the
+    // exact players you missed beats studying the whole squad. The full
+    // squad list is still reachable from the difficulty screen.
+    for (const passed of [true, false]) {
+      for (const hasNextLevel of [true, false]) {
+        for (const missedCount of [0, 1, 3]) {
+          const actions = actionOrder({ passed, hasNextLevel, missedCount });
+          const hasBoth = actions.includes('studyMissed') && actions.includes('study');
+          expect(hasBoth).toBe(false);
+        }
+      }
+    }
+  });
 });
 
 describe('PASS_RATIO', () => {
   it('is the shared pass threshold used by both the picker and results screens', () => {
     expect(PASS_RATIO).toBe(0.8);
+  });
+});
+
+describe('isFlawless', () => {
+  it('is true for a full round with every question correct', () => {
+    expect(isFlawless(10, 10)).toBe(true);
+  });
+
+  it('is false when a single question was missed', () => {
+    expect(isFlawless(9, 10)).toBe(false);
+  });
+
+  it('is false for a round with nothing attempted', () => {
+    // 0/0 is vacuously "all correct" — guard against celebrating an empty round.
+    expect(isFlawless(0, 0)).toBe(false);
+  });
+
+  it('is true for a short but complete round', () => {
+    expect(isFlawless(3, 3)).toBe(true);
   });
 });

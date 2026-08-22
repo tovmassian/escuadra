@@ -184,6 +184,9 @@ export const sizes = {
   // Home's centred lockup. The mark only reads its right angle at this size,
   // which is why the trail is shown here and nowhere else.
   wordmarkMarkHero: 86,
+  // The a la escuadra celebration mark. Larger than Home's lockup because on
+  // this screen the mark is the entire content.
+  celebrationMark: 120,
   rowHeight: 56,
   // Team-picker rows carry a progress sub-line, so they need a second line of
   // height. Plain single-line rows keep `rowHeight`.

@@ -1,10 +1,12 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
+import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
+import { EscuadraMark } from '@/components/EscuadraMark';
 import type { Level } from '@/lib/questionEngine';
-import { actionOrder, PASS_RATIO, type ActionId } from '@/lib/resultsView';
+import { actionOrder, isFlawless, PASS_RATIO, type ActionId } from '@/lib/resultsView';
 import { getRoster, getSquad } from '@/lib/squads';
 import {
   firstWrongPart,
@@ -13,7 +15,7 @@ import {
   useSession,
   type QuestionResult,
 } from '@/stores/session';
-import { colors, radii, sizes, spacing, typography } from '@/theme/tokens';
+import { colors, durations, radii, sizes, spacing, typography } from '@/theme/tokens';
 
 const MAX_LEVEL: Level = 3;
 
@@ -36,6 +38,7 @@ export default function Results() {
 
   const score = selectScore(session.results);
   const missed = selectMissed(session.results);
+  const flawless = isFlawless(score.correct, score.attempted);
 
   const passed = score.attempted > 0 && score.correct / score.attempted >= PASS_RATIO;
   const hasNextLevel = level < MAX_LEVEL;
@@ -89,25 +92,43 @@ export default function Results() {
         { paddingTop: insets.top + spacing.xl, paddingBottom: insets.bottom + spacing.lg },
       ]}
     >
-      <View style={styles.summary}>
-        <Text style={styles.eyebrow}>
-          {squad.name.toUpperCase()} · LEVEL {level} · ROUND COMPLETE
-        </Text>
-        <Text style={styles.score}>
-          {score.correct}/{score.attempted}
-        </Text>
-        <Text style={styles.verdict}>{verdictSentence(score.correct, score.attempted)}</Text>
-      </View>
-
-      {missed.length > 0 && (
+      {flawless ? (
+        <Animated.View
+          entering={FadeIn.duration(durations.pop + durations.popSettle)}
+          style={styles.flawless}
+        >
+          <EscuadraMark size={sizes.celebrationMark} color={colors.success} showTrail />
+          <Text style={styles.flawlessScore}>
+            {score.correct}/{score.attempted}
+          </Text>
+          <Text style={styles.flawlessTitle}>a la escuadra</Text>
+          <Text style={styles.verdict}>
+            {squad.name}, level {level}. Nothing missed.
+          </Text>
+        </Animated.View>
+      ) : (
         <>
-          <Text style={styles.missedLabel}>MISSED · {missed.length} PLAYERS</Text>
-          <FlatList
-            data={missed}
-            keyExtractor={(r) => r.question.playerId}
-            contentContainerStyle={styles.missedList}
-            renderItem={({ item }) => <MissedCard result={item} />}
-          />
+          <View style={styles.summary}>
+            <Text style={styles.eyebrow}>
+              {squad.name.toUpperCase()} · LEVEL {level} · ROUND COMPLETE
+            </Text>
+            <Text style={styles.score}>
+              {score.correct}/{score.attempted}
+            </Text>
+            <Text style={styles.verdict}>{verdictSentence(score.correct, score.attempted)}</Text>
+          </View>
+
+          {missed.length > 0 && (
+            <>
+              <Text style={styles.missedLabel}>MISSED · {missed.length} PLAYERS</Text>
+              <FlatList
+                data={missed}
+                keyExtractor={(r) => r.question.playerId}
+                contentContainerStyle={styles.missedList}
+                renderItem={({ item }) => <MissedCard result={item} />}
+              />
+            </>
+          )}
         </>
       )}
 
@@ -151,6 +172,9 @@ function MissedCard({ result }: { result: QuestionResult }) {
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.lg },
   summary: { alignItems: 'center', marginBottom: spacing.xl },
+  flawless: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: spacing.sm },
+  flawlessScore: { ...typography.scoreHero, color: colors.success, marginTop: spacing.lg },
+  flawlessTitle: { ...typography.screenTitle, color: colors.textPrimary, fontStyle: 'italic' },
   eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, marginBottom: spacing.xs },
   score: { ...typography.scoreHero, color: colors.textPrimary },
   verdict: { ...typography.secondarySmall, color: colors.textSecondary, marginTop: spacing.xs },

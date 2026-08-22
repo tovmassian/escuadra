@@ -35,8 +35,25 @@ export function actionOrder(opts: {
       : 'retry';
 
   const rest: ActionId[] = (['studyMissed', 'retry', 'study', 'chooseTeam'] as const).filter(
-    (id) => id !== primary && (id !== 'studyMissed' || missedCount > 0),
+    (id) =>
+      id !== primary &&
+      (id !== 'studyMissed' || missedCount > 0) &&
+      // studyMissed strictly supersedes study whenever it's on offer: studying
+      // the exact players you missed beats studying the whole squad. The full
+      // squad list is still reachable from the difficulty screen, so this is
+      // never a dead end.
+      (id !== 'study' || missedCount === 0),
   );
 
   return [primary, ...rest];
+}
+
+/**
+ * A la escuadra — the flawless round the product is named for.
+ *
+ * A round with nothing attempted is not flawless: 0/0 is vacuously perfect
+ * and must not trigger the celebration.
+ */
+export function isFlawless(correct: number, attempted: number): boolean {
+  return attempted > 0 && correct === attempted;
 }
