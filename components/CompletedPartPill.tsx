@@ -1,5 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
+import { VerdictGlyph } from './VerdictGlyph';
 import { colors, radii, spacing, typography } from '@/theme/tokens';
 
 interface CompletedPartPillProps {
@@ -21,9 +22,7 @@ interface CompletedPartPillProps {
 export function CompletedPartPill({ label, correct }: CompletedPartPillProps) {
   return (
     <View style={[styles.pill, correct ? styles.pillCorrect : styles.pillIncorrect]}>
-      <Text style={[styles.mark, correct ? styles.markCorrect : styles.markIncorrect]}>
-        {correct ? '✓' : '✕'}
-      </Text>
+      <VerdictGlyph correct={correct} />
       <Text style={[styles.label, correct ? styles.labelCorrect : styles.labelIncorrect]}>
         {label}
       </Text>
@@ -43,9 +42,6 @@ const styles = StyleSheet.create({
   },
   pillCorrect: { backgroundColor: colors.successBg, borderColor: colors.success },
   pillIncorrect: { backgroundColor: colors.errorBg, borderColor: colors.error },
-  mark: { fontWeight: '700' },
-  markCorrect: { color: colors.success },
-  markIncorrect: { color: colors.error },
   label: { ...typography.rowTitle },
   labelCorrect: { color: colors.success },
   labelIncorrect: { color: colors.error },

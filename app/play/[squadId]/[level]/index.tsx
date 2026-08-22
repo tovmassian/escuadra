@@ -8,15 +8,17 @@ import { Button } from '@/components/Button';
 import { ChipOption } from '@/components/ChipOption';
 import { CompletedPartPill } from '@/components/CompletedPartPill';
 import { HeroCard } from '@/components/HeroCard';
+import { PartRail } from '@/components/PartRail';
 import { ProgressDots } from '@/components/ProgressDots';
 import { ScorePill } from '@/components/ScorePill';
 import { StatChip } from '@/components/StatChip';
+import { TeamMarker } from '@/components/TeamMarker';
 import type { Level, QuestionPart } from '@/lib/questionEngine';
-import { progressOutcomes } from '@/lib/roundView';
+import { partRailRows, progressOutcomes } from '@/lib/roundView';
 import { getRoster, getSquad } from '@/lib/squads';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
-import { colors, durations, sizes, spacing, typography } from '@/theme/tokens';
+import { colors, durations, spacing, typography } from '@/theme/tokens';
 
 export default function Question() {
   const insets = useSafeAreaInsets();
@@ -78,7 +80,6 @@ export default function Question() {
 
   const score = selectScore(session.results);
   const questionComplete = result.correct !== null;
-  const accent = squad.primaryColor ?? colors.accent;
 
   const affiliationLabel = squad.kind === 'club' ? 'NAT' : 'CLUB';
   const statChips: { label: string; value: string }[] =
@@ -112,7 +113,7 @@ export default function Question() {
         </Pressable>
         <View style={styles.teamLabel}>
           <Text style={styles.teamName}>{squad.name}</Text>
-          <View style={[styles.underline, { backgroundColor: accent }]} />
+          <TeamMarker marker={squad.marker} />
         </View>
         <ScorePill correct={score.correct} total={score.attempted} variant="header" />
       </View>
@@ -131,15 +132,28 @@ export default function Question() {
         key={session.currentIndex}
         entering={FadeIn.duration(durations.transition)}
         exiting={FadeOut.duration(durations.transition)}
-        style={styles.heroBlock}
+        style={[styles.heroBlock, level > 1 && styles.heroBlockSplit]}
       >
         <HeroCard level={level} shirtNumber={question.memberNo} />
-        {statChips.length > 0 && (
-          <View style={styles.chipRow}>
-            {statChips.map((c) => (
-              <StatChip key={c.label} label={c.label} value={c.value} />
-            ))}
+        {level > 1 ? (
+          <View style={styles.railColumn}>
+            <PartRail rows={partRailRows(question, result, session.currentPartIndex)} />
+            {statChips.length > 0 && (
+              <View style={styles.chipRow}>
+                {statChips.map((c) => (
+                  <StatChip key={c.label} label={c.label} value={c.value} />
+                ))}
+              </View>
+            )}
           </View>
+        ) : (
+          statChips.length > 0 && (
+            <View style={styles.chipRow}>
+              {statChips.map((c) => (
+                <StatChip key={c.label} label={c.label} value={c.value} />
+              ))}
+            </View>
+          )
         )}
       </Animated.View>
 
@@ -186,19 +200,6 @@ function verdictForOption(
   return i === answeredIndex ? 'incorrect-picked' : 'incorrect-other';
 }
 
-function partLabel(part: QuestionPart): string {
-  switch (part.kind) {
-    case 'name':
-      return '1 · NAME';
-    case 'position':
-      return '2 · POSITION';
-    case 'nationality':
-      return '3 · NATIONALITY';
-    case 'club':
-      return '3 · CLUB';
-  }
-}
-
 function QuestionPartView({
   part,
   index,
@@ -232,7 +233,6 @@ function QuestionPartView({
     if (part.kind === 'name') {
       return (
         <View style={styles.part}>
-          <Text style={styles.partLabel}>{partLabel(part)}</Text>
           {isAnswered ? (
             <CompletedPartPill
               label={part.options[part.correctIndex] ?? ''}
@@ -256,7 +256,6 @@ function QuestionPartView({
 
     return (
       <View style={styles.part}>
-        <Text style={styles.partLabel}>{partLabel(part)}</Text>
         {part.kind === 'position' ? (
           <View style={styles.chipOptionsRow}>
             {part.options.map((label, i) => (
@@ -312,11 +311,6 @@ const styles = StyleSheet.create({
   exit: { ...typography.secondary, color: colors.textSecondary },
   teamLabel: { alignItems: 'center', gap: spacing.xxs },
   teamName: { ...typography.rowTitle, color: colors.textPrimary },
-  underline: {
-    width: sizes.teamUnderline.width,
-    height: sizes.teamUnderline.height,
-    borderRadius: sizes.teamUnderline.height,
-  },
   progressBlock: { paddingHorizontal: spacing.lg, paddingTop: spacing.lg, gap: spacing.sm - 2 },
   progressRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
   questionLabel: { ...typography.secondarySmall, color: colors.textSecondary },
@@ -327,6 +321,8 @@ const styles = StyleSheet.create({
     gap: spacing.md,
     paddingVertical: spacing.lg,
   },
+  heroBlockSplit: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: spacing.lg },
+  railColumn: { flex: 1, minWidth: 0, gap: spacing.sm },
   chipRow: { flexDirection: 'row', gap: spacing.xs },
   partsBlock: { flex: 1 },
   partsContent: {
@@ -335,7 +331,6 @@ const styles = StyleSheet.create({
     gap: spacing.md - 2,
   },
   part: { gap: spacing.xs },
-  partLabel: { ...typography.captionEyebrow, color: colors.textSecondary },
   optionsColumn: { gap: spacing.xs + 2 },
   chipOptionsRow: { flexDirection: 'row', gap: spacing.xs },
   footer: { paddingHorizontal: spacing.lg, paddingVertical: spacing.md },
