@@ -17,12 +17,12 @@ no new numbers.
 
 ## Decisions already taken
 
-| # | Decision | Rationale |
-| - | -------- | --------- |
-| 1 | Level-3 nationality and club options stay **text only** | `marker` exists on squads; only 6 nations are squads. Barcelona's members span 8 nationalities, so banding the 3 that have markers and leaving 5 bare reads as a rendering failure. |
-| 2 | `Study These 3` gets a **real player-id filter** | The missed list is the result in a study tool; a primary CTA that silently ignores its own label is worse than no change. |
-| 3 | The `✓`/`✕` dingbats are replaced by the **mark** as part of the question screen | They take colour from tokens so they are not a constraint violation, but they depend on a glyph Inter may not carry. The re-pass already makes the mark the verdict glyph. |
-| 4 | `sizes.teamUnderline` is **removed** | Its only consumers are the three lines the question screen change replaces. |
+| #   | Decision                                                                         | Rationale                                                                                                                                                                           |
+| --- | -------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Level-3 nationality and club options stay **text only**                          | `marker` exists on squads; only 6 nations are squads. Barcelona's members span 8 nationalities, so banding the 3 that have markers and leaving 5 bare reads as a rendering failure. |
+| 2   | `Study These 3` gets a **real player-id filter**                                 | The missed list is the result in a study tool; a primary CTA that silently ignores its own label is worse than no change.                                                           |
+| 3   | The `✓`/`✕` dingbats are replaced by the **mark** as part of the question screen | They take colour from tokens so they are not a constraint violation, but they depend on a glyph Inter may not carry. The re-pass already makes the mark the verdict glyph.          |
+| 4   | `sizes.teamUnderline` is **removed**                                             | Its only consumers are the three lines the question screen change replaces.                                                                                                         |
 
 ## Per-screen deltas
 
