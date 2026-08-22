@@ -1,10 +1,9 @@
 // Pure team-picker row model. Kept out of the screen so it is unit-testable.
+import { PASS_RATIO } from '@/lib/resultsView';
 import { scoreKey } from '@/stores/progress';
 
 const LEVELS = [1, 2, 3] as const;
 const ROUND_LENGTH = 10;
-/** Matches the results screen's pass threshold. */
-const PASS_RATIO = 0.8;
 
 export interface TeamProgress {
   /** Highest level the team has a recorded score for. */

@@ -4,6 +4,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
 import type { Level } from '@/lib/questionEngine';
+import { actionOrder, PASS_RATIO, type ActionId } from '@/lib/resultsView';
 import { getRoster, getSquad } from '@/lib/squads';
 import {
   firstWrongPart,
@@ -15,32 +16,13 @@ import {
 import { colors, radii, sizes, spacing, typography } from '@/theme/tokens';
 
 const MAX_LEVEL: Level = 3;
-const PASS_RATIO = 0.8;
 
 function verdictSentence(correct: number, total: number): string {
   const ratio = total === 0 ? 0 : correct / total;
   if (ratio === 1) return 'A la escuadra — a flawless round.';
   if (ratio >= 0.8) return 'You knew most of the starting XI.';
   if (ratio >= 0.5) return 'Solid — a few names to brush up on.';
-  return 'Time to get back in the study screen.';
-}
-
-type ActionId = 'nextLevel' | 'retry' | 'study' | 'chooseTeam';
-
-/**
- * Primary action reflects readiness to advance: pass a level below the ceiling
- * and it's "play the next one"; pass the ceiling level and there's nowhere to
- * advance to, so the prompt becomes "go test yourself on a new team"; anything
- * short of passing means "retry." Whatever's left of [retry, study,
- * chooseTeam] follows in that fixed order, so every case is one rule instead
- * of four hand-written lists.
- */
-function actionOrder(passed: boolean, hasNextLevel: boolean): ActionId[] {
-  const primary: ActionId = passed ? (hasNextLevel ? 'nextLevel' : 'chooseTeam') : 'retry';
-  const rest: ActionId[] = (['retry', 'study', 'chooseTeam'] as const).filter(
-    (id) => id !== primary,
-  );
-  return [primary, ...rest];
+  return 'These are the ones to learn.';
 }
 
 export default function Results() {
@@ -57,7 +39,7 @@ export default function Results() {
 
   const passed = score.attempted > 0 && score.correct / score.attempted >= PASS_RATIO;
   const hasNextLevel = level < MAX_LEVEL;
-  const actions = actionOrder(passed, hasNextLevel);
+  const actions = actionOrder({ passed, hasNextLevel, missedCount: missed.length });
 
   const retry = (atLevel: Level) => {
     const roster = getRoster(squadId);
@@ -77,9 +59,17 @@ export default function Results() {
     router.push({ pathname: '/team/[squadId]/study', params: { squadId } });
   };
 
+  const studyMissed = () => {
+    router.push({
+      pathname: '/team/[squadId]/study',
+      params: { squadId, players: missed.map((r) => r.question.playerId).join(',') },
+    });
+  };
+
   const actionHandlers: Record<ActionId, () => void> = {
     nextLevel: () => retry((level + 1) as Level),
     retry: () => retry(level),
+    studyMissed,
     study: studySquad,
     chooseTeam: chooseDifferentTeam,
   };
@@ -87,6 +77,7 @@ export default function Results() {
   const actionLabels: Record<ActionId, string> = {
     nextLevel: `Play Level ${level + 1}`,
     retry: 'Retry This Round',
+    studyMissed: `Study These ${missed.length}`,
     study: 'Study This Squad',
     chooseTeam: 'Choose Different Team',
   };
