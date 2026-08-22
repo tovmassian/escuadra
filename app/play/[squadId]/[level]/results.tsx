@@ -6,7 +6,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
 import { EscuadraMark } from '@/components/EscuadraMark';
 import type { Level } from '@/lib/questionEngine';
-import { actionOrder, isFlawless, PASS_RATIO, type ActionId } from '@/lib/resultsView';
+import { actionOrder, isFlawless, type ActionId } from '@/lib/resultsView';
+import { PASS_RATIO } from '@/lib/scoring';
 import { getRoster, getSquad } from '@/lib/squads';
 import {
   firstWrongPart,
@@ -19,10 +20,13 @@ import { colors, durations, radii, sizes, spacing, typography } from '@/theme/to
 
 const MAX_LEVEL: Level = 3;
 
+// Only called from the `!flawless` branch below, where `ratio === 1` is
+// unreachable (a flawless round with `attempted > 0` already took the other
+// branch, and `attempted === 0` computes `ratio = 0`) — so there is no
+// separate "flawless" sentence here; that copy lives in exactly one place.
 function verdictSentence(correct: number, total: number): string {
   const ratio = total === 0 ? 0 : correct / total;
-  if (ratio === 1) return 'A la escuadra — a flawless round.';
-  if (ratio >= 0.8) return 'You knew most of the starting XI.';
+  if (ratio >= PASS_RATIO) return 'You knew most of the starting XI.';
   if (ratio >= 0.5) return 'Solid — a few names to brush up on.';
   return 'These are the ones to learn.';
 }

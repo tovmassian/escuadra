@@ -2,10 +2,9 @@
 // are unit-testable — the project's Vitest setup has no RN renderer, so this
 // file must never import from `components/`.
 import type { Level } from '@/lib/questionEngine';
-import { scoreKey } from '@/stores/progress';
+import { ROUND_LENGTH, scoreKey } from '@/lib/scoring';
 
 const LEVELS: Level[] = [1, 2, 3];
-const ROUND_LENGTH = 10;
 
 export type DifficultyStatus = 'best' | 'unlocked' | 'locked';
 

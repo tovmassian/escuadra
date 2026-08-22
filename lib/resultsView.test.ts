@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { actionOrder, isFlawless, PASS_RATIO } from './resultsView';
+import { actionOrder, isFlawless } from './resultsView';
 
 describe('actionOrder', () => {
   it('offers the next level first when the player passed below the ceiling', () => {
@@ -57,12 +57,6 @@ describe('actionOrder', () => {
         }
       }
     }
-  });
-});
-
-describe('PASS_RATIO', () => {
-  it('is the shared pass threshold used by both the picker and results screens', () => {
-    expect(PASS_RATIO).toBe(0.8);
   });
 });
 

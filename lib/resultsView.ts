@@ -1,13 +1,6 @@
 // Pure results-screen model. Kept out of the screen so invariant 10's rules
 // are unit-testable.
 
-/**
- * Shared pass threshold: the results screen's pass/fail verdict and the
- * picker's "cleared" badge are the same concept, so they share one constant
- * rather than two values that can silently drift apart.
- */
-export const PASS_RATIO = 0.8;
-
 export type ActionId = 'nextLevel' | 'retry' | 'studyMissed' | 'study' | 'chooseTeam';
 
 /**
