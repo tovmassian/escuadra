@@ -181,6 +181,9 @@ export const sizes = {
   // Escuadra wordmark's mark, matching the 30px mark beside 23px type in the
   // design source's lockup.
   wordmarkMark: 30,
+  // Home's centred lockup. The mark only reads its right angle at this size,
+  // which is why the trail is shown here and nowhere else.
+  wordmarkMarkHero: 86,
   rowHeight: 56,
   // Team-picker rows carry a progress sub-line, so they need a second line of
   // height. Plain single-line rows keep `rowHeight`.
