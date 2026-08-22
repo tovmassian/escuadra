@@ -192,8 +192,8 @@ export const sizes = {
 } as const;
 
 export const iconSize = {
-  markLarge: 18, // AnswerOption's correct ✓
-  markSmall: 13, // AnswerOption's incorrect ✕
+  markLarge: 18, // VerdictGlyph default size (AnswerOption's correct mark); also PartRail's upcoming/current bullet diameter
+  markSmall: 13, // VerdictGlyph's smaller size, for AnswerOption's incorrect-picked mark
   chevron: 16, // TeamRow / DifficultyRow disclosure chevron
   chevronLarge: 18, // Home's continue-card chevron
   lockGlyph: 16, // DifficultyRow's locked-badge lock glyph

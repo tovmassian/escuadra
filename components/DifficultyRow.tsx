@@ -13,6 +13,7 @@ import {
 } from '@/theme/tokens';
 import type { Level } from '@/lib/questionEngine';
 import { LockGlyph } from '@/components/LockGlyph';
+import { VerdictGlyph } from '@/components/VerdictGlyph';
 import { type DifficultyStatus } from '@/lib/ladderView';
 
 export type { DifficultyStatus };
@@ -63,7 +64,7 @@ export function DifficultyRow({
         {locked ? (
           <LockGlyph />
         ) : best ? (
-          <Text style={[styles.badgeCheck, { color: colors.accentOn }]}>✓</Text>
+          <VerdictGlyph correct color={colors.accentOn} />
         ) : (
           <Text style={[styles.badgeLabel, { color: colors.accentOn }]}>{level}</Text>
         )}
@@ -109,7 +110,6 @@ const styles = StyleSheet.create({
   badgeUnlocked: { backgroundColor: colors.accent, borderColor: colors.accent },
   badgeBest: { backgroundColor: colors.success, borderColor: colors.success },
   badgeLabel: { ...typography.badgeNumber },
-  badgeCheck: { ...typography.badgeNumber },
   card: {
     flex: 1,
     padding: spacing.md - 1,
