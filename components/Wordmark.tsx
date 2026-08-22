@@ -36,5 +36,5 @@ const styles = StyleSheet.create({
   root: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
   stacked: { flexDirection: 'column', gap: spacing.md },
   word: { ...typography.wordmark, color: colors.textPrimary },
-  wordStacked: { fontSize: typography.screenTitle.fontSize },
+  wordStacked: typography.wordmarkHero,
 });

@@ -105,6 +105,14 @@ export default function Question() {
     session.advanceQuestion();
   };
 
+  const statChipsBlock = statChips.length > 0 && (
+    <View style={styles.chipRow}>
+      {statChips.map((c) => (
+        <StatChip key={c.label} label={c.label} value={c.value} />
+      ))}
+    </View>
+  );
+
   return (
     <View style={styles.root}>
       <View style={[styles.header, { paddingTop: insets.top + spacing.xs }]}>
@@ -115,7 +123,7 @@ export default function Question() {
           <Text style={styles.teamName}>{squad.name}</Text>
           <TeamMarker marker={squad.marker} />
         </View>
-        <ScorePill correct={score.correct} total={score.attempted} variant="header" />
+        <ScorePill correct={score.correct} total={score.attempted} />
       </View>
 
       <View style={styles.progressBlock}>
@@ -138,22 +146,10 @@ export default function Question() {
         {level > 1 ? (
           <View style={styles.railColumn}>
             <PartRail rows={partRailRows(question, result, session.currentPartIndex)} />
-            {statChips.length > 0 && (
-              <View style={styles.chipRow}>
-                {statChips.map((c) => (
-                  <StatChip key={c.label} label={c.label} value={c.value} />
-                ))}
-              </View>
-            )}
+            {statChipsBlock}
           </View>
         ) : (
-          statChips.length > 0 && (
-            <View style={styles.chipRow}>
-              {statChips.map((c) => (
-                <StatChip key={c.label} label={c.label} value={c.value} />
-              ))}
-            </View>
-          )
+          statChipsBlock
         )}
       </Animated.View>
 

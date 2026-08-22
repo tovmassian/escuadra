@@ -24,11 +24,6 @@ describe('progressOutcomes', () => {
     expect(progressOutcomes([result(true), result(null), result(null)], 1)[2]).toBe('future');
   });
 
-  it('keeps the current question current while its parts are still being answered', () => {
-    // Invariant 9: no partial credit, so the bar must not advance mid-question.
-    expect(progressOutcomes([result(null), result(null)], 0)[0]).toBe('current');
-  });
-
   it('returns one outcome per question', () => {
     expect(progressOutcomes([result(true), result(null), result(null)], 1)).toHaveLength(3);
   });

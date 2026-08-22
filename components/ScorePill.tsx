@@ -5,8 +5,6 @@ import { colors, radii, spacing, typography } from '@/theme/tokens';
 interface ScorePillProps {
   correct: number;
   total: number;
-  /** header: "6/8 SCORE" pill in the question-screen chrome. */
-  variant?: 'header';
 }
 
 export function ScorePill({ correct, total }: ScorePillProps) {

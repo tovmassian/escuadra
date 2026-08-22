@@ -8,7 +8,11 @@ import { colors, iconSize, sizes, spacing, typography } from '@/theme/tokens';
 interface TeamRowProps {
   name: string;
   marker: TeamMarkerData;
-  progress: TeamProgress | null;
+  /** `undefined` while the persisted store is still hydrating — "not yet
+   *  known" — distinct from `null`, "known to have never been played".
+   *  Rendering both the same way would have the row assert NOT PLAYED for a
+   *  team with real progress during the hydration window. */
+  progress: TeamProgress | null | undefined;
   onPress: () => void;
 }
 
@@ -26,9 +30,11 @@ export function TeamRow({ name, marker, progress, onPress }: TeamRowProps) {
           {name}
         </Text>
         <Text style={[styles.meta, progress?.cleared === true && styles.metaCleared]}>
-          {progress === null
-            ? 'NOT PLAYED'
-            : `LEVEL ${progress.level} · BEST ${progress.correct}/${progress.total}`}
+          {progress === undefined
+            ? '—'
+            : progress === null
+              ? 'NOT PLAYED'
+              : `LEVEL ${progress.level} · BEST ${progress.correct}/${progress.total}`}
         </Text>
       </View>
       <Text style={styles.chevron}>›</Text>

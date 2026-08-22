@@ -85,6 +85,16 @@ export const typography = {
     fontSize: 23,
     letterSpacing: -0.46,
   },
+  // The wordmark's stacked hero size (used with `sizes.wordmarkMarkHero`).
+  // Same -0.02em tracking ratio as `wordmark`, scaled to the larger 28px
+  // (`screenTitle`'s size) rather than reusing `wordmark`'s -0.46, which was
+  // tuned for 23px and reads too tight at hero scale.
+  wordmarkHero: {
+    fontFamily: 'Inter-ExtraBold',
+    fontWeight: '800' as const,
+    fontSize: 28,
+    letterSpacing: -0.56,
+  },
   // Segmented-control / filter-pill labels.
   segmentLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 13 },
   filterLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },
@@ -187,9 +197,8 @@ export const sizes = {
   // The a la escuadra celebration mark. Larger than Home's lockup because on
   // this screen the mark is the entire content.
   celebrationMark: 120,
-  rowHeight: 56,
   // Team-picker rows carry a progress sub-line, so they need a second line of
-  // height. Plain single-line rows keep `rowHeight`.
+  // height.
   rowHeightTall: 64,
   missedNumberWidth: 24,
 } as const;

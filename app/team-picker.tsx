@@ -40,7 +40,7 @@ export default function TeamPicker() {
           <TeamRow
             name={item.name}
             marker={item.marker}
-            progress={hydrated ? teamProgress(item.id, bestScores) : null}
+            progress={hydrated ? teamProgress(item.id, bestScores) : undefined}
             onPress={() =>
               router.push({ pathname: '/team/[squadId]/difficulty', params: { squadId: item.id } })
             }
