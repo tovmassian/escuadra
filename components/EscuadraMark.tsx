@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
-import { MARK_VIEWBOX, markGeometry } from '@/theme/brand';
+import { MARK_SMALL_BALL_THRESHOLD, MARK_VIEWBOX, markGeometry } from '@/theme/brand';
 
 interface EscuadraMarkProps {
   /** Rendered edge length in dp. The mark is square. */
@@ -16,7 +16,11 @@ interface EscuadraMarkProps {
 // hardcoded size and the mark stays crisp at any dimension.
 export function EscuadraMark({ size, color, showTrail = false }: EscuadraMarkProps) {
   const u = size / MARK_VIEWBOX;
-  const { crossbar, post, ball, trail } = markGeometry;
+  const { crossbar, post, ball, ballSmall, trail } = markGeometry;
+  // Below the threshold the large ball's gaps to the crossbar/post go
+  // sub-pixel and the shapes fuse into a blob — swap to the size-aware
+  // small-ball geometry instead. See `theme/brand.ts`.
+  const activeBall = size < MARK_SMALL_BALL_THRESHOLD ? ballSmall : ball;
 
   return (
     <View style={[styles.root, { width: size, height: size }]}>
@@ -43,11 +47,11 @@ export function EscuadraMark({ size, color, showTrail = false }: EscuadraMarkPro
       <View
         style={{
           position: 'absolute',
-          left: (ball.cx - ball.r) * u,
-          top: (ball.cy - ball.r) * u,
-          width: ball.r * 2 * u,
-          height: ball.r * 2 * u,
-          borderRadius: ball.r * u,
+          left: (activeBall.cx - activeBall.r) * u,
+          top: (activeBall.cy - activeBall.r) * u,
+          width: activeBall.r * 2 * u,
+          height: activeBall.r * 2 * u,
+          borderRadius: activeBall.r * u,
           backgroundColor: color,
         }}
       />
