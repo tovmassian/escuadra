@@ -1,34 +1,36 @@
 import React from 'react';
-import { Pressable, StyleSheet, Text } from 'react-native';
-import { ScorePill } from './ScorePill';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { TeamMarker } from './TeamMarker';
+import type { TeamProgress } from '@/lib/pickerView';
 import type { TeamMarker as TeamMarkerData } from '@/types/squad';
 import { colors, iconSize, sizes, spacing, typography } from '@/theme/tokens';
 
 interface TeamRowProps {
   name: string;
   marker: TeamMarkerData;
-  best: { correct: number; total: number } | null;
+  progress: TeamProgress | null;
   onPress: () => void;
 }
 
-// Left edge (marker + name) stays put; name truncates with an ellipsis. Right
-// edge is a fixed-width score pill, so both edges stay clean regardless of
-// name length — the identity marker is the team's only visual identifier,
-// per the "no crests, ever" constraint.
-export function TeamRow({ name, marker, best, onPress }: TeamRowProps) {
+// Left edge (marker + name) stays put; the name truncates with an ellipsis.
+// The row is the only place per-team progress can live, so it carries a mono
+// sub-line rather than a right-hand pill that read the same on every row. The
+// identity marker is the team's only visual identifier, per the "no crests,
+// ever" constraint.
+export function TeamRow({ name, marker, progress, onPress }: TeamRowProps) {
   return (
     <Pressable onPress={onPress} accessibilityRole="button" style={styles.row}>
       <TeamMarker marker={marker} />
-      <Text style={styles.name} numberOfLines={1}>
-        {name}
-      </Text>
-      <ScorePill
-        correct={best?.correct ?? 0}
-        total={best?.total ?? 10}
-        variant="row"
-        empty={!best}
-      />
+      <View style={styles.text}>
+        <Text style={styles.name} numberOfLines={1}>
+          {name}
+        </Text>
+        <Text style={[styles.meta, progress?.cleared === true && styles.metaCleared]}>
+          {progress === null
+            ? 'NOT PLAYED'
+            : `LEVEL ${progress.level} · BEST ${progress.correct}/${progress.total}`}
+        </Text>
+      </View>
       <Text style={styles.chevron}>›</Text>
     </Pressable>
   );
@@ -39,10 +41,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: spacing.sm,
-    height: sizes.rowHeight,
+    height: sizes.rowHeightTall,
     borderBottomWidth: 1,
     borderBottomColor: colors.surfaceRaised,
   },
-  name: { flex: 1, ...typography.rowTitle, color: colors.textPrimary },
+  text: { flex: 1, minWidth: 0 },
+  name: { ...typography.rowTitle, color: colors.textPrimary },
+  meta: { ...typography.statMonoTiny, color: colors.textMuted, marginTop: spacing.xxs - 1 },
+  metaCleared: { color: colors.success },
   chevron: { fontSize: iconSize.chevron, color: colors.border },
 });

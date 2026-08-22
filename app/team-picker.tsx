@@ -4,6 +4,7 @@ import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { TeamRow } from '@/components/TeamRow';
+import { teamProgress } from '@/lib/pickerView';
 import { listSquads } from '@/lib/squads';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import { colors, spacing, typography } from '@/theme/tokens';
@@ -22,17 +23,6 @@ export default function TeamPicker() {
   const squads = listSquads();
   const filtered = useMemo(() => squads.filter((s) => s.kind === filter), [squads, filter]);
 
-  const bestFor = (squadId: string) => {
-    if (!hydrated) return null;
-    let best: number | null = null;
-    for (const level of [1, 2, 3]) {
-      const key = `${squadId}:${level}`;
-      const score = bestScores[key];
-      if (score !== undefined && (best === null || score > best)) best = score;
-    }
-    return best === null ? null : { correct: best, total: 10 };
-  };
-
   return (
     <View style={[styles.root, { paddingTop: insets.top + spacing.xl }]}>
       <Text style={styles.title}>Choose a Team</Text>
@@ -50,7 +40,7 @@ export default function TeamPicker() {
           <TeamRow
             name={item.name}
             marker={item.marker}
-            best={bestFor(item.id)}
+            progress={hydrated ? teamProgress(item.id, bestScores) : null}
             onPress={() =>
               router.push({ pathname: '/team/[squadId]/difficulty', params: { squadId: item.id } })
             }

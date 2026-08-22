@@ -182,6 +182,9 @@ export const sizes = {
   // design source's lockup.
   wordmarkMark: 30,
   rowHeight: 56,
+  // Team-picker rows carry a progress sub-line, so they need a second line of
+  // height. Plain single-line rows keep `rowHeight`.
+  rowHeightTall: 64,
   teamUnderline: { width: 28, height: 2 },
   missedNumberWidth: 24,
 } as const;
