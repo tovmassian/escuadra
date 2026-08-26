@@ -1,5 +1,13 @@
 export type Position = 'GK' | 'DF' | 'MF' | 'FW';
 
+export type League =
+  | 'la-liga'
+  | 'serie-a'
+  | 'bundesliga'
+  | 'ligue-1'
+  | 'premier-league'
+  | 'ucl';
+
 export interface Player {
   id: string;
   /** Short/known-as name — what the quiz and Study screen display. Must fit
@@ -95,6 +103,11 @@ export interface SquadManifestEntry {
   /** Mirrors the squad file's `marker`, since the picker never imports full
    *  squad JSON. Kept in sync by lib/squads.test.ts. */
   marker: TeamMarker;
+  /** Which big-5 league (or `ucl`, for a UCL group-stage club with no big-5
+   *  home) a club plays in. Present for `kind: 'club'` entries, absent for
+   *  `kind: 'nation'` entries. Derived from the squad file's folder path by
+   *  `scripts/gen-squads.ts`, not authored by hand. */
+  league?: League;
 }
 
 /** A squad member joined with their player record. */
