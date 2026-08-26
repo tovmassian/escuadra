@@ -1,7 +1,7 @@
 ---
 name: squad-updater
 context: fork
-description: Use when creating or refreshing an Escuadra squad file (data/squads/<id>.json) from Wikipedia — adding a new club/national team or syncing an existing one's roster, shirt numbers, or players.json entries. Accepts one or more team names and repeats the procedure for each, sequentially.
+description: Use when creating or refreshing an Escuadra squad file (data/squads/nation/<id>.json or data/squads/club/<league>/<id>.json for a club) from Wikipedia — adding a new club/national team or syncing an existing one's roster, shirt numbers, or players.json entries. Accepts one or more team names and repeats the procedure for each, sequentially.
 ---
 
 # Squad Updater
@@ -9,11 +9,13 @@ description: Use when creating or refreshing an Escuadra squad file (data/squads
 ## Overview
 
 Given a team name (club or nation), fetch that team's current squad from
-Wikipedia and create or update the matching files in `data/`: the squad file,
-`data/players.json`, and `data/index.json`. Multiple team names are handled by
-running this same procedure once per team, **in sequence** — never in
-parallel, since every team writes to the same two shared files
-(`players.json`, `index.json`) and parallel writes would clobber each other.
+Wikipedia and create or update the matching files in `data/`: the squad file
+and `data/players.json`, then run `npm run gen:squads` to regenerate
+`data/index.json` and `lib/squads.generated.ts` from the result. Multiple
+team names are handled by running this same procedure once per team, **in
+sequence** — never in parallel, since every team writes to the same shared
+`players.json` and runs the same generator; parallel writes would clobber
+each other.
 
 ## Critical rule: never trust prose extraction of the roster table
 
@@ -110,8 +112,9 @@ marker, lastUpdated, source, members`.
      domestic home. If a club's domestic league isn't one of the big 5,
      don't invent a folder for it — ask the user how to proceed rather than
      guessing a `League` value the codegen script doesn't recognize.
-     `members` is `[{ playerId, no, captain? }]` — shirt number lives on the
-     membership, never on the player.
+
+   `members` is `[{ playerId, no, captain? }]` — shirt number lives on the
+   membership, never on the player.
 
    - `lastUpdated` — ISO date (`YYYY-MM-DD`) you're writing this file, i.e.
      today, not the "as of" date the Wikipedia section itself claims (that
@@ -139,9 +142,10 @@ weights?: number[], overlay?: { shape: 'disc' | 'diamond', color: string } }`.
        single-colour club (e.g. Arsenal, Real Madrid) gets a one-entry
        `bands` array, not a two-tone split; don't manufacture a second
        band from a trim colour that isn't a real second identity colour.
-       The same object must be copied into the matching `data/index.json`
-       entry; `lib/squads.test.ts` compares them. Hand-check marker colours
-       against a real source rather than generating them.
+       Hand-check marker colours against a real source rather than
+       generating them — `npm run gen:squads` (step 10) picks this object up
+       into `data/index.json` automatically, so there's nothing to copy by
+       hand.
 
 9. **Set `verified: false`.** Always — for a brand-new squad and for one
    you're overwriting, even if it was previously `true`. Scraping + LLM
