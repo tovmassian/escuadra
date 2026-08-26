@@ -43,10 +43,9 @@ export default function Home() {
         { paddingTop: insets.top + spacing.xl, paddingBottom: insets.bottom + spacing.xl },
       ]}
     >
-      <Wordmark />
-      <View style={styles.spacer} />
-      <Text style={styles.title}>Ready to train?</Text>
-      <Text style={styles.subtitle}>Pick up where you left off, or jump into a new team.</Text>
+      <View style={styles.brandBlock}>
+        <Wordmark size={sizes.wordmarkMarkHero} showTrail stacked />
+      </View>
 
       {continueSquad && lastPlayed && (
         <Pressable
@@ -90,13 +89,7 @@ export default function Home() {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.xl },
-  spacer: { flex: 1 },
-  title: {
-    ...typography.screenTitle,
-    color: colors.textPrimary,
-    marginBottom: spacing.xs,
-  },
-  subtitle: { ...typography.secondary, color: colors.textSecondary, marginBottom: spacing.xxl },
+  brandBlock: { flex: 1, alignItems: 'center', justifyContent: 'center' },
   continueCard: {
     flexDirection: 'row',
     alignItems: 'center',

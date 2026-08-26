@@ -6,6 +6,7 @@
 // the whole game: wrong options must be genuinely confusable, not random.
 import { getAge } from './age';
 import { createRng, shuffle } from './prng';
+import { ROUND_LENGTH } from './scoring';
 import type { Position, RosterEntry, Squad } from '@/types/squad';
 
 export type Level = 1 | 2 | 3;
@@ -158,7 +159,7 @@ function buildClubPart(
 }
 
 export function buildRound(opts: BuildRoundOptions): Question[] {
-  const { squad, roster, level, seed = Date.now(), size = 10, now = new Date() } = opts;
+  const { squad, roster, level, seed = Date.now(), size = ROUND_LENGTH, now = new Date() } = opts;
   const rng = createRng(seed);
 
   const minRosterSize = level === 3 ? 6 : 4;

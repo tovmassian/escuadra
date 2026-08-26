@@ -85,6 +85,16 @@ export const typography = {
     fontSize: 23,
     letterSpacing: -0.46,
   },
+  // The wordmark's stacked hero size (used with `sizes.wordmarkMarkHero`).
+  // Same -0.02em tracking ratio as `wordmark`, scaled to the larger 28px
+  // (`screenTitle`'s size) rather than reusing `wordmark`'s -0.46, which was
+  // tuned for 23px and reads too tight at hero scale.
+  wordmarkHero: {
+    fontFamily: 'Inter-ExtraBold',
+    fontWeight: '800' as const,
+    fontSize: 28,
+    letterSpacing: -0.56,
+  },
   // Segmented-control / filter-pill labels.
   segmentLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 13 },
   filterLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },
@@ -160,9 +170,15 @@ export const difficultyTitleWeight = { 1: '400', 2: '600', 3: '800' } as const;
 
 export const sizes = {
   progressDot: 5,
-  // Horizontal offset of the difficulty ladder's connector line — centred
-  // under the badge column regardless of level (badges vary 40-56px wide).
-  difficultyConnectorOffset: 27,
+  // Width of the difficulty ladder's badge column. Every badge (40-56px,
+  // scaling with level) centres inside this fixed-width slot rather than
+  // left-aligning, so the three differently-sized badges — and the connector
+  // segments between them — share one vertical axis. Matches the widest
+  // badge (level 3) so nothing overflows it.
+  difficultyBadgeColumn: badgeSize[3],
+  // Height of one connector segment between two ladder rungs. Drawn only in
+  // the gap, never behind a badge — see `LadderConnector`.
+  difficultyConnectorHeight: 26,
   studyColumn: { no: 26, position: 34, affiliation: 92 },
   // Home's "Start Training" is the one 56px control; every other button
   // (Continue, Results actions) is 52px.
@@ -178,20 +194,34 @@ export const sizes = {
   teamMarkerRadius: 2,
   // Japan's disc and Brazil's diamond, as a fraction of the marker's height.
   teamMarkerOverlayScale: 0.6,
+  // The "banner" marker variant used mid-round (see TeamMarker's `variant`
+  // prop): thinner and longer than the picker's marker, and always rendered
+  // with vertical bands regardless of the squad's real flag orientation.
+  teamMarkerBanner: { width: 100, height: 3 },
   // Escuadra wordmark's mark, matching the 30px mark beside 23px type in the
   // design source's lockup.
   wordmarkMark: 30,
-  rowHeight: 56,
-  teamUnderline: { width: 28, height: 2 },
+  // Home's centred lockup. The mark only reads its right angle at this size,
+  // which is why the trail is shown here and nowhere else.
+  wordmarkMarkHero: 86,
+  // The a la escuadra celebration mark. Larger than Home's lockup because on
+  // this screen the mark is the entire content.
+  celebrationMark: 120,
+  // Team-picker rows carry a progress sub-line, so they need a second line of
+  // height.
+  rowHeightTall: 64,
   missedNumberWidth: 24,
 } as const;
 
 export const iconSize = {
-  markLarge: 18, // AnswerOption's correct ✓
-  markSmall: 13, // AnswerOption's incorrect ✕
+  markLarge: 18, // VerdictGlyph default size (AnswerOption's correct mark); also PartRail's upcoming/current bullet diameter
+  markSmall: 13, // VerdictGlyph's smaller size, for AnswerOption's incorrect-picked mark
   chevron: 16, // TeamRow / DifficultyRow disclosure chevron
   chevronLarge: 18, // Home's continue-card chevron
-  lockGlyph: 16, // DifficultyRow's locked-badge lock glyph
+  // The locked-badge padlock scales with its own badge (40/48/56, escalating
+  // by level) rather than sitting at one fixed size regardless of the ring
+  // around it — 48 * 0.46 ≈ 22, 56 * 0.46 ≈ 26.
+  lockGlyphRatio: 0.46,
 } as const;
 
 // Base unit 4. Use spacing[n], not raw numbers, in component styles.

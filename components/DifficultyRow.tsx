@@ -2,18 +2,23 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import {
   badgeSize,
+  borderWidths,
   colors,
   difficultyTitleSize,
   difficultyTitleWeight,
   iconSize,
   opacity,
   radii,
+  sizes,
   spacing,
   typography,
 } from '@/theme/tokens';
 import type { Level } from '@/lib/questionEngine';
+import { LockGlyph } from '@/components/LockGlyph';
+import { VerdictGlyph } from '@/components/VerdictGlyph';
+import { type DifficultyStatus } from '@/lib/ladderView';
 
-export type DifficultyStatus = 'best' | 'unlocked' | 'locked';
+export type { DifficultyStatus };
 
 interface DifficultyRowProps {
   level: Level;
@@ -21,6 +26,8 @@ interface DifficultyRowProps {
   description: string;
   status: DifficultyStatus;
   bestScore?: { correct: number; total: number };
+  /** Locked rows only — states what clears the gate. */
+  unlockHint?: string;
   onPress?: () => void;
 }
 
@@ -32,6 +39,7 @@ export function DifficultyRow({
   description,
   status,
   bestScore,
+  unlockHint,
   onPress,
 }: DifficultyRowProps) {
   const locked = status === 'locked';
@@ -46,30 +54,26 @@ export function DifficultyRow({
       accessibilityState={{ disabled: locked }}
       style={[styles.row, locked && styles.rowLocked]}
     >
-      <View
-        style={[
-          styles.badge,
-          { width: size, height: size },
-          locked && styles.badgeLocked,
-          status === 'unlocked' && styles.badgeUnlocked,
-          best && styles.badgeBest,
-        ]}
-      >
-        {locked ? (
-          <Text style={styles.badgeLock}>🔒</Text>
-        ) : best ? (
-          <Text style={[styles.badgeCheck, { color: colors.accentOn }]}>✓</Text>
-        ) : (
-          <Text style={[styles.badgeLabel, { color: colors.accentOn }]}>{level}</Text>
-        )}
+      <View style={styles.badgeColumn}>
+        <View
+          style={[
+            styles.badge,
+            { width: size, height: size },
+            locked && styles.badgeLocked,
+            status === 'unlocked' && styles.badgeUnlocked,
+            best && styles.badgeBest,
+          ]}
+        >
+          {locked ? (
+            <LockGlyph size={Math.round(size * iconSize.lockGlyphRatio)} />
+          ) : best ? (
+            <VerdictGlyph correct color={colors.accentOn} />
+          ) : (
+            <Text style={[styles.badgeLabel, { color: colors.accentOn }]}>{level}</Text>
+          )}
+        </View>
       </View>
-      <View
-        style={[
-          styles.card,
-          status === 'unlocked' && styles.cardRaised,
-          level === 3 && styles.cardEmphasis,
-        ]}
-      >
+      <View style={[styles.card, status === 'unlocked' && styles.cardEmphasis]}>
         <View style={styles.headerRow}>
           <Text
             style={[
@@ -86,6 +90,7 @@ export function DifficultyRow({
               </Text>
             </View>
           )}
+          {locked && unlockHint && <Text style={styles.unlockHint}>{unlockHint}</Text>}
         </View>
         <Text style={styles.description}>{description}</Text>
       </View>
@@ -94,8 +99,17 @@ export function DifficultyRow({
 }
 
 const styles = StyleSheet.create({
-  row: { flex: 1, flexDirection: 'row', gap: spacing.sm + 2, alignItems: 'center' },
+  row: { flexDirection: 'row', gap: spacing.sm + 2, alignItems: 'center' },
   rowLocked: { opacity: opacity.disabled },
+  // Fixed-width slot the badge centres inside, regardless of its own
+  // diameter (40-56px, escalating by level) — so all three badges, and the
+  // connector segments between them, share one vertical axis.
+  badgeColumn: {
+    width: sizes.difficultyBadgeColumn,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
+  },
   badge: {
     borderRadius: radii.pill,
     borderWidth: 1.5,
@@ -109,8 +123,6 @@ const styles = StyleSheet.create({
   badgeUnlocked: { backgroundColor: colors.accent, borderColor: colors.accent },
   badgeBest: { backgroundColor: colors.success, borderColor: colors.success },
   badgeLabel: { ...typography.badgeNumber },
-  badgeLock: { fontSize: iconSize.lockGlyph },
-  badgeCheck: { ...typography.badgeNumber },
   card: {
     flex: 1,
     padding: spacing.md - 1,
@@ -119,9 +131,8 @@ const styles = StyleSheet.create({
     borderColor: colors.border,
     borderRadius: radii.lg,
   },
-  cardRaised: { backgroundColor: colors.surfaceRaised },
   cardEmphasis: {
-    borderWidth: 1.5,
+    borderWidth: borderWidths.thick,
     borderColor: colors.accent,
     backgroundColor: colors.surfaceRaised,
   },
@@ -145,4 +156,5 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   },
   statusLabelBest: { ...typography.captionEyebrow, color: colors.success },
+  unlockHint: { ...typography.captionEyebrow, color: colors.textMuted, flexShrink: 0 },
 });

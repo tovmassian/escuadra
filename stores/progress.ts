@@ -2,6 +2,11 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import { scoreKey } from '@/lib/scoring';
+
+// Re-exported so existing importers (e.g. `app/index.tsx`) keep working —
+// `scoreKey` is a scoring scalar defined once in `lib/scoring.ts`, not here.
+export { scoreKey };
 
 interface LastPlayed {
   squadId: string;
@@ -22,8 +27,6 @@ interface ProgressState {
   setLastPlayed: (squadId: string, level: number) => void;
   reset: () => void;
 }
-
-export const scoreKey = (squadId: string, level: number) => `${squadId}:${level}`;
 
 export const useProgress = create<ProgressState>()(
   persist(

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { MARK_VIEWBOX, markGeometry } from './brand';
+import { MARK_SMALL_BALL_THRESHOLD, MARK_VIEWBOX, markGeometry } from './brand';
 
 // The 2a mark's value is a clean silhouette in a single colour: the ball must
 // not collide with either bar, or the shape muddies when everything is one
@@ -7,7 +7,7 @@ import { MARK_VIEWBOX, markGeometry } from './brand';
 // These tests pin that property so a later nudge to the geometry fails here
 // rather than silently degrading the icon.
 describe('Escuadra mark geometry', () => {
-  const { crossbar, post, ball, trail } = markGeometry;
+  const { crossbar, post, ball, ballSmall, trail } = markGeometry;
 
   it('keeps every shape inside the viewBox', () => {
     expect(crossbar.x + crossbar.w).toBeLessThanOrEqual(MARK_VIEWBOX);
@@ -38,6 +38,39 @@ describe('Escuadra mark geometry', () => {
   it('forms a right angle: the post starts where the crossbar ends', () => {
     expect(post.x + post.w).toBe(crossbar.x + crossbar.w);
     expect(post.y).toBe(crossbar.y);
+  });
+
+  it('exposes a small-ball variant for sub-40px renders, inside the viewBox', () => {
+    expect(ballSmall.cx + ballSmall.r).toBeLessThanOrEqual(MARK_VIEWBOX);
+    expect(ballSmall.cy + ballSmall.r).toBeLessThanOrEqual(MARK_VIEWBOX);
+    expect(ballSmall.cx - ballSmall.r).toBeGreaterThanOrEqual(0);
+    expect(ballSmall.cy - ballSmall.r).toBeGreaterThanOrEqual(0);
+  });
+
+  it('leaves a gap between the small ball and the crossbar', () => {
+    const crossbarBottom = crossbar.y + crossbar.h;
+    const ballTop = ballSmall.cy - ballSmall.r;
+    expect(ballTop).toBeGreaterThan(crossbarBottom);
+  });
+
+  it('keeps the small ball clear of the post rather than overlapping it', () => {
+    const ballRight = ballSmall.cx + ballSmall.r;
+    expect(ballRight).toBeLessThanOrEqual(post.x);
+  });
+
+  it('opens strictly larger clearances on the small ball than the large ball', () => {
+    const crossbarBottom = crossbar.y + crossbar.h;
+    const largeTopGap = ball.cy - ball.r - crossbarBottom;
+    const smallTopGap = ballSmall.cy - ballSmall.r - crossbarBottom;
+    expect(smallTopGap).toBeGreaterThan(largeTopGap);
+
+    const largeSideGap = post.x - (ball.cx + ball.r);
+    const smallSideGap = post.x - (ballSmall.cx + ballSmall.r);
+    expect(smallSideGap).toBeGreaterThan(largeSideGap);
+  });
+
+  it('exports a named threshold below which the small ball renders', () => {
+    expect(MARK_SMALL_BALL_THRESHOLD).toBe(40);
   });
 
   it('fades the trail progressively', () => {

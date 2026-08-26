@@ -3,30 +3,28 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
-import { ConnectorLine } from '@/components/ConnectorLine';
-import { DifficultyRow, type DifficultyStatus } from '@/components/DifficultyRow';
+import { DifficultyRow } from '@/components/DifficultyRow';
+import { LadderConnector } from '@/components/LadderConnector';
 import type { Level } from '@/lib/questionEngine';
+import { ladderRows } from '@/lib/ladderView';
 import { getSquad } from '@/lib/squads';
-import { scoreKey, useProgress } from '@/stores/progress';
-import { colors, sizes, spacing, typography } from '@/theme/tokens';
+import { useProgress } from '@/stores/progress';
+import { colors, spacing, typography } from '@/theme/tokens';
 
-const LEVELS: { level: Level; title: string; description: string }[] = [
-  {
-    level: 1,
+const LEVEL_COPY: Record<Level, { title: string; description: string }> = {
+  1: {
     title: 'Name from Number',
     description: 'Given a shirt number, pick the player from 4 options.',
   },
-  {
-    level: 2,
+  2: {
     title: 'Name + Position',
     description: 'Pick the name, then the position — GK, DF, MF, or FW.',
   },
-  {
-    level: 3,
+  3: {
     title: 'Full Profile',
     description: 'Name from 6 options, then position, then club or nationality.',
   },
-];
+};
 
 export default function Difficulty() {
   const insets = useSafeAreaInsets();
@@ -45,40 +43,34 @@ export default function Difficulty() {
       <Text style={styles.eyebrow}>{squad.name.toUpperCase()}</Text>
       <Text style={styles.title}>Choose Difficulty</Text>
 
-      <View style={styles.ladder}>
-        <View style={styles.connector}>
-          <ConnectorLine />
-        </View>
-        <View style={styles.rows}>
-          {LEVELS.map(({ level, title, description }) => {
-            const key = scoreKey(squad.id, level);
-            const best = bestScores[key];
-            const prevCompleted =
-              level === 1 || completedLevels[scoreKey(squad.id, level - 1)] === true;
-            const status: DifficultyStatus =
-              best !== undefined ? 'best' : prevCompleted ? 'unlocked' : 'locked';
-            return (
+      <View>
+        {ladderRows(squad.id, bestScores, completedLevels).map((row, i, rows) => {
+          const copy = LEVEL_COPY[row.level];
+          return (
+            <React.Fragment key={row.level}>
               <DifficultyRow
-                key={level}
-                level={level}
-                title={title}
-                description={description}
-                status={status}
-                bestScore={best !== undefined ? { correct: best, total: 10 } : undefined}
+                level={row.level}
+                title={copy.title}
+                description={copy.description}
+                status={row.status}
+                bestScore={row.best}
+                unlockHint={row.unlockHint}
                 onPress={
-                  status === 'locked'
+                  row.status === 'locked'
                     ? undefined
                     : () =>
                         router.push({
                           pathname: '/play/[squadId]/[level]',
-                          params: { squadId: squad.id, level: String(level) },
+                          params: { squadId: squad.id, level: String(row.level) },
                         })
                 }
               />
-            );
-          })}
-        </View>
+              {i < rows.length - 1 && <LadderConnector active={row.status !== 'locked'} />}
+            </React.Fragment>
+          );
+        })}
       </View>
+      <View style={styles.spacer} />
 
       <View style={styles.studyButton}>
         <Button
@@ -104,13 +96,6 @@ const styles = StyleSheet.create({
   back: { ...typography.secondary, color: colors.textSecondary },
   eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, marginTop: spacing.md },
   title: { ...typography.screenTitle, color: colors.textPrimary, marginBottom: spacing.xxl },
-  ladder: { flex: 1, position: 'relative' },
-  connector: {
-    position: 'absolute',
-    left: sizes.difficultyConnectorOffset,
-    top: spacing.xl,
-    bottom: spacing.xxxl,
-  },
-  rows: { flex: 1, gap: spacing.lg },
+  spacer: { flex: 1 },
   studyButton: { marginTop: spacing.lg },
 });

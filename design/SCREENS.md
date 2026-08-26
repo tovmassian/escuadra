@@ -59,16 +59,17 @@ deliberate constraint is distinguishable from an accident.
 
 ## Screens
 
-Six screens. Route, file, and what it does.
+Six routes (the results route renders two distinct states, ordinary and
+flawless — see below). Route, file, and what it does.
 
-| #   | Route                             | File                                     | Purpose                                                                                                  |
-| --- | --------------------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------- |
-| 1   | `/`                               | `app/index.tsx`                          | Home. Wordmark, continue-card for the last played team, Start Training.                                  |
-| 2   | `/team-picker`                    | `app/team-picker.tsx`                    | Team picker, segmented into Clubs and National Teams, best score per team.                               |
-| 3   | `/team/[squadId]/difficulty`      | `app/team/[squadId]/difficulty.tsx`      | The three-level difficulty ladder, plus the Study entry point.                                           |
-| 4   | `/team/[squadId]/study`           | `app/team/[squadId]/study.tsx`           | Browsable full squad — number, name, position, club or nationality.                                      |
-| 5   | `/play/[squadId]/[level]`         | `app/play/[squadId]/[level]/index.tsx`   | A question. Hero slot, stat chips, answer options, and on L2/L3 the position and club/nationality parts. |
-| 6   | `/play/[squadId]/[level]/results` | `app/play/[squadId]/[level]/results.tsx` | Score, the players missed, and pass/fail-aware CTAs.                                                     |
+| #   | Route                             | File                                     | Purpose                                                                                                                                                                                                                                                 |
+| --- | --------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | `/`                               | `app/index.tsx`                          | Home. Centred, stacked wordmark lockup as the headline, continue-card for the last played team, Start Training.                                                                                                                                         |
+| 2   | `/team-picker`                    | `app/team-picker.tsx`                    | Team picker, segmented into Clubs and National Teams. Each row shows a mono sub-line — `LEVEL n · BEST n/10` or `NOT PLAYED`, green once cleared.                                                                                                       |
+| 3   | `/team/[squadId]/difficulty`      | `app/team/[squadId]/difficulty.tsx`      | The three-level difficulty ladder, accent border on the playable rung, locked rows stating their unlock condition, plus the Study entry point.                                                                                                          |
+| 4   | `/team/[squadId]/study`           | `app/team/[squadId]/study.tsx`           | Browsable squad list — number, name, position, club or nationality. With a `players` param it narrows to only those players, hides the position filters, and titles itself "Missed Players".                                                            |
+| 5   | `/play/[squadId]/[level]`         | `app/play/[squadId]/[level]/index.tsx`   | A question. Hero slot, stat chips, answer options; on L2/L3 a part rail beside the hero shows each part's earned verdict, with the position/club/nationality parts below.                                                                               |
+| 6   | `/play/[squadId]/[level]/results` | `app/play/[squadId]/[level]/results.tsx` | Score, the players missed, and pass/fail-aware CTAs — `Study These N` is primary on a failed round, filtering Study to the misses, and suppresses `Study This Squad`. A 10/10 round instead renders the flawless "a la escuadra" state, no missed list. |
 
 ## Captures
 
@@ -82,6 +83,10 @@ Six screens. Route, file, and what it does.
 | `screens/06-question-l1.png`         | Question, level 1           |
 | `screens/07-question-l3.png`         | Question, level 3           |
 | `screens/08-results.png`             | Results                     |
+
+`08-results.png` captures the ordinary (non-flawless) state. The flawless "a
+la escuadra" state and the missed-players-filtered Study view have no capture
+yet.
 
 ## Vocabulary
 

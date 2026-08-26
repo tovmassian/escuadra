@@ -9,6 +9,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
+import { VerdictGlyph } from './VerdictGlyph';
 import {
   borderWidths,
   colors,
@@ -151,14 +152,11 @@ export function AnswerOption({ label, verdict, disabled, onPress }: AnswerOption
           >
             {label}
           </Text>
-          {verdict === 'correct-picked' && (
-            <Text style={[styles.mark, { color: colors.success }]}>✓</Text>
-          )}
-          {verdict === 'correct-unpicked' && (
-            <Text style={[styles.mark, { color: colors.success }]}>✓</Text>
+          {(verdict === 'correct-picked' || verdict === 'correct-unpicked') && (
+            <VerdictGlyph correct />
           )}
           {verdict === 'incorrect-picked' && (
-            <Text style={[styles.markSmall, { color: colors.errorTextDim }]}>✕</Text>
+            <VerdictGlyph correct={false} size={iconSize.markSmall} />
           )}
         </View>
         {verdict === 'correct-unpicked' && (
@@ -185,14 +183,6 @@ const styles = StyleSheet.create({
   },
   labelEmphasis: {
     ...typography.bodyEmphasis,
-  },
-  mark: {
-    fontSize: iconSize.markLarge,
-    fontWeight: '700',
-  },
-  markSmall: {
-    fontSize: iconSize.markSmall,
-    fontWeight: '700',
   },
   correctCaption: {
     ...typography.captionEyebrow,

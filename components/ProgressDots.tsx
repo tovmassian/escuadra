@@ -1,35 +1,39 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
+import type { DotOutcome } from '@/lib/roundView';
 import { colors, opacity, radii, sizes, spacing } from '@/theme/tokens';
 
 interface ProgressDotsProps {
-  total: number;
-  /** 0-indexed position of the current question. */
-  current: number;
+  /** One entry per question, in order. */
+  outcomes: DotOutcome[];
 }
 
-export function ProgressDots({ total, current }: ProgressDotsProps) {
+// A dash per question, coloured by what actually happened to it — ten
+// identical dashes told the player nothing about their round.
+export function ProgressDots({ outcomes }: ProgressDotsProps) {
   return (
     <View style={styles.row}>
-      {Array.from({ length: total }, (_, i) => (
-        <View
-          key={i}
-          style={[
-            styles.dot,
-            { opacity: i === current ? 1 : i < current ? opacity.dotPast : opacity.dotFuture },
-          ]}
-        />
+      {outcomes.map((outcome, i) => (
+        <View key={i} style={[styles.dot, dotStyle(outcome)]} />
       ))}
     </View>
   );
 }
 
+function dotStyle(outcome: DotOutcome) {
+  switch (outcome) {
+    case 'correct':
+      return { backgroundColor: colors.success, opacity: opacity.dotPast };
+    case 'wrong':
+      return { backgroundColor: colors.error, opacity: opacity.dotPast };
+    case 'current':
+      return { backgroundColor: colors.accent, opacity: 1 };
+    case 'future':
+      return { backgroundColor: colors.border, opacity: opacity.dotFuture };
+  }
+}
+
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', gap: spacing.xxs + 1 },
-  dot: {
-    flex: 1,
-    height: sizes.progressDot,
-    borderRadius: radii.sm - 5,
-    backgroundColor: colors.accent,
-  },
+  dot: { flex: 1, height: sizes.progressDot, borderRadius: radii.sm - 5 },
 });

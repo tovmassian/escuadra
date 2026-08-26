@@ -94,6 +94,24 @@ describe('session store', () => {
     expect(state.results[0]?.parts[2]).toBeNull();
   });
 
+  it('pins currentPartIndex at the wrong part instead of advancing it (invariant 7 store-side contract)', () => {
+    // partRailRows (lib/roundView.ts) decides a row's "current" state purely
+    // from `i === currentPartIndex`. If answerPart ever advanced the index
+    // after a wrong answer, the rail would silently accent a part that will
+    // never be asked — the player would see "current" on position/club after
+    // the question is already lost. Grading must also happen immediately,
+    // not wait for parts that are never coming.
+    useSession.getState().startRound(squad, roster(), 3);
+    const q = useSession.getState().questions[0];
+    if (!q) throw new Error('no question');
+
+    const wrongNameIndex = q.parts[0]!.correctIndex === 0 ? 1 : 0;
+    useSession.getState().answerPart(wrongNameIndex);
+
+    expect(useSession.getState().currentPartIndex).toBe(0);
+    expect(useSession.getState().results[0]?.correct).toBe(false);
+  });
+
   it('advanceQuestion moves forward and completes after the last question', () => {
     useSession.getState().startRound(squad, roster(), 1);
     for (let i = 0; i < 10; i++) {
