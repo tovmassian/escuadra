@@ -136,6 +136,21 @@ Both `data/index.json` (the picker manifest) and each squad file carry
 squad JSON — `marker` must be duplicated identically into `data/index.json`
 (`lib/squads.test.ts` asserts the two agree).
 
+**In-round team marker is always a vertical banner, regardless of the
+squad's real flag orientation.** The team picker (`TeamRow`) renders a
+squad's marker at its true `orientation` — Spain's flag is genuinely
+horizontal stripes there. But mid-round, on the question screen's header,
+the marker always renders as thin, tall, vertical bands, using `bands` (and
+`weights`) as the colour sequence and ignoring `marker.orientation`
+entirely: Spain reads red/yellow/red left-to-right, not stacked. This is
+`TeamMarker`'s `variant="banner"` (`components/TeamMarker.tsx`,
+`sizes.teamMarkerBanner` in `theme/tokens.ts`) — always pass it on the
+question screen, never the bare `marker` prop. A shape `overlay` (Japan's
+disc, Brazil's diamond) doesn't survive the banner's height, so the banner
+renders it as a third middle band instead of a centred shape — edge/middle/
+edge, in the overlay's colour — derived from the marker's own data, never a
+per-team special case.
+
 One file per squad, so a future contribution touches exactly one file.
 
 Static squad JSON is imported directly. It does **not** belong in a store.

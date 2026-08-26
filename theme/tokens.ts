@@ -188,6 +188,10 @@ export const sizes = {
   teamMarkerRadius: 2,
   // Japan's disc and Brazil's diamond, as a fraction of the marker's height.
   teamMarkerOverlayScale: 0.6,
+  // The "banner" marker variant used mid-round (see TeamMarker's `variant`
+  // prop): thinner and longer than the picker's marker, and always rendered
+  // with vertical bands regardless of the squad's real flag orientation.
+  teamMarkerBanner: { width: 100, height: 3 },
   // Escuadra wordmark's mark, matching the 30px mark beside 23px type in the
   // design source's lockup.
   wordmarkMark: 30,

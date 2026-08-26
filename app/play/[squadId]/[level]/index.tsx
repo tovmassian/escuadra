@@ -121,7 +121,7 @@ export default function Question() {
         </Pressable>
         <View style={styles.teamLabel}>
           <Text style={styles.teamName}>{squad.name}</Text>
-          <TeamMarker marker={squad.marker} />
+          <TeamMarker marker={squad.marker} variant="banner" />
         </View>
         <ScorePill correct={score.correct} total={score.attempted} />
       </View>
