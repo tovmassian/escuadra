@@ -62,7 +62,7 @@ scope, but the folder exists for it).
 ## Schema changes (`types/squad.ts`)
 
 - New exported type: `League = 'la-liga' | 'serie-a' | 'bundesliga' |
-  'ligue-1' | 'premier-league' | 'ucl'`.
+'ligue-1' | 'premier-league' | 'ucl'`.
 - `SquadManifestEntry` gains `league?: League` — present for club squads,
   absent for nation squads. Enables a future picker to group clubs by
   league; not consumed by any screen in this spec.
@@ -75,11 +75,11 @@ New script `scripts/gen-squads.ts`, run via `npm run gen:squads`:
 1. Globs `data/squads/**/*.json`.
 2. Derives `kind` and `league` from the folder path: `nation/<id>.json` →
    `kind: 'nation'`; `club/<league>/<id>.json` → `kind: 'club', league:
-   '<league>'` (folder name validated against the `League` enum — an
+'<league>'` (folder name validated against the `League` enum — an
    unrecognized folder name fails the generation step, not a typecheck
    step, since it's discovered by directory listing).
 3. Writes `lib/squads.generated.ts`: one `import squadXxx from
-   '@/data/squads/.../xxx.json'` per file, plus the `SQUAD_FILES` map —
+'@/data/squads/.../xxx.json'` per file, plus the `SQUAD_FILES` map —
    same shape `lib/squads.ts` hand-writes today, just generated. Import
    identifiers are derived from the squad `id` (camelCased) with a
    generation-time error on collision.

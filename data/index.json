@@ -19,7 +19,7 @@
     "season": "2026",
     "primaryColor": "#B70000",
     "secondaryColor": "#FFFFFF",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#D90012", "#0033A0", "#F2A800"],
       "orientation": "horizontal"
@@ -77,7 +77,7 @@
     "season": "2026",
     "primaryColor": "#C60B1E",
     "secondaryColor": "#FFC400",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#AA151B", "#F1BF00", "#AA151B"],
       "orientation": "horizontal",

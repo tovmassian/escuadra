@@ -110,8 +110,8 @@ marker, lastUpdated, source, members`.
      domestic home. If a club's domestic league isn't one of the big 5,
      don't invent a folder for it — ask the user how to proceed rather than
      guessing a `League` value the codegen script doesn't recognize.
-   `members` is `[{ playerId, no, captain? }]` — shirt number lives on the
-   membership, never on the player.
+     `members` is `[{ playerId, no, captain? }]` — shirt number lives on the
+     membership, never on the player.
 
    - `lastUpdated` — ISO date (`YYYY-MM-DD`) you're writing this file, i.e.
      today, not the "as of" date the Wikipedia section itself claims (that

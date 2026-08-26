@@ -10,8 +10,9 @@ description: Use when checking whether an existing Escuadra squad file (data/squ
 
 Given one or more existing squad ids (or "all"), re-fetch each squad's
 current roster from the Wikipedia page recorded in its own `source` field
-and diff it against what's stored in `data/squads/nation/<id>.json` (or `data/squads/club/<league>/<id>.json` for a club)` and
-`data/players.json`. Report a validity verdict per team.
+and diff it against what's stored in `data/squads/nation/<id>.json` (or
+`data/squads/club/<league>/<id>.json` for a club) and `data/players.json`.
+Report a validity verdict per team.
 
 **Scope: players and membership only, never squad-level identity fields
 (`primaryColor`, `secondaryColor`, `marker`, `season`).** Wikipedia's
