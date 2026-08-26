@@ -35,3 +35,12 @@ export function ladderRows(
     return { level, status: 'locked', unlockHint: `Clear L${level - 1}` };
   });
 }
+
+const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/** Formats a squad's `lastUpdated` (`YYYY-MM-DD`) as "21 Aug 2026" for the
+ *  difficulty screen's staleness footnote. */
+export function formatLastUpdated(isoDate: string): string {
+  const [year, month, day] = isoDate.split('-').map(Number);
+  return `${day} ${MONTHS[(month ?? 1) - 1]} ${year}`;
+}

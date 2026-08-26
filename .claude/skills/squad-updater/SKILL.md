@@ -97,9 +97,20 @@ roster.
      birth from their own Wikipedia infobox rather than leaving it blank.
 
 8. **Write `data/squads/<id>.json`**, matching the existing shape exactly:
-   `id, kind, name, season, primaryColor, secondaryColor, verified, marker, members`.
+   `id, kind, name, season, primaryColor, secondaryColor, verified, marker,
+lastUpdated, source, members`.
    `members` is `[{ playerId, no, captain? }]` — shirt number lives on the
    membership, never on the player.
+
+   - `lastUpdated` — ISO date (`YYYY-MM-DD`) you're writing this file, i.e.
+     today, not the "as of" date the Wikipedia section itself claims (that
+     one still goes in your step-12 report, since it can predate today by
+     weeks).
+   - `source` — the exact Wikipedia article URL you fetched, e.g.
+     `https://en.wikipedia.org/wiki/Argentina_national_football_team`. Set
+     both fields on every write, new squad or refresh — a refresh always
+     overwrites the old `lastUpdated`/`source` with the current ones, the
+     same way it always resets `verified` to `false`.
 
    - `marker` — **required on every squad**, club or nation alike; it's the
      team's sole visual identity element, since crests/badges/shields are
@@ -149,8 +160,8 @@ squad file, not as a follow-up fix.
     command rather than trying alternate invocations one at a time.
 
 12. **Report per team**: players added, removed, or moved club; number
-    changes; the captain; and the "as of" date Wikipedia lists for the
-    section you used.
+    changes; the captain; the "as of" date Wikipedia lists for the section
+    you used; and the `source` URL and `lastUpdated` date you wrote.
 
 ## Quick reference
 
@@ -183,3 +194,5 @@ squad file, not as a follow-up fix.
 - Populating `photo` — it stays `null` in v0 regardless of what Wikipedia has.
 - For a national team, grabbing an old/cached call-up list instead of the
   most recent "Current squad"/"Recent call-ups" section.
+- Leaving `lastUpdated`/`source` stale on a refresh — both get overwritten
+  with the current date and the URL you actually fetched, every time.

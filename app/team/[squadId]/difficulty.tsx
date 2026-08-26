@@ -6,7 +6,7 @@ import { Button } from '@/components/Button';
 import { DifficultyRow } from '@/components/DifficultyRow';
 import { LadderConnector } from '@/components/LadderConnector';
 import type { Level } from '@/lib/questionEngine';
-import { ladderRows } from '@/lib/ladderView';
+import { formatLastUpdated, ladderRows } from '@/lib/ladderView';
 import { getSquad } from '@/lib/squads';
 import { useProgress } from '@/stores/progress';
 import { colors, spacing, typography } from '@/theme/tokens';
@@ -82,6 +82,8 @@ export default function Difficulty() {
           }
         />
       </View>
+
+      <Text style={styles.updated}>Updated {formatLastUpdated(squad.lastUpdated)} · Wikipedia</Text>
     </View>
   );
 }
@@ -98,4 +100,10 @@ const styles = StyleSheet.create({
   title: { ...typography.screenTitle, color: colors.textPrimary, marginBottom: spacing.xxl },
   spacer: { flex: 1 },
   studyButton: { marginTop: spacing.lg },
+  updated: {
+    ...typography.descriptionSmall,
+    color: colors.textMuted,
+    alignSelf: 'flex-end',
+    marginTop: spacing.sm,
+  },
 });

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { ladderRows } from './ladderView';
+import { formatLastUpdated, ladderRows } from './ladderView';
 
 describe('ladderRows', () => {
   it('unlocks level 1 with no history at all', () => {
@@ -44,5 +44,15 @@ describe('ladderRows', () => {
 
   it('returns exactly three rows in level order', () => {
     expect(ladderRows('bar', {}, {}).map((r) => r.level)).toEqual([1, 2, 3]);
+  });
+});
+
+describe('formatLastUpdated', () => {
+  it('formats an ISO date as day month year', () => {
+    expect(formatLastUpdated('2026-08-21')).toBe('21 Aug 2026');
+  });
+
+  it('does not zero-pad the day', () => {
+    expect(formatLastUpdated('2026-01-05')).toBe('5 Jan 2026');
   });
 });

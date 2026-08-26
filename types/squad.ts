@@ -71,6 +71,10 @@ export interface Squad {
   /** The team's sole visual identity element — see `TeamMarker`. Present on
    *  every squad, since crests/badges/shields are never used. */
   marker: TeamMarker;
+  /** ISO date this squad file was last written/synced from its source. */
+  lastUpdated: string;
+  /** The Wikipedia article this squad was scraped from. */
+  source: string;
   members: SquadMember[];
 }
 

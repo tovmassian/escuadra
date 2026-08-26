@@ -11,6 +11,8 @@
     "orientation": "horizontal",
     "overlay": { "shape": "diamond", "color": "#FFDF00" }
   },
+  "lastUpdated": "2026-08-21",
+  "source": "https://en.wikipedia.org/wiki/Brazil_national_football_team",
   "members": [
     {
       "playerId": "alisson",

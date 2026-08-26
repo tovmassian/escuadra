@@ -34,6 +34,8 @@ const squad: Squad = {
   secondaryColor: '#FFFFFF',
   verified: false,
   marker: { bands: ['#EF0107'], orientation: 'vertical' },
+  lastUpdated: '2026-08-21',
+  source: 'https://en.wikipedia.org/wiki/Test_FC',
   members: [],
 };
 
