@@ -2,8 +2,8 @@
 // lib/squads.generated.ts and data/index.json from every file under
 // data/squads/. See docs/superpowers/specs/2026-08-26-data-layer-scaling-design.md.
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
-import { spawnSync } from 'node:child_process';
 import path from 'node:path';
+import { format, resolveConfig } from 'prettier';
 import type { League, Squad, SquadManifestEntry } from '../types/squad';
 
 const REPO_ROOT = path.resolve(import.meta.dirname, '..');
@@ -132,35 +132,27 @@ function buildIndexJson(discovered: Discovered[]): string {
   return JSON.stringify(entries, null, 2) + '\n';
 }
 
-function formatWithPrettier(filePaths: string[]): void {
-  // Invoke prettier's own CJS entrypoint through the current `node` binary
-  // rather than shelling out to the `npx`/`npx.cmd` launcher script. Two
-  // Windows-specific failure modes rule out `npx`: (1) Node's CVE-2024-27980
-  // fix makes spawning a `.cmd`/`.bat` file without `shell: true` throw
-  // EINVAL, and (2) with `shell: true`, spawnSync does not reliably quote
-  // absolute-path argv entries that themselves contain spaces (as this repo's
-  // checkout path does), so `npx.cmd prettier --write "C:\Users\A B\...`
-  // arrives at prettier split apart on the space. Spawning `process.execPath`
-  // (a real .exe, not a shell script) directly on prettier's own entrypoint
-  // sidesteps both: no shell hop, and Node quotes exe argv correctly on its own.
-  const prettierBin = path.join(REPO_ROOT, 'node_modules', 'prettier', 'bin', 'prettier.cjs');
-  const result = spawnSync(process.execPath, [prettierBin, '--write', ...filePaths], {
-    cwd: REPO_ROOT,
-    stdio: 'inherit',
-  });
-  if (result.status !== 0) {
-    throw new Error(`gen-squads: prettier --write failed on ${filePaths.join(', ')}`);
-  }
+// Formats `content` with prettier's programmatic API and writes the result
+// to `filePath`. This avoids shelling out to the `npx`/`prettier` CLI
+// entirely — no subprocess, no OS-specific spawn/quoting semantics, and no
+// assumption about node_modules layout (flat/hoisted vs. nested). Passing
+// `filepath` lets prettier infer the right parser per-file (TypeScript for
+// lib/squads.generated.ts, JSON for data/index.json) instead of hardcoding
+// one; `resolveConfig` picks up this repo's .prettierrc automatically so
+// the style options aren't hand-duplicated here.
+async function formatAndWrite(filePath: string, content: string): Promise<void> {
+  const config = await resolveConfig(filePath);
+  const formatted = await format(content, { ...config, filepath: filePath });
+  writeFileSync(filePath, formatted);
 }
 
-function main(): void {
+async function main(): Promise<void> {
   const discovered = discoverSquadFiles();
-  writeFileSync(GENERATED_TS_PATH, buildGeneratedTs(discovered));
-  writeFileSync(INDEX_JSON_PATH, buildIndexJson(discovered));
-  formatWithPrettier([GENERATED_TS_PATH, INDEX_JSON_PATH]);
+  await formatAndWrite(GENERATED_TS_PATH, buildGeneratedTs(discovered));
+  await formatAndWrite(INDEX_JSON_PATH, buildIndexJson(discovered));
   console.log(
     `gen-squads: wrote ${discovered.length} squads to lib/squads.generated.ts and data/index.json`,
   );
 }
 
-main();
+await main();
