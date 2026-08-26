@@ -162,15 +162,22 @@ export function buildRound(opts: BuildRoundOptions): Question[] {
   const { squad, roster, level, seed = Date.now(), size = ROUND_LENGTH, now = new Date() } = opts;
   const rng = createRng(seed);
 
+  // Numberless members (no assigned shirt number yet) can't be asked about —
+  // the level-1 prompt has nothing to show — but still serve as name
+  // distractors for other subjects below.
+  const questionable = roster.filter(
+    (r): r is RosterEntry & { member: { no: number } } => r.member.no !== null,
+  );
+
   const minRosterSize = level === 3 ? 6 : 4;
-  if (roster.length < minRosterSize) {
+  if (questionable.length < minRosterSize) {
     throw new Error(
-      `buildRound: squad "${squad.id}" has ${roster.length} members, needs at least ${minRosterSize} for level ${level}.`,
+      `buildRound: squad "${squad.id}" has ${questionable.length} numbered members, needs at least ${minRosterSize} for level ${level}.`,
     );
   }
 
   const needed = nameDistractorCount(level);
-  const subjects = shuffle(roster, rng).slice(0, Math.min(size, roster.length));
+  const subjects = shuffle(questionable, rng).slice(0, Math.min(size, questionable.length));
 
   return subjects.map((subject) => {
     const parts: QuestionPart[] = [buildNamePart(subject, roster, needed, rng)];

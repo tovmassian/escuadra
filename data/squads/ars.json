@@ -10,7 +10,7 @@
     "bands": ["#EF0107"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-08-21",
+  "lastUpdated": "2026-08-26",
   "source": "https://en.wikipedia.org/wiki/Arsenal_F.C.",
   "members": [
     {
@@ -18,20 +18,8 @@
       "no": 1
     },
     {
-      "playerId": "kepa",
-      "no": 13
-    },
-    {
-      "playerId": "setford",
-      "no": 32
-    },
-    {
-      "playerId": "hein",
-      "no": 30
-    },
-    {
       "playerId": "saliba",
-      "no": 12
+      "no": 2
     },
     {
       "playerId": "mosquera",
@@ -43,60 +31,20 @@
     },
     {
       "playerId": "hincapie",
-      "no": 21
+      "no": 5
     },
     {
       "playerId": "gabriel",
       "no": 6
     },
     {
-      "playerId": "timber",
-      "no": 2
-    },
-    {
-      "playerId": "calafiori",
-      "no": 33
-    },
-    {
-      "playerId": "lewis-skelly",
-      "no": 17
-    },
-    {
-      "playerId": "kiwior",
-      "no": 15
+      "playerId": "saka",
+      "no": 7
     },
     {
       "playerId": "odegaard",
       "no": 8,
       "captain": true
-    },
-    {
-      "playerId": "norgaard",
-      "no": 16
-    },
-    {
-      "playerId": "merino",
-      "no": 23
-    },
-    {
-      "playerId": "zubimendi",
-      "no": 36
-    },
-    {
-      "playerId": "rice",
-      "no": 41
-    },
-    {
-      "playerId": "vieira",
-      "no": 34
-    },
-    {
-      "playerId": "nwaneri",
-      "no": 45
-    },
-    {
-      "playerId": "saka",
-      "no": 7
     },
     {
       "playerId": "jesus",
@@ -111,24 +59,80 @@
       "no": 11
     },
     {
+      "playerId": "timber",
+      "no": 12
+    },
+    {
+      "playerId": "kepa",
+      "no": 13
+    },
+    {
       "playerId": "gyokeres",
       "no": 14
     },
     {
-      "playerId": "trossard",
-      "no": 19
+      "playerId": "konsa",
+      "no": 15
+    },
+    {
+      "playerId": "tzolis",
+      "no": 17
     },
     {
       "playerId": "madueke",
       "no": 20
     },
     {
-      "playerId": "havertz",
-      "no": 29
+      "playerId": "vieira",
+      "no": 21
+    },
+    {
+      "playerId": "nwaneri",
+      "no": 22
+    },
+    {
+      "playerId": "merino",
+      "no": 23
     },
     {
       "playerId": "nelson",
       "no": 24
+    },
+    {
+      "playerId": "havertz",
+      "no": 29
+    },
+    {
+      "playerId": "meslier",
+      "no": 30
+    },
+    {
+      "playerId": "calafiori",
+      "no": 33
+    },
+    {
+      "playerId": "setford",
+      "no": 35
+    },
+    {
+      "playerId": "zubimendi",
+      "no": 36
+    },
+    {
+      "playerId": "bruno-guimaraes",
+      "no": 39
+    },
+    {
+      "playerId": "rice",
+      "no": 41
+    },
+    {
+      "playerId": "lewis-skelly",
+      "no": 49
+    },
+    {
+      "playerId": "dowman",
+      "no": 56
     }
   ]
 }

@@ -26,5 +26,5 @@ export function studyRows(
   return roster
     .filter((r) => (wanted === null ? true : wanted.has(r.player.id)))
     .filter((r) => positionFilter === 'ALL' || r.player.position === positionFilter)
-    .sort((a, b) => a.member.no - b.member.no);
+    .sort((a, b) => (a.member.no ?? Infinity) - (b.member.no ?? Infinity));
 }

@@ -224,7 +224,7 @@
     "name": "Eberechi Eze",
     "fullName": "Eberechi Eze",
     "birth": "1998-06-29",
-    "position": "FW",
+    "position": "MF",
     "nationality": "England",
     "club": null,
     "photo": null
@@ -236,7 +236,7 @@
     "birth": "2001-06-18",
     "position": "FW",
     "nationality": "Brazil",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -938,7 +938,17 @@
     "fullName": "Ange-Yoan Bonny",
     "birth": "2003-10-11",
     "position": "FW",
-    "nationality": "France",
+    "nationality": "Ivory Coast",
+    "club": "Inter Milan",
+    "photo": null
+  },
+  {
+    "id": "curtis-jones",
+    "name": "Curtis Jones",
+    "fullName": "Curtis Julian Jones",
+    "birth": "2001-01-30",
+    "position": "MF",
+    "nationality": "England",
     "club": "Inter Milan",
     "photo": null
   },
@@ -1179,7 +1189,7 @@
     "fullName": "Ibrahim Mbaye",
     "birth": "2007-05-16",
     "position": "FW",
-    "nationality": "France",
+    "nationality": "Senegal",
     "club": null,
     "photo": null
   },
@@ -1301,7 +1311,7 @@
     "birth": "1992-02-23",
     "position": "MF",
     "nationality": "Brazil",
-    "club": "Manchester United",
+    "club": "Inter Miami",
     "photo": null
   },
   {
@@ -1311,7 +1321,7 @@
     "birth": "1997-11-16",
     "position": "MF",
     "nationality": "Brazil",
-    "club": "Newcastle United",
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -1321,7 +1331,7 @@
     "birth": "1997-08-27",
     "position": "MF",
     "nationality": "Brazil",
-    "club": "West Ham United",
+    "club": "Flamengo",
     "photo": null
   },
   {
@@ -1362,6 +1372,146 @@
     "position": "FW",
     "nationality": "Brazil",
     "club": "Manchester City",
+    "photo": null
+  },
+  {
+    "id": "weverton",
+    "name": "Weverton",
+    "fullName": "Weverton Pereira da Silva",
+    "birth": "1987-12-13",
+    "position": "GK",
+    "nationality": "Brazil",
+    "club": "Grêmio",
+    "photo": null
+  },
+  {
+    "id": "ederson",
+    "name": "Ederson",
+    "fullName": "Ederson Santana de Moraes",
+    "birth": "1993-08-17",
+    "position": "GK",
+    "nationality": "Brazil",
+    "club": "Fenerbahçe",
+    "photo": null
+  },
+  {
+    "id": "danilo-luiz",
+    "name": "Danilo",
+    "fullName": "Danilo Luiz da Silva",
+    "birth": "1991-07-15",
+    "position": "DF",
+    "nationality": "Brazil",
+    "club": "Flamengo",
+    "photo": null
+  },
+  {
+    "id": "bremer",
+    "name": "Bremer",
+    "fullName": "Gleison Bremer Silva Nascimento",
+    "birth": "1997-03-18",
+    "position": "DF",
+    "nationality": "Brazil",
+    "club": "Juventus",
+    "photo": null
+  },
+  {
+    "id": "leo-pereira",
+    "name": "Léo Pereira",
+    "fullName": "Leonardo Pereira dos Santos",
+    "birth": "1996-01-31",
+    "position": "DF",
+    "nationality": "Brazil",
+    "club": "Flamengo",
+    "photo": null
+  },
+  {
+    "id": "roger-ibanez",
+    "name": "Roger Ibañez",
+    "fullName": "Roger Ibañez da Silva",
+    "birth": "1998-11-23",
+    "position": "DF",
+    "nationality": "Brazil",
+    "club": "Al-Ahli",
+    "photo": null
+  },
+  {
+    "id": "ederson-silva",
+    "name": "Éderson",
+    "fullName": "Éderson Silva de Sousa",
+    "birth": "1999-07-06",
+    "position": "MF",
+    "nationality": "Brazil",
+    "club": "Atalanta",
+    "photo": null
+  },
+  {
+    "id": "fabinho",
+    "name": "Fabinho",
+    "fullName": "Fábio Henrique Tavares",
+    "birth": "1993-10-23",
+    "position": "MF",
+    "nationality": "Brazil",
+    "club": "Trabzonspor",
+    "photo": null
+  },
+  {
+    "id": "danilo-santos",
+    "name": "Danilo Santos",
+    "fullName": "Danilo Santos",
+    "birth": "2001-04-29",
+    "position": "MF",
+    "nationality": "Brazil",
+    "club": "Botafogo",
+    "photo": null
+  },
+  {
+    "id": "matheus-cunha",
+    "name": "Matheus Cunha",
+    "fullName": "Matheus Santos Carneiro Cunha",
+    "birth": "1999-05-27",
+    "position": "FW",
+    "nationality": "Brazil",
+    "club": "Manchester United",
+    "photo": null
+  },
+  {
+    "id": "neymar",
+    "name": "Neymar",
+    "fullName": "Neymar da Silva Santos Júnior",
+    "birth": "1992-02-05",
+    "position": "FW",
+    "nationality": "Brazil",
+    "club": "Santos",
+    "photo": null
+  },
+  {
+    "id": "luiz-henrique",
+    "name": "Luiz Henrique",
+    "fullName": "Luiz Henrique de Lima Marques",
+    "birth": "2001-01-02",
+    "position": "FW",
+    "nationality": "Brazil",
+    "club": "Zenit",
+    "photo": null
+  },
+  {
+    "id": "igor-thiago",
+    "name": "Igor Thiago",
+    "fullName": "Igor Thiago Nascimento Rodrigues",
+    "birth": "2001-06-26",
+    "position": "FW",
+    "nationality": "Brazil",
+    "club": "Brentford",
+    "photo": null
+  },
+  {
+    "id": "rayan",
+    "name": "Rayan",
+    "fullName": "Rayan Ferreira Lucas",
+    "birth": "2006-08-03",
+    "position": "FW",
+    "nationality": "Brazil",
+    "club": "Bournemouth",
     "photo": null
   },
 
@@ -1412,7 +1562,7 @@
     "birth": "1998-04-27",
     "position": "DF",
     "nationality": "Argentina",
-    "club": "Tottenham Hotspur",
+    "club": "Atlético Madrid",
     "photo": null
   },
   {
@@ -1442,7 +1592,7 @@
     "birth": "1998-04-06",
     "position": "DF",
     "nationality": "Argentina",
-    "club": "Atlético Madrid",
+    "club": "Roma",
     "photo": null
   },
   {
@@ -1472,7 +1622,7 @@
     "birth": "1994-05-24",
     "position": "MF",
     "nationality": "Argentina",
-    "club": "Atlético Madrid",
+    "club": "Inter Miami",
     "photo": null
   },
   {
@@ -1543,6 +1693,96 @@
     "position": "FW",
     "nationality": "Argentina",
     "club": "Roma",
+    "photo": null
+  },
+  {
+    "id": "senesi",
+    "name": "Marcos Senesi",
+    "fullName": "Marcos Senesi",
+    "birth": "1997-05-10",
+    "position": "DF",
+    "nationality": "Argentina",
+    "club": "Tottenham Hotspur",
+    "photo": null
+  },
+  {
+    "id": "montiel",
+    "name": "Gonzalo Montiel",
+    "fullName": "Gonzalo Ariel Montiel",
+    "birth": "1997-01-01",
+    "position": "DF",
+    "nationality": "Argentina",
+    "club": "River Plate",
+    "photo": null
+  },
+  {
+    "id": "barco",
+    "name": "Valentín Barco",
+    "fullName": "Valentín Barco",
+    "birth": "2004-07-23",
+    "position": "DF",
+    "nationality": "Argentina",
+    "club": "Chelsea",
+    "photo": null
+  },
+  {
+    "id": "medina",
+    "name": "Facundo Medina",
+    "fullName": "Facundo Medina",
+    "birth": "1999-05-28",
+    "position": "DF",
+    "nationality": "Argentina",
+    "club": "Bayer Leverkusen",
+    "photo": null
+  },
+  {
+    "id": "palacios",
+    "name": "Exequiel Palacios",
+    "fullName": "Exequiel Palacios",
+    "birth": "1998-10-05",
+    "position": "MF",
+    "nationality": "Argentina",
+    "club": "Bayer Leverkusen",
+    "photo": null
+  },
+  {
+    "id": "almada",
+    "name": "Thiago Almada",
+    "fullName": "Thiago Almada",
+    "birth": "2001-04-26",
+    "position": "MF",
+    "nationality": "Argentina",
+    "club": "River Plate",
+    "photo": null
+  },
+  {
+    "id": "paz",
+    "name": "Nico Paz",
+    "fullName": "Nico Paz",
+    "birth": "2004-09-08",
+    "position": "MF",
+    "nationality": "Argentina",
+    "club": "Como",
+    "photo": null
+  },
+  {
+    "id": "simeone",
+    "name": "Giuliano Simeone",
+    "fullName": "Giuliano Simeone",
+    "birth": "2002-12-18",
+    "position": "FW",
+    "nationality": "Argentina",
+    "club": "Atlético Madrid",
+    "photo": null
+  },
+  {
+    "id": "lopez",
+    "name": "José Manuel López",
+    "fullName": "José Manuel López",
+    "birth": "2000-12-06",
+    "position": "FW",
+    "nationality": "Argentina",
+    "club": "Palmeiras",
     "photo": null
   },
 
@@ -1654,7 +1894,7 @@
     "birth": "1994-04-25",
     "position": "GK",
     "nationality": "France",
-    "club": "RC Lens",
+    "club": "Rennes",
     "photo": null
   },
   {
@@ -1674,7 +1914,7 @@
     "birth": "1991-03-29",
     "position": "MF",
     "nationality": "France",
-    "club": "Al-Ittihad",
+    "club": "Fenerbahçe",
     "photo": null
   },
   {
@@ -1684,7 +1924,7 @@
     "birth": "1995-04-03",
     "position": "MF",
     "nationality": "France",
-    "club": "Marseille",
+    "club": "AC Milan",
     "photo": null
   },
   {
@@ -1717,6 +1957,76 @@
     "club": "Manchester City",
     "photo": null
   },
+  {
+    "id": "risser",
+    "name": "Robin Risser",
+    "fullName": "Robin Risser",
+    "birth": "2004-12-02",
+    "position": "GK",
+    "nationality": "France",
+    "club": "RC Lens",
+    "photo": null
+  },
+  {
+    "id": "gusto",
+    "name": "Malo Gusto",
+    "fullName": "Malo Gusto",
+    "birth": "2003-05-19",
+    "position": "DF",
+    "nationality": "France",
+    "club": "Chelsea",
+    "photo": null
+  },
+  {
+    "id": "upamecano",
+    "name": "Dayot Upamecano",
+    "fullName": "Dayot Upamecano",
+    "birth": "1998-10-27",
+    "position": "DF",
+    "nationality": "France",
+    "club": "Bayern Munich",
+    "photo": null
+  },
+  {
+    "id": "t-hernandez",
+    "name": "Théo Hernandez",
+    "fullName": "Théo Bernard François Hernandez",
+    "birth": "1997-10-06",
+    "position": "DF",
+    "nationality": "France",
+    "club": "Al-Hilal",
+    "photo": null
+  },
+  {
+    "id": "lacroix",
+    "name": "Maxence Lacroix",
+    "fullName": "Maxence Lacroix",
+    "birth": "2000-04-06",
+    "position": "DF",
+    "nationality": "France",
+    "club": "Chelsea",
+    "photo": null
+  },
+  {
+    "id": "kone",
+    "name": "Manu Koné",
+    "fullName": "Emmanuel Koné",
+    "birth": "2001-05-17",
+    "position": "MF",
+    "nationality": "France",
+    "club": "Roma",
+    "photo": null
+  },
+  {
+    "id": "olise",
+    "name": "Michael Olise",
+    "fullName": "Michael Olise",
+    "birth": "2001-12-12",
+    "position": "FW",
+    "nationality": "France",
+    "club": "Bayern Munich",
+    "photo": null
+  },
 
   {
     "id": "suzuki-zion",
@@ -1725,7 +2035,7 @@
     "birth": "2002-08-21",
     "position": "GK",
     "nationality": "Japan",
-    "club": "Parma",
+    "club": "Aston Villa",
     "photo": null
   },
   {
@@ -1745,7 +2055,7 @@
     "birth": "1998-11-05",
     "position": "DF",
     "nationality": "Japan",
-    "club": "Arsenal",
+    "club": "Crystal Palace",
     "photo": null
   },
   {
@@ -1772,10 +2082,10 @@
     "id": "sugawara",
     "name": "Yukinari Sugawara",
     "fullName": "Yukinari Sugawara",
-    "birth": "1995-12-28",
+    "birth": "2000-06-28",
     "position": "DF",
     "nationality": "Japan",
-    "club": "AZ Alkmaar",
+    "club": "Southampton",
     "photo": null
   },
   {
@@ -1785,7 +2095,7 @@
     "birth": "1991-07-15",
     "position": "DF",
     "nationality": "Japan",
-    "club": "Kawasaki Frontale",
+    "club": "Sint-Truiden",
     "photo": null
   },
   {
@@ -1815,7 +2125,7 @@
     "birth": "1998-09-10",
     "position": "MF",
     "nationality": "Japan",
-    "club": "Fortuna Düsseldorf",
+    "club": "Leeds United",
     "photo": null
   },
   {
@@ -1833,9 +2143,9 @@
     "name": "Ritsu Doan",
     "fullName": "Ritsu Doan",
     "birth": "1998-06-16",
-    "position": "FW",
+    "position": "MF",
     "nationality": "Japan",
-    "club": "Freiburg",
+    "club": "Eintracht Frankfurt",
     "photo": null
   },
   {
@@ -1853,9 +2163,159 @@
     "name": "Junya Ito",
     "fullName": "Junya Ito",
     "birth": "1993-03-09",
-    "position": "FW",
+    "position": "MF",
+    "nationality": "Japan",
+    "club": "Genk",
+    "photo": null
+  },
+  {
+    "id": "osako",
+    "name": "Keisuke Osako",
+    "fullName": "Keisuke Osako",
+    "birth": "1999-07-28",
+    "position": "GK",
+    "nationality": "Japan",
+    "club": "Sanfrecce Hiroshima",
+    "photo": null
+  },
+  {
+    "id": "hayakawa",
+    "name": "Tomoki Hayakawa",
+    "fullName": "Tomoki Hayakawa",
+    "birth": "1999-03-03",
+    "position": "GK",
+    "nationality": "Japan",
+    "club": "Kashima Antlers",
+    "photo": null
+  },
+  {
+    "id": "watanabe",
+    "name": "Tsuyoshi Watanabe",
+    "fullName": "Tsuyoshi Watanabe",
+    "birth": "1997-02-05",
+    "position": "DF",
+    "nationality": "Japan",
+    "club": "Feyenoord",
+    "photo": null
+  },
+  {
+    "id": "seko",
+    "name": "Ayumu Seko",
+    "fullName": "Ayumu Seko",
+    "birth": "2000-06-07",
+    "position": "DF",
+    "nationality": "Japan",
+    "club": "Le Havre",
+    "photo": null
+  },
+  {
+    "id": "hiroki-ito",
+    "name": "Hiroki Ito",
+    "fullName": "Hiroki Ito",
+    "birth": "1999-05-12",
+    "position": "DF",
+    "nationality": "Japan",
+    "club": "Bayern Munich",
+    "photo": null
+  },
+  {
+    "id": "suzuki-junnosuke",
+    "name": "Junnosuke Suzuki",
+    "fullName": "Junnosuke Suzuki",
+    "birth": "2003-07-12",
+    "position": "DF",
+    "nationality": "Japan",
+    "club": "Copenhagen",
+    "photo": null
+  },
+  {
+    "id": "nakamura",
+    "name": "Keito Nakamura",
+    "fullName": "Keito Nakamura",
+    "birth": "2000-07-28",
+    "position": "MF",
     "nationality": "Japan",
     "club": "Reims",
+    "photo": null
+  },
+  {
+    "id": "kamada",
+    "name": "Daichi Kamada",
+    "fullName": "Daichi Kamada",
+    "birth": "1996-08-05",
+    "position": "MF",
+    "nationality": "Japan",
+    "club": "Crystal Palace",
+    "photo": null
+  },
+  {
+    "id": "sano",
+    "name": "Kaishu Sano",
+    "fullName": "Kaishu Sano",
+    "birth": "2000-12-30",
+    "position": "MF",
+    "nationality": "Japan",
+    "club": "Mainz 05",
+    "photo": null
+  },
+  {
+    "id": "machino",
+    "name": "Shuto Machino",
+    "fullName": "Shuto Machino",
+    "birth": "1999-09-30",
+    "position": "FW",
+    "nationality": "Japan",
+    "club": "Borussia Mönchengladbach",
+    "photo": null
+  },
+  {
+    "id": "goto",
+    "name": "Keisuke Goto",
+    "fullName": "Keisuke Goto",
+    "birth": "2005-06-03",
+    "position": "FW",
+    "nationality": "Japan",
+    "club": "Freiburg",
+    "photo": null
+  },
+  {
+    "id": "maeda",
+    "name": "Daizen Maeda",
+    "fullName": "Daizen Maeda",
+    "birth": "1997-10-20",
+    "position": "FW",
+    "nationality": "Japan",
+    "club": "Ipswich Town",
+    "photo": null
+  },
+  {
+    "id": "suzuki-yuito",
+    "name": "Yuito Suzuki",
+    "fullName": "Yuito Suzuki",
+    "birth": "2001-10-25",
+    "position": "FW",
+    "nationality": "Japan",
+    "club": "Freiburg",
+    "photo": null
+  },
+  {
+    "id": "ogawa",
+    "name": "Koki Ogawa",
+    "fullName": "Koki Ogawa",
+    "birth": "1997-08-08",
+    "position": "FW",
+    "nationality": "Japan",
+    "club": "Machida Zelvia",
+    "photo": null
+  },
+  {
+    "id": "shiogai",
+    "name": "Kento Shiogai",
+    "fullName": "Kento Shiogai",
+    "birth": "2005-03-26",
+    "position": "FW",
+    "nationality": "Japan",
+    "club": "Wolfsburg",
     "photo": null
   },
 
@@ -2320,6 +2780,96 @@
     "position": "FW",
     "nationality": "Armenia",
     "club": "Podbrezová",
+    "photo": null
+  },
+  {
+    "id": "konsa",
+    "name": "Ezri Konsa",
+    "fullName": "Ezri Ngoyo Konsa",
+    "birth": "1997-10-23",
+    "position": "DF",
+    "nationality": "England",
+    "club": null,
+    "photo": null
+  },
+  {
+    "id": "tzolis",
+    "name": "Christos Tzolis",
+    "fullName": "Christos Tzolis",
+    "birth": "2002-01-30",
+    "position": "FW",
+    "nationality": "Greece",
+    "club": null,
+    "photo": null
+  },
+  {
+    "id": "meslier",
+    "name": "Illan Meslier",
+    "fullName": "Illan Stéphane Meslier",
+    "birth": "2000-03-02",
+    "position": "GK",
+    "nationality": "France",
+    "club": null,
+    "photo": null
+  },
+  {
+    "id": "dowman",
+    "name": "Max Dowman",
+    "fullName": "Max Robert Dowman",
+    "birth": "2009-12-31",
+    "position": "FW",
+    "nationality": "England",
+    "club": null,
+    "photo": null
+  },
+  {
+    "id": "cancelo",
+    "name": "João Cancelo",
+    "fullName": "João Pedro Cavaco Cancelo",
+    "birth": "1994-05-27",
+    "position": "DF",
+    "nationality": "Portugal",
+    "club": "Barcelona",
+    "photo": null
+  },
+  {
+    "id": "adeyemi",
+    "name": "Karim Adeyemi",
+    "fullName": "Karim David Adeyemi",
+    "birth": "2002-01-18",
+    "position": "FW",
+    "nationality": "Germany",
+    "club": "Barcelona",
+    "photo": null
+  },
+  {
+    "id": "christensen",
+    "name": "Andreas Christensen",
+    "fullName": "Andreas Bødtker Christensen",
+    "birth": "1996-04-10",
+    "position": "DF",
+    "nationality": "Denmark",
+    "club": "Barcelona",
+    "photo": null
+  },
+  {
+    "id": "gordon",
+    "name": "Anthony Gordon",
+    "fullName": "Anthony Michael Gordon",
+    "birth": "2001-02-24",
+    "position": "FW",
+    "nationality": "England",
+    "club": "Barcelona",
+    "photo": null
+  },
+  {
+    "id": "bisiwu",
+    "name": "Jesse Bisiwu",
+    "fullName": "Jesse Eugen K. Bisiwu",
+    "birth": "2008-01-22",
+    "position": "FW",
+    "nationality": "Belgium",
+    "club": "Barcelona",
     "photo": null
   }
 ]

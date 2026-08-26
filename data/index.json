@@ -19,7 +19,7 @@
     "season": "2026/27",
     "primaryColor": "#FFFFFF",
     "secondaryColor": "#FEBE10",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#FFFFFF"],
       "orientation": "vertical"
@@ -45,7 +45,7 @@
     "season": "2026/27",
     "primaryColor": "#0068A8",
     "secondaryColor": "#000000",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#0068A8", "#000000"],
       "orientation": "vertical"
@@ -99,7 +99,7 @@
     "season": "2026",
     "primaryColor": "#C60B1E",
     "secondaryColor": "#FFC400",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#AA151B", "#F1BF00", "#AA151B"],
       "orientation": "horizontal",
@@ -140,7 +140,7 @@
     "season": "2026",
     "primaryColor": "#B70000",
     "secondaryColor": "#FFFFFF",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#D90012", "#0033A0", "#F2A800"],
       "orientation": "horizontal"

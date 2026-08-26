@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "overlay": { "shape": "diamond", "color": "#FFDF00" }
   },
-  "lastUpdated": "2026-08-21",
+  "lastUpdated": "2026-08-26",
   "source": "https://en.wikipedia.org/wiki/Brazil_national_football_team",
   "members": [
     {
@@ -19,16 +19,12 @@
       "no": 1
     },
     {
-      "playerId": "bento",
+      "playerId": "weverton",
       "no": 12
     },
     {
-      "playerId": "hugo-souza",
-      "no": 22
-    },
-    {
-      "playerId": "douglas-santos",
-      "no": 2
+      "playerId": "ederson",
+      "no": 23
     },
     {
       "playerId": "gabriel",
@@ -40,68 +36,88 @@
       "captain": true
     },
     {
-      "playerId": "casemiro",
-      "no": 5
-    },
-    {
-      "playerId": "alexsandro",
+      "playerId": "alex-sandro",
       "no": 6
     },
     {
-      "playerId": "vinicius",
-      "no": 7
+      "playerId": "danilo-luiz",
+      "no": 13
+    },
+    {
+      "playerId": "bremer",
+      "no": 14
+    },
+    {
+      "playerId": "leo-pereira",
+      "no": 15
+    },
+    {
+      "playerId": "douglas-santos",
+      "no": 16
+    },
+    {
+      "playerId": "roger-ibanez",
+      "no": 24
+    },
+    {
+      "playerId": "ederson-silva",
+      "no": 2
+    },
+    {
+      "playerId": "casemiro",
+      "no": 5
     },
     {
       "playerId": "bruno-guimaraes",
       "no": 8
     },
     {
-      "playerId": "raphinha",
-      "no": 9
-    },
-    {
-      "playerId": "paqueta",
-      "no": 10
-    },
-    {
-      "playerId": "rodrygo",
-      "no": 11
-    },
-    {
-      "playerId": "alex-sandro",
-      "no": 14
-    },
-    {
-      "playerId": "andrey-santos",
-      "no": 15
-    },
-    {
-      "playerId": "caio-henrique",
-      "no": 16
-    },
-    {
-      "playerId": "wesley",
+      "playerId": "fabinho",
       "no": 17
     },
     {
-      "playerId": "endrick",
+      "playerId": "danilo-santos",
       "no": 18
     },
     {
-      "playerId": "joelinton",
-      "no": 19
-    },
-    {
-      "playerId": "savinho",
+      "playerId": "paqueta",
       "no": 20
     },
     {
-      "playerId": "richarlison",
+      "playerId": "vinicius",
+      "no": 7
+    },
+    {
+      "playerId": "matheus-cunha",
+      "no": 9
+    },
+    {
+      "playerId": "neymar",
+      "no": 10
+    },
+    {
+      "playerId": "raphinha",
+      "no": 11
+    },
+    {
+      "playerId": "endrick",
+      "no": 19
+    },
+    {
+      "playerId": "luiz-henrique",
       "no": 21
     },
     {
-      "playerId": "vanderson",
-      "no": 23
+      "playerId": "martinelli",
+      "no": 22
+    },
+    {
+      "playerId": "igor-thiago",
+      "no": 25
+    },
+    {
+      "playerId": "rayan",
+      "no": 26
     }
   ]
 }

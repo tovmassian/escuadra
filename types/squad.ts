@@ -23,7 +23,11 @@ export interface Player {
 
 export interface SquadMember {
   playerId: string;
-  no: number;
+  /** Null for a squad member Wikipedia lists without an assigned shirt
+   *  number (e.g. a fresh signing). Excluded from quiz question subjects —
+   *  the level-1 prompt has nothing to show without a number — but still
+   *  appears in Study mode and as a name distractor for other questions. */
+  no: number | null;
   captain?: boolean;
 }
 

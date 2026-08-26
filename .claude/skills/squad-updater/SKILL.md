@@ -1,5 +1,6 @@
 ---
 name: squad-updater
+context: fork
 description: Use when creating or refreshing an Escuadra squad file (data/squads/<id>.json) from Wikipedia — adding a new club/national team or syncing an existing one's roster, shirt numbers, or players.json entries. Accepts one or more team names and repeats the procedure for each, sequentially.
 ---
 

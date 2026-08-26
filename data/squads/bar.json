@@ -10,49 +10,77 @@
     "bands": ["#A50044", "#004D98"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-08-21",
+  "lastUpdated": "2026-08-26",
   "source": "https://en.wikipedia.org/wiki/FC_Barcelona",
   "members": [
     {
       "playerId": "joan-garcia",
-      "no": 13
+      "no": 1
     },
     {
-      "playerId": "szczesny",
-      "no": 25
-    },
-    {
-      "playerId": "cubarsi",
-      "no": 5
-    },
-    {
-      "playerId": "kounde",
-      "no": 23
-    },
-    {
-      "playerId": "araujo",
-      "no": 4
+      "playerId": "cancelo",
+      "no": 2
     },
     {
       "playerId": "balde",
       "no": 3
     },
     {
-      "playerId": "eric-garcia",
-      "no": 24
+      "playerId": "cubarsi",
+      "no": 5
+    },
+    {
+      "playerId": "gavi",
+      "no": 6
+    },
+    {
+      "playerId": "fermin",
+      "no": 7
+    },
+    {
+      "playerId": "pedri",
+      "no": 8
+    },
+    {
+      "playerId": "yamal",
+      "no": 10
+    },
+    {
+      "playerId": "raphinha",
+      "no": 11,
+      "captain": true
+    },
+    {
+      "playerId": "szczesny",
+      "no": 13
+    },
+    {
+      "playerId": "adeyemi",
+      "no": 14
+    },
+    {
+      "playerId": "christensen",
+      "no": 15
+    },
+    {
+      "playerId": "rodri",
+      "no": 16
+    },
+    {
+      "playerId": "gordon",
+      "no": 17
     },
     {
       "playerId": "martin",
       "no": 18
     },
     {
-      "playerId": "pedri",
-      "no": 8,
-      "captain": true
+      "playerId": "bardghji",
+      "no": 19
     },
     {
-      "playerId": "gavi",
-      "no": 6
+      "playerId": "dani-olmo",
+      "no": 20
     },
     {
       "playerId": "de-jong",
@@ -63,32 +91,16 @@
       "no": 22
     },
     {
-      "playerId": "fermin",
-      "no": 16
+      "playerId": "kounde",
+      "no": 23
     },
     {
-      "playerId": "dani-olmo",
-      "no": 20
+      "playerId": "eric-garcia",
+      "no": 24
     },
     {
-      "playerId": "lewandowski",
-      "no": 9
-    },
-    {
-      "playerId": "raphinha",
-      "no": 11
-    },
-    {
-      "playerId": "yamal",
-      "no": 10
-    },
-    {
-      "playerId": "rashford",
-      "no": 14
-    },
-    {
-      "playerId": "bardghji",
-      "no": 28
+      "playerId": "bisiwu",
+      "no": 27
     }
   ]
 }

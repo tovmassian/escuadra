@@ -3,7 +3,8 @@ import { StyleSheet, Text, View } from 'react-native';
 import { colors, sizes, spacing, typography } from '@/theme/tokens';
 
 interface StudyRowProps {
-  number: number;
+  /** Null when Wikipedia hasn't assigned this player a shirt number yet. */
+  number: number | null;
   name: string;
   position: string;
   /** Nationality (club squads) or club (nation squads) — see
@@ -14,7 +15,7 @@ interface StudyRowProps {
 export function StudyRow({ number, name, position, affiliation }: StudyRowProps) {
   return (
     <View style={styles.row}>
-      <Text style={[styles.number, { width: sizes.studyColumn.no }]}>{number}</Text>
+      <Text style={[styles.number, { width: sizes.studyColumn.no }]}>{number ?? '—'}</Text>
       <Text style={styles.name} numberOfLines={1}>
         {name}
       </Text>

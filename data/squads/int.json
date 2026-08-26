@@ -5,12 +5,12 @@
   "season": "2026/27",
   "primaryColor": "#0068A8",
   "secondaryColor": "#000000",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#0068A8", "#000000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-08-21",
+  "lastUpdated": "2026-08-26",
   "source": "https://en.wikipedia.org/wiki/Inter_Milan",
   "members": [
     {
@@ -113,6 +113,10 @@
     {
       "playerId": "spence",
       "no": 99
+    },
+    {
+      "playerId": "curtis-jones",
+      "no": null
     }
   ]
 }

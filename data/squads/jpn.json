@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "overlay": { "shape": "disc", "color": "#BC002D" }
   },
-  "lastUpdated": "2026-08-21",
+  "lastUpdated": "2026-08-26",
   "source": "https://en.wikipedia.org/wiki/Japan_national_football_team",
   "members": [
     {
@@ -19,57 +19,105 @@
       "no": 1
     },
     {
-      "playerId": "gonda",
+      "playerId": "osako",
       "no": 12
     },
     {
-      "playerId": "itakura",
-      "no": 5
+      "playerId": "hayakawa",
+      "no": 23
     },
     {
-      "playerId": "nagatomo",
-      "no": 6
+      "playerId": "sugawara",
+      "no": 2
     },
     {
       "playerId": "taniguchi",
       "no": 3
     },
     {
+      "playerId": "itakura",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "nagatomo",
+      "no": 5
+    },
+    {
+      "playerId": "watanabe",
+      "no": 16
+    },
+    {
+      "playerId": "seko",
+      "no": 20
+    },
+    {
+      "playerId": "hiroki-ito",
+      "no": 21
+    },
+    {
       "playerId": "tomiyasu",
       "no": 22
     },
     {
-      "playerId": "sugawara",
-      "no": 19
-    },
-    {
-      "playerId": "endo",
-      "no": 7,
-      "captain": true
-    },
-    {
-      "playerId": "morita",
-      "no": 8
+      "playerId": "suzuki-junnosuke",
+      "no": 25
     },
     {
       "playerId": "tanaka",
-      "no": 14
+      "no": 7
     },
     {
       "playerId": "kubo",
-      "no": 15
-    },
-    {
-      "playerId": "ueda",
-      "no": 9
+      "no": 8
     },
     {
       "playerId": "doan",
       "no": 10
     },
     {
+      "playerId": "nakamura",
+      "no": 13
+    },
+    {
       "playerId": "junya-ito",
+      "no": 14
+    },
+    {
+      "playerId": "kamada",
+      "no": 15
+    },
+    {
+      "playerId": "sano",
+      "no": 24
+    },
+    {
+      "playerId": "machino",
+      "no": 6
+    },
+    {
+      "playerId": "goto",
+      "no": 9
+    },
+    {
+      "playerId": "maeda",
       "no": 11
+    },
+    {
+      "playerId": "suzuki-yuito",
+      "no": 17
+    },
+    {
+      "playerId": "ueda",
+      "no": 18
+    },
+    {
+      "playerId": "ogawa",
+      "no": 19
+    },
+    {
+      "playerId": "shiogai",
+      "no": 26
     }
   ]
 }

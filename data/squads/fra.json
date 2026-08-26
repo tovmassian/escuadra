@@ -10,20 +10,32 @@
     "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-08-21",
+  "lastUpdated": "2026-08-26",
   "source": "https://en.wikipedia.org/wiki/France_national_football_team",
   "members": [
+    {
+      "playerId": "samba",
+      "no": 1
+    },
     {
       "playerId": "maignan",
       "no": 16
     },
     {
-      "playerId": "chevalier",
+      "playerId": "risser",
       "no": 23
     },
     {
-      "playerId": "samba",
-      "no": 30
+      "playerId": "gusto",
+      "no": 2
+    },
+    {
+      "playerId": "digne",
+      "no": 3
+    },
+    {
+      "playerId": "upamecano",
+      "no": 4
     },
     {
       "playerId": "kounde",
@@ -31,47 +43,59 @@
     },
     {
       "playerId": "konate",
-      "no": 4
+      "no": 15
     },
     {
       "playerId": "saliba",
       "no": 17
     },
     {
+      "playerId": "t-hernandez",
+      "no": 19
+    },
+    {
       "playerId": "l-hernandez",
       "no": 21
     },
     {
-      "playerId": "digne",
-      "no": 13
+      "playerId": "lacroix",
+      "no": 26
     },
     {
-      "playerId": "mendy",
-      "no": 22
+      "playerId": "kone",
+      "no": 6
     },
     {
       "playerId": "tchouameni",
       "no": 8
     },
     {
-      "playerId": "camavinga",
-      "no": 6
-    },
-    {
       "playerId": "kante",
-      "no": 14
+      "no": 13
     },
     {
       "playerId": "rabiot",
-      "no": 26
+      "no": 14
     },
     {
       "playerId": "zaire-emery",
-      "no": 9
+      "no": 18
+    },
+    {
+      "playerId": "cherki",
+      "no": 24
     },
     {
       "playerId": "akliouche",
-      "no": 20
+      "no": 25
+    },
+    {
+      "playerId": "dembele",
+      "no": 7
+    },
+    {
+      "playerId": "thuram",
+      "no": 9
     },
     {
       "playerId": "mbappe",
@@ -79,28 +103,20 @@
       "captain": true
     },
     {
-      "playerId": "dembele",
+      "playerId": "olise",
       "no": 11
-    },
-    {
-      "playerId": "doue",
-      "no": 18
     },
     {
       "playerId": "barcola",
       "no": 12
     },
     {
-      "playerId": "griezmann",
-      "no": 7
+      "playerId": "doue",
+      "no": 20
     },
     {
       "playerId": "mateta",
-      "no": 15
-    },
-    {
-      "playerId": "cherki",
-      "no": 19
+      "no": 22
     }
   ]
 }

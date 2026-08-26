@@ -24,7 +24,9 @@ describe('squad data integrity', () => {
       });
 
       it('has no duplicate shirt numbers', () => {
-        const numbers = roster.map((r) => r.member.no);
+        // Numberless members (no assigned shirt number yet) are excluded —
+        // multiple of them isn't a duplicate-number collision.
+        const numbers = roster.map((r) => r.member.no).filter((n): n is number => n !== null);
         expect(new Set(numbers).size).toBe(numbers.length);
       });
 
@@ -70,6 +72,14 @@ describe('squad data integrity', () => {
 
       it('agrees between the manifest and the squad file', () => {
         expect(getSquad(manifest.id)?.marker).toEqual(manifest.marker);
+      });
+
+      // The squad file is the source of truth for `verified` — squad-verifier
+      // and squad-updater only ever write it there — but the manifest carries
+      // its own copy so the picker can show it without importing the full
+      // roster. This catches the two falling out of sync.
+      it('has a verified flag matching the squad file', () => {
+        expect(getSquad(manifest.id)?.verified).toBe(manifest.verified);
       });
 
       it('has a marker orientation of horizontal or vertical', () => {
