@@ -12,7 +12,8 @@
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
-    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test",
+    "gen:squads": "node scripts/gen-squads.ts",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run gen:squads && git diff --exit-code -- lib/squads.generated.ts data/index.json",
     "prepare": "husky",
     "format:check": "prettier --check ."
   },
