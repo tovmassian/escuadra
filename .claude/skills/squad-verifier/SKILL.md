@@ -1,7 +1,7 @@
 ---
 name: squad-verifier
 context: fork
-description: Use when checking whether an existing Escuadra squad file (data/squads/<id>.json) still matches its Wikipedia source — spot-checking one team or auditing several after a while, before trusting or re-verifying `verified` data. Produces a validity verdict per team; the only write it ever makes is setting that squad's own `verified` flag to match the verdict (`true` on VALID, `false` otherwise).
+description: Use when checking whether an existing Escuadra squad file (data/squads/nation/<id>.json or data/squads/club/<league>/<id>.json for a club) still matches its Wikipedia source — spot-checking one team or auditing several after a while, before trusting or re-verifying `verified` data. Produces a validity verdict per team; the only write it ever makes is setting that squad's own `verified` flag to match the verdict (`true` on VALID, `false` otherwise).
 ---
 
 # Squad Verifier
@@ -10,7 +10,7 @@ description: Use when checking whether an existing Escuadra squad file (data/squ
 
 Given one or more existing squad ids (or "all"), re-fetch each squad's
 current roster from the Wikipedia page recorded in its own `source` field
-and diff it against what's stored in `data/squads/<id>.json` and
+and diff it against what's stored in `data/squads/nation/<id>.json` (or `data/squads/club/<league>/<id>.json` for a club)` and
 `data/players.json`. Report a validity verdict per team.
 
 **Scope: players and membership only, never squad-level identity fields
@@ -68,10 +68,15 @@ is fine.
 
 ## Procedure (per team)
 
-1. **Read the stored squad file** `data/squads/<id>.json` — note `kind`,
-   `source`, and every `members` entry (`playerId`, `no`, `captain?`).
-   `name`, `season`, `primaryColor`, `secondaryColor`, and `marker` are out
-   of scope (see Scope above) — read past them, don't verify them.
+1. **Locate and read the stored squad file.** The path depends on `kind`
+   and, for a club, `league` — check `data/index.json` for this squad's
+   `kind`/`league`, or search under `data/squads/` for the file whose `id`
+   matches if you're unsure. Nation squads live at
+   `data/squads/nation/<id>.json`; club squads live at
+   `data/squads/club/<league>/<id>.json`. Note `kind`, `source`, and every
+   `members` entry (`playerId`, `no`, `captain?`). `name`, `season`,
+   `primaryColor`, `secondaryColor`, and `marker` are out of scope (see
+   Scope above) — read past them, don't verify them.
 
 2. **Resolve each `playerId`** against `data/players.json` to get `name`,
    `position`, `nationality`, `club`, `birth`.
@@ -111,8 +116,13 @@ is fine.
    `STALE`/`INVALID` → `verified: false`, even if it was `true` going in —
    that's exactly the "verified once, now drifted" case this flag exists
    to catch, so leaving a stale `true` in place defeats the point of
-   running verification. Write only that one field in
-   `data/squads/<id>.json`; never touch `players.json` or `index.json`.
+   running verification. Write only that one field, in the squad file at its nested path
+   (`data/squads/nation/<id>.json` or `data/squads/club/<league>/<id>.json`);
+   never touch `players.json` or `index.json` — `index.json` is generated
+   from the squad files by `npm run gen:squads` and will pick up the flip
+   next time someone regenerates it (`npm run check`'s diff guard catches
+   the interim staleness rather than this skill needing to run the
+   generator itself).
 
 7. **Return a verdict.** `VALID` means the stored roster agrees with the
    current Wikipedia page in every checked respect — for a `VALID` team,
