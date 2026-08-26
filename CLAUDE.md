@@ -106,11 +106,14 @@ Shirt number belongs to **squad membership, not to the player** — a player has
 different numbers for club and country. Do not denormalise it onto the player.
 
 ```
-data/index.json        squad manifest
-data/players.json      { id, name, birth, position, nationality, photo: null }
-data/squads/<id>.json  { id, kind: 'club'|'nation', name, season, verified,
-                         primaryColor, secondaryColor, marker,
-                         members: [{ playerId, no, captain? }] }
+data/index.json                       squad manifest — GENERATED, see below
+data/players.json                     { id, name, birth, position, nationality, photo: null }
+data/squads/nation/<id>.json          { id, kind: 'nation', name, season, verified,
+                                         primaryColor, secondaryColor, marker,
+                                         members: [{ playerId, no, captain? }] }
+data/squads/club/<league>/<id>.json   same shape, kind: 'club'. <league> is one of
+                                       la-liga, serie-a, bundesliga, ligue-1,
+                                       premier-league, ucl (see League in types/squad.ts)
 ```
 
 A player has **exactly one** position, not an array. Real players are more
@@ -133,8 +136,9 @@ disc or Brazil's diamond). For a nation the marker _is_ the national flag;
 for a club it's the club's own colours laid out as bands — never an emblem.
 Both `data/index.json` (the picker manifest) and each squad file carry
 `primaryColor`/`secondaryColor`/`marker`, since the picker never imports full
-squad JSON — `marker` must be duplicated identically into `data/index.json`
-(`lib/squads.test.ts` asserts the two agree).
+squad JSON. `data/index.json` is generated from the squad files by
+`npm run gen:squads` (`scripts/gen-squads.ts`) — never hand-edit it;
+`npm run check` fails if it's out of sync with what the generator produces.
 
 **In-round team marker is always a vertical banner, regardless of the
 squad's real flag orientation.** The team picker (`TeamRow`) renders a
@@ -152,6 +156,12 @@ edge, in the overlay's colour — derived from the marker's own data, never a
 per-team special case.
 
 One file per squad, so a future contribution touches exactly one file.
+
+`League` (`types/squad.ts`) is the closed set of big-5-league folder names
+under `data/squads/club/`, plus `ucl` for a Champions League group-stage
+club with no big-5 domestic home. `SquadManifestEntry.league` carries it on
+club entries (absent on nation entries) — not consumed by any screen yet,
+but available for a future picker that groups clubs by league.
 
 Static squad JSON is imported directly. It does **not** belong in a store.
 
