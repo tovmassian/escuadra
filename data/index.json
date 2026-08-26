@@ -1,85 +1,5 @@
 [
   {
-    "id": "ars",
-    "kind": "club",
-    "name": "Arsenal",
-    "season": "2025/26",
-    "primaryColor": "#EF0107",
-    "secondaryColor": "#FFFFFF",
-    "verified": true,
-    "marker": {
-      "bands": ["#EF0107"],
-      "orientation": "vertical"
-    }
-  },
-  {
-    "id": "rma",
-    "kind": "club",
-    "name": "Real Madrid",
-    "season": "2026/27",
-    "primaryColor": "#FFFFFF",
-    "secondaryColor": "#FEBE10",
-    "verified": true,
-    "marker": {
-      "bands": ["#FFFFFF"],
-      "orientation": "vertical"
-    }
-  },
-  {
-    "id": "bar",
-    "kind": "club",
-    "name": "Barcelona",
-    "season": "2025/26",
-    "primaryColor": "#A50044",
-    "secondaryColor": "#004D98",
-    "verified": true,
-    "marker": {
-      "bands": ["#A50044", "#004D98"],
-      "orientation": "vertical"
-    }
-  },
-  {
-    "id": "int",
-    "kind": "club",
-    "name": "Inter Milan",
-    "season": "2026/27",
-    "primaryColor": "#0068A8",
-    "secondaryColor": "#000000",
-    "verified": true,
-    "marker": {
-      "bands": ["#0068A8", "#000000"],
-      "orientation": "vertical"
-    }
-  },
-  {
-    "id": "psg",
-    "kind": "club",
-    "name": "Paris Saint-Germain",
-    "season": "2025/26",
-    "primaryColor": "#004170",
-    "secondaryColor": "#DA291C",
-    "verified": true,
-    "marker": {
-      "bands": ["#004170", "#DA291C", "#004170"],
-      "orientation": "vertical",
-      "weights": [2, 1, 2]
-    }
-  },
-  {
-    "id": "bra",
-    "kind": "nation",
-    "name": "Brazil",
-    "season": "2026",
-    "primaryColor": "#FFDF00",
-    "secondaryColor": "#009739",
-    "verified": true,
-    "marker": {
-      "bands": ["#009739"],
-      "orientation": "horizontal",
-      "overlay": { "shape": "diamond", "color": "#FFDF00" }
-    }
-  },
-  {
     "id": "arg",
     "kind": "nation",
     "name": "Argentina",
@@ -93,13 +13,71 @@
     }
   },
   {
+    "id": "arm",
+    "kind": "nation",
+    "name": "Armenia",
+    "season": "2026",
+    "primaryColor": "#B70000",
+    "secondaryColor": "#FFFFFF",
+    "verified": false,
+    "marker": {
+      "bands": ["#D90012", "#0033A0", "#F2A800"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "ars",
+    "kind": "club",
+    "name": "Arsenal",
+    "season": "2025/26",
+    "primaryColor": "#EF0107",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#EF0107"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
+    "id": "bar",
+    "kind": "club",
+    "name": "Barcelona",
+    "season": "2025/26",
+    "primaryColor": "#A50044",
+    "secondaryColor": "#004D98",
+    "verified": true,
+    "marker": {
+      "bands": ["#A50044", "#004D98"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "bra",
+    "kind": "nation",
+    "name": "Brazil",
+    "season": "2026",
+    "primaryColor": "#FFDF00",
+    "secondaryColor": "#009739",
+    "verified": true,
+    "marker": {
+      "bands": ["#009739"],
+      "orientation": "horizontal",
+      "overlay": {
+        "shape": "diamond",
+        "color": "#FFDF00"
+      }
+    }
+  },
+  {
     "id": "esp",
     "kind": "nation",
     "name": "Spain",
     "season": "2026",
     "primaryColor": "#C60B1E",
     "secondaryColor": "#FFC400",
-    "verified": true,
+    "verified": false,
     "marker": {
       "bands": ["#AA151B", "#F1BF00", "#AA151B"],
       "orientation": "horizontal",
@@ -120,6 +98,20 @@
     }
   },
   {
+    "id": "int",
+    "kind": "club",
+    "name": "Inter Milan",
+    "season": "2026/27",
+    "primaryColor": "#0068A8",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#0068A8", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
     "id": "jpn",
     "kind": "nation",
     "name": "Japan",
@@ -130,20 +122,39 @@
     "marker": {
       "bands": ["#FFFFFF"],
       "orientation": "horizontal",
-      "overlay": { "shape": "disc", "color": "#BC002D" }
+      "overlay": {
+        "shape": "disc",
+        "color": "#BC002D"
+      }
     }
   },
   {
-    "id": "arm",
-    "kind": "nation",
-    "name": "Armenia",
-    "season": "2026",
-    "primaryColor": "#B70000",
-    "secondaryColor": "#FFFFFF",
+    "id": "psg",
+    "kind": "club",
+    "name": "Paris Saint-Germain",
+    "season": "2025/26",
+    "primaryColor": "#004170",
+    "secondaryColor": "#DA291C",
     "verified": true,
     "marker": {
-      "bands": ["#D90012", "#0033A0", "#F2A800"],
-      "orientation": "horizontal"
-    }
+      "bands": ["#004170", "#DA291C", "#004170"],
+      "orientation": "vertical",
+      "weights": [2, 1, 2]
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "rma",
+    "kind": "club",
+    "name": "Real Madrid",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#FEBE10",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
   }
 ]
