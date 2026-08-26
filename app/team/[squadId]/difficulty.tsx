@@ -3,13 +3,13 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
-import { ConnectorLine } from '@/components/ConnectorLine';
 import { DifficultyRow } from '@/components/DifficultyRow';
+import { LadderConnector } from '@/components/LadderConnector';
 import type { Level } from '@/lib/questionEngine';
 import { ladderRows } from '@/lib/ladderView';
 import { getSquad } from '@/lib/squads';
 import { useProgress } from '@/stores/progress';
-import { colors, sizes, spacing, typography } from '@/theme/tokens';
+import { colors, spacing, typography } from '@/theme/tokens';
 
 const LEVEL_COPY: Record<Level, { title: string; description: string }> = {
   1: {
@@ -43,16 +43,12 @@ export default function Difficulty() {
       <Text style={styles.eyebrow}>{squad.name.toUpperCase()}</Text>
       <Text style={styles.title}>Choose Difficulty</Text>
 
-      <View style={styles.ladder}>
-        <View style={styles.connector}>
-          <ConnectorLine />
-        </View>
-        <View style={styles.rows}>
-          {ladderRows(squad.id, bestScores, completedLevels).map((row) => {
-            const copy = LEVEL_COPY[row.level];
-            return (
+      <View>
+        {ladderRows(squad.id, bestScores, completedLevels).map((row, i, rows) => {
+          const copy = LEVEL_COPY[row.level];
+          return (
+            <React.Fragment key={row.level}>
               <DifficultyRow
-                key={row.level}
                 level={row.level}
                 title={copy.title}
                 description={copy.description}
@@ -69,9 +65,10 @@ export default function Difficulty() {
                         })
                 }
               />
-            );
-          })}
-        </View>
+              {i < rows.length - 1 && <LadderConnector active={row.status !== 'locked'} />}
+            </React.Fragment>
+          );
+        })}
       </View>
       <View style={styles.spacer} />
 
@@ -99,14 +96,6 @@ const styles = StyleSheet.create({
   back: { ...typography.secondary, color: colors.textSecondary },
   eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, marginTop: spacing.md },
   title: { ...typography.screenTitle, color: colors.textPrimary, marginBottom: spacing.xxl },
-  ladder: { position: 'relative' },
-  connector: {
-    position: 'absolute',
-    left: sizes.difficultyConnectorOffset,
-    top: spacing.xl,
-    bottom: spacing.xl,
-  },
-  rows: { gap: spacing.md },
   spacer: { flex: 1 },
   studyButton: { marginTop: spacing.lg },
 });

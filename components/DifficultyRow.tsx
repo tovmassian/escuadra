@@ -6,8 +6,10 @@ import {
   colors,
   difficultyTitleSize,
   difficultyTitleWeight,
+  iconSize,
   opacity,
   radii,
+  sizes,
   spacing,
   typography,
 } from '@/theme/tokens';
@@ -52,22 +54,24 @@ export function DifficultyRow({
       accessibilityState={{ disabled: locked }}
       style={[styles.row, locked && styles.rowLocked]}
     >
-      <View
-        style={[
-          styles.badge,
-          { width: size, height: size },
-          locked && styles.badgeLocked,
-          status === 'unlocked' && styles.badgeUnlocked,
-          best && styles.badgeBest,
-        ]}
-      >
-        {locked ? (
-          <LockGlyph />
-        ) : best ? (
-          <VerdictGlyph correct color={colors.accentOn} />
-        ) : (
-          <Text style={[styles.badgeLabel, { color: colors.accentOn }]}>{level}</Text>
-        )}
+      <View style={styles.badgeColumn}>
+        <View
+          style={[
+            styles.badge,
+            { width: size, height: size },
+            locked && styles.badgeLocked,
+            status === 'unlocked' && styles.badgeUnlocked,
+            best && styles.badgeBest,
+          ]}
+        >
+          {locked ? (
+            <LockGlyph size={Math.round(size * iconSize.lockGlyphRatio)} />
+          ) : best ? (
+            <VerdictGlyph correct color={colors.accentOn} />
+          ) : (
+            <Text style={[styles.badgeLabel, { color: colors.accentOn }]}>{level}</Text>
+          )}
+        </View>
       </View>
       <View style={[styles.card, status === 'unlocked' && styles.cardEmphasis]}>
         <View style={styles.headerRow}>
@@ -97,6 +101,15 @@ export function DifficultyRow({
 const styles = StyleSheet.create({
   row: { flexDirection: 'row', gap: spacing.sm + 2, alignItems: 'center' },
   rowLocked: { opacity: opacity.disabled },
+  // Fixed-width slot the badge centres inside, regardless of its own
+  // diameter (40-56px, escalating by level) — so all three badges, and the
+  // connector segments between them, share one vertical axis.
+  badgeColumn: {
+    width: sizes.difficultyBadgeColumn,
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexShrink: 0,
+  },
   badge: {
     borderRadius: radii.pill,
     borderWidth: 1.5,

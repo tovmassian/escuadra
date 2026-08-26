@@ -170,9 +170,15 @@ export const difficultyTitleWeight = { 1: '400', 2: '600', 3: '800' } as const;
 
 export const sizes = {
   progressDot: 5,
-  // Horizontal offset of the difficulty ladder's connector line — centred
-  // under the badge column regardless of level (badges vary 40-56px wide).
-  difficultyConnectorOffset: 27,
+  // Width of the difficulty ladder's badge column. Every badge (40-56px,
+  // scaling with level) centres inside this fixed-width slot rather than
+  // left-aligning, so the three differently-sized badges — and the connector
+  // segments between them — share one vertical axis. Matches the widest
+  // badge (level 3) so nothing overflows it.
+  difficultyBadgeColumn: badgeSize[3],
+  // Height of one connector segment between two ladder rungs. Drawn only in
+  // the gap, never behind a badge — see `LadderConnector`.
+  difficultyConnectorHeight: 26,
   studyColumn: { no: 26, position: 34, affiliation: 92 },
   // Home's "Start Training" is the one 56px control; every other button
   // (Continue, Results actions) is 52px.
@@ -212,7 +218,10 @@ export const iconSize = {
   markSmall: 13, // VerdictGlyph's smaller size, for AnswerOption's incorrect-picked mark
   chevron: 16, // TeamRow / DifficultyRow disclosure chevron
   chevronLarge: 18, // Home's continue-card chevron
-  lockGlyph: 16, // DifficultyRow's locked-badge lock glyph
+  // The locked-badge padlock scales with its own badge (40/48/56, escalating
+  // by level) rather than sitting at one fixed size regardless of the ring
+  // around it — 48 * 0.46 ≈ 22, 56 * 0.46 ≈ 26.
+  lockGlyphRatio: 0.46,
 } as const;
 
 // Base unit 4. Use spacing[n], not raw numbers, in component styles.

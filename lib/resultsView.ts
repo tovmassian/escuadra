@@ -1,6 +1,8 @@
 // Pure results-screen model. Kept out of the screen so invariant 10's rules
 // are unit-testable.
 
+import { PASS_RATIO } from '@/lib/scoring';
+
 export type ActionId = 'nextLevel' | 'retry' | 'studyMissed' | 'study' | 'chooseTeam';
 
 /**
@@ -49,4 +51,23 @@ export function actionOrder(opts: {
  */
 export function isFlawless(correct: number, attempted: number): boolean {
   return attempted > 0 && correct === attempted;
+}
+
+/**
+ * The results screen's success mark renders in one of two tones once the
+ * round is passed: `passed` (ball green, frame accent) below a flawless
+ * score, `excellent` (both green) at a flawless one. Below `PASS_RATIO`
+ * there is no success mark at all.
+ *
+ * Deliberately reuses `PASS_RATIO` rather than a second range constant —
+ * moving the pass bar (e.g. to 5/10) moves this split with it, so the
+ * pass/fail verdict, the picker's "cleared" badge, and this tier can never
+ * drift out of sync with each other.
+ */
+export type ResultTier = 'fail' | 'passed' | 'excellent';
+
+export function resultTier(correct: number, attempted: number): ResultTier {
+  if (isFlawless(correct, attempted)) return 'excellent';
+  if (attempted > 0 && correct / attempted >= PASS_RATIO) return 'passed';
+  return 'fail';
 }

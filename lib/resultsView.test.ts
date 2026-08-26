@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { actionOrder, isFlawless } from './resultsView';
+import { actionOrder, isFlawless, resultTier } from './resultsView';
 
 describe('actionOrder', () => {
   it('offers the next level first when the player passed below the ceiling', () => {
@@ -76,5 +76,30 @@ describe('isFlawless', () => {
 
   it('is true for a short but complete round', () => {
     expect(isFlawless(3, 3)).toBe(true);
+  });
+});
+
+describe('resultTier', () => {
+  it('is excellent for a flawless round', () => {
+    expect(resultTier(10, 10)).toBe('excellent');
+  });
+
+  it('is passed at the pass threshold but short of flawless', () => {
+    expect(resultTier(8, 10)).toBe('passed');
+    expect(resultTier(9, 10)).toBe('passed');
+  });
+
+  it('is fail below the pass threshold', () => {
+    expect(resultTier(7, 10)).toBe('fail');
+  });
+
+  it('is fail for a round with nothing attempted', () => {
+    expect(resultTier(0, 0)).toBe('fail');
+  });
+
+  it('tracks PASS_RATIO rather than a hardcoded score', () => {
+    // If the pass bar ever moves (e.g. to 5/10), the tier split moves with
+    // it automatically — this pins that behaviour rather than a literal 8.
+    expect(resultTier(5, 10)).toBe('fail');
   });
 });

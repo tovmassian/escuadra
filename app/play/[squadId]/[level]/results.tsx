@@ -6,7 +6,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
 import { EscuadraMark } from '@/components/EscuadraMark';
 import type { Level } from '@/lib/questionEngine';
-import { actionOrder, isFlawless, type ActionId } from '@/lib/resultsView';
+import { actionOrder, resultTier, type ActionId } from '@/lib/resultsView';
 import { PASS_RATIO } from '@/lib/scoring';
 import { getRoster, getSquad } from '@/lib/squads';
 import {
@@ -20,10 +20,10 @@ import { colors, durations, radii, sizes, spacing, typography } from '@/theme/to
 
 const MAX_LEVEL: Level = 3;
 
-// Only called from the `!flawless` branch below, where `ratio === 1` is
-// unreachable (a flawless round with `attempted > 0` already took the other
-// branch, and `attempted === 0` computes `ratio = 0`) — so there is no
-// separate "flawless" sentence here; that copy lives in exactly one place.
+// Only called for the `passed` and `fail` tiers, where `ratio === 1` is
+// unreachable (a flawless round is the `excellent` tier, handled separately,
+// and `attempted === 0` computes `ratio = 0`) — so there is no separate
+// "flawless" sentence here; that copy lives in exactly one place.
 function verdictSentence(correct: number, total: number): string {
   const ratio = total === 0 ? 0 : correct / total;
   if (ratio >= PASS_RATIO) return 'You knew most of the starting XI.';
@@ -42,9 +42,9 @@ export default function Results() {
 
   const score = selectScore(session.results);
   const missed = selectMissed(session.results);
-  const flawless = isFlawless(score.correct, score.attempted);
+  const tier = resultTier(score.correct, score.attempted);
 
-  const passed = score.attempted > 0 && score.correct / score.attempted >= PASS_RATIO;
+  const passed = tier !== 'fail';
   const hasNextLevel = level < MAX_LEVEL;
   const actions = actionOrder({ passed, hasNextLevel, missedCount: missed.length });
 
@@ -96,43 +96,50 @@ export default function Results() {
         { paddingTop: insets.top + spacing.xl, paddingBottom: insets.bottom + spacing.lg },
       ]}
     >
-      {flawless ? (
+      {tier !== 'fail' ? (
         <Animated.View
           entering={FadeIn.duration(durations.pop + durations.popSettle)}
-          style={styles.flawless}
+          style={[styles.success, tier === 'excellent' && styles.successExcellent]}
         >
-          <EscuadraMark size={sizes.celebrationMark} color={colors.success} showTrail />
-          <Text style={styles.flawlessScore}>
+          <EscuadraMark
+            size={sizes.celebrationMark}
+            color={tier === 'excellent' ? colors.success : colors.accent}
+            ballColor={colors.success}
+            showTrail
+          />
+          <Text style={[styles.successScore, tier === 'excellent' && styles.successScoreExcellent]}>
             {score.correct}/{score.attempted}
           </Text>
-          <Text style={styles.flawlessTitle}>a la escuadra</Text>
+          <Text style={[styles.successTitle, tier === 'excellent' && styles.successTitleExcellent]}>
+            {tier === 'excellent' ? 'a la escuadra' : `Level ${level} cleared`}
+          </Text>
           <Text style={styles.verdict}>
-            {squad.name}, level {level}. Nothing missed.
+            {tier === 'excellent'
+              ? `${squad.name}, level ${level}. Nothing missed.`
+              : verdictSentence(score.correct, score.attempted)}
           </Text>
         </Animated.View>
       ) : (
-        <>
-          <View style={styles.summary}>
-            <Text style={styles.eyebrow}>
-              {squad.name.toUpperCase()} · LEVEL {level} · ROUND COMPLETE
-            </Text>
-            <Text style={styles.score}>
-              {score.correct}/{score.attempted}
-            </Text>
-            <Text style={styles.verdict}>{verdictSentence(score.correct, score.attempted)}</Text>
-          </View>
+        <View style={styles.summary}>
+          <Text style={styles.eyebrow}>
+            {squad.name.toUpperCase()} · LEVEL {level} · ROUND COMPLETE
+          </Text>
+          <Text style={styles.score}>
+            {score.correct}/{score.attempted}
+          </Text>
+          <Text style={styles.verdict}>{verdictSentence(score.correct, score.attempted)}</Text>
+        </View>
+      )}
 
-          {missed.length > 0 && (
-            <>
-              <Text style={styles.missedLabel}>MISSED · {missed.length} PLAYERS</Text>
-              <FlatList
-                data={missed}
-                keyExtractor={(r) => r.question.playerId}
-                contentContainerStyle={styles.missedList}
-                renderItem={({ item }) => <MissedCard result={item} />}
-              />
-            </>
-          )}
+      {missed.length > 0 && (
+        <>
+          <Text style={styles.missedLabel}>MISSED · {missed.length} PLAYERS</Text>
+          <FlatList
+            data={missed}
+            keyExtractor={(r) => r.question.playerId}
+            contentContainerStyle={styles.missedList}
+            renderItem={({ item }) => <MissedCard result={item} />}
+          />
         </>
       )}
 
@@ -176,9 +183,16 @@ function MissedCard({ result }: { result: QuestionResult }) {
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.lg },
   summary: { alignItems: 'center', marginBottom: spacing.xl },
-  flawless: { flex: 1, alignItems: 'center', justifyContent: 'center', gap: spacing.sm },
-  flawlessScore: { ...typography.scoreHero, color: colors.success, marginTop: spacing.lg },
-  flawlessTitle: { ...typography.screenTitle, color: colors.textPrimary, fontStyle: 'italic' },
+  // Shared by both success tiers ('passed' and 'excellent'). 'excellent' has
+  // no missed list beneath it (a flawless round misses nothing), so it alone
+  // gets the full-screen centred treatment; 'passed' sits above its missed
+  // list like `summary` does.
+  success: { alignItems: 'center', marginBottom: spacing.xl, gap: spacing.sm },
+  successExcellent: { flex: 1, justifyContent: 'center', marginBottom: 0 },
+  successScore: { ...typography.scoreHero, color: colors.textPrimary, marginTop: spacing.lg },
+  successScoreExcellent: { color: colors.success },
+  successTitle: { ...typography.screenTitle, color: colors.textPrimary },
+  successTitleExcellent: { fontStyle: 'italic' },
   eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, marginBottom: spacing.xs },
   score: { ...typography.scoreHero, color: colors.textPrimary },
   verdict: { ...typography.secondarySmall, color: colors.textSecondary, marginTop: spacing.xs },
