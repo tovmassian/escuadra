@@ -97,9 +97,19 @@ roster.
      carry it — if the player is new to `players.json`, fetch their date of
      birth from their own Wikipedia infobox rather than leaving it blank.
 
-8. **Write `data/squads/<id>.json`**, matching the existing shape exactly:
-   `id, kind, name, season, primaryColor, secondaryColor, verified, marker,
-lastUpdated, source, members`.
+8. **Write the squad file at its nested path**, matching the existing shape
+   exactly: `id, kind, name, season, primaryColor, secondaryColor, verified,
+marker, lastUpdated, source, members`.
+
+   The path depends on `kind`:
+   - Nation squad → `data/squads/nation/<id>.json`.
+   - Club squad → `data/squads/club/<league>/<id>.json`, where `<league>` is
+     whichever of these the club's real domestic league is:
+     `la-liga`, `serie-a`, `bundesliga`, `ligue-1`, `premier-league`. Use
+     `ucl` only for a UEFA Champions League group-stage club with no big-5
+     domestic home. If a club's domestic league isn't one of the big 5,
+     don't invent a folder for it — ask the user how to proceed rather than
+     guessing a `League` value the codegen script doesn't recognize.
    `members` is `[{ playerId, no, captain? }]` — shirt number lives on the
    membership, never on the player.
 
@@ -140,19 +150,12 @@ weights?: number[], overlay?: { shape: 'disc' | 'diamond', color: string } }`.
    downgrading a previously-verified squad, so the user can decide whether to
    re-verify.
 
-10. **Update `data/index.json`** — add a new manifest entry, or update the
-    existing one's `season`/colours in step with the squad file. Keep it in
-    sync; the picker reads this file only, never the full squad JSON.
-
-10a. **If this is a brand-new squad** (no prior entry in `data/index.json`),
-it also needs wiring into `lib/squads.ts`: add a static `import` for the
-new `data/squads/<id>.json` and a matching entry in `SQUAD_FILES`. Metro
-requires string-literal imports, so this can't be done dynamically — the
-file's own header comment says as much. Skipping this step doesn't error
-at write time; it silently makes `getRoster()` return an empty array for
-the new squad, which only surfaces later as failing
-`lib/squads.test.ts` assertions. Do it in the same pass as writing the
-squad file, not as a follow-up fix.
+10. **Run `npm run gen:squads`.** This regenerates `data/index.json` and
+    `lib/squads.generated.ts` from every file under `data/squads/`,
+    including the one you just wrote. Never hand-edit either generated
+    file, for a new squad or a refresh — `npm run check` fails if either
+    one doesn't match what the generator produces from the current squad
+    files.
 
 11. **Run `npm run check`** before reporting the team done, and report its
     actual output. On Windows, `node`/`npm` may not be on the shell's PATH by
@@ -182,9 +185,14 @@ squad file, not as a follow-up fix.
   Fetch the sections/raw-wikitext URLs directly (`curl`/HTTP GET) rather than
   through a fetch tool that summarizes through a model — WebFetch always
   does this, so it's the wrong tool for this step regardless of prompt.
-- Writing a brand-new squad's JSON file without also wiring it into
-  `lib/squads.ts` (step 10a) — the write succeeds silently; only the test
-  suite catches the omission.
+- Writing a brand-new squad's JSON file without running `npm run gen:squads`
+  (step 10) afterward — the write succeeds silently; the new squad won't
+  appear in the picker or resolve in `getRoster()` until the generator
+  picks it up, and `npm run check`'s diff guard is what catches the
+  omission if you forget.
+- Guessing a `League` folder for a club instead of checking its actual
+  domestic league — the codegen script fails generation outright on an
+  unrecognized folder name under `data/squads/club/`.
 - Running multiple teams' updates in parallel — they share
   `players.json`/`index.json` and will race.
 - Duplicating a player in `players.json` instead of matching an existing
