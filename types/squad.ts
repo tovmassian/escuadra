@@ -1,12 +1,6 @@
 export type Position = 'GK' | 'DF' | 'MF' | 'FW';
 
-export type League =
-  | 'la-liga'
-  | 'serie-a'
-  | 'bundesliga'
-  | 'ligue-1'
-  | 'premier-league'
-  | 'ucl';
+export type League = 'la-liga' | 'serie-a' | 'bundesliga' | 'ligue-1' | 'premier-league' | 'ucl';
 
 export interface Player {
   id: string;

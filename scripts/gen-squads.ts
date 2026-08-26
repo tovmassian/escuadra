@@ -133,10 +133,20 @@ function buildIndexJson(discovered: Discovered[]): string {
 }
 
 function formatWithPrettier(filePaths: string[]): void {
-  const result = spawnSync('npx', ['prettier', '--write', ...filePaths], {
+  // Invoke prettier's own CJS entrypoint through the current `node` binary
+  // rather than shelling out to the `npx`/`npx.cmd` launcher script. Two
+  // Windows-specific failure modes rule out `npx`: (1) Node's CVE-2024-27980
+  // fix makes spawning a `.cmd`/`.bat` file without `shell: true` throw
+  // EINVAL, and (2) with `shell: true`, spawnSync does not reliably quote
+  // absolute-path argv entries that themselves contain spaces (as this repo's
+  // checkout path does), so `npx.cmd prettier --write "C:\Users\A B\...`
+  // arrives at prettier split apart on the space. Spawning `process.execPath`
+  // (a real .exe, not a shell script) directly on prettier's own entrypoint
+  // sidesteps both: no shell hop, and Node quotes exe argv correctly on its own.
+  const prettierBin = path.join(REPO_ROOT, 'node_modules', 'prettier', 'bin', 'prettier.cjs');
+  const result = spawnSync(process.execPath, [prettierBin, '--write', ...filePaths], {
     cwd: REPO_ROOT,
     stdio: 'inherit',
-    shell: process.platform === 'win32',
   });
   if (result.status !== 0) {
     throw new Error(`gen-squads: prettier --write failed on ${filePaths.join(', ')}`);

@@ -58,9 +58,11 @@ anything this document doesn't spell out.
 ### Task 1: `League` type and manifest field
 
 **Files:**
+
 - Modify: `types/squad.ts`
 
 **Interfaces:**
+
 - Produces: `export type League = 'la-liga' | 'serie-a' | 'bundesliga' | 'ligue-1' | 'premier-league' | 'ucl';` and `SquadManifestEntry.league?: League`. Task 2's codegen script and Task 2's edit to `lib/squads.ts` both import `League` from `@/types/squad`.
 
 - [ ] **Step 1: Add the `League` type and the manifest field**
@@ -70,13 +72,7 @@ existing `Position` type is a reasonable spot, but any top-level placement
 is fine — there's no ordering requirement elsewhere in the file):
 
 ```typescript
-export type League =
-  | 'la-liga'
-  | 'serie-a'
-  | 'bundesliga'
-  | 'ligue-1'
-  | 'premier-league'
-  | 'ucl';
+export type League = 'la-liga' | 'serie-a' | 'bundesliga' | 'ligue-1' | 'premier-league' | 'ucl';
 ```
 
 Then add the new optional field to `SquadManifestEntry` (currently at the
@@ -147,6 +143,7 @@ are moved. They land as one task so the repo builds and tests pass at every
 commit.
 
 **Files:**
+
 - Move (git mv): all 11 files under `data/squads/*.json` into the new
   nested layout (exact moves in Step 1).
 - Create: `scripts/gen-squads.ts`
@@ -154,6 +151,7 @@ commit.
 - Modify: `lib/squads.ts`
 
 **Interfaces:**
+
 - Consumes: `League`, `SquadManifestEntry.league` from Task 1 (`@/types/squad`).
 - Produces: `lib/squads.generated.ts` exports `SQUAD_FILES: Record<string, Squad>` — `lib/squads.ts` imports this instead of hand-listing files. `scripts/gen-squads.ts` is invoked as `node scripts/gen-squads.ts` (wired into an npm script in Task 3).
 
@@ -351,7 +349,8 @@ main();
 ```
 
 Notes for the implementer:
-- `readdirSync(SQUADS_DIR, { recursive: true })` returns file *and*
+
+- `readdirSync(SQUADS_DIR, { recursive: true })` returns file _and_
   directory paths as strings relative to `SQUADS_DIR`; the `.endsWith('.json')`
   filter drops the directory entries.
 - On Windows those relative paths use `\` — `.split(path.sep).join('/')`
@@ -478,9 +477,11 @@ git commit -m "feat(data): migrate squads to nested layout, generate index.json 
 ### Task 3: Wire `gen:squads` into npm scripts and `check`
 
 **Files:**
+
 - Modify: `package.json`
 
 **Interfaces:**
+
 - Consumes: `scripts/gen-squads.ts` (Task 2), runnable as `node scripts/gen-squads.ts`.
 
 - [ ] **Step 1: Add the `gen:squads` script and extend `check`**
@@ -542,9 +543,11 @@ git commit -m "chore(data): wire gen:squads into npm run check"
 ### Task 4: Update the `squad-updater` skill for the nested layout
 
 **Files:**
+
 - Modify: `.claude/skills/squad-updater/SKILL.md`
 
 **Interfaces:**
+
 - Consumes: the folder convention from Task 2 (`data/squads/nation/<id>.json`, `data/squads/club/<league>/<id>.json`) and the `npm run gen:squads` command from Task 3.
 
 - [ ] **Step 1: Add folder guidance and change step 8's write path**
@@ -563,7 +566,7 @@ Change it to:
 ```markdown
 8. **Write the squad file at its nested path**, matching the existing shape
    exactly: `id, kind, name, season, primaryColor, secondaryColor, verified,
-   marker, lastUpdated, source, members`.
+marker, lastUpdated, source, members`.
 
    The path depends on `kind`:
    - Nation squad → `data/squads/nation/<id>.json`.
@@ -656,9 +659,11 @@ git commit -m "docs(squad-updater): update for nested data/squads layout and gen
 ### Task 5: Update the `squad-verifier` skill's path references
 
 **Files:**
+
 - Modify: `.claude/skills/squad-verifier/SKILL.md`
 
 **Interfaces:**
+
 - Consumes: the folder convention from Task 2. Behavior is otherwise
   unchanged (per spec: "still only ever flips `verified` inside the squad
   file").
@@ -704,20 +709,20 @@ Change it to:
 Step 6 currently ends with:
 
 ```markdown
-   Write only that one field in
-   `data/squads/<id>.json`; never touch `players.json` or `index.json`.
+Write only that one field in
+`data/squads/<id>.json`; never touch `players.json` or `index.json`.
 ```
 
 Change to:
 
 ```markdown
-   Write only that one field, in the squad file at its nested path
-   (`data/squads/nation/<id>.json` or `data/squads/club/<league>/<id>.json`);
-   never touch `players.json` or `index.json` — `index.json` is generated
-   from the squad files by `npm run gen:squads` and will pick up the flip
-   next time someone regenerates it (`npm run check`'s diff guard catches
-   the interim staleness rather than this skill needing to run the
-   generator itself).
+Write only that one field, in the squad file at its nested path
+(`data/squads/nation/<id>.json` or `data/squads/club/<league>/<id>.json`);
+never touch `players.json` or `index.json` — `index.json` is generated
+from the squad files by `npm run gen:squads` and will pick up the flip
+next time someone regenerates it (`npm run check`'s diff guard catches
+the interim staleness rather than this skill needing to run the
+generator itself).
 ```
 
 - [ ] **Step 4: Commit**
@@ -732,9 +737,11 @@ git commit -m "docs(squad-verifier): update for nested data/squads layout"
 ### Task 6: Update CLAUDE.md's data model section
 
 **Files:**
+
 - Modify: `CLAUDE.md`
 
 **Interfaces:**
+
 - Consumes: the folder layout, `League` type, and generated-file rule established in Tasks 1-3. This task is documentation-only — no code interface.
 
 - [ ] **Step 1: Replace the file-layout block**
