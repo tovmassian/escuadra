@@ -14,7 +14,7 @@ import {
   changeRatio,
   validateEnvelope,
   type RosterEnvelope,
-} from './roster-envelope';
+} from './roster-envelope.ts';
 
 const REPO_ROOT = path.resolve(import.meta.dirname, '..');
 
@@ -24,15 +24,23 @@ function readJson(filePath: string): unknown {
 
 /** Display names of a stored squad's members, resolved through players.json. */
 function storedMemberNames(squadPath: string): string[] {
-  const squad = readJson(squadPath) as { members?: { playerId?: string }[] };
+  const squad = readJson(squadPath) as unknown;
+  if (typeof squad !== 'object' || squad === null) {
+    throw new Error('squad must be an object');
+  }
+  const members = (squad as { members?: unknown }).members;
+  if (members !== undefined && !Array.isArray(members)) {
+    throw new Error('squad.members must be an array');
+  }
   const players = readJson(path.join(REPO_ROOT, 'data', 'players.json')) as {
     id: string;
     name: string;
   }[];
   const nameById = new Map(players.map((player) => [player.id, player.name]));
   const names: string[] = [];
-  for (const member of squad.members ?? []) {
-    const name = member.playerId === undefined ? undefined : nameById.get(member.playerId);
+  for (const member of members ?? []) {
+    const memberObj = member as { playerId?: string };
+    const name = memberObj.playerId === undefined ? undefined : nameById.get(memberObj.playerId);
     if (name !== undefined) names.push(name);
   }
   return names;
@@ -60,6 +68,16 @@ if (paths.length === 0) {
   process.exit(2);
 }
 
+let storedRoster: string[] | undefined;
+if (againstPath !== undefined) {
+  try {
+    storedRoster = storedMemberNames(againstPath);
+  } catch (error) {
+    console.error(`could not read stored squad ${againstPath} — ${(error as Error).message}`);
+    process.exit(2);
+  }
+}
+
 let failed = false;
 for (const filePath of paths) {
   let parsed: unknown;
@@ -80,10 +98,10 @@ for (const filePath of paths) {
 
   console.log(`${filePath}: OK`);
 
-  if (againstPath !== undefined) {
+  if (storedRoster !== undefined) {
     const envelope = parsed as RosterEnvelope;
     const ratio = changeRatio(
-      storedMemberNames(againstPath),
+      storedRoster,
       envelope.members.map((member) => member.name),
     );
     const percent = Math.round(ratio * 100);
