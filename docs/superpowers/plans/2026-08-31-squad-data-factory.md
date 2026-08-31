@@ -455,8 +455,10 @@ The interface the skills actually invoke. A skill cannot import a module; it run
 
 **Interfaces:**
 
-- Consumes: `validateEnvelope` from `scripts/roster-envelope.ts` (Task 1)
-- Produces: CLI `node scripts/envelope-check.ts <path...>` — exit 0 when every file is valid, exit 1 with one problem per line otherwise
+- Consumes: `validateEnvelope`, `changeRatio`, `BLAST_RADIUS_THRESHOLD`, `RosterEnvelope` from `scripts/roster-envelope.ts` (Task 1)
+- Produces: CLI `node scripts/envelope-check.ts [--against <storedSquad.json>] <path...>` — exit 0 when every envelope is valid, exit 1 with one problem per line otherwise. The `--against` form additionally prints the change ratio against a stored squad, warning past `BLAST_RADIUS_THRESHOLD` **without** affecting the exit code.
+
+Without `--against`, `changeRatio` and `BLAST_RADIUS_THRESHOLD` would be exported, tested and never called, and the spec's blast-radius rule would degrade to a skill eyeballing a percentage. This mode is what makes the tested threshold the one actually enforced.
 
 - [ ] **Step 1: Write the implementation**
 
@@ -465,13 +467,63 @@ Create `scripts/envelope-check.ts`:
 ```ts
 // CLI guard the squad skills run against every roster envelope before it is
 // acted on. Skills cannot import a module, so the contract is reachable as a
-// command: node scripts/envelope-check.ts <path...>
+// command:
+//   node scripts/envelope-check.ts <envelope.json...>
+//   node scripts/envelope-check.ts --against <storedSquad.json> <envelope.json...>
+// The --against form also reports how much of the stored roster the envelope
+// changes, warning past BLAST_RADIUS_THRESHOLD. That warning is advisory by
+// design: an on-demand run has an operator reading the report. Promoting it to
+// a hard failure is the documented change if this ever runs on a schedule.
 import { readFileSync } from 'node:fs';
-import { validateEnvelope } from './roster-envelope';
+import path from 'node:path';
+import {
+  BLAST_RADIUS_THRESHOLD,
+  changeRatio,
+  validateEnvelope,
+  type RosterEnvelope,
+} from './roster-envelope';
 
-const paths = process.argv.slice(2);
+const REPO_ROOT = path.resolve(import.meta.dirname, '..');
+
+function readJson(filePath: string): unknown {
+  return JSON.parse(readFileSync(filePath, 'utf8'));
+}
+
+/** Display names of a stored squad's members, resolved through players.json. */
+function storedMemberNames(squadPath: string): string[] {
+  const squad = readJson(squadPath) as { members?: { playerId?: string }[] };
+  const players = readJson(path.join(REPO_ROOT, 'data', 'players.json')) as {
+    id: string;
+    name: string;
+  }[];
+  const nameById = new Map(players.map((player) => [player.id, player.name]));
+  const names: string[] = [];
+  for (const member of squad.members ?? []) {
+    const name = member.playerId === undefined ? undefined : nameById.get(member.playerId);
+    if (name !== undefined) names.push(name);
+  }
+  return names;
+}
+
+const argv = process.argv.slice(2);
+let againstPath: string | undefined;
+let paths = argv;
+
+const flagIndex = argv.indexOf('--against');
+if (flagIndex !== -1) {
+  const value = argv[flagIndex + 1];
+  if (value === undefined) {
+    console.error('--against needs the path of a stored squad file');
+    process.exit(2);
+  }
+  againstPath = value;
+  paths = [...argv.slice(0, flagIndex), ...argv.slice(flagIndex + 2)];
+}
+
 if (paths.length === 0) {
-  console.error('usage: node scripts/envelope-check.ts <envelope.json...>');
+  console.error(
+    'usage: node scripts/envelope-check.ts [--against <storedSquad.json>] <envelope.json...>',
+  );
   process.exit(2);
 }
 
@@ -479,18 +531,38 @@ let failed = false;
 for (const filePath of paths) {
   let parsed: unknown;
   try {
-    parsed = JSON.parse(readFileSync(filePath, 'utf8'));
+    parsed = readJson(filePath);
   } catch (error) {
     console.error(`${filePath}: not readable as JSON — ${(error as Error).message}`);
     failed = true;
     continue;
   }
+
   const errors = validateEnvelope(parsed);
-  if (errors.length === 0) {
-    console.log(`${filePath}: OK`);
-  } else {
+  if (errors.length > 0) {
     for (const message of errors) console.error(`${filePath}: ${message}`);
     failed = true;
+    continue;
+  }
+
+  console.log(`${filePath}: OK`);
+
+  if (againstPath !== undefined) {
+    const envelope = parsed as RosterEnvelope;
+    const ratio = changeRatio(
+      storedMemberNames(againstPath),
+      envelope.members.map((member) => member.name),
+    );
+    const percent = Math.round(ratio * 100);
+    if (ratio > BLAST_RADIUS_THRESHOLD) {
+      console.warn(
+        `${filePath}: BLAST RADIUS — ${percent}% of the stored roster changes ` +
+          `(threshold ${Math.round(BLAST_RADIUS_THRESHOLD * 100)}%). Confirm the source page ` +
+          `was not restructured or vandalised before writing.`,
+      );
+    } else {
+      console.log(`${filePath}: change ratio ${percent}%`);
+    }
   }
 }
 
@@ -536,7 +608,18 @@ echo "exit: $?"
 
 Expected: two errors — `team.league is required on club squads` and `status OK requires a non-empty members array` — and `exit: 1`.
 
-- [ ] **Step 4: Clean up the scratch fixtures and run the full check**
+- [ ] **Step 4: Verify the blast-radius mode warns without failing**
+
+The step-2 fixture holds one member; Spain's stored squad holds a full roster, so almost all of it "changes". That is exactly the shape of a page restructure, and it must warn rather than fail:
+
+```bash
+node scripts/envelope-check.ts --against data/squads/nation/esp.json .claude/tmp/squad-factory/plan-check/esp.json
+echo "exit: $?"
+```
+
+Expected: `... esp.json: OK`, then a `BLAST RADIUS — <N>% of the stored roster changes` line with `<N>` well above 40, and `exit: 0`. A non-zero exit here is a bug: the warning is advisory and must not fail an on-demand run.
+
+- [ ] **Step 5: Clean up the scratch fixtures and run the full check**
 
 ```bash
 rm -rf .claude/tmp/squad-factory/plan-check
@@ -545,7 +628,7 @@ npm run check
 
 Expected: PASS.
 
-- [ ] **Step 5: Commit**
+- [ ] **Step 6: Commit**
 
 ```bash
 git add scripts/envelope-check.ts
