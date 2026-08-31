@@ -1,0 +1,6 @@
+# Gate: a commit can never contain squad data out of sync with its generated
+# index. Cheap subset of `npm run check` (one node start, no typecheck/lint/
+# tests) — the full suite still runs at pre-push.
+# Bypass in a genuine emergency with `git commit --no-verify`.
+node scripts/gen-squads.ts
+git diff --exit-code -- lib/squads.generated.ts data/index.json
