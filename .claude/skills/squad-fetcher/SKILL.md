@@ -28,9 +28,8 @@ fetches running at once can never race on the same file.
 **Read `.claude/skills/squad-factory/references/wikitext-roster-parsing.md`
 before parsing anything, and follow it exactly.** It is the single source
 for page title resolution, the two-step fetch, section selection, the two
-template families (`{{Fs player|...}}` for clubs, `{{nat fs g
-player|...}}` for nations), field extraction, the drop-rows-without-`no`
-rule, and the never-trust-a-prose-summary rule. Those rules are not
+club/nation template families and how to read them, field extraction, the
+drop-rows rule, and the never-trust-a-prose-summary rule. None of that is
 repeated here — the reference exists specifically to end the drift that
 happened when two skills each carried their own copy of the same rules.
 If something about a page doesn't fit what the reference describes, that's
