@@ -1,5 +1,31 @@
 [
   {
+    "id": "arg",
+    "kind": "nation",
+    "name": "Argentina",
+    "season": "2026",
+    "primaryColor": "#75AADB",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "arm",
+    "kind": "nation",
+    "name": "Armenia",
+    "season": "2026",
+    "primaryColor": "#B70000",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#D90012", "#0033A0", "#F2A800"],
+      "orientation": "horizontal"
+    }
+  },
+  {
     "id": "ars",
     "kind": "club",
     "name": "Arsenal",
@@ -10,20 +36,8 @@
     "marker": {
       "bands": ["#EF0107"],
       "orientation": "vertical"
-    }
-  },
-  {
-    "id": "rma",
-    "kind": "club",
-    "name": "Real Madrid",
-    "season": "2026/27",
-    "primaryColor": "#FFFFFF",
-    "secondaryColor": "#FEBE10",
-    "verified": true,
-    "marker": {
-      "bands": ["#FFFFFF"],
-      "orientation": "vertical"
-    }
+    },
+    "league": "premier-league"
   },
   {
     "id": "bar",
@@ -36,34 +50,8 @@
     "marker": {
       "bands": ["#A50044", "#004D98"],
       "orientation": "vertical"
-    }
-  },
-  {
-    "id": "int",
-    "kind": "club",
-    "name": "Inter Milan",
-    "season": "2026/27",
-    "primaryColor": "#0068A8",
-    "secondaryColor": "#000000",
-    "verified": true,
-    "marker": {
-      "bands": ["#0068A8", "#000000"],
-      "orientation": "vertical"
-    }
-  },
-  {
-    "id": "psg",
-    "kind": "club",
-    "name": "Paris Saint-Germain",
-    "season": "2025/26",
-    "primaryColor": "#004170",
-    "secondaryColor": "#DA291C",
-    "verified": true,
-    "marker": {
-      "bands": ["#004170", "#DA291C", "#004170"],
-      "orientation": "vertical",
-      "weights": [2, 1, 2]
-    }
+    },
+    "league": "la-liga"
   },
   {
     "id": "bra",
@@ -76,20 +64,10 @@
     "marker": {
       "bands": ["#009739"],
       "orientation": "horizontal",
-      "overlay": { "shape": "diamond", "color": "#FFDF00" }
-    }
-  },
-  {
-    "id": "arg",
-    "kind": "nation",
-    "name": "Argentina",
-    "season": "2026",
-    "primaryColor": "#75AADB",
-    "secondaryColor": "#FFFFFF",
-    "verified": true,
-    "marker": {
-      "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
-      "orientation": "horizontal"
+      "overlay": {
+        "shape": "diamond",
+        "color": "#FFDF00"
+      }
     }
   },
   {
@@ -120,6 +98,20 @@
     }
   },
   {
+    "id": "int",
+    "kind": "club",
+    "name": "Inter Milan",
+    "season": "2026/27",
+    "primaryColor": "#0068A8",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#0068A8", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
     "id": "jpn",
     "kind": "nation",
     "name": "Japan",
@@ -130,20 +122,39 @@
     "marker": {
       "bands": ["#FFFFFF"],
       "orientation": "horizontal",
-      "overlay": { "shape": "disc", "color": "#BC002D" }
+      "overlay": {
+        "shape": "disc",
+        "color": "#BC002D"
+      }
     }
   },
   {
-    "id": "arm",
-    "kind": "nation",
-    "name": "Armenia",
-    "season": "2026",
-    "primaryColor": "#B70000",
-    "secondaryColor": "#FFFFFF",
+    "id": "psg",
+    "kind": "club",
+    "name": "Paris Saint-Germain",
+    "season": "2025/26",
+    "primaryColor": "#004170",
+    "secondaryColor": "#DA291C",
     "verified": true,
     "marker": {
-      "bands": ["#D90012", "#0033A0", "#F2A800"],
-      "orientation": "horizontal"
-    }
+      "bands": ["#004170", "#DA291C", "#004170"],
+      "orientation": "vertical",
+      "weights": [2, 1, 2]
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "rma",
+    "kind": "club",
+    "name": "Real Madrid",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#FEBE10",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
   }
 ]
