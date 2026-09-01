@@ -64,9 +64,14 @@ skill.
 4. **Parse each member** per the reference, populating the envelope's
    `EnvelopeMember` fields (`scripts/roster-envelope.ts`): shirt number
    (`no`), `position`, display `name`, `captain` flag, and — nation
-   squads only — `club`/`clubNat`/`birth`; club squads only —
-   `nationality` (see the nationality rule below for exactly what value
-   belongs there). Keep the literal template line for every parsed member
+   squads only — `clubNat`/`birth`; club squads only — `nationality` (see
+   the nationality rule below for exactly what value belongs there). That
+   split describes the **wikitext**, not the envelope: `club` itself
+   belongs on every member regardless of kind — a nation squad's wikitext
+   supplies it directly per player, while a club squad's wikitext carries
+   no such field at all (everyone on the page is the same club), so it's
+   set from the squad's own `team.name` instead — see the club rule below.
+   Keep the literal template line for every parsed member
    in `raw` — the writer needs it and must never have to re-fetch or
    re-parse Wikipedia to reconstruct a member it wasn't given verbatim.
    Apply the reference's drop rule for members it doesn't want kept. Zero
@@ -199,6 +204,26 @@ raw code ever gets converted.
   exactly why the level-3 question on a nation squad asks for the player's
   club instead.
 
+## The club rule
+
+`EnvelopeMember.club` must be the player's current club, in the same form
+`data/players.json` already stores throughout (`Arsenal`, not `Arsenal
+F.C.`) — `squad-writer` copies this field verbatim into a new player record
+and performs no derivation of its own, so this envelope is the only place
+the value gets settled.
+
+- **Nation squads**: the wikitext supplies each member's own `club=` field
+  directly — parse it per the reference's field-extraction rule, same as
+  any other wikilinked field. A national squad is drawn from many different
+  clubs, so this is genuine per-member data.
+- **Club squads**: the wikitext carries no per-member club field — the
+  reference's own field table marks it `n/a`, because the whole page is one
+  club — so set every member's `club` to the squad's own team name
+  (`team.name` on the envelope). This is the exact mirror of the
+  nationality rule above, with the two kinds swapped: on a club squad every
+  member shares one club and it's nationality that varies per player; on a
+  nation squad it's the reverse.
+
 ## The no-questions rule
 
 This skill runs as one of potentially many parallel subagents dispatched
@@ -251,6 +276,11 @@ the output contract:
 - Leaving `nationality` as the raw `nat=` FIFA code, or leaving it unset for
   a nation-squad member, instead of the full country name `squad-writer`
   expects to copy verbatim — see the nationality rule.
+- Leaving `club` unset (or `null`) for a club-squad member because the
+  wikitext has no `club=` field to parse, instead of setting it to the
+  squad's own `team.name` — see the club rule. `squad-writer` copies `club`
+  verbatim on every kind of squad; an absent value there silently leaves a
+  player record's `club` stale or `null`.
 - Returning `status: OK` with an empty `members` array — that's
   `PARSE_FAILED`.
 - **Writing an envelope file for `NEEDS_DECISION`, `SOURCE_BROKEN`, or
