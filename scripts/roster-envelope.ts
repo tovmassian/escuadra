@@ -51,6 +51,20 @@ export interface RosterEnvelope {
  *  suspicious (page restructure or vandalism, not a transfer window). */
 export const BLAST_RADIUS_THRESHOLD = 0.4;
 
+/** The closed set of league folder names under data/squads/club/, mirroring
+ *  the list in scripts/gen-squads.ts. Validated here so a club envelope with
+ *  an unrecognised league is refused at squad-writer's entry gate, rather
+ *  than throwing out of the generator once the whole batch is already on
+ *  disk and the generated outputs are stale. */
+export const LEAGUES: League[] = [
+  'la-liga',
+  'serie-a',
+  'bundesliga',
+  'ligue-1',
+  'premier-league',
+  'ucl',
+];
+
 const STATUSES: EnvelopeStatus[] = ['OK', 'NEEDS_DECISION', 'SOURCE_BROKEN', 'PARSE_FAILED'];
 const POSITIONS: Position[] = ['GK', 'DF', 'MF', 'FW'];
 const HEX = /^#[0-9a-fA-F]{6}$/;
@@ -109,8 +123,14 @@ export function validateEnvelope(value: unknown): string[] {
     if (team.kind !== 'nation' && team.kind !== 'club') {
       errors.push(`team.kind must be "nation" or "club"; got ${JSON.stringify(team.kind)}`);
     }
-    if (team.kind === 'club' && !nonEmptyString(team.league)) {
-      errors.push('team.league is required on club squads');
+    if (team.kind === 'club') {
+      if (!nonEmptyString(team.league)) {
+        errors.push('team.league is required on club squads');
+      } else if (!(LEAGUES as string[]).includes(team.league)) {
+        errors.push(
+          `team.league must be one of ${LEAGUES.join(', ')}; got ${JSON.stringify(team.league)}`,
+        );
+      }
     }
     if (team.kind === 'nation' && team.league !== undefined) {
       errors.push('team.league must be absent on nation squads');

@@ -56,6 +56,14 @@ told to write its envelope into and what phase 3 later reads from. Every team
 in the same batch shares the same run id and directory; a re-run (retrying a
 `NEEDS_DECISION` team after the operator resolves it, say) mints a new one.
 
+Phase 5 re-reads the same teams in the same run, so it gets its own
+subdirectory: **`.claude/tmp/squad-factory/<runId>/reverify/`**. Both
+readers name an envelope after the squad id alone, so a phase-5 dispatch
+pointed at the batch directory would write over the very envelope phase 3
+consumed — destroying the record of what was actually applied, and doing it
+while a `squad-writer` run may still be reading. Keep the two directories
+distinct on every phase-5 dispatch.
+
 ## The six phases
 
 ### Phase 1 — read (parallel)
@@ -156,13 +164,25 @@ already safely on disk, and that `data/index.json` /
 `lib/squads.generated.ts` are stale — and `npm run check` will fail — until
 someone fixes the offending file and the generator is re-run.
 
+**A failed batch-end regenerate also ends the run there: skip phase 5, skip
+the final regenerate, and go straight to the report.** Phase 5's whole
+premise is a tree whose squad files and generated outputs agree, and after
+this failure they do not — re-verifying against it would produce verdicts
+nobody should trust, and the final regenerate would only throw on the same
+file a second time. Say plainly in the report that phase 5 and the final
+regenerate were skipped for that reason, and that the batch needs the
+offending file fixed and the generator re-run before it can be finished.
+
 ### Phase 5 — re-verify (parallel)
 
 One `Agent` call per team **`squad-writer` actually wrote** in phase 3 (not
 merely the list it was handed — a team `squad-writer` deferred was never
 written and has nothing to re-verify), dispatched concurrently with the same
 pinned parameters as phase 1. Each subagent invokes `squad-verifier`, again
-for exactly one team, via the Skill tool.
+for exactly one team, via the Skill tool, and is told to write its envelope
+into **`.claude/tmp/squad-factory/<runId>/reverify/`** — not the batch
+directory phase 1 used, which still holds the envelopes phase 3 applied
+(see Run id and envelope directory).
 
 This phase exists because `squad-writer` never re-checks its own
 reconciliation against the source — its parse of the envelope could itself be
@@ -198,6 +218,46 @@ If phase 3 wrote nothing (every team in the batch was terminal at phase 1 or
 regenerate — there is nothing new for `data/index.json` to pick up, and
 running the generator on an unchanged tree is a needless second invocation
 for zero benefit, not "the safe default."
+
+## The closing check
+
+**After the final regenerate, run `npm run check` and quote its actual
+output in the report.** This is the last gate before the operator reviews
+the diff, and the only point in a whole factory run where the repo's own
+data-integrity assertions are exercised at all: `lib/squads.test.ts` checks
+things no worker checks for itself — duplicate shirt numbers inside one
+squad, a squad that fell below the minimum size, a nation squad whose
+players don't all have a club, a `verified` flag out of sync between a
+squad file and the manifest. A batch can finish with every worker reporting
+success and still trip one of these, and without this step nobody finds out
+until a later, unrelated commit.
+
+Running it is not a breach of The prime rule: it inspects the tree, it does
+not write to it, and this skill already runs the final generator for the
+same reason.
+
+Read the result carefully, because two very different things can make it
+exit non-zero:
+
+- **A failure at `typecheck`, `lint`, `format:check` or `test`** is a real
+  defect in what the batch produced. Report it prominently, with the actual
+  failing output, and do not describe the run as clean.
+- **The trailing `git diff --exit-code -- lib/squads.generated.ts
+data/index.json` reporting changes** is expected on any run that wrote a
+  team. That guard compares the working tree against the git index, and
+  this skill never stages anything (see No auto-commit), so it is showing
+  the run's own uncommitted output. Say so, quote it, and don't call the
+  run broken over it — it passes once the operator stages the diff, which
+  is exactly what the pre-commit hook then re-checks.
+
+Never "fix" a failure here by hand-editing squad data, `data/index.json`,
+or `lib/squads.generated.ts` — that is data work this skill does not do.
+Report it and leave it to the operator.
+
+If phase 3 wrote nothing, or the batch-end regenerate failed and phases 5
+and the final regenerate were skipped, run `npm run check` anyway and
+report what it printed; a batch that ended badly is precisely when its
+state is worth stating plainly.
 
 ## Completion
 
@@ -264,8 +324,10 @@ something only the operator can resolve; do not let it read as an
 unremarkable success.
 
 Close with confirmation that the final regenerate ran (or, if phase 3 wrote
-nothing, that it was correctly skipped) and a reminder that the tree is
-unstaged and uncommitted.
+nothing or the batch-end regenerate failed, that it was correctly skipped
+and why), the actual output of the closing `npm run check` read per The
+closing check above, and a reminder that the tree is unstaged and
+uncommitted.
 
 ## Common mistakes
 
@@ -288,7 +350,17 @@ unstaged and uncommitted.
   team.
 - **Skipping phase 5** and reporting a written team as fixed without
   re-verifying it — the report must say the fix is confirmed correct, not
-  merely that it was attempted.
+  merely that it was attempted. The one exception is a failed batch-end
+  regenerate, where phase 5 has no consistent tree to verify against and is
+  skipped deliberately, with the reason stated.
+- Pointing a phase-5 dispatch at the batch's own envelope directory instead
+  of its `reverify/` subdirectory — that overwrites the envelopes phase 3
+  applied, with the same squad ids, losing the record of what was written.
+- Finishing without running `npm run check`, or reporting it as passing
+  without quoting what it printed — it is the only step in the whole run
+  that exercises `lib/squads.test.ts`'s data-integrity assertions. Equally,
+  reporting its trailing unstaged-diff guard as a failure of the batch:
+  that guard is showing this run's own uncommitted output, by design.
 - Handing a phase-1 or phase-5 dispatch more than one team at a time — that
   triggers `squad-verifier`'s own internal per-team fan-out on top of this
   skill's, which is redundant nesting, not extra parallelism.

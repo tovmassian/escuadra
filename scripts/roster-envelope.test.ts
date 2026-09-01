@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   BLAST_RADIUS_THRESHOLD,
+  LEAGUES,
   changeRatio,
   normalizeName,
   validateEnvelope,
@@ -65,6 +66,26 @@ describe('validateEnvelope', () => {
     const env = validEnvelope();
     env.team = { ...env.team, kind: 'club' };
     expect(validateEnvelope(env).join(' ')).toMatch(/team\.league is required/);
+  });
+
+  it('accepts a club squad whose league is in the closed set', () => {
+    const env = validEnvelope();
+    env.team = { ...env.team, kind: 'club', league: 'premier-league' };
+    expect(validateEnvelope(env)).toEqual([]);
+  });
+
+  it('accepts every league gen-squads.ts recognises', () => {
+    for (const league of LEAGUES) {
+      const env = validEnvelope();
+      env.team = { ...env.team, kind: 'club', league };
+      expect(validateEnvelope(env), `league ${league} should be accepted`).toEqual([]);
+    }
+  });
+
+  it('rejects a league outside the closed set at the gate, not in the generator', () => {
+    const env = validEnvelope();
+    env.team = { ...env.team, kind: 'club', league: 'eredivisie' as never };
+    expect(validateEnvelope(env).join(' ')).toMatch(/team\.league must be one of/);
   });
 
   it('forbids league on a nation squad', () => {

@@ -464,6 +464,8 @@ Without `--against`, `changeRatio` and `BLAST_RADIUS_THRESHOLD` would be exporte
 
 Create `scripts/envelope-check.ts`:
 
+> Execution note: the shipped code imports `'./roster-envelope.ts'`; the extensionless specifier below cannot resolve under Node 22 type-stripping.
+
 ```ts
 // CLI guard the squad skills run against every roster envelope before it is
 // acted on. Skills cannot import a module, so the contract is reachable as a

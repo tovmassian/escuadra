@@ -114,15 +114,44 @@ when nothing about _this_ team's fetch changed for them.
 - **Match key**: normalised name — `normalizeName` in
   `scripts/roster-envelope.ts` is the reference implementation
   (case-insensitive, diacritics stripped, whitespace collapsed) — **plus
-  `birth` where both the envelope member and a candidate stored player have
-  one.** Fall back to name alone only when neither side has a birth date to
-  compare.
-- **On exactly one match**: reuse that player's existing `id`. Update
-  whichever of `club`, `position`, `nationality` differs from what's
-  currently stored. Never touch `photo` — it stays `null` in v0 regardless
+  `birth` whenever the envelope member carries one.**
+
+  The two sides are not symmetric, and the difference decides real cases.
+  `Player.birth` is non-optional in `types/squad.ts`, so a stored candidate
+  **always** has a birth date; `EnvelopeMember.birth` is optional, so the
+  envelope member is the only variable. "Where both sides have one" is
+  therefore just "where the envelope member has one" — and on a club squad,
+  whose wikitext carries no birth date at all, that can be every member or
+  none of them. Where it is none, this key degrades to name alone for the
+  entire squad, which is precisely the condition the name-only bullet below
+  refuses to treat as a confident match.
+
+- **On exactly one match on name plus birth**: reuse that player's existing
+  `id`. Update whichever of `club`, `position`, `nationality` differs from
+  what's currently stored. Never touch `photo` — it stays `null` in v0 regardless
   of what the envelope carries. Update `fullName` only when the envelope
   actually supplies a non-blank one for this member (it's optional there);
   otherwise leave the stored `fullName` untouched.
+- **On exactly one match on name alone** — the envelope member carries no
+  `birth`, so nothing corroborates the identity beyond a string — the match
+  counts as confident in exactly one case: the stored player's `club`
+  already equals the envelope's `team.name`. That player is already
+  recorded at this club, so there is no other person to be confusing them
+  with; reuse the `id` and update fields as above. **In every other case,
+  treat the single name-only match as ambiguous** and defer the team under
+  The ambiguity rule, naming the stored candidate with its `id`, name, and
+  birth date.
+
+  This is the failure that has no error message. Picture one stored
+  "Rodrigo" who is a _different_ Rodrigo: there is exactly one candidate,
+  so the multiple-candidates test never fires, and the merge overwrites
+  that player's `club`, `position`, and `nationality` with the new man's.
+  Two real people become one record, nothing is raised, and the only trace
+  is a club change buried in the diff. The real fix is upstream — the
+  parsing reference's birth rule tells a club-squad reader to carry
+  `birth` — so a team deferred here usually means an envelope that skipped
+  it, and that is worth saying in the deferral line.
+
 - **On no match**: create a new entry. The real player record shape is
   `{ id, name, fullName, birth, position, nationality, club, photo }` —
   populate `name`, `birth`, `position`, `nationality`, `club` directly from
@@ -135,9 +164,10 @@ when nothing about _this_ team's fetch changed for them.
   another disambiguated form where the existing data already does so (e.g.
   `lautaro`, `pio-esposito`), or where the plain surname would collide with
   an id already in use.
-- **On ambiguity** — multiple candidate matches, or a name match whose
-  stored `birth` conflicts with the envelope member's `birth` (both present,
-  values differ) — see The ambiguity rule; do not resolve it by guessing.
+- **On ambiguity** — multiple candidate matches, a name match whose stored
+  `birth` conflicts with the envelope member's `birth` (both present, values
+  differ), or an uncorroborated single name-only match per the bullet
+  above — see The ambiguity rule; do not resolve it by guessing.
 
 The envelope's `nationality`, `club`, `birth`, and `position` fields are
 already the clean values the player record needs — whatever FIFA-code
@@ -149,8 +179,9 @@ audit purposes, not as an input this skill parses.
 
 ## The ambiguity rule
 
-On multiple candidate matches for the same envelope member, or a name match
-whose `birth` conflicts, **do not guess and do not partially write.**
+On multiple candidate matches for the same envelope member, a name match
+whose `birth` conflicts, or a single name-only match nothing corroborates,
+**do not guess and do not partially write.**
 Abandon that team entirely: report it as `NEEDS_DECISION`, naming every
 candidate the operator must choose between (stored `id`, name, and birth
 date where known), and **leave every one of that team's files
@@ -242,13 +273,20 @@ any reason — they exist only as this generator's output.
 `gen-squads.ts` throws — before writing either output — on an unrecognised
 league folder under `data/squads/club/`, a squad file whose `id` field
 doesn't match its own filename, or two squad files sharing the same `id`.
-The entry gate does not catch any of these in advance:
-`validateEnvelope` only checks that a club envelope's `team.league` is a
-non-empty string, not that it's one of the closed `League` values, so a
-bad value can slip through the gate and only surface here.
+An unrecognised league is now caught earlier: `validateEnvelope` checks
+`team.league` against the closed `League` set, so a bad value is refused at
+the entry gate before any team is written, rather than surfacing here with
+the batch already half on disk. The other two conditions are properties of
+the tree, not of an envelope, so they can still only appear at this point.
 
 **Recognise it** by the command exiting non-zero with one of those three
-error messages, each naming the offending file directly.
+error messages. The first two name the offending file directly. **The
+duplicate-id message names only the id** — `duplicate squad id "<id>"
+across multiple files` — so there is no path in it to open. Find the
+colliding files first, e.g. by searching `data/squads/` for every file
+whose own `id` field is that value (a recursive grep for `"id": "<id>"`,
+or a listing of `data/squads/**/<id>.json`), and work from the two or more
+paths that turns up.
 
 **Know the state you're in when it happens:** every team's squad file and
 `players.json` edits from step 5 are already correctly on disk — those
@@ -259,9 +297,10 @@ will fail on this mismatch until it's resolved.
 
 **Do not** hand-edit `data/index.json` or `lib/squads.generated.ts` to
 paper over the mismatch — that prohibition holds even in this failure
-case. The fix is to open the squad file the error names, correct the
-actual structural problem (move it to the right league folder, correct
-its `id`, or resolve the duplicate), and re-run
+case. The fix is to open the offending squad file — the one the error
+names, or, for a duplicate id, the ones the search above turned up —
+correct the actual structural problem (move it to the right league folder,
+correct its `id`, or rename one side of the duplicate), and re-run
 `node scripts/gen-squads.ts`. Once every file under `data/squads/` is
 structurally sound, the same command that failed will succeed.
 
@@ -323,7 +362,11 @@ orchestrator's own report is compiled from.
   no stored file exists yet — an envelope in that shape is contract-broken,
   not licence to invent team colours.
 - Duplicating a player in `data/players.json` instead of matching an
-  existing entry by the normalised-name-plus-birth key.
+  existing entry by the normalised-name-plus-birth key — or its mirror
+  image, merging two different people because a birth-less club-squad
+  member matched one stored player's name and nothing else. A single
+  candidate is not the same thing as a confident match; see Player
+  reconciliation's name-only bullet.
 - Guessing through an ambiguous name/birth match instead of applying The
   ambiguity rule, or writing a partial team — e.g. a squad file with
   reconciled members but a skipped `players.json` update, or vice versa —

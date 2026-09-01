@@ -44,10 +44,12 @@ someone else regenerating it, not a write this skill performs.
 **Read `.claude/skills/squad-factory/references/wikitext-roster-parsing.md`
 before parsing anything, and follow it exactly.** It is the single source
 for page title resolution, the two-step fetch, section selection, the two
-club/nation template families and how to read them, field extraction, and
-the drop-rows rule. None of that is repeated here — restating it is
-exactly how this skill's own copy and the retired `squad-updater`'s used to
-drift apart in the first place.
+club/nation template families and how to read them, field extraction, the
+drop-rows rule, and the field-population rules (nationality, club, birth)
+that decide what goes on the envelope this skill hands to `squad-writer`.
+None of that is repeated here — restating it is exactly how this skill's
+own copy and the retired `squad-updater`'s used to drift apart in the first
+place.
 
 One line worth keeping here so the warning isn't lost at a glance: **never
 key a verdict off a prose summary of the roster table.** A fetch tool that
@@ -95,10 +97,13 @@ is fine.
 
 3. **Fetch the squad section from the stored `source` URL**, following the
    parsing reference's two-step fetch, section-selection, and template
-   rules exactly — don't re-derive them here. If `source` 404s, has moved,
-   or neither section the reference accepts is present, that itself is a
-   finding — report it (and, for the envelope in step 5, that's
-   `SOURCE_BROKEN`) — don't guess a replacement URL.
+   rules exactly — don't re-derive them here. Section selection is a
+   priority-ordered list of titles, not a single one: work down it and
+   record the title that actually matched. If `source` 404s, has moved, or
+   the page has **no** section matching any title on that list, that itself
+   is a finding — report it (and, for the envelope in step 5, that's
+   `SOURCE_BROKEN`) — don't guess a replacement URL. A page that matches
+   further down the list is not a broken source.
 
 4. **Diff the live roster against the stored one.** Check, per player:
    - Present in one list but not the other (dropped or added since the
@@ -127,6 +132,17 @@ is fine.
    - `members` is the **live Wikipedia roster** parsed in steps 3-4, not
      the stored one — the same shape `squad-fetcher` would produce fetching
      this team today.
+   - **Apply the reference's Field population rules to every member** —
+     the nationality rule, the club rule and the birth rule, in
+     `wikitext-roster-parsing.md`. `nationality`, `club` and `birth` are
+     not read straight off a template line; each has to be derived, and
+     which one has to be derived flips with the squad's kind. A club
+     squad's wikitext has no `club=`, so `club` comes from `team.name`; a
+     nation squad's has no `nat=`, so `nationality` is the squad's own
+     country; and `{{Fs player}}` carries no birth date at all, so a club
+     squad's members new to `data/players.json` need theirs looked up.
+     `squad-writer` copies these fields verbatim and derives nothing —
+     omit one here and the field it needed simply never gets set.
    - **Omit the `identity` key entirely.** This skill is forbidden from
      checking `primaryColor`, `secondaryColor`, and `marker` (Scope,
      above), so it must never emit them — an absent key is what tells
@@ -145,12 +161,19 @@ is fine.
      `sectionTitle` to be non-empty, which a broken source or a failed
      parse can't supply.
 
-   On `status: OK`, write the file to
-   `.claude/tmp/squad-factory/<runId>/<squadId>.json` (create the
-   directory if it doesn't exist), then validate it:
+   On `status: OK`, write the file to `<envelope dir>/<squadId>.json`
+   (create the directory if it doesn't exist), then validate it:
    `node scripts/envelope-check.ts <path>`. Fix any reported problem before
    moving on — a validation failure means the envelope is malformed, not
    that the tool is wrong.
+
+   `<envelope dir>` is whichever directory the dispatch named. Invoked
+   directly it is the run's own `.claude/tmp/squad-factory/<runId>/`;
+   invoked by `squad-factory`'s phase-5 re-verify it is
+   `.claude/tmp/squad-factory/<runId>/reverify/`, so a second read of the
+   same team in the same run cannot overwrite the envelope phase 3 already
+   consumed. Write where you were told; never rewrite an envelope that a
+   `squad-writer` run may still be reading.
 
    The envelope is the machine handoff to `squad-writer`; the worksheet
    (step 9) remains the human-readable report. Neither replaces the
@@ -254,6 +277,19 @@ argentina, brazil, france, japan").
   frozen at whatever `squad-writer` last set it to. A verified squad going
   stale over time without the flag catching up is exactly the scenario
   this skill exists to close.
+- Emitting an envelope whose members carry only what the template line
+  literally printed — `nationality`, `club` and `birth` have to be derived
+  per the reference's Field population rules, and which of them needs
+  deriving flips with the squad's kind. The two failure shapes to watch for
+  are a club squad's envelope with `club` set on nobody, and a nation
+  squad's with `nationality` set on nobody; both look complete and are not.
+- Leaving `birth` unset on a club-squad member who isn't in
+  `data/players.json` yet — `Player.birth` is required, `{{Fs player}}`
+  never carries it, and `squad-writer` won't fetch it. See the reference's
+  birth rule.
+- Reporting `SOURCE_BROKEN` because the stored page has no "Current squad"
+  section, without working down the rest of the reference's section
+  priority list first — most English club articles never use that title.
 - Fabricating or guessing a replacement Wikipedia URL when the stored
   `source` is broken — report the broken link as a finding.
 - Running one subagent per team sequentially "to be safe" — there's no

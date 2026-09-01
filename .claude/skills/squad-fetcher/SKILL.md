@@ -31,9 +31,10 @@ fetches running at once can never race on the same file.
 before parsing anything, and follow it exactly.** It is the single source
 for page title resolution, the two-step fetch, section selection, the two
 club/nation template families and how to read them, field extraction, the
-drop-rows rule, and the never-trust-a-prose-summary rule. None of that is
-repeated here — the reference exists specifically to end the drift that
-happened when two skills each carried their own copy of the same rules.
+drop-rows rule, the field-population rules (nationality, club, birth), and
+the never-trust-a-prose-summary rule. None of that is repeated here — the
+reference exists specifically to end the drift that happened when two
+skills each carried their own copy of the same rules.
 If something about a page doesn't fit what the reference describes, that's
 a `PARSE_FAILED` or `SOURCE_BROKEN` (see below), not licence to improvise a
 new parsing rule inline.
@@ -52,25 +53,25 @@ skill.
    Internazionale) do not guess — see the no-questions rule below.
 
 2. **Find the squad section index** via the sections API, per the
-   reference's two-step fetch and its section-selection rule. Record
-   whichever section title you used in `team.sectionTitle`, and the
-   section's "as of" date (if any) in `team.asOf`. Neither of the
-   reference's two acceptable sections existing on the page is
-   `SOURCE_BROKEN`.
+   reference's two-step fetch and its section-selection rule. That rule is
+   a priority-ordered list, not a single title — work down it and record
+   whichever section title actually matched in `team.sectionTitle`, plus
+   the section's "as of" date (if any) in `team.asOf`. Only a page with
+   **no** roster section at all is `SOURCE_BROKEN`; falling down the
+   priority list is normal, and club pages routinely do.
 
 3. **Fetch the raw wikitext** of that section directly — never through a
    summarising tool.
 
 4. **Parse each member** per the reference, populating the envelope's
    `EnvelopeMember` fields (`scripts/roster-envelope.ts`): shirt number
-   (`no`), `position`, display `name`, `captain` flag, and — nation
-   squads only — `clubNat`/`birth`; club squads only — `nationality` (see
-   the nationality rule below for exactly what value belongs there). That
-   split describes the **wikitext**, not the envelope: `club` itself
-   belongs on every member regardless of kind — a nation squad's wikitext
-   supplies it directly per player, while a club squad's wikitext carries
-   no such field at all (everyone on the page is the same club), so it's
-   set from the squad's own `team.name` instead — see the club rule below.
+   (`no`), `position`, display `name`, `captain` flag, `clubNat` where the
+   wikitext carries it, and — per the reference's **Field population**
+   section — `nationality`, `club` and `birth` on **every** member
+   regardless of squad kind. Those three are exactly the fields the
+   wikitext doesn't hand over the same way for both kinds, so each has its
+   own rule in the reference (the nationality rule, the club rule, the
+   birth rule); see "Field population lives in the reference" below.
    Keep the literal template line for every parsed member
    in `raw` — the writer needs it and must never have to re-fetch or
    re-parse Wikipedia to reconstruct a member it wasn't given verbatim.
@@ -187,42 +188,18 @@ invented, guessed, or rotated:
   `clubColors`/`pattern` fields) — never a value chosen because it "looks
   about right."
 
-## The nationality rule
+## Field population lives in the reference
 
-`EnvelopeMember.nationality` must be a full country name, in the same form
-`data/players.json` already stores throughout (`Spain`, not `ESP`) —
-`squad-writer` copies this field verbatim into a new player record and
-performs no translation of its own, so this envelope is the only place a
-raw code ever gets converted.
+`EnvelopeMember.nationality`, `club` and `birth` are never read straight
+off a template line. Each has its own rule — the nationality rule, the club
+rule, the birth rule — and all three live together in the parsing
+reference's **Field population — what the wikitext doesn't carry** section.
+Follow them there.
 
-- **Club squads**: translate the wikitext's `nat=` FIFA code into the
-  country's full name. Match the spelling already used elsewhere in
-  `data/players.json` rather than inventing a new one.
-- **Nation squads**: the wikitext carries no per-member nationality field —
-  the whole page is one nationality — so set every member's `nationality`
-  to the squad's own country. That every member shares one nationality is
-  exactly why the level-3 question on a nation squad asks for the player's
-  club instead.
-
-## The club rule
-
-`EnvelopeMember.club` must be the player's current club, in the same form
-`data/players.json` already stores throughout (`Arsenal`, not `Arsenal
-F.C.`) — `squad-writer` copies this field verbatim into a new player record
-and performs no derivation of its own, so this envelope is the only place
-the value gets settled.
-
-- **Nation squads**: the wikitext supplies each member's own `club=` field
-  directly — parse it per the reference's field-extraction rule, same as
-  any other wikilinked field. A national squad is drawn from many different
-  clubs, so this is genuine per-member data.
-- **Club squads**: the wikitext carries no per-member club field — the
-  reference's own field table marks it `n/a`, because the whole page is one
-  club — so set every member's `club` to the squad's own team name
-  (`team.name` on the envelope). This is the exact mirror of the
-  nationality rule above, with the two kinds swapped: on a club squad every
-  member shares one club and it's nationality that varies per player; on a
-  nation squad it's the reverse.
+They are deliberately not restated here. `squad-verifier` builds the same
+envelope for the same writer and never reads this file, so a copy in this
+skill would be a rule half the pipeline can't see — which is exactly the
+drift the shared reference exists to end.
 
 ## The no-questions rule
 
@@ -252,8 +229,10 @@ freeform status text. Like `NEEDS_DECISION`, neither of these writes an
 envelope file — both are reported entirely through the return line, per
 the output contract:
 
-- **`SOURCE_BROKEN`** — the page 404s or has moved, or the page has
-  neither section the reference's section-selection rule accepts.
+- **`SOURCE_BROKEN`** — the page 404s or has moved, or the page has **no**
+  section matching any title in the reference's section-selection priority
+  list. A page that matches further down that list is not broken; reserve
+  this status for a page with no roster section at all.
 - **`PARSE_FAILED`** — zero members survive parsing, or the member rows
   are malformed in a way the reference's rules don't account for. State
   this plainly: **zero parsed members is `PARSE_FAILED`, never an empty
@@ -275,12 +254,20 @@ the output contract:
   returning `NEEDS_DECISION`.
 - Leaving `nationality` as the raw `nat=` FIFA code, or leaving it unset for
   a nation-squad member, instead of the full country name `squad-writer`
-  expects to copy verbatim — see the nationality rule.
+  expects to copy verbatim — see the reference's nationality rule.
 - Leaving `club` unset (or `null`) for a club-squad member because the
   wikitext has no `club=` field to parse, instead of setting it to the
-  squad's own `team.name` — see the club rule. `squad-writer` copies `club`
-  verbatim on every kind of squad; an absent value there silently leaves a
-  player record's `club` stale or `null`.
+  squad's own `team.name` — see the reference's club rule. `squad-writer`
+  copies `club` verbatim on every kind of squad; an absent value there
+  silently leaves a player record's `club` stale or `null`.
+- Leaving `birth` unset on a club-squad member who isn't in
+  `data/players.json` yet, because `{{Fs player}}` has no birth date to
+  parse — see the reference's birth rule. `Player.birth` is required and
+  nothing downstream can supply it, so the fetch of that player's own
+  article is this skill's job, not an optional extra.
+- Reporting `SOURCE_BROKEN` because the page has no "Current squad"
+  section, without working down the rest of the reference's section
+  priority list first — most English club articles never use that title.
 - Returning `status: OK` with an empty `members` array — that's
   `PARSE_FAILED`.
 - **Writing an envelope file for `NEEDS_DECISION`, `SOURCE_BROKEN`, or
