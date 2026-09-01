@@ -44,6 +44,18 @@ Before touching anything, validate every envelope in the batch in one call:
 node scripts/envelope-check.ts <path1> <path2> ...
 ```
 
+On Windows, `node`/`npm` may not be on the shell's PATH by default — if a
+bare call like this one fails, locate `node.exe`'s directory (commonly
+`C:\Program Files\nodejs`) and prepend it to `PATH` for that command,
+rather than trying alternate invocations one at a time. The same applies
+to the batch-end regenerate's `node` call below.
+
+This call never passes `envelope-check.ts`'s optional
+`--against <storedSquad.json>` flag. That mode reports blast radius
+against one stored squad's own roster — it needs a per-team stored-squad
+path to diff against, and belongs to `squad-verifier`'s per-team check,
+not this skill's single, multi-team entry-gate call.
+
 Two distinct checks follow from this, and they act at different scopes:
 
 - **Structural validity is a whole-batch gate.** If `envelope-check.ts`
@@ -225,6 +237,41 @@ disk before regeneration runs at all.
 Never hand-edit `data/index.json` or `lib/squads.generated.ts` directly for
 any reason — they exist only as this generator's output.
 
+### If the generator itself fails
+
+`gen-squads.ts` throws — before writing either output — on an unrecognised
+league folder under `data/squads/club/`, a squad file whose `id` field
+doesn't match its own filename, or two squad files sharing the same `id`.
+The entry gate does not catch any of these in advance:
+`validateEnvelope` only checks that a club envelope's `team.league` is a
+non-empty string, not that it's one of the closed `League` values, so a
+bad value can slip through the gate and only surface here.
+
+**Recognise it** by the command exiting non-zero with one of those three
+error messages, each naming the offending file directly.
+
+**Know the state you're in when it happens:** every team's squad file and
+`players.json` edits from step 5 are already correctly on disk — those
+writes are not rolled back — but `data/index.json` and
+`lib/squads.generated.ts` still reflect the pre-batch tree, since the
+generator throws before writing either one. `npm run check`'s diff guard
+will fail on this mismatch until it's resolved.
+
+**Do not** hand-edit `data/index.json` or `lib/squads.generated.ts` to
+paper over the mismatch — that prohibition holds even in this failure
+case. The fix is to open the squad file the error names, correct the
+actual structural problem (move it to the right league folder, correct
+its `id`, or resolve the duplicate), and re-run
+`node scripts/gen-squads.ts`. Once every file under `data/squads/` is
+structurally sound, the same command that failed will succeed.
+
+**Report it explicitly** rather than folding it into a normal completion
+line: name the failing file and the generator's exact error, state that
+the team-level writes already succeeded and are not at risk, and flag
+that `data/index.json`/`lib/squads.generated.ts` are stale — and that
+`npm run check` will fail — until the offending file is fixed and the
+generator is re-run successfully.
+
 ## Report format
 
 Per team written:
@@ -295,6 +342,9 @@ orchestrator's own report is compiled from.
   club's real colours) from `raw` or from a fresh fetch instead of trusting
   the envelope's already-clean fields — that work belongs to whichever
   reader produced the envelope, not to this skill.
+- Leaving `lastUpdated`/`source` stale on a refresh — step 5 overwrites
+  both with today's date and the envelope's `team.source` on every write,
+  new squad or refresh alike, with no exceptions.
 
 ## Quick reference
 
