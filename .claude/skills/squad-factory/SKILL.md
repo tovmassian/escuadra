@@ -71,12 +71,17 @@ One `Agent` call per team, dispatched concurrently:
 - prompt: instruct the subagent to invoke `squad-fetcher` (`intake`) or
   `squad-verifier` (`maintain`) **via the Skill tool, for this one team
   only**, passing the run's envelope directory. Hand the subagent exactly one
-  team, never a list — `squad-verifier`'s own SKILL.md describes fanning out
-  to one sub-subagent per team when it is given several team ids at once
-  (its "or 'all'" case); that fan-out is for a human invoking it directly.
-  Handing a multi-team list to a phase-1 or phase-5 dispatch here would
-  trigger that internal fan-out on top of this skill's own per-team dispatch,
-  which is redundant nesting, not real parallelism gained.
+  team, never a list. This matters most for `squad-verifier`: its own
+  SKILL.md is written for "one or more existing squad ids (or 'all')" and
+  describes fanning out to one sub-subagent per team when it is handed
+  several at once — that fan-out belongs to a human invoking it directly
+  across a whole audit, not to a per-team dispatch this skill has already
+  sliced down to one team. Handing it a multi-team list here would trigger
+  that internal fan-out on top of this skill's own per-team dispatch —
+  redundant nesting, not real parallelism gained. `squad-fetcher`'s own
+  SKILL.md, by contrast, is written for exactly one team throughout and has
+  no documented multi-team mode at all — handing it a list isn't "extra
+  fan-out," it's input the skill was never built to accept.
 - ask the subagent to return two things: the worker's own one-line or
   worksheet report (verbatim — this skill does not rewrite it), and, for
   routing, the worker's status/path outcome (`squad-fetcher`'s
