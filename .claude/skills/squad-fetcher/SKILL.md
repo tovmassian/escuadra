@@ -116,7 +116,7 @@ skill.
 status is reported entirely through the one-line return — no file, no
 partial envelope, nothing under `.claude/tmp/squad-factory/`. This is
 deliberate, not a shortcut: the envelope exists to hand `squad-writer` a
-*parsed roster*, and the orchestrator only ever passes `OK` envelopes to
+_parsed roster_, and the orchestrator only ever passes `OK` envelopes to
 the writer regardless of status — a `NEEDS_DECISION`/`SOURCE_BROKEN`/
 `PARSE_FAILED` envelope would have no consumer. It would also be
 unsatisfiable: `validateEnvelope` requires `team.id`, `team.name`,
@@ -160,7 +160,7 @@ maintenance re-read of a squad whose id already existed in
 `data/index.json`, omit `identity` entirely — do not set it to `null`,
 an empty object, or the values you happen to see on the page. An **absent**
 key means "not inspected" and tells the writer to preserve whatever
-`primaryColor`/`secondaryColor`/`marker` is already stored; an *incorrect*
+`primaryColor`/`secondaryColor`/`marker` is already stored; an _incorrect_
 present key would overwrite good stored data with something this skill was
 never asked to verify (kit colours read off an infobox are not the same
 fact as a nation's flag, for instance).
