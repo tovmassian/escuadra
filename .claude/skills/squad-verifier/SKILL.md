@@ -25,25 +25,36 @@ when the two were never the same thing). Club colours are closer to kit
 colours but still brand identity, not membership — out of scope for the
 same reason. Verify the roster; leave identity fields alone entirely.
 
-**The `verified` flag on the squad's own file is the only thing this skill
-may write — nothing else, ever.** It has no authority to fix rosters, touch
-`players.json`/`index.json`, or edit any other field of the squad file. Set
-`verified` to match the verdict: `true` on a clean `VALID` result, `false`
-on anything else — including flipping a stale `true` back to `false` when
-a previously-verified squad has drifted out of date since its last check.
-That flag-flip is the full extent of the write; fixing the actual roster
+**`verified` is the only field of committed squad data this skill may
+write.** It has no authority to fix rosters, touch `players.json`, or edit
+any other field of the squad file. Set `verified` to match the verdict:
+`true` on a clean `VALID` result, `false` on anything else — including
+flipping a stale `true` back to `false` when a previously-verified squad
+has drifted out of date since its last check. That flag-flip is the full
+extent of this skill's write to committed data; fixing the actual roster
 after a bad verdict is [[squad-updater]]'s job, run separately by the
-user's choice.
+user's choice. This skill also writes a roster envelope (see the procedure
+below) — but that file lives under `.claude/tmp/`, which is run scratch,
+not committed data, and `data/index.json` changing afterward is a
+downstream consequence of someone else regenerating it, not a write this
+skill performs.
 
-## Critical rule: never trust prose extraction of the roster table
+## Parsing rules live elsewhere — follow them, don't reinvent them
 
-Same failure mode as squad-updater: asking a fetch tool to "list the
-players" runs the page through a summarizing model that paraphrases or
-drops tabular detail with no signal that it did. **Always pull the raw
-wikitext of the squad section and parse the template lines yourself** —
-fetch the sections/raw-wikitext URLs directly rather than through a
-tool that summarizes through a model. Never key a mismatch verdict off a
-prose summary of a roster.
+**Read `.claude/skills/squad-factory/references/wikitext-roster-parsing.md`
+before parsing anything, and follow it exactly.** It is the single source
+for page title resolution, the two-step fetch, section selection, the two
+club/nation template families and how to read them, field extraction, and
+the drop-rows rule. None of that is repeated here — restating it is
+exactly how this skill's copy and squad-updater's began drifting apart in
+the first place.
+
+One line worth keeping here so the warning isn't lost at a glance: **never
+key a verdict off a prose summary of the roster table.** A fetch tool that
+"lists the players" runs the page through a model that paraphrases or
+drops tabular detail with no signal that it did — always pull the raw
+wikitext and parse the template lines yourself. See the reference for the
+exact URLs and template shapes.
 
 ## Delegate the check to a sonnet subagent, one per team
 
@@ -82,15 +93,12 @@ is fine.
 2. **Resolve each `playerId`** against `data/players.json` to get `name`,
    `position`, `nationality`, `club`, `birth`.
 
-3. **Fetch the squad section from the stored `source` URL** — the same
-   two-step Wikipedia fetch as squad-updater:
-   - `https://en.wikipedia.org/w/api.php?action=parse&page=<Title>&prop=sections&format=json`
-     to find the "Current squad" (or "Recent call-ups") section index.
-   - `https://en.wikipedia.org/w/index.php?title=<Title>&action=raw&section=<N>`
-     for the raw wikitext, parsed the same way squad-updater does:
-     `{{Fs player|...}}` for clubs, `{{nat fs g player|...}}` for nations.
-     If `source` 404s, has moved, or the "Current squad" section is gone,
-     that itself is a finding — report it, don't guess a replacement URL.
+3. **Fetch the squad section from the stored `source` URL**, following the
+   parsing reference's two-step fetch, section-selection, and template
+   rules exactly — don't re-derive them here. If `source` 404s, has moved,
+   or neither section the reference accepts is present, that itself is a
+   finding — report it (and, for the envelope in step 5, that's
+   `SOURCE_BROKEN`) — don't guess a replacement URL.
 
 4. **Diff the live roster against the stored one.** Check, per player:
    - Present in one list but not the other (dropped or added since the
@@ -104,7 +112,62 @@ is fine.
      transliteration difference the same severity as a wrong number or
      wrong position.
 
-5. **Do not check `season`, `primaryColor`, `secondaryColor`, or
+5. **Write a roster envelope for `squad-writer`, from the live roster you
+   just parsed for steps 3-4.** That parse already happened for the diff —
+   emitting it costs nothing, and it's the same artifact `squad-fetcher`
+   produces, so `squad-writer` can consume a verifier result directly
+   instead of a human relaying this worksheet by hand. Build a
+   `RosterEnvelope` (`scripts/roster-envelope.ts` — read it for the exact
+   field names and optionality; don't work from a paraphrase of it):
+   - `team.id`/`kind`/`league` from the stored file (step 1); `team.name`
+     and `team.season` copied through from the stored file too, exactly as
+     stored — carried along unverified, never diffed against Wikipedia,
+     per the Scope rule.
+   - `team.source`/`sectionTitle`/`asOf` from the fetch in step 3.
+   - `members` is the **live Wikipedia roster** parsed in steps 3-4, not
+     the stored one — the same shape `squad-fetcher` would produce fetching
+     this team today.
+   - **Omit the `identity` key entirely.** This skill is forbidden from
+     checking `primaryColor`, `secondaryColor`, and `marker` (Scope,
+     above), so it must never emit them — an absent key is what tells
+     `squad-writer` to preserve the stored values; emitting it, even with
+     values read straight off the page, would let unverified data
+     overwrite a good marker.
+   - `warnings: []`, unless step 6 below adds an entry.
+   - Set `status: OK` when the page parsed cleanly, **regardless of the
+     verdict** — `status` describes the fetch, `verdict` describes the
+     comparison (step 9). A `STALE` or `INVALID` team still produces an
+     `OK` envelope. Reserve `SOURCE_BROKEN`/`PARSE_FAILED` for when the
+     fetch or parse itself failed (step 3's finding). On either of those
+     statuses, **write no envelope file at all** and report the failure in
+     the verdict instead — the same rule `squad-fetcher` follows, because
+     `validateEnvelope` requires `team.id`/`name`/`season`/`source`/
+     `sectionTitle` to be non-empty, which a broken source or a failed
+     parse can't supply.
+
+   On `status: OK`, write the file to
+   `.claude/tmp/squad-factory/<runId>/<squadId>.json` (create the
+   directory if it doesn't exist), then validate it:
+   `node scripts/envelope-check.ts <path>`. Fix any reported problem before
+   moving on — a validation failure means the envelope is malformed, not
+   that the tool is wrong.
+
+   The envelope is the machine handoff to `squad-writer`; the worksheet
+   (step 9) remains the human-readable report. Neither replaces the
+   other — produce both whenever an envelope is written.
+
+6. **Check the blast radius — through the CLI, never by eye.** Only when
+   step 5 wrote a file: run
+   `node scripts/envelope-check.ts --against <stored squad path> <envelope path>`
+   and record what it prints. Past `BLAST_RADIUS_THRESHOLD` (40% — see
+   `scripts/roster-envelope.ts`) it prints a `BLAST RADIUS` line naming the
+   percentage of the stored roster that changed; when it does, add a
+   `warnings[]` entry to the envelope quoting that percentage and re-save
+   the file. This warning is advisory on an on-demand run — the operator
+   is reading the report — and is the designated promotion point to a hard
+   block if the factory is ever moved to a schedule.
+
+7. **Do not check `season`, `primaryColor`, `secondaryColor`, or
    `marker`.** These are identity fields, not roster data, and Wikipedia's
    infobox doesn't reliably speak to the same fact this skill would be
    diffing against (kit colours vs. a nation's flag colours, in
@@ -112,8 +175,8 @@ is fine.
    list and each member's player record; nothing on the squad file outside
    of `members` and `verified` is this skill's concern.
 
-6. **`verified` is the one field this skill may write — set it to match
-   the verdict (step 7), in either direction.** `VALID` → `verified: true`.
+8. **`verified` is the one field this skill may write — set it to match
+   the verdict (step 9), in either direction.** `VALID` → `verified: true`.
    `STALE`/`INVALID` → `verified: false`, even if it was `true` going in —
    that's exactly the "verified once, now drifted" case this flag exists
    to catch, so leaving a stale `true` in place defeats the point of
@@ -125,7 +188,7 @@ is fine.
    the interim staleness rather than this skill needing to run the
    generator itself).
 
-7. **Return a verdict.** `VALID` means the stored roster agrees with the
+9. **Return a verdict.** `VALID` means the stored roster agrees with the
    current Wikipedia page in every checked respect — for a `VALID` team,
    the verdict line is the entire report; don't pad it
    with a list of everything that matched. Anything else is `STALE`/
@@ -181,9 +244,11 @@ argentina, brazil, france, japan").
 - Treating a WebFetch prose summary of the roster as ground truth instead
   of parsing raw wikitext — this hides real discrepancies behind a verdict
   that looks clean.
-- Editing the roster, colours, `players.json`, or `index.json` under any
-  verdict — this skill reports and, at most, flips one flag. Point the
-  user at squad-updater for actual repairs.
+- Hand-editing the roster, colours, `players.json`, or `data/index.json`
+  under any verdict — the only committed data this skill ever writes is
+  the one `verified` flip; `index.json` only changes later, as someone
+  else's regeneration, never as this skill's own edit. Point the user at
+  squad-updater for actual repairs.
 - Leaving a stale `verified: true` in place on a non-VALID verdict —
   the flag must move to `false` the moment drift is confirmed, not stay
   frozen at whatever squad-updater last set it to. A verified squad going
