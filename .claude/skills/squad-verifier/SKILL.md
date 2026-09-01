@@ -32,12 +32,12 @@ any other field of the squad file. Set `verified` to match the verdict:
 flipping a stale `true` back to `false` when a previously-verified squad
 has drifted out of date since its last check. That flag-flip is the full
 extent of this skill's write to committed data; fixing the actual roster
-after a bad verdict is [[squad-updater]]'s job, run separately by the
-user's choice. This skill also writes a roster envelope (see the procedure
-below) — but that file lives under `.claude/tmp/`, which is run scratch,
-not committed data, and `data/index.json` changing afterward is a
-downstream consequence of someone else regenerating it, not a write this
-skill performs.
+after a bad verdict is [[squad-writer]]'s job (usually reached through
+`squad-factory`), run separately by the user's choice. This skill also
+writes a roster envelope (see the procedure below) — but that file lives
+under `.claude/tmp/`, which is run scratch, not committed data, and
+`data/index.json` changing afterward is a downstream consequence of
+someone else regenerating it, not a write this skill performs.
 
 ## Parsing rules live elsewhere — follow them, don't reinvent them
 
@@ -46,8 +46,8 @@ before parsing anything, and follow it exactly.** It is the single source
 for page title resolution, the two-step fetch, section selection, the two
 club/nation template families and how to read them, field extraction, and
 the drop-rows rule. None of that is repeated here — restating it is
-exactly how this skill's copy and squad-updater's began drifting apart in
-the first place.
+exactly how this skill's own copy and the retired `squad-updater`'s used to
+drift apart in the first place.
 
 One line worth keeping here so the warning isn't lost at a glance: **never
 key a verdict off a prose summary of the roster table.** A fetch tool that
@@ -60,7 +60,7 @@ exact URLs and template shapes.
 
 Verification is mechanical and its one permitted write (`verified`) lands
 in a squad's own file, never a file shared across teams — so unlike
-squad-updater (which must run its teams sequentially to avoid racing on
+`squad-writer` (which must run its teams sequentially to avoid racing on
 shared writes to `players.json`/`index.json`), multiple teams here have no
 shared state and can be dispatched **in parallel**. For each team, launch
 an `Agent` call:
@@ -192,7 +192,7 @@ is fine.
    current Wikipedia page in every checked respect — for a `VALID` team,
    the verdict line is the entire report; don't pad it
    with a list of everything that matched. Anything else is `STALE`/
-   `INVALID`, and the report is judged by whether **squad-updater could
+   `INVALID`, and the report is judged by whether **squad-writer could
    apply the fix from your text alone, without re-fetching or re-parsing
    Wikipedia itself.** That means every discrepancy carries the raw
    wikitext values, not just "doesn't match" — write the report as if
@@ -206,7 +206,7 @@ For a `VALID` team, one line is the whole report:
 <team name> (<id>) — VALID (26/26 players match)
 ```
 
-For `STALE`/`INVALID`, give squad-updater a worksheet it can act on
+For `STALE`/`INVALID`, give squad-writer a worksheet it can act on
 directly, grouped by discrepancy type — omit any group that's empty:
 
 ```
@@ -228,7 +228,7 @@ Drifted (present in both, fields differ):
 ```
 
 Carry the exact raw template line for every **missing** player (step 4) —
-that's the one case squad-updater cannot reconstruct from a short summary,
+that's the one case squad-writer cannot reconstruct from a short summary,
 since it needs the literal `no=`/`pos=`/`nat=`/`club=` fields to write a
 correct `members` entry and, if the player is new to `players.json`, a
 correct player record. For **dropped** and **drifted** players, the stored
@@ -236,7 +236,7 @@ correct player record. For **dropped** and **drifted** players, the stored
 to restate the whole player record when only one field moved.
 
 For multiple teams, compile one such block per team plus a one-line
-overall summary (e.g. "2/6 valid, 4 need a squad-updater refresh:
+overall summary (e.g. "2/6 valid, 4 need a squad-writer refresh:
 argentina, brazil, france, japan").
 
 ## Common mistakes
@@ -248,16 +248,16 @@ argentina, brazil, france, japan").
   under any verdict — the only committed data this skill ever writes is
   the one `verified` flip; `index.json` only changes later, as someone
   else's regeneration, never as this skill's own edit. Point the user at
-  squad-updater for actual repairs.
+  `squad-writer` (usually via `squad-factory`) for actual repairs.
 - Leaving a stale `verified: true` in place on a non-VALID verdict —
   the flag must move to `false` the moment drift is confirmed, not stay
-  frozen at whatever squad-updater last set it to. A verified squad going
+  frozen at whatever `squad-writer` last set it to. A verified squad going
   stale over time without the flag catching up is exactly the scenario
   this skill exists to close.
 - Fabricating or guessing a replacement Wikipedia URL when the stored
   `source` is broken — report the broken link as a finding.
 - Running one subagent per team sequentially "to be safe" — there's no
-  shared-write hazard here (unlike squad-updater), so parallel dispatch is
+  shared-write hazard here (unlike `squad-writer`), so parallel dispatch is
   correct and faster.
 - Flagging a transliteration/diacritic-only name difference at the same
   severity as a wrong shirt number or missing player — note it, but don't
@@ -267,7 +267,7 @@ argentina, brazil, france, japan").
   kit colours against what's actually a nation's flag colour produces a
   false positive that reads as a real defect but isn't one.
 - Reporting a non-VALID verdict as a headline count ("9 missing, several
-  drifts") without the worksheet detail — squad-updater then has to
+  drifts") without the worksheet detail — squad-writer then has to
   re-fetch and re-parse Wikipedia itself, which defeats the point of
   running verification first. Always include the raw template line for
   every missing player, and old→new values for every drift.

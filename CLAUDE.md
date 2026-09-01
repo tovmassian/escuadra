@@ -107,7 +107,7 @@ different numbers for club and country. Do not denormalise it onto the player.
 
 ```
 data/index.json                       squad manifest — GENERATED, see below
-data/players.json                     { id, name, birth, position, nationality, photo: null }
+data/players.json                     { id, name, fullName, birth, position, nationality, club, photo: null }
 data/squads/nation/<id>.json          { id, kind: 'nation', name, season, verified,
                                          primaryColor, secondaryColor, marker,
                                          members: [{ playerId, no, captain? }] }
@@ -169,6 +169,12 @@ Static squad JSON is imported directly. It does **not** belong in a store.
 current clubs are precisely what models hallucinate. Every generated squad
 carries `verified: false`. Never present unverified data as authoritative and
 never clear that flag without a real source check.
+
+Squad data is created and maintained through the `squad-factory` skill set:
+`squad-factory` orchestrates `squad-fetcher` (parallel Wikipedia reads),
+`squad-writer` (the sole, sequential writer of `players.json`, squad files,
+and the generated index) and `squad-verifier` (parallel re-verification of
+existing squads).
 
 ## Architecture rules
 

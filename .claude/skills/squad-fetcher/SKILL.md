@@ -64,12 +64,14 @@ skill.
 4. **Parse each member** per the reference, populating the envelope's
    `EnvelopeMember` fields (`scripts/roster-envelope.ts`): shirt number
    (`no`), `position`, display `name`, `captain` flag, and — nation
-   squads only — `club`/`clubNat`/`birth`; club squads only — `nationality`.
-   Keep the literal template line for every parsed member in `raw` — the
-   writer needs it and must never have to re-fetch or re-parse Wikipedia to
-   reconstruct a member it wasn't given verbatim. Apply the reference's
-   drop rule for members it doesn't want kept. Zero parsed members is
-   `PARSE_FAILED` (see Failure statuses) — never an empty `OK` roster.
+   squads only — `club`/`clubNat`/`birth`; club squads only —
+   `nationality` (see the nationality rule below for exactly what value
+   belongs there). Keep the literal template line for every parsed member
+   in `raw` — the writer needs it and must never have to re-fetch or
+   re-parse Wikipedia to reconstruct a member it wasn't given verbatim.
+   Apply the reference's drop rule for members it doesn't want kept. Zero
+   parsed members is `PARSE_FAILED` (see Failure statuses) — never an
+   empty `OK` roster.
 
 5. **Determine the squad id.** Check `data/index.json` first: if this team
    is already in the manifest, reuse its `id` exactly — this is a
@@ -180,6 +182,23 @@ invented, guessed, or rotated:
   `clubColors`/`pattern` fields) — never a value chosen because it "looks
   about right."
 
+## The nationality rule
+
+`EnvelopeMember.nationality` must be a full country name, in the same form
+`data/players.json` already stores throughout (`Spain`, not `ESP`) —
+`squad-writer` copies this field verbatim into a new player record and
+performs no translation of its own, so this envelope is the only place a
+raw code ever gets converted.
+
+- **Club squads**: translate the wikitext's `nat=` FIFA code into the
+  country's full name. Match the spelling already used elsewhere in
+  `data/players.json` rather than inventing a new one.
+- **Nation squads**: the wikitext carries no per-member nationality field —
+  the whole page is one nationality — so set every member's `nationality`
+  to the squad's own country. That every member shares one nationality is
+  exactly why the level-3 question on a nation squad asks for the player's
+  club instead.
+
 ## The no-questions rule
 
 This skill runs as one of potentially many parallel subagents dispatched
@@ -229,6 +248,9 @@ the output contract:
   for omitting the key.
 - Guessing a `League` value for a club outside the closed set instead of
   returning `NEEDS_DECISION`.
+- Leaving `nationality` as the raw `nat=` FIFA code, or leaving it unset for
+  a nation-squad member, instead of the full country name `squad-writer`
+  expects to copy verbatim — see the nationality rule.
 - Returning `status: OK` with an empty `members` array — that's
   `PARSE_FAILED`.
 - **Writing an envelope file for `NEEDS_DECISION`, `SOURCE_BROKEN`, or
