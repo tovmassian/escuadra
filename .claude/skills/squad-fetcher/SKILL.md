@@ -9,10 +9,12 @@ description: Use when fetching an Escuadra team's current roster from Wikipedia 
 ## Overview
 
 Given one team name (club or nation), fetch its current roster from
-Wikipedia and write it to **one output file**: a roster envelope at
-`.claude/tmp/squad-factory/<runId>/<squadId>.json`. That envelope is the
-entire deliverable. This skill's one guarantee is that nothing else on disk
-is touched — not `data/players.json`, not any squad file under
+Wikipedia. On a clean parse, write it to **one output file**: a roster
+envelope at `.claude/tmp/squad-factory/<runId>/<squadId>.json`. That
+envelope is the entire deliverable when one is produced — this skill
+writes at most one file, and (see the output contract) sometimes none at
+all. Its one guarantee either way is that nothing else on disk is
+touched — not `data/players.json`, not any squad file under
 `data/squads/`, not `data/index.json`, not `lib/squads.generated.ts`. It
 never runs `npm run gen:squads`. Reconciling players and writing squad
 files is [[squad-writer]]'s job, run separately, later, sequentially, once
@@ -50,22 +52,24 @@ skill.
    Internazionale) do not guess — see the no-questions rule below.
 
 2. **Find the squad section index** via the sections API, per the
-   reference's two-step fetch. Prefer "Current squad"; fall back to
-   "Recent call-ups" and record that fallback plus the "as of" date in
-   `team.sectionTitle` / `team.asOf`. Neither section existing is
+   reference's two-step fetch and its section-selection rule. Record
+   whichever section title you used in `team.sectionTitle`, and the
+   section's "as of" date (if any) in `team.asOf`. Neither of the
+   reference's two acceptable sections existing on the page is
    `SOURCE_BROKEN`.
 
 3. **Fetch the raw wikitext** of that section directly — never through a
    summarising tool.
 
-4. **Parse each member** per the reference: shirt number, position,
-   display name, captain flag, and (nation squads) `club`/`clubNat`/birth,
-   or (club squads) `nat`. Keep the literal template line for every parsed
-   member in `raw` — the writer needs it and must never have to re-fetch or
-   re-parse Wikipedia to reconstruct a member it wasn't given verbatim.
-   Drop any row with no `no=` value, per the reference's drop rule. Zero
-   parsed members is `PARSE_FAILED` (see Failure statuses) — never an
-   empty `OK` roster.
+4. **Parse each member** per the reference, populating the envelope's
+   `EnvelopeMember` fields (`scripts/roster-envelope.ts`): shirt number
+   (`no`), `position`, display `name`, `captain` flag, and — nation
+   squads only — `club`/`clubNat`/`birth`; club squads only — `nationality`.
+   Keep the literal template line for every parsed member in `raw` — the
+   writer needs it and must never have to re-fetch or re-parse Wikipedia to
+   reconstruct a member it wasn't given verbatim. Apply the reference's
+   drop rule for members it doesn't want kept. Zero parsed members is
+   `PARSE_FAILED` (see Failure statuses) — never an empty `OK` roster.
 
 5. **Determine the squad id.** Check `data/index.json` first: if this team
    is already in the manifest, reuse its `id` exactly — this is a
@@ -80,22 +84,74 @@ skill.
    maintenance re-read of a team whose id already existed, skip this step
    entirely; do not populate `identity` at all.
 
-7. **Write the envelope** to
+7. **On `status: OK` only, write the envelope** to
    `.claude/tmp/squad-factory/<runId>/<squadId>.json` (create the
    directory if it doesn't exist) using the `RosterEnvelope` shape from
    `scripts/roster-envelope.ts` — read that file for the exact field
    names; don't work from memory or from this document's paraphrase of it.
+   Include `warnings` as an array on every envelope you write — `[]` when
+   there's nothing to flag, or a short note (e.g. a "Recent call-ups"
+   fallback, a questionable name spelling) when there is; the field is
+   required, not optional. On any other status
+   (`NEEDS_DECISION`/`SOURCE_BROKEN`/`PARSE_FAILED`), **do not write a
+   file at all** — go straight to step 9's failure return. See the output
+   contract below for why.
 
-8. **Validate before returning.** Run
+8. **Validate before returning** (`OK` only). Run
    `node scripts/envelope-check.ts <path>` against the file you just wrote
    and fix any reported problem — a validation failure here means the
    envelope is malformed, not that the tool is wrong. Do not return until
    it reports the file `OK`.
 
-9. **Return exactly one line**: `<status> <squadId> <path>`. Never return
-   the envelope's contents as prose, and never paste `members` or
-   `identity` into the response — the file on disk is the artifact; the
-   return line is just its address and status.
+9. **Return exactly one line** — the format depends on `status`. See
+   "The output contract" below for the two exact forms and worked
+   examples. Never return the envelope's contents as prose, and never
+   paste `members` or `identity` into the response — the file on disk (when
+   one exists) is the artifact; the return line is just its address and
+   status.
+
+## The output contract
+
+**An envelope file is written only when `status: OK`.** Every other
+status is reported entirely through the one-line return — no file, no
+partial envelope, nothing under `.claude/tmp/squad-factory/`. This is
+deliberate, not a shortcut: the envelope exists to hand `squad-writer` a
+*parsed roster*, and the orchestrator only ever passes `OK` envelopes to
+the writer regardless of status — a `NEEDS_DECISION`/`SOURCE_BROKEN`/
+`PARSE_FAILED` envelope would have no consumer. It would also be
+unsatisfiable: `validateEnvelope` requires `team.id`, `team.name`,
+`team.season`, `team.source`, `team.sectionTitle` to be non-empty strings
+and `team.league` to be set for a club — none of which are knowable for,
+say, an unresolved "Milan" or a club in an unrecognized league. Reporting
+the failure directly, instead of forcing values into a schema built for a
+successful parse, avoids that whole class of problem. Failure information
+lands in the run report the orchestrator compiles from every subagent's
+return line, not in a file on disk.
+
+The two return forms, exactly:
+
+- **`status: OK`** → `OK <squadId> <path>` — `<path>` is exactly where the
+  validated envelope was written.
+
+  ```
+  OK ars .claude/tmp/squad-factory/2026-09-01T0417/ars.json
+  ```
+
+- **Any other status** → `<STATUS> <identifier> - <reason>`, one line, no
+  file written. `<identifier>` is the squad id when one was already
+  resolved (a maintenance re-read that then hits `SOURCE_BROKEN` or
+  `PARSE_FAILED` still knows its id); otherwise it's the team name exactly
+  as given (an intake `NEEDS_DECISION` on an ambiguous name has no id to
+  report). `<reason>` is one line the orchestrator's report can use
+  verbatim — for `NEEDS_DECISION`, name every candidate with enough detail
+  to disambiguate (page URL, league, or existing id); for
+  `SOURCE_BROKEN`/`PARSE_FAILED`, state plainly what went wrong.
+
+  ```
+  NEEDS_DECISION Milan - ambiguous team name: AC Milan (https://en.wikipedia.org/wiki/AC_Milan) or Inter Milan (https://en.wikipedia.org/wiki/Internazionale, already stored as id "int")
+  SOURCE_BROKEN atl - https://en.wikipedia.org/wiki/Atletico_Madrid has no section matching the reference's section-selection rule
+  PARSE_FAILED bra - zero members survived parsing the "Current squad" section; the member rows didn't match the shape the reference describes
+  ```
 
 ## The identity rule
 
@@ -128,35 +184,36 @@ invented, guessed, or rotated:
 
 This skill runs as one of potentially many parallel subagents dispatched
 in the same batch. It has no operator to prompt and must never block
-waiting on one. Every ambiguity becomes a status on the envelope instead
-of a question:
+waiting on one. Every ambiguity becomes status `NEEDS_DECISION` on the
+return line instead of a question:
 
 - **Ambiguous team name** (e.g. "Milan" could mean AC Milan or
-  Internazionale) → `status: NEEDS_DECISION`, with each candidate named in
-  `decisions[]`.
+  Internazionale) → `NEEDS_DECISION`, with every candidate named in the
+  return line's reason (see the output contract).
 - **A club whose real domestic league isn't one of the closed `League`
   values** (`la-liga`, `serie-a`, `bundesliga`, `ligue-1`,
   `premier-league`, `ucl`) → also `NEEDS_DECISION`. Never invent a league
   folder or force the club into the nearest big-5 league to make the
   envelope valid.
 
-A `NEEDS_DECISION` envelope still gets written and validated like any
-other — it just carries no usable roster for the writer to act on, and the
+**No envelope file is written for `NEEDS_DECISION`** — per the output
+contract, this status is reported entirely through the return line. The
 downstream orchestrator (or whoever dispatched this skill) surfaces the
-listed candidates to a human instead.
+listed candidates to a human from that line, not from a file.
 
 ## Failure statuses
 
 Use `scripts/roster-envelope.ts`'s exact status strings — there is no
-freeform status text:
+freeform status text. Like `NEEDS_DECISION`, neither of these writes an
+envelope file — both are reported entirely through the return line, per
+the output contract:
 
 - **`SOURCE_BROKEN`** — the page 404s or has moved, or the page has
-  neither a "Current squad" nor a "Recent call-ups" section to read a
-  roster from.
-- **`PARSE_FAILED`** — zero members survive parsing, or the template block
-  is malformed in a way the reference's rules don't account for. State
+  neither section the reference's section-selection rule accepts.
+- **`PARSE_FAILED`** — zero members survive parsing, or the member rows
+  are malformed in a way the reference's rules don't account for. State
   this plainly: **zero parsed members is `PARSE_FAILED`, never an empty
-  `OK` squad.** An empty roster must never be written under status `OK`.
+  `OK` squad.** An empty roster must never be reported as `OK`.
 
 ## Common mistakes
 
@@ -174,10 +231,18 @@ freeform status text:
   returning `NEEDS_DECISION`.
 - Returning `status: OK` with an empty `members` array — that's
   `PARSE_FAILED`.
+- **Writing an envelope file for `NEEDS_DECISION`, `SOURCE_BROKEN`, or
+  `PARSE_FAILED`** — only `OK` ever produces a file; forcing values into
+  `team.id`/`team.league`/etc. to satisfy the schema on a status that
+  doesn't have them yet is exactly the mistake the output contract exists
+  to rule out.
 - Asking the operator anything, or blocking on an assumption that someone
   will answer — this skill cannot prompt; ambiguity is `NEEDS_DECISION`,
   not a question.
-- Skipping `node scripts/envelope-check.ts <path>` before returning, or
-  returning despite it reporting a problem.
+- Skipping `node scripts/envelope-check.ts <path>` before returning an
+  `OK`, or returning despite it reporting a problem.
+- Omitting `warnings` from a written envelope, or setting it to anything
+  other than an array — `[]` is required when there's nothing to flag.
 - Returning the envelope's JSON contents in the response text instead of
-  the one-line `<status> <squadId> <path>` — the file is the deliverable.
+  the one-line return format — the file (when one exists) is the
+  deliverable, not the response.
