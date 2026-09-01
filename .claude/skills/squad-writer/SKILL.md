@@ -53,7 +53,7 @@ Two distinct checks follow from this, and they act at different scopes:
 - **`status` is a per-team filter, applied after the structural gate
   passes.** Process only envelopes whose `status` is `OK`. In practice this
   filter rarely does anything: both producing skills write an envelope file
-  *only* when `status: OK` (see `squad-fetcher`'s output contract) — a
+  _only_ when `status: OK` (see `squad-fetcher`'s output contract) — a
   `NEEDS_DECISION`/`SOURCE_BROKEN`/`PARSE_FAILED` result never reaches disk
   as a file at all. Keep the check anyway as a defensive backstop rather than
   assuming the invariant always holds; if it's ever violated, skip that
@@ -79,7 +79,7 @@ Two distinct checks follow from this, and they act at different scopes:
 5. **Write both files together, atomically as a pair**: the staged
    `players.json` edits from step 1, and the squad file at its nested path
    with the shape `{ id, kind, name, season, primaryColor, secondaryColor,
-   verified, marker, lastUpdated, source, members }` — `id`/`kind`/`name`/
+verified, marker, lastUpdated, source, members }` — `id`/`kind`/`name`/
    `season` copied from `envelope.team`; `primaryColor`/`secondaryColor`/
    `marker` from step 4; `verified` always `false` (see below); `lastUpdated`
    set to today's ISO date (`YYYY-MM-DD`); `source` set to
@@ -97,7 +97,7 @@ step 2, move on to The batch-end regenerate.
 
 Do this for **every** member the envelope carries, not only the ones that
 look new — an existing player's `club` can be stale from a prior session even
-when nothing about *this* team's fetch changed for them.
+when nothing about _this_ team's fetch changed for them.
 
 - **Match key**: normalised name — `normalizeName` in
   `scripts/roster-envelope.ts` is the reference implementation
@@ -178,7 +178,7 @@ This is the hard invariant of the whole skill.
   every marker in the repo.** Treating an absent `identity` as "no colour, no
   marker" — nulling the fields out, or substituting some placeholder — looks
   harmless on one team, but a maintenance sweep runs `identity`-less
-  envelopes across *every* stored team in the same batch. That single bug
+  envelopes across _every_ stored team in the same batch. That single bug
   would silently erase every team's real colours and marker geometry in one
   run, with no signal until someone opens the picker. There is no automatic
   undo for that beyond git history.
@@ -217,7 +217,7 @@ node scripts/gen-squads.ts
 Use that direct `node` invocation, **not** `npm run gen:squads` — the npm
 wrapper dominates cost on Windows for a script this cheap to invoke
 directly. Run it **once**, not once per team: the generator rebuilds
-`data/index.json` and `lib/squads.generated.ts` from *every* file under
+`data/index.json` and `lib/squads.generated.ts` from _every_ file under
 `data/squads/` on each invocation, so calling it after each team redoes the
 same O(n) work n times for a result step 5 already ensured is correct on
 disk before regeneration runs at all.
@@ -298,12 +298,12 @@ orchestrator's own report is compiled from.
 
 ## Quick reference
 
-| What                 | Value                                                                                     |
-| -------------------- | ------------------------------------------------------------------------------------------ |
-| Nation squad path    | `data/squads/nation/<id>.json`                                                             |
-| Club squad path      | `data/squads/club/<league>/<id>.json`, `<league>` = `envelope.team.league`                 |
-| League folder values | `la-liga`, `serie-a`, `bundesliga`, `ligue-1`, `premier-league`, `ucl`                      |
-| Squad file shape     | `{ id, kind, name, season, primaryColor, secondaryColor, verified, marker, lastUpdated, source, members }` |
-| Squad member shape   | `{ playerId, no, captain? }`                                                                |
-| Player record shape  | `{ id, name, fullName, birth, position, nationality, club, photo }`                         |
+| What                 | Value                                                                                                                                     |
+| -------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
+| Nation squad path    | `data/squads/nation/<id>.json`                                                                                                            |
+| Club squad path      | `data/squads/club/<league>/<id>.json`, `<league>` = `envelope.team.league`                                                                |
+| League folder values | `la-liga`, `serie-a`, `bundesliga`, `ligue-1`, `premier-league`, `ucl`                                                                    |
+| Squad file shape     | `{ id, kind, name, season, primaryColor, secondaryColor, verified, marker, lastUpdated, source, members }`                                |
+| Squad member shape   | `{ playerId, no, captain? }`                                                                                                              |
+| Player record shape  | `{ id, name, fullName, birth, position, nationality, club, photo }`                                                                       |
 | Player id convention | kebab-case surname; first-name/disambiguated form where existing data already does so (`lautaro`, `pio-esposito`) or to avoid a collision |
