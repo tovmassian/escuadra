@@ -75,7 +75,7 @@ describe('squad data integrity', () => {
       });
 
       // The squad file is the source of truth for `verified` — squad-verifier
-      // and squad-updater only ever write it there — but the manifest carries
+      // and squad-writer only ever write it there — but the manifest carries
       // its own copy so the picker can show it without importing the full
       // roster. This catches the two falling out of sync.
       it('has a verified flag matching the squad file', () => {

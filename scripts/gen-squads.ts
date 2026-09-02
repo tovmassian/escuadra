@@ -5,13 +5,15 @@ import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { format, resolveConfig } from 'prettier';
 import type { League, Squad, SquadManifestEntry } from '../types/squad';
+// One list, not two: squad-writer's entry gate validates a club envelope's
+// league against this same const, so a bad value is refused before any file
+// is written rather than throwing out of here mid-batch.
+import { LEAGUES } from './roster-envelope.ts';
 
 const REPO_ROOT = path.resolve(import.meta.dirname, '..');
 const SQUADS_DIR = path.join(REPO_ROOT, 'data', 'squads');
 const GENERATED_TS_PATH = path.join(REPO_ROOT, 'lib', 'squads.generated.ts');
 const INDEX_JSON_PATH = path.join(REPO_ROOT, 'data', 'index.json');
-
-const LEAGUES: League[] = ['la-liga', 'serie-a', 'bundesliga', 'ligue-1', 'premier-league', 'ucl'];
 
 function isLeague(value: string): value is League {
   return (LEAGUES as string[]).includes(value);

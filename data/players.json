@@ -16,7 +16,7 @@
     "birth": "1994-10-03",
     "position": "GK",
     "nationality": "Spain",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -26,7 +26,7 @@
     "birth": "2006-08-10",
     "position": "GK",
     "nationality": "England",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -56,7 +56,7 @@
     "birth": "2004-06-01",
     "position": "DF",
     "nationality": "Spain",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -66,7 +66,7 @@
     "birth": "1997-10-08",
     "position": "DF",
     "nationality": "England",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -76,7 +76,7 @@
     "birth": "2002-01-09",
     "position": "DF",
     "nationality": "Ecuador",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -96,7 +96,7 @@
     "birth": "2001-06-17",
     "position": "DF",
     "nationality": "Netherlands",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -106,7 +106,7 @@
     "birth": "2002-05-19",
     "position": "DF",
     "nationality": "Italy",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -116,7 +116,7 @@
     "birth": "2006-09-26",
     "position": "DF",
     "nationality": "England",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -136,7 +136,7 @@
     "birth": "1998-12-17",
     "position": "MF",
     "nationality": "Norway",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -176,7 +176,7 @@
     "birth": "1999-01-14",
     "position": "MF",
     "nationality": "England",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -196,7 +196,7 @@
     "birth": "2007-03-21",
     "position": "MF",
     "nationality": "England",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -204,9 +204,9 @@
     "name": "Bukayo Saka",
     "fullName": "Bukayo Ayoyinka Temidayo Saka",
     "birth": "2001-09-05",
-    "position": "FW",
+    "position": "MF",
     "nationality": "England",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -226,7 +226,7 @@
     "birth": "1998-06-29",
     "position": "MF",
     "nationality": "England",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -246,7 +246,7 @@
     "birth": "1998-06-04",
     "position": "FW",
     "nationality": "Sweden",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -266,7 +266,7 @@
     "birth": "2002-03-10",
     "position": "FW",
     "nationality": "England",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -274,9 +274,9 @@
     "name": "Kai Havertz",
     "fullName": "Kai Havertz",
     "birth": "1999-06-11",
-    "position": "FW",
+    "position": "MF",
     "nationality": "Germany",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -2789,7 +2789,7 @@
     "birth": "1997-10-23",
     "position": "DF",
     "nationality": "England",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -2799,7 +2799,7 @@
     "birth": "2002-01-30",
     "position": "FW",
     "nationality": "Greece",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {
@@ -2809,7 +2809,7 @@
     "birth": "2000-03-02",
     "position": "GK",
     "nationality": "France",
-    "club": null,
+    "club": "Arsenal",
     "photo": null
   },
   {

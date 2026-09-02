@@ -10,7 +10,7 @@
     "bands": ["#EF0107"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-08-26",
+  "lastUpdated": "2026-09-01",
   "source": "https://en.wikipedia.org/wiki/Arsenal_F.C.",
   "members": [
     {
@@ -47,10 +47,6 @@
       "captain": true
     },
     {
-      "playerId": "jesus",
-      "no": 9
-    },
-    {
       "playerId": "eze",
       "no": 10
     },
@@ -83,20 +79,12 @@
       "no": 20
     },
     {
-      "playerId": "vieira",
-      "no": 21
-    },
-    {
       "playerId": "nwaneri",
       "no": 22
     },
     {
       "playerId": "merino",
       "no": 23
-    },
-    {
-      "playerId": "nelson",
-      "no": 24
     },
     {
       "playerId": "havertz",
@@ -129,10 +117,6 @@
     {
       "playerId": "lewis-skelly",
       "no": 49
-    },
-    {
-      "playerId": "dowman",
-      "no": 56
     }
   ]
 }
