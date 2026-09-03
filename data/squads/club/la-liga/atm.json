@@ -1,0 +1,118 @@
+{
+  "id": "atm",
+  "kind": "club",
+  "name": "Atlético Madrid",
+  "season": "2026/27",
+  "primaryColor": "#CB3524",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#CB3524", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-03",
+  "source": "https://en.wikipedia.org/wiki/Atlético_Madrid",
+  "members": [
+    {
+      "playerId": "musso",
+      "no": 1
+    },
+    {
+      "playerId": "martinez",
+      "no": 2
+    },
+    {
+      "playerId": "vargas",
+      "no": 3
+    },
+    {
+      "playerId": "mendoza",
+      "no": 4
+    },
+    {
+      "playerId": "cardoso",
+      "no": 5
+    },
+    {
+      "playerId": "koke",
+      "no": 6,
+      "captain": true
+    },
+    {
+      "playerId": "lee-kang-in",
+      "no": 7
+    },
+    {
+      "playerId": "barrios",
+      "no": 8
+    },
+    {
+      "playerId": "sorloth",
+      "no": 9
+    },
+    {
+      "playerId": "baena",
+      "no": 10
+    },
+    {
+      "playerId": "lookman",
+      "no": 11
+    },
+    {
+      "playerId": "c-martin",
+      "no": 12
+    },
+    {
+      "playerId": "oblak",
+      "no": 13
+    },
+    {
+      "playerId": "llorente",
+      "no": 14
+    },
+    {
+      "playerId": "david",
+      "no": 15
+    },
+    {
+      "playerId": "ortiz",
+      "no": 16
+    },
+    {
+      "playerId": "hancko",
+      "no": 17
+    },
+    {
+      "playerId": "pubill",
+      "no": 18
+    },
+    {
+      "playerId": "alvarez",
+      "no": 19
+    },
+    {
+      "playerId": "simeone",
+      "no": 20
+    },
+    {
+      "playerId": "romero",
+      "no": 21
+    },
+    {
+      "playerId": "grimaldo",
+      "no": 22
+    },
+    {
+      "playerId": "hjulmand",
+      "no": 23
+    },
+    {
+      "playerId": "le-normand",
+      "no": 24
+    },
+    {
+      "playerId": "esquivel",
+      "no": 25
+    }
+  ]
+}

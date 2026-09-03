@@ -1,0 +1,114 @@
+{
+  "id": "dep",
+  "kind": "club",
+  "name": "Deportivo",
+  "season": "2026/27",
+  "primaryColor": "#0000FF",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#0000FF", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-02",
+  "source": "https://en.wikipedia.org/wiki/Deportivo_de_A_Coruña",
+  "members": [
+    {
+      "playerId": "parreno",
+      "no": 1
+    },
+    {
+      "playerId": "altimira",
+      "no": 2
+    },
+    {
+      "playerId": "comas",
+      "no": 3
+    },
+    {
+      "playerId": "noubi",
+      "no": 4
+    },
+    {
+      "playerId": "barcia",
+      "no": 5
+    },
+    {
+      "playerId": "aubameyang",
+      "no": 7
+    },
+    {
+      "playerId": "villares",
+      "no": 8,
+      "captain": true
+    },
+    {
+      "playerId": "eddahchouri",
+      "no": 9
+    },
+    {
+      "playerId": "hernandez",
+      "no": 10
+    },
+    {
+      "playerId": "mella",
+      "no": 11
+    },
+    {
+      "playerId": "quagliata",
+      "no": 12
+    },
+    {
+      "playerId": "roman",
+      "no": 13
+    },
+    {
+      "playerId": "r-rodriguez",
+      "no": 14
+    },
+    {
+      "playerId": "loureiro",
+      "no": 15
+    },
+    {
+      "playerId": "amatucci",
+      "no": 16
+    },
+    {
+      "playerId": "asp-jensen",
+      "no": 18
+    },
+    {
+      "playerId": "cruz",
+      "no": 19
+    },
+    {
+      "playerId": "soriano",
+      "no": 21
+    },
+    {
+      "playerId": "ede",
+      "no": 22
+    },
+    {
+      "playerId": "navarro",
+      "no": 23
+    },
+    {
+      "playerId": "angelino",
+      "no": 24
+    },
+    {
+      "playerId": "fernandez",
+      "no": 25
+    },
+    {
+      "playerId": "nsongo",
+      "no": 32
+    },
+    {
+      "playerId": "gijselhart",
+      "no": 34
+    }
+  ]
+}

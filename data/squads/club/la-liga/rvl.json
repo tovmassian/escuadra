@@ -1,0 +1,110 @@
+{
+  "id": "rvl",
+  "kind": "club",
+  "name": "Rayo Vallecano",
+  "season": "2026/27",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#FF0000",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#FF0000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-02",
+  "source": "https://en.wikipedia.org/wiki/Rayo_Vallecano",
+  "members": [
+    {
+      "playerId": "cardenas",
+      "no": 1
+    },
+    {
+      "playerId": "ratiu",
+      "no": 2
+    },
+    {
+      "playerId": "kumbulla",
+      "no": 3
+    },
+    {
+      "playerId": "p-diaz",
+      "no": 4
+    },
+    {
+      "playerId": "felipe",
+      "no": 5
+    },
+    {
+      "playerId": "ciss",
+      "no": 6
+    },
+    {
+      "playerId": "palazon",
+      "no": 7
+    },
+    {
+      "playerId": "u-lopez",
+      "no": 8
+    },
+    {
+      "playerId": "alemao",
+      "no": 9
+    },
+    {
+      "playerId": "camello",
+      "no": 10
+    },
+    {
+      "playerId": "nteka",
+      "no": 11
+    },
+    {
+      "playerId": "batalla",
+      "no": 13
+    },
+    {
+      "playerId": "tsitaishvili",
+      "no": 14
+    },
+    {
+      "playerId": "pedrosa",
+      "no": 17
+    },
+    {
+      "playerId": "a-garcia",
+      "no": 18
+    },
+    {
+      "playerId": "de-frutos",
+      "no": 19
+    },
+    {
+      "playerId": "balliu",
+      "no": 20
+    },
+    {
+      "playerId": "f-perez",
+      "no": 21
+    },
+    {
+      "playerId": "p-fernandez",
+      "no": 22
+    },
+    {
+      "playerId": "valentin",
+      "no": 23,
+      "captain": true
+    },
+    {
+      "playerId": "lejeune",
+      "no": 24
+    },
+    {
+      "playerId": "vertrouwd",
+      "no": 33
+    },
+    {
+      "playerId": "bouare",
+      "no": 36
+    }
+  ]
+}

@@ -1,0 +1,110 @@
+{
+  "id": "osa",
+  "kind": "club",
+  "name": "Osasuna",
+  "season": "2026/27",
+  "primaryColor": "#D70F27",
+  "secondaryColor": "#00004C",
+  "verified": true,
+  "marker": {
+    "bands": ["#D70F27", "#00004C"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-03",
+  "source": "https://en.wikipedia.org/wiki/CA_Osasuna",
+  "members": [
+    {
+      "playerId": "sergio-herrera",
+      "no": 1
+    },
+    {
+      "playerId": "herrando",
+      "no": 5
+    },
+    {
+      "playerId": "torro",
+      "no": 6
+    },
+    {
+      "playerId": "moncayola",
+      "no": 7
+    },
+    {
+      "playerId": "iker-munoz",
+      "no": 8
+    },
+    {
+      "playerId": "raul-garcia",
+      "no": 9
+    },
+    {
+      "playerId": "oroz",
+      "no": 10
+    },
+    {
+      "playerId": "barja",
+      "no": 11,
+      "captain": true
+    },
+    {
+      "playerId": "aitor-fernandez",
+      "no": 13
+    },
+    {
+      "playerId": "ruben-garcia",
+      "no": 14
+    },
+    {
+      "playerId": "rico",
+      "no": 15
+    },
+    {
+      "playerId": "moi-gomez",
+      "no": 16
+    },
+    {
+      "playerId": "budimir",
+      "no": 17
+    },
+    {
+      "playerId": "moro",
+      "no": 18
+    },
+    {
+      "playerId": "rosier",
+      "no": 19
+    },
+    {
+      "playerId": "dubasin",
+      "no": 21
+    },
+    {
+      "playerId": "boyomo",
+      "no": 22
+    },
+    {
+      "playerId": "bretones",
+      "no": 23
+    },
+    {
+      "playerId": "catena",
+      "no": 24
+    },
+    {
+      "playerId": "echegoyen",
+      "no": 26
+    },
+    {
+      "playerId": "arguibide",
+      "no": 27
+    },
+    {
+      "playerId": "osambela",
+      "no": 29
+    },
+    {
+      "playerId": "yeboah",
+      "no": 48
+    }
+  ]
+}

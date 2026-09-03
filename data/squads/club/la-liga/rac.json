@@ -1,0 +1,114 @@
+{
+  "id": "rac",
+  "kind": "club",
+  "name": "Racing de Santander",
+  "season": "2026/27",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#369028",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#369028"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-03",
+  "source": "https://en.wikipedia.org/wiki/Racing_de_Santander",
+  "members": [
+    {
+      "playerId": "eriksson",
+      "no": 1
+    },
+    {
+      "playerId": "mantilla",
+      "no": 2
+    },
+    {
+      "playerId": "aaron-martin",
+      "no": 3
+    },
+    {
+      "playerId": "hernando",
+      "no": 4
+    },
+    {
+      "playerId": "pablo-ramon",
+      "no": 5
+    },
+    {
+      "playerId": "sainz-maza",
+      "no": 6,
+      "captain": true
+    },
+    {
+      "playerId": "guliashvili",
+      "no": 7
+    },
+    {
+      "playerId": "almeida",
+      "no": 8
+    },
+    {
+      "playerId": "arana",
+      "no": 9
+    },
+    {
+      "playerId": "vicente",
+      "no": 10
+    },
+    {
+      "playerId": "andres-martin",
+      "no": 11
+    },
+    {
+      "playerId": "villalibre",
+      "no": 12
+    },
+    {
+      "playerId": "agirrezabala",
+      "no": 13
+    },
+    {
+      "playerId": "maguette-gueye",
+      "no": 14
+    },
+    {
+      "playerId": "pablo-garcia",
+      "no": 15
+    },
+    {
+      "playerId": "facundo-gonzalez",
+      "no": 16
+    },
+    {
+      "playerId": "jorge-salinas",
+      "no": 17
+    },
+    {
+      "playerId": "prati",
+      "no": 18
+    },
+    {
+      "playerId": "luque",
+      "no": 19
+    },
+    {
+      "playerId": "sergio-canales",
+      "no": 20
+    },
+    {
+      "playerId": "zabiri",
+      "no": 21
+    },
+    {
+      "playerId": "pedro-felipe",
+      "no": 22
+    },
+    {
+      "playerId": "ivan-martin",
+      "no": 23
+    },
+    {
+      "playerId": "belocian",
+      "no": 24
+    }
+  ]
+}

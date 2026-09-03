@@ -1,0 +1,114 @@
+{
+  "id": "elc",
+  "kind": "club",
+  "name": "Elche",
+  "season": "2026/27",
+  "primaryColor": "#05642C",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#05642C", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-02",
+  "source": "https://en.wikipedia.org/wiki/Elche_CF",
+  "members": [
+    {
+      "playerId": "dituro",
+      "no": 1
+    },
+    {
+      "playerId": "sangare",
+      "no": 2
+    },
+    {
+      "playerId": "diaby",
+      "no": 4
+    },
+    {
+      "playerId": "redondo",
+      "no": 5
+    },
+    {
+      "playerId": "bigas",
+      "no": 6,
+      "captain": true
+    },
+    {
+      "playerId": "santiago",
+      "no": 7
+    },
+    {
+      "playerId": "aguado",
+      "no": 8
+    },
+    {
+      "playerId": "ponce",
+      "no": 9
+    },
+    {
+      "playerId": "buonanotte",
+      "no": 10
+    },
+    {
+      "playerId": "valera",
+      "no": 11
+    },
+    {
+      "playerId": "villar",
+      "no": 12
+    },
+    {
+      "playerId": "nino",
+      "no": 14
+    },
+    {
+      "playerId": "neto",
+      "no": 16
+    },
+    {
+      "playerId": "josan",
+      "no": 17
+    },
+    {
+      "playerId": "diangana",
+      "no": 19
+    },
+    {
+      "playerId": "morente",
+      "no": 20
+    },
+    {
+      "playerId": "cepeda",
+      "no": 21
+    },
+    {
+      "playerId": "chust",
+      "no": 23
+    },
+    {
+      "playerId": "osorio",
+      "no": 24
+    },
+    {
+      "playerId": "barzic",
+      "no": 26
+    },
+    {
+      "playerId": "houary",
+      "no": 29
+    },
+    {
+      "playerId": "boayar",
+      "no": 32
+    },
+    {
+      "playerId": "iturbe",
+      "no": 43
+    },
+    {
+      "playerId": "morcillo",
+      "no": 47
+    }
+  ]
+}

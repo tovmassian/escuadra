@@ -1,0 +1,114 @@
+{
+  "id": "lev",
+  "kind": "club",
+  "name": "Levante",
+  "season": "2026/27",
+  "primaryColor": "#222730",
+  "secondaryColor": "#661424",
+  "verified": true,
+  "marker": {
+    "bands": ["#222730", "#661424"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-02",
+  "source": "https://en.wikipedia.org/wiki/Levante_UD",
+  "members": [
+    {
+      "playerId": "campos",
+      "no": 1
+    },
+    {
+      "playerId": "mandi",
+      "no": 2
+    },
+    {
+      "playerId": "ndukwe",
+      "no": 3
+    },
+    {
+      "playerId": "dela",
+      "no": 4
+    },
+    {
+      "playerId": "sotelo",
+      "no": 5
+    },
+    {
+      "playerId": "requena",
+      "no": 6
+    },
+    {
+      "playerId": "brugue",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "olasagasti",
+      "no": 8
+    },
+    {
+      "playerId": "i-romero",
+      "no": 9
+    },
+    {
+      "playerId": "c-alvarez",
+      "no": 10
+    },
+    {
+      "playerId": "musuayi",
+      "no": 11
+    },
+    {
+      "playerId": "ryan",
+      "no": 13
+    },
+    {
+      "playerId": "cabello",
+      "no": 14
+    },
+    {
+      "playerId": "garcia",
+      "no": 17
+    },
+    {
+      "playerId": "bardeli",
+      "no": 18
+    },
+    {
+      "playerId": "rey",
+      "no": 20
+    },
+    {
+      "playerId": "etta-eyong",
+      "no": 21
+    },
+    {
+      "playerId": "toljan",
+      "no": 22
+    },
+    {
+      "playerId": "sanchez",
+      "no": 23
+    },
+    {
+      "playerId": "t-fernandez",
+      "no": 24
+    },
+    {
+      "playerId": "cortes",
+      "no": 27
+    },
+    {
+      "playerId": "n-perez",
+      "no": 29
+    },
+    {
+      "playerId": "primo",
+      "no": 32
+    },
+    {
+      "playerId": "santos",
+      "no": 33
+    }
+  ]
+}

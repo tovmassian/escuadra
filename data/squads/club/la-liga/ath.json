@@ -1,0 +1,118 @@
+{
+  "id": "ath",
+  "kind": "club",
+  "name": "Athletic Club",
+  "season": "2026/27",
+  "primaryColor": "#EE2523",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#EE2523", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-02",
+  "source": "https://en.wikipedia.org/wiki/Athletic_Bilbao",
+  "members": [
+    {
+      "playerId": "unai-simon",
+      "no": 1
+    },
+    {
+      "playerId": "vivian",
+      "no": 3
+    },
+    {
+      "playerId": "a-paredes",
+      "no": 4
+    },
+    {
+      "playerId": "y-alvarez",
+      "no": 5
+    },
+    {
+      "playerId": "prados",
+      "no": 6
+    },
+    {
+      "playerId": "berenguer",
+      "no": 7
+    },
+    {
+      "playerId": "sancet",
+      "no": 8
+    },
+    {
+      "playerId": "williams",
+      "no": 9,
+      "captain": true
+    },
+    {
+      "playerId": "nico-williams",
+      "no": 10
+    },
+    {
+      "playerId": "guruzeta",
+      "no": 11
+    },
+    {
+      "playerId": "areso",
+      "no": 12
+    },
+    {
+      "playerId": "padilla",
+      "no": 13
+    },
+    {
+      "playerId": "laporte",
+      "no": 14
+    },
+    {
+      "playerId": "rincon",
+      "no": 15
+    },
+    {
+      "playerId": "ruiz-de-galarreta",
+      "no": 16
+    },
+    {
+      "playerId": "berchiche",
+      "no": 17
+    },
+    {
+      "playerId": "jauregizar",
+      "no": 18
+    },
+    {
+      "playerId": "rego",
+      "no": 20
+    },
+    {
+      "playerId": "sannadi",
+      "no": 21
+    },
+    {
+      "playerId": "serrano",
+      "no": 22
+    },
+    {
+      "playerId": "r-navarro",
+      "no": 23
+    },
+    {
+      "playerId": "gerenabarrena",
+      "no": 24
+    },
+    {
+      "playerId": "djalo",
+      "no": 25
+    },
+    {
+      "playerId": "canales",
+      "no": 28
+    },
+    {
+      "playerId": "louis-jean",
+      "no": 31
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "sev",
+  "kind": "club",
+  "name": "Sevilla",
+  "season": "2026/27",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#E20001",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#E20001"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-03",
+  "source": "https://en.wikipedia.org/wiki/Sevilla_FC",
+  "members": [
+    {
+      "playerId": "vlachodimos",
+      "no": 1
+    },
+    {
+      "playerId": "iglesias",
+      "no": 2
+    },
+    {
+      "playerId": "julio-diaz",
+      "no": 3
+    },
+    {
+      "playerId": "salas",
+      "no": 4
+    },
+    {
+      "playerId": "castrin",
+      "no": 5
+    },
+    {
+      "playerId": "agoume",
+      "no": 6
+    },
+    {
+      "playerId": "alfon-gonzalez",
+      "no": 7
+    },
+    {
+      "playerId": "kochorashvili",
+      "no": 8
+    },
+    {
+      "playerId": "ure",
+      "no": 9
+    },
+    {
+      "playerId": "peque-fernandez",
+      "no": 10
+    },
+    {
+      "playerId": "ruben-vargas",
+      "no": 11
+    },
+    {
+      "playerId": "sangante",
+      "no": 12
+    },
+    {
+      "playerId": "fran-gonzalez",
+      "no": 13
+    },
+    {
+      "playerId": "manu-bueno",
+      "no": 14
+    },
+    {
+      "playerId": "isaac-romero",
+      "no": 16
+    },
+    {
+      "playerId": "suazo",
+      "no": 17,
+      "captain": true
+    },
+    {
+      "playerId": "guridi",
+      "no": 18
+    },
+    {
+      "playerId": "stassin",
+      "no": 19
+    },
+    {
+      "playerId": "correia",
+      "no": 20
+    },
+    {
+      "playerId": "ejuke",
+      "no": 21
+    },
+    {
+      "playerId": "carmona",
+      "no": 22
+    },
+    {
+      "playerId": "marcao",
+      "no": 23
+    },
+    {
+      "playerId": "fofana",
+      "no": 24
+    },
+    {
+      "playerId": "guillen",
+      "no": 27
+    },
+    {
+      "playerId": "sierra",
+      "no": 30
+    },
+    {
+      "playerId": "rafa-romero",
+      "no": 33
+    }
+  ]
+}

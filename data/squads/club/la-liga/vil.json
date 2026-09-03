@@ -1,0 +1,114 @@
+{
+  "id": "vil",
+  "kind": "club",
+  "name": "Villarreal",
+  "season": "2026/27",
+  "primaryColor": "#FFFF00",
+  "secondaryColor": "#1880FF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFF00"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-02",
+  "source": "https://en.wikipedia.org/wiki/Villarreal_CF",
+  "members": [
+    {
+      "playerId": "junior",
+      "no": 1
+    },
+    {
+      "playerId": "costa",
+      "no": 2
+    },
+    {
+      "playerId": "freeman",
+      "no": 3
+    },
+    {
+      "playerId": "diatta",
+      "no": 5
+    },
+    {
+      "playerId": "p-navarro",
+      "no": 6
+    },
+    {
+      "playerId": "moreno",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "foyth",
+      "no": 8
+    },
+    {
+      "playerId": "mikautadze",
+      "no": 9
+    },
+    {
+      "playerId": "moleiro",
+      "no": 10
+    },
+    {
+      "playerId": "akhomach",
+      "no": 11
+    },
+    {
+      "playerId": "veiga",
+      "no": 12
+    },
+    {
+      "playerId": "r-gomez",
+      "no": 13
+    },
+    {
+      "playerId": "comesana",
+      "no": 14
+    },
+    {
+      "playerId": "mourino",
+      "no": 15
+    },
+    {
+      "playerId": "macia",
+      "no": 16
+    },
+    {
+      "playerId": "buchanan",
+      "no": 17
+    },
+    {
+      "playerId": "gueye",
+      "no": 18
+    },
+    {
+      "playerId": "pepe",
+      "no": 19
+    },
+    {
+      "playerId": "c-romero",
+      "no": 20
+    },
+    {
+      "playerId": "oluwaseyi",
+      "no": 21
+    },
+    {
+      "playerId": "a-perez",
+      "no": 22
+    },
+    {
+      "playerId": "cardona",
+      "no": 23
+    },
+    {
+      "playerId": "n-saliba",
+      "no": 24
+    },
+    {
+      "playerId": "gulacsi",
+      "no": 25
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "id": "val",
+  "kind": "club",
+  "name": "Valencia",
+  "season": "2026/27",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-03",
+  "source": "https://en.wikipedia.org/wiki/Valencia_CF",
+  "members": [
+    {
+      "playerId": "dimitrievski",
+      "no": 1
+    },
+    {
+      "playerId": "g-rodriguez",
+      "no": 2
+    },
+    {
+      "playerId": "copete",
+      "no": 3
+    },
+    {
+      "playerId": "diakhaby",
+      "no": 4
+    },
+    {
+      "playerId": "tarrega",
+      "no": 5
+    },
+    {
+      "playerId": "sadiq",
+      "no": 6
+    },
+    {
+      "playerId": "danjuma",
+      "no": 7
+    },
+    {
+      "playerId": "guerra",
+      "no": 8
+    },
+    {
+      "playerId": "duro",
+      "no": 9
+    },
+    {
+      "playerId": "elliott",
+      "no": 10
+    },
+    {
+      "playerId": "rioja",
+      "no": 11
+    },
+    {
+      "playerId": "de-haas",
+      "no": 12
+    },
+    {
+      "playerId": "rivero",
+      "no": 13
+    },
+    {
+      "playerId": "gaya",
+      "no": 14,
+      "captain": true
+    },
+    {
+      "playerId": "dieng",
+      "no": 15
+    },
+    {
+      "playerId": "d-lopez",
+      "no": 16
+    },
+    {
+      "playerId": "pepelu",
+      "no": 18
+    },
+    {
+      "playerId": "raba",
+      "no": 19
+    },
+    {
+      "playerId": "foulquier",
+      "no": 20
+    },
+    {
+      "playerId": "vazquez",
+      "no": 21
+    },
+    {
+      "playerId": "a-martinez",
+      "no": 22
+    },
+    {
+      "playerId": "ugrinic",
+      "no": 23
+    },
+    {
+      "playerId": "maffeo",
+      "no": 24
+    },
+    {
+      "playerId": "van-oevelen",
+      "no": 25
+    },
+    {
+      "playerId": "sato",
+      "no": 39
+    }
+  ]
+}

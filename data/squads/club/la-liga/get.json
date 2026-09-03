@@ -1,0 +1,110 @@
+{
+  "id": "get",
+  "kind": "club",
+  "name": "Getafe",
+  "season": "2026/27",
+  "primaryColor": "#005999",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#005999"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-03",
+  "source": "https://en.wikipedia.org/wiki/Getafe_CF",
+  "members": [
+    {
+      "playerId": "letacek",
+      "no": 1
+    },
+    {
+      "playerId": "djene",
+      "no": 2,
+      "captain": true
+    },
+    {
+      "playerId": "davinchi",
+      "no": 3
+    },
+    {
+      "playerId": "sazonov",
+      "no": 4
+    },
+    {
+      "playerId": "abqar",
+      "no": 5
+    },
+    {
+      "playerId": "m-martin",
+      "no": 6
+    },
+    {
+      "playerId": "juanmi",
+      "no": 7
+    },
+    {
+      "playerId": "gudelj",
+      "no": 8
+    },
+    {
+      "playerId": "mayoral",
+      "no": 9
+    },
+    {
+      "playerId": "satriano",
+      "no": 10
+    },
+    {
+      "playerId": "terrats",
+      "no": 11
+    },
+    {
+      "playerId": "soria",
+      "no": 13
+    },
+    {
+      "playerId": "boselli",
+      "no": 15
+    },
+    {
+      "playerId": "f-serrano",
+      "no": 16
+    },
+    {
+      "playerId": "femenia",
+      "no": 17
+    },
+    {
+      "playerId": "uche",
+      "no": 18
+    },
+    {
+      "playerId": "unal",
+      "no": 19
+    },
+    {
+      "playerId": "azon",
+      "no": 20
+    },
+    {
+      "playerId": "andres-garcia",
+      "no": 21
+    },
+    {
+      "playerId": "mojica",
+      "no": 22
+    },
+    {
+      "playerId": "mangala",
+      "no": 23
+    },
+    {
+      "playerId": "z-romero",
+      "no": 24
+    },
+    {
+      "playerId": "valou",
+      "no": 26
+    }
+  ]
+}

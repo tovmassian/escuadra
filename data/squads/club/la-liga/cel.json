@@ -1,0 +1,118 @@
+{
+  "id": "cel",
+  "kind": "club",
+  "name": "Celta Vigo",
+  "season": "2026/27",
+  "primaryColor": "#87CEEB",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#87CEEB"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-02",
+  "source": "https://en.wikipedia.org/wiki/RC_Celta_de_Vigo",
+  "members": [
+    {
+      "playerId": "bayindir",
+      "no": 1
+    },
+    {
+      "playerId": "starfelt",
+      "no": 2
+    },
+    {
+      "playerId": "alonso",
+      "no": 3
+    },
+    {
+      "playerId": "faye",
+      "no": 4
+    },
+    {
+      "playerId": "carreira",
+      "no": 5
+    },
+    {
+      "playerId": "moriba",
+      "no": 6
+    },
+    {
+      "playerId": "borja-iglesias",
+      "no": 7
+    },
+    {
+      "playerId": "m-roman",
+      "no": 8
+    },
+    {
+      "playerId": "jutgla",
+      "no": 9
+    },
+    {
+      "playerId": "aspas",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "duran",
+      "no": 11
+    },
+    {
+      "playerId": "radu",
+      "no": 13
+    },
+    {
+      "playerId": "febas",
+      "no": 14
+    },
+    {
+      "playerId": "a-nunez",
+      "no": 15
+    },
+    {
+      "playerId": "h-gonzalez",
+      "no": 16
+    },
+    {
+      "playerId": "rueda",
+      "no": 17
+    },
+    {
+      "playerId": "lago",
+      "no": 18
+    },
+    {
+      "playerId": "swedberg",
+      "no": 19
+    },
+    {
+      "playerId": "j-rodriguez",
+      "no": 20
+    },
+    {
+      "playerId": "vecino",
+      "no": 21
+    },
+    {
+      "playerId": "galan",
+      "no": 22
+    },
+    {
+      "playerId": "h-alvarez",
+      "no": 23
+    },
+    {
+      "playerId": "driouech",
+      "no": 24
+    },
+    {
+      "playerId": "i-villar",
+      "no": 25
+    },
+    {
+      "playerId": "el-abdellaoui",
+      "no": 39
+    }
+  ]
+}

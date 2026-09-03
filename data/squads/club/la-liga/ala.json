@@ -1,0 +1,122 @@
+{
+  "id": "ala",
+  "kind": "club",
+  "name": "Deportivo Alavés",
+  "season": "2026/27",
+  "primaryColor": "#0000FF",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#0000FF", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-03",
+  "source": "https://en.wikipedia.org/wiki/Deportivo_Alavés",
+  "members": [
+    {
+      "playerId": "sivera",
+      "no": 1,
+      "captain": true
+    },
+    {
+      "playerId": "valentini",
+      "no": 2
+    },
+    {
+      "playerId": "enriquez",
+      "no": 3
+    },
+    {
+      "playerId": "suarez",
+      "no": 4
+    },
+    {
+      "playerId": "garces",
+      "no": 5
+    },
+    {
+      "playerId": "guevara",
+      "no": 6
+    },
+    {
+      "playerId": "perez",
+      "no": 7
+    },
+    {
+      "playerId": "blanco",
+      "no": 8
+    },
+    {
+      "playerId": "diaz",
+      "no": 9
+    },
+    {
+      "playerId": "alena",
+      "no": 10
+    },
+    {
+      "playerId": "t-martinez",
+      "no": 11
+    },
+    {
+      "playerId": "novoa",
+      "no": 12
+    },
+    {
+      "playerId": "rodriguez",
+      "no": 13
+    },
+    {
+      "playerId": "tenaglia",
+      "no": 14
+    },
+    {
+      "playerId": "boye",
+      "no": 15
+    },
+    {
+      "playerId": "koski",
+      "no": 16
+    },
+    {
+      "playerId": "otto",
+      "no": 17
+    },
+    {
+      "playerId": "m-rodriguez",
+      "no": 18
+    },
+    {
+      "playerId": "ibanez",
+      "no": 19
+    },
+    {
+      "playerId": "manas",
+      "no": 20
+    },
+    {
+      "playerId": "rebbach",
+      "no": 21
+    },
+    {
+      "playerId": "miguel-rodriguez",
+      "no": 22
+    },
+    {
+      "playerId": "protesoni",
+      "no": 23
+    },
+    {
+      "playerId": "olaiz",
+      "no": 27
+    },
+    {
+      "playerId": "izei-hernandez",
+      "no": 29
+    },
+    {
+      "playerId": "swiderski",
+      "no": 31
+    }
+  ]
+}

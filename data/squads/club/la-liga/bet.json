@@ -1,0 +1,118 @@
+{
+  "id": "bet",
+  "kind": "club",
+  "name": "Real Betis",
+  "season": "2026/27",
+  "primaryColor": "#359B5C",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#359B5C", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-03",
+  "source": "https://en.wikipedia.org/wiki/Real_Betis",
+  "members": [
+    {
+      "playerId": "valles",
+      "no": 1
+    },
+    {
+      "playerId": "bellerin",
+      "no": 2
+    },
+    {
+      "playerId": "diego-llorente",
+      "no": 3
+    },
+    {
+      "playerId": "natan",
+      "no": 4
+    },
+    {
+      "playerId": "bartra",
+      "no": 5
+    },
+    {
+      "playerId": "facundo-bernal",
+      "no": 6
+    },
+    {
+      "playerId": "antony",
+      "no": 7
+    },
+    {
+      "playerId": "fornals",
+      "no": 8
+    },
+    {
+      "playerId": "cucho-hernandez",
+      "no": 9
+    },
+    {
+      "playerId": "ezzalzouli",
+      "no": 10
+    },
+    {
+      "playerId": "fran-garcia-torres",
+      "no": 11
+    },
+    {
+      "playerId": "angel-ortiz",
+      "no": 12
+    },
+    {
+      "playerId": "conde",
+      "no": 13
+    },
+    {
+      "playerId": "losada",
+      "no": 14
+    },
+    {
+      "playerId": "fidalgo",
+      "no": 15
+    },
+    {
+      "playerId": "valentin-gomez",
+      "no": 16
+    },
+    {
+      "playerId": "riquelme",
+      "no": 17
+    },
+    {
+      "playerId": "deossa",
+      "no": 18
+    },
+    {
+      "playerId": "parrott",
+      "no": 19
+    },
+    {
+      "playerId": "lo-celso",
+      "no": 20
+    },
+    {
+      "playerId": "roca",
+      "no": 21
+    },
+    {
+      "playerId": "isco",
+      "no": 22,
+      "captain": true
+    },
+    {
+      "playerId": "firpo",
+      "no": 23
+    },
+    {
+      "playerId": "ruibal",
+      "no": 24
+    },
+    {
+      "playerId": "ceballos",
+      "no": 25
+    }
+  ]
+}

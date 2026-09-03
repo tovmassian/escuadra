@@ -1,0 +1,122 @@
+{
+  "id": "mal",
+  "kind": "club",
+  "name": "Málaga",
+  "season": "2026/27",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#103E9E",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#103E9E"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-02",
+  "source": "https://en.wikipedia.org/wiki/Málaga_CF",
+  "members": [
+    {
+      "playerId": "herrero",
+      "no": 1
+    },
+    {
+      "playerId": "puga",
+      "no": 3
+    },
+    {
+      "playerId": "galilea",
+      "no": 4
+    },
+    {
+      "playerId": "pastor",
+      "no": 5
+    },
+    {
+      "playerId": "ramon",
+      "no": 6,
+      "captain": true
+    },
+    {
+      "playerId": "haitam",
+      "no": 7
+    },
+    {
+      "playerId": "dotor",
+      "no": 8
+    },
+    {
+      "playerId": "chupete",
+      "no": 9
+    },
+    {
+      "playerId": "larrubia",
+      "no": 10
+    },
+    {
+      "playerId": "j-munoz",
+      "no": 11
+    },
+    {
+      "playerId": "salinas",
+      "no": 12
+    },
+    {
+      "playerId": "c-lopez",
+      "no": 13
+    },
+    {
+      "playerId": "rafa",
+      "no": 14
+    },
+    {
+      "playerId": "recio",
+      "no": 15
+    },
+    {
+      "playerId": "murillo",
+      "no": 16
+    },
+    {
+      "playerId": "jauregi",
+      "no": 17
+    },
+    {
+      "playerId": "p-martinez",
+      "no": 18
+    },
+    {
+      "playerId": "j-cruz",
+      "no": 19
+    },
+    {
+      "playerId": "calero",
+      "no": 20
+    },
+    {
+      "playerId": "a-nino",
+      "no": 21
+    },
+    {
+      "playerId": "lorenzo",
+      "no": 22
+    },
+    {
+      "playerId": "i-merino",
+      "no": 23
+    },
+    {
+      "playerId": "lobete",
+      "no": 24
+    },
+    {
+      "playerId": "rafita",
+      "no": 31
+    },
+    {
+      "playerId": "ochoa",
+      "no": 35
+    },
+    {
+      "playerId": "aznou",
+      "no": 39
+    }
+  ]
+}

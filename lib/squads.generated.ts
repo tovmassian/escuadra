@@ -1,27 +1,63 @@
 // GENERATED FILE — run `npm run gen:squads` to regenerate. Do not hand-edit.
 import type { Squad } from '@/types/squad';
+import squadAla from '@/data/squads/club/la-liga/ala.json';
 import squadArg from '@/data/squads/nation/arg.json';
 import squadArm from '@/data/squads/nation/arm.json';
 import squadArs from '@/data/squads/club/premier-league/ars.json';
+import squadAth from '@/data/squads/club/la-liga/ath.json';
+import squadAtm from '@/data/squads/club/la-liga/atm.json';
 import squadBar from '@/data/squads/club/la-liga/bar.json';
+import squadBet from '@/data/squads/club/la-liga/bet.json';
 import squadBra from '@/data/squads/nation/bra.json';
+import squadCel from '@/data/squads/club/la-liga/cel.json';
+import squadDep from '@/data/squads/club/la-liga/dep.json';
+import squadElc from '@/data/squads/club/la-liga/elc.json';
 import squadEsp from '@/data/squads/nation/esp.json';
 import squadFra from '@/data/squads/nation/fra.json';
+import squadGet from '@/data/squads/club/la-liga/get.json';
 import squadInt from '@/data/squads/club/serie-a/int.json';
 import squadJpn from '@/data/squads/nation/jpn.json';
+import squadLev from '@/data/squads/club/la-liga/lev.json';
+import squadMal from '@/data/squads/club/la-liga/mal.json';
+import squadOsa from '@/data/squads/club/la-liga/osa.json';
 import squadPsg from '@/data/squads/club/ligue-1/psg.json';
+import squadRac from '@/data/squads/club/la-liga/rac.json';
+import squadRcd from '@/data/squads/club/la-liga/rcd.json';
 import squadRma from '@/data/squads/club/la-liga/rma.json';
+import squadRso from '@/data/squads/club/la-liga/rso.json';
+import squadRvl from '@/data/squads/club/la-liga/rvl.json';
+import squadSev from '@/data/squads/club/la-liga/sev.json';
+import squadVal from '@/data/squads/club/la-liga/val.json';
+import squadVil from '@/data/squads/club/la-liga/vil.json';
 
 export const SQUAD_FILES: Record<string, Squad> = {
+  ala: squadAla as Squad,
   arg: squadArg as Squad,
   arm: squadArm as Squad,
   ars: squadArs as Squad,
+  ath: squadAth as Squad,
+  atm: squadAtm as Squad,
   bar: squadBar as Squad,
+  bet: squadBet as Squad,
   bra: squadBra as Squad,
+  cel: squadCel as Squad,
+  dep: squadDep as Squad,
+  elc: squadElc as Squad,
   esp: squadEsp as Squad,
   fra: squadFra as Squad,
+  get: squadGet as Squad,
   int: squadInt as Squad,
   jpn: squadJpn as Squad,
+  lev: squadLev as Squad,
+  mal: squadMal as Squad,
+  osa: squadOsa as Squad,
   psg: squadPsg as Squad,
+  rac: squadRac as Squad,
+  rcd: squadRcd as Squad,
   rma: squadRma as Squad,
+  rso: squadRso as Squad,
+  rvl: squadRvl as Squad,
+  sev: squadSev as Squad,
+  val: squadVal as Squad,
+  vil: squadVil as Squad,
 };

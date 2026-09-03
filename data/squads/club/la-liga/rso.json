@@ -1,0 +1,114 @@
+{
+  "id": "rso",
+  "kind": "club",
+  "name": "Real Sociedad",
+  "season": "2026/27",
+  "primaryColor": "#0042FF",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#0042FF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-02",
+  "source": "https://en.wikipedia.org/wiki/Real_Sociedad",
+  "members": [
+    {
+      "playerId": "remiro",
+      "no": 1
+    },
+    {
+      "playerId": "aramburu",
+      "no": 2
+    },
+    {
+      "playerId": "munoz",
+      "no": 3
+    },
+    {
+      "playerId": "gorrotxategi",
+      "no": 4
+    },
+    {
+      "playerId": "zubeldia",
+      "no": 5
+    },
+    {
+      "playerId": "j-martin",
+      "no": 6
+    },
+    {
+      "playerId": "barrenetxea",
+      "no": 7
+    },
+    {
+      "playerId": "turrientes",
+      "no": 8
+    },
+    {
+      "playerId": "oskarsson",
+      "no": 9
+    },
+    {
+      "playerId": "oyarzabal",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "guedes",
+      "no": 11
+    },
+    {
+      "playerId": "ochieng",
+      "no": 12
+    },
+    {
+      "playerId": "marrero",
+      "no": 13
+    },
+    {
+      "playerId": "kubo",
+      "no": 14
+    },
+    {
+      "playerId": "marin",
+      "no": 15
+    },
+    {
+      "playerId": "pacheco",
+      "no": 16
+    },
+    {
+      "playerId": "gomez",
+      "no": 17
+    },
+    {
+      "playerId": "soler",
+      "no": 18
+    },
+    {
+      "playerId": "sarr",
+      "no": 19
+    },
+    {
+      "playerId": "odriozola",
+      "no": 20
+    },
+    {
+      "playerId": "herrera",
+      "no": 21
+    },
+    {
+      "playerId": "fort",
+      "no": 22
+    },
+    {
+      "playerId": "zakharyan",
+      "no": 23
+    },
+    {
+      "playerId": "l-sucic",
+      "no": 24
+    }
+  ]
+}

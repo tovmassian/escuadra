@@ -1,0 +1,118 @@
+{
+  "id": "rcd",
+  "kind": "club",
+  "name": "Espanyol",
+  "season": "2026/27",
+  "primaryColor": "#0070FF",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#0070FF", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-02",
+  "source": "https://en.wikipedia.org/wiki/RCD_Espanyol",
+  "members": [
+    {
+      "playerId": "fortuno",
+      "no": 1
+    },
+    {
+      "playerId": "gorosabel",
+      "no": 2
+    },
+    {
+      "playerId": "hartman",
+      "no": 3
+    },
+    {
+      "playerId": "gonzalez-de-zarate",
+      "no": 4
+    },
+    {
+      "playerId": "riedel",
+      "no": 5
+    },
+    {
+      "playerId": "cabrera",
+      "no": 6,
+      "captain": true
+    },
+    {
+      "playerId": "puado",
+      "no": 7
+    },
+    {
+      "playerId": "exposito",
+      "no": 8
+    },
+    {
+      "playerId": "r-fernandez",
+      "no": 9
+    },
+    {
+      "playerId": "lozano",
+      "no": 10
+    },
+    {
+      "playerId": "milla",
+      "no": 11
+    },
+    {
+      "playerId": "dmitrovic",
+      "no": 13
+    },
+    {
+      "playerId": "nunez",
+      "no": 14
+    },
+    {
+      "playerId": "zaragoza",
+      "no": 15
+    },
+    {
+      "playerId": "drkusic",
+      "no": 16
+    },
+    {
+      "playerId": "j-carreras",
+      "no": 17
+    },
+    {
+      "playerId": "m-fernandez",
+      "no": 18
+    },
+    {
+      "playerId": "k-garcia",
+      "no": 19
+    },
+    {
+      "playerId": "moscardo",
+      "no": 20
+    },
+    {
+      "playerId": "hinojo",
+      "no": 21
+    },
+    {
+      "playerId": "calatrava",
+      "no": 22
+    },
+    {
+      "playerId": "el-hilali",
+      "no": 23
+    },
+    {
+      "playerId": "dolan",
+      "no": 24
+    },
+    {
+      "playerId": "bauza",
+      "no": 26
+    },
+    {
+      "playerId": "j-hernandez",
+      "no": 28
+    }
+  ]
+}

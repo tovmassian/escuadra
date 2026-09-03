@@ -1,5 +1,19 @@
 [
   {
+    "id": "ala",
+    "kind": "club",
+    "name": "Deportivo Alavés",
+    "season": "2026/27",
+    "primaryColor": "#0000FF",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#0000FF", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
     "id": "arg",
     "kind": "nation",
     "name": "Argentina",
@@ -40,6 +54,34 @@
     "league": "premier-league"
   },
   {
+    "id": "ath",
+    "kind": "club",
+    "name": "Athletic Club",
+    "season": "2026/27",
+    "primaryColor": "#EE2523",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#EE2523", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "atm",
+    "kind": "club",
+    "name": "Atlético Madrid",
+    "season": "2026/27",
+    "primaryColor": "#CB3524",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#CB3524", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
     "id": "bar",
     "kind": "club",
     "name": "Barcelona",
@@ -49,6 +91,20 @@
     "verified": true,
     "marker": {
       "bands": ["#A50044", "#004D98"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "bet",
+    "kind": "club",
+    "name": "Real Betis",
+    "season": "2026/27",
+    "primaryColor": "#359B5C",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#359B5C", "#FFFFFF"],
       "orientation": "vertical"
     },
     "league": "la-liga"
@@ -69,6 +125,48 @@
         "color": "#FFDF00"
       }
     }
+  },
+  {
+    "id": "cel",
+    "kind": "club",
+    "name": "Celta Vigo",
+    "season": "2026/27",
+    "primaryColor": "#87CEEB",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#87CEEB"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "dep",
+    "kind": "club",
+    "name": "Deportivo",
+    "season": "2026/27",
+    "primaryColor": "#0000FF",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#0000FF", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "elc",
+    "kind": "club",
+    "name": "Elche",
+    "season": "2026/27",
+    "primaryColor": "#05642C",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#05642C", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
   },
   {
     "id": "esp",
@@ -96,6 +194,20 @@
       "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
       "orientation": "vertical"
     }
+  },
+  {
+    "id": "get",
+    "kind": "club",
+    "name": "Getafe",
+    "season": "2026/27",
+    "primaryColor": "#005999",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#005999"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
   },
   {
     "id": "int",
@@ -129,6 +241,48 @@
     }
   },
   {
+    "id": "lev",
+    "kind": "club",
+    "name": "Levante",
+    "season": "2026/27",
+    "primaryColor": "#222730",
+    "secondaryColor": "#661424",
+    "verified": true,
+    "marker": {
+      "bands": ["#222730", "#661424"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "mal",
+    "kind": "club",
+    "name": "Málaga",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#103E9E",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#103E9E"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "osa",
+    "kind": "club",
+    "name": "Osasuna",
+    "season": "2026/27",
+    "primaryColor": "#D70F27",
+    "secondaryColor": "#00004C",
+    "verified": true,
+    "marker": {
+      "bands": ["#D70F27", "#00004C"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
     "id": "psg",
     "kind": "club",
     "name": "Paris Saint-Germain",
@@ -144,6 +298,34 @@
     "league": "ligue-1"
   },
   {
+    "id": "rac",
+    "kind": "club",
+    "name": "Racing de Santander",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#369028",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#369028"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "rcd",
+    "kind": "club",
+    "name": "Espanyol",
+    "season": "2026/27",
+    "primaryColor": "#0070FF",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#0070FF", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
     "id": "rma",
     "kind": "club",
     "name": "Real Madrid",
@@ -153,6 +335,76 @@
     "verified": true,
     "marker": {
       "bands": ["#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "rso",
+    "kind": "club",
+    "name": "Real Sociedad",
+    "season": "2026/27",
+    "primaryColor": "#0042FF",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#0042FF"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "rvl",
+    "kind": "club",
+    "name": "Rayo Vallecano",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#FF0000",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#FF0000"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "sev",
+    "kind": "club",
+    "name": "Sevilla",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#E20001",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#E20001"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "val",
+    "kind": "club",
+    "name": "Valencia",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "la-liga"
+  },
+  {
+    "id": "vil",
+    "kind": "club",
+    "name": "Villarreal",
+    "season": "2026/27",
+    "primaryColor": "#FFFF00",
+    "secondaryColor": "#1880FF",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFF00"],
       "orientation": "vertical"
     },
     "league": "la-liga"
