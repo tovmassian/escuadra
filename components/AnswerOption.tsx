@@ -1,5 +1,5 @@
 import * as Haptics from 'expo-haptics';
-import React, { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
@@ -100,6 +100,7 @@ export function AnswerOption({ label, verdict, disabled, onPress }: AnswerOption
 
   const handlePressIn = useCallback(() => {
     if (disabled) return;
+    // eslint-disable-next-line react-hooks/immutability -- Reanimated shared values are mutated by design.
     pressScale.value = withTiming(0.97, {
       duration: durations.press,
       easing: Easing.out(Easing.quad),
@@ -108,6 +109,7 @@ export function AnswerOption({ label, verdict, disabled, onPress }: AnswerOption
   }, [disabled, pressScale]);
 
   const handlePressOut = useCallback(() => {
+    // eslint-disable-next-line react-hooks/immutability -- Reanimated shared values are mutated by design.
     pressScale.value = withTiming(1, {
       duration: durations.press,
       easing: Easing.out(Easing.quad),

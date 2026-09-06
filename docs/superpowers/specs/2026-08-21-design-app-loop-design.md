@@ -240,7 +240,9 @@ output exists — planning against imagined deliverables would be guesswork. Tur
 - **No `testID`s exist** on the components. The script leans on text selectors
   until they are added.
 - **`npm start` is `expo start --tunnel`.** Web capture needs a separate
-  non-tunnelled web target.
+  non-tunnelled web target. _(Resolved 2026-09-06: `npm start` dropped
+  `--tunnel` — plain Wi-Fi connects on SDK 57. Web capture still spawns its own
+  `--web` target, so the script is unaffected.)_
 - **The design project is `PROJECT_TYPE_PROJECT`, not a design system.** Read
   access is confirmed working; write access via `finalize_plan` → `write_files`
   is unverified against a project of this type.

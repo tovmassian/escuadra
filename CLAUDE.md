@@ -192,14 +192,24 @@ existing squads).
 ## Environment
 
 ⚠️ **Expo has changed a lot between versions.** Read the exact versioned docs
-at https://docs.expo.dev/versions/v54.0.0/ before writing any Expo code — not
-the `latest` docs, which describe SDK 57+ APIs this project cannot use.
+at https://docs.expo.dev/versions/v57.0.0/ before writing any Expo code — not
+the `latest` docs, which may describe APIs from a newer SDK this project
+cannot use.
 
-⚠️ **Do not upgrade the Expo SDK.** The version in `package.json` is pinned to
-what the App Store build of Expo Go supports, which lags the current SDK. There
-is no Apple Developer Program membership and no development build, so Expo Go on
-a physical iPhone is the _only_ way this app runs. Upgrading the SDK breaks the
-ability to run it at all. Moving to a development build is a v1 decision.
+⚠️ **Do not upgrade the Expo SDK past what the App Store build of Expo Go
+supports.** The version in `package.json` is pinned to that, not to the
+current SDK. There is no Apple Developer Program membership and no
+development build, so Expo Go on a physical iPhone is the _only_ way this app
+runs. Upgrading past what Expo Go supports breaks the ability to run it at
+all — this happened once already (SDK 54 → 57, 2026-09-06), forced by Expo
+Go itself moving to SDK 57 on the App Store. Moving to a development build is
+a v1 decision.
+
+That 54 → 57 jump also surfaced two real breakages worth knowing about if the
+SDK moves again: `expo-router` (SDK 56+) no longer allows importing directly
+from `@react-navigation/*` in app code — import `ThemeProvider`/`DarkTheme`/
+`Theme` from `expo-router` itself instead; and RN 0.86 removed
+`StyleSheet.absoluteFillObject` in favor of `StyleSheet.absoluteFill`.
 
 ```bash
 npx expo start        # dev server; scan QR with iPhone Camera → Expo Go

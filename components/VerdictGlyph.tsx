@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { EscuadraMark } from './EscuadraMark';
 import { colors, iconSize, opacity } from '@/theme/tokens';

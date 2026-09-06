@@ -1,5 +1,4 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import React from 'react';
 import { FlatList, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';

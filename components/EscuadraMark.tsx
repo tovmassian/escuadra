@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import { MARK_SMALL_BALL_THRESHOLD, MARK_VIEWBOX, markGeometry } from '@/theme/brand';
 
