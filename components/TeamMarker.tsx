@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { TeamMarker as TeamMarkerData } from '@/types/squad';
 import { sizes } from '@/theme/tokens';
@@ -80,7 +79,7 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
   },
   overlayWrap: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     alignItems: 'center',
     justifyContent: 'center',
   },

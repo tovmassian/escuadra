@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import { useCallback } from 'react';
 import { Pressable, StyleSheet, Text } from 'react-native';
 import Animated, {
   Easing,
@@ -54,10 +54,12 @@ export function ChipOption({ label, verdict, disabled, onPress }: ChipOptionProp
 
   const handlePressIn = useCallback(() => {
     if (disabled) return;
+    // eslint-disable-next-line react-hooks/immutability -- Reanimated shared values are mutated by design.
     scale.value = withTiming(0.97, { duration: durations.press, easing: Easing.out(Easing.quad) });
   }, [disabled, scale]);
 
   const handlePressOut = useCallback(() => {
+    // eslint-disable-next-line react-hooks/immutability -- Reanimated shared values are mutated by design.
     scale.value = withTiming(1, { duration: durations.press, easing: Easing.out(Easing.quad) });
   }, [scale]);
 

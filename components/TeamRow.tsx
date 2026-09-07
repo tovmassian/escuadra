@@ -1,4 +1,3 @@
-import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { TeamMarker } from './TeamMarker';
 import type { TeamProgress } from '@/lib/pickerView';

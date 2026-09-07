@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import type { DotOutcome } from '@/lib/roundView';
 import { colors, opacity, radii, sizes, spacing } from '@/theme/tokens';

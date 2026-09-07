@@ -1,4 +1,3 @@
-import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { VerdictGlyph } from './VerdictGlyph';
 import type { PartRailRow } from '@/lib/roundView';
