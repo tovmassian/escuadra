@@ -10,7 +10,7 @@
     "bands": ["#D70F27", "#00004C"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-03",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/CA_Osasuna",
   "members": [
     {
@@ -73,6 +73,10 @@
     {
       "playerId": "rosier",
       "no": 19
+    },
+    {
+      "playerId": "romain-del-castillo",
+      "no": 20
     },
     {
       "playerId": "dubasin",

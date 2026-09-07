@@ -9,9 +9,12 @@
   "marker": {
     "bands": ["#009739"],
     "orientation": "horizontal",
-    "overlay": { "shape": "diamond", "color": "#FFDF00" }
+    "overlay": {
+      "shape": "diamond",
+      "color": "#FFDF00"
+    }
   },
-  "lastUpdated": "2026-08-26",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Brazil_national_football_team",
   "members": [
     {
@@ -19,12 +22,8 @@
       "no": 1
     },
     {
-      "playerId": "weverton",
-      "no": 12
-    },
-    {
-      "playerId": "ederson",
-      "no": 23
+      "playerId": "ederson-silva",
+      "no": 2
     },
     {
       "playerId": "gabriel",
@@ -36,8 +35,36 @@
       "captain": true
     },
     {
+      "playerId": "casemiro",
+      "no": 5
+    },
+    {
       "playerId": "alex-sandro",
       "no": 6
+    },
+    {
+      "playerId": "vinicius",
+      "no": 7
+    },
+    {
+      "playerId": "bruno-guimaraes",
+      "no": 8
+    },
+    {
+      "playerId": "matheus-cunha",
+      "no": 9
+    },
+    {
+      "playerId": "neymar",
+      "no": 10
+    },
+    {
+      "playerId": "raphinha",
+      "no": 11
+    },
+    {
+      "playerId": "weverton",
+      "no": 12
     },
     {
       "playerId": "danilo-luiz",
@@ -56,22 +83,6 @@
       "no": 16
     },
     {
-      "playerId": "roger-ibanez",
-      "no": 24
-    },
-    {
-      "playerId": "ederson-silva",
-      "no": 2
-    },
-    {
-      "playerId": "casemiro",
-      "no": 5
-    },
-    {
-      "playerId": "bruno-guimaraes",
-      "no": 8
-    },
-    {
       "playerId": "fabinho",
       "no": 17
     },
@@ -80,28 +91,12 @@
       "no": 18
     },
     {
-      "playerId": "paqueta",
-      "no": 20
-    },
-    {
-      "playerId": "vinicius",
-      "no": 7
-    },
-    {
-      "playerId": "matheus-cunha",
-      "no": 9
-    },
-    {
-      "playerId": "neymar",
-      "no": 10
-    },
-    {
-      "playerId": "raphinha",
-      "no": 11
-    },
-    {
       "playerId": "endrick",
       "no": 19
+    },
+    {
+      "playerId": "paqueta",
+      "no": 20
     },
     {
       "playerId": "luiz-henrique",
@@ -110,6 +105,14 @@
     {
       "playerId": "martinelli",
       "no": 22
+    },
+    {
+      "playerId": "ederson",
+      "no": 23
+    },
+    {
+      "playerId": "roger-ibanez",
+      "no": 24
     },
     {
       "playerId": "igor-thiago",

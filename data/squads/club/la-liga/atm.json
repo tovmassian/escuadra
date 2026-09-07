@@ -10,16 +10,12 @@
     "bands": ["#CB3524", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-03",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Atlético_Madrid",
   "members": [
     {
       "playerId": "musso",
       "no": 1
-    },
-    {
-      "playerId": "martinez",
-      "no": 2
     },
     {
       "playerId": "vargas",
@@ -57,10 +53,6 @@
     {
       "playerId": "lookman",
       "no": 11
-    },
-    {
-      "playerId": "c-martin",
-      "no": 12
     },
     {
       "playerId": "oblak",
@@ -113,6 +105,10 @@
     {
       "playerId": "esquivel",
       "no": 25
+    },
+    {
+      "playerId": "martinez",
+      "no": 30
     }
   ]
 }

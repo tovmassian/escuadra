@@ -10,7 +10,7 @@
     "bands": ["#05642C", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-02",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Elche_CF",
   "members": [
     {
@@ -20,6 +20,10 @@
     {
       "playerId": "sangare",
       "no": 2
+    },
+    {
+      "playerId": "roy-revivo",
+      "no": 3
     },
     {
       "playerId": "diaby",
@@ -109,6 +113,18 @@
     {
       "playerId": "morcillo",
       "no": 47
+    },
+    {
+      "playerId": "kevin-lomonaco",
+      "no": null
+    },
+    {
+      "playerId": "ruben-sanchez",
+      "no": null
+    },
+    {
+      "playerId": "thomas-lemar",
+      "no": null
     }
   ]
 }

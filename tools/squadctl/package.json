@@ -1,0 +1,13 @@
+{
+  "name": "squadctl",
+  "version": "1.0.0",
+  "description": "Deterministic squad data management for Escuadra",
+  "private": true,
+  "type": "module",
+  "oclif": {
+    "bin": "squadctl",
+    "dirname": "squadctl",
+    "commands": "./src/commands",
+    "topicSeparator": " "
+  }
+}

@@ -1,0 +1,6 @@
+{{updated|15 August 2026}}
+The following players have also been called up within the last twelve months.
+{{nat fs break|Recent call-ups}}
+{{nat fs player|no=|pos=GK|name=[[David Raya]]|age={{birth date and age|df=y|1995|9|15}}|caps=12|goals=0|club=[[Arsenal F.C.|Arsenal]]|clubnat=ENG|latest=v. {{fb|POR}}, 8 June 2026}}
+{{nat fs player|no=|pos=DF|name=[[Pau Torres]]|age={{birth date and age|df=y|1997|1|16}}|caps=30|goals=2|club=[[Aston Villa]]|clubnat=ENG|latest=v. {{fb|BRA}}, 25 March 2026}}
+{{nat fs end}}

@@ -10,12 +10,16 @@
     "bands": ["#FFFFFF", "#103E9E"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-02",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Málaga_CF",
   "members": [
     {
       "playerId": "herrero",
       "no": 1
+    },
+    {
+      "playerId": "jens-cajuste",
+      "no": 2
     },
     {
       "playerId": "puga",
@@ -107,6 +111,10 @@
       "no": 24
     },
     {
+      "playerId": "juan-berrocal",
+      "no": 25
+    },
+    {
       "playerId": "rafita",
       "no": 31
     },
@@ -117,6 +125,10 @@
     {
       "playerId": "aznou",
       "no": 39
+    },
+    {
+      "playerId": "moussa-diarra",
+      "no": null
     }
   ]
 }

@@ -10,20 +10,12 @@
     "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-08-26",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/France_national_football_team",
   "members": [
     {
       "playerId": "samba",
       "no": 1
-    },
-    {
-      "playerId": "maignan",
-      "no": 16
-    },
-    {
-      "playerId": "risser",
-      "no": 23
     },
     {
       "playerId": "gusto",
@@ -42,56 +34,16 @@
       "no": 5
     },
     {
-      "playerId": "konate",
-      "no": 15
-    },
-    {
-      "playerId": "saliba",
-      "no": 17
-    },
-    {
-      "playerId": "t-hernandez",
-      "no": 19
-    },
-    {
-      "playerId": "l-hernandez",
-      "no": 21
-    },
-    {
-      "playerId": "lacroix",
-      "no": 26
-    },
-    {
       "playerId": "kone",
       "no": 6
     },
     {
-      "playerId": "tchouameni",
-      "no": 8
-    },
-    {
-      "playerId": "kante",
-      "no": 13
-    },
-    {
-      "playerId": "rabiot",
-      "no": 14
-    },
-    {
-      "playerId": "zaire-emery",
-      "no": 18
-    },
-    {
-      "playerId": "cherki",
-      "no": 24
-    },
-    {
-      "playerId": "akliouche",
-      "no": 25
-    },
-    {
       "playerId": "dembele",
       "no": 7
+    },
+    {
+      "playerId": "tchouameni",
+      "no": 8
     },
     {
       "playerId": "thuram",
@@ -111,12 +63,60 @@
       "no": 12
     },
     {
+      "playerId": "kante",
+      "no": 13
+    },
+    {
+      "playerId": "rabiot",
+      "no": 14
+    },
+    {
+      "playerId": "konate",
+      "no": 15
+    },
+    {
+      "playerId": "maignan",
+      "no": 16
+    },
+    {
+      "playerId": "saliba",
+      "no": 17
+    },
+    {
+      "playerId": "zaire-emery",
+      "no": 18
+    },
+    {
+      "playerId": "t-hernandez",
+      "no": 19
+    },
+    {
       "playerId": "doue",
       "no": 20
     },
     {
+      "playerId": "l-hernandez",
+      "no": 21
+    },
+    {
       "playerId": "mateta",
       "no": 22
+    },
+    {
+      "playerId": "risser",
+      "no": 23
+    },
+    {
+      "playerId": "cherki",
+      "no": 24
+    },
+    {
+      "playerId": "akliouche",
+      "no": 25
+    },
+    {
+      "playerId": "lacroix",
+      "no": 26
     }
   ]
 }

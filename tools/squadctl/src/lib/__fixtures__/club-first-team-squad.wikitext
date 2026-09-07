@@ -1,0 +1,10 @@
+{{updated|1 September 2026}}
+{{fs start}}
+{{fs player|no=1|nat=ESP|name=[[David Raya]]|pos=GK}}
+{{fs player|no=2|nat=FRA|name=[[William Saliba]]|pos=DF}}
+{{fs player|no=4|nat=ENG|name=[[Ben White]]|pos=DF}}
+{{fs player|no=8|nat=NOR|name=[[Martin Ødegaard]]|pos=MF|other=[[Captain (association football)|captain]]}}
+{{fs player|no=41|nat=ENG|name=[[Declan Rice]]|pos=MF|other=[[Captain (association football)|vice-captain]]}}
+{{fs player|no=7|nat=ENG|name=[[Bukayo Saka]]|pos=FW|other=[[Captain (association football)|3rd captain]]}}
+{{fs player|no=|nat=ENG|name=[[Curtis Jones]]|pos=MF}}
+{{fs end}}

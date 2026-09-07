@@ -82,18 +82,20 @@ export default function Question() {
   const questionComplete = result.correct !== null;
 
   const affiliationLabel = squad.kind === 'club' ? 'NAT' : 'CLUB';
+  // AGE drops out of the row entirely when the player has no stored birth
+  // date, rather than rendering an empty or NaN chip. Club-squad wikitext
+  // never carries a birth date, so a new signing legitimately has none:
+  // level 1 falls to two chips and level 2 to one.
+  const ageChip = question.age === null ? [] : [{ label: 'AGE', value: String(question.age) }];
   const statChips: { label: string; value: string }[] =
     level === 1
       ? [
           { label: 'POS', value: question.position },
-          { label: 'AGE', value: String(question.age) },
+          ...ageChip,
           { label: affiliationLabel, value: question.affiliation },
         ]
       : level === 2
-        ? [
-            { label: 'AGE', value: String(question.age) },
-            { label: affiliationLabel, value: question.affiliation },
-          ]
+        ? [...ageChip, { label: affiliationLabel, value: question.affiliation }]
         : [];
 
   const exit = () => {

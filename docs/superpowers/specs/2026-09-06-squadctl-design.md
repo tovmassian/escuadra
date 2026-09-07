@@ -1,7 +1,7 @@
 # squadctl — deterministic squad data management
 
-**Status:** design, approved 2026-09-06. Supersedes `squad-fetch-prespec_1.md`,
-which is kept in the repo as the record of what changed and why.
+**Status:** design, approved 2026-09-06. Self-contained — every decision and
+its rationale is recorded here.
 
 ## 1. Problem
 
@@ -59,15 +59,25 @@ at 150, worth revisiting somewhere past 500 squads.
 2. **Marker design is human work**, once per team. 211 nations is 211 units of
    design judgement that no script removes.
 
-Extending `TeamMarker` with `cross` and `saltire` is a separate design-system
-task, orthogonal to this spec. Because §5's registry makes adding a team an
-append, deferring nations carries no architectural penalty and no rework.
+Extending `TeamMarker` with `cross`, `saltire` and `star` is a design-system
+task orthogonal to this CLI, but it is **on the critical path to the nation
+target** and is not a long tail. Bands-plus-disc cannot express England,
+Scotland, Switzerland, Denmark, Sweden, Norway, Iceland, Finland, USA, Morocco,
+Senegal, Turkey, South Korea, Australia, Uruguay, Chile, Greece or Czech
+Republic — most of a credible top-20 picker, including England and the USA.
+Without that work the realistic nation ceiling is ~30; with it, ~45. Do it
+before the nation sweep rather than shipping 30 nations and revisiting.
+
+Because §5's registry makes adding a team an append, deferring nations until
+then carries no architectural penalty and no rework.
 
 ## 3. Command surface
 
 An oclif v4 app at `tools/squadctl/`.
 
 ```
+squadctl registry init              # derive data/teams.json from existing squad files
+
 squadctl fetch                      # every team in the registry
 squadctl fetch --only sev,rma
 squadctl fetch --league la-liga
@@ -83,12 +93,11 @@ a pure function of its inputs and touches the repo.
 
 ### Cache semantics
 
-The pre-spec's `--refresh` / `--no-cache` pair is inverted and reduced to one
-flag. **Default fetches fresh and writes the cache.** The cache exists so a
-_parser_ change can be re-run at zero network cost, not so stale data is served
-by default. `--offline` re-parses from `.cache/wikitext/` and makes no requests.
-`--no-cache` is dropped: `.cache/` is gitignored and a few KB per team, so
-suppressing the write buys nothing.
+One flag, not a pair. **Default fetches fresh and writes the cache.** The cache
+exists so a _parser_ change can be re-run at zero network cost, not so stale data
+is served by default. `--offline` re-parses from `.cache/wikitext/` and makes no
+requests. There is deliberately no flag to suppress the cache write: `.cache/` is
+gitignored and a few KB per team, so suppressing it buys nothing.
 
 ### No `--season` flag
 
@@ -109,13 +118,15 @@ how it renders. No per-command branching.
 ```
 tools/squadctl/
   package.json               oclif config + bin name ONLY; no dependencies
-  bin/dev.js                 tsx loader — no compile step
+  bin/dev.js                 plain node entrypoint — no compile step
   README.md
   src/base-command.ts        BaseCommand: enableJsonFlag, shared reporter
+  src/commands/registry/init.ts  `registry init` — bootstrap from stored squads
   src/commands/fetch.ts
   src/commands/apply.ts
   src/lib/wiki-fetch.ts      HTTP + disk cache. The only networked file.
   src/lib/wikitext-parse.ts  pure: wikitext -> ParsedRow[]
+  src/lib/build-envelope.ts  pure: registry entry + rows -> RosterEnvelope
   src/lib/reconcile.ts       pure: rows + stored -> WritePlan
   src/lib/assertions.ts      pure: WritePlan -> failures / conflicts / warnings
   src/lib/fifa-countries.ts  code -> country lookup
@@ -126,8 +137,24 @@ tools/squadctl/
 Everything testable without a network lives in the pure layer. The commands do
 argument parsing, I/O and reporting only.
 
-**`@oclif/core` and `tsx` go in the ROOT `devDependencies`.** `tools/squadctl/`
-must not have its own `node_modules`: `metro.config.js` calls
+**`@oclif/core` goes in the ROOT `devDependencies`, and nothing else does.**
+There is deliberately no TypeScript loader: `package.json` pins
+`node >=24.3.0`, Node 24 strips TypeScript natively, and `npm run gen:squads`
+already relies on that by running `node scripts/gen-squads.ts` directly.
+Adding `tsx` would pull ~12 MB of esbuild into the root `node_modules` to
+provide a capability the runtime already has — and per the note below, the
+root `node_modules` is exactly what Metro watches.
+
+Node runs the `.ts` files in **strip-only** mode, which erases types but
+compiles nothing. TypeScript constructs that need code generation are
+therefore unavailable anywhere squadctl imports: no `enum`, no `namespace`,
+and no constructor parameter properties (`constructor(readonly x: T)`) —
+declare the field explicitly instead. `tools/squadctl/package.json` and
+`scripts/package.json` both declare `"type": "module"` so those directories
+are unambiguously ESM; the root `package.json` deliberately does not, because
+Metro needs project `.js` to stay CommonJS.
+
+`tools/squadctl/` must not have its own `node_modules`: `metro.config.js` calls
 `getDefaultConfig(__dirname)`, so Metro watches the project root, and a nested
 dependency tree is the one thing likely to disturb it. Expo Go on a physical
 iPhone is the only way the app runs (CLAUDE.md), so this is not negotiable.
@@ -165,10 +192,23 @@ export type TeamRegistry = TeamRegistryEntry[];
 The registry is validated before the first network call, so a malformed file
 fails in milliseconds rather than halfway through 150 teams.
 
-**Identity is authoritative here and `apply` always writes it through.** This
-deletes the pre-spec's "identity present means overwrite, absent means preserve"
-rule, whose entire purpose was stopping a maintenance run from wiping every
-marker in the repo. With one authoritative source that hazard does not exist.
+**Identity is authoritative here and `apply` always writes it through.** There
+is no "present means overwrite, absent means preserve" rule, and no need for one:
+a single authoritative source removes the hazard that such a rule existed to
+guard against — a maintenance run wiping every marker in the repo.
+
+### Bootstrapping the registry
+
+`squadctl registry init` derives an entry for every squad file already under
+`data/squads/`. Every field the registry needs is already stored: `id`, `kind`,
+`name` and `source` come from the squad file itself, `league` from its folder
+path, and `identity` from its `primaryColor` / `secondaryColor` / `marker`. The
+29 squads in the repo therefore cost **no authoring at all**, and hand-authoring
+is confined to teams that do not exist yet — where `identity` is the only field
+that is genuine judgement rather than lookup.
+
+It refuses to overwrite a populated `data/teams.json`. Merging new entries into
+an existing registry is an operator edit, not a command.
 
 ## 6. Fetching
 
@@ -188,6 +228,22 @@ index is always re-resolved and never cached** — Arsenal's squad section is
 index 24 today and that number is not stable.
 
 Never route these through any tool that summarises through a model.
+
+### A raw section request includes its subsections
+
+`action=raw&section=<N>` returns the matched section **and everything nested
+beneath it**. Most Spanish club articles put `===Reserve team===` and
+`===Out on loan===` under `==Current squad==`, so parsing the whole response
+pulls reserve and loaned-away players into the first team: Elche came back with
+35 members against a stored 24, Rayo with 34 against 23.
+
+The parser therefore cuts at **the first heading that follows the first player
+row**. That rule handles both article shapes — a squad table directly under the
+matched heading (cut at the next subsection) and a table nested one level down,
+as when `Players` matches and the roster lives inside a subsection of it
+(nothing is cut before the table is reached). Dropped headings are reported, not
+silently discarded. `{{updated}}` is read from the whole section, since some
+articles place it below the table.
 
 ### Section selection
 
@@ -219,16 +275,23 @@ stripped, `_` to space, whitespace collapsed, HTML entities decoded, no
 case-folding beyond the first character; **display** is `Display`, or `Target`
 when there is no `|`.
 
-### Three corrections to the pre-spec, from live wikitext
+### Three rules verified against live wikitext
 
-| Rule           | Pre-spec                                    | Corrected                                    | Why                                                                                                                                                                           |
-| -------------- | ------------------------------------------- | -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Captain        | `/captain/i` and not `/vice[-\s]?captain/i` | exact `/^captain$/i` on the **display** text | Arsenal carries `captain`, `vice-captain` **and** `3rd captain`. The pre-spec rule returns two captains and trips its own "≤1 captain" hard failure on the first team parsed. |
-| Numberless row | drop from `members`                         | **keep** with `no: null`                     | `SquadMember.no` is `number \| null`; `int.json` has one, and `questionEngine` deliberately keeps it as a name distractor. Dropping it deletes stored data.                   |
-| `asOf`         | read the section's stated date              | parse `{{updated\|1 September 2026}}`        | It is a template in the section header. Deterministic, no prose reading.                                                                                                      |
+**Captain** — exact `/^captain$/i` against the wikilink **display** text, never a
+substring test. Arsenal's `other=` carries `captain`, `vice-captain` **and**
+`3rd captain`; a `/captain/i` match with a vice-captain exclusion still returns
+two captains and trips the "≤1 captain" hard failure on the very first team
+parsed. Only one captain per squad is tracked — vice-captain, 3rd captain and
+every other variant are ignored, since there is no field for them.
 
-Only one captain per squad is tracked. Vice-captain, 3rd captain and every other
-variant are ignored — there is no field for them.
+**A numberless row is kept**, with `no: null`, never dropped. `SquadMember.no` is
+`number | null` by deliberate design: `int.json` carries one today, and
+`questionEngine` keeps such a player as a name distractor while excluding them as
+a question subject. Dropping the row deletes stored data.
+
+**`asOf`** — parsed from the `{{updated|1 September 2026}}` template in the
+section header, not read out of prose. Deterministic, with no natural-language
+date handling.
 
 ### Field population
 
@@ -248,6 +311,15 @@ yield 65 nationalities, but 100 big-5 clubs will surface roughly 110–130 disti
 codes, so a data-derived table would stop onboarding dead on an unmapped code
 over and over. With the full set seeded, an unmapped code is a genuine exception
 and a hard failure naming the code to add.
+
+**Stored spellings win.** `players.json` already pins 65 country names, and a
+table seeded from a FIFA code list will disagree with several of them —
+`Côte d'Ivoire` against the stored `Ivory Coast`, `Czechia` against
+`Czech Republic`, `Korea Republic` against `South Korea`, `Congo DR` against
+`DR Congo`. Any of those forks the nationality string, leaving level-3
+distractors comparing two spellings of one country and the Study screen showing
+both. So: extract the 65 in-use spellings mechanically and let them override the
+seed unconditionally; review the remaining ~146 by hand once.
 
 ## 8. `birth`
 
@@ -272,16 +344,68 @@ every club permanently unverified after each transfer window.
 becomes `number | null`, `getAge` is guarded, and the chip row filters `AGE` out
 when null. Level 1 goes from three chips to two; **level 2 goes from two to
 one**, leaving nationality as the only stat beyond the shirt number for a club
-squad player with no stored birth date. This is an accepted, deliberate
-regression in exchange for removing ~25 requests per club squad.
+squad player with no stored birth date. This is an accepted
+regression in exchange for removing ~25 requests per club squad — but it is
+recoverable, and is not intended to be permanent.
+
+### Deferred: backfilling birth dates (v0.1)
+
+Level 2 can be returned to two stat chips without ever reintroducing a
+per-player article fetch. A separate `backfill-birthdates` command costs **two
+requests per squad**, not per player:
+
+1. `action=query&prop=pageprops&ppprop=wikibase_item&titles=A|B|C…` — up to 50
+   titles per request, returning each page's Wikidata QID.
+2. One SPARQL query to `https://query.wikidata.org/sparql`:
+   `SELECT ?item ?dob WHERE { VALUES ?item { wd:Q… wd:Q… } ?item wdt:P569 ?dob . }`
+
+The titles come from the wikilink **title** already parsed in §7 and held in
+memory for the duration of the run. This deliberately does **not** require
+storing `wikiTitle` on `Player`, which §9 rejects.
+
+Wikidata is CC0, so this creates no licensing obligation. All 711 stored players
+have a birth date today, so the command only ever does work for genuinely new
+signings — on the order of 150 extra requests to hold level 2 at two chips
+across 100 clubs. **Neither request shape has been tested against a live
+endpoint** and both must be verified before being relied on. Not v0; recorded
+here so the §8 saving does not silently become a permanent UI regression.
 
 ## 9. Reconciliation and what sets `verified`
 
-Match key is the normalised name — no `wikiTitle` is added anywhere. Within a
-single squad normalised names are unique by construction. The two real collisions
-in the current data (`fran garcia` → `fran-garcia` / `fran-garcia-torres`,
-`ederson` → `ederson` / `ederson-silva`) are **cross-squad**, which is exactly
-the case step 2 flags rather than guesses at.
+Match key is the normalised name, and no `wikiTitle` is stored on `Player`.
+
+**`normalizeName` folds more than diacritics.** NFD strips only _combining_
+marks, so `ø đ ð ł æ œ ß þ ı ŋ ħ` survive it untouched and two sources
+spelling one player differently never match — `Ødegaard` against `Odegaard`.
+Those letters are transliterated explicitly, in the shared
+`scripts/roster-envelope.ts` so the skill path folds identically. A match that
+holds **only** because of that folding means the sources disagree on the
+spelling, and raises a `name-variant` conflict: the stored name is kept and
+named alongside the source's, because which is right is a human call.
+
+**Normalised names are NOT unique within a squad.** An earlier draft assumed
+they were; Brazil disproves it. That squad carries two different real people who
+both normalise to `ederson`:
+
+| shirt | article title                     | position | club       |
+| ----- | --------------------------------- | -------- | ---------- |
+| 23    | `Ederson (footballer, born 1993)` | GK       | Fenerbahçe |
+| 2     | `Éderson (footballer, born 1999)` | MF       | Atalanta   |
+
+Two mechanisms handle this, neither of which stores a title on `Player`:
+
+1. **`EnvelopeMember.title`** carries the wikilink target, which _is_ unique by
+   construction. `validateEnvelope` keys its duplicate-name check on
+   name-plus-title, so one squad may legitimately contain two members sharing a
+   display name.
+2. **Reconciliation separates a collision group on data both sides already
+   carry** — position, then club, then shirt number, first discriminator that
+   resolves to exactly one candidate wins. Deterministic and order-independent.
+   When nothing separates them it raises `ambiguous-name` rather than guessing.
+
+The remaining cross-squad collision (`fran garcia` → `fran-garcia` /
+`fran-garcia-torres`) is what step 2's global lookup flags rather than guesses
+at.
 
 Per team:
 
@@ -306,22 +430,49 @@ deletes them.
 | Tier              | Conditions                                                                                                                                                                                                                                               | Effect                                                              |
 | ----------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
 | **Hard failure**  | no matching section; zero members parsed; a club squad with fewer than 14 members parsed; more than one captain; duplicate shirt number within squad; `pos` not in GK/DF/MF/FW; `no` outside 1–99; unmapped FIFA code; registry entry without `identity` | Team is **not written at all**. The run continues with other teams. |
-| **Conflict**      | ambiguous global name match; a `no: null` member; unrecognised player-ish template; roster change >40% vs stored; section matched `Recent call-ups`                                                                                                      | Team **is** written, `verified: false`, reason named in the report. |
-| **Warning**       | departed players; generated player id; club member count <18; nation member count outside 20–30                                                                                                                                                          | Written, `verified` stays `true`.                                   |
+| **Conflict**      | ambiguous global name match; possible rename; spelling disagreement between sources; unrecognised player-ish template; roster change >40% vs stored; section matched `Recent call-ups`                                                                   | Team **is** written, `verified: false`, reason named in the report. |
+| **Warning**       | departed players; generated player id; a `no: null` member; club member count <18; nation member count outside 20–30                                                                                                                                     | Written, `verified` stays `true`.                                   |
 | **Informational** | new player with `birth: null`; orphan count                                                                                                                                                                                                              | Counted only.                                                       |
+
+**A departure and an arrival that look like the same person are a
+`possible-rename` conflict.** Wikipedia edits a player's display form without
+the squad changing at all: a live six-team trial found `Alejandro Grimaldo`
+become `Alex Grimaldo` on Spain and `Dro` become `Dro Fernández` on PSG — two
+of six teams. Step 2's global lookup misses both, so the plain rules create a
+second player record for a person already in the table and orphan the first.
+
+So after steps 1-3, departures and newly-created players **within the same
+squad** are cross-checked: sharing a surname, or one name's tokens being a
+subset of the other's, raises the conflict. It never merges the two — the
+direction of a merge is not inferable and §9's whole stance is to flag
+ambiguity rather than guess. It names the pair, writes `verified: false`, and
+a human decides. A false positive (two unrelated players sharing a surname in
+one window) costs one glance; a false negative costs a duplicate human in
+`players.json` that nothing later removes.
+
+**A `no: null` member is a warning, not a conflict.** It is a modelled,
+unambiguous state rather than missing information: the source is known to list
+that player without a number. Treating it as a conflict would leave any club
+carrying one unnumbered new signing permanently `verified: false`, which across
+100 clubs mid-transfer-window is a large and meaningless fraction of the table.
+Conflicts are for ambiguity; a null number is certain.
 
 **`verified` is the output of the assertion pass**: `true` when a team has zero
 conflicts, `false` otherwise. A deterministic parse has no hallucination surface,
-so a clean run is a legitimate verification — this inverts the pre-spec's "always
-false on write", which would have downgraded all 29 manually-verified squads on
-the first sweep.
+so a clean run is a legitimate verification, and the 29 manually-verified squads
+already in the repo survive the first sweep rather than being downgraded by it.
+
+Be precise about what that flag now asserts: **the squad file faithfully reflects
+its Wikipedia section**, not that the section is correct. It is a much stronger
+claim than the LLM-generated data's flag and a weaker one than a human
+cross-check against a second source. CLAUDE.md's warning about unverified data is
+written in the older, weaker sense and is corrected as part of §12.
 
 The blast-radius check compares against the stored squad file, so it is **skipped
 for a team that has none** — every new team would otherwise trip it at 100%.
 
-**Failures are per-team, not per-run.** The pre-spec aborts the entire run on any
-assertion failure; at 150 teams that lets one restructured page block the other 149. Known consequence: `int` has a numberless member today and will flip to
-`verified: false` on its first sync.
+**Failures are per-team, not per-run.** Aborting the whole run on any assertion
+failure would, at 150 teams, let one restructured page block the other 149.
 
 An envelope naming a team with no registry entry is a hard failure for that team:
 `apply` needs the entry's `identity` and `league`, and inventing either is
@@ -378,7 +529,7 @@ interface RunReport {
 }
 ```
 
-`Conflict` is a discriminated union — `ambiguous-name`, `numberless-member`,
+`Conflict` is a discriminated union — `ambiguous-name`, `possible-rename`, `name-variant`,
 `unknown-template`, `blast-radius`, `call-ups-only` — each carrying the offending
 rows. That structure is what lets a skill spend tokens only on the residue.
 
@@ -401,17 +552,17 @@ unmapped FIFA codes exits non-zero, and the `RunReport` says which two.
 
 ## 12. Changes to existing files
 
-| File                                   | Change                                                                                      |
-| -------------------------------------- | ------------------------------------------------------------------------------------------- |
-| `types/squad.ts`                       | `Player.birth` becomes `string \| null`                                                     |
-| `lib/questionEngine.ts`                | `Question.age` becomes `number \| null`; guard `getAge`                                     |
-| `app/play/[squadId]/[level]/index.tsx` | filter the `AGE` chip when age is null                                                      |
-| `scripts/roster-envelope.ts`           | `EnvelopeMember.no` accepts `null`; `validateEnvelope` updated to match `SquadMember`       |
-| `scripts/gen-squads.ts`                | extract `formatAndWrite` to the shared module                                               |
-| `vitest.config.ts`                     | add `tools/**/*.test.ts` to `include`                                                       |
-| `.gitignore`, `.prettierignore`        | add `.cache/`                                                                               |
-| `package.json`                         | `@oclif/core` + `tsx` in `devDependencies`; `squadctl` script                               |
-| `CLAUDE.md`                            | correct the stale "every generated squad carries `verified: false`" line; document squadctl |
+| File                                   | Change                                                                                                                                                                     |
+| -------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `types/squad.ts`                       | `Player.birth` becomes `string \| null`                                                                                                                                    |
+| `lib/questionEngine.ts`                | `Question.age` becomes `number \| null`; guard `getAge`                                                                                                                    |
+| `app/play/[squadId]/[level]/index.tsx` | filter the `AGE` chip when age is null                                                                                                                                     |
+| `scripts/roster-envelope.ts`           | `EnvelopeMember.no` accepts `null`; `EnvelopeMember.title` added; `validateEnvelope` updated to match `SquadMember` and to key duplicate-name detection on name-plus-title |
+| `scripts/gen-squads.ts`                | extract `formatAndWrite` to the shared module                                                                                                                              |
+| `vitest.config.ts`                     | add `tools/**/*.test.ts` to `include`                                                                                                                                      |
+| `.gitignore`, `.prettierignore`        | add `.cache/`                                                                                                                                                              |
+| `package.json`                         | `@oclif/core` in `devDependencies`; `squadctl` script                                                                                                                      |
+| `CLAUDE.md`                            | correct the stale "every generated squad carries `verified: false`" line; document squadctl                                                                                |
 
 `EnvelopeMember.clubNat` is unused anywhere outside the type and skill prose and
 is removed. `Player.fullName` also has no production consumer — only test
@@ -431,10 +582,22 @@ Checked-in wikitext fixtures with exact expected parsed output:
 6. A disambiguated wikilink: `[[Rodri (footballer, born 1996)|Rodri]]`.
 7. An ambiguous global name match (`ederson`), asserting a conflict rather than a
    merge.
+8. A renamed player (`Alejandro Grimaldo` -> `Alex Grimaldo`), asserting a
+   `possible-rename` conflict rather than a new player record.
 
 All pure — no network. Beyond fixtures, the **29 existing manually-verified
 squads are a test oracle**: a parse that reproduces 722 human-checked memberships
 is stronger evidence than any hand-written fixture.
+
+### The oracle run is a gate, not a smoke test
+
+Before `fetch` is pointed at a single new team, run it across all 29 stored
+squads and `apply --dry-run`, then diff against what is committed. The diff must
+be **exhaustively explainable**: the three season normalisations (`ars`, `bar`
+and `psg` off `2025/26`, §3), plus any genuine roster drift traceable to a change
+on the live page. A difference that is neither is a parser defect, and the fix is
+to the parser — never to the data. Only once that diff is clean is the pipeline
+trusted enough to author new teams into.
 
 ## 14. Docs
 
@@ -445,7 +608,9 @@ exit codes. oclif generates `--help` from the command definitions.
 ## 15. Out of scope
 
 - Player photos and licensing (v1).
-- `TeamMarker` cross / saltire / star support — a separate design-system task.
+- `TeamMarker` cross / saltire / star support — a design-system task, out of
+  scope for this CLI but a prerequisite for the nation target (§2).
+- Backfilling birth dates — designed in §8, deferred to v0.1.
 - All 211 FIFA nations (§2).
 - Retiring any skill. They coexist indefinitely.
 - Any commercial API as a data source.

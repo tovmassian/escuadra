@@ -165,16 +165,36 @@ but available for a future picker that groups clubs by league.
 
 Static squad JSON is imported directly. It does **not** belong in a store.
 
-⚠️ **Squad data is LLM-generated and not fact-checked.** Shirt numbers and
-current clubs are precisely what models hallucinate. Every generated squad
-carries `verified: false`. Never present unverified data as authoritative and
-never clear that flag without a real source check.
+⚠️ **Treat squad data as unfact-checked until its `verified` flag says
+otherwise.** Shirt numbers and current clubs are precisely what models
+hallucinate. `verified` asserts that a squad file faithfully reflects its
+Wikipedia source — not that the source is right — and it is never set by
+hand: it is an output of whichever pipeline wrote the file. Never present
+`verified: false` data as authoritative.
 
-Squad data is created and maintained through the `squad-factory` skill set:
-`squad-factory` orchestrates `squad-fetcher` (parallel Wikipedia reads),
-`squad-writer` (the sole, sequential writer of `players.json`, squad files,
-and the generated index) and `squad-verifier` (parallel re-verification of
-existing squads).
+Squad data is created and maintained two ways, which coexist and produce the
+same `RosterEnvelope`, so their outputs can be diffed directly.
+
+**`squadctl`** (`tools/squadctl/`, `npm run squadctl`) is the deterministic
+path and the default one. `squadctl fetch` reads Wikipedia into envelopes and
+`squadctl apply` writes them to the repo; `data/teams.json` is the single
+registry of teams it knows about. It sets `verified` from its own assertion
+pass — `true` only when a team parsed with zero conflicts.
+
+A **conflict is a handover, not a failure**: the team is still written, but
+`verified: false` and exit code `4` mean a judgement is waiting that no parser
+can make — usually that Wikipedia has changed a player's spelling. Resolve
+those with `squadctl rename <playerId> "<name>"`, which never rewrites an id,
+then re-run `apply`. `tools/squadctl/README.md` documents every conflict kind,
+what you decide, and the command that hands the answer back; the design is in
+`docs/superpowers/specs/2026-09-06-squadctl-design.md`.
+
+**The `squad-factory` skill set** remains for the residue that needs
+judgement — designing a team's colours and `marker`, and triaging conflicts
+squadctl reports. `squad-factory` orchestrates `squad-fetcher` (parallel
+Wikipedia reads), `squad-writer` (the sole, sequential writer of
+`players.json`, squad files, and the generated index) and `squad-verifier`
+(parallel re-verification of existing squads).
 
 ## Architecture rules
 
@@ -211,7 +231,14 @@ from `@react-navigation/*` in app code — import `ThemeProvider`/`DarkTheme`/
 `Theme` from `expo-router` itself instead; and RN 0.86 removed
 `StyleSheet.absoluteFillObject` in favor of `StyleSheet.absoluteFill`.
 
+⚠️ **Node 24+ is required — run `nvm use` before anything else.** TypeScript
+runs through `node` directly here, with no build step, which needs Node 24's
+native type stripping. On Node 22 every `.ts` entry point dies with
+`ERR_UNKNOWN_FILE_EXTENSION`; `scripts/check-node.js` guards `check`,
+`gen:squads` and `squadctl` so the message says so.
+
 ```bash
+nvm use               # .nvmrc pins 24; once per shell
 npx expo start        # dev server; scan QR with iPhone Camera → Expo Go
 npx expo start -c     # same, clearing Metro cache
 npm run typecheck

@@ -21,7 +21,10 @@ export interface Question {
   playerId: string;
   playerName: string;
   memberNo: number;
-  age: number;
+  /** Null when the subject has no stored birth date — the AGE stat chip is
+   *  omitted rather than shown empty. Level 1 then carries two chips and
+   *  level 2 one. */
+  age: number | null;
   /** The subject's actual position — always present, even at level 1 where
    *  no `position` part is asked, so the level-1 stat chip has something to show. */
   position: Position;
