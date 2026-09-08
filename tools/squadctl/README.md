@@ -543,14 +543,17 @@ says which two.
 
 Code `4` means _review needed_, not _broken_.
 
-**Not stable under `--json`.** oclif's command wrapper (`@oclif/core@5.0.0`
-`lib/command.js:202`) falls back to `process.exitCode = process.exitCode ??
-err.exitCode ?? 1`, and a `this.error(msg, { exit: N })` call raises a
-`CLIError` that stores `N` on `error.oclif.exit`, never on `exitCode` — so
-that `?? 1` always wins. Only the codes a command sets itself via
-`process.exitCode` survive `--json`: `fetch`'s 1/2/3 (`fetch.ts:170`) and
-`apply`'s 4/5 (`apply.ts:236`). The other 21 `this.error(..., { exit: N })`
-call sites collapse to `1` — `registry check`'s only failure among them, so
-`registry check --json` reports `1` on every disagreement, indistinguishable
-here from `1`'s own meaning of network / HTTP. A `--json` consumer needs the
-real code from the payload's `error.oclif.exit`, not the process exit code.
+**Stable under `--json` too, but only because the base command makes it so.**
+oclif's own wrapper (`@oclif/core@5.0.0` `lib/command.js:202`) falls back to
+`process.exitCode = process.exitCode ?? err.exitCode ?? 1`, and a
+`this.error(msg, { exit: N })` call raises a `CLIError` that stores `N` on
+`error.oclif.exit`, never on `exitCode` — so that `?? 1` used to win, and
+every such error exited `1`. Without `--json` nobody noticed, because the
+rethrow reaches oclif's top-level handler, which does read `oclif.exit`;
+with `--json` the error is serialised instead of rethrown, and the process
+exited `1` — which this table calls network / HTTP, so a consumer read a
+registry error as a transient failure and retried it. `BaseCommand.catch`
+(`src/base-command.ts`) now forwards `oclif.exit` to `process.exitCode`
+before delegating, and `src/commands/registry/check.integration.test.ts`
+pins it by spawning the CLI and comparing the code with and without the
+flag. The payload still carries the code at `error.oclif.exit`.

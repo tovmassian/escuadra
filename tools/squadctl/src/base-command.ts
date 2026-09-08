@@ -37,5 +37,24 @@ export abstract class BaseCommand<T> extends Command {
     if (!this.jsonEnabled()) this.log(message);
   }
 
+  /** Keeps the documented exit code under `--json`.
+   *
+   *  oclif's own `catch` does `process.exitCode = process.exitCode ?? err.exitCode ?? 1`,
+   *  but `this.error(msg, { exit: N })` builds a `CLIError` that carries the
+   *  code at `oclif.exit` and never sets `exitCode` — so the `?? 1` always
+   *  won. Without `--json` that went unnoticed, because the rethrow reaches
+   *  oclif's top-level handler, which does read `oclif.exit`; under `--json`
+   *  the error is serialised instead of rethrown, and the process exited 1.
+   *
+   *  That mattered more than a wrong number: `1` is "network / HTTP" in the
+   *  exit-code table, so a `--json` consumer read a registry or repo error as
+   *  a transient failure and retried it. `registry check` was affected on
+   *  every failure, its only non-zero exit being a `this.error`. */
+  override async catch(err: Parameters<Command['catch']>[0]): Promise<unknown> {
+    const exit = (err as { oclif?: { exit?: number } }).oclif?.exit;
+    if (exit !== undefined) process.exitCode = exit;
+    return super.catch(err);
+  }
+
   abstract run(): Promise<T>;
 }
