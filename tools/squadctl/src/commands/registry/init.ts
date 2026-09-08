@@ -1,10 +1,8 @@
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
+import { existsSync } from 'node:fs';
 import path from 'node:path';
 import { Flags } from '@oclif/core';
-import type { Squad } from '../../../../../types/squad.ts';
-import { LEAGUES } from '../../../../../scripts/roster-envelope.ts';
 import { BaseCommand } from '../../base-command.ts';
-import type { TeamRegistry, TeamRegistryEntry } from '../../lib/registry.ts';
+import { deriveRegistry } from '../../lib/derive-registry.ts';
 import { validateRegistry } from '../../lib/registry.ts';
 import { formatAndWrite } from '../../lib/write-json.ts';
 
@@ -41,7 +39,7 @@ export default class RegistryInit extends BaseCommand<InitResult> {
       });
     }
 
-    const entries = this.discover();
+    const entries = deriveRegistry(path.join(this.dataDir, 'squads'));
     const problems = validateRegistry(entries);
     if (problems.length > 0) {
       this.error(`derived registry is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
@@ -59,56 +57,5 @@ export default class RegistryInit extends BaseCommand<InitResult> {
       clubs,
       nations: entries.length - clubs,
     };
-  }
-
-  private discover(): TeamRegistry {
-    const squadsDir = path.join(this.dataDir, 'squads');
-    const found: TeamRegistryEntry[] = [];
-
-    const readSquad = (file: string): Squad => JSON.parse(readFileSync(file, 'utf8')) as Squad;
-
-    const nationDir = path.join(squadsDir, 'nation');
-    if (existsSync(nationDir)) {
-      for (const file of readdirSync(nationDir)
-        .filter((f) => f.endsWith('.json'))
-        .sort()) {
-        const squad = readSquad(path.join(nationDir, file));
-        found.push({
-          id: squad.id,
-          kind: 'nation',
-          name: squad.name,
-          source: squad.source,
-          identity: {
-            primaryColor: squad.primaryColor,
-            secondaryColor: squad.secondaryColor,
-            marker: squad.marker,
-          },
-        });
-      }
-    }
-
-    for (const league of LEAGUES) {
-      const dir = path.join(squadsDir, 'club', league);
-      if (!existsSync(dir)) continue;
-      for (const file of readdirSync(dir)
-        .filter((f) => f.endsWith('.json'))
-        .sort()) {
-        const squad = readSquad(path.join(dir, file));
-        found.push({
-          id: squad.id,
-          kind: 'club',
-          league,
-          name: squad.name,
-          source: squad.source,
-          identity: {
-            primaryColor: squad.primaryColor,
-            secondaryColor: squad.secondaryColor,
-            marker: squad.marker,
-          },
-        });
-      }
-    }
-
-    return found;
   }
 }

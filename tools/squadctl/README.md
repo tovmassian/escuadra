@@ -45,6 +45,25 @@ authoring at all.
 Refuses to overwrite a populated registry. Merging new entries into an
 existing one is an operator edit, not a command.
 
+### `registry check`
+
+```bash
+npm run squadctl -- registry check
+```
+
+The other direction from `registry init`: verifies `data/teams.json` still
+agrees with the squad files `apply` wrote from it, instead of writing
+anything. `apply` copies `name`, `source`, `kind`, `league` and `identity`
+from the registry onto every squad file it writes, but nothing else checks
+the two stay in sync — edit a colour or a name in `data/teams.json` and
+forget to re-run `apply`, and the repo drifts silently. Also catches a squad
+file with no registry entry at all.
+
+A clean run prints how many teams agreed. A disagreement exits `5` and
+prints every mismatch, naming both the squad file's value and the registry's.
+Runs as part of `npm run check`, so drift is caught on the next check rather
+than whenever someone happens to notice.
+
 ### `fetch`
 
 ```bash
@@ -233,11 +252,14 @@ Expect `written`, `verified: true`, and a long "new player id(s)" line.
 
 ### `registry init` is not for this
 
-`registry init` runs **once, ever**. It derives `data/teams.json` from squad
-files that already exist — the bootstrap for a repo that had squads before it
-had a registry. It refuses to overwrite a populated registry, because merging
-new entries into an existing one is an operator edit, not a command. Adding a
-team after that point is step 1 above: edit the file.
+`registry init` runs **once for the bootstrap**, plus `registry check` on
+every `npm run check`, plus `init --force` as the recovery path if
+`data/teams.json` is ever lost or mangled. The bootstrap run derives
+`data/teams.json` from squad files that already exist — for a repo that had
+squads before it had a registry. Beyond that, `registry init` refuses to
+overwrite a populated registry, because merging new entries into an existing
+one is an operator edit, not a command. Adding a team after that point is
+step 1 above: edit the file.
 
 ## Two rules that keep `players.json` stable
 
