@@ -8,6 +8,13 @@ import {
 } from '../../../../scripts/roster-envelope.ts';
 import type { Player, Squad } from '../../../../types/squad.ts';
 import { BaseCommand } from '../base-command.ts';
+import {
+  isFileUnchanged,
+  mergePlayers,
+  squadPath,
+  teamStatus,
+  worstExit,
+} from '../lib/apply-plan.ts';
 import { assess, conflictCommand, describeConflict, type Conflict } from '../lib/assertions.ts';
 import { colors } from '../lib/colors.ts';
 import { validateRegistry, type TeamRegistry } from '../lib/registry.ts';
@@ -80,11 +87,11 @@ export default class Apply extends BaseCommand<RunReport> {
         // apply needs the entry's identity and league, and inventing either is
         // exactly what the registry exists to prevent.
         teams.push(this.failed(id, [`no registry entry for ${id}`], envelope));
-        exitCode = Math.max(exitCode, EXIT.repo);
+        exitCode = worstExit(exitCode, EXIT.repo);
         continue;
       }
 
-      const squadFile = this.squadPath(envelope);
+      const squadFile = squadPath(this.dataDir, envelope.team);
       const stored: Squad | null = existsSync(squadFile)
         ? (JSON.parse(readFileSync(squadFile, 'utf8')) as Squad)
         : null;
@@ -107,7 +114,7 @@ export default class Apply extends BaseCommand<RunReport> {
           conflicts: verdict.conflicts,
           warnings: verdict.failures,
         });
-        exitCode = Math.max(exitCode, EXIT.repo);
+        exitCode = worstExit(exitCode, EXIT.repo);
         this.report(
           `  ${id}: ${colors.red(colors.bold('FAILED'))} — ${verdict.failures.join('; ')}`,
         );
@@ -123,17 +130,10 @@ export default class Apply extends BaseCommand<RunReport> {
         marker: entry.identity.marker,
         verified: verdict.verified,
       };
-      // lastUpdated moves only when the rest of the file did, so a no-op sweep
-      // produces an empty git diff.
-      // Keyed on THIS file's content alone. Folding players.json edits in here
-      // meant one player's position correction rewrote the lastUpdated of every
-      // unrelated squad that happened to contain them.
-      const fileUnchanged =
-        stored !== null &&
-        JSON.stringify({ ...squad, lastUpdated: stored.lastUpdated }) === JSON.stringify(stored);
+      const fileUnchanged = isFileUnchanged(squad, stored);
       if (!fileUnchanged) squad.lastUpdated = new Date().toISOString().slice(0, 10);
 
-      players = this.mergePlayers(players, plan.newPlayers, plan.updatedPlayers);
+      players = mergePlayers(players, plan.newPlayers, plan.updatedPlayers);
       // Tracked separately from squad writes. Keying the whole write step on
       // `squadWrites.length` meant a run that only corrected player fields —
       // now the common case, since squad files hold nothing but memberships —
@@ -141,14 +141,8 @@ export default class Apply extends BaseCommand<RunReport> {
       if (plan.newPlayers.length > 0 || plan.updatedPlayers.length > 0) playersDirty = true;
       if (!fileUnchanged) squadWrites.push({ file: squadFile, squad });
 
-      // Conflicts outrank quietness: a team with an open question is never
-      // filed as `unchanged`, or the run exits 4 while the report says
-      // nothing is pending.
-      // `written` describes THIS squad file. Folding players.json edits in
-      // here reported teams as written whose file would not change at all.
-      const status =
-        verdict.conflicts.length > 0 ? 'conflicted' : fileUnchanged ? 'unchanged' : 'written';
-      if (verdict.conflicts.length > 0) exitCode = Math.max(exitCode, EXIT.conflicts);
+      const status = teamStatus({ conflicts: verdict.conflicts, fileUnchanged });
+      if (verdict.conflicts.length > 0) exitCode = worstExit(exitCode, EXIT.conflicts);
 
       teams.push({
         id,
@@ -271,24 +265,6 @@ export default class Apply extends BaseCommand<RunReport> {
       conflicts: [],
       warnings: reasons,
     };
-  }
-
-  private mergePlayers(
-    players: readonly Player[],
-    added: readonly Player[],
-    updated: readonly Player[],
-  ): Player[] {
-    const byId = new Map(players.map((p) => [p.id, p]));
-    for (const player of updated) byId.set(player.id, player);
-    for (const player of added) byId.set(player.id, player);
-    return [...byId.values()];
-  }
-
-  private squadPath(envelope: RosterEnvelope): string {
-    const base = path.join(this.dataDir, 'squads');
-    return envelope.team.kind === 'nation'
-      ? path.join(base, 'nation', `${envelope.team.id}.json`)
-      : path.join(base, 'club', envelope.team.league ?? '', `${envelope.team.id}.json`);
   }
 
   private allSquadFiles(): string[] {

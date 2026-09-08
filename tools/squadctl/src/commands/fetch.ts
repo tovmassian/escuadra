@@ -7,6 +7,7 @@ import { colors } from '../lib/colors.ts';
 import { applyCommand, displayPath } from '../lib/hints.ts';
 import { buildEnvelope } from '../lib/build-envelope.ts';
 import { validateRegistry, wikiTitleFromSource, type TeamRegistry } from '../lib/registry.ts';
+import { selectTeams } from '../lib/select.ts';
 import { WikiFetchError, fetchSquadSection } from '../lib/wiki-fetch.ts';
 import { parseSection } from '../lib/wikitext-parse.ts';
 
@@ -65,7 +66,8 @@ export default class Fetch extends BaseCommand<FetchRunReport> {
       const title = wikiTitleFromSource(team.source);
       if (title !== null) clubNames.set(title, team.name);
     }
-    const selected = this.select(registry, flags);
+    const { selected, missing } = selectTeams(registry, flags);
+    if (missing.length > 0) this.error(`no registry entry for: ${missing.join(', ')}`, { exit: 5 });
     if (selected.length === 0) this.error('no registry entries matched those filters', { exit: 5 });
 
     const runId = new Date().toISOString().replace(/[:.]/g, '-');
@@ -199,29 +201,5 @@ export default class Fetch extends BaseCommand<FetchRunReport> {
       this.error(`data/teams.json is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
     }
     return parsed as TeamRegistry;
-  }
-
-  private select(
-    registry: TeamRegistry,
-    flags: { only?: string | undefined; league?: string | undefined; kind?: string | undefined },
-  ): TeamRegistry {
-    let selected = registry;
-    if (flags.only !== undefined) {
-      const wanted = new Set(
-        flags.only
-          .split(',')
-          .map((id) => id.trim())
-          .filter((id) => id !== ''),
-      );
-      const known = new Set(registry.map((e) => e.id));
-      const missing = [...wanted].filter((id) => !known.has(id));
-      if (missing.length > 0) {
-        this.error(`no registry entry for: ${missing.join(', ')}`, { exit: 5 });
-      }
-      selected = selected.filter((e) => wanted.has(e.id));
-    }
-    if (flags.league !== undefined) selected = selected.filter((e) => e.league === flags.league);
-    if (flags.kind !== undefined) selected = selected.filter((e) => e.kind === flags.kind);
-    return selected;
   }
 }
