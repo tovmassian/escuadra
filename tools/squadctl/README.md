@@ -28,6 +28,73 @@ On an older Node every command stops with a message naming the version and the
 fix, rather than an `ERR_UNKNOWN_FILE_EXTENSION` from inside oclif. `npm run
 check` and `npm run gen:squads` carry the same guard.
 
+## Data mental model
+
+**You edit inputs, squadctl writes outputs, and `verified` is never an
+input.** Every file squadctl touches falls into exactly one of three tiers.
+Knowing a file's tier tells you whether the right move is to open an editor
+or run a command — including for every conflict in "Where the CLI hands over
+to you" below.
+
+### You own — hand-edit these
+
+| file                                             | when                                                   |
+| ------------------------------------------------ | ------------------------------------------------------ |
+| `data/teams.json`                                | adding a team; fixing a name, colour, marker or source |
+| `PLAYER_TEMPLATE` in `src/lib/wikitext-parse.ts` | on an `unknown-template` conflict                      |
+| `data/fifa-countries.json`                       | on an `unmapped FIFA code` failure                     |
+
+Editing `data/teams.json` takes effect only on the next `apply` — until then,
+`registry check` (part of `npm run check`) is what catches an edit here that
+never got applied.
+
+### Commands own — you cause the write, you do not type it
+
+| file                  | written by        |
+| --------------------- | ----------------- |
+| `data/decisions.json` | `alias`, `split`  |
+| `data/players.json`   | `apply`, `rename` |
+
+### Generated — never touch, never hand-review
+
+| file                                         | written by                                  |
+| -------------------------------------------- | ------------------------------------------- |
+| `data/squads/**/*.json`                      | `apply`                                     |
+| `data/index.json`, `lib/squads.generated.ts` | `gen:squads`, which `apply` runs at the end |
+
+Derivation runs one direction only:
+
+```
+data/teams.json
+      |
+      | fetch
+      v
+.cache/envelopes/<runId>/
+      |
+      | apply  <---  data/decisions.json (alias, split)
+      |
+      +--> data/squads/**/*.json
+      |          |
+      |          | gen:squads
+      |          v
+      |    data/index.json
+      |    lib/squads.generated.ts
+      |
+      +--> data/players.json  (rename also writes this directly)
+```
+
+Nothing upstream reads anything downstream of it. Hand-editing a squad file
+to silence a conflict edits a generated artefact — the next `apply`
+overwrites it, and the fix that actually sticks belongs at `teams.json`, at
+a `rename`/`alias`/`split`, or in the parser.
+
+`verified` does not appear in that diagram, because no command writes it — it
+is the assertion pass's output (`assess()` in `src/lib/assertions.ts`),
+recomputed every time `apply` runs. A team is `verified: false` because a
+question is still open, one of the conflicts named below, not because a flag
+was set. Answer the question with the command it names and re-run `apply`,
+and `verified` clears itself.
+
 ## Commands
 
 ### `registry init`
@@ -183,7 +250,7 @@ output format themselves.
 ## The loop, end to end
 
 ```bash
-npm run squadctl -- registry init          # once, ever
+npm run squadctl -- registry init          # once, to bootstrap — see below
 npm run squadctl -- fetch                  # network -> .cache/envelopes/<runId>/
 ```
 
@@ -340,7 +407,8 @@ it. So nothing is written until you answer.
   npm run squadctl -- split atm grimaldo "Alejandro Grimaldo"
   ```
 
-Both write `data/decisions.json`. Re-run `apply` afterwards.
+**What you touch:** `alias` and `split` write `data/decisions.json`; `rename`
+writes `data/players.json` directly. Re-run `apply` afterwards either way.
 
 ### `omitted-row`
 
@@ -350,8 +418,10 @@ bra: "Ederson" could not be placed and is missing from the squad — ambiguous a
 
 A parsed row could not be matched to anyone and could not safely be created, so
 the squad is one player short. Reported explicitly because no member-count
-guard notices a nation squad going 26 → 25. Resolve the underlying
-`ambiguous-name` and it goes away.
+guard notices a nation squad going 26 → 25.
+
+**What you touch:** nothing directly — resolve the underlying
+`ambiguous-name` and this clears with it.
 
 ### `name-variant`
 
@@ -370,7 +440,8 @@ on the spelling, and squadctl keeps yours rather than overwriting it.
 npm run squadctl -- rename odegaard "Martin Odegaard"
 ```
 
-Or keep yours and accept that it will be flagged again next sweep.
+**What you touch:** `data/players.json`, only through `rename` — never by
+hand. Or keep yours and accept that it will be flagged again next sweep.
 
 ### `ambiguous-name`
 
@@ -386,13 +457,15 @@ When the collision is **inside** the squad, the whole group is held exactly as
 stored rather than any of them being dropped. When it is across squads there is
 nothing to hold, so the row is omitted and reported as `omitted-row`.
 
-**This one has no command.** Open `data/players.json`, work out which record the
-row means, and make them distinguishable — usually by giving one the fuller name
-it should have had:
+**This one has no command.** Read `data/players.json`, work out which record
+the row means, and hand the answer back with `rename` — never edit the file
+by hand — usually by giving one player the fuller name they should have had:
 
 ```bash
 npm run squadctl -- rename ederson-silva "Éderson Silva"
 ```
+
+**What you touch:** `data/players.json` to read, `rename` to write it back.
 
 ### `unknown-template`
 
@@ -404,6 +477,9 @@ Not a data problem — a parser gap. The row was **not** parsed, so the squad is
 quietly one player short. Add the variant to `PLAYER_TEMPLATE` in
 `src/lib/wikitext-parse.ts` with a fixture, then re-run `fetch --offline`
 (the wikitext is already cached; this costs no requests).
+
+**What you touch:** `PLAYER_TEMPLATE` in `src/lib/wikitext-parse.ts` — the
+parser, not a data file.
 
 ### `blast-radius`
 
@@ -417,11 +493,17 @@ applying.** If the parse is right, apply and the conflict clears next sweep
 because the stored squad now matches. Skipped entirely for a team with no stored
 squad, so new teams never trip it.
 
+**What you touch:** nothing directly — read the diff, and if the parse is
+right, a plain `apply` clears it.
+
 ### `call-ups-only`
 
 The article had no contract roster, only `Recent call-ups`. Nothing to fix —
 this is a permanent property of that article until someone adds a squad section
 upstream. The team stays `verified: false`, correctly.
+
+**What you touch:** nothing — there's no fix to apply, only a permanent
+property of the article to accept.
 
 ## What squadctl will never do for you
 
