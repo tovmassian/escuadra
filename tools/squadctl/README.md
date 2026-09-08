@@ -95,6 +95,15 @@ question is still open, one of the conflicts named below, not because a flag
 was set. Answer the question with the command it names and re-run `apply`,
 and `verified` clears itself.
 
+That is true for a conflict, not for a hard failure. A team that fails
+outright — zero members, a club squad under the minimum, more than one
+captain, or no identity colour (the failure checks in `assess()`) — is never
+written at all: `apply` records `status: 'failed'` and moves to the next
+team before it ever builds a squad object. Whatever `verified` that team
+already had on disk stays exactly as it was, stale or not. The run still
+exits non-zero and names the team; only fixing the underlying failure and
+re-running `apply` gives it a fresh `verified`.
+
 ## Commands
 
 ### `registry init`
@@ -533,3 +542,15 @@ says which two.
 | 5    | repo write, registry, or generator error                  |
 
 Code `4` means _review needed_, not _broken_.
+
+**Not stable under `--json`.** oclif's command wrapper (`@oclif/core@5.0.0`
+`lib/command.js:202`) falls back to `process.exitCode = process.exitCode ??
+err.exitCode ?? 1`, and a `this.error(msg, { exit: N })` call raises a
+`CLIError` that stores `N` on `error.oclif.exit`, never on `exitCode` — so
+that `?? 1` always wins. Only the codes a command sets itself via
+`process.exitCode` survive `--json`: `fetch`'s 1/2/3 (`fetch.ts:170`) and
+`apply`'s 4/5 (`apply.ts:236`). The other 21 `this.error(..., { exit: N })`
+call sites collapse to `1` — `registry check`'s only failure among them, so
+`registry check --json` reports `1` on every disagreement, indistinguishable
+here from `1`'s own meaning of network / HTTP. A `--json` consumer needs the
+real code from the payload's `error.oclif.exit`, not the process exit code.

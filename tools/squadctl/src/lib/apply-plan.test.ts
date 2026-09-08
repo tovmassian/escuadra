@@ -13,18 +13,27 @@ import {
 } from './apply-plan.ts';
 import type { Conflict } from './assertions.ts';
 
-// Pins the three regressions apply.ts's inline comments record (see
-// tools/squadctl/src/commands/apply.ts):
+// Exercises the pure functions imported below from ./apply-plan.ts. Each
+// one's own doc comment there records a past regression in apply.ts's
+// run(), the call site it was extracted from:
 //   1. lastUpdated stability — a player's position correction elsewhere once
 //      rewrote the lastUpdated of every unrelated squad that happened to
-//      contain them. Pinned below by `isFileUnchanged`.
+//      contain them. Covered below by `isFileUnchanged`.
 //   2. write gating on `squadWrites.length` rather than a separate
-//      players-dirty flag once silently discarded every change. Pinned below
-//      by `hasPlayerChanges` (the per-team flag) and `hasWritableChanges`
-//      (the run-level gate).
+//      players-dirty flag once silently discarded every change. Covered
+//      below by `hasPlayerChanges` (the per-team flag) and
+//      `hasWritableChanges` (the run-level gate).
 //   3. the written/unchanged/conflicted status once reported teams as
-//      written whose file would not change at all. Pinned below by
+//      written whose file would not change at all. Covered below by
 //      `teamStatus`.
+//
+// None of this pins the regressions themselves. All three bugs lived at the
+// call site in apply.ts, not inside these extracted expressions: reverting
+// the write gate there to `if (!dryRun && squadWrites.length > 0)`, say,
+// would reintroduce regression 2 while every test below stays green, since
+// `hasWritableChanges(0, true)` is still `true` in isolation. Pinning the
+// call-site regressions needs an apply-level integration test, which does
+// not exist yet.
 
 const marker = { bands: ['#FFFFFF', '#E20001'], orientation: 'vertical' as const };
 
@@ -75,7 +84,7 @@ describe('isFileUnchanged', () => {
     expect(isFileUnchanged(squad(), null)).toBe(false);
   });
 
-  it('regression (lastUpdated stability): identical content differing only in lastUpdated is unchanged', () => {
+  it('reports unchanged when the only difference is lastUpdated', () => {
     const stored = squad({ lastUpdated: '2026-01-01' });
     const candidate = squad({ lastUpdated: '2026-09-08' });
     expect(isFileUnchanged(candidate, stored)).toBe(true);
@@ -111,7 +120,7 @@ describe('hasPlayerChanges', () => {
 });
 
 describe('hasWritableChanges', () => {
-  it('regression (write gate): a player-only correction with zero squad writes still gates open', () => {
+  it('gates open on a player-only change with zero squad writes', () => {
     // Reproduces the exact scenario apply.ts's comment describes: a run that
     // only corrected a player field, touching no squad file at all. Keying
     // the write step on squadWrites.length alone once silently discarded
@@ -145,7 +154,7 @@ describe('teamStatus', () => {
     expect(teamStatus({ conflicts: noConflicts, fileUnchanged: true })).toBe('unchanged');
   });
 
-  it('regression (status): conflicted-and-unchanged reports conflicted, not unchanged', () => {
+  it('reports conflicted, not unchanged, when the file matches but a conflict remains', () => {
     expect(teamStatus({ conflicts: oneConflict, fileUnchanged: true })).toBe('conflicted');
   });
 
