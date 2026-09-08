@@ -13,8 +13,11 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 export abstract class BaseCommand<T> extends Command {
   static enableJsonFlag = true;
 
-  /** tools/squadctl/src -> repo root. */
-  protected readonly repoRoot = path.resolve(HERE, '../../..');
+  /** tools/squadctl/src -> repo root. Overridable via the SQUADCTL_REPO_ROOT
+   *  environment variable so a test can point a command at a fixture repo
+   *  instead of this one — not a supported production flag, and no command
+   *  ever needs to read it directly. */
+  protected readonly repoRoot = process.env.SQUADCTL_REPO_ROOT ?? path.resolve(HERE, '../../..');
 
   protected get dataDir(): string {
     return path.join(this.repoRoot, 'data');

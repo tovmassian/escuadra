@@ -32,8 +32,8 @@ import type { Conflict } from './assertions.ts';
 // the write gate there to `if (!dryRun && squadWrites.length > 0)`, say,
 // would reintroduce regression 2 while every test below stays green, since
 // `hasWritableChanges(0, true)` is still `true` in isolation. Pinning the
-// call-site regressions needs an apply-level integration test, which does
-// not exist yet.
+// call-site regressions is what ../commands/apply.integration.test.ts is
+// for — it drives the real command end to end against a fixture repo.
 
 const marker = { bands: ['#FFFFFF', '#E20001'], orientation: 'vertical' as const };
 
