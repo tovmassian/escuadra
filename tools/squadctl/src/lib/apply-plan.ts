@@ -24,7 +24,13 @@ export function mergePlayers(
  *  produces an empty git diff.
  *  Keyed on THIS file's content alone. Folding players.json edits in here
  *  meant one player's position correction rewrote the lastUpdated of every
- *  unrelated squad that happened to contain them. */
+ *  unrelated squad that happened to contain them.
+ *
+ *  The lastUpdated substitution is defensive rather than load-bearing at the
+ *  one call site today: reconcileTeam already carries `stored.lastUpdated`
+ *  onto `plan.squad`, so the two dates match before this is ever called.
+ *  Kept because that is reconcile's invariant to break, not this function's
+ *  to assume — and apply-plan.test.ts exercises the substitution directly. */
 export function isFileUnchanged(candidate: Squad, stored: Squad | null): boolean {
   return (
     stored !== null &&

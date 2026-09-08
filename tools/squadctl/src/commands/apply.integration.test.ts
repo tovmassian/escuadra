@@ -388,6 +388,15 @@ describe('regenerating the index', () => {
 // AND in the run-level `playersDirty` flag, a team processed after another
 // team dirties a shared player would look changed even though nothing of
 // its own did.
+//
+// The mutation that proves the cross-squad assertions below are load-bearing
+// is exactly that one — `isFileUnchanged(squad, stored) && !playersDirty` at
+// apply.ts's call site, which fails this test with "expected 'written' to be
+// 'unchanged'". Folding a team's OWN plan into the condition instead
+// (`&& plan.updatedPlayers.length === 0`) does not exercise them: the second
+// squad's envelope is a faithful re-fetch of an already-corrected player, and
+// reconcile's field ownership means a nation row never contributes
+// `position`, so that squad's own updatedPlayers is empty either way.
 
 describe('regression 1: lastUpdated stability', () => {
   it('leaves an unrelated squad sharing a corrected player untouched: no lastUpdated bump, no rewrite', async () => {
