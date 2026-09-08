@@ -2650,6 +2650,16 @@
     "photo": null
   },
   {
+    "id": "giovanni-lo-celso",
+    "name": "Giovani Lo Celso",
+    "fullName": "Giovani Lo Celso",
+    "birth": "1996-04-09",
+    "position": "MF",
+    "nationality": "Argentina",
+    "club": "Real Betis",
+    "photo": null
+  },
+  {
     "id": "godts",
     "name": "Mika Godts",
     "fullName": "Mika Godts",
@@ -3726,7 +3736,7 @@
     "birth": "1994-05-27",
     "position": "DF",
     "nationality": "Spain",
-    "club": "Athletic Bilbao",
+    "club": "Athletic Club",
     "photo": null
   },
   {
@@ -3847,16 +3857,6 @@
     "position": "MF",
     "nationality": "Spain",
     "club": "Atlético Madrid",
-    "photo": null
-  },
-  {
-    "id": "giovanni-lo-celso",
-    "name": "Giovani Lo Celso",
-    "fullName": "Giovani Lo Celso",
-    "birth": "1996-04-09",
-    "position": "MF",
-    "nationality": "Argentina",
-    "club": "Real Betis",
     "photo": null
   },
   {
@@ -4866,7 +4866,7 @@
     "birth": "2002-07-12",
     "position": "FW",
     "nationality": "Spain",
-    "club": "Athletic Bilbao",
+    "club": "Athletic Club",
     "photo": null
   },
   {
@@ -6966,7 +6966,7 @@
     "birth": "1997-06-11",
     "position": "GK",
     "nationality": "Spain",
-    "club": "Athletic Bilbao",
+    "club": "Athletic Club",
     "photo": null
   },
   {
