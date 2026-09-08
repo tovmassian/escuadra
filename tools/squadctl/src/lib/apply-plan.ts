@@ -60,3 +60,22 @@ export function squadPath(dataDir: string, team: RosterEnvelope['team']): string
 export function worstExit(current: number, candidate: number): number {
   return Math.max(current, candidate);
 }
+
+/** Whether this team's reconciliation changed any player record — a new
+ *  signing or a correction to an existing one. Feeds the `playersDirty` flag
+ *  that `hasWritableChanges` checks: a team can dirty `players.json` while
+ *  leaving its own squad file untouched. */
+export function hasPlayerChanges(
+  newPlayers: readonly Player[],
+  updatedPlayers: readonly Player[],
+): boolean {
+  return newPlayers.length > 0 || updatedPlayers.length > 0;
+}
+
+/** Tracked separately from squad writes. Keying the whole write step on
+ *  `squadWrites.length` meant a run that only corrected player fields —
+ *  now the common case, since squad files hold nothing but memberships —
+ *  silently discarded every change. */
+export function hasWritableChanges(squadWriteCount: number, playersDirty: boolean): boolean {
+  return squadWriteCount > 0 || playersDirty;
+}

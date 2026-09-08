@@ -9,6 +9,8 @@ import {
 import type { Player, Squad } from '../../../../types/squad.ts';
 import { BaseCommand } from '../base-command.ts';
 import {
+  hasPlayerChanges,
+  hasWritableChanges,
   isFileUnchanged,
   mergePlayers,
   squadPath,
@@ -134,11 +136,7 @@ export default class Apply extends BaseCommand<RunReport> {
       if (!fileUnchanged) squad.lastUpdated = new Date().toISOString().slice(0, 10);
 
       players = mergePlayers(players, plan.newPlayers, plan.updatedPlayers);
-      // Tracked separately from squad writes. Keying the whole write step on
-      // `squadWrites.length` meant a run that only corrected player fields —
-      // now the common case, since squad files hold nothing but memberships —
-      // silently discarded every change.
-      if (plan.newPlayers.length > 0 || plan.updatedPlayers.length > 0) playersDirty = true;
+      if (hasPlayerChanges(plan.newPlayers, plan.updatedPlayers)) playersDirty = true;
       if (!fileUnchanged) squadWrites.push({ file: squadFile, squad });
 
       const status = teamStatus({ conflicts: verdict.conflicts, fileUnchanged });
@@ -187,7 +185,7 @@ export default class Apply extends BaseCommand<RunReport> {
     }
     const orphans = players.filter((p) => !referenced.has(p.id)).length;
 
-    if (!dryRun && (squadWrites.length > 0 || playersDirty)) {
+    if (!dryRun && hasWritableChanges(squadWrites.length, playersDirty)) {
       for (const write of squadWrites) {
         await formatAndWrite(write.file, `${JSON.stringify(write.squad, null, 2)}\n`);
       }

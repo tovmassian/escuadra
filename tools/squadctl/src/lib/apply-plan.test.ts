@@ -2,7 +2,15 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import type { RosterEnvelope } from '../../../../scripts/roster-envelope.ts';
 import type { Player, Squad } from '../../../../types/squad.ts';
-import { isFileUnchanged, mergePlayers, squadPath, teamStatus, worstExit } from './apply-plan.ts';
+import {
+  hasPlayerChanges,
+  hasWritableChanges,
+  isFileUnchanged,
+  mergePlayers,
+  squadPath,
+  teamStatus,
+  worstExit,
+} from './apply-plan.ts';
 import type { Conflict } from './assertions.ts';
 
 // Pins the three regressions apply.ts's inline comments record (see
@@ -11,10 +19,9 @@ import type { Conflict } from './assertions.ts';
 //      rewrote the lastUpdated of every unrelated squad that happened to
 //      contain them. Pinned below by `isFileUnchanged`.
 //   2. write gating on `squadWrites.length` rather than a separate
-//      players-dirty flag once silently discarded every change. That gate is
-//      orchestration state in the run() loop, not one of the functions this
-//      task extracts, so it stays inline in apply.ts guarded only by its own
-//      preserved comment there — not by a test in this file.
+//      players-dirty flag once silently discarded every change. Pinned below
+//      by `hasPlayerChanges` (the per-team flag) and `hasWritableChanges`
+//      (the run-level gate).
 //   3. the written/unchanged/conflicted status once reported teams as
 //      written whose file would not change at all. Pinned below by
 //      `teamStatus`.
@@ -84,6 +91,43 @@ describe('isFileUnchanged', () => {
     const stored = squad({ verified: true });
     const candidate = squad({ verified: false });
     expect(isFileUnchanged(candidate, stored)).toBe(false);
+  });
+});
+
+describe('hasPlayerChanges', () => {
+  it('is false when neither newPlayers nor updatedPlayers has anything', () => {
+    expect(hasPlayerChanges([], [])).toBe(false);
+  });
+
+  it('is true when a player was newly created', () => {
+    const newPlayers = [player({ id: 'new', name: 'New Signing' })];
+    expect(hasPlayerChanges(newPlayers, [])).toBe(true);
+  });
+
+  it('is true when an existing player was updated', () => {
+    const updatedPlayers = [player({ id: 'raya', name: 'David Raya' })];
+    expect(hasPlayerChanges([], updatedPlayers)).toBe(true);
+  });
+});
+
+describe('hasWritableChanges', () => {
+  it('regression (write gate): a player-only correction with zero squad writes still gates open', () => {
+    // Reproduces the exact scenario apply.ts's comment describes: a run that
+    // only corrected a player field, touching no squad file at all. Keying
+    // the write step on squadWrites.length alone once silently discarded
+    // changes like this one.
+    const updatedPlayers = [player({ id: 'raya', name: 'David Raya' })];
+    const playersDirty = hasPlayerChanges([], updatedPlayers);
+    expect(hasWritableChanges(0, playersDirty)).toBe(true);
+  });
+
+  it('gates open on a squad-file-only change with no player changes', () => {
+    const playersDirty = hasPlayerChanges([], []);
+    expect(hasWritableChanges(1, playersDirty)).toBe(true);
+  });
+
+  it('gates closed when there are neither squad writes nor player changes', () => {
+    expect(hasWritableChanges(0, false)).toBe(false);
   });
 });
 
