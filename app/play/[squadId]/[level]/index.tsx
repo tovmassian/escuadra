@@ -118,14 +118,20 @@ export default function Question() {
   return (
     <View style={styles.root}>
       <View style={[styles.header, { paddingTop: insets.top + spacing.xs }]}>
-        <Pressable onPress={exit} accessibilityRole="button" hitSlop={12}>
-          <Text style={styles.exit}>‹ Exit</Text>
-        </Pressable>
+        <View style={styles.headerSide}>
+          <Pressable onPress={exit} accessibilityRole="button" hitSlop={12}>
+            <Text style={styles.exit}>‹ Exit</Text>
+          </Pressable>
+        </View>
         <View style={styles.teamLabel}>
-          <Text style={styles.teamName}>{squad.name}</Text>
+          <Text style={styles.teamName} numberOfLines={1}>
+            {squad.name}
+          </Text>
           <TeamMarker marker={squad.marker} variant="banner" />
         </View>
-        <ScorePill correct={score.correct} total={score.attempted} />
+        <View style={[styles.headerSide, styles.headerSideRight]}>
+          <ScorePill correct={score.correct} total={score.attempted} />
+        </View>
       </View>
 
       <View style={styles.progressBlock}>
@@ -303,9 +309,16 @@ const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-between',
     paddingHorizontal: spacing.lg,
   },
+  // The team name and its banner sit on the screen's true centre line, not
+  // wherever `space-between` happened to leave them: equal-flex side columns
+  // split the leftover space, so a wider score pill (10/10 vs 0/0) or a
+  // longer exit link can no longer drag the centre block off-axis. Each side
+  // aligns its own child to the outer edge so the column's full width doesn't
+  // become tap target for the exit link.
+  headerSide: { flex: 1, alignItems: 'flex-start' },
+  headerSideRight: { alignItems: 'flex-end' },
   exit: { ...typography.secondary, color: colors.textSecondary },
   teamLabel: { alignItems: 'center', gap: spacing.xxs },
   teamName: { ...typography.rowTitle, color: colors.textPrimary },
