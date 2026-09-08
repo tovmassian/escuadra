@@ -85,6 +85,33 @@ function label(entry: DiscoveredSquad): string {
   return `${entry.squad.name} (${entry.id})`;
 }
 
+/** Shared by the club- and nation-match invariants below: for each entry,
+ *  resolve its members and assert every one's `field` equals the squad's
+ *  own `name`, reporting every mismatch (not just whether one exists) so a
+ *  failure names the offending players. The generic keeps `actual` tied to
+ *  Player's real field type per call site — `string` for nationality,
+ *  `string | null` for club — rather than widening nationality's assertion
+ *  down to club's looser type. */
+function checkFieldMatchesSquadName<F extends 'club' | 'nationality'>(
+  entries: DiscoveredSquad[],
+  field: F,
+): void {
+  for (const entry of entries) {
+    it(label(entry), () => {
+      const mismatches: Array<{ playerId: string; expected: string; actual: Player[F] }> = [];
+      for (const member of entry.squad.members) {
+        const player = players.get(member.playerId);
+        if (!player) continue; // unresolved ids are invariant 1's concern, not this one
+        const actual = player[field];
+        if (actual !== entry.squad.name) {
+          mismatches.push({ playerId: member.playerId, expected: entry.squad.name, actual });
+        }
+      }
+      expect(mismatches).toEqual([]);
+    });
+  }
+}
+
 describe('every squad member resolves to a player', () => {
   // A canary against a broken discovery step: if SQUADS_DIR or LEAGUES were
   // wrong, the loop below would silently generate zero `it`s and every
@@ -114,23 +141,10 @@ describe('every squad member resolves to a player', () => {
 // club squad's members to that squad's own `name` forces players.json to
 // carry one canonical spelling per club.
 describe("a club squad's members all carry that club", () => {
-  for (const entry of squadFiles.filter((s) => s.squad.kind === 'club')) {
-    it(label(entry), () => {
-      const mismatches: Array<{ playerId: string; expected: string; actual: string | null }> = [];
-      for (const member of entry.squad.members) {
-        const player = players.get(member.playerId);
-        if (!player) continue; // unresolved ids are invariant 1's concern, not this one
-        if (player.club !== entry.squad.name) {
-          mismatches.push({
-            playerId: member.playerId,
-            expected: entry.squad.name,
-            actual: player.club,
-          });
-        }
-      }
-      expect(mismatches).toEqual([]);
-    });
-  }
+  checkFieldMatchesSquadName(
+    squadFiles.filter((s) => s.squad.kind === 'club'),
+    'club',
+  );
 });
 
 // Same shape as the club check above, for the other half of Squad.kind. A
@@ -139,23 +153,10 @@ describe("a club squad's members all carry that club", () => {
 // with the squad it's attached to, since Study mode and level-3 club
 // distractor pools (on other nation squads) both read player.nationality.
 describe("a nation squad's members all carry that nationality", () => {
-  for (const entry of squadFiles.filter((s) => s.squad.kind === 'nation')) {
-    it(label(entry), () => {
-      const mismatches: Array<{ playerId: string; expected: string; actual: string }> = [];
-      for (const member of entry.squad.members) {
-        const player = players.get(member.playerId);
-        if (!player) continue; // unresolved ids are invariant 1's concern, not this one
-        if (player.nationality !== entry.squad.name) {
-          mismatches.push({
-            playerId: member.playerId,
-            expected: entry.squad.name,
-            actual: player.nationality,
-          });
-        }
-      }
-      expect(mismatches).toEqual([]);
-    });
-  }
+  checkFieldMatchesSquadName(
+    squadFiles.filter((s) => s.squad.kind === 'nation'),
+    'nationality',
+  );
 });
 
 // squadctl apply and squadctl rename always write players.json sorted by
