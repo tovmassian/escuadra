@@ -6,7 +6,7 @@
 // object and never branch on output format themselves.
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { Command } from '@oclif/core';
+import { Command, type Interfaces } from '@oclif/core';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 
@@ -49,9 +49,11 @@ export abstract class BaseCommand<T> extends Command {
    *  That mattered more than a wrong number: `1` is "network / HTTP" in the
    *  exit-code table, so a `--json` consumer read a registry or repo error as
    *  a transient failure and retried it. `registry check` was affected on
-   *  every failure, its only non-zero exit being a `this.error`. */
+   *  every failure, its only non-zero exit having been a `this.error` at the
+   *  time; it now returns drift as data and sets `process.exitCode` itself,
+   *  but every command still reaches this path for its exceptional cases. */
   override async catch(err: Parameters<Command['catch']>[0]): Promise<unknown> {
-    const exit = (err as { oclif?: { exit?: number } }).oclif?.exit;
+    const exit = (err as Partial<Interfaces.OclifError>).oclif?.exit;
     if (exit !== undefined) process.exitCode = exit;
     return super.catch(err);
   }

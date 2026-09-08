@@ -18,7 +18,10 @@ export interface DecisionFile {
    *  Grimaldo", Spain writes "Álex Grimaldo". Renaming just moves the
    *  conflict to the other squad and splitting asserts something false, so
    *  the only truthful answer is that both names are his. */
-  aliases: AcceptedAlias[];
+  /** Optional because every reader already treats it so — `validateDecisions`
+   *  accepts its absence, and `addAlias`, `apply` and `alias` all read it as
+   *  `?? []`. Older decision files predate aliases and carry only splits. */
+  aliases?: AcceptedAlias[];
 }
 
 export const EMPTY_DECISIONS: DecisionFile = { splits: [], aliases: [] };

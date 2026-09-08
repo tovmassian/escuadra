@@ -26,14 +26,20 @@ export default class RegistryCheck extends BaseCommand<CheckResult> {
     const derived = deriveRegistry(path.join(this.dataDir, 'squads'));
     const problems = diffRegistry(derived, stored);
 
+    // Drift is what this command exists to report, so it is returned as data
+    // and signalled with an exit code — the same shape `apply` uses for
+    // conflicts. `this.error` is kept for the exceptional cases below, where
+    // there is no answer to return. Throwing here instead would have made
+    // `problems` permanently `[]` in the --json payload, leaving a consumer
+    // to parse the message string for the one thing it asked for.
     if (problems.length > 0) {
-      this.error(
-        `data/teams.json disagrees with the squad files it should match:\n  ${problems.join('\n  ')}`,
-        { exit: 5 },
+      this.report(
+        `registry check: data/teams.json disagrees with the squad files it should match:\n  ${problems.join('\n  ')}`,
       );
+      process.exitCode = 5;
+    } else {
+      this.report(`registry check: ${derived.length} teams agree with data/teams.json`);
     }
-
-    this.report(`registry check: ${derived.length} teams agree with data/teams.json`);
     return { teams: derived.length, problems };
   }
 

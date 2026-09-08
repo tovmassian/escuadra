@@ -3,6 +3,7 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { LEAGUES } from '../scripts/roster-envelope.ts';
 import type { Player, Squad } from '@/types/squad';
+import type { DecisionFile } from '../tools/squadctl/src/lib/decisions.ts';
 import { wikiTitleFromSource } from '../tools/squadctl/src/lib/registry.ts';
 
 // Squad data is spread across data/teams.json, data/squads/**/*.json,
@@ -47,9 +48,14 @@ function discoverSquadFiles(): DiscoveredSquad[] {
   const discovered: DiscoveredSquad[] = [];
 
   const nationDir = path.join(SQUADS_DIR, 'nation');
-  for (const fileName of readdirSync(nationDir).filter((f) => f.endsWith('.json'))) {
-    const squad = readJson<Squad>(path.join(nationDir, fileName));
-    discovered.push({ id: squad.id, squad });
+  // Guarded like the league loop below, so a missing directory contributes
+  // zero squads and trips the canary rather than throwing ENOENT out of
+  // module scope, where no `it` is running to attribute it to.
+  if (existsSync(nationDir)) {
+    for (const fileName of readdirSync(nationDir).filter((f) => f.endsWith('.json'))) {
+      const squad = readJson<Squad>(path.join(nationDir, fileName));
+      discovered.push({ id: squad.id, squad });
+    }
   }
 
   for (const league of LEAGUES) {
@@ -67,22 +73,6 @@ function discoverSquadFiles(): DiscoveredSquad[] {
 const squadFiles = discoverSquadFiles();
 const playersData = readJson<Player[]>(path.join(DATA_DIR, 'players.json'));
 const players = new Map(playersData.map((p) => [p.id, p]));
-
-interface DecisionSplit {
-  team: string;
-  departed: string;
-  arrived: string;
-}
-
-interface DecisionAlias {
-  player: string;
-  name: string;
-}
-
-interface DecisionsFile {
-  splits: DecisionSplit[];
-  aliases?: DecisionAlias[];
-}
 
 function label(entry: DiscoveredSquad): string {
   return `${entry.squad.name} (${entry.id})`;
@@ -202,8 +192,14 @@ describe('players.json is canonically ordered and unique', () => {
 // recorded decision isn't taking effect. splits[].arrived is deliberately
 // not checked here — it's the source's display name for the arrival, not a
 // stored player id (tools/squadctl/src/commands/split.ts).
+// Note on vacuity: `splits` is empty in the checked-in data — no split has
+// been needed yet — so the two splits assertions below currently pass over an
+// empty list. That is the honest state rather than a gap to paper over: the
+// alternative would be a guard test asserting splits is non-empty, which would
+// fail for a file that is legitimately empty. Both were perturbation-tested by
+// adding a split pointing at a made-up player id and team id.
 describe('data/decisions.json refers to players and teams that exist', () => {
-  const decisions = readJson<DecisionsFile>(path.join(DATA_DIR, 'decisions.json'));
+  const decisions = readJson<DecisionFile>(path.join(DATA_DIR, 'decisions.json'));
   const squadIds = new Set(squadFiles.map((entry) => entry.id));
 
   it('every aliases[].player exists in players.json', () => {

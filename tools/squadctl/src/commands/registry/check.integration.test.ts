@@ -93,8 +93,22 @@ describe('registry check exit codes', () => {
     expect(runCheck(fixture({ name: 'Espana' }), ['--json']).status).toBe(5);
   });
 
+  // Drift is returned as data and signalled by setting process.exitCode
+  // directly, so the cases above no longer reach BaseCommand.catch. This one
+  // does: a missing registry is an exceptional case that still raises through
+  // `this.error`, which is the path the override exists for. Without it this
+  // exits 1 under --json.
+  it('exits 5 under --json when data/teams.json is missing entirely', () => {
+    const root = mkdtempSync(path.join(tmpdir(), 'squadctl-check-empty-'));
+    madeRoots.push(root);
+    mkdirSync(path.join(root, 'data'), { recursive: true });
+    expect(runCheck(root, ['--json']).status).toBe(5);
+  });
+
   it('reports the same code with and without --json', () => {
-    const drift = { name: 'Espana' };
-    expect(runCheck(fixture(drift), ['--json']).status).toBe(runCheck(fixture(drift)).status);
+    // One fixture, read twice — registry check writes nothing, so the second
+    // run sees exactly the state the first did.
+    const root = fixture({ name: 'Espana' });
+    expect(runCheck(root, ['--json']).status).toBe(runCheck(root).status);
   });
 });

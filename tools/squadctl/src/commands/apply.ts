@@ -47,7 +47,10 @@ interface RunReport {
   exitCode: number;
 }
 
-const EXIT = { clean: 0, unusable: 3, conflicts: 4, repo: 5 } as const;
+// 3 ("parse produced nothing usable") is fetch's, not apply's — see the
+// exit-code table in the README. Only the codes apply can actually reach
+// are declared here.
+const EXIT = { clean: 0, conflicts: 4, repo: 5 } as const;
 
 export default class Apply extends BaseCommand<RunReport> {
   static description =
