@@ -3,6 +3,7 @@ import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { LEAGUES } from '../scripts/roster-envelope.ts';
 import type { Player, Squad } from '@/types/squad';
+import { wikiTitleFromSource } from '../tools/squadctl/src/lib/registry.ts';
 
 // Squad data is spread across data/teams.json, data/squads/**/*.json,
 // data/players.json, data/decisions.json and the generated data/index.json,
@@ -17,8 +18,10 @@ import type { Player, Squad } from '@/types/squad';
 // resolve, which is exactly the failure mode invariant 1 below exists to
 // catch — routing through it would mask the bug instead of reporting it.
 //
-// data/teams.json is deliberately not touched here — comparing it against
-// the squad files is a separate axis, covered elsewhere.
+// Comparing data/teams.json against the squad files is a separate axis,
+// covered by `squadctl registry check` and deliberately not duplicated here.
+// The registry is read for one thing only: the last two invariants need each
+// tracked club's Wikipedia article title, which lives nowhere else.
 const ROOT = path.resolve(import.meta.dirname, '..');
 const DATA_DIR = path.join(ROOT, 'data');
 const SQUADS_DIR = path.join(DATA_DIR, 'squads');
@@ -222,5 +225,78 @@ describe('data/decisions.json refers to players and teams that exist', () => {
       .filter((teamId) => !squadIds.has(teamId))
       .sort();
     expect(missing).toEqual([]);
+  });
+});
+
+// The two invariants above check `club` and `nationality` only for players who
+// are *members* of a squad of that kind. That leaves the players who belong to
+// no club squad of ours — nation-squad-only players and orphans — carrying an
+// unvalidated `club`, and they are exactly the population that feeds level-3
+// club distractors: buildClubPart (lib/questionEngine.ts) draws its pool from
+// the nation roster's `player.club` values. A nation article linking a club we
+// track through a different redirect falls through buildEnvelope's
+// canonicalisation to the display text and forks the spelling, with nothing
+// downstream to notice. That is the Athletic Club / Athletic Bilbao bug one
+// step to the left.
+//
+// wikiTitleFromSource is imported rather than reimplemented — a test in lib/
+// reaching into the CLI's lib is a deliberate direction, since the registry's
+// URL parsing has exactly one correct definition and this is a second reader
+// of it, not a second implementation.
+describe('no player.club uses a tracked club article title over its registry name', () => {
+  const registry = readJson<{ id: string; kind: string; name: string; source: string }[]>(
+    path.join(DATA_DIR, 'teams.json'),
+  );
+
+  // Article title -> registry name, for every tracked club whose Wikipedia
+  // title differs from the name we display. A club we do not track is not
+  // covered by this rule: its spelling is free text we never canonicalise.
+  const titleToName = new Map<string, string>();
+  for (const team of registry) {
+    if (team.kind !== 'club') continue;
+    const title = wikiTitleFromSource(team.source);
+    if (title !== null && title !== team.name) titleToName.set(title, team.name);
+  }
+
+  it('has at least one tracked club whose article title differs from its name', () => {
+    // Otherwise the invariant below passes vacuously and proves nothing.
+    expect(titleToName.size).toBeGreaterThan(0);
+  });
+
+  it('no player carries a tracked club under its article title', () => {
+    const offenders = playersData
+      .filter((player) => player.club !== null && titleToName.has(player.club))
+      .map((player) => ({
+        playerId: player.id,
+        actual: player.club,
+        expected: player.club === null ? null : titleToName.get(player.club),
+      }));
+    expect(offenders).toEqual([]);
+  });
+});
+
+// The other half of the same family. A club squad's members get `nationality`
+// from the closed data/fifa-countries.json vocabulary, enforced at write time
+// by buildEnvelope; a nation squad's members get it from the squad's own name,
+// which comes from data/teams.json and is enforced by nothing. `name:
+// "Holland"` on a nation entry would fork "Holland" against "Netherlands" for
+// every club-squad player, with `registry check` passing (the squad file would
+// agree with the registry) and the nationality invariant above passing too
+// (members would agree with their squad).
+describe('every nation squad name is a FIFA country name', () => {
+  // { CODE: Name }, so the names are the values.
+  const countries = new Set(
+    Object.values(readJson<Record<string, string>>(path.join(DATA_DIR, 'fifa-countries.json'))),
+  );
+
+  it('has a non-empty country vocabulary', () => {
+    expect(countries.size).toBeGreaterThan(0);
+  });
+
+  it('uses only names present in fifa-countries.json', () => {
+    const offenders = squadFiles
+      .filter((entry) => entry.squad.kind === 'nation' && !countries.has(entry.squad.name))
+      .map((entry) => ({ squadId: entry.squad.id, name: entry.squad.name }));
+    expect(offenders).toEqual([]);
   });
 });
