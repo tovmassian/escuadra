@@ -10,7 +10,7 @@
     "bands": ["#222730", "#661424"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-02",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Levante_UD",
   "members": [
     {
@@ -51,7 +51,7 @@
       "no": 9
     },
     {
-      "playerId": "c-alvarez",
+      "playerId": "petar-ratkov",
       "no": 10
     },
     {
@@ -65,6 +65,10 @@
     {
       "playerId": "cabello",
       "no": 14
+    },
+    {
+      "playerId": "axel-tape",
+      "no": 16
     },
     {
       "playerId": "garcia",
@@ -109,6 +113,10 @@
     {
       "playerId": "santos",
       "no": 33
+    },
+    {
+      "playerId": "xavi-grande",
+      "no": null
     }
   ]
 }

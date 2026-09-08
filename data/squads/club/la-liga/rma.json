@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-08-21",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Real_Madrid_CF",
   "members": [
     {
@@ -43,7 +43,8 @@
     },
     {
       "playerId": "valverde",
-      "no": 8
+      "no": 8,
+      "captain": true
     },
     {
       "playerId": "endrick",

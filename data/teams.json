@@ -1,0 +1,441 @@
+[
+  {
+    "id": "arg",
+    "kind": "nation",
+    "name": "Argentina",
+    "source": "https://en.wikipedia.org/wiki/Argentina_national_football_team",
+    "identity": {
+      "primaryColor": "#75AADB",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "arm",
+    "kind": "nation",
+    "name": "Armenia",
+    "source": "https://en.wikipedia.org/wiki/Armenia_national_football_team",
+    "identity": {
+      "primaryColor": "#B70000",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#D90012", "#0033A0", "#F2A800"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "bra",
+    "kind": "nation",
+    "name": "Brazil",
+    "source": "https://en.wikipedia.org/wiki/Brazil_national_football_team",
+    "identity": {
+      "primaryColor": "#FFDF00",
+      "secondaryColor": "#009739",
+      "marker": {
+        "bands": ["#009739"],
+        "orientation": "horizontal",
+        "overlay": {
+          "shape": "diamond",
+          "color": "#FFDF00"
+        }
+      }
+    }
+  },
+  {
+    "id": "esp",
+    "kind": "nation",
+    "name": "Spain",
+    "source": "https://en.wikipedia.org/wiki/Spain_national_football_team",
+    "identity": {
+      "primaryColor": "#C60B1E",
+      "secondaryColor": "#FFC400",
+      "marker": {
+        "bands": ["#AA151B", "#F1BF00", "#AA151B"],
+        "orientation": "horizontal",
+        "weights": [1, 2, 1]
+      }
+    }
+  },
+  {
+    "id": "fra",
+    "kind": "nation",
+    "name": "France",
+    "source": "https://en.wikipedia.org/wiki/France_national_football_team",
+    "identity": {
+      "primaryColor": "#0055A4",
+      "secondaryColor": "#EF4135",
+      "marker": {
+        "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "jpn",
+    "kind": "nation",
+    "name": "Japan",
+    "source": "https://en.wikipedia.org/wiki/Japan_national_football_team",
+    "identity": {
+      "primaryColor": "#000B8C",
+      "secondaryColor": "#BC002D",
+      "marker": {
+        "bands": ["#FFFFFF"],
+        "orientation": "horizontal",
+        "overlay": {
+          "shape": "disc",
+          "color": "#BC002D"
+        }
+      }
+    }
+  },
+  {
+    "id": "ala",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Deportivo Alavés",
+    "source": "https://en.wikipedia.org/wiki/Deportivo_Alavés",
+    "identity": {
+      "primaryColor": "#0000FF",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#0000FF", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "ath",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Athletic Club",
+    "source": "https://en.wikipedia.org/wiki/Athletic_Bilbao",
+    "identity": {
+      "primaryColor": "#EE2523",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#EE2523", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "atm",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Atlético Madrid",
+    "source": "https://en.wikipedia.org/wiki/Atlético_Madrid",
+    "identity": {
+      "primaryColor": "#CB3524",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#CB3524", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "bar",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Barcelona",
+    "source": "https://en.wikipedia.org/wiki/FC_Barcelona",
+    "identity": {
+      "primaryColor": "#A50044",
+      "secondaryColor": "#004D98",
+      "marker": {
+        "bands": ["#A50044", "#004D98"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "bet",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Real Betis",
+    "source": "https://en.wikipedia.org/wiki/Real_Betis",
+    "identity": {
+      "primaryColor": "#359B5C",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#359B5C", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "cel",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Celta Vigo",
+    "source": "https://en.wikipedia.org/wiki/RC_Celta_de_Vigo",
+    "identity": {
+      "primaryColor": "#87CEEB",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#87CEEB"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "dep",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Deportivo",
+    "source": "https://en.wikipedia.org/wiki/Deportivo_de_A_Coruña",
+    "identity": {
+      "primaryColor": "#0000FF",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#0000FF", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "elc",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Elche",
+    "source": "https://en.wikipedia.org/wiki/Elche_CF",
+    "identity": {
+      "primaryColor": "#05642C",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#05642C", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "get",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Getafe",
+    "source": "https://en.wikipedia.org/wiki/Getafe_CF",
+    "identity": {
+      "primaryColor": "#005999",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#005999"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "lev",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Levante",
+    "source": "https://en.wikipedia.org/wiki/Levante_UD",
+    "identity": {
+      "primaryColor": "#222730",
+      "secondaryColor": "#661424",
+      "marker": {
+        "bands": ["#222730", "#661424"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mal",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Málaga",
+    "source": "https://en.wikipedia.org/wiki/Málaga_CF",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#103E9E",
+      "marker": {
+        "bands": ["#FFFFFF", "#103E9E"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "osa",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Osasuna",
+    "source": "https://en.wikipedia.org/wiki/CA_Osasuna",
+    "identity": {
+      "primaryColor": "#D70F27",
+      "secondaryColor": "#00004C",
+      "marker": {
+        "bands": ["#D70F27", "#00004C"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "rac",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Racing de Santander",
+    "source": "https://en.wikipedia.org/wiki/Racing_de_Santander",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#369028",
+      "marker": {
+        "bands": ["#FFFFFF", "#369028"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "rcd",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Espanyol",
+    "source": "https://en.wikipedia.org/wiki/RCD_Espanyol",
+    "identity": {
+      "primaryColor": "#0070FF",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#0070FF", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "rma",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Real Madrid",
+    "source": "https://en.wikipedia.org/wiki/Real_Madrid_CF",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#FEBE10",
+      "marker": {
+        "bands": ["#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "rso",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Real Sociedad",
+    "source": "https://en.wikipedia.org/wiki/Real_Sociedad",
+    "identity": {
+      "primaryColor": "#0042FF",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#0042FF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "rvl",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Rayo Vallecano",
+    "source": "https://en.wikipedia.org/wiki/Rayo_Vallecano",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#FF0000",
+      "marker": {
+        "bands": ["#FFFFFF", "#FF0000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "sev",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Sevilla",
+    "source": "https://en.wikipedia.org/wiki/Sevilla_FC",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#E20001",
+      "marker": {
+        "bands": ["#FFFFFF", "#E20001"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "val",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Valencia",
+    "source": "https://en.wikipedia.org/wiki/Valencia_CF",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#FFFFFF", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "vil",
+    "kind": "club",
+    "league": "la-liga",
+    "name": "Villarreal",
+    "source": "https://en.wikipedia.org/wiki/Villarreal_CF",
+    "identity": {
+      "primaryColor": "#FFFF00",
+      "secondaryColor": "#1880FF",
+      "marker": {
+        "bands": ["#FFFF00"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "int",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Inter Milan",
+    "source": "https://en.wikipedia.org/wiki/Inter_Milan",
+    "identity": {
+      "primaryColor": "#0068A8",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#0068A8", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "psg",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Paris Saint-Germain",
+    "source": "https://en.wikipedia.org/wiki/Paris_Saint-Germain_FC",
+    "identity": {
+      "primaryColor": "#004170",
+      "secondaryColor": "#DA291C",
+      "marker": {
+        "bands": ["#004170", "#DA291C", "#004170"],
+        "orientation": "vertical",
+        "weights": [2, 1, 2]
+      }
+    }
+  },
+  {
+    "id": "ars",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Arsenal",
+    "source": "https://en.wikipedia.org/wiki/Arsenal_F.C.",
+    "identity": {
+      "primaryColor": "#EF0107",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#EF0107"],
+        "orientation": "vertical"
+      }
+    }
+  }
+]

@@ -10,7 +10,7 @@
     "bands": ["#0000FF", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-02",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Deportivo_de_A_Coruña",
   "members": [
     {
@@ -32,6 +32,10 @@
     {
       "playerId": "barcia",
       "no": 5
+    },
+    {
+      "playerId": "marc-casado",
+      "no": 6
     },
     {
       "playerId": "aubameyang",
@@ -75,12 +79,20 @@
       "no": 16
     },
     {
+      "playerId": "angelino",
+      "no": 17
+    },
+    {
       "playerId": "asp-jensen",
       "no": 18
     },
     {
       "playerId": "cruz",
       "no": 19
+    },
+    {
+      "playerId": "jose-maria-gimenez",
+      "no": 20
     },
     {
       "playerId": "soriano",
@@ -95,7 +107,7 @@
       "no": 23
     },
     {
-      "playerId": "angelino",
+      "playerId": "adama-traore",
       "no": 24
     },
     {

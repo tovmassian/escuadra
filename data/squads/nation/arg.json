@@ -10,20 +10,12 @@
     "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-08-26",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Argentina_national_football_team",
   "members": [
     {
       "playerId": "musso",
       "no": 1
-    },
-    {
-      "playerId": "rulli",
-      "no": 12
-    },
-    {
-      "playerId": "e-martinez",
-      "no": 23
     },
     {
       "playerId": "senesi",
@@ -38,44 +30,53 @@
       "no": 4
     },
     {
-      "playerId": "lisandro-martinez",
-      "no": 6
-    },
-    {
-      "playerId": "barco",
-      "no": 8
-    },
-    {
-      "playerId": "romero",
-      "no": 13
-    },
-    {
-      "playerId": "medina",
-      "no": 25
-    },
-    {
-      "playerId": "molina",
-      "no": 26
-    },
-    {
       "playerId": "paredes",
       "no": 5
+    },
+    {
+      "playerId": "lisandro-martinez",
+      "no": 6
     },
     {
       "playerId": "de-paul",
       "no": 7
     },
     {
-      "playerId": "lo-celso",
+      "playerId": "barco",
+      "no": 8
+    },
+    {
+      "playerId": "alvarez",
+      "no": 9
+    },
+    {
+      "playerId": "giovanni-lo-celso",
       "no": 11
+    },
+    {
+      "playerId": "rulli",
+      "no": 12
+    },
+    {
+      "playerId": "romero",
+      "no": 13,
+      "captain": true
     },
     {
       "playerId": "palacios",
       "no": 14
     },
     {
+      "playerId": "gonzalez",
+      "no": 15
+    },
+    {
       "playerId": "almada",
       "no": 16
+    },
+    {
+      "playerId": "simeone",
+      "no": 17
     },
     {
       "playerId": "paz",
@@ -86,33 +87,28 @@
       "no": 20
     },
     {
-      "playerId": "enzo-fernandez",
-      "no": 24
-    },
-    {
-      "playerId": "alvarez",
-      "no": 9
-    },
-    {
-      "playerId": "messi",
-      "no": 10,
-      "captain": true
-    },
-    {
-      "playerId": "gonzalez",
-      "no": 15
-    },
-    {
-      "playerId": "simeone",
-      "no": 17
-    },
-    {
       "playerId": "lopez",
       "no": 21
     },
     {
       "playerId": "lautaro",
       "no": 22
+    },
+    {
+      "playerId": "e-martinez",
+      "no": 23
+    },
+    {
+      "playerId": "enzo-fernandez",
+      "no": 24
+    },
+    {
+      "playerId": "medina",
+      "no": 25
+    },
+    {
+      "playerId": "molina",
+      "no": 26
     }
   ]
 }

@@ -11,7 +11,11 @@ export interface Player {
   /** Full legal name, for data completeness — not surfaced in v0 UI, since
    *  option cards and the Study list have no room for it. */
   fullName: string;
-  birth: string; // ISO date
+  /** ISO date, or null when no birth date is known. Club-squad wikitext
+   *  structurally never carries one, so a new signing legitimately arrives
+   *  without it — normal, not anomalous. The quiz drops the AGE stat chip
+   *  rather than rendering NaN; see `lib/age.ts#getAge`. */
+  birth: string | null;
   /** Exactly one position, not an array — the quiz asks for one chip, and
    *  same-position distractor selection needs a single key to group on. */
   position: Position;

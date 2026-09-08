@@ -1,10 +1,12 @@
 // GENERATED FILE producer — run via `npm run gen:squads`. Regenerates
 // lib/squads.generated.ts and data/index.json from every file under
 // data/squads/. See docs/superpowers/specs/2026-08-26-data-layer-scaling-design.md.
-import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
+import { readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
-import { format, resolveConfig } from 'prettier';
 import type { League, Squad, SquadManifestEntry } from '../types/squad';
+// Shared with squadctl so both write through identical prettier options —
+// see the module header for why that matters to `npm run check`.
+import { formatAndWrite } from '../tools/squadctl/src/lib/write-json.ts';
 // One list, not two: squad-writer's entry gate validates a club envelope's
 // league against this same const, so a bad value is refused before any file
 // is written rather than throwing out of here mid-batch.
@@ -132,20 +134,6 @@ function buildIndexJson(discovered: Discovered[]): string {
     return entry;
   });
   return JSON.stringify(entries, null, 2) + '\n';
-}
-
-// Formats `content` with prettier's programmatic API and writes the result
-// to `filePath`. This avoids shelling out to the `npx`/`prettier` CLI
-// entirely — no subprocess, no OS-specific spawn/quoting semantics, and no
-// assumption about node_modules layout (flat/hoisted vs. nested). Passing
-// `filepath` lets prettier infer the right parser per-file (TypeScript for
-// lib/squads.generated.ts, JSON for data/index.json) instead of hardcoding
-// one; `resolveConfig` picks up this repo's .prettierrc automatically so
-// the style options aren't hand-duplicated here.
-async function formatAndWrite(filePath: string, content: string): Promise<void> {
-  const config = await resolveConfig(filePath);
-  const formatted = await format(content, { ...config, filepath: filePath });
-  writeFileSync(filePath, formatted);
 }
 
 async function main(): Promise<void> {

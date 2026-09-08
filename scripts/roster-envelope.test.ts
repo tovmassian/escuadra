@@ -3,6 +3,7 @@ import {
   BLAST_RADIUS_THRESHOLD,
   LEAGUES,
   changeRatio,
+  isTransliterationVariant,
   normalizeName,
   validateEnvelope,
   type RosterEnvelope,
@@ -118,6 +119,26 @@ describe('validateEnvelope', () => {
       marker: { bands: ['#AA151B'], orientation: 'horizontal' },
     };
     expect(validateEnvelope(env).join(' ')).toMatch(/primaryColor must be a six-digit hex/);
+  });
+});
+
+describe('transliteration', () => {
+  // NFD only strips COMBINING marks. These letters carry the mark inside the
+  // glyph, so without an explicit table two sources spelling one player
+  // differently would never match.
+  it('folds letters NFD cannot decompose', () => {
+    expect(normalizeName('Martin Ødegaard')).toBe('martin odegaard');
+    expect(normalizeName('Martin Odegaard')).toBe('martin odegaard');
+    expect(normalizeName('Luka Đorđević')).toBe('luka dordevic');
+  });
+
+  it('flags a match that only held because of transliteration', () => {
+    expect(isTransliterationVariant('Martin Ødegaard', 'Martin Odegaard')).toBe(true);
+  });
+
+  it('does not flag identical names, or ones plain diacritic stripping matched', () => {
+    expect(isTransliterationVariant('Martin Ødegaard', 'Martin Ødegaard')).toBe(false);
+    expect(isTransliterationVariant('Éderson', 'Ederson')).toBe(false);
   });
 });
 

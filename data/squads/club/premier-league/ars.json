@@ -2,7 +2,7 @@
   "id": "ars",
   "kind": "club",
   "name": "Arsenal",
-  "season": "2025/26",
+  "season": "2026/27",
   "primaryColor": "#EF0107",
   "secondaryColor": "#FFFFFF",
   "verified": true,
@@ -10,7 +10,7 @@
     "bands": ["#EF0107"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-01",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Arsenal_F.C.",
   "members": [
     {
@@ -49,10 +49,6 @@
     {
       "playerId": "eze",
       "no": 10
-    },
-    {
-      "playerId": "martinelli",
-      "no": 11
     },
     {
       "playerId": "timber",

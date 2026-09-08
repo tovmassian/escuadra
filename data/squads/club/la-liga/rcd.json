@@ -10,7 +10,7 @@
     "bands": ["#0070FF", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-02",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/RCD_Espanyol",
   "members": [
     {
@@ -57,6 +57,10 @@
     {
       "playerId": "milla",
       "no": 11
+    },
+    {
+      "playerId": "carlos-serrano",
+      "no": 12
     },
     {
       "playerId": "dmitrovic",
@@ -107,12 +111,40 @@
       "no": 24
     },
     {
+      "playerId": "marcelo-standardo",
+      "no": 25
+    },
+    {
       "playerId": "bauza",
       "no": 26
     },
     {
+      "playerId": "adama-timera",
+      "no": 27
+    },
+    {
       "playerId": "j-hernandez",
       "no": 28
+    },
+    {
+      "playerId": "patricio-quentaros",
+      "no": 29
+    },
+    {
+      "playerId": "cristian-mantorras",
+      "no": 30
+    },
+    {
+      "playerId": "llorenc-serred",
+      "no": 31
+    },
+    {
+      "playerId": "jose-angel-lopez",
+      "no": 32
+    },
+    {
+      "playerId": "andoma",
+      "no": 33
     }
   ]
 }

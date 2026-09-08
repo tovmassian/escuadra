@@ -10,7 +10,7 @@
     "bands": ["#EE2523", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-02",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Athletic_Bilbao",
   "members": [
     {
@@ -113,6 +113,10 @@
     {
       "playerId": "louis-jean",
       "no": 31
+    },
+    {
+      "playerId": "unai-egiluz",
+      "no": null
     }
   ]
 }

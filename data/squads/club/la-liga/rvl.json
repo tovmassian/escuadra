@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#FF0000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-02",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Rayo_Vallecano",
   "members": [
     {
@@ -66,6 +66,10 @@
       "no": 14
     },
     {
+      "playerId": "mujaid-sadick",
+      "no": 15
+    },
+    {
       "playerId": "pedrosa",
       "no": 17
     },
@@ -99,12 +103,20 @@
       "no": 24
     },
     {
+      "playerId": "emil-audero",
+      "no": 25
+    },
+    {
       "playerId": "vertrouwd",
       "no": 33
     },
     {
       "playerId": "bouare",
       "no": 36
+    },
+    {
+      "playerId": "rayane-belaid",
+      "no": 37
     }
   ]
 }

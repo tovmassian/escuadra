@@ -9,22 +9,17 @@
   "marker": {
     "bands": ["#FFFFFF"],
     "orientation": "horizontal",
-    "overlay": { "shape": "disc", "color": "#BC002D" }
+    "overlay": {
+      "shape": "disc",
+      "color": "#BC002D"
+    }
   },
-  "lastUpdated": "2026-08-26",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Japan_national_football_team",
   "members": [
     {
       "playerId": "suzuki-zion",
       "no": 1
-    },
-    {
-      "playerId": "osako",
-      "no": 12
-    },
-    {
-      "playerId": "hayakawa",
-      "no": 23
     },
     {
       "playerId": "sugawara",
@@ -44,24 +39,8 @@
       "no": 5
     },
     {
-      "playerId": "watanabe",
-      "no": 16
-    },
-    {
-      "playerId": "seko",
-      "no": 20
-    },
-    {
-      "playerId": "hiroki-ito",
-      "no": 21
-    },
-    {
-      "playerId": "tomiyasu",
-      "no": 22
-    },
-    {
-      "playerId": "suzuki-junnosuke",
-      "no": 25
+      "playerId": "machino",
+      "no": 6
     },
     {
       "playerId": "tanaka",
@@ -72,8 +51,20 @@
       "no": 8
     },
     {
+      "playerId": "goto",
+      "no": 9
+    },
+    {
       "playerId": "doan",
       "no": 10
+    },
+    {
+      "playerId": "maeda",
+      "no": 11
+    },
+    {
+      "playerId": "osako",
+      "no": 12
     },
     {
       "playerId": "nakamura",
@@ -88,20 +79,8 @@
       "no": 15
     },
     {
-      "playerId": "sano",
-      "no": 24
-    },
-    {
-      "playerId": "machino",
-      "no": 6
-    },
-    {
-      "playerId": "goto",
-      "no": 9
-    },
-    {
-      "playerId": "maeda",
-      "no": 11
+      "playerId": "watanabe",
+      "no": 16
     },
     {
       "playerId": "suzuki-yuito",
@@ -114,6 +93,30 @@
     {
       "playerId": "ogawa",
       "no": 19
+    },
+    {
+      "playerId": "seko",
+      "no": 20
+    },
+    {
+      "playerId": "hiroki-ito",
+      "no": 21
+    },
+    {
+      "playerId": "tomiyasu",
+      "no": 22
+    },
+    {
+      "playerId": "hayakawa",
+      "no": 23
+    },
+    {
+      "playerId": "sano",
+      "no": 24
+    },
+    {
+      "playerId": "suzuki-junnosuke",
+      "no": 25
     },
     {
       "playerId": "shiogai",

@@ -1,0 +1,6 @@
+{{updated|1 September 2026}}
+{{nat fs g start}}
+{{nat fs player|no=1|pos=GK|name=[[Unai Simón]]|age={{birth date and age|df=y|1997|6|11}}|caps=45|goals=0|club=[[Athletic Bilbao]]|clubnat=ESP}}
+{{nat fs player|no=5|pos=MF|name=[[Rodri (footballer, born 1996)|Rodri]]|age={{birth date and age|df=y|1996|6|22}}|caps=60|goals=3|club=[[Manchester City]]|clubnat=ENG|other=[[Captain (association football)|captain]]}}
+{{nat fs player|no=19|pos=FW|name=[[Lamine Yamal]]|age={{birth date and age|df=y|2007|7|13}}|caps=25|goals=6|club=[[FC Barcelona|Barcelona]]|clubnat=ESP}}
+{{nat fs g end}}

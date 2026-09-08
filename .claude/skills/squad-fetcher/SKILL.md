@@ -65,8 +65,8 @@ skill.
 
 4. **Parse each member** per the reference, populating the envelope's
    `EnvelopeMember` fields (`scripts/roster-envelope.ts`): shirt number
-   (`no`), `position`, display `name`, `captain` flag, `clubNat` where the
-   wikitext carries it, and — per the reference's **Field population**
+   (`no`, null when the wikitext lists no number), `position`, display
+   `name`, `captain` flag, and — per the reference's **Field population**
    section — `nationality`, `club` and `birth` on **every** member
    regardless of squad kind. Those three are exactly the fields the
    wikitext doesn't hand over the same way for both kinds, so each has its

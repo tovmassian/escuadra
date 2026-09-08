@@ -47,3 +47,6 @@ app-example
 
 # squad-factory run scratch (roster envelopes)
 .claude/tmp/
+
+# squadctl scratch (cached wikitext, run envelopes)
+.cache/

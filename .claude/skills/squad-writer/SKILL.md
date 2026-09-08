@@ -113,8 +113,17 @@ when nothing about _this_ team's fetch changed for them.
 
 - **Match key**: normalised name — `normalizeName` in
   `scripts/roster-envelope.ts` is the reference implementation
-  (case-insensitive, diacritics stripped, whitespace collapsed) — **plus
-  `birth` whenever the envelope member carries one.**
+  (case-insensitive, diacritics stripped, whitespace collapsed, and letters
+  NFD cannot decompose folded explicitly, so `Ødegaard` matches `Odegaard`
+  and `Đorđević` matches `Dordevic`) — **plus `birth` whenever the envelope
+  member carries one.**
+
+  Call `normalizeName`; never re-implement the folding. Plain diacritic
+  stripping is not enough: `ø đ ð ł æ œ ß þ ı ŋ ħ` carry their mark inside
+  the glyph and survive NFD untouched. When a match holds only because of
+  that folding, the two sources disagree on the player's spelling —
+  `isTransliterationVariant` detects it, and it is worth reporting rather
+  than silently rewriting a stored name.
 
   The two sides are not symmetric, and the difference decides real cases.
   `Player.birth` is non-optional in `types/squad.ts`, so a stored candidate

@@ -10,12 +10,21 @@ export type Position = 'GK' | 'DF' | 'MF' | 'FW';
 export interface EnvelopeMember {
   name: string;
   fullName?: string;
-  no: number;
+  /** Null for a member the source lists without a shirt number, mirroring
+   *  `SquadMember.no`. Kept rather than dropped: the player still appears in
+   *  Study mode and as a name distractor. */
+  no: number | null;
+  /** Wikipedia article title for this player, when the source linked one.
+   *  Two players can share a display name within one squad — Brazil carries
+   *  both `Ederson (footballer, born 1993)` and `Éderson (footballer, born
+   *  1999)` — and the article title is the thing that is unique by
+   *  construction. Carried on the envelope for disambiguation during a run;
+   *  deliberately NOT stored on `Player`. */
+  title?: string;
   position: Position;
   captain?: true;
   nationality?: string;
   club?: string | null;
-  clubNat?: string;
   birth?: string;
   /** The literal wikitext template line this member was parsed from. */
   raw: string;
@@ -43,6 +52,10 @@ export interface RosterEnvelope {
    *  writer preserves whatever is stored. See the spec's identity section. */
   identity?: EnvelopeIdentity;
   members: EnvelopeMember[];
+  /** Names of templates that looked player-ish but matched no known variant.
+   *  Structural, because a conflict must never depend on matching the prose of
+   *  a warning string — reword the sentence and the conflict stops firing. */
+  unknownTemplates?: string[];
   warnings: string[];
   decisions?: string[];
 }
@@ -69,15 +82,55 @@ const STATUSES: EnvelopeStatus[] = ['OK', 'NEEDS_DECISION', 'SOURCE_BROKEN', 'PA
 const POSITIONS: Position[] = ['GK', 'DF', 'MF', 'FW'];
 const HEX = /^#[0-9a-fA-F]{6}$/;
 
-/** Case- and diacritic-insensitive form used for every player match.
+/** Latin letters carrying their mark INSIDE the glyph rather than as a
+ *  combining accent. NFD leaves these intact, so diacritic stripping alone
+ *  does not fold `Ødegaard` onto `Odegaard` and two sources spelling one
+ *  player differently would never match. Transliterated explicitly. */
+const NON_DECOMPOSING: Record<string, string> = {
+  ø: 'o',
+  đ: 'd',
+  ð: 'd',
+  ł: 'l',
+  æ: 'ae',
+  œ: 'oe',
+  ß: 'ss',
+  þ: 'th',
+  ı: 'i',
+  ŋ: 'n',
+  ħ: 'h',
+};
+
+/** Folds the letters NFD cannot decompose. Applied after lowercasing, so the
+ *  table only needs lowercase keys. */
+export function transliterate(value: string): string {
+  return value.replace(/[øđðłæœßþıŋħ]/g, (char) => NON_DECOMPOSING[char] ?? char);
+}
+
+/** Case-, diacritic- and script-insensitive form used for every player match.
  *  Bugs here silently merge two real people, which is why it is tested. */
 export function normalizeName(name: string): string {
-  return name
-    .normalize('NFD')
-    .replace(/\p{Diacritic}/gu, '')
-    .toLowerCase()
+  return transliterate(
+    name
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .toLowerCase(),
+  )
     .trim()
     .replace(/\s+/g, ' ');
+}
+
+/** True when two names differ as written but agree only once the
+ *  non-decomposing letters are folded — the sources disagree on spelling and
+ *  the match is transliteration-dependent rather than exact. */
+export function isTransliterationVariant(a: string, b: string): boolean {
+  const fold = (value: string): string =>
+    value
+      .normalize('NFD')
+      .replace(/\p{Diacritic}/gu, '')
+      .toLowerCase()
+      .trim()
+      .replace(/\s+/g, ' ');
+  return fold(a) !== fold(b) && normalizeName(a) === normalizeName(b);
 }
 
 /** 1 minus the Jaccard similarity of two rosters, by normalised name.
@@ -161,15 +214,22 @@ export function validateEnvelope(value: unknown): string[] {
       if (!POSITIONS.includes(entry.position as Position)) {
         errors.push(`${at}.position must be one of ${POSITIONS.join(', ')}`);
       }
-      if (typeof entry.no !== 'number' || !Number.isInteger(entry.no)) {
-        errors.push(`${at}.no must be an integer shirt number`);
-      } else if (seenNumbers.has(entry.no)) {
-        errors.push(`${at} duplicate shirt number ${entry.no}`);
-      } else {
-        seenNumbers.add(entry.no);
+      // null is a legitimate shirt number (see EnvelopeMember.no); only
+      // real numbers are range-checked and deduplicated.
+      if (entry.no !== null) {
+        if (typeof entry.no !== 'number' || !Number.isInteger(entry.no)) {
+          errors.push(`${at}.no must be an integer shirt number or null`);
+        } else if (seenNumbers.has(entry.no)) {
+          errors.push(`${at} duplicate shirt number ${entry.no}`);
+        } else {
+          seenNumbers.add(entry.no);
+        }
       }
       if (nonEmptyString(entry.name)) {
-        const key = normalizeName(entry.name);
+        // Keyed on the article title as well as the name: two different real
+        // people can share a normalised display name inside one squad, and
+        // only the title separates them.
+        const key = `${normalizeName(entry.name)}#${typeof entry.title === 'string' ? entry.title : ''}`;
         if (seenNames.has(key)) errors.push(`${at} duplicate player name ${entry.name}`);
         seenNames.add(key);
       }

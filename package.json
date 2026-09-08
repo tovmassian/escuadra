@@ -13,7 +13,8 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "gen:squads": "node scripts/gen-squads.ts",
-    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run gen:squads && git diff --exit-code -- lib/squads.generated.ts data/index.json",
+    "squadctl": "node tools/squadctl/bin/dev.js",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run squadctl -- registry check && npm run gen:squads && git diff --exit-code -- lib/squads.generated.ts data/index.json",
     "prepare": "husky",
     "format:check": "prettier --check ."
   },
@@ -47,6 +48,7 @@
     "zustand": "^5.0.15"
   },
   "devDependencies": {
+    "@oclif/core": "^5.0.0",
     "@types/react": "~19.2.4",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~57.0.2",

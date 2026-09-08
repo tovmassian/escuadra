@@ -10,7 +10,7 @@
     "bands": ["#0068A8", "#000000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-08-26",
+  "lastUpdated": "2026-09-07",
   "source": "https://en.wikipedia.org/wiki/Inter_Milan",
   "members": [
     {
@@ -63,7 +63,7 @@
       "no": 20
     },
     {
-      "playerId": "asllani",
+      "playerId": "curtis-jones",
       "no": 21
     },
     {
@@ -95,10 +95,6 @@
       "no": 32
     },
     {
-      "playerId": "massolin",
-      "no": 34
-    },
-    {
       "playerId": "provedel",
       "no": 49
     },
@@ -113,10 +109,6 @@
     {
       "playerId": "spence",
       "no": 99
-    },
-    {
-      "playerId": "curtis-jones",
-      "no": null
     }
   ]
 }
