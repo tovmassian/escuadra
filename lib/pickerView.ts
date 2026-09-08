@@ -1,5 +1,6 @@
 // Pure team-picker row model. Kept out of the screen so it is unit-testable.
 import { PASS_RATIO, ROUND_LENGTH, scoreKey } from '@/lib/scoring';
+import type { League, SquadManifestEntry } from '@/types/squad';
 
 const LEVELS = [1, 2, 3] as const;
 
@@ -28,4 +29,52 @@ export function teamProgress(
 
   if (highest === null) return null;
   return { level: highest.level, correct: highest.correct, total: ROUND_LENGTH, cleared };
+}
+
+/** The clubs tab's league filter. `'ALL'` is the default, unfiltered state. */
+export type LeagueFilter = 'ALL' | League;
+
+export const LEAGUE_LABELS: Record<LeagueFilter, string> = {
+  ALL: 'ALL',
+  'premier-league': 'Premier League',
+  'la-liga': 'La Liga',
+  'serie-a': 'Serie A',
+  bundesliga: 'Bundesliga',
+  'ligue-1': 'Ligue 1',
+  ucl: 'UCL',
+};
+
+/** Pill order: the big five, then UCL. Fixed rather than alphabetical so the
+ *  row doesn't reshuffle as squads are added. */
+const LEAGUE_ORDER: readonly League[] = [
+  'premier-league',
+  'la-liga',
+  'serie-a',
+  'bundesliga',
+  'ligue-1',
+  'ucl',
+];
+
+/** `'ALL'` plus every league that actually has a club in the manifest, in
+ *  `LEAGUE_ORDER`. Derived from the data rather than from the `League` union,
+ *  so a league nobody has added a squad for yet never renders a pill that
+ *  filters the list down to nothing. */
+export function leagueFilters(squads: SquadManifestEntry[]): LeagueFilter[] {
+  const present = new Set<League>();
+  for (const squad of squads) {
+    if (squad.kind === 'club' && squad.league !== undefined) present.add(squad.league);
+  }
+  return ['ALL', ...LEAGUE_ORDER.filter((l) => present.has(l))];
+}
+
+/** The rows the picker shows. `kind` always applies; `league` narrows clubs
+ *  only — nation entries carry no league, so it is ignored on that tab. */
+export function visibleSquads(
+  squads: SquadManifestEntry[],
+  kind: 'club' | 'nation',
+  league: LeagueFilter,
+): SquadManifestEntry[] {
+  return squads.filter(
+    (s) => s.kind === kind && (kind !== 'club' || league === 'ALL' || s.league === league),
+  );
 }
