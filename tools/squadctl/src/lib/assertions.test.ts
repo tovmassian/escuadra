@@ -163,6 +163,35 @@ describe('assess — informational', () => {
   });
 });
 
+describe('title-mismatch', () => {
+  const mismatch = {
+    playerId: 'otavio',
+    storedTitle: 'Otávio (footballer, born 2002)',
+    sourceTitle: 'Otávio (footballer, born November 2005)',
+    rowName: 'Otávio',
+  };
+
+  it('is a conflict, so the team is written but not verified', () => {
+    const result = assess(plan({ titleMismatches: [mismatch] }));
+    expect(result.verified).toBe(false);
+    expect(result.failures).toEqual([]);
+    expect(result.conflicts).toContainEqual({ kind: 'title-mismatch', ...mismatch });
+  });
+
+  it('names both titles, since the reader has to judge which is which', () => {
+    expect(describeConflict({ kind: 'title-mismatch', ...mismatch })).toBe(
+      'identity conflict on otavio — stored "Otávio (footballer, born 2002)", source lists "Otávio (footballer, born November 2005)"',
+    );
+  });
+
+  it('offers all three answers, because none is expressible as another', () => {
+    const command = conflictCommand({ kind: 'title-mismatch', ...mismatch });
+    expect(command).toContain('retitle otavio "Otávio (footballer, born November 2005)"');
+    expect(command).toContain('alias otavio --title "Otávio (footballer, born November 2005)"');
+    expect(command).toContain('fork otavio "Otávio (footballer, born November 2005)"');
+  });
+});
+
 describe('conflictCommand', () => {
   // A command is only offered where one command actually settles it. The rest
   // need a person to look first, and a wrong suggestion is worse than none.
