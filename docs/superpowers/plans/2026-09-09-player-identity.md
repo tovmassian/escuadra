@@ -537,12 +537,23 @@ Update `EMPTY_DECISIONS`:
 export const EMPTY_DECISIONS: DecisionFile = { splits: [], aliases: [], titleAliases: [] };
 ```
 
-In `validateDecisions`, after the `aliases` block:
+In `validateDecisions`, put the array guard **immediately after the existing
+`aliases` array guard** — with the other early returns, before any entry loop has
+pushed into `errors`. Placing it after the `aliases` entry loop instead makes its
+`return` discard errors already accumulated there and skip `splits` validation
+entirely, so a corrupted file reports one problem per run instead of all of them.
 
 ```ts
+// With the other array guards, never after an entry loop: an early `return`
+// below that point throws away everything already pushed.
 if (value.titleAliases !== undefined && !Array.isArray(value.titleAliases)) {
   return ['decisions.json "titleAliases" must be an array when present'];
 }
+```
+
+The `titleAliases` entry loop goes after the `aliases` entry loop:
+
+```ts
 for (const [index, entry] of (value.titleAliases ?? []).entries()) {
   if (!isRecord(entry)) {
     errors.push(`titleAliases[${index}] must be an object`);
