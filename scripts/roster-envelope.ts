@@ -133,6 +133,47 @@ export function isTransliterationVariant(a: string, b: string): boolean {
   return fold(a) !== fold(b) && normalizeName(a) === normalizeName(b);
 }
 
+/** A title with its trailing parenthetical disambiguator removed:
+ *  `Endrick (footballer, born 2006)` -> `Endrick`. Only a trailing group is
+ *  stripped, because a parenthetical anywhere else is part of the name. */
+export function baseTitle(title: string): string {
+  return title.replace(/\s*\([^()]*\)\s*$/, '').trim();
+}
+
+/** True when two article titles name the same article.
+ *
+ *  Byte-equality is wrong here: Wikipedia lets an article be reached through
+ *  a redirect, so one person legitimately has more than one link target. Real
+ *  Madrid links `[[Endrick]]` where Brazil links
+ *  `[[Endrick (footballer, born 2006)]]`, and Barcelona links
+ *  `Eric Garcia (footballer, born 2001)` where Spain links
+ *  `Eric García (footballer, born 2001)`.
+ *
+ *  Two relations, both local — resolving a redirect properly would cost a
+ *  request per link and break `--offline`:
+ *
+ *  1. One side is the other's base title, i.e. a link to the undisambiguated
+ *     redirect.
+ *  2. The whole titles are equal once normalised.
+ *
+ *  NOT `isTransliterationVariant`, which is the obvious candidate and is
+ *  wrong: it requires the NFD fold itself to differ, so it fires only on
+ *  `ø đ ð ł æ œ ß þ ı ŋ ħ` and returns false for the Eric García pair.
+ *
+ *  Deliberately conservative about the disambiguator: two titles that share a
+ *  base but carry *different* disambiguators are two people, which is exactly
+ *  the Otávio and Vitinha collisions this whole mechanism exists to catch. */
+export function titlesEquivalent(a: string, b: string): boolean {
+  if (a === b) return true;
+  if (normalizeName(a) === normalizeName(b)) return true;
+  const strippedA = baseTitle(a);
+  const strippedB = baseTitle(b);
+  // Only when one side carries no disambiguator at all. Otherwise
+  // `Otávio (born 2002)` and `Otávio (born November 2005)` would relate.
+  const oneIsBare = strippedA === a || strippedB === b;
+  return oneIsBare && normalizeName(strippedA) === normalizeName(strippedB);
+}
+
 /** 1 minus the Jaccard similarity of two rosters, by normalised name.
  *  0 means identical, 1 means wholly disjoint. */
 export function changeRatio(stored: string[], parsed: string[]): number {
