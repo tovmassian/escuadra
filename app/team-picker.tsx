@@ -6,6 +6,7 @@ import { FilterPill } from '@/components/FilterPill';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { TeamRow } from '@/components/TeamRow';
 import type { LeagueFilter } from '@/lib/pickerView';
+import { flagFor } from '@/lib/flags';
 import { LEAGUE_LABELS, leagueFilters, teamProgress, visibleSquads } from '@/lib/pickerView';
 import { listSquads } from '@/lib/squads';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
@@ -69,6 +70,7 @@ export default function TeamPicker() {
           <TeamRow
             name={item.name}
             marker={item.marker}
+            flag={item.kind === 'nation' ? flagFor(item.name) : undefined}
             progress={hydrated ? teamProgress(item.id, bestScores) : undefined}
             onPress={() =>
               router.push({ pathname: '/team/[squadId]/difficulty', params: { squadId: item.id } })
