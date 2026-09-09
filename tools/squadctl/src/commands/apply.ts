@@ -106,6 +106,7 @@ export default class Apply extends BaseCommand<RunReport> {
         players,
         acceptedSplits: decisions.splits,
         aliases: decisions.aliases ?? [],
+        titleAliases: decisions.titleAliases ?? [],
       });
       const verdict = assess(plan);
 

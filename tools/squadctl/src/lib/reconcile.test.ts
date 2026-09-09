@@ -287,3 +287,116 @@ describe('reconcileTeam', () => {
     expect(plan.noBirthCount).toBe(1);
   });
 });
+
+describe('title-decisive matching', () => {
+  it('matches on title even when the display names differ', () => {
+    // Juventus renders "Nico González"; the record stores "Nicolás González".
+    // Only the shared article title can join these two.
+    const stored = [
+      player({
+        id: 'gonzalez',
+        name: 'Nicolás González',
+        wikiTitle: 'Nicolás González (footballer, born 1998)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([
+        row({ name: 'Nico González', title: 'Nicolás González (footballer, born 1998)' }),
+      ]),
+      storedSquad: squad([{ playerId: 'gonzalez', no: 10 }]),
+      players: stored,
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['gonzalez']);
+    expect(plan.newPlayers).toEqual([]);
+    expect(plan.possibleRenames).toEqual([]);
+  });
+
+  it('relates a redirect to the article it redirects to', () => {
+    // Real Madrid links [[Endrick]]; Brazil links the disambiguated title.
+    const stored = [player({ id: 'endrick', name: 'Endrick', wikiTitle: 'Endrick' })];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Endrick', title: 'Endrick (footballer, born 2006)' })]),
+      storedSquad: squad([{ playerId: 'endrick', no: 9 }]),
+      players: stored,
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['endrick']);
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  it('back-fills a null stored title from the row', () => {
+    const stored = [player({ id: 'raya', name: 'David Raya', wikiTitle: null })];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'David Raya', title: 'David Raya' })]),
+      storedSquad: squad([{ playerId: 'raya', no: 1 }]),
+      players: stored,
+    });
+    expect(plan.updatedPlayers[0]?.wikiTitle).toBe('David Raya');
+  });
+
+  it('never overwrites a stored title from the row — that is retitle', () => {
+    const stored = [player({ id: 'endrick', name: 'Endrick', wikiTitle: 'Endrick' })];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Endrick', title: 'Endrick (footballer, born 2006)' })]),
+      storedSquad: squad([{ playerId: 'endrick', no: 9 }]),
+      players: stored,
+    });
+    expect(plan.updatedPlayers.some((p) => p.id === 'endrick' && p.wikiTitle !== 'Endrick')).toBe(
+      false,
+    );
+  });
+
+  it('gives a genuinely new player the row title', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Otávio', title: 'Otávio (footballer, born 2002)' })]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.newPlayers[0]?.wikiTitle).toBe('Otávio (footballer, born 2002)');
+  });
+
+  it('leaves a row with no title to name matching, exactly as before', () => {
+    const stored = [player({ id: 'raya', name: 'David Raya', wikiTitle: 'David Raya' })];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'David Raya' })]),
+      storedSquad: squad([{ playerId: 'raya', no: 1 }]),
+      players: stored,
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['raya']);
+  });
+
+  it('matches a recorded title alias', () => {
+    // Atlético links "Alejandro Grimaldo"; the record stores Spain's title.
+    const stored = [player({ id: 'grimaldo', name: 'Álex Grimaldo', wikiTitle: 'Álex Grimaldo' })];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Alejandro Grimaldo', title: 'Alejandro Grimaldo' })]),
+      storedSquad: squad([{ playerId: 'grimaldo', no: 3 }]),
+      players: stored,
+      titleAliases: [{ player: 'grimaldo', title: 'Alejandro Grimaldo' }],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['grimaldo']);
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  it('holds the group when a bare title relates to two stored people', () => {
+    // A bare [[Otávio]] against two stored Otávios: base equivalence relates
+    // it to both and picking one would be a coin flip.
+    const stored = [
+      player({ id: 'otavio', name: 'Otávio', wikiTitle: 'Otávio (footballer, born 2002)' }),
+      player({
+        id: 'otavio-2',
+        name: 'Otávio',
+        wikiTitle: 'Otávio (footballer, born November 2005)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Otávio', title: 'Otávio' })]),
+      storedSquad: squad([
+        { playerId: 'otavio', no: 6 },
+        { playerId: 'otavio-2', no: 5 },
+      ]),
+      players: stored,
+    });
+    expect(plan.ambiguous[0]?.candidateIds.sort()).toEqual(['otavio', 'otavio-2']);
+    expect(plan.newPlayers).toEqual([]);
+  });
+});

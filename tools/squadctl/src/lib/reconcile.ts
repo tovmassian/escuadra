@@ -1,14 +1,19 @@
 // Pure: one envelope + what is stored -> a plan for what to write. No I/O, no
 // decisions about whether the plan is acceptable — that is the assertion pass.
 //
-// The match key is the normalised name. No `wikiTitle` is stored anywhere:
-// within a single squad normalised names are unique by construction, and the
-// cross-squad collisions that do exist are exactly what step 2 flags rather
-// than guesses at.
+// A row matches a stored player by article title first, when both sides carry
+// one: `Player.wikiTitle` plus any recorded `TitleAlias`, related through
+// `titlesEquivalent` so a redirect still lands on the article it redirects
+// to. The title is decisive whatever the display names say — it is the only
+// thing that can join "Nico González" to a record stored as "Nicolás
+// González". Only when a title is missing on either side does matching fall
+// back to the normalised name, which was the whole story before this file
+// grew the title.
 import {
   changeRatio,
   isTransliterationVariant,
   normalizeName,
+  titlesEquivalent,
   transliterate,
   type RosterEnvelope,
 } from '../../../../scripts/roster-envelope.ts';
@@ -111,6 +116,10 @@ export interface ReconcileInput {
   /** Extra names players are known by, so a second source's spelling matches
    *  rather than looking like a rename. */
   aliases?: readonly AcceptedAlias[];
+  /** Extra article titles players are known by, so a source that links a
+   *  redirect matches the person it belongs to rather than looking like a
+   *  second person. */
+  titleAliases?: readonly TitleAlias[];
   /** Defaults to today. Passed explicitly in tests. */
   today?: string;
 }
@@ -166,6 +175,7 @@ export function reconcileTeam({
   players,
   acceptedSplits = [],
   aliases = [],
+  titleAliases = [],
   today = new Date().toISOString().slice(0, 10),
 }: ReconcileInput): TeamPlan {
   const byId = new Map(players.map((p) => [p.id, p]));
@@ -176,6 +186,30 @@ export function reconcileTeam({
     player.name,
     ...aliases.filter((a) => a.player === player.id).map((a) => a.name),
   ];
+
+  /** Every article title a player answers to: the one stored on the record
+   *  plus any recorded alias. */
+  const titlesOf = (player: Player): string[] => [
+    ...(player.wikiTitle === null ? [] : [player.wikiTitle]),
+    ...titleAliases.filter((t) => t.player === player.id).map((t) => t.title),
+  ];
+
+  /** How a row's article title relates to a candidate record.
+   *
+   *  `match`   — the same article, decisively, whatever the names say.
+   *  `unknown` — one side carries no title. Fall back to the name, which is
+   *              exactly the behaviour that predates this field.
+   *  `clash`   — both sides are titled and the titles are unrelated. Not this
+   *              person. Handled by the caller, never by guessing. */
+  const titleVerdict = (
+    candidate: Player,
+    rowTitle: string | undefined,
+  ): 'match' | 'unknown' | 'clash' => {
+    if (rowTitle === undefined || rowTitle === '') return 'unknown';
+    const stored = titlesOf(candidate);
+    if (stored.length === 0) return 'unknown';
+    return stored.some((title) => titlesEquivalent(title, rowTitle)) ? 'match' : 'clash';
+  };
 
   const byNorm = new Map<string, Player[]>();
   for (const player of players) {
@@ -253,31 +287,80 @@ export function reconcileTeam({
     if (heldGroups.has(key)) continue;
     let player: Player | undefined;
 
-    // 1. A stored member of THIS squad, by normalised name.
-    const group = (storedByNorm.get(key) ?? []).filter((m) => !consumed.has(m.playerId));
-    if (group.length === 1) {
-      player = byId.get(group[0]?.playerId ?? '');
-    } else if (group.length > 1) {
-      const resolved = separate(group, row);
-      if (resolved === undefined || resolved === null) {
-        // Cannot tell which stored player this row means. HOLD the group
-        // exactly as stored rather than dropping anyone: an unresolved
-        // ambiguity must never quietly shorten a squad.
-        if (!heldGroups.has(key)) {
-          heldGroups.add(key);
-          ambiguous.push({ name: row.name, candidateIds: group.map((m) => m.playerId) });
-          for (const member of group) {
-            consumed.add(member.playerId);
-            members.push(buildMember(member.playerId, member.no, member.captain));
-          }
-        }
-        continue;
+    // 1a. A stored member of THIS squad whose article title is the row's.
+    //     Decisive whatever the display names say: Juventus renders
+    //     "Nico González" where the record stores "Nicolás González", and
+    //     the title is the only thing that can join them.
+    const titled = storedList.filter((m) => {
+      const candidate = byId.get(m.playerId);
+      return (
+        candidate !== undefined &&
+        !consumed.has(m.playerId) &&
+        titleVerdict(candidate, row.title) === 'match'
+      );
+    });
+    if (titled.length === 1) {
+      player = byId.get(titled[0]?.playerId ?? '');
+    } else if (titled.length > 1) {
+      // A bare [[Otávio]] against two stored Otávios. Base equivalence relates
+      // it to both, and picking one is a coin flip — HOLD the group.
+      heldGroups.add(key);
+      ambiguous.push({ name: row.name, candidateIds: titled.map((m) => m.playerId) });
+      for (const member of titled) {
+        consumed.add(member.playerId);
+        members.push(buildMember(member.playerId, member.no, member.captain));
       }
-      player = byId.get(resolved.playerId);
+      continue;
+    }
+
+    // 1b. A stored member of THIS squad, by normalised name.
+    if (!player) {
+      const group = (storedByNorm.get(key) ?? []).filter((m) => !consumed.has(m.playerId));
+      if (group.length === 1) {
+        player = byId.get(group[0]?.playerId ?? '');
+      } else if (group.length > 1) {
+        const resolved = separate(group, row);
+        if (resolved === undefined || resolved === null) {
+          // Cannot tell which stored player this row means. HOLD the group
+          // exactly as stored rather than dropping anyone: an unresolved
+          // ambiguity must never quietly shorten a squad.
+          if (!heldGroups.has(key)) {
+            heldGroups.add(key);
+            ambiguous.push({ name: row.name, candidateIds: group.map((m) => m.playerId) });
+            for (const member of group) {
+              consumed.add(member.playerId);
+              members.push(buildMember(member.playerId, member.no, member.captain));
+            }
+          }
+          continue;
+        }
+        player = byId.get(resolved.playerId);
+      }
     }
     if (player) {
       consumed.add(player.id);
       matchedCount += 1;
+    }
+
+    // 2a. Otherwise look up players.json globally, by title first.
+    if (!player) {
+      const globallyTitled = players.filter(
+        (candidate) => !consumed.has(candidate.id) && titleVerdict(candidate, row.title) === 'match',
+      );
+      if (globallyTitled.length === 1) {
+        player = globallyTitled[0];
+        if (player) consumed.add(player.id);
+      } else if (globallyTitled.length > 1) {
+        ambiguous.push({
+          name: row.name,
+          candidateIds: globallyTitled.map((c) => c.id),
+        });
+        omitted.push({
+          name: row.name,
+          reason: `ambiguous by title against ${globallyTitled.map((c) => c.id).join(', ')}`,
+        });
+        continue;
+      }
     }
 
     // 2. Otherwise look up players.json globally.
@@ -329,6 +412,9 @@ export function reconcileTeam({
         // A matched record inherits its birth date for free — no per-player
         // article request is ever made to recover one.
         birth: player.birth ?? row.birth ?? null,
+        // Filled when unknown, never overwritten — changing a stored title is
+        // what `retitle` is for.
+        wikiTitle: player.wikiTitle ?? row.title ?? null,
       };
       if (JSON.stringify(merged) !== JSON.stringify(player)) updatedPlayers.push(merged);
       members.push(buildMember(player.id, row.no, row.captain));
@@ -374,7 +460,7 @@ export function reconcileTeam({
       nationality: row.nationality ?? '',
       club: row.club ?? null,
       photo: null,
-      wikiTitle: null,
+      wikiTitle: row.title ?? null,
     };
     newPlayers.push(created);
     members.push(buildMember(id, row.no, row.captain));
