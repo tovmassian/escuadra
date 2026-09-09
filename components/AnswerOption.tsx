@@ -9,7 +9,9 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
+import { Flag } from './Flag';
 import { VerdictGlyph } from './VerdictGlyph';
+import type { FlagCode } from '@/assets/flags/generated';
 import {
   borderWidths,
   colors,
@@ -30,6 +32,10 @@ export type OptionVerdict =
 
 interface AnswerOptionProps {
   label: string;
+  /** Set only on level-3 nationality options, whose labels are country
+   *  names. Null when the name isn't in lib/flags.ts's table. Name, position
+   *  and club options never pass one. */
+  flag?: FlagCode | null;
   verdict: OptionVerdict;
   disabled?: boolean;
   onPress: () => void;
@@ -64,7 +70,7 @@ const VERDICT_OPACITY: Record<OptionVerdict, number> = {
   'incorrect-other': opacity.faded,
 };
 
-export function AnswerOption({ label, verdict, disabled, onPress }: AnswerOptionProps) {
+export function AnswerOption({ label, flag, verdict, disabled, onPress }: AnswerOptionProps) {
   const pressScale = useSharedValue(1);
   const revealProgress = useSharedValue(verdict === 'idle' ? 0 : 1);
   const popScale = useSharedValue(1);
@@ -146,14 +152,17 @@ export function AnswerOption({ label, verdict, disabled, onPress }: AnswerOption
     >
       <Animated.View style={[styles.card, animatedStyle]}>
         <View style={styles.row}>
-          <Text
-            style={[
-              isEmphasised ? styles.labelEmphasis : styles.label,
-              { color: VERDICT_TEXT[verdict] },
-            ]}
-          >
-            {label}
-          </Text>
+          <View style={styles.labelGroup}>
+            {flag ? <Flag code={flag} size="row" label={label} /> : null}
+            <Text
+              style={[
+                isEmphasised ? styles.labelEmphasis : styles.label,
+                { color: VERDICT_TEXT[verdict] },
+              ]}
+            >
+              {label}
+            </Text>
+          </View>
           {(verdict === 'correct-picked' || verdict === 'correct-unpicked') && (
             <VerdictGlyph correct />
           )}
@@ -179,6 +188,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+  },
+  labelGroup: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: spacing.xs,
+    flex: 1,
+    minWidth: 0,
   },
   label: {
     ...typography.body,

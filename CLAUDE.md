@@ -38,12 +38,21 @@ introduce a second styling approach alongside the tokens.
 - [ ] Study screen — browsable full squad list, number / name / position / club
 - [ ] Best score per team-and-level persisted locally
 - [ ] Runs on a physical iPhone via Expo Go
+- [ ] Ships to the App Store and Play Store
 
-That is the whole of v0. **Deferred, do not build or scaffold for:** App Store
-and Play Store distribution, player photos, image licensing, advertising,
-monetisation, authentication, any backend or network call, multiplayer,
-leaderboards, and Exam mode (a full-squad run on shirt numbers alone — worth
-reviving after v0 as a standalone feature, but not a fourth difficulty level).
+That is the whole of v0. **Deferred, do not build or scaffold for:** player
+photos, advertising, monetisation, authentication, any backend or network
+call, multiplayer, leaderboards, and Exam mode (a full-squad run on shirt
+numbers alone — worth reviving after v0 as a standalone feature, but not a
+fourth difficulty level).
+
+⚠️ **Shipping to stores is not a build step bolted on at the end.** Expo Go
+cannot publish to a store: it needs a development/production build, an Apple
+Developer Program membership, and a Play Console account — none of which
+exist yet (see Environment). It also makes asset licensing a release blocker
+rather than a deferred concern: every shipped image must have a licence
+someone can name. `assets/flags/README.md` is the worked example — the flag
+set was replaced wholesale for exactly this reason.
 
 ## Difficulty levels
 
@@ -76,12 +85,16 @@ Product-defining. Flag a conflict rather than working around any of these.
    into without a redesign. It currently holds a large shirt number. Keep
    `photo: string | null` on the player type from day one.
 2. **No club crests, badges, logos, or shield shapes. Ever.** Trademark
-   exposure, and this constraint outlives v0. Teams are identified by text and
+   exposure, and this constraint outlives v0. Clubs are identified by text and
    a banded colour marker (see `TeamMarker` in the data model section) — never
-   an emblem. National flags are the one carve-out: a nation's marker _is_ its
-   flag, rendered as geometry rather than an asset, because the rule exists
-   for trademark exposure and a flag carries none. Crests, badges, logos, and
-   shield shapes remain banned forever.
+   an emblem. National flags are the one carve-out, because the rule exists
+   for trademark exposure and a flag carries none: a nation's identity element
+   is a committed PNG in `assets/flags/`, shown on the team picker, level-3
+   nationality options, the `NAT` stat chip and the Study screen's affiliation
+   column. Never a Unicode regional-indicator emoji (🇦🇷) — that depends on an
+   OS flag-emoji font, and Windows ships none, so the Playwright capture behind
+   `npm run shots` would render "AR". Crests, badges, logos, and shield shapes
+   remain banned forever.
 3. **No text input anywhere. No keyboard.** Every answer is a tap — option cards
    and chip selectors are the entire input vocabulary. This is deliberate:
    typing player names on a phone is the worst possible version of this app. Do
@@ -131,14 +144,16 @@ same-position distractor selection needs a single key to group on.
 (hex), carried directly on the squad — content, not a design token. Get the
 actual colour right; do not invent or rotate an arbitrary hue.
 
-`marker` (`TeamMarker`, see `types/squad.ts`) is the team's sole visual
-identity element — required on every squad, club or nation, since
-crests/badges/shields are never used (hard constraint #2). It's declarative
-band geometry, not an asset: `bands` (fills, in draw order), `orientation`
+`marker` (`TeamMarker`, see `types/squad.ts`) is a club's sole visual
+identity element, and every squad carries one — a nation's still feeds the
+in-round banner, where no image fits. It's declarative band geometry, not an
+asset: `bands` (fills, in draw order), `orientation`
 (`horizontal` | `vertical`), an optional `weights` array for uneven bands, and
 an optional `overlay` (a centred `disc` or `diamond` device, e.g. Japan's
-disc or Brazil's diamond). For a nation the marker _is_ the national flag;
-for a club it's the club's own colours laid out as bands — never an emblem.
+disc or Brazil's diamond). For a club it's the club's own colours laid out as
+bands — never an emblem. A nation's is its flag as geometry, kept for the
+in-round banner only; everywhere else a nation shows its real flag image (see
+`lib/flags.ts` and `components/Flag.tsx`).
 Both `data/index.json` (the picker manifest) and each squad file carry
 `primaryColor`/`secondaryColor`/`marker`, since the picker never imports full
 squad JSON. `data/index.json` is generated from the squad files by
@@ -223,11 +238,15 @@ cannot use.
 
 ⚠️ **Do not upgrade the Expo SDK past what the App Store build of Expo Go
 supports.** The version in `package.json` is pinned to that, not to the
-current SDK. There is no Apple Developer Program membership and no
-development build, so Expo Go on a physical iPhone is the _only_ way this app
-runs. Upgrading past what Expo Go supports breaks the ability to run it at
-all — this happened once already (SDK 54 → 57, 2026-09-06), forced by Expo
-Go itself moving to SDK 57 on the App Store. Moving to a development build is
+current SDK. There is still no Apple Developer Program membership and no
+development build, so Expo Go on a physical iPhone remains the _only_ way
+this app runs today — even though v0 is now committed to shipping on both
+stores, which will require a development build, a paid Apple Developer
+Program membership and a Play Console account. Until that build exists this
+pin stands: upgrading past what Expo Go supports breaks the ability to run
+the app at all — this happened once already (SDK 54 → 57, 2026-09-06),
+forced by Expo Go itself moving to SDK 57 on the App Store. Moving to a
+development build is
 a v1 decision.
 
 That 54 → 57 jump also surfaced two real breakages worth knowing about if the

@@ -13,8 +13,9 @@
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "gen:squads": "node scripts/gen-squads.ts",
+    "gen:flags": "node scripts/gen-flags.ts",
     "squadctl": "node tools/squadctl/bin/dev.js",
-    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run squadctl -- registry check && npm run gen:squads && git diff --exit-code -- lib/squads.generated.ts data/index.json",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run squadctl -- registry check && npm run gen:squads && npm run gen:flags && git diff --exit-code -- lib/squads.generated.ts data/index.json assets/flags/generated.ts",
     "prepare": "husky",
     "format:check": "prettier --check ."
   },
@@ -23,15 +24,15 @@
     "@expo-google-fonts/inter": "^0.4.2",
     "@expo/vector-icons": "^15.0.3",
     "@react-native-async-storage/async-storage": "2.2.0",
-    "expo": "~57.0.20",
+    "expo": "^57.0.21",
     "expo-constants": "~57.0.17",
     "expo-font": "~57.0.3",
     "expo-haptics": "~57.0.2",
     "expo-image": "~57.0.4",
     "expo-linear-gradient": "~57.0.1",
     "expo-linking": "~57.0.9",
-    "expo-router": "~57.0.19",
-    "expo-splash-screen": "~57.0.8",
+    "expo-router": "^57.0.20",
+    "expo-splash-screen": "^57.0.8",
     "expo-status-bar": "~57.0.1",
     "expo-symbols": "~57.0.2",
     "expo-system-ui": "~57.0.3",
@@ -57,7 +58,7 @@
     "playwright": "^1.62.1",
     "prettier": "^3.9.6",
     "typescript": "~6.0.3",
-    "vitest": "^3.2.4"
+    "vitest": "^5.0.0"
   },
   "engines": {
     "node": ">=24.3.0"

@@ -4,6 +4,7 @@ import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FilterPill } from '@/components/FilterPill';
 import { StudyHeaderRow, StudyRow } from '@/components/StudyRow';
+import { flagFor } from '@/lib/flags';
 import { getRoster, getSquad } from '@/lib/squads';
 import { parsePlayerIds, studyRows } from '@/lib/studyView';
 import type { Position } from '@/types/squad';
@@ -53,6 +54,7 @@ export default function Study() {
             affiliation={
               squad.kind === 'club' ? item.player.nationality : (item.player.club ?? '—')
             }
+            flag={squad.kind === 'club' ? flagFor(item.player.nationality) : undefined}
           />
         )}
       />

@@ -13,6 +13,8 @@ import { ProgressDots } from '@/components/ProgressDots';
 import { ScorePill } from '@/components/ScorePill';
 import { StatChip } from '@/components/StatChip';
 import { TeamMarker } from '@/components/TeamMarker';
+import type { FlagCode } from '@/assets/flags/generated';
+import { flagFor } from '@/lib/flags';
 import type { Level, QuestionPart } from '@/lib/questionEngine';
 import { partRailRows, progressOutcomes } from '@/lib/roundView';
 import { getRoster, getSquad } from '@/lib/squads';
@@ -87,15 +89,18 @@ export default function Question() {
   // never carries a birth date, so a new signing legitimately has none:
   // level 1 falls to two chips and level 2 to one.
   const ageChip = question.age === null ? [] : [{ label: 'AGE', value: String(question.age) }];
-  const statChips: { label: string; value: string }[] =
+  // Only the NAT chip carries a flag: its value is a nationality. CLUB's is a
+  // club name, and clubs never get an image.
+  const affiliationChip = {
+    label: affiliationLabel,
+    value: question.affiliation,
+    flag: squad.kind === 'club' ? flagFor(question.affiliation) : null,
+  };
+  const statChips: { label: string; value: string; flag?: FlagCode | null }[] =
     level === 1
-      ? [
-          { label: 'POS', value: question.position },
-          ...ageChip,
-          { label: affiliationLabel, value: question.affiliation },
-        ]
+      ? [{ label: 'POS', value: question.position }, ...ageChip, affiliationChip]
       : level === 2
-        ? [...ageChip, { label: affiliationLabel, value: question.affiliation }]
+        ? [...ageChip, affiliationChip]
         : [];
 
   const exit = () => {
@@ -110,7 +115,7 @@ export default function Question() {
   const statChipsBlock = statChips.length > 0 && (
     <View style={styles.chipRow}>
       {statChips.map((c) => (
-        <StatChip key={c.label} label={c.label} value={c.value} />
+        <StatChip key={c.label} label={c.label} value={c.value} flag={c.flag} />
       ))}
     </View>
   );
@@ -278,6 +283,7 @@ function QuestionPartView({
               <AnswerOption
                 key={label}
                 label={label}
+                flag={part.kind === 'nationality' ? flagFor(label) : undefined}
                 verdict={verdictForOption(part, answeredIndex, i)}
                 disabled={isAnswered}
                 onPress={() => onAnswer(i)}
