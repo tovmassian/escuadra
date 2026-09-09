@@ -292,6 +292,68 @@ Records the decision in `data/decisions.json` so the same question is not asked
 every sweep, and the next `apply` writes the split. Idempotent — running it
 twice changes nothing.
 
+### `exclude`
+
+```bash
+npm run squadctl -- exclude <teamId> "<article title>" --reason "<why>"
+```
+
+Records that a club's article lists a player who does not belong in that
+squad, and `apply` drops the row from then on.
+
+**A player belongs to exactly one club — the one they actually play for.** The
+club that owns the registration and collects the loan fee is irrelevant to the
+quiz. Most of the time no decision is needed, because the article says so
+itself: a loaned player's row carries an `other=` annotation and reconciliation
+reads it (see _Loans_ below). This command is for the residue, where two
+articles list the player identically and only the real world says which is
+right — usually a completed transfer one club has not caught up with.
+
+`--reason` is required, unlike every other decision's fields. This one
+overrules the source outright, so the file records on whose say-so and `apply`
+prints it back on every run. A stale override stays visible rather than
+quietly shortening a squad forever.
+
+Keyed on the **article title**, not the display name, so it survives the
+article rewording the name. A row carrying no title never matches. Scoped to
+one team: excluding a player from Verona leaves Torino untouched. Idempotent.
+
+Never fix a dual membership by editing the squad file. Those are generated,
+and `919f1f9` proved it — a player hand-removed from Arsenal was back on the
+next `apply`.
+
+## Loans
+
+Handled by the parser, with no decision needed. A club's own article states
+the direction in the player template's `other=` parameter, and the two
+directions mean opposite things:
+
+| `other=`                        | meaning                                | row     |
+| ------------------------------- | -------------------------------------- | ------- |
+| `on loan from [[X]]`            | the player is **here**, on loan from X | kept    |
+| `at [[Y]] until <date>`         | the player is **at Y**                 | dropped |
+| `on loan to [[Y]] until <date>` | the player is **at Y**                 | dropped |
+
+The third column is what ends up in the squad. So Dortmund keeps Nwaneri and
+Arsenal does not; Valencia keeps Elliott and Liverpool does not.
+
+Clubs that file loanees under an `===Out on loan===` heading are handled
+earlier and differently, by `trimToFirstSquadTable`, which cuts at the first
+heading after the first player row. Premier League and Serie A articles keep
+them inline in the main table instead, which is why `other=` has to be read.
+
+`isOutOnLoan` anchors at the start of the value and requires the wikilink —
+`on loan from [[Atlético Madrid]]` contains "at" and must not read as a
+departure. **An unrecognised phrasing keeps the row.** That leaves the player
+in two squads and `lib/dataIntegrity.test.ts` fails loudly, which is the safe
+direction: quietly shortening a squad on a phrasing nobody has seen yet is the
+one you cannot recover from.
+
+Dropped rows are reported as a warning, not a conflict — the source stated
+plainly that the player is elsewhere, so nothing is being guessed — and are
+excluded from `parsedCount`, which feeds the blast-radius ratio. Counting them
+would make a club with several loanees out look like a page restructure.
+
 ## `--json`
 
 Global, via `enableJsonFlag` on the shared base command. It suppresses human
