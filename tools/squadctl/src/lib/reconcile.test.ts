@@ -400,13 +400,16 @@ describe('title-decisive matching', () => {
     expect(plan.newPlayers).toEqual([]);
   });
 
-  it('falls back to name matching when wikiTitle key is absent', () => {
-    // Legacy player records may not have the wikiTitle key at all (undefined).
-    // titlesOf should treat this the same as null and fall back to name matching.
+  it('falls back to name matching when the wikiTitle key is absent', () => {
+    // Every record in data/players.json predates the field and carries no
+    // wikiTitle key at all, so `=== null` is false for them and titlesOf
+    // yields [undefined]. The ROW must carry a title for this to bite:
+    // titleVerdict returns 'unknown' on a titleless row before titlesOf is
+    // ever reached, so a titleless row would pass either way.
     const p = player({ id: 'raya', name: 'David Raya', wikiTitle: null });
     const { wikiTitle, ...playerWithoutKey } = p;
     const plan = reconcileTeam({
-      envelope: envelope([row({ name: 'David Raya' })]),
+      envelope: envelope([row({ name: 'David Raya', title: 'David Raya' })]),
       storedSquad: squad([{ playerId: 'raya', no: 1 }]),
       players: [playerWithoutKey as Player],
     });
