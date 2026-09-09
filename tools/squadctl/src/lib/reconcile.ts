@@ -26,6 +26,7 @@ import {
   transliterate,
   type RosterEnvelope,
 } from '../../../../scripts/roster-envelope.ts';
+import { isOutOnLoan, otherAnnotation } from './wikitext-parse.ts';
 import type { Player, Squad, SquadMember } from '../../../../types/squad.ts';
 
 export interface AmbiguousMatch {
@@ -87,6 +88,16 @@ export interface NameVariant {
 /** A row whose article title contradicts the record its name would match.
  *  Two different real people, or one whose article moved — indistinguishable
  *  from the data, so this never resolves itself. */
+/** A player this squad's article lists while saying, in `other=`, that they
+ *  are out on loan somewhere else. A player belongs to the club they actually
+ *  play for; the club collecting the loan fee is irrelevant to the quiz. */
+export interface LoanedOut {
+  name: string;
+  /** The literal `other=` annotation, so a wrong drop is traceable to the
+   *  source text rather than to a guess. */
+  note: string;
+}
+
 export interface TitleMismatch {
   playerId: string;
   storedTitle: string;
@@ -107,6 +118,10 @@ export interface TeamPlan {
   omitted: OmittedRow[];
   nameVariants: NameVariant[];
   titleMismatches: TitleMismatch[];
+  /** Rows the source lists only because this club owns the registration:
+   *  the player is out on loan and plays elsewhere. Dropped from the squad,
+   *  reported so a shortened roster is never silent. */
+  loanedOut: LoanedOut[];
   generatedIds: string[];
   parsedCount: number;
   matchedCount: number;
@@ -268,6 +283,7 @@ export function reconcileTeam({
   const omitted: OmittedRow[] = [];
   const nameVariants: NameVariant[] = [];
   const titleMismatches: TitleMismatch[] = [];
+  const loanedOut: LoanedOut[] = [];
   const generatedIds: string[] = [];
   /** Stored members already claimed by a parsed row, so one record is never
    *  matched twice and departures are computed against what is left. */
@@ -301,7 +317,16 @@ export function reconcileTeam({
         normalizeName(d.arrived) === normalizeName(arrivedName),
     );
 
-  for (const row of envelope.members) {
+  // Out-on-loan rows never reach the matcher. Dropped here rather than in the
+  // fetcher so the envelope stays a faithful record of the source, and so
+  // envelopes already on disk get the rule without a re-fetch.
+  const rows = envelope.members.filter((member) => {
+    if (!isOutOnLoan(member.raw)) return true;
+    loanedOut.push({ name: member.name, note: otherAnnotation(member.raw) });
+    return false;
+  });
+
+  for (const row of rows) {
     const key = normalizeName(row.name);
     // A held collision covers every row sharing that name: the group was
     // preserved wholesale on the first one, and letting a later row fall
@@ -583,8 +608,9 @@ export function reconcileTeam({
     omitted,
     nameVariants,
     titleMismatches,
+    loanedOut,
     generatedIds,
-    parsedCount: envelope.members.length,
+    parsedCount: rows.length,
     matchedCount,
     addedCount: members.filter((m) => !storedIds.has(m.playerId)).length,
     noBirthCount: newPlayers.filter((p) => p.birth === null).length,
@@ -597,7 +623,7 @@ export function reconcileTeam({
         ? null
         : changeRatio(
             storedNames,
-            envelope.members.map((m) => normalizeName(m.name)),
+            rows.map((m) => normalizeName(m.name)),
           ),
     hadStoredSquad: storedSquad !== null,
   };

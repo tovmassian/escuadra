@@ -59,10 +59,6 @@
       "no": 17
     },
     {
-      "playerId": "jack-grealish",
-      "no": 18
-    },
-    {
       "playerId": "rayan-aitnouri",
       "no": 21
     },
@@ -83,10 +79,6 @@
       "no": 28
     },
     {
-      "playerId": "claudio-echeverri",
-      "no": 30
-    },
-    {
       "playerId": "ayyoub-bouaddi",
       "no": 32
     },
@@ -99,20 +91,8 @@
       "no": 37
     },
     {
-      "playerId": "jeremy-monga",
-      "no": 40
-    },
-    {
-      "playerId": "sverre-nypan",
-      "no": 41
-    },
-    {
       "playerId": "antoine-semenyo",
       "no": 42
-    },
-    {
-      "playerId": "kalvin-phillips",
-      "no": 44
     },
     {
       "playerId": "abdukodir-khusanov",
@@ -135,24 +115,12 @@
       "no": 61
     },
     {
-      "playerId": "max-alleyne",
-      "no": 68
-    },
-    {
       "playerId": "floyd-samba",
       "no": 75
     },
     {
       "playerId": "rico-lewis",
       "no": 82
-    },
-    {
-      "playerId": "omar-marmoush",
-      "no": null
-    },
-    {
-      "playerId": "pierce-charles",
-      "no": null
     }
   ]
 }

@@ -27,6 +27,7 @@ const plan = (over: Partial<TeamPlan> = {}): TeamPlan => ({
   omitted: [],
   nameVariants: [],
   titleMismatches: [],
+  loanedOut: [],
   generatedIds: [],
   parsedCount: 25,
   matchedCount: 25,

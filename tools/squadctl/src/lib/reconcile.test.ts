@@ -550,3 +550,62 @@ describe('a clashing title holds the row', () => {
     expect(plan.newPlayers).toEqual([]);
   });
 });
+
+describe('out-on-loan rows', () => {
+  const OUT =
+    '{{Fs player|no=19|nat=ENG|pos=MF|name=[[Harvey Elliott]]|other=at [[Valencia CF|Valencia]] until 30 June 2027}}';
+  const IN =
+    '{{Fs player|no=10|nat=ENG|pos=FW|name=[[Harvey Elliott]]|other=on loan from [[Liverpool F.C.|Liverpool]]}}';
+
+  it('drops the row from the squad the player is loaned OUT of', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([
+        row({ name: 'Ander', no: 1 }),
+        row({ name: 'Harvey Elliott', no: 19, raw: OUT }),
+      ]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['ander']);
+    expect(plan.loanedOut).toEqual([
+      { name: 'Harvey Elliott', note: 'at [[Valencia CF|Valencia]] until 30 June 2027' },
+    ]);
+  });
+
+  it('KEEPS the row at the club the player is loaned IN to', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Harvey Elliott', no: 10, raw: IN })]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['harvey-elliott']);
+    expect(plan.loanedOut).toEqual([]);
+  });
+
+  it('removes a stored member who has since been loaned out, as a departure', () => {
+    const stored = player({ id: 'harvey-elliott', name: 'Harvey Elliott' });
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Harvey Elliott', no: 19, raw: OUT })]),
+      storedSquad: squad([{ playerId: 'harvey-elliott', no: 19 }]),
+      players: [stored],
+    });
+    expect(plan.squad.members).toEqual([]);
+    expect(plan.departed.map((d) => d.id)).toEqual(['harvey-elliott']);
+    // The record itself survives — it is the one the loan club reuses.
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  // parsedCount feeds the blast-radius ratio. Counting a dropped row would
+  // make a club with several loanees out look like a page restructure.
+  it('excludes dropped rows from parsedCount', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([
+        row({ name: 'Ander', no: 1 }),
+        row({ name: 'Harvey Elliott', no: 19, raw: OUT }),
+      ]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.parsedCount).toBe(1);
+  });
+});

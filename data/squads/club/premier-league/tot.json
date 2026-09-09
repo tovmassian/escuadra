@@ -14,10 +14,6 @@
   "source": "https://en.wikipedia.org/wiki/Tottenham_Hotspur_F.C.",
   "members": [
     {
-      "playerId": "guglielmo-vicario",
-      "no": 1
-    },
-    {
       "playerId": "andy-robertson",
       "no": 3
     },
@@ -98,20 +94,12 @@
       "no": 23
     },
     {
-      "playerId": "kota-takai",
-      "no": 25
-    },
-    {
       "playerId": "mykhailo-mudryk",
       "no": 27
     },
     {
       "playerId": "wilson-odobert",
       "no": 28
-    },
-    {
-      "playerId": "pape-matar-sarr",
-      "no": 29
     },
     {
       "playerId": "rodrigo-bentancur",
@@ -131,28 +119,12 @@
       "captain": true
     },
     {
-      "playerId": "souza",
-      "no": 38
-    },
-    {
       "playerId": "martin-dubravka",
       "no": 39
     },
     {
       "playerId": "brandon-austin",
       "no": 40
-    },
-    {
-      "playerId": "kevin-danso",
-      "no": null
-    },
-    {
-      "playerId": "radu-dragusin",
-      "no": null
-    },
-    {
-      "playerId": "yang-minhyeok",
-      "no": null
     }
   ]
 }

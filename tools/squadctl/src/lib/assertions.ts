@@ -119,6 +119,17 @@ export function assess(plan: TeamPlan): AssertionResult {
   }
 
   // --- Warnings: written, verified stays true.
+  // A warning, not a conflict: the source stated plainly that these players
+  // are elsewhere, so nothing is being guessed. Reported because a squad that
+  // quietly came back three players short is exactly what no member-count
+  // guard would notice.
+  if (plan.loanedOut.length > 0) {
+    warnings.push(
+      `${plan.loanedOut.length} out on loan, dropped: ${plan.loanedOut
+        .map((l) => `${l.name} (${l.note})`)
+        .join(', ')}`,
+    );
+  }
   if (plan.departed.length > 0) {
     warnings.push(
       `${plan.departed.length} departed: ${plan.departed.map((d) => d.name).join(', ')}`,
