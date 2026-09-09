@@ -119,6 +119,11 @@ describe('forkPlayer', () => {
     expect(result?.created.nationality).toBe('');
   });
 
+  it("does NOT copy fullName — that is the original person's real name", () => {
+    const result = forkPlayer(stored, 'otavio', 'Otávio (footballer, born November 2005)');
+    expect(result?.created.fullName).toBe('Otávio');
+  });
+
   it('copies name and position, since Player.position admits no null', () => {
     const result = forkPlayer(stored, 'otavio', 'Otávio (footballer, born November 2005)');
     expect(result?.created.name).toBe('Otávio');

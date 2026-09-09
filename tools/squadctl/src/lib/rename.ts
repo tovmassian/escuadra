@@ -73,10 +73,15 @@ export interface ForkResult {
 /** The "two different people" answer to a `title-mismatch`: writes a second
  *  record for the person the source is actually describing.
  *
- *  `birth`, `club` and `nationality` are deliberately NOT copied. The birth
- *  date belongs to the original person, and a wrong one on a duplicate record
- *  is exactly the damage the `possible-rename` hold exists to prevent; club
- *  and nationality are filled by the next `apply` from the row, under the
+ *  `fullName`, `birth`, `club` and `nationality` are deliberately NOT copied.
+ *  A birth date and a full name belong to the original person, and a wrong one
+ *  on a duplicate record is exactly the damage the `possible-rename` hold
+ *  exists to prevent — `fullName` especially, because no later `apply` ever
+ *  rewrites it (the merge owns position/club/nationality/birth and nothing
+ *  else) and `rename` leaves a divergent one alone as real data, so a borrowed
+ *  full name is permanent. It falls back to the display name, which is what a
+ *  freshly created record gets when the row carries no fuller name. Club and
+ *  nationality are filled by the next `apply` from the row, under the
  *  field-ownership rules. `position` is copied only because `Player.position`
  *  admits no null, and a club squad's apply overwrites it from the row. */
 export function forkPlayer(
@@ -89,7 +94,7 @@ export function forkPlayer(
   const created: Player = {
     id: playerId(target.name, new Set(players.map((p) => p.id))),
     name: target.name,
-    fullName: target.fullName,
+    fullName: target.name,
     birth: null,
     position: target.position,
     nationality: '',

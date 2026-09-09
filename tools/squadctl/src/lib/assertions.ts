@@ -190,8 +190,8 @@ export function conflictCommand(conflict: Conflict): string | null {
     case 'possible-rename':
       return (
         `same person, adopt new name:  npm run squadctl -- rename ${conflict.departedId} ${JSON.stringify(conflict.arrivedName)}\n` +
-        `      same person, both names:      npm run squadctl -- alias ${conflict.departedId} ${JSON.stringify(conflict.arrivedName)}\n` +
-        `      two different people:         npm run squadctl -- split ${conflict.team} ${conflict.departedId} ${JSON.stringify(conflict.arrivedName)}`
+        `                same person, both names:      npm run squadctl -- alias ${conflict.departedId} ${JSON.stringify(conflict.arrivedName)}\n` +
+        `                two different people:         npm run squadctl -- split ${conflict.team} ${conflict.departedId} ${JSON.stringify(conflict.arrivedName)}`
       );
     case 'name-variant':
       return `npm run squadctl -- rename ${conflict.playerId} ${JSON.stringify(conflict.sourceName)}`;
@@ -201,8 +201,8 @@ export function conflictCommand(conflict: Conflict): string | null {
     case 'title-mismatch':
       return (
         `same person, article moved:  npm run squadctl -- retitle ${conflict.playerId} ${JSON.stringify(conflict.sourceTitle)}\n` +
-        `      same person, both titles:    npm run squadctl -- alias ${conflict.playerId} --title ${JSON.stringify(conflict.sourceTitle)}\n` +
-        `      two different people:        npm run squadctl -- fork ${conflict.playerId} ${JSON.stringify(conflict.sourceTitle)}`
+        `                same person, both titles:    npm run squadctl -- alias ${conflict.playerId} --title ${JSON.stringify(conflict.sourceTitle)}\n` +
+        `                two different people:        npm run squadctl -- fork ${conflict.playerId} ${JSON.stringify(conflict.sourceTitle)}`
       );
     case 'ambiguous-name':
     case 'omitted-row':
