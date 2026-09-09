@@ -254,11 +254,19 @@ belongs to the original and the next `apply` fills the other two from the row.
 
 ```bash
 npm run squadctl -- alias <playerId> "<other name>"
+npm run squadctl -- alias <playerId> --title "<other article title>"
 ```
 
 Records another name one player is known by. Use it when two articles name the
 same person differently and both are right — the case `rename` cannot fix,
 because renaming to satisfy one squad breaks the other.
+
+The `--title` form is the same idea one level up: two articles can _link_ one
+person differently and both be right. Atlético links `Alejandro Grimaldo` where
+Spain links `Álex Grimaldo`, and `retitle` cannot settle it — it just moves the
+conflict to whichever squad links the other target. Recorded in
+`decisions.json` under `titleAliases`, because a redirect is the one title fact
+squadctl cannot re-derive without a network request.
 
 ### `split`
 
