@@ -663,9 +663,9 @@ describe('title-decisive matching', () => {
       storedSquad: squad([{ playerId: 'endrick', no: 9 }]),
       players: stored,
     });
-    expect(plan.updatedPlayers.find((p) => p.id === 'endrick')?.wikiTitle ?? 'Endrick').toBe(
-      'Endrick',
-    );
+    expect(
+      plan.updatedPlayers.some((p) => p.id === 'endrick' && p.wikiTitle !== 'Endrick'),
+    ).toBe(false);
   });
 
   it('gives a genuinely new player the row title', () => {
