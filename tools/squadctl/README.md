@@ -50,9 +50,9 @@ never got applied.
 
 ### Commands own — you cause the write, you do not type it
 
-| file                  | written by                |
-| --------------------- | ------------------------- |
-| `data/decisions.json` | `alias`, `split`          |
+| file                  | written by                   |
+| --------------------- | ---------------------------- |
+| `data/decisions.json` | `alias`, `split`             |
 | `data/players.json`   | `apply`, `rename`, `retitle` |
 
 ### Generated — never touch, never hand-review

@@ -381,7 +381,8 @@ export function reconcileTeam({
     // 2a. Otherwise look up players.json globally, by title first.
     if (!player) {
       const globallyTitled = players.filter(
-        (candidate) => !consumed.has(candidate.id) && titleVerdict(candidate, row.title) === 'match',
+        (candidate) =>
+          !consumed.has(candidate.id) && titleVerdict(candidate, row.title) === 'match',
       );
       if (globallyTitled.length === 1) {
         player = globallyTitled[0];
