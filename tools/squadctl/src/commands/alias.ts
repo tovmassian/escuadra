@@ -47,10 +47,6 @@ export default class Alias extends BaseCommand<AliasReport> {
   async run(): Promise<AliasReport> {
     const { args, flags } = await this.parse(Alias);
 
-    if (flags.title === undefined && args.name === undefined) {
-      this.error('pass either a name or --title', { exit: 5 });
-    }
-
     const players = readPlayers(this.dataDir);
     const target = players.find((p) => p.id === args.player);
     if (target === undefined) {
@@ -92,7 +88,7 @@ export default class Alias extends BaseCommand<AliasReport> {
       this.report(`recorded: ${args.player} ("${target.name}") is also linked as "${flags.title}"`);
       this.report('  both link targets now match this one record — re-run apply');
       return { player: args.player, title: flags.title, alreadyRecorded: false };
-    } else {
+    } else if (args.name !== undefined) {
       // Name alias mode (existing behavior)
       if (target.name === args.name) {
         this.error(`"${args.player}" is already named ${args.name} — an alias would be a no-op`, {
@@ -100,7 +96,7 @@ export default class Alias extends BaseCommand<AliasReport> {
         });
       }
 
-      const updated = addAlias(decisions, { player: args.player, name: args.name! });
+      const updated = addAlias(decisions, { player: args.player, name: args.name });
       if (updated === null) {
         this.report(`already recorded: ${args.player} is also known as "${args.name}"`);
         return { player: args.player, name: args.name, alreadyRecorded: true };
@@ -110,6 +106,8 @@ export default class Alias extends BaseCommand<AliasReport> {
       this.report(`recorded: ${args.player} ("${target.name}") is also known as "${args.name}"`);
       this.report('  both spellings now match this one record — re-run apply');
       return { player: args.player, name: args.name, alreadyRecorded: false };
+    } else {
+      this.error('pass either a name or --title', { exit: 5 });
     }
   }
 }
