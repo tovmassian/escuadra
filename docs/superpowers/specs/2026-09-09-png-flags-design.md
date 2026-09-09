@@ -41,14 +41,23 @@ Explicitly out of scope:
 
 CLAUDE.md hard constraint #2 and the `TeamMarker` doc comment in `types/squad.ts`
 both state that a nation's marker *is* its flag, "rendered as geometry rather than
-an asset". This work changes that for four surfaces, so both documents are rewritten
-as part of it.
+an asset". **That rule is dropped for nations**, not reworded around: a nation's
+identity element is now a committed PNG flag. Both documents are rewritten to say so.
 
-The rationale recorded there survives and must be kept: it argues against Unicode
-regional-indicator emoji, because Windows ships no flag-emoji font and the design
-loop's Playwright capture runs on Windows Chrome. A committed PNG renders identically
-on every platform, so `npm run shots` is unaffected. The geometry also survives — it
-remains the identity element mid-round and for every club.
+What the rewrite must still carry:
+
+- **Clubs are untouched.** Hard constraint #2's ban on crests, badges, logos and
+  shield shapes remains permanent and absolute. A club's marker is still its own
+  colours as bands, never an emblem, never an asset.
+- **The in-round banner is still geometry.** Nation squads keep `marker` in their
+  squad JSON purely to feed the 100x3 pt question-screen banner, which no image can
+  serve. CLAUDE.md's "in-round team marker is always a vertical banner" rule stands
+  verbatim.
+- **Never Unicode flag emoji.** Kept as a one-line caution, because it is a separate
+  point from geometry-vs-asset and dropping it invites the regression it was written
+  to prevent: Windows ships no flag-emoji font, and the design loop's Playwright
+  capture runs on Windows Chrome, so a nation would render as "AR". A committed PNG
+  has no such dependency, and `npm run shots` is unaffected.
 
 ## Assets
 
