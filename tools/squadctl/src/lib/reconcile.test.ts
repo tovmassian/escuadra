@@ -609,3 +609,54 @@ describe('out-on-loan rows', () => {
     expect(plan.parsedCount).toBe(1);
   });
 });
+
+describe('notInSquad decisions', () => {
+  // The residue the loan rule cannot reach: two articles list the player
+  // identically, with no annotation on either, and only the real world says
+  // which is right.
+  const belghali = { name: 'Rafik Belghali', no: 7, title: 'Rafik Belghali' };
+
+  it('drops the row and reports the reason the operator gave', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Ander', no: 1 }), row(belghali)], { id: 'ver' }),
+      storedSquad: null,
+      players: [],
+      notInSquad: [{ team: 'ver', title: 'Rafik Belghali', reason: 'moved to Torino' }],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['ander']);
+    expect(plan.excluded).toEqual([{ name: 'Rafik Belghali', note: 'moved to Torino' }]);
+  });
+
+  it('applies only to the team it names, so the other squad keeps him', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row(belghali)], { id: 'tor' }),
+      storedSquad: null,
+      players: [],
+      notInSquad: [{ team: 'ver', title: 'Rafik Belghali', reason: 'moved to Torino' }],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['rafik-belghali']);
+    expect(plan.excluded).toEqual([]);
+  });
+
+  it('matches by title equivalence, so a redirect still resolves', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row({ ...belghali, title: 'Rafik Belghali (footballer)' })], {
+        id: 'ver',
+      }),
+      storedSquad: null,
+      players: [],
+      notInSquad: [{ team: 'ver', title: 'Rafik Belghali', reason: 'moved to Torino' }],
+    });
+    expect(plan.squad.members).toEqual([]);
+  });
+
+  it('never matches a row that carries no title, rather than falling back to the name', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Rafik Belghali', no: 7 })], { id: 'ver' }),
+      storedSquad: null,
+      players: [],
+      notInSquad: [{ team: 'ver', title: 'Rafik Belghali', reason: 'moved to Torino' }],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['rafik-belghali']);
+  });
+});

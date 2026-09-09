@@ -98,6 +98,19 @@ export interface LoanedOut {
   note: string;
 }
 
+/** A row a club's article lists that a person has asserted does not belong in
+ *  that squad. Not a loan — the source carries no annotation at all — but a
+ *  transfer one article has not caught up with, which is indistinguishable
+ *  from a correct listing without knowing the real world. Keyed on the
+ *  article title, the same identity key everything else on this path uses. */
+export interface NotInSquad {
+  team: string;
+  title: string;
+  /** Required. This overrules the source, so the file records on whose
+   *  say-so, and `apply` prints it back on every run. */
+  reason: string;
+}
+
 export interface TitleMismatch {
   playerId: string;
   storedTitle: string;
@@ -122,6 +135,8 @@ export interface TeamPlan {
    *  the player is out on loan and plays elsewhere. Dropped from the squad,
    *  reported so a shortened roster is never silent. */
   loanedOut: LoanedOut[];
+  /** Rows dropped because a `notInSquad` decision says they do not belong. */
+  excluded: LoanedOut[];
   generatedIds: string[];
   parsedCount: number;
   matchedCount: number;
@@ -155,6 +170,9 @@ export interface ReconcileInput {
    *  redirect matches the person it belongs to rather than looking like a
    *  second person. */
   titleAliases?: readonly TitleAlias[];
+  /** Rows a person has asserted do not belong in this squad, when the source
+   *  itself gives no reason to drop them. */
+  notInSquad?: readonly NotInSquad[];
   /** Defaults to today. Passed explicitly in tests. */
   today?: string;
 }
@@ -211,6 +229,7 @@ export function reconcileTeam({
   acceptedSplits = [],
   aliases = [],
   titleAliases = [],
+  notInSquad = [],
   today = new Date().toISOString().slice(0, 10),
 }: ReconcileInput): TeamPlan {
   const byId = new Map(players.map((p) => [p.id, p]));
@@ -284,6 +303,7 @@ export function reconcileTeam({
   const nameVariants: NameVariant[] = [];
   const titleMismatches: TitleMismatch[] = [];
   const loanedOut: LoanedOut[] = [];
+  const excluded: LoanedOut[] = [];
   const generatedIds: string[] = [];
   /** Stored members already claimed by a parsed row, so one record is never
    *  matched twice and departures are computed against what is left. */
@@ -321,9 +341,23 @@ export function reconcileTeam({
   // fetcher so the envelope stays a faithful record of the source, and so
   // envelopes already on disk get the rule without a re-fetch.
   const rows = envelope.members.filter((member) => {
-    if (!isOutOnLoan(member.raw)) return true;
-    loanedOut.push({ name: member.name, note: otherAnnotation(member.raw) });
-    return false;
+    if (isOutOnLoan(member.raw)) {
+      loanedOut.push({ name: member.name, note: otherAnnotation(member.raw) });
+      return false;
+    }
+    // The operator's override, for a row the source gives no reason to drop.
+    // Title-keyed, so it survives the article rewording the display name.
+    const decision = notInSquad.find(
+      (n) =>
+        n.team === envelope.team.id &&
+        member.title !== undefined &&
+        titlesEquivalent(n.title, member.title),
+    );
+    if (decision !== undefined) {
+      excluded.push({ name: member.name, note: decision.reason });
+      return false;
+    }
+    return true;
   });
 
   for (const row of rows) {
@@ -609,6 +643,7 @@ export function reconcileTeam({
     nameVariants,
     titleMismatches,
     loanedOut,
+    excluded,
     generatedIds,
     parsedCount: rows.length,
     matchedCount,

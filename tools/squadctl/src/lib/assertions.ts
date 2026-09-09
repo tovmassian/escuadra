@@ -130,6 +130,16 @@ export function assess(plan: TeamPlan): AssertionResult {
         .join(', ')}`,
     );
   }
+  // Also a warning, not a conflict — a person already made this call, and
+  // the reason they gave is printed back every run so a stale override is
+  // visible rather than forgotten.
+  if (plan.excluded.length > 0) {
+    warnings.push(
+      `${plan.excluded.length} excluded by decision: ${plan.excluded
+        .map((e) => `${e.name} (${e.note})`)
+        .join(', ')}`,
+    );
+  }
   if (plan.departed.length > 0) {
     warnings.push(
       `${plan.departed.length} departed: ${plan.departed.map((d) => d.name).join(', ')}`,

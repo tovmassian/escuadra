@@ -8,7 +8,7 @@
 // teams that is the difference between a decision and a chore.
 //
 // Checked in, because it is repo knowledge rather than a local preference.
-import type { AcceptedAlias, AcceptedSplit, TitleAlias } from './reconcile.ts';
+import type { AcceptedAlias, AcceptedSplit, NotInSquad, TitleAlias } from './reconcile.ts';
 
 export interface DecisionFile {
   /** Departure/arrival pairs confirmed to be two different people. */
@@ -25,9 +25,17 @@ export interface DecisionFile {
   /** Extra article titles a player is known by. Optional for the same reason
    *  `aliases` is: every decision file on disk predates it. */
   titleAliases?: TitleAlias[];
+  /** Rows a club's article lists that do not belong in that squad. Optional
+   *  for the same reason the other two are: every file on disk predates it. */
+  notInSquad?: NotInSquad[];
 }
 
-export const EMPTY_DECISIONS: DecisionFile = { splits: [], aliases: [], titleAliases: [] };
+export const EMPTY_DECISIONS: DecisionFile = {
+  splits: [],
+  aliases: [],
+  titleAliases: [],
+  notInSquad: [],
+};
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
@@ -51,6 +59,9 @@ export function validateDecisions(value: unknown): string[] {
   if (value.titleAliases !== undefined && !Array.isArray(value.titleAliases)) {
     return ['decisions.json "titleAliases" must be an array when present'];
   }
+  if (value.notInSquad !== undefined && !Array.isArray(value.notInSquad)) {
+    return ['decisions.json "notInSquad" must be an array when present'];
+  }
   for (const [index, entry] of (value.aliases ?? []).entries()) {
     if (!isRecord(entry)) {
       errors.push(`aliases[${index}] must be an object`);
@@ -70,6 +81,19 @@ export function validateDecisions(value: unknown): string[] {
     for (const field of ['player', 'title'] as const) {
       if (typeof entry[field] !== 'string' || entry[field] === '') {
         errors.push(`titleAliases[${index}].${field} must be a non-empty string`);
+      }
+    }
+  }
+  for (const [index, entry] of (value.notInSquad ?? []).entries()) {
+    if (!isRecord(entry)) {
+      errors.push(`notInSquad[${index}] must be an object`);
+      continue;
+    }
+    // `reason` is required, unlike every other decision's fields: this one
+    // overrules the source outright, so the file has to say on whose say-so.
+    for (const field of ['team', 'title', 'reason'] as const) {
+      if (typeof entry[field] !== 'string' || entry[field] === '') {
+        errors.push(`notInSquad[${index}].${field} must be a non-empty string`);
       }
     }
   }
@@ -127,6 +151,18 @@ export function addTitleAlias(file: DecisionFile, alias: TitleAlias): DecisionFi
     ...file,
     titleAliases: [...existing, alias].sort(
       (a, b) => a.player.localeCompare(b.player) || a.title.localeCompare(b.title),
+    ),
+  };
+}
+
+/** Idempotent, like `addAlias`. Returns null when already recorded. */
+export function addNotInSquad(file: DecisionFile, entry: NotInSquad): DecisionFile | null {
+  const existing = file.notInSquad ?? [];
+  if (existing.some((n) => n.team === entry.team && n.title === entry.title)) return null;
+  return {
+    ...file,
+    notInSquad: [...existing, entry].sort(
+      (a, b) => a.team.localeCompare(b.team) || a.title.localeCompare(b.title),
     ),
   };
 }

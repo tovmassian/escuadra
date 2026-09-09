@@ -107,6 +107,7 @@ export default class Apply extends BaseCommand<RunReport> {
         acceptedSplits: decisions.splits,
         aliases: decisions.aliases ?? [],
         titleAliases: decisions.titleAliases ?? [],
+        notInSquad: decisions.notInSquad ?? [],
       });
       const verdict = assess(plan);
 
@@ -316,6 +317,7 @@ export default class Apply extends BaseCommand<RunReport> {
       ...loaded,
       aliases: loaded.aliases ?? [],
       titleAliases: loaded.titleAliases ?? [],
+      notInSquad: loaded.notInSquad ?? [],
     };
   }
 
