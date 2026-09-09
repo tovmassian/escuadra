@@ -283,6 +283,7 @@ function QuestionPartView({
               <AnswerOption
                 key={label}
                 label={label}
+                flag={part.kind === 'nationality' ? flagFor(label) : undefined}
                 verdict={verdictForOption(part, answeredIndex, i)}
                 disabled={isAnswered}
                 onPress={() => onAnswer(i)}
