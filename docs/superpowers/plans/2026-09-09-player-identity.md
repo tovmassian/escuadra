@@ -1980,6 +1980,33 @@ git commit -m "data: split the two Otávios onto separate player records"
 
 ---
 
+## Correction: title steps must ALL precede name steps
+
+Found by running the real pipeline in Task 10, not by any unit test.
+
+The ordering Tasks 4 and 5 encoded was: title-in-squad (1a), name-in-squad
+(1b, clash -> hold and `continue`), title-global (2a), name-global (2). The
+in-squad clash hold therefore short-circuits **before** the global title lookup
+runs. After `fork` writes the correct second record, reconciliation never looks
+at it: the row clashes with the stored record at 1b and holds, so the conflict
+never clears and the new record is left an orphan. `fork` does not resolve the
+conflict it advertises.
+
+Correct order, which is what the spec's "an equivalent title is decisive,
+whatever the names say" actually means:
+
+1. Title -- a stored member of this squad
+2. Title -- global `players.json`
+3. Name -- a stored member of this squad (clash -> hold on its slot)
+4. Name -- global (clash -> record the mismatch and omit)
+5. `possible-rename`
+6. Create
+
+Every new-code test passed because each exercised one step in isolation. The
+regression test for this is end-to-end: a squad whose stored member clashes on
+title, plus a global record matching the row's title, must resolve to the
+global record with no conflict.
+
 ## Notes for the implementer
 
 - **`.cache/envelopes/otavio` is scratch.** Do not commit it; `.cache/` is ignored.

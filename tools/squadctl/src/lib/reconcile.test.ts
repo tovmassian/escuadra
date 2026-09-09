@@ -519,4 +519,34 @@ describe('a clashing title holds the row', () => {
     expect(plan.titleMismatches).toEqual([]);
     expect(plan.updatedPlayers[0]?.wikiTitle).toBe('Otávio (footballer, born November 2005)');
   });
+
+  it('matches a globally titled fork even though the same-squad name clashes', () => {
+    // The real re-apply bug: `squadctl fork otavio "Otávio (footballer, born
+    // November 2005)"` correctly writes `otavio-2`, but a re-run of `apply`
+    // must still find it. Paris FC's stored `otavio` (born 2002) clashes on
+    // title with Frankfurt's row — that clash must not shadow the `otavio-2`
+    // record whose title the row actually matches.
+    const stored = [
+      player({
+        id: 'otavio',
+        name: 'Otávio',
+        position: 'DF',
+        wikiTitle: 'Otávio (footballer, born 2002)',
+      }),
+      player({
+        id: 'otavio-2',
+        name: 'Otávio',
+        position: 'DF',
+        wikiTitle: 'Otávio (footballer, born November 2005)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([frankfurtRow]),
+      storedSquad: squad([{ playerId: 'otavio', no: 5 }]),
+      players: stored,
+    });
+    expect(plan.squad.members).toEqual([{ playerId: 'otavio-2', no: 5 }]);
+    expect(plan.titleMismatches).toEqual([]);
+    expect(plan.newPlayers).toEqual([]);
+  });
 });

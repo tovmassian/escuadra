@@ -9,6 +9,15 @@
 // González". Only when a title is missing on either side does matching fall
 // back to the normalised name, which was the whole story before this file
 // grew the title.
+//
+// Per row, both title steps run before either name step: title against a
+// stored member of THIS squad, then title against players.json globally,
+// then name against a stored member of THIS squad, then name globally. A
+// same-squad name clash HOLDS the row rather than dropping it — but that
+// hold must never pre-empt a global title match, or a record split off by
+// `squadctl fork` (a second real person sharing the clashing name) stays an
+// orphan forever, because the row that identifies it by title never gets
+// there.
 import {
   changeRatio,
   isTransliterationVariant,
@@ -299,11 +308,15 @@ export function reconcileTeam({
     // through would create a third record for one of the same people.
     if (heldGroups.has(key)) continue;
     let player: Player | undefined;
+    // True only when `player` was matched against a stored member of THIS
+    // squad (steps 1 and 3), so the shared accounting below never counts a
+    // global match as a stored-squad one.
+    let matchedInSquad = false;
 
-    // 1a. A stored member of THIS squad whose article title is the row's.
-    //     Decisive whatever the display names say: Juventus renders
-    //     "Nico González" where the record stores "Nicolás González", and
-    //     the title is the only thing that can join them.
+    // 1. A stored member of THIS squad whose article title is the row's.
+    //    Decisive whatever the display names say: Juventus renders
+    //    "Nico González" where the record stores "Nicolás González", and
+    //    the title is the only thing that can join them.
     const titled = storedList.filter((m) => {
       const candidate = byId.get(m.playerId);
       return (
@@ -314,6 +327,7 @@ export function reconcileTeam({
     });
     if (titled.length === 1) {
       player = byId.get(titled[0]?.playerId ?? '');
+      matchedInSquad = true;
     } else if (titled.length > 1) {
       // A bare [[Otávio]] against two stored Otávios. Base equivalence relates
       // it to both, and picking one is a coin flip — HOLD the group.
@@ -326,7 +340,34 @@ export function reconcileTeam({
       continue;
     }
 
-    // 1b. A stored member of THIS squad, by normalised name.
+    // 2. Otherwise look up players.json globally, by title first. This must
+    //    run before any name step: a title match is decisive, and holding
+    //    on a same-squad name clash (step 3) would otherwise shadow the
+    //    global title match that resolves it — exactly what let a `fork`ed
+    //    record (e.g. `otavio-2`, split off a same-named `otavio` already
+    //    in this squad) go unmatched on the very next `apply`.
+    if (!player) {
+      const globallyTitled = players.filter(
+        (candidate) =>
+          !consumed.has(candidate.id) && titleVerdict(candidate, row.title) === 'match',
+      );
+      if (globallyTitled.length === 1) {
+        player = globallyTitled[0];
+        if (player) consumed.add(player.id);
+      } else if (globallyTitled.length > 1) {
+        ambiguous.push({
+          name: row.name,
+          candidateIds: globallyTitled.map((c) => c.id),
+        });
+        omitted.push({
+          name: row.name,
+          reason: `ambiguous by title against ${globallyTitled.map((c) => c.id).join(', ')}`,
+        });
+        continue;
+      }
+    }
+
+    // 3. A stored member of THIS squad, by normalised name.
     if (!player) {
       const named = (storedByNorm.get(key) ?? []).filter((m) => !consumed.has(m.playerId));
       const group = named.filter((m) => {
@@ -354,6 +395,7 @@ export function reconcileTeam({
       }
       if (group.length === 1) {
         player = byId.get(group[0]?.playerId ?? '');
+        matchedInSquad = true;
       } else if (group.length > 1) {
         const resolved = separate(group, row);
         if (resolved === undefined || resolved === null) {
@@ -371,36 +413,15 @@ export function reconcileTeam({
           continue;
         }
         player = byId.get(resolved.playerId);
+        matchedInSquad = true;
       }
     }
-    if (player) {
+    if (player && matchedInSquad) {
       consumed.add(player.id);
       matchedCount += 1;
     }
 
-    // 2a. Otherwise look up players.json globally, by title first.
-    if (!player) {
-      const globallyTitled = players.filter(
-        (candidate) =>
-          !consumed.has(candidate.id) && titleVerdict(candidate, row.title) === 'match',
-      );
-      if (globallyTitled.length === 1) {
-        player = globallyTitled[0];
-        if (player) consumed.add(player.id);
-      } else if (globallyTitled.length > 1) {
-        ambiguous.push({
-          name: row.name,
-          candidateIds: globallyTitled.map((c) => c.id),
-        });
-        omitted.push({
-          name: row.name,
-          reason: `ambiguous by title against ${globallyTitled.map((c) => c.id).join(', ')}`,
-        });
-        continue;
-      }
-    }
-
-    // 2. Otherwise look up players.json globally.
+    // 4. Otherwise look up players.json globally, by name.
     if (!player) {
       const named = (byNorm.get(key) ?? []).filter((c) => !consumed.has(c.id));
       const candidates = named.filter((c) => titleVerdict(c, row.title) !== 'clash');
@@ -479,7 +500,7 @@ export function reconcileTeam({
       continue;
     }
 
-    // 3. No match anywhere. Before creating a record, check whether this is one
+    // 5. No match anywhere. Before creating a record, check whether this is one
     //    of the squad's OWN members under a new spelling — Wikipedia rewrites
     //    display names without the squad changing. Creating the record first
     //    and flagging afterwards is what put five duplicate people into
@@ -505,7 +526,7 @@ export function reconcileTeam({
       continue;
     }
 
-    // 4. Genuinely new.
+    // 6. Genuinely new.
     const id = playerId(row.name, takenIds);
     takenIds.add(id);
     generatedIds.push(id);
@@ -524,7 +545,7 @@ export function reconcileTeam({
     members.push(buildMember(id, row.no, row.captain));
   }
 
-  // 5. An unmatched stored member has departed. Removed from members; the
+  // 7. An unmatched stored member has departed. Removed from members; the
   //    player record itself is kept, because it is exactly the record reused
   //    when that player turns up in another squad next window.
   const departed: Departure[] = [];
