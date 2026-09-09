@@ -1,0 +1,122 @@
+{
+  "id": "lyo",
+  "kind": "club",
+  "name": "Lyon",
+  "season": "2026/27",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#0033A0",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#0033A0"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Olympique_Lyonnais",
+  "members": [
+    {
+      "playerId": "dominik-greif",
+      "no": 1
+    },
+    {
+      "playerId": "mads-bidstrup",
+      "no": 2
+    },
+    {
+      "playerId": "tagliafico",
+      "no": 3
+    },
+    {
+      "playerId": "tanner-tessmann",
+      "no": 6
+    },
+    {
+      "playerId": "ernest-nuamah",
+      "no": 7
+    },
+    {
+      "playerId": "corentin-tolisso",
+      "no": 8,
+      "captain": true
+    },
+    {
+      "playerId": "pavel-sulc",
+      "no": 10
+    },
+    {
+      "playerId": "nakamura",
+      "no": 11
+    },
+    {
+      "playerId": "zachary-athekame",
+      "no": 13
+    },
+    {
+      "playerId": "abner",
+      "no": 16
+    },
+    {
+      "playerId": "lois-openda",
+      "no": 17
+    },
+    {
+      "playerId": "khalis-merah",
+      "no": 18
+    },
+    {
+      "playerId": "moussa-niakhate",
+      "no": 19
+    },
+    {
+      "playerId": "felix-bacher",
+      "no": 20
+    },
+    {
+      "playerId": "ruben-kluivert",
+      "no": 21
+    },
+    {
+      "playerId": "clinton-mata",
+      "no": 22
+    },
+    {
+      "playerId": "tyler-morton",
+      "no": 23
+    },
+    {
+      "playerId": "julien-duranville",
+      "no": 24
+    },
+    {
+      "playerId": "justin-bengui",
+      "no": 25
+    },
+    {
+      "playerId": "kail-boudache",
+      "no": 26
+    },
+    {
+      "playerId": "alejandro-gomes-rodriguez",
+      "no": 32
+    },
+    {
+      "playerId": "remy-descamps",
+      "no": 40
+    },
+    {
+      "playerId": "lassine-diarra",
+      "no": 50
+    },
+    {
+      "playerId": "mohamed-ouedraogo",
+      "no": 76
+    },
+    {
+      "playerId": "noham-kamara",
+      "no": 85
+    },
+    {
+      "playerId": "noah-nartey",
+      "no": 99
+    }
+  ]
+}

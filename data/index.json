@@ -14,6 +14,20 @@
     "league": "la-liga"
   },
   {
+    "id": "ang",
+    "kind": "club",
+    "name": "Angers",
+    "season": "2026/27",
+    "primaryColor": "#000000",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#000000", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
     "id": "arg",
     "kind": "nation",
     "name": "Argentina",
@@ -80,6 +94,20 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "aux",
+    "kind": "club",
+    "name": "Auxerre",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#002F6C",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#002F6C"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
   },
   {
     "id": "b04",
@@ -153,6 +181,20 @@
         "color": "#FFDF00"
       }
     }
+  },
+  {
+    "id": "brs",
+    "kind": "club",
+    "name": "Brest",
+    "season": "2026/27",
+    "primaryColor": "#DA291C",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#DA291C", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
   },
   {
     "id": "bvb",
@@ -367,6 +409,20 @@
     "league": "bundesliga"
   },
   {
+    "id": "len",
+    "kind": "club",
+    "name": "Lens",
+    "season": "2026/27",
+    "primaryColor": "#C8102E",
+    "secondaryColor": "#FFD100",
+    "verified": true,
+    "marker": {
+      "bands": ["#C8102E", "#FFD100"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
     "id": "lev",
     "kind": "club",
     "name": "Levante",
@@ -379,6 +435,62 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "lhv",
+    "kind": "club",
+    "name": "Le Havre",
+    "season": "2026/27",
+    "primaryColor": "#00A3E0",
+    "secondaryColor": "#002654",
+    "verified": true,
+    "marker": {
+      "bands": ["#00A3E0", "#002654"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "lil",
+    "kind": "club",
+    "name": "Lille",
+    "season": "2026/27",
+    "primaryColor": "#E01E13",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#E01E13", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "lor",
+    "kind": "club",
+    "name": "Lorient",
+    "season": "2026/27",
+    "primaryColor": "#FF6600",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#FF6600", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "lyo",
+    "kind": "club",
+    "name": "Lyon",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#0033A0",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#0033A0"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
   },
   {
     "id": "m05",
@@ -409,6 +521,76 @@
     "league": "la-liga"
   },
   {
+    "id": "mar",
+    "kind": "club",
+    "name": "Marseille",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#009DDC",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#009DDC"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "met",
+    "kind": "club",
+    "name": "Metz",
+    "season": "2026/27",
+    "primaryColor": "#8A1538",
+    "secondaryColor": "#6CACE4",
+    "verified": true,
+    "marker": {
+      "bands": ["#8A1538", "#6CACE4"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "mon",
+    "kind": "club",
+    "name": "Monaco",
+    "season": "2026/27",
+    "primaryColor": "#E51937",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#E51937", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "nan",
+    "kind": "club",
+    "name": "Nantes",
+    "season": "2026/27",
+    "primaryColor": "#FFE500",
+    "secondaryColor": "#007A3D",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFE500", "#007A3D"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "nic",
+    "kind": "club",
+    "name": "Nice",
+    "season": "2026/27",
+    "primaryColor": "#D2001C",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#D2001C", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
     "id": "osa",
     "kind": "club",
     "name": "Osasuna",
@@ -421,6 +603,20 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "pfc",
+    "kind": "club",
+    "name": "Paris FC",
+    "season": "2026/27",
+    "primaryColor": "#0033A0",
+    "secondaryColor": "#ED1C24",
+    "verified": true,
+    "marker": {
+      "bands": ["#0033A0", "#ED1C24"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
   },
   {
     "id": "psg",
@@ -478,6 +674,20 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "ren",
+    "kind": "club",
+    "name": "Rennes",
+    "season": "2026/27",
+    "primaryColor": "#E2001A",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#E2001A", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
   },
   {
     "id": "rma",
@@ -578,6 +788,20 @@
     "league": "bundesliga"
   },
   {
+    "id": "str",
+    "kind": "club",
+    "name": "Strasbourg",
+    "season": "2026/27",
+    "primaryColor": "#0060A9",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#0060A9", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
     "id": "svw",
     "kind": "club",
     "name": "Werder Bremen",
@@ -590,6 +814,20 @@
       "orientation": "vertical"
     },
     "league": "bundesliga"
+  },
+  {
+    "id": "tou",
+    "kind": "club",
+    "name": "Toulouse",
+    "season": "2026/27",
+    "primaryColor": "#5A2D82",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#5A2D82", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
   },
   {
     "id": "tsg",

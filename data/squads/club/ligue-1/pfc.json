@@ -1,0 +1,122 @@
+{
+  "id": "pfc",
+  "kind": "club",
+  "name": "Paris FC",
+  "season": "2026/27",
+  "primaryColor": "#0033A0",
+  "secondaryColor": "#ED1C24",
+  "verified": true,
+  "marker": {
+    "bands": ["#0033A0", "#ED1C24"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Paris_FC",
+  "members": [
+    {
+      "playerId": "kevin-trapp",
+      "no": 1
+    },
+    {
+      "playerId": "emmanuel-mbemba",
+      "no": 3
+    },
+    {
+      "playerId": "vincent-marchetti",
+      "no": 4
+    },
+    {
+      "playerId": "moustapha-mbow",
+      "no": 5
+    },
+    {
+      "playerId": "otavio",
+      "no": 6
+    },
+    {
+      "playerId": "pablo-pagis",
+      "no": 7
+    },
+    {
+      "playerId": "patrick-zabi",
+      "no": 8
+    },
+    {
+      "playerId": "lassine-sinayoko",
+      "no": 9
+    },
+    {
+      "playerId": "ilan-kebbal",
+      "no": 10
+    },
+    {
+      "playerId": "jeanphilippe-krasso",
+      "no": 11
+    },
+    {
+      "playerId": "hamari-traore",
+      "no": 14
+    },
+    {
+      "playerId": "luca-koleosho",
+      "no": 15
+    },
+    {
+      "playerId": "obed-nkambadio",
+      "no": 16
+    },
+    {
+      "playerId": "adama-camara",
+      "no": 17
+    },
+    {
+      "playerId": "omar-sissoko",
+      "no": 18
+    },
+    {
+      "playerId": "nhoa-sangui",
+      "no": 19
+    },
+    {
+      "playerId": "maxime-lopez",
+      "no": 21
+    },
+    {
+      "playerId": "rudy-matondo",
+      "no": 23
+    },
+    {
+      "playerId": "yoan-kore",
+      "no": 25
+    },
+    {
+      "playerId": "moses-simon",
+      "no": 27
+    },
+    {
+      "playerId": "thibault-de-smet",
+      "no": 28
+    },
+    {
+      "playerId": "samir-chergui",
+      "no": 31
+    },
+    {
+      "playerId": "pierre-leesmelou",
+      "no": 33,
+      "captain": true
+    },
+    {
+      "playerId": "diego-coppola",
+      "no": 42
+    },
+    {
+      "playerId": "jonathan-ikone",
+      "no": 93
+    },
+    {
+      "playerId": "andria-kvirikadze",
+      "no": null
+    }
+  ]
+}

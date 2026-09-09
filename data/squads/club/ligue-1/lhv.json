@@ -1,0 +1,121 @@
+{
+  "id": "lhv",
+  "kind": "club",
+  "name": "Le Havre",
+  "season": "2026/27",
+  "primaryColor": "#00A3E0",
+  "secondaryColor": "#002654",
+  "verified": true,
+  "marker": {
+    "bands": ["#00A3E0", "#002654"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Le_Havre_AC",
+  "members": [
+    {
+      "playerId": "ahmed-touba",
+      "no": 5
+    },
+    {
+      "playerId": "junior-mwanga",
+      "no": 6
+    },
+    {
+      "playerId": "amir-richardson",
+      "no": 7
+    },
+    {
+      "playerId": "josh-maja",
+      "no": 9
+    },
+    {
+      "playerId": "felix-mambimbi",
+      "no": 10
+    },
+    {
+      "playerId": "elias-jelert",
+      "no": 12
+    },
+    {
+      "playerId": "rassoul-ndiaye",
+      "no": 14
+    },
+    {
+      "playerId": "seko",
+      "no": 15
+    },
+    {
+      "playerId": "kaito-mizuta",
+      "no": 17
+    },
+    {
+      "playerId": "joan-tincres",
+      "no": 19
+    },
+    {
+      "playerId": "djibril-ouziad",
+      "no": 20
+    },
+    {
+      "playerId": "vincent-sasso",
+      "no": 23
+    },
+    {
+      "playerId": "guynoel-zohouri",
+      "no": 24
+    },
+    {
+      "playerId": "mbwana-samatta",
+      "no": 25
+    },
+    {
+      "playerId": "simon-ebonog",
+      "no": 26
+    },
+    {
+      "playerId": "enzo-koffi",
+      "no": 27
+    },
+    {
+      "playerId": "stephan-zagadou",
+      "no": 29
+    },
+    {
+      "playerId": "sota-nakamura",
+      "no": 30
+    },
+    {
+      "playerId": "timothee-pembele",
+      "no": 32
+    },
+    {
+      "playerId": "rayan-fofana",
+      "no": 38
+    },
+    {
+      "playerId": "ismail-bouneb",
+      "no": 44
+    },
+    {
+      "playerId": "paul-argney",
+      "no": 50
+    },
+    {
+      "playerId": "lionel-mpasi",
+      "no": 77
+    },
+    {
+      "playerId": "daren-mosengo",
+      "no": 78
+    },
+    {
+      "playerId": "gauthier-gallon",
+      "no": 93
+    },
+    {
+      "playerId": "elysee-logbo",
+      "no": null
+    }
+  ]
+}
