@@ -198,6 +198,14 @@ export const sizes = {
   // prop): thinner and longer than the picker's marker, and always rendered
   // with vertical bands regardless of the squad's real flag orientation.
   teamMarkerBanner: { width: 100, height: 3 },
+  // Nation flag images (assets/flags/*.png). Three sizes, one per surface.
+  // `flagMarker` deliberately matches `teamMarker` above so a nation row and
+  // a club row in the picker keep identical metrics. Source images are
+  // 70x46, so `flagMarker` at @3x is a near-exact 1:1 — there is no headroom
+  // above these sizes.
+  flagMarker: { width: 22, height: 15 },
+  flagInline: { width: 18, height: 12 },
+  flagRow: { width: 20, height: 13 },
   // Escuadra wordmark's mark, matching the 30px mark beside 23px type in the
   // design source's lockup.
   wordmarkMark: 30,
