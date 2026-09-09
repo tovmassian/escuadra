@@ -1,7 +1,7 @@
 # Flag images
 
-214 national flag PNGs, one per FIFA three-letter country code (`ARG.png`,
-`IRL.png`, `KOS.png`). 70×46 px each, ~1.1 MB in total.
+106 national flag PNGs, one per FIFA three-letter country code (`ARG.png`,
+`IRL.png`, `KOS.png`). 160 px wide, ~424 KB in total.
 
 Used for nation identity on the team picker, level-3 nationality answer
 options, the `NAT` stat chip and the Study screen's affiliation column. See
@@ -13,37 +13,45 @@ badges, logos and shield shapes permanently; national flags are its only
 carve-out, because the rule exists for trademark exposure and a flag carries
 none.
 
+## Licence
+
+Source: [flagpedia.net](https://flagpedia.net) / flagcdn.com.
+
+> "Flag images are in the public domain (exempt from copyright). They are
+> completely free for non-commercial and even commercial use."
+
+Public domain, commercial use permitted, no attribution required. This is the
+whole licence position for every file in this directory — there is no per-file
+variation to check, which is exactly why this set was chosen: v0 ships to the
+App Store and Play Store, and a set whose provenance could not be named was
+not shippable.
+
+This set replaced an earlier 214-file set of unverified origin. Do not
+reintroduce images from an unnamed source, however convenient — a flag whose
+licence you cannot state is a release blocker, not a detail.
+
 ## Resolution
 
-70×46 is a near-exact fit for the picker marker (22×15 pt is 66×45 px at @3x)
-and sufficient at the smaller sizes. There is no headroom: a hero-sized flag
-would need larger source images.
+160 px wide. The largest on-screen use is `sizes.flagMarker` at 22 pt, which
+is 66 px at @3x, so there is roughly 2.4× headroom — enough for a larger
+treatment later without resourcing.
+
+Aspect ratios are each flag's true ratio, not normalised: most are 3:2, but
+England and Scotland are 5:3 and Northern Ireland is 2:1. `components/Flag.tsx`
+renders with `contentFit="cover"` into a 3:2-ish box, so a non-3:2 flag is
+cropped a few percent at the sides. Invisible at these sizes; revisit if flags
+ever get a hero treatment, where `contain` with a matched box would be better.
 
 ## Adding a flag
 
-Drop `<CODE>.png` in this directory, run `npm run gen:flags`, and add the
-country's name to `FLAG_BY_NATIONALITY` in `lib/flags.ts`. `npm run check`
-fails if either step is skipped.
+Only the flags the squad data actually needs are committed, so a new nation or
+a new player nationality may need one. `lib/flags.test.ts` fails with the
+missing name when that happens.
 
-## Provenance
+1. Find the country's ISO 3166-1 alpha-2 code (UK home nations are `gb-eng`,
+   `gb-sct`, `gb-wls`, `gb-nir`; Kosovo is `xk`).
+2. `curl -o assets/flags/<FIFA>.png https://flagcdn.com/w160/<iso>.png`
+3. `npm run gen:flags`
+4. Add the country's name to `FLAG_BY_NATIONALITY` in `lib/flags.ts`.
 
-Sourced from Wikipedia / Wikimedia Commons.
-
-Wikipedia's own article content is licensed CC BY-SA 4.0. Media files hosted
-on Commons are licensed individually rather than under one blanket licence,
-and national flag images there are overwhelmingly public domain: a flag
-design is generally either uncopyrightable or an official government insignia
-released for free use. A minority of Commons flag renderings are contributed
-under CC BY-SA, which requires attribution and share-alike.
-
-⚠️ **The per-file licence of each of the 214 images here is unverified, and
-v0 is going to the App Store and Play Store.** That makes this a release
-blocker, not a nice-to-have: shipping an image whose licence you cannot name
-is the risk the "no crests, ever" constraint exists to avoid, arriving by a
-different door.
-
-Resolving it means one of two things. Either establish the provenance of each
-file and add an attribution screen for any that require one, or replace the
-set wholesale with one carrying a single documented licence — see
-`docs/superpowers/specs/2026-09-09-png-flags-design.md`. Until then, treat
-these assets as unshippable.
+`npm run check` fails if step 3 or 4 is skipped.
