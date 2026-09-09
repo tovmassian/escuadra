@@ -11,7 +11,7 @@ express a flag with a coat of arms, a canton, a saltire, or any non-band device.
 As national squad coverage grows past the current six, the share of flags the
 geometry misrepresents grows with it.
 
-215 flag PNGs already sit in `assets/flags/`, uncommitted, named by FIFA three-letter
+214 flag PNGs already sit in `assets/flags/`, uncommitted, named by FIFA three-letter
 code (`ARG.png`, `IRL.png`), 70x46 px each, ~1.1 MB in total.
 
 ## Scope
@@ -61,10 +61,10 @@ What the rewrite must still carry:
 
 ## Assets
 
-All 215 PNGs are committed. `assets/flags/LIB.jpg` is deleted: it is 0 bytes, the
+All 214 PNGs are committed. `assets/flags/LIB.jpg` is deleted: it is 0 bytes, the
 only non-PNG in the directory, and Lebanon appears in no squad data.
 
-`assets/flags/README.md` records what is observable — 215 files, FIFA three-letter
+`assets/flags/README.md` records what is observable — 214 files, FIFA three-letter
 codes, 70x46 px — with an explicit TODO for provenance and licence, to be filled in
 before release. Origin is currently unknown.
 
