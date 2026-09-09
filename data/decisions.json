@@ -1,5 +1,11 @@
 {
-  "splits": [],
+  "splits": [
+    {
+      "team": "pfc",
+      "departed": "otavio",
+      "arrived": "otavio-da-silva"
+    }
+  ],
   "aliases": [
     {
       "player": "grimaldo",
