@@ -1,7 +1,7 @@
 {
   "id": "ath",
   "kind": "club",
-  "name": "Athletic Club",
+  "name": "Athletic Bilbao",
   "season": "2026/27",
   "primaryColor": "#EE2523",
   "secondaryColor": "#FFFFFF",
@@ -10,7 +10,7 @@
     "bands": ["#EE2523", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-07",
+  "lastUpdated": "2026-09-09",
   "source": "https://en.wikipedia.org/wiki/Athletic_Bilbao",
   "members": [
     {

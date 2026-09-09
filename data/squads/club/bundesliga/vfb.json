@@ -1,0 +1,133 @@
+{
+  "id": "vfb",
+  "kind": "club",
+  "name": "VfB Stuttgart",
+  "season": "2026/27",
+  "primaryColor": "#E32219",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#E32219", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/VfB_Stuttgart",
+  "members": [
+    {
+      "playerId": "fabian-bredlow",
+      "no": 1
+    },
+    {
+      "playerId": "ameen-aldakhil",
+      "no": 2
+    },
+    {
+      "playerId": "ramon-hendriks",
+      "no": 3
+    },
+    {
+      "playerId": "josha-vagnoman",
+      "no": 4
+    },
+    {
+      "playerId": "angelo-stiller",
+      "no": 6
+    },
+    {
+      "playerId": "maximilian-mittelstadt",
+      "no": 7
+    },
+    {
+      "playerId": "tiago-tomas",
+      "no": 8
+    },
+    {
+      "playerId": "ermedin-demirovic",
+      "no": 9
+    },
+    {
+      "playerId": "chris-fuhrich",
+      "no": 10
+    },
+    {
+      "playerId": "bilal-el-khannouss",
+      "no": 11
+    },
+    {
+      "playerId": "luca-jaquez",
+      "no": 14
+    },
+    {
+      "playerId": "atakan-karazor",
+      "no": 16
+    },
+    {
+      "playerId": "dzenan-pejcinovic",
+      "no": 17
+    },
+    {
+      "playerId": "jamie-leweling",
+      "no": 18
+    },
+    {
+      "playerId": "leonidas-stergiou",
+      "no": 20
+    },
+    {
+      "playerId": "grischa-promel",
+      "no": 21
+    },
+    {
+      "playerId": "lorenz-assignon",
+      "no": 22
+    },
+    {
+      "playerId": "danaxel-zagadou",
+      "no": 23
+    },
+    {
+      "playerId": "jeff-chabot",
+      "no": 24
+    },
+    {
+      "playerId": "deniz-undav",
+      "no": 26
+    },
+    {
+      "playerId": "nikolas-nartey",
+      "no": 28
+    },
+    {
+      "playerId": "finn-jeltsch",
+      "no": 29
+    },
+    {
+      "playerId": "justin-diehl",
+      "no": 31
+    },
+    {
+      "playerId": "marius-funk",
+      "no": 33
+    },
+    {
+      "playerId": "ertugrul-yigit",
+      "no": 39
+    },
+    {
+      "playerId": "dennis-seimen",
+      "no": 41
+    },
+    {
+      "playerId": "jarzinho-malanga",
+      "no": 43
+    },
+    {
+      "playerId": "leo-sauer",
+      "no": 44
+    },
+    {
+      "playerId": "stefan-drljaca",
+      "no": 46
+    }
+  ]
+}

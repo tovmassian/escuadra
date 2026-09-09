@@ -6,29 +6,47 @@ import squadArm from '@/data/squads/nation/arm.json';
 import squadArs from '@/data/squads/club/premier-league/ars.json';
 import squadAth from '@/data/squads/club/la-liga/ath.json';
 import squadAtm from '@/data/squads/club/la-liga/atm.json';
+import squadB04 from '@/data/squads/club/bundesliga/b04.json';
 import squadBar from '@/data/squads/club/la-liga/bar.json';
 import squadBet from '@/data/squads/club/la-liga/bet.json';
+import squadBmg from '@/data/squads/club/bundesliga/bmg.json';
 import squadBra from '@/data/squads/nation/bra.json';
+import squadBvb from '@/data/squads/club/bundesliga/bvb.json';
 import squadCel from '@/data/squads/club/la-liga/cel.json';
 import squadDep from '@/data/squads/club/la-liga/dep.json';
 import squadElc from '@/data/squads/club/la-liga/elc.json';
 import squadEsp from '@/data/squads/nation/esp.json';
+import squadFca from '@/data/squads/club/bundesliga/fca.json';
+import squadFcb from '@/data/squads/club/bundesliga/fcb.json';
+import squadFch from '@/data/squads/club/bundesliga/fch.json';
+import squadFcu from '@/data/squads/club/bundesliga/fcu.json';
 import squadFra from '@/data/squads/nation/fra.json';
 import squadGet from '@/data/squads/club/la-liga/get.json';
+import squadHsv from '@/data/squads/club/bundesliga/hsv.json';
 import squadInt from '@/data/squads/club/serie-a/int.json';
 import squadJpn from '@/data/squads/nation/jpn.json';
+import squadKoe from '@/data/squads/club/bundesliga/koe.json';
 import squadLev from '@/data/squads/club/la-liga/lev.json';
+import squadM05 from '@/data/squads/club/bundesliga/m05.json';
 import squadMal from '@/data/squads/club/la-liga/mal.json';
 import squadOsa from '@/data/squads/club/la-liga/osa.json';
 import squadPsg from '@/data/squads/club/ligue-1/psg.json';
 import squadRac from '@/data/squads/club/la-liga/rac.json';
+import squadRbl from '@/data/squads/club/bundesliga/rbl.json';
 import squadRcd from '@/data/squads/club/la-liga/rcd.json';
 import squadRma from '@/data/squads/club/la-liga/rma.json';
 import squadRso from '@/data/squads/club/la-liga/rso.json';
 import squadRvl from '@/data/squads/club/la-liga/rvl.json';
+import squadScf from '@/data/squads/club/bundesliga/scf.json';
 import squadSev from '@/data/squads/club/la-liga/sev.json';
+import squadSge from '@/data/squads/club/bundesliga/sge.json';
+import squadStp from '@/data/squads/club/bundesliga/stp.json';
+import squadSvw from '@/data/squads/club/bundesliga/svw.json';
+import squadTsg from '@/data/squads/club/bundesliga/tsg.json';
 import squadVal from '@/data/squads/club/la-liga/val.json';
+import squadVfb from '@/data/squads/club/bundesliga/vfb.json';
 import squadVil from '@/data/squads/club/la-liga/vil.json';
+import squadWob from '@/data/squads/club/bundesliga/wob.json';
 
 export const SQUAD_FILES: Record<string, Squad> = {
   ala: squadAla as Squad,
@@ -37,27 +55,45 @@ export const SQUAD_FILES: Record<string, Squad> = {
   ars: squadArs as Squad,
   ath: squadAth as Squad,
   atm: squadAtm as Squad,
+  b04: squadB04 as Squad,
   bar: squadBar as Squad,
   bet: squadBet as Squad,
+  bmg: squadBmg as Squad,
   bra: squadBra as Squad,
+  bvb: squadBvb as Squad,
   cel: squadCel as Squad,
   dep: squadDep as Squad,
   elc: squadElc as Squad,
   esp: squadEsp as Squad,
+  fca: squadFca as Squad,
+  fcb: squadFcb as Squad,
+  fch: squadFch as Squad,
+  fcu: squadFcu as Squad,
   fra: squadFra as Squad,
   get: squadGet as Squad,
+  hsv: squadHsv as Squad,
   int: squadInt as Squad,
   jpn: squadJpn as Squad,
+  koe: squadKoe as Squad,
   lev: squadLev as Squad,
+  m05: squadM05 as Squad,
   mal: squadMal as Squad,
   osa: squadOsa as Squad,
   psg: squadPsg as Squad,
   rac: squadRac as Squad,
+  rbl: squadRbl as Squad,
   rcd: squadRcd as Squad,
   rma: squadRma as Squad,
   rso: squadRso as Squad,
   rvl: squadRvl as Squad,
+  scf: squadScf as Squad,
   sev: squadSev as Squad,
+  sge: squadSge as Squad,
+  stp: squadStp as Squad,
+  svw: squadSvw as Squad,
+  tsg: squadTsg as Squad,
   val: squadVal as Squad,
+  vfb: squadVfb as Squad,
   vil: squadVil as Squad,
+  wob: squadWob as Squad,
 };

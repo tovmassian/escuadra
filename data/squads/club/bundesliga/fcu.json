@@ -1,0 +1,138 @@
+{
+  "id": "fcu",
+  "kind": "club",
+  "name": "Union Berlin",
+  "season": "2026/27",
+  "primaryColor": "#EB1923",
+  "secondaryColor": "#FDDC02",
+  "verified": true,
+  "marker": {
+    "bands": ["#EB1923", "#FDDC02"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/1._FC_Union_Berlin",
+  "members": [
+    {
+      "playerId": "frederik-ronnow",
+      "no": 1
+    },
+    {
+      "playerId": "felix-uduokhai",
+      "no": 2
+    },
+    {
+      "playerId": "andrik-markgraf",
+      "no": 3
+    },
+    {
+      "playerId": "zeno-van-den-bosch",
+      "no": 4
+    },
+    {
+      "playerId": "marvin-friedrich",
+      "no": 5
+    },
+    {
+      "playerId": "aljoscha-kemlein",
+      "no": 6
+    },
+    {
+      "playerId": "oliver-burke",
+      "no": 7
+    },
+    {
+      "playerId": "rani-khedira",
+      "no": 8
+    },
+    {
+      "playerId": "livan-burcu",
+      "no": 9
+    },
+    {
+      "playerId": "jeong-wooyeong",
+      "no": 11
+    },
+    {
+      "playerId": "andras-schafer",
+      "no": 13
+    },
+    {
+      "playerId": "leopold-querfeld",
+      "no": 14
+    },
+    {
+      "playerId": "tom-rothe",
+      "no": 15
+    },
+    {
+      "playerId": "derrick-kohn",
+      "no": 17
+    },
+    {
+      "playerId": "josip-juranovic",
+      "no": 18
+    },
+    {
+      "playerId": "janik-haberer",
+      "no": 19
+    },
+    {
+      "playerId": "michel-aebischer",
+      "no": 20
+    },
+    {
+      "playerId": "tim-skarke",
+      "no": 21
+    },
+    {
+      "playerId": "andrej-ilic",
+      "no": 23
+    },
+    {
+      "playerId": "robert-skov",
+      "no": 24
+    },
+    {
+      "playerId": "carl-klaus",
+      "no": 25
+    },
+    {
+      "playerId": "marin-ljubicic",
+      "no": 27
+    },
+    {
+      "playerId": "christopher-trimmel",
+      "no": 28,
+      "captain": true
+    },
+    {
+      "playerId": "emmanuel-latte-lath",
+      "no": 29
+    },
+    {
+      "playerId": "kastriot-imeri",
+      "no": 30
+    },
+    {
+      "playerId": "matheo-raab",
+      "no": 31
+    },
+    {
+      "playerId": "mekhi-gray",
+      "no": 32
+    },
+    {
+      "playerId": "stanley-nsoki",
+      "no": 34
+    },
+    {
+      "playerId": "julien-friedrich",
+      "no": 38
+    },
+    {
+      "playerId": "linus-guther",
+      "no": 49
+    }
+  ]
+}

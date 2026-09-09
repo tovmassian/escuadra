@@ -1,0 +1,138 @@
+{
+  "id": "bmg",
+  "kind": "club",
+  "name": "Borussia Mönchengladbach",
+  "season": "2026/27",
+  "primaryColor": "#000000",
+  "secondaryColor": "#009A44",
+  "verified": true,
+  "marker": {
+    "bands": ["#000000", "#009A44"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Borussia_M%C3%B6nchengladbach",
+  "members": [
+    {
+      "playerId": "moritz-nicolas",
+      "no": 1
+    },
+    {
+      "playerId": "fabio-chiarodia",
+      "no": 2
+    },
+    {
+      "playerId": "isac-lidberg",
+      "no": 3
+    },
+    {
+      "playerId": "kevin-diks",
+      "no": 4
+    },
+    {
+      "playerId": "jan-leszczynski",
+      "no": 5
+    },
+    {
+      "playerId": "itakura",
+      "no": 6
+    },
+    {
+      "playerId": "kevin-stoger",
+      "no": 7
+    },
+    {
+      "playerId": "enzo-leopold",
+      "no": 8
+    },
+    {
+      "playerId": "franck-honorat",
+      "no": 9
+    },
+    {
+      "playerId": "florian-neuhaus",
+      "no": 10
+    },
+    {
+      "playerId": "tim-kleindienst",
+      "no": 11,
+      "captain": true
+    },
+    {
+      "playerId": "daiki-hashioka",
+      "no": 14
+    },
+    {
+      "playerId": "philipp-sander",
+      "no": 16
+    },
+    {
+      "playerId": "jens-castrop",
+      "no": 17
+    },
+    {
+      "playerId": "machino",
+      "no": 18
+    },
+    {
+      "playerId": "nicolas-kuhn",
+      "no": 19
+    },
+    {
+      "playerId": "david-herold",
+      "no": 20
+    },
+    {
+      "playerId": "tobias-sippel",
+      "no": 21
+    },
+    {
+      "playerId": "yukhym-konoplya",
+      "no": 22
+    },
+    {
+      "playerId": "jan-olschowsky",
+      "no": 23
+    },
+    {
+      "playerId": "robin-hack",
+      "no": 25
+    },
+    {
+      "playerId": "lukas-ullrich",
+      "no": 26
+    },
+    {
+      "playerId": "fritz-fleck",
+      "no": 27
+    },
+    {
+      "playerId": "joe-scally",
+      "no": 29
+    },
+    {
+      "playerId": "daniel-batz",
+      "no": 33
+    },
+    {
+      "playerId": "mathieu-nguefack",
+      "no": 34
+    },
+    {
+      "playerId": "wael-mohya",
+      "no": 36
+    },
+    {
+      "playerId": "hugo-bolin",
+      "no": 38
+    },
+    {
+      "playerId": "iaia-manco-danfa",
+      "no": 39
+    },
+    {
+      "playerId": "zento-uno",
+      "no": 47
+    }
+  ]
+}

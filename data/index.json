@@ -2,7 +2,7 @@
   {
     "id": "ala",
     "kind": "club",
-    "name": "Deportivo Alavés",
+    "name": "Alavés",
     "season": "2026/27",
     "primaryColor": "#0000FF",
     "secondaryColor": "#FFFFFF",
@@ -56,7 +56,7 @@
   {
     "id": "ath",
     "kind": "club",
-    "name": "Athletic Club",
+    "name": "Athletic Bilbao",
     "season": "2026/27",
     "primaryColor": "#EE2523",
     "secondaryColor": "#FFFFFF",
@@ -80,6 +80,20 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "b04",
+    "kind": "club",
+    "name": "Bayer Leverkusen",
+    "season": "2026/27",
+    "primaryColor": "#E32219",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#E32219", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
   },
   {
     "id": "bar",
@@ -110,6 +124,20 @@
     "league": "la-liga"
   },
   {
+    "id": "bmg",
+    "kind": "club",
+    "name": "Borussia Mönchengladbach",
+    "season": "2026/27",
+    "primaryColor": "#000000",
+    "secondaryColor": "#009A44",
+    "verified": true,
+    "marker": {
+      "bands": ["#000000", "#009A44"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
     "id": "bra",
     "kind": "nation",
     "name": "Brazil",
@@ -125,6 +153,20 @@
         "color": "#FFDF00"
       }
     }
+  },
+  {
+    "id": "bvb",
+    "kind": "club",
+    "name": "Borussia Dortmund",
+    "season": "2026/27",
+    "primaryColor": "#FDE100",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#FDE100", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
   },
   {
     "id": "cel",
@@ -183,6 +225,62 @@
     }
   },
   {
+    "id": "fca",
+    "kind": "club",
+    "name": "FC Augsburg",
+    "season": "2026/27",
+    "primaryColor": "#BA3733",
+    "secondaryColor": "#46714D",
+    "verified": true,
+    "marker": {
+      "bands": ["#BA3733", "#46714D"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
+    "id": "fcb",
+    "kind": "club",
+    "name": "Bayern Munich",
+    "season": "2026/27",
+    "primaryColor": "#DC052D",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#DC052D"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
+    "id": "fch",
+    "kind": "club",
+    "name": "1. FC Heidenheim",
+    "season": "2026/27",
+    "primaryColor": "#ED1C24",
+    "secondaryColor": "#003DA5",
+    "verified": true,
+    "marker": {
+      "bands": ["#ED1C24", "#003DA5"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
+    "id": "fcu",
+    "kind": "club",
+    "name": "Union Berlin",
+    "season": "2026/27",
+    "primaryColor": "#EB1923",
+    "secondaryColor": "#FDDC02",
+    "verified": true,
+    "marker": {
+      "bands": ["#EB1923", "#FDDC02"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
     "id": "fra",
     "kind": "nation",
     "name": "France",
@@ -208,6 +306,20 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "hsv",
+    "kind": "club",
+    "name": "Hamburger SV",
+    "season": "2026/27",
+    "primaryColor": "#0049AA",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#0049AA", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
   },
   {
     "id": "int",
@@ -241,6 +353,20 @@
     }
   },
   {
+    "id": "koe",
+    "kind": "club",
+    "name": "1. FC Köln",
+    "season": "2026/27",
+    "primaryColor": "#ED1C24",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#ED1C24", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
     "id": "lev",
     "kind": "club",
     "name": "Levante",
@@ -253,6 +379,20 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "m05",
+    "kind": "club",
+    "name": "Mainz 05",
+    "season": "2026/27",
+    "primaryColor": "#C41E3A",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#C41E3A", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
   },
   {
     "id": "mal",
@@ -312,6 +452,20 @@
     "league": "la-liga"
   },
   {
+    "id": "rbl",
+    "kind": "club",
+    "name": "RB Leipzig",
+    "season": "2026/27",
+    "primaryColor": "#E2001A",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#E2001A", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
     "id": "rcd",
     "kind": "club",
     "name": "Espanyol",
@@ -368,6 +522,20 @@
     "league": "la-liga"
   },
   {
+    "id": "scf",
+    "kind": "club",
+    "name": "SC Freiburg",
+    "season": "2026/27",
+    "primaryColor": "#C8102E",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#C8102E", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
     "id": "sev",
     "kind": "club",
     "name": "Sevilla",
@@ -380,6 +548,62 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "sge",
+    "kind": "club",
+    "name": "Eintracht Frankfurt",
+    "season": "2026/27",
+    "primaryColor": "#E1000F",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#E1000F", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
+    "id": "stp",
+    "kind": "club",
+    "name": "FC St. Pauli",
+    "season": "2026/27",
+    "primaryColor": "#8B4513",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#8B4513", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
+    "id": "svw",
+    "kind": "club",
+    "name": "Werder Bremen",
+    "season": "2026/27",
+    "primaryColor": "#1D9053",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#1D9053", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
+    "id": "tsg",
+    "kind": "club",
+    "name": "TSG Hoffenheim",
+    "season": "2026/27",
+    "primaryColor": "#1C63B7",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#1C63B7", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
   },
   {
     "id": "val",
@@ -396,6 +620,20 @@
     "league": "la-liga"
   },
   {
+    "id": "vfb",
+    "kind": "club",
+    "name": "VfB Stuttgart",
+    "season": "2026/27",
+    "primaryColor": "#E32219",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#E32219", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
+  },
+  {
     "id": "vil",
     "kind": "club",
     "name": "Villarreal",
@@ -408,5 +646,19 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "wob",
+    "kind": "club",
+    "name": "VfL Wolfsburg",
+    "season": "2026/27",
+    "primaryColor": "#65B32E",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#65B32E", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "bundesliga"
   }
 ]

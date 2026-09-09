@@ -1,0 +1,121 @@
+{
+  "id": "sge",
+  "kind": "club",
+  "name": "Eintracht Frankfurt",
+  "season": "2026/27",
+  "primaryColor": "#E1000F",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#E1000F", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Eintracht_Frankfurt",
+  "members": [
+    {
+      "playerId": "noah-atubolu",
+      "no": 1
+    },
+    {
+      "playerId": "elias-baum",
+      "no": 2
+    },
+    {
+      "playerId": "lilian-brassier",
+      "no": 3
+    },
+    {
+      "playerId": "robin-koch",
+      "no": 4
+    },
+    {
+      "playerId": "otavio",
+      "no": 5
+    },
+    {
+      "playerId": "oscar-hojlund",
+      "no": 6
+    },
+    {
+      "playerId": "ansgar-knauff",
+      "no": 7
+    },
+    {
+      "playerId": "fares-chaibi",
+      "no": 8
+    },
+    {
+      "playerId": "jonathan-burkardt",
+      "no": 9
+    },
+    {
+      "playerId": "younes-ebnoutalib",
+      "no": 11
+    },
+    {
+      "playerId": "noel-aseko",
+      "no": 15
+    },
+    {
+      "playerId": "doan",
+      "no": 20
+    },
+    {
+      "playerId": "timothy-chandler",
+      "no": 22
+    },
+    {
+      "playerId": "raphael-onyedika",
+      "no": 25
+    },
+    {
+      "playerId": "keita-kosugi",
+      "no": 26
+    },
+    {
+      "playerId": "mario-gotze",
+      "no": 27
+    },
+    {
+      "playerId": "ayoube-amaimouni",
+      "no": 29
+    },
+    {
+      "playerId": "love-arrhov",
+      "no": 31
+    },
+    {
+      "playerId": "jens-grahl",
+      "no": 33
+    },
+    {
+      "playerId": "nnamdi-collins",
+      "no": 34
+    },
+    {
+      "playerId": "malik-pimpong",
+      "no": 35
+    },
+    {
+      "playerId": "jeremiaha-maluze",
+      "no": 37
+    },
+    {
+      "playerId": "amil-siljevic",
+      "no": 39
+    },
+    {
+      "playerId": "kaua-santos",
+      "no": 40
+    },
+    {
+      "playerId": "can-uzun",
+      "no": 42
+    },
+    {
+      "playerId": "jessic-ngankam",
+      "no": 44
+    }
+  ]
+}
