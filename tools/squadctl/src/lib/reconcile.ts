@@ -188,9 +188,10 @@ export function reconcileTeam({
   ];
 
   /** Every article title a player answers to: the one stored on the record
-   *  plus any recorded alias. */
+   *  plus any recorded alias. Falls back to name matching if no title is
+   *  recorded (null or absent). */
   const titlesOf = (player: Player): string[] => [
-    ...(player.wikiTitle === null ? [] : [player.wikiTitle]),
+    ...(typeof player.wikiTitle === 'string' ? [player.wikiTitle] : []),
     ...titleAliases.filter((t) => t.player === player.id).map((t) => t.title),
   ];
 

@@ -15,11 +15,13 @@ export interface EnvelopeMember {
    *  Study mode and as a name distractor. */
   no: number | null;
   /** Wikipedia article title for this player, when the source linked one.
-   *  Two players can share a display name within one squad — Brazil carries
-   *  both `Ederson (footballer, born 1993)` and `Éderson (footballer, born
-   *  1999)` — and the article title is the thing that is unique by
-   *  construction. Carried on the envelope for disambiguation during a run;
-   *  deliberately NOT stored on `Player`. */
+   *  The article title is the unique-per-person identity key: two players
+   *  can share a display name within one squad — Brazil carries both
+   *  `Ederson (footballer, born 1993)` and `Éderson (footballer, born 1999)`
+   *  — and only the article title distinguishes them by construction. The
+   *  title is carried both on the envelope row (for disambiguation during a
+   *  run) and stored on `Player.wikiTitle` (for reconciliation to match it
+   *  before falling back to normalised name matching). */
   title?: string;
   position: Position;
   captain?: true;

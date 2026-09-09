@@ -399,4 +399,18 @@ describe('title-decisive matching', () => {
     expect(plan.ambiguous[0]?.candidateIds.sort()).toEqual(['otavio', 'otavio-2']);
     expect(plan.newPlayers).toEqual([]);
   });
+
+  it('falls back to name matching when wikiTitle key is absent', () => {
+    // Legacy player records may not have the wikiTitle key at all (undefined).
+    // titlesOf should treat this the same as null and fall back to name matching.
+    const p = player({ id: 'raya', name: 'David Raya', wikiTitle: null });
+    const { wikiTitle, ...playerWithoutKey } = p;
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'David Raya' })]),
+      storedSquad: squad([{ playerId: 'raya', no: 1 }]),
+      players: [playerWithoutKey as Player],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['raya']);
+    expect(plan.newPlayers).toEqual([]);
+  });
 });
