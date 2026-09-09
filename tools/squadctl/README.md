@@ -212,6 +212,19 @@ assertion pass, and writes squad files, `players.json` and the generated index.
 Pure with respect to its inputs: same envelopes plus same repo state gives the
 same result.
 
+**A row is matched to a stored player primarily by an equivalent Wikipedia
+article title, not by name.** "Equivalent" is deliberately looser than
+equal: a bare link and a disambiguated one that share a base title are the
+same article (`Endrick` and `Endrick (footballer, born 2006)`), and so are
+two titles that agree once diacritics are folded (`Eric Garcia (footballer,
+born 2001)` and `Eric García (footballer, born 2001)`) — both resolved
+without asking. Title is decisive whatever the display names say: it is the
+only thing that can join Juventus's "Nico González" to a record stored as
+"Nicolás González". The normalised display name is the **fallback**, used
+only when the row or the candidate record carries no title at all. When a
+row's title instead **conflicts** with what a name match would have picked,
+that is a `title-mismatch` — see below.
+
 `verified` is the assertion pass's output — `true` only when a team has zero
 conflicts. `lastUpdated` moves only when something else in the file did, so a
 no-op sweep produces an empty git diff. `players.json` is written sorted by id
@@ -481,6 +494,56 @@ npm run squadctl -- rename odegaard "Martin Odegaard"
 **What you touch:** `data/players.json`, only through `rename` — never by
 hand. Or keep yours and accept that it will be flagged again next sweep.
 
+### `title-mismatch`
+
+```
+sge: conflicted (verified: false)
+     conflict: identity conflict on otavio — stored "Otávio (footballer, born 2002)",
+               source lists "Otávio (footballer, born November 2005)"
+```
+
+The row matched a stored record by display name, and the two link different
+Wikipedia articles. Two different real people share a name — two Brazilian
+defenders are both rendered `Otávio` — or one person's article moved. Nothing
+in the data separates those, so squadctl writes nothing and asks.
+
+**The squad slot is HELD on the stored record and no new player is created**,
+for the same reason `possible-rename` holds: creating a second record for one
+person is unrecoverable, and no later command undoes it. When the clashing
+record is not in this squad at all there is no slot to hold, so the row is
+omitted and reported as `omitted-row`.
+
+**You decide: one person, or two?**
+
+- **Same person, article moved** — point the record at the new title:
+
+  ```bash
+  npm run squadctl -- retitle otavio "Otávio (footballer, born November 2005)"
+  ```
+
+- **Same person, both titles right** — two articles can link one person through
+  different targets. Atlético links `Alejandro Grimaldo`, Spain links
+  `Álex Grimaldo`. `retitle` only moves the conflict to the other squad:
+
+  ```bash
+  npm run squadctl -- alias grimaldo --title "Alejandro Grimaldo"
+  ```
+
+- **Two different people** — write the second record:
+
+  ```bash
+  npm run squadctl -- fork otavio "Otávio (footballer, born November 2005)"
+  ```
+
+**What you touch:** `retitle` and `fork` write `data/players.json`;
+`alias --title` writes `data/decisions.json`. Re-run `apply` afterwards either
+way.
+
+Note that most redirect pairs never reach you: a link to the undisambiguated
+title (`[[Endrick]]` against `Endrick (footballer, born 2006)`) and an
+accent-only difference (`Eric Garcia` against `Eric García`) are both resolved
+as equivalent without asking.
+
 ### `ambiguous-name`
 
 ```
@@ -494,6 +557,16 @@ only survives when those are equal too, or when the collision is across squads.
 When the collision is **inside** the squad, the whole group is held exactly as
 stored rather than any of them being dropped. When it is across squads there is
 nothing to hold, so the row is omitted and reported as `omitted-row`.
+
+The same conflict kind also fires on a **title** collision, and there none of
+position/club/number is consulted: a bare `[[Otávio]]` is base-title
+equivalent to two different stored Otávio records, so picking one would be a
+coin flip and squadctl holds both instead. This is not `title-mismatch` —
+nothing here contradicts a name match, there simply are two candidates a
+title alone cannot separate — so the fix is the same as for a name collision:
+read `data/players.json`, work out which record the row means, and hand the
+answer back with `rename` (or `retitle`, if the article title itself is what
+needs correcting).
 
 **This one has no command.** Read `data/players.json`, work out which record
 the row means, and hand the answer back with `rename` — never edit the file
