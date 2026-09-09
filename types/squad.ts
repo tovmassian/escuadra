@@ -25,6 +25,17 @@ export interface Player {
    *  club is unknown/unset — never surfaced as a level-3 question in that case. */
   club: string | null;
   photo: string | null; // reserved for v1
+  /** Wikipedia article title this record was created from. Unique per person
+   *  by construction, where a display name is not: two different real people
+   *  are both rendered "Otávio" and only the title separates them.
+   *
+   *  Null when unknown — a record predating this field, or a row the source
+   *  lists as plain text with no article, which is ~2.5% of parsed rows and
+   *  therefore permanent, not merely transitional.
+   *
+   *  Data-layer identity only. No screen reads it and it is never a quiz
+   *  answer. */
+  wikiTitle: string | null;
 }
 
 export interface SquadMember {

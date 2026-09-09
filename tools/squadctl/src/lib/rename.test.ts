@@ -9,6 +9,7 @@ const player = (over: Partial<Player> & { id: string; name: string }): Player =>
   nationality: 'Spain',
   club: 'Benfica',
   photo: null,
+  wikiTitle: null,
   ...over,
 });
 

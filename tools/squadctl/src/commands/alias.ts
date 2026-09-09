@@ -1,7 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { Args } from '@oclif/core';
-import type { Player } from '../../../../types/squad.ts';
 import { BaseCommand } from '../base-command.ts';
 import {
   EMPTY_DECISIONS,
@@ -9,6 +8,7 @@ import {
   validateDecisions,
   type DecisionFile,
 } from '../lib/decisions.ts';
+import { readPlayers } from '../lib/players-file.ts';
 import { formatAndWrite } from '../lib/write-json.ts';
 
 interface AliasReport {
@@ -35,9 +35,7 @@ export default class Alias extends BaseCommand<AliasReport> {
   async run(): Promise<AliasReport> {
     const { args } = await this.parse(Alias);
 
-    const players = JSON.parse(
-      readFileSync(path.join(this.dataDir, 'players.json'), 'utf8'),
-    ) as Player[];
+    const players = readPlayers(this.dataDir);
     const target = players.find((p) => p.id === args.player);
     if (target === undefined) {
       this.error(`no player with id "${args.player}" in data/players.json`, { exit: 5 });

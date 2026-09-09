@@ -21,6 +21,7 @@ import { assess, conflictCommand, describeConflict, type Conflict } from '../lib
 import { colors } from '../lib/colors.ts';
 import { validateRegistry, type TeamRegistry } from '../lib/registry.ts';
 import { EMPTY_DECISIONS, validateDecisions, type DecisionFile } from '../lib/decisions.ts';
+import { readPlayers, writePlayers } from '../lib/players-file.ts';
 import { reconcileTeam } from '../lib/reconcile.ts';
 import { formatAndWrite } from '../lib/write-json.ts';
 
@@ -76,9 +77,7 @@ export default class Apply extends BaseCommand<RunReport> {
     const envelopes = this.loadEnvelopes(args.envelopes);
     const decisions = this.loadDecisions();
 
-    let players: Player[] = JSON.parse(
-      readFileSync(path.join(this.dataDir, 'players.json'), 'utf8'),
-    ) as Player[];
+    let players: Player[] = readPlayers(this.dataDir);
 
     const teams: TeamReport[] = [];
     const squadWrites: { file: string; squad: Squad }[] = [];
@@ -192,14 +191,7 @@ export default class Apply extends BaseCommand<RunReport> {
       for (const write of squadWrites) {
         await formatAndWrite(write.file, `${JSON.stringify(write.squad, null, 2)}\n`);
       }
-      await formatAndWrite(
-        path.join(this.dataDir, 'players.json'),
-        `${JSON.stringify(
-          [...players].sort((a, b) => a.id.localeCompare(b.id)),
-          null,
-          2,
-        )}\n`,
-      );
+      await writePlayers(this.dataDir, players);
       // Regenerated once, at the end, never hand-edited.
       await import('../../../../scripts/gen-squads.ts');
     }

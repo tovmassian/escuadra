@@ -1,10 +1,7 @@
-import { readFileSync } from 'node:fs';
-import path from 'node:path';
 import { Args } from '@oclif/core';
-import type { Player } from '../../../../types/squad.ts';
 import { BaseCommand } from '../base-command.ts';
+import { readPlayers, writePlayers } from '../lib/players-file.ts';
 import { renamePlayer } from '../lib/rename.ts';
-import { formatAndWrite } from '../lib/write-json.ts';
 
 interface RenameReport {
   id: string;
@@ -29,8 +26,7 @@ export default class Rename extends BaseCommand<RenameReport> {
 
   async run(): Promise<RenameReport> {
     const { args } = await this.parse(Rename);
-    const playersPath = path.join(this.dataDir, 'players.json');
-    const players = JSON.parse(readFileSync(playersPath, 'utf8')) as Player[];
+    const players = readPlayers(this.dataDir);
 
     const result = renamePlayer(players, args.playerId, args.name);
     if (result === null) {
@@ -40,14 +36,7 @@ export default class Rename extends BaseCommand<RenameReport> {
       this.error(`"${args.playerId}" is already named ${result.after}`, { exit: 5 });
     }
 
-    await formatAndWrite(
-      playersPath,
-      `${JSON.stringify(
-        [...result.players].sort((a, b) => a.id.localeCompare(b.id)),
-        null,
-        2,
-      )}\n`,
-    );
+    await writePlayers(this.dataDir, result.players);
 
     this.report(`renamed ${args.playerId}: "${result.before}" -> "${result.after}"`);
     if (result.fullNameFollowed) this.report('  fullName tracked name and moved with it');

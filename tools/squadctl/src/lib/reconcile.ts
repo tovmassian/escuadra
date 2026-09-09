@@ -365,6 +365,7 @@ export function reconcileTeam({
       nationality: row.nationality ?? '',
       club: row.club ?? null,
       photo: null,
+      wikiTitle: null,
     };
     newPlayers.push(created);
     members.push(buildMember(id, row.no, row.captain));
