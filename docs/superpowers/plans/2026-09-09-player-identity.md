@@ -1591,7 +1591,9 @@ export default class Fork extends BaseCommand<ForkReport> {
     const { args } = await this.parse(Fork);
     const players = readPlayers(this.dataDir);
 
-    const existing = players.find((p) => p.wikiTitle === args.title);
+    const existing = players.find(
+      (p) => p.wikiTitle !== null && titlesEquivalent(p.wikiTitle, args.title),
+    );
     if (existing !== undefined) {
       this.error(`"${args.title}" is already ${existing.id} — nothing to fork`, { exit: 5 });
     }
