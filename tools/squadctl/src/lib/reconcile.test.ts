@@ -417,3 +417,106 @@ describe('title-decisive matching', () => {
     expect(plan.newPlayers).toEqual([]);
   });
 });
+
+describe('a clashing title holds the row', () => {
+  // The live bug: Frankfurt's Otávio and Paris FC's Otávio are two Brazilian
+  // defenders rendered identically, and one record was serving both squads.
+  const frankfurtRow = row({
+    name: 'Otávio',
+    no: 5,
+    position: 'DF',
+    title: 'Otávio (footballer, born November 2005)',
+  });
+
+  it('does not match a stored member whose title says someone else', () => {
+    const stored = [
+      player({
+        id: 'otavio',
+        name: 'Otávio',
+        position: 'DF',
+        wikiTitle: 'Otávio (footballer, born 2002)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([frankfurtRow]),
+      storedSquad: squad([{ playerId: 'otavio', no: 5 }]),
+      players: stored,
+    });
+    expect(plan.titleMismatches).toEqual([
+      {
+        playerId: 'otavio',
+        storedTitle: 'Otávio (footballer, born 2002)',
+        sourceTitle: 'Otávio (footballer, born November 2005)',
+        rowName: 'Otávio',
+      },
+    ]);
+  });
+
+  it('creates nothing, because a moved article looks identical to a new person', () => {
+    const stored = [
+      player({
+        id: 'otavio',
+        name: 'Otávio',
+        position: 'DF',
+        wikiTitle: 'Otávio (footballer, born 2002)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([frankfurtRow]),
+      storedSquad: squad([{ playerId: 'otavio', no: 5 }]),
+      players: stored,
+    });
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  it('keeps the squad slot, so an unresolved clash never shortens a squad', () => {
+    const stored = [
+      player({
+        id: 'otavio',
+        name: 'Otávio',
+        position: 'DF',
+        wikiTitle: 'Otávio (footballer, born 2002)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([frankfurtRow]),
+      storedSquad: squad([{ playerId: 'otavio', no: 5 }]),
+      players: stored,
+    });
+    expect(plan.squad.members).toEqual([{ playerId: 'otavio', no: 5 }]);
+    expect(plan.departed).toEqual([]);
+  });
+
+  it('omits the row when the clashing record is not in this squad', () => {
+    // Genoa's Vitinha against the stored PSG one. There is no slot to hold,
+    // so the row is left out and said so — never dropped in silence.
+    const stored = [
+      player({
+        id: 'vitinha',
+        name: 'Vitinha',
+        wikiTitle: 'Vitinha (footballer, born February 2000)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([
+        row({ name: 'Vitinha', title: 'Vitinha (footballer, born March 2000)' }),
+      ]),
+      storedSquad: null,
+      players: stored,
+    });
+    expect(plan.titleMismatches).toHaveLength(1);
+    expect(plan.omitted).toHaveLength(1);
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  it('does not clash when the stored title is unknown', () => {
+    const stored = [player({ id: 'otavio', name: 'Otávio', position: 'DF', wikiTitle: null })];
+    const plan = reconcileTeam({
+      envelope: envelope([frankfurtRow]),
+      storedSquad: squad([{ playerId: 'otavio', no: 5 }]),
+      players: stored,
+    });
+    expect(plan.titleMismatches).toEqual([]);
+    expect(plan.updatedPlayers[0]?.wikiTitle).toBe('Otávio (footballer, born November 2005)');
+  });
+});

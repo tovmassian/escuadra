@@ -75,6 +75,16 @@ export interface NameVariant {
   sourceName: string;
 }
 
+/** A row whose article title contradicts the record its name would match.
+ *  Two different real people, or one whose article moved — indistinguishable
+ *  from the data, so this never resolves itself. */
+export interface TitleMismatch {
+  playerId: string;
+  storedTitle: string;
+  sourceTitle: string;
+  rowName: string;
+}
+
 export interface TeamPlan {
   teamId: string;
   /** Fully built except `verified`, which the assertion pass decides, and
@@ -87,6 +97,7 @@ export interface TeamPlan {
   possibleRenames: PossibleRename[];
   omitted: OmittedRow[];
   nameVariants: NameVariant[];
+  titleMismatches: TitleMismatch[];
   generatedIds: string[];
   parsedCount: number;
   matchedCount: number;
@@ -247,6 +258,7 @@ export function reconcileTeam({
   const possibleRenames: PossibleRename[] = [];
   const omitted: OmittedRow[] = [];
   const nameVariants: NameVariant[] = [];
+  const titleMismatches: TitleMismatch[] = [];
   const generatedIds: string[] = [];
   /** Stored members already claimed by a parsed row, so one record is never
    *  matched twice and departures are computed against what is left. */
@@ -316,7 +328,30 @@ export function reconcileTeam({
 
     // 1b. A stored member of THIS squad, by normalised name.
     if (!player) {
-      const group = (storedByNorm.get(key) ?? []).filter((m) => !consumed.has(m.playerId));
+      const named = (storedByNorm.get(key) ?? []).filter((m) => !consumed.has(m.playerId));
+      const group = named.filter((m) => {
+        const candidate = byId.get(m.playerId);
+        return candidate === undefined || titleVerdict(candidate, row.title) !== 'clash';
+      });
+      if (named.length > 0 && group.length === 0) {
+        // Same display name, different article. HOLD the stored record on its
+        // slot: creating one here is the unrecoverable direction, because a
+        // moved article and a second person look identical from the data.
+        const held = named[0];
+        const candidate = held === undefined ? undefined : byId.get(held.playerId);
+        if (held !== undefined && candidate !== undefined && row.title !== undefined) {
+          heldGroups.add(key);
+          titleMismatches.push({
+            playerId: candidate.id,
+            storedTitle: titlesOf(candidate)[0] ?? '',
+            sourceTitle: row.title,
+            rowName: row.name,
+          });
+          consumed.add(held.playerId);
+          members.push(buildMember(held.playerId, row.no, held.captain));
+        }
+        continue;
+      }
       if (group.length === 1) {
         player = byId.get(group[0]?.playerId ?? '');
       } else if (group.length > 1) {
@@ -366,7 +401,28 @@ export function reconcileTeam({
 
     // 2. Otherwise look up players.json globally.
     if (!player) {
-      const candidates = (byNorm.get(key) ?? []).filter((c) => !consumed.has(c.id));
+      const named = (byNorm.get(key) ?? []).filter((c) => !consumed.has(c.id));
+      const candidates = named.filter((c) => titleVerdict(c, row.title) !== 'clash');
+      if (named.length > 0 && candidates.length === 0) {
+        // Same display name, different article, and no stored slot to hold —
+        // this squad doesn't carry the clashing record. Never dropped in
+        // silence, and never created: a moved article and a second person
+        // are indistinguishable from the data.
+        const candidate = named[0];
+        if (candidate !== undefined && row.title !== undefined) {
+          titleMismatches.push({
+            playerId: candidate.id,
+            storedTitle: titlesOf(candidate)[0] ?? '',
+            sourceTitle: row.title,
+            rowName: row.name,
+          });
+          omitted.push({
+            name: row.name,
+            reason: `title clashes with ${candidate.id}, which is not in this squad`,
+          });
+        }
+        continue;
+      }
       if (candidates.length === 1) {
         player = candidates[0];
         if (player) consumed.add(player.id);
@@ -504,6 +560,7 @@ export function reconcileTeam({
     possibleRenames,
     omitted,
     nameVariants,
+    titleMismatches,
     generatedIds,
     parsedCount: envelope.members.length,
     matchedCount,
