@@ -35,12 +35,12 @@ Explicitly out of scope:
 - Any change to `lib/questionEngine.ts`.
 - Flags for clubs. Clubs keep their banded marker; hard constraint #2's ban on
   crests, badges, logos and shield shapes is untouched and permanent.
-- The level-3 *club* part on nation squads. A club has no flag.
+- The level-3 _club_ part on nation squads. A club has no flag.
 
 ## Constraint conflict, and its resolution
 
 CLAUDE.md hard constraint #2 and the `TeamMarker` doc comment in `types/squad.ts`
-both state that a nation's marker *is* its flag, "rendered as geometry rather than
+both state that a nation's marker _is_ its flag, "rendered as geometry rather than
 an asset". **That rule is dropped for nations**, not reworded around: a nation's
 identity element is now a committed PNG flag. Both documents are rewritten to say so.
 
