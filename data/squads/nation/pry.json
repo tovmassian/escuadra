@@ -1,0 +1,122 @@
+{
+  "id": "pry",
+  "kind": "nation",
+  "name": "Paraguay",
+  "season": "2026",
+  "primaryColor": "#D52B1E",
+  "secondaryColor": "#0038A8",
+  "verified": true,
+  "marker": {
+    "bands": ["#D52B1E", "#FFFFFF", "#0038A8"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Paraguay_national_football_team",
+  "members": [
+    {
+      "playerId": "gatito-fernandez",
+      "no": 1
+    },
+    {
+      "playerId": "gustavo-velazquez",
+      "no": 2
+    },
+    {
+      "playerId": "omar-alderete",
+      "no": 3
+    },
+    {
+      "playerId": "juan-jose-caceres",
+      "no": 4
+    },
+    {
+      "playerId": "fabian-balbuena",
+      "no": 5
+    },
+    {
+      "playerId": "junior-alonso",
+      "no": 6
+    },
+    {
+      "playerId": "ramon-sosa",
+      "no": 7
+    },
+    {
+      "playerId": "diego-gomez",
+      "no": 8
+    },
+    {
+      "playerId": "antonio-sanabria",
+      "no": 9
+    },
+    {
+      "playerId": "miguel-almiron",
+      "no": 10
+    },
+    {
+      "playerId": "mauricio",
+      "no": 11
+    },
+    {
+      "playerId": "orlando-gill",
+      "no": 12
+    },
+    {
+      "playerId": "jose-canale",
+      "no": 13
+    },
+    {
+      "playerId": "gustavo-gomez",
+      "no": 15,
+      "captain": true
+    },
+    {
+      "playerId": "damian-bobadilla",
+      "no": 16
+    },
+    {
+      "playerId": "kaku",
+      "no": 17
+    },
+    {
+      "playerId": "alex-arce",
+      "no": 18
+    },
+    {
+      "playerId": "julio-enciso",
+      "no": 19
+    },
+    {
+      "playerId": "braian-ojeda",
+      "no": 20
+    },
+    {
+      "playerId": "gabriel-avalos",
+      "no": 21
+    },
+    {
+      "playerId": "gaston-olveira",
+      "no": 22
+    },
+    {
+      "playerId": "matias-galarza",
+      "no": 23
+    },
+    {
+      "playerId": "gustavo-caballero",
+      "no": 24
+    },
+    {
+      "playerId": "isidro-pitta",
+      "no": 25
+    },
+    {
+      "playerId": "alexandro-maidana",
+      "no": 26
+    },
+    {
+      "playerId": "andres-cubas",
+      "no": null
+    }
+  ]
+}

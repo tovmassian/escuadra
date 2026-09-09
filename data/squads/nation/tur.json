@@ -1,0 +1,126 @@
+{
+  "id": "tur",
+  "kind": "nation",
+  "name": "Türkiye",
+  "season": "2026",
+  "primaryColor": "#E30A17",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#E30A17"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFFFFF"
+    }
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Turkey_national_football_team",
+  "members": [
+    {
+      "playerId": "mert-gunok",
+      "no": 1
+    },
+    {
+      "playerId": "zeki-celik",
+      "no": 2
+    },
+    {
+      "playerId": "merih-demiral",
+      "no": 3
+    },
+    {
+      "playerId": "caglar-soyuncu",
+      "no": 4
+    },
+    {
+      "playerId": "salih-ozcan",
+      "no": 5
+    },
+    {
+      "playerId": "orkun-kokcu",
+      "no": 6
+    },
+    {
+      "playerId": "kerem-akturkoglu",
+      "no": 7
+    },
+    {
+      "playerId": "guler",
+      "no": 8
+    },
+    {
+      "playerId": "deniz-gul",
+      "no": 9
+    },
+    {
+      "playerId": "calhanoglu",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "kenan-yildiz",
+      "no": 11
+    },
+    {
+      "playerId": "bayindir",
+      "no": 12
+    },
+    {
+      "playerId": "eren-elmali",
+      "no": 13
+    },
+    {
+      "playerId": "abdulkerim-bardakci",
+      "no": 14
+    },
+    {
+      "playerId": "ozan-kabak",
+      "no": 15
+    },
+    {
+      "playerId": "ismail-yuksek",
+      "no": 16
+    },
+    {
+      "playerId": "irfan-can-kahveci",
+      "no": 17
+    },
+    {
+      "playerId": "mert-muldur",
+      "no": 18
+    },
+    {
+      "playerId": "yunus-akgun",
+      "no": 19
+    },
+    {
+      "playerId": "ferdi-kadioglu",
+      "no": 20
+    },
+    {
+      "playerId": "baris-alper-yilmaz",
+      "no": 21
+    },
+    {
+      "playerId": "kaan-ayhan",
+      "no": 22
+    },
+    {
+      "playerId": "ugurcan-cakir",
+      "no": 23
+    },
+    {
+      "playerId": "oguz-aydin",
+      "no": 24
+    },
+    {
+      "playerId": "samet-akaydin",
+      "no": 25
+    },
+    {
+      "playerId": "can-uzun",
+      "no": 26
+    }
+  ]
+}

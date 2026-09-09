@@ -44,6 +44,22 @@ function fixture(): string {
   return root;
 }
 
+/** The same throwaway repo, but with a decision `alias` has no business
+ *  touching already on file. */
+function fixtureWithExclusion(): string {
+  const root = fixture();
+  writeFileSync(
+    path.join(root, 'data', 'decisions.json'),
+    JSON.stringify({
+      splits: [{ team: 'ver', departed: 'someone', arrived: 'Someone Else' }],
+      aliases: [],
+      titleAliases: [],
+      notInSquad: [{ team: 'ver', title: 'Rafik Belghali', reason: 'transferred to Torino' }],
+    }),
+  );
+  return root;
+}
+
 function runAlias(root: string, argv: string[]): { status: number | null } {
   const result = spawnSync(process.execPath, [CLI, 'alias', ...argv], {
     env: { ...process.env, SQUADCTL_REPO_ROOT: root },
@@ -53,8 +69,10 @@ function runAlias(root: string, argv: string[]): { status: number | null } {
 }
 
 function decisions(root: string): {
+  splits?: { team: string; departed: string; arrived: string }[];
   aliases?: { player: string; name: string }[];
   titleAliases?: { player: string; title: string }[];
+  notInSquad?: { team: string; title: string; reason: string }[];
 } {
   return JSON.parse(readFileSync(path.join(root, 'data', 'decisions.json'), 'utf8')) as ReturnType<
     typeof decisions
@@ -76,6 +94,29 @@ describe('alias --title', () => {
     expect(runAlias(root, ['grimaldo', 'Alejandro Grimaldo']).status).toBe(0);
     expect(decisions(root).aliases).toEqual([{ player: 'grimaldo', name: 'Alejandro Grimaldo' }]);
     expect(decisions(root).titleAliases ?? []).toEqual([]);
+  });
+
+  // The regression this exists for: `alias` rebuilt the decision file from the
+  // three kinds it knew about, so recording one alias deleted an `exclude`
+  // decision outright — the `--reason` that command insists on, gone with it.
+  // Every writer touches one kind and must carry the rest through untouched.
+  it('preserves decision kinds it does not own', () => {
+    const root = fixtureWithExclusion();
+    expect(runAlias(root, ['grimaldo', 'Alejandro Grimaldo']).status).toBe(0);
+    expect(decisions(root).notInSquad).toEqual([
+      { team: 'ver', title: 'Rafik Belghali', reason: 'transferred to Torino' },
+    ]);
+    expect(decisions(root).splits).toEqual([
+      { team: 'ver', departed: 'someone', arrived: 'Someone Else' },
+    ]);
+  });
+
+  it('preserves them through the --title path too', () => {
+    const root = fixtureWithExclusion();
+    expect(runAlias(root, ['grimaldo', '--title', 'Alejandro Grimaldo']).status).toBe(0);
+    expect(decisions(root).notInSquad).toEqual([
+      { team: 'ver', title: 'Rafik Belghali', reason: 'transferred to Torino' },
+    ]);
   });
 
   it('refuses a title the record already carries, which would be a no-op', () => {

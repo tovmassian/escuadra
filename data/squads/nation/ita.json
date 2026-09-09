@@ -1,0 +1,114 @@
+{
+  "id": "ita",
+  "kind": "nation",
+  "name": "Italy",
+  "season": "2026",
+  "primaryColor": "#008C45",
+  "secondaryColor": "#CD212A",
+  "verified": true,
+  "marker": {
+    "bands": ["#008C45", "#F4F5F0", "#CD212A"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Italy_national_football_team",
+  "members": [
+    {
+      "playerId": "gianluigi-donnarumma",
+      "no": 1,
+      "captain": true
+    },
+    {
+      "playerId": "niccolo-fortini",
+      "no": 2
+    },
+    {
+      "playerId": "davide-bartesaghi",
+      "no": 3
+    },
+    {
+      "playerId": "fabio-chiarodia",
+      "no": 4
+    },
+    {
+      "playerId": "luca-lipani",
+      "no": 5
+    },
+    {
+      "playerId": "filippo-mane",
+      "no": 6
+    },
+    {
+      "playerId": "alessio-cacciamani",
+      "no": 7
+    },
+    {
+      "playerId": "francesco-camarda",
+      "no": 8
+    },
+    {
+      "playerId": "pio-esposito",
+      "no": 9
+    },
+    {
+      "playerId": "cher-ndour",
+      "no": 10
+    },
+    {
+      "playerId": "luca-koleosho",
+      "no": 11
+    },
+    {
+      "playerId": "giovanni-daffara",
+      "no": 12
+    },
+    {
+      "playerId": "luca-reggiani",
+      "no": 13
+    },
+    {
+      "playerId": "tommaso-berti",
+      "no": 14
+    },
+    {
+      "playerId": "pietro-comuzzo",
+      "no": 15
+    },
+    {
+      "playerId": "giacomo-faticanti",
+      "no": 16
+    },
+    {
+      "playerId": "seydou-fini",
+      "no": 17
+    },
+    {
+      "playerId": "jeff-ekhator",
+      "no": 18
+    },
+    {
+      "playerId": "samuele-inacio",
+      "no": 19
+    },
+    {
+      "playerId": "matteo-dagasso",
+      "no": 20
+    },
+    {
+      "playerId": "niccolo-pisilli",
+      "no": 21
+    },
+    {
+      "playerId": "costantino-favasuli",
+      "no": 22
+    },
+    {
+      "playerId": "lorenzo-palmisani",
+      "no": 23
+    },
+    {
+      "playerId": "honest-ahanor",
+      "no": 24
+    }
+  ]
+}

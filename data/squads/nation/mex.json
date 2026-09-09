@@ -1,0 +1,122 @@
+{
+  "id": "mex",
+  "kind": "nation",
+  "name": "Mexico",
+  "season": "2026",
+  "primaryColor": "#006847",
+  "secondaryColor": "#CE1126",
+  "verified": true,
+  "marker": {
+    "bands": ["#006847", "#FFFFFF", "#CE1126"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Mexico_national_football_team",
+  "members": [
+    {
+      "playerId": "raul-rangel",
+      "no": 1
+    },
+    {
+      "playerId": "jorge-sanchez",
+      "no": 2
+    },
+    {
+      "playerId": "cesar-montes",
+      "no": 3
+    },
+    {
+      "playerId": "edson-alvarez",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "johan-vasquez",
+      "no": 5
+    },
+    {
+      "playerId": "erik-lira",
+      "no": 6
+    },
+    {
+      "playerId": "luis-romo",
+      "no": 7
+    },
+    {
+      "playerId": "fidalgo",
+      "no": 8
+    },
+    {
+      "playerId": "raul-jimenez",
+      "no": 9
+    },
+    {
+      "playerId": "alexis-vega",
+      "no": 10
+    },
+    {
+      "playerId": "santiago-gimenez",
+      "no": 11
+    },
+    {
+      "playerId": "carlos-acevedo",
+      "no": 12
+    },
+    {
+      "playerId": "guillermo-ochoa",
+      "no": 13
+    },
+    {
+      "playerId": "armando-gonzalez",
+      "no": 14
+    },
+    {
+      "playerId": "israel-reyes",
+      "no": 15
+    },
+    {
+      "playerId": "julian-quinones",
+      "no": 16
+    },
+    {
+      "playerId": "orbelin-pineda",
+      "no": 17
+    },
+    {
+      "playerId": "vargas",
+      "no": 18
+    },
+    {
+      "playerId": "gilberto-mora",
+      "no": 19
+    },
+    {
+      "playerId": "mateo-chavez",
+      "no": 20
+    },
+    {
+      "playerId": "cesar-huerta",
+      "no": 21
+    },
+    {
+      "playerId": "guillermo-martinez",
+      "no": 22
+    },
+    {
+      "playerId": "jesus-gallardo",
+      "no": 23
+    },
+    {
+      "playerId": "luis-chavez",
+      "no": 24
+    },
+    {
+      "playerId": "roberto-alvarado",
+      "no": 25
+    },
+    {
+      "playerId": "brian-gutierrez",
+      "no": 26
+    }
+  ]
+}

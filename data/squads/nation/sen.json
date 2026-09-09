@@ -1,0 +1,121 @@
+{
+  "id": "sen",
+  "kind": "nation",
+  "name": "Senegal",
+  "season": "2026",
+  "primaryColor": "#00853F",
+  "secondaryColor": "#E31B23",
+  "verified": true,
+  "marker": {
+    "bands": ["#00853F", "#FDEF42", "#E31B23"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Senegal_national_football_team",
+  "members": [
+    {
+      "playerId": "yehvann-diouf",
+      "no": 1
+    },
+    {
+      "playerId": "sarr",
+      "no": 2
+    },
+    {
+      "playerId": "kalidou-koulibaly",
+      "no": 3
+    },
+    {
+      "playerId": "abdoulaye-seck",
+      "no": 4
+    },
+    {
+      "playerId": "idrissa-gueye",
+      "no": 5
+    },
+    {
+      "playerId": "ciss",
+      "no": 6
+    },
+    {
+      "playerId": "assane-diao",
+      "no": 7
+    },
+    {
+      "playerId": "lamine-camara",
+      "no": 8
+    },
+    {
+      "playerId": "bamba-dieng",
+      "no": 9
+    },
+    {
+      "playerId": "sadio-mane",
+      "no": 10
+    },
+    {
+      "playerId": "nicolas-jackson",
+      "no": 11
+    },
+    {
+      "playerId": "cherif-ndiaye",
+      "no": 12
+    },
+    {
+      "playerId": "iliman-ndiaye",
+      "no": 13
+    },
+    {
+      "playerId": "ismail-jakobs",
+      "no": 14
+    },
+    {
+      "playerId": "krepin-diatta",
+      "no": 15
+    },
+    {
+      "playerId": "edouard-mendy",
+      "no": 16
+    },
+    {
+      "playerId": "pape-matar-sarr",
+      "no": 17
+    },
+    {
+      "playerId": "ismaila-sarr",
+      "no": 18
+    },
+    {
+      "playerId": "moussa-niakhate",
+      "no": 19
+    },
+    {
+      "playerId": "mbaye",
+      "no": 20
+    },
+    {
+      "playerId": "habib-diarra",
+      "no": 21
+    },
+    {
+      "playerId": "bara-sapoko-ndiaye",
+      "no": 22
+    },
+    {
+      "playerId": "mory-diaw",
+      "no": 23
+    },
+    {
+      "playerId": "antoine-mendy",
+      "no": 24
+    },
+    {
+      "playerId": "el-hadji-malick-diouf",
+      "no": 25
+    },
+    {
+      "playerId": "gueye",
+      "no": 26
+    }
+  ]
+}

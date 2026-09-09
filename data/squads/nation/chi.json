@@ -1,0 +1,114 @@
+{
+  "id": "chi",
+  "kind": "nation",
+  "name": "Chile",
+  "season": "2026",
+  "primaryColor": "#D52B1E",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#D52B1E"],
+    "orientation": "horizontal",
+    "overlay": {
+      "shape": "disc",
+      "color": "#0039A6"
+    }
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Chile_national_football_team",
+  "members": [
+    {
+      "playerId": "thomas-gillier",
+      "no": 1
+    },
+    {
+      "playerId": "fabian-hormazabal",
+      "no": 2
+    },
+    {
+      "playerId": "guillermo-maripan",
+      "no": 3
+    },
+    {
+      "playerId": "igor-lichnovsky",
+      "no": 4
+    },
+    {
+      "playerId": "vicente-pizarro",
+      "no": 6
+    },
+    {
+      "playerId": "felipe-loyola",
+      "no": 8
+    },
+    {
+      "playerId": "ivan-morales",
+      "no": 9
+    },
+    {
+      "playerId": "cepeda",
+      "no": 10
+    },
+    {
+      "playerId": "dario-osorio",
+      "no": 11
+    },
+    {
+      "playerId": "lawrence-vigouroux",
+      "no": 12
+    },
+    {
+      "playerId": "felipe-mendez",
+      "no": 13
+    },
+    {
+      "playerId": "francisco-sierralta",
+      "no": 15
+    },
+    {
+      "playerId": "gonzalo-tapia",
+      "no": 16
+    },
+    {
+      "playerId": "suazo",
+      "no": 17,
+      "captain": true
+    },
+    {
+      "playerId": "rodrigo-echeverria",
+      "no": 18
+    },
+    {
+      "playerId": "maximiliano-gutierrez",
+      "no": 19
+    },
+    {
+      "playerId": "matias-sepulveda",
+      "no": 20
+    },
+    {
+      "playerId": "lautaro-millan",
+      "no": 21
+    },
+    {
+      "playerId": "nils-reichmuth",
+      "no": 22
+    },
+    {
+      "playerId": "brayan-cortes",
+      "no": 23
+    },
+    {
+      "playerId": "diego-ulloa",
+      "no": 24
+    },
+    {
+      "playerId": "agustin-arce",
+      "no": 25
+    },
+    {
+      "playerId": "felipe-faundez",
+      "no": 26
+    }
+  ]
+}

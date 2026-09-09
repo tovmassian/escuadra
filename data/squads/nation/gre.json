@@ -1,0 +1,121 @@
+{
+  "id": "gre",
+  "kind": "nation",
+  "name": "Greece",
+  "season": "2026",
+  "primaryColor": "#0D5EAF",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#0D5EAF", "#FFFFFF"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Greece_national_football_team",
+  "members": [
+    {
+      "playerId": "vlachodimos",
+      "no": 1
+    },
+    {
+      "playerId": "georgios-vagiannidis",
+      "no": 2
+    },
+    {
+      "playerId": "konstantinos-koulierakis",
+      "no": 3
+    },
+    {
+      "playerId": "konstantinos-mavropanos",
+      "no": 4
+    },
+    {
+      "playerId": "panagiotis-retsos",
+      "no": 5
+    },
+    {
+      "playerId": "dimitrios-kourbelis",
+      "no": 6
+    },
+    {
+      "playerId": "georgios-masouras",
+      "no": 7
+    },
+    {
+      "playerId": "christos-mouzakitis",
+      "no": 8
+    },
+    {
+      "playerId": "anastasios-douvikas",
+      "no": 9
+    },
+    {
+      "playerId": "tzolis",
+      "no": 10
+    },
+    {
+      "playerId": "charalampos-kostoulas",
+      "no": 11
+    },
+    {
+      "playerId": "konstantinos-tzolakis",
+      "no": 12
+    },
+    {
+      "playerId": "christos-mandas",
+      "no": 13
+    },
+    {
+      "playerId": "vangelis-pavlidis",
+      "no": 14
+    },
+    {
+      "playerId": "lazaros-rota",
+      "no": 15
+    },
+    {
+      "playerId": "andrews-tetteh",
+      "no": 16
+    },
+    {
+      "playerId": "pantelis-chatzidiakos",
+      "no": 17
+    },
+    {
+      "playerId": "sotiris-kontouris",
+      "no": 18
+    },
+    {
+      "playerId": "giorgos-kyriakopoulos",
+      "no": 19
+    },
+    {
+      "playerId": "christos-zafeiris",
+      "no": 20
+    },
+    {
+      "playerId": "kostas-tsimikas",
+      "no": 21
+    },
+    {
+      "playerId": "nectarios-triantis",
+      "no": 23
+    },
+    {
+      "playerId": "thanasis-androutsos",
+      "no": 24
+    },
+    {
+      "playerId": "andreas-ntoi",
+      "no": 25
+    },
+    {
+      "playerId": "alexandros-kyziridis",
+      "no": 26
+    },
+    {
+      "playerId": "dimitris-giannoulis",
+      "no": null
+    }
+  ]
+}

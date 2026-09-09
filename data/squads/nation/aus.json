@@ -1,0 +1,126 @@
+{
+  "id": "aus",
+  "kind": "nation",
+  "name": "Australia",
+  "season": "2026",
+  "primaryColor": "#00008B",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#00008B"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFFFFF"
+    }
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Australia_men's_national_soccer_team",
+  "members": [
+    {
+      "playerId": "ryan",
+      "no": 1,
+      "captain": true
+    },
+    {
+      "playerId": "milos-degenek",
+      "no": 2
+    },
+    {
+      "playerId": "alessandro-circati",
+      "no": 3
+    },
+    {
+      "playerId": "jacob-italiano",
+      "no": 4
+    },
+    {
+      "playerId": "jordan-bos",
+      "no": 5
+    },
+    {
+      "playerId": "jason-geria",
+      "no": 6
+    },
+    {
+      "playerId": "mathew-leckie",
+      "no": 7
+    },
+    {
+      "playerId": "connor-metcalfe",
+      "no": 8
+    },
+    {
+      "playerId": "mohamed-toure",
+      "no": 9
+    },
+    {
+      "playerId": "ajdin-hrustic",
+      "no": 10
+    },
+    {
+      "playerId": "awer-mabil",
+      "no": 11
+    },
+    {
+      "playerId": "paul-izzo",
+      "no": 12
+    },
+    {
+      "playerId": "aiden-oneill",
+      "no": 13
+    },
+    {
+      "playerId": "cammy-devlin",
+      "no": 14
+    },
+    {
+      "playerId": "kai-trewin",
+      "no": 15
+    },
+    {
+      "playerId": "aziz-behich",
+      "no": 16
+    },
+    {
+      "playerId": "nestory-irankunda",
+      "no": 17
+    },
+    {
+      "playerId": "patrick-beach",
+      "no": 18
+    },
+    {
+      "playerId": "harry-souttar",
+      "no": 19
+    },
+    {
+      "playerId": "cristian-volpato",
+      "no": 20
+    },
+    {
+      "playerId": "cameron-burgess",
+      "no": 21
+    },
+    {
+      "playerId": "jackson-irvine",
+      "no": 22
+    },
+    {
+      "playerId": "nishan-velupillay",
+      "no": 23
+    },
+    {
+      "playerId": "paul-okonengstler",
+      "no": 24
+    },
+    {
+      "playerId": "lucas-herrington",
+      "no": 25
+    },
+    {
+      "playerId": "tete-yengi",
+      "no": 26
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "sco",
+  "kind": "nation",
+  "name": "Scotland",
+  "season": "2026",
+  "primaryColor": "#005EB8",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#005EB8", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Scotland_national_football_team",
+  "members": [
+    {
+      "playerId": "angus-gunn",
+      "no": 1
+    },
+    {
+      "playerId": "aaron-hickey",
+      "no": 2
+    },
+    {
+      "playerId": "andy-robertson",
+      "no": 3,
+      "captain": true
+    },
+    {
+      "playerId": "scott-mctominay",
+      "no": 4
+    },
+    {
+      "playerId": "grant-hanley",
+      "no": 5
+    },
+    {
+      "playerId": "kieran-tierney",
+      "no": 6
+    },
+    {
+      "playerId": "john-mcginn",
+      "no": 7
+    },
+    {
+      "playerId": "tyler-fletcher",
+      "no": 8
+    },
+    {
+      "playerId": "lyndon-dykes",
+      "no": 9
+    },
+    {
+      "playerId": "che-adams",
+      "no": 10
+    },
+    {
+      "playerId": "ryan-christie",
+      "no": 11
+    },
+    {
+      "playerId": "liam-kelly",
+      "no": 12
+    },
+    {
+      "playerId": "jack-hendry",
+      "no": 13
+    },
+    {
+      "playerId": "ross-stewart",
+      "no": 14
+    },
+    {
+      "playerId": "john-souttar",
+      "no": 15
+    },
+    {
+      "playerId": "dominic-hyam",
+      "no": 16
+    },
+    {
+      "playerId": "ben-gannondoak",
+      "no": 17
+    },
+    {
+      "playerId": "george-hirst",
+      "no": 18
+    },
+    {
+      "playerId": "lewis-ferguson",
+      "no": 19
+    },
+    {
+      "playerId": "lawrence-shankland",
+      "no": 20
+    },
+    {
+      "playerId": "craig-gordon",
+      "no": 21
+    },
+    {
+      "playerId": "nathan-patterson",
+      "no": 22
+    },
+    {
+      "playerId": "kenny-mclean",
+      "no": 23
+    },
+    {
+      "playerId": "anthony-ralston",
+      "no": 24
+    },
+    {
+      "playerId": "findlay-curtis",
+      "no": 25
+    },
+    {
+      "playerId": "scott-mckenna",
+      "no": 26
+    }
+  ]
+}

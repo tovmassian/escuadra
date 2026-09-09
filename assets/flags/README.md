@@ -1,7 +1,7 @@
 # Flag images
 
-106 national flag PNGs, one per FIFA three-letter country code (`ARG.png`,
-`IRL.png`, `KOS.png`). 160 px wide, ~424 KB in total.
+108 national flag PNGs, one per FIFA three-letter country code (`ARG.png`,
+`IRL.png`, `KOS.png`). 160 px wide, ~432 KB in total.
 
 Used for nation identity on the team picker, level-3 nationality answer
 options, the `NAT` stat chip and the Study screen's affiliation column. See

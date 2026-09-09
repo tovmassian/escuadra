@@ -1,0 +1,122 @@
+{
+  "id": "ger",
+  "kind": "nation",
+  "name": "Germany",
+  "season": "2026",
+  "primaryColor": "#000000",
+  "secondaryColor": "#FFCE00",
+  "verified": true,
+  "marker": {
+    "bands": ["#000000", "#DD0000", "#FFCE00"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Germany_national_football_team",
+  "members": [
+    {
+      "playerId": "manuel-neuer",
+      "no": 1
+    },
+    {
+      "playerId": "rudiger",
+      "no": 2
+    },
+    {
+      "playerId": "waldemar-anton",
+      "no": 3
+    },
+    {
+      "playerId": "jonathan-tah",
+      "no": 4
+    },
+    {
+      "playerId": "aleksandar-pavlovic",
+      "no": 5
+    },
+    {
+      "playerId": "joshua-kimmich",
+      "no": 6,
+      "captain": true
+    },
+    {
+      "playerId": "havertz",
+      "no": 7
+    },
+    {
+      "playerId": "leon-goretzka",
+      "no": 8
+    },
+    {
+      "playerId": "jamie-leweling",
+      "no": 9
+    },
+    {
+      "playerId": "jamal-musiala",
+      "no": 10
+    },
+    {
+      "playerId": "nick-woltemade",
+      "no": 11
+    },
+    {
+      "playerId": "oliver-baumann",
+      "no": 12
+    },
+    {
+      "playerId": "pascal-gross",
+      "no": 13
+    },
+    {
+      "playerId": "maximilian-beier",
+      "no": 14
+    },
+    {
+      "playerId": "nico-schlotterbeck",
+      "no": 15
+    },
+    {
+      "playerId": "angelo-stiller",
+      "no": 16
+    },
+    {
+      "playerId": "florian-wirtz",
+      "no": 17
+    },
+    {
+      "playerId": "nathaniel-brown",
+      "no": 18
+    },
+    {
+      "playerId": "leroy-sane",
+      "no": 19
+    },
+    {
+      "playerId": "nadiem-amiri",
+      "no": 20
+    },
+    {
+      "playerId": "alexander-nubel",
+      "no": 21
+    },
+    {
+      "playerId": "david-raum",
+      "no": 22
+    },
+    {
+      "playerId": "felix-nmecha",
+      "no": 23
+    },
+    {
+      "playerId": "malick-thiaw",
+      "no": 24
+    },
+    {
+      "playerId": "assan-ouedraogo",
+      "no": 25
+    },
+    {
+      "playerId": "deniz-undav",
+      "no": 26
+    }
+  ]
+}

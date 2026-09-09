@@ -1,0 +1,106 @@
+{
+  "id": "nga",
+  "kind": "nation",
+  "name": "Nigeria",
+  "season": "2026",
+  "primaryColor": "#008751",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#008751", "#FFFFFF", "#008751"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Nigeria_national_football_team",
+  "members": [
+    {
+      "playerId": "francis-uzoho",
+      "no": 1
+    },
+    {
+      "playerId": "abdullahi-bewene",
+      "no": 2
+    },
+    {
+      "playerId": "zaidu-sanusi",
+      "no": 3
+    },
+    {
+      "playerId": "wilfred-ndidi",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "semi-ajayi",
+      "no": 6
+    },
+    {
+      "playerId": "philip-otele",
+      "no": 7
+    },
+    {
+      "playerId": "frank-onyeka",
+      "no": 8
+    },
+    {
+      "playerId": "terem-moffi",
+      "no": 9
+    },
+    {
+      "playerId": "fisayo-delebashiru",
+      "no": 10
+    },
+    {
+      "playerId": "samuel-chukwueze",
+      "no": 11
+    },
+    {
+      "playerId": "tochukwu-nnadi",
+      "no": 12
+    },
+    {
+      "playerId": "bruno-onyemaechi",
+      "no": 13
+    },
+    {
+      "playerId": "christian-akpan",
+      "no": 14
+    },
+    {
+      "playerId": "moses-simon",
+      "no": 15
+    },
+    {
+      "playerId": "arthur-okonkwo",
+      "no": 16
+    },
+    {
+      "playerId": "alex-iwobi",
+      "no": 17
+    },
+    {
+      "playerId": "emmanuel-fernandez",
+      "no": 18
+    },
+    {
+      "playerId": "paul-onuachu",
+      "no": 19
+    },
+    {
+      "playerId": "raphael-onyedika",
+      "no": 20
+    },
+    {
+      "playerId": "calvin-bassey",
+      "no": 21
+    },
+    {
+      "playerId": "akor-adams",
+      "no": 22
+    },
+    {
+      "playerId": "maduka-okoye",
+      "no": 23
+    }
+  ]
+}

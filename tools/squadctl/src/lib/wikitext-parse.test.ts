@@ -7,6 +7,7 @@ import {
   isOutOnLoan,
   namedParams,
   parseSection,
+  parseSortname,
   parseUpdated,
   parseWikilink,
   selectSquadSection,
@@ -71,6 +72,47 @@ describe('parseWikilink', () => {
 
   it('reports a plain unlinked value as having no title', () => {
     expect(parseWikilink('Bukayo Saka')).toEqual({ title: null, display: 'Bukayo Saka' });
+  });
+});
+
+describe('parseSortname', () => {
+  it('joins the two positional parameters and links the same title', () => {
+    expect(parseSortname('{{sortname|Mathew|Ryan}}')).toEqual({
+      title: 'Mathew Ryan',
+      display: 'Mathew Ryan',
+    });
+  });
+
+  it('disambiguates the title with dab= while leaving the display name alone', () => {
+    expect(parseSortname('{{sortname|Matt|Turner|dab=soccer}}')).toEqual({
+      title: 'Matt Turner (soccer)',
+      display: 'Matt Turner',
+    });
+  });
+
+  it('keeps a comma inside dab=, which splitParams would otherwise not reach', () => {
+    expect(parseSortname('{{sortname|Mohamed|Touré|dab=soccer, born 2004}}')).toEqual({
+      title: 'Mohamed Touré (soccer, born 2004)',
+      display: 'Mohamed Touré',
+    });
+  });
+
+  it('takes a third positional parameter as the link target', () => {
+    expect(parseSortname('{{sortname|Tim|Ream|Timothy Ream}}')).toEqual({
+      title: 'Timothy Ream',
+      display: 'Tim Ream',
+    });
+  });
+
+  it('links nowhere when nolink is set', () => {
+    expect(parseSortname('{{sortname|Kai|Trewin|nolink=1}}')).toEqual({
+      title: null,
+      display: 'Kai Trewin',
+    });
+  });
+
+  it('returns null for a plain wikilink, so the caller falls back', () => {
+    expect(parseSortname('[[Lamine Yamal]]')).toBeNull();
   });
 });
 
@@ -193,6 +235,14 @@ describe('parseSection — anomalies', () => {
     const parsed = parseSection('{{fs player|no=3|nat=ENG|name=[[A B]]|pos=SW}}');
     expect(parsed.rows[0]?.position).toBeNull();
     expect(parsed.rows[0]?.positionRaw).toBe('SW');
+  });
+
+  // The United States and Australia articles write every single player this
+  // way; without it 52 records landed as `sortnamemathewryan`.
+  it('reads a name written as a sortname template', () => {
+    const parsed = parseSection('{{nat fs g player|no=1|pos=GK|name={{sortname|Mathew|Ryan}}}}');
+    expect(parsed.rows[0]?.name).toBe('Mathew Ryan');
+    expect(parsed.rows[0]?.title).toBe('Mathew Ryan');
   });
 
   it('accepts the nat fs g player variant', () => {

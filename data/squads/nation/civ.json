@@ -1,0 +1,122 @@
+{
+  "id": "civ",
+  "kind": "nation",
+  "name": "Ivory Coast",
+  "season": "2026",
+  "primaryColor": "#F77F00",
+  "secondaryColor": "#009E60",
+  "verified": true,
+  "marker": {
+    "bands": ["#F77F00", "#FFFFFF", "#009E60"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Ivory_Coast_national_football_team",
+  "members": [
+    {
+      "playerId": "yahia-fofana",
+      "no": 1
+    },
+    {
+      "playerId": "ousmane-diomande",
+      "no": 2
+    },
+    {
+      "playerId": "ghislain-konan",
+      "no": 3
+    },
+    {
+      "playerId": "jean-michael-seri",
+      "no": 4
+    },
+    {
+      "playerId": "wilfried-singo",
+      "no": 5
+    },
+    {
+      "playerId": "seko-fofana",
+      "no": 6
+    },
+    {
+      "playerId": "odilon-kossounou",
+      "no": 7
+    },
+    {
+      "playerId": "franck-kessie",
+      "no": 8,
+      "captain": true
+    },
+    {
+      "playerId": "bonny",
+      "no": 9
+    },
+    {
+      "playerId": "simon-adingra",
+      "no": 10
+    },
+    {
+      "playerId": "yan-diomande",
+      "no": 11
+    },
+    {
+      "playerId": "elye-wahi",
+      "no": 12
+    },
+    {
+      "playerId": "christopher-operi",
+      "no": 13
+    },
+    {
+      "playerId": "oumar-diakite",
+      "no": 14
+    },
+    {
+      "playerId": "amad-diallo",
+      "no": 15
+    },
+    {
+      "playerId": "mohamed-kone",
+      "no": 16
+    },
+    {
+      "playerId": "guela-doue",
+      "no": 17
+    },
+    {
+      "playerId": "ibrahim-sangare",
+      "no": 18
+    },
+    {
+      "playerId": "pepe",
+      "no": 19
+    },
+    {
+      "playerId": "emmanuel-agbadou",
+      "no": 20
+    },
+    {
+      "playerId": "evan-ndicka",
+      "no": 21
+    },
+    {
+      "playerId": "evann-guessand",
+      "no": 22
+    },
+    {
+      "playerId": "alban-lafont",
+      "no": 23
+    },
+    {
+      "playerId": "bazoumana-toure",
+      "no": 24
+    },
+    {
+      "playerId": "parfait-guiagon",
+      "no": 25
+    },
+    {
+      "playerId": "christ-inao-oulai",
+      "no": 26
+    }
+  ]
+}

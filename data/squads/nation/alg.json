@@ -1,0 +1,126 @@
+{
+  "id": "alg",
+  "kind": "nation",
+  "name": "Algeria",
+  "season": "2026",
+  "primaryColor": "#006233",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#006233", "#FFFFFF"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#D21034"
+    }
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Algeria_national_football_team",
+  "members": [
+    {
+      "playerId": "melvin-mastil",
+      "no": 1
+    },
+    {
+      "playerId": "mandi",
+      "no": 2
+    },
+    {
+      "playerId": "achref-abada",
+      "no": 3
+    },
+    {
+      "playerId": "mohamed-amine-tougai",
+      "no": 4
+    },
+    {
+      "playerId": "zineddine-belaid",
+      "no": 5
+    },
+    {
+      "playerId": "ramiz-zerrouki",
+      "no": 6
+    },
+    {
+      "playerId": "riyad-mahrez",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "houssem-aouar",
+      "no": 8
+    },
+    {
+      "playerId": "amine-gouiri",
+      "no": 9
+    },
+    {
+      "playerId": "fares-chaibi",
+      "no": 10
+    },
+    {
+      "playerId": "anis-hadj-moussa",
+      "no": 11
+    },
+    {
+      "playerId": "nadhir-benbouali",
+      "no": 12
+    },
+    {
+      "playerId": "jaouen-hadjam",
+      "no": 13
+    },
+    {
+      "playerId": "hicham-boudaoui",
+      "no": 14
+    },
+    {
+      "playerId": "rayan-aitnouri",
+      "no": 15
+    },
+    {
+      "playerId": "oussama-benbot",
+      "no": 16
+    },
+    {
+      "playerId": "rafik-belghali",
+      "no": 17
+    },
+    {
+      "playerId": "mohamed-amoura",
+      "no": 18
+    },
+    {
+      "playerId": "nabil-bentaleb",
+      "no": 19
+    },
+    {
+      "playerId": "adil-boulbina",
+      "no": 20
+    },
+    {
+      "playerId": "ramy-bensebaini",
+      "no": 21
+    },
+    {
+      "playerId": "ibrahim-maza",
+      "no": 22
+    },
+    {
+      "playerId": "luca-zidane",
+      "no": 23
+    },
+    {
+      "playerId": "yacine-titraoui",
+      "no": 24
+    },
+    {
+      "playerId": "fares-ghedjemis",
+      "no": 25
+    },
+    {
+      "playerId": "samir-chergui",
+      "no": 26
+    }
+  ]
+}

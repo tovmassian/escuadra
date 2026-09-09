@@ -263,6 +263,47 @@ export function parseWikilink(value: string): Wikilink {
   };
 }
 
+/** Reads `name={{sortname|First|Last}}`, which the United States and
+ *  Australia articles use for every single player where every other article
+ *  writes a plain wikilink. Without it the template source itself becomes the
+ *  player's name, and 52 records land in players.json as `sortnamemathewryan`.
+ *
+ *  The template's own contract: the two positional parameters are the first
+ *  and last name and are also the link target, a third positional overrides
+ *  that target, `dab=` disambiguates it (`dab=soccer` -> `Matt Turner
+ *  (soccer)`), and `nolink=` means it links nowhere. Display text is always
+ *  just the two names.
+ *
+ *  Null when the value is not a sortname, so the caller falls back to
+ *  `parseWikilink` — only `name=` is routed through here, since `club=` and
+ *  `nat=` are plain wikilinks in every article seen so far. */
+export function parseSortname(value: string): Wikilink | null {
+  const template = findTemplates(value)[0];
+  if (template === undefined || !/^sortname$/i.test(template.name)) return null;
+  const named = namedParams(template.params);
+  const positional = template.params
+    .filter((param) => !/^[A-Za-z0-9 _-]+=/.test(param.trim()))
+    .map((param) => stripMarkup(param));
+  const [first, last, target] = positional;
+  const display = [first, last].filter((part) => part !== undefined && part !== '').join(' ');
+  if (display === '') return null;
+
+  const nolink = named.nolink;
+  if (nolink !== undefined && nolink !== '' && nolink !== '0' && !/^no$/i.test(nolink)) {
+    return { title: null, display };
+  }
+  if (target !== undefined && target !== '') return { title: target, display };
+  const dab = named.dab;
+  if (dab !== undefined && dab !== '') return { title: `${display} (${dab})`, display };
+  return { title: display, display };
+}
+
+/** A player row's `name=`, which is a wikilink almost everywhere and a
+ *  `{{sortname}}` on the two North American / Australian articles. */
+export function parseNameField(value: string): Wikilink {
+  return parseSortname(value) ?? parseWikilink(value);
+}
+
 function parseBirth(value: string): string | null {
   const inner = findTemplates(value).find((t) => BIRTH_TEMPLATE.test(t.name));
   if (!inner) return null;
@@ -330,7 +371,7 @@ function toRow(template: RawTemplate): ParsedRow {
   const noRaw = params.no ?? '';
   const positionRaw = params.pos ?? '';
   const position = positionRaw.trim().toUpperCase();
-  const nameLink = parseWikilink(params.name ?? '');
+  const nameLink = parseNameField(params.name ?? '');
   const clubValue = params.club;
   const natValue = params.nat;
 

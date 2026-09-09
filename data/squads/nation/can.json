@@ -1,0 +1,123 @@
+{
+  "id": "can",
+  "kind": "nation",
+  "name": "Canada",
+  "season": "2026",
+  "primaryColor": "#FF0000",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FF0000", "#FFFFFF", "#FF0000"],
+    "orientation": "vertical",
+    "weights": [1, 2, 1]
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Canada_men%27s_national_soccer_team",
+  "members": [
+    {
+      "playerId": "dayne-st-clair",
+      "no": 1
+    },
+    {
+      "playerId": "alistair-johnston",
+      "no": 2
+    },
+    {
+      "playerId": "alfie-jones",
+      "no": 3
+    },
+    {
+      "playerId": "luc-de-fougerolles",
+      "no": 4
+    },
+    {
+      "playerId": "joel-waterman",
+      "no": 5
+    },
+    {
+      "playerId": "mathieu-choiniere",
+      "no": 6
+    },
+    {
+      "playerId": "stephen-eustaquio",
+      "no": 7
+    },
+    {
+      "playerId": "ismael-kone",
+      "no": 8
+    },
+    {
+      "playerId": "cyle-larin",
+      "no": 9
+    },
+    {
+      "playerId": "david",
+      "no": 10
+    },
+    {
+      "playerId": "liam-millar",
+      "no": 11
+    },
+    {
+      "playerId": "oluwaseyi",
+      "no": 12
+    },
+    {
+      "playerId": "derek-cornelius",
+      "no": 13
+    },
+    {
+      "playerId": "jacob-shaffelburg",
+      "no": 14
+    },
+    {
+      "playerId": "moise-bombito",
+      "no": 15
+    },
+    {
+      "playerId": "maxime-crepeau",
+      "no": 16
+    },
+    {
+      "playerId": "buchanan",
+      "no": 17
+    },
+    {
+      "playerId": "owen-goodman",
+      "no": 18
+    },
+    {
+      "playerId": "alphonso-davies",
+      "no": 19,
+      "captain": true
+    },
+    {
+      "playerId": "ali-ahmed",
+      "no": 20
+    },
+    {
+      "playerId": "jonathan-osorio",
+      "no": 21
+    },
+    {
+      "playerId": "richie-laryea",
+      "no": 22
+    },
+    {
+      "playerId": "niko-sigur",
+      "no": 23
+    },
+    {
+      "playerId": "promise-david",
+      "no": 24
+    },
+    {
+      "playerId": "n-saliba",
+      "no": 25
+    },
+    {
+      "playerId": "jayden-nelson",
+      "no": 26
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "pol",
+  "kind": "nation",
+  "name": "Poland",
+  "season": "2026",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#DC143C",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#DC143C"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Poland_national_football_team",
+  "members": [
+    {
+      "playerId": "kamil-grabara",
+      "no": 1
+    },
+    {
+      "playerId": "norbert-wojtuszek",
+      "no": 2
+    },
+    {
+      "playerId": "przemyslaw-wisniewski",
+      "no": 3
+    },
+    {
+      "playerId": "tomasz-kedziora",
+      "no": 4
+    },
+    {
+      "playerId": "jan-bednarek",
+      "no": 5
+    },
+    {
+      "playerId": "bartosz-slisz",
+      "no": 6
+    },
+    {
+      "playerId": "jakub-kaminski",
+      "no": 7
+    },
+    {
+      "playerId": "bartosz-kapustka",
+      "no": 8
+    },
+    {
+      "playerId": "lewandowski",
+      "no": 9,
+      "captain": true
+    },
+    {
+      "playerId": "zielinski",
+      "no": 10
+    },
+    {
+      "playerId": "karol-swiderski",
+      "no": 11
+    },
+    {
+      "playerId": "marcin-bulka",
+      "no": 12
+    },
+    {
+      "playerId": "mateusz-zukowski",
+      "no": 13
+    },
+    {
+      "playerId": "kiwior",
+      "no": 14
+    },
+    {
+      "playerId": "arkadiusz-pyrka",
+      "no": 15
+    },
+    {
+      "playerId": "jakub-piotrowski",
+      "no": 16
+    },
+    {
+      "playerId": "oskar-pietuszewski",
+      "no": 17
+    },
+    {
+      "playerId": "filip-rozga",
+      "no": 18
+    },
+    {
+      "playerId": "michal-skoras",
+      "no": 19
+    },
+    {
+      "playerId": "sebastian-szymanski",
+      "no": 20
+    },
+    {
+      "playerId": "nicola-zalewski",
+      "no": 21
+    },
+    {
+      "playerId": "mateusz-kochalski",
+      "no": 22
+    },
+    {
+      "playerId": "kacper-kozlowski",
+      "no": 23
+    },
+    {
+      "playerId": "karol-czubak",
+      "no": 24
+    },
+    {
+      "playerId": "kacper-potulski",
+      "no": 25
+    },
+    {
+      "playerId": "oskar-wojcik",
+      "no": 26
+    }
+  ]
+}

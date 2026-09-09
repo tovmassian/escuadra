@@ -1838,7 +1838,7 @@
   {
     "id": "tur",
     "kind": "nation",
-    "name": "Turkey",
+    "name": "Türkiye",
     "source": "https://en.wikipedia.org/wiki/Turkey_national_football_team",
     "identity": {
       "primaryColor": "#E30A17",
@@ -1857,7 +1857,7 @@
     "id": "aus",
     "kind": "nation",
     "name": "Australia",
-    "source": "https://en.wikipedia.org/wiki/Australia_national_soccer_team",
+    "source": "https://en.wikipedia.org/wiki/Australia_men's_national_soccer_team",
     "identity": {
       "primaryColor": "#00008B",
       "secondaryColor": "#FFFFFF",
@@ -1996,7 +1996,7 @@
     "id": "swe",
     "kind": "nation",
     "name": "Sweden",
-    "source": "https://en.wikipedia.org/wiki/Sweden_national_football_team",
+    "source": "https://en.wikipedia.org/wiki/Sweden_men's_national_football_team",
     "identity": {
       "primaryColor": "#006AA7",
       "secondaryColor": "#FECC02",
@@ -2157,7 +2157,7 @@
   {
     "id": "cze",
     "kind": "nation",
-    "name": "Czechia",
+    "name": "Czech Republic",
     "source": "https://en.wikipedia.org/wiki/Czech_Republic_national_football_team",
     "identity": {
       "primaryColor": "#D7141A",

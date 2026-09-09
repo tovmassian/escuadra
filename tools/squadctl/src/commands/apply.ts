@@ -20,7 +20,7 @@ import {
 import { assess, conflictCommand, describeConflict, type Conflict } from '../lib/assertions.ts';
 import { colors } from '../lib/colors.ts';
 import { validateRegistry, type TeamRegistry } from '../lib/registry.ts';
-import { EMPTY_DECISIONS, validateDecisions, type DecisionFile } from '../lib/decisions.ts';
+import { readDecisions, type DecisionFile } from '../lib/decisions.ts';
 import { readPlayers, writePlayers } from '../lib/players-file.ts';
 import { reconcileTeam } from '../lib/reconcile.ts';
 import { formatAndWrite } from '../lib/write-json.ts';
@@ -303,22 +303,13 @@ export default class Apply extends BaseCommand<RunReport> {
   }
 
   private loadDecisions(): DecisionFile {
-    const file = path.join(this.dataDir, 'decisions.json');
-    if (!existsSync(file)) return EMPTY_DECISIONS;
-    const parsed: unknown = JSON.parse(readFileSync(file, 'utf8'));
-    const problems = validateDecisions(parsed);
+    const { decisions, problems } = readDecisions(this.dataDir);
     if (problems.length > 0) {
       this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, {
         exit: EXIT.repo,
       });
     }
-    const loaded = parsed as DecisionFile;
-    return {
-      ...loaded,
-      aliases: loaded.aliases ?? [],
-      titleAliases: loaded.titleAliases ?? [],
-      notInSquad: loaded.notInSquad ?? [],
-    };
+    return decisions;
   }
 
   private loadRegistry(): TeamRegistry {

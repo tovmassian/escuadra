@@ -1,0 +1,129 @@
+{
+  "id": "svk",
+  "kind": "nation",
+  "name": "Slovakia",
+  "season": "2026",
+  "primaryColor": "#0B4EA2",
+  "secondaryColor": "#EE1C25",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#0B4EA2", "#EE1C25"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Slovakia_national_football_team",
+  "members": [
+    {
+      "playerId": "lubomir-belko",
+      "no": 1
+    },
+    {
+      "playerId": "peter-pekarik",
+      "no": 2
+    },
+    {
+      "playerId": "denis-vavro",
+      "no": 3
+    },
+    {
+      "playerId": "martin-valjent",
+      "no": 4
+    },
+    {
+      "playerId": "lubomir-satka",
+      "no": 5
+    },
+    {
+      "playerId": "peter-pokorny",
+      "no": 6
+    },
+    {
+      "playerId": "tomas-suslov",
+      "no": 7
+    },
+    {
+      "playerId": "ondrej-duda",
+      "no": 8
+    },
+    {
+      "playerId": "robert-bozenik",
+      "no": 9
+    },
+    {
+      "playerId": "laszlo-benes",
+      "no": 10
+    },
+    {
+      "playerId": "roland-galcik",
+      "no": 11
+    },
+    {
+      "playerId": "jakub-surovcik",
+      "no": 12
+    },
+    {
+      "playerId": "mario-sauer",
+      "no": 14
+    },
+    {
+      "playerId": "david-strelec",
+      "no": 15
+    },
+    {
+      "playerId": "adam-obert",
+      "no": 16
+    },
+    {
+      "playerId": "lukas-haraslin",
+      "no": 17
+    },
+    {
+      "playerId": "artur-gajdos",
+      "no": 18
+    },
+    {
+      "playerId": "david-krcik",
+      "no": 19
+    },
+    {
+      "playerId": "adrian-kapralik",
+      "no": 20
+    },
+    {
+      "playerId": "matus-bero",
+      "no": 21
+    },
+    {
+      "playerId": "peter-kovacik",
+      "no": 22
+    },
+    {
+      "playerId": "dominik-takac",
+      "no": 23
+    },
+    {
+      "playerId": "michal-fasko",
+      "no": 24
+    },
+    {
+      "playerId": "krisztian-bari",
+      "no": 25
+    },
+    {
+      "playerId": "hugo-pavek",
+      "no": 26
+    },
+    {
+      "playerId": "marek-rodak",
+      "no": null
+    },
+    {
+      "playerId": "roman-cerepkai",
+      "no": null
+    },
+    {
+      "playerId": "tomas-bobcek",
+      "no": null
+    }
+  ]
+}

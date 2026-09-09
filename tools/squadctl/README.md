@@ -162,6 +162,18 @@ Dropped headings are reported.
 Two requests per team, ~200 ms apart: the section list, then that section's
 raw wikitext. No per-player article is ever fetched.
 
+**Nations with no shirt numbers.** Seven articles — Brazil, Cameroon,
+Croatia, Hungary, Russia, Uruguay and Venezuela — publish their current squad
+as a call-up list with `no=` empty on every row, and Uruguay's is a 46-man
+preliminary list. They parse cleanly and would be written faithfully, but a
+squad with fewer than four numbered members is unplayable: `buildRound`
+(`lib/questionEngine.ts`) throws rather than build a level-1 prompt with no
+number to show. They are deliberately **not** applied — `data/teams.json`
+keeps their registry entries, so a sweep still fetches them, and Brazil keeps
+the numbered squad it already had. Check the numberless count in the report
+before applying a nation sweep, and hold these back again unless the picker
+has meanwhile learned to offer such a squad as Study-only.
+
 **Cache.** The default fetches fresh and writes `.cache/wikitext/`. The cache
 exists so a _parser_ change can be re-run at zero network cost, not so stale
 data is served by default. `--offline` re-parses from it and makes no requests
@@ -620,15 +632,18 @@ When the collision is **inside** the squad, the whole group is held exactly as
 stored rather than any of them being dropped. When it is across squads there is
 nothing to hold, so the row is omitted and reported as `omitted-row`.
 
-The same conflict kind also fires on a **title** collision, and there none of
-position/club/number is consulted: a bare `[[Otávio]]` is base-title
-equivalent to two different stored Otávio records, so picking one would be a
-coin flip and squadctl holds both instead. This is not `title-mismatch` —
-nothing here contradicts a name match, there simply are two candidates a
-title alone cannot separate — so the fix is the same as for a name collision:
-read `data/players.json`, work out which record the row means, and hand the
-answer back with `rename` (or `retitle`, if the article title itself is what
-needs correcting).
+The same conflict kind also fires on a **title** collision: a bare
+`[[Otávio]]` is base-title equivalent to two different stored Otávio records,
+and a title alone cannot separate them. There too the row's own position and
+club are tried first, in that order — Portugal links a bare `[[Vitinha]]`
+that relates to both `Vitinha (footballer, born February 2000)` and `...
+born March 2000)`, and exactly one of the two is the MF at Paris
+Saint-Germain the row describes. The conflict survives only when none of
+that narrows to one candidate. This is not `title-mismatch` — nothing here
+contradicts a name match, there simply are two candidates left — so the fix
+is the same as for a name collision: read `data/players.json`, work out which
+record the row means, and hand the answer back with `rename` (or `retitle`,
+if the article title itself is what needs correcting).
 
 **This one has no command.** Read `data/players.json`, work out which record
 the row means, and hand the answer back with `rename` — never edit the file

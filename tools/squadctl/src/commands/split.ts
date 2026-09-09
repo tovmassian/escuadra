@@ -1,13 +1,7 @@
-import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { Args } from '@oclif/core';
 import { BaseCommand } from '../base-command.ts';
-import {
-  EMPTY_DECISIONS,
-  addSplit,
-  validateDecisions,
-  type DecisionFile,
-} from '../lib/decisions.ts';
+import { addSplit, readDecisions } from '../lib/decisions.ts';
 import { formatAndWrite } from '../lib/write-json.ts';
 
 interface SplitReport {
@@ -36,14 +30,9 @@ export default class Split extends BaseCommand<SplitReport> {
     const { args } = await this.parse(Split);
     const file = path.join(this.dataDir, 'decisions.json');
 
-    let decisions: DecisionFile = EMPTY_DECISIONS;
-    if (existsSync(file)) {
-      const parsed: unknown = JSON.parse(readFileSync(file, 'utf8'));
-      const problems = validateDecisions(parsed);
-      if (problems.length > 0) {
-        this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
-      }
-      decisions = parsed as DecisionFile;
+    const { decisions, problems } = readDecisions(this.dataDir);
+    if (problems.length > 0) {
+      this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
     }
 
     const split = { team: args.team, departed: args.departed, arrived: args.arrived };

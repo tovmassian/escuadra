@@ -10,7 +10,7 @@
     "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-07",
+  "lastUpdated": "2026-09-09",
   "source": "https://en.wikipedia.org/wiki/Argentina_national_football_team",
   "members": [
     {
@@ -50,6 +50,10 @@
       "no": 9
     },
     {
+      "playerId": "messi",
+      "no": 10
+    },
+    {
       "playerId": "giovanni-lo-celso",
       "no": 11
     },
@@ -81,6 +85,10 @@
     {
       "playerId": "paz",
       "no": 18
+    },
+    {
+      "playerId": "otamendi",
+      "no": 19
     },
     {
       "playerId": "mac-allister",

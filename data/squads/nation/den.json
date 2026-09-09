@@ -1,0 +1,110 @@
+{
+  "id": "den",
+  "kind": "nation",
+  "name": "Denmark",
+  "season": "2026",
+  "primaryColor": "#C60C30",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#C60C30", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Denmark_national_football_team",
+  "members": [
+    {
+      "playerId": "andreas-jungdal",
+      "no": 1
+    },
+    {
+      "playerId": "joachim-andersen",
+      "no": 2
+    },
+    {
+      "playerId": "oliver-provstgaard",
+      "no": 3
+    },
+    {
+      "playerId": "lucas-hogsberg",
+      "no": 4
+    },
+    {
+      "playerId": "joakim-maehle",
+      "no": 5
+    },
+    {
+      "playerId": "christensen",
+      "no": 6
+    },
+    {
+      "playerId": "thomas-jorgensen",
+      "no": 7
+    },
+    {
+      "playerId": "adam-daghim",
+      "no": 8
+    },
+    {
+      "playerId": "rasmus-hojlund",
+      "no": 9
+    },
+    {
+      "playerId": "christian-eriksen",
+      "no": 10
+    },
+    {
+      "playerId": "william-osula",
+      "no": 11
+    },
+    {
+      "playerId": "victor-froholdt",
+      "no": 12
+    },
+    {
+      "playerId": "rasmus-kristensen",
+      "no": 13
+    },
+    {
+      "playerId": "jens-stage",
+      "no": 14
+    },
+    {
+      "playerId": "jacob-trenskow",
+      "no": 15
+    },
+    {
+      "playerId": "mads-hermansen",
+      "no": 16
+    },
+    {
+      "playerId": "patrick-dorgu",
+      "no": 17
+    },
+    {
+      "playerId": "alexander-bah",
+      "no": 18
+    },
+    {
+      "playerId": "kasper-hogh",
+      "no": 19
+    },
+    {
+      "playerId": "albert-gronbaek",
+      "no": 20
+    },
+    {
+      "playerId": "victor-bak-jensen",
+      "no": 21
+    },
+    {
+      "playerId": "filip-jorgensen",
+      "no": 22
+    },
+    {
+      "playerId": "pierreemile-hojbjerg",
+      "no": 23,
+      "captain": true
+    }
+  ]
+}

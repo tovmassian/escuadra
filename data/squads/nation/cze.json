@@ -1,0 +1,122 @@
+{
+  "id": "cze",
+  "kind": "nation",
+  "name": "Czech Republic",
+  "season": "2026",
+  "primaryColor": "#D7141A",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#D7141A"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Czech_Republic_national_football_team",
+  "members": [
+    {
+      "playerId": "matej-kovar",
+      "no": 1
+    },
+    {
+      "playerId": "david-zima",
+      "no": 2
+    },
+    {
+      "playerId": "tomas-holes",
+      "no": 3
+    },
+    {
+      "playerId": "robin-hranac",
+      "no": 4
+    },
+    {
+      "playerId": "vladimir-coufal",
+      "no": 5
+    },
+    {
+      "playerId": "stepan-chaloupek",
+      "no": 6
+    },
+    {
+      "playerId": "ladislav-krejci",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "vladimir-darida",
+      "no": 8
+    },
+    {
+      "playerId": "adam-hlozek",
+      "no": 9
+    },
+    {
+      "playerId": "patrik-schick",
+      "no": 10
+    },
+    {
+      "playerId": "jan-kuchta",
+      "no": 11
+    },
+    {
+      "playerId": "lukas-cerv",
+      "no": 12
+    },
+    {
+      "playerId": "mojmir-chytil",
+      "no": 13
+    },
+    {
+      "playerId": "david-jurasek",
+      "no": 14
+    },
+    {
+      "playerId": "pavel-sulc",
+      "no": 15
+    },
+    {
+      "playerId": "jindrich-stanek",
+      "no": 16
+    },
+    {
+      "playerId": "lukas-provod",
+      "no": 17
+    },
+    {
+      "playerId": "michal-sadilek",
+      "no": 18
+    },
+    {
+      "playerId": "tomas-chory",
+      "no": 19
+    },
+    {
+      "playerId": "jaroslav-zeleny",
+      "no": 20
+    },
+    {
+      "playerId": "david-doudera",
+      "no": 21
+    },
+    {
+      "playerId": "tomas-soucek",
+      "no": 22
+    },
+    {
+      "playerId": "lukas-hornicek",
+      "no": 23
+    },
+    {
+      "playerId": "alexandr-sojka",
+      "no": 24
+    },
+    {
+      "playerId": "hugo-sochurek",
+      "no": 25
+    },
+    {
+      "playerId": "denis-visinsky",
+      "no": 26
+    }
+  ]
+}

@@ -1,0 +1,123 @@
+{
+  "id": "por",
+  "kind": "nation",
+  "name": "Portugal",
+  "season": "2026",
+  "primaryColor": "#046A38",
+  "secondaryColor": "#DA020E",
+  "verified": true,
+  "marker": {
+    "bands": ["#046A38", "#DA020E"],
+    "orientation": "vertical",
+    "weights": [2, 3]
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Portugal_national_football_team",
+  "members": [
+    {
+      "playerId": "diogo-costa",
+      "no": 1
+    },
+    {
+      "playerId": "nelson-semedo",
+      "no": 2
+    },
+    {
+      "playerId": "ruben-dias",
+      "no": 3
+    },
+    {
+      "playerId": "tomas-araujo",
+      "no": 4
+    },
+    {
+      "playerId": "diogo-dalot",
+      "no": 5
+    },
+    {
+      "playerId": "matheus-nunes",
+      "no": 6
+    },
+    {
+      "playerId": "cristiano-ronaldo",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "bruno-fernandes",
+      "no": 8
+    },
+    {
+      "playerId": "goncalo-ramos",
+      "no": 9
+    },
+    {
+      "playerId": "bernardo-silva",
+      "no": 10
+    },
+    {
+      "playerId": "joao-felix",
+      "no": 11
+    },
+    {
+      "playerId": "jose-sa",
+      "no": 12
+    },
+    {
+      "playerId": "veiga",
+      "no": 13
+    },
+    {
+      "playerId": "goncalo-inacio",
+      "no": 14
+    },
+    {
+      "playerId": "neves",
+      "no": 15
+    },
+    {
+      "playerId": "francisco-trincao",
+      "no": 16
+    },
+    {
+      "playerId": "rafael-leao",
+      "no": 17
+    },
+    {
+      "playerId": "pedro-neto",
+      "no": 18
+    },
+    {
+      "playerId": "guedes",
+      "no": 19
+    },
+    {
+      "playerId": "cancelo",
+      "no": 20
+    },
+    {
+      "playerId": "ruben-neves",
+      "no": 21
+    },
+    {
+      "playerId": "rui-silva",
+      "no": 22
+    },
+    {
+      "playerId": "vitinha",
+      "no": 23
+    },
+    {
+      "playerId": "samu-costa",
+      "no": 24
+    },
+    {
+      "playerId": "mendes",
+      "no": 25
+    },
+    {
+      "playerId": "francisco-conceicao",
+      "no": 26
+    }
+  ]
+}

@@ -206,6 +206,29 @@ describe('reconcileTeam', () => {
       expect(plan.squad.members).toEqual([{ playerId: 'grimaldo', no: 3 }]);
     });
 
+    // Brazil, live: `Mauro Júnior` came first in the section and `Vinícius
+    // Júnior` nineteen rows later. "júnior" is a shared last token, so the
+    // loose rename heuristic reached the stored `vinicius` slot before the row
+    // that matches it exactly ever ran — and the real Vinícius Júnior then
+    // created a duplicate record with the birth date dropped.
+    it('never targets a stored record another row in the same section matches', () => {
+      const plan = reconcileTeam({
+        envelope: envelope(
+          [row({ name: 'Mauro Júnior', no: 6 }), row({ name: 'Vinícius Júnior', no: 7 })],
+          { id: 'bra', kind: 'nation' as const, league: undefined },
+        ),
+        storedSquad: squad([{ playerId: 'vinicius', no: 7 }]),
+        players: [player({ id: 'vinicius', name: 'Vinícius Júnior', birth: '2000-07-12' })],
+      });
+      expect(plan.possibleRenames).toEqual([]);
+      expect(plan.newPlayers.map((p) => p.id)).toEqual(['mauro-junior']);
+      expect(plan.squad.members).toEqual([
+        { playerId: 'mauro-junior', no: 6 },
+        { playerId: 'vinicius', no: 7 },
+      ]);
+      expect(plan.departed).toEqual([]);
+    });
+
     it('writes the split once a person has confirmed they are two people', () => {
       const plan = reconcileTeam({
         ...base,
@@ -214,6 +237,78 @@ describe('reconcileTeam', () => {
       expect(plan.possibleRenames).toEqual([]);
       expect(plan.newPlayers.map((p) => p.id)).toEqual(['alex-grimaldo']);
       expect(plan.departed.map((d) => d.id)).toEqual(['grimaldo']);
+    });
+  });
+
+  // Portugal, live: the article links a bare [[Vitinha]], base-title
+  // equivalent to two real people whose articles both disambiguate on a birth
+  // month. Holding both left Portugal a player short and permanently
+  // unverified, with no command able to resolve it — but the row itself says
+  // which one it means.
+  describe('a bare title equivalent to two disambiguated records', () => {
+    const candidates = [
+      player({
+        id: 'vitinha',
+        name: 'Vitinha',
+        position: 'MF',
+        club: 'Paris Saint-Germain',
+        nationality: 'Portugal',
+        wikiTitle: 'Vitinha (footballer, born February 2000)',
+      }),
+      player({
+        id: 'vitinha-2',
+        name: 'Vitinha',
+        position: 'FW',
+        club: 'Genoa',
+        nationality: 'Portugal',
+        wikiTitle: 'Vitinha (footballer, born March 2000)',
+      }),
+    ];
+    const porto = { id: 'por', kind: 'nation' as const, league: undefined };
+
+    it('resolves on the data the row already carries', () => {
+      const plan = reconcileTeam({
+        envelope: envelope(
+          [
+            row({
+              name: 'Vitinha',
+              title: 'Vitinha',
+              no: 16,
+              position: 'MF',
+              club: 'Paris Saint-Germain',
+              nationality: 'Portugal',
+            }),
+          ],
+          porto,
+        ),
+        storedSquad: null,
+        players: candidates,
+      });
+      expect(plan.ambiguous).toEqual([]);
+      expect(plan.omitted).toEqual([]);
+      expect(plan.squad.members).toEqual([{ playerId: 'vitinha', no: 16 }]);
+    });
+
+    it('still holds both when nothing tells them apart', () => {
+      const plan = reconcileTeam({
+        envelope: envelope(
+          [
+            row({
+              name: 'Vitinha',
+              title: 'Vitinha',
+              no: 16,
+              position: 'GK',
+              club: 'Benfica',
+              nationality: 'Portugal',
+            }),
+          ],
+          porto,
+        ),
+        storedSquad: null,
+        players: candidates,
+      });
+      expect(plan.ambiguous.map((a) => a.candidateIds)).toEqual([['vitinha', 'vitinha-2']]);
+      expect(plan.squad.members).toEqual([]);
     });
   });
 

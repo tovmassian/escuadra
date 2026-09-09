@@ -1,0 +1,122 @@
+{
+  "id": "usa",
+  "kind": "nation",
+  "name": "United States",
+  "season": "2026",
+  "primaryColor": "#B31942",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#B31942", "#FFFFFF"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/United_States_men%27s_national_soccer_team",
+  "members": [
+    {
+      "playerId": "matt-turner",
+      "no": 1
+    },
+    {
+      "playerId": "sergino-dest",
+      "no": 2
+    },
+    {
+      "playerId": "chris-richards",
+      "no": 3
+    },
+    {
+      "playerId": "tyler-adams",
+      "no": 4
+    },
+    {
+      "playerId": "antonee-robinson",
+      "no": 5
+    },
+    {
+      "playerId": "auston-trusty",
+      "no": 6
+    },
+    {
+      "playerId": "giovanni-reyna",
+      "no": 7
+    },
+    {
+      "playerId": "weston-mckennie",
+      "no": 8
+    },
+    {
+      "playerId": "ricardo-pepi",
+      "no": 9
+    },
+    {
+      "playerId": "christian-pulisic",
+      "no": 10
+    },
+    {
+      "playerId": "brenden-aaronson",
+      "no": 11
+    },
+    {
+      "playerId": "miles-robinson",
+      "no": 12
+    },
+    {
+      "playerId": "tim-ream",
+      "no": 13,
+      "captain": true
+    },
+    {
+      "playerId": "sebastian-berhalter",
+      "no": 14
+    },
+    {
+      "playerId": "cristian-roldan",
+      "no": 15
+    },
+    {
+      "playerId": "freeman",
+      "no": 16
+    },
+    {
+      "playerId": "malik-tillman",
+      "no": 17
+    },
+    {
+      "playerId": "max-arfsten",
+      "no": 18
+    },
+    {
+      "playerId": "haji-wright",
+      "no": 19
+    },
+    {
+      "playerId": "folarin-balogun",
+      "no": 20
+    },
+    {
+      "playerId": "timothy-weah",
+      "no": 21
+    },
+    {
+      "playerId": "mark-mckenzie",
+      "no": 22
+    },
+    {
+      "playerId": "joe-scally",
+      "no": 23
+    },
+    {
+      "playerId": "matt-freese",
+      "no": 24
+    },
+    {
+      "playerId": "chris-brady",
+      "no": 25
+    },
+    {
+      "playerId": "alejandro-zendejas",
+      "no": 26
+    }
+  ]
+}

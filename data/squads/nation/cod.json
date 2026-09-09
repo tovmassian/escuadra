@@ -1,0 +1,126 @@
+{
+  "id": "cod",
+  "kind": "nation",
+  "name": "DR Congo",
+  "season": "2026",
+  "primaryColor": "#007FFF",
+  "secondaryColor": "#F7D618",
+  "verified": true,
+  "marker": {
+    "bands": ["#007FFF"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#F7D618"
+    }
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/DR_Congo_national_football_team",
+  "members": [
+    {
+      "playerId": "lionel-mpasi",
+      "no": 1
+    },
+    {
+      "playerId": "aaron-wanbissaka",
+      "no": 2
+    },
+    {
+      "playerId": "steve-kapuadi",
+      "no": 3
+    },
+    {
+      "playerId": "axel-tuanzebe",
+      "no": 4
+    },
+    {
+      "playerId": "dylan-batubinsika",
+      "no": 5
+    },
+    {
+      "playerId": "ngalayel-mukau",
+      "no": 6
+    },
+    {
+      "playerId": "nathanael-mbuku",
+      "no": 7
+    },
+    {
+      "playerId": "samuel-moutoussamy",
+      "no": 8
+    },
+    {
+      "playerId": "brian-cipenga",
+      "no": 9
+    },
+    {
+      "playerId": "theo-bongonda",
+      "no": 10
+    },
+    {
+      "playerId": "gael-kakuta",
+      "no": 11
+    },
+    {
+      "playerId": "joris-kayembe",
+      "no": 12
+    },
+    {
+      "playerId": "meschak-elia",
+      "no": 13
+    },
+    {
+      "playerId": "noah-sadiki",
+      "no": 14
+    },
+    {
+      "playerId": "aaron-tshibola",
+      "no": 15
+    },
+    {
+      "playerId": "timothy-fayulu",
+      "no": 16
+    },
+    {
+      "playerId": "cedric-bakambu",
+      "no": 17
+    },
+    {
+      "playerId": "charles-pickel",
+      "no": 18
+    },
+    {
+      "playerId": "fiston-mayele",
+      "no": 19
+    },
+    {
+      "playerId": "yoane-wissa",
+      "no": 20
+    },
+    {
+      "playerId": "matthieu-epolo",
+      "no": 21
+    },
+    {
+      "playerId": "chancel-mbemba",
+      "no": 22,
+      "captain": true
+    },
+    {
+      "playerId": "simon-banza",
+      "no": 23
+    },
+    {
+      "playerId": "gedeon-kalulu",
+      "no": 24
+    },
+    {
+      "playerId": "edo-kayembe",
+      "no": 25
+    },
+    {
+      "playerId": "arthur-masuaku",
+      "no": 26
+    }
+  ]
+}

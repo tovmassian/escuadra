@@ -1,0 +1,122 @@
+{
+  "id": "eng",
+  "kind": "nation",
+  "name": "England",
+  "season": "2026",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#CE1124",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#CE1124"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/England_national_football_team",
+  "members": [
+    {
+      "playerId": "jordan-pickford",
+      "no": 1
+    },
+    {
+      "playerId": "konsa",
+      "no": 2
+    },
+    {
+      "playerId": "nico-oreilly",
+      "no": 3
+    },
+    {
+      "playerId": "rice",
+      "no": 4
+    },
+    {
+      "playerId": "stones",
+      "no": 5
+    },
+    {
+      "playerId": "marc-guehi",
+      "no": 6
+    },
+    {
+      "playerId": "saka",
+      "no": 7
+    },
+    {
+      "playerId": "elliot-anderson",
+      "no": 8
+    },
+    {
+      "playerId": "harry-kane",
+      "no": 9,
+      "captain": true
+    },
+    {
+      "playerId": "bellingham",
+      "no": 10
+    },
+    {
+      "playerId": "rashford",
+      "no": 11
+    },
+    {
+      "playerId": "trevoh-chalobah",
+      "no": 12
+    },
+    {
+      "playerId": "dean-henderson",
+      "no": 13
+    },
+    {
+      "playerId": "jordan-henderson",
+      "no": 14
+    },
+    {
+      "playerId": "dan-burn",
+      "no": 15
+    },
+    {
+      "playerId": "kobbie-mainoo",
+      "no": 16
+    },
+    {
+      "playerId": "morgan-rogers",
+      "no": 17
+    },
+    {
+      "playerId": "gordon",
+      "no": 18
+    },
+    {
+      "playerId": "ollie-watkins",
+      "no": 19
+    },
+    {
+      "playerId": "madueke",
+      "no": 20
+    },
+    {
+      "playerId": "eze",
+      "no": 21
+    },
+    {
+      "playerId": "ivan-toney",
+      "no": 22
+    },
+    {
+      "playerId": "james-trafford",
+      "no": 23
+    },
+    {
+      "playerId": "reece-james",
+      "no": 24
+    },
+    {
+      "playerId": "spence",
+      "no": 25
+    },
+    {
+      "playerId": "jarell-quansah",
+      "no": 26
+    }
+  ]
+}

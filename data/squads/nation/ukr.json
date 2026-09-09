@@ -1,0 +1,118 @@
+{
+  "id": "ukr",
+  "kind": "nation",
+  "name": "Ukraine",
+  "season": "2026",
+  "primaryColor": "#0057B7",
+  "secondaryColor": "#FFDD00",
+  "verified": true,
+  "marker": {
+    "bands": ["#0057B7", "#FFDD00"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Ukraine_national_football_team",
+  "members": [
+    {
+      "playerId": "heorhiy-yermakov",
+      "no": 1
+    },
+    {
+      "playerId": "eduard-sarapiy",
+      "no": 2
+    },
+    {
+      "playerId": "taras-mykhavko",
+      "no": 3
+    },
+    {
+      "playerId": "oleksandr-romanchuk",
+      "no": 4
+    },
+    {
+      "playerId": "valeriy-bondar",
+      "no": 5
+    },
+    {
+      "playerId": "volodymyr-brazhko",
+      "no": 6
+    },
+    {
+      "playerId": "andriy-yarmolenko",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "ruslan-malinovskyi",
+      "no": 8
+    },
+    {
+      "playerId": "roman-yaremchuk",
+      "no": 9
+    },
+    {
+      "playerId": "mykola-shaparenko",
+      "no": 10
+    },
+    {
+      "playerId": "artem-dovbyk",
+      "no": 11
+    },
+    {
+      "playerId": "anatoliy-trubin",
+      "no": 12
+    },
+    {
+      "playerId": "zabarnyi",
+      "no": 13
+    },
+    {
+      "playerId": "yehor-nazaryna",
+      "no": 14
+    },
+    {
+      "playerId": "viktor-tsyhankov",
+      "no": 15
+    },
+    {
+      "playerId": "vitalii-mykolenko",
+      "no": 16
+    },
+    {
+      "playerId": "heorhiy-sudakov",
+      "no": 17
+    },
+    {
+      "playerId": "oleh-ocheretko",
+      "no": 18
+    },
+    {
+      "playerId": "danylo-ihnatenko",
+      "no": 19
+    },
+    {
+      "playerId": "oleksandr-nazarenko",
+      "no": 20
+    },
+    {
+      "playerId": "matviy-ponomarenko",
+      "no": 21
+    },
+    {
+      "playerId": "mykola-matviyenko",
+      "no": 22
+    },
+    {
+      "playerId": "ruslan-neshcheret",
+      "no": 23
+    },
+    {
+      "playerId": "artem-bondarenko",
+      "no": 24
+    },
+    {
+      "playerId": "hennadiy-synchuk",
+      "no": 25
+    }
+  ]
+}

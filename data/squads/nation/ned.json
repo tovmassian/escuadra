@@ -1,0 +1,122 @@
+{
+  "id": "ned",
+  "kind": "nation",
+  "name": "Netherlands",
+  "season": "2026",
+  "primaryColor": "#AE1C28",
+  "secondaryColor": "#21468B",
+  "verified": true,
+  "marker": {
+    "bands": ["#AE1C28", "#FFFFFF", "#21468B"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Netherlands_national_football_team",
+  "members": [
+    {
+      "playerId": "bart-verbruggen",
+      "no": 1
+    },
+    {
+      "playerId": "lutsharel-geertruida",
+      "no": 2
+    },
+    {
+      "playerId": "marten-de-roon",
+      "no": 3
+    },
+    {
+      "playerId": "virgil-van-dijk",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "nathan-ake",
+      "no": 5
+    },
+    {
+      "playerId": "jan-paul-van-hecke",
+      "no": 6
+    },
+    {
+      "playerId": "justin-kluivert",
+      "no": 7
+    },
+    {
+      "playerId": "ryan-gravenberch",
+      "no": 8
+    },
+    {
+      "playerId": "wout-weghorst",
+      "no": 9
+    },
+    {
+      "playerId": "memphis-depay",
+      "no": 10
+    },
+    {
+      "playerId": "cody-gakpo",
+      "no": 11
+    },
+    {
+      "playerId": "mats-wieffer",
+      "no": 12
+    },
+    {
+      "playerId": "robin-roefs",
+      "no": 13
+    },
+    {
+      "playerId": "tijjani-reijnders",
+      "no": 14
+    },
+    {
+      "playerId": "micky-van-de-ven",
+      "no": 15
+    },
+    {
+      "playerId": "guus-til",
+      "no": 16
+    },
+    {
+      "playerId": "noa-lang",
+      "no": 17
+    },
+    {
+      "playerId": "donyell-malen",
+      "no": 18
+    },
+    {
+      "playerId": "brian-brobbey",
+      "no": 19
+    },
+    {
+      "playerId": "teun-koopmeiners",
+      "no": 20
+    },
+    {
+      "playerId": "de-jong",
+      "no": 21
+    },
+    {
+      "playerId": "dumfries",
+      "no": 22
+    },
+    {
+      "playerId": "mark-flekken",
+      "no": 23
+    },
+    {
+      "playerId": "crysencio-summerville",
+      "no": 24
+    },
+    {
+      "playerId": "jorrel-hato",
+      "no": 25
+    },
+    {
+      "playerId": "quinten-timber",
+      "no": 26
+    }
+  ]
+}

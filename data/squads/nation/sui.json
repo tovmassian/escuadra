@@ -1,0 +1,122 @@
+{
+  "id": "sui",
+  "kind": "nation",
+  "name": "Switzerland",
+  "season": "2026",
+  "primaryColor": "#FF0000",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FF0000", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Switzerland_national_football_team",
+  "members": [
+    {
+      "playerId": "gregor-kobel",
+      "no": 1
+    },
+    {
+      "playerId": "miro-muheim",
+      "no": 2
+    },
+    {
+      "playerId": "silvan-widmer",
+      "no": 3
+    },
+    {
+      "playerId": "nico-elvedi",
+      "no": 4
+    },
+    {
+      "playerId": "akanji",
+      "no": 5
+    },
+    {
+      "playerId": "denis-zakaria",
+      "no": 6
+    },
+    {
+      "playerId": "breel-embolo",
+      "no": 7
+    },
+    {
+      "playerId": "remo-freuler",
+      "no": 8
+    },
+    {
+      "playerId": "johan-manzambi",
+      "no": 9
+    },
+    {
+      "playerId": "granit-xhaka",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "dan-ndoye",
+      "no": 11
+    },
+    {
+      "playerId": "yvon-mvogo",
+      "no": 12
+    },
+    {
+      "playerId": "ricardo-rodriguez",
+      "no": 13
+    },
+    {
+      "playerId": "ardon-jashari",
+      "no": 14
+    },
+    {
+      "playerId": "djibril-sow",
+      "no": 15
+    },
+    {
+      "playerId": "christian-fassnacht",
+      "no": 16
+    },
+    {
+      "playerId": "ruben-vargas",
+      "no": 17
+    },
+    {
+      "playerId": "eray-comert",
+      "no": 18
+    },
+    {
+      "playerId": "noah-okafor",
+      "no": 19
+    },
+    {
+      "playerId": "michel-aebischer",
+      "no": 20
+    },
+    {
+      "playerId": "marvin-keller",
+      "no": 21
+    },
+    {
+      "playerId": "fabian-rieder",
+      "no": 22
+    },
+    {
+      "playerId": "zeki-amdouni",
+      "no": 23
+    },
+    {
+      "playerId": "aurele-amenda",
+      "no": 24
+    },
+    {
+      "playerId": "luca-jaquez",
+      "no": 25
+    },
+    {
+      "playerId": "cedric-itten",
+      "no": 26
+    }
+  ]
+}

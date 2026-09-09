@@ -56,6 +56,7 @@ export type FlagCode =
   | 'HUN'
   | 'IDN'
   | 'IRL'
+  | 'IRN'
   | 'ISL'
   | 'ISR'
   | 'ITA'
@@ -82,6 +83,7 @@ export type FlagCode =
   | 'NIR'
   | 'NOR'
   | 'NZL'
+  | 'PAN'
   | 'PAR'
   | 'PER'
   | 'POL'
@@ -164,6 +166,7 @@ export const FLAG_SOURCES: Record<FlagCode, ImageSourcePropType> = {
   HUN: require('./HUN.png') as ImageSourcePropType,
   IDN: require('./IDN.png') as ImageSourcePropType,
   IRL: require('./IRL.png') as ImageSourcePropType,
+  IRN: require('./IRN.png') as ImageSourcePropType,
   ISL: require('./ISL.png') as ImageSourcePropType,
   ISR: require('./ISR.png') as ImageSourcePropType,
   ITA: require('./ITA.png') as ImageSourcePropType,
@@ -190,6 +193,7 @@ export const FLAG_SOURCES: Record<FlagCode, ImageSourcePropType> = {
   NIR: require('./NIR.png') as ImageSourcePropType,
   NOR: require('./NOR.png') as ImageSourcePropType,
   NZL: require('./NZL.png') as ImageSourcePropType,
+  PAN: require('./PAN.png') as ImageSourcePropType,
   PAR: require('./PAR.png') as ImageSourcePropType,
   PER: require('./PER.png') as ImageSourcePropType,
   POL: require('./POL.png') as ImageSourcePropType,

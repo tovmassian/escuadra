@@ -1,14 +1,7 @@
-import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { Args, Flags } from '@oclif/core';
 import { BaseCommand } from '../base-command.ts';
-import {
-  EMPTY_DECISIONS,
-  addAlias,
-  addTitleAlias,
-  validateDecisions,
-  type DecisionFile,
-} from '../lib/decisions.ts';
+import { addAlias, addTitleAlias, readDecisions } from '../lib/decisions.ts';
 import { readPlayers } from '../lib/players-file.ts';
 import { formatAndWrite } from '../lib/write-json.ts';
 import { titlesEquivalent } from '../../../../scripts/roster-envelope.ts';
@@ -54,20 +47,9 @@ export default class Alias extends BaseCommand<AliasReport> {
     }
 
     const file = path.join(this.dataDir, 'decisions.json');
-    let decisions: DecisionFile = EMPTY_DECISIONS;
-    if (existsSync(file)) {
-      const parsed: unknown = JSON.parse(readFileSync(file, 'utf8'));
-      const problems = validateDecisions(parsed);
-      if (problems.length > 0) {
-        this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
-      }
-      const loaded = parsed as DecisionFile;
-      // Older files predate aliases and titleAliases and carry only splits.
-      decisions = {
-        splits: loaded.splits,
-        aliases: loaded.aliases ?? [],
-        titleAliases: loaded.titleAliases ?? [],
-      };
+    const { decisions, problems } = readDecisions(this.dataDir);
+    if (problems.length > 0) {
+      this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
     }
 
     if (flags.title !== undefined) {

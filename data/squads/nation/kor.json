@@ -1,0 +1,126 @@
+{
+  "id": "kor",
+  "kind": "nation",
+  "name": "South Korea",
+  "season": "2026",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#CD2E3A",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#CD2E3A"
+    }
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/South_Korea_national_football_team",
+  "members": [
+    {
+      "playerId": "kim-seunggyu",
+      "no": 1
+    },
+    {
+      "playerId": "lee-hanbeom",
+      "no": 2
+    },
+    {
+      "playerId": "lee-gihyuk",
+      "no": 3
+    },
+    {
+      "playerId": "kim-minjae",
+      "no": 4
+    },
+    {
+      "playerId": "kim-taehyeon",
+      "no": 5
+    },
+    {
+      "playerId": "hwang-inbeom",
+      "no": 6
+    },
+    {
+      "playerId": "son-heungmin",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "paik-seungho",
+      "no": 8
+    },
+    {
+      "playerId": "cho-guesung",
+      "no": 9
+    },
+    {
+      "playerId": "lee-jaesung",
+      "no": 10
+    },
+    {
+      "playerId": "hwang-heechan",
+      "no": 11
+    },
+    {
+      "playerId": "song-bumkeun",
+      "no": 12
+    },
+    {
+      "playerId": "lee-taeseok",
+      "no": 13
+    },
+    {
+      "playerId": "cho-wije",
+      "no": 14
+    },
+    {
+      "playerId": "kim-moonhwan",
+      "no": 15
+    },
+    {
+      "playerId": "park-jinseob",
+      "no": 16
+    },
+    {
+      "playerId": "bae-junho",
+      "no": 17
+    },
+    {
+      "playerId": "oh-hyeongyu",
+      "no": 18
+    },
+    {
+      "playerId": "lee-kang-in",
+      "no": 19
+    },
+    {
+      "playerId": "yang-hyunjun",
+      "no": 20
+    },
+    {
+      "playerId": "jo-hyeonwoo",
+      "no": 21
+    },
+    {
+      "playerId": "seol-youngwoo",
+      "no": 22
+    },
+    {
+      "playerId": "jens-castrop",
+      "no": 23
+    },
+    {
+      "playerId": "kim-jingyu",
+      "no": 24
+    },
+    {
+      "playerId": "eom-jisung",
+      "no": 25
+    },
+    {
+      "playerId": "lee-donggyeong",
+      "no": 26
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "swe",
+  "kind": "nation",
+  "name": "Sweden",
+  "season": "2026",
+  "primaryColor": "#006AA7",
+  "secondaryColor": "#FECC02",
+  "verified": true,
+  "marker": {
+    "bands": ["#006AA7", "#FECC02"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Sweden_men's_national_football_team",
+  "members": [
+    {
+      "playerId": "jacob-widell-zetterstrom",
+      "no": 1
+    },
+    {
+      "playerId": "gustaf-lagerbielke",
+      "no": 2
+    },
+    {
+      "playerId": "victor-lindelof",
+      "no": 3,
+      "captain": true
+    },
+    {
+      "playerId": "isak-hien",
+      "no": 4
+    },
+    {
+      "playerId": "gabriel-gudmundsson",
+      "no": 5
+    },
+    {
+      "playerId": "herman-johansson",
+      "no": 6
+    },
+    {
+      "playerId": "lucas-bergvall",
+      "no": 7
+    },
+    {
+      "playerId": "daniel-svensson",
+      "no": 8
+    },
+    {
+      "playerId": "alexander-isak",
+      "no": 9
+    },
+    {
+      "playerId": "benjamin-nygren",
+      "no": 10
+    },
+    {
+      "playerId": "anthony-elanga",
+      "no": 11
+    },
+    {
+      "playerId": "viktor-johansson",
+      "no": 12
+    },
+    {
+      "playerId": "ken-sema",
+      "no": 13
+    },
+    {
+      "playerId": "hjalmar-ekdal",
+      "no": 14
+    },
+    {
+      "playerId": "starfelt",
+      "no": 15
+    },
+    {
+      "playerId": "jesper-karlstrom",
+      "no": 16
+    },
+    {
+      "playerId": "gyokeres",
+      "no": 17
+    },
+    {
+      "playerId": "yasin-ayari",
+      "no": 18
+    },
+    {
+      "playerId": "mattias-svanberg",
+      "no": 19
+    },
+    {
+      "playerId": "eric-smith",
+      "no": 20
+    },
+    {
+      "playerId": "alexander-bernhardsson",
+      "no": 21
+    },
+    {
+      "playerId": "besfort-zeneli",
+      "no": 22
+    },
+    {
+      "playerId": "kristoffer-nordfeldt",
+      "no": 23
+    },
+    {
+      "playerId": "elliot-stroud",
+      "no": 24
+    },
+    {
+      "playerId": "gustaf-nilsson",
+      "no": 25
+    },
+    {
+      "playerId": "taha-ali",
+      "no": 26
+    }
+  ]
+}

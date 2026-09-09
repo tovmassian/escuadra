@@ -1,0 +1,123 @@
+{
+  "id": "ecu",
+  "kind": "nation",
+  "name": "Ecuador",
+  "season": "2026",
+  "primaryColor": "#FFDD00",
+  "secondaryColor": "#ED1C24",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFDD00", "#034EA2", "#ED1C24"],
+    "orientation": "horizontal",
+    "weights": [2, 1, 1]
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Ecuador_national_football_team",
+  "members": [
+    {
+      "playerId": "hernan-galindez",
+      "no": 1
+    },
+    {
+      "playerId": "felix-torres",
+      "no": 2
+    },
+    {
+      "playerId": "hincapie",
+      "no": 3
+    },
+    {
+      "playerId": "joel-ordonez",
+      "no": 4
+    },
+    {
+      "playerId": "jordy-alcivar",
+      "no": 5
+    },
+    {
+      "playerId": "pacho",
+      "no": 6
+    },
+    {
+      "playerId": "pervis-estupinan",
+      "no": 7
+    },
+    {
+      "playerId": "anthony-valencia",
+      "no": 8
+    },
+    {
+      "playerId": "john-yeboah",
+      "no": 9
+    },
+    {
+      "playerId": "kendry-paez",
+      "no": 10
+    },
+    {
+      "playerId": "kevin-rodriguez",
+      "no": 11
+    },
+    {
+      "playerId": "moises-ramirez",
+      "no": 12
+    },
+    {
+      "playerId": "enner-valencia",
+      "no": 13,
+      "captain": true
+    },
+    {
+      "playerId": "alan-minda",
+      "no": 14
+    },
+    {
+      "playerId": "pedro-vite",
+      "no": 15
+    },
+    {
+      "playerId": "jordy-caicedo",
+      "no": 16
+    },
+    {
+      "playerId": "angelo-preciado",
+      "no": 17
+    },
+    {
+      "playerId": "denil-castillo",
+      "no": 18
+    },
+    {
+      "playerId": "gonzalo-plata",
+      "no": 19
+    },
+    {
+      "playerId": "nilson-angulo",
+      "no": 20
+    },
+    {
+      "playerId": "alan-franco",
+      "no": 21
+    },
+    {
+      "playerId": "gonzalo-valle",
+      "no": 22
+    },
+    {
+      "playerId": "moises-caicedo",
+      "no": 23
+    },
+    {
+      "playerId": "jeremy-arevalo",
+      "no": 24
+    },
+    {
+      "playerId": "jackson-porozo",
+      "no": 25
+    },
+    {
+      "playerId": "yaimar-medina",
+      "no": 26
+    }
+  ]
+}

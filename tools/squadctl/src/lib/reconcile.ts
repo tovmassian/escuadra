@@ -325,6 +325,28 @@ export function reconcileTeam({
     return null;
   };
 
+  /** `separate`, for candidates that are not stored members of this squad and
+   *  so carry no shirt number to compare — the bare-title collision case.
+   *  Portugal links a bare `[[Vitinha]]`, which is base-title equivalent to
+   *  both `Vitinha (footballer, born February 2000)` and `... born March
+   *  2000)`. That is only a coin flip when nothing else tells them apart: the
+   *  row says MF at Paris Saint-Germain, and exactly one of the two is. Same
+   *  discriminators in the same order as `separate`, and the same refusal to
+   *  guess when none of them narrows to one. */
+  const separatePlayers = (
+    group: Player[],
+    row: (typeof envelope.members)[number],
+  ): Player | null => {
+    for (const discriminator of [
+      (p: Player) => p.position === row.position,
+      (p: Player) => p.club === row.club,
+    ]) {
+      const narrowed = group.filter(discriminator);
+      if (narrowed.length === 1) return narrowed[0] ?? null;
+    }
+    return null;
+  };
+
   const storedList = storedMembers.filter((m) => byId.has(m.playerId));
   const storedIds = new Set(storedMembers.map((m) => m.playerId));
   const heldGroups = new Set<string>();
@@ -359,6 +381,33 @@ export function reconcileTeam({
     }
     return true;
   });
+
+  /** Stored members that some row in THIS section matches outright — by
+   *  article title, or by a name the record already answers to.
+   *
+   *  Step 5's rename heuristic is deliberately loose: a shared surname is
+   *  enough. That is right for the case it exists for, and wrong when it
+   *  reaches a record a *later* row matches exactly, because rows are walked
+   *  in source order and step 5 consumes its target. Brazil listed both
+   *  `Mauro Júnior` (row 10) and `Vinícius Júnior` (row 19); "júnior" is a
+   *  shared last token, so the earlier row took the stored `vinicius` slot
+   *  and the real Vinícius Júnior went on to create a duplicate record — the
+   *  exact unrecoverable outcome the hold in step 5 exists to prevent.
+   *
+   *  Excluding these leaves the genuine rename untouched: when a stored name
+   *  really has been rewritten upstream, no row matches it. */
+  const claimedByAnotherRow = new Set<string>();
+  for (const member of storedList) {
+    const candidate = byId.get(member.playerId);
+    if (candidate === undefined) continue;
+    const claimed = rows.some((row) => {
+      const verdict = titleVerdict(candidate, row.title);
+      if (verdict !== 'unknown') return verdict === 'match';
+      const rowKey = normalizeName(row.name);
+      return namesOf(candidate).some((name) => normalizeName(name) === rowKey);
+    });
+    if (claimed) claimedByAnotherRow.add(member.playerId);
+  }
 
   for (const row of rows) {
     const key = normalizeName(row.name);
@@ -414,15 +463,20 @@ export function reconcileTeam({
         player = globallyTitled[0];
         if (player) consumed.add(player.id);
       } else if (globallyTitled.length > 1) {
-        ambiguous.push({
-          name: row.name,
-          candidateIds: globallyTitled.map((c) => c.id),
-        });
-        omitted.push({
-          name: row.name,
-          reason: `ambiguous by title against ${globallyTitled.map((c) => c.id).join(', ')}`,
-        });
-        continue;
+        const resolved = separatePlayers(globallyTitled, row);
+        if (resolved === null) {
+          ambiguous.push({
+            name: row.name,
+            candidateIds: globallyTitled.map((c) => c.id),
+          });
+          omitted.push({
+            name: row.name,
+            reason: `ambiguous by title against ${globallyTitled.map((c) => c.id).join(', ')}`,
+          });
+          continue;
+        }
+        player = resolved;
+        consumed.add(player.id);
       }
     }
 
@@ -566,7 +620,9 @@ export function reconcileTeam({
     //    players.json, and no later command can undo it, so this HOLDS.
     const renamed = storedList.find(
       (m) =>
-        !consumed.has(m.playerId) && looksLikeRename(byId.get(m.playerId)?.name ?? '', row.name),
+        !consumed.has(m.playerId) &&
+        !claimedByAnotherRow.has(m.playerId) &&
+        looksLikeRename(byId.get(m.playerId)?.name ?? '', row.name),
     );
     if (renamed !== undefined && !splitAccepted(renamed.playerId, row.name)) {
       const storedName = byId.get(renamed.playerId)?.name ?? renamed.playerId;

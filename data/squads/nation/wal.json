@@ -1,0 +1,126 @@
+{
+  "id": "wal",
+  "kind": "nation",
+  "name": "Wales",
+  "season": "2026",
+  "primaryColor": "#00B140",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#00B140"],
+    "orientation": "horizontal",
+    "overlay": {
+      "shape": "disc",
+      "color": "#C8102E"
+    }
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Wales_national_football_team",
+  "members": [
+    {
+      "playerId": "karl-darlow",
+      "no": 1
+    },
+    {
+      "playerId": "chris-mepham",
+      "no": 2
+    },
+    {
+      "playerId": "neco-williams",
+      "no": 3
+    },
+    {
+      "playerId": "ben-davies",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "ethan-ampadu",
+      "no": 5
+    },
+    {
+      "playerId": "joe-rodon",
+      "no": 6
+    },
+    {
+      "playerId": "david-brooks",
+      "no": 7
+    },
+    {
+      "playerId": "joel-colwill",
+      "no": 8
+    },
+    {
+      "playerId": "lewis-koumas",
+      "no": 9
+    },
+    {
+      "playerId": "kai-andrews",
+      "no": 10
+    },
+    {
+      "playerId": "brennan-johnson",
+      "no": 11
+    },
+    {
+      "playerId": "danny-ward",
+      "no": 12
+    },
+    {
+      "playerId": "kieffer-moore",
+      "no": 13
+    },
+    {
+      "playerId": "connor-roberts",
+      "no": 14
+    },
+    {
+      "playerId": "jay-dasilva",
+      "no": 15
+    },
+    {
+      "playerId": "ronan-kpakio",
+      "no": 17
+    },
+    {
+      "playerId": "rhys-norringtondavies",
+      "no": 18
+    },
+    {
+      "playerId": "sorba-thomas",
+      "no": 19
+    },
+    {
+      "playerId": "daniel-james",
+      "no": 20
+    },
+    {
+      "playerId": "tom-king",
+      "no": 21
+    },
+    {
+      "playerId": "josh-sheehan",
+      "no": 22
+    },
+    {
+      "playerId": "nathan-broadhead",
+      "no": 23
+    },
+    {
+      "playerId": "isaak-davies",
+      "no": 24
+    },
+    {
+      "playerId": "ollie-bostock",
+      "no": 25
+    },
+    {
+      "playerId": "cameron-congreve",
+      "no": 26
+    },
+    {
+      "playerId": "jayden-lienou",
+      "no": 27
+    }
+  ]
+}

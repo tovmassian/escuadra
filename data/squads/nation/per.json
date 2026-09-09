@@ -1,0 +1,114 @@
+{
+  "id": "per",
+  "kind": "nation",
+  "name": "Peru",
+  "season": "2026",
+  "primaryColor": "#D91023",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#D91023", "#FFFFFF", "#D91023"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Peru_national_football_team",
+  "members": [
+    {
+      "playerId": "pedro-gallese",
+      "no": 1
+    },
+    {
+      "playerId": "alfonso-barco",
+      "no": 2
+    },
+    {
+      "playerId": "fabio-gruber",
+      "no": 3
+    },
+    {
+      "playerId": "marcos-lopez",
+      "no": 4
+    },
+    {
+      "playerId": "jesus-pretell",
+      "no": 6
+    },
+    {
+      "playerId": "kenji-cabrera",
+      "no": 7
+    },
+    {
+      "playerId": "erick-noriega",
+      "no": 8
+    },
+    {
+      "playerId": "adrian-ugarriza",
+      "no": 9
+    },
+    {
+      "playerId": "jairo-velez",
+      "no": 11
+    },
+    {
+      "playerId": "alejandro-duarte",
+      "no": 12
+    },
+    {
+      "playerId": "marco-huaman",
+      "no": 13
+    },
+    {
+      "playerId": "adrian-quiroz",
+      "no": 14
+    },
+    {
+      "playerId": "renzo-garces",
+      "no": 15
+    },
+    {
+      "playerId": "matias-lazo",
+      "no": 16
+    },
+    {
+      "playerId": "jairo-concha",
+      "no": 17
+    },
+    {
+      "playerId": "andre-carrillo",
+      "no": 18
+    },
+    {
+      "playerId": "yoshimar-yotun",
+      "no": 19,
+      "captain": true
+    },
+    {
+      "playerId": "maxloren-castro",
+      "no": 20
+    },
+    {
+      "playerId": "matias-cordova",
+      "no": 21
+    },
+    {
+      "playerId": "oliver-sonne",
+      "no": 22
+    },
+    {
+      "playerId": "rodrigo-vilca",
+      "no": 23
+    },
+    {
+      "playerId": "bassco-soyer",
+      "no": 24
+    },
+    {
+      "playerId": "matias-zegarra",
+      "no": 25
+    },
+    {
+      "playerId": "jhonny-vidales",
+      "no": 27
+    }
+  ]
+}

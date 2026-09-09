@@ -1,0 +1,126 @@
+{
+  "id": "mor",
+  "kind": "nation",
+  "name": "Morocco",
+  "season": "2026",
+  "primaryColor": "#C1272D",
+  "secondaryColor": "#006233",
+  "verified": true,
+  "marker": {
+    "bands": ["#C1272D"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#006233"
+    }
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Morocco_national_football_team",
+  "members": [
+    {
+      "playerId": "yassine-bounou",
+      "no": 1
+    },
+    {
+      "playerId": "hakimi",
+      "no": 2,
+      "captain": true
+    },
+    {
+      "playerId": "noussair-mazraoui",
+      "no": 3
+    },
+    {
+      "playerId": "sofyan-amrabat",
+      "no": 4
+    },
+    {
+      "playerId": "marwane-saadane",
+      "no": 5
+    },
+    {
+      "playerId": "ayyoub-bouaddi",
+      "no": 6
+    },
+    {
+      "playerId": "chemsdine-talbi",
+      "no": 7
+    },
+    {
+      "playerId": "azzedine-ounahi",
+      "no": 8
+    },
+    {
+      "playerId": "soufiane-rahimi",
+      "no": 9
+    },
+    {
+      "playerId": "brahim",
+      "no": 10
+    },
+    {
+      "playerId": "ismael-saibari",
+      "no": 11
+    },
+    {
+      "playerId": "munir-mohamedi",
+      "no": 12
+    },
+    {
+      "playerId": "zakaria-el-ouahdi",
+      "no": 13
+    },
+    {
+      "playerId": "issa-diop",
+      "no": 14
+    },
+    {
+      "playerId": "samir-el-mourabet",
+      "no": 15
+    },
+    {
+      "playerId": "gessime-yassine",
+      "no": 16
+    },
+    {
+      "playerId": "amine-sbai",
+      "no": 17
+    },
+    {
+      "playerId": "chadi-riad",
+      "no": 18
+    },
+    {
+      "playerId": "youssef-belammari",
+      "no": 19
+    },
+    {
+      "playerId": "ayoub-el-kaabi",
+      "no": 20
+    },
+    {
+      "playerId": "ayoube-amaimouni",
+      "no": 21
+    },
+    {
+      "playerId": "ahmed-reda-tagnaouti",
+      "no": 22
+    },
+    {
+      "playerId": "bilal-el-khannouss",
+      "no": 23
+    },
+    {
+      "playerId": "neil-el-aynaoui",
+      "no": 24
+    },
+    {
+      "playerId": "redouane-halhal",
+      "no": 25
+    },
+    {
+      "playerId": "anass-salaheddine",
+      "no": 26
+    }
+  ]
+}

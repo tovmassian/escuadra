@@ -1,0 +1,122 @@
+{
+  "id": "irn",
+  "kind": "nation",
+  "name": "Iran",
+  "season": "2026",
+  "primaryColor": "#239F40",
+  "secondaryColor": "#DA0000",
+  "verified": true,
+  "marker": {
+    "bands": ["#239F40", "#FFFFFF", "#DA0000"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Iran_national_football_team",
+  "members": [
+    {
+      "playerId": "alireza-beiranvand",
+      "no": 1
+    },
+    {
+      "playerId": "saleh-hardani",
+      "no": 2
+    },
+    {
+      "playerId": "ehsan-hajsafi",
+      "no": 3,
+      "captain": true
+    },
+    {
+      "playerId": "shojae-khalilzadeh",
+      "no": 4
+    },
+    {
+      "playerId": "milad-mohammadi",
+      "no": 5
+    },
+    {
+      "playerId": "saeid-ezatolahi",
+      "no": 6
+    },
+    {
+      "playerId": "alireza-jahanbakhsh",
+      "no": 7
+    },
+    {
+      "playerId": "mohammad-mohebi",
+      "no": 8
+    },
+    {
+      "playerId": "mehdi-taremi",
+      "no": 9
+    },
+    {
+      "playerId": "mehdi-ghayedi",
+      "no": 10
+    },
+    {
+      "playerId": "ali-alipour",
+      "no": 11
+    },
+    {
+      "playerId": "payam-niazmand",
+      "no": 12
+    },
+    {
+      "playerId": "hossein-kanaanizadegan",
+      "no": 13
+    },
+    {
+      "playerId": "saman-ghoddos",
+      "no": 14
+    },
+    {
+      "playerId": "rouzbeh-cheshmi",
+      "no": 15
+    },
+    {
+      "playerId": "mahdi-torabi",
+      "no": 16
+    },
+    {
+      "playerId": "aria-yousefi",
+      "no": 17
+    },
+    {
+      "playerId": "amirhossein-hosseinzadeh",
+      "no": 18
+    },
+    {
+      "playerId": "ali-nemati",
+      "no": 19
+    },
+    {
+      "playerId": "shahriyar-moghanlou",
+      "no": 20
+    },
+    {
+      "playerId": "mohammad-ghorbani",
+      "no": 21
+    },
+    {
+      "playerId": "hossein-hosseini",
+      "no": 22
+    },
+    {
+      "playerId": "ramin-rezaeian",
+      "no": 23
+    },
+    {
+      "playerId": "dennis-eckert",
+      "no": 24
+    },
+    {
+      "playerId": "danial-eiri",
+      "no": 25
+    },
+    {
+      "playerId": "amirmohammad-razzaghinia",
+      "no": 26
+    }
+  ]
+}

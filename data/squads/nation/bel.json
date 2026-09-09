@@ -1,0 +1,122 @@
+{
+  "id": "bel",
+  "kind": "nation",
+  "name": "Belgium",
+  "season": "2026",
+  "primaryColor": "#000000",
+  "secondaryColor": "#FDDA24",
+  "verified": true,
+  "marker": {
+    "bands": ["#000000", "#FDDA24", "#EF3340"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Belgium_national_football_team",
+  "members": [
+    {
+      "playerId": "courtois",
+      "no": 1
+    },
+    {
+      "playerId": "zeno-debast",
+      "no": 2
+    },
+    {
+      "playerId": "arthur-theate",
+      "no": 3
+    },
+    {
+      "playerId": "brandon-mechele",
+      "no": 4
+    },
+    {
+      "playerId": "maxim-de-cuyper",
+      "no": 5
+    },
+    {
+      "playerId": "axel-witsel",
+      "no": 6
+    },
+    {
+      "playerId": "kevin-de-bruyne",
+      "no": 7
+    },
+    {
+      "playerId": "youri-tielemans",
+      "no": 8,
+      "captain": true
+    },
+    {
+      "playerId": "romelu-lukaku",
+      "no": 9
+    },
+    {
+      "playerId": "trossard",
+      "no": 10
+    },
+    {
+      "playerId": "jeremy-doku",
+      "no": 11
+    },
+    {
+      "playerId": "senne-lammens",
+      "no": 12
+    },
+    {
+      "playerId": "mike-penders",
+      "no": 13
+    },
+    {
+      "playerId": "dodi-lukebakio",
+      "no": 14
+    },
+    {
+      "playerId": "thomas-meunier",
+      "no": 15
+    },
+    {
+      "playerId": "koni-de-winter",
+      "no": 16
+    },
+    {
+      "playerId": "charles-de-ketelaere",
+      "no": 17
+    },
+    {
+      "playerId": "joaquin-seys",
+      "no": 18
+    },
+    {
+      "playerId": "diego-moreira",
+      "no": 19
+    },
+    {
+      "playerId": "hans-vanaken",
+      "no": 20
+    },
+    {
+      "playerId": "timothy-castagne",
+      "no": 21
+    },
+    {
+      "playerId": "alexis-saelemaekers",
+      "no": 22
+    },
+    {
+      "playerId": "nicolas-raskin",
+      "no": 23
+    },
+    {
+      "playerId": "amadou-onana",
+      "no": 24
+    },
+    {
+      "playerId": "nathan-ngoy",
+      "no": 25
+    },
+    {
+      "playerId": "matias-fernandezpardo",
+      "no": 26
+    }
+  ]
+}

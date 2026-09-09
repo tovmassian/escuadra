@@ -1,0 +1,122 @@
+{
+  "id": "egy",
+  "kind": "nation",
+  "name": "Egypt",
+  "season": "2026",
+  "primaryColor": "#CE1126",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#CE1126", "#FFFFFF", "#000000"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Egypt_national_football_team",
+  "members": [
+    {
+      "playerId": "mohamed-el-shenawy",
+      "no": 1
+    },
+    {
+      "playerId": "yasser-ibrahim",
+      "no": 2
+    },
+    {
+      "playerId": "mohamed-hany",
+      "no": 3
+    },
+    {
+      "playerId": "hossam-abdelmaguid",
+      "no": 4
+    },
+    {
+      "playerId": "ramy-rabia",
+      "no": 5
+    },
+    {
+      "playerId": "mohamed-abdelmonem",
+      "no": 6
+    },
+    {
+      "playerId": "trezeguet",
+      "no": 7
+    },
+    {
+      "playerId": "emam-ashour",
+      "no": 8
+    },
+    {
+      "playerId": "hamza-abdelkarim",
+      "no": 9
+    },
+    {
+      "playerId": "mohamed-salah",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "mostafa-ziko",
+      "no": 11
+    },
+    {
+      "playerId": "haissem-hassan",
+      "no": 12
+    },
+    {
+      "playerId": "ahmed-fatouh",
+      "no": 13
+    },
+    {
+      "playerId": "hamdy-fathy",
+      "no": 14
+    },
+    {
+      "playerId": "karim-hafez",
+      "no": 15
+    },
+    {
+      "playerId": "el-mahdy-soliman",
+      "no": 16
+    },
+    {
+      "playerId": "mohanad-lasheen",
+      "no": 17
+    },
+    {
+      "playerId": "nabil-emad",
+      "no": 18
+    },
+    {
+      "playerId": "marwan-attia",
+      "no": 19
+    },
+    {
+      "playerId": "ibrahim-adel",
+      "no": 20
+    },
+    {
+      "playerId": "mahmoud-saber",
+      "no": 21
+    },
+    {
+      "playerId": "omar-marmoush",
+      "no": 22
+    },
+    {
+      "playerId": "mostafa-shobeir",
+      "no": 23
+    },
+    {
+      "playerId": "tarek-alaa",
+      "no": 24
+    },
+    {
+      "playerId": "zizo",
+      "no": 25
+    },
+    {
+      "playerId": "mohamed-alaa",
+      "no": 26
+    }
+  ]
+}

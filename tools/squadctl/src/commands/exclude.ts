@@ -1,13 +1,7 @@
-import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { Args, Flags } from '@oclif/core';
 import { BaseCommand } from '../base-command.ts';
-import {
-  EMPTY_DECISIONS,
-  addNotInSquad,
-  validateDecisions,
-  type DecisionFile,
-} from '../lib/decisions.ts';
+import { addNotInSquad, readDecisions } from '../lib/decisions.ts';
 import { formatAndWrite } from '../lib/write-json.ts';
 
 interface ExcludeReport {
@@ -56,20 +50,9 @@ export default class Exclude extends BaseCommand<ExcludeReport> {
     const { args, flags } = await this.parse(Exclude);
 
     const file = path.join(this.dataDir, 'decisions.json');
-    let decisions: DecisionFile = EMPTY_DECISIONS;
-    if (existsSync(file)) {
-      const parsed: unknown = JSON.parse(readFileSync(file, 'utf8'));
-      const problems = validateDecisions(parsed);
-      if (problems.length > 0) {
-        this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
-      }
-      const loaded = parsed as DecisionFile;
-      decisions = {
-        splits: loaded.splits,
-        aliases: loaded.aliases ?? [],
-        titleAliases: loaded.titleAliases ?? [],
-        notInSquad: loaded.notInSquad ?? [],
-      };
+    const { decisions, problems } = readDecisions(this.dataDir);
+    if (problems.length > 0) {
+      this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
     }
 
     const entry = { team: args.team, title: args.title, reason: flags.reason };

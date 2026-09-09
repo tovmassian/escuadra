@@ -1,0 +1,122 @@
+{
+  "id": "nor",
+  "kind": "nation",
+  "name": "Norway",
+  "season": "2026",
+  "primaryColor": "#EF2B2D",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#EF2B2D", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Norway_national_football_team",
+  "members": [
+    {
+      "playerId": "orjan-nyland",
+      "no": 1
+    },
+    {
+      "playerId": "morten-thorsby",
+      "no": 2
+    },
+    {
+      "playerId": "kristoffer-ajer",
+      "no": 3
+    },
+    {
+      "playerId": "leo-ostigard",
+      "no": 4
+    },
+    {
+      "playerId": "david-moller-wolfe",
+      "no": 5
+    },
+    {
+      "playerId": "patrick-berg",
+      "no": 6
+    },
+    {
+      "playerId": "sorloth",
+      "no": 7
+    },
+    {
+      "playerId": "sander-berge",
+      "no": 8
+    },
+    {
+      "playerId": "erling-haaland",
+      "no": 9
+    },
+    {
+      "playerId": "odegaard",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "jorgen-strand-larsen",
+      "no": 11
+    },
+    {
+      "playerId": "sander-tangvik",
+      "no": 12
+    },
+    {
+      "playerId": "egil-selvik",
+      "no": 13
+    },
+    {
+      "playerId": "fredrik-aursnes",
+      "no": 14
+    },
+    {
+      "playerId": "fredrik-andre-bjorkan",
+      "no": 15
+    },
+    {
+      "playerId": "marcus-holmgren-pedersen",
+      "no": 16
+    },
+    {
+      "playerId": "torbjorn-heggem",
+      "no": 17
+    },
+    {
+      "playerId": "kristian-thorstvedt",
+      "no": 18
+    },
+    {
+      "playerId": "thelo-aasgaard",
+      "no": 19
+    },
+    {
+      "playerId": "antonio-nusa",
+      "no": 20
+    },
+    {
+      "playerId": "andreas-schjelderup",
+      "no": 21
+    },
+    {
+      "playerId": "oscar-bobb",
+      "no": 22
+    },
+    {
+      "playerId": "jens-petter-hauge",
+      "no": 23
+    },
+    {
+      "playerId": "sondre-langas",
+      "no": 24
+    },
+    {
+      "playerId": "henrik-falchener",
+      "no": 25
+    },
+    {
+      "playerId": "julian-ryerson",
+      "no": 26
+    }
+  ]
+}

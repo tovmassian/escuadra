@@ -1,0 +1,122 @@
+{
+  "id": "pan",
+  "kind": "nation",
+  "name": "Panama",
+  "season": "2026",
+  "primaryColor": "#DA121A",
+  "secondaryColor": "#005293",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#DA121A"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Panama_national_football_team",
+  "members": [
+    {
+      "playerId": "luis-mejia",
+      "no": 1
+    },
+    {
+      "playerId": "cesar-blackman",
+      "no": 2
+    },
+    {
+      "playerId": "jose-cordoba",
+      "no": 3
+    },
+    {
+      "playerId": "fidel-escobar",
+      "no": 4
+    },
+    {
+      "playerId": "edgardo-farina",
+      "no": 5
+    },
+    {
+      "playerId": "cristian-martinez",
+      "no": 6
+    },
+    {
+      "playerId": "jose-luis-rodriguez",
+      "no": 7
+    },
+    {
+      "playerId": "adalberto-carrasquilla",
+      "no": 8
+    },
+    {
+      "playerId": "tomas-rodriguez",
+      "no": 9
+    },
+    {
+      "playerId": "ismael-diaz",
+      "no": 10
+    },
+    {
+      "playerId": "yoel-barcenas",
+      "no": 11
+    },
+    {
+      "playerId": "cesar-samudio",
+      "no": 12
+    },
+    {
+      "playerId": "jiovany-ramos",
+      "no": 13
+    },
+    {
+      "playerId": "carlos-harvey",
+      "no": 14
+    },
+    {
+      "playerId": "eric-davis",
+      "no": 15
+    },
+    {
+      "playerId": "andres-andrade",
+      "no": 16
+    },
+    {
+      "playerId": "jose-fajardo",
+      "no": 17
+    },
+    {
+      "playerId": "cecilio-waterman",
+      "no": 18
+    },
+    {
+      "playerId": "alberto-quintero",
+      "no": 19
+    },
+    {
+      "playerId": "anibal-godoy",
+      "no": 20,
+      "captain": true
+    },
+    {
+      "playerId": "cesar-yanis",
+      "no": 21
+    },
+    {
+      "playerId": "orlando-mosquera",
+      "no": 22
+    },
+    {
+      "playerId": "amir-murillo",
+      "no": 23
+    },
+    {
+      "playerId": "azarias-londono",
+      "no": 24
+    },
+    {
+      "playerId": "roderick-miller",
+      "no": 25
+    },
+    {
+      "playerId": "jorge-gutierrez",
+      "no": 26
+    }
+  ]
+}

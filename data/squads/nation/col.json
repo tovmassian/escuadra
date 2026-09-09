@@ -1,0 +1,123 @@
+{
+  "id": "col",
+  "kind": "nation",
+  "name": "Colombia",
+  "season": "2026",
+  "primaryColor": "#FCD116",
+  "secondaryColor": "#003893",
+  "verified": true,
+  "marker": {
+    "bands": ["#FCD116", "#003893", "#CE1126"],
+    "orientation": "horizontal",
+    "weights": [2, 1, 1]
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Colombia_national_football_team",
+  "members": [
+    {
+      "playerId": "david-ospina",
+      "no": 1
+    },
+    {
+      "playerId": "daniel-munoz",
+      "no": 2
+    },
+    {
+      "playerId": "jhon-lucumi",
+      "no": 3
+    },
+    {
+      "playerId": "santiago-arias",
+      "no": 4
+    },
+    {
+      "playerId": "kevin-castano",
+      "no": 5
+    },
+    {
+      "playerId": "richard-rios",
+      "no": 6
+    },
+    {
+      "playerId": "luis-diaz",
+      "no": 7
+    },
+    {
+      "playerId": "jorge-carrascal",
+      "no": 8
+    },
+    {
+      "playerId": "jhon-cordoba",
+      "no": 9
+    },
+    {
+      "playerId": "james-rodriguez",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "jhon-arias",
+      "no": 11
+    },
+    {
+      "playerId": "camilo-vargas",
+      "no": 12
+    },
+    {
+      "playerId": "yerry-mina",
+      "no": 13
+    },
+    {
+      "playerId": "gustavo-puerta",
+      "no": 14
+    },
+    {
+      "playerId": "juan-portilla",
+      "no": 15
+    },
+    {
+      "playerId": "jefferson-lerma",
+      "no": 16
+    },
+    {
+      "playerId": "mojica",
+      "no": 17
+    },
+    {
+      "playerId": "willer-ditta",
+      "no": 18
+    },
+    {
+      "playerId": "cucho-hernandez",
+      "no": 19
+    },
+    {
+      "playerId": "juan-fernando-quintero",
+      "no": 20
+    },
+    {
+      "playerId": "jaminton-campaz",
+      "no": 21
+    },
+    {
+      "playerId": "deiver-machado",
+      "no": 22
+    },
+    {
+      "playerId": "davinson-sanchez",
+      "no": 23
+    },
+    {
+      "playerId": "alvaro-montero",
+      "no": 24
+    },
+    {
+      "playerId": "luis-suarez",
+      "no": 25
+    },
+    {
+      "playerId": "andres-gomez",
+      "no": 26
+    }
+  ]
+}

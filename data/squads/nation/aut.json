@@ -1,0 +1,122 @@
+{
+  "id": "aut",
+  "kind": "nation",
+  "name": "Austria",
+  "season": "2026",
+  "primaryColor": "#ED2939",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#ED2939", "#FFFFFF", "#ED2939"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Austria_national_football_team",
+  "members": [
+    {
+      "playerId": "alexander-schlager",
+      "no": 1
+    },
+    {
+      "playerId": "david-affengruber",
+      "no": 2
+    },
+    {
+      "playerId": "kevin-danso",
+      "no": 3
+    },
+    {
+      "playerId": "xaver-schlager",
+      "no": 4
+    },
+    {
+      "playerId": "stefan-posch",
+      "no": 5
+    },
+    {
+      "playerId": "nicolas-seiwald",
+      "no": 6
+    },
+    {
+      "playerId": "marko-arnautovic",
+      "no": 7
+    },
+    {
+      "playerId": "alaba",
+      "no": 8,
+      "captain": true
+    },
+    {
+      "playerId": "marcel-sabitzer",
+      "no": 9
+    },
+    {
+      "playerId": "florian-grillitsch",
+      "no": 10
+    },
+    {
+      "playerId": "michael-gregoritsch",
+      "no": 11
+    },
+    {
+      "playerId": "florian-wiegele",
+      "no": 12
+    },
+    {
+      "playerId": "patrick-pentz",
+      "no": 13
+    },
+    {
+      "playerId": "sasa-kalajdzic",
+      "no": 14
+    },
+    {
+      "playerId": "philipp-lienhart",
+      "no": 15
+    },
+    {
+      "playerId": "phillipp-mwene",
+      "no": 16
+    },
+    {
+      "playerId": "carney-chukwuemeka",
+      "no": 17
+    },
+    {
+      "playerId": "romano-schmid",
+      "no": 18
+    },
+    {
+      "playerId": "dejan-ljubicic",
+      "no": 19
+    },
+    {
+      "playerId": "konrad-laimer",
+      "no": 20
+    },
+    {
+      "playerId": "patrick-wimmer",
+      "no": 21
+    },
+    {
+      "playerId": "alexander-prass",
+      "no": 22
+    },
+    {
+      "playerId": "marco-friedl",
+      "no": 23
+    },
+    {
+      "playerId": "paul-wanner",
+      "no": 24
+    },
+    {
+      "playerId": "michael-svoboda",
+      "no": 25
+    },
+    {
+      "playerId": "alessandro-schopf",
+      "no": 26
+    }
+  ]
+}

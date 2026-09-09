@@ -8,6 +8,8 @@
 // teams that is the difference between a decision and a chore.
 //
 // Checked in, because it is repo knowledge rather than a local preference.
+import { existsSync, readFileSync } from 'node:fs';
+import path from 'node:path';
 import type { AcceptedAlias, AcceptedSplit, NotInSquad, TitleAlias } from './reconcile.ts';
 
 export interface DecisionFile {
@@ -36,6 +38,43 @@ export const EMPTY_DECISIONS: DecisionFile = {
   titleAliases: [],
   notInSquad: [],
 };
+
+/** The one way to read `decisions.json`. Returns `EMPTY_DECISIONS` when there
+ *  is no file yet, and hands validation problems back rather than throwing,
+ *  because each command reports them under its own exit code.
+ *
+ *  **Spreads the parsed object; never lists its keys.** Every decision kind is
+ *  optional, so a reader that rebuilds the file from the kinds it happens to
+ *  know about silently deletes the ones it does not — and the writer then
+ *  persists that deletion. `alias` did exactly this: it enumerated `splits`,
+ *  `aliases` and `titleAliases`, and recording one alias erased an `exclude`
+ *  decision, its `--reason` with it. Four commands each had their own copy of
+ *  this read and only one was wrong, which is the argument for there being
+ *  one. */
+export function readDecisions(dataDir: string): {
+  decisions: DecisionFile;
+  problems: string[];
+} {
+  const file = path.join(dataDir, 'decisions.json');
+  if (!existsSync(file)) return { decisions: EMPTY_DECISIONS, problems: [] };
+
+  const parsed: unknown = JSON.parse(readFileSync(file, 'utf8'));
+  const problems = validateDecisions(parsed);
+  if (problems.length > 0) return { decisions: EMPTY_DECISIONS, problems };
+
+  const loaded = parsed as DecisionFile;
+  return {
+    // Older files predate aliases, titleAliases and notInSquad and carry only
+    // splits; defaulting here means no caller repeats the `?? []`.
+    decisions: {
+      ...loaded,
+      aliases: loaded.aliases ?? [],
+      titleAliases: loaded.titleAliases ?? [],
+      notInSquad: loaded.notInSquad ?? [],
+    },
+    problems: [],
+  };
+}
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;

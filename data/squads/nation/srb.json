@@ -1,0 +1,113 @@
+{
+  "id": "srb",
+  "kind": "nation",
+  "name": "Serbia",
+  "season": "2026",
+  "primaryColor": "#C6363C",
+  "secondaryColor": "#0C4076",
+  "verified": true,
+  "marker": {
+    "bands": ["#C6363C", "#0C4076", "#FFFFFF"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Serbia_national_football_team",
+  "members": [
+    {
+      "playerId": "filip-stankovic",
+      "no": 1
+    },
+    {
+      "playerId": "ognjen-mimovic",
+      "no": 2
+    },
+    {
+      "playerId": "petar-petrovic",
+      "no": 3
+    },
+    {
+      "playerId": "nikola-simic",
+      "no": 4
+    },
+    {
+      "playerId": "njegos-petrovic",
+      "no": 5
+    },
+    {
+      "playerId": "vanja-dragojevic",
+      "no": 6
+    },
+    {
+      "playerId": "veljko-birmancevic",
+      "no": 7
+    },
+    {
+      "playerId": "dejan-zukic",
+      "no": 8
+    },
+    {
+      "playerId": "stankovic",
+      "no": 10
+    },
+    {
+      "playerId": "lazar-randelovic",
+      "no": 11
+    },
+    {
+      "playerId": "veljko-ilic",
+      "no": 12
+    },
+    {
+      "playerId": "mirko-milikic",
+      "no": 13
+    },
+    {
+      "playerId": "adem-avdic",
+      "no": 15
+    },
+    {
+      "playerId": "strahinja-erakovic",
+      "no": 16
+    },
+    {
+      "playerId": "kosta-nedeljkovic",
+      "no": 17
+    },
+    {
+      "playerId": "nikola-stulic",
+      "no": 18
+    },
+    {
+      "playerId": "mihailo-ivanovic",
+      "no": 19
+    },
+    {
+      "playerId": "andrija-maksimovic",
+      "no": 20
+    },
+    {
+      "playerId": "vladimir-lucic",
+      "no": 21
+    },
+    {
+      "playerId": "vasilije-kostov",
+      "no": 22
+    },
+    {
+      "playerId": "luka-lijeskic",
+      "no": 23
+    },
+    {
+      "playerId": "petar-stanic",
+      "no": 24
+    },
+    {
+      "playerId": "stefan-bukinac",
+      "no": 25
+    },
+    {
+      "playerId": "vukasin-durdevic",
+      "no": 26
+    }
+  ]
+}
