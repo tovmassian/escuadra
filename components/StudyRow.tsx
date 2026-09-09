@@ -25,10 +25,10 @@ export function StudyRow({ number, name, position, affiliation, flag }: StudyRow
       </Text>
       <Text style={[styles.position, { width: sizes.studyColumn.position }]}>{position}</Text>
       <View style={[styles.affiliationCell, { width: sizes.studyColumn.affiliation }]}>
-        {flag ? <Flag code={flag} size="row" label={affiliation} /> : null}
         <Text style={styles.affiliation} numberOfLines={1}>
           {affiliation}
         </Text>
+        {flag ? <Flag code={flag} size="row" label={affiliation} /> : null}
       </View>
     </View>
   );
@@ -64,6 +64,9 @@ const styles = StyleSheet.create({
   number: { ...typography.statMonoSmall, color: colors.textMuted },
   name: { flex: 1, ...typography.tableName, color: colors.textPrimary, marginLeft: spacing.sm },
   position: { ...typography.tableCell, color: colors.textSecondary, textAlign: 'center' },
+  // Flag last, not first, so every flag lands on the same right edge and the
+  // column reads as one aligned strip — a leading flag shifts with the length
+  // of the name beside it.
   affiliationCell: {
     flexDirection: 'row',
     alignItems: 'center',

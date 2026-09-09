@@ -27,6 +27,16 @@ fails if either step is skipped.
 
 ## Provenance
 
-TODO: origin and licence unknown. What is observable: 214 files, FIFA
-three-letter codes, 70×46 px. This must be resolved before any App Store or
-Play Store distribution. Not a v0 blocker — v0 is not distributed.
+Sourced from Wikipedia / Wikimedia Commons.
+
+Wikipedia's own article content is licensed CC BY-SA 4.0. Media files hosted
+on Commons are licensed individually rather than under one blanket licence,
+and national flag images there are overwhelmingly public domain: a flag
+design is generally either uncopyrightable or an official government insignia
+released for free use. A minority of Commons flag renderings are contributed
+under CC BY-SA, which requires attribution and share-alike.
+
+The per-file licence of each of the 214 images here has not been individually
+verified. That is fine for v0, which is not distributed. Before any App Store
+or Play Store build, confirm the individual licences and add an attribution
+screen for any file that turns out to require one.
