@@ -1,0 +1,154 @@
+{
+  "id": "ver",
+  "kind": "club",
+  "name": "Hellas Verona",
+  "season": "2026/27",
+  "primaryColor": "#FFD400",
+  "secondaryColor": "#00246B",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFD400", "#00246B"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Hellas_Verona_F.C.",
+  "members": [
+    {
+      "playerId": "nicola-leali",
+      "no": 1
+    },
+    {
+      "playerId": "daniel-oyegoke",
+      "no": 2
+    },
+    {
+      "playerId": "martin-frese",
+      "no": 3
+    },
+    {
+      "playerId": "andrias-edmundsson",
+      "no": 5
+    },
+    {
+      "playerId": "domagoj-bradaric",
+      "no": 6
+    },
+    {
+      "playerId": "suat-serdar",
+      "no": 8,
+      "captain": true
+    },
+    {
+      "playerId": "amin-sarr",
+      "no": 9
+    },
+    {
+      "playerId": "tomas-suslov",
+      "no": 10
+    },
+    {
+      "playerId": "mattia-compagnon",
+      "no": 11
+    },
+    {
+      "playerId": "dailon-livramento",
+      "no": 14
+    },
+    {
+      "playerId": "andrea-le-borgne",
+      "no": 17
+    },
+    {
+      "playerId": "leorat-bega",
+      "no": 18
+    },
+    {
+      "playerId": "samuele-mulattieri",
+      "no": 19
+    },
+    {
+      "playerId": "grigoris-kastanos",
+      "no": 20
+    },
+    {
+      "playerId": "abdou-harroui",
+      "no": 21
+    },
+    {
+      "playerId": "giacomo-toniolo",
+      "no": 22
+    },
+    {
+      "playerId": "nunzio-lella",
+      "no": 23
+    },
+    {
+      "playerId": "antoine-bernede",
+      "no": 24
+    },
+    {
+      "playerId": "daniel-mosquera",
+      "no": 25
+    },
+    {
+      "playerId": "pawel-dawidowicz",
+      "no": 27
+    },
+    {
+      "playerId": "tobias-slotsager",
+      "no": 28
+    },
+    {
+      "playerId": "charlys",
+      "no": 31
+    },
+    {
+      "playerId": "noe-mael-tagne",
+      "no": 33
+    },
+    {
+      "playerId": "simone-perilli",
+      "no": 34
+    },
+    {
+      "playerId": "salvatore-cerbone",
+      "no": 35
+    },
+    {
+      "playerId": "nicolo-calabrese",
+      "no": 37
+    },
+    {
+      "playerId": "ruben-akale",
+      "no": 38
+    },
+    {
+      "playerId": "arthur-borghi",
+      "no": 47
+    },
+    {
+      "playerId": "seid-korac",
+      "no": 48
+    },
+    {
+      "playerId": "fallou-cham",
+      "no": 70
+    },
+    {
+      "playerId": "davide-de-battisti",
+      "no": 71
+    },
+    {
+      "playerId": "kacper-sezonienko",
+      "no": 79
+    },
+    {
+      "playerId": "ioan-vermesan",
+      "no": 90
+    },
+    {
+      "playerId": "juan-manuel-cruz",
+      "no": null
+    }
+  ]
+}

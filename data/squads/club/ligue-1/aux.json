@@ -1,0 +1,150 @@
+{
+  "id": "aux",
+  "kind": "club",
+  "name": "Auxerre",
+  "season": "2026/27",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#002F6C",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#002F6C"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/AJ_Auxerre",
+  "members": [
+    {
+      "playerId": "paul-nardi",
+      "no": 1
+    },
+    {
+      "playerId": "remy-labeau-lascary",
+      "no": 3
+    },
+    {
+      "playerId": "francisco-sierralta",
+      "no": 4
+    },
+    {
+      "playerId": "kevin-danois",
+      "no": 5,
+      "captain": true
+    },
+    {
+      "playerId": "josue-casimir",
+      "no": 7
+    },
+    {
+      "playerId": "naouirou-ahamada",
+      "no": 8
+    },
+    {
+      "playerId": "cameron-archer",
+      "no": 9
+    },
+    {
+      "playerId": "eros-maddy",
+      "no": 11
+    },
+    {
+      "playerId": "telli-siwe",
+      "no": 13
+    },
+    {
+      "playerId": "christ-makosso",
+      "no": 15
+    },
+    {
+      "playerId": "pierre-ekwah",
+      "no": 17
+    },
+    {
+      "playerId": "assane-diousse",
+      "no": 18
+    },
+    {
+      "playerId": "danny-namaso",
+      "no": 19
+    },
+    {
+      "playerId": "sinaly-diomande",
+      "no": 20
+    },
+    {
+      "playerId": "fredrik-oppegard",
+      "no": 22
+    },
+    {
+      "playerId": "mamadou-diop",
+      "no": 23
+    },
+    {
+      "playerId": "bryan-okoh",
+      "no": 24
+    },
+    {
+      "playerId": "lamine-sy",
+      "no": 27
+    },
+    {
+      "playerId": "romain-faivre",
+      "no": 28
+    },
+    {
+      "playerId": "marvin-senaya",
+      "no": 29
+    },
+    {
+      "playerId": "ryan-rodin",
+      "no": 31
+    },
+    {
+      "playerId": "rayan-mandengue",
+      "no": 32
+    },
+    {
+      "playerId": "lamfia-dioubate",
+      "no": 34
+    },
+    {
+      "playerId": "elikya-legros",
+      "no": 35
+    },
+    {
+      "playerId": "tidiane-devernois",
+      "no": 36
+    },
+    {
+      "playerId": "louis-mezerette",
+      "no": 37
+    },
+    {
+      "playerId": "salimou-danfakha",
+      "no": 45
+    },
+    {
+      "playerId": "arthur-piedfort",
+      "no": 46
+    },
+    {
+      "playerId": "wei-xiangxin",
+      "no": 49
+    },
+    {
+      "playerId": "aristide-zossou",
+      "no": 77
+    },
+    {
+      "playerId": "clement-akpa",
+      "no": 92
+    },
+    {
+      "playerId": "sekou-fofana",
+      "no": 93
+    },
+    {
+      "playerId": "axel-tuanzebe",
+      "no": null
+    }
+  ]
+}

@@ -1,0 +1,138 @@
+{
+  "id": "bha",
+  "kind": "club",
+  "name": "Brighton & Hove Albion",
+  "season": "2026/27",
+  "primaryColor": "#0057B8",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#0057B8", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Brighton_%26_Hove_Albion_F.C.",
+  "members": [
+    {
+      "playerId": "bart-verbruggen",
+      "no": 1
+    },
+    {
+      "playerId": "jaouen-hadjam",
+      "no": 3
+    },
+    {
+      "playerId": "pascal-struijk",
+      "no": 4
+    },
+    {
+      "playerId": "lewis-dunk",
+      "no": 5,
+      "captain": true
+    },
+    {
+      "playerId": "kaoru-mitoma",
+      "no": 7
+    },
+    {
+      "playerId": "jack-hinshelwood",
+      "no": 8
+    },
+    {
+      "playerId": "stefanos-tzimas",
+      "no": 9
+    },
+    {
+      "playerId": "georginio-rutter",
+      "no": 10
+    },
+    {
+      "playerId": "yankuba-minteh",
+      "no": 11
+    },
+    {
+      "playerId": "promise-david",
+      "no": 12
+    },
+    {
+      "playerId": "pascal-gross",
+      "no": 13
+    },
+    {
+      "playerId": "chema-andres",
+      "no": 14
+    },
+    {
+      "playerId": "ibrahim-osman",
+      "no": 15
+    },
+    {
+      "playerId": "charalampos-kostoulas",
+      "no": 19
+    },
+    {
+      "playerId": "costinha",
+      "no": 20
+    },
+    {
+      "playerId": "olivier-boscagli",
+      "no": 21
+    },
+    {
+      "playerId": "jason-steele",
+      "no": 23
+    },
+    {
+      "playerId": "ferdi-kadioglu",
+      "no": 24
+    },
+    {
+      "playerId": "diego-gomez",
+      "no": 25
+    },
+    {
+      "playerId": "yasin-ayari",
+      "no": 26
+    },
+    {
+      "playerId": "mats-wieffer",
+      "no": 27
+    },
+    {
+      "playerId": "evan-ferguson",
+      "no": 28
+    },
+    {
+      "playerId": "maxim-de-cuyper",
+      "no": 29
+    },
+    {
+      "playerId": "michael-svoboda",
+      "no": 30
+    },
+    {
+      "playerId": "matt-oriley",
+      "no": 33
+    },
+    {
+      "playerId": "malick-yalcouye",
+      "no": 35
+    },
+    {
+      "playerId": "zadok-yohanna",
+      "no": 36
+    },
+    {
+      "playerId": "tom-mcgill",
+      "no": 38
+    },
+    {
+      "playerId": "femi-azeez",
+      "no": 39
+    },
+    {
+      "playerId": "luka-vuskovic",
+      "no": 44
+    }
+  ]
+}

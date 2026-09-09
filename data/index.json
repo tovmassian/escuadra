@@ -14,6 +14,20 @@
     "league": "la-liga"
   },
   {
+    "id": "ang",
+    "kind": "club",
+    "name": "Angers",
+    "season": "2026/27",
+    "primaryColor": "#000000",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#000000", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
     "id": "arg",
     "kind": "nation",
     "name": "Argentina",
@@ -54,6 +68,20 @@
     "league": "premier-league"
   },
   {
+    "id": "ata",
+    "kind": "club",
+    "name": "Atalanta",
+    "season": "2026/27",
+    "primaryColor": "#1E3888",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#1E3888", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
     "id": "ath",
     "kind": "club",
     "name": "Athletic Bilbao",
@@ -80,6 +108,34 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "aux",
+    "kind": "club",
+    "name": "Auxerre",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#002F6C",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#002F6C"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "avl",
+    "kind": "club",
+    "name": "Aston Villa",
+    "season": "2026/27",
+    "primaryColor": "#670E36",
+    "secondaryColor": "#95BFE5",
+    "verified": true,
+    "marker": {
+      "bands": ["#670E36", "#95BFE5"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
   },
   {
     "id": "b04",
@@ -124,6 +180,20 @@
     "league": "la-liga"
   },
   {
+    "id": "bha",
+    "kind": "club",
+    "name": "Brighton & Hove Albion",
+    "season": "2026/27",
+    "primaryColor": "#0057B8",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#0057B8", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
     "id": "bmg",
     "kind": "club",
     "name": "Borussia Mönchengladbach",
@@ -136,6 +206,34 @@
       "orientation": "vertical"
     },
     "league": "bundesliga"
+  },
+  {
+    "id": "bol",
+    "kind": "club",
+    "name": "Bologna",
+    "season": "2026/27",
+    "primaryColor": "#A6192E",
+    "secondaryColor": "#12264F",
+    "verified": true,
+    "marker": {
+      "bands": ["#A6192E", "#12264F"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
+    "id": "bou",
+    "kind": "club",
+    "name": "Bournemouth",
+    "season": "2026/27",
+    "primaryColor": "#DA291C",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#DA291C", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
   },
   {
     "id": "bra",
@@ -155,6 +253,48 @@
     }
   },
   {
+    "id": "bre",
+    "kind": "club",
+    "name": "Brentford",
+    "season": "2026/27",
+    "primaryColor": "#D2122E",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#D2122E", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
+    "id": "brs",
+    "kind": "club",
+    "name": "Brest",
+    "season": "2026/27",
+    "primaryColor": "#DA291C",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#DA291C", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "bur",
+    "kind": "club",
+    "name": "Burnley",
+    "season": "2026/27",
+    "primaryColor": "#6C1D45",
+    "secondaryColor": "#99D6EA",
+    "verified": true,
+    "marker": {
+      "bands": ["#6C1D45", "#99D6EA"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
     "id": "bvb",
     "kind": "club",
     "name": "Borussia Dortmund",
@@ -169,6 +309,20 @@
     "league": "bundesliga"
   },
   {
+    "id": "cag",
+    "kind": "club",
+    "name": "Cagliari",
+    "season": "2026/27",
+    "primaryColor": "#A31E22",
+    "secondaryColor": "#002B5C",
+    "verified": true,
+    "marker": {
+      "bands": ["#A31E22", "#002B5C"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
     "id": "cel",
     "kind": "club",
     "name": "Celta Vigo",
@@ -181,6 +335,62 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "che",
+    "kind": "club",
+    "name": "Chelsea",
+    "season": "2026/27",
+    "primaryColor": "#034694",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#034694"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
+    "id": "com",
+    "kind": "club",
+    "name": "Como",
+    "season": "2026/27",
+    "primaryColor": "#003DA5",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#003DA5", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
+    "id": "cre",
+    "kind": "club",
+    "name": "Cremonese",
+    "season": "2026/27",
+    "primaryColor": "#C8102E",
+    "secondaryColor": "#808080",
+    "verified": true,
+    "marker": {
+      "bands": ["#C8102E", "#808080"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
+    "id": "cry",
+    "kind": "club",
+    "name": "Crystal Palace",
+    "season": "2026/27",
+    "primaryColor": "#1B458F",
+    "secondaryColor": "#C4122E",
+    "verified": true,
+    "marker": {
+      "bands": ["#1B458F", "#C4122E"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
   },
   {
     "id": "dep",
@@ -223,6 +433,20 @@
       "orientation": "horizontal",
       "weights": [1, 2, 1]
     }
+  },
+  {
+    "id": "eve",
+    "kind": "club",
+    "name": "Everton",
+    "season": "2026/27",
+    "primaryColor": "#003399",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#003399"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
   },
   {
     "id": "fca",
@@ -281,6 +505,20 @@
     "league": "bundesliga"
   },
   {
+    "id": "fio",
+    "kind": "club",
+    "name": "Fiorentina",
+    "season": "2026/27",
+    "primaryColor": "#5B2A86",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#5B2A86"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
     "id": "fra",
     "kind": "nation",
     "name": "France",
@@ -292,6 +530,34 @@
       "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
       "orientation": "vertical"
     }
+  },
+  {
+    "id": "ful",
+    "kind": "club",
+    "name": "Fulham",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
+    "id": "gen",
+    "kind": "club",
+    "name": "Genoa",
+    "season": "2026/27",
+    "primaryColor": "#AD1919",
+    "secondaryColor": "#05232F",
+    "verified": true,
+    "marker": {
+      "bands": ["#AD1919", "#05232F"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
   },
   {
     "id": "get",
@@ -353,6 +619,20 @@
     }
   },
   {
+    "id": "juv",
+    "kind": "club",
+    "name": "Juventus",
+    "season": "2026/27",
+    "primaryColor": "#000000",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#000000", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
     "id": "koe",
     "kind": "club",
     "name": "1. FC Köln",
@@ -367,6 +647,62 @@
     "league": "bundesliga"
   },
   {
+    "id": "laz",
+    "kind": "club",
+    "name": "Lazio",
+    "season": "2026/27",
+    "primaryColor": "#6CACE4",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#6CACE4"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
+    "id": "lec",
+    "kind": "club",
+    "name": "Lecce",
+    "season": "2026/27",
+    "primaryColor": "#FFE600",
+    "secondaryColor": "#C8102E",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFE600", "#C8102E"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
+    "id": "lee",
+    "kind": "club",
+    "name": "Leeds United",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#FFCD00",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#FFCD00"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
+    "id": "len",
+    "kind": "club",
+    "name": "Lens",
+    "season": "2026/27",
+    "primaryColor": "#C8102E",
+    "secondaryColor": "#FFD100",
+    "verified": true,
+    "marker": {
+      "bands": ["#C8102E", "#FFD100"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
     "id": "lev",
     "kind": "club",
     "name": "Levante",
@@ -379,6 +715,76 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "lhv",
+    "kind": "club",
+    "name": "Le Havre",
+    "season": "2026/27",
+    "primaryColor": "#00A3E0",
+    "secondaryColor": "#002654",
+    "verified": true,
+    "marker": {
+      "bands": ["#00A3E0", "#002654"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "lil",
+    "kind": "club",
+    "name": "Lille",
+    "season": "2026/27",
+    "primaryColor": "#E01E13",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#E01E13", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "liv",
+    "kind": "club",
+    "name": "Liverpool",
+    "season": "2026/27",
+    "primaryColor": "#C8102E",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#C8102E"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
+    "id": "lor",
+    "kind": "club",
+    "name": "Lorient",
+    "season": "2026/27",
+    "primaryColor": "#FF6600",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#FF6600", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "lyo",
+    "kind": "club",
+    "name": "Lyon",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#0033A0",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#0033A0"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
   },
   {
     "id": "m05",
@@ -409,6 +815,160 @@
     "league": "la-liga"
   },
   {
+    "id": "mar",
+    "kind": "club",
+    "name": "Marseille",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#009DDC",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#009DDC"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "mci",
+    "kind": "club",
+    "name": "Manchester City",
+    "season": "2026/27",
+    "primaryColor": "#6CADDF",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#6CADDF"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
+    "id": "met",
+    "kind": "club",
+    "name": "Metz",
+    "season": "2026/27",
+    "primaryColor": "#8A1538",
+    "secondaryColor": "#6CACE4",
+    "verified": true,
+    "marker": {
+      "bands": ["#8A1538", "#6CACE4"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "mil",
+    "kind": "club",
+    "name": "AC Milan",
+    "season": "2026/27",
+    "primaryColor": "#FB090B",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#FB090B", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
+    "id": "mon",
+    "kind": "club",
+    "name": "Monaco",
+    "season": "2026/27",
+    "primaryColor": "#E51937",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#E51937", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "mun",
+    "kind": "club",
+    "name": "Manchester United",
+    "season": "2026/27",
+    "primaryColor": "#DA291C",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#DA291C"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
+    "id": "nan",
+    "kind": "club",
+    "name": "Nantes",
+    "season": "2026/27",
+    "primaryColor": "#FFE500",
+    "secondaryColor": "#007A3D",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFE500", "#007A3D"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "nap",
+    "kind": "club",
+    "name": "Napoli",
+    "season": "2026/27",
+    "primaryColor": "#12A0D7",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#12A0D7"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
+    "id": "new",
+    "kind": "club",
+    "name": "Newcastle United",
+    "season": "2026/27",
+    "primaryColor": "#241F20",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#241F20", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
+    "id": "nfo",
+    "kind": "club",
+    "name": "Nottingham Forest",
+    "season": "2026/27",
+    "primaryColor": "#DD0000",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#DD0000"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
+    "id": "nic",
+    "kind": "club",
+    "name": "Nice",
+    "season": "2026/27",
+    "primaryColor": "#D2001C",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#D2001C", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
     "id": "osa",
     "kind": "club",
     "name": "Osasuna",
@@ -421,6 +981,48 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "par",
+    "kind": "club",
+    "name": "Parma",
+    "season": "2026/27",
+    "primaryColor": "#FFE500",
+    "secondaryColor": "#002F6C",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFE500", "#002F6C"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
+    "id": "pfc",
+    "kind": "club",
+    "name": "Paris FC",
+    "season": "2026/27",
+    "primaryColor": "#0033A0",
+    "secondaryColor": "#ED1C24",
+    "verified": true,
+    "marker": {
+      "bands": ["#0033A0", "#ED1C24"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "pis",
+    "kind": "club",
+    "name": "Pisa",
+    "season": "2026/27",
+    "primaryColor": "#00205B",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#00205B", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
   },
   {
     "id": "psg",
@@ -480,6 +1082,20 @@
     "league": "la-liga"
   },
   {
+    "id": "ren",
+    "kind": "club",
+    "name": "Rennes",
+    "season": "2026/27",
+    "primaryColor": "#E2001A",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#E2001A", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
     "id": "rma",
     "kind": "club",
     "name": "Real Madrid",
@@ -492,6 +1108,21 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "rom",
+    "kind": "club",
+    "name": "Roma",
+    "season": "2026/27",
+    "primaryColor": "#8E1F2F",
+    "secondaryColor": "#F0BC42",
+    "verified": true,
+    "marker": {
+      "bands": ["#8E1F2F", "#F0BC42"],
+      "orientation": "vertical",
+      "weights": [3, 1]
+    },
+    "league": "serie-a"
   },
   {
     "id": "rso",
@@ -520,6 +1151,20 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "sas",
+    "kind": "club",
+    "name": "Sassuolo",
+    "season": "2026/27",
+    "primaryColor": "#00A650",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#00A650", "#000000"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
   },
   {
     "id": "scf",
@@ -578,6 +1223,34 @@
     "league": "bundesliga"
   },
   {
+    "id": "str",
+    "kind": "club",
+    "name": "Strasbourg",
+    "season": "2026/27",
+    "primaryColor": "#0060A9",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#0060A9", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
+  },
+  {
+    "id": "sun",
+    "kind": "club",
+    "name": "Sunderland",
+    "season": "2026/27",
+    "primaryColor": "#EB172B",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#EB172B", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
     "id": "svw",
     "kind": "club",
     "name": "Werder Bremen",
@@ -590,6 +1263,48 @@
       "orientation": "vertical"
     },
     "league": "bundesliga"
+  },
+  {
+    "id": "tor",
+    "kind": "club",
+    "name": "Torino",
+    "season": "2026/27",
+    "primaryColor": "#8A1538",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#8A1538"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
+    "id": "tot",
+    "kind": "club",
+    "name": "Tottenham Hotspur",
+    "season": "2026/27",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#132257",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#132257"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
+    "id": "tou",
+    "kind": "club",
+    "name": "Toulouse",
+    "season": "2026/27",
+    "primaryColor": "#5A2D82",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#5A2D82", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "ligue-1"
   },
   {
     "id": "tsg",
@@ -606,6 +1321,20 @@
     "league": "bundesliga"
   },
   {
+    "id": "udi",
+    "kind": "club",
+    "name": "Udinese",
+    "season": "2026/27",
+    "primaryColor": "#000000",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#000000", "#FFFFFF"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
+  },
+  {
     "id": "val",
     "kind": "club",
     "name": "Valencia",
@@ -618,6 +1347,20 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "ver",
+    "kind": "club",
+    "name": "Hellas Verona",
+    "season": "2026/27",
+    "primaryColor": "#FFD400",
+    "secondaryColor": "#00246B",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFD400", "#00246B"],
+      "orientation": "vertical"
+    },
+    "league": "serie-a"
   },
   {
     "id": "vfb",
@@ -648,6 +1391,20 @@
     "league": "la-liga"
   },
   {
+    "id": "whu",
+    "kind": "club",
+    "name": "West Ham United",
+    "season": "2026/27",
+    "primaryColor": "#7A263A",
+    "secondaryColor": "#1BB1E7",
+    "verified": true,
+    "marker": {
+      "bands": ["#7A263A", "#1BB1E7"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
+  },
+  {
     "id": "wob",
     "kind": "club",
     "name": "VfL Wolfsburg",
@@ -660,5 +1417,19 @@
       "orientation": "vertical"
     },
     "league": "bundesliga"
+  },
+  {
+    "id": "wol",
+    "kind": "club",
+    "name": "Wolverhampton Wanderers",
+    "season": "2026/27",
+    "primaryColor": "#FDB913",
+    "secondaryColor": "#231F20",
+    "verified": true,
+    "marker": {
+      "bands": ["#FDB913", "#231F20"],
+      "orientation": "vertical"
+    },
+    "league": "premier-league"
   }
 ]

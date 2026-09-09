@@ -5,5 +5,13 @@
       "player": "grimaldo",
       "name": "Alejandro Grimaldo"
     }
+  ],
+  "titleAliases": [],
+  "notInSquad": [
+    {
+      "team": "ver",
+      "title": "Rafik Belghali",
+      "reason": "transferred to Torino, who list him at #45 as of 2026-09-05; Verona's article still carries his old #7 and neither row is annotated as a loan"
+    }
   ]
 }

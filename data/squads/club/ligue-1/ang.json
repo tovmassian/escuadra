@@ -1,0 +1,114 @@
+{
+  "id": "ang",
+  "kind": "club",
+  "name": "Angers",
+  "season": "2026/27",
+  "primaryColor": "#000000",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#000000", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Angers_SCO",
+  "members": [
+    {
+      "playerId": "anthony-lopes",
+      "no": 1
+    },
+    {
+      "playerId": "carlens-arcus",
+      "no": 2
+    },
+    {
+      "playerId": "ousmane-camara",
+      "no": 4
+    },
+    {
+      "playerId": "louis-mouton",
+      "no": 6
+    },
+    {
+      "playerId": "usman-simbakoli",
+      "no": 7
+    },
+    {
+      "playerId": "branco-van-den-boomen",
+      "no": 8
+    },
+    {
+      "playerId": "prosper-peter",
+      "no": 9
+    },
+    {
+      "playerId": "amine-sbai",
+      "no": 10
+    },
+    {
+      "playerId": "harouna-djibirin",
+      "no": 11
+    },
+    {
+      "playerId": "yassin-belkhdim",
+      "no": 14
+    },
+    {
+      "playerId": "melvin-zinga",
+      "no": 16
+    },
+    {
+      "playerId": "joseph-kalulu",
+      "no": 17
+    },
+    {
+      "playerId": "jim-allevinah",
+      "no": 18
+    },
+    {
+      "playerId": "amine-el-ouazzani",
+      "no": 19
+    },
+    {
+      "playerId": "marius-louer",
+      "no": 20
+    },
+    {
+      "playerId": "jordan-lefort",
+      "no": 21
+    },
+    {
+      "playerId": "emmanuel-biumla",
+      "no": 24
+    },
+    {
+      "playerId": "anthony-bermont",
+      "no": 26
+    },
+    {
+      "playerId": "lilian-raolisoa",
+      "no": 27
+    },
+    {
+      "playerId": "mael-gernigon",
+      "no": 34
+    },
+    {
+      "playerId": "bane-diatta",
+      "no": 36
+    },
+    {
+      "playerId": "jules-bouffandeau",
+      "no": 37
+    },
+    {
+      "playerId": "oumar-pona",
+      "no": 40
+    },
+    {
+      "playerId": "haris-belkebla",
+      "no": 93,
+      "captain": true
+    }
+  ]
+}

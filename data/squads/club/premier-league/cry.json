@@ -1,0 +1,130 @@
+{
+  "id": "cry",
+  "kind": "club",
+  "name": "Crystal Palace",
+  "season": "2026/27",
+  "primaryColor": "#1B458F",
+  "secondaryColor": "#C4122E",
+  "verified": true,
+  "marker": {
+    "bands": ["#1B458F", "#C4122E"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Crystal_Palace_F.C.",
+  "members": [
+    {
+      "playerId": "dean-henderson",
+      "no": 1,
+      "captain": true
+    },
+    {
+      "playerId": "tyrick-mitchell",
+      "no": 3
+    },
+    {
+      "playerId": "chadi-riad",
+      "no": 4
+    },
+    {
+      "playerId": "axel-disasi",
+      "no": 5
+    },
+    {
+      "playerId": "jaydee-canvot",
+      "no": 6
+    },
+    {
+      "playerId": "ismaila-sarr",
+      "no": 7
+    },
+    {
+      "playerId": "jefferson-lerma",
+      "no": 8
+    },
+    {
+      "playerId": "eddie-nketiah",
+      "no": 9
+    },
+    {
+      "playerId": "pino",
+      "no": 10
+    },
+    {
+      "playerId": "dwight-mcneil",
+      "no": 11
+    },
+    {
+      "playerId": "zavier-gozo",
+      "no": 12
+    },
+    {
+      "playerId": "mateta",
+      "no": 14
+    },
+    {
+      "playerId": "tomiyasu",
+      "no": 17
+    },
+    {
+      "playerId": "kamada",
+      "no": 18
+    },
+    {
+      "playerId": "will-hughes",
+      "no": 19
+    },
+    {
+      "playerId": "adam-wharton",
+      "no": 20
+    },
+    {
+      "playerId": "honest-ahanor",
+      "no": 21
+    },
+    {
+      "playerId": "jorgen-strand-larsen",
+      "no": 22
+    },
+    {
+      "playerId": "quinten-timber",
+      "no": 23
+    },
+    {
+      "playerId": "dario-osorio",
+      "no": 24
+    },
+    {
+      "playerId": "anan-khalaili",
+      "no": 25
+    },
+    {
+      "playerId": "chris-richards",
+      "no": 26
+    },
+    {
+      "playerId": "cheick-doucoure",
+      "no": 28
+    },
+    {
+      "playerId": "evann-guessand",
+      "no": 29
+    },
+    {
+      "playerId": "oscar-mingueza",
+      "no": 30
+    },
+    {
+      "playerId": "remi-matthews",
+      "no": 31
+    },
+    {
+      "playerId": "ben-chilwell",
+      "no": 33
+    },
+    {
+      "playerId": "walter-benitez",
+      "no": 44
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "id": "bre",
+  "kind": "club",
+  "name": "Brentford",
+  "season": "2026/27",
+  "primaryColor": "#D2122E",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#D2122E", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Brentford_F.C.",
+  "members": [
+    {
+      "playerId": "caoimhin-kelleher",
+      "no": 1
+    },
+    {
+      "playerId": "aaron-hickey",
+      "no": 2
+    },
+    {
+      "playerId": "rico-henry",
+      "no": 3
+    },
+    {
+      "playerId": "sepp-van-den-berg",
+      "no": 4
+    },
+    {
+      "playerId": "yehor-yarmolyuk",
+      "no": 6
+    },
+    {
+      "playerId": "kevin-schade",
+      "no": 7
+    },
+    {
+      "playerId": "mathias-jensen",
+      "no": 8
+    },
+    {
+      "playerId": "igor-thiago",
+      "no": 9
+    },
+    {
+      "playerId": "josh-dasilva",
+      "no": 10
+    },
+    {
+      "playerId": "dango-ouattara",
+      "no": 11
+    },
+    {
+      "playerId": "hakon-valdimarsson",
+      "no": 12
+    },
+    {
+      "playerId": "callum-wilson",
+      "no": 13
+    },
+    {
+      "playerId": "fabio-carvalho",
+      "no": 14
+    },
+    {
+      "playerId": "antoni-milambo",
+      "no": 17
+    },
+    {
+      "playerId": "mamadou-sangare",
+      "no": 18
+    },
+    {
+      "playerId": "jaidon-anthony",
+      "no": 19
+    },
+    {
+      "playerId": "kristoffer-ajer",
+      "no": 20
+    },
+    {
+      "playerId": "nathan-collins",
+      "no": 22,
+      "captain": true
+    },
+    {
+      "playerId": "keane-lewispotter",
+      "no": 23
+    },
+    {
+      "playerId": "mikkel-damsgaard",
+      "no": 24
+    },
+    {
+      "playerId": "el-hadji-malick-diouf",
+      "no": 25
+    },
+    {
+      "playerId": "vitaly-janelt",
+      "no": 27
+    },
+    {
+      "playerId": "ellery-balcombe",
+      "no": 31
+    },
+    {
+      "playerId": "michael-kayode",
+      "no": 33
+    },
+    {
+      "playerId": "kim-jisoo",
+      "no": 36
+    },
+    {
+      "playerId": "gustavo-nunes",
+      "no": 39
+    },
+    {
+      "playerId": "jannik-schuster",
+      "no": 44
+    },
+    {
+      "playerId": "kaye-furo",
+      "no": 47
+    },
+    {
+      "playerId": "benjamin-fredrick",
+      "no": 48
+    }
+  ]
+}

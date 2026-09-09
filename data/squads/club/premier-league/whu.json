@@ -1,0 +1,130 @@
+{
+  "id": "whu",
+  "kind": "club",
+  "name": "West Ham United",
+  "season": "2026/27",
+  "primaryColor": "#7A263A",
+  "secondaryColor": "#1BB1E7",
+  "verified": true,
+  "marker": {
+    "bands": ["#7A263A", "#1BB1E7"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/West_Ham_United_F.C.",
+  "members": [
+    {
+      "playerId": "mads-hermansen",
+      "no": 1
+    },
+    {
+      "playerId": "kyle-walkerpeters",
+      "no": 2
+    },
+    {
+      "playerId": "maximilian-kilman",
+      "no": 3
+    },
+    {
+      "playerId": "edson-alvarez",
+      "no": 4
+    },
+    {
+      "playerId": "morato",
+      "no": 5
+    },
+    {
+      "playerId": "arne-engels",
+      "no": 7
+    },
+    {
+      "playerId": "joel-piroe",
+      "no": 9
+    },
+    {
+      "playerId": "manor-solomon",
+      "no": 10
+    },
+    {
+      "playerId": "taty-castellanos",
+      "no": 11
+    },
+    {
+      "playerId": "divine-mukasa",
+      "no": 14
+    },
+    {
+      "playerId": "konstantinos-mavropanos",
+      "no": 15
+    },
+    {
+      "playerId": "mohamadou-kante",
+      "no": 17
+    },
+    {
+      "playerId": "adama-boiro",
+      "no": 18
+    },
+    {
+      "playerId": "pablo",
+      "no": 19
+    },
+    {
+      "playerId": "jarrod-bowen",
+      "no": 20,
+      "captain": true
+    },
+    {
+      "playerId": "keiber-lamadrid",
+      "no": 21
+    },
+    {
+      "playerId": "maxwel-cornet",
+      "no": 22
+    },
+    {
+      "playerId": "alphonse-areola",
+      "no": 23
+    },
+    {
+      "playerId": "soungoutou-magassa",
+      "no": 27
+    },
+    {
+      "playerId": "tomas-soucek",
+      "no": 28
+    },
+    {
+      "playerId": "oliver-scarles",
+      "no": 30
+    },
+    {
+      "playerId": "joel-veltman",
+      "no": 34
+    },
+    {
+      "playerId": "edvin-austbo",
+      "no": 35
+    },
+    {
+      "playerId": "finlay-herrick",
+      "no": 49
+    },
+    {
+      "playerId": "airidas-golambeckis",
+      "no": 58
+    },
+    {
+      "playerId": "lewis-orford",
+      "no": 61
+    },
+    {
+      "playerId": "ezra-mayers",
+      "no": 63
+    },
+    {
+      "playerId": "joshua-ajala",
+      "no": 66
+    }
+  ]
+}

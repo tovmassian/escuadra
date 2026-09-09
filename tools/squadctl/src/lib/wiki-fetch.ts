@@ -87,17 +87,26 @@ async function getText(url: string, userAgent: string): Promise<string> {
 }
 
 interface SectionsResponse {
-  parse?: { sections?: WikiSection[] };
+  parse?: { title?: string; sections?: WikiSection[] };
 }
 
 /** The section index is ALWAYS re-resolved online and never trusted from a
  *  previous run: a squad section's number moves as an article is edited
- *  (Arsenal's was 24 on the day this was written, and that is not stable). */
+ *  (Arsenal's was 24 on the day this was written, and that is not stable).
+ *
+ *  `redirects=1` matters: a registry `source` naming a redirect (AS Monaco ->
+ *  AS Monaco FC) otherwise resolves against the redirect stub itself, which
+ *  carries no sections at all, and reads as "no squad section found" rather
+ *  than what it is. The response's own `parse.title` is the canonical title
+ *  MediaWiki actually resolved to, and the raw-wikitext request below must
+ *  use that — `action=raw` does not follow redirects the way `action=parse`
+ *  does, so fetching by the original title 404s even once the section index
+ *  is resolved correctly. */
 async function resolveSection(
   title: string,
   userAgent: string,
-): Promise<{ index: string; sectionTitle: SectionTitle }> {
-  const url = `${API}?action=parse&page=${encodeURIComponent(title)}&prop=sections&format=json`;
+): Promise<{ index: string; sectionTitle: SectionTitle; resolvedTitle: string }> {
+  const url = `${API}?action=parse&page=${encodeURIComponent(title)}&redirects=1&prop=sections&format=json`;
   const body = await getText(url, userAgent);
   let parsed: SectionsResponse;
   try {
@@ -113,7 +122,11 @@ async function resolveSection(
   if (!selected) {
     throw new WikiFetchError(`no squad section found on ${title}`, 'no-section');
   }
-  return { index: selected.index, sectionTitle: selected.title };
+  return {
+    index: selected.index,
+    sectionTitle: selected.title,
+    resolvedTitle: parsed.parse?.title ?? title,
+  };
 }
 
 function metaPath(cacheDir: string, title: string): string {
@@ -160,10 +173,10 @@ export async function fetchSquadSection(
   const delayMs = options.delayMs ?? 200;
 
   await sleep(delayMs);
-  const { index, sectionTitle } = await resolveSection(title, userAgent);
+  const { index, sectionTitle, resolvedTitle } = await resolveSection(title, userAgent);
 
   await sleep(delayMs);
-  const url = `${RAW}?title=${encodeURIComponent(title)}&action=raw&section=${encodeURIComponent(index)}`;
+  const url = `${RAW}?title=${encodeURIComponent(resolvedTitle)}&action=raw&section=${encodeURIComponent(index)}`;
   const wikitext = await getText(url, userAgent);
 
   mkdirSync(options.cacheDir, { recursive: true });

@@ -1,0 +1,110 @@
+{
+  "id": "fio",
+  "kind": "club",
+  "name": "Fiorentina",
+  "season": "2026/27",
+  "primaryColor": "#5B2A86",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#5B2A86"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/ACF_Fiorentina",
+  "members": [
+    {
+      "playerId": "dodo",
+      "no": 2
+    },
+    {
+      "playerId": "radu-dragusin",
+      "no": 3
+    },
+    {
+      "playerId": "marco-brescianini",
+      "no": 4
+    },
+    {
+      "playerId": "marin-pongracic",
+      "no": 5
+    },
+    {
+      "playerId": "luca-ranieri",
+      "no": 6
+    },
+    {
+      "playerId": "arthur-atta",
+      "no": 14
+    },
+    {
+      "playerId": "joao-mario",
+      "no": 17
+    },
+    {
+      "playerId": "luca-lezzerini",
+      "no": 19
+    },
+    {
+      "playerId": "alex-jimenez",
+      "no": 20
+    },
+    {
+      "playerId": "victor-valdepenas",
+      "no": 21
+    },
+    {
+      "playerId": "beto",
+      "no": 23
+    },
+    {
+      "playerId": "alieu-njie",
+      "no": 25
+    },
+    {
+      "playerId": "cher-ndour",
+      "no": 27
+    },
+    {
+      "playerId": "pedro-goncalves",
+      "no": 28
+    },
+    {
+      "playerId": "wilfried-gnonto",
+      "no": 29
+    },
+    {
+      "playerId": "mastantuono",
+      "no": 30
+    },
+    {
+      "playerId": "mateo-pellegrino",
+      "no": 32
+    },
+    {
+      "playerId": "viery",
+      "no": 33
+    },
+    {
+      "playerId": "christ-inao-oulai",
+      "no": 42
+    },
+    {
+      "playerId": "david-de-gea",
+      "no": 43,
+      "captain": true
+    },
+    {
+      "playerId": "nicolo-fagioli",
+      "no": 44
+    },
+    {
+      "playerId": "oliver-christensen",
+      "no": 53
+    },
+    {
+      "playerId": "fabiano-parisi",
+      "no": 65
+    }
+  ]
+}

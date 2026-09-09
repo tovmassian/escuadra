@@ -1,0 +1,138 @@
+{
+  "id": "che",
+  "kind": "club",
+  "name": "Chelsea",
+  "season": "2026/27",
+  "primaryColor": "#034694",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#034694"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Chelsea_F.C.",
+  "members": [
+    {
+      "playerId": "e-martinez",
+      "no": 1
+    },
+    {
+      "playerId": "marco-palestra",
+      "no": 2
+    },
+    {
+      "playerId": "wesley-fofana",
+      "no": 3
+    },
+    {
+      "playerId": "barco",
+      "no": 4
+    },
+    {
+      "playerId": "lacroix",
+      "no": 5
+    },
+    {
+      "playerId": "levi-colwill",
+      "no": 6
+    },
+    {
+      "playerId": "pedro-neto",
+      "no": 7
+    },
+    {
+      "playerId": "joao-pedro",
+      "no": 9
+    },
+    {
+      "playerId": "cole-palmer",
+      "no": 10
+    },
+    {
+      "playerId": "jamie-gittens",
+      "no": 11
+    },
+    {
+      "playerId": "jordan-henderson",
+      "no": 14
+    },
+    {
+      "playerId": "morgan-rogers",
+      "no": 17
+    },
+    {
+      "playerId": "danny-welbeck",
+      "no": 18
+    },
+    {
+      "playerId": "jorrel-hato",
+      "no": 21
+    },
+    {
+      "playerId": "emmanuel-emegha",
+      "no": 22
+    },
+    {
+      "playerId": "geovany-quenda",
+      "no": 23
+    },
+    {
+      "playerId": "reece-james",
+      "no": 24,
+      "captain": true
+    },
+    {
+      "playerId": "moises-caicedo",
+      "no": 25
+    },
+    {
+      "playerId": "gusto",
+      "no": 27
+    },
+    {
+      "playerId": "teddy-sharmanlowe",
+      "no": 28
+    },
+    {
+      "playerId": "pep-chavarria",
+      "no": 29
+    },
+    {
+      "playerId": "aaron-anselmino",
+      "no": 30
+    },
+    {
+      "playerId": "reggie-watson",
+      "no": 31
+    },
+    {
+      "playerId": "mahdi-nicolljazuli",
+      "no": 32
+    },
+    {
+      "playerId": "josh-acheampong",
+      "no": 34
+    },
+    {
+      "playerId": "olutayo-subuloye",
+      "no": 37
+    },
+    {
+      "playerId": "mike-penders",
+      "no": 39
+    },
+    {
+      "playerId": "estevao",
+      "no": 41
+    },
+    {
+      "playerId": "gabriel-slonina",
+      "no": 44
+    },
+    {
+      "playerId": "romeo-lavia",
+      "no": 45
+    }
+  ]
+}

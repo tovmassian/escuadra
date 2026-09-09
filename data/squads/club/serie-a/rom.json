@@ -1,0 +1,111 @@
+{
+  "id": "rom",
+  "kind": "club",
+  "name": "Roma",
+  "season": "2026/27",
+  "primaryColor": "#8E1F2F",
+  "secondaryColor": "#F0BC42",
+  "verified": true,
+  "marker": {
+    "bands": ["#8E1F2F", "#F0BC42"],
+    "orientation": "vertical",
+    "weights": [3, 1]
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/A.S._Roma",
+  "members": [
+    {
+      "playerId": "devyne-rensch",
+      "no": 2
+    },
+    {
+      "playerId": "konstantinos-koulierakis",
+      "no": 3
+    },
+    {
+      "playerId": "bryan-cristante",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "evan-ndicka",
+      "no": 5
+    },
+    {
+      "playerId": "lorenzo-pellegrini",
+      "no": 7
+    },
+    {
+      "playerId": "santiago-castro",
+      "no": 9
+    },
+    {
+      "playerId": "donyell-malen",
+      "no": 14
+    },
+    {
+      "playerId": "marten-de-roon",
+      "no": 15
+    },
+    {
+      "playerId": "kone",
+      "no": 17
+    },
+    {
+      "playerId": "matias-soule",
+      "no": 18
+    },
+    {
+      "playerId": "molina",
+      "no": 20
+    },
+    {
+      "playerId": "dybala",
+      "no": 21
+    },
+    {
+      "playerId": "mario-hermoso",
+      "no": 22
+    },
+    {
+      "playerId": "gianluca-mancini",
+      "no": 23
+    },
+    {
+      "playerId": "leonardo-balerdi",
+      "no": 26
+    },
+    {
+      "playerId": "wesley",
+      "no": 43
+    },
+    {
+      "playerId": "niccolo-pisilli",
+      "no": 61
+    },
+    {
+      "playerId": "giorgio-de-marzi",
+      "no": 70
+    },
+    {
+      "playerId": "emanuele-lulli",
+      "no": 77
+    },
+    {
+      "playerId": "rodrigo-mora",
+      "no": 86
+    },
+    {
+      "playerId": "daniele-ghilardi",
+      "no": 87
+    },
+    {
+      "playerId": "pierluigi-gollini",
+      "no": 95
+    },
+    {
+      "playerId": "mile-svilar",
+      "no": 99
+    }
+  ]
+}

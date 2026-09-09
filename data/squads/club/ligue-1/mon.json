@@ -1,0 +1,122 @@
+{
+  "id": "mon",
+  "kind": "club",
+  "name": "Monaco",
+  "season": "2026/27",
+  "primaryColor": "#E51937",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#E51937", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/AS_Monaco",
+  "members": [
+    {
+      "playerId": "lukas-hradecky",
+      "no": 1
+    },
+    {
+      "playerId": "vanderson",
+      "no": 2
+    },
+    {
+      "playerId": "eric-dier",
+      "no": 3
+    },
+    {
+      "playerId": "jordan-teze",
+      "no": 4
+    },
+    {
+      "playerId": "denis-zakaria",
+      "no": 6,
+      "captain": true
+    },
+    {
+      "playerId": "mathys-detourbet",
+      "no": 7
+    },
+    {
+      "playerId": "folarin-balogun",
+      "no": 9
+    },
+    {
+      "playerId": "aleksandr-golovin",
+      "no": 10
+    },
+    {
+      "playerId": "matthis-abline",
+      "no": 11
+    },
+    {
+      "playerId": "christian-mawissa",
+      "no": 13
+    },
+    {
+      "playerId": "mika-biereth",
+      "no": 14
+    },
+    {
+      "playerId": "lamine-camara",
+      "no": 15
+    },
+    {
+      "playerId": "philipp-kohn",
+      "no": 16
+    },
+    {
+      "playerId": "stanis-idumbo",
+      "no": 17
+    },
+    {
+      "playerId": "takumi-minamino",
+      "no": 18
+    },
+    {
+      "playerId": "pape-cabral",
+      "no": 19
+    },
+    {
+      "playerId": "flavio-nazinho",
+      "no": 20
+    },
+    {
+      "playerId": "mohammed-salisu",
+      "no": 22
+    },
+    {
+      "playerId": "mamadou-coulibaly",
+      "no": 28
+    },
+    {
+      "playerId": "paris-brunner",
+      "no": 29
+    },
+    {
+      "playerId": "ansu-fati",
+      "no": 31
+    },
+    {
+      "playerId": "edan-diop",
+      "no": 37
+    },
+    {
+      "playerId": "jules-stawiecki",
+      "no": 40
+    },
+    {
+      "playerId": "samuel-nibombe",
+      "no": 44
+    },
+    {
+      "playerId": "yann-lienard",
+      "no": 50
+    },
+    {
+      "playerId": "sadibou-sane",
+      "no": 72
+    }
+  ]
+}

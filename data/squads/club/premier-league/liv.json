@@ -1,0 +1,130 @@
+{
+  "id": "liv",
+  "kind": "club",
+  "name": "Liverpool",
+  "season": "2026/27",
+  "primaryColor": "#C8102E",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#C8102E"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Liverpool_F.C.",
+  "members": [
+    {
+      "playerId": "alisson-becker",
+      "no": 1
+    },
+    {
+      "playerId": "joe-gomez",
+      "no": 2
+    },
+    {
+      "playerId": "endo",
+      "no": 3
+    },
+    {
+      "playerId": "virgil-van-dijk",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "jeremy-jacquet",
+      "no": 5
+    },
+    {
+      "playerId": "milos-kerkez",
+      "no": 6
+    },
+    {
+      "playerId": "florian-wirtz",
+      "no": 7
+    },
+    {
+      "playerId": "dominik-szoboszlai",
+      "no": 8
+    },
+    {
+      "playerId": "alexander-isak",
+      "no": 9
+    },
+    {
+      "playerId": "mac-allister",
+      "no": 10
+    },
+    {
+      "playerId": "conor-bradley",
+      "no": 12
+    },
+    {
+      "playerId": "federico-chiesa",
+      "no": 14
+    },
+    {
+      "playerId": "giovanni-leoni",
+      "no": 15
+    },
+    {
+      "playerId": "cody-gakpo",
+      "no": 18
+    },
+    {
+      "playerId": "kostas-tsimikas",
+      "no": 21
+    },
+    {
+      "playerId": "hugo-ekitike",
+      "no": 22
+    },
+    {
+      "playerId": "victor-munoz",
+      "no": 23
+    },
+    {
+      "playerId": "giorgi-mamardashvili",
+      "no": 25
+    },
+    {
+      "playerId": "freddie-woodman",
+      "no": 28
+    },
+    {
+      "playerId": "barcola",
+      "no": 29
+    },
+    {
+      "playerId": "jeremie-frimpong",
+      "no": 30
+    },
+    {
+      "playerId": "araujo",
+      "no": 33
+    },
+    {
+      "playerId": "ryan-gravenberch",
+      "no": 38
+    },
+    {
+      "playerId": "trey-nyoni",
+      "no": 42
+    },
+    {
+      "playerId": "james-mcconnell",
+      "no": 53
+    },
+    {
+      "playerId": "vitezslav-jaros",
+      "no": 56
+    },
+    {
+      "playerId": "rio-ngumoha",
+      "no": 73
+    },
+    {
+      "playerId": "harvey-davies",
+      "no": 95
+    }
+  ]
+}

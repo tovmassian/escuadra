@@ -1,0 +1,137 @@
+{
+  "id": "nic",
+  "kind": "club",
+  "name": "Nice",
+  "season": "2026/27",
+  "primaryColor": "#D2001C",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#D2001C", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/OGC_Nice",
+  "members": [
+    {
+      "playerId": "ali-abdi",
+      "no": 2
+    },
+    {
+      "playerId": "mohamed-abdelmonem",
+      "no": 5
+    },
+    {
+      "playerId": "hicham-boudaoui",
+      "no": 6
+    },
+    {
+      "playerId": "gauthier-hein",
+      "no": 7
+    },
+    {
+      "playerId": "morgan-sanson",
+      "no": 8
+    },
+    {
+      "playerId": "mohamed-amoura",
+      "no": 9
+    },
+    {
+      "playerId": "sofiane-diop",
+      "no": 10
+    },
+    {
+      "playerId": "elye-wahi",
+      "no": 11
+    },
+    {
+      "playerId": "victor-orakpo",
+      "no": 14
+    },
+    {
+      "playerId": "laurent-abergel",
+      "no": 19
+    },
+    {
+      "playerId": "isak-jansson",
+      "no": 21
+    },
+    {
+      "playerId": "issiaga-camara",
+      "no": 22
+    },
+    {
+      "playerId": "yehvann-diouf",
+      "no": 23
+    },
+    {
+      "playerId": "niels-nkounkou",
+      "no": 27
+    },
+    {
+      "playerId": "axel-witsel",
+      "no": 28
+    },
+    {
+      "playerId": "nathan-ngoumou",
+      "no": 29
+    },
+    {
+      "playerId": "antoine-mendy",
+      "no": 33
+    },
+    {
+      "playerId": "nassim-laarej",
+      "no": 34
+    },
+    {
+      "playerId": "xavier-mandza",
+      "no": 35
+    },
+    {
+      "playerId": "brad-mantsounga",
+      "no": 36
+    },
+    {
+      "playerId": "djibril-coulibaly",
+      "no": 39
+    },
+    {
+      "playerId": "zoumana-diallo",
+      "no": 44
+    },
+    {
+      "playerId": "youssouf-ndayishimiye",
+      "no": 55
+    },
+    {
+      "playerId": "martin-ponsot",
+      "no": 60
+    },
+    {
+      "playerId": "moise-bombito",
+      "no": 64
+    },
+    {
+      "playerId": "teddy-boulhendi",
+      "no": 77
+    },
+    {
+      "playerId": "hamza-koutoune",
+      "no": 84
+    },
+    {
+      "playerId": "everton-pereira",
+      "no": 87
+    },
+    {
+      "playerId": "jonathan-clauss",
+      "no": 92
+    },
+    {
+      "playerId": "salis-abdul-samed",
+      "no": 99
+    }
+  ]
+}

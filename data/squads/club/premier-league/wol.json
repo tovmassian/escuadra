@@ -1,0 +1,138 @@
+{
+  "id": "wol",
+  "kind": "club",
+  "name": "Wolverhampton Wanderers",
+  "season": "2026/27",
+  "primaryColor": "#FDB913",
+  "secondaryColor": "#231F20",
+  "verified": true,
+  "marker": {
+    "bands": ["#FDB913", "#231F20"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Wolverhampton_Wanderers_F.C.",
+  "members": [
+    {
+      "playerId": "jose-sa",
+      "no": 1
+    },
+    {
+      "playerId": "kieran-trippier",
+      "no": 2
+    },
+    {
+      "playerId": "hugo-bueno",
+      "no": 3
+    },
+    {
+      "playerId": "santiago-bueno",
+      "no": 4
+    },
+    {
+      "playerId": "marshall-munetsi",
+      "no": 5
+    },
+    {
+      "playerId": "andre",
+      "no": 7
+    },
+    {
+      "playerId": "jordan-james",
+      "no": 8
+    },
+    {
+      "playerId": "raul-jimenez",
+      "no": 9
+    },
+    {
+      "playerId": "adam-armstrong",
+      "no": 10
+    },
+    {
+      "playerId": "bertrand-traore",
+      "no": 11
+    },
+    {
+      "playerId": "boubacar-traore",
+      "no": 12
+    },
+    {
+      "playerId": "joao-virginia",
+      "no": 13
+    },
+    {
+      "playerId": "sean-neave",
+      "no": 14
+    },
+    {
+      "playerId": "yerson-mosquera",
+      "no": 15
+    },
+    {
+      "playerId": "pedro-lima",
+      "no": 17
+    },
+    {
+      "playerId": "rafiki-said",
+      "no": 19
+    },
+    {
+      "playerId": "tommy-doyle",
+      "no": 20
+    },
+    {
+      "playerId": "rodrigo-gomes",
+      "no": 21
+    },
+    {
+      "playerId": "tawanda-chirewa",
+      "no": 23
+    },
+    {
+      "playerId": "toti-gomes",
+      "no": 24,
+      "captain": true
+    },
+    {
+      "playerId": "john-ruddy",
+      "no": 26
+    },
+    {
+      "playerId": "jeanricner-bellegarde",
+      "no": 27
+    },
+    {
+      "playerId": "fer-lopez",
+      "no": 28
+    },
+    {
+      "playerId": "enso-gonzalez",
+      "no": 30
+    },
+    {
+      "playerId": "ghislain-konan",
+      "no": 33
+    },
+    {
+      "playerId": "nasser-djiga",
+      "no": 34
+    },
+    {
+      "playerId": "mateus-mane",
+      "no": 36
+    },
+    {
+      "playerId": "ladislav-krejci",
+      "no": 37
+    },
+    {
+      "playerId": "jackson-tchatchoua",
+      "no": 38
+    },
+    {
+      "playerId": "tom-edozie",
+      "no": 74
+    }
+  ]
+}

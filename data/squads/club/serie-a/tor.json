@@ -1,0 +1,134 @@
+{
+  "id": "tor",
+  "kind": "club",
+  "name": "Torino",
+  "season": "2026/27",
+  "primaryColor": "#8A1538",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#8A1538"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Torino_F.C.",
+  "members": [
+    {
+      "playerId": "nathan-patterson",
+      "no": 2
+    },
+    {
+      "playerId": "cristiano-biraghi",
+      "no": 3
+    },
+    {
+      "playerId": "eray-comert",
+      "no": 5
+    },
+    {
+      "playerId": "emirhan-ilkhan",
+      "no": 6
+    },
+    {
+      "playerId": "zakaria-aboukhlal",
+      "no": 7
+    },
+    {
+      "playerId": "rolando-mandragora",
+      "no": 8
+    },
+    {
+      "playerId": "pietro-pellegri",
+      "no": 9
+    },
+    {
+      "playerId": "nikola-vlasic",
+      "no": 10
+    },
+    {
+      "playerId": "gaetano-oristanio",
+      "no": 11
+    },
+    {
+      "playerId": "ricardo-rodriguez",
+      "no": 13
+    },
+    {
+      "playerId": "pietro-comuzzo",
+      "no": 15
+    },
+    {
+      "playerId": "sandro-kulenovic",
+      "no": 17
+    },
+    {
+      "playerId": "giovanni-simeone",
+      "no": 18
+    },
+    {
+      "playerId": "che-adams",
+      "no": 19
+    },
+    {
+      "playerId": "lucas-perri",
+      "no": 20
+    },
+    {
+      "playerId": "daniel-braganca",
+      "no": 21
+    },
+    {
+      "playerId": "cesare-casadei",
+      "no": 22
+    },
+    {
+      "playerId": "saul-coco",
+      "no": 23
+    },
+    {
+      "playerId": "diego-mascardi",
+      "no": 26
+    },
+    {
+      "playerId": "kian-fitzjim",
+      "no": 28
+    },
+    {
+      "playerId": "niccolo-fortini",
+      "no": 29
+    },
+    {
+      "playerId": "ardian-ismajli",
+      "no": 44
+    },
+    {
+      "playerId": "rafik-belghali",
+      "no": 45
+    },
+    {
+      "playerId": "gvidas-gineitis",
+      "no": 66
+    },
+    {
+      "playerId": "lapo-siviero",
+      "no": 76
+    },
+    {
+      "playerId": "alessio-cacciamani",
+      "no": 77
+    },
+    {
+      "playerId": "andrea-luongo",
+      "no": 79
+    },
+    {
+      "playerId": "franco-israel",
+      "no": 81
+    },
+    {
+      "playerId": "duvan-zapata",
+      "no": 91,
+      "captain": true
+    }
+  ]
+}

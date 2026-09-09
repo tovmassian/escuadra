@@ -292,6 +292,39 @@ export function parseUpdated(text: string): string | null {
   return `${year}-${String(month).padStart(2, '0')}-${day.padStart(2, '0')}`;
 }
 
+/** True when this row's `other=` says the player is out on loan AT ANOTHER
+ *  club — so this squad is the parent, which merely owns the registration,
+ *  and not where the player actually plays.
+ *
+ *  Premier League and Serie A articles keep the loaned-away player inline in
+ *  the main squad table rather than under an `===Out on loan===` heading, so
+ *  `trimToFirstSquadTable` has nothing to cut at and `other=` is the only
+ *  signal. Its two directions mean opposite things and both occur:
+ *
+ *    other=on loan from [[X]]              the player is HERE   -> keep
+ *    other=at [[Y]] until <date>           the player is at Y   -> drop
+ *    other=on loan to [[Y]] until <date>   the player is at Y   -> drop
+ *
+ *  Anchored at the start of the value and requiring the wikilink, for the
+ *  same reason the captain test is an exact match: `on loan from [[Atlético
+ *  Madrid]]` contains "at" and must not read as a departure.
+ *
+ *  Deliberately conservative — an unrecognised phrasing returns false and
+ *  leaves the player in both squads, which `dataIntegrity` then fails loudly
+ *  on. Quietly shortening a squad on a phrasing nobody has seen is the
+ *  unrecoverable direction. */
+export function isOutOnLoan(raw: string): boolean {
+  return /^(at|on loan to)\s+\[\[/i.test(otherAnnotation(raw));
+}
+
+/** The row's `other=` value, trimmed, or '' when it carries none. Reported
+ *  alongside a dropped row so the drop is traceable to the source text. */
+export function otherAnnotation(raw: string): string {
+  const template = findTemplates(raw)[0];
+  if (template === undefined) return '';
+  return (namedParams(template.params).other ?? '').trim();
+}
+
 function toRow(template: RawTemplate): ParsedRow {
   const params = namedParams(template.params);
   const noRaw = params.no ?? '';

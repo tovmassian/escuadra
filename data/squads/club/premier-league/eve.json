@@ -1,0 +1,102 @@
+{
+  "id": "eve",
+  "kind": "club",
+  "name": "Everton",
+  "season": "2026/27",
+  "primaryColor": "#003399",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#003399"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Everton_F.C.",
+  "members": [
+    {
+      "playerId": "jordan-pickford",
+      "no": 1
+    },
+    {
+      "playerId": "ainsley-maitlandniles",
+      "no": 2
+    },
+    {
+      "playerId": "jarrad-branthwaite",
+      "no": 4
+    },
+    {
+      "playerId": "michael-keane",
+      "no": 5
+    },
+    {
+      "playerId": "james-tarkowski",
+      "no": 6,
+      "captain": true
+    },
+    {
+      "playerId": "kiernan-dewsburyhall",
+      "no": 8
+    },
+    {
+      "playerId": "jack-grealish",
+      "no": 10
+    },
+    {
+      "playerId": "thierno-barry",
+      "no": 11
+    },
+    {
+      "playerId": "mark-travers",
+      "no": 12
+    },
+    {
+      "playerId": "jake-obrien",
+      "no": 15
+    },
+    {
+      "playerId": "vitalii-mykolenko",
+      "no": 16
+    },
+    {
+      "playerId": "tyrique-george",
+      "no": 19
+    },
+    {
+      "playerId": "tyler-dibling",
+      "no": 20
+    },
+    {
+      "playerId": "brennan-johnson",
+      "no": 22
+    },
+    {
+      "playerId": "norgaard",
+      "no": 23
+    },
+    {
+      "playerId": "charly-alcaraz",
+      "no": 24
+    },
+    {
+      "playerId": "hayden-hackney",
+      "no": 30
+    },
+    {
+      "playerId": "tom-king",
+      "no": 31
+    },
+    {
+      "playerId": "merlin-rohl",
+      "no": 34
+    },
+    {
+      "playerId": "james-garner",
+      "no": 37
+    },
+    {
+      "playerId": "harrison-armstrong",
+      "no": 45
+    }
+  ]
+}

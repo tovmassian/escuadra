@@ -1,0 +1,122 @@
+{
+  "id": "tou",
+  "kind": "club",
+  "name": "Toulouse",
+  "season": "2026/27",
+  "primaryColor": "#5A2D82",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#5A2D82", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Toulouse_FC",
+  "members": [
+    {
+      "playerId": "rasmus-nicolaisen",
+      "no": 2,
+      "captain": true
+    },
+    {
+      "playerId": "mark-mckenzie",
+      "no": 3
+    },
+    {
+      "playerId": "seny-koumbassa",
+      "no": 5
+    },
+    {
+      "playerId": "alexis-vossah",
+      "no": 6
+    },
+    {
+      "playerId": "julian-vignolo",
+      "no": 7
+    },
+    {
+      "playerId": "thomas-jorgensen",
+      "no": 8
+    },
+    {
+      "playerId": "santiago-hidalgo",
+      "no": 9
+    },
+    {
+      "playerId": "sion-oppong",
+      "no": 11
+    },
+    {
+      "playerId": "christ-tape",
+      "no": 12
+    },
+    {
+      "playerId": "jacen-russellrowe",
+      "no": 13
+    },
+    {
+      "playerId": "niko-sigur",
+      "no": 14
+    },
+    {
+      "playerId": "aron-donnum",
+      "no": 15
+    },
+    {
+      "playerId": "guillaume-restes",
+      "no": 16
+    },
+    {
+      "playerId": "abu-francis",
+      "no": 17
+    },
+    {
+      "playerId": "mathis-amougou",
+      "no": 18
+    },
+    {
+      "playerId": "david-odogu",
+      "no": 19
+    },
+    {
+      "playerId": "casper-tengstedt",
+      "no": 20
+    },
+    {
+      "playerId": "rafik-messali",
+      "no": 22
+    },
+    {
+      "playerId": "cristian-casseres",
+      "no": 23
+    },
+    {
+      "playerId": "naime-said-mchindra",
+      "no": 30
+    },
+    {
+      "playerId": "niklas-schmidt",
+      "no": 31
+    },
+    {
+      "playerId": "ilyas-azizi",
+      "no": 37
+    },
+    {
+      "playerId": "gaetan-bakhouche",
+      "no": 44
+    },
+    {
+      "playerId": "aymen-amaaouch",
+      "no": 49
+    },
+    {
+      "playerId": "mathys-niflore",
+      "no": 60
+    },
+    {
+      "playerId": "ismail-diallo",
+      "no": 94
+    }
+  ]
+}

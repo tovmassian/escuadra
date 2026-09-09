@@ -1,0 +1,137 @@
+{
+  "id": "met",
+  "kind": "club",
+  "name": "Metz",
+  "season": "2026/27",
+  "primaryColor": "#8A1538",
+  "secondaryColor": "#6CACE4",
+  "verified": true,
+  "marker": {
+    "bands": ["#8A1538", "#6CACE4"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/FC_Metz",
+  "members": [
+    {
+      "playerId": "jonathan-fischer",
+      "no": 1
+    },
+    {
+      "playerId": "maxime-colin",
+      "no": 2
+    },
+    {
+      "playerId": "florian-miguel",
+      "no": 3
+    },
+    {
+      "playerId": "uriemichel-mboula",
+      "no": 4
+    },
+    {
+      "playerId": "jean-ruiz",
+      "no": 5
+    },
+    {
+      "playerId": "nampalys-mendy",
+      "no": 6
+    },
+    {
+      "playerId": "ibou-sane",
+      "no": 7
+    },
+    {
+      "playerId": "jessy-deminguet",
+      "no": 8
+    },
+    {
+      "playerId": "giorgi-abuashvili",
+      "no": 9
+    },
+    {
+      "playerId": "teji-savanier",
+      "no": 10
+    },
+    {
+      "playerId": "pape-moussa-fall",
+      "no": 11
+    },
+    {
+      "playerId": "alpha-toure",
+      "no": 12
+    },
+    {
+      "playerId": "joseph-mangondo",
+      "no": 17
+    },
+    {
+      "playerId": "believe-munongo",
+      "no": 18
+    },
+    {
+      "playerId": "morgan-bokele",
+      "no": 19
+    },
+    {
+      "playerId": "jahyann-pandore",
+      "no": 21
+    },
+    {
+      "playerId": "nathan-mbala",
+      "no": 22
+    },
+    {
+      "playerId": "diego-duarte",
+      "no": 23
+    },
+    {
+      "playerId": "alassane-sy",
+      "no": 27
+    },
+    {
+      "playerId": "edouard-soumahabbad",
+      "no": 29
+    },
+    {
+      "playerId": "adam-marchal",
+      "no": 32
+    },
+    {
+      "playerId": "abdourahmane-mbodji",
+      "no": 33
+    },
+    {
+      "playerId": "hamza-kadamani",
+      "no": 38
+    },
+    {
+      "playerId": "bryan-song",
+      "no": 39
+    },
+    {
+      "playerId": "ousmane-ba",
+      "no": 40
+    },
+    {
+      "playerId": "cristian-devenish",
+      "no": 42
+    },
+    {
+      "playerId": "pape-sy",
+      "no": 61
+    },
+    {
+      "playerId": "bouna-sarr",
+      "no": 70
+    },
+    {
+      "playerId": "abdoulaye-ba",
+      "no": 77
+    },
+    {
+      "playerId": "idris-mohamed",
+      "no": 98
+    }
+  ]
+}

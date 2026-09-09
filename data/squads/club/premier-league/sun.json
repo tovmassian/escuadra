@@ -1,0 +1,134 @@
+{
+  "id": "sun",
+  "kind": "club",
+  "name": "Sunderland",
+  "season": "2026/27",
+  "primaryColor": "#EB172B",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#EB172B", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Sunderland_A.F.C.",
+  "members": [
+    {
+      "playerId": "kevin-danso",
+      "no": 4
+    },
+    {
+      "playerId": "daniel-ballard",
+      "no": 5
+    },
+    {
+      "playerId": "dayann-methalie",
+      "no": 6
+    },
+    {
+      "playerId": "chemsdine-talbi",
+      "no": 7
+    },
+    {
+      "playerId": "alan-browne",
+      "no": 8
+    },
+    {
+      "playerId": "brian-brobbey",
+      "no": 9
+    },
+    {
+      "playerId": "nilson-angulo",
+      "no": 10
+    },
+    {
+      "playerId": "chris-rigg",
+      "no": 11
+    },
+    {
+      "playerId": "thomas-meunier",
+      "no": 12
+    },
+    {
+      "playerId": "luke-onien",
+      "no": 13
+    },
+    {
+      "playerId": "romaine-mundle",
+      "no": 14
+    },
+    {
+      "playerId": "omar-alderete",
+      "no": 15
+    },
+    {
+      "playerId": "reinildo",
+      "no": 17
+    },
+    {
+      "playerId": "wilson-isidor",
+      "no": 18
+    },
+    {
+      "playerId": "habib-diarra",
+      "no": 19
+    },
+    {
+      "playerId": "nordi-mukiele",
+      "no": 20
+    },
+    {
+      "playerId": "simon-moore",
+      "no": 21
+    },
+    {
+      "playerId": "robin-roefs",
+      "no": 22
+    },
+    {
+      "playerId": "noah-sadiki",
+      "no": 27
+    },
+    {
+      "playerId": "enzo-le-fee",
+      "no": 28
+    },
+    {
+      "playerId": "jules-ahoka",
+      "no": 29
+    },
+    {
+      "playerId": "melker-ellborg",
+      "no": 31
+    },
+    {
+      "playerId": "trai-hume",
+      "no": 32
+    },
+    {
+      "playerId": "granit-xhaka",
+      "no": 34,
+      "captain": true
+    },
+    {
+      "playerId": "jocelin-ta-bi",
+      "no": 37
+    },
+    {
+      "playerId": "malick-fofana",
+      "no": 39
+    },
+    {
+      "playerId": "aji-alese",
+      "no": 42
+    },
+    {
+      "playerId": "abdoullah-ba",
+      "no": 46
+    },
+    {
+      "playerId": "juan-riquelme-angulo",
+      "no": null
+    }
+  ]
+}

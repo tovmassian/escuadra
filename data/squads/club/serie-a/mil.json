@@ -1,0 +1,126 @@
+{
+  "id": "mil",
+  "kind": "club",
+  "name": "AC Milan",
+  "season": "2026/27",
+  "primaryColor": "#FB090B",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#FB090B", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/A.C._Milan",
+  "members": [
+    {
+      "playerId": "pietro-terracciano",
+      "no": 1
+    },
+    {
+      "playerId": "pervis-estupinan",
+      "no": 2
+    },
+    {
+      "playerId": "koni-de-winter",
+      "no": 5
+    },
+    {
+      "playerId": "ruben-loftuscheek",
+      "no": 8
+    },
+    {
+      "playerId": "goncalo-ramos",
+      "no": 9
+    },
+    {
+      "playerId": "christian-pulisic",
+      "no": 11
+    },
+    {
+      "playerId": "rabiot",
+      "no": 12
+    },
+    {
+      "playerId": "sankhoun-diawara",
+      "no": 13
+    },
+    {
+      "playerId": "luka-modric",
+      "no": 14
+    },
+    {
+      "playerId": "maignan",
+      "no": 16,
+      "captain": true
+    },
+    {
+      "playerId": "omari-hutchinson",
+      "no": 20
+    },
+    {
+      "playerId": "samuel-chukwueze",
+      "no": 21
+    },
+    {
+      "playerId": "diego-moreira",
+      "no": 22
+    },
+    {
+      "playerId": "fikayo-tomori",
+      "no": 23
+    },
+    {
+      "playerId": "christian-comotto",
+      "no": 28
+    },
+    {
+      "playerId": "ardon-jashari",
+      "no": 30
+    },
+    {
+      "playerId": "strahinja-pavlovic",
+      "no": 31
+    },
+    {
+      "playerId": "davide-bartesaghi",
+      "no": 33
+    },
+    {
+      "playerId": "mario-gila",
+      "no": 34
+    },
+    {
+      "playerId": "valeri-vladimirov",
+      "no": 35
+    },
+    {
+      "playerId": "filippo-terracciano",
+      "no": 42
+    },
+    {
+      "playerId": "matteo-gabbia",
+      "no": 46
+    },
+    {
+      "playerId": "alexis-saelemaekers",
+      "no": 56
+    },
+    {
+      "playerId": "alphadjo-cisse",
+      "no": 70
+    },
+    {
+      "playerId": "francesco-camarda",
+      "no": 73
+    },
+    {
+      "playerId": "yunus-musah",
+      "no": 80
+    },
+    {
+      "playerId": "lorenzo-torriani",
+      "no": 96
+    }
+  ]
+}

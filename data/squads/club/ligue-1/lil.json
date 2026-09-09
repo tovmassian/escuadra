@@ -1,0 +1,122 @@
+{
+  "id": "lil",
+  "kind": "club",
+  "name": "Lille",
+  "season": "2026/27",
+  "primaryColor": "#E01E13",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#E01E13", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Lille_OSC",
+  "members": [
+    {
+      "playerId": "berke-ozer",
+      "no": 1
+    },
+    {
+      "playerId": "loun-srdanovic",
+      "no": 2
+    },
+    {
+      "playerId": "nathan-ngoy",
+      "no": 3
+    },
+    {
+      "playerId": "alexsandro",
+      "no": 4
+    },
+    {
+      "playerId": "nabil-bentaleb",
+      "no": 6
+    },
+    {
+      "playerId": "dilane-bakwa",
+      "no": 7
+    },
+    {
+      "playerId": "ethan-mbappe",
+      "no": 8
+    },
+    {
+      "playerId": "olivier-giroud",
+      "no": 9
+    },
+    {
+      "playerId": "hakon-haraldsson",
+      "no": 10
+    },
+    {
+      "playerId": "osame-sahraoui",
+      "no": 11
+    },
+    {
+      "playerId": "orlando-gill",
+      "no": 12
+    },
+    {
+      "playerId": "maurits-kjaergaard",
+      "no": 14
+    },
+    {
+      "playerId": "romain-perraud",
+      "no": 15
+    },
+    {
+      "playerId": "arnaud-bodart",
+      "no": 16
+    },
+    {
+      "playerId": "ngalayel-mukau",
+      "no": 17
+    },
+    {
+      "playerId": "ueda",
+      "no": 18
+    },
+    {
+      "playerId": "basar-onal",
+      "no": 19
+    },
+    {
+      "playerId": "benjamin-andre",
+      "no": 21,
+      "captain": true
+    },
+    {
+      "playerId": "tiago-santos",
+      "no": 22
+    },
+    {
+      "playerId": "tanguy-nianzou",
+      "no": 23
+    },
+    {
+      "playerId": "calvin-verdonk",
+      "no": 24
+    },
+    {
+      "playerId": "isaac-cossier",
+      "no": 26
+    },
+    {
+      "playerId": "gaetan-perrin",
+      "no": 28
+    },
+    {
+      "playerId": "hamza-igamane",
+      "no": 29
+    },
+    {
+      "playerId": "soriba-diaoune",
+      "no": 35
+    },
+    {
+      "playerId": "maxima-goffi",
+      "no": 38
+    }
+  ]
+}

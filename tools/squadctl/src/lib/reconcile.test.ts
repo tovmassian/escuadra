@@ -16,6 +16,7 @@ const player = (over: Partial<Player> & { id: string; name: string }): Player =>
   nationality: 'Spain',
   club: 'Sevilla',
   photo: null,
+  wikiTitle: null,
   ...over,
 });
 
@@ -284,5 +285,378 @@ describe('reconcileTeam', () => {
     });
     expect(plan.newPlayers[0]?.birth).toBeNull();
     expect(plan.noBirthCount).toBe(1);
+  });
+});
+
+describe('title-decisive matching', () => {
+  it('matches on title even when the display names differ', () => {
+    // Juventus renders "Nico González"; the record stores "Nicolás González".
+    // Only the shared article title can join these two.
+    const stored = [
+      player({
+        id: 'gonzalez',
+        name: 'Nicolás González',
+        wikiTitle: 'Nicolás González (footballer, born 1998)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([
+        row({ name: 'Nico González', title: 'Nicolás González (footballer, born 1998)' }),
+      ]),
+      storedSquad: squad([{ playerId: 'gonzalez', no: 10 }]),
+      players: stored,
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['gonzalez']);
+    expect(plan.newPlayers).toEqual([]);
+    expect(plan.possibleRenames).toEqual([]);
+  });
+
+  it('relates a redirect to the article it redirects to', () => {
+    // Real Madrid links [[Endrick]]; Brazil links the disambiguated title.
+    const stored = [player({ id: 'endrick', name: 'Endrick', wikiTitle: 'Endrick' })];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Endrick', title: 'Endrick (footballer, born 2006)' })]),
+      storedSquad: squad([{ playerId: 'endrick', no: 9 }]),
+      players: stored,
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['endrick']);
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  it('back-fills a null stored title from the row', () => {
+    const stored = [player({ id: 'raya', name: 'David Raya', wikiTitle: null })];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'David Raya', title: 'David Raya' })]),
+      storedSquad: squad([{ playerId: 'raya', no: 1 }]),
+      players: stored,
+    });
+    expect(plan.updatedPlayers[0]?.wikiTitle).toBe('David Raya');
+  });
+
+  it('never overwrites a stored title from the row — that is retitle', () => {
+    const stored = [player({ id: 'endrick', name: 'Endrick', wikiTitle: 'Endrick' })];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Endrick', title: 'Endrick (footballer, born 2006)' })]),
+      storedSquad: squad([{ playerId: 'endrick', no: 9 }]),
+      players: stored,
+    });
+    expect(plan.updatedPlayers.some((p) => p.id === 'endrick' && p.wikiTitle !== 'Endrick')).toBe(
+      false,
+    );
+  });
+
+  it('gives a genuinely new player the row title', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Otávio', title: 'Otávio (footballer, born 2002)' })]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.newPlayers[0]?.wikiTitle).toBe('Otávio (footballer, born 2002)');
+  });
+
+  it('leaves a row with no title to name matching, exactly as before', () => {
+    const stored = [player({ id: 'raya', name: 'David Raya', wikiTitle: 'David Raya' })];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'David Raya' })]),
+      storedSquad: squad([{ playerId: 'raya', no: 1 }]),
+      players: stored,
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['raya']);
+  });
+
+  it('matches a recorded title alias', () => {
+    // Atlético links "Alejandro Grimaldo"; the record stores Spain's title.
+    const stored = [player({ id: 'grimaldo', name: 'Álex Grimaldo', wikiTitle: 'Álex Grimaldo' })];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Alejandro Grimaldo', title: 'Alejandro Grimaldo' })]),
+      storedSquad: squad([{ playerId: 'grimaldo', no: 3 }]),
+      players: stored,
+      titleAliases: [{ player: 'grimaldo', title: 'Alejandro Grimaldo' }],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['grimaldo']);
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  it('holds the group when a bare title relates to two stored people', () => {
+    // A bare [[Otávio]] against two stored Otávios: base equivalence relates
+    // it to both and picking one would be a coin flip.
+    const stored = [
+      player({ id: 'otavio', name: 'Otávio', wikiTitle: 'Otávio (footballer, born 2002)' }),
+      player({
+        id: 'otavio-2',
+        name: 'Otávio',
+        wikiTitle: 'Otávio (footballer, born November 2005)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Otávio', title: 'Otávio' })]),
+      storedSquad: squad([
+        { playerId: 'otavio', no: 6 },
+        { playerId: 'otavio-2', no: 5 },
+      ]),
+      players: stored,
+    });
+    expect(plan.ambiguous[0]?.candidateIds.sort()).toEqual(['otavio', 'otavio-2']);
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  it('falls back to name matching when the wikiTitle key is absent', () => {
+    // Every record in data/players.json predates the field and carries no
+    // wikiTitle key at all, so `=== null` is false for them and titlesOf
+    // yields [undefined]. The ROW must carry a title for this to bite:
+    // titleVerdict returns 'unknown' on a titleless row before titlesOf is
+    // ever reached, so a titleless row would pass either way.
+    const p = player({ id: 'raya', name: 'David Raya', wikiTitle: null });
+    const { wikiTitle, ...playerWithoutKey } = p;
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'David Raya', title: 'David Raya' })]),
+      storedSquad: squad([{ playerId: 'raya', no: 1 }]),
+      players: [playerWithoutKey as Player],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['raya']);
+    expect(plan.newPlayers).toEqual([]);
+  });
+});
+
+describe('a clashing title holds the row', () => {
+  // The live bug: Frankfurt's Otávio and Paris FC's Otávio are two Brazilian
+  // defenders rendered identically, and one record was serving both squads.
+  const frankfurtRow = row({
+    name: 'Otávio',
+    no: 5,
+    position: 'DF',
+    title: 'Otávio (footballer, born November 2005)',
+  });
+
+  it('does not match a stored member whose title says someone else', () => {
+    const stored = [
+      player({
+        id: 'otavio',
+        name: 'Otávio',
+        position: 'DF',
+        wikiTitle: 'Otávio (footballer, born 2002)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([frankfurtRow]),
+      storedSquad: squad([{ playerId: 'otavio', no: 5 }]),
+      players: stored,
+    });
+    expect(plan.titleMismatches).toEqual([
+      {
+        playerId: 'otavio',
+        storedTitle: 'Otávio (footballer, born 2002)',
+        sourceTitle: 'Otávio (footballer, born November 2005)',
+        rowName: 'Otávio',
+      },
+    ]);
+  });
+
+  it('creates nothing, because a moved article looks identical to a new person', () => {
+    const stored = [
+      player({
+        id: 'otavio',
+        name: 'Otávio',
+        position: 'DF',
+        wikiTitle: 'Otávio (footballer, born 2002)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([frankfurtRow]),
+      storedSquad: squad([{ playerId: 'otavio', no: 5 }]),
+      players: stored,
+    });
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  it('keeps the squad slot, so an unresolved clash never shortens a squad', () => {
+    const stored = [
+      player({
+        id: 'otavio',
+        name: 'Otávio',
+        position: 'DF',
+        wikiTitle: 'Otávio (footballer, born 2002)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([frankfurtRow]),
+      storedSquad: squad([{ playerId: 'otavio', no: 5 }]),
+      players: stored,
+    });
+    expect(plan.squad.members).toEqual([{ playerId: 'otavio', no: 5 }]);
+    expect(plan.departed).toEqual([]);
+  });
+
+  it('omits the row when the clashing record is not in this squad', () => {
+    // Genoa's Vitinha against the stored PSG one. There is no slot to hold,
+    // so the row is left out and said so — never dropped in silence.
+    const stored = [
+      player({
+        id: 'vitinha',
+        name: 'Vitinha',
+        wikiTitle: 'Vitinha (footballer, born February 2000)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([
+        row({ name: 'Vitinha', title: 'Vitinha (footballer, born March 2000)' }),
+      ]),
+      storedSquad: null,
+      players: stored,
+    });
+    expect(plan.titleMismatches).toHaveLength(1);
+    expect(plan.omitted).toHaveLength(1);
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  it('does not clash when the stored title is unknown', () => {
+    const stored = [player({ id: 'otavio', name: 'Otávio', position: 'DF', wikiTitle: null })];
+    const plan = reconcileTeam({
+      envelope: envelope([frankfurtRow]),
+      storedSquad: squad([{ playerId: 'otavio', no: 5 }]),
+      players: stored,
+    });
+    expect(plan.titleMismatches).toEqual([]);
+    expect(plan.updatedPlayers[0]?.wikiTitle).toBe('Otávio (footballer, born November 2005)');
+  });
+
+  it('matches a globally titled fork even though the same-squad name clashes', () => {
+    // The real re-apply bug: `squadctl fork otavio "Otávio (footballer, born
+    // November 2005)"` correctly writes `otavio-2`, but a re-run of `apply`
+    // must still find it. Paris FC's stored `otavio` (born 2002) clashes on
+    // title with Frankfurt's row — that clash must not shadow the `otavio-2`
+    // record whose title the row actually matches.
+    const stored = [
+      player({
+        id: 'otavio',
+        name: 'Otávio',
+        position: 'DF',
+        wikiTitle: 'Otávio (footballer, born 2002)',
+      }),
+      player({
+        id: 'otavio-2',
+        name: 'Otávio',
+        position: 'DF',
+        wikiTitle: 'Otávio (footballer, born November 2005)',
+      }),
+    ];
+    const plan = reconcileTeam({
+      envelope: envelope([frankfurtRow]),
+      storedSquad: squad([{ playerId: 'otavio', no: 5 }]),
+      players: stored,
+    });
+    expect(plan.squad.members).toEqual([{ playerId: 'otavio-2', no: 5 }]);
+    expect(plan.titleMismatches).toEqual([]);
+    expect(plan.newPlayers).toEqual([]);
+  });
+});
+
+describe('out-on-loan rows', () => {
+  const OUT =
+    '{{Fs player|no=19|nat=ENG|pos=MF|name=[[Harvey Elliott]]|other=at [[Valencia CF|Valencia]] until 30 June 2027}}';
+  const IN =
+    '{{Fs player|no=10|nat=ENG|pos=FW|name=[[Harvey Elliott]]|other=on loan from [[Liverpool F.C.|Liverpool]]}}';
+
+  it('drops the row from the squad the player is loaned OUT of', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([
+        row({ name: 'Ander', no: 1 }),
+        row({ name: 'Harvey Elliott', no: 19, raw: OUT }),
+      ]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['ander']);
+    expect(plan.loanedOut).toEqual([
+      { name: 'Harvey Elliott', note: 'at [[Valencia CF|Valencia]] until 30 June 2027' },
+    ]);
+  });
+
+  it('KEEPS the row at the club the player is loaned IN to', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Harvey Elliott', no: 10, raw: IN })]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['harvey-elliott']);
+    expect(plan.loanedOut).toEqual([]);
+  });
+
+  it('removes a stored member who has since been loaned out, as a departure', () => {
+    const stored = player({ id: 'harvey-elliott', name: 'Harvey Elliott' });
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Harvey Elliott', no: 19, raw: OUT })]),
+      storedSquad: squad([{ playerId: 'harvey-elliott', no: 19 }]),
+      players: [stored],
+    });
+    expect(plan.squad.members).toEqual([]);
+    expect(plan.departed.map((d) => d.id)).toEqual(['harvey-elliott']);
+    // The record itself survives — it is the one the loan club reuses.
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  // parsedCount feeds the blast-radius ratio. Counting a dropped row would
+  // make a club with several loanees out look like a page restructure.
+  it('excludes dropped rows from parsedCount', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([
+        row({ name: 'Ander', no: 1 }),
+        row({ name: 'Harvey Elliott', no: 19, raw: OUT }),
+      ]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.parsedCount).toBe(1);
+  });
+});
+
+describe('notInSquad decisions', () => {
+  // The residue the loan rule cannot reach: two articles list the player
+  // identically, with no annotation on either, and only the real world says
+  // which is right.
+  const belghali = { name: 'Rafik Belghali', no: 7, title: 'Rafik Belghali' };
+
+  it('drops the row and reports the reason the operator gave', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Ander', no: 1 }), row(belghali)], { id: 'ver' }),
+      storedSquad: null,
+      players: [],
+      notInSquad: [{ team: 'ver', title: 'Rafik Belghali', reason: 'moved to Torino' }],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['ander']);
+    expect(plan.excluded).toEqual([{ name: 'Rafik Belghali', note: 'moved to Torino' }]);
+  });
+
+  it('applies only to the team it names, so the other squad keeps him', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row(belghali)], { id: 'tor' }),
+      storedSquad: null,
+      players: [],
+      notInSquad: [{ team: 'ver', title: 'Rafik Belghali', reason: 'moved to Torino' }],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['rafik-belghali']);
+    expect(plan.excluded).toEqual([]);
+  });
+
+  it('matches by title equivalence, so a redirect still resolves', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row({ ...belghali, title: 'Rafik Belghali (footballer)' })], {
+        id: 'ver',
+      }),
+      storedSquad: null,
+      players: [],
+      notInSquad: [{ team: 'ver', title: 'Rafik Belghali', reason: 'moved to Torino' }],
+    });
+    expect(plan.squad.members).toEqual([]);
+  });
+
+  it('never matches a row that carries no title, rather than falling back to the name', () => {
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Rafik Belghali', no: 7 })], { id: 'ver' }),
+      storedSquad: null,
+      players: [],
+      notInSquad: [{ team: 'ver', title: 'Rafik Belghali', reason: 'moved to Torino' }],
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['rafik-belghali']);
   });
 });

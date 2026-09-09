@@ -1,0 +1,114 @@
+{
+  "id": "ata",
+  "kind": "club",
+  "name": "Atalanta",
+  "season": "2026/27",
+  "primaryColor": "#1E3888",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#1E3888", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Atalanta_B.C.",
+  "members": [
+    {
+      "playerId": "odilon-kossounou",
+      "no": 3
+    },
+    {
+      "playerId": "isak-hien",
+      "no": 4
+    },
+    {
+      "playerId": "kamaldeen-sulemana",
+      "no": 7
+    },
+    {
+      "playerId": "mario-pasalic",
+      "no": 8
+    },
+    {
+      "playerId": "gianluca-scamacca",
+      "no": 9
+    },
+    {
+      "playerId": "lazar-samardzic",
+      "no": 10
+    },
+    {
+      "playerId": "jonathan-rowe",
+      "no": 11
+    },
+    {
+      "playerId": "ederson-silva",
+      "no": 13,
+      "captain": true
+    },
+    {
+      "playerId": "raoul-bellanova",
+      "no": 16
+    },
+    {
+      "playerId": "charles-de-ketelaere",
+      "no": 17
+    },
+    {
+      "playerId": "giacomo-raspadori",
+      "no": 18
+    },
+    {
+      "playerId": "franck-kessie",
+      "no": 19
+    },
+    {
+      "playerId": "thomas-pompei",
+      "no": 22
+    },
+    {
+      "playerId": "sead-kolasinac",
+      "no": 23
+    },
+    {
+      "playerId": "marco-carnesecchi",
+      "no": 29
+    },
+    {
+      "playerId": "thomas-kristensen",
+      "no": 31
+    },
+    {
+      "playerId": "giorgio-scalvini",
+      "no": 42
+    },
+    {
+      "playerId": "lorenzo-bernasconi",
+      "no": 47
+    },
+    {
+      "playerId": "marco-sportiello",
+      "no": 57
+    },
+    {
+      "playerId": "nicola-zalewski",
+      "no": 59
+    },
+    {
+      "playerId": "gianluca-gaetano",
+      "no": 70
+    },
+    {
+      "playerId": "davide-zappacosta",
+      "no": 77
+    },
+    {
+      "playerId": "nikola-krstovic",
+      "no": 90
+    },
+    {
+      "playerId": "eljif-elmas",
+      "no": 99
+    }
+  ]
+}
