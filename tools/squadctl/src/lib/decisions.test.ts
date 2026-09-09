@@ -113,4 +113,31 @@ describe('validateDecisions with titleAliases', () => {
       'titleAliases[0].title must be a non-empty string',
     ]);
   });
+
+  // Tests that entry-level errors from different arrays accumulate together,
+  // not that the guard placement prevents errors being discarded (the guard
+  // returns a literal array, so placement never affects it).
+  it('accumulates entry-level errors across aliases and splits sections', () => {
+    const result = validateDecisions({
+      splits: [{ team: 'arg' }],
+      aliases: [{ player: 'x' }],
+    });
+    expect(result).toContain('aliases[0].name must be a non-empty string');
+    expect(result).toContain('splits[0].departed must be a non-empty string');
+    expect(result).toContain('splits[0].arrived must be a non-empty string');
+  });
+
+  // Same as above: confirms entry-level errors from multiple arrays accumulate.
+  // Not a regression guard for the guard move, since the move changes no
+  // observable output (the guard returns a literal array, not one that
+  // includes accumulated state).
+  it('accumulates entry-level errors across titleAliases and splits sections', () => {
+    const result = validateDecisions({
+      splits: [{ team: 'arg' }],
+      titleAliases: [{ player: 'x' }],
+    });
+    expect(result).toContain('titleAliases[0].title must be a non-empty string');
+    expect(result).toContain('splits[0].departed must be a non-empty string');
+    expect(result).toContain('splits[0].arrived must be a non-empty string');
+  });
 });

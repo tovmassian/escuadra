@@ -40,6 +40,17 @@ export function validateDecisions(value: unknown): string[] {
   if (value.aliases !== undefined && !Array.isArray(value.aliases)) {
     return ['decisions.json "aliases" must be an array when present'];
   }
+  // Type guards are grouped here as early returns before any entry loop,
+  // matching the convention for splits and aliases. Each returns a single
+  // message rather than accumulating, so the guard's placement does not
+  // affect its observable output: `return [msg]` gives the same result
+  // whether it runs here or after entry loops. Grouping them at the top
+  // means a future change to accumulate errors (using `[...errors, msg]`)
+  // would be correct by construction — the guard would not accidentally
+  // discard anything already in the errors array.
+  if (value.titleAliases !== undefined && !Array.isArray(value.titleAliases)) {
+    return ['decisions.json "titleAliases" must be an array when present'];
+  }
   for (const [index, entry] of (value.aliases ?? []).entries()) {
     if (!isRecord(entry)) {
       errors.push(`aliases[${index}] must be an object`);
@@ -50,9 +61,6 @@ export function validateDecisions(value: unknown): string[] {
         errors.push(`aliases[${index}].${field} must be a non-empty string`);
       }
     }
-  }
-  if (value.titleAliases !== undefined && !Array.isArray(value.titleAliases)) {
-    return ['decisions.json "titleAliases" must be an array when present'];
   }
   for (const [index, entry] of (value.titleAliases ?? []).entries()) {
     if (!isRecord(entry)) {
