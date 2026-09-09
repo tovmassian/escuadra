@@ -1,0 +1,138 @@
+{
+  "id": "laz",
+  "kind": "club",
+  "name": "Lazio",
+  "season": "2026/27",
+  "primaryColor": "#6CACE4",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#6CACE4"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/S.S._Lazio",
+  "members": [
+    {
+      "playerId": "diogo-leite",
+      "no": 2
+    },
+    {
+      "playerId": "danilho-doekhi",
+      "no": 5
+    },
+    {
+      "playerId": "nicolo-rovella",
+      "no": 6
+    },
+    {
+      "playerId": "fisayo-delebashiru",
+      "no": 7
+    },
+    {
+      "playerId": "bruno-galassi",
+      "no": 8
+    },
+    {
+      "playerId": "andrea-pinamonti",
+      "no": 9
+    },
+    {
+      "playerId": "mattia-zaccagni",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "gustav-isaksen",
+      "no": 11
+    },
+    {
+      "playerId": "tijjani-noslin",
+      "no": 14
+    },
+    {
+      "playerId": "romano-floriani-mussolini",
+      "no": 15
+    },
+    {
+      "playerId": "frattesi",
+      "no": 16
+    },
+    {
+      "playerId": "nuno-tavares",
+      "no": 17
+    },
+    {
+      "playerId": "reda-belahyane",
+      "no": 21
+    },
+    {
+      "playerId": "matteo-cancellieri",
+      "no": 22
+    },
+    {
+      "playerId": "alfonso-pedraza",
+      "no": 23
+    },
+    {
+      "playerId": "kenneth-taylor",
+      "no": 24
+    },
+    {
+      "playerId": "oliver-provstgaard",
+      "no": 25
+    },
+    {
+      "playerId": "adrian-przyborek",
+      "no": 28
+    },
+    {
+      "playerId": "manuel-lazzari",
+      "no": 29
+    },
+    {
+      "playerId": "danilo-cataldi",
+      "no": 32
+    },
+    {
+      "playerId": "christos-mandas",
+      "no": 35
+    },
+    {
+      "playerId": "josip-sutalo",
+      "no": 37
+    },
+    {
+      "playerId": "edoardo-motta",
+      "no": 40
+    },
+    {
+      "playerId": "alessio-furlanetto",
+      "no": 55
+    },
+    {
+      "playerId": "davide-renzetti",
+      "no": 59
+    },
+    {
+      "playerId": "federico-serra",
+      "no": 63
+    },
+    {
+      "playerId": "valerio-farcomeni",
+      "no": 71
+    },
+    {
+      "playerId": "filipe-bordon",
+      "no": 76
+    },
+    {
+      "playerId": "adam-marusic",
+      "no": 77
+    },
+    {
+      "playerId": "albert-gudmundsson",
+      "no": 80
+    }
+  ]
+}

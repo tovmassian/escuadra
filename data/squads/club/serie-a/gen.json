@@ -1,0 +1,138 @@
+{
+  "id": "gen",
+  "kind": "club",
+  "name": "Genoa",
+  "season": "2026/27",
+  "primaryColor": "#AD1919",
+  "secondaryColor": "#05232F",
+  "verified": true,
+  "marker": {
+    "bands": ["#AD1919", "#05232F"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Genoa_C.F.C.",
+  "members": [
+    {
+      "playerId": "justin-bijlow",
+      "no": 1
+    },
+    {
+      "playerId": "mario-mitaj",
+      "no": 2
+    },
+    {
+      "playerId": "kingsley-ehizibue",
+      "no": 3
+    },
+    {
+      "playerId": "alex-amorim",
+      "no": 4
+    },
+    {
+      "playerId": "leo-ostigard",
+      "no": 5
+    },
+    {
+      "playerId": "tommaso-baldanzi",
+      "no": 8
+    },
+    {
+      "playerId": "vitinha-2",
+      "no": 9
+    },
+    {
+      "playerId": "junior-messias",
+      "no": 10
+    },
+    {
+      "playerId": "ethan-meichtry",
+      "no": 11
+    },
+    {
+      "playerId": "cody-drameh",
+      "no": 16
+    },
+    {
+      "playerId": "elias-havel",
+      "no": 17
+    },
+    {
+      "playerId": "milutin-osmajic",
+      "no": 18
+    },
+    {
+      "playerId": "joi-nuredini",
+      "no": 19
+    },
+    {
+      "playerId": "stefano-sabelli",
+      "no": 20
+    },
+    {
+      "playerId": "johan-vasquez",
+      "no": 22,
+      "captain": true
+    },
+    {
+      "playerId": "hamed-traore",
+      "no": 25
+    },
+    {
+      "playerId": "alessandro-marcandalli",
+      "no": 27
+    },
+    {
+      "playerId": "lorenzo-colombo",
+      "no": 29
+    },
+    {
+      "playerId": "david-puczka",
+      "no": 31
+    },
+    {
+      "playerId": "morten-frendrup",
+      "no": 32
+    },
+    {
+      "playerId": "sebastian-otoa",
+      "no": 34
+    },
+    {
+      "playerId": "daniele-sommariva",
+      "no": 39
+    },
+    {
+      "playerId": "samuel-wiafe",
+      "no": 71
+    },
+    {
+      "playerId": "mamedi-doucoure",
+      "no": 74
+    },
+    {
+      "playerId": "lorenzo-venturino",
+      "no": 76
+    },
+    {
+      "playerId": "mikael-egill-ellertsson",
+      "no": 77
+    },
+    {
+      "playerId": "marcelo-vaz",
+      "no": 85
+    },
+    {
+      "playerId": "stephan-el-shaarawy",
+      "no": 92
+    },
+    {
+      "playerId": "djibril-sow",
+      "no": 97
+    },
+    {
+      "playerId": "franz-stolz",
+      "no": 99
+    }
+  ]
+}

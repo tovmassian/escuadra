@@ -1,0 +1,130 @@
+{
+  "id": "par",
+  "kind": "club",
+  "name": "Parma",
+  "season": "2026/27",
+  "primaryColor": "#FFE500",
+  "secondaryColor": "#002F6C",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFE500", "#002F6C"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Parma_Calcio_1913",
+  "members": [
+    {
+      "playerId": "abdoulaye-ndiaye",
+      "no": 3
+    },
+    {
+      "playerId": "lautaro-valenti",
+      "no": 5
+    },
+    {
+      "playerId": "ousmane-diallo",
+      "no": 7
+    },
+    {
+      "playerId": "benjamin-cremaschi",
+      "no": 8
+    },
+    {
+      "playerId": "david-romero",
+      "no": 9
+    },
+    {
+      "playerId": "adrian-bernabe",
+      "no": 10
+    },
+    {
+      "playerId": "pontus-almqvist",
+      "no": 11
+    },
+    {
+      "playerId": "emanuele-valeri",
+      "no": 14
+    },
+    {
+      "playerId": "enrico-delprato",
+      "no": 15,
+      "captain": true
+    },
+    {
+      "playerId": "mandela-keita",
+      "no": 16
+    },
+    {
+      "playerId": "el-bilal-toure",
+      "no": 19
+    },
+    {
+      "playerId": "matija-frigan",
+      "no": 20
+    },
+    {
+      "playerId": "nesta-elphege",
+      "no": 23
+    },
+    {
+      "playerId": "thomas-de-martis",
+      "no": 25
+    },
+    {
+      "playerId": "sascha-britschgi",
+      "no": 27
+    },
+    {
+      "playerId": "franco-carboni",
+      "no": 29
+    },
+    {
+      "playerId": "giovanni-daffara",
+      "no": 30
+    },
+    {
+      "playerId": "christian-ordonez",
+      "no": 32
+    },
+    {
+      "playerId": "mariano-troilo",
+      "no": 37
+    },
+    {
+      "playerId": "edoardo-corvi",
+      "no": 40
+    },
+    {
+      "playerId": "hans-nicolussi-caviglia",
+      "no": 41
+    },
+    {
+      "playerId": "abdousalam-konate",
+      "no": 47
+    },
+    {
+      "playerId": "dominik-drobnic",
+      "no": 72
+    },
+    {
+      "playerId": "simone-lontani",
+      "no": 76
+    },
+    {
+      "playerId": "giovanni-fabbian",
+      "no": 80
+    },
+    {
+      "playerId": "diego-carlos",
+      "no": null
+    },
+    {
+      "playerId": "simone-ghidotti",
+      "no": null
+    },
+    {
+      "playerId": "vincent-sierro",
+      "no": null
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "bol",
+  "kind": "club",
+  "name": "Bologna",
+  "season": "2026/27",
+  "primaryColor": "#A6192E",
+  "secondaryColor": "#12264F",
+  "verified": true,
+  "marker": {
+    "bands": ["#A6192E", "#12264F"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Bologna_F.C._1909",
+  "members": [
+    {
+      "playerId": "lukasz-skorupski",
+      "no": 1
+    },
+    {
+      "playerId": "emil-holm",
+      "no": 2
+    },
+    {
+      "playerId": "arthur-theate",
+      "no": 3
+    },
+    {
+      "playerId": "tommaso-pobega",
+      "no": 4
+    },
+    {
+      "playerId": "eivind-helland",
+      "no": 5
+    },
+    {
+      "playerId": "nikola-moro",
+      "no": 6
+    },
+    {
+      "playerId": "riccardo-orsolini",
+      "no": 7
+    },
+    {
+      "playerId": "mikel-amondarain",
+      "no": 8
+    },
+    {
+      "playerId": "artem-dovbyk",
+      "no": 9
+    },
+    {
+      "playerId": "federico-bernardeschi",
+      "no": 10
+    },
+    {
+      "playerId": "samuel-mbangula",
+      "no": 11
+    },
+    {
+      "playerId": "torbjorn-heggem",
+      "no": 14
+    },
+    {
+      "playerId": "nicolo-casale",
+      "no": 16
+    },
+    {
+      "playerId": "oussama-el-azzouzi",
+      "no": 17
+    },
+    {
+      "playerId": "lewis-ferguson",
+      "no": 19
+    },
+    {
+      "playerId": "nadir-zortea",
+      "no": 20
+    },
+    {
+      "playerId": "jens-odgaard",
+      "no": 21
+    },
+    {
+      "playerId": "jay-enem",
+      "no": 22
+    },
+    {
+      "playerId": "rahim-alhassane",
+      "no": 23
+    },
+    {
+      "playerId": "massimo-pessina",
+      "no": 25
+    },
+    {
+      "playerId": "nicolo-cambiaghi",
+      "no": 28
+    },
+    {
+      "playerId": "lorenzo-de-silvestri",
+      "no": 29,
+      "captain": true
+    },
+    {
+      "playerId": "juan-miranda",
+      "no": 33
+    },
+    {
+      "playerId": "martin-vitik",
+      "no": 41
+    },
+    {
+      "playerId": "ukko-happonen",
+      "no": 77
+    },
+    {
+      "playerId": "roberto-piccoli",
+      "no": 91
+    }
+  ]
+}

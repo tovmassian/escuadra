@@ -1,0 +1,114 @@
+{
+  "id": "lee",
+  "kind": "club",
+  "name": "Leeds United",
+  "season": "2026/27",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#FFCD00",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#FFCD00"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Leeds_United_F.C.",
+  "members": [
+    {
+      "playerId": "james-trafford",
+      "no": 1
+    },
+    {
+      "playerId": "jayden-bogle",
+      "no": 2
+    },
+    {
+      "playerId": "gabriel-gudmundsson",
+      "no": 3
+    },
+    {
+      "playerId": "ethan-ampadu",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "tarik-muharemovic",
+      "no": 5
+    },
+    {
+      "playerId": "joe-rodon",
+      "no": 6
+    },
+    {
+      "playerId": "daniel-james",
+      "no": 7
+    },
+    {
+      "playerId": "sean-longstaff",
+      "no": 8
+    },
+    {
+      "playerId": "dominic-calvertlewin",
+      "no": 9
+    },
+    {
+      "playerId": "harry-wilson",
+      "no": 10
+    },
+    {
+      "playerId": "brenden-aaronson",
+      "no": 11
+    },
+    {
+      "playerId": "lukas-nmecha",
+      "no": 14
+    },
+    {
+      "playerId": "jaka-bijol",
+      "no": 15
+    },
+    {
+      "playerId": "michael-zetterer",
+      "no": 16
+    },
+    {
+      "playerId": "anton-stach",
+      "no": 18
+    },
+    {
+      "playerId": "noah-okafor",
+      "no": 19
+    },
+    {
+      "playerId": "alex-cairns",
+      "no": 21
+    },
+    {
+      "playerId": "tanaka",
+      "no": 22
+    },
+    {
+      "playerId": "jeanmatteo-bahoya",
+      "no": 23
+    },
+    {
+      "playerId": "james-justin",
+      "no": 24
+    },
+    {
+      "playerId": "melvin-bard",
+      "no": 26
+    },
+    {
+      "playerId": "nico-elvedi",
+      "no": 30
+    },
+    {
+      "playerId": "ilia-gruev",
+      "no": 44
+    },
+    {
+      "playerId": "mateo-joseph",
+      "no": null
+    }
+  ]
+}

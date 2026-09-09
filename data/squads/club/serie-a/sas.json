@@ -1,0 +1,153 @@
+{
+  "id": "sas",
+  "kind": "club",
+  "name": "Sassuolo",
+  "season": "2026/27",
+  "primaryColor": "#00A650",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#00A650", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/U.S._Sassuolo_Calcio",
+  "members": [
+    {
+      "playerId": "josh-doig",
+      "no": 3
+    },
+    {
+      "playerId": "fali-cande",
+      "no": 5
+    },
+    {
+      "playerId": "sebastian-walukiewicz",
+      "no": 6
+    },
+    {
+      "playerId": "cristian-volpato",
+      "no": 7
+    },
+    {
+      "playerId": "andrea-ghion",
+      "no": 8
+    },
+    {
+      "playerId": "kieron-bowie",
+      "no": 9
+    },
+    {
+      "playerId": "domenico-berardi",
+      "no": 10
+    },
+    {
+      "playerId": "daniel-boloca",
+      "no": 11
+    },
+    {
+      "playerId": "giacomo-satalino",
+      "no": 12
+    },
+    {
+      "playerId": "duje-caletacar",
+      "no": 15
+    },
+    {
+      "playerId": "fedde-leysen",
+      "no": 16
+    },
+    {
+      "playerId": "vasilije-adzic",
+      "no": 17
+    },
+    {
+      "playerId": "nemanja-matic",
+      "no": 18
+    },
+    {
+      "playerId": "laurs-skjellerup",
+      "no": 19
+    },
+    {
+      "playerId": "ignace-van-der-brempt",
+      "no": 20
+    },
+    {
+      "playerId": "jay-idzes",
+      "no": 21
+    },
+    {
+      "playerId": "lorenzo-nyarko",
+      "no": 22
+    },
+    {
+      "playerId": "benja-dominguez",
+      "no": 25
+    },
+    {
+      "playerId": "cas-odenthal",
+      "no": 26
+    },
+    {
+      "playerId": "yeferson-paz",
+      "no": 27
+    },
+    {
+      "playerId": "rafa-obrador",
+      "no": 33
+    },
+    {
+      "playerId": "luca-lipani",
+      "no": 35
+    },
+    {
+      "playerId": "giorgio-vezzosi",
+      "no": 36
+    },
+    {
+      "playerId": "kristian-thorstvedt",
+      "no": 42
+    },
+    {
+      "playerId": "armand-lauriente",
+      "no": 45
+    },
+    {
+      "playerId": "simone-cinquegrano",
+      "no": 46
+    },
+    {
+      "playerId": "arijanet-muric",
+      "no": 49
+    },
+    {
+      "playerId": "darryl-bakola",
+      "no": 50
+    },
+    {
+      "playerId": "ibrahim-sulemana",
+      "no": 55
+    },
+    {
+      "playerId": "nicholas-pierini",
+      "no": 77
+    },
+    {
+      "playerId": "stefano-turati",
+      "no": 80
+    },
+    {
+      "playerId": "ismael-kone",
+      "no": 90
+    },
+    {
+      "playerId": "sebastiano-esposito",
+      "no": 94
+    },
+    {
+      "playerId": "edoardo-pieragnolo",
+      "no": null
+    }
+  ]
+}

@@ -1,0 +1,122 @@
+{
+  "id": "nap",
+  "kind": "club",
+  "name": "Napoli",
+  "season": "2026/27",
+  "primaryColor": "#12A0D7",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#12A0D7"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/S.S.C._Napoli",
+  "members": [
+    {
+      "playerId": "alex-meret",
+      "no": 1
+    },
+    {
+      "playerId": "costantino-favasuli",
+      "no": 2
+    },
+    {
+      "playerId": "alessandro-buongiorno",
+      "no": 4
+    },
+    {
+      "playerId": "benoit-badiashile",
+      "no": 5
+    },
+    {
+      "playerId": "billy-gilmour",
+      "no": 6
+    },
+    {
+      "playerId": "david-neres",
+      "no": 7
+    },
+    {
+      "playerId": "scott-mctominay",
+      "no": 8
+    },
+    {
+      "playerId": "kevin-de-bruyne",
+      "no": 11
+    },
+    {
+      "playerId": "amir-rrahmani",
+      "no": 13
+    },
+    {
+      "playerId": "nikita-contini",
+      "no": 14
+    },
+    {
+      "playerId": "rafa-marin",
+      "no": 16
+    },
+    {
+      "playerId": "mathias-olivera",
+      "no": 17
+    },
+    {
+      "playerId": "rasmus-hojlund",
+      "no": 19
+    },
+    {
+      "playerId": "lorenzo-lucca",
+      "no": 20
+    },
+    {
+      "playerId": "matteo-politano",
+      "no": 21
+    },
+    {
+      "playerId": "giovanni-di-lorenzo",
+      "no": 22,
+      "captain": true
+    },
+    {
+      "playerId": "giovane",
+      "no": 23
+    },
+    {
+      "playerId": "antonio-vergara",
+      "no": 26
+    },
+    {
+      "playerId": "alisson-santos",
+      "no": 27
+    },
+    {
+      "playerId": "sam-beukema",
+      "no": 31
+    },
+    {
+      "playerId": "vanja-milinkovicsavic",
+      "no": 32
+    },
+    {
+      "playerId": "luca-marianucci",
+      "no": 35
+    },
+    {
+      "playerId": "leonardo-spinazzola",
+      "no": 37
+    },
+    {
+      "playerId": "stanislav-lobotka",
+      "no": 68
+    },
+    {
+      "playerId": "noa-lang",
+      "no": 70
+    },
+    {
+      "playerId": "frank-anguissa",
+      "no": 99
+    }
+  ]
+}

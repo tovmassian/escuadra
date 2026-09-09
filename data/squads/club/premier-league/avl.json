@@ -1,0 +1,134 @@
+{
+  "id": "avl",
+  "kind": "club",
+  "name": "Aston Villa",
+  "season": "2026/27",
+  "primaryColor": "#670E36",
+  "secondaryColor": "#95BFE5",
+  "verified": true,
+  "marker": {
+    "bands": ["#670E36", "#95BFE5"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Aston_Villa_F.C.",
+  "members": [
+    {
+      "playerId": "suzuki-zion",
+      "no": 1
+    },
+    {
+      "playerId": "matty-cash",
+      "no": 2
+    },
+    {
+      "playerId": "victor-lindelof",
+      "no": 3
+    },
+    {
+      "playerId": "taylor-harwoodbellis",
+      "no": 4
+    },
+    {
+      "playerId": "tyrone-mings",
+      "no": 5
+    },
+    {
+      "playerId": "ross-barkley",
+      "no": 6
+    },
+    {
+      "playerId": "john-mcginn",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "boubacar-kamara",
+      "no": 8
+    },
+    {
+      "playerId": "emiliano-buendia",
+      "no": 10
+    },
+    {
+      "playerId": "nicolas-jackson",
+      "no": 11
+    },
+    {
+      "playerId": "matteo-ruggeri",
+      "no": 13
+    },
+    {
+      "playerId": "pau-torres",
+      "no": 14
+    },
+    {
+      "playerId": "alejandro-garnacho",
+      "no": 17
+    },
+    {
+      "playerId": "tammy-abraham",
+      "no": 18
+    },
+    {
+      "playerId": "mbaye",
+      "no": 19
+    },
+    {
+      "playerId": "jamaldeen-jimohaloba",
+      "no": 20
+    },
+    {
+      "playerId": "ian-maatsen",
+      "no": 22
+    },
+    {
+      "playerId": "amadou-onana",
+      "no": 24
+    },
+    {
+      "playerId": "lamare-bogarde",
+      "no": 26
+    },
+    {
+      "playerId": "leon-goretzka",
+      "no": 27
+    },
+    {
+      "playerId": "aaron-wanbissaka",
+      "no": 29
+    },
+    {
+      "playerId": "joao-gomes",
+      "no": 35
+    },
+    {
+      "playerId": "brian-madjo",
+      "no": 39
+    },
+    {
+      "playerId": "marco-bizot",
+      "no": 40
+    },
+    {
+      "playerId": "james-wright",
+      "no": 42
+    },
+    {
+      "playerId": "johan-manzambi",
+      "no": 44
+    },
+    {
+      "playerId": "alysson",
+      "no": 47
+    },
+    {
+      "playerId": "modou-keba-cisse",
+      "no": 48
+    },
+    {
+      "playerId": "george-hemmings",
+      "no": 53
+    }
+  ]
+}

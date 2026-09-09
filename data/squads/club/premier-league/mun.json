@@ -1,0 +1,138 @@
+{
+  "id": "mun",
+  "kind": "club",
+  "name": "Manchester United",
+  "season": "2026/27",
+  "primaryColor": "#DA291C",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#DA291C"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Manchester_United_F.C.",
+  "members": [
+    {
+      "playerId": "senne-lammens",
+      "no": 1
+    },
+    {
+      "playerId": "diogo-dalot",
+      "no": 2
+    },
+    {
+      "playerId": "noussair-mazraoui",
+      "no": 3
+    },
+    {
+      "playerId": "matthijs-de-ligt",
+      "no": 4
+    },
+    {
+      "playerId": "harry-maguire",
+      "no": 5
+    },
+    {
+      "playerId": "lisandro-martinez",
+      "no": 6
+    },
+    {
+      "playerId": "mason-mount",
+      "no": 7
+    },
+    {
+      "playerId": "bruno-fernandes",
+      "no": 8,
+      "captain": true
+    },
+    {
+      "playerId": "rashford",
+      "no": 9
+    },
+    {
+      "playerId": "matheus-cunha",
+      "no": 10
+    },
+    {
+      "playerId": "joshua-zirkzee",
+      "no": 11
+    },
+    {
+      "playerId": "karl-darlow",
+      "no": 12
+    },
+    {
+      "playerId": "patrick-dorgu",
+      "no": 13
+    },
+    {
+      "playerId": "leny-yoro",
+      "no": 15
+    },
+    {
+      "playerId": "amad-diallo",
+      "no": 16
+    },
+    {
+      "playerId": "andrey-santos",
+      "no": 17
+    },
+    {
+      "playerId": "youri-tielemans",
+      "no": 18
+    },
+    {
+      "playerId": "bryan-mbeumo",
+      "no": 19
+    },
+    {
+      "playerId": "carlos-baleba",
+      "no": 20
+    },
+    {
+      "playerId": "tom-heaton",
+      "no": 22
+    },
+    {
+      "playerId": "luke-shaw",
+      "no": 23
+    },
+    {
+      "playerId": "manuel-ugarte",
+      "no": 25
+    },
+    {
+      "playerId": "ayden-heaven",
+      "no": 26
+    },
+    {
+      "playerId": "benjamin-sesko",
+      "no": 30
+    },
+    {
+      "playerId": "shea-lacey",
+      "no": 31
+    },
+    {
+      "playerId": "kobbie-mainoo",
+      "no": 37
+    },
+    {
+      "playerId": "jack-fletcher",
+      "no": 38
+    },
+    {
+      "playerId": "tyler-fletcher",
+      "no": 39
+    },
+    {
+      "playerId": "harry-amass",
+      "no": 41
+    },
+    {
+      "playerId": "dermot-mee",
+      "no": 45
+    }
+  ]
+}

@@ -1,0 +1,158 @@
+{
+  "id": "mci",
+  "kind": "club",
+  "name": "Manchester City",
+  "season": "2026/27",
+  "primaryColor": "#6CADDF",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#6CADDF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Manchester_City_F.C.",
+  "members": [
+    {
+      "playerId": "gianluigi-donnarumma",
+      "no": 1
+    },
+    {
+      "playerId": "ruben-dias",
+      "no": 3,
+      "captain": true
+    },
+    {
+      "playerId": "elliot-anderson",
+      "no": 5
+    },
+    {
+      "playerId": "marc-guehi",
+      "no": 6
+    },
+    {
+      "playerId": "iliman-ndiaye",
+      "no": 7
+    },
+    {
+      "playerId": "mateo-kovacic",
+      "no": 8
+    },
+    {
+      "playerId": "erling-haaland",
+      "no": 9
+    },
+    {
+      "playerId": "cherki",
+      "no": 10
+    },
+    {
+      "playerId": "jeremy-doku",
+      "no": 11
+    },
+    {
+      "playerId": "marcus-bettinelli",
+      "no": 13
+    },
+    {
+      "playerId": "enzo-fernandez",
+      "no": 17
+    },
+    {
+      "playerId": "jack-grealish",
+      "no": 18
+    },
+    {
+      "playerId": "rayan-aitnouri",
+      "no": 21
+    },
+    {
+      "playerId": "vitor-reis",
+      "no": 22
+    },
+    {
+      "playerId": "josko-gvardiol",
+      "no": 24
+    },
+    {
+      "playerId": "matheus-nunes",
+      "no": 27
+    },
+    {
+      "playerId": "rulli",
+      "no": 28
+    },
+    {
+      "playerId": "claudio-echeverri",
+      "no": 30
+    },
+    {
+      "playerId": "ayyoub-bouaddi",
+      "no": 32
+    },
+    {
+      "playerId": "nico-oreilly",
+      "no": 33
+    },
+    {
+      "playerId": "allan",
+      "no": 37
+    },
+    {
+      "playerId": "jeremy-monga",
+      "no": 40
+    },
+    {
+      "playerId": "sverre-nypan",
+      "no": 41
+    },
+    {
+      "playerId": "antoine-semenyo",
+      "no": 42
+    },
+    {
+      "playerId": "kalvin-phillips",
+      "no": 44
+    },
+    {
+      "playerId": "abdukodir-khusanov",
+      "no": 45
+    },
+    {
+      "playerId": "phil-foden",
+      "no": 47
+    },
+    {
+      "playerId": "ryan-mcaidoo",
+      "no": 56
+    },
+    {
+      "playerId": "josh-wilsonesbrand",
+      "no": 59
+    },
+    {
+      "playerId": "kaden-braithwaite",
+      "no": 61
+    },
+    {
+      "playerId": "max-alleyne",
+      "no": 68
+    },
+    {
+      "playerId": "floyd-samba",
+      "no": 75
+    },
+    {
+      "playerId": "rico-lewis",
+      "no": 82
+    },
+    {
+      "playerId": "omar-marmoush",
+      "no": null
+    },
+    {
+      "playerId": "pierce-charles",
+      "no": null
+    }
+  ]
+}

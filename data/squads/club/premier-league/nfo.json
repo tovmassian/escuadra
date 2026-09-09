@@ -1,0 +1,114 @@
+{
+  "id": "nfo",
+  "kind": "club",
+  "name": "Nottingham Forest",
+  "season": "2026/27",
+  "primaryColor": "#DD0000",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#DD0000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Nottingham_Forest_F.C.",
+  "members": [
+    {
+      "playerId": "ousmane-diomande",
+      "no": 2
+    },
+    {
+      "playerId": "neco-williams",
+      "no": 3
+    },
+    {
+      "playerId": "murillo-2",
+      "no": 5
+    },
+    {
+      "playerId": "ibrahim-sangare",
+      "no": 6
+    },
+    {
+      "playerId": "callum-hudsonodoi",
+      "no": 7
+    },
+    {
+      "playerId": "nicolas-dominguez",
+      "no": 8
+    },
+    {
+      "playerId": "chris-wood",
+      "no": 9
+    },
+    {
+      "playerId": "morgan-gibbswhite",
+      "no": 10
+    },
+    {
+      "playerId": "igor-jesus",
+      "no": 11
+    },
+    {
+      "playerId": "john-victor",
+      "no": 12
+    },
+    {
+      "playerId": "dan-ndoye",
+      "no": 14
+    },
+    {
+      "playerId": "arnaud-kalimuendo",
+      "no": 15
+    },
+    {
+      "playerId": "liam-delap",
+      "no": 19
+    },
+    {
+      "playerId": "xaver-schlager",
+      "no": 21
+    },
+    {
+      "playerId": "ryan-yates",
+      "no": 22,
+      "captain": true
+    },
+    {
+      "playerId": "jair-cunha",
+      "no": 23
+    },
+    {
+      "playerId": "james-mcatee",
+      "no": 24
+    },
+    {
+      "playerId": "luca-netz",
+      "no": 25
+    },
+    {
+      "playerId": "matz-sels",
+      "no": 26
+    },
+    {
+      "playerId": "daniel-munoz",
+      "no": 27
+    },
+    {
+      "playerId": "nikola-milenkovic",
+      "no": 31
+    },
+    {
+      "playerId": "steven-benda",
+      "no": 33
+    },
+    {
+      "playerId": "ola-aina",
+      "no": 34
+    },
+    {
+      "playerId": "nicolo-savona",
+      "no": 37
+    }
+  ]
+}

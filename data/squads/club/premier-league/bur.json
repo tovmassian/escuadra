@@ -1,0 +1,122 @@
+{
+  "id": "bur",
+  "kind": "club",
+  "name": "Burnley",
+  "season": "2026/27",
+  "primaryColor": "#6C1D45",
+  "secondaryColor": "#99D6EA",
+  "verified": true,
+  "marker": {
+    "bands": ["#6C1D45", "#99D6EA"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Burnley_F.C.",
+  "members": [
+    {
+      "playerId": "max-weiss",
+      "no": 1
+    },
+    {
+      "playerId": "kyle-walker",
+      "no": 2
+    },
+    {
+      "playerId": "max-alleyne",
+      "no": 3
+    },
+    {
+      "playerId": "reo-hatate",
+      "no": 5
+    },
+    {
+      "playerId": "jacob-bruun-larsen",
+      "no": 7
+    },
+    {
+      "playerId": "ugo-raghouber",
+      "no": 8
+    },
+    {
+      "playerId": "jamie-vardy",
+      "no": 9
+    },
+    {
+      "playerId": "zeki-amdouni",
+      "no": 11
+    },
+    {
+      "playerId": "dastan-satpayev",
+      "no": 12
+    },
+    {
+      "playerId": "connor-roberts",
+      "no": 14
+    },
+    {
+      "playerId": "anel-ahmedhodzic",
+      "no": 15
+    },
+    {
+      "playerId": "andreas-hountondji",
+      "no": 17
+    },
+    {
+      "playerId": "hjalmar-ekdal",
+      "no": 18
+    },
+    {
+      "playerId": "largie-ramazani",
+      "no": 19
+    },
+    {
+      "playerId": "aaron-ramsey",
+      "no": 21
+    },
+    {
+      "playerId": "oliver-sonne",
+      "no": 22
+    },
+    {
+      "playerId": "lucas-pires",
+      "no": 23
+    },
+    {
+      "playerId": "josh-cullen",
+      "no": 24,
+      "captain": true
+    },
+    {
+      "playerId": "armando-broja",
+      "no": 27
+    },
+    {
+      "playerId": "hannibal-mejbri",
+      "no": 28
+    },
+    {
+      "playerId": "josh-laurent",
+      "no": 29
+    },
+    {
+      "playerId": "lluc-castell",
+      "no": 30
+    },
+    {
+      "playerId": "jaydon-banel",
+      "no": 34
+    },
+    {
+      "playerId": "gregoire-coudert",
+      "no": 37
+    },
+    {
+      "playerId": "igor-julio",
+      "no": 44
+    },
+    {
+      "playerId": "enock-agyei",
+      "no": 48
+    }
+  ]
+}
