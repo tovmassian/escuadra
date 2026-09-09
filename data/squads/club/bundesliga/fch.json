@@ -1,0 +1,121 @@
+{
+  "id": "fch",
+  "kind": "club",
+  "name": "1. FC Heidenheim",
+  "season": "2026/27",
+  "primaryColor": "#ED1C24",
+  "secondaryColor": "#003DA5",
+  "verified": true,
+  "marker": {
+    "bands": ["#ED1C24", "#003DA5"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/1._FC_Heidenheim",
+  "members": [
+    {
+      "playerId": "frank-feller",
+      "no": 1
+    },
+    {
+      "playerId": "marnon-busch",
+      "no": 2
+    },
+    {
+      "playerId": "jan-schoppner",
+      "no": 3
+    },
+    {
+      "playerId": "tim-siersleben",
+      "no": 4
+    },
+    {
+      "playerId": "patrick-mainka",
+      "no": 6
+    },
+    {
+      "playerId": "paul-hennrich",
+      "no": 8
+    },
+    {
+      "playerId": "christian-conteh",
+      "no": 10
+    },
+    {
+      "playerId": "budu-zivzivadze",
+      "no": 11
+    },
+    {
+      "playerId": "maximilian-breunig",
+      "no": 14
+    },
+    {
+      "playerId": "julian-niehues",
+      "no": 16
+    },
+    {
+      "playerId": "mathias-honsak",
+      "no": 17
+    },
+    {
+      "playerId": "alessandro-vogt",
+      "no": 18
+    },
+    {
+      "playerId": "jonas-fohrenbach",
+      "no": 19
+    },
+    {
+      "playerId": "luca-kerber",
+      "no": 20
+    },
+    {
+      "playerId": "oualid-mhamdi",
+      "no": 22
+    },
+    {
+      "playerId": "leart-pacarada",
+      "no": 23
+    },
+    {
+      "playerId": "marcel-costly",
+      "no": 24
+    },
+    {
+      "playerId": "michael-heule",
+      "no": 27
+    },
+    {
+      "playerId": "adam-kolle",
+      "no": 28
+    },
+    {
+      "playerId": "mikkel-kaufmann",
+      "no": 29
+    },
+    {
+      "playerId": "sirlord-conteh",
+      "no": 31
+    },
+    {
+      "playerId": "thomas-dahne",
+      "no": 33
+    },
+    {
+      "playerId": "paul-tschernuth",
+      "no": 34
+    },
+    {
+      "playerId": "yannik-wagner",
+      "no": 38
+    },
+    {
+      "playerId": "felix-mark",
+      "no": 40
+    },
+    {
+      "playerId": "marko-zrilic",
+      "no": 41
+    }
+  ]
+}

@@ -1,0 +1,130 @@
+{
+  "id": "tot",
+  "kind": "club",
+  "name": "Tottenham Hotspur",
+  "season": "2026/27",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#132257",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#132257"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Tottenham_Hotspur_F.C.",
+  "members": [
+    {
+      "playerId": "andy-robertson",
+      "no": 3
+    },
+    {
+      "playerId": "tosin-adarabioyo",
+      "no": 4
+    },
+    {
+      "playerId": "senesi",
+      "no": 5
+    },
+    {
+      "playerId": "jan-paul-van-hecke",
+      "no": 6
+    },
+    {
+      "playerId": "xavi-simons",
+      "no": 7
+    },
+    {
+      "playerId": "conor-gallagher",
+      "no": 8
+    },
+    {
+      "playerId": "richarlison",
+      "no": 9
+    },
+    {
+      "playerId": "james-maddison",
+      "no": 10
+    },
+    {
+      "playerId": "mathys-tel",
+      "no": 11
+    },
+    {
+      "playerId": "destiny-udogie",
+      "no": 13
+    },
+    {
+      "playerId": "archie-gray",
+      "no": 14
+    },
+    {
+      "playerId": "lucas-bergvall",
+      "no": 15
+    },
+    {
+      "playerId": "sandro-tonali",
+      "no": 16
+    },
+    {
+      "playerId": "savio",
+      "no": 17
+    },
+    {
+      "playerId": "mateus-fernandes",
+      "no": 18
+    },
+    {
+      "playerId": "dominic-solanke",
+      "no": 19
+    },
+    {
+      "playerId": "mohammed-kudus",
+      "no": 20
+    },
+    {
+      "playerId": "dejan-kulusevski",
+      "no": 21
+    },
+    {
+      "playerId": "omar-marmoush",
+      "no": 22
+    },
+    {
+      "playerId": "porro",
+      "no": 23
+    },
+    {
+      "playerId": "mykhailo-mudryk",
+      "no": 27
+    },
+    {
+      "playerId": "wilson-odobert",
+      "no": 28
+    },
+    {
+      "playerId": "rodrigo-bentancur",
+      "no": 30
+    },
+    {
+      "playerId": "antonin-kinsky",
+      "no": 31
+    },
+    {
+      "playerId": "ben-davies",
+      "no": 33
+    },
+    {
+      "playerId": "micky-van-de-ven",
+      "no": 37,
+      "captain": true
+    },
+    {
+      "playerId": "martin-dubravka",
+      "no": 39
+    },
+    {
+      "playerId": "brandon-austin",
+      "no": 40
+    }
+  ]
+}

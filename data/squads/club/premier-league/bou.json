@@ -1,0 +1,130 @@
+{
+  "id": "bou",
+  "kind": "club",
+  "name": "Bournemouth",
+  "season": "2026/27",
+  "primaryColor": "#DA291C",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#DA291C", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/AFC_Bournemouth",
+  "members": [
+    {
+      "playerId": "dorde-petrovic",
+      "no": 1
+    },
+    {
+      "playerId": "julian-araujo",
+      "no": 2
+    },
+    {
+      "playerId": "adrien-truffert",
+      "no": 3
+    },
+    {
+      "playerId": "lewis-cook",
+      "no": 4
+    },
+    {
+      "playerId": "james-hill",
+      "no": 5
+    },
+    {
+      "playerId": "julio-soler",
+      "no": 6
+    },
+    {
+      "playerId": "david-brooks",
+      "no": 7
+    },
+    {
+      "playerId": "alex-scott",
+      "no": 8
+    },
+    {
+      "playerId": "evanilson",
+      "no": 9
+    },
+    {
+      "playerId": "ryan-christie",
+      "no": 10
+    },
+    {
+      "playerId": "ben-gannondoak",
+      "no": 11
+    },
+    {
+      "playerId": "tyler-adams",
+      "no": 12
+    },
+    {
+      "playerId": "antonio-silva",
+      "no": 14
+    },
+    {
+      "playerId": "adam-smith",
+      "no": 15,
+      "captain": true
+    },
+    {
+      "playerId": "marcus-tavernier",
+      "no": 16
+    },
+    {
+      "playerId": "fraser-forster",
+      "no": 17
+    },
+    {
+      "playerId": "bafode-diakite",
+      "no": 18
+    },
+    {
+      "playerId": "justin-kluivert",
+      "no": 19
+    },
+    {
+      "playerId": "michele-di-gregorio",
+      "no": 20
+    },
+    {
+      "playerId": "amine-adli",
+      "no": 21
+    },
+    {
+      "playerId": "eli-junior-kroupi",
+      "no": 22
+    },
+    {
+      "playerId": "juanlu-sanchez",
+      "no": 24
+    },
+    {
+      "playerId": "alex-toth",
+      "no": 27
+    },
+    {
+      "playerId": "max-aarons",
+      "no": 28
+    },
+    {
+      "playerId": "daniel-jebbison",
+      "no": 29
+    },
+    {
+      "playerId": "alvaro-rodriguez",
+      "no": 30
+    },
+    {
+      "playerId": "rayan",
+      "no": 37
+    },
+    {
+      "playerId": "veljko-milosavljevic",
+      "no": 44
+    }
+  ]
+}

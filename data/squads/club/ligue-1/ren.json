@@ -1,0 +1,126 @@
+{
+  "id": "ren",
+  "kind": "club",
+  "name": "Rennes",
+  "season": "2026/27",
+  "primaryColor": "#E2001A",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#E2001A", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Stade_Rennais_F.C.",
+  "members": [
+    {
+      "playerId": "charlie-cresswell",
+      "no": 4
+    },
+    {
+      "playerId": "goncalo-oliveira",
+      "no": 5
+    },
+    {
+      "playerId": "djaoui-cisse",
+      "no": 6
+    },
+    {
+      "playerId": "esteban-lepaul",
+      "no": 9
+    },
+    {
+      "playerId": "ludovic-blas",
+      "no": 10
+    },
+    {
+      "playerId": "musa-altaamari",
+      "no": 11
+    },
+    {
+      "playerId": "eliezer-mayenda",
+      "no": 12
+    },
+    {
+      "playerId": "bryan-reynolds",
+      "no": 14
+    },
+    {
+      "playerId": "nicolas-lemaitre",
+      "no": 16
+    },
+    {
+      "playerId": "sebastian-szymanski",
+      "no": 17
+    },
+    {
+      "playerId": "aboubakar-nagida",
+      "no": 18
+    },
+    {
+      "playerId": "valentin-rongier",
+      "no": 21,
+      "captain": true
+    },
+    {
+      "playerId": "boulaye-dia",
+      "no": 22
+    },
+    {
+      "playerId": "anthony-rouault",
+      "no": 24
+    },
+    {
+      "playerId": "quentin-merlin",
+      "no": 26
+    },
+    {
+      "playerId": "adrien-thomasson",
+      "no": 28
+    },
+    {
+      "playerId": "samba",
+      "no": 30
+    },
+    {
+      "playerId": "elias-legendre",
+      "no": 35
+    },
+    {
+      "playerId": "alidu-seidu",
+      "no": 36
+    },
+    {
+      "playerId": "mahdi-camara",
+      "no": 45
+    },
+    {
+      "playerId": "abdelhamid-ait-boudlal",
+      "no": 48
+    },
+    {
+      "playerId": "kilian-belazzoug",
+      "no": 60
+    },
+    {
+      "playerId": "jonathan-do-marcolino",
+      "no": 64
+    },
+    {
+      "playerId": "arnaud-nordin",
+      "no": 70
+    },
+    {
+      "playerId": "issa-soumare",
+      "no": 90
+    },
+    {
+      "playerId": "przemyslaw-frankowski",
+      "no": 95
+    },
+    {
+      "playerId": "ayanda-sishuba",
+      "no": null
+    }
+  ]
+}

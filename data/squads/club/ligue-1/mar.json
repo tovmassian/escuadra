@@ -1,0 +1,106 @@
+{
+  "id": "mar",
+  "kind": "club",
+  "name": "Marseille",
+  "season": "2026/27",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#009DDC",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#009DDC"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Olympique_de_Marseille",
+  "members": [
+    {
+      "playerId": "jeffrey-de-lange",
+      "no": 1
+    },
+    {
+      "playerId": "cj-eganriley",
+      "no": 4
+    },
+    {
+      "playerId": "tochukwu-nnadi",
+      "no": 6
+    },
+    {
+      "playerId": "angel-gomes",
+      "no": 7
+    },
+    {
+      "playerId": "himad-abdelli",
+      "no": 8
+    },
+    {
+      "playerId": "amine-gouiri",
+      "no": 9
+    },
+    {
+      "playerId": "neal-maupay",
+      "no": 11
+    },
+    {
+      "playerId": "derek-cornelius",
+      "no": 13
+    },
+    {
+      "playerId": "igor-paixao",
+      "no": 14
+    },
+    {
+      "playerId": "bamo-meite",
+      "no": 18
+    },
+    {
+      "playerId": "geoffrey-kondogbia",
+      "no": 19
+    },
+    {
+      "playerId": "nayef-aguerd",
+      "no": 21
+    },
+    {
+      "playerId": "timothy-weah",
+      "no": 22,
+      "captain": true
+    },
+    {
+      "playerId": "pierreemile-hojbjerg",
+      "no": 23
+    },
+    {
+      "playerId": "ulisses-garcia",
+      "no": 25
+    },
+    {
+      "playerId": "faris-moumbagna",
+      "no": 29
+    },
+    {
+      "playerId": "emerson-palmieri",
+      "no": 33
+    },
+    {
+      "playerId": "jelle-van-neck",
+      "no": 40
+    },
+    {
+      "playerId": "tadjidine-mmadi",
+      "no": 43
+    },
+    {
+      "playerId": "keyliane-abdallah",
+      "no": 48
+    },
+    {
+      "playerId": "amine-harit",
+      "no": 77
+    },
+    {
+      "playerId": "theo-vermot",
+      "no": 92
+    }
+  ]
+}

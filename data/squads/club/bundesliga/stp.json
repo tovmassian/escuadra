@@ -1,0 +1,130 @@
+{
+  "id": "stp",
+  "kind": "club",
+  "name": "FC St. Pauli",
+  "season": "2026/27",
+  "primaryColor": "#8B4513",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#8B4513", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/FC_St._Pauli",
+  "members": [
+    {
+      "playerId": "ben-voll",
+      "no": 1
+    },
+    {
+      "playerId": "rony-jansson",
+      "no": 2
+    },
+    {
+      "playerId": "david-nemeth",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "gisli-thordarson",
+      "no": 5
+    },
+    {
+      "playerId": "marcus-mathisen",
+      "no": 6
+    },
+    {
+      "playerId": "youssoupha-niang",
+      "no": 7
+    },
+    {
+      "playerId": "eric-smith",
+      "no": 8
+    },
+    {
+      "playerId": "abdoulie-ceesay",
+      "no": 9
+    },
+    {
+      "playerId": "branimir-hrgota",
+      "no": 10
+    },
+    {
+      "playerId": "arkadiusz-pyrka",
+      "no": 11
+    },
+    {
+      "playerId": "erik-ahlstrand",
+      "no": 14
+    },
+    {
+      "playerId": "tomoya-ando",
+      "no": 15
+    },
+    {
+      "playerId": "joel-chima-fujita",
+      "no": 16
+    },
+    {
+      "playerId": "scott-banks",
+      "no": 17
+    },
+    {
+      "playerId": "taichi-hara",
+      "no": 18
+    },
+    {
+      "playerId": "martijn-kaars",
+      "no": 19
+    },
+    {
+      "playerId": "mathias-rasmussen",
+      "no": 20
+    },
+    {
+      "playerId": "lars-ritzka",
+      "no": 21
+    },
+    {
+      "playerId": "sam-klein",
+      "no": 22
+    },
+    {
+      "playerId": "louis-oppie",
+      "no": 23
+    },
+    {
+      "playerId": "connor-metcalfe",
+      "no": 24
+    },
+    {
+      "playerId": "adam-dzwigala",
+      "no": 25
+    },
+    {
+      "playerId": "rickyjade-jones",
+      "no": 26
+    },
+    {
+      "playerId": "mathias-pereira-lage",
+      "no": 28
+    },
+    {
+      "playerId": "simon-spari",
+      "no": 30
+    },
+    {
+      "playerId": "dimitar-mitov",
+      "no": 33
+    },
+    {
+      "playerId": "marwin-schmitz",
+      "no": 42
+    },
+    {
+      "playerId": "nick-schmidt",
+      "no": 44
+    }
+  ]
+}

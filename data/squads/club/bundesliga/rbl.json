@@ -1,0 +1,138 @@
+{
+  "id": "rbl",
+  "kind": "club",
+  "name": "RB Leipzig",
+  "season": "2026/27",
+  "primaryColor": "#E2001A",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#E2001A", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/RB_Leipzig",
+  "members": [
+    {
+      "playerId": "orjan-nyland",
+      "no": 1
+    },
+    {
+      "playerId": "abdoul-kone",
+      "no": 2
+    },
+    {
+      "playerId": "maxime-esteve",
+      "no": 3
+    },
+    {
+      "playerId": "willi-orban",
+      "no": 4
+    },
+    {
+      "playerId": "ezechiel-banzuzi",
+      "no": 6
+    },
+    {
+      "playerId": "antonio-nusa",
+      "no": 7
+    },
+    {
+      "playerId": "assan-ouedraogo",
+      "no": 8
+    },
+    {
+      "playerId": "marc-guiu",
+      "no": 9
+    },
+    {
+      "playerId": "brajan-gruda",
+      "no": 10
+    },
+    {
+      "playerId": "johan-bakayoko",
+      "no": 11
+    },
+    {
+      "playerId": "nicolas-seiwald",
+      "no": 13
+    },
+    {
+      "playerId": "christoph-baumgartner",
+      "no": 14
+    },
+    {
+      "playerId": "lukas-klostermann",
+      "no": 16
+    },
+    {
+      "playerId": "ridle-baku",
+      "no": 17
+    },
+    {
+      "playerId": "suleman-sani",
+      "no": 18
+    },
+    {
+      "playerId": "rocco-reitz",
+      "no": 20
+    },
+    {
+      "playerId": "neil-el-aynaoui",
+      "no": 21
+    },
+    {
+      "playerId": "david-raum",
+      "no": 22,
+      "captain": true
+    },
+    {
+      "playerId": "castello-lukeba",
+      "no": 23
+    },
+    {
+      "playerId": "leopold-zingerle",
+      "no": 25
+    },
+    {
+      "playerId": "maarten-vandevoordt",
+      "no": 26
+    },
+    {
+      "playerId": "tidiam-gomis",
+      "no": 27
+    },
+    {
+      "playerId": "christopher-nkunku",
+      "no": 28
+    },
+    {
+      "playerId": "andrija-maksimovic",
+      "no": 30
+    },
+    {
+      "playerId": "max-finkgrafe",
+      "no": 35
+    },
+    {
+      "playerId": "benno-kaltefleiter",
+      "no": 37
+    },
+    {
+      "playerId": "benjamin-henrichs",
+      "no": 39
+    },
+    {
+      "playerId": "romulo",
+      "no": 40
+    },
+    {
+      "playerId": "samba-konate",
+      "no": 45
+    },
+    {
+      "playerId": "viggo-gebel",
+      "no": 47
+    }
+  ]
+}

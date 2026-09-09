@@ -1,0 +1,114 @@
+{
+  "id": "fcb",
+  "kind": "club",
+  "name": "Bayern Munich",
+  "season": "2026/27",
+  "primaryColor": "#DC052D",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#DC052D"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/FC_Bayern_Munich",
+  "members": [
+    {
+      "playerId": "manuel-neuer",
+      "no": 1,
+      "captain": true
+    },
+    {
+      "playerId": "upamecano",
+      "no": 2
+    },
+    {
+      "playerId": "kim-minjae",
+      "no": 3
+    },
+    {
+      "playerId": "jonathan-tah",
+      "no": 4
+    },
+    {
+      "playerId": "joshua-kimmich",
+      "no": 6
+    },
+    {
+      "playerId": "serge-gnabry",
+      "no": 7
+    },
+    {
+      "playerId": "tom-bischof",
+      "no": 8
+    },
+    {
+      "playerId": "harry-kane",
+      "no": 9
+    },
+    {
+      "playerId": "jamal-musiala",
+      "no": 10
+    },
+    {
+      "playerId": "nathaniel-brown",
+      "no": 11
+    },
+    {
+      "playerId": "luis-diaz",
+      "no": 14
+    },
+    {
+      "playerId": "olise",
+      "no": 17
+    },
+    {
+      "playerId": "alphonso-davies",
+      "no": 19
+    },
+    {
+      "playerId": "hiroki-ito",
+      "no": 21
+    },
+    {
+      "playerId": "sacha-boey",
+      "no": 23
+    },
+    {
+      "playerId": "sven-ulreich",
+      "no": 26
+    },
+    {
+      "playerId": "konrad-laimer",
+      "no": 27
+    },
+    {
+      "playerId": "ismael-saibari",
+      "no": 34
+    },
+    {
+      "playerId": "bara-sapoko-ndiaye",
+      "no": 39
+    },
+    {
+      "playerId": "jonas-urbig",
+      "no": 40
+    },
+    {
+      "playerId": "lennart-karl",
+      "no": 42
+    },
+    {
+      "playerId": "josip-stanisic",
+      "no": 44
+    },
+    {
+      "playerId": "aleksandar-pavlovic",
+      "no": 45
+    },
+    {
+      "playerId": "david-santos-daiber",
+      "no": 47
+    }
+  ]
+}

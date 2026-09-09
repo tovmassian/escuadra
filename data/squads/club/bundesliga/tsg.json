@@ -1,0 +1,129 @@
+{
+  "id": "tsg",
+  "kind": "club",
+  "name": "TSG Hoffenheim",
+  "season": "2026/27",
+  "primaryColor": "#1C63B7",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#1C63B7", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/TSG_1899_Hoffenheim",
+  "members": [
+    {
+      "playerId": "oliver-baumann",
+      "no": 1
+    },
+    {
+      "playerId": "robin-hranac",
+      "no": 2
+    },
+    {
+      "playerId": "sean-dulic",
+      "no": 4
+    },
+    {
+      "playerId": "ozan-kabak",
+      "no": 5
+    },
+    {
+      "playerId": "leon-avdullahu",
+      "no": 7
+    },
+    {
+      "playerId": "patrick-wimmer",
+      "no": 8
+    },
+    {
+      "playerId": "max-moerstedt",
+      "no": 9
+    },
+    {
+      "playerId": "adam-hlozek",
+      "no": 10
+    },
+    {
+      "playerId": "fisnik-asllani",
+      "no": 11
+    },
+    {
+      "playerId": "bernardo",
+      "no": 13
+    },
+    {
+      "playerId": "adam-daghim",
+      "no": 14
+    },
+    {
+      "playerId": "valentin-gendrey",
+      "no": 15
+    },
+    {
+      "playerId": "luis-engelns",
+      "no": 16
+    },
+    {
+      "playerId": "nathan-de-cat",
+      "no": 17
+    },
+    {
+      "playerId": "wouter-burger",
+      "no": 18
+    },
+    {
+      "playerId": "tim-lemperle",
+      "no": 19
+    },
+    {
+      "playerId": "bambase-conte",
+      "no": 20
+    },
+    {
+      "playerId": "albian-hajdari",
+      "no": 21
+    },
+    {
+      "playerId": "alexander-prass",
+      "no": 22
+    },
+    {
+      "playerId": "andrej-kramaric",
+      "no": 27
+    },
+    {
+      "playerId": "koki-machida",
+      "no": 28
+    },
+    {
+      "playerId": "natnael-abraha",
+      "no": 29
+    },
+    {
+      "playerId": "cajetan-lenz",
+      "no": 32
+    },
+    {
+      "playerId": "vladimir-coufal",
+      "no": 34
+    },
+    {
+      "playerId": "arthur-chaves",
+      "no": 35
+    },
+    {
+      "playerId": "lukas-petersson",
+      "no": 36
+    },
+    {
+      "playerId": "luca-philipp",
+      "no": 37
+    },
+    {
+      "playerId": "mats-rots",
+      "no": 39
+    }
+  ]
+}

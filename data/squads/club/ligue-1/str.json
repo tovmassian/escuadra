@@ -1,0 +1,133 @@
+{
+  "id": "str",
+  "kind": "club",
+  "name": "Strasbourg",
+  "season": "2026/27",
+  "primaryColor": "#0060A9",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#0060A9", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/RC_Strasbourg_Alsace",
+  "members": [
+    {
+      "playerId": "filip-jorgensen",
+      "no": 1
+    },
+    {
+      "playerId": "jeyland-mitchell",
+      "no": 4
+    },
+    {
+      "playerId": "ismael-doukoure",
+      "no": 6
+    },
+    {
+      "playerId": "sam-amoameyaw",
+      "no": 7
+    },
+    {
+      "playerId": "maxi-oyedele",
+      "no": 8
+    },
+    {
+      "playerId": "joaquin-panichelli",
+      "no": 9
+    },
+    {
+      "playerId": "giovanni-reyna",
+      "no": 10
+    },
+    {
+      "playerId": "sebastian-nanasi",
+      "no": 11
+    },
+    {
+      "playerId": "milosz-piekutowski",
+      "no": 12
+    },
+    {
+      "playerId": "dario-essugo",
+      "no": 14
+    },
+    {
+      "playerId": "mateo-del-blanco",
+      "no": 15
+    },
+    {
+      "playerId": "genesis-antwi",
+      "no": 16
+    },
+    {
+      "playerId": "fabio-balde",
+      "no": 19
+    },
+    {
+      "playerId": "martial-godo",
+      "no": 20
+    },
+    {
+      "playerId": "pape-demba-diop",
+      "no": 21
+    },
+    {
+      "playerId": "diogo-sousa",
+      "no": 23
+    },
+    {
+      "playerId": "lucas-hogsberg",
+      "no": 24
+    },
+    {
+      "playerId": "omari-kellyman",
+      "no": 26
+    },
+    {
+      "playerId": "tyrese-noubissie",
+      "no": 28
+    },
+    {
+      "playerId": "samir-el-mourabet",
+      "no": 29
+    },
+    {
+      "playerId": "jacobo-ortega",
+      "no": 30
+    },
+    {
+      "playerId": "karim-coulibaly",
+      "no": 31
+    },
+    {
+      "playerId": "oso",
+      "no": 36
+    },
+    {
+      "playerId": "conrad-harder",
+      "no": 40
+    },
+    {
+      "playerId": "deivid-washington",
+      "no": 42
+    },
+    {
+      "playerId": "benjamin-brantlind",
+      "no": 45
+    },
+    {
+      "playerId": "gessime-yassine",
+      "no": 80
+    },
+    {
+      "playerId": "hermann-malonga",
+      "no": null
+    },
+    {
+      "playerId": "sekou-mara",
+      "no": null
+    }
+  ]
+}

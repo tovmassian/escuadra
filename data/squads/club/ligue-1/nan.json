@@ -1,0 +1,126 @@
+{
+  "id": "nan",
+  "kind": "club",
+  "name": "Nantes",
+  "season": "2026/27",
+  "primaryColor": "#FFE500",
+  "secondaryColor": "#007A3D",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFE500", "#007A3D"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/FC_Nantes",
+  "members": [
+    {
+      "playerId": "maxime-dupe",
+      "no": 1
+    },
+    {
+      "playerId": "saidou-sow",
+      "no": 4
+    },
+    {
+      "playerId": "lucas-perrin",
+      "no": 5
+    },
+    {
+      "playerId": "antoine-joujou",
+      "no": 7
+    },
+    {
+      "playerId": "johann-lepenant",
+      "no": 8
+    },
+    {
+      "playerId": "killian-corredor",
+      "no": 12
+    },
+    {
+      "playerId": "fode-doucoure",
+      "no": 13
+    },
+    {
+      "playerId": "lamine-diack",
+      "no": 14
+    },
+    {
+      "playerId": "alexis-mirbach",
+      "no": 16
+    },
+    {
+      "playerId": "dehmaine-tabibou",
+      "no": 17
+    },
+    {
+      "playerId": "fabien-centonze",
+      "no": 18
+    },
+    {
+      "playerId": "louis-leroux",
+      "no": 19
+    },
+    {
+      "playerId": "mathieu-cafaro",
+      "no": 20
+    },
+    {
+      "playerId": "wilitty-younoussa",
+      "no": 23
+    },
+    {
+      "playerId": "frederic-guilbert",
+      "no": 24
+    },
+    {
+      "playerId": "ryad-hachem",
+      "no": 26
+    },
+    {
+      "playerId": "thomas-robinet",
+      "no": 27
+    },
+    {
+      "playerId": "ibrahima-sissoko",
+      "no": 28
+    },
+    {
+      "playerId": "ignatius-ganago",
+      "no": 37
+    },
+    {
+      "playerId": "yanel-zeze",
+      "no": 40
+    },
+    {
+      "playerId": "balthazar-pierret",
+      "no": 44
+    },
+    {
+      "playerId": "malang-gomes",
+      "no": 67
+    },
+    {
+      "playerId": "sacha-ziani",
+      "no": 69
+    },
+    {
+      "playerId": "sekou-doucoure",
+      "no": 72
+    },
+    {
+      "playerId": "amin-cherni",
+      "no": 75
+    },
+    {
+      "playerId": "tylel-tati",
+      "no": 78
+    },
+    {
+      "playerId": "kelvin-amian",
+      "no": 98,
+      "captain": true
+    }
+  ]
+}

@@ -1,0 +1,150 @@
+{
+  "id": "pis",
+  "kind": "club",
+  "name": "Pisa",
+  "season": "2026/27",
+  "primaryColor": "#00205B",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#00205B", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Pisa_S.C.",
+  "members": [
+    {
+      "playerId": "rosen-bozhinov",
+      "no": 2
+    },
+    {
+      "playerId": "samuele-angori",
+      "no": 3
+    },
+    {
+      "playerId": "antonio-caracciolo",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "simone-canestrelli",
+      "no": 5
+    },
+    {
+      "playerId": "mehdi-leris",
+      "no": 7
+    },
+    {
+      "playerId": "malthe-hojholt",
+      "no": 8
+    },
+    {
+      "playerId": "henrik-meister",
+      "no": 9
+    },
+    {
+      "playerId": "matteo-tramoni",
+      "no": 10
+    },
+    {
+      "playerId": "ichem-ferrah",
+      "no": 11
+    },
+    {
+      "playerId": "andrea-primasso",
+      "no": 13
+    },
+    {
+      "playerId": "felipe-loyola",
+      "no": 14
+    },
+    {
+      "playerId": "louis-buffon",
+      "no": 16
+    },
+    {
+      "playerId": "emanuele-rao",
+      "no": 17
+    },
+    {
+      "playerId": "nicholas-bonfanti",
+      "no": 18
+    },
+    {
+      "playerId": "tomas-esteves",
+      "no": 19
+    },
+    {
+      "playerId": "isak-vural",
+      "no": 21
+    },
+    {
+      "playerId": "leonardo-loria",
+      "no": 22
+    },
+    {
+      "playerId": "tommaso-marras",
+      "no": 23
+    },
+    {
+      "playerId": "francesco-coppola",
+      "no": 26
+    },
+    {
+      "playerId": "jeremy-mbambi",
+      "no": 27
+    },
+    {
+      "playerId": "omar-correia",
+      "no": 29
+    },
+    {
+      "playerId": "stefano-moreo",
+      "no": 32
+    },
+    {
+      "playerId": "arturo-calabresi",
+      "no": 33
+    },
+    {
+      "playerId": "gabriele-piccinini",
+      "no": 36
+    },
+    {
+      "playerId": "andrea-petagna",
+      "no": 37
+    },
+    {
+      "playerId": "daniel-denoon",
+      "no": 44
+    },
+    {
+      "playerId": "mateus-lusuardi",
+      "no": 47
+    },
+    {
+      "playerId": "giuseppe-leone",
+      "no": 55
+    },
+    {
+      "playerId": "simone-zanon",
+      "no": 72
+    },
+    {
+      "playerId": "alessandro-confente",
+      "no": 98
+    },
+    {
+      "playerId": "elia-giani",
+      "no": null
+    },
+    {
+      "playerId": "emanuel-vignato",
+      "no": null
+    },
+    {
+      "playerId": "simone-scuffet",
+      "no": null
+    }
+  ]
+}

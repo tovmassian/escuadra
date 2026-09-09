@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { EMPTY_DECISIONS, addAlias, addSplit, validateDecisions } from './decisions.ts';
+import {
+  EMPTY_DECISIONS,
+  addAlias,
+  addSplit,
+  addTitleAlias,
+  validateDecisions,
+  type DecisionFile,
+} from './decisions.ts';
 
 const split = { team: 'arg', departed: 'gonzalez', arrived: 'Nicolás González' };
 
@@ -56,5 +63,81 @@ describe('addAlias', () => {
   it('does not disturb recorded splits', () => {
     const withSplit = addSplit(EMPTY_DECISIONS, split)!;
     expect(addAlias(withSplit, alias)?.splits).toEqual([split]);
+  });
+});
+
+describe('addTitleAlias', () => {
+  const empty: DecisionFile = { splits: [], aliases: [], titleAliases: [] };
+
+  it('records an extra article title one player is known by', () => {
+    const updated = addTitleAlias(empty, { player: 'grimaldo', title: 'Alejandro Grimaldo' });
+    expect(updated?.titleAliases).toEqual([{ player: 'grimaldo', title: 'Alejandro Grimaldo' }]);
+  });
+
+  it('is idempotent, so re-running after a failed apply piles up nothing', () => {
+    const once = addTitleAlias(empty, { player: 'grimaldo', title: 'Alejandro Grimaldo' });
+    expect(addTitleAlias(once!, { player: 'grimaldo', title: 'Alejandro Grimaldo' })).toBeNull();
+  });
+
+  it('sorts, so two people editing the file do not fight over order', () => {
+    const a = addTitleAlias(empty, { player: 'zubimendi', title: 'Martín Zubimendi' })!;
+    const b = addTitleAlias(a, { player: 'grimaldo', title: 'Alejandro Grimaldo' })!;
+    expect(b.titleAliases?.map((t) => t.player)).toEqual(['grimaldo', 'zubimendi']);
+  });
+
+  it('leaves an older file that predates the field alone', () => {
+    const updated = addTitleAlias(
+      { splits: [], aliases: [] },
+      {
+        player: 'grimaldo',
+        title: 'Alejandro Grimaldo',
+      },
+    );
+    expect(updated?.titleAliases).toHaveLength(1);
+  });
+});
+
+describe('validateDecisions with titleAliases', () => {
+  it('accepts a file with no titleAliases at all', () => {
+    expect(validateDecisions({ splits: [], aliases: [] })).toEqual([]);
+  });
+
+  it('rejects a non-array titleAliases', () => {
+    expect(validateDecisions({ splits: [], titleAliases: 'nope' })).toEqual([
+      'decisions.json "titleAliases" must be an array when present',
+    ]);
+  });
+
+  it('names the offending entry and field', () => {
+    expect(validateDecisions({ splits: [], titleAliases: [{ player: 'x' }] })).toEqual([
+      'titleAliases[0].title must be a non-empty string',
+    ]);
+  });
+
+  // Tests that entry-level errors from different arrays accumulate together,
+  // not that the guard placement prevents errors being discarded (the guard
+  // returns a literal array, so placement never affects it).
+  it('accumulates entry-level errors across aliases and splits sections', () => {
+    const result = validateDecisions({
+      splits: [{ team: 'arg' }],
+      aliases: [{ player: 'x' }],
+    });
+    expect(result).toContain('aliases[0].name must be a non-empty string');
+    expect(result).toContain('splits[0].departed must be a non-empty string');
+    expect(result).toContain('splits[0].arrived must be a non-empty string');
+  });
+
+  // Same as above: confirms entry-level errors from multiple arrays accumulate.
+  // Not a regression guard for the guard move, since the move changes no
+  // observable output (the guard returns a literal array, not one that
+  // includes accumulated state).
+  it('accumulates entry-level errors across titleAliases and splits sections', () => {
+    const result = validateDecisions({
+      splits: [{ team: 'arg' }],
+      titleAliases: [{ player: 'x' }],
+    });
+    expect(result).toContain('titleAliases[0].title must be a non-empty string');
+    expect(result).toContain('splits[0].departed must be a non-empty string');
+    expect(result).toContain('splits[0].arrived must be a non-empty string');
   });
 });

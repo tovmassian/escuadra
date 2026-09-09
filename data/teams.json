@@ -96,7 +96,7 @@
     "id": "ala",
     "kind": "club",
     "league": "la-liga",
-    "name": "Deportivo Alavés",
+    "name": "Alavés",
     "source": "https://en.wikipedia.org/wiki/Deportivo_Alavés",
     "identity": {
       "primaryColor": "#0000FF",
@@ -111,7 +111,7 @@
     "id": "ath",
     "kind": "club",
     "league": "la-liga",
-    "name": "Athletic Club",
+    "name": "Athletic Bilbao",
     "source": "https://en.wikipedia.org/wiki/Athletic_Bilbao",
     "identity": {
       "primaryColor": "#EE2523",
@@ -408,6 +408,292 @@
     }
   },
   {
+    "id": "ata",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Atalanta",
+    "source": "https://en.wikipedia.org/wiki/Atalanta_B.C.",
+    "identity": {
+      "primaryColor": "#1E3888",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#1E3888", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "bol",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Bologna",
+    "source": "https://en.wikipedia.org/wiki/Bologna_F.C._1909",
+    "identity": {
+      "primaryColor": "#A6192E",
+      "secondaryColor": "#12264F",
+      "marker": {
+        "bands": ["#A6192E", "#12264F"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "cag",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Cagliari",
+    "source": "https://en.wikipedia.org/wiki/Cagliari_Calcio",
+    "identity": {
+      "primaryColor": "#A31E22",
+      "secondaryColor": "#002B5C",
+      "marker": {
+        "bands": ["#A31E22", "#002B5C"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "com",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Como",
+    "source": "https://en.wikipedia.org/wiki/Como_1907",
+    "identity": {
+      "primaryColor": "#003DA5",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#003DA5", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "cre",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Cremonese",
+    "source": "https://en.wikipedia.org/wiki/US_Cremonese",
+    "identity": {
+      "primaryColor": "#C8102E",
+      "secondaryColor": "#808080",
+      "marker": {
+        "bands": ["#C8102E", "#808080"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "fio",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Fiorentina",
+    "source": "https://en.wikipedia.org/wiki/ACF_Fiorentina",
+    "identity": {
+      "primaryColor": "#5B2A86",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#5B2A86"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "gen",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Genoa",
+    "source": "https://en.wikipedia.org/wiki/Genoa_C.F.C.",
+    "identity": {
+      "primaryColor": "#AD1919",
+      "secondaryColor": "#05232F",
+      "marker": {
+        "bands": ["#AD1919", "#05232F"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "ver",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Hellas Verona",
+    "source": "https://en.wikipedia.org/wiki/Hellas_Verona_F.C.",
+    "identity": {
+      "primaryColor": "#FFD400",
+      "secondaryColor": "#00246B",
+      "marker": {
+        "bands": ["#FFD400", "#00246B"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "juv",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Juventus",
+    "source": "https://en.wikipedia.org/wiki/Juventus_F.C.",
+    "identity": {
+      "primaryColor": "#000000",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#000000", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "laz",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Lazio",
+    "source": "https://en.wikipedia.org/wiki/S.S._Lazio",
+    "identity": {
+      "primaryColor": "#6CACE4",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#6CACE4"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "lec",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Lecce",
+    "source": "https://en.wikipedia.org/wiki/U.S._Lecce",
+    "identity": {
+      "primaryColor": "#FFE600",
+      "secondaryColor": "#C8102E",
+      "marker": {
+        "bands": ["#FFE600", "#C8102E"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mil",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "AC Milan",
+    "source": "https://en.wikipedia.org/wiki/A.C._Milan",
+    "identity": {
+      "primaryColor": "#FB090B",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#FB090B", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "nap",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Napoli",
+    "source": "https://en.wikipedia.org/wiki/S.S.C._Napoli",
+    "identity": {
+      "primaryColor": "#12A0D7",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#12A0D7"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "par",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Parma",
+    "source": "https://en.wikipedia.org/wiki/Parma_Calcio_1913",
+    "identity": {
+      "primaryColor": "#FFE500",
+      "secondaryColor": "#002F6C",
+      "marker": {
+        "bands": ["#FFE500", "#002F6C"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "pis",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Pisa",
+    "source": "https://en.wikipedia.org/wiki/Pisa_S.C.",
+    "identity": {
+      "primaryColor": "#00205B",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#00205B", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "rom",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Roma",
+    "source": "https://en.wikipedia.org/wiki/A.S._Roma",
+    "identity": {
+      "primaryColor": "#8E1F2F",
+      "secondaryColor": "#F0BC42",
+      "marker": {
+        "bands": ["#8E1F2F", "#F0BC42"],
+        "orientation": "vertical",
+        "weights": [3, 1]
+      }
+    }
+  },
+  {
+    "id": "sas",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Sassuolo",
+    "source": "https://en.wikipedia.org/wiki/U.S._Sassuolo_Calcio",
+    "identity": {
+      "primaryColor": "#00A650",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#00A650", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "tor",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Torino",
+    "source": "https://en.wikipedia.org/wiki/Torino_F.C.",
+    "identity": {
+      "primaryColor": "#8A1538",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#8A1538"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "udi",
+    "kind": "club",
+    "league": "serie-a",
+    "name": "Udinese",
+    "source": "https://en.wikipedia.org/wiki/Udinese_Calcio",
+    "identity": {
+      "primaryColor": "#000000",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#000000", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
     "id": "psg",
     "kind": "club",
     "league": "ligue-1",
@@ -424,6 +710,261 @@
     }
   },
   {
+    "id": "ang",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Angers",
+    "source": "https://en.wikipedia.org/wiki/Angers_SCO",
+    "identity": {
+      "primaryColor": "#000000",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#000000", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "aux",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Auxerre",
+    "source": "https://en.wikipedia.org/wiki/AJ_Auxerre",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#002F6C",
+      "marker": {
+        "bands": ["#FFFFFF", "#002F6C"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "brs",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Brest",
+    "source": "https://en.wikipedia.org/wiki/Stade_Brestois_29",
+    "identity": {
+      "primaryColor": "#DA291C",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#DA291C", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "lhv",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Le Havre",
+    "source": "https://en.wikipedia.org/wiki/Le_Havre_AC",
+    "identity": {
+      "primaryColor": "#00A3E0",
+      "secondaryColor": "#002654",
+      "marker": {
+        "bands": ["#00A3E0", "#002654"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "len",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Lens",
+    "source": "https://en.wikipedia.org/wiki/RC_Lens",
+    "identity": {
+      "primaryColor": "#C8102E",
+      "secondaryColor": "#FFD100",
+      "marker": {
+        "bands": ["#C8102E", "#FFD100"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "lil",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Lille",
+    "source": "https://en.wikipedia.org/wiki/Lille_OSC",
+    "identity": {
+      "primaryColor": "#E01E13",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#E01E13", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "lor",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Lorient",
+    "source": "https://en.wikipedia.org/wiki/FC_Lorient",
+    "identity": {
+      "primaryColor": "#FF6600",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#FF6600", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "lyo",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Lyon",
+    "source": "https://en.wikipedia.org/wiki/Olympique_Lyonnais",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#0033A0",
+      "marker": {
+        "bands": ["#FFFFFF", "#0033A0"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mar",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Marseille",
+    "source": "https://en.wikipedia.org/wiki/Olympique_de_Marseille",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#009DDC",
+      "marker": {
+        "bands": ["#FFFFFF", "#009DDC"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "met",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Metz",
+    "source": "https://en.wikipedia.org/wiki/FC_Metz",
+    "identity": {
+      "primaryColor": "#8A1538",
+      "secondaryColor": "#6CACE4",
+      "marker": {
+        "bands": ["#8A1538", "#6CACE4"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mon",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Monaco",
+    "source": "https://en.wikipedia.org/wiki/AS_Monaco",
+    "identity": {
+      "primaryColor": "#E51937",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#E51937", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "nan",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Nantes",
+    "source": "https://en.wikipedia.org/wiki/FC_Nantes",
+    "identity": {
+      "primaryColor": "#FFE500",
+      "secondaryColor": "#007A3D",
+      "marker": {
+        "bands": ["#FFE500", "#007A3D"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "nic",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Nice",
+    "source": "https://en.wikipedia.org/wiki/OGC_Nice",
+    "identity": {
+      "primaryColor": "#D2001C",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#D2001C", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "pfc",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Paris FC",
+    "source": "https://en.wikipedia.org/wiki/Paris_FC",
+    "identity": {
+      "primaryColor": "#0033A0",
+      "secondaryColor": "#ED1C24",
+      "marker": {
+        "bands": ["#0033A0", "#ED1C24"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "ren",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Rennes",
+    "source": "https://en.wikipedia.org/wiki/Stade_Rennais_F.C.",
+    "identity": {
+      "primaryColor": "#E2001A",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#E2001A", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "str",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Strasbourg",
+    "source": "https://en.wikipedia.org/wiki/RC_Strasbourg_Alsace",
+    "identity": {
+      "primaryColor": "#0060A9",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#0060A9", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "tou",
+    "kind": "club",
+    "league": "ligue-1",
+    "name": "Toulouse",
+    "source": "https://en.wikipedia.org/wiki/Toulouse_FC",
+    "identity": {
+      "primaryColor": "#5A2D82",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#5A2D82", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
     "id": "ars",
     "kind": "club",
     "league": "premier-league",
@@ -434,6 +975,1227 @@
       "secondaryColor": "#FFFFFF",
       "marker": {
         "bands": ["#EF0107"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "avl",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Aston Villa",
+    "source": "https://en.wikipedia.org/wiki/Aston_Villa_F.C.",
+    "identity": {
+      "primaryColor": "#670E36",
+      "secondaryColor": "#95BFE5",
+      "marker": {
+        "bands": ["#670E36", "#95BFE5"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "bou",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Bournemouth",
+    "source": "https://en.wikipedia.org/wiki/AFC_Bournemouth",
+    "identity": {
+      "primaryColor": "#DA291C",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#DA291C", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "bre",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Brentford",
+    "source": "https://en.wikipedia.org/wiki/Brentford_F.C.",
+    "identity": {
+      "primaryColor": "#D2122E",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#D2122E", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "bha",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Brighton & Hove Albion",
+    "source": "https://en.wikipedia.org/wiki/Brighton_%26_Hove_Albion_F.C.",
+    "identity": {
+      "primaryColor": "#0057B8",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#0057B8", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "bur",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Burnley",
+    "source": "https://en.wikipedia.org/wiki/Burnley_F.C.",
+    "identity": {
+      "primaryColor": "#6C1D45",
+      "secondaryColor": "#99D6EA",
+      "marker": {
+        "bands": ["#6C1D45", "#99D6EA"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "che",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Chelsea",
+    "source": "https://en.wikipedia.org/wiki/Chelsea_F.C.",
+    "identity": {
+      "primaryColor": "#034694",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#034694"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "cry",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Crystal Palace",
+    "source": "https://en.wikipedia.org/wiki/Crystal_Palace_F.C.",
+    "identity": {
+      "primaryColor": "#1B458F",
+      "secondaryColor": "#C4122E",
+      "marker": {
+        "bands": ["#1B458F", "#C4122E"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "eve",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Everton",
+    "source": "https://en.wikipedia.org/wiki/Everton_F.C.",
+    "identity": {
+      "primaryColor": "#003399",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#003399"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "ful",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Fulham",
+    "source": "https://en.wikipedia.org/wiki/Fulham_F.C.",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#FFFFFF", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "lee",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Leeds United",
+    "source": "https://en.wikipedia.org/wiki/Leeds_United_F.C.",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#FFCD00",
+      "marker": {
+        "bands": ["#FFFFFF", "#FFCD00"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "liv",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Liverpool",
+    "source": "https://en.wikipedia.org/wiki/Liverpool_F.C.",
+    "identity": {
+      "primaryColor": "#C8102E",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#C8102E"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mci",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Manchester City",
+    "source": "https://en.wikipedia.org/wiki/Manchester_City_F.C.",
+    "identity": {
+      "primaryColor": "#6CADDF",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#6CADDF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mun",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Manchester United",
+    "source": "https://en.wikipedia.org/wiki/Manchester_United_F.C.",
+    "identity": {
+      "primaryColor": "#DA291C",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#DA291C"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "new",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Newcastle United",
+    "source": "https://en.wikipedia.org/wiki/Newcastle_United_F.C.",
+    "identity": {
+      "primaryColor": "#241F20",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#241F20", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "nfo",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Nottingham Forest",
+    "source": "https://en.wikipedia.org/wiki/Nottingham_Forest_F.C.",
+    "identity": {
+      "primaryColor": "#DD0000",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#DD0000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "sun",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Sunderland",
+    "source": "https://en.wikipedia.org/wiki/Sunderland_A.F.C.",
+    "identity": {
+      "primaryColor": "#EB172B",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#EB172B", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "tot",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Tottenham Hotspur",
+    "source": "https://en.wikipedia.org/wiki/Tottenham_Hotspur_F.C.",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#132257",
+      "marker": {
+        "bands": ["#FFFFFF", "#132257"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "whu",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "West Ham United",
+    "source": "https://en.wikipedia.org/wiki/West_Ham_United_F.C.",
+    "identity": {
+      "primaryColor": "#7A263A",
+      "secondaryColor": "#1BB1E7",
+      "marker": {
+        "bands": ["#7A263A", "#1BB1E7"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "wol",
+    "kind": "club",
+    "league": "premier-league",
+    "name": "Wolverhampton Wanderers",
+    "source": "https://en.wikipedia.org/wiki/Wolverhampton_Wanderers_F.C.",
+    "identity": {
+      "primaryColor": "#FDB913",
+      "secondaryColor": "#231F20",
+      "marker": {
+        "bands": ["#FDB913", "#231F20"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "fcb",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "Bayern Munich",
+    "source": "https://en.wikipedia.org/wiki/FC_Bayern_Munich",
+    "identity": {
+      "primaryColor": "#DC052D",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#DC052D"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "bvb",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "Borussia Dortmund",
+    "source": "https://en.wikipedia.org/wiki/Borussia_Dortmund",
+    "identity": {
+      "primaryColor": "#FDE100",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#FDE100", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "b04",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "Bayer Leverkusen",
+    "source": "https://en.wikipedia.org/wiki/Bayer_04_Leverkusen",
+    "identity": {
+      "primaryColor": "#E32219",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#E32219", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "rbl",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "RB Leipzig",
+    "source": "https://en.wikipedia.org/wiki/RB_Leipzig",
+    "identity": {
+      "primaryColor": "#E2001A",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#E2001A", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "sge",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "Eintracht Frankfurt",
+    "source": "https://en.wikipedia.org/wiki/Eintracht_Frankfurt",
+    "identity": {
+      "primaryColor": "#E1000F",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#E1000F", "#000000"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "vfb",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "VfB Stuttgart",
+    "source": "https://en.wikipedia.org/wiki/VfB_Stuttgart",
+    "identity": {
+      "primaryColor": "#E32219",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#E32219", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "m05",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "Mainz 05",
+    "source": "https://en.wikipedia.org/wiki/1._FSV_Mainz_05",
+    "identity": {
+      "primaryColor": "#C41E3A",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#C41E3A", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "bmg",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "Borussia Mönchengladbach",
+    "source": "https://en.wikipedia.org/wiki/Borussia_M%C3%B6nchengladbach",
+    "identity": {
+      "primaryColor": "#000000",
+      "secondaryColor": "#009A44",
+      "marker": {
+        "bands": ["#000000", "#009A44"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "tsg",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "TSG Hoffenheim",
+    "source": "https://en.wikipedia.org/wiki/TSG_1899_Hoffenheim",
+    "identity": {
+      "primaryColor": "#1C63B7",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#1C63B7", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "svw",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "Werder Bremen",
+    "source": "https://en.wikipedia.org/wiki/SV_Werder_Bremen",
+    "identity": {
+      "primaryColor": "#1D9053",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#1D9053", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "wob",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "VfL Wolfsburg",
+    "source": "https://en.wikipedia.org/wiki/VfL_Wolfsburg",
+    "identity": {
+      "primaryColor": "#65B32E",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#65B32E", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "scf",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "SC Freiburg",
+    "source": "https://en.wikipedia.org/wiki/SC_Freiburg",
+    "identity": {
+      "primaryColor": "#C8102E",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#C8102E", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "fca",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "FC Augsburg",
+    "source": "https://en.wikipedia.org/wiki/FC_Augsburg",
+    "identity": {
+      "primaryColor": "#BA3733",
+      "secondaryColor": "#46714D",
+      "marker": {
+        "bands": ["#BA3733", "#46714D"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "fcu",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "Union Berlin",
+    "source": "https://en.wikipedia.org/wiki/1._FC_Union_Berlin",
+    "identity": {
+      "primaryColor": "#EB1923",
+      "secondaryColor": "#FDDC02",
+      "marker": {
+        "bands": ["#EB1923", "#FDDC02"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "stp",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "FC St. Pauli",
+    "source": "https://en.wikipedia.org/wiki/FC_St._Pauli",
+    "identity": {
+      "primaryColor": "#8B4513",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#8B4513", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "fch",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "1. FC Heidenheim",
+    "source": "https://en.wikipedia.org/wiki/1._FC_Heidenheim",
+    "identity": {
+      "primaryColor": "#ED1C24",
+      "secondaryColor": "#003DA5",
+      "marker": {
+        "bands": ["#ED1C24", "#003DA5"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "koe",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "1. FC Köln",
+    "source": "https://en.wikipedia.org/wiki/1._FC_K%C3%B6ln",
+    "identity": {
+      "primaryColor": "#ED1C24",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#ED1C24", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "hsv",
+    "kind": "club",
+    "league": "bundesliga",
+    "name": "Hamburger SV",
+    "source": "https://en.wikipedia.org/wiki/Hamburger_SV",
+    "identity": {
+      "primaryColor": "#0049AA",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#0049AA", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "eng",
+    "kind": "nation",
+    "name": "England",
+    "source": "https://en.wikipedia.org/wiki/England_national_football_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#CE1124",
+      "marker": {
+        "bands": ["#FFFFFF", "#CE1124"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mor",
+    "kind": "nation",
+    "name": "Morocco",
+    "source": "https://en.wikipedia.org/wiki/Morocco_national_football_team",
+    "identity": {
+      "primaryColor": "#C1272D",
+      "secondaryColor": "#006233",
+      "marker": {
+        "bands": ["#C1272D"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#006233"
+        }
+      }
+    }
+  },
+  {
+    "id": "por",
+    "kind": "nation",
+    "name": "Portugal",
+    "source": "https://en.wikipedia.org/wiki/Portugal_national_football_team",
+    "identity": {
+      "primaryColor": "#046A38",
+      "secondaryColor": "#DA020E",
+      "marker": {
+        "bands": ["#046A38", "#DA020E"],
+        "orientation": "vertical",
+        "weights": [2, 3]
+      }
+    }
+  },
+  {
+    "id": "bel",
+    "kind": "nation",
+    "name": "Belgium",
+    "source": "https://en.wikipedia.org/wiki/Belgium_national_football_team",
+    "identity": {
+      "primaryColor": "#000000",
+      "secondaryColor": "#FDDA24",
+      "marker": {
+        "bands": ["#000000", "#FDDA24", "#EF3340"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "ned",
+    "kind": "nation",
+    "name": "Netherlands",
+    "source": "https://en.wikipedia.org/wiki/Netherlands_national_football_team",
+    "identity": {
+      "primaryColor": "#AE1C28",
+      "secondaryColor": "#21468B",
+      "marker": {
+        "bands": ["#AE1C28", "#FFFFFF", "#21468B"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "mex",
+    "kind": "nation",
+    "name": "Mexico",
+    "source": "https://en.wikipedia.org/wiki/Mexico_national_football_team",
+    "identity": {
+      "primaryColor": "#006847",
+      "secondaryColor": "#CE1126",
+      "marker": {
+        "bands": ["#006847", "#FFFFFF", "#CE1126"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "col",
+    "kind": "nation",
+    "name": "Colombia",
+    "source": "https://en.wikipedia.org/wiki/Colombia_national_football_team",
+    "identity": {
+      "primaryColor": "#FCD116",
+      "secondaryColor": "#003893",
+      "marker": {
+        "bands": ["#FCD116", "#003893", "#CE1126"],
+        "orientation": "horizontal",
+        "weights": [2, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "ger",
+    "kind": "nation",
+    "name": "Germany",
+    "source": "https://en.wikipedia.org/wiki/Germany_national_football_team",
+    "identity": {
+      "primaryColor": "#000000",
+      "secondaryColor": "#FFCE00",
+      "marker": {
+        "bands": ["#000000", "#DD0000", "#FFCE00"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "cro",
+    "kind": "nation",
+    "name": "Croatia",
+    "source": "https://en.wikipedia.org/wiki/Croatia_national_football_team",
+    "identity": {
+      "primaryColor": "#FF0000",
+      "secondaryColor": "#171796",
+      "marker": {
+        "bands": ["#FF0000", "#FFFFFF", "#171796"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "sui",
+    "kind": "nation",
+    "name": "Switzerland",
+    "source": "https://en.wikipedia.org/wiki/Switzerland_national_football_team",
+    "identity": {
+      "primaryColor": "#FF0000",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FF0000", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "ita",
+    "kind": "nation",
+    "name": "Italy",
+    "source": "https://en.wikipedia.org/wiki/Italy_national_football_team",
+    "identity": {
+      "primaryColor": "#008C45",
+      "secondaryColor": "#CD212A",
+      "marker": {
+        "bands": ["#008C45", "#F4F5F0", "#CD212A"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "usa",
+    "kind": "nation",
+    "name": "United States",
+    "source": "https://en.wikipedia.org/wiki/United_States_men%27s_national_soccer_team",
+    "identity": {
+      "primaryColor": "#B31942",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#B31942", "#FFFFFF"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "sen",
+    "kind": "nation",
+    "name": "Senegal",
+    "source": "https://en.wikipedia.org/wiki/Senegal_national_football_team",
+    "identity": {
+      "primaryColor": "#00853F",
+      "secondaryColor": "#E31B23",
+      "marker": {
+        "bands": ["#00853F", "#FDEF42", "#E31B23"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "nor",
+    "kind": "nation",
+    "name": "Norway",
+    "source": "https://en.wikipedia.org/wiki/Norway_national_football_team",
+    "identity": {
+      "primaryColor": "#EF2B2D",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#EF2B2D", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "uru",
+    "kind": "nation",
+    "name": "Uruguay",
+    "source": "https://en.wikipedia.org/wiki/Uruguay_national_football_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#0038A8",
+      "marker": {
+        "bands": ["#FFFFFF", "#0038A8"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "den",
+    "kind": "nation",
+    "name": "Denmark",
+    "source": "https://en.wikipedia.org/wiki/Denmark_national_football_team",
+    "identity": {
+      "primaryColor": "#C60C30",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#C60C30", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "irn",
+    "kind": "nation",
+    "name": "Iran",
+    "source": "https://en.wikipedia.org/wiki/Iran_national_football_team",
+    "identity": {
+      "primaryColor": "#239F40",
+      "secondaryColor": "#DA0000",
+      "marker": {
+        "bands": ["#239F40", "#FFFFFF", "#DA0000"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "aut",
+    "kind": "nation",
+    "name": "Austria",
+    "source": "https://en.wikipedia.org/wiki/Austria_national_football_team",
+    "identity": {
+      "primaryColor": "#ED2939",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#ED2939", "#FFFFFF", "#ED2939"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "egy",
+    "kind": "nation",
+    "name": "Egypt",
+    "source": "https://en.wikipedia.org/wiki/Egypt_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#CE1126", "#FFFFFF", "#000000"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "ecu",
+    "kind": "nation",
+    "name": "Ecuador",
+    "source": "https://en.wikipedia.org/wiki/Ecuador_national_football_team",
+    "identity": {
+      "primaryColor": "#FFDD00",
+      "secondaryColor": "#ED1C24",
+      "marker": {
+        "bands": ["#FFDD00", "#034EA2", "#ED1C24"],
+        "orientation": "horizontal",
+        "weights": [2, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "nga",
+    "kind": "nation",
+    "name": "Nigeria",
+    "source": "https://en.wikipedia.org/wiki/Nigeria_national_football_team",
+    "identity": {
+      "primaryColor": "#008751",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#008751", "#FFFFFF", "#008751"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "tur",
+    "kind": "nation",
+    "name": "Turkey",
+    "source": "https://en.wikipedia.org/wiki/Turkey_national_football_team",
+    "identity": {
+      "primaryColor": "#E30A17",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#E30A17"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFFFF"
+        }
+      }
+    }
+  },
+  {
+    "id": "aus",
+    "kind": "nation",
+    "name": "Australia",
+    "source": "https://en.wikipedia.org/wiki/Australia_national_soccer_team",
+    "identity": {
+      "primaryColor": "#00008B",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#00008B"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFFFF"
+        }
+      }
+    }
+  },
+  {
+    "id": "alg",
+    "kind": "nation",
+    "name": "Algeria",
+    "source": "https://en.wikipedia.org/wiki/Algeria_national_football_team",
+    "identity": {
+      "primaryColor": "#006233",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#006233", "#FFFFFF"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#D21034"
+        }
+      }
+    }
+  },
+  {
+    "id": "can",
+    "kind": "nation",
+    "name": "Canada",
+    "source": "https://en.wikipedia.org/wiki/Canada_men%27s_national_soccer_team",
+    "identity": {
+      "primaryColor": "#FF0000",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FF0000", "#FFFFFF", "#FF0000"],
+        "orientation": "vertical",
+        "weights": [1, 2, 1]
+      }
+    }
+  },
+  {
+    "id": "civ",
+    "kind": "nation",
+    "name": "Ivory Coast",
+    "source": "https://en.wikipedia.org/wiki/Ivory_Coast_national_football_team",
+    "identity": {
+      "primaryColor": "#F77F00",
+      "secondaryColor": "#009E60",
+      "marker": {
+        "bands": ["#F77F00", "#FFFFFF", "#009E60"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "kor",
+    "kind": "nation",
+    "name": "South Korea",
+    "source": "https://en.wikipedia.org/wiki/South_Korea_national_football_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#CD2E3A",
+      "marker": {
+        "bands": ["#FFFFFF"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#CD2E3A"
+        }
+      }
+    }
+  },
+  {
+    "id": "ukr",
+    "kind": "nation",
+    "name": "Ukraine",
+    "source": "https://en.wikipedia.org/wiki/Ukraine_national_football_team",
+    "identity": {
+      "primaryColor": "#0057B7",
+      "secondaryColor": "#FFDD00",
+      "marker": {
+        "bands": ["#0057B7", "#FFDD00"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "pry",
+    "kind": "nation",
+    "name": "Paraguay",
+    "source": "https://en.wikipedia.org/wiki/Paraguay_national_football_team",
+    "identity": {
+      "primaryColor": "#D52B1E",
+      "secondaryColor": "#0038A8",
+      "marker": {
+        "bands": ["#D52B1E", "#FFFFFF", "#0038A8"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "rus",
+    "kind": "nation",
+    "name": "Russia",
+    "source": "https://en.wikipedia.org/wiki/Russia_national_football_team",
+    "identity": {
+      "primaryColor": "#0039A6",
+      "secondaryColor": "#D52B1E",
+      "marker": {
+        "bands": ["#FFFFFF", "#0039A6", "#D52B1E"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "pol",
+    "kind": "nation",
+    "name": "Poland",
+    "source": "https://en.wikipedia.org/wiki/Poland_national_football_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#DC143C",
+      "marker": {
+        "bands": ["#FFFFFF", "#DC143C"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "swe",
+    "kind": "nation",
+    "name": "Sweden",
+    "source": "https://en.wikipedia.org/wiki/Sweden_national_football_team",
+    "identity": {
+      "primaryColor": "#006AA7",
+      "secondaryColor": "#FECC02",
+      "marker": {
+        "bands": ["#006AA7", "#FECC02"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "wal",
+    "kind": "nation",
+    "name": "Wales",
+    "source": "https://en.wikipedia.org/wiki/Wales_national_football_team",
+    "identity": {
+      "primaryColor": "#00B140",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FFFFFF", "#00B140"],
+        "orientation": "horizontal",
+        "overlay": {
+          "shape": "disc",
+          "color": "#C8102E"
+        }
+      }
+    }
+  },
+  {
+    "id": "hun",
+    "kind": "nation",
+    "name": "Hungary",
+    "source": "https://en.wikipedia.org/wiki/Hungary_national_football_team",
+    "identity": {
+      "primaryColor": "#CE2939",
+      "secondaryColor": "#477050",
+      "marker": {
+        "bands": ["#CE2939", "#FFFFFF", "#477050"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "srb",
+    "kind": "nation",
+    "name": "Serbia",
+    "source": "https://en.wikipedia.org/wiki/Serbia_national_football_team",
+    "identity": {
+      "primaryColor": "#C6363C",
+      "secondaryColor": "#0C4076",
+      "marker": {
+        "bands": ["#C6363C", "#0C4076", "#FFFFFF"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "cod",
+    "kind": "nation",
+    "name": "DR Congo",
+    "source": "https://en.wikipedia.org/wiki/DR_Congo_national_football_team",
+    "identity": {
+      "primaryColor": "#007FFF",
+      "secondaryColor": "#F7D618",
+      "marker": {
+        "bands": ["#007FFF"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#F7D618"
+        }
+      }
+    }
+  },
+  {
+    "id": "sco",
+    "kind": "nation",
+    "name": "Scotland",
+    "source": "https://en.wikipedia.org/wiki/Scotland_national_football_team",
+    "identity": {
+      "primaryColor": "#005EB8",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#005EB8", "#FFFFFF"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "cmr",
+    "kind": "nation",
+    "name": "Cameroon",
+    "source": "https://en.wikipedia.org/wiki/Cameroon_national_football_team",
+    "identity": {
+      "primaryColor": "#007A5E",
+      "secondaryColor": "#CE1126",
+      "marker": {
+        "bands": ["#007A5E", "#CE1126", "#FCD116"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "pan",
+    "kind": "nation",
+    "name": "Panama",
+    "source": "https://en.wikipedia.org/wiki/Panama_national_football_team",
+    "identity": {
+      "primaryColor": "#DA121A",
+      "secondaryColor": "#005293",
+      "marker": {
+        "bands": ["#FFFFFF", "#DA121A"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "svk",
+    "kind": "nation",
+    "name": "Slovakia",
+    "source": "https://en.wikipedia.org/wiki/Slovakia_national_football_team",
+    "identity": {
+      "primaryColor": "#0B4EA2",
+      "secondaryColor": "#EE1C25",
+      "marker": {
+        "bands": ["#FFFFFF", "#0B4EA2", "#EE1C25"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "gre",
+    "kind": "nation",
+    "name": "Greece",
+    "source": "https://en.wikipedia.org/wiki/Greece_national_football_team",
+    "identity": {
+      "primaryColor": "#0D5EAF",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#0D5EAF", "#FFFFFF"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "ven",
+    "kind": "nation",
+    "name": "Venezuela",
+    "source": "https://en.wikipedia.org/wiki/Venezuela_national_football_team",
+    "identity": {
+      "primaryColor": "#FFCC00",
+      "secondaryColor": "#CF142B",
+      "marker": {
+        "bands": ["#FFCC00", "#00247D", "#CF142B"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "cze",
+    "kind": "nation",
+    "name": "Czechia",
+    "source": "https://en.wikipedia.org/wiki/Czech_Republic_national_football_team",
+    "identity": {
+      "primaryColor": "#D7141A",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FFFFFF", "#D7141A"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "chi",
+    "kind": "nation",
+    "name": "Chile",
+    "source": "https://en.wikipedia.org/wiki/Chile_national_football_team",
+    "identity": {
+      "primaryColor": "#D52B1E",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FFFFFF", "#D52B1E"],
+        "orientation": "horizontal",
+        "overlay": {
+          "shape": "disc",
+          "color": "#0039A6"
+        }
+      }
+    }
+  },
+  {
+    "id": "per",
+    "kind": "nation",
+    "name": "Peru",
+    "source": "https://en.wikipedia.org/wiki/Peru_national_football_team",
+    "identity": {
+      "primaryColor": "#D91023",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#D91023", "#FFFFFF", "#D91023"],
         "orientation": "vertical"
       }
     }

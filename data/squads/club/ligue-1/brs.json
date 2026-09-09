@@ -1,0 +1,114 @@
+{
+  "id": "brs",
+  "kind": "club",
+  "name": "Brest",
+  "season": "2026/27",
+  "primaryColor": "#DA291C",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#DA291C", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Stade_Brestois_29",
+  "members": [
+    {
+      "playerId": "egil-selvik",
+      "no": 1
+    },
+    {
+      "playerId": "bradley-locko",
+      "no": 2
+    },
+    {
+      "playerId": "gautier-lloris",
+      "no": 4
+    },
+    {
+      "playerId": "brendan-chardonnet",
+      "no": 5,
+      "captain": true
+    },
+    {
+      "playerId": "mamady-diambou",
+      "no": 6
+    },
+    {
+      "playerId": "joseph-nonge",
+      "no": 7
+    },
+    {
+      "playerId": "hugo-magnetti",
+      "no": 8
+    },
+    {
+      "playerId": "pathe-mboup",
+      "no": 9
+    },
+    {
+      "playerId": "giovani-versini",
+      "no": 10
+    },
+    {
+      "playerId": "noah-edjouma",
+      "no": 11
+    },
+    {
+      "playerId": "joris-chotard",
+      "no": 13
+    },
+    {
+      "playerId": "noe-poillion",
+      "no": 16
+    },
+    {
+      "playerId": "mama-balde",
+      "no": 17
+    },
+    {
+      "playerId": "justin-bourgault",
+      "no": 18
+    },
+    {
+      "playerId": "ludovic-ajorque",
+      "no": 19
+    },
+    {
+      "playerId": "luck-zogbe",
+      "no": 20
+    },
+    {
+      "playerId": "kamory-doumbia",
+      "no": 23
+    },
+    {
+      "playerId": "lucas-tousart",
+      "no": 29
+    },
+    {
+      "playerId": "mathieu-patouillet",
+      "no": 30
+    },
+    {
+      "playerId": "mathis-laine",
+      "no": 32
+    },
+    {
+      "playerId": "djylian-nguessan",
+      "no": 39
+    },
+    {
+      "playerId": "romain-cagnon",
+      "no": 49
+    },
+    {
+      "playerId": "kenny-lala",
+      "no": 70
+    },
+    {
+      "playerId": "raphael-le-guen",
+      "no": 71
+    }
+  ]
+}

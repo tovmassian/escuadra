@@ -1,0 +1,121 @@
+{
+  "id": "m05",
+  "kind": "club",
+  "name": "Mainz 05",
+  "season": "2026/27",
+  "primaryColor": "#C41E3A",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#C41E3A", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/1._FSV_Mainz_05",
+  "members": [
+    {
+      "playerId": "alexander-schwolow",
+      "no": 1
+    },
+    {
+      "playerId": "phillipp-mwene",
+      "no": 2
+    },
+    {
+      "playerId": "fabio-gruber",
+      "no": 3
+    },
+    {
+      "playerId": "stefan-posch",
+      "no": 4
+    },
+    {
+      "playerId": "eric-martel",
+      "no": 5
+    },
+    {
+      "playerId": "sano",
+      "no": 6
+    },
+    {
+      "playerId": "lee-jaesung",
+      "no": 7
+    },
+    {
+      "playerId": "paul-nebel",
+      "no": 8
+    },
+    {
+      "playerId": "phillip-tietz",
+      "no": 9
+    },
+    {
+      "playerId": "nadiem-amiri",
+      "no": 10
+    },
+    {
+      "playerId": "ransfordyeboah-konigsdorffer",
+      "no": 11
+    },
+    {
+      "playerId": "lennard-maloney",
+      "no": 15
+    },
+    {
+      "playerId": "stefan-bell",
+      "no": 16
+    },
+    {
+      "playerId": "benedict-hollerbach",
+      "no": 17
+    },
+    {
+      "playerId": "anthony-caci",
+      "no": 19
+    },
+    {
+      "playerId": "otto-ruoppi",
+      "no": 20
+    },
+    {
+      "playerId": "danny-da-costa",
+      "no": 21
+    },
+    {
+      "playerId": "sheraldo-becker",
+      "no": 23
+    },
+    {
+      "playerId": "sota-kawasaki",
+      "no": 24
+    },
+    {
+      "playerId": "silas",
+      "no": 26
+    },
+    {
+      "playerId": "robin-zentner",
+      "no": 27
+    },
+    {
+      "playerId": "silvan-widmer",
+      "no": 30
+    },
+    {
+      "playerId": "dominik-kohr",
+      "no": 31
+    },
+    {
+      "playerId": "alynho-haidara",
+      "no": 39
+    },
+    {
+      "playerId": "maximilian-kinzig",
+      "no": 40
+    },
+    {
+      "playerId": "kacper-potulski",
+      "no": 48
+    }
+  ]
+}

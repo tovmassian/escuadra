@@ -1,0 +1,141 @@
+{
+  "id": "koe",
+  "kind": "club",
+  "name": "1. FC Köln",
+  "season": "2026/27",
+  "primaryColor": "#ED1C24",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#ED1C24", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/1._FC_K%C3%B6ln",
+  "members": [
+    {
+      "playerId": "marvin-schwabe",
+      "no": 1
+    },
+    {
+      "playerId": "joel-schmied",
+      "no": 2
+    },
+    {
+      "playerId": "borna-sosa",
+      "no": 3
+    },
+    {
+      "playerId": "timo-hubers",
+      "no": 4
+    },
+    {
+      "playerId": "tom-krauss",
+      "no": 5
+    },
+    {
+      "playerId": "ellyes-skhiri",
+      "no": 6
+    },
+    {
+      "playerId": "luca-waldschmidt",
+      "no": 7
+    },
+    {
+      "playerId": "isak-johannesson",
+      "no": 8
+    },
+    {
+      "playerId": "ragnar-ache",
+      "no": 9
+    },
+    {
+      "playerId": "said-el-mala",
+      "no": 10
+    },
+    {
+      "playerId": "reigan-heskey",
+      "no": 11
+    },
+    {
+      "playerId": "gideon-mensah",
+      "no": 14
+    },
+    {
+      "playerId": "imad-rondic",
+      "no": 15
+    },
+    {
+      "playerId": "alessio-castromontes",
+      "no": 17
+    },
+    {
+      "playerId": "malek-el-mala",
+      "no": 19
+    },
+    {
+      "playerId": "ronrobert-zieler",
+      "no": 20
+    },
+    {
+      "playerId": "martin-james",
+      "no": 21
+    },
+    {
+      "playerId": "jahmai-simpsonpusey",
+      "no": 22
+    },
+    {
+      "playerId": "paul-okonengstler",
+      "no": 23
+    },
+    {
+      "playerId": "luka-lochoshvili",
+      "no": 24
+    },
+    {
+      "playerId": "thijs-dallinga",
+      "no": 27
+    },
+    {
+      "playerId": "sebastian-sebulonsen",
+      "no": 28
+    },
+    {
+      "playerId": "jan-thielmann",
+      "no": 29
+    },
+    {
+      "playerId": "marius-bulter",
+      "no": 30
+    },
+    {
+      "playerId": "gil-neves",
+      "no": 31
+    },
+    {
+      "playerId": "rav-van-den-berg",
+      "no": 33
+    },
+    {
+      "playerId": "fayssal-harchaoui",
+      "no": 34
+    },
+    {
+      "playerId": "linton-maina",
+      "no": 37
+    },
+    {
+      "playerId": "matthias-kobbing",
+      "no": 44
+    },
+    {
+      "playerId": "mikey-moore",
+      "no": 47
+    },
+    {
+      "playerId": "david-furst",
+      "no": 49
+    }
+  ]
+}

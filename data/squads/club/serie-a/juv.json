@@ -1,0 +1,130 @@
+{
+  "id": "juv",
+  "kind": "club",
+  "name": "Juventus",
+  "season": "2026/27",
+  "primaryColor": "#000000",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#000000", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Juventus_F.C.",
+  "members": [
+    {
+      "playerId": "kamil-grabara",
+      "no": 1
+    },
+    {
+      "playerId": "zeki-celik",
+      "no": 2
+    },
+    {
+      "playerId": "bremer",
+      "no": 3
+    },
+    {
+      "playerId": "federico-gatti",
+      "no": 4
+    },
+    {
+      "playerId": "manuel-locatelli",
+      "no": 5,
+      "captain": true
+    },
+    {
+      "playerId": "lloyd-kelly",
+      "no": 6
+    },
+    {
+      "playerId": "francisco-conceicao",
+      "no": 7
+    },
+    {
+      "playerId": "teun-koopmeiners",
+      "no": 8
+    },
+    {
+      "playerId": "randal-kolo-muani",
+      "no": 9
+    },
+    {
+      "playerId": "kenan-yildiz",
+      "no": 10
+    },
+    {
+      "playerId": "edon-zhegrova",
+      "no": 11
+    },
+    {
+      "playerId": "douglas-luiz",
+      "no": 12
+    },
+    {
+      "playerId": "jeremie-boga",
+      "no": 13
+    },
+    {
+      "playerId": "arkadiusz-milik",
+      "no": 14
+    },
+    {
+      "playerId": "pierre-kalulu",
+      "no": 15
+    },
+    {
+      "playerId": "kerim-alajbegovic",
+      "no": 17
+    },
+    {
+      "playerId": "jeff-ekhator",
+      "no": 18
+    },
+    {
+      "playerId": "khephren-thuram",
+      "no": 19
+    },
+    {
+      "playerId": "andrea-cambiaso",
+      "no": 20
+    },
+    {
+      "playerId": "weston-mckennie",
+      "no": 22
+    },
+    {
+      "playerId": "carlo-pinsoglio",
+      "no": 23
+    },
+    {
+      "playerId": "daniele-rugani",
+      "no": 24
+    },
+    {
+      "playerId": "guglielmo-vicario",
+      "no": 25
+    },
+    {
+      "playerId": "jhon-lucumi",
+      "no": 26
+    },
+    {
+      "playerId": "nick-woltemade",
+      "no": 27
+    },
+    {
+      "playerId": "pape-matar-sarr",
+      "no": 29
+    },
+    {
+      "playerId": "gonzalez",
+      "no": 31
+    },
+    {
+      "playerId": "juan-cabal",
+      "no": 32
+    }
+  ]
+}

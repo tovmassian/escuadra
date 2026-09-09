@@ -10,7 +10,7 @@
     "bands": ["#EF0107"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-07",
+  "lastUpdated": "2026-09-09",
   "source": "https://en.wikipedia.org/wiki/Arsenal_F.C.",
   "members": [
     {
@@ -75,10 +75,6 @@
       "no": 20
     },
     {
-      "playerId": "nwaneri",
-      "no": 22
-    },
-    {
       "playerId": "merino",
       "no": 23
     },
@@ -93,10 +89,6 @@
     {
       "playerId": "calafiori",
       "no": 33
-    },
-    {
-      "playerId": "setford",
-      "no": 35
     },
     {
       "playerId": "zubimendi",

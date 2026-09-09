@@ -1,0 +1,126 @@
+{
+  "id": "scf",
+  "kind": "club",
+  "name": "SC Freiburg",
+  "season": "2026/27",
+  "primaryColor": "#C8102E",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#C8102E", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/SC_Freiburg",
+  "members": [
+    {
+      "playerId": "mio-backhaus",
+      "no": 1
+    },
+    {
+      "playerId": "philipp-lienhart",
+      "no": 3
+    },
+    {
+      "playerId": "anthony-jung",
+      "no": 5
+    },
+    {
+      "playerId": "patrick-osterhage",
+      "no": 6
+    },
+    {
+      "playerId": "derry-scherhant",
+      "no": 7
+    },
+    {
+      "playerId": "maximilian-eggestein",
+      "no": 8
+    },
+    {
+      "playerId": "lucas-holer",
+      "no": 9
+    },
+    {
+      "playerId": "suzuki-yuito",
+      "no": 14
+    },
+    {
+      "playerId": "yannik-engelhardt",
+      "no": 16
+    },
+    {
+      "playerId": "lukas-kubler",
+      "no": 17
+    },
+    {
+      "playerId": "niklas-beste",
+      "no": 19
+    },
+    {
+      "playerId": "rihito-yamamoto",
+      "no": 20
+    },
+    {
+      "playerId": "florian-muller",
+      "no": 21
+    },
+    {
+      "playerId": "cyriaque-irie",
+      "no": 22
+    },
+    {
+      "playerId": "florent-muslija",
+      "no": 23
+    },
+    {
+      "playerId": "jannik-huth",
+      "no": 24
+    },
+    {
+      "playerId": "berkay-yilmaz",
+      "no": 27
+    },
+    {
+      "playerId": "matthias-ginter",
+      "no": 28
+    },
+    {
+      "playerId": "philipp-treu",
+      "no": 29
+    },
+    {
+      "playerId": "christian-gunter",
+      "no": 30,
+      "captain": true
+    },
+    {
+      "playerId": "igor-matanovic",
+      "no": 31
+    },
+    {
+      "playerId": "vincenzo-grifo",
+      "no": 32
+    },
+    {
+      "playerId": "jordy-makengo",
+      "no": 33
+    },
+    {
+      "playerId": "max-rosenfelder",
+      "no": 37
+    },
+    {
+      "playerId": "rouven-tarnutzer",
+      "no": 39
+    },
+    {
+      "playerId": "goto",
+      "no": 42
+    },
+    {
+      "playerId": "bruno-ogbus",
+      "no": 43
+    }
+  ]
+}

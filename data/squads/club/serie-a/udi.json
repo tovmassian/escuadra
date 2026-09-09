@@ -1,0 +1,126 @@
+{
+  "id": "udi",
+  "kind": "club",
+  "name": "Udinese",
+  "season": "2026/27",
+  "primaryColor": "#000000",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#000000", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Udinese_Calcio",
+  "members": [
+    {
+      "playerId": "sandi-lovric",
+      "no": 4
+    },
+    {
+      "playerId": "oier-zarraga",
+      "no": 6
+    },
+    {
+      "playerId": "idrissa-gueye",
+      "no": 7
+    },
+    {
+      "playerId": "jesper-karlstrom",
+      "no": 8,
+      "captain": true
+    },
+    {
+      "playerId": "keinan-davis",
+      "no": 9
+    },
+    {
+      "playerId": "nicolo-zaniolo",
+      "no": 10
+    },
+    {
+      "playerId": "hassane-kamara",
+      "no": 11
+    },
+    {
+      "playerId": "nicolo-bertola",
+      "no": 13
+    },
+    {
+      "playerId": "james-abankwah",
+      "no": 14
+    },
+    {
+      "playerId": "vakoun-bayo",
+      "no": 15
+    },
+    {
+      "playerId": "matteo-palma",
+      "no": 16
+    },
+    {
+      "playerId": "juan-david-arizala",
+      "no": 20
+    },
+    {
+      "playerId": "mergim-vojvoda",
+      "no": 23
+    },
+    {
+      "playerId": "jakub-piotrowski",
+      "no": 24
+    },
+    {
+      "playerId": "christian-kabasele",
+      "no": 27
+    },
+    {
+      "playerId": "oumar-solet",
+      "no": 28
+    },
+    {
+      "playerId": "giorgi-chakvetadze",
+      "no": 30
+    },
+    {
+      "playerId": "jurgen-ekkelenkamp",
+      "no": 32
+    },
+    {
+      "playerId": "lennon-miller",
+      "no": 38
+    },
+    {
+      "playerId": "maduka-okoye",
+      "no": 40
+    },
+    {
+      "playerId": "bartosz-mrozek",
+      "no": 41
+    },
+    {
+      "playerId": "giulio-vinciati",
+      "no": 45
+    },
+    {
+      "playerId": "unai-gomez",
+      "no": 46
+    },
+    {
+      "playerId": "alessandro-zanoli",
+      "no": 59
+    },
+    {
+      "playerId": "enzo-ebosse",
+      "no": 77
+    },
+    {
+      "playerId": "lazar-jovanovic",
+      "no": 91
+    },
+    {
+      "playerId": "daniele-padelli",
+      "no": 93
+    }
+  ]
+}

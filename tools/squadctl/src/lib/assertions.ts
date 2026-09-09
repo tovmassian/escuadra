@@ -23,7 +23,14 @@ export type Conflict =
   | { kind: 'omitted-row'; name: string; reason: string }
   | { kind: 'unknown-template'; detail: string }
   | { kind: 'blast-radius'; ratio: number }
-  | { kind: 'call-ups-only'; sectionTitle: string };
+  | { kind: 'call-ups-only'; sectionTitle: string }
+  | {
+      kind: 'title-mismatch';
+      playerId: string;
+      storedTitle: string;
+      sourceTitle: string;
+      rowName: string;
+    };
 
 export interface AssertionResult {
   /** Team is not written at all. The run continues with the other teams. */
@@ -90,6 +97,11 @@ export function assess(plan: TeamPlan): AssertionResult {
       sourceName: variant.sourceName,
     });
   }
+  // Two different real people, or one whose article moved. Neither is provable
+  // from the data, and merging the wrong pair is unrecoverable.
+  for (const mismatch of plan.titleMismatches) {
+    conflicts.push({ kind: 'title-mismatch', ...mismatch });
+  }
   // A row that could not be placed is a conflict in its own right: the squad
   // is short a player and no member-count guard would notice 26 -> 25.
   for (const row of plan.omitted) {
@@ -107,6 +119,27 @@ export function assess(plan: TeamPlan): AssertionResult {
   }
 
   // --- Warnings: written, verified stays true.
+  // A warning, not a conflict: the source stated plainly that these players
+  // are elsewhere, so nothing is being guessed. Reported because a squad that
+  // quietly came back three players short is exactly what no member-count
+  // guard would notice.
+  if (plan.loanedOut.length > 0) {
+    warnings.push(
+      `${plan.loanedOut.length} out on loan, dropped: ${plan.loanedOut
+        .map((l) => `${l.name} (${l.note})`)
+        .join(', ')}`,
+    );
+  }
+  // Also a warning, not a conflict — a person already made this call, and
+  // the reason they gave is printed back every run so a stale override is
+  // visible rather than forgotten.
+  if (plan.excluded.length > 0) {
+    warnings.push(
+      `${plan.excluded.length} excluded by decision: ${plan.excluded
+        .map((e) => `${e.name} (${e.note})`)
+        .join(', ')}`,
+    );
+  }
   if (plan.departed.length > 0) {
     warnings.push(
       `${plan.departed.length} departed: ${plan.departed.map((d) => d.name).join(', ')}`,
@@ -153,6 +186,8 @@ export function describeConflict(conflict: Conflict): string {
       return `possible rename — stored "${conflict.departedName}" (${conflict.departedId}) left the squad, source lists "${conflict.arrivedName}"`;
     case 'name-variant':
       return `spelling disagreement on ${conflict.playerId} — stored "${conflict.storedName}", source "${conflict.sourceName}"`;
+    case 'title-mismatch':
+      return `identity conflict on ${conflict.playerId} — stored "${conflict.storedTitle}", source lists "${conflict.sourceTitle}"`;
     case 'omitted-row':
       return `"${conflict.name}" could not be placed and is missing from the squad — ${conflict.reason}`;
     case 'unknown-template':
@@ -176,11 +211,20 @@ export function conflictCommand(conflict: Conflict): string | null {
     case 'possible-rename':
       return (
         `same person, adopt new name:  npm run squadctl -- rename ${conflict.departedId} ${JSON.stringify(conflict.arrivedName)}\n` +
-        `      same person, both names:      npm run squadctl -- alias ${conflict.departedId} ${JSON.stringify(conflict.arrivedName)}\n` +
-        `      two different people:         npm run squadctl -- split ${conflict.team} ${conflict.departedId} ${JSON.stringify(conflict.arrivedName)}`
+        `                same person, both names:      npm run squadctl -- alias ${conflict.departedId} ${JSON.stringify(conflict.arrivedName)}\n` +
+        `                two different people:         npm run squadctl -- split ${conflict.team} ${conflict.departedId} ${JSON.stringify(conflict.arrivedName)}`
       );
     case 'name-variant':
       return `npm run squadctl -- rename ${conflict.playerId} ${JSON.stringify(conflict.sourceName)}`;
+    // The same three answers as possible-rename, one level up. "Both titles
+    // are his" is no more expressible as either of the others than "both
+    // names are his" was.
+    case 'title-mismatch':
+      return (
+        `same person, article moved:  npm run squadctl -- retitle ${conflict.playerId} ${JSON.stringify(conflict.sourceTitle)}\n` +
+        `                same person, both titles:    npm run squadctl -- alias ${conflict.playerId} --title ${JSON.stringify(conflict.sourceTitle)}\n` +
+        `                two different people:        npm run squadctl -- fork ${conflict.playerId} ${JSON.stringify(conflict.sourceTitle)}`
+      );
     case 'ambiguous-name':
     case 'omitted-row':
     case 'unknown-template':

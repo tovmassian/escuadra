@@ -9,6 +9,7 @@ function player(overrides: Partial<Player> & Pick<Player, 'id' | 'name' | 'posit
     nationality: 'England',
     club: null,
     photo: null,
+    wikiTitle: null,
     ...overrides,
   };
 }

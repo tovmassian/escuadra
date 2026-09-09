@@ -4,6 +4,7 @@ import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import {
   findTemplates,
+  isOutOnLoan,
   namedParams,
   parseSection,
   parseUpdated,
@@ -222,5 +223,65 @@ describe('selectSquadSection', () => {
 
   it('returns null when the article has no squad section at all', () => {
     expect(selectSquadSection([{ line: 'History', index: '3' }])).toBeNull();
+  });
+});
+
+describe('isOutOnLoan', () => {
+  // Premier League and Serie A articles keep a loaned-away player INLINE in
+  // the main squad table, so `trimToFirstSquadTable` has no heading to cut
+  // at. `other=` is the only signal, and its two directions mean opposite
+  // things: `from` is where the player plays, `to`/`at` is the club that
+  // merely owns the registration.
+  it('drops the "at [[club]] until <date>" form, the most common one', () => {
+    expect(
+      isOutOnLoan(
+        '{{Fs player|no=19|nat=ENG|pos=MF|name=[[Harvey Elliott]]|other=at [[Valencia CF|Valencia]] until 30 June 2027}}',
+      ),
+    ).toBe(true);
+  });
+
+  it('drops the "on loan to [[club]]" form', () => {
+    expect(
+      isOutOnLoan(
+        '{{Fs player|no=22|nat=ENG|pos=FW|name=[[Ethan Nwaneri]]|other=on loan to [[Borussia Dortmund]] until 30 June 2027}}',
+      ),
+    ).toBe(true);
+  });
+
+  it('KEEPS "on loan from", which means the player is at THIS club', () => {
+    expect(
+      isOutOnLoan(
+        '{{Fs player|no=18|nat=ENG|pos=MF|name=[[Ethan Nwaneri]]|other=on loan from [[Arsenal F.C.|Arsenal]]}}',
+      ),
+    ).toBe(false);
+  });
+
+  it('keeps a captain row, where other= carries the armband instead', () => {
+    expect(
+      isOutOnLoan('{{Fs player|no=8|nat=NOR|pos=MF|name=[[Martin Ødegaard]]|other=captain}}'),
+    ).toBe(false);
+  });
+
+  it('keeps a row with no other= at all', () => {
+    expect(isOutOnLoan('{{Fs player|no=45|nat=ALG|pos=DF|name=[[Rafik Belghali]]}}')).toBe(false);
+  });
+
+  // Fail-safe direction. An unrecognised annotation leaves the player in both
+  // squads, which dataIntegrity then fails loudly on — far better than
+  // silently shortening a squad on a phrasing nobody has seen yet.
+  it('keeps a row whose other= is an unrecognised phrasing', () => {
+    expect(
+      isOutOnLoan(
+        '{{Fs player|no=7|nat=ESP|pos=FW|name=[[Someone]]|other=training with the squad}}',
+      ),
+    ).toBe(false);
+  });
+
+  it('anchors at the start, so a club whose name contains "at" is not dropped', () => {
+    expect(
+      isOutOnLoan(
+        '{{Fs player|no=9|nat=ESP|pos=FW|name=[[Someone]]|other=on loan from [[Atlético Madrid]]}}',
+      ),
+    ).toBe(false);
   });
 });

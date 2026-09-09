@@ -1,0 +1,126 @@
+{
+  "id": "com",
+  "kind": "club",
+  "name": "Como",
+  "season": "2026/27",
+  "primaryColor": "#003DA5",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#003DA5", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Como_1907",
+  "members": [
+    {
+      "playerId": "jean-butez",
+      "no": 1
+    },
+    {
+      "playerId": "marcoliver-kempf",
+      "no": 2
+    },
+    {
+      "playerId": "alex-valle",
+      "no": 3
+    },
+    {
+      "playerId": "jacobo-ramon",
+      "no": 4
+    },
+    {
+      "playerId": "maximo-perrone",
+      "no": 5
+    },
+    {
+      "playerId": "luis-milla",
+      "no": 6
+    },
+    {
+      "playerId": "lucas-da-cunha",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "maxence-caqueret",
+      "no": 8
+    },
+    {
+      "playerId": "anastasios-douvikas",
+      "no": 9
+    },
+    {
+      "playerId": "paz",
+      "no": 10
+    },
+    {
+      "playerId": "assane-diao",
+      "no": 11
+    },
+    {
+      "playerId": "alberto-dossena",
+      "no": 13
+    },
+    {
+      "playerId": "samuele-ricci",
+      "no": 14
+    },
+    {
+      "playerId": "adrian-lahdo",
+      "no": 15
+    },
+    {
+      "playerId": "kaiki-bruno",
+      "no": 16
+    },
+    {
+      "playerId": "jesus-rodriguez",
+      "no": 17
+    },
+    {
+      "playerId": "edoardo-goldaniga",
+      "no": 18
+    },
+    {
+      "playerId": "martin-baturina",
+      "no": 20
+    },
+    {
+      "playerId": "mauro-vigorito",
+      "no": 22
+    },
+    {
+      "playerId": "yan-couto",
+      "no": 27
+    },
+    {
+      "playerId": "ivan-smolcic",
+      "no": 28
+    },
+    {
+      "playerId": "mattia-liberali",
+      "no": 30
+    },
+    {
+      "playerId": "jayden-addai",
+      "no": 42
+    },
+    {
+      "playerId": "willy-kambwala",
+      "no": 53
+    },
+    {
+      "playerId": "moise-kean",
+      "no": 90
+    },
+    {
+      "playerId": "robert-sanchez",
+      "no": 97
+    },
+    {
+      "playerId": "trevoh-chalobah",
+      "no": 99
+    }
+  ]
+}

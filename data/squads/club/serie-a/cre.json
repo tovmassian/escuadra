@@ -1,0 +1,146 @@
+{
+  "id": "cre",
+  "kind": "club",
+  "name": "Cremonese",
+  "season": "2026/27",
+  "primaryColor": "#C8102E",
+  "secondaryColor": "#808080",
+  "verified": true,
+  "marker": {
+    "bands": ["#C8102E", "#808080"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/US_Cremonese",
+  "members": [
+    {
+      "playerId": "andrea-fulignati",
+      "no": 1
+    },
+    {
+      "playerId": "morten-thorsby",
+      "no": 2
+    },
+    {
+      "playerId": "giuseppe-pezzella",
+      "no": 3
+    },
+    {
+      "playerId": "tommaso-barbieri",
+      "no": 4
+    },
+    {
+      "playerId": "sebastiano-luperto",
+      "no": 5
+    },
+    {
+      "playerId": "federico-baschirotto",
+      "no": 6
+    },
+    {
+      "playerId": "david-stuckler",
+      "no": 7
+    },
+    {
+      "playerId": "simone-lottici-tessadri",
+      "no": 8
+    },
+    {
+      "playerId": "manuel-de-luca",
+      "no": 9
+    },
+    {
+      "playerId": "adin-licina",
+      "no": 10
+    },
+    {
+      "playerId": "milan-duric",
+      "no": 11
+    },
+    {
+      "playerId": "marco-festa",
+      "no": 12
+    },
+    {
+      "playerId": "fellipe-jack",
+      "no": 13
+    },
+    {
+      "playerId": "tommaso-berti",
+      "no": 14
+    },
+    {
+      "playerId": "matteo-bianchetti",
+      "no": 15,
+      "captain": true
+    },
+    {
+      "playerId": "fabio-gerli",
+      "no": 16
+    },
+    {
+      "playerId": "adrian-lickunas",
+      "no": 17
+    },
+    {
+      "playerId": "michele-collocolo",
+      "no": 18
+    },
+    {
+      "playerId": "marco-nasti",
+      "no": 19
+    },
+    {
+      "playerId": "simone-pontisso",
+      "no": 20
+    },
+    {
+      "playerId": "yuri-rocchetti",
+      "no": 21
+    },
+    {
+      "playerId": "federico-agazzi",
+      "no": 22
+    },
+    {
+      "playerId": "francesco-folino",
+      "no": 23
+    },
+    {
+      "playerId": "dachi-lordkipanidze",
+      "no": 25
+    },
+    {
+      "playerId": "jari-vandeputte",
+      "no": 27
+    },
+    {
+      "playerId": "alberto-grassi",
+      "no": 33
+    },
+    {
+      "playerId": "eddy-cabianca",
+      "no": 35
+    },
+    {
+      "playerId": "alessandro-vogliacco",
+      "no": 38
+    },
+    {
+      "playerId": "salvatore-elia",
+      "no": 71
+    },
+    {
+      "playerId": "federico-bonazzoli",
+      "no": 90
+    },
+    {
+      "playerId": "alessio-brambilla",
+      "no": null
+    },
+    {
+      "playerId": "nouroudine-faye",
+      "no": null
+    }
+  ]
+}

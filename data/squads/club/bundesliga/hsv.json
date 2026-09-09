@@ -1,0 +1,129 @@
+{
+  "id": "hsv",
+  "kind": "club",
+  "name": "Hamburger SV",
+  "season": "2026/27",
+  "primaryColor": "#0049AA",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#0049AA", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Hamburger_SV",
+  "members": [
+    {
+      "playerId": "daniel-heuer-fernandes",
+      "no": 1
+    },
+    {
+      "playerId": "david-moller-wolfe",
+      "no": 3
+    },
+    {
+      "playerId": "bilal-nadir",
+      "no": 4
+    },
+    {
+      "playerId": "martin-adeline",
+      "no": 5
+    },
+    {
+      "playerId": "albert-sambi-lokonga",
+      "no": 6
+    },
+    {
+      "playerId": "zakaria-el-ouahdi",
+      "no": 7
+    },
+    {
+      "playerId": "vieira",
+      "no": 8
+    },
+    {
+      "playerId": "terem-moffi",
+      "no": 9
+    },
+    {
+      "playerId": "immanuel-pherai",
+      "no": 10
+    },
+    {
+      "playerId": "albert-gronbaek",
+      "no": 11
+    },
+    {
+      "playerId": "sander-tangvik",
+      "no": 12
+    },
+    {
+      "playerId": "yussuf-poulsen",
+      "no": 15
+    },
+    {
+      "playerId": "warmed-omari",
+      "no": 17
+    },
+    {
+      "playerId": "bakery-jatta",
+      "no": 18
+    },
+    {
+      "playerId": "otto-stange",
+      "no": 19
+    },
+    {
+      "playerId": "nicolai-remberg",
+      "no": 21
+    },
+    {
+      "playerId": "kofi-amoako",
+      "no": 22
+    },
+    {
+      "playerId": "jordan-torunarigha",
+      "no": 23
+    },
+    {
+      "playerId": "nicolas-capaldo",
+      "no": 24
+    },
+    {
+      "playerId": "patson-daka",
+      "no": 27
+    },
+    {
+      "playerId": "miro-muheim",
+      "no": 28
+    },
+    {
+      "playerId": "sebastiaan-bornauw",
+      "no": 33
+    },
+    {
+      "playerId": "louis-lemke",
+      "no": 37
+    },
+    {
+      "playerId": "alexander-rossinglelesiit",
+      "no": 38
+    },
+    {
+      "playerId": "joel-agyekum",
+      "no": 39
+    },
+    {
+      "playerId": "elias-lahti",
+      "no": 40
+    },
+    {
+      "playerId": "fernando-dickes",
+      "no": 41
+    },
+    {
+      "playerId": "shafiq-nandja",
+      "no": 43
+    }
+  ]
+}

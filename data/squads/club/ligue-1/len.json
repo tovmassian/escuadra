@@ -1,0 +1,134 @@
+{
+  "id": "len",
+  "kind": "club",
+  "name": "Lens",
+  "season": "2026/27",
+  "primaryColor": "#C8102E",
+  "secondaryColor": "#FFD100",
+  "verified": true,
+  "marker": {
+    "bands": ["#C8102E", "#FFD100"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/RC_Lens",
+  "members": [
+    {
+      "playerId": "regis-gurtner",
+      "no": 1
+    },
+    {
+      "playerId": "ruben-aguilar",
+      "no": 2
+    },
+    {
+      "playerId": "maik-nawrocki",
+      "no": 3
+    },
+    {
+      "playerId": "nidal-celik",
+      "no": 4
+    },
+    {
+      "playerId": "andrija-bulatovic",
+      "no": 5
+    },
+    {
+      "playerId": "samson-baidoo",
+      "no": 6
+    },
+    {
+      "playerId": "florian-sotoca",
+      "no": 7
+    },
+    {
+      "playerId": "yacine-titraoui",
+      "no": 8
+    },
+    {
+      "playerId": "thorgan-hazard",
+      "no": 9
+    },
+    {
+      "playerId": "florian-thauvin",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "odsonne-edouard",
+      "no": 11
+    },
+    {
+      "playerId": "jhoanner-chavez",
+      "no": 13
+    },
+    {
+      "playerId": "matthieu-udol",
+      "no": 14
+    },
+    {
+      "playerId": "mathieu-gorgelin",
+      "no": 16
+    },
+    {
+      "playerId": "abdallah-sima",
+      "no": 19
+    },
+    {
+      "playerId": "jeanclair-todibo",
+      "no": 20
+    },
+    {
+      "playerId": "amadou-haidara",
+      "no": 21
+    },
+    {
+      "playerId": "michal-skoras",
+      "no": 22
+    },
+    {
+      "playerId": "saud-abdulhamid",
+      "no": 23
+    },
+    {
+      "playerId": "jonathan-gradit",
+      "no": 24
+    },
+    {
+      "playerId": "ismaelo-ganiou",
+      "no": 25
+    },
+    {
+      "playerId": "michael-cuisance",
+      "no": 27
+    },
+    {
+      "playerId": "junior-kadile",
+      "no": 28
+    },
+    {
+      "playerId": "franjo-ivanovic",
+      "no": 29
+    },
+    {
+      "playerId": "souleymane-sagnan",
+      "no": 31
+    },
+    {
+      "playerId": "kyllian-antonio",
+      "no": 32
+    },
+    {
+      "playerId": "mezian-mesloub",
+      "no": 38
+    },
+    {
+      "playerId": "risser",
+      "no": 40
+    },
+    {
+      "playerId": "ilan-jourdren",
+      "no": 60
+    }
+  ]
+}

@@ -107,7 +107,7 @@ different numbers for club and country. Do not denormalise it onto the player.
 
 ```
 data/index.json                       squad manifest — GENERATED, see below
-data/players.json                     { id, name, fullName, birth, position, nationality, club, photo: null }
+data/players.json                     { id, name, fullName, birth, position, nationality, club, photo: null, wikiTitle }
 data/squads/nation/<id>.json          { id, kind: 'nation', name, season, verified,
                                          primaryColor, secondaryColor, marker,
                                          members: [{ playerId, no, captain? }] }
@@ -115,6 +115,11 @@ data/squads/club/<league>/<id>.json   same shape, kind: 'club'. <league> is one 
                                        la-liga, serie-a, bundesliga, ligue-1,
                                        premier-league, ucl (see League in types/squad.ts)
 ```
+
+`wikiTitle` is the Wikipedia article title the record came from — the only
+field that is unique per person, since two different real people are both
+rendered "Otávio". Null when the source links no article. Never a quiz answer;
+identity only.
 
 A player has **exactly one** position, not an array. Real players are more
 flexible than that, but the quiz asks for one answer through one chip, and

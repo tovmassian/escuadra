@@ -1,0 +1,122 @@
+{
+  "id": "ful",
+  "kind": "club",
+  "name": "Fulham",
+  "season": "2026/27",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Fulham_F.C.",
+  "members": [
+    {
+      "playerId": "bernd-leno",
+      "no": 1
+    },
+    {
+      "playerId": "kenny-tete",
+      "no": 2
+    },
+    {
+      "playerId": "calvin-bassey",
+      "no": 3
+    },
+    {
+      "playerId": "jorge-cuenca",
+      "no": 4
+    },
+    {
+      "playerId": "joachim-andersen",
+      "no": 5
+    },
+    {
+      "playerId": "harrison-reed",
+      "no": 6
+    },
+    {
+      "playerId": "gonzalo-garcia",
+      "no": 7
+    },
+    {
+      "playerId": "cesar-palacios",
+      "no": 8
+    },
+    {
+      "playerId": "rodrigo-muniz",
+      "no": 9
+    },
+    {
+      "playerId": "tom-cairney",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "kevin",
+      "no": 11
+    },
+    {
+      "playerId": "oscar-bobb",
+      "no": 14
+    },
+    {
+      "playerId": "hugo-larsson",
+      "no": 15
+    },
+    {
+      "playerId": "sander-berge",
+      "no": 16
+    },
+    {
+      "playerId": "alex-iwobi",
+      "no": 17
+    },
+    {
+      "playerId": "jonah-kusiasare",
+      "no": 18
+    },
+    {
+      "playerId": "shea-charles",
+      "no": 19
+    },
+    {
+      "playerId": "manuel-angel",
+      "no": 20
+    },
+    {
+      "playerId": "timothy-castagne",
+      "no": 21
+    },
+    {
+      "playerId": "david-affengruber",
+      "no": 22
+    },
+    {
+      "playerId": "benjamin-lecomte",
+      "no": 23
+    },
+    {
+      "playerId": "josh-king",
+      "no": 24
+    },
+    {
+      "playerId": "ryan-sessegnon",
+      "no": 30
+    },
+    {
+      "playerId": "emile-smith-rowe",
+      "no": 32
+    },
+    {
+      "playerId": "antonee-robinson",
+      "no": 33
+    },
+    {
+      "playerId": "alex-borto",
+      "no": 36
+    }
+  ]
+}

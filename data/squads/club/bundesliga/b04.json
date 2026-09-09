@@ -1,0 +1,126 @@
+{
+  "id": "b04",
+  "kind": "club",
+  "name": "Bayer Leverkusen",
+  "season": "2026/27",
+  "primaryColor": "#E32219",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#E32219", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Bayer_04_Leverkusen",
+  "members": [
+    {
+      "playerId": "mark-flekken",
+      "no": 1
+    },
+    {
+      "playerId": "medina",
+      "no": 2
+    },
+    {
+      "playerId": "miguel-gutierrez",
+      "no": 3
+    },
+    {
+      "playerId": "jarell-quansah",
+      "no": 4
+    },
+    {
+      "playerId": "loic-bade",
+      "no": 5
+    },
+    {
+      "playerId": "equi-fernandez",
+      "no": 6
+    },
+    {
+      "playerId": "jonas-hofmann",
+      "no": 7
+    },
+    {
+      "playerId": "robert-andrich",
+      "no": 8
+    },
+    {
+      "playerId": "afonso-moreira",
+      "no": 9
+    },
+    {
+      "playerId": "malik-tillman",
+      "no": 10
+    },
+    {
+      "playerId": "martin-terrier",
+      "no": 11
+    },
+    {
+      "playerId": "edmond-tapsoba",
+      "no": 12,
+      "captain": true
+    },
+    {
+      "playerId": "patrik-schick",
+      "no": 14
+    },
+    {
+      "playerId": "tim-oermann",
+      "no": 15
+    },
+    {
+      "playerId": "lucas-vazquez",
+      "no": 17
+    },
+    {
+      "playerId": "kennet-eichhorn",
+      "no": 18
+    },
+    {
+      "playerId": "moussa-diaby",
+      "no": 19
+    },
+    {
+      "playerId": "guela-doue",
+      "no": 20
+    },
+    {
+      "playerId": "victor-boniface",
+      "no": 22
+    },
+    {
+      "playerId": "nathan-tella",
+      "no": 23
+    },
+    {
+      "playerId": "aleix-garcia",
+      "no": 24
+    },
+    {
+      "playerId": "janis-blaswich",
+      "no": 28
+    },
+    {
+      "playerId": "eliesse-ben-seghir",
+      "no": 29
+    },
+    {
+      "playerId": "ibrahim-maza",
+      "no": 30
+    },
+    {
+      "playerId": "christian-kofane",
+      "no": 35
+    },
+    {
+      "playerId": "niklas-lomb",
+      "no": 36
+    },
+    {
+      "playerId": "montrell-culbreath",
+      "no": 42
+    }
+  ]
+}

@@ -1,0 +1,157 @@
+{
+  "id": "svw",
+  "kind": "club",
+  "name": "Werder Bremen",
+  "season": "2026/27",
+  "primaryColor": "#1D9053",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#1D9053", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/SV_Werder_Bremen",
+  "members": [
+    {
+      "playerId": "hein",
+      "no": 1
+    },
+    {
+      "playerId": "olivier-deman",
+      "no": 2
+    },
+    {
+      "playerId": "oskar-wojcik",
+      "no": 3
+    },
+    {
+      "playerId": "niklas-stark",
+      "no": 4
+    },
+    {
+      "playerId": "amos-pieper",
+      "no": 5
+    },
+    {
+      "playerId": "jens-stage",
+      "no": 6
+    },
+    {
+      "playerId": "mitchell-weiser",
+      "no": 8
+    },
+    {
+      "playerId": "keke-topp",
+      "no": 9
+    },
+    {
+      "playerId": "niclas-fullkrug",
+      "no": 10
+    },
+    {
+      "playerId": "justin-njinmah",
+      "no": 11
+    },
+    {
+      "playerId": "arthur",
+      "no": 13
+    },
+    {
+      "playerId": "senne-lynen",
+      "no": 14
+    },
+    {
+      "playerId": "ludovit-reis",
+      "no": 15
+    },
+    {
+      "playerId": "moussa-ndiaye",
+      "no": 16
+    },
+    {
+      "playerId": "marco-grull",
+      "no": 17
+    },
+    {
+      "playerId": "eren-dinkci",
+      "no": 18
+    },
+    {
+      "playerId": "kenny-quetant",
+      "no": 19
+    },
+    {
+      "playerId": "chuki",
+      "no": 20
+    },
+    {
+      "playerId": "dawid-kownacki",
+      "no": 21
+    },
+    {
+      "playerId": "julian-malatini",
+      "no": 22
+    },
+    {
+      "playerId": "dariusz-stalmach",
+      "no": 23
+    },
+    {
+      "playerId": "markus-kolke",
+      "no": 25
+    },
+    {
+      "playerId": "cedric-itten",
+      "no": 26
+    },
+    {
+      "playerId": "felix-agu",
+      "no": 27
+    },
+    {
+      "playerId": "skelly-alvero",
+      "no": 28
+    },
+    {
+      "playerId": "salim-musah",
+      "no": 29
+    },
+    {
+      "playerId": "alexander-schlager",
+      "no": 30
+    },
+    {
+      "playerId": "marco-friedl",
+      "no": 32
+    },
+    {
+      "playerId": "mick-schmetgens",
+      "no": 33
+    },
+    {
+      "playerId": "darwin-soylu",
+      "no": 34
+    },
+    {
+      "playerId": "luca-hocker",
+      "no": 35
+    },
+    {
+      "playerId": "mats-heitmann",
+      "no": 36
+    },
+    {
+      "playerId": "stefan-smarkalev",
+      "no": 37
+    },
+    {
+      "playerId": "paul-erevbenagie",
+      "no": 38
+    },
+    {
+      "playerId": "youri-regeer",
+      "no": 44
+    }
+  ]
+}

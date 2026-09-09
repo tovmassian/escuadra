@@ -1,0 +1,141 @@
+{
+  "id": "wob",
+  "kind": "club",
+  "name": "VfL Wolfsburg",
+  "season": "2026/27",
+  "primaryColor": "#65B32E",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#65B32E", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/VfL_Wolfsburg",
+  "members": [
+    {
+      "playerId": "timon-wellenreuther",
+      "no": 1
+    },
+    {
+      "playerId": "kilian-fischer",
+      "no": 2
+    },
+    {
+      "playerId": "vini-souza",
+      "no": 5
+    },
+    {
+      "playerId": "hauke-wahl",
+      "no": 6
+    },
+    {
+      "playerId": "shiogai",
+      "no": 7
+    },
+    {
+      "playerId": "bence-dardai",
+      "no": 8
+    },
+    {
+      "playerId": "fraser-hornby",
+      "no": 10
+    },
+    {
+      "playerId": "fabian-reese",
+      "no": 11
+    },
+    {
+      "playerId": "pavao-pervan",
+      "no": 12
+    },
+    {
+      "playerId": "rogerio",
+      "no": 13
+    },
+    {
+      "playerId": "pharell-hensel",
+      "no": 14
+    },
+    {
+      "playerId": "moritz-jenz",
+      "no": 15
+    },
+    {
+      "playerId": "alexander-bernhardsson",
+      "no": 17
+    },
+    {
+      "playerId": "jonas-adjetey",
+      "no": 18
+    },
+    {
+      "playerId": "robert-glatzel",
+      "no": 19
+    },
+    {
+      "playerId": "muhammed-damar",
+      "no": 20
+    },
+    {
+      "playerId": "joakim-maehle",
+      "no": 21
+    },
+    {
+      "playerId": "mathys-angely",
+      "no": 22
+    },
+    {
+      "playerId": "alessio-besio",
+      "no": 23
+    },
+    {
+      "playerId": "christian-eriksen",
+      "no": 24
+    },
+    {
+      "playerId": "aaron-zehnter",
+      "no": 25
+    },
+    {
+      "playerId": "sael-kumbedi",
+      "no": 26
+    },
+    {
+      "playerId": "maximilian-arnold",
+      "no": 27
+    },
+    {
+      "playerId": "jakub-zielinski",
+      "no": 30
+    },
+    {
+      "playerId": "yannick-gerhardt",
+      "no": 31
+    },
+    {
+      "playerId": "mattias-svanberg",
+      "no": 32
+    },
+    {
+      "playerId": "cleiton",
+      "no": 33
+    },
+    {
+      "playerId": "aster-vranckx",
+      "no": 36
+    },
+    {
+      "playerId": "elvis-rexhbecaj",
+      "no": 37
+    },
+    {
+      "playerId": "bruno-katz",
+      "no": 42
+    },
+    {
+      "playerId": "trevor-benedict",
+      "no": 43
+    }
+  ]
+}

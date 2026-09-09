@@ -1,0 +1,138 @@
+{
+  "id": "fca",
+  "kind": "club",
+  "name": "FC Augsburg",
+  "season": "2026/27",
+  "primaryColor": "#BA3733",
+  "secondaryColor": "#46714D",
+  "verified": true,
+  "marker": {
+    "bands": ["#BA3733", "#46714D"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/FC_Augsburg",
+  "members": [
+    {
+      "playerId": "finn-dahmen",
+      "no": 1
+    },
+    {
+      "playerId": "calvin-brackelmann",
+      "no": 2
+    },
+    {
+      "playerId": "hannoah-massengo",
+      "no": 4
+    },
+    {
+      "playerId": "chrislain-matsima",
+      "no": 5
+    },
+    {
+      "playerId": "jeffrey-gouweleeuw",
+      "no": 6,
+      "captain": true
+    },
+    {
+      "playerId": "seol-youngwoo",
+      "no": 7
+    },
+    {
+      "playerId": "sima-suso",
+      "no": 8
+    },
+    {
+      "playerId": "rodrigo-ribeiro",
+      "no": 9
+    },
+    {
+      "playerId": "mert-komur",
+      "no": 10
+    },
+    {
+      "playerId": "michael-gregoritsch",
+      "no": 11
+    },
+    {
+      "playerId": "yannik-keitel",
+      "no": 14
+    },
+    {
+      "playerId": "steve-mounie",
+      "no": 15
+    },
+    {
+      "playerId": "hennes-behrens",
+      "no": 16
+    },
+    {
+      "playerId": "kristijan-jakic",
+      "no": 17
+    },
+    {
+      "playerId": "tim-breithaupt",
+      "no": 18
+    },
+    {
+      "playerId": "robin-fellhauer",
+      "no": 19
+    },
+    {
+      "playerId": "alexis-claudemaurice",
+      "no": 20
+    },
+    {
+      "playerId": "arijon-ibrahimovic",
+      "no": 21
+    },
+    {
+      "playerId": "nediljko-labrovic",
+      "no": 22
+    },
+    {
+      "playerId": "faik-sakar",
+      "no": 23
+    },
+    {
+      "playerId": "marius-wolf",
+      "no": 27
+    },
+    {
+      "playerId": "anton-kade",
+      "no": 30
+    },
+    {
+      "playerId": "fabian-rieder",
+      "no": 32
+    },
+    {
+      "playerId": "nathanael-mbuku",
+      "no": 34
+    },
+    {
+      "playerId": "juma-bah",
+      "no": 35
+    },
+    {
+      "playerId": "tim-schnitzer",
+      "no": 37
+    },
+    {
+      "playerId": "uchenna-ogundu",
+      "no": 39
+    },
+    {
+      "playerId": "noahkai-banks",
+      "no": 40
+    },
+    {
+      "playerId": "mahmut-kucuksahin",
+      "no": 42
+    },
+    {
+      "playerId": "tom-wisbereit",
+      "no": 48
+    }
+  ]
+}

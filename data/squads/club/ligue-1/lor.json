@@ -1,0 +1,125 @@
+{
+  "id": "lor",
+  "kind": "club",
+  "name": "Lorient",
+  "season": "2026/27",
+  "primaryColor": "#FF6600",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#FF6600", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/FC_Lorient",
+  "members": [
+    {
+      "playerId": "benjamin-leroy",
+      "no": 1
+    },
+    {
+      "playerId": "alec-georgen",
+      "no": 2
+    },
+    {
+      "playerId": "montassar-talbi",
+      "no": 3
+    },
+    {
+      "playerId": "formose-mendy",
+      "no": 5
+    },
+    {
+      "playerId": "bandiougou-fadiga",
+      "no": 7
+    },
+    {
+      "playerId": "noah-cadiou",
+      "no": 8
+    },
+    {
+      "playerId": "mohamed-bamba",
+      "no": 9
+    },
+    {
+      "playerId": "isak-jensen",
+      "no": 10
+    },
+    {
+      "playerId": "theo-le-bris",
+      "no": 11
+    },
+    {
+      "playerId": "aiyegun-tosin",
+      "no": 15
+    },
+    {
+      "playerId": "jeanvictor-makengo",
+      "no": 17
+    },
+    {
+      "playerId": "ibrahima-balde",
+      "no": 18
+    },
+    {
+      "playerId": "souleymane-faye",
+      "no": 19
+    },
+    {
+      "playerId": "dembo-sylla",
+      "no": 20
+    },
+    {
+      "playerId": "bingourou-kamara",
+      "no": 21
+    },
+    {
+      "playerId": "daniel-semedo",
+      "no": 23
+    },
+    {
+      "playerId": "srdan-kuzmic",
+      "no": 30
+    },
+    {
+      "playerId": "nathaniel-adjei",
+      "no": 32
+    },
+    {
+      "playerId": "gabin-bernardeau",
+      "no": 33
+    },
+    {
+      "playerId": "yvon-mvogo",
+      "no": 38
+    },
+    {
+      "playerId": "mamadou-kone",
+      "no": 42
+    },
+    {
+      "playerId": "arsene-kouassi",
+      "no": 43
+    },
+    {
+      "playerId": "nosa-edward-obaretin",
+      "no": 55
+    },
+    {
+      "playerId": "arthur-avom",
+      "no": 62
+    },
+    {
+      "playerId": "noah-mbamba",
+      "no": 72
+    },
+    {
+      "playerId": "panos-katseris",
+      "no": 77
+    },
+    {
+      "playerId": "isaak-toure",
+      "no": 95
+    }
+  ]
+}

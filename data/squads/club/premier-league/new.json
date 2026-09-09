@@ -1,0 +1,118 @@
+{
+  "id": "new",
+  "kind": "club",
+  "name": "Newcastle United",
+  "season": "2026/27",
+  "primaryColor": "#241F20",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#241F20", "#FFFFFF"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Newcastle_United_F.C.",
+  "members": [
+    {
+      "playerId": "nick-pope",
+      "no": 1
+    },
+    {
+      "playerId": "tino-livramento",
+      "no": 2
+    },
+    {
+      "playerId": "lewis-hall",
+      "no": 3
+    },
+    {
+      "playerId": "sven-botman",
+      "no": 4
+    },
+    {
+      "playerId": "fabian-schar",
+      "no": 5
+    },
+    {
+      "playerId": "nico-gonzalez",
+      "no": 6
+    },
+    {
+      "playerId": "joelinton",
+      "no": 7
+    },
+    {
+      "playerId": "aladji-bamba",
+      "no": 8
+    },
+    {
+      "playerId": "yoane-wissa",
+      "no": 9
+    },
+    {
+      "playerId": "william-osula",
+      "no": 10
+    },
+    {
+      "playerId": "harvey-barnes",
+      "no": 11
+    },
+    {
+      "playerId": "malick-thiaw",
+      "no": 12
+    },
+    {
+      "playerId": "sean-steur",
+      "no": 14
+    },
+    {
+      "playerId": "bazoumana-toure",
+      "no": 17
+    },
+    {
+      "playerId": "anthony-elanga",
+      "no": 19
+    },
+    {
+      "playerId": "matias-fernandezpardo",
+      "no": 20
+    },
+    {
+      "playerId": "lukas-hornicek",
+      "no": 21
+    },
+    {
+      "playerId": "jacob-murphy",
+      "no": 23
+    },
+    {
+      "playerId": "ewen-jaouen",
+      "no": 24
+    },
+    {
+      "playerId": "joe-willock",
+      "no": 28
+    },
+    {
+      "playerId": "mark-gillespie",
+      "no": 29
+    },
+    {
+      "playerId": "dan-burn",
+      "no": 33,
+      "captain": true
+    },
+    {
+      "playerId": "amar-dedic",
+      "no": 37
+    },
+    {
+      "playerId": "jacob-ramsey",
+      "no": 41
+    },
+    {
+      "playerId": "lewis-miley",
+      "no": 67
+    }
+  ]
+}

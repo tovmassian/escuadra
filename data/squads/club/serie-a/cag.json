@@ -1,0 +1,138 @@
+{
+  "id": "cag",
+  "kind": "club",
+  "name": "Cagliari",
+  "season": "2026/27",
+  "primaryColor": "#A31E22",
+  "secondaryColor": "#002B5C",
+  "verified": true,
+  "marker": {
+    "bands": ["#A31E22", "#002B5C"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Cagliari_Calcio",
+  "members": [
+    {
+      "playerId": "elia-caprile",
+      "no": 1
+    },
+    {
+      "playerId": "ze-pedro",
+      "no": 2
+    },
+    {
+      "playerId": "riyad-idrissi",
+      "no": 3
+    },
+    {
+      "playerId": "alessandro-romano",
+      "no": 4
+    },
+    {
+      "playerId": "harry-winks",
+      "no": 6
+    },
+    {
+      "playerId": "michel-adopo",
+      "no": 8
+    },
+    {
+      "playerId": "kevin-carlos",
+      "no": 9
+    },
+    {
+      "playerId": "jacopo-fazzini",
+      "no": 10
+    },
+    {
+      "playerId": "alen-sherri",
+      "no": 12
+    },
+    {
+      "playerId": "alessandro-deiola",
+      "no": 14,
+      "captain": true
+    },
+    {
+      "playerId": "juan-rodriguez",
+      "no": 15
+    },
+    {
+      "playerId": "mattia-felici",
+      "no": 17
+    },
+    {
+      "playerId": "mbala-nzola",
+      "no": 18
+    },
+    {
+      "playerId": "yael-trepy",
+      "no": 19
+    },
+    {
+      "playerId": "riccardo-ciervo",
+      "no": 20
+    },
+    {
+      "playerId": "roberto-gagliardini",
+      "no": 21
+    },
+    {
+      "playerId": "raphael-kofler",
+      "no": 22
+    },
+    {
+      "playerId": "boris-radunovic",
+      "no": 23
+    },
+    {
+      "playerId": "giuseppe-aurelio",
+      "no": 24
+    },
+    {
+      "playerId": "yerry-mina",
+      "no": 26
+    },
+    {
+      "playerId": "joseph-liteta",
+      "no": 27
+    },
+    {
+      "playerId": "demi-akarakiri",
+      "no": 30
+    },
+    {
+      "playerId": "paul-mendy",
+      "no": 31
+    },
+    {
+      "playerId": "ivan-sulev",
+      "no": 32
+    },
+    {
+      "playerId": "adam-obert",
+      "no": 33
+    },
+    {
+      "playerId": "nicola-grandu",
+      "no": 36
+    },
+    {
+      "playerId": "alieu-fadera",
+      "no": 39
+    },
+    {
+      "playerId": "daniel-maldini",
+      "no": 70
+    },
+    {
+      "playerId": "massolin",
+      "no": 79
+    },
+    {
+      "playerId": "sugawara",
+      "no": null
+    }
+  ]
+}

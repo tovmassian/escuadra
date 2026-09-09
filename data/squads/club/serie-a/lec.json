@@ -1,0 +1,142 @@
+{
+  "id": "lec",
+  "kind": "club",
+  "name": "Lecce",
+  "season": "2026/27",
+  "primaryColor": "#FFE600",
+  "secondaryColor": "#C8102E",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFE600", "#C8102E"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/U.S._Lecce",
+  "members": [
+    {
+      "playerId": "marco-bleve",
+      "no": 1
+    },
+    {
+      "playerId": "ali-dembele",
+      "no": 2
+    },
+    {
+      "playerId": "corrie-ndaba",
+      "no": 3
+    },
+    {
+      "playerId": "kialonda-gaspar",
+      "no": 4
+    },
+    {
+      "playerId": "jamil-siebert",
+      "no": 5
+    },
+    {
+      "playerId": "amar-fatah",
+      "no": 7
+    },
+    {
+      "playerId": "sadik-fofana",
+      "no": 8
+    },
+    {
+      "playerId": "nikola-stulic",
+      "no": 9
+    },
+    {
+      "playerId": "medon-berisha",
+      "no": 10
+    },
+    {
+      "playerId": "konan-ndri",
+      "no": 11
+    },
+    {
+      "playerId": "youssef-maleh",
+      "no": 14
+    },
+    {
+      "playerId": "omri-gandelman",
+      "no": 16
+    },
+    {
+      "playerId": "danilo-veiga",
+      "no": 17
+    },
+    {
+      "playerId": "gaby-jean",
+      "no": 18
+    },
+    {
+      "playerId": "ivan-ilic",
+      "no": 20
+    },
+    {
+      "playerId": "paco-esteban",
+      "no": 22
+    },
+    {
+      "playerId": "antonino-gallo",
+      "no": 25
+    },
+    {
+      "playerId": "olaf-gorter",
+      "no": 28
+    },
+    {
+      "playerId": "lassana-coulibaly",
+      "no": 29
+    },
+    {
+      "playerId": "wladimiro-falcone",
+      "no": 30,
+      "captain": true
+    },
+    {
+      "playerId": "elijah-scott",
+      "no": 31
+    },
+    {
+      "playerId": "plamen-penev",
+      "no": 33
+    },
+    {
+      "playerId": "hjalte-laerke",
+      "no": 34
+    },
+    {
+      "playerId": "marlon-ubani",
+      "no": 36
+    },
+    {
+      "playerId": "tiago-gabriel",
+      "no": 44
+    },
+    {
+      "playerId": "santiago-pierotti",
+      "no": 50
+    },
+    {
+      "playerId": "willem-geubbels",
+      "no": 69
+    },
+    {
+      "playerId": "mohamed-kaba",
+      "no": 77
+    },
+    {
+      "playerId": "oumar-ngom",
+      "no": 79
+    },
+    {
+      "playerId": "niko-kovac",
+      "no": 80
+    },
+    {
+      "playerId": "joel-monteiro",
+      "no": 99
+    }
+  ]
+}

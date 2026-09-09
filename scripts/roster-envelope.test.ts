@@ -2,9 +2,11 @@ import { describe, expect, it } from 'vitest';
 import {
   BLAST_RADIUS_THRESHOLD,
   LEAGUES,
+  baseTitle,
   changeRatio,
   isTransliterationVariant,
   normalizeName,
+  titlesEquivalent,
   validateEnvelope,
   type RosterEnvelope,
 } from './roster-envelope';
@@ -179,5 +181,66 @@ describe('changeRatio', () => {
     const stored = Array.from({ length: 26 }, (_, i) => `Player ${i}`);
     const parsed = Array.from({ length: 26 }, (_, i) => `Other ${i}`);
     expect(changeRatio(stored, parsed)).toBeGreaterThan(BLAST_RADIUS_THRESHOLD);
+  });
+});
+
+describe('titlesEquivalent', () => {
+  // Every row is a real pair from the envelope cache. The `true` rows are one
+  // person linked through a redirect; the `false` rows are two different real
+  // people. If a change makes any row flip, it merges or splits real players.
+  const cases: [string, string, boolean, string][] = [
+    ['Endrick', 'Endrick (footballer, born 2006)', true, 'link to the undisambiguated redirect'],
+    [
+      'Eric Garcia (footballer, born 2001)',
+      'Eric García (footballer, born 2001)',
+      true,
+      'same title, one source drops the accent',
+    ],
+    [
+      'Otávio (footballer, born November 2005)',
+      'Otávio (footballer, born 2002)',
+      false,
+      'two Brazilian defenders, Frankfurt and Paris FC',
+    ],
+    [
+      'Vitinha (footballer, born February 2000)',
+      'Vitinha (footballer, born March 2000)',
+      false,
+      'two Portuguese midfielders, PSG and Genoa',
+    ],
+    [
+      'Ederson (footballer, born 1993)',
+      'Éderson (footballer, born 1999)',
+      false,
+      'both in the Brazil squad; the base folds together, the year does not',
+    ],
+    [
+      'Nico González (footballer, born 2002)',
+      'Nicolás González (footballer, born 1998)',
+      false,
+      'Newcastle and Juventus, both rendered "Nico González"',
+    ],
+    ['Endrick', 'Endrick', true, 'identical'],
+  ];
+
+  for (const [a, b, expected, why] of cases) {
+    it(`${expected ? 'relates' : 'separates'} ${a} / ${b} — ${why}`, () => {
+      expect(titlesEquivalent(a, b)).toBe(expected);
+      expect(titlesEquivalent(b, a)).toBe(expected);
+    });
+  }
+});
+
+describe('baseTitle', () => {
+  it('strips a trailing parenthetical disambiguator', () => {
+    expect(baseTitle('Endrick (footballer, born 2006)')).toBe('Endrick');
+  });
+
+  it('leaves an undisambiguated title alone', () => {
+    expect(baseTitle('Endrick')).toBe('Endrick');
+  });
+
+  it('leaves a parenthetical that is not trailing alone', () => {
+    expect(baseTitle('Sporting CP (B) squad')).toBe('Sporting CP (B) squad');
   });
 });

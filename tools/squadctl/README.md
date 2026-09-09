@@ -50,10 +50,10 @@ never got applied.
 
 ### Commands own — you cause the write, you do not type it
 
-| file                  | written by        |
-| --------------------- | ----------------- |
-| `data/decisions.json` | `alias`, `split`  |
-| `data/players.json`   | `apply`, `rename` |
+| file                  | written by                           |
+| --------------------- | ------------------------------------ |
+| `data/decisions.json` | `alias`, `split`                     |
+| `data/players.json`   | `apply`, `rename`, `retitle`, `fork` |
 
 ### Generated — never touch, never hand-review
 
@@ -212,6 +212,19 @@ assertion pass, and writes squad files, `players.json` and the generated index.
 Pure with respect to its inputs: same envelopes plus same repo state gives the
 same result.
 
+**A row is matched to a stored player primarily by an equivalent Wikipedia
+article title, not by name.** "Equivalent" is deliberately looser than
+equal: a bare link and a disambiguated one that share a base title are the
+same article (`Endrick` and `Endrick (footballer, born 2006)`), and so are
+two titles that agree once diacritics are folded (`Eric Garcia (footballer,
+born 2001)` and `Eric García (footballer, born 2001)`) — both resolved
+without asking. Title is decisive whatever the display names say: it is the
+only thing that can join Juventus's "Nico González" to a record stored as
+"Nicolás González". The normalised display name is the **fallback**, used
+only when the row or the candidate record carries no title at all. When a
+row's title instead **conflicts** with what a name match would have picked,
+that is a `title-mismatch` — see below.
+
 `verified` is the assertion pass's output — `true` only when a team has zero
 conflicts. `lastUpdated` moves only when something else in the file did, so a
 no-op sweep produces an empty git diff. `players.json` is written sorted by id
@@ -229,15 +242,44 @@ only if it was tracking `name` exactly; a divergent `fullName` is real data and
 is left alone. This is one of the two answers to a `possible-rename`, and the
 answer to a `name-variant` — see below.
 
+### `retitle`
+
+```bash
+npm run squadctl -- retitle <playerId> "<article title as the source links it>"
+```
+
+Points a record at a different Wikipedia article title, for when the article
+moved and the person did not. One of the three answers to a `title-mismatch`.
+Never touches `name` — that is `rename` — and never rewrites an id.
+
+### `fork`
+
+```bash
+npm run squadctl -- fork <playerId> "<article title of the other person>"
+```
+
+Writes a second record for a different real person who shares a display name —
+the two Otávios, the two Vitinhas. Copies the name and position; deliberately
+does **not** copy `birth`, `club` or `nationality`, because the birth date
+belongs to the original and the next `apply` fills the other two from the row.
+
 ### `alias`
 
 ```bash
 npm run squadctl -- alias <playerId> "<other name>"
+npm run squadctl -- alias <playerId> --title "<other article title>"
 ```
 
 Records another name one player is known by. Use it when two articles name the
 same person differently and both are right — the case `rename` cannot fix,
 because renaming to satisfy one squad breaks the other.
+
+The `--title` form is the same idea one level up: two articles can _link_ one
+person differently and both be right. Atlético links `Alejandro Grimaldo` where
+Spain links `Álex Grimaldo`, and `retitle` cannot settle it — it just moves the
+conflict to whichever squad links the other target. Recorded in
+`decisions.json` under `titleAliases`, because a redirect is the one title fact
+squadctl cannot re-derive without a network request.
 
 ### `split`
 
@@ -249,6 +291,68 @@ The other answer to a `possible-rename`: these really are two different people.
 Records the decision in `data/decisions.json` so the same question is not asked
 every sweep, and the next `apply` writes the split. Idempotent — running it
 twice changes nothing.
+
+### `exclude`
+
+```bash
+npm run squadctl -- exclude <teamId> "<article title>" --reason "<why>"
+```
+
+Records that a club's article lists a player who does not belong in that
+squad, and `apply` drops the row from then on.
+
+**A player belongs to exactly one club — the one they actually play for.** The
+club that owns the registration and collects the loan fee is irrelevant to the
+quiz. Most of the time no decision is needed, because the article says so
+itself: a loaned player's row carries an `other=` annotation and reconciliation
+reads it (see _Loans_ below). This command is for the residue, where two
+articles list the player identically and only the real world says which is
+right — usually a completed transfer one club has not caught up with.
+
+`--reason` is required, unlike every other decision's fields. This one
+overrules the source outright, so the file records on whose say-so and `apply`
+prints it back on every run. A stale override stays visible rather than
+quietly shortening a squad forever.
+
+Keyed on the **article title**, not the display name, so it survives the
+article rewording the name. A row carrying no title never matches. Scoped to
+one team: excluding a player from Verona leaves Torino untouched. Idempotent.
+
+Never fix a dual membership by editing the squad file. Those are generated,
+and `919f1f9` proved it — a player hand-removed from Arsenal was back on the
+next `apply`.
+
+## Loans
+
+Handled by the parser, with no decision needed. A club's own article states
+the direction in the player template's `other=` parameter, and the two
+directions mean opposite things:
+
+| `other=`                        | meaning                                | row     |
+| ------------------------------- | -------------------------------------- | ------- |
+| `on loan from [[X]]`            | the player is **here**, on loan from X | kept    |
+| `at [[Y]] until <date>`         | the player is **at Y**                 | dropped |
+| `on loan to [[Y]] until <date>` | the player is **at Y**                 | dropped |
+
+The third column is what ends up in the squad. So Dortmund keeps Nwaneri and
+Arsenal does not; Valencia keeps Elliott and Liverpool does not.
+
+Clubs that file loanees under an `===Out on loan===` heading are handled
+earlier and differently, by `trimToFirstSquadTable`, which cuts at the first
+heading after the first player row. Premier League and Serie A articles keep
+them inline in the main table instead, which is why `other=` has to be read.
+
+`isOutOnLoan` anchors at the start of the value and requires the wikilink —
+`on loan from [[Atlético Madrid]]` contains "at" and must not read as a
+departure. **An unrecognised phrasing keeps the row.** That leaves the player
+in two squads and `lib/dataIntegrity.test.ts` fails loudly, which is the safe
+direction: quietly shortening a squad on a phrasing nobody has seen yet is the
+one you cannot recover from.
+
+Dropped rows are reported as a warning, not a conflict — the source stated
+plainly that the player is elsewhere, so nothing is being guessed — and are
+excluded from `parsedCount`, which feeds the blast-radius ratio. Counting them
+would make a club with several loanees out look like a page restructure.
 
 ## `--json`
 
@@ -452,6 +556,56 @@ npm run squadctl -- rename odegaard "Martin Odegaard"
 **What you touch:** `data/players.json`, only through `rename` — never by
 hand. Or keep yours and accept that it will be flagged again next sweep.
 
+### `title-mismatch`
+
+```
+sge: conflicted (verified: false)
+     conflict: identity conflict on otavio — stored "Otávio (footballer, born 2002)",
+               source lists "Otávio (footballer, born November 2005)"
+```
+
+The row matched a stored record by display name, and the two link different
+Wikipedia articles. Two different real people share a name — two Brazilian
+defenders are both rendered `Otávio` — or one person's article moved. Nothing
+in the data separates those, so squadctl writes nothing and asks.
+
+**The squad slot is HELD on the stored record and no new player is created**,
+for the same reason `possible-rename` holds: creating a second record for one
+person is unrecoverable, and no later command undoes it. When the clashing
+record is not in this squad at all there is no slot to hold, so the row is
+omitted and reported as `omitted-row`.
+
+**You decide: one person, or two?**
+
+- **Same person, article moved** — point the record at the new title:
+
+  ```bash
+  npm run squadctl -- retitle otavio "Otávio (footballer, born November 2005)"
+  ```
+
+- **Same person, both titles right** — two articles can link one person through
+  different targets. Atlético links `Alejandro Grimaldo`, Spain links
+  `Álex Grimaldo`. `retitle` only moves the conflict to the other squad:
+
+  ```bash
+  npm run squadctl -- alias grimaldo --title "Alejandro Grimaldo"
+  ```
+
+- **Two different people** — write the second record:
+
+  ```bash
+  npm run squadctl -- fork otavio "Otávio (footballer, born November 2005)"
+  ```
+
+**What you touch:** `retitle` and `fork` write `data/players.json`;
+`alias --title` writes `data/decisions.json`. Re-run `apply` afterwards either
+way.
+
+Note that most redirect pairs never reach you: a link to the undisambiguated
+title (`[[Endrick]]` against `Endrick (footballer, born 2006)`) and an
+accent-only difference (`Eric Garcia` against `Eric García`) are both resolved
+as equivalent without asking.
+
 ### `ambiguous-name`
 
 ```
@@ -465,6 +619,16 @@ only survives when those are equal too, or when the collision is across squads.
 When the collision is **inside** the squad, the whole group is held exactly as
 stored rather than any of them being dropped. When it is across squads there is
 nothing to hold, so the row is omitted and reported as `omitted-row`.
+
+The same conflict kind also fires on a **title** collision, and there none of
+position/club/number is consulted: a bare `[[Otávio]]` is base-title
+equivalent to two different stored Otávio records, so picking one would be a
+coin flip and squadctl holds both instead. This is not `title-mismatch` —
+nothing here contradicts a name match, there simply are two candidates a
+title alone cannot separate — so the fix is the same as for a name collision:
+read `data/players.json`, work out which record the row means, and hand the
+answer back with `rename` (or `retitle`, if the article title itself is what
+needs correcting).
 
 **This one has no command.** Read `data/players.json`, work out which record
 the row means, and hand the answer back with `rename` — never edit the file

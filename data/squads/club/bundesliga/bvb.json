@@ -1,0 +1,138 @@
+{
+  "id": "bvb",
+  "kind": "club",
+  "name": "Borussia Dortmund",
+  "season": "2026/27",
+  "primaryColor": "#FDE100",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#FDE100", "#000000"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-09-09",
+  "source": "https://en.wikipedia.org/wiki/Borussia_Dortmund",
+  "members": [
+    {
+      "playerId": "gregor-kobel",
+      "no": 1
+    },
+    {
+      "playerId": "waldemar-anton",
+      "no": 3
+    },
+    {
+      "playerId": "nico-schlotterbeck",
+      "no": 4
+    },
+    {
+      "playerId": "ramy-bensebaini",
+      "no": 5
+    },
+    {
+      "playerId": "jobe-bellingham",
+      "no": 7
+    },
+    {
+      "playerId": "felix-nmecha",
+      "no": 8
+    },
+    {
+      "playerId": "serhou-guirassy",
+      "no": 9
+    },
+    {
+      "playerId": "maximilian-beier",
+      "no": 14
+    },
+    {
+      "playerId": "carney-chukwuemeka",
+      "no": 17
+    },
+    {
+      "playerId": "nwaneri",
+      "no": 18
+    },
+    {
+      "playerId": "konstantinos-karetsas",
+      "no": 19
+    },
+    {
+      "playerId": "marcel-sabitzer",
+      "no": 20
+    },
+    {
+      "playerId": "fabio-silva",
+      "no": 21
+    },
+    {
+      "playerId": "joane-gadou",
+      "no": 22
+    },
+    {
+      "playerId": "emre-can",
+      "no": 23,
+      "captain": true
+    },
+    {
+      "playerId": "daniel-svensson",
+      "no": 24
+    },
+    {
+      "playerId": "joey-veerman",
+      "no": 25
+    },
+    {
+      "playerId": "julian-ryerson",
+      "no": 26
+    },
+    {
+      "playerId": "justin-lerma",
+      "no": 28
+    },
+    {
+      "playerId": "patrick-drewes",
+      "no": 30
+    },
+    {
+      "playerId": "silas-ostrzinski",
+      "no": 31
+    },
+    {
+      "playerId": "alexander-meyer",
+      "no": 33
+    },
+    {
+      "playerId": "kaua-prates",
+      "no": 36
+    },
+    {
+      "playerId": "filippo-mane",
+      "no": 39
+    },
+    {
+      "playerId": "samuele-inacio",
+      "no": 40
+    },
+    {
+      "playerId": "mathis-albert",
+      "no": 41
+    },
+    {
+      "playerId": "enzo-dos-santos",
+      "no": 44
+    },
+    {
+      "playerId": "giannis-konstantelias",
+      "no": 45
+    },
+    {
+      "playerId": "mussa-kaba",
+      "no": 48
+    },
+    {
+      "playerId": "luca-reggiani",
+      "no": 49
+    }
+  ]
+}

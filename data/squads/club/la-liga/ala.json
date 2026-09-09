@@ -1,7 +1,7 @@
 {
   "id": "ala",
   "kind": "club",
-  "name": "Deportivo Alavés",
+  "name": "Alavés",
   "season": "2026/27",
   "primaryColor": "#0000FF",
   "secondaryColor": "#FFFFFF",
@@ -10,7 +10,7 @@
     "bands": ["#0000FF", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-07",
+  "lastUpdated": "2026-09-09",
   "source": "https://en.wikipedia.org/wiki/Deportivo_Alavés",
   "members": [
     {
