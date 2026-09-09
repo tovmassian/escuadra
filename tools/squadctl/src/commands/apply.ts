@@ -310,7 +310,12 @@ export default class Apply extends BaseCommand<RunReport> {
         exit: EXIT.repo,
       });
     }
-    return parsed as DecisionFile;
+    const loaded = parsed as DecisionFile;
+    return {
+      ...loaded,
+      aliases: loaded.aliases ?? [],
+      titleAliases: loaded.titleAliases ?? [],
+    };
   }
 
   private loadRegistry(): TeamRegistry {

@@ -8,7 +8,7 @@
 // teams that is the difference between a decision and a chore.
 //
 // Checked in, because it is repo knowledge rather than a local preference.
-import type { AcceptedAlias, AcceptedSplit } from './reconcile.ts';
+import type { AcceptedAlias, AcceptedSplit, TitleAlias } from './reconcile.ts';
 
 export interface DecisionFile {
   /** Departure/arrival pairs confirmed to be two different people. */
@@ -22,9 +22,12 @@ export interface DecisionFile {
    *  accepts its absence, and `addAlias`, `apply` and `alias` all read it as
    *  `?? []`. Older decision files predate aliases and carry only splits. */
   aliases?: AcceptedAlias[];
+  /** Extra article titles a player is known by. Optional for the same reason
+   *  `aliases` is: every decision file on disk predates it. */
+  titleAliases?: TitleAlias[];
 }
 
-export const EMPTY_DECISIONS: DecisionFile = { splits: [], aliases: [] };
+export const EMPTY_DECISIONS: DecisionFile = { splits: [], aliases: [], titleAliases: [] };
 
 function isRecord(value: unknown): value is Record<string, unknown> {
   return typeof value === 'object' && value !== null;
@@ -45,6 +48,20 @@ export function validateDecisions(value: unknown): string[] {
     for (const field of ['player', 'name'] as const) {
       if (typeof entry[field] !== 'string' || entry[field] === '') {
         errors.push(`aliases[${index}].${field} must be a non-empty string`);
+      }
+    }
+  }
+  if (value.titleAliases !== undefined && !Array.isArray(value.titleAliases)) {
+    return ['decisions.json "titleAliases" must be an array when present'];
+  }
+  for (const [index, entry] of (value.titleAliases ?? []).entries()) {
+    if (!isRecord(entry)) {
+      errors.push(`titleAliases[${index}] must be an object`);
+      continue;
+    }
+    for (const field of ['player', 'title'] as const) {
+      if (typeof entry[field] !== 'string' || entry[field] === '') {
+        errors.push(`titleAliases[${index}].${field} must be a non-empty string`);
       }
     }
   }
@@ -90,6 +107,18 @@ export function addAlias(file: DecisionFile, alias: AcceptedAlias): DecisionFile
     ...file,
     aliases: [...existing, alias].sort(
       (a, b) => a.player.localeCompare(b.player) || a.name.localeCompare(b.name),
+    ),
+  };
+}
+
+/** Idempotent, like `addAlias`. Returns null when already recorded. */
+export function addTitleAlias(file: DecisionFile, alias: TitleAlias): DecisionFile | null {
+  const existing = file.titleAliases ?? [];
+  if (existing.some((t) => t.player === alias.player && t.title === alias.title)) return null;
+  return {
+    ...file,
+    titleAliases: [...existing, alias].sort(
+      (a, b) => a.player.localeCompare(b.player) || a.title.localeCompare(b.title),
     ),
   };
 }

@@ -45,6 +45,15 @@ export interface AcceptedAlias {
   name: string;
 }
 
+/** An extra article title one player is known by, recorded because a source
+ *  links a redirect rather than the canonical title — Atlético links
+ *  `Alejandro Grimaldo` where Spain links `Álex Grimaldo`. Unlike a stored
+ *  title this cannot be re-derived offline, which is why it is a decision. */
+export interface TitleAlias {
+  player: string;
+  title: string;
+}
+
 /** An operator decision that a departure and an arrival really are two
  *  different people, recorded so the question is not asked every sweep. */
 export interface AcceptedSplit {
