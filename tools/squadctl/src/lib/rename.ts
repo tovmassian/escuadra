@@ -6,6 +6,7 @@
 // the existing id is referenced by every squad file that carries this player,
 // and §9 never rewrites an id.
 import type { Player } from '../../../../types/squad.ts';
+import { playerId } from './reconcile.ts';
 
 export interface RenameResult {
   players: Player[];
@@ -62,4 +63,39 @@ export function retitlePlayer(
     before: target.wikiTitle,
     after: title,
   };
+}
+
+export interface ForkResult {
+  players: Player[];
+  created: Player;
+}
+
+/** The "two different people" answer to a `title-mismatch`: writes a second
+ *  record for the person the source is actually describing.
+ *
+ *  `birth`, `club` and `nationality` are deliberately NOT copied. The birth
+ *  date belongs to the original person, and a wrong one on a duplicate record
+ *  is exactly the damage the `possible-rename` hold exists to prevent; club
+ *  and nationality are filled by the next `apply` from the row, under the
+ *  field-ownership rules. `position` is copied only because `Player.position`
+ *  admits no null, and a club squad's apply overwrites it from the row. */
+export function forkPlayer(
+  players: readonly Player[],
+  id: string,
+  title: string,
+): ForkResult | null {
+  const target = players.find((p) => p.id === id);
+  if (target === undefined) return null;
+  const created: Player = {
+    id: playerId(target.name, new Set(players.map((p) => p.id))),
+    name: target.name,
+    fullName: target.fullName,
+    birth: null,
+    position: target.position,
+    nationality: '',
+    club: null,
+    photo: null,
+    wikiTitle: title,
+  };
+  return { players: [...players, created], created };
 }

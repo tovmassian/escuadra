@@ -50,10 +50,10 @@ never got applied.
 
 ### Commands own — you cause the write, you do not type it
 
-| file                  | written by                   |
-| --------------------- | ---------------------------- |
-| `data/decisions.json` | `alias`, `split`             |
-| `data/players.json`   | `apply`, `rename`, `retitle` |
+| file                  | written by                           |
+| --------------------- | ------------------------------------ |
+| `data/decisions.json` | `alias`, `split`                     |
+| `data/players.json`   | `apply`, `rename`, `retitle`, `fork` |
 
 ### Generated — never touch, never hand-review
 
@@ -238,6 +238,17 @@ npm run squadctl -- retitle <playerId> "<article title as the source links it>"
 Points a record at a different Wikipedia article title, for when the article
 moved and the person did not. One of the three answers to a `title-mismatch`.
 Never touches `name` — that is `rename` — and never rewrites an id.
+
+### `fork`
+
+```bash
+npm run squadctl -- fork <playerId> "<article title of the other person>"
+```
+
+Writes a second record for a different real person who shares a display name —
+the two Otávios, the two Vitinhas. Copies the name and position; deliberately
+does **not** copy `birth`, `club` or `nationality`, because the birth date
+belongs to the original and the next `apply` fills the other two from the row.
 
 ### `alias`
 
