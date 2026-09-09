@@ -38,12 +38,21 @@ introduce a second styling approach alongside the tokens.
 - [ ] Study screen — browsable full squad list, number / name / position / club
 - [ ] Best score per team-and-level persisted locally
 - [ ] Runs on a physical iPhone via Expo Go
+- [ ] Ships to the App Store and Play Store
 
-That is the whole of v0. **Deferred, do not build or scaffold for:** App Store
-and Play Store distribution, player photos, image licensing, advertising,
-monetisation, authentication, any backend or network call, multiplayer,
-leaderboards, and Exam mode (a full-squad run on shirt numbers alone — worth
-reviving after v0 as a standalone feature, but not a fourth difficulty level).
+That is the whole of v0. **Deferred, do not build or scaffold for:** player
+photos, advertising, monetisation, authentication, any backend or network
+call, multiplayer, leaderboards, and Exam mode (a full-squad run on shirt
+numbers alone — worth reviving after v0 as a standalone feature, but not a
+fourth difficulty level).
+
+⚠️ **Shipping to stores is not a build step bolted on at the end.** Expo Go
+cannot publish to a store: it needs a development/production build, an Apple
+Developer Program membership, and a Play Console account — none of which
+exist yet (see Environment). It also makes asset licensing a release blocker
+rather than a deferred concern: every shipped image must have a licence
+someone can name. `assets/flags/README.md` is the worked example — the flag
+set was replaced wholesale for exactly this reason.
 
 ## Difficulty levels
 
@@ -229,11 +238,15 @@ cannot use.
 
 ⚠️ **Do not upgrade the Expo SDK past what the App Store build of Expo Go
 supports.** The version in `package.json` is pinned to that, not to the
-current SDK. There is no Apple Developer Program membership and no
-development build, so Expo Go on a physical iPhone is the _only_ way this app
-runs. Upgrading past what Expo Go supports breaks the ability to run it at
-all — this happened once already (SDK 54 → 57, 2026-09-06), forced by Expo
-Go itself moving to SDK 57 on the App Store. Moving to a development build is
+current SDK. There is still no Apple Developer Program membership and no
+development build, so Expo Go on a physical iPhone remains the _only_ way
+this app runs today — even though v0 is now committed to shipping on both
+stores, which will require a development build, a paid Apple Developer
+Program membership and a Play Console account. Until that build exists this
+pin stands: upgrading past what Expo Go supports breaks the ability to run
+the app at all — this happened once already (SDK 54 → 57, 2026-09-06),
+forced by Expo Go itself moving to SDK 57 on the App Store. Moving to a
+development build is
 a v1 decision.
 
 That 54 → 57 jump also surfaced two real breakages worth knowing about if the
