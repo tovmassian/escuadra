@@ -50,10 +50,10 @@ never got applied.
 
 ### Commands own — you cause the write, you do not type it
 
-| file                  | written by        |
-| --------------------- | ----------------- |
-| `data/decisions.json` | `alias`, `split`  |
-| `data/players.json`   | `apply`, `rename` |
+| file                  | written by                |
+| --------------------- | ------------------------- |
+| `data/decisions.json` | `alias`, `split`          |
+| `data/players.json`   | `apply`, `rename`, `retitle` |
 
 ### Generated — never touch, never hand-review
 
@@ -228,6 +228,16 @@ which every squad file referencing that player depends on. `fullName` moves too
 only if it was tracking `name` exactly; a divergent `fullName` is real data and
 is left alone. This is one of the two answers to a `possible-rename`, and the
 answer to a `name-variant` — see below.
+
+### `retitle`
+
+```bash
+npm run squadctl -- retitle <playerId> "<article title as the source links it>"
+```
+
+Points a record at a different Wikipedia article title, for when the article
+moved and the person did not. One of the three answers to a `title-mismatch`.
+Never touches `name` — that is `rename` — and never rewrites an id.
 
 ### `alias`
 

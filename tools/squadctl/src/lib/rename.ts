@@ -38,3 +38,28 @@ export function renamePlayer(
     fullNameFollowed,
   };
 }
+
+export interface RetitleResult {
+  players: Player[];
+  /** Null when the record carried no title yet. */
+  before: string | null;
+  after: string;
+}
+
+/** Points a record at a different Wikipedia article title. One of the three
+ *  answers to a `title-mismatch`: the person is the same and their article
+ *  moved. Never touches `name` — that is `rename` — and never touches the id,
+ *  which every squad file referencing this player depends on. */
+export function retitlePlayer(
+  players: readonly Player[],
+  id: string,
+  title: string,
+): RetitleResult | null {
+  const target = players.find((p) => p.id === id);
+  if (target === undefined) return null;
+  return {
+    players: players.map((p) => (p.id === id ? { ...p, wikiTitle: title } : p)),
+    before: target.wikiTitle,
+    after: title,
+  };
+}

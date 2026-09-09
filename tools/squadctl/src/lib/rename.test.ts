@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Player } from '../../../../types/squad.ts';
-import { renamePlayer } from './rename.ts';
+import { renamePlayer, retitlePlayer } from './rename.ts';
 
 const player = (over: Partial<Player> & { id: string; name: string }): Player => ({
   fullName: over.name,
@@ -50,5 +50,33 @@ describe('renamePlayer', () => {
   it('does not mutate the array it was given', () => {
     renamePlayer(stored, 'dro', 'Dro Fernández');
     expect(stored[1]?.name).toBe('Dro');
+  });
+});
+
+describe('retitlePlayer', () => {
+  const stored = [
+    player({ id: 'endrick', name: 'Endrick', wikiTitle: 'Endrick' }),
+    player({ id: 'dro', name: 'Dro', wikiTitle: null }),
+  ];
+
+  it('points the record at the new title without touching the id', () => {
+    const result = retitlePlayer(stored, 'endrick', 'Endrick (footballer, born 2006)');
+    expect(result?.players.find((p) => p.id === 'endrick')?.wikiTitle).toBe(
+      'Endrick (footballer, born 2006)',
+    );
+    expect(result?.players.map((p) => p.id)).toEqual(['endrick', 'dro']);
+  });
+
+  it('leaves the display name alone — that is what rename is for', () => {
+    const result = retitlePlayer(stored, 'endrick', 'Endrick (footballer, born 2006)');
+    expect(result?.players.find((p) => p.id === 'endrick')?.name).toBe('Endrick');
+  });
+
+  it('reports the previous title, including when there was none', () => {
+    expect(retitlePlayer(stored, 'dro', 'Dro Fernández')?.before).toBeNull();
+  });
+
+  it('returns null for an unknown id rather than inventing a record', () => {
+    expect(retitlePlayer(stored, 'nobody', 'Nobody')).toBeNull();
   });
 });
