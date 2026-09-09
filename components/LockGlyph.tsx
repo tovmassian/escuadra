@@ -4,7 +4,7 @@ import { colors } from '@/theme/tokens';
 // Geometric padlock for the locked-difficulty badge, replacing the OS emoji
 // 🔒 previously inlined in DifficultyRow. Built from plain Views, coloured
 // from tokens, so it has no dependency on the OS emoji font (the same reason
-// TeamMarker draws flags as geometry rather than Unicode regional-indicator
+// nation flags are committed PNGs rather than Unicode regional-indicator
 // emoji — see types/squad.ts).
 //
 // Drawn in a 16x16 box and scaled the same way EscuadraMark scales from

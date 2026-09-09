@@ -48,25 +48,28 @@ export interface SquadMember {
   captain?: boolean;
 }
 
-/** A team's sole visual identity element, as declarative geometry rather
- *  than an asset — every squad, club or nation, carries one.
+/** A team's visual identity as declarative geometry rather than an asset —
+ *  every squad, club or nation, carries one.
  *
- *  For a nation the marker *is* the national flag. National flags are
- *  exempt from the "no crests, badges, logos or shield shapes" rule: that
- *  rule exists for trademark exposure, and a flag carries no trademark.
- *  Deliberately not the Unicode regional-indicator emoji (🇦🇷): that depends
- *  on an OS flag-emoji font, and Windows ships none — the Playwright capture
- *  step of the design loop runs on Windows Chrome and would hand the design
- *  side "AR" instead of a flag. Geometry renders identically everywhere.
- *  National emblems and coats of arms are omitted. Spain without its arms is
- *  the civil flag; Argentina without the sun and Brazil without the celestial
- *  globe stay unambiguous at this size, and omitting them keeps the marker
- *  consistent with the app's geometric language.
- *
- *  For a club the marker is the club's own colours laid out as bands — never
- *  an emblem, per the "no crests, ever" constraint. A single-colour club
+ *  For a club this is the whole story: its own colours as bands, never an
+ *  emblem, per the "no crests, ever" constraint. A single-colour club
  *  (Arsenal, Real Madrid) is a one-entry `bands` array: a plain field, not a
- *  split shape. */
+ *  split shape.
+ *
+ *  For a nation it is no longer the identity element. Nations show a real
+ *  flag image from `assets/flags/` (see `lib/flags.ts` and
+ *  `components/Flag.tsx`) on the team picker, level-3 nationality options,
+ *  the `NAT` stat chip and the Study screen — geometry could not express a
+ *  flag with a coat of arms, a canton or a saltire. A nation's `marker`
+ *  survives for one job: the question screen's in-round banner, which at
+ *  100x3 pt has no room for an image. National emblems and coats of arms are
+ *  omitted there; Spain without its arms is the civil flag, and Argentina
+ *  without the sun stays unambiguous at that size.
+ *
+ *  Never a Unicode regional-indicator emoji (🇦🇷) anywhere: that depends on an
+ *  OS flag-emoji font, and Windows ships none — the Playwright capture step
+ *  of the design loop runs on Windows Chrome and would hand the design side
+ *  "AR". A committed PNG has no such dependency. */
 export interface TeamMarker {
   /** Band fills, in draw order: top-to-bottom for `horizontal`,
    *  left-to-right for `vertical`. A single-entry array is a plain field. */
