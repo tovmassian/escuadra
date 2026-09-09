@@ -1,4 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { Flag } from './Flag';
+import type { FlagCode } from '@/assets/flags/generated';
 import { colors, sizes, spacing, typography } from '@/theme/tokens';
 
 interface StudyRowProps {
@@ -9,9 +11,12 @@ interface StudyRowProps {
   /** Nationality (club squads) or club (nation squads) — see
    *  `Question.affiliation` in the question engine for the same conditional. */
   affiliation: string;
+  /** The flag for `affiliation` on club squads, where it is a nationality.
+   *  Nation squads show a club there and never pass one. */
+  flag?: FlagCode | null;
 }
 
-export function StudyRow({ number, name, position, affiliation }: StudyRowProps) {
+export function StudyRow({ number, name, position, affiliation, flag }: StudyRowProps) {
   return (
     <View style={styles.row}>
       <Text style={[styles.number, { width: sizes.studyColumn.no }]}>{number ?? '—'}</Text>
@@ -19,12 +24,12 @@ export function StudyRow({ number, name, position, affiliation }: StudyRowProps)
         {name}
       </Text>
       <Text style={[styles.position, { width: sizes.studyColumn.position }]}>{position}</Text>
-      <Text
-        style={[styles.affiliation, { width: sizes.studyColumn.affiliation }]}
-        numberOfLines={1}
-      >
-        {affiliation}
-      </Text>
+      <View style={[styles.affiliationCell, { width: sizes.studyColumn.affiliation }]}>
+        {flag ? <Flag code={flag} size="row" label={affiliation} /> : null}
+        <Text style={styles.affiliation} numberOfLines={1}>
+          {affiliation}
+        </Text>
+      </View>
     </View>
   );
 }
@@ -59,7 +64,18 @@ const styles = StyleSheet.create({
   number: { ...typography.statMonoSmall, color: colors.textMuted },
   name: { flex: 1, ...typography.tableName, color: colors.textPrimary, marginLeft: spacing.sm },
   position: { ...typography.tableCell, color: colors.textSecondary, textAlign: 'center' },
-  affiliation: { ...typography.tableCell, color: colors.textMuted, textAlign: 'right' },
+  affiliationCell: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    gap: spacing.xs,
+  },
+  affiliation: {
+    ...typography.tableCell,
+    color: colors.textMuted,
+    textAlign: 'right',
+    flexShrink: 1,
+  },
   headerRow: {
     flexDirection: 'row',
     alignItems: 'center',

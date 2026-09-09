@@ -179,7 +179,11 @@ export const sizes = {
   // Height of one connector segment between two ladder rungs. Drawn only in
   // the gap, never behind a badge — see `LadderConnector`.
   difficultyConnectorHeight: 26,
-  studyColumn: { no: 26, position: 34, affiliation: 92 },
+  // `affiliation` carries a flag image plus its gap on club squads
+  // (sizes.flagRow.width + spacing.xs = 28 of its 120), so the text keeps the
+  // same 92 it had before flags. The name column is flex, so it absorbs the
+  // difference.
+  studyColumn: { no: 26, position: 34, affiliation: 120 },
   // Home's "Start Training" is the one 56px control; every other button
   // (Continue, Results actions) is 52px.
   controlHeight: 52,
