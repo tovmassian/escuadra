@@ -1,6 +1,7 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { VerdictGlyph } from './VerdictGlyph';
-import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { radii, spacing, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 interface CompletedPartPillProps {
   label: string;
@@ -19,6 +20,24 @@ interface CompletedPartPillProps {
 // straight to a green check regardless of correctness was the bug this
 // `correct` prop exists to fix.
 export function CompletedPartPill({ label, correct }: CompletedPartPillProps) {
+  const colors = useThemeColors();
+  const styles = StyleSheet.create({
+    pill: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs,
+      paddingVertical: spacing.sm,
+      paddingHorizontal: spacing.md - 2,
+      borderWidth: 1,
+      borderRadius: radii.lg,
+    },
+    pillCorrect: { backgroundColor: colors.successBg, borderColor: colors.success },
+    pillIncorrect: { backgroundColor: colors.errorBg, borderColor: colors.error },
+    label: { ...typography.rowTitle },
+    labelCorrect: { color: colors.success },
+    labelIncorrect: { color: colors.error },
+  });
+
   return (
     <View style={[styles.pill, correct ? styles.pillCorrect : styles.pillIncorrect]}>
       <VerdictGlyph correct={correct} />
@@ -28,20 +47,3 @@ export function CompletedPartPill({ label, correct }: CompletedPartPillProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  pill: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-    paddingVertical: spacing.sm,
-    paddingHorizontal: spacing.md - 2,
-    borderWidth: 1,
-    borderRadius: radii.lg,
-  },
-  pillCorrect: { backgroundColor: colors.successBg, borderColor: colors.success },
-  pillIncorrect: { backgroundColor: colors.errorBg, borderColor: colors.error },
-  label: { ...typography.rowTitle },
-  labelCorrect: { color: colors.success },
-  labelIncorrect: { color: colors.error },
-});

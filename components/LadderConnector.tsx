@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
-import { borderWidths, colors, sizes } from '@/theme/tokens';
+import { borderWidths, sizes } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 interface LadderConnectorProps {
   /** Whether this segment leads into a rung the player can still play —
@@ -14,6 +15,7 @@ interface LadderConnectorProps {
 // rather than one continuous line, so the ladder reads as "how far you've
 // gotten" instead of a decorative rail.
 export function LadderConnector({ active }: LadderConnectorProps) {
+  const colors = useThemeColors();
   return (
     <View style={styles.row}>
       <View style={styles.column}>

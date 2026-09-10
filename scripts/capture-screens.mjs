@@ -44,11 +44,17 @@ function killServerTree(server) {
   }
 }
 
+// The root layout holds the splash until the persisted store has hydrated, so
+// `networkidle` now fires before the app has painted anything — the settle
+// window has to cover that wait plus the entry animation that follows it.
+// Home's is the long pole: its letter cascade runs to roughly 1.6s once
+// `MOTION_TIME_SCALE` is applied, far past the 300ms per-animation budget that
+// governs mid-round motion.
+const SETTLE_MS = 2200;
+
 async function shoot(page, path, file, pageErrorRef) {
   await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle' });
-  // Let fonts settle and the entry animations finish. Every animation is
-  // under 300ms by constraint, so 600ms is comfortably past all of them.
-  await page.waitForTimeout(600);
+  await page.waitForTimeout(SETTLE_MS);
   assertNoPageError(pageErrorRef);
   await page.screenshot({ path: `${OUT}/${file}` });
   console.log(`captured ${file}`);
@@ -69,19 +75,10 @@ function assertNoPageError(pageErrorRef) {
   }
 }
 
-const server = spawn('npx', ['expo', 'start', '--web', '--port', String(PORT)], {
-  stdio: 'inherit',
-  shell: process.platform === 'win32',
-  env: { ...process.env, BROWSER: 'none', CI: '1' },
-});
-
-let browser;
-try {
-  await mkdir(OUT, { recursive: true });
-  await waitForServer();
-
-  browser = await chromium.launch();
-  const page = await browser.newPage({ viewport: VIEWPORT, deviceScaleFactor: 2 });
+// One full pass over every screen in a single theme. `suffix` is appended
+// before the extension, so the dark pass keeps the original filenames.
+async function captureTheme(browser, colorScheme, suffix) {
+  const page = await browser.newPage({ viewport: VIEWPORT, deviceScaleFactor: 2, colorScheme });
 
   // Recorded here, not thrown here: a throw inside a Playwright event
   // handler doesn't propagate through this function's try/finally, so it
@@ -94,50 +91,81 @@ try {
     pageErrorRef.error = error;
   });
 
-  await shoot(page, '/', '01-home.png', pageErrorRef);
-  await shoot(page, '/team-picker', '02-team-picker-clubs.png', pageErrorRef);
+  const name = (base) => `${base}${suffix}.png`;
 
-  await page.getByText('National Teams').click();
-  await page.waitForTimeout(400);
-  assertNoPageError(pageErrorRef);
-  await page.screenshot({ path: `${OUT}/03-team-picker-nations.png` });
-  console.log('captured 03-team-picker-nations.png');
+  try {
+    await shoot(page, '/', name('01-home'), pageErrorRef);
+    await shoot(page, '/team-picker', name('02-team-picker-clubs'), pageErrorRef);
 
-  await shoot(page, '/team/bar/difficulty', '04-difficulty.png', pageErrorRef);
-  await shoot(page, '/team/bar/study', '05-study.png', pageErrorRef);
-  await shoot(page, `/play/bar/1?seed=${SEED}`, '06-question-l1.png', pageErrorRef);
-  await shoot(page, `/play/bar/3?seed=${SEED}`, '07-question-l3.png', pageErrorRef);
-
-  // Results cannot be reached by URL: the session store is deliberately
-  // ephemeral, so the round has to actually be played. Answer the first
-  // option each time until the router lands on /results.
-  await page.goto(`${BASE}/play/bar/1?seed=${SEED}`, { waitUntil: 'networkidle' });
-  for (let i = 0; i < 60; i++) {
+    await page.getByText('National Teams').click();
+    await page.waitForTimeout(400);
     assertNoPageError(pageErrorRef);
-    if (page.url().includes('/results')) break;
-    const next = page.getByTestId('app-button').first();
-    // The footer button is present but disabled ("Select an answer") before
-    // a part is answered — isVisible() alone is true even while disabled,
-    // so check enabled state too or the loop clicks a no-op forever.
-    if (
-      (await next.isVisible().catch(() => false)) &&
-      (await next.isEnabled().catch(() => false))
-    ) {
-      await next.click();
-    } else {
-      const option = page.getByTestId('answer-option').first();
-      if (!(await option.isVisible().catch(() => false))) break;
-      await option.click();
+    await page.screenshot({ path: `${OUT}/${name('03-team-picker-nations')}` });
+    console.log(`captured ${name('03-team-picker-nations')}`);
+
+    await shoot(page, '/team/bar/difficulty', name('04-difficulty'), pageErrorRef);
+    await shoot(page, '/team/bar/study', name('05-study'), pageErrorRef);
+    await shoot(page, `/play/bar/1?seed=${SEED}`, name('06-question-l1'), pageErrorRef);
+    await shoot(page, `/play/bar/3?seed=${SEED}`, name('07-question-l3'), pageErrorRef);
+
+    // Results cannot be reached by URL: the session store is deliberately
+    // ephemeral, so the round has to actually be played. Answer the first
+    // option each time until the router lands on /results.
+    await page.goto(`${BASE}/play/bar/1?seed=${SEED}`, { waitUntil: 'networkidle' });
+    await page.waitForTimeout(SETTLE_MS);
+    for (let i = 0; i < 60; i++) {
+      assertNoPageError(pageErrorRef);
+      if (page.url().includes('/results')) break;
+      const next = page.getByTestId('app-button').first();
+      // The footer button is present but disabled ("Select an answer") before
+      // a part is answered — isVisible() alone is true even while disabled,
+      // so check enabled state too or the loop clicks a no-op forever.
+      if (
+        (await next.isVisible().catch(() => false)) &&
+        (await next.isEnabled().catch(() => false))
+      ) {
+        await next.click();
+      } else {
+        const option = page.getByTestId('answer-option').first();
+        if (!(await option.isVisible().catch(() => false))) break;
+        await option.click();
+      }
+      await page.waitForTimeout(250);
     }
-    await page.waitForTimeout(250);
+    if (!page.url().includes('/results')) {
+      throw new Error('never reached the results screen — check the testIDs from Step 2');
+    }
+    // The results celebration cascade is the longest in the app.
+    await page.waitForTimeout(SETTLE_MS);
+    assertNoPageError(pageErrorRef);
+    await page.screenshot({ path: `${OUT}/${name('08-results')}` });
+    console.log(`captured ${name('08-results')}`);
+  } finally {
+    await page.close();
   }
-  if (!page.url().includes('/results')) {
-    throw new Error('never reached the results screen — check the testIDs from Step 2');
-  }
-  await page.waitForTimeout(600);
-  assertNoPageError(pageErrorRef);
-  await page.screenshot({ path: `${OUT}/08-results.png` });
-  console.log('captured 08-results.png');
+}
+
+const server = spawn('npx', ['expo', 'start', '--web', '--port', String(PORT)], {
+  stdio: 'inherit',
+  shell: process.platform === 'win32',
+  env: { ...process.env, BROWSER: 'none', CI: '1' },
+});
+
+let browser;
+try {
+  await mkdir(OUT, { recursive: true });
+  await waitForServer();
+
+  browser = await chromium.launch();
+
+  // Both themes, because both ship. The app's theme preference defaults to
+  // 'system', which on web reads `prefers-color-scheme` — so emulating the
+  // scheme is enough to drive the whole palette, with nothing to seed into
+  // storage. Dark keeps the original filenames: it is still the app's default
+  // identity, and keeping the names stable lets the design side diff a capture
+  // against the previous turn's.
+  await captureTheme(browser, 'dark', '');
+  await captureTheme(browser, 'light', '-light');
 } finally {
   await browser?.close();
   killServerTree(server);

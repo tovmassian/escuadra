@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Flag } from './Flag';
 import type { FlagCode } from '@/assets/flags/generated';
-import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { radii, spacing, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 interface StatChipProps {
   label: string;
@@ -13,6 +14,23 @@ interface StatChipProps {
 }
 
 export function StatChip({ label, value, flag }: StatChipProps) {
+  const colors = useThemeColors();
+  const styles = StyleSheet.create({
+    chip: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xxs + 2,
+      paddingVertical: spacing.xs - 1,
+      paddingHorizontal: spacing.sm + 1,
+      backgroundColor: colors.surface,
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: radii.pill,
+    },
+    label: { ...typography.captionEyebrow, color: colors.textMuted },
+    value: { ...typography.statMonoTiny, color: colors.textPrimary },
+  });
+
   return (
     <View style={styles.chip}>
       <Text style={styles.label}>{label}</Text>
@@ -21,19 +39,3 @@ export function StatChip({ label, value, flag }: StatChipProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  chip: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xxs + 2,
-    paddingVertical: spacing.xs - 1,
-    paddingHorizontal: spacing.sm + 1,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radii.pill,
-  },
-  label: { ...typography.captionEyebrow, color: colors.textMuted },
-  value: { ...typography.statMonoTiny, color: colors.textPrimary },
-});

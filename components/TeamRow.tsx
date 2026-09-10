@@ -4,7 +4,8 @@ import { TeamMarker } from './TeamMarker';
 import type { FlagCode } from '@/assets/flags/generated';
 import type { TeamProgress } from '@/lib/pickerView';
 import type { TeamMarker as TeamMarkerData } from '@/types/squad';
-import { colors, iconSize, sizes, spacing, typography } from '@/theme/tokens';
+import { iconSize, sizes, spacing, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 interface TeamRowProps {
   name: string;
@@ -31,6 +32,23 @@ interface TeamRowProps {
 // only carve-out, because it exists for trademark exposure and a flag
 // carries none.
 export function TeamRow({ name, marker, flag, progress, onPress }: TeamRowProps) {
+  const colors = useThemeColors();
+  const styles = StyleSheet.create({
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      height: sizes.rowHeightTall,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.surfaceRaised,
+    },
+    text: { flex: 1, minWidth: 0 },
+    name: { ...typography.rowTitle, color: colors.textPrimary },
+    meta: { ...typography.statMonoTiny, color: colors.textMuted, marginTop: spacing.xxs - 1 },
+    metaCleared: { color: colors.success },
+    chevron: { fontSize: iconSize.chevron, color: colors.border },
+  });
+
   return (
     <Pressable onPress={onPress} accessibilityRole="button" style={styles.row}>
       {flag ? <Flag code={flag} size="marker" label={name} /> : <TeamMarker marker={marker} />}
@@ -50,19 +68,3 @@ export function TeamRow({ name, marker, flag, progress, onPress }: TeamRowProps)
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.sm,
-    height: sizes.rowHeightTall,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.surfaceRaised,
-  },
-  text: { flex: 1, minWidth: 0 },
-  name: { ...typography.rowTitle, color: colors.textPrimary },
-  meta: { ...typography.statMonoTiny, color: colors.textMuted, marginTop: spacing.xxs - 1 },
-  metaCleared: { color: colors.success },
-  chevron: { fontSize: iconSize.chevron, color: colors.border },
-});

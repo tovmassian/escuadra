@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { Easing, FadeInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
+import { ThemeToggle } from '@/components/ThemeToggle';
 import { Wordmark } from '@/components/Wordmark';
 import { getRoster, getSquad } from '@/lib/squads';
 import { scoreKey, useProgress, useProgressHydrated } from '@/stores/progress';
@@ -10,7 +11,6 @@ import { useSession } from '@/stores/session';
 import {
   celebrationEasingCurves,
   celebrationRiseDuration,
-  colors,
   homeCascade,
   iconSize,
   radii,
@@ -18,11 +18,13 @@ import {
   spacing,
   typography,
 } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 const riseEasing = Easing.bezier(...celebrationEasingCurves.rise);
 
 export default function Home() {
   const insets = useSafeAreaInsets();
+  const colors = useThemeColors();
   const hydrated = useProgressHydrated();
   const lastPlayed = useProgress((s) => s.lastPlayed);
   const bestScores = useProgress((s) => s.bestScores);
@@ -48,6 +50,38 @@ export default function Home() {
     router.push('/team-picker');
   };
 
+  const styles = StyleSheet.create({
+    root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.xl },
+    toggleRow: { alignItems: 'flex-end' },
+    brandBlock: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+    continueCard: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.md - 2,
+      padding: spacing.md,
+      backgroundColor: colors.surface,
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: radii.xl,
+      marginBottom: spacing.xxl,
+    },
+    dot: {
+      width: sizes.teamDot,
+      height: sizes.teamDot,
+      borderRadius: sizes.teamDot,
+      flexShrink: 0,
+    },
+    continueText: { flex: 1, minWidth: 0 },
+    continueName: { ...typography.rowTitle, color: colors.textPrimary },
+    continueMeta: {
+      ...typography.statMonoTiny,
+      color: colors.textMuted,
+      marginTop: spacing.xxs - 2,
+    },
+    chevron: { fontSize: iconSize.chevronLarge, color: colors.textMuted },
+    actions: { gap: spacing.md },
+  });
+
   return (
     <View
       style={[
@@ -55,6 +89,10 @@ export default function Home() {
         { paddingTop: insets.top + spacing.xl, paddingBottom: insets.bottom + spacing.xl },
       ]}
     >
+      <View style={styles.toggleRow}>
+        <ThemeToggle />
+      </View>
+
       <View style={styles.brandBlock}>
         <Wordmark size={sizes.wordmarkMarkHero} stacked animate />
       </View>
@@ -116,25 +154,3 @@ export default function Home() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.xl },
-  brandBlock: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-  continueCard: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.md - 2,
-    padding: spacing.md,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radii.xl,
-    marginBottom: spacing.xxl,
-  },
-  dot: { width: sizes.teamDot, height: sizes.teamDot, borderRadius: sizes.teamDot, flexShrink: 0 },
-  continueText: { flex: 1, minWidth: 0 },
-  continueName: { ...typography.rowTitle, color: colors.textPrimary },
-  continueMeta: { ...typography.statMonoTiny, color: colors.textMuted, marginTop: spacing.xxs - 2 },
-  chevron: { fontSize: iconSize.chevronLarge, color: colors.textMuted },
-  actions: { gap: spacing.md },
-});

@@ -9,13 +9,14 @@ import Animated, {
 import type { OptionVerdict } from './AnswerOption';
 import {
   borderWidths,
-  colors,
   durations,
   opacity,
   radii,
   spacing,
   typography,
+  type Palette,
 } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 interface ChipOptionProps {
   label: string;
@@ -27,29 +28,45 @@ interface ChipOptionProps {
 // Position chips (GK/DF/MF/FW) reuse AnswerOption's verdict vocabulary for
 // consistent colour logic, but lay out as equal-flex pills with no marks or
 // "CORRECT ANSWER" caption — the design treats both correct states alike here.
-const BG: Record<OptionVerdict, string> = {
+const chipBg = (colors: Palette): Record<OptionVerdict, string> => ({
   idle: colors.surface,
   'correct-picked': colors.successBg,
   'correct-unpicked': colors.successBg,
   'incorrect-picked': colors.errorBg,
   'incorrect-other': colors.surface,
-};
-const BORDER: Record<OptionVerdict, string> = {
+});
+const chipBorder = (colors: Palette): Record<OptionVerdict, string> => ({
   idle: colors.border,
   'correct-picked': colors.success,
   'correct-unpicked': colors.success,
   'incorrect-picked': colors.error,
   'incorrect-other': colors.border,
-};
-const TEXT: Record<OptionVerdict, string> = {
+});
+const chipText = (colors: Palette): Record<OptionVerdict, string> => ({
   idle: colors.textPrimary,
   'correct-picked': colors.success,
   'correct-unpicked': colors.success,
   'incorrect-picked': colors.error,
   'incorrect-other': colors.textMuted,
-};
+});
 
 export function ChipOption({ label, verdict, disabled, onPress }: ChipOptionProps) {
+  const colors = useThemeColors();
+  const BG = chipBg(colors);
+  const BORDER = chipBorder(colors);
+  const TEXT = chipText(colors);
+  const styles = StyleSheet.create({
+    flex: { flex: 1 },
+    chip: {
+      paddingVertical: spacing.sm,
+      borderRadius: radii.lg,
+      borderWidth: borderWidths.thick,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    label: { ...typography.chipLabel },
+  });
+
   const scale = useSharedValue(1);
 
   const handlePressIn = useCallback(() => {
@@ -88,15 +105,3 @@ export function ChipOption({ label, verdict, disabled, onPress }: ChipOptionProp
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  flex: { flex: 1 },
-  chip: {
-    paddingVertical: spacing.sm,
-    borderRadius: radii.lg,
-    borderWidth: borderWidths.thick,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  label: { ...typography.chipLabel },
-});

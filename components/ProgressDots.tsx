@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import type { DotOutcome } from '@/lib/roundView';
-import { colors, opacity, radii, sizes, spacing } from '@/theme/tokens';
+import { opacity, radii, sizes, spacing, type Palette } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 interface ProgressDotsProps {
   /** One entry per question, in order. */
@@ -10,16 +11,17 @@ interface ProgressDotsProps {
 // A dash per question, coloured by what actually happened to it — ten
 // identical dashes told the player nothing about their round.
 export function ProgressDots({ outcomes }: ProgressDotsProps) {
+  const colors = useThemeColors();
   return (
     <View style={styles.row}>
       {outcomes.map((outcome, i) => (
-        <View key={i} style={[styles.dot, dotStyle(outcome)]} />
+        <View key={i} style={[styles.dot, dotStyle(outcome, colors)]} />
       ))}
     </View>
   );
 }
 
-function dotStyle(outcome: DotOutcome) {
+function dotStyle(outcome: DotOutcome, colors: Palette) {
   switch (outcome) {
     case 'correct':
       return { backgroundColor: colors.success, opacity: opacity.dotPast };

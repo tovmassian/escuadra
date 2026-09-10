@@ -4,13 +4,13 @@ import { EscuadraMark } from './EscuadraMark';
 import { EscuadraStrike } from './EscuadraStrike';
 import {
   celebrationEasingCurves,
-  colors,
   homeCascade,
   sizes,
   spacing,
   strikeTiming,
   typography,
 } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 const WORD = 'escuadra';
 
@@ -36,6 +36,14 @@ export function Wordmark({
   stacked = false,
   animate = false,
 }: WordmarkProps) {
+  const colors = useThemeColors();
+  const styles = StyleSheet.create({
+    root: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
+    stacked: { flexDirection: 'column', gap: spacing.md },
+    wordRow: { flexDirection: 'row', overflow: 'hidden' },
+    word: { ...typography.wordmark, color: colors.textPrimary },
+    wordStacked: typography.wordmarkHero,
+  });
   const wordStyle = [styles.word, stacked && styles.wordStacked];
 
   return (
@@ -45,9 +53,9 @@ export function Wordmark({
       accessibilityLabel="Escuadra"
     >
       {animate ? (
-        <EscuadraStrike size={size} color={colors.brandSoft} timing={strikeTiming.home} />
+        <EscuadraStrike size={size} color={colors.mark} timing={strikeTiming.home} />
       ) : (
-        <EscuadraMark size={size} color={colors.brandSoft} showTrail={showTrail} />
+        <EscuadraMark size={size} color={colors.mark} showTrail={showTrail} />
       )}
       {animate ? (
         <View style={styles.wordRow}>
@@ -69,11 +77,3 @@ export function Wordmark({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  root: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-  stacked: { flexDirection: 'column', gap: spacing.md },
-  wordRow: { flexDirection: 'row', overflow: 'hidden' },
-  word: { ...typography.wordmark, color: colors.textPrimary },
-  wordStacked: typography.wordmarkHero,
-});

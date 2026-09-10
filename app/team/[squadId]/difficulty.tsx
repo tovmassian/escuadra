@@ -9,7 +9,8 @@ import type { Level } from '@/lib/questionEngine';
 import { formatLastUpdated, ladderRows } from '@/lib/ladderView';
 import { getSquad } from '@/lib/squads';
 import { useProgress } from '@/stores/progress';
-import { colors, spacing, typography } from '@/theme/tokens';
+import { spacing, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 const LEVEL_COPY: Record<Level, { title: string; description: string }> = {
   1: {
@@ -28,9 +29,30 @@ const LEVEL_COPY: Record<Level, { title: string; description: string }> = {
 
 export default function Difficulty() {
   const insets = useSafeAreaInsets();
+  const colors = useThemeColors();
   const { squadId } = useLocalSearchParams<{ squadId: string }>();
   const bestScores = useProgress((s) => s.bestScores);
   const completedLevels = useProgress((s) => s.completedLevels);
+
+  const styles = StyleSheet.create({
+    root: {
+      flex: 1,
+      backgroundColor: colors.background,
+      paddingHorizontal: spacing.lg,
+      paddingBottom: spacing.xl,
+    },
+    back: { ...typography.secondary, color: colors.textSecondary },
+    eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, marginTop: spacing.md },
+    title: { ...typography.screenTitle, color: colors.textPrimary, marginBottom: spacing.xxl },
+    spacer: { flex: 1 },
+    studyButton: { marginTop: spacing.lg },
+    updated: {
+      ...typography.descriptionSmall,
+      color: colors.textMuted,
+      alignSelf: 'flex-end',
+      marginTop: spacing.sm,
+    },
+  });
 
   const squad = getSquad(squadId);
   if (!squad) return null;
@@ -87,23 +109,3 @@ export default function Difficulty() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  root: {
-    flex: 1,
-    backgroundColor: colors.background,
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.xl,
-  },
-  back: { ...typography.secondary, color: colors.textSecondary },
-  eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, marginTop: spacing.md },
-  title: { ...typography.screenTitle, color: colors.textPrimary, marginBottom: spacing.xxl },
-  spacer: { flex: 1 },
-  studyButton: { marginTop: spacing.lg },
-  updated: {
-    ...typography.descriptionSmall,
-    color: colors.textMuted,
-    alignSelf: 'flex-end',
-    marginTop: spacing.sm,
-  },
-});

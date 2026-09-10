@@ -1,42 +1,50 @@
 import { useFonts } from 'expo-font';
-import { DarkTheme, Stack, ThemeProvider, type Theme } from 'expo-router';
+import { DarkTheme, DefaultTheme, Stack, ThemeProvider, type Theme } from 'expo-router';
 import * as SplashScreen from 'expo-splash-screen';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-reanimated';
 
+import { useProgressHydrated } from '@/stores/progress';
 import { fontAssets } from '@/theme/fonts';
-import { colors } from '@/theme/tokens';
+import { useThemeColors, useThemeName } from '@/theme/useTheme';
 
 SplashScreen.preventAutoHideAsync();
 
-// Escuadra is dark-only — the token set has no light variant, so we pin the
-// navigation theme rather than following the system scheme.
-const navTheme: Theme = {
-  ...DarkTheme,
-  dark: true,
-  colors: {
-    ...DarkTheme.colors,
-    primary: colors.accent,
-    background: colors.background,
-    card: colors.surface,
-    text: colors.textPrimary,
-    border: colors.border,
-    notification: colors.error,
-  },
-};
-
 export default function RootLayout() {
   const [fontsLoaded, fontError] = useFonts(fontAssets);
+  const hydrated = useProgressHydrated();
+  const themeName = useThemeName();
+  const colors = useThemeColors();
+
+  // Hold the splash until the type is ready, otherwise the first frame renders
+  // in the system font and visibly reflows — and until the persisted
+  // preference is back, otherwise someone pinned to light gets a dark frame
+  // that flips on every launch.
+  const ready = (fontsLoaded || fontError) && hydrated;
 
   useEffect(() => {
-    if (fontsLoaded || fontError) SplashScreen.hideAsync();
-  }, [fontsLoaded, fontError]);
+    if (ready) SplashScreen.hideAsync();
+  }, [ready]);
 
-  // Keep the splash up until the type is ready, otherwise the first frame
-  // renders in the system font and visibly reflows.
-  if (!fontsLoaded && !fontError) return null;
+  if (!ready) return null;
+
+  const isDark = themeName === 'dark';
+  const base = isDark ? DarkTheme : DefaultTheme;
+  const navTheme: Theme = {
+    ...base,
+    dark: isDark,
+    colors: {
+      ...base.colors,
+      primary: colors.accent,
+      background: colors.background,
+      card: colors.surface,
+      text: colors.textPrimary,
+      border: colors.border,
+      notification: colors.error,
+    },
+  };
 
   return (
     <SafeAreaProvider>
@@ -47,7 +55,7 @@ export default function RootLayout() {
             contentStyle: { backgroundColor: colors.background },
           }}
         />
-        <StatusBar style="light" />
+        <StatusBar style={isDark ? 'light' : 'dark'} />
       </ThemeProvider>
     </SafeAreaProvider>
   );

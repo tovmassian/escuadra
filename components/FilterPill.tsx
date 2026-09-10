@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
-import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { radii, spacing, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 interface FilterPillProps {
   label: string;
@@ -8,6 +9,19 @@ interface FilterPillProps {
 }
 
 export function FilterPill({ label, active, onPress }: FilterPillProps) {
+  const colors = useThemeColors();
+  const styles = StyleSheet.create({
+    pill: {
+      paddingVertical: spacing.xs - 2,
+      paddingHorizontal: spacing.sm + 2,
+      borderRadius: radii.pill,
+      borderWidth: 1,
+    },
+    pillActive: { backgroundColor: colors.accent, borderColor: colors.accent },
+    pillIdle: { backgroundColor: colors.surface, borderColor: colors.border },
+    label: { ...typography.filterLabel },
+  });
+
   return (
     <Pressable
       onPress={onPress}
@@ -21,15 +35,3 @@ export function FilterPill({ label, active, onPress }: FilterPillProps) {
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  pill: {
-    paddingVertical: spacing.xs - 2,
-    paddingHorizontal: spacing.sm + 2,
-    borderRadius: radii.pill,
-    borderWidth: 1,
-  },
-  pillActive: { backgroundColor: colors.accent, borderColor: colors.accent },
-  pillIdle: { backgroundColor: colors.surface, borderColor: colors.border },
-  label: { ...typography.filterLabel },
-});

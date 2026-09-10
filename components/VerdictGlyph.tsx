@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
 import { EscuadraMark } from './EscuadraMark';
-import { colors, iconSize, opacity } from '@/theme/tokens';
+import { iconSize, opacity } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 interface VerdictGlyphProps {
   correct: boolean;
@@ -19,6 +20,7 @@ interface VerdictGlyphProps {
 // U+2713 / U+2715 dingbats, which depend on a glyph Inter may not carry and
 // so fall back silently to another font.
 export function VerdictGlyph({ correct, size = iconSize.markLarge, color }: VerdictGlyphProps) {
+  const colors = useThemeColors();
   return (
     <View style={[styles.root, !correct && styles.incorrect]}>
       <EscuadraMark size={size} color={color ?? (correct ? colors.success : colors.errorTextDim)} />
