@@ -113,4 +113,36 @@ describe('visibleSquads', () => {
   it('returns an empty list for a league with no clubs', () => {
     expect(visibleSquads(MANIFEST, 'club', 'bundesliga')).toEqual([]);
   });
+
+  it('filters by a case-insensitive substring of the name', () => {
+    expect(visibleSquads(MANIFEST, 'club', 'ALL', 'AR').map((s) => s.id)).toEqual(['ars', 'bar']);
+  });
+
+  it('trims surrounding whitespace from the query', () => {
+    expect(visibleSquads(MANIFEST, 'club', 'ALL', '  ar  ').map((s) => s.id)).toEqual([
+      'ars',
+      'bar',
+    ]);
+  });
+
+  it('treats an empty query as no filter', () => {
+    expect(visibleSquads(MANIFEST, 'club', 'ALL', '').map((s) => s.id)).toEqual([
+      'ars',
+      'bar',
+      'rma',
+      'juv',
+    ]);
+  });
+
+  it('composes the query with the league filter', () => {
+    expect(visibleSquads(MANIFEST, 'club', 'la-liga', 'ba').map((s) => s.id)).toEqual(['bar']);
+  });
+
+  it('filters nations by name too', () => {
+    expect(visibleSquads(MANIFEST, 'nation', 'ALL', 'ar').map((s) => s.id)).toEqual(['arg']);
+  });
+
+  it('returns an empty list when nothing matches the query', () => {
+    expect(visibleSquads(MANIFEST, 'club', 'ALL', 'zzz')).toEqual([]);
+  });
 });
