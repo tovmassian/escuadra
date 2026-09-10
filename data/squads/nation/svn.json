@@ -1,0 +1,118 @@
+{
+  "id": "svn",
+  "kind": "nation",
+  "name": "Slovenia",
+  "season": "2026",
+  "primaryColor": "#005DA4",
+  "secondaryColor": "#ED1C24",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#005DA4", "#ED1C24"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-09-10",
+  "source": "https://en.wikipedia.org/wiki/Slovenia_national_football_team",
+  "members": [
+    {
+      "playerId": "oblak",
+      "no": 1,
+      "captain": true
+    },
+    {
+      "playerId": "zan-karnicnik",
+      "no": 2
+    },
+    {
+      "playerId": "jost-urbancic",
+      "no": 3
+    },
+    {
+      "playerId": "marcel-ratnik",
+      "no": 4
+    },
+    {
+      "playerId": "srdan-kuzmic",
+      "no": 5
+    },
+    {
+      "playerId": "jaka-bijol",
+      "no": 6
+    },
+    {
+      "playerId": "benjamin-verbic",
+      "no": 7
+    },
+    {
+      "playerId": "sandi-lovric",
+      "no": 8
+    },
+    {
+      "playerId": "andraz-sporar",
+      "no": 9
+    },
+    {
+      "playerId": "svit-seslar",
+      "no": 10
+    },
+    {
+      "playerId": "tjas-begic",
+      "no": 11
+    },
+    {
+      "playerId": "matevz-vidovsek",
+      "no": 12
+    },
+    {
+      "playerId": "erik-janza",
+      "no": 13
+    },
+    {
+      "playerId": "tamar-svetlin",
+      "no": 14
+    },
+    {
+      "playerId": "danijel-sturm",
+      "no": 15
+    },
+    {
+      "playerId": "zanluk-leban",
+      "no": 16
+    },
+    {
+      "playerId": "david-zec",
+      "no": 17
+    },
+    {
+      "playerId": "zan-vipotnik",
+      "no": 18
+    },
+    {
+      "playerId": "aljosa-matko",
+      "no": 19
+    },
+    {
+      "playerId": "drkusic",
+      "no": 21
+    },
+    {
+      "playerId": "adam-gnezda-cerin",
+      "no": 22
+    },
+    {
+      "playerId": "david-brekalo",
+      "no": 23
+    },
+    {
+      "playerId": "tian-nai-koren",
+      "no": 24
+    },
+    {
+      "playerId": "ester-sokler",
+      "no": 25
+    },
+    {
+      "playerId": "adrian-zeljkovic",
+      "no": 26
+    }
+  ]
+}

@@ -123,6 +123,7 @@ import squadStr from '@/data/squads/club/ligue-1/str.json';
 import squadSui from '@/data/squads/nation/sui.json';
 import squadSun from '@/data/squads/club/premier-league/sun.json';
 import squadSvk from '@/data/squads/nation/svk.json';
+import squadSvn from '@/data/squads/nation/svn.json';
 import squadSvw from '@/data/squads/club/bundesliga/svw.json';
 import squadSwe from '@/data/squads/nation/swe.json';
 import squadTor from '@/data/squads/club/serie-a/tor.json';
@@ -266,6 +267,7 @@ export const SQUAD_FILES: Record<string, Squad> = {
   sui: squadSui as Squad,
   sun: squadSun as Squad,
   svk: squadSvk as Squad,
+  svn: squadSvn as Squad,
   svw: squadSvw as Squad,
   swe: squadSwe as Squad,
   tor: squadTor as Squad,

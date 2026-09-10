@@ -6,7 +6,7 @@ Status: approved
 ## Context
 
 Escuadra's v0 feature work is done: 7 screens, light and dark themes, 141 squads
-(96 clubs, 45 nations), all `verified: true`, and no network calls anywhere in
+(96 clubs, 46 nations), all `verified: true`, and no network calls anywhere in
 `app/`, `components/`, `lib/`, `stores/` or `theme/`. What is missing is not
 product — it is everything between a working Expo Go app and a listing someone
 can download.
@@ -35,7 +35,7 @@ two. Android moves to its own milestone with no due date.
 | iPad                  | `supportsTablet: false`                                   | No `maxWidth` or `useWindowDimensions` anywhere; every layout is pure flex and would stretch on a 13" iPad.          |
 | Privacy/support pages | GitHub Pages from a dedicated `gh-pages` branch           | `docs/` holds internal specs and plans; publishing from it would put them on a public website.                       |
 | Screenshots           | Extend `scripts/capture-screens.mjs` with a store profile | Reuses infrastructure already trusted; regenerates in one command when a screen changes.                             |
-| Nation count          | Ship 45                                                   | Six nations are registered but unwritten. Deregister them rather than block the release.                             |
+| Nation count          | Ship 46                                                   | Six nations are registered but unwritten. Deregister them rather than block the release.                             |
 
 ## Constraint #4 holds
 

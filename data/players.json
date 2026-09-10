@@ -418,6 +418,17 @@
     "wikiTitle": null
   },
   {
+    "id": "adam-gnezda-cerin",
+    "name": "Adam Gnezda Čerin",
+    "fullName": "Adam Gnezda Čerin",
+    "birth": "1999-07-16",
+    "position": "MF",
+    "nationality": "Slovenia",
+    "club": "Al Wahda",
+    "photo": null,
+    "wikiTitle": "Adam Gnezda Čerin"
+  },
+  {
     "id": "adam-hlozek",
     "name": "Adam Hložek",
     "fullName": "Adam Hložek",
@@ -658,6 +669,17 @@
     "club": "Hapoel Be'er Sheva",
     "photo": null,
     "wikiTitle": "Adrián Ugarriza"
+  },
+  {
+    "id": "adrian-zeljkovic",
+    "name": "Adrian Zeljković",
+    "fullName": "Adrian Zeljković",
+    "birth": "2002-08-19",
+    "position": "MF",
+    "nationality": "Slovenia",
+    "club": "MTK Budapest",
+    "photo": null,
+    "wikiTitle": "Adrian Zeljković"
   },
   {
     "id": "adrien-thomasson",
@@ -1859,6 +1881,17 @@
     "wikiTitle": "Alistair Johnston"
   },
   {
+    "id": "aljosa-matko",
+    "name": "Aljoša Matko",
+    "fullName": "Aljoša Matko",
+    "birth": "2000-03-29",
+    "position": "FW",
+    "nationality": "Slovenia",
+    "club": "Újpest",
+    "photo": null,
+    "wikiTitle": "Aljoša Matko"
+  },
+  {
     "id": "aljoscha-kemlein",
     "name": "Aljoscha Kemlein",
     "fullName": "Aljoscha Kemlein",
@@ -2319,6 +2352,17 @@
     "club": "Union Berlin",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "andraz-sporar",
+    "name": "Andraž Šporar",
+    "fullName": "Andraž Šporar",
+    "birth": "1994-02-27",
+    "position": "FW",
+    "nationality": "Slovenia",
+    "club": "Slovan Bratislava",
+    "photo": null,
+    "wikiTitle": "Andraž Šporar"
   },
   {
     "id": "andre",
@@ -4420,6 +4464,17 @@
     "club": "Manchester United",
     "photo": null,
     "wikiTitle": "Benjamin Šeško"
+  },
+  {
+    "id": "benjamin-verbic",
+    "name": "Benjamin Verbič",
+    "fullName": "Benjamin Verbič",
+    "birth": "1993-11-27",
+    "position": "MF",
+    "nationality": "Slovenia",
+    "club": "Celje",
+    "photo": null,
+    "wikiTitle": "Benjamin Verbič"
   },
   {
     "id": "benno-kaltefleiter",
@@ -7315,6 +7370,17 @@
     "wikiTitle": "Daniele Sommariva"
   },
   {
+    "id": "danijel-sturm",
+    "name": "Danijel Šturm",
+    "fullName": "Danijel Šturm",
+    "birth": "1999-01-04",
+    "position": "FW",
+    "nationality": "Slovenia",
+    "club": "Slavia Prague",
+    "photo": null,
+    "wikiTitle": "Danijel Šturm"
+  },
+  {
     "id": "danilho-doekhi",
     "name": "Danilho Doekhi",
     "fullName": "Danilho Doekhi",
@@ -7535,6 +7601,17 @@
     "wikiTitle": "David Affengruber (footballer, born 2001)"
   },
   {
+    "id": "david-brekalo",
+    "name": "David Brekalo",
+    "fullName": "David Brekalo",
+    "birth": "1998-12-03",
+    "position": "DF",
+    "nationality": "Slovenia",
+    "club": "Orlando City",
+    "photo": null,
+    "wikiTitle": "David Brekalo"
+  },
+  {
     "id": "david-brooks",
     "name": "David Brooks",
     "fullName": "David Brooks",
@@ -7731,6 +7808,17 @@
     "club": "Cremonese",
     "photo": null,
     "wikiTitle": "David Stückler"
+  },
+  {
+    "id": "david-zec",
+    "name": "David Zec",
+    "fullName": "David Zec",
+    "birth": "2000-01-05",
+    "position": "DF",
+    "nationality": "Slovenia",
+    "club": "Holstein Kiel",
+    "photo": null,
+    "wikiTitle": "David Zec"
   },
   {
     "id": "david-zima",
@@ -8863,7 +8951,7 @@
     "nationality": "Slovenia",
     "club": "Espanyol",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Vanja Drkušić"
   },
   {
     "id": "dro-fernandez",
@@ -10043,6 +10131,17 @@
     "wikiTitle": null
   },
   {
+    "id": "erik-janza",
+    "name": "Erik Janža",
+    "fullName": "Erik Janža",
+    "birth": "1993-06-21",
+    "position": "DF",
+    "nationality": "Slovenia",
+    "club": "Górnik Zabrze",
+    "photo": null,
+    "wikiTitle": "Erik Janža"
+  },
+  {
     "id": "erik-lira",
     "name": "Érik Lira",
     "fullName": "Érik Lira",
@@ -10140,6 +10239,17 @@
     "club": "Rennes",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "ester-sokler",
+    "name": "Ester Sokler",
+    "fullName": "Ester Sokler",
+    "birth": "1999-06-04",
+    "position": "FW",
+    "nationality": "Slovenia",
+    "club": "Maccabi Tel Aviv",
+    "photo": null,
+    "wikiTitle": "Ester Sokler"
   },
   {
     "id": "estevao",
@@ -15040,7 +15150,7 @@
     "id": "jaka-bijol",
     "name": "Jaka Bijol",
     "fullName": "Jaka Bijol",
-    "birth": null,
+    "birth": "1999-02-05",
     "position": "DF",
     "nationality": "Slovenia",
     "club": "Leeds United",
@@ -17257,6 +17367,17 @@
     "club": "Manchester City",
     "photo": null,
     "wikiTitle": "Joško Gvardiol"
+  },
+  {
+    "id": "jost-urbancic",
+    "name": "Jošt Urbančič",
+    "fullName": "Jošt Urbančič",
+    "birth": "2001-04-12",
+    "position": "DF",
+    "nationality": "Slovenia",
+    "club": "Olimpija Ljubljana",
+    "photo": null,
+    "wikiTitle": "Jošt Urbančič"
   },
   {
     "id": "josue-casimir",
@@ -21516,6 +21637,17 @@
     "wikiTitle": null
   },
   {
+    "id": "marcel-ratnik",
+    "name": "Marcel Ratnik",
+    "fullName": "Marcel Ratnik",
+    "birth": "2003-12-23",
+    "position": "DF",
+    "nationality": "Slovenia",
+    "club": "Al Ain",
+    "photo": null,
+    "wikiTitle": "Marcel Ratnik"
+  },
+  {
     "id": "marcel-sabitzer",
     "name": "Marcel Sabitzer",
     "fullName": "Marcel Sabitzer",
@@ -22460,6 +22592,17 @@
     "club": "1. FC Magdeburg",
     "photo": null,
     "wikiTitle": "Mateusz Żukowski"
+  },
+  {
+    "id": "matevz-vidovsek",
+    "name": "Matevž Vidovšek",
+    "fullName": "Matevž Vidovšek",
+    "birth": "1999-10-30",
+    "position": "GK",
+    "nationality": "Slovenia",
+    "club": "Olimpija Ljubljana",
+    "photo": null,
+    "wikiTitle": "Matevž Vidovšek"
   },
   {
     "id": "matheo-raab",
@@ -26540,7 +26683,7 @@
     "nationality": "Slovenia",
     "club": "Atlético Madrid",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Jan Oblak"
   },
   {
     "id": "ochieng",
@@ -31232,7 +31375,7 @@
     "id": "sandi-lovric",
     "name": "Sandi Lovrić",
     "fullName": "Sandi Lovrić",
-    "birth": null,
+    "birth": "1998-03-28",
     "position": "MF",
     "nationality": "Slovenia",
     "club": "Udinese",
@@ -32596,12 +32739,12 @@
     "id": "srdan-kuzmic",
     "name": "Srđan Kuzmić",
     "fullName": "Srđan Kuzmić",
-    "birth": null,
+    "birth": "2004-01-16",
     "position": "DF",
     "nationality": "Slovenia",
     "club": "Lorient",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Srđan Kuzmić"
   },
   {
     "id": "stanis-idumbo",
@@ -33011,6 +33154,17 @@
     "wikiTitle": "Sverre Nypan"
   },
   {
+    "id": "svit-seslar",
+    "name": "Svit Sešlar",
+    "fullName": "Svit Sešlar",
+    "birth": "2002-01-09",
+    "position": "MF",
+    "nationality": "Slovenia",
+    "club": "Celje",
+    "photo": null,
+    "wikiTitle": "Svit Sešlar"
+  },
+  {
     "id": "swedberg",
     "name": "Williot Swedberg",
     "fullName": "Williot Theo Swedberg",
@@ -33130,6 +33284,17 @@
     "club": "Monaco",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "tamar-svetlin",
+    "name": "Tamar Svetlin",
+    "fullName": "Tamar Svetlin",
+    "birth": "2001-07-30",
+    "position": "MF",
+    "nationality": "Slovenia",
+    "club": "Saint-Étienne",
+    "photo": null,
+    "wikiTitle": "Tamar Svetlin"
   },
   {
     "id": "tammy-abraham",
@@ -33627,6 +33792,17 @@
     "wikiTitle": null
   },
   {
+    "id": "tian-nai-koren",
+    "name": "Tian Nai Koren",
+    "fullName": "Tian Nai Koren",
+    "birth": "2009-07-31",
+    "position": "MF",
+    "nationality": "Slovenia",
+    "club": "Club Brugge",
+    "photo": null,
+    "wikiTitle": "Tian Nai Koren"
+  },
+  {
     "id": "tidiam-gomis",
     "name": "Tidiam Gomis",
     "fullName": "Tidiam Gomis",
@@ -33867,6 +34043,17 @@
     "club": "Newcastle United",
     "photo": null,
     "wikiTitle": "Tino Livramento"
+  },
+  {
+    "id": "tjas-begic",
+    "name": "Tjaš Begić",
+    "fullName": "Tjaš Begić",
+    "birth": "2003-06-30",
+    "position": "FW",
+    "nationality": "Slovenia",
+    "club": "Sampdoria",
+    "photo": null,
+    "wikiTitle": "Tjaš Begić"
   },
   {
     "id": "tobias-sippel",
@@ -36309,6 +36496,39 @@
     "club": "Real Sociedad",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "zan-karnicnik",
+    "name": "Žan Karničnik",
+    "fullName": "Žan Karničnik",
+    "birth": "1994-09-18",
+    "position": "DF",
+    "nationality": "Slovenia",
+    "club": "Maribor",
+    "photo": null,
+    "wikiTitle": "Žan Karničnik"
+  },
+  {
+    "id": "zan-vipotnik",
+    "name": "Žan Vipotnik",
+    "fullName": "Žan Vipotnik",
+    "birth": "2002-03-18",
+    "position": "FW",
+    "nationality": "Slovenia",
+    "club": "Swansea City",
+    "photo": null,
+    "wikiTitle": "Žan Vipotnik"
+  },
+  {
+    "id": "zanluk-leban",
+    "name": "Žan-Luk Leban",
+    "fullName": "Žan-Luk Leban",
+    "birth": "2002-12-15",
+    "position": "GK",
+    "nationality": "Slovenia",
+    "club": "Celje",
+    "photo": null,
+    "wikiTitle": "Žan-Luk Leban"
   },
   {
     "id": "zaragoza",

@@ -1721,6 +1721,19 @@
     }
   },
   {
+    "id": "svn",
+    "kind": "nation",
+    "name": "Slovenia",
+    "season": "2026",
+    "primaryColor": "#005DA4",
+    "secondaryColor": "#ED1C24",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#005DA4", "#ED1C24"],
+      "orientation": "horizontal"
+    }
+  },
+  {
     "id": "svw",
     "kind": "club",
     "name": "Werder Bremen",
