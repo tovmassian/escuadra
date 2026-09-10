@@ -1,9 +1,21 @@
 # Escuadra
 
-Escuadra — a football squad memorisation trainer for iOS. Expo SDK 57 + expo-router, TypeScript strict,
-Zustand, Reanimated. Dark-only.
+[![check](https://github.com/tovmassian/escuadra/actions/workflows/check.yml/badge.svg)](https://github.com/tovmassian/escuadra/actions/workflows/check.yml)
 
-Runs in **Expo Go** — no Xcode, no Apple Developer account, no native build.
+Escuadra — a football squad memorisation trainer for iOS. Expo SDK 57 + expo-router, TypeScript strict,
+Zustand, Reanimated. Light and dark themes, following the device setting by default, with a toggle on Home.
+
+Runs in **Expo Go** for local development — no Xcode, no Apple Developer account, no native build.
+
+## App Store release
+
+Escuadra is expected on the **App Store** first, as the **First release**
+milestone, with the **Play Store** to follow in its own milestone (see
+[#8](https://github.com/tovmassian/escuadra/issues/8)). Shipping to the store is
+a separate track from the Expo Go development flow above: it needs an Apple
+Developer Program membership and an [EAS](https://docs.expo.dev/eas/) build, not
+Xcode. Privacy and support pages for the store listing are published from the
+[`gh-pages`](https://github.com/tovmassian/escuadra/tree/gh-pages) branch.
 
 ## Setup
 
