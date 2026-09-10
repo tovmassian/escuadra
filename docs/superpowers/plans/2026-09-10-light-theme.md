@@ -35,7 +35,6 @@
 | ---------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
 | `theme/resolveTheme.ts`      | Pure preference → theme-name resolution. No React, no react-native, so it is unit-testable.                              |
 | `theme/resolveTheme.test.ts` | Tests for the above.                                                                                                     |
-| `theme/tokens.test.ts`       | Palette key-parity and colour-format checks.                                                                             |
 | `theme/useTheme.ts`          | `useThemeName()` / `useThemeColors()`. Imports react-native and the store, so it is verified on device, not unit-tested. |
 | `components/ThemeToggle.tsx` | The sun/moon switch from the design mock.                                                                                |
 
@@ -44,6 +43,7 @@
 | File                              | Change                                                                                                                         |
 | --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
 | `theme/tokens.ts`                 | Two palettes, `ThemeName`/`ThemePreference`/`Palette` types, toggle sizing and duration tokens. `colors` is removed in Task 9. |
+| `theme/tokens.test.ts`            | **Already exists** with a `describe('brand tokens')` block. Append to it; do not overwrite it.                                 |
 | `stores/progress.ts`              | `themePreference` field + `setThemePreference`.                                                                                |
 | `app.json`                        | `userInterfaceStyle: "automatic"`, background hexes, theme-aware splash.                                                       |
 | `app/_layout.tsx`                 | Reactive navigation theme + status bar, splash held until hydration.                                                           |
@@ -60,7 +60,7 @@
 **Files:**
 
 - Modify: `theme/tokens.ts:1-35` (the `colors` object and `gradients` below it)
-- Test: `theme/tokens.test.ts` (create)
+- Test: `theme/tokens.test.ts` — **this file already exists.** Append the new `describe` block; do not overwrite its `describe('brand tokens')` block. Its first test reads `colors[key]` for the brand hexes; repoint that at `palettes.dark[key]` now, since Task 9 deletes `colors` and would otherwise break this file.
 
 **Interfaces:**
 
@@ -71,12 +71,9 @@ This task also lands the design source's lifted dark ramp, so the app visibly ch
 
 - [ ] **Step 1: Write the failing test**
 
-Create `theme/tokens.test.ts`:
+`theme/tokens.test.ts` already exists. Change its import from `import { colors, gradients, typography } from './tokens';` to `import { gradients, palettes, typography } from './tokens';`, change the one `colors[key]` reference in its brand-hex test to `palettes.dark[key]`, and **append** this block below the existing `describe('brand tokens')`:
 
 ```ts
-import { describe, expect, it } from 'vitest';
-import { palettes } from './tokens';
-
 // Hex or rgba(). Catches a truncated hex like '#12141', which is a valid
 // string and a silently wrong colour — neither TypeScript nor the compiler
 // can see the difference.
@@ -102,6 +99,8 @@ describe('palettes', () => {
 Run: `npx vitest run theme/tokens.test.ts`
 
 Expected: FAIL — `palettes` is not exported from `./tokens`.
+
+The whole-suite count is the guard that the append went in cleanly: it must read **2489** once this task is done — the 2487 baseline plus these two. A lower number means the existing block was clobbered.
 
 - [ ] **Step 3: Restructure the token file**
 

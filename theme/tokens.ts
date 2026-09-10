@@ -1,36 +1,114 @@
 // Escuadra — design tokens
 // Plain exported objects. No styling library, no CSS-in-JS. Spacing is unitless (RN dp).
 
-export const colors = {
-  background: '#07090b',
-  surface: '#111416',
-  surfaceRaised: '#1c2022',
-  border: '#33393d',
-  textPrimary: '#f3f5f7',
-  textSecondary: '#b4b8bb',
-  textMuted: '#707579',
+export type ThemeName = 'dark' | 'light';
+export type ThemePreference = ThemeName | 'system';
+
+/** Every colour role, resolved for one theme. Both palettes must implement
+ *  this in full — a missing role is a compile error, not a runtime blank. */
+export interface Palette {
+  background: string;
+  surface: string;
+  surfaceRaised: string;
+  border: string;
+  textPrimary: string;
+  textSecondary: string;
+  textMuted: string;
+  accent: string;
+  /** Text/icon colour to place on top of `accent`. */
+  accentOn: string;
+  /** Flat fill for the Escuadra mark — the brand ramp's pale end reads on a
+   *  dark ground and its bright end on a light one, so this is a role, not a
+   *  fixed hex. */
+  mark: string;
+  /** The theme toggle's thumb and its sun/moon glyph. */
+  thumbBg: string;
+  thumbIcon: string;
+  success: string;
+  successBg: string;
+  error: string;
+  errorBg: string;
+  errorBorderDim: string;
+  /** Dimmed error text for an "incorrect-picked" option — visually quieter
+   *  than `error` so the correct answer stays the loudest thing on screen. */
+  errorTextDim: string;
+  brandBright: string;
+  brandDeep: string;
+  brandSoft: string;
+  brandLift: string;
+  brandPlateTop: string;
+  brandPlateBottom: string;
+}
+
+// Roles that do not vary by theme. `accent` is dark enough to carry against
+// both grounds, which is why the design source reuses it unchanged; the two
+// state washes are translucent and composite over whatever surface is behind
+// them; the brand ramp is the mark's own identity — a design token, not
+// team-identity content, unlike a club's real colours — and the plate's
+// gradient ends run deeper than the mark's own stops because the plate sits
+// behind it.
+const sharedRoles = {
   accent: '#3e45a3',
-  accentOn: '#f3f5f7', // text/icon colour to place on top of `accent`
-  success: '#61bd67',
   successBg: 'rgba(97,189,103,0.14)',
-  error: '#f05653',
   errorBg: 'rgba(240,86,83,0.10)',
-  errorBorderDim: '#5c3230',
-  // Dimmed error text for an "incorrect-picked" option — visually quieter
-  // than `error` so the correct answer stays the loudest thing on screen.
-  errorTextDim: '#a15a58',
-  // Brand palette — the Escuadra mark's own colours, from the 2a design
-  // direction. These are design tokens, not team-identity content: the mark
-  // belongs to the app's design system, unlike a club's real colours.
   brandBright: '#5b63d6',
   brandDeep: '#2f3585',
   brandSoft: '#8f97ea',
   brandLift: '#6d76e6',
-  // The icon plate's gradient ends. Distinct from the mark's own stops —
-  // the plate sits behind the mark, so it runs deeper.
   brandPlateTop: '#4a52c4',
   brandPlateBottom: '#252a6b',
 } as const;
+
+// The ramp sits higher than it did: the mark's trail squares, at 30% and 55%
+// opacity, sank into the old near-black and stopped reading as a trail.
+const darkRoles = {
+  background: '#12141a',
+  surface: '#1a1d22',
+  surfaceRaised: '#242830',
+  border: '#3a4046',
+  textPrimary: '#f3f5f7',
+  textSecondary: '#b4b8bb',
+  textMuted: '#767b80',
+  accentOn: '#f3f5f7',
+  mark: sharedRoles.brandSoft,
+  thumbBg: '#2b2f38',
+  thumbIcon: '#e7e9f5',
+  success: '#61bd67',
+  error: '#f05653',
+  errorBorderDim: '#5c3230',
+  errorTextDim: '#a15a58',
+} as const;
+
+// `success` and `error` darken here rather than being reused: at #61bd67 and
+// #f05653 they carry only ~2.4:1 and ~3.5:1 against white, and both are used
+// as small caption and mono text. The two opaque "dim" blends are re-tuned
+// toward the light ground for the same reason.
+const lightRoles = {
+  background: '#f7f7f9',
+  surface: '#ffffff',
+  surfaceRaised: '#eef0f3',
+  border: '#dcdfe4',
+  textPrimary: '#14161a',
+  textSecondary: '#4b4f56',
+  textMuted: '#8b8f96',
+  accentOn: '#ffffff',
+  mark: sharedRoles.brandBright,
+  thumbBg: '#ffffff',
+  thumbIcon: '#b9840f',
+  success: '#2f8f3e',
+  error: '#c23934',
+  errorBorderDim: '#e3b0ad',
+  errorTextDim: '#b3625d',
+} as const;
+
+export const palettes: Record<ThemeName, Palette> = {
+  dark: { ...sharedRoles, ...darkRoles },
+  light: { ...sharedRoles, ...lightRoles },
+};
+
+// Temporary. Every consumer migrates to `useThemeColors()`; this alias only
+// keeps the tree compiling until they have, and is deleted once they are.
+export const colors = palettes.dark;
 
 // Gradient stops for the Escuadra mark and its icon plate. React Native
 // cannot paint a gradient from a plain View, so these are declarative data
@@ -41,17 +119,17 @@ export const colors = {
 // right, which is {x:0,y:0} → {x:0.64,y:1} here.
 export const gradients = {
   mark: {
-    colors: [colors.brandBright, colors.brandDeep],
+    colors: [sharedRoles.brandBright, sharedRoles.brandDeep],
     start: { x: 0, y: 0 },
     end: { x: 1, y: 1 },
   },
   markSoft: {
-    colors: [colors.accent, colors.brandLift],
+    colors: [sharedRoles.accent, sharedRoles.brandLift],
     start: { x: 0, y: 1 },
     end: { x: 1, y: 0 },
   },
   plate: {
-    colors: [colors.brandPlateTop, colors.brandPlateBottom],
+    colors: [sharedRoles.brandPlateTop, sharedRoles.brandPlateBottom],
     start: { x: 0, y: 0 },
     end: { x: 0.64, y: 1 },
   },

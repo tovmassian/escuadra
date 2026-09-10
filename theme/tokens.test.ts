@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { colors, gradients, typography } from './tokens';
+import { gradients, palettes, typography } from './tokens';
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
 
@@ -13,7 +13,7 @@ describe('brand tokens', () => {
       'brandPlateTop',
       'brandPlateBottom',
     ] as const) {
-      expect(colors[key], key).toMatch(HEX);
+      expect(palettes.dark[key], key).toMatch(HEX);
     }
   });
 
@@ -37,5 +37,24 @@ describe('brand tokens', () => {
 
   it('the wordmark uses the ExtraBold family', () => {
     expect(typography.wordmark.fontFamily).toBe('Inter-ExtraBold');
+  });
+});
+
+// Hex or rgba(). Catches a truncated hex like '#12141', which is a valid
+// string and a silently wrong colour — neither TypeScript nor the compiler
+// can see the difference.
+const COLOR = /^(#[0-9a-f]{6}|rgba\(\d+,\d+,\d+,[\d.]+\))$/;
+
+describe('palettes', () => {
+  it('expose identical key sets', () => {
+    expect(new Set(Object.keys(palettes.light))).toEqual(new Set(Object.keys(palettes.dark)));
+  });
+
+  it('hold a well-formed colour in every role, in both themes', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      Object.entries(palettes[name]).forEach(([role, value]) => {
+        expect(value.replace(/\s/g, ''), `${name}.${role}`).toMatch(COLOR);
+      });
+    });
   });
 });
