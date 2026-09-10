@@ -24,10 +24,12 @@
 ### Task 1: Profile registry + CLI resolution
 
 **Files:**
+
 - Create: `scripts/screenshot-profiles.ts`
 - Test: `scripts/screenshot-profiles.test.ts`
 
 **Interfaces:**
+
 - Produces: `interface Profile { name: string; viewport: { width: number; height: number }; deviceScaleFactor: number; outDir: string; expectedDimensions: { width: number; height: number } | null }`, `PROFILES: Record<string, Profile>` (keys `'design'` and `'store'`), `resolveProfile(argv: readonly string[]): Profile`.
 
 - [ ] **Step 1: Write the failing tests**
@@ -130,7 +132,9 @@ export function resolveProfile(argv: readonly string[]): Profile {
   const name = flag ? flag.slice('--profile='.length) : DEFAULT_PROFILE;
   const profile = (PROFILES as Record<string, Profile | undefined>)[name];
   if (!profile) {
-    throw new Error(`unknown --profile "${name}" — known profiles: ${Object.keys(PROFILES).join(', ')}`);
+    throw new Error(
+      `unknown --profile "${name}" — known profiles: ${Object.keys(PROFILES).join(', ')}`,
+    );
   }
   return profile;
 }
@@ -163,10 +167,12 @@ EOF
 ### Task 2: PNG dimension reader + assertion
 
 **Files:**
+
 - Modify: `scripts/screenshot-profiles.ts`
 - Modify: `scripts/screenshot-profiles.test.ts`
 
 **Interfaces:**
+
 - Consumes: `Profile` from Task 1.
 - Produces: `readPngDimensions(buffer: Buffer): { width: number; height: number }`, `assertProfileDimensions(profile: Profile, dims: { width: number; height: number }, filePath: string): void`.
 
@@ -175,7 +181,12 @@ EOF
 Append to `scripts/screenshot-profiles.test.ts` (add the import too):
 
 ```ts
-import { PROFILES, assertProfileDimensions, readPngDimensions, resolveProfile } from './screenshot-profiles';
+import {
+  PROFILES,
+  assertProfileDimensions,
+  readPngDimensions,
+  resolveProfile,
+} from './screenshot-profiles';
 
 // A minimal buffer readPngDimensions can parse: real 8-byte PNG signature,
 // then an IHDR chunk header (4-byte length + "IHDR") and width/height as
@@ -228,7 +239,11 @@ describe('assertProfileDimensions', () => {
 
   it('throws, naming the file, the actual size and the expected size, on a mismatch', () => {
     expect(() =>
-      assertProfileDimensions(PROFILES.store, { width: 1319, height: 2868 }, 'design/store/01-home.png'),
+      assertProfileDimensions(
+        PROFILES.store,
+        { width: 1319, height: 2868 },
+        'design/store/01-home.png',
+      ),
     ).toThrow(/design\/store\/01-home\.png is 1319×2868, expected exactly 1320×2868/);
   });
 });
@@ -303,10 +318,12 @@ EOF
 ### Task 3: Wire the profile into capture-screens.mjs, add `shots:store`
 
 **Files:**
+
 - Modify: `scripts/capture-screens.mjs`
 - Modify: `package.json`
 
 **Interfaces:**
+
 - Consumes: `resolveProfile`, `readPngDimensions`, `assertProfileDimensions` from `./screenshot-profiles.ts` (Tasks 1–2).
 
 - [ ] **Step 1: Update the header comment**
@@ -365,7 +382,11 @@ with:
 import { spawn, spawnSync } from 'node:child_process';
 import { mkdir, readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
-import { assertProfileDimensions, readPngDimensions, resolveProfile } from './screenshot-profiles.ts';
+import {
+  assertProfileDimensions,
+  readPngDimensions,
+  resolveProfile,
+} from './screenshot-profiles.ts';
 
 const PORT = 8082;
 const BASE = `http://localhost:${PORT}`;
@@ -377,17 +398,17 @@ const PROFILE = resolveProfile(process.argv.slice(2));
 In `openCapture`, replace:
 
 ```js
-  const page = await browser.newPage({ viewport: VIEWPORT, deviceScaleFactor: 2, colorScheme });
+const page = await browser.newPage({ viewport: VIEWPORT, deviceScaleFactor: 2, colorScheme });
 ```
 
 with:
 
 ```js
-  const page = await browser.newPage({
-    viewport: PROFILE.viewport,
-    deviceScaleFactor: PROFILE.deviceScaleFactor,
-    colorScheme,
-  });
+const page = await browser.newPage({
+  viewport: PROFILE.viewport,
+  deviceScaleFactor: PROFILE.deviceScaleFactor,
+  colorScheme,
+});
 ```
 
 - [ ] **Step 4: Use the profile's output dir and assert dimensions in `shoot()`**
@@ -421,13 +442,13 @@ with:
 Replace:
 
 ```js
-  await mkdir(OUT, { recursive: true });
+await mkdir(OUT, { recursive: true });
 ```
 
 with:
 
 ```js
-  await mkdir(PROFILE.outDir, { recursive: true });
+await mkdir(PROFILE.outDir, { recursive: true });
 ```
 
 - [ ] **Step 6: Add the `shots:store` npm script**

@@ -79,8 +79,14 @@ describe('readPngDimensions', () => {
     expect(() => readPngDimensions(buf)).toThrow(/expected IHDR.*got "IDAT"/);
   });
 
-  it('rejects a truncated buffer', () => {
-    expect(() => readPngDimensions(Buffer.alloc(10))).toThrow(/not a PNG/);
+  it('rejects a truncated buffer with garbage content', () => {
+    expect(() => readPngDimensions(Buffer.alloc(10))).toThrow(/truncated before IHDR/);
+  });
+
+  it('rejects a truncated buffer even with a valid PNG signature', () => {
+    const buf = Buffer.alloc(16);
+    Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]).copy(buf, 0);
+    expect(() => readPngDimensions(buf)).toThrow(/truncated before IHDR/);
   });
 });
 
