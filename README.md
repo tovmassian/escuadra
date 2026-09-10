@@ -9,14 +9,13 @@ Runs in **Expo Go** for local development — no Xcode, no Apple Developer accou
 
 ## App Store release
 
-Escuadra v0 targets the **App Store only** — the Play Store is deferred to its own
-milestone (see [#8](https://github.com/tovmassian/escuadra/issues/8)). Shipping to
-the store is a separate track from the Expo Go development flow above: it needs an
-Apple Developer Program membership and an [EAS](https://docs.expo.dev/eas/) build,
-not Xcode. Privacy and support pages for the store listing are published from the
-[`gh-pages`](https://github.com/tovmassian/escuadra/tree/gh-pages) branch. See
-[`docs/superpowers/specs/2026-09-10-app-store-release-design.md`](docs/superpowers/specs/2026-09-10-app-store-release-design.md)
-for the full release plan.
+Escuadra is expected on the **App Store** first, as the **First release**
+milestone, with the **Play Store** to follow in its own milestone (see
+[#8](https://github.com/tovmassian/escuadra/issues/8)). Shipping to the store is
+a separate track from the Expo Go development flow above: it needs an Apple
+Developer Program membership and an [EAS](https://docs.expo.dev/eas/) build, not
+Xcode. Privacy and support pages for the store listing are published from the
+[`gh-pages`](https://github.com/tovmassian/escuadra/tree/gh-pages) branch.
 
 ## Setup
 
