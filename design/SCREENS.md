@@ -79,20 +79,37 @@ flawless — see below). Route, file, and what it does.
 
 ## Captures
 
-| File                                 | Screen                      |
-| ------------------------------------ | --------------------------- |
-| `screens/01-home.png`                | Home                        |
-| `screens/02-team-picker-clubs.png`   | Team picker, Clubs          |
-| `screens/03-team-picker-nations.png` | Team picker, National Teams |
-| `screens/04-difficulty.png`          | Difficulty ladder           |
-| `screens/05-study.png`               | Study                       |
-| `screens/06-question-l1.png`         | Question, level 1           |
-| `screens/07-question-l3.png`         | Question, level 3           |
-| `screens/08-results.png`             | Results                     |
+| File                                     | Screen                               |
+| ---------------------------------------- | ------------------------------------ |
+| `screens/01-home.png`                    | Home                                 |
+| `screens/02-team-picker-clubs.png`       | Team picker, Clubs                   |
+| `screens/03-team-picker-nations.png`     | Team picker, National Teams          |
+| `screens/04-difficulty.png`              | Difficulty ladder                    |
+| `screens/05-study.png`                   | Study                                |
+| `screens/06-question-l1.png`             | Question, level 1                    |
+| `screens/07-question-l3.png`             | Question, level 3 — club part        |
+| `screens/07-question-l3-nationality.png` | Question, level 3 — nationality part |
+| `screens/08-results.png`                 | Results — failed round               |
+| `screens/08-results-passed.png`          | Results — passed, 9/10               |
+| `screens/08-results-flawless.png`        | Results — a la escuadra, 10/10       |
 
-`08-results.png` captures the ordinary (non-flawless) state. The flawless "a
-la escuadra" state and the missed-players-filtered Study view have no capture
-yet.
+Both level-3 captures show the **third part**, the only state where the whole
+question layout is in play at once — answered name pill, greyed position
+chips, a part rail carrying two earned verdicts, and the last part's options
+still open. They are two different questions, not one screen twice: `squad.kind`
+decides what the third part asks. `07-question-l3.png` is a **nation** squad
+(Spain), so it asks the player's **club**; `07-question-l3-nationality.png` is a
+**club** squad (Barcelona), so it asks their **nationality** — and only
+nationality options carry flag images.
+
+The three results captures are the three tiers `resultTier` distinguishes.
+`08-results.png` is a failed round — the missed list is primary and
+`Study These N` is the first CTA. `08-results-passed.png` is a cleared round
+that still missed a player, so `Play Level 2` takes over as primary while the
+missed list stays. `08-results-flawless.png` is the 10/10 **a la escuadra**
+state: green mark, green score, no missed list at all.
+
+The missed-players-filtered Study view has no capture yet.
 
 ## Vocabulary
 

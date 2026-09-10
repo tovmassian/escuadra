@@ -1,18 +1,3 @@
-import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View, type StyleProp, type TextStyle } from 'react-native';
-import Animated, {
-  Easing,
-  FadeInUp,
-  runOnJS,
-  useAnimatedReaction,
-  useAnimatedStyle,
-  useSharedValue,
-  withDelay,
-  withSequence,
-  withTiming,
-} from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
 import { EscuadraStrike } from '@/components/EscuadraStrike';
 import type { Level } from '@/lib/questionEngine';
@@ -40,6 +25,21 @@ import {
   type Palette,
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { router, useLocalSearchParams } from 'expo-router';
+import { useEffect, useState } from 'react';
+import { FlatList, StyleSheet, Text, View, type StyleProp, type TextStyle } from 'react-native';
+import Animated, {
+  Easing,
+  FadeInUp,
+  runOnJS,
+  useAnimatedReaction,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const riseEasing = Easing.bezier(...celebrationEasingCurves.rise);
 // Exaggerates the score's pop-in bounce by the same knob EscuadraStrike
@@ -287,7 +287,7 @@ export default function Results() {
       {missed.length > 0 && (
         <>
           <Animated.Text entering={riseIn(cascade.missedLabel ?? 0)} style={styles.missedLabel}>
-            MISSED · {missed.length} PLAYERS
+            MISSED · {missed.length} PLAYER{missed.length !== 1 ? 'S' : ''}
           </Animated.Text>
           <FlatList
             data={missed}
