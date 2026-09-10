@@ -8,14 +8,24 @@ import { flagFor } from '@/lib/flags';
 import { getRoster, getSquad } from '@/lib/squads';
 import { parsePlayerIds, studyRows } from '@/lib/studyView';
 import type { Position } from '@/types/squad';
-import { colors, spacing, typography } from '@/theme/tokens';
+import { spacing, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 const FILTERS: ('ALL' | Position)[] = ['ALL', 'GK', 'DF', 'MF', 'FW'];
 
 export default function Study() {
   const insets = useSafeAreaInsets();
+  const colors = useThemeColors();
   const { squadId, players } = useLocalSearchParams<{ squadId: string; players?: string }>();
   const [filter, setFilter] = useState<'ALL' | Position>('ALL');
+
+  const styles = StyleSheet.create({
+    root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.lg },
+    back: { ...typography.secondary, color: colors.textSecondary },
+    eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, marginTop: spacing.md },
+    title: { ...typography.sectionHead, color: colors.textPrimary, marginBottom: spacing.md },
+    filters: { flexDirection: 'row', gap: spacing.xs - 2, marginBottom: spacing.sm },
+  });
 
   const squad = getSquad(squadId);
   const roster = useMemo(() => getRoster(squadId), [squadId]);
@@ -61,11 +71,3 @@ export default function Study() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.lg },
-  back: { ...typography.secondary, color: colors.textSecondary },
-  eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, marginTop: spacing.md },
-  title: { ...typography.sectionHead, color: colors.textPrimary, marginBottom: spacing.md },
-  filters: { flexDirection: 'row', gap: spacing.xs - 2, marginBottom: spacing.sm },
-});

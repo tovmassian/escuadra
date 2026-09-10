@@ -20,10 +20,59 @@ import { partRailRows, progressOutcomes } from '@/lib/roundView';
 import { getRoster, getSquad } from '@/lib/squads';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
-import { colors, durations, spacing, typography } from '@/theme/tokens';
+import { durations, spacing, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
+
+// `QuestionPartView`'s layout. Carries no colour, so it stays at module scope
+// rather than being rebuilt per render from a palette it never reads.
+const partStyles = StyleSheet.create({
+  part: { gap: spacing.xs },
+  optionsColumn: { gap: spacing.xs + 2 },
+  chipOptionsRow: { flexDirection: 'row', gap: spacing.xs },
+});
 
 export default function Question() {
   const insets = useSafeAreaInsets();
+  const colors = useThemeColors();
+  const styles = StyleSheet.create({
+    root: { flex: 1, backgroundColor: colors.background },
+    header: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingHorizontal: spacing.lg,
+    },
+    // The team name and its banner sit on the screen's true centre line, not
+    // wherever `space-between` happened to leave them: equal-flex side columns
+    // split the leftover space, so a wider score pill (10/10 vs 0/0) or a
+    // longer exit link can no longer drag the centre block off-axis. Each side
+    // aligns its own child to the outer edge so the column's full width doesn't
+    // become tap target for the exit link.
+    headerSide: { flex: 1, alignItems: 'flex-start' },
+    headerSideRight: { alignItems: 'flex-end' },
+    exit: { ...typography.secondary, color: colors.textSecondary },
+    teamLabel: { alignItems: 'center', gap: spacing.xxs },
+    teamName: { ...typography.rowTitle, color: colors.textPrimary },
+    progressBlock: { paddingHorizontal: spacing.lg, paddingTop: spacing.lg, gap: spacing.sm - 2 },
+    progressRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
+    questionLabel: { ...typography.secondarySmall, color: colors.textSecondary },
+    difficultyLabel: { ...typography.statMonoTiny, color: colors.textMuted, letterSpacing: 0.7 },
+    heroBlock: {
+      alignItems: 'center',
+      justifyContent: 'center',
+      gap: spacing.md,
+      paddingVertical: spacing.lg,
+    },
+    heroBlockSplit: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: spacing.lg },
+    railColumn: { flex: 1, minWidth: 0, gap: spacing.sm },
+    chipRow: { flexDirection: 'row', gap: spacing.xs },
+    partsBlock: { flex: 1 },
+    partsContent: {
+      paddingHorizontal: spacing.lg,
+      paddingBottom: spacing.md,
+      gap: spacing.md - 2,
+    },
+    footer: { paddingHorizontal: spacing.lg, paddingVertical: spacing.md },
+  });
   const {
     squadId,
     level: levelParam,
@@ -241,14 +290,14 @@ function QuestionPartView({
   if (isMultiPart) {
     if (part.kind === 'name') {
       return (
-        <View style={styles.part}>
+        <View style={partStyles.part}>
           {isAnswered ? (
             <CompletedPartPill
               label={part.options[part.correctIndex] ?? ''}
               correct={answeredIndex === part.correctIndex}
             />
           ) : (
-            <View style={styles.optionsColumn}>
+            <View style={partStyles.optionsColumn}>
               {part.options.map((label, i) => (
                 <AnswerOption
                   key={label}
@@ -264,9 +313,9 @@ function QuestionPartView({
     }
 
     return (
-      <View style={styles.part}>
+      <View style={partStyles.part}>
         {part.kind === 'position' ? (
-          <View style={styles.chipOptionsRow}>
+          <View style={partStyles.chipOptionsRow}>
             {part.options.map((label, i) => (
               <ChipOption
                 key={label}
@@ -278,7 +327,7 @@ function QuestionPartView({
             ))}
           </View>
         ) : (
-          <View style={styles.optionsColumn}>
+          <View style={partStyles.optionsColumn}>
             {part.options.map((label, i) => (
               <AnswerOption
                 key={label}
@@ -296,7 +345,7 @@ function QuestionPartView({
   }
 
   return (
-    <View style={styles.optionsColumn}>
+    <View style={partStyles.optionsColumn}>
       {part.options.map((label, i) => (
         <AnswerOption
           key={label}
@@ -309,46 +358,3 @@ function QuestionPartView({
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: colors.background },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: spacing.lg,
-  },
-  // The team name and its banner sit on the screen's true centre line, not
-  // wherever `space-between` happened to leave them: equal-flex side columns
-  // split the leftover space, so a wider score pill (10/10 vs 0/0) or a
-  // longer exit link can no longer drag the centre block off-axis. Each side
-  // aligns its own child to the outer edge so the column's full width doesn't
-  // become tap target for the exit link.
-  headerSide: { flex: 1, alignItems: 'flex-start' },
-  headerSideRight: { alignItems: 'flex-end' },
-  exit: { ...typography.secondary, color: colors.textSecondary },
-  teamLabel: { alignItems: 'center', gap: spacing.xxs },
-  teamName: { ...typography.rowTitle, color: colors.textPrimary },
-  progressBlock: { paddingHorizontal: spacing.lg, paddingTop: spacing.lg, gap: spacing.sm - 2 },
-  progressRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
-  questionLabel: { ...typography.secondarySmall, color: colors.textSecondary },
-  difficultyLabel: { ...typography.statMonoTiny, color: colors.textMuted, letterSpacing: 0.7 },
-  heroBlock: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    gap: spacing.md,
-    paddingVertical: spacing.lg,
-  },
-  heroBlockSplit: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: spacing.lg },
-  railColumn: { flex: 1, minWidth: 0, gap: spacing.sm },
-  chipRow: { flexDirection: 'row', gap: spacing.xs },
-  partsBlock: { flex: 1 },
-  partsContent: {
-    paddingHorizontal: spacing.lg,
-    paddingBottom: spacing.md,
-    gap: spacing.md - 2,
-  },
-  part: { gap: spacing.xs },
-  optionsColumn: { gap: spacing.xs + 2 },
-  chipOptionsRow: { flexDirection: 'row', gap: spacing.xs },
-  footer: { paddingHorizontal: spacing.lg, paddingVertical: spacing.md },
-});

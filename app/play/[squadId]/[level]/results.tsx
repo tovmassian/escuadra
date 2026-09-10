@@ -30,7 +30,6 @@ import {
   celebrationCascade,
   celebrationEasingCurves,
   celebrationRiseDuration,
-  colors,
   MOTION_DISTANCE_SCALE,
   radii,
   sizes,
@@ -38,7 +37,9 @@ import {
   strikeTiming,
   typography,
   type CelebrationCascade,
+  type Palette,
 } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 const riseEasing = Easing.bezier(...celebrationEasingCurves.rise);
 // Exaggerates the score's pop-in bounce by the same knob EscuadraStrike
@@ -120,8 +121,59 @@ function verdictSentence(correct: number, total: number): string {
   return 'These are the ones to learn.';
 }
 
+// `Results` and `MissedCard` below share this, so it is a factory taking the
+// palette rather than an inline block duplicated in both.
+const makeStyles = (colors: Palette) =>
+  StyleSheet.create({
+    root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.lg },
+    summary: { alignItems: 'center', marginBottom: spacing.xl },
+    // Shared by both success tiers ('passed' and 'excellent'). 'excellent' has
+    // no missed list beneath it (a flawless round misses nothing), so it alone
+    // gets the full-screen centred treatment; 'passed' sits above its missed
+    // list like `summary` does.
+    success: { alignItems: 'center', marginBottom: spacing.xl, gap: spacing.sm },
+    successExcellent: { flex: 1, justifyContent: 'center', marginBottom: 0 },
+    successScore: { ...typography.scoreHero, color: colors.textPrimary, marginTop: spacing.lg },
+    successScoreExcellent: { color: colors.success },
+    successTitle: { ...typography.screenTitle, color: colors.textPrimary },
+    successTitleExcellent: { fontStyle: 'italic' },
+    eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, marginBottom: spacing.xs },
+    score: { ...typography.scoreHero, color: colors.textPrimary },
+    verdict: { ...typography.secondarySmall, color: colors.textSecondary, marginTop: spacing.xs },
+    missedLabel: { ...typography.captionEyebrow, color: colors.error, marginBottom: spacing.sm },
+    missedList: { gap: spacing.sm },
+    missedCard: {
+      flexDirection: 'row',
+      alignItems: 'flex-start',
+      gap: spacing.sm,
+      padding: spacing.md - 2,
+      backgroundColor: colors.surface,
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderLeftWidth: 2,
+      borderLeftColor: colors.error,
+      borderRadius: radii.lg,
+    },
+    missedNumber: {
+      ...typography.rowTitle,
+      width: sizes.missedNumberWidth,
+      color: colors.textMuted,
+    },
+    missedText: { flex: 1, minWidth: 0 },
+    missedName: { ...typography.rowTitle, color: colors.textPrimary },
+    missedPicked: {
+      ...typography.secondarySmall,
+      color: colors.textMuted,
+      marginTop: spacing.xxs - 2,
+    },
+    missedPickedValue: { color: colors.error },
+    actions: { gap: spacing.sm, marginTop: spacing.md },
+  });
+
 export default function Results() {
   const insets = useSafeAreaInsets();
+  const colors = useThemeColors();
+  const styles = makeStyles(colors);
   const { squadId, level: levelParam } = useLocalSearchParams<{ squadId: string; level: string }>();
   const level = Number(levelParam) as Level;
   const session = useSession();
@@ -270,6 +322,7 @@ export default function Results() {
 }
 
 function MissedCard({ result, delay }: { result: QuestionResult; delay: number }) {
+  const styles = makeStyles(useThemeColors());
   const wrong = firstWrongPart(result);
   const namePart = result.question.parts[0];
   const correctName =
@@ -294,45 +347,3 @@ function MissedCard({ result, delay }: { result: QuestionResult; delay: number }
     </Animated.View>
   );
 }
-
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.lg },
-  summary: { alignItems: 'center', marginBottom: spacing.xl },
-  // Shared by both success tiers ('passed' and 'excellent'). 'excellent' has
-  // no missed list beneath it (a flawless round misses nothing), so it alone
-  // gets the full-screen centred treatment; 'passed' sits above its missed
-  // list like `summary` does.
-  success: { alignItems: 'center', marginBottom: spacing.xl, gap: spacing.sm },
-  successExcellent: { flex: 1, justifyContent: 'center', marginBottom: 0 },
-  successScore: { ...typography.scoreHero, color: colors.textPrimary, marginTop: spacing.lg },
-  successScoreExcellent: { color: colors.success },
-  successTitle: { ...typography.screenTitle, color: colors.textPrimary },
-  successTitleExcellent: { fontStyle: 'italic' },
-  eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, marginBottom: spacing.xs },
-  score: { ...typography.scoreHero, color: colors.textPrimary },
-  verdict: { ...typography.secondarySmall, color: colors.textSecondary, marginTop: spacing.xs },
-  missedLabel: { ...typography.captionEyebrow, color: colors.error, marginBottom: spacing.sm },
-  missedList: { gap: spacing.sm },
-  missedCard: {
-    flexDirection: 'row',
-    alignItems: 'flex-start',
-    gap: spacing.sm,
-    padding: spacing.md - 2,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderLeftWidth: 2,
-    borderLeftColor: colors.error,
-    borderRadius: radii.lg,
-  },
-  missedNumber: { ...typography.rowTitle, width: sizes.missedNumberWidth, color: colors.textMuted },
-  missedText: { flex: 1, minWidth: 0 },
-  missedName: { ...typography.rowTitle, color: colors.textPrimary },
-  missedPicked: {
-    ...typography.secondarySmall,
-    color: colors.textMuted,
-    marginTop: spacing.xxs - 2,
-  },
-  missedPickedValue: { color: colors.error },
-  actions: { gap: spacing.sm, marginTop: spacing.md },
-});

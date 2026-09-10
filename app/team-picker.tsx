@@ -10,7 +10,8 @@ import { flagFor } from '@/lib/flags';
 import { LEAGUE_LABELS, leagueFilters, teamProgress, visibleSquads } from '@/lib/pickerView';
 import { listSquads } from '@/lib/squads';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
-import { colors, spacing, typography } from '@/theme/tokens';
+import { spacing, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 const SEGMENTS = [
   { key: 'club', label: 'Clubs' },
@@ -19,6 +20,7 @@ const SEGMENTS = [
 
 export default function TeamPicker() {
   const insets = useSafeAreaInsets();
+  const colors = useThemeColors();
   const hydrated = useProgressHydrated();
   const bestScores = useProgress((s) => s.bestScores);
   const [filter, setFilter] = useState<'club' | 'nation'>('club');
@@ -27,6 +29,23 @@ export default function TeamPicker() {
   const squads = listSquads();
   const leagues = useMemo(() => leagueFilters(squads), [squads]);
   const filtered = useMemo(() => visibleSquads(squads, filter, league), [squads, filter, league]);
+
+  const styles = StyleSheet.create({
+    root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.lg },
+    title: { ...typography.screenTitle, color: colors.textPrimary, marginBottom: spacing.xxs },
+    subtitle: { ...typography.secondarySmall, color: colors.textMuted, marginBottom: spacing.md },
+    // `flexGrow: 0` keeps the horizontal scroller from claiming leftover
+    // vertical space in this column; `flexShrink: 0` stops the list below from
+    // taking it back. Without the latter the track collapses on native once the
+    // list is long enough to scroll (RN shrinks flex children by default where
+    // RN-Web does not, so this never reproduces in the web build).
+    leagueTrack: { flexGrow: 0, flexShrink: 0, marginTop: spacing.sm },
+    // `alignItems: 'center'` keeps each pill at its own intrinsic height. A row
+    // stretches its children by default, so a squeezed track would otherwise
+    // flatten the pills and clip their labels rather than overflow.
+    leagueRow: { alignItems: 'center', gap: spacing.xs - 2, paddingRight: spacing.lg },
+    list: { paddingTop: spacing.xs },
+  });
 
   // Switching tabs drops the league back to ALL, so tapping "Clubs" always
   // shows every club rather than silently re-applying a league picked before
@@ -81,20 +100,3 @@ export default function TeamPicker() {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.lg },
-  title: { ...typography.screenTitle, color: colors.textPrimary, marginBottom: spacing.xxs },
-  subtitle: { ...typography.secondarySmall, color: colors.textMuted, marginBottom: spacing.md },
-  // `flexGrow: 0` keeps the horizontal scroller from claiming leftover
-  // vertical space in this column; `flexShrink: 0` stops the list below from
-  // taking it back. Without the latter the track collapses on native once the
-  // list is long enough to scroll (RN shrinks flex children by default where
-  // RN-Web does not, so this never reproduces in the web build).
-  leagueTrack: { flexGrow: 0, flexShrink: 0, marginTop: spacing.sm },
-  // `alignItems: 'center'` keeps each pill at its own intrinsic height. A row
-  // stretches its children by default, so a squeezed track would otherwise
-  // flatten the pills and clip their labels rather than overflow.
-  leagueRow: { alignItems: 'center', gap: spacing.xs - 2, paddingRight: spacing.lg },
-  list: { paddingTop: spacing.xs },
-});
