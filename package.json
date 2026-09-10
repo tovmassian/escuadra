@@ -52,7 +52,6 @@
   "devDependencies": {
     "@oclif/core": "^5.0.0",
     "@types/react": "~19.2.4",
-    "eas-cli": "^24.0.0",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~57.0.2",
     "eslint-config-prettier": "^10.1.8",
@@ -65,5 +64,9 @@
   "engines": {
     "node": ">=24.3.0"
   },
-  "private": true
+  "private": true,
+  "allowScripts": {
+    "fsevents@2.3.2": true,
+    "unrs-resolver@1.12.2": true
+  }
 }
