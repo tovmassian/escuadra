@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FilterPill } from '@/components/FilterPill';
+import { SearchField } from '@/components/SearchField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { TeamRow } from '@/components/TeamRow';
 import type { LeagueFilter } from '@/lib/pickerView';
@@ -25,10 +26,14 @@ export default function TeamPicker() {
   const bestScores = useProgress((s) => s.bestScores);
   const [filter, setFilter] = useState<'club' | 'nation'>('club');
   const [league, setLeague] = useState<LeagueFilter>('ALL');
+  const [query, setQuery] = useState('');
 
   const squads = listSquads();
   const leagues = useMemo(() => leagueFilters(squads), [squads]);
-  const filtered = useMemo(() => visibleSquads(squads, filter, league), [squads, filter, league]);
+  const filtered = useMemo(
+    () => visibleSquads(squads, filter, league, query),
+    [squads, filter, league, query],
+  );
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.lg },
@@ -45,11 +50,17 @@ export default function TeamPicker() {
     // flatten the pills and clip their labels rather than overflow.
     leagueRow: { alignItems: 'center', gap: spacing.xs - 2, paddingRight: spacing.lg },
     list: { paddingTop: spacing.xs },
+    search: { marginBottom: spacing.sm },
+    empty: { paddingTop: spacing.xxl, alignItems: 'center' },
+    emptyTitle: { ...typography.secondary, color: colors.textSecondary, marginBottom: spacing.xxs },
+    emptySubtitle: { ...typography.secondarySmall, color: colors.textMuted },
   });
 
   // Switching tabs drops the league back to ALL, so tapping "Clubs" always
   // shows every club rather than silently re-applying a league picked before
-  // a detour through the nations tab, while its pill row was hidden.
+  // a detour through the nations tab, while its pill row was hidden. The
+  // search query deliberately survives the switch instead — a name typed on
+  // one tab may be worth checking on the other.
   const changeKind = (key: string) => {
     setFilter(key as 'club' | 'nation');
     setLeague('ALL');
@@ -61,6 +72,9 @@ export default function TeamPicker() {
       <Text style={styles.subtitle}>
         {filtered.length} {filtered.length === 1 ? 'team' : 'teams'} · tap to start
       </Text>
+      <View style={styles.search}>
+        <SearchField value={query} onChange={setQuery} onClear={() => setQuery('')} />
+      </View>
       <SegmentedControl segments={SEGMENTS} value={filter} onChange={changeKind} />
 
       {filter === 'club' && (
@@ -85,6 +99,14 @@ export default function TeamPicker() {
         data={filtered}
         keyExtractor={(item) => item.id}
         contentContainerStyle={styles.list}
+        ListEmptyComponent={
+          <View style={styles.empty}>
+            <Text style={styles.emptyTitle}>No teams found</Text>
+            {query.trim().length > 0 && (
+              <Text style={styles.emptySubtitle}>No results for &quot;{query.trim()}&quot;</Text>
+            )}
+          </View>
+        }
         renderItem={({ item }) => (
           <TeamRow
             name={item.name}

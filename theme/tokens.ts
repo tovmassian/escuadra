@@ -462,6 +462,8 @@ export const iconSize = {
   markSmall: 13, // VerdictGlyph's smaller size, for AnswerOption's incorrect-picked mark
   chevron: 16, // TeamRow / DifficultyRow disclosure chevron
   chevronLarge: 18, // Home's continue-card chevron
+  searchGlyph: 15, // SearchField's magnifying-glass icon
+  clearGlyph: 10, // SearchField's clear (×) button, drawn from two crossed bars
   // The locked-badge padlock scales with its own badge (40/48/56, escalating
   // by level) rather than sitting at one fixed size regardless of the ring
   // around it — 48 * 0.46 ≈ 22, 56 * 0.46 ≈ 26.

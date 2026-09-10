@@ -68,13 +68,20 @@ export function leagueFilters(squads: SquadManifestEntry[]): LeagueFilter[] {
 }
 
 /** The rows the picker shows. `kind` always applies; `league` narrows clubs
- *  only — nation entries carry no league, so it is ignored on that tab. */
+ *  only — nation entries carry no league, so it is ignored on that tab.
+ *  `query` narrows further by a case-insensitive substring of the name,
+ *  composing with `kind` and `league` rather than replacing them. */
 export function visibleSquads(
   squads: SquadManifestEntry[],
   kind: 'club' | 'nation',
   league: LeagueFilter,
+  query = '',
 ): SquadManifestEntry[] {
+  const q = query.trim().toLowerCase();
   return squads.filter(
-    (s) => s.kind === kind && (kind !== 'club' || league === 'ALL' || s.league === league),
+    (s) =>
+      s.kind === kind &&
+      (kind !== 'club' || league === 'ALL' || s.league === league) &&
+      (q === '' || s.name.toLowerCase().includes(q)),
   );
 }

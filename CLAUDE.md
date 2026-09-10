@@ -97,10 +97,18 @@ Product-defining. Flag a conflict rather than working around any of these.
    OS flag-emoji font, and Windows ships none, so the Playwright capture behind
    `npm run shots` would render "AR". Crests, badges, logos, and shield shapes
    remain banned forever.
-3. **No text input anywhere. No keyboard.** Every answer is a tap — option cards
-   and chip selectors are the entire input vocabulary. This is deliberate:
-   typing player names on a phone is the worst possible version of this app. Do
-   not add free-text answering or fuzzy name matching.
+3. **No text input in the quiz. No keyboard for answering.** Every quiz answer
+   is a tap — option cards and chip selectors are the entire input vocabulary
+   there. This is deliberate: typing player names on a phone is the worst
+   possible version of this app. Do not add free-text answering or fuzzy name
+   matching to questions.
+
+   The one exception is the **team picker's search field** (filtering the
+   club/nation list as you type): narrowing a list is not answering a
+   question, and typing a few letters is the normal way to find one team
+   among ~20. Keep the exception scoped to that field — do not add free-text
+   input anywhere else in the app.
+
 4. **No auth, no accounts, no analytics SDKs, no network calls.** v0 is fully
    offline.
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
