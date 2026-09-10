@@ -143,21 +143,45 @@ Listing content: subtitle (30 chars), keywords (100 chars), description,
 promotional text, support URL, privacy URL, and 6.9" screenshots. No iPad
 screenshots, because `supportsTablet` is false.
 
-## Calendar
+## Schedule
 
-Day 0 is 2026-09-10.
+Day 0 is Thursday 2026-09-10. Estimate is days of **focused work**, excluding
+waiting. Priority: **P0** means on the critical path, so slipping it slips the
+launch; **P1** means required for launch but carrying slack.
 
-| When      | What                                                                        |
-| --------- | --------------------------------------------------------------------------- |
-| Day 0     | Apple Developer enrolment. Gates everything downstream, so it starts first. |
-| Day 0–3   | Repo work: build config, About screen, `season`, gh-pages, screenshots      |
-| ~Day 2    | Enrolment approved → reserve name, create app record                        |
-| ~Day 3    | First EAS production build → TestFlight → verify on a physical iPhone       |
-| ~Day 5    | Listing copy, privacy labels, age rating, submit                            |
-| ~Day 6–9  | Apple review (1–3 days typical; first submissions can run longer)           |
-| ~Day 9–12 | iOS live                                                                    |
+| Issue                              | Pri | Size | Est  | Start      | Target     |
+| ---------------------------------- | --- | ---- | ---- | ---------- | ---------- |
+| #24 Apple enrolment + reserve name | P0  | S    | 0.5  | Thu 10 Sep | Sat 12 Sep |
+| #25 app.json + eas.json + eas-cli  | P0  | S    | 0.5  | Thu 10 Sep | Fri 11 Sep |
+| #30 deregister 6 nations           | P1  | XS   | 0.25 | Thu 10 Sep | Thu 10 Sep |
+| #26 About screen + `season`        | P0  | M    | 1.5  | Fri 11 Sep | Sun 13 Sep |
+| #27 privacy + support on gh-pages  | P1  | S    | 0.5  | Fri 11 Sep | Sun 13 Sep |
+| #28 store screenshots              | P0  | M    | 1.0  | Mon 14 Sep | Tue 15 Sep |
+| #29 listing, submission, review    | P0  | M    | 1.0  | Tue 15 Sep | Tue 22 Sep |
 
-Milestone `First release` is due 2026-09-24, which carries real slack.
+Roughly 5.25 days of real work across 14 calendar days. The gap is waiting —
+Apple's enrolment approval and Apple's review queue — not effort.
+
+`#24` is P0 despite being among the smallest tasks: nothing in App Store Connect
+can start until it clears, and there is no lever to speed it up.
+
+`#26` and `#27` share a start date deliberately. The privacy wording is authored
+once and used in both, embedded in the About screen and published to Pages.
+Doing them apart is how the two copies diverge.
+
+`#28` cannot start before Sunday 13th, because screenshots must show the
+finished app and `#26` changes two of the screens captured.
+
+`#29` targets Tuesday 22nd rather than the 15th: one day of work, then three to
+four days in Apple's queue.
+
+Milestone `First release` is due 2026-09-24, leaving two days of slack. That is
+enough for a slow review. It is not enough for a rejection and resubmission.
+
+These five fields — priority, size, estimate, start date and target date — exist
+only as GitHub Projects v2 fields, which need the `project` auth scope
+(`gh auth refresh -s project`). Until that board exists, this table and the one
+in `#7` are the record.
 
 ## Risks
 
