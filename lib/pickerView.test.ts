@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { leagueFilters, teamProgress, visibleSquads } from './pickerView';
+import { leagueFilters, teamMetaLine, teamProgress, visibleSquads } from './pickerView';
 import type { League, SquadManifestEntry } from '@/types/squad';
 
 describe('teamProgress', () => {
@@ -47,6 +47,25 @@ describe('teamProgress', () => {
       total: 10,
       cleared: false,
     });
+  });
+});
+
+describe('teamMetaLine', () => {
+  it('shows only the season while progress is still hydrating', () => {
+    expect(teamMetaLine('2025/26', undefined)).toBe('2025/26');
+  });
+
+  it('shows the season plus NOT PLAYED for a team with no recorded progress', () => {
+    expect(teamMetaLine('2025/26', null)).toBe('2025/26 · NOT PLAYED');
+  });
+
+  it('shows the season plus level and best score for a played team', () => {
+    const progress = { level: 2, correct: 7, total: 10, cleared: false };
+    expect(teamMetaLine('2025/26', progress)).toBe('2025/26 · LEVEL 2 · BEST 7/10');
+  });
+
+  it('uses the nation-style season string unchanged', () => {
+    expect(teamMetaLine('2026', null)).toBe('2026 · NOT PLAYED');
   });
 });
 

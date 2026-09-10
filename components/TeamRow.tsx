@@ -2,7 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Flag } from './Flag';
 import { TeamMarker } from './TeamMarker';
 import type { FlagCode } from '@/assets/flags/generated';
-import type { TeamProgress } from '@/lib/pickerView';
+import { teamMetaLine, type TeamProgress } from '@/lib/pickerView';
 import type { TeamMarker as TeamMarkerData } from '@/types/squad';
 import { iconSize, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -10,6 +10,7 @@ import { useThemeColors } from '@/theme/useTheme';
 interface TeamRowProps {
   name: string;
   marker: TeamMarkerData;
+  season: string;
   /** A nation's flag image, which replaces the geometric marker for
    *  `kind: 'nation'` rows. Absent for clubs, which never get one — see
    *  CLAUDE.md hard constraint #2. Null means the nationality isn't in
@@ -31,7 +32,7 @@ interface TeamRowProps {
 // constraint. A nation's is its flag image instead; flags are that rule's
 // only carve-out, because it exists for trademark exposure and a flag
 // carries none.
-export function TeamRow({ name, marker, flag, progress, onPress }: TeamRowProps) {
+export function TeamRow({ name, marker, season, flag, progress, onPress }: TeamRowProps) {
   const colors = useThemeColors();
   const styles = StyleSheet.create({
     row: {
@@ -57,11 +58,7 @@ export function TeamRow({ name, marker, flag, progress, onPress }: TeamRowProps)
           {name}
         </Text>
         <Text style={[styles.meta, progress?.cleared === true && styles.metaCleared]}>
-          {progress === undefined
-            ? '—'
-            : progress === null
-              ? 'NOT PLAYED'
-              : `LEVEL ${progress.level} · BEST ${progress.correct}/${progress.total}`}
+          {teamMetaLine(season, progress)}
         </Text>
       </View>
       <Text style={styles.chevron}>›</Text>

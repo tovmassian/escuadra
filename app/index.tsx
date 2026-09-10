@@ -52,7 +52,8 @@ export default function Home() {
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.xl },
-    toggleRow: { alignItems: 'flex-end' },
+    toggleRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+    aboutLink: { ...typography.secondarySmall, color: colors.textMuted },
     brandBlock: { flex: 1, alignItems: 'center', justifyContent: 'center' },
     continueCard: {
       flexDirection: 'row',
@@ -90,6 +91,9 @@ export default function Home() {
       ]}
     >
       <View style={styles.toggleRow}>
+        <Pressable onPress={() => router.push('/about')} accessibilityRole="button" hitSlop={12}>
+          <Text style={styles.aboutLink}>About</Text>
+        </Pressable>
         <ThemeToggle />
       </View>
 

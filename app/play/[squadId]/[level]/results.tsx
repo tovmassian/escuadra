@@ -263,14 +263,14 @@ export default function Results() {
           </Animated.Text>
           <Animated.Text entering={riseIn(cascade.subtitle)} style={styles.verdict}>
             {tier === 'excellent'
-              ? `${squad.name}, level ${level}. Nothing missed.`
-              : verdictSentence(score.correct, score.attempted)}
+              ? `${squad.name} · ${squad.season}, level ${level}. Nothing missed.`
+              : `${squad.name} · ${squad.season}. ${verdictSentence(score.correct, score.attempted)}`}
           </Animated.Text>
         </View>
       ) : (
         <View style={styles.summary}>
           <Animated.Text entering={riseIn(cascade.title)} style={styles.eyebrow}>
-            {squad.name.toUpperCase()} · LEVEL {level} · ROUND COMPLETE
+            {squad.name.toUpperCase()} · {squad.season} · LEVEL {level} · ROUND COMPLETE
           </Animated.Text>
           <AnimatedScore
             correct={score.correct}
