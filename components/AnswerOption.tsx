@@ -14,14 +14,15 @@ import { VerdictGlyph } from './VerdictGlyph';
 import type { FlagCode } from '@/assets/flags/generated';
 import {
   borderWidths,
-  colors,
   durations,
   iconSize,
   opacity,
   radii,
   spacing,
   typography,
+  type Palette,
 } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 // Five states, not four — the design gives "you picked the right answer" and
 // "you picked wrong, here's what was right" visibly different weight (a
@@ -41,27 +42,28 @@ interface AnswerOptionProps {
   onPress: () => void;
 }
 
-const VERDICT_BG: Record<OptionVerdict, string> = {
+const verdictBg = (colors: Palette): Record<OptionVerdict, string> => ({
   idle: colors.surface,
   'correct-picked': colors.successBg,
   'correct-unpicked': colors.successBg,
   'incorrect-picked': colors.surface, // background fades to transparent via opacity below
   'incorrect-other': colors.surface,
-};
-const VERDICT_BORDER: Record<OptionVerdict, string> = {
+});
+const verdictBorder = (colors: Palette): Record<OptionVerdict, string> => ({
   idle: colors.border,
   'correct-picked': colors.success,
   'correct-unpicked': colors.success,
   'incorrect-picked': colors.errorBorderDim,
   'incorrect-other': colors.border,
-};
-const VERDICT_TEXT: Record<OptionVerdict, string> = {
+});
+const verdictText = (colors: Palette): Record<OptionVerdict, string> => ({
   idle: colors.textPrimary,
   'correct-picked': colors.success,
   'correct-unpicked': colors.success,
   'incorrect-picked': colors.errorTextDim,
   'incorrect-other': colors.textMuted,
-};
+});
+// Numbers only, so this one is theme-independent and stays at module scope.
 const VERDICT_OPACITY: Record<OptionVerdict, number> = {
   idle: 1,
   'correct-picked': 1,
@@ -71,6 +73,41 @@ const VERDICT_OPACITY: Record<OptionVerdict, number> = {
 };
 
 export function AnswerOption({ label, flag, verdict, disabled, onPress }: AnswerOptionProps) {
+  const colors = useThemeColors();
+  const VERDICT_BG = verdictBg(colors);
+  const VERDICT_BORDER = verdictBorder(colors);
+  const VERDICT_TEXT = verdictText(colors);
+  const styles = StyleSheet.create({
+    card: {
+      borderRadius: radii.lg,
+      paddingVertical: spacing.md - 2,
+      paddingHorizontal: spacing.md,
+    },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+    },
+    labelGroup: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs,
+      flex: 1,
+      minWidth: 0,
+    },
+    label: {
+      ...typography.body,
+    },
+    labelEmphasis: {
+      ...typography.bodyEmphasis,
+    },
+    correctCaption: {
+      ...typography.captionEyebrow,
+      color: colors.success,
+      marginTop: spacing.xxs - 1,
+    },
+  });
+
   const pressScale = useSharedValue(1);
   const revealProgress = useSharedValue(verdict === 'idle' ? 0 : 1);
   const popScale = useSharedValue(1);
@@ -177,34 +214,3 @@ export function AnswerOption({ label, flag, verdict, disabled, onPress }: Answer
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    borderRadius: radii.lg,
-    paddingVertical: spacing.md - 2,
-    paddingHorizontal: spacing.md,
-  },
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'space-between',
-  },
-  labelGroup: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    gap: spacing.xs,
-    flex: 1,
-    minWidth: 0,
-  },
-  label: {
-    ...typography.body,
-  },
-  labelEmphasis: {
-    ...typography.bodyEmphasis,
-  },
-  correctCaption: {
-    ...typography.captionEyebrow,
-    color: colors.success,
-    marginTop: spacing.xxs - 1,
-  },
-});

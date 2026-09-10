@@ -1,7 +1,6 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Skeleton } from './Skeleton';
 import {
-  colors,
   elevation,
   heroCardSize,
   heroNumberSize,
@@ -9,6 +8,7 @@ import {
   spacing,
   typography,
 } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 import type { Level } from '@/lib/questionEngine';
 
 interface HeroCardProps {
@@ -20,8 +20,30 @@ interface HeroCardProps {
 // Every level currently holds a shirt number; the square footprint this
 // reserves is deliberate — v1's photo drops in here without a redesign.
 export function HeroCard({ level, shirtNumber, loading }: HeroCardProps) {
+  const colors = useThemeColors();
   const size = heroCardSize[level];
   const numberSize = heroNumberSize[level];
+  const styles = StyleSheet.create({
+    card: {
+      borderRadius: radii.xl,
+      backgroundColor: colors.surface,
+      borderWidth: 1,
+      borderColor: colors.border,
+      alignItems: 'center',
+      justifyContent: 'center',
+      ...elevation.e1,
+    },
+    number: {
+      fontFamily: 'IBMPlexMono-Bold',
+      fontWeight: '700',
+      color: colors.textPrimary,
+    },
+    label: {
+      ...typography.captionEyebrow,
+      color: colors.textMuted,
+      marginTop: spacing.xs,
+    },
+  });
 
   return (
     <View style={[styles.card, { width: size, height: size }]}>
@@ -38,25 +60,3 @@ export function HeroCard({ level, shirtNumber, loading }: HeroCardProps) {
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  card: {
-    borderRadius: radii.xl,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    alignItems: 'center',
-    justifyContent: 'center',
-    ...elevation.e1,
-  },
-  number: {
-    fontFamily: 'IBMPlexMono-Bold',
-    fontWeight: '700',
-    color: colors.textPrimary,
-  },
-  label: {
-    ...typography.captionEyebrow,
-    color: colors.textMuted,
-    marginTop: spacing.xs,
-  },
-});
