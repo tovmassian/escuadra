@@ -106,10 +106,6 @@ export const palettes: Record<ThemeName, Palette> = {
   light: { ...sharedRoles, ...lightRoles },
 };
 
-// Temporary. Every consumer migrates to `useThemeColors()`; this alias only
-// keeps the tree compiling until they have, and is deleted once they are.
-export const colors = palettes.dark;
-
 // Gradient stops for the Escuadra mark and its icon plate. React Native
 // cannot paint a gradient from a plain View, so these are declarative data
 // consumed by <BrandGradient>, which wraps expo-linear-gradient.
