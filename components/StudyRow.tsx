@@ -1,7 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { Flag } from './Flag';
 import type { FlagCode } from '@/assets/flags/generated';
-import { colors, sizes, spacing, typography } from '@/theme/tokens';
+import { sizes, spacing, typography, type Palette } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 interface StudyRowProps {
   /** Null when Wikipedia hasn't assigned this player a shirt number yet. */
@@ -16,7 +17,48 @@ interface StudyRowProps {
   flag?: FlagCode | null;
 }
 
+// Two components in this file share one stylesheet, so it is a factory rather
+// than an inline block in either of them.
+const makeStyles = (colors: Palette) =>
+  StyleSheet.create({
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingVertical: spacing.sm - 1,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.surfaceRaised,
+    },
+    number: { ...typography.statMonoSmall, color: colors.textMuted },
+    name: { flex: 1, ...typography.tableName, color: colors.textPrimary, marginLeft: spacing.sm },
+    position: { ...typography.tableCell, color: colors.textSecondary, textAlign: 'center' },
+    // Flag last, not first, so every flag lands on the same right edge and the
+    // column reads as one aligned strip — a leading flag shifts with the length
+    // of the name beside it.
+    affiliationCell: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'flex-end',
+      gap: spacing.xs,
+    },
+    affiliation: {
+      ...typography.tableCell,
+      color: colors.textMuted,
+      textAlign: 'right',
+      flexShrink: 1,
+    },
+    headerRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      paddingBottom: spacing.xs,
+      borderBottomWidth: 1,
+      borderBottomColor: colors.border,
+    },
+    headerLabel: { ...typography.tableHeader, color: colors.textMuted },
+    headerName: { flex: 1, marginLeft: spacing.sm },
+  });
+
 export function StudyRow({ number, name, position, affiliation, flag }: StudyRowProps) {
+  const styles = makeStyles(useThemeColors());
   return (
     <View style={styles.row}>
       <Text style={[styles.number, { width: sizes.studyColumn.no }]}>{number ?? '—'}</Text>
@@ -35,6 +77,7 @@ export function StudyRow({ number, name, position, affiliation, flag }: StudyRow
 }
 
 export function StudyHeaderRow({ affiliationLabel }: { affiliationLabel: 'NAT' | 'CLUB' }) {
+  const styles = makeStyles(useThemeColors());
   return (
     <View style={styles.headerRow}>
       <Text style={[styles.headerLabel, { width: sizes.studyColumn.no }]}>#</Text>
@@ -52,40 +95,3 @@ export function StudyHeaderRow({ affiliationLabel }: { affiliationLabel: 'NAT' |
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  row: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingVertical: spacing.sm - 1,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.surfaceRaised,
-  },
-  number: { ...typography.statMonoSmall, color: colors.textMuted },
-  name: { flex: 1, ...typography.tableName, color: colors.textPrimary, marginLeft: spacing.sm },
-  position: { ...typography.tableCell, color: colors.textSecondary, textAlign: 'center' },
-  // Flag last, not first, so every flag lands on the same right edge and the
-  // column reads as one aligned strip — a leading flag shifts with the length
-  // of the name beside it.
-  affiliationCell: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'flex-end',
-    gap: spacing.xs,
-  },
-  affiliation: {
-    ...typography.tableCell,
-    color: colors.textMuted,
-    textAlign: 'right',
-    flexShrink: 1,
-  },
-  headerRow: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingBottom: spacing.xs,
-    borderBottomWidth: 1,
-    borderBottomColor: colors.border,
-  },
-  headerLabel: { ...typography.tableHeader, color: colors.textMuted },
-  headerName: { flex: 1, marginLeft: spacing.sm },
-});
