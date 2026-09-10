@@ -46,9 +46,9 @@ export type LeagueFilter = 'ALL' | League;
 
 export const LEAGUE_LABELS: Record<LeagueFilter, string> = {
   ALL: 'ALL',
-  'premier-league': 'Premier League',
   'la-liga': 'La Liga',
   'serie-a': 'Serie A',
+  'premier-league': 'Premier League',
   bundesliga: 'Bundesliga',
   'ligue-1': 'Ligue 1',
   ucl: 'UCL',
