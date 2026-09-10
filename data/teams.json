@@ -1653,20 +1653,6 @@
     }
   },
   {
-    "id": "cro",
-    "kind": "nation",
-    "name": "Croatia",
-    "source": "https://en.wikipedia.org/wiki/Croatia_national_football_team",
-    "identity": {
-      "primaryColor": "#FF0000",
-      "secondaryColor": "#171796",
-      "marker": {
-        "bands": ["#FF0000", "#FFFFFF", "#171796"],
-        "orientation": "horizontal"
-      }
-    }
-  },
-  {
     "id": "sui",
     "kind": "nation",
     "name": "Switzerland",
@@ -1733,20 +1719,6 @@
       "marker": {
         "bands": ["#EF2B2D", "#FFFFFF"],
         "orientation": "vertical"
-      }
-    }
-  },
-  {
-    "id": "uru",
-    "kind": "nation",
-    "name": "Uruguay",
-    "source": "https://en.wikipedia.org/wiki/Uruguay_national_football_team",
-    "identity": {
-      "primaryColor": "#FFFFFF",
-      "secondaryColor": "#0038A8",
-      "marker": {
-        "bands": ["#FFFFFF", "#0038A8"],
-        "orientation": "horizontal"
       }
     }
   },
@@ -1965,20 +1937,6 @@
     }
   },
   {
-    "id": "rus",
-    "kind": "nation",
-    "name": "Russia",
-    "source": "https://en.wikipedia.org/wiki/Russia_national_football_team",
-    "identity": {
-      "primaryColor": "#0039A6",
-      "secondaryColor": "#D52B1E",
-      "marker": {
-        "bands": ["#FFFFFF", "#0039A6", "#D52B1E"],
-        "orientation": "horizontal"
-      }
-    }
-  },
-  {
     "id": "pol",
     "kind": "nation",
     "name": "Poland",
@@ -2021,20 +1979,6 @@
           "shape": "disc",
           "color": "#C8102E"
         }
-      }
-    }
-  },
-  {
-    "id": "hun",
-    "kind": "nation",
-    "name": "Hungary",
-    "source": "https://en.wikipedia.org/wiki/Hungary_national_football_team",
-    "identity": {
-      "primaryColor": "#CE2939",
-      "secondaryColor": "#477050",
-      "marker": {
-        "bands": ["#CE2939", "#FFFFFF", "#477050"],
-        "orientation": "horizontal"
       }
     }
   },
@@ -2085,20 +2029,6 @@
     }
   },
   {
-    "id": "cmr",
-    "kind": "nation",
-    "name": "Cameroon",
-    "source": "https://en.wikipedia.org/wiki/Cameroon_national_football_team",
-    "identity": {
-      "primaryColor": "#007A5E",
-      "secondaryColor": "#CE1126",
-      "marker": {
-        "bands": ["#007A5E", "#CE1126", "#FCD116"],
-        "orientation": "vertical"
-      }
-    }
-  },
-  {
     "id": "pan",
     "kind": "nation",
     "name": "Panama",
@@ -2136,20 +2066,6 @@
       "secondaryColor": "#FFFFFF",
       "marker": {
         "bands": ["#0D5EAF", "#FFFFFF"],
-        "orientation": "horizontal"
-      }
-    }
-  },
-  {
-    "id": "ven",
-    "kind": "nation",
-    "name": "Venezuela",
-    "source": "https://en.wikipedia.org/wiki/Venezuela_national_football_team",
-    "identity": {
-      "primaryColor": "#FFCC00",
-      "secondaryColor": "#CF142B",
-      "marker": {
-        "bands": ["#FFCC00", "#00247D", "#CF142B"],
         "orientation": "horizontal"
       }
     }
