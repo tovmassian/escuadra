@@ -237,6 +237,7 @@ export const durations = {
   popSettle: 120,
   transition: 150,
   collapse: 200,
+  toggle: 160,
   skeleton: 900,
 } as const;
 
@@ -442,6 +443,22 @@ export const sizes = {
   // height.
   rowHeightTall: 64,
   missedNumberWidth: 24,
+  // The theme toggle. `inset` is the gap between track edge and thumb, so the
+  // thumb's travel is trackWidth - thumb - inset * 2.
+  themeToggle: { trackWidth: 52, trackHeight: 30, thumb: 24, inset: 2 },
+  // The toggle's glyphs. The moon is a disc with an offset disc punched out
+  // of it in the thumb's own colour — `moonCutoutTop`/`moonCutoutLeft` place
+  // that punch-out, and are what give the crescent its lean. The sun is a
+  // core disc with four rays at `sunRayOffset` from centre.
+  themeToggleGlyph: {
+    moon: 13,
+    moonCutout: 11,
+    moonCutoutTop: -3,
+    moonCutoutLeft: 3,
+    sunCore: 10,
+    sunRay: 3,
+    sunRayOffset: 6,
+  },
 } as const;
 
 export const iconSize = {
