@@ -1,21 +1,29 @@
-// Captures every Escuadra screen from the web build into design/screens/, for
-// the Claude Design handoff. See design/SCREENS.md for what each file shows.
+// Captures every Escuadra screen from the web build. Default (`npm run
+// shots`) writes design/screens/, for the Claude Design handoff. `--profile=
+// store` (`npm run shots:store`) instead writes design/store/ at Apple's
+// 6.9" App Store dimensions — see scripts/screenshot-profiles.ts for both
+// profiles' exact viewport/scale/output facts. See design/SCREENS.md for
+// what each captured file shows.
 //
 // These are web-rendered, not device truth: safe-area insets are zero on web,
 // so padding reads differently than on an iPhone. Good enough for structure
 // and hierarchy, not for exact spacing.
 //
 // Every capture is deterministic on purpose — fixed seeds, fixed answers, a
-// fixed viewport — so a re-run only moves a PNG when the app actually changed
-// and design can diff a capture against the previous turn's.
+// fixed viewport per profile — so a re-run only moves a PNG when the app
+// actually changed and design can diff a capture against the previous turn's.
 import { spawn, spawnSync } from 'node:child_process';
-import { mkdir } from 'node:fs/promises';
+import { mkdir, readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
+import {
+  assertProfileDimensions,
+  readPngDimensions,
+  resolveProfile,
+} from './screenshot-profiles.ts';
 
 const PORT = 8082;
 const BASE = `http://localhost:${PORT}`;
-const OUT = 'design/screens';
-const VIEWPORT = { width: 390, height: 844 }; // iPhone 14 logical size
+const PROFILE = resolveProfile(process.argv.slice(2));
 
 // Fixed so a round is reproducible and design can diff turn against turn.
 const SEED = 20260821;
@@ -84,7 +92,11 @@ function killServerTree(server) {
  * threading the same arguments through every call.
  */
 async function openCapture(browser, { colorScheme, suffix }) {
-  const page = await browser.newPage({ viewport: VIEWPORT, deviceScaleFactor: 2, colorScheme });
+  const page = await browser.newPage({
+    viewport: PROFILE.viewport,
+    deviceScaleFactor: PROFILE.deviceScaleFactor,
+    colorScheme,
+  });
 
   // Recorded here, not thrown here: a throw inside a Playwright event handler
   // doesn't propagate through the caller's try/finally, so it would either
@@ -142,7 +154,11 @@ async function openCapture(browser, { colorScheme, suffix }) {
 
     async shoot(base) {
       capture.assertLive();
-      await page.screenshot({ path: `${OUT}/${capture.file(base)}` });
+      const filePath = `${PROFILE.outDir}/${capture.file(base)}`;
+      await page.screenshot({ path: filePath });
+      if (PROFILE.expectedDimensions) {
+        assertProfileDimensions(PROFILE, readPngDimensions(await readFile(filePath)), filePath);
+      }
       console.log(`captured ${capture.file(base)}`);
     },
 
@@ -338,7 +354,7 @@ const server = spawn('npx', ['expo', 'start', '--web', '--port', String(PORT)], 
 
 let browser;
 try {
-  await mkdir(OUT, { recursive: true });
+  await mkdir(PROFILE.outDir, { recursive: true });
   await waitForServer();
 
   browser = await chromium.launch();

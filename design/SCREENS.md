@@ -27,6 +27,14 @@ Good enough to judge structure and hierarchy. **Not** good enough to judge
 exact spacing from. Whether this fidelity is sufficient is an open assumption
 being tested on this iteration.
 
+A sibling `store/` profile captures the same screens at 1320×2868, Apple's
+6.9" App Store listing size, via `npm run shots:store`. It is gitignored
+rather than committed — it isn't part of this handoff surface, just a
+release artefact regenerated on demand — but the same web-rendered, not
+device truth caveat above applies to it too, arguably more: a store listing
+represents the real app to a prospective player more directly than a design
+handoff does.
+
 ## Invariants
 
 **Anything not on this list is open for redesign. Everything on it must
