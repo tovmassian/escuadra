@@ -49,6 +49,13 @@ Ask the user:
 > **Description:** [await input]
 > **Issue type:** Bug / Feature / Refactor / Doc / Data
 
+**Title follows conventional-commit style**, matching the prefixes already used in
+this repo's git history (`feat:`, `fix:`, `docs:`, `data:`, ...). Prefix the title
+with the type mapped from the chosen issue type — see the canonical mapping in
+[Quick Reference](#quick-reference) — e.g. issue type "Bug" + title "AsyncStorage
+loses scores on force-close" becomes `fix: AsyncStorage loses scores on
+force-close`. Don't double up if the user already typed a prefix themselves.
+
 ### 2. Discover Available Options (Silent)
 
 Before prompting for metadata, enumerate what exists:
@@ -108,7 +115,8 @@ For each field, prompt with context:
 Automatically apply based on issue type — see the canonical mapping in
 [Quick Reference](#quick-reference). If the mapped label doesn't exist yet
 (check against the discovered label list from step 2), offer to create it
-rather than silently applying nothing.
+rather than silently applying nothing. The same mapping also supplies the
+title's conventional-commit prefix (step 1).
 
 Show which labels will be applied, confirm.
 
@@ -117,7 +125,7 @@ Show which labels will be applied, confirm.
 Show the issue template before creation:
 
 ```
-Title: [title]
+Title: [prefix][title]
 Description: [description]
 
 Metadata:
@@ -180,16 +188,17 @@ EOF
 
 ## Common mistakes
 
-| Mistake                                         | Fix                                                                                |
-| ----------------------------------------------- | ----------------------------------------------------------------------------------- |
-| Use `gh milestone list` command (doesn't exist) | Use `gh api repos/tovmassian/escuadra/milestones` instead                           |
-| Pass `-R` to `gh api`                           | `gh api` has no `-R` flag — the repo is already fully qualified in the path         |
-| Assume projects are always available            | Check auth scope; `gh auth refresh -s project` if missing                           |
-| Ask for size label when none exist              | Check available labels first; offer to create them or skip size field               |
-| Apply wrong label for issue type                | Use the canonical mapping in [Quick Reference](#quick-reference), not a restated one |
-| Silent assignee default to current user         | Always ask, but default to repo owner (@tovmassian) unless overridden               |
-| Forget to confirm before creating               | Show full issue template + metadata, ask "Create?" before `gh issue create`         |
-| Silently fail when projects unavailable         | Report clearly: "Projects require auth scope 'project'. Skipping project assignment." |
+| Mistake                                          | Fix                                                                                                |
+| ------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
+| Use `gh milestone list` command (doesn't exist)  | Use `gh api repos/tovmassian/escuadra/milestones` instead                                          |
+| Pass `-R` to `gh api`                            | `gh api` has no `-R` flag — the repo is already fully qualified in the path                        |
+| Assume projects are always available             | Check auth scope; `gh auth refresh -s project` if missing                                          |
+| Ask for size label when none exist               | Check available labels first; offer to create them or skip size field                              |
+| Apply wrong label for issue type                 | Use the canonical mapping in [Quick Reference](#quick-reference), not a restated one               |
+| Leave title without a conventional-commit prefix | Prefix with the type's mapping (`fix:`, `feat:`, `docs:`, ...); skip if the user already typed one |
+| Silent assignee default to current user          | Always ask, but default to repo owner (@tovmassian) unless overridden                              |
+| Forget to confirm before creating                | Show full issue template + metadata, ask "Create?" before `gh issue create`                        |
+| Silently fail when projects unavailable          | Report clearly: "Projects require auth scope 'project'. Skipping project assignment."              |
 
 ## Quick reference
 
@@ -200,15 +209,17 @@ EOF
 - Milestone: Highest-priority open milestone
 - Size: Ask (no sensible default)
 - Labels: Type-based (bug/feature/refactor/doc/data)
+- Title prefix: Type-based, conventional-commit style (`fix:`/`feat:`/`refactor:`/`docs:`/`data:`)
 
-**Labels to apply by type (canonical mapping — verified against current repo labels):**
+**Type → label / title-prefix mapping (canonical — verified against current repo
+labels and commit history):**
 
 ```
-bug        → bug
-feature    → enhancement
-refactor   → investigation   (no dedicated "refactor" label exists; reuses "investigation")
-doc        → documentation
-data       → data (doesn't exist yet; offer to create it)
+bug        → label: bug            → title prefix: fix:
+feature    → label: enhancement    → title prefix: feat:
+refactor   → label: investigation  → title prefix: refactor:   (no dedicated "refactor" label exists; reuses "investigation")
+doc        → label: documentation  → title prefix: docs:
+data       → label: data           → title prefix: data:       (label doesn't exist yet; offer to create it)
 ```
 
 **Size scale (if using labels):**
@@ -235,7 +246,7 @@ User: Create an issue for the offline persistence bug
 1. **Gather context:**
 
    ```
-   Issue title: Fix AsyncStorage persistence on app close
+   Issue title: AsyncStorage persistence lost on app close
    Description: Best scores not saved when app is force-closed
    Issue type: bug
    ```
@@ -262,12 +273,14 @@ User: Create an issue for the offline persistence bug
    Size: [ask] Medium (1-2 hours debugging/fixing AsyncStorage)
 
    Labels: [auto] bug (type-based)
+
+   Title prefix: [auto] fix: (type-based)
    ```
 
 4. **Confirm:**
 
    ```
-   Title: Fix AsyncStorage persistence on app close
+   Title: fix: AsyncStorage persistence lost on app close
    Description: Best scores not saved when app is force-closed
 
    Metadata:
