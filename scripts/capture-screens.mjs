@@ -2,15 +2,16 @@
 // shots`) writes design/screens/, for the Claude Design handoff. `--profile=
 // store` (`npm run shots:store`) instead writes design/store/ at Apple's
 // 6.9" App Store dimensions — see scripts/screenshot-profiles.ts for both
-// profiles' exact viewport/scale/output facts.
+// profiles' exact viewport/scale/output facts. See design/SCREENS.md for
+// what each captured file shows.
 //
 // These are web-rendered, not device truth: safe-area insets are zero on web,
 // so padding reads differently than on an iPhone. Good enough for structure
 // and hierarchy, not for exact spacing.
 //
 // Every capture is deterministic on purpose — fixed seeds, fixed answers, a
-// fixed viewport — so a re-run only moves a PNG when the app actually changed
-// and design can diff a capture against the previous turn's.
+// fixed viewport per profile — so a re-run only moves a PNG when the app
+// actually changed and design can diff a capture against the previous turn's.
 import { spawn, spawnSync } from 'node:child_process';
 import { mkdir, readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';

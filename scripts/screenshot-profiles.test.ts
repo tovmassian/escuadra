@@ -27,6 +27,14 @@ describe('resolveProfile', () => {
   it('ignores unrelated argv entries', () => {
     expect(resolveProfile(['--headless', '--profile=store', '--foo=bar'])).toBe(PROFILES.store);
   });
+
+  it('does not resolve a prototype-chain property name to an inherited value', () => {
+    expect(() => resolveProfile(['--profile=constructor'])).toThrow(/unknown --profile/);
+  });
+
+  it('throws on a bare --profile token instead of silently defaulting to design', () => {
+    expect(() => resolveProfile(['--profile', 'store'])).toThrow(/--profile=<name>/);
+  });
 });
 
 describe('PROFILES', () => {
@@ -45,6 +53,15 @@ describe('PROFILES', () => {
     expect(PROFILES.design.viewport).toEqual({ width: 390, height: 844 });
     expect(PROFILES.design.deviceScaleFactor).toBe(2);
     expect(PROFILES.design.outDir).toBe('design/screens');
+  });
+
+  it('every constrained profile has a viewport×scale that actually produces its expectedDimensions', () => {
+    for (const profile of Object.values(PROFILES)) {
+      const expected = profile.expectedDimensions;
+      if (!expected) continue;
+      expect(profile.viewport.width * profile.deviceScaleFactor).toBe(expected.width);
+      expect(profile.viewport.height * profile.deviceScaleFactor).toBe(expected.height);
+    }
   });
 });
 

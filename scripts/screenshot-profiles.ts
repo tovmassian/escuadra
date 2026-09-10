@@ -33,15 +33,22 @@ const DEFAULT_PROFILE = 'design';
 
 /** Reads `--profile=<name>` out of argv (default: design). Throws on an unrecognised name. */
 export function resolveProfile(argv: readonly string[]): Profile {
+  if (argv.includes('--profile')) {
+    throw new Error(
+      'unknown --profile flag: pass it as --profile=<name> (a single token), not a space-separated pair',
+    );
+  }
   const flag = argv.find((arg) => arg.startsWith('--profile='));
   const name = flag ? flag.slice('--profile='.length) : DEFAULT_PROFILE;
-  const profile = (PROFILES as Record<string, Profile | undefined>)[name];
-  if (!profile) {
+  if (!Object.hasOwn(PROFILES, name)) {
     throw new Error(
       `unknown --profile "${name}" — known profiles: ${Object.keys(PROFILES).join(', ')}`,
     );
   }
-  return profile;
+  // Object.hasOwn just proved `name` is one of PROFILES' own keys, so this
+  // indexes by the closed key union rather than a generic string index
+  // signature — no need to cast past noUncheckedIndexedAccess.
+  return PROFILES[name as keyof typeof PROFILES];
 }
 
 const PNG_SIGNATURE = Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]);

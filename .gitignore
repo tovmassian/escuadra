@@ -9,6 +9,10 @@ dist/
 web-build/
 expo-env.d.ts
 
+# App Store screenshot profile output — regenerable release-candidate PNGs,
+# unlike the committed design/screens/ handoff set. See `npm run shots:store`.
+design/store/
+
 # Native
 .kotlin/
 *.orig.*

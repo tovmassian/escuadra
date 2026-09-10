@@ -300,6 +300,7 @@ npm run typecheck
 npm run lint
 npm run check         # run before reporting any work complete
 npm run shots          # capture design/screens/ from the running web build
+npm run shots:store    # capture the 1320×2868 App Store profile to design/store/
 ```
 
 `design/` is the handoff surface pushed to the Claude Design project.
@@ -308,6 +309,9 @@ npm run shots          # capture design/screens/ from the running web build
 identity so they cannot quietly drift into a duplicate. `design/screens/`
 holds PNGs captured by `npm run shots`; after any change to a screen,
 regenerate them, or the design side is working from a stale picture.
+`design/store/` is the same screens at App Store listing dimensions — it is
+gitignored, not part of the `design/screens/` handoff surface, and is
+regenerated via `npm run shots:store` only when needed for a store listing.
 
 ## Working conventions
 
