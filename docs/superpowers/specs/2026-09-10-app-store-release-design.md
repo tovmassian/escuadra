@@ -145,22 +145,30 @@ screenshots, because `supportsTablet` is false.
 
 ## Schedule
 
-Day 0 is Thursday 2026-09-10. Estimate is days of **focused work**, excluding
-waiting. Priority: **P0** means on the critical path, so slipping it slips the
-launch; **P1** means required for launch but carrying slack.
+Day 0 is Thursday 2026-09-10.
 
-| Issue                              | Pri | Size | Est  | Start      | Target     |
-| ---------------------------------- | --- | ---- | ---- | ---------- | ---------- |
-| #24 Apple enrolment + reserve name | P0  | S    | 0.5  | Thu 10 Sep | Sat 12 Sep |
-| #25 app.json + eas.json + eas-cli  | P0  | S    | 0.5  | Thu 10 Sep | Fri 11 Sep |
-| #30 deregister 6 nations           | P1  | XS   | 0.25 | Thu 10 Sep | Thu 10 Sep |
-| #26 About screen + `season`        | P0  | M    | 1.5  | Fri 11 Sep | Sun 13 Sep |
-| #27 privacy + support on gh-pages  | P1  | S    | 0.5  | Fri 11 Sep | Sun 13 Sep |
-| #28 store screenshots              | P0  | M    | 1.0  | Mon 14 Sep | Tue 15 Sep |
-| #29 listing, submission, review    | P0  | M    | 1.0  | Tue 15 Sep | Tue 22 Sep |
+Priority: **P0** means on the critical path, so slipping it slips the launch;
+**P1** means required for launch but carrying slack.
 
-Roughly 5.25 days of real work across 14 calendar days. The gap is waiting —
-Apple's enrolment approval and Apple's review queue — not effort.
+Estimate is **story points**, matching the scale already in use on the board —
+`#10` was M at 5 points and `#9` was L at 8, which fixes the ladder as
+`XS=1 · S=3 · M=5 · L=8 · XL=13`. The epic `#7` deliberately carries no points
+of its own; its children hold them, so that a summed Estimate column does not
+double-count the release.
+
+| Issue                              | Pri | Size | Pts | Start      | Target     |
+| ---------------------------------- | --- | ---- | --- | ---------- | ---------- |
+| #24 Apple enrolment + reserve name | P0  | S    | 3   | Thu 10 Sep | Sat 12 Sep |
+| #25 app.json + eas.json + eas-cli  | P0  | S    | 3   | Thu 10 Sep | Fri 11 Sep |
+| #30 deregister 6 nations           | P1  | XS   | 1   | Thu 10 Sep | Thu 10 Sep |
+| #26 About screen + `season`        | P0  | M    | 5   | Fri 11 Sep | Sun 13 Sep |
+| #27 privacy + support on gh-pages  | P1  | S    | 3   | Fri 11 Sep | Sun 13 Sep |
+| #28 store screenshots              | P0  | M    | 5   | Mon 14 Sep | Tue 15 Sep |
+| #29 listing, submission, review    | P0  | M    | 5   | Tue 15 Sep | Tue 22 Sep |
+
+Twenty-five points in total. In wall-clock terms that is roughly five and a
+quarter days of real work spread across fourteen calendar days. The gap is
+waiting — Apple's enrolment approval and Apple's review queue — not effort.
 
 `#24` is P0 despite being among the smallest tasks: nothing in App Store Connect
 can start until it clears, and there is no lever to speed it up.
