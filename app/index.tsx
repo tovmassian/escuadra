@@ -1,12 +1,25 @@
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import Animated, { Easing, FadeInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
 import { Wordmark } from '@/components/Wordmark';
 import { getRoster, getSquad } from '@/lib/squads';
 import { scoreKey, useProgress, useProgressHydrated } from '@/stores/progress';
 import { useSession } from '@/stores/session';
-import { colors, iconSize, radii, sizes, spacing, typography } from '@/theme/tokens';
+import {
+  celebrationEasingCurves,
+  celebrationRiseDuration,
+  colors,
+  homeCascade,
+  iconSize,
+  radii,
+  sizes,
+  spacing,
+  typography,
+} from '@/theme/tokens';
+
+const riseEasing = Easing.bezier(...celebrationEasingCurves.rise);
 
 export default function Home() {
   const insets = useSafeAreaInsets();
@@ -43,44 +56,62 @@ export default function Home() {
       ]}
     >
       <View style={styles.brandBlock}>
-        <Wordmark size={sizes.wordmarkMarkHero} showTrail stacked />
+        <Wordmark size={sizes.wordmarkMarkHero} stacked animate />
       </View>
 
       {continueSquad && lastPlayed && (
-        <Pressable
-          onPress={() =>
-            router.push({
-              pathname: '/team/[squadId]/difficulty',
-              params: { squadId: continueSquad.id },
-            })
-          }
-          style={styles.continueCard}
-          accessibilityRole="button"
+        <Animated.View
+          entering={FadeInUp.duration(celebrationRiseDuration)
+            .delay(homeCascade.continueCardDelay)
+            .easing(riseEasing)}
         >
-          <View
-            style={[
-              styles.dot,
-              { backgroundColor: continueSquad.primaryColor ?? colors.textMuted },
-            ]}
-          />
-          <View style={styles.continueText}>
-            <Text style={styles.continueName}>{continueSquad.name}</Text>
-            <Text style={styles.continueMeta}>
-              LEVEL {lastPlayed.level}
-              {continueBest !== undefined ? ` · BEST ${continueBest}/10` : ''}
-            </Text>
-          </View>
-          <Text style={styles.chevron}>›</Text>
-        </Pressable>
+          <Pressable
+            onPress={() =>
+              router.push({
+                pathname: '/team/[squadId]/difficulty',
+                params: { squadId: continueSquad.id },
+              })
+            }
+            style={styles.continueCard}
+            accessibilityRole="button"
+          >
+            <View
+              style={[
+                styles.dot,
+                { backgroundColor: continueSquad.primaryColor ?? colors.textMuted },
+              ]}
+            />
+            <View style={styles.continueText}>
+              <Text style={styles.continueName}>{continueSquad.name}</Text>
+              <Text style={styles.continueMeta}>
+                LEVEL {lastPlayed.level}
+                {continueBest !== undefined ? ` · BEST ${continueBest}/10` : ''}
+              </Text>
+            </View>
+            <Text style={styles.chevron}>›</Text>
+          </Pressable>
+        </Animated.View>
       )}
 
       <View style={styles.actions}>
-        <Button label="Start Training" variant="filled" large onPress={startTraining} />
-        <Button
-          label="Browse All Teams"
-          variant="text"
-          onPress={() => router.push('/team-picker')}
-        />
+        <Animated.View
+          entering={FadeInUp.duration(celebrationRiseDuration)
+            .delay(homeCascade.actionsBase)
+            .easing(riseEasing)}
+        >
+          <Button label="Start Training" variant="filled" large onPress={startTraining} />
+        </Animated.View>
+        <Animated.View
+          entering={FadeInUp.duration(celebrationRiseDuration)
+            .delay(homeCascade.actionsBase + homeCascade.actionsStep)
+            .easing(riseEasing)}
+        >
+          <Button
+            label="Browse All Teams"
+            variant="text"
+            onPress={() => router.push('/team-picker')}
+          />
+        </Animated.View>
       </View>
     </View>
   );

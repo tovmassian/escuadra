@@ -1,9 +1,20 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { FlatList, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import { useEffect, useState } from 'react';
+import { FlatList, StyleSheet, Text, View, type StyleProp, type TextStyle } from 'react-native';
+import Animated, {
+  Easing,
+  FadeInUp,
+  runOnJS,
+  useAnimatedReaction,
+  useAnimatedStyle,
+  useSharedValue,
+  withDelay,
+  withSequence,
+  withTiming,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
-import { EscuadraMark } from '@/components/EscuadraMark';
+import { EscuadraStrike } from '@/components/EscuadraStrike';
 import type { Level } from '@/lib/questionEngine';
 import { actionOrder, resultTier, type ActionId } from '@/lib/resultsView';
 import { PASS_RATIO } from '@/lib/scoring';
@@ -15,7 +26,86 @@ import {
   useSession,
   type QuestionResult,
 } from '@/stores/session';
-import { colors, durations, radii, sizes, spacing, typography } from '@/theme/tokens';
+import {
+  celebrationCascade,
+  celebrationEasingCurves,
+  celebrationRiseDuration,
+  colors,
+  MOTION_DISTANCE_SCALE,
+  radii,
+  sizes,
+  spacing,
+  strikeTiming,
+  typography,
+  type CelebrationCascade,
+} from '@/theme/tokens';
+
+const riseEasing = Easing.bezier(...celebrationEasingCurves.rise);
+// Exaggerates the score's pop-in bounce by the same knob EscuadraStrike
+// uses for the mark — 1 in the shipped build, a no-op until that's turned up.
+const POP_START_SCALE = 1 - 0.18 * MOTION_DISTANCE_SCALE;
+const POP_OVERSHOOT_SCALE = 1 + 0.05 * MOTION_DISTANCE_SCALE;
+
+// Bridges a Reanimated shared value's count-up to React state so a plain
+// <Text> can render it — no react-native-redash on this project, so this is
+// the pragmatic stand-in for the design source's `ReText`/AnimatedProps
+// approach: cheap here since it only fires once per integer step (0..10).
+function AnimatedScore({
+  correct,
+  total,
+  cascade,
+  style,
+}: {
+  correct: number;
+  total: number;
+  cascade: CelebrationCascade['score'];
+  style: StyleProp<TextStyle>;
+}) {
+  const [display, setDisplay] = useState(0);
+  const n = useSharedValue(0);
+  const scale = useSharedValue(cascade.pop ? POP_START_SCALE : 1);
+  const opacity = useSharedValue(cascade.pop ? 0 : 1);
+
+  useEffect(() => {
+    n.value = withDelay(
+      cascade.delay,
+      withTiming(correct, { duration: cascade.duration, easing: Easing.out(Easing.cubic) }),
+    );
+    if (cascade.pop) {
+      const popDuration = celebrationRiseDuration + 40; // matches the design's esc-pop, ~260ms
+      opacity.value = withDelay(
+        cascade.delay,
+        withTiming(1, { duration: Math.round(popDuration * 0.4) }),
+      );
+      scale.value = withDelay(
+        cascade.delay,
+        withSequence(
+          withTiming(POP_OVERSHOOT_SCALE, { duration: Math.round(popDuration * 0.62) }),
+          withTiming(1, { duration: Math.round(popDuration * 0.38) }),
+        ),
+      );
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  useAnimatedReaction(
+    () => Math.round(n.value),
+    (value, previous) => {
+      if (value !== previous) runOnJS(setDisplay)(value);
+    },
+  );
+
+  const animatedStyle = useAnimatedStyle(() => ({
+    opacity: opacity.value,
+    transform: [{ scale: scale.value }],
+  }));
+
+  return (
+    <Animated.Text style={[style, animatedStyle]}>
+      {display}/{total}
+    </Animated.Text>
+  );
+}
 
 const MAX_LEVEL: Level = 3;
 
@@ -88,6 +178,10 @@ export default function Results() {
     chooseTeam: 'Choose Different Team',
   };
 
+  const cascade = celebrationCascade[tier];
+  const riseIn = (delay: number) =>
+    FadeInUp.duration(celebrationRiseDuration).delay(delay).easing(riseEasing);
+
   return (
     <View
       style={[
@@ -96,67 +190,86 @@ export default function Results() {
       ]}
     >
       {tier !== 'fail' ? (
-        <Animated.View
-          entering={FadeIn.duration(durations.pop + durations.popSettle)}
-          style={[styles.success, tier === 'excellent' && styles.successExcellent]}
-        >
-          <EscuadraMark
+        <View style={[styles.success, tier === 'excellent' && styles.successExcellent]}>
+          <EscuadraStrike
             size={sizes.celebrationMark}
             color={tier === 'excellent' ? colors.success : colors.accent}
             ballColor={colors.success}
-            showTrail
+            timing={tier === 'excellent' ? strikeTiming.excellent : strikeTiming.passed}
           />
-          <Text style={[styles.successScore, tier === 'excellent' && styles.successScoreExcellent]}>
-            {score.correct}/{score.attempted}
-          </Text>
-          <Text style={[styles.successTitle, tier === 'excellent' && styles.successTitleExcellent]}>
+          <AnimatedScore
+            correct={score.correct}
+            total={score.attempted}
+            cascade={cascade.score}
+            style={[styles.successScore, tier === 'excellent' && styles.successScoreExcellent]}
+          />
+          <Animated.Text
+            entering={riseIn(cascade.title)}
+            style={[styles.successTitle, tier === 'excellent' && styles.successTitleExcellent]}
+          >
             {tier === 'excellent' ? 'a la escuadra' : `Level ${level} cleared`}
-          </Text>
-          <Text style={styles.verdict}>
+          </Animated.Text>
+          <Animated.Text entering={riseIn(cascade.subtitle)} style={styles.verdict}>
             {tier === 'excellent'
               ? `${squad.name}, level ${level}. Nothing missed.`
               : verdictSentence(score.correct, score.attempted)}
-          </Text>
-        </Animated.View>
+          </Animated.Text>
+        </View>
       ) : (
         <View style={styles.summary}>
-          <Text style={styles.eyebrow}>
+          <Animated.Text entering={riseIn(cascade.title)} style={styles.eyebrow}>
             {squad.name.toUpperCase()} · LEVEL {level} · ROUND COMPLETE
-          </Text>
-          <Text style={styles.score}>
-            {score.correct}/{score.attempted}
-          </Text>
-          <Text style={styles.verdict}>{verdictSentence(score.correct, score.attempted)}</Text>
+          </Animated.Text>
+          <AnimatedScore
+            correct={score.correct}
+            total={score.attempted}
+            cascade={cascade.score}
+            style={styles.score}
+          />
+          <Animated.Text entering={riseIn(cascade.subtitle)} style={styles.verdict}>
+            {verdictSentence(score.correct, score.attempted)}
+          </Animated.Text>
         </View>
       )}
 
       {missed.length > 0 && (
         <>
-          <Text style={styles.missedLabel}>MISSED · {missed.length} PLAYERS</Text>
+          <Animated.Text entering={riseIn(cascade.missedLabel ?? 0)} style={styles.missedLabel}>
+            MISSED · {missed.length} PLAYERS
+          </Animated.Text>
           <FlatList
             data={missed}
             keyExtractor={(r) => r.question.playerId}
             contentContainerStyle={styles.missedList}
-            renderItem={({ item }) => <MissedCard result={item} />}
+            renderItem={({ item, index }) => (
+              <MissedCard
+                result={item}
+                delay={(cascade.missedBase ?? 0) + index * (cascade.missedStep ?? 0)}
+              />
+            )}
           />
         </>
       )}
 
       <View style={styles.actions}>
         {actions.map((id, index) => (
-          <Button
+          <Animated.View
             key={id}
-            label={actionLabels[id]}
-            variant={index === 0 ? 'filled' : index === 1 ? 'outline' : 'text'}
-            onPress={actionHandlers[id]}
-          />
+            entering={riseIn(cascade.actionsBase + index * cascade.actionsStep)}
+          >
+            <Button
+              label={actionLabels[id]}
+              variant={index === 0 ? 'filled' : index === 1 ? 'outline' : 'text'}
+              onPress={actionHandlers[id]}
+            />
+          </Animated.View>
         ))}
       </View>
     </View>
   );
 }
 
-function MissedCard({ result }: { result: QuestionResult }) {
+function MissedCard({ result, delay }: { result: QuestionResult; delay: number }) {
   const wrong = firstWrongPart(result);
   const namePart = result.question.parts[0];
   const correctName =
@@ -165,7 +278,10 @@ function MissedCard({ result }: { result: QuestionResult }) {
       : result.question.playerName;
 
   return (
-    <View style={styles.missedCard}>
+    <Animated.View
+      entering={FadeInUp.duration(celebrationRiseDuration).delay(delay).easing(riseEasing)}
+      style={styles.missedCard}
+    >
       <Text style={styles.missedNumber}>{result.question.memberNo}</Text>
       <View style={styles.missedText}>
         <Text style={styles.missedName}>{correctName}</Text>
@@ -175,7 +291,7 @@ function MissedCard({ result }: { result: QuestionResult }) {
           </Text>
         )}
       </View>
-    </View>
+    </Animated.View>
   );
 }
 

@@ -149,7 +149,9 @@ export const opacity = {
   dotFuture: 0.35, // progress dots not yet reached
 } as const;
 
-// All under 300ms, per CLAUDE.md's motion rule.
+// All under 300ms, per CLAUDE.md's motion rule — this is the mid-round
+// budget. The round-over celebration and the home lockup are the one
+// carve-out from that rule; see `strikeTiming`/`celebrationCascade` below.
 export const durations = {
   press: 100,
   reveal: 180,
@@ -159,6 +161,145 @@ export const durations = {
   collapse: 200,
   skeleton: 900,
 } as const;
+
+// ---- Celebration motion ---------------------------------------------------
+// Budget for the results screen's round-over celebration (passed/excellent
+// tiers) and the once-per-launch home lockup only — never mid-round. Plain
+// bezier control-point tuples rather than `Easing.bezier(...)` instances, so
+// this file stays free of the animation library per its own header comment;
+// construct the curve at the call site (`Easing.bezier(...curve)`).
+export const celebrationEasingCurves = {
+  strike: [0.16, 0.72, 0.2, 1],
+  recoil: [0.3, 0.6, 0.2, 1],
+  rise: [0.2, 0.8, 0.2, 1],
+} as const;
+
+// Preview knobs for a longer, more exaggerated take on the celebration
+// motion below, without hand-editing every value. 1 = the shipped, reviewed
+// timing/distances. `MOTION_TIME_SCALE` stretches every duration and delay
+// in `strikeTiming`/`celebrationCascade`/`homeCascade` uniformly (so the
+// whole cascade's rhythm holds, just slower); `MOTION_DISTANCE_SCALE` is
+// read directly by `EscuadraStrike` and `AnimatedScore` to exaggerate the
+// ball's travel/overshoot, the frame's recoil, the trail's catch-up
+// distance and the score's pop-in — set both back to 1 to restore exactly
+// what shipped, nothing else needs to change.
+export const MOTION_TIME_SCALE = 1.8;
+export const MOTION_DISTANCE_SCALE = 1.5;
+
+function t(ms: number): number {
+  return Math.round(ms * MOTION_TIME_SCALE);
+}
+
+export interface StrikeTiming {
+  frameDuration: number;
+  frameStagger: number;
+  recoilDuration: number;
+  recoilDelay: number;
+  ballDuration: number;
+  ballDelay: number;
+  flash: { duration: number; delay: number } | null;
+  trail: { duration: number; delay: number; stagger: number } | null;
+}
+
+// The mark's crossbar/post/ball choreography, keyed by where it appears.
+// `passed` is deliberately quieter than `excellent` — no flash ring, no
+// trail — matching the design's "two-tone, quieter strike" for a level
+// clear that isn't flawless. `home` sits between the two: full trail, no
+// flash, since the launch lockup isn't a celebration.
+export const strikeTiming: Record<'excellent' | 'passed' | 'home', StrikeTiming> = {
+  excellent: {
+    frameDuration: t(180),
+    frameStagger: t(40),
+    recoilDuration: t(260),
+    recoilDelay: t(330),
+    ballDuration: t(640),
+    ballDelay: t(60),
+    flash: { duration: t(420), delay: t(300) },
+    trail: { duration: t(300), delay: t(340), stagger: t(60) },
+  },
+  passed: {
+    frameDuration: t(160),
+    frameStagger: t(30),
+    recoilDuration: t(220),
+    recoilDelay: t(240),
+    ballDuration: t(440),
+    ballDelay: t(40),
+    flash: null,
+    trail: null,
+  },
+  home: {
+    frameDuration: t(180),
+    frameStagger: t(40),
+    recoilDuration: t(240),
+    recoilDelay: t(300),
+    ballDuration: t(560),
+    ballDelay: t(60),
+    flash: null,
+    trail: { duration: t(280), delay: t(320), stagger: t(60) },
+  },
+};
+
+// One rise-in duration shared by every title/subtitle/missed-card/button in
+// the cascade below — only the per-element delay varies by tier, which is
+// what actually shapes the cascade's rhythm.
+export const celebrationRiseDuration = t(220);
+
+export interface CelebrationCascade {
+  score: { delay: number; duration: number; pop: boolean };
+  title: number;
+  subtitle: number;
+  missedLabel?: number;
+  missedBase?: number;
+  missedStep?: number;
+  actionsBase: number;
+  actionsStep: number;
+}
+
+// Text/list/button cascade once the strike lands, keyed by results-screen
+// tier. `score.pop` is true only for `excellent`: the flawless score has its
+// own pop-in the other two tiers skip (their digits still count up, just
+// without an entrance transform on the readout itself).
+export const celebrationCascade: Record<'excellent' | 'passed' | 'fail', CelebrationCascade> = {
+  excellent: {
+    score: { delay: t(420), duration: t(260), pop: true },
+    title: t(540),
+    subtitle: t(620),
+    actionsBase: t(660),
+    actionsStep: t(40),
+  },
+  passed: {
+    score: { delay: t(160), duration: t(380), pop: false },
+    title: t(380),
+    subtitle: t(440),
+    missedLabel: t(460),
+    missedBase: t(500),
+    missedStep: t(40),
+    actionsBase: t(580),
+    actionsStep: t(40),
+  },
+  fail: {
+    score: { delay: t(120), duration: t(420), pop: false },
+    title: 0,
+    subtitle: t(300),
+    missedLabel: t(320),
+    missedBase: t(360),
+    missedStep: t(40),
+    actionsBase: t(520),
+    actionsStep: t(40),
+  },
+};
+
+// Home's lockup: the mark strike (`strikeTiming.home`) plus the wordmark's
+// letter-by-letter rise and the continue-card/buttons beneath it. Runs once,
+// on the home screen's initial mount only — see app/index.tsx.
+export const homeCascade = {
+  letterDuration: t(300),
+  letterBase: t(400),
+  letterStep: t(28),
+  continueCardDelay: t(600),
+  actionsBase: t(660),
+  actionsStep: t(40),
+};
 
 // Keyed by question-engine Level (1 | 2 | 3) — escalating hero/badge weight
 // as difficulty rises, per the design's difficulty-ladder and hero-card specs.
