@@ -8,9 +8,14 @@
     "scheme": "escuadra",
     "userInterfaceStyle": "automatic",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": false,
+      "bundleIdentifier": "com.tovmassian.escuadra",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
+      "package": "com.tovmassian.escuadra",
       "adaptiveIcon": {
         "backgroundColor": "#12141a",
         "foregroundImage": "./assets/images/android-icon-foreground.png",
@@ -46,6 +51,12 @@
       "typedRoutes": true,
       "reactCompiler": true
     },
-    "backgroundColor": "#12141a"
+    "backgroundColor": "#12141a",
+    "extra": {
+      "router": {},
+      "eas": {
+        "projectId": "64738e72-9ac7-482a-aa64-f3cdec09bc29"
+      }
+    }
   }
 }

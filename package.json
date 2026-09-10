@@ -26,6 +26,7 @@
     "@react-native-async-storage/async-storage": "2.2.0",
     "expo": "^57.0.21",
     "expo-constants": "~57.0.17",
+    "expo-dev-client": "~57.0.18",
     "expo-font": "~57.0.3",
     "expo-haptics": "~57.0.2",
     "expo-image": "~57.0.4",
@@ -51,6 +52,7 @@
   "devDependencies": {
     "@oclif/core": "^5.0.0",
     "@types/react": "~19.2.4",
+    "eas-cli": "^24.0.0",
     "eslint": "^9.25.0",
     "eslint-config-expo": "~57.0.2",
     "eslint-config-prettier": "^10.1.8",
