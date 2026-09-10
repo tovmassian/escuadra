@@ -31,6 +31,16 @@ export function teamProgress(
   return { level: highest.level, correct: highest.correct, total: ROUND_LENGTH, cleared };
 }
 
+/** The team picker row's mono meta line: the season, plus progress once it's
+ *  known. `undefined` progress (still hydrating) shows the season alone
+ *  rather than a placeholder dash, since the season itself needs no store
+ *  read and is available immediately. */
+export function teamMetaLine(season: string, progress: TeamProgress | null | undefined): string {
+  if (progress === undefined) return season;
+  if (progress === null) return `${season} · NOT PLAYED`;
+  return `${season} · LEVEL ${progress.level} · BEST ${progress.correct}/${progress.total}`;
+}
+
 /** The clubs tab's league filter. `'ALL'` is the default, unfiltered state. */
 export type LeagueFilter = 'ALL' | League;
 
