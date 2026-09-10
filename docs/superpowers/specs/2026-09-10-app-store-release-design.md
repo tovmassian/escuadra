@@ -128,9 +128,16 @@ ticked, the Play Store deferral recorded, and these decisions noted.
 ## Work in App Store Connect
 
 Enrolment, then: reserve the name "Escuadra" (a store search found no exact
-match, but only reservation settles it), create the app record, set the category
-and a 4+ age rating, and complete App Privacy as **no data collected** — which is
-true, and verifiable by grep.
+match, but only reservation settles it), create the app record, set a 4+ age
+rating, and complete App Privacy as **no data collected** — which is true, and
+verifiable by grep.
+
+Category is **primary Education, secondary Sports**. Education matches the
+product thesis in CLAUDE.md — a study tool, not a party game — and consistency
+between the listing and the app is what a reviewer checks. It also sits furthest
+from Games › Trivia, where guideline 4.3 "spam" rejections concentrate for quiz
+apps from new individual developers. Sports as secondary still surfaces the app
+to football fans browsing.
 
 Listing content: subtitle (30 chars), keywords (100 chars), description,
 promotional text, support URL, privacy URL, and 6.9" screenshots. No iPad
