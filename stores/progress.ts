@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { scoreKey } from '@/lib/scoring';
+import type { ThemePreference } from '@/theme/tokens';
 
 // Re-exported so existing importers (e.g. `app/index.tsx`) keep working —
 // `scoreKey` is a scoring scalar defined once in `lib/scoring.ts`, not here.
@@ -23,8 +24,14 @@ interface ProgressState {
   /** Backs Home's "continue" card — the most recent team+level a round was
    *  started for, regardless of how it finished. */
   lastPlayed: LastPlayed | null;
+  /** Appearance preference. `'system'` follows the device setting; an explicit
+   *  value pins one theme. Survives `reset()`, which clears game progress
+   *  only — reverting someone's appearance choice alongside their scores
+   *  would be a surprise, and the two are unrelated. */
+  themePreference: ThemePreference;
   recordScore: (squadId: string, level: number, score: number) => void;
   setLastPlayed: (squadId: string, level: number) => void;
+  setThemePreference: (preference: ThemePreference) => void;
   reset: () => void;
 }
 
@@ -34,6 +41,7 @@ export const useProgress = create<ProgressState>()(
       bestScores: {},
       completedLevels: {},
       lastPlayed: null,
+      themePreference: 'system',
       recordScore: (squadId, level, score) =>
         set((s) => {
           const key = scoreKey(squadId, level);
@@ -44,6 +52,7 @@ export const useProgress = create<ProgressState>()(
           };
         }),
       setLastPlayed: (squadId, level) => set({ lastPlayed: { squadId, level } }),
+      setThemePreference: (themePreference) => set({ themePreference }),
       reset: () => set({ bestScores: {}, completedLevels: {}, lastPlayed: null }),
     }),
     {
