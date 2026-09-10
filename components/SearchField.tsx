@@ -1,6 +1,6 @@
-import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 import { iconSize, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 // Magnifying-glass geometry, in a square box `iconSize.searchGlyph` wide.
 // Built from plain Views rather than a 🔍/Unicode glyph, matching LockGlyph
@@ -93,7 +93,7 @@ export function SearchField({ value, onChange, onClear }: SearchFieldProps) {
       backgroundColor: colors.surface,
       borderWidth: 1,
       borderColor: colors.border,
-      borderRadius: radii.md,
+      borderRadius: radii.lg,
     },
     input: { flex: 1, padding: 0, ...typography.secondary, color: colors.textPrimary },
   });
