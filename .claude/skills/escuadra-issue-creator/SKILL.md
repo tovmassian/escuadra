@@ -11,7 +11,7 @@ GitHub issues without proper metadata (project, milestone, size, assignee) creat
 
 **Core principle:** Discover available options first, then prompt for each field with context. Never create an issue without metadata.
 
-## When to Use
+## When to use
 
 Use this skill whenever you create a GitHub issue for Escuadra:
 
@@ -26,14 +26,18 @@ Use this skill whenever you create a GitHub issue for Escuadra:
 - PRs (use standard flow)
 - Issues in other projects
 
-## Before You Create
+## Before you create
 
-**Required setup (one-time):**
+**Optional setup — only if you intend to add the issue to a project board:**
 
 ```bash
-# Ensure GitHub CLI is authenticated and has project scope
+# Grants the 'project' scope; triggers an interactive browser/device-code flow,
+# so only run this when the user actually wants project assignment.
 gh auth refresh -s project
 ```
+
+If this scope isn't granted, skip project assignment gracefully (see step 2) rather
+than prompting for it up front.
 
 ## Workflow
 
@@ -51,14 +55,15 @@ Before prompting for metadata, enumerate what exists:
 
 ```bash
 # Milestones (via API, since gh milestone doesn't exist)
-gh api -R tovmassian/escuadra repos/tovmassian/escuadra/milestones --jq '.[].title'
+# Note: `gh api` has no -R flag; the repo is already fully qualified in the path
+gh api repos/tovmassian/escuadra/milestones --jq '.[].title'
 
 # Available labels
 gh label list -R tovmassian/escuadra --limit 100
 
-# Projects (requires auth scope 'read:project')
+# Projects (requires auth scope 'project')
 # Note: This may fail if scope not granted; if so, skip project assignment
-gh project list --owner tovmassian 2>/dev/null || echo "⚠️  Projects unavailable (needs auth scope 'read:project')"
+gh project list --owner tovmassian 2>/dev/null || echo "⚠️  Projects unavailable (needs auth scope 'project')"
 ```
 
 **Store the results.** You need these for prompting. If a command fails, gracefully skip that field.
@@ -86,6 +91,8 @@ For each field, prompt with context:
 > **Milestone:** [list open milestones]
 
 - Default: current active milestone or none
+- If more than one milestone is open, don't guess — list them all and ask the user
+  to pick rather than silently defaulting
 - Explain what the milestone contains
 
 **Size:**
@@ -98,13 +105,10 @@ For each field, prompt with context:
 - **As of now:** Escuadra has no size labels; offer to create them or ask: "Should I add a size label?"
 
 **Labels (Type):**
-Automatically apply based on issue type:
-
-- Bug → `bug` label
-- Feature → `enhancement` label
-- Refactor → `refactor` label
-- Doc → `documentation` label
-- Data → `data` label
+Automatically apply based on issue type — see the canonical mapping in
+[Quick Reference](#quick-reference). If the mapped label doesn't exist yet
+(check against the discovered label list from step 2), offer to create it
+rather than silently applying nothing.
 
 Show which labels will be applied, confirm.
 
@@ -126,33 +130,46 @@ Metadata:
 
 **Ask:** Create this issue? (y/n)
 
-If yes, create with `gh issue create`:
+If yes, create with `gh issue create`. Write the title/description to temp files
+first rather than interpolating raw user text into the command string — free-text
+input can contain quotes, backticks, or `$(...)` that would break shell quoting or
+get evaluated:
 
 ```bash
+TITLE_FILE=$(mktemp)
+BODY_FILE=$(mktemp)
+printf '%s' "[title]" > "$TITLE_FILE"
+printf '%s' "[description]" > "$BODY_FILE"
+
 gh issue create \
   -R tovmassian/escuadra \
-  --title "[title]" \
-  --body "[description]" \
+  --title "$(cat "$TITLE_FILE")" \
+  --body-file "$BODY_FILE" \
   --assignee [assignee] \
   --label "[labels]" \
   [--milestone "[milestone]" if set] \
   [--project "[project]" if supported]
+
+rm -f "$TITLE_FILE" "$BODY_FILE"
 ```
 
 If no, loop back to step 1.
 
 ### 5. Link to Project (If CLI Can't)
 
-If `gh issue create --project` doesn't work (GitHub API limitation), create the issue first, then:
+If `gh issue create --project` doesn't work (GitHub API limitation), the simplest
+fix is to add it via the web UI. If a scripted fallback is needed, `addProjectV2ItemById`
+takes a project **node ID** and issue **node ID** (both GraphQL `ID`, not numbers),
+and the query must be piped in with `-f query=@-`:
 
 ```bash
-# Get the issue number from output
-ISSUE_NUM=123
+# Get the project's node ID (not its number) and the issue's node ID first:
+PROJECT_ID=$(gh project view PROJECT_NUMBER --owner tovmassian --format json --jq '.id')
+ISSUE_ID=$(gh issue view ISSUE_NUM -R tovmassian/escuadra --json id --jq '.id')
 
-# Add to project manually via the UI, or use gh api:
-gh api graphql -F owner=tovmassian -F project=PROJECT_NUMBER -F itemId=ISSUE_ID << 'EOF'
-mutation($owner:String!, $project:Int!, $itemId:String!) {
-  addProjectV2ItemById(input:{projectId:$project, contentId:$itemId}) {
+gh api graphql -f query=@- -F projectId="$PROJECT_ID" -F itemId="$ISSUE_ID" << 'EOF'
+mutation($projectId: ID!, $itemId: ID!) {
+  addProjectV2ItemById(input: {projectId: $projectId, contentId: $itemId}) {
     item {
       id
     }
@@ -161,19 +178,20 @@ mutation($owner:String!, $project:Int!, $itemId:String!) {
 EOF
 ```
 
-## Common Mistakes
+## Common mistakes
 
-| Mistake                                         | Fix                                                                                                        |
-| ----------------------------------------------- | ---------------------------------------------------------------------------------------------------------- |
-| Use `gh milestone list` command (doesn't exist) | Use `gh api repos/tovmassian/escuadra/milestones` instead                                                  |
-| Assume projects are always available            | Check auth scope; `gh auth refresh -s read:project` if missing                                             |
-| Ask for size label when none exist              | Check available labels first; offer to create them or skip size field                                      |
-| Apply wrong label for issue type                | Map type → label programmatically: bug→bug, feature→enhancement, refactor→investigation, doc→documentation |
-| Silent assignee default to current user         | Always ask, but default to repo owner (@tovmassian) unless overridden                                      |
-| Forget to confirm before creating               | Show full issue template + metadata, ask "Create?" before `gh issue create`                                |
-| Silently fail when projects unavailable         | Report clearly: "Projects require auth scope read:project. Skipping project assignment."                   |
+| Mistake                                         | Fix                                                                                |
+| ----------------------------------------------- | ----------------------------------------------------------------------------------- |
+| Use `gh milestone list` command (doesn't exist) | Use `gh api repos/tovmassian/escuadra/milestones` instead                           |
+| Pass `-R` to `gh api`                           | `gh api` has no `-R` flag — the repo is already fully qualified in the path         |
+| Assume projects are always available            | Check auth scope; `gh auth refresh -s project` if missing                           |
+| Ask for size label when none exist              | Check available labels first; offer to create them or skip size field               |
+| Apply wrong label for issue type                | Use the canonical mapping in [Quick Reference](#quick-reference), not a restated one |
+| Silent assignee default to current user         | Always ask, but default to repo owner (@tovmassian) unless overridden               |
+| Forget to confirm before creating               | Show full issue template + metadata, ask "Create?" before `gh issue create`         |
+| Silently fail when projects unavailable         | Report clearly: "Projects require auth scope 'project'. Skipping project assignment." |
 
-## Quick Reference
+## Quick reference
 
 **Default values for Escuadra:**
 
@@ -183,14 +201,14 @@ EOF
 - Size: Ask (no sensible default)
 - Labels: Type-based (bug/feature/refactor/doc/data)
 
-**Labels to apply by type:**
+**Labels to apply by type (canonical mapping — verified against current repo labels):**
 
 ```
 bug        → bug
 feature    → enhancement
-refactor   → refactor (or create if missing)
+refactor   → investigation   (no dedicated "refactor" label exists; reuses "investigation")
 doc        → documentation
-data       → data (or create if missing)
+data       → data (doesn't exist yet; offer to create it)
 ```
 
 **Size scale (if using labels):**
@@ -200,13 +218,11 @@ data       → data (or create if missing)
 - Medium: feature with multiple parts, refactor one module (1-2 hours)
 - Large: new subsystem, major refactor, complex feature (4+ hours)
 
-**Escuadra milestones to expect:**
+**Escuadra milestones:** don't hardcode names — always discover the live list via
+`gh api repos/tovmassian/escuadra/milestones` (step 2). Milestone names and how many
+are open change over time.
 
-- v0 (first release: team picker, 10-question round, study screen)
-- v1 (post-v0: player photos, more squads)
-- Future (beyond current scope)
-
-## Example Walkthrough
+## Example walkthrough
 
 **Input:**
 
@@ -228,8 +244,8 @@ User: Create an issue for the offline persistence bug
 
    ```
    Projects found: "v0 planning"
-   Milestones: ["v0 (active)", "v1 (future)"]
-   Labels: ["bug", "enhancement", "documentation", "data", ...]
+   Milestones: ["First release"]
+   Labels: ["bug", "enhancement", "documentation", "investigation", ...]
    ```
 
 3. **Prompt for metadata:**
@@ -240,8 +256,8 @@ User: Create an issue for the offline persistence bug
    Project: Add to "v0 planning"?
    - (shows: this is the active planning board)
 
-   Milestone: "v0 (active)"?
-   - (shows: 8 issues in v0 milestone)
+   Milestone: "First release"?
+   - (shows: N issues in this milestone)
 
    Size: [ask] Medium (1-2 hours debugging/fixing AsyncStorage)
 
@@ -257,7 +273,7 @@ User: Create an issue for the offline persistence bug
    Metadata:
      Assignee: @tovmassian
      Project: v0 planning
-     Milestone: v0 (active)
+     Milestone: First release
      Size: Medium
      Labels: bug
 
@@ -271,9 +287,9 @@ User: Create an issue for the offline persistence bug
    Added to project: v0 planning
    ```
 
-## Integration Notes
+## Integration notes
 
-- **Auth scope for projects**: `gh auth refresh -s read:project` once per session (only if you want to use project assignment)
+- **Auth scope for projects**: `gh auth refresh -s project` once per session (only if you want to use project assignment)
 - **Milestones require API**: Use `gh api repos/tovmassian/escuadra/milestones` not `gh milestone list`
 - **Size labels don't exist yet**: Offer to create trivial/small/medium/large labels in bulk, or skip size field
 - **GraphQL fallback for project assignment**: If CLI `--project` flag doesn't work, use the GraphQL API example (see step 5)
@@ -281,13 +297,13 @@ User: Create an issue for the offline persistence bug
 - **Metadata override**: User can specify any field explicitly (skip discovery, use provided value)
 - **Graceful degradation**: If projects unavailable (no auth scope), continue without adding to project board
 
-## Red Flags (When to Stop & Ask)
+## Red flags (when to stop & ask)
 
 - [ ] Missing GitHub CLI authentication — error message will say so
 - [ ] GitHub API call fails (milestone, labels, projects) — report error clearly, don't silently skip
-- [ ] Projects unavailable due to missing `read:project` scope — report: "Skipping project assignment (auth scope required)"
+- [ ] Projects unavailable due to missing `project` scope — report: "Skipping project assignment (auth scope required)"
 - [ ] User provides issue type you don't recognize — ask to clarify: bug/feature/refactor/doc/data
-- [ ] Label for issue type doesn't exist (e.g., no "refactor" label) — ask: should I create it?
+- [ ] Label for issue type doesn't exist (e.g., no "data" label) — ask: should I create it?
 - [ ] Size labels don't exist — ask: should I create them (trivial/small/medium/large)?
 - [ ] Milestone list is empty — ask: should this issue have a milestone?
 - [ ] Assignee doesn't exist in repo — ask: verify username (e.g., is it @tovmassian?)
