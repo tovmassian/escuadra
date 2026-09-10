@@ -24,26 +24,28 @@ farthest.
 
 ## Scope
 
+Both themes ship in the first release. This is a v0 feature, not a follow-up,
+and CLAUDE.md is updated to say so — see "CLAUDE.md" below.
+
 In scope:
 
 - A second palette, and both palettes carrying the same key set.
-- Theme state, persisted, defaulting to dark.
+- Theme preference, persisted, **following the system setting by default**.
 - A toggle control on Home, top-right, per the mock.
 - Every screen and component switching with it.
-- The dark ramp's lift, including the four `app.json` colours that mirror it.
+- The dark ramp's lift, including the `app.json` colours that mirror it.
+- A theme-aware splash screen.
+- CLAUDE.md updates.
 - Regenerating `design/screens/`.
 
 Out of scope:
 
 - **A Settings screen.** Home is the only entry point; v0 has no settings
   surface and this does not justify inventing one.
-- **Following the OS appearance setting.** First launch is dark for everyone,
-  exactly as today. `userInterfaceStyle: "dark"` stays in `app.json` — see
-  "Native shell" below.
 - **A styling library.** CLAUDE.md forbids a second styling approach beside the
   tokens. Plain `StyleSheet` stays.
 - **Re-tuning the dark theme beyond the design source's four lifted values.**
-- **A theme-aware splash screen.** See "Cold start" below.
+- **A new splash asset.** Not needed — see "Native shell".
 
 ## The palette
 
@@ -96,17 +98,60 @@ which is why those two — and only those two — need light-theme values.
 
 ### Where the state lives
 
-`stores/progress.ts` gains `theme: ThemeName` (default `'dark'`) plus
-`setTheme`/`toggleTheme`. No new store: CLAUDE.md permits exactly two, and a
-durable cross-session preference is what the persisted one is for.
+`stores/progress.ts` gains `themePreference: ThemePreference` (default
+`'system'`) plus `setThemePreference`/`toggleTheme`. No new store: CLAUDE.md
+permits exactly two, and a durable cross-session preference is what the
+persisted one is for.
 
-`ThemeName` (`'dark' | 'light'`) is defined and exported by `theme/tokens.ts`
-alongside the palettes, so the store depends on the token file rather than the
-reverse.
+`theme/tokens.ts` defines and exports both types alongside the palettes, so the
+store depends on the token file rather than the reverse:
 
-`reset()` does not touch `theme`. It clears game progress; silently reverting
-someone's appearance choice alongside their scores would be a surprise, and the
-two have nothing to do with each other.
+```ts
+type ThemeName = 'dark' | 'light'; // a resolved theme — indexes `palettes`
+type ThemePreference = ThemeName | 'system'; // what the user chose
+```
+
+The distinction carries real weight and the two must not be collapsed. The
+preference is what persists; the name is what the UI resolves to on each render.
+
+`reset()` does not touch the preference. It clears game progress; silently
+reverting someone's appearance choice alongside their scores would be a
+surprise, and the two have nothing to do with each other.
+
+### Resolving the preference to a theme
+
+`'system'` resolves through React Native's `useColorScheme()`, which reports the
+device setting and re-renders on change — so a phone that switches itself at
+dusk carries the app with it, without the app storing anything.
+
+```ts
+const preference = useProgress((s) => s.themePreference);
+const system = useColorScheme(); // 'light' | 'dark' | null
+const name: ThemeName = preference === 'system' ? (system ?? 'dark') : preference;
+```
+
+`useColorScheme()` returns `null` when the scheme is unknown. Dark is the
+fallback — it is the app's original and only identity to date.
+
+**This requires `userInterfaceStyle: "automatic"` in `app.json`.** The current
+value is `"dark"`, which per the SDK 57 docs locks the app to dark outright:
+`useColorScheme()` would return `'dark'` on every device regardless of its
+setting, and the default preference would silently never work. This is the one
+change in the whole feature that fails silently rather than loudly, which is
+why it is called out twice — here and under "Native shell".
+
+### The toggle's semantics
+
+The mock's control is a two-state sun/moon switch, but the preference has three
+states. Tapping it writes an **explicit** preference — the opposite of whatever
+is currently resolved. So a user on a light phone sees light, taps once, and is
+pinned to dark.
+
+There is deliberately no way back to `'system'` from the toggle. A binary
+switch cannot express three states legibly, and there is no Settings screen to
+put a third control on. The cost is that the first tap is one-way until
+reinstall; that is the normal bargain for a binary theme switch and is accepted
+here rather than worked around with a hidden gesture.
 
 ### Resolving colours
 
@@ -126,13 +171,16 @@ So a consumer sees one flat object with exactly the shape `colors` has today.
 Every `colors.foo` reference across the app keeps working verbatim; only where
 the object comes _from_ changes.
 
-A hook resolves it:
+Two hooks resolve it, wrapping the preference resolution above:
 
 ```ts
-export function useThemeColors(): Palette {
-  return palettes[useProgress((s) => s.theme)];
-}
+export function useThemeName(): ThemeName; // preference + useColorScheme()
+export function useThemeColors(): Palette; // palettes[useThemeName()]
 ```
+
+Both are needed. `useThemeColors` covers almost every consumer; the root layout
+and the toggle need the resolved _name_ itself, to pick a navigation theme, a
+status-bar style, and which glyph to show.
 
 Palettes are module constants, so the returned identity is stable per theme and
 only changes when the theme actually does.
@@ -151,19 +199,25 @@ three shapes, and only the first is the obvious one:
 
 1. **Module-scope `StyleSheet.create`** — most files. Moves inside the
    component: `const colors = useThemeColors();` then
-   `const styles = useMemo(() => StyleSheet.create({...}), [colors]);`.
+   `const styles = StyleSheet.create({...})` in the render body.
 
 2. **Module-scope lookup records** — `AnswerOption` (`VERDICT_BG`,
    `VERDICT_BORDER`, `VERDICT_TEXT`) and `ChipOption`. These map a verdict to a
-   colour. They become functions of the palette, memoised in the component the
-   same way.
+   colour. They become functions taking the palette as a parameter.
 
 3. **Module-scope helper functions** — `ProgressDots.dotStyle(outcome)` returns
-   a style object built from `colors`. It takes the palette as a parameter.
+   a style object built from `colors`. Same treatment: take the palette as a
+   parameter.
+
+**No manual `useMemo`.** `app.json` sets `experiments.reactCompiler: true`, so
+the compiler memoises these automatically on `colors`, whose identity is stable
+per theme. Hand-written `useMemo` across twenty-seven files would be noise that
+duplicates what the build already does. If profiling later shows a real cost,
+add it then — a theme change is a single user-driven tap, not a hot path.
 
 Styles that carry no colour could stay at module scope, but splitting each
-component's styles in two to save a `StyleSheet.create` on a rare, user-driven
-toggle is not worth the readability cost. One memoised block per component.
+component's styles in two is not worth the readability cost. One block per
+component.
 
 ### Root layout
 
@@ -191,8 +245,8 @@ of clearing a simulated status bar and must not be copied as a literal.
 
 ## Cold start
 
-The theme is persisted, so on a cold launch it is not known at first paint.
-Left alone, a light-theme user gets a dark frame that flips — every launch.
+The preference is persisted, so on a cold launch it is not known at first paint.
+Left alone, someone pinned to light gets a dark frame that flips — every launch.
 
 `app/_layout.tsx` already holds the splash screen until fonts load, for exactly
 this class of problem ("otherwise the first frame renders in the system font and
@@ -200,26 +254,63 @@ visibly reflows"). The same gate extends to hydration: hold the splash until
 `useProgressHydrated()` is true as well. `stores/progress.ts` already exports
 that hook.
 
-**The splash itself stays dark in both themes.** It is a static asset configured
-in `app.json` and cannot read a value that lives in AsyncStorage. Expo's dark
-splash variant keys off the OS setting, which is not what drives our theme, so
-it would be wrong as often as right. A light-theme user sees a dark splash. This
-is an accepted limitation, recorded so it is not later filed as a bug.
+Note that the default case needs no such help — `useColorScheme()` is
+synchronous and correct on the first frame. The gate exists for the explicit
+override, which is the only part that lives in AsyncStorage. It is applied
+unconditionally because which case applies is itself unknown until hydration.
 
 ## Native shell
 
-`app.json` repeats the dark background as a literal in four places — the Android
-adaptive icon, the splash, the splash's dark variant, and the top-level
-`backgroundColor`. All four move `#07090b` → `#12141a` with the token. Left
-stale, the splash-to-app handoff shows a visible seam for dark users, which is
-the majority case.
+`app.json` needs three changes.
 
-`userInterfaceStyle` stays `"dark"`. It governs OS-drawn surfaces, and this app
-has almost none — hard constraint #3 means there is no keyboard, and there are
-no action sheets or system dialogs. Setting it `"automatic"` would let native
-surfaces follow the OS while the app follows its own persisted setting, so the
-two could disagree. Revisit it alongside the development build, where native
-surfaces can actually be tested.
+**`userInterfaceStyle: "dark"` → `"automatic"`.** Per the SDK 57 docs, `"dark"`
+locks the app to dark and pins `useColorScheme()` to `'dark'` on every device.
+Without this change the default preference resolves to dark for everyone, on a
+light phone as readily as a dark one, and nothing anywhere reports an error.
+
+**The background hexes move `#07090b` → `#12141a`.** They appear in the Android
+adaptive icon, the splash, the splash's `dark` variant, and the top-level
+`backgroundColor`. Left stale, the splash-to-app handoff shows a visible seam.
+
+The top-level `backgroundColor` is a single static value that cannot follow a
+theme; it sits behind screen transitions. Dark is the right choice for it — the
+app's original identity, and the value it already holds — but it means a
+light-theme user may catch a dark edge mid-transition. A device-verification
+item, not a blocker.
+
+**The splash becomes theme-aware**, and needs no new asset. `splash-icon.png` is
+the mark on a fully transparent background, its gradient running `#5961d2` to
+`#393f97`: deep enough to hold against near-white, bright enough to hold against
+near-black. Only the two background colours differ — base `#f7f7f9`, `dark`
+variant `#12141a`. `userInterfaceStyle: "automatic"` is what activates the
+variant, so this falls out of the change above rather than costing anything
+extra.
+
+One seam remains and is accepted: the native splash follows the **OS**, while an
+explicit in-app override follows the user. Someone who pins light on a dark
+phone gets a dark splash and a light app. It cannot be fixed from `app.json` —
+the splash paints before any JavaScript runs, so nothing can read AsyncStorage in
+time. For the default `'system'` preference the two always agree.
+
+## CLAUDE.md
+
+Two themes ship in the first release, so CLAUDE.md changes with the code rather
+than after it:
+
+- **v0 definition of done** gains a line for light/dark, following the system
+  setting by default, with a toggle on Home. It is a release item, not a
+  follow-up.
+- **Hard constraint #5** ("Never hardcode a colour…") is extended: colours come
+  from the _active palette_, via `useThemeColors()`. A module-scope colour
+  capture is the specific failure the constraint now names, because it produces
+  a component that looks correct and silently ignores the theme.
+- **Architecture rules** gains the theming mechanism in brief — two palettes
+  with identical key sets, the hooks, and the fact that the preference lives in
+  `stores/progress.ts` rather than a third store.
+- **Environment** records the `userInterfaceStyle` gotcha: pinning it to a fixed
+  theme makes `useColorScheme()` constant, with no error to trace it by.
+- The `app/_layout.tsx` comment asserting the app is dark-only goes, along with
+  the sentence in **Current state** that treats one palette as given.
 
 ## Testing
 
@@ -238,11 +329,14 @@ infrastructure; this follows that convention rather than introducing one.
 - `npm run check` in full.
 - **Device verification via Expo Go**, both themes, every screen. This is the
   step that matters. Typecheck proves every file was migrated; it does not prove
-  anything is legible.
+  anything is legible. Three cases specifically: a light phone launching to
+  light with no stored preference, flipping the phone's setting mid-session and
+  watching the app follow, and an explicit override surviving a cold restart
+  while the phone disagrees.
 - `npm run shots` regenerated. The dark captures change (the ramp lifts), so
-  this is required regardless. A light pass means seeding the persisted theme
-  before a second capture run — worth doing so the design handoff sees the new
-  theme, and the first thing to drop if it fights the tooling.
+  this is required regardless. A light pass means seeding the preference before
+  a second capture run — worth doing so the design handoff sees the new theme,
+  and the first thing to drop if it fights the tooling.
 
 ## Watch items
 
@@ -257,3 +351,10 @@ pre-tune these blind; measure first.
 **A missed file is a build failure, not a visual bug.** Removing the `colors`
 export is what buys that, and is the main reason a twenty-seven-file mechanical
 migration is a reasonable thing to attempt in one pass.
+
+**`userInterfaceStyle` is the one silent failure mode.** Everything else in this
+feature fails loudly — a missed migration breaks the build, a mismatched palette
+key fails a test. Leaving `userInterfaceStyle` at `"dark"` produces an app that
+compiles, passes, and looks right on a dark phone, while the entire
+system-following default quietly never fires. Verify it on a light phone, not by
+reading the diff.
