@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Flag } from './Flag';
 import type { FlagCode } from '@/assets/flags/generated';
 import { sizes, spacing, typography, type Palette } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { StyleSheet, Text, View } from 'react-native';
+import { Flag } from './Flag';
 
 interface StudyRowProps {
   /** Null when Wikipedia hasn't assigned this player a shirt number yet. */
@@ -39,6 +39,7 @@ const makeStyles = (colors: Palette) =>
       alignItems: 'center',
       justifyContent: 'flex-end',
       gap: spacing.xs,
+      paddingRight: spacing.sm,
     },
     affiliation: {
       ...typography.tableCell,

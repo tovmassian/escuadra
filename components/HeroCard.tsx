@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Skeleton } from './Skeleton';
+import type { Level } from '@/lib/questionEngine';
 import {
   elevation,
   heroCardSize,
@@ -9,7 +8,8 @@ import {
   typography,
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
-import type { Level } from '@/lib/questionEngine';
+import { StyleSheet, Text, View } from 'react-native';
+import { Skeleton } from './Skeleton';
 
 interface HeroCardProps {
   level: Level;
