@@ -7,6 +7,12 @@ from the app, not edited to describe an intention.
 `tokens.ts` and `brand.ts` re-export the app's real definitions — they are not
 copies. `screens/*.png` are captured from the running app by `npm run shots`.
 
+Every screen is captured twice, once per shipped theme: the unsuffixed files
+are dark, and their `-light` counterparts are the same screen in the light
+palette. Dark keeps the plain filenames because it remains the app's default
+identity, and because stable names let a capture be diffed against the
+previous turn's.
+
 ## About the screenshots
 
 They are **web-rendered, not device truth.** `react-native-web` is close but
