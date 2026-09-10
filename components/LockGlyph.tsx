@@ -1,5 +1,5 @@
 import { View } from 'react-native';
-import { colors } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 // Geometric padlock for the locked-difficulty badge, replacing the OS emoji
 // 🔒 previously inlined in DifficultyRow. Built from plain Views, coloured
@@ -29,6 +29,7 @@ interface LockGlyphProps {
 }
 
 export function LockGlyph({ size }: LockGlyphProps) {
+  const colors = useThemeColors();
   const u = size / GLYPH_BOX;
 
   return (

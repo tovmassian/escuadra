@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { colors, opacity, radii, sizes, typography } from '@/theme/tokens';
+import { opacity, radii, sizes, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 export type ButtonVariant = 'filled' | 'outline' | 'inert' | 'text';
 
@@ -13,6 +14,24 @@ interface ButtonProps {
 }
 
 export function Button({ label, variant, onPress, disabled, large }: ButtonProps) {
+  const colors = useThemeColors();
+  const styles = StyleSheet.create({
+    pressed: { opacity: opacity.settled },
+    control: {
+      borderRadius: radii.lg,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    filled: { backgroundColor: colors.accent },
+    outline: { borderWidth: 1, borderColor: colors.border },
+    inert: { backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border },
+    label: { ...typography.body },
+    filledLabel: { color: colors.accentOn },
+    outlineLabel: { color: colors.textSecondary },
+    inertLabel: { color: colors.textMuted },
+    textLabel: { ...typography.secondary, color: colors.textSecondary, textAlign: 'center' },
+  });
+
   if (variant === 'text') {
     return (
       <Pressable
@@ -59,20 +78,3 @@ export function Button({ label, variant, onPress, disabled, large }: ButtonProps
     </Pressable>
   );
 }
-
-const styles = StyleSheet.create({
-  pressed: { opacity: opacity.settled },
-  control: {
-    borderRadius: radii.lg,
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  filled: { backgroundColor: colors.accent },
-  outline: { borderWidth: 1, borderColor: colors.border },
-  inert: { backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border },
-  label: { ...typography.body },
-  filledLabel: { color: colors.accentOn },
-  outlineLabel: { color: colors.textSecondary },
-  inertLabel: { color: colors.textMuted },
-  textLabel: { ...typography.secondary, color: colors.textSecondary, textAlign: 'center' },
-});

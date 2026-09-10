@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { colors, radii, spacing, typography } from '@/theme/tokens';
+import { radii, spacing, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 interface Segment {
   key: string;
@@ -13,6 +14,27 @@ interface SegmentedControlProps {
 }
 
 export function SegmentedControl({ segments, value, onChange }: SegmentedControlProps) {
+  const colors = useThemeColors();
+  const styles = StyleSheet.create({
+    track: {
+      flexDirection: 'row',
+      gap: spacing.xs - 2,
+      padding: spacing.xxs,
+      backgroundColor: colors.surface,
+      borderWidth: 1,
+      borderColor: colors.border,
+      borderRadius: radii.pill,
+    },
+    segment: {
+      flex: 1,
+      alignItems: 'center',
+      paddingVertical: spacing.xs,
+      borderRadius: radii.pill,
+    },
+    segmentActive: { backgroundColor: colors.accent },
+    label: { ...typography.segmentLabel },
+  });
+
   return (
     <View style={styles.track}>
       {segments.map((s) => {
@@ -34,23 +56,3 @@ export function SegmentedControl({ segments, value, onChange }: SegmentedControl
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  track: {
-    flexDirection: 'row',
-    gap: spacing.xs - 2,
-    padding: spacing.xxs,
-    backgroundColor: colors.surface,
-    borderWidth: 1,
-    borderColor: colors.border,
-    borderRadius: radii.pill,
-  },
-  segment: {
-    flex: 1,
-    alignItems: 'center',
-    paddingVertical: spacing.xs,
-    borderRadius: radii.pill,
-  },
-  segmentActive: { backgroundColor: colors.accent },
-  label: { ...typography.segmentLabel },
-});

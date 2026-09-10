@@ -8,7 +8,8 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { colors, durations, opacity, radii } from '@/theme/tokens';
+import { durations, opacity, radii } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 interface SkeletonProps {
   width: DimensionValue;
@@ -19,6 +20,10 @@ interface SkeletonProps {
 // No spinner, per the design spec: "a spinner reads as broken, a shimmer
 // reads as arriving." A gently pulsing opacity block instead.
 export function Skeleton({ width, height, radius = radii.sm }: SkeletonProps) {
+  const colors = useThemeColors();
+  const styles = StyleSheet.create({
+    block: { backgroundColor: colors.surfaceRaised },
+  });
   const pulse = useSharedValue(1);
 
   useEffect(() => {
@@ -44,7 +49,3 @@ export function Skeleton({ width, height, radius = radii.sm }: SkeletonProps) {
     />
   );
 }
-
-const styles = StyleSheet.create({
-  block: { backgroundColor: colors.surfaceRaised },
-});

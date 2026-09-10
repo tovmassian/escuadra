@@ -1,7 +1,8 @@
 import { Image } from 'expo-image';
 import { StyleSheet } from 'react-native';
 import { FLAG_SOURCES, type FlagCode } from '@/assets/flags/generated';
-import { colors, sizes } from '@/theme/tokens';
+import { sizes } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
 
 export type FlagSize = 'marker' | 'inline' | 'row';
 
@@ -27,9 +28,19 @@ const DIMENSIONS: Record<FlagSize, { width: number; height: number }> = {
 // TeamMarker's geometric banner, not this: at 100x3 pt there is no image to
 // show.
 //
-// The hairline border is not decoration. The theme is dark-only, and Japan's
-// and Poland's white would otherwise bleed into the surface behind it.
+// The hairline border is not decoration: Japan's and Poland's white would
+// otherwise bleed into the surface behind it. It matters in both themes —
+// white-on-light is the worse case of the two.
 export function Flag({ code, size, label }: FlagProps) {
+  const colors = useThemeColors();
+  const styles = StyleSheet.create({
+    flag: {
+      borderRadius: sizes.teamMarkerRadius,
+      borderWidth: 1,
+      borderColor: colors.border,
+    },
+  });
+
   if (code === null) return null;
   const dimensions = DIMENSIONS[size];
   return (
@@ -42,11 +53,3 @@ export function Flag({ code, size, label }: FlagProps) {
     />
   );
 }
-
-const styles = StyleSheet.create({
-  flag: {
-    borderRadius: sizes.teamMarkerRadius,
-    borderWidth: 1,
-    borderColor: colors.border,
-  },
-});
