@@ -22,8 +22,8 @@ round is **a la escuadra**; use that term in the UI rather than "perfect score".
 ## Current state
 
 The Expo app is scaffolded and runs. Design tokens from the design pass are in
-the repo. What's missing is the product: the data layer, the question engine,
-the screens, and the stores.
+the repo, in both a light and a dark palette. What's missing is the product:
+the data layer, the question engine, the screens, and the stores.
 
 Build on the existing scaffold and tokens. Do not re-scaffold, and do not
 introduce a second styling approach alongside the tokens.
@@ -37,6 +37,8 @@ introduce a second styling approach alongside the tokens.
 - [ ] Results screen listing the players missed
 - [ ] Study screen — browsable full squad list, number / name / position / club
 - [ ] Best score per team-and-level persisted locally
+- [ ] Light and dark themes, following the device setting by default, with a
+      toggle on Home
 - [ ] Runs on a physical iPhone via Expo Go
 - [ ] Ships to the App Store and Play Store
 
@@ -109,6 +111,12 @@ Product-defining. Flag a conflict rather than working around any of these.
    is real-world fact about a specific club or nation, not a design choice —
    see the data model section below. Never invent, rotate, or arbitrarily
    assign a team's colour; it must be the team's actual real colour.
+   Colour specifically comes from the **active palette**, via
+   `useThemeColors()` — never a module-scope capture. `StyleSheet.create` at
+   module scope is evaluated once at import, so a component built that way
+   looks correct and silently ignores the theme. Both palettes in
+   `theme/tokens.ts` implement the same `Palette` interface: add a role to
+   both or to neither.
 6. **The product is called Escuadra.** "Squad Trainer", "Squad Game", "Squad
    Quiz" and similar all predate the name and are stale wherever they survive —
    including code comments, file headers and docs. Fix them on sight.
@@ -224,6 +232,12 @@ Wikipedia reads), `squad-writer` (the sole, sequential writer of
 - **Two stores only.** `stores/progress.ts` is persisted via AsyncStorage — best
   scores, teams played. `stores/session.ts` is ephemeral — current round state. A
   half-finished round must not survive an app restart.
+- **Theming is two palettes and a hook.** `theme/tokens.ts` holds
+  `palettes.dark` and `palettes.light`; `theme/resolveTheme.ts` is the pure
+  preference-to-name resolver, kept React-free so Vitest (which runs in a node
+  environment and cannot load `react-native`) can test it; `theme/useTheme.ts`
+  exposes `useThemeName()` and `useThemeColors()`. The persisted preference
+  lives in `stores/progress.ts` — it is not a third store.
 - Zustand's `persist` defaults to `localStorage`, which does not exist here. Use
   `createJSONStorage(() => AsyncStorage)`.
 - Every animation stays under 300ms. The app is played in fast repetitive bursts
@@ -254,6 +268,15 @@ SDK moves again: `expo-router` (SDK 56+) no longer allows importing directly
 from `@react-navigation/*` in app code — import `ThemeProvider`/`DarkTheme`/
 `Theme` from `expo-router` itself instead; and RN 0.86 removed
 `StyleSheet.absoluteFillObject` in favor of `StyleSheet.absoluteFill`.
+`DefaultTheme` is exported alongside `DarkTheme` and is the light theme's base.
+
+⚠️ **`userInterfaceStyle` in `app.json` must stay `"automatic"`.** Pinning it
+to `"dark"` or `"light"` locks the app to that theme and makes
+`useColorScheme()` return the same value on every device, so the
+system-following default silently never fires — with no error to trace it by.
+This is the one theming failure that compiles, passes every test, and looks
+correct on a matching phone. Verify it on a light device, not by reading the
+diff.
 
 ⚠️ **Node 24+ is required — run `nvm use` before anything else.** TypeScript
 runs through `node` directly here, with no build step, which needs Node 24's
