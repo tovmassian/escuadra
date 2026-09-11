@@ -39,8 +39,9 @@ introduce a second styling approach alongside the tokens.
 - [ ] Best score per team-and-level persisted locally
 - [ ] Light and dark themes, following the device setting by default, with a
       toggle on Home
-- [ ] Runs on a physical iPhone via Expo Go
-- [ ] Ships to the App Store and Play Store
+- [x] Runs on a physical iPhone — now via an EAS development build, not Expo Go
+- [ ] Ships to the App Store and Play Store — iOS 1.0.0 is on TestFlight,
+      not yet submitted for review; Android not built
 
 That is the whole of v0. **Deferred, do not build or scaffold for:** player
 photos, advertising, monetisation, authentication, any backend or network
@@ -48,13 +49,16 @@ call, multiplayer, leaderboards, and Exam mode (a full-squad run on shirt
 numbers alone — worth reviving after v0 as a standalone feature, but not a
 fourth difficulty level).
 
-⚠️ **Shipping to stores is not a build step bolted on at the end.** Expo Go
-cannot publish to a store: it needs a development/production build, an Apple
-Developer Program membership, and a Play Console account — none of which
-exist yet (see Environment). It also makes asset licensing a release blocker
-rather than a deferred concern: every shipped image must have a licence
-someone can name. `assets/flags/README.md` is the worked example — the flag
-set was replaced wholesale for exactly this reason.
+⚠️ **The iOS release is already in flight.** As of 2026-09-11 the Apple
+Developer Program membership exists, EAS Build produces real binaries, and
+version 1.0.0 sits in App Store Connect at _Prepare for Submission_ with
+builds on TestFlight — it has never been sent for review. Android has not
+been built at all yet. Shipping is therefore no longer a future step to plan
+for; it is the phase the project is in, and asset licensing is a live release
+blocker rather than a deferred concern: every shipped image must have a
+licence someone can name. `assets/flags/README.md` is the worked example —
+the flag set was replaced wholesale for exactly this reason. See the EAS
+section under Environment for how builds and over-the-air updates work.
 
 ## Difficulty levels
 
@@ -258,18 +262,15 @@ at https://docs.expo.dev/versions/v57.0.0/ before writing any Expo code — not
 the `latest` docs, which may describe APIs from a newer SDK this project
 cannot use.
 
-⚠️ **Do not upgrade the Expo SDK past what the App Store build of Expo Go
-supports.** The version in `package.json` is pinned to that, not to the
-current SDK. There is still no Apple Developer Program membership and no
-development build, so Expo Go on a physical iPhone remains the _only_ way
-this app runs today — even though v0 is now committed to shipping on both
-stores, which will require a development build, a paid Apple Developer
-Program membership and a Play Console account. Until that build exists this
-pin stands: upgrading past what Expo Go supports breaks the ability to run
-the app at all — this happened once already (SDK 54 → 57, 2026-09-06),
-forced by Expo Go itself moving to SDK 57 on the App Store. Moving to a
-development build is
-a v1 decision.
+⚠️ **Do not upgrade the Expo SDK without deciding to cut a new store
+build.** `package.json` is pinned to SDK 57. Expo Go is no longer the only
+way to run the app — `expo-dev-client` is installed and EAS Build produces
+development, simulator, preview and production builds — so the original
+reason for the pin (Expo Go's App Store build dictating the SDK) has been
+superseded. The pin now stands for a harder reason: the binary on TestFlight
+is SDK 57, and an SDK bump changes the native runtime, which invalidates
+every over-the-air update path and forces a new build and a new submission.
+Treat an SDK upgrade as a release decision, not a dependency bump.
 
 That 54 → 57 jump also surfaced two real breakages worth knowing about if the
 SDK moves again: `expo-router` (SDK 56+) no longer allows importing directly
@@ -312,6 +313,55 @@ regenerate them, or the design side is working from a stale picture.
 `design/store/` is the same screens at App Store listing dimensions — it is
 gitignored, not part of the `design/screens/` handoff surface, and is
 regenerated via `npm run shots:store` only when needed for a store listing.
+
+### EAS: builds, channels and over-the-air updates
+
+The project runs on the EAS ecosystem. `eas.json` defines four build
+profiles — `development`, `ios-simulator`, `preview` and `production` — and
+each carries a `channel` of the same name. A build only ever receives updates
+published to its own channel.
+
+```bash
+npx eas-cli build --profile production --platform ios   # cut a store binary
+npx eas-cli submit --profile production --platform ios  # upload to App Store Connect
+npx eas-cli update --channel production --message "..." # publish an OTA update
+npx eas-cli update:roll-back-to-embedded --channel production  # undo a bad update
+npx expo-updates fingerprint:generate --platform ios    # what runtime am I on?
+```
+
+`expo-updates` ships JavaScript, styles, images and static JSON — so squad
+data corrections, question-engine changes, theme fixes and layout bugs all go
+out over the air, in seconds, without a review cycle. Native dependencies,
+Expo SDK bumps, permissions and anything in `app.json` do **not**: those need
+a new build and a new submission.
+
+⚠️ **`runtimeVersion` uses the `fingerprint` policy, deliberately — do not
+change it to `appVersion`.** The fingerprint is a hash of everything that
+affects the native runtime, computed by `@expo/fingerprint` at both build
+time and publish time. An update only reaches builds whose fingerprint
+matches, so a dependency bump automatically stops a stale update from being
+served to an incompatible binary. `appVersion` (what `eas update:configure`
+sets by default) derives the runtime from the `version` field alone, which
+means bumping a native dependency inside the same version silently produces
+JavaScript that can be delivered to a binary that cannot run it. The
+fingerprint differs per platform; that is expected.
+
+⚠️ **`eas.json` is itself a fingerprint input.** Editing it — adding a
+profile, changing a channel — changes the runtime version and orphans every
+build already in the field from future updates. Check the fingerprint before
+and after any `eas.json` change, and rebuild if it moved.
+
+⚠️ **Do not publish to the `production` channel while a build is in review.**
+Review devices launch the app like any user and will pick up channel updates,
+so a reviewer can end up running JavaScript that is not what was submitted.
+Go quiet on the channel from _Add for Review_ until the app is approved.
+
+Updates download in the background and apply on the **next** launch, not the
+current one (`checkAutomatically` defaults to `ON_LOAD`,
+`fallbackToCacheTimeout` to `0`, so launch is never blocked). Verifying an
+update therefore means launching twice. `expo-updates` is inert in Expo Go
+and in development — test the update pipeline on a `preview` or TestFlight
+build, never by reading the config.
 
 ## Working conventions
 
