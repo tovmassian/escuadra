@@ -183,13 +183,13 @@ async function openCapture(browser, { colorScheme, suffix }) {
 // capturing some other player's question.
 const L3_THIRD_PART_SHOTS = [
   {
-    file: '07-question-l3',
+    file: '08-question-l3',
     path: `/play/esp/3?seed=${SEED}`,
     name: 'Ferran Torres',
     position: 'FW',
   },
   {
-    file: '07-question-l3-nationality',
+    file: '08-question-l3-nationality',
     path: `/play/bar/3?seed=${NATIONALITY_SEED}`,
     name: 'Lamine Yamal',
     position: 'FW',
@@ -245,7 +245,7 @@ const ROUND_ONE_MISS = [...ROUND_ALL_CORRECT.slice(0, -1), 'Marc Pubill'];
  * The first listed option of each question, which lands 2/10. This is the
  * round the failed-tier capture has always shown — it used to be produced by
  * blindly clicking the topmost option — so it stays spelled out here to keep
- * `08-results.png` from moving under an unrelated refactor.
+ * `09-results.png` from moving under an unrelated refactor.
  */
 const ROUND_FIRST_OPTION = [
   'Ferran Torres',
@@ -265,9 +265,9 @@ const ROUND_FIRST_OPTION = [
 // round promotes `Play Level 2` while the missed list stays, and a flawless
 // round drops the list entirely and celebrates.
 const RESULTS_SHOTS = [
-  { file: '08-results', answers: ROUND_FIRST_OPTION },
-  { file: '08-results-passed', answers: ROUND_ONE_MISS },
-  { file: '08-results-flawless', answers: ROUND_ALL_CORRECT },
+  { file: '09-results', answers: ROUND_FIRST_OPTION },
+  { file: '09-results-passed', answers: ROUND_ONE_MISS },
+  { file: '09-results-flawless', answers: ROUND_ALL_CORRECT },
 ];
 
 /**
@@ -329,6 +329,9 @@ async function captureTheme(browser, colorScheme, suffix) {
 
     await capture.open(`/play/esp/1?seed=${SEED}`);
     await capture.shoot('06-question-l1');
+
+    await capture.open(`/play/esp/2?seed=${SEED}`);
+    await capture.shoot('07-question-l2');
 
     for (const shot of L3_THIRD_PART_SHOTS) {
       await captureLevel3ThirdPart(capture, shot);

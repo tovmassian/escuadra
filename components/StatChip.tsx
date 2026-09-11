@@ -1,8 +1,8 @@
-import { StyleSheet, Text, View } from 'react-native';
-import { Flag } from './Flag';
 import type { FlagCode } from '@/assets/flags/generated';
 import { radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { StyleSheet, Text, View } from 'react-native';
+import { Flag } from './Flag';
 
 interface StatChipProps {
   label: string;
@@ -26,6 +26,7 @@ export function StatChip({ label, value, flag }: StatChipProps) {
       borderWidth: 1,
       borderColor: colors.border,
       borderRadius: radii.pill,
+      alignSelf: 'flex-start',
     },
     label: { ...typography.captionEyebrow, color: colors.textMuted },
     value: { ...typography.statMonoTiny, color: colors.textPrimary },

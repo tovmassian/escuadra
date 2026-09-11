@@ -1,8 +1,4 @@
-import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import type { FlagCode } from '@/assets/flags/generated';
 import { AnswerOption } from '@/components/AnswerOption';
 import { Button } from '@/components/Button';
 import { ChipOption } from '@/components/ChipOption';
@@ -13,7 +9,6 @@ import { ProgressDots } from '@/components/ProgressDots';
 import { ScorePill } from '@/components/ScorePill';
 import { StatChip } from '@/components/StatChip';
 import { TeamMarker } from '@/components/TeamMarker';
-import type { FlagCode } from '@/assets/flags/generated';
 import { flagFor } from '@/lib/flags';
 import type { Level, QuestionPart } from '@/lib/questionEngine';
 import { partRailRows, progressOutcomes } from '@/lib/roundView';
@@ -22,6 +17,11 @@ import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
 import { durations, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { router, useLocalSearchParams } from 'expo-router';
+import { useEffect } from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // `QuestionPartView`'s layout. Carries no colour, so it stays at module scope
 // rather than being rebuilt per render from a palette it never reads.
@@ -65,6 +65,7 @@ export default function Question() {
     heroBlockSplit: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: spacing.lg },
     railColumn: { flex: 1, minWidth: 0, gap: spacing.sm },
     chipRow: { flexDirection: 'row', gap: spacing.xs },
+    chipColumn: { flexDirection: 'column', gap: spacing.xs, alignSelf: 'flex-start' },
     partsBlock: { flex: 1 },
     partsContent: {
       paddingHorizontal: spacing.lg,
@@ -162,7 +163,7 @@ export default function Question() {
   };
 
   const statChipsBlock = statChips.length > 0 && (
-    <View style={styles.chipRow}>
+    <View style={level === 2 ? styles.chipColumn : styles.chipRow}>
       {statChips.map((c) => (
         <StatChip key={c.label} label={c.label} value={c.value} flag={c.flag} />
       ))}

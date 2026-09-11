@@ -95,26 +95,32 @@ flawless — see below). Route, file, and what it does.
 | `screens/04-difficulty.png`              | Difficulty ladder                    |
 | `screens/05-study.png`                   | Study                                |
 | `screens/06-question-l1.png`             | Question, level 1                    |
-| `screens/07-question-l3.png`             | Question, level 3 — club part        |
-| `screens/07-question-l3-nationality.png` | Question, level 3 — nationality part |
-| `screens/08-results.png`                 | Results — failed round               |
-| `screens/08-results-passed.png`          | Results — passed, 9/10               |
-| `screens/08-results-flawless.png`        | Results — a la escuadra, 10/10       |
+| `screens/07-question-l2.png`             | Question, level 2                    |
+| `screens/08-question-l3.png`             | Question, level 3 — club part        |
+| `screens/08-question-l3-nationality.png` | Question, level 3 — nationality part |
+| `screens/09-results.png`                 | Results — failed round               |
+| `screens/09-results-passed.png`          | Results — passed, 9/10               |
+| `screens/09-results-flawless.png`        | Results — a la escuadra, 10/10       |
+
+`07-question-l2.png` is captured on arrival, unanswered, like the level-1
+shot — its distinct layout is the stat-chip column (age, nationality) stacked
+beside the hero, shrink-wrapped to its own content rather than stretched, with
+the part rail showing Name active and Position greyed until Name is answered.
 
 Both level-3 captures show the **third part**, the only state where the whole
 question layout is in play at once — answered name pill, greyed position
 chips, a part rail carrying two earned verdicts, and the last part's options
 still open. They are two different questions, not one screen twice: `squad.kind`
-decides what the third part asks. `07-question-l3.png` is a **nation** squad
-(Spain), so it asks the player's **club**; `07-question-l3-nationality.png` is a
+decides what the third part asks. `08-question-l3.png` is a **nation** squad
+(Spain), so it asks the player's **club**; `08-question-l3-nationality.png` is a
 **club** squad (Barcelona), so it asks their **nationality** — and only
 nationality options carry flag images.
 
 The three results captures are the three tiers `resultTier` distinguishes.
-`08-results.png` is a failed round — the missed list is primary and
-`Study These N` is the first CTA. `08-results-passed.png` is a cleared round
+`09-results.png` is a failed round — the missed list is primary and
+`Study These N` is the first CTA. `09-results-passed.png` is a cleared round
 that still missed a player, so `Play Level 2` takes over as primary while the
-missed list stays. `08-results-flawless.png` is the 10/10 **a la escuadra**
+missed list stays. `09-results-flawless.png` is the 10/10 **a la escuadra**
 state: green mark, green score, no missed list at all.
 
 The missed-players-filtered Study view has no capture yet.
