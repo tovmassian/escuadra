@@ -1,6 +1,6 @@
+import type { League, SquadManifestEntry } from '@/types/squad';
 import { describe, expect, it } from 'vitest';
 import { leagueFilters, teamMetaLine, teamProgress, visibleSquads } from './pickerView';
-import type { League, SquadManifestEntry } from '@/types/squad';
 
 describe('teamProgress', () => {
   it('returns null for a team that has never been played', () => {
@@ -92,12 +92,12 @@ describe('leagueFilters', () => {
   it('offers only leagues that actually have a club', () => {
     // No Bundesliga, Ligue 1 or UCL squad in the manifest, so no dead pill
     // that would filter the list down to nothing.
-    expect(leagueFilters(MANIFEST)).toEqual(['ALL', 'premier-league', 'la-liga', 'serie-a']);
+    expect(leagueFilters(MANIFEST)).toEqual(['ALL', 'la-liga', 'serie-a', 'premier-league']);
   });
 
   it('orders leagues canonically, not by first appearance', () => {
     const reversed = [...MANIFEST].reverse();
-    expect(leagueFilters(reversed)).toEqual(['ALL', 'premier-league', 'la-liga', 'serie-a']);
+    expect(leagueFilters(reversed)).toEqual(['ALL', 'la-liga', 'serie-a', 'premier-league']);
   });
 
   it('ignores nations, which carry no league', () => {
