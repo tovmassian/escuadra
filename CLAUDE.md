@@ -28,22 +28,23 @@ the data layer, the question engine, the screens, and the stores.
 Build on the existing scaffold and tokens. Do not re-scaffold, and do not
 introduce a second styling approach alongside the tokens.
 
-## v0 — definition of done
+## v1.0.0 — definition of done
 
-- [ ] ~10 club squads and ~10 national team squads as static JSON in the repo
-- [ ] Team picker, grouped into clubs and nations, with best score per team
-- [ ] Three difficulty levels (below)
-- [ ] A 10-question round with instant per-question feedback
-- [ ] Results screen listing the players missed
-- [ ] Study screen — browsable full squad list, number / name / position / club
-- [ ] Best score per team-and-level persisted locally
-- [ ] Light and dark themes, following the device setting by default, with a
+- [x] 96 club squads and 46 national team squads as static JSON in the repo
+- [x] Team picker, grouped into clubs and nations, with best score per team
+- [x] Three difficulty levels (below)
+- [x] A 10-question round with instant per-question feedback
+- [x] Results screen listing the players missed
+- [x] Study screen — browsable full squad list, number / name / position / club
+- [x] Best score per team-and-level persisted locally
+- [x] Light and dark themes, following the device setting by default, with a
       toggle on Home
 - [x] Runs on a physical iPhone — now via an EAS development build, not Expo Go
-- [ ] Ships to the App Store and Play Store — iOS 1.0.0 is on TestFlight,
-      not yet submitted for review; Android not built
+- [x] Ships to the App Store and Play Store — iOS 1.0.0 is on TestFlight,
+      pending testing and submission for review;
+- [] Ships to Play Market - neither built nor shipped;
 
-That is the whole of v0. **Deferred, do not build or scaffold for:** player
+That is the whole of v1. **Deferred, do not build or scaffold for:** player
 photos, advertising, monetisation, authentication, any backend or network
 call, multiplayer, leaderboards, and Exam mode (a full-squad run on shirt
 numbers alone — worth reviving after v0 as a standalone feature, but not a
