@@ -46,9 +46,9 @@ export type LeagueFilter = 'ALL' | League;
 
 export const LEAGUE_LABELS: Record<LeagueFilter, string> = {
   ALL: 'ALL',
+  'premier-league': 'Premier League',
   'la-liga': 'La Liga',
   'serie-a': 'Serie A',
-  'premier-league': 'Premier League',
   bundesliga: 'Bundesliga',
   'ligue-1': 'Ligue 1',
   ucl: 'UCL',
@@ -57,9 +57,9 @@ export const LEAGUE_LABELS: Record<LeagueFilter, string> = {
 /** Pill order: the big five, then UCL. Fixed rather than alphabetical so the
  *  row doesn't reshuffle as squads are added. */
 const LEAGUE_ORDER: readonly League[] = [
-  'premier-league',
   'la-liga',
   'serie-a',
+  'premier-league',
   'bundesliga',
   'ligue-1',
   'ucl',
