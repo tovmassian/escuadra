@@ -1,40 +1,130 @@
 <!doctype html>
 <html lang="en">
-<head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Escuadra</title>
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    margin: 0;
-    padding: 2rem 1.25rem 4rem;
-    max-width: 40rem;
-    margin-inline: auto;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.55;
-    color: #1a1a1a;
-    background: #ffffff;
-  }
-  @media (prefers-color-scheme: dark) {
-    body { color: #e8e8e8; background: #121212; }
-    a { color: #7db8ff; }
-  }
-  h1 { font-size: 1.75rem; margin-bottom: 1rem; }
-  nav { font-size: 0.9rem; margin-top: 2rem; }
-  nav a { margin-right: 1rem; }
-</style>
-</head>
-<body>
-<h1>Escuadra</h1>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Escuadra</title>
+    <script>
+      try {
+        const saved = localStorage.getItem('escuadra-site-theme');
+        const theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches
+          ? 'dark'
+          : 'light';
+      }
+      document.documentElement.dataset.js = 'true';
+    </script>
+    <link rel="stylesheet" href="site.css" />
+    <script type="module" src="site.mjs"></script>
+  </head>
+  <body>
+    <header class="site-header shell">
+      <a class="brand" href="index.html" aria-label="Escuadra home">
+        <span class="brand-mark" aria-hidden="true"></span><span>escuadra</span>
+      </a>
+      <nav aria-label="Utility">
+        <a href="privacy.html">Privacy</a><a href="support.html">Support</a>
+      </nav>
+      <button
+        type="button"
+        class="theme-toggle"
+        data-theme-toggle
+        aria-pressed="false"
+      >
+        <span class="theme-toggle-icon" aria-hidden="true">◐</span
+        ><span data-theme-toggle-label></span>
+      </button>
+    </header>
+    <main>
+      <section class="hero shell" aria-label="Know the squad. Cold.">
+        <div class="hero-copy" data-reveal>
+          <p class="eyebrow">Football, learned</p>
+          <h1>Know the squad. Cold.</h1>
+          <p>Ten fast questions. One squad you can name under pressure.</p>
+          <span class="release-status">Coming soon</span>
+        </div>
+        <div class="matchcard-number" data-reveal aria-label="Shirt number 07">
+          07
+        </div>
+        <div class="team-band" aria-hidden="true"></div>
+      </section>
 
-<p>Escuadra is a football squad memorisation trainer — pick a club or national side and
-answer rounds of questions about its players until you know the squad cold. It runs
-fully offline, with no accounts, no ads, and no network calls of any kind. See the
-<a href="privacy.html">privacy policy</a> for details on what stays on your device, or
-visit <a href="support.html">support</a> if you need help.</p>
+      <section class="proof shell" aria-label="See the app">
+        <figure class="screen-card" data-reveal>
+          <img
+            class="screen-image screen-image--dark"
+            src="assets/marketing/home-dark.png"
+            alt="Escuadra's dark home screen with the escuadra logo and a Start Training button"
+          />
+          <img
+            class="screen-image screen-image--light"
+            src="assets/marketing/home-light.png"
+            alt="Escuadra's light home screen with the escuadra logo and a Start Training button"
+          />
+          <figcaption>Pick a club or national squad</figcaption>
+        </figure>
+        <figure class="screen-card" data-reveal>
+          <img
+            class="screen-image screen-image--dark"
+            src="assets/marketing/question-dark.png"
+            alt="Escuadra's dark question screen showing shirt number 7 and four player answer choices"
+          />
+          <img
+            class="screen-image screen-image--light"
+            src="assets/marketing/question-light.png"
+            alt="Escuadra's light question screen showing shirt number 7 and four player answer choices"
+          />
+          <figcaption>Match the shirt number to the player</figcaption>
+        </figure>
+        <figure class="screen-card" data-reveal>
+          <img
+            class="screen-image screen-image--dark"
+            src="assets/marketing/results-dark.png"
+            alt="Escuadra's dark results screen showing a 9 out of 10 score and level cleared summary"
+          />
+          <img
+            class="screen-image screen-image--light"
+            src="assets/marketing/results-light.png"
+            alt="Escuadra's light results screen showing a 9 out of 10 score and level cleared summary"
+          />
+          <figcaption>See exactly who you missed</figcaption>
+        </figure>
+      </section>
 
-<nav><a href="privacy.html">Privacy</a> · <a href="support.html">Support</a></nav>
+      <section class="facts shell" aria-label="How Escuadra works">
+        <article data-reveal>
+          <h2>10-question rounds</h2>
+          <p>Fast sessions built for repetition, not filler.</p>
+        </article>
+        <article data-reveal>
+          <h2>Club &amp; national squads</h2>
+          <p>Choose the team you want to know before the next match.</p>
+        </article>
+        <article data-reveal>
+          <h2>Fully offline</h2>
+          <p>Your practice stays on your phone, with no account required.</p>
+        </article>
+      </section>
 
-</body>
+      <section class="trust shell" aria-label="Privacy commitment">
+        <p>No account. No ads. No data collected.</p>
+      </section>
+    </main>
+    <footer class="site-footer shell">
+      <span>&copy; Khachatur Tovmasyan</span>
+      <nav aria-label="Footer">
+        <a href="privacy.html">Privacy</a><a href="support.html">Support</a>
+      </nav>
+      <span class="release-status">Coming soon</span>
+    </footer>
+  </body>
 </html>

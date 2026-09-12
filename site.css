@@ -1,0 +1,342 @@
+/* Escuadra marketing site — shared theme, layout, motion, and a11y layer. */
+
+/* ---------- Semantic palettes ---------- */
+:root {
+  color-scheme: light;
+  --page: #f5f5f7;
+  --surface: #ffffff;
+  --ink: #11131a;
+  --muted: #626977;
+  --line: #d8dbe2;
+  --accent: #4c50ba;
+  --accent-strong: #393d9e;
+  --focus: #4c50ba;
+  --shadow: 0 18px 40px rgb(18 22 33 / 12%);
+}
+
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --page: #101218;
+  --surface: #191d24;
+  --ink: #f5f6fa;
+  --muted: #adb3bf;
+  --line: #393f4a;
+  --accent: #9296eb;
+  --accent-strong: #a9adff;
+  --focus: #b6b9ff;
+  --shadow: 0 18px 40px rgb(0 0 0 / 28%);
+}
+
+/* ---------- Focus, reveal, and motion contract ---------- */
+:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
+[data-reveal] { opacity: 1; transform: none; }
+:root[data-js='true'] [data-reveal] { opacity: 0; transform: translateY(12px); }
+:root[data-js='true'] [data-reveal].is-visible { opacity: 1; transform: none; }
+@media (prefers-reduced-motion: no-preference) {
+  * { transition-duration: 180ms; transition-timing-function: ease; }
+  [data-reveal] { transition-property: opacity, transform; }
+}
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+}
+
+/* ---------- Reset ---------- */
+*, *::before, *::after { box-sizing: border-box; }
+html { -webkit-text-size-adjust: 100%; }
+body { margin: 0; }
+h1, h2, p, figure { margin: 0; }
+img { display: block; max-width: 100%; height: auto; }
+button { font: inherit; }
+
+/* ---------- Base typography and surface ---------- */
+body {
+  background: var(--page);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  line-height: 1.55;
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  color: var(--accent-strong);
+  text-underline-offset: 0.2em;
+}
+a:hover,
+a:focus-visible {
+  color: var(--accent);
+}
+
+/* ---------- Mobile-first layout ---------- */
+.shell {
+  width: 100%;
+  max-width: 72rem;
+  margin-inline: auto;
+  padding-inline: 1.25rem;
+}
+@media (min-width: 48rem) {
+  .shell { padding-inline: 2.5rem; }
+}
+
+/* ---------- Header, brand mark, utility nav, theme toggle ---------- */
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 1.25rem;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  color: var(--ink);
+  font-weight: 700;
+  font-size: 1.05rem;
+  letter-spacing: 0.01em;
+}
+
+.brand-mark {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.45rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
+  flex-shrink: 0;
+}
+
+.site-header nav {
+  display: flex;
+  align-items: center;
+  gap: 1.25rem;
+  font-size: 0.95rem;
+}
+
+.site-header nav a {
+  color: var(--muted);
+}
+.site-header nav a:hover,
+.site-header nav a:focus-visible {
+  color: var(--ink);
+}
+
+.theme-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 2.75rem;
+  padding: 0.5rem 0.95rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  color: var(--ink);
+  font-size: 0.9rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.theme-toggle:hover,
+.theme-toggle:focus-visible {
+  border-color: var(--accent);
+}
+.theme-toggle-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ---------- Hero ---------- */
+.hero {
+  display: grid;
+  gap: 2rem;
+  padding-block: 2rem 3rem;
+}
+@media (min-width: 56rem) {
+  .hero {
+    grid-template-columns: 1.2fr 0.8fr;
+    align-items: center;
+    padding-block: 3.5rem 4.5rem;
+  }
+}
+
+.hero-copy {
+  display: grid;
+  gap: 1rem;
+  max-width: 34rem;
+}
+
+.eyebrow {
+  color: var(--accent-strong);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-size: 0.8rem;
+  font-weight: 700;
+}
+
+.hero-copy h1 {
+  font-size: clamp(2rem, 1.2rem + 4vw, 3.25rem);
+  line-height: 1.08;
+}
+
+.hero-copy p {
+  color: var(--muted);
+  font-size: clamp(1rem, 0.9rem + 0.4vw, 1.15rem);
+  max-width: 32rem;
+}
+
+.release-status {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.matchcard-number {
+  justify-self: center;
+  font-size: clamp(6rem, 3rem + 16vw, 11rem);
+  font-weight: 800;
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: tabular-nums;
+}
+
+.team-band {
+  grid-column: 1 / -1;
+  height: 0.4rem;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-strong) 50%, var(--accent) 100%);
+}
+
+/* ---------- Product proof: screen cards ---------- */
+.proof {
+  padding-block: 1.5rem 3rem;
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 56rem) {
+  .proof {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.75rem;
+  }
+}
+
+.screen-card {
+  padding: 0.75rem;
+  border-radius: 1.25rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.screen-card img {
+  border-radius: 0.75rem;
+  width: 100%;
+}
+
+.screen-card figcaption {
+  margin-top: 0.75rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+.screen-image--dark,
+.screen-image--light {
+  display: none;
+}
+:root:not([data-theme='dark']) .screen-image--light { display: block; }
+:root[data-theme='dark'] .screen-image--dark { display: block; }
+
+/* ---------- Facts ---------- */
+.facts {
+  padding-block: 1.5rem 3rem;
+  display: grid;
+  gap: 1.5rem;
+}
+@media (min-width: 56rem) {
+  .facts {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+.facts article {
+  padding: 1.5rem;
+  border-radius: 1rem;
+  border: 1px solid var(--line);
+  background: var(--surface);
+}
+
+.facts h2 {
+  font-size: 1.1rem;
+  margin-bottom: 0.5rem;
+}
+
+.facts p {
+  color: var(--muted);
+}
+
+/* ---------- Trust statement ---------- */
+.trust {
+  padding-block: 1.5rem 3rem;
+  text-align: center;
+  display: grid;
+  gap: 0.75rem;
+}
+.trust p {
+  font-size: 1.05rem;
+}
+
+/* ---------- Footer ---------- */
+.site-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-block: 2rem;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+.site-footer nav {
+  display: flex;
+  gap: 1.25rem;
+}
+.site-footer a {
+  color: var(--muted);
+}
+.site-footer a:hover,
+.site-footer a:focus-visible {
+  color: var(--ink);
+}
+
+/* ---------- Legal prose (privacy, support) ---------- */
+.legal-page {
+  max-width: 42rem;
+  margin-inline: auto;
+  padding-block: 1.5rem 4rem;
+}
+.legal-page h1 {
+  font-size: clamp(1.75rem, 1.4rem + 1.4vw, 2.25rem);
+  margin-bottom: 0.25rem;
+}
+.legal-page .updated {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+.legal-page h2 {
+  font-size: 1.15rem;
+  margin-top: 2.25rem;
+  margin-bottom: 0.5rem;
+}
+.legal-page p {
+  margin-bottom: 1rem;
+}
+.legal-page strong {
+  color: var(--ink);
+}

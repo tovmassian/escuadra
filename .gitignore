@@ -1,2 +1,7 @@
 .worktrees/
 .superpowers/
+.cache/
+.expo/
+node_modules/
+design/store
+.DS_Store

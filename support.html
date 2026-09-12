@@ -4,36 +4,43 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Support — Escuadra</title>
-<style>
-  :root { color-scheme: light dark; }
-  body {
-    margin: 0;
-    padding: 2rem 1.25rem 4rem;
-    max-width: 40rem;
-    margin-inline: auto;
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-    line-height: 1.55;
-    color: #1a1a1a;
-    background: #ffffff;
+<script>
+  try {
+    const saved = localStorage.getItem('escuadra-site-theme');
+    const theme = saved === 'light' || saved === 'dark'
+      ? saved
+      : matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
+    document.documentElement.dataset.theme = theme;
+  } catch {
+    document.documentElement.dataset.theme = matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light';
   }
-  @media (prefers-color-scheme: dark) {
-    body { color: #e8e8e8; background: #121212; }
-    a { color: #7db8ff; }
-  }
-  h1 { font-size: 1.5rem; margin-bottom: 1.5rem; }
-  nav { font-size: 0.9rem; margin-bottom: 1.5rem; }
-  nav a { margin-right: 1rem; }
-</style>
+  document.documentElement.dataset.js = 'true';
+</script>
+<link rel="stylesheet" href="site.css">
+<script type="module" src="site.mjs"></script>
 </head>
 <body>
-<nav><a href="index.html">Escuadra</a> · <a href="privacy.html">Privacy</a></nav>
+<header class="site-header shell">
+  <a class="brand" href="index.html" aria-label="Escuadra home">
+    <span class="brand-mark" aria-hidden="true"></span><span>escuadra</span>
+  </a>
+  <nav aria-label="Utility"><a href="privacy.html">Privacy</a><a href="support.html">Support</a></nav>
+  <button type="button" class="theme-toggle" data-theme-toggle aria-pressed="false">
+    <span class="theme-toggle-icon" aria-hidden="true">◐</span><span data-theme-toggle-label></span>
+  </button>
+</header>
+<main class="legal-page shell">
+  <h1>Support</h1>
 
-<h1>Support</h1>
-
-<p>Escuadra is a football squad memorisation trainer. If you run into a bug, have a
-question, or want to suggest a squad or feature, the best place to reach the developer
-is <a href="https://github.com/tovmassian/escuadra/issues">GitHub Issues</a> — open a
-new issue describing what happened, and it will be picked up from there.</p>
-
+  <p>Escuadra is a football squad memorisation trainer. If you run into a bug, have a
+  question, or want to suggest a squad or feature, the best place to reach the developer
+  is <a href="https://github.com/tovmassian/escuadra/issues">GitHub Issues</a> — open a
+  new issue describing what happened, and it will be picked up from there.</p>
+</main>
+<footer class="site-footer shell">
+  <span>&copy; Escuadra</span>
+  <nav aria-label="Footer"><a href="index.html">Home</a><a href="privacy.html">Privacy</a></nav>
+  <span class="release-status">Coming soon</span>
+</footer>
 </body>
 </html>
