@@ -1,18 +1,18 @@
-import { router } from 'expo-router';
-import { useMemo, useState } from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FilterPill } from '@/components/FilterPill';
 import { SearchField } from '@/components/SearchField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { TeamRow } from '@/components/TeamRow';
-import type { LeagueFilter } from '@/lib/pickerView';
 import { flagFor } from '@/lib/flags';
+import type { LeagueFilter } from '@/lib/pickerView';
 import { LEAGUE_LABELS, leagueFilters, teamProgress, visibleSquads } from '@/lib/pickerView';
 import { listSquads } from '@/lib/squads';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import { spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { router } from 'expo-router';
+import { useMemo, useState } from 'react';
+import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const SEGMENTS = [
   { key: 'club', label: 'Clubs' },
@@ -81,6 +81,7 @@ export default function TeamPicker() {
         <ScrollView
           horizontal
           showsHorizontalScrollIndicator={false}
+          keyboardShouldPersistTaps="handled"
           style={styles.leagueTrack}
           contentContainerStyle={styles.leagueRow}
         >
@@ -98,6 +99,7 @@ export default function TeamPicker() {
       <FlatList
         data={filtered}
         keyExtractor={(item) => item.id}
+        keyboardShouldPersistTaps="handled"
         contentContainerStyle={styles.list}
         ListEmptyComponent={
           <View style={styles.empty}>
