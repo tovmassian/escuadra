@@ -147,7 +147,6 @@ a:focus-visible {
   width: 1.5rem;
   height: 1.5rem;
   border-radius: 0.45rem;
-  background: linear-gradient(135deg, var(--accent), var(--accent-strong));
   flex-shrink: 0;
 }
 
