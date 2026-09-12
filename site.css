@@ -28,31 +28,75 @@
 }
 
 /* ---------- Focus, reveal, and motion contract ---------- */
-:focus-visible { outline: 3px solid var(--focus); outline-offset: 4px; }
-[data-reveal] { opacity: 1; transform: none; }
-:root[data-js='true'] [data-reveal] { opacity: 0; transform: translateY(12px); }
-:root[data-js='true'] [data-reveal].is-visible { opacity: 1; transform: none; }
+:focus-visible {
+  outline: 3px solid var(--focus);
+  outline-offset: 4px;
+}
+[data-reveal] {
+  opacity: 1;
+  transform: none;
+}
+:root[data-js='true'] [data-reveal] {
+  opacity: 0;
+  transform: translateY(12px);
+}
+:root[data-js='true'] [data-reveal].is-visible {
+  opacity: 1;
+  transform: none;
+}
 @media (prefers-reduced-motion: no-preference) {
-  * { transition-duration: 180ms; transition-timing-function: ease; }
-  [data-reveal] { transition-property: opacity, transform; }
+  * {
+    transition-duration: 180ms;
+    transition-timing-function: ease;
+  }
+  [data-reveal] {
+    transition-property: opacity, transform;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
 }
 
 /* ---------- Reset ---------- */
-*, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
-body { margin: 0; }
-h1, h2, p, figure { margin: 0; }
-img { display: block; max-width: 100%; height: auto; }
-button { font: inherit; }
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  -webkit-text-size-adjust: 100%;
+}
+body {
+  margin: 0;
+}
+h1,
+h2,
+p,
+figure {
+  margin: 0;
+}
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+button {
+  font: inherit;
+}
 
 /* ---------- Base typography and surface ---------- */
 body {
   background: var(--page);
   color: var(--ink);
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial,
+    sans-serif;
   line-height: 1.55;
   -webkit-font-smoothing: antialiased;
 }
@@ -74,7 +118,9 @@ a:focus-visible {
   padding-inline: 1.25rem;
 }
 @media (min-width: 48rem) {
-  .shell { padding-inline: 2.5rem; }
+  .shell {
+    padding-inline: 2.5rem;
+  }
 }
 
 /* ---------- Header, brand mark, utility nav, theme toggle ---------- */
@@ -183,14 +229,13 @@ a:focus-visible {
   max-width: 32rem;
 }
 
-.release-status {
-  display: inline-block;
+.screen-image--dark {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
   width: fit-content;
   padding: 0.4rem 0.9rem;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  color: var(--muted);
-  font-size: 0.85rem;
+  font-size: 1rem;
   font-weight: 600;
 }
 
@@ -207,9 +252,62 @@ a:focus-visible {
   grid-column: 1 / -1;
   height: 0.4rem;
   border-radius: 999px;
-  background: linear-gradient(90deg, var(--accent) 0%, var(--accent-strong) 50%, var(--accent) 100%);
+  background: linear-gradient(
+    90deg,
+    var(--accent) 0%,
+    var(--accent-strong) 50%,
+    var(--accent) 100%
+  );
+}
+.release-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding-block: 0.75rem;
+}
+.release-bar a {
+  text-decoration: none;
 }
 
+.release-bar span {
+  color: var(--muted);
+  font-size: 1.4rem;
+}
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.4rem 0.9rem;
+  width: 200px;
+}
+
+.badge--google-play {
+  width: 222px;
+}
+
+.badge--dark,
+.badge--light {
+  display: none;
+}
+:root:not([data-theme='dark']) .badge--light {
+  display: inline-block;
+}
+:root[data-theme='dark'] .badge--dark {
+  display: inline-block;
+}
+
+.release-status {
+  display: inline-block;
+  width: fit-content;
+  padding: 0.4rem 0.9rem;
+  border-radius: 999px;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
 /* ---------- Product proof: screen cards ---------- */
 .proof {
   padding-block: 1.5rem 3rem;
@@ -247,8 +345,12 @@ a:focus-visible {
 .screen-image--light {
   display: none;
 }
-:root:not([data-theme='dark']) .screen-image--light { display: block; }
-:root[data-theme='dark'] .screen-image--dark { display: block; }
+:root:not([data-theme='dark']) .screen-image--light {
+  display: block;
+}
+:root[data-theme='dark'] .screen-image--dark {
+  display: block;
+}
 
 /* ---------- Facts ---------- */
 .facts {
