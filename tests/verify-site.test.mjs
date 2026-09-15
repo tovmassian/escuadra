@@ -39,7 +39,7 @@ for (const page of pages) {
 }
 
 for (const [page, requiredText] of [
-  ['privacy.html', 'Escuadra does not collect any data about you.'],
+  ['privacy.html', 'Escuadra does not collect any personal data about you.'],
   ['support.html', 'GitHub Issues'],
 ]) {
   const html = readFileSync(page, 'utf8');
