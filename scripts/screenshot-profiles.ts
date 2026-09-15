@@ -2,21 +2,25 @@
 // Kept here, pure and dependency-free, so both the CLI flag parsing and the
 // PNG dimension assertion can be unit-tested without spinning up a browser.
 
+export type ImageFormat = 'png' | 'jpeg';
+
 export interface Profile {
   readonly name: string;
   readonly viewport: { readonly width: number; readonly height: number };
   readonly deviceScaleFactor: number;
   readonly outDir: string;
+  readonly format: ImageFormat;
   /** Non-null when a profile's output must land on an exact pixel size. */
   readonly expectedDimensions: { readonly width: number; readonly height: number } | null;
 }
 
-export const PROFILES: Record<'design' | 'store', Profile> = {
+export const PROFILES: Record<'design' | 'store' | 'play', Profile> = {
   design: {
     name: 'design',
     viewport: { width: 390, height: 844 }, // iPhone 14 logical size
     deviceScaleFactor: 2,
     outDir: 'design/screens',
+    format: 'png',
     expectedDimensions: null,
   },
   store: {
@@ -24,8 +28,23 @@ export const PROFILES: Record<'design' | 'store', Profile> = {
     viewport: { width: 440, height: 956 },
     deviceScaleFactor: 3,
     outDir: 'design/store',
+    format: 'png',
     // Apple's 6.9" class requirement — off-by-a-few is rejected at upload, not at review.
     expectedDimensions: { width: 1320, height: 2868 },
+  },
+  play: {
+    name: 'play',
+    // 360×640 is a common Android logical width, not chosen for that alone:
+    // at 3x it lands on exactly 1080×1920, the 9:16 ratio Play requires for
+    // promotion-eligible phone screenshots (its own "long side ≤ 2× short
+    // side" minimum is looser and this satisfies it too).
+    viewport: { width: 360, height: 640 },
+    deviceScaleFactor: 3,
+    outDir: 'design/play',
+    // JPEG side-steps any ambiguity over Play's "24-bit PNG, no alpha" rule —
+    // a JPEG has no alpha channel to get wrong.
+    format: 'jpeg',
+    expectedDimensions: { width: 1080, height: 1920 },
   },
 };
 
@@ -70,6 +89,43 @@ export function readPngDimensions(buffer: Buffer): { width: number; height: numb
     throw new Error(`expected IHDR as the first chunk, got "${chunkType}"`);
   }
   return { width: buffer.readUInt32BE(16), height: buffer.readUInt32BE(20) };
+}
+
+/**
+ * Reads width/height out of a JPEG buffer by walking its marker segments to
+ * the first SOF (start-of-frame) marker, where dimensions live — no
+ * JPEG-decoding dependency needed for that. Handles the baseline/progressive
+ * SOF variants (0xC0–0xC3, 0xC5–0xC7, 0xC9–0xCB, 0xCD–0xCF); JFIF/EXIF/quant/
+ * huffman segments in between are skipped via their own length prefix.
+ */
+export function readJpegDimensions(buffer: Buffer): { width: number; height: number } {
+  if (buffer.length < 4 || buffer[0] !== 0xff || buffer[1] !== 0xd8) {
+    throw new Error('not a JPEG file (missing SOI marker)');
+  }
+  let offset = 2;
+  while (offset + 4 <= buffer.length) {
+    if (buffer[offset] !== 0xff) {
+      throw new Error(`malformed JPEG: expected a marker at byte ${offset}`);
+    }
+    const marker = buffer[offset + 1];
+    const isSofMarker =
+      marker !== undefined &&
+      marker >= 0xc0 &&
+      marker <= 0xcf &&
+      marker !== 0xc4 && // DHT (Huffman table), not a frame header
+      marker !== 0xc8 && // JPG extension, reserved
+      marker !== 0xcc; // DAC (arithmetic conditioning), not a frame header
+    const segmentLength = buffer.readUInt16BE(offset + 2);
+    if (isSofMarker) {
+      // Segment: length(2) + precision(1) + height(2) + width(2) + ...
+      return {
+        height: buffer.readUInt16BE(offset + 5),
+        width: buffer.readUInt16BE(offset + 7),
+      };
+    }
+    offset += 2 + segmentLength;
+  }
+  throw new Error('malformed JPEG: no SOF marker found before end of buffer');
 }
 
 /** Throws if `dims` doesn't match the profile's required output size; no-op when the profile doesn't constrain dimensions. */

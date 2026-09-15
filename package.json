@@ -9,6 +9,8 @@
     "web": "expo start --web",
     "shots": "node scripts/capture-screens.mjs",
     "shots:store": "node scripts/capture-screens.mjs --profile=store",
+    "shots:play": "node scripts/capture-screens.mjs --profile=play",
+    "gen:play-assets": "node scripts/generate-play-listing-assets.mjs",
     "lint": "expo lint",
     "format": "prettier --write .",
     "typecheck": "tsc --noEmit",

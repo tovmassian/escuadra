@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   PROFILES,
   assertProfileDimensions,
+  readJpegDimensions,
   readPngDimensions,
   resolveProfile,
 } from './screenshot-profiles';
@@ -13,6 +14,10 @@ describe('resolveProfile', () => {
 
   it('resolves --profile=store to the store profile', () => {
     expect(resolveProfile(['--profile=store'])).toBe(PROFILES.store);
+  });
+
+  it('resolves --profile=play to the play profile', () => {
+    expect(resolveProfile(['--profile=play'])).toBe(PROFILES.play);
   });
 
   it('resolves --profile=design explicitly', () => {
@@ -47,6 +52,15 @@ describe('PROFILES', () => {
     expect(PROFILES.store.deviceScaleFactor).toBe(3);
     expect(PROFILES.store.expectedDimensions).toEqual({ width: 1320, height: 2868 });
     expect(PROFILES.store.outDir).toBe('design/store');
+    expect(PROFILES.store.format).toBe('png');
+  });
+
+  it('play profile targets exactly the 9:16 Play promotion-eligible dimensions, as JPEG', () => {
+    expect(PROFILES.play.viewport).toEqual({ width: 360, height: 640 });
+    expect(PROFILES.play.deviceScaleFactor).toBe(3);
+    expect(PROFILES.play.expectedDimensions).toEqual({ width: 1080, height: 1920 });
+    expect(PROFILES.play.outDir).toBe('design/play');
+    expect(PROFILES.play.format).toBe('jpeg');
   });
 
   it('design profile keeps its current viewport and output directory', () => {
@@ -104,6 +118,55 @@ describe('readPngDimensions', () => {
     const buf = Buffer.alloc(16);
     Buffer.from([0x89, 0x50, 0x4e, 0x47, 0x0d, 0x0a, 0x1a, 0x0a]).copy(buf, 0);
     expect(() => readPngDimensions(buf)).toThrow(/truncated before IHDR/);
+  });
+});
+
+// A minimal buffer readJpegDimensions can parse: SOI, then a baseline SOF0
+// segment carrying precision/height/width, then EOI. Real JPEGs interleave
+// JFIF/quant/Huffman segments before SOF0; the marker-length-skip loop in
+// readJpegDimensions is what lets it walk past those without needing to
+// understand them, so this fake only needs the one segment that matters.
+function fakeJpeg(width: number, height: number): Buffer {
+  const buf = Buffer.alloc(2 + 2 + 2 + 1 + 2 + 2 + 2);
+  let offset = 0;
+  buf.writeUInt8(0xff, offset++);
+  buf.writeUInt8(0xd8, offset++); // SOI
+  buf.writeUInt8(0xff, offset++);
+  buf.writeUInt8(0xc0, offset++); // SOF0
+  buf.writeUInt16BE(8, offset); // segment length (excludes the marker itself)
+  offset += 2;
+  buf.writeUInt8(8, offset++); // precision
+  buf.writeUInt16BE(height, offset);
+  offset += 2;
+  buf.writeUInt16BE(width, offset);
+  offset += 2;
+  buf.writeUInt8(0xff, offset++);
+  buf.writeUInt8(0xd9, offset); // EOI
+  return buf;
+}
+
+describe('readJpegDimensions', () => {
+  it('reads width and height out of the SOF0 segment', () => {
+    expect(readJpegDimensions(fakeJpeg(1080, 1920))).toEqual({ width: 1080, height: 1920 });
+  });
+
+  it('skips a preceding marker segment (e.g. a JFIF/APP0 header) to reach SOF0', () => {
+    const sof0 = fakeJpeg(1080, 1920);
+    const app0 = Buffer.from([0xff, 0xe0, 0x00, 0x04, 0x00, 0x00]); // 4-byte segment, no payload of interest
+    expect(
+      readJpegDimensions(Buffer.concat([sof0.subarray(0, 2), app0, sof0.subarray(2)])),
+    ).toEqual({ width: 1080, height: 1920 });
+  });
+
+  it('rejects a buffer with the wrong signature', () => {
+    const buf = fakeJpeg(100, 100);
+    buf[0] = 0x00;
+    expect(() => readJpegDimensions(buf)).toThrow(/missing SOI marker/);
+  });
+
+  it('rejects a buffer with no SOF marker before running out of bytes', () => {
+    const buf = Buffer.from([0xff, 0xd8, 0xff, 0xd9]); // SOI immediately followed by EOI
+    expect(() => readJpegDimensions(buf)).toThrow(/no SOF marker found/);
   });
 });
 

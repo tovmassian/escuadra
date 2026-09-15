@@ -28,12 +28,20 @@ exact spacing from. Whether this fidelity is sufficient is an open assumption
 being tested on this iteration.
 
 A sibling `store/` profile captures the same screens at 1320×2868, Apple's
-6.9" App Store listing size, via `npm run shots:store`. It is gitignored
-rather than committed — it isn't part of this handoff surface, just a
-release artefact regenerated on demand — but the same web-rendered, not
-device truth caveat above applies to it too, arguably more: a store listing
-represents the real app to a prospective player more directly than a design
-handoff does.
+6.9" App Store listing size, via `npm run shots:store`. A `play/` profile
+captures them again at 1080×1920 (9:16) as JPEGs, Google Play's
+promotion-eligible phone screenshot size, via `npm run shots:play`. Both are
+gitignored rather than committed — neither is part of this handoff surface,
+just release artefacts regenerated on demand — but the same web-rendered,
+not device truth caveat above applies to them too, arguably more: a store
+listing represents the real app to a prospective player more directly than a
+design handoff does.
+
+`npm run gen:play-assets` writes two more Play listing assets into `play/`
+that aren't screen captures at all: `icon-512.png` (the shipped app icon
+resized to Play's 512×512) and `feature-graphic.jpg` (1024×500, rendered from
+the dedicated `app/store/feature-graphic.tsx` route — nothing like it exists
+for iOS).
 
 ## Invariants
 

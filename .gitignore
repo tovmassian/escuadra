@@ -13,6 +13,12 @@ expo-env.d.ts
 # unlike the committed design/screens/ handoff set. See `npm run shots:store`.
 design/store/
 
+# Google Play listing assets — phone screenshots (`npm run shots:play`) plus
+# the app icon export and feature graphic (`npm run gen:play-assets`). Same
+# reasoning as design/store/ above: regenerable release artefacts, not part
+# of the design/screens/ handoff set.
+design/play/
+
 # Native
 .kotlin/
 *.orig.*

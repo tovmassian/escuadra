@@ -1,9 +1,11 @@
 // Captures every Escuadra screen from the web build. Default (`npm run
 // shots`) writes design/screens/, for the Claude Design handoff. `--profile=
 // store` (`npm run shots:store`) instead writes design/store/ at Apple's
-// 6.9" App Store dimensions — see scripts/screenshot-profiles.ts for both
-// profiles' exact viewport/scale/output facts. See design/SCREENS.md for
-// what each captured file shows.
+// 6.9" App Store dimensions, and `--profile=play` (`npm run shots:play`)
+// writes design/play/ at a Play-valid 1080×1920 (9:16) as JPEGs — see
+// scripts/screenshot-profiles.ts for every profile's exact viewport/scale/
+// format/output facts. See design/SCREENS.md for what each captured file
+// shows.
 //
 // These are web-rendered, not device truth: safe-area insets are zero on web,
 // so padding reads differently than on an iPhone. Good enough for structure
@@ -12,11 +14,12 @@
 // Every capture is deterministic on purpose — fixed seeds, fixed answers, a
 // fixed viewport per profile — so a re-run only moves a PNG when the app
 // actually changed and design can diff a capture against the previous turn's.
-import { spawn, spawnSync } from 'node:child_process';
 import { mkdir, readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
+import { killServerTree, startExpoWeb, waitForServer } from './dev-server.mjs';
 import {
   assertProfileDimensions,
+  readJpegDimensions,
   readPngDimensions,
   resolveProfile,
 } from './screenshot-profiles.ts';
@@ -49,39 +52,6 @@ const REVEAL_MS = 500;
 const SWAP_MS = 400;
 
 // ---------------------------------------------------------------------------
-// Dev server
-// ---------------------------------------------------------------------------
-
-async function waitForServer(timeoutMs = 180_000) {
-  const deadline = Date.now() + timeoutMs;
-  while (Date.now() < deadline) {
-    try {
-      const res = await fetch(BASE);
-      if (res.ok) return;
-    } catch {
-      // not up yet
-    }
-    await new Promise((r) => setTimeout(r, 1000));
-  }
-  throw new Error(`Metro did not serve ${BASE} within ${timeoutMs}ms`);
-}
-
-// On Windows, spawning with `shell: true` makes the direct child a cmd.exe
-// wrapper around the real `npx expo start --web` process tree. `server.kill()`
-// only terminates that cmd.exe shell, leaving the Metro/expo grandchildren
-// running and holding the port — the next run's waitForServer() then talks to
-// the stale, orphaned server instead of a fresh one. `taskkill /T` kills the
-// whole process tree rooted at the shell's PID.
-function killServerTree(server) {
-  if (!server.pid) return;
-  if (process.platform === 'win32') {
-    spawnSync('taskkill', ['/pid', String(server.pid), '/T', '/F']);
-  } else {
-    server.kill();
-  }
-}
-
-// ---------------------------------------------------------------------------
 // Capture session
 // ---------------------------------------------------------------------------
 
@@ -108,11 +78,13 @@ async function openCapture(browser, { colorScheme, suffix }) {
     pageError = error;
   });
 
+  const ext = PROFILE.format === 'jpeg' ? 'jpg' : 'png';
+
   const capture = {
     page,
 
     /** The suffixed filename a base name is captured as. */
-    file: (base) => `${base}${suffix}.png`,
+    file: (base) => `${base}${suffix}.${ext}`,
 
     /**
      * Server-rendered markup can paint fine while the client bundle is dead,
@@ -155,9 +127,16 @@ async function openCapture(browser, { colorScheme, suffix }) {
     async shoot(base) {
       capture.assertLive();
       const filePath = `${PROFILE.outDir}/${capture.file(base)}`;
-      await page.screenshot({ path: filePath });
+      await page.screenshot({
+        path: filePath,
+        type: PROFILE.format,
+        ...(PROFILE.format === 'jpeg' ? { quality: 92 } : {}),
+      });
       if (PROFILE.expectedDimensions) {
-        assertProfileDimensions(PROFILE, readPngDimensions(await readFile(filePath)), filePath);
+        const buffer = await readFile(filePath);
+        const dims =
+          PROFILE.format === 'jpeg' ? readJpegDimensions(buffer) : readPngDimensions(buffer);
+        assertProfileDimensions(PROFILE, dims, filePath);
       }
       console.log(`captured ${capture.file(base)}`);
     },
@@ -349,16 +328,12 @@ async function captureTheme(browser, colorScheme, suffix) {
 // Entry point
 // ---------------------------------------------------------------------------
 
-const server = spawn('npx', ['expo', 'start', '--web', '--port', String(PORT)], {
-  stdio: 'inherit',
-  shell: process.platform === 'win32',
-  env: { ...process.env, BROWSER: 'none', CI: '1' },
-});
+const server = startExpoWeb(PORT);
 
 let browser;
 try {
   await mkdir(PROFILE.outDir, { recursive: true });
-  await waitForServer();
+  await waitForServer(BASE);
 
   browser = await chromium.launch();
 
