@@ -89,13 +89,22 @@ export default function About() {
           <Text style={styles.sectionHeading}>Privacy</Text>
 
           <Text style={styles.paragraphEmphasis}>
-            Escuadra does not collect any data about you.
+            Escuadra does not collect any personal data about you.
           </Text>
 
           <Text style={styles.paragraph}>
-            The app works entirely offline. It makes no network requests of any kind. There is no
-            account, no sign-in, and no analytics or tracking software. Nothing you do in the app is
-            transmitted anywhere, because the app has no way to transmit anything.
+            There is no account, no sign-in, and no advertising, analytics or tracking software.
+            Your scores and settings never leave your device.
+          </Text>
+
+          <Text style={styles.subHeading}>App updates</Text>
+          <Text style={styles.paragraph}>
+            When Escuadra starts, it checks whether a newer version of the app is available from
+            Expo, the service that delivers its updates. The check sends only what is needed to
+            deliver the right update: your device&apos;s operating system, the app&apos;s version,
+            and a random identifier created for this installation. The identifier is not linked to
+            you or to anything you do in the app. Without a connection, the app works fully offline
+            and skips the check.
           </Text>
 
           <Text style={styles.subHeading}>What is stored on your device</Text>
@@ -112,14 +121,14 @@ export default function About() {
 
           <Text style={styles.subHeading}>Crash reports</Text>
           <Text style={styles.paragraph}>
-            If you have chosen to share analytics and diagnostics with Apple in your iOS settings,
-            Apple may pass on anonymised crash reports about this app. That is handled entirely by
-            Apple and controlled by your iOS settings. Escuadra itself sends nothing.
+            If you allow your device to share diagnostics, Apple (on iOS) or Google (on Android) may
+            share anonymised crash reports with the developer. That is handled by Apple or Google
+            and controlled in your device settings. Escuadra itself sends no crash reports.
           </Text>
 
           <Text style={styles.subHeading}>Children</Text>
           <Text style={[styles.paragraph, { marginBottom: 0 }]}>
-            Escuadra collects no data from anyone, including children.
+            Escuadra collects no personal data from anyone, including children.
           </Text>
         </View>
 
