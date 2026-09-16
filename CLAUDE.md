@@ -348,8 +348,9 @@ published to its own channel.
 ```bash
 npx eas-cli build --profile production --platform ios   # cut a store binary
 npx eas-cli submit --profile production --platform ios  # upload to App Store Connect
-npx eas-cli update --channel production --message "..." # publish an OTA update
-npx eas-cli update:roll-back-to-embedded --channel production  # undo a bad update
+npx eas-cli fingerprint:compare --build-id <id> --environment production  # safe to OTA this build?
+npx eas-cli update --channel production --platform android --environment production --message "..."  # publish an OTA update
+npx eas-cli update:roll-back-to-embedded --channel production --platform android  # undo a bad update
 npx expo-updates fingerprint:generate --platform ios    # what runtime am I on?
 ```
 
@@ -370,10 +371,25 @@ means bumping a native dependency inside the same version silently produces
 JavaScript that can be delivered to a binary that cannot run it. The
 fingerprint differs per platform; that is expected.
 
-⚠️ **`eas.json` is itself a fingerprint input.** Editing it — adding a
-profile, changing a channel — changes the runtime version and orphans every
-build already in the field from future updates. Check the fingerprint before
-and after any `eas.json` change, and rebuild if it moved.
+⚠️ **The fingerprint moves on more than native code.** Besides native
+packages in `node_modules`, `eas.json`, and anything in `app.json` (including
+`version` and `name`), it also hashes **npm scripts in `package.json` and
+`.gitignore`**. Commit `3b66b670` added two scripts and one ignore line, and
+`main` silently stopped matching every shipped 1.0.0 binary. `eas update` does
+not warn about a mismatch: it prints "Published!" and the update reaches
+nobody. So:
+
+- Publish OTA updates for a shipped version **only from its
+  `release/<version>` branch** (created at the build's commit; JS fixes are
+  cherry-picked onto it), never from `main`.
+- Before every publish, run
+  `npx eas-cli fingerprint:compare --build-id <id> --environment production`
+  and continue only on ✅.
+
+[`docs/eas-update.md`](docs/eas-update.md) is the full guide: a tested matrix
+of what moves the fingerprint, the store-build-vs-OTA decision, step-by-step
+publish and verification, and the rules for the planned GitHub Actions
+automation. Keep it current when the process changes.
 
 ⚠️ **Do not publish to the `production` channel while a build is in review**
 on either store — App Store review, Beta App Review, or a Google Play
@@ -414,7 +430,10 @@ build, never by reading the config.
 
 ## Reference docs
 
-None are checked in yet. `docs/mobile-dev-setup.md` was explicitly superseded by
+- [`docs/eas-update.md`](docs/eas-update.md): store build vs OTA update,
+  fingerprint verification, release branches, CI rules.
+
+`docs/mobile-dev-setup.md` was explicitly superseded by
 the setup walkthrough and should not come back. If the design and logo briefs are
 worth keeping in-repo, drop them at `docs/claude-design-brief.md` and
 `docs/logo-brief.md` and re-add the `@` imports here.
