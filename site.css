@@ -286,6 +286,30 @@ a:focus-visible {
   width: 222px;
 }
 
+/* Phones and small tablets: below 38rem the label plus both badges at full size
+   no longer fit on one line (~543px of content), so the label takes its own line
+   and the badges scale with the viewport instead of being squeezed. The
+   38vw / 42.2vw pair keeps the same width ratio as 200px / 222px, so the two
+   badges stay the same height; min() caps them at their full size. */
+@media (max-width: 38rem) {
+  .release-bar {
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: 0.25rem;
+  }
+  .release-bar span {
+    flex: 1 0 100%;
+    font-size: 1.15rem;
+  }
+  .badge {
+    width: min(200px, 38vw);
+    padding-inline: 0;
+  }
+  .badge--google-play {
+    width: min(222px, 42.2vw);
+  }
+}
+
 .badge--dark,
 .badge--light {
   display: none;
