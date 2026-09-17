@@ -29,9 +29,18 @@ interface ProgressState {
    *  only — reverting someone's appearance choice alongside their scores
    *  would be a surprise, and the two are unrelated. */
   themePreference: ThemePreference;
+  /** Random UUID created once per installation, the anonymous `clientUser`
+   *  for telemetry. Null until the root layout creates it after hydration.
+   *  Survives `reset()`; a reinstall clears storage and so gets a new one. */
+  installId: string | null;
+  /** The About screen's opt-out. Off means `lib/telemetry.ts` sends nothing.
+   *  Survives `reset()` for the same reason as `themePreference`. */
+  telemetryEnabled: boolean;
   recordScore: (squadId: string, level: number, score: number) => void;
   setLastPlayed: (squadId: string, level: number) => void;
   setThemePreference: (preference: ThemePreference) => void;
+  setInstallId: (installId: string) => void;
+  setTelemetryEnabled: (enabled: boolean) => void;
   reset: () => void;
 }
 
@@ -42,6 +51,8 @@ export const useProgress = create<ProgressState>()(
       completedLevels: {},
       lastPlayed: null,
       themePreference: 'system',
+      installId: null,
+      telemetryEnabled: true,
       recordScore: (squadId, level, score) =>
         set((s) => {
           const key = scoreKey(squadId, level);
@@ -53,6 +64,8 @@ export const useProgress = create<ProgressState>()(
         }),
       setLastPlayed: (squadId, level) => set({ lastPlayed: { squadId, level } }),
       setThemePreference: (themePreference) => set({ themePreference }),
+      setInstallId: (installId) => set((s) => (s.installId === null ? { installId } : s)),
+      setTelemetryEnabled: (telemetryEnabled) => set({ telemetryEnabled }),
       reset: () => set({ bestScores: {}, completedLevels: {}, lastPlayed: null }),
     }),
     {
