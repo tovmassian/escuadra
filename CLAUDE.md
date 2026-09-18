@@ -115,9 +115,10 @@ update this file in the same PR rather than leave a stale rule behind.
    crash reporting, a backend call, a new SDK) ships **together** with the
    updated privacy policy (the published page and the About screen text,
    word for word), Apple's App Privacy answers and Google Play's Data safety
-   form — in a store build, never over the air. Today the only traffic is
+   form — in a store build, never over the air. Today the traffic is
    `expo-updates` checking EAS Update on launch (OS, project ID, a random
-   installation token).
+   installation token) and, from 1.1.0, opt-out TelemetryDeck usage signals
+   (see Telemetry under Architecture rules).
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
    rather than inlining a value. This governs the app's own design system —
@@ -258,6 +259,19 @@ Wikipedia reads), `squad-writer` (the sole, sequential writer of
   environment and cannot load `react-native`) can test it; `theme/useTheme.ts`
   exposes `useThemeName()` and `useThemeColors()`. The persisted preference
   lives in `stores/progress.ts` — it is not a third store.
+- **Telemetry** is TelemetryDeck, anonymous and opt-out. The event allowlist
+  — every event name and property that may leave the device — is
+  `TELEMETRY_EVENTS` in `lib/telemetryEvents.ts`, alongside the pure gate
+  that keeps it inert in `__DEV__`, on web (so `npm run shots*` never sends),
+  when opted out, and with no App ID (`app.json` →
+  `extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only module that
+  imports the SDK; screens call its `track()`. The anonymous `clientUser` is
+  a random `installId` persisted in `stores/progress.ts`, next to the
+  About-screen opt-out. Non-`production` channels send TelemetryDeck test
+  signals. **A new event or property is a disclosure review** (guardrail 4):
+  the privacy policy, About text, App Privacy and Data safety answers change
+  with it, in a store build. Never put names, free text or player data in a
+  payload.
 - Zustand's `persist` defaults to `localStorage`, which does not exist here. Use
   `createJSONStorage(() => AsyncStorage)`.
 - Every animation stays under 300ms. The app is played in fast repetitive bursts
