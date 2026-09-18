@@ -16,7 +16,7 @@ free text, no player data.
   not installed. The gate refuses to send if `TextEncoder` is missing, so the
   worst case is silence, never a crash.
 - **App ID** lives in `app.json` → `expo.extra.telemetryDeckAppId`, read via
-  `expo-constants`. Empty string = inert.
+  `expo-constants`. Empty string = inert (set to the Escuadra app on 2026-09-18).
 - **Test mode** = `Updates.channel !== 'production'`. Preview builds
   (`channel: preview`) send test signals; dev builds never send at all.
 
