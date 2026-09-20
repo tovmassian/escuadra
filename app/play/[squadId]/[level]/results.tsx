@@ -332,13 +332,10 @@ export default function Results() {
       )}
 
       <View style={styles.actions}>
-        <Animated.View entering={riseIn(cascade.actionsBase)}>
-          <Button label="Share Result" variant="outline" onPress={shareResult} />
-        </Animated.View>
         {actions.map((id, index) => (
           <Animated.View
             key={id}
-            entering={riseIn(cascade.actionsBase + (index + 1) * cascade.actionsStep)}
+            entering={riseIn(cascade.actionsBase + index * cascade.actionsStep)}
           >
             <Button
               label={actionLabels[id]}
@@ -347,6 +344,11 @@ export default function Results() {
             />
           </Animated.View>
         ))}
+        <Animated.View
+          entering={riseIn(cascade.actionsBase + actions.length * cascade.actionsStep)}
+        >
+          <Button label="Share Result" variant="outline" onPress={shareResult} />
+        </Animated.View>
       </View>
     </View>
   );

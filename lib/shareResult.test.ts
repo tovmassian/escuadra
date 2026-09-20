@@ -15,6 +15,7 @@ describe('formatShareText', () => {
       [
         'Escuadra · Real Madrid · Level 2',
         `8/10  ${G}${G}${R}${G}${G}${G}${G}${R}${G}${G}`,
+        '',
         SHARE_URL,
       ].join('\n'),
     );

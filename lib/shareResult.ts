@@ -23,6 +23,7 @@ export function formatShareText({ teamName, level, outcomes }: ShareInput): stri
   return [
     `Escuadra · ${teamName} · Level ${level}`,
     `${correct}/${answered.length}  ${verdict}${grid}`,
+    '',
     SHARE_URL,
   ].join('\n');
 }
