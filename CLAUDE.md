@@ -28,10 +28,37 @@ persisted best scores, light and dark themes, About screen.
 Build on the existing scaffold and tokens. Do not re-scaffold, and do not
 introduce a second styling approach alongside the tokens.
 
-**Release status (2026-09-15):** iOS 1.0.0 is in App Store review (#7).
-Android 1.0.0 is going through Google Play internal and closed testing
-(#41). Shipped builds exist on both platforms, so every change has a
-delivery path — see the EAS section under Environment.
+**Release status (2026-09-21):** iOS 1.0.0 is live on the
+[App Store](https://apps.apple.com/us/app/escuadra/id6810705505) (#7).
+Android 1.0.0 is in Google Play's closed test (#49); no Play review is in
+flight until the production-access application (#50) and then the
+production release (#51). Both 1.0.0 binaries take over-the-air updates
+from `release/1.0.0`. The next store version is 1.1.0 (#52). The marketing
+site links the App Store and shows Google Play greyed out, and its privacy
+page describes 1.0.0 — the 1.1.0 policy goes live only when a 1.1.0 build
+reaches users (#54).
+
+**Branches.** Three kinds, and which one a change belongs on matters more
+here than in most repos — see the EAS section under Environment for why.
+
+- `main` — development. Its fingerprint drifts from shipped binaries, so
+  never publish an OTA update from it.
+- `release-1.1.0` — integration branch for the next store version. PRs for
+  1.1.0 work target it; it merges into `main` at release (#60). Fixes that
+  land on `main` meanwhile are cherry-picked onto it with `-x`.
+- `release/<version>` — one per shipped version, created at the store
+  build's commit, and the only place OTA updates for that version are
+  published from. `release/1.0.0` is the only one today; JS fixes reach it
+  from `main` by `git cherry-pick -x`. `release/1.1.0` is created when the
+  1.1.0 store build is cut.
+
+⚠️ **On `release-1.1.0` today, the About privacy text is out of date.** It
+still says "no advertising, analytics or tracking software" while
+TelemetryDeck (#53) is in the code. Nothing from this branch may reach users
+until #54 rewrites that text and the web policy together, and #55 updates the
+store declarations — the order is #54 → #55 → #60. The 1.1.0 store build is
+also the commit that adds `fingerprint.config.js` (see `docs/eas-update.md`),
+never a commit in between.
 
 ## Scope and roadmap
 
