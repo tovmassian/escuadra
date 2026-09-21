@@ -1,5 +1,26 @@
 # Escuadra
 
+> ⚠️ **You are on `release/1.0.0` — the OTA branch for the shipped 1.0.0
+> binaries** (iOS build 3 = runtime `8b8b8840…`, Android build 3 = runtime
+> `a616db89…`). Everything committed here must leave both fingerprints
+> unchanged, or every published update silently reaches nobody.
+>
+> - **Belongs here:** JavaScript fixes cherry-picked from `main` with
+>   `git cherry-pick -x`, docs, and GitHub Actions workflows — measured to be
+>   fingerprint-inert (see the matrix in `docs/eas-update.md`).
+> - **Never here:** new npm scripts, dependency changes, `.gitignore` lines,
+>   `fingerprint.config.js`, or any `app.json` / `eas.json` edit. Each one
+>   moves the fingerprint. A change that needs one is a store build for a new
+>   version, not a commit on this branch.
+> - **Before every publish:**
+>   `npx eas-cli fingerprint:compare --build-id <id> --environment production`,
+>   continue only on ✅, and always pass `--platform`.
+>
+> The rest of this file is `main`'s CLAUDE.md (as of `2eb496fa`, #69).
+> Commands and files it mentions that were added after the 1.0.0 build —
+> `shots:play`, `gen:play-assets`, `design/play/`,
+> `app/store/feature-graphic.tsx` — exist only on `main`.
+
 A football squad memorisation trainer for mobile.
 
 ## What the game is
@@ -21,45 +42,49 @@ round is **a la escuadra**; use that term in the UI rather than "perfect score".
 
 ## Current state
 
-The Expo app is scaffolded and runs. Design tokens from the design pass are in
-the repo, in both a light and a dark palette. What's missing is the product:
-the data layer, the question engine, the screens, and the stores.
+v1.0.0 is feature-complete: 96 club and 46 national squads, team picker with
+search, three difficulty levels, 10-question rounds, results, Study screen,
+persisted best scores, light and dark themes, About screen.
 
 Build on the existing scaffold and tokens. Do not re-scaffold, and do not
 introduce a second styling approach alongside the tokens.
 
-## v1.0.0 — definition of done
+**Release status (2026-09-21):** iOS 1.0.0 is live on the
+[App Store](https://apps.apple.com/us/app/escuadra/id6810705505) (#7).
+Android 1.0.0 is in Google Play's closed test (#49); no Play review is in
+flight until the production-access application (#50) and then the
+production release (#51). Both 1.0.0 binaries take over-the-air updates
+from `release/1.0.0`. The next store version is 1.1.0 (#52). The marketing
+site links the App Store and shows Google Play greyed out, and its privacy
+page describes 1.0.0 — the 1.1.0 policy goes live only when a 1.1.0 build
+reaches users (#54).
 
-- [x] 96 club squads and 46 national team squads as static JSON in the repo
-- [x] Team picker, grouped into clubs and nations, with best score per team
-- [x] Three difficulty levels (below)
-- [x] A 10-question round with instant per-question feedback
-- [x] Results screen listing the players missed
-- [x] Study screen — browsable full squad list, number / name / position / club
-- [x] Best score per team-and-level persisted locally
-- [x] Light and dark themes, following the device setting by default, with a
-      toggle on Home
-- [x] Runs on a physical iPhone — now via an EAS development build, not Expo Go
-- [x] Ships to the App Store and Play Store — iOS 1.0.0 is on TestFlight,
-      pending testing and submission for review;
-- [] Ships to Play Market - neither built nor shipped;
+**Branches.** Three kinds, and which one a change belongs on matters more
+here than in most repos — see the EAS section under Environment for why.
 
-That is the whole of v1. **Deferred, do not build or scaffold for:** player
-photos, advertising, monetisation, authentication, any backend or network
-call, multiplayer, leaderboards, and Exam mode (a full-squad run on shirt
-numbers alone — worth reviving after v0 as a standalone feature, but not a
-fourth difficulty level).
+- `main` — development. Its fingerprint drifts from shipped binaries, so
+  never publish an OTA update from it.
+- `release-1.1.0` — integration branch for the next store version. PRs for
+  1.1.0 work target it; it merges into `main` at release (#60). Fixes that
+  land on `main` meanwhile are cherry-picked onto it with `-x`.
+- `release/<version>` — one per shipped version, created at the store
+  build's commit, and the only place OTA updates for that version are
+  published from. `release/1.0.0` is the only one today; JS fixes reach it
+  from `main` by `git cherry-pick -x`. `release/1.1.0` is created when the
+  1.1.0 store build is cut.
 
-⚠️ **The iOS release is already in flight.** As of 2026-09-11 the Apple
-Developer Program membership exists, EAS Build produces real binaries, and
-version 1.0.0 sits in App Store Connect at _Prepare for Submission_ with
-builds on TestFlight — it has never been sent for review. Android has not
-been built at all yet. Shipping is therefore no longer a future step to plan
-for; it is the phase the project is in, and asset licensing is a live release
-blocker rather than a deferred concern: every shipped image must have a
-licence someone can name. `assets/flags/README.md` is the worked example —
-the flag set was replaced wholesale for exactly this reason. See the EAS
-section under Environment for how builds and over-the-air updates work.
+## Scope and roadmap
+
+**Scope lives in GitHub — milestones and issues — not in this file.** The
+app is growing, and this file describes how to build it, not what to build
+next. If the issue being worked on asks for something — analytics, photos,
+a backend call, a new mode, monetisation — that is the decision; build it
+well within the guardrails below. Only stop and ask when a request would
+break a **legal** guardrail (crests, unlicensed assets) or when no issue
+covers it and it is a product-direction change.
+
+One idea worth remembering: Exam mode (a full-squad run on shirt numbers
+alone) belongs as a standalone feature, not a fourth difficulty level.
 
 ## Difficulty levels
 
@@ -83,14 +108,18 @@ game trivial; same-position and same-squad distractors make it a real test. On
 level 3 the name distractors are drawn from the **same squad**, so they are
 genuinely confusable.
 
-## Hard constraints
+## Guardrails
 
-Product-defining. Flag a conflict rather than working around any of these.
+Two kinds. **Legal** guardrails (2 and the asset-licensing rule) are never
+worked around — stop and ask. **Product and engineering** guardrails are the
+defaults; an issue that explicitly changes one wins, and the change should
+update this file in the same PR rather than leave a stale rule behind.
 
-1. **No player photographs in v0** — but photos become the _primary_ element in
-   v1, so the question screen keeps a hero slot that a square portrait can drop
-   into without a redesign. It currently holds a large shirt number. Keep
-   `photo: string | null` on the player type from day one.
+1. **Player photos slot into the existing hero.** The question screen keeps a
+   hero slot that a square portrait can drop into without a redesign (it
+   currently holds a large shirt number), and players carry
+   `photo: string | null`. Any photo that ships is bound by the
+   asset-licensing rule below.
 2. **No club crests, badges, logos, or shield shapes. Ever.** Trademark
    exposure, and this constraint outlives v0. Clubs are identified by text and
    a banded colour marker (see `TeamMarker` in the data model section) — never
@@ -102,6 +131,11 @@ Product-defining. Flag a conflict rather than working around any of these.
    OS flag-emoji font, and Windows ships none, so the Playwright capture behind
    `npm run shots` would render "AR". Crests, badges, logos, and shield shapes
    remain banned forever.
+
+   **Asset licensing (legal):** every shipped image must have a licence
+   someone can name. `assets/flags/README.md` is the worked example — the flag
+   set was replaced wholesale for exactly this reason.
+
 3. **No text input in the quiz. No keyboard for answering.** Every quiz answer
    is a tap — option cards and chip selectors are the entire input vocabulary
    there. This is deliberate: typing player names on a phone is the worst
@@ -114,8 +148,16 @@ Product-defining. Flag a conflict rather than working around any of these.
    among ~20. Keep the exception scoped to that field — do not add free-text
    input anywhere else in the app.
 
-4. **No auth, no accounts, no analytics SDKs, no network calls.** v0 is fully
-   offline.
+4. **Offline-first, and privacy disclosures always match the binary.** Core
+   gameplay must work with no connection; squad data stays bundled. Network
+   features are allowed when an issue asks for them. The rule is honesty,
+   not abstinence: any change that alters what leaves the device (analytics,
+   crash reporting, a backend call, a new SDK) ships **together** with the
+   updated privacy policy (the published page and the About screen text,
+   word for word), Apple's App Privacy answers and Google Play's Data safety
+   form — in a store build, never over the air. Today the only traffic is
+   `expo-updates` checking EAS Update on launch (OS, project ID, a random
+   installation token).
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
    rather than inlining a value. This governs the app's own design system —
@@ -131,8 +173,11 @@ Product-defining. Flag a conflict rather than working around any of these.
    `theme/tokens.ts` implement the same `Palette` interface: add a role to
    both or to neither.
 6. **The product is called Escuadra.** "Squad Trainer", "Squad Game", "Squad
-   Quiz" and similar all predate the name and are stale wherever they survive —
-   including code comments, file headers and docs. Fix them on sight.
+   Quiz" and similar as a _product name_ predate it and are stale wherever
+   they survive — code comments, file headers, docs. Fix them on sight.
+   Descriptive store copy (an App Store subtitle, a Play short description)
+   may use category words like "football squad quiz"; that is ASO, not a
+   rename.
 
 ## Data model
 
@@ -242,9 +287,11 @@ Wikipedia reads), `squad-writer` (the sole, sequential writer of
 - **`lib/questionEngine.ts` stays pure.** No React, no store imports, no I/O.
   Given a squad and a level, return questions. It's the piece most likely to
   need iteration and it must be trivially unit-testable.
-- **Two stores only.** `stores/progress.ts` is persisted via AsyncStorage — best
-  scores, teams played. `stores/session.ts` is ephemeral — current round state. A
-  half-finished round must not survive an app restart.
+- **Persisted vs ephemeral state.** `stores/progress.ts` is persisted via
+  AsyncStorage — best scores, teams played, preferences. `stores/session.ts` is
+  ephemeral — current round state. A half-finished round must not survive an
+  app restart. Put new state in whichever of the two fits; add a third store
+  only when neither does, and say why in the PR.
 - **Theming is two palettes and a hook.** `theme/tokens.ts` holds
   `palettes.dark` and `palettes.light`; `theme/resolveTheme.ts` is the pure
   preference-to-name resolver, kept React-free so Vitest (which runs in a node
@@ -301,8 +348,10 @@ npx expo start -c     # same, clearing Metro cache
 npm run typecheck
 npm run lint
 npm run check         # run before reporting any work complete
-npm run shots          # capture design/screens/ from the running web build
-npm run shots:store    # capture the 1320×2868 App Store profile to design/store/
+npm run shots           # capture design/screens/ from the running web build
+npm run shots:store     # capture the 1320×2868 App Store profile to design/store/
+npm run shots:play      # capture the 1080×1920 (9:16) Google Play profile to design/play/
+npm run gen:play-assets # write design/play/icon-512.png and feature-graphic.jpg
 ```
 
 `design/` is the handoff surface pushed to the Claude Design project.
@@ -311,9 +360,23 @@ npm run shots:store    # capture the 1320×2868 App Store profile to design/stor
 identity so they cannot quietly drift into a duplicate. `design/screens/`
 holds PNGs captured by `npm run shots`; after any change to a screen,
 regenerate them, or the design side is working from a stale picture.
-`design/store/` is the same screens at App Store listing dimensions — it is
-gitignored, not part of the `design/screens/` handoff surface, and is
-regenerated via `npm run shots:store` only when needed for a store listing.
+
+`design/store/` (App Store, 1320×2868 PNG, `npm run shots:store`) and
+`design/play/` (Google Play, 1080×1920 JPEG, `npm run shots:play`) are the
+same screens re-captured at each store's listing dimensions — both
+gitignored, not part of the `design/screens/` handoff surface, regenerated on
+demand rather than committed. `npm run gen:play-assets` additionally writes
+`design/play/icon-512.png` (the shipped app icon resized to Play's required
+512×512, alpha preserved) and `design/play/feature-graphic.jpg` (1024×500,
+rendered from the dedicated `app/store/feature-graphic.tsx` capture-only
+route — nothing like it exists for iOS). **Regenerate whichever of these is
+stale whenever a store listing is being prepared, and whenever the app icon,
+brand mark, or any captured screen changes** — a task that touches
+`assets/images/icon.png`, `theme/brand.ts`, `theme/tokens.ts`'s brand roles,
+or any `app/` screen should re-run the relevant `shots*`/`gen:play-assets`
+command in the same PR, not leave the store assets stale. See
+`scripts/screenshot-profiles.ts` for every profile's exact viewport/scale/
+format facts and `design/SCREENS.md` for what each captured file shows.
 
 ### EAS: builds, channels and over-the-air updates
 
@@ -325,8 +388,9 @@ published to its own channel.
 ```bash
 npx eas-cli build --profile production --platform ios   # cut a store binary
 npx eas-cli submit --profile production --platform ios  # upload to App Store Connect
-npx eas-cli update --channel production --message "..." # publish an OTA update
-npx eas-cli update:roll-back-to-embedded --channel production  # undo a bad update
+npx eas-cli fingerprint:compare --build-id <id> --environment production  # safe to OTA this build?
+npx eas-cli update --channel production --platform android --environment production --message "..."  # publish an OTA update
+npx eas-cli update:roll-back-to-embedded --channel production --platform android  # undo a bad update
 npx expo-updates fingerprint:generate --platform ios    # what runtime am I on?
 ```
 
@@ -347,15 +411,45 @@ means bumping a native dependency inside the same version silently produces
 JavaScript that can be delivered to a binary that cannot run it. The
 fingerprint differs per platform; that is expected.
 
-⚠️ **`eas.json` is itself a fingerprint input.** Editing it — adding a
-profile, changing a channel — changes the runtime version and orphans every
-build already in the field from future updates. Check the fingerprint before
-and after any `eas.json` change, and rebuild if it moved.
+⚠️ **The fingerprint moves on more than native code.** Besides native
+packages in `node_modules`, `eas.json`, and anything in `app.json` (including
+`version` and `name`), it also hashes **npm scripts in `package.json` and
+`.gitignore`**. Commit `3b66b670` added two scripts and one ignore line, and
+`main` silently stopped matching every shipped 1.0.0 binary. `eas update` does
+not warn about a mismatch: it prints "Published!" and the update reaches
+nobody. So:
 
-⚠️ **Do not publish to the `production` channel while a build is in review.**
-Review devices launch the app like any user and will pick up channel updates,
-so a reviewer can end up running JavaScript that is not what was submitted.
-Go quiet on the channel from _Add for Review_ until the app is approved.
+- Publish OTA updates for a shipped version **only from its
+  `release/<version>` branch** (created at the build's commit; JS fixes are
+  cherry-picked onto it), never from `main`.
+- Before every publish, run
+  `npx eas-cli fingerprint:compare --build-id <id> --environment production`
+  and continue only on ✅.
+
+[`docs/eas-update.md`](docs/eas-update.md) is the full guide: a tested matrix
+of what moves the fingerprint, the store-build-vs-OTA decision, step-by-step
+publish and verification, and the rules for the planned GitHub Actions
+automation. Keep it current when the process changes.
+
+⚠️ **Do not publish to the `production` channel while a build is in review**
+on either store — App Store review, Beta App Review, or a Google Play
+closed-test or production review. Review devices launch the app like any user
+and will pick up channel updates, so a reviewer can end up running JavaScript
+that is not what was submitted. Go quiet on the channel from submission until
+approval. `eas update` and `update:roll-back-to-embedded` default to
+`--platform all`: pass `--platform android` or `--platform ios` whenever only
+one platform is safe to touch.
+
+**What needs a store build, not an OTA update:** native dependencies (any
+package with native code — `expo-crypto`, `expo-store-review`, image capture,
+sharing), Expo SDK bumps, permissions, anything in `app.json` or `eas.json`,
+and any change to what data leaves the device (guardrail 4) — even if the code
+itself is pure JavaScript. The fingerprint enforces the first four on its own;
+the last one is on you.
+
+**Google Play's 12-tester / 14-day closed test** is a one-time gate before a
+new app's first production release on a personal developer account, not a
+per-update cycle. Updates after production access go straight to review.
 
 Updates download in the background and apply on the **next** launch, not the
 current one (`checkAutomatically` defaults to `ON_LOAD`,
@@ -368,13 +462,18 @@ build, never by reading the config.
 
 - Prefer targeted edits over rewriting whole files.
 - Flag design tradeoffs before building rather than resolving them silently.
+  Flagging is a sentence in the plan, not a blocker — unless it touches a
+  legal guardrail, keep going.
 - Run `npm run check` and report the actual output before claiming work is done.
 - TypeScript is strict, including `noUncheckedIndexedAccess`. With a quiz engine
   full of `options[i]`, do not weaken it to make an error go away.
 
 ## Reference docs
 
-None are checked in yet. `docs/mobile-dev-setup.md` was explicitly superseded by
+- [`docs/eas-update.md`](docs/eas-update.md): store build vs OTA update,
+  fingerprint verification, release branches, CI rules.
+
+`docs/mobile-dev-setup.md` was explicitly superseded by
 the setup walkthrough and should not come back. If the design and logo briefs are
 worth keeping in-repo, drop them at `docs/claude-design-brief.md` and
 `docs/logo-brief.md` and re-add the `@` imports here.
