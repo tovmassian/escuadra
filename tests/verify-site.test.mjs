@@ -2,6 +2,8 @@ import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 
 const pages = ['index.html', 'privacy.html', 'support.html'];
+const appStoreUrl = 'https://apps.apple.com/us/app/escuadra/id6810705505';
+const allowedExternalLinks = ['https://github.com/tovmassian/escuadra/issues', appStoreUrl];
 const screenshots = [
   'assets/marketing/home-dark.png',
   'assets/marketing/home-light.png',
@@ -28,10 +30,15 @@ for (const page of pages) {
   assert.match(html, /src="site\.mjs"/, `${page} loads shared enhancement`);
   assert.match(html, /href="privacy\.html"/, `${page} links privacy`);
   assert.match(html, /href="support\.html"/, `${page} links support`);
-  assert.doesNotMatch(html, /https?:\/\/(?!github\.com\/tovmassian\/escuadra\/issues)/, `${page} has no external resource`);
+  for (const [url] of html.matchAll(/https?:\/\/[^"'\s<)]+/g)) {
+    assert.ok(
+      allowedExternalLinks.some((allowed) => url.startsWith(allowed)),
+      `${page} has no external resource beyond the allowed links (found ${url})`,
+    );
+  }
 
   for (const [, target] of html.matchAll(/(?:href|src)="([^"]+)"/g)) {
-    if (target.startsWith('https://github.com/tovmassian/escuadra/issues')) continue;
+    if (target === '#') assert.fail(`${page} has a placeholder link to #`);
     if (/^[a-z][a-z\d+.-]*:/i.test(target) || target.startsWith('//')) continue;
     const localPath = target.split(/[?#]/, 1)[0];
     if (localPath) assert.ok(existsSync(localPath), `${page} references missing local file: ${localPath}`);
@@ -53,7 +60,14 @@ for (const [page, requiredText] of [
 const home = readFileSync('index.html', 'utf8');
 assert.match(home, /<h1>Know the squad\. Cold\.<\/h1>/, 'home has the approved headline');
 assert.match(home, /Ten fast questions\. One squad you can name under pressure\./, 'home has the approved supporting copy');
-assert.match(home, />Coming soon</, 'home has an honest release status');
+assert.match(home, />Now on the App Store</, 'home has an honest release status');
+assert.doesNotMatch(home, /[Cc]oming soon|Soon on/, 'home no longer says the app is coming soon');
+assert.ok(home.includes(`href="${appStoreUrl}"`), 'App Store badge links to the live listing');
+assert.match(
+  home,
+  /<img\s+class="badge badge--google-play badge--unavailable"/,
+  'Google Play badge is greyed out and not wrapped in a link until the app is live there',
+);
 assert.match(home, /10-question rounds/, 'home includes the round fact');
 assert.match(home, /Club &amp; national squads/, 'home includes the squad fact');
 assert.match(home, /Fully offline/, 'home includes the offline fact');
