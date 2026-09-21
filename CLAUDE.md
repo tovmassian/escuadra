@@ -52,6 +52,14 @@ here than in most repos — see the EAS section under Environment for why.
   from `main` by `git cherry-pick -x`. `release/1.1.0` is created when the
   1.1.0 store build is cut.
 
+⚠️ **On `release-1.1.0` today, the About privacy text is out of date.** It
+still says "no advertising, analytics or tracking software" while
+TelemetryDeck (#53) is in the code. Nothing from this branch may reach users
+until #54 rewrites that text and the web policy together, and #55 updates the
+store declarations — the order is #54 → #55 → #60. The 1.1.0 store build is
+also the commit that adds `fingerprint.config.js` (see `docs/eas-update.md`),
+never a commit in between.
+
 ## Scope and roadmap
 
 **Scope lives in GitHub — milestones and issues — not in this file.** The
