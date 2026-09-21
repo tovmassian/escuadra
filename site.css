@@ -286,6 +286,12 @@ a:focus-visible {
   width: 222px;
 }
 
+/* A store the app is not on yet: shown for recognition, greyed out, not a link. */
+.badge--unavailable {
+  filter: grayscale(1);
+  opacity: 0.4;
+}
+
 /* Phones and small tablets: below 38rem the label plus both badges at full size
    no longer fit on one line (~543px of content), so the label takes its own line
    and the badges scale with the viewport instead of being squeezed. The
