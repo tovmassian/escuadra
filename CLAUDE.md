@@ -34,9 +34,10 @@ Android 1.0.0 is in Google Play's closed test (#49); no Play review is in
 flight until the production-access application (#50) and then the
 production release (#51). Both 1.0.0 binaries take over-the-air updates
 from `release/1.0.0`. The next store version is 1.1.0 (#52). The marketing
-site links the App Store and shows Google Play greyed out, and its privacy
-page describes 1.0.0 — the 1.1.0 policy goes live only when a 1.1.0 build
-reaches users (#54).
+site links the App Store badge and says "Coming soon to Android™ phones." in
+plain text — no Google Play badge until the Play listing is live (#51, #59).
+Its privacy page describes 1.0.0; the 1.1.0 policy goes live only when a
+1.1.0 build reaches users (#54).
 
 **Branches.** Three kinds, and which one a change belongs on matters more
 here than in most repos — see the EAS section under Environment for why.
@@ -44,13 +45,23 @@ here than in most repos — see the EAS section under Environment for why.
 - `main` — development. Its fingerprint drifts from shipped binaries, so
   never publish an OTA update from it.
 - `release-1.1.0` — integration branch for the next store version. PRs for
-  1.1.0 work target it; it merges into `main` at release (#60). Fixes that
-  land on `main` meanwhile are cherry-picked onto it with `-x`.
+  1.1.0 work target it; it merges into `main` at release (#60). It stays
+  current by **merging `origin/main` into it** whenever `main` moves — safe
+  here, because nothing ships from it before its own store build.
 - `release/<version>` — one per shipped version, created at the store
   build's commit, and the only place OTA updates for that version are
-  published from. `release/1.0.0` is the only one today; JS fixes reach it
-  from `main` by `git cherry-pick -x`. `release/1.1.0` is created when the
-  1.1.0 store build is cut.
+  published from. `release/1.0.0` is the only one today. `release/1.1.0` is
+  created when the 1.1.0 store build is cut.
+
+**Flow: `main` first, then outwards.** A fix lands on `main` by PR, then goes
+to `release/<version>` by `git cherry-pick -x` (and to `release-1.1.0` with
+the next `origin/main` merge). If a fix is ever written on a release branch
+first — an urgent hotfix — it goes back to `main` the same way, by
+cherry-pick. **Never merge between `main` and a `release/<version>` branch in
+either direction:** merging `main` in would drag its npm scripts and
+`.gitignore` changes onto the release branch and orphan every shipped binary;
+merging the release branch into `main` would carry its branch-only banner
+into `main`'s CLAUDE.md.
 
 ## Scope and roadmap
 
@@ -113,7 +124,11 @@ update this file in the same PR rather than leave a stale rule behind.
 
    **Asset licensing (legal):** every shipped image must have a licence
    someone can name. `assets/flags/README.md` is the worked example — the flag
-   set was replaced wholesale for exactly this reason.
+   set was replaced wholesale for exactly this reason. Store badges on the
+   `gh-pages` site are licensed artwork too: use Apple's and Google's badges
+   only as their guidelines allow — unmodified (never recoloured, greyed out
+   or set inside a sentence), only for a store where the app is actually
+   live, and with their credit lines in the footer.
 
 3. **No text input in the quiz. No keyboard for answering.** Every quiz answer
    is a tap — option cards and chip selectors are the entire input vocabulary
