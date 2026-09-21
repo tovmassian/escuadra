@@ -16,7 +16,7 @@
 >   `npx eas-cli fingerprint:compare --build-id <id> --environment production`,
 >   continue only on ✅, and always pass `--platform`.
 >
-> The rest of this file is `main`'s CLAUDE.md (as of `2eb496fa`, #69).
+> The rest of this file is `main`'s CLAUDE.md (as of `a3e89d45`, #72).
 > Commands and files it mentions that were added after the 1.0.0 build —
 > `shots:play`, `gen:play-assets`, `design/play/`,
 > `app/store/feature-graphic.tsx` — exist only on `main`.
