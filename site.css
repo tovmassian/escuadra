@@ -261,7 +261,7 @@ a:focus-visible {
 .release-bar {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 0.5rem;
   padding-block: 0.75rem;
 }
@@ -284,12 +284,6 @@ a:focus-visible {
 
 .badge--google-play {
   width: 222px;
-}
-
-/* A store the app is not on yet: shown for recognition, greyed out, not a link. */
-.badge--unavailable {
-  filter: grayscale(1);
-  opacity: 0.4;
 }
 
 /* Phones and small tablets: below 38rem the label plus both badges at full size
@@ -443,6 +437,13 @@ a:focus-visible {
 .site-footer a:hover,
 .site-footer a:focus-visible {
   color: var(--ink);
+}
+/* Trademark credits the store badges' owners require wherever legal notice
+   is given — once per site, on the page that shows the badge. */
+.legal-credits {
+  flex: 1 0 100%;
+  margin: 0;
+  font-size: 0.8rem;
 }
 
 /* ---------- Legal prose (privacy, support) ---------- */
