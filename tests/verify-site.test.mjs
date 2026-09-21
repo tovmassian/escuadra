@@ -61,13 +61,30 @@ const home = readFileSync('index.html', 'utf8');
 assert.match(home, /<h1>Know the squad\. Cold\.<\/h1>/, 'home has the approved headline');
 assert.match(home, /Ten fast questions\. One squad you can name under pressure\./, 'home has the approved supporting copy');
 assert.match(home, />Now on the App Store</, 'home has an honest release status');
-assert.doesNotMatch(home, /[Cc]oming soon|Soon on/, 'home no longer says the app is coming soon');
+assert.doesNotMatch(home, /Soon on|coming soon to the App Store/i, 'home no longer says iOS is coming soon');
 assert.ok(home.includes(`href="${appStoreUrl}"`), 'App Store badge links to the live listing');
+// Google's badge rules forbid recolouring or greying the badge, and it may only
+// promote an app you can get (or pre-register) on Play. Until the Play listing
+// is live (#51), no Google Play artwork appears — only plain text.
+for (const page of pages) {
+  assert.doesNotMatch(
+    readFileSync(page, 'utf8'),
+    /google-play-badge|badge--google-play/,
+    `${page} shows no Google Play badge until Escuadra is live on Google Play`,
+  );
+}
+assert.match(home, /Coming soon to Android™ phones\./, 'home says Android is coming, in plain text');
 assert.match(
   home,
-  /<img\s+class="badge badge--google-play badge--unavailable"/,
-  'Google Play badge is greyed out and not wrapped in a link until the app is live there',
+  /Apple and the Apple logo are trademarks of Apple Inc\., registered in\s+the U\.S\. and other countries\./,
+  'home credits Apple and the Apple logo, as the App Store badge requires',
 );
+assert.match(
+  home,
+  /App Store is a service mark of Apple\s+Inc\., registered in the U\.S\. and other countries\./,
+  'home credits the App Store service mark',
+);
+assert.match(home, /Android is a\s+trademark of Google LLC\./, 'home attributes the Android trademark');
 assert.match(home, /10-question rounds/, 'home includes the round fact');
 assert.match(home, /Club &amp; national squads/, 'home includes the squad fact');
 assert.match(home, /Fully offline/, 'home includes the offline fact');
