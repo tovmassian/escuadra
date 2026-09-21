@@ -55,9 +55,10 @@ Android 1.0.0 is in Google Play's closed test (#49); no Play review is in
 flight until the production-access application (#50) and then the
 production release (#51). Both 1.0.0 binaries take over-the-air updates
 from `release/1.0.0`. The next store version is 1.1.0 (#52). The marketing
-site links the App Store and shows Google Play greyed out, and its privacy
-page describes 1.0.0 — the 1.1.0 policy goes live only when a 1.1.0 build
-reaches users (#54).
+site links the App Store badge and says "Coming soon to Android™ phones." in
+plain text — no Google Play badge until the Play listing is live (#51, #59).
+Its privacy page describes 1.0.0; the 1.1.0 policy goes live only when a
+1.1.0 build reaches users (#54).
 
 **Branches.** Three kinds, and which one a change belongs on matters more
 here than in most repos — see the EAS section under Environment for why.
@@ -134,7 +135,11 @@ update this file in the same PR rather than leave a stale rule behind.
 
    **Asset licensing (legal):** every shipped image must have a licence
    someone can name. `assets/flags/README.md` is the worked example — the flag
-   set was replaced wholesale for exactly this reason.
+   set was replaced wholesale for exactly this reason. Store badges on the
+   `gh-pages` site are licensed artwork too: use Apple's and Google's badges
+   only as their guidelines allow — unmodified (never recoloured, greyed out
+   or set inside a sentence), only for a store where the app is actually
+   live, and with their credit lines in the footer.
 
 3. **No text input in the quiz. No keyboard for answering.** Every quiz answer
    is a tap — option cards and chip selectors are the entire input vocabulary
