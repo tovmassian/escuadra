@@ -104,6 +104,20 @@ Each row changed one thing on `release/1.0.0` (baseline android `a616db89`, ios
 | `eas.json` → add a profile                                              | CHANGED | CHANGED | store build                  |
 | `.gitignore` → add a line                                               | CHANGED | CHANGED | ⚠️ false positive            |
 | `package.json` → add an npm script                                      | CHANGED | CHANGED | ⚠️ false positive            |
+| Add a GitHub Actions workflow (`.github/workflows/*.yml`)               | same    | same    | safe on a release branch     |
+| Edit an existing workflow (`.github/workflows/check.yml`)               | same    | same    | safe on a release branch     |
+| Add a composite action (`.github/actions/*/action.yml`)                 | same    | same    | safe on a release branch     |
+| Add a standalone script not wired into `package.json` (`scripts/ci/*`)  | same    | same    | safe on a release branch     |
+| Edit `CLAUDE.md` or anything under `docs/`                              | same    | same    | safe on a release branch     |
+| Add a `.fingerprintignore`                                              | same    | same    | —                            |
+| Add `fingerprint.config.js` (`sourceSkips`)                             | CHANGED | CHANGED | store build — see below      |
+
+The last seven rows were measured on 2026-09-21, the same way, against the
+same baseline. They answer whether GitHub Actions automation can live on a
+release branch without orphaning its binaries: it can, as long as it calls
+tools directly (`npx eas-cli …`, `node scripts/ci/….mjs`) instead of adding
+npm scripts, and writes temporary files to `$RUNNER_TEMP` instead of adding
+`.gitignore` lines.
 
 ### Why bumping packages sometimes left the hash unchanged
 
@@ -186,8 +200,10 @@ binaries (android `a616db89`, ios `8b8b8840`). Verify that with
 3. OTA updates for that version are published **only** from the release branch.
 4. When the next version ships to all users, the old release branch is frozen.
 
-⚠️ Today `release/1.0.0` exists **only locally** (`c5633fbc` + the #61 About
-text). Push it so it isn't lost and CI can use it.
+`release/1.0.0` is on `origin` (pushed 2026-09-21): `c5633fbc` + the #61
+About text + docs. On 2026-09-21 the #61 About text was published from it to
+iOS (update `01a0c500`, runtime `8b8b8840`); Android received the same text
+on 2026-09-18 (#44).
 
 ---
 
@@ -402,6 +418,18 @@ automation can't repeat any of the manual mistakes above.
    `--environment production`.
 7. **Guardrail 4 stays human.** A privacy-affecting change is never published by
    CI; it waits for a store build.
+8. **Workflows live on the release branch too, and stay fingerprint-inert.**
+   GitHub lists a `workflow_dispatch` workflow only if it's on the default
+   branch, but runs the copy on the ref you pick, and a `push: release/**`
+   trigger runs the pushed branch's copy. So a workflow lands on `main` by PR
+   and is cherry-picked onto each `release/<version>`. The matrix above shows
+   that's safe; the invariant is: no new npm scripts, no `.gitignore` lines, no
+   `eas.json` edits (route channels server-side with `eas channel:edit`), and no
+   `fingerprint.config.js` except in the commit that cuts a store build.
+9. **Untested: runner vs. Mac.** Nobody has yet checked that an Ubuntu runner
+   computes the same hash as a local Mac for the same commit. EAS's own
+   builders did, so it probably will, and the "require a matching build" gate
+   fails safe if not. Confirm on the first run.
 
 ### Building blocks (verified to exist)
 
