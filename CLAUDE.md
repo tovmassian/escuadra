@@ -45,13 +45,23 @@ here than in most repos — see the EAS section under Environment for why.
 - `main` — development. Its fingerprint drifts from shipped binaries, so
   never publish an OTA update from it.
 - `release-1.1.0` — integration branch for the next store version. PRs for
-  1.1.0 work target it; it merges into `main` at release (#60). Fixes that
-  land on `main` meanwhile are cherry-picked onto it with `-x`.
+  1.1.0 work target it; it merges into `main` at release (#60). It stays
+  current by **merging `origin/main` into it** whenever `main` moves — safe
+  here, because nothing ships from it before its own store build.
 - `release/<version>` — one per shipped version, created at the store
   build's commit, and the only place OTA updates for that version are
-  published from. `release/1.0.0` is the only one today; JS fixes reach it
-  from `main` by `git cherry-pick -x`. `release/1.1.0` is created when the
-  1.1.0 store build is cut.
+  published from. `release/1.0.0` is the only one today. `release/1.1.0` is
+  created when the 1.1.0 store build is cut.
+
+**Flow: `main` first, then outwards.** A fix lands on `main` by PR, then goes
+to `release/<version>` by `git cherry-pick -x` (and to `release-1.1.0` with
+the next `origin/main` merge). If a fix is ever written on a release branch
+first — an urgent hotfix — it goes back to `main` the same way, by
+cherry-pick. **Never merge between `main` and a `release/<version>` branch in
+either direction:** merging `main` in would drag its npm scripts and
+`.gitignore` changes onto the release branch and orphan every shipped binary;
+merging the release branch into `main` would carry its branch-only banner
+into `main`'s CLAUDE.md.
 
 ## Scope and roadmap
 
