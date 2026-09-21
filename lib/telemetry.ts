@@ -4,12 +4,12 @@
 // No global polyfill: the SDK takes `subtleCrypto` directly, so `expo-crypto`
 // hashes the install ID, and Hermes provides `TextEncoder`.
 
+import { useProgress } from '@/stores/progress';
 import TelemetryDeck from '@telemetrydeck/sdk';
 import Constants from 'expo-constants';
 import * as Crypto from 'expo-crypto';
 import * as Updates from 'expo-updates';
 import { Platform } from 'react-native';
-import { useProgress } from '@/stores/progress';
 import {
   buildPayload,
   isTestMode,
