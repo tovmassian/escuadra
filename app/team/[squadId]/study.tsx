@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { FilterPill } from '@/components/FilterPill';
@@ -7,6 +7,7 @@ import { StudyHeaderRow, StudyRow } from '@/components/StudyRow';
 import { flagFor } from '@/lib/flags';
 import { getRoster, getSquad } from '@/lib/squads';
 import { parsePlayerIds, studyRows } from '@/lib/studyView';
+import { track } from '@/lib/telemetry';
 import type { Position } from '@/types/squad';
 import { spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -29,6 +30,10 @@ export default function Study() {
 
   const squad = getSquad(squadId);
   const roster = useMemo(() => getRoster(squadId), [squadId]);
+  const kind = squad?.kind;
+  useEffect(() => {
+    if (kind) track('study.opened', { kind });
+  }, [squadId, kind]);
   if (!squad) return null;
 
   const playerIds = parsePlayerIds(players);

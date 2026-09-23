@@ -12,7 +12,9 @@ import { TeamMarker } from '@/components/TeamMarker';
 import { flagFor } from '@/lib/flags';
 import type { Level, QuestionPart } from '@/lib/questionEngine';
 import { partRailRows, progressOutcomes } from '@/lib/roundView';
+import { isFlawless } from '@/lib/resultsView';
 import { getRoster, getSquad } from '@/lib/squads';
+import { track } from '@/lib/telemetry';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
 import { durations, spacing, typography } from '@/theme/tokens';
@@ -99,6 +101,7 @@ export default function Question() {
     if (session.squadId !== squadId || session.level !== level || session.phase === 'idle') {
       const roster = getRoster(squadId);
       session.startRound(squad, roster, level, Number.isFinite(seed) ? seed : undefined);
+      track('round.started', { kind: squad.kind, level });
     }
     setLastPlayed(squadId, level);
     // Only re-run when the route target changes — starting a round mutates
@@ -110,6 +113,14 @@ export default function Question() {
     if (session.phase === 'complete' && session.squadId === squadId && session.level === level) {
       const score = selectScore(session.results);
       recordScore(squadId, level, score.correct);
+      if (squad) {
+        track('round.completed', {
+          kind: squad.kind,
+          level,
+          score: score.correct,
+          aLaEscuadra: isFlawless(score.correct, score.attempted),
+        });
+      }
       router.replace({
         pathname: '/play/[squadId]/[level]/results',
         params: { squadId, level: levelParam },

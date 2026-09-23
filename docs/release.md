@@ -13,11 +13,11 @@ The release pipeline (#73) is being built. Until it lands, releases are manual: 
 equals the fingerprint of the commit it was published from, and a locked release branch
 never changes its fingerprint.
 
-| Version | Platform | Build          | Runtime    | Branch          | State                           |
-| ------- | -------- | -------------- | ---------- | --------------- | ------------------------------- |
-| 1.0.0   | iOS      | 3 · `ef36adae` | `8b8b8840` | `release/1.0.0` | locked · live on the App Store  |
-| 1.0.0   | Android  | 3 · `1973200b` | `a616db89` | `release/1.0.0` | locked · Play closed test (#49) |
-| 1.1.0   | both     | —              | —          | `release/1.1.0` | open                            |
+| Version    | Platform | Build          | Runtime    | Branch          | State                           |
+| ---------- | -------- | -------------- | ---------- | --------------- | ------------------------------- |
+| 1.0.0      | iOS      | 3 · `ef36adae` | `8b8b8840` | `release/1.0.0` | locked · live on the App Store  |
+| 1.0.0      | Android  | 3 · `1973200b` | `a616db89` | `release/1.0.0` | locked · Play closed test (#49) |
+| next (TBD) | both     | —              | —          | not cut yet     | in development on `main`        |
 
 Keep this table current whenever a build is cut or a store status changes. Play's
 12-tester, 14-day closed test is a one-time gate before a new app's first production
@@ -35,7 +35,8 @@ build's platform == update's platform   (ios | android)
 build's runtime  == update's runtime    (the fingerprint)
 ```
 
-- One channel serves several runtimes at once: 1.0.0 and 1.1.0 updates share `production`.
+- One channel serves several runtimes at once: every shipped version's updates share
+  `production`.
 - The app checks on launch without blocking, downloads in the background, and applies the
   update on the next cold start. To check by hand: open, wait, close fully, open again.
 - `expo-updates` does nothing in Expo Go or development builds; test delivery on a
@@ -64,7 +65,7 @@ Measured on Expo SDK 57 and eas-cli 24; re-measure if either moves.
 - Only installed packages count, so run `npm ci` before computing a fingerprint.
 - The false positives disappear with a `fingerprint.config.js`
   (`sourceSkips: ['PackageJsonScriptsAll', 'GitIgnore']`), which is itself a fingerprint
-  change: it lands on `release/1.1.0` before that version's build, never on a locked branch.
+  change: it lands on `main` before the next version is cut, never on a locked branch.
 - To see what's inside a fingerprint: `npx expo-updates fingerprint:generate --platform android --debug`.
 
 What the fingerprint can't see:
@@ -78,22 +79,25 @@ What the fingerprint can't see:
 
 ## Branches
 
-- **`main`**: development. Its fingerprint drifts; nothing is ever published from it.
-- **`release/X.Y.Z`**: one per version, from the day work on it starts. Each platform on
-  it is in one of two states, read from EAS:
+- **`main`**: development, including the next version's features. Its fingerprint drifts;
+  nothing is ever published or built from it.
+- **`release/X.Y.Z`**: one per version, cut from `main` once the version's content is
+  decided. Each platform on it is in one of two states, read from EAS:
 
 | State  | When                                                                 | What may merge                                                        |
 | ------ | -------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Open   | No production build of X.Y.Z exists for the platform                 | Anything: feature PRs, syncs from `main`                              |
+| Open   | No production build of X.Y.Z exists for the platform                 | Anything: fixes, syncs from `main`                                    |
 | Locked | A production build of X.Y.Z exists (finished, queued or in progress) | Cherry-picks that keep the fingerprint; nothing from `main`'s history |
 
 A locked branch is its version's OTA source. A change that needs another runtime is a new
 version: `release/X.Y.(Z+1)`, branched from `release/X.Y.Z`.
 
-**Flow.** Fixes land on `main` first, by PR. They reach a locked branch as a PR of
-`git cherry-pick -x` commits on a branch cut from the release branch; a hotfix written
-there first goes back to `main` the same way. An open branch syncs from `main` by PR, with
-a merge commit. A feature release ends with a PR from `release/X.Y.Z` into `main`.
+**Flow.** A fix for a shipped version is written on its release branch, against the code
+that shipped: a PR into `release/X.Y.Z` from a branch cut from it. Once merged, it goes to
+`main` as a PR of `git cherry-pick -x` commits, like anything merged into an open branch.
+(Picking a fix out of `main` instead risks dragging unreleased work into an OTA.) Docs and
+CI changes go the other way. An open branch may sync from `main` by PR, with a merge
+commit; a release branch never merges into `main`.
 
 ## Reference
 

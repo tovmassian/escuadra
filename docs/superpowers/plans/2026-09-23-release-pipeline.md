@@ -309,64 +309,79 @@ The owner merges with **Rebase and merge**, so the docs commit stays a single co
 
 ---
 
-### Task 3: Carry the docs to `release/1.1.0` and `release/1.0.0`
+### Task 3: Land `release/1.1.0` on `main`; carry the docs to `release/1.0.0`
 
-**Files:** `CLAUDE.md` and the Task 2 files on both release branches.
+Revised during execution: release branches are now cut from `main` (spec §4), so the open `release/1.1.0` merges into `main` and is deleted instead of taking syncs.
 
-- [ ] **Step 1: Sync `main` into the open `release/1.1.0`**
+**Files:** `CLAUDE.md`, `docs/release.md`, the spec and this plan on `main`; `CLAUDE.md` and the Task 2 files on `release/1.0.0`.
+
+- [ ] **Step 1: Merge `main` into a branch cut from `release/1.1.0`**
 
 ```bash
 git fetch origin
-git switch -c sync/main-into-1.1.0 origin/release/1.1.0
+git switch -c merge/1.1.0-into-main origin/release/1.1.0
 git merge origin/main
 ```
 
-Expected: a conflict in `CLAUDE.md` around the branch-only paragraph that starts `⚠️ **On `release-1.1.0` today, the About privacy text is out of date.**`. Resolve it as: `main`'s new `## Releases` section, then that paragraph directly under it with two changes — `release-1.1.0` becomes `release/1.1.0`, and its last two sentences become:
+Expected: no conflict. `main`'s `## Releases` section lands directly above the branch's paragraph that starts `⚠️ **On `release-1.1.0` today, the About privacy text is out of date.**`, and the branch's guardrail 4 wording and Telemetry rule stay.
+
+- [ ] **Step 2: Reword that paragraph for `main`**
 
 ```markdown
-`fingerprint.config.js` lands on this branch before the 1.1.0 build (see
-`docs/release.md`), never after it.
+⚠️ **On `main` today, the About privacy text is out of date.** It still says
+"no advertising, analytics or tracking software" while TelemetryDeck (#53) is
+in the code. The next release branch (its version still TBD) is cut from
+`main` only after #54 rewrites that text and the web policy together and #55
+updates the store declarations; then #60 builds it.
 ```
 
-Keep the branch's other differences (guardrail 4 wording, the Telemetry rule) as they are.
+- [ ] **Step 3: Describe the new flow, in two commits**
 
-- [ ] **Step 2: Check and push the sync**
+Commit 1, `docs/release.md` (the 1.1.0 row, where `fingerprint.config.js` lands, Branches and Flow) and `CLAUDE.md` (the paragraph above and rule 3); commit 2, the spec and this plan. Only commit 1 goes to `release/1.0.0`.
+
+- [ ] **Step 4: Check and open the PR** (confirm first)
 
 ```bash
-npx prettier --write CLAUDE.md && npm run check
-git add CLAUDE.md && git commit --no-edit
-git push -u origin sync/main-into-1.1.0
-gh pr create --base release/1.1.0 --title "sync: main into release/1.1.0 (docs/release.md)" --body "Brings docs/release.md and the CLAUDE.md Releases section; keeps this branch's privacy-text warning."
+npm ci && npx prettier --write CLAUDE.md docs && npm run check
+git push -u origin merge/1.1.0-into-main
+gh pr create --base main --title "Land release/1.1.0 on main; cut release branches from main (#73)"
 ```
 
 The owner merges with **Create a merge commit**.
 
-- [ ] **Step 3: Cherry-pick the docs onto the locked `release/1.0.0`**
+- [ ] **Step 5: Delete `release/1.1.0`** (confirm first)
 
 ```bash
-DOCS=$(git log origin/main -1 --format=%H -- docs/release.md)
-git switch -c docs/release-md-1.0.0 origin/release/1.0.0
-git cherry-pick -x "$DOCS"
+git fetch origin
+git merge-base --is-ancestor origin/release/1.1.0 origin/main && git push origin --delete release/1.1.0
+git branch -D release/1.1.0
 ```
 
-If `CLAUDE.md` conflicts, resolve to `main`'s text below the banner. If `docs/eas-update.md` reports modify/delete, resolve with `git rm docs/eas-update.md`.
+- [ ] **Step 6: Cherry-pick the docs onto the locked `release/1.0.0`**
 
-- [ ] **Step 4: Shrink the `release/1.0.0` banner**
+```bash
+git switch -c docs/release-md-1.0.0 origin/release/1.0.0
+git cherry-pick -x 5654c67f <the CLAUDE.md and docs/release.md commits of Step 3, as merged>
+```
+
+Resolve `CLAUDE.md` to `main`'s text below the banner. If `docs/eas-update.md` reports modify/delete, resolve with `git rm docs/eas-update.md`.
+
+- [ ] **Step 7: Shrink the `release/1.0.0` banner**
 
 Replace the whole blockquote at the top of `CLAUDE.md` (from `> ⚠️ **You are on `release/1.0.0`` through `> `app/store/feature-graphic.tsx`— exist only on`main`.`) with the text below, where `<main-sha>` is the output of `git rev-parse --short origin/main`:
 
 ```markdown
 > ⚠️ **You are on `release/1.0.0`, the locked OTA branch for the shipped 1.0.0
 > binaries** (iOS build 3 = runtime `8b8b8840…`, Android build 3 = runtime
-> `a616db89…`). Only cherry-picks that keep both fingerprints belong here; see
+> `a616db89…`). Only changes that keep both fingerprints belong here; see
 > "Branches" in `docs/release.md`.
 >
-> The rest of this file is `main`'s CLAUDE.md (as of `<main-sha>`). Commands and files
-> it mentions that were added after the 1.0.0 build — `shots:play`, `gen:play-assets`,
-> `design/play/`, `app/store/feature-graphic.tsx` — exist only on `main`.
+> The rest of this file is `main`'s CLAUDE.md (as of `<main-sha>`). What it describes that
+> came after the 1.0.0 build — TelemetryDeck and its privacy notes, `shots:play`,
+> `gen:play-assets`, `design/play/`, `app/store/feature-graphic.tsx` — exists only on `main`.
 ```
 
-- [ ] **Step 5: Prove both fingerprints are unchanged**
+- [ ] **Step 8: Prove both fingerprints are unchanged**
 
 ```bash
 npm ci
@@ -375,13 +390,13 @@ for p in ios android; do npx expo-updates fingerprint:generate --platform $p | n
 
 Expected, in order: `8b8b8840bd6e265b91976ef4690a9ef5cb632508` and `a616db8911b507fe2e4b9502b1d48e24a397a84b`. Stop if either differs.
 
-- [ ] **Step 6: Check, commit, PR**
+- [ ] **Step 9: Check, commit, PR** (confirm first)
 
 ```bash
 npx prettier --write CLAUDE.md && npm run check
 git add CLAUDE.md && git commit -m "docs(claude-md): banner points at docs/release.md"
 git push -u origin docs/release-md-1.0.0
-gh pr create --base release/1.0.0 --title "docs: docs/release.md on release/1.0.0" --body "Cherry-pick of the docs commit from main (fingerprint-inert: iOS 8b8b8840 and Android a616db89 unchanged), plus a shorter banner."
+gh pr create --base release/1.0.0 --title "docs: docs/release.md on release/1.0.0" --body "Cherry-picks of the docs commits from main (fingerprint-inert: iOS 8b8b8840 and Android a616db89 unchanged), plus a shorter banner."
 ```
 
 The owner merges with **Rebase and merge**.
@@ -1616,6 +1631,7 @@ describe('renderGate', () => {
     expect(body).toContain('`release/1.0.1` from `release/1.0.0`');
     expect(body).toContain('**Labels:** ota:ios');
     expect(body).toContain('guardrail 4');
+    expect(body).toContain("isn't on `main` yet goes there as a PR of `git cherry-pick -x`");
   });
 
   it('says nothing is published without labels, and lists guardrail-4 hints', () => {
@@ -1735,6 +1751,10 @@ export function renderGate(view: GateView): string {
       "`ota:*` confirms this PR doesn't change what data leaves the device (guardrail 4).",
     );
   }
+  lines.push(
+    '',
+    "Once merged, whatever here isn't on `main` yet goes there as a PR of `git cherry-pick -x` commits.",
+  );
   if (view.findings.length || view.dependencies.length) {
     lines.push('', '**Check against guardrail 4** (informational):');
     for (const finding of view.findings)
@@ -4606,17 +4626,19 @@ nobody can on `release/*`.
 
 ### Ship a JS fix
 
-1. Land the fix on `main` by PR.
-2. Cut a branch from the release branch and cherry-pick it:
-   `git switch -c fix/<topic>-1.0.0 origin/release/1.0.0 && git cherry-pick -x <sha>`
-3. Open a PR into `release/1.0.0` labelled `ota:ios`, `ota:android` or both. No label, no
+1. Write the fix on a branch cut from the release branch:
+   `git switch -c fix/<topic> origin/release/1.0.0`
+2. Open a PR into `release/1.0.0` labelled `ota:ios`, `ota:android` or both. No label, no
    publish: right for docs and CI changes.
-4. `release-gate` comments a verdict per platform, and a ❌ blocks the merge (see
+3. `release-gate` comments a verdict per platform, and a ❌ blocks the merge (see
    [Troubleshooting](#troubleshooting)). With a label, every push also publishes to
    `preview`: open the preview app twice to see it.
-5. Merge with rebase or a merge commit. `ota-production` publishes each labelled platform,
+4. Merge with rebase or a merge commit. `ota-production` publishes each labelled platform,
    checks the runtime it published and comments on the PR.
-6. Open a store install twice to see it.
+5. Open a store install twice to see it.
+6. Take the fix to `main`:
+   `git switch -c fix/<topic>-main origin/main && git cherry-pick -x <sha>…`, then a PR
+   into `main`. Conflicts get resolved here, where nothing ships.
 
 ### Release one platform first, or publish later
 
@@ -4647,27 +4669,28 @@ target: when the history holds test updates, `previous` may not be what you expe
 | `embedded` | Sends devices back to the JS inside the binary | Nothing else is good. On 1.0.0 it also drops #61's corrected privacy text |
 
 A production rollback opens a freeze first, because the bad commit is still on the branch,
-and waits for running publishes. Devices switch after two launches. Then revert or fix on
-`main`, cherry-pick it in a PR, close the freeze and merge. `channel: preview` rolls back
-preview builds for drills and never freezes.
+and waits for running publishes. Devices switch after two launches. Then revert or fix in
+a PR into the release branch, close the freeze, merge, and take the fix to `main`.
+`channel: preview` rolls back preview builds for drills and never freezes.
 
 ### Cut a release
 
-A new version on an open branch (1.1.0):
+A new version from `main` (1.1.0):
 
-1. PRs into `release/1.1.0` for the `app.json` version bump and `fingerprint.config.js`.
-2. **Actions → store-build**: `platforms: both`, `profile: production`, `submit` on. Both
+1. The `app.json` version bump and `fingerprint.config.js` land on `main` by PR.
+2. Cut the branch: `git push origin origin/main:refs/heads/release/1.1.0`. Fixes found
+   from here on go into it by PR and on to `main` by cherry-pick.
+3. **Actions → store-build**: `platforms: both`, `profile: production`, `submit` on. Both
    platforms build from one commit; each job checks the built runtime, opens the freeze
    and lists what's left.
-3. iOS: Submit for Review in App Store Connect. Android: promote the build in Play
+4. iOS: Submit for Review in App Store Connect. Android: promote the build in Play
    Console. Close each freeze once approved, and update [Start here](#start-here).
-4. Merge `release/1.1.0` into `main` by PR, with a merge commit.
 
 A runtime-changing fix to a released version (1.0.1):
 
 1. `git push origin origin/release/1.0.0:refs/heads/release/1.0.1`
 2. A PR into `release/1.0.1` with the fix and `app.json` at `1.0.1`.
-3. `store-build` as above.
+3. `store-build` as above, then take the fix to `main`.
 
 `store-build` refuses a production build when `app.json` doesn't match the branch, when the
 platform is locked to another runtime, and on the same runtime unless `rebuild` is on,
@@ -4802,11 +4825,7 @@ gh pr checks --watch
 
 Expected: `release-gate` passes, and its comment shows iOS `8b8b8840` ✅ and Android `a616db89` ✅ computed on a Linux runner: the runner-vs-Mac question, answered. The owner merges with **Rebase and merge**. The `ota-production` run for that push ends with "has no ota:* label: nothing to publish." If it says "No merged PR behind" instead, GitHub didn't associate the rebased commit with its PR (spec §12): switch `resolve` to reading the PR number from the push payload's commit messages before any labelled PR merges.
 
-- [ ] **Step 3: Sync to `release/1.1.0`**
-
-Repeat Task 3, Steps 1–2 with branch `sync/pipeline-into-1.1.0`. Expected: `release-gate` passes with both platforms "open".
-
-- [ ] **Step 4: Switch on the `release/*` ruleset** (confirm first)
+- [ ] **Step 3: Switch on the `release/*` ruleset** (confirm first)
 
 ```bash
 gh api -X POST repos/tovmassian/escuadra/rulesets --input - <<'EOF'
@@ -4861,16 +4880,13 @@ Expected: a status of `NEW`, `IN_QUEUE` or `IN_PROGRESS`, with or without a runt
 
 ### Task 20: First real OTA through the pipeline
 
-Prerequisite: the About update-ID fix (show `Updates.updateId` on About) is merged on `main`. It is separate work: if no issue exists for it, create one with the `escuadra-issue-creator` skill and implement it through its own plan.
+Prerequisite: an issue for the About update-ID fix (show `Updates.updateId` on About). It is separate work: if none exists, create one with the `escuadra-issue-creator` skill and implement it through its own plan, on `fix/about-update-id` cut from `origin/release/1.0.0`.
 
-- [ ] **Step 1: Cherry-pick PR with both labels**
+- [ ] **Step 1: PR into `release/1.0.0` with both labels**
 
 ```bash
-FIX=<sha of the About fix on main>
-git fetch origin && git switch -c fix/about-update-id-1.0.0 origin/release/1.0.0
-git cherry-pick -x "$FIX"
-git push -u origin fix/about-update-id-1.0.0
-gh pr create --base release/1.0.0 --title "fix: show the update ID on About (1.0.0)" --body "Cherry-pick of $FIX." --label ota:ios --label ota:android
+git push -u origin fix/about-update-id
+gh pr create --base release/1.0.0 --title "fix: show the update ID on About" --body "Closes #<issue>." --label ota:ios --label ota:android
 ```
 
 Expected: `release-gate` ✅ for both platforms; the `preview` job fills the comment with an iOS and an Android group.
@@ -4880,6 +4896,8 @@ Expected: `release-gate` ✅ for both platforms; the `preview` job fills the com
 - [ ] **Step 3: Merge** (the owner, **Rebase and merge**). Expected: `ota-production` publishes both platforms, and each job's PR comment says `✅ matches build 3`. If `eas update` fails with a permission error on the protected channel, the Admin robot can't publish there (spec §12): store the owner's personal token as `EXPO_TOKEN_PRODUCTION` in both environments instead, and re-run the failed jobs.
 
 - [ ] **Step 4: 👤 Verify on store installs** (launch twice), and check EAS: `npx eas-cli update:list --branch production --limit 3` shows the new groups on `8b8b8840` and `a616db89`.
+
+- [ ] **Step 5: Take the fix to `main`** (confirm first): `git switch -c fix/about-update-id-main origin/main && git cherry-pick -x <the fix's commits>`, resolve (About carries the telemetry opt-out on `main`), then a PR into `main`.
 
 ---
 
@@ -4931,8 +4949,8 @@ Expected: the dry run's summary shows from → to and "Dry run: nothing changed"
 
 ### Task 22: Final docs and closing #73
 
-- [ ] **Step 1: Bring `docs/release.md` up to date** — the "Start here" table (store statuses as of today) and anything the drills showed to be wrong. Commit on `main` by PR, then cherry-pick to `release/1.0.0` and sync `release/1.1.0` as in Task 3.
+- [ ] **Step 1: Bring `docs/release.md` up to date** — the "Start here" table (store statuses as of today) and anything the drills showed to be wrong. Commit on `main` by PR, then cherry-pick to `release/1.0.0` as in Task 3.
 
 - [ ] **Step 2: Update the agent memory notes** that describe the old process (`ota-from-release-branch`, `eas-builds-via-github-actions`): OTAs and builds now go through the workflows in `docs/release.md`.
 
-- [ ] **Step 3: Close #73** with a comment listing what shipped, the drill results, and the follow-ups: splitting the rest of CLAUDE.md, and 1.1.0 (#60) as `store-build`'s first production use.
+- [ ] **Step 3: Close #73** with a comment listing what shipped, the drill results, and the follow-ups: splitting the rest of CLAUDE.md, and the next version (#60) as `store-build`'s first production use.

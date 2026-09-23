@@ -1,13 +1,16 @@
 import { router } from 'expo-router';
 import Constants from 'expo-constants';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useProgress } from '@/stores/progress';
 import { radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 export default function About() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
+  const telemetryEnabled = useProgress((s) => s.telemetryEnabled);
+  const setTelemetryEnabled = useProgress((s) => s.setTelemetryEnabled);
 
   const version = Constants.expoConfig?.version ?? Constants.nativeAppVersion ?? '—';
   const build = Constants.expoConfig?.ios?.buildNumber ?? Constants.nativeBuildVersion ?? '—';
@@ -46,6 +49,13 @@ export default function About() {
       color: colors.textPrimary,
       marginBottom: spacing.sm,
     },
+    settingRow: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: spacing.md,
+    },
+    settingLabel: { ...typography.body, color: colors.textPrimary, flex: 1 },
     versionLine: {
       ...typography.statMonoTiny,
       color: colors.textMuted,
@@ -83,6 +93,22 @@ export default function About() {
           <Text style={[styles.paragraph, { marginBottom: 0 }]}>
             Flag images are from flagpedia.net and are in the public domain.
           </Text>
+        </View>
+
+        <View style={[styles.section, styles.settingRow]}>
+          <Text style={styles.settingLabel} nativeID="telemetry-label">
+            Share anonymous usage statistics
+          </Text>
+          <Switch
+            testID="telemetry-toggle"
+            accessibilityLabelledBy="telemetry-label"
+            accessibilityLabel="Share anonymous usage statistics"
+            value={telemetryEnabled}
+            onValueChange={setTelemetryEnabled}
+            trackColor={{ false: colors.surfaceRaised, true: colors.accent }}
+            thumbColor={colors.thumbBg}
+            ios_backgroundColor={colors.surfaceRaised}
+          />
         </View>
 
         <View style={styles.section}>
