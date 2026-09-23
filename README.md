@@ -16,7 +16,7 @@ Play follows once its closed test and production review finish (see
 is a separate track from the Expo Go development flow above: it needs an
 [EAS](https://docs.expo.dev/eas/) build, not Xcode, and JS-only fixes to a
 shipped version go out as over-the-air updates — see
-[`docs/eas-update.md`](docs/eas-update.md). The marketing site and the privacy
+[`docs/release.md`](docs/release.md). The marketing site and the privacy
 and support pages for the store listings are published from the
 [`gh-pages`](https://github.com/tovmassian/escuadra/tree/gh-pages) branch.
 
