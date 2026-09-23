@@ -13,11 +13,11 @@ The release pipeline (#73) is being built. Until it lands, releases are manual: 
 equals the fingerprint of the commit it was published from, and a locked release branch
 never changes its fingerprint.
 
-| Version | Platform | Build          | Runtime    | Branch          | State                           |
-| ------- | -------- | -------------- | ---------- | --------------- | ------------------------------- |
-| 1.0.0   | iOS      | 3 · `ef36adae` | `8b8b8840` | `release/1.0.0` | locked · live on the App Store  |
-| 1.0.0   | Android  | 3 · `1973200b` | `a616db89` | `release/1.0.0` | locked · Play closed test (#49) |
-| 1.1.0   | both     | —              | —          | not cut yet     | in development on `main`        |
+| Version    | Platform | Build          | Runtime    | Branch          | State                           |
+| ---------- | -------- | -------------- | ---------- | --------------- | ------------------------------- |
+| 1.0.0      | iOS      | 3 · `ef36adae` | `8b8b8840` | `release/1.0.0` | locked · live on the App Store  |
+| 1.0.0      | Android  | 3 · `1973200b` | `a616db89` | `release/1.0.0` | locked · Play closed test (#49) |
+| next (TBD) | both     | —              | —          | not cut yet     | in development on `main`        |
 
 Keep this table current whenever a build is cut or a store status changes. Play's
 12-tester, 14-day closed test is a one-time gate before a new app's first production
@@ -35,7 +35,8 @@ build's platform == update's platform   (ios | android)
 build's runtime  == update's runtime    (the fingerprint)
 ```
 
-- One channel serves several runtimes at once: 1.0.0 and 1.1.0 updates share `production`.
+- One channel serves several runtimes at once: every shipped version's updates share
+  `production`.
 - The app checks on launch without blocking, downloads in the background, and applies the
   update on the next cold start. To check by hand: open, wait, close fully, open again.
 - `expo-updates` does nothing in Expo Go or development builds; test delivery on a
@@ -64,7 +65,7 @@ Measured on Expo SDK 57 and eas-cli 24; re-measure if either moves.
 - Only installed packages count, so run `npm ci` before computing a fingerprint.
 - The false positives disappear with a `fingerprint.config.js`
   (`sourceSkips: ['PackageJsonScriptsAll', 'GitIgnore']`), which is itself a fingerprint
-  change: it lands on `main` before 1.1.0 is cut, never on a locked branch.
+  change: it lands on `main` before the next version is cut, never on a locked branch.
 - To see what's inside a fingerprint: `npx expo-updates fingerprint:generate --platform android --debug`.
 
 What the fingerprint can't see:
