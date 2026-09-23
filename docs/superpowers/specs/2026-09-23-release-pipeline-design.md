@@ -116,8 +116,9 @@ by hand:
 ### 1.1.0
 
 `release-1.1.0` was renamed `release/1.1.0` through GitHub's branch rename, then merged
-into `main` and deleted when this flow replaced the long-lived integration branch. 1.1.0
-is cut from `main` again once #54 and #55 have landed; #60 builds it.
+into `main` and deleted when this flow replaced the long-lived integration branch. The
+next version, its number still TBD, is cut from `main` once #54 and #55 have landed; #60
+builds it.
 
 ## 5. Repository and EAS setup
 
@@ -429,7 +430,7 @@ procedures link to concepts instead of restating them.
    two launches; nothing in Expo Go or development builds; reading `Updates.updateId`.
 3. **OTA or store build?** — one table of what moves the fingerprint and what doesn't,
    the two false positives, what the fingerprint can't see (guardrail 4, store review),
-   and `fingerprint.config.js` at the 1.1.0 build.
+   and `fingerprint.config.js` at the next version's build.
 4. **Branches** — lifecycle, rules, flow, and a current-releases table (version,
    platform, build, runtime, state).
 5. **Procedures** — ship a JS fix; release one platform first or publish after a freeze;
@@ -505,7 +506,7 @@ every GitHub or EAS settings change is confirmed with the owner before it's made
    run from `main` is refused. A rollback drill on `preview` rolls back and verifies.
 8. **Docs final**, then close #73.
 
-The 1.1.0 release (#60) is then the first production use of `store-build`.
+The next store version (#60) is then the first production use of `store-build`.
 
 ## 15. Acceptance criteria
 

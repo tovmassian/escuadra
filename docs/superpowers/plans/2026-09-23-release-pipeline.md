@@ -330,9 +330,9 @@ Expected: no conflict. `main`'s `## Releases` section lands directly above the b
 ```markdown
 ⚠️ **On `main` today, the About privacy text is out of date.** It still says
 "no advertising, analytics or tracking software" while TelemetryDeck (#53) is
-in the code. `release/1.1.0` is cut from `main` only after #54 rewrites that
-text and the web policy together and #55 updates the store declarations; then
-#60 builds it.
+in the code. The next release branch (its version still TBD) is cut from
+`main` only after #54 rewrites that text and the web policy together and #55
+updates the store declarations; then #60 builds it.
 ```
 
 - [ ] **Step 3: Describe the new flow, in two commits**
@@ -361,7 +361,7 @@ git branch -D release/1.1.0
 
 ```bash
 git switch -c docs/release-md-1.0.0 origin/release/1.0.0
-git cherry-pick -x 5654c67f <commit 1 of Step 3, as merged>
+git cherry-pick -x 5654c67f <the CLAUDE.md and docs/release.md commits of Step 3, as merged>
 ```
 
 Resolve `CLAUDE.md` to `main`'s text below the banner. If `docs/eas-update.md` reports modify/delete, resolve with `git rm docs/eas-update.md`.
@@ -4953,4 +4953,4 @@ Expected: the dry run's summary shows from → to and "Dry run: nothing changed"
 
 - [ ] **Step 2: Update the agent memory notes** that describe the old process (`ota-from-release-branch`, `eas-builds-via-github-actions`): OTAs and builds now go through the workflows in `docs/release.md`.
 
-- [ ] **Step 3: Close #73** with a comment listing what shipped, the drill results, and the follow-ups: splitting the rest of CLAUDE.md, and 1.1.0 (#60) as `store-build`'s first production use.
+- [ ] **Step 3: Close #73** with a comment listing what shipped, the drill results, and the follow-ups: splitting the rest of CLAUDE.md, and the next version (#60) as `store-build`'s first production use.
