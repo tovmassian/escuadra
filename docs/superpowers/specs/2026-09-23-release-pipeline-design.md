@@ -420,6 +420,7 @@ Constraints:
 | `commits/{sha}/pulls` returns the PR for rebase-merged commits                                             | Find the PR from the push payload's commit list                                                |
 | `eas update --json` and `update:view --json` expose the group and update IDs and the git commit            | The duplicate guard compares messages instead of commits                                       |
 | Environment branch policies admit `push` and `workflow_dispatch` runs on `release/*`                       | The scripts' own branch check remains the guard                                                |
+| `eas … --json` prints only JSON on stdout (it doesn't: with `--environment` a notice comes first)          | `runJson` parses from the first line that opens an object or array (found by the dry run)      |
 
 ## 13. Documentation
 

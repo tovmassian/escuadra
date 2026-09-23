@@ -57,6 +57,11 @@ export async function runOk(runner: Runner, tool: Tool, args: string[]): Promise
   return result.stdout;
 }
 
+// eas-cli prints notices on stdout even with --json — for any command given --environment,
+// "No environment variables … found for the "production" environment on EAS." — so the JSON
+// starts at the first line that opens an object or an array.
 export async function runJson<T>(runner: Runner, tool: Tool, args: string[]): Promise<T> {
-  return JSON.parse(await runOk(runner, tool, args)) as T;
+  const stdout = await runOk(runner, tool, args);
+  const start = stdout.search(/^[[{]/m);
+  return JSON.parse(start > 0 ? stdout.slice(start) : stdout) as T;
 }
