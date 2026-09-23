@@ -47,9 +47,9 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 
 ⚠️ **On `main` today, the About privacy text is out of date.** It still says
 "no advertising, analytics or tracking software" while TelemetryDeck (#53) is
-in the code. `release/1.1.0` is cut from `main` only after #54 rewrites that
-text and the web policy together and #55 updates the store declarations; then
-#60 builds it.
+in the code. The next release branch (its version still TBD) is cut from
+`main` only after #54 rewrites that text and the web policy together and #55
+updates the store declarations; then #60 builds it.
 
 ## Scope and roadmap
 
@@ -139,8 +139,8 @@ update this file in the same PR rather than leave a stale rule behind.
    word for word), Apple's App Privacy answers and Google Play's Data safety
    form — in a store build, never over the air. Today the traffic is
    `expo-updates` checking EAS Update on launch (OS, project ID, a random
-   installation token) and, from 1.1.0, opt-out TelemetryDeck usage signals
-   (see Telemetry under Architecture rules).
+   installation token) and, from the next store version, opt-out
+   TelemetryDeck usage signals (see Telemetry under Architecture rules).
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
    rather than inlining a value. This governs the app's own design system —
