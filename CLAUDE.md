@@ -1,25 +1,13 @@
 # Escuadra
 
-> ⚠️ **You are on `release/1.0.0` — the OTA branch for the shipped 1.0.0
+> ⚠️ **You are on `release/1.0.0`, the locked OTA branch for the shipped 1.0.0
 > binaries** (iOS build 3 = runtime `8b8b8840…`, Android build 3 = runtime
-> `a616db89…`). Everything committed here must leave both fingerprints
-> unchanged, or every published update silently reaches nobody.
+> `a616db89…`). Only changes that keep both fingerprints belong here; see
+> "Branches" in `docs/release.md`.
 >
-> - **Belongs here:** JavaScript fixes cherry-picked from `main` with
->   `git cherry-pick -x`, docs, and GitHub Actions workflows — measured to be
->   fingerprint-inert (see the matrix in `docs/eas-update.md`).
-> - **Never here:** new npm scripts, dependency changes, `.gitignore` lines,
->   `fingerprint.config.js`, or any `app.json` / `eas.json` edit. Each one
->   moves the fingerprint. A change that needs one is a store build for a new
->   version, not a commit on this branch.
-> - **Before every publish:**
->   `npx eas-cli fingerprint:compare --build-id <id> --environment production`,
->   continue only on ✅, and always pass `--platform`.
->
-> The rest of this file is `main`'s CLAUDE.md (as of `a3e89d45`, #72).
-> Commands and files it mentions that were added after the 1.0.0 build —
-> `shots:play`, `gen:play-assets`, `design/play/`,
-> `app/store/feature-graphic.tsx` — exist only on `main`.
+> The rest of this file is `main`'s CLAUDE.md (as of `71b6d77c`). What it describes that
+> came after the 1.0.0 build — TelemetryDeck and its privacy notes, `shots:play`,
+> `gen:play-assets`, `design/play/`, `app/store/feature-graphic.tsx` — exists only on `main`.
 
 A football squad memorisation trainer for mobile.
 
