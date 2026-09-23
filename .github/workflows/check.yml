@@ -13,3 +13,7 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run check
+      - name: Lint workflows
+        uses: docker://rhysd/actionlint:1.7.12
+        with:
+          args: -color
