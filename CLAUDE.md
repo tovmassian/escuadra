@@ -59,11 +59,18 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 - **Nothing that moves the fingerprint lands on a locked release branch:** npm scripts,
   dependency changes, `.gitignore` lines, `app.json`, `eas.json`, `fingerprint.config.js`.
   A change that needs one is a new version.
-- **Fixes land on `main` first** and reach a locked branch by `git cherry-pick -x`.
+- **A fix for a shipped version starts on its release branch** and reaches `main` by
+  `git cherry-pick -x`. Docs and CI changes go the other way.
 - **`runtimeVersion` stays on the `fingerprint` policy.** `appVersion` would hand
   JavaScript to binaries that can't run it.
 - **CI calls tools directly** (`node scripts/ci/…`, `npx eas-cli …`), never through new npm
   scripts, and writes temporary files to `$RUNNER_TEMP`, never new `.gitignore` lines.
+
+⚠️ **On `main` today, the About privacy text is out of date.** It still says
+"no advertising, analytics or tracking software" while TelemetryDeck (#53) is
+in the code. `release/1.1.0` is cut from `main` only after #54 rewrites that
+text and the web policy together and #55 updates the store declarations; then
+#60 builds it.
 
 ## Scope and roadmap
 
@@ -151,9 +158,10 @@ update this file in the same PR rather than leave a stale rule behind.
    crash reporting, a backend call, a new SDK) ships **together** with the
    updated privacy policy (the published page and the About screen text,
    word for word), Apple's App Privacy answers and Google Play's Data safety
-   form — in a store build, never over the air. Today the only traffic is
+   form — in a store build, never over the air. Today the traffic is
    `expo-updates` checking EAS Update on launch (OS, project ID, a random
-   installation token).
+   installation token) and, from 1.1.0, opt-out TelemetryDeck usage signals
+   (see Telemetry under Architecture rules).
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
    rather than inlining a value. This governs the app's own design system —
@@ -294,6 +302,19 @@ Wikipedia reads), `squad-writer` (the sole, sequential writer of
   environment and cannot load `react-native`) can test it; `theme/useTheme.ts`
   exposes `useThemeName()` and `useThemeColors()`. The persisted preference
   lives in `stores/progress.ts` — it is not a third store.
+- **Telemetry** is TelemetryDeck, anonymous and opt-out. The event allowlist
+  — every event name and property that may leave the device — is
+  `TELEMETRY_EVENTS` in `lib/telemetryEvents.ts`, alongside the pure gate
+  that keeps it inert in `__DEV__`, on web (so `npm run shots*` never sends),
+  when opted out, and with no App ID (`app.json` →
+  `extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only module that
+  imports the SDK; screens call its `track()`. The anonymous `clientUser` is
+  a random `installId` persisted in `stores/progress.ts`, next to the
+  About-screen opt-out. Non-`production` channels send TelemetryDeck test
+  signals. **A new event or property is a disclosure review** (guardrail 4):
+  the privacy policy, About text, App Privacy and Data safety answers change
+  with it, in a store build. Never put names, free text or player data in a
+  payload.
 - Zustand's `persist` defaults to `localStorage`, which does not exist here. Use
   `createJSONStorage(() => AsyncStorage)`.
 - Every animation stays under 300ms. The app is played in fast repetitive bursts
