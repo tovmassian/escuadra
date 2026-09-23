@@ -1,7 +1,8 @@
 # Release pipeline — OTA updates and store builds through GitHub Actions
 
-**Status:** design, approved 2026-09-23 (#73). Self-contained — every decision and
-its rationale is recorded here.
+**Status:** design, approved 2026-09-23 (#73) and revised the same day: release branches
+are cut from `main`, and a fix for a shipped version starts on its branch (§4).
+Self-contained — every decision and its rationale is recorded here.
 
 ## 1. Problem
 
@@ -52,7 +53,7 @@ Measured 2026-09-23 unless noted.
 | ------------------ | ------------------------------------------------------------------------------------------------------------------ |
 | Preview lane       | Automatic: each push to a labelled PR publishes to `preview` when a preview build with the same fingerprint exists |
 | Platform selection | Opt-in PR labels `ota:ios`, `ota:android`; no label, nothing published                                             |
-| Branch model       | One convention, `release/X.Y.Z`, with a per-platform lifecycle (open → locked) read from EAS                       |
+| Branch model       | One convention, `release/X.Y.Z` cut from `main`, with a per-platform lifecycle (open → locked) read from EAS       |
 | Branch protection  | Rulesets on `main` and `release/*`; a bypass only on `main`, only for PR merges                                    |
 | Review freeze      | Freeze issues (label `ota-freeze`), keyed `platform@version`                                                       |
 | Production guard   | Environments `production-ios` and `production-android`, deployable from `release/*` only                           |
@@ -74,12 +75,13 @@ Rejected:
 
 ### Lifecycle
 
-Every version lives on `release/X.Y.Z` from the day work on it starts. Each platform on
-the branch is in one of two states, read from EAS and never set by hand:
+A version gets its `release/X.Y.Z` branch when it is cut from `main`, once its content is
+decided. Each platform on the branch is in one of two states, read from EAS and never set
+by hand:
 
 | State  | Condition                                                                                  | What may merge                                                                                         | Publishing                          |
 | ------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ----------------------------------- |
-| Open   | No production build of X.Y.Z exists for the platform                                       | Anything: feature PRs, syncs from `main`                                                               | Preview, if a preview build matches |
+| Open   | No production build of X.Y.Z exists for the platform                                       | Anything: fixes, syncs from `main`                                                                     | Preview, if a preview build matches |
 | Locked | A production build of X.Y.Z exists for the platform — finished, new, queued or in progress | Only PRs whose fingerprint equals the latest such build's runtime and that bring no commit from `main` | Preview and production              |
 
 - Errored and cancelled builds don't count. "Latest" is by creation time: iOS 1.0.0
@@ -97,19 +99,25 @@ the branch is in one of two states, read from EAS and never set by hand:
 
 ### Flow
 
-- Fixes land on `main` first, as today.
-- A fix reaches a locked branch as a PR of `git cherry-pick -x` commits, on a branch cut
-  from the release branch.
-- An open branch syncs from `main` by PR, merged with a merge commit.
-- A feature release ends with a PR from `release/X.Y.Z` into `main` (#60); the branch
-  lives on as that version's OTA source.
-- A hotfix written on a release branch first still goes back to `main` by cherry-pick.
+- Development, the next version's features included, happens on `main`. A version's
+  branch is cut only once its content is decided, so nothing locks early.
+- A fix for a shipped version starts on its release branch: a PR from a branch cut from
+  `release/X.Y.Z`, previewed through the labels. Once merged, a PR of `git cherry-pick -x`
+  commits takes it to `main`, as it does anything merged into an open branch.
+- Why that direction: `main` carries unreleased work. A fix written there and picked back
+  can conflict in the same files, and resolving that on a shipping branch can drag
+  unreleased code — TelemetryDeck today — into an OTA, which guardrail 4 forbids and the
+  fingerprint can't see. Conflicts on the way to `main` are resolved where nothing ships.
+  The cost, remembering the pick to `main`, is carried by the gate's comment (§6).
+- Docs and CI changes start on `main` and reach release branches by cherry-pick.
+- An open branch may sync from `main` by PR, with a merge commit. A release branch never
+  merges into `main`; after its lock it lives on as its version's OTA source.
 
-### Rename
+### 1.1.0
 
-`release-1.1.0` becomes `release/1.1.0` through GitHub's branch rename. No PRs are open,
-so nothing needs retargeting. Local clones run `git fetch --prune`, `git branch -m`, and
-set the new upstream.
+`release-1.1.0` was renamed `release/1.1.0` through GitHub's branch rename, then merged
+into `main` and deleted when this flow replaced the long-lived integration branch. 1.1.0
+is cut from `main` again once #54 and #55 have landed; #60 builds it.
 
 ## 5. Repository and EAS setup
 
@@ -123,8 +131,8 @@ set the new upstream.
 | Merge methods                 | unchanged             | merge commit, rebase — no squash                       |
 | Bypass                        | admin, PR merges only | none; the escape is editing the ruleset (audit-logged) |
 
-- The repo deletes a merged PR's head branch automatically; deletion protection keeps
-  `release/1.1.0` alive through its PR into `main`.
+- The repo deletes a merged PR's head branch automatically; deletion protection keeps a
+  release branch alive if one is ever a PR's head.
 - No squash: a sync from `main` needs a real merge commit, and a rebase merge keeps each
   cherry-pick's `-x` line.
 - Rulesets match `release/*` with wildcards; the version-shaped regex is enforced by
@@ -184,7 +192,8 @@ runs `npm ci`, then:
 6. Reports, without blocking: labels; open freezes for the labelled platforms; with an
    `ota:*` label, the guardrail-4 line; changed dependencies and added network-looking
    code (`fetch(`, `XMLHttpRequest`, `WebSocket`, `sendBeacon`, URL literals) in files the
-   app bundles — everything outside `docs/`, `.github/`, `scripts/`, `tools/` and tests.
+   app bundles — everything outside `docs/`, `.github/`, `scripts/`, `tools/` and tests;
+   and a reminder that whatever isn't on `main` yet goes there by cherry-pick once merged.
 7. Writes one PR comment, updated in place on each run (found by a hidden marker), and
    the job summary. If EAS can't be reached, the check fails and is re-run later.
 
@@ -295,9 +304,9 @@ Steps:
 6. Reports from → to, the new group, the runtime, the freeze link, and "devices switch
    after two launches".
 
-Recovery: revert or fix on `main`, cherry-pick PR, close the freeze, merge. Merging
-first also works: the publish fails as frozen, and "Re-run failed jobs" after closing the
-freeze publishes it.
+Recovery: a revert or fix PR into the release branch, close the freeze, merge, then pick
+it to `main`. Merging first also works: the publish fails as frozen, and "Re-run failed
+jobs" after closing the freeze publishes it.
 
 ## 10. Store builds
 
@@ -330,12 +339,12 @@ freeze, and on a locked branch verify that their runtime equals the production o
 
 Procedures this enables (written out in `docs/release.md`):
 
-- **Feature release (1.1.0):** on the open branch, PRs for the version bump and
-  `fingerprint.config.js` (`sourceSkips: ['PackageJsonScriptsAll', 'GitIgnore']`); run with
-  `both`; the branch locks; PR `release/1.1.0` into `main` (#60).
+- **Feature release (1.1.0):** the version bump and `fingerprint.config.js`
+  (`sourceSkips: ['PackageJsonScriptsAll', 'GitIgnore']`) land on `main`; cut
+  `release/1.1.0` from it; run with `both`; the branch locks (#60).
 - **Runtime-changing fix to 1.0.0:**
   `git push origin origin/release/1.0.0:refs/heads/release/1.0.1`; PR with the fix and
-  the version bump; run; the branch locks.
+  the version bump; run; the branch locks; pick the fix to `main`.
 
 Stays manual: Submit for Review, Play promotions and their freezes, closing freezes.
 
@@ -455,7 +464,8 @@ may break:
   release doc's fallback.
 - On a locked branch, nothing that moves the fingerprint: npm scripts, dependency
   changes, `.gitignore` lines, `app.json`, `eas.json`, `fingerprint.config.js`.
-- Fixes land on `main` first and reach a locked branch by `cherry-pick -x`.
+- A fix for a shipped version starts on its release branch and reaches `main` by
+  `cherry-pick -x`; docs and CI changes go the other way.
 - CI calls tools directly — never through new npm scripts — and writes temporary files
   to `$RUNNER_TEMP`.
 
@@ -470,7 +480,8 @@ every GitHub or EAS settings change is confirmed with the owner before it's made
 1. **Rename and docs.** Rename `release-1.1.0` to `release/1.1.0`. One PR on `main`:
    `docs/release.md` (the model, the current manual procedures) replaces
    `docs/eas-update.md`; CLAUDE.md gets its Releases section; README.md's link follows.
-   Sync it to `release/1.1.0` by PR; cherry-pick it to `release/1.0.0` by PR.
+   Then `release/1.1.0` merges into `main` and is deleted (§4), and the docs are
+   cherry-picked to `release/1.0.0` by PR.
 2. **Accounts and settings.** 👤 Create the two EAS robot tokens and store them as GitHub
    secrets. 👤 Confirm submission credentials on EAS. Then labels, environments,
    `eas channel:protect production`, and `main`'s ruleset.
@@ -480,15 +491,15 @@ every GitHub or EAS settings change is confirmed with the owner before it's made
 4. **Run it on its own introduction.** A cherry-pick PR into `release/1.0.0`:
    `release-gate` runs on the PR that adds it and must show both fingerprints unchanged,
    and the fingerprints it prints on a Linux runner answer the runner-vs-Mac question.
-   Sync to `release/1.1.0`, then switch on `release/*`'s ruleset.
+   Then switch on `release/*`'s ruleset.
 5. **Preview lane.** `store-build` with profile `preview` and `both` on `release/1.0.0`:
    one build per platform from the Free quota. 👤 Install them. A preview build and a
    store build share the app ID, so a device holds one at a time; on Android, switching
    means uninstalling (different signing keys), which wipes best scores.
 6. **First real OTA: the About update-ID fix**, first because it makes every later
-   on-device check instant. PR on `main`; cherry-pick PR into `release/1.0.0` with
-   `ota:ios` and `ota:android`; preview publish; 👤 open the app twice; merge, which
-   publishes to production; 👤 verify on a store install.
+   on-device check instant. PR into `release/1.0.0` with `ota:ios` and `ota:android`;
+   preview publish; 👤 open the app twice; merge, which publishes to production; 👤 verify
+   on a store install; pick it to `main`.
 7. **Failure drills.** A throwaway PR adding an npm script fails `release-gate` with the
    diff. An open freeze blocks a publish; closing it and re-running publishes. A manual
    run from `main` is refused. A rollback drill on `preview` rolls back and verifies.
@@ -500,8 +511,8 @@ The 1.1.0 release (#60) is then the first production use of `store-build`.
 
 From #73:
 
-- A JS fix merged on `main` and cherry-picked to `release/1.0.0` reaches production users
-  through CI with no local `eas` command (step 6).
+- A JS fix merged into `release/1.0.0` reaches production users through CI with no local
+  `eas` command (step 6).
 - CI refuses to publish when no production build matches the fingerprint and while the
   platform is frozen (unit tests in §11; drills in step 7).
 - Nothing CI adds to `release/1.0.0` moves its fingerprints `8b8b8840` / `a616db89`
