@@ -38,19 +38,18 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 - **Nothing that moves the fingerprint lands on a locked release branch:** npm scripts,
   dependency changes, `.gitignore` lines, `app.json`, `eas.json`, `fingerprint.config.js`.
   A change that needs one is a new version.
-- **Fixes land on `main` first** and reach a locked branch by `git cherry-pick -x`.
+- **A fix for a shipped version starts on its release branch** and reaches `main` by
+  `git cherry-pick -x`. Docs and CI changes go the other way.
 - **`runtimeVersion` stays on the `fingerprint` policy.** `appVersion` would hand
   JavaScript to binaries that can't run it.
 - **CI calls tools directly** (`node scripts/ci/…`, `npx eas-cli …`), never through new npm
   scripts, and writes temporary files to `$RUNNER_TEMP`, never new `.gitignore` lines.
 
-⚠️ **On `release-1.1.0` today, the About privacy text is out of date.** It
-still says "no advertising, analytics or tracking software" while
-TelemetryDeck (#53) is in the code. Nothing from this branch may reach users
-until #54 rewrites that text and the web policy together, and #55 updates the
-store declarations — the order is #54 → #55 → #60. The 1.1.0 store build is
-also the commit that adds `fingerprint.config.js` (see `docs/eas-update.md`),
-never a commit in between.
+⚠️ **On `main` today, the About privacy text is out of date.** It still says
+"no advertising, analytics or tracking software" while TelemetryDeck (#53) is
+in the code. `release/1.1.0` is cut from `main` only after #54 rewrites that
+text and the web policy together and #55 updates the store declarations; then
+#60 builds it.
 
 ## Scope and roadmap
 
