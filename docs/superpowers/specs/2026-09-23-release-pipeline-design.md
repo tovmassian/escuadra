@@ -129,7 +129,7 @@ builds it.
 | Block deletion and force-push | ✓                     | ✓                                                      |
 | Require a PR (0 approvals)    | ✓                     | ✓                                                      |
 | Required checks               | `check`               | `check`, `release-gate`                                |
-| Merge methods                 | unchanged             | merge commit, rebase — no squash                       |
+| Merge methods                 | merge commit, rebase  | merge commit, rebase — no squash                       |
 | Bypass                        | admin, PR merges only | none; the escape is editing the ruleset (audit-logged) |
 
 - The repo deletes a merged PR's head branch automatically; deletion protection keeps a
@@ -154,9 +154,13 @@ one of them, so none can run from `main` or a feature branch.
 | `EXPO_TOKEN_PREVIEW`    | Developer      | repository secret                                  | `release-gate`, preview publish, preview builds and preview rollback drills |
 | `EXPO_TOKEN_PRODUCTION` | Admin          | environment secret in both production environments | production publish, rollback and builds                                     |
 
-Plus `eas channel:protect production`, so only Admins can publish there. A workflow
-edited inside a PR runs with repository secrets; with this split it still can't publish
-to production.
+The design also protected the `production` channel (`eas channel:protect`), so that only
+Admins could publish there. That feature isn't enabled for the account (Expo support can
+turn it on; the dashboard offers only Pause and Delete), which leaves one gap: a workflow
+edited inside a PR runs with repository secrets, so it could publish to `production` with
+the preview token. Only someone with write access can open such a PR, and the preview
+flow's tests pin its channel to `preview`. If protection is ever enabled, run
+`eas channel:protect production` and the gap closes.
 
 ### Labels and credentials
 
@@ -382,6 +386,7 @@ The rules are unit tests, run by Vitest inside `npm run check` on every branch:
 
 - publish: frozen, open or mismatched means `eas update` is never called; a failed
   verification exits non-zero;
+- preview: `eas update` only ever targets the `preview` channel and environment;
 - gate: locked with a mismatch fails; `main` commits on a locked branch fail; an
   unfinished build with an unknown runtime fails;
 - rollback: the freeze issue is created before the rollback command; `previous` with no
@@ -407,14 +412,14 @@ Constraints:
 
 ## 12. To verify during implementation
 
-| Item                                                                                                          | If it doesn't hold                                                                             |
-| ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| EAS reports the runtime or fingerprint of an unfinished build                                                 | PRs wait while a production build of the version is unfinished — already the designed fallback |
-| EAS robot users can hold the Developer and Admin roles, and an Admin robot can publish to a protected channel | The production token is the owner's personal token, kept in the production environments        |
-| Submission credentials exist on EAS                                                                           | The owner adds them to EAS once                                                                |
-| `commits/{sha}/pulls` returns the PR for rebase-merged commits                                                | Find the PR from the push payload's commit list                                                |
-| `eas update --json` and `update:view --json` expose the group and update IDs and the git commit               | The duplicate guard compares messages instead of commits                                       |
-| Environment branch policies admit `push` and `workflow_dispatch` runs on `release/*`                          | The scripts' own branch check remains the guard                                                |
+| Item                                                                                                       | If it doesn't hold                                                                             |
+| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| EAS reports the runtime or fingerprint of an unfinished build                                              | PRs wait while a production build of the version is unfinished — already the designed fallback |
+| EAS robot users can hold the Developer and Admin roles (they can; channel protection can't be enabled, §5) | The production token is the owner's personal token, kept in the production environments        |
+| Submission credentials exist on EAS                                                                        | The owner adds them to EAS once                                                                |
+| `commits/{sha}/pulls` returns the PR for rebase-merged commits                                             | Find the PR from the push payload's commit list                                                |
+| `eas update --json` and `update:view --json` expose the group and update IDs and the git commit            | The duplicate guard compares messages instead of commits                                       |
+| Environment branch policies admit `push` and `workflow_dispatch` runs on `release/*`                       | The scripts' own branch check remains the guard                                                |
 
 ## 13. Documentation
 
@@ -485,7 +490,7 @@ every GitHub or EAS settings change is confirmed with the owner before it's made
    cherry-picked to `release/1.0.0` by PR.
 2. **Accounts and settings.** 👤 Create the two EAS robot tokens and store them as GitHub
    secrets. 👤 Confirm submission credentials on EAS. Then labels, environments,
-   `eas channel:protect production`, and `main`'s ruleset.
+   `eas channel:protect production` (unavailable, §5), and `main`'s ruleset.
 3. **Build on `main`.** One PR: `scripts/ci/` with tests, the setup action, the four
    workflows, actionlint, and the pipeline sections of `docs/release.md`. Dry run against
    `release/1.0.0`, expecting ✅ `8b8b8840` / `a616db89`.

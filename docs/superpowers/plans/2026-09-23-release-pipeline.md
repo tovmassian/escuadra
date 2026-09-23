@@ -442,10 +442,9 @@ gh secret set EXPO_TOKEN_PRODUCTION --env production-android
 
 `npx eas-cli credentials --platform ios` → `production` → App Store Connect API Key must be set up; `npx eas-cli credentials --platform android` → `production` → Google Service Account Key must be set up. If either is missing, add it there (it stays on EAS, never in GitHub).
 
-- [ ] **Step 5: Protect the production channel**
+- [ ] **Step 5: Protect the production channel** — unavailable
 
-Run: `npx eas-cli channel:protect production --non-interactive` then `npx eas-cli channel:view production --non-interactive | grep Protection`
-Expected: `Protection  Protected` (wording may differ; it must not say Unprotected).
+Result 2026-09-23: `eas channel:protect production` answers "Channel protection is not enabled for the account", and the dashboard offers only Pause and Delete. Spec §5 records the gap this leaves; if Expo support ever enables the feature, run the command then.
 
 - [ ] **Step 6: The `main` ruleset**
 
@@ -2765,6 +2764,11 @@ describe('runPreview', () => {
     expect(outcome.status).toBe('done');
     expect(outcome.summary).toContain('iOS → group `1a2b3c4d`');
     expect(outcome.summary).toContain('Android: skipped, no preview build on runtime `a616db89`');
+    // Pinned: the preview token can reach any channel, since protection isn't available.
+    const args =
+      runner.calls.find((call) => call.tool === 'eas' && call.args[0] === 'update')?.args ?? [];
+    expect(args[args.indexOf('--channel') + 1]).toBe('preview');
+    expect(args[args.indexOf('--environment') + 1]).toBe('preview');
     const patch = runner.calls.find((call) => call.args.includes('PATCH'));
     expect(patch?.args.find((arg) => arg.startsWith('body='))).toContain('iOS → group `1a2b3c4d`');
   });
@@ -4724,8 +4728,8 @@ Insert directly under `## Reference`:
 | `ota-rollback`   | Manual                                    | Roll back production or preview                 | production runs in `production-<platform>`         |
 | `store-build`    | Manual                                    | Production or preview build, optional submit    | production runs in `production-<platform>`         |
 
-Both environments accept only `release/*` branches, and the `production` channel is
-protected so only the Admin token can publish to it. The logic lives in `scripts/ci/`,
+Both environments accept only `release/*` branches, so only a run on a release branch
+reaches the production token. The logic lives in `scripts/ci/`,
 tested by `npm run check`. To see the gate's verdict before opening a PR, from a checkout of
 the branch you would merge:
 `EAS_CLI="npx --yes eas-cli@24.7.0" node scripts/ci/gate.ts --base release/1.0.0 --dry-run`.
@@ -4793,7 +4797,7 @@ gh pr create --base main --title "ci: release pipeline — gate, preview, produc
   --body "Implements docs/superpowers/plans/2026-09-23-release-pipeline.md, Phase 3. Nothing here moves the fingerprint: files under .github/ and scripts/ci/ only. Dry run against release/1.0.0: iOS 8b8b8840 ✅, Android a616db89 ✅."
 ```
 
-Expected: `check` passes, including actionlint. The owner merges with **Squash and merge**, so Phase 4 cherry-picks one commit.
+Expected: `check` passes, including actionlint. The owner merges with **Create a merge commit** (`main` allows no squash); Phase 4 cherry-picks that merge as one commit with `-m 1`.
 
 ---
 
@@ -4801,13 +4805,13 @@ Expected: `check` passes, including actionlint. The owner merges with **Squash a
 
 ### Task 18: The pipeline on its own introduction PR; the `release/*` ruleset
 
-- [ ] **Step 1: Cherry-pick the squashed pipeline commit onto `release/1.0.0`**
+- [ ] **Step 1: Cherry-pick the pipeline's merge commit onto `release/1.0.0`**
 
 ```bash
 git fetch origin
-CODE=$(git log origin/main -1 --format=%H -- scripts/ci/gate.ts)
+CODE=$(gh pr view <pipeline PR number> --json mergeCommit --jq .mergeCommit.oid)
 git switch -c ci/pipeline-1.0.0 origin/release/1.0.0
-git cherry-pick -x "$CODE"
+git cherry-pick -x -m 1 "$CODE"
 npm ci
 for p in ios android; do npx expo-updates fingerprint:generate --platform $p | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>process.stdout.write(JSON.parse(s).hash+"\n"))'; done
 ```
@@ -4893,7 +4897,7 @@ Expected: `release-gate` ✅ for both platforms; the `preview` job fills the com
 
 - [ ] **Step 2: 👤 Verify on the preview builds:** open the app, wait, close fully, open again. About shows the update ID from the comment.
 
-- [ ] **Step 3: Merge** (the owner, **Rebase and merge**). Expected: `ota-production` publishes both platforms, and each job's PR comment says `✅ matches build 3`. If `eas update` fails with a permission error on the protected channel, the Admin robot can't publish there (spec §12): store the owner's personal token as `EXPO_TOKEN_PRODUCTION` in both environments instead, and re-run the failed jobs.
+- [ ] **Step 3: Merge** (the owner, **Rebase and merge**). Expected: `ota-production` publishes both platforms, and each job's PR comment says `✅ matches build 3`.
 
 - [ ] **Step 4: 👤 Verify on store installs** (launch twice), and check EAS: `npx eas-cli update:list --branch production --limit 3` shows the new groups on `8b8b8840` and `a616db89`.
 
