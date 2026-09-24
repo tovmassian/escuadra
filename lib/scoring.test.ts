@@ -17,7 +17,7 @@ describe('PASS_RATIO', () => {
 });
 
 describe('scoreKey', () => {
-  it('joins squad and level into the bestScores/completedLevels storage key', () => {
+  it('joins squad and level into the bestScores storage key', () => {
     expect(scoreKey('barcelona', 2)).toBe('barcelona:2');
   });
 });

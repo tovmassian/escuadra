@@ -23,5 +23,5 @@ export const ROUND_LENGTH = 10;
  */
 export const PASS_RATIO = 0.8;
 
-/** The `bestScores` / `completedLevels` storage key for a team+level pair. */
+/** The `bestScores` storage key for a team+level pair. */
 export const scoreKey = (squadId: string, level: number) => `${squadId}:${level}`;
