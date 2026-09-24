@@ -12,7 +12,7 @@ interface LadderBadgeProps {
   expanded: boolean;
 }
 
-// A rung's badge: its number while playable, the mark once played, a padlock
+// A rung's badge: its number while playable, the mark once cleared, a padlock
 // while locked. Centred in the ladder's fixed-width column so both badge
 // sizes, and the connector segments between them, share one vertical axis.
 export function LadderBadge({ level, status, expanded }: LadderBadgeProps) {
@@ -30,7 +30,7 @@ export function LadderBadge({ level, status, expanded }: LadderBadgeProps) {
     },
     locked: { backgroundColor: colors.surface, borderColor: colors.border },
     unlocked: { backgroundColor: colors.accent, borderColor: colors.accent },
-    best: { backgroundColor: colors.success, borderColor: colors.success },
+    cleared: { backgroundColor: colors.success, borderColor: colors.success },
     number: { ...typography.badgeNumber, color: colors.accentOn },
   });
 
@@ -39,7 +39,7 @@ export function LadderBadge({ level, status, expanded }: LadderBadgeProps) {
       <View style={[styles.badge, styles[status]]}>
         {status === 'locked' ? (
           <LockGlyph size={Math.round(size * iconSize.lockGlyphRatio)} />
-        ) : status === 'best' ? (
+        ) : status === 'cleared' ? (
           <VerdictGlyph
             correct
             size={expanded ? iconSize.markLarge : iconSize.markSmall}

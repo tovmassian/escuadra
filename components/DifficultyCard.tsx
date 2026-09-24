@@ -47,7 +47,13 @@ export function DifficultyCard({ row, title, description, onPlay }: DifficultyCa
           <Text style={styles.title} accessibilityRole="header">
             {title}
           </Text>
-          {row.best && <BestPill correct={row.best.correct} total={row.best.total} />}
+          {row.best && (
+            <BestPill
+              correct={row.best.correct}
+              total={row.best.total}
+              cleared={row.status === 'cleared'}
+            />
+          )}
         </View>
         <Text style={styles.description}>{description}</Text>
         <View style={styles.action}>

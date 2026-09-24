@@ -33,7 +33,6 @@ export default function Difficulty() {
   const colors = useThemeColors();
   const { squadId } = useLocalSearchParams<{ squadId: string }>();
   const bestScores = useProgress((s) => s.bestScores);
-  const completedLevels = useProgress((s) => s.completedLevels);
 
   const styles = StyleSheet.create({
     root: {
@@ -58,7 +57,7 @@ export default function Difficulty() {
   const squad = getSquad(squadId);
   if (!squad) return null;
 
-  const rows = ladderRows(squad.id, bestScores, completedLevels);
+  const rows = ladderRows(squad.id, bestScores);
   const focused = focusedLevel(rows);
   const play = (level: Level) =>
     router.push({

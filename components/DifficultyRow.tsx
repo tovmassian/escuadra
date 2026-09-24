@@ -50,7 +50,13 @@ export function DifficultyRow({ row, title, onPress }: DifficultyRowProps) {
       <LadderBadge level={row.level} status={row.status} expanded={false} />
       <View style={styles.card}>
         <Text style={styles.title}>{title}</Text>
-        {row.best && <BestPill correct={row.best.correct} total={row.best.total} />}
+        {row.best && (
+          <BestPill
+            correct={row.best.correct}
+            total={row.best.total}
+            cleared={row.status === 'cleared'}
+          />
+        )}
         {locked && row.unlockHint && <Text style={styles.hint}>{row.unlockHint}</Text>}
       </View>
     </Pressable>
