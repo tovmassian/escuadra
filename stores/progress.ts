@@ -16,11 +16,6 @@ interface LastPlayed {
 
 interface ProgressState {
   bestScores: Record<string, number>; // key: `${squadId}:${level}`
-  /** Set true the moment a level is finished, independent of `bestScores` —
-   *  a legitimate 0/10 round wouldn't raise `bestScores` above its default
-   *  of 0, which would otherwise make the difficulty ladder's "unlocked once
-   *  the prior level has a recorded score" gate impossible to clear. */
-  completedLevels: Record<string, true>;
   /** Backs Home's "continue" card — the most recent team+level a round was
    *  started for, regardless of how it finished. */
   lastPlayed: LastPlayed | null;
@@ -48,7 +43,6 @@ export const useProgress = create<ProgressState>()(
   persist(
     (set) => ({
       bestScores: {},
-      completedLevels: {},
       lastPlayed: null,
       themePreference: 'system',
       installId: null,
@@ -56,17 +50,19 @@ export const useProgress = create<ProgressState>()(
       recordScore: (squadId, level, score) =>
         set((s) => {
           const key = scoreKey(squadId, level);
-          const prev = s.bestScores[key] ?? 0;
+          const prev = s.bestScores[key];
+          // `prev === undefined`, not `?? 0`: a first round of 0/10 is still a
+          // score the ladder and picker should show as played.
           return {
-            bestScores: score > prev ? { ...s.bestScores, [key]: score } : s.bestScores,
-            completedLevels: { ...s.completedLevels, [key]: true },
+            bestScores:
+              prev === undefined || score > prev ? { ...s.bestScores, [key]: score } : s.bestScores,
           };
         }),
       setLastPlayed: (squadId, level) => set({ lastPlayed: { squadId, level } }),
       setThemePreference: (themePreference) => set({ themePreference }),
       setInstallId: (installId) => set((s) => (s.installId === null ? { installId } : s)),
       setTelemetryEnabled: (telemetryEnabled) => set({ telemetryEnabled }),
-      reset: () => set({ bestScores: {}, completedLevels: {}, lastPlayed: null }),
+      reset: () => set({ bestScores: {}, lastPlayed: null }),
     }),
     {
       name: 'escuadra-progress',
