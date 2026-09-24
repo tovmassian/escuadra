@@ -217,6 +217,13 @@ To see the gate's verdict before opening a PR, from a checkout of the branch you
 merge:
 `EAS_CLI="npx --yes eas-cli@24.7.0" node scripts/ci/gate.ts --base release/1.0.0 --dry-run`.
 
+**Pinned actions.** These workflows name each action by full commit SHA, its version in a
+comment. A tag like `v7` can be repointed at other code by whoever controls the action's
+repository, and these jobs run with an Expo token in reach, the production one included;
+`actions/checkout` v7.0.1 isn't even an immutable release. To move a pin, replace the SHA
+and the comment together: `gh api repos/actions/checkout/commits/<tag> --jq .sha`. `check`
+holds no token and keeps plain tags.
+
 ### Manual fallback (when Actions is down)
 
 Do what the workflows do, from a clean checkout of the release branch, one platform per

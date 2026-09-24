@@ -420,9 +420,11 @@ Constraints:
 - TypeScript that Node can strip: no enums, no parameter properties, relative imports end
   in `.ts`. Strict mode and `noUncheckedIndexedAccess` stay on.
 - Temporary files go to `$RUNNER_TEMP`.
-- Least-privilege `permissions:` per workflow; third-party actions pinned to commit SHAs;
-  PR titles, labels and messages reach scripts through the environment or the event
-  file, never interpolated into `run:`; eas-cli pinned to one version.
+- Least-privilege `permissions:` per workflow; every action in a workflow that reaches an
+  Expo token pinned to a full commit SHA, its version in a comment (a tag can be
+  repointed; `check`, with no token, keeps tags); PR titles, labels and messages reach
+  scripts through the environment or the event file, never interpolated into `run:`;
+  eas-cli pinned to one version.
 
 ## 12. To verify during implementation
 
