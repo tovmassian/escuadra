@@ -90,7 +90,7 @@ For each field, prompt with context:
 
 > **Add to project:** [list discovered projects with descriptions]
 
-- Default: v0 planning board (if exists) or primary project
+- Default: Escuadra board (if exists) or primary project
 - Show which board it will appear on
 
 **Milestone:**
@@ -104,12 +104,14 @@ For each field, prompt with context:
 
 **Size:**
 
-> **Complexity estimate:** Trivial / Small / Medium / Large
+> **Complexity estimate:** XS / S / M / L / XL
 
-- If size labels exist (size-trivial, size-small, etc.), map the choice to labels
-- If size labels don't exist yet, ask the user which label(s) to add and propose creating them in one batch
-- Explain: what effort does "Medium" mean for Escuadra? (1-2 hours, ~200 lines)
-- **As of now:** Escuadra has no size labels; offer to create them or ask: "Should I add a size label?"
+- Escuadra does **not** use size labels — sizing is a `Size` single-select field
+  on the **Escuadra project board** (Projects v2), with options `XS`, `S`, `M`,
+  `L`, `XL`. It can only be set once the issue is an item on that project (see
+  step 5), via `gh project item-edit` with the field's node ID — there is no
+  `gh issue create` flag for it.
+- Explain: what effort does "M" mean for Escuadra? (1-2 hours, ~200 lines)
 
 **Labels (Type):**
 Automatically apply based on issue type — see the canonical mapping in
@@ -155,59 +157,84 @@ gh issue create \
   --body-file "$BODY_FILE" \
   --assignee [assignee] \
   --label "[labels]" \
-  [--milestone "[milestone]" if set] \
-  [--project "[project]" if supported]
+  [--milestone "[milestone]" if set]
 
 rm -f "$TITLE_FILE" "$BODY_FILE"
 ```
 
+`gh issue create` does have a `--project` flag, but it only adds the issue to
+a project by title — it can't also set a custom field like `Size` in the same
+call, so project assignment and sizing always happen as a follow-up (step 5),
+not inline here.
+
 If no, loop back to step 1.
 
-### 5. Link to Project (If CLI Can't)
+### 5. Add to Project & Set Size
 
-If `gh issue create --project` doesn't work (GitHub API limitation), the simplest
-fix is to add it via the web UI. If a scripted fallback is needed, `addProjectV2ItemById`
-takes a project **node ID** and issue **node ID** (both GraphQL `ID`, not numbers),
-and the query must be piped in with `-f query=@-`:
+`gh project item-add` returns the **project item ID** (`PVTI_...`), distinct
+from the issue's own node ID — that's the ID `item-edit` needs:
 
 ```bash
-# Get the project's node ID (not its number) and the issue's node ID first:
-PROJECT_ID=$(gh project view PROJECT_NUMBER --owner tovmassian --format json --jq '.id')
-ISSUE_ID=$(gh issue view ISSUE_NUM -R tovmassian/escuadra --json id --jq '.id')
-
-gh api graphql -f query=@- -F projectId="$PROJECT_ID" -F itemId="$ISSUE_ID" << 'EOF'
-mutation($projectId: ID!, $itemId: ID!) {
-  addProjectV2ItemById(input: {projectId: $projectId, contentId: $itemId}) {
-    item {
-      id
-    }
-  }
-}
-EOF
+ITEM_ID=$(gh project item-add 1 --owner tovmassian \
+  --url https://github.com/tovmassian/escuadra/issues/ISSUE_NUM \
+  --format json --jq '.id')
 ```
+
+If the body contains control characters (multiline text) the `--jq` filter on
+`item-add`'s own output can choke — if so, drop `--jq` (keep `--format json`)
+and read `.id` from the raw JSON output instead.
+
+To set `Size`, resolve the project's node ID and the `Size` field's node ID
+once per session (these are stable, so cache them for repeat use):
+
+```bash
+PROJECT_ID=$(gh project view 1 --owner tovmassian --format json --jq '.id')
+gh project field-list 1 --owner tovmassian --format json \
+  --jq '.fields[] | select(.name=="Size")'
+# → gives the Size field's id and its XS/S/M/L/XL option ids
+```
+
+Then set the value with the node-ID form below — verified end-to-end for this
+repo:
+
+```bash
+gh project item-edit --id "$ITEM_ID" \
+  --project-id "$PROJECT_ID" \
+  --field-id "<Size field node id>" \
+  --single-select-option-id "<chosen option's node id>"
+```
+
+(`gh project item-edit --help` also documents a simpler by-name form —
+`gh project item-edit <number> --owner ... --url ... --field "Size" --value "M"`
+— which skips the ID resolution above, but it hasn't been verified
+end-to-end for this repo.)
+
+Milestone and assignee are set at issue-creation time (step 4); only `Size`
+and project membership need this separate step, since Escuadra's board is a
+Projects v2 board and sizing is a custom field on it, not a label.
 
 ## Common mistakes
 
-| Mistake                                          | Fix                                                                                                |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| Use `gh milestone list` command (doesn't exist)  | Use `gh api repos/tovmassian/escuadra/milestones` instead                                          |
-| Pass `-R` to `gh api`                            | `gh api` has no `-R` flag — the repo is already fully qualified in the path                        |
-| Assume projects are always available             | Check auth scope; `gh auth refresh -s project` if missing                                          |
-| Ask for size label when none exist               | Check available labels first; offer to create them or skip size field                              |
-| Apply wrong label for issue type                 | Use the canonical mapping in [Quick Reference](#quick-reference), not a restated one               |
-| Leave title without a conventional-commit prefix | Prefix with the type's mapping (`fix:`, `feat:`, `docs:`, ...); skip if the user already typed one |
-| Silent assignee default to current user          | Always ask, but default to repo owner (@tovmassian) unless overridden                              |
-| Forget to confirm before creating                | Show full issue template + metadata, ask "Create?" before `gh issue create`                        |
-| Silently fail when projects unavailable          | Report clearly: "Projects require auth scope 'project'. Skipping project assignment."              |
+| Mistake                                          | Fix                                                                                                                                                         |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Use `gh milestone list` command (doesn't exist)  | Use `gh api repos/tovmassian/escuadra/milestones` instead                                                                                                   |
+| Pass `-R` to `gh api`                            | `gh api` has no `-R` flag — the repo is already fully qualified in the path                                                                                 |
+| Assume projects are always available             | Check auth scope; `gh auth refresh -s project` if missing                                                                                                   |
+| Try to set Size via a label                      | Size is a Projects v2 field (`XS`/`S`/`M`/`L`/`XL`) on the Escuadra board, not a label — set it with `gh project item-edit` after `item-add`, not `--label` |
+| Apply wrong label for issue type                 | Use the canonical mapping in [Quick Reference](#quick-reference), not a restated one                                                                        |
+| Leave title without a conventional-commit prefix | Prefix with the type's mapping (`fix:`, `feat:`, `docs:`, ...); skip if the user already typed one                                                          |
+| Silent assignee default to current user          | Always ask, but default to repo owner (@tovmassian) unless overridden                                                                                       |
+| Forget to confirm before creating                | Show full issue template + metadata, ask "Create?" before `gh issue create`                                                                                 |
+| Silently fail when projects unavailable          | Report clearly: "Projects require auth scope 'project'. Skipping project assignment."                                                                       |
 
 ## Quick reference
 
 **Default values for Escuadra:**
 
 - Assignee: `@tovmassian`
-- Project: v0 planning board (if exists)
+- Project: Escuadra board (if exists)
 - Milestone: Highest-priority open milestone
-- Size: Ask (no sensible default)
+- Size: Ask (no sensible default); set via the project board's `Size` field, not a label
 - Labels: Type-based (bug/feature/refactor/doc/data)
 - Title prefix: Type-based, conventional-commit style (`fix:`/`feat:`/`refactor:`/`docs:`/`data:`)
 
@@ -222,12 +249,13 @@ doc        → label: documentation  → title prefix: docs:
 data       → label: data           → title prefix: data:       (label doesn't exist yet; offer to create it)
 ```
 
-**Size scale (if using labels):**
+**Size scale (Escuadra project board `Size` field — XS/S/M/L/XL):**
 
-- Trivial: fix typo, small config change (<30 min)
-- Small: isolated bug fix, add one component (30 min - 1 hour)
-- Medium: feature with multiple parts, refactor one module (1-2 hours)
-- Large: new subsystem, major refactor, complex feature (4+ hours)
+- XS: fix typo, small config change, copy tweak (<30 min)
+- S: isolated bug fix, add one component (30 min - 1 hour)
+- M: feature with multiple parts, refactor one module (1-2 hours)
+- L: new subsystem, major refactor, complex feature (4+ hours)
+- XL: multi-day effort, spans several modules or a new pipeline
 
 **Escuadra milestones:** don't hardcode names — always discover the live list via
 `gh api repos/tovmassian/escuadra/milestones` (step 2). Milestone names and how many
@@ -254,7 +282,7 @@ User: Create an issue for the offline persistence bug
 2. **Discover options (silent):**
 
    ```
-   Projects found: "v0 planning"
+   Projects found: "Escuadra"
    Milestones: ["First release"]
    Labels: ["bug", "enhancement", "documentation", "investigation", ...]
    ```
@@ -264,13 +292,13 @@ User: Create an issue for the offline persistence bug
    ```
    Assignee: @tovmassian (default, no change)
 
-   Project: Add to "v0 planning"?
+   Project: Add to "Escuadra"?
    - (shows: this is the active planning board)
 
    Milestone: "First release"?
    - (shows: N issues in this milestone)
 
-   Size: [ask] Medium (1-2 hours debugging/fixing AsyncStorage)
+   Size: [ask] M (1-2 hours debugging/fixing AsyncStorage) — set on the project board after creation
 
    Labels: [auto] bug (type-based)
 
@@ -285,27 +313,28 @@ User: Create an issue for the offline persistence bug
 
    Metadata:
      Assignee: @tovmassian
-     Project: v0 planning
+     Project: Escuadra
      Milestone: First release
-     Size: Medium
+     Size: M
      Labels: bug
 
    Create? (y/n)
    ```
 
-5. **Create & confirm:**
+5. **Create, add to project, set size:**
    ```
    ✓ Issue #18 created
    https://github.com/tovmassian/escuadra/issues/18
-   Added to project: v0 planning
+   Added to project: Escuadra
+   Size set: M
    ```
 
 ## Integration notes
 
 - **Auth scope for projects**: `gh auth refresh -s project` once per session (only if you want to use project assignment)
 - **Milestones require API**: Use `gh api repos/tovmassian/escuadra/milestones` not `gh milestone list`
-- **Size labels don't exist yet**: Offer to create trivial/small/medium/large labels in bulk, or skip size field
-- **GraphQL fallback for project assignment**: If CLI `--project` flag doesn't work, use the GraphQL API example (see step 5)
+- **Size is a project board field, not a label**: `Size` (XS/S/M/L/XL) lives on the Escuadra Projects v2 board; set it with `gh project item-edit` after `gh project item-add`, never `gh label create`
+- **Project add / size set is always a follow-up step**: `gh issue create` has no flag that sets custom project fields; step 5 always runs after the issue exists
 - **Batch creation**: For multiple issues, run this skill sequentially — one issue per invocation
 - **Metadata override**: User can specify any field explicitly (skip discovery, use provided value)
 - **Graceful degradation**: If projects unavailable (no auth scope), continue without adding to project board
@@ -317,6 +346,6 @@ User: Create an issue for the offline persistence bug
 - [ ] Projects unavailable due to missing `project` scope — report: "Skipping project assignment (auth scope required)"
 - [ ] User provides issue type you don't recognize — ask to clarify: bug/feature/refactor/doc/data
 - [ ] Label for issue type doesn't exist (e.g., no "data" label) — ask: should I create it?
-- [ ] Size labels don't exist — ask: should I create them (trivial/small/medium/large)?
+- [ ] `gh project item-add`/`item-edit` fails — report the actual error; don't silently skip sizing
 - [ ] Milestone list is empty — ask: should this issue have a milestone?
 - [ ] Assignee doesn't exist in repo — ask: verify username (e.g., is it @tovmassian?)
