@@ -90,7 +90,7 @@ For each field, prompt with context:
 
 > **Add to project:** [list discovered projects with descriptions]
 
-- Default: v0 planning board (if exists) or primary project
+- Default: Escuadra board (if exists) or primary project
 - Show which board it will appear on
 
 **Milestone:**
@@ -109,7 +109,7 @@ For each field, prompt with context:
 - Escuadra does **not** use size labels — sizing is a `Size` single-select field
   on the **Escuadra project board** (Projects v2), with options `XS`, `S`, `M`,
   `L`, `XL`. It can only be set once the issue is an item on that project (see
-  step 4), via `gh project item-edit` with the field's node ID — there is no
+  step 5), via `gh project item-edit` with the field's node ID — there is no
   `gh issue create` flag for it.
 - Explain: what effort does "M" mean for Escuadra? (1-2 hours, ~200 lines)
 
@@ -162,9 +162,10 @@ gh issue create \
 rm -f "$TITLE_FILE" "$BODY_FILE"
 ```
 
-`gh issue create` has no `--project` flag that also lets you set custom fields
-like `Size` in one step, so project assignment and sizing always happen as a
-follow-up (step 5), not inline here.
+`gh issue create` does have a `--project` flag, but it only adds the issue to
+a project by title — it can't also set a custom field like `Size` in the same
+call, so project assignment and sizing always happen as a follow-up (step 5),
+not inline here.
 
 If no, loop back to step 1.
 
@@ -180,9 +181,8 @@ ITEM_ID=$(gh project item-add 1 --owner tovmassian \
 ```
 
 If the body contains control characters (multiline text) the `--jq` filter on
-`item-add`'s own output can choke — if so, drop `--jq` and read `.id` from the
-plain JSON output instead, or reuse the `ITEM_ID` printed in the command's
-non-JSON output.
+`item-add`'s own output can choke — if so, drop `--jq` (keep `--format json`)
+and read `.id` from the raw JSON output instead.
 
 To set `Size`, resolve the project's node ID and the `Size` field's node ID
 once per session (these are stable, so cache them for repeat use):
@@ -194,8 +194,8 @@ gh project field-list 1 --owner tovmassian --format json \
 # → gives the Size field's id and its XS/S/M/L/XL option ids
 ```
 
-Then set the value — **by-name form is simpler and preferred** when you already
-have the issue URL:
+Then set the value with the node-ID form below — verified end-to-end for this
+repo:
 
 ```bash
 gh project item-edit --id "$ITEM_ID" \
@@ -204,9 +204,10 @@ gh project item-edit --id "$ITEM_ID" \
   --single-select-option-id "<chosen option's node id>"
 ```
 
-(There is also a `gh project item-edit <number> --owner ... --url ... --field "Size" --value "M"`
-by-name form documented in `gh project item-edit --help`; the node-ID form
-above is what's been verified to work end-to-end for this repo.)
+(`gh project item-edit --help` also documents a simpler by-name form —
+`gh project item-edit <number> --owner ... --url ... --field "Size" --value "M"`
+— which skips the ID resolution above, but it hasn't been verified
+end-to-end for this repo.)
 
 Milestone and assignee are set at issue-creation time (step 4); only `Size`
 and project membership need this separate step, since Escuadra's board is a
@@ -231,7 +232,7 @@ Projects v2 board and sizing is a custom field on it, not a label.
 **Default values for Escuadra:**
 
 - Assignee: `@tovmassian`
-- Project: v0 planning board (if exists)
+- Project: Escuadra board (if exists)
 - Milestone: Highest-priority open milestone
 - Size: Ask (no sensible default); set via the project board's `Size` field, not a label
 - Labels: Type-based (bug/feature/refactor/doc/data)
@@ -281,7 +282,7 @@ User: Create an issue for the offline persistence bug
 2. **Discover options (silent):**
 
    ```
-   Projects found: "v0 planning"
+   Projects found: "Escuadra"
    Milestones: ["First release"]
    Labels: ["bug", "enhancement", "documentation", "investigation", ...]
    ```
@@ -291,7 +292,7 @@ User: Create an issue for the offline persistence bug
    ```
    Assignee: @tovmassian (default, no change)
 
-   Project: Add to "v0 planning"?
+   Project: Add to "Escuadra"?
    - (shows: this is the active planning board)
 
    Milestone: "First release"?
@@ -312,7 +313,7 @@ User: Create an issue for the offline persistence bug
 
    Metadata:
      Assignee: @tovmassian
-     Project: v0 planning
+     Project: Escuadra
      Milestone: First release
      Size: M
      Labels: bug
