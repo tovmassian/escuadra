@@ -1,7 +1,7 @@
-// The contract between the squad data skills. squad-fetcher and
-// squad-verifier both produce a RosterEnvelope; squad-writer consumes one.
-// Kept as tested code rather than prose in a SKILL.md because a malformed
-// envelope must be caught before it can mutate the shared players.json.
+// The contract squadctl's fetch/apply commands share: fetch produces a
+// RosterEnvelope, apply consumes one. Kept as tested code rather than prose
+// because a malformed envelope must be caught before it can mutate the
+// shared players.json.
 import type { League, TeamMarker } from '../types/squad';
 
 export type EnvelopeStatus = 'OK' | 'NEEDS_DECISION' | 'SOURCE_BROKEN' | 'PARSE_FAILED';
@@ -68,7 +68,7 @@ export const BLAST_RADIUS_THRESHOLD = 0.4;
 
 /** The closed set of league folder names under data/squads/club/, mirroring
  *  the list in scripts/gen-squads.ts. Validated here so a club envelope with
- *  an unrecognised league is refused at squad-writer's entry gate, rather
+ *  an unrecognised league is refused at squadctl apply's entry gate, rather
  *  than throwing out of the generator once the whole batch is already on
  *  disk and the generated outputs are stale. */
 export const LEAGUES: League[] = [

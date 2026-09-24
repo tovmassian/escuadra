@@ -2,14 +2,14 @@
 
 Deterministic squad data management for Escuadra. Moves the mechanical parts
 of maintaining squad data — fetch a Wikipedia section, parse template lines,
-reconcile against stored records, write JSON — off the `squad-factory` skills
-and into a CLI.
+reconcile against stored records, write JSON — off the retired `squad-factory`
+skill set and into a CLI.
 
-The skills are **not** retired. Both paths produce the same `RosterEnvelope`
-(`scripts/roster-envelope.ts`), so their outputs are directly diffable. The
-intended end state is a combination: `squadctl --json` does the bulk work and
-reports typed conflicts, and a skill spends tokens only on the residue that
-needs judgement.
+The `squad-factory` skill set (`squad-fetcher`, `squad-writer`,
+`squad-verifier`) has been removed: squadctl proved faster and more reliable,
+so it now does that work directly. `squadctl --json` does the bulk work and
+reports typed conflicts; the residue that still needs judgement — designing a
+team's colours and `marker`, and resolving conflicts — is done by hand.
 
 Design: `docs/superpowers/specs/2026-09-06-squadctl-design.md`.
 
@@ -420,11 +420,11 @@ league has no teams yet.
 
    `identity` is the only part that is real work, and the only part squadctl
    will not do for you: reading kit colours and expressing a flag as bands is
-   design judgement, once per team ever. An entry without it is a hard failure,
-   never an invented colour. The `squad-factory` skill is good at this in
-   batches. `name` matters beyond display — it becomes the `club` on every
-   member of a club squad, and the `nationality` on every member of a nation
-   squad, so it must match the spelling `players.json` already uses.
+   design judgement, once per team ever, done by hand. An entry without it is
+   a hard failure, never an invented colour. `name` matters beyond display —
+   it becomes the `club` on every member of a club squad, and the
+   `nationality` on every member of a nation squad, so it must match the
+   spelling `players.json` already uses.
 
 2. **Fetch and apply.**
 
