@@ -365,9 +365,12 @@ Stays manual: Submit for Review, Play promotions and their freezes, closing free
   store-build.yml      §10
 scripts/ci/
   lib/                 pure decisions, no I/O
-  flows/               gate, publish, rollback, build, over an injected Runner
-  fixtures/            real EAS output from 2026-09-23, trimmed to the fields the code reads
-  gate.ts  publish.ts  rollback.ts  build.ts   entry points
+  flows/               gate, preview, publish, rollback, build, over an injected Runner
+  gate.ts  preview.ts  publish.ts  rollback.ts  build.ts   entry points
+  __tests__/
+    lib/  flows/       the tests, mirroring the code
+    fake-runner.ts     the Runner's test double
+    fixtures/          real EAS output from 2026-09-23, trimmed to the fields the code reads
 ```
 
 - `lib/`: parse `release/X.Y.Z`; lock state from a build list; the per-platform verdict;
@@ -375,6 +378,7 @@ scripts/ci/
   target; rendering the comment and summaries.
 - `flows/`: sequence the steps through a `Runner` (`eas`, `gh`, `git`). Tests pass a fake
   that records calls.
+- `__tests__/`: everything the tests need, so `lib/` and `flows/` hold only code.
 - Entry points read the event payload and environment, wire the real runner
   (`child_process.execFile`), and write `$GITHUB_OUTPUT` and `$GITHUB_STEP_SUMMARY`.
   Workflows run them as `node scripts/ci/<name>.ts`, with Node 24 type stripping, like

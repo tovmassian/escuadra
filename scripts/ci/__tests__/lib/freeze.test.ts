@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { findFreeze, freezeTitle, type Issue } from './freeze.ts';
+import { findFreeze, freezeTitle, type Issue } from '../../lib/freeze.ts';
 
 const url = 'https://github.com/tovmassian/escuadra/issues/';
 const issues: Issue[] = [

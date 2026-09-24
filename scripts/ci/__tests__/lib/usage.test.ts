@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { usageReport } from './usage.ts';
+import { usageReport } from '../../lib/usage.ts';
 
 const LIMIT = 107374182400;
 

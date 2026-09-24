@@ -1,10 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { fixture } from '../fixtures/load.ts';
-import type { Issue } from '../lib/freeze.ts';
-import type { EasBuild } from '../lib/release.ts';
-import type { UpdateGroupSummary } from '../lib/updates.ts';
-import { fakeRunner, json, ok, ran } from './fake-runner.ts';
-import { runPublish, type PublishContext } from './publish.ts';
+import type { Issue } from '../../lib/freeze.ts';
+import type { EasBuild } from '../../lib/release.ts';
+import type { UpdateGroupSummary } from '../../lib/updates.ts';
+import { fakeRunner, json, ok, ran } from '../fake-runner.ts';
+import { runPublish, type PublishContext } from '../../flows/publish.ts';
 
 const builds = fixture<EasBuild[]>('builds.json');
 const history = fixture<UpdateGroupSummary[]>('updates-production.json');

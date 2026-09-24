@@ -7,7 +7,7 @@ import {
   parseReleaseBranch,
   verdictFor,
   type EasBuild,
-} from './release.ts';
+} from '../../lib/release.ts';
 
 const builds = fixture<EasBuild[]>('builds.json');
 const IOS_1_0_0 = '8b8b8840bd6e265b91976ef4690a9ef5cb632508';

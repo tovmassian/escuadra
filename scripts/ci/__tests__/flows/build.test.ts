@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { fixture } from '../fixtures/load.ts';
-import type { EasBuild } from '../lib/release.ts';
-import { runStoreBuild, type BuildContext } from './build.ts';
-import { fakeRunner, json, ok, ran } from './fake-runner.ts';
+import type { EasBuild } from '../../lib/release.ts';
+import { runStoreBuild, type BuildContext } from '../../flows/build.ts';
+import { fakeRunner, json, ok, ran } from '../fake-runner.ts';
 
 const builds = fixture<EasBuild[]>('builds.json');
 const IOS_1_0_0 = '8b8b8840bd6e265b91976ef4690a9ef5cb632508';

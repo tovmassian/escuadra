@@ -6,7 +6,7 @@ import {
   rollbackTarget,
   type UpdateGroupSummary,
   type UpdateInfo,
-} from './updates.ts';
+} from '../../lib/updates.ts';
 
 const history = fixture<UpdateGroupSummary[]>('updates-production.json');
 const IOS = '8b8b8840bd6e265b91976ef4690a9ef5cb632508';

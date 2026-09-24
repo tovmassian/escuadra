@@ -17,7 +17,7 @@
 - TypeScript: strict and `noUncheckedIndexedAccess` stay on. Erasable syntax only — no `enum`, `namespace` or constructor parameter properties. Relative imports end in `.ts`; type-only imports use `import type` or inline `type`.
 - Output with `process.stdout.write`, never `console.log` (the lint config warns on it).
 - Module headers explain _why_, like `scripts/gen-squads.ts`.
-- Tests: Vitest, `scripts/ci/**/*.test.ts`, run by `npm run check`. Before every commit: `npx prettier --write <files>` then `npm run check`, and report its output.
+- Tests: Vitest, in `scripts/ci/__tests__/` (mirroring `lib/` and `flows/`, beside the fake runner and fixtures), run by `npm run check`. Before every commit: `npx prettier --write <files>` then `npm run check`, and report its output.
 - Pinned versions: `actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1` (v7.0.1), `actions/setup-node@820762786026740c76f36085b0efc47a31fe5020` (v7.0.0), `docker://rhysd/actionlint:1.7.12`, `eas-cli@24.7.0`.
 - Names that must match everywhere: labels `ota:ios`, `ota:android`, `ota-freeze`; freeze title `OTA freeze: <platform>@<version>`; branch regex `^release/(\d+)\.(\d+)\.(\d+)$`; required checks `check` and `release-gate`; environments `production-ios`, `production-android`; secrets `EXPO_TOKEN_PREVIEW` (repository) and `EXPO_TOKEN_PRODUCTION` (environments); EAS account `tovmassian27`, project `escuadra`.
 - PR titles, labels and inputs reach scripts through `env:` or the event file — never `${{ }}` inside a `run:` script.
@@ -30,6 +30,10 @@
 - **Publish verification compares runtimes directly:** the published update's `runtimeVersion` must equal the locked build's runtime. That is the delivery rule itself, and it is parseable; `fingerprint:compare --update-id` prints prose.
 - **Syncs from `main` come from a `sync/…` branch**, not a PR from `main` itself: conflicts can't be resolved on `main`.
 
+## After review (2026-09-24)
+
+- **Tests live in `scripts/ci/__tests__/`**, mirroring `lib/` and `flows/`, with the fake runner and the fixtures beside them: the code folders hold only code. Tasks 5–14 show paths and imports as first written; the File map and the repo are current.
+
 ## File map
 
 | Path                                                                           | Responsibility                                                          |
@@ -37,7 +41,6 @@
 | `docs/release.md`                                                              | The front door: how releases work and every procedure (Tasks 2, 16)     |
 | `docs/eas-update.md`                                                           | Deleted (Task 2)                                                        |
 | `CLAUDE.md`, `README.md`                                                       | Releases section and links (Task 2); banner on `release/1.0.0` (Task 3) |
-| `scripts/ci/fixtures/{load.ts,builds.json,updates-production.json}`            | Real EAS output, trimmed; loader for tests                              |
 | `scripts/ci/lib/release.ts`                                                    | Branch → version, lock state, per-platform verdicts, gate errors        |
 | `scripts/ci/lib/pr.ts`                                                         | Platforms from labels and inputs; docs-only; guardrail-4 hints          |
 | `scripts/ci/lib/freeze.ts`                                                     | Freeze issue title and matching                                         |
@@ -45,11 +48,14 @@
 | `scripts/ci/lib/usage.ts`                                                      | Free-plan usage line and warnings                                       |
 | `scripts/ci/lib/outcome.ts`                                                    | `done` / `skipped` / `failed` results                                   |
 | `scripts/ci/lib/render.ts`                                                     | The gate's PR comment                                                   |
-| `scripts/ci/flows/runner.ts`, `fake-runner.ts`                                 | Command execution and its test double                                   |
+| `scripts/ci/flows/runner.ts`                                                   | Command execution                                                       |
 | `scripts/ci/flows/{eas,github,git}.ts`                                         | Typed CLI calls                                                         |
 | `scripts/ci/flows/{gate,preview,publish,rollback,build}.ts`                    | The five flows                                                          |
 | `scripts/ci/flows/actions.ts`                                                  | Event, env, outputs, job summary                                        |
 | `scripts/ci/{gate,preview,publish,rollback,build}.ts`                          | Entry points                                                            |
+| `scripts/ci/__tests__/{lib,flows}/*.test.ts`                                   | Unit tests, mirroring the code                                          |
+| `scripts/ci/__tests__/fake-runner.ts`                                          | The runner's test double                                                |
+| `scripts/ci/__tests__/fixtures/{load.ts,builds.json,updates-production.json}`  | Real EAS output, trimmed; loader for tests                              |
 | `.github/actions/setup/action.yml`                                             | Node, `npm ci`, eas-cli                                                 |
 | `.github/workflows/{release-gate,ota-production,ota-rollback,store-build}.yml` | The workflows                                                           |
 | `.github/workflows/check.yml`                                                  | Gains actionlint                                                        |

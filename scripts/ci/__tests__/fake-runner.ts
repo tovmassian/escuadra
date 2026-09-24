@@ -1,6 +1,6 @@
 // Test double for Runner: answers from a responder and records every call. An
 // unanswered call throws, so a flow that runs something unexpected fails its test.
-import type { CommandResult, Runner, Tool } from './runner.ts';
+import type { CommandResult, Runner, Tool } from '../flows/runner.ts';
 
 export interface Call {
   tool: Tool;

@@ -6,7 +6,7 @@ import {
   parsePlatform,
   platformsFromInput,
   platformsFromLabels,
-} from './pr.ts';
+} from '../../lib/pr.ts';
 
 describe('platforms', () => {
   it('reads ota:* labels in a fixed order and ignores the rest', () => {

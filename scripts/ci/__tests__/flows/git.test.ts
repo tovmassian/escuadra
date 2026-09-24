@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { fail, fakeRunner, ok } from './fake-runner.ts';
-import { bringsMainCommits } from './git.ts';
+import { fail, fakeRunner, ok } from '../fake-runner.ts';
+import { bringsMainCommits } from '../../flows/git.ts';
 
 /** Two merge bases with main; `onBase` says, in order, whether each is on the release branch. */
 function history(onBase: boolean[]) {

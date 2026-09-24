@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { fakeRunner, json, ok } from './fake-runner.ts';
-import { activeRuns, pullRequestsForCommit, upsertComment } from './github.ts';
+import { fakeRunner, json, ok } from '../fake-runner.ts';
+import { activeRuns, pullRequestsForCommit, upsertComment } from '../../flows/github.ts';
 
 describe('upsertComment', () => {
   it('edits the marked comment when there is one, creates one otherwise', async () => {

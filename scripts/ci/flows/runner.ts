@@ -1,5 +1,5 @@
 // How flows run the `eas`, `gh` and `git` CLIs. Flows take a Runner, so tests pass a
-// fake (fake-runner.ts) and assert what ran — and, as much, what never did.
+// fake (__tests__/fake-runner.ts) and assert what ran — and, as much, what never did.
 import { execFile } from 'node:child_process';
 
 export type Tool = 'eas' | 'gh' | 'git';

@@ -1,13 +1,13 @@
 import { describe, expect, it } from 'vitest';
 import { fixture } from '../fixtures/load.ts';
-import { gateErrors, lockState, verdictFor, type EasBuild } from './release.ts';
+import { gateErrors, lockState, verdictFor, type EasBuild } from '../../lib/release.ts';
 import {
   COMMENT_MARKER,
   renderBadBranch,
   renderGate,
   withPreview,
   type GateView,
-} from './render.ts';
+} from '../../lib/render.ts';
 
 const builds = fixture<EasBuild[]>('builds.json');
 

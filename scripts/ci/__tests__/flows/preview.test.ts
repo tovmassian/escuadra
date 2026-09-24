@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
-import type { EasBuild } from '../lib/release.ts';
-import { COMMENT_MARKER } from '../lib/render.ts';
-import { fakeRunner, json, ok, ran } from './fake-runner.ts';
-import { runPreview, type PreviewContext } from './preview.ts';
+import type { EasBuild } from '../../lib/release.ts';
+import { COMMENT_MARKER } from '../../lib/render.ts';
+import { fakeRunner, json, ok, ran } from '../fake-runner.ts';
+import { runPreview, type PreviewContext } from '../../flows/preview.ts';
 
 const IOS = '8b8b8840bd6e265b91976ef4690a9ef5cb632508';
 const ANDROID = 'a616db8911b507fe2e4b9502b1d48e24a397a84b';

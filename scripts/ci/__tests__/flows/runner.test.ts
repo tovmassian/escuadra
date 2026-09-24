@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { fail, fakeRunner, json, ok } from './fake-runner.ts';
-import { CommandError, createRunner, runJson, runOk } from './runner.ts';
+import { fail, fakeRunner, json, ok } from '../fake-runner.ts';
+import { CommandError, createRunner, runJson, runOk } from '../../flows/runner.ts';
 
 describe('runOk and runJson', () => {
   it('return stdout, parse JSON, and throw CommandError on a non-zero exit', async () => {

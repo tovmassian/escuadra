@@ -1,8 +1,8 @@
 import { describe, expect, it } from 'vitest';
 import { fixture } from '../fixtures/load.ts';
-import type { EasBuild, Platform } from '../lib/release.ts';
-import { fail, fakeRunner, indexOf, json, ok, ran } from './fake-runner.ts';
-import { runGate, type GateContext } from './gate.ts';
+import type { EasBuild, Platform } from '../../lib/release.ts';
+import { fail, fakeRunner, indexOf, json, ok, ran } from '../fake-runner.ts';
+import { runGate, type GateContext } from '../../flows/gate.ts';
 
 const builds = fixture<EasBuild[]>('builds.json');
 const SHIPPED: Record<Platform, string> = {

@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { explainMismatch, listBuilds, listUpdateGroups, republishGroup } from './eas.ts';
-import { fakeRunner, json } from './fake-runner.ts';
+import { explainMismatch, listBuilds, listUpdateGroups, republishGroup } from '../../flows/eas.ts';
+import { fakeRunner, json } from '../fake-runner.ts';
 
 describe('eas wrappers', () => {
   it('asks build:list for one platform, profile and version', async () => {

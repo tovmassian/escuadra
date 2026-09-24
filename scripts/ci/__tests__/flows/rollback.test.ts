@@ -1,9 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { fixture } from '../fixtures/load.ts';
-import type { EasBuild } from '../lib/release.ts';
-import type { UpdateGroupSummary } from '../lib/updates.ts';
-import { fakeRunner, indexOf, json, ok, ran } from './fake-runner.ts';
-import { runRollback, type RollbackContext, type Waiter } from './rollback.ts';
+import type { EasBuild } from '../../lib/release.ts';
+import type { UpdateGroupSummary } from '../../lib/updates.ts';
+import { fakeRunner, indexOf, json, ok, ran } from '../fake-runner.ts';
+import { runRollback, type RollbackContext, type Waiter } from '../../flows/rollback.ts';
 
 const builds = fixture<EasBuild[]>('builds.json');
 const history = fixture<UpdateGroupSummary[]>('updates-production.json');
