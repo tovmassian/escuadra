@@ -1,7 +1,7 @@
 // The exit code a script or skill actually observes.
 //
 // squadctl publishes an exit-code table in its README and calls it stable,
-// because the squad-factory skills are meant to branch on it. That contract
+// because scripts and CI are meant to branch on it. That contract
 // was false under `--json`: oclif's `Command.catch` does
 // `process.exitCode = process.exitCode ?? err.exitCode ?? 1`, and the
 // `CLIError` built by `this.error(msg, { exit: N })` carries its code at

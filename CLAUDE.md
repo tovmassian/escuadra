@@ -258,12 +258,11 @@ then re-run `apply`. `tools/squadctl/README.md` documents every conflict kind,
 what you decide, and the command that hands the answer back; the design is in
 `docs/superpowers/specs/2026-09-06-squadctl-design.md`.
 
-**The `squad-factory` skill set** remains for the residue that needs
-judgement — designing a team's colours and `marker`, and triaging conflicts
-squadctl reports. `squad-factory` orchestrates `squad-fetcher` (parallel
-Wikipedia reads), `squad-writer` (the sole, sequential writer of
-`players.json`, squad files, and the generated index) and `squad-verifier`
-(parallel re-verification of existing squads).
+The `squad-factory` skill set (`squad-fetcher`, `squad-writer`,
+`squad-verifier`) is retired — `squadctl` proved faster and more reliable, and
+now does that work directly. The residue that still needs judgement —
+designing a team's colours and `marker`, and triaging the conflicts squadctl
+reports — is done by hand, not by a skill.
 
 ## Architecture rules
 

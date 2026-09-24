@@ -1,9 +1,8 @@
 // Registry entry + parsed rows -> RosterEnvelope. Pure, so the shape of every
 // envelope squadctl produces is testable without a socket.
 //
-// The envelope is the shared contract with the squad-factory skills
-// (scripts/roster-envelope.ts), imported upward rather than forked, which is
-// what keeps the two paths' outputs directly diffable.
+// The envelope shape lives in scripts/roster-envelope.ts, imported upward
+// rather than forked.
 import {
   validateEnvelope,
   type EnvelopeMember,

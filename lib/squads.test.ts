@@ -74,10 +74,10 @@ describe('squad data integrity', () => {
         expect(getSquad(manifest.id)?.marker).toEqual(manifest.marker);
       });
 
-      // The squad file is the source of truth for `verified` — squad-verifier
-      // and squad-writer only ever write it there — but the manifest carries
-      // its own copy so the picker can show it without importing the full
-      // roster. This catches the two falling out of sync.
+      // The squad file is the source of truth for `verified` — squadctl only
+      // ever writes it there — but the manifest carries its own copy so the
+      // picker can show it without importing the full roster. This catches
+      // the two falling out of sync.
       it('has a verified flag matching the squad file', () => {
         expect(getSquad(manifest.id)?.verified).toBe(manifest.verified);
       });

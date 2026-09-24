@@ -7,7 +7,7 @@ import type { League, Squad, SquadManifestEntry } from '../types/squad';
 // Shared with squadctl so both write through identical prettier options —
 // see the module header for why that matters to `npm run check`.
 import { formatAndWrite } from '../tools/squadctl/src/lib/write-json.ts';
-// One list, not two: squad-writer's entry gate validates a club envelope's
+// One list, not two: squadctl apply's entry gate validates a club envelope's
 // league against this same const, so a bad value is refused before any file
 // is written rather than throwing out of here mid-batch.
 import { LEAGUES } from './roster-envelope.ts';
