@@ -214,17 +214,17 @@ Projects v2 board and sizing is a custom field on it, not a label.
 
 ## Common mistakes
 
-| Mistake                                          | Fix                                                                                                |
-| ------------------------------------------------ | -------------------------------------------------------------------------------------------------- |
-| Use `gh milestone list` command (doesn't exist)  | Use `gh api repos/tovmassian/escuadra/milestones` instead                                          |
-| Pass `-R` to `gh api`                            | `gh api` has no `-R` flag — the repo is already fully qualified in the path                        |
-| Assume projects are always available             | Check auth scope; `gh auth refresh -s project` if missing                                          |
-| Try to set Size via a label                       | Size is a Projects v2 field (`XS`/`S`/`M`/`L`/`XL`) on the Escuadra board, not a label — set it with `gh project item-edit` after `item-add`, not `--label` |
-| Apply wrong label for issue type                 | Use the canonical mapping in [Quick Reference](#quick-reference), not a restated one               |
-| Leave title without a conventional-commit prefix | Prefix with the type's mapping (`fix:`, `feat:`, `docs:`, ...); skip if the user already typed one |
-| Silent assignee default to current user          | Always ask, but default to repo owner (@tovmassian) unless overridden                              |
-| Forget to confirm before creating                | Show full issue template + metadata, ask "Create?" before `gh issue create`                        |
-| Silently fail when projects unavailable          | Report clearly: "Projects require auth scope 'project'. Skipping project assignment."              |
+| Mistake                                          | Fix                                                                                                                                                         |
+| ------------------------------------------------ | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Use `gh milestone list` command (doesn't exist)  | Use `gh api repos/tovmassian/escuadra/milestones` instead                                                                                                   |
+| Pass `-R` to `gh api`                            | `gh api` has no `-R` flag — the repo is already fully qualified in the path                                                                                 |
+| Assume projects are always available             | Check auth scope; `gh auth refresh -s project` if missing                                                                                                   |
+| Try to set Size via a label                      | Size is a Projects v2 field (`XS`/`S`/`M`/`L`/`XL`) on the Escuadra board, not a label — set it with `gh project item-edit` after `item-add`, not `--label` |
+| Apply wrong label for issue type                 | Use the canonical mapping in [Quick Reference](#quick-reference), not a restated one                                                                        |
+| Leave title without a conventional-commit prefix | Prefix with the type's mapping (`fix:`, `feat:`, `docs:`, ...); skip if the user already typed one                                                          |
+| Silent assignee default to current user          | Always ask, but default to repo owner (@tovmassian) unless overridden                                                                                       |
+| Forget to confirm before creating                | Show full issue template + metadata, ask "Create?" before `gh issue create`                                                                                 |
+| Silently fail when projects unavailable          | Report clearly: "Projects require auth scope 'project'. Skipping project assignment."                                                                       |
 
 ## Quick reference
 
