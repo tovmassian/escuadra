@@ -45,7 +45,8 @@ export default function Difficulty() {
     eyebrow: { ...typography.captionEyebrow, color: colors.textMuted, marginTop: spacing.md },
     title: { ...typography.screenTitle, color: colors.textPrimary, marginBottom: spacing.xxl },
     spacer: { flex: 1 },
-    studyLink: { marginTop: spacing.lg, alignItems: 'center' },
+    studyButton: { marginTop: spacing.lg },
+    studyLink: { marginTop: spacing.lg, marginBottom: spacing.md, alignItems: 'center' },
     updated: {
       ...typography.descriptionSmall,
       color: colors.textMuted,
@@ -59,6 +60,7 @@ export default function Difficulty() {
 
   const rows = ladderRows(squad.id, bestScores);
   const focused = focusedLevel(rows);
+  const studyProminent = focused === 1;
   const play = (level: Level) =>
     router.push({
       pathname: '/play/[squadId]/[level]',
@@ -99,10 +101,14 @@ export default function Difficulty() {
       </View>
       <View style={styles.spacer} />
 
-      <View style={styles.studyLink}>
+      {/* Before the first level is cleared, studying the squad is a real
+          alternative to playing, so it keeps a full outline button; past it,
+          Play is the way forward and Study steps down to a link. */}
+      <View style={studyProminent ? styles.studyButton : styles.studyLink}>
         <Button
           label="Study This Squad"
-          variant="text"
+          variant={studyProminent ? 'outline' : 'text'}
+          large={studyProminent}
           onPress={() =>
             router.push({ pathname: '/team/[squadId]/study', params: { squadId: squad.id } })
           }

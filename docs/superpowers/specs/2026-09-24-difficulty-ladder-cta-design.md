@@ -55,8 +55,11 @@ Each level has one of three states:
 level is itself a button and starts its level directly; tapping it does not move the
 expansion. A locked level is dimmed (`opacity.disabled`) and not pressable.
 
-**Study This Squad becomes a text link** (`Button variant="text"`), centred below the
-ladder, so it no longer competes with Play.
+**Study This Squad depends on progress.** While the focused level is level 1 (nothing
+cleared yet), studying the squad first is a real alternative to playing, so it stays the
+full-width outline button it was. Once level 1 is cleared, Play is the way forward and Study
+becomes a centred text link (`Button variant="text"`), with a gap above the "Updated …"
+footnote.
 
 **Badges size by state, not by level.** Expanded badge 48px, compact 32px, both centred in
 one fixed-width column so the connector stays on a single axis. The old per-level escalation
