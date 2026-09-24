@@ -3,7 +3,9 @@ import { EscuadraStrike } from '@/components/EscuadraStrike';
 import type { Level } from '@/lib/questionEngine';
 import { actionOrder, resultTier, type ActionId } from '@/lib/resultsView';
 import { PASS_RATIO } from '@/lib/scoring';
+import { formatShareText } from '@/lib/shareResult';
 import { getRoster, getSquad } from '@/lib/squads';
+import { track } from '@/lib/telemetry';
 import {
   firstWrongPart,
   selectMissed,
@@ -27,7 +29,15 @@ import {
 import { useThemeColors } from '@/theme/useTheme';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { FlatList, StyleSheet, Text, View, type StyleProp, type TextStyle } from 'react-native';
+import {
+  FlatList,
+  Share,
+  StyleSheet,
+  Text,
+  View,
+  type StyleProp,
+  type TextStyle,
+} from 'react-native';
 import Animated, {
   Easing,
   FadeInUp,
@@ -214,6 +224,24 @@ export default function Results() {
     });
   };
 
+  // Outside `actionOrder`: sharing is not a next step in the study loop, so it
+  // never competes for the primary slot or reorders the pass/fail actions.
+  const shareResult = async () => {
+    const message = formatShareText({
+      teamName: squad.name,
+      level,
+      outcomes: session.results.map((r) => r.correct),
+    });
+    try {
+      const outcome = await Share.share({ message });
+      if (outcome.action === Share.sharedAction) {
+        track('result.shared', { level, score: score.correct });
+      }
+    } catch {
+      // The share sheet failing to open is not worth interrupting the results.
+    }
+  };
+
   const actionHandlers: Record<ActionId, () => void> = {
     nextLevel: () => retry((level + 1) as Level),
     retry: () => retry(level),
@@ -316,6 +344,11 @@ export default function Results() {
             />
           </Animated.View>
         ))}
+        <Animated.View
+          entering={riseIn(cascade.actionsBase + actions.length * cascade.actionsStep)}
+        >
+          <Button label="Share Result" variant="outline" onPress={shareResult} />
+        </Animated.View>
       </View>
     </View>
   );
