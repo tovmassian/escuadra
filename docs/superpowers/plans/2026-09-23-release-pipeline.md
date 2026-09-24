@@ -17,7 +17,7 @@
 - TypeScript: strict and `noUncheckedIndexedAccess` stay on. Erasable syntax only — no `enum`, `namespace` or constructor parameter properties. Relative imports end in `.ts`; type-only imports use `import type` or inline `type`.
 - Output with `process.stdout.write`, never `console.log` (the lint config warns on it).
 - Module headers explain _why_, like `scripts/gen-squads.ts`.
-- Tests: Vitest, `scripts/ci/**/*.test.ts`, run by `npm run check`. Before every commit: `npx prettier --write <files>` then `npm run check`, and report its output.
+- Tests: Vitest, in `scripts/ci/__tests__/` (mirroring `lib/` and `flows/`, beside the fake runner and fixtures), run by `npm run check`. Before every commit: `npx prettier --write <files>` then `npm run check`, and report its output.
 - Pinned versions: `actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1` (v7.0.1), `actions/setup-node@820762786026740c76f36085b0efc47a31fe5020` (v7.0.0), `docker://rhysd/actionlint:1.7.12`, `eas-cli@24.7.0`.
 - Names that must match everywhere: labels `ota:ios`, `ota:android`, `ota-freeze`; freeze title `OTA freeze: <platform>@<version>`; branch regex `^release/(\d+)\.(\d+)\.(\d+)$`; required checks `check` and `release-gate`; environments `production-ios`, `production-android`; secrets `EXPO_TOKEN_PREVIEW` (repository) and `EXPO_TOKEN_PRODUCTION` (environments); EAS account `tovmassian27`, project `escuadra`.
 - PR titles, labels and inputs reach scripts through `env:` or the event file — never `${{ }}` inside a `run:` script.
@@ -28,7 +28,11 @@
 - **Rollback gains a `dry_run` input.** The real `production` history shows that `previous` on Android today would republish the #44 "OTA marker" test update (fixture test in Task 7). A dry run shows the target first.
 - **One `preview` job publishes every labelled platform in turn** instead of one job per label, so two jobs never edit the gate's comment at once. Same behaviour.
 - **Publish verification compares runtimes directly:** the published update's `runtimeVersion` must equal the locked build's runtime. That is the delivery rule itself, and it is parseable; `fingerprint:compare --update-id` prints prose.
-- **Syncs from `main` come from a `sync/…` branch**, not a PR from `main` itself: conflicts can't be resolved on `main`.
+
+## After review (2026-09-24)
+
+- **Tests live in `scripts/ci/__tests__/`**, mirroring `lib/` and `flows/`, with the fake runner and the fixtures beside them: the code folders hold only code. Tasks 5–14 show paths and imports as first written; the File map and the repo are current.
+- **Every PR is squash-merged** (the owner's call): one PR lands as one commit, and that commit is what crosses between branches by `git cherry-pick -x`. Syncing `main` into an open branch by merge commit is gone (spec §4, §5), so `gateErrors` refuses `main`'s history on an open branch too, and the gate's reminder names the squash commit. Tasks 17–20 below squash-merge and pick without `-m 1`; Tasks 8, 10 and 16 show the text as first written.
 
 ## File map
 
@@ -37,7 +41,6 @@
 | `docs/release.md`                                                              | The front door: how releases work and every procedure (Tasks 2, 16)     |
 | `docs/eas-update.md`                                                           | Deleted (Task 2)                                                        |
 | `CLAUDE.md`, `README.md`                                                       | Releases section and links (Task 2); banner on `release/1.0.0` (Task 3) |
-| `scripts/ci/fixtures/{load.ts,builds.json,updates-production.json}`            | Real EAS output, trimmed; loader for tests                              |
 | `scripts/ci/lib/release.ts`                                                    | Branch → version, lock state, per-platform verdicts, gate errors        |
 | `scripts/ci/lib/pr.ts`                                                         | Platforms from labels and inputs; docs-only; guardrail-4 hints          |
 | `scripts/ci/lib/freeze.ts`                                                     | Freeze issue title and matching                                         |
@@ -45,11 +48,14 @@
 | `scripts/ci/lib/usage.ts`                                                      | Free-plan usage line and warnings                                       |
 | `scripts/ci/lib/outcome.ts`                                                    | `done` / `skipped` / `failed` results                                   |
 | `scripts/ci/lib/render.ts`                                                     | The gate's PR comment                                                   |
-| `scripts/ci/flows/runner.ts`, `fake-runner.ts`                                 | Command execution and its test double                                   |
+| `scripts/ci/flows/runner.ts`                                                   | Command execution                                                       |
 | `scripts/ci/flows/{eas,github,git}.ts`                                         | Typed CLI calls                                                         |
 | `scripts/ci/flows/{gate,preview,publish,rollback,build}.ts`                    | The five flows                                                          |
 | `scripts/ci/flows/actions.ts`                                                  | Event, env, outputs, job summary                                        |
 | `scripts/ci/{gate,preview,publish,rollback,build}.ts`                          | Entry points                                                            |
+| `scripts/ci/__tests__/{lib,flows}/*.test.ts`                                   | Unit tests, mirroring the code                                          |
+| `scripts/ci/__tests__/fake-runner.ts`                                          | The runner's test double                                                |
+| `scripts/ci/__tests__/fixtures/{load.ts,builds.json,updates-production.json}`  | Real EAS output, trimmed; loader for tests                              |
 | `.github/actions/setup/action.yml`                                             | Node, `npm ci`, eas-cli                                                 |
 | `.github/workflows/{release-gate,ota-production,ota-rollback,store-build}.yml` | The workflows                                                           |
 | `.github/workflows/check.yml`                                                  | Gains actionlint                                                        |
@@ -442,10 +448,9 @@ gh secret set EXPO_TOKEN_PRODUCTION --env production-android
 
 `npx eas-cli credentials --platform ios` → `production` → App Store Connect API Key must be set up; `npx eas-cli credentials --platform android` → `production` → Google Service Account Key must be set up. If either is missing, add it there (it stays on EAS, never in GitHub).
 
-- [ ] **Step 5: Protect the production channel**
+- [ ] **Step 5: Protect the production channel** — unavailable
 
-Run: `npx eas-cli channel:protect production --non-interactive` then `npx eas-cli channel:view production --non-interactive | grep Protection`
-Expected: `Protection  Protected` (wording may differ; it must not say Unprotected).
+Result 2026-09-23: `eas channel:protect production` answers "Channel protection is not enabled for the account", and the dashboard offers only Pause and Delete. Spec §5 records the gap this leaves; if Expo support ever enables the feature, run the command then.
 
 - [ ] **Step 6: The `main` ruleset**
 
@@ -473,6 +478,8 @@ EOF
 ```
 
 Expected: JSON with `"name": "main"` and `"enforcement": "active"`. (`actor_id` 5 is the admin role; `pull_request` mode allows merging a PR past a red check, never a direct push.)
+
+Result: the owner created it in the UI as `to-main-with-pr` (id 23904085, `refs/heads/main`); since 2026-09-24 it allows squash merges only (spec §5).
 
 ---
 
@@ -2765,6 +2772,11 @@ describe('runPreview', () => {
     expect(outcome.status).toBe('done');
     expect(outcome.summary).toContain('iOS → group `1a2b3c4d`');
     expect(outcome.summary).toContain('Android: skipped, no preview build on runtime `a616db89`');
+    // Pinned: the preview token can reach any channel, since protection isn't available.
+    const args =
+      runner.calls.find((call) => call.tool === 'eas' && call.args[0] === 'update')?.args ?? [];
+    expect(args[args.indexOf('--channel') + 1]).toBe('preview');
+    expect(args[args.indexOf('--environment') + 1]).toBe('preview');
     const patch = runner.calls.find((call) => call.args.includes('PATCH'));
     expect(patch?.args.find((arg) => arg.startsWith('body='))).toContain('iOS → group `1a2b3c4d`');
   });
@@ -4724,8 +4736,8 @@ Insert directly under `## Reference`:
 | `ota-rollback`   | Manual                                    | Roll back production or preview                 | production runs in `production-<platform>`         |
 | `store-build`    | Manual                                    | Production or preview build, optional submit    | production runs in `production-<platform>`         |
 
-Both environments accept only `release/*` branches, and the `production` channel is
-protected so only the Admin token can publish to it. The logic lives in `scripts/ci/`,
+Both environments accept only `release/*` branches, so only a run on a release branch
+reaches the production token. The logic lives in `scripts/ci/`,
 tested by `npm run check`. To see the gate's verdict before opening a PR, from a checkout of
 the branch you would merge:
 `EAS_CLI="npx --yes eas-cli@24.7.0" node scripts/ci/gate.ts --base release/1.0.0 --dry-run`.
@@ -4793,7 +4805,7 @@ gh pr create --base main --title "ci: release pipeline — gate, preview, produc
   --body "Implements docs/superpowers/plans/2026-09-23-release-pipeline.md, Phase 3. Nothing here moves the fingerprint: files under .github/ and scripts/ci/ only. Dry run against release/1.0.0: iOS 8b8b8840 ✅, Android a616db89 ✅."
 ```
 
-Expected: `check` passes, including actionlint. The owner merges with **Squash and merge**, so Phase 4 cherry-picks one commit.
+Expected: `check` passes, including actionlint. The owner merges with **Squash and merge**; Phase 4 cherry-picks that one commit.
 
 ---
 
@@ -4801,11 +4813,11 @@ Expected: `check` passes, including actionlint. The owner merges with **Squash a
 
 ### Task 18: The pipeline on its own introduction PR; the `release/*` ruleset
 
-- [ ] **Step 1: Cherry-pick the squashed pipeline commit onto `release/1.0.0`**
+- [ ] **Step 1: Cherry-pick the pipeline's squash commit onto `release/1.0.0`**
 
 ```bash
 git fetch origin
-CODE=$(git log origin/main -1 --format=%H -- scripts/ci/gate.ts)
+CODE=$(gh pr view <pipeline PR number> --json mergeCommit --jq .mergeCommit.oid)
 git switch -c ci/pipeline-1.0.0 origin/release/1.0.0
 git cherry-pick -x "$CODE"
 npm ci
@@ -4813,6 +4825,8 @@ for p in ios android; do npx expo-updates fingerprint:generate --platform $p | n
 ```
 
 Expected: `8b8b8840bd6e265b91976ef4690a9ef5cb632508` then `a616db8911b507fe2e4b9502b1d48e24a397a84b`. Stop if either differs.
+
+The pick also brings `CLAUDE.md`'s `__tests__` convention: in the same commit (`git commit --amend`), move the banner's "as of `71b6d77c`" to the first eight characters of `$CODE`.
 
 - [ ] **Step 2: Open the PR and read the gate** (confirm first)
 
@@ -4823,7 +4837,7 @@ gh pr create --base release/1.0.0 --title "ci: release pipeline on release/1.0.0
 gh pr checks --watch
 ```
 
-Expected: `release-gate` passes, and its comment shows iOS `8b8b8840` ✅ and Android `a616db89` ✅ computed on a Linux runner: the runner-vs-Mac question, answered. The owner merges with **Rebase and merge**. The `ota-production` run for that push ends with "has no ota:* label: nothing to publish." If it says "No merged PR behind" instead, GitHub didn't associate the rebased commit with its PR (spec §12): switch `resolve` to reading the PR number from the push payload's commit messages before any labelled PR merges.
+Expected: `release-gate` passes, and its comment shows iOS `8b8b8840` ✅ and Android `a616db89` ✅ computed on a Linux runner: the runner-vs-Mac question, answered. The owner merges with **Squash and merge**. The `ota-production` run for that push ends with "has no ota:* label: nothing to publish." If it says "No merged PR behind" instead, GitHub didn't associate the squash commit with its PR (spec §12; it did for #77's merge commit): switch `resolve` to the `(#N)` that ends the squash commit's title before any labelled PR merges.
 
 - [ ] **Step 3: Switch on the `release/*` ruleset** (confirm first)
 
@@ -4840,9 +4854,9 @@ gh api -X POST repos/tovmassian/escuadra/rulesets --input - <<'EOF'
     { "type": "pull_request", "parameters": {
         "required_approving_review_count": 0, "dismiss_stale_reviews_on_push": false,
         "require_code_owner_review": false, "require_last_push_approval": false,
-        "required_review_thread_resolution": false, "allowed_merge_methods": ["merge", "rebase"] } },
+        "required_review_thread_resolution": false, "allowed_merge_methods": ["squash"] } },
     { "type": "required_status_checks", "parameters": {
-        "strict_required_status_checks_policy": false,
+        "strict_required_status_checks_policy": false, "do_not_enforce_on_create": true,
         "required_status_checks": [{ "context": "check" }, { "context": "release-gate" }] } }
   ],
   "bypass_actors": []
@@ -4893,11 +4907,11 @@ Expected: `release-gate` ✅ for both platforms; the `preview` job fills the com
 
 - [ ] **Step 2: 👤 Verify on the preview builds:** open the app, wait, close fully, open again. About shows the update ID from the comment.
 
-- [ ] **Step 3: Merge** (the owner, **Rebase and merge**). Expected: `ota-production` publishes both platforms, and each job's PR comment says `✅ matches build 3`. If `eas update` fails with a permission error on the protected channel, the Admin robot can't publish there (spec §12): store the owner's personal token as `EXPO_TOKEN_PRODUCTION` in both environments instead, and re-run the failed jobs.
+- [ ] **Step 3: Merge** (the owner, **Squash and merge**). Expected: `ota-production` publishes both platforms, and each job's PR comment says `✅ matches build 3`.
 
 - [ ] **Step 4: 👤 Verify on store installs** (launch twice), and check EAS: `npx eas-cli update:list --branch production --limit 3` shows the new groups on `8b8b8840` and `a616db89`.
 
-- [ ] **Step 5: Take the fix to `main`** (confirm first): `git switch -c fix/about-update-id-main origin/main && git cherry-pick -x <the fix's commits>`, resolve (About carries the telemetry opt-out on `main`), then a PR into `main`.
+- [ ] **Step 5: Take the fix to `main`** (confirm first): `git switch -c fix/about-update-id-main origin/main && git cherry-pick -x <the fix's squash commit>`, resolve (About carries the telemetry opt-out on `main`), then a PR into `main`.
 
 ---
 

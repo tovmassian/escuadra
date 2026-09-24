@@ -1,0 +1,50 @@
+# The required check on every PR into a release branch, then the preview publish.
+# See docs/release.md. No paths filter: a required check must always report.
+name: release-gate
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+    branches: ['release/**']
+
+concurrency:
+  group: release-gate-${{ github.event.pull_request.number }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: write
+
+jobs:
+  release-gate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    outputs:
+      platforms: ${{ steps.gate.outputs.platforms }}
+      fingerprints: ${{ steps.gate.outputs.fingerprints }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+      - uses: ./.github/actions/setup
+      - id: gate
+        run: node scripts/ci/gate.ts
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN_PREVIEW }}
+          GH_TOKEN: ${{ github.token }}
+
+  preview:
+    needs: release-gate
+    if: needs.release-gate.outputs.platforms != '[]'
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup
+      - run: node scripts/ci/preview.ts
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN_PREVIEW }}
+          GH_TOKEN: ${{ github.token }}
+          PLATFORMS: ${{ needs.release-gate.outputs.platforms }}
+          FINGERPRINTS: ${{ needs.release-gate.outputs.fingerprints }}

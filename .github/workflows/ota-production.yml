@@ -1,0 +1,69 @@
+# Production OTA publishing: after a labelled PR merges into a release branch, or by
+# hand. See docs/release.md.
+name: ota-production
+
+on:
+  push:
+    branches: ['release/**']
+  workflow_dispatch:
+    inputs:
+      platforms:
+        description: Platforms to publish
+        type: choice
+        options: [ios, android, both]
+        required: true
+      message:
+        description: Update message (defaults to the branch and commit)
+        type: string
+        required: false
+
+permissions:
+  contents: read
+  issues: read
+  pull-requests: write
+
+jobs:
+  resolve:
+    if: startsWith(github.ref, 'refs/heads/release/')
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    outputs:
+      platforms: ${{ steps.resolve.outputs.platforms }}
+      message: ${{ steps.resolve.outputs.message }}
+      pr: ${{ steps.resolve.outputs.pr }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+      - id: resolve
+        run: node scripts/ci/publish.ts resolve
+        env:
+          GH_TOKEN: ${{ github.token }}
+          INPUT_PLATFORMS: ${{ inputs.platforms }}
+          INPUT_MESSAGE: ${{ inputs.message }}
+
+  publish:
+    needs: resolve
+    if: needs.resolve.outputs.platforms != '[]'
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ${{ fromJSON(needs.resolve.outputs.platforms) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    environment: production-${{ matrix.platform }}
+    concurrency:
+      group: ota-production-${{ github.ref_name }}-${{ matrix.platform }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup
+      - run: node scripts/ci/publish.ts run
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN_PRODUCTION }}
+          GH_TOKEN: ${{ github.token }}
+          PLATFORM: ${{ matrix.platform }}
+          MESSAGE: ${{ needs.resolve.outputs.message }}
+          PR_NUMBER: ${{ needs.resolve.outputs.pr }}
+          EAS_ACCOUNT: tovmassian27
