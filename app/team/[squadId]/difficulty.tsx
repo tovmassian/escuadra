@@ -3,10 +3,11 @@ import React from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
+import { DifficultyCard } from '@/components/DifficultyCard';
 import { DifficultyRow } from '@/components/DifficultyRow';
 import { LadderConnector } from '@/components/LadderConnector';
 import type { Level } from '@/lib/questionEngine';
-import { formatLastUpdated, ladderRows } from '@/lib/ladderView';
+import { focusedLevel, formatLastUpdated, ladderRows } from '@/lib/ladderView';
 import { getSquad } from '@/lib/squads';
 import { useProgress } from '@/stores/progress';
 import { spacing, typography } from '@/theme/tokens';
@@ -32,7 +33,6 @@ export default function Difficulty() {
   const colors = useThemeColors();
   const { squadId } = useLocalSearchParams<{ squadId: string }>();
   const bestScores = useProgress((s) => s.bestScores);
-  const completedLevels = useProgress((s) => s.completedLevels);
 
   const styles = StyleSheet.create({
     root: {
@@ -46,6 +46,7 @@ export default function Difficulty() {
     title: { ...typography.screenTitle, color: colors.textPrimary, marginBottom: spacing.xxl },
     spacer: { flex: 1 },
     studyButton: { marginTop: spacing.lg },
+    studyLink: { marginTop: spacing.lg, marginBottom: spacing.md, alignItems: 'center' },
     updated: {
       ...typography.descriptionSmall,
       color: colors.textMuted,
@@ -57,6 +58,15 @@ export default function Difficulty() {
   const squad = getSquad(squadId);
   if (!squad) return null;
 
+  const rows = ladderRows(squad.id, bestScores);
+  const focused = focusedLevel(rows);
+  const studyProminent = focused === 1;
+  const play = (level: Level) =>
+    router.push({
+      pathname: '/play/[squadId]/[level]',
+      params: { squadId: squad.id, level: String(level) },
+    });
+
   return (
     <View style={[styles.root, { paddingTop: insets.top + spacing.xl }]}>
       <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
@@ -66,27 +76,24 @@ export default function Difficulty() {
       <Text style={styles.title}>Choose Difficulty</Text>
 
       <View>
-        {ladderRows(squad.id, bestScores, completedLevels).map((row, i, rows) => {
+        {rows.map((row, i) => {
           const copy = LEVEL_COPY[row.level];
           return (
             <React.Fragment key={row.level}>
-              <DifficultyRow
-                level={row.level}
-                title={copy.title}
-                description={copy.description}
-                status={row.status}
-                bestScore={row.best}
-                unlockHint={row.unlockHint}
-                onPress={
-                  row.status === 'locked'
-                    ? undefined
-                    : () =>
-                        router.push({
-                          pathname: '/play/[squadId]/[level]',
-                          params: { squadId: squad.id, level: String(row.level) },
-                        })
-                }
-              />
+              {row.level === focused ? (
+                <DifficultyCard
+                  row={row}
+                  title={copy.title}
+                  description={copy.description}
+                  onPlay={() => play(row.level)}
+                />
+              ) : (
+                <DifficultyRow
+                  row={row}
+                  title={copy.title}
+                  onPress={row.status === 'locked' ? undefined : () => play(row.level)}
+                />
+              )}
               {i < rows.length - 1 && <LadderConnector active={row.status !== 'locked'} />}
             </React.Fragment>
           );
@@ -94,11 +101,14 @@ export default function Difficulty() {
       </View>
       <View style={styles.spacer} />
 
-      <View style={styles.studyButton}>
+      {/* Before the first level is cleared, studying the squad is a real
+          alternative to playing, so it keeps a full outline button; past it,
+          Play is the way forward and Study steps down to a link. */}
+      <View style={studyProminent ? styles.studyButton : styles.studyLink}>
         <Button
           label="Study This Squad"
-          variant="outline"
-          large
+          variant={studyProminent ? 'outline' : 'text'}
+          large={studyProminent}
           onPress={() =>
             router.push({ pathname: '/team/[squadId]/study', params: { squadId: squad.id } })
           }

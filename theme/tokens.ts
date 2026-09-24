@@ -376,25 +376,26 @@ export const homeCascade = {
   actionsStep: t(40),
 };
 
-// Keyed by question-engine Level (1 | 2 | 3) — escalating hero/badge weight
-// as difficulty rises, per the design's difficulty-ladder and hero-card specs.
+// Keyed by question-engine Level (1 | 2 | 3) — the question screen's hero
+// shrinks as difficulty rises, per the design's hero-card spec.
 export const heroCardSize = { 1: 220, 2: 130, 3: 108 } as const;
 export const heroNumberSize = { 1: 104, 2: 64, 3: 52 } as const;
-export const badgeSize = { 1: 40, 2: 48, 3: 56 } as const;
-export const difficultyTitleSize = { 1: 15, 2: 17, 3: 19 } as const;
-export const difficultyTitleWeight = { 1: '400', 2: '600', 3: '800' } as const;
+
+// Difficulty-ladder badge diameters. Size follows the rung's state, not its
+// level: the focused rung, expanded into a Play card, carries the large badge;
+// every other rung the compact one.
+export const ladderBadgeSize = { compact: 32, expanded: 48 } as const;
 
 export const sizes = {
   progressDot: 5,
-  // Width of the difficulty ladder's badge column. Every badge (40-56px,
-  // scaling with level) centres inside this fixed-width slot rather than
-  // left-aligning, so the three differently-sized badges — and the connector
-  // segments between them — share one vertical axis. Matches the widest
-  // badge (level 3) so nothing overflows it.
-  difficultyBadgeColumn: badgeSize[3],
+  // Width of the difficulty ladder's badge column. Both badge sizes centre
+  // inside this fixed-width slot, so the badges — and the connector segments
+  // between them — share one vertical axis. Matches the larger badge so
+  // nothing overflows it.
+  difficultyBadgeColumn: ladderBadgeSize.expanded,
   // Height of one connector segment between two ladder rungs. Drawn only in
   // the gap, never behind a badge — see `LadderConnector`.
-  difficultyConnectorHeight: 26,
+  difficultyConnectorHeight: 16,
   // `affiliation` carries a flag image plus its gap on club squads
   // (sizes.flagRow.width + spacing.xs = 28 of its 120), so the text keeps the
   // same 92 it had before flags. The name column is flex, so it absorbs the
@@ -460,13 +461,12 @@ export const sizes = {
 export const iconSize = {
   markLarge: 18, // VerdictGlyph default size (AnswerOption's correct mark); also PartRail's upcoming/current bullet diameter
   markSmall: 13, // VerdictGlyph's smaller size, for AnswerOption's incorrect-picked mark
-  chevron: 16, // TeamRow / DifficultyRow disclosure chevron
+  chevron: 16, // TeamRow disclosure chevron
   chevronLarge: 18, // Home's continue-card chevron
   searchGlyph: 15, // SearchField's magnifying-glass icon
   clearGlyph: 10, // SearchField's clear (×) button, drawn from two crossed bars
-  // The locked-badge padlock scales with its own badge (40/48/56, escalating
-  // by level) rather than sitting at one fixed size regardless of the ring
-  // around it — 48 * 0.46 ≈ 22, 56 * 0.46 ≈ 26.
+  // The locked-badge padlock scales with its badge rather than sitting at one
+  // fixed size — 32 * 0.46 ≈ 15.
   lockGlyphRatio: 0.46,
 } as const;
 
