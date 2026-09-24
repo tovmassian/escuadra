@@ -479,6 +479,8 @@ EOF
 
 Expected: JSON with `"name": "main"` and `"enforcement": "active"`. (`actor_id` 5 is the admin role; `pull_request` mode allows merging a PR past a red check, never a direct push.)
 
+Result: the owner created it in the UI as `to-main-with-pr` (id 23904085, `refs/heads/main`); since 2026-09-24 it allows squash merges only (spec §5).
+
 ---
 
 ## Phase 3 — Pipeline code on `main` (spec §14, step 3)
