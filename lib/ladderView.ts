@@ -36,6 +36,29 @@ export function ladderRows(
   });
 }
 
+/** The rung the ladder expands into a Play card: the first level still to
+ *  clear, else the highest one played (a replay), else level 1. */
+export function focusedLevel(rows: LadderRow[]): Level {
+  const next = rows.find((r) => r.status === 'unlocked');
+  if (next) return next.level;
+  const played = rows.filter((r) => r.status !== 'locked');
+  return played[played.length - 1]?.level ?? 1;
+}
+
+export function playLabel(row: LadderRow): string {
+  return row.status === 'best' ? 'Play Again' : 'Play';
+}
+
+/** What a screen reader announces for a compact rung, whose status is
+ *  otherwise carried only by its badge and pill. */
+export function rungAccessibilityLabel(row: LadderRow, title: string): string {
+  if (row.best) return `${title}, best ${row.best.correct} of ${row.best.total}`;
+  if (row.status === 'locked') {
+    return row.unlockHint ? `${title}, locked, ${row.unlockHint}` : `${title}, locked`;
+  }
+  return title;
+}
+
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 /** Formats a squad's `lastUpdated` (`YYYY-MM-DD`) as "21 Aug 2026" for the
