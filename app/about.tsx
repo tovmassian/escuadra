@@ -1,7 +1,9 @@
 import { router } from 'expo-router';
 import Constants from 'expo-constants';
+import * as Updates from 'expo-updates';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { versionLabel } from '@/lib/aboutView';
 import { radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
@@ -9,8 +11,7 @@ export default function About() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
 
-  const version = Constants.expoConfig?.version ?? Constants.nativeAppVersion ?? '—';
-  const build = Constants.expoConfig?.ios?.buildNumber ?? Constants.nativeBuildVersion ?? '—';
+  const version = Constants.expoConfig?.version ?? '—';
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
@@ -133,7 +134,13 @@ export default function About() {
         </View>
 
         <Text style={styles.versionLine}>
-          Version {version} ({build})
+          {versionLabel(version, {
+            isEnabled: Updates.isEnabled,
+            isEmbeddedLaunch: Updates.isEmbeddedLaunch,
+            updateId: Updates.updateId,
+            channel: Updates.channel,
+            manifest: Updates.manifest,
+          })}
         </Text>
       </ScrollView>
     </View>
