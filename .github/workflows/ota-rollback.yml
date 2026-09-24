@@ -1,0 +1,85 @@
+# Roll back an OTA update. Production rollbacks open a freeze first. Start with
+# dry_run. See docs/release.md.
+name: ota-rollback
+
+on:
+  workflow_dispatch:
+    inputs:
+      platforms:
+        type: choice
+        options: [ios, android, both]
+        required: true
+      channel:
+        type: choice
+        options: [production, preview]
+        default: production
+      mode:
+        type: choice
+        options: [previous, group, embedded]
+        default: previous
+      group_id:
+        description: Group to republish (mode group only)
+        type: string
+        required: false
+      reason:
+        description: Why; goes into the update message and the freeze issue
+        type: string
+        required: true
+      dry_run:
+        description: Show what would happen without changing anything
+        type: boolean
+        default: false
+
+permissions:
+  actions: read
+  contents: read
+  issues: write
+
+jobs:
+  production:
+    if: inputs.channel == 'production' && startsWith(github.ref, 'refs/heads/release/')
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ${{ fromJSON(inputs.platforms == 'both' && '["ios","android"]' || format('["{0}"]', inputs.platforms)) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    environment: production-${{ matrix.platform }}
+    concurrency:
+      group: ota-rollback-${{ github.ref_name }}-${{ matrix.platform }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup
+      - run: node scripts/ci/rollback.ts
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN_PRODUCTION }}
+          GH_TOKEN: ${{ github.token }}
+          PLATFORM: ${{ matrix.platform }}
+          CHANNEL: production
+          MODE: ${{ inputs.mode }}
+          GROUP_ID: ${{ inputs.group_id }}
+          REASON: ${{ inputs.reason }}
+          DRY_RUN: ${{ inputs.dry_run }}
+
+  preview:
+    if: inputs.channel == 'preview' && startsWith(github.ref, 'refs/heads/release/')
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ${{ fromJSON(inputs.platforms == 'both' && '["ios","android"]' || format('["{0}"]', inputs.platforms)) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup
+      - run: node scripts/ci/rollback.ts
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN_PREVIEW }}
+          GH_TOKEN: ${{ github.token }}
+          PLATFORM: ${{ matrix.platform }}
+          CHANNEL: preview
+          MODE: ${{ inputs.mode }}
+          GROUP_ID: ${{ inputs.group_id }}
+          REASON: ${{ inputs.reason }}
+          DRY_RUN: ${{ inputs.dry_run }}
