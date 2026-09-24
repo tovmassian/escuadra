@@ -5,7 +5,7 @@
 > `a616db89…`). Only changes that keep both fingerprints belong here; see
 > "Branches" in `docs/release.md`.
 >
-> The rest of this file is `main`'s CLAUDE.md (as of `71b6d77c`). What it describes that
+> The rest of this file is `main`'s CLAUDE.md (as of `326d092f`). What it describes that
 > came after the 1.0.0 build — TelemetryDeck and its privacy notes, `shots:play`,
 > `gen:play-assets`, `design/play/`, `app/store/feature-graphic.tsx` — exists only on `main`.
 
@@ -392,6 +392,10 @@ format facts and `design/SCREENS.md` for what each captured file shows.
 - Run `npm run check` and report the actual output before claiming work is done.
 - TypeScript is strict, including `noUncheckedIndexedAccess`. With a quiz engine
   full of `options[i]`, do not weaken it to make an error go away.
+- Tests live in a `__tests__/` folder that mirrors the code it covers, with the
+  fakes and fixtures they use, so code folders hold only code;
+  `scripts/ci/__tests__/` is the model. An area that still keeps `*.test.ts`
+  beside its code keeps that layout until it moves over whole, in a PR of its own.
 
 ## Reference docs
 

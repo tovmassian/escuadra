@@ -1,0 +1,78 @@
+# Store and preview builds from a release branch. The first production build of a
+# version locks it. See docs/release.md.
+name: store-build
+
+on:
+  workflow_dispatch:
+    inputs:
+      platforms:
+        type: choice
+        options: [ios, android, both]
+        required: true
+      profile:
+        type: choice
+        options: [production, preview]
+        default: production
+      submit:
+        description: Upload to App Store Connect / Play after building (production only)
+        type: boolean
+        default: true
+      rebuild:
+        description: Build again on an already-locked runtime (production only)
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+  issues: write
+
+jobs:
+  production:
+    if: inputs.profile == 'production' && startsWith(github.ref, 'refs/heads/release/')
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ${{ fromJSON(inputs.platforms == 'both' && '["ios","android"]' || format('["{0}"]', inputs.platforms)) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    environment: production-${{ matrix.platform }}
+    concurrency:
+      group: store-build-${{ github.ref_name }}-${{ matrix.platform }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup
+      - run: npm run check
+      - run: node scripts/ci/build.ts
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN_PRODUCTION }}
+          GH_TOKEN: ${{ github.token }}
+          PLATFORM: ${{ matrix.platform }}
+          PROFILE: production
+          SUBMIT: ${{ inputs.submit }}
+          REBUILD: ${{ inputs.rebuild }}
+          EAS_ACCOUNT: tovmassian27
+
+  preview:
+    if: inputs.profile == 'preview' && startsWith(github.ref, 'refs/heads/release/')
+    strategy:
+      fail-fast: false
+      matrix:
+        platform: ${{ fromJSON(inputs.platforms == 'both' && '["ios","android"]' || format('["{0}"]', inputs.platforms)) }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 240
+    concurrency:
+      group: store-build-preview-${{ github.ref_name }}-${{ matrix.platform }}
+      cancel-in-progress: false
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: ./.github/actions/setup
+      - run: node scripts/ci/build.ts
+        env:
+          EXPO_TOKEN: ${{ secrets.EXPO_TOKEN_PREVIEW }}
+          GH_TOKEN: ${{ github.token }}
+          PLATFORM: ${{ matrix.platform }}
+          PROFILE: preview
+          SUBMIT: 'false'
+          REBUILD: 'false'
+          EAS_ACCOUNT: tovmassian27

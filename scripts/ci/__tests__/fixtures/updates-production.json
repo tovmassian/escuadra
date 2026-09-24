@@ -1,0 +1,72 @@
+[
+  {
+    "group": "e43368a2-cfde-483d-a99d-fd1e9bc2691f",
+    "runtimeVersion": "8b8b8840bd6e265b91976ef4690a9ef5cb632508",
+    "platforms": "ios",
+    "isRollBackToEmbedded": false,
+    "message": "\"Correct privacy text (#61)\" (1 day ago by tovmassian27)"
+  },
+  {
+    "group": "3f8c3721-9c5e-4850-b160-cfe33608dd7d",
+    "runtimeVersion": "a616db8911b507fe2e4b9502b1d48e24a397a84b",
+    "platforms": "android",
+    "isRollBackToEmbedded": false,
+    "message": "\"rollback(#44): restore #61 privacy text\" (5 days ago by tovmassian27)"
+  },
+  {
+    "group": "37018bbe-bfd9-4741-9aec-670fe6496f3d",
+    "runtimeVersion": "a616db8911b507fe2e4b9502b1d48e24a397a84b",
+    "platforms": "android",
+    "isRollBackToEmbedded": false,
+    "message": "\"test(#44): OTA marker\" (5 days ago by tovmassian27)"
+  },
+  {
+    "group": "0bf0c4b2-ab28-40fd-ae16-aa5401699a17",
+    "runtimeVersion": "a616db8911b507fe2e4b9502b1d48e24a397a84b",
+    "platforms": "android",
+    "isRollBackToEmbedded": false,
+    "message": "\"Correct privacy text (#61)\" (1 week ago by tovmassian27)"
+  },
+  {
+    "group": "0e49e570-d666-4173-94b9-0e5d901ff7ee",
+    "runtimeVersion": "c0a62aca64074feadd73c7042a3a9a8737a30405",
+    "platforms": "android",
+    "isRollBackToEmbedded": false,
+    "message": "\"Correct privacy text (#61)\" (1 week ago by tovmassian27)"
+  },
+  {
+    "group": "02f7fad4-83fc-41f3-8a14-04892984be7d",
+    "runtimeVersion": "8b8b8840bd6e265b91976ef4690a9ef5cb632508",
+    "platforms": "ios",
+    "isRollBackToEmbedded": false,
+    "message": "\"Republish \"fix tapping when search keyboard is open\" - group: 73b3cb5e-1671-4949-8b08-073e336f367a\" (1 week ago by tovmassian27)"
+  },
+  {
+    "group": "832ed9d4-248c-4b86-9744-01058c93df34",
+    "runtimeVersion": "a616db8911b507fe2e4b9502b1d48e24a397a84b",
+    "platforms": "android",
+    "isRollBackToEmbedded": false,
+    "message": "\"testing OAT and rollback\" (1 week ago by tovmassian27)"
+  },
+  {
+    "group": "189cc9a3-67fd-4830-9f70-e913a5a28930",
+    "runtimeVersion": "8b8b8840bd6e265b91976ef4690a9ef5cb632508",
+    "platforms": "ios",
+    "isRollBackToEmbedded": false,
+    "message": "\"testing OAT and rollback\" (1 week ago by tovmassian27)"
+  },
+  {
+    "group": "73b3cb5e-1671-4949-8b08-073e336f367a",
+    "runtimeVersion": "8b8b8840bd6e265b91976ef4690a9ef5cb632508",
+    "platforms": "ios",
+    "isRollBackToEmbedded": false,
+    "message": "\"fix tapping when search keyboard is open\" (1 week ago by tovmassian27)"
+  },
+  {
+    "group": "b894d9c2-ba6e-473b-ba4b-53c7496f2f19",
+    "runtimeVersion": "a616db8911b507fe2e4b9502b1d48e24a397a84b",
+    "platforms": "android",
+    "isRollBackToEmbedded": false,
+    "message": "\"fix tapping when search keyboard is open\" (1 week ago by tovmassian27)"
+  }
+]

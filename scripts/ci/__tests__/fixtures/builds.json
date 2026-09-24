@@ -1,0 +1,86 @@
+[
+  {
+    "id": "d9f54943-647e-4145-b4d7-4e1e2eea3e76",
+    "status": "FINISHED",
+    "platform": "IOS",
+    "buildProfile": "preview",
+    "appVersion": "1.0.0",
+    "appBuildVersion": "3",
+    "runtime": { "version": "5c76669c2371687527b7f8e87928d531cab40f21" },
+    "fingerprint": { "hash": "5c76669c2371687527b7f8e87928d531cab40f21" },
+    "gitCommitHash": "1add0764b8d73d0df6a79864431f528bb33e371d",
+    "createdAt": "2026-09-18T13:33:46.097Z"
+  },
+  {
+    "id": "1973200b-2b3c-48f1-ad3e-4b14da20b838",
+    "status": "FINISHED",
+    "platform": "ANDROID",
+    "buildProfile": "production",
+    "appVersion": "1.0.0",
+    "appBuildVersion": "3",
+    "runtime": { "version": "a616db8911b507fe2e4b9502b1d48e24a397a84b" },
+    "fingerprint": { "hash": "a616db8911b507fe2e4b9502b1d48e24a397a84b" },
+    "gitCommitHash": "c5633fbcd25206a103cf0e5fd3a9ac9c820dc983",
+    "createdAt": "2026-09-14T16:15:42.625Z"
+  },
+  {
+    "id": "7e4e77fa-d745-4d65-8973-a737aa72b37f",
+    "status": "FINISHED",
+    "platform": "ANDROID",
+    "buildProfile": "production",
+    "appVersion": "1.0.0",
+    "appBuildVersion": "2",
+    "runtime": { "version": "a616db8911b507fe2e4b9502b1d48e24a397a84b" },
+    "fingerprint": { "hash": "a616db8911b507fe2e4b9502b1d48e24a397a84b" },
+    "gitCommitHash": "c5633fbcd25206a103cf0e5fd3a9ac9c820dc983",
+    "createdAt": "2026-09-13T18:52:28.040Z"
+  },
+  {
+    "id": "ef36adae-098e-4928-9565-c36e98ae7f3e",
+    "status": "FINISHED",
+    "platform": "IOS",
+    "buildProfile": "production",
+    "appVersion": "1.0.0",
+    "appBuildVersion": "3",
+    "runtime": { "version": "8b8b8840bd6e265b91976ef4690a9ef5cb632508" },
+    "fingerprint": { "hash": "8b8b8840bd6e265b91976ef4690a9ef5cb632508" },
+    "gitCommitHash": "4ee49b31e30b753abdcec977df2e38eeb2a4f8ac",
+    "createdAt": "2026-09-11T16:47:34.947Z"
+  },
+  {
+    "id": "33e09c02-b7c3-490e-9341-56f61b2bc6d6",
+    "status": "FINISHED",
+    "platform": "IOS",
+    "buildProfile": "production",
+    "appVersion": "1.0.0",
+    "appBuildVersion": "2",
+    "runtime": { "version": null },
+    "fingerprint": { "hash": "1875cdeef966b6996d8caf83c0d67ab1cb6a258c" },
+    "gitCommitHash": "52e5337467b392efcaa058820c56ba6566f200cd",
+    "createdAt": "2026-09-11T10:49:11.962Z"
+  },
+  {
+    "id": "2cb563d7-e2ae-407a-b8b9-2904a206e169",
+    "status": "FINISHED",
+    "platform": "IOS",
+    "buildProfile": "development",
+    "appVersion": "1.0.0",
+    "appBuildVersion": "1",
+    "runtime": { "version": null },
+    "fingerprint": { "hash": "de2c101cd5e39e23f5248bfaea748dd2126590c4" },
+    "gitCommitHash": "b2677cbacae1c9a48e3ff4015a7d70b7560ff8df",
+    "createdAt": "2026-09-10T15:05:07.234Z"
+  },
+  {
+    "id": "25f62187-512d-4187-9d00-d7d6d6632ddb",
+    "status": "FINISHED",
+    "platform": "IOS",
+    "buildProfile": "ios-simulator",
+    "appVersion": "1.0.0",
+    "appBuildVersion": "1",
+    "runtime": { "version": null },
+    "fingerprint": { "hash": "de2c101cd5e39e23f5248bfaea748dd2126590c4" },
+    "gitCommitHash": "6ce1ea41d45c7bf85b7bf3895c8ebc7a1844754d",
+    "createdAt": "2026-09-10T14:33:42.946Z"
+  }
+]
