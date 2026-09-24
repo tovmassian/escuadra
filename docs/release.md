@@ -88,26 +88,28 @@ What the fingerprint can't see:
 - **`release/X.Y.Z`**: one per version, cut from `main` once the version's content is
   decided. Each platform on it is in one of two states, read from EAS:
 
-| State  | When                                                                 | What may merge                                                        |
-| ------ | -------------------------------------------------------------------- | --------------------------------------------------------------------- |
-| Open   | No production build of X.Y.Z exists for the platform                 | Anything: fixes, syncs from `main`                                    |
-| Locked | A production build of X.Y.Z exists (finished, queued or in progress) | Cherry-picks that keep the fingerprint; nothing from `main`'s history |
+| State  | When                                                                 | What may merge                         |
+| ------ | -------------------------------------------------------------------- | -------------------------------------- |
+| Open   | No production build of X.Y.Z exists for the platform                 | Any change, runtime changes included   |
+| Locked | A production build of X.Y.Z exists (finished, queued or in progress) | Only changes that keep the fingerprint |
 
 A locked branch is its version's OTA source. A change that needs another runtime is a new
 version: `release/X.Y.(Z+1)`, branched from `release/X.Y.Z`.
 
 **Flow.** A fix for a shipped version is written on its release branch, against the code
-that shipped: a PR into `release/X.Y.Z` from a branch cut from it. Once merged, it goes to
-`main` as a PR of `git cherry-pick -x` commits, like anything merged into an open branch.
-(Picking a fix out of `main` instead risks dragging unreleased work into an OTA.) Docs and
-CI changes go the other way. An open branch may sync from `main` by PR, with a merge
-commit; a release branch never merges into `main`.
+that shipped: a PR into `release/X.Y.Z` from a branch cut from it. Once merged, its squash
+commit goes to `main` by `git cherry-pick -x`, like anything merged into an open branch.
+(Picking a fix out of `main` instead risks dragging unreleased work into an OTA.) Docs, CI,
+and whatever an open branch still needs from `main` go the other way, also by cherry-pick.
+Neither branch ever merges the other: `release-gate` refuses a PR that brings commits from
+`main`'s history.
 
 **Rules.** GitHub rulesets make `main` and `release/*` take changes only by PR, forbid
-deleting or force-pushing them, and require the `check` job. `release/*` also requires
-`release-gate` and refuses squash merges: a sync needs a real merge commit, and a rebase
-keeps each cherry-pick's `-x` line. An admin may merge a PR into `main` past a red check;
-nobody can on `release/*`.
+deleting or force-pushing them, and require the `check` job; `release/*` also requires
+`release-gate`. Every PR is squash-merged, so a PR is one commit and a pick is one commit.
+Keep GitHub's default squash message: it carries each commit's `(cherry picked from
+commit …)` line. An admin may merge a PR into `main` past a red check; nobody can on
+`release/*`.
 
 ## Procedures
 
@@ -120,12 +122,12 @@ nobody can on `release/*`.
 3. `release-gate` comments a verdict per platform, and a ❌ blocks the merge (see
    [Troubleshooting](#troubleshooting)). With a label, every push also publishes to
    `preview`: open the preview app twice to see it.
-4. Merge with rebase or a merge commit. `ota-production` publishes each labelled platform,
-   checks the runtime it published and comments on the PR.
+4. **Squash and merge.** `ota-production` publishes each labelled platform, checks the
+   runtime it published and comments on the PR.
 5. Open a store install twice to see it.
 6. Take the fix to `main`:
-   `git switch -c fix/<topic>-main origin/main && git cherry-pick -x <sha>…`, then a PR
-   into `main`. Conflicts get resolved here, where nothing ships.
+   `git switch -c fix/<topic>-main origin/main && git cherry-pick -x <squash commit>`,
+   then a PR into `main`. Conflicts get resolved here, where nothing ships.
 
 ### Release one platform first, or publish later
 
@@ -191,11 +193,12 @@ equals production's, so it receives the same OTAs through `preview`. Preview and
 builds share the app ID: a device holds one at a time, and on Android switching means
 uninstalling (different signing keys), which wipes local data.
 
-### Sync `main` into an open branch
+### Take a change from `main` to a release branch
 
-`git switch -c sync/main-into-X.Y.Z origin/release/X.Y.Z && git merge origin/main`, resolve,
-push, and open a PR into `release/X.Y.Z`; merge it with a merge commit. `release-gate`
-refuses this once the branch is locked.
+Docs, CI, or something an open branch still needs:
+`git switch -c pick/<topic> origin/release/X.Y.Z && git cherry-pick -x <squash commit>…`,
+then a PR into `release/X.Y.Z`. On a locked branch, `release-gate` passes it only if it
+keeps the fingerprint.
 
 ## Reference
 

@@ -1,5 +1,5 @@
 // The `release-gate` check: a verdict per platform for a PR into release/X.Y.Z. It
-// blocks on a runtime change, a build in flight, or `main` history reaching a locked
+// blocks on a runtime change, a build in flight, or `main` history reaching a release
 // branch; everything else it reports is informational. §6 of the design.
 import { findFreeze } from '../lib/freeze.ts';
 import { dependencyChanges, networkFindings, platformsFromLabels } from '../lib/pr.ts';
@@ -61,12 +61,7 @@ export async function runGate(runner: Runner, ctx: GateContext): Promise<GateRep
       explanations[platform] = await explainMismatch(runner, verdict.build.id);
   }
 
-  const locked = verdicts.some((verdict) => verdict.kind !== 'open');
-  const errors = gateErrors(
-    verdicts,
-    version,
-    locked && (await bringsMainCommits(runner, ctx.baseRef)),
-  );
+  const errors = gateErrors(verdicts, version, await bringsMainCommits(runner, ctx.baseRef));
   const labels = platformsFromLabels(ctx.labels);
   const issues = labels.length ? await openFreezes(runner, ctx.repo) : [];
   const files = ctx.prNumber === null ? [] : await pullRequestFiles(runner, ctx.repo, ctx.prNumber);

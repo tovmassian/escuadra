@@ -53,7 +53,7 @@ describe('renderGate', () => {
     expect(body).toContain('`release/1.0.1` from `release/1.0.0`');
     expect(body).toContain('**Labels:** ota:ios');
     expect(body).toContain('guardrail 4');
-    expect(body).toContain("isn't on `main` yet goes there as a PR of `git cherry-pick -x`");
+    expect(body).toContain('take its squash commit to `main` with `git cherry-pick -x`');
   });
 
   it('says nothing is published without labels, and lists guardrail-4 hints', () => {

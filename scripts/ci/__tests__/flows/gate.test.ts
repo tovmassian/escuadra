@@ -71,15 +71,15 @@ describe('runGate', () => {
     expect(report.body).toContain('package.json scripts');
   });
 
-  it('fails main history on a locked branch and accepts it on an open one', async () => {
+  it('fails main history on a locked branch and on an open one', async () => {
     expect((await runGate(world({ mainOnBase: false }), ctx)).passed).toBe(false);
-    const open = await runGate(world({ mainOnBase: false }), {
-      ...ctx,
-      baseRef: 'release/1.1.0',
-      appJsonVersion: '1.1.0',
-    });
-    expect(open.passed).toBe(true);
-    expect(open.body).toContain('no 1.1.0 build yet');
+    const open = { ...ctx, baseRef: 'release/1.1.0', appJsonVersion: '1.1.0' };
+    const clean = await runGate(world(), open);
+    expect(clean.passed).toBe(true);
+    expect(clean.body).toContain('no 1.1.0 build yet');
+    const fromMain = await runGate(world({ mainOnBase: false }), open);
+    expect(fromMain.passed).toBe(false);
+    expect(fromMain.body).toContain('brings commits from `main`');
   });
 
   it("refuses a base that isn't release/X.Y.Z without asking EAS anything", async () => {

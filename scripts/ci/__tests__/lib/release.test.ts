@@ -112,10 +112,13 @@ describe('verdictFor and gateErrors', () => {
     expect(gateErrors([pending], '1.1.0', false)).toHaveLength(1);
   });
 
-  it('blocks commits from main only once a platform is locked', () => {
+  it('blocks commits from main on an open branch as on a locked one', () => {
     const open = [verdictFor('ios', { state: 'open' }, IOS_1_0_0)];
     const locked = [verdictFor('ios', lockedIos, IOS_1_0_0)];
-    expect(gateErrors(open, '1.1.0', true)).toEqual([]);
+    expect(gateErrors(open, '1.1.0', false)).toEqual([]);
+    const [fromOpen] = gateErrors(open, '1.1.0', true);
+    expect(fromOpen).toContain('brings commits from `main`');
+    expect(fromOpen).toContain('`release/1.1.0`');
     expect(gateErrors(locked, '1.0.0', true)[0]).toContain('brings commits from `main`');
   });
 });

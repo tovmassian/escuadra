@@ -110,8 +110,8 @@ export function verdictFor(platform: Platform, lock: LockState, fingerprint: str
 
 /**
  * Everything that must stop a merge, in words; empty means the gate passes.
- * `bringsMainCommits` counts only once a platform is locked or about to be: an open
- * branch takes syncs from `main` by design.
+ * `bringsMainCommits` counts on an open branch too: every PR is squash-merged, so what a
+ * release branch needs from `main` arrives by cherry-pick, never by merging `main`.
  */
 export function gateErrors(
   verdicts: Verdict[],
@@ -136,10 +136,10 @@ export function gateErrors(
       );
     }
   }
-  if (bringsMainCommits && verdicts.some((verdict) => verdict.kind !== 'open')) {
+  if (bringsMainCommits) {
     errors.push(
-      'This PR brings commits from `main` into a locked branch. Cut the branch from ' +
-        `\`release/${version}\` and \`git cherry-pick -x\` the fix instead.`,
+      "This PR brings commits from `main`'s history. Cut its branch from " +
+        `\`release/${version}\` and \`git cherry-pick -x\` what it needs instead.`,
     );
   }
   return errors;

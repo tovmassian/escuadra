@@ -78,7 +78,7 @@ export function renderGate(view: GateView): string {
   }
   lines.push(
     '',
-    "Once merged, whatever here isn't on `main` yet goes there as a PR of `git cherry-pick -x` commits.",
+    'Once merged, take its squash commit to `main` with `git cherry-pick -x`, unless it came from there.',
   );
   if (view.findings.length || view.dependencies.length) {
     lines.push('', '**Check against guardrail 4** (informational):');

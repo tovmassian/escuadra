@@ -1,7 +1,9 @@
 # Release pipeline — OTA updates and store builds through GitHub Actions
 
 **Status:** design, approved 2026-09-23 (#73) and revised the same day: release branches
-are cut from `main`, and a fix for a shipped version starts on its branch (§4).
+are cut from `main`, and a fix for a shipped version starts on its branch (§4). Revised
+again on 2026-09-24: every PR is squash-merged, so changes cross between `main` and a
+release branch only by cherry-pick (§4, §5).
 Self-contained — every decision and its rationale is recorded here.
 
 ## 1. Problem
@@ -55,6 +57,7 @@ Measured 2026-09-23 unless noted.
 | Platform selection | Opt-in PR labels `ota:ios`, `ota:android`; no label, nothing published                                             |
 | Branch model       | One convention, `release/X.Y.Z` cut from `main`, with a per-platform lifecycle (open → locked) read from EAS       |
 | Branch protection  | Rulesets on `main` and `release/*`; a bypass only on `main`, only for PR merges                                    |
+| Merge method       | Squash only: one PR lands as one commit, the unit a cherry-pick carries between branches                           |
 | Review freeze      | Freeze issues (label `ota-freeze`), keyed `platform@version`                                                       |
 | Production guard   | Environments `production-ios` and `production-android`, deployable from `release/*` only                           |
 | Implementation     | Thin workflows; every decision in tested TypeScript under `scripts/ci/`                                            |
@@ -81,7 +84,7 @@ by hand:
 
 | State  | Condition                                                                                  | What may merge                                                                                         | Publishing                          |
 | ------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ----------------------------------- |
-| Open   | No production build of X.Y.Z exists for the platform                                       | Anything: fixes, syncs from `main`                                                                     | Preview, if a preview build matches |
+| Open   | No production build of X.Y.Z exists for the platform                                       | Anything, runtime changes included, that brings no commit from `main`                                  | Preview, if a preview build matches |
 | Locked | A production build of X.Y.Z exists for the platform — finished, new, queued or in progress | Only PRs whose fingerprint equals the latest such build's runtime and that bring no commit from `main` | Preview and production              |
 
 - Errored and cancelled builds don't count. "Latest" is by creation time: iOS 1.0.0
@@ -102,16 +105,17 @@ by hand:
 - Development, the next version's features included, happens on `main`. A version's
   branch is cut only once its content is decided, so nothing locks early.
 - A fix for a shipped version starts on its release branch: a PR from a branch cut from
-  `release/X.Y.Z`, previewed through the labels. Once merged, a PR of `git cherry-pick -x`
-  commits takes it to `main`, as it does anything merged into an open branch.
+  `release/X.Y.Z`, previewed through the labels. Once merged, a PR that cherry-picks its
+  squash commit (`git cherry-pick -x`) takes it to `main`, as it does anything merged into
+  an open branch.
 - Why that direction: `main` carries unreleased work. A fix written there and picked back
   can conflict in the same files, and resolving that on a shipping branch can drag
   unreleased code — TelemetryDeck today — into an OTA, which guardrail 4 forbids and the
   fingerprint can't see. Conflicts on the way to `main` are resolved where nothing ships.
   The cost, remembering the pick to `main`, is carried by the gate's comment (§6).
-- Docs and CI changes start on `main` and reach release branches by cherry-pick.
-- An open branch may sync from `main` by PR, with a merge commit. A release branch never
-  merges into `main`; after its lock it lives on as its version's OTA source.
+- Docs, CI, and whatever an open branch still needs from `main` start on `main` and reach
+  release branches by cherry-pick. Neither branch ever merges the other; after its lock, a
+  release branch lives on as its version's OTA source.
 
 ### 1.1.0
 
@@ -129,13 +133,17 @@ builds it.
 | Block deletion and force-push | ✓                     | ✓                                                      |
 | Require a PR (0 approvals)    | ✓                     | ✓                                                      |
 | Required checks               | `check`               | `check`, `release-gate`                                |
-| Merge methods                 | merge commit, rebase  | merge commit, rebase — no squash                       |
+| Merge methods                 | squash                | squash                                                 |
 | Bypass                        | admin, PR merges only | none; the escape is editing the ruleset (audit-logged) |
 
 - The repo deletes a merged PR's head branch automatically; deletion protection keeps a
   release branch alive if one is ever a PR's head.
-- No squash: a sync from `main` needs a real merge commit, and a rebase merge keeps each
-  cherry-pick's `-x` line.
+- Squash only, the owner's call on review: one PR lands as one commit, which is what a
+  cherry-pick carries between branches, and GitHub's default squash message keeps each
+  commit's `-x` line. With no merge commits, nothing syncs by merging (§4).
+- `release/*`'s required checks aren't enforced when a branch is created
+  (`do_not_enforce_on_create`): a version is cut from a `main` commit that never ran
+  `release-gate`.
 - Rulesets match `release/*` with wildcards; the version-shaped regex is enforced by
   `release-gate`, so `release/1.1` fails loudly instead of passing as an open branch.
 - `main`'s ruleset goes live in rollout step 2. `release/*`'s waits until
@@ -190,15 +198,17 @@ runs `npm ci`, then:
      and "put it on a new version: `release/X.Y.(Z+1)` from this branch";
    - open — ✅, "no X.Y.Z build yet";
    - a production build unfinished and its runtime unknown — ❌, "wait for build N".
-5. On a locked branch, fails if the PR contains any commit that is in `origin/main`'s
-   history but not on the base branch. This catches a sync from `main` and a branch cut
-   from `main` by mistake. After 1.1.0 ships, `main` and `release/1.1.0` will often share
-   a runtime, so the fingerprint alone would let 1.2.0 work reach 1.1.0 users.
+5. Fails if the PR contains any commit that is in `origin/main`'s history but not on the
+   base branch: a branch cut from `main` by mistake, or a merge of `main`. Open or locked,
+   a release branch takes what it needs from `main` by cherry-pick (§4). Once a version
+   ships, `main` and its branch will often share a runtime, so the fingerprint alone would
+   let the next version's work reach its users.
 6. Reports, without blocking: labels; open freezes for the labelled platforms; with an
    `ota:*` label, the guardrail-4 line; changed dependencies and added network-looking
    code (`fetch(`, `XMLHttpRequest`, `WebSocket`, `sendBeacon`, URL literals) in files the
    app bundles — everything outside `docs/`, `.github/`, `scripts/`, `tools/` and tests;
-   and a reminder that whatever isn't on `main` yet goes there by cherry-pick once merged.
+   and a reminder to cherry-pick the squash commit to `main` once merged, unless it came
+   from there.
 7. Writes one PR comment, updated in place on each run (found by a hidden marker), and
    the job summary. If EAS can't be reached, the check fails and is re-run later.
 
@@ -391,7 +401,7 @@ The rules are unit tests, run by Vitest inside `npm run check` on every branch:
 - publish: frozen, open or mismatched means `eas update` is never called; a failed
   verification exits non-zero;
 - preview: `eas update` only ever targets the `preview` channel and environment;
-- gate: locked with a mismatch fails; `main` commits on a locked branch fail; an
+- gate: locked with a mismatch fails; `main` commits fail, open or locked; an
   unfinished build with an unknown runtime fails;
 - rollback: the freeze issue is created before the rollback command; `previous` with no
   earlier group fails without calling EAS;
@@ -416,15 +426,15 @@ Constraints:
 
 ## 12. To verify during implementation
 
-| Item                                                                                                       | If it doesn't hold                                                                             |
-| ---------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
-| EAS reports the runtime or fingerprint of an unfinished build                                              | PRs wait while a production build of the version is unfinished — already the designed fallback |
-| EAS robot users can hold the Developer and Admin roles (they can; channel protection can't be enabled, §5) | The production token is the owner's personal token, kept in the production environments        |
-| Submission credentials exist on EAS                                                                        | The owner adds them to EAS once                                                                |
-| `commits/{sha}/pulls` returns the PR for rebase-merged commits                                             | Find the PR from the push payload's commit list                                                |
-| `eas update --json` and `update:view --json` expose the group and update IDs and the git commit            | The duplicate guard compares messages instead of commits                                       |
-| Environment branch policies admit `push` and `workflow_dispatch` runs on `release/*`                       | The scripts' own branch check remains the guard                                                |
-| `eas … --json` prints only JSON on stdout (it doesn't: with `--environment` a notice comes first)          | `runJson` parses from the first line that opens an object or array (found by the dry run)      |
+| Item                                                                                                          | If it doesn't hold                                                                             |
+| ------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| EAS reports the runtime or fingerprint of an unfinished build                                                 | PRs wait while a production build of the version is unfinished — already the designed fallback |
+| EAS robot users can hold the Developer and Admin roles (they can; channel protection can't be enabled, §5)    | The production token is the owner's personal token, kept in the production environments        |
+| Submission credentials exist on EAS                                                                           | The owner adds them to EAS once                                                                |
+| `commits/{sha}/pulls` returns the PR for a squash commit on a release branch (it does for #77's merge commit) | Take the PR number from the `(#N)` that ends the squash commit's title                         |
+| `eas update --json` and `update:view --json` expose the group and update IDs and the git commit               | The duplicate guard compares messages instead of commits                                       |
+| Environment branch policies admit `push` and `workflow_dispatch` runs on `release/*`                          | The scripts' own branch check remains the guard                                                |
+| `eas … --json` prints only JSON on stdout (it doesn't: with `--environment` a notice comes first)             | `runJson` parses from the first line that opens an object or array (found by the dry run)      |
 
 ## 13. Documentation
 
@@ -445,7 +455,7 @@ procedures link to concepts instead of restating them.
    platform, build, runtime, state).
 5. **Procedures** — ship a JS fix; release one platform first or publish after a freeze;
    review freeze; roll back; cut a feature release; runtime-changing fix; cut preview
-   builds; sync `main` into an open branch.
+   builds; take a change from `main` to a release branch.
 6. **Reference** — workflows (trigger, inputs, environment, token), labels, the freeze
    format, commands, troubleshooting by workflow message, and the manual fallback for
    when Actions is down.

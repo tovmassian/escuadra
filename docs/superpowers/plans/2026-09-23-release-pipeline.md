@@ -28,11 +28,11 @@
 - **Rollback gains a `dry_run` input.** The real `production` history shows that `previous` on Android today would republish the #44 "OTA marker" test update (fixture test in Task 7). A dry run shows the target first.
 - **One `preview` job publishes every labelled platform in turn** instead of one job per label, so two jobs never edit the gate's comment at once. Same behaviour.
 - **Publish verification compares runtimes directly:** the published update's `runtimeVersion` must equal the locked build's runtime. That is the delivery rule itself, and it is parseable; `fingerprint:compare --update-id` prints prose.
-- **Syncs from `main` come from a `sync/…` branch**, not a PR from `main` itself: conflicts can't be resolved on `main`.
 
 ## After review (2026-09-24)
 
 - **Tests live in `scripts/ci/__tests__/`**, mirroring `lib/` and `flows/`, with the fake runner and the fixtures beside them: the code folders hold only code. Tasks 5–14 show paths and imports as first written; the File map and the repo are current.
+- **Every PR is squash-merged** (the owner's call): one PR lands as one commit, and that commit is what crosses between branches by `git cherry-pick -x`. Syncing `main` into an open branch by merge commit is gone (spec §4, §5), so `gateErrors` refuses `main`'s history on an open branch too, and the gate's reminder names the squash commit. Tasks 17–20 below squash-merge and pick without `-m 1`; Tasks 8, 10 and 16 show the text as first written.
 
 ## File map
 
@@ -4803,7 +4803,7 @@ gh pr create --base main --title "ci: release pipeline — gate, preview, produc
   --body "Implements docs/superpowers/plans/2026-09-23-release-pipeline.md, Phase 3. Nothing here moves the fingerprint: files under .github/ and scripts/ci/ only. Dry run against release/1.0.0: iOS 8b8b8840 ✅, Android a616db89 ✅."
 ```
 
-Expected: `check` passes, including actionlint. The owner merges with **Create a merge commit** (`main` allows no squash); Phase 4 cherry-picks that merge as one commit with `-m 1`.
+Expected: `check` passes, including actionlint. The owner merges with **Squash and merge**; Phase 4 cherry-picks that one commit.
 
 ---
 
@@ -4811,18 +4811,20 @@ Expected: `check` passes, including actionlint. The owner merges with **Create a
 
 ### Task 18: The pipeline on its own introduction PR; the `release/*` ruleset
 
-- [ ] **Step 1: Cherry-pick the pipeline's merge commit onto `release/1.0.0`**
+- [ ] **Step 1: Cherry-pick the pipeline's squash commit onto `release/1.0.0`**
 
 ```bash
 git fetch origin
 CODE=$(gh pr view <pipeline PR number> --json mergeCommit --jq .mergeCommit.oid)
 git switch -c ci/pipeline-1.0.0 origin/release/1.0.0
-git cherry-pick -x -m 1 "$CODE"
+git cherry-pick -x "$CODE"
 npm ci
 for p in ios android; do npx expo-updates fingerprint:generate --platform $p | node -e 'let s="";process.stdin.on("data",d=>s+=d).on("end",()=>process.stdout.write(JSON.parse(s).hash+"\n"))'; done
 ```
 
 Expected: `8b8b8840bd6e265b91976ef4690a9ef5cb632508` then `a616db8911b507fe2e4b9502b1d48e24a397a84b`. Stop if either differs.
+
+The pick also brings `CLAUDE.md`'s `__tests__` convention: in the same commit (`git commit --amend`), move the banner's "as of `71b6d77c`" to the first eight characters of `$CODE`.
 
 - [ ] **Step 2: Open the PR and read the gate** (confirm first)
 
@@ -4833,7 +4835,7 @@ gh pr create --base release/1.0.0 --title "ci: release pipeline on release/1.0.0
 gh pr checks --watch
 ```
 
-Expected: `release-gate` passes, and its comment shows iOS `8b8b8840` ✅ and Android `a616db89` ✅ computed on a Linux runner: the runner-vs-Mac question, answered. The owner merges with **Rebase and merge**. The `ota-production` run for that push ends with "has no ota:* label: nothing to publish." If it says "No merged PR behind" instead, GitHub didn't associate the rebased commit with its PR (spec §12): switch `resolve` to reading the PR number from the push payload's commit messages before any labelled PR merges.
+Expected: `release-gate` passes, and its comment shows iOS `8b8b8840` ✅ and Android `a616db89` ✅ computed on a Linux runner: the runner-vs-Mac question, answered. The owner merges with **Squash and merge**. The `ota-production` run for that push ends with "has no ota:* label: nothing to publish." If it says "No merged PR behind" instead, GitHub didn't associate the squash commit with its PR (spec §12; it did for #77's merge commit): switch `resolve` to the `(#N)` that ends the squash commit's title before any labelled PR merges.
 
 - [ ] **Step 3: Switch on the `release/*` ruleset** (confirm first)
 
@@ -4850,9 +4852,9 @@ gh api -X POST repos/tovmassian/escuadra/rulesets --input - <<'EOF'
     { "type": "pull_request", "parameters": {
         "required_approving_review_count": 0, "dismiss_stale_reviews_on_push": false,
         "require_code_owner_review": false, "require_last_push_approval": false,
-        "required_review_thread_resolution": false, "allowed_merge_methods": ["merge", "rebase"] } },
+        "required_review_thread_resolution": false, "allowed_merge_methods": ["squash"] } },
     { "type": "required_status_checks", "parameters": {
-        "strict_required_status_checks_policy": false,
+        "strict_required_status_checks_policy": false, "do_not_enforce_on_create": true,
         "required_status_checks": [{ "context": "check" }, { "context": "release-gate" }] } }
   ],
   "bypass_actors": []
@@ -4903,11 +4905,11 @@ Expected: `release-gate` ✅ for both platforms; the `preview` job fills the com
 
 - [ ] **Step 2: 👤 Verify on the preview builds:** open the app, wait, close fully, open again. About shows the update ID from the comment.
 
-- [ ] **Step 3: Merge** (the owner, **Rebase and merge**). Expected: `ota-production` publishes both platforms, and each job's PR comment says `✅ matches build 3`.
+- [ ] **Step 3: Merge** (the owner, **Squash and merge**). Expected: `ota-production` publishes both platforms, and each job's PR comment says `✅ matches build 3`.
 
 - [ ] **Step 4: 👤 Verify on store installs** (launch twice), and check EAS: `npx eas-cli update:list --branch production --limit 3` shows the new groups on `8b8b8840` and `a616db89`.
 
-- [ ] **Step 5: Take the fix to `main`** (confirm first): `git switch -c fix/about-update-id-main origin/main && git cherry-pick -x <the fix's commits>`, resolve (About carries the telemetry opt-out on `main`), then a PR into `main`.
+- [ ] **Step 5: Take the fix to `main`** (confirm first): `git switch -c fix/about-update-id-main origin/main && git cherry-pick -x <the fix's squash commit>`, resolve (About carries the telemetry opt-out on `main`), then a PR into `main`.
 
 ---
 
