@@ -220,7 +220,11 @@ export default function Results() {
   const studyMissed = () => {
     router.push({
       pathname: '/team/[squadId]/study',
-      params: { squadId, players: missed.map((r) => r.question.playerId).join(',') },
+      params: {
+        squadId,
+        players: missed.map((r) => r.question.playerId).join(','),
+        level: String(level),
+      },
     });
   };
 
