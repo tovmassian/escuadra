@@ -39,7 +39,7 @@ export default function Study() {
   return (
     <View style={[styles.root, { paddingTop: insets.top + spacing.xl }]}>
       <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
-        <Text style={styles.back}>‹ Exit</Text>
+        <Text style={styles.back}>‹ Back</Text>
       </Pressable>
       <Text style={styles.eyebrow}>{squad.name.toUpperCase()}</Text>
       <Text style={styles.title}>{playerIds === null ? 'Full Squad' : 'Missed Players'}</Text>
