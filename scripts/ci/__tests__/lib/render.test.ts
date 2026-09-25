@@ -53,7 +53,7 @@ describe('renderGate', () => {
     expect(body).toContain('`release/1.0.1` from `release/1.0.0`');
     expect(body).toContain('**Labels:** ota:ios');
     expect(body).toContain('guardrail 4');
-    expect(body).toContain('take its squash commit to `main` with `git cherry-pick -x`');
+    expect(body).toContain('pick-to-main opens its `git cherry-pick -x` into `main`');
   });
 
   it('says nothing is published without labels, and lists guardrail-4 hints', () => {
@@ -71,12 +71,32 @@ describe('renderGate', () => {
 });
 
 describe('withPreview', () => {
-  it('replaces only the preview line, repeatably', () => {
-    const once = withPreview(renderGate(view()), 'iOS → group `1a2b3c4d`');
-    const twice = withPreview(once, 'iOS → group `5e6f7a8b`');
+  it('replaces only the preview slot, repeatably', () => {
+    const once = withPreview(renderGate(view()), ['iOS → group `1a2b3c4d`']);
+    const twice = withPreview(once, ['iOS → group `5e6f7a8b`']);
     expect(twice).toContain('**Preview:** iOS → group `5e6f7a8b`');
     expect(twice).not.toContain('1a2b3c4d');
     expect(twice.split(COMMENT_MARKER)).toHaveLength(2);
+  });
+
+  it('lists one line per platform', () => {
+    const body = withPreview(renderGate(view()), ['iOS → group `1a2b3c4d`', 'Android: skipped']);
+    expect(body).toContain('**Preview:**\n\n- iOS → group `1a2b3c4d`\n- Android: skipped');
+  });
+
+  it('keeps its markers off the markdown lines, which GitHub would print verbatim', () => {
+    const body = withPreview(renderGate(view()), ['iOS → group `1a2b3c4d`']);
+    for (const line of body.split('\n').filter((l) => l.includes('<!-- '))) {
+      expect(line).toMatch(/^<!-- \/?[a-z-]+ -->$/);
+    }
+  });
+
+  it('replaces a one-line slot written before the markers moved to their own lines', () => {
+    const old = `${COMMENT_MARKER}\n\n<!-- preview -->**Preview:** after this check passes<!-- /preview -->\n\nafter`;
+    const body = withPreview(old, ['iOS → group `1a2b3c4d`']);
+    expect(body).not.toContain('after this check passes');
+    expect(body).toContain('**Preview:** iOS → group `1a2b3c4d`');
+    expect(body.endsWith('\n\nafter')).toBe(true);
   });
 });
 

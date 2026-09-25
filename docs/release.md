@@ -98,8 +98,9 @@ version: `release/X.Y.(Z+1)`, branched from `release/X.Y.Z`.
 
 **Flow.** A fix for a shipped version is written on its release branch, against the code
 that shipped: a PR into `release/X.Y.Z` from a branch cut from it. Once merged, its squash
-commit goes to `main` by `git cherry-pick -x`, like anything merged into an open branch.
-(Picking a fix out of `main` instead risks dragging unreleased work into an OTA.) Docs, CI,
+commit goes to `main` by `git cherry-pick -x`, like anything merged into an open branch:
+`pick-to-main` opens that PR, and you review and merge it. (Picking a fix out of `main`
+instead risks dragging unreleased work into an OTA.) Docs, CI,
 and whatever an open branch still needs from `main` go the other way, also by cherry-pick.
 Neither branch ever merges the other: `release-gate` refuses a PR that brings commits from
 `main`'s history.
@@ -121,13 +122,14 @@ commit …)` line. An admin may merge a PR into `main` past a red check; nobody 
    publish: right for docs and CI changes.
 3. `release-gate` comments a verdict per platform, and a ❌ blocks the merge (see
    [Troubleshooting](#troubleshooting)). With a label, every push also publishes to
-   `preview`: open the preview app twice to see it.
+   `preview`; the comment links the preview build to install. Open the app twice to see it.
 4. **Squash and merge.** `ota-production` publishes each labelled platform, checks the
    runtime it published and comments on the PR.
 5. Open a store install twice to see it.
-6. Take the fix to `main`:
-   `git switch -c fix/<topic>-main origin/main && git cherry-pick -x <squash commit>`,
-   then a PR into `main`. Conflicts get resolved here, where nothing ships.
+6. `pick-to-main` opens the fix's cherry-pick into `main` and links it on the PR. Drop
+   anything that belongs to the release only (a patch version's `app.json`), then merge. On
+   a conflict it opens nothing and comments the commands instead: resolve them on `main`,
+   where nothing ships.
 
 ### Release one platform first, or publish later
 
@@ -210,6 +212,11 @@ keeps the fingerprint.
 | `ota-production` | Push to `release/*` (a merged PR); manual | Production publish per labelled platform        | `EXPO_TOKEN_PRODUCTION` in `production-<platform>` |
 | `ota-rollback`   | Manual                                    | Roll back production or preview                 | production runs in `production-<platform>`         |
 | `store-build`    | Manual                                    | Production or preview build, optional submit    | production runs in `production-<platform>`         |
+| `pick-to-main`   | A PR merged into `release/*`              | Opens its cherry-pick into `main`, runs `check` | `GITHUB_TOKEN`                                     |
+
+`pick-to-main` needs **Settings → Actions → General → Allow GitHub Actions to create and
+approve pull requests**. A PR opened with `GITHUB_TOKEN` starts no workflows, so the job
+dispatches `check` on it; that's why `check.yml` takes `workflow_dispatch`.
 
 Both environments accept only `release/*` branches, so only a run on a release branch
 reaches the production token. The logic lives in `scripts/ci/`, tested by `npm run check`.
@@ -249,6 +256,8 @@ Don't publish while that platform's build is in store review.
 | ❌ wait for the build                          | A production build of this version is running; re-run the check after it finishes.                                                                              |
 | Preview skipped: no preview build on runtime … | [Cut preview builds](#cut-preview-builds).                                                                                                                      |
 | Frozen by #N                                   | Close the freeze when the review passes, then **Re-run failed jobs**.                                                                                           |
+| pick-to-main: couldn't cherry-pick             | `main` conflicts, often with an earlier release fix not yet on `main`. Run the commands it commented, resolve, and open the PR.                                 |
+| pick-to-main: couldn't open its PR             | The Actions setting above is off. The branch is pushed: open its PR into `main` by hand.                                                                        |
 | 🚨 … reaches nobody / runner and EAS disagree  | Shouldn't happen after the checks. Roll back if something shipped, then investigate before publishing again.                                                    |
 | "Published!" but no device gets it             | The update's runtime matches no build: published from the wrong branch, or a stale `node_modules`.                                                              |
 | Still the old version after one launch         | Updates apply on the next cold start: close fully and reopen.                                                                                                   |

@@ -3,8 +3,8 @@
 // Not a required check: a failure here never blocks a merge.
 import { done, failed, skipped, type Outcome } from '../lib/outcome.ts';
 import { isDocsOrCiOnly } from '../lib/pr.ts';
-import { PLATFORM_NAMES, short, type Platform } from '../lib/release.ts';
-import { COMMENT_MARKER, withPreview } from '../lib/render.ts';
+import { PLATFORM_NAMES, buildUrl, short, type Platform } from '../lib/release.ts';
+import { COMMENT_MARKER, previewMarkdown, withPreview } from '../lib/render.ts';
 import { listBuilds, publishUpdate } from './eas.ts';
 import { findComment, pullRequestFiles, updateComment } from './github.ts';
 import type { Runner } from './runner.ts';
@@ -16,6 +16,7 @@ export interface PreviewContext {
   headSha: string;
   platforms: Platform[];
   fingerprints: Partial<Record<Platform, string>>;
+  account: string;
 }
 
 export async function runPreview(runner: Runner, ctx: PreviewContext): Promise<Outcome> {
@@ -39,7 +40,10 @@ export async function runPreview(runner: Runner, ctx: PreviewContext): Promise<O
         fingerprint,
         finishedOnly: true,
       });
-      if (receivers.length === 0) {
+      const receiver = receivers.toSorted(
+        (a, b) => Date.parse(b.createdAt) - Date.parse(a.createdAt),
+      )[0];
+      if (!receiver) {
         results.push(
           `${name}: skipped, no preview build on runtime \`${short(fingerprint)}\` (cut one with store-build, profile: preview)`,
         );
@@ -57,13 +61,16 @@ export async function runPreview(runner: Runner, ctx: PreviewContext): Promise<O
         continue;
       }
       published = true;
-      results.push(`${name} → group \`${short(update.group)}\` (open the preview app twice)`);
+      const install = `[preview build ${receiver.appBuildVersion ?? ''}](${buildUrl(ctx.account, receiver.id)})`;
+      results.push(
+        `${name} → group \`${short(update.group)}\` on ${install}: open the app twice to load it`,
+      );
     }
   }
-  const text = results.join(' · ');
   const comment = await findComment(runner, ctx.repo, ctx.prNumber, COMMENT_MARKER);
-  if (comment) await updateComment(runner, ctx.repo, comment.id, withPreview(comment.body, text));
-  const summary = `**Preview:** ${text}`;
+  if (comment)
+    await updateComment(runner, ctx.repo, comment.id, withPreview(comment.body, results));
+  const summary = previewMarkdown(results);
   if (broken) return failed(summary);
   return published ? done(summary) : skipped(summary);
 }
