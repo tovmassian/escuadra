@@ -30,6 +30,11 @@ export function short(hash: string | null | undefined): string {
   return hash ? hash.slice(0, 8) : 'unknown';
 }
 
+/** The build's page on expo.dev, where it installs from. */
+export function buildUrl(account: string, buildId: string): string {
+  return `https://expo.dev/accounts/${account}/projects/escuadra/builds/${buildId}`;
+}
+
 /** A build as `eas build:list --json` and `eas build --json` report it: the fields read here. */
 export interface EasBuild {
   id: string;
