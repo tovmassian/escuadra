@@ -294,6 +294,9 @@ async function captureTheme(browser, colorScheme, suffix) {
     await capture.open('/');
     await capture.shoot('01-home');
 
+    await capture.open('/about');
+    await capture.shoot('01a-about');
+
     await capture.open('/team-picker');
     await capture.shoot('02-team-picker-clubs');
     // Same screen, other segment — a tap rather than a second navigation.

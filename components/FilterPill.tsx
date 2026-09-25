@@ -29,7 +29,7 @@ export function FilterPill({ label, active, onPress }: FilterPillProps) {
       accessibilityState={{ selected: active }}
       style={[styles.pill, active ? styles.pillActive : styles.pillIdle]}
     >
-      <Text style={[styles.label, { color: active ? colors.background : colors.textMuted }]}>
+      <Text style={[styles.label, { color: active ? colors.accentOn : colors.textMuted }]}>
         {label}
       </Text>
     </Pressable>
