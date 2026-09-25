@@ -194,3 +194,39 @@ export async function activeRuns(
   ]);
   return runs.filter((run) => run.status !== 'completed').length;
 }
+
+/** Opens a PR and returns its URL. */
+export async function createPullRequest(
+  runner: Runner,
+  repo: string,
+  pr: { base: string; head: string; title: string; body: string },
+): Promise<string> {
+  const url = await runOk(runner, 'gh', [
+    'pr',
+    'create',
+    '--repo',
+    repo,
+    '--base',
+    pr.base,
+    '--head',
+    pr.head,
+    '--title',
+    pr.title,
+    '--body',
+    pr.body,
+  ]);
+  return url.trim();
+}
+
+/**
+ * Runs `workflow` on `ref`. Pushes and PRs made with GITHUB_TOKEN start no workflows;
+ * a dispatch is the exception, so this is how such a PR gets its required check.
+ */
+export async function dispatchWorkflow(
+  runner: Runner,
+  repo: string,
+  workflow: string,
+  ref: string,
+): Promise<void> {
+  await runOk(runner, 'gh', ['workflow', 'run', workflow, '--repo', repo, '--ref', ref]);
+}

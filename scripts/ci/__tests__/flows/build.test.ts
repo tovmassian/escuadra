@@ -33,13 +33,17 @@ const ctx: BuildContext = {
   runUrl: 'https://github.com/tovmassian/escuadra/actions/runs/1',
 };
 
-function world(options: { fingerprint?: string; built?: Partial<EasBuild> } = {}) {
+function world(
+  options: { fingerprint?: string; built?: Partial<EasBuild>; viewed?: Partial<EasBuild> } = {},
+) {
   return fakeRunner(({ tool, args }) => {
     const [sub] = args;
     if (tool === 'eas' && sub === 'build:list') return json(builds);
     if (tool === 'eas' && sub === 'fingerprint:generate')
       return json({ hash: options.fingerprint ?? NEW_RUNTIME });
     if (tool === 'eas' && sub === 'build') return json([{ ...BUILT, ...options.built }]);
+    if (tool === 'eas' && sub === 'build:view')
+      return json({ ...BUILT, ...options.built, ...options.viewed });
     if (tool === 'gh' && sub === 'issue')
       return ok('https://github.com/tovmassian/escuadra/issues/81\n');
     return undefined;
@@ -101,6 +105,18 @@ describe('runStoreBuild', () => {
       '--auto-submit',
     );
     expect(ran(runner.calls, 'gh', 'issue')).toBe(false);
+  });
+
+  it('re-reads the build after --auto-submit, whose JSON can carry the status from enqueue', async () => {
+    const runner = world({ built: { status: 'IN_QUEUE' }, viewed: { status: 'FINISHED' } });
+    const outcome = await runStoreBuild(runner, ctx);
+    expect(outcome.status).toBe('done');
+    expect(runner.calls.find((call) => call.args[0] === 'build:view')?.args).toEqual([
+      'build:view',
+      'b4',
+      '--json',
+    ]);
+    expect(ran(runner.calls, 'gh', 'issue')).toBe(true);
   });
 
   it("fails a build that didn't finish", async () => {
