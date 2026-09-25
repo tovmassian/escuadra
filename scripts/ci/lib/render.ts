@@ -68,7 +68,7 @@ export function renderGate(view: GateView): string {
   lines.push(
     `**Labels:** ${labels || 'none, so nothing is published'} · **Freeze:** ${freezes || 'none'}`,
     '',
-    `${PREVIEW_START}**Preview:** ${preview}${PREVIEW_END}`,
+    previewSlot([preview]),
   );
   if (view.labels.length) {
     lines.push(
@@ -78,7 +78,7 @@ export function renderGate(view: GateView): string {
   }
   lines.push(
     '',
-    'Once merged, take its squash commit to `main` with `git cherry-pick -x`, unless it came from there.',
+    'Once merged, pick-to-main opens its `git cherry-pick -x` into `main`, unless it came from there.',
   );
   if (view.findings.length || view.dependencies.length) {
     lines.push('', '**Check against guardrail 4** (informational):');
@@ -94,11 +94,23 @@ export function renderBadBranch(baseRef: string): string {
   return `${COMMENT_MARKER}\n❌ \`${baseRef}\` isn't a release branch: PRs into \`release/*\` must target \`release/X.Y.Z\`.`;
 }
 
-/** The gate's comment with its preview line replaced: how the preview job reports. */
-export function withPreview(body: string, text: string): string {
-  const line = `${PREVIEW_START}**Preview:** ${text}${PREVIEW_END}`;
+/** One result inline, several as a list: one line per platform. */
+export function previewMarkdown(results: string[]): string {
+  if (results.length === 1) return `**Preview:** ${results[0]}`;
+  return ['**Preview:**', '', ...results.map((result) => `- ${result}`)].join('\n');
+}
+
+// Markers on their own lines, with blank lines around the content: a line that starts
+// with `<!--` is an HTML block, and GitHub would print the markdown after it verbatim.
+function previewSlot(results: string[]): string {
+  return [PREVIEW_START, '', previewMarkdown(results), '', PREVIEW_END].join('\n');
+}
+
+/** The gate's comment with its preview slot replaced: how the preview job reports. */
+export function withPreview(body: string, results: string[]): string {
+  const slot = previewSlot(results);
   const start = body.indexOf(PREVIEW_START);
   const end = body.indexOf(PREVIEW_END);
-  if (start < 0 || end < start) return `${body}\n\n${line}`;
-  return body.slice(0, start) + line + body.slice(end + PREVIEW_END.length);
+  if (start < 0 || end < start) return `${body}\n\n${slot}`;
+  return body.slice(0, start) + slot + body.slice(end + PREVIEW_END.length);
 }

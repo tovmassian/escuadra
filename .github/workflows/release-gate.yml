@@ -48,3 +48,4 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           PLATFORMS: ${{ needs.release-gate.outputs.platforms }}
           FINGERPRINTS: ${{ needs.release-gate.outputs.fingerprints }}
+          EAS_ACCOUNT: tovmassian27

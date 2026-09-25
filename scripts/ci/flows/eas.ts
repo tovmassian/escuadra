@@ -48,6 +48,11 @@ export function listBuilds(runner: Runner, query: BuildQuery): Promise<EasBuild[
   return runJson<EasBuild[]>(runner, 'eas', args);
 }
 
+export function viewBuild(runner: Runner, buildId: string): Promise<EasBuild> {
+  // build:view rejects --non-interactive; it never prompts.
+  return runJson<EasBuild>(runner, 'eas', ['build:view', buildId, '--json']);
+}
+
 /** fingerprint:compare's own explanation of why this checkout differs from a build. */
 export async function explainMismatch(runner: Runner, buildId: string): Promise<string> {
   const result = await runner.run('eas', [
