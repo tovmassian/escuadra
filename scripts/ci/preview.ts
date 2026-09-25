@@ -20,6 +20,7 @@ try {
       headSha: pr.head.sha,
       platforms: (JSON.parse(env('PLATFORMS')) as string[]).map(parsePlatform),
       fingerprints: JSON.parse(env('FINGERPRINTS')) as Partial<Record<Platform, string>>,
+      account: env('EAS_ACCOUNT'),
     }),
   );
 } catch (error) {

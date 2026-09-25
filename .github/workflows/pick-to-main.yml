@@ -1,0 +1,37 @@
+# After a PR merges into a release branch, opens its `git cherry-pick -x` into main.
+# See docs/release.md. Needs Settings → Actions → General → "Allow GitHub Actions to
+# create and approve pull requests".
+name: pick-to-main
+
+on:
+  pull_request:
+    types: [closed]
+    branches: ['release/**']
+
+concurrency:
+  group: pick-to-main-${{ github.event.pull_request.number }}
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  pick:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.base.ref }}
+          fetch-depth: 0
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: .nvmrc
+      - run: node scripts/ci/pick.ts
+        env:
+          GH_TOKEN: ${{ github.token }}
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898283+github-actions[bot]@users.noreply.github.com

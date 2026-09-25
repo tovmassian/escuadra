@@ -1,6 +1,8 @@
 name: check
 
-on: [push, pull_request]
+# workflow_dispatch: pick-to-main's PRs are opened with GITHUB_TOKEN, which starts no
+# push or pull_request runs, so it starts this one by hand for main's required check.
+on: [push, pull_request, workflow_dispatch]
 
 jobs:
   check:
