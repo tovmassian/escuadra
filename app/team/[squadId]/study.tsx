@@ -61,14 +61,26 @@ export default function Study() {
     if (level === null) return;
     const fullRoster = getRoster(squad.id);
     startRound(squad, fullRoster, level);
-    router.replace({
+    // This screen is only reached (with a level) by pushing from Results,
+    // which itself replaced Play — so a plain replace here would leave
+    // Results underneath, and Exit's session.reset() + router.back() would
+    // land on a Results screen whose session guard no longer matches,
+    // rendering blank. Dismissing to Difficulty first — always an ancestor
+    // of this flow — then pushing Play restores the same
+    // Difficulty-then-Play shape every other entry into a round has, so
+    // Exit's back() always lands somewhere valid.
+    router.dismissTo({
+      pathname: '/team/[squadId]/difficulty',
+      params: { squadId: squad.id },
+    });
+    router.push({
       pathname: '/play/[squadId]/[level]',
       params: { squadId: squad.id, level: String(level) },
     });
   };
 
   return (
-    <View style={[styles.root, { paddingTop: insets.top + spacing.xl }]}>
+    <View style={[styles.root, { paddingTop: insets.top + spacing.md }]}>
       <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
         <Text style={styles.back}>‹ Back</Text>
       </Pressable>
