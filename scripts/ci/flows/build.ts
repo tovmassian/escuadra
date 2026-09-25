@@ -11,7 +11,7 @@ import {
   short,
   type Platform,
 } from '../lib/release.ts';
-import { computeFingerprint, listBuilds, startBuild } from './eas.ts';
+import { computeFingerprint, listBuilds, startBuild, viewBuild } from './eas.ts';
 import { createFreeze } from './github.ts';
 import type { Runner } from './runner.ts';
 
@@ -66,7 +66,10 @@ export async function runStoreBuild(runner: Runner, ctx: BuildContext): Promise<
   }
 
   const built = await startBuild(runner, ctx.platform, ctx.profile, production && ctx.submit);
-  const build = built.find((candidate) => candidate.platform.toLowerCase() === ctx.platform);
+  const started = built.find((candidate) => candidate.platform.toLowerCase() === ctx.platform);
+  // eas-cli 24.7's --auto-submit JSON can report the status from enqueue (IN_QUEUE) for a
+  // build that finished; a fresh build:view reports the settled one.
+  const build = started && (await viewBuild(runner, started.id));
   const buildUrl = build
     ? `https://expo.dev/accounts/${ctx.account}/projects/escuadra/builds/${build.id}`
     : '(no build returned)';
