@@ -5,6 +5,7 @@
 import { done, failed, type Outcome } from '../lib/outcome.ts';
 import {
   PLATFORM_NAMES,
+  buildUrl,
   buildRuntime,
   lockState,
   parseReleaseBranch,
@@ -70,31 +71,27 @@ export async function runStoreBuild(runner: Runner, ctx: BuildContext): Promise<
   // eas-cli 24.7's --auto-submit JSON can report the status from enqueue (IN_QUEUE) for a
   // build that finished; a fresh build:view reports the settled one.
   const build = started && (await viewBuild(runner, started.id));
-  const buildUrl = build
-    ? `https://expo.dev/accounts/${ctx.account}/projects/escuadra/builds/${build.id}`
-    : '(no build returned)';
+  const url = build ? buildUrl(ctx.account, build.id) : '(no build returned)';
   if (!build || build.status !== 'FINISHED') {
-    return failed(
-      `The ${name} build didn't finish (status ${build?.status ?? 'unknown'}): ${buildUrl}`,
-    );
+    return failed(`The ${name} build didn't finish (status ${build?.status ?? 'unknown'}): ${url}`);
   }
   const runtime = buildRuntime(build);
   if (runtime !== fingerprint) {
     return failed(
       `🚨 EAS built runtime \`${short(runtime)}\`, but the runner computed \`${short(fingerprint)}\` for the ` +
-        `same commit: ${buildUrl}. Don't publish OTAs to this build until that's explained.`,
+        `same commit: ${url}. Don't publish OTAs to this build until that's explained.`,
     );
   }
   if (!production && lock.state === 'locked' && runtime !== lock.runtime) {
     return failed(
-      `Preview build ${buildUrl} runs \`${short(runtime)}\` but ${name} ${version} production runs ` +
+      `Preview build ${url} runs \`${short(runtime)}\` but ${name} ${version} production runs ` +
         `\`${short(lock.runtime)}\`: it can't preview this version's OTAs.`,
     );
   }
 
   const lines = [
     `🏗️ ${ctx.profile} · ${name} · ${version} · build ${build.appBuildVersion} · runtime \`${short(runtime)}\` ✅ matches the runner`,
-    buildUrl,
+    url,
   ];
   if (production && ctx.submit) {
     const freezeUrl = await createFreeze(
@@ -102,7 +99,7 @@ export async function runStoreBuild(runner: Runner, ctx: BuildContext): Promise<
       ctx.repo,
       ctx.platform,
       version,
-      `Build ${build.appBuildVersion} (${buildUrl}) was submitted by ${ctx.runUrl}. Production publishes for ` +
+      `Build ${build.appBuildVersion} (${url}) was submitted by ${ctx.runUrl}. Production publishes for ` +
         `${ctx.platform}@${version} stay blocked until this issue is closed. Close it once the store review passes.`,
     );
     lines.push(

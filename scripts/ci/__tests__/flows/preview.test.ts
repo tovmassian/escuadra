@@ -27,6 +27,13 @@ const ctx: PreviewContext = {
   headSha: '1111111111111111111111111111111111111111',
   platforms: ['ios', 'android'],
   fingerprints: { ios: IOS, android: ANDROID },
+  account: 'tovmassian27',
+};
+const OLDER_PREVIEW_IOS: EasBuild = {
+  ...PREVIEW_IOS,
+  id: 'p0',
+  appBuildVersion: '3',
+  createdAt: '2026-09-20T10:00:00.000Z',
 };
 
 function world(options: { files?: string[]; publishedRuntime?: string } = {}) {
@@ -41,7 +48,7 @@ function world(options: { files?: string[]; publishedRuntime?: string } = {}) {
       );
     }
     if (tool === 'eas' && sub === 'build:list') {
-      return json(args.includes('ios') ? [PREVIEW_IOS] : []);
+      return json(args.includes('ios') ? [OLDER_PREVIEW_IOS, PREVIEW_IOS] : []);
     }
     if (tool === 'eas' && sub === 'update') {
       return json([
@@ -66,8 +73,12 @@ describe('runPreview', () => {
     const runner = world();
     const outcome = await runPreview(runner, ctx);
     expect(outcome.status).toBe('done');
-    expect(outcome.summary).toContain('iOS → group `1a2b3c4d`');
-    expect(outcome.summary).toContain('Android: skipped, no preview build on runtime `a616db89`');
+    expect(outcome.summary).toContain(
+      '- iOS → group `1a2b3c4d` on [preview build 4](https://expo.dev/accounts/tovmassian27/projects/escuadra/builds/p1)',
+    );
+    expect(outcome.summary).toContain(
+      '\n- Android: skipped, no preview build on runtime `a616db89`',
+    );
     // Pinned: the preview token can reach any channel, since protection isn't available.
     const args =
       runner.calls.find((call) => call.tool === 'eas' && call.args[0] === 'update')?.args ?? [];
