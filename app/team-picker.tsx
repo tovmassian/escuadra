@@ -11,7 +11,7 @@ import { spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import { router } from 'expo-router';
 import { useMemo, useState } from 'react';
-import { FlatList, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 const SEGMENTS = [
@@ -37,7 +37,13 @@ export default function TeamPicker() {
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.lg },
-    title: { ...typography.screenTitle, color: colors.textPrimary, marginBottom: spacing.xxs },
+    back: { ...typography.secondary, color: colors.textSecondary },
+    title: {
+      ...typography.screenTitle,
+      color: colors.textPrimary,
+      marginTop: spacing.md,
+      marginBottom: spacing.xxs,
+    },
     subtitle: { ...typography.secondarySmall, color: colors.textMuted, marginBottom: spacing.md },
     // `flexGrow: 0` keeps the horizontal scroller from claiming leftover
     // vertical space in this column; `flexShrink: 0` stops the list below from
@@ -68,6 +74,9 @@ export default function TeamPicker() {
 
   return (
     <View style={[styles.root, { paddingTop: insets.top + spacing.xl }]}>
+      <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
+        <Text style={styles.back}>‹ Back</Text>
+      </Pressable>
       <Text style={styles.title}>Choose a Team</Text>
       <Text style={styles.subtitle}>
         {filtered.length} {filtered.length === 1 ? 'team' : 'teams'} · tap to start
