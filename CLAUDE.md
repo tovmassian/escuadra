@@ -1,13 +1,18 @@
 # Escuadra
 
-> ⚠️ **You are on `release/1.0.0`, the locked OTA branch for the shipped 1.0.0
-> binaries** (iOS build 3 = runtime `8b8b8840…`, Android build 3 = runtime
-> `a616db89…`). Only changes that keep both fingerprints belong here; see
-> "Branches" in `docs/release.md`.
+> ⚠️ **You are on `release/1.0.1`, an Android-only patch release**: `release/1.0.0` plus
+> the adaptive-icon fix (#93, #94) and `app.json` at 1.0.1.
 >
-> The rest of this file is `main`'s CLAUDE.md (as of `326d092f`). What it describes that
-> came after the 1.0.0 build — TelemetryDeck and its privacy notes, `shots:play`,
-> `gen:play-assets`, `design/play/`, `app/store/feature-graphic.tsx` — exists only on `main`.
+> - **Android is locked** to build 4 = runtime `97579457…` (Play closed test). Only
+>   changes that keep that fingerprint belong here, and Android JS fixes publish from
+>   here with `ota:android`.
+> - **iOS has no 1.0.1 build.** iOS ships from `release/1.0.0`, and its OTAs publish
+>   from there: never label a PR here `ota:ios`.
+>
+> See "Branches" in `docs/release.md`. The rest of this file is `main`'s CLAUDE.md (as
+> of `326d092f`). What it describes that came after the 1.0.0 build — TelemetryDeck and
+> its privacy notes, `shots:play`, `gen:play-assets`, `design/play/`,
+> `app/store/feature-graphic.tsx` — exists only on `main`.
 
 A football squad memorisation trainer for mobile.
 
