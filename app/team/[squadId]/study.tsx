@@ -19,7 +19,11 @@ const FILTERS: ('ALL' | Position)[] = ['ALL', 'GK', 'DF', 'MF', 'FW'];
 export default function Study() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
-  const { squadId, players, level: levelParam } = useLocalSearchParams<{
+  const {
+    squadId,
+    players,
+    level: levelParam,
+  } = useLocalSearchParams<{
     squadId: string;
     players?: string;
     level?: string;
