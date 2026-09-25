@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { parsePlayerIds, studyRows } from './studyView';
+import { parseLevel, parsePlayerIds, studyRows } from './studyView';
 import type { RosterEntry } from '@/types/squad';
 
 function entry(id: string, no: number, position: 'GK' | 'DF' | 'MF' | 'FW'): RosterEntry {
@@ -33,6 +33,27 @@ describe('parsePlayerIds', () => {
 
   it('trims whitespace and drops empty entries', () => {
     expect(parsePlayerIds('a, ,b,')).toEqual(['a', 'b']);
+  });
+});
+
+describe('parseLevel', () => {
+  it('returns null when the param is absent', () => {
+    expect(parseLevel(undefined)).toBeNull();
+  });
+
+  it('returns null for a non-numeric param', () => {
+    expect(parseLevel('abc')).toBeNull();
+  });
+
+  it('returns null for a level outside 1..3', () => {
+    expect(parseLevel('0')).toBeNull();
+    expect(parseLevel('4')).toBeNull();
+  });
+
+  it('parses a valid level', () => {
+    expect(parseLevel('1')).toBe(1);
+    expect(parseLevel('2')).toBe(2);
+    expect(parseLevel('3')).toBe(3);
   });
 });
 

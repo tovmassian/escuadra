@@ -68,9 +68,9 @@ export default function Difficulty() {
     });
 
   return (
-    <View style={[styles.root, { paddingTop: insets.top + spacing.xl }]}>
+    <View style={[styles.root, { paddingTop: insets.top + spacing.md }]}>
       <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
-        <Text style={styles.back}>‹ Exit</Text>
+        <Text style={styles.back}>‹ Back</Text>
       </Pressable>
       <Text style={styles.eyebrow}>{squad.name.toUpperCase()}</Text>
       <Text style={styles.title}>Choose Difficulty</Text>

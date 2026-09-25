@@ -1,4 +1,5 @@
 // Pure Study-screen filtering. Kept out of the screen so it is unit-testable.
+import type { Level } from '@/lib/questionEngine';
 import type { Position, RosterEntry } from '@/types/squad';
 
 /**
@@ -14,6 +15,19 @@ export function parsePlayerIds(param: string | undefined): string[] | null {
     .map((id) => id.trim())
     .filter((id) => id.length > 0);
   return ids.length > 0 ? ids : null;
+}
+
+/**
+ * The `?level=` route param as a `Level`, or null when absent or invalid.
+ *
+ * Mirrors `parsePlayerIds`: a malformed or missing param means "no level
+ * known" rather than throwing, so a caller can fall back to not offering a
+ * level-scoped action (e.g. retry) instead of crashing the screen.
+ */
+export function parseLevel(param: string | undefined): Level | null {
+  if (param === undefined) return null;
+  const n = Number(param);
+  return n === 1 || n === 2 || n === 3 ? n : null;
 }
 
 /** Rows to show, always in shirt-number order. */
