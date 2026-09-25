@@ -73,7 +73,7 @@ export default function TeamPicker() {
   };
 
   return (
-    <View style={[styles.root, { paddingTop: insets.top + spacing.xl }]}>
+    <View style={[styles.root, { paddingTop: insets.top + spacing.md }]}>
       <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
         <Text style={styles.back}>‹ Back</Text>
       </Pressable>
