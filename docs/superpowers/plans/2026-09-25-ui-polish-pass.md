@@ -31,12 +31,12 @@
 
 **Context:** The issue asks for one consistent mapping: "Back" for a linear step back, "Exit" only when it truly abandons an in-progress round. Auditing every occurrence of this control:
 
-| File | Current text | Action performed | Abandons a round? | Correct label |
-| --- | --- | --- | --- | --- |
-| `app/about.tsx:76` | `‹ Back` | `router.back()` | No | `Back` (already correct) |
-| `app/team/[squadId]/difficulty.tsx:73` | `‹ Exit` | `router.back()` | No — no round has started yet | `Back` |
-| `app/team/[squadId]/study.tsx:47` | `‹ Exit` | `router.back()` | No — Study is a read-only detour, reachable both before playing and after a round is already complete | `Back` |
-| `app/play/[squadId]/[level]/index.tsx:189` | `‹ Exit` | `session.reset()` then `router.back()` | Yes — this is the only place that actually discards an in-progress round | `Exit` (already correct, do not touch) |
+| File                                       | Current text | Action performed                       | Abandons a round?                                                                                     | Correct label                          |
+| ------------------------------------------ | ------------ | -------------------------------------- | ----------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `app/about.tsx:76`                         | `‹ Back`     | `router.back()`                        | No                                                                                                    | `Back` (already correct)               |
+| `app/team/[squadId]/difficulty.tsx:73`     | `‹ Exit`     | `router.back()`                        | No — no round has started yet                                                                         | `Back`                                 |
+| `app/team/[squadId]/study.tsx:47`          | `‹ Exit`     | `router.back()`                        | No — Study is a read-only detour, reachable both before playing and after a round is already complete | `Back`                                 |
+| `app/play/[squadId]/[level]/index.tsx:189` | `‹ Exit`     | `session.reset()` then `router.back()` | Yes — this is the only place that actually discards an in-progress round                              | `Exit` (already correct, do not touch) |
 
 So this task only changes the two screens whose action is a plain `router.back()` but whose label currently says "Exit".
 
@@ -45,9 +45,9 @@ So this task only changes the two screens whose action is a plain `router.back()
 In `app/team/[squadId]/difficulty.tsx`, line 73:
 
 ```tsx
-      <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
-        <Text style={styles.back}>‹ Back</Text>
-      </Pressable>
+<Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
+  <Text style={styles.back}>‹ Back</Text>
+</Pressable>
 ```
 
 (Only the text inside `<Text>` changes, from `‹ Exit` to `‹ Back`. The `styles.back` key is already named `back`, so no style rename is needed.)
@@ -57,9 +57,9 @@ In `app/team/[squadId]/difficulty.tsx`, line 73:
 In `app/team/[squadId]/study.tsx`, line 47:
 
 ```tsx
-      <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
-        <Text style={styles.back}>‹ Back</Text>
-      </Pressable>
+<Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
+  <Text style={styles.back}>‹ Back</Text>
+</Pressable>
 ```
 
 - [ ] **Step 3: Verify there are no other stray "Exit" labels left mislabeled**
@@ -190,9 +190,7 @@ components/FilterPill.tsx:32:      <Text style={[styles.label, { color: active ?
 In `components/FilterPill.tsx`, line 32:
 
 ```tsx
-      <Text style={[styles.label, { color: active ? colors.accentOn : colors.textMuted }]}>
-        {label}
-      </Text>
+<Text style={[styles.label, { color: active ? colors.accentOn : colors.textMuted }]}>{label}</Text>
 ```
 
 - [ ] **Step 3: Typecheck and lint**
@@ -323,16 +321,16 @@ git commit -m "feat: add parseLevel to studyView for route-param parsing"
 In `app/play/[squadId]/[level]/results.tsx`, update `studyMissed` (around line 220):
 
 ```tsx
-  const studyMissed = () => {
-    router.push({
-      pathname: '/team/[squadId]/study',
-      params: {
-        squadId,
-        players: missed.map((r) => r.question.playerId).join(','),
-        level: String(level),
-      },
-    });
-  };
+const studyMissed = () => {
+  router.push({
+    pathname: '/team/[squadId]/study',
+    params: {
+      squadId,
+      players: missed.map((r) => r.question.playerId).join(','),
+      level: String(level),
+    },
+  });
+};
 ```
 
 - [ ] **Step 7: Typecheck**
@@ -372,7 +370,11 @@ Update the component to read the `level` param, add the retry handler, and const
 export default function Study() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
-  const { squadId, players, level: levelParam } = useLocalSearchParams<{
+  const {
+    squadId,
+    players,
+    level: levelParam,
+  } = useLocalSearchParams<{
     squadId: string;
     players?: string;
     level?: string;
