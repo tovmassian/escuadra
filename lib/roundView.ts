@@ -1,8 +1,9 @@
 // Pure view-model helpers for the play screen. No React and no store values —
 // only types — so this stays unit-testable, since the project's Vitest setup
 // has no React Native renderer.
-import type { Question, QuestionPart } from '@/lib/questionEngine';
+import type { Level, Question, QuestionPart } from '@/lib/questionEngine';
 import type { QuestionResult } from '@/stores/session';
+import { heroCardMinSize, heroCardSize, heroFitHeight, heroNumberSize } from '@/theme/tokens';
 
 export type DotOutcome = 'correct' | 'wrong' | 'current' | 'future';
 
@@ -71,4 +72,23 @@ export function partRailRows(
     }
     return { label, state: i === currentPartIndex ? 'current' : 'upcoming', answer: null };
   });
+}
+
+export interface HeroCardFit {
+  size: number;
+  numberSize: number;
+}
+
+/**
+ * The hero card's size for a screen with `usableHeight` points between its
+ * safe-area insets. Full size when the level fits; otherwise the card gives up
+ * exactly the missing height, so every option stays on screen without
+ * scrolling, down to the level's floor. The card stays square either way —
+ * the photo slot it reserves keeps its shape.
+ */
+export function fitHeroCard(level: Level, usableHeight: number): HeroCardFit {
+  const full = heroCardSize[level];
+  const missing = Math.max(0, heroFitHeight[level] - usableHeight);
+  const size = Math.max(heroCardMinSize[level], full - Math.ceil(missing));
+  return { size, numberSize: Math.round((heroNumberSize[level] * size) / full) };
 }

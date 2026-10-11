@@ -15,14 +15,16 @@ interface HeroCardProps {
   level: Level;
   shirtNumber: number;
   loading?: boolean;
+  /** Overrides the level's full size, as fitted to the screen by `fitHeroCard`. */
+  fit?: { size: number; numberSize: number };
 }
 
 // Every level currently holds a shirt number; the square footprint this
 // reserves is deliberate — v1's photo drops in here without a redesign.
-export function HeroCard({ level, shirtNumber, loading }: HeroCardProps) {
+export function HeroCard({ level, shirtNumber, loading, fit }: HeroCardProps) {
   const colors = useThemeColors();
-  const size = heroCardSize[level];
-  const numberSize = heroNumberSize[level];
+  const size = fit?.size ?? heroCardSize[level];
+  const numberSize = fit?.numberSize ?? heroNumberSize[level];
   const styles = StyleSheet.create({
     card: {
       borderRadius: radii.xl,
