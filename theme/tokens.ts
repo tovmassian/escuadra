@@ -380,6 +380,16 @@ export const homeCascade = {
 // shrinks as difficulty rises, per the design's hero-card spec.
 export const heroCardSize = { 1: 220, 2: 130, 3: 108 } as const;
 export const heroNumberSize = { 1: 104, 2: 64, 3: 52 } as const;
+// The usable height (screen minus safe-area insets) each level's question
+// screen needs to show the full-size hero and every option of its tallest part
+// without scrolling. Measured on the web build at a 375pt width, plus 8pt for
+// native font metrics: re-measure if the header, progress block, stat chips,
+// option cards or footer change height. Below it the hero gives up the
+// difference (`fitHeroCard` in lib/roundView.ts), down to `heroCardMinSize`.
+export const heroFitHeight = { 1: 736, 2: 608, 3: 696 } as const;
+// The floor for that shrink. Level 2 and 3 sit beside the part rail, so going
+// below the rail's height would free nothing.
+export const heroCardMinSize = { 1: 120, 2: 124, 3: 68 } as const;
 
 // Difficulty-ladder badge diameters. Size follows the rung's state, not its
 // level: the focused rung, expanded into a Play card, carries the large badge;
