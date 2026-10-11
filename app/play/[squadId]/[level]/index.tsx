@@ -11,7 +11,7 @@ import { StatChip } from '@/components/StatChip';
 import { TeamMarker } from '@/components/TeamMarker';
 import { flagFor } from '@/lib/flags';
 import type { Level, QuestionPart } from '@/lib/questionEngine';
-import { partRailRows, progressOutcomes } from '@/lib/roundView';
+import { fitHeroCard, partRailRows, progressOutcomes } from '@/lib/roundView';
 import { getRoster, getSquad } from '@/lib/squads';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
@@ -21,7 +21,7 @@ import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 
 // `QuestionPartView`'s layout. Carries no colour, so it stays at module scope
 // rather than being rebuilt per render from a palette it never reads.
@@ -33,6 +33,10 @@ const partStyles = StyleSheet.create({
 
 export default function Question() {
   const insets = useSafeAreaInsets();
+  // The provider's frame, not `useWindowDimensions`: on edge-to-edge Android
+  // the window height's treatment of the system bars varies by OS version,
+  // while the frame is the space this screen actually lays out in.
+  const frame = useSafeAreaFrame();
   const colors = useThemeColors();
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
@@ -84,6 +88,7 @@ export default function Question() {
     seed?: string;
   }>();
   const level = Number(levelParam) as Level;
+  const heroFit = fitHeroCard(level, frame.height - insets.top - insets.bottom);
   // Optional `?seed=` makes a round reproducible — used by the design-loop
   // screenshot capture, and handy for reproducing a specific round by hand.
   const seed = seedParam === undefined ? undefined : Number(seedParam);
@@ -205,7 +210,7 @@ export default function Question() {
         exiting={FadeOut.duration(durations.transition)}
         style={[styles.heroBlock, level > 1 && styles.heroBlockSplit]}
       >
-        <HeroCard level={level} shirtNumber={question.memberNo} />
+        <HeroCard level={level} shirtNumber={question.memberNo} fit={heroFit} />
         {level > 1 ? (
           <View style={styles.railColumn}>
             <PartRail rows={partRailRows(question, result, session.currentPartIndex)} />
@@ -234,7 +239,7 @@ export default function Question() {
         ))}
       </ScrollView>
 
-      <View style={styles.footer}>
+      <View style={[styles.footer, { paddingBottom: insets.bottom + spacing.md }]}>
         <Button
           label={questionComplete ? 'Continue' : 'Select an answer'}
           variant={questionComplete ? 'filled' : 'inert'}
