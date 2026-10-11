@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { partRailRows, progressOutcomes } from './roundView';
+import { fitHeroCard, partRailRows, progressOutcomes } from './roundView';
+import { heroCardMinSize, heroCardSize, heroFitHeight, heroNumberSize } from '@/theme/tokens';
 import type { Question, QuestionPart } from '@/lib/questionEngine';
 import type { AnsweredPart, QuestionResult } from '@/stores/session';
 
@@ -123,5 +124,35 @@ describe('partRailRows', () => {
     const single = question([namePart()]);
     const rows = partRailRows(single, { question: single, parts: [null], correct: null }, 0);
     expect(rows).toHaveLength(1);
+  });
+});
+
+describe('fitHeroCard', () => {
+  it('keeps the full-size hero when the screen has room', () => {
+    for (const level of [1, 2, 3] as const) {
+      expect(fitHeroCard(level, heroFitHeight[level])).toEqual({
+        size: heroCardSize[level],
+        numberSize: heroNumberSize[level],
+      });
+      expect(fitHeroCard(level, 2000).size).toBe(heroCardSize[level]);
+    }
+  });
+
+  it('gives up exactly the missing height on a short screen', () => {
+    // iPhone SE (2nd/3rd gen): 667pt tall, a 20pt status bar, no home indicator.
+    const usable = 667 - 20;
+    const missing = heroFitHeight[1] - usable;
+    expect(fitHeroCard(1, usable).size).toBe(heroCardSize[1] - missing);
+  });
+
+  it('never shrinks below the level minimum', () => {
+    for (const level of [1, 2, 3] as const) {
+      expect(fitHeroCard(level, 300).size).toBe(heroCardMinSize[level]);
+    }
+  });
+
+  it('scales the shirt number with the card', () => {
+    const { size, numberSize } = fitHeroCard(1, 300);
+    expect(numberSize).toBe(Math.round((heroNumberSize[1] * size) / heroCardSize[1]));
   });
 });
