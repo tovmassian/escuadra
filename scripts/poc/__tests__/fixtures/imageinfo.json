@@ -1,0 +1,100 @@
+{
+  "batchcomplete": true,
+  "query": {
+    "normalized": [
+      { "fromencoded": false, "from": "File:Fixture_Pedri.jpg", "to": "File:Fixture Pedri.jpg" }
+    ],
+    "pages": [
+      {
+        "ns": 6,
+        "title": "File:Fixture Pedri.jpg",
+        "imageinfo": [
+          {
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Fixture_Pedri.jpg/512px-Fixture_Pedri.jpg",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Fixture_Pedri.jpg",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Example\" title=\"User:Example\">Example   Photographer</a>"
+              },
+              "LicenseShortName": { "value": "CC BY-SA 4.0" },
+              "LicenseUrl": { "value": "https://creativecommons.org/licenses/by-sa/4.0" },
+              "AttributionRequired": { "value": "true" }
+            }
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Fixture Rodri.jpg",
+        "imageinfo": [
+          {
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/c/cd/Fixture_Rodri.jpg/512px-Fixture_Rodri.jpg",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Fixture_Rodri.jpg",
+            "extmetadata": {
+              "LicenseShortName": { "value": "CC BY 2.0" },
+              "LicenseUrl": { "value": "https://creativecommons.org/licenses/by/2.0" }
+            }
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Fixture Ferran.jpg",
+        "imageinfo": [
+          {
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/e/ef/Fixture_Ferran.jpg/512px-Fixture_Ferran.jpg",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Fixture_Ferran.jpg",
+            "extmetadata": {
+              "Artist": { "value": "Someone" },
+              "LicenseShortName": { "value": "CC BY-NC 2.0" },
+              "LicenseUrl": { "value": "https://creativecommons.org/licenses/by-nc/2.0" }
+            }
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Fixture Old.jpg",
+        "imageinfo": [
+          {
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/1/12/Fixture_Old.jpg/512px-Fixture_Old.jpg",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Fixture_Old.jpg",
+            "extmetadata": {
+              "Artist": { "value": "Unknown &amp; anonymous" },
+              "LicenseShortName": { "value": "Public domain" }
+            }
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Fixture Elsewhere.jpg",
+        "imageinfo": [
+          {
+            "thumburl": "http://example.org/Fixture_Elsewhere.jpg",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Fixture_Elsewhere.jpg",
+            "extmetadata": {
+              "Artist": { "value": "Someone" },
+              "LicenseShortName": { "value": "CC BY 4.0" },
+              "LicenseUrl": { "value": "https://creativecommons.org/licenses/by/4.0" }
+            }
+          }
+        ]
+      },
+      {
+        "ns": 6,
+        "title": "File:Fixture NoDeed.jpg",
+        "imageinfo": [
+          {
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/thumb/9/98/Fixture_NoDeed.jpg/512px-Fixture_NoDeed.jpg",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Fixture_NoDeed.jpg",
+            "extmetadata": {
+              "Artist": { "value": "Someone" },
+              "LicenseShortName": { "value": "CC BY-SA 3.0" }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

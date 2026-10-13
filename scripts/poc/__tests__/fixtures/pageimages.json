@@ -1,0 +1,25 @@
+{
+  "batchcomplete": true,
+  "query": {
+    "normalized": [
+      {
+        "fromencoded": false,
+        "from": "Rodri_(footballer,_born_1996)",
+        "to": "Rodri (footballer, born 1996)"
+      }
+    ],
+    "redirects": [{ "from": "Ferran Torres García", "to": "Ferran Torres" }],
+    "pages": [
+      { "pageid": 1, "ns": 0, "title": "Pedri", "pageimage": "Fixture_Pedri.jpg" },
+      {
+        "pageid": 2,
+        "ns": 0,
+        "title": "Rodri (footballer, born 1996)",
+        "pageimage": "Fixture_Rodri.jpg"
+      },
+      { "pageid": 3, "ns": 0, "title": "Ferran Torres", "pageimage": "Fixture_Ferran.jpg" },
+      { "pageid": 4, "ns": 0, "title": "Víctor Muñoz (footballer, born 2003)" },
+      { "ns": 0, "title": "Nobody Real", "missing": true }
+    ]
+  }
+}
