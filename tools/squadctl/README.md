@@ -50,10 +50,10 @@ never got applied.
 
 ### Commands own — you cause the write, you do not type it
 
-| file                  | written by                           |
-| --------------------- | ------------------------------------ |
-| `data/decisions.json` | `alias`, `split`                     |
-| `data/players.json`   | `apply`, `rename`, `retitle`, `fork` |
+| file                  | written by                                              |
+| --------------------- | ------------------------------------------------------- |
+| `data/decisions.json` | `alias`, `split`, `exclude`, `birth --keep`             |
+| `data/players.json`   | `apply`, `rename`, `retitle`, `fork`, `birth`, `enrich` |
 
 ### Generated — never touch, never hand-review
 
@@ -81,6 +81,10 @@ data/teams.json
       |    lib/squads.generated.ts
       |
       +--> data/players.json  (rename also writes this directly)
+                 |
+                 | enrich  <---  Wikipedia, Wikidata, Commons (.cache/wikimedia/)
+                 v
+           data/players.json  (photo, and birth where unknown)
 ```
 
 Nothing upstream reads anything downstream of it. Hand-editing a squad file
@@ -334,6 +338,67 @@ Never fix a dual membership by editing the squad file. Those are generated,
 and `919f1f9` proved it — a player hand-removed from Arsenal was back on the
 next `apply`.
 
+### `enrich`
+
+```bash
+npm run squadctl -- enrich [--dry-run]
+npm run squadctl -- enrich --only esp,rma   # just these teams' members
+npm run squadctl -- enrich --offline        # re-run from cache, zero requests
+```
+
+Writes each player's photo credit (`photo`, a `PhotoCredit` in
+`types/squad.ts`) and fills a birth date where none is stored. Runs after
+`apply`, which ends by printing it when it added players. Touches the network
+unless `--offline`; writes only `data/players.json`. Design and results:
+`docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.
+
+Per-player data comes in batches of 50, never one request per player — the
+same rule `fetch` keeps. Three stages, about 190 requests and under four
+minutes for the whole base at a 500 ms courtesy delay:
+
+| stage     | asks for                                                          |
+| --------- | ----------------------------------------------------------------- |
+| Wikipedia | each `wikiTitle`'s free lead image and Wikidata item              |
+| Wikidata  | each item's `instance of`, date of birth and image (P31/P569/P18) |
+| Commons   | each candidate image's 500 px thumbnail, licence, author, page    |
+
+**Photo.** The article's free lead image, else the Wikidata item's own. It is
+written only with an accepted licence (CC BY or CC BY-SA at any version, CC0,
+public domain), a thumbnail on `upload.` or `thumb.wikimedia.org` and the
+Commons page; author and deed are kept when Commons gives them. Everything
+else is refused and listed, including Commons' attribution-only
+"Attribution" licence until a person signs it off. No photo comes from a
+missing article, a disambiguation page, or an item that is not a person. The
+photo is the latest lookup's verdict and is rewritten every run; a batch that
+fails keeps what is stored and exits `1`.
+
+**Birth.** Filled only where unknown, and only from one day-precise Gregorian
+Wikidata date (preferred-rank claims when there are any). A stored date
+Wikidata disagrees with is never overwritten: it is a `birth-mismatch`
+conflict, below, and the photo is held with it.
+
+**Cache.** Every response is cached in `.cache/wikimedia/` before parsing, so
+a rule change re-runs with `--offline` at zero network cost. Wikidata's are
+trimmed to the three claims read first (~80 MB untrimmed for the base); a
+rule on another property needs one online run.
+
+**Run it on a developer machine.** Wikimedia's APIs answered `429` to a cloud
+session's shared IP after fewer than ten requests. GitHub Actions runners are
+untested.
+
+### `birth`
+
+```bash
+npm run squadctl -- birth <playerId> <YYYY-MM-DD>
+npm run squadctl -- birth <playerId> --keep
+```
+
+The two command answers to a `birth-mismatch`. A date sets the stored birth
+date (refusing one that does not exist, like 1998-02-29); `--keep` records in
+`data/decisions.json` (`keptBirths`) that the stored date stands against
+Wikidata's. The record carries the date it confirms, so it lapses by itself
+if the stored date changes.
+
 ## Loans
 
 Handled by the parser, with no decision needed. A club's own article states
@@ -377,6 +442,8 @@ output format themselves.
 ```bash
 npm run squadctl -- registry init          # once, to bootstrap — see below
 npm run squadctl -- fetch                  # network -> .cache/envelopes/<runId>/
+npm run squadctl -- apply <runDir>         # envelopes -> squad files, players.json
+npm run squadctl -- enrich                 # network -> photos and birth dates
 ```
 
 `fetch` ends by printing the exact `apply` command for the run it just wrote,
@@ -392,7 +459,9 @@ Read the conflicts, fix them (below), then re-run without `--dry-run` to write.
 
 `fetch` never touches the repo. `apply --dry-run` never touches the repo.
 Only a bare `apply` writes, and it regenerates `data/index.json` and
-`lib/squads.generated.ts` itself at the end.
+`lib/squads.generated.ts` itself at the end. When it added players it ends
+with the `enrich` command for their teams: a new record has no photo, and a
+club-squad row carries no birth date.
 
 ## Adding a new team
 
@@ -460,12 +529,13 @@ one nation squad, and the two articles disagree — Atlético calls Simeone MF,
 Argentina calls him FW. Each kind owns the fields it is definitionally right
 about and only fills blanks in the others:
 
-| field         | owned by     | because                              |
-| ------------- | ------------ | ------------------------------------ |
-| `club`        | club squad   | they play there                      |
-| `position`    | club squad   | its article tracks them week to week |
-| `nationality` | nation squad | they play for that country           |
-| `birth`       | neither      | never overwritten once known         |
+| field         | owned by     | because                                                       |
+| ------------- | ------------ | ------------------------------------------------------------- |
+| `club`        | club squad   | they play there                                               |
+| `position`    | club squad   | its article tracks them week to week                          |
+| `nationality` | nation squad | they play for that country                                    |
+| `birth`       | neither      | never overwritten once known; `enrich` fills it from Wikidata |
+| `photo`       | `enrich`     | rewritten from Commons every run                              |
 
 Without this, whichever squad applied last won and the next sweep flipped it
 back, so `players.json` could never produce an empty diff.
@@ -684,6 +754,40 @@ squad, so new teams never trip it.
 **What you touch:** nothing directly — read the diff, and if the parse is
 right, a plain `apply` clears it.
 
+### `birth-mismatch` (from `enrich`)
+
+```
+conflict: birth date on torres ("Ferran Torres") — stored 1998-02-29, Wikidata 2000-02-29 ("Ferran Torres")
+    fix:      Wikidata is right:      npm run squadctl -- birth torres 2000-02-29
+              wrong person:           npm run squadctl -- retitle torres "<their article title>"
+              stored date is right:   npm run squadctl -- birth torres --keep
+```
+
+The stored birth date and Wikidata disagree. Either can be wrong, or the
+title names a different person — a different birth date is how that shows
+up — so `enrich` writes neither date and **holds the photo** until you answer.
+Exit code `4`.
+
+**You decide which source is right.** Read the article's infobox: this
+project's source is Wikipedia, so it breaks the tie.
+
+- **Infobox agrees with Wikidata**, and the article's club with ours: the
+  stored date is wrong. `birth <id> <date>`. Most of the first run's 68 were
+  this — dates the retired LLM pipeline invented.
+- **Infobox agrees with the stored date**: Wikidata is the odd one out (a
+  placeholder 1 January, a typo'd year). `birth <id> --keep`.
+- **The article is someone else** — another nationality, club or decade:
+  `retitle`, and `alias --title` the old link so `apply` keeps matching.
+- **No majority**: leave it. The photo stays held, and nothing is guessed.
+
+**What you touch:** `birth` writes `data/players.json`, `birth --keep`
+writes `data/decisions.json`, `retitle` writes `data/players.json`. Re-run
+`enrich --offline` afterwards; it needs no requests.
+
+`enrich` also warns, without exiting non-zero, about a title that leads to a
+**disambiguation page**: find the person's own article, `retitle` to it, and
+`alias --title` the link the source uses.
+
 ### `call-ups-only`
 
 The article had no contract roster, only `Recent call-ups`. Nothing to fix —
@@ -721,6 +825,11 @@ says which two.
 | 5    | repo write, registry, or generator error                  |
 
 Code `4` means _review needed_, not _broken_.
+
+`enrich` uses the same table: `1` when a batch failed after its retries (its
+players keep what they had), `4` when a `birth-mismatch` is waiting, `5` for a
+repo error. Its `4` writes everything else and never touches `verified`, which
+is a squad file's assertion, not a player's.
 
 **Stable under `--json` too, but only because the base command makes it so.**
 oclif's own wrapper (`@oclif/core@5.0.0` `lib/command.js:202`) falls back to

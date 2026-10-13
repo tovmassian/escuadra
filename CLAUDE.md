@@ -93,11 +93,18 @@ worked around — stop and ask. **Product and engineering** guardrails are the
 defaults; an issue that explicitly changes one wins, and the change should
 update this file in the same PR rather than leave a stale rule behind.
 
-1. **Player photos slot into the existing hero.** The question screen keeps a
-   hero slot that a square portrait can drop into without a redesign (it
-   currently holds a large shirt number), and players carry
-   `photo: string | null`. Any photo that ships is bound by the
-   asset-licensing rule below.
+1. **Player photos are hotlinked Wikimedia Commons thumbnails, always
+   credited.** A photo fills the question hero and the shirt number moves to
+   a corner tab; with no photo, or until it loads, the number card shows.
+   `player.photo` is a `PhotoCredit` written only by `squadctl enrich`, which
+   refuses any photo without an accepted licence, a Wikimedia thumbnail and
+   its Commons page — the asset-licensing rule below, enforced in code and in
+   `lib/dataIntegrity.test.ts`. Every shown photo shows its credit; never put
+   the Commons file name or caption in visible text or a label, as they name
+   the player. Photos stay gated to development builds
+   (`EXPO_PUBLIC_PHOTOS=1`) until a store build ships them with the privacy
+   disclosures (guardrail 4) and a signed-off credit placement:
+   `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.
 2. **No club crests, badges, logos, or shield shapes. Ever.** Trademark
    exposure, and this constraint outlives v0. Clubs are identified by text and
    a banded colour marker (see `TeamMarker` in the data model section) — never
@@ -169,7 +176,7 @@ different numbers for club and country. Do not denormalise it onto the player.
 
 ```
 data/index.json                       squad manifest — GENERATED, see below
-data/players.json                     { id, name, fullName, birth, position, nationality, club, photo: null, wikiTitle }
+data/players.json                     { id, name, fullName, birth, position, nationality, club, photo, wikiTitle }
 data/squads/nation/<id>.json          { id, kind: 'nation', name, season, verified,
                                          primaryColor, secondaryColor, marker,
                                          members: [{ playerId, no, captain? }] }
@@ -177,6 +184,10 @@ data/squads/club/<league>/<id>.json   same shape, kind: 'club'. <league> is one 
                                        la-liga, serie-a, bundesliga, ligue-1,
                                        premier-league, ucl (see League in types/squad.ts)
 ```
+
+`photo` is a `PhotoCredit` (`types/squad.ts`) or null: the Commons file, its
+500 px thumbnail URL, author, licence, deed and Commons page. Hotlinked, never
+copied.
 
 `wikiTitle` is the Wikipedia article title the record came from — the only
 field that is unique per person, since two different real people are both
@@ -257,6 +268,11 @@ those with `squadctl rename <playerId> "<name>"`, which never rewrites an id,
 then re-run `apply`. `tools/squadctl/README.md` documents every conflict kind,
 what you decide, and the command that hands the answer back; the design is in
 `docs/superpowers/specs/2026-09-06-squadctl-design.md`.
+
+`squadctl enrich` runs after `apply` and writes each player's `photo` and,
+where none is stored, `birth` from Wikidata, in batches of 50. A stored birth
+date Wikidata disagrees with is a conflict it never overwrites, and holds that
+player's photo until `squadctl birth` answers it.
 
 The `squad-factory` skill set (`squad-fetcher`, `squad-writer`,
 `squad-verifier`) is retired — `squadctl` proved faster and more reliable, and

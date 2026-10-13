@@ -1,11 +1,13 @@
 # Wikimedia player photos — proof of concept
 
-**Status:** concluded 2026-10-13. This file is the front door for player
-photos: the POC's design (§1–§7), what it measured (§9), and how to build the
-real feature (§8). Mockups:
+**Status:** POC concluded 2026-10-13; the production data pipeline and the
+data were built 2026-10-14 (§10). This file is the front door for player
+photos: the POC's design (§1–§7), what it measured (§9), the production plan
+(§8) and what was built from it (§10). Mockups:
 <https://claude.ai/artifact/3EQSqA9vHiWVEbzrGTdWAN> (private; the last version
-shows the credit options, earlier versions the hero studies). Code: branch
-`claude/festive-dijkstra-j9urcu`.
+shows the credit options, earlier versions the hero studies). Code: the POC on
+branch `claude/festive-dijkstra-j9urcu`, the production pipeline on
+`claude/player-photos`.
 
 ## Outcome
 
@@ -387,3 +389,97 @@ committed; 117 requests):
 Played on device across all three levels: the photo with the corner tab
 works and transforms the experience. The credit after answering felt like an
 unnecessary reveal, so it moves (§8.4). No screenshots were committed.
+
+## 10. Production pipeline (built 2026-10-14)
+
+§8.1–§8.3 and the §8.7 fixes are built; the credit placement (§8.4) and the
+release (§8.5) are not. Photos reach no user yet: the app reads
+`player.photo`, behind a development-only gate renamed `EXPO_PUBLIC_PHOTOS=1`.
+
+### 10.1 What was built
+
+- **`squadctl enrich`** (`tools/squadctl/src/commands/enrich.ts`), after
+  `apply`: Wikipedia → Wikidata → Commons in batches of 50, responses cached
+  in `.cache/wikimedia/` before parsing, `--offline`, `--dry-run`, `--only`.
+  Rules in `lib/photo-credit.ts` and `lib/enrich-plan.ts`, with recorded
+  Wikimedia responses as fixtures. Usage and the conflict procedure:
+  `tools/squadctl/README.md`.
+- **`squadctl birth <id> <date>` / `--keep`** answer a birth conflict;
+  `--keep` is recorded in `data/decisions.json` (`keptBirths`).
+- **Data model** as §8.1: `Player.photo: PhotoCredit | null` with `file`;
+  `types/photo.ts`, `data/poc/` and `scripts/poc/` are gone.
+- **`lib/dataIntegrity.test.ts`** asserts every stored photo's credit (the
+  licensing guardrail) and that every birth date is a real date.
+
+Departures from §8.2, each found in the data:
+
+- **Wikidata's image (P18) is the fallback** when the article has no free lead
+  image, or its image is refused: +45 photos at no extra request.
+- **No photo from an item that is not a person.** A club's item has an image
+  too — Real Madrid's is a building — so a title pointing at one would show it.
+- **No photo from a disambiguation page**, reported with the retitle fix.
+- **A birth conflict holds the photo**, not just the date: a different birth
+  date is how a title naming the wrong person shows up (`idrissa-gueye` was
+  stored with a namesake's 1989 date).
+- **A conflict can be kept** (`birth --keep`): when the stored date is right,
+  the alternative was editing Wikidata or being asked every run.
+- **Public domain is accepted exactly**, not as a prefix; ported CC variants
+  ("CC BY-SA 3.0 at") are accepted; `http://` deeds are upgraded to https.
+- "Attribution" is still refused: 12 players, awaiting the sign-off §8.2 asks
+  for.
+
+### 10.2 `wikiTitle` backfill (§8.3)
+
+Re-applying the cached wikitext the stored squads were built from (`fetch
+--offline`, Brazil held back as usual) filled 1,100 of the 1,227 missing
+titles: `apply` fills a title when unknown, and these records predated the
+field. Squad files did not change. Freiburg first needed `KVX` mapped to
+Kosovo (FIFA's code; most articles write `KOS`). The 127 left: 91 rows the
+source lists unlinked, 21 orphans, 15 Brazil members the current article no
+longer lists.
+
+### 10.3 Results — all 3,335 players
+
+| Photo status              | Players | Share |
+| ------------------------- | ------- | ----- |
+| Usable photo              | 2,184   | 65%   |
+| Article has no free image | 964     | 29%   |
+| No `wikiTitle`            | 127     | 4%    |
+| Title has no article      | 44      | 1%    |
+| Licence refused           | 14      | 0.4%  |
+| Held on a birth conflict  | 2       | 0.1%  |
+
+- **69.5% of question subjects** (2,618 of 3,767 numbered squad slots) have a
+  photo. 19 squads are complete — 18 nations, Spain, England, France and
+  Argentina among them, and Arsenal; Mallorca (3 of 28) and Italy (6 of 24)
+  are lowest.
+- Licence mix: CC BY-SA 4.0 1,176, CC0 433, CC BY 4.0 142, CC BY-SA 3.0 132,
+  CC BY 3.0 120, CC BY 2.0 71, CC BY-SA 2.0 52, public domain 47, CC BY-SA 3.0
+  at 9, CC BY 3.0 br 1, CC BY 2.5 1.
+- **Birth dates:** 1,543 filled; 3,186 players (95.5%) now have one.
+- **68 stored dates disagreed with Wikidata.** Settled against the article
+  infobox: 53 stored dates were wrong (Ferran Torres was stored as born
+  1998-02-29, a date that does not exist), 13 were right and Wikidata was not
+  (kept), 2 have no majority and stay open: `andres-cubas`, `longoni`.
+- Four disambiguation titles were retitled after matching nationality, birth
+  and club on Wikidata.
+- 185 requests, 3 min 40 s; a second, offline run changes nothing.
+- Size: `data/players.json` 0.85 → 1.93 MB on disk; 0.94 MB minified, 431 bytes
+  per photo — more than §8.1 estimated, because coverage is higher.
+
+Found on the way: Espanyol's stored squad carried eight entries its article
+has since removed, linked to articles that do not exist; a fresh `rcd` apply
+dropped them. Some players exist twice (`alisson` in Brazil, `alisson-becker`
+at Liverpool); squadctl never merges records, so that is left to a person.
+
+### 10.4 Still open
+
+1. **Credit placement** (§8.4) — the redesign session; today's screens are the
+   POC's.
+2. **Release** (§8.5) — privacy policy, About text, App Privacy, Data safety,
+   in a store build, then the gate comes off.
+3. **"Attribution" licence** — 12 photos, a person's decision.
+4. **Two birth conflicts** — `andres-cubas`, `longoni`.
+5. **Bundle size** — 0.94 MB of credits ships in every OTA update. Dropping
+   `sourceUrl` (derivable from `file`) saves ~80 bytes a photo; a decision,
+   not a fix.
