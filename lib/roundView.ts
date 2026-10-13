@@ -107,7 +107,7 @@ export interface HeroTabMetrics {
   padEnd: number;
 }
 
-/** The photo hero's number tab for a hero of side `size` (Photo POC). */
+/** The photo hero's number tab for a hero of side `size`. */
 export function heroTabMetrics(size: number): HeroTabMetrics {
   const thickness = Math.max(heroTab.minThickness, Math.round(size * heroTab.thicknessRatio));
   return {

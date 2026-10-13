@@ -22,18 +22,27 @@ interface HeroCardProps {
   loading?: boolean;
   /** Overrides the level's full size, as fitted to the screen by `fitHeroCard`. */
   fit?: { size: number; numberSize: number };
-  /** Photo POC: a Wikimedia Commons thumbnail to fill the card. The number
-   *  card shows until it loads, and stays if it fails. */
+  /** A Wikimedia Commons thumbnail to fill the card. The number card shows
+   *  until it loads, and stays if it fails. */
   photoUrl?: string | null;
 }
 
-// Every level holds a shirt number; with a photo (Photo POC) the photo fills
+// Every level holds a shirt number; with a photo the photo fills
 // the same square footprint and the number moves into a bottom-left tab.
 export function HeroCard({ level, shirtNumber, loading, fit, photoUrl }: HeroCardProps) {
   const colors = useThemeColors();
   // Track which URL has loaded, not a boolean, so a reused card cannot carry
   // "shown" over to the next question's photo.
   const [loadedUrl, setLoadedUrl] = useState<string | null>(null);
+  // The loading card unmounts the Image, so coming back from it with the same
+  // URL must wait for a fresh onLoad — otherwise the tab shows for a frame
+  // over a photo that is not drawn yet. Adjusted during render, React's
+  // pattern for state that follows a prop.
+  const [wasLoading, setWasLoading] = useState(loading === true);
+  if ((loading === true) !== wasLoading) {
+    setWasLoading(loading === true);
+    if (loading === true) setLoadedUrl(null);
+  }
   const photoShown = photoUrl != null && loadedUrl === photoUrl;
   const size = fit?.size ?? heroCardSize[level];
   const numberSize = fit?.numberSize ?? heroNumberSize[level];

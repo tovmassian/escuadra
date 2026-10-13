@@ -466,7 +466,7 @@ export const sizes = {
     sunRay: 3,
     sunRayOffset: 6,
   },
-  // Photo POC: the results screen's expanded photo-credit list scrolls past this.
+  // The results screen's expanded photo-credit list scrolls past this.
   photoCreditsMaxHeight: 200,
 } as const;
 
@@ -503,7 +503,7 @@ export const radii = {
   pill: 999,
 } as const;
 
-// Photo POC hero (docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md):
+// Photo hero (docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md):
 // with a photo, the shirt number moves into a tab cut into the card's
 // bottom-left corner. Ratios are of the hero's side (thickness) or of the
 // tab's thickness (number, padding); the floors keep the tab legible at

@@ -1,23 +1,23 @@
-// Photo POC: dev-only Wikimedia photos in the question hero. Pure — the gate
-// takes its inputs rather than reading `__DEV__`, which does not exist in
-// Vitest's Node environment; lib/photoPocRuntime.ts supplies them, as
-// lib/telemetry.ts does for lib/telemetryEvents.ts. Spec:
+// Player photos: Wikimedia Commons thumbnails, hotlinked, credited from
+// `player.photo` (written by `squadctl enrich`). Pure — the gate takes its
+// inputs rather than reading `__DEV__`, which does not exist in Vitest's Node
+// environment; lib/photosRuntime.ts supplies them, as lib/telemetry.ts does
+// for lib/telemetryEvents.ts. Spec:
 // docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md.
-import photosData from '@/data/poc/photos.esp.json';
 import type { QuestionResult } from '@/stores/session';
-import type { PhotoCredit, PhotoFile } from '@/types/photo';
+import type { PhotoCredit, Player } from '@/types/squad';
 
-const photos = photosData as PhotoFile;
-
-/** On only in a development build started with EXPO_PUBLIC_PHOTO_POC=1, so a
- *  production binary or OTA update can never show a photo. */
-export function photoPocGate(env: { isDev: boolean; flag: string | undefined }): boolean {
+/** On only in a development build started with EXPO_PUBLIC_PHOTOS=1, so a
+ *  production binary or OTA update never loads a photo. Each photo load
+ *  sends the user's IP to Wikimedia: turning this on for users ships with
+ *  the privacy disclosures, in a store build (spec §8.5, guardrail 4). */
+export function photosGate(env: { isDev: boolean; flag: string | undefined }): boolean {
   return env.isDev && env.flag === '1';
 }
 
-export function getPhoto(playerId: string, enabled: boolean): PhotoCredit | null {
+export function photoFor(player: Player | undefined, enabled: boolean): PhotoCredit | null {
   if (!enabled) return null;
-  return photos[playerId] ?? null;
+  return player?.photo ?? null;
 }
 
 export interface PhotoCreditRow {

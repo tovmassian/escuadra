@@ -2,12 +2,12 @@ import { Button } from '@/components/Button';
 import { EscuadraStrike } from '@/components/EscuadraStrike';
 import { PhotoCredits } from '@/components/PhotoCredits';
 import type { Level } from '@/lib/questionEngine';
-import { getPhoto, photoCreditRows } from '@/lib/photoPoc';
-import { PHOTO_POC_ENABLED } from '@/lib/photoPocRuntime';
+import { photoCreditRows, photoFor } from '@/lib/photos';
+import { PHOTOS_ENABLED } from '@/lib/photosRuntime';
 import { actionOrder, resultTier, type ActionId } from '@/lib/resultsView';
 import { PASS_RATIO } from '@/lib/scoring';
 import { formatShareText } from '@/lib/shareResult';
-import { getRoster, getSquad } from '@/lib/squads';
+import { getPlayer, getRoster, getSquad } from '@/lib/squads';
 import { track } from '@/lib/telemetry';
 import {
   firstWrongPart,
@@ -201,7 +201,9 @@ export default function Results() {
   const passed = tier !== 'fail';
   const hasNextLevel = level < MAX_LEVEL;
   const actions = actionOrder({ passed, hasNextLevel, missedCount: missed.length });
-  const photoCredits = photoCreditRows(session.results, (id) => getPhoto(id, PHOTO_POC_ENABLED));
+  const photoCredits = photoCreditRows(session.results, (id) =>
+    photoFor(getPlayer(id), PHOTOS_ENABLED),
+  );
 
   const retry = (atLevel: Level) => {
     const roster = getRoster(squadId);

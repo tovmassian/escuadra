@@ -11,12 +11,12 @@ import { ScorePill } from '@/components/ScorePill';
 import { StatChip } from '@/components/StatChip';
 import { TeamMarker } from '@/components/TeamMarker';
 import { flagFor } from '@/lib/flags';
-import { getPhoto } from '@/lib/photoPoc';
-import { PHOTO_POC_ENABLED } from '@/lib/photoPocRuntime';
+import { photoFor } from '@/lib/photos';
+import { PHOTOS_ENABLED } from '@/lib/photosRuntime';
 import type { Level, QuestionPart } from '@/lib/questionEngine';
 import { fitHeroCard, partRailRows, progressOutcomes } from '@/lib/roundView';
 import { isFlawless } from '@/lib/resultsView';
-import { getRoster, getSquad } from '@/lib/squads';
+import { getPlayer, getRoster, getSquad } from '@/lib/squads';
 import { track } from '@/lib/telemetry';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
@@ -138,12 +138,13 @@ export default function Question() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session.phase]);
 
-  // Photo POC: warm the cache for the next question's photo while this one is
-  // played, so it is normally already loaded when the question appears.
+  // Warm the cache for the next question's photo while this one is played,
+  // so it is normally already loaded when the question appears. A failed
+  // prefetch only means the number card shows a moment longer.
   useEffect(() => {
     const next = session.questions[session.currentIndex + 1];
-    const nextPhoto = next ? getPhoto(next.playerId, PHOTO_POC_ENABLED) : null;
-    if (nextPhoto) void Image.prefetch(nextPhoto.url);
+    const nextPhoto = next ? photoFor(getPlayer(next.playerId), PHOTOS_ENABLED) : null;
+    if (nextPhoto) Image.prefetch(nextPhoto.url).catch(() => {});
   }, [session.currentIndex, session.questions]);
 
   if (
@@ -160,7 +161,7 @@ export default function Question() {
 
   const score = selectScore(session.results);
   const questionComplete = result.correct !== null;
-  const photo = getPhoto(question.playerId, PHOTO_POC_ENABLED);
+  const photo = photoFor(getPlayer(question.playerId), PHOTOS_ENABLED);
 
   const affiliationLabel = squad.kind === 'club' ? 'NAT' : 'CLUB';
   // AGE drops out of the row entirely when the player has no stored birth

@@ -1,11 +1,11 @@
-import type { PhotoCreditRow } from '@/lib/photoPoc';
+import type { PhotoCreditRow } from '@/lib/photos';
 import { sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import { openBrowserAsync } from 'expo-web-browser';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
-// Photo POC: every photo the round showed, with its credit. Collapsed by
+// Every photo the round showed, with its credit. Collapsed by
 // default so it never competes with the results' own actions. Player names are
 // already revealed on this screen, so naming them here gives nothing away.
 export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
@@ -23,7 +23,7 @@ export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
     link: { color: colors.textSecondary, textDecorationLine: 'underline' },
   });
   const openUrl = (url: string) => () => {
-    void openBrowserAsync(url);
+    openBrowserAsync(url).catch(() => {});
   };
 
   return (
