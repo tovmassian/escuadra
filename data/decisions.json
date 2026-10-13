@@ -10,7 +10,16 @@
       "name": "Alejandro Grimaldo"
     }
   ],
-  "titleAliases": [],
+  "titleAliases": [
+    {
+      "player": "giovanni-lo-celso",
+      "title": "Giovanni Lo Celso"
+    },
+    {
+      "player": "grimaldo",
+      "title": "Alejandro Grimaldo"
+    }
+  ],
   "notInSquad": [
     {
       "team": "ver",
