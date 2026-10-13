@@ -13,6 +13,11 @@ describe('stripHtml', () => {
     expect(stripHtml('A &amp; B &quot;C&quot; &#39;D&#39;&nbsp;E')).toBe('A & B "C" \'D\' E');
   });
 
+  // One malformed author must not fail its whole Commons batch.
+  it('leaves an out-of-range numeric entity as written', () => {
+    expect(stripHtml('A &#99999999; B &#x110000; C')).toBe('A &#99999999; B &#x110000; C');
+  });
+
   it('decodes every numeric entity, decimal or hex', () => {
     expect(stripHtml('O&#039;Brien &#x00C9;lodie &#233;t&#xE9;')).toBe("O'Brien Élodie été");
   });

@@ -24,11 +24,11 @@ const NAMED_ENTITIES: Record<string, string> = {
 };
 
 function decodeEntity(entity: string): string {
-  if (entity.startsWith('#x') || entity.startsWith('#X')) {
-    return String.fromCodePoint(Number.parseInt(entity.slice(2), 16));
-  }
-  if (entity.startsWith('#')) return String.fromCodePoint(Number.parseInt(entity.slice(1), 10));
-  return NAMED_ENTITIES[entity] ?? `&${entity};`;
+  const hex = entity.startsWith('#x') || entity.startsWith('#X');
+  if (!entity.startsWith('#')) return NAMED_ENTITIES[entity] ?? `&${entity};`;
+  const codePoint = Number.parseInt(entity.slice(hex ? 2 : 1), hex ? 16 : 10);
+  // Past Unicode's range there is no character: keep the text as written.
+  return codePoint <= 0x10ffff ? String.fromCodePoint(codePoint) : `&${entity};`;
 }
 
 /** Commons' `Artist` field is HTML — usually a link to the uploader's user
