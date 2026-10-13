@@ -51,7 +51,7 @@ export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
                 accessibilityRole="link"
                 onPress={openUrl(r.credit.sourceUrl)}
               >
-                {r.credit.author}
+                {r.credit.author ?? 'Wikimedia Commons'}
               </Text>
               {' · '}
               <Text

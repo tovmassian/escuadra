@@ -165,7 +165,7 @@ async function main(): Promise<void> {
 
   const photos: PhotoFile = {};
   const report = rows.map((row): ReportRow => {
-    const none = { ...row, file: null, licence: null };
+    const none = { ...row, file: null, licence: null, missing: [] };
     if (row.wikiTitle === null) return { ...none, status: 'no-article' };
     if (failedTitles.has(row.wikiTitle)) return { ...none, status: 'lookup-failed' };
     const lead = leadImages.get(row.wikiTitle) ?? null;
@@ -175,7 +175,16 @@ async function main(): Promise<void> {
     if (failedFiles.has(file) || outcome === undefined) {
       return { ...none, file, status: 'lookup-failed' };
     }
-    if (outcome.status !== 'ok') {
+    if (outcome.status === 'incomplete-licence') {
+      return {
+        ...none,
+        file,
+        licence: outcome.licence,
+        missing: outcome.missing,
+        status: outcome.status,
+      };
+    }
+    if (outcome.status === 'unexpected-licence') {
       return { ...none, file, licence: outcome.licence, status: outcome.status };
     }
     photos[row.playerId] = outcome.credit;

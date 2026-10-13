@@ -105,10 +105,19 @@ describe('creditsByFile', () => {
     });
   });
 
-  it('drops a photo with no author as incomplete', () => {
-    expect(credits.get('Fixture Rodri.jpg')).toEqual({
+  // Like Wikipedia, the credit can stand on the licence and a link to the
+  // Commons page, which always names the author.
+  it('accepts a photo with no author, crediting it to Commons', () => {
+    const outcome = credits.get('Fixture Rodri.jpg');
+    expect(outcome?.status).toBe('ok');
+    if (outcome?.status === 'ok') expect(outcome.credit.author).toBeNull();
+  });
+
+  it('names every missing field when Commons sends no image info at all', () => {
+    expect(credits.get('Fixture Bare.jpg')).toEqual({
       status: 'incomplete-licence',
-      licence: 'CC BY 2.0',
+      licence: null,
+      missing: ['licence', 'thumbnail', 'commons-page'],
     });
   });
 
@@ -129,11 +138,19 @@ describe('creditsByFile', () => {
   });
 
   it('drops a thumbnail hosted anywhere but upload.wikimedia.org', () => {
-    expect(credits.get('Fixture Elsewhere.jpg')?.status).toBe('incomplete-licence');
+    expect(credits.get('Fixture Elsewhere.jpg')).toEqual({
+      status: 'incomplete-licence',
+      licence: 'CC BY 4.0',
+      missing: ['thumbnail'],
+    });
   });
 
-  it('drops a CC licence that comes without its deed URL', () => {
-    expect(credits.get('Fixture NoDeed.jpg')?.status).toBe('incomplete-licence');
+  // Commons often omits LicenseUrl for CC files; the credit links to the
+  // Commons page instead, which carries the licence and its deed.
+  it('accepts a CC licence that comes without its deed URL', () => {
+    const outcome = credits.get('Fixture NoDeed.jpg');
+    expect(outcome?.status).toBe('ok');
+    if (outcome?.status === 'ok') expect(outcome.credit.licenceUrl).toBeNull();
   });
 });
 
@@ -146,6 +163,7 @@ describe('renderReport', () => {
     status,
     file: status === 'ok' || status === 'incomplete-licence' ? `File ${no}.jpg` : null,
     licence,
+    missing: status === 'incomplete-licence' ? ['thumbnail'] : [],
   });
   const report = renderReport('Spain', [
     row(1, 'ok', 'CC BY-SA 4.0'),
@@ -167,7 +185,10 @@ describe('renderReport', () => {
     expect(report).toContain('| CC BY-SA 4.0 | 1 |');
   });
 
-  it('lists each player', () => {
-    expect(report).toContain('| 3 | Player 3 | no-article | — | — |');
+  it('lists each player, with what an incomplete credit is missing', () => {
+    expect(report).toContain('| 3 | Player 3 | no-article | — | — | — |');
+    expect(report).toContain(
+      '| 4 | Player 4 | incomplete-licence | File 4.jpg | CC BY 2.0 | thumbnail |',
+    );
   });
 });

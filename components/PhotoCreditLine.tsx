@@ -21,7 +21,7 @@ export function PhotoCreditLine({ credit }: { credit: PhotoCredit }) {
     <Text style={styles.line}>
       Photo:{' '}
       <Text style={styles.link} accessibilityRole="link" onPress={open(credit.sourceUrl)}>
-        {credit.author}
+        {credit.author ?? 'Wikimedia Commons'}
       </Text>
       {' · '}
       <Text

@@ -68,14 +68,14 @@ describe('photoCreditRows', () => {
 });
 
 // The licensing guardrail as a test: nothing reaches the screen without a
-// nameable author and licence, hosted where the spec says.
+// nameable licence and a link to the Commons page that credits the author.
 describe('data/poc/photos.esp.json', () => {
   const memberIds = new Set(spain.members.map((m) => m.playerId));
 
   it('holds only Spain members, each with a complete credit', () => {
     for (const [id, entry] of Object.entries(photos)) {
       expect(memberIds.has(id), id).toBe(true);
-      expect(entry.author.trim(), id).not.toBe('');
+      if (entry.author !== null) expect(entry.author.trim(), id).not.toBe('');
       expect(entry.licence.trim(), id).not.toBe('');
       expect(entry.url.startsWith('https://upload.wikimedia.org/'), id).toBe(true);
       expect(entry.sourceUrl.startsWith('https://commons.wikimedia.org/wiki/File:'), id).toBe(true);

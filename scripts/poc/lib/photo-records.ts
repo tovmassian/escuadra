@@ -20,15 +20,20 @@ export interface PlayerRow {
   wikiTitle: string | null;
 }
 
+/** What an `incomplete-licence` credit lacks, so the report says why. */
+export type MissingField = 'licence' | 'thumbnail' | 'commons-page';
+
 export interface ReportRow extends PlayerRow {
   status: PhotoStatus;
   file: string | null;
   licence: string | null;
+  missing: readonly MissingField[];
 }
 
 export type CreditOutcome =
   | { status: 'ok'; credit: PhotoCredit }
-  | { status: 'incomplete-licence' | 'unexpected-licence'; licence: string | null };
+  | { status: 'unexpected-licence'; licence: string }
+  | { status: 'incomplete-licence'; licence: string | null; missing: MissingField[] };
 
 /** MediaWiki's per-request title limit for clients without the apihighlimits right. */
 export const BATCH_SIZE = 50;
@@ -68,7 +73,6 @@ export function fileKey(name: string): string {
 // de" included), CC0 and public domain. Anything else — non-commercial,
 // GFDL-only, fair use — is refused rather than guessed at.
 const ACCEPTED_LICENCE = /^(CC BY(-SA)? \d\.\d\b|CC0\b|Public domain\b)/i;
-const NEEDS_DEED_URL = /^CC BY/i;
 const THUMB_HOST = 'https://upload.wikimedia.org/';
 
 export function isAcceptedLicence(shortName: string): boolean {
@@ -126,8 +130,11 @@ function nonEmpty(value: string | undefined): string | null {
 }
 
 /** The credit of each Commons file in the response, keyed by `fileKey`. A
- *  file is `ok` only with an accepted licence, an author, a thumbnail on
- *  upload.wikimedia.org, a Commons page, and — for CC licences — the deed URL. */
+ *  file is `ok` only with an accepted licence, a thumbnail on
+ *  upload.wikimedia.org and a Commons page. Author and licence deed URL are
+ *  kept when Commons sends them but not required: the credit links to the
+ *  Commons page, which names both — the same click-through credit Wikipedia
+ *  itself relies on. */
 export function creditsByFile(response: unknown): Map<string, CreditOutcome> {
   const result = new Map<string, CreditOutcome>();
   for (const page of (response as ImageInfoResponse).query?.pages ?? []) {
@@ -139,19 +146,21 @@ export function creditsByFile(response: unknown): Map<string, CreditOutcome> {
     const url = info?.thumburl ?? '';
     const sourceUrl = info?.descriptionurl ?? '';
 
+    const missing: MissingField[] = [];
+    if (licence === null) missing.push('licence');
+    if (!url.startsWith(THUMB_HOST)) missing.push('thumbnail');
+    if (sourceUrl === '') missing.push('commons-page');
+
     let outcome: CreditOutcome;
     if (licence !== null && !isAcceptedLicence(licence)) {
       outcome = { status: 'unexpected-licence', licence };
-    } else if (
-      licence === null ||
-      author === '' ||
-      !url.startsWith(THUMB_HOST) ||
-      sourceUrl === '' ||
-      (NEEDS_DEED_URL.test(licence) && licenceUrl === null)
-    ) {
-      outcome = { status: 'incomplete-licence', licence };
+    } else if (licence === null || missing.length > 0) {
+      outcome = { status: 'incomplete-licence', licence, missing };
     } else {
-      outcome = { status: 'ok', credit: { url, author, licence, licenceUrl, sourceUrl } };
+      outcome = {
+        status: 'ok',
+        credit: { url, author: author === '' ? null : author, licence, licenceUrl, sourceUrl },
+      };
     }
     result.set(fileKey(page.title), outcome);
   }
@@ -208,10 +217,12 @@ export function renderReport(squadName: string, rows: readonly ReportRow[]): str
     '',
     '## Players',
     '',
-    '| No | Player | Status | File | Licence |',
-    '| --- | --- | --- | --- | --- |',
+    '| No | Player | Status | File | Licence | Missing |',
+    '| --- | --- | --- | --- | --- | --- |',
     ...rows.map(
-      (r) => `| ${r.no} | ${r.name} | ${r.status} | ${r.file ?? '—'} | ${r.licence ?? '—'} |`,
+      (r) =>
+        `| ${r.no} | ${r.name} | ${r.status} | ${r.file ?? '—'} | ${r.licence ?? '—'} | ` +
+        `${r.missing.length > 0 ? r.missing.join(', ') : '—'} |`,
     ),
     '',
   ].join('\n');

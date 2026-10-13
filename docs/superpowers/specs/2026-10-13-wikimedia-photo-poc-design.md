@@ -24,16 +24,16 @@ three levels. Development builds only.
 
 ## 2. Decisions and rationale
 
-| Decision         | Choice                                                                                                                                                                    | Why                                                                                                                                                                 |
-| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Hosting          | Hotlink Wikimedia's 512 px thumbnail from `upload.wikimedia.org` via `expo-image`; store no copies                                                                        | The point of the evaluation. Hotlinking Commons is permitted; `expo-image` (already installed) caches.                                                              |
-| Licensing        | Remote hosting does **not** remove attribution duties; every shown photo carries author + licence + Commons link, and a photo with incomplete licence data is never shown | CC BY / BY-SA require attribution wherever the image is displayed, wherever it is hosted. CLAUDE.md's asset-licensing rule applies to remote images too.            |
-| Resolution       | Build-time lookup script (not runtime API calls)                                                                                                                          | No extra network round trips per question; licences are validated before a build, not discovered by a user. This is also how production would work.                 |
-| Hero treatment   | Option **A — corner tab**: photo fills the square, number sits in a bottom-left surface-coloured tab joined to the card by concave fillets                                | Keeps the most photo while the number stays on a flat, always-legible surface; scales to the 68 pt minimum. Chosen over bottom band, side rail and number-on-photo. |
-| Number minimum   | 14 pt floor for the tab number                                                                                                                                            | At 68 pt (level 3, short screen) the proportional size is ~11 pt — too small for a timed read.                                                                      |
-| Credit placement | Option **C — after answering**: one-line credit when the question is fully answered, plus a full list on the results screen                                               | Cleanest during play. See the release blocker in §7: this is the weakest of the three options on licence compliance.                                                |
-| Gate             | `__DEV__` and `EXPO_PUBLIC_PHOTO_POC=1`, both required                                                                                                                    | Dead code in production builds, so it cannot ship over the air or in a store build even if merged.                                                                  |
-| Engine           | `lib/questionEngine.ts` untouched                                                                                                                                         | Photos are a presentation concern looked up by `playerId`; the engine stays pure.                                                                                   |
+| Decision         | Choice                                                                                                                                                                                                        | Why                                                                                                                                                                 |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Hosting          | Hotlink Wikimedia's 512 px thumbnail from `upload.wikimedia.org` via `expo-image`; store no copies                                                                                                            | The point of the evaluation. Hotlinking Commons is permitted; `expo-image` (already installed) caches.                                                              |
+| Licensing        | Remote hosting does **not** remove attribution duties; every shown photo carries its licence and a Commons link (plus author when Commons gives one), and a photo with incomplete licence data is never shown | CC BY / BY-SA require attribution wherever the image is displayed, wherever it is hosted. CLAUDE.md's asset-licensing rule applies to remote images too.            |
+| Resolution       | Build-time lookup script (not runtime API calls)                                                                                                                                                              | No extra network round trips per question; licences are validated before a build, not discovered by a user. This is also how production would work.                 |
+| Hero treatment   | Option **A — corner tab**: photo fills the square, number sits in a bottom-left surface-coloured tab joined to the card by concave fillets                                                                    | Keeps the most photo while the number stays on a flat, always-legible surface; scales to the 68 pt minimum. Chosen over bottom band, side rail and number-on-photo. |
+| Number minimum   | 14 pt floor for the tab number                                                                                                                                                                                | At 68 pt (level 3, short screen) the proportional size is ~11 pt — too small for a timed read.                                                                      |
+| Credit placement | Option **C — after answering**: one-line credit when the question is fully answered, plus a full list on the results screen                                                                                   | Cleanest during play. See the release blocker in §7: this is the weakest of the three options on licence compliance.                                                |
+| Gate             | `__DEV__` and `EXPO_PUBLIC_PHOTO_POC=1`, both required                                                                                                                                                        | Dead code in production builds, so it cannot ship over the air or in a store build even if merged.                                                                  |
+| Engine           | `lib/questionEngine.ts` untouched                                                                                                                                                                             | Photos are a presentation concern looked up by `playerId`; the engine stays pure.                                                                                   |
 
 Rejected approaches: **runtime lookup** (two API calls per question in a timed
 game, licence checked on-device) and **runtime licence re-check** (complexity
@@ -67,10 +67,15 @@ Steps:
    `action=query&prop=imageinfo&iiprop=url|extmetadata&iiurlwidth=512`.
    Take `thumburl`, `descriptionurl`, and from `extmetadata`: `Artist`
    (HTML — stripped to text), `LicenseShortName`, `LicenseUrl`,
-   `AttributionRequired`. A missing author or licence name is reported
-   `incomplete-licence` and the entry is dropped — never shipped with a
-   guessed credit. A licence that is not CC BY / CC BY-SA / CC0 / public
-   domain is reported `unexpected-licence` and dropped.
+   `AttributionRequired`. A missing licence name, thumbnail or Commons page
+   is reported `incomplete-licence`, with the missing field named in the
+   report, and the entry is dropped — never shipped with a guessed credit.
+   Author and licence deed URL are optional (revised 2026-10-13 after the
+   first Spain run returned 25 of 26 CC BY-SA files without a deed URL): the
+   credit links the Commons file page, which names both — the click-through
+   credit Wikipedia itself relies on. With no author the credit reads
+   "Photo: Wikimedia Commons". A licence that is not CC BY / CC BY-SA / CC0 /
+   public domain is reported `unexpected-licence` and dropped.
 4. Etiquette: a User-Agent naming the repository (as
    `tools/squadctl/src/lib/wiki-fetch.ts` does), a delay between requests,
    exponential backoff on `429`. Reuse squadctl's conventions rather than
