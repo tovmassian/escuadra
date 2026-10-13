@@ -1,6 +1,9 @@
 import { Button } from '@/components/Button';
 import { EscuadraStrike } from '@/components/EscuadraStrike';
+import { PhotoCredits } from '@/components/PhotoCredits';
 import type { Level } from '@/lib/questionEngine';
+import { getPhoto, photoCreditRows } from '@/lib/photoPoc';
+import { PHOTO_POC_ENABLED } from '@/lib/photoPocRuntime';
 import { actionOrder, resultTier, type ActionId } from '@/lib/resultsView';
 import { PASS_RATIO } from '@/lib/scoring';
 import { formatShareText } from '@/lib/shareResult';
@@ -198,6 +201,7 @@ export default function Results() {
   const passed = tier !== 'fail';
   const hasNextLevel = level < MAX_LEVEL;
   const actions = actionOrder({ passed, hasNextLevel, missedCount: missed.length });
+  const photoCredits = photoCreditRows(session.results, (id) => getPhoto(id, PHOTO_POC_ENABLED));
 
   const retry = (atLevel: Level) => {
     const roster = getRoster(squadId);
@@ -354,6 +358,7 @@ export default function Results() {
           <Button label="Share Result" variant="outline" onPress={shareResult} />
         </Animated.View>
       </View>
+      <PhotoCredits rows={photoCredits} />
     </View>
   );
 }
