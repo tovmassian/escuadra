@@ -31,7 +31,10 @@ interface HeroCardProps {
 // the same square footprint and the number moves into a bottom-left tab.
 export function HeroCard({ level, shirtNumber, loading, fit, photoUrl }: HeroCardProps) {
   const colors = useThemeColors();
-  const [photoShown, setPhotoShown] = useState(false);
+  // Track which URL has loaded, not a boolean, so a reused card cannot carry
+  // "shown" over to the next question's photo.
+  const [loadedUrl, setLoadedUrl] = useState<string | null>(null);
+  const photoShown = photoUrl != null && loadedUrl === photoUrl;
   const size = fit?.size ?? heroCardSize[level];
   const numberSize = fit?.numberSize ?? heroNumberSize[level];
   const tab = heroTabMetrics(size);
@@ -135,8 +138,8 @@ export function HeroCard({ level, shirtNumber, loading, fit, photoUrl }: HeroCar
           contentPosition="top"
           transition={durations.reveal}
           accessible={false}
-          onLoad={() => setPhotoShown(true)}
-          onError={() => setPhotoShown(false)}
+          onLoad={() => setLoadedUrl(photoUrl)}
+          onError={() => setLoadedUrl(null)}
         />
         {photoShown && (
           <View style={styles.tab}>
