@@ -157,8 +157,8 @@ describe('creditsByFile', () => {
     });
   });
 
-  // Commons often omits LicenseUrl for CC files; the credit links to the
-  // Commons page instead, which carries the licence and its deed.
+  // Not required: the credit links the Commons page, which carries the
+  // licence and its deed.
   it('accepts a CC licence that comes without its deed URL', () => {
     const outcome = credits.get('Fixture NoDeed.jpg');
     expect(outcome?.status).toBe('ok');

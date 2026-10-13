@@ -1,9 +1,28 @@
 # Wikimedia player photos — proof of concept
 
-**Status:** design, approved 2026-10-13. Self-contained — every decision and
-its rationale is recorded here. Mockups:
+**Status:** concluded 2026-10-13. This file is the front door for player
+photos: the POC's design (§1–§7), what it measured (§9), and how to build the
+real feature (§8). Mockups:
 <https://claude.ai/artifact/3EQSqA9vHiWVEbzrGTdWAN> (private; the last version
-shows the credit options, earlier versions the hero studies).
+shows the credit options, earlier versions the hero studies). Code: branch
+`claude/festive-dijkstra-j9urcu`.
+
+## Outcome
+
+**Wikimedia hotlinking with machine-read credits is good enough to build
+on.** Played on device, real photos in the hero were "a completely another
+level of experience", and the licence data comes back complete for 99.6% of
+players who have a free photo.
+
+- **Spain:** 26 of 26 players usable.
+- **All 3,335 players:** 1,559 usable (47%). The limit is our data, not
+  Wikimedia: 1,227 players (37%) have no `wikiTitle` to look up. Of players
+  who have one, 74% have a usable photo.
+- **Birth dates come from the same lookup:** Wikidata gives a day-precise
+  birth date for 98% of players with a `wikiTitle`.
+- **Changes for production:** the credit must be visible during the question,
+  not revealed after answering (§8.4), and thumbnails should be requested at
+  500 px, not 512 (§8.2).
 
 ## 1. Question this POC answers
 
@@ -70,8 +89,7 @@ Steps:
    `AttributionRequired`. A missing licence name, thumbnail or Commons page
    is reported `incomplete-licence`, with the missing field named in the
    report, and the entry is dropped — never shipped with a guessed credit.
-   Author and licence deed URL are optional (revised 2026-10-13 after the
-   first Spain run returned 25 of 26 CC BY-SA files without a deed URL): the
+   Author and licence deed URL are optional (revised 2026-10-13): the
    credit links the Commons file page, which names both — the click-through
    credit Wikipedia itself relies on. With no author the credit reads
    "Photo: Wikimedia Commons". A licence that is not CC BY / CC BY-SA / CC0 /
@@ -186,29 +204,186 @@ cached before it is needed.
 
 The POC never ships. A production version must first:
 
-1. **Have credit placement signed off by a person.** Option C shows a photo
-   for several seconds before its credit is reachable. The App Store and
-   Google Play are unlikely to object; the risk is the copyright holders —
-   CC BY-SA 2.0/3.0 attribution is actively enforced by some photographers.
-   Option B (a CC button on the photo opening a credit sheet) is the fallback
-   if C is not accepted.
+1. **Have credit placement signed off by a person.** Option C (credit after
+   answering) was rejected in the play test: it read as an unnecessary
+   reveal, and it leaves the photo uncredited for seconds. The production
+   placement is persistent (§8.4). The App Store and Google Play are unlikely
+   to object; the risk is the copyright holders — CC BY-SA 2.0/3.0
+   attribution is actively enforced by some photographers.
 2. **Update privacy disclosures** (guardrail 4): every photo load sends the
    user's IP to Wikimedia. Privacy policy, About text, App Privacy and Data
    safety change together, in a store build.
 3. **Update CLAUDE.md guardrail 1** to describe remote Commons photos and the
    attribution rule.
 
-## 8. Path to production (out of scope here)
+## 8. Production implementation
 
-- Photo lookup becomes a step in `squadctl`'s per-player fetch, alongside
-  birth date, writing the `PhotoCredit` fields onto each player record in the
-  bundled JSON. The `data/poc/` record shape is designed to move over
-  unchanged.
-- A later move of squad data to a hosted database (e.g. DynamoDB) is a
-  separate product decision: it ends bundled squad data, so it changes the
-  offline-first guardrail and needs its own disclosure review.
+The POC code is a working reference, not the production code: lookup lives in
+`scripts/poc/`, data in `data/poc/`, and the app reads it behind a dev-only
+gate. Production moves each piece to its permanent home.
+
+### 8.1 Data model
+
+- `Player.photo` (`types/squad.ts`) changes from the reserved
+  `string | null` to `PhotoCredit | null`, with `PhotoCredit` moving there
+  from `types/photo.ts`. Add the Commons file name as a field (`file`): it is
+  the stable identity, while the thumbnail URL is derived and can change
+  (the POC's first rule broke on exactly that: §9.3).
+- `Player.birth` is filled from Wikidata where it is null today.
+- Size: ~400 bytes per credited player (measured on Spain), about 0.6 MB
+  added to the bundled `data/players.json` at today's coverage. Squad data stays bundled
+  (guardrail 4); a hosted database is a separate decision (§8.6).
+
+### 8.2 Enrichment in squadctl
+
+Add a player-enrichment step to `squadctl` that runs after `apply`, writing
+photo and birth onto player records. It gets per-player data **in batches of
+50 titles, not one request per player** — the same result for every player,
+while keeping squadctl's rule that no per-player article is ever fetched
+(`tools/squadctl/src/lib/wiki-fetch.ts`).
+
+Three requests per batch, all measured in this POC:
+
+| Step | Endpoint                                                                                        | Gives                                  |
+| ---- | ----------------------------------------------------------------------------------------------- | -------------------------------------- |
+| 1    | Wikipedia `prop=pageimages\|pageprops`, `pilicense=free`, `ppprop=wikibase_item`, `redirects=1` | Free lead image, Wikidata id           |
+| 2    | Commons `prop=imageinfo`, `iiprop=url\|extmetadata`, `iiurlwidth=500`                           | Thumbnail, licence, author, deed, page |
+| 3    | Wikidata `wbgetentities`, `props=claims`                                                        | Birth date (`P569`, day precision)     |
+
+The whole player base is 117 requests, 2 min 22 s with a 500 ms courtesy
+delay. Port the rules from `scripts/poc/lib/photo-records.ts` with their
+tests:
+
+- **Accept:** CC BY and CC BY-SA at any version (ported variants included),
+  CC0, public domain.
+- **Require:** licence, a thumbnail on `upload.wikimedia.org` or
+  `thumb.wikimedia.org`, the Commons page. Author and deed URL are optional;
+  the credit links the Commons page, which names both.
+- **Strip** Commons' `utm_*` tracking query from stored URLs.
+- **Request 500 px.** Commons snaps widths to standard sizes: 512 comes back
+  as 960 px (463 KB for Pedri); 500 comes back exactly (119 KB), enough for
+  the 220 pt hero at 2×.
+- **Decide on "Attribution":** 7 players have Commons' attribution-only
+  licence, refused by today's rule. It is a free licence; accept it after a
+  person looks at the wording.
+- **Birth disagreements are conflicts.** Where a stored birth date and
+  Wikidata disagree (62 players), report a conflict as squadctl does for
+  spelling changes; never overwrite silently. Use only day-precise dates.
+- **Cache responses** before parsing, like `wiki-fetch.ts`, so rule changes
+  re-run offline.
+- **Run it on a developer machine.** Wikimedia's APIs answered 429 to a
+  cloud session's shared IP after fewer than ten requests. GitHub Actions
+  runners are untested.
+
+### 8.3 Backfill `wikiTitle` first
+
+It is the largest coverage lever: 1,227 players (37%) have no `wikiTitle`,
+so nothing can be looked up for them. CLAUDE.md puts the permanent share
+(source rows with no article) at about 2.5%; the rest predate the field.
+Check whether re-running `squadctl apply` fills titles on existing records;
+if not, backfilling them is the first task. With titles filled, expect about
+74% photo coverage and 98% birth coverage.
+
+### 8.4 App
+
+- **Keep from the POC:** `HeroCard`'s photo branch with the bottom-left
+  number tab and concave fillets, `heroTabMetrics` with the 14 pt floor,
+  next-question prefetch, and the fall-back to the number card while loading,
+  offline or on error.
+- **Remove** the `EXPO_PUBLIC_PHOTO_POC` gate and `data/poc/`; read
+  `player.photo`.
+- **Move the credit.** It must be visible for as long as the photo is, and
+  never appear as part of the answer reveal. Candidates from the play test:
+  a quiet line in the footer below the action button, or beside the hero.
+  Settle it in the planned redesign session. The results-screen credit list
+  stays.
+- **Never** put Commons file names or captions in visible text or labels —
+  they usually name the player. Credits show author and licence only.
+
+### 8.5 Release
+
+Ships in a **store build**, never over the air (guardrail 4): each photo load
+sends the user's IP address to Wikimedia. In the same release:
+
+- the privacy policy and About text, word for word;
+- App Privacy and Data safety answers;
+- CLAUDE.md guardrail 1, rewritten for remote Commons photos and the credit
+  rule;
+- the credit-placement sign-off (§7.1).
+
+No dependency changes are needed: `expo-image` and `expo-web-browser` are
+installed.
+
+### 8.6 Later
+
+Moving squad data to a hosted database (e.g. DynamoDB) ends bundled data, so
+it changes the offline-first guardrail and needs its own disclosure review.
+
+### 8.7 Fix when porting
+
+Found by task reviews of the POC; minor in a dev-only POC, real in
+production:
+
+- `stripHtml` decodes `&#39;` but not other numeric entities
+  (`O&#039;Brien`).
+- `isAcceptedLicence` accepts any "Public domain…" prefix, including "Public
+  domain in the US only".
+- The lookup does not follow MediaWiki `continue`. No response needed it at
+  50 per batch, but production should handle it.
+- Members with no shirt number are skipped from the coverage report without
+  being counted.
+- Fire-and-forget `Image.prefetch` and `openBrowserAsync` calls have no
+  `.catch`.
+- The hero tab can show for a frame over a still-loading photo when the card
+  returns from its loading state with the same URL.
 
 ## 9. Results
 
-_To be filled in after the script has run: coverage %, licence-complete %,
-licence mix, and screenshots of real photos in the hero at each level._
+Measured 2026-10-13 on a developer machine.
+
+### 9.1 Spain
+
+All 26 players usable: 25 CC BY-SA 4.0, 1 public domain. 25 of the 26 photos
+are by one photographer (Bryan Berlin) from two 2026 World Cup matches.
+Credits were spot-checked against Commons for Pedri and Rodri and match.
+Report: `data/poc/photos.esp.report.md`.
+
+### 9.2 All players
+
+A read-only run of the same rules over all of `data/players.json` (not
+committed; 117 requests):
+
+| Status                          | Players | Share |
+| ------------------------------- | ------- | ----- |
+| Usable photo                    | 1,559   | 47%   |
+| No `wikiTitle`                  | 1,227   | 37%   |
+| Article has no free lead image  | 542     | 16%   |
+| Licence refused ("Attribution") | 7       | 0.2%  |
+| Licence data incomplete         | 0       | 0%    |
+
+- Of 2,108 players with a `wikiTitle`, 74% have a usable photo.
+- Licence mix of usable photos: CC BY-SA 4.0 906, CC0 259, CC BY 4.0 119,
+  CC BY-SA 3.0 94 (plus 6 Austrian-ported), CC BY 3.0 77, CC BY 2.0 42,
+  public domain 37, CC BY-SA 2.0 19.
+- 375 distinct photographers; the top one accounts for 525 photos (34%).
+- Birth dates: 1,643 players have one stored today. Wikidata has a
+  day-precise date for 2,059 (98% of players with a `wikiTitle`). Together:
+  2,490 (75% of all players). 62 players' stored date disagrees with
+  Wikidata.
+
+### 9.3 What the run taught us about the APIs
+
+- Commons serves scaled thumbnails from `thumb.wikimedia.org`, and only
+  small originals served unscaled from `upload.wikimedia.org`. The POC's
+  first rule accepted only the latter and rejected 25 of 26 Spain photos.
+- Requested widths snap to standard sizes (512 → 960; 500 is exact).
+- Every image URL carries `utm_*` tracking parameters; the image loads
+  without them.
+- Wikimedia's APIs throttle shared cloud IPs (429) while still serving
+  images to them.
+
+### 9.4 Fit
+
+Played on device across all three levels: the photo with the corner tab
+works and transforms the experience. The credit after answering felt like an
+unnecessary reveal, so it moves (§8.4). No screenshots were committed.

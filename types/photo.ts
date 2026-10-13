@@ -10,8 +10,8 @@ export interface PhotoCredit {
   author: string | null;
   /** Licence short name as Commons gives it, e.g. "CC BY-SA 4.0". */
   licence: string;
-  /** Licence deed, when Commons gives one (it often omits it for CC files);
-   *  the credit falls back to linking the Commons page. */
+  /** Licence deed, when Commons gives one (none for public domain); the
+   *  credit falls back to linking the Commons page. */
   licenceUrl: string | null;
   /** The file's Commons page, which carries the full credit. */
   sourceUrl: string;
