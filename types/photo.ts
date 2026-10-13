@@ -2,7 +2,8 @@
  *  scripts/poc/fetch-photos.ts, read by lib/photoPoc.ts. Photo POC only — see
  *  docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md. */
 export interface PhotoCredit {
-  /** 512 px thumbnail on https://upload.wikimedia.org/. */
+  /** Thumbnail on upload.wikimedia.org or thumb.wikimedia.org, tracking query
+   *  removed. Commons snaps the requested 512 px to its nearest standard width. */
   url: string;
   /** Photographer, plain text. Null when Commons gives none; the credit
    *  then names Wikimedia Commons and links the file page, which credits them. */

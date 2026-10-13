@@ -77,7 +77,7 @@ describe('data/poc/photos.esp.json', () => {
       expect(memberIds.has(id), id).toBe(true);
       if (entry.author !== null) expect(entry.author.trim(), id).not.toBe('');
       expect(entry.licence.trim(), id).not.toBe('');
-      expect(entry.url.startsWith('https://upload.wikimedia.org/'), id).toBe(true);
+      expect(entry.url, id).toMatch(/^https:\/\/(upload|thumb)\.wikimedia\.org\/[^?]+$/);
       expect(entry.sourceUrl.startsWith('https://commons.wikimedia.org/wiki/File:'), id).toBe(true);
       if (entry.licenceUrl !== null) expect(entry.licenceUrl.startsWith('https://'), id).toBe(true);
     }

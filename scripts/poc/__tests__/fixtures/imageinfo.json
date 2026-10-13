@@ -133,6 +133,25 @@
         "ns": 6,
         "title": "File:Fixture Bare.jpg",
         "missing": true
+      },
+      {
+        "ns": 6,
+        "title": "File:Fixture Bucketed.jpg",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Fixture_Bucketed.jpg/960px-Fixture_Bucketed.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Fixture_Bucketed.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Fixture_Bucketed.jpg",
+            "extmetadata": {
+              "Artist": {
+                "value": "Someone"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0"
+              }
+            }
+          }
+        ]
       }
     ]
   }

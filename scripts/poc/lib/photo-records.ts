@@ -73,7 +73,23 @@ export function fileKey(name: string): string {
 // de" included), CC0 and public domain. Anything else — non-commercial,
 // GFDL-only, fair use — is refused rather than guessed at.
 const ACCEPTED_LICENCE = /^(CC BY(-SA)? \d\.\d\b|CC0\b|Public domain\b)/i;
-const THUMB_HOST = 'https://upload.wikimedia.org/';
+// Wikimedia's image hosts. Scaled thumbnails come from thumb.wikimedia.org;
+// small originals Commons serves unscaled come from upload.wikimedia.org.
+const IMAGE_HOSTS = new Set(['upload.wikimedia.org', 'thumb.wikimedia.org']);
+
+/** The thumbnail URL on a Wikimedia image host, with Commons' utm_* tracking
+ *  query dropped. Null when it is missing or hosted anywhere else. */
+function wikimediaImageUrl(raw: string | undefined): string | null {
+  if (raw === undefined) return null;
+  let parsed: URL;
+  try {
+    parsed = new URL(raw);
+  } catch {
+    return null;
+  }
+  if (parsed.protocol !== 'https:' || !IMAGE_HOSTS.has(parsed.hostname)) return null;
+  return `${parsed.origin}${parsed.pathname}`;
+}
 
 export function isAcceptedLicence(shortName: string): boolean {
   return ACCEPTED_LICENCE.test(shortName.trim());
@@ -130,8 +146,8 @@ function nonEmpty(value: string | undefined): string | null {
 }
 
 /** The credit of each Commons file in the response, keyed by `fileKey`. A
- *  file is `ok` only with an accepted licence, a thumbnail on
- *  upload.wikimedia.org and a Commons page. Author and licence deed URL are
+ *  file is `ok` only with an accepted licence, a thumbnail on a Wikimedia
+ *  image host and a Commons page. Author and licence deed URL are
  *  kept when Commons sends them but not required: the credit links to the
  *  Commons page, which names both — the same click-through credit Wikipedia
  *  itself relies on. */
@@ -143,18 +159,18 @@ export function creditsByFile(response: unknown): Map<string, CreditOutcome> {
     const licence = nonEmpty(meta.LicenseShortName?.value);
     const author = stripHtml(meta.Artist?.value ?? '');
     const licenceUrl = nonEmpty(meta.LicenseUrl?.value);
-    const url = info?.thumburl ?? '';
+    const url = wikimediaImageUrl(info?.thumburl);
     const sourceUrl = info?.descriptionurl ?? '';
 
     const missing: MissingField[] = [];
     if (licence === null) missing.push('licence');
-    if (!url.startsWith(THUMB_HOST)) missing.push('thumbnail');
+    if (url === null) missing.push('thumbnail');
     if (sourceUrl === '') missing.push('commons-page');
 
     let outcome: CreditOutcome;
     if (licence !== null && !isAcceptedLicence(licence)) {
       outcome = { status: 'unexpected-licence', licence };
-    } else if (licence === null || missing.length > 0) {
+    } else if (licence === null || url === null || missing.length > 0) {
       outcome = { status: 'incomplete-licence', licence, missing };
     } else {
       outcome = {

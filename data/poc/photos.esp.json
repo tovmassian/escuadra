@@ -1,1 +1,184 @@
-{}
+{
+  "baena": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e8/Alex_Baena_France_v_Spain_7.24.26-024.jpg/960px-Alex_Baena_France_v_Spain_7.24.26-024.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alex_Baena_France_v_Spain_7.24.26-024.jpg"
+  },
+  "borja-iglesias": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b0/Borja_Iglesias_Argentina_v_Spain_19_July_2026-253_%28cropped%29.jpg/960px-Borja_Iglesias_Argentina_v_Spain_19_July_2026-253_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Borja_Iglesias_Argentina_v_Spain_19_July_2026-253_(cropped).jpg"
+  },
+  "cubarsi": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/77/Pau_Cubarsi_Argentina_v_Spain_19_July_2026-181_%28cropped%29.jpg/960px-Pau_Cubarsi_Argentina_v_Spain_19_July_2026-181_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pau_Cubarsi_Argentina_v_Spain_19_July_2026-181_(cropped).jpg"
+  },
+  "cucurella": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg/960px-Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_(cropped).jpg"
+  },
+  "dani-olmo": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Dani_Olmo_France_v_Spain_7.24.26-176_%28cropped%29.jpg/960px-Dani_Olmo_France_v_Spain_7.24.26-176_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Dani_Olmo_France_v_Spain_7.24.26-176_(cropped).jpg"
+  },
+  "eric-garcia": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/eb/Eric_Garcia_Argentina_v_Spain_19_July_2026-313_%28cropped%29.jpg/960px-Eric_Garcia_Argentina_v_Spain_19_July_2026-313_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Eric_Garcia_Argentina_v_Spain_19_July_2026-313_(cropped).jpg"
+  },
+  "fabian-ruiz": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/88/Fabian_Ruiz_Argentina_v_Spain_19_July_2026-315.jpg/960px-Fabian_Ruiz_Argentina_v_Spain_19_July_2026-315.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Fabian_Ruiz_Argentina_v_Spain_19_July_2026-315.jpg"
+  },
+  "gavi": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4a/Gavi_Argentina_v_Spain_19_July_2026-013.jpg/960px-Gavi_Argentina_v_Spain_19_July_2026-013.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Gavi_Argentina_v_Spain_19_July_2026-013.jpg"
+  },
+  "grimaldo": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/87/Alex_Grimaldo_Argentina_v_Spain_19_July_2026-314.jpg/960px-Alex_Grimaldo_Argentina_v_Spain_19_July_2026-314.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Alex_Grimaldo_Argentina_v_Spain_19_July_2026-314.jpg"
+  },
+  "joan-garcia": {
+    "url": "https://upload.wikimedia.org/wikipedia/commons/b/b0/P20260719DT-1994_President_Donald_J._Trump_and_First_Lady_Melania_Trump_attend_the_FIFA_World_Cup_Final_%28cropped%29.jpg",
+    "author": "The White House",
+    "licence": "Public domain",
+    "licenceUrl": null,
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:P20260719DT-1994_President_Donald_J._Trump_and_First_Lady_Melania_Trump_attend_the_FIFA_World_Cup_Final_(cropped).jpg"
+  },
+  "laporte": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d5/Aymeric_Laporte_Argentina_v_Spain_19_July_2026-067_%28cropped%29.jpg/960px-Aymeric_Laporte_Argentina_v_Spain_19_July_2026-067_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Aymeric_Laporte_Argentina_v_Spain_19_July_2026-067_(cropped).jpg"
+  },
+  "llorente": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/Marcos_Llorente_France_v_Spain_7.24.26-020.jpg/960px-Marcos_Llorente_France_v_Spain_7.24.26-020.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Marcos_Llorente_France_v_Spain_7.24.26-020.jpg"
+  },
+  "merino": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/45/Mikel_Merino_France_v_Spain_7.24.26-241_%28cropped%29.jpg/960px-Mikel_Merino_France_v_Spain_7.24.26-241_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mikel_Merino_France_v_Spain_7.24.26-241_(cropped).jpg"
+  },
+  "nico-williams": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/Nico_Williams_Argentina_v_Spain_19_July_2026-196_%28cropped%29.jpg/960px-Nico_Williams_Argentina_v_Spain_19_July_2026-196_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Nico_Williams_Argentina_v_Spain_19_July_2026-196_(cropped).jpg"
+  },
+  "oyarzabal": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/20/Mikel_Oyarzabal_France_v_Spain_7.24.26-161_%28cropped%29.jpg/960px-Mikel_Oyarzabal_France_v_Spain_7.24.26-161_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Mikel_Oyarzabal_France_v_Spain_7.24.26-161_(cropped).jpg"
+  },
+  "pedri": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/960px-Pedri_France_v_Spain_7.24.26-245.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pedri_France_v_Spain_7.24.26-245.jpg"
+  },
+  "pino": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7e/Yeremy_Pino_Argentina_v_Spain_19_July_2026-019.jpg/960px-Yeremy_Pino_Argentina_v_Spain_19_July_2026-019.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Yeremy_Pino_Argentina_v_Spain_19_July_2026-019.jpg"
+  },
+  "porro": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5e/Pedro_Porro_Argentina_v_Spain_19_July_2026-177_%28cropped%29.jpg/960px-Pedro_Porro_Argentina_v_Spain_19_July_2026-177_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Pedro_Porro_Argentina_v_Spain_19_July_2026-177_(cropped).jpg"
+  },
+  "pubill": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/65/Marc_Pubill_Argentina_v_Spain_19_July_2026-312.jpg/960px-Marc_Pubill_Argentina_v_Spain_19_July_2026-312.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Marc_Pubill_Argentina_v_Spain_19_July_2026-312.jpg"
+  },
+  "raya": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/David_Raya_Argentina_v_Spain_19_July_2026-003_%28cropped%29.jpg/960px-David_Raya_Argentina_v_Spain_19_July_2026-003_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:David_Raya_Argentina_v_Spain_19_July_2026-003_(cropped).jpg"
+  },
+  "rodri": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/Rodri_Argentina_v_Spain_19_July_2026-187_%28cropped%29.jpg/960px-Rodri_Argentina_v_Spain_19_July_2026-187_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Rodri_Argentina_v_Spain_19_July_2026-187_(cropped).jpg"
+  },
+  "torres": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Ferran_Torres_France_v_Spain_7.24.26-237_%28cropped%29.jpg/960px-Ferran_Torres_France_v_Spain_7.24.26-237_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Ferran_Torres_France_v_Spain_7.24.26-237_(cropped).jpg"
+  },
+  "unai-simon": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/53/Unai_Simon_Argentina_v_Spain_19_July_2026-078_%28cropped%29.jpg/960px-Unai_Simon_Argentina_v_Spain_19_July_2026-078_%28cropped%29.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Unai_Simon_Argentina_v_Spain_19_July_2026-078_(cropped).jpg"
+  },
+  "victor-munoz": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/Victor_Munoz_Argentina_v_Spain_19_July_2026-020.jpg/960px-Victor_Munoz_Argentina_v_Spain_19_July_2026-020.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Victor_Munoz_Argentina_v_Spain_19_July_2026-020.jpg"
+  },
+  "yamal": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/960px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Lamine_Yamal_France_v_Spain_7.24.26-142.jpg"
+  },
+  "zubimendi": {
+    "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f9/Martin_Zubimendi_Argentina_v_Spain_19_July_2026-012.jpg/960px-Martin_Zubimendi_Argentina_v_Spain_19_July_2026-012.jpg",
+    "author": "Bryan Berlin",
+    "licence": "CC BY-SA 4.0",
+    "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Martin_Zubimendi_Argentina_v_Spain_19_July_2026-012.jpg"
+  }
+}

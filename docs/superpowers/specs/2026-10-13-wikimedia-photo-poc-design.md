@@ -26,7 +26,7 @@ three levels. Development builds only.
 
 | Decision         | Choice                                                                                                                                                                                                        | Why                                                                                                                                                                 |
 | ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Hosting          | Hotlink Wikimedia's 512 px thumbnail from `upload.wikimedia.org` via `expo-image`; store no copies                                                                                                            | The point of the evaluation. Hotlinking Commons is permitted; `expo-image` (already installed) caches.                                                              |
+| Hosting          | Hotlink Wikimedia's thumbnail (requested at 512 px; Commons snaps it to a standard width) from `upload.wikimedia.org` or `thumb.wikimedia.org` via `expo-image`, tracking query removed; store no copies      | The point of the evaluation. Hotlinking Commons is permitted; `expo-image` (already installed) caches.                                                              |
 | Licensing        | Remote hosting does **not** remove attribution duties; every shown photo carries its licence and a Commons link (plus author when Commons gives one), and a photo with incomplete licence data is never shown | CC BY / BY-SA require attribution wherever the image is displayed, wherever it is hosted. CLAUDE.md's asset-licensing rule applies to remote images too.            |
 | Resolution       | Build-time lookup script (not runtime API calls)                                                                                                                                                              | No extra network round trips per question; licences are validated before a build, not discovered by a user. This is also how production would work.                 |
 | Hero treatment   | Option **A — corner tab**: photo fills the square, number sits in a bottom-left surface-coloured tab joined to the card by concave fillets                                                                    | Keeps the most photo while the number stays on a flat, always-legible surface; scales to the 68 pt minimum. Chosen over bottom band, side rail and number-on-photo. |
@@ -91,7 +91,7 @@ Scale check: all 3,335 players is ~70 Wikipedia + ~70 Commons requests.
 
 ```ts
 type PhotoCredit = {
-  url: string; // 512 px thumbnail on upload.wikimedia.org
+  url: string; // thumbnail on upload. or thumb.wikimedia.org, no query string
   author: string; // plain text
   licence: string; // e.g. "CC BY-SA 4.0"
   licenceUrl: string | null; // null only for public domain / CC0
@@ -173,7 +173,7 @@ cached before it is needed.
   batching at 50.
 - `lib/photoPoc.test.ts` (beside its code, as `lib/` does today): null when
   gated off; null for unknown players; **every entry has a non-empty author and
-  licence and an `https://upload.wikimedia.org/` URL** — the licensing
+  licence and a Wikimedia image-host URL (`upload.` or `thumb.wikimedia.org`)** — the licensing
   guardrail as a test.
 - `lib/roundView.test.ts`: `heroTabMetrics` at 220 / 130 / 108 / 68 pt,
   including the 14 pt floor.

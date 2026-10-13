@@ -137,7 +137,19 @@ describe('creditsByFile', () => {
     }
   });
 
-  it('drops a thumbnail hosted anywhere but upload.wikimedia.org', () => {
+  // Commons serves scaled thumbnails from thumb.wikimedia.org, snaps the width
+  // to a standard bucket, and appends utm_* tracking parameters.
+  it('accepts a thumbnail on thumb.wikimedia.org, without tracking parameters', () => {
+    const outcome = credits.get('Fixture Bucketed.jpg');
+    expect(outcome?.status).toBe('ok');
+    if (outcome?.status === 'ok') {
+      expect(outcome.credit.url).toBe(
+        'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Fixture_Bucketed.jpg/960px-Fixture_Bucketed.jpg',
+      );
+    }
+  });
+
+  it('drops a thumbnail hosted anywhere but Wikimedia', () => {
     expect(credits.get('Fixture Elsewhere.jpg')).toEqual({
       status: 'incomplete-licence',
       licence: 'CC BY 4.0',
