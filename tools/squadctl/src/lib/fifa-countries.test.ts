@@ -18,8 +18,8 @@ function storedNationalities(): string[] {
 }
 
 describe('fifa-countries table', () => {
-  it('holds all 211 FIFA members plus the four non-FIFA codes seen in club wikitext', () => {
-    expect(Object.keys(FIFA_COUNTRIES)).toHaveLength(215);
+  it('holds all 211 FIFA members, the four non-FIFA codes seen in club wikitext and one second code', () => {
+    expect(Object.keys(FIFA_COUNTRIES)).toHaveLength(216);
     for (const code of ['GLP', 'MTQ', 'GUF', 'REU']) {
       expect(FIFA_COUNTRIES[code]).toBeTypeOf('string');
     }
@@ -30,7 +30,10 @@ describe('fifa-countries table', () => {
     expect(bad).toEqual([]);
   });
 
-  it('never maps two codes to the same country name', () => {
+  // Kosovo is the one country written two ways: most articles use KOS, while
+  // Freiburg's uses KVX, FIFA's own trigram. Both name one spelling, so
+  // nothing forks; any other pair is a copy error.
+  it('never maps two codes to the same country name, except Kosovo', () => {
     const seen = new Map<string, string>();
     const collisions: string[] = [];
     for (const [code, country] of Object.entries(FIFA_COUNTRIES)) {
@@ -38,7 +41,7 @@ describe('fifa-countries table', () => {
       if (first !== undefined) collisions.push(`${country}: ${first} and ${code}`);
       else seen.set(country, code);
     }
-    expect(collisions).toEqual([]);
+    expect(collisions).toEqual(['Kosovo: KOS and KVX']);
   });
 
   // The guard that keeps the table from forking a nationality string. If this

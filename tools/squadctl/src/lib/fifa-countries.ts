@@ -13,6 +13,9 @@
 // players born there are tagged with them. Guadeloupe is already in
 // `players.json`.
 //
+// Kosovo has two codes: articles write both KOS and KVX (FIFA's own), and
+// both map to the one spelling.
+//
 // SPELLINGS ARE NOT FREE TO CHANGE. Where a country is already represented in
 // `players.json`, this table must use that exact spelling — `Ivory Coast` not
 // `Côte d'Ivoire`, `Czech Republic` not `Czechia`, `South Korea` not `Korea
