@@ -12,12 +12,28 @@
   ],
   "titleAliases": [
     {
+      "player": "daniel-ballard",
+      "title": "Daniel Ballard"
+    },
+    {
       "player": "giovanni-lo-celso",
       "title": "Giovanni Lo Celso"
     },
     {
       "player": "grimaldo",
       "title": "Alejandro Grimaldo"
+    },
+    {
+      "player": "john-victor",
+      "title": "John Victor (footballer)"
+    },
+    {
+      "player": "josh-cullen",
+      "title": "Josh Cullen (footballer)"
+    },
+    {
+      "player": "rodriguez",
+      "title": "Adrián Rodríguez (footballer)"
     }
   ],
   "notInSquad": [
@@ -25,6 +41,60 @@
       "team": "ver",
       "title": "Rafik Belghali",
       "reason": "transferred to Torino, who list him at #45 as of 2026-09-05; Verona's article still carries his old #7 and neither row is annotated as a loan"
+    }
+  ],
+  "keptBirths": [
+    {
+      "player": "arguibide",
+      "birth": "2005-04-19"
+    },
+    {
+      "player": "bauza",
+      "birth": "2005-01-31"
+    },
+    {
+      "player": "cucho-hernandez",
+      "birth": "1999-04-20"
+    },
+    {
+      "player": "el-hilali",
+      "birth": "2003-09-12"
+    },
+    {
+      "player": "el-mahdy-soliman",
+      "birth": "1987-06-08"
+    },
+    {
+      "player": "gabriel-avalos",
+      "birth": "1991-07-09"
+    },
+    {
+      "player": "ghazaryan",
+      "birth": "2001-07-24"
+    },
+    {
+      "player": "houary",
+      "birth": "2005-08-05"
+    },
+    {
+      "player": "matias-galarza",
+      "birth": "2002-02-11"
+    },
+    {
+      "player": "mohamed-alaa",
+      "birth": "1999-09-01"
+    },
+    {
+      "player": "mohanad-lasheen",
+      "birth": "1996-05-29"
+    },
+    {
+      "player": "n-saliba",
+      "birth": "2004-02-07"
+    },
+    {
+      "player": "saleh-hardani",
+      "birth": "1998-12-26"
     }
   ]
 }
