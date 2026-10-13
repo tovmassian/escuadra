@@ -6,6 +6,7 @@
 // the existing id is referenced by every squad file that carries this player,
 // and §9 never rewrites an id.
 import type { Player } from '../../../../types/squad.ts';
+import { isCalendarDate } from './enrich-plan.ts';
 import { playerId } from './reconcile.ts';
 
 export interface RenameResult {
@@ -103,4 +104,28 @@ export function forkPlayer(
     wikiTitle: title,
   };
   return { players: [...players, created], created };
+}
+
+export interface SetBirthResult {
+  players: Player[];
+  before: string | null;
+  after: string;
+}
+
+/** The "Wikidata is right" answer to a `birth-mismatch` from `enrich`: the
+ *  stored date was wrong. Refuses anything but a real `YYYY-MM-DD` date, so
+ *  no impossible date (1998-02-29) is ever typed back in. */
+export function setBirth(
+  players: readonly Player[],
+  id: string,
+  date: string,
+): SetBirthResult | { invalid: string } | null {
+  const target = players.find((p) => p.id === id);
+  if (target === undefined) return null;
+  if (!isCalendarDate(date)) return { invalid: date };
+  return {
+    players: players.map((p) => (p.id === id ? { ...p, birth: date } : p)),
+    before: target.birth,
+    after: date,
+  };
 }

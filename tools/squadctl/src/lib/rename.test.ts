@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Player } from '../../../../types/squad.ts';
-import { renamePlayer, retitlePlayer, forkPlayer } from './rename.ts';
+import { renamePlayer, retitlePlayer, forkPlayer, setBirth } from './rename.ts';
 
 const player = (over: Partial<Player> & { id: string; name: string }): Player => ({
   fullName: over.name,
@@ -132,5 +132,26 @@ describe('forkPlayer', () => {
 
   it('returns null for an unknown id', () => {
     expect(forkPlayer(stored, 'nobody', 'Nobody')).toBeNull();
+  });
+});
+
+describe('setBirth', () => {
+  const stored = [player({ id: 'torres', name: 'Ferran Torres', birth: '1998-02-29' })];
+
+  it('sets the date and reports the one it replaced', () => {
+    const result = setBirth(stored, 'torres', '2000-02-29');
+    expect(result).toMatchObject({ before: '1998-02-29', after: '2000-02-29' });
+    if (result !== null && 'players' in result) {
+      expect(result.players[0]).toEqual({ ...stored[0], birth: '2000-02-29' });
+    }
+  });
+
+  it('refuses a date that does not exist', () => {
+    expect(setBirth(stored, 'torres', '2001-02-29')).toEqual({ invalid: '2001-02-29' });
+    expect(setBirth(stored, 'torres', '29/02/2000')).toEqual({ invalid: '29/02/2000' });
+  });
+
+  it('returns null for an unknown id', () => {
+    expect(setBirth(stored, 'nobody', '2000-02-29')).toBeNull();
   });
 });

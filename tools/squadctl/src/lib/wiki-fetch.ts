@@ -1,9 +1,10 @@
-// The only networked file in squadctl. Everything else is pure and testable
-// without a socket.
+// One of squadctl's two networked files — `fetch`'s; wikimedia-fetch.ts is
+// `enrich`'s. Everything else is pure and testable without a socket.
 //
 // Two requests per team, never more: the section list, then that section's
 // raw wikitext. No per-player article is ever fetched — that request was the
-// dominant cost of the old pipeline.
+// dominant cost of the old pipeline. (`enrich` keeps the same rule: its
+// per-player data comes in batches of 50 titles, never one request each.)
 import { mkdirSync, readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { selectSquadSection, type SectionTitle, type WikiSection } from './wikitext-parse.ts';

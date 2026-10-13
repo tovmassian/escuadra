@@ -24,7 +24,10 @@ export interface Player {
   /** Asked on level 3 when the squad is a nation. Null for players whose
    *  club is unknown/unset — never surfaced as a level-3 question in that case. */
   club: string | null;
-  photo: string | null; // reserved for v1
+  /** A freely licensed Wikimedia Commons photo and its credit, written by
+   *  `squadctl enrich`. Null when the player has no article, the article and
+   *  its Wikidata item have no image, or the image's licence is refused. */
+  photo: PhotoCredit | null;
   /** Wikipedia article title this record was created from. Unique per person
    *  by construction, where a display name is not: two different real people
    *  are both rendered "Otávio" and only the title separates them.
@@ -36,6 +39,30 @@ export interface Player {
    *  Data-layer identity only. No screen reads it and it is never a quiz
    *  answer. */
   wikiTitle: string | null;
+}
+
+/** A Wikimedia Commons photo and the credit its licence requires. Hotlinked,
+ *  never copied: the app loads `url` and stores nothing. Every field but
+ *  `author` and `licenceUrl` is required, so a photo never ships with a
+ *  guessed credit. See docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md. */
+export interface PhotoCredit {
+  /** The Commons file name ("Pedri 2021.jpg"), the photo's stable identity.
+   *  It usually names the player, so it never reaches visible text or a
+   *  label during a question. */
+  file: string;
+  /** A 500 px thumbnail on upload.wikimedia.org or thumb.wikimedia.org,
+   *  tracking query removed. Derived from `file` by Commons; can change. */
+  url: string;
+  /** Photographer, plain text. Null when Commons gives none; the credit
+   *  then names Wikimedia Commons and links the file page, which names them. */
+  author: string | null;
+  /** Licence short name as Commons gives it, e.g. "CC BY-SA 4.0". */
+  licence: string;
+  /** Licence deed, when Commons gives one (none for public domain); the
+   *  credit falls back to linking the Commons page. */
+  licenceUrl: string | null;
+  /** The file's Commons page, which carries the full credit. */
+  sourceUrl: string;
 }
 
 export interface SquadMember {
