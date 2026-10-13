@@ -1,6 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { fitHeroCard, partRailRows, progressOutcomes } from './roundView';
-import { heroCardMinSize, heroCardSize, heroFitHeight, heroNumberSize } from '@/theme/tokens';
+import { fitHeroCard, heroTabMetrics, partRailRows, progressOutcomes } from './roundView';
+import {
+  heroCardMinSize,
+  heroCardSize,
+  heroFitHeight,
+  heroNumberSize,
+  heroTab,
+} from '@/theme/tokens';
 import type { Question, QuestionPart } from '@/lib/questionEngine';
 import type { AnsweredPart, QuestionResult } from '@/stores/session';
 
@@ -154,5 +160,28 @@ describe('fitHeroCard', () => {
   it('scales the shirt number with the card', () => {
     const { size, numberSize } = fitHeroCard(1, 300);
     expect(numberSize).toBe(Math.round((heroNumberSize[1] * size) / heroCardSize[1]));
+  });
+});
+
+describe('heroTabMetrics', () => {
+  it('scales the tab with the hero at every level size', () => {
+    expect(heroTabMetrics(220)).toMatchObject({ thickness: 59, numberSize: 35 });
+    expect(heroTabMetrics(130)).toMatchObject({ thickness: 35, numberSize: 21 });
+    expect(heroTabMetrics(108)).toMatchObject({ thickness: 29, numberSize: 17 });
+  });
+
+  it('holds the number at its floor on the smallest hero', () => {
+    // 68pt is level 3's fitHeroCard minimum; the ratios alone give an ~11pt number.
+    expect(heroTabMetrics(68)).toMatchObject({
+      thickness: heroTab.minThickness,
+      numberSize: heroTab.minNumberSize,
+    });
+  });
+
+  it('never lets the number outgrow its tab', () => {
+    for (const size of [68, 90, 108, 124, 130, 180, 220]) {
+      const m = heroTabMetrics(size);
+      expect(m.numberSize).toBeLessThan(m.thickness);
+    }
   });
 });
