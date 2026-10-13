@@ -28,32 +28,33 @@
 
 ## File Structure
 
-| File | Responsibility |
-| --- | --- |
-| `types/photo.ts` (create) | `PhotoCredit` / `PhotoFile` — the record shared by script and app |
-| `scripts/poc/lib/photo-records.ts` (create) | Pure: batching, HTML stripping, licence rules, response parsing, report rendering |
-| `scripts/poc/__tests__/photo-records.test.ts` (create) | Tests for the above |
-| `scripts/poc/__tests__/fixtures/pageimages.json`, `imageinfo.json` (create) | API response fixtures in MediaWiki `formatversion=2` shape |
-| `scripts/poc/fetch-photos.ts` (create) | Networked CLI: fetch, assemble, write atomically |
-| `data/poc/photos.esp.json` (create, `{}` until the script runs) | Spain photo credits |
-| `lib/photoPoc.ts` (create) | Pure gate, `getPhoto`, `photoCreditRows` |
-| `lib/photoPoc.test.ts` (create) | Gate/lookup tests + licensing guardrail over the data file |
-| `lib/photoPocRuntime.ts` (create) | Reads `__DEV__` + env var into `PHOTO_POC_ENABLED` |
-| `theme/tokens.ts` (modify) | `heroTab` constants, `sizes.photoCreditsMaxHeight` |
-| `lib/roundView.ts` / `lib/roundView.test.ts` (modify) | `heroTabMetrics(size)` |
-| `components/HeroTabFillet.tsx` (create) | Concave corner joining the tab to the photo edge |
-| `components/HeroCard.tsx` (modify) | Photo branch with corner tab; number-card branch unchanged |
-| `components/PhotoCreditLine.tsx` (create) | One-line credit after a question is answered |
-| `components/PhotoCredits.tsx` (create) | Collapsible credit list on the results screen |
-| `app/play/[squadId]/[level]/index.tsx` (modify) | Wire photo, prefetch, credit line |
-| `app/play/[squadId]/[level]/results.tsx` (modify) | Wire credit list |
-| `data/poc/photos.esp.report.md` (created by the script in Task 8) | Coverage report |
+| File                                                                        | Responsibility                                                                    |
+| --------------------------------------------------------------------------- | --------------------------------------------------------------------------------- |
+| `types/photo.ts` (create)                                                   | `PhotoCredit` / `PhotoFile` — the record shared by script and app                 |
+| `scripts/poc/lib/photo-records.ts` (create)                                 | Pure: batching, HTML stripping, licence rules, response parsing, report rendering |
+| `scripts/poc/__tests__/photo-records.test.ts` (create)                      | Tests for the above                                                               |
+| `scripts/poc/__tests__/fixtures/pageimages.json`, `imageinfo.json` (create) | API response fixtures in MediaWiki `formatversion=2` shape                        |
+| `scripts/poc/fetch-photos.ts` (create)                                      | Networked CLI: fetch, assemble, write atomically                                  |
+| `data/poc/photos.esp.json` (create, `{}` until the script runs)             | Spain photo credits                                                               |
+| `lib/photoPoc.ts` (create)                                                  | Pure gate, `getPhoto`, `photoCreditRows`                                          |
+| `lib/photoPoc.test.ts` (create)                                             | Gate/lookup tests + licensing guardrail over the data file                        |
+| `lib/photoPocRuntime.ts` (create)                                           | Reads `__DEV__` + env var into `PHOTO_POC_ENABLED`                                |
+| `theme/tokens.ts` (modify)                                                  | `heroTab` constants, `sizes.photoCreditsMaxHeight`                                |
+| `lib/roundView.ts` / `lib/roundView.test.ts` (modify)                       | `heroTabMetrics(size)`                                                            |
+| `components/HeroTabFillet.tsx` (create)                                     | Concave corner joining the tab to the photo edge                                  |
+| `components/HeroCard.tsx` (modify)                                          | Photo branch with corner tab; number-card branch unchanged                        |
+| `components/PhotoCreditLine.tsx` (create)                                   | One-line credit after a question is answered                                      |
+| `components/PhotoCredits.tsx` (create)                                      | Collapsible credit list on the results screen                                     |
+| `app/play/[squadId]/[level]/index.tsx` (modify)                             | Wire photo, prefetch, credit line                                                 |
+| `app/play/[squadId]/[level]/results.tsx` (modify)                           | Wire credit list                                                                  |
+| `data/poc/photos.esp.report.md` (created by the script in Task 8)           | Coverage report                                                                   |
 
 ---
 
 ### Task 1: Photo record type and pure lookup rules
 
 **Files:**
+
 - Create: `types/photo.ts`
 - Create: `scripts/poc/lib/photo-records.ts`
 - Create: `scripts/poc/__tests__/fixtures/pageimages.json`
@@ -61,6 +62,7 @@
 - Test: `scripts/poc/__tests__/photo-records.test.ts`
 
 **Interfaces:**
+
 - Consumes: nothing.
 - Produces:
   - `types/photo.ts`: `interface PhotoCredit { url: string; author: string; licence: string; licenceUrl: string | null; sourceUrl: string }`, `type PhotoFile = Record<string, PhotoCredit>`
@@ -131,7 +133,9 @@ These follow MediaWiki's documented `formatversion=2` response shape. File names
 {
   "batchcomplete": true,
   "query": {
-    "normalized": [{ "fromencoded": false, "from": "File:Fixture_Pedri.jpg", "to": "File:Fixture Pedri.jpg" }],
+    "normalized": [
+      { "fromencoded": false, "from": "File:Fixture_Pedri.jpg", "to": "File:Fixture Pedri.jpg" }
+    ],
     "pages": [
       {
         "ns": 6,
@@ -660,10 +664,12 @@ git commit -m "feat(photo-poc): pure Wikimedia photo lookup rules and record typ
 ### Task 2: Lookup script and empty data file
 
 **Files:**
+
 - Create: `scripts/poc/fetch-photos.ts`
 - Create: `data/poc/photos.esp.json`
 
 **Interfaces:**
+
 - Consumes: everything `scripts/poc/lib/photo-records.ts` exports (Task 1); `PhotoFile` from `types/photo.ts`; `Player`, `Squad` from `types/squad.ts`; `formatAndWrite(filePath: string, content: string): Promise<void>` from `tools/squadctl/src/lib/write-json.ts`.
 - Produces: CLI `node scripts/poc/fetch-photos.ts <squadId>` writing `data/poc/photos.<squadId>.json` (a `PhotoFile`, keys sorted) and `data/poc/photos.<squadId>.report.md`. The committed `data/poc/photos.esp.json` starts as `{}` so the app compiles before the script has run.
 
@@ -856,9 +862,7 @@ async function main(): Promise<void> {
     return { ...none, file, licence: outcome.credit.licence, status: 'ok' };
   });
 
-  const sorted = Object.fromEntries(
-    Object.entries(photos).sort(([a], [b]) => a.localeCompare(b)),
-  );
+  const sorted = Object.fromEntries(Object.entries(photos).sort(([a], [b]) => a.localeCompare(b)));
   const outDir = path.join(REPO_ROOT, 'data', 'poc');
   await writeAtomically(
     path.join(outDir, `photos.${squadId}.json`),
@@ -913,11 +917,13 @@ git commit -m "feat(photo-poc): Wikipedia/Commons lookup script for squad photos
 ### Task 3: App-side gate, lookup and credit rows
 
 **Files:**
+
 - Create: `lib/photoPoc.ts`
 - Create: `lib/photoPocRuntime.ts`
 - Test: `lib/photoPoc.test.ts`
 
 **Interfaces:**
+
 - Consumes: `PhotoCredit`, `PhotoFile` (Task 1); `QuestionResult` type from `@/stores/session` (has `question: Question` with `playerId`, `playerName`, `memberNo`); `data/poc/photos.esp.json` (Task 2).
 - Produces:
   - `photoPocGate(env: { isDev: boolean; flag: string | undefined }): boolean`
@@ -1011,9 +1017,7 @@ describe('data/poc/photos.esp.json', () => {
       expect(entry.author.trim(), id).not.toBe('');
       expect(entry.licence.trim(), id).not.toBe('');
       expect(entry.url.startsWith('https://upload.wikimedia.org/'), id).toBe(true);
-      expect(entry.sourceUrl.startsWith('https://commons.wikimedia.org/wiki/File:'), id).toBe(
-        true,
-      );
+      expect(entry.sourceUrl.startsWith('https://commons.wikimedia.org/wiki/File:'), id).toBe(true);
       if (entry.licenceUrl !== null) expect(entry.licenceUrl.startsWith('https://'), id).toBe(true);
     }
   });
@@ -1119,11 +1123,13 @@ git commit -m "feat(photo-poc): dev-only gate, photo lookup and credit rows"
 ### Task 4: Corner-tab sizing
 
 **Files:**
+
 - Modify: `theme/tokens.ts` (add `heroTab` after the `radii` block, ~line 503; add one entry to `sizes`, ~line 399)
 - Modify: `lib/roundView.ts` (append after `fitHeroCard`, ~line 94)
 - Test: `lib/roundView.test.ts` (append)
 
 **Interfaces:**
+
 - Consumes: `radii` from `theme/tokens.ts`.
 - Produces:
   - `heroTab` token object; `sizes.photoCreditsMaxHeight: number`
@@ -1238,10 +1244,12 @@ git commit -m "feat(photo-poc): corner-tab sizing tokens and heroTabMetrics"
 ### Task 5: Photo hero with the corner tab
 
 **Files:**
+
 - Create: `components/HeroTabFillet.tsx`
 - Modify: `components/HeroCard.tsx` (whole file shown below)
 
 **Interfaces:**
+
 - Consumes: `heroTabMetrics(size)` (Task 4); `durations.reveal` (180 ms), `elevation.e1`, `radii.xl`, `spacing.xs`, `typography.captionEyebrow` from `theme/tokens.ts`.
 - Produces: `HeroCard` gains optional prop `photoUrl?: string | null`. Without it (or while `loading`), render is identical to today. `HeroTabFillet({ size, color, style })`.
 
@@ -1465,10 +1473,12 @@ git commit -m "feat(photo-poc): photo hero with bottom-left number tab"
 ### Task 6: Question screen — photo, prefetch, credit after answering
 
 **Files:**
+
 - Create: `components/PhotoCreditLine.tsx`
 - Modify: `app/play/[squadId]/[level]/index.tsx`
 
 **Interfaces:**
+
 - Consumes: `getPhoto` (Task 3), `PHOTO_POC_ENABLED` (Task 3), `HeroCard`'s `photoUrl` (Task 5), `PhotoCredit` (Task 1), `openBrowserAsync` from `expo-web-browser`, `Image.prefetch` from `expo-image`.
 - Produces: `PhotoCreditLine({ credit }: { credit: PhotoCredit })`.
 
@@ -1532,42 +1542,44 @@ import { Image } from 'expo-image';
 Add this effect directly after the existing `useEffect` that routes to results (the one ending `}, [session.phase]);`), so it runs before any early return:
 
 ```tsx
-  // Photo POC: warm the cache for the next question's photo while this one is
-  // played, so it is normally already loaded when the question appears.
-  useEffect(() => {
-    const next = session.questions[session.currentIndex + 1];
-    const nextPhoto = next ? getPhoto(next.playerId, PHOTO_POC_ENABLED) : null;
-    if (nextPhoto) void Image.prefetch(nextPhoto.url);
-  }, [session.currentIndex, session.questions]);
+// Photo POC: warm the cache for the next question's photo while this one is
+// played, so it is normally already loaded when the question appears.
+useEffect(() => {
+  const next = session.questions[session.currentIndex + 1];
+  const nextPhoto = next ? getPhoto(next.playerId, PHOTO_POC_ENABLED) : null;
+  if (nextPhoto) void Image.prefetch(nextPhoto.url);
+}, [session.currentIndex, session.questions]);
 ```
 
 After `const questionComplete = result.correct !== null;` add:
 
 ```tsx
-  const photo = getPhoto(question.playerId, PHOTO_POC_ENABLED);
+const photo = getPhoto(question.playerId, PHOTO_POC_ENABLED);
 ```
 
 Change the hero line from
 
 ```tsx
-        <HeroCard level={level} shirtNumber={question.memberNo} fit={heroFit} />
+<HeroCard level={level} shirtNumber={question.memberNo} fit={heroFit} />
 ```
 
 to
 
 ```tsx
-        <HeroCard
-          level={level}
-          shirtNumber={question.memberNo}
-          fit={heroFit}
-          photoUrl={photo?.url ?? null}
-        />
+<HeroCard
+  level={level}
+  shirtNumber={question.memberNo}
+  fit={heroFit}
+  photoUrl={photo?.url ?? null}
+/>
 ```
 
 Inside the parts `ScrollView`, directly after the `{question.parts.map(…)}` block and before `</ScrollView>`, add:
 
 ```tsx
-        {questionComplete && photo && <PhotoCreditLine credit={photo} />}
+{
+  questionComplete && photo && <PhotoCreditLine credit={photo} />;
+}
 ```
 
 - [ ] **Step 3: Typecheck, lint, format**
@@ -1592,10 +1604,12 @@ git commit -m "feat(photo-poc): photo in the question hero, credit once answered
 ### Task 7: Results screen — photo credit list
 
 **Files:**
+
 - Create: `components/PhotoCredits.tsx`
 - Modify: `app/play/[squadId]/[level]/results.tsx`
 
 **Interfaces:**
+
 - Consumes: `photoCreditRows`, `PhotoCreditRow`, `getPhoto` (Task 3), `PHOTO_POC_ENABLED` (Task 3), `sizes.photoCreditsMaxHeight` (Task 4).
 - Produces: `PhotoCredits({ rows }: { rows: PhotoCreditRow[] })` — renders nothing for an empty list.
 
@@ -1652,7 +1666,11 @@ export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
                 {r.memberNo} {r.playerName}
               </Text>
               {' — '}
-              <Text style={styles.link} accessibilityRole="link" onPress={openUrl(r.credit.sourceUrl)}>
+              <Text
+                style={styles.link}
+                accessibilityRole="link"
+                onPress={openUrl(r.credit.sourceUrl)}
+              >
                 {r.credit.author}
               </Text>
               {' · '}
@@ -1686,13 +1704,13 @@ import { PHOTO_POC_ENABLED } from '@/lib/photoPocRuntime';
 After `const actions = actionOrder({ … });` add:
 
 ```tsx
-  const photoCredits = photoCreditRows(session.results, (id) => getPhoto(id, PHOTO_POC_ENABLED));
+const photoCredits = photoCreditRows(session.results, (id) => getPhoto(id, PHOTO_POC_ENABLED));
 ```
 
 Directly after the closing `</View>` of `<View style={styles.actions}>` (and before the root `</View>`), add:
 
 ```tsx
-      <PhotoCredits rows={photoCredits} />
+<PhotoCredits rows={photoCredits} />
 ```
 
 - [ ] **Step 3: Typecheck, lint, format**
@@ -1719,11 +1737,13 @@ Expected: typecheck, lint, format:check, tests, registry check, gen:squads, gen:
 This task needs a developer machine: Wikimedia's APIs throttle the cloud session's IP. It produces the POC's answer.
 
 **Files:**
+
 - Modify: `data/poc/photos.esp.json` (written by the script)
 - Create: `data/poc/photos.esp.report.md` (written by the script)
 - Modify: `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md` (§9 Results)
 
 **Interfaces:**
+
 - Consumes: the CLI from Task 2; the app wiring from Tasks 5–7.
 - Produces: the filled data file and report; the spec's Results section.
 
@@ -1754,6 +1774,7 @@ EXPO_PUBLIC_PHOTO_POC=1 npx expo start
 ```
 
 On a device or simulator (development build), for Spain:
+
 - Levels 1, 2, 3: players with a photo show it, cropped to keep the head in frame, with the number in the bottom-left tab; players without one show today's number card.
 - After the last part of a question: the credit line appears under the answers; both links open in the system browser.
 - Results: "Show photo credits · N" expands to the list; links open.
