@@ -200,7 +200,7 @@ export default function Results() {
 
   const chooseDifferentTeam = () => {
     session.reset();
-    router.replace('/team-picker');
+    router.dismissTo('/team-picker');
   };
 
   const studySquad = () => {
