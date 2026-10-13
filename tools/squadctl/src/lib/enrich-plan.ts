@@ -11,6 +11,8 @@
 //   Wikidata date. A stored date Wikidata disagrees with is never
 //   overwritten: it is a conflict, and the photo is held with it, because a
 //   different birth date is how a title naming the wrong person shows up.
+//   A person answers it with `birth <id> <date>`, `birth <id> --keep`
+//   (recorded in decisions.json) or `retitle`.
 import type { Player, Squad } from '../../../../types/squad.ts';
 import type { CreditOutcome, MissingField } from './photo-credit.ts';
 import type { ArticleInfo, PersonInfo } from './wikimedia-parse.ts';
@@ -27,7 +29,8 @@ export type PhotoStatus =
   | 'held'
   | 'lookup-failed';
 
-export type BirthStatus = 'filled' | 'agrees' | 'conflict' | 'ambiguous' | 'none' | 'lookup-failed';
+export type BirthStatus =
+  'filled' | 'agrees' | 'kept' | 'conflict' | 'ambiguous' | 'none' | 'lookup-failed';
 
 /** Report order: shown first, then why not, most fixable last. */
 export const PHOTO_STATUSES: readonly PhotoStatus[] = [
@@ -46,6 +49,7 @@ export const PHOTO_STATUSES: readonly PhotoStatus[] = [
 export const BIRTH_STATUSES: readonly BirthStatus[] = [
   'filled',
   'agrees',
+  'kept',
   'none',
   'ambiguous',
   'conflict',
@@ -114,6 +118,7 @@ function outcome(
 function birthVerdict(
   player: Player,
   person: PersonInfo | null,
+  kept: ReadonlyMap<string, string>,
 ): { status: BirthStatus; birth: string | null } {
   const births = person?.births ?? [];
   if (births.length === 0) return { status: 'none', birth: player.birth };
@@ -123,12 +128,20 @@ function birthVerdict(
       ? { status: 'ambiguous', birth: null }
       : { status: 'filled', birth: only };
   }
-  return births.includes(player.birth)
-    ? { status: 'agrees', birth: player.birth }
+  if (births.includes(player.birth)) return { status: 'agrees', birth: player.birth };
+  // A person confirmed this very date against Wikidata's (`birth --keep`).
+  return kept.get(player.id) === player.birth
+    ? { status: 'kept', birth: player.birth }
     : { status: 'conflict', birth: player.birth };
 }
 
-export function enrichPlayer(player: Player, lookups: Lookups): PlayerEnrichment {
+/** `kept` maps a player id to the stored birth date a person confirmed
+ *  against Wikidata (decisions.json `keptBirths`). */
+export function enrichPlayer(
+  player: Player,
+  lookups: Lookups,
+  kept: ReadonlyMap<string, string> = new Map(),
+): PlayerEnrichment {
   const title = player.wikiTitle;
   if (title === null) return outcome(player, 'no-title', 'none', { ...player, photo: null });
 
@@ -154,7 +167,7 @@ export function enrichPlayer(player: Player, lookups: Lookups): PlayerEnrichment
     }
   }
 
-  const birth = birthVerdict(player, person);
+  const birth = birthVerdict(player, person, kept);
   const withBirth: Player = { ...player, birth: birth.birth };
   if (birth.status === 'conflict' && article.qid !== null && player.birth !== null) {
     const conflict: BirthConflict = {
@@ -228,7 +241,7 @@ export function birthConflictFixes(conflict: BirthConflict): string[] {
   return [
     `Wikidata is right:      npm run squadctl -- birth ${conflict.playerId} ${date}`,
     `wrong person:           npm run squadctl -- retitle ${conflict.playerId} "<their article title>"`,
-    `stored date is right:   correct https://www.wikidata.org/wiki/${conflict.qid}, then re-run enrich`,
+    `stored date is right:   npm run squadctl -- birth ${conflict.playerId} --keep`,
   ];
 }
 

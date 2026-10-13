@@ -19,6 +19,7 @@ import {
 } from '../lib/apply-plan.ts';
 import { assess, conflictCommand, describeConflict, type Conflict } from '../lib/assertions.ts';
 import { colors } from '../lib/colors.ts';
+import { enrichCommand } from '../lib/hints.ts';
 import { validateRegistry, type TeamRegistry } from '../lib/registry.ts';
 import { readDecisions, type DecisionFile } from '../lib/decisions.ts';
 import { readPlayers, writePlayers } from '../lib/players-file.ts';
@@ -229,6 +230,12 @@ export default class Apply extends BaseCommand<RunReport> {
           `${report.totals.conflicted} team(s) need a decision before they can verify — run the fix above, then re-run apply.`,
         ),
       );
+    }
+    // New records arrive with no photo, and club-squad rows carry no birth
+    // date; both come from `enrich`, which needs the network apply never uses.
+    const withNewPlayers = teams.filter((t) => t.counts.newPlayers > 0).map((t) => t.id);
+    if (!dryRun && withNewPlayers.length > 0) {
+      this.report(`${colors.dim('next:')}     ${colors.bold(enrichCommand(withNewPlayers))}`);
     }
     if (exitCode !== EXIT.clean) process.exitCode = exitCode;
     return report;

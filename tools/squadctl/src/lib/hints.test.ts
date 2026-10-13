@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { applyCommand, displayPath } from './hints.ts';
+import { applyCommand, displayPath, enrichCommand } from './hints.ts';
 
 const REPO = '/Users/x/escuadra';
 
@@ -30,5 +30,17 @@ describe('applyCommand', () => {
     expect(applyCommand(REPO, `${REPO}/.cache/envelopes/run-1`, true)).toBe(
       'npm run squadctl -- apply .cache/envelopes/run-1 --dry-run',
     );
+  });
+});
+
+describe('enrichCommand', () => {
+  it('names the teams whose new players need a photo', () => {
+    expect(enrichCommand(['bay', 'esp'])).toBe('npm run squadctl -- enrich --only bay,esp');
+  });
+
+  // A sweep's list would run off the screen; the whole base is ~3 minutes.
+  it('falls back to every player past ten teams', () => {
+    const many = Array.from({ length: 11 }, (_, i) => `t${i}`);
+    expect(enrichCommand(many)).toBe('npm run squadctl -- enrich');
   });
 });

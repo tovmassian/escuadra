@@ -240,6 +240,22 @@ describe('enrichPlayer — birth', () => {
   });
 });
 
+describe('enrichPlayer — a kept birth date', () => {
+  const kept = new Map([['pedri', '1998-02-29']]);
+
+  it('stands against Wikidata and releases the photo', () => {
+    const result = enrichPlayer(player({ birth: '1998-02-29' }), lookups(), kept);
+    expect(result).toMatchObject({ birth: 'kept', photo: 'ok', conflict: null });
+    expect(result.player.birth).toBe('1998-02-29');
+  });
+
+  // The decision named a date; a different stored date is a new question.
+  it('lapses once the stored date is no longer the one it confirmed', () => {
+    const result = enrichPlayer(player({ birth: '1999-01-01' }), lookups(), kept);
+    expect(result.birth).toBe('conflict');
+  });
+});
+
 describe('enrichPlayer — failed lookups keep what is stored', () => {
   const stored = player({ birth: '2002-11-25', photo: credit('Kept.jpg') });
 
@@ -305,7 +321,7 @@ describe('describeBirthConflict and birthConflictFixes', () => {
     expect(birthConflictFixes(conflict)).toEqual([
       'Wikidata is right:      npm run squadctl -- birth torres 2000-02-29',
       'wrong person:           npm run squadctl -- retitle torres "<their article title>"',
-      'stored date is right:   correct https://www.wikidata.org/wiki/Q44297797, then re-run enrich',
+      'stored date is right:   npm run squadctl -- birth torres --keep',
     ]);
   });
 

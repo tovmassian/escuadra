@@ -5,6 +5,7 @@ import { LEAGUES } from '../../../../scripts/roster-envelope.ts';
 import type { Player, Squad } from '../../../../types/squad.ts';
 import { BaseCommand } from '../base-command.ts';
 import { colors } from '../lib/colors.ts';
+import { readDecisions } from '../lib/decisions.ts';
 import {
   BIRTH_STATUSES,
   PHOTO_STATUSES,
@@ -88,6 +89,11 @@ export default class Enrich extends BaseCommand<EnrichReport> {
     const dryRun = flags['dry-run'];
     const players = readPlayers(this.dataDir);
     const selected = this.select(players, flags.only);
+    const { decisions, problems } = readDecisions(this.dataDir);
+    if (problems.length > 0) {
+      this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
+    }
+    const kept = new Map((decisions.keptBirths ?? []).map((k) => [k.player, k.birth]));
 
     const client = new WikimediaClient({
       cacheDir: path.join(this.cacheDir, 'wikimedia'),
@@ -96,7 +102,7 @@ export default class Enrich extends BaseCommand<EnrichReport> {
     const failures: string[] = [];
     const lookups = await this.lookUp(client, selected, failures);
 
-    const results = selected.map((player) => enrichPlayer(player, lookups));
+    const results = selected.map((player) => enrichPlayer(player, lookups, kept));
     const summary = summarize(selected, results);
     const conflicts = results.flatMap((r) => (r.conflict === null ? [] : [r.conflict]));
 

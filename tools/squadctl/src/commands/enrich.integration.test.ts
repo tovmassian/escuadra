@@ -232,3 +232,29 @@ describe('birth, then enrich', () => {
     });
   });
 });
+
+describe('birth --keep, then enrich', () => {
+  it('keeps the stored date against Wikidata and releases the photo', async () => {
+    const root = repo();
+    await Birth.run(['torres', '2000-02-28', '--json'], import.meta.url);
+    await Birth.run(['torres', '--keep', '--json'], import.meta.url);
+    const decisions = JSON.parse(
+      readFileSync(path.join(root, 'data', 'decisions.json'), 'utf8'),
+    ) as { keptBirths: unknown };
+    expect(decisions.keptBirths).toEqual([{ player: 'torres', birth: '2000-02-28' }]);
+
+    const report = await Enrich.run(['--offline', '--json'], import.meta.url);
+    expect(report.conflicts).toEqual([]);
+    expect(report.players.find((p) => p.id === 'torres')?.birth).toBe('kept');
+    expect(stored(root).get('torres')).toMatchObject({
+      birth: '2000-02-28',
+      photo: { file: 'Torres.jpg' },
+    });
+  });
+
+  it('refuses to keep a stored date that does not exist', async () => {
+    const root = repo();
+    await expect(Birth.run(['torres', '--keep'], import.meta.url)).rejects.toThrow(/1998-02-29/);
+    expect(() => readFileSync(path.join(root, 'data', 'decisions.json'), 'utf8')).toThrow();
+  });
+});
