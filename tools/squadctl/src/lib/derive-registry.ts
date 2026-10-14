@@ -5,12 +5,9 @@
 // registry and the squad files drifting apart — an edited colour or name in
 // `data/teams.json` with no re-run of `apply`, or a squad file with no
 // registry entry at all.
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
-import path from 'node:path';
 import { isDeepStrictEqual } from 'node:util';
-import type { Squad } from '../../../../types/squad.ts';
-import { LEAGUES } from '../../../../scripts/roster-envelope.ts';
 import type { TeamRegistryEntry } from './registry.ts';
+import { readSquad, squadFiles } from './squad-files.ts';
 
 /** Walks every squad file under `squadsDir` and derives the registry entry
  *  each one implies. Order: `nation/*.json` first, then each `LEAGUES`
@@ -19,53 +16,21 @@ import type { TeamRegistryEntry } from './registry.ts';
  *  the folder), and `identity` — is already stored on the squad file, so
  *  this is reconstruction, not derivation in the "invented" sense. */
 export function deriveRegistry(squadsDir: string): TeamRegistryEntry[] {
-  const found: TeamRegistryEntry[] = [];
-
-  const readSquad = (file: string): Squad => JSON.parse(readFileSync(file, 'utf8')) as Squad;
-
-  const nationDir = path.join(squadsDir, 'nation');
-  if (existsSync(nationDir)) {
-    for (const file of readdirSync(nationDir)
-      .filter((f) => f.endsWith('.json'))
-      .sort()) {
-      const squad = readSquad(path.join(nationDir, file));
-      found.push({
-        id: squad.id,
-        kind: 'nation',
-        name: squad.name,
-        source: squad.source,
-        identity: {
-          primaryColor: squad.primaryColor,
-          secondaryColor: squad.secondaryColor,
-          marker: squad.marker,
-        },
-      });
-    }
-  }
-
-  for (const league of LEAGUES) {
-    const dir = path.join(squadsDir, 'club', league);
-    if (!existsSync(dir)) continue;
-    for (const file of readdirSync(dir)
-      .filter((f) => f.endsWith('.json'))
-      .sort()) {
-      const squad = readSquad(path.join(dir, file));
-      found.push({
-        id: squad.id,
-        kind: 'club',
-        league,
-        name: squad.name,
-        source: squad.source,
-        identity: {
-          primaryColor: squad.primaryColor,
-          secondaryColor: squad.secondaryColor,
-          marker: squad.marker,
-        },
-      });
-    }
-  }
-
-  return found;
+  return squadFiles(squadsDir).map((file) => {
+    const squad = readSquad(file.path);
+    return {
+      id: squad.id,
+      kind: file.kind,
+      ...(file.kind === 'club' ? { league: file.league } : {}),
+      name: squad.name,
+      source: squad.source,
+      identity: {
+        primaryColor: squad.primaryColor,
+        secondaryColor: squad.secondaryColor,
+        marker: squad.marker,
+      },
+    };
+  });
 }
 
 /** Renders `undefined` as a readable placeholder rather than the bare word

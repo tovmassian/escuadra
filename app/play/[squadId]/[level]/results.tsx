@@ -1,10 +1,12 @@
 import { Button } from '@/components/Button';
 import { EscuadraStrike } from '@/components/EscuadraStrike';
+import { PhotoCredits } from '@/components/PhotoCredits';
 import type { Level } from '@/lib/questionEngine';
+import { photoCreditRows, photoFor } from '@/lib/photos';
 import { actionOrder, resultTier, type ActionId } from '@/lib/resultsView';
 import { PASS_RATIO } from '@/lib/scoring';
 import { formatShareText } from '@/lib/shareResult';
-import { getRoster, getSquad } from '@/lib/squads';
+import { getPlayer, getRoster, getSquad } from '@/lib/squads';
 import { track } from '@/lib/telemetry';
 import {
   firstWrongPart,
@@ -198,6 +200,7 @@ export default function Results() {
   const passed = tier !== 'fail';
   const hasNextLevel = level < MAX_LEVEL;
   const actions = actionOrder({ passed, hasNextLevel, missedCount: missed.length });
+  const photoCredits = photoCreditRows(session.results, (id) => photoFor(getPlayer(id)));
 
   const retry = (atLevel: Level) => {
     const roster = getRoster(squadId);
@@ -354,6 +357,7 @@ export default function Results() {
           <Button label="Share Result" variant="outline" onPress={shareResult} />
         </Animated.View>
       </View>
+      <PhotoCredits rows={photoCredits} />
     </View>
   );
 }

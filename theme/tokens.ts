@@ -466,6 +466,8 @@ export const sizes = {
     sunRay: 3,
     sunRayOffset: 6,
   },
+  // The results screen's expanded photo-credit list scrolls past this.
+  photoCreditsMaxHeight: 200,
 } as const;
 
 export const iconSize = {
@@ -499,6 +501,21 @@ export const radii = {
   lg: 16,
   xl: 24,
   pill: 999,
+} as const;
+
+// Photo hero (docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md):
+// with a photo, the shirt number moves into a tab cut into the card's
+// bottom-left corner. Ratios are of the hero's side (thickness) or of the
+// tab's thickness (number, padding); the floors keep the tab legible at
+// level 3's 68pt minimum, where the ratios alone give an ~11pt number.
+export const heroTab = {
+  thicknessRatio: 0.27,
+  minThickness: 18,
+  numberRatio: 0.6,
+  minNumberSize: 14,
+  padStartRatio: 0.22,
+  padEndRatio: 0.26,
+  fillet: radii.md,
 } as const;
 
 // Single-layer shadows only — keep each usage to one shadow* set (+ elevation for Android).

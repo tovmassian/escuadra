@@ -1,0 +1,85 @@
+{
+  "batchcomplete": true,
+  "query": {
+    "normalized": [
+      {
+        "fromencoded": false,
+        "from": "Rodri_(footballer,_born_1996)",
+        "to": "Rodri (footballer, born 1996)"
+      }
+    ],
+    "redirects": [
+      {
+        "from": "Rodri (footballer, born 1996)",
+        "to": "Rodri"
+      },
+      {
+        "from": "Eric García (footballer, born 2001)",
+        "to": "Eric Garcia (footballer, born 2001)"
+      },
+      {
+        "from": "Josh Cullen (footballer)",
+        "to": "Josh Cullen"
+      }
+    ],
+    "pages": [
+      {
+        "ns": 0,
+        "title": "Federico Serra (footballer, born 2006)",
+        "missing": true
+      },
+      {
+        "pageid": 48849865,
+        "ns": 0,
+        "title": "Rodri",
+        "pageimage": "Rodri_Argentina_v_Spain_19_July_2026-187_(cropped).jpg",
+        "pageprops": {
+          "wikibase_item": "Q20994118"
+        }
+      },
+      {
+        "pageid": 59426361,
+        "ns": 0,
+        "title": "Eric Garcia (footballer, born 2001)",
+        "pageimage": "Eric_Garcia_Argentina_v_Spain_19_July_2026-313_(cropped).jpg",
+        "pageprops": {
+          "wikibase_item": "Q59938996"
+        }
+      },
+      {
+        "pageid": 61282065,
+        "ns": 0,
+        "title": "Abu Francis",
+        "pageprops": {
+          "wikibase_item": "Q65559585"
+        }
+      },
+      {
+        "pageid": 61557884,
+        "ns": 0,
+        "title": "Pedri",
+        "pageimage": "Pedri_France_v_Spain_7.24.26-245.jpg",
+        "pageprops": {
+          "wikibase_item": "Q66606355"
+        }
+      },
+      {
+        "pageid": 67674046,
+        "ns": 0,
+        "title": "Abdoullah Ba",
+        "pageprops": {
+          "wikibase_item": "Q106860208"
+        }
+      },
+      {
+        "pageid": 79852618,
+        "ns": 0,
+        "title": "Josh Cullen",
+        "pageprops": {
+          "disambiguation": "",
+          "wikibase_item": "Q134296439"
+        }
+      }
+    ]
+  }
+}

@@ -10,7 +10,19 @@
 // Checked in, because it is repo knowledge rather than a local preference.
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
+import { isCalendarDate } from './dates.ts';
 import type { AcceptedAlias, AcceptedSplit, NotInSquad, TitleAlias } from './reconcile.ts';
+
+/** A stored birth date a person has confirmed against Wikidata's: the
+ *  third answer to an `enrich` birth-date conflict, after `birth <id>
+ *  <date>` (Wikidata is right) and `retitle` (wrong person). It carries the
+ *  date it confirms, so `enrich` stops honouring it if the stored date
+ *  changes — and `birth <id> <date>`, the one command that changes a stored
+ *  date, removes it in the same run (`dropKeptBirth`). */
+export interface KeptBirth {
+  player: string;
+  birth: string;
+}
 
 export interface DecisionFile {
   /** Departure/arrival pairs confirmed to be two different people. */
@@ -30,6 +42,9 @@ export interface DecisionFile {
   /** Rows a club's article lists that do not belong in that squad. Optional
    *  for the same reason the other two are: every file on disk predates it. */
   notInSquad?: NotInSquad[];
+  /** Stored birth dates confirmed against Wikidata. Optional like the
+   *  others: every file on disk predates it. */
+  keptBirths?: KeptBirth[];
 }
 
 export const EMPTY_DECISIONS: DecisionFile = {
@@ -37,6 +52,7 @@ export const EMPTY_DECISIONS: DecisionFile = {
   aliases: [],
   titleAliases: [],
   notInSquad: [],
+  keptBirths: [],
 };
 
 /** The one way to read `decisions.json`. Returns `EMPTY_DECISIONS` when there
@@ -71,6 +87,7 @@ export function readDecisions(dataDir: string): {
       aliases: loaded.aliases ?? [],
       titleAliases: loaded.titleAliases ?? [],
       notInSquad: loaded.notInSquad ?? [],
+      keptBirths: loaded.keptBirths ?? [],
     },
     problems: [],
   };
@@ -100,6 +117,21 @@ export function validateDecisions(value: unknown): string[] {
   }
   if (value.notInSquad !== undefined && !Array.isArray(value.notInSquad)) {
     return ['decisions.json "notInSquad" must be an array when present'];
+  }
+  if (value.keptBirths !== undefined && !Array.isArray(value.keptBirths)) {
+    return ['decisions.json "keptBirths" must be an array when present'];
+  }
+  for (const [index, entry] of (value.keptBirths ?? []).entries()) {
+    if (!isRecord(entry)) {
+      errors.push(`keptBirths[${index}] must be an object`);
+      continue;
+    }
+    if (typeof entry.player !== 'string' || entry.player === '') {
+      errors.push(`keptBirths[${index}].player must be a non-empty string`);
+    }
+    if (typeof entry.birth !== 'string' || !isCalendarDate(entry.birth)) {
+      errors.push(`keptBirths[${index}].birth must be a real YYYY-MM-DD date`);
+    }
   }
   for (const [index, entry] of (value.aliases ?? []).entries()) {
     if (!isRecord(entry)) {
@@ -204,4 +236,26 @@ export function addNotInSquad(file: DecisionFile, entry: NotInSquad): DecisionFi
       (a, b) => a.team.localeCompare(b.team) || a.title.localeCompare(b.title),
     ),
   };
+}
+
+/** One decision per player: a later one replaces it. Returns null when the
+ *  same decision is already recorded. */
+export function addKeptBirth(file: DecisionFile, entry: KeptBirth): DecisionFile | null {
+  const existing = file.keptBirths ?? [];
+  if (existing.some((k) => k.player === entry.player && k.birth === entry.birth)) return null;
+  return {
+    ...file,
+    keptBirths: [...existing.filter((k) => k.player !== entry.player), entry].sort((a, b) =>
+      a.player.localeCompare(b.player),
+    ),
+  };
+}
+
+/** The player's kept birth gone, because their stored date was just set:
+ *  it confirmed the old date, and the data test fails on any entry that no
+ *  longer matches. Returns null when there was none. */
+export function dropKeptBirth(file: DecisionFile, player: string): DecisionFile | null {
+  const existing = file.keptBirths ?? [];
+  if (!existing.some((k) => k.player === player)) return null;
+  return { ...file, keptBirths: existing.filter((k) => k.player !== player) };
 }

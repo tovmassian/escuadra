@@ -1,0 +1,467 @@
+{
+  "batchcomplete": true,
+  "query": {
+    "pages": [
+      {
+        "ns": 6,
+        "title": "File:Escuadra fixture file that does not exist.jpg",
+        "missing": true,
+        "imagerepository": ""
+      },
+      {
+        "pageid": 39282000,
+        "ns": 6,
+        "title": "File:20150328 1426 U19 AUTHRV 1333.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/20150328_1426_U19_AUTHRV_1333.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 500,
+            "thumbheight": 751,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/20150328_1426_U19_AUTHRV_1333.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:20150328_1426_U19_AUTHRV_1333.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=39282000",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Ailura\" title=\"User:Ailura\">Ailura</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 3.0 at",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Attribution": {
+                "value": "Ailura, CC BY-SA 3.0 AT",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/3.0/at/deed.en",
+                "source": "commons-desc-page"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 88959974,
+        "ns": 6,
+        "title": "File:Mahdi Torabi (Cropped).jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/6/67/Mahdi_Torabi_%28Cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 500,
+            "thumbheight": 587,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Mahdi_Torabi_%28Cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Mahdi_Torabi_(Cropped).jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=88959974",
+            "extmetadata": {
+              "Artist": {
+                "value": "Unknown photographer",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Attribution",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Attribution": {
+                "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://snn.ir\">Student News Agency</a>",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 92181031,
+        "ns": 6,
+        "title": "File:20171114 AUT URU 4518 - Rodrigo Bentancur (cropped) 2.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/20171114_AUT_URU_4518_-_Rodrigo_Bentancur_%28cropped%29_2.jpg/500px-20171114_AUT_URU_4518_-_Rodrigo_Bentancur_%28cropped%29_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 697,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/20171114_AUT_URU_4518_-_Rodrigo_Bentancur_%28cropped%29_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:20171114_AUT_URU_4518_-_Rodrigo_Bentancur_(cropped)_2.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=92181031",
+            "extmetadata": {
+              "Artist": {
+                "value": "<ul><li><b>Original: </b> <a href=\"//commons.wikimedia.org/wiki/User:Ailura\" title=\"User:Ailura\">Ailura</a></li>\n<li><b>Derivative work: </b> <a href=\"//commons.wikimedia.org/w/index.php?title=User:Danyele&amp;action=edit&amp;redlink=1\" class=\"new\" title=\"User:Danyele (page does not exist)\">Danyele</a></li></ul>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 3.0 at",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Attribution": {
+                "value": "Ailura, CC BY-SA 3.0 AT",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/3.0/at/deed.en",
+                "source": "commons-desc-page"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 114124724,
+        "ns": 6,
+        "title": "File:UEFA Europa Conference League CSKA Sofia - Roma, 2021-12-09 (Kumbulla).jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg/500px-UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 972,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma,_2021-12-09_(Kumbulla).jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=114124724",
+            "extmetadata": {
+              "Artist": {
+                "value": "CSKA Sofia",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "GFDL",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "http://www.gnu.org/copyleft/fdl.html",
+                "source": "commons-desc-page"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 125306749,
+        "ns": 6,
+        "title": "File:Schäfer 2022.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Sch%C3%A4fer_2022.jpg/500px-Sch%C3%A4fer_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 692,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Sch%C3%A4fer_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Sch%C3%A4fer_2022.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=125306749",
+            "extmetadata": {
+              "Artist": {
+                "value": "mlsz.hu – the official website of the Hungarian Football Federation",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Attribution",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Attribution": {
+                "value": "mlsz.hu – Hungarian Football Federation",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 144158905,
+        "ns": 6,
+        "title": "File:0K8A7853 (53451306071) (cropped).jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/0K8A7853_%2853451306071%29_%28cropped%29.jpg/500px-0K8A7853_%2853451306071%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 577,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/0K8A7853_%2853451306071%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:0K8A7853_(53451306071)_(cropped).jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=144158905",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://www.flickr.com/people/196250323@N06\">Fédération Guinéenne Football</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Public domain",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "AttributionRequired": {
+                "value": "false",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 151983442,
+        "ns": 6,
+        "title": "File:Cher Ndour.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Cher_Ndour.jpg/500px-Cher_Ndour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 748,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Cher_Ndour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Cher_Ndour.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=151983442",
+            "extmetadata": {
+              "LicenseShortName": {
+                "value": "CC BY 2.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/2.0",
+                "source": "commons-desc-page"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 152029520,
+        "ns": 6,
+        "title": "File:2024 Emirates Cup - Riccardo Calafiori (2) (cropped).jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/2024_Emirates_Cup_-_Riccardo_Calafiori_%282%29_%28cropped%29.jpg/500px-2024_Emirates_Cup_-_Riccardo_Calafiori_%282%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 673,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/2024_Emirates_Cup_-_Riccardo_Calafiori_%282%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:2024_Emirates_Cup_-_Riccardo_Calafiori_(2)_(cropped).jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=152029520",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Timmy96\" title=\"User:Timmy96\">Timmy96</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "AttributionRequired": {
+                "value": "false",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+                "source": "commons-desc-page"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 152730778,
+        "ns": 6,
+        "title": "File:Alex Valle ACCI FCBARCELONA Turisme Catalunya gira pretemporada.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg/500px-Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 625,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=152730778",
+            "extmetadata": {
+              "Artist": {
+                "value": "Govern de Catalunya",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Attribution",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Attribution": {
+                "value": "<i>Govern de Catalunya</i>",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 157279900,
+        "ns": 6,
+        "title": "File:2021-07-28 FC Gossau - FC Wil 1900 02 (Nils Reichmuth).jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/2021-07-28_FC_Gossau_-_FC_Wil_1900_02_%28Nils_Reichmuth%29.jpg/500px-2021-07-28_FC_Gossau_-_FC_Wil_1900_02_%28Nils_Reichmuth%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 1012,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/2021-07-28_FC_Gossau_-_FC_Wil_1900_02_%28Nils_Reichmuth%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:2021-07-28_FC_Gossau_-_FC_Wil_1900_02_(Nils_Reichmuth).jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=157279900",
+            "extmetadata": {
+              "Artist": {
+                "value": "GePo",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Attribution",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 159794942,
+        "ns": 6,
+        "title": "File:Abdoullah Ba.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Abdoullah_Ba.jpg/500px-Abdoullah_Ba.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 699,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Abdoullah_Ba.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Abdoullah_Ba.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=159794942",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Benoit-caen\" title=\"User:Benoit-caen\">Benoit-caen</a>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "AttributionRequired": {
+                "value": "false",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "http://creativecommons.org/publicdomain/zero/1.0/deed.en",
+                "source": "commons-desc-page"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 182750019,
+        "ns": 6,
+        "title": "File:Frenkie De Jong (2025) (cropped).png",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Frenkie_De_Jong_%282025%29_%28cropped%29.png/500px-Frenkie_De_Jong_%282025%29_%28cropped%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 510,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Frenkie_De_Jong_%282025%29_%28cropped%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Frenkie_De_Jong_(2025)_(cropped).png",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=182750019",
+            "extmetadata": {
+              "Artist": {
+                "value": "Unknown author<span style=\"display: none;\">Unknown author</span>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 195780348,
+        "ns": 6,
+        "title": "File:Pedri France v Spain 7.24.26-245.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/500px-Pedri_France_v_Spain_7.24.26-245.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 750,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Pedri_France_v_Spain_7.24.26-245.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=195780348",
+            "extmetadata": {
+              "Artist": {
+                "value": "<a href=\"//commons.wikimedia.org/wiki/User:Berlination\" title=\"User:Berlination\">Bryan Berlin</a>",
+                "source": "commons-desc-page"
+              },
+              "Attribution": {
+                "value": "Bryan Berlin / WikiPortraits",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseShortName": {
+                "value": "CC BY-SA 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by-sa/4.0",
+                "source": "commons-desc-page"
+              }
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

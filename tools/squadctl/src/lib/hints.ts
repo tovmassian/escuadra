@@ -16,3 +16,12 @@ export function displayPath(repoRoot: string, target: string): string {
 export function applyCommand(repoRoot: string, envelopeDir: string, dryRun = false): string {
   return `npm run squadctl -- apply ${displayPath(repoRoot, envelopeDir)}${dryRun ? ' --dry-run' : ''}`;
 }
+
+/** What `apply` suggests once it has written new players: their photos and
+ *  birth dates come from `enrich`. Past ten teams the list stops being
+ *  readable, and enriching everyone takes about three minutes. */
+export function enrichCommand(teamIds: readonly string[]): string {
+  return teamIds.length === 0 || teamIds.length > 10
+    ? 'npm run squadctl -- enrich'
+    : `npm run squadctl -- enrich --only ${teamIds.join(',')}`;
+}

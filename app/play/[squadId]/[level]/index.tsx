@@ -5,20 +5,23 @@ import { ChipOption } from '@/components/ChipOption';
 import { CompletedPartPill } from '@/components/CompletedPartPill';
 import { HeroCard } from '@/components/HeroCard';
 import { PartRail } from '@/components/PartRail';
+import { PhotoCreditLine } from '@/components/PhotoCreditLine';
 import { ProgressDots } from '@/components/ProgressDots';
 import { ScorePill } from '@/components/ScorePill';
 import { StatChip } from '@/components/StatChip';
 import { TeamMarker } from '@/components/TeamMarker';
 import { flagFor } from '@/lib/flags';
+import { photoFor } from '@/lib/photos';
 import type { Level, QuestionPart } from '@/lib/questionEngine';
 import { fitHeroCard, partRailRows, progressOutcomes } from '@/lib/roundView';
 import { isFlawless } from '@/lib/resultsView';
-import { getRoster, getSquad } from '@/lib/squads';
+import { getPlayer, getRoster, getSquad } from '@/lib/squads';
 import { track } from '@/lib/telemetry';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
 import { durations, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
@@ -134,6 +137,15 @@ export default function Question() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session.phase]);
 
+  // Warm the cache for the next question's photo while this one is played,
+  // so it is normally already loaded when the question appears. A failed
+  // prefetch only means the number card shows a moment longer.
+  useEffect(() => {
+    const next = session.questions[session.currentIndex + 1];
+    const nextPhoto = next ? photoFor(getPlayer(next.playerId)) : null;
+    if (nextPhoto) Image.prefetch(nextPhoto.url).catch(() => {});
+  }, [session.currentIndex, session.questions]);
+
   if (
     !squad ||
     session.phase !== 'playing' ||
@@ -148,6 +160,7 @@ export default function Question() {
 
   const score = selectScore(session.results);
   const questionComplete = result.correct !== null;
+  const photo = photoFor(getPlayer(question.playerId));
 
   const affiliationLabel = squad.kind === 'club' ? 'NAT' : 'CLUB';
   // AGE drops out of the row entirely when the player has no stored birth
@@ -221,7 +234,12 @@ export default function Question() {
         exiting={FadeOut.duration(durations.transition)}
         style={[styles.heroBlock, level > 1 && styles.heroBlockSplit]}
       >
-        <HeroCard level={level} shirtNumber={question.memberNo} fit={heroFit} />
+        <HeroCard
+          level={level}
+          shirtNumber={question.memberNo}
+          fit={heroFit}
+          photoUrl={photo?.url ?? null}
+        />
         {level > 1 ? (
           <View style={styles.railColumn}>
             <PartRail rows={partRailRows(question, result, session.currentPartIndex)} />
@@ -257,6 +275,7 @@ export default function Question() {
           disabled={!questionComplete}
           onPress={continuePressed}
         />
+        <PhotoCreditLine credit={photo} />
       </View>
     </View>
   );

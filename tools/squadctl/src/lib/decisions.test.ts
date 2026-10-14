@@ -2,6 +2,8 @@ import { describe, expect, it } from 'vitest';
 import {
   EMPTY_DECISIONS,
   addAlias,
+  addKeptBirth,
+  dropKeptBirth,
   addSplit,
   addTitleAlias,
   validateDecisions,
@@ -139,5 +141,58 @@ describe('validateDecisions with titleAliases', () => {
     expect(result).toContain('titleAliases[0].title must be a non-empty string');
     expect(result).toContain('splits[0].departed must be a non-empty string');
     expect(result).toContain('splits[0].arrived must be a non-empty string');
+  });
+});
+
+describe('addKeptBirth', () => {
+  it('records that a stored birth date stands against Wikidata, idempotently', () => {
+    const once = addKeptBirth(EMPTY_DECISIONS, { player: 'galarza', birth: '2002-02-11' });
+    expect(once?.keptBirths).toEqual([{ player: 'galarza', birth: '2002-02-11' }]);
+    expect(once && addKeptBirth(once, { player: 'galarza', birth: '2002-02-11' })).toBeNull();
+  });
+
+  it('replaces an earlier decision for the same player, keeping the list sorted', () => {
+    const file = { ...EMPTY_DECISIONS, keptBirths: [{ player: 'z', birth: '2000-01-02' }] };
+    const updated = addKeptBirth(file, { player: 'a', birth: '2001-01-01' });
+    expect(updated?.keptBirths?.map((k) => k.player)).toEqual(['a', 'z']);
+    expect(addKeptBirth(file, { player: 'z', birth: '2000-01-03' })?.keptBirths).toEqual([
+      { player: 'z', birth: '2000-01-03' },
+    ]);
+  });
+});
+
+describe('dropKeptBirth', () => {
+  it("removes only that player's entry, and is a no-op without one", () => {
+    const file = {
+      ...EMPTY_DECISIONS,
+      keptBirths: [
+        { player: 'a', birth: '2001-01-01' },
+        { player: 'z', birth: '2000-01-02' },
+      ],
+    };
+    expect(dropKeptBirth(file, 'a')?.keptBirths).toEqual([{ player: 'z', birth: '2000-01-02' }]);
+    expect(dropKeptBirth(file, 'nobody')).toBeNull();
+    expect(dropKeptBirth(EMPTY_DECISIONS, 'a')).toBeNull();
+  });
+});
+
+describe('validateDecisions with keptBirths', () => {
+  it('accepts a file without them, and well-formed entries', () => {
+    expect(validateDecisions({ splits: [] })).toEqual([]);
+    expect(
+      validateDecisions({ splits: [], keptBirths: [{ player: 'a', birth: '2001-01-01' }] }),
+    ).toEqual([]);
+  });
+
+  it('refuses a non-array, a missing player, or a date that is not a real one', () => {
+    expect(validateDecisions({ splits: [], keptBirths: {} })).toEqual([
+      'decisions.json "keptBirths" must be an array when present',
+    ]);
+    expect(
+      validateDecisions({ splits: [], keptBirths: [{ player: '', birth: '1998-02-29' }] }),
+    ).toEqual([
+      'keptBirths[0].player must be a non-empty string',
+      'keptBirths[0].birth must be a real YYYY-MM-DD date',
+    ]);
   });
 });

@@ -3,7 +3,13 @@
 // has no React Native renderer.
 import type { Level, Question, QuestionPart } from '@/lib/questionEngine';
 import type { QuestionResult } from '@/stores/session';
-import { heroCardMinSize, heroCardSize, heroFitHeight, heroNumberSize } from '@/theme/tokens';
+import {
+  heroCardMinSize,
+  heroCardSize,
+  heroFitHeight,
+  heroNumberSize,
+  heroTab,
+} from '@/theme/tokens';
 
 export type DotOutcome = 'correct' | 'wrong' | 'current' | 'future';
 
@@ -91,4 +97,24 @@ export function fitHeroCard(level: Level, usableHeight: number): HeroCardFit {
   const missing = Math.max(0, heroFitHeight[level] - usableHeight);
   const size = Math.max(heroCardMinSize[level], full - Math.ceil(missing));
   return { size, numberSize: Math.round((heroNumberSize[level] * size) / full) };
+}
+
+export interface HeroTabMetrics {
+  thickness: number;
+  numberSize: number;
+  fillet: number;
+  padStart: number;
+  padEnd: number;
+}
+
+/** The photo hero's number tab for a hero of side `size`. */
+export function heroTabMetrics(size: number): HeroTabMetrics {
+  const thickness = Math.max(heroTab.minThickness, Math.round(size * heroTab.thicknessRatio));
+  return {
+    thickness,
+    numberSize: Math.max(heroTab.minNumberSize, Math.round(thickness * heroTab.numberRatio)),
+    fillet: heroTab.fillet,
+    padStart: Math.round(thickness * heroTab.padStartRatio),
+    padEnd: Math.round(thickness * heroTab.padEndRatio),
+  };
 }

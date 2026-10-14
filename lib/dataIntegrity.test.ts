@@ -4,6 +4,12 @@ import { describe, expect, it } from 'vitest';
 import { LEAGUES } from '../scripts/roster-envelope.ts';
 import type { Player, Squad } from '@/types/squad';
 import type { DecisionFile } from '../tools/squadctl/src/lib/decisions.ts';
+import { isCalendarDate } from '../tools/squadctl/src/lib/dates.ts';
+import {
+  MAX_CREDIT_NAME,
+  isAcceptedLicence,
+  isAttributionOnly,
+} from '../tools/squadctl/src/lib/photo-credit.ts';
 import { wikiTitleFromSource } from '../tools/squadctl/src/lib/registry.ts';
 
 // Squad data is spread across data/teams.json, data/squads/**/*.json,
@@ -221,6 +227,104 @@ describe('data/decisions.json refers to players and teams that exist', () => {
       .filter((teamId) => !squadIds.has(teamId))
       .sort();
     expect(missing).toEqual([]);
+  });
+
+  it('every keptBirths[] entry names a player and still confirms their stored date', () => {
+    const stale = (decisions.keptBirths ?? [])
+      .filter((k) => players.get(k.player)?.birth !== k.birth)
+      .map((k) => k.player);
+    expect(stale).toEqual([]);
+  });
+});
+
+// The asset-licensing guardrail as a test: no photo reaches a screen without
+// a licence someone can name and a link to the Commons page that credits its
+// author. squadctl enrich is the only writer of `photo` and refuses anything
+// less, so a failure here means a hand edit or a broken rule.
+describe('every player photo carries a complete, accepted credit', () => {
+  const withPhoto = playersData.filter((p) => p.photo !== null);
+
+  it('has photos to check', () => {
+    expect(withPhoto.length).toBeGreaterThan(0);
+  });
+
+  it('names an accepted licence, and an author only when there is one', () => {
+    const bad = withPhoto
+      .filter(
+        ({ photo }) =>
+          photo === null ||
+          !isAcceptedLicence(photo.licence) ||
+          (photo.author !== null && photo.author.trim() === '') ||
+          photo.file.trim() === '',
+      )
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  // That licence's one condition is crediting the holder by name; the
+  // "Wikimedia Commons" fallback does not meet it.
+  it('names the holder of every attribution-only photo', () => {
+    const bad = withPhoto
+      .filter(
+        ({ photo }) => photo !== null && isAttributionOnly(photo.licence) && photo.author === null,
+      )
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  // A Commons template can wrap a source box and a licence banner round the
+  // name: one stored credit was once 4,413 characters of it, CSS included.
+  it('credits a name, never a template’s boilerplate', () => {
+    const bad = withPhoto
+      .filter(({ photo }) => (photo?.author?.length ?? 0) > MAX_CREDIT_NAME)
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  it('hotlinks a Wikimedia image host over https, with no tracking query', () => {
+    const bad = withPhoto
+      .filter(
+        ({ photo }) => !/^https:\/\/(upload|thumb)\.wikimedia\.org\/[^?#]+$/.test(photo?.url ?? ''),
+      )
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  it('links a deed only over https', () => {
+    const bad = withPhoto
+      .filter(({ photo }) => photo?.licenceUrl != null && !photo.licenceUrl.startsWith('https://'))
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  // The Commons page is derived from `file` (scripts/commons.ts), not stored:
+  // ~100 bytes a photo. Anything beyond these fields is weight the bundle
+  // carries for nothing.
+  it('carries exactly the PhotoCredit fields', () => {
+    const fields = ['author', 'file', 'licence', 'licenceUrl', 'url'];
+    const bad = withPhoto
+      .filter(
+        ({ photo }) => JSON.stringify(Object.keys(photo ?? {}).sort()) !== JSON.stringify(fields),
+      )
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  // A photo is looked up through the player's article; without one there is
+  // nothing to say whose photo it is.
+  it('belongs to a player with an article title', () => {
+    expect(withPhoto.filter((p) => p.wikiTitle === null).map((p) => p.id)).toEqual([]);
+  });
+});
+
+// The old pipeline stored dates that do not exist (1998-02-29), which a
+// screen turns into a wrong AGE chip rather than a visible error.
+describe('every stored birth date is a real calendar date', () => {
+  it('parses back to itself', () => {
+    const bad = playersData
+      .filter((p) => p.birth !== null && !isCalendarDate(p.birth))
+      .map((p) => `${p.id}: ${p.birth}`);
+    expect(bad).toEqual([]);
   });
 });
 

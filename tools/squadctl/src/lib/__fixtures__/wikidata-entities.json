@@ -1,0 +1,382 @@
+{
+  "entities": {
+    "Q66606355": {
+      "type": "item",
+      "id": "Q66606355",
+      "claims": {
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "ad7d38a03cdd40cdc373de0dc4e7b7fcbccb31d9",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 5,
+                  "id": "Q5"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q66606355$6D5C086A-B2A8-4063-AD14-F9D204624631",
+            "rank": "normal"
+          }
+        ],
+        "P569": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P569",
+              "hash": "b443924c5f5d7d93579620444dd8d5238c889529",
+              "datavalue": {
+                "value": {
+                  "time": "+2002-11-25T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q66606355$bde8662a-7c84-44f6-bf34-1be4163409df",
+            "rank": "normal"
+          }
+        ],
+        "P18": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P18",
+              "hash": "65eff65dc37ef3ddd9caec1895678a89b4b39eb7",
+              "datavalue": {
+                "value": "Pedri France v Spain 7.24.26-245.jpg",
+                "type": "string"
+              },
+              "datatype": "commonsMedia"
+            },
+            "type": "statement",
+            "id": "Q66606355$4afa914a-4427-3fff-525c-791827b1e31c",
+            "rank": "normal"
+          }
+        ]
+      }
+    },
+    "Q100716088": {
+      "type": "item",
+      "id": "Q100716088",
+      "claims": {
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "ad7d38a03cdd40cdc373de0dc4e7b7fcbccb31d9",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 5,
+                  "id": "Q5"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q100716088$aede3981-44b4-182b-5ca0-be34cf370b93",
+            "rank": "normal"
+          }
+        ],
+        "P569": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P569",
+              "hash": "7987dfa67ed177af385b7c67b89ddd76f78a25ee",
+              "datavalue": {
+                "value": {
+                  "time": "+2003-01-01T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 9,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q100716088$60434ebd-1d5d-4458-9453-a0405edcdfa8",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P569",
+              "hash": "0419f5eccdb110641713639712ee4b87f326f331",
+              "datavalue": {
+                "value": {
+                  "time": "+2003-07-07T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q100716088$972832D0-DF88-407C-84AE-200BB5F9BE3B",
+            "rank": "preferred"
+          }
+        ]
+      }
+    },
+    "Q115181709": {
+      "type": "item",
+      "id": "Q115181709",
+      "claims": {
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "ad7d38a03cdd40cdc373de0dc4e7b7fcbccb31d9",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 5,
+                  "id": "Q5"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q115181709$7e4f88d9-d072-45dc-b2f2-35ca1604afff",
+            "rank": "normal"
+          }
+        ],
+        "P569": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P569",
+              "hash": "22535b74bad6026347ea153ddad73fb19e6a1aff",
+              "datavalue": {
+                "value": {
+                  "time": "+2004-02-24T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q115181709$4d34b059-cbdf-4bde-92cc-b24095b33fcd",
+            "rank": "normal"
+          },
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P569",
+              "hash": "907396244a1289e8d66a52885c4cc308d332a922",
+              "datavalue": {
+                "value": {
+                  "time": "+2004-02-26T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q115181709$F4CDD8C3-A1FA-4108-885B-DC11F0357ED5",
+            "rank": "normal"
+          }
+        ]
+      }
+    },
+    "Q65160117": {
+      "type": "item",
+      "id": "Q65160117",
+      "claims": {
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "ad7d38a03cdd40cdc373de0dc4e7b7fcbccb31d9",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 5,
+                  "id": "Q5"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q65160117$38890C8F-2D19-4B6B-86A4-1225B25CEFE7",
+            "rank": "normal"
+          }
+        ],
+        "P569": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P569",
+              "hash": "0d229e9a347af530a79c5e097538d7250d25c38e",
+              "datavalue": {
+                "value": {
+                  "time": "+1997-00-00T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 9,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q65160117$258ea20a-1334-4e38-a51d-814fd0da1a21",
+            "rank": "normal"
+          }
+        ]
+      }
+    },
+    "Q106860208": {
+      "type": "item",
+      "id": "Q106860208",
+      "claims": {
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "ad7d38a03cdd40cdc373de0dc4e7b7fcbccb31d9",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 5,
+                  "id": "Q5"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "Q106860208$f1c9569f-5271-4378-b496-af23e634576f",
+            "rank": "normal"
+          }
+        ],
+        "P569": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P569",
+              "hash": "e61951cbb4bd410c5d89440ac1a608dc0d77203b",
+              "datavalue": {
+                "value": {
+                  "time": "+2003-07-31T00:00:00Z",
+                  "timezone": 0,
+                  "before": 0,
+                  "after": 0,
+                  "precision": 11,
+                  "calendarmodel": "http://www.wikidata.org/entity/Q1985727"
+                },
+                "type": "time"
+              },
+              "datatype": "time"
+            },
+            "type": "statement",
+            "id": "Q106860208$63229baa-8317-4400-a4bc-0b1f075724ed",
+            "rank": "normal"
+          }
+        ],
+        "P18": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P18",
+              "hash": "2209d3083cf123ef3ee3a072ec93ace1326a4b07",
+              "datavalue": {
+                "value": "Abdoullah Ba.jpg",
+                "type": "string"
+              },
+              "datatype": "commonsMedia"
+            },
+            "type": "statement",
+            "id": "Q106860208$C1F358B2-7D55-419A-A306-599FEA7A00A9",
+            "rank": "normal"
+          }
+        ]
+      }
+    },
+    "Q8682": {
+      "type": "item",
+      "id": "Q8682",
+      "claims": {
+        "P31": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P31",
+              "hash": "de95c192b6d83336c7c4d98d15b566a0ca33065a",
+              "datavalue": {
+                "value": {
+                  "entity-type": "item",
+                  "numeric-id": 476028,
+                  "id": "Q476028"
+                },
+                "type": "wikibase-entityid"
+              },
+              "datatype": "wikibase-item"
+            },
+            "type": "statement",
+            "id": "q8682$381F1FD7-B316-46C9-B457-E1640AC4AE94",
+            "rank": "normal"
+          }
+        ],
+        "P18": [
+          {
+            "mainsnak": {
+              "snaktype": "value",
+              "property": "P18",
+              "hash": "e81ab0454bd6d919d86225df70f81176bb11b3d4",
+              "datavalue": {
+                "value": "® S.D. MADRID E.S.B. FACHADA PRINCIPAL - panoramio.jpg",
+                "type": "string"
+              },
+              "datatype": "commonsMedia"
+            },
+            "type": "statement",
+            "id": "Q8682$3D369C9D-5B03-4628-9E05-CAAA1F2C7041",
+            "rank": "normal"
+          }
+        ]
+      }
+    }
+  },
+  "success": 1
+}

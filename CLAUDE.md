@@ -47,9 +47,11 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 
 ⚠️ **On `main` today, the About privacy text is out of date.** It still says
 "no advertising, analytics or tracking software" while TelemetryDeck (#53) is
-in the code. The next release branch (its version still TBD) is cut from
-`main` only after #54 rewrites that text and the web policy together and #55
-updates the store declarations; then #60 builds it.
+in the code, and it does not mention that player photos load from Wikimedia
+Commons, which sees the user's IP address. The next release branch (its
+version still TBD) is cut from `main` only after #54 rewrites that text and
+the web policy together and #55 updates the store declarations — both
+covering the photos as well as TelemetryDeck; then #60 builds it.
 
 ## Scope and roadmap
 
@@ -93,11 +95,19 @@ worked around — stop and ask. **Product and engineering** guardrails are the
 defaults; an issue that explicitly changes one wins, and the change should
 update this file in the same PR rather than leave a stale rule behind.
 
-1. **Player photos slot into the existing hero.** The question screen keeps a
-   hero slot that a square portrait can drop into without a redesign (it
-   currently holds a large shirt number), and players carry
-   `photo: string | null`. Any photo that ships is bound by the
-   asset-licensing rule below.
+1. **Player photos are hotlinked Wikimedia Commons thumbnails, always
+   credited.** A photo fills the question hero and the shirt number moves to
+   a corner tab; with no photo, or until it loads, the number card shows.
+   `player.photo` is a `PhotoCredit` written only by `squadctl enrich`, which
+   refuses any photo without an accepted licence, a Wikimedia thumbnail and
+   its Commons page — the asset-licensing rule below, enforced in code and in
+   `lib/dataIntegrity.test.ts`. Every shown photo shows its credit; never put
+   the Commons file name or caption in visible text or a label, as they name
+   the player. The credit sits under the question's action button for as
+   long as the question is on screen, never as part of the answer reveal.
+   Each photo load reaches Wikimedia, so photos ship in a store build with
+   the privacy disclosures (guardrail 4), never over the air:
+   `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.
 2. **No club crests, badges, logos, or shield shapes. Ever.** Trademark
    exposure, and this constraint outlives v0. Clubs are identified by text and
    a banded colour marker (see `TeamMarker` in the data model section) — never
@@ -140,7 +150,9 @@ update this file in the same PR rather than leave a stale rule behind.
    form — in a store build, never over the air. Today the traffic is
    `expo-updates` checking EAS Update on launch (OS, project ID, a random
    installation token) and, from the next store version, opt-out
-   TelemetryDeck usage signals (see Telemetry under Architecture rules).
+   TelemetryDeck usage signals (see Telemetry under Architecture rules) and
+   player-photo thumbnails loaded from Wikimedia Commons
+   (`upload.`/`thumb.wikimedia.org`, which sees the IP address).
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
    rather than inlining a value. This governs the app's own design system —
@@ -169,7 +181,7 @@ different numbers for club and country. Do not denormalise it onto the player.
 
 ```
 data/index.json                       squad manifest — GENERATED, see below
-data/players.json                     { id, name, fullName, birth, position, nationality, club, photo: null, wikiTitle }
+data/players.json                     { id, name, fullName, birth, position, nationality, club, photo, wikiTitle }
 data/squads/nation/<id>.json          { id, kind: 'nation', name, season, verified,
                                          primaryColor, secondaryColor, marker,
                                          members: [{ playerId, no, captain? }] }
@@ -177,6 +189,11 @@ data/squads/club/<league>/<id>.json   same shape, kind: 'club'. <league> is one 
                                        la-liga, serie-a, bundesliga, ligue-1,
                                        premier-league, ucl (see League in types/squad.ts)
 ```
+
+`photo` is a `PhotoCredit` (`types/squad.ts`) or null: the Commons file, its
+500 px thumbnail URL, the name the licence asks to credit, licence and deed.
+The Commons page is derived from the file name (`scripts/commons.ts`), not
+stored. Hotlinked, never copied.
 
 `wikiTitle` is the Wikipedia article title the record came from — the only
 field that is unique per person, since two different real people are both
@@ -257,6 +274,11 @@ those with `squadctl rename <playerId> "<name>"`, which never rewrites an id,
 then re-run `apply`. `tools/squadctl/README.md` documents every conflict kind,
 what you decide, and the command that hands the answer back; the design is in
 `docs/superpowers/specs/2026-09-06-squadctl-design.md`.
+
+`squadctl enrich` runs after `apply` and writes each player's `photo` and,
+where none is stored, `birth` from Wikidata, in batches of 50. A stored birth
+date Wikidata disagrees with is a conflict it never overwrites, and holds that
+player's photo until `squadctl birth` answers it.
 
 The `squad-factory` skill set (`squad-fetcher`, `squad-writer`,
 `squad-verifier`) is retired — `squadctl` proved faster and more reliable, and
