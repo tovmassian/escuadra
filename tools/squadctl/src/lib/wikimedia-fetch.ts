@@ -47,7 +47,7 @@ export const REQUESTS = {
     prop: 'imageinfo',
     iiprop: 'url|extmetadata',
     iiurlwidth: String(THUMB_WIDTH),
-    iiextmetadatafilter: 'LicenseShortName|Artist|LicenseUrl|AttributionRequired',
+    iiextmetadatafilter: 'LicenseShortName|Artist|Attribution|LicenseUrl|AttributionRequired',
     titles: files.map((file) => `File:${file}`).join('|'),
   }),
 };

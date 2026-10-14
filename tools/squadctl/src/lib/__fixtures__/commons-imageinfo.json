@@ -36,9 +36,46 @@
                 "source": "commons-desc-page",
                 "hidden": ""
               },
+              "Attribution": {
+                "value": "Ailura, CC BY-SA 3.0 AT",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
               "LicenseUrl": {
                 "value": "https://creativecommons.org/licenses/by-sa/3.0/at/deed.en",
                 "source": "commons-desc-page"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 88959974,
+        "ns": 6,
+        "title": "File:Mahdi Torabi (Cropped).jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/6/67/Mahdi_Torabi_%28Cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 500,
+            "thumbheight": 587,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Mahdi_Torabi_%28Cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Mahdi_Torabi_(Cropped).jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=88959974",
+            "extmetadata": {
+              "Artist": {
+                "value": "Unknown photographer",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Attribution",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Attribution": {
+                "value": "<a rel=\"nofollow\" class=\"external text\" href=\"https://snn.ir\">Student News Agency</a>",
+                "source": "commons-desc-page",
+                "hidden": ""
               }
             }
           }
@@ -69,6 +106,11 @@
               },
               "AttributionRequired": {
                 "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Attribution": {
+                "value": "Ailura, CC BY-SA 3.0 AT",
                 "source": "commons-desc-page",
                 "hidden": ""
               },
@@ -111,6 +153,38 @@
               "LicenseUrl": {
                 "value": "http://www.gnu.org/copyleft/fdl.html",
                 "source": "commons-desc-page"
+              }
+            }
+          }
+        ]
+      },
+      {
+        "pageid": 125306749,
+        "ns": 6,
+        "title": "File:Schäfer 2022.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Sch%C3%A4fer_2022.jpg/500px-Sch%C3%A4fer_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 692,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Sch%C3%A4fer_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Sch%C3%A4fer_2022.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=125306749",
+            "extmetadata": {
+              "Artist": {
+                "value": "mlsz.hu – the official website of the Hungarian Football Federation",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Attribution",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Attribution": {
+                "value": "mlsz.hu – Hungarian Football Federation",
+                "source": "commons-desc-page",
+                "hidden": ""
               }
             }
           }
@@ -217,6 +291,38 @@
         ]
       },
       {
+        "pageid": 152730778,
+        "ns": 6,
+        "title": "File:Alex Valle ACCI FCBARCELONA Turisme Catalunya gira pretemporada.jpg",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg/500px-Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 625,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=152730778",
+            "extmetadata": {
+              "Artist": {
+                "value": "Govern de Catalunya",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "Attribution",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "Attribution": {
+                "value": "<i>Govern de Catalunya</i>",
+                "source": "commons-desc-page",
+                "hidden": ""
+              }
+            }
+          }
+        ]
+      },
+      {
         "pageid": 157279900,
         "ns": 6,
         "title": "File:2021-07-28 FC Gossau - FC Wil 1900 02 (Nils Reichmuth).jpg",
@@ -280,6 +386,42 @@
         ]
       },
       {
+        "pageid": 182750019,
+        "ns": 6,
+        "title": "File:Frenkie De Jong (2025) (cropped).png",
+        "imagerepository": "local",
+        "imageinfo": [
+          {
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Frenkie_De_Jong_%282025%29_%28cropped%29.png/500px-Frenkie_De_Jong_%282025%29_%28cropped%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 500,
+            "thumbheight": 510,
+            "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Frenkie_De_Jong_%282025%29_%28cropped%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
+            "descriptionurl": "https://commons.wikimedia.org/wiki/File:Frenkie_De_Jong_(2025)_(cropped).png",
+            "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=182750019",
+            "extmetadata": {
+              "Artist": {
+                "value": "Unknown author<span style=\"display: none;\">Unknown author</span>",
+                "source": "commons-desc-page"
+              },
+              "LicenseShortName": {
+                "value": "CC BY 4.0",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "AttributionRequired": {
+                "value": "true",
+                "source": "commons-desc-page",
+                "hidden": ""
+              },
+              "LicenseUrl": {
+                "value": "https://creativecommons.org/licenses/by/4.0",
+                "source": "commons-desc-page"
+              }
+            }
+          }
+        ]
+      },
+      {
         "pageid": 195780348,
         "ns": 6,
         "title": "File:Pedri France v Spain 7.24.26-245.jpg",
@@ -296,6 +438,11 @@
               "Artist": {
                 "value": "<a href=\"//commons.wikimedia.org/wiki/User:Berlination\" title=\"User:Berlination\">Bryan Berlin</a>",
                 "source": "commons-desc-page"
+              },
+              "Attribution": {
+                "value": "Bryan Berlin / WikiPortraits",
+                "source": "commons-desc-page",
+                "hidden": ""
               },
               "LicenseShortName": {
                 "value": "CC BY-SA 4.0",

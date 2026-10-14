@@ -4,10 +4,13 @@
 // fixes its reviews found (numeric entities, exact "Public domain").
 //
 // Spec: docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md.
+import { commonsFileUrl } from '../../../../scripts/commons.ts';
 import type { PhotoCredit } from '../../../../types/squad.ts';
 
-/** What an `incomplete-credit` lacks, so the report says why. */
-export type MissingField = 'licence' | 'thumbnail' | 'commons-page';
+/** What an `incomplete-credit` lacks, so the report says why. `author` only
+ *  for the attribution-only licence, whose one condition is a named holder;
+ *  `commons-page` also when the page is not where `commonsFileUrl` puts it. */
+export type MissingField = 'licence' | 'thumbnail' | 'commons-page' | 'author';
 
 export type CreditOutcome =
   | { status: 'ok'; credit: PhotoCredit }
@@ -31,7 +34,7 @@ function decodeEntity(entity: string): string {
   return codePoint <= 0x10ffff ? String.fromCodePoint(codePoint) : `&${entity};`;
 }
 
-/** Commons' `Artist` field is HTML — usually a link to the uploader's user
+/** Commons' `Artist` and `Attribution` fields are HTML — usually a link to the uploader's user
  *  page, sometimes a list naming the original and the derivative work. A
  *  credit line is plain text. */
 export function stripHtml(html: string): string {
@@ -51,10 +54,16 @@ export function fileKey(name: string): string {
 }
 
 // CC BY and CC BY-SA at any version (ported variants such as "CC BY-SA 3.0
-// at" included), CC0, and public domain exactly. Anything else — "Public
-// domain in the United States", non-commercial, GFDL, Commons' own
-// "Attribution" — is refused rather than guessed at.
-const ACCEPTED_LICENCE = /^(CC BY(-SA)? \d\.\d( [a-z]{2,3})?|CC0|Public domain)$/i;
+// at" included), CC0, public domain exactly, and Commons' attribution-only
+// licence — "anyone may use it for any purpose, provided that the copyright
+// holder is properly attributed", accepted 2026-10-14 once its wording was
+// read. Anything else — "Public domain in the United States",
+// non-commercial, GFDL, "Copyrighted free use" — is refused, not guessed at.
+const ACCEPTED_LICENCE = /^(CC BY(-SA)? \d\.\d( [a-z]{2,3})?|CC0|Public domain|Attribution)$/i;
+const ATTRIBUTION_ONLY = 'Attribution';
+
+/** Commons' unknown-author templates name no one to credit. */
+const UNKNOWN_NAME = /^(unknown (author|photographer)\s*)+$/i;
 
 export function isAcceptedLicence(shortName: string): boolean {
   return ACCEPTED_LICENCE.test(shortName.trim());
@@ -96,45 +105,53 @@ interface ImageInfoResponse {
   query?: { normalized?: { from: string; to: string }[]; pages?: ImageInfoPage[] };
 }
 
+/** Who a credit names: the attribution the licence asks for when Commons
+ *  records one — CC BY wants credit "in any reasonable manner requested by
+ *  the licensor", and an agency's photo names the agency, not the
+ *  photographer — else the author. Null when neither names anyone. */
+function creditName(meta: Record<string, { value?: string } | undefined>): string | null {
+  for (const field of [meta.Attribution?.value, meta.Artist?.value]) {
+    const name = stripHtml(field ?? '');
+    if (name !== '' && !UNKNOWN_NAME.test(name)) return name;
+  }
+  return null;
+}
+
 function credit(page: ImageInfoPage): CreditOutcome {
   const info = page.imageinfo?.[0];
   const meta = info?.extmetadata ?? {};
+  const file = fileKey(page.title);
   const licence = nonEmpty(meta.LicenseShortName?.value);
-  const author = stripHtml(meta.Artist?.value ?? '');
+  const author = creditName(meta);
   const licenceUrl = nonEmpty(meta.LicenseUrl?.value)?.replace(/^http:\/\//, 'https://') ?? null;
   const url = wikimediaImageUrl(info?.thumburl);
-  const sourceUrl = nonEmpty(info?.descriptionurl);
+  // Not stored — the app derives it from `file` — so it must be exactly
+  // where the derivation puts it, or the credit's link would not land.
+  const pageFound = nonEmpty(info?.descriptionurl) === commonsFileUrl(file);
 
   if (licence !== null && !isAcceptedLicence(licence)) {
     return { status: 'refused-licence', licence };
   }
-  if (licence === null || url === null || sourceUrl === null) {
+  const unnamedHolder = licence === ATTRIBUTION_ONLY && author === null;
+  if (licence === null || url === null || !pageFound || unnamedHolder) {
     const missing: MissingField[] = [];
     if (licence === null) missing.push('licence');
     if (url === null) missing.push('thumbnail');
-    if (sourceUrl === null) missing.push('commons-page');
+    if (!pageFound) missing.push('commons-page');
+    if (unnamedHolder) missing.push('author');
     return { status: 'incomplete-credit', licence, missing };
   }
-  return {
-    status: 'ok',
-    credit: {
-      file: fileKey(page.title),
-      url,
-      author: author === '' ? null : author,
-      licence,
-      licenceUrl,
-      sourceUrl,
-    },
-  };
+  return { status: 'ok', credit: { file, url, author, licence, licenceUrl } };
 }
 
 /** The credit of each Commons file across one batch's responses (more than
  *  one when the query was `continue`d), keyed by `fileKey` — under the
  *  requested spelling too when Commons normalised it. A file is `ok` only
- *  with an accepted licence, a thumbnail on a Wikimedia image host and a
- *  Commons page. Author and deed are kept when Commons sends them but not
- *  required: the credit links to the Commons page, which names both — the
- *  same click-through credit Wikipedia itself relies on. */
+ *  with an accepted licence, a thumbnail on a Wikimedia image host and its
+ *  Commons page where `commonsFileUrl` derives it. A credit name and deed
+ *  are kept when Commons sends them but not required — the credit links the
+ *  Commons page, which names both, the same click-through credit Wikipedia
+ *  relies on — except that the attribution-only licence needs a name. */
 export function creditsByFile(responses: readonly unknown[]): Map<string, CreditOutcome> {
   const pages = new Map<string, ImageInfoPage>();
   const aliases = new Map<string, string>();

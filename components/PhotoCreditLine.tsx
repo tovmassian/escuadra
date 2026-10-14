@@ -1,3 +1,4 @@
+import { commonsFileUrl } from '@/scripts/commons';
 import { typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { PhotoCredit } from '@/types/squad';
@@ -22,14 +23,18 @@ export function PhotoCreditLine({ credit }: { credit: PhotoCredit }) {
   return (
     <Text style={styles.line}>
       Photo:{' '}
-      <Text style={styles.link} accessibilityRole="link" onPress={open(credit.sourceUrl)}>
+      <Text
+        style={styles.link}
+        accessibilityRole="link"
+        onPress={open(commonsFileUrl(credit.file))}
+      >
         {credit.author ?? 'Wikimedia Commons'}
       </Text>
       {' · '}
       <Text
         style={styles.link}
         accessibilityRole="link"
-        onPress={open(credit.licenceUrl ?? credit.sourceUrl)}
+        onPress={open(credit.licenceUrl ?? commonsFileUrl(credit.file))}
       >
         {credit.licence}
       </Text>

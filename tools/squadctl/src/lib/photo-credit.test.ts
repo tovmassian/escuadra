@@ -40,6 +40,9 @@ describe('fileKey', () => {
 });
 
 describe('isAcceptedLicence', () => {
+  // "Attribution" is Commons' attribution-only licence: any use, provided the
+  // copyright holder is credited — accepted 2026-10-14 after its wording was
+  // read, on the condition creditsByFile enforces: a named holder.
   it.each([
     'CC BY-SA 4.0',
     'CC BY 2.0',
@@ -48,19 +51,17 @@ describe('isAcceptedLicence', () => {
     'CC BY-SA 3.0 IGO',
     'CC0',
     'Public domain',
+    'Attribution',
   ])('accepts %s', (licence) => {
     expect(isAcceptedLicence(licence)).toBe(true);
   });
 
-  // "Attribution" is Commons' attribution-only licence: free, but the spec
-  // leaves accepting it to a person who has read its wording.
   it.each([
     'CC BY-NC 2.0',
     'CC BY-NC-SA 4.0',
     'GFDL',
     'GFDL 1.2',
     'CC BY-SA',
-    'Attribution',
     'Copyrighted free use',
     'PDM-owner',
     'Public domain in the United States',
@@ -72,19 +73,53 @@ describe('isAcceptedLicence', () => {
 
 describe('creditsByFile (recorded Commons response)', () => {
   const credits = creditsByFile([imageInfo]);
+  const author = (file: string) => {
+    const outcome = credits.get(file);
+    return outcome?.status === 'ok' ? outcome.credit.author : `not ok: ${outcome?.status}`;
+  };
 
-  it('builds a complete credit: file, tracking-free thumbnail, author as text, deed, page', () => {
+  it('builds a complete credit: file, tracking-free thumbnail, credit name, licence, deed', () => {
     expect(credits.get('Pedri France v Spain 7.24.26-245.jpg')).toEqual({
       status: 'ok',
       credit: {
         file: 'Pedri France v Spain 7.24.26-245.jpg',
         url: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/500px-Pedri_France_v_Spain_7.24.26-245.jpg',
-        author: 'Bryan Berlin',
+        author: 'Bryan Berlin / WikiPortraits',
         licence: 'CC BY-SA 4.0',
         licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
-        sourceUrl: 'https://commons.wikimedia.org/wiki/File:Pedri_France_v_Spain_7.24.26-245.jpg',
       },
     });
+  });
+
+  // CC BY asks for credit "in any reasonable manner requested by the
+  // licensor": Commons' Attribution field is that request, and it can name
+  // someone the author field does not.
+  it('credits the attribution the licence asks for over the author field', () => {
+    expect(author('Pedri France v Spain 7.24.26-245.jpg')).toBe('Bryan Berlin / WikiPortraits');
+    expect(author('Mahdi Torabi (Cropped).jpg')).toBe('Student News Agency');
+    expect(author('Schäfer 2022.jpg')).toBe('mlsz.hu – Hungarian Football Federation');
+  });
+
+  it('credits the author when the licence asks for nothing else', () => {
+    expect(author('2024 Emirates Cup - Riccardo Calafiori (2) (cropped).jpg')).toBe('Timmy96');
+    expect(author('2021-07-28 FC Gossau - FC Wil 1900 02 (Nils Reichmuth).jpg')).toBe('GePo');
+  });
+
+  it('accepts the attribution-only licence when the holder is named', () => {
+    const outcome = credits.get(
+      'Alex Valle ACCI FCBARCELONA Turisme Catalunya gira pretemporada.jpg',
+    );
+    expect(outcome).toMatchObject({
+      status: 'ok',
+      credit: { author: 'Govern de Catalunya', licence: 'Attribution', licenceUrl: null },
+    });
+  });
+
+  // Commons' unknown-author template is no one to credit; the credit falls
+  // back to Wikimedia Commons and its page, as for no author at all.
+  it('treats an unknown-author placeholder as no author', () => {
+    expect(author('Frenkie De Jong (2025) (cropped).png')).toBeNull();
+    expect(author('Cher Ndour.jpg')).toBeNull();
   });
 
   // Commons serves a small original unscaled from upload.wikimedia.org.
@@ -119,30 +154,10 @@ describe('creditsByFile (recorded Commons response)', () => {
     }
   });
 
-  // Like Wikipedia, the credit can stand on the licence and a link to the
-  // Commons page, which always names the author.
-  it('accepts a photo with no author, crediting it to Commons', () => {
-    const outcome = credits.get('Cher Ndour.jpg');
-    expect(outcome?.status).toBe('ok');
-    if (outcome?.status === 'ok') expect(outcome.credit.author).toBeNull();
-  });
-
-  it('credits both photographers of a derivative work', () => {
-    const outcome = credits.get('20171114 AUT URU 4518 - Rodrigo Bentancur (cropped) 2.jpg');
-    expect(outcome?.status).toBe('ok');
-    if (outcome?.status === 'ok') {
-      expect(outcome.credit.author).toBe('Original: Ailura; Derivative work: Danyele');
-    }
-  });
-
-  it('refuses a licence outside CC BY / BY-SA / CC0 / public domain, naming it', () => {
+  it('refuses a licence outside the accepted set, naming it', () => {
     expect(
       credits.get('UEFA Europa Conference League CSKA Sofia - Roma, 2021-12-09 (Kumbulla).jpg'),
     ).toEqual({ status: 'refused-licence', licence: 'GFDL' });
-    expect(credits.get('2021-07-28 FC Gossau - FC Wil 1900 02 (Nils Reichmuth).jpg')).toEqual({
-      status: 'refused-licence',
-      licence: 'Attribution',
-    });
   });
 
   it('names every missing field when Commons has no such file', () => {
@@ -201,6 +216,48 @@ describe('creditsByFile (edge cases)', () => {
       },
     ]);
     expect(credits.get('Split.jpg')?.status).toBe('ok');
+  });
+
+  const attributionOnly = (artist: string | null) => ({
+    title: 'File:Holder.jpg',
+    imageinfo: [
+      {
+        thumburl: 'https://upload.wikimedia.org/wikipedia/commons/h.jpg',
+        descriptionurl: 'https://commons.wikimedia.org/wiki/File:Holder.jpg',
+        extmetadata: {
+          LicenseShortName: { value: 'Attribution' },
+          ...(artist === null ? {} : { Artist: { value: artist } }),
+        },
+      },
+    ],
+  });
+
+  // The licence's one condition is crediting the holder; with no one named,
+  // the photo cannot meet it.
+  it('refuses the attribution-only licence when no holder is named', () => {
+    for (const artist of [null, 'Unknown photographer']) {
+      expect(
+        creditsByFile([{ query: { pages: [attributionOnly(artist)] } }]).get('Holder.jpg'),
+      ).toEqual({
+        status: 'incomplete-credit',
+        licence: 'Attribution',
+        missing: ['author'],
+      });
+    }
+  });
+
+  // The page URL is not stored: the app derives it from the file name. A
+  // file whose page Commons puts anywhere else is refused, so the derived
+  // link always lands.
+  it('refuses a file whose Commons page is not where the file name says', () => {
+    const moved = page('File:Moved.jpg', 'https://upload.wikimedia.org/wikipedia/commons/m.jpg');
+    const info = moved.imageinfo[0];
+    if (info) info.descriptionurl = 'https://commons.wikimedia.org/wiki/File:Elsewhere.jpg';
+    expect(creditsByFile([{ query: { pages: [moved] } }]).get('Moved.jpg')).toEqual({
+      status: 'incomplete-credit',
+      licence: 'CC BY 4.0',
+      missing: ['commons-page'],
+    });
   });
 
   it('keys a file by the name it was requested under when Commons normalises it', () => {

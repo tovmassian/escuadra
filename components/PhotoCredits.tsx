@@ -1,3 +1,4 @@
+import { commonsFileUrl } from '@/scripts/commons';
 import type { PhotoCreditRow } from '@/lib/photos';
 import { sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -49,7 +50,7 @@ export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
               <Text
                 style={styles.link}
                 accessibilityRole="link"
-                onPress={openUrl(r.credit.sourceUrl)}
+                onPress={openUrl(commonsFileUrl(r.credit.file))}
               >
                 {r.credit.author ?? 'Wikimedia Commons'}
               </Text>
@@ -57,7 +58,7 @@ export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
               <Text
                 style={styles.link}
                 accessibilityRole="link"
-                onPress={openUrl(r.credit.licenceUrl ?? r.credit.sourceUrl)}
+                onPress={openUrl(r.credit.licenceUrl ?? commonsFileUrl(r.credit.file))}
               >
                 {r.credit.licence}
               </Text>

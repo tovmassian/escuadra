@@ -364,10 +364,18 @@ minutes for the whole base at a 500 ms courtesy delay:
 
 **Photo.** The article's free lead image, else the Wikidata item's own. It is
 written only with an accepted licence (CC BY or CC BY-SA at any version, CC0,
-public domain), a thumbnail on `upload.` or `thumb.wikimedia.org` and the
-Commons page; author and deed are kept when Commons gives them. Everything
-else is refused and listed, including Commons' attribution-only
-"Attribution" licence until a person signs it off. No photo comes from a
+public domain, and Commons' attribution-only "Attribution"), a thumbnail on
+`upload.` or `thumb.wikimedia.org`, and a Commons page exactly where
+`commonsFileUrl` (`scripts/commons.ts`) derives it from the file name — the
+page is not stored, the app derives it. GFDL, "Copyrighted free use" and
+everything else is refused and listed.
+
+**Credit.** The name a credit shows is the attribution the licence asks for,
+from Commons' `Attribution` field — "Bryan Berlin / WikiPortraits", or the
+agency that holds the rights rather than its photographer — else the
+author; an unknown-author placeholder counts as no name. The attribution-only
+licence's one condition is crediting the holder, so a photo under it with no
+name is refused (`incomplete-credit`, missing `author`). No photo comes from a
 missing article, a disambiguation page, or an item that is not a person. The
 photo is the latest lookup's verdict and is rewritten every run; a batch that
 fails keeps what is stored and exits `1`.

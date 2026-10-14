@@ -44,25 +44,27 @@ export interface Player {
 /** A Wikimedia Commons photo and the credit its licence requires. Hotlinked,
  *  never copied: the app loads `url` and stores nothing. Every field but
  *  `author` and `licenceUrl` is required, so a photo never ships with a
- *  guessed credit. See docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md. */
+ *  guessed credit. Its Commons page is not stored: `commonsFileUrl(file)`
+ *  (scripts/commons.ts) derives it, and enrich stores only photos whose page is
+ *  exactly there. See docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md. */
 export interface PhotoCredit {
-  /** The Commons file name ("Pedri 2021.jpg"), the photo's stable identity.
-   *  It usually names the player, so it never reaches visible text or a
-   *  label during a question. */
+  /** The Commons file name ("Pedri 2021.jpg"), the photo's stable identity
+   *  and the key to its Commons page. It usually names the player, so it
+   *  never reaches visible text or a label during a question. */
   file: string;
   /** A 500 px thumbnail on upload.wikimedia.org or thumb.wikimedia.org,
    *  tracking query removed. Derived from `file` by Commons; can change. */
   url: string;
-  /** Photographer, plain text. Null when Commons gives none; the credit
-   *  then names Wikimedia Commons and links the file page, which names them. */
+  /** Who the credit names, plain text: the attribution the licence asks for
+   *  when Commons records one ("Bryan Berlin / WikiPortraits", a rights-
+   *  holding agency), else the photographer. Null when neither is known; the
+   *  credit then names Wikimedia Commons and links the file page. */
   author: string | null;
   /** Licence short name as Commons gives it, e.g. "CC BY-SA 4.0". */
   licence: string;
-  /** Licence deed, when Commons gives one (none for public domain); the
-   *  credit falls back to linking the Commons page. */
+  /** Licence deed, when Commons gives one (none for public domain or the
+   *  attribution-only licence); the credit falls back to the Commons page. */
   licenceUrl: string | null;
-  /** The file's Commons page, which carries the full credit. */
-  sourceUrl: string;
 }
 
 export interface SquadMember {

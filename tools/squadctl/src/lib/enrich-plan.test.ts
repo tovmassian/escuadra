@@ -34,7 +34,6 @@ function credit(file: string): PhotoCredit {
     author: 'Bryan Berlin',
     licence: 'CC BY-SA 4.0',
     licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
-    sourceUrl: `https://commons.wikimedia.org/wiki/File:${file}`,
   };
 }
 

@@ -9,7 +9,6 @@ const credit: PhotoCredit = {
   author: 'Example Photographer',
   licence: 'CC BY-SA 4.0',
   licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
-  sourceUrl: 'https://commons.wikimedia.org/wiki/File:X.jpg',
 };
 
 const player = (photo: PhotoCredit | null): Player => ({

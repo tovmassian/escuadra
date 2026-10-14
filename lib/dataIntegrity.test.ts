@@ -266,12 +266,21 @@ describe('every player photo carries a complete, accepted credit', () => {
     expect(bad).toEqual([]);
   });
 
-  it('links its Commons page, and a deed only over https', () => {
+  it('links a deed only over https', () => {
+    const bad = withPhoto
+      .filter(({ photo }) => photo?.licenceUrl != null && !photo.licenceUrl.startsWith('https://'))
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  // The Commons page is derived from `file` (scripts/commons.ts), not stored:
+  // ~100 bytes a photo. Anything beyond these fields is weight the bundle
+  // carries for nothing.
+  it('carries exactly the PhotoCredit fields', () => {
+    const fields = ['author', 'file', 'licence', 'licenceUrl', 'url'];
     const bad = withPhoto
       .filter(
-        ({ photo }) =>
-          !(photo?.sourceUrl ?? '').startsWith('https://commons.wikimedia.org/wiki/File:') ||
-          (photo?.licenceUrl != null && !photo.licenceUrl.startsWith('https://')),
+        ({ photo }) => JSON.stringify(Object.keys(photo ?? {}).sort()) !== JSON.stringify(fields),
       )
       .map((p) => p.id);
     expect(bad).toEqual([]);
