@@ -47,9 +47,11 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 
 ⚠️ **On `main` today, the About privacy text is out of date.** It still says
 "no advertising, analytics or tracking software" while TelemetryDeck (#53) is
-in the code. The next release branch (its version still TBD) is cut from
-`main` only after #54 rewrites that text and the web policy together and #55
-updates the store declarations; then #60 builds it.
+in the code, and it does not mention that player photos load from Wikimedia
+Commons, which sees the user's IP address. The next release branch (its
+version still TBD) is cut from `main` only after #54 rewrites that text and
+the web policy together and #55 updates the store declarations — both
+covering the photos as well as TelemetryDeck; then #60 builds it.
 
 ## Scope and roadmap
 
@@ -101,9 +103,10 @@ update this file in the same PR rather than leave a stale rule behind.
    its Commons page — the asset-licensing rule below, enforced in code and in
    `lib/dataIntegrity.test.ts`. Every shown photo shows its credit; never put
    the Commons file name or caption in visible text or a label, as they name
-   the player. Photos stay gated to development builds
-   (`EXPO_PUBLIC_PHOTOS=1`) until a store build ships them with the privacy
-   disclosures (guardrail 4) and a signed-off credit placement:
+   the player. The credit sits under the question's action button for as
+   long as the question is on screen, never as part of the answer reveal.
+   Each photo load reaches Wikimedia, so photos ship in a store build with
+   the privacy disclosures (guardrail 4), never over the air:
    `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.
 2. **No club crests, badges, logos, or shield shapes. Ever.** Trademark
    exposure, and this constraint outlives v0. Clubs are identified by text and
@@ -147,7 +150,9 @@ update this file in the same PR rather than leave a stale rule behind.
    form — in a store build, never over the air. Today the traffic is
    `expo-updates` checking EAS Update on launch (OS, project ID, a random
    installation token) and, from the next store version, opt-out
-   TelemetryDeck usage signals (see Telemetry under Architecture rules).
+   TelemetryDeck usage signals (see Telemetry under Architecture rules) and
+   player-photo thumbnails loaded from Wikimedia Commons
+   (`upload.`/`thumb.wikimedia.org`, which sees the IP address).
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
    rather than inlining a value. This governs the app's own design system —

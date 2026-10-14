@@ -392,9 +392,12 @@ unnecessary reveal, so it moves (§8.4). No screenshots were committed.
 
 ## 10. Production pipeline (built 2026-10-14)
 
-§8.1–§8.3 and the §8.7 fixes are built; the credit placement (§8.4) and the
-release (§8.5) are not. Photos reach no user yet: the app reads
-`player.photo`, behind a development-only gate renamed `EXPO_PUBLIC_PHOTOS=1`.
+§8.1–§8.3 and the §8.7 fixes are built. Photos are a core feature: the app
+reads `player.photo` with no gate (the `EXPO_PUBLIC_PHOTOS` flag was removed
+2026-10-14), so they ship with the next store release and its privacy
+disclosures (§8.5). The credit sits in muted text under the question's action
+button, always visible and taking two lines either way so the button never
+moves — an interim placement until the play-page redesign (§8.4).
 
 ### 10.1 What was built
 
@@ -490,10 +493,10 @@ at Liverpool); squadctl never merges records, so that is left to a person.
 
 ### 10.4 Still open
 
-1. **Credit placement** (§8.4) — the redesign session; today's screens are the
-   POC's.
-2. **Release** (§8.5) — privacy policy, About text, App Privacy, Data safety,
-   in a store build, then the gate comes off.
+1. **Play-page redesign** (§8.4) — where the credit and the photo finally sit.
+2. **Release** (§8.5) — privacy policy, About text, App Privacy and Data
+   safety must name Wikimedia photo loads (#54, #55) before the next release
+   branch is cut; never over the air.
 3. **Brazil** — its stored squad predates squadctl and is held back while its
    article lists no shirt numbers, so its 15 untitled members have no photo,
    and its Alisson is a second record of Liverpool's `alisson-becker`. A
