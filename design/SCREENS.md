@@ -49,9 +49,11 @@ for iOS).
 survive.** Each entry says what the behaviour is and why it exists, so a
 deliberate constraint is distinguishable from an accident.
 
-1. **No player photographs in v0** — but photos become the primary element in
-   v1, so the question screen keeps a hero slot that a square portrait can drop
-   into without a redesign. It currently holds a large shirt number.
+1. **Player photos fill the hero**, hotlinked from Wikimedia Commons; the
+   shirt number moves to a tab in the corner. A player with no freely licensed
+   photo keeps the large-number card. Each photo's credit — who to credit,
+   licence, "cropped" — sits in muted text under the action button, always
+   visible; the results screen lists every credit behind "Show photo credits".
 2. **No club crests, badges, logos or shield shapes. Ever.** Trademark
    exposure. Clubs are identified by text and colour, drawn as banded
    rectangles — the same marker shape used for national flags. National
@@ -111,6 +113,9 @@ flawless — see below). Route, file, and what it does.
 | `screens/09-results.png`                 | Results — failed round               |
 | `screens/09-results-passed.png`          | Results — passed, 9/10               |
 | `screens/09-results-flawless.png`        | Results — a la escuadra, 10/10       |
+
+Question captures carry real Commons photos, each credited on screen by the
+line under the button; a capture waits for its images to load.
 
 `07-question-l2.png` is captured on arrival, unanswered, like the level-1
 shot — its distinct layout is the stat-chip column (age, nationality) stacked
