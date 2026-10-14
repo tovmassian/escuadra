@@ -1,4 +1,4 @@
-import { photoCreditRows, photoFor } from '@/lib/photos';
+import { creditParts, photoCreditRows, photoFor } from '@/lib/photos';
 import type { QuestionResult } from '@/stores/session';
 import type { PhotoCredit, Player } from '@/types/squad';
 import { describe, expect, it } from 'vitest';
@@ -60,5 +60,26 @@ describe('photoCreditRows', () => {
       { playerId: 'b', memberNo: 20, playerName: 'Pedri', credit },
       { playerId: 'c', memberNo: 16, playerName: 'Rodri', credit },
     ]);
+  });
+});
+
+describe('creditParts', () => {
+  it('credits the author, linking the Commons page, and the licence, linking its deed', () => {
+    expect(creditParts(credit)).toEqual({
+      author: {
+        text: 'Example Photographer',
+        url: 'https://commons.wikimedia.org/wiki/File:X.jpg',
+      },
+      licence: { text: 'CC BY-SA 4.0', url: 'https://creativecommons.org/licenses/by-sa/4.0' },
+      change: 'cropped',
+    });
+  });
+
+  // No name could be read, or public domain has no deed: the Commons page
+  // names both.
+  it('falls back to Wikimedia Commons and the page', () => {
+    const parts = creditParts({ ...credit, author: null, licenceUrl: null });
+    expect(parts.author.text).toBe('Wikimedia Commons');
+    expect(parts.licence.url).toBe('https://commons.wikimedia.org/wiki/File:X.jpg');
   });
 });

@@ -1,8 +1,7 @@
-import { commonsFileUrl } from '@/scripts/commons';
+import { PhotoCreditText } from '@/components/PhotoCreditText';
 import { spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { PhotoCredit } from '@/types/squad';
-import { openBrowserAsync } from 'expo-web-browser';
 import { StyleSheet, Text } from 'react-native';
 
 // A photo's credit, under the question's action button for as long as the
@@ -29,10 +28,6 @@ export function PhotoCreditLine({ credit }: { credit: PhotoCredit | null }) {
     },
     link: { textDecorationLine: 'underline' },
   });
-  // A link that fails to open has nothing to recover; the credit stays shown.
-  const open = (url: string) => () => {
-    openBrowserAsync(url).catch(() => {});
-  };
 
   if (credit === null) {
     return (
@@ -44,23 +39,7 @@ export function PhotoCreditLine({ credit }: { credit: PhotoCredit | null }) {
 
   return (
     <Text style={styles.line} numberOfLines={2}>
-      Photo:{' '}
-      <Text
-        style={styles.link}
-        accessibilityRole="link"
-        onPress={open(commonsFileUrl(credit.file))}
-      >
-        {credit.author ?? 'Wikimedia Commons'}
-      </Text>
-      {' · '}
-      <Text
-        style={styles.link}
-        accessibilityRole="link"
-        onPress={open(credit.licenceUrl ?? commonsFileUrl(credit.file))}
-      >
-        {credit.licence}
-      </Text>
-      {' · cropped'}
+      Photo: <PhotoCreditText credit={credit} linkStyle={styles.link} />
     </Text>
   );
 }

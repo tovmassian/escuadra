@@ -1,8 +1,7 @@
-import { commonsFileUrl } from '@/scripts/commons';
+import { PhotoCreditText } from '@/components/PhotoCreditText';
 import type { PhotoCreditRow } from '@/lib/photos';
 import { sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
-import { openBrowserAsync } from 'expo-web-browser';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
@@ -23,9 +22,6 @@ export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
     name: { color: colors.textPrimary },
     link: { color: colors.textSecondary, textDecorationLine: 'underline' },
   });
-  const openUrl = (url: string) => () => {
-    openBrowserAsync(url).catch(() => {});
-  };
 
   return (
     <View style={styles.root}>
@@ -47,22 +43,7 @@ export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
                 {r.memberNo} {r.playerName}
               </Text>
               {' — '}
-              <Text
-                style={styles.link}
-                accessibilityRole="link"
-                onPress={openUrl(commonsFileUrl(r.credit.file))}
-              >
-                {r.credit.author ?? 'Wikimedia Commons'}
-              </Text>
-              {' · '}
-              <Text
-                style={styles.link}
-                accessibilityRole="link"
-                onPress={openUrl(r.credit.licenceUrl ?? commonsFileUrl(r.credit.file))}
-              >
-                {r.credit.licence}
-              </Text>
-              {' · cropped'}
+              <PhotoCreditText credit={r.credit} linkStyle={styles.link} />
             </Text>
           ))}
         </ScrollView>
