@@ -425,8 +425,24 @@ Departures from §8.2, each found in the data:
   the alternative was editing Wikidata or being asked every run.
 - **Public domain is accepted exactly**, not as a prefix; ported CC variants
   ("CC BY-SA 3.0 at") are accepted; `http://` deeds are upgraded to https.
-- "Attribution" is still refused: 11 players, awaiting the sign-off §8.2 asks
-  for.
+- **The credit names whom the licence asks for** (added 2026-10-14). Commons'
+  `Attribution` field records the credit a licensor requests — CC BY wants
+  credit "in any reasonable manner requested by the licensor" — and it
+  differed from the author field on 459 photos: 350 by Bryan Berlin ask for
+  "Bryan Berlin / WikiPortraits", and agency photos (Fars, Tasnim, Mehr,
+  Dynamomania) name the agency, not the photographer. The credit shows that
+  field, else the author; an unknown-author placeholder counts as no name.
+- **"Attribution" is accepted** (signed off 2026-10-14) — "anyone may use it
+  for any purpose, provided that the copyright holder is properly
+  attributed" — on one condition: a named holder, else the photo is refused.
+  It covers 12 photos: 5 from the Hungarian federation, 3 from the
+  Government of Catalonia, 2 by GePo, 1 from Iran's Student News Agency
+  (whose author field says only "Unknown photographer"), and Willi Orbán's.
+- **The Commons page is derived, not stored** (2026-10-14): MediaWiki's own
+  URL encoding of the file name reproduced all 2,184 stored page URLs
+  exactly, so `sourceUrl` is gone and `scripts/commons.ts` derives it.
+  enrich stores a photo only when Commons' page URL equals the derivation,
+  so a derived link always lands.
 
 ### 10.2 `wikiTitle` backfill (§8.3)
 
@@ -442,30 +458,30 @@ longer lists.
 
 | Photo status              | Players | Share |
 | ------------------------- | ------- | ----- |
-| Usable photo              | 2,184   | 65%   |
-| Article has no free image | 964     | 29%   |
+| Usable photo              | 2,197   | 66%   |
+| Article has no free image | 965     | 29%   |
 | No `wikiTitle`            | 127     | 4%    |
-| Title has no article      | 44      | 1%    |
-| Licence refused           | 14      | 0.4%  |
-| Held on a birth conflict  | 2       | 0.1%  |
+| Title has no article      | 43      | 1%    |
+| Licence refused           | 3       | 0.1%  |
 
-- **69.5% of question subjects** (2,618 of 3,767 numbered squad slots) have a
+- **69.8% of question subjects** (2,631 of 3,767 numbered squad slots) have a
   photo. 19 squads are complete — 18 nations, Spain, England, France and
   Argentina among them, and Arsenal; Mallorca (3 of 28) and Italy (6 of 24)
   are lowest.
-- Licence mix: CC BY-SA 4.0 1,176, CC0 433, CC BY 4.0 142, CC BY-SA 3.0 132,
-  CC BY 3.0 120, CC BY 2.0 71, CC BY-SA 2.0 52, public domain 47, CC BY-SA 3.0
-  at 9, CC BY 3.0 br 1, CC BY 2.5 1.
+- Licence mix: CC BY-SA 4.0 1,176, CC0 434, CC BY 4.0 142, CC BY-SA 3.0 132,
+  CC BY 3.0 120, CC BY 2.0 71, CC BY-SA 2.0 52, public domain 47, Attribution
+  12, CC BY-SA 3.0 at 9, CC BY 3.0 br 1, CC BY 2.5 1.
 - **Birth dates:** 1,543 filled; 3,186 players (95.5%) now have one.
 - **68 stored dates disagreed with Wikidata.** Settled against the article
   infobox: 53 stored dates were wrong (Ferran Torres was stored as born
   1998-02-29, a date that does not exist), 13 were right and Wikidata was not
-  (kept), 2 have no majority and stay open: `andres-cubas`, `longoni`.
+  (kept), and the last 2 were settled by hand: `andres-cubas` takes one of
+  Wikidata's two dates, `longoni` keeps the infobox's against Wikidata's.
 - Four disambiguation titles were retitled after matching nationality, birth
   and club on Wikidata.
 - 185 requests, 3 min 40 s; a second, offline run changes nothing.
-- Size: `data/players.json` 0.85 → 1.93 MB on disk; 0.94 MB minified, 431 bytes
-  per photo — more than §8.1 estimated, because coverage is higher.
+- Size: `data/players.json` 0.85 → 1.69 MB on disk; 0.69 MB minified, 331 bytes
+  per photo, with the Commons page derived rather than stored.
 
 Found on the way: Espanyol's stored squad carried eight entries its article
 has since removed, linked to articles that do not exist; a fresh `rcd` apply
@@ -478,8 +494,7 @@ at Liverpool); squadctl never merges records, so that is left to a person.
    POC's.
 2. **Release** (§8.5) — privacy policy, About text, App Privacy, Data safety,
    in a store build, then the gate comes off.
-3. **"Attribution" licence** — 11 photos, a person's decision.
-4. **Two birth conflicts** — `andres-cubas`, `longoni`.
-5. **Bundle size** — 0.94 MB of credits ships in every OTA update. Dropping
-   `sourceUrl` (derivable from `file`) saves ~80 bytes a photo; a decision,
-   not a fix.
+3. **Brazil** — its stored squad predates squadctl and is held back while its
+   article lists no shirt numbers, so its 15 untitled members have no photo,
+   and its Alisson is a second record of Liverpool's `alisson-becker`. A
+   Brazil apply would repoint him by title; until then he shows no photo.

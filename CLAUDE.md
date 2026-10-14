@@ -186,8 +186,9 @@ data/squads/club/<league>/<id>.json   same shape, kind: 'club'. <league> is one 
 ```
 
 `photo` is a `PhotoCredit` (`types/squad.ts`) or null: the Commons file, its
-500 px thumbnail URL, author, licence, deed and Commons page. Hotlinked, never
-copied.
+500 px thumbnail URL, the name the licence asks to credit, licence and deed.
+The Commons page is derived from the file name (`scripts/commons.ts`), not
+stored. Hotlinked, never copied.
 
 `wikiTitle` is the Wikipedia article title the record came from — the only
 field that is unique per person, since two different real people are both
