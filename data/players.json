@@ -3591,11 +3591,18 @@
     "id": "andres-cubas",
     "name": "Andrés Cubas",
     "fullName": "Andrés Cubas",
-    "birth": "1996-05-22",
+    "birth": "1996-05-11",
     "position": "MF",
     "nationality": "Paraguay",
     "club": "Vancouver Whitecaps",
-    "photo": null,
+    "photo": {
+      "file": "Andres Cubas France v Paraguay 4 July 2026-173.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/Andres_Cubas_France_v_Paraguay_4_July_2026-173.jpg/500px-Andres_Cubas_France_v_Paraguay_4_July_2026-173.jpg",
+      "author": "Bryan Berlin",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Andres_Cubas_France_v_Paraguay_4_July_2026-173.jpg"
+    },
     "wikiTitle": "Andrés Cubas"
   },
   {
@@ -28495,11 +28502,18 @@
     "id": "longoni",
     "name": "Alessandro Longoni",
     "fullName": "Alessandro Longoni",
-    "birth": "2004-05-05",
+    "birth": "2008-01-30",
     "position": "GK",
     "nationality": "Italy",
     "club": "Paris Saint-Germain",
-    "photo": null,
+    "photo": {
+      "file": "Longoni Rennes PSG (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/24/Longoni_Rennes_PSG_%28cropped%29.jpg/500px-Longoni_Rennes_PSG_%28cropped%29.jpg",
+      "author": "Paul Vaurie",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en",
+      "sourceUrl": "https://commons.wikimedia.org/wiki/File:Longoni_Rennes_PSG_(cropped).jpg"
+    },
     "wikiTitle": "Alessandro Longoni"
   },
   {
