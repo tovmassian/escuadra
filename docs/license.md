@@ -75,6 +75,7 @@ you changed the work.
 
 | asset                          | licence                                         | source of truth                          |
 | ------------------------------ | ----------------------------------------------- | ---------------------------------------- |
+| Squad data                     | Wikipedia CC BY-SA; Wikidata CC0                | `data/squads/`, `tools/squadctl/`        |
 | Player photos                  | per photo — see the next section                | `player.photo` in `data/players.json`    |
 | National flags                 | public domain (flagpedia.net)                   | `assets/flags/README.md`                 |
 | Inter, IBM Plex Mono           | SIL Open Font License 1.1                       | `@expo-google-fonts/*` in `package.json` |
@@ -190,6 +191,18 @@ made the way the next section describes.
 Loading a photo also sends the user's IP address to Wikimedia. That is a
 privacy matter, not a licensing one — it is why photos ship only in a store
 build with updated disclosures (`CLAUDE.md`, guardrail 4).
+
+### Where the app says it
+
+The About screen (`app/about.tsx`) is the user-facing half of this document.
+Its "Data and image credits" section names every source and licence in the
+table above — Wikipedia, Wikidata, Commons photos with the five accepted
+licences, flags, fonts — and says where the per-photo credit appears (under
+the question, and in the results' "photo credits" list). Its Privacy section
+says what photo loading sends to Wikimedia, that photos are cached on the
+device, and that a credit link opens a third-party site. Change a licence, a
+source or a credit surface here and the About text in the same PR, and the web
+privacy policy with it (`CLAUDE.md`, guardrail 4).
 
 ## Changing the list
 
