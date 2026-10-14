@@ -70,22 +70,8 @@ export function stripHtml(html: string): string {
 // at" included), CC0, public domain exactly, and Commons' attribution-only
 // licence — "anyone may use it for any purpose, provided that the copyright
 // holder is properly attributed", accepted 2026-10-14 once its wording was
-// read. Anything else is refused, not guessed at:
-// - non-commercial (CC BY-NC…): the app ships through stores and may carry
-//   monetisation; Commons itself refuses NC as not free.
-// - GFDL: the licence's full text must travel with the image. Such files are
-//   usually dual-licensed, but `LicenseShortName` names only one licence.
-// - a CC licence with no version: its terms and its deed depend on the
-//   version, so there is nothing exact to comply with or link.
-// - "Copyrighted free use": a holder's permission in no standard wording,
-//   with no deed to link.
-// - "PDM-owner": the Public Domain Mark labels work already free of
-//   copyright; it is not a way to waive one's own (CC0 is), so an owner's
-//   use of it leaves the rights unclear.
-// - "Public domain in the United States": free there, perhaps not in the
-//   other countries the app ships to.
-// - "Fair use": not a licence but a US defence for an article's own use,
-//   which does not carry over to an app.
+// read. Anything else is refused, not guessed at. What each asks, and why
+// each refusal: docs/license.md — change the two together.
 const ACCEPTED_LICENCE = /^(CC BY(-SA)? \d\.\d( [a-z]{2,3})?|CC0|Public domain|Attribution)$/i;
 const ATTRIBUTION_ONLY = /^Attribution$/i;
 
