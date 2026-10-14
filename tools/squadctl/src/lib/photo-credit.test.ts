@@ -87,7 +87,7 @@ describe('isAcceptedLicence', () => {
     expect(isAcceptedLicence(licence)).toBe(true);
   });
 
-  // The reasons, at length, are in photo-credit.ts beside ACCEPTED_LICENCE.
+  // The reasons, at length: docs/license.md.
   it.each([
     ['CC BY-NC 2.0', 'non-commercial only'],
     ['CC BY-NC-SA 4.0', 'non-commercial only'],

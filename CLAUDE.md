@@ -121,12 +121,14 @@ update this file in the same PR rather than leave a stale rule behind.
    remain banned forever.
 
    **Asset licensing (legal):** every shipped image must have a licence
-   someone can name. `assets/flags/README.md` is the worked example — the flag
-   set was replaced wholesale for exactly this reason. Store badges on the
-   `gh-pages` site are licensed artwork too: use Apple's and Google's badges
-   only as their guidelines allow — unmodified (never recoloured, greyed out
-   or set inside a sentence), only for a store where the app is actually
-   live, and with their credit lines in the footer.
+   someone can name. What each licence asks, which ones player photos may
+   carry and why the rest are refused: [`docs/license.md`](docs/license.md).
+   `assets/flags/README.md` is the worked example — the flag set was replaced
+   wholesale for exactly this reason. Store badges on the `gh-pages` site are
+   licensed artwork too: use Apple's and Google's badges only as their
+   guidelines allow — unmodified (never recoloured, greyed out or set inside
+   a sentence), only for a store where the app is actually live, and with
+   their credit lines in the footer.
 
 3. **No text input in the quiz. No keyboard for answering.** Every quiz answer
    is a tap — option cards and chip selectors are the entire input vocabulary
@@ -413,6 +415,8 @@ format facts and `design/SCREENS.md` for what each captured file shows.
 
 - [`docs/release.md`](docs/release.md): releasing — OTA updates, store builds, the
   fingerprint, release branches, rollback.
+- [`docs/license.md`](docs/license.md): licences — every shipped asset's, the
+  photo licences accepted and refused, and how to change the list.
 
 `docs/mobile-dev-setup.md` was explicitly superseded by
 the setup walkthrough and should not come back. If the design and logo briefs are
