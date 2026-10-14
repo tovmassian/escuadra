@@ -1,4 +1,4 @@
-import { commonsFileUrl } from './commons.ts';
+import { commonsFileUrl, fileKey } from './commons.ts';
 import { describe, expect, it } from 'vitest';
 
 // Each pair is a file name and the page URL Commons itself gave for it
@@ -36,5 +36,13 @@ describe('commonsFileUrl', () => {
     expect(commonsFileUrl('a;b@c$d!e*f(g)h,i/j~k:l.jpg')).toBe(
       'https://commons.wikimedia.org/wiki/File:a;b@c$d!e*f(g)h,i/j~k:l.jpg',
     );
+  });
+});
+
+describe('fileKey', () => {
+  it('gives pageimages, Wikidata and Commons spellings of one file the same key', () => {
+    expect(fileKey('Pedri_2021.jpg')).toBe('Pedri 2021.jpg');
+    expect(fileKey('File:Pedri 2021.jpg')).toBe('Pedri 2021.jpg');
+    expect(fileKey('Pedri 2021.jpg')).toBe('Pedri 2021.jpg');
   });
 });

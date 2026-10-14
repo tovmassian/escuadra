@@ -52,7 +52,7 @@ never got applied.
 
 | file                  | written by                                              |
 | --------------------- | ------------------------------------------------------- |
-| `data/decisions.json` | `alias`, `split`, `exclude`, `birth --keep`             |
+| `data/decisions.json` | `alias`, `split`, `exclude`, `birth`                    |
 | `data/players.json`   | `apply`, `rename`, `retitle`, `fork`, `birth`, `enrich` |
 
 ### Generated — never touch, never hand-review
@@ -353,14 +353,22 @@ unless `--offline`; writes only `data/players.json`. Design and results:
 `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.
 
 Per-player data comes in batches of 50, never one request per player — the
-same rule `fetch` keeps. Three stages, about 190 requests and under four
+same rule `fetch` keeps. Three stages, about 175 requests and under four
 minutes for the whole base at a 500 ms courtesy delay:
 
-| stage     | asks for                                                          |
-| --------- | ----------------------------------------------------------------- |
-| Wikipedia | each `wikiTitle`'s free lead image and Wikidata item              |
-| Wikidata  | each item's `instance of`, date of birth and image (P31/P569/P18) |
-| Commons   | each candidate image's 500 px thumbnail, licence, author, page    |
+| stage     | asks for                                                             |
+| --------- | -------------------------------------------------------------------- |
+| Wikipedia | each `wikiTitle`'s free lead image and Wikidata item                 |
+| Wikidata  | each item's `instance of`, date of birth and image (P31/P569/P18)    |
+| Commons   | each photo's next candidate: 500 px thumbnail, licence, author, page |
+
+Commons runs in passes: every photo's first candidate, then the item's own
+image only for the photos whose first one proved unusable (2,200 files, then
+1, for the whole base). Each lookup's query sits beside the reader that
+depends on it — `lib/wikimedia-parse.ts`, `lib/photo-credit.ts` — so a field
+read is a field asked for. Requests go through `lib/http.ts`, shared with
+`fetch`: a pause before each, a 30 s timeout, and backoff on 429, 5xx and a
+dropped connection.
 
 **Photo.** The article's free lead image, else the Wikidata item's own. It is
 written only with an accepted licence (CC BY or CC BY-SA at any version, CC0,
@@ -373,22 +381,34 @@ everything else is refused and listed.
 **Credit.** The name a credit shows is the attribution the licence asks for,
 from Commons' `Attribution` field — "Bryan Berlin / WikiPortraits", or the
 agency that holds the rights rather than its photographer — else the
-author; an unknown-author placeholder counts as no name. The attribution-only
-licence's one condition is crediting the holder, so a photo under it with no
-name is refused (`incomplete-credit`, missing `author`). No photo comes from a
+author. An unknown-author placeholder counts as no name, and so does anything
+longer than 120 characters — a template's source box or licence banner, not a
+person; the credit then names Wikimedia Commons and links the file's page,
+which names the author in full. The attribution-only licence's one condition
+is crediting the holder, so a photo under it with no name — in any spelling of
+the licence — is refused (`incomplete-credit`, missing `author`). Every
+`incomplete-credit` is listed with what it lacks. No photo comes from a
 missing article, a disambiguation page, or an item that is not a person. The
-photo is the latest lookup's verdict and is rewritten every run; a batch that
-fails keeps what is stored and exits `1`.
+photo is the latest lookup's verdict and is rewritten every run. A key no
+lookup answers — its batch failed after its retries, the reply skipped it, or
+`--offline` has nothing cached for it — keeps what is stored, is listed, and
+exits `1`.
 
 **Birth.** Filled only where unknown, and only from one day-precise Gregorian
-Wikidata date (preferred-rank claims when there are any). A stored date
-Wikidata disagrees with is never overwritten: it is a `birth-mismatch`
-conflict, below, and the photo is held with it.
+Wikidata date (preferred-rank claims when there are any) that puts the player
+at 15 to 45 on 1 July of their squad's season. A filled date has no other
+source to agree or disagree with, so an age outside that is an
+`implausible-birth` conflict, below. A stored date Wikidata disagrees with is
+never overwritten: it is a `birth-mismatch`. Either conflict holds the photo.
 
-**Cache.** Every response is cached in `.cache/wikimedia/` before parsing, so
-a rule change re-runs with `--offline` at zero network cost. Wikidata's are
-trimmed to the three claims read first (~80 MB untrimmed for the base); a
-rule on another property needs one online run.
+**Cache.** Each key's answer — an article, an item, a file — is cached on its
+own in `.cache/wikimedia/<stage>/` before any rule reads it, so a rule change
+re-runs with `--offline` at zero network cost, for any selection: `--only`,
+or the whole base after one `retitle`. An online run always asks again and
+refreshes what it asked. Answers sit under a hash of their query's shape, so
+a changed query is never served an old answer. Wikidata's are trimmed to the
+three claims read (~80 MB untrimmed for the base); a rule on another property
+needs one online run.
 
 **Run it on a developer machine.** Wikimedia's APIs answered `429` to a cloud
 session's shared IP after fewer than ten requests. GitHub Actions runners are
@@ -401,11 +421,11 @@ npm run squadctl -- birth <playerId> <YYYY-MM-DD>
 npm run squadctl -- birth <playerId> --keep
 ```
 
-The two command answers to a `birth-mismatch`. A date sets the stored birth
-date (refusing one that does not exist, like 1998-02-29); `--keep` records in
-`data/decisions.json` (`keptBirths`) that the stored date stands against
-Wikidata's. The record carries the date it confirms, so it lapses by itself
-if the stored date changes.
+The command answers to a `birth-mismatch` or an `implausible-birth`. A date
+sets the stored birth date (refusing one that does not exist, like
+1998-02-29), and removes any `keptBirths` entry for that player, which
+confirmed the date it replaces. `--keep` records in `data/decisions.json`
+(`keptBirths`) that the stored date stands against Wikidata's.
 
 ## Loans
 
@@ -789,8 +809,27 @@ project's source is Wikipedia, so it breaks the tie.
 - **No majority**: leave it. The photo stays held, and nothing is guessed.
 
 **What you touch:** `birth` writes `data/players.json`, `birth --keep`
-writes `data/decisions.json`, `retitle` writes `data/players.json`. Re-run
-`enrich --offline` afterwards; it needs no requests.
+writes `data/decisions.json`, `retitle` writes `data/players.json`. After
+`birth`, re-run `enrich --offline`: a held photo is looked up with the rest,
+so it needs no requests. After `retitle`, the new title is a new lookup:
+`enrich --only <team>`.
+
+### `implausible-birth` (from `enrich`)
+
+```
+conflict: birth date on veteran ("Veteran") — Wikidata's 1950-03-02 ("Veteran") makes them 76 in 2026, outside playing age 15–45
+    fix:      wrong person:           npm run squadctl -- retitle veteran "<their article title>"
+              the date is right:      npm run squadctl -- birth veteran 1950-03-02
+```
+
+No birth date was stored, and Wikidata's would put the player at an age no
+squad player has. A filled date's only source is the item it came from, so
+nothing else can disagree with it; this is how a title naming an older
+namesake shows up. `enrich` fills nothing and **holds the photo**. Exit code
+`4`. Read the article: if it is someone else, `retitle` (and `alias --title`
+the old link); if the date is right — a 46-year-old goalkeeper — `birth` stores
+it, and from then on it is checked against Wikidata rather than filled. A
+namesake of the same age is not caught here.
 
 `enrich` also warns, without exiting non-zero, about a title that leads to a
 **disambiguation page**: find the person's own article, `retitle` to it, and
@@ -834,10 +873,12 @@ says which two.
 
 Code `4` means _review needed_, not _broken_.
 
-`enrich` uses the same table: `1` when a batch failed after its retries (its
-players keep what they had), `4` when a `birth-mismatch` is waiting, `5` for a
-repo error. Its `4` writes everything else and never touches `verified`, which
-is a squad file's assertion, not a player's.
+`enrich` uses the same table: `1` when a lookup went unanswered — a batch
+failed after its retries, the reply skipped a key, or `--offline` had nothing
+cached for it (those players keep what they had) — `4` when a `birth-mismatch`
+or `implausible-birth` is waiting, `5` for a repo error. Its `4` writes
+everything else and never touches `verified`, which is a squad file's
+assertion, not a player's.
 
 **Stable under `--json` too, but only because the base command makes it so.**
 oclif's own wrapper (`@oclif/core@5.0.0` `lib/command.js:202`) falls back to

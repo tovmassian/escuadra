@@ -1,12 +1,15 @@
-// The human's half of a conflict. `possible-rename` and `name-variant` both
-// mean "the source now spells this player differently" — squadctl refuses to
-// guess which spelling wins, and this is how the answer comes back in.
+// The human's half of a conflict: the record edits that hand an answer back,
+// one per command — `rename`, `retitle`, `fork` and `birth`. `possible-rename`
+// and `name-variant` both mean "the source now spells this player
+// differently" — squadctl refuses to guess which spelling wins, and
+// `renamePlayer` is how the answer comes back in. `setBirth` does the same
+// for `enrich`'s `birth-mismatch` and `implausible-birth`.
 //
 // Renaming the stored record rather than accepting the new one is deliberate:
 // the existing id is referenced by every squad file that carries this player,
 // and §9 never rewrites an id.
 import type { Player } from '../../../../types/squad.ts';
-import { isCalendarDate } from './enrich-plan.ts';
+import { isCalendarDate } from './dates.ts';
 import { playerId } from './reconcile.ts';
 
 export interface RenameResult {

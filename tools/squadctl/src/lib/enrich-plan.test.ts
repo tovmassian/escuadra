@@ -1,12 +1,13 @@
 import { describe, expect, it } from 'vitest';
-import type { PhotoCredit, Player, Squad } from '../../../../types/squad.ts';
+import type { PhotoCredit, Player } from '../../../../types/squad.ts';
 import {
+  ageInSeason,
   birthConflictFixes,
   describeBirthConflict,
   enrichPlayer,
-  isCalendarDate,
-  playersInTeams,
+  pendingFiles,
   summarize,
+  type EnrichContext,
   type Lookups,
 } from './enrich-plan.ts';
 import type { CreditOutcome } from './photo-credit.ts';
@@ -48,7 +49,8 @@ function lookups({
   failedFiles = [],
 }: {
   article?: ArticleInfo | null;
-  person?: PersonInfo | null;
+  /** null: Wikidata answered that it has no such item. */
+  person?: PersonInfo | null | 'unanswered';
   credits?: [string, CreditOutcome][];
   failedTitles?: string[];
   failedItems?: string[];
@@ -56,7 +58,7 @@ function lookups({
 } = {}): Lookups {
   return {
     articles: new Map(article === null ? [] : [['Pedri', article]]),
-    people: new Map(person === null ? [] : [['Q1', person]]),
+    people: new Map(person === 'unanswered' ? [] : [['Q1', person]]),
     credits: new Map(credits),
     failedTitles: new Set(failedTitles),
     failedItems: new Set(failedItems),
@@ -178,6 +180,13 @@ describe('enrichPlayer — photo', () => {
     );
     expect(result).toMatchObject({ photo: 'ok', birth: 'none' });
   });
+
+  it('uses the article image when Wikidata has no such item', () => {
+    expect(enrichPlayer(player(), lookups({ person: null }))).toMatchObject({
+      photo: 'ok',
+      birth: 'none',
+    });
+  });
 });
 
 describe('enrichPlayer — birth', () => {
@@ -239,8 +248,63 @@ describe('enrichPlayer — birth', () => {
   });
 });
 
+describe('enrichPlayer — a filled birth date at no playing age', () => {
+  const inSeason = (year: number): EnrichContext => ({
+    kept: new Map(),
+    seasonYears: new Map([['pedri', year]]),
+  });
+  const born = (date: string) => lookups({ person: { human: true, births: [date], image: null } });
+
+  it('counts age on 1 July of the season’s first year', () => {
+    expect(ageInSeason('2002-07-01', 2026)).toBe(24);
+    expect(ageInSeason('2002-07-02', 2026)).toBe(23);
+  });
+
+  it('fills a date that puts the player at 15 to 45 in their season', () => {
+    expect(enrichPlayer(player(), born('2011-06-30'), inSeason(2026)).birth).toBe('filled');
+    expect(enrichPlayer(player(), born('1981-01-01'), inSeason(2026)).birth).toBe('filled');
+  });
+
+  // Filled from the item alone, the date has nothing to agree or disagree
+  // with: an age no squad player has is how an older namesake shows up.
+  it('holds the photo and fills nothing for a date outside it', () => {
+    const result = enrichPlayer(
+      player({ photo: credit('Old.jpg') }),
+      born('1950-03-02'),
+      inSeason(2026),
+    );
+    expect(result).toMatchObject({ birth: 'conflict', photo: 'held' });
+    expect(result.player).toMatchObject({ birth: null, photo: null });
+    expect(result.conflict).toEqual({
+      kind: 'implausible-birth',
+      playerId: 'pedri',
+      name: 'Pedri',
+      title: 'Pedri',
+      qid: 'Q1',
+      wikidata: '1950-03-02',
+      seasonYear: 2026,
+      age: 76,
+    });
+    expect(enrichPlayer(player(), born('2012-01-01'), inSeason(2026)).birth).toBe('conflict');
+  });
+
+  // Once a person has stored it, the date is cross-checked, not filled.
+  it('checks a stored date against Wikidata, not against the window', () => {
+    expect(
+      enrichPlayer(player({ birth: '1950-03-02' }), born('1950-03-02'), inSeason(2026)).birth,
+    ).toBe('agrees');
+  });
+
+  it('fills without the check for a player in no squad', () => {
+    expect(enrichPlayer(player(), born('1950-03-02')).birth).toBe('filled');
+  });
+});
+
 describe('enrichPlayer — a kept birth date', () => {
-  const kept = new Map([['pedri', '1998-02-29']]);
+  const kept: EnrichContext = {
+    kept: new Map([['pedri', '1998-02-29']]),
+    seasonYears: new Map(),
+  };
 
   it('stands against Wikidata and releases the photo', () => {
     const result = enrichPlayer(player({ birth: '1998-02-29' }), lookups(), kept);
@@ -270,6 +334,13 @@ describe('enrichPlayer — failed lookups keep what is stored', () => {
 
   it('keeps everything when the Wikidata batch failed', () => {
     const result = enrichPlayer(stored, lookups({ failedItems: ['Q1'] }));
+    expect(result).toMatchObject({ photo: 'lookup-failed', birth: 'lookup-failed' });
+    expect(result.player).toEqual(stored);
+  });
+
+  // Not the same as Wikidata answering that there is no item.
+  it('keeps everything when the item is simply not answered', () => {
+    const result = enrichPlayer(stored, lookups({ person: 'unanswered' }));
     expect(result).toMatchObject({ photo: 'lookup-failed', birth: 'lookup-failed' });
     expect(result.player).toEqual(stored);
   });
@@ -324,6 +395,26 @@ describe('describeBirthConflict and birthConflictFixes', () => {
     ]);
   });
 
+  it('names an implausible date, the age it gives and the window', () => {
+    const implausible = {
+      kind: 'implausible-birth' as const,
+      playerId: 'torres',
+      name: 'Ferran Torres',
+      title: 'Ferran Torres (footballer, born 1950)',
+      qid: 'Q1',
+      wikidata: '1950-03-02',
+      seasonYear: 2026,
+      age: 76,
+    };
+    expect(describeBirthConflict(implausible)).toBe(
+      'birth date on torres ("Ferran Torres") — Wikidata\'s 1950-03-02 ("Ferran Torres (footballer, born 1950)") makes them 76 in 2026, outside playing age 15–45',
+    );
+    expect(birthConflictFixes(implausible)).toEqual([
+      'wrong person:           npm run squadctl -- retitle torres "<their article title>"',
+      'the date is right:      npm run squadctl -- birth torres 1950-03-02',
+    ]);
+  });
+
   it('offers no single date when Wikidata holds several', () => {
     expect(birthConflictFixes({ ...conflict, wikidata: ['2000-02-28', '2000-02-29'] })[0]).toBe(
       'Wikidata is right:      npm run squadctl -- birth torres <2000-02-28 | 2000-02-29>',
@@ -331,31 +422,53 @@ describe('describeBirthConflict and birthConflictFixes', () => {
   });
 });
 
-describe('isCalendarDate', () => {
-  it('accepts a real ISO date, a leap day included', () => {
-    expect(isCalendarDate('2000-02-29')).toBe(true);
+describe('pendingFiles', () => {
+  const players = [player()];
+
+  it('asks for the article image first, and not yet the item’s', () => {
+    expect(
+      pendingFiles(
+        players,
+        lookups({ person: { human: true, births: [], image: 'Item.jpg' }, credits: [] }),
+      ),
+    ).toEqual(['Pedri.jpg']);
   });
 
-  it('refuses an impossible or malformed date', () => {
-    expect(isCalendarDate('1998-02-29')).toBe(false);
-    expect(isCalendarDate('2001-13-01')).toBe(false);
-    expect(isCalendarDate('2001-1-01')).toBe(false);
-    expect(isCalendarDate('01/01/2001')).toBe(false);
+  it('asks for the item’s image once the article’s proves unusable', () => {
+    expect(
+      pendingFiles(
+        players,
+        lookups({
+          person: { human: true, births: [], image: 'Item.jpg' },
+          credits: [['Pedri.jpg', { status: 'refused-licence', licence: 'GFDL' }]],
+        }),
+      ),
+    ).toEqual(['Item.jpg']);
   });
-});
 
-describe('playersInTeams', () => {
-  const squad = (id: string, playerIds: string[]): Squad =>
-    ({ id, members: playerIds.map((playerId) => ({ playerId, no: 1 })) }) as unknown as Squad;
-  const players = [player({ id: 'a' }), player({ id: 'b' }), player({ id: 'c' })];
+  it('asks for nothing once a usable image is answered, or a file failed', () => {
+    const withItem = { human: true, births: [], image: 'Item.jpg' };
+    expect(pendingFiles(players, lookups({ person: withItem }))).toEqual([]);
+    expect(
+      pendingFiles(players, lookups({ person: withItem, credits: [], failedFiles: ['Pedri.jpg'] })),
+    ).toEqual([]);
+  });
 
-  it('selects the members of the named teams', () => {
-    const selected = playersInTeams(
-      players,
-      [squad('esp', ['a', 'b']), squad('fra', ['c'])],
-      ['esp'],
-    );
-    expect(selected.map((p) => p.id)).toEqual(['a', 'b']);
+  it('asks nothing for a record with no one to photograph', () => {
+    expect(pendingFiles([player({ wikiTitle: null })], lookups({ credits: [] }))).toEqual([]);
+    expect(
+      pendingFiles(
+        players,
+        lookups({ person: { human: false, births: [], image: 'Stadium.jpg' }, credits: [] }),
+      ),
+    ).toEqual([]);
+  });
+
+  // So that the answer to the conflict re-runs with --offline.
+  it('asks for a held photo too', () => {
+    const held = player({ birth: '1998-02-29' });
+    expect(enrichPlayer(held, lookups()).photo).toBe('held');
+    expect(pendingFiles([held], lookups({ credits: [] }))).toEqual(['Pedri.jpg']);
   });
 });
 

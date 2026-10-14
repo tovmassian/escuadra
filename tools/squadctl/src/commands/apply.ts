@@ -1,11 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { Args, Flags } from '@oclif/core';
-import {
-  LEAGUES,
-  validateEnvelope,
-  type RosterEnvelope,
-} from '../../../../scripts/roster-envelope.ts';
+import { validateEnvelope, type RosterEnvelope } from '../../../../scripts/roster-envelope.ts';
 import type { Player, Squad } from '../../../../types/squad.ts';
 import { BaseCommand } from '../base-command.ts';
 import {
@@ -24,6 +20,7 @@ import { validateRegistry, type TeamRegistry } from '../lib/registry.ts';
 import { readDecisions, type DecisionFile } from '../lib/decisions.ts';
 import { readPlayers, writePlayers } from '../lib/players-file.ts';
 import { reconcileTeam } from '../lib/reconcile.ts';
+import { squadFiles } from '../lib/squad-files.ts';
 import { formatAndWrite } from '../lib/write-json.ts';
 
 interface TeamReport {
@@ -182,7 +179,7 @@ export default class Apply extends BaseCommand<RunReport> {
     // Orphans are kept and never auto-pruned: an orphan is precisely the record
     // reused, birth date intact, when that player appears in another squad.
     const referenced = new Set<string>();
-    for (const file of this.allSquadFiles()) {
+    for (const { path: file } of squadFiles(path.join(this.dataDir, 'squads'))) {
       const squad =
         squadWrites.find((w) => w.file === file)?.squad ??
         (JSON.parse(readFileSync(file, 'utf8')) as Squad);
@@ -267,25 +264,6 @@ export default class Apply extends BaseCommand<RunReport> {
       conflicts: [],
       warnings: reasons,
     };
-  }
-
-  private allSquadFiles(): string[] {
-    const base = path.join(this.dataDir, 'squads');
-    const files: string[] = [];
-    const nation = path.join(base, 'nation');
-    if (existsSync(nation)) {
-      for (const f of readdirSync(nation).filter((n) => n.endsWith('.json'))) {
-        files.push(path.join(nation, f));
-      }
-    }
-    for (const league of LEAGUES) {
-      const dir = path.join(base, 'club', league);
-      if (!existsSync(dir)) continue;
-      for (const f of readdirSync(dir).filter((n) => n.endsWith('.json'))) {
-        files.push(path.join(dir, f));
-      }
-    }
-    return files;
   }
 
   private loadEnvelopes(dir: string): RosterEnvelope[] {

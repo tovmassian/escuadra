@@ -4,8 +4,12 @@ import { describe, expect, it } from 'vitest';
 import { LEAGUES } from '../scripts/roster-envelope.ts';
 import type { Player, Squad } from '@/types/squad';
 import type { DecisionFile } from '../tools/squadctl/src/lib/decisions.ts';
-import { isCalendarDate } from '../tools/squadctl/src/lib/enrich-plan.ts';
-import { isAcceptedLicence } from '../tools/squadctl/src/lib/photo-credit.ts';
+import { isCalendarDate } from '../tools/squadctl/src/lib/dates.ts';
+import {
+  MAX_CREDIT_NAME,
+  isAcceptedLicence,
+  isAttributionOnly,
+} from '../tools/squadctl/src/lib/photo-credit.ts';
 import { wikiTitleFromSource } from '../tools/squadctl/src/lib/registry.ts';
 
 // Squad data is spread across data/teams.json, data/squads/**/*.json,
@@ -253,6 +257,26 @@ describe('every player photo carries a complete, accepted credit', () => {
           (photo.author !== null && photo.author.trim() === '') ||
           photo.file.trim() === '',
       )
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  // That licence's one condition is crediting the holder by name; the
+  // "Wikimedia Commons" fallback does not meet it.
+  it('names the holder of every attribution-only photo', () => {
+    const bad = withPhoto
+      .filter(
+        ({ photo }) => photo !== null && isAttributionOnly(photo.licence) && photo.author === null,
+      )
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  // A Commons template can wrap a source box and a licence banner round the
+  // name: one stored credit was once 4,413 characters of it, CSS included.
+  it('credits a name, never a template’s boilerplate', () => {
+    const bad = withPhoto
+      .filter(({ photo }) => (photo?.author?.length ?? 0) > MAX_CREDIT_NAME)
       .map((p) => p.id);
     expect(bad).toEqual([]);
   });

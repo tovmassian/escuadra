@@ -1,6 +1,26 @@
 import { describe, expect, it } from 'vitest';
+import { fileKey } from '../../../../scripts/commons.ts';
 import imageInfo from './__fixtures__/commons-imageinfo.json';
-import { creditsByFile, fileKey, isAcceptedLicence, stripHtml } from './photo-credit.ts';
+import {
+  CREDITS,
+  MAX_CREDIT_NAME,
+  isAcceptedLicence,
+  isAttributionOnly,
+  stripHtml,
+  type CreditOutcome,
+} from './photo-credit.ts';
+
+/** Each file's credit, read from one batch's replies as the client reads it. */
+function creditsByFile(files: readonly string[], replies: readonly unknown[]) {
+  return new Map<string, CreditOutcome>(
+    [...CREDITS.answers(files, replies)].map(([file, page]) => [file, CREDITS.read(page)]),
+  );
+}
+
+/** Every file a reply's pages hold, as `enrich` would have asked for it. */
+function filesIn(reply: { query?: { pages?: { title: string }[] } }): string[] {
+  return (reply.query?.pages ?? []).map((page) => fileKey(page.title));
+}
 
 describe('stripHtml', () => {
   it('reduces a Commons user link to its text', () => {
@@ -29,20 +49,31 @@ describe('stripHtml', () => {
     ).toBe('Original: A; Derivative work: B');
     expect(stripHtml('A<br>B<br />C')).toBe('A; B; C');
   });
+
+  // A Commons template can wrap a name in its own stylesheet.
+  it('drops a style or script element with its contents', () => {
+    expect(
+      stripHtml(
+        '<style data-mw-deduplicate="x">.mw-parser-output .box{margin:4px 0}</style><b>Jane</b><script>alert(1)</script> Doe',
+      ),
+    ).toBe('Jane Doe');
+  });
 });
 
-describe('fileKey', () => {
-  it('gives pageimages, Wikidata and Commons spellings of one file the same key', () => {
-    expect(fileKey('Pedri_2021.jpg')).toBe('Pedri 2021.jpg');
-    expect(fileKey('File:Pedri 2021.jpg')).toBe('Pedri 2021.jpg');
-    expect(fileKey('Pedri 2021.jpg')).toBe('Pedri 2021.jpg');
+describe('isAttributionOnly', () => {
+  it('matches the attribution-only licence in any case, and nothing else', () => {
+    for (const spelling of ['Attribution', 'attribution', 'ATTRIBUTION', ' Attribution ']) {
+      expect(isAttributionOnly(spelling)).toBe(true);
+    }
+    expect(isAttributionOnly('CC BY 4.0')).toBe(false);
+    expect(isAttributionOnly('Attribution-ShareAlike')).toBe(false);
   });
 });
 
 describe('isAcceptedLicence', () => {
   // "Attribution" is Commons' attribution-only licence: any use, provided the
   // copyright holder is credited — accepted 2026-10-14 after its wording was
-  // read, on the condition creditsByFile enforces: a named holder.
+  // read, on the condition `credit` enforces: a named holder.
   it.each([
     'CC BY-SA 4.0',
     'CC BY 2.0',
@@ -56,23 +87,24 @@ describe('isAcceptedLicence', () => {
     expect(isAcceptedLicence(licence)).toBe(true);
   });
 
+  // The reasons, at length, are in photo-credit.ts beside ACCEPTED_LICENCE.
   it.each([
-    'CC BY-NC 2.0',
-    'CC BY-NC-SA 4.0',
-    'GFDL',
-    'GFDL 1.2',
-    'CC BY-SA',
-    'Copyrighted free use',
-    'PDM-owner',
-    'Public domain in the United States',
-    'Fair use',
-  ])('refuses %s', (licence) => {
+    ['CC BY-NC 2.0', 'non-commercial only'],
+    ['CC BY-NC-SA 4.0', 'non-commercial only'],
+    ['GFDL', 'its full text must travel with the image'],
+    ['GFDL 1.2', 'its full text must travel with the image'],
+    ['CC BY-SA', 'no version, so no exact terms or deed'],
+    ['Copyrighted free use', 'a permission in no standard wording'],
+    ['PDM-owner', 'a label for work already free, not a waiver'],
+    ['Public domain in the United States', 'free there, perhaps not elsewhere'],
+    ['Fair use', 'not a licence'],
+  ])('refuses %s: %s', (licence) => {
     expect(isAcceptedLicence(licence)).toBe(false);
   });
 });
 
-describe('creditsByFile (recorded Commons response)', () => {
-  const credits = creditsByFile([imageInfo]);
+describe('CREDITS (recorded Commons response)', () => {
+  const credits = creditsByFile(filesIn(imageInfo), [imageInfo]);
   const author = (file: string) => {
     const outcome = credits.get(file);
     return outcome?.status === 'ok' ? outcome.credit.author : `not ok: ${outcome?.status}`;
@@ -169,11 +201,11 @@ describe('creditsByFile (recorded Commons response)', () => {
   });
 
   it('answers only for files the response holds', () => {
-    expect(credits.get('Never requested.jpg')).toBeUndefined();
+    expect(creditsByFile(['Never requested.jpg'], [imageInfo]).size).toBe(0);
   });
 });
 
-describe('creditsByFile (edge cases)', () => {
+describe('CREDITS (edge cases)', () => {
   const page = (title: string, thumburl: string, licence = 'CC BY 4.0') => ({
     title,
     imageinfo: [
@@ -186,16 +218,22 @@ describe('creditsByFile (edge cases)', () => {
   });
 
   it('refuses a thumbnail hosted anywhere but Wikimedia, or over plain http', () => {
-    const credits = creditsByFile([
-      {
-        query: {
-          pages: [
-            page('File:Elsewhere.jpg', 'https://example.org/x.jpg'),
-            page('File:Plain.jpg', 'http://upload.wikimedia.org/wikipedia/commons/a/ab/Plain.jpg'),
-          ],
+    const credits = creditsByFile(
+      ['Elsewhere.jpg', 'Plain.jpg'],
+      [
+        {
+          query: {
+            pages: [
+              page('File:Elsewhere.jpg', 'https://example.org/x.jpg'),
+              page(
+                'File:Plain.jpg',
+                'http://upload.wikimedia.org/wikipedia/commons/a/ab/Plain.jpg',
+              ),
+            ],
+          },
         },
-      },
-    ]);
+      ],
+    );
     expect(credits.get('Elsewhere.jpg')).toEqual({
       status: 'incomplete-credit',
       licence: 'CC BY 4.0',
@@ -207,14 +245,17 @@ describe('creditsByFile (edge cases)', () => {
   // A `continue`d query answers the same file across two responses; the one
   // carrying imageinfo wins over the one that does not.
   it('merges a file answered across continued responses', () => {
-    const credits = creditsByFile([
-      { query: { pages: [{ title: 'File:Split.jpg' }] } },
-      {
-        query: {
-          pages: [page('File:Split.jpg', 'https://upload.wikimedia.org/wikipedia/commons/s.jpg')],
+    const credits = creditsByFile(
+      ['Split.jpg'],
+      [
+        { query: { pages: [{ title: 'File:Split.jpg' }] } },
+        {
+          query: {
+            pages: [page('File:Split.jpg', 'https://upload.wikimedia.org/wikipedia/commons/s.jpg')],
+          },
         },
-      },
-    ]);
+      ],
+    );
     expect(credits.get('Split.jpg')?.status).toBe('ok');
   });
 
@@ -237,7 +278,9 @@ describe('creditsByFile (edge cases)', () => {
   it('refuses the attribution-only licence when no holder is named', () => {
     for (const artist of [null, 'Unknown photographer']) {
       expect(
-        creditsByFile([{ query: { pages: [attributionOnly(artist)] } }]).get('Holder.jpg'),
+        creditsByFile(['Holder.jpg'], [{ query: { pages: [attributionOnly(artist)] } }]).get(
+          'Holder.jpg',
+        ),
       ).toEqual({
         status: 'incomplete-credit',
         licence: 'Attribution',
@@ -253,7 +296,7 @@ describe('creditsByFile (edge cases)', () => {
     const moved = page('File:Moved.jpg', 'https://upload.wikimedia.org/wikipedia/commons/m.jpg');
     const info = moved.imageinfo[0];
     if (info) info.descriptionurl = 'https://commons.wikimedia.org/wiki/File:Elsewhere.jpg';
-    expect(creditsByFile([{ query: { pages: [moved] } }]).get('Moved.jpg')).toEqual({
+    expect(creditsByFile(['Moved.jpg'], [{ query: { pages: [moved] } }]).get('Moved.jpg')).toEqual({
       status: 'incomplete-credit',
       licence: 'CC BY 4.0',
       missing: ['commons-page'],
@@ -261,15 +304,75 @@ describe('creditsByFile (edge cases)', () => {
   });
 
   it('keys a file by the name it was requested under when Commons normalises it', () => {
-    const credits = creditsByFile([
-      {
-        query: {
-          normalized: [{ from: 'File:lower.jpg', to: 'File:Lower.jpg' }],
-          pages: [page('File:Lower.jpg', 'https://upload.wikimedia.org/wikipedia/commons/l.jpg')],
+    const credits = creditsByFile(
+      ['lower.jpg'],
+      [
+        {
+          query: {
+            normalized: [{ from: 'File:lower.jpg', to: 'File:Lower.jpg' }],
+            pages: [page('File:Lower.jpg', 'https://upload.wikimedia.org/wikipedia/commons/l.jpg')],
+          },
         },
-      },
-    ]);
-    expect(credits.get('lower.jpg')?.status).toBe('ok');
-    expect(credits.get('Lower.jpg')?.status).toBe('ok');
+      ],
+    );
+    expect(credits.get('lower.jpg')).toMatchObject({ status: 'ok', credit: { file: 'Lower.jpg' } });
+  });
+
+  // Wikidata or an article can still name a file by the name it had before
+  // it was moved on Commons.
+  it('follows a moved file to its new name, which the credit stores', () => {
+    expect(CREDITS.params(['Old.jpg']).redirects).toBe('1');
+    const credits = creditsByFile(
+      ['Old name.jpg'],
+      [
+        {
+          query: {
+            redirects: [{ from: 'File:Old name.jpg', to: 'File:New name.jpg' }],
+            pages: [
+              page('File:New name.jpg', 'https://upload.wikimedia.org/wikipedia/commons/n.jpg'),
+            ],
+          },
+        },
+      ],
+    );
+    expect(credits.get('Old name.jpg')).toMatchObject({
+      status: 'ok',
+      credit: { file: 'New name.jpg' },
+    });
+  });
+
+  // Matched case-insensitively, as the accepted-licence rule is: no casing
+  // gets an attribution-only photo past its one condition.
+  it('refuses the attribution-only licence with no holder in any case', () => {
+    for (const licence of ['attribution', 'ATTRIBUTION']) {
+      const unnamed = attributionOnly(null);
+      const meta = unnamed.imageinfo[0]?.extmetadata;
+      if (meta) meta.LicenseShortName = { value: licence };
+      expect(
+        creditsByFile(['Holder.jpg'], [{ query: { pages: [unnamed] } }]).get('Holder.jpg'),
+      ).toEqual({ status: 'incomplete-credit', licence, missing: ['author'] });
+    }
+  });
+
+  // Ferdi Kadıoğlu's Artist field is a source box and a licence banner
+  // wrapped round a stylesheet: 4,413 characters once stripped.
+  it('credits Wikimedia Commons when the author field is too long to be a name', () => {
+    const boilerplate = `This photo is available from Serkan Yakın. ${'You are free: to share. '.repeat(10)}`;
+    expect(boilerplate.length).toBeGreaterThan(MAX_CREDIT_NAME);
+    const long = page('File:Long.jpg', 'https://upload.wikimedia.org/wikipedia/commons/l.jpg');
+    const meta = long.imageinfo[0]?.extmetadata as Record<string, { value: string }>;
+    meta.Artist = { value: `<table><tr><td>${boilerplate}</td></tr></table>` };
+    expect(
+      creditsByFile(['Long.jpg'], [{ query: { pages: [long] } }]).get('Long.jpg'),
+    ).toMatchObject({
+      status: 'ok',
+      credit: { author: null },
+    });
+  });
+
+  it('asks Commons for exactly the fields the credit reads', () => {
+    expect(CREDITS.params(['A.jpg']).iiextmetadatafilter).toBe(
+      'LicenseShortName|Artist|Attribution|LicenseUrl',
+    );
   });
 });

@@ -1,27 +1,22 @@
 import { describe, expect, it } from 'vitest';
 import pagesResponse from './__fixtures__/wikipedia-pages.json';
 import entitiesResponse from './__fixtures__/wikidata-entities.json';
-import {
-  BATCH_SIZE,
-  articlesByTitle,
-  birthDates,
-  chunk,
-  peopleById,
-  trimEntities,
-} from './wikimedia-parse.ts';
+import type { Lookup } from './wikimedia-fetch.ts';
+import { ARTICLES, PEOPLE, birthDates } from './wikimedia-parse.ts';
 
-describe('chunk', () => {
-  it('splits into MediaWiki-sized batches', () => {
-    const titles = Array.from({ length: 120 }, (_, i) => `T${i}`);
-    expect(chunk(titles, BATCH_SIZE).map((b) => b.length)).toEqual([50, 50, 20]);
-  });
+/** What a lookup reads for each key from a batch's replies — what the
+ *  client does with each answer, cached or not. */
+function readAll<Info, Answer>(
+  lookup: Lookup<Info, Answer>,
+  keys: readonly string[],
+  replies: readonly unknown[],
+): Map<string, Info> {
+  return new Map(
+    [...lookup.answers(keys, replies)].map(([key, answer]) => [key, lookup.read(answer)]),
+  );
+}
 
-  it('returns no batches for no items', () => {
-    expect(chunk([], BATCH_SIZE)).toEqual([]);
-  });
-});
-
-describe('articlesByTitle (recorded Wikipedia response)', () => {
+describe('ARTICLES (recorded Wikipedia response)', () => {
   const titles = [
     'Pedri',
     'Eric García (footballer, born 2001)',
@@ -30,7 +25,7 @@ describe('articlesByTitle (recorded Wikipedia response)', () => {
     'Josh Cullen (footballer)',
     'Rodri_(footballer,_born_1996)',
   ];
-  const articles = articlesByTitle(titles, [pagesResponse]);
+  const articles = readAll(ARTICLES, titles, [pagesResponse]);
 
   it('gives an article its lead image as a file key and its Wikidata item', () => {
     expect(articles.get('Pedri')).toEqual({
@@ -82,13 +77,14 @@ describe('articlesByTitle (recorded Wikipedia response)', () => {
   });
 
   it('answers nothing for a title the responses do not hold', () => {
-    expect(articlesByTitle(['Never Asked'], [pagesResponse]).has('Never Asked')).toBe(false);
+    expect(readAll(ARTICLES, ['Never Asked'], [pagesResponse]).has('Never Asked')).toBe(false);
   });
 
   // `continue` splits one batch's props across responses: the image in one,
   // the Wikidata item in the next.
   it('merges a page answered across continued responses', () => {
-    const merged = articlesByTitle(
+    const merged = readAll(
+      ARTICLES,
       ['Split'],
       [
         { query: { pages: [{ title: 'Split', pageimage: 'Split.jpg' }] } },
@@ -164,8 +160,9 @@ describe('birthDates', () => {
   });
 });
 
-describe('peopleById (recorded Wikidata response)', () => {
-  const people = peopleById([entitiesResponse]);
+describe('PEOPLE (recorded Wikidata response)', () => {
+  const ids = Object.keys(entitiesResponse.entities);
+  const people = readAll(PEOPLE, ids, [entitiesResponse]);
 
   it('reads a person: human, one birth date, their image', () => {
     expect(people.get('Q66606355')).toEqual({
@@ -187,39 +184,55 @@ describe('peopleById (recorded Wikidata response)', () => {
   it('marks an item that is not a person', () => {
     expect(people.get('Q8682')?.human).toBe(false);
   });
+
+  // An answer, unlike an id the reply skips: Wikidata says there is no item.
+  it('reads an item Wikidata does not have as no person', () => {
+    const missing = readAll(
+      PEOPLE,
+      ['Q1', 'Q2'],
+      [{ entities: { Q1: { id: 'Q1', missing: '' } } }],
+    );
+    expect([...missing]).toEqual([['Q1', null]]);
+  });
 });
 
-describe('trimEntities', () => {
-  it('keeps only the claims enrich reads, without references or qualifiers', () => {
-    const trimmed = trimEntities({
-      entities: {
-        Q1: {
-          id: 'Q1',
-          labels: { en: { value: 'X' } },
-          claims: {
-            P31: [{ rank: 'normal', mainsnak: { snaktype: 'value' }, references: [{}] }],
-            P54: [{ rank: 'normal', mainsnak: { snaktype: 'value' } }],
-            P569: [{ rank: 'normal', mainsnak: { snaktype: 'value' }, qualifiers: {} }],
+describe('PEOPLE answers', () => {
+  it('keep only the claims PEOPLE reads, without references or qualifiers', () => {
+    const answers = PEOPLE.answers(
+      ['Q1', 'Q2'],
+      [
+        {
+          entities: {
+            Q1: {
+              id: 'Q1',
+              labels: { en: { value: 'X' } },
+              claims: {
+                P31: [{ rank: 'normal', mainsnak: { snaktype: 'value' }, references: [{}] }],
+                P54: [{ rank: 'normal', mainsnak: { snaktype: 'value' } }],
+                P569: [{ rank: 'normal', mainsnak: { snaktype: 'value' }, qualifiers: {} }],
+              },
+            },
+            Q2: { id: 'Q2', missing: '' },
           },
         },
-        Q2: { id: 'Q2', missing: '' },
-      },
-    });
-    expect(trimmed).toEqual({
-      entities: {
-        Q1: {
+      ],
+    );
+    expect([...answers]).toEqual([
+      [
+        'Q1',
+        {
           id: 'Q1',
           claims: {
             P31: [{ rank: 'normal', mainsnak: { snaktype: 'value' } }],
             P569: [{ rank: 'normal', mainsnak: { snaktype: 'value' } }],
           },
         },
-        Q2: { id: 'Q2', missing: '' },
-      },
-    });
+      ],
+      ['Q2', { id: 'Q2', missing: '' }],
+    ]);
   });
 
-  it('is idempotent, so a cached response trims to itself', () => {
-    expect(trimEntities(trimEntities(entitiesResponse))).toEqual(trimEntities(entitiesResponse));
+  it('answer only the ids asked for', () => {
+    expect([...PEOPLE.answers(['Q8682'], [entitiesResponse]).keys()]).toEqual(['Q8682']);
   });
 });

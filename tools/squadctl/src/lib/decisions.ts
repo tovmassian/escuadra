@@ -10,13 +10,15 @@
 // Checked in, because it is repo knowledge rather than a local preference.
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
-import { isCalendarDate } from './enrich-plan.ts';
+import { isCalendarDate } from './dates.ts';
 import type { AcceptedAlias, AcceptedSplit, NotInSquad, TitleAlias } from './reconcile.ts';
 
 /** A stored birth date a person has confirmed against Wikidata's: the
  *  third answer to an `enrich` birth-date conflict, after `birth <id>
  *  <date>` (Wikidata is right) and `retitle` (wrong person). It carries the
- *  date it confirms, so it lapses by itself if the stored date changes. */
+ *  date it confirms, so `enrich` stops honouring it if the stored date
+ *  changes — and `birth <id> <date>`, the one command that changes a stored
+ *  date, removes it in the same run (`dropKeptBirth`). */
 export interface KeptBirth {
   player: string;
   birth: string;
@@ -247,4 +249,13 @@ export function addKeptBirth(file: DecisionFile, entry: KeptBirth): DecisionFile
       a.player.localeCompare(b.player),
     ),
   };
+}
+
+/** The player's kept birth gone, because their stored date was just set:
+ *  it confirmed the old date, and the data test fails on any entry that no
+ *  longer matches. Returns null when there was none. */
+export function dropKeptBirth(file: DecisionFile, player: string): DecisionFile | null {
+  const existing = file.keptBirths ?? [];
+  if (!existing.some((k) => k.player === player)) return null;
+  return { ...file, keptBirths: existing.filter((k) => k.player !== player) };
 }

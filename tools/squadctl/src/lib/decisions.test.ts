@@ -3,6 +3,7 @@ import {
   EMPTY_DECISIONS,
   addAlias,
   addKeptBirth,
+  dropKeptBirth,
   addSplit,
   addTitleAlias,
   validateDecisions,
@@ -157,6 +158,21 @@ describe('addKeptBirth', () => {
     expect(addKeptBirth(file, { player: 'z', birth: '2000-01-03' })?.keptBirths).toEqual([
       { player: 'z', birth: '2000-01-03' },
     ]);
+  });
+});
+
+describe('dropKeptBirth', () => {
+  it("removes only that player's entry, and is a no-op without one", () => {
+    const file = {
+      ...EMPTY_DECISIONS,
+      keptBirths: [
+        { player: 'a', birth: '2001-01-01' },
+        { player: 'z', birth: '2000-01-02' },
+      ],
+    };
+    expect(dropKeptBirth(file, 'a')?.keptBirths).toEqual([{ player: 'z', birth: '2000-01-02' }]);
+    expect(dropKeptBirth(file, 'nobody')).toBeNull();
+    expect(dropKeptBirth(EMPTY_DECISIONS, 'a')).toBeNull();
   });
 });
 

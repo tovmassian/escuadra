@@ -1,7 +1,5 @@
-import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { Flags } from '@oclif/core';
-import { LEAGUES } from '../../../../scripts/roster-envelope.ts';
 import type { Player, Squad } from '../../../../types/squad.ts';
 import { BaseCommand } from '../base-command.ts';
 import { colors } from '../lib/colors.ts';
@@ -12,40 +10,23 @@ import {
   birthConflictFixes,
   describeBirthConflict,
   enrichPlayer,
-  playersInTeams,
+  pendingFiles,
   summarize,
   type BirthConflict,
   type EnrichSummary,
   type Lookups,
   type PlayerEnrichment,
 } from '../lib/enrich-plan.ts';
-import { creditsByFile, type CreditOutcome } from '../lib/photo-credit.ts';
+import { CREDITS, type CreditOutcome } from '../lib/photo-credit.ts';
 import { readPlayers, writePlayers } from '../lib/players-file.ts';
-import {
-  COMMONS_API,
-  REQUESTS,
-  WIKIDATA_API,
-  WIKIPEDIA_API,
-  WikimediaClient,
-} from '../lib/wikimedia-fetch.ts';
-import {
-  BATCH_SIZE,
-  articlesByTitle,
-  chunk,
-  peopleById,
-  trimEntities,
-  type ArticleInfo,
-  type PersonInfo,
-} from '../lib/wikimedia-parse.ts';
+import { playersInTeams, readSquad, seasonYears, squadFiles } from '../lib/squad-files.ts';
+import { WikimediaClient, type Lookup } from '../lib/wikimedia-fetch.ts';
+import { ARTICLES, PEOPLE, type ArticleInfo, type PersonInfo } from '../lib/wikimedia-parse.ts';
 
-interface PlayerRow {
-  id: string;
-  photo: PlayerEnrichment['photo'];
-  birth: PlayerEnrichment['birth'];
-  file: string | null;
-  licence: string | null;
-  imageSource: PlayerEnrichment['imageSource'];
-}
+type PlayerRow = { id: string } & Pick<
+  PlayerEnrichment,
+  'photo' | 'birth' | 'file' | 'licence' | 'imageSource' | 'missing'
+>;
 
 interface EnrichReport {
   dryRun: boolean;
@@ -53,7 +34,7 @@ interface EnrichReport {
   requests: number;
   summary: EnrichSummary;
   conflicts: BirthConflict[];
-  /** One line per batch that failed after its retries. */
+  /** One line per failed batch, or per group of keys no lookup answered. */
   failures: string[];
   players: PlayerRow[];
   exitCode: number;
@@ -88,12 +69,18 @@ export default class Enrich extends BaseCommand<EnrichReport> {
     const { flags } = await this.parse(Enrich);
     const dryRun = flags['dry-run'];
     const players = readPlayers(this.dataDir);
-    const selected = this.select(players, flags.only);
+    const squads = squadFiles(path.join(this.dataDir, 'squads')).map((f) => readSquad(f.path));
+    const selected = this.select(players, squads, flags.only);
     const { decisions, problems } = readDecisions(this.dataDir);
     if (problems.length > 0) {
-      this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
+      this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, {
+        exit: EXIT.repo,
+      });
     }
-    const kept = new Map((decisions.keptBirths ?? []).map((k) => [k.player, k.birth]));
+    const context = {
+      kept: new Map((decisions.keptBirths ?? []).map((k) => [k.player, k.birth])),
+      seasonYears: seasonYears(squads),
+    };
 
     const client = new WikimediaClient({
       cacheDir: path.join(this.cacheDir, 'wikimedia'),
@@ -102,7 +89,7 @@ export default class Enrich extends BaseCommand<EnrichReport> {
     const failures: string[] = [];
     const lookups = await this.lookUp(client, selected, failures);
 
-    const results = selected.map((player) => enrichPlayer(player, lookups, kept));
+    const results = selected.map((player) => enrichPlayer(player, lookups, context));
     const summary = summarize(selected, results);
     const conflicts = results.flatMap((r) => (r.conflict === null ? [] : [r.conflict]));
 
@@ -124,33 +111,36 @@ export default class Enrich extends BaseCommand<EnrichReport> {
       summary,
       conflicts,
       failures,
-      players: results.map((r) => ({
-        id: r.playerId,
-        photo: r.photo,
-        birth: r.birth,
-        file: r.file,
-        licence: r.licence,
-        imageSource: r.imageSource,
+      players: results.map(({ playerId, photo, birth, file, licence, imageSource, missing }) => ({
+        id: playerId,
+        photo,
+        birth,
+        file,
+        licence,
+        imageSource,
+        missing,
       })),
       exitCode,
     };
   }
 
-  private select(players: Player[], only: string | undefined): Player[] {
+  private select(players: Player[], squads: Squad[], only: string | undefined): Player[] {
     if (only === undefined) return players;
     const ids = only
       .split(',')
       .map((id) => id.trim())
       .filter((id) => id !== '');
-    const squads = this.allSquads();
     const unknown = ids.filter((id) => !squads.some((s) => s.id === id));
-    if (unknown.length > 0) this.error(`no squad file for: ${unknown.join(', ')}`, { exit: 5 });
+    if (unknown.length > 0) {
+      this.error(`no squad file for: ${unknown.join(', ')}`, { exit: EXIT.repo });
+    }
     return playersInTeams(players, squads, ids);
   }
 
-  /** Three stages, each in batches of 50: Wikipedia for the article, then
-   *  Wikidata for its item, then Commons for every candidate image. A batch
-   *  that fails is recorded and its players keep what they have. */
+  /** Wikipedia for each article, then Wikidata for its item, then Commons in
+   *  passes: every photo's first candidate, then the item's image only for
+   *  the photos whose first one proved unusable. A key no lookup answers is
+   *  recorded as failed, and its players keep what they have. */
   private async lookUp(
     client: WikimediaClient,
     players: readonly Player[],
@@ -158,7 +148,7 @@ export default class Enrich extends BaseCommand<EnrichReport> {
   ): Promise<Lookups> {
     const lookups = {
       articles: new Map<string, ArticleInfo>(),
-      people: new Map<string, PersonInfo>(),
+      people: new Map<string, PersonInfo | null>(),
       credits: new Map<string, CreditOutcome>(),
       failedTitles: new Set<string>(),
       failedItems: new Set<string>(),
@@ -167,52 +157,42 @@ export default class Enrich extends BaseCommand<EnrichReport> {
     const sorted = (values: Iterable<string>) => [...new Set(values)].sort();
 
     const titles = sorted(players.flatMap((p) => (p.wikiTitle === null ? [] : [p.wikiTitle])));
-    await this.stage('wikipedia', titles, failures, lookups.failedTitles, async (batch) => {
-      const responses = await client.query(WIKIPEDIA_API, REQUESTS.articles(batch));
-      for (const [title, info] of articlesByTitle(batch, responses)) {
-        lookups.articles.set(title, info);
-      }
-    });
+    await this.stage(client, ARTICLES, titles, lookups.articles, lookups.failedTitles, failures);
 
-    const articles = [...lookups.articles.values()].flatMap((a) => (a.status === 'ok' ? [a] : []));
-    const ids = sorted(articles.flatMap((a) => (a.qid === null ? [] : [a.qid])));
-    await this.stage('wikidata', ids, failures, lookups.failedItems, async (batch) => {
-      const responses = await client.query(WIKIDATA_API, REQUESTS.people(batch), trimEntities);
-      for (const [id, person] of peopleById(responses)) lookups.people.set(id, person);
-    });
-
-    const files = sorted([
-      ...articles.flatMap((a) => (a.image === null ? [] : [a.image])),
-      ...[...lookups.people.values()].flatMap((p) =>
-        p.human && p.image !== null ? [p.image] : [],
+    const ids = sorted(
+      [...lookups.articles.values()].flatMap((a) =>
+        a.status === 'ok' && a.qid !== null ? [a.qid] : [],
       ),
-    ]);
-    await this.stage('commons', files, failures, lookups.failedFiles, async (batch) => {
-      const responses = await client.query(COMMONS_API, REQUESTS.credits(batch));
-      for (const [file, outcome] of creditsByFile(responses)) lookups.credits.set(file, outcome);
-    });
+    );
+    await this.stage(client, PEOPLE, ids, lookups.people, lookups.failedItems, failures);
 
+    // Every pass answers or fails each file it asks for, so a file is never
+    // asked twice and the passes end — at the latest after one per candidate.
+    const asked = new Set<string>();
+    for (;;) {
+      const files = pendingFiles(players, lookups).filter((file) => !asked.has(file));
+      if (files.length === 0) break;
+      for (const file of files) asked.add(file);
+      await this.stage(client, CREDITS, files, lookups.credits, lookups.failedFiles, failures);
+    }
     return lookups;
   }
 
-  private async stage(
-    name: string,
+  private async stage<Info, Answer>(
+    client: WikimediaClient,
+    lookup: Lookup<Info, Answer>,
     keys: readonly string[],
-    failures: string[],
+    found: Map<string, Info>,
     failed: Set<string>,
-    run: (batch: string[]) => Promise<void>,
+    failures: string[],
   ): Promise<void> {
-    const batches = chunk(keys, BATCH_SIZE);
-    this.report(colors.dim(`  ${name}: ${keys.length} in ${batches.length} batch(es)`));
-    for (const [index, batch] of batches.entries()) {
-      try {
-        await run(batch);
-      } catch (error) {
-        const message = error instanceof Error ? error.message : String(error);
-        failures.push(`${name} batch ${index + 1}/${batches.length}: ${message}`);
-        for (const key of batch) failed.add(key);
-        this.report(`  ${colors.red('failed:')} ${name} batch ${index + 1} — ${message}`);
-      }
+    this.report(colors.dim(`  ${lookup.name}: ${keys.length} to look up`));
+    const result = await client.lookUp(lookup, keys);
+    for (const [key, info] of result.found) found.set(key, info);
+    for (const key of result.failed) failed.add(key);
+    for (const failure of result.failures) {
+      failures.push(failure);
+      this.report(`  ${colors.red('failed:')} ${failure}`);
     }
   }
 
@@ -245,6 +225,11 @@ export default class Enrich extends BaseCommand<EnrichReport> {
 
     for (const r of results.filter((r) => r.photo === 'refused-licence')) {
       this.report(`  ${colors.yellow('refused:')}  ${r.playerId} — ${r.licence} (${r.file})`);
+    }
+    for (const r of results.filter((r) => r.photo === 'incomplete-credit')) {
+      this.report(
+        `  ${colors.yellow('incomplete:')} ${r.playerId} — no ${r.missing.join(', ')} (${r.file})`,
+      );
     }
     for (const r of results.filter((r) => r.photo === 'disambiguation')) {
       const title = r.player.wikiTitle ?? '';
@@ -281,17 +266,5 @@ export default class Enrich extends BaseCommand<EnrichReport> {
         ),
       );
     }
-  }
-
-  private allSquads(): Squad[] {
-    const base = path.join(this.dataDir, 'squads');
-    const dirs = [path.join(base, 'nation'), ...LEAGUES.map((l) => path.join(base, 'club', l))];
-    return dirs.flatMap((dir) =>
-      existsSync(dir)
-        ? readdirSync(dir)
-            .filter((f) => f.endsWith('.json'))
-            .map((f) => JSON.parse(readFileSync(path.join(dir, f), 'utf8')) as Squad)
-        : [],
-    );
   }
 }

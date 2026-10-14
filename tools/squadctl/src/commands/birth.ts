@@ -1,8 +1,8 @@
 import path from 'node:path';
 import { Args, Flags } from '@oclif/core';
 import { BaseCommand } from '../base-command.ts';
-import { addKeptBirth, readDecisions } from '../lib/decisions.ts';
-import { isCalendarDate } from '../lib/enrich-plan.ts';
+import { addKeptBirth, dropKeptBirth, readDecisions } from '../lib/decisions.ts';
+import { isCalendarDate } from '../lib/dates.ts';
 import { readPlayers, writePlayers } from '../lib/players-file.ts';
 import { setBirth } from '../lib/rename.ts';
 import { formatAndWrite } from '../lib/write-json.ts';
@@ -12,12 +12,17 @@ interface BirthReport {
   before: string | null;
   after: string;
   kept: boolean;
+  /** A set date replaced one a person had kept against Wikidata's; that
+   *  keptBirths entry was removed with it. */
+  droppedKept: boolean;
 }
 
 /** The answers to an `enrich` birth-date conflict that a command can give:
  *  `birth <id> <date>` when Wikidata's date is right and the stored one is
  *  not, `birth <id> --keep` when the stored date is right. The third answer,
- *  that the title names someone else, is `retitle`. */
+ *  that the title names someone else, is `retitle`. For an
+ *  `implausible-birth`, `birth <id> <date>` confirms Wikidata's date: once
+ *  stored, it is checked against Wikidata rather than filled from it. */
 export default class Birth extends BaseCommand<BirthReport> {
   static description =
     "Set a player's birth date, or keep the stored one against Wikidata's. Resolves an enrich birth-date conflict.";
@@ -73,7 +78,13 @@ export default class Birth extends BaseCommand<BirthReport> {
         `${updated === null ? 'already recorded' : 'recorded'}: ${args.playerId} keeps ${target.birth} against Wikidata`,
       );
       this.report('  now re-run: npm run squadctl -- enrich');
-      return { id: args.playerId, before: target.birth, after: target.birth, kept: true };
+      return {
+        id: args.playerId,
+        before: target.birth,
+        after: target.birth,
+        kept: true,
+        droppedKept: false,
+      };
     }
 
     if (args.date === undefined) {
@@ -89,12 +100,33 @@ export default class Birth extends BaseCommand<BirthReport> {
     if (result.before === result.after) {
       this.error(`"${args.playerId}" is already born ${result.after}`, { exit: 5 });
     }
+    // A kept birth confirmed the date this replaces: it goes with it.
+    const { decisions, problems } = readDecisions(this.dataDir);
+    if (problems.length > 0) {
+      this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
+    }
+    const withoutKept = dropKeptBirth(decisions, args.playerId);
 
     await writePlayers(this.dataDir, result.players);
+    if (withoutKept !== null) {
+      await formatAndWrite(
+        path.join(this.dataDir, 'decisions.json'),
+        `${JSON.stringify(withoutKept, null, 2)}\n`,
+      );
+    }
 
     this.report(`birth ${args.playerId}: ${result.before ?? '(none)'} -> ${result.after}`);
+    if (withoutKept !== null) {
+      this.report(`  removed: the kept birth ${result.before ?? ''} from data/decisions.json`);
+    }
     this.report('  now re-run: npm run squadctl -- enrich');
 
-    return { id: args.playerId, before: result.before, after: result.after, kept: false };
+    return {
+      id: args.playerId,
+      before: result.before,
+      after: result.after,
+      kept: false,
+      droppedKept: withoutKept !== null,
+    };
   }
 }

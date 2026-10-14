@@ -402,8 +402,9 @@ moves — an interim placement until the play-page redesign (§8.4).
 ### 10.1 What was built
 
 - **`squadctl enrich`** (`tools/squadctl/src/commands/enrich.ts`), after
-  `apply`: Wikipedia → Wikidata → Commons in batches of 50, responses cached
-  in `.cache/wikimedia/` before parsing, `--offline`, `--dry-run`, `--only`.
+  `apply`: Wikipedia → Wikidata → Commons in batches of 50, each key's answer
+  cached in `.cache/wikimedia/` before any rule reads it, `--offline`,
+  `--dry-run`, `--only`.
   Rules in `lib/photo-credit.ts` and `lib/enrich-plan.ts`, with recorded
   Wikimedia responses as fixtures. Usage and the conflict procedure:
   `tools/squadctl/README.md`.
@@ -446,6 +447,16 @@ Departures from §8.2, each found in the data:
   exactly, so `sourceUrl` is gone and `scripts/commons.ts` derives it.
   enrich stores a photo only when Commons' page URL equals the derivation,
   so a derived link always lands.
+- **A credit name longer than 120 characters is no name** (#108 review).
+  Ferdi Kadıoğlu's author field was a source box and a licence banner round a
+  stylesheet, stored as 4,413 characters; it is now credited to Wikimedia
+  Commons with its page, like an unknown author. `<style>` and `<script>` go
+  with their contents.
+- **A filled birth date must give a playing age** (#108 review): 15 to 45 on
+  1 July of the squad's season, else an `implausible-birth` conflict. A
+  filled date comes from the very item the birth check compares against, so
+  only an independent signal can catch a wrong title there. None of the
+  1,543 dates filled before the rule fell outside it (the base spans 16–44).
 
 ### 10.2 `wikiTitle` backfill (§8.3)
 

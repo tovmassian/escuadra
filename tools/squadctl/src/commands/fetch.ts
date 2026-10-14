@@ -8,7 +8,8 @@ import { applyCommand, displayPath } from '../lib/hints.ts';
 import { buildEnvelope } from '../lib/build-envelope.ts';
 import { validateRegistry, wikiTitleFromSource, type TeamRegistry } from '../lib/registry.ts';
 import { selectTeams } from '../lib/select.ts';
-import { WikiFetchError, fetchSquadSection } from '../lib/wiki-fetch.ts';
+import { WikiFetchError } from '../lib/http.ts';
+import { fetchSquadSection } from '../lib/wiki-fetch.ts';
 import { parseSection } from '../lib/wikitext-parse.ts';
 
 interface FetchTeamReport {
