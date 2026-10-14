@@ -63,7 +63,7 @@ export const BIRTH_STATUSES: readonly BirthStatus[] = [
 ];
 
 /** The ages a squad's players are found at, in years on 1 July of the
- *  season's first year. The base's youngest is 16 and oldest 44 (2026). */
+ *  season's first year. The base's youngest is 15 and oldest 43 (2026). */
 export const PLAYING_AGE = { min: 15, max: 45 } as const;
 
 export interface Lookups {

@@ -456,7 +456,8 @@ Departures from §8.2, each found in the data:
   1 July of the squad's season, else an `implausible-birth` conflict. A
   filled date comes from the very item the birth check compares against, so
   only an independent signal can catch a wrong title there. None of the
-  1,543 dates filled before the rule fell outside it (the base spans 16–44).
+  1,543 dates filled before the rule fell outside it (squad members span
+  15–43).
 
 ### 10.2 `wikiTitle` backfill (§8.3)
 
