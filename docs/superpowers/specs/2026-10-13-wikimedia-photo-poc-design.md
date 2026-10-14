@@ -425,7 +425,7 @@ Departures from §8.2, each found in the data:
   the alternative was editing Wikidata or being asked every run.
 - **Public domain is accepted exactly**, not as a prefix; ported CC variants
   ("CC BY-SA 3.0 at") are accepted; `http://` deeds are upgraded to https.
-- "Attribution" is still refused: 12 players, awaiting the sign-off §8.2 asks
+- "Attribution" is still refused: 11 players, awaiting the sign-off §8.2 asks
   for.
 
 ### 10.2 `wikiTitle` backfill (§8.3)
@@ -478,7 +478,7 @@ at Liverpool); squadctl never merges records, so that is left to a person.
    POC's.
 2. **Release** (§8.5) — privacy policy, About text, App Privacy, Data safety,
    in a store build, then the gate comes off.
-3. **"Attribution" licence** — 12 photos, a person's decision.
+3. **"Attribution" licence** — 11 photos, a person's decision.
 4. **Two birth conflicts** — `andres-cubas`, `longoni`.
 5. **Bundle size** — 0.94 MB of credits ships in every OTA update. Dropping
    `sourceUrl` (derivable from `file`) saves ~80 bytes a photo; a decision,
