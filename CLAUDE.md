@@ -45,13 +45,13 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 - **CI calls tools directly** (`node scripts/ci/…`, `npx eas-cli …`), never through new npm
   scripts, and writes temporary files to `$RUNNER_TEMP`, never new `.gitignore` lines.
 
-⚠️ **On `main` today, the About privacy text is out of date.** It still says
-"no advertising, analytics or tracking software" while TelemetryDeck (#53) is
-in the code, and it does not mention that player photos load from Wikimedia
-Commons, which sees the user's IP address. The next release branch (its
-version still TBD) is cut from `main` only after #54 rewrites that text and
-the web policy together and #55 updates the store declarations — both
-covering the photos as well as TelemetryDeck; then #60 builds it.
+⚠️ **The About text on `main` now covers TelemetryDeck and the Wikimedia photos
+(#54), but the web policy has not caught up.** `gh-pages` `privacy.html` still
+carries the old text and must be replaced with the About text word for word,
+published when the first build containing it reaches users; #55 updates the
+store declarations (both covering the photos as well as TelemetryDeck). The next
+release branch (its version still TBD) is cut from `main` only after both; then
+#60 builds it.
 
 ## Scope and roadmap
 
