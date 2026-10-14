@@ -1,4 +1,4 @@
-import { photoCreditRows, photoFor, photosGate } from '@/lib/photos';
+import { photoCreditRows, photoFor } from '@/lib/photos';
 import type { QuestionResult } from '@/stores/session';
 import type { PhotoCredit, Player } from '@/types/squad';
 import { describe, expect, it } from 'vitest';
@@ -39,29 +39,14 @@ function result(playerId: string, memberNo: number, playerName: string): Questio
   };
 }
 
-// Photos load from Wikimedia, which sees the user's IP: until a store build
-// ships that disclosure, nothing but a development build may show one.
-describe('photosGate', () => {
-  it('is on only in a development build with the flag set to 1', () => {
-    expect(photosGate({ isDev: true, flag: '1' })).toBe(true);
-    expect(photosGate({ isDev: false, flag: '1' })).toBe(false);
-    expect(photosGate({ isDev: true, flag: undefined })).toBe(false);
-    expect(photosGate({ isDev: true, flag: 'true' })).toBe(false);
-  });
-});
-
 describe('photoFor', () => {
-  it('returns the player’s photo when photos are on', () => {
-    expect(photoFor(player(credit), true)).toEqual(credit);
-  });
-
-  it('returns nothing when photos are off, whatever the data holds', () => {
-    expect(photoFor(player(credit), false)).toBeNull();
+  it('returns the player’s photo', () => {
+    expect(photoFor(player(credit))).toEqual(credit);
   });
 
   it('returns nothing for a player without a photo, or no player at all', () => {
-    expect(photoFor(player(null), true)).toBeNull();
-    expect(photoFor(undefined, true)).toBeNull();
+    expect(photoFor(player(null))).toBeNull();
+    expect(photoFor(undefined)).toBeNull();
   });
 });
 

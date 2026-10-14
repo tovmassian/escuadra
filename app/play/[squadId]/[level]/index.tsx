@@ -12,7 +12,6 @@ import { StatChip } from '@/components/StatChip';
 import { TeamMarker } from '@/components/TeamMarker';
 import { flagFor } from '@/lib/flags';
 import { photoFor } from '@/lib/photos';
-import { PHOTOS_ENABLED } from '@/lib/photosRuntime';
 import type { Level, QuestionPart } from '@/lib/questionEngine';
 import { fitHeroCard, partRailRows, progressOutcomes } from '@/lib/roundView';
 import { isFlawless } from '@/lib/resultsView';
@@ -143,7 +142,7 @@ export default function Question() {
   // prefetch only means the number card shows a moment longer.
   useEffect(() => {
     const next = session.questions[session.currentIndex + 1];
-    const nextPhoto = next ? photoFor(getPlayer(next.playerId), PHOTOS_ENABLED) : null;
+    const nextPhoto = next ? photoFor(getPlayer(next.playerId)) : null;
     if (nextPhoto) Image.prefetch(nextPhoto.url).catch(() => {});
   }, [session.currentIndex, session.questions]);
 
@@ -161,7 +160,7 @@ export default function Question() {
 
   const score = selectScore(session.results);
   const questionComplete = result.correct !== null;
-  const photo = photoFor(getPlayer(question.playerId), PHOTOS_ENABLED);
+  const photo = photoFor(getPlayer(question.playerId));
 
   const affiliationLabel = squad.kind === 'club' ? 'NAT' : 'CLUB';
   // AGE drops out of the row entirely when the player has no stored birth
@@ -267,7 +266,6 @@ export default function Question() {
             onAnswer={(pickedIndex) => session.answerPart(pickedIndex)}
           />
         ))}
-        {questionComplete && photo && <PhotoCreditLine credit={photo} />}
       </ScrollView>
 
       <View style={[styles.footer, { paddingBottom: insets.bottom + spacing.md }]}>
@@ -277,6 +275,7 @@ export default function Question() {
           disabled={!questionComplete}
           onPress={continuePressed}
         />
+        <PhotoCreditLine credit={photo} />
       </View>
     </View>
   );
