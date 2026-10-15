@@ -356,11 +356,11 @@ Per-player data comes in batches of 50, never one request per player — the
 same rule `fetch` keeps. Three stages, about 175 requests and under four
 minutes for the whole base at a 500 ms courtesy delay:
 
-| stage     | asks for                                                             |
-| --------- | -------------------------------------------------------------------- |
-| Wikipedia | each `wikiTitle`'s free lead image and Wikidata item                 |
-| Wikidata  | each item's `instance of`, date of birth and image (P31/P569/P18)    |
-| Commons   | each photo's next candidate: 500 px thumbnail, licence, author, page |
+| stage     | asks for                                                                            |
+| --------- | ----------------------------------------------------------------------------------- |
+| Wikipedia | each `wikiTitle`'s free lead image and Wikidata item                                |
+| Wikidata  | each item's `instance of`, date of birth and image (P31/P569/P18)                   |
+| Commons   | each photo's next candidate: 960 px thumbnail, original size, licence, author, page |
 
 Commons runs in passes: every photo's first candidate, then the item's own
 image only for the photos whose first one proved unusable (2,200 files, then
@@ -373,11 +373,11 @@ dropped connection.
 **Photo.** The article's free lead image, else the Wikidata item's own. It is
 written only with an accepted licence (CC BY or CC BY-SA at any version, CC0,
 public domain, and Commons' attribution-only "Attribution"), a thumbnail on
-`upload.` or `thumb.wikimedia.org`, and a Commons page exactly where
-`commonsFileUrl` (`scripts/commons.ts`) derives it from the file name — the
-page is not stored, the app derives it. GFDL, "Copyrighted free use" and
-everything else is refused and listed; why each licence is accepted or
-refused: [`docs/license.md`](../../docs/license.md).
+`upload.` or `thumb.wikimedia.org`, the original's width and height, and a
+Commons page exactly where `commonsFileUrl` (`scripts/commons.ts`) derives it
+from the file name — the page is not stored, the app derives it. GFDL,
+"Copyrighted free use" and everything else is refused and listed; why each
+licence is accepted or refused: [`docs/license.md`](../../docs/license.md).
 
 **Credit.** The name a credit shows is the attribution the licence asks for,
 from Commons' `Attribution` field — "Bryan Berlin / WikiPortraits", or the

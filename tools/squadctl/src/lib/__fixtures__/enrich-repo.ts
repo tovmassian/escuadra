@@ -78,7 +78,9 @@ const imagePage = (file: string) => ({
   title: `File:${file}`,
   imageinfo: [
     {
-      thumburl: `https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/${file}/500px-${file}?utm_source=x`,
+      thumburl: `https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/${file}/960px-${file}?utm_source=x`,
+      width: 1200,
+      height: 1600,
       descriptionurl: `https://commons.wikimedia.org/wiki/File:${file}`,
       extmetadata: {
         Artist: { value: '<a href="//commons.wikimedia.org/wiki/User:B">Bryan Berlin</a>' },

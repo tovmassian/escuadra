@@ -115,7 +115,9 @@ describe('CREDITS (recorded Commons response)', () => {
       status: 'ok',
       credit: {
         file: 'Pedri France v Spain 7.24.26-245.jpg',
-        url: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/500px-Pedri_France_v_Spain_7.24.26-245.jpg',
+        url: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/960px-Pedri_France_v_Spain_7.24.26-245.jpg',
+        width: 3333,
+        height: 5000,
         author: 'Bryan Berlin / WikiPortraits',
         licence: 'CC BY-SA 4.0',
         licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
@@ -163,6 +165,8 @@ describe('CREDITS (recorded Commons response)', () => {
         'https://upload.wikimedia.org/wikipedia/commons/3/3d/20150328_1426_U19_AUTHRV_1333.jpg',
       );
       expect(outcome.credit.licence).toBe('CC BY-SA 3.0 at');
+      // The original's 480 x 721, not Commons' requested thumbwidth of 960.
+      expect(outcome.credit).toMatchObject({ width: 480, height: 721 });
     }
   });
 
@@ -196,7 +200,7 @@ describe('CREDITS (recorded Commons response)', () => {
     expect(credits.get('Escuadra fixture file that does not exist.jpg')).toEqual({
       status: 'incomplete-credit',
       licence: null,
-      missing: ['licence', 'thumbnail', 'commons-page'],
+      missing: ['licence', 'thumbnail', 'commons-page', 'size'],
     });
   });
 
@@ -206,11 +210,12 @@ describe('CREDITS (recorded Commons response)', () => {
 });
 
 describe('CREDITS (edge cases)', () => {
-  const page = (title: string, thumburl: string, licence = 'CC BY 4.0') => ({
+  const page = (title: string, thumburl: string, licence = 'CC BY 4.0', size = true) => ({
     title,
     imageinfo: [
       {
         thumburl,
+        ...(size ? { width: 1200, height: 1600 } : {}),
         descriptionurl: `https://commons.wikimedia.org/wiki/${title.replace(/ /g, '_')}`,
         extmetadata: { LicenseShortName: { value: licence } },
       },
@@ -264,6 +269,8 @@ describe('CREDITS (edge cases)', () => {
     imageinfo: [
       {
         thumburl: 'https://upload.wikimedia.org/wikipedia/commons/h.jpg',
+        width: 1200,
+        height: 1600,
         descriptionurl: 'https://commons.wikimedia.org/wiki/File:Holder.jpg',
         extmetadata: {
           LicenseShortName: { value: 'Attribution' },
@@ -374,5 +381,52 @@ describe('CREDITS (edge cases)', () => {
     expect(CREDITS.params(['A.jpg']).iiextmetadatafilter).toBe(
       'LicenseShortName|Artist|Attribution|LicenseUrl',
     );
+  });
+
+  // The question screen frames a photo whose original is too small to fill
+  // it (spec §2.6), so the original's size is part of the credit.
+  it("stores the original's width and height", () => {
+    const outcome = creditsByFile(
+      ['Sized.jpg'],
+      [
+        {
+          query: {
+            pages: [page('File:Sized.jpg', 'https://upload.wikimedia.org/wikipedia/commons/s.jpg')],
+          },
+        },
+      ],
+    ).get('Sized.jpg');
+    expect(outcome?.status === 'ok' && outcome.credit).toMatchObject({ width: 1200, height: 1600 });
+  });
+
+  it('refuses a file Commons gives no size for', () => {
+    const outcome = creditsByFile(
+      ['Unsized.jpg'],
+      [
+        {
+          query: {
+            pages: [
+              page(
+                'File:Unsized.jpg',
+                'https://upload.wikimedia.org/wikipedia/commons/u.jpg',
+                'CC BY 4.0',
+                false,
+              ),
+            ],
+          },
+        },
+      ],
+    ).get('Unsized.jpg');
+    expect(outcome).toEqual({
+      status: 'incomplete-credit',
+      licence: 'CC BY 4.0',
+      missing: ['size'],
+    });
+  });
+
+  it('asks Commons for the original size and the 960 px thumbnail', () => {
+    const params = CREDITS.params(['A.jpg']);
+    expect(params.iiprop?.split('|')).toContain('size');
+    expect(params.iiurlwidth).toBe('960');
   });
 });

@@ -100,14 +100,14 @@ text.
 ## Player photos: the licences we accept
 
 Photos come from Wikimedia Commons, which hosts only freely licensed files.
-`squadctl enrich` stores a photo only under one of these (counts are the 2,197
-photos stored on 2026-10-14):
+`squadctl enrich` stores a photo only under one of these (counts are the 2,199
+photos stored on 2026-10-15):
 
 | licence                                        | photos | what it asks                              |
 | ---------------------------------------------- | -----: | ----------------------------------------- |
-| CC BY-SA, any version or port (4.0, 3.0, 2.0…) |  1,369 | credit, licence link, changes; ShareAlike |
-| CC BY, any version or port                     |    335 | credit, licence link, changes             |
-| CC0                                            |    434 | nothing                                   |
+| CC BY-SA, any version or port (4.0, 3.0, 2.0…) |  1,373 | credit, licence link, changes; ShareAlike |
+| CC BY, any version or port                     |    332 | credit, licence link, changes             |
+| CC0                                            |    435 | nothing                                   |
 | Public domain (exactly that)                   |     47 | nothing                                   |
 | Attribution (Commons' attribution-only)        |     12 | credit the copyright holder **by name**   |
 
@@ -169,7 +169,7 @@ the ones Commons actually serves, and what is wrong with each for an app:
   of a non-free image. It does not carry over to an app. (`enrich` asks
   Wikipedia for free images only, so these never arrive.)
 
-The cost is small: 3 photos on 2026-10-14 — one "Copyrighted free use", two
+The cost is small: 3 photos on 2026-10-15 — one "Copyrighted free use", two
 GFDL. If they ever matter, the GFDL pair could be recovered by also reading a
 file's licence categories to find the CC alternative; that is a rule change,
 made the way the next section describes.

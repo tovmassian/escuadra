@@ -7,6 +7,7 @@ import type { DecisionFile } from '../tools/squadctl/src/lib/decisions.ts';
 import { isCalendarDate } from '../tools/squadctl/src/lib/dates.ts';
 import {
   MAX_CREDIT_NAME,
+  THUMB_WIDTH,
   isAcceptedLicence,
   isAttributionOnly,
 } from '../tools/squadctl/src/lib/photo-credit.ts';
@@ -301,11 +302,44 @@ describe('every player photo carries a complete, accepted credit', () => {
   // ~100 bytes a photo. Anything beyond these fields is weight the bundle
   // carries for nothing.
   it('carries exactly the PhotoCredit fields', () => {
-    const fields = ['author', 'file', 'licence', 'licenceUrl', 'url'];
+    const fields = ['author', 'file', 'height', 'licence', 'licenceUrl', 'url', 'width'];
     const bad = withPhoto
       .filter(
         ({ photo }) => JSON.stringify(Object.keys(photo ?? {}).sort()) !== JSON.stringify(fields),
       )
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  // The question screen fills or frames a photo by its original's size
+  // (spec §2.6), so every photo must carry one.
+  it("records the original's width and height", () => {
+    const bad = withPhoto
+      .filter(
+        ({ photo }) =>
+          !Number.isInteger(photo?.width) ||
+          !Number.isInteger(photo?.height) ||
+          (photo?.width ?? 0) <= 0 ||
+          (photo?.height ?? 0) <= 0,
+      )
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  // An original 960 px or wider must come back as the 960 px thumbnail. A
+  // smaller original is served as Commons chooses: usually unscaled,
+  // sometimes at a smaller standard step (500 or 250 px, seen for 4 JPEGs on
+  // 2026-10-15). Either is Commons' own answer.
+  it(`serves the ${THUMB_WIDTH} px thumbnail for an original at least that wide`, () => {
+    const bad = withPhoto
+      .filter(({ photo }) => {
+        if (photo === null) return false;
+        const scaled = photo.url.startsWith('https://thumb.wikimedia.org/');
+        const last = photo.url.slice(photo.url.lastIndexOf('/') + 1);
+        return scaled
+          ? photo.width >= THUMB_WIDTH && !last.includes(`${THUMB_WIDTH}px-`)
+          : photo.width > THUMB_WIDTH;
+      })
       .map((p) => p.id);
     expect(bad).toEqual([]);
   });

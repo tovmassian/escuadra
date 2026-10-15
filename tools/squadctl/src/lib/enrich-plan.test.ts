@@ -31,7 +31,9 @@ function player(overrides: Partial<Player> = {}): Player {
 function credit(file: string): PhotoCredit {
   return {
     file,
-    url: `https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/${file}/500px-${file}`,
+    url: `https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/${file}/960px-${file}`,
+    width: 1200,
+    height: 1600,
     author: 'Bryan Berlin',
     licence: 'CC BY-SA 4.0',
     licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
