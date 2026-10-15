@@ -77,7 +77,8 @@ describe('text contrast', () => {
 });
 
 describe('spotlight stage', () => {
-  // These sit on the player photo, which looks the same in either theme.
+  // These sit on the player photo or on the team's own colours, neither of
+  // which changes with the theme.
   it('shares the photo-side roles between themes', () => {
     for (const role of [
       'heat',
@@ -88,6 +89,7 @@ describe('spotlight stage', () => {
       'glassLine',
       'veilInk',
     ] as const) {
+      expect(palettes.dark[role], role).toBeDefined();
       expect(palettes.light[role], role).toBe(palettes.dark[role]);
     }
   });
@@ -162,6 +164,19 @@ describe('Archivo display type', () => {
     for (const [normal, compact] of pairs) {
       expect(compact.fontFamily).toBe(normal.fontFamily);
       expect(compact.fontSize).toBeLessThan(normal.fontSize);
+    }
+  });
+
+  // Each cut is a single weight, so the family name alone selects it. A
+  // fontWeight of 700 or more makes Android look up a bold variant that a
+  // runtime-loaded font does not have, and fall back to the system font.
+  it('leaves fontWeight off every Archivo style', () => {
+    const archivo = Object.entries(typography).filter(([, style]) =>
+      style.fontFamily.startsWith('Archivo-'),
+    );
+    expect(archivo).toHaveLength(9);
+    for (const [name, style] of archivo) {
+      expect(style, name).not.toHaveProperty('fontWeight');
     }
   });
 });

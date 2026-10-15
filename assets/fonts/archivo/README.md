@@ -24,7 +24,7 @@ from the source. Copyright 2020 The Archivo Project Authors
 
 A cut is a Modified Version under the OFL. That is allowed, and it may keep
 the name Archivo, because Archivo declares no Reserved Font Name (its
-copyright line would say so). The cuts stay under the OFL, and each file's
+copyright line names none). The cuts stay under the OFL, and each file's
 name table still carries the copyright notice and the licence. See
 `docs/license.md`.
 

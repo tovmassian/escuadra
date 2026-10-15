@@ -57,7 +57,9 @@ export interface Palette {
   /** Answer tiles on the stage's ground. */
   tile: string;
   tileLine: string;
-  /** Secondary text on the stage: "Level n", slot labels. */
+  /** Slot-chip labels and tile sub-labels on the stage's ground. Text over
+   *  the photo (the top bar's "Level n") needs a shared on-photo colour,
+   *  which #113 adds. */
   onStageMuted: string;
   /** The stage's main button ("Got it — next") and its label. */
   ctaBg: string;
@@ -84,8 +86,8 @@ const sharedRoles = {
   brandLift: '#6d76e6',
   brandPlateTop: '#4a52c4',
   brandPlateBottom: '#252a6b',
-  // The 2.0 stage's photo-side roles, shared because the photo does not
-  // change with the theme.
+  // The 2.0 stage's photo-side roles, shared because they sit on the photo
+  // or on the team's own colours, and neither changes with the theme.
   heat: '#ffaa3c',
   heatBg: 'rgba(255,170,60,0.2)',
   heatLine: 'rgba(255,170,60,0.5)',
@@ -303,16 +305,19 @@ export const typography = {
   // Native takes lineHeight in points, so the design's ratios are resolved
   // here: 0.78 of the size for the shirt number, 0.8 for the score, 0.9 for
   // card numbers, 1.05 for titles.
+  //
+  // No fontWeight on any of these: each cut is a single weight, so the family
+  // name alone selects it. A fontWeight of 700 or more would make Android look
+  // up a bold variant that a runtime-loaded font does not have, and fall back
+  // to the system font.
   shirtNumber: {
     fontFamily: 'Archivo-ExtraCondensedBlack',
-    fontWeight: '900' as const,
     fontSize: 152,
     lineHeight: 119,
     letterSpacing: -3,
   },
   shirtNumberCompact: {
     fontFamily: 'Archivo-ExtraCondensedBlack',
-    fontWeight: '900' as const,
     fontSize: 112,
     lineHeight: 87,
     letterSpacing: -3,
@@ -320,7 +325,6 @@ export const typography = {
   // Results' score; its "/10" is set smaller beside it.
   scoreDisplay: {
     fontFamily: 'Archivo-ExtraCondensedBlack',
-    fontWeight: '900' as const,
     fontSize: 150,
     lineHeight: 120,
     letterSpacing: -4,
@@ -328,21 +332,18 @@ export const typography = {
   // The shirt number on a player card (Results, Study).
   cardNumber: {
     fontFamily: 'Archivo-ExtraCondensedBlack',
-    fontWeight: '900' as const,
     fontSize: 44,
     lineHeight: 40,
   },
   // "Who wears 7?", "Position?", "Correct" / "Missed".
   prompt: {
     fontFamily: 'Archivo-SemiExpandedExtraBold',
-    fontWeight: '800' as const,
     fontSize: 26,
     lineHeight: 26,
     textTransform: 'uppercase' as const,
   },
   promptCompact: {
     fontFamily: 'Archivo-SemiExpandedExtraBold',
-    fontWeight: '800' as const,
     fontSize: 22,
     lineHeight: 22,
     textTransform: 'uppercase' as const,
@@ -350,7 +351,6 @@ export const typography = {
   // Results' tier title ("Level 2 cleared").
   titleDisplay: {
     fontFamily: 'Archivo-SemiExpandedExtraBold',
-    fontWeight: '800' as const,
     fontSize: 25,
     lineHeight: 26,
     textTransform: 'uppercase' as const,
@@ -358,7 +358,6 @@ export const typography = {
   // The stage's main button label.
   ctaLabel: {
     fontFamily: 'Archivo-SemiExpandedExtraBold',
-    fontWeight: '800' as const,
     fontSize: 16,
     letterSpacing: 0.4,
     textTransform: 'uppercase' as const,
@@ -366,7 +365,6 @@ export const typography = {
   // The position code on a position tile ("GK").
   tileCode: {
     fontFamily: 'Archivo-Black',
-    fontWeight: '900' as const,
     fontSize: 22,
     lineHeight: 22,
   },
@@ -656,8 +654,9 @@ export const sizes = {
   compactBelow: 700,
   // The share of the window the photo stage fills, normal and compact.
   stage: { ratio: 0.68, ratioCompact: 0.72 },
-  // One segment of the round's Stories-style progress bar.
-  segment: 3,
+  // The height of one segment: the question's Stories-style progress bar
+  // (3) and Results' round strip (6).
+  segment: { question: 3, results: 6 },
   // The escuadra corner beside a number: arm length and bar thickness.
   corner: { question: { arm: 24, bar: 6 }, results: { arm: 40, bar: 10 } },
   // Answer tile heights per grid (spec §2.3).

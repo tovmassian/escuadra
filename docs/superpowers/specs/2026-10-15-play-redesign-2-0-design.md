@@ -22,8 +22,8 @@ real photo (Ferran Torres, cropped from `design/screens`); the others show the f
   Hide names mode for self-testing.
 - **Feel:** motion for misses and results, haptics for a pass and a 10/10, a streak
   counter, and a correct answer that moves on by itself.
-- **Brand step:** Archivo joins Inter and IBM Plex Mono for numbers and headlines. Two new
-  colour roles and two contrast fixes.
+- **Brand step:** Archivo joins Inter and IBM Plex Mono for numbers and headlines. New
+  colour roles for the stage and two contrast fixes.
 - **Photos:** 960 px thumbnails, the original's size stored, and a whole round's photos
   loaded when the round starts.
 
@@ -377,11 +377,11 @@ Archivo (SIL OFL 1.1) to `docs/license.md`.
 
 **Sizes, radii, durations.** These are new:
 
-| Group     | Entries                                                                                                                                                                                     |
-| --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Sizes     | `stage` ratios (0.68 / 0.72), `segment` 3, `corner` (24/6 question, 40/10 results), tile heights (§2.3), `cta` 52/48, `glassButton` 36, `playerCard` (218; 140×184 on Results), `avatar` 46 |
-| Radii     | `sheet` 28                                                                                                                                                                                  |
-| Durations | `shake` 240, `ballDrop` 220, `ballBounce` 260, `pulse` 200, `segmentFill` 120 (+ 40 stagger), `sheet` 240, `autoAdvance` 1,200 (a pause, see §2.4)                                          |
+| Group     | Entries                                                                                                                                                                                                           |
+| --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Sizes     | `stage` ratios (0.68 / 0.72), `segment` (3 question, 6 results), `corner` (24/6 question, 40/10 results), tile heights (§2.3), `cta` 52/48, `glassButton` 36, `playerCard` (218; 140×184 on Results), `avatar` 46 |
+| Radii     | `sheet` 28                                                                                                                                                                                                        |
+| Durations | `shake` 240, `ballDrop` 220, `ballBounce` 260, `pulse` 200, `segmentFill` 120 (+ 40 stagger), `sheet` 240, `autoAdvance` 1,200 (a pause, see §2.4)                                                                |
 
 `design/tokens.ts` re-exports, so the handoff stays in step.
 
