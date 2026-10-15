@@ -13,6 +13,8 @@ export default function About() {
   const colors = useThemeColors();
   const telemetryEnabled = useProgress((s) => s.telemetryEnabled);
   const setTelemetryEnabled = useProgress((s) => s.setTelemetryEnabled);
+  const haptics = useProgress((s) => s.haptics);
+  const setHaptics = useProgress((s) => s.setHaptics);
 
   const version = Constants.expoConfig?.version ?? '—';
 
@@ -114,6 +116,22 @@ export default function About() {
             Flag images are from flagpedia.net and are in the public domain. The Inter, IBM Plex
             Mono and Archivo typefaces are used under the SIL Open Font License 1.1.
           </Text>
+        </View>
+
+        <View style={[styles.section, styles.settingRow]}>
+          <Text style={styles.settingLabel} nativeID="haptics-label">
+            Vibration
+          </Text>
+          <Switch
+            testID="haptics-toggle"
+            accessibilityLabelledBy="haptics-label"
+            accessibilityLabel="Vibration"
+            value={haptics}
+            onValueChange={setHaptics}
+            trackColor={{ false: colors.surfaceRaised, true: colors.accent }}
+            thumbColor={colors.thumbBg}
+            ios_backgroundColor={colors.surfaceRaised}
+          />
         </View>
 
         <View style={[styles.section, styles.settingRow]}>
