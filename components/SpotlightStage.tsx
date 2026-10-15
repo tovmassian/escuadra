@@ -57,8 +57,6 @@ export function SpotlightStage({ height, photo, marker, dimmed }: SpotlightStage
   }, [dimmed, reduced, dim]);
   const dimStyle = useAnimatedStyle(() => ({ opacity: dim.value }));
 
-  const onLoad = () => setLoaded(url);
-  const onError = () => setFailed(url);
   const styles = StyleSheet.create({
     stage: {
       position: 'absolute',
@@ -104,15 +102,21 @@ export function SpotlightStage({ height, photo, marker, dimmed }: SpotlightStage
       <View style={styles.veil} />
       {loading ? <Shimmer reduced={reduced} /> : null}
       {photo && layout !== null ? (
+        // A fresh Image per photo: expo-image keeps the old source on screen
+        // until the new one loads, so without the key the previous player's
+        // face would show (and the bands and shimmer would not) while this
+        // one loads. Each callback sets the URL it was created for.
         <Image
+          key={photo.url}
+          recyclingKey={photo.url}
           source={{ uri: photo.url }}
           style={StyleSheet.absoluteFill}
           contentFit="cover"
           contentPosition={stage.focal}
           transition={durations.reveal}
           cachePolicy="disk"
-          onLoad={onLoad}
-          onError={onError}
+          onLoad={() => setLoaded(photo.url)}
+          onError={() => setFailed(photo.url)}
         />
       ) : null}
       {photo && layout === 'frame' && loaded === photo.url ? (
@@ -120,6 +124,8 @@ export function SpotlightStage({ height, photo, marker, dimmed }: SpotlightStage
           <View style={styles.frameDim} />
           <View style={styles.frameBox}>
             <Image
+              key={photo.url}
+              recyclingKey={photo.url}
               source={{ uri: photo.url }}
               style={styles.frameImage}
               contentFit="contain"

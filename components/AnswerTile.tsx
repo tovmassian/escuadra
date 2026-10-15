@@ -109,11 +109,17 @@ export function AnswerTile({
   const shift = useSharedValue(0);
   const fade = useSharedValue(1);
   const previous = useRef(verdict);
+  // The latest `answered`, for `onPressOut`: Pressability delays it for a press
+  // shorter than 130 ms and then calls the closure from before the verdict,
+  // where `answered` is still false. A press-out after the verdict must not
+  // reset the scale the verdict effect is animating.
+  const answeredRef = useRef(verdict !== 'idle');
   const answered = verdict !== 'idle';
 
   useEffect(() => {
     const from = previous.current;
     previous.current = verdict;
+    answeredRef.current = verdict !== 'idle';
     const target =
       verdict === 'incorrect-other'
         ? pickedRight
@@ -126,7 +132,11 @@ export function AnswerTile({
     if (from !== 'idle' || verdict === 'idle') return;
     if (verdict === 'correct-picked') feedback('correct');
     if (verdict === 'incorrect-picked') feedback('wrong');
-    if (reduced) return;
+    if (reduced) {
+      // No press scale was applied; make sure none lingers.
+      scale.value = 1;
+      return;
+    }
     if (verdict === 'correct-picked') {
       scale.value = withSequence(
         withTiming(spotlightMotion.popScale, {
@@ -144,6 +154,8 @@ export function AnswerTile({
         ),
       );
     } else if (verdict === 'incorrect-picked') {
+      // Nothing else resets the press scale (0.97) on a wrong pick.
+      scale.value = withTiming(1, { duration: durations.press });
       // Three swings of ±6 pt in the shake's 240 ms.
       const swing = durations.shake / 6;
       const { shake } = spotlightMotion;
@@ -216,7 +228,8 @@ export function AnswerTile({
             scale.set(withTiming(spotlightMotion.pressScale, { duration: durations.press }));
         }}
         onPressOut={() => {
-          if (!reduced && !answered) scale.set(withTiming(1, { duration: durations.press }));
+          if (!reduced && !answeredRef.current)
+            scale.set(withTiming(1, { duration: durations.press }));
         }}
         disabled={answered}
         accessibilityRole="button"
