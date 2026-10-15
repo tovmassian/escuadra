@@ -340,15 +340,13 @@ export const stage = {
   tileAfterMiss: 0.35, // other tiles after a miss
 ```
 
-**`durations`.** Add after `autoAdvance` (all within 300):
+**`durations`.** Add these three directly before `autoAdvance: 1200,`. The pause stays last, and all three are within 300 ms.
 
 ```ts
   partOut: 120, // the old part's tiles fading out
   partStagger: 20, // between tiles rising in for the next part
   tileStagger: 25, // between tiles rising in for the next question
 ```
-
-Hmm — keep `autoAdvance` last for readability; put these three before it.
 
 **New exports,** after `durations`:
 
@@ -1834,7 +1832,7 @@ function NextBar({ height, onNext }: { height: number; onNext: () => void }) {
   useEffect(() => {
     progress.value = withTiming(1, { duration: durations.autoAdvance, easing: Easing.linear });
   }, [progress]);
-  const fill = useAnimatedStyle(() => ({ width: `${progress.value * 100}%` }));
+  const fill = useAnimatedStyle(() => ({ width: `${progress.value * 100}%` as `${number}%` }));
   const styles = StyleSheet.create({
     bar: {
       height,
