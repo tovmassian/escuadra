@@ -373,11 +373,11 @@ dropped connection.
 **Photo.** The article's free lead image, else the Wikidata item's own. It is
 written only with an accepted licence (CC BY or CC BY-SA at any version, CC0,
 public domain, and Commons' attribution-only "Attribution"), a thumbnail on
-`upload.` or `thumb.wikimedia.org`, and a Commons page exactly where
-`commonsFileUrl` (`scripts/commons.ts`) derives it from the file name — the
-page is not stored, the app derives it. GFDL, "Copyrighted free use" and
-everything else is refused and listed; why each licence is accepted or
-refused: [`docs/license.md`](../../docs/license.md).
+`upload.` or `thumb.wikimedia.org`, the original's width and height, and a
+Commons page exactly where `commonsFileUrl` (`scripts/commons.ts`) derives it
+from the file name — the page is not stored, the app derives it. GFDL,
+"Copyrighted free use" and everything else is refused and listed; why each
+licence is accepted or refused: [`docs/license.md`](../../docs/license.md).
 
 **Credit.** The name a credit shows is the attribution the licence asks for,
 from Commons' `Attribution` field — "Bryan Berlin / WikiPortraits", or the
