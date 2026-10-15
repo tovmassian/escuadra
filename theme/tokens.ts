@@ -317,9 +317,13 @@ export const opacity = {
   dotFuture: 0.35, // progress dots not yet reached
 } as const;
 
-// All under 300ms, per CLAUDE.md's motion rule — this is the mid-round
-// budget. The round-over celebration and the home lockup are the one
-// carve-out from that rule; see `strikeTiming`/`celebrationCascade` below.
+// All within 300ms, per CLAUDE.md's motion rule — this is the mid-round
+// budget. Two entries are not animations and sit outside it: `skeleton` is a
+// shimmer's loop period, and `autoAdvance` is the pause after a correct
+// answer before the round moves on by itself (spec §2.4; a tap skips it, and
+// it never runs with a screen reader on). The round-over celebration and the
+// home lockup are the one carve-out from the rule; see
+// `strikeTiming`/`celebrationCascade` below.
 export const durations = {
   press: 100,
   reveal: 180,
@@ -329,6 +333,15 @@ export const durations = {
   collapse: 200,
   toggle: 160,
   skeleton: 900,
+  // ---- 2.0 spotlight (spec §6) ----
+  shake: 240, // a missed tile, three swings
+  ballDrop: 220, // the ball into the corner on a correct answer
+  ballBounce: 260, // the ball off the post on a miss
+  pulse: 200, // the next slot's outline
+  segmentFill: 120, // one results-strip segment
+  segmentStagger: 40, // between results-strip segments
+  sheet: 240, // the share sheet sliding up
+  autoAdvance: 1200,
 } as const;
 
 // ---- Celebration motion ---------------------------------------------------
@@ -562,6 +575,32 @@ export const sizes = {
   },
   // The results screen's expanded photo-credit list scrolls past this.
   photoCreditsMaxHeight: 200,
+  // ---- 2.0 spotlight screens (spec §2, §3, §5, §8) ----
+  // The question screen goes compact below this usable height (window minus
+  // safe-area insets). It replaces `heroFitHeight` when the hero goes.
+  compactBelow: 700,
+  // The share of the window the photo stage fills, normal and compact.
+  stage: { ratio: 0.68, ratioCompact: 0.72 },
+  // One segment of the round's Stories-style progress bar.
+  segment: 3,
+  // The escuadra corner beside a number: arm length and bar thickness.
+  corner: { question: { arm: 24, bar: 6 }, results: { arm: 40, bar: 10 } },
+  // Answer tile heights per grid (spec §2.3).
+  answerTile: {
+    names4: { normal: 58, compact: 52 }, // 2 x 2
+    names6: { normal: 54, compact: 48 }, // 2 x 3, level 3
+    positions: { normal: 64, compact: 56 }, // 1 x 4
+  },
+  // The stage's main button.
+  cta: { normal: 52, compact: 48 },
+  // Round glass controls over the photo. Below the 44pt tap minimum on
+  // purpose: give it hitSlop where it is used.
+  glassButton: 36,
+  // Study's grid card (its width comes from the column) and Results' missed
+  // player card.
+  playerCard: { studyHeight: 218, results: { width: 140, height: 184 } },
+  // Study's list-view avatar.
+  avatar: 46,
 } as const;
 
 export const iconSize = {
@@ -594,6 +633,7 @@ export const radii = {
   md: 12,
   lg: 16,
   xl: 24,
+  sheet: 28, // the share sheet's top corners
   pill: 999,
 } as const;
 

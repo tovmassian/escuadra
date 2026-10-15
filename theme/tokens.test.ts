@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { contrastRatio } from '@/lib/contrast';
-import { gradients, palettes, stage, stageGradients, typography } from './tokens';
+import { durations, gradients, palettes, sizes, stage, stageGradients, typography } from './tokens';
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
 
@@ -112,5 +112,43 @@ describe('spotlight stage', () => {
       expect(stage.veil[name], name).toBeLessThan(1);
     }
     expect(stage.veil.dark).toBeGreaterThan(stage.veil.light);
+  });
+});
+
+describe('motion budget', () => {
+  // Not animations: a shimmer's loop period, and the pause after a correct
+  // answer before the round moves on (spec §2.4).
+  const NOT_ANIMATIONS = new Set(['skeleton', 'autoAdvance']);
+  const animations = Object.entries(durations).filter(([name]) => !NOT_ANIMATIONS.has(name));
+
+  it('keeps every mid-round animation within 300 ms', () => {
+    for (const [name, ms] of animations) expect(ms, name).toBeLessThanOrEqual(300);
+  });
+
+  it('waits longer after a correct answer than any animation runs', () => {
+    expect(durations.autoAdvance).toBeGreaterThan(Math.max(...animations.map(([, ms]) => ms)));
+  });
+});
+
+describe('spotlight sizes', () => {
+  it('gives the photo more of a short screen, not less', () => {
+    expect(sizes.stage.ratioCompact).toBeGreaterThan(sizes.stage.ratio);
+    expect(sizes.stage.ratioCompact).toBeLessThan(1);
+  });
+
+  it('shrinks every answer tile and the main button when compact', () => {
+    for (const [grid, h] of Object.entries(sizes.answerTile)) {
+      expect(h.compact, grid).toBeLessThan(h.normal);
+    }
+    expect(sizes.cta.compact).toBeLessThan(sizes.cta.normal);
+  });
+
+  // Apple's minimum tap target. The 36 pt glass button gets there with
+  // hitSlop at its call site, so it is not checked here.
+  it('keeps every answer tile and the main button at least 44 pt tall', () => {
+    for (const [grid, h] of Object.entries(sizes.answerTile)) {
+      expect(h.compact, grid).toBeGreaterThanOrEqual(44);
+    }
+    expect(sizes.cta.compact).toBeGreaterThanOrEqual(44);
   });
 });
