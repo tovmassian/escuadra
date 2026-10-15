@@ -5,6 +5,10 @@
 // Import from the per-weight subpath, never the package root. The root barrel
 // `require()`s every weight and italic, and Metro cannot tree-shake those away
 // — it costs ~6 MB of unused fonts in the bundle.
+//
+// Archivo is not an @expo-google-fonts package: that ships normal width only,
+// so its three cuts are static instances committed to assets/fonts/archivo/
+// (see the README there).
 import { IBMPlexMono_600SemiBold } from '@expo-google-fonts/ibm-plex-mono/600SemiBold';
 import { IBMPlexMono_700Bold } from '@expo-google-fonts/ibm-plex-mono/700Bold';
 import { Inter_500Medium } from '@expo-google-fonts/inter/500Medium';
@@ -19,6 +23,9 @@ export const fontAssets = {
   'Inter-ExtraBold': Inter_800ExtraBold,
   'IBMPlexMono-SemiBold': IBMPlexMono_600SemiBold,
   'IBMPlexMono-Bold': IBMPlexMono_700Bold,
+  'Archivo-ExtraCondensedBlack': require('../assets/fonts/archivo/Archivo-ExtraCondensedBlack.ttf'),
+  'Archivo-SemiExpandedExtraBold': require('../assets/fonts/archivo/Archivo-SemiExpandedExtraBold.ttf'),
+  'Archivo-Black': require('../assets/fonts/archivo/Archivo-Black.ttf'),
 } as const;
 
 export type FontFamily = keyof typeof fontAssets;

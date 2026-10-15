@@ -1,6 +1,8 @@
 // Escuadra — design tokens
 // Plain exported objects. No styling library, no CSS-in-JS. Spacing is unitless (RN dp).
 
+import type { FontFamily } from './fonts';
+
 export type ThemeName = 'dark' | 'light';
 export type ThemePreference = ThemeName | 'system';
 
@@ -295,7 +297,80 @@ export const typography = {
     letterSpacing: 0.8,
     textTransform: 'uppercase' as const,
   },
-} as const;
+  // ---- Archivo, the 2.0 display face ----
+  // Static cuts of the variable font, one file per width, since React Native
+  // cannot set a variable font's width axis: see assets/fonts/archivo/. React
+  // Native takes lineHeight in points, so the design's ratios are resolved
+  // here: 0.78 of the size for the shirt number, 0.8 for the score, 0.9 for
+  // card numbers, 1.05 for titles.
+  shirtNumber: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontWeight: '900' as const,
+    fontSize: 152,
+    lineHeight: 119,
+    letterSpacing: -3,
+  },
+  shirtNumberCompact: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontWeight: '900' as const,
+    fontSize: 112,
+    lineHeight: 87,
+    letterSpacing: -3,
+  },
+  // Results' score; its "/10" is set smaller beside it.
+  scoreDisplay: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontWeight: '900' as const,
+    fontSize: 150,
+    lineHeight: 120,
+    letterSpacing: -4,
+  },
+  // The shirt number on a player card (Results, Study).
+  cardNumber: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontWeight: '900' as const,
+    fontSize: 44,
+    lineHeight: 40,
+  },
+  // "Who wears 7?", "Position?", "Correct" / "Missed".
+  prompt: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontWeight: '800' as const,
+    fontSize: 26,
+    lineHeight: 26,
+    textTransform: 'uppercase' as const,
+  },
+  promptCompact: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontWeight: '800' as const,
+    fontSize: 22,
+    lineHeight: 22,
+    textTransform: 'uppercase' as const,
+  },
+  // Results' tier title ("Level 2 cleared").
+  titleDisplay: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontWeight: '800' as const,
+    fontSize: 25,
+    lineHeight: 26,
+    textTransform: 'uppercase' as const,
+  },
+  // The stage's main button label.
+  ctaLabel: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontWeight: '800' as const,
+    fontSize: 16,
+    letterSpacing: 0.4,
+    textTransform: 'uppercase' as const,
+  },
+  // The position code on a position tile ("GK").
+  tileCode: {
+    fontFamily: 'Archivo-Black',
+    fontWeight: '900' as const,
+    fontSize: 22,
+    lineHeight: 22,
+  },
+} as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // 1.5px is the option-card default; 2px marks the emphasised "correct,
 // unpicked" card in the incorrect-reveal state.

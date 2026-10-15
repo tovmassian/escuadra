@@ -79,14 +79,18 @@ you changed the work.
 | Player photos                  | per photo — see the next section                | `player.photo` in `data/players.json`    |
 | National flags                 | public domain (flagpedia.net)                   | `assets/flags/README.md`                 |
 | Inter, IBM Plex Mono           | SIL Open Font License 1.1                       | `@expo-google-fonts/*` in `package.json` |
+| Archivo (three static cuts)    | SIL Open Font License 1.1                       | `assets/fonts/archivo/README.md`         |
 | App Store / Google Play badges | Apple's and Google's artwork, under their rules | `CLAUDE.md`, guardrail 2                 |
 | Club crests, badges, logos     | **never** — trademarks, whatever their licence  | `CLAUDE.md`, guardrail 2                 |
 
 The flag set replaced an earlier set nobody could name a source for; a flag
 whose licence you cannot state is a release blocker. The OFL lets the app
 bundle the fonts, provided their copyright notice and licence travel with them,
-which they do inside each font file. The store badges may be used only
-unmodified and only for a store where the app is live, with Apple's and
+which they do inside each font file. Archivo's cuts are generated from its
+variable font, which makes them a Modified Version under the OFL: allowed, and
+under the Archivo name, because Archivo declares no Reserved Font Name. They
+stay under the OFL, with `OFL.txt` beside them. The store badges may be used
+only unmodified and only for a store where the app is live, with Apple's and
 Google's credit lines on the site.
 
 Squad data — names, numbers, positions, dates — is facts, not images. squadctl

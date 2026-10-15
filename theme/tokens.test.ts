@@ -152,3 +152,16 @@ describe('spotlight sizes', () => {
     expect(sizes.cta.compact).toBeGreaterThanOrEqual(44);
   });
 });
+
+describe('Archivo display type', () => {
+  it('sets each compact style smaller, in the same face', () => {
+    const pairs = [
+      [typography.shirtNumber, typography.shirtNumberCompact],
+      [typography.prompt, typography.promptCompact],
+    ] as const;
+    for (const [normal, compact] of pairs) {
+      expect(compact.fontFamily).toBe(normal.fontFamily);
+      expect(compact.fontSize).toBeLessThan(normal.fontSize);
+    }
+  });
+});
