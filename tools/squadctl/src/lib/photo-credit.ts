@@ -14,8 +14,8 @@ import { pagesByTitle } from './wikimedia-parse.ts';
 export const COMMONS_API = 'https://commons.wikimedia.org/w/api.php';
 
 /** Commons snaps a requested width to its standard sizes, and 960 is one.
- *  The 2.0 question screen fills the top of the window with the photo, about
- *  780 px at 2x and 1,170 at 3x, so 960 covers 2x and comes close at 3x
+ *  The 2.0 question screen (#113) fills the top of the window with the photo,
+ *  about 780 px at 2x and 1,170 at 3x, so 960 covers 2x and comes close at 3x
  *  under the stage gradient. 463 KB for one photo, against 119 KB at 500. */
 export const THUMB_WIDTH = 960;
 

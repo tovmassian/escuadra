@@ -397,7 +397,7 @@ spotlight needs about 780 px at 2× and 1,170 px at 3×.
 - **Store the original's size.** `iiprop=url|size|extmetadata`; `PhotoCredit` gains
   `width` and `height` (of the original). The app uses them for the framed layout (§2.6).
 - **Re-run `squadctl enrich`** and regenerate the data.
-- **Update the `PhotoCredit.url` comment** ("A 500 px thumbnail…") and any test that pins 500. `lib/dataIntegrity.test.ts` checks only the host, so it still passes.
+- **Update the `PhotoCredit.url` comment** ("A 500 px thumbnail…") and any test that pins 500. `lib/dataIntegrity.test.ts` now requires the original's size, and the 960 px thumbnail for an original at least that wide.
 
 **Loading.** Today only the next question's photo is loaded ahead (`Image.prefetch` in
 `app/play/[squadId]/[level]/index.tsx`).

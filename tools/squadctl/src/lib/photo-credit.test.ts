@@ -165,6 +165,8 @@ describe('CREDITS (recorded Commons response)', () => {
         'https://upload.wikimedia.org/wikipedia/commons/3/3d/20150328_1426_U19_AUTHRV_1333.jpg',
       );
       expect(outcome.credit.licence).toBe('CC BY-SA 3.0 at');
+      // The original's 480 x 721, not Commons' requested thumbwidth of 960.
+      expect(outcome.credit).toMatchObject({ width: 480, height: 721 });
     }
   });
 

@@ -99,15 +99,15 @@ update this file in the same PR rather than leave a stale rule behind.
    credited.** A photo fills the question hero and the shirt number moves to
    a corner tab; with no photo, or until it loads, the number card shows.
    `player.photo` is a `PhotoCredit` written only by `squadctl enrich`, which
-   refuses any photo without an accepted licence, a Wikimedia thumbnail, the
-   original's size and its Commons page — the asset-licensing rule below,
-   enforced in code and in `lib/dataIntegrity.test.ts`. Every shown photo
-   shows its credit; never put the Commons file name or caption in visible
-   text or a label, as they name the player. The credit sits under the
-   question's action button for as long as the question is on screen, never
-   as part of the answer reveal. Each photo load reaches Wikimedia, so
-   photos ship in a store build with the privacy disclosures (guardrail 4),
-   never over the air:
+   refuses any photo without an accepted licence, a Wikimedia thumbnail and
+   its Commons page — the asset-licensing rule below, enforced in code and in
+   `lib/dataIntegrity.test.ts` — and any with no original size, which the
+   layout needs. Every shown photo shows its credit; never put the Commons
+   file name or caption in visible text or a label, as they name the player.
+   The credit sits under the question's action button for as long as the
+   question is on screen, never as part of the answer reveal. Each photo load
+   reaches Wikimedia, so photos ship in a store build with the privacy
+   disclosures (guardrail 4), never over the air:
    `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.
 2. **No club crests, badges, logos, or shield shapes. Ever.** Trademark
    exposure, and this constraint outlives v0. Clubs are identified by text and
@@ -194,10 +194,10 @@ data/squads/club/<league>/<id>.json   same shape, kind: 'club'. <league> is one 
 ```
 
 `photo` is a `PhotoCredit` (`types/squad.ts`) or null: the Commons file, its
-960 px thumbnail URL (or the original, when no wider), the original's width
-and height, the name the licence asks to credit, licence and deed.
-The Commons page is derived from the file name (`scripts/commons.ts`), not
-stored. Hotlinked, never copied.
+thumbnail URL (960 px for an original that wide, else as Commons serves it),
+the original's width and height, the name the licence asks to credit, licence
+and deed. The Commons page is derived from the file name
+(`scripts/commons.ts`), not stored. Hotlinked, never copied.
 
 `wikiTitle` is the Wikipedia article title the record came from — the only
 field that is unique per person, since two different real people are both

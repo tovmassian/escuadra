@@ -52,13 +52,16 @@ export interface PhotoCredit {
    *  and the key to its Commons page. It usually names the player, so it
    *  never reaches visible text or a label during a question. */
   file: string;
-  /** A 960 px thumbnail on thumb.wikimedia.org, or the original itself on
-   *  upload.wikimedia.org when it is no wider, tracking query removed.
-   *  Derived from `file` by Commons; can change. */
+  /** The 960 px thumbnail on thumb.wikimedia.org for an original at least
+   *  960 px wide. A narrower original is served unscaled or, occasionally, at
+   *  a smaller Commons step; a thumbnail URL's `NNNpx-` segment is the width
+   *  actually served. Tracking query removed. Derived from `file` by Commons;
+   *  can change. */
   url: string;
-  /** The original file's size in pixels, not the thumbnail's. The question
-   *  screen fills its stage with a photo at least 720 px wide and frames a
-   *  smaller one (spec §2.6). */
+  /** The original file's size in pixels, not the thumbnail's. The 2.0
+   *  question screen (#113) will use it to fill its stage with a photo at
+   *  least 720 px wide and frame a smaller one (spec §2.6), going by the
+   *  width actually served (see `url`). */
   width: number;
   height: number;
   /** Who the credit names, plain text: the attribution the licence asks for
