@@ -21,7 +21,7 @@ import {
   heroTab,
   sizes,
 } from '@/theme/tokens';
-import type { Question, QuestionPart } from '@/lib/questionEngine';
+import type { Level, Question, QuestionPart } from '@/lib/questionEngine';
 import type { AnsweredPart, QuestionResult } from '@/stores/session';
 
 // These helpers only read `.correct`, so a minimal stub keeps the tests
@@ -236,14 +236,166 @@ function scoredResult(q: Question, picks: number[], correct: boolean | null): Qu
   };
 }
 
-const view = (slots: { key: string; state: string; value: string }[]) =>
-  slots.map((s) => `${s.key}:${s.state}:${s.value}`);
+// An asked slot's value is null while it is `active` or `pending`; `-` here.
+const view = (slots: { key: string; state: string; value: string | null }[]) =>
+  slots.map((s) => `${s.key}:${s.state}:${s.value ?? '-'}`);
+
+// Spec §13: every level, part and verdict. A nation squad's affiliation is a
+// CLUB (asked on level 3); a club squad's is a NAT (asked on level 3 too).
+const L3_CLUB_PARTS: QuestionPart[] = [
+  { kind: 'name', options: ['A', 'B', 'Ferran Torres', 'C', 'D', 'E'], correctIndex: 2 },
+  { kind: 'position', options: ['GK', 'DF', 'MF', 'FW'], correctIndex: 3 },
+  { kind: 'nationality', options: ['Brazil', 'Spain', 'Poland', 'Chile'], correctIndex: 1 },
+];
+
+interface SlotCase {
+  label: string;
+  q: Question;
+  result: QuestionResult;
+  at: number;
+  kind: 'club' | 'nation';
+  level: Level;
+  expected: string[];
+}
+
+function slotCase(
+  label: string,
+  kind: 'club' | 'nation',
+  level: Level,
+  parts: QuestionPart[],
+  picks: number[],
+  correct: boolean | null,
+  at: number,
+  expected: string[],
+): SlotCase {
+  const q = spotQuestion({ parts, affiliation: kind === 'club' ? 'Spain' : 'Barcelona' });
+  return { label, q, result: scoredResult(q, picks, correct), at, kind, level, expected };
+}
+
+const L1_PARTS: QuestionPart[] = [
+  { kind: 'name', options: ['A', 'Ferran Torres', 'B', 'C'], correctIndex: 1 },
+];
+
+const SLOT_CASES: SlotCase[] = [
+  slotCase('L1 nation, unanswered', 'nation', 1, L1_PARTS, [], null, 0, [
+    'NAME:active:-',
+    'POS:given:FW',
+    'AGE:given:26',
+    'CLUB:given:Barcelona',
+  ]),
+  slotCase('L1 nation, right', 'nation', 1, L1_PARTS, [1], true, 0, [
+    'NAME:correct:Ferran Torres',
+    'POS:given:FW',
+    'AGE:given:26',
+    'CLUB:given:Barcelona',
+  ]),
+  slotCase('L1 nation, wrong', 'nation', 1, L1_PARTS, [0], false, 0, [
+    'NAME:wrong:Ferran Torres',
+    'POS:given:FW',
+    'AGE:given:26',
+    'CLUB:given:Barcelona',
+  ]),
+  slotCase('L2 nation, unanswered', 'nation', 2, L2_PARTS, [], null, 0, [
+    'NAME:active:-',
+    'POS:pending:-',
+    'AGE:given:26',
+    'CLUB:given:Barcelona',
+  ]),
+  slotCase('L2 nation, wrong at the name', 'nation', 2, L2_PARTS, [0], false, 0, [
+    'NAME:wrong:Ferran Torres',
+    'POS:notAsked:FW',
+    'AGE:given:26',
+    'CLUB:given:Barcelona',
+  ]),
+  slotCase('L2 nation, wrong at the position', 'nation', 2, L2_PARTS, [1, 0], false, 1, [
+    'NAME:correct:Ferran Torres',
+    'POS:wrong:FW',
+    'AGE:given:26',
+    'CLUB:given:Barcelona',
+  ]),
+  slotCase('L2 nation, all right', 'nation', 2, L2_PARTS, [1, 3], true, 1, [
+    'NAME:correct:Ferran Torres',
+    'POS:correct:FW',
+    'AGE:given:26',
+    'CLUB:given:Barcelona',
+  ]),
+  slotCase('L3 nation, unanswered', 'nation', 3, L3_NATION_PARTS, [], null, 0, [
+    'NAME:active:-',
+    'POS:pending:-',
+    'CLUB:pending:-',
+  ]),
+  slotCase('L3 nation, name right, position next', 'nation', 3, L3_NATION_PARTS, [2], null, 1, [
+    'NAME:correct:Ferran Torres',
+    'POS:active:-',
+    'CLUB:pending:-',
+  ]),
+  slotCase('L3 nation, position right, club next', 'nation', 3, L3_NATION_PARTS, [2, 3], null, 2, [
+    'NAME:correct:Ferran Torres',
+    'POS:correct:FW',
+    'CLUB:active:-',
+  ]),
+  slotCase('L3 nation, wrong at the name', 'nation', 3, L3_NATION_PARTS, [0], false, 0, [
+    'NAME:wrong:Ferran Torres',
+    'POS:notAsked:FW',
+    'CLUB:notAsked:Barcelona',
+  ]),
+  slotCase('L3 nation, wrong at the position', 'nation', 3, L3_NATION_PARTS, [2, 0], false, 1, [
+    'NAME:correct:Ferran Torres',
+    'POS:wrong:FW',
+    'CLUB:notAsked:Barcelona',
+  ]),
+  slotCase('L3 nation, wrong at the club', 'nation', 3, L3_NATION_PARTS, [2, 3, 0], false, 2, [
+    'NAME:correct:Ferran Torres',
+    'POS:correct:FW',
+    'CLUB:wrong:Barcelona',
+  ]),
+  slotCase('L3 nation, all right', 'nation', 3, L3_NATION_PARTS, [2, 3, 1], true, 2, [
+    'NAME:correct:Ferran Torres',
+    'POS:correct:FW',
+    'CLUB:correct:Barcelona',
+  ]),
+  slotCase('L3 club, unanswered', 'club', 3, L3_CLUB_PARTS, [], null, 0, [
+    'NAME:active:-',
+    'POS:pending:-',
+    'NAT:pending:-',
+  ]),
+  slotCase('L3 club, name right, position next', 'club', 3, L3_CLUB_PARTS, [2], null, 1, [
+    'NAME:correct:Ferran Torres',
+    'POS:active:-',
+    'NAT:pending:-',
+  ]),
+  slotCase('L3 club, position right, nationality next', 'club', 3, L3_CLUB_PARTS, [2, 3], null, 2, [
+    'NAME:correct:Ferran Torres',
+    'POS:correct:FW',
+    'NAT:active:-',
+  ]),
+  slotCase('L3 club, wrong at the name', 'club', 3, L3_CLUB_PARTS, [0], false, 0, [
+    'NAME:wrong:Ferran Torres',
+    'POS:notAsked:FW',
+    'NAT:notAsked:Spain',
+  ]),
+  slotCase('L3 club, wrong at the position', 'club', 3, L3_CLUB_PARTS, [2, 0], false, 1, [
+    'NAME:correct:Ferran Torres',
+    'POS:wrong:FW',
+    'NAT:notAsked:Spain',
+  ]),
+  slotCase('L3 club, wrong at the nationality', 'club', 3, L3_CLUB_PARTS, [2, 3, 0], false, 2, [
+    'NAME:correct:Ferran Torres',
+    'POS:correct:FW',
+    'NAT:wrong:Spain',
+  ]),
+  slotCase('L3 club, all right', 'club', 3, L3_CLUB_PARTS, [2, 3, 1], true, 2, [
+    'NAME:correct:Ferran Torres',
+    'POS:correct:FW',
+    'NAT:correct:Spain',
+  ]),
+];
 
 describe('slotStates', () => {
   it('level 1 asks the name and prints position, age and club as clues', () => {
     const q = spotQuestion();
     expect(view(slotStates(q, scoredResult(q, [], null), 0, 'nation', 1))).toEqual([
-      'NAME:active:Ferran Torres',
+      'NAME:active:-',
       'POS:given:FW',
       'AGE:given:26',
       'CLUB:given:Barcelona',
@@ -272,21 +424,21 @@ describe('slotStates', () => {
   it('level 2: position is pending until the name is answered, then active', () => {
     const q = spotQuestion({ parts: L2_PARTS });
     expect(view(slotStates(q, scoredResult(q, [], null), 0, 'nation', 2)).slice(0, 2)).toEqual([
-      'NAME:active:Ferran Torres',
-      'POS:pending:FW',
+      'NAME:active:-',
+      'POS:pending:-',
     ]);
     expect(view(slotStates(q, scoredResult(q, [1], null), 1, 'nation', 2)).slice(0, 2)).toEqual([
       'NAME:correct:Ferran Torres',
-      'POS:active:FW',
+      'POS:active:-',
     ]);
   });
 
   it('level 3 asks name, position and club, and has no AGE slot', () => {
     const q = spotQuestion({ parts: L3_NATION_PARTS });
     expect(view(slotStates(q, scoredResult(q, [], null), 0, 'nation', 3))).toEqual([
-      'NAME:active:Ferran Torres',
-      'POS:pending:FW',
-      'CLUB:pending:Barcelona',
+      'NAME:active:-',
+      'POS:pending:-',
+      'CLUB:pending:-',
     ]);
   });
 
@@ -314,6 +466,39 @@ describe('slotStates', () => {
     const q = spotQuestion({ parts: L2_PARTS });
     const states = slotStates(q, scoredResult(q, [0], false), 0, 'nation', 2).map((s) => s.state);
     expect(states).not.toContain('correct');
+  });
+
+  it('never carries the answer on a slot still being asked', () => {
+    // A chip, a label or a flag lookup built from `value` cannot leak what it
+    // was never given.
+    for (const c of SLOT_CASES) {
+      const asking = slotStates(c.q, c.result, c.at, c.kind, c.level).filter(
+        (s) => s.state === 'active' || s.state === 'pending',
+      );
+      for (const s of asking) expect(s.value, `${c.label} ${s.key}`).toBeNull();
+    }
+  });
+
+  it('carries the true value on every other slot', () => {
+    for (const c of SLOT_CASES) {
+      const settled = slotStates(c.q, c.result, c.at, c.kind, c.level).filter(
+        (s) => s.state !== 'active' && s.state !== 'pending',
+      );
+      for (const s of settled) expect(s.value, `${c.label} ${s.key}`).not.toBeNull();
+    }
+  });
+
+  for (const c of SLOT_CASES) {
+    it(`${c.label}`, () => {
+      expect(view(slotStates(c.q, c.result, c.at, c.kind, c.level))).toEqual(c.expected);
+    });
+  }
+
+  it('asks a club squad for nationality, so NAT is never a given clue', () => {
+    for (const c of SLOT_CASES.filter((c) => c.kind === 'club' && c.level === 3)) {
+      const nat = slotStates(c.q, c.result, c.at, c.kind, c.level).find((s) => s.key === 'NAT');
+      expect(nat?.state, c.label).not.toBe('given');
+    }
   });
 });
 

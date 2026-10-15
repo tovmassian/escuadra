@@ -51,6 +51,13 @@ export interface Palette {
   /** Translucent glass for controls over the photo (the close button). */
   glass: string;
   glassLine: string;
+  /** Opaque ink over the photo, the same in both themes: the top bar's team
+   *  name, the close glyph, the score text and the current progress segment.
+   *  Opaque so `stageVeil` can measure contrast against it. */
+  onPhoto: string;
+  /** The same ink, quieter: the top bar's "Level n". Translucent, so never
+   *  measure it with `contrastRatio`. */
+  onPhotoMuted: string;
   /** The ink of the veil over a no-photo stage's team-colour bands. Its
    *  strength is `stage.veil`, raised by `stageVeil` where a band is light. */
   veilInk: string;
@@ -58,8 +65,7 @@ export interface Palette {
   tile: string;
   tileLine: string;
   /** Slot-chip labels and tile sub-labels on the stage's ground. Text over
-   *  the photo (the top bar's "Level n") needs a shared on-photo colour,
-   *  which #113 adds. */
+   *  the photo (the top bar's "Level n") is `onPhotoMuted`, not this. */
   onStageMuted: string;
   /** The stage's main button ("Got it — next") and its label. */
   ctaBg: string;
@@ -94,6 +100,8 @@ const sharedRoles = {
   heatText: '#ffc27a',
   glass: 'rgba(15,17,23,0.42)',
   glassLine: 'rgba(255,255,255,0.18)',
+  onPhoto: '#ffffff',
+  onPhotoMuted: 'rgba(255,255,255,0.75)',
   veilInk: '#0c0d12',
 } as const;
 
@@ -225,8 +233,8 @@ export const stageGradients: Record<ThemeName, StageGradient> = {
 
 // The no-photo stage (spec §2.6): the squad's marker bands under a wash of
 // `veilInk` at this opacity, per theme. A floor, not the final value —
-// `stageVeil` in lib/stageView.ts raises it until white text holds 3:1 on the
-// lightest band (Real Madrid's white still has to carry the top bar).
+// `stageVeil` in lib/stageView.ts raises it until `onPhoto` text holds 3:1 on
+// the lightest band (Real Madrid's white still has to carry the top bar).
 export const stage = {
   veil: { dark: 0.42, light: 0.12 },
 } as const;

@@ -88,10 +88,18 @@ describe('spotlight stage', () => {
       'glass',
       'glassLine',
       'veilInk',
+      'onPhoto',
+      'onPhotoMuted',
     ] as const) {
       expect(palettes.dark[role], role).toBeDefined();
       expect(palettes.light[role], role).toBe(palettes.dark[role]);
     }
+  });
+
+  // contrastRatio measures opaque #rrggbb only, so the role the veil is sized
+  // against must be one.
+  it('keeps onPhoto opaque, so the veil can be measured against it', () => {
+    expect(palettes.dark.onPhoto).toMatch(HEX);
   });
 
   it('gives each theme a stage gradient that ends in its own ground', () => {

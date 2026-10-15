@@ -45,22 +45,22 @@ describe('stageVeil', () => {
     });
 
     // Spec §2.6: Real Madrid's white must still carry the top bar.
-    it(`gives white text 3:1 on Real Madrid's white, ${theme}`, () => {
+    it(`gives on-photo text 3:1 on Real Madrid's white, ${theme}`, () => {
       const bands = bannerBands(squad('club/la-liga/rma.json').marker);
       const alpha = stageVeil(bands, theme);
-      const ink = palettes[theme].veilInk;
-      expect(contrastRatio('#ffffff', veiled('#ffffff', ink, alpha))).toBeGreaterThanOrEqual(3);
+      const { onPhoto, veilInk } = palettes[theme];
+      expect(contrastRatio(onPhoto, veiled('#ffffff', veilInk, alpha))).toBeGreaterThanOrEqual(3);
       expect(alpha).toBeGreaterThan(stage.veil[theme]);
     });
 
     it(`raises the veil no further than it must, ${theme}`, () => {
       const bands = bannerBands(squad('nation/esp.json').marker);
       const alpha = stageVeil(bands, theme);
-      const ink = palettes[theme].veilInk;
+      const { onPhoto, veilInk } = palettes[theme];
       if (alpha > stage.veil[theme]) {
-        expect(contrastRatio('#ffffff', veiled('#F1BF00', ink, alpha - 0.01))).toBeLessThan(3);
+        expect(contrastRatio(onPhoto, veiled('#F1BF00', veilInk, alpha - 0.01))).toBeLessThan(3);
       }
-      expect(contrastRatio('#ffffff', veiled('#F1BF00', ink, alpha))).toBeGreaterThanOrEqual(3);
+      expect(contrastRatio(onPhoto, veiled('#F1BF00', veilInk, alpha))).toBeGreaterThanOrEqual(3);
     });
   }
 });
@@ -88,10 +88,25 @@ describe('servedWidth and photoLayout', () => {
     expect(servedWidth(photo(ORIGINAL, 722))).toBe(722);
   });
 
+  // Only a /thumb/ URL carries a step. A file name that merely contains
+  // `-300px-` is an original, served at its own width.
+  it('ignores an NNNpx- in the file name of an unscaled original', () => {
+    const odd = 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Foo-300px-Bar.jpg';
+    expect(servedWidth(photo(odd, 900))).toBe(900);
+    expect(photoLayout(photo(odd, 900))).toBe('fill');
+  });
+
   it(`fills the stage from ${FILL_MIN_WIDTH} px served, frames anything smaller`, () => {
     expect(photoLayout(photo(THUMB(960), 3333))).toBe('fill');
     expect(photoLayout(photo(ORIGINAL, 722))).toBe('fill');
     expect(photoLayout(photo(ORIGINAL, 480))).toBe('frame');
+  });
+
+  it('switches from frame to fill at the served-width boundary', () => {
+    expect(photoLayout(photo(ORIGINAL, FILL_MIN_WIDTH - 1))).toBe('frame');
+    expect(photoLayout(photo(ORIGINAL, FILL_MIN_WIDTH))).toBe('fill');
+    expect(photoLayout(photo(THUMB(FILL_MIN_WIDTH - 1), 3333))).toBe('frame');
+    expect(photoLayout(photo(THUMB(FILL_MIN_WIDTH), 3333))).toBe('fill');
   });
 
   // #112: Commons serves some 720–959 px originals at a 500 px step. The

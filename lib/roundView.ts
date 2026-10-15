@@ -138,9 +138,11 @@ export type SlotState = 'given' | 'active' | 'pending' | 'correct' | 'wrong' | '
 export interface Slot {
   key: SlotKey;
   state: SlotState;
-  /** The true value. A chip shows it in every state but `active` (`?`) and
-   *  `pending` (`—`). */
-  value: string;
+  /** The true value in every state but `active` and `pending`, where it is
+   *  null: a slot still being asked never carries its answer, so no chip,
+   *  label or flag lookup can leak it. A chip shows `?` for `active` and `—`
+   *  for `pending`. */
+  value: string | null;
 }
 
 const PART_SLOT: Record<QuestionPart['kind'], SlotKey> = {
@@ -192,7 +194,7 @@ export function slotStates(
         : partIndex === currentPartIndex
           ? 'active'
           : 'pending';
-    slots.push({ key, state, value });
+    slots.push({ key, state, value: state === 'active' || state === 'pending' ? null : value });
   }
   return slots;
 }
@@ -245,9 +247,10 @@ export function promptText(part: QuestionPart, memberNo: number, verdict: boolea
   }
 }
 
-/** "2/3" beside the prompt on a multi-part question; null on level 1. The
- *  session leaves `currentPartIndex` on the last part answered, so it is the
- *  part on screen in every state. */
+/** "2/3" beside the prompt on a multi-part question; null on level 1.
+ *  `currentPartIndex` is the part being asked. Once the question is scored it
+ *  stays on the last part answered, so it is the part on screen in every
+ *  state. */
 export function partCounter(question: Question, currentPartIndex: number): string | null {
   const total = question.parts.length;
   return total > 1 ? `${currentPartIndex + 1}/${total}` : null;

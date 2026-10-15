@@ -58,16 +58,19 @@ const ANDROID: Record<HapticMoment, AndroidHapticType[]> = {
 
 /**
  * The calls for one moment:
+ * - Vibration off (`enabled` false): nothing, on every platform.
  * - iOS: the iOS column.
  * - Android: each step's constant where the device's API level has it,
  *   otherwise the iOS step it stands for (which plays through the vibrator).
  * - Anywhere else (web): nothing.
  */
 export function hapticPlan(
+  enabled: boolean,
   moment: HapticMoment,
   os: string,
   androidApiLevel: number,
 ): HapticStep[] {
+  if (!enabled) return [];
   if (os === 'ios') return IOS[moment];
   if (os !== 'android') return [];
   const ios = IOS[moment];
