@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { contrastRatio } from '@/lib/contrast';
 import { gradients, palettes, typography } from './tokens';
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
@@ -55,6 +56,22 @@ describe('palettes', () => {
       Object.entries(palettes[name]).forEach(([role, value]) => {
         expect(value.replace(/\s/g, ''), `${name}.${role}`).toMatch(COLOR);
       });
+    });
+  });
+});
+
+describe('text contrast', () => {
+  // AA for body text. `textMuted` carries captions, stat labels and the photo
+  // credit, so it is held to the body-copy bar on the grounds it sits on.
+  it('textMuted reaches 4.5:1 on background and surface, in both themes', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      for (const ground of ['background', 'surface'] as const) {
+        expect(
+          contrastRatio(p.textMuted, p[ground]),
+          `${name}.textMuted on ${ground}`,
+        ).toBeGreaterThanOrEqual(4.5);
+      }
     });
   });
 });

@@ -68,7 +68,8 @@ const darkRoles = {
   border: '#3a4046',
   textPrimary: '#f3f5f7',
   textSecondary: '#b4b8bb',
-  textMuted: '#767b80',
+  // 5.4:1 on the ground (was #767b80, 4.3:1, under AA).
+  textMuted: '#868b91',
   accentOn: '#f3f5f7',
   mark: sharedRoles.brandSoft,
   thumbBg: '#2b2f38',
@@ -90,7 +91,8 @@ const lightRoles = {
   border: '#dcdfe4',
   textPrimary: '#14161a',
   textSecondary: '#4b4f56',
-  textMuted: '#8b8f96',
+  // 4.9:1 on the ground (was #8b8f96, 3.0:1).
+  textMuted: '#686c73',
   accentOn: '#ffffff',
   mark: sharedRoles.brandBright,
   thumbBg: '#ffffff',
@@ -431,9 +433,9 @@ export const sizes = {
   teamMarkerBanner: { width: 100, height: 3 },
   // Nation flag images (assets/flags/*.png). Three sizes, one per surface.
   // `flagMarker` deliberately matches `teamMarker` above so a nation row and
-  // a club row in the picker keep identical metrics. Source images are
-  // 70x46, so `flagMarker` at @3x is a near-exact 1:1 — there is no headroom
-  // above these sizes.
+  // a club row in the picker keep identical metrics. Source images are 160 px
+  // wide (160x107 for a 3:2 flag), so `flagMarker` at @3x (66 px) leaves about
+  // 2.4x headroom — see assets/flags/README.md.
   flagMarker: { width: 22, height: 15 },
   flagInline: { width: 18, height: 12 },
   flagRow: { width: 20, height: 13 },
