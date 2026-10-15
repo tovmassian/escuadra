@@ -73,6 +73,41 @@ export interface Palette {
   /** Accent as a line: the active slot's outline. `accent` is too dark to
    *  read as a thin line on the dark ground, so dark uses `brandSoft`. */
   accentLine: string;
+  // ---- 2.0 question screen (spec §2), from the design board ----
+  /** Progress segments over the photo: future, right, wrong. */
+  photoTrack: string;
+  photoSuccess: string;
+  photoError: string;
+  /** The loading shimmer's highlight and its transparent edges. */
+  stageShimmer: string;
+  stageShimmerEdge: string;
+  /** Text on the stage's ground: the shirt number, the prompt, the active
+   *  slot's "?". */
+  onStage: string;
+  /** Slot chips: fill, outline, and a pending slot's dashed outline and text
+   *  (also a not-asked slot's value). */
+  chipBg: string;
+  chipLine: string;
+  chipPendingLine: string;
+  chipPendingText: string;
+  /** The word under a position tile's code. */
+  tileSub: string;
+  /** Verdicts on the stage: a right slot's text and a right pick's fill; a
+   *  wrong pick's outline, fill and text; the right answer's fill after a
+   *  miss. */
+  stageSuccessText: string;
+  stageSuccessBg: string;
+  stageErrorLine: string;
+  stageErrorBg: string;
+  stageErrorText: string;
+  stageAnswerBg: string;
+  /** The hairline around a flag on the stage. */
+  flagRing: string;
+  /** The auto-next bar: outline, fill, label and the progress inside it. */
+  nextLine: string;
+  nextBg: string;
+  nextText: string;
+  nextFill: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -103,6 +138,11 @@ const sharedRoles = {
   onPhoto: '#ffffff',
   onPhotoMuted: 'rgba(255,255,255,0.75)',
   veilInk: '#0c0d12',
+  photoTrack: 'rgba(255,255,255,0.28)',
+  photoSuccess: '#61bd67',
+  photoError: '#f05653',
+  stageShimmer: 'rgba(255,255,255,0.26)',
+  stageShimmerEdge: 'rgba(255,255,255,0)',
 } as const;
 
 // The ramp sits higher than it did: the mark's trail squares, at 30% and 55%
@@ -130,6 +170,23 @@ const darkRoles = {
   ctaBg: '#f3f5f7',
   ctaText: '#12141a',
   accentLine: sharedRoles.brandSoft,
+  onStage: '#ffffff',
+  chipBg: 'rgba(255,255,255,0.1)',
+  chipLine: 'rgba(255,255,255,0.16)',
+  chipPendingLine: 'rgba(255,255,255,0.3)',
+  chipPendingText: 'rgba(255,255,255,0.6)',
+  tileSub: 'rgba(255,255,255,0.66)',
+  stageSuccessText: '#8fe095',
+  stageSuccessBg: 'rgba(97,189,103,0.22)',
+  stageErrorLine: 'rgba(240,86,83,0.55)',
+  stageErrorBg: 'rgba(240,86,83,0.14)',
+  stageErrorText: '#e9827f',
+  stageAnswerBg: 'rgba(18,20,26,0.6)',
+  flagRing: 'rgba(255,255,255,0.14)',
+  nextLine: 'rgba(97,189,103,0.5)',
+  nextBg: 'rgba(97,189,103,0.12)',
+  nextText: '#9be0a0',
+  nextFill: 'rgba(97,189,103,0.2)',
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -155,10 +212,28 @@ const lightRoles = {
   errorTextDim: '#b3625d',
   tile: '#ffffff',
   tileLine: '#dcdfe4',
-  onStageMuted: '#686c73',
+  onStageMuted: '#5f636a', // 5:1 on a chip (the board's #686c73 is 4.35)
   ctaBg: '#14161a',
   ctaText: '#ffffff',
   accentLine: sharedRoles.accent,
+  onStage: '#14161a',
+  chipBg: 'rgba(20,22,26,0.06)',
+  chipLine: 'rgba(20,22,26,0.12)',
+  chipPendingLine: 'rgba(20,22,26,0.28)',
+  chipPendingText: '#5f636a',
+  tileSub: '#686c73',
+  // The board's #2f8f3e gives ~3.4:1 on its own green washes; this holds 5:1.
+  stageSuccessText: '#24702f',
+  stageSuccessBg: 'rgba(47,143,62,0.12)',
+  stageErrorLine: 'rgba(194,57,52,0.45)',
+  stageErrorBg: 'rgba(194,57,52,0.08)',
+  stageErrorText: '#b0413c',
+  stageAnswerBg: '#ffffff',
+  flagRing: 'rgba(20,22,26,0.14)',
+  nextLine: 'rgba(47,143,62,0.45)',
+  nextBg: 'rgba(47,143,62,0.08)',
+  nextText: '#24702f',
+  nextFill: 'rgba(47,143,62,0.14)',
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -237,6 +312,16 @@ export const stageGradients: Record<ThemeName, StageGradient> = {
 // the lightest band (Real Madrid's white still has to carry the top bar).
 export const stage = {
   veil: { dark: 0.42, light: 0.12 },
+  // Where a filled photo is anchored: faces sit high in a portrait.
+  focal: { top: '14%', left: '50%' },
+  // A framed photo (original under 720 px wide): whole, at 3:4, in the
+  // upper stage, over its own copy filled and darkened by `frameDim`.
+  frame: { bottom: '30%', height: '84%', aspect: 3 / 4 },
+  frameDim: 0.55,
+  // How much the photo dims on a miss (spec §6).
+  missDim: 0.1,
+  // The loading shimmer: a diagonal band (spec §2.6).
+  shimmer: { locations: [0.3, 0.48, 0.66], start: { x: 0, y: 0.35 }, end: { x: 1, y: 0.65 } },
 } as const;
 
 export const typography = {
@@ -376,6 +461,15 @@ export const typography = {
     fontSize: 22,
     lineHeight: 22,
   },
+  // ---- 2.0 question screen: Inter faces chosen by family, no weight ----
+  // A picked or revealed right answer on a tile.
+  bodyStrong: { fontFamily: 'Inter-Bold', fontSize: 17 },
+  // A slot chip's value.
+  slotValue: { fontFamily: 'Inter-Bold', fontSize: 13 },
+  // The team name in the question's top bar.
+  topBarTeam: { fontFamily: 'Inter-Bold', fontSize: 14 },
+  // The word under a position tile's code ("Keeper").
+  tileSubLabel: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 10.5 },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // 1.5px is the option-card default; 2px marks the emphasised "correct,
@@ -396,6 +490,8 @@ export const opacity = {
   loadingBlank: 0.25, // option cards mid question-transition
   dotPast: 0.9, // progress dots for answered questions
   dotFuture: 0.35, // progress dots not yet reached
+  tileAfterCorrect: 0.5, // other tiles once the pick was right (spec §6)
+  tileAfterMiss: 0.35, // other tiles after a miss
 } as const;
 
 // All within 300ms, per CLAUDE.md's motion rule — this is the mid-round
@@ -422,7 +518,38 @@ export const durations = {
   segmentFill: 120, // one results-strip segment
   segmentStagger: 40, // between results-strip segments
   sheet: 240, // the share sheet sliding up
+  partOut: 120, // the old part's tiles fading out
+  partStagger: 20, // between tiles rising in for the next part
+  tileStagger: 25, // between tiles rising in for the next question
   autoAdvance: 1200,
+} as const;
+
+// Distances (pt) and scales of the question screen's motion (spec §6).
+export const spotlightMotion = {
+  pressScale: 0.97,
+  popScale: 1.04,
+  answerPopScale: 1.03,
+  pulseScale: 1.06,
+  streakPopScale: 1.15,
+  streakOutScale: 0.8,
+  ballStartScale: 0.6,
+  shake: 6,
+  rise: 8,
+  numberRise: 12,
+  slide: 16,
+  ballDrop: 10,
+} as const;
+
+// When each beat starts after a verdict (ms, spec §6), so the screen reads as
+// one gesture: tile, then slot, then ball, then streak.
+export const spotlightCues = {
+  slot: 60,
+  ball: 80,
+  streak: 120,
+  missAnswer: 60,
+  missDim: 100,
+  missStreak: 120,
+  missCta: 140,
 } as const;
 
 // ---- Celebration motion ---------------------------------------------------
@@ -665,8 +792,9 @@ export const sizes = {
   // The height of one segment: the question's Stories-style progress bar
   // (3) and Results' round strip (6).
   segment: { question: 3, results: 6 },
-  // The escuadra corner beside a number: arm length and bar thickness.
-  corner: { question: { arm: 24, bar: 6 }, results: { arm: 40, bar: 10 } },
+  // The escuadra corner beside a number: arm length, bar thickness and, on the
+  // question, the ball's diameter.
+  corner: { question: { arm: 24, bar: 6, ball: 10 }, results: { arm: 40, bar: 10 } },
   // Answer tile heights per grid (spec §2.3).
   answerTile: {
     names4: { normal: 58, compact: 52 }, // 2 x 2
@@ -683,6 +811,11 @@ export const sizes = {
   playerCard: { studyHeight: 218, results: { width: 140, height: 184 } },
   // Study's list-view avatar.
   avatar: 46,
+  // Apple's minimum tap target; smaller drawn controls take hitSlop to reach it.
+  minTapTarget: 44,
+  // The question's top bar, and the glass pills in it (score).
+  topBar: { height: 52, pill: 32, pillMinWidth: 52 },
+  slotChipHeight: 30,
 } as const;
 
 export const iconSize = {
@@ -692,6 +825,8 @@ export const iconSize = {
   chevronLarge: 18, // Home's continue-card chevron
   searchGlyph: 15, // SearchField's magnifying-glass icon
   clearGlyph: 10, // SearchField's clear (×) button, drawn from two crossed bars
+  closeGlyph: 14, // the question's close ×, two crossed bars
+  flameGlyph: 12, // the streak chip's flame
   // The locked-badge padlock scales with its badge rather than sitting at one
   // fixed size — 32 * 0.46 ≈ 15.
   lockGlyphRatio: 0.46,
@@ -711,6 +846,7 @@ export const spacing = {
 } as const;
 
 export const radii = {
+  xs: 2, // progress segments
   sm: 8,
   md: 12,
   lg: 16,
