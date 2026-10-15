@@ -1,5 +1,6 @@
 import { StyleSheet, View } from 'react-native';
 import type { TeamMarker as TeamMarkerData } from '@/types/squad';
+import { bannerBands } from '@/lib/stageView';
 import { sizes } from '@/theme/tokens';
 
 interface TeamMarkerProps {
@@ -22,21 +23,15 @@ export function TeamMarker({ marker, variant = 'default' }: TeamMarkerProps) {
   const dimensions = isBanner ? sizes.teamMarkerBanner : sizes.teamMarker;
   const isColumn = !isBanner && marker.orientation === 'horizontal';
 
-  // A shape overlay (disc/diamond) reads fine at the picker's marker height
-  // but disappears at the banner's — there's no diameter left to draw. Every
-  // overlay marker is a single solid band plus one centred device (Japan:
-  // white + red disc; Brazil: green + yellow diamond — see TeamMarker's
-  // data-model docs), so the banner instead splits that band into
-  // edge/middle/edge, using the overlay's own colour for the middle third.
-  // Driven by the marker's shape, not any per-team case.
-  const soleBand = marker.bands.length === 1 ? marker.bands[0] : undefined;
-  const bannerOverlayEdge = isBanner && marker.overlay && soleBand !== undefined ? soleBand : null;
-  const bands =
-    bannerOverlayEdge !== null && marker.overlay
-      ? [bannerOverlayEdge, marker.overlay.color, bannerOverlayEdge]
-      : marker.bands;
-  const weights =
-    bannerOverlayEdge !== null ? [1, 1, 1] : (marker.weights ?? marker.bands.map(() => 1));
+  // The banner always draws vertical bands, and a shape overlay becomes a
+  // middle band, since a disc or diamond has no room at the banner's height.
+  // `bannerBands` (lib/stageView.ts) owns that rule; the spotlight stage's
+  // team-colour fallback (spec §2.6) draws the same bands.
+  const banded = isBanner
+    ? bannerBands(marker)
+    : marker.bands.map((color, i) => ({ color, weight: marker.weights?.[i] ?? 1 }));
+  const bands = banded.map((b) => b.color);
+  const weights = banded.map((b) => b.weight);
   const total = weights.reduce((sum, w) => sum + w, 0);
 
   const showShapeOverlay = !isBanner && marker.overlay;
