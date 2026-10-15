@@ -1,4 +1,3 @@
-import * as Haptics from 'expo-haptics';
 import { useCallback, useEffect } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
@@ -12,6 +11,7 @@ import Animated, {
 import { Flag } from './Flag';
 import { VerdictGlyph } from './VerdictGlyph';
 import type { FlagCode } from '@/assets/flags/generated';
+import { feedback } from '@/lib/haptics';
 import {
   borderWidths,
   durations,
@@ -130,14 +130,14 @@ export function AnswerOption({ label, flag, verdict, disabled, onPress }: Answer
         withTiming(1.04, { duration: durations.pop, easing: Easing.out(Easing.quad) }),
         withTiming(1, { duration: durations.popSettle, easing: Easing.inOut(Easing.quad) }),
       );
-      Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Medium);
+      feedback('correct');
     } else if (verdict === 'correct-unpicked') {
       popScale.value = withSequence(
         withTiming(1.03, { duration: durations.pop, easing: Easing.out(Easing.quad) }),
         withTiming(1, { duration: durations.popSettle, easing: Easing.inOut(Easing.quad) }),
       );
     } else if (verdict === 'incorrect-picked') {
-      Haptics.notificationAsync(Haptics.NotificationFeedbackType.Warning);
+      feedback('wrong');
     }
   }, [verdict, revealProgress, popScale, boxOpacity]);
 
@@ -148,7 +148,7 @@ export function AnswerOption({ label, flag, verdict, disabled, onPress }: Answer
       duration: durations.press,
       easing: Easing.out(Easing.quad),
     });
-    Haptics.impactAsync(Haptics.ImpactFeedbackStyle.Light);
+    feedback('tap');
   }, [disabled, pressScale]);
 
   const handlePressOut = useCallback(() => {
