@@ -286,3 +286,53 @@ const POSITION_LABELS: Record<Position, string> = {
 export function positionLabel(position: Position): string {
   return POSITION_LABELS[position];
 }
+
+/**
+ * What the footer offers (spec §2.4):
+ * - waiting for a tap;
+ * - after a right answer, the bar that moves on by itself;
+ * - after a miss, a button that waits.
+ *
+ * With a screen reader on, a right answer gets a plain Next button: the round
+ * never moves on by itself then.
+ */
+export type FooterMode = 'waiting' | 'autoNext' | 'next' | 'gotIt';
+
+export function footerMode(verdict: boolean | null, screenReader: boolean): FooterMode {
+  if (verdict === null) return 'waiting';
+  if (verdict === false) return 'gotIt';
+  return screenReader ? 'next' : 'autoNext';
+}
+
+/** The streak haptic's moment: the count just reached 5 or 10 (spec §7). */
+export function streakMilestone(previous: number, current: number): boolean {
+  return current !== previous && (current === 5 || current === 10);
+}
+
+const SLOT_NAMES: Record<SlotKey, string> = {
+  NAME: 'Name',
+  POS: 'Position',
+  AGE: 'Age',
+  CLUB: 'Club',
+  NAT: 'Nationality',
+};
+
+/** A slot chip's screen-reader label. A slot still being asked carries no
+ *  value, so its label cannot read out the answer. */
+export function slotSpoken(slot: Slot): string {
+  const name = SLOT_NAMES[slot.key];
+  switch (slot.state) {
+    case 'active':
+      return `${name}: being asked`;
+    case 'pending':
+      return `${name}: asked next`;
+    case 'correct':
+      return `${name}: ${slot.value ?? ''}, right`;
+    case 'wrong':
+      return `${name}: ${slot.value ?? ''}, the right answer`;
+    case 'notAsked':
+      return `${name}: ${slot.value ?? ''}, not asked`;
+    case 'given':
+      return `${name}: ${slot.value ?? ''}`;
+  }
+}

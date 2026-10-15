@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   answerLayout,
   fitHeroCard,
+  footerMode,
   heroTabMetrics,
   isCompact,
   partCounter,
@@ -9,8 +10,10 @@ import {
   positionLabel,
   progressOutcomes,
   promptText,
+  slotSpoken,
   slotStates,
   streak,
+  streakMilestone,
   tileVerdict,
 } from './roundView';
 import {
@@ -605,5 +608,54 @@ describe('positionLabel', () => {
       'Midfield',
       'Forward',
     ]);
+  });
+});
+
+describe('footerMode', () => {
+  it('waits for an answer, then moves on by itself or waits on a miss', () => {
+    expect(footerMode(null, false)).toBe('waiting');
+    expect(footerMode(true, false)).toBe('autoNext');
+    expect(footerMode(false, false)).toBe('gotIt');
+  });
+
+  // Spec §2.4: no auto-advance while a screen reader is on.
+  it('never moves on by itself with a screen reader on', () => {
+    expect(footerMode(true, true)).toBe('next');
+    expect(footerMode(false, true)).toBe('gotIt');
+  });
+});
+
+describe('streakMilestone', () => {
+  it('fires when the streak reaches 5 or 10', () => {
+    expect(streakMilestone(4, 5)).toBe(true);
+    expect(streakMilestone(9, 10)).toBe(true);
+  });
+
+  it('stays quiet otherwise, and on a re-render at the same count', () => {
+    expect(streakMilestone(5, 5)).toBe(false);
+    expect(streakMilestone(5, 6)).toBe(false);
+    expect(streakMilestone(5, 0)).toBe(false);
+    expect(streakMilestone(3, 4)).toBe(false);
+  });
+});
+
+describe('slotSpoken', () => {
+  it('names a settled slot with its value', () => {
+    expect(slotSpoken({ key: 'POS', state: 'given', value: 'FW' })).toBe('Position: FW');
+    expect(slotSpoken({ key: 'NAME', state: 'correct', value: 'Pedri' })).toBe(
+      'Name: Pedri, right',
+    );
+    expect(slotSpoken({ key: 'CLUB', state: 'wrong', value: 'Barcelona' })).toBe(
+      'Club: Barcelona, the right answer',
+    );
+    expect(slotSpoken({ key: 'NAT', state: 'notAsked', value: 'Spain' })).toBe(
+      'Nationality: Spain, not asked',
+    );
+  });
+
+  // Guardrail: a screen reader must not read out the answer being asked.
+  it('never speaks a value for a slot still being asked', () => {
+    expect(slotSpoken({ key: 'NAME', state: 'active', value: null })).toBe('Name: being asked');
+    expect(slotSpoken({ key: 'POS', state: 'pending', value: null })).toBe('Position: asked next');
   });
 });
