@@ -5,7 +5,9 @@ import { describe, expect, it } from 'vitest';
 
 const credit: PhotoCredit = {
   file: 'X.jpg',
-  url: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/X.jpg/500px-X.jpg',
+  url: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/X.jpg/960px-X.jpg',
+  width: 1200,
+  height: 1600,
   author: 'Example Photographer',
   licence: 'CC BY-SA 4.0',
   licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0',

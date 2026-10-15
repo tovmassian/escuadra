@@ -52,9 +52,15 @@ export interface PhotoCredit {
    *  and the key to its Commons page. It usually names the player, so it
    *  never reaches visible text or a label during a question. */
   file: string;
-  /** A 500 px thumbnail on upload.wikimedia.org or thumb.wikimedia.org,
-   *  tracking query removed. Derived from `file` by Commons; can change. */
+  /** A 960 px thumbnail on thumb.wikimedia.org, or the original itself on
+   *  upload.wikimedia.org when it is no wider, tracking query removed.
+   *  Derived from `file` by Commons; can change. */
   url: string;
+  /** The original file's size in pixels, not the thumbnail's. The question
+   *  screen fills its stage with a photo at least 720 px wide and frames a
+   *  smaller one (spec §2.6). */
+  width: number;
+  height: number;
   /** Who the credit names, plain text: the attribution the licence asks for
    *  when Commons records one ("Bryan Berlin / WikiPortraits", a rights-
    *  holding agency), else the photographer. Null when neither is known; the

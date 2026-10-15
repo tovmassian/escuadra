@@ -13,10 +13,11 @@ import { pagesByTitle } from './wikimedia-parse.ts';
 
 export const COMMONS_API = 'https://commons.wikimedia.org/w/api.php';
 
-/** Commons snaps a requested width to its standard sizes: 512 comes back as
- *  960 px (463 KB for one photo), 500 exactly (119 KB) — enough for the
- *  220 pt hero at 2x. */
-export const THUMB_WIDTH = 500;
+/** Commons snaps a requested width to its standard sizes, and 960 is one.
+ *  The 2.0 question screen fills the top of the window with the photo, about
+ *  780 px at 2x and 1,170 at 3x, so 960 covers 2x and comes close at 3x
+ *  under the stage gradient. 463 KB for one photo, against 119 KB at 500. */
+export const THUMB_WIDTH = 960;
 
 /** The `extmetadata` fields the rules read, and all the query asks for.
  *  Typed, so reading a field not asked for does not compile. */
@@ -26,8 +27,9 @@ type CreditMetadata = Partial<Record<CreditField, { value?: string }>>;
 
 /** What an `incomplete-credit` lacks, so the report says why. `author` only
  *  for the attribution-only licence, whose one condition is a named holder;
- *  `commons-page` also when the page is not where `commonsFileUrl` puts it. */
-export type MissingField = 'licence' | 'thumbnail' | 'commons-page' | 'author';
+ *  `commons-page` also when the page is not where `commonsFileUrl` puts it;
+ *  `size` when Commons gives no original width and height. */
+export type MissingField = 'licence' | 'thumbnail' | 'commons-page' | 'author' | 'size';
 
 export type CreditOutcome =
   | { status: 'ok'; credit: PhotoCredit }
@@ -118,10 +120,19 @@ function nonEmpty(value: string | undefined): string | null {
   return trimmed === '' ? null : trimmed;
 }
 
+/** A pixel dimension Commons reported, or null when it is absent or not a
+ *  positive whole number. */
+function pixels(value: number | undefined): number | null {
+  return value !== undefined && Number.isInteger(value) && value > 0 ? value : null;
+}
+
 interface ImageInfoPage {
   title: string;
   imageinfo?: {
     thumburl?: string;
+    /** The original file's size: asked for with `iiprop=size`. */
+    width?: number;
+    height?: number;
     descriptionurl?: string;
     extmetadata?: CreditMetadata;
   }[];
@@ -143,11 +154,11 @@ function creditName(meta: CreditMetadata): string | null {
 }
 
 /** The credit of one Commons file. It is `ok` only with an accepted licence,
- *  a thumbnail on a Wikimedia image host and its Commons page where
- *  `commonsFileUrl` derives it. A credit name and deed are kept when Commons
- *  sends them but not required — the credit links the Commons page, which
- *  names both, the same click-through credit Wikipedia relies on — except
- *  that the attribution-only licence needs a name. */
+ *  a thumbnail on a Wikimedia image host, the original's size and its Commons
+ *  page where `commonsFileUrl` derives it. A credit name and deed are kept
+ *  when Commons sends them but not required — the credit links the Commons
+ *  page, which names both, the same click-through credit Wikipedia relies
+ *  on — except that the attribution-only licence needs a name. */
 export function credit(page: ImageInfoPage): CreditOutcome {
   const info = page.imageinfo?.[0];
   const meta = info?.extmetadata ?? {};
@@ -156,6 +167,8 @@ export function credit(page: ImageInfoPage): CreditOutcome {
   const author = creditName(meta);
   const licenceUrl = nonEmpty(meta.LicenseUrl?.value)?.replace(/^http:\/\//, 'https://') ?? null;
   const url = wikimediaImageUrl(info?.thumburl);
+  const width = pixels(info?.width);
+  const height = pixels(info?.height);
   // Not stored — the app derives it from `file` — so it must be exactly
   // where the derivation puts it, or the credit's link would not land.
   const pageFound = nonEmpty(info?.descriptionurl) === commonsFileUrl(file);
@@ -164,15 +177,23 @@ export function credit(page: ImageInfoPage): CreditOutcome {
     return { status: 'refused-licence', licence };
   }
   const unnamedHolder = licence !== null && isAttributionOnly(licence) && author === null;
-  if (licence === null || url === null || !pageFound || unnamedHolder) {
+  if (
+    licence === null ||
+    url === null ||
+    !pageFound ||
+    unnamedHolder ||
+    width === null ||
+    height === null
+  ) {
     const missing: MissingField[] = [];
     if (licence === null) missing.push('licence');
     if (url === null) missing.push('thumbnail');
     if (!pageFound) missing.push('commons-page');
     if (unnamedHolder) missing.push('author');
+    if (width === null || height === null) missing.push('size');
     return { status: 'incomplete-credit', licence, missing };
   }
-  return { status: 'ok', credit: { file, url, author, licence, licenceUrl } };
+  return { status: 'ok', credit: { file, url, width, height, author, licence, licenceUrl } };
 }
 
 /** Each file's thumbnail, Commons page and credit metadata, keyed by the
@@ -183,7 +204,7 @@ export const CREDITS: Lookup<CreditOutcome, ImageInfoPage> = {
   params: (files) => ({
     action: 'query',
     prop: 'imageinfo',
-    iiprop: 'url|extmetadata',
+    iiprop: 'url|size|extmetadata',
     iiurlwidth: String(THUMB_WIDTH),
     iiextmetadatafilter: CREDIT_FIELDS.join('|'),
     // A file moved on Commons still answers under its new name, which the

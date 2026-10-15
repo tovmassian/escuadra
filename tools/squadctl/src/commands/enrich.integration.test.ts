@@ -26,7 +26,9 @@ describe('enrich --offline', () => {
 
     expect(players.get('pedri')?.photo).toEqual({
       file: 'Pedri.jpg',
-      url: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Pedri.jpg/500px-Pedri.jpg',
+      url: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/Pedri.jpg/960px-Pedri.jpg',
+      width: 1200,
+      height: 1600,
       author: 'Bryan Berlin',
       licence: 'CC BY-SA 4.0',
       licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
@@ -120,7 +122,7 @@ describe('enrich --offline', () => {
         id: 'pedri',
         photo: 'incomplete-credit',
         file: 'Pedri.jpg',
-        missing: ['licence', 'thumbnail', 'commons-page'],
+        missing: ['licence', 'thumbnail', 'commons-page', 'size'],
       }),
     ]);
   });

@@ -15,9 +15,19 @@
         "imagerepository": "local",
         "imageinfo": [
           {
+            "size": 207039,
+            "width": 480,
+            "height": 721,
             "thumburl": "https://upload.wikimedia.org/wikipedia/commons/3/3d/20150328_1426_U19_AUTHRV_1333.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-            "thumbwidth": 500,
-            "thumbheight": 751,
+            "thumbwidth": 960,
+            "thumbheight": 1442,
+            "thumbattribs": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/3/3d/20150328_1426_U19_AUTHRV_1333.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1442
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/3/3d/20150328_1426_U19_AUTHRV_1333.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:20150328_1426_U19_AUTHRV_1333.jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=39282000",
@@ -28,11 +38,6 @@
               },
               "LicenseShortName": {
                 "value": "CC BY-SA 3.0 at",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "AttributionRequired": {
-                "value": "true",
                 "source": "commons-desc-page",
                 "hidden": ""
               },
@@ -56,9 +61,19 @@
         "imagerepository": "local",
         "imageinfo": [
           {
+            "size": 41830,
+            "width": 310,
+            "height": 364,
             "thumburl": "https://upload.wikimedia.org/wikipedia/commons/6/67/Mahdi_Torabi_%28Cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
-            "thumbwidth": 500,
-            "thumbheight": 587,
+            "thumbwidth": 960,
+            "thumbheight": 1127,
+            "thumbattribs": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/6/67/Mahdi_Torabi_%28Cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1127
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/6/67/Mahdi_Torabi_%28Cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:Mahdi_Torabi_(Cropped).jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=88959974",
@@ -88,9 +103,19 @@
         "imagerepository": "local",
         "imageinfo": [
           {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c8/20171114_AUT_URU_4518_-_Rodrigo_Bentancur_%28cropped%29_2.jpg/500px-20171114_AUT_URU_4518_-_Rodrigo_Bentancur_%28cropped%29_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 500,
-            "thumbheight": 697,
+            "size": 573739,
+            "width": 725,
+            "height": 1010,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/c/c8/20171114_AUT_URU_4518_-_Rodrigo_Bentancur_%28cropped%29_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 960,
+            "thumbheight": 1337,
+            "thumbattribs": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/c/c8/20171114_AUT_URU_4518_-_Rodrigo_Bentancur_%28cropped%29_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1337
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/c/c8/20171114_AUT_URU_4518_-_Rodrigo_Bentancur_%28cropped%29_2.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:20171114_AUT_URU_4518_-_Rodrigo_Bentancur_(cropped)_2.jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=92181031",
@@ -101,11 +126,6 @@
               },
               "LicenseShortName": {
                 "value": "CC BY-SA 3.0 at",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "AttributionRequired": {
-                "value": "true",
                 "source": "commons-desc-page",
                 "hidden": ""
               },
@@ -129,9 +149,23 @@
         "imagerepository": "local",
         "imageinfo": [
           {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg/500px-UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 500,
-            "thumbheight": 972,
+            "size": 753864,
+            "width": 1440,
+            "height": 2800,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg/960px-UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 960,
+            "thumbheight": 1867,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/b/b5/UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b5/UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg/960px-UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1867,
+              "srcset": "https://upload.wikimedia.org/wikipedia/commons/b/b5/UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma%2C_2021-12-09_%28Kumbulla%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:UEFA_Europa_Conference_League_CSKA_Sofia_-_Roma,_2021-12-09_(Kumbulla).jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=114124724",
@@ -142,11 +176,6 @@
               },
               "LicenseShortName": {
                 "value": "GFDL",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "AttributionRequired": {
-                "value": "true",
                 "source": "commons-desc-page",
                 "hidden": ""
               },
@@ -165,9 +194,19 @@
         "imagerepository": "local",
         "imageinfo": [
           {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f0/Sch%C3%A4fer_2022.jpg/500px-Sch%C3%A4fer_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 500,
-            "thumbheight": 692,
+            "size": 220522,
+            "width": 741,
+            "height": 1026,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Sch%C3%A4fer_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 960,
+            "thumbheight": 1329,
+            "thumbattribs": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Sch%C3%A4fer_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1329
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/f/f0/Sch%C3%A4fer_2022.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:Sch%C3%A4fer_2022.jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=125306749",
@@ -197,9 +236,23 @@
         "imagerepository": "local",
         "imageinfo": [
           {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/0K8A7853_%2853451306071%29_%28cropped%29.jpg/500px-0K8A7853_%2853451306071%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 500,
-            "thumbheight": 577,
+            "size": 2613328,
+            "width": 1477,
+            "height": 1704,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/0K8A7853_%2853451306071%29_%28cropped%29.jpg/960px-0K8A7853_%2853451306071%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 960,
+            "thumbheight": 1108,
+            "responsiveUrls": {
+              "2": "https://upload.wikimedia.org/wikipedia/commons/a/a9/0K8A7853_%2853451306071%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/0K8A7853_%2853451306071%29_%28cropped%29.jpg/960px-0K8A7853_%2853451306071%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1108,
+              "srcset": "https://upload.wikimedia.org/wikipedia/commons/a/a9/0K8A7853_%2853451306071%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled 2x"
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/a/a9/0K8A7853_%2853451306071%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:0K8A7853_(53451306071)_(cropped).jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=144158905",
@@ -210,11 +263,6 @@
               },
               "LicenseShortName": {
                 "value": "Public domain",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "AttributionRequired": {
-                "value": "false",
                 "source": "commons-desc-page",
                 "hidden": ""
               }
@@ -229,20 +277,25 @@
         "imagerepository": "local",
         "imageinfo": [
           {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/fc/Cher_Ndour.jpg/500px-Cher_Ndour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 500,
-            "thumbheight": 748,
+            "size": 666474,
+            "width": 648,
+            "height": 969,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Cher_Ndour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 960,
+            "thumbheight": 1436,
+            "thumbattribs": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Cher_Ndour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1436
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/f/fc/Cher_Ndour.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:Cher_Ndour.jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=151983442",
             "extmetadata": {
               "LicenseShortName": {
                 "value": "CC BY 2.0",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "AttributionRequired": {
-                "value": "true",
                 "source": "commons-desc-page",
                 "hidden": ""
               },
@@ -261,9 +314,19 @@
         "imagerepository": "local",
         "imageinfo": [
           {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e2/2024_Emirates_Cup_-_Riccardo_Calafiori_%282%29_%28cropped%29.jpg/500px-2024_Emirates_Cup_-_Riccardo_Calafiori_%282%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 500,
-            "thumbheight": 673,
+            "size": 69750,
+            "width": 697,
+            "height": 938,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/e/e2/2024_Emirates_Cup_-_Riccardo_Calafiori_%282%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 960,
+            "thumbheight": 1292,
+            "thumbattribs": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/e/e2/2024_Emirates_Cup_-_Riccardo_Calafiori_%282%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1292
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/e/e2/2024_Emirates_Cup_-_Riccardo_Calafiori_%282%29_%28cropped%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:2024_Emirates_Cup_-_Riccardo_Calafiori_(2)_(cropped).jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=152029520",
@@ -274,11 +337,6 @@
               },
               "LicenseShortName": {
                 "value": "CC0",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "AttributionRequired": {
-                "value": "false",
                 "source": "commons-desc-page",
                 "hidden": ""
               },
@@ -297,9 +355,23 @@
         "imagerepository": "local",
         "imageinfo": [
           {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg/500px-Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 500,
-            "thumbheight": 625,
+            "size": 1684894,
+            "width": 2400,
+            "height": 3000,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg/960px-Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 960,
+            "thumbheight": 1200,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg/1920px-Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg/960px-Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1200,
+              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/00/Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg/1920px-Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/0/00/Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:Alex_Valle_ACCI_FCBARCELONA_Turisme_Catalunya_gira_pretemporada.jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=152730778",
@@ -329,9 +401,19 @@
         "imagerepository": "local",
         "imageinfo": [
           {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4e/2021-07-28_FC_Gossau_-_FC_Wil_1900_02_%28Nils_Reichmuth%29.jpg/500px-2021-07-28_FC_Gossau_-_FC_Wil_1900_02_%28Nils_Reichmuth%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 500,
-            "thumbheight": 1012,
+            "size": 129284,
+            "width": 857,
+            "height": 1734,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/4/4e/2021-07-28_FC_Gossau_-_FC_Wil_1900_02_%28Nils_Reichmuth%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 960,
+            "thumbheight": 1942,
+            "thumbattribs": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/4/4e/2021-07-28_FC_Gossau_-_FC_Wil_1900_02_%28Nils_Reichmuth%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1942
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/4/4e/2021-07-28_FC_Gossau_-_FC_Wil_1900_02_%28Nils_Reichmuth%29.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:2021-07-28_FC_Gossau_-_FC_Wil_1900_02_(Nils_Reichmuth).jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=157279900",
@@ -356,9 +438,19 @@
         "imagerepository": "local",
         "imageinfo": [
           {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Abdoullah_Ba.jpg/500px-Abdoullah_Ba.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 500,
-            "thumbheight": 699,
+            "size": 227982,
+            "width": 643,
+            "height": 899,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/6/60/Abdoullah_Ba.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 960,
+            "thumbheight": 1342,
+            "thumbattribs": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/6/60/Abdoullah_Ba.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1342
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/6/60/Abdoullah_Ba.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:Abdoullah_Ba.jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=159794942",
@@ -369,11 +461,6 @@
               },
               "LicenseShortName": {
                 "value": "CC0",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "AttributionRequired": {
-                "value": "false",
                 "source": "commons-desc-page",
                 "hidden": ""
               },
@@ -392,9 +479,19 @@
         "imagerepository": "local",
         "imageinfo": [
           {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Frenkie_De_Jong_%282025%29_%28cropped%29.png/500px-Frenkie_De_Jong_%282025%29_%28cropped%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 500,
-            "thumbheight": 510,
+            "size": 331840,
+            "width": 706,
+            "height": 720,
+            "thumburl": "https://upload.wikimedia.org/wikipedia/commons/3/38/Frenkie_De_Jong_%282025%29_%28cropped%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+            "thumbwidth": 960,
+            "thumbheight": 979,
+            "thumbattribs": {
+              "src": "https://upload.wikimedia.org/wikipedia/commons/3/38/Frenkie_De_Jong_%282025%29_%28cropped%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail_unscaled",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 979
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/3/38/Frenkie_De_Jong_%282025%29_%28cropped%29.png?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:Frenkie_De_Jong_(2025)_(cropped).png",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=182750019",
@@ -405,11 +502,6 @@
               },
               "LicenseShortName": {
                 "value": "CC BY 4.0",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "AttributionRequired": {
-                "value": "true",
                 "source": "commons-desc-page",
                 "hidden": ""
               },
@@ -428,9 +520,23 @@
         "imagerepository": "local",
         "imageinfo": [
           {
-            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/500px-Pedri_France_v_Spain_7.24.26-245.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
-            "thumbwidth": 500,
-            "thumbheight": 750,
+            "size": 3691497,
+            "width": 3333,
+            "height": 5000,
+            "thumburl": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/960px-Pedri_France_v_Spain_7.24.26-245.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+            "thumbwidth": 960,
+            "thumbheight": 1440,
+            "responsiveUrls": {
+              "2": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/1920px-Pedri_France_v_Spain_7.24.26-245.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail"
+            },
+            "thumbattribs": {
+              "src": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/960px-Pedri_France_v_Spain_7.24.26-245.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+              "decoding": "async",
+              "loading": "lazy",
+              "width": 960,
+              "height": 1440,
+              "srcset": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg/1920px-Pedri_France_v_Spain_7.24.26-245.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail 2x"
+            },
             "url": "https://upload.wikimedia.org/wikipedia/commons/1/1c/Pedri_France_v_Spain_7.24.26-245.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=original",
             "descriptionurl": "https://commons.wikimedia.org/wiki/File:Pedri_France_v_Spain_7.24.26-245.jpg",
             "descriptionshorturl": "https://commons.wikimedia.org/w/index.php?curid=195780348",
@@ -446,11 +552,6 @@
               },
               "LicenseShortName": {
                 "value": "CC BY-SA 4.0",
-                "source": "commons-desc-page",
-                "hidden": ""
-              },
-              "AttributionRequired": {
-                "value": "true",
                 "source": "commons-desc-page",
                 "hidden": ""
               },
