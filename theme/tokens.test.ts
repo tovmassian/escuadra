@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { gradients, palettes, typography } from './tokens';
+import { contrastRatio } from '@/lib/contrast';
+import { durations, gradients, palettes, sizes, stage, stageGradients, typography } from './tokens';
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
 
@@ -56,5 +57,126 @@ describe('palettes', () => {
         expect(value.replace(/\s/g, ''), `${name}.${role}`).toMatch(COLOR);
       });
     });
+  });
+});
+
+describe('text contrast', () => {
+  // AA for body text. `textMuted` carries captions, stat labels and the photo
+  // credit, so it is held to the body-copy bar on the grounds it sits on.
+  it('textMuted reaches 4.5:1 on background and surface, in both themes', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      for (const ground of ['background', 'surface'] as const) {
+        expect(
+          contrastRatio(p.textMuted, p[ground]),
+          `${name}.textMuted on ${ground}`,
+        ).toBeGreaterThanOrEqual(4.5);
+      }
+    });
+  });
+});
+
+describe('spotlight stage', () => {
+  // These sit on the player photo or on the team's own colours, neither of
+  // which changes with the theme.
+  it('shares the photo-side roles between themes', () => {
+    for (const role of [
+      'heat',
+      'heatBg',
+      'heatLine',
+      'heatText',
+      'glass',
+      'glassLine',
+      'veilInk',
+    ] as const) {
+      expect(palettes.dark[role], role).toBeDefined();
+      expect(palettes.light[role], role).toBe(palettes.dark[role]);
+    }
+  });
+
+  it('gives each theme a stage gradient that ends in its own ground', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const g = stageGradients[name];
+      expect(g.locations.length, name).toBe(g.colors.length);
+      g.colors.forEach((c) => expect(c, name).toMatch(COLOR));
+      g.locations.forEach((at, i) => {
+        expect(at, `${name}[${i}]`).toBeGreaterThanOrEqual(0);
+        expect(at, `${name}[${i}]`).toBeLessThanOrEqual(1);
+        if (i > 0) expect(at, `${name}[${i}]`).toBeGreaterThan(g.locations[i - 1] ?? 1);
+      });
+      expect(g.colors.at(-1), name).toBe(palettes[name].background);
+    });
+  });
+
+  it('veils the no-photo bands harder on dark than on light', () => {
+    for (const name of ['dark', 'light'] as const) {
+      expect(stage.veil[name], name).toBeGreaterThan(0);
+      expect(stage.veil[name], name).toBeLessThan(1);
+    }
+    expect(stage.veil.dark).toBeGreaterThan(stage.veil.light);
+  });
+});
+
+describe('motion budget', () => {
+  // Not animations: a shimmer's loop period, and the pause after a correct
+  // answer before the round moves on (spec §2.4).
+  const NOT_ANIMATIONS = new Set(['skeleton', 'autoAdvance']);
+  const animations = Object.entries(durations).filter(([name]) => !NOT_ANIMATIONS.has(name));
+
+  it('keeps every mid-round animation within 300 ms', () => {
+    for (const [name, ms] of animations) expect(ms, name).toBeLessThanOrEqual(300);
+  });
+
+  it('waits longer after a correct answer than any animation runs', () => {
+    expect(durations.autoAdvance).toBeGreaterThan(Math.max(...animations.map(([, ms]) => ms)));
+  });
+});
+
+describe('spotlight sizes', () => {
+  it('gives the photo more of a short screen, not less', () => {
+    expect(sizes.stage.ratioCompact).toBeGreaterThan(sizes.stage.ratio);
+    expect(sizes.stage.ratioCompact).toBeLessThan(1);
+  });
+
+  it('shrinks every answer tile and the main button when compact', () => {
+    for (const [grid, h] of Object.entries(sizes.answerTile)) {
+      expect(h.compact, grid).toBeLessThan(h.normal);
+    }
+    expect(sizes.cta.compact).toBeLessThan(sizes.cta.normal);
+  });
+
+  // Apple's minimum tap target. The 36 pt glass button gets there with
+  // hitSlop at its call site, so it is not checked here.
+  it('keeps every answer tile and the main button at least 44 pt tall', () => {
+    for (const [grid, h] of Object.entries(sizes.answerTile)) {
+      expect(h.compact, grid).toBeGreaterThanOrEqual(44);
+    }
+    expect(sizes.cta.compact).toBeGreaterThanOrEqual(44);
+  });
+});
+
+describe('Archivo display type', () => {
+  it('sets each compact style smaller, in the same face', () => {
+    const pairs = [
+      [typography.shirtNumber, typography.shirtNumberCompact],
+      [typography.prompt, typography.promptCompact],
+    ] as const;
+    for (const [normal, compact] of pairs) {
+      expect(compact.fontFamily).toBe(normal.fontFamily);
+      expect(compact.fontSize).toBeLessThan(normal.fontSize);
+    }
+  });
+
+  // Each cut is a single weight, so the family name alone selects it. A
+  // fontWeight of 700 or more makes Android look up a bold variant that a
+  // runtime-loaded font does not have, and fall back to the system font.
+  it('leaves fontWeight off every Archivo style', () => {
+    const archivo = Object.entries(typography).filter(([, style]) =>
+      style.fontFamily.startsWith('Archivo-'),
+    );
+    expect(archivo).toHaveLength(9);
+    for (const [name, style] of archivo) {
+      expect(style, name).not.toHaveProperty('fontWeight');
+    }
   });
 });

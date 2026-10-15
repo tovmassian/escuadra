@@ -111,8 +111,8 @@ export default function About() {
 
           <Text style={styles.subHeading}>Flags and fonts</Text>
           <Text style={[styles.paragraph, { marginBottom: 0 }]}>
-            Flag images are from flagpedia.net and are in the public domain. The Inter and IBM Plex
-            Mono typefaces are used under the SIL Open Font License 1.1.
+            Flag images are from flagpedia.net and are in the public domain. The Inter, IBM Plex
+            Mono and Archivo typefaces are used under the SIL Open Font License 1.1.
           </Text>
         </View>
 

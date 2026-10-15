@@ -1,6 +1,8 @@
 // Escuadra — design tokens
 // Plain exported objects. No styling library, no CSS-in-JS. Spacing is unitless (RN dp).
 
+import type { FontFamily } from './fonts';
+
 export type ThemeName = 'dark' | 'light';
 export type ThemePreference = ThemeName | 'system';
 
@@ -38,6 +40,33 @@ export interface Palette {
   brandLift: string;
   brandPlateTop: string;
   brandPlateBottom: string;
+  // ---- The 2.0 spotlight stage (spec §8). Most of these sit on the player
+  // photo, which looks the same in either theme, so they are shared.
+  /** The streak chip: its flame, wash, outline and count. Brand, never a
+   *  verdict colour — it only ever means the streak. */
+  heat: string;
+  heatBg: string;
+  heatLine: string;
+  heatText: string;
+  /** Translucent glass for controls over the photo (the close button). */
+  glass: string;
+  glassLine: string;
+  /** The ink of the veil over a no-photo stage's team-colour bands. Its
+   *  strength is `stage.veil`, raised by `stageVeil` where a band is light. */
+  veilInk: string;
+  /** Answer tiles on the stage's ground. */
+  tile: string;
+  tileLine: string;
+  /** Slot-chip labels and tile sub-labels on the stage's ground. Text over
+   *  the photo (the top bar's "Level n") needs a shared on-photo colour,
+   *  which #113 adds. */
+  onStageMuted: string;
+  /** The stage's main button ("Got it — next") and its label. */
+  ctaBg: string;
+  ctaText: string;
+  /** Accent as a line: the active slot's outline. `accent` is too dark to
+   *  read as a thin line on the dark ground, so dark uses `brandSoft`. */
+  accentLine: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -57,6 +86,15 @@ const sharedRoles = {
   brandLift: '#6d76e6',
   brandPlateTop: '#4a52c4',
   brandPlateBottom: '#252a6b',
+  // The 2.0 stage's photo-side roles, shared because they sit on the photo
+  // or on the team's own colours, and neither changes with the theme.
+  heat: '#ffaa3c',
+  heatBg: 'rgba(255,170,60,0.2)',
+  heatLine: 'rgba(255,170,60,0.5)',
+  heatText: '#ffc27a',
+  glass: 'rgba(15,17,23,0.42)',
+  glassLine: 'rgba(255,255,255,0.18)',
+  veilInk: '#0c0d12',
 } as const;
 
 // The ramp sits higher than it did: the mark's trail squares, at 30% and 55%
@@ -68,7 +106,8 @@ const darkRoles = {
   border: '#3a4046',
   textPrimary: '#f3f5f7',
   textSecondary: '#b4b8bb',
-  textMuted: '#767b80',
+  // 5.4:1 on the ground (was #767b80, 4.3:1, under AA).
+  textMuted: '#868b91',
   accentOn: '#f3f5f7',
   mark: sharedRoles.brandSoft,
   thumbBg: '#2b2f38',
@@ -77,6 +116,12 @@ const darkRoles = {
   error: '#f05653',
   errorBorderDim: '#5c3230',
   errorTextDim: '#a15a58',
+  tile: 'rgba(255,255,255,0.08)',
+  tileLine: 'rgba(255,255,255,0.16)',
+  onStageMuted: 'rgba(255,255,255,0.62)',
+  ctaBg: '#f3f5f7',
+  ctaText: '#12141a',
+  accentLine: sharedRoles.brandSoft,
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -90,7 +135,8 @@ const lightRoles = {
   border: '#dcdfe4',
   textPrimary: '#14161a',
   textSecondary: '#4b4f56',
-  textMuted: '#8b8f96',
+  // 4.9:1 on the ground (was #8b8f96, 3.0:1).
+  textMuted: '#686c73',
   accentOn: '#ffffff',
   mark: sharedRoles.brandBright,
   thumbBg: '#ffffff',
@@ -99,6 +145,12 @@ const lightRoles = {
   error: '#c23934',
   errorBorderDim: '#e3b0ad',
   errorTextDim: '#b3625d',
+  tile: '#ffffff',
+  tileLine: '#dcdfe4',
+  onStageMuted: '#686c73',
+  ctaBg: '#14161a',
+  ctaText: '#ffffff',
+  accentLine: sharedRoles.accent,
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -132,6 +184,52 @@ export const gradients = {
 } as const;
 
 export type GradientName = keyof typeof gradients;
+
+/** A vertical gradient for `expo-linear-gradient`: `colors[i]` sits at
+ *  `locations[i]`, a fraction of the painted view's height from the top. */
+export interface StageGradient {
+  colors: readonly [string, string, ...string[]];
+  locations: readonly [number, number, ...number[]];
+}
+
+// The question screen's stage (spec §2.1), painted over the whole window —
+// so locations are fractions of the window, not of the photo — above the
+// photo and under every control. A near-black scrim under the status and top
+// bars, clear through the face, then a fall into the ground the answers sit
+// on. The scrim is the same ink in both themes because it always sits on a
+// photo; the ground ends in the palette's own background. Per theme, so not
+// in `gradients`: read it as `stageGradients[useThemeName()]` at render,
+// never captured at module scope.
+export const stageGradients: Record<ThemeName, StageGradient> = {
+  dark: {
+    colors: [
+      'rgba(10,11,15,0.6)',
+      'rgba(10,11,15,0)',
+      'rgba(18,20,26,0)',
+      'rgba(18,20,26,0.88)',
+      '#12141a',
+    ],
+    locations: [0, 0.2, 0.34, 0.62, 0.74],
+  },
+  light: {
+    colors: [
+      'rgba(10,11,15,0.55)',
+      'rgba(10,11,15,0)',
+      'rgba(247,247,249,0)',
+      'rgba(247,247,249,0.94)',
+      '#f7f7f9',
+    ],
+    locations: [0, 0.2, 0.3, 0.48, 0.56],
+  },
+};
+
+// The no-photo stage (spec §2.6): the squad's marker bands under a wash of
+// `veilInk` at this opacity, per theme. A floor, not the final value —
+// `stageVeil` in lib/stageView.ts raises it until white text holds 3:1 on the
+// lightest band (Real Madrid's white still has to carry the top bar).
+export const stage = {
+  veil: { dark: 0.42, light: 0.12 },
+} as const;
 
 export const typography = {
   heroNumber: { fontFamily: 'IBMPlexMono-Bold', fontWeight: '700' as const, fontSize: 96 },
@@ -201,7 +299,76 @@ export const typography = {
     letterSpacing: 0.8,
     textTransform: 'uppercase' as const,
   },
-} as const;
+  // ---- Archivo, the 2.0 display face ----
+  // Static cuts of the variable font, one file per width, since React Native
+  // cannot set a variable font's width axis: see assets/fonts/archivo/. React
+  // Native takes lineHeight in points, so the design's ratios are resolved
+  // here: 0.78 of the size for the shirt number, 0.8 for the score, 0.9 for
+  // card numbers, 1.05 for titles.
+  //
+  // No fontWeight on any of these: each cut is a single weight, so the family
+  // name alone selects it. A fontWeight of 700 or more would make Android look
+  // up a bold variant that a runtime-loaded font does not have, and fall back
+  // to the system font.
+  shirtNumber: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 152,
+    lineHeight: 119,
+    letterSpacing: -3,
+  },
+  shirtNumberCompact: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 112,
+    lineHeight: 87,
+    letterSpacing: -3,
+  },
+  // Results' score; its "/10" is set smaller beside it.
+  scoreDisplay: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 150,
+    lineHeight: 120,
+    letterSpacing: -4,
+  },
+  // The shirt number on a player card (Results, Study).
+  cardNumber: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 44,
+    lineHeight: 40,
+  },
+  // "Who wears 7?", "Position?", "Correct" / "Missed".
+  prompt: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 26,
+    lineHeight: 26,
+    textTransform: 'uppercase' as const,
+  },
+  promptCompact: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 22,
+    lineHeight: 22,
+    textTransform: 'uppercase' as const,
+  },
+  // Results' tier title ("Level 2 cleared").
+  titleDisplay: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 25,
+    lineHeight: 26,
+    textTransform: 'uppercase' as const,
+  },
+  // The stage's main button label.
+  ctaLabel: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 16,
+    letterSpacing: 0.4,
+    textTransform: 'uppercase' as const,
+  },
+  // The position code on a position tile ("GK").
+  tileCode: {
+    fontFamily: 'Archivo-Black',
+    fontSize: 22,
+    lineHeight: 22,
+  },
+} as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // 1.5px is the option-card default; 2px marks the emphasised "correct,
 // unpicked" card in the incorrect-reveal state.
@@ -223,9 +390,13 @@ export const opacity = {
   dotFuture: 0.35, // progress dots not yet reached
 } as const;
 
-// All under 300ms, per CLAUDE.md's motion rule — this is the mid-round
-// budget. The round-over celebration and the home lockup are the one
-// carve-out from that rule; see `strikeTiming`/`celebrationCascade` below.
+// All within 300ms, per CLAUDE.md's motion rule — this is the mid-round
+// budget. Two entries are not animations and sit outside it: `skeleton` is a
+// shimmer's loop period, and `autoAdvance` is the pause after a correct
+// answer before the round moves on by itself (spec §2.4; a tap skips it, and
+// it never runs with a screen reader on). The round-over celebration and the
+// home lockup are the one carve-out from the rule; see
+// `strikeTiming`/`celebrationCascade` below.
 export const durations = {
   press: 100,
   reveal: 180,
@@ -235,6 +406,15 @@ export const durations = {
   collapse: 200,
   toggle: 160,
   skeleton: 900,
+  // ---- 2.0 spotlight (spec §6) ----
+  shake: 240, // a missed tile, three swings
+  ballDrop: 220, // the ball into the corner on a correct answer
+  ballBounce: 260, // the ball off the post on a miss
+  pulse: 200, // the next slot's outline
+  segmentFill: 120, // one results-strip segment
+  segmentStagger: 40, // between results-strip segments
+  sheet: 240, // the share sheet sliding up
+  autoAdvance: 1200,
 } as const;
 
 // ---- Celebration motion ---------------------------------------------------
@@ -431,9 +611,9 @@ export const sizes = {
   teamMarkerBanner: { width: 100, height: 3 },
   // Nation flag images (assets/flags/*.png). Three sizes, one per surface.
   // `flagMarker` deliberately matches `teamMarker` above so a nation row and
-  // a club row in the picker keep identical metrics. Source images are
-  // 70x46, so `flagMarker` at @3x is a near-exact 1:1 — there is no headroom
-  // above these sizes.
+  // a club row in the picker keep identical metrics. Source images are 160 px
+  // wide (160x107 for a 3:2 flag), so `flagMarker` at @3x (66 px) leaves about
+  // 2.4x headroom — see assets/flags/README.md.
   flagMarker: { width: 22, height: 15 },
   flagInline: { width: 18, height: 12 },
   flagRow: { width: 20, height: 13 },
@@ -468,6 +648,33 @@ export const sizes = {
   },
   // The results screen's expanded photo-credit list scrolls past this.
   photoCreditsMaxHeight: 200,
+  // ---- 2.0 spotlight screens (spec §2, §3, §5, §8) ----
+  // The question screen goes compact below this usable height (window minus
+  // safe-area insets). It replaces `heroFitHeight` when the hero goes.
+  compactBelow: 700,
+  // The share of the window the photo stage fills, normal and compact.
+  stage: { ratio: 0.68, ratioCompact: 0.72 },
+  // The height of one segment: the question's Stories-style progress bar
+  // (3) and Results' round strip (6).
+  segment: { question: 3, results: 6 },
+  // The escuadra corner beside a number: arm length and bar thickness.
+  corner: { question: { arm: 24, bar: 6 }, results: { arm: 40, bar: 10 } },
+  // Answer tile heights per grid (spec §2.3).
+  answerTile: {
+    names4: { normal: 58, compact: 52 }, // 2 x 2
+    names6: { normal: 54, compact: 48 }, // 2 x 3, level 3
+    positions: { normal: 64, compact: 56 }, // 1 x 4
+  },
+  // The stage's main button.
+  cta: { normal: 52, compact: 48 },
+  // Round glass controls over the photo. Below the 44pt tap minimum on
+  // purpose: give it hitSlop where it is used.
+  glassButton: 36,
+  // Study's grid card (its width comes from the column) and Results' missed
+  // player card.
+  playerCard: { studyHeight: 218, results: { width: 140, height: 184 } },
+  // Study's list-view avatar.
+  avatar: 46,
 } as const;
 
 export const iconSize = {
@@ -500,6 +707,7 @@ export const radii = {
   md: 12,
   lg: 16,
   xl: 24,
+  sheet: 28, // the share sheet's top corners
   pill: 999,
 } as const;
 
