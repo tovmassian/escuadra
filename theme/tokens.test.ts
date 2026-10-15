@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { contrastRatio } from '@/lib/contrast';
-import { gradients, palettes, typography } from './tokens';
+import { gradients, palettes, stage, stageGradients, typography } from './tokens';
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
 
@@ -73,5 +73,44 @@ describe('text contrast', () => {
         ).toBeGreaterThanOrEqual(4.5);
       }
     });
+  });
+});
+
+describe('spotlight stage', () => {
+  // These sit on the player photo, which looks the same in either theme.
+  it('shares the photo-side roles between themes', () => {
+    for (const role of [
+      'heat',
+      'heatBg',
+      'heatLine',
+      'heatText',
+      'glass',
+      'glassLine',
+      'veilInk',
+    ] as const) {
+      expect(palettes.light[role], role).toBe(palettes.dark[role]);
+    }
+  });
+
+  it('gives each theme a stage gradient that ends in its own ground', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const g = stageGradients[name];
+      expect(g.locations.length, name).toBe(g.colors.length);
+      g.colors.forEach((c) => expect(c, name).toMatch(COLOR));
+      g.locations.forEach((at, i) => {
+        expect(at, `${name}[${i}]`).toBeGreaterThanOrEqual(0);
+        expect(at, `${name}[${i}]`).toBeLessThanOrEqual(1);
+        if (i > 0) expect(at, `${name}[${i}]`).toBeGreaterThan(g.locations[i - 1] ?? 1);
+      });
+      expect(g.colors.at(-1), name).toBe(palettes[name].background);
+    });
+  });
+
+  it('veils the no-photo bands harder on dark than on light', () => {
+    for (const name of ['dark', 'light'] as const) {
+      expect(stage.veil[name], name).toBeGreaterThan(0);
+      expect(stage.veil[name], name).toBeLessThan(1);
+    }
+    expect(stage.veil.dark).toBeGreaterThan(stage.veil.light);
   });
 });

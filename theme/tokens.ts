@@ -38,6 +38,31 @@ export interface Palette {
   brandLift: string;
   brandPlateTop: string;
   brandPlateBottom: string;
+  // ---- The 2.0 spotlight stage (spec §8). Most of these sit on the player
+  // photo, which looks the same in either theme, so they are shared.
+  /** The streak chip: its flame, wash, outline and count. Brand, never a
+   *  verdict colour — it only ever means the streak. */
+  heat: string;
+  heatBg: string;
+  heatLine: string;
+  heatText: string;
+  /** Translucent glass for controls over the photo (the close button). */
+  glass: string;
+  glassLine: string;
+  /** The ink of the veil over a no-photo stage's team-colour bands. Its
+   *  strength is `stage.veil`, raised by `stageVeil` where a band is light. */
+  veilInk: string;
+  /** Answer tiles on the stage's ground. */
+  tile: string;
+  tileLine: string;
+  /** Secondary text on the stage: "Level n", slot labels. */
+  onStageMuted: string;
+  /** The stage's main button ("Got it — next") and its label. */
+  ctaBg: string;
+  ctaText: string;
+  /** Accent as a line: the active slot's outline. `accent` is too dark to
+   *  read as a thin line on the dark ground, so dark uses `brandSoft`. */
+  accentLine: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -57,6 +82,15 @@ const sharedRoles = {
   brandLift: '#6d76e6',
   brandPlateTop: '#4a52c4',
   brandPlateBottom: '#252a6b',
+  // The 2.0 stage's photo-side roles, shared because the photo does not
+  // change with the theme.
+  heat: '#ffaa3c',
+  heatBg: 'rgba(255,170,60,0.2)',
+  heatLine: 'rgba(255,170,60,0.5)',
+  heatText: '#ffc27a',
+  glass: 'rgba(15,17,23,0.42)',
+  glassLine: 'rgba(255,255,255,0.18)',
+  veilInk: '#0c0d12',
 } as const;
 
 // The ramp sits higher than it did: the mark's trail squares, at 30% and 55%
@@ -78,6 +112,12 @@ const darkRoles = {
   error: '#f05653',
   errorBorderDim: '#5c3230',
   errorTextDim: '#a15a58',
+  tile: 'rgba(255,255,255,0.08)',
+  tileLine: 'rgba(255,255,255,0.16)',
+  onStageMuted: 'rgba(255,255,255,0.62)',
+  ctaBg: '#f3f5f7',
+  ctaText: '#12141a',
+  accentLine: sharedRoles.brandSoft,
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -101,6 +141,12 @@ const lightRoles = {
   error: '#c23934',
   errorBorderDim: '#e3b0ad',
   errorTextDim: '#b3625d',
+  tile: '#ffffff',
+  tileLine: '#dcdfe4',
+  onStageMuted: '#686c73',
+  ctaBg: '#14161a',
+  ctaText: '#ffffff',
+  accentLine: sharedRoles.accent,
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -134,6 +180,52 @@ export const gradients = {
 } as const;
 
 export type GradientName = keyof typeof gradients;
+
+/** A vertical gradient for `expo-linear-gradient`: `colors[i]` sits at
+ *  `locations[i]`, a fraction of the painted view's height from the top. */
+export interface StageGradient {
+  colors: readonly [string, string, ...string[]];
+  locations: readonly [number, number, ...number[]];
+}
+
+// The question screen's stage (spec §2.1), painted over the whole window —
+// so locations are fractions of the window, not of the photo — above the
+// photo and under every control. A near-black scrim under the status and top
+// bars, clear through the face, then a fall into the ground the answers sit
+// on. The scrim is the same ink in both themes because it always sits on a
+// photo; the ground ends in the palette's own background. Per theme, so not
+// in `gradients`: read it as `stageGradients[useThemeName()]` at render,
+// never captured at module scope.
+export const stageGradients: Record<ThemeName, StageGradient> = {
+  dark: {
+    colors: [
+      'rgba(10,11,15,0.6)',
+      'rgba(10,11,15,0)',
+      'rgba(18,20,26,0)',
+      'rgba(18,20,26,0.88)',
+      '#12141a',
+    ],
+    locations: [0, 0.2, 0.34, 0.62, 0.74],
+  },
+  light: {
+    colors: [
+      'rgba(10,11,15,0.55)',
+      'rgba(10,11,15,0)',
+      'rgba(247,247,249,0)',
+      'rgba(247,247,249,0.94)',
+      '#f7f7f9',
+    ],
+    locations: [0, 0.2, 0.3, 0.48, 0.56],
+  },
+};
+
+// The no-photo stage (spec §2.6): the squad's marker bands under a wash of
+// `veilInk` at this opacity, per theme. A floor, not the final value —
+// `stageVeil` in lib/stageView.ts raises it until white text holds 3:1 on the
+// lightest band (Real Madrid's white still has to carry the top bar).
+export const stage = {
+  veil: { dark: 0.42, light: 0.12 },
+} as const;
 
 export const typography = {
   heroNumber: { fontFamily: 'IBMPlexMono-Bold', fontWeight: '700' as const, fontSize: 96 },
