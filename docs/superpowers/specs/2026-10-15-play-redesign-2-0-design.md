@@ -444,14 +444,16 @@ Each change ships in the store build that contains it. The About text and the pu
    - **About text:** "a result was shared, with the level and score" becomes "a result was
      shared, with the level, the score and whether it was shared as a picture or as text".
 
-4. **Store answers.**
+4. **What is stored on the device.** About's "What is stored on your device" list counts what `stores/progress.ts` persists. #113 adds whether vibration is on (seven things); #115 adds the Study view choice (eight). Each change goes into the About text with its PR and into `privacy.html` with the build.
+
+5. **Store answers.**
    - The new property sits in the category already declared for TelemetryDeck (App Privacy
      "Product Interaction", Data safety "App interactions"). Re-confirm; no change is
      expected.
    - The photo traffic is the Wikimedia disclosure #55 adds. Same hosts, more requests: no
      new category.
 
-Haptics, the streak, Hide names, the Vibration switch and `studyView` stay on the device.
+Haptics, the streak, Hide names, the Vibration switch and `studyView` never leave the device; whatever part of them is stored is counted in item 4.
 
 ## 11. Code map
 

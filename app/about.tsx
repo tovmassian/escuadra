@@ -13,6 +13,8 @@ export default function About() {
   const colors = useThemeColors();
   const telemetryEnabled = useProgress((s) => s.telemetryEnabled);
   const setTelemetryEnabled = useProgress((s) => s.setTelemetryEnabled);
+  const haptics = useProgress((s) => s.haptics);
+  const setHaptics = useProgress((s) => s.setHaptics);
 
   const version = Constants.expoConfig?.version ?? '—';
 
@@ -117,6 +119,22 @@ export default function About() {
         </View>
 
         <View style={[styles.section, styles.settingRow]}>
+          <Text style={styles.settingLabel} nativeID="haptics-label">
+            Vibration
+          </Text>
+          <Switch
+            testID="haptics-toggle"
+            accessibilityLabelledBy="haptics-label"
+            accessibilityLabel="Vibration"
+            value={haptics}
+            onValueChange={setHaptics}
+            trackColor={{ false: colors.surfaceRaised, true: colors.accent }}
+            thumbColor={colors.thumbBg}
+            ios_backgroundColor={colors.surfaceRaised}
+          />
+        </View>
+
+        <View style={[styles.section, styles.settingRow]}>
           <Text style={styles.settingLabel} nativeID="telemetry-label">
             Share anonymous usage statistics
           </Text>
@@ -192,10 +210,10 @@ export default function About() {
 
           <Text style={styles.subHeading}>What is stored on your device</Text>
           <Text style={styles.paragraph}>
-            Escuadra saves six things locally, on your device only: your best score for each team
+            Escuadra saves seven things locally, on your device only: your best score for each team
             and difficulty level; which levels you have completed; the last team and level you
-            played; your light or dark appearance preference; your choice about usage statistics;
-            and the random identifier those statistics use.
+            played; your light or dark appearance preference; whether vibration is on; your choice
+            about usage statistics; and the random identifier those statistics use.
           </Text>
           <Text style={styles.paragraph}>
             This lives in the app&apos;s own private storage. Apart from that identifier, which is

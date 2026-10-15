@@ -31,11 +31,15 @@ interface ProgressState {
   /** The About screen's opt-out. Off means `lib/telemetry.ts` sends nothing.
    *  Survives `reset()` for the same reason as `themePreference`. */
   telemetryEnabled: boolean;
+  /** The About screen's Vibration switch (spec §7). Off means `lib/haptics.ts`
+   *  plays nothing. On by default; survives `reset()` like the other settings. */
+  haptics: boolean;
   recordScore: (squadId: string, level: number, score: number) => void;
   setLastPlayed: (squadId: string, level: number) => void;
   setThemePreference: (preference: ThemePreference) => void;
   setInstallId: (installId: string) => void;
   setTelemetryEnabled: (enabled: boolean) => void;
+  setHaptics: (enabled: boolean) => void;
   reset: () => void;
 }
 
@@ -47,6 +51,7 @@ export const useProgress = create<ProgressState>()(
       themePreference: 'system',
       installId: null,
       telemetryEnabled: true,
+      haptics: true,
       recordScore: (squadId, level, score) =>
         set((s) => {
           const key = scoreKey(squadId, level);
@@ -62,6 +67,7 @@ export const useProgress = create<ProgressState>()(
       setThemePreference: (themePreference) => set({ themePreference }),
       setInstallId: (installId) => set((s) => (s.installId === null ? { installId } : s)),
       setTelemetryEnabled: (telemetryEnabled) => set({ telemetryEnabled }),
+      setHaptics: (haptics) => set({ haptics }),
       reset: () => set({ bestScores: {}, lastPlayed: null }),
     }),
     {
