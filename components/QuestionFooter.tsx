@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
   FadeIn,
+  ReduceMotion,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
@@ -43,13 +44,21 @@ interface QuestionFooterProps {
 export function QuestionFooter({ mode, compact, onNext, credit }: QuestionFooterProps) {
   const colors = useThemeColors();
   const reduced = useReducedMotion();
-  const height = compact ? sizes.cta.compact : sizes.cta.normal;
+  // The least the button is tall; it grows with the text at large sizes.
+  const minHeight = compact ? sizes.cta.compact : sizes.cta.normal;
   const styles = StyleSheet.create({
     footer: { paddingHorizontal: spacing.md, paddingTop: spacing.sm },
-    hint: { height, alignItems: 'center', justifyContent: 'center' },
+    hint: {
+      minHeight,
+      paddingVertical: spacing.xs,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     hintText: { ...typography.secondary, color: colors.textMuted },
     cta: {
-      height,
+      minHeight,
+      paddingVertical: spacing.xs,
+      paddingHorizontal: spacing.md,
       borderRadius: radii.pill,
       alignItems: 'center',
       justifyContent: 'center',
@@ -85,7 +94,7 @@ export function QuestionFooter({ mode, compact, onNext, credit }: QuestionFooter
           </Pressable>
         </Animated.View>
       ) : null}
-      {mode === 'autoNext' ? <NextBar height={height} onNext={onNext} /> : null}
+      {mode === 'autoNext' ? <NextBar minHeight={minHeight} onNext={onNext} /> : null}
       <PhotoCreditLine credit={credit} />
     </View>
   );
@@ -93,16 +102,25 @@ export function QuestionFooter({ mode, compact, onNext, credit }: QuestionFooter
 
 // Fills over `durations.autoAdvance`. The screen moves on when it is full;
 // a tap moves on now.
-function NextBar({ height, onNext }: { height: number; onNext: () => void }) {
+function NextBar({ minHeight, onNext }: { minHeight: number; onNext: () => void }) {
   const colors = useThemeColors();
   const progress = useSharedValue(0);
   useEffect(() => {
-    progress.value = withTiming(1, { duration: durations.autoAdvance, easing: Easing.linear });
+    // A timer cue, not decorative motion: it shows how long is left before the
+    // round moves on, so it runs under Reduce Motion too. Left to Reanimated's
+    // default (`ReduceMotion.System`), it would jump to full at once.
+    progress.value = withTiming(1, {
+      duration: durations.autoAdvance,
+      easing: Easing.linear,
+      reduceMotion: ReduceMotion.Never,
+    });
   }, [progress]);
   const fill = useAnimatedStyle(() => ({ width: `${progress.value * 100}%` as `${number}%` }));
   const styles = StyleSheet.create({
     bar: {
-      height,
+      minHeight,
+      paddingVertical: spacing.xs,
+      paddingHorizontal: spacing.md,
       borderRadius: radii.pill,
       borderWidth: borderWidths.hairline,
       borderColor: colors.nextLine,

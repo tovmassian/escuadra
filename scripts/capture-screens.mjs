@@ -53,9 +53,9 @@ const SWAP_MS = 400;
 // Between an answer and tapping its "next" control. Well inside the question
 // screen's 1,200 ms auto-advance, so the tap always lands on this question.
 const TAP_TO_NEXT_MS = 250;
-// Player photos load from Wikimedia, and the hero shows the number card until
-// one has: a shot waits for every image to finish (or this long), then for
-// the photo's fade-in, so it captures the photo rather than a race.
+// Player photos load from Wikimedia, and the stage shows the team's colours
+// until one has: a shot waits for every image to finish (or this long), then
+// for the photo's fade-in, so it captures the photo rather than a race.
 const IMAGE_TIMEOUT_MS = 15_000;
 
 // ---------------------------------------------------------------------------

@@ -99,8 +99,6 @@ export interface Palette {
   stageErrorBg: string;
   stageErrorText: string;
   stageAnswerBg: string;
-  /** The hairline around a flag on the stage. */
-  flagRing: string;
   /** The auto-next bar: outline, fill, label and the progress inside it. */
   nextLine: string;
   nextBg: string;
@@ -178,7 +176,6 @@ const darkRoles = {
   stageErrorBg: 'rgba(240,86,83,0.14)',
   stageErrorText: '#e9827f',
   stageAnswerBg: 'rgba(18,20,26,0.6)',
-  flagRing: 'rgba(255,255,255,0.14)',
   nextLine: 'rgba(97,189,103,0.5)',
   nextBg: 'rgba(97,189,103,0.12)',
   nextText: '#9be0a0',
@@ -224,7 +221,6 @@ const lightRoles = {
   stageErrorBg: 'rgba(194,57,52,0.08)',
   stageErrorText: '#b0413c',
   stageAnswerBg: '#ffffff',
-  flagRing: 'rgba(20,22,26,0.14)',
   nextLine: 'rgba(47,143,62,0.45)',
   nextBg: 'rgba(47,143,62,0.08)',
   nextText: '#24702f',
@@ -474,6 +470,13 @@ export const typography = {
   tileSubLabel: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 10.5 },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
+// How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
+// The question screen's display type (the shirt number and the prompt) is
+// already large, and at the largest accessibility sizes it would push the
+// answers off the screen. It keeps growing with the setting, up to this cap;
+// everything else on the screen scales freely and the screen scrolls.
+export const fontScaleCap = { display: 1.2 } as const;
+
 // 1.5px is the option-card default; 2px marks the emphasised "correct,
 // unpicked" card in the incorrect-reveal state.
 export const borderWidths = {
@@ -489,7 +492,6 @@ export const opacity = {
   dimmed: 0.65, // VerdictGlyph's incorrect variant (no screen renders one today)
   faded: 0.4, // the photo-loading shimmer under Reduce Motion (SpotlightStage)
   settled: 0.7, // press feedback: Button, DifficultyRow, GlassCloseButton, QuestionFooter
-  loadingBlank: 0.25, // unused since the Spotlight screen (it was the old option cards' mid-transition blank)
   tileAfterCorrect: 0.5, // other tiles once the pick was right (spec §6)
   tileAfterMiss: 0.35, // other tiles after a miss
 } as const;

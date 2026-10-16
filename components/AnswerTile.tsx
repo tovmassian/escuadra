@@ -39,7 +39,8 @@ interface AnswerTileProps {
   /** Whether this part's pick was right. After a right pick the other tiles
    *  fade to 50 %, after a miss to 35 % (spec §6). */
   pickedRight: boolean;
-  height: number;
+  /** The least the tile is tall. It grows with the text at large sizes. */
+  minHeight: number;
   onPress: () => void;
 }
 
@@ -100,7 +101,7 @@ export function AnswerTile({
   flag,
   verdict,
   pickedRight,
-  height,
+  minHeight,
   onPress,
 }: AnswerTileProps) {
   const colors = useThemeColors();
@@ -180,7 +181,9 @@ export function AnswerTile({
   const styles = StyleSheet.create({
     cell: { flex: 1 },
     tile: {
-      height,
+      // Fills its row when a neighbour grows, so the pair stays level.
+      flex: 1,
+      minHeight,
       borderRadius: radii.lg,
       borderWidth: tone.width,
       borderColor: tone.line,
@@ -196,7 +199,7 @@ export function AnswerTile({
     code: { ...typography.tileCode, color: tone.text },
     sub: { ...typography.tileSubLabel, color: colors.tileSub },
     textBlock: { flex: 1, minWidth: 0 },
-    tag: { ...typography.captionEyebrow, color: colors.success },
+    tag: { ...typography.captionEyebrow, color: colors.stageSuccessText },
     labelRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs },
     label: {
       ...(strong ? typography.bodyStrong : typography.body),

@@ -8,7 +8,14 @@ import { useThemeColors } from '@/theme/useTheme';
 // - current: white until answered, then its verdict;
 // - future: a faint track.
 // Invariant 9: it counts questions, not parts.
-export function RoundProgress({ outcomes }: { outcomes: DotOutcome[] }) {
+export function RoundProgress({
+  outcomes,
+  currentIndex,
+}: {
+  outcomes: DotOutcome[];
+  /** The question being asked, from 0, for the spoken label. */
+  currentIndex: number;
+}) {
   const colors = useThemeColors();
   const fill: Record<DotOutcome, string> = {
     correct: colors.photoSuccess,
@@ -20,8 +27,9 @@ export function RoundProgress({ outcomes }: { outcomes: DotOutcome[] }) {
   return (
     <View
       style={styles.row}
+      accessible
       accessibilityRole="progressbar"
-      accessibilityLabel="Round progress"
+      accessibilityLabel={`Question ${currentIndex + 1} of ${outcomes.length}`}
       accessibilityValue={{ min: 0, max: outcomes.length, now: answered }}
     >
       {outcomes.map((outcome, i) => (

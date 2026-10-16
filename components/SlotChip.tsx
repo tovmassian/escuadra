@@ -74,11 +74,12 @@ export function SlotChip({ slot }: { slot: Slot }) {
   const settled = slot.state === 'correct' || slot.state === 'wrong';
   const styles = StyleSheet.create({
     chip: {
-      height: sizes.slotChipHeight,
+      minHeight: sizes.slotChipHeight,
       flexDirection: 'row',
       alignItems: 'center',
       gap: spacing.xs,
       paddingHorizontal: spacing.sm,
+      paddingVertical: spacing.xxs,
       borderRadius: radii.pill,
       borderWidth: borderWidths.thick,
       borderStyle: dashed ? 'dashed' : 'solid',

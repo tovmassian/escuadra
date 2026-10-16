@@ -228,6 +228,40 @@ describe('spotlight screen text contrast', () => {
       }
     });
   });
+
+  // `contrastRatio` measures opaque #rrggbb only, so a translucent role is
+  // blended over what it sits on first, in sRGB, as the screen paints it.
+  function blend(role: string, over: string): string {
+    const rgba = /^rgba\((\d+),(\d+),(\d+),([\d.]+)\)$/.exec(role.replace(/\s/g, ''));
+    if (!rgba) return role;
+    const [r = 0, g = 0, b = 0, alpha = 1] = rgba.slice(1).map(Number);
+    const mixed = [r, g, b].map((v, i) =>
+      Math.round(v * alpha + parseInt(over.slice(1 + i * 2, 3 + i * 2), 16) * (1 - alpha)),
+    );
+    return `#${mixed.map((v) => v.toString(16).padStart(2, '0')).join('')}`;
+  }
+
+  // The checks above see only the background. These text roles sit on a wash of
+  // their own, which moves the ground under them.
+  it('reaches 4.5:1 on the wash each text role sits on, in both themes', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      const wash = (role: 'stageAnswerBg' | 'chipBg' | 'nextBg') => blend(p[role], p.background);
+      const pairs = [
+        ['stageSuccessText', 'stageAnswerBg'],
+        ['chipPendingText', 'chipBg'],
+        ['onStageMuted', 'chipBg'],
+        ['nextText', 'nextBg'],
+      ] as const;
+      for (const [text, ground] of pairs) {
+        const under = wash(ground);
+        expect(
+          contrastRatio(blend(p[text], under), under),
+          `${name}.${text} on ${ground}`,
+        ).toBeGreaterThanOrEqual(4.5);
+      }
+    });
+  });
 });
 
 describe('spotlight motion', () => {

@@ -32,6 +32,7 @@ import { selectScore, useSession } from '@/stores/session';
 import {
   borderWidths,
   durations,
+  fontScaleCap,
   radii,
   sizes,
   spacing,
@@ -279,7 +280,10 @@ export default function Question() {
         pointerEvents="none"
       />
       <View style={styles.column}>
-        <RoundProgress outcomes={progressOutcomes(session.results, session.currentIndex)} />
+        <RoundProgress
+          outcomes={progressOutcomes(session.results, session.currentIndex)}
+          currentIndex={session.currentIndex}
+        />
         <View style={styles.topBar}>
           <GlassCloseButton label="Leave the round" onPress={exit} />
           <View style={styles.team}>
@@ -307,6 +311,7 @@ export default function Question() {
           style={styles.scroll}
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
+          alwaysBounceVertical={false}
         >
           {/* Not keyed: the backing stays put while the hero changes. */}
           <LinearGradient
@@ -330,6 +335,7 @@ export default function Question() {
               <View style={styles.numberWrap}>
                 <Text
                   style={styles.number}
+                  maxFontSizeMultiplier={fontScaleCap.display}
                   accessibilityLabel={`Shirt number ${question.memberNo}`}
                 >
                   {question.memberNo}
@@ -351,6 +357,7 @@ export default function Question() {
                   compact ? typography.promptCompact : typography.prompt,
                   { color: promptColor },
                 ]}
+                maxFontSizeMultiplier={fontScaleCap.display}
                 accessibilityRole="header"
                 accessibilityLiveRegion="polite"
               >
@@ -367,7 +374,19 @@ export default function Question() {
               stagger={
                 session.currentPartIndex === 0 ? durations.tileStagger : durations.partStagger
               }
-              onAnswer={(pickedIndex) => session.answerPart(pickedIndex)}
+              onAnswer={(pickedIndex) => {
+                // `answerPart` scores the part and moves to the next in one
+                // update, so this grid unmounts before any tile sees its
+                // verdict. A right part that is not the last gets its haptic
+                // here; the last part's tile plays its own.
+                if (
+                  pickedIndex === part.correctIndex &&
+                  session.currentPartIndex < question.parts.length - 1
+                ) {
+                  feedback('correct');
+                }
+                session.answerPart(pickedIndex);
+              }}
             />
 
             <QuestionFooter

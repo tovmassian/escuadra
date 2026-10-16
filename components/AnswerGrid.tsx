@@ -1,3 +1,4 @@
+import { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, { FadeOut, useReducedMotion } from 'react-native-reanimated';
 import { AnswerTile } from './AnswerTile';
@@ -39,6 +40,17 @@ export function AnswerGrid({
   onAnswer,
 }: AnswerGridProps) {
   const reduced = useReducedMotion();
+  // The grid whose tiles may be pressed. The next part's tiles sit in the same
+  // spot as the ones just answered, so a double tap or a bounce would answer
+  // them as well. Presses are ignored until the old tiles have faded
+  // (`durations.partOut`); the tiles do not look disabled.
+  const readyGrid = useRef<string | null>(null);
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      readyGrid.current = gridKey;
+    }, durations.partOut);
+    return () => clearTimeout(timer);
+  }, [gridKey]);
   const tiles: TileModel[] =
     part.kind === 'position'
       ? part.options.map((option, index) => ({
@@ -81,8 +93,10 @@ export function AnswerGrid({
                 flag={tile.flag}
                 verdict={tileVerdict(part, answeredIndex, tile.index)}
                 pickedRight={pickedRight}
-                height={layout.tileHeight}
-                onPress={() => onAnswer(tile.index)}
+                minHeight={layout.tileHeight}
+                onPress={() => {
+                  if (readyGrid.current === gridKey) onAnswer(tile.index);
+                }}
               />
             </Animated.View>
           ))}

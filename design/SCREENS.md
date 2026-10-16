@@ -73,9 +73,10 @@ deliberate constraint is distinguishable from an accident.
    text sizes, so no option is ever out of reach.
 7. **On levels 2 and 3, asking stops once a part is answered wrong.** The
    question is already lost; continuing to ask wastes the player's time.
-8. **Per-part verdicts show the real result.** A part must never show a green
-   check it did not earn — an earlier version did, and it made the feedback
-   untrustworthy, which is fatal for a study tool.
+8. **Per-part verdicts show the real result.** A part must never show a right
+   verdict it did not earn: a green tile, a green slot or a check. An earlier
+   version did, and it made the feedback untrustworthy, which is fatal for a
+   study tool.
 9. **No partial credit.** A level-2 or level-3 question is one scored unit,
    correct only when every part is right. The progress bar counts questions,
    not parts, so all three levels read 1..10.
