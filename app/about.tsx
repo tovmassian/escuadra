@@ -183,6 +183,13 @@ export default function About() {
             policies, and Escuadra cannot see what you do there.
           </Text>
 
+          <Text style={styles.subHeading}>Sharing</Text>
+          <Text style={styles.paragraph}>
+            Sharing a result creates a picture or a short text on your device and passes it to the
+            app you pick in your phone&apos;s share menu. Escuadra does not see, send or keep what
+            you share.
+          </Text>
+
           <Text style={styles.subHeading}>Anonymous usage statistics</Text>
           <Text style={styles.paragraph}>
             Escuadra sends anonymous usage statistics to TelemetryDeck, an analytics service, unless

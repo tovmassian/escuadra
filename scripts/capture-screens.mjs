@@ -50,6 +50,9 @@ const REVEAL_MS = 500;
 // After a tap that only swaps what is already on screen, like the team
 // picker's Clubs/National Teams segment.
 const SWAP_MS = 400;
+// After opening the share sheet: its slide is 240 ms, and the card in it
+// needs its fonts. `SETTLE_MS` would be a long wait for a single modal.
+const SHEET_MS = 600;
 // Between an answer and tapping its "next" control. Well inside the question
 // screen's 1,200 ms auto-advance, so the tap always lands on this question.
 const TAP_TO_NEXT_MS = 250;
@@ -121,6 +124,13 @@ async function openCapture(browser, { colorScheme, suffix }) {
     async tap(text, { exact = true, wait = REVEAL_MS } = {}) {
       capture.assertLive();
       await page.getByText(text, { exact }).click();
+      await page.waitForTimeout(wait);
+    },
+
+    /** Tap something by its `testID`, for controls that have no text of their own to find. */
+    async tapId(testId, { wait = REVEAL_MS } = {}) {
+      capture.assertLive();
+      await page.getByTestId(testId).click();
       await page.waitForTimeout(wait);
     },
 
@@ -260,8 +270,12 @@ const ROUND_FIRST_OPTION = [
 // so each gets a capture: a failed round leads with the missed player cards, a
 // cleared round promotes `Play level 2` and keeps the cards, and a flawless
 // round shows the ten player circles instead and celebrates.
+//
+// `then` runs on the same page once the screen is shot, so a state reached from
+// the results screen is captured without playing the round a second time. The
+// failed round is the one that opens the share sheet.
 const RESULTS_SHOTS = [
-  { file: '09-results', answers: ROUND_FIRST_OPTION },
+  { file: '09-results', answers: ROUND_FIRST_OPTION, then: captureShareSheet },
   { file: '09-results-passed', answers: ROUND_ONE_MISS },
   { file: '09-results-flawless', answers: ROUND_ALL_CORRECT },
 ];
@@ -273,7 +287,7 @@ const RESULTS_SHOTS = [
  * a single part per question, so each question is one answer tap plus its
  * next control.
  */
-async function captureResults(capture, { file, answers }) {
+async function captureResults(capture, { file, answers, then }) {
   const path = `/play/esp/1?seed=${SEED}`;
   await capture.open(path);
 
@@ -293,6 +307,19 @@ async function captureResults(capture, { file, answers }) {
   // The long pole is the round strip, the strike and the card rise.
   await capture.page.waitForTimeout(SETTLE_MS);
   await capture.shoot(file);
+  await then?.(capture);
+}
+
+/**
+ * The share sheet over the results screen, once on its Image tab (the default)
+ * and once on Text. The picture's squares and the message's bubble both come
+ * from the round just shot.
+ */
+async function captureShareSheet(capture) {
+  await capture.tapId('results-share', { wait: SHEET_MS });
+  await capture.shoot('09-results-share');
+  await capture.tapId('share-format-text', { wait: SWAP_MS });
+  await capture.shoot('09-results-share-text');
 }
 
 // ---------------------------------------------------------------------------

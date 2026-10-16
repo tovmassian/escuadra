@@ -168,7 +168,9 @@ update this file in the same PR rather than leave a stale rule behind.
    Colour specifically comes from the **active palette**, via
    `useThemeColors()` — never a module-scope capture. `StyleSheet.create` at
    module scope is evaluated once at import, so a component built that way
-   looks correct and silently ignores the theme. Both palettes in
+   looks correct and silently ignores the theme. The one exception is
+   `ShareCard`, the share picture, which draws in `palettes.dark` on purpose: the
+   picture looks the same whichever theme it is shared from. Both palettes in
    `theme/tokens.ts` implement the same `Palette` interface: add a role to
    both or to neither.
 6. **The product is called Escuadra.** "Squad Trainer", "Squad Game", "Squad
