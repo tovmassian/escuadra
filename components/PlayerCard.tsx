@@ -19,9 +19,12 @@ interface PlayerCardProps {
   marker: TeamMarker;
 }
 
-// A player as a card (spec §5.2), on Results and Study: the photo (or the
-// team's bands under the veil), the shirt number top left, a gradient, and
-// the name with one line beneath. One component, so the two screens match.
+// A player as a card (spec §5.2), on Results and Study: the team's bands under
+// the veil, the photo over them, the shirt number top left, a gradient, and the
+// name with one line beneath. The bands are always drawn, so a photo that is
+// loading, failed or offline (spec §13) leaves a dark card the white number
+// and `cardLine` hold on, never the bare surface. One component, so the two
+// screens match.
 export function PlayerCard({
   width,
   height,
@@ -72,6 +75,12 @@ export function PlayerCard({
       accessible
       accessibilityLabel={`${shirtNumber}, ${name}${line ? `. ${line}` : ''}`}
     >
+      <View style={styles.bands}>
+        {bands.map((band, i) => (
+          <View key={i} style={{ flex: band.weight, backgroundColor: band.color }} />
+        ))}
+      </View>
+      <View style={styles.veil} />
       {photo ? (
         <Image
           key={photo.url}
@@ -83,16 +92,7 @@ export function PlayerCard({
           transition={durations.reveal}
           cachePolicy="disk"
         />
-      ) : (
-        <>
-          <View style={styles.bands}>
-            {bands.map((band, i) => (
-              <View key={i} style={{ flex: band.weight, backgroundColor: band.color }} />
-            ))}
-          </View>
-          <View style={styles.veil} />
-        </>
-      )}
+      ) : null}
       <LinearGradient
         colors={cardGradient.colors}
         locations={cardGradient.locations}
