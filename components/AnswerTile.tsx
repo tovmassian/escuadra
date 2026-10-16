@@ -256,7 +256,10 @@ export function AnswerTile({
             ) : null}
             <View style={styles.labelRow}>
               {flag ? <Flag code={flag} size="marker" label={label} /> : null}
-              <Text style={styles.label} numberOfLines={2}>
+              {/* One line under the ANSWER tag: tag and two lines overflow a
+                  48-54 pt tile. The NAME (or POS, CLUB, NAT) slot above
+                  shows the right answer in full after a miss. */}
+              <Text style={styles.label} numberOfLines={verdict === 'correct-unpicked' ? 1 : 2}>
                 {label}
               </Text>
             </View>
