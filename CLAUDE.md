@@ -107,7 +107,7 @@ update this file in the same PR rather than leave a stale rule behind.
    file name or caption in visible text or a label, as they name the player.
    The credit sits under the question's action button for as long as the
    question is on screen, never as part of the answer reveal. On Results and
-   Study the credits sit under "Photo credits · N"; Study's name each photo by
+   Study the credits sit under "Photo credits · N"; Study names each photo by
    shirt number only, so Hide names is not spoiled. Each photo load
    reaches Wikimedia, so photos ship in a store build with the privacy
    disclosures (guardrail 4), never over the air:

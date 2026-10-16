@@ -99,11 +99,17 @@ Web can't show any of this. It runs on simulators or devices.
   - the score sits on the "/10" baseline and the corner sits where the web capture puts it;
   - retry and "Play level n+1" do not flash the next round's empty state (red strip, grey corner) before Results unmounts. `startRound` resets the session while Results is still mounted; if it shows, snapshot `session.results` once on mount rather than reordering the calls.
 - **Study:**
-  - A fast scroll through a 26-player squad never shows blank cards with `windowSize` 2. Photos load as cards mount. If gaps show, use 3; that is about 4 more photos at open.
-  - With Hide names on, VoiceOver and TalkBack never speak a name, and a reveal plays the light haptic.
+  - A fast scroll through a 26-player squad, in grid and in list, never shows blank cards with `windowSize` 2. Photos load as cards mount.
+    - If gaps show, add `getItemLayout` first (the rows are fixed: 64 pt in the list, and 218 + 10 in the grid; check how `numColumns` indexes rows).
+    - Only then try 3, which comes close to mounting a whole squad.
+  - With Hide names on, VoiceOver and TalkBack never speak a name. A reveal plays the light haptic and announces the name.
+  - TalkBack may say "double tap to activate" on a card whose name is shown; check that it reads acceptably.
   - The dashed reveal pill draws on Android.
   - Grid or list survives an app restart.
-  - At large text, names and lines still read inside the fixed 218 pt cards.
+  - At large text, names and lines still read inside the fixed 218 pt cards and 64 pt rows.
+  - A card with no shirt number draws "—" in Archivo.
+  - Android: the cards' fade-in plays inside `FlatList` cells, and the credits list scrolls inside the Study list (`nestedScrollEnabled`).
+  - Memory in list view on a 35-player squad: the 46 pt avatars decode the 960 px thumbnails.
 - **Native motion:**
   - the rise and slide Keyframes (web only fades);
   - the framed-photo fade;
@@ -135,10 +141,16 @@ Web can't show any of this. It runs on simulators or devices.
 - **Hide names is a switch whose spoken name stays "Hide names".** Its visible text flips to "Show names".
 - **A name fades in only on a reveal,** not every time a card mounts.
 - **Reduce Motion** follows the rest of the app. Reanimated's `ReduceMotion.System` skips the fades too.
+- **Board deviations:**
+  - Hide names has no eye icon (no icon library).
+  - The flags are 18×12 (`sizes.flagInline`), not 16×11.
+  - A reveal swaps the pill for the name, which then fades in; it is not a true crossfade.
+- **`recyclingKey` is the photo URL, not the player id** that spec §5.1 names. They are equivalent here, since every player has one photo and `FlatList` doesn't recycle cells.
+- **A filter change scrolls back to the top. A reveal is announced to screen readers,** since the card's label changes silently.
 
 ## Notes for #116 (release)
 
-- **`privacy.html`** on `gh-pages` must match the About text word for word. It has changed in several PRs: the Archivo credit, photo loading, the stored-data list, Vibration, and #114 part 2's new "Sharing" section and telemetry sentence. Publish it when the first build containing that text reaches users.
+- **`privacy.html`** on `gh-pages` must match the About text word for word. It has changed in several PRs: the Archivo credit, photo loading, the stored-data list, Vibration, #114 part 2's new "Sharing" section and telemetry sentence, and #115's Study clause in "Player photos" ("…and a squad's photos on the Study screen as you scroll…which players are in your round or squad") with the stored list at eight things. Publish it when the first build containing that text reaches users.
 - **Store declarations.** Re-confirm App Privacy and Data safety (#55). #114 part 2 added the `format` property to `result.shared`, in the category already declared (App Privacy "Product Interaction", Data safety "App interactions"). No change is expected, but re-confirm it.
 - **Store assets.** Regenerate `npm run shots:store`, `shots:play` and `gen:play-assets` for the 2.0 listing. Set CLAUDE.md "Current state" to 2.0.
 - **The release itself.**
@@ -160,6 +172,8 @@ None of these blocks 2.0.
 - **Contrast:**
   - Dark `textMuted` is 4.30:1 on `surfaceRaised`; no screen puts it there today.
   - Small "cleared" text in `success` on the picker and difficulty rows is 3.83:1 in light: [#122](https://github.com/tovmassian/escuadra/issues/122).
+- **Docs for #116's consistency pass:** CLAUDE.md's data model says a nation's band geometry is "kept for the in-round banner only". Results' and Study's cards, the list avatars and the share picture now draw it too.
+- **Study's Hide names switch:** the visible "Show names" and the constant spoken "Hide names" differ, which trips Voice Control's label-in-name rule. It was a deliberate switch-pattern trade-off.
 - **Player cards (Results and Study):**
   - The white shirt number sits on the photo with only the top of `cardGradient` (0.35, fading out) behind it. Over a white photo top it falls to about 1.2:1 at its lowest point.
   - Real photos are usually darker there, but a text shadow or a small backing, like the stage's `heroBacking`, would make it safe. That is a design call for the owner.
@@ -182,4 +196,4 @@ None of these blocks 2.0.
 
 - `gh issue develop` links a branch to its issue, and merging that branch's PR **closes the issue**. #113 had to be reopened after part 1. Later parts used unlinked branches with "Part of #N" or "Closes #N" in the PR body.
 - Each PR description has a "Decisions to check" section: #118, #119, #120 and #121 hold the full rationale for each merged step.
-- Reviews ran per task, and then once over the whole branch: on Opus for #111–#113, on Sonnet for #114 because Opus hit its weekly limit (it resets 2026-10-19). **A deeper Opus review of #114 is owed before the 2.0 store build.** The findings and their fixes are in each PR's commits (`fix(…): final-review fixes …`).
+- Reviews ran per task, and then once over the whole branch: on Opus for #111–#113, on Sonnet for #114 and #115 because Opus hit its weekly limit (it resets 2026-10-19). **A deeper Opus review of #114 and #115 is owed before the 2.0 store build.** The findings and their fixes are in each PR's commits (`fix(…): final-review fixes …`).
