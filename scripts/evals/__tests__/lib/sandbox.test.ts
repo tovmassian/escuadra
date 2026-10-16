@@ -4,7 +4,12 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { beforeAll, describe, expect, it } from 'vitest';
-import { buildSandbox, realGitBinary, type SandboxSetup } from '../../lib/sandbox.ts';
+import {
+  buildSandbox,
+  realGitBinary,
+  withoutGitVars,
+  type SandboxSetup,
+} from '../../lib/sandbox.ts';
 
 const GH_DIR = fileURLToPath(new URL('../../sandbox/', import.meta.url));
 
@@ -13,6 +18,7 @@ function git(cwd: string, ...args: string[]): string {
   return execFileSync('git', [...identity, '-c', 'commit.gpgsign=false', ...args], {
     cwd,
     encoding: 'utf8',
+    env: withoutGitVars(process.env),
   }).trim();
 }
 
@@ -149,7 +155,7 @@ describe('buildSandbox', () => {
     const title = execFileSync(
       join(box, 'bin', 'gh'),
       ['issue', 'view', '9001', '--json', 'title', '--jq', '.title'],
-      { cwd: work, encoding: 'utf8' },
+      { cwd: work, encoding: 'utf8', env: withoutGitVars(process.env) },
     );
     expect(title).toBe('fix: a synthetic bug\n');
     expect(readFileSync(join(box, 'gh.log'), 'utf8')).toContain('READ gh issue view 9001');
@@ -160,7 +166,48 @@ describe('buildSandbox', () => {
     const heads = execFileSync(wrapper, ['ls-remote', '--heads', 'origin'], {
       cwd: work,
       encoding: 'utf8',
+      env: withoutGitVars(process.env),
     });
     expect(heads).toContain('refs/heads/fix/9008-x');
+  });
+});
+
+describe('buildSandbox under an inherited GIT_DIR', () => {
+  it('builds in the directories it is given and leaves the repo GIT_DIR names untouched', () => {
+    // A hook exports GIT_DIR. The decoy stands in for the real repository; it is a temp repo.
+    const decoy = temp('sandbox-decoy-');
+    git(decoy, 'init', '--quiet', '--initial-branch', 'main');
+    const source = sourceRepo();
+    const work = temp('sandbox-work-');
+    const setup: SandboxSetup = {
+      pins: { main: source.second },
+      issues: [],
+      prs: [],
+      commits: [
+        { message: 'docs: a synthetic commit', files: [{ path: 'docs/a.md', content: 'a\n' }] },
+      ],
+      branches: [],
+      checkout: { branch: 'main' },
+      dirty: [],
+    };
+    const saved = process.env.GIT_DIR;
+    process.env.GIT_DIR = join(decoy, '.git');
+    try {
+      buildSandbox({
+        sourceRepo: source.dir,
+        workDir: work,
+        tmpDir: temp('sandbox-tmp-'),
+        fixturesDir: fixtures(),
+        ghDir: GH_DIR,
+        realGit: realGitBinary(),
+        setup,
+      });
+    } finally {
+      if (saved === undefined) delete process.env.GIT_DIR;
+      else process.env.GIT_DIR = saved;
+    }
+    expect(git(work, 'log', '-1', '--format=%s')).toBe('docs: a synthetic commit');
+    expect(git(decoy, 'config', '--get', 'core.bare')).toBe('false');
+    expect(() => git(decoy, 'rev-parse', '--verify', 'HEAD')).toThrow();
   });
 });

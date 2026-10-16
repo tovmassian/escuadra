@@ -72,11 +72,19 @@ const DATES = {
   GIT_COMMITTER_DATE: '2026-10-16T12:00:00Z',
 };
 
+/**
+ * The environment minus every GIT_* variable, so git acts on the repo `cwd` names. Git hooks
+ * export GIT_DIR, and a git run under it would write to the hook's repository instead.
+ */
+export function withoutGitVars<E extends Readonly<Record<string, string | undefined>>>(env: E): E {
+  return Object.fromEntries(Object.entries(env).filter(([name]) => !name.startsWith('GIT_'))) as E;
+}
+
 function git(cwd: string, args: string[]): string {
   return execFileSync('git', [...IDENTITY, ...args], {
     cwd,
     encoding: 'utf8',
-    env: { ...process.env, ...DATES },
+    env: { ...withoutGitVars(process.env), ...DATES },
     stdio: ['ignore', 'pipe', 'pipe'],
   }).trim();
 }
@@ -86,7 +94,10 @@ function git(cwd: string, args: string[]): string {
  * fails inside the agent's sandbox (spec §11).
  */
 export function realGitBinary(): string {
-  const execPath = execFileSync('git', ['--exec-path'], { encoding: 'utf8' }).trim();
+  const execPath = execFileSync('git', ['--exec-path'], {
+    encoding: 'utf8',
+    env: withoutGitVars(process.env),
+  }).trim();
   return realpathSync(join(execPath, 'git'));
 }
 
