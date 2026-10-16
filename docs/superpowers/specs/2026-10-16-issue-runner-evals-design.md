@@ -152,10 +152,13 @@ the answer depends on a question asked.
 Claude Code 2.1.278 ships an eval runner that targets a single skill folder.
 It provides a with-skill and a without-skill arm per case (the ablation is the
 RED/GREEN comparison), repeated runs, LLM judges, cost ceilings, concurrency,
-JSON results and an HTML report. A case is a folder: `prompt.md` (frontmatter:
-`max_turns`, `timeout_seconds`, `allowed_tools`, `env`, `append_system_prompt`)
-and `graders/*.md` (`regex`, `tool_used`, `tool_order`, `file_exists`, `llm`,
-`baseline`). A `scaffold_script` prepares a workspace per run.
+JSON results and an HTML report. A case is a folder holding one `case.yaml`:
+`context.scaffold_script` (prepares the run's workspace), `execution`
+(`prompt`, `max_turns`, `timeout_seconds`, `allowed_tools`,
+`append_system_prompt`, `env`), `runs` and `graders` (`regex`, `tool_used`,
+`tool_order`, `file_exists`, `llm`, `baseline`). A regex grader reads the last
+message, the whole trace, or a file in the run's directory. (The `prompt.md`
+plus `graders/*.md` form exists too, but cannot declare a scaffold.)
 
 Rejected: a TypeScript harness of our own around `claude -p` (it would rebuild
 the ablation, runs, budget and report), and skill-creator's Python tooling
@@ -176,36 +179,47 @@ remote) are out of scope for now (§12).
 
 ### 4.2 The dry-run instruction
 
-`evals/dry-run.md` is every case's `append_system_prompt`, given to both arms:
+`evals/dry-run.md`, followed by the triage template from
+`scripts/evals/lib/triage.ts`, is every case's `append_system_prompt`, given to
+both arms. In substance:
 
-> This is a dry run. Do every read-only step you would do for this request.
-> If it leads you to work on an issue, stop at the first step that would
-> change the repository, a branch, a worktree or GitHub; do not take it. End
-> your final message with the triage block below, filled in.
-> [the format from §2.6, with each field's allowed values]
+> This is a dry run in a disposable copy of the repository. Read `CLAUDE.md`
+> first: a real session would have it loaded. Do every read-only step you
+> would do. Make no change to the repository, its branches or worktrees, or
+> GitHub. If the request leads you to work on an issue, end your final message
+> with the triage block, filled in; questions you would ask the owner go in
+> the block, with `decision: ask`. Otherwise answer and leave the block out.
 
-The instruction is identical in both arms, so the delta measures what the skill
-adds to the decisions, not whether the agent knew the format. On a negative
-case (§7) the request does not lead to working an issue, and no block is
-expected.
+Eval runs set `CLAUDE_CODE_DISABLE_CLAUDE_MDS=1`, so `CLAUDE.md` is not
+preloaded (§11). Telling both arms to read it restores the information a real
+session has, without embedding 26 KB in every case. The instruction is
+identical in both arms, so the delta measures what the skill adds to the
+decisions, not whether the agent knew the format. On a negative case (§7) the
+request does not lead to working an issue, and no block is expected.
 
 ## 5. The sandbox
 
-Every run gets a fresh sandbox, built by `scripts/evals/scaffold.sh`:
+The runner gives each run a fresh directory with a sandboxed `HOME` and
+`TMPDIR`, and runs the case's `scaffold.sh` there, unsandboxed, as the owner.
+Each generated `scaffold.sh` hands off to `scripts/evals/scaffold.ts`, which
+builds:
 
 ```
-$SANDBOX/
-  origin.git/        bare clone of the real repo; its own `origin` removed
-                     main → deb2e3b9, release/1.0.0 → d8f2d21b (pinned)
-  work/              clone of origin.git; the agent's working directory
-    .git/sandbox/    this case's fixtures, read by the fake gh, and gh.log
+$TMPDIR/origin.git/    bare clone of the real repo; its own `origin` removed;
+                       only the pinned branches: main → deb2e3b9,
+                       release/1.0.0 → d8f2d21b
+$HOME/cwd/             clone of origin.git: the agent's working directory
+  .git/sandbox/        issues/*.json, prs.json, gh.log (created empty)
+  .git/sandbox/bin/    gh and git wrappers, the fake gh's code, package.json
 ```
 
 - **Pinned commits** freeze the specs, plans and handoff to match the issue
   snapshots, and keep the skill out of the clone (it is written after
-  `deb2e3b9`), so the without arm really is without it. The clone does carry
-  `escuadra-issue-creator`, in both arms, as in real use. Bumping a pin is
+  `deb2e3b9`), so the without arm really is without it. Bumping a pin is
   deliberate and goes with re-capturing the snapshots.
+- **Project skills in the clone do not load** in eval runs, and neither do the
+  owner's plugins (superpowers included): the run's config directory is
+  sandboxed. Both arms see the same thing; `first-step` is graded as a name.
 - **Per-case state** is applied on top: synthetic docs committed into
   `docs/superpowers/` as if they were history, `(#9007, part 1)` commits, an
   open-PR branch pushed to `origin.git`, a checked-out `release/1.0.0` or
@@ -214,9 +228,19 @@ $SANDBOX/
 
 ### 5.1 The fake `gh`
 
-`scripts/evals/bin/gh` is a shell wrapper around `scripts/evals/fake-gh.ts`
-(TypeScript run directly by Node 24). It finds its fixtures through
-`git rev-parse --git-common-dir`, so it also works from a worktree.
+The agent runs under an OS sandbox that cannot read the real repo, so the fake
+lives inside the sandbox: the scaffold copies `scripts/evals/sandbox/gh.ts` and
+`gh-cli.ts` (Node built-ins only) into `.git/sandbox/bin/`, next to a `gh`
+wrapper that runs them with Node 24 and a `package.json` that marks them as ES
+modules. `run.ts` puts the **relative** entry `.git/sandbox/bin` first on
+`PATH`; it resolves against the agent's working directory. The fake finds its
+fixtures through `git rev-parse --git-common-dir`.
+
+**`git` needs a wrapper too.** `/usr/bin/git` is Apple's xcrun shim, which
+fails inside the sandbox (it cannot write its cache). The scaffold writes a
+`.git/sandbox/bin/git` that runs the real binary (`$(git --exec-path)/git`)
+directly, and sets `remote.origin.uploadpack` and `receivepack` to the real
+helpers, which git otherwise also finds through the shim.
 
 - Serves `issue view`, `issue list`, `pr list`, `pr view` and `api graphql`.
   GraphQL answers with a superset of the issue (state, body, labels, milestone,
@@ -230,14 +254,21 @@ $SANDBOX/
 
 ### 5.2 Safety
 
-Three layers keep a run away from the real GitHub and the real repo:
+Four layers keep a run away from the real GitHub and the real repo:
 
-1. The fake `gh` is first on `PATH`.
-2. `GH_TOKEN` and `GH_CONFIG_DIR` (in each case's `env`) point at nothing, so a
-   real `gh` reached by mistake cannot authenticate.
-3. `origin` is the sandbox's bare repo, so a stray push stays inside it.
+1. The agent's OS sandbox: reading the real repo fails with "Operation not
+   permitted", and writes outside the run's working directory fail.
+2. The fake `gh` is first on `PATH`, refuses every write and logs it.
+3. A real `gh` reached by mistake (say, after a `cd`) is not signed in: the
+   sandboxed `HOME` has no gh config, and the runner passes only an allowlist
+   of variables (`GH_TOKEN` is not among them, and a case may set only
+   `EVAL_*` names).
+4. `origin` is the sandbox's bare repo outside the working directory, so a
+   stray push fails ("unpacker error").
 
-The `no-writes` grader (§8) fails any run that tried a GitHub write.
+The `no-writes` grader (§8) fails any run that tried a GitHub write. The skill
+folder's `evals/`, where the expected answers live, is also out of reach: the
+runner's permissions deny reading it.
 
 ## 6. Fixtures
 
@@ -264,7 +295,11 @@ The `no-writes` grader (§8) fails any run that tried a GitHub write.
 - **Synthetic issues** (`#9001`…) only for boundaries no real issue covers,
   with their docs under `_fixtures/docs/`. Their wording follows the real
   issues' style (Size line, Work checklist, Acceptance criteria).
-- `prs.json` per case lists open PRs where a case needs one.
+- A case's open PRs are declared in `cases.ts`, and land in the sandbox's
+  `prs.json`.
+- `#9000` belongs to `sandbox-smoke`, a cheap case outside the matrix that
+  checks the sandbox itself: the fake `gh`, the `git` wrapper, a denied commit
+  and a logged write. Run it after a Claude Code upgrade, before anything else.
 
 ## 7. The case matrix
 
@@ -336,7 +371,9 @@ how the owner actually asks.
   "asks nothing the issue or spec already answers". The scaffold creates
   `gh.log` empty, since a file grader needs the file to exist.
 - **Allowed tools** are a backstop, not the measurement: `Read`, `Glob`,
-  `Grep`, `Skill`, and `Bash` scoped to read-only `git`, `gh`, `ls` and `cat`.
+  `Grep`, `Skill`, and `Bash` scoped to read-only `git` commands, `gh` (the
+  fake refuses its writes, and logging them is the point), and read-only
+  shell tools.
   `EnterWorktree`, `Write` and `Edit` are not allowed, so no grader checks
   for them; a run that tries one is denied and still graded on its triage.
 - **Models:** the agent runs on Sonnet (`--model sonnet`) and the judge on
@@ -349,35 +386,48 @@ how the owner actually asks.
 
 ```
 scripts/evals/                        the harness: skill-agnostic
-  scaffold.sh
-  bin/gh, fake-gh.ts
-  capture-issue.ts
-  gen-cases.ts                        cases.ts → <case>/prompt.md + graders/*.md
-  run.ts                              wraps `claude plugin eval`
-  __tests__/                          fake-gh, gen-cases in sync, scaffold smoke
+  scaffold.ts                         entry: builds a run's sandbox
+  gen-cases.ts                        entry: cases.ts → each case's files
+  run.ts                              entry: wraps `claude plugin eval`
+  capture-issue.ts                    entry: real issue → fixture snapshot
+  sandbox/gh.ts, gh-cli.ts            the fake gh, copied into each sandbox
+  lib/                                pure: triage format, YAML, graders,
+                                      cases, sandbox build, run args, capture
+  __tests__/                          mirrors lib/ and sandbox/, plus the
+                                      suite-in-sync test
   README.md                           the front door: run, budget, pins, capture
 
 .claude/skills/escuadra-issue-runner/
   SKILL.md
   evals/
-    cases.ts                          the matrix as typed data: the one source
+    cases.ts                          the suite as typed data: the one source
     dry-run.md
-    _fixtures/issues/*.json, _fixtures/docs/…, _fixtures/prs/*.json
-    <case>/prompt.md, graders/*.md    GENERATED; never edited by hand
+    _fixtures/issues/*.json, _fixtures/docs/…
+    <case>/case.yaml, scaffold.sh,    GENERATED; never edited by hand
+           setup.json
 ```
 
-- **Cases are generated** from `cases.ts`: 19 cases come to about 150 grader
-  files. A Vitest test in `scripts/evals/__tests__/` fails when the generated
-  files drift from `cases.ts`, the pattern `gen:squads` uses for
-  `data/index.json`. It sits under `scripts/`, which `vitest.config.ts`,
-  `tsc`, ESLint and Prettier already cover, so `npm run check` runs it.
+- **Cases are generated** from `cases.ts`: each case's `case.yaml` repeats the
+  dry-run text, the tool list and the shared graders, which hand-kept files
+  would let drift. A Vitest test fails when the generated files drift from
+  `cases.ts`, the pattern `gen:squads` uses for `data/index.json`. It sits
+  under `scripts/`, which `vitest.config.ts`, `tsc`, ESLint and Prettier
+  already cover, so `npm run check` runs it; importing `cases.ts` from it is
+  what brings that file under `tsc`.
+- **No YAML dependency.** `lib/yaml.ts` writes the few shapes a case uses
+  (block maps and lists, JSON-quoted strings), and the generator formats the
+  result with Prettier, so `format:check` agrees with it.
+- **Tests never need the pinned history.** CI checks out one commit, so the
+  sandbox tests build a throwaway source repo of their own.
 - **No npm scripts and no `.gitignore` lines**, since both move the
   fingerprint. Commands run as `node scripts/evals/run.ts --tag core`
   (or `--case 129-*`, or `--full`). `run.ts` passes `--scaffold`, the models,
-  `--threshold 0.8` and `--max-cost-usd`, prepends `scripts/evals/bin` to
-  `PATH`, and sends `--output-dir` and `--report` to `$TMPDIR`, so results
-  never land in the repo.
-- **Tags:** `core` (one case per rule: about 8), `workspace`, `ask`, `negative`.
+  `--threshold 0.8`, `--max-cost-usd` and `--no-publish`, prepends
+  `.git/sandbox/bin` to `PATH`, and sends `--output-dir` and `--report` to a
+  temporary directory, so results never land in the repo. `--keep` adds
+  `--keep-temp`: a run's trace survives only with it.
+- **Tags:** `core` (one case per rule: about 8), `workspace`, `ask`, `negative`,
+  and `smoke` for `sandbox-smoke`.
 - **Skill-agnostic harness:** the sandbox and the fake `gh` know nothing of this
   skill, so another Escuadra skill could get a suite later. Nothing is built for
   that now.
@@ -410,25 +460,36 @@ both sub-projects.
 Each PR is on its own branch from `main`. The results are summarised in an
 Outcome section added to this spec, as the photo POC's spec does.
 
-## 11. Spike first
+## 11. Spike results (2026-10-16)
 
-The CLI does not document these, so the plan opens with a one-case probe that
-settles them before anything else is built:
+The CLI documents little of this, so five one-case probes on Haiku (about
+$0.04–0.07 estimated each, 30 s) and its own schema settled it before the plan
+was written. Re-check after a Claude Code upgrade; `sandbox-smoke` covers most
+of it.
 
-1. How a `prompt.md` case declares `scaffold_script`, the script's working
-   directory, its arguments and environment, and how it learns its case.
-2. The agent's working directory, and whether it is the scaffold's workspace.
-3. Whether the run inherits `PATH` from `claude plugin eval`, or the case's
-   `env` must set it. If neither works, layer 2 of §5.2 still holds, and the
-   fake `gh` moves to an absolute path the scaffold writes.
-4. Whether `Bash(...)` patterns and `Read` path rules apply inside a run, and
-   whether the with arm can read the skill folder's `evals/`. The expected
-   answers live there; if the agent can read them, they move out of reach
-   (the scaffold copies only the case's fixtures), or the leak is graded.
-5. Whether user-level plugins (superpowers and its session-start hook) load in
-   a run. Both arms see the same thing either way; this decides how realistic
-   the run is, not how it is graded.
-6. What a run's `cost_usd` reports on a claude.ai login.
+1. **The case format.** `scaffold_script` lives in `case.yaml`
+   (`context.scaffold_script`), as a path inside the case folder (`..` and
+   absolute paths are refused). A case's `env` may set only `EVAL_*` names.
+2. **The scaffold** runs as `bash <script>`, unsandboxed, for up to 120 s, in
+   the run's working directory (`$HOME/cwd`), with the operator's `PATH`, a
+   sandboxed `HOME` and `TMPDIR`, no `EVAL_*` variables, stdout discarded and
+   stderr kept. `$0` is the script's absolute path, so it finds its case
+   folder from that. A bare clone of this repo takes about 3 s.
+3. **The agent** starts in the same directory, under an OS sandbox: the real
+   repo and the scratch directory are unreadable, `~/.nvm` (Node) and system
+   tools are readable, and writes outside the working directory fail. It
+   inherits `PATH` but not `GH_*`. `CLAUDE_CODE_DISABLE_CLAUDE_MDS=1` is set,
+   the config directory is sandboxed (no user plugins, no superpowers), and
+   project skills in the working directory do not load. The skill under test
+   loads as `<name>:<name>`.
+4. **Paths outside the working directory** are denied by permission, the
+   skill folder's `evals/` included, even when `Bash` is granted.
+5. **`/usr/bin/git` fails** inside the sandbox (xcrun's cache), and so do
+   git's transport helpers; §5.1's wrapper and config fix both. A relative
+   `PATH` entry finds the wrappers.
+6. **Cost:** `cost_usd` is an API-rate estimate on a claude.ai login. A run's
+   trace exists only with `--keep-temp`; the kept directory is sealed
+   (`chmod 700` it to look, and never run git inside it).
 
 ## 12. Out of scope
 
