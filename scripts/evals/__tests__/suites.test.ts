@@ -34,4 +34,48 @@ describe('escuadra-issue-runner suite', () => {
     expect(new Set(names).size).toBe(names.length);
     for (const name of names) expect(name).toMatch(/^[a-z0-9]+(?:-[a-z0-9]+)*$/);
   });
+
+  it('covers the matrix in spec §7, plus the smoke case', () => {
+    expect(SUITE.cases.map((item) => item.name).sort()).toEqual(
+      [
+        '115-closed',
+        '116-release',
+        '117-owner-decision',
+        '126-small-bug',
+        '129-large-spec',
+        '129-large-spec-subagent',
+        '55-tbc',
+        '59-gh-pages',
+        'dirty-tree',
+        'fingerprint-on-release',
+        'm-boundary',
+        'neg-create-issue',
+        'neg-question',
+        'no-size',
+        'on-feature-branch',
+        'on-release-branch',
+        'open-pr',
+        'plan-half-done',
+        'sandbox-smoke',
+        'shipped-fix-from-main',
+      ].sort(),
+    );
+  });
+
+  it('keeps a case the skill must not fire on', () => {
+    expect(SUITE.cases.some((item) => item.expect.kind === 'no-triage')).toBe(true);
+  });
+
+  it('commits every fixture a case writes', () => {
+    for (const item of SUITE.cases) {
+      const commits = [...(item.commits ?? []), ...(item.branches ?? []).flatMap((b) => b.commits)];
+      for (const file of commits.flatMap((commit) => commit.files)) {
+        if (file.fixture === undefined) continue;
+        expect(
+          existsSync(join(EVALS, '_fixtures', file.fixture)),
+          `${item.name}: ${file.fixture}`,
+        ).toBe(true);
+      }
+    }
+  });
 });

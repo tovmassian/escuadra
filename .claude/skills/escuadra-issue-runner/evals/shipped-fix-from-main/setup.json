@@ -1,0 +1,14 @@
+{
+  "pins": {
+    "main": "deb2e3b9c589bf2c5619fe3a7b82866ef9415ebf",
+    "release/1.0.0": "d8f2d21bb9bb4bf3256e64d3ca06b785ad7bd20b"
+  },
+  "issues": ["issues/9002.json"],
+  "prs": [],
+  "commits": [],
+  "branches": [],
+  "checkout": {
+    "branch": "main"
+  },
+  "dirty": []
+}

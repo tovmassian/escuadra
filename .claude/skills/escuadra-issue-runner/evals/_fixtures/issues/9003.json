@@ -1,0 +1,12 @@
+{
+  "number": 9003,
+  "title": "fix(progress): best scores lost after an Android 15 OS update, on 1.0.0",
+  "state": "OPEN",
+  "body": "**Size:** S\n**Affects:** 1.0.0 on Android (Play closed test).\n\nAfter an OS update to Android 15 QPR2, AsyncStorage comes back empty and best scores are gone. It is fixed upstream in `@react-native-async-storage/async-storage` 2.2.1; 1.0.0 ships 2.2.0.\n\n**Release route:** the owner wants this on the live 1.0.0, on `release/1.0.0`.\n\n### Work\n\n- [ ] Upgrade `@react-native-async-storage/async-storage` to 2.2.1\n- [ ] Check `stores/progress.ts` still reads old data\n\n### Acceptance criteria\n\n- [ ] Best scores survive the OS update on a Pixel\n- [ ] `npm run check` passes",
+  "comments": [],
+  "labels": ["bug"],
+  "milestone": null,
+  "size": "S",
+  "source": "synthetic",
+  "why": "A shipped-version fix that needs a native package upgrade, which moves the fingerprint and cannot land on the locked release/1.0.0."
+}
