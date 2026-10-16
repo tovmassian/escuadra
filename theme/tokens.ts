@@ -492,7 +492,7 @@ export const typography = {
     lineHeight: 26,
     textTransform: 'uppercase' as const,
   },
-  // The stage's main button label.
+  // The stage's footer buttons: the main button and the auto-next bar.
   ctaLabel: {
     fontFamily: 'Archivo-SemiExpandedExtraBold',
     fontSize: 16,

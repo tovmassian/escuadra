@@ -122,11 +122,15 @@ filled glass on dark and white cards on light.
 - **Correct, more parts to go:** the slot fills, the next part's options replace the grid
   in place (§6).
 - **Correct, last part:** the ball is struck into the corner (§6), and the footer shows "Next
-  question · tap to skip" with a bar filling over 1,200 ms. Then the round advances.
+  · tap to skip" with a bar filling over 1,200 ms. Then the round advances.
   Tapping skips the wait. **No auto-advance while a screen reader is on**
   (`AccessibilityInfo.isScreenReaderEnabled`): the footer shows "Next question" instead.
 - **Miss:** the right answer is shown, later slots switch to "not asked", and the footer
   shows "Got it — next". It never advances on its own.
+- **Last question:** each of these says "See results" instead ("See results · tap to skip"
+  on the bar). The bar still moves on by itself.
+- **Type:** the button and the bar share `ctaLabel`; filled pill versus filling bar tells
+  them apart. `nextButtonText` in `lib/roundView.ts` holds the words.
 
 The 1,200 ms is a pause, not an animation, so it sits outside the 300 ms rule. It is a
 token (`durations.autoAdvance`).

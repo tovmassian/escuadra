@@ -11,7 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { PhotoCreditLine } from './PhotoCreditLine';
 import { riseIn } from './riseIn';
-import type { FooterMode } from '@/lib/roundView';
+import { nextButtonText, type FooterMode } from '@/lib/roundView';
 import {
   borderWidths,
   durations,
@@ -29,6 +29,8 @@ import type { PhotoCredit } from '@/types/squad';
 interface QuestionFooterProps {
   mode: FooterMode;
   compact: boolean;
+  /** The round's last question, whose button goes to the results. */
+  last: boolean;
   onNext: () => void;
   /** The current question's photo credit, shown for the whole question
    *  (spec §2.7, guardrail 1). */
@@ -40,8 +42,9 @@ interface QuestionFooterProps {
 // - after a miss, "Got it — next", which waits;
 // - after a right answer, a bar that fills and moves on by itself (tap to
 //   skip), or a plain "Next question" with a screen reader on.
+// On the last question each says "See results" instead.
 // Then the photo credit, always.
-export function QuestionFooter({ mode, compact, onNext, credit }: QuestionFooterProps) {
+export function QuestionFooter({ mode, compact, last, onNext, credit }: QuestionFooterProps) {
   const colors = useThemeColors();
   const reduced = useReducedMotion();
   // The least the button is tall; it grows with the text at large sizes.
@@ -88,13 +91,11 @@ export function QuestionFooter({ mode, compact, onNext, credit }: QuestionFooter
             accessibilityRole="button"
             style={({ pressed }) => [styles.cta, pressed && { opacity: opacity.settled }]}
           >
-            <Text style={styles.ctaText}>
-              {mode === 'gotIt' ? 'Got it — next' : 'Next question'}
-            </Text>
+            <Text style={styles.ctaText}>{nextButtonText(mode, last).label}</Text>
           </Pressable>
         </Animated.View>
       ) : null}
-      {mode === 'autoNext' ? <NextBar minHeight={minHeight} onNext={onNext} /> : null}
+      {mode === 'autoNext' ? <NextBar minHeight={minHeight} last={last} onNext={onNext} /> : null}
       <PhotoCreditLine credit={credit} />
     </View>
   );
@@ -102,8 +103,17 @@ export function QuestionFooter({ mode, compact, onNext, credit }: QuestionFooter
 
 // Fills over `durations.autoAdvance`. The screen moves on when it is full;
 // a tap moves on now.
-function NextBar({ minHeight, onNext }: { minHeight: number; onNext: () => void }) {
+function NextBar({
+  minHeight,
+  last,
+  onNext,
+}: {
+  minHeight: number;
+  last: boolean;
+  onNext: () => void;
+}) {
   const colors = useThemeColors();
+  const text = nextButtonText('autoNext', last);
   const progress = useSharedValue(0);
   useEffect(() => {
     // A timer cue, not decorative motion: it shows how long is left before the
@@ -130,19 +140,20 @@ function NextBar({ minHeight, onNext }: { minHeight: number; onNext: () => void 
       overflow: 'hidden',
     },
     fill: { position: 'absolute', top: 0, bottom: 0, left: 0, backgroundColor: colors.nextFill },
-    label: { ...typography.rowTitle, color: colors.nextText },
+    // The main button's face, so the two read as one button in two states.
+    label: { ...typography.ctaLabel, color: colors.nextText },
   });
   return (
     <Pressable
       testID="question-next"
       onPress={onNext}
       accessibilityRole="button"
-      accessibilityLabel="Next question"
+      accessibilityLabel={text.spoken}
       accessibilityHint="Moves on by itself in a moment"
       style={styles.bar}
     >
       <Animated.View style={[styles.fill, fill]} />
-      <Text style={styles.label}>Next question · tap to skip</Text>
+      <Text style={styles.label}>{text.label}</Text>
     </Pressable>
   );
 }

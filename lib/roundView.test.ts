@@ -3,6 +3,7 @@ import {
   answerLayout,
   footerMode,
   isCompact,
+  nextButtonText,
   partCounter,
   positionLabel,
   progressOutcomes,
@@ -462,6 +463,35 @@ describe('footerMode', () => {
   it('never moves on by itself with a screen reader on', () => {
     expect(footerMode(true, true)).toBe('next');
     expect(footerMode(false, true)).toBe('gotIt');
+  });
+});
+
+describe('nextButtonText', () => {
+  it('moves on to the next question before the last', () => {
+    expect(nextButtonText('gotIt', false)).toEqual({
+      label: 'Got it — next',
+      spoken: 'Got it — next',
+    });
+    expect(nextButtonText('next', false)).toEqual({
+      label: 'Next question',
+      spoken: 'Next question',
+    });
+    expect(nextButtonText('autoNext', false)).toEqual({
+      label: 'Next · tap to skip',
+      spoken: 'Next question',
+    });
+  });
+
+  it('says where the last question goes: to the results', () => {
+    expect(nextButtonText('gotIt', true)).toEqual({
+      label: 'See results',
+      spoken: 'See results',
+    });
+    expect(nextButtonText('next', true)).toEqual({ label: 'See results', spoken: 'See results' });
+    expect(nextButtonText('autoNext', true)).toEqual({
+      label: 'See results · tap to skip',
+      spoken: 'See results',
+    });
   });
 });
 

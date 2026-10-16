@@ -404,6 +404,7 @@ export default function Question() {
             <QuestionFooter
               mode={footerMode(verdict, screenReader)}
               compact={compact}
+              last={session.currentIndex === session.questions.length - 1}
               onNext={next}
               credit={photo}
             />
