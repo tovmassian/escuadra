@@ -26,7 +26,7 @@
 
 These touch the legal asset-licensing guardrail, so no session decided them.
 
-1. **"Otherwise unchanged."** The About credits say photos are "shown cropped to fit, and otherwise unchanged". The stage now shades the photo: a gradient into the ground, a 10 % dim on a miss, and a darkened copy behind a framed photo. Results' player cards and circles shade theirs the same way (`cardGradient`, the veil). The reviewers' read is that there is no licence breach, because the credit names the crop and the shading is presentation. But the sentence is untrue on its face; a suggestion is "cropped to fit and shaded under the screen's text". #114 part 2 rewrites the About text, so that is the natural place to decide.
+1. **"Otherwise unchanged."** The About credits say photos are "shown cropped to fit, and otherwise unchanged". The stage now shades the photo: a gradient into the ground, a 10 % dim on a miss, and a darkened copy behind a framed photo. Results' player cards shade theirs with `cardGradient`; the circles show the photo unshaded. The reviewers' read is that there is no licence breach, because the credit names the crop and the shading is presentation. But the sentence is untrue on its face; a suggestion is "cropped to fit and shaded under the screen's text". #114 part 2 rewrites the About text, so that is the natural place to decide.
 2. **Crests in photos.** The full-bleed stage makes kit crests and sponsor logos far more visible than the 1.x hero did; Spain's crest is clear in `design/screens/06–08`, and on Pedri's card in `09-results.png`. `docs/license.md` says crests are "never — whatever their licence", and it is silent on crests that appear incidentally inside a licensed photo. One sentence affirming the photo decision would close it.
 
 ## Decisions taken on the owner's behalf
@@ -68,7 +68,7 @@ Web can't show any of this. It runs on simulators or devices.
 - **Largest text size:**
   - every answer is still reachable;
   - the question's top bar (fixed 52/32 pt) is a known residual;
-  - Results' strip and card numbers are capped at 1.2×; check that the names and lines inside the fixed cards still read.
+  - Results' strip and card numbers are capped at 1.2×; check that the names and lines inside the fixed cards still read. From about 1.4× the card's line rises into the gradient's ramp, where `cardLine` drops under 4.5:1 on a white photo.
 - **Accessibility:**
   - VoiceOver/TalkBack: the round never moves on by itself;
   - the progress bar reads "Question n of 10";
@@ -128,6 +128,7 @@ None of these blocks 2.0.
   - iOS gets no spoken verdict (`announceForAccessibility`).
 - **Contrast:**
   - Dark `textMuted` is 4.30:1 on `surfaceRaised`; no screen puts it there today.
+  - Small "cleared" text in `success` on the picker and difficulty rows is 3.83:1 in light: [#122](https://github.com/tovmassian/escuadra/issues/122).
 - **Results:**
   - On a 10/10, the actions rise before the last circles finish (spec §6 says "last").
   - `resultCopy` hard-codes level 3 as the last level rather than taking `hasNextLevel`.
