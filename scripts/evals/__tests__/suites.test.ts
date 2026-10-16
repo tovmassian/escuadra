@@ -88,6 +88,18 @@ describe('escuadra-issue-runner suite', () => {
     expect(SUITE.cases.some((item) => item.expect.kind === 'no-triage')).toBe(true);
   });
 
+  it('declares the PR every commit on main was merged through', () => {
+    for (const item of SUITE.cases) {
+      const prs = (item.prs ?? []).map((pr) => pr.number);
+      for (const { message } of item.commits ?? []) {
+        // A squash merge ends the subject with its PR: `… (#9007, part 1) (#9100)`.
+        const merged = /\(#(\d+)\)$/.exec(message)?.[1];
+        if (merged === undefined || item.issues.includes(Number(merged))) continue;
+        expect(prs, `${item.name}: ${message}`).toContain(Number(merged));
+      }
+    }
+  });
+
   it('commits every fixture a case writes', () => {
     for (const item of SUITE.cases) {
       const commits = [...(item.commits ?? []), ...(item.branches ?? []).flatMap((b) => b.commits)];

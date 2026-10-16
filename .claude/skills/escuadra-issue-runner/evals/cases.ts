@@ -361,7 +361,22 @@ const CASES: EvalCase[] = [
             content:
               "export type Badge = 'hat-trick' | 'on-fire' | 'a-la-escuadra';\n\nexport function streakBadge(verdicts: boolean[]): Badge | null {\n  let run = 0;\n  let best = 0;\n  for (const right of verdicts) {\n    run = right ? run + 1 : 0;\n    best = Math.max(best, run);\n  }\n  if (best >= 10) return 'a-la-escuadra';\n  if (best >= 5) return 'on-fire';\n  return best >= 3 ? 'hat-trick' : null;\n}\n",
           },
+          {
+            path: 'lib/__tests__/streakBadges.test.ts',
+            content:
+              "import { describe, expect, it } from 'vitest';\nimport { streakBadge } from '../streakBadges.ts';\n\ndescribe('streakBadge', () => {\n  it('gives no badge under 3 in a row', () => {\n    expect(streakBadge([true, true, false, true, true])).toBeNull();\n  });\n\n  it('gives a hat-trick at 3 in a row', () => {\n    expect(streakBadge([false, true, true, true, false])).toBe('hat-trick');\n  });\n\n  it('gives on fire at 5 in a row', () => {\n    expect(streakBadge([true, true, true, true, true, false])).toBe('on-fire');\n  });\n\n  it('gives a la escuadra at 10 in a row', () => {\n    expect(streakBadge(Array.from({ length: 10 }, () => true))).toBe('a-la-escuadra');\n  });\n});\n",
+          },
         ],
+      },
+    ],
+    prs: [
+      {
+        number: 9100,
+        title: 'feat(streak): the badge model (#9007, part 1)',
+        state: 'MERGED',
+        headRefName: 'feat/9007-streak-badge-model',
+        baseRefName: 'main',
+        body: 'Part 1 of #9007: lib/streakBadges.ts and its tests. Parts 2 and 3 follow.',
       },
     ],
     expect: triage({
