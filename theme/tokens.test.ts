@@ -310,6 +310,24 @@ describe('Archivo display type', () => {
     }
   });
 
+  // iOS clips glyphs to the line box and the web renderer does not, so a tight
+  // line height shows only on a device (#124). 1.088 is the face's own
+  // ascent plus descent; the margin gives the extra height back to the layout.
+  it('gives the big numbers a line box that holds the glyphs, and offsets it', () => {
+    const big = {
+      shirtNumber: [typography.shirtNumber, 119],
+      shirtNumberCompact: [typography.shirtNumberCompact, 87],
+      scoreDisplay: [typography.scoreDisplay, 120],
+      scoreTail: [typography.scoreTail, 48],
+      shareScore: [typography.shareScore, 160],
+      shareScoreTail: [typography.shareScoreTail, 62],
+    } as const;
+    for (const [name, [style, designBox]] of Object.entries(big)) {
+      expect(style.lineHeight, name).toBeGreaterThanOrEqual(style.fontSize * 1.088);
+      expect(style.lineHeight + 2 * style.marginVertical, name).toBe(designBox);
+    }
+  });
+
   // Each cut is a single weight, so the family name alone selects it. A
   // fontWeight of 700 or more makes Android look up a bold variant that a
   // runtime-loaded font does not have, and fall back to the system font.

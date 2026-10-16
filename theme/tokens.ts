@@ -430,8 +430,16 @@ export const typography = {
   // Static cuts of the variable font, one file per width, since React Native
   // cannot set a variable font's width axis: see assets/fonts/archivo/. React
   // Native takes lineHeight in points, so the design's ratios are resolved
-  // here: 0.78 of the size for the shirt number, 0.8 for the score, 0.9 for
-  // card numbers, 1.05 for titles.
+  // here: 0.9 of the size for card numbers, 1.05 for titles.
+  //
+  // The big numbers (shirt number, score, and the share picture's score) get
+  // the face's natural line height instead, 1.088 of the size (hhea ascent 878
+  // plus descent 210, per 1000 em). iOS clips glyphs to the line box, so a
+  // tighter one cut off the tops of the digits on a device; the web renderer
+  // does not, so `npm run shots` could not show it (#124). `marginVertical`
+  // takes the extra height back out of the layout, so the number sits where
+  // the design's tighter box put it: lineHeight + 2 * marginVertical is that
+  // box. Spread the style whole to keep the pair together.
   //
   // No fontWeight on any of these: each cut is a single weight, so the family
   // name alone selects it. A fontWeight of 700 or more would make Android look
@@ -440,20 +448,23 @@ export const typography = {
   shirtNumber: {
     fontFamily: 'Archivo-ExtraCondensedBlack',
     fontSize: 152,
-    lineHeight: 119,
+    lineHeight: 166,
+    marginVertical: -23.5,
     letterSpacing: -3,
   },
   shirtNumberCompact: {
     fontFamily: 'Archivo-ExtraCondensedBlack',
     fontSize: 112,
-    lineHeight: 87,
+    lineHeight: 122,
+    marginVertical: -17.5,
     letterSpacing: -3,
   },
   // Results' score; its "/10" is set smaller beside it.
   scoreDisplay: {
     fontFamily: 'Archivo-ExtraCondensedBlack',
     fontSize: 150,
-    lineHeight: 120,
+    lineHeight: 164,
+    marginVertical: -22,
     letterSpacing: -4,
   },
   // The shirt number on a player card (Results, Study).
@@ -506,7 +517,12 @@ export const typography = {
   tileSubLabel: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 10.5 },
   // ---- 2.0 Results ----
   // The "/10" beside the score.
-  scoreTail: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 60, lineHeight: 48 },
+  scoreTail: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 60,
+    lineHeight: 66,
+    marginVertical: -9,
+  },
   // A player card's name and its line.
   cardName: { fontFamily: 'Inter-Bold', fontSize: 15 },
   cardLine: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 11.5 },
@@ -527,10 +543,16 @@ export const typography = {
   shareScore: {
     fontFamily: 'Archivo-ExtraCondensedBlack',
     fontSize: 200,
-    lineHeight: 160,
+    lineHeight: 218,
+    marginVertical: -29,
     letterSpacing: -4,
   },
-  shareScoreTail: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 78, lineHeight: 62 },
+  shareScoreTail: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 78,
+    lineHeight: 85,
+    marginVertical: -11.5,
+  },
   shareTitle: {
     fontFamily: 'Archivo-SemiExpandedExtraBold',
     fontSize: 30,

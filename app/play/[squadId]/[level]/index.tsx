@@ -78,6 +78,9 @@ export default function Question() {
   const seed = seedParam === undefined ? undefined : Number(seedParam);
   const compact = isCompact(frame.height - insets.top - insets.bottom);
   const numberType = compact ? typography.shirtNumberCompact : typography.shirtNumber;
+  // The number's design box: its line box less the margin that offsets the
+  // clip-proof line height (see the Archivo block in theme/tokens.ts).
+  const numberBox = numberType.lineHeight + 2 * numberType.marginVertical;
   const stageHeight = Math.round(
     frame.height * (compact ? sizes.stage.ratioCompact : sizes.stage.ratio),
   );
@@ -195,13 +198,13 @@ export default function Question() {
       left: 0,
       right: 0,
       top: 0,
-      height: numberType.lineHeight + spacing.sm,
+      height: numberBox + spacing.sm,
     },
     backingChips: {
       position: 'absolute',
       left: 0,
       right: 0,
-      top: numberType.lineHeight + spacing.sm,
+      top: numberBox + spacing.sm,
       bottom: 0,
       backgroundColor: colors.background,
     },
