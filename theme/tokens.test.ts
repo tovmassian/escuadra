@@ -145,6 +145,33 @@ describe('text contrast', () => {
       ).toBeGreaterThanOrEqual(4.5);
     });
   });
+
+  // Study's card line and its "Tap to reveal" label are translucent whites, so
+  // each is blended over the same worst-case ground before it is measured.
+  it('revealText and onPhotoMuted reach 4.5:1 under the last cardGradient stop over a white photo', () => {
+    const last = cardGradient.colors[cardGradient.colors.length - 1] ?? '';
+    const ground = blend(last, '#ffffff');
+    (['dark', 'light'] as const).forEach((name) => {
+      for (const role of ['revealText', 'onPhotoMuted'] as const) {
+        expect(
+          contrastRatio(blend(palettes[name][role], ground), ground),
+          `${name}.${role}`,
+        ).toBeGreaterThanOrEqual(4.5);
+      }
+    });
+  });
+
+  // The list rows' affiliation line and position chip are `textSecondary`;
+  // `textMuted` is covered above.
+  it('textSecondary reaches 4.5:1 on background, in both themes', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      expect(
+        contrastRatio(p.textSecondary, p.background),
+        `${name}.textSecondary`,
+      ).toBeGreaterThanOrEqual(4.5);
+    });
+  });
 });
 
 describe('spotlight stage', () => {
@@ -167,6 +194,8 @@ describe('spotlight stage', () => {
       'stageShimmer',
       'stageShimmerEdge',
       'cardLine',
+      'revealLine',
+      'revealText',
     ] as const) {
       expect(palettes.dark[role], role).toBeDefined();
       expect(palettes.light[role], role).toBe(palettes.dark[role]);
@@ -259,7 +288,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(15);
+    expect(archivo).toHaveLength(16);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }

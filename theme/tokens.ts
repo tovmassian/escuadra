@@ -115,6 +115,17 @@ export interface Palette {
   scrim: string;
   /** A link inside a preview (the share text's URL). */
   link: string;
+  // ---- 2.0 Study (spec §5) ----
+  /** The dashed outline of a hidden name's "Tap to reveal" pill on a player
+   *  card. The card is dark in both themes, so this is shared. Translucent,
+   *  so never measure it with `contrastRatio`. */
+  revealLine: string;
+  /** That pill's label. Translucent; held to AA by a composite test over the
+   *  card gradient's last stop. */
+  revealText: string;
+  /** The divider under each Study list row. A step quieter than `border`,
+   *  which outlines controls. */
+  hairline: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -152,6 +163,9 @@ const sharedRoles = {
   cardLine: '#ffa19e',
   // The share sheet's backdrop: the same ink in both themes.
   scrim: 'rgba(0,0,0,0.55)',
+  // Study's hidden-name pill on a player card, which is dark in both themes.
+  revealLine: 'rgba(255,255,255,0.5)',
+  revealText: 'rgba(255,255,255,0.85)',
 } as const;
 
 // The ramp sits higher than it did: the mark's trail squares, at 30% and 55%
@@ -196,6 +210,7 @@ const darkRoles = {
   nextText: '#9be0a0',
   nextFill: 'rgba(97,189,103,0.2)',
   link: '#8fb4ff',
+  hairline: '#23272e',
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -243,6 +258,7 @@ const lightRoles = {
   nextText: '#24702f',
   nextFill: 'rgba(47,143,62,0.14)',
   link: '#2f56c6',
+  hairline: '#e3e5e9',
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -557,6 +573,20 @@ export const typography = {
     textDecorationLine: 'underline' as const,
   },
   bubbleMeta: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 11 },
+  // ---- 2.0 Study (spec §5): no fontWeight on a Bold or Archivo face ----
+  // The position chip's code ("GK"), on a card and in a list row.
+  positionChip: { fontFamily: 'IBMPlexMono-Bold', fontSize: 11 },
+  // "Tap to reveal", on a card and in a list row.
+  revealLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },
+  // The line under a card's name when it is neutral, not a miss (`cardLine`).
+  cardAffiliation: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 12 },
+  // A list row's shirt number column, its line under the name, and the
+  // number on its avatar when there is no photo.
+  rowNumber: { fontFamily: 'IBMPlexMono-Bold', fontSize: 14 },
+  rowAffiliation: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 12.5 },
+  avatarNumber: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 20 },
+  // The count after a filter pill's label ("GK 3").
+  filterCount: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 11.5 },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -858,6 +888,13 @@ export const sizes = {
   playerCard: { studyHeight: 218, results: { width: 140, height: 184 } },
   // Study's list-view avatar.
   avatar: 46,
+  // Study's position chip, on a card and in a list row.
+  studyChip: 24,
+  // The "Tap to reveal" pill's height: on a card, and in a list row.
+  revealPill: { card: 24, row: 22 },
+  // A Study list row, and the gap between a grid's cards.
+  studyRow: 64,
+  studyGridGap: 10,
   // Apple's minimum tap target; smaller drawn controls take hitSlop to reach it.
   minTapTarget: 44,
   // The question's top bar, and the glass pills in it (score).
@@ -906,6 +943,8 @@ export const iconSize = {
   flameGlyph: 12, // the streak chip's flame
   shareGlyph: 18, // the Results screen's share button
   retryGlyph: 18, // the Results screen's retry icon beside Study
+  back: 22, // Study's back chevron
+  viewToggle: 17, // Study's list/grid toggle
   // The locked-badge padlock scales with its badge rather than sitting at one
   // fixed size — 32 * 0.46 ≈ 15.
   lockGlyphRatio: 0.46,
