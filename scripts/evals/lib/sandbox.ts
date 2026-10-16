@@ -13,7 +13,7 @@ import {
   writeFileSync,
 } from 'node:fs';
 import { basename, dirname, join } from 'node:path';
-import type { PrFixture } from '../sandbox/gh.ts';
+import type { IssueFixture, PrFixture } from '../sandbox/gh.ts';
 
 /** A file a synthetic commit writes: inline `content`, or a `fixture` under _fixtures/. */
 export interface SyntheticFile {
@@ -126,8 +126,11 @@ export function buildSandbox(o: BuildOptions): void {
   const box = join(o.workDir, '.git', 'sandbox');
   mkdirSync(join(box, 'issues'), { recursive: true });
   mkdirSync(join(box, 'bin'), { recursive: true });
+  // `why` and `source` say what a case expects, so they stay out of the agent's reach.
   for (const issue of o.setup.issues) {
-    copyFileSync(join(o.fixturesDir, issue), join(box, 'issues', basename(issue)));
+    const fixture = JSON.parse(readFileSync(join(o.fixturesDir, issue), 'utf8')) as IssueFixture;
+    const { why: _why, source: _source, ...rest } = fixture;
+    writeFileSync(join(box, 'issues', basename(issue)), `${JSON.stringify(rest, null, 2)}\n`);
   }
   writeFileSync(join(box, 'prs.json'), `${JSON.stringify(o.setup.prs, null, 2)}\n`);
   writeFileSync(join(box, 'gh.log'), '');

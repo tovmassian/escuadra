@@ -135,6 +135,16 @@ describe('buildSandbox', () => {
     expect(JSON.parse(readFileSync(join(box, 'prs.json'), 'utf8'))).toHaveLength(1);
   });
 
+  it('leaves the answer key, why and source, out of the copied fixtures', () => {
+    const copied = JSON.parse(readFileSync(join(box, 'issues', '9001.json'), 'utf8')) as Record<
+      string,
+      unknown
+    >;
+    expect(copied).not.toHaveProperty('why');
+    expect(copied).not.toHaveProperty('source');
+    expect(copied.title).toBe('fix: a synthetic bug');
+  });
+
   it('installs a gh wrapper that answers from those fixtures', () => {
     const title = execFileSync(
       join(box, 'bin', 'gh'),

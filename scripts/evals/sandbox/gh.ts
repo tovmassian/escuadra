@@ -15,9 +15,9 @@ export interface IssueFixture {
   /** The board's Size field, or null when the issue has none. */
   size: string | null;
   /** "real snapshot YYYY-MM-DD…" or "synthetic". */
-  source: string;
+  source?: string;
   /** What the cases that load it test. */
-  why: string;
+  why?: string;
 }
 
 export interface PrFixture {
