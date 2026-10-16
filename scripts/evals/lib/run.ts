@@ -64,8 +64,17 @@ export function evalArgs(o: RunOptions): string[] {
   return args;
 }
 
+/** A flag's number, or an error naming the flag: finite and above zero, and whole when `integer`. */
+export function parseNumber(flag: string, value: string, integer = false): number {
+  const number = Number(value);
+  if (!Number.isFinite(number) || number <= 0 || (integer && !Number.isInteger(number))) {
+    throw new Error(`--${flag} must be a ${integer ? 'whole ' : ''}number above 0, not "${value}"`);
+  }
+  return number;
+}
+
 export function evalEnv<E extends Readonly<Record<string, string | undefined>>>(
   env: E,
 ): E & { PATH: string } {
-  return { ...env, PATH: `${SANDBOX_BIN}:${env.PATH ?? ''}` };
+  return { ...env, PATH: env.PATH ? `${SANDBOX_BIN}:${env.PATH}` : SANDBOX_BIN };
 }

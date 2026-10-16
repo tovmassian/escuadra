@@ -7,7 +7,7 @@ import { tmpdir } from 'node:os';
 import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
-import { evalArgs, evalEnv } from './lib/run.ts';
+import { evalArgs, evalEnv, parseNumber } from './lib/run.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const { values } = parseArgs({
@@ -38,13 +38,16 @@ const args = evalArgs({
   tags: values.tag,
   caseGlob: values.case,
   full: values.full,
-  runs: values.runs === undefined ? undefined : Number(values.runs),
+  runs: values.runs === undefined ? undefined : parseNumber('runs', values.runs, true),
   model: values.model,
   judgeModel: values['judge-model'],
   ablation,
-  maxCostUsd: Number(values['max-cost-usd']),
-  concurrency: values.concurrency === undefined ? undefined : Number(values.concurrency),
-  threshold: Number(values.threshold),
+  maxCostUsd: parseNumber('max-cost-usd', values['max-cost-usd']),
+  concurrency:
+    values.concurrency === undefined
+      ? undefined
+      : parseNumber('concurrency', values.concurrency, true),
+  threshold: parseNumber('threshold', values.threshold),
   keep: values.keep,
 });
 process.stdout.write(`Results and report: ${outDir}\n`);
@@ -53,4 +56,6 @@ const result = spawnSync('claude', args, {
   stdio: 'inherit',
   env: evalEnv(process.env),
 });
+if (result.error) process.stderr.write(`Could not run claude: ${result.error.message}\n`);
+if (result.signal) process.stderr.write(`claude plugin eval was stopped by ${result.signal}\n`);
 process.exitCode = result.status ?? 1;
