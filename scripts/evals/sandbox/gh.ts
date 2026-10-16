@@ -279,7 +279,13 @@ function prView(p: Parsed, store: Store, jq: Jq): Answer {
   const pr = store.prs.find((item) =>
     byNumber ? item.number === number : item.headRefName === ref,
   );
-  if (!pr) return fail(`no pull requests found for branch "${ref}"\n`);
+  if (!pr) {
+    return fail(
+      byNumber
+        ? `GraphQL: Could not resolve to a PullRequest with the number of ${number}. (repository.pullRequest)\n`
+        : `no pull requests found for branch "${ref}"\n`,
+    );
+  }
   const text = () =>
     `${pr.title} #${pr.number}\n${pr.state} • ${pr.headRefName} → ${pr.baseRefName}\n\n${pr.body}\n\nView this pull request on GitHub: ${WEB}/pull/${pr.number}\n`;
   return output(prJson(pr), p, jq, text);

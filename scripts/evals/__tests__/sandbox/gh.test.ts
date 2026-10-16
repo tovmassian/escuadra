@@ -1,6 +1,13 @@
 // scripts/evals/__tests__/sandbox/gh.test.ts
 import { describe, expect, it } from 'vitest';
-import { handle, isWrite, type IssueFixture, type Jq, type Store } from '../../sandbox/gh.ts';
+import {
+  handle,
+  isWrite,
+  type IssueFixture,
+  type Jq,
+  type PrFixture,
+  type Store,
+} from '../../sandbox/gh.ts';
 
 function issue(fields: Partial<IssueFixture> & Pick<IssueFixture, 'number'>): IssueFixture {
   return {
@@ -147,18 +154,17 @@ describe('everything else', () => {
   });
 });
 
+const pr9101: PrFixture = {
+  number: 9101,
+  title: 'fix(play): progress bar reaches 10 before Results (#9008)',
+  state: 'OPEN',
+  headRefName: 'fix/9008-progress-bar-last-step',
+  baseRefName: 'main',
+  body: 'Closes #9008',
+};
 const WITH_PR: Store = {
   ...STORE,
-  prs: [
-    {
-      number: 9101,
-      title: 'fix(play): progress bar reaches 10 before Results (#9008)',
-      state: 'OPEN',
-      headRefName: 'fix/9008-progress-bar-last-step',
-      baseRefName: 'main',
-      body: 'Closes #9008',
-    },
-  ],
+  prs: [pr9101],
   currentBranch: 'fix/9008-progress-bar-last-step',
 };
 const ghPr = (...args: string[]) => handle(args, WITH_PR, jq);
@@ -184,6 +190,26 @@ describe('pull requests', () => {
 
   it('fails for a branch with no PR', () => {
     expect(ghPr('pr', 'view', 'fix/none').code).toBe(1);
+  });
+
+  it('fails for a number with no PR as gh does, not as a branch', () => {
+    const result = ghPr('pr', 'view', '9999');
+    expect(result.code).toBe(1);
+    expect(result.stderr).toBe(
+      'GraphQL: Could not resolve to a PullRequest with the number of 9999. (repository.pullRequest)\n',
+    );
+  });
+
+  it('lists merged PRs with --state merged, and only then', () => {
+    const merged: Store = {
+      ...WITH_PR,
+      prs: [...WITH_PR.prs, { ...pr9101, number: 9100, state: 'MERGED', headRefName: 'feat/x' }],
+    };
+    const list = (...args: string[]) =>
+      numbers(handle(['pr', 'list', ...args, '--json', 'number'], merged, jq).stdout);
+    expect(list('--state', 'merged')).toEqual([9100]);
+    expect(list()).toEqual([9101]);
+    expect(list('--state', 'all')).toEqual([9101, 9100]);
   });
 
   it('logs a read it cannot answer as unsupported', () => {
