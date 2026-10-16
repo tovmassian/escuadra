@@ -206,6 +206,27 @@ export function footerMode(verdict: boolean | null, screenReader: boolean): Foot
   return screenReader ? 'next' : 'autoNext';
 }
 
+export interface NextButtonText {
+  /** What the button shows. */
+  label: string;
+  /** What a screen reader says: the destination, without the visual "tap to skip". */
+  spoken: string;
+}
+
+/**
+ * The footer button's words. The last question's button goes to the results,
+ * so it says so. The auto-next bar's label is short enough to fit one line of
+ * `ctaLabel` on a 360 dp phone.
+ */
+export function nextButtonText(
+  mode: Exclude<FooterMode, 'waiting'>,
+  last: boolean,
+): NextButtonText {
+  const spoken = last ? 'See results' : mode === 'gotIt' ? 'Got it — next' : 'Next question';
+  if (mode !== 'autoNext') return { label: spoken, spoken };
+  return { label: `${last ? 'See results' : 'Next'} · tap to skip`, spoken };
+}
+
 /** The streak haptic's moment: the count just reached 5 or 10 (spec §7). */
 export function streakMilestone(previous: number, current: number): boolean {
   return current !== previous && (current === 5 || current === 10);

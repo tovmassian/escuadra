@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { opacity, radii, sizes, typography } from '@/theme/tokens';
+import { borderWidths, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 export type ButtonVariant = 'filled' | 'outline' | 'inert' | 'text';
@@ -17,17 +17,20 @@ export function Button({ label, variant, onPress, disabled, large }: ButtonProps
   const colors = useThemeColors();
   const styles = StyleSheet.create({
     pressed: { opacity: opacity.settled },
+    // The 2.0 buttons (Results, the question footer): a pill, `ctaLabel`.
     control: {
-      borderRadius: radii.lg,
+      paddingVertical: spacing.xs,
+      paddingHorizontal: spacing.md,
+      borderRadius: radii.pill,
       alignItems: 'center',
       justifyContent: 'center',
     },
-    filled: { backgroundColor: colors.accent },
-    outline: { borderWidth: 1, borderColor: colors.border },
+    filled: { backgroundColor: colors.ctaBg },
+    outline: { borderWidth: borderWidths.thick, borderColor: colors.border },
     inert: { backgroundColor: colors.surface, borderWidth: 1, borderColor: colors.border },
-    label: { ...typography.body },
-    filledLabel: { color: colors.accentOn },
-    outlineLabel: { color: colors.textSecondary },
+    label: { ...typography.ctaLabel },
+    filledLabel: { color: colors.ctaText },
+    outlineLabel: { color: colors.textPrimary },
     inertLabel: { color: colors.textMuted },
     textLabel: { ...typography.secondary, color: colors.textSecondary, textAlign: 'center' },
   });
@@ -58,7 +61,8 @@ export function Button({ label, variant, onPress, disabled, large }: ButtonProps
       <View
         style={[
           styles.control,
-          { height: large ? sizes.controlHeightLarge : sizes.controlHeight },
+          // The least it is tall; it grows with the text at large sizes.
+          { minHeight: large ? sizes.controlHeightLarge : sizes.controlHeight },
           variant === 'filled' && styles.filled,
           variant === 'outline' && styles.outline,
           variant === 'inert' && styles.inert,

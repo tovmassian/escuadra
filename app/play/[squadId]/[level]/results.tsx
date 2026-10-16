@@ -145,7 +145,7 @@ export default function Results() {
       alignItems: 'center',
       justifyContent: 'center',
     },
-    outlineText: { ...typography.rowTitle, color: colors.textPrimary },
+    outlineText: { ...typography.ctaLabel, color: colors.textPrimary },
     retry: {
       width: sizes.cta.compact,
       height: sizes.cta.compact,
