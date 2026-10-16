@@ -3,13 +3,13 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
   FadeIn,
-  Keyframe,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import { PhotoCreditLine } from './PhotoCreditLine';
+import { riseIn } from './riseIn';
 import type { FooterMode } from '@/lib/roundView';
 import {
   borderWidths,
@@ -32,16 +32,6 @@ interface QuestionFooterProps {
   /** The current question's photo credit, shown for the whole question
    *  (spec §2.7, guardrail 1). */
   credit: PhotoCredit | null;
-}
-
-function risingCta(reduced: boolean) {
-  if (reduced) return FadeIn.duration(durations.transition);
-  return new Keyframe({
-    0: { opacity: 0, transform: [{ translateY: spotlightMotion.rise }] },
-    100: { opacity: 1, transform: [{ translateY: 0 }] },
-  })
-    .duration(durations.toggle)
-    .delay(spotlightCues.missCta);
 }
 
 // Under the answers (spec §2.1, §2.4):
@@ -77,7 +67,11 @@ export function QuestionFooter({ mode, compact, onNext, credit }: QuestionFooter
       ) : null}
       {mode === 'gotIt' || mode === 'next' ? (
         <Animated.View
-          entering={mode === 'gotIt' ? risingCta(reduced) : FadeIn.duration(durations.transition)}
+          entering={
+            mode === 'gotIt'
+              ? riseIn(reduced, spotlightMotion.rise, durations.toggle, spotlightCues.missCta)
+              : FadeIn.duration(durations.transition)
+          }
         >
           <Pressable
             testID="question-next"

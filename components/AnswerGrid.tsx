@@ -1,6 +1,7 @@
 import { StyleSheet, View } from 'react-native';
-import Animated, { FadeIn, FadeOut, Keyframe, useReducedMotion } from 'react-native-reanimated';
+import Animated, { FadeOut, useReducedMotion } from 'react-native-reanimated';
 import { AnswerTile } from './AnswerTile';
+import { riseIn } from './riseIn';
 import type { FlagCode } from '@/assets/flags/generated';
 import { flagFor } from '@/lib/flags';
 import type { QuestionPart } from '@/lib/questionEngine';
@@ -25,16 +26,6 @@ interface TileModel {
   label: string;
   sub: string | undefined;
   flag: FlagCode | null | undefined;
-}
-
-function rising(reduced: boolean, delay: number) {
-  if (reduced) return FadeIn.duration(durations.transition);
-  return new Keyframe({
-    0: { opacity: 0, transform: [{ translateY: spotlightMotion.rise }] },
-    100: { opacity: 1, transform: [{ translateY: 0 }] },
-  })
-    .duration(durations.transition)
-    .delay(delay);
 }
 
 // The answers, as a grid (spec §2.3): two columns for names, clubs and
@@ -77,7 +68,12 @@ export function AnswerGrid({
             <Animated.View
               key={tile.label}
               style={styles.cell}
-              entering={rising(reduced, tile.index * stagger)}
+              entering={riseIn(
+                reduced,
+                spotlightMotion.rise,
+                durations.transition,
+                tile.index * stagger,
+              )}
             >
               <AnswerTile
                 label={tile.label}
