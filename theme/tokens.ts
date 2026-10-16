@@ -112,7 +112,7 @@ export interface Palette {
    *  both themes (photo or bands under `cardGradient`), so this is shared. */
   cardLine: string;
   // ---- 2.0 sharing (spec §4.1) ----
-  /** The share sheet's backdrop over the Results screen. */
+  /** A bottom sheet's backdrop: the share sheet and the photo credits. */
   scrim: string;
   /** A link inside a preview (the share text's URL). */
   link: string;
@@ -166,7 +166,7 @@ const sharedRoles = {
   stageShimmer: 'rgba(255,255,255,0.26)',
   stageShimmerEdge: 'rgba(255,255,255,0)',
   cardLine: '#ffa19e',
-  // The share sheet's backdrop: the same ink in both themes.
+  // A bottom sheet's backdrop: the same ink in both themes.
   scrim: 'rgba(0,0,0,0.55)',
   // Study's hidden-name pill on a player card, which is dark in both themes.
   revealLine: 'rgba(255,255,255,0.5)',
@@ -564,6 +564,7 @@ export const typography = {
   shareQuestion: { fontFamily: 'Inter-Bold', fontSize: 16, lineHeight: 19 },
   shareLink: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 11 },
   // ---- 2.0 share sheet (spec §4.1) ----
+  // Every bottom sheet's title, not only the share sheet's.
   sheetTitle: {
     fontFamily: 'Archivo-SemiExpandedExtraBold',
     fontSize: 18,
@@ -657,13 +658,19 @@ export const durations = {
   pulse: 200, // the next slot's outline
   segmentFill: 120, // one results-strip segment
   segmentStagger: 40, // between results-strip segments
-  sheet: 240, // the share sheet sliding up
-  scrim: 200, // the share sheet's backdrop fading in
+  sheet: 240, // a bottom sheet sliding up
+  scrim: 200, // a bottom sheet's backdrop fading in
   partOut: 120, // the old part's tiles fading out
   partStagger: 20, // between tiles rising in for the next part
   tileStagger: 25, // between tiles rising in for the next question
   autoAdvance: 1200,
 } as const;
+
+// Dragging a bottom sheet down by its handle or title (`Sheet`). The drag takes
+// over once the finger has moved `slop` pt down; let go past `closeFraction` of
+// the sheet's height, or faster than `flingVelocity` (pt per ms), and the sheet
+// closes; otherwise it settles back.
+export const sheetDrag = { slop: 10, closeFraction: 0.25, flingVelocity: 0.8 } as const;
 
 // Distances (pt) and scales of the question screen's motion (spec §6).
 export const spotlightMotion = {
@@ -874,8 +881,6 @@ export const sizes = {
     sunRay: 3,
     sunRayOffset: 6,
   },
-  // The results screen's expanded photo-credit list scrolls past this.
-  photoCreditsMaxHeight: 200,
   // ---- 2.0 spotlight screens (spec §2, §3, §5, §8) ----
   // The question screen goes compact below this usable height (window minus
   // safe-area insets).
@@ -937,11 +942,10 @@ export const sizes = {
     titleGap: 14, // score to title
     gridGap: 26, // title to the squares
   },
-  // The share sheet (spec §4.1).
+  // Every bottom sheet (`Sheet`): its grab handle and its close button.
+  sheet: { handleWidth: 36, handleHeight: 5, close: 36 },
+  // The share sheet's own parts (spec §4.1).
   shareSheet: {
-    handleWidth: 36,
-    handleHeight: 5,
-    close: 36,
     switchHeight: 40,
     previewHeight: 304,
     previewWidth: 168,
@@ -991,7 +995,7 @@ export const radii = {
   lg: 16,
   card: 18, // player cards
   xl: 24,
-  sheet: 28, // the share sheet's top corners
+  sheet: 28, // a bottom sheet's top corners
   bubbleTail: 6, // the text preview bubble's tail corner
   pill: 999,
 } as const;
