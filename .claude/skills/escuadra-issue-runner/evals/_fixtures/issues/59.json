@@ -1,0 +1,12 @@
+{
+  "number": 59,
+  "title": "docs(site): link store badges on the marketing site",
+  "state": "OPEN",
+  "body": "**Priority:** P2  \n**Size:** XS  \n**Branch:** `gh-pages`\n\nThe marketing site's App Store and Google Play badges link to `#`. The share feature links to this site, so it has to lead somewhere.\n\n### Work\n\n- [x] App Store badge → the live App Store URL once 1.0.0 is approved\n- [ ] Google Play badge → the Play URL once production is live; until then, keep it clearly \"coming soon\" (the closed-test opt-in link must **not** go here)\n- [ ] Update the badge `aria-label`s to match\n\n### Acceptance criteria\n\n- [ ] No badge links to `#` for a store where the app is live\n",
+  "comments": [],
+  "labels": ["documentation"],
+  "milestone": "Google Play v1 Release",
+  "size": "XS",
+  "source": "real snapshot 2026-10-16",
+  "why": "XS, but it publishes gh-pages and touches the store-badge rule while Play is not live: the skill asks."
+}
