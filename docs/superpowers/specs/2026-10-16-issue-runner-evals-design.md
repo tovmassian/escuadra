@@ -6,6 +6,57 @@ built in this order: the eval suite (§3–§9), then the skill written against 
 (§2, §10). The contract in §2 is the skill's specification; the evals encode
 it.
 
+## Outcome
+
+### RED baseline (2026-10-16)
+
+Run on 2026-10-16 with Claude Code 2.1.278: `--full --ablation none --runs 1`, a Sonnet
+agent, an Opus judge and the stub skill, $7.34 estimated, 11 minutes. Before Ruling 20,
+`--full` still included the smoke case.
+
+| Case                      | Score | Failed graders                                           |
+| ------------------------- | ----- | -------------------------------------------------------- |
+| `126-small-bug`           | 0.50  | decision, workspace, first-step, execution, docs         |
+| `129-large-spec`          | 0.72  | first-step, execution, docs, questions                   |
+| `129-large-spec-subagent` | 0.61  | decision, workspace, questions                           |
+| `117-owner-decision`      | 0.91  | docs                                                     |
+| `55-tbc`                  | 1.00  |                                                          |
+| `59-gh-pages`             | 1.00  |                                                          |
+| `116-release`             | 1.00  |                                                          |
+| `115-closed`              | 0.73  | docs, questions                                          |
+| `on-release-branch`       | 0.73  | workspace, first-step, execution                         |
+| `shipped-fix-from-main`   | 0.53  | decision, workspace, first-step, execution               |
+| `fingerprint-on-release`  | 1.00  |                                                          |
+| `m-boundary`              | 0.73  | workspace, first-step, execution                         |
+| `on-feature-branch`       | 0.93  | first-step                                               |
+| `dirty-tree`              | 0.33  | decision, workspace, base, branch, first-step, execution |
+| `plan-half-done`          | 0.83  | execution, questions                                     |
+| `open-pr`                 | 0.60  | decision, workspace, execution                           |
+| `no-size`                 | 0.88  | first-step, execution                                    |
+| `neg-create-issue`        | 1.00  |                                                          |
+| `neg-question`            | 1.00  |                                                          |
+
+`sandbox-smoke` scored 0.5 on Sonnet, which declined the deliberate PR and commit
+(`write-logged`, `commit-sandboxed` and `stayed-dry-fires` failed). It is a Haiku check
+(`--tag smoke --model haiku`), and full runs now skip it.
+
+8 of the 19 graded cases reach the 0.9 bar; the mean score is 0.79.
+
+- The ask cases do not all pass already: `55-tbc`, `59-gh-pages`, `116-release` and
+  `fingerprint-on-release` score 1.0 and `117-owner-decision` 0.91 (it misses `docs`), while
+  `115-closed` (`docs`, `questions`), `129-large-spec` (`first-step`, `execution`, `docs`,
+  `questions`), `129-large-spec-subagent` and `plan-half-done` (`execution`, `questions`) fall short.
+- The proceed cases are where the baseline fails: of the 8, 4 miss `decision`, 6 miss
+  `workspace`, 7 miss `first-step` and 7 miss `execution`.
+- `docs` is missed by `115-closed`, `117-owner-decision`, `126-small-bug` and `129-large-spec`.
+- `129-large-spec-subagent` misses `decision` (and `workspace`, `questions`), so it did not ask
+  the open choices as expected.
+- Both negative cases pass; `neg-create-issue` reached its 15-turn cap and still passed.
+
+The run was not kept, so the final messages behind the proceed cases' misses (a different
+decision, or a different line format) are not in the report; PR 2 starts with a `--keep`
+run of the `core` tag to read them.
+
 ## 1. Problem
 
 The owner wants one skill that takes an issue number and carries the issue
@@ -455,7 +506,9 @@ scripts/evals/                        the harness: skill-agnostic
   land in the repo. `--keep` adds
   `--keep-temp`: a run's trace survives only with it.
 - **Tags:** `core` (one case per rule: about 8), `workspace`, `ask`, `negative`,
-  and `smoke` for `sandbox-smoke`.
+  and `smoke` for `sandbox-smoke`. The generator adds `graded` to every case but the smoke
+  case, and `--full` runs `--tag graded`: the smoke case is a Haiku check that a Sonnet run
+  would fail.
 - **Skill-agnostic harness:** the sandbox and the fake `gh` know nothing of this
   skill, so another Escuadra skill could get a suite later. Nothing is built for
   that now.
