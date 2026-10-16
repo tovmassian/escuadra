@@ -1,5 +1,6 @@
-import { CloseGlyph, ShareGlyph } from '@/components/ActionGlyphs';
+import { ShareGlyph } from '@/components/ActionGlyphs';
 import { ShareCard } from '@/components/ShareCard';
+import { Sheet } from '@/components/Sheet';
 import { releaseShareImage, shareImage, shareText } from '@/lib/share';
 import {
   formatShareText,
@@ -22,25 +23,14 @@ import {
 import { useThemeColors } from '@/theme/useTheme';
 import type { TeamMarker } from '@/types/squad';
 import { useEffect, useRef, useState } from 'react';
-import {
-  Modal,
-  PixelRatio,
-  Pressable,
-  ScrollView,
-  StyleSheet,
-  Text,
-  useWindowDimensions,
-  View,
-} from 'react-native';
+import { PixelRatio, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   FadeIn,
-  SlideInDown,
   useAnimatedStyle,
   useReducedMotion,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 interface ShareSheetProps {
   visible: boolean;
@@ -68,35 +58,22 @@ interface ShareSheetProps {
 // sent, so closing on resolve would close it on a cancel too, and a player
 // often wants to send the other format as well. Closing is one tap.
 //
-// The body mounts only while the sheet is open, so every opening starts on
-// Image, with nothing in flight.
+// The body mounts only while the sheet is open (`Sheet`), so every opening
+// starts on Image, with nothing in flight.
 //
-// The sheet is capped at the screen's height less the top inset and a margin,
-// because at large text sizes or on a short screen it is taller than that, and
-// a bottom-pinned sheet taller than the screen loses its handle and its close
-// button off the top, with no way to dismiss it. The handle, the title with its
-// close button and the share button stay put; the switch, the preview and the
-// hint between them scroll.
+// When the sheet is capped at the screen's height, the title with its close
+// button and the share button stay put; the switch, the preview and the hint
+// between them scroll.
 export function ShareSheet({ visible, onClose, card, text, onShared }: ShareSheetProps) {
   return (
-    <Modal
-      visible={visible}
-      transparent
-      animationType="none"
-      statusBarTranslucent
-      navigationBarTranslucent
-      // Android's back button.
-      onRequestClose={onClose}
-    >
-      {visible ? <SheetBody onClose={onClose} card={card} text={text} onShared={onShared} /> : null}
-    </Modal>
+    <Sheet visible={visible} onClose={onClose} title="Share your round" testID="share">
+      <ShareBody card={card} text={text} onShared={onShared} />
+    </Sheet>
   );
 }
 
-function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'visible'>) {
+function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | 'onClose'>) {
   const colors = useThemeColors();
-  const insets = useSafeAreaInsets();
-  const { height: windowHeight } = useWindowDimensions();
   const reduced = useReducedMotion();
   const [format, setFormat] = useState<ShareFormat>('image');
   const [busy, setBusy] = useState(false);
@@ -124,46 +101,16 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
 
   const sheet = sizes.shareSheet;
   const captureWidth = shareCapture.width / PixelRatio.get();
-  // The close button and the switch's segments are drawn under the 44 pt tap
-  // target, and reach it through hitSlop.
-  const closeSlop = (sizes.minTapTarget - sheet.close) / 2;
+  // The switch's segments are drawn under the 44 pt tap target, and reach it
+  // through hitSlop.
   const segmentSlop = (sizes.minTapTarget - sheet.switchHeight) / 2;
 
   const styles = StyleSheet.create({
-    root: { ...StyleSheet.absoluteFill, justifyContent: 'flex-end' },
-    scrim: { ...StyleSheet.absoluteFill, backgroundColor: colors.scrim },
-    sheet: {
-      backgroundColor: colors.surface,
-      borderTopLeftRadius: radii.sheet,
-      borderTopRightRadius: radii.sheet,
-      paddingTop: spacing.xs,
-      paddingHorizontal: spacing.lg,
-      paddingBottom: insets.bottom + spacing.sm,
-      gap: spacing.md,
-      maxHeight: windowHeight - insets.top - spacing.md,
-    },
-    handle: {
-      alignSelf: 'center',
-      width: sheet.handleWidth,
-      height: sheet.handleHeight,
-      borderRadius: radii.pill,
-      backgroundColor: colors.border,
-    },
     // Shrinks, and scrolls, when the sheet is capped.
     body: { flexShrink: 1 },
     bodyContent: { gap: spacing.md },
-    header: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-    title: { ...typography.sheetTitle, flex: 1, minWidth: 0, color: colors.textPrimary },
-    close: {
-      width: sheet.close,
-      height: sheet.close,
-      borderRadius: sheet.close / 2,
-      backgroundColor: colors.surfaceRaised,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
     // `surfaceRaised`, not `tile`: the light palette's `tile` is white, the
-    // sheet's own colour, so a track and a close button filled with it vanish.
+    // sheet's own colour, so a track filled with it vanishes.
     track: {
       padding: spacing.xxs,
       borderRadius: radii.pill,
@@ -264,161 +211,115 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
   const bubbleLabel = `${parts.header}. ${parts.score}${parts.verdict ? `, ${parts.verdict}` : ''}. ${parts.url}`;
 
   return (
-    <View style={styles.root}>
-      <Animated.View
-        entering={FadeIn.duration(reduced ? durations.transition : durations.scrim)}
-        style={styles.scrim}
+    <>
+      <ScrollView
+        style={styles.body}
+        contentContainerStyle={styles.bodyContent}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
       >
-        {/* A tap outside closes the sheet, but the scrim is left out of the
-            screen reader's order: the × and Android's back button are the
-            accessible ways out, and a second "Close" would be read twice (on
-            Android `accessibilityViewIsModal` does nothing). */}
-        <Pressable
-          style={StyleSheet.absoluteFill}
-          onPress={onClose}
-          focusable={false}
-          importantForAccessibility="no"
-          accessibilityElementsHidden
-        />
-      </Animated.View>
-
-      <Animated.View
-        testID="share-sheet"
-        // A timing slide with no spring, so the sheet never overshoots.
-        entering={
-          reduced ? FadeIn.duration(durations.transition) : SlideInDown.duration(durations.sheet)
-        }
-        style={styles.sheet}
-        accessibilityViewIsModal
-        // iOS's two-finger scrub, since the scrim is hidden from screen readers.
-        onAccessibilityEscape={onClose}
-      >
-        <View style={styles.handle} />
-
-        <View style={styles.header}>
-          <Text style={styles.title} accessibilityRole="header">
-            Share your round
-          </Text>
-          <Pressable
-            testID="share-close"
-            onPress={onClose}
-            hitSlop={closeSlop}
-            accessibilityRole="button"
-            accessibilityLabel="Close"
-            style={({ pressed }) => [styles.close, pressed && { opacity: opacity.settled }]}
+        <View style={styles.track} accessibilityRole="tablist">
+          <View
+            style={styles.segments}
+            onLayout={(e) => setSwitchWidth(e.nativeEvent.layout.width)}
           >
-            <CloseGlyph color={colors.textSecondary} />
-          </Pressable>
+            <Animated.View style={[styles.pill, pillStyle]} />
+            {formats.map(({ key, label }) => {
+              const selected = format === key;
+              return (
+                <Pressable
+                  key={key}
+                  testID={`share-format-${key}`}
+                  onPress={() => setFormat(key)}
+                  // Locked while a share is in flight, so the capture copy
+                  // cannot unmount under `captureRef`.
+                  disabled={busy}
+                  hitSlop={{ top: segmentSlop, bottom: segmentSlop }}
+                  accessibilityRole="tab"
+                  accessibilityState={{ selected, disabled: busy }}
+                  style={styles.segment}
+                >
+                  <Text
+                    style={[
+                      styles.segmentLabel,
+                      { color: selected ? colors.ctaText : colors.textSecondary },
+                    ]}
+                  >
+                    {label}
+                  </Text>
+                </Pressable>
+              );
+            })}
+          </View>
         </View>
 
-        <ScrollView
-          style={styles.body}
-          contentContainerStyle={styles.bodyContent}
-          showsVerticalScrollIndicator={false}
-          bounces={false}
-        >
-          <View style={styles.track} accessibilityRole="tablist">
-            <View
-              style={styles.segments}
-              onLayout={(e) => setSwitchWidth(e.nativeEvent.layout.width)}
-            >
-              <Animated.View style={[styles.pill, pillStyle]} />
-              {formats.map(({ key, label }) => {
-                const selected = format === key;
-                return (
-                  <Pressable
-                    key={key}
-                    testID={`share-format-${key}`}
-                    onPress={() => setFormat(key)}
-                    // Locked while a share is in flight, so the capture copy
-                    // cannot unmount under `captureRef`.
-                    disabled={busy}
-                    hitSlop={{ top: segmentSlop, bottom: segmentSlop }}
-                    accessibilityRole="tab"
-                    accessibilityState={{ selected, disabled: busy }}
-                    style={styles.segment}
-                  >
-                    <Text
-                      style={[
-                        styles.segmentLabel,
-                        { color: selected ? colors.ctaText : colors.textSecondary },
-                      ]}
-                    >
-                      {label}
-                    </Text>
-                  </Pressable>
-                );
-              })}
-            </View>
-          </View>
-
-          <View style={styles.preview}>
-            <Animated.View
-              key={format}
-              entering={FadeIn.duration(durations.transition)}
-              style={styles.previewItem}
-            >
-              {format === 'image' ? (
-                <View style={styles.frame}>
-                  <View style={styles.frameClip}>
-                    <ShareCard
-                      view={view}
-                      items={card.items}
-                      marker={card.marker}
-                      width={sheet.previewWidth}
-                    />
+        <View style={styles.preview}>
+          <Animated.View
+            key={format}
+            entering={FadeIn.duration(durations.transition)}
+            style={styles.previewItem}
+          >
+            {format === 'image' ? (
+              <View style={styles.frame}>
+                <View style={styles.frameClip}>
+                  <ShareCard
+                    view={view}
+                    items={card.items}
+                    marker={card.marker}
+                    width={sheet.previewWidth}
+                  />
+                </View>
+              </View>
+            ) : (
+              <View style={styles.bubble} accessible accessibilityLabel={bubbleLabel}>
+                <Text style={styles.bubbleText}>{parts.header}</Text>
+                <View style={styles.bubbleResult}>
+                  <Text style={styles.bubbleScore}>{parts.score}</Text>
+                  {parts.verdict ? <Text style={styles.bubbleText}>{parts.verdict}</Text> : null}
+                  <View style={styles.squares}>
+                    {parts.squares.map((right, i) => (
+                      <View
+                        key={i}
+                        style={[
+                          styles.square,
+                          { backgroundColor: right ? colors.success : colors.error },
+                        ]}
+                      />
+                    ))}
                   </View>
                 </View>
-              ) : (
-                <View style={styles.bubble} accessible accessibilityLabel={bubbleLabel}>
-                  <Text style={styles.bubbleText}>{parts.header}</Text>
-                  <View style={styles.bubbleResult}>
-                    <Text style={styles.bubbleScore}>{parts.score}</Text>
-                    {parts.verdict ? <Text style={styles.bubbleText}>{parts.verdict}</Text> : null}
-                    <View style={styles.squares}>
-                      {parts.squares.map((right, i) => (
-                        <View
-                          key={i}
-                          style={[
-                            styles.square,
-                            { backgroundColor: right ? colors.success : colors.error },
-                          ]}
-                        />
-                      ))}
-                    </View>
-                  </View>
-                  <Text style={styles.bubbleLink}>{parts.url}</Text>
-                  <Text style={styles.bubbleMeta}>Preview</Text>
-                </View>
-              )}
-            </Animated.View>
-          </View>
+                <Text style={styles.bubbleLink}>{parts.url}</Text>
+                <Text style={styles.bubbleMeta}>Preview</Text>
+              </View>
+            )}
+          </Animated.View>
+        </View>
 
-          <View style={styles.hintSlot}>
-            <Text style={styles.hint}>
-              {format === 'image'
-                ? 'Story-sized picture. No player photos, no names — friends can still play it.'
-                : 'The score grid for group chats, with a link to the app.'}
-            </Text>
-          </View>
-        </ScrollView>
+        <View style={styles.hintSlot}>
+          <Text style={styles.hint}>
+            {format === 'image'
+              ? 'Story-sized picture. No player photos, no names — friends can still play it.'
+              : 'The score grid for group chats, with a link to the app.'}
+          </Text>
+        </View>
+      </ScrollView>
 
-        <Pressable
-          testID="share-submit"
-          onPress={submit}
-          disabled={busy}
-          accessibilityRole="button"
-          accessibilityState={{ busy, disabled: busy }}
-          style={({ pressed }) => [
-            styles.cta,
-            busy ? { opacity: opacity.disabled } : pressed && { opacity: opacity.settled },
-          ]}
-        >
-          <ShareGlyph color={colors.ctaText} />
-          <Text style={styles.ctaText}>{format === 'image' ? 'Share image' : 'Share text'}</Text>
-        </Pressable>
-      </Animated.View>
+      <Pressable
+        testID="share-submit"
+        onPress={submit}
+        disabled={busy}
+        accessibilityRole="button"
+        accessibilityState={{ busy, disabled: busy }}
+        style={({ pressed }) => [
+          styles.cta,
+          busy ? { opacity: opacity.disabled } : pressed && { opacity: opacity.settled },
+        ]}
+      >
+        <ShareGlyph color={colors.ctaText} />
+        <Text style={styles.ctaText}>{format === 'image' ? 'Share image' : 'Share text'}</Text>
+      </Pressable>
 
+      {/* Absolutely placed, so it takes no room in the sheet's column. */}
       {format === 'image' ? (
         <View
           style={styles.capture}
@@ -435,6 +336,6 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
           />
         </View>
       ) : null}
-    </View>
+    </>
   );
 }

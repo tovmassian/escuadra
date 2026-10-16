@@ -53,8 +53,8 @@ deliberate constraint is distinguishable from an accident.
    Wikimedia Commons, behind the shirt number. With no freely licensed photo,
    or while it loads, the team's colours and the number show. Each photo's
    credit — who to credit, licence, "cropped" — sits in muted text under the
-   action button, always visible; the results screen lists every credit behind
-   "Photo credits · N".
+   action button, always visible; Results and Study list every credit in a
+   sheet behind "Photo credits · N".
 2. **No club crests, badges, logos or shield shapes. Ever.** Trademark
    exposure. Clubs are identified by text and colour, drawn as banded
    rectangles — the same marker shape used for national flags. National
@@ -123,6 +123,7 @@ flawless — see below). Route, file, and what it does.
 | `screens/09-results-share.png`           | Results — share sheet, Image         |
 | `screens/09-results-share-text.png`      | Results — share sheet, Text          |
 | `screens/09-results-share-flawless.png`  | Results — share sheet, a la escuadra |
+| `screens/09-results-credits.png`         | Results — photo credits sheet        |
 
 Question captures carry real Commons photos, each credited on screen by the
 line under the footer; a capture waits for its images to load.
@@ -189,6 +190,13 @@ app." and `SHARE TEXT`. On web the share button does nothing.
 `09-results-share-flawless.png` is the Image format after the flawless round: the
 picture turns green, with a green `10/10`, the strike with its ball and trail,
 `A LA ESCUADRA` and ten green squares.
+
+`09-results-credits.png` is the passed round's Results after a tap on
+`Photo credits · N`: the same sheet, titled `PHOTO CREDITS` with a close ×,
+lists each photo the round showed as its shirt number and name, then the
+author, the licence and "cropped", the author and the licence underlined as
+links. The sheet is as tall as the list, and scrolls only past the screen's
+height. Study opens the same sheet, its rows named by shirt number only.
 
 The three Study captures are Inter Milan, a club squad, so each line under a
 name is a nationality with its flag (a nation squad shows the club instead).
