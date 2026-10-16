@@ -3,6 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Animated, { FadeOut, useReducedMotion } from 'react-native-reanimated';
 import { AnswerTile } from './AnswerTile';
 import { riseIn } from './riseIn';
+import type { ShotTap } from './useShot';
 import type { FlagCode } from '@/assets/flags/generated';
 import { flagFor } from '@/lib/flags';
 import type { QuestionPart } from '@/lib/questionEngine';
@@ -19,7 +20,8 @@ interface AnswerGridProps {
   /** Delay between tiles rising in: `durations.tileStagger` for a new
    *  question, `durations.partStagger` for the next part. */
   stagger: number;
-  onAnswer: (index: number) => void;
+  /** The answer, and where it was tapped (the shot starts from there). */
+  onAnswer: (index: number, tap: ShotTap) => void;
 }
 
 interface TileModel {
@@ -94,8 +96,8 @@ export function AnswerGrid({
                 verdict={tileVerdict(part, answeredIndex, tile.index)}
                 pickedRight={pickedRight}
                 minHeight={layout.tileHeight}
-                onPress={() => {
-                  if (readyGrid.current === gridKey) onAnswer(tile.index);
+                onPress={(tap) => {
+                  if (readyGrid.current === gridKey) onAnswer(tile.index, tap);
                 }}
               />
             </Animated.View>

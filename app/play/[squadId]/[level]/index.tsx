@@ -1,14 +1,16 @@
 import { AnswerGrid } from '@/components/AnswerGrid';
-import { EscuadraCorner, type CornerState } from '@/components/EscuadraCorner';
+import { EscuadraCorner } from '@/components/EscuadraCorner';
 import { GlassCloseButton } from '@/components/GlassCloseButton';
 import { QuestionFooter } from '@/components/QuestionFooter';
 import { riseIn } from '@/components/riseIn';
 import { RoundProgress } from '@/components/RoundProgress';
+import { ShotOverlay } from '@/components/ShotOverlay';
 import { SlotChip } from '@/components/SlotChip';
 import { SpotlightStage } from '@/components/SpotlightStage';
 import { StreakChip } from '@/components/StreakChip';
 import { TeamMarker } from '@/components/TeamMarker';
 import { useScreenReader } from '@/components/useScreenReader';
+import { useShot } from '@/components/useShot';
 import { feedback } from '@/lib/haptics';
 import { photoFor, roundPhotoUrls } from '@/lib/photos';
 import type { Level } from '@/lib/questionEngine';
@@ -55,7 +57,8 @@ import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-cont
 // - the photo stage;
 // - the stage gradient over the whole window;
 // - a column: progress, top bar, and, in a scroll, the hero (number, corner,
-//   slots), the prompt, the answers and the footer.
+//   slots), the prompt, the answers and the footer;
+// - the shot (the ball and its trail), over everything (#129).
 // The scroll is bottom-aligned, so it never moves when everything fits (every
 // level at 360×640). It only scrolls at large text sizes (SCREENS.md
 // invariant 6).
@@ -153,6 +156,8 @@ export default function Question() {
     previousStreak.current = currentStreak;
   }, [currentStreak]);
 
+  const { live, clock, overlayRef, cornerRef, fire } = useShot(session.currentIndex);
+
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     column: { flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom },
@@ -248,7 +253,6 @@ export default function Question() {
   const slots = slotStates(question, result, session.currentPartIndex, squad.kind, level);
   const answeredIndex = result.parts[session.currentPartIndex]?.pickedIndex ?? null;
   const counter = partCounter(question, session.currentPartIndex);
-  const corner: CornerState = verdict === true ? 'correct' : verdict === false ? 'wrong' : 'asking';
   const promptColor =
     verdict === true ? colors.success : verdict === false ? colors.error : colors.onStage;
 
@@ -343,7 +347,12 @@ export default function Question() {
                 >
                   {question.memberNo}
                 </Text>
-                <EscuadraCorner state={corner} />
+                <EscuadraCorner
+                  ref={cornerRef}
+                  question={session.currentIndex}
+                  live={live}
+                  clock={clock}
+                />
               </View>
               <View style={styles.slots}>
                 {slots.map((slot) => (
@@ -377,17 +386,17 @@ export default function Question() {
               stagger={
                 session.currentPartIndex === 0 ? durations.tileStagger : durations.partStagger
               }
-              onAnswer={(pickedIndex) => {
+              onAnswer={(pickedIndex, tap) => {
+                const right = pickedIndex === part.correctIndex;
+                const lastPart = session.currentPartIndex === question.parts.length - 1;
                 // `answerPart` scores the part and moves to the next in one
                 // update, so this grid unmounts before any tile sees its
                 // verdict. A right part that is not the last gets its haptic
                 // here; the last part's tile plays its own.
-                if (
-                  pickedIndex === part.correctIndex &&
-                  session.currentPartIndex < question.parts.length - 1
-                ) {
-                  feedback('correct');
-                }
+                if (right && !lastPart) feedback('correct');
+                // The shot only when the question is decided: the last part
+                // right (a goal), or any part wrong (a miss).
+                if (!right || lastPart) fire(right ? 'goal' : 'miss', tap);
                 session.answerPart(pickedIndex);
               }}
             />
@@ -401,6 +410,8 @@ export default function Question() {
           </View>
         </ScrollView>
       </View>
+      {/* Over everything, and never in the way of a tap. */}
+      <ShotOverlay ref={overlayRef} question={session.currentIndex} live={live} clock={clock} />
     </View>
   );
 }

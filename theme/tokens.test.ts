@@ -416,18 +416,57 @@ describe('spotlight motion', () => {
   });
 
   it('keeps scales near 1 and distances small', () => {
-    for (const key of [
-      'pressScale',
-      'streakOutScale',
-      'ballStartScale',
-      'rosterInScale',
-    ] as const) {
+    for (const key of ['pressScale', 'streakOutScale', 'rosterInScale'] as const) {
       expect(spotlightMotion[key], key).toBeLessThan(1);
     }
     for (const key of ['popScale', 'answerPopScale', 'pulseScale', 'streakPopScale'] as const) {
       expect(spotlightMotion[key], key).toBeGreaterThan(1);
       expect(spotlightMotion[key], key).toBeLessThanOrEqual(1.2);
     }
+  });
+
+  it("strikes the ball bigger than the corner's and settles it at the corner's size", () => {
+    const { shot } = spotlightMotion;
+    expect(shot.startScale).toBeGreaterThan(1);
+    expect(shot.settleScale).toBeLessThan(1);
+    // Drawn large and scaled down, so it stays sharp: never scaled up.
+    expect(shot.drawScale).toBeGreaterThan(shot.startScale);
+    expect(shot.clearance).toBeGreaterThan(0);
+  });
+
+  it('fades the trail out behind the ball, each one later, fainter and smaller', () => {
+    const { trail } = spotlightMotion.shot;
+    expect(trail.length).toBe(3);
+    trail.forEach((ghost, i) => {
+      expect(ghost.opacity).toBeLessThan(1);
+      expect(ghost.scale).toBeLessThan(1);
+      const before = trail[i - 1];
+      if (!before) return;
+      expect(ghost.delay).toBeGreaterThan(before.delay);
+      expect(ghost.opacity).toBeLessThan(before.opacity);
+      expect(ghost.scale).toBeLessThan(before.scale);
+    });
+  });
+
+  it('kicks the corner a little, less with each swing', () => {
+    const { cornerKick } = spotlightMotion;
+    cornerKick.forEach((swing, i) => {
+      expect(swing.at).toBeGreaterThan(0);
+      expect(swing.at).toBeLessThan(1);
+      expect(Math.abs(swing.scale - 1)).toBeLessThanOrEqual(0.15);
+      const before = cornerKick[i - 1];
+      if (!before) return;
+      expect(swing.at).toBeGreaterThan(before.at);
+      expect(Math.abs(swing.x)).toBeLessThan(Math.abs(before.x));
+      expect(Math.abs(swing.scale - 1)).toBeLessThan(Math.abs(before.scale - 1));
+    });
+  });
+
+  it('flashes the ring out from inside the ball to past the corner, fading', () => {
+    const { ring } = spotlightMotion;
+    expect(ring.from).toBeLessThan(1);
+    expect(ring.to).toBeGreaterThan(1);
+    expect(ring.opacity).toBeLessThan(1);
   });
 });
 
