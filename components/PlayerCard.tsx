@@ -116,7 +116,7 @@ export function PlayerCard({
       borderRadius: radii.pill,
       borderWidth: borderWidths.hairline,
       borderColor: colors.glassLine,
-      backgroundColor: colors.glass,
+      backgroundColor: colors.photoChip,
     },
     badgeText: { ...typography.positionChip, color: colors.onPhoto },
     reveal: {
@@ -204,7 +204,7 @@ export function PlayerCard({
         )}
         {lineText && lineFlag ? (
           <View style={styles.lineRow}>
-            <Flag code={lineFlag} size="inline" label={line ?? ''} />
+            <Flag code={lineFlag} size="inline" label={line ?? ''} lineColor={colors.glassLine} />
             {lineText}
           </View>
         ) : (

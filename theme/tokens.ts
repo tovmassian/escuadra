@@ -116,6 +116,10 @@ export interface Palette {
   /** A link inside a preview (the share text's URL). */
   link: string;
   // ---- 2.0 Study (spec §5) ----
+  /** The position chip's fill over a card photo. Darker than `glass`, which
+   *  leaves white text under 4.5:1 over a bright photo's top edge. Translucent,
+   *  so never measure it with `contrastRatio`; a composite test holds it. */
+  photoChip: string;
   /** The dashed outline of a hidden name's "Tap to reveal" pill on a player
    *  card. The card is dark in both themes, so this is shared. Translucent,
    *  so never measure it with `contrastRatio`. */
@@ -166,6 +170,7 @@ const sharedRoles = {
   // Study's hidden-name pill on a player card, which is dark in both themes.
   revealLine: 'rgba(255,255,255,0.5)',
   revealText: 'rgba(255,255,255,0.85)',
+  photoChip: 'rgba(15,17,23,0.6)',
 } as const;
 
 // The ramp sits higher than it did: the mark's trail squares, at 30% and 55%

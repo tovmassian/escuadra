@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text } from 'react-native';
-import { opacity, radii, spacing, typography } from '@/theme/tokens';
+import { radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 interface FilterPillProps {
@@ -25,7 +25,7 @@ export function FilterPill({ label, active, onPress, count }: FilterPillProps) {
     // Only with a count, so a pill without one lays out as it always did.
     pillCounted: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs - 2 },
     label: { ...typography.filterLabel },
-    count: { ...typography.filterCount, opacity: opacity.settled },
+    count: { ...typography.filterCount },
   });
   const ink = active ? colors.accentOn : colors.textMuted;
 
