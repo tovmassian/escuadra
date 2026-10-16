@@ -85,7 +85,7 @@ Web can't show any of this. It runs on simulators or devices.
 - **Android haptics:** the native constants on API ≥ 30/34, and the vibrator below.
 - **Offline:** team colours everywhere (stage, cards, circles), and nothing errors.
 - **Android:**
-  - the shirt number's line height (119 at 152 pt) does not clip its digits; the same goes for Results' `scoreDisplay` (120 at 150 pt), `scoreTail` and `cardNumber`, and for the share picture's `shareScore` (160 at 200 pt), `shareScoreTail` (62 at 78) and `shareSquare` (26 at 26). The picture is where an Android clip would show;
+  - the shirt number's line height (119 at 152 pt) does not clip its digits; the same goes for Results' `scoreDisplay` (120 at 150 pt), `scoreTail` and `cardNumber`, and for the share picture's `shareScore` (160 at 200 pt), `shareScoreTail` (62 at 78) and `shareSquare` (26 at 26). The picture is where a clip would show. iPhones clip these too: see [#124](https://github.com/tovmassian/escuadra/issues/124), which covers the share tokens in a comment;
   - the bold Inter/Plex styles, for #117.
 - **Results on native:**
   - the score sits on the "/10" baseline and the corner sits where the web capture puts it;
