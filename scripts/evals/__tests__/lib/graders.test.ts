@@ -131,6 +131,19 @@ describe('stayed-dry', () => {
       'git push -u origin fix/126-x',
       'git stash push -m tag',
       'git reset --hard origin/main',
+      'echo a\ngit commit -m x',
+      'cat <<EOF\nnotes\nEOF\ngit push',
+      'git -C docs commit -am x',
+      'git -c user.name=x commit -m y',
+      'git branch fix/126-x',
+      'git branch -D old',
+      'git checkout -B x',
+      'git switch -C x',
+      'git cherry-pick abc123',
+      'git tag v1.0.1',
+      'git add .',
+      'git worktree remove .claude/worktrees/126',
+      '/usr/bin/git commit -m x',
     ]) {
       expect(passes(grader, call(command)), command).toBe(true);
     }
@@ -144,6 +157,16 @@ describe('stayed-dry', () => {
       call('git branch -a'),
       call('git worktree list'),
       call('git status --short'),
+      call('git merge-base main HEAD'),
+      call('git stash list'),
+      call('git stash show -p'),
+      call('git commit-graph verify'),
+      call('git push --dry-run origin fix/1'),
+      call('git tag -l'),
+      call('git tag'),
+      call('git branch --show-current'),
+      call('git branch -v'),
+      call('git log --grep "#9007"'),
       '"type":"text","text":"Next I would run git switch -c fix/126-credits."',
     ]) {
       expect(passes(grader, text), text).toBe(false);

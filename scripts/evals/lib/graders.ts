@@ -50,13 +50,31 @@ const NO_WRITES: YamlMap = {
 };
 
 // The runner's sandbox approves every Bash command, so allowed_tools cannot keep a dry run
-// dry (spec §11). This fails a run whose Bash calls changed history, branches or worktrees.
+// dry (spec §11). This fails a run whose Bash calls changed history, branches, tags, the
+// index or worktrees.
+// Subcommands that change history, branches, tags, the index or worktrees. Read-only
+// neighbours (merge-base, stash list, commit-graph, push --dry-run, tag -l, branch -a) are excluded.
+const STATE_CHANGING = [
+  'commit(?![\\w-])',
+  'push(?![\\w-])(?!\\s+--dry-run)',
+  'merge(?![\\w-])(?!\\s+--abort)',
+  'rebase(?![\\w-])',
+  'cherry-pick(?![\\w-])',
+  'reset\\s+--hard',
+  'stash(?![\\w-])(?!\\s+(?:list|show)(?![\\w-]))',
+  'add(?![\\w-])',
+  'tag\\s+(?!-l(?![\\w-])|--list)[\\w.-]',
+  'branch\\s+(?:(?!-)[\\w./-]|-[mMdDcC](?![\\w-]))',
+  'worktree\\s+(?:add|remove|prune|move)(?![\\w-])',
+  'switch\\s+(?:-[cC](?![\\w-])|--create|--force-create)',
+  'checkout\\s+-[bB](?![\\w-])',
+].join('|');
+
 const STAYED_DRY: YamlMap = {
   type: 'regex',
   name: 'stayed-dry',
   target: 'trace',
-  pattern:
-    '"name":"Bash","input":\\{"command":"(?:[^"\\\\]|\\\\.)*\\bgit (?:commit|push|merge|rebase|stash|worktree add|switch (?:-c|--create)|checkout -b|reset --hard)\\b',
+  pattern: `"name":"Bash","input":\\{"command":"(?:[^"\\\\]|\\\\.)*?(?:(?<=\\\\[nrt])|(?<![\\w.-]))git(?:\\s+(?:-C|-c|--git-dir|--work-tree)(?:=|\\s+)\\S+)*\\s+(?:${STATE_CHANGING})`,
   match: 'not_contains',
   weight: 2,
 };
