@@ -19,16 +19,18 @@ interface ShareCardProps {
 interface Scalable {
   fontSize: number;
   lineHeight?: number;
+  marginVertical?: number;
   letterSpacing?: number;
 }
 
 // A typography entry at the card's scale. The entries are written for the
-// 360 pt layout, so the size, line height and tracking all follow `k`.
+// 360 pt layout, so the size, line height, vertical margin and tracking all follow `k`.
 function scaled<T extends Scalable>(style: T, k: number) {
   return {
     ...style,
     fontSize: style.fontSize * k,
     ...(style.lineHeight !== undefined ? { lineHeight: style.lineHeight * k } : null),
+    ...(style.marginVertical !== undefined ? { marginVertical: style.marginVertical * k } : null),
     ...(style.letterSpacing !== undefined ? { letterSpacing: style.letterSpacing * k } : null),
   };
 }
