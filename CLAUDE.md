@@ -120,7 +120,10 @@ update this file in the same PR rather than leave a stale rule behind.
    column. Never a Unicode regional-indicator emoji (🇦🇷) — that depends on an
    OS flag-emoji font, and Windows ships none, so the Playwright capture behind
    `npm run shots` would render "AR". Crests, badges, logos, and shield shapes
-   remain banned forever.
+   remain banned forever. A crest that appears in a licensed player photo, on a
+   kit or in the background, is part of that photo, not something Escuadra
+   shows: never crop to it, enlarge it, isolate it or use it to identify a team.
+   About says so, and says the marks belong to their owners.
 
    **Asset licensing (legal):** every shipped image must have a licence
    someone can name. What each licence asks, which ones player photos may
@@ -179,6 +182,17 @@ update this file in the same PR rather than leave a stale rule behind.
    Descriptive store copy (an App Store subtitle, a Play short description)
    may use category words like "football squad quiz"; that is ASO, not a
    rename.
+7. **The About screen stays true.** It states:
+   - what leaves the device and what is stored on it;
+   - how photos are shown and credited;
+   - which assets are used, under which licence;
+   - that Escuadra is unaffiliated.
+
+   A change that could make any of that untrue is flagged in its PR, and the
+   text is fixed in the same PR. When the right wording is plain, write it.
+   When it needs a privacy, licensing or legal judgement, stop and discuss it
+   with the owner first. The Privacy section also reaches `privacy.html` word
+   for word (guardrail 4).
 
 ## Data model
 

@@ -93,6 +93,14 @@ stay under the OFL, with `OFL.txt` beside them. The store badges may be used
 only unmodified and only for a store where the app is live, with Apple's and
 Google's credit lines on the site.
 
+A crest, badge or sponsor logo can still appear in a player photo, on a kit
+or in the background. It comes with the photo, and it is not an asset
+Escuadra ships. The photo's licence covers the photo, not the mark, which stays
+its owner's. Escuadra never crops to one, enlarges one,
+or uses one to identify a team. About says so, and says the marks belong to
+their owners and imply no endorsement. This was decided by the owner on
+2026-10-16 (#128).
+
 Squad data — names, numbers, positions, dates — is facts, not images. squadctl
 takes the facts from Wikipedia and Wikidata (Wikidata is CC0), not article
 text.
@@ -130,6 +138,10 @@ question is on screen:
 - **Licence** — its exact short name, linking the licence deed, or the Commons
   page when there is no deed (public domain).
 - **cropped** — the change we make: every screen crops the photo to its frame.
+  The screens also shade it where their text sits over it, and dim it after a
+  miss, and a photo too small to fill the stage sits whole over a darkened copy
+  of itself. That is the app's presentation, drawn over the photo; the file is
+  not edited. About says all of this (`CLAUDE.md`, guardrail 7).
 
 The **title is deliberately left out**. A Commons file name or caption names
 the player, and showing it would answer the question (`CLAUDE.md`, guardrail 1).

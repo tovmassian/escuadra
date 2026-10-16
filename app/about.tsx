@@ -87,6 +87,13 @@ export default function About() {
             their respective owners. Escuadra is also not affiliated with or endorsed by the
             Wikimedia Foundation, or by any player shown in a photo.
           </Text>
+          <Text style={[styles.paragraph, { marginBottom: 0 }]}>
+            Escuadra identifies teams by their names and colours, and never shows club crests,
+            badges or logos itself. A player photo can still show one, on a shirt or in the
+            background, because it is part of the original photo. Those marks belong to their
+            owners, and their appearance does not mean that any club, sponsor or brand endorses
+            Escuadra.
+          </Text>
         </View>
 
         <View style={styles.section}>
@@ -102,13 +109,16 @@ export default function About() {
           <Text style={styles.paragraph}>
             Player photos come from Wikimedia Commons. Each one is used under the licence its author
             chose: CC BY-SA, CC BY, CC0, public domain, or Commons&apos; own Attribution licence.
-            Every photo is shown cropped to fit, and otherwise unchanged. Not every player has a
-            photo.
+            Every photo is cropped to fit its frame. Where the app&apos;s text sits over a photo,
+            the app shades that part of the screen, and it dims the photo after a wrong answer. A
+            photo too small to fill the screen is shown whole, over a darkened copy of itself. The
+            photo files themselves are not edited. Not every player has a photo.
           </Text>
           <Text style={styles.paragraph}>
             The author, the licence and the word &quot;cropped&quot; appear under the question for
-            as long as a photo is on screen, and again, for the whole round, in the results. Tap the
-            author for the photo&apos;s page on Wikimedia Commons, or the licence for its terms.
+            as long as a photo is on screen, and again, for the whole round, under &quot;Photo
+            credits&quot; in the results. Tap the author for the photo&apos;s page on Wikimedia
+            Commons, or the licence for its terms.
           </Text>
 
           <Text style={styles.subHeading}>Flags and fonts</Text>
