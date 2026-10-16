@@ -22,12 +22,20 @@
 
 `main` now carries most of 2.0. Whichever release branch is cut from `main` next (the photo build, #60, or 2.0.0) ships it. #114 part 2 moved the fingerprint: it adds `react-native-view-shot` and `expo-sharing`. So none of 2.0 can reach a 1.x binary over the air.
 
-## Questions only the owner can answer
+## The owner's decisions (2026-10-16, #128)
 
-These touch the legal asset-licensing guardrail, so no session decided them.
+Both questions touched the legal asset-licensing guardrail, so no session decided them.
 
-1. **"Otherwise unchanged."** The About credits say photos are "shown cropped to fit, and otherwise unchanged". The stage now shades the photo: a gradient into the ground, a 10 % dim on a miss, and a darkened copy behind a framed photo. Results' player cards shade theirs with `cardGradient`; the circles show the photo unshaded. The reviewers' read is that there is no licence breach, because the credit names the crop and the shading is presentation. But the sentence is untrue on its face; a suggestion is "cropped to fit and shaded under the screen's text". #114 part 2 added its own About text but left this sentence alone. It is still open, and it must be settled before #116 publishes `privacy.html`.
-2. **Crests in photos.** The full-bleed stage makes kit crests and sponsor logos far more visible than the 1.x hero did; Spain's crest is clear in `design/screens/06–08`, and on Pedri's card in `09-results.png`. `docs/license.md` says crests are "never — whatever their licence", and it is silent on crests that appear incidentally inside a licensed photo. One sentence affirming the photo decision would close it.
+1. **How photos are shown.** About said each photo is "shown cropped to fit, and otherwise unchanged", which was untrue once the screens shaded photos. The owner asked for the text to be adjusted. About now says:
+   - photos are cropped to fit;
+   - they are shaded where text sits over them and dimmed after a miss;
+   - a photo too small to fill the screen sits whole over a darkened copy;
+   - the files themselves are not edited.
+
+   The credit line's change note stays "cropped".
+
+2. **Crests in photos.** About now says Escuadra never shows crests itself, but a photo can show one, on a shirt or in the background. Those marks belong to their owners and imply no endorsement. `CLAUDE.md` guardrail 2 and `docs/license.md` say the same, and forbid cropping to, enlarging or isolating a crest.
+3. **A new rule, `CLAUDE.md` guardrail 7.** A change that could make About untrue is flagged and fixed in the same PR: directly when the wording is plain, and after discussing it with the owner when it needs a judgement.
 
 ## Decisions taken on the owner's behalf
 
