@@ -120,6 +120,7 @@ flawless — see below). Route, file, and what it does.
 | `screens/09-results-flawless.png`        | Results — a la escuadra, 10/10       |
 | `screens/09-results-share.png`           | Results — share sheet, Image         |
 | `screens/09-results-share-text.png`      | Results — share sheet, Text          |
+| `screens/09-results-share-flawless.png`  | Results — share sheet, a la escuadra |
 
 Question captures carry real Commons photos, each credited on screen by the
 line under the footer; a capture waits for its images to load.
@@ -167,8 +168,8 @@ with the retry icon beside `Study this squad`. `09-results-flawless.png` is the
 its trail, `ALL 10 · NOTHING MISSED` over the ten players in green-ringed
 circles, and the same actions as a pass.
 
-The two share captures are the failed round's Results with the share sheet
-open, one per format. The sheet rises from the bottom over a dimmed scrim: a
+The first two share captures are the failed round's Results with the share
+sheet open, one per format. The sheet rises from the bottom over a dimmed scrim: a
 handle, `SHARE YOUR ROUND` with a close ×, an **Image / Text** switch with a
 sliding pill, a preview, a hint and the share button.
 `09-results-share.png` is the Image format, the default: a scaled copy of the
@@ -183,6 +184,9 @@ same in the `-light` capture; only the sheet around it changes.
 (the header, the score with its ten squares, the link, and "Preview" at the
 bottom right), the hint "The score grid for group chats, with a link to the
 app." and `SHARE TEXT`. On web the share button does nothing.
+`09-results-share-flawless.png` is the Image format after the flawless round: the
+picture turns green, with a green `10/10`, the strike with its ball and trail,
+`A LA ESCUADRA` and ten green squares.
 
 The missed-players-filtered Study view has no capture yet.
 

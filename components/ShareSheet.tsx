@@ -1,6 +1,6 @@
 import { CloseGlyph, ShareGlyph } from '@/components/ActionGlyphs';
 import { ShareCard } from '@/components/ShareCard';
-import { shareImage, shareText } from '@/lib/share';
+import { releaseShareImage, shareImage, shareText } from '@/lib/share';
 import {
   formatShareText,
   shareCardView,
@@ -9,12 +9,22 @@ import {
   type ShareFormat,
   type ShareInput,
 } from '@/lib/shareResult';
-import { durations, elevation, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
+import {
+  durations,
+  elevation,
+  opacity,
+  radii,
+  shareCapture,
+  sizes,
+  spacing,
+  typography,
+} from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { TeamMarker } from '@/types/squad';
 import { useEffect, useRef, useState } from 'react';
 import {
   Modal,
+  PixelRatio,
   Pressable,
   ScrollView,
   StyleSheet,
@@ -50,8 +60,9 @@ interface ShareSheetProps {
 //
 // The picture the button sends is not the preview. The preview is a scaled
 // copy for the eye, and capturing a scaled view would capture the scale; so
-// while Image is chosen a second `ShareCard` at its full 360 pt layout sits
-// off screen, and that view is what `shareImage` captures.
+// while Image is chosen a second `ShareCard` sits off screen, laid out at
+// `shareCapture`'s 1,080 x 1,920 pixels (its width in points is that over the
+// pixel ratio), and that view is what `shareImage` captures at its native size.
 //
 // The sheet stays open after a share. Expo cannot say whether a picture was
 // sent, so closing on resolve would close it on a cancel too, and a player
@@ -89,10 +100,17 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
   const reduced = useReducedMotion();
   const [format, setFormat] = useState<ShareFormat>('image');
   const [busy, setBusy] = useState(false);
+  // The guard `submit` actually checks: state is a render behind, so two taps in
+  // one frame would both pass it. `busy` only drives how the sheet draws.
+  const sharing = useRef(false);
   // The switch's inner width, so the pill can be half of it and slide by that.
   const [switchWidth, setSwitchWidth] = useState(0);
   const cardRef = useRef<View>(null);
   const pillX = useSharedValue(0);
+
+  // The picture's last capture is released with the sheet, not right after
+  // it is shared: a target app can still be reading it.
+  useEffect(() => () => releaseShareImage(), []);
 
   const pillWidth = switchWidth / 2;
   useEffect(() => {
@@ -105,6 +123,7 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
   const parts = shareTextParts(text);
 
   const sheet = sizes.shareSheet;
+  const captureWidth = shareCapture.width / PixelRatio.get();
   // The close button and the switch's segments are drawn under the 44 pt tap
   // target, and reach it through hitSlop.
   const closeSlop = (sizes.minTapTarget - sheet.close) / 2;
@@ -219,11 +238,12 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
     },
     ctaText: { ...typography.ctaLabel, color: colors.ctaText },
     // Where `shareImage` captures from: out of sight, out of reach.
-    capture: { position: 'absolute', top: 0, left: -2 * sizes.shareCard.width },
+    capture: { position: 'absolute', top: 0, left: -2 * captureWidth },
   });
 
   const submit = async () => {
-    if (busy) return;
+    if (sharing.current) return;
+    sharing.current = true;
     setBusy(true);
     try {
       const sent =
@@ -232,6 +252,7 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
     } catch {
       // A share menu that fails to open is not worth interrupting the results.
     } finally {
+      sharing.current = false;
       setBusy(false);
     }
   };
@@ -269,6 +290,8 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
         }
         style={styles.sheet}
         accessibilityViewIsModal
+        // iOS's two-finger scrub, since the scrim is hidden from screen readers.
+        onAccessibilityEscape={onClose}
       >
         <View style={styles.handle} />
 
@@ -307,9 +330,12 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
                     key={key}
                     testID={`share-format-${key}`}
                     onPress={() => setFormat(key)}
+                    // Locked while a share is in flight, so the capture copy
+                    // cannot unmount under `captureRef`.
+                    disabled={busy}
                     hitSlop={{ top: segmentSlop, bottom: segmentSlop }}
                     accessibilityRole="tab"
-                    accessibilityState={{ selected }}
+                    accessibilityState={{ selected, disabled: busy }}
                     style={styles.segment}
                   >
                     <Text
@@ -405,7 +431,7 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
             view={view}
             items={card.items}
             marker={card.marker}
-            width={sizes.shareCard.width}
+            width={captureWidth}
           />
         </View>
       ) : null}

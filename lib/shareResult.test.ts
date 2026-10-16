@@ -33,6 +33,18 @@ describe('formatShareText', () => {
     expect(text).not.toMatch(/perfect/i);
   });
 
+  it('pins a flawless round exactly', () => {
+    expect(formatShareText({ teamName: 'Spain', level: 3, outcomes: Array(10).fill(true) })).toBe(
+      'Escuadra · Spain · Level 3\n10/10  a la escuadra  ' + G.repeat(10) + '\n\n' + SHARE_URL,
+    );
+  });
+
+  it('pins an empty round exactly', () => {
+    expect(formatShareText({ teamName: 'Spain', level: 1, outcomes: [] })).toBe(
+      'Escuadra · Spain · Level 1\n0/0  \n\n' + SHARE_URL,
+    );
+  });
+
   it('does not celebrate an empty round', () => {
     const text = formatShareText({ teamName: 'Spain', level: 1, outcomes: [] });
     expect(text).not.toContain('a la escuadra');

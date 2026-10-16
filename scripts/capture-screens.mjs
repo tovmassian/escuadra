@@ -273,11 +273,12 @@ const ROUND_FIRST_OPTION = [
 //
 // `then` runs on the same page once the screen is shot, so a state reached from
 // the results screen is captured without playing the round a second time. The
-// failed round is the one that opens the share sheet.
+// failed round opens the share sheet in both formats, and the flawless round
+// opens it once more on Image, for the picture's celebrating variant.
 const RESULTS_SHOTS = [
   { file: '09-results', answers: ROUND_FIRST_OPTION, then: captureShareSheet },
   { file: '09-results-passed', answers: ROUND_ONE_MISS },
-  { file: '09-results-flawless', answers: ROUND_ALL_CORRECT },
+  { file: '09-results-flawless', answers: ROUND_ALL_CORRECT, then: captureShareSheetImage },
 ];
 
 /**
@@ -320,6 +321,16 @@ async function captureShareSheet(capture) {
   await capture.shoot('09-results-share');
   await capture.tapId('share-format-text', { wait: SWAP_MS });
   await capture.shoot('09-results-share-text');
+}
+
+/**
+ * The share sheet on its Image tab after a flawless round: the picture's
+ * a la escuadra variant, with the strike's ball and trail and every square
+ * green.
+ */
+async function captureShareSheetImage(capture) {
+  await capture.tapId('results-share', { wait: SHEET_MS });
+  await capture.shoot('09-results-share-flawless');
 }
 
 // ---------------------------------------------------------------------------

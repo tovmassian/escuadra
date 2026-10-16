@@ -151,7 +151,7 @@ export function ShareCard({ view, items, marker, width, ref }: ShareCardProps) {
       collapsable={false}
       style={styles.root}
       accessible
-      accessibilityLabel={`${view.eyebrow}. ${view.correct} of ${view.total}. ${view.title}.`}
+      accessibilityLabel={`Share picture: ${view.eyebrow}. ${view.correct} of ${view.total}. ${view.title}.`}
     >
       <View style={styles.band}>
         {bands.map((band, i) => (
