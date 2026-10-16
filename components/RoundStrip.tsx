@@ -7,7 +7,15 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
-import { durations, radii, resultsTimeline, sizes, spacing, typography } from '@/theme/tokens';
+import {
+  durations,
+  fontScaleCap,
+  radii,
+  resultsTimeline,
+  sizes,
+  spacing,
+  typography,
+} from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 // The round in ten segments (spec §3.1), each labelled with its shirt number.
@@ -47,7 +55,10 @@ function Segment({ index, no, correct }: { index: number; no: number; correct: b
           style={[styles.bar, { backgroundColor: correct ? colors.success : colors.error }, filled]}
         />
       </View>
-      <Text style={[typography.stripNumber, { color: correct ? colors.textMuted : colors.error }]}>
+      <Text
+        style={[typography.stripNumber, { color: correct ? colors.textMuted : colors.error }]}
+        maxFontSizeMultiplier={fontScaleCap.display}
+      >
         {no}
       </Text>
     </View>

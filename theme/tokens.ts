@@ -27,6 +27,9 @@ export interface Palette {
   thumbBg: string;
   thumbIcon: string;
   success: string;
+  /** Small success-coloured text on `background`/`surface`; `success` itself
+   *  stays for large text and graphics. */
+  successText: string;
   successBg: string;
   error: string;
   /** Dimmed error text for an "incorrect-picked" option — visually quieter
@@ -160,6 +163,7 @@ const darkRoles = {
   thumbBg: '#2b2f38',
   thumbIcon: '#e7e9f5',
   success: '#61bd67',
+  successText: '#61bd67',
   error: '#f05653',
   errorTextDim: '#a15a58',
   tile: 'rgba(255,255,255,0.08)',
@@ -204,6 +208,7 @@ const lightRoles = {
   thumbBg: '#ffffff',
   thumbIcon: '#b9840f',
   success: '#2f8f3e',
+  successText: '#24702f',
   error: '#c23934',
   errorTextDim: '#b3625d',
   tile: '#ffffff',
@@ -589,15 +594,14 @@ export const celebrationEasingCurves = {
 } as const;
 
 // Preview knobs for a longer, more exaggerated take on the celebration
-// motion below, without hand-editing every value. 1 = the shipped, reviewed
-// timing/distances (spec §6). `MOTION_TIME_SCALE` stretches every duration and
-// delay in `strikeTiming`, `celebrationRiseDuration`, `resultsTimeline` (bar
-// its strip fields, which are the mid-round `durations`) and `homeCascade`
-// uniformly (so the whole cascade's rhythm holds, just slower);
-// `MOTION_DISTANCE_SCALE` is read directly by `EscuadraStrike` to exaggerate
-// the ball's travel/overshoot, the frame's recoil and the trail's catch-up
-// distance — set both back to 1 to restore exactly what shipped, nothing else
-// needs to change.
+// motion below, without hand-editing every value. `MOTION_TIME_SCALE` ships at
+// 1 (the spec's timing) and stretches every duration and delay in
+// `strikeTiming`, `celebrationRiseDuration`, `resultsTimeline` (bar its strip
+// fields, which are the mid-round `durations`) and `homeCascade` uniformly (so
+// the whole cascade's rhythm holds, just slower); `MOTION_DISTANCE_SCALE` ships
+// at 1.5 and is read directly by `EscuadraStrike` to exaggerate the ball's
+// travel/overshoot, the frame's recoil and the trail's catch-up distance —
+// set it to 1 to restore the base distances, nothing else needs to change.
 export const MOTION_TIME_SCALE = 1;
 export const MOTION_DISTANCE_SCALE = 1.5;
 

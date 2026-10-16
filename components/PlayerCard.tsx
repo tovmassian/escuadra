@@ -2,7 +2,15 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, View } from 'react-native';
 import { bannerBands, stageVeil } from '@/lib/stageView';
-import { cardGradient, durations, radii, spacing, stage, typography } from '@/theme/tokens';
+import {
+  cardGradient,
+  durations,
+  fontScaleCap,
+  radii,
+  spacing,
+  stage,
+  typography,
+} from '@/theme/tokens';
 import { useThemeColors, useThemeName } from '@/theme/useTheme';
 import type { PhotoCredit, TeamMarker } from '@/types/squad';
 
@@ -99,7 +107,9 @@ export function PlayerCard({
         style={StyleSheet.absoluteFill}
         pointerEvents="none"
       />
-      <Text style={styles.number}>{shirtNumber}</Text>
+      <Text style={styles.number} maxFontSizeMultiplier={fontScaleCap.display}>
+        {shirtNumber}
+      </Text>
       <View style={styles.text}>
         <Text style={styles.name} numberOfLines={2}>
           {name}

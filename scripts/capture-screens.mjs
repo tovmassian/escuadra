@@ -40,9 +40,9 @@ const NATIONALITY_SEED = 20260832;
 // the persisted store has hydrated, so `networkidle` now fires before the app
 // has painted anything — this window has to cover that wait plus the entry
 // animation that follows it. Home's is the long pole: its letter cascade runs
-// to roughly 1.6s once `MOTION_TIME_SCALE` is applied, far past the 300ms
-// per-animation budget that governs mid-round motion. The results
-// celebration cascade is the other long one, so it reuses this.
+// well past the 300ms per-animation budget that governs mid-round motion. The
+// Results cascade (strip, strike, card rise) is the other long one, so it
+// reuses this.
 const SETTLE_MS = 2200;
 // After answering one part, which only has to outlast that part's reveal —
 // well inside the 300ms budget, so this is generous rather than tuned.
@@ -257,9 +257,9 @@ const ROUND_FIRST_OPTION = [
 ];
 
 // `resultTier` splits results three ways and each way is a different screen,
-// so each gets a capture: a failed round leads with the missed list, a cleared
-// round promotes `Play Level 2` while the missed list stays, and a flawless
-// round drops the list entirely and celebrates.
+// so each gets a capture: a failed round leads with the missed player cards, a
+// cleared round promotes `Play level 2` and keeps the cards, and a flawless
+// round shows the ten player circles instead and celebrates.
 const RESULTS_SHOTS = [
   { file: '09-results', answers: ROUND_FIRST_OPTION },
   { file: '09-results-passed', answers: ROUND_ONE_MISS },
@@ -290,7 +290,7 @@ async function captureResults(capture, { file, answers }) {
         `the answer labels above no longer match the round this seed builds`,
     );
   }
-  // The results celebration cascade is the longest animation in the app.
+  // The long pole is the round strip, the strike and the card rise.
   await capture.page.waitForTimeout(SETTLE_MS);
   await capture.shoot(file);
 }

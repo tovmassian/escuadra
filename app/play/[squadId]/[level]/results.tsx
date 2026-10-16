@@ -348,6 +348,10 @@ function Score({
   const flawless = tier === 'excellent';
   const timing = flawless ? strikeTiming.excellent : strikeTiming.passed;
   // Reduce Motion: the final score and the strike's resting mark, at once.
+  // The strike settles on its own because `EscuadraStrike`'s `withTiming`,
+  // `withDelay` and `withSequence` keep Reanimated's default
+  // `ReduceMotion.System`; a `reduceMotion: ReduceMotion.Never` added there
+  // would break this.
   const [shown, setShown] = useState(reduced ? correct : 0);
   const [struck, setStruck] = useState(passed && reduced);
   const pop = useSharedValue(1);
@@ -548,7 +552,7 @@ function Roster({ results, marker }: { results: QuestionResult[]; marker: TeamMa
   const reduced = useReducedMotion();
   const styles = StyleSheet.create({
     section: { paddingTop: spacing.xl, paddingHorizontal: spacing.lg, gap: spacing.sm },
-    label: { ...typography.captionEyebrow, color: colors.success },
+    label: { ...typography.captionEyebrow, color: colors.successText },
     grid: { gap: spacing.sm },
     row: { flexDirection: 'row', gap: spacing.xs },
     cell: { flex: 1, minWidth: 0, alignItems: 'center', gap: spacing.xxs },
