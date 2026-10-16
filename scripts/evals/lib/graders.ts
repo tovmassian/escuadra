@@ -1,6 +1,7 @@
 // The graders for a case's expectation (spec §8): a regex per triage field the
-// case pins down, an LLM judge for questions and answers, and the write check
-// every case carries.
+// case pins down, an LLM judge for questions and answers, and the write check and the
+// stayed-dry check that every triage and negative case carries (a smoke case carries
+// its own graders).
 import { escapeRegExp, fieldPattern } from './triage.ts';
 import type { YamlMap } from './yaml.ts';
 
@@ -48,6 +49,18 @@ const NO_WRITES: YamlMap = {
   weight: 3,
 };
 
+// The runner's sandbox approves every Bash command, so allowed_tools cannot keep a dry run
+// dry (spec §11). This fails a run whose Bash calls changed history, branches or worktrees.
+const STAYED_DRY: YamlMap = {
+  type: 'regex',
+  name: 'stayed-dry',
+  target: 'trace',
+  pattern:
+    '"name":"Bash","input":\\{"command":"(?:[^"\\\\]|\\\\.)*\\bgit (?:commit|push|merge|rebase|stash|worktree add|switch (?:-c|--create)|checkout -b|reset --hard)\\b',
+  match: 'not_contains',
+  weight: 2,
+};
+
 function line(name: string, pattern: string, weight: number): YamlMap {
   return { type: 'regex', name, pattern, flags: 'm', weight };
 }
@@ -66,9 +79,10 @@ export function gradersFor(expect: Expectation): YamlMap[] {
       },
       { type: 'llm', name: 'answered', criteria: expect.answered, weight: 2 },
       NO_WRITES,
+      STAYED_DRY,
     ];
   }
-  return [...triageGraders(expect), NO_WRITES];
+  return [...triageGraders(expect), NO_WRITES, STAYED_DRY];
 }
 
 function triageGraders(t: Triage): YamlMap[] {

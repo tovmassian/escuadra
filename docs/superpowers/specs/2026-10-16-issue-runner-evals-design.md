@@ -302,8 +302,9 @@ runner's permissions deny reading it.
 - A case's open PRs are declared in `cases.ts`, and land in the sandbox's
   `prs.json`.
 - `#9000` belongs to `sandbox-smoke`, a cheap case outside the matrix that
-  checks the sandbox itself: the fake `gh`, the `git` wrapper, a denied commit
-  and a logged write. Run it after a Claude Code upgrade, before anything else.
+  checks the sandbox itself: the fake `gh`, the `git` wrapper, a commit that
+  succeeds inside the sandbox (allowed tools do not deny Bash; §11) and a logged
+  write. Run it after a Claude Code upgrade, before anything else.
 
 ## 7. The case matrix
 
@@ -350,20 +351,21 @@ how the owner actually asks.
 
 ## 8. Graders and the pass bar
 
-| Grader              | Type                                                   | Weight | Cases                                    |
-| ------------------- | ------------------------------------------------------ | ------ | ---------------------------------------- |
-| `decision`          | regex `^decision:\s*(proceed\|ask)$`                   | 3      | every positive case                      |
-| `workspace`, `base` | regex                                                  | 2 each | proceed cases and execution-only asks    |
-| `branch`            | regex on `<type>/<N>-` (the exact name for `open-pr`)  | 1      | same                                     |
-| `first-step`        | regex                                                  | 1      | same, except `open-pr`, `plan-half-done` |
-| `execution`         | regex                                                  | 1      | same                                     |
-| `size`              | regex `(estimated)`                                    | 1      | `no-size`                                |
-| `docs`              | regex, one lookahead per required path                 | 1      | cases with docs                          |
-| `existing`          | regex on the PR or the part-1 commit                   | 1      | `open-pr`, `plan-half-done`              |
-| `questions`         | `llm`, concrete claims                                 | 2      | every ask case                           |
-| `no-writes`         | regex over `.git/sandbox/gh.log`, `not_contains WRITE` | 3      | every case                               |
-| `no-triage`         | regex, `not_contains` `decision:`                      | 3      | negative cases                           |
-| `answered`          | `llm`                                                  | 2      | negative cases                           |
+| Grader              | Type                                                                                                                                | Weight | Cases                                    |
+| ------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ------ | ---------------------------------------- |
+| `decision`          | regex `^decision:\s*(proceed\|ask)$`                                                                                                | 3      | every positive case                      |
+| `workspace`, `base` | regex                                                                                                                               | 2 each | proceed cases and execution-only asks    |
+| `branch`            | regex on `<type>/<N>-` (the exact name for `open-pr`)                                                                               | 1      | same                                     |
+| `first-step`        | regex                                                                                                                               | 1      | same, except `open-pr`, `plan-half-done` |
+| `execution`         | regex                                                                                                                               | 1      | same                                     |
+| `size`              | regex `(estimated)`                                                                                                                 | 1      | `no-size`                                |
+| `docs`              | regex, one lookahead per required path                                                                                              | 1      | cases with docs                          |
+| `existing`          | regex on the PR or the part-1 commit                                                                                                | 1      | `open-pr`, `plan-half-done`              |
+| `questions`         | `llm`, concrete claims                                                                                                              | 2      | every ask case                           |
+| `no-writes`         | regex over `.git/sandbox/gh.log`, `not_contains WRITE`                                                                              | 3      | every case                               |
+| `stayed-dry`        | regex over the trace: no Bash call that commits, pushes, merges, rebases, stashes, resets hard, adds a worktree or creates a branch | 2      | every triage and negative case           |
+| `no-triage`         | regex, `not_contains` `decision:`                                                                                                   | 3      | negative cases                           |
+| `answered`          | `llm`                                                                                                                               | 2      | negative cases                           |
 
 - No grader checks whether the skill fired. Under `--ablation none` (the RED
   run) a `tool_used: Skill` grader would be scored rather than shown, and a
@@ -379,9 +381,10 @@ how the owner actually asks.
 - **Allowed tools** are a backstop, not the measurement: `Read`, `Glob`,
   `Grep`, `Skill`, and `Bash` scoped to read-only `git` commands, `gh` (the
   fake refuses its writes, and logging them is the point), and read-only
-  shell tools.
-  `EnterWorktree`, `Write` and `Edit` are not allowed, so no grader checks
-  for them; a run that tries one is denied and still graded on its triage.
+  shell tools. The runner's sandbox approves every Bash command, so the list
+  denies nothing in a run (§11); `stayed-dry` is what notices a run that acted.
+  `EnterWorktree`, `Write` and `Edit` are not granted, so no grader checks for
+  them; the runner may still refuse them.
 - **Models:** the agent runs on Sonnet (`--model sonnet`) and the judge on
   Opus (`--judge-model opus`); the judge must differ from the agent.
 - **Pass bar:** in the with arm, every case scores ≥ 0.8 (`--threshold 0.8`),
@@ -496,6 +499,12 @@ of it.
 6. **Cost:** `cost_usd` is an API-rate estimate on a claude.ai login. A run's
    trace exists only with `--keep-temp`; the kept directory is sealed
    (`chmod 700` it to look, and never run git inside it).
+7. **`allowed_tools` does not deny Bash.** The runner's sandbox approves every
+   Bash command, so `git commit` succeeded in the smoke case. A case's tool
+   list is a backstop for non-Bash tools only; `stayed-dry` grades whether a
+   dry run stayed dry. File graders resolve their path from the run's working
+   directory. A smoke run runs both arms by default (about $0.07–0.09
+   estimated).
 
 ## 12. Out of scope
 

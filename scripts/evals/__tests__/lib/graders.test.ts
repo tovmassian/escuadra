@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { gradersFor, type Triage } from '../../lib/graders.ts';
+import { gradersFor, type Expectation, type Triage } from '../../lib/graders.ts';
 import { fieldPattern, TRIAGE_TEMPLATE } from '../../lib/triage.ts';
 import type { YamlMap } from '../../lib/yaml.ts';
 
@@ -91,7 +91,63 @@ describe('gradersFor a triage', () => {
 describe('gradersFor a negative case', () => {
   it('expects no triage block and an answer', () => {
     const names = gradersFor({ kind: 'no-triage', answered: 'It answers.' }).map((g) => g.name);
-    expect(names).toEqual(['no-triage', 'answered', 'no-writes']);
+    expect(names).toEqual(['no-triage', 'answered', 'no-writes', 'stayed-dry']);
+  });
+});
+
+describe('stayed-dry', () => {
+  const stayedDry = (graders: YamlMap[]) => graders.find((g) => g.name === 'stayed-dry');
+  const call = (command: string) =>
+    `"name":"Bash","input":{"command":${JSON.stringify(command)},"description":"x"}`;
+
+  it('is on every triage and negative case, over the trace, weighted 2', () => {
+    const expectations: Expectation[] = [
+      { kind: 'triage', decision: 'proceed' },
+      { kind: 'no-triage', answered: 'It answers.' },
+    ];
+    for (const expectation of expectations) {
+      expect(stayedDry(gradersFor(expectation))).toMatchObject({
+        type: 'regex',
+        target: 'trace',
+        match: 'not_contains',
+        weight: 2,
+      });
+    }
+  });
+
+  it('is not added to a smoke case', () => {
+    expect(stayedDry(gradersFor({ kind: 'smoke', graders: [] }))).toBeUndefined();
+  });
+
+  it('catches a Bash call that changes branches, commits or worktrees', () => {
+    const grader = stayedDry(gradersFor({ kind: 'triage', decision: 'proceed' }));
+    if (!grader) throw new Error('no stayed-dry grader');
+    for (const command of [
+      'git switch -c fix/126-credits',
+      'git checkout -b fix/126-credits',
+      'git worktree add .claude/worktrees/126 -b fix/126-x main',
+      'git commit -m "wip"',
+      'cd docs && git commit -am x',
+      'git push -u origin fix/126-x',
+      'git stash push -m tag',
+      'git reset --hard origin/main',
+    ]) {
+      expect(passes(grader, call(command)), command).toBe(true);
+    }
+  });
+
+  it('lets read-only git through, and prose that only mentions a command', () => {
+    const grader = stayedDry(gradersFor({ kind: 'triage', decision: 'proceed' }));
+    if (!grader) throw new Error('no stayed-dry grader');
+    for (const text of [
+      call('git log --oneline -5'),
+      call('git branch -a'),
+      call('git worktree list'),
+      call('git status --short'),
+      '"type":"text","text":"Next I would run git switch -c fix/126-credits."',
+    ]) {
+      expect(passes(grader, text), text).toBe(false);
+    }
   });
 });
 
