@@ -15,7 +15,7 @@ Every run draws on your Claude plan's usage limits. Start small:
 
 The defaults are a Sonnet agent, an Opus judge, a pass threshold of 0.9 per case, a $15 ceiling (estimated at API rates) and both arms, the eval runner's default (`--ablation with-without`). The results directory is printed first, and holds `report.html` and `result.json`. Nothing is written to the repo, and nothing is published.
 
-To see why a run failed, add `--keep`. The run's directory is kept, sealed: `chmod 700` it and its `sealed/` folder, then read `out/trace.jsonl`. Never run git inside it.
+To see why a run failed, add `--keep`. The run's directory is kept, and its `out/trace.jsonl` is readable as it is; only its `sealed/` folder needs `chmod 700` before you can look inside. Never run git inside the run's directory.
 
 ## Change the suite
 

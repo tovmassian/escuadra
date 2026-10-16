@@ -217,8 +217,11 @@ $HOME/cwd/             clone of origin.git: the agent's working directory
 ```
 
 - **Pinned commits** freeze the specs, plans and handoff to match the issue
-  snapshots, and keep the skill out of the clone (it is written after
-  `deb2e3b9`), so the without arm really is without it. Bumping a pin is
+  snapshots, and keep the skill out of the clone's reachable history (it is
+  written after `deb2e3b9`), so the without arm really is without it. A local
+  clone still carries the source repo's unreachable objects (other branches'
+  commits); fetching only the pinned commits would close that, at the cost of
+  a pack transfer the scaffold's 120 s may not allow. Bumping a pin is
   deliberate and goes with re-capturing the snapshots.
 - **Project skills in the clone do not load** in eval runs, and neither do the
   owner's plugins (superpowers included): the run's config directory is
