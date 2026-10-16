@@ -307,7 +307,9 @@ runner's permissions deny reading it.
 - `#9000` belongs to `sandbox-smoke`, a cheap case outside the matrix that
   checks the sandbox itself: the fake `gh`, the `git` wrapper, a commit that
   succeeds inside the sandbox (allowed tools do not deny Bash; §11) and a logged
-  write. Run it after a Claude Code upgrade, before anything else.
+  write. It also proves `stayed-dry`'s pattern matches that commit in the trace,
+  so a trace format change after an upgrade shows. Run it after a Claude Code
+  upgrade, before anything else.
 
 ## 7. The case matrix
 
