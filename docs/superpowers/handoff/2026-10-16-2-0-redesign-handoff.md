@@ -16,7 +16,7 @@
 | #112  | 960 px photos, original size in `PhotoCredit`             | merged, [#119](https://github.com/tovmassian/escuadra/pull/119)                                                                          |
 | #113  | The Spotlight question screen                             | merged: logic [#120](https://github.com/tovmassian/escuadra/pull/120), screen [#121](https://github.com/tovmassian/escuadra/pull/121)    |
 | #114  | Results and sharing                                       | merged: Results [#123](https://github.com/tovmassian/escuadra/pull/123), sharing [#127](https://github.com/tovmassian/escuadra/pull/127) |
-| #115  | Study                                                     | In review: `feat/115-study`.                                                                                                             |
+| #115  | Study                                                     | merged, [#131](https://github.com/tovmassian/escuadra/pull/131)                                                                          |
 | #116  | Docs pass, store assets, version, release branch          | Not started. Its notes are below.                                                                                                        |
 | #117  | Android: bold Inter/Plex styles probably render in Roboto | Open. Found in #111's review; needs a device check.                                                                                      |
 
