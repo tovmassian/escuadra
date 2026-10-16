@@ -4,14 +4,7 @@
 import type { Level, Question, QuestionPart } from '@/lib/questionEngine';
 import type { QuestionResult } from '@/stores/session';
 import type { Position, Squad } from '@/types/squad';
-import {
-  heroCardMinSize,
-  heroCardSize,
-  heroFitHeight,
-  heroNumberSize,
-  heroTab,
-  sizes,
-} from '@/theme/tokens';
+import { sizes } from '@/theme/tokens';
 
 export type DotOutcome = 'correct' | 'wrong' | 'current' | 'future';
 
@@ -28,97 +21,6 @@ export function progressOutcomes(results: QuestionResult[], currentIndex: number
     if (r.correct === false) return 'wrong';
     return i === currentIndex ? 'current' : 'future';
   });
-}
-
-export type PartState = 'answered-correct' | 'answered-wrong' | 'current' | 'upcoming';
-
-export interface PartRailRow {
-  label: string;
-  state: PartState;
-  /** The option the player actually picked, or null while unanswered. */
-  answer: string | null;
-}
-
-function partLabel(part: QuestionPart): string {
-  switch (part.kind) {
-    case 'name':
-      return 'NAME';
-    case 'position':
-      return 'POSITION';
-    case 'nationality':
-      return 'NATIONALITY';
-    case 'club':
-      return 'CLUB';
-  }
-}
-
-/**
- * One row per part of the current question.
- *
- * Invariant 8: a row shows a verdict only where one was actually earned, and
- * reports the option the player picked rather than the correct one.
- *
- * Invariant 7: asking stops on a wrong part, so a part that has not been
- * answered is `current` only when it is genuinely the active index —
- * everything else is `upcoming`, never accented.
- */
-export function partRailRows(
-  question: Question,
-  result: QuestionResult,
-  currentPartIndex: number,
-): PartRailRow[] {
-  return question.parts.map((part, i) => {
-    const answeredPart = result.parts[i];
-    const label = partLabel(part);
-
-    if (answeredPart) {
-      return {
-        label,
-        state: answeredPart.correct ? 'answered-correct' : 'answered-wrong',
-        answer: part.options[answeredPart.pickedIndex] ?? null,
-      };
-    }
-    return { label, state: i === currentPartIndex ? 'current' : 'upcoming', answer: null };
-  });
-}
-
-export interface HeroCardFit {
-  size: number;
-  numberSize: number;
-}
-
-/**
- * The hero card's size for a screen with `usableHeight` points between its
- * safe-area insets. Full size when the level fits; otherwise the card gives up
- * exactly the missing height, so every option stays on screen without
- * scrolling, down to the level's floor. The card stays square either way —
- * the photo slot it reserves keeps its shape.
- */
-export function fitHeroCard(level: Level, usableHeight: number): HeroCardFit {
-  const full = heroCardSize[level];
-  const missing = Math.max(0, heroFitHeight[level] - usableHeight);
-  const size = Math.max(heroCardMinSize[level], full - Math.ceil(missing));
-  return { size, numberSize: Math.round((heroNumberSize[level] * size) / full) };
-}
-
-export interface HeroTabMetrics {
-  thickness: number;
-  numberSize: number;
-  fillet: number;
-  padStart: number;
-  padEnd: number;
-}
-
-/** The photo hero's number tab for a hero of side `size`. */
-export function heroTabMetrics(size: number): HeroTabMetrics {
-  const thickness = Math.max(heroTab.minThickness, Math.round(size * heroTab.thicknessRatio));
-  return {
-    thickness,
-    numberSize: Math.max(heroTab.minNumberSize, Math.round(thickness * heroTab.numberRatio)),
-    fillet: heroTab.fillet,
-    padStart: Math.round(thickness * heroTab.padStartRatio),
-    padEnd: Math.round(thickness * heroTab.padEndRatio),
-  };
 }
 
 // ---- Spotlight question screen (2.0, spec §2) ------------------------------
@@ -285,4 +187,54 @@ const POSITION_LABELS: Record<Position, string> = {
 /** The word under a position tile's code. */
 export function positionLabel(position: Position): string {
   return POSITION_LABELS[position];
+}
+
+/**
+ * What the footer offers (spec §2.4):
+ * - waiting for a tap;
+ * - after a right answer, the bar that moves on by itself;
+ * - after a miss, a button that waits.
+ *
+ * With a screen reader on, a right answer gets a plain Next button: the round
+ * never moves on by itself then.
+ */
+export type FooterMode = 'waiting' | 'autoNext' | 'next' | 'gotIt';
+
+export function footerMode(verdict: boolean | null, screenReader: boolean): FooterMode {
+  if (verdict === null) return 'waiting';
+  if (verdict === false) return 'gotIt';
+  return screenReader ? 'next' : 'autoNext';
+}
+
+/** The streak haptic's moment: the count just reached 5 or 10 (spec §7). */
+export function streakMilestone(previous: number, current: number): boolean {
+  return current !== previous && (current === 5 || current === 10);
+}
+
+const SLOT_NAMES: Record<SlotKey, string> = {
+  NAME: 'Name',
+  POS: 'Position',
+  AGE: 'Age',
+  CLUB: 'Club',
+  NAT: 'Nationality',
+};
+
+/** A slot chip's screen-reader label. A slot still being asked carries no
+ *  value, so its label cannot read out the answer. */
+export function slotSpoken(slot: Slot): string {
+  const name = SLOT_NAMES[slot.key];
+  switch (slot.state) {
+    case 'active':
+      return `${name}: being asked`;
+    case 'pending':
+      return `${name}: asked next`;
+    case 'correct':
+      return `${name}: ${slot.value ?? ''}, right`;
+    case 'wrong':
+      return `${name}: ${slot.value ?? ''}, the right answer`;
+    case 'notAsked':
+      return `${name}: ${slot.value ?? ''}, not asked`;
+    case 'given':
+      return `${name}: ${slot.value ?? ''}`;
+  }
 }

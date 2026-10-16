@@ -60,3 +60,20 @@ export function photoCreditRows(
         ];
   });
 }
+
+/**
+ * Every photo a round will show, once each, in question order. The screen
+ * prefetches them all when the round starts (spec §9), so a question never
+ * waits on its photo. A player with no photo, or not found, is skipped.
+ */
+export function roundPhotoUrls(
+  questions: readonly { playerId: string }[],
+  playerById: (id: string) => Player | undefined,
+): string[] {
+  const urls: string[] = [];
+  for (const { playerId } of questions) {
+    const url = photoFor(playerById(playerId))?.url;
+    if (url !== undefined && !urls.includes(url)) urls.push(url);
+  }
+  return urls;
+}

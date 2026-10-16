@@ -50,9 +50,12 @@ const REVEAL_MS = 500;
 // After a tap that only swaps what is already on screen, like the team
 // picker's Clubs/National Teams segment.
 const SWAP_MS = 400;
-// Player photos load from Wikimedia, and the hero shows the number card until
-// one has: a shot waits for every image to finish (or this long), then for
-// the photo's fade-in, so it captures the photo rather than a race.
+// Between an answer and tapping its "next" control. Well inside the question
+// screen's 1,200 ms auto-advance, so the tap always lands on this question.
+const TAP_TO_NEXT_MS = 250;
+// Player photos load from Wikimedia, and the stage shows the team's colours
+// until one has: a shot waits for every image to finish (or this long), then
+// for the photo's fade-in, so it captures the photo rather than a race.
 const IMAGE_TIMEOUT_MS = 15_000;
 
 // ---------------------------------------------------------------------------
@@ -121,10 +124,14 @@ async function openCapture(browser, { colorScheme, suffix }) {
       await page.waitForTimeout(wait);
     },
 
-    /** Tap the screen's primary button — the round's footer Continue. */
-    async tapPrimaryButton({ wait = REVEAL_MS } = {}) {
+    /**
+     * Tap the question's "next" control: the auto-next bar after a right
+     * answer, or "Got it — next" after a miss. The bar moves on by itself
+     * after `durations.autoAdvance` (1,200 ms), so callers tap within it.
+     */
+    async tapNext({ wait = REVEAL_MS } = {}) {
       capture.assertLive();
-      await page.getByTestId('app-button').first().click();
+      await page.getByTestId('question-next').click();
       await page.waitForTimeout(wait);
     },
 
@@ -189,8 +196,8 @@ const L3_THIRD_PART_SHOTS = [
  * Captured mid-question, not on arrival. A level-3 question has three parts
  * and only the first is on screen when the round starts; the state worth
  * handing design is the last one, where the whole layout is in play at once —
- * answered name pill, greyed position chips, the part rail carrying two
- * verdicts, and the third part's options still open.
+ * the name and position slots carrying their verdicts, and the third part's
+ * options still open.
  *
  * Both earlier parts must be answered *correctly*: asking stops on a wrong
  * part (invariant 7), so a wrong pick ends the question and the third part
@@ -263,17 +270,18 @@ const RESULTS_SHOTS = [
  * Plays a level-1 round to completion, then captures the results screen it
  * lands on. Results cannot be reached by URL — the session store is
  * deliberately ephemeral, so the round has to actually be played. Level 1 asks
- * a single part per question, so each question is one option tap plus
- * Continue (the footer button is the disabled "Select an answer" placeholder
- * until the question is scored).
+ * a single part per question, so each question is one answer tap plus its
+ * next control.
  */
 async function captureResults(capture, { file, answers }) {
   const path = `/play/esp/1?seed=${SEED}`;
   await capture.open(path);
 
   for (const label of answers) {
-    await capture.tap(label);
-    await capture.tapPrimaryButton();
+    // Short wait: a right answer moves on by itself after 1,200 ms, so the
+    // next control is tapped well within it.
+    await capture.tap(label, { wait: TAP_TO_NEXT_MS });
+    await capture.tapNext();
   }
 
   if (!capture.page.url().includes('/results')) {

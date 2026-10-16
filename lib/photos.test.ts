@@ -1,4 +1,4 @@
-import { creditParts, photoCreditRows, photoFor } from '@/lib/photos';
+import { creditParts, photoCreditRows, photoFor, roundPhotoUrls } from '@/lib/photos';
 import type { QuestionResult } from '@/stores/session';
 import type { PhotoCredit, Player } from '@/types/squad';
 import { describe, expect, it } from 'vitest';
@@ -83,5 +83,33 @@ describe('creditParts', () => {
     const parts = creditParts({ ...credit, author: null, licenceUrl: null });
     expect(parts.author.text).toBe('Wikimedia Commons');
     expect(parts.licence.url).toBe('https://commons.wikimedia.org/wiki/File:X.jpg');
+  });
+});
+
+describe('roundPhotoUrls', () => {
+  const withPhoto = (id: string, url: string): Player => ({
+    ...player(credit),
+    id,
+    photo: { ...credit, url },
+  });
+
+  it("lists each question's photo once, in question order, skipping players without one", () => {
+    const players = new Map<string, Player>([
+      ['a', withPhoto('a', 'https://upload.wikimedia.org/a.jpg')],
+      ['b', player(null)],
+      ['c', withPhoto('c', 'https://upload.wikimedia.org/c.jpg')],
+    ]);
+    expect(
+      roundPhotoUrls(
+        [
+          { playerId: 'c' },
+          { playerId: 'b' },
+          { playerId: 'a' },
+          { playerId: 'c' },
+          { playerId: 'x' },
+        ],
+        (id) => players.get(id),
+      ),
+    ).toEqual(['https://upload.wikimedia.org/c.jpg', 'https://upload.wikimedia.org/a.jpg']);
   });
 });

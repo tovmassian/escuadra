@@ -165,17 +165,17 @@ export default function About() {
 
           <Text style={styles.subHeading}>Player photos</Text>
           <Text style={styles.paragraph}>
-            Escuadra does not ship player photos. Each one is loaded from Wikimedia Commons, run by
-            the Wikimedia Foundation, when a question needs it, and the next question&apos;s photo
-            is loaded while you answer. Like any website, Wikimedia receives your device&apos;s IP
-            address and the details of each request, including which photo was asked for, and so
-            which player you were asked about. Escuadra sends nothing else to Wikimedia, and
-            Wikimedia&apos;s own privacy policy applies to what it receives.
+            Escuadra does not ship player photos. They are loaded from Wikimedia Commons, run by the
+            Wikimedia Foundation: the ten photos for a round when the round starts. Like any
+            website, Wikimedia receives your device&apos;s IP address and the details of each
+            request, including which photos were asked for, and so which players are in your round.
+            Escuadra sends nothing else to Wikimedia, and Wikimedia&apos;s own privacy policy
+            applies to what it receives.
           </Text>
           <Text style={styles.paragraph}>
             Photos already loaded may be kept in the app&apos;s cache on your device so that they
-            appear faster. Without a connection the quiz works as usual and shows the shirt number
-            instead of a photo.
+            appear faster. Without a connection the quiz works as usual and shows the team&apos;s
+            colours and the shirt number instead of a photo.
           </Text>
           <Text style={styles.paragraph}>
             Tapping a photo credit opens the photo&apos;s Wikimedia Commons page, or its licence on

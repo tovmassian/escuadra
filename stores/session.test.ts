@@ -1,5 +1,6 @@
 import { beforeEach, describe, expect, it } from 'vitest';
 import { firstWrongPart, selectMissed, selectScore, useSession } from './session';
+import { slotStates, type Slot } from '@/lib/roundView';
 import type { Player, RosterEntry, Squad } from '@/types/squad';
 
 function player(overrides: Partial<Player> & Pick<Player, 'id' | 'name' | 'position'>): Player {
@@ -39,6 +40,18 @@ const squad: Squad = {
   source: 'https://en.wikipedia.org/wiki/Test_FC',
   members: [],
 };
+
+// The slots the question screen would draw for the current question, built
+// from the live store the same way the screen builds them.
+function currentSlots(): Slot[] {
+  const state = useSession.getState();
+  const question = state.questions[state.currentIndex];
+  const result = state.results[state.currentIndex];
+  if (!question || !result || state.level === null) throw new Error('no question in play');
+  return slotStates(question, result, state.currentPartIndex, squad.kind, state.level);
+}
+
+const slotView = (slots: Slot[]) => slots.map((s) => `${s.key}:${s.state}`);
 
 describe('session store', () => {
   beforeEach(() => {
@@ -97,22 +110,59 @@ describe('session store', () => {
     expect(state.results[0]?.parts[2]).toBeNull();
   });
 
-  it('pins currentPartIndex at the wrong part instead of advancing it (invariant 7 store-side contract)', () => {
-    // partRailRows (lib/roundView.ts) decides a row's "current" state purely
-    // from `i === currentPartIndex`. If answerPart ever advanced the index
-    // after a wrong answer, the rail would silently accent a part that will
-    // never be asked — the player would see "current" on position/club after
-    // the question is already lost. Grading must also happen immediately,
-    // not wait for parts that are never coming.
+  it('pins currentPartIndex at the wrong part, so later slots are not asked (invariant 7 store-side contract)', () => {
+    // slotStates marks a slot `active` purely from `partIndex === currentPartIndex`
+    // while the question is unscored, and `notAsked` once it is. If answerPart
+    // ever advanced the index after a wrong answer, or waited to grade, the
+    // screen would accent a part that will never be asked, and the player
+    // would see an active position/nationality chip on a question already
+    // lost. Grading must also happen immediately, not wait for parts that
+    // are never coming.
     useSession.getState().startRound(squad, roster(), 3);
     const q = useSession.getState().questions[0];
     if (!q) throw new Error('no question');
+    expect(slotView(currentSlots())).toEqual(['NAME:active', 'POS:pending', 'NAT:pending']);
 
     const wrongNameIndex = q.parts[0]!.correctIndex === 0 ? 1 : 0;
     useSession.getState().answerPart(wrongNameIndex);
 
     expect(useSession.getState().currentPartIndex).toBe(0);
     expect(useSession.getState().results[0]?.correct).toBe(false);
+    expect(slotView(currentSlots())).toEqual(['NAME:wrong', 'POS:notAsked', 'NAT:notAsked']);
+  });
+
+  it('no slot is correct unless its part was answered right (invariant 8 store-side contract)', () => {
+    // A slot shows a verdict only where one was earned. A wrong position after
+    // a right name leaves the name correct, the position wrong, and the part
+    // never asked notAsked: no green check on anything the player did not
+    // answer, and none on the question as a whole.
+    useSession.getState().startRound(squad, roster(), 3);
+    const q = useSession.getState().questions[0];
+    if (!q) throw new Error('no question');
+
+    useSession.getState().answerPart(q.parts[0]!.correctIndex);
+    expect(slotView(currentSlots())).toEqual(['NAME:correct', 'POS:active', 'NAT:pending']);
+
+    const wrongPositionIndex = q.parts[1]!.correctIndex === 0 ? 1 : 0;
+    useSession.getState().answerPart(wrongPositionIndex);
+
+    const slots = currentSlots();
+    expect(slotView(slots)).toEqual(['NAME:correct', 'POS:wrong', 'NAT:notAsked']);
+    const answered = useSession.getState().results[0]?.parts ?? [];
+    const correctKeys = slots.filter((s) => s.state === 'correct').map((s) => s.key);
+    expect(correctKeys).toHaveLength(answered.filter((p) => p?.correct === true).length);
+    expect(useSession.getState().results[0]?.correct).toBe(false);
+  });
+
+  it('shows every slot correct only when every part was answered right', () => {
+    useSession.getState().startRound(squad, roster(), 3);
+    const q = useSession.getState().questions[0];
+    if (!q) throw new Error('no question');
+
+    for (const part of q.parts) useSession.getState().answerPart(part.correctIndex);
+
+    expect(slotView(currentSlots())).toEqual(['NAME:correct', 'POS:correct', 'NAT:correct']);
+    expect(useSession.getState().results[0]?.correct).toBe(true);
   });
 
   it('advanceQuestion moves forward and completes after the last question', () => {

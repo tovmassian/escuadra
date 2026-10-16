@@ -49,11 +49,12 @@ for iOS).
 survive.** Each entry says what the behaviour is and why it exists, so a
 deliberate constraint is distinguishable from an accident.
 
-1. **Player photos fill the hero**, hotlinked from Wikimedia Commons; the
-   shirt number moves to a tab in the corner. A player with no freely licensed
-   photo keeps the large-number card. Each photo's credit — who to credit,
-   licence, "cropped" — sits in muted text under the action button, always
-   visible; the results screen lists every credit behind "Show photo credits".
+1. **Player photos fill the top of the question screen**, hotlinked from
+   Wikimedia Commons, behind the shirt number. With no freely licensed photo,
+   or while it loads, the team's colours and the number show. Each photo's
+   credit — who to credit, licence, "cropped" — sits in muted text under the
+   action button, always visible; the results screen lists every credit behind
+   "Show photo credits".
 2. **No club crests, badges, logos or shield shapes. Ever.** Trademark
    exposure. Clubs are identified by text and colour, drawn as banded
    rectangles — the same marker shape used for national flags. National
@@ -68,13 +69,14 @@ deliberate constraint is distinguishable from an accident.
    about a specific club or nation, not a design choice, and is exempt.
 5. **Every animation stays under 300ms.** The app is played in fast repetitive
    bursts; slow transitions become infuriating by question six.
-6. **Question parts must stay scrollable.** Without it, later parts on levels 2
-   and 3 became physically unreachable on a phone.
+6. **Every part fits without scrolling at 360×640.** A scroll remains for large
+   text sizes, so no option is ever out of reach.
 7. **On levels 2 and 3, asking stops once a part is answered wrong.** The
    question is already lost; continuing to ask wastes the player's time.
-8. **Per-part verdicts show the real result.** A part must never show a green
-   check it did not earn — an earlier version did, and it made the feedback
-   untrustworthy, which is fatal for a study tool.
+8. **Per-part verdicts show the real result.** A part must never show a right
+   verdict it did not earn: a green tile, a green slot or a check. An earlier
+   version did, and it made the feedback untrustworthy, which is fatal for a
+   study tool.
 9. **No partial credit.** A level-2 or level-3 question is one scored unit,
    correct only when every part is right. The progress bar counts questions,
    not parts, so all three levels read 1..10.
@@ -93,7 +95,7 @@ flawless — see below). Route, file, and what it does.
 | 3   | `/team-picker`                    | `app/team-picker.tsx`                    | Team picker, segmented into Clubs and National Teams. Each row shows a mono sub-line — `LEVEL n · BEST n/10` or `NOT PLAYED`, green once cleared.                                                                                                                        |
 | 4   | `/team/[squadId]/difficulty`      | `app/team/[squadId]/difficulty.tsx`      | The difficulty ladder in level order: the focused level expanded into a card with its description and a Play button, the other levels compact (locked ones stating their unlock condition), and Study, an outline button until level 1 is cleared and a text link after. |
 | 5   | `/team/[squadId]/study`           | `app/team/[squadId]/study.tsx`           | Browsable squad list — number, name, position, club or nationality. With a `players` param it narrows to only those players, hides the position filters, and titles itself "Missed Players".                                                                             |
-| 6   | `/play/[squadId]/[level]`         | `app/play/[squadId]/[level]/index.tsx`   | A question. Hero slot, stat chips, answer options; on L2/L3 a part rail beside the hero shows each part's earned verdict, with the position/club/nationality parts below.                                                                                                |
+| 6   | `/play/[squadId]/[level]`         | `app/play/[squadId]/[level]/index.tsx`   | A question. The photo (or the team's colours) fills the top; the shirt number with the escuadra corner, the slot chips that spell out the player, the prompt, a grid of answers and the footer sit in the thumb zone. A right answer moves on by itself; a miss waits.   |
 | 7   | `/play/[squadId]/[level]/results` | `app/play/[squadId]/[level]/results.tsx` | Score, the players missed, and pass/fail-aware CTAs — `Study These N` is primary on a failed round, filtering Study to the misses, and suppresses `Study This Squad`. A 10/10 round instead renders the flawless "a la escuadra" state, no missed list.                  |
 
 ## Captures
@@ -115,21 +117,36 @@ flawless — see below). Route, file, and what it does.
 | `screens/09-results-flawless.png`        | Results — a la escuadra, 10/10       |
 
 Question captures carry real Commons photos, each credited on screen by the
-line under the button; a capture waits for its images to load.
+line under the footer; a capture waits for its images to load.
 
-`07-question-l2.png` is captured on arrival, unanswered, like the level-1
-shot — its distinct layout is the stat-chip column (age, nationality) stacked
-beside the hero, shrink-wrapped to its own content rather than stretched, with
-the part rail showing Name active and Position greyed until Name is answered.
+All four question screens share one layout, top to bottom. The photo fills the
+top edge to edge, with the round's progress bar, the close button, the team's
+name with its vertical banner and the level, and the score pill floating over
+it. The shirt number, large, with the escuadra corner beside it, sits over the
+photo's lower edge on its own ground (dark in dark, near-white in light), so it
+stays legible over any photo. Under it come the slot chips, one per thing the
+player must name or is told; the prompt in the display face, with a `1/2` or
+`3/3` part counter on the right from level 2 up; a two-column grid of answers;
+the footer, which reads "Tap your answer" until a pick; and the photo credit.
+
+`06-question-l1.png` is captured on arrival, unanswered. The slot chips show
+what level 1 gives for free (position, age, club) beside `NAME ?`, the active
+slot with the accent outline; the prompt is `WHO WEARS 7?` over four name
+options and has no part counter, as there is only one part.
+
+`07-question-l2.png` is captured on arrival, unanswered, like the level-1 shot.
+What differs is the slots: position is no longer given, so `POS` is a dashed,
+empty slot waiting behind `NAME ?`, and the prompt carries `1/2`.
 
 Both level-3 captures show the **third part**, the only state where the whole
-question layout is in play at once — answered name pill, greyed position
-chips, a part rail carrying two earned verdicts, and the last part's options
-still open. They are two different questions, not one screen twice: `squad.kind`
-decides what the third part asks. `08-question-l3.png` is a **nation** squad
-(Spain), so it asks the player's **club**; `08-question-l3-nationality.png` is a
-**club** squad (Barcelona), so it asks their **nationality** — and only
-nationality options carry flag images.
+question is in play at once — `NAME` and `POS` slots settled green with their
+answers filled in, the last slot (`CLUB ?` or `NAT ?`) active, the counter at
+`3/3`, and the last part's four options still open. They are two different
+questions, not one screen twice: `squad.kind` decides what the third part asks.
+`08-question-l3.png` is a **nation** squad (Spain), so it asks the player's
+**club** (`WHICH CLUB?`, text options); `08-question-l3-nationality.png` is a
+**club** squad (Barcelona), so it asks their **nationality**
+(`NATIONALITY?`) — and only nationality options carry flag images.
 
 The three results captures are the three tiers `resultTier` distinguishes.
 `09-results.png` is a failed round — the missed list is primary and

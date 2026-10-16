@@ -1,6 +1,16 @@
 import { describe, expect, it } from 'vitest';
 import { contrastRatio } from '@/lib/contrast';
-import { durations, gradients, palettes, sizes, stage, stageGradients, typography } from './tokens';
+import {
+  durations,
+  gradients,
+  palettes,
+  sizes,
+  spotlightCues,
+  spotlightMotion,
+  stage,
+  stageGradients,
+  typography,
+} from './tokens';
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
 
@@ -90,6 +100,11 @@ describe('spotlight stage', () => {
       'veilInk',
       'onPhoto',
       'onPhotoMuted',
+      'photoTrack',
+      'photoSuccess',
+      'photoError',
+      'stageShimmer',
+      'stageShimmerEdge',
     ] as const) {
       expect(palettes.dark[role], role).toBeDefined();
       expect(palettes.light[role], role).toBe(palettes.dark[role]);
@@ -185,6 +200,85 @@ describe('Archivo display type', () => {
     expect(archivo).toHaveLength(9);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
+    }
+  });
+});
+
+describe('spotlight screen text contrast', () => {
+  // Opaque text roles on the stage's ground, held to AA (4.5:1) against the
+  // theme's background. Translucent roles composite at render time and are
+  // checked on the design board instead.
+  const TEXT_ROLES = [
+    'onStage',
+    'chipPendingText',
+    'onStageMuted',
+    'stageSuccessText',
+    'stageErrorText',
+    'nextText',
+    'tileSub',
+  ] as const;
+
+  it('reaches 4.5:1 on the ground wherever the role is opaque', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      for (const role of TEXT_ROLES) {
+        const value = p[role];
+        if (!value.startsWith('#')) continue;
+        expect(contrastRatio(value, p.background), `${name}.${role}`).toBeGreaterThanOrEqual(4.5);
+      }
+    });
+  });
+
+  // `contrastRatio` measures opaque #rrggbb only, so a translucent role is
+  // blended over what it sits on first, in sRGB, as the screen paints it.
+  function blend(role: string, over: string): string {
+    const rgba = /^rgba\((\d+),(\d+),(\d+),([\d.]+)\)$/.exec(role.replace(/\s/g, ''));
+    if (!rgba) return role;
+    const [r = 0, g = 0, b = 0, alpha = 1] = rgba.slice(1).map(Number);
+    const mixed = [r, g, b].map((v, i) =>
+      Math.round(v * alpha + parseInt(over.slice(1 + i * 2, 3 + i * 2), 16) * (1 - alpha)),
+    );
+    return `#${mixed.map((v) => v.toString(16).padStart(2, '0')).join('')}`;
+  }
+
+  // The checks above see only the background. These text roles sit on a wash of
+  // their own, which moves the ground under them.
+  it('reaches 4.5:1 on the wash each text role sits on, in both themes', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      const wash = (role: 'stageAnswerBg' | 'chipBg' | 'nextBg') => blend(p[role], p.background);
+      const pairs = [
+        ['stageSuccessText', 'stageAnswerBg'],
+        ['chipPendingText', 'chipBg'],
+        ['onStageMuted', 'chipBg'],
+        ['nextText', 'nextBg'],
+      ] as const;
+      for (const [text, ground] of pairs) {
+        const under = wash(ground);
+        expect(
+          contrastRatio(blend(p[text], under), under),
+          `${name}.${text} on ${ground}`,
+        ).toBeGreaterThanOrEqual(4.5);
+      }
+    });
+  });
+});
+
+describe('spotlight motion', () => {
+  it('cues every mid-round moment within the 300 ms budget', () => {
+    for (const [cue, ms] of Object.entries(spotlightCues)) {
+      expect(ms, cue).toBeGreaterThanOrEqual(0);
+      expect(ms, cue).toBeLessThanOrEqual(300);
+    }
+  });
+
+  it('keeps scales near 1 and distances small', () => {
+    for (const key of ['pressScale', 'streakOutScale', 'ballStartScale'] as const) {
+      expect(spotlightMotion[key], key).toBeLessThan(1);
+    }
+    for (const key of ['popScale', 'answerPopScale', 'pulseScale', 'streakPopScale'] as const) {
+      expect(spotlightMotion[key], key).toBeGreaterThan(1);
+      expect(spotlightMotion[key], key).toBeLessThanOrEqual(1.2);
     }
   });
 });
