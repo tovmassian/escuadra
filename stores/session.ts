@@ -133,17 +133,3 @@ export function selectScore(results: QuestionResult[]): { correct: number; attem
 export function selectMissed(results: QuestionResult[]): QuestionResult[] {
   return results.filter((r) => r.correct === false);
 }
-
-/** Label + value for whichever part of a missed question was first wrong —
- *  not always the name (a right name can still fail on position/nationality/club). */
-export function firstWrongPart(
-  result: QuestionResult,
-): { partIndex: number; pickedLabel: string } | null {
-  for (let i = 0; i < result.parts.length; i++) {
-    const answered = result.parts[i];
-    const part = result.question.parts[i];
-    if (!answered || !part || answered.correct) continue;
-    return { partIndex: i, pickedLabel: part.options[answered.pickedIndex] ?? '—' };
-  }
-  return null;
-}

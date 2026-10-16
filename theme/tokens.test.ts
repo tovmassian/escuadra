@@ -1,9 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { contrastRatio } from '@/lib/contrast';
 import {
+  cardGradient,
   durations,
   gradients,
+  MOTION_TIME_SCALE,
   palettes,
+  resultsTimeline,
   sizes,
   spotlightCues,
   spotlightMotion,
@@ -56,6 +59,18 @@ describe('brand tokens', () => {
 // can see the difference.
 const COLOR = /^(#[0-9a-f]{6}|rgba\(\d+,\d+,\d+,[\d.]+\))$/;
 
+// `contrastRatio` measures opaque #rrggbb only, so a translucent role is
+// blended over what it sits on first, in sRGB, as the screen paints it.
+function blend(role: string, over: string): string {
+  const rgba = /^rgba\((\d+),(\d+),(\d+),([\d.]+)\)$/.exec(role.replace(/\s/g, ''));
+  if (!rgba) return role;
+  const [r = 0, g = 0, b = 0, alpha = 1] = rgba.slice(1).map(Number);
+  const mixed = [r, g, b].map((v, i) =>
+    Math.round(v * alpha + parseInt(over.slice(1 + i * 2, 3 + i * 2), 16) * (1 - alpha)),
+  );
+  return `#${mixed.map((v) => v.toString(16).padStart(2, '0')).join('')}`;
+}
+
 describe('palettes', () => {
   it('expose identical key sets', () => {
     expect(new Set(Object.keys(palettes.light))).toEqual(new Set(Object.keys(palettes.dark)));
@@ -84,6 +99,40 @@ describe('text contrast', () => {
       }
     });
   });
+
+  // Results sets small text in `successText` (the 10/10 label) and `error` (the
+  // fail label). `success` carries only large text and graphics there.
+  it('successText reaches 4.5:1 on background and surface, in both themes', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      for (const ground of ['background', 'surface'] as const) {
+        expect(
+          contrastRatio(p.successText, p[ground]),
+          `${name}.successText on ${ground}`,
+        ).toBeGreaterThanOrEqual(4.5);
+      }
+    });
+  });
+
+  it('error reaches 4.5:1 on background, in both themes', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      expect(contrastRatio(p.error, p.background), `${name}.error`).toBeGreaterThanOrEqual(4.5);
+    });
+  });
+
+  // A player card's line sits at the foot of the card, on the gradient's last
+  // stop, so it is held to AA there over the worst photo: pure white.
+  it('cardLine reaches 4.5:1 under the last cardGradient stop over a white photo', () => {
+    const last = cardGradient.colors[cardGradient.colors.length - 1] ?? '';
+    const ground = blend(last, '#ffffff');
+    (['dark', 'light'] as const).forEach((name) => {
+      expect(
+        contrastRatio(palettes[name].cardLine, ground),
+        `${name}.cardLine`,
+      ).toBeGreaterThanOrEqual(4.5);
+    });
+  });
 });
 
 describe('spotlight stage', () => {
@@ -105,6 +154,7 @@ describe('spotlight stage', () => {
       'photoError',
       'stageShimmer',
       'stageShimmerEdge',
+      'cardLine',
     ] as const) {
       expect(palettes.dark[role], role).toBeDefined();
       expect(palettes.light[role], role).toBe(palettes.dark[role]);
@@ -197,7 +247,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(9);
+    expect(archivo).toHaveLength(10);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }
@@ -228,18 +278,6 @@ describe('spotlight screen text contrast', () => {
       }
     });
   });
-
-  // `contrastRatio` measures opaque #rrggbb only, so a translucent role is
-  // blended over what it sits on first, in sRGB, as the screen paints it.
-  function blend(role: string, over: string): string {
-    const rgba = /^rgba\((\d+),(\d+),(\d+),([\d.]+)\)$/.exec(role.replace(/\s/g, ''));
-    if (!rgba) return role;
-    const [r = 0, g = 0, b = 0, alpha = 1] = rgba.slice(1).map(Number);
-    const mixed = [r, g, b].map((v, i) =>
-      Math.round(v * alpha + parseInt(over.slice(1 + i * 2, 3 + i * 2), 16) * (1 - alpha)),
-    );
-    return `#${mixed.map((v) => v.toString(16).padStart(2, '0')).join('')}`;
-  }
 
   // The checks above see only the background. These text roles sit on a wash of
   // their own, which moves the ground under them.
@@ -273,12 +311,42 @@ describe('spotlight motion', () => {
   });
 
   it('keeps scales near 1 and distances small', () => {
-    for (const key of ['pressScale', 'streakOutScale', 'ballStartScale'] as const) {
+    for (const key of [
+      'pressScale',
+      'streakOutScale',
+      'ballStartScale',
+      'rosterInScale',
+    ] as const) {
       expect(spotlightMotion[key], key).toBeLessThan(1);
     }
     for (const key of ['popScale', 'answerPopScale', 'pulseScale', 'streakPopScale'] as const) {
       expect(spotlightMotion[key], key).toBeGreaterThan(1);
       expect(spotlightMotion[key], key).toBeLessThanOrEqual(1.2);
     }
+  });
+});
+
+describe('results motion', () => {
+  // Spec §6 gives the Results timings at MOTION_TIME_SCALE 1.
+  it('runs at the shipped time scale', () => {
+    expect(MOTION_TIME_SCALE).toBe(1);
+  });
+
+  it('fills the round strip by the time the pass beat starts', () => {
+    const stripEnd = 9 * resultsTimeline.segmentStagger + resultsTimeline.segmentFill;
+    expect(stripEnd).toBeLessThanOrEqual(resultsTimeline.passBeat);
+    expect(resultsTimeline.failBeat).toBeLessThan(resultsTimeline.passBeat);
+  });
+});
+
+describe('cardGradient', () => {
+  it('has as many locations as colours, ascending, within the card', () => {
+    expect(cardGradient.locations.length).toBe(cardGradient.colors.length);
+    cardGradient.colors.forEach((c) => expect(c).toMatch(COLOR));
+    cardGradient.locations.forEach((at, i) => {
+      expect(at).toBeGreaterThanOrEqual(0);
+      expect(at).toBeLessThanOrEqual(1);
+      if (i > 0) expect(at).toBeGreaterThan(cardGradient.locations[i - 1] ?? 1);
+    });
   });
 });

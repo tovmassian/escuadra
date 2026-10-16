@@ -27,6 +27,9 @@ export interface Palette {
   thumbBg: string;
   thumbIcon: string;
   success: string;
+  /** Small success-coloured text on `background`/`surface`; `success` itself
+   *  stays for large text and graphics. */
+  successText: string;
   successBg: string;
   error: string;
   /** Dimmed error text for an "incorrect-picked" option — visually quieter
@@ -104,6 +107,9 @@ export interface Palette {
   nextBg: string;
   nextText: string;
   nextFill: string;
+  /** A player card's line under the name ("You picked …"). The card is dark in
+   *  both themes (photo or bands under `cardGradient`), so this is shared. */
+  cardLine: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -138,6 +144,7 @@ const sharedRoles = {
   photoError: '#f05653',
   stageShimmer: 'rgba(255,255,255,0.26)',
   stageShimmerEdge: 'rgba(255,255,255,0)',
+  cardLine: '#ffa19e',
 } as const;
 
 // The ramp sits higher than it did: the mark's trail squares, at 30% and 55%
@@ -156,6 +163,7 @@ const darkRoles = {
   thumbBg: '#2b2f38',
   thumbIcon: '#e7e9f5',
   success: '#61bd67',
+  successText: '#61bd67',
   error: '#f05653',
   errorTextDim: '#a15a58',
   tile: 'rgba(255,255,255,0.08)',
@@ -200,6 +208,7 @@ const lightRoles = {
   thumbBg: '#ffffff',
   thumbIcon: '#b9840f',
   success: '#2f8f3e',
+  successText: '#24702f',
   error: '#c23934',
   errorTextDim: '#b3625d',
   tile: '#ffffff',
@@ -299,6 +308,14 @@ export const stageGradients: Record<ThemeName, StageGradient> = {
   },
 };
 
+// A player card's shading (spec §5.2): a light scrim behind the shirt number,
+// clear through the face, deep under the name. The same in both themes,
+// because the card is always a photo or the team's bands.
+export const cardGradient: StageGradient = {
+  colors: ['rgba(10,11,15,0.35)', 'rgba(10,11,15,0)', 'rgba(10,11,15,0)', 'rgba(10,11,15,0.92)'],
+  locations: [0, 0.28, 0.4, 0.8],
+};
+
 // The no-photo stage (spec §2.6): the squad's marker bands under a wash of
 // `veilInk` at this opacity, per theme. A floor, not the final value —
 // `stageVeil` in lib/stageView.ts raises it until `onPhoto` text holds 3:1 on
@@ -326,8 +343,6 @@ export const stage = {
 } as const;
 
 export const typography = {
-  // Results screen's giant score readout.
-  scoreHero: { fontFamily: 'IBMPlexMono-Bold', fontWeight: '700' as const, fontSize: 56 },
   screenTitle: { fontFamily: 'Inter-Bold', fontWeight: '700' as const, fontSize: 28 },
   sectionHead: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 20 },
   body: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 17 },
@@ -468,6 +483,16 @@ export const typography = {
   topBarTeam: { fontFamily: 'Inter-Bold', fontSize: 14 },
   // The word under a position tile's code ("Keeper").
   tileSubLabel: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 10.5 },
+  // ---- 2.0 Results ----
+  // The "/10" beside the score.
+  scoreTail: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 60, lineHeight: 48 },
+  // A player card's name and its line.
+  cardName: { fontFamily: 'Inter-Bold', fontSize: 15 },
+  cardLine: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 11.5 },
+  // The shirt number under each round-strip segment.
+  stripNumber: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 10.5 },
+  // A name under a 10/10 circle.
+  rosterName: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 11 },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -502,7 +527,7 @@ export const opacity = {
 // answer before the round moves on by itself (spec §2.4; a tap skips it, and
 // it never runs with a screen reader on). The round-over celebration and the
 // home lockup are the one carve-out from the rule; see
-// `strikeTiming`/`celebrationCascade` below.
+// `strikeTiming`/`resultsTimeline` below.
 export const durations = {
   press: 100,
   reveal: 180,
@@ -535,6 +560,8 @@ export const spotlightMotion = {
   streakPopScale: 1.15,
   streakOutScale: 0.8,
   ballStartScale: 0.6,
+  // A 10/10's player circles on Results grow from this as they pop in.
+  rosterInScale: 0.8,
   shake: 6,
   rise: 8,
   numberRise: 12,
@@ -567,15 +594,15 @@ export const celebrationEasingCurves = {
 } as const;
 
 // Preview knobs for a longer, more exaggerated take on the celebration
-// motion below, without hand-editing every value. 1 = the shipped, reviewed
-// timing/distances. `MOTION_TIME_SCALE` stretches every duration and delay
-// in `strikeTiming`/`celebrationCascade`/`homeCascade` uniformly (so the
-// whole cascade's rhythm holds, just slower); `MOTION_DISTANCE_SCALE` is
-// read directly by `EscuadraStrike` and `AnimatedScore` to exaggerate the
-// ball's travel/overshoot, the frame's recoil, the trail's catch-up
-// distance and the score's pop-in — set both back to 1 to restore exactly
-// what shipped, nothing else needs to change.
-export const MOTION_TIME_SCALE = 1.8;
+// motion below, without hand-editing every value. `MOTION_TIME_SCALE` ships at
+// 1 (the spec's timing) and stretches every duration and delay in
+// `strikeTiming`, `celebrationRiseDuration`, `resultsTimeline` (bar its strip
+// fields, which are the mid-round `durations`) and `homeCascade` uniformly (so
+// the whole cascade's rhythm holds, just slower); `MOTION_DISTANCE_SCALE` ships
+// at 1.5 and is read directly by `EscuadraStrike` to exaggerate the ball's
+// travel/overshoot, the frame's recoil and the trail's catch-up distance —
+// set it to 1 to restore the base distances, nothing else needs to change.
+export const MOTION_TIME_SCALE = 1;
 export const MOTION_DISTANCE_SCALE = 1.5;
 
 function t(ms: number): number {
@@ -631,55 +658,26 @@ export const strikeTiming: Record<'excellent' | 'passed' | 'home', StrikeTiming>
   },
 };
 
-// One rise-in duration shared by every title/subtitle/missed-card/button in
-// the cascade below — only the per-element delay varies by tier, which is
-// what actually shapes the cascade's rhythm.
+// Home's continue card and buttons rise in over this (app/index.tsx).
 export const celebrationRiseDuration = t(220);
 
-export interface CelebrationCascade {
-  score: { delay: number; duration: number; pop: boolean };
-  title: number;
-  subtitle: number;
-  missedLabel?: number;
-  missedBase?: number;
-  missedStep?: number;
-  actionsBase: number;
-  actionsStep: number;
-}
-
-// Text/list/button cascade once the strike lands, keyed by results-screen
-// tier. `score.pop` is true only for `excellent`: the flawless score has its
-// own pop-in the other two tiers skip (their digits still count up, just
-// without an entrance transform on the readout itself).
-export const celebrationCascade: Record<'excellent' | 'passed' | 'fail', CelebrationCascade> = {
-  excellent: {
-    score: { delay: t(420), duration: t(260), pop: true },
-    title: t(540),
-    subtitle: t(620),
-    actionsBase: t(660),
-    actionsStep: t(40),
-  },
-  passed: {
-    score: { delay: t(160), duration: t(380), pop: false },
-    title: t(380),
-    subtitle: t(440),
-    missedLabel: t(460),
-    missedBase: t(500),
-    missedStep: t(40),
-    actionsBase: t(580),
-    actionsStep: t(40),
-  },
-  fail: {
-    score: { delay: t(120), duration: t(420), pop: false },
-    title: 0,
-    subtitle: t(300),
-    missedLabel: t(320),
-    missedBase: t(360),
-    missedStep: t(40),
-    actionsBase: t(520),
-    actionsStep: t(40),
-  },
-};
+// The Results screen's timeline (spec §6), at MOTION_TIME_SCALE 1. It is the
+// celebration carve-out, so it may run past the mid-round 300 ms budget.
+// - The strip fills first, segment by segment.
+// - Then comes the tier's beat. A fail: the title rises and the missed cards
+//   slide in. A pass: the corner draws and the ball strikes (`strikeTiming`).
+// - The actions rise last.
+export const resultsTimeline = {
+  segmentFill: durations.segmentFill,
+  segmentStagger: durations.segmentStagger,
+  failBeat: t(300),
+  passBeat: t(480),
+  rise: t(220),
+  cardStagger: t(60),
+  circleStagger: t(40),
+  actionsAfter: t(220),
+  actionsStagger: t(40),
+} as const;
 
 // Home's lockup: the mark strike (`strikeTiming.home`) plus the wordmark's
 // letter-by-letter rise and the continue-card/buttons beneath it. Runs once,
@@ -744,13 +742,11 @@ export const sizes = {
   // Home's centred lockup. The mark only reads its right angle at this size,
   // which is why the trail is shown here and nowhere else.
   wordmarkMarkHero: 86,
-  // The a la escuadra celebration mark. Larger than Home's lockup because on
-  // this screen the mark is the entire content.
-  celebrationMark: 120,
+  // A 10/10's player circles.
+  rosterAvatar: 54,
   // Team-picker rows carry a progress sub-line, so they need a second line of
   // height.
   rowHeightTall: 64,
-  missedNumberWidth: 24,
   // The theme toggle. `inset` is the gap between track edge and thumb, so the
   // thumb's travel is trackWidth - thumb - inset * 2.
   themeToggle: { trackWidth: 52, trackHeight: 30, thumb: 24, inset: 2 },
@@ -813,6 +809,8 @@ export const iconSize = {
   clearGlyph: 10, // SearchField's clear (×) button, drawn from two crossed bars
   closeGlyph: 14, // the question's close ×, two crossed bars
   flameGlyph: 12, // the streak chip's flame
+  shareGlyph: 18, // the Results screen's share button
+  retryGlyph: 18, // the Results screen's retry icon beside Study
   // The locked-badge padlock scales with its badge rather than sitting at one
   // fixed size — 32 * 0.46 ≈ 15.
   lockGlyphRatio: 0.46,
@@ -835,6 +833,7 @@ export const radii = {
   xs: 2, // progress segments
   md: 12,
   lg: 16,
+  card: 18, // player cards
   xl: 24,
   sheet: 28, // the share sheet's top corners
   pill: 999,

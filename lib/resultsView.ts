@@ -1,47 +1,8 @@
 // Pure results-screen model. Kept out of the screen so invariant 10's rules
 // are unit-testable.
 
-import { PASS_RATIO } from '@/lib/scoring';
-
-export type ActionId = 'nextLevel' | 'retry' | 'studyMissed' | 'study' | 'chooseTeam';
-
-/**
- * Ordered actions for the results screen, primary first.
- *
- * Invariant 10: the set varies by pass/fail and by whether the level ceiling
- * is reached. Passing below the ceiling advances; passing at the ceiling has
- * nowhere to advance to, so it points at a new team. Failing puts the missed
- * list first — for a study tool the misses are the result, and retrying the
- * round you just failed teaches nothing.
- */
-export function actionOrder(opts: {
-  passed: boolean;
-  hasNextLevel: boolean;
-  missedCount: number;
-}): ActionId[] {
-  const { passed, hasNextLevel, missedCount } = opts;
-
-  const primary: ActionId = passed
-    ? hasNextLevel
-      ? 'nextLevel'
-      : 'chooseTeam'
-    : missedCount > 0
-      ? 'studyMissed'
-      : 'retry';
-
-  const rest: ActionId[] = (['studyMissed', 'retry', 'study', 'chooseTeam'] as const).filter(
-    (id) =>
-      id !== primary &&
-      (id !== 'studyMissed' || missedCount > 0) &&
-      // studyMissed strictly supersedes study whenever it's on offer: studying
-      // the exact players you missed beats studying the whole squad. The full
-      // squad list is still reachable from the difficulty screen, so this is
-      // never a dead end.
-      (id !== 'study' || missedCount === 0),
-  );
-
-  return [primary, ...rest];
-}
+import { PASS_RATIO, ROUND_LENGTH } from '@/lib/scoring';
+import type { QuestionResult } from '@/stores/session';
 
 /**
  * A la escuadra — the flawless round the product is named for.
@@ -70,4 +31,83 @@ export function resultTier(correct: number, attempted: number): ResultTier {
   if (isFlawless(correct, attempted)) return 'excellent';
   if (attempted > 0 && correct / attempted >= PASS_RATIO) return 'passed';
   return 'fail';
+}
+
+export type PrimaryAction = 'nextLevel' | 'retry' | 'chooseTeam';
+
+export interface ResultActions {
+  primary: PrimaryAction;
+  secondary: 'study';
+  /** Retry as an icon beside Study, whenever retry isn't the main button. */
+  retryIcon: boolean;
+}
+
+/**
+ * Invariant 10 (spec §3.2):
+ * - A failed round's main button retries it.
+ * - A pass plays the next level, or, at level 3, chooses a different team.
+ * - Study this squad is always the second action.
+ * - The screen's close button always chooses a different team.
+ */
+export function resultActions(passed: boolean, hasNextLevel: boolean): ResultActions {
+  const primary: PrimaryAction = passed ? (hasNextLevel ? 'nextLevel' : 'chooseTeam') : 'retry';
+  return { primary, secondary: 'study', retryIcon: primary !== 'retry' };
+}
+
+export interface ResultCopy {
+  title: string;
+  verdict: string;
+}
+
+/** The tier's title and one line of verdict (spec §3.1). */
+export function resultCopy({
+  tier,
+  level,
+  teamName,
+  season,
+}: {
+  tier: ResultTier;
+  level: number;
+  teamName: string;
+  season: string;
+}): ResultCopy {
+  if (tier === 'excellent') {
+    return {
+      title: 'A la escuadra',
+      verdict: `${teamName} · ${season}, level ${level}. Nothing missed.`,
+    };
+  }
+  if (tier === 'passed') {
+    return { title: `Level ${level} cleared`, verdict: 'You knew most of the starting XI.' };
+  }
+  const target = `${Math.ceil(PASS_RATIO * ROUND_LENGTH)}/${ROUND_LENGTH}`;
+  return {
+    title: 'These are the ones to learn',
+    verdict:
+      level >= 3
+        ? `Score ${target} to clear level ${level}.`
+        : `Score ${target} to unlock level ${level + 1}.`,
+  };
+}
+
+const PART_NOUN = { position: 'position', club: 'club', nationality: 'nationality' } as const;
+
+/**
+ * A missed card's line, naming the first wrong part (spec §3.1):
+ * - the name: "You picked …";
+ * - a later part: what was right first, then the real value and the pick.
+ * Empty when no part is wrong.
+ */
+export function missedLine(result: QuestionResult): string {
+  for (let i = 0; i < result.parts.length; i++) {
+    const answered = result.parts[i];
+    const part = result.question.parts[i];
+    if (!answered || !part || answered.correct) continue;
+    const picked = part.options[answered.pickedIndex] ?? '—';
+    if (part.kind === 'name') return `You picked ${picked}`;
+    const right = part.options[part.correctIndex] ?? '—';
+    const before = i === 1 ? 'Name right' : 'Name and position right';
+    return `${before} · ${PART_NOUN[part.kind]} is ${right}, you said ${picked}`;
+  }
+  return '';
 }
