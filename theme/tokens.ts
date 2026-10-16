@@ -486,10 +486,10 @@ export const borderWidths = {
 // 0.4/0.65/etc in a component.
 export const opacity = {
   disabled: 0.55, // locked difficulty row
-  dimmed: 0.65, // incorrect-picked text/border
-  faded: 0.4, // unrelated options during an incorrect reveal
-  settled: 0.7, // other options once one is picked correct
-  loadingBlank: 0.25, // option cards mid question-transition
+  dimmed: 0.65, // VerdictGlyph's incorrect variant (no screen renders one today)
+  faded: 0.4, // the photo-loading shimmer under Reduce Motion (SpotlightStage)
+  settled: 0.7, // press feedback: Button, DifficultyRow, GlassCloseButton, QuestionFooter
+  loadingBlank: 0.25, // unused since the Spotlight screen (it was the old option cards' mid-transition blank)
   tileAfterCorrect: 0.5, // other tiles once the pick was right (spec §6)
   tileAfterMiss: 0.35, // other tiles after a miss
 } as const;

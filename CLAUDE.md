@@ -96,8 +96,9 @@ defaults; an issue that explicitly changes one wins, and the change should
 update this file in the same PR rather than leave a stale rule behind.
 
 1. **Player photos are hotlinked Wikimedia Commons thumbnails, always
-   credited.** A photo fills the question hero and the shirt number moves to
-   a corner tab; with no photo, or until it loads, the number card shows.
+   credited.** The photo fills the top of the question screen behind the shirt
+   number; with no photo, or while it loads, the team's colours and the number
+   show.
    `player.photo` is a `PhotoCredit` written only by `squadctl enrich`, which
    refuses any photo without an accepted licence, a Wikimedia thumbnail and
    its Commons page — the asset-licensing rule below, enforced in code and in
