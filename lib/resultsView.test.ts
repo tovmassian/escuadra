@@ -1,62 +1,136 @@
 import { describe, expect, it } from 'vitest';
-import { actionOrder, isFlawless, resultTier } from './resultsView';
+import type { QuestionPart } from '@/lib/questionEngine';
+import { isFlawless, missedLine, resultActions, resultCopy, resultTier } from './resultsView';
+import type { QuestionResult } from '@/stores/session';
 
-describe('actionOrder', () => {
-  it('offers the next level first when the player passed below the ceiling', () => {
-    const actions = actionOrder({ passed: true, hasNextLevel: true, missedCount: 2 });
-    expect(actions[0]).toBe('nextLevel');
+// Invariant 10 (SCREENS.md, spec §3.2): the main button differs by pass/fail
+// and by whether a level is left; Study is always the second; retry becomes
+// an icon whenever it is not the main button.
+describe('resultActions', () => {
+  it('retries a failed round, with Study as the second action and no retry icon', () => {
+    expect(resultActions(false, true)).toEqual({
+      primary: 'retry',
+      secondary: 'study',
+      retryIcon: false,
+    });
+    expect(resultActions(false, false)).toEqual({
+      primary: 'retry',
+      secondary: 'study',
+      retryIcon: false,
+    });
   });
 
-  it('offers a new team first when the player passed at the ceiling', () => {
-    // Invariant 10: nothing to advance to, so do not dangle a next level.
-    const actions = actionOrder({ passed: true, hasNextLevel: false, missedCount: 1 });
-    expect(actions[0]).toBe('chooseTeam');
-    expect(actions).not.toContain('nextLevel');
+  it('plays the next level after a pass below level 3, retry as an icon', () => {
+    expect(resultActions(true, true)).toEqual({
+      primary: 'nextLevel',
+      secondary: 'study',
+      retryIcon: true,
+    });
   });
 
-  it('offers studying the missed players first when the player failed', () => {
-    const actions = actionOrder({ passed: false, hasNextLevel: true, missedCount: 3 });
-    expect(actions[0]).toBe('studyMissed');
+  it('chooses a different team after a pass at level 3, retry as an icon', () => {
+    expect(resultActions(true, false)).toEqual({
+      primary: 'chooseTeam',
+      secondary: 'study',
+      retryIcon: true,
+    });
   });
 
-  it('falls back to retry as primary when the player failed but missed nothing', () => {
-    // Defensive: a 0-attempted round has no missed list to study.
-    const actions = actionOrder({ passed: false, hasNextLevel: true, missedCount: 0 });
-    expect(actions[0]).toBe('retry');
-    expect(actions).not.toContain('studyMissed');
-  });
-
-  it('never offers studyMissed when there are no missed players', () => {
-    const actions = actionOrder({ passed: true, hasNextLevel: true, missedCount: 0 });
-    expect(actions).not.toContain('studyMissed');
-  });
-
-  it('always offers a way to leave for another team', () => {
+  it('never offers the same thing twice', () => {
     for (const passed of [true, false]) {
-      for (const hasNextLevel of [true, false]) {
-        expect(actionOrder({ passed, hasNextLevel, missedCount: 2 })).toContain('chooseTeam');
+      for (const hasNext of [true, false]) {
+        const { primary, retryIcon } = resultActions(passed, hasNext);
+        expect(primary === 'retry' && retryIcon, `${passed}/${hasNext}`).toBe(false);
       }
     }
   });
+});
 
-  it('never repeats an action', () => {
-    const actions = actionOrder({ passed: false, hasNextLevel: true, missedCount: 3 });
-    expect(new Set(actions).size).toBe(actions.length);
+describe('resultCopy', () => {
+  const base = { level: 2, teamName: 'Spain', season: '2026' };
+
+  it('fail: what to learn, and the score that unlocks the next level', () => {
+    expect(resultCopy({ ...base, tier: 'fail' })).toEqual({
+      title: 'These are the ones to learn',
+      verdict: 'Score 8/10 to unlock level 3.',
+    });
   });
 
-  it('never offers both studyMissed and study in the same list', () => {
-    // studyMissed strictly supersedes study when it's on offer: studying the
-    // exact players you missed beats studying the whole squad. The full
-    // squad list is still reachable from the difficulty screen.
-    for (const passed of [true, false]) {
-      for (const hasNextLevel of [true, false]) {
-        for (const missedCount of [0, 1, 3]) {
-          const actions = actionOrder({ passed, hasNextLevel, missedCount });
-          const hasBoth = actions.includes('studyMissed') && actions.includes('study');
-          expect(hasBoth).toBe(false);
-        }
-      }
-    }
+  it('fail on level 3: the score that clears it', () => {
+    expect(resultCopy({ ...base, level: 3, tier: 'fail' }).verdict).toBe(
+      'Score 8/10 to clear level 3.',
+    );
+  });
+
+  it('passed: the level cleared', () => {
+    expect(resultCopy({ ...base, tier: 'passed' })).toEqual({
+      title: 'Level 2 cleared',
+      verdict: 'You knew most of the starting XI.',
+    });
+  });
+
+  it('10/10: a la escuadra, with the team, season and level', () => {
+    expect(resultCopy({ ...base, tier: 'excellent' })).toEqual({
+      title: 'A la escuadra',
+      verdict: 'Spain · 2026, level 2. Nothing missed.',
+    });
+  });
+});
+
+describe('missedLine', () => {
+  // The first wrong part decides the line; the rest were never asked.
+  function missed(parts: QuestionPart[], picks: number[]): QuestionResult {
+    return {
+      question: {
+        playerId: 'p',
+        playerName: 'Ferran Torres',
+        memberNo: 7,
+        age: 26,
+        position: 'MF',
+        affiliation: 'Barcelona',
+        parts,
+      },
+      parts: parts.map((p, i) => {
+        const pick = picks[i];
+        return pick === undefined ? null : { pickedIndex: pick, correct: pick === p.correctIndex };
+      }),
+      correct: false,
+    };
+  }
+  const name: QuestionPart = {
+    kind: 'name',
+    options: ['Marc Pubill', 'Ferran Torres'],
+    correctIndex: 1,
+  };
+  const pos: QuestionPart = {
+    kind: 'position',
+    options: ['GK', 'DF', 'MF', 'FW'],
+    correctIndex: 2,
+  };
+  const club: QuestionPart = { kind: 'club', options: ['Arsenal', 'Barcelona'], correctIndex: 1 };
+  const nat: QuestionPart = { kind: 'nationality', options: ['France', 'Spain'], correctIndex: 1 };
+
+  it('names the wrong pick on the name', () => {
+    expect(missedLine(missed([name], [0]))).toBe('You picked Marc Pubill');
+  });
+
+  it('says the name was right when the position was wrong', () => {
+    expect(missedLine(missed([name, pos], [1, 3]))).toBe(
+      'Name right · position is MF, you said FW',
+    );
+  });
+
+  it('says name and position were right when the club or nationality was wrong', () => {
+    expect(missedLine(missed([name, pos, club], [1, 2, 0]))).toBe(
+      'Name and position right · club is Barcelona, you said Arsenal',
+    );
+    expect(missedLine(missed([name, pos, nat], [1, 2, 0]))).toBe(
+      'Name and position right · nationality is Spain, you said France',
+    );
+  });
+
+  it('is empty for a question with no wrong part', () => {
+    expect(missedLine(missed([name], [1]))).toBe('');
   });
 });
 

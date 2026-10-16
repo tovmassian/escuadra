@@ -3,7 +3,7 @@ import { EscuadraStrike } from '@/components/EscuadraStrike';
 import { PhotoCredits } from '@/components/PhotoCredits';
 import type { Level } from '@/lib/questionEngine';
 import { photoCreditRows, photoFor } from '@/lib/photos';
-import { actionOrder, resultTier, type ActionId } from '@/lib/resultsView';
+import { resultTier } from '@/lib/resultsView';
 import { PASS_RATIO } from '@/lib/scoring';
 import { formatShareText } from '@/lib/shareResult';
 import { getPlayer, getRoster, getSquad } from '@/lib/squads';
@@ -387,4 +387,33 @@ function MissedCard({ result, delay }: { result: QuestionResult; delay: number }
       </View>
     </Animated.View>
   );
+}
+
+// Interim: Task 4 rewrites this screen. The old actionOrder lives here only so
+// this file keeps compiling now that lib/resultsView no longer exports it.
+type ActionId = 'nextLevel' | 'retry' | 'studyMissed' | 'study' | 'chooseTeam';
+
+function actionOrder(opts: {
+  passed: boolean;
+  hasNextLevel: boolean;
+  missedCount: number;
+}): ActionId[] {
+  const { passed, hasNextLevel, missedCount } = opts;
+
+  const primary: ActionId = passed
+    ? hasNextLevel
+      ? 'nextLevel'
+      : 'chooseTeam'
+    : missedCount > 0
+      ? 'studyMissed'
+      : 'retry';
+
+  const rest: ActionId[] = (['studyMissed', 'retry', 'study', 'chooseTeam'] as const).filter(
+    (id) =>
+      id !== primary &&
+      (id !== 'studyMissed' || missedCount > 0) &&
+      (id !== 'study' || missedCount === 0),
+  );
+
+  return [primary, ...rest];
 }
