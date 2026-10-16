@@ -108,3 +108,51 @@ describe('fieldPattern', () => {
     expect(TRIAGE_TEMPLATE).toMatch(/\n```$/);
   });
 });
+
+describe('anchoring and boundaries', () => {
+  const named = (graders: YamlMap[], name: string): YamlMap => {
+    const grader = graders.find((g) => g.name === name);
+    if (!grader) throw new Error(`no grader named ${name}`);
+    return grader;
+  };
+  const DOC = 'docs/superpowers/handoff/2026-10-16-2-0-redesign-handoff.md';
+
+  it('docs passes only on the docs line, not a narrative mention or a longer name', () => {
+    const docs = named(gradersFor({ kind: 'triage', decision: 'proceed', docs: [DOC] }), 'docs');
+    expect(passes(docs, BLOCK)).toBe(true);
+
+    const narrative = BLOCK.replace(`docs: ${DOC}`, 'docs: none').replace(
+      'I read the issue and the handoff.',
+      `I read ${DOC}.`,
+    );
+    expect(passes(docs, narrative)).toBe(false);
+
+    const longer = BLOCK.replace(
+      `docs: ${DOC}`,
+      'docs: docs/superpowers/handoff/x-2026-10-16-2-0-redesign-handoff.md',
+    );
+    expect(passes(docs, longer)).toBe(false);
+  });
+
+  it('existing passes on the number and not a longer one', () => {
+    const existing = named(
+      gradersFor({ kind: 'triage', decision: 'proceed', existing: ['#9101'] }),
+      'existing',
+    );
+    const withExisting = (line: string) => BLOCK.replace('existing: none', line);
+    expect(
+      passes(existing, withExisting('existing: open PR #9101 (fix/9008-progress-bar-last-step)')),
+    ).toBe(true);
+    expect(passes(existing, withExisting('existing: PR #91010'))).toBe(false);
+  });
+
+  it('branch rejects a slash after the slug', () => {
+    const branch = named(gradersFor(proceed), 'branch');
+    const slashed = BLOCK.replace('branch: fix/126-photo-credits-sheet', 'branch: fix/126-foo/bar');
+    expect(passes(branch, slashed)).toBe(false);
+  });
+
+  it('a field pattern does not match across a line break', () => {
+    expect(new RegExp(fieldPattern('base', 'main'), 'm').test('base:\nmain')).toBe(false);
+  });
+});

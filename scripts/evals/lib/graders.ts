@@ -79,23 +79,23 @@ function triageGraders(t: Triage): YamlMap[] {
     const pattern =
       'exact' in t.branch
         ? fieldPattern('branch', t.branch.exact)
-        : `^branch:\\s*${escapeRegExp(t.branch.prefix)}[\\w.-]+`;
+        : `^branch:[ \\t]*${escapeRegExp(t.branch.prefix)}[\\w.-]+(?![\\w/.-])`;
     graders.push(line('branch', pattern, 1));
   }
   if (t.firstStep) {
     const skill = escapeRegExp(t.firstStep);
-    graders.push(line('first-step', `^first-step:\\s*(?:superpowers:)?${skill}(?![\\w-])`, 1));
+    graders.push(line('first-step', `^first-step:[ \\t]*(?:superpowers:)?${skill}(?![\\w-])`, 1));
   }
   if (t.execution) graders.push(line('execution', fieldPattern('execution', t.execution), 1));
   if (t.sizeEstimated) graders.push(line('size', '^size:.*\\(estimated', 1));
   if (t.docs !== undefined && t.docs.length > 0) {
     const names = t.docs.map((doc) => escapeRegExp(doc.split('/').pop() ?? doc));
-    const pattern = `^${names.map((name) => `(?=[\\s\\S]*${name})`).join('')}`;
-    graders.push({ type: 'regex', name: 'docs', pattern, weight: 1 });
+    const pattern = `^docs:${names.map((name) => `(?=.*(?<![\\w.-])${name})`).join('')}`;
+    graders.push(line('docs', pattern, 1));
   }
   if (t.existing !== undefined && t.existing.length > 0) {
     const options = t.existing.map(escapeRegExp).join('|');
-    graders.push(line('existing', `^existing:.*(?:${options})`, 1));
+    graders.push(line('existing', `^existing:.*(?<![\\w/#.-])(?:${options})(?![\\w/.-])`, 1));
   }
   if (t.questions) {
     const criteria = `The final message ends with a triage block whose decision is "ask". Among its questions for the owner, ${t.questions}`;

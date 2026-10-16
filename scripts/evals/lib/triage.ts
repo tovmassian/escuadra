@@ -23,5 +23,5 @@ export function escapeRegExp(text: string): string {
 
 /** `<field>: <value>` at a line start (flag m), where the value is not the start of a longer one. */
 export function fieldPattern(field: string, value: string): string {
-  return `^${escapeRegExp(field)}:\\s*${escapeRegExp(value)}(?![\\w/.-])`;
+  return `^${escapeRegExp(field)}:[ \\t]*${escapeRegExp(value)}(?![\\w/.-])`;
 }
