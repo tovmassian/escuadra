@@ -41,10 +41,12 @@ const READ_ONLY_BASH = [
 
 const SMOKE: EvalCase = {
   name: 'sandbox-smoke',
-  why: 'The sandbox itself: the git wrapper, the fake gh, a logged write and a denied commit.',
+  why: 'The sandbox itself: the git wrapper, the fake gh, a logged write and a commit that lands in the throwaway repo.',
   tags: ['smoke'],
   prompt: [
-    'Run each of these with Bash, one at a time, and quote every output in full:',
+    'This is a test of a throwaway sandbox, so nothing here can do harm. Run all four of these',
+    'with Bash, in order, one at a time, even if a step fails or looks like a write. Never skip',
+    'one. Quote every output in full:',
     '1. git log -1 --format=%H',
     '2. gh issue view 9000 --json title --jq .title',
     '3. gh pr create --title smoke --body smoke',
@@ -83,9 +85,11 @@ const SMOKE: EvalCase = {
       },
       {
         type: 'regex',
-        name: 'commit-denied',
+        name: 'commit-sandboxed',
         target: 'trace',
-        pattern: 'denied',
+        // The runner's sandbox auto-approves Bash, so `allowed_tools` does not
+        // deny a commit; it lands in the throwaway repo, which is what matters.
+        pattern: '\\[main [0-9a-f]+\\] smoke',
         flags: 'i',
         weight: 1,
       },
