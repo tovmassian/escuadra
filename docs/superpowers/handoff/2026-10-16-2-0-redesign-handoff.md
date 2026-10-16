@@ -10,23 +10,23 @@
 
 ## Where it stands
 
-| Issue | What                                                      | State                                                                                                                                                    |
-| ----- | --------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| #111  | Tokens, Archivo, `textMuted` contrast                     | merged, [#118](https://github.com/tovmassian/escuadra/pull/118)                                                                                          |
-| #112  | 960 px photos, original size in `PhotoCredit`             | merged, [#119](https://github.com/tovmassian/escuadra/pull/119)                                                                                          |
-| #113  | The Spotlight question screen                             | merged: logic [#120](https://github.com/tovmassian/escuadra/pull/120), screen [#121](https://github.com/tovmassian/escuadra/pull/121)                    |
-| #114  | Results and sharing                                       | Part 1 is the rebuilt Results screen (branch `feat/114-results`). Part 2 adds the share sheet, the share image, telemetry `format` and the privacy text. |
-| #115  | Study                                                     | **Not started, by the owner's instruction (2026-10-16).** Its notes are below.                                                                           |
-| #116  | Docs pass, store assets, version, release branch          | Not started. Its notes are below.                                                                                                                        |
-| #117  | Android: bold Inter/Plex styles probably render in Roboto | Open. Found in #111's review; needs a device check.                                                                                                      |
+| Issue | What                                                      | State                                                                                                                                 |
+| ----- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
+| #111  | Tokens, Archivo, `textMuted` contrast                     | merged, [#118](https://github.com/tovmassian/escuadra/pull/118)                                                                       |
+| #112  | 960 px photos, original size in `PhotoCredit`             | merged, [#119](https://github.com/tovmassian/escuadra/pull/119)                                                                       |
+| #113  | The Spotlight question screen                             | merged: logic [#120](https://github.com/tovmassian/escuadra/pull/120), screen [#121](https://github.com/tovmassian/escuadra/pull/121) |
+| #114  | Results and sharing                                       | merged: Results [#123](https://github.com/tovmassian/escuadra/pull/123), sharing (#114 part 2, `feat/114-sharing`)                    |
+| #115  | Study                                                     | **Not started, by the owner's instruction (2026-10-16).** Its notes are below.                                                        |
+| #116  | Docs pass, store assets, version, release branch          | Not started. Its notes are below.                                                                                                     |
+| #117  | Android: bold Inter/Plex styles probably render in Roboto | Open. Found in #111's review; needs a device check.                                                                                   |
 
-`main` now carries most of 2.0. Whichever release branch is cut from `main` next (the photo build, #60, or 2.0.0) ships it. No PR here moved the fingerprint until #114 part 2, which adds two native packages.
+`main` now carries most of 2.0. Whichever release branch is cut from `main` next (the photo build, #60, or 2.0.0) ships it. #114 part 2 moved the fingerprint: it adds `react-native-view-shot` and `expo-sharing`. So none of 2.0 can reach a 1.x binary over the air.
 
 ## Questions only the owner can answer
 
 These touch the legal asset-licensing guardrail, so no session decided them.
 
-1. **"Otherwise unchanged."** The About credits say photos are "shown cropped to fit, and otherwise unchanged". The stage now shades the photo: a gradient into the ground, a 10 % dim on a miss, and a darkened copy behind a framed photo. Results' player cards shade theirs with `cardGradient`; the circles show the photo unshaded. The reviewers' read is that there is no licence breach, because the credit names the crop and the shading is presentation. But the sentence is untrue on its face; a suggestion is "cropped to fit and shaded under the screen's text". #114 part 2 rewrites the About text, so that is the natural place to decide.
+1. **"Otherwise unchanged."** The About credits say photos are "shown cropped to fit, and otherwise unchanged". The stage now shades the photo: a gradient into the ground, a 10 % dim on a miss, and a darkened copy behind a framed photo. Results' player cards shade theirs with `cardGradient`; the circles show the photo unshaded. The reviewers' read is that there is no licence breach, because the credit names the crop and the shading is presentation. But the sentence is untrue on its face; a suggestion is "cropped to fit and shaded under the screen's text". #114 part 2 added its own About text but left this sentence alone. It is still open, and it must be settled before #116 publishes `privacy.html`.
 2. **Crests in photos.** The full-bleed stage makes kit crests and sponsor logos far more visible than the 1.x hero did; Spain's crest is clear in `design/screens/06–08`, and on Pedri's card in `09-results.png`. `docs/license.md` says crests are "never — whatever their licence", and it is silent on crests that appear incidentally inside a licensed photo. One sentence affirming the photo decision would close it.
 
 ## Decisions taken on the owner's behalf
@@ -52,7 +52,12 @@ Each one has a cheap reversal.
 - **The round prefetch** lives in the screen, not `stores/session.ts`, so the store stays free of I/O.
 - **Fill or frame** goes by the width Commons actually served. Four sub-960 originals come back as 500/250 px thumbnails.
 - **`MOTION_TIME_SCALE`** is 1 (it was a 1.8 preview). `MOTION_DISTANCE_SCALE` stays 1.5.
-- **No icon library.** The ×, the flame, share and retry are drawn from Views.
+- **No icon library.** The ×, the flame, share and retry are drawn from Views. The share sheet's Image/Text switch drops the board's two icons; the labels carry it.
+- **The share picture is always dark** (`ShareCard` reads `palettes.dark`), as on the board, so it looks the same whichever theme it is shared from. CLAUDE.md guardrail 5 names the exception.
+- **The share sheet stays open after a share.** Expo can't tell a sent picture from a cancelled one, and the other format is one tap away.
+- **Image shares are counted when `shareAsync` resolves** (spec §10.3), so `result.shared` with `format: 'image'` counts share menus opened and closed, not pictures sent. Text shares are counted only when the OS reports them sent.
+- **About gives sharing its own "Sharing" heading.** Under "Player photos" it would read as being about photos.
+- **The `expo-sharing` config plugin is left out.** `npx expo install` adds it, but it only sets up receiving shares (`withShareExtension`, off by default); outgoing shares need nothing in `app.json`.
 - **`fontScaleCap.display` (1.2)** caps the shirt number and the prompt at large text sizes; the boxes use `minHeight` so they can grow.
 
 **Data**
@@ -88,7 +93,19 @@ Web can't show any of this. It runs on simulators or devices.
   - the framed-photo fade;
   - the streak chip's exit;
   - Results' card snapping (web ignores `snapToInterval`);
-  - the circle pop.
+  - the circle pop;
+  - the share sheet's scrim fade and slide up, with no overshoot.
+- **Sharing (spec §13):**
+  - "Share image" opens the share menu on both platforms with a 1,080×1,920 PNG. Check the saved file's size.
+  - The picture is not blank. The captured card is a second copy laid out off screen (`left: -720`), and `react-native-view-shot` does not document off-screen capture. If it comes out blank, move the copy on screen under the sheet.
+  - Its fonts are Archivo, Inter and Plex, not the system font, on Android (#117).
+  - "Share text" is unchanged from 1.x.
+  - Android back and a tap on the scrim close the sheet.
+  - VoiceOver and TalkBack stay inside the sheet while it is open, and read the preview as one element.
+  - A quick double tap on the button opens one menu, not two.
+  - On a small phone or at large text, the sheet stops below the status bar and its body scrolls. The top-inset part of the cap can't be seen on web.
+  - On Android, the × and the switch segments still take a tap at 44 pt. Their `hitSlop` reaches past their row, which Android may ignore.
+  - The preview's shadow shows on iOS. It is a separate view from the clip, since iOS clips a view's own shadow.
 
 ## Notes for #115 (Study)
 
@@ -106,8 +123,8 @@ Web can't show any of this. It runs on simulators or devices.
 
 ## Notes for #116 (release)
 
-- **`privacy.html`** on `gh-pages` must match the About text word for word. It has changed in several PRs: photo loading, the stored-data list, Vibration, and part 2's sharing and telemetry text. Publish it when the first build containing that text reaches users.
-- **Store declarations.** Re-confirm App Privacy and Data safety (#55). Part 2 adds the `format` property to `result.shared`.
+- **`privacy.html`** on `gh-pages` must match the About text word for word. It has changed in several PRs: the Archivo credit, photo loading, the stored-data list, Vibration, and #114 part 2's new "Sharing" section and telemetry sentence. Publish it when the first build containing that text reaches users.
+- **Store declarations.** Re-confirm App Privacy and Data safety (#55). #114 part 2 added the `format` property to `result.shared`, in the category already declared (App Privacy "Product Interaction", Data safety "App interactions"). No change is expected, but re-confirm it.
 - **CLAUDE.md guardrail 1** describes the question screen's photo only. Extend it to Results' cards (credits behind the "Photo credits · N" toggle) and Study.
 - **Store assets.** Regenerate `npm run shots:store`, `shots:play` and `gen:play-assets` for the 2.0 listing. Set CLAUDE.md "Current state" to 2.0.
 - **The release itself.**
