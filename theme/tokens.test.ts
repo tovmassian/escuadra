@@ -8,6 +8,7 @@ import {
   palettes,
   resultsTimeline,
   sizes,
+  spacing,
   spotlightCues,
   spotlightMotion,
   stage,
@@ -145,6 +146,60 @@ describe('text contrast', () => {
       ).toBeGreaterThanOrEqual(4.5);
     });
   });
+
+  // Study's card line and its "Tap to reveal" label are translucent whites, so
+  // each is blended over the same worst-case ground before it is measured.
+  it('revealText and onPhotoMuted reach 4.5:1 under the last cardGradient stop over a white photo', () => {
+    const last = cardGradient.colors[cardGradient.colors.length - 1] ?? '';
+    const ground = blend(last, '#ffffff');
+    (['dark', 'light'] as const).forEach((name) => {
+      for (const role of ['revealText', 'onPhotoMuted'] as const) {
+        expect(
+          contrastRatio(blend(palettes[name][role], ground), ground),
+          `${name}.${role}`,
+        ).toBeGreaterThanOrEqual(4.5);
+      }
+    });
+  });
+
+  // The position chip sits at the card's top, where the gradient is only
+  // lightly dark. Its code is white on `photoChip`, so it is held to AA at the
+  // chip's bottom edge (the worst row: the gradient has faded furthest there),
+  // over a white photo, with the gradient's alpha interpolated between stops.
+  it('the position chip code reaches 4.5:1 on photoChip at its bottom edge over a white photo', () => {
+    const edge = (spacing.xs + 2 + sizes.studyChip) / sizes.playerCard.studyHeight;
+    const { colors, locations } = cardGradient;
+    const i = locations.findIndex((at, n) => at <= edge && edge <= (locations[n + 1] ?? -1));
+    const from = /rgba\((\d+),(\d+),(\d+),([\d.]+)\)/.exec(colors[i] ?? '');
+    const to = /rgba\((\d+),(\d+),(\d+),([\d.]+)\)/.exec(colors[i + 1] ?? '');
+    const a = locations[i] ?? 0;
+    const b = locations[i + 1] ?? 1;
+    expect(from && to, 'the chip edge falls between two rgba stops').toBeTruthy();
+    const t = (edge - a) / (b - a);
+    const mix = (n: number) => Number(from?.[n]) + (Number(to?.[n]) - Number(from?.[n])) * t;
+    const scrim = blend(
+      `rgba(${Math.round(mix(1))},${Math.round(mix(2))},${Math.round(mix(3))},${mix(4)})`,
+      '#ffffff',
+    );
+    (['dark', 'light'] as const).forEach((name) => {
+      expect(
+        contrastRatio(palettes[name].onPhoto, blend(palettes[name].photoChip, scrim)),
+        `${name}.onPhoto on photoChip`,
+      ).toBeGreaterThanOrEqual(4.5);
+    });
+  });
+
+  // The list rows' affiliation line and position chip are `textSecondary`;
+  // `textMuted` is covered above.
+  it('textSecondary reaches 4.5:1 on background, in both themes', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      expect(
+        contrastRatio(p.textSecondary, p.background),
+        `${name}.textSecondary`,
+      ).toBeGreaterThanOrEqual(4.5);
+    });
+  });
 });
 
 describe('spotlight stage', () => {
@@ -167,6 +222,9 @@ describe('spotlight stage', () => {
       'stageShimmer',
       'stageShimmerEdge',
       'cardLine',
+      'revealLine',
+      'revealText',
+      'photoChip',
     ] as const) {
       expect(palettes.dark[role], role).toBeDefined();
       expect(palettes.light[role], role).toBe(palettes.dark[role]);
@@ -259,7 +317,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(15);
+    expect(archivo).toHaveLength(16);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }

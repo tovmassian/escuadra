@@ -35,7 +35,8 @@ export function creditParts(credit: PhotoCredit): {
 
 export interface PhotoCreditRow {
   playerId: string;
-  memberNo: number;
+  /** Null for a Study row whose member Wikipedia lists without a shirt number. */
+  memberNo: number | null;
   playerName: string;
   credit: PhotoCredit;
 }

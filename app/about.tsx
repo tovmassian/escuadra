@@ -117,8 +117,8 @@ export default function About() {
           <Text style={styles.paragraph}>
             The author, the licence and the word &quot;cropped&quot; appear under the question for
             as long as a photo is on screen, and again, for the whole round, under &quot;Photo
-            credits&quot; in the results. Tap the author for the photo&apos;s page on Wikimedia
-            Commons, or the licence for its terms.
+            credits&quot; in the results and at the end of the Study screen. Tap the author for the
+            photo&apos;s page on Wikimedia Commons, or the licence for its terms.
           </Text>
 
           <Text style={styles.subHeading}>Flags and fonts</Text>
@@ -176,11 +176,12 @@ export default function About() {
           <Text style={styles.subHeading}>Player photos</Text>
           <Text style={styles.paragraph}>
             Escuadra does not ship player photos. They are loaded from Wikimedia Commons, run by the
-            Wikimedia Foundation: the ten photos for a round when the round starts. Like any
-            website, Wikimedia receives your device&apos;s IP address and the details of each
-            request, including which photos were asked for, and so which players are in your round.
-            Escuadra sends nothing else to Wikimedia, and Wikimedia&apos;s own privacy policy
-            applies to what it receives.
+            Wikimedia Foundation: the ten photos for a round when the round starts, and a
+            squad&apos;s photos on the Study screen as you scroll. Like any website, Wikimedia
+            receives your device&apos;s IP address and the details of each request, including which
+            photos were asked for, and so which players are in your round or squad. Escuadra sends
+            nothing else to Wikimedia, and Wikimedia&apos;s own privacy policy applies to what it
+            receives.
           </Text>
           <Text style={styles.paragraph}>
             Photos already loaded may be kept in the app&apos;s cache on your device so that they
@@ -228,10 +229,11 @@ export default function About() {
 
           <Text style={styles.subHeading}>What is stored on your device</Text>
           <Text style={styles.paragraph}>
-            Escuadra saves seven things locally, on your device only: your best score for each team
+            Escuadra saves eight things locally, on your device only: your best score for each team
             and difficulty level; which levels you have completed; the last team and level you
-            played; your light or dark appearance preference; whether vibration is on; your choice
-            about usage statistics; and the random identifier those statistics use.
+            played; your light or dark appearance preference; whether vibration is on; whether the
+            Study screen shows cards or a list; your choice about usage statistics; and the random
+            identifier those statistics use.
           </Text>
           <Text style={styles.paragraph}>
             This lives in the app&apos;s own private storage. Apart from that identifier, which is

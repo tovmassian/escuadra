@@ -8,7 +8,15 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 // Every photo the round showed, with its credit. Collapsed by
 // default so it never competes with the results' own actions. Player names are
 // already revealed on this screen, so naming them here gives nothing away.
-export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
+// Study passes `numbersOnly`, so a row reads "16", not "16 Rodri": a name here
+// would spoil Hide names.
+export function PhotoCredits({
+  rows,
+  numbersOnly = false,
+}: {
+  rows: PhotoCreditRow[];
+  numbersOnly?: boolean;
+}) {
   const colors = useThemeColors();
   const [open, setOpen] = useState(false);
   if (rows.length === 0) return null;
@@ -40,11 +48,17 @@ export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
         </Text>
       </Pressable>
       {open && (
-        <ScrollView style={styles.list} contentContainerStyle={styles.listContent}>
+        // nestedScrollEnabled: on Android this scrolls inside Study's list.
+        <ScrollView
+          nestedScrollEnabled
+          style={styles.list}
+          contentContainerStyle={styles.listContent}
+        >
           {rows.map((r) => (
             <Text key={r.playerId} style={styles.row}>
               <Text style={styles.name}>
-                {r.memberNo} {r.playerName}
+                {r.memberNo ?? '—'}
+                {numbersOnly ? '' : ` ${r.playerName}`}
               </Text>
               {' — '}
               <PhotoCreditText credit={r.credit} linkStyle={styles.link} />

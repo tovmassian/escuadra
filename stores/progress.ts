@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import { scoreKey } from '@/lib/scoring';
+import type { StudyView } from '@/lib/studyView';
 import type { ThemePreference } from '@/theme/tokens';
 
 // Re-exported so existing importers (e.g. `app/index.tsx`) keep working —
@@ -34,12 +35,16 @@ interface ProgressState {
   /** The About screen's Vibration switch (spec §7). Off means `lib/haptics.ts`
    *  plays nothing. On by default; survives `reset()` like the other settings. */
   haptics: boolean;
+  /** Study's grid or list view (spec §5.1). A preference like `themePreference`,
+   *  so it survives `reset()`. */
+  studyView: StudyView;
   recordScore: (squadId: string, level: number, score: number) => void;
   setLastPlayed: (squadId: string, level: number) => void;
   setThemePreference: (preference: ThemePreference) => void;
   setInstallId: (installId: string) => void;
   setTelemetryEnabled: (enabled: boolean) => void;
   setHaptics: (enabled: boolean) => void;
+  setStudyView: (view: StudyView) => void;
   reset: () => void;
 }
 
@@ -52,6 +57,7 @@ export const useProgress = create<ProgressState>()(
       installId: null,
       telemetryEnabled: true,
       haptics: true,
+      studyView: 'grid',
       recordScore: (squadId, level, score) =>
         set((s) => {
           const key = scoreKey(squadId, level);
@@ -68,6 +74,7 @@ export const useProgress = create<ProgressState>()(
       setInstallId: (installId) => set((s) => (s.installId === null ? { installId } : s)),
       setTelemetryEnabled: (telemetryEnabled) => set({ telemetryEnabled }),
       setHaptics: (haptics) => set({ haptics }),
+      setStudyView: (studyView) => set({ studyView }),
       reset: () => set({ bestScores: {}, lastPlayed: null }),
     }),
     {

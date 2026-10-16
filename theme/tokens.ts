@@ -115,6 +115,21 @@ export interface Palette {
   scrim: string;
   /** A link inside a preview (the share text's URL). */
   link: string;
+  // ---- 2.0 Study (spec §5) ----
+  /** The position chip's fill over a card photo. Darker than `glass`, which
+   *  leaves white text under 4.5:1 over a bright photo's top edge. Translucent,
+   *  so never measure it with `contrastRatio`; a composite test holds it. */
+  photoChip: string;
+  /** The dashed outline of a hidden name's "Tap to reveal" pill on a player
+   *  card. The card is dark in both themes, so this is shared. Translucent,
+   *  so never measure it with `contrastRatio`. */
+  revealLine: string;
+  /** That pill's label. Translucent; held to AA by a composite test over the
+   *  card gradient's last stop. */
+  revealText: string;
+  /** The divider under each Study list row. A step quieter than `border`,
+   *  which outlines controls. */
+  hairline: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -152,6 +167,10 @@ const sharedRoles = {
   cardLine: '#ffa19e',
   // The share sheet's backdrop: the same ink in both themes.
   scrim: 'rgba(0,0,0,0.55)',
+  // Study's hidden-name pill on a player card, which is dark in both themes.
+  revealLine: 'rgba(255,255,255,0.5)',
+  revealText: 'rgba(255,255,255,0.85)',
+  photoChip: 'rgba(15,17,23,0.6)',
 } as const;
 
 // The ramp sits higher than it did: the mark's trail squares, at 30% and 55%
@@ -196,6 +215,7 @@ const darkRoles = {
   nextText: '#9be0a0',
   nextFill: 'rgba(97,189,103,0.2)',
   link: '#8fb4ff',
+  hairline: '#23272e',
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -243,6 +263,7 @@ const lightRoles = {
   nextText: '#24702f',
   nextFill: 'rgba(47,143,62,0.14)',
   link: '#2f56c6',
+  hairline: '#e3e5e9',
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -390,15 +411,6 @@ export const typography = {
   badgeNumber: { fontFamily: 'IBMPlexMono-Bold', fontWeight: '700' as const, fontSize: 18 },
   // Difficulty-row / card descriptions — one step down from `secondary`.
   descriptionSmall: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 12.5 },
-  // Study screen table cells.
-  tableName: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 14 },
-  tableCell: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 11 },
-  tableHeader: {
-    fontFamily: 'Inter-SemiBold',
-    fontWeight: '600' as const,
-    fontSize: 10,
-    letterSpacing: 0.6,
-  },
   eyebrow: {
     fontFamily: 'Inter-SemiBold',
     fontWeight: '600' as const,
@@ -406,7 +418,7 @@ export const typography = {
     letterSpacing: 1.2,
     textTransform: 'uppercase' as const,
   },
-  // Shared by difficulty-row status pills and the Study screen's column headers.
+  // Shared by difficulty-row status pills and the Study screen's header eyebrow.
   captionEyebrow: {
     fontFamily: 'Inter-SemiBold',
     fontWeight: '600' as const,
@@ -486,7 +498,7 @@ export const typography = {
   // ---- 2.0 question screen: Inter faces chosen by family, no weight ----
   // A picked or revealed right answer on a tile.
   bodyStrong: { fontFamily: 'Inter-Bold', fontSize: 17 },
-  // A slot chip's value.
+  // A slot chip's value; also Study's Hide names label.
   slotValue: { fontFamily: 'Inter-Bold', fontSize: 13 },
   // The team name in the question's top bar.
   topBarTeam: { fontFamily: 'Inter-Bold', fontSize: 14 },
@@ -557,6 +569,20 @@ export const typography = {
     textDecorationLine: 'underline' as const,
   },
   bubbleMeta: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 11 },
+  // ---- 2.0 Study (spec §5): no fontWeight on a Bold or Archivo face ----
+  // The position chip's code ("GK"), on a card and in a list row.
+  positionChip: { fontFamily: 'IBMPlexMono-Bold', fontSize: 11 },
+  // "Tap to reveal", on a card and in a list row.
+  revealLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },
+  // The line under a card's name when it is neutral, not a miss (`cardLine`).
+  cardAffiliation: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 12 },
+  // A list row's shirt number column, its line under the name, and the
+  // number on its avatar when there is no photo.
+  rowNumber: { fontFamily: 'IBMPlexMono-Bold', fontSize: 14 },
+  rowAffiliation: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 12.5 },
+  avatarNumber: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 20 },
+  // The count after a filter pill's label ("GK 3").
+  filterCount: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 11.5 },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -770,11 +796,8 @@ export const sizes = {
   // Height of one connector segment between two ladder rungs. Drawn only in
   // the gap, never behind a badge — see `LadderConnector`.
   difficultyConnectorHeight: 16,
-  // `affiliation` carries a flag image plus its gap on club squads
-  // (sizes.flagRow.width + spacing.xs = 28 of its 120), so the text keeps the
-  // same 92 it had before flags. The name column is flex, so it absorbs the
-  // difference.
-  studyColumn: { no: 26, position: 34, affiliation: 120 },
+  // The shirt-number column of a Study list row.
+  studyColumn: { no: 26 },
   // Home's "Start Training" is the one 56px control; every other button
   // (Continue, Results actions) is 52px.
   controlHeight: 52,
@@ -858,6 +881,19 @@ export const sizes = {
   playerCard: { studyHeight: 218, results: { width: 140, height: 184 } },
   // Study's list-view avatar.
   avatar: 46,
+  // Study's top-bar controls: the Hide names pill's height and the view
+  // toggle's diameter. Each takes hitSlop to reach `minTapTarget`.
+  studyControl: 36,
+  // The team's bands as a small strip beside Study's header eyebrow. The
+  // question's `teamMarkerBanner` is 100 wide, too long for a line of text.
+  studyBanner: { width: 28, height: 3 },
+  // Study's position chip, on a card and in a list row.
+  studyChip: 24,
+  // The "Tap to reveal" pill's height: on a card, and in a list row.
+  revealPill: { card: 24, row: 22 },
+  // A Study list row, and the gap between a grid's cards.
+  studyRow: 64,
+  studyGridGap: 10,
   // Apple's minimum tap target; smaller drawn controls take hitSlop to reach it.
   minTapTarget: 44,
   // The question's top bar, and the glass pills in it (score).
@@ -906,6 +942,8 @@ export const iconSize = {
   flameGlyph: 12, // the streak chip's flame
   shareGlyph: 18, // the Results screen's share button
   retryGlyph: 18, // the Results screen's retry icon beside Study
+  back: 22, // Study's back chevron
+  viewToggle: 17, // Study's list/grid toggle
   // The locked-badge padlock scales with its badge rather than sitting at one
   // fixed size — 32 * 0.46 ≈ 15.
   lockGlyphRatio: 0.46,

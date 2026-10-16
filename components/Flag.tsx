@@ -14,6 +14,9 @@ interface FlagProps {
   size: FlagSize;
   /** Announced by a screen reader in place of the image, e.g. "Spain". */
   label: string;
+  /** The hairline's colour. Defaults to `border`; a flag on a dark photo card
+   *  passes `glassLine`, since `border` is pale in the light theme. */
+  lineColor?: string;
 }
 
 const DIMENSIONS: Record<FlagSize, { width: number; height: number }> = {
@@ -31,13 +34,13 @@ const DIMENSIONS: Record<FlagSize, { width: number; height: number }> = {
 // The hairline border is not decoration: Japan's and Poland's white would
 // otherwise bleed into the surface behind it. It matters in both themes —
 // white-on-light is the worse case of the two.
-export function Flag({ code, size, label }: FlagProps) {
+export function Flag({ code, size, label, lineColor }: FlagProps) {
   const colors = useThemeColors();
   const styles = StyleSheet.create({
     flag: {
       borderRadius: sizes.teamMarkerRadius,
       borderWidth: 1,
-      borderColor: colors.border,
+      borderColor: lineColor ?? colors.border,
     },
   });
 

@@ -16,7 +16,7 @@
 | #112  | 960 px photos, original size in `PhotoCredit`             | merged, [#119](https://github.com/tovmassian/escuadra/pull/119)                                                                          |
 | #113  | The Spotlight question screen                             | merged: logic [#120](https://github.com/tovmassian/escuadra/pull/120), screen [#121](https://github.com/tovmassian/escuadra/pull/121)    |
 | #114  | Results and sharing                                       | merged: Results [#123](https://github.com/tovmassian/escuadra/pull/123), sharing [#127](https://github.com/tovmassian/escuadra/pull/127) |
-| #115  | Study                                                     | **Not started, by the owner's instruction (2026-10-16).** Its notes are below.                                                           |
+| #115  | Study                                                     | merged, [#131](https://github.com/tovmassian/escuadra/pull/131)                                                                          |
 | #116  | Docs pass, store assets, version, release branch          | Not started. Its notes are below.                                                                                                        |
 | #117  | Android: bold Inter/Plex styles probably render in Roboto | Open. Found in #111's review; needs a device check.                                                                                      |
 
@@ -98,6 +98,18 @@ Web can't show any of this. It runs on simulators or devices.
 - **Results on native:**
   - the score sits on the "/10" baseline and the corner sits where the web capture puts it;
   - retry and "Play level n+1" do not flash the next round's empty state (red strip, grey corner) before Results unmounts. `startRound` resets the session while Results is still mounted; if it shows, snapshot `session.results` once on mount rather than reordering the calls.
+- **Study:**
+  - A fast scroll through a 26-player squad, in grid and in list, never shows blank cards with `windowSize` 2. Photos load as cards mount.
+    - If gaps show, add `getItemLayout` first (the rows are fixed: 64 pt in the list, and 218 + 10 in the grid; check how `numColumns` indexes rows).
+    - Only then try 3, which comes close to mounting a whole squad.
+  - With Hide names on, VoiceOver and TalkBack never speak a name. A reveal plays the light haptic and announces the name.
+  - TalkBack may say "double tap to activate" on a card whose name is shown; check that it reads acceptably.
+  - The dashed reveal pill draws on Android.
+  - Grid or list survives an app restart.
+  - At large text, names and lines still read inside the fixed 218 pt cards and 64 pt rows.
+  - A card with no shirt number draws "—" in Archivo.
+  - Android: the cards' fade-in plays inside `FlatList` cells, and the credits list scrolls inside the Study list (`nestedScrollEnabled`).
+  - Memory in list view on a 35-player squad: the 46 pt avatars decode the 960 px thumbnails.
 - **Native motion:**
   - the rise and slide Keyframes (web only fades);
   - the framed-photo fade;
@@ -117,25 +129,29 @@ Web can't show any of this. It runs on simulators or devices.
   - On Android, the × and the switch segments still take a tap at 44 pt. Their `hitSlop` reaches past their row, which Android may ignore.
   - The preview's shadow shows on iOS. It is a separate view from the clip, since iOS clips a view's own shadow.
 
-## Notes for #115 (Study)
+## Study (#115): decisions
 
-- **Reuse `components/PlayerCard.tsx`.**
-  - It has no slot yet for the position chip (top right) or the "Tap to reveal" pill. Give it a `badge`/`overlay` prop.
-  - Its root `accessible` would swallow a tappable child, so make the reveal pill its own accessible element.
-  - Its label speaks the name, so Hide names needs a variant without it.
-  - The line's colour is hard-wired to `cardLine` (`#ffa19e`, an error tint), so Study's club or nationality line would come out pink. Add a tone prop.
-  - It builds `stageVeil` and a `StyleSheet` per render. That is fine in Results' virtualised list but a cost in a grid.
-- **The About texts.**
-  - The stored-on-device list becomes **eight** things with `studyView`, under spec §10 item 4.
-  - The "Player photos" paragraph needs Study's clause: "…and a squad's photos on the Study screen as you scroll".
-- **The missed view has no caller.** Nothing links to Study's `players`/`level` params any more, since Results no longer has "Study these N". Remove them, `parsePlayerIds`/`parseLevel` and `StudyRow`.
-- **Contrast tests.** The tokens tests have composite checks (text over translucent backgrounds); add Study's new roles to them.
+- **The whole card or row is the reveal button,** as on the board, so there is no nested tappable pill. Every card and row gets the same `onPress`. It is a button, with the "Reveals the name" hint, only while its name is hidden. A press with the name shown does nothing. The card root never switches type on reveal, since that would remount it and reload its photo.
+- **The filters are today's `FilterPill`s with a count,** in the label's own colour. The board's 0.7 opacity was about 3:1. The pills scroll sideways on a 360 pt phone.
+- **The credits cover the rows in the current filter,** which are the photos on screen. They name each photo by shirt number only.
+- **A member with no shirt number shows "—" and keeps its credit.** 32 members have no number, and 15 of them have photos.
+- **Windowing.** `FlatList` counts rows, and a grid row is two cards. The grid mounts 4 rows and the list 10, with `windowSize` 2. The grid loads 8 photos for the 8 cards on screen.
+- **The header's team strip** is drawn from `bannerBands` at `sizes.studyBanner` (28×3).
+- **The position chip** has its own `photoChip` fill at 0.6, which gives 6.2:1 at its worst point over a white photo. `glass` would give 3.7:1 there.
+- **Hide names is a switch whose spoken name stays "Hide names".** Its visible text flips to "Show names".
+- **A name fades in only on a reveal,** not every time a card mounts.
+- **Reduce Motion** follows the rest of the app. Reanimated's `ReduceMotion.System` skips the fades too.
+- **Board deviations:**
+  - Hide names has no eye icon (no icon library).
+  - The flags are 18×12 (`sizes.flagInline`), not 16×11.
+  - A reveal swaps the pill for the name, which then fades in; it is not a true crossfade.
+- **`recyclingKey` is the photo URL, not the player id** that spec §5.1 names. They are equivalent here, since every player has one photo and `FlatList` doesn't recycle cells.
+- **A filter change scrolls back to the top. A reveal is announced to screen readers,** since the card's label changes silently.
 
 ## Notes for #116 (release)
 
-- **`privacy.html`** on `gh-pages` must match the About text word for word. It has changed in several PRs: the Archivo credit, photo loading, the stored-data list, Vibration, and #114 part 2's new "Sharing" section and telemetry sentence. Publish it when the first build containing that text reaches users.
+- **`privacy.html`** on `gh-pages` must match the About text word for word. It has changed in several PRs: the Archivo credit, photo loading, the stored-data list, Vibration, #114 part 2's new "Sharing" section and telemetry sentence, and #115's Study clause in "Player photos" ("…and a squad's photos on the Study screen as you scroll…which players are in your round or squad") with the stored list at eight things. Publish it when the first build containing that text reaches users.
 - **Store declarations.** Re-confirm App Privacy and Data safety (#55). #114 part 2 added the `format` property to `result.shared`, in the category already declared (App Privacy "Product Interaction", Data safety "App interactions"). No change is expected, but re-confirm it.
-- **CLAUDE.md guardrail 1** describes the question screen's photo only. Extend it to Results' cards (credits behind the "Photo credits · N" toggle) and Study.
 - **Store assets.** Regenerate `npm run shots:store`, `shots:play` and `gen:play-assets` for the 2.0 listing. Set CLAUDE.md "Current state" to 2.0.
 - **The release itself.**
   - Bump `app.json` to 2.0.0 by PR, then cut `release/2.0.0` (`docs/release.md`).
@@ -156,6 +172,11 @@ None of these blocks 2.0.
 - **Contrast:**
   - Dark `textMuted` is 4.30:1 on `surfaceRaised`; no screen puts it there today.
   - Small "cleared" text in `success` on the picker and difficulty rows is 3.83:1 in light: [#122](https://github.com/tovmassian/escuadra/issues/122).
+- **Docs for #116's consistency pass:** CLAUDE.md's data model says a nation's band geometry is "kept for the in-round banner only". Results' and Study's cards, the list avatars and the share picture now draw it too.
+- **Study's Hide names switch:** the visible "Show names" and the constant spoken "Hide names" differ, which trips Voice Control's label-in-name rule. It was a deliberate switch-pattern trade-off.
+- **Player cards (Results and Study):**
+  - The white shirt number sits on the photo with only the top of `cardGradient` (0.35, fading out) behind it. Over a white photo top it falls to about 1.2:1 at its lowest point.
+  - Real photos are usually darker there, but a text shadow or a small backing, like the stage's `heroBacking`, would make it safe. That is a design call for the owner.
 - **Results:**
   - On a 10/10, the actions rise before the last circles finish (spec §6 says "last").
   - `resultCopy` hard-codes level 3 as the last level rather than taking `hasNextLevel`.
@@ -175,4 +196,4 @@ None of these blocks 2.0.
 
 - `gh issue develop` links a branch to its issue, and merging that branch's PR **closes the issue**. #113 had to be reopened after part 1. Later parts used unlinked branches with "Part of #N" or "Closes #N" in the PR body.
 - Each PR description has a "Decisions to check" section: #118, #119, #120 and #121 hold the full rationale for each merged step.
-- Reviews ran per task, and then once over the whole branch: on Opus for #111–#113, on Sonnet for #114 because Opus hit its weekly limit (it resets 2026-10-19). **A deeper Opus review of #114 is owed before the 2.0 store build.** The findings and their fixes are in each PR's commits (`fix(…): final-review fixes …`).
+- Reviews ran per task, and then once over the whole branch: on Opus for #111–#113, on Sonnet for #114 and #115 because Opus hit its weekly limit (it resets 2026-10-19). **A deeper Opus review of #114 and #115 is owed before the 2.0 store build.** The findings and their fixes are in each PR's commits (`fix(…): final-review fixes …`).

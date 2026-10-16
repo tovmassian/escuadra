@@ -334,6 +334,29 @@ async function captureShareSheetImage(capture) {
 }
 
 // ---------------------------------------------------------------------------
+// Study, in its three states
+// ---------------------------------------------------------------------------
+
+/**
+ * Study as cards (the default), as a list and with Hide names on. The chosen
+ * view is persisted in the page's storage, so the shots run in an order that
+ * starts each from the state it needs: the cards on a fresh page, the list
+ * after one tap of the view toggle, then back to cards for Hide names. Hide
+ * names itself is not persisted.
+ */
+async function captureStudy(capture) {
+  await capture.open('/team/int/study');
+  await capture.shoot('05-study');
+
+  await capture.tapId('study-view-toggle', { wait: SWAP_MS });
+  await capture.shoot('05-study-list');
+
+  await capture.tapId('study-view-toggle', { wait: SWAP_MS });
+  await capture.tapId('study-hide-names', { wait: SWAP_MS });
+  await capture.shoot('05-study-hidden');
+}
+
+// ---------------------------------------------------------------------------
 // A full pass
 // ---------------------------------------------------------------------------
 
@@ -362,8 +385,7 @@ async function captureTheme(browser, colorScheme, suffix) {
     await capture.open('/team/rma/difficulty');
     await capture.shoot('04-difficulty');
 
-    await capture.open('/team/int/study');
-    await capture.shoot('05-study');
+    await captureStudy(capture);
 
     await capture.open(`/play/esp/1?seed=${SEED}`);
     await capture.shoot('06-question-l1');
