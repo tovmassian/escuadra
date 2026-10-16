@@ -48,7 +48,12 @@ export function PhotoCredits({
         </Text>
       </Pressable>
       {open && (
-        <ScrollView style={styles.list} contentContainerStyle={styles.listContent}>
+        // nestedScrollEnabled: on Android this scrolls inside Study's list.
+        <ScrollView
+          nestedScrollEnabled
+          style={styles.list}
+          contentContainerStyle={styles.listContent}
+        >
           {rows.map((r) => (
             <Text key={r.playerId} style={styles.row}>
               <Text style={styles.name}>

@@ -1,6 +1,14 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
-import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import {
+  AccessibilityInfo,
+  FlatList,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackGlyph, GridGlyph, ListGlyph } from '@/components/ActionGlyphs';
@@ -72,6 +80,7 @@ export default function Study() {
   // Hide names is not persisted: a fresh visit starts with the names showing.
   const [hidden, setHidden] = useState(false);
   const [revealed, setRevealed] = useState<ReadonlySet<string>>(() => new Set());
+  const listRef = useRef<FlatList<RosterEntry>>(null);
 
   const squad = getSquad(squadId);
   const roster = useMemo(() => getRoster(squadId), [squadId]);
@@ -86,12 +95,14 @@ export default function Study() {
   // Every card and row gets this same press, whether or not names are hidden,
   // so none of them changes what it is when a name is revealed (that would
   // remount the card and reload its photo). It does nothing unless the name is
-  // hidden.
+  // hidden. A card's label changes silently, so the name is also announced
+  // for a screen-reader user who is self-testing.
   const reveal = useCallback(
-    (id: string) => {
+    (id: string, name: string) => {
       if (!hidden || revealed.has(id)) return;
       setRevealed((prev) => new Set(prev).add(id));
       feedback('reveal');
+      AccessibilityInfo.announceForAccessibility(name);
     },
     [hidden, revealed],
   );
@@ -176,7 +187,7 @@ export default function Study() {
     const flag = squad.kind === 'club' ? flagFor(player.nationality) : null;
     const label = studyLabel(member.no, player, affiliation, covered);
     const photo = photoFor(player);
-    const onPress = () => reveal(player.id);
+    const onPress = () => reveal(player.id, player.name);
 
     if (!grid) {
       return (
@@ -304,12 +315,19 @@ export default function Study() {
             label={f === 'ALL' ? 'All' : f}
             count={counts[f]}
             active={filter === f}
-            onPress={() => setFilter(f)}
+            onPress={() => {
+              if (f === filter) return;
+              setFilter(f);
+              // A shorter list would otherwise clamp to its bottom. Not a re-key
+              // by filter: that would replay every card's fade.
+              listRef.current?.scrollToOffset({ offset: 0, animated: false });
+            }}
           />
         ))}
       </ScrollView>
 
       <FlatList
+        ref={listRef}
         // A FlatList cannot change its column count in place.
         key={view}
         style={styles.list}
