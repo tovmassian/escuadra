@@ -46,7 +46,7 @@ export function TeamRow({ name, marker, season, flag, progress, onPress }: TeamR
     text: { flex: 1, minWidth: 0 },
     name: { ...typography.rowTitle, color: colors.textPrimary },
     meta: { ...typography.statMonoTiny, color: colors.textMuted, marginTop: spacing.xxs - 1 },
-    metaCleared: { color: colors.success },
+    metaCleared: { color: colors.successText },
     chevron: { fontSize: iconSize.chevron, color: colors.border },
   });
 

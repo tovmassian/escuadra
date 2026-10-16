@@ -23,7 +23,7 @@ export function BestPill({ correct, total, cleared }: BestPillProps) {
     pillCleared: { backgroundColor: colors.successBg },
     pillOpen: { borderWidth: borderWidths.hairline, borderColor: colors.border },
     label: { ...typography.captionEyebrow },
-    labelCleared: { color: colors.success },
+    labelCleared: { color: colors.successText },
     labelOpen: { color: colors.textSecondary },
   });
 

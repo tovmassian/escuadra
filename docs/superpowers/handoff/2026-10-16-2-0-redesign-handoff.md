@@ -171,7 +171,6 @@ None of these blocks 2.0.
   - iOS gets no spoken verdict (`announceForAccessibility`).
 - **Contrast:**
   - Dark `textMuted` is 4.30:1 on `surfaceRaised`; no screen puts it there today.
-  - Small "cleared" text in `success` on the picker and difficulty rows is 3.83:1 in light: [#122](https://github.com/tovmassian/escuadra/issues/122).
 - **Docs for #116's consistency pass:** CLAUDE.md's data model says a nation's band geometry is "kept for the in-round banner only". Results' and Study's cards, the list avatars and the share picture now draw it too.
 - **Study's Hide names switch:** the visible "Show names" and the constant spoken "Hide names" differ, which trips Voice Control's label-in-name rule. It was a deliberate switch-pattern trade-off.
 - **Player cards (Results and Study):**
