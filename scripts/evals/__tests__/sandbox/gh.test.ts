@@ -146,3 +146,91 @@ describe('everything else', () => {
     expect(gh('auth', 'status').stdout).toContain('Logged in to github.com');
   });
 });
+
+const WITH_PR: Store = {
+  ...STORE,
+  prs: [
+    {
+      number: 9101,
+      title: 'fix(play): progress bar reaches 10 before Results (#9008)',
+      state: 'OPEN',
+      headRefName: 'fix/9008-progress-bar-last-step',
+      baseRefName: 'main',
+      body: 'Closes #9008',
+    },
+  ],
+  currentBranch: 'fix/9008-progress-bar-last-step',
+};
+const ghPr = (...args: string[]) => handle(args, WITH_PR, jq);
+
+describe('pull requests', () => {
+  it('lists open PRs, filtered by --head and --search', () => {
+    expect(numbers(ghPr('pr', 'list', '--json', 'number').stdout)).toEqual([9101]);
+    expect(numbers(ghPr('pr', 'list', '--head', 'fix/other', '--json', 'number').stdout)).toEqual(
+      [],
+    );
+    expect(numbers(ghPr('pr', 'list', '--search', '9008', '--json', 'number').stdout)).toEqual([
+      9101,
+    ]);
+  });
+
+  it('views a PR by number, by branch, and for the current branch', () => {
+    for (const ref of [['9101'], ['fix/9008-progress-bar-last-step'], []]) {
+      expect(JSON.parse(ghPr('pr', 'view', ...ref, '--json', 'number').stdout)).toEqual({
+        number: 9101,
+      });
+    }
+  });
+
+  it('fails for a branch with no PR', () => {
+    expect(ghPr('pr', 'view', 'fix/none').code).toBe(1);
+  });
+
+  it('logs a read it cannot answer as unsupported', () => {
+    expect(ghPr('pr', 'diff', '9101').log).toBe('UNSUPPORTED gh pr diff 9101');
+  });
+});
+
+describe('api', () => {
+  const sizeQuery =
+    'query($n:Int!){ repository(owner:"tovmassian", name:"escuadra"){ issue(number:$n){ projectItems(first:5){ nodes { fieldValueByName(name:"Size"){ ... on ProjectV2ItemFieldSingleSelectValue { name } } } } } } }';
+
+  it('answers a GraphQL issue query with the board Size', () => {
+    const result = gh('api', 'graphql', '-f', `query=${sizeQuery}`, '-F', 'n=126');
+    const body = JSON.parse(result.stdout) as {
+      data: { repository: { issue: { projectItems: { nodes: { fieldValueByName: unknown }[] } } } };
+    };
+    expect(body.data.repository.issue.projectItems.nodes[0]?.fieldValueByName).toEqual({
+      name: 'S',
+    });
+    expect(result.log.startsWith('READ gh api graphql')).toBe(true);
+  });
+
+  it('finds a number written into the query, and gives null for no Size', () => {
+    const query =
+      'query={ repository(owner:"tovmassian",name:"escuadra"){ issue(number: 9009){ title } } }';
+    const body = JSON.parse(gh('api', 'graphql', '-f', query).stdout) as {
+      data: {
+        repository: {
+          issue: { title: string; projectItems: { nodes: { fieldValueByName: unknown }[] } };
+        };
+      };
+    };
+    expect(body.data.repository.issue.title).toBe('fix(theme): toggle label');
+    expect(body.data.repository.issue.projectItems.nodes[0]?.fieldValueByName).toBeNull();
+  });
+
+  it('lists milestones and reads an issue over REST', () => {
+    expect(JSON.parse(gh('api', 'repos/tovmassian/escuadra/milestones').stdout)).toEqual([
+      { number: 1, title: 'v2.0.0', state: 'open' },
+    ]);
+    const issue = JSON.parse(gh('api', 'repos/tovmassian/escuadra/issues/115').stdout) as {
+      state: string;
+    };
+    expect(issue.state).toBe('closed');
+  });
+
+  it('treats an API path it does not serve as unsupported', () => {
+    expect(gh('api', 'user').log).toBe('UNSUPPORTED gh api user');
+  });
+});

@@ -163,6 +163,19 @@ function read(args: string[], store: Store, jq: Jq): Answer | null {
   const flags = () => parse(args.slice(2), VALUED);
   if (group === 'issue' && verb === 'view') return issueView(flags(), store, jq);
   if (group === 'issue' && verb === 'list') return issueList(flags(), store, jq);
+  if (group === 'pr' && verb === 'view') return prView(flags(), store, jq);
+  if (group === 'pr' && verb === 'list') return prList(flags(), store, jq);
+  if (group === 'api') return api(parse(args.slice(1), API_VALUED), store, jq);
+  if (group === 'repo' && verb === 'view') {
+    const repo: JsonObject = {
+      name: 'escuadra',
+      nameWithOwner: REPO,
+      owner: { login: OWNER },
+      defaultBranchRef: { name: 'main' },
+      url: WEB,
+    };
+    return output(repo, flags(), jq, () => `name:\t${REPO}\n`);
+  }
   if (group === 'auth' && verb === 'status') {
     return ok(`github.com\n  ✓ Logged in to github.com account ${OWNER} (sandbox)\n`);
   }
@@ -243,6 +256,168 @@ function issueText(i: IssueFixture, withComments: boolean): string {
   if (withComments) for (const c of i.comments) lines.push(`${c.author} • commented`, c.body, '');
   lines.push(`View this issue on GitHub: ${WEB}/issues/${i.number}`, '');
   return lines.join('\n');
+}
+
+function prJson(pr: PrFixture): JsonObject {
+  return {
+    number: pr.number,
+    title: pr.title,
+    state: pr.state,
+    headRefName: pr.headRefName,
+    baseRefName: pr.baseRefName,
+    body: pr.body,
+    url: `${WEB}/pull/${pr.number}`,
+    isDraft: false,
+    author: { login: OWNER },
+  };
+}
+
+function prView(p: Parsed, store: Store, jq: Jq): Answer {
+  const ref = p.positional[0] ?? store.currentBranch ?? '';
+  const number = Number(ref.replace(/^.*\/pull\//, '').replace(/^#/, ''));
+  const byNumber = Number.isInteger(number) && number > 0;
+  const pr = store.prs.find((item) =>
+    byNumber ? item.number === number : item.headRefName === ref,
+  );
+  if (!pr) return fail(`no pull requests found for branch "${ref}"\n`);
+  const text = () =>
+    `${pr.title} #${pr.number}\n${pr.state} • ${pr.headRefName} → ${pr.baseRefName}\n\n${pr.body}\n\nView this pull request on GitHub: ${WEB}/pull/${pr.number}\n`;
+  return output(prJson(pr), p, jq, text);
+}
+
+function prList(p: Parsed, store: Store, jq: Jq): Answer {
+  const state = (first(p, '--state', '-s') ?? 'open').toUpperCase();
+  const head = first(p, '--head', '-H');
+  const base = first(p, '--base', '-B');
+  const search = first(p, '--search', '-S');
+  const limit = Number(first(p, '--limit', '-L') ?? 30);
+  const prs = store.prs
+    .filter((pr) => state === 'ALL' || pr.state === state)
+    .filter((pr) => head === undefined || pr.headRefName === head)
+    .filter((pr) => base === undefined || pr.baseRefName === base)
+    .filter(
+      (pr) => search === undefined || matches(search, `${pr.title}\n${pr.body}\n${pr.headRefName}`),
+    )
+    .sort((a, b) => b.number - a.number)
+    .slice(0, limit);
+  const text = () =>
+    prs.map((pr) => `${pr.number}\t${pr.title}\t${pr.headRefName}\t${pr.state}\n`).join('');
+  return output(prs.map(prJson), p, jq, text);
+}
+
+function api(p: Parsed, store: Store, jq: Jq): Answer | null {
+  const endpoint = (p.positional[0] ?? '').replace(/^\//, '');
+  const expression = first(p, '--jq', '-q');
+  if (endpoint === 'graphql') {
+    const fields = fieldPairs(p);
+    const number = issueNumberIn(fields.get('query') ?? '', fields);
+    if (number === null) return null;
+    const issue = store.issues.find((i) => i.number === number);
+    if (!issue) {
+      return fail(
+        `GraphQL: Could not resolve to an issue or pull request with the number of ${number}. (repository.issue)\n`,
+      );
+    }
+    const node = issueNode(issue);
+    return send(
+      { data: { repository: { issue: node, issueOrPullRequest: node } } },
+      expression,
+      jq,
+    );
+  }
+  const rest = endpoint.match(
+    /^repos\/[^/]+\/[^/]+\/(milestones|issues|pulls)(?:\/(\d+))?(?:\?.*)?$/,
+  );
+  if (!rest) return null;
+  const [, collection, id] = rest;
+  if (collection === 'milestones') return send(milestones(store), expression, jq);
+  if (collection === 'issues') {
+    if (id === undefined) {
+      return send(store.issues.filter((i) => i.state === 'OPEN').map(restIssue), expression, jq);
+    }
+    const issue = findIssue(store, id);
+    return issue ? send(restIssue(issue), expression, jq) : fail('gh: Not Found (HTTP 404)\n');
+  }
+  if (id === undefined) {
+    return send(store.prs.filter((pr) => pr.state === 'OPEN').map(restPr), expression, jq);
+  }
+  const pr = store.prs.find((item) => item.number === Number(id));
+  return pr ? send(restPr(pr), expression, jq) : fail('gh: Not Found (HTTP 404)\n');
+}
+
+// An issue number from `issue(number: 126)` in the query, else from the first
+// numeric field (`-F n=126`).
+function issueNumberIn(query: string, fields: Map<string, string>): number | null {
+  const inline = query.match(/\bnumber\s*:\s*(\d+)/);
+  if (inline?.[1] !== undefined) return Number(inline[1]);
+  for (const value of fields.values()) if (/^\d+$/.test(value)) return Number(value);
+  return null;
+}
+
+// A superset of what an agent's GraphQL query might select, so whatever shape
+// it asks for resolves; Size sits where the Projects v2 API puts it.
+function issueNode(i: IssueFixture): JsonObject {
+  const fieldValues: Json[] = [
+    { name: i.state === 'CLOSED' ? 'Done' : 'Backlog', field: { name: 'Status' } },
+  ];
+  if (i.size !== null) fieldValues.push({ name: i.size, field: { name: 'Size' } });
+  return {
+    number: i.number,
+    title: i.title,
+    state: i.state,
+    body: i.body,
+    url: `${WEB}/issues/${i.number}`,
+    closed: i.state === 'CLOSED',
+    milestone: i.milestone === null ? null : { title: i.milestone },
+    labels: { nodes: i.labels.map((name) => ({ name })) },
+    assignees: { nodes: [{ login: OWNER }] },
+    comments: {
+      totalCount: i.comments.length,
+      nodes: i.comments.map((c) => ({ author: { login: c.author }, body: c.body })),
+    },
+    projectItems: {
+      nodes: [
+        {
+          project: { title: 'Escuadra', number: 1 },
+          fieldValueByName: i.size === null ? null : { name: i.size },
+          fieldValues: { nodes: fieldValues },
+        },
+      ],
+    },
+  };
+}
+
+function milestones(store: Store): JsonObject[] {
+  const titles = [
+    ...new Set(store.issues.map((i) => i.milestone).filter((t): t is string => t !== null)),
+  ];
+  return titles.map((title, index) => ({ number: index + 1, title, state: 'open' }));
+}
+
+function restIssue(i: IssueFixture): JsonObject {
+  return {
+    number: i.number,
+    title: i.title,
+    state: i.state.toLowerCase(),
+    body: i.body,
+    html_url: `${WEB}/issues/${i.number}`,
+    labels: i.labels.map((name) => ({ name })),
+    milestone: i.milestone === null ? null : { title: i.milestone },
+    comments: i.comments.length,
+  };
+}
+
+function restPr(pr: PrFixture): JsonObject {
+  return {
+    number: pr.number,
+    title: pr.title,
+    state: pr.state === 'OPEN' ? 'open' : 'closed',
+    merged: pr.state === 'MERGED',
+    body: pr.body,
+    html_url: `${WEB}/pull/${pr.number}`,
+    head: { ref: pr.headRefName },
+    base: { ref: pr.baseRefName },
+  };
 }
 
 // gh's search syntax, reduced to what triage needs: every plain word must
