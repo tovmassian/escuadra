@@ -102,7 +102,8 @@ describe('text contrast', () => {
   });
 
   // Results sets small text in `successText` (the 10/10 label) and `error` (the
-  // fail label). `success` carries only large text and graphics there.
+  // fail label), and the team picker's cleared meta line is `successText` too.
+  // `success` carries only large text and graphics.
   it('successText reaches 4.5:1 on background and surface, in both themes', () => {
     (['dark', 'light'] as const).forEach((name) => {
       const p = palettes[name];
@@ -110,6 +111,22 @@ describe('text contrast', () => {
         expect(
           contrastRatio(p.successText, p[ground]),
           `${name}.successText on ${ground}`,
+        ).toBeGreaterThanOrEqual(4.5);
+      }
+    });
+  });
+
+  // The ladder's cleared BestPill sets its label on the translucent
+  // `successBg`, which deepens the ground under it: on the difficulty list's
+  // `surface` rows and on the card's `surfaceRaised`.
+  it('successText reaches 4.5:1 on successBg, on surface and surfaceRaised, in both themes', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      for (const ground of ['surface', 'surfaceRaised'] as const) {
+        const under = blend(p.successBg, p[ground]);
+        expect(
+          contrastRatio(p.successText, under),
+          `${name}.successText on successBg over ${ground}`,
         ).toBeGreaterThanOrEqual(4.5);
       }
     });

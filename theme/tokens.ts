@@ -27,8 +27,9 @@ export interface Palette {
   thumbBg: string;
   thumbIcon: string;
   success: string;
-  /** Small success-coloured text on `background`/`surface`; `success` itself
-   *  stays for large text and graphics. */
+  /** Small success-coloured text on `background`/`surface`, and on
+   *  `successBg` over `surface`/`surfaceRaised`; `success` itself stays for
+   *  large text and graphics. */
   successText: string;
   successBg: string;
   error: string;
