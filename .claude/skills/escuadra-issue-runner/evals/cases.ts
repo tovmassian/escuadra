@@ -125,7 +125,7 @@ const CASES: EvalCase[] = [
   },
   {
     name: '129-large-spec',
-    why: 'An L feature with a spec and no plan: a worktree, writing-plans, and the execution question asked up front.',
+    why: "An L feature with a spec and no plan: a worktree, writing-plans, and the execution question and the issue's two open choices asked up front.",
     tags: ['core', 'workspace', 'ask'],
     prompt: "Let's do issue 129.",
     issues: [129],
@@ -138,23 +138,25 @@ const CASES: EvalCase[] = [
       execution: 'ask',
       docs: [SPEC_2_0, HANDOFF],
       questions:
-        'one asks whether to run the plan with superpowers:subagent-driven-development or superpowers:executing-plans, and none asks something the issue, the spec or CLAUDE.md already answers.',
+        'one asks whether to run the plan with superpowers:subagent-driven-development or superpowers:executing-plans; others ask the issue\'s two open choices (the ball\'s depth, "Lob swell" or "At camera", and whether the trail is on), offering its defaults; none asks something the issue, the spec or CLAUDE.md already answers.',
     }),
   },
   {
     name: '129-large-spec-subagent',
-    why: 'The same issue, with the execution mode given in the prompt: nothing is left to ask.',
-    tags: ['workspace'],
+    why: 'The same issue with the execution mode given in the prompt: the open choices are still asked, the execution mode is not.',
+    tags: ['workspace', 'ask'],
     prompt: 'Pick up #129 and run the plan with subagents.',
     issues: [129],
     expect: triage({
-      decision: 'proceed',
+      decision: 'ask',
       workspace: 'worktree',
       base: 'main',
       branch: { prefix: 'feat/129-' },
       firstStep: 'writing-plans',
       execution: 'subagent-driven',
-      docs: [SPEC_2_0],
+      docs: [SPEC_2_0, HANDOFF],
+      questions:
+        "they ask the issue's two open choices (the ball's depth and the trail), offering its defaults, and none asks how to execute the plan, which the prompt already answered.",
     }),
   },
   {

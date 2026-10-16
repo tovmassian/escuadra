@@ -8,5 +8,5 @@
   "milestone": "v2.0.0",
   "size": "L",
   "source": "real snapshot 2026-10-16; body and state as of the main pin deb2e3b9 (its boxes were ticked, and #135 closed it, later that day)",
-  "why": "L feature with a spec and no plan: a worktree, writing-plans first, and the execution question."
+  "why": "L feature with a spec and no plan: a worktree, writing-plans first, the execution question, and the two open choices the issue lists."
 }
