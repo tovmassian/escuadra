@@ -144,6 +144,19 @@ describe('stayed-dry', () => {
       'git add .',
       'git worktree remove .claude/worktrees/126',
       '/usr/bin/git commit -m x',
+      'git reset HEAD~1',
+      'git reset --soft HEAD^',
+      'git restore README.md',
+      'git clean -fd',
+      'git rm old.ts',
+      'git mv a.ts b.ts',
+      'git pull',
+      'git revert abc123',
+      'git checkout -- README.md',
+      'git branch --delete old',
+      '(cd docs; git commit -m x)',
+      'ls && git add .',
+      'x=$(git stash)',
     ]) {
       expect(passes(grader, call(command)), command).toBe(true);
     }
@@ -167,6 +180,11 @@ describe('stayed-dry', () => {
       call('git branch --show-current'),
       call('git branch -v'),
       call('git log --grep "#9007"'),
+      call('grep "git cherry-pick" docs/release.md'),
+      call('grep -n "git commit" CLAUDE.md'),
+      call('echo "run git push later"'),
+      call('git checkout main'),
+      call('cat docs/release.md | grep reset'),
       '"type":"text","text":"Next I would run git switch -c fix/126-credits."',
     ]) {
       expect(passes(grader, text), text).toBe(false);

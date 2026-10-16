@@ -50,31 +50,43 @@ const NO_WRITES: YamlMap = {
 };
 
 // The runner's sandbox approves every Bash command, so allowed_tools cannot keep a dry run
-// dry (spec §11). This fails a run whose Bash calls changed history, branches, tags, the
-// index or worktrees.
-// Subcommands that change history, branches, tags, the index or worktrees. Read-only
-// neighbours (merge-base, stash list, commit-graph, push --dry-run, tag -l, branch -a) are excluded.
+// dry (spec §11). stayed-dry fails a run whose Bash calls changed history, branches, tags,
+// the index, tracked files or worktrees.
+// The subcommands that do. Read-only neighbours (merge-base, stash list, commit-graph,
+// push --dry-run, tag -l, branch -a, checkout <branch>) are excluded.
 const STATE_CHANGING = [
   'commit(?![\\w-])',
   'push(?![\\w-])(?!\\s+--dry-run)',
   'merge(?![\\w-])(?!\\s+--abort)',
   'rebase(?![\\w-])',
   'cherry-pick(?![\\w-])',
-  'reset\\s+--hard',
+  'reset(?![\\w-])',
   'stash(?![\\w-])(?!\\s+(?:list|show)(?![\\w-]))',
   'add(?![\\w-])',
   'tag\\s+(?!-l(?![\\w-])|--list)[\\w.-]',
-  'branch\\s+(?:(?!-)[\\w./-]|-[mMdDcC](?![\\w-]))',
+  'branch\\s+(?:(?!-)[\\w./-]|-[mMdDcCf](?![\\w-])|--(?:delete|move|copy|force)(?![\\w-]))',
   'worktree\\s+(?:add|remove|prune|move)(?![\\w-])',
   'switch\\s+(?:-[cC](?![\\w-])|--create|--force-create)',
-  'checkout\\s+-[bB](?![\\w-])',
+  'checkout\\s+(?:-[bB](?![\\w-])|--\\s)',
+  'restore(?![\\w-])',
+  'clean(?![\\w-])',
+  'rm(?![\\w-])',
+  'mv(?![\\w-])',
+  'pull(?![\\w-])',
+  'revert(?![\\w-])',
+  'am(?![\\w-])',
 ].join('|');
+
+// git counts only in command position: at the start of the command, after an escaped
+// newline, return or tab, or after ;, &, | or ( (so &&, ||, | and $( too), each followed by
+// optional spaces. A quoted mention, as in grep "git commit", is not a command.
+const COMMAND_START = '(?:(?<="command":")|(?<=\\\\[nrt])|(?<=[;&|(]\\s*))';
 
 const STAYED_DRY: YamlMap = {
   type: 'regex',
   name: 'stayed-dry',
   target: 'trace',
-  pattern: `"name":"Bash","input":\\{"command":"(?:[^"\\\\]|\\\\.)*?(?:(?<=\\\\[nrt])|(?<![\\w.-]))git(?:\\s+(?:-C|-c|--git-dir|--work-tree)(?:=|\\s+)\\S+)*\\s+(?:${STATE_CHANGING})`,
+  pattern: `"name":"Bash","input":\\{"command":"(?:[^"\\\\]|\\\\.)*?${COMMAND_START}(?:[\\w./-]*/)?git(?:\\s+(?:-C|-c|--git-dir|--work-tree)(?:=|\\s+)\\S+)*\\s+(?:${STATE_CHANGING})`,
   match: 'not_contains',
   weight: 2,
 };

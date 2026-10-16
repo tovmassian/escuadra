@@ -91,6 +91,6 @@ graders:
   - type: 'regex'
     name: 'stayed-dry'
     target: 'trace'
-    pattern: "\"name\":\"Bash\",\"input\":\\{\"command\":\"(?:[^\"\\\\]|\\\\.)*?(?:(?<=\\\\[nrt])|(?<![\\w.-]))git(?:\\s+(?:-C|-c|--git-dir|--work-tree)(?:=|\\s+)\\S+)*\\s+(?:commit(?![\\w-])|push(?![\\w-])(?!\\s+--dry-run)|merge(?![\\w-])(?!\\s+--abort)|rebase(?![\\w-])|cherry-pick(?![\\w-])|reset\\s+--hard|stash(?![\\w-])(?!\\s+(?:list|show)(?![\\w-]))|add(?![\\w-])|tag\\s+(?!-l(?![\\w-])|--list)[\\w.-]|branch\\s+(?:(?!-)[\\w./-]|-[mMdDcC](?![\\w-]))|worktree\\s+(?:add|remove|prune|move)(?![\\w-])|switch\\s+(?:-[cC](?![\\w-])|--create|--force-create)|checkout\\s+-[bB](?![\\w-]))"
+    pattern: "\"name\":\"Bash\",\"input\":\\{\"command\":\"(?:[^\"\\\\]|\\\\.)*?(?:(?<=\"command\":\")|(?<=\\\\[nrt])|(?<=[;&|(]\\s*))(?:[\\w./-]*/)?git(?:\\s+(?:-C|-c|--git-dir|--work-tree)(?:=|\\s+)\\S+)*\\s+(?:commit(?![\\w-])|push(?![\\w-])(?!\\s+--dry-run)|merge(?![\\w-])(?!\\s+--abort)|rebase(?![\\w-])|cherry-pick(?![\\w-])|reset(?![\\w-])|stash(?![\\w-])(?!\\s+(?:list|show)(?![\\w-]))|add(?![\\w-])|tag\\s+(?!-l(?![\\w-])|--list)[\\w.-]|branch\\s+(?:(?!-)[\\w./-]|-[mMdDcCf](?![\\w-])|--(?:delete|move|copy|force)(?![\\w-]))|worktree\\s+(?:add|remove|prune|move)(?![\\w-])|switch\\s+(?:-[cC](?![\\w-])|--create|--force-create)|checkout\\s+(?:-[bB](?![\\w-])|--\\s)|restore(?![\\w-])|clean(?![\\w-])|rm(?![\\w-])|mv(?![\\w-])|pull(?![\\w-])|revert(?![\\w-])|am(?![\\w-]))"
     match: 'not_contains'
     weight: 2
