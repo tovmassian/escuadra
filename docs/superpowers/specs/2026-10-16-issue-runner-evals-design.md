@@ -387,9 +387,13 @@ how the owner actually asks.
   them; the runner may still refuse them.
 - **Models:** the agent runs on Sonnet (`--model sonnet`) and the judge on
   Opus (`--judge-model opus`); the judge must differ from the agent.
-- **Pass bar:** in the with arm, every case scores ≥ 0.8 (`--threshold 0.8`),
+- **Pass bar:** in the with arm, every case scores ≥ 0.9 (`--threshold 0.9`),
   and the suite-wide delta over the without arm is positive. The without arm
-  is not gated; its scores are the RED record.
+  is not gated; its scores are the RED record. `no-writes` (3) and
+  `stayed-dry` (2) are points any compliant run earns, so at 0.9 any grader of
+  weight 2 or more fails a run on its own, while one missed 1-point field
+  passes (`126-small-bug`: 15/16 = 0.94; a wrong decision, 13/16 = 0.81). A
+  case's score is the mean of its runs.
 
 ## 9. Layout and running
 
@@ -431,7 +435,7 @@ scripts/evals/                        the harness: skill-agnostic
 - **No npm scripts and no `.gitignore` lines**, since both move the
   fingerprint. Commands run as `node scripts/evals/run.ts --tag core`
   (or `--case 129-*`, or `--full`). `run.ts` passes `--scaffold`, the models,
-  `--threshold 0.8`, `--max-cost-usd` and `--no-publish`, prepends
+  `--threshold 0.9`, `--max-cost-usd` and `--no-publish`, prepends
   `.git/sandbox/bin` to `PATH`, and sends `--output-dir` and `--report` to a
   temporary directory, so results never land in the repo. `--keep` adds
   `--keep-temp`: a run's trace survives only with it.
