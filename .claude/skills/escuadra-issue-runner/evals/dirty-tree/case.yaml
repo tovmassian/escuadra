@@ -4,6 +4,7 @@ name: 'dirty-tree'
 description: "An S feature on main with someone's uncommitted edit: a worktree keeps it safe."
 tags:
   - 'workspace'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

@@ -4,6 +4,7 @@ name: '115-closed'
 description: 'A closed issue: the skill asks before doing anything.'
 tags:
   - 'ask'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

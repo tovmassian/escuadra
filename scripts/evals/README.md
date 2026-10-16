@@ -6,12 +6,12 @@ Grades how an agent triages an Escuadra issue, with and without a skill, using C
 
 Every run draws on your Claude plan's usage limits. Start small:
 
-| What                                            | Command                                                                    |
-| ----------------------------------------------- | -------------------------------------------------------------------------- |
-| Check the sandbox (after a Claude Code upgrade) | `node scripts/evals/run.ts --tag smoke --model haiku --judge-model sonnet` |
-| A slice, once each, while iterating             | `node scripts/evals/run.ts --tag core --runs 1`                            |
-| One case                                        | `node scripts/evals/run.ts --case 'open-pr'`                               |
-| Everything, before a skill change merges        | `node scripts/evals/run.ts --full`                                         |
+| What                                                                 | Command                                                                    |
+| -------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| Check the sandbox (after a Claude Code upgrade)                      | `node scripts/evals/run.ts --tag smoke --model haiku --judge-model sonnet` |
+| A slice, once each, while iterating                                  | `node scripts/evals/run.ts --tag core --runs 1`                            |
+| One case                                                             | `node scripts/evals/run.ts --case 'open-pr'`                               |
+| Every graded case (not the smoke case), before a skill change merges | `node scripts/evals/run.ts --full`                                         |
 
 The defaults are a Sonnet agent, an Opus judge, a pass threshold of 0.9 per case, a $15 ceiling (estimated at API rates) and both arms, the eval runner's default (`--ablation with-without`). The results directory is printed first, and holds `report.html` and `result.json`. Nothing is written to the repo, and nothing is published.
 

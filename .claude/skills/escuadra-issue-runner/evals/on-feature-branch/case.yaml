@@ -4,6 +4,7 @@ name: 'on-feature-branch'
 description: 'An S feature while another feature branch is checked out: a worktree from main, not stacked on unrelated work.'
 tags:
   - 'workspace'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

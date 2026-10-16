@@ -3,6 +3,7 @@
 // stays local, results land outside the repo, and the fake gh comes first on
 // PATH through relative entries that resolve inside each run's sandbox.
 import { join } from 'node:path';
+import { GRADED_TAG } from './cases.ts';
 
 export interface RunOptions {
   /** The skill folder under test, relative to the repo root. */
@@ -63,7 +64,7 @@ export function evalArgs(o: RunOptions): string[] {
     '--json',
     join(o.outDir, 'result.json'),
   ];
-  for (const tag of o.tags) args.push('--tag', tag);
+  for (const tag of o.full ? [...o.tags, GRADED_TAG] : o.tags) args.push('--tag', tag);
   if (o.caseGlob !== undefined) args.push('--case', o.caseGlob);
   if (o.runs !== undefined) args.push('--runs', String(o.runs));
   if (o.ablation !== undefined) args.push('--ablation', o.ablation);

@@ -5,6 +5,7 @@ description: "An S bug on clean main: in place, systematic-debugging. The board'
 tags:
   - 'core'
   - 'workspace'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

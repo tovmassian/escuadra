@@ -4,6 +4,7 @@ name: 'fingerprint-on-release'
 description: 'A shipped-version fix that needs a native package upgrade, which cannot land on the locked release branch.'
 tags:
   - 'ask'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

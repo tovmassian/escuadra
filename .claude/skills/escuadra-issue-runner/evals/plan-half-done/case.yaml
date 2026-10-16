@@ -5,6 +5,7 @@ description: "An L feature whose plan's part 1 is merged: progress comes from gi
 tags:
   - 'core'
   - 'ask'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

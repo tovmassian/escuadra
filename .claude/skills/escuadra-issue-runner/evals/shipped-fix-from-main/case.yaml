@@ -5,6 +5,7 @@ description: 'A shipped-version fix asked for from main: the base differs from t
 tags:
   - 'core'
   - 'workspace'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

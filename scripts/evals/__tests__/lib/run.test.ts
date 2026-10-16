@@ -68,7 +68,14 @@ describe('evalArgs', () => {
 
   it('refuses to run the whole suite unless asked to', () => {
     expect(() => evalArgs({ ...BASE, tags: [] })).toThrow(/--full/);
-    expect(evalArgs({ ...BASE, tags: [], full: true })).not.toContain('--tag');
+    const args = evalArgs({ ...BASE, tags: [], full: true });
+    expect(args).toContain('--tag');
+    expect(args[args.indexOf('--tag') + 1]).toBe('graded');
+  });
+
+  it('passes the graded tag with --full, and any tags given beside it', () => {
+    const args = evalArgs({ ...BASE, tags: ['core'], full: true });
+    expect(args.filter((_, i) => args[i - 1] === '--tag')).toEqual(['core', 'graded']);
   });
 });
 

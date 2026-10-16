@@ -60,6 +60,9 @@ export function setupFor(suite: Suite, item: EvalCase): SandboxSetup {
   };
 }
 
+/** Every case with a grade to reach carries it; `--full` runs this tag, not the smoke case. */
+export const GRADED_TAG = 'graded';
+
 export function caseYaml(suite: Suite, item: EvalCase, dryRun: string): YamlMap {
   const execution: YamlMap = {
     prompt: item.prompt,
@@ -74,7 +77,7 @@ export function caseYaml(suite: Suite, item: EvalCase, dryRun: string): YamlMap 
     schema_version: '1.0',
     name: item.name,
     description: item.why,
-    tags: item.tags,
+    tags: item.expect.kind === 'smoke' ? item.tags : [...item.tags, GRADED_TAG],
     context: { scaffold_script: 'scaffold.sh' },
     execution,
     runs: item.runs ?? suite.runs,

@@ -4,6 +4,7 @@ name: '55-tbc'
 description: '[TBC] in the title, and the work happens in the store consoles: the skill asks.'
 tags:
   - 'ask'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

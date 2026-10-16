@@ -5,6 +5,7 @@ description: 'An M feature with no docs on clean main: in place, since only L an
 tags:
   - 'core'
   - 'workspace'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

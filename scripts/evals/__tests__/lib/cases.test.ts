@@ -1,5 +1,12 @@
 import { describe, expect, it } from 'vitest';
-import { caseFiles, caseYaml, setupFor, type EvalCase, type Suite } from '../../lib/cases.ts';
+import {
+  caseFiles,
+  caseYaml,
+  GRADED_TAG,
+  setupFor,
+  type EvalCase,
+  type Suite,
+} from '../../lib/cases.ts';
 import { TRIAGE_TEMPLATE } from '../../lib/triage.ts';
 
 const SUITE: Suite = {
@@ -50,6 +57,13 @@ describe('caseYaml', () => {
     const yaml = caseYaml(SUITE, smoke, 'This is a dry run.\n');
     expect(yaml.execution).not.toHaveProperty('append_system_prompt');
     expect(yaml).toMatchObject({ runs: 1, execution: { max_turns: 12 } });
+    expect(yaml.tags).not.toContain(GRADED_TAG);
+  });
+
+  it('tags a triage case graded, after its own tags', () => {
+    const yaml = caseYaml(SUITE, TRIAGE_CASE, 'This is a dry run.\n');
+    expect(yaml.tags).toEqual(['core', 'graded']);
+    expect(GRADED_TAG).toBe('graded');
   });
 });
 

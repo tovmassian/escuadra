@@ -5,6 +5,7 @@ description: 'The issue leaves the release route to the owner, so the skill asks
 tags:
   - 'core'
   - 'ask'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

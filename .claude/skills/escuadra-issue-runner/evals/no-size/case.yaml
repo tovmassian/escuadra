@@ -4,6 +4,7 @@ name: 'no-size'
 description: 'No Size on the board or in the body: estimated and marked so; a small bug, in place.'
 tags:
   - 'workspace'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

@@ -6,6 +6,7 @@ tags:
   - 'core'
   - 'workspace'
   - 'ask'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

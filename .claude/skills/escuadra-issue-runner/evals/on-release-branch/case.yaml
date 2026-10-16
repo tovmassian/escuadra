@@ -5,6 +5,7 @@ description: 'An XS JS fix to the shipped 1.0.0, worked while on release/1.0.0: 
 tags:
   - 'core'
   - 'workspace'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

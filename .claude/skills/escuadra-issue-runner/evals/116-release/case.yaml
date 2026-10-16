@@ -4,6 +4,7 @@ name: '116-release'
 description: 'A release chore the 2.0 handoff covers; cutting a release branch and store assets need the owner.'
 tags:
   - 'ask'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

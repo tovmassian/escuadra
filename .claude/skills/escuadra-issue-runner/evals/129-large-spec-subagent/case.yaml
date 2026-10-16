@@ -5,6 +5,7 @@ description: 'The same issue with the execution mode given in the prompt: the op
 tags:
   - 'workspace'
   - 'ask'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:

@@ -4,6 +4,7 @@ name: 'neg-create-issue'
 description: 'Creating an issue is not working one: the skill does not fire.'
 tags:
   - 'negative'
+  - 'graded'
 context:
   scaffold_script: 'scaffold.sh'
 execution:
