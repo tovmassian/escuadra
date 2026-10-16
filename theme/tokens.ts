@@ -29,8 +29,6 @@ export interface Palette {
   success: string;
   successBg: string;
   error: string;
-  errorBg: string;
-  errorBorderDim: string;
   /** Dimmed error text for an "incorrect-picked" option — visually quieter
    *  than `error` so the correct answer stays the loudest thing on screen. */
   errorTextDim: string;
@@ -111,16 +109,15 @@ export interface Palette {
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
-// both grounds, which is why the design source reuses it unchanged; the two
-// state washes are translucent and composite over whatever surface is behind
-// them; the brand ramp is the mark's own identity — a design token, not
+// both grounds, which is why the design source reuses it unchanged; the
+// success wash is translucent and composites over whatever surface is behind
+// it; the brand ramp is the mark's own identity — a design token, not
 // team-identity content, unlike a club's real colours — and the plate's
 // gradient ends run deeper than the mark's own stops because the plate sits
 // behind it.
 const sharedRoles = {
   accent: '#3e45a3',
   successBg: 'rgba(97,189,103,0.14)',
-  errorBg: 'rgba(240,86,83,0.10)',
   brandBright: '#5b63d6',
   brandDeep: '#2f3585',
   brandSoft: '#8f97ea',
@@ -162,7 +159,6 @@ const darkRoles = {
   thumbIcon: '#e7e9f5',
   success: '#61bd67',
   error: '#f05653',
-  errorBorderDim: '#5c3230',
   errorTextDim: '#a15a58',
   tile: 'rgba(255,255,255,0.08)',
   tileLine: 'rgba(255,255,255,0.16)',
@@ -208,7 +204,6 @@ const lightRoles = {
   thumbIcon: '#b9840f',
   success: '#2f8f3e',
   error: '#c23934',
-  errorBorderDim: '#e3b0ad',
   errorTextDim: '#b3625d',
   tile: '#ffffff',
   tileLine: '#dcdfe4',
@@ -335,7 +330,6 @@ export const stage = {
 } as const;
 
 export const typography = {
-  heroNumber: { fontFamily: 'IBMPlexMono-Bold', fontWeight: '700' as const, fontSize: 96 },
   // Results screen's giant score readout.
   scoreHero: { fontFamily: 'IBMPlexMono-Bold', fontWeight: '700' as const, fontSize: 56 },
   screenTitle: { fontFamily: 'Inter-Bold', fontWeight: '700' as const, fontSize: 28 },
@@ -349,9 +343,8 @@ export const typography = {
   statMono: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 15 },
   statMonoSmall: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 13 },
   statMonoTiny: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 12 },
-  // Team-row names, chip labels — one step down from `body`.
+  // Team-row names — one step down from `body`.
   rowTitle: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 15 },
-  chipLabel: { fontFamily: 'Inter-Bold', fontWeight: '700' as const, fontSize: 14 },
   // The wordmark's "escuadra" lockup. ExtraBold at -0.02em, per the 2a
   // design source. The only place Inter 800 is used.
   wordmark: {
@@ -393,8 +386,7 @@ export const typography = {
     letterSpacing: 1.2,
     textTransform: 'uppercase' as const,
   },
-  // Shared by AnswerOption's "CORRECT ANSWER" caption, stat-chip labels,
-  // difficulty-row status pills, and the Study screen's column headers.
+  // Shared by difficulty-row status pills and the Study screen's column headers.
   captionEyebrow: {
     fontFamily: 'Inter-SemiBold',
     fontWeight: '600' as const,
@@ -498,8 +490,6 @@ export const opacity = {
   faded: 0.4, // unrelated options during an incorrect reveal
   settled: 0.7, // other options once one is picked correct
   loadingBlank: 0.25, // option cards mid question-transition
-  dotPast: 0.9, // progress dots for answered questions
-  dotFuture: 0.35, // progress dots not yet reached
   tileAfterCorrect: 0.5, // other tiles once the pick was right (spec §6)
   tileAfterMiss: 0.35, // other tiles after a miss
 } as const;
@@ -701,28 +691,12 @@ export const homeCascade = {
   actionsStep: t(40),
 };
 
-// Keyed by question-engine Level (1 | 2 | 3) — the question screen's hero
-// shrinks as difficulty rises, per the design's hero-card spec.
-export const heroCardSize = { 1: 220, 2: 130, 3: 108 } as const;
-export const heroNumberSize = { 1: 104, 2: 64, 3: 52 } as const;
-// The usable height (screen minus safe-area insets) each level's question
-// screen needs to show the full-size hero and every option of its tallest part
-// without scrolling. Measured on the web build at a 375pt width, plus 8pt for
-// native font metrics: re-measure if the header, progress block, stat chips,
-// option cards or footer change height. Below it the hero gives up the
-// difference (`fitHeroCard` in lib/roundView.ts), down to `heroCardMinSize`.
-export const heroFitHeight = { 1: 736, 2: 608, 3: 696 } as const;
-// The floor for that shrink. Level 2 and 3 sit beside the part rail, so going
-// below the rail's height would free nothing.
-export const heroCardMinSize = { 1: 120, 2: 124, 3: 68 } as const;
-
 // Difficulty-ladder badge diameters. Size follows the rung's state, not its
 // level: the focused rung, expanded into a Play card, carries the large badge;
 // every other rung the compact one.
 export const ladderBadgeSize = { compact: 32, expanded: 48 } as const;
 
 export const sizes = {
-  progressDot: 5,
   // Width of the difficulty ladder's badge column. Both badge sizes centre
   // inside this fixed-width slot, so the badges — and the connector segments
   // between them — share one vertical axis. Matches the larger badge so
@@ -795,7 +769,7 @@ export const sizes = {
   photoCreditsMaxHeight: 200,
   // ---- 2.0 spotlight screens (spec §2, §3, §5, §8) ----
   // The question screen goes compact below this usable height (window minus
-  // safe-area insets). It replaces `heroFitHeight` when the hero goes.
+  // safe-area insets).
   compactBelow: 700,
   // The share of the window the photo stage fills, normal and compact.
   stage: { ratio: 0.68, ratioCompact: 0.72 },
@@ -829,8 +803,8 @@ export const sizes = {
 } as const;
 
 export const iconSize = {
-  markLarge: 18, // VerdictGlyph default size (AnswerOption's correct mark); also PartRail's upcoming/current bullet diameter
-  markSmall: 13, // VerdictGlyph's smaller size, for AnswerOption's incorrect-picked mark
+  markLarge: 18, // VerdictGlyph default size; AnswerTile's correct mark
+  markSmall: 13, // VerdictGlyph's smaller size; AnswerTile's incorrect-picked mark
   chevron: 16, // TeamRow disclosure chevron
   chevronLarge: 18, // Home's continue-card chevron
   searchGlyph: 15, // SearchField's magnifying-glass icon
@@ -857,7 +831,6 @@ export const spacing = {
 
 export const radii = {
   xs: 2, // progress segments
-  sm: 8,
   md: 12,
   lg: 16,
   xl: 24,
@@ -865,30 +838,8 @@ export const radii = {
   pill: 999,
 } as const;
 
-// Photo hero (docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md):
-// with a photo, the shirt number moves into a tab cut into the card's
-// bottom-left corner. Ratios are of the hero's side (thickness) or of the
-// tab's thickness (number, padding); the floors keep the tab legible at
-// level 3's 68pt minimum, where the ratios alone give an ~11pt number.
-export const heroTab = {
-  thicknessRatio: 0.27,
-  minThickness: 18,
-  numberRatio: 0.6,
-  minNumberSize: 14,
-  padStartRatio: 0.22,
-  padEndRatio: 0.26,
-  fillet: radii.md,
-} as const;
-
 // Single-layer shadows only — keep each usage to one shadow* set (+ elevation for Android).
 export const elevation = {
-  e1: {
-    shadowColor: '#000000',
-    shadowOffset: { width: 0, height: 1 },
-    shadowOpacity: 0.5,
-    shadowRadius: 2,
-    elevation: 2,
-  },
   e2: {
     shadowColor: '#000000',
     shadowOffset: { width: 0, height: 8 },
