@@ -79,21 +79,24 @@ export function StreakChip({ count }: { count: number }) {
   });
 
   return (
+    // The layout animations sit on a wrapper that sets no style of its own, and
+    // so no transform: the pop's transform lives on the inner view (#125).
     <Animated.View
-      style={[styles.chip, pop]}
       entering={FadeIn.duration(durations.transition)}
       exiting={reduced ? FadeOut.duration(durations.transition) : exit}
       accessible
       accessibilityLabel={`Streak: ${count} in a row`}
     >
-      <View style={styles.flame} />
-      <Animated.Text
-        key={count}
-        entering={reduced ? undefined : FadeIn.duration(durations.reveal)}
-        style={styles.count}
-      >
-        {count}
-      </Animated.Text>
+      <Animated.View style={[styles.chip, pop]}>
+        <View style={styles.flame} />
+        <Animated.Text
+          key={count}
+          entering={reduced ? undefined : FadeIn.duration(durations.reveal)}
+          style={styles.count}
+        >
+          {count}
+        </Animated.Text>
+      </Animated.View>
     </Animated.View>
   );
 }
