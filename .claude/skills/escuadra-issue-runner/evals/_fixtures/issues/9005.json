@@ -1,0 +1,12 @@
+{
+  "number": 9005,
+  "title": "feat(home): show the app version under the wordmark",
+  "state": "OPEN",
+  "body": "**Size:** S\n\nHome shows no version. Show `v<version>` in `textMuted` under the wordmark in `app/index.tsx`, read from `expo-constants`, the way About already does.\n\n### Acceptance criteria\n\n- [ ] Home shows the same version as About, in both themes\n- [ ] `npm run check` passes",
+  "comments": [],
+  "labels": ["enhancement"],
+  "milestone": null,
+  "size": "S",
+  "source": "synthetic",
+  "why": "An S feature while an unrelated feature branch is checked out: a worktree from main, not stacked on that work."
+}

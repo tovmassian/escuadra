@@ -1,0 +1,12 @@
+{
+  "number": 9001,
+  "title": "fix(about): the update line says Embedded after an OTA on 1.0.0",
+  "state": "OPEN",
+  "body": "**Size:** XS\n**Affects:** 1.0.0, live on the App Store.\n\nAfter an over-the-air update, About's update line still reads \"Embedded\" until a second cold start. `lib/aboutView.ts` reads `isEmbeddedLaunch` once, when `app/about.tsx` first renders, and keeps it.\n\n**Release route:** decided by the owner on 2026-10-14. It is JS-only, so it ships on `release/1.0.0` as an OTA update, and reaches `main` by `git cherry-pick -x`.\n\n### Work\n\n- [ ] Read `Updates.isEmbeddedLaunch` and `Updates.updateId` on each render of About\n- [ ] A test in `lib/aboutView.test.ts` for both states\n\n### Acceptance criteria\n\n- [ ] After an OTA update and one cold start, About names the update\n- [ ] `npm run check` passes",
+  "comments": [],
+  "labels": ["bug"],
+  "milestone": null,
+  "size": "XS",
+  "source": "synthetic",
+  "why": "An XS JS fix to the shipped 1.0.0, with its route decided, worked from release/1.0.0: in place."
+}

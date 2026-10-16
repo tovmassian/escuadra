@@ -1,0 +1,12 @@
+{
+  "number": 55,
+  "title": "[TBC] chore(store): update App Privacy and Data safety for telemetry",
+  "state": "OPEN",
+  "body": "**Priority:** P0  \n**Size:** S\n\nUpdate both stores' privacy declarations so they match the 1.1.0 binary. Submitting a build that collects data under a \"Data Not Collected\" label is the failure this prevents.\n\n### Apple — App Store Connect → App Privacy\n\nPer [TelemetryDeck's guidance](https://telemetrydeck.com/docs/articles/apple-app-privacy/):\n\n- [ ] **Identifiers → Device ID** — not linked to the user, not used for tracking, purpose: Analytics\n- [ ] **Usage Data → Product Interaction** — not linked, not tracking, purpose: Analytics\n- [ ] Re-confirm how the EAS Update request is answered (decided during the 1.0.0 correction)\n\n### Google — Play Console → App content → Data safety\n\n- [ ] **App activity → App interactions** — collected, not shared, purpose: Analytics\n- [ ] **Device or other IDs** — collected, not shared, purpose: Analytics\n- [ ] Encrypted in transit: yes\n- [ ] Whether users can request deletion — answer honestly given anonymised data and the in-app opt-out\n- [ ] Keep consistent with the EAS Update answer from the Android v1 listing\n\n### Timing\n\n- [ ] Google: update when the 1.1.0 AAB is uploaded to any track\n- [ ] Apple: update before sending 1.1.0 for review\n\n### Acceptance criteria\n\n- [ ] Both declarations match the telemetry allowlist and the published privacy policy\n- [ ] Neither store is left claiming \"no data collected\" for a build that sends telemetry\n",
+  "comments": [],
+  "labels": ["release"],
+  "milestone": "v2.0.0",
+  "size": "S",
+  "source": "real snapshot 2026-10-16",
+  "why": "[TBC] in the title, and the work happens in the store consoles: the skill asks."
+}
