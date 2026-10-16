@@ -374,6 +374,7 @@ const CASES: EvalCase[] = [
         number: 9100,
         title: 'feat(streak): the badge model (#9007, part 1)',
         state: 'MERGED',
+        mergedAt: '2026-10-10T12:00:00Z',
         headRefName: 'feat/9007-streak-badge-model',
         baseRefName: 'main',
         body: 'Part 1 of #9007: lib/streakBadges.ts and its tests. Parts 2 and 3 follow.',

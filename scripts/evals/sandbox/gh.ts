@@ -27,6 +27,7 @@ export interface PrFixture {
   headRefName: string;
   baseRefName: string;
   body: string;
+  mergedAt?: string;
 }
 
 export interface Store {
@@ -263,6 +264,8 @@ function prJson(pr: PrFixture): JsonObject {
     number: pr.number,
     title: pr.title,
     state: pr.state,
+    mergedAt: pr.mergedAt ?? null,
+    closed: pr.state !== 'OPEN',
     headRefName: pr.headRefName,
     baseRefName: pr.baseRefName,
     body: pr.body,

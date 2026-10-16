@@ -212,6 +212,26 @@ describe('pull requests', () => {
     expect(list('--state', 'all')).toEqual([9101, 9100]);
   });
 
+  it('answers state and mergedAt for a merged PR', () => {
+    const merged: Store = {
+      ...WITH_PR,
+      prs: [
+        ...WITH_PR.prs,
+        {
+          ...pr9101,
+          number: 9100,
+          state: 'MERGED',
+          headRefName: 'feat/x',
+          mergedAt: '2026-10-10T12:00:00Z',
+        },
+      ],
+    };
+    const view = handle(['pr', 'view', '9100', '--json', 'state,mergedAt'], merged, jq);
+    expect(JSON.parse(view.stdout)).toEqual({ state: 'MERGED', mergedAt: '2026-10-10T12:00:00Z' });
+    const open = ghPr('pr', 'view', '9101', '--json', 'mergedAt,closed');
+    expect(JSON.parse(open.stdout)).toEqual({ mergedAt: null, closed: false });
+  });
+
   it('logs a read it cannot answer as unsupported', () => {
     expect(ghPr('pr', 'diff', '9101').log).toBe('UNSUPPORTED gh pr diff 9101');
   });
