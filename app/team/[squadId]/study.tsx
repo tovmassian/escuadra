@@ -240,7 +240,12 @@ export default function Study() {
             setRevealed(new Set());
           }}
           accessibilityRole="switch"
+          // A constant name, so the switch reads "Hide names, on" and never
+          // "Show names, on"; the visible text may flip. aria-checked is for
+          // react-native-web, which does not read accessibilityState.
+          accessibilityLabel="Hide names"
           accessibilityState={{ checked: hidden }}
+          aria-checked={hidden}
           hitSlop={CONTROL_SLOP}
           style={styles.hide}
         >

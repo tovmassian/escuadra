@@ -1,5 +1,6 @@
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
+import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import type { FlagCode } from '@/assets/flags/generated';
@@ -80,6 +81,12 @@ export function PlayerCard({
 }: PlayerCardProps) {
   const colors = useThemeColors();
   const themeName = useThemeName();
+  // Whether this card has ever drawn the "Tap to reveal" pill. Only then does
+  // a shown name fade in, as a reveal; a name that was never hidden has no
+  // animation on mount. State rather than a ref, which the lint forbids
+  // reading in render; set during the render that first hides the name.
+  const [wasHidden, setWasHidden] = useState(nameHidden);
+  if (nameHidden && !wasHidden) setWasHidden(true);
   const bands = bannerBands(marker);
   const styles = StyleSheet.create({
     card: {
@@ -201,9 +208,11 @@ export function PlayerCard({
               Tap to reveal
             </Text>
           </View>
-        ) : onPress ? (
-          // Mounted when the pill goes, so a reveal fades the name in. The
-          // wrapper sets no style of its own, and so no transform (#125).
+        ) : wasHidden ? (
+          // Mounted when the pill goes, so a reveal fades the name in. Only a
+          // card that has been hidden gets it: a name that was never hidden
+          // shows at once. The wrapper sets no style of its own, and so no
+          // transform (#125).
           <Animated.View key="name" entering={FadeIn.duration(durations.reveal)}>
             {nameText}
           </Animated.View>

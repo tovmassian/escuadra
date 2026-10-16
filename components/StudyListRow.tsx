@@ -1,4 +1,5 @@
 import { Image } from 'expo-image';
+import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import type { FlagCode } from '@/assets/flags/generated';
@@ -62,6 +63,12 @@ export function StudyListRow({
 }: StudyListRowProps) {
   const colors = useThemeColors();
   const themeName = useThemeName();
+  // Whether this row has ever drawn the "Tap to reveal" pill. Only then does
+  // a shown name fade in, as a reveal; a name that was never hidden has no
+  // animation on mount. State rather than a ref, which the lint forbids
+  // reading in render; set during the render that first hides the name.
+  const [wasHidden, setWasHidden] = useState(nameHidden);
+  if (nameHidden && !wasHidden) setWasHidden(true);
   const bands = bannerBands(marker);
   const number = shirtNumber ?? '—';
   const styles = StyleSheet.create({
@@ -159,9 +166,11 @@ export function StudyListRow({
               Tap to reveal
             </Text>
           </View>
-        ) : onPress ? (
-          // Mounted when the pill goes, so a reveal fades the name in. The
-          // wrapper sets no style of its own, and so no transform (#125).
+        ) : wasHidden ? (
+          // Mounted when the pill goes, so a reveal fades the name in. Only a
+          // row that has been hidden gets it: a name that was never hidden
+          // shows at once. The wrapper sets no style of its own, and so no
+          // transform (#125).
           <Animated.View key="name" entering={FadeIn.duration(durations.reveal)}>
             {nameText}
           </Animated.View>
