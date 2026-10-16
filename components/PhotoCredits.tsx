@@ -44,7 +44,7 @@ export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
           {rows.map((r) => (
             <Text key={r.playerId} style={styles.row}>
               <Text style={styles.name}>
-                {r.memberNo} {r.playerName}
+                {r.memberNo ?? '—'} {r.playerName}
               </Text>
               {' — '}
               <PhotoCreditText credit={r.credit} linkStyle={styles.link} />

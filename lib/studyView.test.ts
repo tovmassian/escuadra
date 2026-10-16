@@ -1,84 +1,142 @@
 import { describe, expect, it } from 'vitest';
-import { parseLevel, parsePlayerIds, studyRows } from './studyView';
-import type { RosterEntry } from '@/types/squad';
+import {
+  STUDY_FILTERS,
+  filterCounts,
+  studyAffiliation,
+  studyCount,
+  studyCreditRows,
+  studyLabel,
+  studyRows,
+} from './studyView';
+import type { PhotoCredit, Player, Position, RosterEntry } from '@/types/squad';
 
-function entry(id: string, no: number, position: 'GK' | 'DF' | 'MF' | 'FW'): RosterEntry {
+const photo: PhotoCredit = {
+  file: 'Rodri 2021.jpg',
+  url: 'https://upload.wikimedia.org/wikipedia/commons/thumb/a/ab/Rodri_2021.jpg/960px-Rodri_2021.jpg',
+  width: 3000,
+  height: 2000,
+  author: 'Example Photographer',
+  licence: 'CC BY-SA 4.0',
+  licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+};
+
+function entry(
+  no: number | null,
+  name: string,
+  position: Position,
+  extra: Partial<Player> = {},
+): RosterEntry {
   return {
+    member: { playerId: name.toLowerCase(), no },
     player: {
-      id,
-      name: id,
-      birth: '2000-01-01',
+      id: name.toLowerCase(),
+      name,
+      fullName: name,
+      birth: null,
       position,
       nationality: 'Spain',
+      club: 'Barcelona',
       photo: null,
+      wikiTitle: null,
+      ...extra,
     },
-    member: { playerId: id, no },
-  } as RosterEntry;
+  };
 }
 
-const roster: RosterEntry[] = [entry('c', 9, 'FW'), entry('a', 1, 'GK'), entry('b', 4, 'DF')];
-
-describe('parsePlayerIds', () => {
-  it('returns null when the param is absent', () => {
-    expect(parsePlayerIds(undefined)).toBeNull();
-  });
-
-  it('returns null for an empty string, so an empty param is not a filter to nothing', () => {
-    expect(parsePlayerIds('')).toBeNull();
-  });
-
-  it('splits a comma-separated list', () => {
-    expect(parsePlayerIds('a,b')).toEqual(['a', 'b']);
-  });
-
-  it('trims whitespace and drops empty entries', () => {
-    expect(parsePlayerIds('a, ,b,')).toEqual(['a', 'b']);
-  });
-});
-
-describe('parseLevel', () => {
-  it('returns null when the param is absent', () => {
-    expect(parseLevel(undefined)).toBeNull();
-  });
-
-  it('returns null for a non-numeric param', () => {
-    expect(parseLevel('abc')).toBeNull();
-  });
-
-  it('returns null for a level outside 1..3', () => {
-    expect(parseLevel('0')).toBeNull();
-    expect(parseLevel('4')).toBeNull();
-  });
-
-  it('parses a valid level', () => {
-    expect(parseLevel('1')).toBe(1);
-    expect(parseLevel('2')).toBe(2);
-    expect(parseLevel('3')).toBe(3);
-  });
-});
+const roster = [
+  entry(7, 'Torres', 'FW'),
+  entry(1, 'Raya', 'GK'),
+  entry(16, 'Rodri', 'MF', { photo }),
+  entry(3, 'Grimaldo', 'DF'),
+  entry(23, 'Simón', 'GK', { photo }),
+];
 
 describe('studyRows', () => {
-  it('sorts by shirt number when unfiltered', () => {
-    expect(studyRows(roster, 'ALL', null).map((r) => r.member.no)).toEqual([1, 4, 9]);
+  it('lists the whole squad in shirt-number order', () => {
+    expect(studyRows(roster, 'ALL').map((r) => r.member.no)).toEqual([1, 3, 7, 16, 23]);
   });
 
-  it('filters by position', () => {
-    expect(studyRows(roster, 'GK', null).map((r) => r.player.id)).toEqual(['a']);
+  it('keeps one position, still in shirt-number order', () => {
+    expect(studyRows(roster, 'GK').map((r) => r.member.no)).toEqual([1, 23]);
   });
 
-  it('filters to the given player ids', () => {
-    expect(studyRows(roster, 'ALL', ['c', 'a']).map((r) => r.player.id)).toEqual(['a', 'c']);
+  it('puts a member with no shirt number last', () => {
+    const withUnnumbered = [entry(null, 'Newman', 'DF'), ...roster];
+    expect(studyRows(withUnnumbered, 'ALL').map((r) => r.member.no)).toEqual([
+      1,
+      3,
+      7,
+      16,
+      23,
+      null,
+    ]);
+  });
+});
+
+describe('filterCounts', () => {
+  it('counts the whole squad for All and each position for its pill', () => {
+    expect(filterCounts(roster)).toEqual({ ALL: 5, GK: 2, DF: 1, MF: 1, FW: 1 });
   });
 
-  it('keeps shirt-number order when filtering by id, not the order of the id list', () => {
-    expect(studyRows(roster, 'ALL', ['c', 'a']).map((r) => r.member.no)).toEqual([1, 9]);
+  it('has a count for every filter', () => {
+    const counts = filterCounts(roster);
+    for (const f of STUDY_FILTERS) expect(typeof counts[f]).toBe('number');
+  });
+});
+
+describe('studyCount', () => {
+  it('says how many players when unfiltered', () => {
+    expect(studyCount(26, 26, 'ALL')).toBe('26 players');
+    expect(studyCount(1, 1, 'ALL')).toBe('1 player');
   });
 
-  it('ignores ids that are not in this squad', () => {
-    expect(studyRows(roster, 'ALL', ['a', 'zzz']).map((r) => r.player.id)).toEqual(['a']);
+  it('says how many of the squad when filtered', () => {
+    expect(studyCount(9, 26, 'DF')).toBe('9 of 26');
+  });
+});
+
+describe('studyAffiliation', () => {
+  it('gives a club squad the nationality and a nation squad the club', () => {
+    const p = entry(7, 'Torres', 'FW', { nationality: 'Spain', club: 'Barcelona' }).player;
+    expect(studyAffiliation(p, 'club')).toBe('Spain');
+    expect(studyAffiliation(p, 'nation')).toBe('Barcelona');
   });
 
-  it('returns an empty list when no id matches', () => {
-    expect(studyRows(roster, 'ALL', ['zzz'])).toEqual([]);
+  it('shows a dash for a nation player with no club', () => {
+    const p = entry(7, 'Torres', 'FW', { club: null }).player;
+    expect(studyAffiliation(p, 'nation')).toBe('—');
+  });
+});
+
+describe('studyLabel', () => {
+  const p = entry(7, 'Torres', 'FW').player;
+
+  it('reads the number, name, position and affiliation', () => {
+    expect(studyLabel(7, p, 'Barcelona', false)).toBe('7, Torres, Forward, Barcelona');
+  });
+
+  it('never speaks a hidden name', () => {
+    const label = studyLabel(7, p, 'Barcelona', true);
+    expect(label).toBe('7, name hidden, Forward, Barcelona');
+    expect(label).not.toContain('Torres');
+  });
+
+  it('says "no number" for a member Wikipedia lists without one', () => {
+    expect(studyLabel(null, p, 'Barcelona', false)).toBe('no number, Torres, Forward, Barcelona');
+  });
+});
+
+describe('studyCreditRows', () => {
+  it('credits only the rows with a photo, in list order', () => {
+    const rows = studyCreditRows(studyRows(roster, 'ALL'));
+    expect(rows.map((r) => r.memberNo)).toEqual([16, 23]);
+    expect(rows[0]?.credit).toBe(photo);
+  });
+
+  it('still credits a photographed member who has no shirt number', () => {
+    const rows = studyCreditRows([entry(null, 'Newman', 'DF', { photo })]);
+    expect(rows).toEqual([
+      { playerId: 'newman', memberNo: null, playerName: 'Newman', credit: photo },
+    ]);
   });
 });
