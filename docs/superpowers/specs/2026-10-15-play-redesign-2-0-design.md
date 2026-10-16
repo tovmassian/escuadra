@@ -121,7 +121,7 @@ filled glass on dark and white cards on light.
 - **Tap:** as today: press scale, a light haptic, instant verdict.
 - **Correct, more parts to go:** the slot fills, the next part's options replace the grid
   in place (§6).
-- **Correct, last part:** the ball drops into the corner, and the footer shows "Next
+- **Correct, last part:** the ball is struck into the corner (§6), and the footer shows "Next
   question · tap to skip" with a bar filling over 1,200 ms. Then the round advances.
   Tapping skips the wait. **No auto-advance while a screen reader is on**
   (`AccessibilityInfo.isScreenReaderEnabled`): the footer shows "Next question" instead.
@@ -284,33 +284,37 @@ Study; a bottom gradient; the name and one line beneath it.
 
 ## 6. Motion
 
-Mid-round everything finishes within 300 ms. Results keep the celebration carve-out,
+Every mid-round animation finishes within 300 ms. Beats may chain: a goal's shot, then
+the corner's kick and ring, end about 640 ms after the tap. That is inside the 1,200 ms
+auto-advance pause (§2.4), so a round takes no longer. Results keep the celebration carve-out,
 with timings below at `MOTION_TIME_SCALE` 1. With Reduce Motion on (Reanimated
 `useReducedMotion`), nothing shakes, bounces, slides or scales: colour and opacity only,
 150 ms.
 
-| Moment           | At   | What                                                                                                                                                                       |
-| ---------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Press            | tap  | Tile to 0.97, 100 ms (today).                                                                                                                                              |
-| Correct          | 0    | Tile fills green, 180 ms; pop 1.04 → 1 (100 + 120). Others fade to 50 %.                                                                                                   |
-|                  | 60   | Slot chip turns green and crossfades to the answer, 180 ms.                                                                                                                |
-|                  | 80   | Ball drops into the corner from 10 pt above, scale 0.6 → 1, 220 ms, `celebrationEasingCurves.strike`. Corner turns green.                                                  |
-|                  | 120  | Streak chip 1 → 1.15 → 1, 180 ms; digit rolls up.                                                                                                                          |
-|                  | 300  | Auto-next bar fills linearly over 1,200 ms.                                                                                                                                |
-| Next part        | —    | Old tiles fade out 120 ms; new rise 8 pt and fade in 150 ms, 20 ms apart. Next slot's outline pulses 1 → 1.06 → 1, 200 ms.                                                 |
-| Miss             | 0    | Picked tile turns red and shakes ±6 pt, three swings, 240 ms. The ball drops toward the corner, hits the post and bounces out down-left, 260 ms. Corner turns red, 180 ms. |
-|                  | 60   | Right answer: green outline, pop 1.03, ANSWER tag fades in, 150 ms. Others fade to 35 %. Slots switch.                                                                     |
-|                  | 100  | Photo dims 10 %, 180 ms.                                                                                                                                                   |
-|                  | 120  | Streak chip shrinks to 0.8 and fades out, 150 ms.                                                                                                                          |
-|                  | 140  | "Got it — next" rises 8 pt and fades in, 160 ms.                                                                                                                           |
-| Next question    | —    | Content slides 16 pt left and fades, 150 ms. Next photo crossfades 180 ms; number rises 12 pt; chips 30 ms apart; tiles 25 ms apart. Done by 300 ms.                       |
-| Results, all     | 0    | Round strip fills left to right, 120 ms each, 40 ms apart; the score counts up with each green segment.                                                                    |
-| Results, fail    | 300  | Corner stays grey, no ball. Title rises 12 pt, 220 ms; missed cards slide in from the right, 60 ms apart.                                                                  |
-| Results, passed  | 480  | Corner draws and the ball strikes in (`strikeTiming.passed`).                                                                                                              |
-| Results, 10/10   | 480  | Full strike with trail and flash (`strikeTiming.excellent`); score pops 1.15 → 1; the ten circles pop in 40 ms apart.                                                      |
-| Results, actions | last | Buttons rise 12 pt, 40 ms apart (today's cascade).                                                                                                                         |
-| Share sheet      | —    | Scrim 200 ms; sheet slides up 240 ms, no overshoot. Switch pill slides 160 ms; preview crossfades 150 ms.                                                                  |
-| Study            | —    | Cards fade in as they mount, 150 ms. A reveal crossfades the name in, 180 ms.                                                                                              |
+| Moment           | At      | What                                                                                                                                                                                                                                                                                                                                               |
+| ---------------- | ------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Press            | tap     | Tile to 0.97, 100 ms (today).                                                                                                                                                                                                                                                                                                                      |
+| Correct          | 0       | Tile fills green, 180 ms; pop 1.04 → 1 (100 + 120). Others fade to 50 %.                                                                                                                                                                                                                                                                           |
+|                  | 60      | Slot chip turns green and crossfades to the answer, 180 ms.                                                                                                                                                                                                                                                                                        |
+|                  | 80      | The shot: a ball leaves the tapped tile at 1.7× the corner's ball, swells at the top of its arc and slows into the corner through its open, lower-left side, landing at the corner's ball size. One of Curler, Driven, Dipping lob or Trivela, never the same twice running, 213–291 ms. A trail of three fading balls follows it (`lib/shot.ts`). |
+|                  | 293–371 | It lands: the corner turns green and kicks (240 ms), a ring flashes out from the ball (300 ms), and the ball settles under the crossbar (140 ms) and stays.                                                                                                                                                                                        |
+|                  | 120     | Streak chip 1 → 1.15 → 1, 180 ms; digit rolls up.                                                                                                                                                                                                                                                                                                  |
+|                  | 300     | Auto-next bar fills linearly over 1,200 ms.                                                                                                                                                                                                                                                                                                        |
+| Next part        | —       | Old tiles fade out 120 ms; new rise 8 pt and fade in 150 ms, 20 ms apart. Next slot's outline pulses 1 → 1.06 → 1, 200 ms.                                                                                                                                                                                                                         |
+| Miss             | 0       | Picked tile turns red and shakes ±6 pt, three swings, 240 ms.                                                                                                                                                                                                                                                                                      |
+|                  | 60      | Right answer: green outline, pop 1.03, ANSWER tag fades in, 150 ms. Others fade to 35 %. Slots switch.                                                                                                                                                                                                                                             |
+|                  | 80      | The shot goes wide, right or left: Wide right, Wide left, Sliced right or Dragged left, never the same twice running. It keeps its pace (299 ms) and leaves the screen, never within 28 pt of the corner. The corner turns red as it goes by, at about 185 ms. The frame never moves.                                                              |
+|                  | 100     | Photo dims 10 %, 180 ms.                                                                                                                                                                                                                                                                                                                           |
+|                  | 120     | Streak chip shrinks to 0.8 and fades out, 150 ms.                                                                                                                                                                                                                                                                                                  |
+|                  | 140     | "Got it — next" rises 8 pt and fades in, 160 ms.                                                                                                                                                                                                                                                                                                   |
+| Next question    | —       | Content slides 16 pt left and fades, 150 ms. Next photo crossfades 180 ms; number rises 12 pt; chips 30 ms apart; tiles 25 ms apart. Done by 300 ms.                                                                                                                                                                                               |
+| Results, all     | 0       | Round strip fills left to right, 120 ms each, 40 ms apart; the score counts up with each green segment.                                                                                                                                                                                                                                            |
+| Results, fail    | 300     | Corner stays grey, no ball. Title rises 12 pt, 220 ms; missed cards slide in from the right, 60 ms apart.                                                                                                                                                                                                                                          |
+| Results, passed  | 480     | Corner draws and the ball strikes in (`strikeTiming.passed`).                                                                                                                                                                                                                                                                                      |
+| Results, 10/10   | 480     | Full strike with trail and flash (`strikeTiming.excellent`); score pops 1.15 → 1; the ten circles pop in 40 ms apart.                                                                                                                                                                                                                              |
+| Results, actions | last    | Buttons rise 12 pt, 40 ms apart (today's cascade).                                                                                                                                                                                                                                                                                                 |
+| Share sheet      | —       | Scrim 200 ms; sheet slides up 240 ms, no overshoot. Switch pill slides 160 ms; preview crossfades 150 ms.                                                                                                                                                                                                                                          |
+| Study            | —       | Cards fade in as they mount, 150 ms. A reveal crossfades the name in, 180 ms.                                                                                                                                                                                                                                                                      |
 
 ## 7. Haptics
 
@@ -383,7 +387,7 @@ Archivo (SIL OFL 1.1) to `docs/license.md`.
 | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Sizes     | `stage` ratios (0.68 / 0.72), `segment` (3 question, 6 results), `corner` (24/6 question, 40/10 results), tile heights (§2.3), `cta` 52/48, `glassButton` 36, `playerCard` (218; 140×184 on Results), `avatar` 46 |
 | Radii     | `sheet` 28                                                                                                                                                                                                        |
-| Durations | `shake` 240, `ballDrop` 220, `ballBounce` 260, `pulse` 200, `segmentFill` 120 (+ 40 stagger), `sheet` 240, `autoAdvance` 1,200 (a pause, see §2.4)                                                                |
+| Durations | `shake` 240, `shotFlight` 260 (× each shot's pace), `shotSettle` 140, `cornerShake` 240, `ring` 300, `pulse` 200, `segmentFill` 120 (+ 40 stagger), `sheet` 240, `autoAdvance` 1,200 (a pause, see §2.4)          |
 
 `design/tokens.ts` re-exports, so the handoff stays in step.
 
@@ -464,10 +468,11 @@ Haptics, the streak, Hide names, the Vibration switch and `studyView` never leav
 - **Components:** `SpotlightStage` (photo, framed, fallback, loading, gradients),
   `RoundProgress`, `SlotChip`, `AnswerTile` (replaces `AnswerOption` and `ChipOption`),
   `EscuadraCorner` (corner and ball, from `theme/brand.ts` geometry), `StreakChip`,
-  `PlayerCard`, `ShareSheet`, `ShareCard`.
+  `PlayerCard`, `ShareSheet`, `ShareCard`, `ShotOverlay` (the shot and its trail).
 - **Libraries:** `lib/haptics.ts`, `lib/share.ts` (capture and hand-off).
 - **Pure helpers:** `lib/roundView.ts` gains `slotStates`, `answerLayout` and `streak`;
-  `lib/stageView.ts` gets `stageVeil` and `photoLayout`.
+  `lib/stageView.ts` gets `stageVeil` and `photoLayout`; `lib/shot.ts` plans the shot
+  after a question is decided (#129).
 
 **Changed:**
 

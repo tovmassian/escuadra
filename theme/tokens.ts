@@ -638,9 +638,11 @@ export const opacity = {
 // budget. Two entries are not animations and sit outside it: `skeleton` is a
 // shimmer's loop period, and `autoAdvance` is the pause after a correct
 // answer before the round moves on by itself (spec §2.4; a tap skips it, and
-// it never runs with a screen reader on). The round-over celebration and the
-// home lockup are the one carve-out from the rule; see
-// `strikeTiming`/`resultsTimeline` below.
+// it never runs with a screen reader on). A goal chains its beats (the shot,
+// then the corner's kick and ring) to about 640 ms after the tap; each stays
+// within the budget, and the chain ends well inside `autoAdvance`. The
+// round-over celebration and the home lockup are the one carve-out from the
+// rule; see `strikeTiming`/`resultsTimeline` below.
 export const durations = {
   press: 100,
   reveal: 180,
@@ -652,8 +654,12 @@ export const durations = {
   skeleton: 900,
   // ---- 2.0 spotlight (spec §6) ----
   shake: 240, // a missed tile, three swings
-  ballDrop: 220, // the ball into the corner on a correct answer
-  ballBounce: 260, // the ball off the post on a miss
+  // The shot after a question is decided (lib/shot.ts, #129). Each shot flies
+  // `shotFlight` × its own pace: a goal 213–291 ms, a miss 299.
+  shotFlight: 260,
+  shotSettle: 140, // the ball settling in the corner after a goal
+  cornerShake: 240, // the corner's kick as a goal lands
+  ring: 300, // the flash out from the ball as a goal lands
   pulse: 200, // the next slot's outline
   segmentFill: 120, // one results-strip segment
   segmentStagger: 40, // between results-strip segments
@@ -673,14 +679,40 @@ export const spotlightMotion = {
   pulseScale: 1.06,
   streakPopScale: 1.15,
   streakOutScale: 0.8,
-  ballStartScale: 0.6,
   // A 10/10's player circles on Results grow from this as they pop in.
   rosterInScale: 0.8,
   shake: 6,
   rise: 8,
   numberRise: 12,
   slide: 16,
-  ballDrop: 10,
+  // The shot (lib/shot.ts, #129). Its size reads as height: it leaves the
+  // tile at `startScale` × the corner's ball, is biggest at the top of its
+  // arc, and a goal lands at 1. Each ball is drawn at `drawScale` × and scaled
+  // down, so it stays sharp at its biggest. A miss keeps `clearance` dp
+  // between its edge and the corner's box. Three fainter, smaller balls
+  // follow it, each `delay` ms behind.
+  shot: {
+    startScale: 1.7,
+    drawScale: 4,
+    settleScale: 0.86,
+    clearance: 28,
+    trail: [
+      { delay: 18, opacity: 0.4, scale: 0.94 },
+      { delay: 36, opacity: 0.22, scale: 0.86 },
+      { delay: 54, opacity: 0.1, scale: 0.78 },
+    ],
+  },
+  // The corner's kick as a goal lands, from its top right, over
+  // `durations.cornerShake`: pt right (and as much up) and scale, at a share
+  // of the way through, back to rest after the last.
+  cornerKick: [
+    { at: 0.2, x: 3, scale: 1.14 },
+    { at: 0.45, x: -2, scale: 0.96 },
+    { at: 0.7, x: 1, scale: 1.03 },
+  ],
+  // The ring that flashes out from the ball as a goal lands, over
+  // `durations.ring`: its scale (× the corner's arm) and its starting opacity.
+  ring: { from: 0.4, to: 2.6, opacity: 0.75 },
 } as const;
 
 // When each beat starts after a verdict (ms, spec §6), so the screen reads as
@@ -697,8 +729,9 @@ export const spotlightCues = {
 
 // ---- Celebration motion ---------------------------------------------------
 // Budget for the results screen's round-over celebration (passed/excellent
-// tiers) and the once-per-launch home lockup only — never mid-round. Plain
-// bezier control-point tuples rather than `Easing.bezier(...)` instances, so
+// tiers) and the once-per-launch home lockup — and, mid-round, the ring a goal
+// flashes as it lands in the corner (`rise`, #129). Plain bezier
+// control-point tuples rather than `Easing.bezier(...)` instances, so
 // this file stays free of the animation library per its own header comment;
 // construct the curve at the call site (`Easing.bezier(...curve)`).
 export const celebrationEasingCurves = {

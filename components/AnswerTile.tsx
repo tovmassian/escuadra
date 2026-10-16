@@ -12,6 +12,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { EscuadraMark } from './EscuadraMark';
 import { Flag } from './Flag';
+import type { ShotTap } from './useShot';
 import type { FlagCode } from '@/assets/flags/generated';
 import { feedback } from '@/lib/haptics';
 import type { TileVerdict } from '@/lib/roundView';
@@ -41,7 +42,8 @@ interface AnswerTileProps {
   pickedRight: boolean;
   /** The least the tile is tall. It grows with the text at large sizes. */
   minHeight: number;
-  onPress: () => void;
+  /** The press, with where it landed and the tile, so the shot starts there. */
+  onPress: (tap: ShotTap) => void;
 }
 
 function look(colors: Palette, verdict: TileVerdict) {
@@ -110,6 +112,7 @@ export function AnswerTile({
   const shift = useSharedValue(0);
   const fade = useSharedValue(1);
   const previous = useRef(verdict);
+  const pressable = useRef<View>(null);
   // The latest `answered`, for `onPressOut`: Pressability delays it for a press
   // shorter than 130 ms and then calls the closure from before the verdict,
   // where `answered` is still false. A press-out after the verdict must not
@@ -223,7 +226,14 @@ export function AnswerTile({
   return (
     <Animated.View style={[styles.cell, motion]}>
       <Pressable
-        onPress={onPress}
+        ref={pressable}
+        onPress={(event) =>
+          onPress({
+            pageX: event.nativeEvent.pageX,
+            pageY: event.nativeEvent.pageY,
+            tile: pressable.current,
+          })
+        }
         onPressIn={() => {
           if (answered) return;
           feedback('tap');
