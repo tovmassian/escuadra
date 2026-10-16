@@ -1,4 +1,4 @@
-This session is a dry run for an evaluation. The working directory is a disposable copy of the Escuadra repository, and the `gh` on your `PATH` answers from fixtures.
+This session is a dry run for an evaluation. The working directory is a disposable copy of the Escuadra repository.
 
 - `CLAUDE.md` at the repository root holds the project's instructions. A real session would have it loaded already, so read it before anything else.
 - Do every read-only step you would do for this request: read files, and run read-only `git` and `gh` commands.
