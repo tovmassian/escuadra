@@ -292,6 +292,10 @@ runner's permissions deny reading it.
 - **Real snapshots** wherever a real issue sits on a decision; captured with
   `node scripts/evals/capture-issue.ts <N>` (real `gh`, run by hand) and
   committed, so later edits to the issue do not move the suite.
+- **A snapshot records the issue as it stands at the main pin.** An issue
+  closed after the pin, by work the sandbox does not contain, is recorded open,
+  and its `source` says so: #129 closed through #135 a few hours after
+  `deb2e3b9`.
 - **Synthetic issues** (`#9001`…) only for boundaries no real issue covers,
   with their docs under `_fixtures/docs/`. Their wording follows the real
   issues' style (Size line, Work checklist, Acceptance criteria).
@@ -360,8 +364,10 @@ how the owner actually asks.
 | `no-writes`         | regex over `.git/sandbox/gh.log`, `not_contains WRITE` | 3      | every case                               |
 | `no-triage`         | regex, `not_contains` `decision:`                      | 3      | negative cases                           |
 | `answered`          | `llm`                                                  | 2      | negative cases                           |
-| `skill-fired`       | `tool_used: Skill` (with-only, never scored)           | —      | every case                               |
 
+- No grader checks whether the skill fired. Under `--ablation none` (the RED
+  run) a `tool_used: Skill` grader would be scored rather than shown, and a
+  skill that never fires already shows as a failing case.
 - Ask cases with an open answer skip `workspace`, `base` and `branch`: grading
   a guess at an answer that depends on the owner is noise.
 - Weights follow the cost of an error: asking when the agent should have
