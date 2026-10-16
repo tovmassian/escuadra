@@ -292,7 +292,9 @@ export const stageGradients: Record<ThemeName, StageGradient> = {
       'rgba(18,20,26,0.88)',
       '#12141a',
     ],
-    locations: [0, 0.2, 0.34, 0.62, 0.74],
+    // Solid ground at 0.68, where the stage ends (`sizes.stage.ratio`): the
+    // board's 0.62/0.74 left the photo's bottom edge showing as a seam.
+    locations: [0, 0.2, 0.34, 0.6, 0.68],
   },
   light: {
     colors: [
@@ -322,6 +324,14 @@ export const stage = {
   missDim: 0.1,
   // The loading shimmer: a diagonal band (spec §2.6).
   shimmer: { locations: [0.3, 0.48, 0.66], start: { x: 0, y: 0.35 }, end: { x: 1, y: 0.65 } },
+  // The backing behind the shirt number and the slot chips. It moves with
+  // the hero, wherever the content puts it:
+  // - `rise` pt above the hero it is clear;
+  // - at the hero's top edge it is the ground at `top[theme]`;
+  // - it reaches solid ground by the slot chips.
+  // Dark 0.55 keeps a white number at 3:1 or better even over a white photo;
+  // light 0.6 keeps the near-black number at 3:1 or better even over a black one.
+  heroBacking: { rise: 96, top: { dark: 0.55, light: 0.6 } },
 } as const;
 
 export const typography = {

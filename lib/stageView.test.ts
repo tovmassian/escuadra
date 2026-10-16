@@ -2,7 +2,14 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { contrastRatio } from './contrast';
-import { bannerBands, FILL_MIN_WIDTH, photoLayout, servedWidth, stageVeil } from './stageView';
+import {
+  bannerBands,
+  FILL_MIN_WIDTH,
+  photoLayout,
+  servedWidth,
+  stageVeil,
+  withAlpha,
+} from './stageView';
 import { palettes, stage } from '@/theme/tokens';
 import type { PhotoCredit, Squad } from '@/types/squad';
 
@@ -63,6 +70,47 @@ describe('stageVeil', () => {
       expect(contrastRatio(onPhoto, veiled('#F1BF00', veilInk, alpha))).toBeGreaterThanOrEqual(3);
     });
   }
+});
+
+describe('the hero backing', () => {
+  // The worst photo for each theme's number: white under dark's white
+  // number, black under light's near-black one.
+  const worstPhoto = { dark: '#ffffff', light: '#000000' } as const;
+
+  for (const theme of ['dark', 'light'] as const) {
+    it(`keeps the shirt number at 3:1 over the worst photo, ${theme}`, () => {
+      const { background, onStage } = palettes[theme];
+      const ground = veiled(worstPhoto[theme], background, stage.heroBacking.top[theme]);
+      expect(contrastRatio(onStage, ground)).toBeGreaterThanOrEqual(3);
+    });
+  }
+
+  it('starts clear above the hero and partly opaque at its top edge', () => {
+    expect(stage.heroBacking.rise).toBeGreaterThan(0);
+    for (const theme of ['dark', 'light'] as const) {
+      expect(stage.heroBacking.top[theme], theme).toBeGreaterThan(0);
+      expect(stage.heroBacking.top[theme], theme).toBeLessThan(1);
+    }
+  });
+});
+
+describe('withAlpha', () => {
+  it('writes a #rrggbb colour as rgba with no spaces', () => {
+    expect(withAlpha('#12141a', 0.55)).toBe('rgba(18,20,26,0.55)');
+    expect(withAlpha('#F7F7F9', 1)).toBe('rgba(247,247,249,1)');
+    expect(withAlpha('#000000', 0)).toBe('rgba(0,0,0,0)');
+  });
+
+  it('rounds alpha to two decimals', () => {
+    expect(withAlpha('#ffffff', 0.123456)).toBe('rgba(255,255,255,0.12)');
+    expect(withAlpha('#ffffff', 0.666)).toBe('rgba(255,255,255,0.67)');
+  });
+
+  it('throws on anything but #rrggbb', () => {
+    expect(() => withAlpha('#fff', 0.5)).toThrow(/#rrggbb/);
+    expect(() => withAlpha('rgba(255,255,255,0.1)', 0.5)).toThrow(/#rrggbb/);
+    expect(() => withAlpha('12141a', 0.5)).toThrow(/#rrggbb/);
+  });
 });
 
 const photo = (url: string, width: number): PhotoCredit => ({

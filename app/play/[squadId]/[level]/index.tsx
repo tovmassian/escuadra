@@ -25,6 +25,7 @@ import {
   streakMilestone,
 } from '@/lib/roundView';
 import { getPlayer, getRoster, getSquad } from '@/lib/squads';
+import { withAlpha } from '@/lib/stageView';
 import { track } from '@/lib/telemetry';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
@@ -35,6 +36,7 @@ import {
   sizes,
   spacing,
   spotlightMotion,
+  stage,
   stageGradients,
   typography,
 } from '@/theme/tokens';
@@ -74,6 +76,7 @@ export default function Question() {
   // Optional `?seed=` makes a round reproducible, for the screenshot capture.
   const seed = seedParam === undefined ? undefined : Number(seedParam);
   const compact = isCompact(frame.height - insets.top - insets.bottom);
+  const numberType = compact ? typography.shirtNumberCompact : typography.shirtNumber;
   const stageHeight = Math.round(
     frame.height * (compact ? sizes.stage.ratioCompact : sizes.stage.ratio),
   );
@@ -174,15 +177,41 @@ export default function Question() {
     score: { ...typography.statMonoSmall, color: colors.onPhoto },
     scroll: { flex: 1 },
     scrollContent: { flexGrow: 1, justifyContent: 'flex-end', paddingBottom: spacing.xxs },
+    // The hero carries its own ground (`stage.heroBacking`), so the number and
+    // chips stay legible over any photo wherever the content puts them: clear
+    // to `top` over `rise`, then to solid over the number, solid behind the
+    // chips. The chips start one number line and the hero's gap below its
+    // top; read from the tokens, not measured. Larger text only moves them
+    // further onto solid ground.
+    // The rise is a flex item: it takes free space above the hero, at most
+    // `rise`, so it always starts clear. When less is free (two rows of slots
+    // at 360×600), the scroll's top edge would otherwise cut it mid-fade, a
+    // seam under the top bar. It never adds height.
+    backingRise: { flexGrow: 1, maxHeight: stage.heroBacking.rise },
+    heroFrame: { position: 'relative' },
+    backingNumber: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      height: numberType.lineHeight + spacing.sm,
+    },
+    backingChips: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: numberType.lineHeight + spacing.sm,
+      bottom: 0,
+      backgroundColor: colors.background,
+    },
     hero: { paddingHorizontal: spacing.lg, gap: spacing.sm },
+    // Under the hero, the prompt, answers and footer sit on solid ground.
+    ground: { backgroundColor: colors.background },
     numberWrap: {
       alignSelf: 'flex-start',
       paddingRight: sizes.corner.question.arm + sizes.corner.question.bar,
     },
-    number: {
-      ...(compact ? typography.shirtNumberCompact : typography.shirtNumber),
-      color: colors.onStage,
-    },
+    number: { ...numberType, color: colors.onStage },
     slots: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs },
     promptRow: {
       flexDirection: 'row',
@@ -224,6 +253,7 @@ export default function Question() {
     router.back();
   };
   const next = () => session.advanceQuestion();
+  const backingTop = withAlpha(colors.background, stage.heroBacking.top[themeName]);
 
   const heroEntering = riseIn(reduced, spotlightMotion.numberRise, durations.transition);
   const heroExiting = reduced
@@ -278,54 +308,75 @@ export default function Question() {
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
         >
-          <Animated.View
-            key={session.currentIndex}
-            entering={heroEntering}
-            exiting={heroExiting}
-            style={styles.hero}
-          >
-            <View style={styles.numberWrap}>
-              <Text style={styles.number} accessibilityLabel={`Shirt number ${question.memberNo}`}>
-                {question.memberNo}
-              </Text>
-              <EscuadraCorner state={corner} />
-            </View>
-            <View style={styles.slots}>
-              {slots.map((slot) => (
-                <SlotChip key={slot.key} slot={slot} />
-              ))}
-            </View>
-          </Animated.View>
-
-          <View style={styles.promptRow}>
-            <Text
-              style={[
-                compact ? typography.promptCompact : typography.prompt,
-                { color: promptColor },
-              ]}
-              accessibilityRole="header"
-              accessibilityLiveRegion="polite"
+          {/* Not keyed: the backing stays put while the hero changes. */}
+          <LinearGradient
+            colors={[withAlpha(colors.background, 0), backingTop]}
+            style={styles.backingRise}
+            pointerEvents="none"
+          />
+          <View style={styles.heroFrame}>
+            <LinearGradient
+              colors={[backingTop, colors.background]}
+              style={styles.backingNumber}
+              pointerEvents="none"
+            />
+            <View style={styles.backingChips} pointerEvents="none" />
+            <Animated.View
+              key={session.currentIndex}
+              entering={heroEntering}
+              exiting={heroExiting}
+              style={styles.hero}
             >
-              {promptText(part, question.memberNo, verdict)}
-            </Text>
-            {counter ? <Text style={styles.counter}>{counter}</Text> : null}
+              <View style={styles.numberWrap}>
+                <Text
+                  style={styles.number}
+                  accessibilityLabel={`Shirt number ${question.memberNo}`}
+                >
+                  {question.memberNo}
+                </Text>
+                <EscuadraCorner state={corner} />
+              </View>
+              <View style={styles.slots}>
+                {slots.map((slot) => (
+                  <SlotChip key={slot.key} slot={slot} />
+                ))}
+              </View>
+            </Animated.View>
           </View>
 
-          <AnswerGrid
-            part={part}
-            gridKey={`${session.currentIndex}:${session.currentPartIndex}`}
-            answeredIndex={answeredIndex}
-            layout={answerLayout(part, compact)}
-            stagger={session.currentPartIndex === 0 ? durations.tileStagger : durations.partStagger}
-            onAnswer={(pickedIndex) => session.answerPart(pickedIndex)}
-          />
+          <View style={styles.ground}>
+            <View style={styles.promptRow}>
+              <Text
+                style={[
+                  compact ? typography.promptCompact : typography.prompt,
+                  { color: promptColor },
+                ]}
+                accessibilityRole="header"
+                accessibilityLiveRegion="polite"
+              >
+                {promptText(part, question.memberNo, verdict)}
+              </Text>
+              {counter ? <Text style={styles.counter}>{counter}</Text> : null}
+            </View>
 
-          <QuestionFooter
-            mode={footerMode(verdict, screenReader)}
-            compact={compact}
-            onNext={next}
-            credit={photo}
-          />
+            <AnswerGrid
+              part={part}
+              gridKey={`${session.currentIndex}:${session.currentPartIndex}`}
+              answeredIndex={answeredIndex}
+              layout={answerLayout(part, compact)}
+              stagger={
+                session.currentPartIndex === 0 ? durations.tileStagger : durations.partStagger
+              }
+              onAnswer={(pickedIndex) => session.answerPart(pickedIndex)}
+            />
+
+            <QuestionFooter
+              mode={footerMode(verdict, screenReader)}
+              compact={compact}
+              onNext={next}
+              credit={photo}
+            />
+          </View>
         </ScrollView>
       </View>
     </View>

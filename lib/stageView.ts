@@ -45,6 +45,17 @@ function veiled(hex: string, ink: string, alpha: number): string {
 }
 
 /**
+ * A `#rrggbb` colour at `alpha`, as `rgba(r,g,b,a)`: the hero's backing fades
+ * the palette's ground in from clear (`stage.heroBacking`). Alpha is rounded
+ * to two decimals. Anything but `#rrggbb` throws, as `relativeLuminance` does.
+ */
+export function withAlpha(hex: string, alpha: number): string {
+  if (!/^#[0-9a-f]{6}$/i.test(hex)) throw new Error(`withAlpha: expected #rrggbb, got "${hex}"`);
+  const [r, g, b] = [0, 1, 2].map((i) => channel(hex, i));
+  return `rgba(${r},${g},${b},${Math.round(alpha * 100) / 100})`;
+}
+
+/**
  * How strongly the no-photo stage's veil darkens the team's bands.
  *
  * The answer is the stronger of two things:
