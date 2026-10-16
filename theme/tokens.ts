@@ -110,6 +110,11 @@ export interface Palette {
   /** A player card's line under the name ("You picked …"). The card is dark in
    *  both themes (photo or bands under `cardGradient`), so this is shared. */
   cardLine: string;
+  // ---- 2.0 sharing (spec §4.1) ----
+  /** The share sheet's backdrop over the Results screen. */
+  scrim: string;
+  /** A link inside a preview (the share text's URL). */
+  link: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -145,6 +150,8 @@ const sharedRoles = {
   stageShimmer: 'rgba(255,255,255,0.26)',
   stageShimmerEdge: 'rgba(255,255,255,0)',
   cardLine: '#ffa19e',
+  // The share sheet's backdrop: the same ink in both themes.
+  scrim: 'rgba(0,0,0,0.55)',
 } as const;
 
 // The ramp sits higher than it did: the mark's trail squares, at 30% and 55%
@@ -188,6 +195,7 @@ const darkRoles = {
   nextBg: 'rgba(97,189,103,0.12)',
   nextText: '#9be0a0',
   nextFill: 'rgba(97,189,103,0.2)',
+  link: '#8fb4ff',
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -234,6 +242,7 @@ const lightRoles = {
   nextBg: 'rgba(47,143,62,0.08)',
   nextText: '#24702f',
   nextFill: 'rgba(47,143,62,0.14)',
+  link: '#2f56c6',
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -493,6 +502,53 @@ export const typography = {
   stripNumber: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 10.5 },
   // A name under a 10/10 circle.
   rosterName: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 11 },
+  // ---- 2.0 share picture (spec §4.2), at `sizes.shareCard`'s 360 pt;
+  // `ShareCard` scales them to the width it is drawn at ----
+  shareWord: { fontFamily: 'Inter-ExtraBold', fontSize: 20, letterSpacing: -0.4 },
+  shareEyebrow: {
+    fontFamily: 'Inter-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 12,
+    letterSpacing: 1.2,
+    textTransform: 'uppercase' as const,
+  },
+  shareScore: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 200,
+    lineHeight: 160,
+    letterSpacing: -4,
+  },
+  shareScoreTail: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 78, lineHeight: 62 },
+  shareTitle: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 30,
+    lineHeight: 30,
+    textTransform: 'uppercase' as const,
+  },
+  shareSquare: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 26, lineHeight: 26 },
+  shareQuestion: { fontFamily: 'Inter-Bold', fontSize: 16, lineHeight: 19 },
+  shareLink: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 11 },
+  // ---- 2.0 share sheet (spec §4.1) ----
+  sheetTitle: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 18,
+    textTransform: 'uppercase' as const,
+  },
+  switchLabel: { fontFamily: 'Inter-Bold', fontSize: 14 },
+  bubbleText: {
+    fontFamily: 'Inter-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 14.5,
+    lineHeight: 19.5,
+  },
+  bubbleScore: { fontFamily: 'Inter-Bold', fontSize: 14.5 },
+  bubbleLink: {
+    fontFamily: 'Inter-Medium',
+    fontWeight: '500' as const,
+    fontSize: 14,
+    textDecorationLine: 'underline' as const,
+  },
+  bubbleMeta: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 11 },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -545,6 +601,7 @@ export const durations = {
   segmentFill: 120, // one results-strip segment
   segmentStagger: 40, // between results-strip segments
   sheet: 240, // the share sheet sliding up
+  scrim: 200, // the share sheet's backdrop fading in
   partOut: 120, // the old part's tiles fading out
   partStagger: 20, // between tiles rising in for the next part
   tileStagger: 25, // between tiles rising in for the next question
@@ -798,7 +855,37 @@ export const sizes = {
   // The question's top bar, and the glass pills in it (score).
   topBar: { height: 52, pill: 32, pillMinWidth: 52 },
   slotChipHeight: 30,
+  // The share picture (spec §4.2), laid out at 360×640 pt; `ShareCard`
+  // scales every metric here to the width it is drawn at.
+  shareCard: {
+    width: 360,
+    height: 640,
+    band: 10,
+    pad: 28,
+    mark: 26,
+    cornerArm: 56,
+    cornerBar: 14,
+    columns: 5,
+    squareRadius: 10,
+    titleGap: 14, // score to title
+    gridGap: 26, // title to the squares
+  },
+  // The share sheet (spec §4.1).
+  shareSheet: {
+    handleWidth: 36,
+    handleHeight: 5,
+    close: 36,
+    switchHeight: 40,
+    previewHeight: 304,
+    previewWidth: 168,
+    bubbleMaxWidth: 300,
+    square: 12, // a result square in the text preview's bubble
+    squareGap: 3,
+  },
 } as const;
+
+// The share picture's captured size in pixels: a 9:16 story (spec §4.2).
+export const shareCapture = { width: 1080, height: 1920 } as const;
 
 export const iconSize = {
   markLarge: 18, // VerdictGlyph default size; AnswerTile's correct mark
@@ -836,6 +923,7 @@ export const radii = {
   card: 18, // player cards
   xl: 24,
   sheet: 28, // the share sheet's top corners
+  bubbleTail: 6, // the text preview bubble's tail corner
   pill: 999,
 } as const;
 

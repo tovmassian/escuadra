@@ -121,6 +121,18 @@ describe('text contrast', () => {
     });
   });
 
+  // The share text's URL, drawn in `link` inside the preview's bubble, which
+  // sits on `surfaceRaised`.
+  it('link reaches 4.5:1 on surfaceRaised, in both themes', () => {
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      expect(
+        contrastRatio(p.link, p.surfaceRaised),
+        `${name}.link on surfaceRaised`,
+      ).toBeGreaterThanOrEqual(4.5);
+    });
+  });
+
   // A player card's line sits at the foot of the card, on the gradient's last
   // stop, so it is held to AA there over the worst photo: pure white.
   it('cardLine reaches 4.5:1 under the last cardGradient stop over a white photo', () => {
@@ -247,7 +259,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(10);
+    expect(archivo).toHaveLength(15);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }
