@@ -374,12 +374,12 @@ export const stage = {
 } as const;
 
 export const typography = {
-  screenTitle: { fontFamily: 'Inter-Bold', fontWeight: '700' as const, fontSize: 28 },
+  screenTitle: { fontFamily: 'Inter-Bold', fontSize: 28 },
   sectionHead: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 20 },
   body: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 17 },
   // The "correct, unpicked" answer option after a wrong pick — same size as
   // `body`, bolder weight, so it visibly outweighs the rest without a new size.
-  bodyEmphasis: { fontFamily: 'Inter-Bold', fontWeight: '800' as const, fontSize: 17 },
+  bodyEmphasis: { fontFamily: 'Inter-Bold', fontSize: 17 },
   secondary: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 15 },
   secondarySmall: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 13 },
   statMono: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 15 },
@@ -391,7 +391,6 @@ export const typography = {
   // design source. The only place Inter 800 is used.
   wordmark: {
     fontFamily: 'Inter-ExtraBold',
-    fontWeight: '800' as const,
     fontSize: 23,
     letterSpacing: -0.46,
   },
@@ -401,7 +400,6 @@ export const typography = {
   // tuned for 23px and reads too tight at hero scale.
   wordmarkHero: {
     fontFamily: 'Inter-ExtraBold',
-    fontWeight: '800' as const,
     fontSize: 28,
     letterSpacing: -0.56,
   },
@@ -409,7 +407,7 @@ export const typography = {
   segmentLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 13 },
   filterLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },
   // Difficulty-ladder badge number.
-  badgeNumber: { fontFamily: 'IBMPlexMono-Bold', fontWeight: '700' as const, fontSize: 18 },
+  badgeNumber: { fontFamily: 'IBMPlexMono-Bold', fontSize: 18 },
   // Difficulty-row / card descriptions — one step down from `secondary`.
   descriptionSmall: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 12.5 },
   eyebrow: {
