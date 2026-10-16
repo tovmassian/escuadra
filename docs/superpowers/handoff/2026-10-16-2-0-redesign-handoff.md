@@ -151,6 +151,10 @@ None of these blocks 2.0.
 - **Results:**
   - On a 10/10, the actions rise before the last circles finish (spec §6 says "last").
   - `resultCopy` hard-codes level 3 as the last level rather than taking `hasNextLevel`.
+- **Sharing:**
+  - Closing the sheet during the brief capture (about 100–300 ms) leaves that one PNG in the cache until the next image share or the OS clears it.
+  - When a device can't share a file (`Sharing.isAvailableAsync()` is false), "Share image" does nothing and says nothing.
+  - The sheet has no exit animation. Spec §6 times only its entry.
 - **Telemetry (pre-existing on `main`):**
   - Retry and "Play level n+1" never emit `round.started`. Results calls `startRound`, and the question screen's guard then skips its own call.
 - **Unused tokens:**
