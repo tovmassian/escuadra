@@ -359,6 +359,19 @@ describe('Archivo display type', () => {
   });
 });
 
+describe('font weights', () => {
+  // Every family in theme/fonts.ts is one runtime-loaded file, so its name
+  // alone selects the cut. A fontWeight of 700 or more makes Android look up a
+  // bold variant that such a font does not have, and fall back to the system
+  // font (#117). 'bold' parses to NaN, so it fails too.
+  it('sets no fontWeight of 700 or more on any style', () => {
+    const bold = Object.entries(typography).filter(
+      ([, style]) => 'fontWeight' in style && !(Number(style.fontWeight) < 700),
+    );
+    expect(bold.map(([name]) => name)).toEqual([]);
+  });
+});
+
 describe('spotlight screen text contrast', () => {
   // Opaque text roles on the stage's ground, held to AA (4.5:1) against the
   // theme's background. Translucent roles composite at render time and are
