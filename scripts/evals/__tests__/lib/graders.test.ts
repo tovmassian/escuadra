@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest';
-import { gradersFor, type Expectation, type Triage } from '../../lib/graders.ts';
+import {
+  gradersFor,
+  STAYED_DRY_PATTERN,
+  type Expectation,
+  type Triage,
+} from '../../lib/graders.ts';
 import { fieldPattern, TRIAGE_TEMPLATE } from '../../lib/triage.ts';
 import type { YamlMap } from '../../lib/yaml.ts';
 
@@ -117,6 +122,12 @@ describe('stayed-dry', () => {
 
   it('is not added to a smoke case', () => {
     expect(stayedDry(gradersFor({ kind: 'smoke', graders: [] }))).toBeUndefined();
+  });
+
+  it('exports its pattern, for the smoke case to prove it on a real trace', () => {
+    expect(stayedDry(gradersFor({ kind: 'triage', decision: 'proceed' }))?.pattern).toBe(
+      STAYED_DRY_PATTERN,
+    );
   });
 
   it('catches a Bash call that changes branches, commits or worktrees', () => {

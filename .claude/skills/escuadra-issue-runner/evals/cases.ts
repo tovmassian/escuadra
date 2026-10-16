@@ -1,7 +1,7 @@
 // The escuadra-issue-runner eval suite as data (spec §7). Edit this, then run
 // `node scripts/evals/gen-cases.ts` to regenerate each case's folder.
 import type { EvalCase, Suite } from '../../../../scripts/evals/lib/cases.ts';
-import { GH_LOG, type Triage } from '../../../../scripts/evals/lib/graders.ts';
+import { GH_LOG, STAYED_DRY_PATTERN, type Triage } from '../../../../scripts/evals/lib/graders.ts';
 
 const PINS = {
   main: 'deb2e3b9c589bf2c5619fe3a7b82866ef9415ebf',
@@ -91,6 +91,15 @@ const SMOKE: EvalCase = {
         // deny a commit; it lands in the throwaway repo, which is what matters.
         pattern: '\\[main [0-9a-f]+\\] smoke',
         flags: 'i',
+        weight: 1,
+      },
+      // The commit above, seen by stayed-dry's pattern: a trace format that changes
+      // after an upgrade shows here rather than as dry runs that silently pass.
+      {
+        type: 'regex',
+        name: 'stayed-dry-fires',
+        target: 'trace',
+        pattern: STAYED_DRY_PATTERN,
         weight: 1,
       },
     ],

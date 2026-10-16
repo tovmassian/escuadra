@@ -82,11 +82,14 @@ const STATE_CHANGING = [
 // optional spaces. A quoted mention, as in grep "git commit", is not a command.
 const COMMAND_START = '(?:(?<="command":")|(?<=\\\\[nrt])|(?<=[;&|(]\\s*))';
 
+/** A Bash call in the trace that changes git state. The smoke case proves it on a real commit. */
+export const STAYED_DRY_PATTERN = `"name":"Bash","input":\\{"command":"(?:[^"\\\\]|\\\\.)*?${COMMAND_START}(?:[\\w./-]*/)?git(?:\\s+(?:-C|-c|--git-dir|--work-tree)(?:=|\\s+)\\S+)*\\s+(?:${STATE_CHANGING})`;
+
 const STAYED_DRY: YamlMap = {
   type: 'regex',
   name: 'stayed-dry',
   target: 'trace',
-  pattern: `"name":"Bash","input":\\{"command":"(?:[^"\\\\]|\\\\.)*?${COMMAND_START}(?:[\\w./-]*/)?git(?:\\s+(?:-C|-c|--git-dir|--work-tree)(?:=|\\s+)\\S+)*\\s+(?:${STATE_CHANGING})`,
+  pattern: STAYED_DRY_PATTERN,
   match: 'not_contains',
   weight: 2,
 };

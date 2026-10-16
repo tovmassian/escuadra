@@ -5,6 +5,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { describe, expect, it } from 'vitest';
 import { SUITE } from '../../../.claude/skills/escuadra-issue-runner/evals/cases.ts';
+import { STAYED_DRY_PATTERN } from '../lib/graders.ts';
 import { renderSuite, staleCaseDirs } from '../lib/suite.ts';
 
 const EVALS = fileURLToPath(
@@ -60,6 +61,18 @@ describe('escuadra-issue-runner suite', () => {
         'shipped-fix-from-main',
       ].sort(),
     );
+  });
+
+  it('proves on the smoke case that stayed-dry matches a real commit in the trace', () => {
+    const smoke = SUITE.cases.find((item) => item.name === 'sandbox-smoke');
+    if (smoke?.expect.kind !== 'smoke') throw new Error('no smoke case');
+    expect(smoke.expect.graders).toContainEqual({
+      type: 'regex',
+      name: 'stayed-dry-fires',
+      target: 'trace',
+      pattern: STAYED_DRY_PATTERN,
+      weight: 1,
+    });
   });
 
   it('keeps a case the skill must not fire on', () => {
