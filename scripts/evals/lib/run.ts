@@ -1,0 +1,71 @@
+// The arguments and environment for `claude plugin eval` (spec §9). The
+// defaults that matter are pinned by a test: the scaffold runs, the report
+// stays local, results land outside the repo, and the fake gh comes first on
+// PATH through a relative entry that resolves inside each run's sandbox.
+import { join } from 'node:path';
+
+export interface RunOptions {
+  /** The skill folder under test, relative to the repo root. */
+  target: string;
+  outDir: string;
+  tags: string[];
+  caseGlob?: string;
+  /** No tag or case filter: every case. */
+  full: boolean;
+  runs?: number;
+  model: string;
+  judgeModel: string;
+  ablation?: 'with-without' | 'none';
+  maxCostUsd: number;
+  concurrency?: number;
+  threshold: number;
+  /** Keep each run's directory, and so its trace. */
+  keep: boolean;
+}
+
+export const SANDBOX_BIN = '.git/sandbox/bin';
+
+export function evalArgs(o: RunOptions): string[] {
+  if (!o.full && o.tags.length === 0 && o.caseGlob === undefined) {
+    throw new Error(
+      'Pick a slice with --tag <tag> or --case <glob>, or pass --full for every case.',
+    );
+  }
+  const args = [
+    'plugin',
+    'eval',
+    o.target,
+    '--scaffold',
+    '--trust-plugin',
+    '--allow-tools',
+    'Bash',
+    '--no-publish',
+    '--model',
+    o.model,
+    '--judge-model',
+    o.judgeModel,
+    '--threshold',
+    String(o.threshold),
+    '--max-cost-usd',
+    String(o.maxCostUsd),
+    '--output-dir',
+    o.outDir,
+    '--report',
+    join(o.outDir, 'report.html'),
+    '--json',
+    join(o.outDir, 'result.json'),
+  ];
+  for (const tag of o.tags) args.push('--tag', tag);
+  if (o.caseGlob !== undefined) args.push('--case', o.caseGlob);
+  if (o.runs !== undefined) args.push('--runs', String(o.runs));
+  if (o.ablation !== undefined) args.push('--ablation', o.ablation);
+  if (o.concurrency !== undefined) args.push('--concurrency', String(o.concurrency));
+  if (o.keep) args.push('--keep-temp');
+  return args;
+}
+
+export function evalEnv<E extends Readonly<Record<string, string | undefined>>>(
+  env: E,
+): E & { PATH: string } {
+  return { ...env, PATH: `${SANDBOX_BIN}:${env.PATH ?? ''}` };
+}
