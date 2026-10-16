@@ -198,7 +198,7 @@ export default function Results() {
     try {
       const outcome = await Share.share({ message });
       if (outcome.action === Share.sharedAction) {
-        track('result.shared', { level, score: score.correct });
+        track('result.shared', { level, score: score.correct, format: 'text' });
       }
     } catch {
       // The share sheet failing to open is not worth interrupting the results.

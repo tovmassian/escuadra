@@ -194,8 +194,9 @@ export default function About() {
             The statistics are: the app was opened; a round started, with whether the team is a club
             or a nation and the difficulty level; a round finished, with the same two details, the
             score, and whether it was a la escuadra; the Study screen was opened, with whether the
-            team is a club or a nation; a result was shared, with the level and score. They never
-            include team names, player names, your answers or anything you type.
+            team is a club or a nation; a result was shared, with the level, the score and whether
+            it was shared as a picture or as text. They never include team names, player names, your
+            answers or anything you type.
           </Text>
 
           <Text style={styles.subHeading}>App updates</Text>
