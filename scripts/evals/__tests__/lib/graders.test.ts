@@ -211,6 +211,10 @@ describe('fieldPattern', () => {
     );
   });
 
+  it('lets a value end a sentence', () => {
+    expect(new RegExp(fieldPattern('decision', 'ask'), 'm').test('decision: ask.')).toBe(true);
+  });
+
   it('matches the template it is written against', () => {
     expect(TRIAGE_TEMPLATE).toMatch(/^```triage\n/);
     expect(TRIAGE_TEMPLATE).toMatch(/\n```$/);
@@ -252,6 +256,7 @@ describe('anchoring and boundaries', () => {
       passes(existing, withExisting('existing: open PR #9101 (fix/9008-progress-bar-last-step)')),
     ).toBe(true);
     expect(passes(existing, withExisting('existing: PR #91010'))).toBe(false);
+    expect(passes(existing, withExisting('existing: open PR #9101.'))).toBe(true);
   });
 
   it('branch rejects a slash after the slug', () => {

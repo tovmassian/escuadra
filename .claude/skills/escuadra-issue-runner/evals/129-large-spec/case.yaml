@@ -48,17 +48,17 @@ runs: 3
 graders:
   - type: 'regex'
     name: 'decision'
-    pattern: "^decision:[ \\t]*ask(?![\\w/.-])"
+    pattern: "^decision:[ \\t]*ask(?![\\w/-]|\\.[\\w/-])"
     flags: 'm'
     weight: 3
   - type: 'regex'
     name: 'workspace'
-    pattern: "^workspace:[ \\t]*worktree(?![\\w/.-])"
+    pattern: "^workspace:[ \\t]*worktree(?![\\w/-]|\\.[\\w/-])"
     flags: 'm'
     weight: 2
   - type: 'regex'
     name: 'base'
-    pattern: "^base:[ \\t]*main(?![\\w/.-])"
+    pattern: "^base:[ \\t]*main(?![\\w/-]|\\.[\\w/-])"
     flags: 'm'
     weight: 2
   - type: 'regex'
@@ -73,7 +73,7 @@ graders:
     weight: 1
   - type: 'regex'
     name: 'execution'
-    pattern: "^execution:[ \\t]*ask(?![\\w/.-])"
+    pattern: "^execution:[ \\t]*ask(?![\\w/-]|\\.[\\w/-])"
     flags: 'm'
     weight: 1
   - type: 'regex'

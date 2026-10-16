@@ -142,7 +142,8 @@ function triageGraders(t: Triage): YamlMap[] {
   }
   if (t.existing !== undefined && t.existing.length > 0) {
     const options = t.existing.map(escapeRegExp).join('|');
-    graders.push(line('existing', `^existing:.*(?<![\\w/#.-])(?:${options})(?![\\w/.-])`, 1));
+    const pattern = `^existing:.*(?<![\\w/#.-])(?:${options})(?![\\w/-]|\\.[\\w/-])`;
+    graders.push(line('existing', pattern, 1));
   }
   if (t.questions) {
     const criteria = `The final message ends with a triage block whose decision is "ask". Among its questions for the owner, ${t.questions}`;

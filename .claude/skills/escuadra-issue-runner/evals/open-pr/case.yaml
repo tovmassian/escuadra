@@ -47,32 +47,32 @@ runs: 3
 graders:
   - type: 'regex'
     name: 'decision'
-    pattern: "^decision:[ \\t]*proceed(?![\\w/.-])"
+    pattern: "^decision:[ \\t]*proceed(?![\\w/-]|\\.[\\w/-])"
     flags: 'm'
     weight: 3
   - type: 'regex'
     name: 'workspace'
-    pattern: "^workspace:[ \\t]*in-place(?![\\w/.-])"
+    pattern: "^workspace:[ \\t]*in-place(?![\\w/-]|\\.[\\w/-])"
     flags: 'm'
     weight: 2
   - type: 'regex'
     name: 'base'
-    pattern: "^base:[ \\t]*main(?![\\w/.-])"
+    pattern: "^base:[ \\t]*main(?![\\w/-]|\\.[\\w/-])"
     flags: 'm'
     weight: 2
   - type: 'regex'
     name: 'branch'
-    pattern: "^branch:[ \\t]*fix\\/9008-progress-bar-last-step(?![\\w/.-])"
+    pattern: "^branch:[ \\t]*fix\\/9008-progress-bar-last-step(?![\\w/-]|\\.[\\w/-])"
     flags: 'm'
     weight: 1
   - type: 'regex'
     name: 'execution'
-    pattern: "^execution:[ \\t]*n\\/a(?![\\w/.-])"
+    pattern: "^execution:[ \\t]*n\\/a(?![\\w/-]|\\.[\\w/-])"
     flags: 'm'
     weight: 1
   - type: 'regex'
     name: 'existing'
-    pattern: "^existing:.*(?<![\\w/#.-])(?:#9101|fix\\/9008-progress-bar-last-step)(?![\\w/.-])"
+    pattern: "^existing:.*(?<![\\w/#.-])(?:#9101|fix\\/9008-progress-bar-last-step)(?![\\w/-]|\\.[\\w/-])"
     flags: 'm'
     weight: 1
   - type: 'regex'

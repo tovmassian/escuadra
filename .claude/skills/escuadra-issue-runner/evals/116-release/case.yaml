@@ -46,7 +46,7 @@ runs: 3
 graders:
   - type: 'regex'
     name: 'decision'
-    pattern: "^decision:[ \\t]*ask(?![\\w/.-])"
+    pattern: "^decision:[ \\t]*ask(?![\\w/-]|\\.[\\w/-])"
     flags: 'm'
     weight: 3
   - type: 'regex'

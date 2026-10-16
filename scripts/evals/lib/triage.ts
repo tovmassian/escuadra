@@ -21,7 +21,10 @@ export function escapeRegExp(text: string): string {
   return text.replace(/[.*+?^${}()|[\]\\/]/g, '\\$&');
 }
 
-/** `<field>: <value>` at a line start (flag m), where the value is not the start of a longer one. */
+/**
+ * `<field>: <value>` at a line start (flag m), where the value is not the start of a longer one.
+ * A `.` may follow it, as at the end of a sentence, unless more of a value follows the `.`.
+ */
 export function fieldPattern(field: string, value: string): string {
-  return `^${escapeRegExp(field)}:[ \\t]*${escapeRegExp(value)}(?![\\w/.-])`;
+  return `^${escapeRegExp(field)}:[ \\t]*${escapeRegExp(value)}(?![\\w/-]|\\.[\\w/-])`;
 }
