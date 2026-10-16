@@ -55,7 +55,9 @@ Each one has a cheap reversal.
 - **No icon library.** The ×, the flame, share and retry are drawn from Views. The share sheet's Image/Text switch drops the board's two icons; the labels carry it.
 - **The share picture is always dark** (`ShareCard` reads `palettes.dark`), as on the board, so it looks the same whichever theme it is shared from. CLAUDE.md guardrail 5 names the exception.
 - **The share sheet stays open after a share.** Expo can't tell a sent picture from a cancelled one, and the other format is one tap away.
-- **Image shares are counted when `shareAsync` resolves** (spec §10.3), so `result.shared` with `format: 'image'` counts share menus opened and closed, not pictures sent. Text shares are counted only when the OS reports them sent.
+- **Image shares are counted when `shareAsync` resolves** (spec §10.3), so `result.shared` with `format: 'image'` counts share menus opened and closed, not pictures sent. Text shares are counted when the OS reports them sent, which iOS does honestly. On Android, React Native's `Share.share` reports every opened chooser as sent, so there both formats count menus opened.
+- **The share picture is captured at its native size.** The off-screen copy is laid out at `1080 / PixelRatio` pt, and `captureRef` gets no `width` or `height`. Those options are points on iOS but raw pixels on Android, so spec §4.2's original snippet would have given about 411×731 px on Android. The spec snippet is corrected.
+- **The captured PNG is released when the sheet closes** (`releaseShareImage`), so About's "does not … keep" holds. It is not released straight after `shareAsync`, because an Android target can read the file after the chooser returns.
 - **About gives sharing its own "Sharing" heading.** Under "Player photos" it would read as being about photos.
 - **The `expo-sharing` config plugin is left out.** `npx expo install` adds it, but it only sets up receiving shares (`withShareExtension`, off by default); outgoing shares need nothing in `app.json`.
 - **`fontScaleCap.display` (1.2)** caps the shirt number and the prompt at large text sizes; the boxes use `minHeight` so they can grow.
@@ -83,7 +85,7 @@ Web can't show any of this. It runs on simulators or devices.
 - **Android haptics:** the native constants on API ≥ 30/34, and the vibrator below.
 - **Offline:** team colours everywhere (stage, cards, circles), and nothing errors.
 - **Android:**
-  - the shirt number's line height (119 at 152 pt) does not clip its digits; the same goes for Results' `scoreDisplay` (120 at 150 pt), `scoreTail` and `cardNumber`;
+  - the shirt number's line height (119 at 152 pt) does not clip its digits; the same goes for Results' `scoreDisplay` (120 at 150 pt), `scoreTail` and `cardNumber`, and for the share picture's `shareScore` (160 at 200 pt), `shareScoreTail` (62 at 78) and `shareSquare` (26 at 26). The picture is where an Android clip would show;
   - the bold Inter/Plex styles, for #117.
 - **Results on native:**
   - the score sits on the "/10" baseline and the corner sits where the web capture puts it;
@@ -96,8 +98,8 @@ Web can't show any of this. It runs on simulators or devices.
   - the circle pop;
   - the share sheet's scrim fade and slide up, with no overshoot.
 - **Sharing (spec §13):**
-  - "Share image" opens the share menu on both platforms with a 1,080×1,920 PNG. Check the saved file's size.
-  - The picture is not blank. The captured card is a second copy laid out off screen (`left: -720`), and `react-native-view-shot` does not document off-screen capture. If it comes out blank, move the copy on screen under the sheet.
+  - "Share image" opens the share menu on both platforms with a 1,080×1,920 PNG. Check the file's size on a 2× iPhone and on an Android phone that isn't 3×, since those are where a scale mistake shows.
+  - The picture is not blank. The captured card is a second copy laid out off screen (left of the window by twice its width), and `react-native-view-shot` does not document off-screen capture. If it comes out blank on iOS, try `captureRef`'s `useRenderInContext: true` first; the card has no images or gradients, so that suits it. Failing that, move the copy on screen under the sheet.
   - Its fonts are Archivo, Inter and Plex, not the system font, on Android (#117).
   - "Share text" is unchanged from 1.x.
   - Android back and a tap on the scrim close the sheet.
@@ -152,7 +154,7 @@ None of these blocks 2.0.
 - **Telemetry (pre-existing on `main`):**
   - Retry and "Play level n+1" never emit `round.started`. Results calls `startRound`, and the question screen's guard then skips its own call.
 - **Unused tokens:**
-  - `elevation.e2` and `opacity.dimmed` (only `VerdictGlyph` uses it).
+  - `opacity.dimmed` (only `VerdictGlyph` uses it).
 - **Docs and fonts:**
   - The Archivo credit line on About sits below the captured viewport, so `design/screens` never shows it.
   - The static Archivo cuts keep a small `STAT` table.
