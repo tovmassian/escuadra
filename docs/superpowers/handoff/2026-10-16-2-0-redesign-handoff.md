@@ -10,15 +10,15 @@
 
 ## Where it stands
 
-| Issue | What                                                      | State                                                                                                                                 |
-| ----- | --------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| #111  | Tokens, Archivo, `textMuted` contrast                     | merged, [#118](https://github.com/tovmassian/escuadra/pull/118)                                                                       |
-| #112  | 960 px photos, original size in `PhotoCredit`             | merged, [#119](https://github.com/tovmassian/escuadra/pull/119)                                                                       |
-| #113  | The Spotlight question screen                             | merged: logic [#120](https://github.com/tovmassian/escuadra/pull/120), screen [#121](https://github.com/tovmassian/escuadra/pull/121) |
-| #114  | Results and sharing                                       | merged: Results [#123](https://github.com/tovmassian/escuadra/pull/123), sharing (#114 part 2, `feat/114-sharing`)                    |
-| #115  | Study                                                     | **Not started, by the owner's instruction (2026-10-16).** Its notes are below.                                                        |
-| #116  | Docs pass, store assets, version, release branch          | Not started. Its notes are below.                                                                                                     |
-| #117  | Android: bold Inter/Plex styles probably render in Roboto | Open. Found in #111's review; needs a device check.                                                                                   |
+| Issue | What                                                      | State                                                                                                                                    |
+| ----- | --------------------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------- |
+| #111  | Tokens, Archivo, `textMuted` contrast                     | merged, [#118](https://github.com/tovmassian/escuadra/pull/118)                                                                          |
+| #112  | 960 px photos, original size in `PhotoCredit`             | merged, [#119](https://github.com/tovmassian/escuadra/pull/119)                                                                          |
+| #113  | The Spotlight question screen                             | merged: logic [#120](https://github.com/tovmassian/escuadra/pull/120), screen [#121](https://github.com/tovmassian/escuadra/pull/121)    |
+| #114  | Results and sharing                                       | merged: Results [#123](https://github.com/tovmassian/escuadra/pull/123), sharing [#127](https://github.com/tovmassian/escuadra/pull/127) |
+| #115  | Study                                                     | **Not started, by the owner's instruction (2026-10-16).** Its notes are below.                                                           |
+| #116  | Docs pass, store assets, version, release branch          | Not started. Its notes are below.                                                                                                        |
+| #117  | Android: bold Inter/Plex styles probably render in Roboto | Open. Found in #111's review; needs a device check.                                                                                      |
 
 `main` now carries most of 2.0. Whichever release branch is cut from `main` next (the photo build, #60, or 2.0.0) ships it. #114 part 2 moved the fingerprint: it adds `react-native-view-shot` and `expo-sharing`. So none of 2.0 can reach a 1.x binary over the air.
 
