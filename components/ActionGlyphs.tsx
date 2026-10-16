@@ -42,10 +42,12 @@ export function ShareGlyph({ color }: { color: string }) {
       borderBottomLeftRadius: w * 2,
       borderBottomRightRadius: w * 2,
     },
+    // Starts a stroke below the top, inside the head's apex, so its square
+    // end never pokes out past the point.
     shaft: {
       position: 'absolute',
       left: s / 2 - w / 2,
-      top: 0,
+      top: w,
       width: w,
       height: s * 0.68,
       backgroundColor: color,
@@ -71,10 +73,15 @@ export function ShareGlyph({ color }: { color: string }) {
   );
 }
 
-/** Retry: an open ring with an arrowhead. */
+/** Retry: a ring turning anticlockwise, open on the left, with an arrowhead
+ *  on its upper end pointing into the gap. */
 export function RetryGlyph({ color }: { color: string }) {
   const s = iconSize.retryGlyph;
   const w = borderWidths.thick + borderWidths.hairline / 2;
+  // The ring's centre line ends at 10:30, where the transparent side's edge
+  // falls once the ring is turned a quarter: `end` is that point's x and y.
+  const end = s / 2 - (s / 2 - w / 2) * Math.SQRT1_2;
+  const head = s * 0.3;
   const styles = StyleSheet.create({
     box: { width: s, height: s },
     ring: {
@@ -83,16 +90,18 @@ export function RetryGlyph({ color }: { color: string }) {
       borderWidth: w,
       borderColor: color,
       borderTopColor: 'transparent',
-      transform: [{ rotate: '-45deg' }],
+      transform: [{ rotate: '-90deg' }],
     },
+    // Two strokes meeting at the ring's end, the corner pointing down-left
+    // along the turn and the arms running back up and right.
     head: {
       position: 'absolute',
-      left: 0,
-      top: 0,
-      width: s * 0.36,
-      height: s * 0.36,
-      borderRightWidth: w,
-      borderTopWidth: w,
+      left: end - w / 2,
+      top: end + w / 2 - head,
+      width: head,
+      height: head,
+      borderLeftWidth: w,
+      borderBottomWidth: w,
       borderColor: color,
     },
   });

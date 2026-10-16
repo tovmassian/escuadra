@@ -277,7 +277,12 @@ describe('spotlight motion', () => {
   });
 
   it('keeps scales near 1 and distances small', () => {
-    for (const key of ['pressScale', 'streakOutScale', 'ballStartScale'] as const) {
+    for (const key of [
+      'pressScale',
+      'streakOutScale',
+      'ballStartScale',
+      'rosterInScale',
+    ] as const) {
       expect(spotlightMotion[key], key).toBeLessThan(1);
     }
     for (const key of ['popScale', 'answerPopScale', 'pulseScale', 'streakPopScale'] as const) {

@@ -15,6 +15,9 @@ export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
 
   const styles = StyleSheet.create({
     root: { marginTop: spacing.md, gap: spacing.xs },
+    // Centred under the actions, open or closed; the list below keeps the
+    // full width.
+    button: { alignSelf: 'center' },
     toggle: { ...typography.captionEyebrow, color: colors.textMuted },
     list: { maxHeight: sizes.photoCreditsMaxHeight },
     listContent: { gap: spacing.xs },
@@ -30,9 +33,10 @@ export function PhotoCredits({ rows }: { rows: PhotoCreditRow[] }) {
         accessibilityRole="button"
         accessibilityState={{ expanded: open }}
         hitSlop={8}
+        style={styles.button}
       >
         <Text style={styles.toggle}>
-          {open ? 'Hide' : 'Show'} photo credits · {rows.length}
+          {open ? 'Hide photo credits' : 'Photo credits'} · {rows.length}
         </Text>
       </Pressable>
       {open && (

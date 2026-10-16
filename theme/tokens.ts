@@ -338,8 +338,6 @@ export const stage = {
 } as const;
 
 export const typography = {
-  // Results screen's giant score readout.
-  scoreHero: { fontFamily: 'IBMPlexMono-Bold', fontWeight: '700' as const, fontSize: 56 },
   screenTitle: { fontFamily: 'Inter-Bold', fontWeight: '700' as const, fontSize: 28 },
   sectionHead: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 20 },
   body: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 17 },
@@ -524,7 +522,7 @@ export const opacity = {
 // answer before the round moves on by itself (spec §2.4; a tap skips it, and
 // it never runs with a screen reader on). The round-over celebration and the
 // home lockup are the one carve-out from the rule; see
-// `strikeTiming`/`celebrationCascade` below.
+// `strikeTiming`/`resultsTimeline` below.
 export const durations = {
   press: 100,
   reveal: 180,
@@ -557,6 +555,8 @@ export const spotlightMotion = {
   streakPopScale: 1.15,
   streakOutScale: 0.8,
   ballStartScale: 0.6,
+  // A 10/10's player circles on Results grow from this as they pop in.
+  rosterInScale: 0.8,
   shake: 6,
   rise: 8,
   numberRise: 12,
@@ -591,12 +591,13 @@ export const celebrationEasingCurves = {
 // Preview knobs for a longer, more exaggerated take on the celebration
 // motion below, without hand-editing every value. 1 = the shipped, reviewed
 // timing/distances (spec §6). `MOTION_TIME_SCALE` stretches every duration and
-// delay in `strikeTiming`/`celebrationCascade`/`homeCascade` uniformly (so the
-// whole cascade's rhythm holds, just slower); `MOTION_DISTANCE_SCALE` is
-// read directly by `EscuadraStrike` and `AnimatedScore` to exaggerate the
-// ball's travel/overshoot, the frame's recoil, the trail's catch-up
-// distance and the score's pop-in — set both back to 1 to restore exactly
-// what shipped, nothing else needs to change.
+// delay in `strikeTiming`, `celebrationRiseDuration`, `resultsTimeline` (bar
+// its strip fields, which are the mid-round `durations`) and `homeCascade`
+// uniformly (so the whole cascade's rhythm holds, just slower);
+// `MOTION_DISTANCE_SCALE` is read directly by `EscuadraStrike` to exaggerate
+// the ball's travel/overshoot, the frame's recoil and the trail's catch-up
+// distance — set both back to 1 to restore exactly what shipped, nothing else
+// needs to change.
 export const MOTION_TIME_SCALE = 1;
 export const MOTION_DISTANCE_SCALE = 1.5;
 
@@ -653,55 +654,8 @@ export const strikeTiming: Record<'excellent' | 'passed' | 'home', StrikeTiming>
   },
 };
 
-// One rise-in duration shared by every title/subtitle/missed-card/button in
-// the cascade below — only the per-element delay varies by tier, which is
-// what actually shapes the cascade's rhythm.
+// Home's continue card and buttons rise in over this (app/index.tsx).
 export const celebrationRiseDuration = t(220);
-
-export interface CelebrationCascade {
-  score: { delay: number; duration: number; pop: boolean };
-  title: number;
-  subtitle: number;
-  missedLabel?: number;
-  missedBase?: number;
-  missedStep?: number;
-  actionsBase: number;
-  actionsStep: number;
-}
-
-// Text/list/button cascade once the strike lands, keyed by results-screen
-// tier. `score.pop` is true only for `excellent`: the flawless score has its
-// own pop-in the other two tiers skip (their digits still count up, just
-// without an entrance transform on the readout itself).
-export const celebrationCascade: Record<'excellent' | 'passed' | 'fail', CelebrationCascade> = {
-  excellent: {
-    score: { delay: t(420), duration: t(260), pop: true },
-    title: t(540),
-    subtitle: t(620),
-    actionsBase: t(660),
-    actionsStep: t(40),
-  },
-  passed: {
-    score: { delay: t(160), duration: t(380), pop: false },
-    title: t(380),
-    subtitle: t(440),
-    missedLabel: t(460),
-    missedBase: t(500),
-    missedStep: t(40),
-    actionsBase: t(580),
-    actionsStep: t(40),
-  },
-  fail: {
-    score: { delay: t(120), duration: t(420), pop: false },
-    title: 0,
-    subtitle: t(300),
-    missedLabel: t(320),
-    missedBase: t(360),
-    missedStep: t(40),
-    actionsBase: t(520),
-    actionsStep: t(40),
-  },
-};
 
 // The Results screen's timeline (spec §6), at MOTION_TIME_SCALE 1. It is the
 // celebration carve-out, so it may run past the mid-round 300 ms budget.
@@ -784,15 +738,11 @@ export const sizes = {
   // Home's centred lockup. The mark only reads its right angle at this size,
   // which is why the trail is shown here and nowhere else.
   wordmarkMarkHero: 86,
-  // The a la escuadra celebration mark. Larger than Home's lockup because on
-  // this screen the mark is the entire content.
-  celebrationMark: 120,
   // A 10/10's player circles.
   rosterAvatar: 54,
   // Team-picker rows carry a progress sub-line, so they need a second line of
   // height.
   rowHeightTall: 64,
-  missedNumberWidth: 24,
   // The theme toggle. `inset` is the gap between track edge and thumb, so the
   // thumb's travel is trackWidth - thumb - inset * 2.
   themeToggle: { trackWidth: 52, trackHeight: 30, thumb: 24, inset: 2 },

@@ -1,5 +1,5 @@
 import { beforeEach, describe, expect, it } from 'vitest';
-import { firstWrongPart, selectMissed, selectScore, useSession } from './session';
+import { selectMissed, selectScore, useSession } from './session';
 import { slotStates, type Slot } from '@/lib/roundView';
 import type { Player, RosterEntry, Squad } from '@/types/squad';
 
@@ -185,7 +185,7 @@ describe('session store', () => {
     expect(score.correct).toBe(1);
   });
 
-  it('selectMissed and firstWrongPart surface the wrong pick', () => {
+  it('selectMissed surfaces the wrong pick', () => {
     useSession.getState().startRound(squad, roster(), 1);
     const q = useSession.getState().questions[0];
     if (!q) throw new Error('no question');
@@ -197,8 +197,7 @@ describe('session store', () => {
 
     const missed = selectMissed(useSession.getState().results);
     expect(missed).toHaveLength(1);
-    const wrong = firstWrongPart(missed[0]!);
-    expect(wrong?.pickedLabel).toBe(namePart.options[wrongIndex]);
+    expect(missed[0]?.parts[0]?.pickedIndex).toBe(wrongIndex);
   });
 
   it('reset clears the round', () => {

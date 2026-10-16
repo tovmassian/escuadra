@@ -54,7 +54,7 @@ deliberate constraint is distinguishable from an accident.
    or while it loads, the team's colours and the number show. Each photo's
    credit — who to credit, licence, "cropped" — sits in muted text under the
    action button, always visible; the results screen lists every credit behind
-   "Show photo credits".
+   "Photo credits · N".
 2. **No club crests, badges, logos or shield shapes. Ever.** Trademark
    exposure. Clubs are identified by text and colour, drawn as banded
    rectangles — the same marker shape used for national flags. National
@@ -81,7 +81,10 @@ deliberate constraint is distinguishable from an accident.
    correct only when every part is right. The progress bar counts questions,
    not parts, so all three levels read 1..10.
 10. **Results screen CTAs differ** by pass/fail and by whether the level
-    ceiling has been reached.
+    ceiling has been reached. A fail's main button retries; a pass plays the
+    next level, or at level 3 chooses a different team, with retry as an icon.
+    Study this squad is always the second action, and the close button always
+    chooses a different team.
 
 ## Screens
 
@@ -96,7 +99,7 @@ flawless — see below). Route, file, and what it does.
 | 4   | `/team/[squadId]/difficulty`      | `app/team/[squadId]/difficulty.tsx`      | The difficulty ladder in level order: the focused level expanded into a card with its description and a Play button, the other levels compact (locked ones stating their unlock condition), and Study, an outline button until level 1 is cleared and a text link after. |
 | 5   | `/team/[squadId]/study`           | `app/team/[squadId]/study.tsx`           | Browsable squad list — number, name, position, club or nationality. With a `players` param it narrows to only those players, hides the position filters, and titles itself "Missed Players".                                                                             |
 | 6   | `/play/[squadId]/[level]`         | `app/play/[squadId]/[level]/index.tsx`   | A question. The photo (or the team's colours) fills the top; the shirt number with the escuadra corner, the slot chips that spell out the player, the prompt, a grid of answers and the footer sit in the thumb zone. A right answer moves on by itself; a miss waits.   |
-| 7   | `/play/[squadId]/[level]/results` | `app/play/[squadId]/[level]/results.tsx` | Score, the players missed, and pass/fail-aware CTAs — `Study These N` is primary on a failed round, filtering Study to the misses, and suppresses `Study This Squad`. A 10/10 round instead renders the flawless "a la escuadra" state, no missed list.                  |
+| 7   | `/play/[squadId]/[level]/results` | `app/play/[squadId]/[level]/results.tsx` | The round's result: close (a different team), the team and level, share; the score with the escuadra corner, the tier's title and verdict, the round strip; the missed players as snapping photo cards, or a 10/10's ten in circles; the actions.                        |
 
 ## Captures
 
@@ -148,12 +151,19 @@ questions, not one screen twice: `squad.kind` decides what the third part asks.
 **club** squad (Barcelona), so it asks their **nationality**
 (`NATIONALITY?`) — and only nationality options carry flag images.
 
-The three results captures are the three tiers `resultTier` distinguishes.
-`09-results.png` is a failed round — the missed list is primary and
-`Study These N` is the first CTA. `09-results-passed.png` is a cleared round
-that still missed a player, so `Play Level 2` takes over as primary while the
-missed list stays. `09-results-flawless.png` is the 10/10 **a la escuadra**
-state: green mark, green score, no missed list at all.
+The three results captures are the three tiers `resultTier` distinguishes, all
+from one Spain level-1 round. `09-results.png` is a failed round, 2/10: the
+corner is two grey bars, the title reads `THESE ARE THE ONES TO LEARN` over
+"Score 8/10 to unlock level 2.", eight red segments, and `MISSED · 8 PLAYERS`
+with "Swipe for all" over a row of photo cards ("You picked Gavi"), the third
+cut off at the edge. Its main button is `RETRY THIS ROUND`, with
+`Study this squad` beneath and no retry icon. `09-results-passed.png` is a
+cleared round that still missed one player, 9/10: the strike in accent with a
+green ball, `LEVEL 1 CLEARED`, one card, and `PLAY LEVEL 2` as the main button,
+with the retry icon beside `Study this squad`. `09-results-flawless.png` is the
+10/10 **a la escuadra** state: a green score and title, the green strike with
+its trail, `ALL 10 · NOTHING MISSED` over the ten players in green-ringed
+circles, and the same actions as a pass.
 
 The missed-players-filtered Study view has no capture yet.
 
