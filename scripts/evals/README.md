@@ -13,6 +13,8 @@ Every run draws on your Claude plan's usage limits. Start small:
 | One case                                                             | `node scripts/evals/run.ts --case 'open-pr'`                               |
 | Every graded case (not the smoke case), before a skill change merges | `node scripts/evals/run.ts --full`                                         |
 
+Use `--full` on its own; combined with `--tag`, which cases run depends on how the runner combines tags.
+
 The defaults are a Sonnet agent, an Opus judge, a pass threshold of 0.9 per case, a $15 ceiling (estimated at API rates) and both arms, the eval runner's default (`--ablation with-without`). The results directory is printed first, and holds `report.html` and `result.json`. Nothing is written to the repo, and nothing is published.
 
 To see why a run failed, add `--keep`. The run's directory is kept, and its `out/trace.jsonl` is readable as it is; only its `sealed/` folder needs `chmod 700` before you can look inside. Never run git inside the run's directory.

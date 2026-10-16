@@ -11,8 +11,8 @@ it.
 ### RED baseline (2026-10-16)
 
 Run on 2026-10-16 with Claude Code 2.1.278: `--full --ablation none --runs 1`, a Sonnet
-agent, an Opus judge and the stub skill, $7.34 estimated, 11 minutes. Before Ruling 20,
-`--full` still included the smoke case.
+agent, an Opus judge and the stub skill, $7.34 estimated, 11 minutes. At the time of the run, `--full` still
+included the smoke case; it no longer does.
 
 | Case                      | Score | Failed graders                                           |
 | ------------------------- | ----- | -------------------------------------------------------- |
