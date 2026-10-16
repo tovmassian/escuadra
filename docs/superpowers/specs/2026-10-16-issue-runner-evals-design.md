@@ -497,8 +497,8 @@ of it.
    git's transport helpers; §5.1's wrapper and config fix both. A relative
    `PATH` entry finds the wrappers.
 6. **Cost:** `cost_usd` is an API-rate estimate on a claude.ai login. A run's
-   trace exists only with `--keep-temp`; the kept directory is sealed
-   (`chmod 700` it to look, and never run git inside it).
+   trace exists only with `--keep-temp`; the kept directory and its `sealed/`
+   folder are sealed (`chmod 700` both to look, and never run git inside them).
 7. **`allowed_tools` does not deny Bash.** The runner's sandbox approves every
    Bash command, so `git commit` succeeded in the smoke case. A case's tool
    list is a backstop for non-Bash tools only; `stayed-dry` grades whether a
