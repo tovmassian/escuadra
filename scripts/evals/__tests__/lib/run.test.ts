@@ -8,7 +8,7 @@ const BASE: RunOptions = {
   model: 'sonnet',
   judgeModel: 'opus',
   maxCostUsd: 15,
-  threshold: 0.8,
+  threshold: 0.9,
   keep: false,
   full: false,
 };
@@ -29,7 +29,7 @@ describe('evalArgs', () => {
       '--judge-model',
       'opus',
       '--threshold',
-      '0.8',
+      '0.9',
       '--max-cost-usd',
       '15',
       '--output-dir',
@@ -87,6 +87,17 @@ describe('parseNumber', () => {
 
   it('names the flag in the message', () => {
     expect(() => parseNumber('max-cost-usd', 'abc')).toThrow(/--max-cost-usd/);
+  });
+
+  it('keeps a number within an upper bound, the bound included', () => {
+    expect(parseNumber('threshold', '0.9', false, 1)).toBe(0.9);
+    expect(parseNumber('threshold', '1', false, 1)).toBe(1);
+  });
+
+  it('refuses a number above the bound, naming the flag and the bound', () => {
+    expect(() => parseNumber('threshold', '1.5', false, 1)).toThrow(
+      /--threshold must be a number above 0 and at most 1/,
+    );
   });
 });
 

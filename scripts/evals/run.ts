@@ -22,7 +22,7 @@ const { values } = parseArgs({
     ablation: { type: 'string' },
     'max-cost-usd': { type: 'string', default: '15' },
     concurrency: { type: 'string' },
-    threshold: { type: 'string', default: '0.8' },
+    threshold: { type: 'string', default: '0.9' },
     keep: { type: 'boolean', default: false },
   },
 });
@@ -47,7 +47,7 @@ const args = evalArgs({
     values.concurrency === undefined
       ? undefined
       : parseNumber('concurrency', values.concurrency, true),
-  threshold: parseNumber('threshold', values.threshold),
+  threshold: parseNumber('threshold', values.threshold, false, 1),
   keep: values.keep,
 });
 process.stdout.write(`Results and report: ${outDir}\n`);

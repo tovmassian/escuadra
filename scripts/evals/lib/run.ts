@@ -64,11 +64,22 @@ export function evalArgs(o: RunOptions): string[] {
   return args;
 }
 
-/** A flag's number, or an error naming the flag: finite and above zero, and whole when `integer`. */
-export function parseNumber(flag: string, value: string, integer = false): number {
+/**
+ * A flag's number, or an error naming the flag: finite, above zero and at most `max`, and whole
+ * when `integer`.
+ */
+export function parseNumber(flag: string, value: string, integer = false, max = Infinity): number {
   const number = Number(value);
-  if (!Number.isFinite(number) || number <= 0 || (integer && !Number.isInteger(number))) {
-    throw new Error(`--${flag} must be a ${integer ? 'whole ' : ''}number above 0, not "${value}"`);
+  if (
+    !Number.isFinite(number) ||
+    number <= 0 ||
+    number > max ||
+    (integer && !Number.isInteger(number))
+  ) {
+    const bound = Number.isFinite(max) ? ` and at most ${max}` : '';
+    throw new Error(
+      `--${flag} must be a ${integer ? 'whole ' : ''}number above 0${bound}, not "${value}"`,
+    );
   }
   return number;
 }
