@@ -20,7 +20,7 @@ To see why a run failed, add `--keep`. The run's directory is kept, sealed: `chm
 ## Change the suite
 
 - **Cases** are data in [`cases.ts`](../../.claude/skills/escuadra-issue-runner/evals/cases.ts). Edit them, then run `node scripts/evals/gen-cases.ts`. Never edit a case's `case.yaml`, `scaffold.sh` or `setup.json`: `npm run check` fails when they drift.
-- **A real issue** becomes a fixture with `node scripts/evals/capture-issue.ts <number> --why "<what it tests>"`. A snapshot records the issue as it stands at the main pin.
+- **A real issue** becomes a fixture with `node scripts/evals/capture-issue.ts <number> --why "<what it tests>"`. A snapshot records the issue as it stands at the main pin, so compare the issue's last edit and close times with the pin's commit date, and undo body edits and state changes made after it by hand, saying so in `source`.
 - **Bumping the pins** (`PINS` in [`cases.ts`](../../.claude/skills/escuadra-issue-runner/evals/cases.ts)) means re-capturing the real issues and checking every expectation still holds at the new commit.
 
 ## What a run can and cannot do

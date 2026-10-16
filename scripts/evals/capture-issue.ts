@@ -1,8 +1,9 @@
 // Captures a real issue as a fixture for the suite:
 //   node scripts/evals/capture-issue.ts 126 --why "S bug, in place"
 // It uses the real gh, so run it in an ordinary shell. A snapshot records the
-// issue as it stands at the main pin (spec §6): if the issue closed after the
-// pin, set its state back by hand and say so in `source`.
+// issue as it stands at the main pin (spec §6), so compare the issue's last
+// edit and close times with the pin's commit date, and undo body edits and
+// state changes made after it by hand, saying so in `source`.
 import { execFileSync } from 'node:child_process';
 import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join, resolve } from 'node:path';
