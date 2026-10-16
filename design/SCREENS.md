@@ -97,7 +97,7 @@ flawless — see below). Route, file, and what it does.
 | 2   | `/about`                          | `app/about.tsx`                          | About. Legal/attribution copy, data and image credits, the privacy section (photos, usage statistics, updates), and the running update line.                                                                                                                             |
 | 3   | `/team-picker`                    | `app/team-picker.tsx`                    | Team picker, segmented into Clubs and National Teams. Each row shows a mono sub-line — `LEVEL n · BEST n/10` or `NOT PLAYED`, green once cleared.                                                                                                                        |
 | 4   | `/team/[squadId]/difficulty`      | `app/team/[squadId]/difficulty.tsx`      | The difficulty ladder in level order: the focused level expanded into a card with its description and a Play button, the other levels compact (locked ones stating their unlock condition), and Study, an outline button until level 1 is cleared and a text link after. |
-| 5   | `/team/[squadId]/study`           | `app/team/[squadId]/study.tsx`           | Browsable squad list — number, name, position, club or nationality. With a `players` param it narrows to only those players, hides the position filters, and titles itself "Missed Players".                                                                             |
+| 5   | `/team/[squadId]/study`           | `app/team/[squadId]/study.tsx`           | Browsable squad: back, Hide names and a cards/list toggle; the team's banner, "Squad" and a count; position filters with counts; every player in shirt-number order as photo cards or a list. Hide names covers each name. Photo credits end the list.                   |
 | 6   | `/play/[squadId]/[level]`         | `app/play/[squadId]/[level]/index.tsx`   | A question. The photo (or the team's colours) fills the top; the shirt number with the escuadra corner, the slot chips that spell out the player, the prompt, a grid of answers and the footer sit in the thumb zone. A right answer moves on by itself; a miss waits.   |
 | 7   | `/play/[squadId]/[level]/results` | `app/play/[squadId]/[level]/results.tsx` | The round's result: close (a different team), the team and level, share; the score with the escuadra corner, the tier's title and verdict, the round strip; the missed players as snapping photo cards, or a 10/10's ten in circles; the actions; the share sheet.       |
 
@@ -110,7 +110,9 @@ flawless — see below). Route, file, and what it does.
 | `screens/02-team-picker-clubs.png`       | Team picker, Clubs                   |
 | `screens/03-team-picker-nations.png`     | Team picker, National Teams          |
 | `screens/04-difficulty.png`              | Difficulty ladder                    |
-| `screens/05-study.png`                   | Study                                |
+| `screens/05-study.png`                   | Study, cards                         |
+| `screens/05-study-list.png`              | Study, list                          |
+| `screens/05-study-hidden.png`            | Study, cards with Hide names on      |
 | `screens/06-question-l1.png`             | Question, level 1                    |
 | `screens/07-question-l2.png`             | Question, level 2                    |
 | `screens/08-question-l3.png`             | Question, level 3 — club part        |
@@ -188,7 +190,19 @@ app." and `SHARE TEXT`. On web the share button does nothing.
 picture turns green, with a green `10/10`, the strike with its ball and trail,
 `A LA ESCUADRA` and ten green squares.
 
-The missed-players-filtered Study view has no capture yet.
+The three Study captures are Inter Milan, a club squad, so each line under a
+name is a nationality with its flag (a nation squad shows the club instead).
+`05-study.png` is the default view, cards: the top bar (back, `Hide names`, the
+list toggle), the team's banner and `INTER MILAN · 2026/27` over `SQUAD` and
+`24 players`, the `All 24 / GK 3 / DF 8 / MF 9 / FW 4` filters, then two columns
+of photo cards in shirt-number order, each with its number, a position chip and
+the name over the nationality; a player with no photo shows the team's bands.
+`05-study-list.png` is the same squad after one tap of the toggle, which now
+shows the grid glyph: 64 pt rows of avatar, number, name over nationality and a
+position chip. `05-study-hidden.png` is the cards with `Hide names` on: the
+button reads `Show names` and every name is a dashed `Tap to reveal` pill. The
+`Photo credits · 21` line at the end of the list, named by shirt number, is
+below the fold in all three.
 
 ## Vocabulary
 

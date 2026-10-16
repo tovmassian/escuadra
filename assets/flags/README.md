@@ -4,7 +4,7 @@
 `IRL.png`, `KOS.png`). 160 px wide, ~432 KB in total.
 
 Used for nation identity on the team picker, level-3 nationality answer
-options, the `NAT` stat chip and the Study screen's affiliation column. See
+options, the `NAT` stat chip and the Study screen's cards and list rows. See
 `lib/flags.ts` for the name→code lookup and `assets/flags/generated.ts` for
 the Metro require map.
 

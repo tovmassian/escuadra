@@ -411,15 +411,6 @@ export const typography = {
   badgeNumber: { fontFamily: 'IBMPlexMono-Bold', fontWeight: '700' as const, fontSize: 18 },
   // Difficulty-row / card descriptions — one step down from `secondary`.
   descriptionSmall: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 12.5 },
-  // Study screen table cells.
-  tableName: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 14 },
-  tableCell: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 11 },
-  tableHeader: {
-    fontFamily: 'Inter-SemiBold',
-    fontWeight: '600' as const,
-    fontSize: 10,
-    letterSpacing: 0.6,
-  },
   eyebrow: {
     fontFamily: 'Inter-SemiBold',
     fontWeight: '600' as const,
@@ -427,7 +418,7 @@ export const typography = {
     letterSpacing: 1.2,
     textTransform: 'uppercase' as const,
   },
-  // Shared by difficulty-row status pills and the Study screen's column headers.
+  // Shared by difficulty-row status pills and the Study screen's header eyebrow.
   captionEyebrow: {
     fontFamily: 'Inter-SemiBold',
     fontWeight: '600' as const,
@@ -507,7 +498,7 @@ export const typography = {
   // ---- 2.0 question screen: Inter faces chosen by family, no weight ----
   // A picked or revealed right answer on a tile.
   bodyStrong: { fontFamily: 'Inter-Bold', fontSize: 17 },
-  // A slot chip's value.
+  // A slot chip's value; also Study's Hide names label.
   slotValue: { fontFamily: 'Inter-Bold', fontSize: 13 },
   // The team name in the question's top bar.
   topBarTeam: { fontFamily: 'Inter-Bold', fontSize: 14 },
@@ -805,11 +796,8 @@ export const sizes = {
   // Height of one connector segment between two ladder rungs. Drawn only in
   // the gap, never behind a badge — see `LadderConnector`.
   difficultyConnectorHeight: 16,
-  // `affiliation` carries a flag image plus its gap on club squads
-  // (sizes.flagRow.width + spacing.xs = 28 of its 120), so the text keeps the
-  // same 92 it had before flags. The name column is flex, so it absorbs the
-  // difference.
-  studyColumn: { no: 26, position: 34, affiliation: 120 },
+  // The shirt-number column of a Study list row.
+  studyColumn: { no: 26 },
   // Home's "Start Training" is the one 56px control; every other button
   // (Continue, Results actions) is 52px.
   controlHeight: 52,
@@ -893,6 +881,12 @@ export const sizes = {
   playerCard: { studyHeight: 218, results: { width: 140, height: 184 } },
   // Study's list-view avatar.
   avatar: 46,
+  // Study's top-bar controls: the Hide names pill's height and the view
+  // toggle's diameter. Each takes hitSlop to reach `minTapTarget`.
+  studyControl: 36,
+  // The team's bands as a small strip beside Study's header eyebrow. The
+  // question's `teamMarkerBanner` is 100 wide, too long for a line of text.
+  studyBanner: { width: 28, height: 3 },
   // Study's position chip, on a card and in a list row.
   studyChip: 24,
   // The "Tap to reveal" pill's height: on a card, and in a list row.

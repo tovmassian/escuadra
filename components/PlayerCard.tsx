@@ -44,7 +44,10 @@ interface PlayerCardProps {
   lineFlag?: FlagCode | null;
   /** Replaces the default label (Study passes `studyLabel`). */
   accessibilityLabel?: string;
-  /** Makes the whole card a button (Study's reveal). */
+  /** Makes the whole card a Pressable (Study's reveal). Study passes the same
+   *  one whether or not names are hidden, so the root never switches between
+   *  View and Pressable, which would remount the card and reload its photo;
+   *  the card is a button, and says so, only while `nameHidden`. */
   onPress?: () => void;
 }
 
@@ -58,7 +61,8 @@ interface PlayerCardProps {
 // Results passes only the basics. Study adds slots, each off by default: a
 // position chip top right, a flag before the line, a neutral line colour, a
 // hidden name drawn as a "Tap to reveal" pill, its own screen-reader label and
-// a press, which makes the card a button and fades a revealed name in.
+// a press, which makes the card a Pressable (a button while its name is hidden)
+// and fades a revealed name in.
 export function PlayerCard({
   width,
   height,
@@ -147,8 +151,12 @@ export function PlayerCard({
       {name}
     </Text>
   );
+  // A hidden name is never spoken, not even by the fallback.
   const label =
-    accessibilityLabel ?? `${shirtNumber ?? 'no number'}, ${name}${line ? `. ${line}` : ''}`;
+    accessibilityLabel ??
+    (nameHidden
+      ? `${shirtNumber ?? 'no number'}, name hidden`
+      : `${shirtNumber ?? 'no number'}, ${name}${line ? `. ${line}` : ''}`);
 
   const content = (
     <>
@@ -219,7 +227,7 @@ export function PlayerCard({
       style={styles.card}
       onPress={onPress}
       accessible
-      accessibilityRole="button"
+      accessibilityRole={nameHidden ? 'button' : undefined}
       accessibilityLabel={label}
       accessibilityHint={nameHidden ? 'Reveals the name' : undefined}
     >

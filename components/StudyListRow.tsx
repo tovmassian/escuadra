@@ -35,7 +35,10 @@ interface StudyListRowProps {
   /** What a screen reader hears: Study passes `studyLabel`, which never speaks
    *  a hidden name. */
   accessibilityLabel: string;
-  /** Makes the whole row a button (Study's reveal). */
+  /** Makes the whole row a Pressable (Study's reveal). Study passes the same
+   *  one whether or not names are hidden, so the root never switches between
+   *  View and Pressable, which would remount the row and reload its photo;
+   *  the row is a button, and says so, only while `nameHidden`. */
   onPress?: () => void;
 }
 
@@ -185,7 +188,7 @@ export function StudyListRow({
       style={styles.row}
       onPress={onPress}
       accessible
-      accessibilityRole="button"
+      accessibilityRole={nameHidden ? 'button' : undefined}
       accessibilityLabel={accessibilityLabel}
       accessibilityHint={nameHidden ? 'Reveals the name' : undefined}
     >

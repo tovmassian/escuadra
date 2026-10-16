@@ -106,7 +106,9 @@ update this file in the same PR rather than leave a stale rule behind.
    layout needs. Every shown photo shows its credit; never put the Commons
    file name or caption in visible text or a label, as they name the player.
    The credit sits under the question's action button for as long as the
-   question is on screen, never as part of the answer reveal. Each photo load
+   question is on screen, never as part of the answer reveal. On Results and
+   Study the credits sit under "Photo credits · N"; Study's name each photo by
+   shirt number only, so Hide names is not spoiled. Each photo load
    reaches Wikimedia, so photos ship in a store build with the privacy
    disclosures (guardrail 4), never over the air:
    `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.
@@ -116,8 +118,8 @@ update this file in the same PR rather than leave a stale rule behind.
    an emblem. National flags are the one carve-out, because the rule exists
    for trademark exposure and a flag carries none: a nation's identity element
    is a committed PNG in `assets/flags/`, shown on the team picker, level-3
-   nationality options, the `NAT` stat chip and the Study screen's affiliation
-   column. Never a Unicode regional-indicator emoji (🇦🇷) — that depends on an
+   nationality options, the `NAT` stat chip and the Study screen's cards and
+   list rows. Never a Unicode regional-indicator emoji (🇦🇷) — that depends on an
    OS flag-emoji font, and Windows ships none, so the Playwright capture behind
    `npm run shots` would render "AR". Crests, badges, logos, and shield shapes
    remain banned forever. A crest that appears in a licensed player photo, on a
