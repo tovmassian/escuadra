@@ -235,9 +235,11 @@ The agent runs under an OS sandbox that cannot read the real repo, so the fake
 lives inside the sandbox: the scaffold copies `scripts/evals/sandbox/gh.ts` and
 `gh-cli.ts` (Node built-ins only) into `.git/sandbox/bin/`, next to a `gh`
 wrapper that runs them with Node 24 and a `package.json` that marks them as ES
-modules. `run.ts` puts the **relative** entry `.git/sandbox/bin` first on
-`PATH`; it resolves against the agent's working directory. The fake finds its
-fixtures through `git rev-parse --git-common-dir`.
+modules. `run.ts` puts the **relative** entries `.git/sandbox/bin`,
+`../.git/sandbox/bin` and `../../.git/sandbox/bin` first on `PATH`; they
+resolve against the agent's working directory, so a `cd` one or two levels
+down keeps the wrappers. The fake finds its fixtures through
+`git rev-parse --git-common-dir`.
 
 **`git` needs a wrapper too.** `/usr/bin/git` is Apple's xcrun shim, which
 fails inside the sandbox (it cannot write its cache). The scaffold writes a
@@ -441,9 +443,10 @@ scripts/evals/                        the harness: skill-agnostic
 - **No npm scripts and no `.gitignore` lines**, since both move the
   fingerprint. Commands run as `node scripts/evals/run.ts --tag core`
   (or `--case 129-*`, or `--full`). `run.ts` passes `--scaffold`, the models,
-  `--threshold 0.9`, `--max-cost-usd` and `--no-publish`, prepends
-  `.git/sandbox/bin` to `PATH`, and sends `--output-dir` and `--report` to a
-  temporary directory, so results never land in the repo. `--keep` adds
+  `--threshold 0.9`, `--max-cost-usd` and `--no-publish`, prepends the
+  relative `.git/sandbox/bin` entries (§5.1) to `PATH`, and sends
+  `--output-dir` and `--report` to a temporary directory, so results never
+  land in the repo. `--keep` adds
   `--keep-temp`: a run's trace survives only with it.
 - **Tags:** `core` (one case per rule: about 8), `workspace`, `ask`, `negative`,
   and `smoke` for `sandbox-smoke`.
