@@ -13,7 +13,15 @@ import { durations, elevation, opacity, radii, sizes, spacing, typography } from
 import { useThemeColors } from '@/theme/useTheme';
 import type { TeamMarker } from '@/types/squad';
 import { useEffect, useRef, useState } from 'react';
-import { Modal, Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Modal,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  useWindowDimensions,
+  View,
+} from 'react-native';
 import Animated, {
   FadeIn,
   SlideInDown,
@@ -51,6 +59,13 @@ interface ShareSheetProps {
 //
 // The body mounts only while the sheet is open, so every opening starts on
 // Image, with nothing in flight.
+//
+// The sheet is capped at the screen's height less the top inset and a margin,
+// because at large text sizes or on a short screen it is taller than that, and
+// a bottom-pinned sheet taller than the screen loses its handle and its close
+// button off the top, with no way to dismiss it. The handle, the title with its
+// close button and the share button stay put; the switch, the preview and the
+// hint between them scroll.
 export function ShareSheet({ visible, onClose, card, text, onShared }: ShareSheetProps) {
   return (
     <Modal
@@ -70,6 +85,7 @@ export function ShareSheet({ visible, onClose, card, text, onShared }: ShareShee
 function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'visible'>) {
   const colors = useThemeColors();
   const insets = useSafeAreaInsets();
+  const { height: windowHeight } = useWindowDimensions();
   const reduced = useReducedMotion();
   const [format, setFormat] = useState<ShareFormat>('image');
   const [busy, setBusy] = useState(false);
@@ -105,6 +121,7 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
       paddingHorizontal: spacing.lg,
       paddingBottom: insets.bottom + spacing.sm,
       gap: spacing.md,
+      maxHeight: windowHeight - insets.top - spacing.md,
     },
     handle: {
       alignSelf: 'center',
@@ -113,6 +130,9 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
       borderRadius: radii.pill,
       backgroundColor: colors.border,
     },
+    // Shrinks, and scrolls, when the sheet is capped.
+    body: { flexShrink: 1 },
+    bodyContent: { gap: spacing.md },
     header: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
     title: { ...typography.sheetTitle, flex: 1, minWidth: 0, color: colors.textPrimary },
     close: {
@@ -181,8 +201,11 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
     squares: { flexDirection: 'row', gap: sheet.squareGap },
     square: { width: sheet.square, height: sheet.square, borderRadius: radii.xs },
     bubbleLink: { ...typography.bubbleLink, color: colors.link },
-    bubbleMeta: { ...typography.bubbleMeta, alignSelf: 'flex-end', color: colors.textMuted },
-    hint: { ...typography.secondarySmall, textAlign: 'center', color: colors.textMuted },
+    bubbleMeta: { ...typography.bubbleMeta, alignSelf: 'flex-end', color: colors.textSecondary },
+    // Two lines of room, so the sheet does not change height between formats:
+    // the Image hint takes two lines, the Text hint one, centred in the slot.
+    hintSlot: { minHeight: 2 * typography.sheetHint.lineHeight, justifyContent: 'center' },
+    hint: { ...typography.sheetHint, textAlign: 'center', color: colors.textMuted },
     cta: {
       minHeight: sizes.cta.normal,
       paddingVertical: spacing.xs,
@@ -225,11 +248,16 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
         entering={FadeIn.duration(reduced ? durations.transition : durations.scrim)}
         style={styles.scrim}
       >
+        {/* A tap outside closes the sheet, but the scrim is left out of the
+            screen reader's order: the × and Android's back button are the
+            accessible ways out, and a second "Close" would be read twice (on
+            Android `accessibilityViewIsModal` does nothing). */}
         <Pressable
           style={StyleSheet.absoluteFill}
           onPress={onClose}
-          accessibilityRole="button"
-          accessibilityLabel="Close"
+          focusable={false}
+          importantForAccessibility="no"
+          accessibilityElementsHidden
         />
       </Animated.View>
 
@@ -260,85 +288,94 @@ function SheetBody({ onClose, card, text, onShared }: Omit<ShareSheetProps, 'vis
           </Pressable>
         </View>
 
-        <View style={styles.track} accessibilityRole="tablist">
-          <View
-            style={styles.segments}
-            onLayout={(e) => setSwitchWidth(e.nativeEvent.layout.width)}
-          >
-            <Animated.View style={[styles.pill, pillStyle]} />
-            {formats.map(({ key, label }) => {
-              const selected = format === key;
-              return (
-                <Pressable
-                  key={key}
-                  testID={`share-format-${key}`}
-                  onPress={() => setFormat(key)}
-                  hitSlop={{ top: segmentSlop, bottom: segmentSlop }}
-                  accessibilityRole="tab"
-                  accessibilityState={{ selected }}
-                  style={styles.segment}
-                >
-                  <Text
-                    style={[
-                      styles.segmentLabel,
-                      { color: selected ? colors.ctaText : colors.textSecondary },
-                    ]}
+        <ScrollView
+          style={styles.body}
+          contentContainerStyle={styles.bodyContent}
+          showsVerticalScrollIndicator={false}
+          bounces={false}
+        >
+          <View style={styles.track} accessibilityRole="tablist">
+            <View
+              style={styles.segments}
+              onLayout={(e) => setSwitchWidth(e.nativeEvent.layout.width)}
+            >
+              <Animated.View style={[styles.pill, pillStyle]} />
+              {formats.map(({ key, label }) => {
+                const selected = format === key;
+                return (
+                  <Pressable
+                    key={key}
+                    testID={`share-format-${key}`}
+                    onPress={() => setFormat(key)}
+                    hitSlop={{ top: segmentSlop, bottom: segmentSlop }}
+                    accessibilityRole="tab"
+                    accessibilityState={{ selected }}
+                    style={styles.segment}
                   >
-                    {label}
-                  </Text>
-                </Pressable>
-              );
-            })}
+                    <Text
+                      style={[
+                        styles.segmentLabel,
+                        { color: selected ? colors.ctaText : colors.textSecondary },
+                      ]}
+                    >
+                      {label}
+                    </Text>
+                  </Pressable>
+                );
+              })}
+            </View>
           </View>
-        </View>
 
-        <View style={styles.preview}>
-          <Animated.View
-            key={format}
-            entering={FadeIn.duration(durations.transition)}
-            style={styles.previewItem}
-          >
-            {format === 'image' ? (
-              <View style={styles.frame}>
-                <View style={styles.frameClip}>
-                  <ShareCard
-                    view={view}
-                    items={card.items}
-                    marker={card.marker}
-                    width={sheet.previewWidth}
-                  />
-                </View>
-              </View>
-            ) : (
-              <View style={styles.bubble} accessible accessibilityLabel={bubbleLabel}>
-                <Text style={styles.bubbleText}>{parts.header}</Text>
-                <View style={styles.bubbleResult}>
-                  <Text style={styles.bubbleScore}>{parts.score}</Text>
-                  {parts.verdict ? <Text style={styles.bubbleText}>{parts.verdict}</Text> : null}
-                  <View style={styles.squares}>
-                    {parts.squares.map((right, i) => (
-                      <View
-                        key={i}
-                        style={[
-                          styles.square,
-                          { backgroundColor: right ? colors.success : colors.error },
-                        ]}
-                      />
-                    ))}
+          <View style={styles.preview}>
+            <Animated.View
+              key={format}
+              entering={FadeIn.duration(durations.transition)}
+              style={styles.previewItem}
+            >
+              {format === 'image' ? (
+                <View style={styles.frame}>
+                  <View style={styles.frameClip}>
+                    <ShareCard
+                      view={view}
+                      items={card.items}
+                      marker={card.marker}
+                      width={sheet.previewWidth}
+                    />
                   </View>
                 </View>
-                <Text style={styles.bubbleLink}>{parts.url}</Text>
-                <Text style={styles.bubbleMeta}>Preview</Text>
-              </View>
-            )}
-          </Animated.View>
-        </View>
+              ) : (
+                <View style={styles.bubble} accessible accessibilityLabel={bubbleLabel}>
+                  <Text style={styles.bubbleText}>{parts.header}</Text>
+                  <View style={styles.bubbleResult}>
+                    <Text style={styles.bubbleScore}>{parts.score}</Text>
+                    {parts.verdict ? <Text style={styles.bubbleText}>{parts.verdict}</Text> : null}
+                    <View style={styles.squares}>
+                      {parts.squares.map((right, i) => (
+                        <View
+                          key={i}
+                          style={[
+                            styles.square,
+                            { backgroundColor: right ? colors.success : colors.error },
+                          ]}
+                        />
+                      ))}
+                    </View>
+                  </View>
+                  <Text style={styles.bubbleLink}>{parts.url}</Text>
+                  <Text style={styles.bubbleMeta}>Preview</Text>
+                </View>
+              )}
+            </Animated.View>
+          </View>
 
-        <Text style={styles.hint}>
-          {format === 'image'
-            ? 'Story-sized picture. No player photos, no names — friends can still play it.'
-            : 'The score grid for group chats, with a link to the app.'}
-        </Text>
+          <View style={styles.hintSlot}>
+            <Text style={styles.hint}>
+              {format === 'image'
+                ? 'Story-sized picture. No player photos, no names — friends can still play it.'
+                : 'The score grid for group chats, with a link to the app.'}
+            </Text>
+          </View>
+        </ScrollView>
 
         <Pressable
           testID="share-submit"

@@ -170,7 +170,7 @@ circles, and the same actions as a pass.
 The two share captures are the failed round's Results with the share sheet
 open, one per format. The sheet rises from the bottom over a dimmed scrim: a
 handle, `SHARE YOUR ROUND` with a close ×, an **Image / Text** switch with a
-sliding pill, a preview, a one-line hint and the share button.
+sliding pill, a preview, a hint and the share button.
 `09-results-share.png` is the Image format, the default: a scaled copy of the
 share picture — the team's bands across the top, the escuadra mark and
 wordmark, `SPAIN · 2026 · LEVEL 1`, the score with two grey bars for a corner,

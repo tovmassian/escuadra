@@ -535,6 +535,14 @@ export const typography = {
     textTransform: 'uppercase' as const,
   },
   switchLabel: { fontFamily: 'Inter-Bold', fontSize: 14 },
+  // The sheet's hint under the preview: `secondarySmall` with a line height,
+  // so the sheet can reserve exactly two lines for it.
+  sheetHint: {
+    fontFamily: 'Inter-Medium',
+    fontWeight: '500' as const,
+    fontSize: 13,
+    lineHeight: 17.5,
+  },
   bubbleText: {
     fontFamily: 'Inter-SemiBold',
     fontWeight: '600' as const,
