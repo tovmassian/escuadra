@@ -1,119 +1,101 @@
-import type { FlagCode } from '@/assets/flags/generated';
-import { AnswerOption } from '@/components/AnswerOption';
-import { Button } from '@/components/Button';
-import { ChipOption } from '@/components/ChipOption';
-import { CompletedPartPill } from '@/components/CompletedPartPill';
-import { HeroCard } from '@/components/HeroCard';
-import { PartRail } from '@/components/PartRail';
-import { PhotoCreditLine } from '@/components/PhotoCreditLine';
-import { ProgressDots } from '@/components/ProgressDots';
-import { ScorePill } from '@/components/ScorePill';
-import { StatChip } from '@/components/StatChip';
+import { AnswerGrid } from '@/components/AnswerGrid';
+import { EscuadraCorner, type CornerState } from '@/components/EscuadraCorner';
+import { GlassCloseButton } from '@/components/GlassCloseButton';
+import { QuestionFooter } from '@/components/QuestionFooter';
+import { riseIn } from '@/components/riseIn';
+import { RoundProgress } from '@/components/RoundProgress';
+import { SlotChip } from '@/components/SlotChip';
+import { SpotlightStage } from '@/components/SpotlightStage';
+import { StreakChip } from '@/components/StreakChip';
 import { TeamMarker } from '@/components/TeamMarker';
-import { flagFor } from '@/lib/flags';
-import { photoFor } from '@/lib/photos';
-import type { Level, QuestionPart } from '@/lib/questionEngine';
-import { fitHeroCard, partRailRows, progressOutcomes } from '@/lib/roundView';
+import { useScreenReader } from '@/components/useScreenReader';
+import { feedback } from '@/lib/haptics';
+import { photoFor, roundPhotoUrls } from '@/lib/photos';
+import type { Level } from '@/lib/questionEngine';
 import { isFlawless } from '@/lib/resultsView';
+import {
+  answerLayout,
+  footerMode,
+  isCompact,
+  partCounter,
+  progressOutcomes,
+  promptText,
+  slotStates,
+  streak,
+  streakMilestone,
+} from '@/lib/roundView';
 import { getPlayer, getRoster, getSquad } from '@/lib/squads';
 import { track } from '@/lib/telemetry';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
-import { durations, spacing, typography } from '@/theme/tokens';
-import { useThemeColors } from '@/theme/useTheme';
+import {
+  borderWidths,
+  durations,
+  radii,
+  sizes,
+  spacing,
+  spotlightMotion,
+  stageGradients,
+  typography,
+} from '@/theme/tokens';
+import { useThemeColors, useThemeName } from '@/theme/useTheme';
 import { Image } from 'expo-image';
+import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeIn, FadeOut } from 'react-native-reanimated';
+import { StatusBar } from 'expo-status-bar';
+import { useEffect, useRef } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import Animated, { FadeOut, Keyframe, useReducedMotion } from 'react-native-reanimated';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 
-// `QuestionPartView`'s layout. Carries no colour, so it stays at module scope
-// rather than being rebuilt per render from a palette it never reads.
-const partStyles = StyleSheet.create({
-  part: { gap: spacing.xs },
-  optionsColumn: { gap: spacing.xs + 2 },
-  chipOptionsRow: { flexDirection: 'row', gap: spacing.xs },
-});
-
+// The Spotlight question screen (spec §2). Its layers, back to front:
+// - the photo stage;
+// - the stage gradient over the whole window;
+// - a column: progress, top bar, and, in a scroll, the hero (number, corner,
+//   slots), the prompt, the answers and the footer.
+// The scroll is bottom-aligned, so it never moves when everything fits (every
+// level at 360×640). It only scrolls at large text sizes (SCREENS.md
+// invariant 6).
 export default function Question() {
   const insets = useSafeAreaInsets();
   // The provider's frame, not `useWindowDimensions`: on edge-to-edge Android
-  // the window height's treatment of the system bars varies by OS version,
-  // while the frame is the space this screen actually lays out in.
+  // the window's treatment of the system bars varies by OS version.
   const frame = useSafeAreaFrame();
   const colors = useThemeColors();
-  const styles = StyleSheet.create({
-    root: { flex: 1, backgroundColor: colors.background },
-    header: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      paddingHorizontal: spacing.lg,
-    },
-    // The team name and its banner sit on the screen's true centre line, not
-    // wherever `space-between` happened to leave them: equal-flex side columns
-    // split the leftover space, so a wider score pill (10/10 vs 0/0) or a
-    // longer exit link can no longer drag the centre block off-axis. Each side
-    // aligns its own child to the outer edge so the column's full width doesn't
-    // become tap target for the exit link.
-    headerSide: { flex: 1, alignItems: 'flex-start' },
-    headerSideRight: { alignItems: 'flex-end' },
-    exit: { ...typography.secondary, color: colors.textSecondary },
-    teamLabel: { alignItems: 'center', gap: spacing.xxs },
-    teamName: { ...typography.rowTitle, color: colors.textPrimary },
-    progressBlock: { paddingHorizontal: spacing.lg, paddingTop: spacing.lg, gap: spacing.sm - 2 },
-    progressRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'baseline' },
-    questionLabel: { ...typography.secondarySmall, color: colors.textSecondary },
-    difficultyLabel: { ...typography.statMonoTiny, color: colors.textMuted, letterSpacing: 0.7 },
-    heroBlock: {
-      alignItems: 'center',
-      justifyContent: 'center',
-      gap: spacing.md,
-      paddingVertical: spacing.lg,
-    },
-    heroBlockSplit: { flexDirection: 'row', alignItems: 'center', paddingHorizontal: spacing.lg },
-    railColumn: { flex: 1, minWidth: 0, gap: spacing.sm },
-    chipRow: { flexDirection: 'row', gap: spacing.xs },
-    chipColumn: { flexDirection: 'column', gap: spacing.xs, alignSelf: 'flex-start' },
-    partsBlock: { flex: 1 },
-    partsContent: {
-      paddingHorizontal: spacing.lg,
-      paddingBottom: spacing.md,
-      gap: spacing.md - 2,
-    },
-    footer: { paddingHorizontal: spacing.lg, paddingVertical: spacing.md },
-  });
+  const themeName = useThemeName();
+  const reduced = useReducedMotion();
+  const screenReader = useScreenReader();
   const {
     squadId,
     level: levelParam,
     seed: seedParam,
-  } = useLocalSearchParams<{
-    squadId: string;
-    level: string;
-    seed?: string;
-  }>();
+  } = useLocalSearchParams<{ squadId: string; level: string; seed?: string }>();
   const level = Number(levelParam) as Level;
-  const heroFit = fitHeroCard(level, frame.height - insets.top - insets.bottom);
-  // Optional `?seed=` makes a round reproducible — used by the design-loop
-  // screenshot capture, and handy for reproducing a specific round by hand.
+  // Optional `?seed=` makes a round reproducible, for the screenshot capture.
   const seed = seedParam === undefined ? undefined : Number(seedParam);
+  const compact = isCompact(frame.height - insets.top - insets.bottom);
+  const stageHeight = Math.round(
+    frame.height * (compact ? sizes.stage.ratioCompact : sizes.stage.ratio),
+  );
 
   const session = useSession();
   const setLastPlayed = useProgress((s) => s.setLastPlayed);
   const recordScore = useProgress((s) => s.recordScore);
-
   const squad = getSquad(squadId);
 
   useEffect(() => {
     if (!squad) return;
     if (session.squadId !== squadId || session.level !== level || session.phase === 'idle') {
-      const roster = getRoster(squadId);
-      session.startRound(squad, roster, level, Number.isFinite(seed) ? seed : undefined);
+      session.startRound(
+        squad,
+        getRoster(squadId),
+        level,
+        Number.isFinite(seed) ? seed : undefined,
+      );
       track('round.started', { kind: squad.kind, level });
     }
     setLastPlayed(squadId, level);
-    // Only re-run when the route target changes — starting a round mutates
-    // `session`, so including it here would loop.
+    // Only when the route target changes: starting a round mutates `session`.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [squadId, level, seedParam]);
 
@@ -137,14 +119,82 @@ export default function Question() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [session.phase]);
 
-  // Warm the cache for the next question's photo while this one is played,
-  // so it is normally already loaded when the question appears. A failed
-  // prefetch only means the number card shows a moment longer.
+  // A round's photos are fetched when it starts (spec §9), so no question
+  // waits on its photo. The result is ignored: it is false as soon as one
+  // fails, and a failure only means the team colours show a moment longer.
   useEffect(() => {
-    const next = session.questions[session.currentIndex + 1];
-    const nextPhoto = next ? photoFor(getPlayer(next.playerId)) : null;
-    if (nextPhoto) Image.prefetch(nextPhoto.url).catch(() => {});
-  }, [session.currentIndex, session.questions]);
+    if (session.squadId !== squadId || session.questions.length === 0) return;
+    const urls = roundPhotoUrls(session.questions, getPlayer);
+    if (urls.length > 0) Image.prefetch(urls, { cachePolicy: 'disk' }).catch(() => {});
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [session.questions]);
+
+  const verdict = session.results[session.currentIndex]?.correct ?? null;
+
+  // A right answer moves on after `durations.autoAdvance`; a miss waits for
+  // its button; with a screen reader on nothing moves on by itself (§2.4).
+  useEffect(() => {
+    if (verdict !== true || screenReader) return;
+    const timer = setTimeout(() => useSession.getState().advanceQuestion(), durations.autoAdvance);
+    return () => clearTimeout(timer);
+  }, [verdict, screenReader, session.currentIndex]);
+
+  const currentStreak = streak(session.results, session.currentIndex);
+  const previousStreak = useRef(currentStreak);
+  useEffect(() => {
+    if (streakMilestone(previousStreak.current, currentStreak)) feedback('streak');
+    previousStreak.current = currentStreak;
+  }, [currentStreak]);
+
+  const styles = StyleSheet.create({
+    root: { flex: 1, backgroundColor: colors.background },
+    column: { flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom },
+    topBar: {
+      height: sizes.topBar.height,
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.sm,
+      paddingHorizontal: spacing.sm,
+    },
+    team: { flex: 1, minWidth: 0, gap: spacing.xxs },
+    teamName: { ...typography.topBarTeam, color: colors.onPhoto },
+    teamSub: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs },
+    level: { ...typography.filterLabel, color: colors.onPhotoMuted },
+    scorePill: {
+      height: sizes.topBar.pill,
+      minWidth: sizes.topBar.pillMinWidth,
+      paddingHorizontal: spacing.sm,
+      borderRadius: radii.pill,
+      borderWidth: borderWidths.hairline,
+      borderColor: colors.glassLine,
+      backgroundColor: colors.glass,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
+    score: { ...typography.statMonoSmall, color: colors.onPhoto },
+    scroll: { flex: 1 },
+    scrollContent: { flexGrow: 1, justifyContent: 'flex-end', paddingBottom: spacing.xxs },
+    hero: { paddingHorizontal: spacing.lg, gap: spacing.sm },
+    numberWrap: {
+      alignSelf: 'flex-start',
+      paddingRight: sizes.corner.question.arm + sizes.corner.question.bar,
+    },
+    number: {
+      ...(compact ? typography.shirtNumberCompact : typography.shirtNumber),
+      color: colors.onStage,
+    },
+    slots: { flexDirection: 'row', flexWrap: 'wrap', gap: spacing.xs },
+    promptRow: {
+      flexDirection: 'row',
+      alignItems: 'baseline',
+      justifyContent: 'space-between',
+      gap: spacing.sm,
+      paddingHorizontal: spacing.lg,
+      paddingTop: spacing.md,
+      paddingBottom: spacing.sm,
+    },
+    counter: { ...typography.statMonoTiny, color: colors.onStageMuted },
+  });
 
   if (
     !squad ||
@@ -157,240 +207,127 @@ export default function Question() {
   const question = session.questions[session.currentIndex];
   const result = session.results[session.currentIndex];
   if (!question || !result) return null;
+  const part = question.parts[session.currentPartIndex];
+  if (!part) return null;
 
   const score = selectScore(session.results);
-  const questionComplete = result.correct !== null;
   const photo = photoFor(getPlayer(question.playerId));
-
-  const affiliationLabel = squad.kind === 'club' ? 'NAT' : 'CLUB';
-  // AGE drops out of the row entirely when the player has no stored birth
-  // date, rather than rendering an empty or NaN chip. Club-squad wikitext
-  // never carries a birth date, so a new signing legitimately has none:
-  // level 1 falls to two chips and level 2 to one.
-  const ageChip = question.age === null ? [] : [{ label: 'AGE', value: String(question.age) }];
-  // Only the NAT chip carries a flag: its value is a nationality. CLUB's is a
-  // club name, and clubs never get an image.
-  const affiliationChip = {
-    label: affiliationLabel,
-    value: question.affiliation,
-    flag: squad.kind === 'club' ? flagFor(question.affiliation) : null,
-  };
-  const statChips: { label: string; value: string; flag?: FlagCode | null }[] =
-    level === 1
-      ? [{ label: 'POS', value: question.position }, ...ageChip, affiliationChip]
-      : level === 2
-        ? [...ageChip, affiliationChip]
-        : [];
+  const slots = slotStates(question, result, session.currentPartIndex, squad.kind, level);
+  const answeredIndex = result.parts[session.currentPartIndex]?.pickedIndex ?? null;
+  const counter = partCounter(question, session.currentPartIndex);
+  const corner: CornerState = verdict === true ? 'correct' : verdict === false ? 'wrong' : 'asking';
+  const promptColor =
+    verdict === true ? colors.success : verdict === false ? colors.error : colors.onStage;
 
   const exit = () => {
     session.reset();
     router.back();
   };
+  const next = () => session.advanceQuestion();
 
-  const continuePressed = () => {
-    session.advanceQuestion();
-  };
-
-  const statChipsBlock = statChips.length > 0 && (
-    <View style={level === 2 ? styles.chipColumn : styles.chipRow}>
-      {statChips.map((c) => (
-        <StatChip key={c.label} label={c.label} value={c.value} flag={c.flag} />
-      ))}
-    </View>
-  );
+  const heroEntering = riseIn(reduced, spotlightMotion.numberRise, durations.transition);
+  const heroExiting = reduced
+    ? FadeOut.duration(durations.transition)
+    : new Keyframe({
+        0: { opacity: 1, transform: [{ translateX: 0 }] },
+        100: { opacity: 0, transform: [{ translateX: -spotlightMotion.slide }] },
+      }).duration(durations.transition);
 
   return (
     <View style={styles.root}>
-      <View style={[styles.header, { paddingTop: insets.top + spacing.xs }]}>
-        <View style={styles.headerSide}>
-          <Pressable onPress={exit} accessibilityRole="button" hitSlop={12}>
-            <Text style={styles.exit}>‹ Exit</Text>
-          </Pressable>
-        </View>
-        <View style={styles.teamLabel}>
-          <Text style={styles.teamName} numberOfLines={1}>
-            {squad.name}
-          </Text>
-          <TeamMarker marker={squad.marker} variant="banner" />
-        </View>
-        <View style={[styles.headerSide, styles.headerSideRight]}>
-          <ScorePill correct={score.correct} total={score.attempted} />
-        </View>
-      </View>
-
-      <View style={styles.progressBlock}>
-        <View style={styles.progressRow}>
-          <Text style={styles.questionLabel}>
-            Question {session.currentIndex + 1} of {session.questions.length}
-          </Text>
-          <Text style={styles.difficultyLabel}>DIFFICULTY {level}</Text>
-        </View>
-        <ProgressDots outcomes={progressOutcomes(session.results, session.currentIndex)} />
-      </View>
-
-      <Animated.View
-        key={session.currentIndex}
-        entering={FadeIn.duration(durations.transition)}
-        exiting={FadeOut.duration(durations.transition)}
-        style={[styles.heroBlock, level > 1 && styles.heroBlockSplit]}
-      >
-        <HeroCard
-          level={level}
-          shirtNumber={question.memberNo}
-          fit={heroFit}
-          photoUrl={photo?.url ?? null}
-        />
-        {level > 1 ? (
-          <View style={styles.railColumn}>
-            <PartRail rows={partRailRows(question, result, session.currentPartIndex)} />
-            {statChipsBlock}
+      <StatusBar style="light" />
+      <SpotlightStage
+        height={stageHeight}
+        photo={photo}
+        marker={squad.marker}
+        dimmed={verdict === false}
+      />
+      <LinearGradient
+        colors={stageGradients[themeName].colors}
+        locations={stageGradients[themeName].locations}
+        style={StyleSheet.absoluteFill}
+        pointerEvents="none"
+      />
+      <View style={styles.column}>
+        <RoundProgress outcomes={progressOutcomes(session.results, session.currentIndex)} />
+        <View style={styles.topBar}>
+          <GlassCloseButton label="Leave the round" onPress={exit} />
+          <View style={styles.team}>
+            <Text style={styles.teamName} numberOfLines={1}>
+              {squad.name}
+            </Text>
+            <View style={styles.teamSub}>
+              <TeamMarker marker={squad.marker} variant="banner" />
+              <Text style={styles.level}>Level {level}</Text>
+            </View>
           </View>
-        ) : (
-          statChipsBlock
-        )}
-      </Animated.View>
+          {currentStreak >= 2 ? <StreakChip count={currentStreak} /> : null}
+          <View
+            style={styles.scorePill}
+            accessible
+            accessibilityLabel={`Score: ${score.correct} of ${score.attempted}`}
+          >
+            <Text style={styles.score}>
+              {score.correct}/{score.attempted}
+            </Text>
+          </View>
+        </View>
 
-      <ScrollView
-        style={styles.partsBlock}
-        contentContainerStyle={styles.partsContent}
-        showsVerticalScrollIndicator={false}
-      >
-        {question.parts.map((part, i) => (
-          <QuestionPartView
-            key={i}
-            part={part}
-            index={i}
-            level={level}
-            currentPartIndex={session.currentPartIndex}
-            answeredIndex={result.parts[i]?.pickedIndex ?? null}
-            onAnswer={(pickedIndex) => session.answerPart(pickedIndex)}
-          />
-        ))}
-      </ScrollView>
-
-      <View style={[styles.footer, { paddingBottom: insets.bottom + spacing.md }]}>
-        <Button
-          label={questionComplete ? 'Continue' : 'Select an answer'}
-          variant={questionComplete ? 'filled' : 'inert'}
-          disabled={!questionComplete}
-          onPress={continuePressed}
-        />
-        <PhotoCreditLine credit={photo} />
-      </View>
-    </View>
-  );
-}
-
-type OptionVerdict =
-  'idle' | 'correct-picked' | 'correct-unpicked' | 'incorrect-picked' | 'incorrect-other';
-
-function verdictForOption(
-  part: QuestionPart,
-  answeredIndex: number | null,
-  i: number,
-): OptionVerdict {
-  if (answeredIndex === null) return 'idle';
-  if (i === part.correctIndex) return i === answeredIndex ? 'correct-picked' : 'correct-unpicked';
-  return i === answeredIndex ? 'incorrect-picked' : 'incorrect-other';
-}
-
-function QuestionPartView({
-  part,
-  index,
-  level,
-  currentPartIndex,
-  answeredIndex,
-  onAnswer,
-}: {
-  part: QuestionPart;
-  index: number;
-  level: Level;
-  currentPartIndex: number;
-  answeredIndex: number | null;
-  onAnswer: (pickedIndex: number) => void;
-}) {
-  const isMultiPart = level > 1;
-  const isAnswered = answeredIndex !== null;
-  const isActive = index === currentPartIndex;
-
-  if (!isActive && !isAnswered) return null; // future part, not revealed yet
-
-  // Level 1 has a single part: it stays expanded and shows the full
-  // idle/correct/incorrect reveal, per the interaction-state spec. On
-  // levels 2-3 the name part still collapses to a summary pill once
-  // answered (up to 6 options — keeping them all on screen through the
-  // remaining parts is too much vertical weight), but the position and
-  // nationality/club parts keep their option row in place and grey out the
-  // options the player didn't pick, matching level 1's instant-feedback
-  // treatment instead of a collapsed pill.
-  if (isMultiPart) {
-    if (part.kind === 'name') {
-      return (
-        <View style={partStyles.part}>
-          {isAnswered ? (
-            <CompletedPartPill
-              label={part.options[part.correctIndex] ?? ''}
-              correct={answeredIndex === part.correctIndex}
-            />
-          ) : (
-            <View style={partStyles.optionsColumn}>
-              {part.options.map((label, i) => (
-                <AnswerOption
-                  key={label}
-                  label={label}
-                  verdict="idle"
-                  onPress={() => onAnswer(i)}
-                />
+        <ScrollView
+          style={styles.scroll}
+          contentContainerStyle={styles.scrollContent}
+          showsVerticalScrollIndicator={false}
+        >
+          <Animated.View
+            key={session.currentIndex}
+            entering={heroEntering}
+            exiting={heroExiting}
+            style={styles.hero}
+          >
+            <View style={styles.numberWrap}>
+              <Text style={styles.number} accessibilityLabel={`Shirt number ${question.memberNo}`}>
+                {question.memberNo}
+              </Text>
+              <EscuadraCorner state={corner} />
+            </View>
+            <View style={styles.slots}>
+              {slots.map((slot) => (
+                <SlotChip key={slot.key} slot={slot} />
               ))}
             </View>
-          )}
-        </View>
-      );
-    }
+          </Animated.View>
 
-    return (
-      <View style={partStyles.part}>
-        {part.kind === 'position' ? (
-          <View style={partStyles.chipOptionsRow}>
-            {part.options.map((label, i) => (
-              <ChipOption
-                key={label}
-                label={label}
-                verdict={verdictForOption(part, answeredIndex, i)}
-                disabled={isAnswered}
-                onPress={() => onAnswer(i)}
-              />
-            ))}
+          <View style={styles.promptRow}>
+            <Text
+              style={[
+                compact ? typography.promptCompact : typography.prompt,
+                { color: promptColor },
+              ]}
+              accessibilityRole="header"
+              accessibilityLiveRegion="polite"
+            >
+              {promptText(part, question.memberNo, verdict)}
+            </Text>
+            {counter ? <Text style={styles.counter}>{counter}</Text> : null}
           </View>
-        ) : (
-          <View style={partStyles.optionsColumn}>
-            {part.options.map((label, i) => (
-              <AnswerOption
-                key={label}
-                label={label}
-                flag={part.kind === 'nationality' ? flagFor(label) : undefined}
-                verdict={verdictForOption(part, answeredIndex, i)}
-                disabled={isAnswered}
-                onPress={() => onAnswer(i)}
-              />
-            ))}
-          </View>
-        )}
+
+          <AnswerGrid
+            part={part}
+            gridKey={`${session.currentIndex}:${session.currentPartIndex}`}
+            answeredIndex={answeredIndex}
+            layout={answerLayout(part, compact)}
+            stagger={session.currentPartIndex === 0 ? durations.tileStagger : durations.partStagger}
+            onAnswer={(pickedIndex) => session.answerPart(pickedIndex)}
+          />
+
+          <QuestionFooter
+            mode={footerMode(verdict, screenReader)}
+            compact={compact}
+            onNext={next}
+            credit={photo}
+          />
+        </ScrollView>
       </View>
-    );
-  }
-
-  return (
-    <View style={partStyles.optionsColumn}>
-      {part.options.map((label, i) => (
-        <AnswerOption
-          key={label}
-          label={label}
-          verdict={verdictForOption(part, answeredIndex, i)}
-          disabled={isAnswered}
-          onPress={() => onAnswer(i)}
-        />
-      ))}
     </View>
   );
 }
