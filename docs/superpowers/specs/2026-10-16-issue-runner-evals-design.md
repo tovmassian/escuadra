@@ -46,6 +46,9 @@ The skill stops and asks, in **one batch**, when any of these hold:
 
 - the issue is closed;
 - the title carries `[TBC]`, or the issue leaves a choice to the owner;
+- the issue lists choices to settle before building (an "Open" section, or a
+  question put to the owner), even when it names a default: ask, offering the
+  default as the recommended answer;
 - it touches a legal guardrail, or About text that needs a privacy, licensing
   or legal judgement (`CLAUDE.md` guardrails 2 and 7);
 - it is a product-direction change no issue covers;
@@ -310,34 +313,35 @@ runner's permissions deny reading it.
 
 Starting state, unless a row says otherwise: `main`, clean tree, no open PR.
 
-| Case                      | Source | Setup                                   | Decision       | Workspace · base             | First step                  |
-| ------------------------- | ------ | --------------------------------------- | -------------- | ---------------------------- | --------------------------- |
-| `126-small-bug`           | #126   | —                                       | proceed        | in-place · main              | systematic-debugging        |
-| `129-large-spec`          | #129   | —                                       | ask: execution | worktree · main              | writing-plans               |
-| `129-large-spec-subagent` | #129   | prompt asks for subagents               | proceed        | worktree · main              | writing-plans               |
-| `117-owner-decision`      | #117   | —                                       | ask            | n/a                          | n/a                         |
-| `55-tbc`                  | #55    | —                                       | ask            | n/a                          | n/a                         |
-| `59-gh-pages`             | #59    | —                                       | ask            | n/a                          | n/a                         |
-| `116-release`             | #116   | —                                       | ask            | n/a                          | n/a                         |
-| `115-closed`              | #115   | issue closed                            | ask            | n/a                          | n/a                         |
-| `on-release-branch`       | #9001  | on `release/1.0.0`                      | proceed        | in-place · release/1.0.0     | systematic-debugging        |
-| `shipped-fix-from-main`   | #9002  | —                                       | proceed        | worktree · release/1.0.0     | systematic-debugging        |
-| `fingerprint-on-release`  | #9003  | —                                       | ask            | n/a                          | n/a                         |
-| `m-boundary`              | #9004  | M, no docs                              | proceed        | in-place · main              | brainstorming               |
-| `on-feature-branch`       | #9005  | on `feat/other`                         | proceed        | worktree · main              | test-driven-development     |
-| `dirty-tree`              | #9006  | a tracked file modified                 | proceed        | worktree · main              | test-driven-development     |
-| `plan-half-done`          | #9007  | L; spec, plan, `(#9007, part 1)` merged | ask: execution | worktree · main              | n/a (depends on the answer) |
-| `open-pr`                 | #9008  | open PR #9101 on `fix/9008-…`           | proceed        | in-place · main, that branch | —                           |
-| `no-size`                 | #9009  | no Size anywhere                        | proceed        | in-place · main              | systematic-debugging        |
-| `neg-create-issue`        | —      | "open an issue for …"                   | no triage      | —                            | —                           |
-| `neg-question`            | #117   | "what does #117 say about …?"           | no triage      | —                            | —                           |
+| Case                      | Source | Setup                                   | Decision          | Workspace · base             | First step                  |
+| ------------------------- | ------ | --------------------------------------- | ----------------- | ---------------------------- | --------------------------- |
+| `126-small-bug`           | #126   | —                                       | proceed           | in-place · main              | systematic-debugging        |
+| `129-large-spec`          | #129   | —                                       | ask: execution    | worktree · main              | writing-plans               |
+| `129-large-spec-subagent` | #129   | prompt asks for subagents               | ask: open choices | worktree · main              | writing-plans               |
+| `117-owner-decision`      | #117   | —                                       | ask               | n/a                          | n/a                         |
+| `55-tbc`                  | #55    | —                                       | ask               | n/a                          | n/a                         |
+| `59-gh-pages`             | #59    | —                                       | ask               | n/a                          | n/a                         |
+| `116-release`             | #116   | —                                       | ask               | n/a                          | n/a                         |
+| `115-closed`              | #115   | issue closed                            | ask               | n/a                          | n/a                         |
+| `on-release-branch`       | #9001  | on `release/1.0.0`                      | proceed           | in-place · release/1.0.0     | systematic-debugging        |
+| `shipped-fix-from-main`   | #9002  | —                                       | proceed           | worktree · release/1.0.0     | systematic-debugging        |
+| `fingerprint-on-release`  | #9003  | —                                       | ask               | n/a                          | n/a                         |
+| `m-boundary`              | #9004  | M, no docs                              | proceed           | in-place · main              | brainstorming               |
+| `on-feature-branch`       | #9005  | on `feat/other`                         | proceed           | worktree · main              | test-driven-development     |
+| `dirty-tree`              | #9006  | a tracked file modified                 | proceed           | worktree · main              | test-driven-development     |
+| `plan-half-done`          | #9007  | L; spec, plan, `(#9007, part 1)` merged | ask: execution    | worktree · main              | n/a (depends on the answer) |
+| `open-pr`                 | #9008  | open PR #9101 on `fix/9008-…`           | proceed           | in-place · main, that branch | —                           |
+| `no-size`                 | #9009  | no Size anywhere                        | proceed           | in-place · main              | systematic-debugging        |
+| `neg-create-issue`        | —      | "open an issue for …"                   | no triage         | —                            | —                           |
+| `neg-question`            | #117   | "what does #117 say about …?"           | no triage         | —                            | —                           |
 
 What each real case tests: #126, an S bug in place, a size disagreement, a
 device check that is not a question; #129, L to a worktree, finding spec
-§2.4/§6/§8 and the handoff, and the execution question (asked, or answered by
-the prompt); #117, an issue that hands the owner the release route; #55,
-`[TBC]`; #59, pushing `gh-pages` and the store-badge licence rule while Play is
-not live; #116, the handoff as the primary doc and cutting a release branch;
+§2.4/§6/§8 and the handoff, the execution question (asked, or answered by the
+prompt), and the issue's two open choices, the ball's depth and the trail
+(asked in both cases, though the issue names defaults); #117, an issue that
+hands the owner the release route; #55, `[TBC]`; #59, pushing `gh-pages` and
+the store-badge licence rule while Play is not live; #116, the handoff as the primary doc and cutting a release branch;
 #115, a closed issue. The synthetic ones each sit on one rule of §2.3–§2.4;
 #9001 and #9002 name `release/1.0.0` as their route, as §2.3 requires;
 `fingerprint-on-release` needs a native package upgrade; `plan-half-done`
@@ -351,21 +355,21 @@ how the owner actually asks.
 
 ## 8. Graders and the pass bar
 
-| Grader              | Type                                                                                                                                                                                                                                                                     | Weight | Cases                                    |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ | ---------------------------------------- |
-| `decision`          | regex `^decision:\s*(proceed\|ask)$`                                                                                                                                                                                                                                     | 3      | every positive case                      |
-| `workspace`, `base` | regex                                                                                                                                                                                                                                                                    | 2 each | proceed cases and execution-only asks    |
-| `branch`            | regex on `<type>/<N>-` (the exact name for `open-pr`)                                                                                                                                                                                                                    | 1      | same                                     |
-| `first-step`        | regex                                                                                                                                                                                                                                                                    | 1      | same, except `open-pr`, `plan-half-done` |
-| `execution`         | regex                                                                                                                                                                                                                                                                    | 1      | same                                     |
-| `size`              | regex `(estimated)`                                                                                                                                                                                                                                                      | 1      | `no-size`                                |
-| `docs`              | regex, one lookahead per required path                                                                                                                                                                                                                                   | 1      | cases with docs                          |
-| `existing`          | regex on the PR or the part-1 commit                                                                                                                                                                                                                                     | 1      | `open-pr`, `plan-half-done`              |
-| `questions`         | `llm`, concrete claims                                                                                                                                                                                                                                                   | 2      | every ask case                           |
-| `no-writes`         | regex over `.git/sandbox/gh.log`, `not_contains WRITE`                                                                                                                                                                                                                   | 3      | every case                               |
-| `stayed-dry`        | regex over the trace: no Bash call that changes history, branches, tags, the index or worktrees (commit, push, merge, rebase, cherry-pick, `reset --hard`, stash, add, tag, branch create or delete, `worktree add`/`remove`/`move`/`prune`, `switch -c`, `checkout -b`) | 2      | every triage and negative case           |
-| `no-triage`         | regex, `not_contains` `decision:`                                                                                                                                                                                                                                        | 3      | negative cases                           |
-| `answered`          | `llm`                                                                                                                                                                                                                                                                    | 2      | negative cases                           |
+| Grader              | Type                                                                                                                                                                                                                                                                     | Weight | Cases                                          |
+| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | ------ | ---------------------------------------------- |
+| `decision`          | regex `^decision:\s*(proceed\|ask)$`                                                                                                                                                                                                                                     | 3      | every positive case                            |
+| `workspace`, `base` | regex                                                                                                                                                                                                                                                                    | 2 each | proceed cases and asks that do not change them |
+| `branch`            | regex on `<type>/<N>-` (the exact name for `open-pr`)                                                                                                                                                                                                                    | 1      | same                                           |
+| `first-step`        | regex                                                                                                                                                                                                                                                                    | 1      | same, except `open-pr`, `plan-half-done`       |
+| `execution`         | regex                                                                                                                                                                                                                                                                    | 1      | same                                           |
+| `size`              | regex `(estimated)`                                                                                                                                                                                                                                                      | 1      | `no-size`                                      |
+| `docs`              | regex, one lookahead per required path                                                                                                                                                                                                                                   | 1      | cases with docs                                |
+| `existing`          | regex on the PR or the part-1 commit                                                                                                                                                                                                                                     | 1      | `open-pr`, `plan-half-done`                    |
+| `questions`         | `llm`, concrete claims                                                                                                                                                                                                                                                   | 2      | every ask case                                 |
+| `no-writes`         | regex over `.git/sandbox/gh.log`, `not_contains WRITE`                                                                                                                                                                                                                   | 3      | every case                                     |
+| `stayed-dry`        | regex over the trace: no Bash call that changes history, branches, tags, the index or worktrees (commit, push, merge, rebase, cherry-pick, `reset --hard`, stash, add, tag, branch create or delete, `worktree add`/`remove`/`move`/`prune`, `switch -c`, `checkout -b`) | 2      | every triage and negative case                 |
+| `no-triage`         | regex, `not_contains` `decision:`                                                                                                                                                                                                                                        | 3      | negative cases                                 |
+| `answered`          | `llm`                                                                                                                                                                                                                                                                    | 2      | negative cases                                 |
 
 - No grader checks whether the skill fired. Under `--ablation none` (the RED
   run) a `tool_used: Skill` grader would be scored rather than shown, and a
