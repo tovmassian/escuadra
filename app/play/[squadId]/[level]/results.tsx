@@ -446,7 +446,7 @@ function Score({
           <View style={styles.strike} pointerEvents="none">
             <EscuadraStrike
               size={strikeSize}
-              color={flawless ? colors.success : colors.accent}
+              color={flawless ? colors.success : colors.accentLine}
               ballColor={colors.success}
               timing={timing}
             />
