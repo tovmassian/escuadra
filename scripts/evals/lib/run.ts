@@ -1,7 +1,7 @@
 // The arguments and environment for `claude plugin eval` (spec §9). The
 // defaults that matter are pinned by a test: the scaffold runs, the report
 // stays local, results land outside the repo, and the fake gh comes first on
-// PATH through a relative entry that resolves inside each run's sandbox.
+// PATH through relative entries that resolve inside each run's sandbox.
 import { join } from 'node:path';
 
 export interface RunOptions {
@@ -23,7 +23,15 @@ export interface RunOptions {
   keep: boolean;
 }
 
-export const SANDBOX_BIN = '.git/sandbox/bin';
+/**
+ * The sandbox's bin, relative to the agent's directory and to the two above it, so the fake gh
+ * and the git wrapper stay first on PATH after a `cd docs` or `cd docs/superpowers`.
+ */
+export const SANDBOX_BIN_ENTRIES = [
+  '.git/sandbox/bin',
+  '../.git/sandbox/bin',
+  '../../.git/sandbox/bin',
+];
 
 export function evalArgs(o: RunOptions): string[] {
   if (!o.full && o.tags.length === 0 && o.caseGlob === undefined) {
@@ -87,5 +95,6 @@ export function parseNumber(flag: string, value: string, integer = false, max = 
 export function evalEnv<E extends Readonly<Record<string, string | undefined>>>(
   env: E,
 ): E & { PATH: string } {
-  return { ...env, PATH: env.PATH ? `${SANDBOX_BIN}:${env.PATH}` : SANDBOX_BIN };
+  const bins = SANDBOX_BIN_ENTRIES.join(':');
+  return { ...env, PATH: env.PATH ? `${bins}:${env.PATH}` : bins };
 }

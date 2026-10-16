@@ -102,11 +102,13 @@ describe('parseNumber', () => {
 });
 
 describe('evalEnv', () => {
-  it('puts the sandbox bin first on PATH, as a relative entry', () => {
-    expect(evalEnv({ PATH: '/usr/bin' }).PATH).toBe('.git/sandbox/bin:/usr/bin');
+  const BINS = '.git/sandbox/bin:../.git/sandbox/bin:../../.git/sandbox/bin';
+
+  it('puts the sandbox bin first on PATH, as relative entries that survive a cd or two', () => {
+    expect(evalEnv({ PATH: '/usr/bin' }).PATH).toBe(`${BINS}:/usr/bin`);
   });
 
   it('leaves no empty entry when PATH is unset', () => {
-    expect(evalEnv({}).PATH).toBe('.git/sandbox/bin');
+    expect(evalEnv({}).PATH).toBe(BINS);
   });
 });
