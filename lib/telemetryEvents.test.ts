@@ -44,10 +44,11 @@ describe('buildPayload', () => {
     expect(buildPayload('study.opened', props)).toEqual({ kind: 'nation' });
   });
 
-  it('keeps only level and score for a shared result', () => {
-    expect(buildPayload('result.shared', { level: 2, score: 7 })).toEqual({
+  it('keeps level, score and format for a shared result', () => {
+    expect(buildPayload('result.shared', { level: 2, score: 7, format: 'image' })).toEqual({
       level: '2',
       score: '7',
+      format: 'image',
     });
   });
 });

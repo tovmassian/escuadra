@@ -224,15 +224,17 @@ WhatsApp, Instagram and the rest appear. No third-party logos are drawn.
 - 10 rounded squares with the shirt numbers, green filled or red outlined;
 - "Can you name Spain's squad?" and `tovmassian.github.io/escuadra`.
 
-It renders off screen and is captured at 1,080×1,920 px:
+It renders off screen and is captured at 1,080×1,920 px. The off-screen copy is laid out at
+`1080 / PixelRatio.get()` pt wide, so its native size is the picture's, and `captureRef` takes no
+`width` or `height`. Those options are points on iOS but raw pixels on Android. The first draft of
+this snippet passed `width: 1080 / PixelRatio.get()`, which gives about 411 px on Android; it was
+corrected in #114.
 
 ```ts
 const uri = await captureRef(ref, {
   format: 'png',
   quality: 1,
   result: 'tmpfile',
-  width: 1080 / PixelRatio.get(),
-  height: 1920 / PixelRatio.get(),
 });
 await Sharing.shareAsync(uri, {
   mimeType: 'image/png',

@@ -99,7 +99,7 @@ flawless — see below). Route, file, and what it does.
 | 4   | `/team/[squadId]/difficulty`      | `app/team/[squadId]/difficulty.tsx`      | The difficulty ladder in level order: the focused level expanded into a card with its description and a Play button, the other levels compact (locked ones stating their unlock condition), and Study, an outline button until level 1 is cleared and a text link after. |
 | 5   | `/team/[squadId]/study`           | `app/team/[squadId]/study.tsx`           | Browsable squad list — number, name, position, club or nationality. With a `players` param it narrows to only those players, hides the position filters, and titles itself "Missed Players".                                                                             |
 | 6   | `/play/[squadId]/[level]`         | `app/play/[squadId]/[level]/index.tsx`   | A question. The photo (or the team's colours) fills the top; the shirt number with the escuadra corner, the slot chips that spell out the player, the prompt, a grid of answers and the footer sit in the thumb zone. A right answer moves on by itself; a miss waits.   |
-| 7   | `/play/[squadId]/[level]/results` | `app/play/[squadId]/[level]/results.tsx` | The round's result: close (a different team), the team and level, share; the score with the escuadra corner, the tier's title and verdict, the round strip; the missed players as snapping photo cards, or a 10/10's ten in circles; the actions.                        |
+| 7   | `/play/[squadId]/[level]/results` | `app/play/[squadId]/[level]/results.tsx` | The round's result: close (a different team), the team and level, share; the score with the escuadra corner, the tier's title and verdict, the round strip; the missed players as snapping photo cards, or a 10/10's ten in circles; the actions; the share sheet.       |
 
 ## Captures
 
@@ -118,6 +118,9 @@ flawless — see below). Route, file, and what it does.
 | `screens/09-results.png`                 | Results — failed round               |
 | `screens/09-results-passed.png`          | Results — passed, 9/10               |
 | `screens/09-results-flawless.png`        | Results — a la escuadra, 10/10       |
+| `screens/09-results-share.png`           | Results — share sheet, Image         |
+| `screens/09-results-share-text.png`      | Results — share sheet, Text          |
+| `screens/09-results-share-flawless.png`  | Results — share sheet, a la escuadra |
 
 Question captures carry real Commons photos, each credited on screen by the
 line under the footer; a capture waits for its images to load.
@@ -158,12 +161,32 @@ corner is two grey bars, the title reads `THESE ARE THE ONES TO LEARN` over
 with "Swipe for all" over a row of photo cards ("You picked Gavi"), the third
 cut off at the edge. Its main button is `RETRY THIS ROUND`, with
 `Study this squad` beneath and no retry icon. `09-results-passed.png` is a
-cleared round that still missed one player, 9/10: the strike in accent with a
+cleared round that still missed one player, 9/10: the strike in `accentLine` with a
 green ball, `LEVEL 1 CLEARED`, one card, and `PLAY LEVEL 2` as the main button,
 with the retry icon beside `Study this squad`. `09-results-flawless.png` is the
 10/10 **a la escuadra** state: a green score and title, the green strike with
 its trail, `ALL 10 · NOTHING MISSED` over the ten players in green-ringed
 circles, and the same actions as a pass.
+
+The first two share captures are the failed round's Results with the share
+sheet open, one per format. The sheet rises from the bottom over a dimmed scrim: a
+handle, `SHARE YOUR ROUND` with a close ×, an **Image / Text** switch with a
+sliding pill, a preview, a hint and the share button.
+`09-results-share.png` is the Image format, the default: a scaled copy of the
+share picture — the team's bands across the top, the escuadra mark and
+wordmark, `SPAIN · 2026 · LEVEL 1`, the score with two grey bars for a corner,
+`STILL LEARNING`, ten squares carrying the shirt numbers (green filled, red
+outlined) and "Can you name Spain's squad?" over the link — then the hint
+"Story-sized picture. No player photos, no names — friends can still play it."
+and `SHARE IMAGE`. The picture always draws in the dark palette, so it is the
+same in the `-light` capture; only the sheet around it changes.
+`09-results-share-text.png` is the Text format: the message as a chat bubble
+(the header, the score with its ten squares, the link, and "Preview" at the
+bottom right), the hint "The score grid for group chats, with a link to the
+app." and `SHARE TEXT`. On web the share button does nothing.
+`09-results-share-flawless.png` is the Image format after the flawless round: the
+picture turns green, with a green `10/10`, the strike with its ball and trail,
+`A LA ESCUADRA` and ten green squares.
 
 The missed-players-filtered Study view has no capture yet.
 

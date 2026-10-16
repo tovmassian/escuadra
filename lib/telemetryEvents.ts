@@ -6,6 +6,7 @@
 // store privacy declarations. Adding one is a disclosure review, not just a
 // code change (CLAUDE.md guardrail 4).
 
+import type { ShareFormat } from '@/lib/shareResult';
 import type { Squad } from '@/types/squad';
 
 type SquadKind = Squad['kind'];
@@ -16,7 +17,7 @@ export const TELEMETRY_EVENTS = {
   'round.started': ['kind', 'level'],
   'round.completed': ['kind', 'level', 'score', 'aLaEscuadra'],
   'study.opened': ['kind'],
-  'result.shared': ['level', 'score'],
+  'result.shared': ['level', 'score', 'format'],
 } as const satisfies Record<string, readonly string[]>;
 
 export type TelemetryEvent = keyof typeof TELEMETRY_EVENTS;
@@ -26,7 +27,7 @@ export interface TelemetryProps {
   'round.started': { kind: SquadKind; level: number };
   'round.completed': { kind: SquadKind; level: number; score: number; aLaEscuadra: boolean };
   'study.opened': { kind: SquadKind };
-  'result.shared': { level: number; score: number };
+  'result.shared': { level: number; score: number; format: ShareFormat };
 }
 
 /**

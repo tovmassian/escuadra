@@ -4,6 +4,7 @@ import { PhotoCredits } from '@/components/PhotoCredits';
 import { PlayerCard } from '@/components/PlayerCard';
 import { popIn, riseIn, slideIn } from '@/components/riseIn';
 import { RoundStrip } from '@/components/RoundStrip';
+import { ShareSheet } from '@/components/ShareSheet';
 import { feedback } from '@/lib/haptics';
 import { photoCreditRows, photoFor } from '@/lib/photos';
 import type { Level } from '@/lib/questionEngine';
@@ -15,7 +16,6 @@ import {
   type PrimaryAction,
   type ResultTier,
 } from '@/lib/resultsView';
-import { formatShareText } from '@/lib/shareResult';
 import { getPlayer, getRoster, getSquad } from '@/lib/squads';
 import { bannerBands, stageVeil } from '@/lib/stageView';
 import { track } from '@/lib/telemetry';
@@ -40,7 +40,7 @@ import type { TeamMarker } from '@/types/squad';
 import { Image } from 'expo-image';
 import { router, useLocalSearchParams } from 'expo-router';
 import { useEffect, useState } from 'react';
-import { FlatList, Pressable, ScrollView, Share, StyleSheet, Text, View } from 'react-native';
+import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   cancelAnimation,
   useAnimatedStyle,
@@ -60,7 +60,8 @@ const ROSTER_COLUMNS = 5;
 // The Results screen (spec §3), top to bottom: a top bar (close, the team and
 // level, share), the score with its escuadra corner, the tier's title and
 // verdict, the round strip, then the missed players as swipeable cards (or,
-// on a 10/10, the ten players in circles), and the actions. Its motion is the
+// on a 10/10, the ten players in circles), and the actions. The share button
+// opens the share sheet (spec §4.1), a modal over the screen. Its motion is the
 // celebration carve-out (`resultsTimeline`, spec §6): the strip fills and the
 // score counts up with it, then the tier's beat, then the actions.
 export default function Results() {
@@ -73,6 +74,9 @@ export default function Results() {
   const squad = getSquad(squadId);
   const score = selectScore(session.results);
   const tier = resultTier(score.correct, score.attempted);
+  // Sharing is not a next step in the study loop, so it sits in the top bar,
+  // apart from the actions, and opens a sheet rather than leaving the screen.
+  const [sharing, setSharing] = useState(false);
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
@@ -187,24 +191,6 @@ export default function Results() {
     router.push({ pathname: '/team/[squadId]/study', params: { squadId } });
   };
 
-  // Sharing is not a next step in the study loop, so it sits in the top bar,
-  // apart from the actions.
-  const shareText = async () => {
-    const message = formatShareText({
-      teamName: squad.name,
-      level,
-      outcomes: session.results.map((r) => r.correct),
-    });
-    try {
-      const outcome = await Share.share({ message });
-      if (outcome.action === Share.sharedAction) {
-        track('result.shared', { level, score: score.correct });
-      }
-    } catch {
-      // The share sheet failing to open is not worth interrupting the results.
-    }
-  };
-
   const primary: Record<PrimaryAction, { label: string; onPress: () => void }> = {
     retry: { label: 'Retry this round', onPress: () => retry(level) },
     nextLevel: { label: `Play level ${level + 1}`, onPress: () => retry((level + 1) as Level) },
@@ -213,117 +199,149 @@ export default function Results() {
   const main = primary[actions.primary];
 
   return (
-    <ScrollView
-      style={styles.root}
-      contentContainerStyle={styles.content}
-      showsVerticalScrollIndicator={false}
-      alwaysBounceVertical={false}
-    >
-      <View style={styles.topBar}>
-        <Pressable
-          testID="results-close"
-          onPress={chooseDifferentTeam}
-          accessibilityRole="button"
-          accessibilityLabel="Close, choose a different team"
-          style={({ pressed }) => [styles.close, pressed && { opacity: opacity.settled }]}
-        >
-          <CloseGlyph color={colors.textSecondary} />
-        </Pressable>
-        <Text style={styles.context} numberOfLines={1}>
-          {`${squad.name} · Level ${level}`}
-        </Text>
-        <Pressable
-          testID="results-share"
-          onPress={shareText}
-          accessibilityRole="button"
-          accessibilityLabel="Share your round"
-          style={({ pressed }) => [styles.share, pressed && { opacity: opacity.settled }]}
-        >
-          <ShareGlyph color={colors.textPrimary} />
-        </Pressable>
-      </View>
-
-      <View style={styles.scoreBlock}>
-        <Score
-          correct={score.correct}
-          attempted={score.attempted}
-          outcomes={strip.map((s) => s.correct)}
-          tier={tier}
-        />
-        <Animated.Text
-          entering={riseIn(reduced, spotlightMotion.numberRise, resultsTimeline.rise, beat)}
-          style={styles.title}
-          maxFontSizeMultiplier={fontScaleCap.display}
-          accessibilityRole="header"
-        >
-          {copy.title}
-        </Animated.Text>
-        <Animated.Text
-          entering={riseIn(
-            reduced,
-            spotlightMotion.numberRise,
-            resultsTimeline.rise,
-            beat + resultsTimeline.actionsStagger,
-          )}
-          style={styles.verdict}
-        >
-          {copy.verdict}
-        </Animated.Text>
-      </View>
-
-      <View style={styles.strip}>
-        <RoundStrip items={strip} />
-      </View>
-
-      {missed.length > 0 ? <MissedCards missed={missed} marker={squad.marker} beat={beat} /> : null}
-      {tier === 'excellent' ? <Roster results={session.results} marker={squad.marker} /> : null}
-
-      <View style={styles.spacer} />
-
-      <View style={styles.actions}>
-        <Animated.View
-          entering={riseIn(reduced, spotlightMotion.numberRise, resultsTimeline.rise, actionAt(0))}
-        >
+    <>
+      <ScrollView
+        style={styles.root}
+        contentContainerStyle={styles.content}
+        showsVerticalScrollIndicator={false}
+        alwaysBounceVertical={false}
+      >
+        <View style={styles.topBar}>
           <Pressable
-            testID="results-primary"
-            onPress={main.onPress}
+            testID="results-close"
+            onPress={chooseDifferentTeam}
             accessibilityRole="button"
-            style={({ pressed }) => [styles.cta, pressed && { opacity: opacity.settled }]}
+            accessibilityLabel="Close, choose a different team"
+            style={({ pressed }) => [styles.close, pressed && { opacity: opacity.settled }]}
           >
-            <Text style={styles.ctaText}>{main.label}</Text>
+            <CloseGlyph color={colors.textSecondary} />
           </Pressable>
-        </Animated.View>
-        <Animated.View
-          entering={riseIn(reduced, spotlightMotion.numberRise, resultsTimeline.rise, actionAt(1))}
-          style={styles.row}
-        >
+          <Text style={styles.context} numberOfLines={1}>
+            {`${squad.name} · Level ${level}`}
+          </Text>
           <Pressable
-            testID="results-study"
-            onPress={studySquad}
+            testID="results-share"
+            onPress={() => setSharing(true)}
             accessibilityRole="button"
-            style={({ pressed }) => [styles.outline, pressed && { opacity: opacity.settled }]}
+            accessibilityLabel="Share your round"
+            style={({ pressed }) => [styles.share, pressed && { opacity: opacity.settled }]}
           >
-            <Text style={styles.outlineText}>Study this squad</Text>
+            <ShareGlyph color={colors.textPrimary} />
           </Pressable>
-          {actions.retryIcon ? (
+        </View>
+
+        <View style={styles.scoreBlock}>
+          <Score
+            correct={score.correct}
+            attempted={score.attempted}
+            outcomes={strip.map((s) => s.correct)}
+            tier={tier}
+          />
+          <Animated.Text
+            entering={riseIn(reduced, spotlightMotion.numberRise, resultsTimeline.rise, beat)}
+            style={styles.title}
+            maxFontSizeMultiplier={fontScaleCap.display}
+            accessibilityRole="header"
+          >
+            {copy.title}
+          </Animated.Text>
+          <Animated.Text
+            entering={riseIn(
+              reduced,
+              spotlightMotion.numberRise,
+              resultsTimeline.rise,
+              beat + resultsTimeline.actionsStagger,
+            )}
+            style={styles.verdict}
+          >
+            {copy.verdict}
+          </Animated.Text>
+        </View>
+
+        <View style={styles.strip}>
+          <RoundStrip items={strip} />
+        </View>
+
+        {missed.length > 0 ? (
+          <MissedCards missed={missed} marker={squad.marker} beat={beat} />
+        ) : null}
+        {tier === 'excellent' ? <Roster results={session.results} marker={squad.marker} /> : null}
+
+        <View style={styles.spacer} />
+
+        <View style={styles.actions}>
+          <Animated.View
+            entering={riseIn(
+              reduced,
+              spotlightMotion.numberRise,
+              resultsTimeline.rise,
+              actionAt(0),
+            )}
+          >
             <Pressable
-              testID="results-retry"
-              onPress={() => retry(level)}
+              testID="results-primary"
+              onPress={main.onPress}
               accessibilityRole="button"
-              accessibilityLabel="Retry this round"
-              style={({ pressed }) => [styles.retry, pressed && { opacity: opacity.settled }]}
+              style={({ pressed }) => [styles.cta, pressed && { opacity: opacity.settled }]}
             >
-              <RetryGlyph color={colors.textPrimary} />
+              <Text style={styles.ctaText}>{main.label}</Text>
             </Pressable>
-          ) : null}
-        </Animated.View>
-        <Animated.View
-          entering={riseIn(reduced, spotlightMotion.numberRise, resultsTimeline.rise, actionAt(2))}
-        >
-          <PhotoCredits rows={photoCredits} />
-        </Animated.View>
-      </View>
-    </ScrollView>
+          </Animated.View>
+          <Animated.View
+            entering={riseIn(
+              reduced,
+              spotlightMotion.numberRise,
+              resultsTimeline.rise,
+              actionAt(1),
+            )}
+            style={styles.row}
+          >
+            <Pressable
+              testID="results-study"
+              onPress={studySquad}
+              accessibilityRole="button"
+              style={({ pressed }) => [styles.outline, pressed && { opacity: opacity.settled }]}
+            >
+              <Text style={styles.outlineText}>Study this squad</Text>
+            </Pressable>
+            {actions.retryIcon ? (
+              <Pressable
+                testID="results-retry"
+                onPress={() => retry(level)}
+                accessibilityRole="button"
+                accessibilityLabel="Retry this round"
+                style={({ pressed }) => [styles.retry, pressed && { opacity: opacity.settled }]}
+              >
+                <RetryGlyph color={colors.textPrimary} />
+              </Pressable>
+            ) : null}
+          </Animated.View>
+          <Animated.View
+            entering={riseIn(
+              reduced,
+              spotlightMotion.numberRise,
+              resultsTimeline.rise,
+              actionAt(2),
+            )}
+          >
+            <PhotoCredits rows={photoCredits} />
+          </Animated.View>
+        </View>
+      </ScrollView>
+      <ShareSheet
+        visible={sharing}
+        onClose={() => setSharing(false)}
+        card={{
+          teamName: squad.name,
+          season: squad.season,
+          level,
+          items: strip,
+          marker: squad.marker,
+        }}
+        text={{ teamName: squad.name, level, outcomes: session.results.map((r) => r.correct) }}
+        onShared={(format) => track('result.shared', { level, score: score.correct, format })}
+      />
+    </>
   );
 }
 
