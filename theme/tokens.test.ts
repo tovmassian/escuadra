@@ -1,9 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { contrastRatio } from '@/lib/contrast';
 import {
+  cardGradient,
   durations,
   gradients,
+  MOTION_TIME_SCALE,
   palettes,
+  resultsTimeline,
   sizes,
   spotlightCues,
   spotlightMotion,
@@ -105,6 +108,7 @@ describe('spotlight stage', () => {
       'photoError',
       'stageShimmer',
       'stageShimmerEdge',
+      'cardLine',
     ] as const) {
       expect(palettes.dark[role], role).toBeDefined();
       expect(palettes.light[role], role).toBe(palettes.dark[role]);
@@ -197,7 +201,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(9);
+    expect(archivo).toHaveLength(10);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }
@@ -280,5 +284,30 @@ describe('spotlight motion', () => {
       expect(spotlightMotion[key], key).toBeGreaterThan(1);
       expect(spotlightMotion[key], key).toBeLessThanOrEqual(1.2);
     }
+  });
+});
+
+describe('results motion', () => {
+  // Spec §6 gives the Results timings at MOTION_TIME_SCALE 1.
+  it('runs at the shipped time scale', () => {
+    expect(MOTION_TIME_SCALE).toBe(1);
+  });
+
+  it('fills the round strip by the time the pass beat starts', () => {
+    const stripEnd = 9 * resultsTimeline.segmentStagger + resultsTimeline.segmentFill;
+    expect(stripEnd).toBeLessThanOrEqual(resultsTimeline.passBeat);
+    expect(resultsTimeline.failBeat).toBeLessThan(resultsTimeline.passBeat);
+  });
+});
+
+describe('cardGradient', () => {
+  it('has as many locations as colours, ascending, within the card', () => {
+    expect(cardGradient.locations.length).toBe(cardGradient.colors.length);
+    cardGradient.colors.forEach((c) => expect(c).toMatch(COLOR));
+    cardGradient.locations.forEach((at, i) => {
+      expect(at).toBeGreaterThanOrEqual(0);
+      expect(at).toBeLessThanOrEqual(1);
+      if (i > 0) expect(at).toBeGreaterThan(cardGradient.locations[i - 1] ?? 1);
+    });
   });
 });
