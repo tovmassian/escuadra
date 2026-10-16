@@ -7,6 +7,7 @@ import { describe, expect, it } from 'vitest';
 import { SUITE } from '../../../.claude/skills/escuadra-issue-runner/evals/cases.ts';
 import { STAYED_DRY_PATTERN } from '../lib/graders.ts';
 import { renderSuite, staleCaseDirs } from '../lib/suite.ts';
+import { TRIAGE_TEMPLATE } from '../lib/triage.ts';
 
 const EVALS = fileURLToPath(
   new URL('../../../.claude/skills/escuadra-issue-runner/evals/', import.meta.url),
@@ -73,6 +74,14 @@ describe('escuadra-issue-runner suite', () => {
       pattern: STAYED_DRY_PATTERN,
       weight: 1,
     });
+  });
+
+  it('grades only first steps the triage template lists', () => {
+    const line = TRIAGE_TEMPLATE.split('\n').find((text) => text.startsWith('first-step:')) ?? '';
+    for (const item of SUITE.cases) {
+      if (item.expect.kind !== 'triage' || item.expect.firstStep === undefined) continue;
+      expect(line, item.name).toMatch(new RegExp(`[:|]${item.expect.firstStep}[|,]`));
+    }
   });
 
   it('keeps a case the skill must not fire on', () => {

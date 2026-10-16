@@ -13,7 +13,7 @@ export const TRIAGE_TEMPLATE = [
   'workspace: <in-place|worktree|n/a>',
   'base: <main|release/X.Y.Z|n/a>',
   'branch: <type>/<number>-<slug>, or n/a',
-  'first-step: <superpowers:skill-name, or n/a>',
+  'first-step: <superpowers:brainstorming|writing-plans|subagent-driven-development|executing-plans|systematic-debugging|test-driven-development, or n/a>',
   '```',
 ].join('\n');
 
