@@ -10,6 +10,8 @@
 // Short labels carry a length budget ("≤ N chars: where") that translators
 // write to (#141, Text expansion). Spec: #141.
 
+import { A_LA_ESCUADRA, ESCUADRA } from './names';
+
 /** A squad's `lastUpdated`, split so each language orders it its own way. */
 export interface CalendarDate {
   day: number;
@@ -27,6 +29,7 @@ function possessive(name: string): string {
 
 const PHOTO_CREDITS = 'Photo credits';
 const CROPPED = 'cropped';
+const USAGE_STATISTICS = 'Share anonymous usage statistics';
 
 export const en = {
   common: {
@@ -264,6 +267,95 @@ export const en = {
     version: (version: string) => `Version ${version}`,
     /** In brackets after the version on a build's own bundle. */
     builtIn: 'built-in',
+    title: 'About',
+    /** Affiliation, then crests. */
+    intro: [
+      `${ESCUADRA} is an independent, unofficial app. It is not affiliated with, endorsed by, or associated with FIFA, UEFA, any league, any national football association, or any club. Club and national team names are used for identification only and remain the property of their respective owners. ${ESCUADRA} is also not affiliated with or endorsed by the Wikimedia Foundation, or by any player shown in a photo.`,
+      `${ESCUADRA} identifies teams by their names and colours, and never shows club crests, badges or logos itself. A player photo can still show one, on a shirt or in the background, because it is part of the original photo. Those marks belong to their owners, and their appearance does not mean that any club, sponsor or brand endorses ${ESCUADRA}.`,
+    ],
+    credits: {
+      heading: 'Data and image credits',
+      sections: [
+        {
+          heading: 'Squad data',
+          paragraphs: [
+            'Squad data is compiled from Wikipedia and Wikidata and reflects the season shown on each team. Wikipedia content is available under CC BY-SA. Wikidata is available under CC0.',
+          ],
+        },
+        {
+          heading: 'Player photos',
+          paragraphs: [
+            "Player photos come from Wikimedia Commons. Each one is used under the licence its author chose: CC BY-SA, CC BY, CC0, public domain, or Commons' own Attribution licence. Every photo is cropped to fit its frame. Where the app's text sits over a photo, the app shades that part of the screen, and it dims the photo after a wrong answer. A photo too small to fill the screen is shown whole, over a darkened copy of itself. The photo files themselves are not edited. Not every player has a photo.",
+            `The author, the licence and the word "${CROPPED}" appear under the question for as long as a photo is on screen, and again, for the whole round, under "${PHOTO_CREDITS}" in the results and at the end of the Study screen. Tap the author for the photo's page on Wikimedia Commons, or the licence for its terms.`,
+          ],
+        },
+        {
+          heading: 'Flags and fonts',
+          paragraphs: [
+            'Flag images are from flagpedia.net and are in the public domain. The Inter, IBM Plex Mono and Archivo typefaces are used under the SIL Open Font License 1.1.',
+          ],
+        },
+      ],
+    },
+    /** The setting row's label and the switch's spoken name. */
+    vibration: 'Vibration',
+    usageStatistics: USAGE_STATISTICS,
+    privacy: {
+      heading: 'Privacy',
+      /** Set in emphasis. */
+      lead: `${ESCUADRA} has no account, no sign-in and no advertising, and it never asks for your name, email or any contact details.`,
+      paragraphs: [
+        'Your scores and settings stay on your device. The only things that leave it are the ones described below, and none of them is linked to who you are.',
+      ],
+      sections: [
+        {
+          heading: 'Player photos',
+          paragraphs: [
+            `${ESCUADRA} does not ship player photos. They are loaded from Wikimedia Commons, run by the Wikimedia Foundation: the ten photos for a round when the round starts, and a squad's photos on the Study screen as you scroll. Like any website, Wikimedia receives your device's IP address and the details of each request, including which photos were asked for, and so which players are in your round or squad. ${ESCUADRA} sends nothing else to Wikimedia, and Wikimedia's own privacy policy applies to what it receives.`,
+            "Photos already loaded may be kept in the app's cache on your device so that they appear faster. Without a connection the quiz works as usual and shows the team's colours and the shirt number instead of a photo.",
+            `Tapping a photo credit opens the photo's Wikimedia Commons page, or its licence on the Creative Commons website, in an in-app browser. Those sites have their own privacy policies, and ${ESCUADRA} cannot see what you do there.`,
+          ],
+        },
+        {
+          heading: 'Sharing',
+          paragraphs: [
+            `Sharing a result creates a picture or a short text on your device and passes it to the app you pick in your phone's share menu. ${ESCUADRA} does not see, send or keep what you share.`,
+          ],
+        },
+        {
+          heading: 'Anonymous usage statistics',
+          paragraphs: [
+            `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off at the top of this screen. Each one is tagged with a random identifier created for this installation. It is not linked to you, your device or your accounts, and it is not shared with anyone else.`,
+            `The statistics are: the app was opened; a round started, with whether the team is a club or a nation and the difficulty level; a round finished, with the same two details, the score, and whether it was ${A_LA_ESCUADRA}; the Study screen was opened, with whether the team is a club or a nation; a result was shared, with the level, the score and whether it was shared as a picture or as text. They never include team names, player names, your answers or anything you type.`,
+          ],
+        },
+        {
+          heading: 'App updates',
+          paragraphs: [
+            `When ${ESCUADRA} starts, it checks whether a newer version of the app is available from Expo, the service that delivers its updates. The check sends only what is needed to deliver the right update: your device's operating system, the app's version and project, and a random identifier created for this installation. The identifier is not linked to you or to anything you do in the app. Without a connection, the app works fully offline and skips the check.`,
+          ],
+        },
+        {
+          heading: 'What is stored on your device',
+          paragraphs: [
+            `${ESCUADRA} saves nine things locally, on your device only: your best score for each team and difficulty level; which levels you have completed; the last team and level you played; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; your choice about usage statistics; and the random identifier those statistics use.`,
+            "This lives in the app's own private storage. Apart from that identifier, which is sent with each usage statistic, it never leaves your phone. Deleting the app deletes it, along with any cached photos. There is no backup and no sync, and no way for anyone — including the developer — to read it.",
+          ],
+        },
+        {
+          heading: 'Crash reports',
+          paragraphs: [
+            `If you allow your device to share diagnostics, Apple (on iOS) or Google (on Android) may share anonymised crash reports with the developer. That is handled by Apple or Google and controlled in your device settings. ${ESCUADRA} itself sends no crash reports.`,
+          ],
+        },
+        {
+          heading: 'Children',
+          paragraphs: [
+            `${ESCUADRA} has no account and asks for no personal information from anyone, including children. Usage statistics are anonymous and can be switched off at any time.`,
+          ],
+        },
+      ],
+    },
   },
 };
 
