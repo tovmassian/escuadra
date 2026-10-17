@@ -3,6 +3,7 @@ import Constants from 'expo-constants';
 import * as Updates from 'expo-updates';
 import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useT } from '@/i18n/useT';
 import { versionLabel } from '@/lib/aboutView';
 import { useProgress } from '@/stores/progress';
 import { radii, spacing, typography } from '@/theme/tokens';
@@ -11,6 +12,7 @@ import { useThemeColors } from '@/theme/useTheme';
 export default function About() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
+  const t = useT();
   const telemetryEnabled = useProgress((s) => s.telemetryEnabled);
   const setTelemetryEnabled = useProgress((s) => s.setTelemetryEnabled);
   const haptics = useProgress((s) => s.haptics);
@@ -229,11 +231,11 @@ export default function About() {
 
           <Text style={styles.subHeading}>What is stored on your device</Text>
           <Text style={styles.paragraph}>
-            Escuadra saves eight things locally, on your device only: your best score for each team
+            Escuadra saves nine things locally, on your device only: your best score for each team
             and difficulty level; which levels you have completed; the last team and level you
-            played; your light or dark appearance preference; whether vibration is on; whether the
-            Study screen shows cards or a list; your choice about usage statistics; and the random
-            identifier those statistics use.
+            played; your light or dark appearance preference; your language choice; whether
+            vibration is on; whether the Study screen shows cards or a list; your choice about usage
+            statistics; and the random identifier those statistics use.
           </Text>
           <Text style={styles.paragraph}>
             This lives in the app&apos;s own private storage. Apart from that identifier, which is
@@ -257,13 +259,17 @@ export default function About() {
         </View>
 
         <Text style={styles.versionLine}>
-          {versionLabel(version, {
-            isEnabled: Updates.isEnabled,
-            isEmbeddedLaunch: Updates.isEmbeddedLaunch,
-            updateId: Updates.updateId,
-            channel: Updates.channel,
-            manifest: Updates.manifest,
-          })}
+          {versionLabel(
+            version,
+            {
+              isEnabled: Updates.isEnabled,
+              isEmbeddedLaunch: Updates.isEmbeddedLaunch,
+              updateId: Updates.updateId,
+              channel: Updates.channel,
+              manifest: Updates.manifest,
+            },
+            t,
+          )}
         </Text>
       </ScrollView>
     </View>

@@ -1,10 +1,12 @@
 import { describe, expect, it } from 'vitest';
+import { en } from '@/i18n/en';
 import {
   focusedLevel,
   formatLastUpdated,
   ladderRows,
   playLabel,
   rungAccessibilityLabel,
+  unlockHint,
 } from './ladderView';
 
 describe('ladderRows', () => {
@@ -56,16 +58,13 @@ describe('ladderRows', () => {
     expect(ladderRows('bar', { 'bar:1': 5, 'bar:2': 9 })[1]?.best).toBeUndefined();
   });
 
-  it('gives each locked level a hint naming the score that unlocks it', () => {
-    const rows = ladderRows('bar', {});
-    expect(rows[1]?.unlockHint).toBe('Score 8/10 on L1');
-    expect(rows[2]?.unlockHint).toBe('Score 8/10 on L2');
+  it('names the score that unlocks a level', () => {
+    expect(unlockHint(2, en)).toBe('Score 8/10 on L1');
+    expect(unlockHint(3, en)).toBe('Score 8/10 on L2');
   });
 
-  it('gives open levels no unlock hint', () => {
-    const rows = ladderRows('bar', { 'bar:1': 9 });
-    expect(rows[0]?.unlockHint).toBeUndefined();
-    expect(rows[1]?.unlockHint).toBeUndefined();
+  it('carries no text in the rows', () => {
+    expect(ladderRows('bar', {})[1]).toEqual({ level: 2, status: 'locked' });
   });
 
   it('does not leak progress between squads', () => {
@@ -81,11 +80,11 @@ describe('ladderRows', () => {
 
 describe('formatLastUpdated', () => {
   it('formats an ISO date as day month year', () => {
-    expect(formatLastUpdated('2026-08-21')).toBe('21 Aug 2026');
+    expect(formatLastUpdated('2026-08-21', en)).toBe('21 Aug 2026');
   });
 
   it('does not zero-pad the day', () => {
-    expect(formatLastUpdated('2026-01-05')).toBe('5 Jan 2026');
+    expect(formatLastUpdated('2026-01-05', en)).toBe('5 Jan 2026');
   });
 });
 
@@ -113,17 +112,17 @@ describe('focusedLevel', () => {
 
 describe('playLabel', () => {
   it('reads Play for a level not yet played', () => {
-    expect(playLabel({ level: 1, status: 'unlocked' })).toBe('Play');
+    expect(playLabel({ level: 1, status: 'unlocked' }, en)).toBe('Play');
   });
 
   it('reads Play Again for a cleared level', () => {
-    expect(playLabel({ level: 1, status: 'cleared', best: { correct: 9, total: 10 } })).toBe(
+    expect(playLabel({ level: 1, status: 'cleared', best: { correct: 9, total: 10 } }, en)).toBe(
       'Play Again',
     );
   });
 
   it('reads Play Again for a level played but not yet cleared', () => {
-    expect(playLabel({ level: 1, status: 'unlocked', best: { correct: 5, total: 10 } })).toBe(
+    expect(playLabel({ level: 1, status: 'unlocked', best: { correct: 5, total: 10 } }, en)).toBe(
       'Play Again',
     );
   });
@@ -132,18 +131,20 @@ describe('playLabel', () => {
 describe('rungAccessibilityLabel', () => {
   it('announces a cleared rung with its best score', () => {
     const row = { level: 1, status: 'cleared', best: { correct: 9, total: 10 } } as const;
-    expect(rungAccessibilityLabel(row, 'Name from Number')).toBe('Name from Number, best 9 of 10');
+    expect(rungAccessibilityLabel(row, 'Name from Number', en)).toBe(
+      'Name from Number, best 9 of 10',
+    );
   });
 
   it('announces a locked rung with what unlocks it', () => {
-    const row = { level: 3, status: 'locked', unlockHint: 'Score 8/10 on L2' } as const;
-    expect(rungAccessibilityLabel(row, 'Full Profile')).toBe(
+    const row = { level: 3, status: 'locked' } as const;
+    expect(rungAccessibilityLabel(row, 'Full Profile', en)).toBe(
       'Full Profile, locked, Score 8/10 on L2',
     );
   });
 
   it('announces an unlocked rung by its title alone', () => {
-    expect(rungAccessibilityLabel({ level: 2, status: 'unlocked' }, 'Name + Position')).toBe(
+    expect(rungAccessibilityLabel({ level: 2, status: 'unlocked' }, 'Name + Position', en)).toBe(
       'Name + Position',
     );
   });

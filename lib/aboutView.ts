@@ -3,6 +3,7 @@
 // like the other lib/*View.ts modules.
 
 import type { Manifest } from 'expo-updates';
+import type { Messages } from '@/i18n/en';
 
 export type UpdateState = {
   isEnabled: boolean;
@@ -33,23 +34,17 @@ function updateGroupFromManifest(manifest: Partial<Manifest>): string | null {
  * docs/superpowers/specs/2026-09-24-about-update-line-design.md for the
  * table of cases this implements.
  */
-export function versionLabel(version: string, update: UpdateState): string {
-  if (!update.isEnabled) {
-    return `Version ${version}`;
-  }
-
-  if (update.isEmbeddedLaunch) {
-    return `Version ${version} (built-in)`;
-  }
+export function versionLabel(version: string, update: UpdateState, messages: Messages): string {
+  const label = messages.about.version(version);
+  if (!update.isEnabled) return label;
+  if (update.isEmbeddedLaunch) return `${label} (${messages.about.builtIn})`;
 
   const id = updateGroupFromManifest(update.manifest) ?? update.updateId;
-  if (!id) {
-    return `Version ${version}`;
-  }
+  if (!id) return label;
 
   const shortId = id.slice(0, GROUP_ID_LENGTH);
   const channelSuffix =
     update.channel && update.channel !== PRODUCTION_CHANNEL ? ` · ${update.channel}` : '';
 
-  return `Version ${version} (${shortId}${channelSuffix})`;
+  return `${label} (${shortId}${channelSuffix})`;
 }

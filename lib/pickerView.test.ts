@@ -1,6 +1,13 @@
 import type { League, SquadManifestEntry } from '@/types/squad';
 import { describe, expect, it } from 'vitest';
-import { leagueFilters, teamMetaLine, teamProgress, visibleSquads } from './pickerView';
+import { en } from '@/i18n/en';
+import {
+  leagueFilters,
+  leagueLabel,
+  teamMetaLine,
+  teamProgress,
+  visibleSquads,
+} from './pickerView';
 
 describe('teamProgress', () => {
   it('returns null for a team that has never been played', () => {
@@ -52,20 +59,27 @@ describe('teamProgress', () => {
 
 describe('teamMetaLine', () => {
   it('shows only the season while progress is still hydrating', () => {
-    expect(teamMetaLine('2025/26', undefined)).toBe('2025/26');
+    expect(teamMetaLine('2025/26', undefined, en)).toBe('2025/26');
   });
 
   it('shows the season plus NOT PLAYED for a team with no recorded progress', () => {
-    expect(teamMetaLine('2025/26', null)).toBe('2025/26 · NOT PLAYED');
+    expect(teamMetaLine('2025/26', null, en)).toBe('2025/26 · NOT PLAYED');
   });
 
   it('shows the season plus level and best score for a played team', () => {
     const progress = { level: 2, correct: 7, total: 10, cleared: false };
-    expect(teamMetaLine('2025/26', progress)).toBe('2025/26 · LEVEL 2 · BEST 7/10');
+    expect(teamMetaLine('2025/26', progress, en)).toBe('2025/26 · LEVEL 2 · BEST 7/10');
   });
 
   it('uses the nation-style season string unchanged', () => {
-    expect(teamMetaLine('2026', null)).toBe('2026 · NOT PLAYED');
+    expect(teamMetaLine('2026', null, en)).toBe('2026 · NOT PLAYED');
+  });
+});
+
+describe('leagueLabel', () => {
+  it('names leagues as they are, and the clear pill from the catalog', () => {
+    expect(leagueLabel('ALL', en)).toBe('ALL');
+    expect(leagueLabel('la-liga', en)).toBe('La Liga');
   });
 });
 

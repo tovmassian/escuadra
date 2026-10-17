@@ -20,10 +20,14 @@ let lastCapture: string | null = null;
  * `width` option as points on iOS and as pixels on Android, so none is passed).
  * True once the menu has closed: Expo cannot tell whether the picture was
  * sent, so that is what `result.shared` counts for an image (spec §10.3).
+ * `dialogTitle` is Android's share-dialog title, in the app's language.
  * False on web, where the button does nothing (spec §4.2), or when the device
  * cannot share a file.
  */
-export async function shareImage(card: RefObject<View | null>): Promise<boolean> {
+export async function shareImage(
+  card: RefObject<View | null>,
+  dialogTitle: string,
+): Promise<boolean> {
   if (Platform.OS === 'web' || !(await Sharing.isAvailableAsync())) return false;
   releaseShareImage();
   lastCapture = await captureRef(card, {
@@ -34,7 +38,7 @@ export async function shareImage(card: RefObject<View | null>): Promise<boolean>
   await Sharing.shareAsync(lastCapture, {
     mimeType: 'image/png',
     UTI: 'public.png',
-    dialogTitle: 'Share your round',
+    dialogTitle,
   });
   return true;
 }

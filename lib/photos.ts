@@ -2,6 +2,7 @@
 // `player.photo` (written by `squadctl enrich`). Each photo load sends the
 // user's IP to Wikimedia, which is why the privacy disclosures name it
 // (guardrail 4). Spec: docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md.
+import type { Messages } from '@/i18n/en';
 import { commonsFileUrl } from '@/scripts/commons';
 import type { QuestionResult } from '@/stores/session';
 import type { PhotoCredit, Player } from '@/types/squad';
@@ -20,7 +21,10 @@ export interface CreditLink {
  *  Commons page, which names them in full, or "Wikimedia Commons" when no
  *  name could be read), the licence (linking its deed, else that page), and
  *  the change made to the photo (every screen crops it). */
-export function creditParts(credit: PhotoCredit): {
+export function creditParts(
+  credit: PhotoCredit,
+  messages: Messages,
+): {
   author: CreditLink;
   licence: CreditLink;
   change: string;
@@ -29,7 +33,7 @@ export function creditParts(credit: PhotoCredit): {
   return {
     author: { text: credit.author ?? 'Wikimedia Commons', url: page },
     licence: { text: credit.licence, url: credit.licenceUrl ?? page },
-    change: 'cropped',
+    change: messages.credits.cropped,
   };
 }
 

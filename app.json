@@ -44,6 +44,15 @@
       ],
       "expo-font",
       "expo-image",
+      [
+        "expo-localization",
+        {
+          "supportedLocales": {
+            "ios": ["en", "es", "fr", "it", "de"],
+            "android": ["en", "es", "fr", "it", "de"]
+          }
+        }
+      ],
       "expo-status-bar",
       "expo-web-browser"
     ],

@@ -1,6 +1,7 @@
 import { ShareGlyph } from '@/components/ActionGlyphs';
 import { ShareCard } from '@/components/ShareCard';
 import { Sheet } from '@/components/Sheet';
+import { useT } from '@/i18n/useT';
 import { releaseShareImage, shareImage, shareText } from '@/lib/share';
 import {
   formatShareText,
@@ -74,6 +75,7 @@ export function ShareSheet({ visible, onClose, card, text, onShared }: ShareShee
 
 function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | 'onClose'>) {
   const colors = useThemeColors();
+  const t = useT();
   const reduced = useReducedMotion();
   const [format, setFormat] = useState<ShareFormat>('image');
   const [busy, setBusy] = useState(false);
@@ -96,8 +98,8 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
   }, [format, pillWidth, reduced, pillX]);
   const pillStyle = useAnimatedStyle(() => ({ transform: [{ translateX: pillX.value }] }));
 
-  const view = shareCardView(card);
-  const parts = shareTextParts(text);
+  const view = shareCardView(card, t);
+  const parts = shareTextParts(text, t);
 
   const sheet = sizes.shareSheet;
   const captureWidth = shareCapture.width / PixelRatio.get();
@@ -194,7 +196,9 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
     setBusy(true);
     try {
       const sent =
-        format === 'image' ? await shareImage(cardRef) : await shareText(formatShareText(text));
+        format === 'image'
+          ? await shareImage(cardRef, t.share.title)
+          : await shareText(formatShareText(text, t));
       if (sent) onShared(format);
     } catch {
       // A share menu that fails to open is not worth interrupting the results.

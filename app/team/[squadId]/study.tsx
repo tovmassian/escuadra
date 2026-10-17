@@ -42,6 +42,7 @@ import {
   spacing,
   typography,
 } from '@/theme/tokens';
+import { useT } from '@/i18n/useT';
 import { useThemeColors } from '@/theme/useTheme';
 import type { RosterEntry } from '@/types/squad';
 
@@ -73,6 +74,7 @@ const CONTROL_SLOP = (sizes.minTapTarget - sizes.studyControl) / 2;
 export default function Study() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
+  const t = useT();
   const { squadId } = useLocalSearchParams<{ squadId: string }>();
   const view = useProgress((s) => s.studyView);
   const setStudyView = useProgress((s) => s.setStudyView);
@@ -185,7 +187,7 @@ export default function Study() {
     const covered = hidden && !revealed.has(player.id);
     const affiliation = studyAffiliation(player, squad.kind);
     const flag = squad.kind === 'club' ? flagFor(player.nationality) : null;
-    const label = studyLabel(member.no, player, affiliation, covered);
+    const label = studyLabel(member.no, player, affiliation, covered, t);
     const photo = photoFor(player);
     const onPress = () => reveal(player.id, player.name);
 
@@ -299,7 +301,7 @@ export default function Study() {
           >
             Squad
           </Text>
-          <Text style={styles.count}>{studyCount(rows.length, roster.length, filter)}</Text>
+          <Text style={styles.count}>{studyCount(rows.length, roster.length, filter, t)}</Text>
         </View>
       </View>
 

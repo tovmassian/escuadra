@@ -5,6 +5,7 @@ import { PlayerCard } from '@/components/PlayerCard';
 import { popIn, riseIn, slideIn } from '@/components/riseIn';
 import { RoundStrip } from '@/components/RoundStrip';
 import { ShareSheet } from '@/components/ShareSheet';
+import { useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
 import { photoCreditRows, photoFor } from '@/lib/photos';
 import type { Level } from '@/lib/questionEngine';
@@ -67,6 +68,7 @@ const ROSTER_COLUMNS = 5;
 export default function Results() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
+  const t = useT();
   const reduced = useReducedMotion();
   const { squadId, level: levelParam } = useLocalSearchParams<{ squadId: string; level: string }>();
   const level = Number(levelParam) as Level;
@@ -160,7 +162,7 @@ export default function Results() {
   if (!squad || session.squadId !== squadId || session.level !== level) return null;
 
   const missed = selectMissed(session.results);
-  const copy = resultCopy({ tier, level, teamName: squad.name, season: squad.season });
+  const copy = resultCopy({ tier, level, teamName: squad.name, season: squad.season }, t);
   const actions = resultActions(tier !== 'fail', level < MAX_LEVEL);
   const strip = session.results.map((r) => ({
     no: r.question.memberNo,
@@ -496,6 +498,7 @@ function MissedCards({
   beat: number;
 }) {
   const colors = useThemeColors();
+  const t = useT();
   const reduced = useReducedMotion();
   const card = sizes.playerCard.results;
   const styles = StyleSheet.create({
@@ -541,7 +544,7 @@ function MissedCards({
               height={card.height}
               shirtNumber={item.question.memberNo}
               name={item.question.playerName}
-              line={missedLine(item)}
+              line={missedLine(item, t)}
               photo={photoFor(getPlayer(item.question.playerId))}
               marker={marker}
             />

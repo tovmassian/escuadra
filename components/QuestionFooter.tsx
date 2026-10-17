@@ -23,6 +23,7 @@ import {
   spotlightMotion,
   typography,
 } from '@/theme/tokens';
+import { useT } from '@/i18n/useT';
 import { useThemeColors } from '@/theme/useTheme';
 import type { PhotoCredit } from '@/types/squad';
 
@@ -46,6 +47,7 @@ interface QuestionFooterProps {
 // Then the photo credit, always.
 export function QuestionFooter({ mode, compact, last, onNext, credit }: QuestionFooterProps) {
   const colors = useThemeColors();
+  const t = useT();
   const reduced = useReducedMotion();
   // The least the button is tall; it grows with the text at large sizes.
   const minHeight = compact ? sizes.cta.compact : sizes.cta.normal;
@@ -91,7 +93,7 @@ export function QuestionFooter({ mode, compact, last, onNext, credit }: Question
             accessibilityRole="button"
             style={({ pressed }) => [styles.cta, pressed && { opacity: opacity.settled }]}
           >
-            <Text style={styles.ctaText}>{nextButtonText(mode, last).label}</Text>
+            <Text style={styles.ctaText}>{nextButtonText(mode, last, t).label}</Text>
           </Pressable>
         </Animated.View>
       ) : null}
@@ -113,7 +115,8 @@ function NextBar({
   onNext: () => void;
 }) {
   const colors = useThemeColors();
-  const text = nextButtonText('autoNext', last);
+  const t = useT();
+  const text = nextButtonText('autoNext', last, t);
   const progress = useSharedValue(0);
   useEffect(() => {
     // A timer cue, not decorative motion: it shows how long is left before the

@@ -43,6 +43,7 @@ import {
   stageGradients,
   typography,
 } from '@/theme/tokens';
+import { useT } from '@/i18n/useT';
 import { useThemeColors, useThemeName } from '@/theme/useTheme';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -68,6 +69,7 @@ export default function Question() {
   // the window's treatment of the system bars varies by OS version.
   const frame = useSafeAreaFrame();
   const colors = useThemeColors();
+  const t = useT();
   const themeName = useThemeName();
   const reduced = useReducedMotion();
   const screenReader = useScreenReader();
@@ -373,7 +375,7 @@ export default function Question() {
                 accessibilityRole="header"
                 accessibilityLiveRegion="polite"
               >
-                {promptText(part, question.memberNo, verdict)}
+                {promptText(part, question.memberNo, verdict, t)}
               </Text>
               {counter ? <Text style={styles.counter}>{counter}</Text> : null}
             </View>

@@ -1,6 +1,7 @@
 // Pure view-model helpers for the play screen. No React and no store values —
 // only types — so this stays unit-testable, since the project's Vitest setup
 // has no React Native renderer.
+import type { Messages } from '@/i18n/en';
 import type { Level, Question, QuestionPart } from '@/lib/questionEngine';
 import type { QuestionResult } from '@/stores/session';
 import type { Position, Squad } from '@/types/squad';
@@ -135,17 +136,22 @@ export function streak(results: QuestionResult[], currentIndex: number): number 
 }
 
 /** The prompt row's words: the part's question, or the verdict once scored. */
-export function promptText(part: QuestionPart, memberNo: number, verdict: boolean | null): string {
-  if (verdict !== null) return verdict ? 'Correct' : 'Missed';
+export function promptText(
+  part: QuestionPart,
+  memberNo: number,
+  verdict: boolean | null,
+  messages: Messages,
+): string {
+  if (verdict !== null) return verdict ? messages.round.correct : messages.round.missed;
   switch (part.kind) {
     case 'name':
-      return `Who wears ${memberNo}?`;
+      return messages.round.whoWears(memberNo);
     case 'position':
-      return 'Position?';
+      return messages.round.askPosition;
     case 'club':
-      return 'Which club?';
+      return messages.round.askClub;
     case 'nationality':
-      return 'Nationality?';
+      return messages.round.askNationality;
   }
 }
 
@@ -177,16 +183,9 @@ export function tileVerdict(
   return index === answeredIndex ? 'incorrect-picked' : 'incorrect-other';
 }
 
-const POSITION_LABELS: Record<Position, string> = {
-  GK: 'Keeper',
-  DF: 'Defender',
-  MF: 'Midfield',
-  FW: 'Forward',
-};
-
 /** The word under a position tile's code. */
-export function positionLabel(position: Position): string {
-  return POSITION_LABELS[position];
+export function positionLabel(position: Position, messages: Messages): string {
+  return messages.positions[position];
 }
 
 /**
@@ -221,10 +220,12 @@ export interface NextButtonText {
 export function nextButtonText(
   mode: Exclude<FooterMode, 'waiting'>,
   last: boolean,
+  messages: Messages,
 ): NextButtonText {
-  const spoken = last ? 'See results' : mode === 'gotIt' ? 'Got it — next' : 'Next question';
+  const { round } = messages;
+  const spoken = last ? round.seeResults : mode === 'gotIt' ? round.gotItNext : round.nextQuestion;
   if (mode !== 'autoNext') return { label: spoken, spoken };
-  return { label: `${last ? 'See results' : 'Next'} · tap to skip`, spoken };
+  return { label: round.tapToSkip(last ? round.seeResults : round.next), spoken };
 }
 
 /** The streak haptic's moment: the count just reached 5 or 10 (spec §7). */
@@ -232,30 +233,8 @@ export function streakMilestone(previous: number, current: number): boolean {
   return current !== previous && (current === 5 || current === 10);
 }
 
-const SLOT_NAMES: Record<SlotKey, string> = {
-  NAME: 'Name',
-  POS: 'Position',
-  AGE: 'Age',
-  CLUB: 'Club',
-  NAT: 'Nationality',
-};
-
 /** A slot chip's screen-reader label. A slot still being asked carries no
  *  value, so its label cannot read out the answer. */
-export function slotSpoken(slot: Slot): string {
-  const name = SLOT_NAMES[slot.key];
-  switch (slot.state) {
-    case 'active':
-      return `${name}: being asked`;
-    case 'pending':
-      return `${name}: asked next`;
-    case 'correct':
-      return `${name}: ${slot.value ?? ''}, right`;
-    case 'wrong':
-      return `${name}: ${slot.value ?? ''}, the right answer`;
-    case 'notAsked':
-      return `${name}: ${slot.value ?? ''}, not asked`;
-    case 'given':
-      return `${name}: ${slot.value ?? ''}`;
-  }
+export function slotSpoken(slot: Slot, messages: Messages): string {
+  return messages.round.slotSpoken[slot.state](messages.slots[slot.key], slot.value ?? '');
 }

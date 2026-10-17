@@ -3,6 +3,8 @@
 // flag emoji (they depend on an OS font; CLAUDE.md guardrail 2), nothing
 // crest-like, and never a player's name or photo (spec §1).
 
+import type { Messages } from '@/i18n/en';
+import { A_LA_ESCUADRA, A_LA_ESCUADRA_TITLE, ESCUADRA } from '@/i18n/names';
 import { isFlawless, resultTier, type ResultTier } from '@/lib/resultsView';
 
 /** The marketing site links both stores; a store URL is wrong on the other platform. */
@@ -32,20 +34,23 @@ export interface ShareTextParts {
   url: string;
 }
 
-export function shareTextParts({ teamName, level, outcomes }: ShareInput): ShareTextParts {
+export function shareTextParts(
+  { teamName, level, outcomes }: ShareInput,
+  messages: Messages,
+): ShareTextParts {
   const squares = outcomes.filter((o): o is boolean => o !== null);
   const correct = squares.filter(Boolean).length;
   return {
-    header: `Escuadra · ${teamName} · Level ${level}`,
+    header: [ESCUADRA, teamName, messages.common.level(level)].join(' · '),
     score: `${correct}/${squares.length}`,
-    verdict: isFlawless(correct, squares.length) ? 'a la escuadra' : null,
+    verdict: isFlawless(correct, squares.length) ? A_LA_ESCUADRA : null,
     squares,
     url: SHARE_URL,
   };
 }
 
-export function formatShareText(input: ShareInput): string {
-  const { header, score, verdict, squares, url } = shareTextParts(input);
+export function formatShareText(input: ShareInput, messages: Messages): string {
+  const { header, score, verdict, squares, url } = shareTextParts(input, messages);
   const grid = squares.map((o) => (o ? '🟩' : '🟥')).join('');
   return [header, `${score}  ${verdict ? `${verdict}  ` : ''}${grid}`, '', url].join('\n');
 }
@@ -75,29 +80,27 @@ export interface ShareCardView {
   link: string;
 }
 
-// "Spain's", but "Netherlands'".
-function possessive(name: string): string {
-  return name.endsWith('s') ? `${name}'` : `${name}'s`;
-}
-
 // Results' fail title ("These are the ones to learn") speaks to the player;
 // the picture speaks to whoever receives it, so a fail reads "Still learning".
-const TITLES: Record<ResultTier, (level: number) => string> = {
-  fail: () => 'Still learning',
-  passed: (level) => `Level ${level} cleared`,
-  excellent: () => 'A la escuadra',
-};
+function cardTitle(tier: ResultTier, level: number, messages: Messages): string {
+  if (tier === 'excellent') return A_LA_ESCUADRA_TITLE;
+  if (tier === 'passed') return messages.results.clearedTitle(level);
+  return messages.share.stillLearning;
+}
 
-export function shareCardView({ teamName, season, level, items }: ShareCardInput): ShareCardView {
+export function shareCardView(
+  { teamName, season, level, items }: ShareCardInput,
+  messages: Messages,
+): ShareCardView {
   const correct = items.filter((i) => i.correct).length;
   const tier = resultTier(correct, items.length);
   return {
-    eyebrow: `${teamName} · ${season} · Level ${level}`,
+    eyebrow: [teamName, season, messages.common.level(level)].join(' · '),
     correct,
     total: items.length,
     tier,
-    title: TITLES[tier](level),
-    question: `Can you name ${possessive(teamName)} squad?`,
+    title: cardTitle(tier, level, messages),
+    question: messages.share.question(teamName),
     link: SHARE_URL_DISPLAY,
   };
 }

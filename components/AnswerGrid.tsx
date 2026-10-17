@@ -7,6 +7,7 @@ import type { ShotTap } from './useShot';
 import type { FlagCode } from '@/assets/flags/generated';
 import { flagFor } from '@/lib/flags';
 import type { QuestionPart } from '@/lib/questionEngine';
+import { useT } from '@/i18n/useT';
 import { positionLabel, tileVerdict, type AnswerLayout } from '@/lib/roundView';
 import { durations, spacing, spotlightMotion } from '@/theme/tokens';
 
@@ -42,6 +43,7 @@ export function AnswerGrid({
   onAnswer,
 }: AnswerGridProps) {
   const reduced = useReducedMotion();
+  const t = useT();
   // The grid whose tiles may be pressed. The next part's tiles sit in the same
   // spot as the ones just answered, so a double tap or a bounce would answer
   // them as well. Presses are ignored until the old tiles have faded
@@ -58,7 +60,7 @@ export function AnswerGrid({
       ? part.options.map((option, index) => ({
           index,
           label: option,
-          sub: positionLabel(option),
+          sub: positionLabel(option, t),
           flag: undefined,
         }))
       : part.options.map((option, index) => ({

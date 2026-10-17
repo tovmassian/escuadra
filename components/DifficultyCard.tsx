@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { BestPill } from '@/components/BestPill';
 import { Button } from '@/components/Button';
 import { LadderBadge } from '@/components/LadderBadge';
+import { useT } from '@/i18n/useT';
 import { type LadderRow, playLabel } from '@/lib/ladderView';
 import { borderWidths, radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -18,6 +19,7 @@ interface DifficultyCardProps {
 // than a card the player has to guess is pressable.
 export function DifficultyCard({ row, title, description, onPlay }: DifficultyCardProps) {
   const colors = useThemeColors();
+  const t = useT();
   const styles = StyleSheet.create({
     row: { flexDirection: 'row', alignItems: 'flex-start', gap: spacing.sm },
     // Drops the badge level with the title line rather than the card's top edge.
@@ -57,7 +59,7 @@ export function DifficultyCard({ row, title, description, onPlay }: DifficultyCa
         </View>
         <Text style={styles.description}>{description}</Text>
         <View style={styles.action}>
-          <Button label={playLabel(row)} variant="filled" onPress={onPlay} />
+          <Button label={playLabel(row, t)} variant="filled" onPress={onPlay} />
         </View>
       </View>
     </View>
