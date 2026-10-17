@@ -99,13 +99,18 @@ describe('studyCount', () => {
 describe('studyAffiliation', () => {
   it('gives a club squad the nationality and a nation squad the club', () => {
     const p = entry(7, 'Torres', 'FW', { nationality: 'Spain', club: 'Barcelona' }).player;
-    expect(studyAffiliation(p, 'club')).toBe('Spain');
-    expect(studyAffiliation(p, 'nation')).toBe('Barcelona');
+    expect(studyAffiliation(p, 'club', 'en')).toBe('Spain');
+    expect(studyAffiliation(p, 'nation', 'en')).toBe('Barcelona');
+  });
+
+  it('shows an unmapped nationality as it is', () => {
+    const p = entry(7, 'Torres', 'FW', { nationality: 'Atlantis' }).player;
+    expect(studyAffiliation(p, 'club', 'en')).toBe('Atlantis');
   });
 
   it('shows a dash for a nation player with no club', () => {
     const p = entry(7, 'Torres', 'FW', { club: null }).player;
-    expect(studyAffiliation(p, 'nation')).toBe('—');
+    expect(studyAffiliation(p, 'nation', 'en')).toBe('—');
   });
 });
 

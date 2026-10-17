@@ -16,10 +16,11 @@ import { FilterPill } from '@/components/FilterPill';
 import { PhotoCredits } from '@/components/PhotoCredits';
 import { PlayerCard } from '@/components/PlayerCard';
 import { StudyListRow } from '@/components/StudyListRow';
-import { useT } from '@/i18n/useT';
+import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
 import { feedback } from '@/lib/haptics';
 import { photoFor } from '@/lib/photos';
+import { positionCode } from '@/lib/roundView';
 import { getRoster, getSquad } from '@/lib/squads';
 import { bannerBands } from '@/lib/stageView';
 import {
@@ -75,6 +76,7 @@ export default function Study() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
   const t = useT();
+  const language = useLanguage();
   const { squadId } = useLocalSearchParams<{ squadId: string }>();
   const view = useProgress((s) => s.studyView);
   const setStudyView = useProgress((s) => s.setStudyView);
@@ -185,7 +187,7 @@ export default function Study() {
   const renderItem = ({ item, index }: { item: RosterEntry; index: number }) => {
     const { member, player } = item;
     const covered = hidden && !revealed.has(player.id);
-    const affiliation = studyAffiliation(player, squad.kind);
+    const affiliation = studyAffiliation(player, squad.kind, language);
     const flag = squad.kind === 'club' ? flagFor(player.nationality) : null;
     const label = studyLabel(member.no, player, affiliation, covered, t);
     const photo = photoFor(player);
@@ -199,7 +201,7 @@ export default function Study() {
           nameHidden={covered}
           affiliation={affiliation}
           affiliationFlag={flag}
-          position={player.position}
+          position={positionCode(player.position, t)}
           photo={photo}
           marker={squad.marker}
           accessibilityLabel={label}
@@ -217,7 +219,7 @@ export default function Study() {
             height={sizes.playerCard.studyHeight}
             shirtNumber={member.no}
             name={player.name}
-            badge={player.position}
+            badge={positionCode(player.position, t)}
             nameHidden={covered}
             lineTone="neutral"
             line={affiliation}
@@ -314,7 +316,7 @@ export default function Study() {
         {STUDY_FILTERS.map((f) => (
           <FilterPill
             key={f}
-            label={f === 'ALL' ? t.study.all : f}
+            label={f === 'ALL' ? t.study.all : positionCode(f, t)}
             count={counts[f]}
             active={filter === f}
             onPress={() => {
