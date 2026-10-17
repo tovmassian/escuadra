@@ -231,11 +231,11 @@ export default function About() {
 
           <Text style={styles.subHeading}>What is stored on your device</Text>
           <Text style={styles.paragraph}>
-            Escuadra saves eight things locally, on your device only: your best score for each team
+            Escuadra saves nine things locally, on your device only: your best score for each team
             and difficulty level; which levels you have completed; the last team and level you
-            played; your light or dark appearance preference; whether vibration is on; whether the
-            Study screen shows cards or a list; your choice about usage statistics; and the random
-            identifier those statistics use.
+            played; your light or dark appearance preference; your language choice; whether
+            vibration is on; whether the Study screen shows cards or a list; your choice about usage
+            statistics; and the random identifier those statistics use.
           </Text>
           <Text style={styles.paragraph}>
             This lives in the app&apos;s own private storage. Apart from that identifier, which is

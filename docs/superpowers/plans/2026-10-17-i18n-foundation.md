@@ -41,7 +41,7 @@
   - squad files, club and player names, country names (#144), position **codes** (#144), league names, `Wikimedia Commons`, `testID`s, telemetry names and haptic names are not catalog text;
   - `lib/questionEngine.ts` is untouched.
 - **`lib/` signature rule:** a function that builds text takes `messages: Messages` as its **last** positional parameter, and its tests pass `en` and expect today's exact output.
-- **Decision 1: About moves in #142, verbatim.** It goes into `en.about` as data, which #146's privacy-page generator will walk. There is one intended text change, forced by guardrail 7 because #142 adds a stored value: "eight things" becomes "nine things", adding "your language choice" after the appearance preference. This is #146's planned wording.
+- **Decision 1: About moves in #142, verbatim.** It goes into `en.about` as data, which #146's privacy-page generator will walk. The one guardrail-7 sentence change ("eight things" becomes "nine things", adding "your language choice" after the appearance preference) landed in PR 1, which stores `languagePreference`; PR 2 copies that sentence like every other paragraph.
 - **Decision 2: lint.**
   - `react/jsx-no-literals` takes `{ noStrings: true, ignoreProps: true, allowedStrings: [punctuation] }`.
   - `no-restricted-syntax` fails a lettered string in any attribute, except on a fixed list of props that are never shown or spoken.
@@ -1129,7 +1129,8 @@ PR body:
 
 - what changed;
 - the fingerprint note (`expo-localization` and `app.json`, for the 2.0.0 store build);
-- that nothing on screen changes, and the shots prove it;
+- **guardrail 7 flag:** About's stored-data list changes from eight to nine things ("your language choice"), because this branch stores `languagePreference`. This is #146's wording, landed early; `privacy.html` follows in #146 with the build;
+- that nothing on screen changes except About's stored-data sentence, and the shots prove it;
 - the `npm run check` tail.
 
 End with the attribution line from the session.
@@ -1514,7 +1515,7 @@ git add -A i18n app components
 git commit -m "feat(i18n): Study strings in the catalog (#142)"
 ```
 
-### Task 11: About, as data, verbatim but for one sentence
+### Task 11: About, as data, verbatim
 
 **Files:**
 
@@ -1592,7 +1593,7 @@ Extend `about`. Copy each paragraph **verbatim** from `app/about.tsx` on `main`,
         { heading: 'App updates', paragraphs: [/* "When Escuadra starts, it checks…" */] },
         {
           heading: 'What is stored on your device',
-          paragraphs: [STORED, /* "This lives in the app's own private storage…" */],
+          paragraphs: [/* "Escuadra saves nine things locally…" */, /* "This lives in the app's own private storage…" */],
         },
         { heading: 'Crash reports', paragraphs: [/* "If you allow your device to share diagnostics…" */] },
         { heading: 'Children', paragraphs: [/* "Escuadra has no account and asks for no personal information…" */] },
@@ -1602,12 +1603,6 @@ Extend `about`. Copy each paragraph **verbatim** from `app/about.tsx` on `main`,
 ```
 
 Each `/* "…" */` marker names a paragraph of `app/about.tsx` by its opening words. The executor replaces the marker with that whole paragraph as a template string, and none may remain in the file. The order of markers is the order on screen, and Step 3's check enforces it.
-
-`STORED` is the one changed paragraph, written inline in place of the marker:
-
-```ts
-`${ESCUADRA} saves nine things locally, on your device only: your best score for each team and difficulty level; which levels you have completed; the last team and level you played; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; your choice about usage statistics; and the random identifier those statistics use.`;
-```
 
 Paragraph counts can differ between languages without failing the typecheck, because arrays aren't tuples. #145 or #146 adds a parity test when the first translation lands. Name this in the PR.
 
@@ -1661,8 +1656,7 @@ const last = (i: number, list: readonly unknown[]) => i === list.length - 1;
 `i18n/__tests__/aboutVerbatim.test.ts`:
 
 ```ts
-// TEMPORARY (#142, Task 11): proves en.about reproduces main's About text, but
-// for the one intended sentence. Deleted before the commit — it reads main's
+// TEMPORARY (#142, Task 11): proves en.about reproduces main's About text. Deleted before the commit — it reads main's
 // copy of app/about.tsx, which this PR replaces.
 import { execSync } from 'node:child_process';
 import ts from 'typescript';
@@ -1688,7 +1682,7 @@ function mainAboutTexts(): string[] {
   return out;
 }
 
-it("reproduces main's About text, but for the stored-data sentence", () => {
+it("reproduces main's About text", () => {
   const a = en.about;
   const actual = [
     `‹ ${en.common.back}`,
@@ -1705,9 +1699,7 @@ it("reproduces main's About text, but for the stored-data sentence", () => {
   ];
   const nine = a.privacy.sections.find((s) => s.heading === 'What is stored on your device')
     ?.paragraphs[0];
-  const expected = mainAboutTexts().map((text) =>
-    text.startsWith('Escuadra saves eight things') ? nine : text,
-  );
+  const expected = mainAboutTexts();
   expect(actual).toEqual(expected);
   expect(nine).toContain('nine things');
   expect(nine).toContain('your language choice');
@@ -1727,11 +1719,7 @@ rm i18n/__tests__/aboutVerbatim.test.ts
 npm run typecheck && npm run lint
 npx prettier --write i18n app
 git add -A i18n app
-git commit -m "feat(i18n): About as catalog data; stored data names the language choice (#142)
-
-About moves to en.about verbatim. One sentence changes, because this branch
-adds languagePreference to the device's storage (guardrail 7): \"eight things\"
-becomes \"nine\", adding \"your language choice\" — #146's planned wording."
+git commit -m "feat(i18n): About as catalog data (#142)"
 ```
 
 ### Task 12: Sweep for strings outside JSX
@@ -1928,8 +1916,8 @@ Under `## Architecture rules`, after the Theming bullet:
 
 ```markdown
 - **User-visible text lives in `i18n/`.** `i18n/en.ts` is the source catalog and
-  `Messages = typeof en`; every other catalog is typed `: Messages`, so a missing
-  key or a wrong parameter list fails the typecheck. Screens read text through
+  `Messages = typeof en`; every other catalog is typed `: Messages`, so a missing or
+  extra key, or a parameter of the wrong type, fails the typecheck. Screens read text through
   `useT()`. `lib/` modules that build text take `messages` as their last argument
   and stay React-free. Data stays English: squads, players, clubs and position
   codes are translated at display time by code, never by their English string.
@@ -1945,8 +1933,7 @@ Run: `npm run shots`
 
 Expected:
 
-- only `01a-about*.png` may change, and only if the stored-data paragraph is in frame;
-- every other PNG is unchanged.
+- every PNG is unchanged (the About sentence changed in PR 1).
 
 Open every PNG that changed and compare it with `main`. An unexplained change is a bug: find it before going on.
 
@@ -1967,7 +1954,6 @@ git commit -m "docs(claude): user-visible text lives in i18n/ (#142)"
 Ask: "PR 2 of #142 is ready: push and open it?" Only on a yes, push and `gh pr create` with:
 
 - `Closes #142`;
-- **guardrail 7 flag:** About's stored-data list changes from eight to nine things ("your language choice"), because this branch stores `languagePreference`. This is #146's wording, landed early. `privacy.html` follows in #146 with the build;
 - the lint design (Decision 2) and the reviewed exceptions from Task 12;
 - the screenshot comparison;
 - the `npm run check` tail;
