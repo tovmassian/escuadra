@@ -25,6 +25,9 @@ function possessive(name: string): string {
   return name.endsWith('s') ? `${name}'` : `${name}'s`;
 }
 
+const PHOTO_CREDITS = 'Photo credits';
+const CROPPED = 'cropped';
+
 export const en = {
   common: {
     /** "Level 2": the round header, results, the share text and picture. */
@@ -117,9 +120,13 @@ export const en = {
   },
   credits: {
     /** The licence's change note, after the author and licence. */
-    cropped: 'cropped',
+    cropped: CROPPED,
     /** ≤ 8 chars: before the credit under the question. */
     photo: 'Photo:',
+    /** The credits sheet's title. */
+    title: PHOTO_CREDITS,
+    /** ≤ 20 chars: the button that opens it. */
+    button: (count: number) => `${PHOTO_CREDITS} · ${count}`,
   },
   results: {
     /** The flawless round's title. */
@@ -142,6 +149,25 @@ export const en = {
       club: (right: string, picked: string) => `club is ${right}, you said ${picked}`,
       nationality: (right: string, picked: string) => `nationality is ${right}, you said ${picked}`,
     },
+    /** The close button's spoken name. */
+    close: 'Close, choose a different team',
+    /** ≤ 22 chars: the outline button. */
+    studySquad: 'Study this squad',
+    /** ≤ 22 chars: the main button, and the retry icon's spoken name. */
+    retry: 'Retry this round',
+    /** ≤ 22 chars: the main button after a pass. */
+    playLevel: (level: number) => `Play level ${level}`,
+    /** ≤ 22 chars: the main button after level 3. */
+    chooseTeam: 'Choose different team',
+    /** ≤ 24 chars: the missed list's eyebrow, in capitals. */
+    missedCount: (count: number) =>
+      count === 1 ? `MISSED · ${count} PLAYER` : `MISSED · ${count} PLAYERS`,
+    /** ≤ 14 chars: beside that eyebrow. */
+    swipeForAll: 'Swipe for all',
+    /** ≤ 24 chars: the flawless roster's eyebrow, in capitals. */
+    nothingMissed: (count: number) => `ALL ${count} · NOTHING MISSED`,
+    /** The round strip, spoken. */
+    roundSpoken: (right: number, total: number) => `Round: ${right} of ${total} right`,
   },
   share: {
     /** The share sheet's title, the results Share button's label, Android's share dialog. */
@@ -150,6 +176,19 @@ export const en = {
     stillLearning: 'Still learning',
     /** The share picture's question to its receiver. */
     question: (team: string) => `Can you name ${possessive(team)} squad?`,
+    /** ≤ 8 chars each: the format switch. */
+    image: 'Image',
+    text: 'Text',
+    /** ≤ 10 chars: under the chat-bubble preview. */
+    preview: 'Preview',
+    imageHint: 'Story-sized picture. No player photos, no names — friends can still play it.',
+    textHint: 'The score grid for group chats, with a link to the app.',
+    /** ≤ 16 chars: the submit button. */
+    shareImage: 'Share image',
+    shareText: 'Share text',
+    /** The share picture, spoken. */
+    pictureSpoken: (eyebrow: string, correct: number, total: number, title: string) =>
+      `Share picture: ${eyebrow}. ${correct} of ${total}. ${title}.`,
   },
   ladder: {
     /** ≤ 14 chars: the Play card's button. */

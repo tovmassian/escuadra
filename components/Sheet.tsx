@@ -1,4 +1,5 @@
 import { CloseGlyph } from '@/components/ActionGlyphs';
+import { useT } from '@/i18n/useT';
 import { durations, opacity, radii, sheetDrag, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import { useEffect, useState, type ReactNode } from 'react';
@@ -88,6 +89,7 @@ export function Sheet({ visible, onClose, title, testID, children }: SheetProps)
 
 function SheetFrame({ onClose, title, testID, children }: Omit<SheetProps, 'visible'>) {
   const colors = useThemeColors();
+  const t = useT();
   const insets = useSafeAreaInsets();
   const { height: windowHeight } = useWindowDimensions();
   const reduced = useReducedMotion();
@@ -223,7 +225,7 @@ function SheetFrame({ onClose, title, testID, children }: Omit<SheetProps, 'visi
                 onPress={onClose}
                 hitSlop={closeSlop}
                 accessibilityRole="button"
-                accessibilityLabel="Close"
+                accessibilityLabel={t.common.close}
                 style={({ pressed }) => [styles.close, pressed && { opacity: opacity.settled }]}
               >
                 <CloseGlyph color={colors.textSecondary} />

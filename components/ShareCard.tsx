@@ -1,4 +1,6 @@
 import { EscuadraMark } from '@/components/EscuadraMark';
+import { ESCUADRA_WORDMARK } from '@/i18n/names';
+import { useT } from '@/i18n/useT';
 import type { ShareCardView, ShareItem } from '@/lib/shareResult';
 import { bannerBands } from '@/lib/stageView';
 import { MARK_VIEWBOX, markGeometry } from '@/theme/brand';
@@ -47,6 +49,7 @@ function scaled<T extends Scalable>(style: T, k: number) {
 // capture. Text never scales with the OS setting, because the bounds are fixed.
 export function ShareCard({ view, items, marker, width, ref }: ShareCardProps) {
   const colors = palettes.dark;
+  const t = useT();
   const card = sizes.shareCard;
   const k = width / card.width;
   const flawless = view.tier === 'excellent';
@@ -153,7 +156,7 @@ export function ShareCard({ view, items, marker, width, ref }: ShareCardProps) {
       collapsable={false}
       style={styles.root}
       accessible
-      accessibilityLabel={`Share picture: ${view.eyebrow}. ${view.correct} of ${view.total}. ${view.title}.`}
+      accessibilityLabel={t.share.pictureSpoken(view.eyebrow, view.correct, view.total, view.title)}
     >
       <View style={styles.band}>
         {bands.map((band, i) => (
@@ -164,7 +167,7 @@ export function ShareCard({ view, items, marker, width, ref }: ShareCardProps) {
         <View style={styles.brand}>
           <EscuadraMark size={card.mark * k} color={colors.accentLine} />
           <Text style={styles.word} allowFontScaling={false}>
-            escuadra
+            {ESCUADRA_WORDMARK}
           </Text>
         </View>
         <View style={styles.spacer} />

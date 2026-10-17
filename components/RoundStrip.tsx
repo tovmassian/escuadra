@@ -16,17 +16,22 @@ import {
   spacing,
   typography,
 } from '@/theme/tokens';
+import { useT } from '@/i18n/useT';
 import { useThemeColors } from '@/theme/useTheme';
 
 // The round in ten segments (spec §3.1), each labelled with its shirt number.
 // They fill left to right on arrival (spec §6). Reduce Motion: they fade in
 // together.
 export function RoundStrip({ items }: { items: { no: number; correct: boolean }[] }) {
+  const t = useT();
   return (
     <View
       style={styles.row}
       accessible
-      accessibilityLabel={`Round: ${items.filter((i) => i.correct).length} of ${items.length} right`}
+      accessibilityLabel={t.results.roundSpoken(
+        items.filter((i) => i.correct).length,
+        items.length,
+      )}
     >
       {items.map((item, i) => (
         <Segment key={i} index={i} no={item.no} correct={item.correct} />

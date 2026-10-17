@@ -32,7 +32,8 @@ export function PhotoCreditText({
       <Text style={linkStyle} accessibilityRole="link" onPress={open(licence.url)}>
         {licence.text}
       </Text>
-      {` · ${change}`}
+      {' · '}
+      {change}
     </>
   );
 }

@@ -194,9 +194,12 @@ export default function Results() {
   };
 
   const primary: Record<PrimaryAction, { label: string; onPress: () => void }> = {
-    retry: { label: 'Retry this round', onPress: () => retry(level) },
-    nextLevel: { label: `Play level ${level + 1}`, onPress: () => retry((level + 1) as Level) },
-    chooseTeam: { label: 'Choose different team', onPress: chooseDifferentTeam },
+    retry: { label: t.results.retry, onPress: () => retry(level) },
+    nextLevel: {
+      label: t.results.playLevel(level + 1),
+      onPress: () => retry((level + 1) as Level),
+    },
+    chooseTeam: { label: t.results.chooseTeam, onPress: chooseDifferentTeam },
   };
   const main = primary[actions.primary];
 
@@ -213,19 +216,19 @@ export default function Results() {
             testID="results-close"
             onPress={chooseDifferentTeam}
             accessibilityRole="button"
-            accessibilityLabel="Close, choose a different team"
+            accessibilityLabel={t.results.close}
             style={({ pressed }) => [styles.close, pressed && { opacity: opacity.settled }]}
           >
             <CloseGlyph color={colors.textSecondary} />
           </Pressable>
           <Text style={styles.context} numberOfLines={1}>
-            {`${squad.name} · Level ${level}`}
+            {[squad.name, t.common.level(level)].join(' · ')}
           </Text>
           <Pressable
             testID="results-share"
             onPress={() => setSharing(true)}
             accessibilityRole="button"
-            accessibilityLabel="Share your round"
+            accessibilityLabel={t.share.title}
             style={({ pressed }) => [styles.share, pressed && { opacity: opacity.settled }]}
           >
             <ShareGlyph color={colors.textPrimary} />
@@ -304,14 +307,14 @@ export default function Results() {
               accessibilityRole="button"
               style={({ pressed }) => [styles.outline, pressed && { opacity: opacity.settled }]}
             >
-              <Text style={styles.outlineText}>Study this squad</Text>
+              <Text style={styles.outlineText}>{t.results.studySquad}</Text>
             </Pressable>
             {actions.retryIcon ? (
               <Pressable
                 testID="results-retry"
                 onPress={() => retry(level)}
                 accessibilityRole="button"
-                accessibilityLabel="Retry this round"
+                accessibilityLabel={t.results.retry}
                 style={({ pressed }) => [styles.retry, pressed && { opacity: opacity.settled }]}
               >
                 <RetryGlyph color={colors.textPrimary} />
@@ -363,6 +366,7 @@ function Score({
   tier: ResultTier;
 }) {
   const colors = useThemeColors();
+  const t = useT();
   const reduced = useReducedMotion();
   const passed = tier !== 'fail';
   const flawless = tier === 'excellent';
@@ -458,7 +462,11 @@ function Score({
   });
 
   return (
-    <View style={styles.row} accessible accessibilityLabel={`Score: ${correct} of ${attempted}`}>
+    <View
+      style={styles.row}
+      accessible
+      accessibilityLabel={t.common.scoreSpoken(correct, attempted)}
+    >
       <Animated.Text style={[styles.count, popStyle]} maxFontSizeMultiplier={fontScaleCap.display}>
         {shown}
       </Animated.Text>
@@ -521,10 +529,8 @@ function MissedCards({
         entering={riseIn(reduced, spotlightMotion.rise, resultsTimeline.rise, beat)}
         style={styles.labelRow}
       >
-        <Text style={styles.label}>
-          MISSED · {missed.length} PLAYER{missed.length === 1 ? '' : 'S'}
-        </Text>
-        {missed.length > 2 ? <Text style={styles.hint}>Swipe for all</Text> : null}
+        <Text style={styles.label}>{t.results.missedCount(missed.length)}</Text>
+        {missed.length > 2 ? <Text style={styles.hint}>{t.results.swipeForAll}</Text> : null}
       </Animated.View>
       <FlatList
         horizontal
@@ -570,6 +576,7 @@ function CardGap() {
 // (spec §13) leaves the bands and number.
 function Roster({ results, marker }: { results: QuestionResult[]; marker: TeamMarker }) {
   const colors = useThemeColors();
+  const t = useT();
   const reduced = useReducedMotion();
   const styles = StyleSheet.create({
     section: { paddingTop: spacing.xl, paddingHorizontal: spacing.lg, gap: spacing.sm },
@@ -597,7 +604,7 @@ function Roster({ results, marker }: { results: QuestionResult[]; marker: TeamMa
           resultsTimeline.passBeat,
         )}
       >
-        <Text style={styles.label}>ALL {results.length} · NOTHING MISSED</Text>
+        <Text style={styles.label}>{t.results.nothingMissed(results.length)}</Text>
       </Animated.View>
       <View style={styles.grid}>
         {rows.map((row, r) => (
