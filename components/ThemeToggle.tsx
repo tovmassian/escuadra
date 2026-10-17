@@ -1,5 +1,6 @@
 import { Pressable, StyleSheet, View } from 'react-native';
 import Animated, { Easing, useAnimatedStyle, withTiming } from 'react-native-reanimated';
+import { useT } from '@/i18n/useT';
 import { useProgress } from '@/stores/progress';
 import { borderWidths, durations, radii, sizes } from '@/theme/tokens';
 import { useThemeColors, useThemeName } from '@/theme/useTheme';
@@ -13,6 +14,7 @@ const g = sizes.themeToggleGlyph;
 // control on.
 export function ThemeToggle() {
   const colors = useThemeColors();
+  const t = useT();
   const isDark = useThemeName() === 'dark';
   const setThemePreference = useProgress((s) => s.setThemePreference);
 
@@ -33,7 +35,7 @@ export function ThemeToggle() {
       onPress={() => setThemePreference(isDark ? 'light' : 'dark')}
       accessibilityRole="switch"
       accessibilityState={{ checked: isDark }}
-      accessibilityLabel="Dark theme"
+      accessibilityLabel={t.home.darkTheme}
       style={[styles.track, { backgroundColor: colors.surfaceRaised, borderColor: colors.border }]}
     >
       <Animated.View style={[styles.thumb, { backgroundColor: colors.thumbBg }, thumbStyle]}>

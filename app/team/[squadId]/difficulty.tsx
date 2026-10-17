@@ -14,21 +14,6 @@ import { useProgress } from '@/stores/progress';
 import { spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
-const LEVEL_COPY: Record<Level, { title: string; description: string }> = {
-  1: {
-    title: 'Name from Number',
-    description: 'Given a shirt number, pick the player from 4 options.',
-  },
-  2: {
-    title: 'Name + Position',
-    description: 'Pick the name, then the position — GK, DF, MF, or FW.',
-  },
-  3: {
-    title: 'Full Profile',
-    description: 'Name from 6 options, then position, then club or nationality.',
-  },
-};
-
 export default function Difficulty() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
@@ -72,14 +57,14 @@ export default function Difficulty() {
   return (
     <View style={[styles.root, { paddingTop: insets.top + spacing.md }]}>
       <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
-        <Text style={styles.back}>‹ Back</Text>
+        <Text style={styles.back}>‹ {t.common.back}</Text>
       </Pressable>
       <Text style={styles.eyebrow}>{squad.name.toUpperCase()}</Text>
-      <Text style={styles.title}>Choose Difficulty</Text>
+      <Text style={styles.title}>{t.ladder.title}</Text>
 
       <View>
         {rows.map((row, i) => {
-          const copy = LEVEL_COPY[row.level];
+          const copy = t.ladder.levels[row.level];
           return (
             <React.Fragment key={row.level}>
               {row.level === focused ? (
@@ -108,7 +93,7 @@ export default function Difficulty() {
           Play is the way forward and Study steps down to a link. */}
       <View style={studyProminent ? styles.studyButton : styles.studyLink}>
         <Button
-          label="Study This Squad"
+          label={t.ladder.studySquad}
           variant={studyProminent ? 'outline' : 'text'}
           large={studyProminent}
           onPress={() =>
@@ -118,7 +103,7 @@ export default function Difficulty() {
       </View>
 
       <Text style={styles.updated}>
-        Updated {formatLastUpdated(squad.lastUpdated, t)} · Wikipedia
+        {t.ladder.updated(formatLastUpdated(squad.lastUpdated, t))}
       </Text>
     </View>
   );

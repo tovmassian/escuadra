@@ -15,15 +15,14 @@ import { useMemo, useState } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
-const SEGMENTS = [
-  { key: 'club', label: 'Clubs' },
-  { key: 'nation', label: 'National Teams' },
-] as const;
-
 export default function TeamPicker() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
   const t = useT();
+  const segments = [
+    { key: 'club', label: t.picker.clubs },
+    { key: 'nation', label: t.picker.nationalTeams },
+  ] as const;
   const hydrated = useProgressHydrated();
   const bestScores = useProgress((s) => s.bestScores);
   const [filter, setFilter] = useState<'club' | 'nation'>('club');
@@ -77,16 +76,14 @@ export default function TeamPicker() {
   return (
     <View style={[styles.root, { paddingTop: insets.top + spacing.md }]}>
       <Pressable onPress={() => router.dismissTo('/')} accessibilityRole="button" hitSlop={12}>
-        <Text style={styles.back}>‹ Back</Text>
+        <Text style={styles.back}>‹ {t.common.back}</Text>
       </Pressable>
-      <Text style={styles.title}>Choose a Team</Text>
-      <Text style={styles.subtitle}>
-        {filtered.length} {filtered.length === 1 ? 'team' : 'teams'} · tap to start
-      </Text>
+      <Text style={styles.title}>{t.picker.title}</Text>
+      <Text style={styles.subtitle}>{t.picker.count(filtered.length)}</Text>
       <View style={styles.search}>
         <SearchField value={query} onChange={setQuery} onClear={() => setQuery('')} />
       </View>
-      <SegmentedControl segments={SEGMENTS} value={filter} onChange={changeKind} />
+      <SegmentedControl segments={segments} value={filter} onChange={changeKind} />
 
       {filter === 'club' && (
         <ScrollView
@@ -114,9 +111,9 @@ export default function TeamPicker() {
         contentContainerStyle={styles.list}
         ListEmptyComponent={
           <View style={styles.empty}>
-            <Text style={styles.emptyTitle}>No teams found</Text>
+            <Text style={styles.emptyTitle}>{t.picker.noTeams}</Text>
             {query.trim().length > 0 && (
-              <Text style={styles.emptySubtitle}>No results for &quot;{query.trim()}&quot;</Text>
+              <Text style={styles.emptySubtitle}>{t.picker.noResults(query.trim())}</Text>
             )}
           </View>
         }

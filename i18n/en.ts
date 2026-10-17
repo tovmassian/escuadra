@@ -29,6 +29,25 @@ export const en = {
   common: {
     /** "Level 2": the round header, results, the share text and picture. */
     level: (level: number) => `Level ${level}`,
+    /** ≤ 8 chars: the back link, after "‹ ". */
+    back: 'Back',
+    /** A sheet's close button, spoken. */
+    close: 'Close',
+    /** A score, spoken. */
+    scoreSpoken: (correct: number, attempted: number) => `Score: ${correct} of ${attempted}`,
+  },
+  home: {
+    /** ≤ 8 chars: the top-left link. */
+    aboutLink: 'About',
+    /** Spoken name of the theme switch. */
+    darkTheme: 'Dark theme',
+    /** ≤ 24 chars: the continue card's meta line, in IBM Plex Mono capitals. */
+    continueMeta: (level: number, best: number | undefined) =>
+      best === undefined ? `LEVEL ${level}` : `LEVEL ${level} · BEST ${best}/10`,
+    /** ≤ 18 chars: the main button. */
+    startTraining: 'Start Training',
+    /** ≤ 20 chars: the text button. */
+    browseAllTeams: 'Browse All Teams',
   },
   formats: {
     /** "21 Aug 2026". */
@@ -121,6 +140,28 @@ export const en = {
     rungLocked: (title: string, hint: string) => `${title}, locked, ${hint}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, best ${correct} of ${total}`,
+    title: 'Choose Difficulty',
+    /** Titles ≤ 18 chars: a rung's title. Descriptions wrap. */
+    levels: {
+      1: {
+        title: 'Name from Number',
+        description: 'Given a shirt number, pick the player from 4 options.',
+      },
+      2: {
+        title: 'Name + Position',
+        description: 'Pick the name, then the position — GK, DF, MF, or FW.',
+      },
+      3: {
+        title: 'Full Profile',
+        description: 'Name from 6 options, then position, then club or nationality.',
+      },
+    },
+    /** ≤ 20 chars: the Study button or link. */
+    studySquad: 'Study This Squad',
+    /** The staleness footnote; `date` from `formatLastUpdated`. */
+    updated: (date: string) => `Updated ${date} · Wikipedia`,
+    /** ≤ 12 chars: a rung's best-score pill, in capitals. */
+    best: (correct: number, total: number) => `BEST ${correct}/${total}`,
   },
   picker: {
     /** ≤ 6 chars: the league pill that clears the filter. */
@@ -130,6 +171,21 @@ export const en = {
     /** A team row's mono meta line, with its best score. */
     played: (season: string, level: number, correct: number, total: number) =>
       `${season} · LEVEL ${level} · BEST ${correct}/${total}`,
+    title: 'Choose a Team',
+    count: (count: number) =>
+      count === 1 ? `${count} team · tap to start` : `${count} teams · tap to start`,
+    /** ≤ 14 chars each: the segmented control. */
+    clubs: 'Clubs',
+    nationalTeams: 'National Teams',
+    /** The search field's placeholder and spoken name. */
+    search: 'Search teams',
+    clearSearch: 'Clear search',
+    noTeams: 'No teams found',
+    noResults: (query: string) => `No results for "${query}"`,
+  },
+  store: {
+    /** The Play Store feature graphic's tagline (#147 localises the graphic). */
+    tagline: 'Learn every squad',
   },
   about: {
     version: (version: string) => `Version ${version}`,

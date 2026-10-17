@@ -1,6 +1,8 @@
 import { StyleSheet, Text, View } from 'react-native';
 import { BrandGradient } from '@/components/BrandGradient';
 import { EscuadraMark } from '@/components/EscuadraMark';
+import { ESCUADRA_WORDMARK } from '@/i18n/names';
+import { useT } from '@/i18n/useT';
 import { palettes, sizes, spacing, typography } from '@/theme/tokens';
 
 // Google Play's feature graphic (1024×500) — captured via `npm run
@@ -13,12 +15,13 @@ import { palettes, sizes, spacing, typography } from '@/theme/tokens';
 // gradient the icon plate uses — rather than following the capturing
 // device's colour scheme.
 export default function FeatureGraphic() {
+  const t = useT();
   return (
     <BrandGradient gradient="plate" style={styles.root}>
       <View style={styles.content}>
         <EscuadraMark size={sizes.wordmarkMarkHero} color={palettes.dark.mark} showTrail />
-        <Text style={styles.word}>escuadra</Text>
-        <Text style={styles.tagline}>Learn every squad</Text>
+        <Text style={styles.word}>{ESCUADRA_WORDMARK}</Text>
+        <Text style={styles.tagline}>{t.store.tagline}</Text>
       </View>
     </BrandGradient>
   );
