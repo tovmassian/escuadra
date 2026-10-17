@@ -1,4 +1,5 @@
 import { StyleSheet, Text, View } from 'react-native';
+import { useT } from '@/i18n/useT';
 import { borderWidths, radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
@@ -13,6 +14,7 @@ interface BestPillProps {
 // A played rung's best score.
 export function BestPill({ correct, total, cleared }: BestPillProps) {
   const colors = useThemeColors();
+  const t = useT();
   const styles = StyleSheet.create({
     pill: {
       paddingVertical: spacing.xxs - 1,
@@ -30,7 +32,7 @@ export function BestPill({ correct, total, cleared }: BestPillProps) {
   return (
     <View style={[styles.pill, cleared ? styles.pillCleared : styles.pillOpen]}>
       <Text style={[styles.label, cleared ? styles.labelCleared : styles.labelOpen]}>
-        BEST {correct}/{total}
+        {t.ladder.best(correct, total)}
       </Text>
     </View>
   );

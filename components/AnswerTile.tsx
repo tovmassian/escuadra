@@ -14,6 +14,7 @@ import { EscuadraMark } from './EscuadraMark';
 import { Flag } from './Flag';
 import type { ShotTap } from './useShot';
 import type { FlagCode } from '@/assets/flags/generated';
+import { useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
 import type { TileVerdict } from '@/lib/roundView';
 import {
@@ -80,14 +81,6 @@ function look(colors: Palette, verdict: TileVerdict) {
   }
 }
 
-const SPOKEN: Record<TileVerdict, string> = {
-  idle: '',
-  'correct-picked': ', correct',
-  'correct-unpicked': ', the right answer',
-  'incorrect-picked': ', your pick, wrong',
-  'incorrect-other': '',
-};
-
 // One answer (spec §2.3, §2.4, §6). It keeps today's five verdicts. The
 // effects:
 // - a press scales it slightly, with a light haptic;
@@ -107,6 +100,7 @@ export function AnswerTile({
   onPress,
 }: AnswerTileProps) {
   const colors = useThemeColors();
+  const t = useT();
   const reduced = useReducedMotion();
   const scale = useSharedValue(1);
   const shift = useSharedValue(0);
@@ -247,7 +241,7 @@ export function AnswerTile({
         disabled={answered}
         accessibilityRole="button"
         accessibilityState={{ disabled: answered }}
-        accessibilityLabel={`${label}${sub ? `, ${sub}` : ''}${SPOKEN[verdict]}`}
+        accessibilityLabel={[label, sub, t.round.tileSpoken[verdict]].filter(Boolean).join(', ')}
         style={styles.tile}
       >
         {isPosition ? (
@@ -264,7 +258,7 @@ export function AnswerTile({
                 )}
                 style={styles.tag}
               >
-                Answer
+                {t.round.answerTag}
               </Animated.Text>
             ) : null}
             <View style={styles.labelRow}>

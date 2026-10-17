@@ -1,6 +1,7 @@
 import { router } from 'expo-router';
 import Constants from 'expo-constants';
 import * as Updates from 'expo-updates';
+import { Fragment } from 'react';
 import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useT } from '@/i18n/useT';
@@ -13,6 +14,7 @@ export default function About() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
   const t = useT();
+  const last = (i: number, list: readonly unknown[]) => i === list.length - 1;
   const telemetryEnabled = useProgress((s) => s.telemetryEnabled);
   const setTelemetryEnabled = useProgress((s) => s.setTelemetryEnabled);
   const haptics = useProgress((s) => s.haptics);
@@ -77,67 +79,47 @@ export default function About() {
         contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}
       >
         <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
-          <Text style={styles.back}>‹ Back</Text>
+          <Text style={styles.back}>‹ {t.common.back}</Text>
         </Pressable>
-        <Text style={styles.title}>About</Text>
+        <Text style={styles.title}>{t.about.title}</Text>
 
         <View style={styles.section}>
-          <Text style={styles.paragraph}>
-            Escuadra is an independent, unofficial app. It is not affiliated with, endorsed by, or
-            associated with FIFA, UEFA, any league, any national football association, or any club.
-            Club and national team names are used for identification only and remain the property of
-            their respective owners. Escuadra is also not affiliated with or endorsed by the
-            Wikimedia Foundation, or by any player shown in a photo.
-          </Text>
-          <Text style={[styles.paragraph, { marginBottom: 0 }]}>
-            Escuadra identifies teams by their names and colours, and never shows club crests,
-            badges or logos itself. A player photo can still show one, on a shirt or in the
-            background, because it is part of the original photo. Those marks belong to their
-            owners, and their appearance does not mean that any club, sponsor or brand endorses
-            Escuadra.
-          </Text>
+          {t.about.intro.map((p, i, all) => (
+            <Text key={i} style={[styles.paragraph, last(i, all) && { marginBottom: 0 }]}>
+              {p}
+            </Text>
+          ))}
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionHeading}>Data and image credits</Text>
-
-          <Text style={styles.subHeading}>Squad data</Text>
-          <Text style={styles.paragraph}>
-            Squad data is compiled from Wikipedia and Wikidata and reflects the season shown on each
-            team. Wikipedia content is available under CC BY-SA. Wikidata is available under CC0.
-          </Text>
-
-          <Text style={styles.subHeading}>Player photos</Text>
-          <Text style={styles.paragraph}>
-            Player photos come from Wikimedia Commons. Each one is used under the licence its author
-            chose: CC BY-SA, CC BY, CC0, public domain, or Commons&apos; own Attribution licence.
-            Every photo is cropped to fit its frame. Where the app&apos;s text sits over a photo,
-            the app shades that part of the screen, and it dims the photo after a wrong answer. A
-            photo too small to fill the screen is shown whole, over a darkened copy of itself. The
-            photo files themselves are not edited. Not every player has a photo.
-          </Text>
-          <Text style={styles.paragraph}>
-            The author, the licence and the word &quot;cropped&quot; appear under the question for
-            as long as a photo is on screen, and again, for the whole round, under &quot;Photo
-            credits&quot; in the results and at the end of the Study screen. Tap the author for the
-            photo&apos;s page on Wikimedia Commons, or the licence for its terms.
-          </Text>
-
-          <Text style={styles.subHeading}>Flags and fonts</Text>
-          <Text style={[styles.paragraph, { marginBottom: 0 }]}>
-            Flag images are from flagpedia.net and are in the public domain. The Inter, IBM Plex
-            Mono and Archivo typefaces are used under the SIL Open Font License 1.1.
-          </Text>
+          <Text style={styles.sectionHeading}>{t.about.credits.heading}</Text>
+          {t.about.credits.sections.map((section, s, sections) => (
+            <Fragment key={section.heading}>
+              <Text style={styles.subHeading}>{section.heading}</Text>
+              {section.paragraphs.map((p, i, all) => (
+                <Text
+                  key={i}
+                  style={[
+                    styles.paragraph,
+                    // Only the card's last paragraph drops its bottom margin.
+                    last(s, sections) && last(i, all) && { marginBottom: 0 },
+                  ]}
+                >
+                  {p}
+                </Text>
+              ))}
+            </Fragment>
+          ))}
         </View>
 
         <View style={[styles.section, styles.settingRow]}>
           <Text style={styles.settingLabel} nativeID="haptics-label">
-            Vibration
+            {t.about.vibration}
           </Text>
           <Switch
             testID="haptics-toggle"
             accessibilityLabelledBy="haptics-label"
-            accessibilityLabel="Vibration"
+            accessibilityLabel={t.about.vibration}
             value={haptics}
             onValueChange={setHaptics}
             trackColor={{ false: colors.surfaceRaised, true: colors.accent }}
@@ -148,12 +130,12 @@ export default function About() {
 
         <View style={[styles.section, styles.settingRow]}>
           <Text style={styles.settingLabel} nativeID="telemetry-label">
-            Share anonymous usage statistics
+            {t.about.usageStatistics}
           </Text>
           <Switch
             testID="telemetry-toggle"
             accessibilityLabelledBy="telemetry-label"
-            accessibilityLabel="Share anonymous usage statistics"
+            accessibilityLabel={t.about.usageStatistics}
             value={telemetryEnabled}
             onValueChange={setTelemetryEnabled}
             trackColor={{ false: colors.surfaceRaised, true: colors.accent }}
@@ -163,99 +145,33 @@ export default function About() {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionHeading}>Privacy</Text>
+          <Text style={styles.sectionHeading}>{t.about.privacy.heading}</Text>
 
-          <Text style={styles.paragraphEmphasis}>
-            Escuadra has no account, no sign-in and no advertising, and it never asks for your name,
-            email or any contact details.
-          </Text>
+          <Text style={styles.paragraphEmphasis}>{t.about.privacy.lead}</Text>
 
-          <Text style={styles.paragraph}>
-            Your scores and settings stay on your device. The only things that leave it are the ones
-            described below, and none of them is linked to who you are.
-          </Text>
+          {t.about.privacy.paragraphs.map((p, i) => (
+            <Text key={i} style={styles.paragraph}>
+              {p}
+            </Text>
+          ))}
 
-          <Text style={styles.subHeading}>Player photos</Text>
-          <Text style={styles.paragraph}>
-            Escuadra does not ship player photos. They are loaded from Wikimedia Commons, run by the
-            Wikimedia Foundation: the ten photos for a round when the round starts, and a
-            squad&apos;s photos on the Study screen as you scroll. Like any website, Wikimedia
-            receives your device&apos;s IP address and the details of each request, including which
-            photos were asked for, and so which players are in your round or squad. Escuadra sends
-            nothing else to Wikimedia, and Wikimedia&apos;s own privacy policy applies to what it
-            receives.
-          </Text>
-          <Text style={styles.paragraph}>
-            Photos already loaded may be kept in the app&apos;s cache on your device so that they
-            appear faster. Without a connection the quiz works as usual and shows the team&apos;s
-            colours and the shirt number instead of a photo.
-          </Text>
-          <Text style={styles.paragraph}>
-            Tapping a photo credit opens the photo&apos;s Wikimedia Commons page, or its licence on
-            the Creative Commons website, in an in-app browser. Those sites have their own privacy
-            policies, and Escuadra cannot see what you do there.
-          </Text>
-
-          <Text style={styles.subHeading}>Sharing</Text>
-          <Text style={styles.paragraph}>
-            Sharing a result creates a picture or a short text on your device and passes it to the
-            app you pick in your phone&apos;s share menu. Escuadra does not see, send or keep what
-            you share.
-          </Text>
-
-          <Text style={styles.subHeading}>Anonymous usage statistics</Text>
-          <Text style={styles.paragraph}>
-            Escuadra sends anonymous usage statistics to TelemetryDeck, an analytics service, unless
-            you switch &quot;Share anonymous usage statistics&quot; off at the top of this screen.
-            Each one is tagged with a random identifier created for this installation. It is not
-            linked to you, your device or your accounts, and it is not shared with anyone else.
-          </Text>
-          <Text style={styles.paragraph}>
-            The statistics are: the app was opened; a round started, with whether the team is a club
-            or a nation and the difficulty level; a round finished, with the same two details, the
-            score, and whether it was a la escuadra; the Study screen was opened, with whether the
-            team is a club or a nation; a result was shared, with the level, the score and whether
-            it was shared as a picture or as text. They never include team names, player names, your
-            answers or anything you type.
-          </Text>
-
-          <Text style={styles.subHeading}>App updates</Text>
-          <Text style={styles.paragraph}>
-            When Escuadra starts, it checks whether a newer version of the app is available from
-            Expo, the service that delivers its updates. The check sends only what is needed to
-            deliver the right update: your device&apos;s operating system, the app&apos;s version
-            and project, and a random identifier created for this installation. The identifier is
-            not linked to you or to anything you do in the app. Without a connection, the app works
-            fully offline and skips the check.
-          </Text>
-
-          <Text style={styles.subHeading}>What is stored on your device</Text>
-          <Text style={styles.paragraph}>
-            Escuadra saves nine things locally, on your device only: your best score for each team
-            and difficulty level; which levels you have completed; the last team and level you
-            played; your light or dark appearance preference; your language choice; whether
-            vibration is on; whether the Study screen shows cards or a list; your choice about usage
-            statistics; and the random identifier those statistics use.
-          </Text>
-          <Text style={styles.paragraph}>
-            This lives in the app&apos;s own private storage. Apart from that identifier, which is
-            sent with each usage statistic, it never leaves your phone. Deleting the app deletes it,
-            along with any cached photos. There is no backup and no sync, and no way for anyone —
-            including the developer — to read it.
-          </Text>
-
-          <Text style={styles.subHeading}>Crash reports</Text>
-          <Text style={styles.paragraph}>
-            If you allow your device to share diagnostics, Apple (on iOS) or Google (on Android) may
-            share anonymised crash reports with the developer. That is handled by Apple or Google
-            and controlled in your device settings. Escuadra itself sends no crash reports.
-          </Text>
-
-          <Text style={styles.subHeading}>Children</Text>
-          <Text style={[styles.paragraph, { marginBottom: 0 }]}>
-            Escuadra has no account and asks for no personal information from anyone, including
-            children. Usage statistics are anonymous and can be switched off at any time.
-          </Text>
+          {t.about.privacy.sections.map((section, s, sections) => (
+            <Fragment key={section.heading}>
+              <Text style={styles.subHeading}>{section.heading}</Text>
+              {section.paragraphs.map((p, i, all) => (
+                <Text
+                  key={i}
+                  style={[
+                    styles.paragraph,
+                    // Only the card's last paragraph drops its bottom margin.
+                    last(s, sections) && last(i, all) && { marginBottom: 0 },
+                  ]}
+                >
+                  {p}
+                </Text>
+              ))}
+            </Fragment>
+          ))}
         </View>
 
         <Text style={styles.versionLine}>

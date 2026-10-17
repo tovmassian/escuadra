@@ -1,3 +1,4 @@
+import { useT } from '@/i18n/useT';
 import { iconSize, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
@@ -83,6 +84,7 @@ interface SearchFieldProps {
 
 export function SearchField({ value, onChange, onClear }: SearchFieldProps) {
   const colors = useThemeColors();
+  const t = useT();
   const styles = StyleSheet.create({
     root: {
       flexDirection: 'row',
@@ -104,19 +106,19 @@ export function SearchField({ value, onChange, onClear }: SearchFieldProps) {
       <TextInput
         value={value}
         onChangeText={onChange}
-        placeholder="Search teams"
+        placeholder={t.picker.search}
         placeholderTextColor={colors.textMuted}
         autoCorrect={false}
         autoCapitalize="none"
         returnKeyType="search"
-        accessibilityLabel="Search teams"
+        accessibilityLabel={t.picker.search}
         style={styles.input}
       />
       {value.length > 0 && (
         <Pressable
           onPress={onClear}
           accessibilityRole="button"
-          accessibilityLabel="Clear search"
+          accessibilityLabel={t.picker.clearSearch}
           hitSlop={spacing.xs}
         >
           <ClearGlyph />

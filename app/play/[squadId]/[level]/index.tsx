@@ -11,6 +11,7 @@ import { StreakChip } from '@/components/StreakChip';
 import { TeamMarker } from '@/components/TeamMarker';
 import { useScreenReader } from '@/components/useScreenReader';
 import { useShot } from '@/components/useShot';
+import { useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
 import { photoFor, roundPhotoUrls } from '@/lib/photos';
 import type { Level } from '@/lib/questionEngine';
@@ -43,7 +44,6 @@ import {
   stageGradients,
   typography,
 } from '@/theme/tokens';
-import { useT } from '@/i18n/useT';
 import { useThemeColors, useThemeName } from '@/theme/useTheme';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
@@ -294,21 +294,21 @@ export default function Question() {
           currentIndex={session.currentIndex}
         />
         <View style={styles.topBar}>
-          <GlassCloseButton label="Leave the round" onPress={exit} />
+          <GlassCloseButton label={t.round.leave} onPress={exit} />
           <View style={styles.team}>
             <Text style={styles.teamName} numberOfLines={1}>
               {squad.name}
             </Text>
             <View style={styles.teamSub}>
               <TeamMarker marker={squad.marker} variant="banner" />
-              <Text style={styles.level}>Level {level}</Text>
+              <Text style={styles.level}>{t.common.level(level)}</Text>
             </View>
           </View>
           {currentStreak >= 2 ? <StreakChip count={currentStreak} /> : null}
           <View
             style={styles.scorePill}
             accessible
-            accessibilityLabel={`Score: ${score.correct} of ${score.attempted}`}
+            accessibilityLabel={t.common.scoreSpoken(score.correct, score.attempted)}
           >
             <Text style={styles.score}>
               {score.correct}/{score.attempted}
@@ -345,7 +345,7 @@ export default function Question() {
                 <Text
                   style={styles.number}
                   maxFontSizeMultiplier={fontScaleCap.display}
-                  accessibilityLabel={`Shirt number ${question.memberNo}`}
+                  accessibilityLabel={t.round.shirtNumber(question.memberNo)}
                 >
                   {question.memberNo}
                 </Text>

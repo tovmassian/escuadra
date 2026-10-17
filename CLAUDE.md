@@ -325,6 +325,18 @@ reports — is done by hand, not by a skill.
   environment and cannot load `react-native`) can test it; `theme/useTheme.ts`
   exposes `useThemeName()` and `useThemeColors()`. The persisted preference
   lives in `stores/progress.ts` — it is not a third store.
+- **User-visible text lives in `i18n/`.** `i18n/en.ts` is the source catalog and
+  `Messages = typeof en`; every other catalog is typed `: Messages`, so a missing or
+  extra key fails the typecheck (a function that drops a trailing parameter still
+  compiles; a parity test lands with the first translation, #145). About's words
+  are `en.about`, kept as data that #146 renders into the privacy pages. Screens read text through
+  `useT()`. `lib/` modules that build text take `messages` as their last argument
+  and stay React-free. Data stays English: squads, players, clubs and position
+  codes are translated at display time by code, never by their English string.
+  _Escuadra_ and _a la escuadra_ come from `i18n/names.ts` and are never
+  translated. `npm run lint` fails a hard-coded string in `app/` or
+  `components/` JSX; a prop that is never shown or spoken goes on
+  `SILENT_PROPS` in `eslint.config.js`.
 - **Telemetry** is TelemetryDeck, anonymous and opt-out. The event allowlist
   — every event name and property that may leave the device — is
   `TELEMETRY_EVENTS` in `lib/telemetryEvents.ts`, alongside the pure gate

@@ -4,6 +4,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import type { FlagCode } from '@/assets/flags/generated';
 import { Flag } from '@/components/Flag';
+import { useT } from '@/i18n/useT';
 import { bannerBands, stageVeil } from '@/lib/stageView';
 import {
   borderWidths,
@@ -62,6 +63,7 @@ export function StudyListRow({
   onPress,
 }: StudyListRowProps) {
   const colors = useThemeColors();
+  const t = useT();
   const themeName = useThemeName();
   // Whether this row has ever drawn the "Tap to reveal" pill. Only then does
   // a shown name fade in, as a reveal; a name that was never hidden has no
@@ -163,7 +165,7 @@ export function StudyListRow({
         {nameHidden ? (
           <View key="reveal" style={styles.reveal}>
             <Text style={styles.revealLabel} maxFontSizeMultiplier={fontScaleCap.display}>
-              Tap to reveal
+              {t.study.tapToReveal}
             </Text>
           </View>
         ) : wasHidden ? (
@@ -199,7 +201,7 @@ export function StudyListRow({
       accessible
       accessibilityRole={nameHidden ? 'button' : undefined}
       accessibilityLabel={accessibilityLabel}
-      accessibilityHint={nameHidden ? 'Reveals the name' : undefined}
+      accessibilityHint={nameHidden ? t.study.revealsName : undefined}
     >
       {content}
     </Pressable>

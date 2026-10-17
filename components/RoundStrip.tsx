@@ -7,6 +7,7 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
+import { useT } from '@/i18n/useT';
 import {
   durations,
   fontScaleCap,
@@ -22,11 +23,15 @@ import { useThemeColors } from '@/theme/useTheme';
 // They fill left to right on arrival (spec §6). Reduce Motion: they fade in
 // together.
 export function RoundStrip({ items }: { items: { no: number; correct: boolean }[] }) {
+  const t = useT();
   return (
     <View
       style={styles.row}
       accessible
-      accessibilityLabel={`Round: ${items.filter((i) => i.correct).length} of ${items.length} right`}
+      accessibilityLabel={t.results.roundSpoken(
+        items.filter((i) => i.correct).length,
+        items.length,
+      )}
     >
       {items.map((item, i) => (
         <Segment key={i} index={i} no={item.no} correct={item.correct} />

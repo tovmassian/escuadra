@@ -66,8 +66,9 @@ interface ShareSheetProps {
 // button and the share button stay put; the switch, the preview and the hint
 // between them scroll.
 export function ShareSheet({ visible, onClose, card, text, onShared }: ShareSheetProps) {
+  const t = useT();
   return (
-    <Sheet visible={visible} onClose={onClose} title="Share your round" testID="share">
+    <Sheet visible={visible} onClose={onClose} title={t.share.title} testID="share">
       <ShareBody card={card} text={text} onShared={onShared} />
     </Sheet>
   );
@@ -209,8 +210,8 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
   };
 
   const formats: { key: ShareFormat; label: string }[] = [
-    { key: 'image', label: 'Image' },
-    { key: 'text', label: 'Text' },
+    { key: 'image', label: t.share.image },
+    { key: 'text', label: t.share.text },
   ];
   const bubbleLabel = `${parts.header}. ${parts.score}${parts.verdict ? `, ${parts.verdict}` : ''}. ${parts.url}`;
 
@@ -293,7 +294,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
                   </View>
                 </View>
                 <Text style={styles.bubbleLink}>{parts.url}</Text>
-                <Text style={styles.bubbleMeta}>Preview</Text>
+                <Text style={styles.bubbleMeta}>{t.share.preview}</Text>
               </View>
             )}
           </Animated.View>
@@ -301,9 +302,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
 
         <View style={styles.hintSlot}>
           <Text style={styles.hint}>
-            {format === 'image'
-              ? 'Story-sized picture. No player photos, no names — friends can still play it.'
-              : 'The score grid for group chats, with a link to the app.'}
+            {format === 'image' ? t.share.imageHint : t.share.textHint}
           </Text>
         </View>
       </ScrollView>
@@ -320,7 +319,9 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
         ]}
       >
         <ShareGlyph color={colors.ctaText} />
-        <Text style={styles.ctaText}>{format === 'image' ? 'Share image' : 'Share text'}</Text>
+        <Text style={styles.ctaText}>
+          {format === 'image' ? t.share.shareImage : t.share.shareText}
+        </Text>
       </Pressable>
 
       {/* Absolutely placed, so it takes no room in the sheet's column. */}

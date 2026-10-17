@@ -9,6 +9,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { Flag } from './Flag';
+import { useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
 import { slotSpoken, type Slot, type SlotState } from '@/lib/roundView';
 import {
@@ -22,7 +23,6 @@ import {
   typography,
   type Palette,
 } from '@/theme/tokens';
-import { useT } from '@/i18n/useT';
 import { useThemeColors } from '@/theme/useTheme';
 
 function look(colors: Palette, state: SlotState): { line: string; text: string; dashed: boolean } {

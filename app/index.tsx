@@ -5,6 +5,8 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Wordmark } from '@/components/Wordmark';
+import { useT } from '@/i18n/useT';
+import { ROUND_LENGTH } from '@/lib/scoring';
 import { getRoster, getSquad } from '@/lib/squads';
 import { scoreKey, useProgress, useProgressHydrated } from '@/stores/progress';
 import { useSession } from '@/stores/session';
@@ -25,6 +27,7 @@ const riseEasing = Easing.bezier(...celebrationEasingCurves.rise);
 export default function Home() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
+  const t = useT();
   const hydrated = useProgressHydrated();
   const lastPlayed = useProgress((s) => s.lastPlayed);
   const bestScores = useProgress((s) => s.bestScores);
@@ -92,7 +95,7 @@ export default function Home() {
     >
       <View style={styles.toggleRow}>
         <Pressable onPress={() => router.push('/about')} accessibilityRole="button" hitSlop={12}>
-          <Text style={styles.aboutLink}>About</Text>
+          <Text style={styles.aboutLink}>{t.home.aboutLink}</Text>
         </Pressable>
         <ThemeToggle />
       </View>
@@ -126,8 +129,7 @@ export default function Home() {
             <View style={styles.continueText}>
               <Text style={styles.continueName}>{continueSquad.name}</Text>
               <Text style={styles.continueMeta}>
-                LEVEL {lastPlayed.level}
-                {continueBest !== undefined ? ` · BEST ${continueBest}/10` : ''}
+                {t.home.continueMeta(lastPlayed.level, continueBest, ROUND_LENGTH)}
               </Text>
             </View>
             <Text style={styles.chevron}>›</Text>
@@ -141,7 +143,7 @@ export default function Home() {
             .delay(homeCascade.actionsBase)
             .easing(riseEasing)}
         >
-          <Button label="Start Training" variant="filled" large onPress={startTraining} />
+          <Button label={t.home.startTraining} variant="filled" large onPress={startTraining} />
         </Animated.View>
         <Animated.View
           entering={FadeInUp.duration(celebrationRiseDuration)
@@ -149,7 +151,7 @@ export default function Home() {
             .easing(riseEasing)}
         >
           <Button
-            label="Browse All Teams"
+            label={t.home.browseAllTeams}
             variant="text"
             onPress={() => router.push('/team-picker')}
           />

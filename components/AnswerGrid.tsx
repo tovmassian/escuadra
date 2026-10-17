@@ -5,9 +5,9 @@ import { AnswerTile } from './AnswerTile';
 import { riseIn } from './riseIn';
 import type { ShotTap } from './useShot';
 import type { FlagCode } from '@/assets/flags/generated';
+import { useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
 import type { QuestionPart } from '@/lib/questionEngine';
-import { useT } from '@/i18n/useT';
 import { positionLabel, tileVerdict, type AnswerLayout } from '@/lib/roundView';
 import { durations, spacing, spotlightMotion } from '@/theme/tokens';
 

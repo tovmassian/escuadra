@@ -11,6 +11,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { PhotoCreditLine } from './PhotoCreditLine';
 import { riseIn } from './riseIn';
+import { useT } from '@/i18n/useT';
 import { nextButtonText, type FooterMode } from '@/lib/roundView';
 import {
   borderWidths,
@@ -23,7 +24,6 @@ import {
   spotlightMotion,
   typography,
 } from '@/theme/tokens';
-import { useT } from '@/i18n/useT';
 import { useThemeColors } from '@/theme/useTheme';
 import type { PhotoCredit } from '@/types/squad';
 
@@ -76,7 +76,7 @@ export function QuestionFooter({ mode, compact, last, onNext, credit }: Question
     <View style={styles.footer}>
       {mode === 'waiting' ? (
         <View style={styles.hint}>
-          <Text style={styles.hintText}>Tap your answer</Text>
+          <Text style={styles.hintText}>{t.round.tapYourAnswer}</Text>
         </View>
       ) : null}
       {mode === 'gotIt' || mode === 'next' ? (
@@ -152,7 +152,7 @@ function NextBar({
       onPress={onNext}
       accessibilityRole="button"
       accessibilityLabel={text.spoken}
-      accessibilityHint="Moves on by itself in a moment"
+      accessibilityHint={t.round.movesOn}
       style={styles.bar}
     >
       <Animated.View style={[styles.fill, fill]} />

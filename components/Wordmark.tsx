@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Animated, { Easing, FadeInUp } from 'react-native-reanimated';
 import { EscuadraMark } from './EscuadraMark';
 import { EscuadraStrike } from './EscuadraStrike';
+import { ESCUADRA, ESCUADRA_WORDMARK } from '@/i18n/names';
 import {
   celebrationEasingCurves,
   homeCascade,
@@ -12,7 +13,7 @@ import {
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
-const WORD = 'escuadra';
+const WORD = ESCUADRA_WORDMARK;
 
 interface WordmarkProps {
   /** Mark edge length in dp. Defaults to the token-defined lockup size. */
@@ -50,7 +51,7 @@ export function Wordmark({
     <View
       style={[styles.root, stacked && styles.stacked]}
       accessibilityRole="header"
-      accessibilityLabel="Escuadra"
+      accessibilityLabel={ESCUADRA}
     >
       {animate ? (
         <EscuadraStrike size={size} color={colors.mark} timing={strikeTiming.home} />

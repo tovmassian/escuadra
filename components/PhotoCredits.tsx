@@ -1,5 +1,6 @@
 import { PhotoCreditText } from '@/components/PhotoCreditText';
 import { Sheet } from '@/components/Sheet';
+import { useT } from '@/i18n/useT';
 import type { PhotoCreditRow } from '@/lib/photos';
 import { spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -21,6 +22,7 @@ export function PhotoCredits({
   numbersOnly?: boolean;
 }) {
   const colors = useThemeColors();
+  const t = useT();
   const [open, setOpen] = useState(false);
   if (rows.length === 0) return null;
 
@@ -46,9 +48,9 @@ export function PhotoCredits({
         hitSlop={8}
         style={styles.button}
       >
-        <Text style={styles.label}>Photo credits · {rows.length}</Text>
+        <Text style={styles.label}>{t.credits.button(rows.length)}</Text>
       </Pressable>
-      <Sheet visible={open} onClose={() => setOpen(false)} title="Photo credits" testID="credits">
+      <Sheet visible={open} onClose={() => setOpen(false)} title={t.credits.title} testID="credits">
         <ScrollView
           style={styles.list}
           contentContainerStyle={styles.listContent}
