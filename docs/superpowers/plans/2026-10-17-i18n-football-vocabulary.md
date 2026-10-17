@@ -49,24 +49,24 @@
 
 ## File map
 
-| File                                                   | Responsibility                                                                               |
-| ------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
-| `i18n/countries.ts` (new)                              | `COUNTRY_NAMES`: FIFA code → name, per supported language                                    |
-| `i18n/displayNames.ts` (new)                           | `countryName`, `nationalityName`, `squadDisplayName`                                         |
-| `i18n/__tests__/countries.test.ts` (new)               | Every code has a name in every language; English reproduces today's names                    |
-| `i18n/__tests__/displayNames.test.ts` (new)            | The three lookups, their fallbacks, every nation squad name                                  |
-| `i18n/en.ts`                                           | `positionCodes`                                                                              |
-| `lib/roundView.ts`                                     | `positionCode`, `optionText`, `slotValueText`; `slotSpoken` takes `language`                 |
-| `lib/resultsView.ts`                                   | `missedLine` takes `language`, shows translated option text                                  |
-| `lib/studyView.ts`                                     | `studyAffiliation` takes `language`                                                          |
-| `lib/pickerView.ts`                                    | `visibleSquads` sorts by displayed name, searches displayed or English name, folds accents   |
-| `lib/questionEngine.test.ts`                           | Pins that the engine is language-free                                                        |
-| `components/AnswerGrid.tsx`, `components/SlotChip.tsx` | Draw translated option and slot text                                                         |
-| `app/team/[squadId]/study.tsx`                         | Position codes, nationality and team name                                                    |
-| `app/team-picker.tsx`                                  | Passes names and locale to `visibleSquads`; shows displayed names                            |
-| `app/index.tsx`, `app/team/[squadId]/difficulty.tsx`   | Displayed team name                                                                          |
-| `app/play/[squadId]/[level]/index.tsx`, `results.tsx`  | Displayed team name (round header, results context, share card and text)                     |
-| `CLAUDE.md`                                            | The i18n bullet names `displayNames.ts` and `countries.ts`                                   |
+| File                                                   | Responsibility                                                                             |
+| ------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
+| `i18n/countries.ts` (new)                              | `COUNTRY_NAMES`: FIFA code → name, per supported language                                  |
+| `i18n/displayNames.ts` (new)                           | `countryName`, `nationalityName`, `squadDisplayName`                                       |
+| `i18n/__tests__/countries.test.ts` (new)               | Every code has a name in every language; English reproduces today's names                  |
+| `i18n/__tests__/displayNames.test.ts` (new)            | The three lookups, their fallbacks, every nation squad name                                |
+| `i18n/en.ts`                                           | `positionCodes`                                                                            |
+| `lib/roundView.ts`                                     | `positionCode`, `optionText`, `slotValueText`; `slotSpoken` takes `language`               |
+| `lib/resultsView.ts`                                   | `missedLine` takes `language`, shows translated option text                                |
+| `lib/studyView.ts`                                     | `studyAffiliation` takes `language`                                                        |
+| `lib/pickerView.ts`                                    | `visibleSquads` sorts by displayed name, searches displayed or English name, folds accents |
+| `lib/questionEngine.test.ts`                           | Pins that the engine is language-free                                                      |
+| `components/AnswerGrid.tsx`, `components/SlotChip.tsx` | Draw translated option and slot text                                                       |
+| `app/team/[squadId]/study.tsx`                         | Position codes, nationality and team name                                                  |
+| `app/team-picker.tsx`                                  | Passes names and locale to `visibleSquads`; shows displayed names                          |
+| `app/index.tsx`, `app/team/[squadId]/difficulty.tsx`   | Displayed team name                                                                        |
+| `app/play/[squadId]/[level]/index.tsx`, `results.tsx`  | Displayed team name (round header, results context, share card and text)                   |
+| `CLAUDE.md`                                            | The i18n bullet names `displayNames.ts` and `countries.ts`                                 |
 
 ---
 
@@ -436,12 +436,12 @@ describe('slotValueText', () => {
 In `lib/resultsView.test.ts`, change every `missedLine(…, en)` call (lines 115–134) to `missedLine(…, 'en', en)`. Expectations stay. Then add inside the `missedLine` describe, after the `nat` test:
 
 ```ts
-  it('draws the position codes from the catalog', () => {
-    const spanish = { ...en, positionCodes: { GK: 'POR', DF: 'DEF', MF: 'MED', FW: 'DEL' } };
-    expect(missedLine(missed([name, pos], [1, 3]), 'en', spanish)).toBe(
-      'Name right · position is MED, you said DEL',
-    );
-  });
+it('draws the position codes from the catalog', () => {
+  const spanish = { ...en, positionCodes: { GK: 'POR', DF: 'DEF', MF: 'MED', FW: 'DEL' } };
+  expect(missedLine(missed([name, pos], [1, 3]), 'en', spanish)).toBe(
+    'Name right · position is MED, you said DEL',
+  );
+});
 ```
 
 In `lib/questionEngine.test.ts`, add these imports at the top:
@@ -586,20 +586,20 @@ export function missedLine(
 `components/AnswerGrid.tsx`: change the import to `import { useLanguage, useT } from '@/i18n/useT';` and the `roundView` import to `import { optionText, positionLabel, tileVerdict, type AnswerLayout } from '@/lib/roundView';`. After `const t = useT();` add `const language = useLanguage();`. Replace the `tiles` definition:
 
 ```tsx
-  const tiles: TileModel[] =
-    part.kind === 'position'
-      ? part.options.map((option, index) => ({
-          index,
-          label: optionText(part, index, language, t),
-          sub: positionLabel(option, t),
-          flag: undefined,
-        }))
-      : part.options.map((option, index) => ({
-          index,
-          label: optionText(part, index, language, t),
-          sub: undefined,
-          flag: part.kind === 'nationality' ? flagFor(option) : undefined,
-        }));
+const tiles: TileModel[] =
+  part.kind === 'position'
+    ? part.options.map((option, index) => ({
+        index,
+        label: optionText(part, index, language, t),
+        sub: positionLabel(option, t),
+        flag: undefined,
+      }))
+    : part.options.map((option, index) => ({
+        index,
+        label: optionText(part, index, language, t),
+        sub: undefined,
+        flag: part.kind === 'nationality' ? flagFor(option) : undefined,
+      }));
 ```
 
 `flagFor(option)` still receives the English option, as the Global Constraints require.
@@ -607,8 +607,8 @@ export function missedLine(
 `components/SlotChip.tsx`: change the import to `import { useLanguage, useT } from '@/i18n/useT';` and the roundView import to `import { slotSpoken, slotValueText, type Slot, type SlotState } from '@/lib/roundView';`. After `const t = useT();` add `const language = useLanguage();`. Replace the `shown` line:
 
 ```tsx
-  const text = slotValueText(slot, language, t);
-  const shown = text ?? (slot.state === 'active' ? '?' : '—');
+const text = slotValueText(slot, language, t);
+const shown = text ?? (slot.state === 'active' ? '?' : '—');
 ```
 
 Leave `const flag = slot.key === 'NAT' && slot.value !== null ? flagFor(slot.value) : null;` as it is (it reads the English value). Then in the JSX: `accessibilityLabel={slotSpoken(slot, language, t)}` and `label={text ?? ''}` on the `Flag`.
@@ -647,10 +647,10 @@ git commit -m "feat(i18n): position codes and nationality names in the round (#1
 In `lib/studyView.test.ts`, change the three `studyAffiliation` calls (lines 102, 103, 108) to pass `'en'` as the last argument, and add one case to the `studyAffiliation` describe:
 
 ```ts
-  it('shows an unmapped nationality as it is', () => {
-    const p = entry(7, 'Torres', 'FW', { nationality: 'Atlantis' }).player;
-    expect(studyAffiliation(p, 'club', 'en')).toBe('Atlantis');
-  });
+it('shows an unmapped nationality as it is', () => {
+  const p = entry(7, 'Torres', 'FW', { nationality: 'Atlantis' }).player;
+  expect(studyAffiliation(p, 'club', 'en')).toBe('Atlantis');
+});
 ```
 
 `studyAffiliation(p, 'club', 'en')` still returns `'Spain'` for the first test; `studyAffiliation(p, 'nation', 'en')` still returns `'Barcelona'`.
@@ -906,20 +906,20 @@ Each screen below imports `useLanguage` from `@/i18n/useT` (beside the existing 
 `app/team-picker.tsx`:
 
 ```tsx
-  const language = useLanguage();
-  const squads = listSquads();
-  const leagues = useMemo(() => leagueFilters(squads), [squads]);
-  const filtered = useMemo(
-    () =>
-      visibleSquads(
-        squads,
-        filter,
-        league,
-        { nameOf: (s) => squadDisplayName(s, language), locale: language },
-        query,
-      ),
-    [squads, filter, league, query, language],
-  );
+const language = useLanguage();
+const squads = listSquads();
+const leagues = useMemo(() => leagueFilters(squads), [squads]);
+const filtered = useMemo(
+  () =>
+    visibleSquads(
+      squads,
+      filter,
+      league,
+      { nameOf: (s) => squadDisplayName(s, language), locale: language },
+      query,
+    ),
+  [squads, filter, league, query, language],
+);
 ```
 
 and in `renderItem`: `name={squadDisplayName(item, language)}`. Keep `flag={item.kind === 'nation' ? flagFor(item.name) : undefined}` as it is: the flag keys on the English name.
@@ -1041,20 +1041,20 @@ End with the attribution line from the session.
 
 **Spec coverage** (issue #144, line by line):
 
-| Requirement                                                              | Where                                                                                                              |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------ |
-| Position codes in the catalogs, used by tiles, chips, Study              | Task 2 (`positionCodes`, tiles via `optionText`, slot chips via `slotValueText`), Task 3 (pills, badge, list row)  |
-| `Position` stays GK/DF/MF/FW in data and engine                          | Global Constraints; engine untouched; Task 2 Step 2 pins it                                                         |
-| `i18n/countries.ts`, English reproduces today's names, "China PR"        | Task 1 Steps 2–5                                                                                                   |
-| `squadDisplayName(squad, lang)` used by picker, Home, header, results, Study, share text, `ShareCard` | Task 1 Step 8; Task 4 Step 5                                                          |
-| Level-3 nationality options and `NAT` chip show the country table's name | Task 2 Steps 4 and 6                                                                                               |
-| Picker sort `localeCompare(lang)` on the displayed name                  | Task 4 Steps 1–4; the English order change is Decision 1                                                           |
-| Picker search: displayed or English name, case- and accent-insensitive   | Task 4 Steps 1–4                                                                                                   |
-| Test: every code in `FLAG_BY_NATIONALITY` named in every supported language | Task 1 Step 2                                                                                                  |
-| AC: English screens unchanged                                            | Identity tests in Tasks 1–3; Task 5 Step 4 compares the shots. Exception: picker order, flagged                     |
-| AC: "espana", "España", "Spain" find the same team, with fixture names   | Task 4 Step 1                                                                                                      |
-| AC: level-3 distractors unchanged, codes before labels                   | Engine untouched; Task 2 Step 2 (no i18n import, options are flag-table keys)                                      |
-| AC: `npm run check` passes                                               | Task 5 Step 3                                                                                                      |
+| Requirement                                                                                           | Where                                                                                                             |
+| ----------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------- |
+| Position codes in the catalogs, used by tiles, chips, Study                                           | Task 2 (`positionCodes`, tiles via `optionText`, slot chips via `slotValueText`), Task 3 (pills, badge, list row) |
+| `Position` stays GK/DF/MF/FW in data and engine                                                       | Global Constraints; engine untouched; Task 2 Step 2 pins it                                                       |
+| `i18n/countries.ts`, English reproduces today's names, "China PR"                                     | Task 1 Steps 2–5                                                                                                  |
+| `squadDisplayName(squad, lang)` used by picker, Home, header, results, Study, share text, `ShareCard` | Task 1 Step 8; Task 4 Step 5                                                                                      |
+| Level-3 nationality options and `NAT` chip show the country table's name                              | Task 2 Steps 4 and 6                                                                                              |
+| Picker sort `localeCompare(lang)` on the displayed name                                               | Task 4 Steps 1–4; the English order change is Decision 1                                                          |
+| Picker search: displayed or English name, case- and accent-insensitive                                | Task 4 Steps 1–4                                                                                                  |
+| Test: every code in `FLAG_BY_NATIONALITY` named in every supported language                           | Task 1 Step 2                                                                                                     |
+| AC: English screens unchanged                                                                         | Identity tests in Tasks 1–3; Task 5 Step 4 compares the shots. Exception: picker order, flagged                   |
+| AC: "espana", "España", "Spain" find the same team, with fixture names                                | Task 4 Step 1                                                                                                     |
+| AC: level-3 distractors unchanged, codes before labels                                                | Engine untouched; Task 2 Step 2 (no i18n import, options are flag-table keys)                                     |
+| AC: `npm run check` passes                                                                            | Task 5 Step 3                                                                                                     |
 
 **Placeholder scan:** none. The one generated file has its generator script, an expected line count, and a test that fails if the output is wrong.
 

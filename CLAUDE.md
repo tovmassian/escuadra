@@ -333,6 +333,10 @@ reports — is done by hand, not by a skill.
   `useT()`. `lib/` modules that build text take `messages` as their last argument
   and stay React-free. Data stays English: squads, players, clubs and position
   codes are translated at display time by code, never by their English string.
+  A nation's name and a player's nationality come from `i18n/countries.ts` (FIFA
+  code → name, the codes `lib/flags.ts` maps to); every screen shows a team
+  through `squadDisplayName()` in `i18n/displayNames.ts`. `lib/` functions that
+  also need a country name take `language` just before `messages`.
   _Escuadra_ and _a la escuadra_ come from `i18n/names.ts` and are never
   translated. `npm run lint` fails a hard-coded string in `app/` or
   `components/` JSX; a prop that is never shown or spoken goes on
