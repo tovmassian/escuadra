@@ -1,16 +1,19 @@
 import { describe, expect, it } from 'vitest';
-import { en } from '@/i18n/en';
+import { en, type Messages } from '@/i18n/en';
 import {
   answerLayout,
   footerMode,
   isCompact,
   nextButtonText,
+  optionText,
   partCounter,
+  positionCode,
   positionLabel,
   progressOutcomes,
   promptText,
   slotSpoken,
   slotStates,
+  slotValueText,
   streak,
   streakMilestone,
   tileVerdict,
@@ -515,23 +518,108 @@ describe('streakMilestone', () => {
 
 describe('slotSpoken', () => {
   it('names a settled slot with its value', () => {
-    expect(slotSpoken({ key: 'POS', state: 'given', value: 'FW' }, en)).toBe('Position: FW');
-    expect(slotSpoken({ key: 'NAME', state: 'correct', value: 'Pedri' }, en)).toBe(
+    expect(slotSpoken({ key: 'POS', state: 'given', value: 'FW' }, 'en', en)).toBe('Position: FW');
+    expect(slotSpoken({ key: 'NAME', state: 'correct', value: 'Pedri' }, 'en', en)).toBe(
       'Name: Pedri, right',
     );
-    expect(slotSpoken({ key: 'CLUB', state: 'wrong', value: 'Barcelona' }, en)).toBe(
+    expect(slotSpoken({ key: 'CLUB', state: 'wrong', value: 'Barcelona' }, 'en', en)).toBe(
       'Club: Barcelona, the right answer',
     );
-    expect(slotSpoken({ key: 'NAT', state: 'notAsked', value: 'Spain' }, en)).toBe(
+    expect(slotSpoken({ key: 'NAT', state: 'notAsked', value: 'Spain' }, 'en', en)).toBe(
       'Nationality: Spain, not asked',
     );
   });
 
   // Guardrail: a screen reader must not read out the answer being asked.
   it('never speaks a value for a slot still being asked', () => {
-    expect(slotSpoken({ key: 'NAME', state: 'active', value: null }, en)).toBe('Name: being asked');
-    expect(slotSpoken({ key: 'POS', state: 'pending', value: null }, en)).toBe(
+    expect(slotSpoken({ key: 'NAME', state: 'active', value: null }, 'en', en)).toBe(
+      'Name: being asked',
+    );
+    expect(slotSpoken({ key: 'POS', state: 'pending', value: null }, 'en', en)).toBe(
       'Position: asked next',
+    );
+  });
+});
+
+// A catalog that spells the codes differently, as Spanish will (#145).
+const spanishCodes: Messages = {
+  ...en,
+  positionCodes: { GK: 'POR', DF: 'DEF', MF: 'MED', FW: 'DEL' },
+};
+
+describe('positionCode', () => {
+  it('is the English code today', () => {
+    expect((['GK', 'DF', 'MF', 'FW'] as const).map((p) => positionCode(p, en))).toEqual([
+      'GK',
+      'DF',
+      'MF',
+      'FW',
+    ]);
+  });
+
+  it('follows the catalog, never the data', () => {
+    expect(positionCode('GK', spanishCodes)).toBe('POR');
+  });
+});
+
+describe('optionText', () => {
+  const position: QuestionPart = {
+    kind: 'position',
+    options: ['GK', 'DF', 'MF', 'FW'],
+    correctIndex: 2,
+  };
+  const nationality: QuestionPart = {
+    kind: 'nationality',
+    options: ['China PR', 'Spain', 'Atlantis'],
+    correctIndex: 1,
+  };
+  const name: QuestionPart = { kind: 'name', options: ['Pedri', 'Rodri'], correctIndex: 0 };
+  const club: QuestionPart = { kind: 'club', options: ['Arsenal'], correctIndex: 0 };
+
+  it('draws a position as its catalog code', () => {
+    expect(optionText(position, 3, 'en', en)).toBe('FW');
+    expect(optionText(position, 3, 'en', spanishCodes)).toBe('DEL');
+  });
+
+  it('draws a nationality as its country name, or as it is when unmapped', () => {
+    expect(optionText(nationality, 0, 'en', en)).toBe('China PR');
+    expect(optionText(nationality, 2, 'en', en)).toBe('Atlantis');
+  });
+
+  it('leaves names and clubs alone', () => {
+    expect(optionText(name, 1, 'en', en)).toBe('Rodri');
+    expect(optionText(club, 0, 'en', en)).toBe('Arsenal');
+  });
+
+  it('shows a dash for an index past the options', () => {
+    expect(optionText(name, 9, 'en', en)).toBe('—');
+  });
+});
+
+describe('slotValueText', () => {
+  it('draws POS as a code and NAT as a country name', () => {
+    expect(slotValueText({ key: 'POS', state: 'given', value: 'FW' }, 'en', spanishCodes)).toBe(
+      'DEL',
+    );
+    expect(slotValueText({ key: 'NAT', state: 'given', value: 'China PR' }, 'en', en)).toBe(
+      'China PR',
+    );
+  });
+
+  it('leaves NAME, AGE and CLUB as they are', () => {
+    expect(slotValueText({ key: 'CLUB', state: 'given', value: 'Arsenal' }, 'en', en)).toBe(
+      'Arsenal',
+    );
+    expect(slotValueText({ key: 'AGE', state: 'given', value: '26' }, 'en', en)).toBe('26');
+  });
+
+  it('is null while the slot is being asked, so nothing leaks', () => {
+    expect(slotValueText({ key: 'NAT', state: 'active', value: null }, 'en', en)).toBeNull();
+  });
+
+  it('speaks the translated value', () => {
+    expect(slotSpoken({ key: 'POS', state: 'given', value: 'FW' }, 'en', spanishCodes)).toBe(
+      'Position: DEL',
     );
   });
 });

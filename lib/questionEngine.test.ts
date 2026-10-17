@@ -1,4 +1,7 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { FLAG_BY_NATIONALITY } from './flags';
 import { buildRound, isQuestionCorrect } from './questionEngine';
 import type { Player, RosterEntry, Squad } from '@/types/squad';
 
@@ -192,5 +195,29 @@ describe('isQuestionCorrect', () => {
     const wrongIndexes = [...rightIndexes];
     wrongIndexes[wrongIndexes.length - 1] = -1;
     expect(isQuestionCorrect(q, wrongIndexes)).toBe(false);
+  });
+});
+
+describe('the engine is language-free (#144)', () => {
+  it('imports nothing from i18n', () => {
+    const source = readFileSync(path.resolve(import.meta.dirname, 'questionEngine.ts'), 'utf-8');
+    expect(source).not.toMatch(/from ['"]@\/i18n|from ['"]\.\.?\/i18n/);
+  });
+
+  it('asks nationalities by the English key the flag table is keyed by', () => {
+    const round = buildRound({
+      squad: squad(),
+      roster: buildClubRoster(),
+      level: 3,
+      seed: 7,
+      now: new Date('2026-01-01'),
+    });
+    const options = round.flatMap((q) =>
+      q.parts.flatMap((part) => (part.kind === 'nationality' ? part.options : [])),
+    );
+    expect(options.length).toBeGreaterThan(0);
+    for (const option of options) {
+      expect(FLAG_BY_NATIONALITY[option]).toBeDefined();
+    }
   });
 });

@@ -5,7 +5,7 @@ import { PlayerCard } from '@/components/PlayerCard';
 import { popIn, riseIn, slideIn } from '@/components/riseIn';
 import { RoundStrip } from '@/components/RoundStrip';
 import { ShareSheet } from '@/components/ShareSheet';
-import { useT } from '@/i18n/useT';
+import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
 import { photoCreditRows, photoFor } from '@/lib/photos';
 import type { Level } from '@/lib/questionEngine';
@@ -507,6 +507,7 @@ function MissedCards({
 }) {
   const colors = useThemeColors();
   const t = useT();
+  const language = useLanguage();
   const reduced = useReducedMotion();
   const card = sizes.playerCard.results;
   const styles = StyleSheet.create({
@@ -550,7 +551,7 @@ function MissedCards({
               height={card.height}
               shirtNumber={item.question.memberNo}
               name={item.question.playerName}
-              line={missedLine(item, t)}
+              line={missedLine(item, language, t)}
               photo={photoFor(getPlayer(item.question.playerId))}
               marker={marker}
             />

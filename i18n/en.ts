@@ -67,6 +67,8 @@ export const en = {
     /** "21 Aug 2026". */
     date: ({ day, month, year }: CalendarDate) => `${day} ${MONTHS[month - 1] ?? ''} ${year}`,
   },
+  /** ≤ 3 chars: a position's code on an answer tile, a slot chip, a Study filter pill and a card badge. */
+  positionCodes: { GK: 'GK', DF: 'DF', MF: 'MF', FW: 'FW' },
   /** The word under a position tile's code, and in Study's spoken label. */
   positions: { GK: 'Keeper', DF: 'Defender', MF: 'Midfield', FW: 'Forward' },
   /** Slot names, spoken before a slot's value. */
