@@ -3,6 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { Easing, FadeInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
+import { LanguageChip } from '@/components/LanguageChip';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Wordmark } from '@/components/Wordmark';
 import { useT } from '@/i18n/useT';
@@ -56,6 +57,7 @@ export default function Home() {
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.xl },
     toggleRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
+    controls: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
     aboutLink: { ...typography.secondarySmall, color: colors.textMuted },
     brandBlock: { flex: 1, alignItems: 'center', justifyContent: 'center' },
     continueCard: {
@@ -97,7 +99,10 @@ export default function Home() {
         <Pressable onPress={() => router.push('/about')} accessibilityRole="button" hitSlop={12}>
           <Text style={styles.aboutLink}>{t.home.aboutLink}</Text>
         </Pressable>
-        <ThemeToggle />
+        <View style={styles.controls}>
+          <LanguageChip />
+          <ThemeToggle />
+        </View>
       </View>
 
       <View style={styles.brandBlock}>

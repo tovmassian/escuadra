@@ -47,6 +47,8 @@ export const en = {
     aboutLink: 'About',
     /** Spoken name of the theme switch. */
     darkTheme: 'Dark theme',
+    /** Spoken name of the language chip, with the current language in its own name: "Language: English". */
+    languageLabel: (name: string) => `Language: ${name}`,
     /** ≤ 24 chars: the continue card's meta line, in IBM Plex Mono capitals. */
     continueMeta: (level: number, best: number | undefined, total: number) =>
       best === undefined ? `LEVEL ${level}` : `LEVEL ${level} · BEST ${best}/${total}`,
@@ -54,6 +56,12 @@ export const en = {
     startTraining: 'Start Training',
     /** ≤ 20 chars: the text button. */
     browseAllTeams: 'Browse All Teams',
+  },
+  languageSheet: {
+    /** ≤ 16 chars: the sheet's title. */
+    title: 'Language',
+    /** ≤ 28 chars: the first row, with the language the phone resolves to in its own name. */
+    matchPhone: (name: string) => `Match phone · ${name}`,
   },
   formats: {
     /** "21 Aug 2026". */

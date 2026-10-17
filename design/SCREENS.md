@@ -93,7 +93,7 @@ flawless — see below). Route, file, and what it does.
 
 | #   | Route                             | File                                     | Purpose                                                                                                                                                                                                                                                                  |
 | --- | --------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| 1   | `/`                               | `app/index.tsx`                          | Home. Centred, stacked wordmark lockup as the headline, continue-card for the last played team, Start Training.                                                                                                                                                          |
+| 1   | `/`                               | `app/index.tsx`                          | Home. Centred, stacked wordmark lockup as the headline, continue-card for the last played team, Start Training. A language chip beside the theme toggle opens the language sheet.                                                                                        |
 | 2   | `/about`                          | `app/about.tsx`                          | About. Legal/attribution copy, data and image credits, the privacy section (photos, usage statistics, updates), and the running update line.                                                                                                                             |
 | 3   | `/team-picker`                    | `app/team-picker.tsx`                    | Team picker, segmented into Clubs and National Teams. Each row shows a mono sub-line — `LEVEL n · BEST n/10` or `NOT PLAYED`, green once cleared.                                                                                                                        |
 | 4   | `/team/[squadId]/difficulty`      | `app/team/[squadId]/difficulty.tsx`      | The difficulty ladder in level order: the focused level expanded into a card with its description and a Play button, the other levels compact (locked ones stating their unlock condition), and Study, an outline button until level 1 is cleared and a text link after. |
@@ -107,6 +107,7 @@ flawless — see below). Route, file, and what it does.
 | ---------------------------------------- | ------------------------------------ |
 | `screens/01-home.png`                    | Home                                 |
 | `screens/01a-about.png`                  | About                                |
+| `screens/01b-home-language.png`          | Home — language sheet                |
 | `screens/02-team-picker-clubs.png`       | Team picker, Clubs                   |
 | `screens/03-team-picker-nations.png`     | Team picker, National Teams          |
 | `screens/04-difficulty.png`              | Difficulty ladder                    |
