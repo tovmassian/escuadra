@@ -2,6 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
+import type { LanguagePreference } from '@/i18n/resolveLanguage';
 import { scoreKey } from '@/lib/scoring';
 import type { StudyView } from '@/lib/studyView';
 import type { ThemePreference } from '@/theme/tokens';
@@ -25,6 +26,10 @@ interface ProgressState {
    *  only — reverting someone's appearance choice alongside their scores
    *  would be a surprise, and the two are unrelated. */
   themePreference: ThemePreference;
+  /** The app's language (#141): `'system'` follows the phone, an explicit
+   *  language pins it. A preference like `themePreference`, so it survives
+   *  `reset()`. Set by the Home language sheet (#143). */
+  languagePreference: LanguagePreference;
   /** Random UUID created once per installation, the anonymous `clientUser`
    *  for telemetry. Null until the root layout creates it after hydration.
    *  Survives `reset()`; a reinstall clears storage and so gets a new one. */
@@ -41,6 +46,7 @@ interface ProgressState {
   recordScore: (squadId: string, level: number, score: number) => void;
   setLastPlayed: (squadId: string, level: number) => void;
   setThemePreference: (preference: ThemePreference) => void;
+  setLanguagePreference: (preference: LanguagePreference) => void;
   setInstallId: (installId: string) => void;
   setTelemetryEnabled: (enabled: boolean) => void;
   setHaptics: (enabled: boolean) => void;
@@ -54,6 +60,7 @@ export const useProgress = create<ProgressState>()(
       bestScores: {},
       lastPlayed: null,
       themePreference: 'system',
+      languagePreference: 'system',
       installId: null,
       telemetryEnabled: true,
       haptics: true,
@@ -71,6 +78,7 @@ export const useProgress = create<ProgressState>()(
         }),
       setLastPlayed: (squadId, level) => set({ lastPlayed: { squadId, level } }),
       setThemePreference: (themePreference) => set({ themePreference }),
+      setLanguagePreference: (languagePreference) => set({ languagePreference }),
       setInstallId: (installId) => set((s) => (s.installId === null ? { installId } : s)),
       setTelemetryEnabled: (telemetryEnabled) => set({ telemetryEnabled }),
       setHaptics: (haptics) => set({ haptics }),
