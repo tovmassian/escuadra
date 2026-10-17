@@ -1,6 +1,7 @@
 // Pure results-screen model. Kept out of the screen so invariant 10's rules
 // are unit-testable.
 
+import { A_LA_ESCUADRA_TITLE } from '@/i18n/names';
 import type { Messages } from '@/i18n/en';
 import { PASS_RATIO, ROUND_LENGTH } from '@/lib/scoring';
 import type { QuestionResult } from '@/stores/session';
@@ -78,7 +79,7 @@ export function resultCopy(
   const { results } = messages;
   if (tier === 'excellent') {
     return {
-      title: results.flawlessTitle,
+      title: A_LA_ESCUADRA_TITLE,
       verdict: results.flawlessVerdict(teamName, season, level),
     };
   }

@@ -1,14 +1,14 @@
 // The English catalog, the source every other language is typed against:
 // `Messages = typeof en`. Deliberately not `as const` — its strings widen to
-// `string`, so a translation can hold different words while a missing key, an
-// extra key or a wrong parameter list still fails `npm run typecheck`.
+// `string`, so a translation can hold different words while a missing or extra
+// key, or a parameter of the wrong type, fails `npm run typecheck`. A function
+// that drops a trailing parameter still compiles (a parity test lands with the
+// first translation, #145).
 // Values are strings, or functions when they take parameters; each function
 // writes its own plural. No `Intl`: dates and plurals are written out here.
 // Escuadra and a la escuadra come from ./names and are never translated.
 // Short labels carry a length budget ("≤ N chars: where") that translators
 // write to (#141, Text expansion). Spec: #141.
-
-import { A_LA_ESCUADRA_TITLE } from './names';
 
 /** A squad's `lastUpdated`, split so each language orders it its own way. */
 export interface CalendarDate {
@@ -41,6 +41,7 @@ export const en = {
   round: {
     /** ≤ 12 chars: the prompt row once a question is scored. */
     correct: 'Correct',
+    /** ≤ 12 chars: the prompt row once a question is scored. */
     missed: 'Missed',
     whoWears: (no: number) => `Who wears ${no}?`,
     askPosition: 'Position?',
@@ -50,7 +51,9 @@ export const en = {
     seeResults: 'See results',
     /** ≤ 8 chars: the auto-next bar's label before "· tap to skip". */
     next: 'Next',
+    /** ≤ 18 chars: the footer button after a right answer with a screen reader on. */
     nextQuestion: 'Next question',
+    /** ≤ 18 chars: the footer button after a miss. */
     gotItNext: 'Got it — next',
     /** The auto-next bar: one line of `ctaLabel` at 360 dp, ≤ 26 chars in all. */
     tapToSkip: (label: string) => `${label} · tap to skip`,
@@ -80,7 +83,6 @@ export const en = {
   },
   results: {
     /** The flawless round's title. */
-    flawlessTitle: A_LA_ESCUADRA_TITLE,
     flawlessVerdict: (team: string, season: string, level: number) =>
       `${team} · ${season}, level ${level}. Nothing missed.`,
     /** Also the share picture's title for a pass. */

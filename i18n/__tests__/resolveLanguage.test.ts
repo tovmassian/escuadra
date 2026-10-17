@@ -20,7 +20,7 @@ describe('resolveLanguage', () => {
     it('reads tags case-insensitively, with either separator and with a script', () => {
       expect(resolveLanguage('system', ['IT-it'], LANGUAGES)).toBe('it');
       expect(resolveLanguage('system', ['de_AT'], LANGUAGES)).toBe('de');
-      expect(resolveLanguage('system', ['zh-Hans-CN', 'en-GB'], LANGUAGES)).toBe('en');
+      expect(resolveLanguage('system', ['zh-Hans-CN', 'fr-Latn-FR'], LANGUAGES)).toBe('fr');
     });
 
     it('never picks a language that has no reviewed catalog', () => {
@@ -31,6 +31,10 @@ describe('resolveLanguage', () => {
   describe('a language picked in the app', () => {
     it('beats the phone', () => {
       expect(resolveLanguage('it', ['es-ES', 'de-DE'], LANGUAGES)).toBe('it');
+    });
+
+    it('keeps English when picked, whatever the phone', () => {
+      expect(resolveLanguage('en', ['es-ES'], LANGUAGES)).toBe('en');
     });
 
     it('is ignored while its language is unsupported', () => {
