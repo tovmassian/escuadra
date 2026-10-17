@@ -252,6 +252,8 @@ export const en = {
     /** A team row's mono meta line, with its best score. */
     played: (season: string, level: number, correct: number, total: number) =>
       `${season} · LEVEL ${level} · BEST ${correct}/${total}`,
+    /** ≤ 8 chars: the back link, after "‹ ". The picker always returns Home. */
+    home: 'Home',
     title: 'Choose a Team',
     count: (count: number) =>
       count === 1 ? `${count} team · tap to start` : `${count} teams · tap to start`,

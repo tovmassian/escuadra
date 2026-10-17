@@ -76,7 +76,7 @@ export default function TeamPicker() {
   return (
     <View style={[styles.root, { paddingTop: insets.top + spacing.md }]}>
       <Pressable onPress={() => router.dismissTo('/')} accessibilityRole="button" hitSlop={12}>
-        <Text style={styles.back}>‹ {t.common.back}</Text>
+        <Text style={styles.back}>‹ {t.picker.home}</Text>
       </Pressable>
       <Text style={styles.title}>{t.picker.title}</Text>
       <Text style={styles.subtitle}>{t.picker.count(filtered.length)}</Text>
