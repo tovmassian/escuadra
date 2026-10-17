@@ -85,6 +85,25 @@ export const en = {
       wrong: (slot: string, value: string) => `${slot}: ${value}, the right answer`,
       notAsked: (slot: string, value: string) => `${slot}: ${value}, not asked`,
     },
+    /** The close button's spoken name. */
+    leave: 'Leave the round',
+    shirtNumber: (no: number) => `Shirt number ${no}`,
+    /** ≤ 20 chars: the footer before a tap. */
+    tapYourAnswer: 'Tap your answer',
+    /** The auto-next bar's spoken hint. */
+    movesOn: 'Moves on by itself in a moment',
+    /** ≤ 8 chars: the tag over the right answer after a miss, in capitals. */
+    answerTag: 'Answer',
+    /** What a tile adds to its spoken name once answered; '' adds nothing. */
+    tileSpoken: {
+      idle: '',
+      'correct-picked': 'correct',
+      'correct-unpicked': 'the right answer',
+      'incorrect-picked': 'your pick, wrong',
+      'incorrect-other': '',
+    },
+    questionOf: (n: number, total: number) => `Question ${n} of ${total}`,
+    streak: (count: number) => `Streak: ${count} in a row`,
   },
   study: {
     /** The header's count, unfiltered. */
@@ -99,6 +118,8 @@ export const en = {
   credits: {
     /** The licence's change note, after the author and licence. */
     cropped: 'cropped',
+    /** ≤ 8 chars: before the credit under the question. */
+    photo: 'Photo:',
   },
   results: {
     /** The flawless round's title. */

@@ -22,6 +22,7 @@ import {
   spotlightMotion,
   typography,
 } from '@/theme/tokens';
+import { useT } from '@/i18n/useT';
 import { useThemeColors } from '@/theme/useTheme';
 
 // The streak (spec §2.5): correct answers in a row, shown from 2. It pops when
@@ -36,6 +37,7 @@ const exit = new Keyframe({
 
 export function StreakChip({ count }: { count: number }) {
   const colors = useThemeColors();
+  const t = useT();
   const reduced = useReducedMotion();
   const scale = useSharedValue(1);
 
@@ -85,7 +87,7 @@ export function StreakChip({ count }: { count: number }) {
       entering={FadeIn.duration(durations.transition)}
       exiting={reduced ? FadeOut.duration(durations.transition) : exit}
       accessible
-      accessibilityLabel={`Streak: ${count} in a row`}
+      accessibilityLabel={t.round.streak(count)}
     >
       <Animated.View style={[styles.chip, pop]}>
         <View style={styles.flame} />

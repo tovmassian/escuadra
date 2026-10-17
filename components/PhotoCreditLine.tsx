@@ -1,4 +1,5 @@
 import { PhotoCreditText } from '@/components/PhotoCreditText';
+import { useT } from '@/i18n/useT';
 import { spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { PhotoCredit } from '@/types/squad';
@@ -17,6 +18,7 @@ const LINE_HEIGHT = Math.round(typography.descriptionSmall.fontSize * 1.3);
 
 export function PhotoCreditLine({ credit }: { credit: PhotoCredit | null }) {
   const colors = useThemeColors();
+  const t = useT();
   const styles = StyleSheet.create({
     line: {
       ...typography.descriptionSmall,
@@ -39,7 +41,7 @@ export function PhotoCreditLine({ credit }: { credit: PhotoCredit | null }) {
 
   return (
     <Text style={styles.line} numberOfLines={2}>
-      Photo: <PhotoCreditText credit={credit} linkStyle={styles.link} />
+      {t.credits.photo} <PhotoCreditText credit={credit} linkStyle={styles.link} />
     </Text>
   );
 }

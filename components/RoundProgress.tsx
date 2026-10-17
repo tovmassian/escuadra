@@ -1,4 +1,5 @@
 import { StyleSheet, View } from 'react-native';
+import { useT } from '@/i18n/useT';
 import type { DotOutcome } from '@/lib/roundView';
 import { radii, sizes, spacing } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -17,6 +18,7 @@ export function RoundProgress({
   currentIndex: number;
 }) {
   const colors = useThemeColors();
+  const t = useT();
   const fill: Record<DotOutcome, string> = {
     correct: colors.photoSuccess,
     wrong: colors.photoError,
@@ -29,7 +31,7 @@ export function RoundProgress({
       style={styles.row}
       accessible
       accessibilityRole="progressbar"
-      accessibilityLabel={`Question ${currentIndex + 1} of ${outcomes.length}`}
+      accessibilityLabel={t.round.questionOf(currentIndex + 1, outcomes.length)}
       accessibilityValue={{ min: 0, max: outcomes.length, now: answered }}
     >
       {outcomes.map((outcome, i) => (
