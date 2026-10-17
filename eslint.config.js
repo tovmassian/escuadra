@@ -8,6 +8,13 @@ const prettierConfig = require('eslint-config-prettier/flat');
 // enum, so attributes go through no-restricted-syntax: a lettered string in
 // any prop fails unless the prop is on this list of props that are never
 // shown or spoken. A new enum prop fails until it is added here — on purpose.
+//
+// Escapes that remain, by design of a lint rule: call arguments
+// (`fn('Hello')`); object-valued props (`accessibilityValue={{ text }}`);
+// strings built outside JSX and passed by variable; attributes whose letters
+// are all non-ASCII (the regex is [A-Za-z]). Flat config replaces rule
+// options, so any future `no-restricted-syntax` entry for these files must
+// merge in these selectors, or it silently switches the guard off.
 const SILENT_PROPS = [
   'key',
   'testID',
@@ -34,7 +41,9 @@ const SILENT_PROPS = [
 const shownProp = `JSXAttribute:not([name.name=/^(${SILENT_PROPS.join('|')})$/])`;
 const wordy =
   ':matches(Literal[value=/[A-Za-z]/], TemplateLiteral:has(TemplateElement[value.raw=/[A-Za-z]/]))';
-const branch = ':matches(ConditionalExpression, LogicalExpression)';
+const wrap =
+  ':matches(ConditionalExpression, LogicalExpression, TSAsExpression, TSSatisfiesExpression)';
+const host = `:matches(JSXElement, JSXFragment, ${shownProp}) > JSXExpressionContainer`;
 const useCatalog = 'User-visible text comes from the i18n catalog: `const t = useT()`.';
 
 module.exports = defineConfig([
@@ -57,12 +66,11 @@ module.exports = defineConfig([
         'error',
         { selector: `${shownProp} > Literal[value=/[A-Za-z]/]`, message: useCatalog },
         { selector: `${shownProp} > JSXExpressionContainer > ${wordy}`, message: useCatalog },
+        { selector: `${host} > ${wrap} > ${wordy}`, message: useCatalog },
+        { selector: `${host} > ${wrap} > ${wrap} > ${wordy}`, message: useCatalog },
+        { selector: `${host} > BinaryExpression[operator='+'] ${wordy}`, message: useCatalog },
         {
-          selector: `${shownProp} > JSXExpressionContainer > ${branch} > ${wordy}`,
-          message: useCatalog,
-        },
-        {
-          selector: `:matches(JSXElement, JSXFragment) > JSXExpressionContainer > ${branch} > ${wordy}`,
+          selector: `${host} > CallExpression[callee.property.name='join'] > MemberExpression.callee > ArrayExpression > ${wordy}`,
           message: useCatalog,
         },
       ],

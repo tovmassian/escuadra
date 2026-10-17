@@ -24,6 +24,15 @@ describe('hard-coded UI strings fail lint', { timeout: 60_000 }, () => {
     ['a ternary label', "<Pressable accessibilityLabel={on ? 'Show as list' : 'Show as cards'} />"],
     ['a custom label prop', '<View label="Study This Squad" />'],
     ['a hint', '<Pressable accessibilityHint="Reveals the name" />'],
+    ['a nested ternary child', "<Text>{on ? (n ? 'Show names' : t.a) : t.a}</Text>"],
+    [
+      'a nested ternary label',
+      "<Pressable accessibilityLabel={on ? (n ? 'Show names' : t.a) : t.a} />",
+    ],
+    ['a cast label', "<Pressable accessibilityLabel={'Hidden' as string} />"],
+    ['a concatenated label', "<Pressable accessibilityLabel={t.a + ', hidden'} />"],
+    ['a join child', "<Text>{[t.a, 'Level'].join(' · ')}</Text>"],
+    ['a join label', "<Pressable accessibilityLabel={[t.a, 'Level'].join(', ')} />"],
   ])('%s', async (_, jsx) => {
     expect(await hits(jsx)).toBeGreaterThan(0);
   });
@@ -36,6 +45,8 @@ describe('hard-coded UI strings fail lint', { timeout: 60_000 }, () => {
       '<Pressable testID="x-close" accessibilityRole="button" pointerEvents="none" />',
     ],
     ['a ternary enum', "<Pressable accessibilityRole={on ? 'button' : undefined} />"],
+    ['a call in a handler', "<Pressable onPress={on ? () => f('round.started') : undefined} />"],
+    ['a comparison ternary', '<Text>{n === 1 ? t.a : t.a}</Text>'],
     ['a joined line', "<Text>{[t.a, t.a].join(' · ')}</Text>"],
   ])('passes %s', async (_, jsx) => {
     expect(await hits(jsx)).toBe(0);
