@@ -117,6 +117,19 @@ export const en = {
     noNumber: 'no number',
     /** Spoken in place of a name while Hide names is on. */
     nameHidden: 'name hidden',
+    /** The screen's title. */
+    title: 'Squad',
+    /** ≤ 12 chars: the toggle, and the switch's constant spoken name. */
+    hideNames: 'Hide names',
+    showNames: 'Show names',
+    showAsList: 'Show as list',
+    showAsCards: 'Show as cards',
+    /** ≤ 6 chars: the filter pill for every position. */
+    all: 'All',
+    /** ≤ 14 chars: the dashed pill over a hidden name. */
+    tapToReveal: 'Tap to reveal',
+    /** A hidden name's spoken hint. */
+    revealsName: 'Reveals the name',
   },
   credits: {
     /** The licence's change note, after the author and licence. */

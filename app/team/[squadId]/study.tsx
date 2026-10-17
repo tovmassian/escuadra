@@ -16,6 +16,7 @@ import { FilterPill } from '@/components/FilterPill';
 import { PhotoCredits } from '@/components/PhotoCredits';
 import { PlayerCard } from '@/components/PlayerCard';
 import { StudyListRow } from '@/components/StudyListRow';
+import { useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
 import { feedback } from '@/lib/haptics';
 import { photoFor } from '@/lib/photos';
@@ -42,7 +43,6 @@ import {
   spacing,
   typography,
 } from '@/theme/tokens';
-import { useT } from '@/i18n/useT';
 import { useThemeColors } from '@/theme/useTheme';
 import type { RosterEntry } from '@/types/squad';
 
@@ -240,7 +240,7 @@ export default function Study() {
           testID="study-back"
           onPress={() => router.back()}
           accessibilityRole="button"
-          accessibilityLabel="Back"
+          accessibilityLabel={t.common.back}
           style={styles.back}
         >
           <BackGlyph color={colors.textSecondary} />
@@ -256,21 +256,21 @@ export default function Study() {
           // A constant name, so the switch reads "Hide names, on" and never
           // "Show names, on"; the visible text may flip. aria-checked is for
           // react-native-web, which does not read accessibilityState.
-          accessibilityLabel="Hide names"
+          accessibilityLabel={t.study.hideNames}
           accessibilityState={{ checked: hidden }}
           aria-checked={hidden}
           hitSlop={CONTROL_SLOP}
           style={styles.hide}
         >
           <Text style={styles.hideLabel} maxFontSizeMultiplier={fontScaleCap.display}>
-            {hidden ? 'Show names' : 'Hide names'}
+            {hidden ? t.study.showNames : t.study.hideNames}
           </Text>
         </Pressable>
         <Pressable
           testID="study-view-toggle"
           onPress={() => setStudyView(grid ? 'list' : 'grid')}
           accessibilityRole="button"
-          accessibilityLabel={grid ? 'Show as list' : 'Show as cards'}
+          accessibilityLabel={grid ? t.study.showAsList : t.study.showAsCards}
           hitSlop={CONTROL_SLOP}
           style={styles.viewToggle}
         >
@@ -290,7 +290,7 @@ export default function Study() {
             ))}
           </View>
           <Text style={styles.eyebrow} numberOfLines={1}>
-            {`${squad.name} · ${squad.season}`}
+            {[squad.name, squad.season].join(' · ')}
           </Text>
         </View>
         <View style={styles.titleRow}>
@@ -299,7 +299,7 @@ export default function Study() {
             maxFontSizeMultiplier={fontScaleCap.display}
             accessibilityRole="header"
           >
-            Squad
+            {t.study.title}
           </Text>
           <Text style={styles.count}>{studyCount(rows.length, roster.length, filter, t)}</Text>
         </View>
@@ -314,7 +314,7 @@ export default function Study() {
         {STUDY_FILTERS.map((f) => (
           <FilterPill
             key={f}
-            label={f === 'ALL' ? 'All' : f}
+            label={f === 'ALL' ? t.study.all : f}
             count={counts[f]}
             active={filter === f}
             onPress={() => {
