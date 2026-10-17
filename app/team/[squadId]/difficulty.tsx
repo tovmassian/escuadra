@@ -6,7 +6,8 @@ import { Button } from '@/components/Button';
 import { DifficultyCard } from '@/components/DifficultyCard';
 import { DifficultyRow } from '@/components/DifficultyRow';
 import { LadderConnector } from '@/components/LadderConnector';
-import { useT } from '@/i18n/useT';
+import { squadDisplayName } from '@/i18n/displayNames';
+import { useLanguage, useT } from '@/i18n/useT';
 import type { Level } from '@/lib/questionEngine';
 import { focusedLevel, formatLastUpdated, ladderRows } from '@/lib/ladderView';
 import { getSquad } from '@/lib/squads';
@@ -18,6 +19,7 @@ export default function Difficulty() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
   const t = useT();
+  const language = useLanguage();
   const { squadId } = useLocalSearchParams<{ squadId: string }>();
   const bestScores = useProgress((s) => s.bestScores);
 
@@ -59,7 +61,7 @@ export default function Difficulty() {
       <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
         <Text style={styles.back}>‹ {t.common.back}</Text>
       </Pressable>
-      <Text style={styles.eyebrow}>{squad.name.toUpperCase()}</Text>
+      <Text style={styles.eyebrow}>{squadDisplayName(squad, language).toUpperCase()}</Text>
       <Text style={styles.title}>{t.ladder.title}</Text>
 
       <View>

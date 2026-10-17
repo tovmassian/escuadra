@@ -2,7 +2,8 @@ import { FilterPill } from '@/components/FilterPill';
 import { SearchField } from '@/components/SearchField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { TeamRow } from '@/components/TeamRow';
-import { useT } from '@/i18n/useT';
+import { squadDisplayName } from '@/i18n/displayNames';
+import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
 import type { LeagueFilter } from '@/lib/pickerView';
 import { leagueFilters, leagueLabel, teamProgress, visibleSquads } from '@/lib/pickerView';
@@ -19,6 +20,7 @@ export default function TeamPicker() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
   const t = useT();
+  const language = useLanguage();
   const segments = [
     { key: 'club', label: t.picker.clubs },
     { key: 'nation', label: t.picker.nationalTeams },
@@ -32,8 +34,15 @@ export default function TeamPicker() {
   const squads = listSquads();
   const leagues = useMemo(() => leagueFilters(squads), [squads]);
   const filtered = useMemo(
-    () => visibleSquads(squads, filter, league, query),
-    [squads, filter, league, query],
+    () =>
+      visibleSquads(
+        squads,
+        filter,
+        league,
+        { nameOf: (s) => squadDisplayName(s, language), locale: language },
+        query,
+      ),
+    [squads, filter, league, query, language],
   );
 
   const styles = StyleSheet.create({
@@ -119,7 +128,7 @@ export default function TeamPicker() {
         }
         renderItem={({ item }) => (
           <TeamRow
-            name={item.name}
+            name={squadDisplayName(item, language)}
             marker={item.marker}
             season={item.season}
             flag={item.kind === 'nation' ? flagFor(item.name) : undefined}

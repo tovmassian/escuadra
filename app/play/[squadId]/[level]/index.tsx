@@ -11,7 +11,8 @@ import { StreakChip } from '@/components/StreakChip';
 import { TeamMarker } from '@/components/TeamMarker';
 import { useScreenReader } from '@/components/useScreenReader';
 import { useShot } from '@/components/useShot';
-import { useT } from '@/i18n/useT';
+import { squadDisplayName } from '@/i18n/displayNames';
+import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
 import { photoFor, roundPhotoUrls } from '@/lib/photos';
 import type { Level } from '@/lib/questionEngine';
@@ -70,6 +71,7 @@ export default function Question() {
   const frame = useSafeAreaFrame();
   const colors = useThemeColors();
   const t = useT();
+  const language = useLanguage();
   const themeName = useThemeName();
   const reduced = useReducedMotion();
   const screenReader = useScreenReader();
@@ -297,7 +299,7 @@ export default function Question() {
           <GlassCloseButton label={t.round.leave} onPress={exit} />
           <View style={styles.team}>
             <Text style={styles.teamName} numberOfLines={1}>
-              {squad.name}
+              {squadDisplayName(squad, language)}
             </Text>
             <View style={styles.teamSub}>
               <TeamMarker marker={squad.marker} variant="banner" />

@@ -5,6 +5,7 @@ import { PlayerCard } from '@/components/PlayerCard';
 import { popIn, riseIn, slideIn } from '@/components/riseIn';
 import { RoundStrip } from '@/components/RoundStrip';
 import { ShareSheet } from '@/components/ShareSheet';
+import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
 import { photoCreditRows, photoFor } from '@/lib/photos';
@@ -69,6 +70,7 @@ export default function Results() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
   const t = useT();
+  const language = useLanguage();
   const reduced = useReducedMotion();
   const { squadId, level: levelParam } = useLocalSearchParams<{ squadId: string; level: string }>();
   const level = Number(levelParam) as Level;
@@ -161,8 +163,9 @@ export default function Results() {
 
   if (!squad || session.squadId !== squadId || session.level !== level) return null;
 
+  const teamName = squadDisplayName(squad, language);
   const missed = selectMissed(session.results);
-  const copy = resultCopy({ tier, level, teamName: squad.name, season: squad.season }, t);
+  const copy = resultCopy({ tier, level, teamName, season: squad.season }, t);
   const actions = resultActions(tier !== 'fail', level < MAX_LEVEL);
   const strip = session.results.map((r) => ({
     no: r.question.memberNo,
@@ -222,7 +225,7 @@ export default function Results() {
             <CloseGlyph color={colors.textSecondary} />
           </Pressable>
           <Text style={styles.context} numberOfLines={1}>
-            {[squad.name, t.common.level(level)].join(' · ')}
+            {[teamName, t.common.level(level)].join(' · ')}
           </Text>
           <Pressable
             testID="results-share"
@@ -337,13 +340,13 @@ export default function Results() {
         visible={sharing}
         onClose={() => setSharing(false)}
         card={{
-          teamName: squad.name,
+          teamName,
           season: squad.season,
           level,
           items: strip,
           marker: squad.marker,
         }}
-        text={{ teamName: squad.name, level, outcomes: session.results.map((r) => r.correct) }}
+        text={{ teamName, level, outcomes: session.results.map((r) => r.correct) }}
         onShared={(format) => track('result.shared', { level, score: score.correct, format })}
       />
     </>

@@ -16,6 +16,7 @@ import { FilterPill } from '@/components/FilterPill';
 import { PhotoCredits } from '@/components/PhotoCredits';
 import { PlayerCard } from '@/components/PlayerCard';
 import { StudyListRow } from '@/components/StudyListRow';
+import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
 import { feedback } from '@/lib/haptics';
@@ -292,7 +293,7 @@ export default function Study() {
             ))}
           </View>
           <Text style={styles.eyebrow} numberOfLines={1}>
-            {[squad.name, squad.season].join(' · ')}
+            {[squadDisplayName(squad, language), squad.season].join(' · ')}
           </Text>
         </View>
         <View style={styles.titleRow}>
