@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { en } from '@/i18n/en';
 import type { QuestionPart } from '@/lib/questionEngine';
 import { isFlawless, missedLine, resultActions, resultCopy, resultTier } from './resultsView';
 import type { QuestionResult } from '@/stores/session';
@@ -50,27 +51,27 @@ describe('resultCopy', () => {
   const base = { level: 2, teamName: 'Spain', season: '2026' };
 
   it('fail: what to learn, and the score that unlocks the next level', () => {
-    expect(resultCopy({ ...base, tier: 'fail' })).toEqual({
+    expect(resultCopy({ ...base, tier: 'fail' }, en)).toEqual({
       title: 'These are the ones to learn',
       verdict: 'Score 8/10 to unlock level 3.',
     });
   });
 
   it('fail on level 3: the score that clears it', () => {
-    expect(resultCopy({ ...base, level: 3, tier: 'fail' }).verdict).toBe(
+    expect(resultCopy({ ...base, level: 3, tier: 'fail' }, en).verdict).toBe(
       'Score 8/10 to clear level 3.',
     );
   });
 
   it('passed: the level cleared', () => {
-    expect(resultCopy({ ...base, tier: 'passed' })).toEqual({
+    expect(resultCopy({ ...base, tier: 'passed' }, en)).toEqual({
       title: 'Level 2 cleared',
       verdict: 'You knew most of the starting XI.',
     });
   });
 
   it('10/10: a la escuadra, with the team, season and level', () => {
-    expect(resultCopy({ ...base, tier: 'excellent' })).toEqual({
+    expect(resultCopy({ ...base, tier: 'excellent' }, en)).toEqual({
       title: 'A la escuadra',
       verdict: 'Spain · 2026, level 2. Nothing missed.',
     });
@@ -111,26 +112,26 @@ describe('missedLine', () => {
   const nat: QuestionPart = { kind: 'nationality', options: ['France', 'Spain'], correctIndex: 1 };
 
   it('names the wrong pick on the name', () => {
-    expect(missedLine(missed([name], [0]))).toBe('You picked Marc Pubill');
+    expect(missedLine(missed([name], [0]), en)).toBe('You picked Marc Pubill');
   });
 
   it('says the name was right when the position was wrong', () => {
-    expect(missedLine(missed([name, pos], [1, 3]))).toBe(
+    expect(missedLine(missed([name, pos], [1, 3]), en)).toBe(
       'Name right · position is MF, you said FW',
     );
   });
 
   it('says name and position were right when the club or nationality was wrong', () => {
-    expect(missedLine(missed([name, pos, club], [1, 2, 0]))).toBe(
+    expect(missedLine(missed([name, pos, club], [1, 2, 0]), en)).toBe(
       'Name and position right · club is Barcelona, you said Arsenal',
     );
-    expect(missedLine(missed([name, pos, nat], [1, 2, 0]))).toBe(
+    expect(missedLine(missed([name, pos, nat], [1, 2, 0]), en)).toBe(
       'Name and position right · nationality is Spain, you said France',
     );
   });
 
   it('is empty for a question with no wrong part', () => {
-    expect(missedLine(missed([name], [1]))).toBe('');
+    expect(missedLine(missed([name], [1]), en)).toBe('');
   });
 });
 

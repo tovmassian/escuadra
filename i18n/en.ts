@@ -8,6 +8,8 @@
 // Short labels carry a length budget ("≤ N chars: where") that translators
 // write to (#141, Text expansion). Spec: #141.
 
+import { A_LA_ESCUADRA_TITLE } from './names';
+
 /** A squad's `lastUpdated`, split so each language orders it its own way. */
 export interface CalendarDate {
   day: number;
@@ -17,6 +19,11 @@ export interface CalendarDate {
 }
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+/** "Spain's", but "Netherlands'". English only: each catalog writes its own. */
+function possessive(name: string): string {
+  return name.endsWith('s') ? `${name}'` : `${name}'s`;
+}
 
 export const en = {
   common: {
@@ -70,6 +77,37 @@ export const en = {
   credits: {
     /** The licence's change note, after the author and licence. */
     cropped: 'cropped',
+  },
+  results: {
+    /** The flawless round's title. */
+    flawlessTitle: A_LA_ESCUADRA_TITLE,
+    flawlessVerdict: (team: string, season: string, level: number) =>
+      `${team} · ${season}, level ${level}. Nothing missed.`,
+    /** Also the share picture's title for a pass. */
+    clearedTitle: (level: number) => `Level ${level} cleared`,
+    clearedVerdict: 'You knew most of the starting XI.',
+    failTitle: 'These are the ones to learn',
+    /** `target` is "8/10". */
+    toClear: (target: string, level: number) => `Score ${target} to clear level ${level}.`,
+    toUnlock: (target: string, level: number) => `Score ${target} to unlock level ${level}.`,
+    /** A missed card's line when the name was wrong. */
+    youPicked: (picked: string) => `You picked ${picked}`,
+    nameRight: 'Name right',
+    nameAndPositionRight: 'Name and position right',
+    /** A missed card's line after a later part, following "Name right · ". */
+    wrongPart: {
+      position: (right: string, picked: string) => `position is ${right}, you said ${picked}`,
+      club: (right: string, picked: string) => `club is ${right}, you said ${picked}`,
+      nationality: (right: string, picked: string) => `nationality is ${right}, you said ${picked}`,
+    },
+  },
+  share: {
+    /** The share sheet's title, the results Share button's label, Android's share dialog. */
+    title: 'Share your round',
+    /** The share picture's title below a pass: it speaks to whoever receives it. */
+    stillLearning: 'Still learning',
+    /** The share picture's question to its receiver. */
+    question: (team: string) => `Can you name ${possessive(team)} squad?`,
   },
 };
 

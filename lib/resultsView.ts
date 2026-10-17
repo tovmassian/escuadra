@@ -1,6 +1,7 @@
 // Pure results-screen model. Kept out of the screen so invariant 10's rules
 // are unit-testable.
 
+import type { Messages } from '@/i18n/en';
 import { PASS_RATIO, ROUND_LENGTH } from '@/lib/scoring';
 import type { QuestionResult } from '@/stores/session';
 
@@ -60,37 +61,36 @@ export interface ResultCopy {
 }
 
 /** The tier's title and one line of verdict (spec §3.1). */
-export function resultCopy({
-  tier,
-  level,
-  teamName,
-  season,
-}: {
-  tier: ResultTier;
-  level: number;
-  teamName: string;
-  season: string;
-}): ResultCopy {
+export function resultCopy(
+  {
+    tier,
+    level,
+    teamName,
+    season,
+  }: {
+    tier: ResultTier;
+    level: number;
+    teamName: string;
+    season: string;
+  },
+  messages: Messages,
+): ResultCopy {
+  const { results } = messages;
   if (tier === 'excellent') {
     return {
-      title: 'A la escuadra',
-      verdict: `${teamName} · ${season}, level ${level}. Nothing missed.`,
+      title: results.flawlessTitle,
+      verdict: results.flawlessVerdict(teamName, season, level),
     };
   }
   if (tier === 'passed') {
-    return { title: `Level ${level} cleared`, verdict: 'You knew most of the starting XI.' };
+    return { title: results.clearedTitle(level), verdict: results.clearedVerdict };
   }
   const target = `${Math.ceil(PASS_RATIO * ROUND_LENGTH)}/${ROUND_LENGTH}`;
   return {
-    title: 'These are the ones to learn',
-    verdict:
-      level >= 3
-        ? `Score ${target} to clear level ${level}.`
-        : `Score ${target} to unlock level ${level + 1}.`,
+    title: results.failTitle,
+    verdict: level >= 3 ? results.toClear(target, level) : results.toUnlock(target, level + 1),
   };
 }
-
-const PART_NOUN = { position: 'position', club: 'club', nationality: 'nationality' } as const;
 
 /**
  * A missed card's line, naming the first wrong part (spec §3.1):
@@ -98,16 +98,17 @@ const PART_NOUN = { position: 'position', club: 'club', nationality: 'nationalit
  * - a later part: what was right first, then the real value and the pick.
  * Empty when no part is wrong.
  */
-export function missedLine(result: QuestionResult): string {
+export function missedLine(result: QuestionResult, messages: Messages): string {
+  const { results } = messages;
   for (let i = 0; i < result.parts.length; i++) {
     const answered = result.parts[i];
     const part = result.question.parts[i];
     if (!answered || !part || answered.correct) continue;
     const picked = part.options[answered.pickedIndex] ?? '—';
-    if (part.kind === 'name') return `You picked ${picked}`;
+    if (part.kind === 'name') return results.youPicked(picked);
     const right = part.options[part.correctIndex] ?? '—';
-    const before = i === 1 ? 'Name right' : 'Name and position right';
-    return `${before} · ${PART_NOUN[part.kind]} is ${right}, you said ${picked}`;
+    const before = i === 1 ? results.nameRight : results.nameAndPositionRight;
+    return `${before} · ${results.wrongPart[part.kind](right, picked)}`;
   }
   return '';
 }
