@@ -975,6 +975,10 @@ export const sizes = {
   },
   // Every bottom sheet (`Sheet`): its grab handle and its close button.
   sheet: { handleWidth: 36, handleHeight: 5, close: 36 },
+  // The language chip's pill and the language sheet's radio (#143). The chip
+  // has no fixed height or width: it grows with the OS text size, and
+  // `minHeight` is the theme toggle's track so the two sit level.
+  languageChip: { minHeight: 30, radio: 20, radioDot: 10 },
   // The share sheet's own parts (spec §4.1).
   shareSheet: {
     switchHeight: 40,

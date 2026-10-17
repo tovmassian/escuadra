@@ -382,6 +382,8 @@ async function captureTheme(browser, colorScheme, suffix) {
   try {
     await capture.open('/');
     await capture.shoot('01-home');
+    await capture.tapId('language-chip', { wait: SHEET_MS });
+    await capture.shoot('01b-home-language');
 
     await capture.open('/about');
     await capture.shoot('01a-about');
