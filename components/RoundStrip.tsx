@@ -7,6 +7,7 @@ import Animated, {
   withDelay,
   withTiming,
 } from 'react-native-reanimated';
+import { useT } from '@/i18n/useT';
 import {
   durations,
   fontScaleCap,
@@ -16,7 +17,6 @@ import {
   spacing,
   typography,
 } from '@/theme/tokens';
-import { useT } from '@/i18n/useT';
 import { useThemeColors } from '@/theme/useTheme';
 
 // The round in ten segments (spec §3.1), each labelled with its shirt number.

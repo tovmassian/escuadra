@@ -327,7 +327,9 @@ reports — is done by hand, not by a skill.
   lives in `stores/progress.ts` — it is not a third store.
 - **User-visible text lives in `i18n/`.** `i18n/en.ts` is the source catalog and
   `Messages = typeof en`; every other catalog is typed `: Messages`, so a missing or
-  extra key, or a parameter of the wrong type, fails the typecheck. Screens read text through
+  extra key fails the typecheck (a function that drops a trailing parameter still
+  compiles; a parity test lands with the first translation, #145). About's words
+  are `en.about`, kept as data that #146 renders into the privacy pages. Screens read text through
   `useT()`. `lib/` modules that build text take `messages` as their last argument
   and stay React-free. Data stays English: squads, players, clubs and position
   codes are translated at display time by code, never by their English string.

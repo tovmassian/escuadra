@@ -6,6 +6,7 @@ import { Button } from '@/components/Button';
 import { ThemeToggle } from '@/components/ThemeToggle';
 import { Wordmark } from '@/components/Wordmark';
 import { useT } from '@/i18n/useT';
+import { ROUND_LENGTH } from '@/lib/scoring';
 import { getRoster, getSquad } from '@/lib/squads';
 import { scoreKey, useProgress, useProgressHydrated } from '@/stores/progress';
 import { useSession } from '@/stores/session';
@@ -128,7 +129,7 @@ export default function Home() {
             <View style={styles.continueText}>
               <Text style={styles.continueName}>{continueSquad.name}</Text>
               <Text style={styles.continueMeta}>
-                {t.home.continueMeta(lastPlayed.level, continueBest)}
+                {t.home.continueMeta(lastPlayed.level, continueBest, ROUND_LENGTH)}
               </Text>
             </View>
             <Text style={styles.chevron}>›</Text>

@@ -2,6 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import Animated, { Easing, FadeInUp } from 'react-native-reanimated';
 import { EscuadraMark } from './EscuadraMark';
 import { EscuadraStrike } from './EscuadraStrike';
+import { ESCUADRA, ESCUADRA_WORDMARK } from '@/i18n/names';
 import {
   celebrationEasingCurves,
   homeCascade,
@@ -10,7 +11,6 @@ import {
   strikeTiming,
   typography,
 } from '@/theme/tokens';
-import { ESCUADRA, ESCUADRA_WORDMARK } from '@/i18n/names';
 import { useThemeColors } from '@/theme/useTheme';
 
 const WORD = ESCUADRA_WORDMARK;

@@ -101,6 +101,7 @@ export default function About() {
                   key={i}
                   style={[
                     styles.paragraph,
+                    // Only the card's last paragraph drops its bottom margin.
                     last(s, sections) && last(i, all) && { marginBottom: 0 },
                   ]}
                 >
@@ -162,6 +163,7 @@ export default function About() {
                   key={i}
                   style={[
                     styles.paragraph,
+                    // Only the card's last paragraph drops its bottom margin.
                     last(s, sections) && last(i, all) && { marginBottom: 0 },
                   ]}
                 >

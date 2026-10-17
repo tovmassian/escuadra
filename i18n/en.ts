@@ -48,8 +48,8 @@ export const en = {
     /** Spoken name of the theme switch. */
     darkTheme: 'Dark theme',
     /** ≤ 24 chars: the continue card's meta line, in IBM Plex Mono capitals. */
-    continueMeta: (level: number, best: number | undefined) =>
-      best === undefined ? `LEVEL ${level}` : `LEVEL ${level} · BEST ${best}/10`,
+    continueMeta: (level: number, best: number | undefined, total: number) =>
+      best === undefined ? `LEVEL ${level}` : `LEVEL ${level} · BEST ${best}/${total}`,
     /** ≤ 18 chars: the main button. */
     startTraining: 'Start Training',
     /** ≤ 20 chars: the text button. */
@@ -125,6 +125,7 @@ export const en = {
     /** ≤ 12 chars: the toggle, and the switch's constant spoken name. */
     hideNames: 'Hide names',
     showNames: 'Show names',
+    /** Spoken labels for the view toggle: no visible budget. */
     showAsList: 'Show as list',
     showAsCards: 'Show as cards',
     /** ≤ 6 chars: the filter pill for every position. */
@@ -197,7 +198,9 @@ export const en = {
     text: 'Text',
     /** ≤ 10 chars: under the chat-bubble preview. */
     preview: 'Preview',
+    /** ≤ 2 lines at 360 dp: the hint under the preview (its slot is two lines tall). */
     imageHint: 'Story-sized picture. No player photos, no names — friends can still play it.',
+    /** ≤ 2 lines at 360 dp: the hint under the preview (its slot is two lines tall). */
     textHint: 'The score grid for group chats, with a link to the app.',
     /** ≤ 16 chars: the submit button. */
     shareImage: 'Share image',
@@ -225,6 +228,8 @@ export const en = {
       },
       2: {
         title: 'Name + Position',
+        // The codes GK, DF, MF and FW must match the position chips' codes in
+        // each language (#144 makes the codes translatable; #145 writes them).
         description: 'Pick the name, then the position — GK, DF, MF, or FW.',
       },
       3: {

@@ -210,8 +210,8 @@ build with updated disclosures (`CLAUDE.md`, guardrail 4).
 
 ### Where the app says it
 
-The About screen (`app/about.tsx`) is the user-facing half of this document.
-Its "Data and image credits" section names every source and licence in the
+The About screen is the user-facing half of this document. Its words live in
+`en.about` in `i18n/en.ts`, which `app/about.tsx` only renders. Its "Data and image credits" section names every source and licence in the
 table above — Wikipedia, Wikidata, Commons photos with the five accepted
 licences, flags, fonts — and says where the per-photo credit appears (under
 the question, and in the results' "photo credits" list). Its Privacy section

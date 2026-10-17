@@ -11,6 +11,7 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
+import { useT } from '@/i18n/useT';
 import {
   borderWidths,
   durations,
@@ -22,7 +23,6 @@ import {
   spotlightMotion,
   typography,
 } from '@/theme/tokens';
-import { useT } from '@/i18n/useT';
 import { useThemeColors } from '@/theme/useTheme';
 
 // The streak (spec §2.5): correct answers in a row, shown from 2. It pops when
