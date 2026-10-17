@@ -2,9 +2,10 @@ import { FilterPill } from '@/components/FilterPill';
 import { SearchField } from '@/components/SearchField';
 import { SegmentedControl } from '@/components/SegmentedControl';
 import { TeamRow } from '@/components/TeamRow';
+import { useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
 import type { LeagueFilter } from '@/lib/pickerView';
-import { LEAGUE_LABELS, leagueFilters, teamProgress, visibleSquads } from '@/lib/pickerView';
+import { leagueFilters, leagueLabel, teamProgress, visibleSquads } from '@/lib/pickerView';
 import { listSquads } from '@/lib/squads';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import { spacing, typography } from '@/theme/tokens';
@@ -22,6 +23,7 @@ const SEGMENTS = [
 export default function TeamPicker() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
+  const t = useT();
   const hydrated = useProgressHydrated();
   const bestScores = useProgress((s) => s.bestScores);
   const [filter, setFilter] = useState<'club' | 'nation'>('club');
@@ -97,7 +99,7 @@ export default function TeamPicker() {
           {leagues.map((l) => (
             <FilterPill
               key={l}
-              label={LEAGUE_LABELS[l]}
+              label={leagueLabel(l, t)}
               active={league === l}
               onPress={() => setLeague(l)}
             />

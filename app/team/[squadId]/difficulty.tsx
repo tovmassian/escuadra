@@ -6,6 +6,7 @@ import { Button } from '@/components/Button';
 import { DifficultyCard } from '@/components/DifficultyCard';
 import { DifficultyRow } from '@/components/DifficultyRow';
 import { LadderConnector } from '@/components/LadderConnector';
+import { useT } from '@/i18n/useT';
 import type { Level } from '@/lib/questionEngine';
 import { focusedLevel, formatLastUpdated, ladderRows } from '@/lib/ladderView';
 import { getSquad } from '@/lib/squads';
@@ -31,6 +32,7 @@ const LEVEL_COPY: Record<Level, { title: string; description: string }> = {
 export default function Difficulty() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
+  const t = useT();
   const { squadId } = useLocalSearchParams<{ squadId: string }>();
   const bestScores = useProgress((s) => s.bestScores);
 
@@ -115,7 +117,9 @@ export default function Difficulty() {
         />
       </View>
 
-      <Text style={styles.updated}>Updated {formatLastUpdated(squad.lastUpdated)} · Wikipedia</Text>
+      <Text style={styles.updated}>
+        Updated {formatLastUpdated(squad.lastUpdated, t)} · Wikipedia
+      </Text>
     </View>
   );
 }

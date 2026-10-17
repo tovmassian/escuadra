@@ -3,6 +3,7 @@ import Constants from 'expo-constants';
 import * as Updates from 'expo-updates';
 import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useT } from '@/i18n/useT';
 import { versionLabel } from '@/lib/aboutView';
 import { useProgress } from '@/stores/progress';
 import { radii, spacing, typography } from '@/theme/tokens';
@@ -11,6 +12,7 @@ import { useThemeColors } from '@/theme/useTheme';
 export default function About() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
+  const t = useT();
   const telemetryEnabled = useProgress((s) => s.telemetryEnabled);
   const setTelemetryEnabled = useProgress((s) => s.setTelemetryEnabled);
   const haptics = useProgress((s) => s.haptics);
@@ -257,13 +259,17 @@ export default function About() {
         </View>
 
         <Text style={styles.versionLine}>
-          {versionLabel(version, {
-            isEnabled: Updates.isEnabled,
-            isEmbeddedLaunch: Updates.isEmbeddedLaunch,
-            updateId: Updates.updateId,
-            channel: Updates.channel,
-            manifest: Updates.manifest,
-          })}
+          {versionLabel(
+            version,
+            {
+              isEnabled: Updates.isEnabled,
+              isEmbeddedLaunch: Updates.isEmbeddedLaunch,
+              updateId: Updates.updateId,
+              channel: Updates.channel,
+              manifest: Updates.manifest,
+            },
+            t,
+          )}
         </Text>
       </ScrollView>
     </View>

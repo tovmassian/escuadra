@@ -109,6 +109,31 @@ export const en = {
     /** The share picture's question to its receiver. */
     question: (team: string) => `Can you name ${possessive(team)} squad?`,
   },
+  ladder: {
+    /** ≤ 14 chars: the Play card's button. */
+    play: 'Play',
+    /** ≤ 14 chars: the Play card's button once the level has a score. */
+    playAgain: 'Play Again',
+    /** Under a locked rung. `target` is "8/10". */
+    unlockHint: (target: string, level: number) => `Score ${target} on L${level}`,
+    rungLocked: (title: string, hint: string) => `${title}, locked, ${hint}`,
+    rungBest: (title: string, correct: number, total: number) =>
+      `${title}, best ${correct} of ${total}`,
+  },
+  picker: {
+    /** ≤ 6 chars: the league pill that clears the filter. */
+    allLeagues: 'ALL',
+    /** A team row's mono meta line, never played. */
+    notPlayed: (season: string) => `${season} · NOT PLAYED`,
+    /** A team row's mono meta line, with its best score. */
+    played: (season: string, level: number, correct: number, total: number) =>
+      `${season} · LEVEL ${level} · BEST ${correct}/${total}`,
+  },
+  about: {
+    version: (version: string) => `Version ${version}`,
+    /** In brackets after the version on a build's own bundle. */
+    builtIn: 'built-in',
+  },
 };
 
 export type Messages = typeof en;

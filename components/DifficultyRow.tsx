@@ -1,7 +1,8 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { BestPill } from '@/components/BestPill';
 import { LadderBadge } from '@/components/LadderBadge';
-import { type LadderRow, rungAccessibilityLabel } from '@/lib/ladderView';
+import { useT } from '@/i18n/useT';
+import { type LadderRow, rungAccessibilityLabel, unlockHint } from '@/lib/ladderView';
 import { borderWidths, opacity, radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
@@ -17,6 +18,7 @@ interface DifficultyRowProps {
 // without moving the expanded card.
 export function DifficultyRow({ row, title, onPress }: DifficultyRowProps) {
   const colors = useThemeColors();
+  const t = useT();
   const locked = row.status === 'locked';
   const styles = StyleSheet.create({
     row: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
@@ -43,7 +45,7 @@ export function DifficultyRow({ row, title, onPress }: DifficultyRowProps) {
       onPress={onPress}
       disabled={locked || !onPress}
       accessibilityRole="button"
-      accessibilityLabel={rungAccessibilityLabel(row, title)}
+      accessibilityLabel={rungAccessibilityLabel(row, title, t)}
       accessibilityState={{ disabled: locked }}
       style={({ pressed }) => [styles.row, locked && styles.locked, pressed && styles.pressed]}
     >
@@ -57,7 +59,7 @@ export function DifficultyRow({ row, title, onPress }: DifficultyRowProps) {
             cleared={row.status === 'cleared'}
           />
         )}
-        {locked && row.unlockHint && <Text style={styles.hint}>{row.unlockHint}</Text>}
+        {locked && <Text style={styles.hint}>{unlockHint(row.level, t)}</Text>}
       </View>
     </Pressable>
   );

@@ -1,4 +1,5 @@
 // Pure team-picker row model. Kept out of the screen so it is unit-testable.
+import type { Messages } from '@/i18n/en';
 import { PASS_RATIO, ROUND_LENGTH, scoreKey } from '@/lib/scoring';
 import type { League, SquadManifestEntry } from '@/types/squad';
 
@@ -35,17 +36,21 @@ export function teamProgress(
  *  known. `undefined` progress (still hydrating) shows the season alone
  *  rather than a placeholder dash, since the season itself needs no store
  *  read and is available immediately. */
-export function teamMetaLine(season: string, progress: TeamProgress | null | undefined): string {
+export function teamMetaLine(
+  season: string,
+  progress: TeamProgress | null | undefined,
+  messages: Messages,
+): string {
   if (progress === undefined) return season;
-  if (progress === null) return `${season} · NOT PLAYED`;
-  return `${season} · LEVEL ${progress.level} · BEST ${progress.correct}/${progress.total}`;
+  if (progress === null) return messages.picker.notPlayed(season);
+  return messages.picker.played(season, progress.level, progress.correct, progress.total);
 }
 
 /** The clubs tab's league filter. `'ALL'` is the default, unfiltered state. */
 export type LeagueFilter = 'ALL' | League;
 
-export const LEAGUE_LABELS: Record<LeagueFilter, string> = {
-  ALL: 'ALL',
+/** League names are proper nouns, like club names: data, not catalog text. */
+const LEAGUE_NAMES: Record<League, string> = {
   'premier-league': 'Premier League',
   'la-liga': 'La Liga',
   'serie-a': 'Serie A',
@@ -53,6 +58,11 @@ export const LEAGUE_LABELS: Record<LeagueFilter, string> = {
   'ligue-1': 'Ligue 1',
   ucl: 'UCL',
 };
+
+/** A league pill's label. */
+export function leagueLabel(filter: LeagueFilter, messages: Messages): string {
+  return filter === 'ALL' ? messages.picker.allLeagues : LEAGUE_NAMES[filter];
+}
 
 /** Pill order: the big five, then UCL. Fixed rather than alphabetical so the
  *  row doesn't reshuffle as squads are added. */
