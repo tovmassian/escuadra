@@ -1,3 +1,4 @@
+import { useT } from '@/i18n/useT';
 import { creditParts } from '@/lib/photos';
 import type { PhotoCredit } from '@/types/squad';
 import { openBrowserAsync } from 'expo-web-browser';
@@ -15,7 +16,8 @@ export function PhotoCreditText({
   credit: PhotoCredit;
   linkStyle: StyleProp<TextStyle>;
 }) {
-  const { author, licence, change } = creditParts(credit);
+  const t = useT();
+  const { author, licence, change } = creditParts(credit, t);
   // A link that fails to open has nothing to recover; the credit stays shown.
   const open = (url: string) => () => {
     openBrowserAsync(url).catch(() => {});

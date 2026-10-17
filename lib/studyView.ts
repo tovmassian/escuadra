@@ -3,6 +3,7 @@
 // line, what a screen reader hears, and the photo credits. Kept out of the
 // screen so it is unit-testable.
 
+import type { Messages } from '@/i18n/en';
 import { photoFor, type PhotoCreditRow } from '@/lib/photos';
 import { positionLabel } from '@/lib/roundView';
 import type { Player, Position, RosterEntry, Squad } from '@/types/squad';
@@ -28,9 +29,14 @@ export function filterCounts(roster: RosterEntry[]): Record<StudyFilter, number>
 }
 
 /** The header's count: "26 players" unfiltered, "9 of 26" filtered. */
-export function studyCount(shown: number, total: number, filter: StudyFilter): string {
-  if (filter !== 'ALL') return `${shown} of ${total}`;
-  return `${total} ${total === 1 ? 'player' : 'players'}`;
+export function studyCount(
+  shown: number,
+  total: number,
+  filter: StudyFilter,
+  messages: Messages,
+): string {
+  if (filter !== 'ALL') return messages.study.shownOf(shown, total);
+  return messages.study.players(total);
 }
 
 /** The line under a name: a club squad's players show their nationality
@@ -47,9 +53,11 @@ export function studyLabel(
   player: Player,
   affiliation: string,
   hidden: boolean,
+  messages: Messages,
 ): string {
-  const name = hidden ? 'name hidden' : player.name;
-  return `${no ?? 'no number'}, ${name}, ${positionLabel(player.position)}, ${affiliation}`;
+  const name = hidden ? messages.study.nameHidden : player.name;
+  const position = positionLabel(player.position, messages);
+  return `${no ?? messages.study.noNumber}, ${name}, ${position}, ${affiliation}`;
 }
 
 /** The credits for the photos in the list, in list order. Study's credit

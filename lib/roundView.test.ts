@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { en } from '@/i18n/en';
 import {
   answerLayout,
   footerMode,
@@ -409,17 +410,17 @@ describe('streak', () => {
 
 describe('promptText and partCounter', () => {
   it('asks each part in its own words', () => {
-    expect(promptText(L3_NATION_PARTS[0] as QuestionPart, 7, null)).toBe('Who wears 7?');
-    expect(promptText(L3_NATION_PARTS[1] as QuestionPart, 7, null)).toBe('Position?');
-    expect(promptText(L3_NATION_PARTS[2] as QuestionPart, 7, null)).toBe('Which club?');
-    expect(promptText({ kind: 'nationality', options: ['a'], correctIndex: 0 }, 7, null)).toBe(
+    expect(promptText(L3_NATION_PARTS[0] as QuestionPart, 7, null, en)).toBe('Who wears 7?');
+    expect(promptText(L3_NATION_PARTS[1] as QuestionPart, 7, null, en)).toBe('Position?');
+    expect(promptText(L3_NATION_PARTS[2] as QuestionPart, 7, null, en)).toBe('Which club?');
+    expect(promptText({ kind: 'nationality', options: ['a'], correctIndex: 0 }, 7, null, en)).toBe(
       'Nationality?',
     );
   });
 
   it('reads the verdict once the question is scored', () => {
-    expect(promptText(L3_NATION_PARTS[0] as QuestionPart, 7, true)).toBe('Correct');
-    expect(promptText(L3_NATION_PARTS[0] as QuestionPart, 7, false)).toBe('Missed');
+    expect(promptText(L3_NATION_PARTS[0] as QuestionPart, 7, true, en)).toBe('Correct');
+    expect(promptText(L3_NATION_PARTS[0] as QuestionPart, 7, false, en)).toBe('Missed');
   });
 
   it('counts parts only on multi-part questions', () => {
@@ -443,7 +444,7 @@ describe('tileVerdict', () => {
 
 describe('positionLabel', () => {
   it('names each position for the tile beneath its code', () => {
-    expect(['GK', 'DF', 'MF', 'FW'].map((p) => positionLabel(p as 'GK'))).toEqual([
+    expect(['GK', 'DF', 'MF', 'FW'].map((p) => positionLabel(p as 'GK', en))).toEqual([
       'Keeper',
       'Defender',
       'Midfield',
@@ -468,27 +469,30 @@ describe('footerMode', () => {
 
 describe('nextButtonText', () => {
   it('moves on to the next question before the last', () => {
-    expect(nextButtonText('gotIt', false)).toEqual({
+    expect(nextButtonText('gotIt', false, en)).toEqual({
       label: 'Got it — next',
       spoken: 'Got it — next',
     });
-    expect(nextButtonText('next', false)).toEqual({
+    expect(nextButtonText('next', false, en)).toEqual({
       label: 'Next question',
       spoken: 'Next question',
     });
-    expect(nextButtonText('autoNext', false)).toEqual({
+    expect(nextButtonText('autoNext', false, en)).toEqual({
       label: 'Next · tap to skip',
       spoken: 'Next question',
     });
   });
 
   it('says where the last question goes: to the results', () => {
-    expect(nextButtonText('gotIt', true)).toEqual({
+    expect(nextButtonText('gotIt', true, en)).toEqual({
       label: 'See results',
       spoken: 'See results',
     });
-    expect(nextButtonText('next', true)).toEqual({ label: 'See results', spoken: 'See results' });
-    expect(nextButtonText('autoNext', true)).toEqual({
+    expect(nextButtonText('next', true, en)).toEqual({
+      label: 'See results',
+      spoken: 'See results',
+    });
+    expect(nextButtonText('autoNext', true, en)).toEqual({
       label: 'See results · tap to skip',
       spoken: 'See results',
     });
@@ -511,21 +515,23 @@ describe('streakMilestone', () => {
 
 describe('slotSpoken', () => {
   it('names a settled slot with its value', () => {
-    expect(slotSpoken({ key: 'POS', state: 'given', value: 'FW' })).toBe('Position: FW');
-    expect(slotSpoken({ key: 'NAME', state: 'correct', value: 'Pedri' })).toBe(
+    expect(slotSpoken({ key: 'POS', state: 'given', value: 'FW' }, en)).toBe('Position: FW');
+    expect(slotSpoken({ key: 'NAME', state: 'correct', value: 'Pedri' }, en)).toBe(
       'Name: Pedri, right',
     );
-    expect(slotSpoken({ key: 'CLUB', state: 'wrong', value: 'Barcelona' })).toBe(
+    expect(slotSpoken({ key: 'CLUB', state: 'wrong', value: 'Barcelona' }, en)).toBe(
       'Club: Barcelona, the right answer',
     );
-    expect(slotSpoken({ key: 'NAT', state: 'notAsked', value: 'Spain' })).toBe(
+    expect(slotSpoken({ key: 'NAT', state: 'notAsked', value: 'Spain' }, en)).toBe(
       'Nationality: Spain, not asked',
     );
   });
 
   // Guardrail: a screen reader must not read out the answer being asked.
   it('never speaks a value for a slot still being asked', () => {
-    expect(slotSpoken({ key: 'NAME', state: 'active', value: null })).toBe('Name: being asked');
-    expect(slotSpoken({ key: 'POS', state: 'pending', value: null })).toBe('Position: asked next');
+    expect(slotSpoken({ key: 'NAME', state: 'active', value: null }, en)).toBe('Name: being asked');
+    expect(slotSpoken({ key: 'POS', state: 'pending', value: null }, en)).toBe(
+      'Position: asked next',
+    );
   });
 });

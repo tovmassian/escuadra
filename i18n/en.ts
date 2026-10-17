@@ -27,6 +27,50 @@ export const en = {
     /** "21 Aug 2026". */
     date: ({ day, month, year }: CalendarDate) => `${day} ${MONTHS[month - 1] ?? ''} ${year}`,
   },
+  /** The word under a position tile's code, and in Study's spoken label. */
+  positions: { GK: 'Keeper', DF: 'Defender', MF: 'Midfield', FW: 'Forward' },
+  /** Slot names, spoken before a slot's value. */
+  slots: { NAME: 'Name', POS: 'Position', AGE: 'Age', CLUB: 'Club', NAT: 'Nationality' },
+  round: {
+    /** ≤ 12 chars: the prompt row once a question is scored. */
+    correct: 'Correct',
+    missed: 'Missed',
+    whoWears: (no: number) => `Who wears ${no}?`,
+    askPosition: 'Position?',
+    askClub: 'Which club?',
+    askNationality: 'Nationality?',
+    /** ≤ 14 chars: the footer button on the last question. */
+    seeResults: 'See results',
+    /** ≤ 8 chars: the auto-next bar's label before "· tap to skip". */
+    next: 'Next',
+    nextQuestion: 'Next question',
+    gotItNext: 'Got it — next',
+    /** The auto-next bar: one line of `ctaLabel` at 360 dp, ≤ 26 chars in all. */
+    tapToSkip: (label: string) => `${label} · tap to skip`,
+    /** A slot chip's screen-reader label, by slot state. */
+    slotSpoken: {
+      given: (slot: string, value: string) => `${slot}: ${value}`,
+      active: (slot: string) => `${slot}: being asked`,
+      pending: (slot: string) => `${slot}: asked next`,
+      correct: (slot: string, value: string) => `${slot}: ${value}, right`,
+      wrong: (slot: string, value: string) => `${slot}: ${value}, the right answer`,
+      notAsked: (slot: string, value: string) => `${slot}: ${value}, not asked`,
+    },
+  },
+  study: {
+    /** The header's count, unfiltered. */
+    players: (count: number) => (count === 1 ? `${count} player` : `${count} players`),
+    /** The header's count, filtered. */
+    shownOf: (shown: number, total: number) => `${shown} of ${total}`,
+    /** Spoken for a member with no shirt number yet. */
+    noNumber: 'no number',
+    /** Spoken in place of a name while Hide names is on. */
+    nameHidden: 'name hidden',
+  },
+  credits: {
+    /** The licence's change note, after the author and licence. */
+    cropped: 'cropped',
+  },
 };
 
 export type Messages = typeof en;

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { en } from '@/i18n/en';
 import {
   STUDY_FILTERS,
   filterCounts,
@@ -86,12 +87,12 @@ describe('filterCounts', () => {
 
 describe('studyCount', () => {
   it('says how many players when unfiltered', () => {
-    expect(studyCount(26, 26, 'ALL')).toBe('26 players');
-    expect(studyCount(1, 1, 'ALL')).toBe('1 player');
+    expect(studyCount(26, 26, 'ALL', en)).toBe('26 players');
+    expect(studyCount(1, 1, 'ALL', en)).toBe('1 player');
   });
 
   it('says how many of the squad when filtered', () => {
-    expect(studyCount(9, 26, 'DF')).toBe('9 of 26');
+    expect(studyCount(9, 26, 'DF', en)).toBe('9 of 26');
   });
 });
 
@@ -112,17 +113,19 @@ describe('studyLabel', () => {
   const p = entry(7, 'Torres', 'FW').player;
 
   it('reads the number, name, position and affiliation', () => {
-    expect(studyLabel(7, p, 'Barcelona', false)).toBe('7, Torres, Forward, Barcelona');
+    expect(studyLabel(7, p, 'Barcelona', false, en)).toBe('7, Torres, Forward, Barcelona');
   });
 
   it('never speaks a hidden name', () => {
-    const label = studyLabel(7, p, 'Barcelona', true);
+    const label = studyLabel(7, p, 'Barcelona', true, en);
     expect(label).toBe('7, name hidden, Forward, Barcelona');
     expect(label).not.toContain('Torres');
   });
 
   it('says "no number" for a member Wikipedia lists without one', () => {
-    expect(studyLabel(null, p, 'Barcelona', false)).toBe('no number, Torres, Forward, Barcelona');
+    expect(studyLabel(null, p, 'Barcelona', false, en)).toBe(
+      'no number, Torres, Forward, Barcelona',
+    );
   });
 });
 

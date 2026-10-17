@@ -22,6 +22,7 @@ import {
   typography,
   type Palette,
 } from '@/theme/tokens';
+import { useT } from '@/i18n/useT';
 import { useThemeColors } from '@/theme/useTheme';
 
 function look(colors: Palette, state: SlotState): { line: string; text: string; dashed: boolean } {
@@ -51,6 +52,7 @@ function look(colors: Palette, state: SlotState): { line: string; text: string; 
 // can show or speak the answer early.
 export function SlotChip({ slot }: { slot: Slot }) {
   const colors = useThemeColors();
+  const t = useT();
   const reduced = useReducedMotion();
   const scale = useSharedValue(1);
   const previous = useRef(slot.state);
@@ -91,7 +93,7 @@ export function SlotChip({ slot }: { slot: Slot }) {
   });
 
   return (
-    <Animated.View style={[styles.chip, pulse]} accessible accessibilityLabel={slotSpoken(slot)}>
+    <Animated.View style={[styles.chip, pulse]} accessible accessibilityLabel={slotSpoken(slot, t)}>
       <Text style={styles.label}>{slot.key}</Text>
       {flag ? <Flag code={flag} size="inline" label={slot.value ?? ''} /> : null}
       <Animated.Text

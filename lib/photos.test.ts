@@ -1,3 +1,4 @@
+import { en } from '@/i18n/en';
 import { creditParts, photoCreditRows, photoFor, roundPhotoUrls } from '@/lib/photos';
 import type { QuestionResult } from '@/stores/session';
 import type { PhotoCredit, Player } from '@/types/squad';
@@ -67,7 +68,7 @@ describe('photoCreditRows', () => {
 
 describe('creditParts', () => {
   it('credits the author, linking the Commons page, and the licence, linking its deed', () => {
-    expect(creditParts(credit)).toEqual({
+    expect(creditParts(credit, en)).toEqual({
       author: {
         text: 'Example Photographer',
         url: 'https://commons.wikimedia.org/wiki/File:X.jpg',
@@ -80,7 +81,7 @@ describe('creditParts', () => {
   // No name could be read, or public domain has no deed: the Commons page
   // names both.
   it('falls back to Wikimedia Commons and the page', () => {
-    const parts = creditParts({ ...credit, author: null, licenceUrl: null });
+    const parts = creditParts({ ...credit, author: null, licenceUrl: null }, en);
     expect(parts.author.text).toBe('Wikimedia Commons');
     expect(parts.licence.url).toBe('https://commons.wikimedia.org/wiki/File:X.jpg');
   });
