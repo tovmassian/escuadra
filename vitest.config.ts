@@ -7,13 +7,15 @@ import { defineConfig } from 'vitest/config';
 // skills — pure and equally worth pinning; tools/ holds squadctl, whose
 // parse/reconcile/assert layer is pure by design and network-free. theme/ and design/ are plain
 // data — tokens, mark geometry, handoff re-exports — and are tested for
-// internal consistency only. Screens and components are verified
-// on-device instead: no RN test renderer is configured here on purpose.
+// internal consistency only. i18n/ resolves the language without React.
+// Screens and components are verified on-device instead: no RN test renderer
+// is configured here on purpose.
 export default defineConfig({
   test: {
     environment: 'node',
     include: [
       'lib/**/*.test.ts',
+      'i18n/**/*.test.ts',
       'scripts/**/*.test.ts',
       'tools/**/*.test.ts',
       'stores/**/*.test.ts',
