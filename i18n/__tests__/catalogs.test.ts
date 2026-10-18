@@ -28,6 +28,18 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     // "Text" is the German word for a share as text.
     'share.text',
   ],
+  fr: [
+    // Club is the French word too, and CLUB its chip code.
+    'slots.CLUB',
+    'slotCodes.CLUB',
+    // POS for Poste, NAT for Nationalité.
+    'slotCodes.POS',
+    'slotCodes.NAT',
+    // "Image" is the French word for a share as a picture.
+    'share.image',
+    // "Clubs" is French too.
+    'picker.clubs',
+  ],
 };
 
 const english = catalogLeaves(en);
