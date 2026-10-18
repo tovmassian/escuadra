@@ -161,7 +161,8 @@ export const it: Messages = {
   share: {
     title: 'Condividi la partita',
     // Speaks to whoever receives the picture: not there yet, but working on it.
-    stillLearning: 'In allenamento',
+    // "In allenamento" wraps the picture's title to two lines.
+    stillLearning: 'Sto imparando',
     // The name first, so it needs no article ("della rosa dell’Inter").
     question: (team: string) => `${team}: conosci tutta la rosa?`,
     image: 'Immagine',
@@ -180,8 +181,8 @@ export const it: Messages = {
   ladder: {
     play: 'Gioca',
     playAgain: 'Gioca ancora',
-    // No verb, as the rung titles beside it would wrap.
-    unlockHint: (target: string, level: number) => `${target} al livello ${level}`,
+    // The level first: "8/10 al livello 2" wraps "Profilo completo" beside it.
+    unlockHint: (target: string, level: number) => `Livello ${level}: ${target}`,
     rungLocked: (title: string, hint: string) => `${title}, bloccato, ${hint}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} su ${total}`,
