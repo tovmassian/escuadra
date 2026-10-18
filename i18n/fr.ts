@@ -80,7 +80,8 @@ export const fr: Messages = {
     gotItNext: 'Compris – suivant',
     // "Résultats · appuie pour passer" is 30 chars against 26. The ellipsis
     // says it moves on in a moment; "ou appuie ici" says a tap is sooner.
-    tapToSkip: (label: string) => `${label} … ou appuie ici`,
+    // French sets the ellipsis tight against the word before it.
+    tapToSkip: (label: string) => `${label}… ou appuie ici`,
     slotSpoken: {
       given: (slot: string, value: string) => `${slot} : ${value}`,
       active: (slot: string) => `${slot} : à trouver`,
@@ -94,7 +95,7 @@ export const fr: Messages = {
     shirtNumber: (no: number) => `Numéro ${no}`,
     // "Choisis", not "Tape": "Tape ta réponse" reads "type your answer".
     tapYourAnswer: 'Choisis ta réponse',
-    movesOn: 'Passe tout seul à la suite dans un instant',
+    movesOn: 'Passe automatiquement à la suite dans un instant',
     answerTag: 'Réponse',
     tileSpoken: {
       idle: '',
