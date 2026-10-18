@@ -10,7 +10,25 @@ import { SUPPORTED_LANGUAGES, type Language } from '../resolveLanguage';
 
 // Texts that are rightly the same as in English, by language, each with a
 // comment saying why ("Name" is German too). Every other text must differ.
-const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]>> = {};
+const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]>> = {
+  de: [
+    // German players say "Level 2" too.
+    'common.level',
+    // MF is German's code too: Mittelfeld.
+    'positionCodes.MF',
+    // Name and Position are German words, spelled the same.
+    'slots.NAME',
+    'slots.POS',
+    // The chip codes of those words, and NAT for Nationalität.
+    'slotCodes.NAME',
+    'slotCodes.POS',
+    'slotCodes.NAT',
+    // "{1}: {2}" has no words.
+    'round.slotSpoken.given',
+    // "Text" is the German word for a share as text.
+    'share.text',
+  ],
+};
 
 const english = catalogLeaves(en);
 const englishText = new Map(english.map((leaf) => [leaf.path, leaf.text]));
