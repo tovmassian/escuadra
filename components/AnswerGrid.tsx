@@ -30,6 +30,7 @@ interface TileModel {
   label: string;
   sub: string | undefined;
   flag: FlagCode | null | undefined;
+  testID: string | undefined;
 }
 
 // The answers, as a grid (spec §2.3): two columns for names, clubs and
@@ -63,12 +64,14 @@ export function AnswerGrid({
           label: optionText(part, index, language, t),
           sub: positionLabel(option, t),
           flag: undefined,
+          testID: `answer-position-${option}`,
         }))
       : part.options.map((option, index) => ({
           index,
           label: optionText(part, index, language, t),
           sub: undefined,
           flag: part.kind === 'nationality' ? flagFor(option) : undefined,
+          testID: undefined,
         }));
   const rows: TileModel[][] = [];
   for (const tile of tiles) {
@@ -96,6 +99,7 @@ export function AnswerGrid({
                 label={tile.label}
                 sub={tile.sub}
                 flag={tile.flag}
+                testID={tile.testID}
                 verdict={tileVerdict(part, answeredIndex, tile.index)}
                 pickedRight={pickedRight}
                 minHeight={layout.tileHeight}

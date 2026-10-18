@@ -45,6 +45,8 @@ interface AnswerTileProps {
   minHeight: number;
   /** The press, with where it landed and the tile, so the shot starts there. */
   onPress: (tap: ShotTap) => void;
+  /** For the screen capture, which taps a position tile by its code, not its translated label. */
+  testID?: string;
 }
 
 function look(colors: Palette, verdict: TileVerdict) {
@@ -98,6 +100,7 @@ export function AnswerTile({
   pickedRight,
   minHeight,
   onPress,
+  testID,
 }: AnswerTileProps) {
   const colors = useThemeColors();
   const t = useT();
@@ -221,6 +224,7 @@ export function AnswerTile({
     <Animated.View style={[styles.cell, motion]}>
       <Pressable
         ref={pressable}
+        testID={testID}
         onPress={(event) =>
           onPress({
             pageX: event.nativeEvent.pageX,

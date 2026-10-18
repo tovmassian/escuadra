@@ -2,6 +2,8 @@
 // Kept here, pure and dependency-free, so both the CLI flag parsing and the
 // PNG dimension assertion can be unit-tested without spinning up a browser.
 
+import { SUPPORTED_LANGUAGES, type SupportedLanguage } from '../i18n/resolveLanguage.ts';
+
 export type ImageFormat = 'png' | 'jpeg';
 
 export interface Profile {
@@ -141,4 +143,34 @@ export function assertProfileDimensions(
       `${filePath} is ${dims.width}×${dims.height}, expected exactly ${expected.width}×${expected.height} for the "${profile.name}" profile`,
     );
   }
+}
+
+/** Reads `--lang=<code>` (#145): the language to capture in, or null to leave the app's own. */
+export function resolveLanguageArg(argv: readonly string[]): SupportedLanguage | null {
+  if (argv.includes('--lang')) {
+    throw new Error('pass the language as --lang=<code> (a single token), not a separate argument');
+  }
+  const flag = argv.find((arg) => arg.startsWith('--lang='));
+  if (!flag) return null;
+  const code = flag.slice('--lang='.length);
+  const language = SUPPORTED_LANGUAGES.find((supported) => supported === code);
+  if (!language) {
+    throw new Error(`unknown --lang "${code}" — supported: ${SUPPORTED_LANGUAGES.join(', ')}`);
+  }
+  return language;
+}
+
+/**
+ * Where a run writes: the profile's folder, or its `<lang>/` subfolder.
+ * design/screens/ is the English handoff set (#147), so a language goes to the
+ * play or store profile instead.
+ */
+export function outDirFor(profile: Profile, language: SupportedLanguage | null): string {
+  if (language === null) return profile.outDir;
+  if (profile.name === 'design') {
+    throw new Error(
+      'design/screens/ stays English: capture a language with --profile=play (or store)',
+    );
+  }
+  return `${profile.outDir}/${language}`;
 }
