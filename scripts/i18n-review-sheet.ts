@@ -8,12 +8,9 @@ import { LENGTH_BUDGETS } from '@/i18n/budgets';
 import { CATALOGS } from '@/i18n/catalogs';
 import { COUNTRY_NAMES } from '@/i18n/countries';
 import { en } from '@/i18n/en';
-import { catalogLeaves, type Leaf } from '@/i18n/leaves';
+import { catalogLeaves, isLater, type Leaf } from '@/i18n/leaves';
 import { LANGUAGE_NAMES } from '@/i18n/names';
 import type { SupportedLanguage } from '@/i18n/resolveLanguage';
-
-/** Reviewed with #146 (About and privacy) and #147 (store listing). */
-const LATER = ['about.', 'store.'];
 
 const budgetByPath = new Map<string, number>(
   LENGTH_BUDGETS.flatMap(({ budget, texts }) =>
@@ -44,7 +41,8 @@ export function reviewSheet(language: SupportedLanguage): string {
   const name = LANGUAGE_NAMES[language];
   const theirs = new Map(catalogLeaves(CATALOGS[language]).map((leaf) => [leaf.path, leaf]));
   const rows = catalogLeaves(en)
-    .filter((leaf) => !LATER.some((prefix) => leaf.path.startsWith(prefix)))
+    // A path #146/#147 translate, or one with no English text: nothing to review.
+    .filter((leaf) => !isLater(leaf.path) && leaf.text !== '')
     .map((leaf) => {
       const translated = theirs.get(leaf.path);
       const limit = budgetByPath.get(leaf.path) ?? '';

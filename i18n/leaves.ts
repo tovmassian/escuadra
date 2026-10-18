@@ -21,6 +21,13 @@ const SAMPLE_ARGS: Readonly<Record<string, readonly unknown[]>> = {
   'formats.date': [{ day: 21, month: 8, year: 2026 }],
 };
 
+/** Translated by #146 (About and privacy) and #147 (store listing), not #145. */
+export const LATER_PATHS: readonly string[] = ['about.', 'store.'];
+
+export function isLater(path: string): boolean {
+  return LATER_PATHS.some((prefix) => path.startsWith(prefix));
+}
+
 export function catalogLeaves(messages: Messages): Leaf[] {
   const leaves: Leaf[] = [];
   const walk = (value: unknown, path: string): void => {
@@ -32,7 +39,15 @@ export function catalogLeaves(messages: Messages): Leaf[] {
       const fn = value as (...args: unknown[]) => unknown;
       const call = (...args: unknown[]) => String(fn(...args));
       const args = SAMPLE_ARGS[path] ?? PLACEHOLDERS.slice(0, fn.length);
-      leaves.push({ path, text: call(...args), arity: fn.length, call });
+      let text: string;
+      try {
+        text = call(...args);
+      } catch (error) {
+        // A translation that throws must not hide the rest of the catalog:
+        // the tests that compare texts then name this path.
+        text = `⚠ threw: ${error instanceof Error ? error.message : String(error)}`;
+      }
+      leaves.push({ path, text, arity: fn.length, call });
     } else if (value !== null && typeof value === 'object') {
       for (const [key, child] of Object.entries(value)) {
         walk(child, path === '' ? key : `${path}.${key}`);

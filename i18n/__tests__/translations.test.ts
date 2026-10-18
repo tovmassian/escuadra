@@ -6,7 +6,7 @@ import type { FlagCode } from '@/assets/flags/generated';
 import type { Position } from '@/types/squad';
 import { CATALOGS } from '../catalogs';
 import { countryName } from '../displayNames';
-import { catalogLeaves } from '../leaves';
+import { catalogLeaves, isLater } from '../leaves';
 import { resolveLanguage, SUPPORTED_LANGUAGES, type Language } from '../resolveLanguage';
 
 interface Facts {
@@ -101,9 +101,6 @@ const FACTS: Record<Language, Facts> = {
   },
 };
 
-/** Translated by #146 and #147, so not held to this issue's rules. */
-const LATER = ['about.', 'store.'];
-
 describe.each(SUPPORTED_LANGUAGES)('%s', (language) => {
   const facts = FACTS[language];
   const messages = CATALOGS[language];
@@ -137,8 +134,7 @@ describe.each(SUPPORTED_LANGUAGES)('%s', (language) => {
   it.runIf(facts.frenchSpacing)('puts a no-break space before ? ! : ; and inside « »', () => {
     const wrong = catalogLeaves(messages).filter(
       (leaf) =>
-        !LATER.some((prefix) => leaf.path.startsWith(prefix)) &&
-        (/[^\u00A0][?!:;»]/.test(leaf.text) || /«[^\u00A0]/.test(leaf.text)),
+        !isLater(leaf.path) && (/[^\u00A0][?!:;»]/.test(leaf.text) || /«[^\u00A0]/.test(leaf.text)),
     );
     expect(wrong.map((leaf) => `${leaf.path}: ${leaf.text}`)).toEqual([]);
   });

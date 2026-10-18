@@ -2,8 +2,6 @@
 // Kept here, pure and dependency-free, so both the CLI flag parsing and the
 // PNG dimension assertion can be unit-tested without spinning up a browser.
 
-import { SUPPORTED_LANGUAGES, type SupportedLanguage } from '../i18n/resolveLanguage.ts';
-
 export type ImageFormat = 'png' | 'jpeg';
 
 export interface Profile {
@@ -145,19 +143,25 @@ export function assertProfileDimensions(
   }
 }
 
-/** Reads `--lang=<code>` (#145): the language to capture in, or null to leave the app's own. */
-export function resolveLanguageArg(argv: readonly string[]): SupportedLanguage | null {
+/**
+ * Reads `--lang=<code>` (#145): the language to capture in, or null to leave
+ * the app's own. It checks only that the code is two letters. It imports
+ * nothing from i18n/, because that would make Node load a `.ts` file from a
+ * package with no "type" and warn on every `npm run shots*`. A language
+ * without a reviewed catalog is rejected by capture-screens.mjs instead: its
+ * Home-chip assertion throws when the chip does not show the requested code.
+ */
+export function resolveLanguageArg(argv: readonly string[]): string | null {
   if (argv.includes('--lang')) {
     throw new Error('pass the language as --lang=<code> (a single token), not a separate argument');
   }
   const flag = argv.find((arg) => arg.startsWith('--lang='));
   if (!flag) return null;
   const code = flag.slice('--lang='.length);
-  const language = SUPPORTED_LANGUAGES.find((supported) => supported === code);
-  if (!language) {
-    throw new Error(`unknown --lang "${code}" — supported: ${SUPPORTED_LANGUAGES.join(', ')}`);
+  if (!/^[a-z]{2}$/.test(code)) {
+    throw new Error(`unknown --lang "${code}": pass a two-letter language code`);
   }
-  return language;
+  return code;
 }
 
 /**
@@ -165,7 +169,7 @@ export function resolveLanguageArg(argv: readonly string[]): SupportedLanguage |
  * design/screens/ is the English handoff set (#147), so a language goes to the
  * play or store profile instead.
  */
-export function outDirFor(profile: Profile, language: SupportedLanguage | null): string {
+export function outDirFor(profile: Profile, language: string | null): string {
   if (language === null) return profile.outDir;
   if (profile.name === 'design') {
     throw new Error(

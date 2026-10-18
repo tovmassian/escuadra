@@ -5,15 +5,12 @@
 import { describe, expect, it } from 'vitest';
 import { CATALOGS } from '../catalogs';
 import { en } from '../en';
-import { catalogLeaves } from '../leaves';
+import { catalogLeaves, isLater } from '../leaves';
 import { SUPPORTED_LANGUAGES, type Language } from '../resolveLanguage';
 
 // Texts that are rightly the same as in English, by language, each with a
 // comment saying why ("Name" is German too). Every other text must differ.
 const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]>> = {};
-
-/** Translated by #146 (About and privacy) and #147 (store listing), not #145. */
-const LATER = ['about.', 'store.'];
 
 const english = catalogLeaves(en);
 const englishText = new Map(english.map((leaf) => [leaf.path, leaf.text]));
@@ -35,6 +32,14 @@ describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {
     expect(wrong.map((leaf) => leaf.path)).toEqual([]);
   });
 
+  it('prints exactly the placeholders English does, at every path', () => {
+    const tokens = (text: string) => (text.match(/\{\d\}/g) ?? []).sort();
+    const wrong = leaves.filter(
+      (leaf) => tokens(leaf.text).join() !== tokens(englishText.get(leaf.path) ?? '').join(),
+    );
+    expect(wrong.map((leaf) => leaf.path)).toEqual([]);
+  });
+
   it('names its own position codes in the level-2 description', () => {
     const description = messages.ladder.levels[2].description;
     for (const code of Object.values(messages.positionCodes)) {
@@ -45,7 +50,7 @@ describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {
   it.skipIf(language === 'en')('translates every text it does not share on purpose', () => {
     const untranslated = leaves.filter(
       (leaf) =>
-        !LATER.some((prefix) => leaf.path.startsWith(prefix)) &&
+        !isLater(leaf.path) &&
         leaf.text !== '' &&
         leaf.text === englishText.get(leaf.path) &&
         !allowed.includes(leaf.path),
@@ -55,7 +60,7 @@ describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {
 
   it.skipIf(language === 'en')('shares with English only texts that are still the same', () => {
     const text = new Map(leaves.map((leaf) => [leaf.path, leaf.text]));
-    const stale = allowed.filter((path) => text.get(path) !== englishText.get(path));
+    const stale = allowed.filter((p) => !englishText.has(p) || text.get(p) !== englishText.get(p));
     expect(stale).toEqual([]);
   });
 });

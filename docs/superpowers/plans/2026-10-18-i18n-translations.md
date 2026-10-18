@@ -661,7 +661,13 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 8, texts: { 'round.next': (m) => m.round.next } },
   { budget: 18, texts: { 'round.nextQuestion': (m) => m.round.nextQuestion } },
   { budget: 18, texts: { 'round.gotItNext': (m) => m.round.gotItNext } },
-  { budget: 26, texts: { 'round.tapToSkip': (m) => m.round.tapToSkip(m.round.next) } },
+  {
+    budget: 26,
+    texts: {
+      'round.tapToSkip (next)': (m) => m.round.tapToSkip(m.round.next),
+      'round.tapToSkip (seeResults)': (m) => m.round.tapToSkip(m.round.seeResults),
+    },
+  },
   { budget: 20, texts: { 'round.tapYourAnswer': (m) => m.round.tapYourAnswer } },
   { budget: 8, texts: { 'round.answerTag': (m) => m.round.answerTag } },
   {
@@ -751,10 +757,10 @@ git commit -m "feat(i18n): slot labels in the catalog, length budgets as a test 
 
 **Interfaces:**
 
-- Consumes: `SUPPORTED_LANGUAGES`, `SupportedLanguage` from `i18n/resolveLanguage.ts`, which has no imports, so Node can load it from the `.mjs` script.
+- Consumes: nothing from `i18n/`. Importing a `.ts` file from there makes every `npm run shots*` print Node's MODULE_TYPELESS_PACKAGE_JSON warning (the root `package.json` has no "type" and is fingerprint-locked), so `resolveLanguageArg` checks only the shape of the code.
 - Produces:
-  - `resolveLanguageArg(argv: readonly string[]): SupportedLanguage | null`;
-  - `outDirFor(profile: Profile, language: SupportedLanguage | null): string`;
+  - `resolveLanguageArg(argv: readonly string[]): string | null`;
+  - `outDirFor(profile: Profile, language: string | null): string`;
   - testIDs `segment-<key>` (e.g. `segment-nation`) and `answer-position-<GK|DF|MF|FW>`.
 
 - [ ] **Step 1: Write the failing tests**
@@ -771,8 +777,12 @@ describe('resolveLanguageArg', () => {
     expect(resolveLanguageArg(['--profile=play', '--lang=en'])).toBe('en');
   });
 
-  it('throws on a language without a reviewed catalog, naming the supported ones', () => {
-    expect(() => resolveLanguageArg(['--lang=xx'])).toThrow(/unknown --lang "xx".*en/);
+  it('throws on a code that is not two lowercase letters', () => {
+    for (const code of ['xx1', 'DE', 'deu', '']) {
+      expect(() => resolveLanguageArg([`--lang=${code}`])).toThrow(
+        `unknown --lang "${code}": pass a two-letter language code`,
+      );
+    }
   });
 
   it('throws on a bare --lang token instead of ignoring it', () => {
@@ -803,28 +813,26 @@ Expected: FAIL, "resolveLanguageArg is not a function" (or not exported).
 
 - [ ] **Step 3: Implement both in `scripts/screenshot-profiles.ts`**
 
-Add at the top, after the header comment:
+Add no import. Append:
 
 ```ts
-import { SUPPORTED_LANGUAGES, type SupportedLanguage } from '../i18n/resolveLanguage.ts';
-```
-
-Append:
-
-```ts
-/** Reads `--lang=<code>` (#145): the language to capture in, or null to leave the app's own. */
-export function resolveLanguageArg(argv: readonly string[]): SupportedLanguage | null {
+/**
+ * Reads `--lang=<code>` (#145): the language to capture in, or null to leave
+ * the app's own. It checks only that the code is two letters. A language
+ * without a reviewed catalog is rejected by capture-screens.mjs instead: its
+ * Home-chip assertion throws when the chip does not show the requested code.
+ */
+export function resolveLanguageArg(argv: readonly string[]): string | null {
   if (argv.includes('--lang')) {
     throw new Error('pass the language as --lang=<code> (a single token), not a separate argument');
   }
   const flag = argv.find((arg) => arg.startsWith('--lang='));
   if (!flag) return null;
   const code = flag.slice('--lang='.length);
-  const language = SUPPORTED_LANGUAGES.find((supported) => supported === code);
-  if (!language) {
-    throw new Error(`unknown --lang "${code}" — supported: ${SUPPORTED_LANGUAGES.join(', ')}`);
+  if (!/^[a-z]{2}$/.test(code)) {
+    throw new Error(`unknown --lang "${code}": pass a two-letter language code`);
   }
-  return language;
+  return code;
 }
 
 /**
@@ -832,7 +840,7 @@ export function resolveLanguageArg(argv: readonly string[]): SupportedLanguage |
  * design/screens/ is the English handoff set (#147), so a language goes to the
  * play or store profile instead.
  */
-export function outDirFor(profile: Profile, language: SupportedLanguage | null): string {
+export function outDirFor(profile: Profile, language: string | null): string {
   if (language === null) return profile.outDir;
   if (profile.name === 'design') {
     throw new Error(
@@ -970,7 +978,7 @@ git commit -m "feat(shots): capture in one language with --lang, tapping by test
 
 **Interfaces:**
 
-- Consumes: `FLAG_BY_NATIONALITY` from `lib/flags.ts` (its only import is a type, which Node erases); `FlagCode` (type) from `assets/flags/generated.ts`; `Language` (type) from `i18n/resolveLanguage.ts`.
+- Consumes: `FlagCode` (type) from `assets/flags/generated.ts` and `Language` (type) from `i18n/resolveLanguage.ts`, both erased by Node. It imports nothing else at run time: the codes are `ISO_REGION`'s keys plus the `HOME_NATIONS` const.
 - Produces: `node scripts/seed-country-names.ts <es|fr|it|de>` prints the body of a `COUNTRY_NAMES` entry to stdout.
 
 - [ ] **Step 1: Write the script**
@@ -988,10 +996,10 @@ git commit -m "feat(shots): capture in one language with --lang, tapping by test
 //   node scripts/seed-country-names.ts de
 import type { FlagCode } from '../assets/flags/generated.ts';
 import type { Language } from '../i18n/resolveLanguage.ts';
-import { FLAG_BY_NATIONALITY } from '../lib/flags.ts';
 
 /** FIFA members that are not ISO countries, so CLDR has no name for them. */
-type HomeNation = 'ENG' | 'SCO' | 'WAL' | 'NIR';
+const HOME_NATIONS = ['ENG', 'SCO', 'WAL', 'NIR'] as const;
+type HomeNation = (typeof HOME_NATIONS)[number];
 type SeedLanguage = Exclude<Language, 'en'>;
 
 /** FIFA code → ISO 3166-1 alpha-2 region, the key CLDR names countries by. Kosovo is CLDR's XK. */
@@ -1156,7 +1164,9 @@ if (language !== 'es' && language !== 'fr' && language !== 'it' && language !== 
 const regions = new Intl.DisplayNames([language], { type: 'region', fallback: 'none' });
 const hand: Partial<Record<FlagCode, string>> = HAND_WRITTEN[language];
 const isoRegion: Partial<Record<FlagCode, string>> = ISO_REGION;
-const codes = [...new Set(Object.values(FLAG_BY_NATIONALITY))].sort();
+// Object.keys widens to string. ISO_REGION's Record type makes its keys exactly the non-home FlagCodes, so the cast only narrows to that set.
+const isoCodes = Object.keys(ISO_REGION) as (keyof typeof ISO_REGION)[];
+const codes = [...isoCodes, ...HOME_NATIONS].sort();
 
 const lines = codes.map((code) => {
   const iso = isoRegion[code];
@@ -1165,7 +1175,7 @@ const lines = codes.map((code) => {
   return `    ${code}: '${name.replaceAll("'", "\\'")}',`;
 });
 
-console.log(`  ${language}: {\n${lines.join('\n')}\n  },`);
+process.stdout.write(`  ${language}: {\n${lines.join('\n')}\n  },\n`);
 ```
 
 Run `npx prettier --write scripts/seed-country-names.ts`. It spreads the two dense tables one entry per line. That is fine.
@@ -1583,6 +1593,7 @@ Expected: PASS. The usual failures, and what to do about each:
 - **budgets:** rewrite the text shorter. Never raise a budget to fit.
 - **untranslated:** a text equal to English. Translate it. If it is rightly the same (German `Name`, `Position`, `Level {1}`, `MF`), add the path to `SAME_AS_ENGLISH.<lang>` with a comment saying why.
 - **facts:** the catalog or the country table disagrees with the glossary. Make them agree.
+- **expect several `SAME_AS_ENGLISH` entries per language**, each with its reason: `round.slotSpoken.given` ("{1}: {2}"), `slotCodes.CLUB`, `slotCodes.POS`, `slotCodes.NAT`, `slots.CLUB`, and in German `positionCodes.MF` and `common.level`.
 
 - [ ] **Step 7: Check, then commit the draft**
 

@@ -61,7 +61,13 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 8, texts: { 'round.next': (m) => m.round.next } },
   { budget: 18, texts: { 'round.nextQuestion': (m) => m.round.nextQuestion } },
   { budget: 18, texts: { 'round.gotItNext': (m) => m.round.gotItNext } },
-  { budget: 26, texts: { 'round.tapToSkip': (m) => m.round.tapToSkip(m.round.next) } },
+  {
+    budget: 26,
+    texts: {
+      'round.tapToSkip (next)': (m) => m.round.tapToSkip(m.round.next),
+      'round.tapToSkip (seeResults)': (m) => m.round.tapToSkip(m.round.seeResults),
+    },
+  },
   { budget: 20, texts: { 'round.tapYourAnswer': (m) => m.round.tapYourAnswer } },
   { budget: 8, texts: { 'round.answerTag': (m) => m.round.answerTag } },
   {

@@ -187,4 +187,4 @@ const lines = codes.map((code) => {
   return `    ${code}: '${name.replaceAll("'", "\\'")}',`;
 });
 
-console.log(`  ${language}: {\n${lines.join('\n')}\n  },`);
+process.stdout.write(`  ${language}: {\n${lines.join('\n')}\n  },\n`);

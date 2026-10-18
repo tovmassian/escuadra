@@ -205,8 +205,12 @@ describe('resolveLanguageArg', () => {
     expect(resolveLanguageArg(['--profile=play', '--lang=en'])).toBe('en');
   });
 
-  it('throws on a language without a reviewed catalog, naming the supported ones', () => {
-    expect(() => resolveLanguageArg(['--lang=xx'])).toThrow(/unknown --lang "xx".*en/);
+  it('throws on a code that is not two lowercase letters', () => {
+    for (const code of ['xx1', 'DE', 'deu', '']) {
+      expect(() => resolveLanguageArg([`--lang=${code}`])).toThrow(
+        `unknown --lang "${code}": pass a two-letter language code`,
+      );
+    }
   });
 
   it('throws on a bare --lang token instead of ignoring it', () => {
