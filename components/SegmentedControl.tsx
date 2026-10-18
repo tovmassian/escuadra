@@ -42,6 +42,7 @@ export function SegmentedControl({ segments, value, onChange }: SegmentedControl
         return (
           <Pressable
             key={s.key}
+            testID={`segment-${s.key}`}
             style={[styles.segment, active && styles.segmentActive]}
             onPress={() => onChange(s.key)}
             accessibilityRole="button"

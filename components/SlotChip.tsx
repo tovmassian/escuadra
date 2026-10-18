@@ -100,7 +100,7 @@ export function SlotChip({ slot }: { slot: Slot }) {
       accessible
       accessibilityLabel={slotSpoken(slot, language, t)}
     >
-      <Text style={styles.label}>{slot.key}</Text>
+      <Text style={styles.label}>{t.slotCodes[slot.key]}</Text>
       {flag ? <Flag code={flag} size="inline" label={valueText ?? ''} /> : null}
       <Animated.Text
         key={`${slot.state}:${shown}`}

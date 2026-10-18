@@ -3,7 +3,9 @@ import {
   PROFILES,
   assertProfileDimensions,
   readJpegDimensions,
+  outDirFor,
   readPngDimensions,
+  resolveLanguageArg,
   resolveProfile,
 } from './screenshot-profiles';
 
@@ -191,5 +193,42 @@ describe('assertProfileDimensions', () => {
         'design/store/01-home.png',
       ),
     ).toThrow(/design\/store\/01-home\.png is 1319×2868, expected exactly 1320×2868/);
+  });
+});
+
+describe('resolveLanguageArg', () => {
+  it('is null with no flag: the app picks its own language', () => {
+    expect(resolveLanguageArg(['--profile=play'])).toBeNull();
+  });
+
+  it('reads a supported language', () => {
+    expect(resolveLanguageArg(['--profile=play', '--lang=en'])).toBe('en');
+  });
+
+  it('throws on a code that is not two lowercase letters', () => {
+    for (const code of ['xx1', 'DE', 'deu', '']) {
+      expect(() => resolveLanguageArg([`--lang=${code}`])).toThrow(
+        `unknown --lang "${code}": pass a two-letter language code`,
+      );
+    }
+  });
+
+  it('throws on a bare --lang token instead of ignoring it', () => {
+    expect(() => resolveLanguageArg(['--lang', 'de'])).toThrow(/--lang=<code>/);
+  });
+});
+
+describe('outDirFor', () => {
+  it("is the profile's folder with no language", () => {
+    expect(outDirFor(PROFILES.play, null)).toBe('design/play');
+  });
+
+  it("is a language's subfolder with one", () => {
+    expect(outDirFor(PROFILES.play, 'en')).toBe('design/play/en');
+    expect(outDirFor(PROFILES.store, 'en')).toBe('design/store/en');
+  });
+
+  it('keeps design/screens/ English: the design profile refuses a language', () => {
+    expect(() => outDirFor(PROFILES.design, 'en')).toThrow(/design\/screens\/ stays English/);
   });
 });

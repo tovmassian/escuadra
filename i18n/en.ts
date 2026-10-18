@@ -1,9 +1,9 @@
 // The English catalog, the source every other language is typed against:
 // `Messages = typeof en`. Deliberately not `as const` — its strings widen to
 // `string`, so a translation can hold different words while a missing or extra
-// key, or a parameter of the wrong type, fails `npm run typecheck`. A function
-// that drops a trailing parameter still compiles (a parity test lands with the
-// first translation, #145).
+// key, or a parameter of the wrong type, fails `npm run typecheck`; a dropped
+// trailing parameter fails i18n/__tests__/catalogs.test.ts. Each "≤ N chars"
+// budget below is also in ./budgets.ts, which the tests hold every catalog to.
 // Values are strings, or functions when they take parameters; each function
 // writes its own plural. No `Intl`: dates and plurals are written out here.
 // Escuadra and a la escuadra come from ./names and are never translated.
@@ -69,10 +69,12 @@ export const en = {
   },
   /** ≤ 3 chars: a position's code on an answer tile, a slot chip, a Study filter pill and a card badge. */
   positionCodes: { GK: 'GK', DF: 'DF', MF: 'MF', FW: 'FW' },
-  /** The word under a position tile's code, and in Study's spoken label. */
+  /** ≤ 11 chars: the word under a position tile's code, and in Study's spoken label. */
   positions: { GK: 'Keeper', DF: 'Defender', MF: 'Midfield', FW: 'Forward' },
   /** Slot names, spoken before a slot's value. */
   slots: { NAME: 'Name', POS: 'Position', AGE: 'Age', CLUB: 'Club', NAT: 'Nationality' },
+  /** ≤ 6 chars: a slot chip's label above its value, in capitals. */
+  slotCodes: { NAME: 'NAME', POS: 'POS', AGE: 'AGE', CLUB: 'CLUB', NAT: 'NAT' },
   round: {
     /** ≤ 12 chars: the prompt row once a question is scored. */
     correct: 'Correct',

@@ -25,9 +25,10 @@ describe('languageRows', () => {
     expect(rows.map((row) => row.preference)).toEqual(['system', 'en', 'fr']);
   });
 
-  it('offers just English while English is the only reviewed catalog', () => {
-    const rows = languageRows(SUPPORTED_LANGUAGES, 'en');
-    expect(rows.map((row) => row.preference)).toEqual(['system', 'en']);
+  it('offers "Match phone", then each reviewed language and no other', () => {
+    const [first, ...rest] = languageRows(SUPPORTED_LANGUAGES, 'en');
+    expect(first?.preference).toBe('system');
+    expect(rest.map((row) => row.preference).sort()).toEqual([...SUPPORTED_LANGUAGES].sort());
   });
 });
 

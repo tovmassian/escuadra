@@ -327,8 +327,12 @@ reports — is done by hand, not by a skill.
   lives in `stores/progress.ts` — it is not a third store.
 - **User-visible text lives in `i18n/`.** `i18n/en.ts` is the source catalog and
   `Messages = typeof en`; every other catalog is typed `: Messages`, so a missing or
-  extra key fails the typecheck (a function that drops a trailing parameter still
-  compiles; a parity test lands with the first translation, #145). About's words
+  extra key fails the typecheck, and `i18n/__tests__/catalogs.test.ts` fails a
+  dropped parameter, a key out of order or a text left in English. The `≤ N chars`
+  comments in `en.ts` are mirrored in `i18n/budgets.ts`, which
+  `i18n/__tests__/budgets.test.ts` holds every catalog to; the per-language facts
+  (date, plurals, position codes, hand-written country names) are
+  `i18n/__tests__/translations.test.ts`. About's words
   are `en.about`, kept as data that #146 renders into the privacy pages. Screens read text through
   `useT()`. `lib/` modules that build text take `messages` as their last argument
   and stay React-free. Data stays English: squads, players, clubs and position
@@ -410,6 +414,7 @@ npm run check         # run before reporting any work complete
 npm run shots           # capture design/screens/ from the running web build
 npm run shots:store     # capture the 1320×2868 App Store profile to design/store/
 npm run shots:play      # capture the 1080×1920 (9:16) Google Play profile to design/play/
+npm run shots:play -- --lang=<code>   # the same, in one supported language, to design/play/<code>/
 npm run gen:play-assets # write design/play/icon-512.png and feature-graphic.jpg
 ```
 

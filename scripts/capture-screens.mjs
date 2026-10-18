@@ -19,14 +19,21 @@ import { chromium } from 'playwright';
 import { killServerTree, startExpoWeb, waitForServer } from './dev-server.mjs';
 import {
   assertProfileDimensions,
+  outDirFor,
   readJpegDimensions,
   readPngDimensions,
+  resolveLanguageArg,
   resolveProfile,
 } from './screenshot-profiles.ts';
 
 const PORT = 8082;
 const BASE = `http://localhost:${PORT}`;
 const PROFILE = resolveProfile(process.argv.slice(2));
+// `--lang=de` (#145) captures in one language, into `<profile dir>/de/`. The
+// app reads `languagePreference` from its persisted store, so each page seeds
+// it before the app loads; without the flag the app follows the browser.
+const LANGUAGE = resolveLanguageArg(process.argv.slice(2));
+const OUT_DIR = outDirFor(PROFILE, LANGUAGE);
 
 // Fixed so a round is reproducible and design can diff turn against turn.
 const SEED = 20260821;
@@ -87,6 +94,23 @@ async function openCapture(browser, { colorScheme, suffix }) {
   page.on('pageerror', (error) => {
     pageError = error;
   });
+
+  if (LANGUAGE) {
+    // Merged into whatever the store already holds, so a best score written
+    // by an earlier round on this page survives the next navigation.
+    await page.addInitScript((language) => {
+      const key = 'escuadra-progress';
+      let stored = null;
+      try {
+        stored = JSON.parse(localStorage.getItem(key) ?? 'null');
+      } catch {
+        stored = null;
+      }
+      const next = stored ?? { state: {}, version: 0 };
+      next.state = { ...next.state, languagePreference: language };
+      localStorage.setItem(key, JSON.stringify(next));
+    }, LANGUAGE);
+  }
 
   const ext = PROFILE.format === 'jpeg' ? 'jpg' : 'png';
 
@@ -153,7 +177,7 @@ async function openCapture(browser, { colorScheme, suffix }) {
         })
         .catch(() => {});
       await page.waitForTimeout(REVEAL_MS);
-      const filePath = `${PROFILE.outDir}/${capture.file(base)}`;
+      const filePath = `${OUT_DIR}/${capture.file(base)}`;
       await page.screenshot({
         path: filePath,
         type: PROFILE.format,
@@ -184,7 +208,8 @@ async function openCapture(browser, { colorScheme, suffix }) {
 // and only nationality options carry flag images. Design needs to see both.
 //
 // `name`/`position` are the *correct* answers to that squad's first question
-// at that seed. They are seed- and data-bound on purpose: if the squad data or
+// at that seed. `position` is the position's data code (GK/DF/MF/FW), tapped
+// by `testID`. They are seed- and data-bound on purpose: if the squad data or
 // the seed moves, Playwright fails on the missing option rather than quietly
 // capturing some other player's question.
 const L3_THIRD_PART_SHOTS = [
@@ -216,7 +241,7 @@ const L3_THIRD_PART_SHOTS = [
 async function captureLevel3ThirdPart(capture, shot) {
   await capture.open(shot.path);
   await capture.tap(shot.name);
-  await capture.tap(shot.position);
+  await capture.tapId(`answer-position-${shot.position}`);
   await capture.shoot(shot.file);
 }
 
@@ -381,6 +406,12 @@ async function captureTheme(browser, colorScheme, suffix) {
 
   try {
     await capture.open('/');
+    if (LANGUAGE) {
+      const chip = await capture.page.getByTestId('language-chip').innerText();
+      if (chip.trim() !== LANGUAGE.toUpperCase()) {
+        throw new Error(`--lang=${LANGUAGE}: Home's language chip says "${chip}"`);
+      }
+    }
     await capture.shoot('01-home');
     await capture.tapId('language-chip', { wait: SHEET_MS });
     await capture.shoot('01b-home-language');
@@ -391,7 +422,7 @@ async function captureTheme(browser, colorScheme, suffix) {
     await capture.open('/team-picker');
     await capture.shoot('02-team-picker-clubs');
     // Same screen, other segment — a tap rather than a second navigation.
-    await capture.tap('National Teams', { exact: false, wait: SWAP_MS });
+    await capture.tapId('segment-nation', { wait: SWAP_MS });
     await capture.shoot('03-team-picker-nations');
 
     await capture.open('/team/rma/difficulty');
@@ -425,7 +456,7 @@ const server = startExpoWeb(PORT);
 
 let browser;
 try {
-  await mkdir(PROFILE.outDir, { recursive: true });
+  await mkdir(OUT_DIR, { recursive: true });
   await waitForServer(BASE);
 
   browser = await chromium.launch();
