@@ -1,7 +1,8 @@
 // The Deutsch catalog (#145), typed against ./en.ts: same keys, same order,
-// same parameters. Drafted by Claude and reviewed by a native speaker before
-// 'de' joined SUPPORTED_LANGUAGES. About and the store tagline are English
-// until #146 and #147 translate them with their legal and listing copy.
+// same parameters. Drafted by Claude for native review (#145); 'de' stays in
+// SUPPORTED_LANGUAGES only once a native speaker signs it off. About and the
+// store tagline are English until #146 and #147 translate them with their
+// legal and listing copy.
 // Escuadra and a la escuadra come from ./names and are never translated.
 import { en, type CalendarDate, type Messages } from './en';
 
@@ -60,14 +61,14 @@ export const de: Messages = {
     whoWears: (no: number) => `Wer trägt die ${no}?`,
     askPosition: 'Welche Position?',
     askClub: 'Welcher Verein?',
-    askNationality: 'Welches Land?',
+    askNationality: 'Welche Nation?',
     seeResults: 'Zum Ergebnis',
     next: 'Weiter',
     nextQuestion: 'Nächste Frage',
     gotItNext: 'Gemerkt – weiter',
-    // "Zum Ergebnis · zum Überspringen tippen" is 37 chars against 26: the
-    // filling bar says it moves on by itself, "oder tippen" says a tap is sooner.
-    tapToSkip: (label: string) => `${label} · oder tippen`,
+    // "Zum Ergebnis · zum Überspringen tippen" is 37 chars against 26. The
+    // ellipsis says it moves on in a moment; "oder tippen" says a tap is sooner.
+    tapToSkip: (label: string) => `${label} … oder tippen`,
     slotSpoken: {
       given: (slot: string, value: string) => `${slot}: ${value}`,
       active: (slot: string) => `${slot}: wird gefragt`,
@@ -102,7 +103,7 @@ export const de: Messages = {
     // "Namen ausblenden" is 16 chars against 12. As a switch, it is spoken
     // "Ohne Namen, ein" or "…, aus".
     hideNames: 'Ohne Namen',
-    showNames: 'Mit Namen',
+    showNames: 'Namen zeigen',
     showAsList: 'Als Liste zeigen',
     showAsCards: 'Als Karten zeigen',
     all: 'Alle',
@@ -139,7 +140,7 @@ export const de: Messages = {
     chooseTeam: 'Anderes Team wählen',
     // "Daneben", as the round says after a miss.
     missedCount: (count: number) => `DANEBEN · ${count} SPIELER`,
-    swipeForAll: 'Wisch für alle',
+    swipeForAll: 'Wisch für mehr',
     nothingMissed: (count: number) => `ALLE ${count} · KEIN FEHLER`,
     roundSpoken: (right: number, total: number) => `Runde: ${right} von ${total} richtig`,
   },
