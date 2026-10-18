@@ -414,7 +414,7 @@ export const COUNTRY_NAMES: Record<SupportedLanguage, CountryNames> = {
     MAR: 'Marruecos',
     MEX: 'México',
     MKD: 'Macedonia del Norte',
-    MLI: 'Mali',
+    MLI: 'Malí',
     MNE: 'Montenegro',
     MOZ: 'Mozambique',
     MTN: 'Mauritania',

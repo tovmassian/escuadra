@@ -183,8 +183,9 @@ export const es: Messages = {
     text: 'Texto',
     // "Vista previa" is 12 chars against 10.
     preview: 'Así queda',
-    // "Historias", the word Instagram and WhatsApp use in Spanish.
-    imageHint: 'Imagen para historias. Sin fotos ni nombres: tus amigos también pueden jugar.',
+    // "Historias", the word Instagram and Facebook use in Spanish. No photos
+    // or names give the answers away, so friends can still play.
+    imageHint: 'Imagen para historias. Sin fotos ni nombres, para que tus amigos puedan jugar.',
     textHint: 'La cuadrícula de aciertos para tus grupos, con un enlace a la app.',
     shareImage: 'Compartir imagen',
     shareText: 'Compartir texto',
