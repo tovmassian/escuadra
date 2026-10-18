@@ -69,10 +69,12 @@ export const en = {
   },
   /** ≤ 3 chars: a position's code on an answer tile, a slot chip, a Study filter pill and a card badge. */
   positionCodes: { GK: 'GK', DF: 'DF', MF: 'MF', FW: 'FW' },
-  /** The word under a position tile's code, and in Study's spoken label. */
+  /** ≤ 11 chars: the word under a position tile's code, and in Study's spoken label. */
   positions: { GK: 'Keeper', DF: 'Defender', MF: 'Midfield', FW: 'Forward' },
   /** Slot names, spoken before a slot's value. */
   slots: { NAME: 'Name', POS: 'Position', AGE: 'Age', CLUB: 'Club', NAT: 'Nationality' },
+  /** ≤ 6 chars: a slot chip's label above its value, in capitals. */
+  slotCodes: { NAME: 'NAME', POS: 'POS', AGE: 'AGE', CLUB: 'CLUB', NAT: 'NAT' },
   round: {
     /** ≤ 12 chars: the prompt row once a question is scored. */
     correct: 'Correct',

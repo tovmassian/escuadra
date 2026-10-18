@@ -138,7 +138,7 @@ describe.each(SUPPORTED_LANGUAGES)('%s', (language) => {
     const wrong = catalogLeaves(messages).filter(
       (leaf) =>
         !LATER.some((prefix) => leaf.path.startsWith(prefix)) &&
-        (/[^ ][?!:;»]/.test(leaf.text) || /«[^ ]/.test(leaf.text)),
+        (/[^\u00A0][?!:;»]/.test(leaf.text) || /«[^\u00A0]/.test(leaf.text)),
     );
     expect(wrong.map((leaf) => `${leaf.path}: ${leaf.text}`)).toEqual([]);
   });
