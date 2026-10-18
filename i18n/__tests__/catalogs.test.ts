@@ -49,6 +49,15 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     // "{1}: {2}" has no words.
     'round.slotSpoken.given',
   ],
+  it: [
+    // Club is the Italian word too, and CLUB its chip code.
+    'slots.CLUB',
+    'slotCodes.CLUB',
+    // "{1}: {2}" has no words.
+    'round.slotSpoken.given',
+    // "Home" is what Italian apps call the start screen.
+    'picker.home',
+  ],
 };
 
 const english = catalogLeaves(en);
