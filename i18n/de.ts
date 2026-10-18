@@ -60,7 +60,7 @@ export const de: Messages = {
     whoWears: (no: number) => `Wer trägt die ${no}?`,
     askPosition: 'Welche Position?',
     askClub: 'Welcher Verein?',
-    askNationality: 'Welche Nationalität?',
+    askNationality: 'Welches Land?',
     seeResults: 'Zum Ergebnis',
     next: 'Weiter',
     nextQuestion: 'Nächste Frage',
@@ -123,7 +123,8 @@ export const de: Messages = {
     failTitle: 'Die hier solltest du dir merken',
     toClear: (target: string, level: number) => `Hol ${target}, um Level ${level} zu schaffen.`,
     toUnlock: (target: string, level: number) => `Hol ${target}, um Level ${level} freizuschalten.`,
-    youPicked: (picked: string) => `Du hast ${picked} gewählt`,
+    // The words first: a long name truncates, the words must not.
+    youPicked: (picked: string) => `Deine Wahl: ${picked}`,
     nameRight: 'Name richtig',
     nameAndPositionRight: 'Name und Position richtig',
     wrongPart: {
@@ -132,7 +133,7 @@ export const de: Messages = {
       nationality: (right: string, picked: string) => `Nationalität: ${right}, nicht ${picked}`,
     },
     close: 'Schließen, anderes Team wählen',
-    studySquad: 'Diesen Kader lernen',
+    studySquad: 'Kader lernen',
     retry: 'Runde wiederholen',
     playLevel: (level: number) => `Level ${level} spielen`,
     chooseTeam: 'Anderes Team wählen',
@@ -144,7 +145,7 @@ export const de: Messages = {
   },
   share: {
     title: 'Runde teilen',
-    stillLearning: 'Noch am Lernen',
+    stillLearning: 'Lerne noch',
     // The name first, so it needs no article or case ending.
     question: (team: string) => `${team}: Kennst du den ganzen Kader?`,
     image: 'Bild',
@@ -179,7 +180,7 @@ export const de: Messages = {
         description: 'Name aus 6 Optionen, dann Position, dann Verein oder Nationalität.',
       },
     },
-    studySquad: 'Diesen Kader lernen',
+    studySquad: 'Kader lernen',
     updated: (date: string) => `Stand: ${date} · Wikipedia`,
     best: (correct: number, total: number) => `REKORD ${correct}/${total}`,
   },
