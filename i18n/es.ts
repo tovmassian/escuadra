@@ -70,8 +70,9 @@ export const es: Messages = {
     askPosition: '¿Qué posición?',
     askClub: '¿Qué club?',
     // Not "¿Qué país?": on a club squad that could mean the country the
-    // player plays in. Nacionalidad, as on the NAC chip.
-    askNationality: '¿Qué nacionalidad?',
+    // player plays in. Nacionalidad, as on the NAC chip. Not "¿Qué
+    // nacionalidad?" either: it wraps the prompt to two lines at 360 dp.
+    askNationality: '¿Nacionalidad?',
     // "Ver resultados" (14) would make the auto-next bar 28 chars against 26.
     seeResults: 'Resultados',
     // "Siguiente" is 9 chars against 8. "Seguimos…" says the round moves on
@@ -155,8 +156,9 @@ export const es: Messages = {
       nationality: (right: string, picked: string) => `nacionalidad: ${right}, no ${picked}`,
     },
     close: 'Cerrar y elegir otro equipo',
-    // "Repasar": the word for going over something before a test.
-    studySquad: 'Repasar la plantilla',
+    // "Repasar": the word for going over something before a test. "Repasar
+    // la plantilla" wraps the outline button beside the retry icon.
+    studySquad: 'Repasar plantilla',
     retry: 'Repetir la ronda',
     playLevel: (level: number) => `Jugar el nivel ${level}`,
     chooseTeam: 'Elegir otro equipo',
@@ -173,7 +175,8 @@ export const es: Messages = {
   share: {
     title: 'Comparte tu ronda',
     // Speaks to whoever receives the picture: not there yet, but working on it.
-    stillLearning: 'Sigo aprendiendo',
+    // "Sigo aprendiendo" wraps the picture's title to two lines.
+    stillLearning: 'Aprendiendo',
     // The name first, so it needs no article ("de la plantilla del Barça").
     question: (team: string) => `${team}: ¿te sabes la plantilla?`,
     image: 'Imagen',
@@ -191,7 +194,8 @@ export const es: Messages = {
   ladder: {
     play: 'Jugar',
     playAgain: 'Jugar otra vez',
-    unlockHint: (target: string, level: number) => `${target} en el nivel ${level}`,
+    // The level first: "8/10 en el nivel 1" wraps the rung titles beside it.
+    unlockHint: (target: string, level: number) => `Nivel ${level}: ${target}`,
     rungLocked: (title: string, hint: string) => `${title}, bloqueado, ${hint}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, récord ${correct} de ${total}`,
@@ -212,7 +216,7 @@ export const es: Messages = {
           'El nombre entre 6 opciones, luego la posición y luego el club o la nacionalidad.',
       },
     },
-    studySquad: 'Repasar la plantilla',
+    studySquad: 'Repasar plantilla',
     updated: (date: string) => `Actualizado el ${date} · Wikipedia`,
     best: (correct: number, total: number) => `RÉCORD ${correct}/${total}`,
   },
