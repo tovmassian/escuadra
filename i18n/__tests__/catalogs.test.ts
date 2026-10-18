@@ -40,6 +40,15 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     // "Clubs" is French too.
     'picker.clubs',
   ],
+  es: [
+    // Club is the Spanish word too, and CLUB its chip code.
+    'slots.CLUB',
+    'slotCodes.CLUB',
+    // POS for Posición.
+    'slotCodes.POS',
+    // "{1}: {2}" has no words.
+    'round.slotSpoken.given',
+  ],
 };
 
 const english = catalogLeaves(en);
