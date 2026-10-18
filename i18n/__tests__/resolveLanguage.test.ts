@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { LANGUAGES, resolveLanguage, SUPPORTED_LANGUAGES } from '../resolveLanguage';
+import { LANGUAGES, resolveLanguage, SUPPORTED_LANGUAGES, type Language } from '../resolveLanguage';
 
 describe('resolveLanguage', () => {
   describe('following the phone', () => {
@@ -42,8 +42,10 @@ describe('resolveLanguage', () => {
     });
   });
 
-  it('ships English only until #145 adds a reviewed language', () => {
-    expect(SUPPORTED_LANGUAGES).toEqual(['en']);
-    expect(resolveLanguage('system', ['es-MX'], SUPPORTED_LANGUAGES)).toBe('en');
+  it('opens a language not yet reviewed in English (#145)', () => {
+    const supported: readonly Language[] = SUPPORTED_LANGUAGES;
+    for (const language of LANGUAGES.filter((l) => !supported.includes(l))) {
+      expect(resolveLanguage('system', [`${language}-XX`], SUPPORTED_LANGUAGES)).toBe('en');
+    }
   });
 });
