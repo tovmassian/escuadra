@@ -70,8 +70,9 @@ export const fr: Messages = {
     askPosition: 'Quel poste ?',
     askClub: 'Quel club ?',
     // Not "Quel pays ?": on a club squad that could mean the country the
-    // player plays in. Nationalité, as on the NAT chip.
-    askNationality: 'Quelle nationalité ?',
+    // player plays in. Nationalité, as on the NAT chip. Not "Quelle
+    // nationalité ?" either: it wraps the prompt to two lines at 360 dp.
+    askNationality: 'Nationalité ?',
     // "Voir les résultats" is 18 chars against 14.
     seeResults: 'Résultats',
     next: 'Suivant',
@@ -185,7 +186,8 @@ export const fr: Messages = {
   ladder: {
     play: 'Jouer',
     playAgain: 'Rejouer',
-    unlockHint: (target: string, level: number) => `Fais ${target} au niveau ${level}`,
+    // No verb: "Fais 8/10 au niveau 1" wraps the rung titles beside it.
+    unlockHint: (target: string, level: number) => `${target} au niveau ${level}`,
     rungLocked: (title: string, hint: string) => `${title}, verrouillé, ${hint}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} sur ${total}`,
