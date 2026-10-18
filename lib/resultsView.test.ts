@@ -112,26 +112,33 @@ describe('missedLine', () => {
   const nat: QuestionPart = { kind: 'nationality', options: ['France', 'Spain'], correctIndex: 1 };
 
   it('names the wrong pick on the name', () => {
-    expect(missedLine(missed([name], [0]), en)).toBe('You picked Marc Pubill');
+    expect(missedLine(missed([name], [0]), 'en', en)).toBe('You picked Marc Pubill');
   });
 
   it('says the name was right when the position was wrong', () => {
-    expect(missedLine(missed([name, pos], [1, 3]), en)).toBe(
+    expect(missedLine(missed([name, pos], [1, 3]), 'en', en)).toBe(
       'Name right · position is MF, you said FW',
     );
   });
 
   it('says name and position were right when the club or nationality was wrong', () => {
-    expect(missedLine(missed([name, pos, club], [1, 2, 0]), en)).toBe(
+    expect(missedLine(missed([name, pos, club], [1, 2, 0]), 'en', en)).toBe(
       'Name and position right · club is Barcelona, you said Arsenal',
     );
-    expect(missedLine(missed([name, pos, nat], [1, 2, 0]), en)).toBe(
+    expect(missedLine(missed([name, pos, nat], [1, 2, 0]), 'en', en)).toBe(
       'Name and position right · nationality is Spain, you said France',
     );
   });
 
+  it('draws the position codes from the catalog', () => {
+    const spanish = { ...en, positionCodes: { GK: 'POR', DF: 'DEF', MF: 'MED', FW: 'DEL' } };
+    expect(missedLine(missed([name, pos], [1, 3]), 'en', spanish)).toBe(
+      'Name right · position is MED, you said DEL',
+    );
+  });
+
   it('is empty for a question with no wrong part', () => {
-    expect(missedLine(missed([name], [1]), en)).toBe('');
+    expect(missedLine(missed([name], [1]), 'en', en)).toBe('');
   });
 });
 

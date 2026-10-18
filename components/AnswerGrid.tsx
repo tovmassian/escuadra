@@ -5,10 +5,10 @@ import { AnswerTile } from './AnswerTile';
 import { riseIn } from './riseIn';
 import type { ShotTap } from './useShot';
 import type { FlagCode } from '@/assets/flags/generated';
-import { useT } from '@/i18n/useT';
+import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
 import type { QuestionPart } from '@/lib/questionEngine';
-import { positionLabel, tileVerdict, type AnswerLayout } from '@/lib/roundView';
+import { optionText, positionLabel, tileVerdict, type AnswerLayout } from '@/lib/roundView';
 import { durations, spacing, spotlightMotion } from '@/theme/tokens';
 
 interface AnswerGridProps {
@@ -44,6 +44,7 @@ export function AnswerGrid({
 }: AnswerGridProps) {
   const reduced = useReducedMotion();
   const t = useT();
+  const language = useLanguage();
   // The grid whose tiles may be pressed. The next part's tiles sit in the same
   // spot as the ones just answered, so a double tap or a bounce would answer
   // them as well. Presses are ignored until the old tiles have faded
@@ -59,13 +60,13 @@ export function AnswerGrid({
     part.kind === 'position'
       ? part.options.map((option, index) => ({
           index,
-          label: option,
+          label: optionText(part, index, language, t),
           sub: positionLabel(option, t),
           flag: undefined,
         }))
       : part.options.map((option, index) => ({
           index,
-          label: option,
+          label: optionText(part, index, language, t),
           sub: undefined,
           flag: part.kind === 'nationality' ? flagFor(option) : undefined,
         }));

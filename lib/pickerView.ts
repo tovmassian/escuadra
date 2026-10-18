@@ -87,21 +87,43 @@ export function leagueFilters(squads: SquadManifestEntry[]): LeagueFilter[] {
   return ['ALL', ...LEAGUE_ORDER.filter((l) => present.has(l))];
 }
 
-/** The rows the picker shows. `kind` always applies; `league` narrows clubs
- *  only — nation entries carry no league, so it is ignored on that tab.
- *  `query` narrows further by a case-insensitive substring of the name,
- *  composing with `kind` and `league` rather than replacing them. */
+/** How the picker names and orders its rows. `nameOf` is the displayed name
+ *  (`squadDisplayName`), injected so this module stays language-free. */
+export interface SquadNames {
+  nameOf: (squad: SquadManifestEntry) => string;
+  /** The language the list is sorted in: `localeCompare`'s locale. */
+  locale: string;
+}
+
+/** Lowercase, accents removed: "España" and "espana" fold to the same text.
+ *  `normalize('NFD')` splits an accented letter into the letter and a combining
+ *  mark (U+0300–U+036F), which the replace drops. No `Intl`. */
+function fold(text: string): string {
+  return text
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase();
+}
+
+/** The rows the picker shows, sorted by the displayed name. `kind` always
+ *  applies; `league` narrows clubs only — nation entries carry no league, so it
+ *  is ignored on that tab. `query` narrows further by a substring of the
+ *  displayed name or of the English one, ignoring case and accents, composing
+ *  with `kind` and `league` rather than replacing them. */
 export function visibleSquads(
   squads: SquadManifestEntry[],
   kind: 'club' | 'nation',
   league: LeagueFilter,
+  names: SquadNames,
   query = '',
 ): SquadManifestEntry[] {
-  const q = query.trim().toLowerCase();
-  return squads.filter(
-    (s) =>
-      s.kind === kind &&
-      (kind !== 'club' || league === 'ALL' || s.league === league) &&
-      (q === '' || s.name.toLowerCase().includes(q)),
-  );
+  const q = fold(query.trim());
+  return squads
+    .filter(
+      (s) =>
+        s.kind === kind &&
+        (kind !== 'club' || league === 'ALL' || s.league === league) &&
+        (q === '' || fold(names.nameOf(s)).includes(q) || fold(s.name).includes(q)),
+    )
+    .sort((a, b) => names.nameOf(a).localeCompare(names.nameOf(b), names.locale));
 }

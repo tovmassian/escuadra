@@ -3,6 +3,8 @@
 
 import { A_LA_ESCUADRA_TITLE } from '@/i18n/names';
 import type { Messages } from '@/i18n/en';
+import type { SupportedLanguage } from '@/i18n/resolveLanguage';
+import { optionText } from '@/lib/roundView';
 import { PASS_RATIO, ROUND_LENGTH } from '@/lib/scoring';
 import type { QuestionResult } from '@/stores/session';
 
@@ -99,15 +101,19 @@ export function resultCopy(
  * - a later part: what was right first, then the real value and the pick.
  * Empty when no part is wrong.
  */
-export function missedLine(result: QuestionResult, messages: Messages): string {
+export function missedLine(
+  result: QuestionResult,
+  language: SupportedLanguage,
+  messages: Messages,
+): string {
   const { results } = messages;
   for (let i = 0; i < result.parts.length; i++) {
     const answered = result.parts[i];
     const part = result.question.parts[i];
     if (!answered || !part || answered.correct) continue;
-    const picked = part.options[answered.pickedIndex] ?? '—';
+    const picked = optionText(part, answered.pickedIndex, language, messages);
     if (part.kind === 'name') return results.youPicked(picked);
-    const right = part.options[part.correctIndex] ?? '—';
+    const right = optionText(part, part.correctIndex, language, messages);
     const before = i === 1 ? results.nameRight : results.nameAndPositionRight;
     return `${before} · ${results.wrongPart[part.kind](right, picked)}`;
   }

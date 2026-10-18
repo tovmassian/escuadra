@@ -1,7 +1,9 @@
 // Pure view-model helpers for the play screen. No React and no store values —
 // only types — so this stays unit-testable, since the project's Vitest setup
 // has no React Native renderer.
+import { nationalityName } from '@/i18n/displayNames';
 import type { Messages } from '@/i18n/en';
+import type { SupportedLanguage } from '@/i18n/resolveLanguage';
 import type { Level, Question, QuestionPart } from '@/lib/questionEngine';
 import type { QuestionResult } from '@/stores/session';
 import type { Position, Squad } from '@/types/squad';
@@ -188,6 +190,46 @@ export function positionLabel(position: Position, messages: Messages): string {
   return messages.positions[position];
 }
 
+const POSITION_CODES: readonly string[] = ['GK', 'DF', 'MF', 'FW'];
+
+/** A slot's value is a string, so a position in it needs narrowing back. */
+function isPosition(value: string): value is Position {
+  return POSITION_CODES.includes(value);
+}
+
+/** A position's short code on a tile, chip or badge: GK, DF, MF, FW in English. */
+export function positionCode(position: Position, messages: Messages): string {
+  return messages.positionCodes[position];
+}
+
+/** The text of one answer option. The part keeps the English key (a
+ *  nationality, a position code), so the flag and the choice of distractors
+ *  never see a translation. */
+export function optionText(
+  part: QuestionPart,
+  index: number,
+  language: SupportedLanguage,
+  messages: Messages,
+): string {
+  const value = part.options[index] ?? '—';
+  if (part.kind === 'position') return isPosition(value) ? positionCode(value, messages) : value;
+  if (part.kind === 'nationality') return nationalityName(value, language);
+  return value;
+}
+
+/** What a slot chip prints, or null while its part is being asked. The slot
+ *  keeps the English value so the chip can look up its flag. */
+export function slotValueText(
+  slot: Slot,
+  language: SupportedLanguage,
+  messages: Messages,
+): string | null {
+  if (slot.value === null) return null;
+  if (slot.key === 'POS' && isPosition(slot.value)) return positionCode(slot.value, messages);
+  if (slot.key === 'NAT') return nationalityName(slot.value, language);
+  return slot.value;
+}
+
 /**
  * What the footer offers (spec §2.4):
  * - waiting for a tap;
@@ -235,6 +277,7 @@ export function streakMilestone(previous: number, current: number): boolean {
 
 /** A slot chip's screen-reader label. A slot still being asked carries no
  *  value, so its label cannot read out the answer. */
-export function slotSpoken(slot: Slot, messages: Messages): string {
-  return messages.round.slotSpoken[slot.state](messages.slots[slot.key], slot.value ?? '');
+export function slotSpoken(slot: Slot, language: SupportedLanguage, messages: Messages): string {
+  const value = slotValueText(slot, language, messages) ?? '';
+  return messages.round.slotSpoken[slot.state](messages.slots[slot.key], value);
 }

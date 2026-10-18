@@ -3,7 +3,9 @@
 // line, what a screen reader hears, and the photo credits. Kept out of the
 // screen so it is unit-testable.
 
+import { nationalityName } from '@/i18n/displayNames';
 import type { Messages } from '@/i18n/en';
+import type { SupportedLanguage } from '@/i18n/resolveLanguage';
 import { photoFor, type PhotoCreditRow } from '@/lib/photos';
 import { positionLabel } from '@/lib/roundView';
 import type { Player, Position, RosterEntry, Squad } from '@/types/squad';
@@ -41,8 +43,12 @@ export function studyCount(
 
 /** The line under a name: a club squad's players show their nationality
  *  (with its flag), a nation squad's their club. */
-export function studyAffiliation(player: Player, kind: Squad['kind']): string {
-  return kind === 'club' ? player.nationality : (player.club ?? '—');
+export function studyAffiliation(
+  player: Player,
+  kind: Squad['kind'],
+  language: SupportedLanguage,
+): string {
+  return kind === 'club' ? nationalityName(player.nationality, language) : (player.club ?? '—');
 }
 
 /** What a screen reader hears for a player. With Hide names on, the name is

@@ -7,6 +7,7 @@ import {
   teamMetaLine,
   teamProgress,
   visibleSquads,
+  type SquadNames,
 } from './pickerView';
 
 describe('teamProgress', () => {
@@ -119,63 +120,112 @@ describe('leagueFilters', () => {
   });
 });
 
+// The English name of each fixture entry is its id (see `entry`). These tables
+// stand in for a language the app does not ship yet.
+const ID_NAMES: SquadNames = { nameOf: (s) => s.id, locale: 'en' };
+
 describe('visibleSquads', () => {
-  it('shows every club under ALL', () => {
-    expect(visibleSquads(MANIFEST, 'club', 'ALL').map((s) => s.id)).toEqual([
-      'ars',
-      'bar',
-      'rma',
-      'juv',
-    ]);
+  const show = (
+    kind: 'club' | 'nation',
+    league: Parameters<typeof visibleSquads>[2],
+    query = '',
+    names: SquadNames = ID_NAMES,
+    squads: SquadManifestEntry[] = MANIFEST,
+  ) => visibleSquads(squads, kind, league, names, query).map((s) => s.id);
+
+  it('shows every club under ALL, sorted by name', () => {
+    expect(show('club', 'ALL')).toEqual(['ars', 'bar', 'juv', 'rma']);
   });
 
   it('narrows clubs to one league', () => {
-    expect(visibleSquads(MANIFEST, 'club', 'la-liga').map((s) => s.id)).toEqual(['bar', 'rma']);
+    expect(show('club', 'la-liga')).toEqual(['bar', 'rma']);
   });
 
   it('never mixes nations into the clubs tab', () => {
-    expect(visibleSquads(MANIFEST, 'club', 'ALL').every((s) => s.kind === 'club')).toBe(true);
+    expect(show('club', 'ALL')).not.toContain('arg');
   });
 
   it('ignores the league on the nations tab', () => {
     // A stale league must not empty the nations list, since nation entries
     // carry no league at all.
-    expect(visibleSquads(MANIFEST, 'nation', 'la-liga').map((s) => s.id)).toEqual(['arg', 'bra']);
+    expect(show('nation', 'la-liga')).toEqual(['arg', 'bra']);
   });
 
   it('returns an empty list for a league with no clubs', () => {
-    expect(visibleSquads(MANIFEST, 'club', 'bundesliga')).toEqual([]);
+    expect(show('club', 'bundesliga')).toEqual([]);
   });
 
   it('filters by a case-insensitive substring of the name', () => {
-    expect(visibleSquads(MANIFEST, 'club', 'ALL', 'AR').map((s) => s.id)).toEqual(['ars', 'bar']);
+    expect(show('club', 'ALL', 'AR')).toEqual(['ars', 'bar']);
   });
 
   it('trims surrounding whitespace from the query', () => {
-    expect(visibleSquads(MANIFEST, 'club', 'ALL', '  ar  ').map((s) => s.id)).toEqual([
-      'ars',
-      'bar',
-    ]);
+    expect(show('club', 'ALL', '  ar  ')).toEqual(['ars', 'bar']);
   });
 
   it('treats an empty query as no filter', () => {
-    expect(visibleSquads(MANIFEST, 'club', 'ALL', '').map((s) => s.id)).toEqual([
-      'ars',
-      'bar',
-      'rma',
-      'juv',
-    ]);
+    expect(show('club', 'ALL', '')).toEqual(['ars', 'bar', 'juv', 'rma']);
   });
 
   it('composes the query with the league filter', () => {
-    expect(visibleSquads(MANIFEST, 'club', 'la-liga', 'ba').map((s) => s.id)).toEqual(['bar']);
+    expect(show('club', 'la-liga', 'ba')).toEqual(['bar']);
   });
 
   it('filters nations by name too', () => {
-    expect(visibleSquads(MANIFEST, 'nation', 'ALL', 'ar').map((s) => s.id)).toEqual(['arg']);
+    expect(show('nation', 'ALL', 'ar')).toEqual(['arg']);
   });
 
   it('returns an empty list when nothing matches the query', () => {
-    expect(visibleSquads(MANIFEST, 'club', 'ALL', 'zzz')).toEqual([]);
+    expect(show('club', 'ALL', 'zzz')).toEqual([]);
+  });
+
+  describe('with displayed names', () => {
+    // Three nations as a Spanish-speaking player would see them. The English
+    // name stays on the entry, as it does in data/index.json.
+    const nations = [
+      { ...entry('esp', 'nation'), name: 'Spain' },
+      { ...entry('ger', 'nation'), name: 'Germany' },
+      { ...entry('aus', 'nation'), name: 'Austria' },
+    ] as SquadManifestEntry[];
+    const spanish: Record<string, string> = {
+      esp: 'España',
+      ger: 'Alemania',
+      aus: 'Austria',
+    };
+    const es: SquadNames = { nameOf: (s) => spanish[s.id] ?? s.name, locale: 'es' };
+
+    it('sorts by the displayed name, not by the English one', () => {
+      expect(show('nation', 'ALL', '', es, nations)).toEqual(['ger', 'aus', 'esp']);
+      expect(show('nation', 'ALL', '', { ...es, nameOf: (s) => s.name }, nations)).toEqual([
+        'aus',
+        'ger',
+        'esp',
+      ]);
+    });
+
+    it('sorts an accented name among its unaccented neighbours', () => {
+      const accented: Record<string, string> = { esp: 'Álava', ger: 'Zaragoza', aus: 'Barcelona' };
+      const names: SquadNames = { nameOf: (s) => accented[s.id] ?? s.name, locale: 'es' };
+      expect(show('nation', 'ALL', '', names, nations)).toEqual(['esp', 'aus', 'ger']);
+    });
+
+    it('finds the same team by "espana", "España" and "Spain"', () => {
+      expect(show('nation', 'ALL', 'espana', es, nations)).toEqual(['esp']);
+      expect(show('nation', 'ALL', 'España', es, nations)).toEqual(['esp']);
+      expect(show('nation', 'ALL', 'Spain', es, nations)).toEqual(['esp']);
+    });
+
+    it('ignores accents and case in the typed query and in the name', () => {
+      expect(show('nation', 'ALL', 'ESPAÑA', es, nations)).toEqual(['esp']);
+      expect(show('nation', 'ALL', 'alemanía', es, nations)).toEqual(['ger']);
+    });
+
+    it('matches the English name even when another is displayed', () => {
+      expect(show('nation', 'ALL', 'germ', es, nations)).toEqual(['ger']);
+    });
+
+    it('does not match a name that appears in neither', () => {
+      expect(show('nation', 'ALL', 'francia', es, nations)).toEqual([]);
+    });
   });
 });

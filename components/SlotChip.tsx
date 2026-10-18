@@ -9,9 +9,9 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { Flag } from './Flag';
-import { useT } from '@/i18n/useT';
+import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
-import { slotSpoken, type Slot, type SlotState } from '@/lib/roundView';
+import { slotSpoken, slotValueText, type Slot, type SlotState } from '@/lib/roundView';
 import {
   borderWidths,
   durations,
@@ -53,6 +53,7 @@ function look(colors: Palette, state: SlotState): { line: string; text: string; 
 export function SlotChip({ slot }: { slot: Slot }) {
   const colors = useThemeColors();
   const t = useT();
+  const language = useLanguage();
   const reduced = useReducedMotion();
   const scale = useSharedValue(1);
   const previous = useRef(slot.state);
@@ -71,7 +72,8 @@ export function SlotChip({ slot }: { slot: Slot }) {
 
   const pulse = useAnimatedStyle(() => ({ transform: [{ scale: scale.value }] }));
   const { line, text, dashed } = look(colors, slot.state);
-  const shown = slot.value ?? (slot.state === 'active' ? '?' : '—');
+  const valueText = slotValueText(slot, language, t);
+  const shown = valueText ?? (slot.state === 'active' ? '?' : '—');
   const flag = slot.key === 'NAT' && slot.value !== null ? flagFor(slot.value) : null;
   const settled = slot.state === 'correct' || slot.state === 'wrong';
   const styles = StyleSheet.create({
@@ -93,9 +95,13 @@ export function SlotChip({ slot }: { slot: Slot }) {
   });
 
   return (
-    <Animated.View style={[styles.chip, pulse]} accessible accessibilityLabel={slotSpoken(slot, t)}>
+    <Animated.View
+      style={[styles.chip, pulse]}
+      accessible
+      accessibilityLabel={slotSpoken(slot, language, t)}
+    >
       <Text style={styles.label}>{slot.key}</Text>
-      {flag ? <Flag code={flag} size="inline" label={slot.value ?? ''} /> : null}
+      {flag ? <Flag code={flag} size="inline" label={valueText ?? ''} /> : null}
       <Animated.Text
         key={`${slot.state}:${shown}`}
         entering={
