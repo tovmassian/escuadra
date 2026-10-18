@@ -8,10 +8,10 @@
 //   node scripts/seed-country-names.ts de
 import type { FlagCode } from '../assets/flags/generated.ts';
 import type { Language } from '../i18n/resolveLanguage.ts';
-import { FLAG_BY_NATIONALITY } from '../lib/flags.ts';
 
 /** FIFA members that are not ISO countries, so CLDR has no name for them. */
-type HomeNation = 'ENG' | 'SCO' | 'WAL' | 'NIR';
+const HOME_NATIONS = ['ENG', 'SCO', 'WAL', 'NIR'] as const;
+type HomeNation = (typeof HOME_NATIONS)[number];
 type SeedLanguage = Exclude<Language, 'en'>;
 
 /** FIFA code → ISO 3166-1 alpha-2 region, the key CLDR names countries by. Kosovo is CLDR's XK. */
@@ -176,7 +176,9 @@ if (language !== 'es' && language !== 'fr' && language !== 'it' && language !== 
 const regions = new Intl.DisplayNames([language], { type: 'region', fallback: 'none' });
 const hand: Partial<Record<FlagCode, string>> = HAND_WRITTEN[language];
 const isoRegion: Partial<Record<FlagCode, string>> = ISO_REGION;
-const codes = [...new Set(Object.values(FLAG_BY_NATIONALITY))].sort();
+// Object.keys widens to string. ISO_REGION's Record type makes its keys exactly the non-home FlagCodes, so the cast only narrows to that set.
+const isoCodes = Object.keys(ISO_REGION) as (keyof typeof ISO_REGION)[];
+const codes = [...isoCodes, ...HOME_NATIONS].sort();
 
 const lines = codes.map((code) => {
   const iso = isoRegion[code];
