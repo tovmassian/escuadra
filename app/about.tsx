@@ -165,8 +165,9 @@ export default function About() {
                   key={i}
                   style={[
                     styles.paragraph,
-                    // Only the card's last paragraph drops its bottom margin.
-                    last(s, sections) && last(i, all) && { marginBottom: 0 },
+                    // Only the card's last paragraph drops its bottom margin;
+                    // with a translation notice, the notice is the last one.
+                    last(s, sections) && last(i, all) && !notice && { marginBottom: 0 },
                   ]}
                 >
                   {p}
@@ -174,7 +175,7 @@ export default function About() {
               ))}
             </Fragment>
           ))}
-          {notice && <Text style={styles.paragraph}>{notice}</Text>}
+          {notice && <Text style={[styles.paragraph, { marginBottom: 0 }]}>{notice}</Text>}
         </View>
 
         <Text style={styles.versionLine}>
