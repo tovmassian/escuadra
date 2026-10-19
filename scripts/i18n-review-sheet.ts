@@ -41,8 +41,8 @@ export function reviewSheet(language: SupportedLanguage): string {
   const name = LANGUAGE_NAMES[language];
   const theirs = new Map(catalogLeaves(CATALOGS[language]).map((leaf) => [leaf.path, leaf]));
   const rows = catalogLeaves(en)
-    // A path #146/#147 translate, or one with no English text: nothing to review.
-    .filter((leaf) => !isLater(leaf.path) && leaf.text !== '')
+    // A path the language has not translated yet, or one with no English text: nothing to review.
+    .filter((leaf) => !isLater(leaf.path, language) && leaf.text !== '')
     .map((leaf) => {
       const translated = theirs.get(leaf.path);
       const limit = budgetByPath.get(leaf.path) ?? '';

@@ -4,7 +4,8 @@ import * as Updates from 'expo-updates';
 import { Fragment } from 'react';
 import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { useT } from '@/i18n/useT';
+import { translationNotice } from '@/i18n/translationNotice';
+import { useLanguage, useT } from '@/i18n/useT';
 import { versionLabel } from '@/lib/aboutView';
 import { useProgress } from '@/stores/progress';
 import { radii, spacing, typography } from '@/theme/tokens';
@@ -14,6 +15,7 @@ export default function About() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
   const t = useT();
+  const notice = translationNotice(useLanguage());
   const last = (i: number, list: readonly unknown[]) => i === list.length - 1;
   const telemetryEnabled = useProgress((s) => s.telemetryEnabled);
   const setTelemetryEnabled = useProgress((s) => s.setTelemetryEnabled);
@@ -172,6 +174,7 @@ export default function About() {
               ))}
             </Fragment>
           ))}
+          {notice && <Text style={styles.paragraph}>{notice}</Text>}
         </View>
 
         <Text style={styles.versionLine}>

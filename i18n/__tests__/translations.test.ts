@@ -8,6 +8,7 @@ import { CATALOGS } from '../catalogs';
 import { countryName } from '../displayNames';
 import { catalogLeaves, isLater } from '../leaves';
 import { resolveLanguage, SUPPORTED_LANGUAGES, type Language } from '../resolveLanguage';
+import { translationNotice } from '../translationNotice';
 
 interface Facts {
   /** `formats.date` for 21 August 2026. */
@@ -21,6 +22,8 @@ interface Facts {
   phoneTag: string;
   /** A no-break space before ? ! : ; and inside « ». */
   frenchSpacing: boolean;
+  /** The last line of a translated privacy text (#141): the English text governs. */
+  translationNotice: string | null;
 }
 
 const FACTS: Record<Language, Facts> = {
@@ -31,6 +34,7 @@ const FACTS: Record<Language, Facts> = {
     countries: { ENG: 'England', ESP: 'Spain' },
     phoneTag: 'en-GB',
     frenchSpacing: false,
+    translationNotice: null,
   },
   de: {
     date: '21. Aug. 2026',
@@ -50,6 +54,8 @@ const FACTS: Record<Language, Facts> = {
     },
     phoneTag: 'de-AT',
     frenchSpacing: false,
+    translationNotice:
+      'Dies ist eine Übersetzung. Weicht sie vom englischen Text ab, gilt der englische Text.',
   },
   fr: {
     date: '21 août 2026',
@@ -66,6 +72,8 @@ const FACTS: Record<Language, Facts> = {
     },
     phoneTag: 'fr-CA',
     frenchSpacing: true,
+    translationNotice:
+      'Ceci est une traduction. En cas de divergence avec le texte anglais, c’est le texte anglais qui fait foi.',
   },
   es: {
     date: '21 ago 2026',
@@ -83,6 +91,8 @@ const FACTS: Record<Language, Facts> = {
     },
     phoneTag: 'es-MX',
     frenchSpacing: false,
+    translationNotice:
+      'Esta es una traducción. Si difiere del texto en inglés, prevalece el texto en inglés.',
   },
   it: {
     date: '21 ago 2026',
@@ -101,6 +111,8 @@ const FACTS: Record<Language, Facts> = {
     },
     phoneTag: 'it-CH',
     frenchSpacing: false,
+    translationNotice:
+      'Questa è una traduzione. In caso di differenze rispetto al testo inglese, prevale il testo inglese.',
   },
 };
 
@@ -128,6 +140,10 @@ describe.each(SUPPORTED_LANGUAGES)('%s', (language) => {
     }
   });
 
+  it('ends a translated privacy text with the notice that English governs', () => {
+    expect(translationNotice(language)).toBe(facts.translationNotice);
+  });
+
   it('is what a phone set to it opens in, on first launch', () => {
     expect(resolveLanguage('system', [facts.phoneTag, 'en-US'], SUPPORTED_LANGUAGES)).toBe(
       language,
@@ -137,7 +153,8 @@ describe.each(SUPPORTED_LANGUAGES)('%s', (language) => {
   it.runIf(facts.frenchSpacing)('puts a no-break space before ? ! : ; and inside « »', () => {
     const wrong = catalogLeaves(messages).filter(
       (leaf) =>
-        !isLater(leaf.path) && (/[^\u00A0][?!:;»]/.test(leaf.text) || /«[^\u00A0]/.test(leaf.text)),
+        !isLater(leaf.path, language) &&
+        (/[^\u00A0][?!:;»]/.test(leaf.text) || /«[^\u00A0]/.test(leaf.text)),
     );
     expect(wrong.map((leaf) => `${leaf.path}: ${leaf.text}`)).toEqual([]);
   });

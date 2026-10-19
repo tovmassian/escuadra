@@ -110,7 +110,7 @@ describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {
   it.skipIf(language === 'en')('translates every text it does not share on purpose', () => {
     const untranslated = leaves.filter(
       (leaf) =>
-        !isLater(leaf.path) &&
+        !isLater(leaf.path, language) &&
         leaf.text !== '' &&
         leaf.text === englishText.get(leaf.path) &&
         !allowed.includes(leaf.path),

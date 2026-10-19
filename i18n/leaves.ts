@@ -2,6 +2,7 @@
 // review sheet. A function is called with placeholders ("{1}", "{2}"…), so
 // "Who wears {1}?" shows where its value goes. React-free.
 import type { Messages } from './en';
+import type { Language } from './resolveLanguage';
 
 export interface Leaf {
   /** "round.whoWears", "ladder.levels.2.title", "about.intro.0". */
@@ -21,11 +22,18 @@ const SAMPLE_ARGS: Readonly<Record<string, readonly unknown[]>> = {
   'formats.date': [{ day: 21, month: 8, year: 2026 }],
 };
 
-/** Translated by #146 (About and privacy) and #147 (store listing), not #145. */
-export const LATER_PATHS: readonly string[] = ['about.', 'store.'];
+/** What a language has not translated yet: About and privacy (#146) and the
+ *  store listing (#147). Each language drops `about.` when its About lands. */
+export const LATER_PATHS: Readonly<Record<Language, readonly string[]>> = {
+  en: [],
+  de: ['about.', 'store.'],
+  fr: ['about.', 'store.'],
+  es: ['about.', 'store.'],
+  it: ['about.', 'store.'],
+};
 
-export function isLater(path: string): boolean {
-  return LATER_PATHS.some((prefix) => path.startsWith(prefix));
+export function isLater(path: string, language: Language): boolean {
+  return LATER_PATHS[language].some((prefix) => path.startsWith(prefix));
 }
 
 export function catalogLeaves(messages: Messages): Leaf[] {
