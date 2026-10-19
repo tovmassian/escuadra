@@ -45,16 +45,17 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 - **CI calls tools directly** (`node scripts/ci/…`, `npx eas-cli …`), never through new npm
   scripts, and writes temporary files to `$RUNNER_TEMP`, never new `.gitignore` lines.
 
-⚠️ **2.0.0 changes what leaves the device, so its disclosures ship with its store
-build.** The About text on `main`, in all five catalogs, covers TelemetryDeck,
-the Wikimedia photos and the language sent with the launch signal (#54, #146).
-The web policy is versioned: `privacy.html` stays the 1.x policy that both store
-listings link today, and `privacy/2/` holds the 2.0 pages `scripts/privacy-pages.ts`
-renders. The order: every 2.0.0 issue lands on `main`, with the 2.0 pages signed
-off and #55's answers written; then `release/2.0.0` is cut and built (#116). At
-submission, App Privacy (before Apple review) and Data safety (when the build is
-uploaded) are updated, and each store's privacy URL moves to `privacy/2/` when
-that store ships 2.0.
+⚠️ **2.0.0 changes what leaves the device, so its disclosures ship with its
+store build.** The About text on `main`, in all five catalogs, covers
+TelemetryDeck, the Wikimedia photos and the language sent with the launch signal
+(#54, #146). The web policy is versioned: `privacy.html` stays the 1.x policy
+that both store listings link today, and `privacy/2/` holds the 2.0 pages
+`scripts/privacy-pages.ts` renders. The order: every 2.0.0 issue lands on
+`main`, with the 2.0 pages signed off and #55's App Privacy and Data safety
+answers written; then `release/2.0.0` is cut and built (#116). At submission,
+App Privacy (before Apple review) and Data safety (when the build is uploaded)
+are updated, and each store's privacy URL moves to `privacy/2/` when that store
+ships 2.0.
 
 ## Scope and roadmap
 

@@ -87,8 +87,8 @@ you changed the work.
 The Unicode License asks that its copyright and permission notice appear with
 all copies of the data, or in the documentation that comes with it. In the
 repository it does: `i18n/UNICODE-LICENSE.txt` sits next to the country names
-in `i18n/countries.ts`. For the app bundle, an in-app licences sheet that shows
-the notice is tracked in its own issue.
+in `i18n/countries.ts`. The app bundle does not carry it yet; an in-app licences
+sheet that shows it is tracked in its own issue.
 
 The flag set replaced an earlier set nobody could name a source for; a flag
 whose licence you cannot state is a release blocker. The OFL lets the app
@@ -144,11 +144,13 @@ question is on screen:
   and the licence: the TASL a phone screen has no room for, one tap away.
 - **Licence** — its exact short name, linking the licence deed, or the Commons
   page when there is no deed (public domain).
-- **cropped** — the change we make: every screen crops the photo to its frame.
-  The screens also shade it where their text sits over it, and dim it after a
-  miss, and a photo too small to fill the stage sits whole over a darkened copy
-  of itself. That is the app's presentation, drawn over the photo; the file is
-  not edited. About says all of this (`CLAUDE.md`, guardrail 7).
+- **cropped** — the change we make: every screen crops the photo to fill the
+  space it appears in. On the question screen, a photo too small to fill the
+  stage is shown whole instead, over an enlarged, darkened copy of itself
+  cropped to fill it, so its credit says "cropped" too. Where the app's text
+  sits over a photo, the app shades that part of the screen, and it dims the
+  photo after a miss. All of it is presentation; the file is not edited. About
+  says all of this (`CLAUDE.md`, guardrail 7).
 
 The **title is deliberately left out**. A Commons file name or caption names
 the player, and showing it would answer the question (`CLAUDE.md`, guardrail 1).
