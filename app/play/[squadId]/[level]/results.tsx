@@ -82,18 +82,22 @@ export default function Results() {
   // Sharing is not a next step in the study loop, so it sits in the top bar,
   // apart from the actions, and opens a sheet rather than leaving the screen.
   const [sharing, setSharing] = useState(false);
+  // The photo-credits sheet, and a credit's in-app browser opened from it.
+  const [crediting, setCrediting] = useState(false);
 
   // After an a la escuadra round, once the celebration is over, perhaps ask
   // for a store rating (#57). Nothing here sets state, so the screen never
-  // waits on it or re-renders for it. Leaving or covering the screen (Study
-  // is pushed over it) or opening the share sheet calls the ask off; coming
-  // back starts the wait again.
+  // waits on it or re-renders for it. The wait calls the ask off if the
+  // screen is left or covered (Study is pushed over it), or if the share sheet
+  // or the photo-credits sheet opens. Coming back, or closing the sheet,
+  // starts the wait again. lib/storeReview.ts also never asks while the app is
+  // in the background.
   const flawless =
     tier === 'excellent' && !!squad && session.squadId === squadId && session.level === level;
   const earlierRounds = session.earlierRounds;
   useFocusEffect(
     useCallback(() => {
-      if (!flawless || sharing) return;
+      if (!flawless || sharing || crediting) return;
       let shown = true;
       const timer = setTimeout(
         () => askForReview({ flawless, earlierRounds }, () => shown),
@@ -103,7 +107,7 @@ export default function Results() {
         shown = false;
         clearTimeout(timer);
       };
-    }, [flawless, earlierRounds, sharing]),
+    }, [flawless, earlierRounds, sharing, crediting]),
   );
 
   const styles = StyleSheet.create({
@@ -356,7 +360,7 @@ export default function Results() {
               actionAt(2),
             )}
           >
-            <PhotoCredits rows={photoCredits} />
+            <PhotoCredits rows={photoCredits} onOpenChange={setCrediting} />
           </Animated.View>
         </View>
       </ScrollView>

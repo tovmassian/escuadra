@@ -4,13 +4,15 @@ import { describe, expect, it } from 'vitest';
 import { shouldAskForReview, type ReviewPromptInput } from './reviewPrompt';
 
 // A round that should ask: flawless, the store has a review flow, this app
-// version has not asked yet, and the user had finished a round before.
+// version has not asked yet, the user had finished a round before, and the
+// app is in the foreground.
 const due: ReviewPromptInput = {
   flawless: true,
   hasAction: true,
   appVersion: '2.0.0',
   askedVersion: null,
   earlierRounds: true,
+  appActive: true,
 };
 
 describe('shouldAskForReview', () => {
@@ -46,6 +48,12 @@ describe('shouldAskForReview', () => {
 
   it('never asks on the first round ever', () => {
     expect(shouldAskForReview({ ...due, earlierRounds: false })).toBe(false);
+  });
+
+  it('never asks while the app is not in the foreground', () => {
+    // A backgrounded app has no window for the dialog, and must not use up
+    // this version's one ask on it.
+    expect(shouldAskForReview({ ...due, appActive: false })).toBe(false);
   });
 });
 

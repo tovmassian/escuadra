@@ -4,11 +4,12 @@
 // rating dialog actually shows (it rations them, and shows none on
 // TestFlight). Fire and forget: never awaited, never throws, and it sets no
 // React state, so the screen never waits on it or re-renders for it. Skipped
-// on web, where there is no store, so `npm run shots` never asks.
+// on web, where there is no store, so `npm run shots` never asks, and while
+// the app is in the background.
 import { useProgress } from '@/stores/progress';
 import Constants from 'expo-constants';
 import * as StoreReview from 'expo-store-review';
-import { Platform } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import { shouldAskForReview } from './reviewPrompt';
 
 /**
@@ -31,6 +32,8 @@ export function askForReview(
         hasAction,
         appVersion,
         askedVersion: reviewAskedVersion,
+        // Read as the decision is made, just before the request.
+        appActive: AppState.currentState === 'active',
       });
       // `appVersion` is never null when `ask` holds; checked to narrow it.
       if (!ask || appVersion === null) return;
