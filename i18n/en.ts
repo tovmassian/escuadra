@@ -316,6 +316,12 @@ export const en = {
             'Flag images are from flagpedia.net and are in the public domain. The Inter, IBM Plex Mono and Archivo typefaces are used under the SIL Open Font License 1.1.',
           ],
         },
+        {
+          heading: 'Country names',
+          paragraphs: [
+            'Country names in other languages come from the Unicode CLDR project, used under the Unicode License.',
+          ],
+        },
       ],
     },
     /** The setting row's label and the switch's spoken name. */
@@ -346,8 +352,8 @@ export const en = {
         {
           heading: 'Anonymous usage statistics',
           paragraphs: [
-            `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off at the top of this screen. Each one is tagged with a random identifier created for this installation. It is not linked to you, your device or your accounts, and it is not shared with anyone else.`,
-            `The statistics are: the app was opened; a round started, with whether the team is a club or a nation and the difficulty level; a round finished, with the same two details, the score, and whether it was ${A_LA_ESCUADRA}; the Study screen was opened, with whether the team is a club or a nation; a result was shared, with the level, the score and whether it was shared as a picture or as text. They never include team names, player names, your answers or anything you type.`,
+            `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off on the app's About screen. Each one is tagged with a random identifier created for this installation. It is not linked to you, your device or your accounts, and it is not shared with anyone else.`,
+            `The statistics are: the app was opened, with the app's language and whether it follows your phone or was chosen in the app; a round started, with whether the team is a club or a nation and the difficulty level; a round finished, with the same two details, the score, and whether it was ${A_LA_ESCUADRA}; the Study screen was opened, with whether the team is a club or a nation; a result was shared, with the level, the score and whether it was shared as a picture or as text. They never include team names, player names, your answers or anything you type.`,
           ],
         },
         {
@@ -376,6 +382,25 @@ export const en = {
           ],
         },
       ],
+    },
+    /** The web privacy pages (#146), rendered by scripts/privacy-pages.ts.
+     *  Never shown in the app. The page's nav uses `privacy.heading`. */
+    site: {
+      /** The page's title and heading. */
+      title: 'Privacy Policy',
+      updated: (date: string) => `Last updated: ${date}`,
+      /** The spoken name of the Escuadra link in the header. */
+      home: `${ESCUADRA} home`,
+      /** The spoken name of the list of languages. */
+      languages: 'Language',
+      nav: { home: 'Home', support: 'Support' },
+      theme: {
+        light: 'Light',
+        dark: 'Dark',
+        toLight: 'Switch to light theme',
+        toDark: 'Switch to dark theme',
+      },
+      releaseStatus: 'Now on the App Store',
     },
   },
 };

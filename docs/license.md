@@ -73,15 +73,16 @@ you changed the work.
 
 ## What Escuadra ships
 
-| asset                          | licence                                         | source of truth                          |
-| ------------------------------ | ----------------------------------------------- | ---------------------------------------- |
-| Squad data                     | Wikipedia CC BY-SA; Wikidata CC0                | `data/squads/`, `tools/squadctl/`        |
-| Player photos                  | per photo — see the next section                | `player.photo` in `data/players.json`    |
-| National flags                 | public domain (flagpedia.net)                   | `assets/flags/README.md`                 |
-| Inter, IBM Plex Mono           | SIL Open Font License 1.1                       | `@expo-google-fonts/*` in `package.json` |
-| Archivo (three static cuts)    | SIL Open Font License 1.1                       | `assets/fonts/archivo/README.md`         |
-| App Store / Google Play badges | Apple's and Google's artwork, under their rules | `CLAUDE.md`, guardrail 2                 |
-| Club crests, badges, logos     | **never** — trademarks, whatever their licence  | `CLAUDE.md`, guardrail 2                 |
+| asset                          | licence                                         | source of truth                                      |
+| ------------------------------ | ----------------------------------------------- | ---------------------------------------------------- |
+| Squad data                     | Wikipedia CC BY-SA; Wikidata CC0                | `data/squads/`, `tools/squadctl/`                    |
+| Player photos                  | per photo — see the next section                | `player.photo` in `data/players.json`                |
+| National flags                 | public domain (flagpedia.net)                   | `assets/flags/README.md`                             |
+| Country names (es, fr, it, de) | Unicode License v3 (Unicode CLDR)               | `i18n/countries.ts`, `scripts/seed-country-names.ts` |
+| Inter, IBM Plex Mono           | SIL Open Font License 1.1                       | `@expo-google-fonts/*` in `package.json`             |
+| Archivo (three static cuts)    | SIL Open Font License 1.1                       | `assets/fonts/archivo/README.md`                     |
+| App Store / Google Play badges | Apple's and Google's artwork, under their rules | `CLAUDE.md`, guardrail 2                             |
+| Club crests, badges, logos     | **never** — trademarks, whatever their licence  | `CLAUDE.md`, guardrail 2                             |
 
 The flag set replaced an earlier set nobody could name a source for; a flag
 whose licence you cannot state is a release blocker. The OFL lets the app
@@ -213,7 +214,7 @@ build with updated disclosures (`CLAUDE.md`, guardrail 4).
 The About screen is the user-facing half of this document. Its words live in
 `en.about` in `i18n/en.ts`, which `app/about.tsx` only renders. Its "Data and image credits" section names every source and licence in the
 table above — Wikipedia, Wikidata, Commons photos with the five accepted
-licences, flags, fonts — and says where the per-photo credit appears (under
+licences, flags, fonts, country names — and says where the per-photo credit appears (under
 the question, and in the results' "photo credits" list). Its Privacy section
 says what photo loading sends to Wikimedia, that photos are cached on the
 device, and that a credit link opens a third-party site. Change a licence, a
