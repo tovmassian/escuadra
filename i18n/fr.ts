@@ -3,6 +3,8 @@
 // merges (#145). About and the store tagline are English until #146 and #147
 // translate them with their legal and listing copy.
 // Escuadra and a la escuadra come from ./names and are never translated.
+// French as France speaks it and L’Équipe writes it: where Belgium, Switzerland
+// or Québec differ (Nigéria, septante, magasiner), France wins.
 //
 // Typography: every space before ? ! : ; and inside « » is a no-break space
 // (U+00A0, not the narrow U+202F), so the sign never wraps onto a line of its

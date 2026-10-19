@@ -35,7 +35,7 @@ const FACTS: Record<Language, Facts> = {
   de: {
     date: '21. Aug. 2026',
     players: ['0 Spieler', '1 Spieler', '2 Spieler'],
-    positionCodes: { GK: 'TW', DF: 'AB', MF: 'MF', FW: 'ST' },
+    positionCodes: { GK: 'TW', DF: 'ABW', MF: 'MF', FW: 'ST' },
     countries: {
       GER: 'Deutschland',
       ENG: 'England',

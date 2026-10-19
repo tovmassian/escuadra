@@ -49,13 +49,15 @@ export const de: Messages = {
     /** "21. Aug. 2026". */
     date: ({ day, month, year }: CalendarDate) => `${day}. ${MONTHS[month - 1] ?? ''} ${year}`,
   },
-  // TW Torwart, AB Abwehr, MF Mittelfeld, ST Sturm.
-  positionCodes: { GK: 'TW', DF: 'AB', MF: 'MF', FW: 'ST' },
+  // TW Torwart, ABW Abwehr ("Abw." in squad lists; a bare "AB" reads as the
+  // word "ab"), MF Mittelfeld, ST Sturm.
+  positionCodes: { GK: 'TW', DF: 'ABW', MF: 'MF', FW: 'ST' },
   positions: { GK: 'Torwart', DF: 'Abwehr', MF: 'Mittelfeld', FW: 'Sturm' },
   slots: { NAME: 'Name', POS: 'Position', AGE: 'Alter', CLUB: 'Verein', NAT: 'Nationalität' },
   slotCodes: { NAME: 'NAME', POS: 'POS', AGE: 'ALTER', CLUB: 'VEREIN', NAT: 'NAT' },
   round: {
-    correct: 'Richtig',
+    // "Treffer" / "Daneben": a shot on goal, hit or wide.
+    correct: 'Treffer',
     missed: 'Daneben',
     whoWears: (no: number) => `Wer trägt die ${no}?`,
     askPosition: 'Welche Position?',
@@ -76,7 +78,7 @@ export const de: Messages = {
       wrong: (slot: string, value: string) => `${slot}: ${value}, die richtige Antwort`,
       notAsked: (slot: string, value: string) => `${slot}: ${value}, nicht gefragt`,
     },
-    leave: 'Runde verlassen',
+    leave: 'Runde abbrechen',
     shirtNumber: (no: number) => `Rückennummer ${no}`,
     // "Wähle", not "Tippe": "Tippe deine Antwort" also reads "type your answer".
     tapYourAnswer: 'Wähle deine Antwort',
@@ -90,7 +92,7 @@ export const de: Messages = {
       'incorrect-other': '',
     },
     questionOf: (n: number, total: number) => `Frage ${n} von ${total}`,
-    streak: (count: number) => `Serie: ${count} in Folge`,
+    streak: (count: number) => `Serie: ${count} richtig in Folge`,
   },
   study: {
     // "Spieler" is both singular and plural.
@@ -100,9 +102,9 @@ export const de: Messages = {
     nameHidden: 'Name verborgen',
     title: 'Kader',
     // "Namen ausblenden" is 16 chars against 12. As a switch, it is spoken
-    // "Ohne Namen, ein" or "…, aus".
+    // "Ohne Namen, ein" or "…, aus"; "Mit Namen" is its pair.
     hideNames: 'Ohne Namen',
-    showNames: 'Namen zeigen',
+    showNames: 'Mit Namen',
     showAsList: 'Als Liste zeigen',
     showAsCards: 'Als Karten zeigen',
     all: 'Alle',
@@ -119,10 +121,10 @@ export const de: Messages = {
     flawlessVerdict: (team: string, season: string, level: number) =>
       `${team} · ${season}, Level ${level}. Kein Fehler.`,
     clearedTitle: (level: number) => `Level ${level} geschafft`,
-    clearedVerdict: 'Du kennst den Großteil der Startelf.',
+    clearedVerdict: 'Du kennst schon fast die ganze Startelf.',
     failTitle: 'Die hier solltest du dir merken',
-    toClear: (target: string, level: number) => `Hol ${target}, um Level ${level} zu schaffen.`,
-    toUnlock: (target: string, level: number) => `Hol ${target}, um Level ${level} freizuschalten.`,
+    toClear: (target: string, level: number) => `Mit ${target} schaffst du Level ${level}.`,
+    toUnlock: (target: string, level: number) => `Mit ${target} schaltest du Level ${level} frei.`,
     // The words first: a long name truncates, the words must not.
     youPicked: (picked: string) => `Deine Wahl: ${picked}`,
     nameRight: 'Name richtig',
@@ -145,7 +147,8 @@ export const de: Messages = {
   },
   share: {
     title: 'Runde teilen',
-    stillLearning: 'Lerne noch',
+    // Not "Lerne noch", which reads as telling the receiver to learn more.
+    stillLearning: 'Noch am Lernen',
     // The name first, so it needs no article or case ending.
     question: (team: string) => `${team}: Kennst du den ganzen Kader?`,
     image: 'Bild',
@@ -161,7 +164,8 @@ export const de: Messages = {
   ladder: {
     play: 'Spielen',
     playAgain: 'Noch mal',
-    unlockHint: (target: string, level: number) => `Hol ${target} in L${level}`,
+    // "Ab 8/10": how German states a threshold.
+    unlockHint: (target: string, level: number) => `Ab ${target} in L${level}`,
     rungLocked: (title: string, correct: number, total: number, level: number) =>
       `${title}, gesperrt, ab ${correct} von ${total} in Level ${level}`,
     rungBest: (title: string, correct: number, total: number) =>
@@ -170,15 +174,16 @@ export const de: Messages = {
     levels: {
       1: {
         title: 'Name zur Nummer',
-        description: 'Du siehst die Rückennummer und wählst den Spieler aus 4 Optionen.',
+        description: 'Du siehst die Rückennummer und wählst den Spieler aus 4 Namen.',
       },
       2: {
         title: 'Name und Position',
-        description: 'Erst den Namen, dann die Position – TW, AB, MF oder ST.',
+        description: 'Erst den Namen, dann die Position – TW, ABW, MF oder ST.',
       },
       3: {
-        title: 'Volles Profil',
-        description: 'Name aus 6 Optionen, dann Position, dann Verein oder Nationalität.',
+        // A player's Steckbrief: name, position, club, country.
+        title: 'Ganzer Steckbrief',
+        description: '6 Namen zur Wahl, dann Position, dann Verein oder Nationalität.',
       },
     },
     studySquad: 'Kader lernen',
