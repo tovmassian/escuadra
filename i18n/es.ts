@@ -5,27 +5,16 @@
 // Escuadra and a la escuadra come from ./names and are never translated.
 //
 // UI copy in neutral Spanish, for Spain and Latin America alike: the player is
-// "tú", and "teléfono", never "móvil" or "celular". Country names follow CLDR's
-// Spain forms (Arabia Saudí, Rumanía), for the reviewer to judge. Every
+// "tú", and "teléfono", never "móvil" or "celular". Where the regions differ,
+// Spain's form wins, as most players are there: "plantilla", not "plantel";
+// CLDR's Spain country names (Arabia Saudí, Rumanía). Every
 // question and exclamation opens with ¿ or ¡. A team's name sits before a
 // colon or alone, never after "de", "del", "el" or "la": the data gives no
 // gender or article ("del Real Madrid").
 import { en, type CalendarDate, type Messages } from './en';
 
-const MONTHS = [
-  'ene',
-  'feb',
-  'mar',
-  'abr',
-  'may',
-  'jun',
-  'jul',
-  'ago',
-  'sept',
-  'oct',
-  'nov',
-  'dic',
-];
+// Three letters each: "sep", as Latin America writes it, not Spain's CLDR "sept".
+const MONTHS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
 
 export const es: Messages = {
   common: {
@@ -48,9 +37,9 @@ export const es: Messages = {
   },
   languageSheet: {
     title: 'Idioma',
-    // Under the title "Idioma", so "[idioma] del teléfono". "Idioma del
-    // teléfono · Italiano" is 30 chars against 28.
-    matchPhone: (name: string) => `Del teléfono · ${name}`,
+    // Under the title "Idioma": follow the phone. "Idioma del teléfono ·
+    // Italiano" is 30 chars against 28.
+    matchPhone: (name: string) => `Como el teléfono · ${name}`,
   },
   formats: {
     /** "21 ago 2026". */
@@ -62,7 +51,8 @@ export const es: Messages = {
   // understood everywhere. "Centrocampista" is 14 chars against 11.
   positions: { GK: 'Portero', DF: 'Defensa', MF: 'Medio', FW: 'Delantero' },
   slots: { NAME: 'Nombre', POS: 'Posición', AGE: 'Edad', CLUB: 'Club', NAT: 'Nacionalidad' },
-  slotCodes: { NAME: 'NOM', POS: 'POS', AGE: 'EDAD', CLUB: 'CLUB', NAT: 'NAC' },
+  // "NOMBRE" whole: "NOM" is Catalan, not an abbreviation.
+  slotCodes: { NAME: 'NOMBRE', POS: 'POS', AGE: 'EDAD', CLUB: 'CLUB', NAT: 'NAC' },
   round: {
     // "Acierto" and "fallo": the words a quiz keeps score with.
     correct: 'Acierto',
@@ -142,7 +132,7 @@ export const es: Messages = {
       `${team} · ${season}, nivel ${level}. Sin fallos.`,
     clearedTitle: (level: number) => `Nivel ${level} superado`,
     clearedVerdict: 'Te sabes casi todo el once titular.',
-    failTitle: 'Estos son los que debes aprender',
+    failTitle: 'Estos son los que te faltan',
     toClear: (target: string, level: number) =>
       `Consigue ${target} para superar el nivel ${level}.`,
     toUnlock: (target: string, level: number) =>
@@ -152,7 +142,10 @@ export const es: Messages = {
     nameRight: 'Nombre correcto',
     nameAndPositionRight: 'Nombre y posición correctos',
     wrongPart: {
-      position: (right: string, picked: string) => `posición: ${right}, no ${picked}`,
+      // A position is a common noun, lowercase mid-sentence; a club or a
+      // country keeps its capital.
+      position: (right: string, picked: string) =>
+        `posición: ${right.toLowerCase()}, no ${picked.toLowerCase()}`,
       club: (right: string, picked: string) => `club: ${right}, no ${picked}`,
       nationality: (right: string, picked: string) => `nacionalidad: ${right}, no ${picked}`,
     },
@@ -199,14 +192,16 @@ export const es: Messages = {
     // The target first, as French does: "Nivel 1: 8/10" reads as a recorded
     // score. "8/10 en nivel 1" wraps "Nombre y posición" beside it.
     unlockHint: (target: string, level: number) => `${target} en niv. ${level}`,
-    rungLocked: (title: string, hint: string) => `${title}, bloqueado, ${hint}`,
+    rungLocked: (title: string, correct: number, total: number, level: number) =>
+      `${title}, bloqueado, consigue ${correct} de ${total} en el nivel ${level}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, récord ${correct} de ${total}`,
     title: 'Elige la dificultad',
     levels: {
       1: {
-        // "Del dorsal al nombre" is 20 chars against 18.
-        title: 'Nombre por dorsal',
+        // The ladder reads Solo el nombre → Nombre y posición → Perfil
+        // completo; the description says "dorsal".
+        title: 'Solo el nombre',
         description: 'Con el dorsal, elige al jugador entre 4 opciones.',
       },
       2: {
@@ -216,7 +211,7 @@ export const es: Messages = {
       3: {
         title: 'Perfil completo',
         description:
-          'El nombre entre 6 opciones, luego la posición y luego el club o la nacionalidad.',
+          'Elige el nombre entre 6 opciones, luego la posición y, por último, el club o la nacionalidad.',
       },
     },
     studySquad: 'Repasar plantilla',

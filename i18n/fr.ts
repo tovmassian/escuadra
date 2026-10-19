@@ -196,7 +196,8 @@ export const fr: Messages = {
     playAgain: 'Rejouer',
     // No verb: "Fais 8/10 au niveau 1" wraps the rung titles beside it.
     unlockHint: (target: string, level: number) => `${target} au niveau ${level}`,
-    rungLocked: (title: string, hint: string) => `${title}, verrouillé, ${hint}`,
+    rungLocked: (title: string, correct: number, total: number, level: number) =>
+      `${title}, verrouillé, ${correct} sur ${total} au niveau ${level}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} sur ${total}`,
     title: 'Choisis la difficulté',

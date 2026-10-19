@@ -162,7 +162,8 @@ export const de: Messages = {
     play: 'Spielen',
     playAgain: 'Noch mal',
     unlockHint: (target: string, level: number) => `Hol ${target} in L${level}`,
-    rungLocked: (title: string, hint: string) => `${title}, gesperrt, ${hint}`,
+    rungLocked: (title: string, correct: number, total: number, level: number) =>
+      `${title}, gesperrt, ab ${correct} von ${total} in Level ${level}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, Rekord ${correct} von ${total}`,
     title: 'Schwierigkeit wählen',

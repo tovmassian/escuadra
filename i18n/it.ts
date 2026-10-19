@@ -187,7 +187,8 @@ export const it: Messages = {
     // The target first, as French does: "Livello 1: 8/10" reads as a
     // recorded score. "8/10 al livello 2" wraps "Profilo completo" beside it.
     unlockHint: (target: string, level: number) => `${target} al liv. ${level}`,
-    rungLocked: (title: string, hint: string) => `${title}, bloccato, ${hint}`,
+    rungLocked: (title: string, correct: number, total: number, level: number) =>
+      `${title}, bloccato, ${correct} su ${total} al livello ${level}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} su ${total}`,
     title: 'Scegli la difficoltà',
