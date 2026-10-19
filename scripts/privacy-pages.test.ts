@@ -10,6 +10,7 @@ import {
   PAGE_FILES,
   pageUrl,
   POLICY_DIR,
+  parseUpdated,
   POLICY_VERSION,
   privacyPage,
   SITE_URL,
@@ -116,6 +117,28 @@ describe('escapeHtml', () => {
   });
 });
 
+describe('parseUpdated', () => {
+  it('reads a real date', () => {
+    expect(parseUpdated('2026-10-21')).toEqual({ day: 21, month: 10, year: 2026 });
+    expect(parseUpdated('2028-02-29')).toEqual({ day: 29, month: 2, year: 2028 });
+  });
+
+  it('rejects a day the month does not have', () => {
+    expect(parseUpdated('2026-02-31')).toBeNull();
+    expect(parseUpdated('2026-02-29')).toBeNull();
+    expect(parseUpdated('2026-04-31')).toBeNull();
+    expect(parseUpdated('2026-13-01')).toBeNull();
+    expect(parseUpdated('2026-00-10')).toBeNull();
+    expect(parseUpdated('2026-10-00')).toBeNull();
+  });
+
+  it('rejects text that is not YYYY-MM-DD', () => {
+    expect(parseUpdated('')).toBeNull();
+    expect(parseUpdated('21 October 2026')).toBeNull();
+    expect(parseUpdated('2026-1-5')).toBeNull();
+  });
+});
+
 describe('writePrivacyPages', () => {
   it('writes every page into privacy/2/, creating it, and leaves the 1.x policy alone', () => {
     const dir = mkdtempSync(path.join(os.tmpdir(), 'escuadra-privacy-'));
@@ -143,14 +166,7 @@ describe('writePrivacyPages', () => {
 // (<dir> is a gh-pages worktree). Skipped in a normal run.
 const out = process.env.PRIVACY_PAGES;
 it.runIf(out !== undefined)('writes the five privacy pages', () => {
-  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(process.env.PRIVACY_UPDATED ?? '');
-  const date = match && {
-    year: Number(match[1]),
-    month: Number(match[2]),
-    day: Number(match[3]),
-  };
-  if (!date || date.month < 1 || date.month > 12 || date.day < 1 || date.day > 31) {
-    throw new Error('PRIVACY_UPDATED=YYYY-MM-DD: the date the pages go live');
-  }
+  const date = parseUpdated(process.env.PRIVACY_UPDATED ?? '');
+  if (!date) throw new Error('PRIVACY_UPDATED=YYYY-MM-DD: the date the pages go live');
   writePrivacyPages(path.resolve(out ?? ''), date);
 });

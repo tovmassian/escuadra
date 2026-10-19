@@ -20,12 +20,19 @@ export const SITE_URL = SHARE_URL;
 
 // The version these pages state, and their folder. A version that changes
 // what leaves the device gets a new folder, and a published folder is never
-// edited after its version ships: a store listing may still link it.
+// edited after its version ships: a store listing may still link it. The one
+// exception comes when a later version gets its own folder. Then this folder's
+// applies line gains an upper bound (say "2.0 to 2.x"), and the new folder's
+// earlier-versions link points at this one instead of privacy.html. That
+// single regeneration is the only edit a published folder ever gets.
 export const POLICY_VERSION = '2.0';
 export const POLICY_DIR = 'privacy/2/';
 
-/** From POLICY_DIR back to the site root, where the site's own files are. */
-const ROOT = '../../';
+/**
+ * From POLICY_DIR back to the site root, where the site's own files are: one
+ * `../` per folder, so the two cannot drift apart.
+ */
+const ROOT = '../'.repeat(POLICY_DIR.split('/').filter(Boolean).length);
 
 /** Each language's file in POLICY_DIR. English is the folder's index. */
 export const PAGE_FILES: Readonly<Record<SupportedLanguage, string>> = {
@@ -152,6 +159,25 @@ export function privacyPage(language: SupportedLanguage, updated: CalendarDate):
     '</html>',
     '',
   ].join('\n');
+}
+
+/**
+ * Reads the writer's PRIVACY_UPDATED, "YYYY-MM-DD", into a date, or null when
+ * the text is not a date that exists: 2026-02-31 would otherwise print as a
+ * day the pages never went live.
+ */
+export function parseUpdated(text: string): CalendarDate | null {
+  const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(text);
+  if (!match) return null;
+  const date = { year: Number(match[1]), month: Number(match[2]), day: Number(match[3]) };
+  // A UTC Date rolls an impossible day over into the next month, so a real
+  // date is exactly one that comes back unchanged.
+  const check = new Date(Date.UTC(date.year, date.month - 1, date.day));
+  const real =
+    check.getUTCFullYear() === date.year &&
+    check.getUTCMonth() === date.month - 1 &&
+    check.getUTCDate() === date.day;
+  return real ? date : null;
 }
 
 /** Writes every language's page to <dir>/privacy/2/, creating the folders. */
