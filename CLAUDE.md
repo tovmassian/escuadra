@@ -162,10 +162,10 @@ update this file in the same PR rather than leave a stale rule behind.
    word for word), Apple's App Privacy answers and Google Play's Data safety
    form — in a store build, never over the air. Today the traffic is
    `expo-updates` checking EAS Update on launch (OS, project ID, a random
-   installation token) and, from the next store version, opt-out
-   TelemetryDeck usage signals (see Telemetry under Architecture rules) and
-   player-photo thumbnails loaded from Wikimedia Commons
-   (`upload.`/`thumb.wikimedia.org`, which sees the IP address).
+   installation token and, after a failed start, the error message) and, from
+   the next store version, opt-out TelemetryDeck usage signals (see Telemetry
+   under Architecture rules) and player-photo thumbnails loaded from Wikimedia
+   Commons (`upload.`/`thumb.wikimedia.org`, which sees the IP address).
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
    rather than inlining a value. This governs the app's own design system —

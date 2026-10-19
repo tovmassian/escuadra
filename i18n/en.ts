@@ -307,7 +307,7 @@ export const en = {
           heading: 'Player photos',
           paragraphs: [
             "Player photos come from Wikimedia Commons. Each one is either in the public domain or used under the licence it carries on Commons: CC BY-SA, CC BY, CC0 or Commons' own Attribution licence. Photos are cropped to fill the space they appear in. On the question screen, a photo too small to fill the space is shown whole instead, over an enlarged, darkened copy of itself that fills it. Where the app's text sits over a photo, the app shades that part of the screen, and it dims the photo after a wrong answer. The photo files themselves are not edited. Not every player has a photo.",
-            `The author, the licence and the word "${CROPPED}" appear under the question for as long as a photo is on screen, and again under "${PHOTO_CREDITS}" in the results, for the whole round, and at the end of the Study screen, for the whole squad. Tap the author for the photo's page on Wikimedia Commons, or the licence for its terms.`,
+            `The author, the licence and the word "${CROPPED}" appear under the question for as long as a photo is on screen, and again under "${PHOTO_CREDITS}" in the results, for the whole round, and at the end of the Study screen, for every player it lists. Tap the author for the photo's page on Wikimedia Commons, or the licence for its terms.`,
           ],
         },
         {
@@ -339,7 +339,7 @@ export const en = {
           heading: 'Player photos',
           paragraphs: [
             `${ESCUADRA} does not ship player photos. They are loaded from Wikimedia Commons, run by the Wikimedia Foundation: a round's photos when the round starts, and a squad's photos on the Study screen as you scroll. Like any website, Wikimedia receives your device's IP address and the details of each request, including which photos were asked for, and so which players are in your round or squad. ${ESCUADRA} sends nothing else to Wikimedia, and Wikimedia's own privacy policy applies to what it receives.`,
-            "Photos already loaded may be kept in the app's cache on your device so that they appear faster. Without a connection the quiz works as usual and shows the team's colours and the shirt number instead of a photo.",
+            "Photos already loaded may be kept in the app's cache on your device so that they appear faster. Without a connection the quiz works as usual and shows the team's colours and the shirt number in place of any photo not already in that cache.",
             `Tapping a photo credit opens the photo's Wikimedia Commons page, or its licence on the Creative Commons website, in an in-app browser. Those sites have their own privacy policies, and ${ESCUADRA} cannot see what you do there.`,
           ],
         },
@@ -353,13 +353,13 @@ export const en = {
           heading: 'Anonymous usage statistics',
           paragraphs: [
             `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off on the app's About screen. Each one carries a hashed form of a random identifier created for these statistics (separate from the one the app-update check uses) and a random session code that is new each time the app starts. Like any online service, TelemetryDeck also receives your device's IP address with each one, and TelemetryDeck's own privacy policy applies to what it receives. The identifier and the session code are random, not derived from your device, and not linked to you or your accounts. Neither ${ESCUADRA} nor the developer shares them or the statistics with anyone else.`,
-            `The statistics are: the app was opened, with its language and whether that language follows your phone's language or was chosen in the app; a round started, with whether the team is a club or a nation and the difficulty level; a round finished, with the same two details, the score, and whether it was ${A_LA_ESCUADRA}; the Study screen was opened, with whether the team is a club or a nation; and a result was shared, with the level, the score and whether it was shared as a picture or as text. They never include team names, player names, your answers or anything you type.`,
+            `The statistics are: the app was opened, with its language and whether that language follows your phone's language or was chosen in the app; a round started, with whether the team is a club or a nation and the difficulty level; a round finished, with the same two details, the score, and whether it was ${A_LA_ESCUADRA}; the Study screen was opened, with whether the team is a club or a nation; and a result was passed to your phone's share menu, with the level, the score and whether it was a picture or text. They never include team names, player names, your answers or anything you type.`,
           ],
         },
         {
           heading: 'App updates',
           paragraphs: [
-            `When ${ESCUADRA} starts, it checks whether a newer version of the app is available from Expo, the service that delivers its updates. The check sends only what is needed to deliver the right update: your device's operating system, the app's version and project, and a random identifier created for this installation. Like any online service, Expo also receives your device's IP address with each check. The identifier is not linked to you or to anything you do in the app. Without a connection, the app skips the check and works as usual.`,
+            `When ${ESCUADRA} starts, it checks whether a newer version of the app is available from Expo, the service that delivers its updates. The check sends what is needed to deliver the right update: your device's operating system, the app's version and project, and a random identifier created for this installation. If the app crashed or failed to load an update as it last started, the check also sends Expo the technical error message from that failure. Like any online service, Expo also receives your device's IP address with each check. The identifier is not linked to you or to anything you do in the app. Without a connection, the app skips the check and works as usual.`,
           ],
         },
         {
@@ -372,7 +372,7 @@ export const en = {
         {
           heading: 'Crash reports',
           paragraphs: [
-            `If you allow your device to share diagnostics, Apple (on iOS) or Google (on Android) may share anonymised crash reports with the developer. That is handled by Apple or Google and controlled in your device settings. ${ESCUADRA} itself sends no crash reports.`,
+            `If you allow your device to share diagnostics, Apple (on iOS) or Google (on Android) may share anonymised crash reports with the developer. That is handled by Apple or Google and controlled in your device settings. Apart from the error message the app-update check may send after a failed start, ${ESCUADRA} itself sends no crash reports.`,
           ],
         },
         {
