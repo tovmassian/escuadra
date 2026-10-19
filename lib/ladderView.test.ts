@@ -139,7 +139,7 @@ describe('rungAccessibilityLabel', () => {
   it('announces a locked rung with what unlocks it', () => {
     const row = { level: 3, status: 'locked' } as const;
     expect(rungAccessibilityLabel(row, 'Full Profile', en)).toBe(
-      'Full Profile, locked, Score 8/10 on L2',
+      'Full Profile, locked, score 8 of 10 on level 2',
     );
   });
 

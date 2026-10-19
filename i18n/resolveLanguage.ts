@@ -11,7 +11,13 @@ export type LanguagePreference = 'system' | Language;
 
 /** The languages with a reviewed catalog. #145 adds each one only after a
  *  native speaker signs it off; `i18n/useT.ts` needs a catalog for each. */
-export const SUPPORTED_LANGUAGES = ['en'] as const satisfies readonly Language[];
+export const SUPPORTED_LANGUAGES = [
+  'en',
+  'de',
+  'fr',
+  'es',
+  'it',
+] as const satisfies readonly Language[];
 export type SupportedLanguage = (typeof SUPPORTED_LANGUAGES)[number];
 
 /** `es-MX`, `de_AT`, `zh-Hans-CN` → `es`, `de`, `zh`. */

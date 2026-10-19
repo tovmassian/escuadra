@@ -228,7 +228,9 @@ export const en = {
     playAgain: 'Play Again',
     /** Under a locked rung. `target` is "8/10". */
     unlockHint: (target: string, level: number) => `Score ${target} on L${level}`,
-    rungLocked: (title: string, hint: string) => `${title}, locked, ${hint}`,
+    /** Spoken, so the numbers are words: no "8/10" (read as a date) or "L2". */
+    rungLocked: (title: string, correct: number, total: number, level: number) =>
+      `${title}, locked, score ${correct} of ${total} on level ${level}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, best ${correct} of ${total}`,
     title: 'Choose Difficulty',

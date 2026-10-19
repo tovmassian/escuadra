@@ -1495,9 +1495,9 @@ Run this whole task once per language, in that order. Each run is its own PR. `<
 | `slots` (spoken)                        | Nombre, Posición, Edad, Club, Nacionalidad       | Nom, Poste, Âge, Club, Nationalité                             | Nome, Ruolo, Età, Club, Nazionalità             | Name, Position, Alter, Verein, Nationalität                 |
 | Level 2                                 | Nivel 2                                          | Niveau 2                                                       | Livello 2                                       | Level 2                                                     |
 | Squad (Study's title)                   | Plantilla                                        | Effectif                                                       | Rosa                                            | Kader                                                       |
-| Round                                   | ronda                                            | manche                                                         | turno                                           | Runde                                                       |
+| Round                                   | ronda                                            | manche                                                         | partita                                         | Runde                                                       |
 | Start Training (≤ 18)                   | Entrenar                                         | S’entraîner                                                    | Allenati                                        | Training starten                                            |
-| Who wears {n}?                          | ¿Quién lleva el {n}?                             | Qui porte le {n} ?                                             | Chi ha il {n}?                                  | Wer trägt die {n}?                                          |
+| Who wears {n}?                          | ¿Quién lleva el {n}?                             | Qui porte le {n} ?                                             | Chi ha il numero {n}?                           | Wer trägt die {n}?                                          |
 | Clubs / National Teams (≤ 14)           | Clubes / Selecciones                             | Clubs / Sélections                                             | Club / Nazionali                                | Vereine / Nationalteams                                     |
 | Months (`formats.date`)                 | ene feb mar abr may jun jul ago sept oct nov dic | janv. févr. mars avr. mai juin juil. août sept. oct. nov. déc. | gen feb mar apr mag giu lug ago set ott nov dic | Jan. Feb. März Apr. Mai Juni Juli Aug. Sept. Okt. Nov. Dez. |
 | Date shape                              | 21 ago 2026                                      | 21 août 2026                                                   | 21 ago 2026                                     | 21. Aug. 2026                                               |
@@ -1507,6 +1507,7 @@ Run this whole task once per language, in that order. Each run is its own PR. `<
 
 Notes:
 
+- **Italian elision:** Italian elides "il" before 8, 11 and 80–89 (l’8, l’11), so never put "il" directly before a number.
 - The mono labels in capitals (`continueMeta`, `missedCount`, `nothingMissed`, `ladder.best`, `picker.played`) stay in capitals in every language.
 - **Name placement:** follow the Global Constraints rule. For `share.question`, write the name first: `` `${team}: ¿te sabes la plantilla?` `` in Spanish, `` `${team} : sauras-tu nommer tout l’effectif ?` `` in French, `` `${team}: conosci tutta la rosa?` `` in Italian, `` `${team}: Kennst du den ganzen Kader?` `` in German.
 - **Level-2 description:** it must spell out the four position codes of its own catalog. The catalog test checks this.

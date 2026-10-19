@@ -1,6 +1,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { fileKey } from '../scripts/commons.ts';
 import { LEAGUES } from '../scripts/roster-envelope.ts';
 import type { Player, Squad } from '@/types/squad';
 import type { DecisionFile } from '../tools/squadctl/src/lib/decisions.ts';
@@ -287,6 +288,20 @@ describe('every player photo carries a complete, accepted credit', () => {
       .filter(
         ({ photo }) => !/^https:\/\/(upload|thumb)\.wikimedia\.org\/[^?#]+$/.test(photo?.url ?? ''),
       )
+      .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  // The credit links the Commons page derived from `file`, and the picture is
+  // `url`: both must name the same Commons file. A find-and-replace on a
+  // club's name once rewrote nine file names and left their pages 404.
+  it('names the file its thumbnail serves', () => {
+    const served = /\/commons\/(?:thumb\/)?[0-9a-f]\/[0-9a-f]{2}\/([^/]+)/;
+    const bad = withPhoto
+      .filter(({ photo }) => {
+        const match = photo?.url.match(served);
+        return !match?.[1] || fileKey(decodeURIComponent(match[1])) !== fileKey(photo?.file ?? '');
+      })
       .map((p) => p.id);
     expect(bad).toEqual([]);
   });

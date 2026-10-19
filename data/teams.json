@@ -1493,7 +1493,7 @@
     "id": "fch",
     "kind": "club",
     "league": "bundesliga",
-    "name": "1. FC Heidenheim",
+    "name": "FC Heidenheim",
     "source": "https://en.wikipedia.org/wiki/1._FC_Heidenheim",
     "identity": {
       "primaryColor": "#ED1C24",
@@ -1508,7 +1508,7 @@
     "id": "koe",
     "kind": "club",
     "league": "bundesliga",
-    "name": "1. FC Köln",
+    "name": "FC Köln",
     "source": "https://en.wikipedia.org/wiki/1._FC_K%C3%B6ln",
     "identity": {
       "primaryColor": "#ED1C24",

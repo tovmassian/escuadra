@@ -66,7 +66,7 @@ export function playLabel(row: LadderRow, messages: Messages): string {
  *  otherwise carried only by its badge and pill. */
 export function rungAccessibilityLabel(row: LadderRow, title: string, messages: Messages): string {
   if (row.status === 'locked') {
-    return messages.ladder.rungLocked(title, unlockHint(row.level, messages));
+    return messages.ladder.rungLocked(title, PASS_MARK, ROUND_LENGTH, row.level - 1);
   }
   if (row.best) return messages.ladder.rungBest(title, row.best.correct, row.best.total);
   return title;

@@ -35,7 +35,7 @@ const FACTS: Record<Language, Facts> = {
   de: {
     date: '21. Aug. 2026',
     players: ['0 Spieler', '1 Spieler', '2 Spieler'],
-    positionCodes: { GK: 'TW', DF: 'AB', MF: 'MF', FW: 'ST' },
+    positionCodes: { GK: 'TW', DF: 'ABW', MF: 'MF', FW: 'ST' },
     countries: {
       GER: 'Deutschland',
       ENG: 'England',
@@ -79,6 +79,7 @@ const FACTS: Record<Language, Facts> = {
       NIR: 'Irlanda del Norte',
       CIV: 'Costa de Marfil',
       COD: 'RD Congo',
+      MLI: 'Malí',
     },
     phoneTag: 'es-MX',
     frenchSpacing: false,
@@ -93,8 +94,10 @@ const FACTS: Record<Language, Facts> = {
       SCO: 'Scozia',
       WAL: 'Galles',
       NIR: 'Irlanda del Nord',
-      COD: 'RD del Congo',
+      COD: 'RD Congo',
       CGO: 'Congo',
+      CZE: 'Repubblica Ceca',
+      FRO: 'Isole Far Oer',
     },
     phoneTag: 'it-CH',
     frenchSpacing: false,
