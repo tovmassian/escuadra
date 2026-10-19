@@ -32,9 +32,9 @@ PR B stays a draft until then. It is built from PR A's generator, so it is opene
 
 - **Word for word (guardrail 4).** Each privacy page shows its catalog's `about.privacy` texts exactly, plus that language's translation notice. Nothing is added, dropped or reworded between the app and the page.
 - **The switch sentence:** `…unless you switch "${USAGE_STATISTICS}" off on the app's About screen.` The same wording is used in every language, each with its own switch label in quotes.
-- **New English texts, verbatim from #146:**
-  - `the app was opened, with the app's language and whether it follows your phone or was chosen in the app`
-  - `Country names in other languages come from the Unicode CLDR project, used under the Unicode License.`
+- **New English texts** (#146's wording, as amended by the owner after the English language review, 2026-10-19):
+  - `the app was opened, with its language and whether that language follows your phone's setting or was chosen in the app`
+  - `Most country names in languages other than English come from the Unicode CLDR project and are used under the Unicode License.`
   - Notice (drafted in each language): `This is a translation. If it differs from the English text, the English text applies.`
 - Already in `en.ts`, from #143: "nine things" and "your language choice". Do not add them twice.
 - **Never translated:** _Escuadra_ and _a la escuadra_ (`i18n/names.ts`). Also left as they are: TelemetryDeck, Wikimedia Commons, Wikimedia Foundation, Wikipedia, Wikidata, Expo, flagpedia.net, Unicode CLDR, and licence names (CC BY-SA, CC BY, CC0, SIL Open Font License 1.1, Unicode License).
@@ -330,7 +330,7 @@ git commit -m "feat(telemetry): the launch signal carries the app's language and
 In `i18n/en.ts`, inside `about.privacy.sections`, the "Anonymous usage statistics" section:
 
 - In the first paragraph, replace `off at the top of this screen.` with `off on the app's About screen.`.
-- In the second paragraph, replace `The statistics are: the app was opened; a round started,` with `The statistics are: the app was opened, with the app's language and whether it follows your phone or was chosen in the app; a round started,`.
+- In the second paragraph, replace `The statistics are: the app was opened; a round started,` with `The statistics are: the app was opened, with its language and whether that language follows your phone's setting or was chosen in the app; a round started,`.
 
 In `about.credits.sections`, after the "Flags and fonts" entry, add:
 
@@ -338,7 +338,7 @@ In `about.credits.sections`, after the "Flags and fonts" entry, add:
         {
           heading: 'Country names',
           paragraphs: [
-            'Country names in other languages come from the Unicode CLDR project, used under the Unicode License.',
+            'Most country names in languages other than English come from the Unicode CLDR project and are used under the Unicode License.',
           ],
         },
 ```
@@ -350,7 +350,7 @@ After `privacy: { … },` (the last key of `about`), add:
      *  Never shown in the app. The page's nav uses `privacy.heading`. */
     site: {
       /** The page's title and heading. */
-      title: 'Privacy Policy',
+      title: 'Privacy policy',
       updated: (date: string) => `Last updated: ${date}`,
       /** The spoken name of the Escuadra link in the header. */
       home: `${ESCUADRA} home`,
