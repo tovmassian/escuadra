@@ -87,8 +87,8 @@ you changed the work.
 The Unicode License asks that its copyright and permission notice appear with
 all copies of the data, or in the documentation that comes with it. In the
 repository it does: `i18n/UNICODE-LICENSE.txt` sits next to the country names
-in `i18n/countries.ts`. The app bundle does not carry it yet; an in-app licences
-sheet that shows it is tracked in #156.
+in `i18n/countries.ts`. The app bundle does not carry it yet; #156 tracks an
+in-app licences sheet that will show it.
 
 The flag set replaced an earlier set nobody could name a source for; a flag
 whose licence you cannot state is a release blocker. The OFL lets the app
