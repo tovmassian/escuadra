@@ -278,7 +278,7 @@ export const de: Messages = {
         {
           heading: 'Anonyme Nutzungsstatistiken',
           paragraphs: [
-            `${ESCUADRA} sendet anonyme Nutzungsstatistiken an TelemetryDeck, einen Analysedienst, es sei denn, du schaltest „${USAGE_STATISTICS}“ in der App unter „Info“ aus. Jede davon ist mit einer zufälligen Kennung versehen, die für diese Statistiken erstellt wurde und nicht dieselbe ist wie die, die die Update-Prüfung der App verwendet. Diese Kennung ist nicht mit dir, deinem Gerät oder deinen Konten verknüpft, und weder sie noch die Statistiken werden an Dritte weitergegeben.`,
+            `${ESCUADRA} sendet anonyme Nutzungsstatistiken an TelemetryDeck, einen Analysedienst, es sei denn, du schaltest „${USAGE_STATISTICS}“ in der App unter „Info“ aus. Jede davon ist mit einer zufälligen Kennung versehen, die für diese Statistiken erstellt wurde, getrennt von der Kennung, die die Update-Prüfung der App verwendet. Die Kennung der Statistiken ist nicht mit dir, deinem Gerät oder deinen Konten verknüpft, und weder sie noch die Statistiken werden an Dritte weitergegeben.`,
             `Gesendet werden diese Statistiken: die App wurde geöffnet, mit ihrer Sprache und der Angabe, ob diese der Sprache deines Smartphones folgt oder in der App gewählt wurde; eine Runde wurde gestartet, mit der Angabe, ob das Team ein Verein oder ein Nationalteam ist, und dem Level; eine Runde wurde beendet, mit denselben beiden Angaben, der Punktzahl und der Angabe, ob sie ${A_LA_ESCUADRA} war; die Kaderansicht wurde geöffnet, mit der Angabe, ob das Team ein Verein oder ein Nationalteam ist; und ein Ergebnis wurde geteilt, mit dem Level, der Punktzahl und der Angabe, ob es als Bild oder als Text geteilt wurde. Sie enthalten nie Teamnamen, Spielernamen, deine Antworten oder etwas, das du eingibst.`,
           ],
         },
@@ -291,8 +291,8 @@ export const de: Messages = {
         {
           heading: 'Was auf deinem Gerät gespeichert wird',
           paragraphs: [
-            `${ESCUADRA} speichert neun Dinge lokal auf deinem Gerät: deinen Rekord für jedes Team und jedes Level; welche Level du abgeschlossen hast; das letzte Team und Level, das du gespielt hast; deine Einstellung für helles oder dunkles Design; deine Sprachwahl; ob die Vibration eingeschaltet ist; ob die Kaderansicht Karten oder eine Liste zeigt; deine Entscheidung zu den Nutzungsstatistiken und die zufällige Kennung, die diese Statistiken verwenden.`,
-            `Diese Daten liegen im eigenen, privaten Speicher der App. ${ESCUADRA} selbst sendet nur zwei davon von deinem Gerät, und nur, solange die Nutzungsstatistiken eingeschaltet sind: die Kennung, die mit jeder Statistik gesendet wird, und deine Sprachwahl, die in der Statistik enthalten ist, die beim Öffnen der App gesendet wird. Wenn du die App löschst, werden all diese Daten von deinem Gerät gelöscht, ebenso alle zwischengespeicherten Fotos. ${ESCUADRA} hat kein eigenes Backup und keine eigene Synchronisierung, aber die Backups deines Geräts (unter iOS in iCloud oder auf einem Computer; unter Android bei Google) können diese Daten enthalten. Der Entwickler hat keinen Zugriff auf diesen Speicher.`,
+            `${ESCUADRA} speichert neun Dinge lokal auf deinem Gerät: deinen Rekord für jedes Team und jedes Level; welche Level du abgeschlossen hast; das letzte Team und Level, das du gespielt hast; deine Einstellung für helles oder dunkles Design; deine Sprachwahl; ob die Vibration eingeschaltet ist; ob die Kaderansicht Karten oder eine Liste zeigt; deine Entscheidung zu den Nutzungsstatistiken; und die zufällige Kennung, die diese Statistiken verwenden.`,
+            `Diese Daten liegen im eigenen, privaten Speicher der App. ${ESCUADRA} selbst sendet nur zwei dieser Dinge von deinem Gerät aus, und nur, solange die Nutzungsstatistiken eingeschaltet sind: die Kennung, die mit jeder Statistik gesendet wird, und deine Sprachwahl, die in der Statistik enthalten ist, die beim Öffnen der App gesendet wird. Wenn du die App löschst, werden all diese Daten von deinem Gerät gelöscht, ebenso alle zwischengespeicherten Fotos. ${ESCUADRA} hat kein eigenes Backup und keine eigene Synchronisierung, aber die Backups deines Geräts (unter iOS in iCloud oder auf einem Computer; unter Android bei Google) können diese Daten enthalten. Der Entwickler hat keinen Zugriff auf diesen Speicher.`,
           ],
         },
         {
@@ -325,8 +325,8 @@ export const de: Messages = {
       theme: {
         light: 'Hell',
         dark: 'Dunkel',
-        toLight: 'Zu hellem Design wechseln',
-        toDark: 'Zu dunklem Design wechseln',
+        toLight: 'Zum hellen Design wechseln',
+        toDark: 'Zum dunklen Design wechseln',
       },
       releaseStatus: 'Jetzt im App Store',
     },
