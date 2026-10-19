@@ -81,8 +81,11 @@ What the fingerprint can't see:
 - Store listing text and screenshots, and the web privacy pages
   (`scripts/privacy-pages.ts`): those change in Play Console, App Store Connect
   and on `gh-pages`. The pages are versioned: `privacy.html` is the 1.x policy
-  and `privacy/2/` holds 2.0's, and a store's privacy URL moves to a version's
-  pages when that store ships the version.
+  and `privacy/2/` holds 2.0's. A store's privacy URL moves to a version's
+  pages when that store's App Privacy or Data safety answers are updated for
+  it (before review on Apple, when the build is uploaded on Play), because the
+  answers and the URL both belong to the app, not to a version. The pages must
+  be published first.
 
 ## Branches
 
@@ -175,10 +178,18 @@ A new version from `main`:
    `main` by PR.
 2. Cut the branch: `git push origin origin/main:refs/heads/release/X.Y.Z`. Fixes found
    from here on go into it by PR and on to `main` by cherry-pick.
-3. **Actions → store-build**: `platforms: both`, `profile: production`, `submit` on. Both
+3. Only if the release changes what leaves the device (guardrail 4 in `CLAUDE.md`):
+   - Regenerate and publish the version's privacy folder
+     (`scripts/privacy-pages.ts`) before the build.
+   - At submission (step 5), update App Privacy and Data safety, and move each store's privacy
+     URL to the new folder at the same moment: Apple before review, Play when the
+     build is uploaded.
+   - Point the site's own Privacy nav link at the new folder once every live store
+     ships the version.
+4. **Actions → store-build**: `platforms: both`, `profile: production`, `submit` on. Both
    platforms build from one commit; each job checks the built runtime, opens the freeze
    and lists what's left.
-4. iOS: Submit for Review in App Store Connect. Android: promote the build in Play
+5. iOS: Submit for Review in App Store Connect. Android: promote the build in Play
    Console. Close each freeze once approved, and update [Start here](#start-here).
 
 A runtime-changing fix to a released version (1.0.1):
