@@ -80,8 +80,8 @@ What the fingerprint can't see:
 - **Store reviews.** A reviewer's device receives updates for its runtime like anyone's.
 - Store listing text and screenshots, and the web privacy pages
   (`scripts/privacy-pages.ts`): those change in Play Console, App Store Connect
-  and on `gh-pages`. The pages are versioned: `privacy.html` is the 1.x policy
-  and `privacy/2/` holds 2.0's. A store's privacy URL moves to a version's
+  and on `gh-pages`. The pages are versioned: `privacy.html` is the 1.x policy and
+  2.0's go in `privacy/2/`. A store's privacy URL moves to a version's
   pages when that store's App Privacy or Data safety answers are updated for
   it (before review on Apple, when the build is uploaded on Play), because the
   answers and the URL both belong to the app, not to a version. The pages must
@@ -179,11 +179,12 @@ A new version from `main`:
 2. Cut the branch: `git push origin origin/main:refs/heads/release/X.Y.Z`. Fixes found
    from here on go into it by PR and on to `main` by cherry-pick.
 3. Only if the release changes what leaves the device (guardrail 4 in `CLAUDE.md`):
-   - Regenerate and publish the version's privacy folder
-     (`scripts/privacy-pages.ts`) before the build.
-   - At submission (step 5), update App Privacy and Data safety, and move each store's privacy
-     URL to the new folder at the same moment: Apple before review, Play when the
-     build is uploaded.
+   - Give the version its own folder (`POLICY_VERSION` and `POLICY_DIR` in
+     `scripts/privacy-pages.ts`, whose comment says what the superseded folder gets), then
+     generate and publish it before the build.
+   - When the builds reach the stores, update App Privacy and Data safety, and move each
+     store's privacy URL to the new folder at the same moment: Play when step 4 uploads
+     the build, Apple before step 5's Submit for Review.
    - Point the site's own Privacy nav link at the new folder once every live store
      ships the version.
 4. **Actions → store-build**: `platforms: both`, `profile: production`, `submit` on. Both

@@ -2,7 +2,8 @@
 // every language, for gh-pages (CLAUDE.md guardrail 4). The policy is
 // versioned: these are POLICY_VERSION's pages, in POLICY_DIR, and every link
 // out of that folder climbs back to the site root. privacy.html stays the 1.x
-// policy, and a published folder is never edited once its version ships.
+// policy, and a published folder is never edited once its version ships, bar
+// the one regeneration described at POLICY_DIR.
 // Written into <dir>/privacy/2/ by `PRIVACY_PAGES=<dir>
 // PRIVACY_UPDATED=YYYY-MM-DD npx vitest run scripts/privacy-pages.test.ts` —
 // a Vitest run, because Node alone cannot load the catalogs' extensionless

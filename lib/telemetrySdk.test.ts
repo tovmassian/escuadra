@@ -1,9 +1,11 @@
+import { createHash } from 'node:crypto';
 import TelemetryDeck from '@telemetrydeck/sdk';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 // About states what a usage statistic carries: a hashed form of a random
 // identifier, a random session code that is new each time the app starts, and
-// the statistic itself. Nothing else. That is a statement about the SDK, not
+// the statistic itself; the request also names the app and the SDK version.
+// Nothing else. That is a statement about the SDK, not
 // only about our code, so this test builds the same client `lib/telemetry.ts`
 // does and pins the request it sends. A failure after an upgrade of
 // `@telemetrydeck/sdk` means the SDK now sends something About does not say:
@@ -68,6 +70,7 @@ describe('what the TelemetryDeck SDK sends', () => {
     ]);
     expect(signal?.appID).toBe('APP');
     expect(signal?.type).toBe('app.launched');
+    expect(signal?.telemetryClientVersion).toMatch(/^JavaScriptSDK \d+\.\d+\.\d+$/);
   });
 
   it('adds only the test flag on a test-mode client', async () => {
@@ -87,6 +90,7 @@ describe('what the TelemetryDeck SDK sends', () => {
   it('sends the identifier hashed, never as it is stored', async () => {
     const [signal] = (await sendOne()).signals;
     expect(signal?.clientUser).toMatch(/^[0-9a-f]{64}$/);
+    expect(signal?.clientUser).toBe(createHash('sha256').update(INSTALL_ID).digest('hex'));
     expect(signal?.clientUser).not.toBe(INSTALL_ID);
     expect(JSON.stringify(signal)).not.toContain(INSTALL_ID);
   });

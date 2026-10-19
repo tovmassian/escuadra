@@ -50,7 +50,7 @@ store build.** The About text on `main`, in all five catalogs, covers
 TelemetryDeck, the Wikimedia photos and the language sent with the launch signal
 (#54, #146). The web policy is versioned: `privacy.html` stays the 1.x policy
 that both store listings link today, and `scripts/privacy-pages.ts` generates
-the 2.0 pages into `privacy/2/`, which await #157 to be published. The order:
+the 2.0 pages into `privacy/2/`, which #157 will publish. The order:
 
 1. Every 2.0.0 issue lands on `main`.
 2. #157 is merged, so `privacy/2/` is published (nothing links it yet).
@@ -173,7 +173,7 @@ update this file in the same PR rather than leave a stale rule behind.
    version, opt-out TelemetryDeck usage signals (see Telemetry under
    Architecture rules) and player-photo thumbnails loaded from Wikimedia
    Commons (`upload.`/`thumb.wikimedia.org`). `en.about.privacy`
-   (`i18n/en.ts`) is the complete statement of what each one receives.
+   (`i18n/en.ts`) is the complete statement of what each service receives.
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
    rather than inlining a value. This governs the app's own design system —
@@ -368,17 +368,17 @@ reports — is done by hand, not by a skill.
   `TELEMETRY_EVENTS` in `lib/telemetryEvents.ts`, alongside the pure gate
   that keeps it inert in `__DEV__`, on web (so `npm run shots*` never sends),
   when opted out, and with no App ID (`app.json` →
-  `extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only module that
+  `extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only app module that
   imports the SDK; screens call its `track()`. The anonymous `clientUser` is
   a random `installId` persisted in `stores/progress.ts`, next to the
   About-screen opt-out. Non-`production` channels send TelemetryDeck test
   signals. **A new event or property is a disclosure review** (guardrail 4):
   the privacy policy, About text, App Privacy and Data safety answers change
   with it, in a store build. So is an upgrade of `@telemetrydeck/sdk` (or of
-  `expo-updates`), because About states what those SDKs put in each request;
-  `lib/telemetrySdk.test.ts` pins what the TelemetryDeck SDK sends, and a
-  failure there is the cue to review. Never put names, free text or player
-  data in a payload.
+  `expo-updates`), because About states what those SDKs put in each request.
+  For TelemetryDeck, `lib/telemetrySdk.test.ts` pins the request, and a failure
+  there means About no longer describes it; `expo-updates` has no such test, so
+  read its changelog. Never put names, free text or player data in a payload.
 - Zustand's `persist` defaults to `localStorage`, which does not exist here. Use
   `createJSONStorage(() => AsyncStorage)`.
 - Every animation stays under 300ms. The app is played in fast repetitive bursts
