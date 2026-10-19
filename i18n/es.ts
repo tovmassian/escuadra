@@ -195,8 +195,9 @@ export const es: Messages = {
   ladder: {
     play: 'Jugar',
     playAgain: 'Jugar otra vez',
-    // The level first: "8/10 en el nivel 1" wraps the rung titles beside it.
-    unlockHint: (target: string, level: number) => `Nivel ${level}: ${target}`,
+    // The target first, as French does: "Nivel 1: 8/10" reads as a recorded
+    // score. "8/10 en nivel 1" wraps "Nombre y posición" beside it.
+    unlockHint: (target: string, level: number) => `${target} en niv. ${level}`,
     rungLocked: (title: string, hint: string) => `${title}, bloqueado, ${hint}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, récord ${correct} de ${total}`,

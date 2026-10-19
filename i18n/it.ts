@@ -183,8 +183,9 @@ export const it: Messages = {
   ladder: {
     play: 'Gioca',
     playAgain: 'Gioca ancora',
-    // The level first: "8/10 al livello 2" wraps "Profilo completo" beside it.
-    unlockHint: (target: string, level: number) => `Livello ${level}: ${target}`,
+    // The target first, as French does: "Livello 1: 8/10" reads as a
+    // recorded score. "8/10 al livello 2" wraps "Profilo completo" beside it.
+    unlockHint: (target: string, level: number) => `${target} al liv. ${level}`,
     rungLocked: (title: string, hint: string) => `${title}, bloccato, ${hint}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} su ${total}`,

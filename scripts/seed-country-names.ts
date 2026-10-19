@@ -138,6 +138,7 @@ const HAND_WRITTEN: Record<
     NIR: 'Irlanda del Norte',
     CIV: 'Costa de Marfil',
     COD: 'RD Congo',
+    MLI: 'Malí',
   },
   fr: {
     ENG: 'Angleterre',
@@ -154,6 +155,7 @@ const HAND_WRITTEN: Record<
     NIR: 'Irlanda del Nord',
     CGO: 'Congo',
     COD: 'RD del Congo',
+    CZE: 'Repubblica Ceca',
   },
   de: {
     ENG: 'England',
