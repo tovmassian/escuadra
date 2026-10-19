@@ -264,8 +264,8 @@ export const es: Messages = {
         {
           heading: 'Fotos de los jugadores',
           paragraphs: [
-            'Las fotos de los jugadores proceden de Wikimedia Commons. Cada una se usa bajo la licencia que eligió su autor: CC BY-SA, CC BY, CC0, dominio público o la licencia “Attribution” propia de Commons. Todas las fotos se recortan para ajustarse a su marco. Donde el texto de la aplicación queda sobre una foto, la aplicación sombrea esa parte de la pantalla, y atenúa la foto tras una respuesta incorrecta. Una foto demasiado pequeña para llenar la pantalla se muestra entera, sobre una copia oscurecida de sí misma. Los archivos de las fotos en sí no se modifican. No todos los jugadores tienen foto.',
-            `El autor, la licencia y la palabra “${CROPPED}” aparecen bajo la pregunta mientras haya una foto en pantalla, y de nuevo, para toda la ronda, bajo “${PHOTO_CREDITS}” en los resultados y al final de la pantalla “Plantilla”. Toca el autor para ver la página de la foto en Wikimedia Commons, o la licencia para ver sus condiciones.`,
+            'Las fotos de los jugadores proceden de Wikimedia Commons. Cada una es de dominio público o se usa bajo la licencia con la que figura en Commons: CC BY-SA, CC BY, CC0 o la licencia “Attribution” propia de Commons. Las fotos se recortan para llenar el espacio en el que aparecen. En la pantalla de preguntas, una foto demasiado pequeña para llenar ese espacio se muestra en cambio entera, sobre una copia ampliada y oscurecida de sí misma que lo llena. Donde el texto de la aplicación queda sobre una foto, la aplicación sombrea esa parte de la pantalla, y atenúa la foto tras una respuesta incorrecta. Los archivos de las fotos en sí no se modifican. No todos los jugadores tienen foto.',
+            `El autor, la licencia y la palabra “${CROPPED}” aparecen bajo la pregunta mientras haya una foto en pantalla, y de nuevo bajo “${PHOTO_CREDITS}” en los resultados, para toda la ronda, y al final de la pantalla “Plantilla”, para cada jugador que figura en ella. Toca el autor para ver la página de la foto en Wikimedia Commons, o la licencia para ver sus condiciones.`,
           ],
         },
         {
@@ -290,14 +290,14 @@ export const es: Messages = {
       heading: 'Privacidad',
       lead: `${ESCUADRA} no tiene cuentas, inicio de sesión ni publicidad, y nunca te pide tu nombre, tu correo electrónico ni ningún dato de contacto.`,
       paragraphs: [
-        'Tus puntuaciones y ajustes se quedan en tu dispositivo. Lo único que sale de él es lo que se describe a continuación, y nada de ello está vinculado a tu identidad.',
+        'Tus puntuaciones y ajustes se guardan en tu dispositivo. Lo único que sale de él es lo que se describe a continuación, y nada de ello está vinculado a tu identidad.',
       ],
       sections: [
         {
           heading: 'Fotos de los jugadores',
           paragraphs: [
-            `${ESCUADRA} no contiene fotos de jugadores. Se cargan desde Wikimedia Commons, gestionado por la Wikimedia Foundation: las diez fotos de una ronda, cuando empieza la ronda, y las fotos de una plantilla en la pantalla “Plantilla”, a medida que te desplazas por ella. Como cualquier sitio web, Wikimedia recibe la dirección IP de tu dispositivo y los detalles de cada solicitud, entre ellos qué fotos se pidieron y, por tanto, qué jugadores hay en tu ronda o en tu plantilla. ${ESCUADRA} no envía nada más a Wikimedia, y lo que Wikimedia recibe se rige por su propia política de privacidad.`,
-            'Las fotos ya cargadas pueden conservarse en la caché de la aplicación en tu dispositivo para que aparezcan más rápido. Sin conexión, el juego funciona con normalidad y muestra los colores del equipo y el dorsal en lugar de una foto.',
+            `${ESCUADRA} no contiene fotos de jugadores. Se cargan desde Wikimedia Commons, gestionado por la Wikimedia Foundation: las fotos de una ronda, cuando empieza la ronda, y las fotos de una plantilla en la pantalla “Plantilla”, a medida que te desplazas por ella. Como cualquier sitio web, Wikimedia recibe la dirección IP de tu dispositivo y los detalles de cada solicitud, entre ellos qué fotos se pidieron y, por tanto, qué jugadores hay en tu ronda o en tu plantilla. ${ESCUADRA} no envía nada más a Wikimedia, y lo que Wikimedia recibe se rige por su propia política de privacidad.`,
+            'Las fotos ya cargadas pueden conservarse en la caché de la aplicación en tu dispositivo para que aparezcan más rápido. Sin conexión, el juego funciona con normalidad y muestra los colores del equipo y el dorsal en lugar de cualquier foto que no esté ya en esa caché.',
             `Al tocar el crédito de una foto se abre la página de la foto en Wikimedia Commons, o su licencia en el sitio web de Creative Commons, en un navegador integrado en la aplicación. Esos sitios tienen sus propias políticas de privacidad, y ${ESCUADRA} no puede ver lo que haces en ellos.`,
           ],
         },
@@ -310,28 +310,28 @@ export const es: Messages = {
         {
           heading: 'Estadísticas de uso anónimas',
           paragraphs: [
-            `${ESCUADRA} envía estadísticas de uso anónimas a TelemetryDeck, un servicio de analítica, salvo que desactives “${USAGE_STATISTICS}” en la pantalla “Info” de la aplicación. Cada una va etiquetada con un identificador aleatorio creado para estas estadísticas, distinto del que usa la comprobación de actualizaciones de la aplicación. El identificador de las estadísticas no está vinculado a ti, a tu dispositivo ni a tus cuentas, y ni él ni las estadísticas se comparten con nadie más.`,
-            `Estas son las estadísticas: se abrió la aplicación, con su idioma y la indicación de si este sigue el idioma de tu teléfono o se eligió en la aplicación; empezó una ronda, con el tipo de equipo (club o selección) y el nivel de dificultad; terminó una ronda, con esos mismos dos datos, la puntuación y la indicación de si fue ${A_LA_ESCUADRA}; se abrió la pantalla “Plantilla”, con el tipo de equipo (club o selección); y se compartió un resultado, con el nivel, la puntuación y el formato en que se compartió (imagen o texto). Las estadísticas nunca incluyen nombres de equipos ni de jugadores, ni tus respuestas, ni nada de lo que escribas.`,
+            `${ESCUADRA} envía estadísticas de uso anónimas a TelemetryDeck, un servicio de analítica, salvo que desactives “${USAGE_STATISTICS}” en la pantalla “Info” de la aplicación. Cada una lleva un identificador aleatorio en forma de hash, creado para estas estadísticas (distinto del que usa la comprobación de actualizaciones de la aplicación), y un código de sesión aleatorio, nuevo cada vez que se inicia la aplicación. Como cualquier servicio en línea, TelemetryDeck también recibe la dirección IP de tu dispositivo con cada estadística, y lo que TelemetryDeck recibe se rige por su propia política de privacidad. El identificador de las estadísticas y el código de sesión son aleatorios, no se derivan de tu dispositivo y no están vinculados a ti ni a tus cuentas. Ni ${ESCUADRA} ni el desarrollador los comparten con nadie más, ni tampoco las estadísticas.`,
+            `Estas son las estadísticas: se abrió la aplicación, con su idioma y la indicación de si este sigue el idioma de tu teléfono o se eligió en la aplicación; empezó una ronda, con el tipo de equipo (club o selección) y el nivel de dificultad; terminó una ronda, con esos mismos dos datos, la puntuación y la indicación de si fue ${A_LA_ESCUADRA}; se abrió la pantalla “Plantilla”, con el tipo de equipo (club o selección); y se pasó un resultado al menú para compartir de tu teléfono, con el nivel, la puntuación y el formato (imagen o texto). Las estadísticas nunca incluyen nombres de equipos ni de jugadores, ni tus respuestas, ni nada de lo que escribas.`,
           ],
         },
         {
           heading: 'Actualizaciones de la aplicación',
           paragraphs: [
-            `Cuando ${ESCUADRA} se inicia, comprueba si hay una versión más reciente de la aplicación disponible en Expo, el servicio que distribuye sus actualizaciones. La comprobación solo envía lo necesario para entregar la actualización correcta: el sistema operativo de tu dispositivo, la versión y el proyecto de la aplicación, y un identificador aleatorio creado para esta instalación. El identificador no está vinculado a ti ni a nada de lo que haces en la aplicación. Si no hay conexión, la aplicación funciona por completo sin ella y omite la comprobación.`,
+            `Cuando ${ESCUADRA} se inicia, comprueba si hay una versión más reciente de la aplicación disponible en Expo, el servicio que distribuye sus actualizaciones. La comprobación envía lo necesario para entregar la actualización correcta: el sistema operativo de tu dispositivo, la versión y el proyecto de la aplicación, y un identificador aleatorio creado para esta instalación. Si la aplicación sufrió un fallo o no pudo cargar una actualización la última vez que se inició, la comprobación también envía a Expo el mensaje de error técnico correspondiente. Como cualquier servicio en línea, Expo recibe además la dirección IP de tu dispositivo con cada comprobación. El identificador no está vinculado a ti ni a nada de lo que haces en la aplicación. Si no hay conexión, la aplicación omite la comprobación y funciona con normalidad.`,
           ],
         },
         {
           heading: 'Qué se guarda en tu dispositivo',
           paragraphs: [
-            `${ESCUADRA} guarda nueve datos localmente, en tu dispositivo: tu récord en cada equipo y nivel de dificultad; qué niveles has superado; el último equipo y nivel que has jugado; tu preferencia de tema claro u oscuro; tu elección de idioma; si la vibración está activada; si la pantalla “Plantilla” muestra tarjetas o una lista; tu elección sobre las estadísticas de uso; y el identificador aleatorio que usan esas estadísticas.`,
-            `Estos datos se guardan en el almacenamiento privado de la propia aplicación. ${ESCUADRA}, por sí misma, solo envía dos de ellos fuera de tu dispositivo, y solo mientras las estadísticas de uso están activadas: el identificador, que se envía con cada estadística, y tu elección de idioma, que se incluye en la estadística que se envía al abrir la aplicación. Al eliminar la aplicación, se borran todos ellos de tu dispositivo, junto con las fotos que haya en caché. ${ESCUADRA} no tiene copia de seguridad ni sincronización propias, pero las copias de seguridad de tu dispositivo (en iOS, en iCloud o en un ordenador; en Android, en Google) pueden incluir estos datos. El desarrollador no tiene acceso a este almacenamiento.`,
+            `${ESCUADRA} guarda ocho datos localmente, en tu dispositivo: tu récord en cada equipo y nivel de dificultad, a partir del cual la aplicación deduce qué niveles has superado; el último equipo y nivel que has jugado; tu preferencia de tema claro u oscuro; tu elección de idioma; si la vibración está activada; si la pantalla “Plantilla” muestra tarjetas o una lista; tu elección sobre las estadísticas de uso; y el identificador aleatorio que usan esas estadísticas. La comprobación de actualizaciones de la aplicación también guarda su propio identificador aleatorio en tu dispositivo.`,
+            `Estos datos se guardan en el almacenamiento privado de la propia aplicación. ${ESCUADRA}, por sí misma, solo envía dos de esos ocho datos fuera de tu dispositivo, y solo mientras las estadísticas de uso están activadas: el identificador, que se envía en forma de hash con cada estadística, y tu elección de idioma, que se incluye en la estadística que se envía al abrir la aplicación. Al eliminar la aplicación, se borran todos ellos de tu dispositivo, junto con las fotos que haya en caché. ${ESCUADRA} no tiene copia de seguridad ni sincronización propias, pero las copias de seguridad de tu dispositivo (en iOS, en iCloud o en un ordenador; en Android, en Google) pueden incluir estos datos. El desarrollador no tiene acceso a este almacenamiento.`,
           ],
         },
         {
           // "Fallos", the word iOS and Android use for crashes in Spanish.
           heading: 'Informes de fallos',
           paragraphs: [
-            `Si permites que tu dispositivo comparta datos de diagnóstico, Apple (en iOS) o Google (en Android) pueden compartir informes de fallos anonimizados con el desarrollador. Eso lo gestionan Apple o Google, y se controla en los ajustes de tu dispositivo. ${ESCUADRA}, por sí misma, no envía ningún informe de fallos.`,
+            `Si permites que tu dispositivo comparta datos de diagnóstico, Apple (en iOS) o Google (en Android) pueden compartir informes de fallos anonimizados con el desarrollador. Eso lo gestionan Apple o Google, y se controla en los ajustes de tu dispositivo. Aparte del mensaje de error que la comprobación de actualizaciones de la aplicación puede enviar tras un inicio fallido, ${ESCUADRA}, por sí misma, no envía ningún informe de fallos.`,
           ],
         },
         {
@@ -346,8 +346,8 @@ export const es: Messages = {
       title: 'Política de privacidad',
       updated: (date: string) => `Última actualización: ${date}`,
       appliesTo: (version: string) =>
-        `Esta política de privacidad se aplica a ${ESCUADRA} ${version} y versiones posteriores.`,
-      earlierVersions: 'Política de privacidad de versiones anteriores',
+        `Esta política se aplica a ${ESCUADRA} ${version} y a las versiones posteriores.`,
+      earlierVersions: 'Política de privacidad de las versiones anteriores',
       home: `Página de inicio de ${ESCUADRA}`,
       languages: 'Idioma',
       nav: {
