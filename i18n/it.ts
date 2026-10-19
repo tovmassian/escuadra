@@ -54,7 +54,9 @@ export const it: Messages = {
   round: {
     correct: 'Giusto',
     missed: 'Sbagliato',
-    whoWears: (no: number) => `Chi ha il ${no}?`,
+    // "il" elides before 8, 11 and 80–89 (l’8, l’11), so never put it
+    // directly before a number.
+    whoWears: (no: number) => `Chi ha il numero ${no}?`,
     askPosition: 'Che ruolo?',
     askClub: 'Quale club?',
     // Not "Che paese?": on a club squad that could mean the country the
@@ -202,7 +204,8 @@ export const it: Messages = {
       },
     },
     studySquad: 'Ripassa la rosa',
-    updated: (date: string) => `Aggiornato il ${date} · Wikipedia`,
+    // Not "Aggiornato il": "il 8 set" and "il 11 set" need elision.
+    updated: (date: string) => `Aggiornato: ${date} · Wikipedia`,
     best: (correct: number, total: number) => `RECORD ${correct}/${total}`,
   },
   picker: {
