@@ -45,9 +45,10 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 - **CI calls tools directly** (`node scripts/ci/…`, `npx eas-cli …`), never through new npm
   scripts, and writes temporary files to `$RUNNER_TEMP`, never new `.gitignore` lines.
 
-⚠️ **The About text on `main` now covers TelemetryDeck and the Wikimedia photos
-(#54), but the web policy has not caught up.** `gh-pages` `privacy.html` still
-carries the old text and must be replaced with the About text word for word,
+⚠️ **The About text on `main` now covers TelemetryDeck, the Wikimedia photos
+and the app's language, in five languages (#54, #146), but the web policy has
+not caught up.** `gh-pages` still carries the old English `privacy.html`; #146's
+PR B replaces it with the five pages `scripts/privacy-pages.ts` renders,
 published when the first build containing it reaches users; #55 updates the
 store declarations (both covering the photos as well as TelemetryDeck). The next
 release branch (its version still TBD) is cut from `main` only after both; then
@@ -154,7 +155,7 @@ update this file in the same PR rather than leave a stale rule behind.
    features are allowed when an issue asks for them. The rule is honesty,
    not abstinence: any change that alters what leaves the device (analytics,
    crash reporting, a backend call, a new SDK) ships **together** with the
-   updated privacy policy (the published page and the About screen text,
+   updated privacy policy (the privacy pages and the About screen text,
    word for word), Apple's App Privacy answers and Google Play's Data safety
    form — in a store build, never over the air. Today the traffic is
    `expo-updates` checking EAS Update on launch (OS, project ID, a random
@@ -193,8 +194,8 @@ update this file in the same PR rather than leave a stale rule behind.
    A change that could make any of that untrue is flagged in its PR, and the
    text is fixed in the same PR. When the right wording is plain, write it.
    When it needs a privacy, licensing or legal judgement, stop and discuss it
-   with the owner first. The Privacy section also reaches `privacy.html` word
-   for word (guardrail 4).
+   with the owner first. The Privacy section also reaches the privacy pages
+   word for word (guardrail 4), rendered by `scripts/privacy-pages.ts`.
 
 ## Data model
 
@@ -332,10 +333,12 @@ reports — is done by hand, not by a skill.
   comments in `en.ts` are mirrored in `i18n/budgets.ts`, which
   `i18n/__tests__/budgets.test.ts` holds every catalog to; the per-language facts
   (date, plurals, position codes, hand-written country names) are
-  `i18n/__tests__/translations.test.ts`. About's words
-  are `en.about`, kept as data that #146 renders into the privacy pages. Screens read text through
-  `useT()`. `lib/` modules that build text take `messages` as their last argument
-  and stay React-free. Data stays English: squads, players, clubs and position
+  `i18n/__tests__/translations.test.ts`. About's words are each catalog's
+  `about`. Its Privacy section, plus `i18n/translationNotice.ts` in a
+  translation, is rendered word for word into `privacy.html` and
+  `privacy.{es,fr,it,de}.html` by `scripts/privacy-pages.ts`. Screens read text
+  through `useT()`. `lib/` modules that build text take `messages` as their last
+  argument and stay React-free. Data stays English: squads, players, clubs and position
   codes are translated at display time by code, never by their English string.
   A nation's name and a player's nationality come from `i18n/countries.ts` (FIFA
   code → name, the codes `lib/flags.ts` maps to); every screen shows a team

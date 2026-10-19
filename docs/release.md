@@ -78,8 +78,9 @@ What the fingerprint can't see:
   reporting, a new endpoint — even in pure JS — ship in a store build, together with the
   privacy policy, App Privacy and Data safety.
 - **Store reviews.** A reviewer's device receives updates for its runtime like anyone's.
-- Store listing text and screenshots, and the web privacy page: those change in Play
-  Console, App Store Connect and on `gh-pages`.
+- Store listing text and screenshots, and the web privacy pages
+  (`scripts/privacy-pages.ts`): those change in Play Console, App Store Connect
+  and on `gh-pages`.
 
 ## Branches
 
