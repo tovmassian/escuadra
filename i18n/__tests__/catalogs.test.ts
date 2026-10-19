@@ -32,8 +32,7 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     // Club is the French word too, and CLUB its chip code.
     'slots.CLUB',
     'slotCodes.CLUB',
-    // POS for Poste, NAT for Nationalité.
-    'slotCodes.POS',
+    // NAT for Nationalité.
     'slotCodes.NAT',
     // "Image" is the French word for a share as a picture.
     'share.image',

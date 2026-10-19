@@ -60,7 +60,8 @@ export const fr: Messages = {
   positionCodes: { GK: 'GB', DF: 'DÉF', MF: 'MIL', FW: 'ATT' },
   positions: { GK: 'Gardien', DF: 'Défenseur', MF: 'Milieu', FW: 'Attaquant' },
   slots: { NAME: 'Nom', POS: 'Poste', AGE: 'Âge', CLUB: 'Club', NAT: 'Nationalité' },
-  slotCodes: { NAME: 'NOM', POS: 'POS', AGE: 'ÂGE', CLUB: 'CLUB', NAT: 'NAT' },
+  // "POSTE" fits the chip; "POS" is the English code.
+  slotCodes: { NAME: 'NOM', POS: 'POSTE', AGE: 'ÂGE', CLUB: 'CLUB', NAT: 'NAT' },
   round: {
     // "Bonne réponse" is 13 chars against 12.
     correct: 'Exact',
@@ -76,7 +77,8 @@ export const fr: Messages = {
     seeResults: 'Résultats',
     next: 'Suivant',
     nextQuestion: 'Question suivante',
-    gotItNext: 'Compris – suivant',
+    // A comma, not a dash: the dash reads as English UI.
+    gotItNext: 'Compris, suivant',
     // "Résultats · appuie pour passer" is 30 chars against 26. The ellipsis
     // says it moves on in a moment; "ou appuie ici" says a tap is sooner.
     // French sets the ellipsis tight against the word before it.
@@ -84,17 +86,20 @@ export const fr: Messages = {
     slotSpoken: {
       given: (slot: string, value: string) => `${slot} : ${value}`,
       active: (slot: string) => `${slot} : à trouver`,
-      pending: (slot: string) => `${slot} : à suivre`,
+      // "À venir", not "à suivre": that is "to be continued".
+      pending: (slot: string) => `${slot} : à venir`,
       correct: (slot: string, value: string) => `${slot} : ${value}, exact`,
       wrong: (slot: string, value: string) => `${slot} : ${value}, la bonne réponse`,
       // Spoken only: "demandé" and "demandée" sound the same.
       notAsked: (slot: string, value: string) => `${slot} : ${value}, non demandé`,
     },
-    leave: 'Quitter la manche',
+    // "Partie": a manche is one round of several inside a match.
+    leave: 'Quitter la partie',
     shirtNumber: (no: number) => `Numéro ${no}`,
     // "Choisis", not "Tape": "Tape ta réponse" reads "type your answer".
     tapYourAnswer: 'Choisis ta réponse',
-    movesOn: 'Passe automatiquement à la suite dans un instant',
+    // Not "Passe…": with "tu" that reads as an order to the player.
+    movesOn: 'La suite arrive dans un instant',
     answerTag: 'Réponse',
     tileSpoken: {
       idle: '',
@@ -142,8 +147,9 @@ export const fr: Messages = {
       `Fais ${target} pour débloquer le niveau ${level}.`,
     // The words first: a long name truncates, the words must not.
     youPicked: (picked: string) => `Ton choix : ${picked}`,
-    nameRight: 'Bon nom',
-    nameAndPositionRight: 'Bon nom et bon poste',
+    // "Trouvé", the quiz word; "Bon nom" can read as "nice name".
+    nameRight: 'Nom trouvé',
+    nameAndPositionRight: 'Nom et poste trouvés',
     wrongPart: {
       position: (right: string, picked: string) => `poste : ${right}, pas ${picked}`,
       club: (right: string, picked: string) => `club : ${right}, pas ${picked}`,
@@ -152,7 +158,7 @@ export const fr: Messages = {
     close: 'Fermer, choisir une autre équipe',
     // "Réviser": the word for studying before a test.
     studySquad: 'Réviser l’effectif',
-    retry: 'Rejouer la manche',
+    retry: 'Rejouer la partie',
     playLevel: (level: number) => `Jouer le niveau ${level}`,
     chooseTeam: 'Changer d’équipe',
     // "Raté", as the round says after a miss.
@@ -164,18 +170,20 @@ export const fr: Messages = {
     // "Sans faute", as the flawless verdict says.
     nothingMissed: (count: number) => `TOUS LES ${count} · SANS FAUTE`,
     roundSpoken: (right: number, total: number) =>
-      `Manche : ${right} ${right <= 1 ? 'bonne réponse' : 'bonnes réponses'} sur ${total}`,
+      `Partie : ${right} ${right <= 1 ? 'bonne réponse' : 'bonnes réponses'} sur ${total}`,
   },
   share: {
-    title: 'Partager ta manche',
-    // Speaks to whoever receives the picture: not there yet, but working on it.
-    stillLearning: 'Pas encore au point',
+    title: 'Partager ta partie',
+    // Speaks to whoever receives the picture: working on it, as "Réviser"
+    // says elsewhere. "Pas encore au point" sounded like a put-down.
+    stillLearning: 'En pleine révision',
     // The name first, so it needs no article ("de l’Espagne", "du Brésil").
-    question: (team: string) => `${team} : sauras-tu nommer tout l’effectif ?`,
+    // Not "nommer", which also means to appoint.
+    question: (team: string) => `${team} : connais-tu tout l’effectif ?`,
     image: 'Image',
     text: 'Texte',
     preview: 'Aperçu',
-    imageHint: 'Image au format story, sans photo ni nom : tes amis peuvent y jouer aussi.',
+    imageHint: 'Image au format story, sans photo ni nom : tes amis peuvent quand même y jouer.',
     textHint: 'La grille du score pour tes groupes, avec un lien vers l’appli.',
     // "Partager le texte" is 17 chars against 16, so both say "Envoyer".
     shareImage: 'Envoyer l’image',
@@ -207,7 +215,7 @@ export const fr: Messages = {
       },
     },
     studySquad: 'Réviser l’effectif',
-    updated: (date: string) => `Mis à jour le ${date} · Wikipedia`,
+    updated: (date: string) => `Mis à jour le ${date} · Wikipédia`,
     best: (correct: number, total: number) => `RECORD ${correct}/${total}`,
   },
   picker: {
