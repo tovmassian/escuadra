@@ -307,7 +307,7 @@ export const en = {
           heading: 'Player photos',
           paragraphs: [
             "Player photos come from Wikimedia Commons. Each one is either in the public domain or used under the licence it carries on Commons: CC BY-SA, CC BY, CC0 or Commons' own Attribution licence. Photos are cropped to fill the space they appear in. On the question screen, a photo too small to fill the space is shown whole instead, over an enlarged, darkened copy of itself that fills it. Where the app's text sits over a photo, the app shades that part of the screen, and it dims the photo after a wrong answer. The photo files themselves are not edited. Not every player has a photo.",
-            `The author, the licence and the word "${CROPPED}" appear under the question for as long as a photo is on screen, and again, for the whole round, under "${PHOTO_CREDITS}" in the results and at the end of the Study screen. Tap the author for the photo's page on Wikimedia Commons, or the licence for its terms.`,
+            `The author, the licence and the word "${CROPPED}" appear under the question for as long as a photo is on screen, and again under "${PHOTO_CREDITS}" in the results, for the whole round, and at the end of the Study screen, for the whole squad. Tap the author for the photo's page on Wikimedia Commons, or the licence for its terms.`,
           ],
         },
         {
@@ -332,13 +332,13 @@ export const en = {
       /** Set in emphasis. */
       lead: `${ESCUADRA} has no account, no sign-in and no advertising, and it never asks for your name, email or any contact details.`,
       paragraphs: [
-        'Your scores and settings stay on your device. The only things that leave it are the ones described below, and none of them is linked to who you are.',
+        'Your scores and settings are saved on your device. The only things that leave it are the ones described below, and none of them is linked to who you are.',
       ],
       sections: [
         {
           heading: 'Player photos',
           paragraphs: [
-            `${ESCUADRA} does not ship player photos. They are loaded from Wikimedia Commons, run by the Wikimedia Foundation: the ten photos for a round when the round starts, and a squad's photos on the Study screen as you scroll. Like any website, Wikimedia receives your device's IP address and the details of each request, including which photos were asked for, and so which players are in your round or squad. ${ESCUADRA} sends nothing else to Wikimedia, and Wikimedia's own privacy policy applies to what it receives.`,
+            `${ESCUADRA} does not ship player photos. They are loaded from Wikimedia Commons, run by the Wikimedia Foundation: a round's photos when the round starts, and a squad's photos on the Study screen as you scroll. Like any website, Wikimedia receives your device's IP address and the details of each request, including which photos were asked for, and so which players are in your round or squad. ${ESCUADRA} sends nothing else to Wikimedia, and Wikimedia's own privacy policy applies to what it receives.`,
             "Photos already loaded may be kept in the app's cache on your device so that they appear faster. Without a connection the quiz works as usual and shows the team's colours and the shirt number instead of a photo.",
             `Tapping a photo credit opens the photo's Wikimedia Commons page, or its licence on the Creative Commons website, in an in-app browser. Those sites have their own privacy policies, and ${ESCUADRA} cannot see what you do there.`,
           ],
@@ -359,14 +359,14 @@ export const en = {
         {
           heading: 'App updates',
           paragraphs: [
-            `When ${ESCUADRA} starts, it checks whether a newer version of the app is available from Expo, the service that delivers its updates. The check sends only what is needed to deliver the right update: your device's operating system, the app's version and project, and a random identifier created for this installation. The identifier is not linked to you or to anything you do in the app. Without a connection, the app works fully offline and skips the check.`,
+            `When ${ESCUADRA} starts, it checks whether a newer version of the app is available from Expo, the service that delivers its updates. The check sends only what is needed to deliver the right update: your device's operating system, the app's version and project, and a random identifier created for this installation. Like any online service, Expo also receives your device's IP address with each check. The identifier is not linked to you or to anything you do in the app. Without a connection, the app skips the check and works as usual.`,
           ],
         },
         {
           heading: 'What is stored on your device',
           paragraphs: [
-            `${ESCUADRA} saves nine things locally, on your device: your best score for each team and difficulty level; which levels you have completed; the last team and level you played; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; your choice about usage statistics; and the random identifier those statistics use. The app-update check also keeps its own random identifier on your device.`,
-            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of those nine things off your device, and only while usage statistics are on: the identifier, which is sent in hashed form with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
+            `${ESCUADRA} saves eight things locally, on your device: your best score for each team and difficulty level, from which it works out which levels you have completed; the last team and level you played; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; your choice about usage statistics; and the random identifier those statistics use. The app-update check also keeps its own random identifier on your device.`,
+            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of those eight things off your device, and only while usage statistics are on: the identifier, which is sent in hashed form with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
           ],
         },
         {
