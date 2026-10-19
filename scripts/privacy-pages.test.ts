@@ -73,8 +73,16 @@ describe.each(SUPPORTED_LANGUAGES)('the %s privacy page', (language) => {
     const at = lines.findIndex((line) => line.startsWith('<p class="updated">'));
     expect(at).toBeGreaterThan(-1);
     expect(lines[at + 1]).toBe(
-      `<p class="applies">${escapeHtml(site.appliesTo(POLICY_VERSION))} <a href="../../privacy.html">${escapeHtml(site.earlierVersions)}</a></p>`,
+      `<p class="applies">${escapeHtml(site.appliesTo(POLICY_VERSION))} <a href="../../privacy.html" hreflang="en">${escapeHtml(site.earlierVersions)}</a></p>`,
     );
+  });
+
+  // The page sits two folders down, so its home links must climb back to the
+  // site root. A bare `index.html` would resolve inside the policy folder,
+  // to the English privacy page, and the relative-link test below accepts it.
+  it('links the brand and the footer home to the site root', () => {
+    expect(html).toContain('<a class="brand" href="../../index.html"');
+    expect(html).toContain('<a href="../../index.html">');
   });
 
   // The page sits two folders down: a link to the site's own files that
