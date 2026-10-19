@@ -26,7 +26,7 @@ const SAMPLE_ARGS: Readonly<Record<string, readonly unknown[]>> = {
  *  store listing (#147). Each language drops `about.` when its About lands. */
 export const LATER_PATHS: Readonly<Record<Language, readonly string[]>> = {
   en: [],
-  de: ['about.', 'store.'],
+  de: ['store.'],
   fr: ['about.', 'store.'],
   es: ['about.', 'store.'],
   it: ['about.', 'store.'],

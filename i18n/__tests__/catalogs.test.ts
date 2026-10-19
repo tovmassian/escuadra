@@ -27,6 +27,10 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'round.slotSpoken.given',
     // "Text" is the German word for a share as text.
     'share.text',
+    // "Version {1}": German writes it the same.
+    'about.version',
+    // "Vibration" is the German word, and the setting's name on iOS and Android.
+    'about.vibration',
   ],
   fr: [
     // Club is the French word too, and CLUB its chip code.

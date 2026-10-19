@@ -1,9 +1,10 @@
 // The Deutsch catalog (#145), typed against ./en.ts: same keys, same order,
 // same parameters. Drafted by Claude; a native speaker reviews it before it
-// merges (#145). About and the store tagline are English until #146 and #147
-// translate them with their legal and listing copy.
+// merges (#145). The store tagline is English until #147 translates it with
+// the listing copy.
 // Escuadra and a la escuadra come from ./names and are never translated.
 import { en, type CalendarDate, type Messages } from './en';
+import { A_LA_ESCUADRA, ESCUADRA } from './names';
 
 const MONTHS = [
   'Jan.',
@@ -21,6 +22,8 @@ const MONTHS = [
 ];
 
 const PHOTO_CREDITS = 'Bildnachweise';
+const CROPPED = 'zugeschnitten';
+const USAGE_STATISTICS = 'Anonyme Nutzungsstatistiken teilen';
 
 export const de: Messages = {
   common: {
@@ -112,7 +115,7 @@ export const de: Messages = {
     revealsName: 'Zeigt den Namen',
   },
   credits: {
-    cropped: 'zugeschnitten',
+    cropped: CROPPED,
     photo: 'Foto:',
     title: PHOTO_CREDITS,
     button: (count: number) => `${PHOTO_CREDITS} · ${count}`,
@@ -210,6 +213,122 @@ export const de: Messages = {
   },
   // English until #147 localises the feature graphic with the store listing.
   store: en.store,
-  // English until #146 translates About with the privacy policy.
-  about: en.about,
+  about: {
+    version: (version: string) => `Version ${version}`,
+    builtIn: 'integriert',
+    // "Info", as the home screen's link to it says.
+    title: 'Info',
+    intro: [
+      `${ESCUADRA} ist eine unabhängige, inoffizielle App. Sie ist weder mit der FIFA, der UEFA, einer Liga, einem nationalen Fußballverband noch mit einem Verein verbunden oder assoziiert und wird von keinem von ihnen befürwortet. Die Namen von Vereinen und Nationalteams werden nur zur Identifizierung verwendet und bleiben Eigentum ihrer jeweiligen Inhaber. ${ESCUADRA} ist außerdem weder mit der Wikimedia Foundation noch mit einem auf einem Foto gezeigten Spieler verbunden und wird von keinem von ihnen befürwortet.`,
+      `${ESCUADRA} kennzeichnet Teams mit ihren Namen und Farben und zeigt selbst nie Vereinswappen, Embleme oder Logos. Auf einem Spielerfoto kann trotzdem eines zu sehen sein, auf einem Trikot oder im Hintergrund, weil es zum Originalfoto gehört. Diese Zeichen gehören ihren Inhabern, und dass sie zu sehen sind, bedeutet nicht, dass ein Verein, ein Sponsor oder eine Marke ${ESCUADRA} befürwortet.`,
+    ],
+    credits: {
+      heading: 'Daten- und Bildnachweise',
+      sections: [
+        {
+          heading: 'Kaderdaten',
+          paragraphs: [
+            'Die Kaderdaten sind aus Wikipedia und Wikidata zusammengestellt und geben die Saison wieder, die bei jedem Team angegeben ist. Die Inhalte von Wikipedia sind unter CC BY-SA verfügbar. Wikidata ist unter CC0 verfügbar.',
+          ],
+        },
+        {
+          heading: 'Spielerfotos',
+          paragraphs: [
+            'Die Spielerfotos stammen von Wikimedia Commons. Jedes wird unter der Lizenz verwendet, die sein Urheber gewählt hat: CC BY-SA, CC BY, CC0, gemeinfrei oder die Commons-eigene Lizenz „Attribution“. Jedes Foto wird so zugeschnitten, dass es in seinen Rahmen passt. Wo Text der App über einem Foto liegt, legt die App einen Schatten über diesen Teil des Bildschirms, und nach einer falschen Antwort dimmt sie das Foto. Ein Foto, das zu klein ist, um den Bildschirm zu füllen, wird vollständig gezeigt, über einer abgedunkelten Kopie seiner selbst. Die Fotodateien selbst werden nicht bearbeitet. Nicht jeder Spieler hat ein Foto.',
+            `Urheber, Lizenz und das Wort „${CROPPED}“ stehen unter der Frage, solange ein Foto zu sehen ist, und noch einmal, für die ganze Runde, unter „${PHOTO_CREDITS}“ in der Ergebnisansicht und am Ende der Kaderansicht. Tippe auf den Urheber, um die Seite des Fotos auf Wikimedia Commons zu öffnen, oder auf die Lizenz, um ihre Bedingungen zu lesen.`,
+          ],
+        },
+        {
+          heading: 'Flaggen und Schriften',
+          paragraphs: [
+            'Die Flaggenbilder stammen von flagpedia.net und sind gemeinfrei. Die Schriften Inter, IBM Plex Mono und Archivo werden unter der SIL Open Font License 1.1 verwendet.',
+          ],
+        },
+        {
+          heading: 'Ländernamen',
+          paragraphs: [
+            `Die meisten Ländernamen in anderen Sprachen als Englisch stammen aus dem Projekt Unicode CLDR und werden unter der Unicode License v3 verwendet. Die übrigen wurden für ${ESCUADRA} verfasst.`,
+          ],
+        },
+      ],
+    },
+    vibration: 'Vibration',
+    usageStatistics: USAGE_STATISTICS,
+    privacy: {
+      heading: 'Datenschutz',
+      lead: `Bei ${ESCUADRA} gibt es kein Konto, keine Anmeldung und keine Werbung, und die App fragt nie nach deinem Namen, deiner E-Mail-Adresse oder Kontaktdaten jeglicher Art.`,
+      paragraphs: [
+        'Deine Ergebnisse und Einstellungen bleiben auf deinem Gerät. Nur das, was unten beschrieben ist, verlässt dein Gerät, und nichts davon ist mit deiner Person verknüpft.',
+      ],
+      sections: [
+        {
+          heading: 'Spielerfotos',
+          paragraphs: [
+            `${ESCUADRA} liefert keine Spielerfotos mit. Sie werden von Wikimedia Commons geladen, das die Wikimedia Foundation betreibt: die zehn Fotos einer Runde, wenn die Runde beginnt, und die Fotos eines Kaders in der Kaderansicht, während du scrollst. Wie jede Website erhält Wikimedia die IP-Adresse deines Geräts und die Details jeder Anfrage, darunter, welche Fotos abgerufen wurden, und damit, welche Spieler in deiner Runde oder deinem Kader sind. ${ESCUADRA} sendet sonst nichts an Wikimedia, und für das, was Wikimedia erhält, gilt die Datenschutzerklärung von Wikimedia.`,
+            'Bereits geladene Fotos können im Cache der App auf deinem Gerät gespeichert bleiben, damit sie schneller erscheinen. Ohne Verbindung funktioniert das Quiz wie gewohnt und zeigt statt eines Fotos die Farben des Teams und die Rückennummer.',
+            `Wenn du auf einen Bildnachweis tippst, öffnet sich die Seite des Fotos auf Wikimedia Commons oder seine Lizenz auf der Website von Creative Commons in einem In-App-Browser. Diese Websites haben eigene Datenschutzerklärungen, und ${ESCUADRA} kann nicht sehen, was du dort tust.`,
+          ],
+        },
+        {
+          heading: 'Teilen',
+          paragraphs: [
+            `Wenn du ein Ergebnis teilst, wird auf deinem Gerät ein Bild oder ein kurzer Text erstellt und an die App übergeben, die du im Teilen-Menü deines Smartphones auswählst. ${ESCUADRA} sieht, sendet und speichert nichts von dem, was du teilst.`,
+          ],
+        },
+        {
+          heading: 'Anonyme Nutzungsstatistiken',
+          paragraphs: [
+            `${ESCUADRA} sendet anonyme Nutzungsstatistiken an TelemetryDeck, einen Analysedienst, es sei denn, du schaltest „${USAGE_STATISTICS}“ in der App unter „Info“ aus. Jede davon ist mit einer zufälligen Kennung versehen, die für diese Statistiken erstellt wurde und nicht dieselbe ist wie die, die die Update-Prüfung der App verwendet. Diese Kennung ist nicht mit dir, deinem Gerät oder deinen Konten verknüpft, und weder sie noch die Statistiken werden an Dritte weitergegeben.`,
+            `Gesendet werden diese Statistiken: die App wurde geöffnet, mit ihrer Sprache und der Angabe, ob diese der Sprache deines Smartphones folgt oder in der App gewählt wurde; eine Runde wurde gestartet, mit der Angabe, ob das Team ein Verein oder ein Nationalteam ist, und dem Level; eine Runde wurde beendet, mit denselben beiden Angaben, der Punktzahl und der Angabe, ob sie ${A_LA_ESCUADRA} war; die Kaderansicht wurde geöffnet, mit der Angabe, ob das Team ein Verein oder ein Nationalteam ist; und ein Ergebnis wurde geteilt, mit dem Level, der Punktzahl und der Angabe, ob es als Bild oder als Text geteilt wurde. Sie enthalten nie Teamnamen, Spielernamen, deine Antworten oder etwas, das du eingibst.`,
+          ],
+        },
+        {
+          heading: 'App-Updates',
+          paragraphs: [
+            `Wenn ${ESCUADRA} startet, prüft die App, ob bei Expo, dem Dienst, der ihre Updates ausliefert, eine neuere Version verfügbar ist. Die Prüfung sendet nur, was nötig ist, um das richtige Update auszuliefern: das Betriebssystem deines Geräts, die Version und das Projekt der App sowie eine zufällige Kennung, die für diese Installation erstellt wurde. Die Kennung ist weder mit dir noch mit irgendetwas verknüpft, das du in der App tust. Ohne Verbindung funktioniert die App vollständig offline und überspringt die Prüfung.`,
+          ],
+        },
+        {
+          heading: 'Was auf deinem Gerät gespeichert wird',
+          paragraphs: [
+            `${ESCUADRA} speichert neun Dinge lokal auf deinem Gerät: deinen Rekord für jedes Team und jedes Level; welche Level du abgeschlossen hast; das letzte Team und Level, das du gespielt hast; deine Einstellung für helles oder dunkles Design; deine Sprachwahl; ob die Vibration eingeschaltet ist; ob die Kaderansicht Karten oder eine Liste zeigt; deine Entscheidung zu den Nutzungsstatistiken und die zufällige Kennung, die diese Statistiken verwenden.`,
+            `Diese Daten liegen im eigenen, privaten Speicher der App. ${ESCUADRA} selbst sendet nur zwei davon von deinem Gerät, und nur, solange die Nutzungsstatistiken eingeschaltet sind: die Kennung, die mit jeder Statistik gesendet wird, und deine Sprachwahl, die in der Statistik enthalten ist, die beim Öffnen der App gesendet wird. Wenn du die App löschst, werden all diese Daten von deinem Gerät gelöscht, ebenso alle zwischengespeicherten Fotos. ${ESCUADRA} hat kein eigenes Backup und keine eigene Synchronisierung, aber die Backups deines Geräts (unter iOS in iCloud oder auf einem Computer; unter Android bei Google) können diese Daten enthalten. Der Entwickler hat keinen Zugriff auf diesen Speicher.`,
+          ],
+        },
+        {
+          heading: 'Absturzberichte',
+          paragraphs: [
+            `Wenn du erlaubst, dass dein Gerät Diagnosedaten teilt, kann Apple (unter iOS) oder Google (unter Android) anonymisierte Absturzberichte mit dem Entwickler teilen. Das wird von Apple oder Google abgewickelt und in den Einstellungen deines Geräts gesteuert. ${ESCUADRA} selbst sendet keine Absturzberichte.`,
+          ],
+        },
+        {
+          heading: 'Kinder',
+          paragraphs: [
+            `Bei ${ESCUADRA} gibt es kein Konto, und die App fragt niemanden nach persönlichen Angaben, auch keine Kinder. Nutzungsstatistiken sind anonym und können jederzeit ausgeschaltet werden.`,
+          ],
+        },
+      ],
+    },
+    site: {
+      title: 'Datenschutzerklärung',
+      // "Stand:", as the team ladder dates its squad data.
+      updated: (date: string) => `Stand: ${date}`,
+      home: `Startseite von ${ESCUADRA}`,
+      languages: 'Sprache',
+      nav: {
+        home: 'Startseite',
+        support: 'Hilfe',
+        // The German web term for a site's utility links.
+        utility: 'Servicenavigation',
+        footer: 'Fußzeile',
+      },
+      theme: {
+        light: 'Hell',
+        dark: 'Dunkel',
+        toLight: 'Zu hellem Design wechseln',
+        toDark: 'Zu dunklem Design wechseln',
+      },
+      releaseStatus: 'Jetzt im App Store',
+    },
+  },
 };
