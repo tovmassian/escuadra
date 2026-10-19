@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../../assets/favicon.ico" />
+    <title>Privacy policy — Escuadra</title>
+    <link rel="canonical" href="https://tovmassian.github.io/escuadra/privacy/2/" />
+    <link rel="alternate" hreflang="en" href="https://tovmassian.github.io/escuadra/privacy/2/" />
+    <link rel="alternate" hreflang="de" href="https://tovmassian.github.io/escuadra/privacy/2/de.html" />
+    <link rel="alternate" hreflang="fr" href="https://tovmassian.github.io/escuadra/privacy/2/fr.html" />
+    <link rel="alternate" hreflang="es" href="https://tovmassian.github.io/escuadra/privacy/2/es.html" />
+    <link rel="alternate" hreflang="it" href="https://tovmassian.github.io/escuadra/privacy/2/it.html" />
+    <link rel="alternate" hreflang="x-default" href="https://tovmassian.github.io/escuadra/privacy/2/" />
+    <script>
+      try {
+        const saved = localStorage.getItem('escuadra-site-theme');
+        const theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches
+          ? 'dark'
+          : 'light';
+      }
+      document.documentElement.dataset.js = 'true';
+    </script>
+    <link rel="stylesheet" href="../../site.css" />
+    <script type="module" src="../../site.mjs"></script>
+  </head>
+  <body>
+    <header class="site-header shell">
+      <a class="brand" href="../../index.html" aria-label="Escuadra home">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="../../assets/favicon.ico" alt="" />
+        </span>
+        <span>escuadra</span>
+      </a>
+      <nav aria-label="Utility">
+        <a href="index.html">Privacy</a><a href="../../support.html">Support</a>
+      </nav>
+      <button
+        type="button"
+        class="theme-toggle"
+        data-theme-toggle
+        data-label-light="Light"
+        data-label-dark="Dark"
+        data-label-to-light="Switch to light theme"
+        data-label-to-dark="Switch to dark theme"
+        aria-pressed="false"
+      >
+        <span class="theme-toggle-icon" aria-hidden="true">◐</span
+        ><span data-theme-toggle-label></span>
+      </button>
+    </header>
+    <main class="legal-page shell">
+      <nav class="language-nav" aria-label="Language"><a href="index.html" hreflang="en" lang="en" aria-current="page">English</a><a href="de.html" hreflang="de" lang="de">Deutsch</a><a href="fr.html" hreflang="fr" lang="fr">Français</a><a href="es.html" hreflang="es" lang="es">Español</a><a href="it.html" hreflang="it" lang="it">Italiano</a></nav>
+      <h1>Privacy policy</h1>
+      <p class="updated">Last updated: 20 Oct 2026</p>
+      <p class="applies">This policy applies to Escuadra 2.0 and later. <a href="../../privacy.html">Privacy policy for earlier versions</a></p>
+
+      <p><strong>Escuadra has no account, no sign-in and no advertising, and it never asks for your name, email or any contact details.</strong></p>
+      <p>Your scores and settings are saved on your device. The only things that leave it are the ones described below, and none of them is linked to who you are.</p>
+
+      <h2>Player photos</h2>
+      <p>Escuadra does not ship player photos. They are loaded from Wikimedia Commons, run by the Wikimedia Foundation: a round's photos when the round starts, and a squad's photos on the Study screen as you scroll. Like any website, Wikimedia receives your device's IP address and the details of each request, including which photos were asked for, and so which players are in your round or squad. Escuadra sends nothing else to Wikimedia, and Wikimedia's own privacy policy applies to what it receives.</p>
+      <p>Photos already loaded may be kept in the app's cache on your device so that they appear faster. Without a connection the quiz works as usual and shows the team's colours and the shirt number in place of any photo not already in that cache.</p>
+      <p>Tapping a photo credit opens the photo's Wikimedia Commons page, or its licence on the Creative Commons website, in an in-app browser. Those sites have their own privacy policies, and Escuadra cannot see what you do there.</p>
+
+      <h2>Sharing</h2>
+      <p>Sharing a result creates a picture or a short text on your device and passes it to the app you pick in your phone's share menu. Escuadra does not see, send or keep what you share.</p>
+
+      <h2>Anonymous usage statistics</h2>
+      <p>Escuadra sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch &quot;Share anonymous usage statistics&quot; off on the app's About screen. Each one carries a hashed form of a random identifier created for these statistics (separate from the one the app-update check uses) and a random session code that is new each time the app starts. Like any online service, TelemetryDeck also receives your device's IP address with each one, and TelemetryDeck's own privacy policy applies to what it receives. The identifier and the session code are random, not derived from your device, and not linked to you or your accounts. Neither Escuadra nor the developer shares them or the statistics with anyone else.</p>
+      <p>The statistics are: the app was opened, with its language and whether that language follows your phone's language or was chosen in the app; a round started, with whether the team is a club or a nation and the difficulty level; a round finished, with the same two details, the score, and whether it was a la escuadra; the Study screen was opened, with whether the team is a club or a nation; and a result was passed to your phone's share menu, with the level, the score and whether it was a picture or text. They never include team names, player names, your answers or anything you type.</p>
+
+      <h2>App updates</h2>
+      <p>When Escuadra starts, it checks whether a newer version of the app is available from Expo, the service that delivers its updates. The check sends what is needed to deliver the right update: your device's operating system, the app's version and project, and a random identifier created for this installation. If the app crashed or failed to load an update as it last started, the check also sends Expo the technical error message from that failure. Like any online service, Expo also receives your device's IP address with each check. The identifier is not linked to you or to anything you do in the app. Without a connection, the app skips the check and works as usual.</p>
+
+      <h2>What is stored on your device</h2>
+      <p>Escuadra saves eight things locally, on your device: your best score for each team and difficulty level, from which it works out which levels you have completed; the last team and level you played; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; your choice about usage statistics; and the random identifier those statistics use. The app-update check also keeps its own random identifier on your device.</p>
+      <p>This data lives in the app's own private storage. Escuadra itself sends only two of those eight things off your device, and only while usage statistics are on: the identifier, which is sent in hashed form with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. Escuadra keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.</p>
+
+      <h2>Crash reports</h2>
+      <p>If you allow your device to share diagnostics, Apple (on iOS) or Google (on Android) may share anonymised crash reports with the developer. That is handled by Apple or Google and controlled in your device settings. Apart from the error message the app-update check may send after a failed start, Escuadra itself sends no crash reports.</p>
+
+      <h2>Children</h2>
+      <p>Escuadra has no account and asks for no personal information from anyone, including children. Usage statistics are anonymous and can be switched off at any time.</p>
+    </main>
+    <footer class="site-footer shell">
+      <span>&copy; Escuadra</span>
+      <nav aria-label="Footer">
+        <a href="../../index.html">Home</a><a href="../../support.html">Support</a>
+      </nav>
+      <span class="release-status">Now on the App Store</span>
+    </footer>
+  </body>
+</html>
