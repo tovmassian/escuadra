@@ -1108,3 +1108,135 @@ Only on the owner's go-ahead: push and run `gh pr create --draft --base gh-pages
 | Generator test: exact paragraphs                          | 4                                           |
 | Published with the 2.0.0 build, not before                | PR B draft                                  |
 | `npm run check` passes                                    | every task                                  |
+
+---
+
+## Part 2: the owner's decisions of 2026-10-19 (PR A follow-up, PR B, the telemetry epic)
+
+The owner reviewed PR A (#155) and decided:
+
+1. **Unicode License v3:** option A now. Commit the notice next to the data. An in-app licence sheet comes later, in its own issue.
+2. **Release note:** rewrite the ⚠️ paragraph in the right order.
+3. **Versioned privacy pages:** `privacy.html` stays alive as the 1.x policy, because both store listings link it today. The 2.0 policy lives under `privacy/2/`, and each store's URL is switched when that store ships 2.0.
+4. **TelemetryDeck gaps:** the privacy text names the hashed identifier, the per-launch session code and the IP address. The telemetry epic (#52) and its TBC issues (#54, #55, #57) are revisited, and whatever code they still need lands in this PR or a PR stacked on it.
+5. **Cropped wording:** as proposed below.
+
+The owner is unavailable while this runs, so every change must be cheap and reversible: commits, draft PRs, issue edits. **Nothing is merged, released or published.**
+
+### Task 12: English texts, the Unicode notice, the release note
+
+**Files:** `i18n/en.ts`, `i18n/__tests__/catalogs.test.ts` (the hash), `i18n/UNICODE-LICENSE.txt` (new), `i18n/countries.ts` (header), `docs/license.md`, `CLAUDE.md`, `docs/release.md`
+
+- [ ] **en.ts, `about.privacy.sections[2].paragraphs[0]`** (usage statistics) becomes:
+      `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off on the app's About screen. Each one carries a hashed form of a random identifier created for these statistics, separate from the one the app-update check uses, and a random session code that is new each time the app starts. Like any website, TelemetryDeck also receives your device's IP address with each one, and TelemetryDeck's own privacy policy applies to what it receives. The identifier and the session code are not linked to you, your device or your accounts, and neither they nor the statistics are shared with anyone else.`
+- [ ] **en.ts, `about.privacy.sections[4].paragraphs[1]`** (what is stored): change `the identifier, which is sent with each statistic,` to `a hashed form of the identifier, which is sent with each statistic,`.
+- [ ] **en.ts, `about.credits.sections[1].paragraphs[0]`** (player photos): change `Every photo is cropped to fit its frame.` to `Photos are cropped to fill the space they appear in. On the question screen, a photo too small to fill it is shown whole instead, over an enlarged, darkened copy of itself.`, and delete `A photo too small to fill the screen is shown whole, over a darkened copy of itself.` The rest is unchanged.
+- [ ] **The pin.** Update the English About hash in `catalogs.test.ts`. The four translations follow in Task 14, in the same PR, which is what the pin asks for.
+- [ ] **`i18n/UNICODE-LICENSE.txt`.** The Unicode License v3 notice, verbatim: "UNICODE LICENSE V3" through "SPDX-License-Identifier: Unicode-3.0". Take it from the ICU section of Node's own `LICENSE` (`$(dirname $(dirname $(which node)))/LICENSE`, about line 373), unindented. Put one line above it naming the source: `The country names in i18n/countries.ts for es, fr, it and de are derived from the Unicode CLDR project, under this licence:`.
+- [ ] **countries.ts header.** Add `// The CLDR-derived names travel with Unicode's notice: ./UNICODE-LICENSE.txt.`
+- [ ] **docs/license.md.**
+  - The country-names row says the notice is in `i18n/UNICODE-LICENSE.txt`.
+  - A sentence after the table says how the condition is met: the notice sits next to the data in the repo. For the app bundle, an in-app licences sheet is tracked in its own issue (Task 17 creates it).
+- [ ] **CLAUDE.md, the ⚠️ paragraph** under "Releases" becomes:
+  ```
+  ⚠️ **2.0.0 changes what leaves the device, so its disclosures ship with its store
+  build.** The About text on `main`, in all five catalogs, covers TelemetryDeck,
+  the Wikimedia photos and the language sent with the launch signal (#54, #146).
+  The web policy is versioned: `privacy.html` stays the 1.x policy that both store
+  listings link today, and `privacy/2/` holds the 2.0 pages `scripts/privacy-pages.ts`
+  renders. The order: every 2.0.0 issue lands on `main`, with the 2.0 pages signed
+  off and #55's answers written; then `release/2.0.0` is cut and built (#116). At
+  submission, App Privacy (before Apple review) and Data safety (when the build is
+  uploaded) are updated, and each store's privacy URL moves to `privacy/2/` when
+  that store ships 2.0.
+  ```
+- [ ] **CLAUDE.md, the i18n bullet.** Change `` into `privacy.html` and `privacy.{es,fr,it,de}.html` `` to ``into `privacy/2/` (`index.html`, `es.html`, `fr.html`, `it.html`, `de.html`)``, and rewrap.
+- [ ] **docs/release.md.** The "web privacy pages" line also says the pages are versioned folders, and that a store's privacy URL moves when it ships the version.
+- [ ] **Gate.** Run the English language gate on the three changed paragraphs and on the CLAUDE.md, release.md and license.md prose. Wording findings are applied. A meaning finding takes the smallest change that keeps the facts above, and is recorded as a ruling.
+
+### Task 13: the versioned generator
+
+**Files:** `scripts/privacy-pages.ts`, `scripts/privacy-pages.test.ts`, `i18n/en.ts`, `i18n/{de,fr,es,it}.ts` (two new `about.site` keys)
+
+- [ ] **Two new `about.site` keys in every catalog:**
+  - `appliesTo: (version: string) => `This policy applies to ${ESCUADRA} ${version} and later.``
+  - `earlierVersions: 'Privacy policy for earlier versions'`
+  - The implementer drafts the four translations; the language gates in Task 14 review them.
+- [ ] **`scripts/privacy-pages.ts`:**
+  - `POLICY_VERSION = '2.0'` and `POLICY_DIR = 'privacy/2/'`, with a comment: a version that changes what leaves the device gets a new folder, and a published folder is never edited after its version ships.
+  - `PAGE_FILES` becomes `{ en: 'index.html', es: 'es.html', fr: 'fr.html', it: 'it.html', de: 'de.html' }`, inside `POLICY_DIR`.
+  - The page URL is `${SITE_URL}${POLICY_DIR}` for English (the folder itself) and `${SITE_URL}${POLICY_DIR}${file}` for the others. The canonical link, the alternates and `x-default` use these.
+  - Relative links between language pages use the file names.
+  - Every site asset and page link outside the folder gets `../../`: favicon, `site.css`, `site.mjs`, `index.html`, `support.html`.
+  - After `<p class="updated">`, add `<p class="applies">${e(site.appliesTo(POLICY_VERSION))} <a href="../../privacy.html">${e(site.earlierVersions)}</a></p>`.
+- [ ] **Tests:**
+  - Update the paths. The exact-paragraph test keeps matching bare `<p>` only.
+  - Add tests that each page has the applies line with the earlier-versions link, and that every local `href`/`src` starts with `../../`, is a sibling page file, or is absolute.
+  - The writer writes `<dir>/privacy/2/<file>`, creating the folders.
+
+### Task 14: the four translations follow the English
+
+**Files:** `i18n/{de,fr,es,it}.ts`
+
+- [ ] Translate the three changed paragraphs from Task 12 into each language, keeping each catalog's consts, address form and typography. The cropped sentence quotes nothing.
+- [ ] Run the language gate per language, with fresh reviewers, in parallel since they are read-only. A gate reviews the changed paragraphs and the two new `site` keys, and also re-checks that the whole Privacy section is still consistent. Loop until "No findings."
+- [ ] Then regenerate the review sheets.
+
+### Task 15: PR B on `gh-pages`, as a draft
+
+**Worktree:** `/Users/khachaturtovmasyan/Projects/escuadra-146-gh-pages`, branch `docs/146-privacy-pages`.
+
+- [ ] **`privacy.html`** goes back to `origin/gh-pages`'s version, unchanged: the 1.x policy stays alive. Delete the `privacy.{es,fr,it,de}.html` files. Generate `privacy/2/*` from `feat/146-privacy-pages`, with the placeholder date until release.
+- [ ] **`index.html`**, using the owner's wording approved in #54 (comment of 2026-09-21):
+  - the trust line `No account. No ads. No data collected.` becomes `No ads. No account. No personal data.`
+  - the "Fully offline" card becomes the heading `Works offline` and the text `Every round plays without a connection, and there's no account to make.`
+  - Both are true for 1.x and 2.0.
+- [ ] **`tests/verify-site.test.mjs`:**
+  - pages in a subfolder resolve their local links relative to their own folder;
+  - `privacy.html` keeps its 1.x key copy;
+  - the `privacy/2/` pages get the five-language assertions;
+  - the home-page assertions use the new wording.
+- [ ] Commit, push the branch, and open a **draft** PR into `gh-pages`. Its body says:
+  - it merges only after #155, the native sign-off and a regeneration with the real date;
+  - nothing links `privacy/2/` until a store's privacy URL is switched.
+
+### Task 16: push PR A's new commits, and update its description
+
+### Task 17: the issues
+
+Each issue edit keeps the earlier text inside a `<details>` block, so nothing is lost.
+
+- [ ] **#52 (epic):**
+  - It now ships in 2.0.0. `release-1.1.0` was never cut, and #60 was closed for #116.
+  - Update the task table: #53 ✅, #54 About ✅ with web via #146, #55 open, #56 ✅, #57 (Task 18), #58 ✅, #59 (Play), #60 → #116.
+  - The facts it must describe now include `language`/`languageSource`, the hashed identifier, the session code and the IP.
+- [ ] **#54:**
+  - Done on `main`: About covers EAS Update, telemetry and photos, now in five languages via #146.
+  - Remaining: the web policy, through #146's PR B (`privacy/2/`), and the home-page wording.
+  - Closes with PR B.
+- [ ] **#55:**
+  - Rewrite for 2.0.0: Apple and Google answers per data type, including the `language` property, the hashed identifier and the session code under Device ID.
+  - Add a note on the IP addresses that TelemetryDeck and Wikimedia receive.
+  - Add a step to switch each store's privacy URL to `privacy/2/` when it ships 2.0.
+  - Timing per #116.
+  - Leave the Wikimedia photo-loading answer as an explicit owner checkbox.
+- [ ] **#57:** 2.0.0 facts: PR into `main`, a native module so it waits for the 2.0 store build, one more stored item, which means About changes in five languages. Link Task 18's PR.
+- [ ] **#146 and #116:** a comment each, with the versioned-pages decision and the release order.
+- [ ] **New issue:** an in-app "Licences" sheet showing the Unicode notice and the MIT notices of the bundled JavaScript dependencies (milestone v2.0.0). Use the `escuadra-issue-creator` skill.
+
+### Task 18: #57, the store-rating prompt (stacked draft PR)
+
+**Branch:** `feat/57-review-prompt`, off `feat/146-privacy-pages`. Draft PR with base `feat/146-privacy-pages`; retarget it to `main` once #155 merges.
+
+- [ ] Install `expo-store-review` with `npx expo install expo-store-review`, so the version suits SDK 57.
+- [ ] **Pure, test-first:** `lib/reviewPrompt.ts` exports `shouldAskForReview({ flawless, hasAction, appVersion, askedVersion, earlierRounds })`. It returns true only when all of these hold:
+  - the round was flawless;
+  - `hasAction` is true;
+  - this app version has not asked before;
+  - the user had completed an earlier round.
+  - Tests go in `lib/__tests__/` if `lib/` has moved over; otherwise beside the code, as `lib/` does now.
+- [ ] **Persistence:** `stores/progress.ts` gets `reviewAskedVersion: string | null`, set when the prompt is requested. "An earlier round" is derived from existing state, without a new counter: the implementer reads how Results knows a previous best, and rules on it.
+- [ ] **Results:** after a flawless round, fire and forget, never blocking or delaying the screen: `if (shouldAskForReview(…)) { setReviewAskedVersion(v); StoreReview.requestReview().catch(() => {}); }`.
+- [ ] **About:** "What is stored" becomes ten things, adding which app version last asked you for a rating, in five languages. Then the language gates, the hash pin, and a regeneration of the pages.
+- [ ] **Docs:** CLAUDE.md lists `expo-store-review` where native modules are named, if anywhere.
+- [ ] **Not verifiable here:** the TestFlight/internal-track check (#57's acceptance criterion) stays open for the owner.
