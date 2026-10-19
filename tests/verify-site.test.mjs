@@ -1,9 +1,17 @@
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 
-const pages = ['index.html', 'privacy.html', 'support.html'];
+const privacyPages = [
+  'privacy.html',
+  'privacy.es.html',
+  'privacy.fr.html',
+  'privacy.it.html',
+  'privacy.de.html',
+];
+const pages = ['index.html', ...privacyPages, 'support.html'];
+const siteUrl = 'https://tovmassian.github.io/escuadra/';
 const appStoreUrl = 'https://apps.apple.com/us/app/escuadra/id6810705505';
-const allowedExternalLinks = ['https://github.com/tovmassian/escuadra/issues', appStoreUrl];
+const allowedExternalLinks = ['https://github.com/tovmassian/escuadra/issues', appStoreUrl, siteUrl];
 const screenshots = [
   'assets/marketing/home-dark.png',
   'assets/marketing/home-light.png',
@@ -28,7 +36,7 @@ for (const page of pages) {
   const html = readFileSync(page, 'utf8');
   assert.match(html, /href="site\.css"/, `${page} loads shared CSS`);
   assert.match(html, /src="site\.mjs"/, `${page} loads shared enhancement`);
-  assert.match(html, /href="privacy\.html"/, `${page} links privacy`);
+  assert.match(html, /href="privacy(\.[a-z]{2})?\.html"/, `${page} links privacy`);
   assert.match(html, /href="support\.html"/, `${page} links support`);
   for (const [url] of html.matchAll(/https?:\/\/[^"'\s<)]+/g)) {
     assert.ok(
@@ -46,7 +54,7 @@ for (const page of pages) {
 }
 
 for (const [page, requiredText] of [
-  ['privacy.html', 'Escuadra does not collect any personal data about you.'],
+  ['privacy.html', 'Escuadra has no account, no sign-in and no advertising'],
   ['support.html', 'GitHub Issues'],
 ]) {
   const html = readFileSync(page, 'utf8');
@@ -55,6 +63,28 @@ for (const [page, requiredText] of [
   assert.match(html, /data-theme-toggle/, `${page} has a theme toggle`);
   assert.match(html, /href="index\.html"/, `${page} links home`);
   assert.match(html, new RegExp(requiredText), `${page} retains its key copy`);
+}
+
+for (const page of privacyPages) {
+  const html = readFileSync(page, 'utf8');
+  assert.match(html, /<main/, `${page} has a main landmark`);
+  assert.equal((html.match(/<h1/g) ?? []).length, 1, `${page} has exactly one h1`);
+  for (const other of privacyPages) {
+    assert.ok(html.includes(`href="${other}"`), `${page} links ${other}`);
+    assert.ok(
+      html.includes(`href="${siteUrl}${other}"`),
+      `${page} declares ${other} as an alternate`,
+    );
+  }
+  assert.match(html, /hreflang="x-default"/, `${page} declares the English page as the default`);
+  assert.doesNotMatch(
+    html,
+    /does not collect any personal data/,
+    `${page} carries the current policy`,
+  );
+}
+for (const page of privacyPages.slice(1)) {
+  assert.match(readFileSync(page, 'utf8'), /<p><em>/, `${page} ends with the translation notice`);
 }
 
 const home = readFileSync('index.html', 'utf8');

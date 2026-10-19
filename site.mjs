@@ -17,9 +17,19 @@ function setTheme(theme, persist) {
   }
   for (const toggle of document.querySelectorAll('[data-theme-toggle]')) {
     toggle.setAttribute('aria-pressed', String(theme === 'dark'));
-    toggle.setAttribute('aria-label', `Switch to ${nextTheme(theme)} theme`);
+    // Translated pages carry their own labels in data-label-*; the others keep English.
+    const labels = toggle.dataset;
+    const next = nextTheme(theme);
+    toggle.setAttribute(
+      'aria-label',
+      (next === 'dark' ? labels.labelToDark : labels.labelToLight) ?? `Switch to ${next} theme`,
+    );
     const label = toggle.querySelector('[data-theme-toggle-label]');
-    if (label) label.textContent = theme === 'dark' ? 'Dark' : 'Light';
+    if (label) {
+      label.textContent =
+        (theme === 'dark' ? labels.labelDark : labels.labelLight) ??
+        (theme === 'dark' ? 'Dark' : 'Light');
+    }
   }
 }
 

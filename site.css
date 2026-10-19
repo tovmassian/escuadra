@@ -472,3 +472,17 @@ a:focus-visible {
 .legal-page strong {
   color: var(--ink);
 }
+.legal-page .language-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+.legal-page .language-nav a {
+  color: var(--muted);
+}
+.legal-page .language-nav a[aria-current='page'] {
+  color: var(--ink);
+  text-decoration: none;
+}
