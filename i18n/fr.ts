@@ -264,8 +264,8 @@ export const fr: Messages = {
         {
           heading: 'Photos des joueurs',
           paragraphs: [
-            'Les photos des joueurs proviennent de Wikimedia Commons. Chacune est utilisée sous la licence choisie par son auteur : CC BY-SA, CC BY, CC0, domaine public ou la licence « Attribution » propre à Commons. Chaque photo est recadrée pour s’adapter à son cadre. Là où du texte de l’application se superpose à une photo, l’application applique un ombrage à cette partie de l’écran, et elle atténue la photo après une mauvaise réponse. Une photo trop petite pour remplir l’écran est affichée en entier, sur une copie assombrie d’elle-même. Les fichiers des photos eux-mêmes ne sont pas modifiés. Tous les joueurs n’ont pas de photo.',
-            `L’auteur, la licence et le mot « ${CROPPED} » s’affichent sous la question tant qu’une photo est à l’écran, et à nouveau, pour toute la partie, sous « ${PHOTO_CREDITS} » dans les résultats et à la fin de l’écran Effectif. Appuie sur l’auteur pour afficher la page de la photo sur Wikimedia Commons, ou sur la licence pour en voir les conditions.`,
+            'Les photos des joueurs proviennent de Wikimedia Commons. Chacune relève du domaine public ou est utilisée sous la licence qui l’accompagne sur Commons : CC BY-SA, CC BY, CC0 ou la licence « Attribution » propre à Commons. Les photos sont recadrées pour remplir l’espace où elles apparaissent. Sur l’écran des questions, une photo trop petite pour remplir cet espace est alors affichée en entier, sur une copie agrandie et assombrie d’elle-même qui le remplit. Là où du texte de l’application se superpose à une photo, l’application applique un ombrage à cette partie de l’écran, et elle atténue la photo après une mauvaise réponse. Les fichiers des photos eux-mêmes ne sont pas modifiés. Tous les joueurs n’ont pas de photo.',
+            `L’auteur, la licence et le mot « ${CROPPED} » s’affichent sous la question tant qu’une photo est à l’écran, et à nouveau sous « ${PHOTO_CREDITS} » dans les résultats, pour toute la partie, et à la fin de l’écran Effectif, pour chaque joueur qui y figure. Appuie sur l’auteur pour afficher la page de la photo sur Wikimedia Commons, ou sur la licence pour en voir les conditions.`,
           ],
         },
         {
@@ -289,14 +289,14 @@ export const fr: Messages = {
       heading: 'Confidentialité',
       lead: `${ESCUADRA} ne comporte ni compte, ni identification, ni publicité, et ne te demande jamais ton nom, ton adresse e-mail ni aucune coordonnée.`,
       paragraphs: [
-        'Tes scores et tes réglages restent sur ton appareil. Les seuls éléments qui le quittent sont ceux décrits ci-dessous, et aucun n’est lié à ton identité.',
+        'Tes scores et tes réglages sont enregistrés sur ton appareil. Les seuls éléments qui le quittent sont ceux décrits ci-dessous, et aucun n’est lié à ton identité.',
       ],
       sections: [
         {
           heading: 'Photos des joueurs',
           paragraphs: [
-            `${ESCUADRA} ne contient pas de photos de joueurs. Elles sont chargées depuis Wikimedia Commons, géré par la Wikimedia Foundation : les dix photos d’une partie quand la partie commence, et les photos d’un effectif sur l’écran Effectif, à mesure que tu le fais défiler. Comme tout site web, Wikimedia reçoit l’adresse IP de ton appareil et les détails de chaque requête, y compris les photos demandées, et donc les joueurs de ta partie ou de ton effectif. ${ESCUADRA} n’envoie rien d’autre à Wikimedia, et ce que Wikimedia reçoit est soumis à sa propre politique de confidentialité.`,
-            'Les photos déjà chargées peuvent être conservées dans le cache de l’application sur ton appareil, afin qu’elles s’affichent plus rapidement. Sans connexion, le quiz fonctionne normalement et affiche les couleurs de l’équipe et le numéro de maillot à la place d’une photo.',
+            `${ESCUADRA} ne contient pas de photos de joueurs. Elles sont chargées depuis Wikimedia Commons, géré par la Wikimedia Foundation : les photos d’une partie quand la partie commence, et les photos d’un effectif sur l’écran Effectif, à mesure que tu le fais défiler. Comme tout site web, Wikimedia reçoit l’adresse IP de ton appareil et les détails de chaque requête, y compris les photos demandées, et donc les joueurs de ta partie ou de ton effectif. ${ESCUADRA} n’envoie rien d’autre à Wikimedia, et ce que Wikimedia reçoit est soumis à sa propre politique de confidentialité.`,
+            'Les photos déjà chargées peuvent être conservées dans le cache de l’application sur ton appareil, afin qu’elles s’affichent plus rapidement. Sans connexion, le quiz fonctionne normalement et affiche les couleurs de l’équipe et le numéro de maillot à la place de toute photo qui ne se trouve pas déjà dans ce cache.',
             `Appuyer sur un crédit photo ouvre la page de la photo sur Wikimedia Commons, ou sa licence sur le site de Creative Commons, dans un navigateur intégré à l’application. Ces sites ont leur propre politique de confidentialité, et ${ESCUADRA} ne peut pas voir ce que tu y fais.`,
           ],
         },
@@ -309,27 +309,27 @@ export const fr: Messages = {
         {
           heading: 'Statistiques d’utilisation anonymes',
           paragraphs: [
-            `${ESCUADRA} envoie des statistiques d’utilisation anonymes à TelemetryDeck, un service de mesure d’audience, sauf si tu désactives « ${USAGE_STATISTICS} » sur l’écran « À propos » de l’application. Chacune est associée à un identifiant aléatoire, créé pour ces statistiques et distinct de celui qu’utilise la vérification des mises à jour de l’application. L’identifiant des statistiques n’est lié ni à toi, ni à ton appareil, ni à tes comptes, et ni lui ni les statistiques ne sont partagés avec qui que ce soit d’autre.`,
-            `Ces statistiques sont les suivantes : l’application a été ouverte, avec sa langue et l’indication que cette langue suit celle de ton téléphone ou a été choisie dans l’application ; une partie a commencé, avec le type d’équipe (club ou sélection) et le niveau de difficulté ; une partie s’est terminée, avec ces deux mêmes informations, le score et l’indication qu’elle a été ou non ${A_LA_ESCUADRA} ; l’écran Effectif a été ouvert, avec le type d’équipe (club ou sélection) ; et un résultat a été partagé, avec le niveau, le score et le format du partage (image ou texte). Elles ne contiennent jamais de noms d’équipes ni de joueurs, ni tes réponses, ni rien de ce que tu saisis.`,
+            `${ESCUADRA} envoie des statistiques d’utilisation anonymes à TelemetryDeck, un service de mesure d’audience, sauf si tu désactives « ${USAGE_STATISTICS} » sur l’écran « À propos » de l’application. Chacune contient une forme hachée d’un identifiant aléatoire créé pour ces statistiques (distinct de celui qu’utilise la vérification des mises à jour de l’application) et un code de session aléatoire, renouvelé à chaque démarrage de l’application. Comme tout service en ligne, TelemetryDeck reçoit aussi l’adresse IP de ton appareil avec chaque statistique, et ce que TelemetryDeck reçoit est soumis à sa propre politique de confidentialité. L’identifiant des statistiques et le code de session sont aléatoires, ne sont pas dérivés de ton appareil et ne sont liés ni à toi ni à tes comptes. Ni ${ESCUADRA} ni le développeur ne les partagent avec qui que ce soit d’autre, pas plus que les statistiques.`,
+            `Ces statistiques sont les suivantes : l’application a été ouverte, avec sa langue et l’indication que cette langue suit celle de ton téléphone ou a été choisie dans l’application ; une partie a commencé, avec le type d’équipe (club ou sélection) et le niveau de difficulté ; une partie s’est terminée, avec ces deux mêmes informations, le score et l’indication qu’elle a été ou non ${A_LA_ESCUADRA} ; l’écran Effectif a été ouvert, avec le type d’équipe (club ou sélection) ; et un résultat a été transmis au menu de partage de ton téléphone, avec le niveau, le score et le format (image ou texte). Elles ne contiennent jamais de noms d’équipes ni de joueurs, ni tes réponses, ni rien de ce que tu saisis.`,
           ],
         },
         {
           heading: 'Mises à jour de l’application',
           paragraphs: [
-            `Quand ${ESCUADRA} démarre, elle vérifie si une version plus récente de l’application est disponible auprès d’Expo, le service qui distribue ses mises à jour. Cette vérification n’envoie que ce qui est nécessaire pour fournir la bonne mise à jour : le système d’exploitation de ton appareil, la version et le projet de l’application, et un identifiant aléatoire créé pour cette installation. Cet identifiant n’est lié ni à toi, ni à rien de ce que tu fais dans l’application. Sans connexion, l’application fonctionne entièrement hors ligne et se passe de cette vérification.`,
+            `Quand ${ESCUADRA} démarre, elle vérifie si une version plus récente de l’application est disponible auprès d’Expo, le service qui distribue ses mises à jour. Cette vérification envoie ce qui est nécessaire pour fournir la bonne mise à jour : le système d’exploitation de ton appareil, la version et le projet de l’application, et un identifiant aléatoire créé pour cette installation. Si l’application a planté ou n’a pas pu charger une mise à jour lors de son dernier démarrage, la vérification envoie aussi à Expo le message d’erreur technique lié à cet échec. Comme tout service en ligne, Expo reçoit également l’adresse IP de ton appareil à chaque vérification. Cet identifiant n’est lié ni à toi, ni à rien de ce que tu fais dans l’application. Sans connexion, l’application se passe de cette vérification et fonctionne normalement.`,
           ],
         },
         {
           heading: 'Ce qui est enregistré sur ton appareil',
           paragraphs: [
-            `${ESCUADRA} enregistre neuf éléments en local, sur ton appareil : ton record pour chaque équipe et chaque niveau de difficulté ; les niveaux que tu as validés ; la dernière équipe et le dernier niveau joués ; ta préférence de thème, clair ou sombre ; ton choix de langue ; si les vibrations sont activées ; si l’écran Effectif affiche des cartes ou une liste ; ton choix concernant les statistiques d’utilisation ; et l’identifiant aléatoire qu’utilisent ces statistiques.`,
-            `Ces données se trouvent dans l’espace de stockage privé propre à l’application. ${ESCUADRA} elle-même n’envoie que deux de ces éléments hors de ton appareil, et seulement tant que les statistiques d’utilisation sont activées : l’identifiant, envoyé avec chaque statistique, et ton choix de langue, inclus dans la statistique envoyée à l’ouverture de l’application. Supprimer l’application efface toutes ces données de ton appareil, ainsi que les éventuelles photos en cache. ${ESCUADRA} n’effectue aucune sauvegarde ni synchronisation de son côté, mais les sauvegardes de ton appareil (sous iOS, dans iCloud ou sur un ordinateur ; sous Android, chez Google) peuvent inclure ces données. Le développeur n’a pas accès à cet espace de stockage.`,
+            `${ESCUADRA} enregistre huit éléments en local, sur ton appareil : ton record pour chaque équipe et chaque niveau de difficulté, dont l’application déduit les niveaux que tu as validés ; la dernière équipe et le dernier niveau joués ; ta préférence de thème, clair ou sombre ; ton choix de langue ; si les vibrations sont activées ; si l’écran Effectif affiche des cartes ou une liste ; ton choix concernant les statistiques d’utilisation ; et l’identifiant aléatoire qu’utilisent ces statistiques. La vérification des mises à jour de l’application conserve aussi son propre identifiant aléatoire sur ton appareil.`,
+            `Ces données se trouvent dans l’espace de stockage privé propre à l’application. ${ESCUADRA} elle-même n’envoie que deux de ces huit éléments hors de ton appareil, et seulement tant que les statistiques d’utilisation sont activées : l’identifiant, envoyé sous forme hachée avec chaque statistique, et ton choix de langue, inclus dans la statistique envoyée à l’ouverture de l’application. Supprimer l’application efface toutes ces données de ton appareil, ainsi que les éventuelles photos en cache. ${ESCUADRA} n’effectue aucune sauvegarde ni synchronisation de son côté, mais les sauvegardes de ton appareil (sous iOS, dans iCloud ou sur un ordinateur ; sous Android, chez Google) peuvent inclure ces données. Le développeur n’a pas accès à cet espace de stockage.`,
           ],
         },
         {
           heading: 'Rapports de plantage',
           paragraphs: [
-            `Si tu autorises ton appareil à partager des données de diagnostic, Apple (sous iOS) ou Google (sous Android) peut partager des rapports de plantage anonymisés avec le développeur. Ce partage est géré par Apple ou Google et se contrôle dans les réglages de ton appareil. ${ESCUADRA} elle-même n’envoie aucun rapport de plantage.`,
+            `Si tu autorises ton appareil à partager des données de diagnostic, Apple (sous iOS) ou Google (sous Android) peut partager des rapports de plantage anonymisés avec le développeur. Ce partage est géré par Apple ou Google et se contrôle dans les réglages de ton appareil. En dehors du message d’erreur que la vérification des mises à jour de l’application peut envoyer après un échec de démarrage, ${ESCUADRA} elle-même n’envoie aucun rapport de plantage.`,
           ],
         },
         {
@@ -344,7 +344,7 @@ export const fr: Messages = {
       title: 'Politique de confidentialité',
       updated: (date: string) => `Dernière mise à jour : ${date}`,
       appliesTo: (version: string) =>
-        `Cette politique de confidentialité s’applique à ${ESCUADRA} ${version} et aux versions ultérieures.`,
+        `Cette politique s’applique à ${ESCUADRA} ${version} et aux versions ultérieures.`,
       earlierVersions: 'Politique de confidentialité des versions antérieures',
       home: `Page d’accueil d’${ESCUADRA}`,
       languages: 'Langue',
