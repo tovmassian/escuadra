@@ -352,7 +352,7 @@ export const en = {
         {
           heading: 'Anonymous usage statistics',
           paragraphs: [
-            `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off on the app's About screen. Each one is tagged with a random identifier created for this installation. It is not linked to you, your device or your accounts, and it is not shared with anyone else.`,
+            `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off on the app's About screen. Each one is tagged with a random identifier created for these statistics, separate from the one the app-update check uses. That identifier is not linked to you, your device or your accounts, and neither it nor the statistics are shared with anyone else.`,
             `The statistics are: the app was opened, with its language and whether that language follows your phone's language or was chosen in the app; a round started, with whether the team is a club or a nation and the difficulty level; a round finished, with the same two details, the score, and whether it was ${A_LA_ESCUADRA}; the Study screen was opened, with whether the team is a club or a nation; and a result was shared, with the level, the score and whether it was shared as a picture or as text. They never include team names, player names, your answers or anything you type.`,
           ],
         },
@@ -365,8 +365,8 @@ export const en = {
         {
           heading: 'What is stored on your device',
           paragraphs: [
-            `${ESCUADRA} saves nine things locally, on your device only: your best score for each team and difficulty level; which levels you have completed; the last team and level you played; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; your choice about usage statistics; and the random identifier those statistics use.`,
-            `This data lives in the app's own private storage. Only two of these things leave your device, and only while usage statistics are on: the identifier, which is sent with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
+            `${ESCUADRA} saves nine things locally, on your device: your best score for each team and difficulty level; which levels you have completed; the last team and level you played; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; your choice about usage statistics; and the random identifier those statistics use.`,
+            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of these things off your device, and only while usage statistics are on: the identifier, which is sent with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
           ],
         },
         {
