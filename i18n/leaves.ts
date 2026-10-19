@@ -28,7 +28,7 @@ export const LATER_PATHS: Readonly<Record<Language, readonly string[]>> = {
   en: [],
   de: ['store.'],
   fr: ['store.'],
-  es: ['about.', 'store.'],
+  es: ['store.'],
   it: ['about.', 'store.'],
 };
 
