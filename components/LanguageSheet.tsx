@@ -1,9 +1,10 @@
+import { useLocales } from 'expo-localization';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Sheet } from '@/components/Sheet';
 import { languageRows } from '@/i18n/languageOptions';
 import { LANGUAGE_NAMES } from '@/i18n/names';
 import { SUPPORTED_LANGUAGES } from '@/i18n/resolveLanguage';
-import { useLanguage, useT } from '@/i18n/useT';
+import { useT } from '@/i18n/useT';
 import { useProgress } from '@/stores/progress';
 import { borderWidths, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -28,10 +29,13 @@ export function LanguageSheet({ visible, onClose }: LanguageSheetProps) {
 function LanguageRows({ onClose }: { onClose: () => void }) {
   const colors = useThemeColors();
   const t = useT();
-  const resolved = useLanguage();
+  const locales = useLocales();
   const preference = useProgress((s) => s.languagePreference);
   const setLanguagePreference = useProgress((s) => s.setLanguagePreference);
-  const rows = languageRows(SUPPORTED_LANGUAGES, resolved);
+  const rows = languageRows(
+    SUPPORTED_LANGUAGES,
+    locales.map((locale) => locale.languageTag),
+  );
   const chip = sizes.languageChip;
 
   const styles = StyleSheet.create({
