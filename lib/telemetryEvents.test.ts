@@ -26,11 +26,18 @@ describe('TELEMETRY_EVENTS', () => {
       'study.opened',
     ]);
   });
+
+  it('lets the launch signal carry only the language and its source', () => {
+    expect(TELEMETRY_EVENTS['app.launched']).toEqual(['language', 'languageSource']);
+  });
 });
 
 describe('buildPayload', () => {
-  it('returns an empty payload for a prop-less event', () => {
-    expect(buildPayload('app.launched', {})).toEqual({});
+  it("sends the app's language and where it came from on launch", () => {
+    expect(buildPayload('app.launched', { language: 'de', languageSource: 'phone' })).toEqual({
+      language: 'de',
+      languageSource: 'phone',
+    });
   });
 
   it('stringifies every value', () => {

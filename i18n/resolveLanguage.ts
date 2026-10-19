@@ -46,3 +46,15 @@ export function resolveLanguage<L extends Language>(
   }
   return 'en';
 }
+
+/** Where the language in use came from, for the launch signal (#146). */
+export type LanguageSource = 'phone' | 'picked';
+
+/**
+ * `'picked'` only when the language picked in the app is the one in use. A
+ * picked language without a catalog falls back to the phone's, so that is
+ * `'phone'`.
+ */
+export function languageSource(preference: LanguagePreference, resolved: Language): LanguageSource {
+  return preference !== 'system' && preference === resolved ? 'picked' : 'phone';
+}
