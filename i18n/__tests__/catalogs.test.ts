@@ -62,6 +62,10 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'round.slotSpoken.given',
     // "Home" is what Italian apps call the start screen.
     'picker.home',
+    // "Privacy" is the Italian word, as in "informativa sulla privacy".
+    'about.privacy.heading',
+    // "Home", as the picker says: what Italian websites call the home page.
+    'about.site.nav.home',
   ],
 };
 

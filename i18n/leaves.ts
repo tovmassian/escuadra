@@ -29,7 +29,7 @@ export const LATER_PATHS: Readonly<Record<Language, readonly string[]>> = {
   de: ['store.'],
   fr: ['store.'],
   es: ['store.'],
-  it: ['about.', 'store.'],
+  it: ['store.'],
 };
 
 export function isLater(path: string, language: Language): boolean {
