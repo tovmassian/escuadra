@@ -4,6 +4,10 @@
 // none. Kept out of the catalogs, which must have English's shape.
 import type { SupportedLanguage } from './resolveLanguage';
 
+/** The sentence each notice translates, for the review sheet. Never shown: English has no notice. */
+export const NOTICE_SOURCE =
+  'This is a translation. If it differs from the English text, the English text applies.';
+
 const NOTICES: Readonly<Record<Exclude<SupportedLanguage, 'en'>, string>> = {
   de: 'Dies ist eine Übersetzung. Weicht sie vom englischen Text ab, gilt der englische Text.',
   fr: 'Ceci est une traduction. En cas de divergence avec le texte anglais, c’est le texte anglais qui fait foi.',

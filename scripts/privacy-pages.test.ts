@@ -68,8 +68,14 @@ describe('escapeHtml', () => {
 const out = process.env.PRIVACY_PAGES;
 it.runIf(out !== undefined)('writes the five privacy pages', () => {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(process.env.PRIVACY_UPDATED ?? '');
-  if (!match) throw new Error('PRIVACY_UPDATED=YYYY-MM-DD: the date the pages go live');
-  const date = { year: Number(match[1]), month: Number(match[2]), day: Number(match[3]) };
+  const date = match && {
+    year: Number(match[1]),
+    month: Number(match[2]),
+    day: Number(match[3]),
+  };
+  if (!date || date.month < 1 || date.month > 12 || date.day < 1 || date.day > 31) {
+    throw new Error('PRIVACY_UPDATED=YYYY-MM-DD: the date the pages go live');
+  }
   const dir = path.resolve(out ?? '');
   mkdirSync(dir, { recursive: true });
   for (const language of SUPPORTED_LANGUAGES) {

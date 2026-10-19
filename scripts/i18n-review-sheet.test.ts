@@ -21,7 +21,12 @@ describe('reviewSheet', () => {
   });
 
   it('includes About once a language has translated it', () => {
-    expect(sheet).toContain('| about.privacy.heading | Privacy | Privacy |  |');
+    expect(reviewSheet('de')).toContain('| about.privacy.heading | Privacy | Datenschutz |');
+  });
+
+  it('shows the translation notice beside its English, in translated languages only', () => {
+    expect(reviewSheet('de')).toContain('| translationNotice | This is a translation.');
+    expect(sheet).not.toContain('| translationNotice |');
   });
 
   it('lists the country names', () => {

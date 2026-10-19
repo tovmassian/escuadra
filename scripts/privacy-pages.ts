@@ -8,8 +8,9 @@ import type { CalendarDate } from '@/i18n/en';
 import { ESCUADRA, ESCUADRA_WORDMARK, LANGUAGE_NAMES } from '@/i18n/names';
 import { SUPPORTED_LANGUAGES, type SupportedLanguage } from '@/i18n/resolveLanguage';
 import { translationNotice } from '@/i18n/translationNotice';
+import { SHARE_URL } from '@/lib/shareResult';
 
-export const SITE_URL = 'https://tovmassian.github.io/escuadra/';
+export const SITE_URL = SHARE_URL;
 
 export const PAGE_FILES: Readonly<Record<SupportedLanguage, string>> = {
   en: 'privacy.html',

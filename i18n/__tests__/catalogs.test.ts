@@ -2,6 +2,7 @@
 // missing or extra key; this catches what it cannot: a function that drops a
 // trailing parameter, an array of a different length, keys in another order,
 // and a text left in English.
+import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { CATALOGS } from '../catalogs';
 import { en } from '../en';
@@ -72,6 +73,17 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
 const english = catalogLeaves(en);
 const englishText = new Map(english.map((leaf) => [leaf.path, leaf.text]));
 const shape = (leaves: typeof english) => leaves.map(({ path, arity }) => ({ path, arity }));
+
+// The English About governs; de/fr/es/it translate it (#146). When this
+// fails, en.about changed: change each translation's `about` to match in the
+// same PR, send them through review, then update the hash.
+it('pins the English About the translations were made from', () => {
+  const text = catalogLeaves(en)
+    .filter((leaf) => leaf.path.startsWith('about.'))
+    .map((leaf) => `${leaf.path}\t${leaf.text}`)
+    .join('\n');
+  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('7f56f02c5a38bb51');
+});
 
 describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {
   const messages = CATALOGS[language];
