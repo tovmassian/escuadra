@@ -114,11 +114,15 @@ for (const { lang, file } of policyPages) {
     html.includes(`hreflang="x-default" href="${siteUrl}privacy/2/"`),
     `${page} declares the English page as the default`,
   );
-  assert.match(
-    html,
-    /<p class="applies">[^<]*<a href="\.\.\/\.\.\/privacy\.html">[^<]+<\/a><\/p>/,
+  const applies = html.match(
+    /<p class="applies">[^<]*<a href="\.\.\/\.\.\/privacy\.html"([^>]*)>[^<]+<\/a><\/p>/,
+  );
+  assert.ok(
+    applies,
     `${page} says which versions it covers and links the policy for earlier ones`,
   );
+  // privacy.html is English only, so the link says so.
+  assert.match(applies[1] ?? '', /\bhreflang="en"/, `${page} marks the 1.x policy link as English`);
   assert.doesNotMatch(
     html,
     /does not collect any personal data/,
