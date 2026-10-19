@@ -127,8 +127,8 @@ export const it: Messages = {
     flawlessVerdict: (team: string, season: string, level: number) =>
       `${team} · ${season}, livello ${level}. Zero errori.`,
     clearedTitle: (level: number) => `Livello ${level} superato`,
-    // "L’undici titolare", the starting eleven.
-    clearedVerdict: 'Conosci quasi tutto l’undici titolare.',
+    // "I titolari", the starting eleven.
+    clearedVerdict: 'Conosci quasi tutti i titolari.',
     failTitle: 'Ecco quelli da imparare',
     toClear: (target: string, level: number) => `Fai ${target} per superare il livello ${level}.`,
     toUnlock: (target: string, level: number) => `Fai ${target} per sbloccare il livello ${level}.`,
@@ -147,9 +147,10 @@ export const it: Messages = {
     retry: 'Rigioca la partita',
     playLevel: (level: number) => `Gioca il livello ${level}`,
     chooseTeam: 'Cambia squadra',
-    // "Sbagliato", as the round says after a miss.
-    missedCount: (count: number) =>
-      count === 1 ? `SBAGLIATO · ${count} GIOCATORE` : `SBAGLIATI · ${count} GIOCATORI`,
+    // "Errori", as "Zero errori" says below: a label with its count, which
+    // stays the same for one. "Sbagliati · 8 giocatori" also reads as "the
+    // wrong players".
+    missedCount: (count: number) => `ERRORI · ${count}`,
     // "Scorri per vederli tutti" is 24 chars against 14. Beside the missed
     // cards, the verb alone says it.
     swipeForAll: 'Scorri',
@@ -160,7 +161,8 @@ export const it: Messages = {
       `Partita: ${right} ${right === 1 ? 'risposta giusta' : 'risposte giuste'} su ${total}`,
   },
   share: {
-    title: 'Condividi la partita',
+    // Italian shares "il risultato", not the game.
+    title: 'Condividi il risultato',
     // Speaks to whoever receives the picture: not there yet, but working on it.
     // "In allenamento" wraps the picture's title to two lines.
     stillLearning: 'Sto imparando',
@@ -171,7 +173,7 @@ export const it: Messages = {
     preview: 'Anteprima',
     // "Storie", the word Instagram and Facebook use in Italian. No photos or
     // names give the answers away, so friends can still play.
-    imageHint: 'Formato storie. Senza foto né nomi, così i tuoi amici possono giocare.',
+    imageHint: 'Formato storie. Senza foto né nomi, così anche i tuoi amici possono giocare.',
     textHint: 'La griglia dei risultati per le chat di gruppo, con un link all’app.',
     // "Condividi immagine" is 18 chars against 16, so both say "Invia".
     shareImage: 'Invia immagine',

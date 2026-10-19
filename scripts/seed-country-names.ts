@@ -154,8 +154,9 @@ const HAND_WRITTEN: Record<
     WAL: 'Galles',
     NIR: 'Irlanda del Nord',
     CGO: 'Congo',
-    COD: 'RD del Congo',
+    COD: 'RD Congo',
     CZE: 'Repubblica Ceca',
+    FRO: 'Isole Far Oer',
   },
   de: {
     ENG: 'England',
