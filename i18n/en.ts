@@ -393,7 +393,14 @@ export const en = {
       home: `${ESCUADRA} home`,
       /** The spoken name of the list of languages. */
       languages: 'Language',
-      nav: { home: 'Home', support: 'Support' },
+      nav: {
+        home: 'Home',
+        support: 'Support',
+        /** The spoken name of the list of links in the header. */
+        utility: 'Utility',
+        /** The spoken name of the list of links in the footer. */
+        footer: 'Footer',
+      },
       theme: {
         light: 'Light',
         dark: 'Dark',

@@ -42,6 +42,12 @@ describe.each(SUPPORTED_LANGUAGES)('the %s privacy page', (language) => {
     );
   });
 
+  it('names its landmarks in its own language', () => {
+    const { site } = CATALOGS[language].about;
+    expect(html).toContain(`<nav aria-label="${escapeHtml(site.nav.utility)}">`);
+    expect(html).toContain(`<nav aria-label="${escapeHtml(site.nav.footer)}">`);
+  });
+
   it('links every language, marking its own', () => {
     for (const other of SUPPORTED_LANGUAGES) {
       expect(html).toContain(`href="${PAGE_FILES[other]}" hreflang="${other}" lang="${other}"`);
