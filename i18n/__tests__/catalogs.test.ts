@@ -82,7 +82,7 @@ it('pins the English About the translations were made from', () => {
     .filter((leaf) => leaf.path.startsWith('about.'))
     .map((leaf) => `${leaf.path}\t${leaf.text}`)
     .join('\n');
-  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('fb24a9f18cc8e276');
+  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('41796b02d855714d');
 });
 
 describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {

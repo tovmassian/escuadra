@@ -1,12 +1,38 @@
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdtempSync, readdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import os from 'node:os';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { CATALOGS } from '@/i18n/catalogs';
 import { SUPPORTED_LANGUAGES } from '@/i18n/resolveLanguage';
 import { translationNotice } from '@/i18n/translationNotice';
-import { escapeHtml, PAGE_FILES, privacyPage, SITE_URL } from './privacy-pages';
+import {
+  escapeHtml,
+  PAGE_FILES,
+  pageUrl,
+  POLICY_DIR,
+  POLICY_VERSION,
+  privacyPage,
+  SITE_URL,
+  writePrivacyPages,
+} from './privacy-pages';
 
 const updated = { day: 21, month: 10, year: 2026 };
+
+describe('the policy folder', () => {
+  it('holds 2.0 in privacy/2/, English as the folder itself', () => {
+    expect(POLICY_VERSION).toBe('2.0');
+    expect(POLICY_DIR).toBe('privacy/2/');
+    expect(PAGE_FILES).toEqual({
+      en: 'index.html',
+      es: 'es.html',
+      fr: 'fr.html',
+      it: 'it.html',
+      de: 'de.html',
+    });
+    expect(pageUrl('en')).toBe(`${SITE_URL}privacy/2/`);
+    expect(pageUrl('fr')).toBe(`${SITE_URL}privacy/2/fr.html`);
+  });
+});
 
 describe.each(SUPPORTED_LANGUAGES)('the %s privacy page', (language) => {
   const html = privacyPage(language, updated);
@@ -30,16 +56,36 @@ describe.each(SUPPORTED_LANGUAGES)('the %s privacy page', (language) => {
     );
   });
 
-  it('declares its language and its alternates', () => {
+  it('declares its language, its canonical URL and its alternates', () => {
     expect(html).toContain(`<html lang="${language}">`);
+    expect(html).toContain(`<link rel="canonical" href="${pageUrl(language)}" />`);
     for (const other of SUPPORTED_LANGUAGES) {
       expect(html).toContain(
-        `<link rel="alternate" hreflang="${other}" href="${SITE_URL}${PAGE_FILES[other]}" />`,
+        `<link rel="alternate" hreflang="${other}" href="${pageUrl(other)}" />`,
       );
     }
-    expect(html).toContain(
-      `<link rel="alternate" hreflang="x-default" href="${SITE_URL}${PAGE_FILES.en}" />`,
+    expect(html).toContain(`<link rel="alternate" hreflang="x-default" href="${pageUrl('en')}" />`);
+  });
+
+  it('says under its date which versions it covers, and links the earlier policy', () => {
+    const { site } = CATALOGS[language].about;
+    const lines = html.split('\n').map((line) => line.trim());
+    const at = lines.findIndex((line) => line.startsWith('<p class="updated">'));
+    expect(at).toBeGreaterThan(-1);
+    expect(lines[at + 1]).toBe(
+      `<p class="applies">${escapeHtml(site.appliesTo(POLICY_VERSION))} <a href="../../privacy.html">${escapeHtml(site.earlierVersions)}</a></p>`,
     );
+  });
+
+  // The page sits two folders down: a link to the site's own files that
+  // forgot to climb back would load nothing.
+  it('reaches outside its folder only from the site root', () => {
+    const local = [...html.matchAll(/\s(?:href|src)="([^"]*)"/g)]
+      .map(([, url]) => url ?? '')
+      .filter((url) => !/^[a-z][a-z+.-]*:/i.test(url));
+    const siblings: readonly string[] = Object.values(PAGE_FILES);
+    expect(local).not.toEqual([]);
+    expect(local.filter((url) => !url.startsWith('../../') && !siblings.includes(url))).toEqual([]);
   });
 
   it('names its landmarks in its own language', () => {
@@ -62,9 +108,31 @@ describe('escapeHtml', () => {
   });
 });
 
+describe('writePrivacyPages', () => {
+  it('writes every page into privacy/2/, creating it, and leaves the 1.x policy alone', () => {
+    const dir = mkdtempSync(path.join(os.tmpdir(), 'escuadra-privacy-'));
+    try {
+      writeFileSync(path.join(dir, 'privacy.html'), 'the 1.x policy');
+      writePrivacyPages(dir, updated);
+      expect(readdirSync(dir).sort()).toEqual(['privacy', 'privacy.html']);
+      expect(readFileSync(path.join(dir, 'privacy.html'), 'utf8')).toBe('the 1.x policy');
+      expect(readdirSync(path.join(dir, POLICY_DIR)).sort()).toEqual(
+        Object.values(PAGE_FILES).sort(),
+      );
+      for (const language of SUPPORTED_LANGUAGES) {
+        expect(readFileSync(path.join(dir, POLICY_DIR, PAGE_FILES[language]), 'utf8')).toBe(
+          privacyPage(language, updated),
+        );
+      }
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
+});
+
 // `PRIVACY_PAGES=<dir> PRIVACY_UPDATED=2026-10-21 npx vitest run
-// scripts/privacy-pages.test.ts` writes the five pages into <dir> (a gh-pages
-// worktree). Skipped in a normal run.
+// scripts/privacy-pages.test.ts` writes the five pages into <dir>/privacy/2/
+// (<dir> is a gh-pages worktree). Skipped in a normal run.
 const out = process.env.PRIVACY_PAGES;
 it.runIf(out !== undefined)('writes the five privacy pages', () => {
   const match = /^(\d{4})-(\d{2})-(\d{2})$/.exec(process.env.PRIVACY_UPDATED ?? '');
@@ -76,9 +144,5 @@ it.runIf(out !== undefined)('writes the five privacy pages', () => {
   if (!date || date.month < 1 || date.month > 12 || date.day < 1 || date.day > 31) {
     throw new Error('PRIVACY_UPDATED=YYYY-MM-DD: the date the pages go live');
   }
-  const dir = path.resolve(out ?? '');
-  mkdirSync(dir, { recursive: true });
-  for (const language of SUPPORTED_LANGUAGES) {
-    writeFileSync(path.join(dir, PAGE_FILES[language]), privacyPage(language, date));
-  }
+  writePrivacyPages(path.resolve(out ?? ''), date);
 });

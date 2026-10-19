@@ -389,6 +389,10 @@ export const en = {
       /** The page's title and heading. */
       title: 'Privacy policy',
       updated: (date: string) => `Last updated: ${date}`,
+      /** Under the date: the app versions this page covers, as "2.0". */
+      appliesTo: (version: string) => `This policy applies to ${ESCUADRA} ${version} and later.`,
+      /** The link after it, to the 1.x policy at privacy.html. */
+      earlierVersions: 'Privacy policy for earlier versions',
       /** The spoken name of the Escuadra link in the header. */
       home: `${ESCUADRA} home`,
       /** The spoken name of the list of languages. */

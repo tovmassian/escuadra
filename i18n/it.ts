@@ -341,6 +341,9 @@ export const it: Messages = {
     site: {
       title: 'Informativa sulla privacy',
       updated: (date: string) => `Ultimo aggiornamento: ${date}`,
+      appliesTo: (version: string) =>
+        `Questa informativa si applica a ${ESCUADRA} ${version} e alle versioni successive.`,
+      earlierVersions: 'Informativa sulla privacy delle versioni precedenti',
       home: `Home page di ${ESCUADRA}`,
       languages: 'Lingua',
       nav: {

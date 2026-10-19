@@ -343,6 +343,9 @@ export const fr: Messages = {
     site: {
       title: 'Politique de confidentialité',
       updated: (date: string) => `Dernière mise à jour : ${date}`,
+      appliesTo: (version: string) =>
+        `Cette politique de confidentialité s’applique à ${ESCUADRA} ${version} et aux versions ultérieures.`,
+      earlierVersions: 'Politique de confidentialité des versions antérieures',
       home: `Page d’accueil d’${ESCUADRA}`,
       languages: 'Langue',
       nav: {

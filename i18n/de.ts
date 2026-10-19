@@ -313,6 +313,9 @@ export const de: Messages = {
       title: 'Datenschutzerklärung',
       // "Stand:", as the team ladder dates its squad data.
       updated: (date: string) => `Stand: ${date}`,
+      appliesTo: (version: string) =>
+        `Diese Datenschutzerklärung gilt für ${ESCUADRA} ab Version ${version}.`,
+      earlierVersions: 'Datenschutzerklärung für frühere Versionen',
       home: `Startseite von ${ESCUADRA}`,
       languages: 'Sprache',
       nav: {

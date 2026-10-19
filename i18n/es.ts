@@ -345,6 +345,9 @@ export const es: Messages = {
     site: {
       title: 'Política de privacidad',
       updated: (date: string) => `Última actualización: ${date}`,
+      appliesTo: (version: string) =>
+        `Esta política de privacidad se aplica a ${ESCUADRA} ${version} y versiones posteriores.`,
+      earlierVersions: 'Política de privacidad de versiones anteriores',
       home: `Página de inicio de ${ESCUADRA}`,
       languages: 'Idioma',
       nav: {

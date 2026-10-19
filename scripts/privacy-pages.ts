@@ -1,8 +1,14 @@
 // The web privacy pages (#146): About's Privacy section, word for word, in
-// every language, for gh-pages (CLAUDE.md guardrail 4). Written by
-// `PRIVACY_PAGES=<dir> PRIVACY_UPDATED=YYYY-MM-DD npx vitest run
-// scripts/privacy-pages.test.ts` — a Vitest run, because Node alone cannot
-// load the catalogs' extensionless imports.
+// every language, for gh-pages (CLAUDE.md guardrail 4). The policy is
+// versioned: these are POLICY_VERSION's pages, in POLICY_DIR, and every link
+// out of that folder climbs back to the site root. privacy.html stays the 1.x
+// policy, and a published folder is never edited once its version ships.
+// Written into <dir>/privacy/2/ by `PRIVACY_PAGES=<dir>
+// PRIVACY_UPDATED=YYYY-MM-DD npx vitest run scripts/privacy-pages.test.ts` —
+// a Vitest run, because Node alone cannot load the catalogs' extensionless
+// imports.
+import { mkdirSync, writeFileSync } from 'node:fs';
+import path from 'node:path';
 import { CATALOGS } from '@/i18n/catalogs';
 import type { CalendarDate } from '@/i18n/en';
 import { ESCUADRA, ESCUADRA_WORDMARK, LANGUAGE_NAMES } from '@/i18n/names';
@@ -12,13 +18,28 @@ import { SHARE_URL } from '@/lib/shareResult';
 
 export const SITE_URL = SHARE_URL;
 
+// The version these pages state, and their folder. A version that changes
+// what leaves the device gets a new folder, and a published folder is never
+// edited after its version ships: a store listing may still link it.
+export const POLICY_VERSION = '2.0';
+export const POLICY_DIR = 'privacy/2/';
+
+/** From POLICY_DIR back to the site root, where the site's own files are. */
+const ROOT = '../../';
+
+/** Each language's file in POLICY_DIR. English is the folder's index. */
 export const PAGE_FILES: Readonly<Record<SupportedLanguage, string>> = {
-  en: 'privacy.html',
-  es: 'privacy.es.html',
-  fr: 'privacy.fr.html',
-  it: 'privacy.it.html',
-  de: 'privacy.de.html',
+  en: 'index.html',
+  es: 'es.html',
+  fr: 'fr.html',
+  it: 'it.html',
+  de: 'de.html',
 };
+
+/** A page's public URL: the folder itself for English. */
+export function pageUrl(language: SupportedLanguage): string {
+  return `${SITE_URL}${POLICY_DIR}${language === 'en' ? '' : PAGE_FILES[language]}`;
+}
 
 export function escapeHtml(text: string): string {
   return text
@@ -57,10 +78,9 @@ export function privacyPage(language: SupportedLanguage, updated: CalendarDate):
 
   const alternates = [
     ...SUPPORTED_LANGUAGES.map(
-      (other) =>
-        `    <link rel="alternate" hreflang="${other}" href="${SITE_URL}${PAGE_FILES[other]}" />`,
+      (other) => `    <link rel="alternate" hreflang="${other}" href="${pageUrl(other)}" />`,
     ),
-    `    <link rel="alternate" hreflang="x-default" href="${SITE_URL}${PAGE_FILES.en}" />`,
+    `    <link rel="alternate" hreflang="x-default" href="${pageUrl('en')}" />`,
   ];
   const languageLinks = SUPPORTED_LANGUAGES.map((other) => {
     const current = other === language ? ' aria-current="page"' : '';
@@ -73,24 +93,24 @@ export function privacyPage(language: SupportedLanguage, updated: CalendarDate):
     '  <head>',
     '    <meta charset="utf-8" />',
     '    <meta name="viewport" content="width=device-width, initial-scale=1" />',
-    '    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />',
+    `    <link rel="icon" type="image/x-icon" href="${ROOT}assets/favicon.ico" />`,
     `    <title>${e(site.title)} — ${ESCUADRA}</title>`,
-    `    <link rel="canonical" href="${SITE_URL}${PAGE_FILES[language]}" />`,
+    `    <link rel="canonical" href="${pageUrl(language)}" />`,
     ...alternates,
     THEME_SCRIPT,
-    '    <link rel="stylesheet" href="site.css" />',
-    '    <script type="module" src="site.mjs"></script>',
+    `    <link rel="stylesheet" href="${ROOT}site.css" />`,
+    `    <script type="module" src="${ROOT}site.mjs"></script>`,
     '  </head>',
     '  <body>',
     '    <header class="site-header shell">',
-    `      <a class="brand" href="index.html" aria-label="${e(site.home)}">`,
+    `      <a class="brand" href="${ROOT}index.html" aria-label="${e(site.home)}">`,
     '        <span class="brand-mark" aria-hidden="true">',
-    '          <img src="assets/favicon.ico" alt="" />',
+    `          <img src="${ROOT}assets/favicon.ico" alt="" />`,
     '        </span>',
     `        <span>${ESCUADRA_WORDMARK}</span>`,
     '      </a>',
     `      <nav aria-label="${e(site.nav.utility)}">`,
-    `        <a href="${PAGE_FILES[language]}">${e(privacy.heading)}</a><a href="support.html">${e(site.nav.support)}</a>`,
+    `        <a href="${PAGE_FILES[language]}">${e(privacy.heading)}</a><a href="${ROOT}support.html">${e(site.nav.support)}</a>`,
     '      </nav>',
     '      <button',
     '        type="button"',
@@ -110,6 +130,7 @@ export function privacyPage(language: SupportedLanguage, updated: CalendarDate):
     `      <nav class="language-nav" aria-label="${e(site.languages)}">${languageLinks}</nav>`,
     `      <h1>${e(site.title)}</h1>`,
     `      <p class="updated">${e(site.updated(t.formats.date(updated)))}</p>`,
+    `      <p class="applies">${e(site.appliesTo(POLICY_VERSION))} <a href="${ROOT}privacy.html">${e(site.earlierVersions)}</a></p>`,
     '',
     `      <p><strong>${e(privacy.lead)}</strong></p>`,
     ...privacy.paragraphs.map(p),
@@ -123,7 +144,7 @@ export function privacyPage(language: SupportedLanguage, updated: CalendarDate):
     '    <footer class="site-footer shell">',
     `      <span>&copy; ${ESCUADRA}</span>`,
     `      <nav aria-label="${e(site.nav.footer)}">`,
-    `        <a href="index.html">${e(site.nav.home)}</a><a href="support.html">${e(site.nav.support)}</a>`,
+    `        <a href="${ROOT}index.html">${e(site.nav.home)}</a><a href="${ROOT}support.html">${e(site.nav.support)}</a>`,
     '      </nav>',
     `      <span class="release-status">${e(site.releaseStatus)}</span>`,
     '    </footer>',
@@ -131,4 +152,13 @@ export function privacyPage(language: SupportedLanguage, updated: CalendarDate):
     '</html>',
     '',
   ].join('\n');
+}
+
+/** Writes every language's page to <dir>/privacy/2/, creating the folders. */
+export function writePrivacyPages(dir: string, updated: CalendarDate): void {
+  const folder = path.join(dir, POLICY_DIR);
+  mkdirSync(folder, { recursive: true });
+  for (const language of SUPPORTED_LANGUAGES) {
+    writeFileSync(path.join(folder, PAGE_FILES[language]), privacyPage(language, updated));
+  }
 }
