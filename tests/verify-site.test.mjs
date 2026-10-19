@@ -102,6 +102,22 @@ for (const { lang, file } of policyPages) {
   assert.equal((html.match(/<main/g) ?? []).length, 1, `${page} has one main landmark`);
   assert.equal((html.match(/<h1/g) ?? []).length, 1, `${page} has exactly one h1`);
   assert.match(html, /data-theme-toggle/, `${page} has a theme toggle`);
+  // site.mjs falls back to English when a label is missing, so a translated page
+  // that lost its labels would ship an English toggle without any other sign.
+  for (const label of ['light', 'dark', 'to-light', 'to-dark']) {
+    assert.match(
+      html,
+      new RegExp(`data-label-${label}="[^"]+"`),
+      `${page} has a non-empty data-label-${label} on its theme toggle`,
+    );
+  }
+  if (lang !== 'en') {
+    assert.doesNotMatch(
+      html,
+      /data-label-light="Light"/,
+      `${page} translates the theme toggle`,
+    );
+  }
   assert.ok(html.includes('href="../../index.html"'), `${page} links home`);
   for (const sibling of policyPages) {
     assert.ok(html.includes(`href="${sibling.file}"`), `${page} links ${sibling.file}`);
