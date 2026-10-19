@@ -32,9 +32,7 @@ PR B stays a draft until then. It is built from PR A's generator, so it is opene
 
 - **Word for word (guardrail 4).** Each privacy page shows its catalog's `about.privacy` texts exactly, plus that language's translation notice. Nothing is added, dropped or reworded between the app and the page.
 - **The switch sentence:** `…unless you switch "${USAGE_STATISTICS}" off on the app's About screen.` The same wording is used in every language, each with its own switch label in quotes.
-- **New English texts** (#146's wording, as amended by the owner after the English language review, 2026-10-19):
-  - `the app was opened, with its language and whether that language follows your phone's setting or was chosen in the app`
-  - `Most country names in languages other than English come from the Unicode CLDR project and are used under the Unicode License.`
+- **The English source is `en.about` in `i18n/en.ts` as it stands after the English language review (five rounds, owner-approved, 2026-10-19).** Translate what it says now; #146's original wording was amended there.
   - Notice (drafted in each language): `This is a translation. If it differs from the English text, the English text applies.`
 - Already in `en.ts`, from #143: "nine things" and "your language choice". Do not add them twice.
 - **Never translated:** _Escuadra_ and _a la escuadra_ (`i18n/names.ts`). Also left as they are: TelemetryDeck, Wikimedia Commons, Wikimedia Foundation, Wikipedia, Wikidata, Expo, flagpedia.net, Unicode CLDR, and licence names (CC BY-SA, CC BY, CC0, SIL Open Font License 1.1, Unicode License).
