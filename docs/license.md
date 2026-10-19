@@ -73,16 +73,22 @@ you changed the work.
 
 ## What Escuadra ships
 
-| asset                          | licence                                         | source of truth                                      |
-| ------------------------------ | ----------------------------------------------- | ---------------------------------------------------- |
-| Squad data                     | Wikipedia CC BY-SA; Wikidata CC0                | `data/squads/`, `tools/squadctl/`                    |
-| Player photos                  | per photo — see the next section                | `player.photo` in `data/players.json`                |
-| National flags                 | public domain (flagpedia.net)                   | `assets/flags/README.md`                             |
-| Country names (es, fr, it, de) | Unicode License v3 (Unicode CLDR)               | `i18n/countries.ts`, `scripts/seed-country-names.ts` |
-| Inter, IBM Plex Mono           | SIL Open Font License 1.1                       | `@expo-google-fonts/*` in `package.json`             |
-| Archivo (three static cuts)    | SIL Open Font License 1.1                       | `assets/fonts/archivo/README.md`                     |
-| App Store / Google Play badges | Apple's and Google's artwork, under their rules | `CLAUDE.md`, guardrail 2                             |
-| Club crests, badges, logos     | **never** — trademarks, whatever their licence  | `CLAUDE.md`, guardrail 2                             |
+| asset                          | licence                                         | source of truth                                                                              |
+| ------------------------------ | ----------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Squad data                     | Wikipedia CC BY-SA; Wikidata CC0                | `data/squads/`, `tools/squadctl/`                                                            |
+| Player photos                  | per photo — see the next section                | `player.photo` in `data/players.json`                                                        |
+| National flags                 | public domain (flagpedia.net)                   | `assets/flags/README.md`                                                                     |
+| Country names (es, fr, it, de) | Unicode License v3 (Unicode CLDR)               | `i18n/countries.ts`, `scripts/seed-country-names.ts`; the notice: `i18n/UNICODE-LICENSE.txt` |
+| Inter, IBM Plex Mono           | SIL Open Font License 1.1                       | `@expo-google-fonts/*` in `package.json`                                                     |
+| Archivo (three static cuts)    | SIL Open Font License 1.1                       | `assets/fonts/archivo/README.md`                                                             |
+| App Store / Google Play badges | Apple's and Google's artwork, under their rules | `CLAUDE.md`, guardrail 2                                                                     |
+| Club crests, badges, logos     | **never** — trademarks, whatever their licence  | `CLAUDE.md`, guardrail 2                                                                     |
+
+The Unicode License asks that its copyright and permission notice appear with
+all copies of the data, or in the documentation that comes with it. In the
+repository it does: `i18n/UNICODE-LICENSE.txt` sits next to the country names
+in `i18n/countries.ts`. For the app bundle, an in-app licences sheet that shows
+the notice is tracked in its own issue.
 
 The flag set replaced an earlier set nobody could name a source for; a flag
 whose licence you cannot state is a release blocker. The OFL lets the app

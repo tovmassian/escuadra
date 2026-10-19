@@ -45,15 +45,16 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 - **CI calls tools directly** (`node scripts/ci/…`, `npx eas-cli …`), never through new npm
   scripts, and writes temporary files to `$RUNNER_TEMP`, never new `.gitignore` lines.
 
-⚠️ **The About text on `main`, in all five catalogs, now covers TelemetryDeck,
-the Wikimedia photos and the language sent with the launch signal (#54, #146),
-but the web policy has not caught up.** `gh-pages` still carries the old English
-`privacy.html`. A separate `gh-pages` pull request for #146, held until release,
-will replace it with the five pages `scripts/privacy-pages.ts` renders; they are
-published when the first build containing the new About text reaches users. #55
-updates the App Store and Google Play declarations to cover the photos,
-TelemetryDeck and the language. The next release branch (its version still TBD)
-is cut from `main` only after both; then #60 builds it.
+⚠️ **2.0.0 changes what leaves the device, so its disclosures ship with its store
+build.** The About text on `main`, in all five catalogs, covers TelemetryDeck,
+the Wikimedia photos and the language sent with the launch signal (#54, #146).
+The web policy is versioned: `privacy.html` stays the 1.x policy that both store
+listings link today, and `privacy/2/` holds the 2.0 pages `scripts/privacy-pages.ts`
+renders. The order: every 2.0.0 issue lands on `main`, with the 2.0 pages signed
+off and #55's answers written; then `release/2.0.0` is cut and built (#116). At
+submission, App Privacy (before Apple review) and Data safety (when the build is
+uploaded) are updated, and each store's privacy URL moves to `privacy/2/` when
+that store ships 2.0.
 
 ## Scope and roadmap
 
@@ -336,14 +337,15 @@ reports — is done by hand, not by a skill.
   (date, plurals, position codes, hand-written country names) are
   `i18n/__tests__/translations.test.ts`. About's words are each catalog's
   `about`. `scripts/privacy-pages.ts` renders its Privacy section word for
-  word into `privacy.html` and `privacy.{es,fr,it,de}.html`; a translated
-  page ends, as its About screen does, with the notice from
-  `i18n/translationNotice.ts`. A change to `en.about` changes every catalog's
-  `about` in the same PR, each re-reviewed; `i18n/__tests__/catalogs.test.ts`
-  pins a hash of the English About to catch one that doesn't. Screens read
-  text through `useT()`. `lib/` modules that build text take `messages` as
-  their last argument and stay React-free. Data stays English: squads, players, clubs and position codes
-  are translated at display time by code, never by their English string.
+  word into `privacy/2/` (`index.html`, `es.html`, `fr.html`, `it.html`,
+  `de.html`); a translated page ends, as its About screen does, with the
+  notice from `i18n/translationNotice.ts`. A change to `en.about` changes
+  every catalog's `about` in the same PR, each re-reviewed;
+  `i18n/__tests__/catalogs.test.ts` pins a hash of the English About to catch
+  one that doesn't. Screens read text through `useT()`. `lib/` modules that
+  build text take `messages` as their last argument and stay React-free. Data
+  stays English: squads, players, clubs and position codes are translated at
+  display time by code, never by their English string.
   A nation's name and a player's nationality come from `i18n/countries.ts` (FIFA
   code → name, the codes `lib/flags.ts` maps to); every screen shows a team
   through `squadDisplayName()` in `i18n/displayNames.ts`. `lib/` functions that

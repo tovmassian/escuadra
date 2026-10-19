@@ -80,7 +80,9 @@ What the fingerprint can't see:
 - **Store reviews.** A reviewer's device receives updates for its runtime like anyone's.
 - Store listing text and screenshots, and the web privacy pages
   (`scripts/privacy-pages.ts`): those change in Play Console, App Store Connect
-  and on `gh-pages`.
+  and on `gh-pages`. The pages are versioned: `privacy.html` is the 1.x policy
+  and `privacy/2/` holds 2.0's, and a store's privacy URL moves to a version's
+  pages when that store ships the version.
 
 ## Branches
 
