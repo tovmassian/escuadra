@@ -33,6 +33,11 @@ interface SessionState {
   currentPartIndex: number;
   results: QuestionResult[];
   phase: SessionPhase;
+  /** Whether any round had been completed before this one, noted by the
+   *  question screen as this round completes, before its score is recorded.
+   *  Results reads it for the store-rating prompt's "not on the first round
+   *  ever" (#57). False until noted; a new round starts it over. */
+  earlierRounds: boolean;
 
   startRound: (squad: Squad, roster: RosterEntry[], level: Level, seed?: number) => void;
   /** Grades the current part, advances to the next part, or finalizes the
@@ -40,6 +45,7 @@ interface SessionState {
   answerPart: (pickedIndex: number) => void;
   /** Continue button: moves to the next question, or flips phase to 'complete'. */
   advanceQuestion: () => void;
+  setEarlierRounds: (earlierRounds: boolean) => void;
   reset: () => void;
 }
 
@@ -52,6 +58,7 @@ const initialState = {
   currentPartIndex: 0,
   results: [],
   phase: 'idle' as SessionPhase,
+  earlierRounds: false,
 };
 
 export const useSession = create<SessionState>()((set, get) => ({
@@ -72,6 +79,7 @@ export const useSession = create<SessionState>()((set, get) => ({
         correct: null,
       })),
       phase: 'playing',
+      earlierRounds: false,
     });
   },
 
@@ -116,6 +124,8 @@ export const useSession = create<SessionState>()((set, get) => ({
     }
     set({ currentIndex: currentIndex + 1, currentPartIndex: 0 });
   },
+
+  setEarlierRounds: (earlierRounds) => set({ earlierRounds }),
 
   reset: () => set(initialState),
 }));

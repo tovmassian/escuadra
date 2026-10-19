@@ -207,6 +207,23 @@ describe('session store', () => {
     expect(useSession.getState().questions).toHaveLength(0);
   });
 
+  // The store-rating prompt's "not on the first round ever" (#57): the
+  // question screen notes it as the round completes; Results reads it.
+  it('notes whether earlier rounds were completed, for this round only', () => {
+    expect(useSession.getState().earlierRounds).toBe(false);
+    useSession.getState().startRound(squad, roster(), 1);
+    useSession.getState().setEarlierRounds(true);
+    expect(useSession.getState().earlierRounds).toBe(true);
+
+    // Retrying from Results starts a new round, which notes its own.
+    useSession.getState().startRound(squad, roster(), 1);
+    expect(useSession.getState().earlierRounds).toBe(false);
+
+    useSession.getState().setEarlierRounds(true);
+    useSession.getState().reset();
+    expect(useSession.getState().earlierRounds).toBe(false);
+  });
+
   it('produces an identical round for the same explicit seed', () => {
     useSession.getState().startRound(squad, roster(), 1, 4242);
     const first = JSON.stringify(useSession.getState().questions);

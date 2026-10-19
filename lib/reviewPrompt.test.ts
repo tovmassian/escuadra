@@ -1,3 +1,5 @@
+import { readFileSync, readdirSync, statSync } from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { shouldAskForReview, type ReviewPromptInput } from './reviewPrompt';
 
@@ -44,5 +46,32 @@ describe('shouldAskForReview', () => {
 
   it('never asks on the first round ever', () => {
     expect(shouldAskForReview({ ...due, earlierRounds: false })).toBe(false);
+  });
+});
+
+// lib/storeReview.ts is the only module that imports expo-store-review, so
+// every request goes through `shouldAskForReview` and its throttle.
+describe('expo-store-review importers', () => {
+  const ROOT = path.join(import.meta.dirname, '..');
+  const SKIPPED_DIRS = new Set(['node_modules', 'dist', '__tests__']);
+  // Any import form: `from 'expo-store-review'`, a bare side-effect import,
+  // `require(...)`, a dynamic `import(...)`, or a deep path.
+  const EXPO_STORE_REVIEW = /['"]expo-store-review(\/[^'"]*)?['"]/;
+
+  function sources(dir: string): string[] {
+    return readdirSync(dir).flatMap((name) => {
+      const full = path.join(dir, name);
+      if (statSync(full).isDirectory()) {
+        return name.startsWith('.') || SKIPPED_DIRS.has(name) ? [] : sources(full);
+      }
+      return /\.(ts|tsx)$/.test(name) && !/\.test\.tsx?$/.test(name) ? [full] : [];
+    });
+  }
+
+  it('is lib/storeReview.ts alone', () => {
+    const importers = sources(ROOT)
+      .filter((file) => EXPO_STORE_REVIEW.test(readFileSync(file, 'utf8')))
+      .map((file) => path.relative(ROOT, file));
+    expect(importers).toEqual(['lib/storeReview.ts']);
   });
 });

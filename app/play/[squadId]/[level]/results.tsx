@@ -20,6 +20,7 @@ import {
 } from '@/lib/resultsView';
 import { getPlayer, getRoster, getSquad } from '@/lib/squads';
 import { bannerBands, stageVeil } from '@/lib/stageView';
+import { askForReview } from '@/lib/storeReview';
 import { track } from '@/lib/telemetry';
 import { selectMissed, selectScore, useSession, type QuestionResult } from '@/stores/session';
 import { MARK_VIEWBOX, markGeometry } from '@/theme/brand';
@@ -40,8 +41,8 @@ import {
 import { useThemeColors, useThemeName } from '@/theme/useTheme';
 import type { TeamMarker } from '@/types/squad';
 import { Image } from 'expo-image';
-import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useCallback, useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   cancelAnimation,
@@ -81,6 +82,29 @@ export default function Results() {
   // Sharing is not a next step in the study loop, so it sits in the top bar,
   // apart from the actions, and opens a sheet rather than leaving the screen.
   const [sharing, setSharing] = useState(false);
+
+  // After an a la escuadra round, once the celebration is over, perhaps ask
+  // for a store rating (#57). Nothing here sets state, so the screen never
+  // waits on it or re-renders for it. Leaving or covering the screen (Study
+  // is pushed over it) or opening the share sheet calls the ask off; coming
+  // back starts the wait again.
+  const flawless =
+    tier === 'excellent' && !!squad && session.squadId === squadId && session.level === level;
+  const earlierRounds = session.earlierRounds;
+  useFocusEffect(
+    useCallback(() => {
+      if (!flawless || sharing) return;
+      let shown = true;
+      const timer = setTimeout(
+        () => askForReview({ flawless, earlierRounds }, () => shown),
+        resultsTimeline.reviewPrompt,
+      );
+      return () => {
+        shown = false;
+        clearTimeout(timer);
+      };
+    }, [flawless, earlierRounds, sharing]),
+  );
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },

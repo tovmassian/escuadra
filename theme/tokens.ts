@@ -829,6 +829,12 @@ export const resultsTimeline = {
   circleStagger: t(40),
   actionsAfter: t(220),
   actionsStagger: t(40),
+  // After an a la escuadra round, the store-rating request (#57,
+  // lib/storeReview.ts) waits this long from the screen's mount: the
+  // celebration is over by 1,200 ms (the strike's flash fading), and a beat
+  // more lets the score be seen before the OS may show its dialog. A pause,
+  // not an animation.
+  reviewPrompt: t(2000),
 } as const;
 
 // Home's lockup: the mark strike (`strikeTiming.home`) plus the wordmark's

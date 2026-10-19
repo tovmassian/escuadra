@@ -13,6 +13,7 @@ import {
   spotlightMotion,
   stage,
   stageGradients,
+  strikeTiming,
   typography,
 } from './tokens';
 
@@ -493,6 +494,25 @@ describe('results motion', () => {
     const stripEnd = 9 * resultsTimeline.segmentStagger + resultsTimeline.segmentFill;
     expect(stripEnd).toBeLessThanOrEqual(resultsTimeline.passBeat);
     expect(resultsTimeline.failBeat).toBeLessThan(resultsTimeline.passBeat);
+  });
+
+  // #57: the store-rating request waits for the celebration to finish.
+  it('asks for a rating only once an a la escuadra celebration is over', () => {
+    const { passBeat, rise, actionsAfter, actionsStagger, circleStagger } = resultsTimeline;
+    const strike = strikeTiming.excellent;
+    const ends = [
+      // The strip, the ten circles and the three action rows.
+      9 * resultsTimeline.segmentStagger + resultsTimeline.segmentFill,
+      passBeat + 9 * circleStagger + rise,
+      passBeat + actionsAfter + 2 * actionsStagger + rise,
+      // The strike: the ball lands, the frame recoils, the flash and trail fade.
+      passBeat + strike.ballDelay + strike.ballDuration,
+      passBeat + strike.recoilDelay + strike.recoilDuration,
+      passBeat + (strike.flash ? strike.flash.delay + strike.flash.duration : 0),
+      passBeat +
+        (strike.trail ? strike.trail.delay + strike.trail.stagger + strike.trail.duration : 0),
+    ];
+    expect(resultsTimeline.reviewPrompt).toBeGreaterThan(Math.max(...ends));
   });
 });
 

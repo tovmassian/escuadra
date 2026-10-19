@@ -43,6 +43,10 @@ interface ProgressState {
   /** Study's grid or list view (spec §5.1). A preference like `themePreference`,
    *  so it survives `reset()`. */
   studyView: StudyView;
+  /** The app version that last asked the OS for its store-rating dialog
+   *  (#57), so each version asks at most once. Null until one has. Survives
+   *  `reset()`: clearing scores should not earn a second ask. */
+  reviewAskedVersion: string | null;
   recordScore: (squadId: string, level: number, score: number) => void;
   setLastPlayed: (squadId: string, level: number) => void;
   setThemePreference: (preference: ThemePreference) => void;
@@ -51,6 +55,7 @@ interface ProgressState {
   setTelemetryEnabled: (enabled: boolean) => void;
   setHaptics: (enabled: boolean) => void;
   setStudyView: (view: StudyView) => void;
+  setReviewAskedVersion: (version: string) => void;
   reset: () => void;
 }
 
@@ -65,6 +70,7 @@ export const useProgress = create<ProgressState>()(
       telemetryEnabled: true,
       haptics: true,
       studyView: 'grid',
+      reviewAskedVersion: null,
       recordScore: (squadId, level, score) =>
         set((s) => {
           const key = scoreKey(squadId, level);
@@ -83,6 +89,7 @@ export const useProgress = create<ProgressState>()(
       setTelemetryEnabled: (telemetryEnabled) => set({ telemetryEnabled }),
       setHaptics: (haptics) => set({ haptics }),
       setStudyView: (studyView) => set({ studyView }),
+      setReviewAskedVersion: (reviewAskedVersion) => set({ reviewAskedVersion }),
       reset: () => set({ bestScores: {}, lastPlayed: null }),
     }),
     {
