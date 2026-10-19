@@ -42,6 +42,8 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'share.image',
     // "Clubs" is French too.
     'picker.clubs',
+    // "Version {1}": French writes it the same.
+    'about.version',
   ],
   es: [
     // Club is the Spanish word too, and CLUB its chip code.

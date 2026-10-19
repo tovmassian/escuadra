@@ -27,7 +27,7 @@ const SAMPLE_ARGS: Readonly<Record<string, readonly unknown[]>> = {
 export const LATER_PATHS: Readonly<Record<Language, readonly string[]>> = {
   en: [],
   de: ['store.'],
-  fr: ['about.', 'store.'],
+  fr: ['store.'],
   es: ['about.', 'store.'],
   it: ['about.', 'store.'],
 };
