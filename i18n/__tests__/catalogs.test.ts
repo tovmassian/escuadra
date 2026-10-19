@@ -87,6 +87,19 @@ describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {
     expect(wrong.map((leaf) => leaf.path)).toEqual([]);
   });
 
+  // Placeholders survive a case change ("{1}".toLowerCase() is "{1}"), so this
+  // calls each function with mixed-case values: a code like DEF or a club's
+  // name must reach the screen exactly as given.
+  it('prints every value it is given unchanged', () => {
+    const wrong = leaves.filter((leaf) => {
+      if (!leaf.call || leaf.path === 'formats.date') return false;
+      const values = Array.from({ length: leaf.arity }, (_, i) => `Qx${i}`);
+      const text = leaf.call(...values);
+      return values.some((value) => !text.includes(value));
+    });
+    expect(wrong.map((leaf) => leaf.path)).toEqual([]);
+  });
+
   it('names its own position codes in the level-2 description', () => {
     const description = messages.ladder.levels[2].description;
     for (const code of Object.values(messages.positionCodes)) {

@@ -142,10 +142,9 @@ export const es: Messages = {
     nameRight: 'Nombre correcto',
     nameAndPositionRight: 'Nombre y posición correctos',
     wrongPart: {
-      // A position is a common noun, lowercase mid-sentence; a club or a
-      // country keeps its capital.
-      position: (right: string, picked: string) =>
-        `posición: ${right.toLowerCase()}, no ${picked.toLowerCase()}`,
+      // The values are the position codes (DEF, MED), as on the tiles, so
+      // they keep their capitals.
+      position: (right: string, picked: string) => `posición: ${right}, no ${picked}`,
       club: (right: string, picked: string) => `club: ${right}, no ${picked}`,
       nationality: (right: string, picked: string) => `nacionalidad: ${right}, no ${picked}`,
     },
