@@ -306,7 +306,7 @@ export const en = {
         {
           heading: 'Player photos',
           paragraphs: [
-            "Player photos come from Wikimedia Commons. Each one is used under the licence its author chose: CC BY-SA, CC BY, CC0, public domain, or Commons' own Attribution licence. Every photo is cropped to fit its frame. Where the app's text sits over a photo, the app shades that part of the screen, and it dims the photo after a wrong answer. A photo too small to fill the screen is shown whole, over a darkened copy of itself. The photo files themselves are not edited. Not every player has a photo.",
+            "Player photos come from Wikimedia Commons. Each one is used under the licence its author chose: CC BY-SA, CC BY, CC0, public domain, or Commons' own Attribution licence. Photos are cropped to fill the space they appear in. On the question screen, a photo too small to fill it is shown whole instead, over an enlarged, darkened copy of itself. Where the app's text sits over a photo, the app shades that part of the screen, and it dims the photo after a wrong answer. The photo files themselves are not edited. Not every player has a photo.",
             `The author, the licence and the word "${CROPPED}" appear under the question for as long as a photo is on screen, and again, for the whole round, under "${PHOTO_CREDITS}" in the results and at the end of the Study screen. Tap the author for the photo's page on Wikimedia Commons, or the licence for its terms.`,
           ],
         },
@@ -352,7 +352,7 @@ export const en = {
         {
           heading: 'Anonymous usage statistics',
           paragraphs: [
-            `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off on the app's About screen. Each one is tagged with a random identifier created for these statistics, separate from the one the app-update check uses. That identifier is not linked to you, your device or your accounts, and neither it nor the statistics are shared with anyone else.`,
+            `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off on the app's About screen. Each one carries a hashed form of a random identifier created for these statistics, separate from the one the app-update check uses, and a random session code that is new each time the app starts. Like any website, TelemetryDeck also receives your device's IP address with each one, and TelemetryDeck's own privacy policy applies to what it receives. The identifier and the session code are not linked to you, your device or your accounts, and neither they nor the statistics are shared with anyone else.`,
             `The statistics are: the app was opened, with its language and whether that language follows your phone's language or was chosen in the app; a round started, with whether the team is a club or a nation and the difficulty level; a round finished, with the same two details, the score, and whether it was ${A_LA_ESCUADRA}; the Study screen was opened, with whether the team is a club or a nation; and a result was shared, with the level, the score and whether it was shared as a picture or as text. They never include team names, player names, your answers or anything you type.`,
           ],
         },
@@ -366,7 +366,7 @@ export const en = {
           heading: 'What is stored on your device',
           paragraphs: [
             `${ESCUADRA} saves nine things locally, on your device: your best score for each team and difficulty level; which levels you have completed; the last team and level you played; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; your choice about usage statistics; and the random identifier those statistics use.`,
-            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of these things off your device, and only while usage statistics are on: the identifier, which is sent with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
+            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of these things off your device, and only while usage statistics are on: a hashed form of the identifier, which is sent with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
           ],
         },
         {
