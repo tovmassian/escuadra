@@ -258,7 +258,7 @@ export const fr: Messages = {
         {
           heading: 'Données des effectifs',
           paragraphs: [
-            'Les données des effectifs sont compilées à partir de Wikipedia et de Wikidata et correspondent à la saison indiquée pour chaque équipe. Le contenu de Wikipedia est disponible sous licence CC BY-SA. Wikidata est disponible sous licence CC0.',
+            'Les données des effectifs sont compilées à partir de Wikipédia et de Wikidata et correspondent à la saison indiquée pour chaque équipe. Le contenu de Wikipédia est disponible sous licence CC BY-SA. Wikidata est disponible sous licence CC0.',
           ],
         },
         {
