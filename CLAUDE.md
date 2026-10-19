@@ -338,9 +338,11 @@ reports — is done by hand, not by a skill.
   `about`. `scripts/privacy-pages.ts` renders its Privacy section word for
   word into `privacy.html` and `privacy.{es,fr,it,de}.html`; a translated
   page ends, as its About screen does, with the notice from
-  `i18n/translationNotice.ts`. Screens read text through `useT()`. `lib/`
-  modules that build text take `messages` as their last argument and stay
-  React-free. Data stays English: squads, players, clubs and position codes
+  `i18n/translationNotice.ts`. A change to `en.about` changes every catalog's
+  `about` in the same PR, each re-reviewed; `i18n/__tests__/catalogs.test.ts`
+  pins a hash of the English About to catch one that doesn't. Screens read
+  text through `useT()`. `lib/` modules that build text take `messages` as
+  their last argument and stay React-free. Data stays English: squads, players, clubs and position codes
   are translated at display time by code, never by their English string.
   A nation's name and a player's nationality come from `i18n/countries.ts` (FIFA
   code → name, the codes `lib/flags.ts` maps to); every screen shows a team
