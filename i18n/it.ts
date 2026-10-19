@@ -261,7 +261,7 @@ export const it: Messages = {
         {
           heading: 'Foto dei giocatori',
           paragraphs: [
-            'Le foto dei giocatori provengono da Wikimedia Commons. Ognuna è usata con la licenza scelta dal suo autore: CC BY-SA, CC BY, CC0, pubblico dominio o la licenza “Attribution” propria di Commons. Ogni foto viene ritagliata per adattarsi al suo riquadro. Dove il testo dell’app si sovrappone a una foto, l’app ombreggia quella parte dello schermo, e attenua la foto dopo una risposta sbagliata. Una foto troppo piccola per riempire lo schermo viene mostrata intera, sopra una copia scurita di sé stessa. I file delle foto in sé non vengono modificati. Non tutti i giocatori hanno una foto.',
+            'Le foto dei giocatori provengono da Wikimedia Commons. Ognuna è usata con la licenza scelta dal suo autore: CC BY-SA, CC BY, CC0, pubblico dominio o la licenza “Attribution” propria di Commons. Ogni foto viene ritagliata per adattarsi al suo riquadro. Dove il testo dell’app si sovrappone a una foto, l’app ombreggia quella parte dello schermo, e scurisce la foto dopo una risposta sbagliata. Una foto troppo piccola per riempire lo schermo viene mostrata intera, sopra una copia scurita di sé stessa. I file delle foto in sé non vengono modificati. Non tutti i giocatori hanno una foto.',
             `L’autore, la licenza e la parola “${CROPPED}” compaiono sotto la domanda finché una foto è sullo schermo, e di nuovo, per l’intera partita, sotto “${PHOTO_CREDITS}” nei risultati e in fondo alla schermata “Rosa”. Tocca l’autore per aprire la pagina della foto su Wikimedia Commons, o la licenza per leggerne le condizioni.`,
           ],
         },
@@ -292,9 +292,9 @@ export const it: Messages = {
         {
           heading: 'Foto dei giocatori',
           paragraphs: [
-            `${ESCUADRA} non contiene le foto dei giocatori. Vengono caricate da Wikimedia Commons, gestito dalla Wikimedia Foundation: le dieci foto di una partita all’inizio della partita, e le foto di una rosa nella schermata “Rosa” man mano che scorri. Come qualsiasi sito web, Wikimedia riceve l’indirizzo IP del tuo dispositivo e i dettagli di ogni richiesta, tra cui quali foto sono state richieste e, di conseguenza, quali giocatori fanno parte della tua partita o della tua rosa. ${ESCUADRA} non invia nient’altro a Wikimedia, e a ciò che Wikimedia riceve si applica la sua informativa sulla privacy.`,
+            `${ESCUADRA} non contiene le foto dei giocatori. Vengono caricate da Wikimedia Commons, gestito dalla Wikimedia Foundation: le dieci foto di una partita all’inizio della partita, e le foto di una rosa nella schermata “Rosa” man mano che scorri. Come qualsiasi sito web, Wikimedia riceve l’indirizzo IP del tuo dispositivo e i dettagli di ogni richiesta, tra cui quali foto sono state richieste e, di conseguenza, quali giocatori fanno parte della tua partita o della tua rosa. ${ESCUADRA} non invia nient’altro a Wikimedia, e a ciò che Wikimedia riceve si applica l’informativa sulla privacy di Wikimedia.`,
             'Le foto già caricate possono essere conservate nella cache dell’app sul tuo dispositivo, così da apparire più rapidamente. Senza connessione, il quiz funziona normalmente e mostra i colori della squadra e il numero di maglia al posto di una foto.',
-            `Se tocchi un credito foto, si apre la pagina della foto su Wikimedia Commons, o la sua licenza sul sito di Creative Commons, in un browser interno all’app. Quei siti hanno le proprie informative sulla privacy, e ${ESCUADRA} non può vedere ciò che fai lì.`,
+            `Se tocchi un credito foto, si apre la pagina della foto su Wikimedia Commons, o la sua licenza sul sito di Creative Commons, in un browser interno all’app. Quei siti hanno le proprie informative sulla privacy, ed ${ESCUADRA} non può vedere ciò che fai lì.`,
           ],
         },
         {
