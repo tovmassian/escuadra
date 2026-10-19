@@ -1,8 +1,7 @@
 // The Deutsch catalog (#145), typed against ./en.ts: same keys, same order,
-// same parameters. Drafted by Claude for native review (#145); 'de' stays in
-// SUPPORTED_LANGUAGES only once a native speaker signs it off. About and the
-// store tagline are English until #146 and #147 translate them with their
-// legal and listing copy.
+// same parameters. Drafted by Claude; a native speaker reviews it before it
+// merges (#145). About and the store tagline are English until #146 and #147
+// translate them with their legal and listing copy.
 // Escuadra and a la escuadra come from ./names and are never translated.
 import { en, type CalendarDate, type Messages } from './en';
 

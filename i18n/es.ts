@@ -1,14 +1,15 @@
 // The Español catalog (#145), typed against ./en.ts: same keys, same order,
-// same parameters. Drafted by Claude for native review (#145); 'es' stays in
-// SUPPORTED_LANGUAGES only once a native speaker signs it off. About and the
-// store tagline are English until #146 and #147 translate them with their
-// legal and listing copy.
+// same parameters. Drafted by Claude; a native speaker reviews it before it
+// merges (#145). About and the store tagline are English until #146 and #147
+// translate them with their legal and listing copy.
 // Escuadra and a la escuadra come from ./names and are never translated.
 //
-// Neutral Spanish, for Spain and Latin America alike: the player is "tú", and
-// "teléfono", never "móvil" or "celular". Every question and exclamation opens
-// with ¿ or ¡. A team's name sits before a colon or alone, never after "de",
-// "del", "el" or "la": the data gives no gender or article ("del Real Madrid").
+// UI copy in neutral Spanish, for Spain and Latin America alike: the player is
+// "tú", and "teléfono", never "móvil" or "celular". Country names follow CLDR's
+// Spain forms (Arabia Saudí, Rumanía), for the reviewer to judge. Every
+// question and exclamation opens with ¿ or ¡. A team's name sits before a
+// colon or alone, never after "de", "del", "el" or "la": the data gives no
+// gender or article ("del Real Madrid").
 import { en, type CalendarDate, type Messages } from './en';
 
 const MONTHS = [
@@ -73,7 +74,7 @@ export const es: Messages = {
     // player plays in. Nacionalidad, as on the NAC chip. Not "¿Qué
     // nacionalidad?" either: it wraps the prompt to two lines at 360 dp.
     askNationality: '¿Nacionalidad?',
-    // "Ver resultados" (14) would make the auto-next bar 28 chars against 26.
+    // "Ver resultados" (14) would make the auto-next bar 27 chars against 26.
     seeResults: 'Resultados',
     // "Siguiente" is 9 chars against 8. "Seguimos…" says the round moves on
     // by itself; "o toca aquí" says a tap is sooner.
@@ -95,7 +96,7 @@ export const es: Messages = {
     leave: 'Salir de la ronda',
     // "Dorsal", the word for the number on the shirt.
     shirtNumber: (no: number) => `Dorsal ${no}`,
-    // "Elige", not "Toca": the answer is picked, not typed.
+    // "Elige", not "Toca": it names the choice, as de and fr do.
     tapYourAnswer: 'Elige tu respuesta',
     movesOn: 'Avanza automáticamente en un momento',
     answerTag: 'Solución',

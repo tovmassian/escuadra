@@ -1,8 +1,7 @@
 // The Italiano catalog (#145), typed against ./en.ts: same keys, same order,
-// same parameters. Drafted by Claude for native review (#145); 'it' stays in
-// SUPPORTED_LANGUAGES only once a native speaker signs it off. About and the
-// store tagline are English until #146 and #147 translate them with their
-// legal and listing copy.
+// same parameters. Drafted by Claude; a native speaker reviews it before it
+// merges (#145). About and the store tagline are English until #146 and #147
+// translate them with their legal and listing copy.
 // Escuadra and a la escuadra come from ./names and are never translated.
 //
 // The player is "tu"; apostrophes are ’. A team's name sits before a colon or
@@ -63,11 +62,11 @@ export const it: Messages = {
     // player plays in. Nazionalità, as on the NAZ chip.
     askNationality: 'Nazionalità?',
     seeResults: 'Risultati',
-    // The ellipsis says the round moves on by itself; "o tocca qui" says a tap
-    // is sooner. Italian sets the ellipsis tight against the word before it.
     next: 'Avanti',
     nextQuestion: 'Prossima domanda',
     gotItNext: 'Capito, avanti',
+    // The ellipsis says the round moves on by itself; "o tocca qui" says a tap
+    // is sooner. Italian sets the ellipsis tight against the word before it.
     tapToSkip: (label: string) => `${label}… o tocca qui`,
     slotSpoken: {
       given: (slot: string, value: string) => `${slot}: ${value}`,
@@ -81,7 +80,7 @@ export const it: Messages = {
     },
     leave: 'Esci dalla partita',
     shirtNumber: (no: number) => `Maglia numero ${no}`,
-    // "Scegli", not "Tocca": the answer is picked, not typed.
+    // "Scegli", not "Tocca": it names the choice, as de and fr do.
     tapYourAnswer: 'Scegli la risposta',
     movesOn: 'Va avanti automaticamente tra un attimo',
     answerTag: 'Risposta',
