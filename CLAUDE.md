@@ -339,9 +339,9 @@ reports — is done by hand, not by a skill.
   `i18n/__tests__/translations.test.ts`. About's words are each catalog's
   `about`. `scripts/privacy-pages.ts` renders its Privacy section word for
   word into `privacy/2/` (`index.html`, `es.html`, `fr.html`, `it.html`,
-  `de.html`); a translated page ends, as its About screen does, with the
-  notice from `i18n/translationNotice.ts`. A change to `en.about` changes
-  every catalog's `about` in the same PR, each re-reviewed;
+  `de.html`); a translated page ends, as About's Privacy section does in that
+  language, with the notice from `i18n/translationNotice.ts`. A change to
+  `en.about` changes every catalog's `about` in the same PR, each re-reviewed;
   `i18n/__tests__/catalogs.test.ts` pins a hash of the English About to catch
   one that doesn't. Screens read text through `useT()`. `lib/` modules that
   build text take `messages` as their last argument and stay React-free. Data

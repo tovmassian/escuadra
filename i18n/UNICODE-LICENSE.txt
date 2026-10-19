@@ -1,4 +1,4 @@
-Most of the country names in i18n/countries.ts for es, fr, it and de are derived from the Unicode CLDR project, under this licence:
+Most of the Spanish, French, Italian and German country names in i18n/countries.ts are derived from the Unicode CLDR project, under this licence:
 
 UNICODE LICENSE V3
 
