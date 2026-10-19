@@ -49,13 +49,21 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 store build.** The About text on `main`, in all five catalogs, covers
 TelemetryDeck, the Wikimedia photos and the language sent with the launch signal
 (#54, #146). The web policy is versioned: `privacy.html` stays the 1.x policy
-that both store listings link today, and `privacy/2/` holds the 2.0 pages
-`scripts/privacy-pages.ts` renders. The order: every 2.0.0 issue lands on
-`main`, with the 2.0 pages signed off and #55's App Privacy and Data safety
-answers written; then `release/2.0.0` is cut and built (#116). At submission,
-App Privacy (before Apple review) and Data safety (when the build is uploaded)
-are updated, and each store's privacy URL moves to `privacy/2/` when that store
-ships 2.0.
+that both store listings link today, and `scripts/privacy-pages.ts` generates
+the 2.0 pages into `privacy/2/`, which #157 will publish. The order:
+
+1. Every 2.0.0 issue lands on `main`.
+2. #157 is merged, so `privacy/2/` is published (nothing links it yet).
+3. #55's App Privacy and Data safety answers are written.
+4. `release/2.0.0` is cut and built (#116).
+5. At submission, each store's App Privacy or Data safety answers and its
+   privacy URL change together: Apple before review, Play when the build is
+   uploaded.
+
+The URL moves with the answers because both belong to the app, not to a
+version: answers for 2.0 beside a URL for the 1.x page would contradict each
+other in front of Apple's reviewer. The 2.0 page names the versions it covers
+and links the 1.x policy, so 1.x users lose nothing.
 
 ## Scope and roadmap
 
@@ -161,11 +169,11 @@ update this file in the same PR rather than leave a stale rule behind.
    updated privacy policy (the privacy pages and the About screen text,
    word for word), Apple's App Privacy answers and Google Play's Data safety
    form — in a store build, never over the air. Today the traffic is
-   `expo-updates` checking EAS Update on launch (OS, project ID, a random
-   installation token and, after a failed start, the error message) and, from
-   the next store version, opt-out TelemetryDeck usage signals (see Telemetry
-   under Architecture rules) and player-photo thumbnails loaded from Wikimedia
-   Commons (`upload.`/`thumb.wikimedia.org`, which sees the IP address).
+   `expo-updates` checking EAS Update on launch and, from the next store
+   version, opt-out TelemetryDeck usage signals (see Telemetry under
+   Architecture rules) and player-photo thumbnails loaded from Wikimedia
+   Commons (`upload.`/`thumb.wikimedia.org`). `en.about.privacy`
+   (`i18n/en.ts`) is the complete statement of what each service receives.
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
    rather than inlining a value. This governs the app's own design system —
@@ -360,14 +368,17 @@ reports — is done by hand, not by a skill.
   `TELEMETRY_EVENTS` in `lib/telemetryEvents.ts`, alongside the pure gate
   that keeps it inert in `__DEV__`, on web (so `npm run shots*` never sends),
   when opted out, and with no App ID (`app.json` →
-  `extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only module that
+  `extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only app module that
   imports the SDK; screens call its `track()`. The anonymous `clientUser` is
   a random `installId` persisted in `stores/progress.ts`, next to the
   About-screen opt-out. Non-`production` channels send TelemetryDeck test
   signals. **A new event or property is a disclosure review** (guardrail 4):
   the privacy policy, About text, App Privacy and Data safety answers change
-  with it, in a store build. Never put names, free text or player data in a
-  payload.
+  with it, in a store build. So is an upgrade of `@telemetrydeck/sdk` (or of
+  `expo-updates`), because About states what those SDKs put in each request.
+  For TelemetryDeck, `lib/telemetrySdk.test.ts` pins the request, and a failure
+  there means About no longer describes it; `expo-updates` has no such test, so
+  read its changelog. Never put names, free text or player data in a payload.
 - Zustand's `persist` defaults to `localStorage`, which does not exist here. Use
   `createJSONStorage(() => AsyncStorage)`.
 - Every animation stays under 300ms. The app is played in fast repetitive bursts
