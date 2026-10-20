@@ -1,0 +1,118 @@
+{
+  "id": "hun",
+  "kind": "nation",
+  "name": "Hungary",
+  "season": "2026",
+  "primaryColor": "#CE2939",
+  "secondaryColor": "#477050",
+  "verified": true,
+  "marker": {
+    "bands": ["#CE2939", "#FFFFFF", "#477050"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Hungary_national_football_team",
+  "members": [
+    {
+      "playerId": "balazs-toth",
+      "no": 1
+    },
+    {
+      "playerId": "attila-osvath",
+      "no": 2
+    },
+    {
+      "playerId": "mark-csinger",
+      "no": 3
+    },
+    {
+      "playerId": "bence-varkonyi",
+      "no": 4
+    },
+    {
+      "playerId": "akos-markgraf",
+      "no": 5
+    },
+    {
+      "playerId": "willi-orban",
+      "no": 6
+    },
+    {
+      "playerId": "tamas-szucs",
+      "no": 7
+    },
+    {
+      "playerId": "milan-vitalis",
+      "no": 8
+    },
+    {
+      "playerId": "donat-barany",
+      "no": 9
+    },
+    {
+      "playerId": "dominik-szoboszlai",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "jozsef-szalai",
+      "no": 11
+    },
+    {
+      "playerId": "bence-gundeltakacs",
+      "no": 12
+    },
+    {
+      "playerId": "andras-schafer",
+      "no": 13
+    },
+    {
+      "playerId": "bendeguz-bolla",
+      "no": 14
+    },
+    {
+      "playerId": "aron-csongvai",
+      "no": 15
+    },
+    {
+      "playerId": "daniel-lukacs",
+      "no": 16
+    },
+    {
+      "playerId": "gabor-jurek",
+      "no": 17
+    },
+    {
+      "playerId": "zsolt-nagy",
+      "no": 18
+    },
+    {
+      "playerId": "rajmund-toth",
+      "no": 19
+    },
+    {
+      "playerId": "milan-toth",
+      "no": 20
+    },
+    {
+      "playerId": "alex-toth",
+      "no": 21
+    },
+    {
+      "playerId": "armin-pecsi",
+      "no": 22
+    },
+    {
+      "playerId": "aron-doktorics",
+      "no": 23
+    },
+    {
+      "playerId": "kornel-szucs",
+      "no": null
+    },
+    {
+      "playerId": "milos-kerkez",
+      "no": null
+    }
+  ]
+}

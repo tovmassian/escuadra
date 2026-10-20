@@ -1,0 +1,123 @@
+{
+  "id": "comoros",
+  "kind": "nation",
+  "name": "Comoros",
+  "season": "2026",
+  "primaryColor": "#009639",
+  "secondaryColor": "#FFD100",
+  "verified": true,
+  "marker": {
+    "bands": ["#009639", "#FFD100", "#FFFFFF", "#EF3340", "#003DA5"],
+    "orientation": "vertical",
+    "weights": [2, 1, 1, 1, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Comoros_national_football_team",
+  "members": [
+    {
+      "playerId": "salim-ben-boina",
+      "no": 1
+    },
+    {
+      "playerId": "ismael-boura",
+      "no": 2
+    },
+    {
+      "playerId": "abdelhakim-abdallah",
+      "no": 3
+    },
+    {
+      "playerId": "kenan-toibibou",
+      "no": 4
+    },
+    {
+      "playerId": "ahmed-soilihi",
+      "no": 5
+    },
+    {
+      "playerId": "iyad-mohamed",
+      "no": 6
+    },
+    {
+      "playerId": "faiz-selemani",
+      "no": 7
+    },
+    {
+      "playerId": "yannis-kari",
+      "no": 8
+    },
+    {
+      "playerId": "aboubacar-ali",
+      "no": 9
+    },
+    {
+      "playerId": "youssouf-mchangama",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "rafiki-said",
+      "no": 11
+    },
+    {
+      "playerId": "kassim-mdahoma",
+      "no": 12
+    },
+    {
+      "playerId": "aymeric-ahmed",
+      "no": 13
+    },
+    {
+      "playerId": "remy-vita",
+      "no": 14
+    },
+    {
+      "playerId": "benjaloud-youssouf",
+      "no": 15
+    },
+    {
+      "playerId": "yannick-pandor",
+      "no": 16
+    },
+    {
+      "playerId": "myziane-maolida",
+      "no": 17
+    },
+    {
+      "playerId": "yacine-bourhane",
+      "no": 18
+    },
+    {
+      "playerId": "zaid-amir",
+      "no": 20
+    },
+    {
+      "playerId": "el-fardou-ben-nabouhane",
+      "no": 21
+    },
+    {
+      "playerId": "said-bakari",
+      "no": 22
+    },
+    {
+      "playerId": "adel-anzimati",
+      "no": 23
+    },
+    {
+      "playerId": "idris-mohamed",
+      "no": 25
+    },
+    {
+      "playerId": "raouf-mroivili",
+      "no": 26
+    },
+    {
+      "playerId": "rayan-lutin",
+      "no": 27
+    },
+    {
+      "playerId": "zaydou-youssouf",
+      "no": 28
+    }
+  ]
+}

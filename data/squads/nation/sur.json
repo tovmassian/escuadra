@@ -1,0 +1,107 @@
+{
+  "id": "sur",
+  "kind": "nation",
+  "name": "Suriname",
+  "season": "2026",
+  "primaryColor": "#377E3F",
+  "secondaryColor": "#B40A2D",
+  "verified": true,
+  "marker": {
+    "bands": ["#377E3F", "#FFFFFF", "#B40A2D", "#FFFFFF", "#377E3F"],
+    "orientation": "horizontal",
+    "weights": [2, 1, 4, 1, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Suriname_national_football_team",
+  "members": [
+    {
+      "playerId": "jahnilo-wiegel",
+      "no": 1
+    },
+    {
+      "playerId": "navajo-bakboord",
+      "no": 2
+    },
+    {
+      "playerId": "stefano-denswil",
+      "no": 4
+    },
+    {
+      "playerId": "yannick-leliendal",
+      "no": 5
+    },
+    {
+      "playerId": "immanuel-pherai",
+      "no": 6
+    },
+    {
+      "playerId": "gyrano-kerk",
+      "no": 7
+    },
+    {
+      "playerId": "justin-lonwijk",
+      "no": 8
+    },
+    {
+      "playerId": "richonell-margaret",
+      "no": 9
+    },
+    {
+      "playerId": "denzel-jubitana",
+      "no": 10
+    },
+    {
+      "playerId": "denilho-cleonise",
+      "no": 11
+    },
+    {
+      "playerId": "myenty-abena",
+      "no": 12,
+      "captain": true
+    },
+    {
+      "playerId": "illjonathan-fonkelnljonathan-fonkelptjonathan-fonkel",
+      "no": 13
+    },
+    {
+      "playerId": "che-nunnely",
+      "no": 14
+    },
+    {
+      "playerId": "jayden-turfkruier",
+      "no": 15
+    },
+    {
+      "playerId": "shiloh-t-zand",
+      "no": 16
+    },
+    {
+      "playerId": "dhoraso-klas",
+      "no": 17
+    },
+    {
+      "playerId": "djenairo-daniels",
+      "no": 18
+    },
+    {
+      "playerId": "shaquille-pinas",
+      "no": 19
+    },
+    {
+      "playerId": "gleofilo-vlijter",
+      "no": 20
+    },
+    {
+      "playerId": "liam-van-gelderen",
+      "no": 21
+    },
+    {
+      "playerId": "kenneth-paal",
+      "no": 22
+    },
+    {
+      "playerId": "etienne-vaessen",
+      "no": 23
+    }
+  ]
+}

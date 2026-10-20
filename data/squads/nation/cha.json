@@ -1,0 +1,109 @@
+{
+  "id": "cha",
+  "kind": "nation",
+  "name": "Chad",
+  "season": "2026",
+  "primaryColor": "#002664",
+  "secondaryColor": "#C60C30",
+  "verified": true,
+  "marker": {
+    "bands": ["#002664", "#FECB00", "#C60C30"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Chad_national_football_team",
+  "members": [
+    {
+      "playerId": "mathieu-adoassou",
+      "no": 1
+    },
+    {
+      "playerId": "abdoul-aziz",
+      "no": 2
+    },
+    {
+      "playerId": "dia-wah-michael",
+      "no": 3
+    },
+    {
+      "playerId": "felix-noubara",
+      "no": 4
+    },
+    {
+      "playerId": "djawal-kaiba",
+      "no": 5
+    },
+    {
+      "playerId": "mahamat-thiam",
+      "no": 6
+    },
+    {
+      "playerId": "haroun-tchaouna",
+      "no": 7
+    },
+    {
+      "playerId": "charles-tchouplaou",
+      "no": 8
+    },
+    {
+      "playerId": "djedanoum-fabien",
+      "no": 9
+    },
+    {
+      "playerId": "marius-mouandilmadji",
+      "no": 10
+    },
+    {
+      "playerId": "celestin-ecua",
+      "no": 11
+    },
+    {
+      "playerId": "lassine-kouma",
+      "no": 12
+    },
+    {
+      "playerId": "natoyoum-osee",
+      "no": 13
+    },
+    {
+      "playerId": "bertrand-mani",
+      "no": 14
+    },
+    {
+      "playerId": "wanre-daikreo",
+      "no": 15
+    },
+    {
+      "playerId": "mbaiossoum-samba-diallo",
+      "no": 16
+    },
+    {
+      "playerId": "yves-allarabaye",
+      "no": 17
+    },
+    {
+      "playerId": "william-damba",
+      "no": 18
+    },
+    {
+      "playerId": "ahmat-mahamat-abakar",
+      "no": 19
+    },
+    {
+      "playerId": "benjamin-merba",
+      "no": 20
+    },
+    {
+      "playerId": "gabkala-daba",
+      "no": 21
+    },
+    {
+      "playerId": "jourdain-mbaynaissem",
+      "no": 22
+    },
+    {
+      "playerId": "franck-tchaouna",
+      "no": 23
+    }
+  ]
+}

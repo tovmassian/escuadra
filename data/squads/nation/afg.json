@@ -1,0 +1,109 @@
+{
+  "id": "afg",
+  "kind": "nation",
+  "name": "Afghanistan",
+  "season": "2026",
+  "primaryColor": "#000000",
+  "secondaryColor": "#007A36",
+  "verified": true,
+  "marker": {
+    "bands": ["#000000", "#D32011", "#007A36"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Afghanistan_national_football_team",
+  "members": [
+    {
+      "playerId": "faisal-hamidi",
+      "no": 1
+    },
+    {
+      "playerId": "nawid-mahbobi",
+      "no": 2
+    },
+    {
+      "playerId": "amid-arezou",
+      "no": 3
+    },
+    {
+      "playerId": "mahboob-hanifi",
+      "no": 4
+    },
+    {
+      "playerId": "ahmad-shekib-mehri",
+      "no": 5
+    },
+    {
+      "playerId": "habibulla-askar",
+      "no": 6
+    },
+    {
+      "playerId": "mosawer-ahadi",
+      "no": 7
+    },
+    {
+      "playerId": "rahmat-akbari",
+      "no": 8
+    },
+    {
+      "playerId": "roman-fazi",
+      "no": 9
+    },
+    {
+      "playerId": "omid-musawi",
+      "no": 10
+    },
+    {
+      "playerId": "maziar-kouhyar",
+      "no": 11
+    },
+    {
+      "playerId": "elias-mansor",
+      "no": 12
+    },
+    {
+      "playerId": "hamed-mumand",
+      "no": 13
+    },
+    {
+      "playerId": "ali-reza-panahi",
+      "no": 14
+    },
+    {
+      "playerId": "amin-nabizada",
+      "no": 15
+    },
+    {
+      "playerId": "sahil-sarwari",
+      "no": 16
+    },
+    {
+      "playerId": "yaser-safi",
+      "no": 17
+    },
+    {
+      "playerId": "jamshed-asekzai",
+      "no": 18
+    },
+    {
+      "playerId": "omid-popalzay",
+      "no": 19
+    },
+    {
+      "playerId": "mustafa-omarkheil",
+      "no": 20
+    },
+    {
+      "playerId": "ali-rayez-muradi",
+      "no": 21
+    },
+    {
+      "playerId": "ali-sina-hakimi",
+      "no": 22
+    },
+    {
+      "playerId": "keyvan-mottaghian",
+      "no": 23
+    }
+  ]
+}

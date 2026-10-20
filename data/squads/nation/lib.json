@@ -1,0 +1,115 @@
+{
+  "id": "lib",
+  "kind": "nation",
+  "name": "Lebanon",
+  "season": "2026",
+  "primaryColor": "#D31624",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#D31624", "#FFFFFF", "#D31624"],
+    "orientation": "horizontal",
+    "weights": [1, 2, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Lebanon_national_football_team",
+  "members": [
+    {
+      "playerId": "ali-alrida-ismail",
+      "no": 2
+    },
+    {
+      "playerId": "jad-smaira",
+      "no": 3
+    },
+    {
+      "playerId": "hassan-kaafarani",
+      "no": 4
+    },
+    {
+      "playerId": "khalil-khamis",
+      "no": 5,
+      "captain": true
+    },
+    {
+      "playerId": "mohammad-el-hayek",
+      "no": 6
+    },
+    {
+      "playerId": "mahmoud-zbib",
+      "no": 7
+    },
+    {
+      "playerId": "jimmy-kazan",
+      "no": 8
+    },
+    {
+      "playerId": "leonardo-shahin",
+      "no": 9
+    },
+    {
+      "playerId": "husseyn-chakroun",
+      "no": 10
+    },
+    {
+      "playerId": "ali-kassas",
+      "no": 11
+    },
+    {
+      "playerId": "hasan-srour",
+      "no": 12
+    },
+    {
+      "playerId": "ahmad-kheir-el-dine",
+      "no": 13
+    },
+    {
+      "playerId": "ali-el-fadl",
+      "no": 14
+    },
+    {
+      "playerId": "ralph-khoury",
+      "no": 15
+    },
+    {
+      "playerId": "walid-shour",
+      "no": 16
+    },
+    {
+      "playerId": "khalil-bader",
+      "no": 17
+    },
+    {
+      "playerId": "pedro-budib",
+      "no": 18
+    },
+    {
+      "playerId": "bader-kawam",
+      "no": 19
+    },
+    {
+      "playerId": "samy-merheg",
+      "no": 20
+    },
+    {
+      "playerId": "mostafa-matar",
+      "no": 21
+    },
+    {
+      "playerId": "wehbi-fawaz",
+      "no": 22
+    },
+    {
+      "playerId": "ali-sabeh",
+      "no": 23
+    },
+    {
+      "playerId": "joao-gabriel-maklouf",
+      "no": 24
+    },
+    {
+      "playerId": "antoine-al-douaihy",
+      "no": null
+    }
+  ]
+}

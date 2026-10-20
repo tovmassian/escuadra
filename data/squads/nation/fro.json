@@ -1,0 +1,118 @@
+{
+  "id": "fro",
+  "kind": "nation",
+  "name": "Faroe Islands",
+  "season": "2026",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#EF3340",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#015EB8", "#EF3340", "#015EB8", "#FFFFFF"],
+    "orientation": "horizontal",
+    "weights": [7, 1, 2, 1, 7]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Faroe_Islands_national_football_team",
+  "members": [
+    {
+      "playerId": "mattias-lamhauge",
+      "no": 1
+    },
+    {
+      "playerId": "joannes-danielsen",
+      "no": 2
+    },
+    {
+      "playerId": "viljormur-davidsen",
+      "no": 3
+    },
+    {
+      "playerId": "samuel-chukwudi",
+      "no": 4
+    },
+    {
+      "playerId": "andrias-edmundsson",
+      "no": 5
+    },
+    {
+      "playerId": "emil-joensen",
+      "no": 6
+    },
+    {
+      "playerId": "joannes-bjartalid",
+      "no": 7
+    },
+    {
+      "playerId": "heini-vatnsdal",
+      "no": 8
+    },
+    {
+      "playerId": "jorgen-nielsen",
+      "no": 9
+    },
+    {
+      "playerId": "aki-samuelsen",
+      "no": 10
+    },
+    {
+      "playerId": "petur-knudsen",
+      "no": 11
+    },
+    {
+      "playerId": "ari-petersen",
+      "no": 12
+    },
+    {
+      "playerId": "martin-agnarsson",
+      "no": 13
+    },
+    {
+      "playerId": "poul-kallsberg",
+      "no": 14
+    },
+    {
+      "playerId": "odmar-faero",
+      "no": 15
+    },
+    {
+      "playerId": "gunnar-vatnhamar",
+      "no": 16
+    },
+    {
+      "playerId": "asi-dam",
+      "no": 17
+    },
+    {
+      "playerId": "aron-benjaminsen",
+      "no": 18
+    },
+    {
+      "playerId": "jann-benjaminsen",
+      "no": 19
+    },
+    {
+      "playerId": "hanus-sorensen",
+      "no": 20
+    },
+    {
+      "playerId": "geza-david-turi",
+      "no": 21
+    },
+    {
+      "playerId": "mattias-hellisdal",
+      "no": 22
+    },
+    {
+      "playerId": "bardur-a-reynatrod",
+      "no": 23
+    },
+    {
+      "playerId": "adrian-justinussen",
+      "no": null
+    },
+    {
+      "playerId": "pall-klettskard",
+      "no": null
+    }
+  ]
+}

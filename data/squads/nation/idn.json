@@ -1,0 +1,110 @@
+{
+  "id": "idn",
+  "kind": "nation",
+  "name": "Indonesia",
+  "season": "2026",
+  "primaryColor": "#FF0000",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FF0000", "#FFFFFF"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Indonesia_national_football_team",
+  "members": [
+    {
+      "playerId": "emil-audero",
+      "no": 1
+    },
+    {
+      "playerId": "kevin-diks",
+      "no": 2,
+      "captain": true
+    },
+    {
+      "playerId": "dion-markx",
+      "no": 3
+    },
+    {
+      "playerId": "jordi-amat",
+      "no": 4
+    },
+    {
+      "playerId": "rizky-ridho",
+      "no": 5
+    },
+    {
+      "playerId": "rizky-eka-pratama",
+      "no": 6
+    },
+    {
+      "playerId": "egy-maulana-vikri",
+      "no": 7
+    },
+    {
+      "playerId": "luke-vickery",
+      "no": 8
+    },
+    {
+      "playerId": "mitchell-baker",
+      "no": 9
+    },
+    {
+      "playerId": "ole-romeny",
+      "no": 10
+    },
+    {
+      "playerId": "ragnar-oratmangoen",
+      "no": 11
+    },
+    {
+      "playerId": "maarten-paes",
+      "no": 12
+    },
+    {
+      "playerId": "nadeo-argawinata",
+      "no": 13
+    },
+    {
+      "playerId": "joey-pelupessy",
+      "no": 14
+    },
+    {
+      "playerId": "rayhan-hannan",
+      "no": 15
+    },
+    {
+      "playerId": "shayne-pattynama",
+      "no": 16
+    },
+    {
+      "playerId": "calvin-verdonk",
+      "no": 17
+    },
+    {
+      "playerId": "ivar-jenner",
+      "no": 18
+    },
+    {
+      "playerId": "thom-haye",
+      "no": 19
+    },
+    {
+      "playerId": "elkan-baggott",
+      "no": 20
+    },
+    {
+      "playerId": "dean-james",
+      "no": 21
+    },
+    {
+      "playerId": "nathan-tjoeaon",
+      "no": 22
+    },
+    {
+      "playerId": "justin-hubner",
+      "no": 23
+    }
+  ]
+}

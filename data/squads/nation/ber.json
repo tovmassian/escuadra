@@ -1,0 +1,117 @@
+{
+  "id": "ber",
+  "kind": "nation",
+  "name": "Bermuda",
+  "season": "2026",
+  "primaryColor": "#C8102E",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#C8102E"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFFFFF"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Bermuda_national_football_team",
+  "members": [
+    {
+      "playerId": "milai-perott",
+      "no": 1
+    },
+    {
+      "playerId": "emeer-peets",
+      "no": 2
+    },
+    {
+      "playerId": "diego-richardson",
+      "no": 3
+    },
+    {
+      "playerId": "london-steedejackson",
+      "no": 4
+    },
+    {
+      "playerId": "nejai-tucker",
+      "no": 5
+    },
+    {
+      "playerId": "sincere-hall",
+      "no": 6
+    },
+    {
+      "playerId": "lejaun-simmons",
+      "no": 7
+    },
+    {
+      "playerId": "djair-parfitt",
+      "no": 8
+    },
+    {
+      "playerId": "enrique-russell",
+      "no": 9
+    },
+    {
+      "playerId": "zeiko-lewis",
+      "no": 10
+    },
+    {
+      "playerId": "deniche-hill",
+      "no": 11
+    },
+    {
+      "playerId": "jahquil-hill",
+      "no": 12
+    },
+    {
+      "playerId": "blayz-borgesson",
+      "no": 13
+    },
+    {
+      "playerId": "brighton-morrison",
+      "no": 14
+    },
+    {
+      "playerId": "elisha-darrell",
+      "no": 15
+    },
+    {
+      "playerId": "jorj-dublin",
+      "no": 16
+    },
+    {
+      "playerId": "harry-twite",
+      "no": 17
+    },
+    {
+      "playerId": "luke-robinson",
+      "no": 18
+    },
+    {
+      "playerId": "ajani-burchall",
+      "no": 19
+    },
+    {
+      "playerId": "riley-robinson",
+      "no": 20
+    },
+    {
+      "playerId": "caleb-mcdowall",
+      "no": 21
+    },
+    {
+      "playerId": "justin-donawa",
+      "no": 22
+    },
+    {
+      "playerId": "coleridge-fubler",
+      "no": 23
+    },
+    {
+      "playerId": "nahki-wells",
+      "no": null
+    }
+  ]
+}

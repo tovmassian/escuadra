@@ -1,0 +1,109 @@
+{
+  "id": "irl",
+  "kind": "nation",
+  "name": "Republic of Ireland",
+  "season": "2026",
+  "primaryColor": "#169B62",
+  "secondaryColor": "#FF883E",
+  "verified": true,
+  "marker": {
+    "bands": ["#169B62", "#FFFFFF", "#FF883E"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Republic_of_Ireland_national_football_team",
+  "members": [
+    {
+      "playerId": "caoimhin-kelleher",
+      "no": 1
+    },
+    {
+      "playerId": "jimmy-dunne",
+      "no": 2
+    },
+    {
+      "playerId": "liam-scales",
+      "no": 3
+    },
+    {
+      "playerId": "bosun-lawal",
+      "no": 4
+    },
+    {
+      "playerId": "jake-obrien",
+      "no": 5
+    },
+    {
+      "playerId": "jayson-molumby",
+      "no": 6
+    },
+    {
+      "playerId": "parrott",
+      "no": 7
+    },
+    {
+      "playerId": "jason-knight",
+      "no": 8
+    },
+    {
+      "playerId": "tom-cannon",
+      "no": 9
+    },
+    {
+      "playerId": "adam-idah",
+      "no": 10
+    },
+    {
+      "playerId": "finn-azaz",
+      "no": 11
+    },
+    {
+      "playerId": "liam-kitching",
+      "no": 12
+    },
+    {
+      "playerId": "joel-bagan",
+      "no": 13
+    },
+    {
+      "playerId": "conor-coventry",
+      "no": 14
+    },
+    {
+      "playerId": "john-egan",
+      "no": 15
+    },
+    {
+      "playerId": "max-oleary",
+      "no": 16
+    },
+    {
+      "playerId": "jack-moylan",
+      "no": 17
+    },
+    {
+      "playerId": "ryan-manning",
+      "no": 18
+    },
+    {
+      "playerId": "owen-elding",
+      "no": 19
+    },
+    {
+      "playerId": "chiedozie-ogbene",
+      "no": 20
+    },
+    {
+      "playerId": "rocco-vata",
+      "no": 21
+    },
+    {
+      "playerId": "killian-phillips",
+      "no": 22
+    },
+    {
+      "playerId": "josh-keeley",
+      "no": 23
+    }
+  ]
+}

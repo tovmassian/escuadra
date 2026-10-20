@@ -1,0 +1,127 @@
+{
+  "id": "ple",
+  "kind": "nation",
+  "name": "Palestine",
+  "season": "2026",
+  "primaryColor": "#000000",
+  "secondaryColor": "#009639",
+  "verified": true,
+  "marker": {
+    "bands": ["#ED2E38", "#000000", "#FFFFFF", "#009639"],
+    "orientation": "vertical",
+    "weights": [1, 2, 2, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Palestine_national_football_team",
+  "members": [
+    {
+      "playerId": "abed-yassin",
+      "no": 1
+    },
+    {
+      "playerId": "wajdi-nabhan",
+      "no": 2
+    },
+    {
+      "playerId": "khalid-abu-el-haija",
+      "no": 3
+    },
+    {
+      "playerId": "yaser-hamed",
+      "no": 4
+    },
+    {
+      "playerId": "ameed-sawafta",
+      "no": 5
+    },
+    {
+      "playerId": "adam-ahmad",
+      "no": 6
+    },
+    {
+      "playerId": "musab-albattat",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "hamed-hamdan",
+      "no": 8
+    },
+    {
+      "playerId": "tamer-seyam",
+      "no": 9
+    },
+    {
+      "playerId": "khaled-alnabris",
+      "no": 10
+    },
+    {
+      "playerId": "oday-dabbagh",
+      "no": 11
+    },
+    {
+      "playerId": "assad-al-hamlawi",
+      "no": 12
+    },
+    {
+      "playerId": "ayham-shhade",
+      "no": 13
+    },
+    {
+      "playerId": "ahmed-taha",
+      "no": 14
+    },
+    {
+      "playerId": "milad-termanini",
+      "no": 15
+    },
+    {
+      "playerId": "mahdi-assi",
+      "no": 16
+    },
+    {
+      "playerId": "emilio-saba",
+      "no": 17
+    },
+    {
+      "playerId": "adam-kaied",
+      "no": 18
+    },
+    {
+      "playerId": "agustin-manzur",
+      "no": 19
+    },
+    {
+      "playerId": "ameed-mahajna",
+      "no": 20
+    },
+    {
+      "playerId": "zaid-qunbar",
+      "no": 21
+    },
+    {
+      "playerId": "rami-hamada",
+      "no": 22
+    },
+    {
+      "playerId": "alaa-aldeen-hassan",
+      "no": 23
+    },
+    {
+      "playerId": "bader-mousa",
+      "no": 24
+    },
+    {
+      "playerId": "ahmad-alqaq",
+      "no": 25
+    },
+    {
+      "playerId": "abdelhadi-rashid",
+      "no": 26
+    },
+    {
+      "playerId": "brayan-dakhil",
+      "no": 27
+    }
+  ]
+}

@@ -1,0 +1,121 @@
+{
+  "id": "hon",
+  "kind": "nation",
+  "name": "Honduras",
+  "season": "2026",
+  "primaryColor": "#00BCE4",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#00BCE4", "#FFFFFF", "#00BCE4"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Honduras_national_football_team",
+  "members": [
+    {
+      "playerId": "edrick-menjivar",
+      "no": 1
+    },
+    {
+      "playerId": "clinton-bennett",
+      "no": 2
+    },
+    {
+      "playerId": "giancarlo-sacaza",
+      "no": 3
+    },
+    {
+      "playerId": "luis-vega",
+      "no": 4
+    },
+    {
+      "playerId": "kervin-arriaga",
+      "no": 5
+    },
+    {
+      "playerId": "cristopher-melendez",
+      "no": 6
+    },
+    {
+      "playerId": "jonathan-toro",
+      "no": 7
+    },
+    {
+      "playerId": "joseph-rosales",
+      "no": 8
+    },
+    {
+      "playerId": "keyrol-figueroa",
+      "no": 9
+    },
+    {
+      "playerId": "luis-palma",
+      "no": 10
+    },
+    {
+      "playerId": "david-ruiz",
+      "no": 11
+    },
+    {
+      "playerId": "alex-guity",
+      "no": 12
+    },
+    {
+      "playerId": "clever-portillo",
+      "no": 13
+    },
+    {
+      "playerId": "jose-reyes",
+      "no": 14
+    },
+    {
+      "playerId": "mike-arana",
+      "no": 15
+    },
+    {
+      "playerId": "edwin-rodriguez",
+      "no": 16
+    },
+    {
+      "playerId": "exon-arzu",
+      "no": 17
+    },
+    {
+      "playerId": "dereck-moncada",
+      "no": 18
+    },
+    {
+      "playerId": "erick-puerto",
+      "no": 19
+    },
+    {
+      "playerId": "deiby-flores",
+      "no": 20
+    },
+    {
+      "playerId": "bryan-rochez",
+      "no": 21
+    },
+    {
+      "playerId": "luis-ortiz",
+      "no": 22
+    },
+    {
+      "playerId": "alenis-vargas",
+      "no": null
+    },
+    {
+      "playerId": "denil-maldonado",
+      "no": null
+    },
+    {
+      "playerId": "nixon-cruz",
+      "no": null
+    },
+    {
+      "playerId": "victor-vandenbroucke",
+      "no": null
+    }
+  ]
+}

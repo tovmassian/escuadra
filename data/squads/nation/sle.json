@@ -1,0 +1,125 @@
+{
+  "id": "sle",
+  "kind": "nation",
+  "name": "Sierra Leone",
+  "season": "2026",
+  "primaryColor": "#1EB53A",
+  "secondaryColor": "#0072C6",
+  "verified": true,
+  "marker": {
+    "bands": ["#1EB53A", "#FFFFFF", "#0072C6"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Sierra_Leone_national_football_team",
+  "members": [
+    {
+      "playerId": "mamadou-jalloh",
+      "no": 1
+    },
+    {
+      "playerId": "osman-kakay",
+      "no": 2
+    },
+    {
+      "playerId": "azeem-abdulai",
+      "no": 3
+    },
+    {
+      "playerId": "mj-kamsonkamara",
+      "no": 4
+    },
+    {
+      "playerId": "alpha-turay",
+      "no": 5
+    },
+    {
+      "playerId": "saidu-fofanah",
+      "no": 6
+    },
+    {
+      "playerId": "idris-kanu",
+      "no": 7
+    },
+    {
+      "playerId": "alhassan-koroma",
+      "no": 8
+    },
+    {
+      "playerId": "daniel-kanu",
+      "no": 9
+    },
+    {
+      "playerId": "sullay-kaikai",
+      "no": 10
+    },
+    {
+      "playerId": "josh-koroma",
+      "no": 11
+    },
+    {
+      "playerId": "abdoulie-jarjue-kabia",
+      "no": 13
+    },
+    {
+      "playerId": "tyrese-fornah",
+      "no": 14
+    },
+    {
+      "playerId": "alie-conteh",
+      "no": 15
+    },
+    {
+      "playerId": "raees-bangurawilliams",
+      "no": 16
+    },
+    {
+      "playerId": "momoh-kamara",
+      "no": 17
+    },
+    {
+      "playerId": "sallieu-tarawallie",
+      "no": 18
+    },
+    {
+      "playerId": "alex-bangura",
+      "no": 19
+    },
+    {
+      "playerId": "kallum-cesay",
+      "no": 20
+    },
+    {
+      "playerId": "juma-bah",
+      "no": 21
+    },
+    {
+      "playerId": "saidu-bah-kamara",
+      "no": 22
+    },
+    {
+      "playerId": "ibrahim-sesay",
+      "no": 23
+    },
+    {
+      "playerId": "santigie-sesay",
+      "no": 24
+    },
+    {
+      "playerId": "francis-koroma",
+      "no": 25
+    },
+    {
+      "playerId": "emmanuel-samadia",
+      "no": null
+    },
+    {
+      "playerId": "hindolo-mustapha",
+      "no": null
+    },
+    {
+      "playerId": "mohamed-fofanah",
+      "no": null
+    }
+  ]
+}

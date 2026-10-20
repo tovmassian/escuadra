@@ -1,0 +1,114 @@
+{
+  "id": "guy",
+  "kind": "nation",
+  "name": "Guyana",
+  "season": "2026",
+  "primaryColor": "#2A936A",
+  "secondaryColor": "#FFC20E",
+  "verified": true,
+  "marker": {
+    "bands": ["#BE1E2D", "#FFC20E", "#2A936A"],
+    "orientation": "vertical",
+    "weights": [1, 1, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Guyana_national_football_team",
+  "members": [
+    {
+      "playerId": "emmanuel-lewis",
+      "no": 1
+    },
+    {
+      "playerId": "leo-lovell",
+      "no": 2
+    },
+    {
+      "playerId": "bryan-wharton",
+      "no": 3
+    },
+    {
+      "playerId": "kvist-paul",
+      "no": 4
+    },
+    {
+      "playerId": "jalen-jones",
+      "no": 5
+    },
+    {
+      "playerId": "nathan-moriahwelsh",
+      "no": 6
+    },
+    {
+      "playerId": "nathan-ferguson",
+      "no": 7
+    },
+    {
+      "playerId": "darron-niles",
+      "no": 8
+    },
+    {
+      "playerId": "osaze-de-rosario",
+      "no": 9
+    },
+    {
+      "playerId": "omari-glasgow",
+      "no": 10
+    },
+    {
+      "playerId": "kelsey-benjamin",
+      "no": 11
+    },
+    {
+      "playerId": "imani-barker",
+      "no": 12
+    },
+    {
+      "playerId": "liam-gordon",
+      "no": 13
+    },
+    {
+      "playerId": "curtez-kellman",
+      "no": 14
+    },
+    {
+      "playerId": "solomon-austin",
+      "no": 15
+    },
+    {
+      "playerId": "isaiah-jones",
+      "no": 16
+    },
+    {
+      "playerId": "raushan-ritch",
+      "no": 17
+    },
+    {
+      "playerId": "quillan-roberts",
+      "no": 18
+    },
+    {
+      "playerId": "deon-moore",
+      "no": 19
+    },
+    {
+      "playerId": "terence-vancooten",
+      "no": 20
+    },
+    {
+      "playerId": "enoch-george",
+      "no": 21
+    },
+    {
+      "playerId": "akel-clarke",
+      "no": 22
+    },
+    {
+      "playerId": "elliot-bonds",
+      "no": 23
+    },
+    {
+      "playerId": "neron-barrow",
+      "no": null
+    }
+  ]
+}

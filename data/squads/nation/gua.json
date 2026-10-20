@@ -1,0 +1,102 @@
+{
+  "id": "gua",
+  "kind": "nation",
+  "name": "Guatemala",
+  "season": "2026",
+  "primaryColor": "#4997D0",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#4997D0", "#FFFFFF", "#4997D0"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Guatemala_national_football_team",
+  "members": [
+    {
+      "playerId": "jose-rosales",
+      "no": 5
+    },
+    {
+      "playerId": "matt-evans",
+      "no": 8
+    },
+    {
+      "playerId": "olger-escobar",
+      "no": 10
+    },
+    {
+      "playerId": "rudy-munoz",
+      "no": 11
+    },
+    {
+      "playerId": "kenderson-navarro",
+      "no": 12
+    },
+    {
+      "playerId": "stheven-robles",
+      "no": 13
+    },
+    {
+      "playerId": "darwin-lom",
+      "no": 14
+    },
+    {
+      "playerId": "allen-yanes",
+      "no": 15
+    },
+    {
+      "playerId": "oscar-castellanos",
+      "no": 17
+    },
+    {
+      "playerId": "oscar-santis",
+      "no": 18
+    },
+    {
+      "playerId": "kevin-ramirez",
+      "no": 20
+    },
+    {
+      "playerId": "luis-moran",
+      "no": 21
+    },
+    {
+      "playerId": "jonathan-franco",
+      "no": 22
+    },
+    {
+      "playerId": "arquimides-ordonez",
+      "no": null
+    },
+    {
+      "playerId": "carlos-aguilar",
+      "no": null
+    },
+    {
+      "playerId": "daniel-mendez",
+      "no": null
+    },
+    {
+      "playerId": "diego-fernandez",
+      "no": null
+    },
+    {
+      "playerId": "jose-ardon",
+      "no": null
+    },
+    {
+      "playerId": "jose-carlos-pinto",
+      "no": null,
+      "captain": true
+    },
+    {
+      "playerId": "jose-morales",
+      "no": null
+    },
+    {
+      "playerId": "marcelo-hernandez",
+      "no": null
+    }
+  ]
+}

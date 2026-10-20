@@ -1,0 +1,110 @@
+{
+  "id": "cam",
+  "kind": "nation",
+  "name": "Cambodia",
+  "season": "2026",
+  "primaryColor": "#032EA1",
+  "secondaryColor": "#E00025",
+  "verified": true,
+  "marker": {
+    "bands": ["#032EA1", "#E00025", "#032EA1"],
+    "orientation": "horizontal",
+    "weights": [1, 2, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Cambodia_national_football_team",
+  "members": [
+    {
+      "playerId": "keo-soksela",
+      "no": 1
+    },
+    {
+      "playerId": "choun-chanchav",
+      "no": 2
+    },
+    {
+      "playerId": "takaki-ose",
+      "no": 3
+    },
+    {
+      "playerId": "alisher-mirzaev",
+      "no": 4
+    },
+    {
+      "playerId": "hikaru-mizuno",
+      "no": 5
+    },
+    {
+      "playerId": "yudai-ogawa",
+      "no": 6
+    },
+    {
+      "playerId": "iago-bento",
+      "no": 7
+    },
+    {
+      "playerId": "bong-samuel",
+      "no": 8
+    },
+    {
+      "playerId": "sieng-chanthea",
+      "no": 9
+    },
+    {
+      "playerId": "andres-nieto",
+      "no": 10
+    },
+    {
+      "playerId": "sin-kakada",
+      "no": 11
+    },
+    {
+      "playerId": "ouk-sovann",
+      "no": 12
+    },
+    {
+      "playerId": "sareth-krya",
+      "no": 13
+    },
+    {
+      "playerId": "hav-soknet",
+      "no": 14
+    },
+    {
+      "playerId": "min-ratanak",
+      "no": 15
+    },
+    {
+      "playerId": "kim-sokyuth",
+      "no": 16
+    },
+    {
+      "playerId": "sa-ty",
+      "no": 17
+    },
+    {
+      "playerId": "phat-sokha",
+      "no": 18
+    },
+    {
+      "playerId": "nhean-sosidan",
+      "no": 19
+    },
+    {
+      "playerId": "cheng-meng",
+      "no": 20
+    },
+    {
+      "playerId": "vireak-dara",
+      "no": 21
+    },
+    {
+      "playerId": "reth-lyheng",
+      "no": 22
+    },
+    {
+      "playerId": "sor-rotana",
+      "no": 23
+    }
+  ]
+}

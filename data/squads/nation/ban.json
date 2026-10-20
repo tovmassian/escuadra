@@ -1,0 +1,114 @@
+{
+  "id": "ban",
+  "kind": "nation",
+  "name": "Bangladesh",
+  "season": "2026",
+  "primaryColor": "#006A4E",
+  "secondaryColor": "#F42A41",
+  "verified": true,
+  "marker": {
+    "bands": ["#006A4E"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#F42A41"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Bangladesh_national_football_team",
+  "members": [
+    {
+      "playerId": "mehedi-hasan-srabon",
+      "no": 1
+    },
+    {
+      "playerId": "md-shakil-ahad-topu",
+      "no": 2
+    },
+    {
+      "playerId": "rahmat-mia",
+      "no": 3
+    },
+    {
+      "playerId": "minhazul-karim-shadin",
+      "no": 4
+    },
+    {
+      "playerId": "md-ridoy",
+      "no": 5
+    },
+    {
+      "playerId": "jamal-bhuyan",
+      "no": 6,
+      "captain": true
+    },
+    {
+      "playerId": "shekh-morsalin",
+      "no": 7
+    },
+    {
+      "playerId": "hamza-choudhury",
+      "no": 8
+    },
+    {
+      "playerId": "shuki-itofusa",
+      "no": 9
+    },
+    {
+      "playerId": "rakib-hossain",
+      "no": 10
+    },
+    {
+      "playerId": "shahriar-emon",
+      "no": 11
+    },
+    {
+      "playerId": "zidane-yousuf",
+      "no": 12
+    },
+    {
+      "playerId": "mitul-marma",
+      "no": 13
+    },
+    {
+      "playerId": "tariq-kazi",
+      "no": 14
+    },
+    {
+      "playerId": "fahamedul-islam",
+      "no": 15
+    },
+    {
+      "playerId": "md-sohel-rana",
+      "no": 16
+    },
+    {
+      "playerId": "sohel-rana",
+      "no": 17
+    },
+    {
+      "playerId": "sujon-hossain",
+      "no": 18
+    },
+    {
+      "playerId": "zayyan-ahmed",
+      "no": 19
+    },
+    {
+      "playerId": "monjurur-rahman-manik",
+      "no": 20
+    },
+    {
+      "playerId": "farhaan-ali-wahid",
+      "no": 21
+    },
+    {
+      "playerId": "md-saad-uddin",
+      "no": 22
+    },
+    {
+      "playerId": "shamit-shome",
+      "no": 23
+    }
+  ]
+}

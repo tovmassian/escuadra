@@ -1,0 +1,110 @@
+{
+  "id": "and",
+  "kind": "nation",
+  "name": "Andorra",
+  "season": "2026",
+  "primaryColor": "#10069F",
+  "secondaryColor": "#D50032",
+  "verified": true,
+  "marker": {
+    "bands": ["#10069F", "#FEDD00", "#D50032"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Andorra_national_football_team",
+  "members": [
+    {
+      "playerId": "josep-gomes",
+      "no": 1
+    },
+    {
+      "playerId": "biel-borra",
+      "no": 2
+    },
+    {
+      "playerId": "pau-babot",
+      "no": 3
+    },
+    {
+      "playerId": "christian-garcia",
+      "no": 4
+    },
+    {
+      "playerId": "max-llovera",
+      "no": 5
+    },
+    {
+      "playerId": "kiko-pomares",
+      "no": 6
+    },
+    {
+      "playerId": "alex-martinez",
+      "no": 7
+    },
+    {
+      "playerId": "eric-vales",
+      "no": 8
+    },
+    {
+      "playerId": "ricard-fernandez",
+      "no": 9
+    },
+    {
+      "playerId": "guillaume-lopez",
+      "no": 10
+    },
+    {
+      "playerId": "albert-rosas",
+      "no": 11
+    },
+    {
+      "playerId": "iker-alvarez",
+      "no": 12
+    },
+    {
+      "playerId": "alex-ruiz",
+      "no": 13
+    },
+    {
+      "playerId": "jordi-alaez",
+      "no": 14
+    },
+    {
+      "playerId": "moises-san-nicolas",
+      "no": 15,
+      "captain": true
+    },
+    {
+      "playerId": "joao-teixeira",
+      "no": 16
+    },
+    {
+      "playerId": "aron-rodrigo",
+      "no": 17
+    },
+    {
+      "playerId": "jesus-rubio",
+      "no": 18
+    },
+    {
+      "playerId": "joel-guillen",
+      "no": 19
+    },
+    {
+      "playerId": "izan-fernandez",
+      "no": 20
+    },
+    {
+      "playerId": "marc-garcia",
+      "no": 21
+    },
+    {
+      "playerId": "ian-olivera",
+      "no": 22
+    },
+    {
+      "playerId": "ot-remolins",
+      "no": 23
+    }
+  ]
+}

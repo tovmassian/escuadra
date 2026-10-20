@@ -1,0 +1,126 @@
+{
+  "id": "mkd",
+  "kind": "nation",
+  "name": "North Macedonia",
+  "season": "2026",
+  "primaryColor": "#D82126",
+  "secondaryColor": "#F8E92E",
+  "verified": true,
+  "marker": {
+    "bands": ["#D82126"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#F8E92E"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/North_Macedonia_national_football_team",
+  "members": [
+    {
+      "playerId": "davor-taleski",
+      "no": 1
+    },
+    {
+      "playerId": "bojan-ilievski",
+      "no": 2
+    },
+    {
+      "playerId": "din-alomerovikj",
+      "no": 3
+    },
+    {
+      "playerId": "andrej-stojchevski",
+      "no": 4
+    },
+    {
+      "playerId": "gjoko-zajkov",
+      "no": 5
+    },
+    {
+      "playerId": "visar-musliu",
+      "no": 6
+    },
+    {
+      "playerId": "eljif-elmas",
+      "no": 7
+    },
+    {
+      "playerId": "ezgjan-alioski",
+      "no": 8
+    },
+    {
+      "playerId": "bojan-miovski",
+      "no": 9
+    },
+    {
+      "playerId": "enis-bardhi",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "elmin-rastoder",
+      "no": 11
+    },
+    {
+      "playerId": "damjan-shishkovski",
+      "no": 12
+    },
+    {
+      "playerId": "anes-meliqi",
+      "no": 13
+    },
+    {
+      "playerId": "gjorge-djekov",
+      "no": 14
+    },
+    {
+      "playerId": "agon-elezi",
+      "no": 15
+    },
+    {
+      "playerId": "matej-gashtarov",
+      "no": 16
+    },
+    {
+      "playerId": "azer-omeragikj",
+      "no": 17
+    },
+    {
+      "playerId": "tihomir-kostadinov",
+      "no": 18
+    },
+    {
+      "playerId": "ljupcho-doriev",
+      "no": 19
+    },
+    {
+      "playerId": "dimitar-mitrovski",
+      "no": 20
+    },
+    {
+      "playerId": "luka-stankovski",
+      "no": 21
+    },
+    {
+      "playerId": "hristijan-maleski",
+      "no": 22
+    },
+    {
+      "playerId": "dimitrievski",
+      "no": 23
+    },
+    {
+      "playerId": "jani-atanasov",
+      "no": null
+    },
+    {
+      "playerId": "mario-mladenovski",
+      "no": null
+    },
+    {
+      "playerId": "sebastian-herrera",
+      "no": null
+    }
+  ]
+}

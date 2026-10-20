@@ -1,0 +1,117 @@
+{
+  "id": "vir",
+  "kind": "nation",
+  "name": "United States Virgin Islands",
+  "season": "2026",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#162667",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#F4C53D"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/United_States_Virgin_Islands_national_soccer_team",
+  "members": [
+    {
+      "playerId": "dylan-ramos",
+      "no": 1
+    },
+    {
+      "playerId": "jett-blaschka",
+      "no": 2
+    },
+    {
+      "playerId": "andrew-shaffer",
+      "no": 5
+    },
+    {
+      "playerId": "rakeem-joseph",
+      "no": 9
+    },
+    {
+      "playerId": "jimson-st-louis",
+      "no": 10
+    },
+    {
+      "playerId": "joshua-ramos",
+      "no": 11
+    },
+    {
+      "playerId": "ramesses-mcguiness",
+      "no": 12
+    },
+    {
+      "playerId": "quinn-farrell",
+      "no": 14
+    },
+    {
+      "playerId": "devien-bell",
+      "no": 15
+    },
+    {
+      "playerId": "axel-bartsch",
+      "no": 16
+    },
+    {
+      "playerId": "aubin-atemazem",
+      "no": 17
+    },
+    {
+      "playerId": "whelan-joseph",
+      "no": 18
+    },
+    {
+      "playerId": "jannick-liburd",
+      "no": 19
+    },
+    {
+      "playerId": "naqwan-henry",
+      "no": 20
+    },
+    {
+      "playerId": "gabriel-catonehighfield",
+      "no": 21
+    },
+    {
+      "playerId": "alfred-harris",
+      "no": null
+    },
+    {
+      "playerId": "brad-robinson",
+      "no": null
+    },
+    {
+      "playerId": "carmelo-rodriguez",
+      "no": null
+    },
+    {
+      "playerId": "ismail-nieves",
+      "no": null
+    },
+    {
+      "playerId": "jair-whyte",
+      "no": null
+    },
+    {
+      "playerId": "matthew-roth",
+      "no": null
+    },
+    {
+      "playerId": "quinn-scott",
+      "no": null
+    },
+    {
+      "playerId": "terrence-jones-jr",
+      "no": null
+    },
+    {
+      "playerId": "toryn-penders",
+      "no": null
+    }
+  ]
+}

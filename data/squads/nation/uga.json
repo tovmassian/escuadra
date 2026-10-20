@@ -1,0 +1,157 @@
+{
+  "id": "uga",
+  "kind": "nation",
+  "name": "Uganda",
+  "season": "2026",
+  "primaryColor": "#D90000",
+  "secondaryColor": "#FCDC04",
+  "verified": true,
+  "marker": {
+    "bands": ["#000000", "#FCDC04", "#D90000", "#000000", "#FCDC04", "#D90000"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Uganda_national_football_team",
+  "members": [
+    {
+      "playerId": "hannington-ssebwalunyo",
+      "no": 1
+    },
+    {
+      "playerId": "nathan-asiimwe",
+      "no": 2
+    },
+    {
+      "playerId": "rogers-torach",
+      "no": 3
+    },
+    {
+      "playerId": "kenneth-semakula",
+      "no": 4
+    },
+    {
+      "playerId": "toby-sibbick",
+      "no": 5
+    },
+    {
+      "playerId": "baba-alhassan",
+      "no": 6
+    },
+    {
+      "playerId": "rogers-mato",
+      "no": 7
+    },
+    {
+      "playerId": "allan-oyirwoth",
+      "no": 8
+    },
+    {
+      "playerId": "arnold-vula",
+      "no": 9
+    },
+    {
+      "playerId": "travis-mutyaba",
+      "no": 10
+    },
+    {
+      "playerId": "steven-mukwala",
+      "no": 11
+    },
+    {
+      "playerId": "kelvin-boateng",
+      "no": 13
+    },
+    {
+      "playerId": "denis-omedi",
+      "no": 14
+    },
+    {
+      "playerId": "noble-okello",
+      "no": 15
+    },
+    {
+      "playerId": "hilary-mukundane",
+      "no": 16
+    },
+    {
+      "playerId": "james-bogere",
+      "no": 17
+    },
+    {
+      "playerId": "denis-onyango",
+      "no": 18
+    },
+    {
+      "playerId": "david-lukwago",
+      "no": 19
+    },
+    {
+      "playerId": "herbert-achayi",
+      "no": 20
+    },
+    {
+      "playerId": "allan-okello",
+      "no": 21
+    },
+    {
+      "playerId": "joseph-seremba",
+      "no": 22
+    },
+    {
+      "playerId": "aziz-kayondo",
+      "no": 23
+    },
+    {
+      "playerId": "jonathan-odongo",
+      "no": 24
+    },
+    {
+      "playerId": "abdoulaye-sissako",
+      "no": null
+    },
+    {
+      "playerId": "akpan-david-udoh",
+      "no": null
+    },
+    {
+      "playerId": "dieudonne-gaucho-debohi",
+      "no": null
+    },
+    {
+      "playerId": "frank-ssebuufu",
+      "no": null
+    },
+    {
+      "playerId": "gavin-kizito",
+      "no": null
+    },
+    {
+      "playerId": "geoffrey-lubanga",
+      "no": null
+    },
+    {
+      "playerId": "hassan-mubiru",
+      "no": null
+    },
+    {
+      "playerId": "herbert-bockhorn",
+      "no": null
+    },
+    {
+      "playerId": "kingdom-osayi",
+      "no": null
+    },
+    {
+      "playerId": "richard-basangwa",
+      "no": null
+    },
+    {
+      "playerId": "sadam-masereka",
+      "no": null
+    },
+    {
+      "playerId": "souleymane-diaby",
+      "no": null
+    }
+  ]
+}

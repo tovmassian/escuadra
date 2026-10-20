@@ -1,0 +1,126 @@
+{
+  "id": "rou",
+  "kind": "nation",
+  "name": "Romania",
+  "season": "2026",
+  "primaryColor": "#002B7F",
+  "secondaryColor": "#CE1126",
+  "verified": true,
+  "marker": {
+    "bands": ["#002B7F", "#FCD116", "#CE1126"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Romania_national_football_team",
+  "members": [
+    {
+      "playerId": "radu",
+      "no": 1
+    },
+    {
+      "playerId": "ratiu",
+      "no": 2
+    },
+    {
+      "playerId": "matei-ilie",
+      "no": 3
+    },
+    {
+      "playerId": "andrei-coubis",
+      "no": 4
+    },
+    {
+      "playerId": "lisav-eissat",
+      "no": 5
+    },
+    {
+      "playerId": "tudor-baluta",
+      "no": 6
+    },
+    {
+      "playerId": "darius-olaru",
+      "no": 7
+    },
+    {
+      "playerId": "alexandru-cicaldau",
+      "no": 8
+    },
+    {
+      "playerId": "florin-tanase",
+      "no": 9
+    },
+    {
+      "playerId": "nicolae-stanciu",
+      "no": 10
+    },
+    {
+      "playerId": "nicusor-bancu",
+      "no": 11
+    },
+    {
+      "playerId": "otto-hindrich",
+      "no": 12
+    },
+    {
+      "playerId": "valentin-mihaila",
+      "no": 13
+    },
+    {
+      "playerId": "ianis-hagi",
+      "no": 14,
+      "captain": true
+    },
+    {
+      "playerId": "raul-oprut",
+      "no": 15
+    },
+    {
+      "playerId": "valentin-cojocaru",
+      "no": 16
+    },
+    {
+      "playerId": "vladimir-screciu",
+      "no": 17
+    },
+    {
+      "playerId": "razvan-marin",
+      "no": 18
+    },
+    {
+      "playerId": "catalin-cirjan",
+      "no": 19
+    },
+    {
+      "playerId": "dennis-man",
+      "no": 20
+    },
+    {
+      "playerId": "olimpiu-morutan",
+      "no": 21
+    },
+    {
+      "playerId": "vlad-dragomir",
+      "no": 22
+    },
+    {
+      "playerId": "tony-strata",
+      "no": 23
+    },
+    {
+      "playerId": "andrei-borza",
+      "no": null
+    },
+    {
+      "playerId": "andrei-burca",
+      "no": null
+    },
+    {
+      "playerId": "bogdan-racovitan",
+      "no": null
+    },
+    {
+      "playerId": "david-matei",
+      "no": null
+    }
+  ]
+}

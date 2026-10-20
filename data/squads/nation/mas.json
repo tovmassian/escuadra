@@ -1,0 +1,110 @@
+{
+  "id": "mas",
+  "kind": "nation",
+  "name": "Malaysia",
+  "season": "2026",
+  "primaryColor": "#CC0000",
+  "secondaryColor": "#000066",
+  "verified": true,
+  "marker": {
+    "bands": ["#000066", "#CC0000", "#FFFFFF", "#CC0000", "#FFFFFF"],
+    "orientation": "vertical",
+    "weights": [3, 1, 1, 1, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Malaysia_national_football_team",
+  "members": [
+    {
+      "playerId": "azri-ghani",
+      "no": 1
+    },
+    {
+      "playerId": "daniel-ting",
+      "no": 2
+    },
+    {
+      "playerId": "ubaidullah-shamsul",
+      "no": 3
+    },
+    {
+      "playerId": "manuel-hidalgo",
+      "no": 4
+    },
+    {
+      "playerId": "brad-tapp",
+      "no": 5
+    },
+    {
+      "playerId": "quentin-cheng",
+      "no": 6
+    },
+    {
+      "playerId": "faisal-halim",
+      "no": 7
+    },
+    {
+      "playerId": "syahir-bashah",
+      "no": 8
+    },
+    {
+      "playerId": "bergson",
+      "no": 9
+    },
+    {
+      "playerId": "arif-aiman",
+      "no": 10
+    },
+    {
+      "playerId": "hong-wan",
+      "no": 11
+    },
+    {
+      "playerId": "stuart-wilkin",
+      "no": 12
+    },
+    {
+      "playerId": "fergus-tierney",
+      "no": 13
+    },
+    {
+      "playerId": "harith-haiqal",
+      "no": 14
+    },
+    {
+      "playerId": "nooa-laine",
+      "no": 15
+    },
+    {
+      "playerId": "syihan-hazmi",
+      "no": 16
+    },
+    {
+      "playerId": "g-pavithran",
+      "no": 17
+    },
+    {
+      "playerId": "syahmi-safari",
+      "no": 18
+    },
+    {
+      "playerId": "paulo-josue",
+      "no": 19
+    },
+    {
+      "playerId": "nazmi-faiz",
+      "no": 20
+    },
+    {
+      "playerId": "dion-cools",
+      "no": 21
+    },
+    {
+      "playerId": "lavere-corbinong",
+      "no": 22
+    },
+    {
+      "playerId": "haziq-nadzli",
+      "no": 23
+    }
+  ]
+}

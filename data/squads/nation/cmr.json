@@ -1,0 +1,121 @@
+{
+  "id": "cmr",
+  "kind": "nation",
+  "name": "Cameroon",
+  "season": "2026",
+  "primaryColor": "#007A5E",
+  "secondaryColor": "#CE1126",
+  "verified": true,
+  "marker": {
+    "bands": ["#007A5E", "#CE1126", "#FCD116"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Cameroon_national_football_team",
+  "members": [
+    {
+      "playerId": "blondy-nna-noukeu",
+      "no": 1
+    },
+    {
+      "playerId": "jackson-tchatchoua",
+      "no": 2
+    },
+    {
+      "playerId": "che-malone",
+      "no": 3
+    },
+    {
+      "playerId": "kevin-keben",
+      "no": 4
+    },
+    {
+      "playerId": "emmanuel-moungam",
+      "no": 5
+    },
+    {
+      "playerId": "david-nyengue",
+      "no": 6
+    },
+    {
+      "playerId": "mael-fernandez",
+      "no": 7
+    },
+    {
+      "playerId": "harouna-djibirin",
+      "no": 8
+    },
+    {
+      "playerId": "ivan-cedric",
+      "no": 9
+    },
+    {
+      "playerId": "bryan-mbeumo",
+      "no": 10
+    },
+    {
+      "playerId": "saidou-alioum",
+      "no": 11
+    },
+    {
+      "playerId": "duplexe-tchamba",
+      "no": 12
+    },
+    {
+      "playerId": "darlin-yongwa",
+      "no": 13
+    },
+    {
+      "playerId": "danny-namaso",
+      "no": 14
+    },
+    {
+      "playerId": "arthur-avom",
+      "no": 15
+    },
+    {
+      "playerId": "emile-lako",
+      "no": 16
+    },
+    {
+      "playerId": "samuel-kotto",
+      "no": 17
+    },
+    {
+      "playerId": "aboubakar-nagida",
+      "no": 18
+    },
+    {
+      "playerId": "ryan-fosso",
+      "no": 19
+    },
+    {
+      "playerId": "nsongo",
+      "no": 20
+    },
+    {
+      "playerId": "angel-yondjo",
+      "no": 21
+    },
+    {
+      "playerId": "junior-tchamadeu",
+      "no": 22
+    },
+    {
+      "playerId": "simon-ngapandouetnbu",
+      "no": 23
+    },
+    {
+      "playerId": "stephane-keller",
+      "no": 24
+    },
+    {
+      "playerId": "lilian-njoh",
+      "no": 25
+    },
+    {
+      "playerId": "christian-kofane",
+      "no": 26
+    }
+  ]
+}

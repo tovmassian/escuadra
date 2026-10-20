@@ -1,0 +1,105 @@
+{
+  "id": "lca",
+  "kind": "nation",
+  "name": "Saint Lucia",
+  "season": "2026",
+  "primaryColor": "#66CCFF",
+  "secondaryColor": "#FCD116",
+  "verified": true,
+  "marker": {
+    "bands": ["#66CCFF"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "diamond",
+      "color": "#000000"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Saint_Lucia_national_football_team",
+  "members": [
+    {
+      "playerId": "devone-st-prix",
+      "no": 1
+    },
+    {
+      "playerId": "darren-donaie",
+      "no": 2
+    },
+    {
+      "playerId": "adee-germe",
+      "no": 3
+    },
+    {
+      "playerId": "ajani-louis",
+      "no": 4
+    },
+    {
+      "playerId": "melvin-doxilly",
+      "no": 5
+    },
+    {
+      "playerId": "alvinus-myers",
+      "no": 6
+    },
+    {
+      "playerId": "doneal-lionel",
+      "no": 7
+    },
+    {
+      "playerId": "ridel-stanislas",
+      "no": 8
+    },
+    {
+      "playerId": "shaquan-nelson",
+      "no": 9
+    },
+    {
+      "playerId": "thierry-morille",
+      "no": 10
+    },
+    {
+      "playerId": "lester-joseph",
+      "no": 11
+    },
+    {
+      "playerId": "trent-alexander",
+      "no": 12
+    },
+    {
+      "playerId": "bayan-aman",
+      "no": 13
+    },
+    {
+      "playerId": "mervin-st-romain",
+      "no": 14
+    },
+    {
+      "playerId": "eymani-butcher",
+      "no": 15
+    },
+    {
+      "playerId": "donavan-phillip",
+      "no": 16
+    },
+    {
+      "playerId": "hemaiael-charlery",
+      "no": 17
+    },
+    {
+      "playerId": "shevon-byron",
+      "no": 18
+    },
+    {
+      "playerId": "arkell-judeboyd",
+      "no": 19
+    },
+    {
+      "playerId": "kegan-caull",
+      "no": 20
+    },
+    {
+      "playerId": "jahlil-evans",
+      "no": 21
+    }
+  ]
+}

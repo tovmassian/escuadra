@@ -1,0 +1,139 @@
+{
+  "id": "rsa",
+  "kind": "nation",
+  "name": "South Africa",
+  "season": "2026",
+  "primaryColor": "#007749",
+  "secondaryColor": "#FFB81C",
+  "verified": true,
+  "marker": {
+    "bands": ["#E03C31", "#FFFFFF", "#007749", "#FFFFFF", "#001489"],
+    "orientation": "horizontal",
+    "weights": [3, 1, 2, 1, 3]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/South_Africa_national_soccer_team",
+  "members": [
+    {
+      "playerId": "ronwen-williams",
+      "no": 1,
+      "captain": true
+    },
+    {
+      "playerId": "thabang-matuludi",
+      "no": 2
+    },
+    {
+      "playerId": "khulumani-ndamane",
+      "no": 3
+    },
+    {
+      "playerId": "teboho-mokoena",
+      "no": 4
+    },
+    {
+      "playerId": "lebone-seema",
+      "no": 5
+    },
+    {
+      "playerId": "aubrey-modiba",
+      "no": 6
+    },
+    {
+      "playerId": "oswin-appollis",
+      "no": 7
+    },
+    {
+      "playerId": "tshepang-moremi",
+      "no": 8
+    },
+    {
+      "playerId": "yanela-mbuthuma",
+      "no": 9
+    },
+    {
+      "playerId": "relebohile-mofokeng",
+      "no": 10
+    },
+    {
+      "playerId": "themba-zwane",
+      "no": 11
+    },
+    {
+      "playerId": "thapelo-maseko",
+      "no": 12
+    },
+    {
+      "playerId": "sphephelo-sithole",
+      "no": 13
+    },
+    {
+      "playerId": "fawaaz-basadien",
+      "no": 14
+    },
+    {
+      "playerId": "iqraam-rayners",
+      "no": 15
+    },
+    {
+      "playerId": "sipho-chaine",
+      "no": 16
+    },
+    {
+      "playerId": "luther-singh",
+      "no": 17
+    },
+    {
+      "playerId": "samukele-kabini",
+      "no": 18
+    },
+    {
+      "playerId": "nkosinathi-sibisi",
+      "no": 19
+    },
+    {
+      "playerId": "brooklyn-poggenpoel",
+      "no": 20
+    },
+    {
+      "playerId": "ime-okon",
+      "no": 21
+    },
+    {
+      "playerId": "ricardo-goss",
+      "no": 22
+    },
+    {
+      "playerId": "puso-dithejane",
+      "no": 23
+    },
+    {
+      "playerId": "olwethu-makhanya",
+      "no": 24
+    },
+    {
+      "playerId": "kamogelo-sebelebele",
+      "no": 25
+    },
+    {
+      "playerId": "shandre-campbell",
+      "no": 26
+    },
+    {
+      "playerId": "cassius-mailula",
+      "no": 27
+    },
+    {
+      "playerId": "thapelo-morena",
+      "no": 28
+    },
+    {
+      "playerId": "tashreeq-matthews",
+      "no": 29
+    },
+    {
+      "playerId": "bathusi-aubaas",
+      "no": 30
+    }
+  ]
+}

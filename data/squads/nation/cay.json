@@ -1,0 +1,89 @@
+{
+  "id": "cay",
+  "kind": "nation",
+  "name": "Cayman Islands",
+  "season": "2026",
+  "primaryColor": "#012169",
+  "secondaryColor": "#C8102E",
+  "verified": true,
+  "marker": {
+    "bands": ["#012169"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#C8102E"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Cayman_Islands_national_football_team",
+  "members": [
+    {
+      "playerId": "lachlin-lambert",
+      "no": 1
+    },
+    {
+      "playerId": "jah-dain-alexander",
+      "no": 2
+    },
+    {
+      "playerId": "dandre-rowe",
+      "no": 3
+    },
+    {
+      "playerId": "cameron-gray",
+      "no": 5
+    },
+    {
+      "playerId": "wesley-robinson",
+      "no": 6
+    },
+    {
+      "playerId": "elijah-seymour",
+      "no": 7
+    },
+    {
+      "playerId": "jordan-bonilla",
+      "no": 8
+    },
+    {
+      "playerId": "christopher-reeves",
+      "no": 9
+    },
+    {
+      "playerId": "zachary-scott",
+      "no": 10
+    },
+    {
+      "playerId": "trey-ebanks",
+      "no": 11
+    },
+    {
+      "playerId": "deshawn-whittaker",
+      "no": 12
+    },
+    {
+      "playerId": "kareem-foster",
+      "no": 14
+    },
+    {
+      "playerId": "shakurn-silburn",
+      "no": 15
+    },
+    {
+      "playerId": "gonzalo-mclaughlin",
+      "no": 16
+    },
+    {
+      "playerId": "joshwa-campbell",
+      "no": 18
+    },
+    {
+      "playerId": "jacobbi-tugman",
+      "no": 21
+    },
+    {
+      "playerId": "jabari-campbell",
+      "no": 23
+    }
+  ]
+}

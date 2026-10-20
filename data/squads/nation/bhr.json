@@ -1,0 +1,122 @@
+{
+  "id": "bhr",
+  "kind": "nation",
+  "name": "Bahrain",
+  "season": "2026",
+  "primaryColor": "#DA291C",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#DA291C"],
+    "orientation": "vertical",
+    "weights": [1, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Bahrain_national_football_team",
+  "members": [
+    {
+      "playerId": "omar-salem",
+      "no": 1
+    },
+    {
+      "playerId": "amine-benaddi",
+      "no": 2
+    },
+    {
+      "playerId": "waleed-al-hayam",
+      "no": 3
+    },
+    {
+      "playerId": "sayed-dhiya-saeed",
+      "no": 4
+    },
+    {
+      "playerId": "hamad-alshamsan",
+      "no": 5
+    },
+    {
+      "playerId": "abbas-alasfoor",
+      "no": 6
+    },
+    {
+      "playerId": "ali-madan",
+      "no": 7
+    },
+    {
+      "playerId": "mohamed-marhoon",
+      "no": 8
+    },
+    {
+      "playerId": "hashim-sayed-isa",
+      "no": 9
+    },
+    {
+      "playerId": "kamil-alaswad",
+      "no": 10
+    },
+    {
+      "playerId": "ebrahim-alkhattal",
+      "no": 11
+    },
+    {
+      "playerId": "mahdi-abduljabbar",
+      "no": 12
+    },
+    {
+      "playerId": "mohamed-alromaihi",
+      "no": 13
+    },
+    {
+      "playerId": "vincent-emmanuel",
+      "no": 14
+    },
+    {
+      "playerId": "jasim-alshaikh",
+      "no": 15
+    },
+    {
+      "playerId": "sayed-baqer",
+      "no": 16
+    },
+    {
+      "playerId": "ahmed-rabea",
+      "no": 17
+    },
+    {
+      "playerId": "husain-abdulkarim",
+      "no": 18
+    },
+    {
+      "playerId": "mohammed-abdulqayoom",
+      "no": 19
+    },
+    {
+      "playerId": "mahdi-alhumaidan",
+      "no": 20
+    },
+    {
+      "playerId": "omar-saber",
+      "no": 21
+    },
+    {
+      "playerId": "ebrahim-lutfalla",
+      "no": 22
+    },
+    {
+      "playerId": "abdulla-alkhulasi",
+      "no": 23
+    },
+    {
+      "playerId": "mohamed-el-garably",
+      "no": 24
+    },
+    {
+      "playerId": "hasan-alkarrani",
+      "no": 25
+    },
+    {
+      "playerId": "ali-aldoseri",
+      "no": 26
+    }
+  ]
+}

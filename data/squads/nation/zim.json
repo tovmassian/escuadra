@@ -1,0 +1,117 @@
+{
+  "id": "zim",
+  "kind": "nation",
+  "name": "Zimbabwe",
+  "season": "2026",
+  "primaryColor": "#006400",
+  "secondaryColor": "#FFD200",
+  "verified": true,
+  "marker": {
+    "bands": ["#006400", "#FFD200", "#D40000", "#000000", "#D40000", "#FFD200", "#006400"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Zimbabwe_national_football_team",
+  "members": [
+    {
+      "playerId": "elvis-chipezeze",
+      "no": 1
+    },
+    {
+      "playerId": "shane-maroodza",
+      "no": 2
+    },
+    {
+      "playerId": "peter-muduhwa",
+      "no": 3
+    },
+    {
+      "playerId": "munashe-garananga",
+      "no": 4
+    },
+    {
+      "playerId": "divine-lunga",
+      "no": 5
+    },
+    {
+      "playerId": "prosper-padera",
+      "no": 6
+    },
+    {
+      "playerId": "marshall-munetsi",
+      "no": 8
+    },
+    {
+      "playerId": "thandolwenkosi-ngwenya",
+      "no": 9
+    },
+    {
+      "playerId": "andy-rinomhota",
+      "no": 10
+    },
+    {
+      "playerId": "corbin-mthunzi",
+      "no": 12
+    },
+    {
+      "playerId": "daniel-msendami",
+      "no": 13
+    },
+    {
+      "playerId": "bill-antonio",
+      "no": 14
+    },
+    {
+      "playerId": "sean-fusire",
+      "no": 15
+    },
+    {
+      "playerId": "martin-mapisa",
+      "no": 16
+    },
+    {
+      "playerId": "abubakar-moffat",
+      "no": 17
+    },
+    {
+      "playerId": "marvelous-nakamba",
+      "no": 18
+    },
+    {
+      "playerId": "tawanda-maswanhise",
+      "no": 19
+    },
+    {
+      "playerId": "tawanda-chirewa",
+      "no": 20
+    },
+    {
+      "playerId": "kevin-moyo",
+      "no": 21
+    },
+    {
+      "playerId": "nelson-chadya",
+      "no": 22
+    },
+    {
+      "playerId": "emmanuel-jalai",
+      "no": 23
+    },
+    {
+      "playerId": "leeroy-mavunga",
+      "no": 24
+    },
+    {
+      "playerId": "isaac-mabaya",
+      "no": null
+    },
+    {
+      "playerId": "prince-dube",
+      "no": null
+    },
+    {
+      "playerId": "tino-kadewere",
+      "no": null
+    }
+  ]
+}

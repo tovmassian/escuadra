@@ -1,0 +1,118 @@
+{
+  "id": "bih",
+  "kind": "nation",
+  "name": "Bosnia and Herzegovina",
+  "season": "2026",
+  "primaryColor": "#002395",
+  "secondaryColor": "#FECB00",
+  "verified": true,
+  "marker": {
+    "bands": ["#002395", "#FECB00", "#002395"],
+    "orientation": "vertical",
+    "weights": [2, 2, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Bosnia_and_Herzegovina_national_football_team",
+  "members": [
+    {
+      "playerId": "mladen-jurkas",
+      "no": 1
+    },
+    {
+      "playerId": "nihad-mujakic",
+      "no": 2
+    },
+    {
+      "playerId": "arjan-malic",
+      "no": 3
+    },
+    {
+      "playerId": "tarik-muharemovic",
+      "no": 4
+    },
+    {
+      "playerId": "sead-kolasinac",
+      "no": 5
+    },
+    {
+      "playerId": "benjamin-tahirovic",
+      "no": 6
+    },
+    {
+      "playerId": "zinedin-smajlovic",
+      "no": 7
+    },
+    {
+      "playerId": "armin-gigovic",
+      "no": 8
+    },
+    {
+      "playerId": "samed-bazdar",
+      "no": 9
+    },
+    {
+      "playerId": "ermedin-demirovic",
+      "no": 10
+    },
+    {
+      "playerId": "esmir-bajraktarevic",
+      "no": 11
+    },
+    {
+      "playerId": "salko-hamzic",
+      "no": 12
+    },
+    {
+      "playerId": "ivan-basic",
+      "no": 13
+    },
+    {
+      "playerId": "ivan-sunjic",
+      "no": 14
+    },
+    {
+      "playerId": "amar-memic",
+      "no": 15
+    },
+    {
+      "playerId": "ermin-mahmic",
+      "no": 16
+    },
+    {
+      "playerId": "ajdin-hasic",
+      "no": 17
+    },
+    {
+      "playerId": "nikola-katic",
+      "no": 18
+    },
+    {
+      "playerId": "jovo-lukic",
+      "no": 19
+    },
+    {
+      "playerId": "nail-omerovic",
+      "no": 20
+    },
+    {
+      "playerId": "stjepan-radeljic",
+      "no": 21
+    },
+    {
+      "playerId": "martin-zlomislic",
+      "no": 22
+    },
+    {
+      "playerId": "haris-tabakovic",
+      "no": 23
+    },
+    {
+      "playerId": "kerim-alajbegovic",
+      "no": null
+    },
+    {
+      "playerId": "luka-duric",
+      "no": null
+    }
+  ]
+}

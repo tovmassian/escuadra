@@ -1,0 +1,133 @@
+{
+  "id": "cyp",
+  "kind": "nation",
+  "name": "Cyprus",
+  "season": "2026",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#D67900",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#D67900"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Cyprus_national_football_team",
+  "members": [
+    {
+      "playerId": "fabiano",
+      "no": 1
+    },
+    {
+      "playerId": "evagoras-antoniou",
+      "no": 2
+    },
+    {
+      "playerId": "nikolas-panagiotou",
+      "no": 3
+    },
+    {
+      "playerId": "hector-kyprianou",
+      "no": 4
+    },
+    {
+      "playerId": "konstantinos-sotiriou",
+      "no": 5
+    },
+    {
+      "playerId": "nick-tsaroulla",
+      "no": 6
+    },
+    {
+      "playerId": "angelos-neophytou",
+      "no": 7
+    },
+    {
+      "playerId": "charalampos-kyriakou",
+      "no": 8
+    },
+    {
+      "playerId": "ioannis-pittas",
+      "no": 9
+    },
+    {
+      "playerId": "loizos-loizou",
+      "no": 10
+    },
+    {
+      "playerId": "andronikos-kakoullis",
+      "no": 11
+    },
+    {
+      "playerId": "joel-mall",
+      "no": 12
+    },
+    {
+      "playerId": "ioannis-kosti",
+      "no": 13
+    },
+    {
+      "playerId": "giorgos-malekkidis",
+      "no": 14
+    },
+    {
+      "playerId": "leonidas-konomis",
+      "no": 15
+    },
+    {
+      "playerId": "panagiotis-andreou",
+      "no": 16
+    },
+    {
+      "playerId": "andreas-christou",
+      "no": 17
+    },
+    {
+      "playerId": "kostakis-artymatas",
+      "no": 18
+    },
+    {
+      "playerId": "stavros-georgiou",
+      "no": 19
+    },
+    {
+      "playerId": "grigoris-kastanos",
+      "no": 20
+    },
+    {
+      "playerId": "marinos-tzionis",
+      "no": 21
+    },
+    {
+      "playerId": "andreas-paraskevas",
+      "no": 22
+    },
+    {
+      "playerId": "marcus-edwards",
+      "no": 23
+    },
+    {
+      "playerId": "andreas-shikkis",
+      "no": null
+    },
+    {
+      "playerId": "christos-sielis",
+      "no": null
+    },
+    {
+      "playerId": "konstantinos-laifis",
+      "no": null
+    },
+    {
+      "playerId": "kostas-pileas",
+      "no": null
+    },
+    {
+      "playerId": "neofytos-michail",
+      "no": null
+    }
+  ]
+}

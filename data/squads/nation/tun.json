@@ -1,0 +1,125 @@
+{
+  "id": "tun",
+  "kind": "nation",
+  "name": "Tunisia",
+  "season": "2026",
+  "primaryColor": "#E70013",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#E70013"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFFFFF"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Tunisia_national_football_team",
+  "members": [
+    {
+      "playerId": "mouhib-chamakh",
+      "no": 1
+    },
+    {
+      "playerId": "mohamed-amine-ben-hamida",
+      "no": 2
+    },
+    {
+      "playerId": "montassar-talbi",
+      "no": 3
+    },
+    {
+      "playerId": "mohamed-nasraoui",
+      "no": 4
+    },
+    {
+      "playerId": "mohamed-ali-ben-romdhane",
+      "no": 5
+    },
+    {
+      "playerId": "adem-arous",
+      "no": 6
+    },
+    {
+      "playerId": "elias-achouri",
+      "no": 7
+    },
+    {
+      "playerId": "hamza-rafia",
+      "no": 8
+    },
+    {
+      "playerId": "hazem-mastouri",
+      "no": 9
+    },
+    {
+      "playerId": "khalil-ayari",
+      "no": 10
+    },
+    {
+      "playerId": "ismael-gharbi",
+      "no": 11
+    },
+    {
+      "playerId": "ali-maaloul",
+      "no": 12
+    },
+    {
+      "playerId": "ferjani-sassi",
+      "no": 13
+    },
+    {
+      "playerId": "aissa-laidouni",
+      "no": 14
+    },
+    {
+      "playerId": "samy-chouchane",
+      "no": 15
+    },
+    {
+      "playerId": "aymen-dahmen",
+      "no": 16
+    },
+    {
+      "playerId": "sebastian-tounekti",
+      "no": 17
+    },
+    {
+      "playerId": "anis-ben-slimane",
+      "no": 18
+    },
+    {
+      "playerId": "moutaz-neffati",
+      "no": 19
+    },
+    {
+      "playerId": "yan-valery",
+      "no": 20
+    },
+    {
+      "playerId": "amin-cherni",
+      "no": 21
+    },
+    {
+      "playerId": "rayan-elloumi",
+      "no": 22
+    },
+    {
+      "playerId": "sayfallah-ltaief",
+      "no": 23
+    },
+    {
+      "playerId": "alaa-ghram",
+      "no": null
+    },
+    {
+      "playerId": "sabri-ben-hessen",
+      "no": null
+    },
+    {
+      "playerId": "sadok-kadida",
+      "no": null
+    }
+  ]
+}

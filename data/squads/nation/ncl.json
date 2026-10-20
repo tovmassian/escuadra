@@ -1,0 +1,89 @@
+{
+  "id": "ncl",
+  "kind": "nation",
+  "name": "New Caledonia",
+  "season": "2026",
+  "primaryColor": "#0035AD",
+  "secondaryColor": "#009543",
+  "verified": true,
+  "marker": {
+    "bands": ["#0035AD", "#ED4135", "#009543"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/New_Caledonia_national_football_team",
+  "members": [
+    {
+      "playerId": "mickael-ulile",
+      "no": 1
+    },
+    {
+      "playerId": "aymard-tidjite",
+      "no": 2
+    },
+    {
+      "playerId": "fabrice-iopue",
+      "no": 3
+    },
+    {
+      "playerId": "timotei-zeter",
+      "no": 4
+    },
+    {
+      "playerId": "neil-wahiobe",
+      "no": 5
+    },
+    {
+      "playerId": "kandjo-teanyouen",
+      "no": 6
+    },
+    {
+      "playerId": "stephane-wahaga",
+      "no": 7
+    },
+    {
+      "playerId": "gregory-diko",
+      "no": 8
+    },
+    {
+      "playerId": "willy-read",
+      "no": 9
+    },
+    {
+      "playerId": "brice-dahite",
+      "no": 10
+    },
+    {
+      "playerId": "roan-thale",
+      "no": 11
+    },
+    {
+      "playerId": "djibril-tufele",
+      "no": 12
+    },
+    {
+      "playerId": "jeangilles-hnamuko",
+      "no": 13
+    },
+    {
+      "playerId": "cedric-decoire",
+      "no": 14
+    },
+    {
+      "playerId": "pierre-iekawe",
+      "no": 15
+    },
+    {
+      "playerId": "jeanpierre-welepane",
+      "no": 16
+    },
+    {
+      "playerId": "jemmanuel-siwoine",
+      "no": 17
+    },
+    {
+      "playerId": "sipane-qaeze",
+      "no": 18
+    }
+  ]
+}

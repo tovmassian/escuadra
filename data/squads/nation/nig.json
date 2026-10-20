@@ -1,0 +1,121 @@
+{
+  "id": "nig",
+  "kind": "nation",
+  "name": "Niger",
+  "season": "2026",
+  "primaryColor": "#E05206",
+  "secondaryColor": "#0DB02B",
+  "verified": true,
+  "marker": {
+    "bands": ["#E05206", "#FFFFFF", "#0DB02B"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Niger_national_football_team",
+  "members": [
+    {
+      "playerId": "issiaka-boukari-kanta",
+      "no": 1
+    },
+    {
+      "playerId": "rahim-alhassane",
+      "no": 2
+    },
+    {
+      "playerId": "oumar-sako",
+      "no": 3
+    },
+    {
+      "playerId": "ibrahim-sani",
+      "no": 4
+    },
+    {
+      "playerId": "mamane-sabo",
+      "no": 5
+    },
+    {
+      "playerId": "youssouf-oumarou",
+      "no": 6
+    },
+    {
+      "playerId": "daniel-sosah",
+      "no": 7
+    },
+    {
+      "playerId": "amadou-sabo",
+      "no": 8
+    },
+    {
+      "playerId": "kairou-amoustapha",
+      "no": 9
+    },
+    {
+      "playerId": "victorien-adebayor",
+      "no": 10
+    },
+    {
+      "playerId": "mohamed-wonkoye",
+      "no": 11
+    },
+    {
+      "playerId": "ousseini-badamassi",
+      "no": 12
+    },
+    {
+      "playerId": "mohamed-abdourahmane",
+      "no": 13
+    },
+    {
+      "playerId": "ali-mohamed",
+      "no": 14
+    },
+    {
+      "playerId": "konan-ndri",
+      "no": 15
+    },
+    {
+      "playerId": "younoussa-abiboulaye",
+      "no": 16
+    },
+    {
+      "playerId": "ibrahim-moussa",
+      "no": 17
+    },
+    {
+      "playerId": "yacouba-diori",
+      "no": 18
+    },
+    {
+      "playerId": "hassane-adamou",
+      "no": 19
+    },
+    {
+      "playerId": "amadou-moutari",
+      "no": 20
+    },
+    {
+      "playerId": "alhabib-hassane",
+      "no": 21
+    },
+    {
+      "playerId": "mahamadou-tanja",
+      "no": 22
+    },
+    {
+      "playerId": "abdoullatif-goumey",
+      "no": 23
+    },
+    {
+      "playerId": "aboubacar-camara-2",
+      "no": 24
+    },
+    {
+      "playerId": "hamza-aboubacar",
+      "no": 25
+    },
+    {
+      "playerId": "abraham-adamou-gora",
+      "no": 26
+    }
+  ]
+}

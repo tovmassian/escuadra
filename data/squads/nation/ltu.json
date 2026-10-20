@@ -1,0 +1,117 @@
+{
+  "id": "ltu",
+  "kind": "nation",
+  "name": "Lithuania",
+  "season": "2026",
+  "primaryColor": "#FDB913",
+  "secondaryColor": "#C1272D",
+  "verified": true,
+  "marker": {
+    "bands": ["#FDB913", "#006A44", "#C1272D"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Lithuania_national_football_team",
+  "members": [
+    {
+      "playerId": "edvinas-gertmonas",
+      "no": 1
+    },
+    {
+      "playerId": "artemijus-tutyskinas",
+      "no": 2
+    },
+    {
+      "playerId": "edgaras-utkus",
+      "no": 3
+    },
+    {
+      "playerId": "zygimantas-baltrunas",
+      "no": 4
+    },
+    {
+      "playerId": "kipras-kazukolovas",
+      "no": 5
+    },
+    {
+      "playerId": "modestas-vorobjovas",
+      "no": 6
+    },
+    {
+      "playerId": "artur-dolznikov",
+      "no": 7
+    },
+    {
+      "playerId": "domantas-sluta",
+      "no": 8
+    },
+    {
+      "playerId": "manfredas-ruzgis",
+      "no": 9
+    },
+    {
+      "playerId": "armandas-kucys",
+      "no": 10
+    },
+    {
+      "playerId": "eligijus-jankauskas",
+      "no": 11
+    },
+    {
+      "playerId": "tomas-svedkauskas",
+      "no": 12
+    },
+    {
+      "playerId": "justas-lasickas",
+      "no": 13
+    },
+    {
+      "playerId": "vykintas-slivka",
+      "no": 14
+    },
+    {
+      "playerId": "gvidas-gineitis",
+      "no": 15
+    },
+    {
+      "playerId": "lukas-michelbrink",
+      "no": 16
+    },
+    {
+      "playerId": "vilius-armalas",
+      "no": 18
+    },
+    {
+      "playerId": "ignas-venckus",
+      "no": 19
+    },
+    {
+      "playerId": "rokas-lekiatas",
+      "no": 20
+    },
+    {
+      "playerId": "adrian-lickunas",
+      "no": 21
+    },
+    {
+      "playerId": "motiejus-burba",
+      "no": 22
+    },
+    {
+      "playerId": "dziugas-bartkus",
+      "no": 23
+    },
+    {
+      "playerId": "deividas-malzinskas",
+      "no": null
+    },
+    {
+      "playerId": "faustas-steponavicius",
+      "no": null
+    },
+    {
+      "playerId": "pijus-sirvys",
+      "no": null
+    }
+  ]
+}

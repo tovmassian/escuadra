@@ -1,0 +1,118 @@
+{
+  "id": "ben",
+  "kind": "nation",
+  "name": "Benin",
+  "season": "2026",
+  "primaryColor": "#008751",
+  "secondaryColor": "#FCD116",
+  "verified": true,
+  "marker": {
+    "bands": ["#008751", "#FCD116", "#E8112D"],
+    "orientation": "vertical",
+    "weights": [2, 3, 3]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Benin_national_football_team",
+  "members": [
+    {
+      "playerId": "marcel-dandjinou",
+      "no": 1
+    },
+    {
+      "playerId": "liam-omore",
+      "no": 2
+    },
+    {
+      "playerId": "tamimou-ouorou",
+      "no": 3
+    },
+    {
+      "playerId": "amiro-amadou",
+      "no": 4
+    },
+    {
+      "playerId": "yohan-roche",
+      "no": 5
+    },
+    {
+      "playerId": "sahid-ngobi",
+      "no": 6
+    },
+    {
+      "playerId": "matteo-ahlinvi",
+      "no": 7
+    },
+    {
+      "playerId": "hassane-imourane",
+      "no": 8
+    },
+    {
+      "playerId": "aiyegun-tosin",
+      "no": 10
+    },
+    {
+      "playerId": "yamirou-ouorou",
+      "no": 11
+    },
+    {
+      "playerId": "charlemagne-azongnitode",
+      "no": 12
+    },
+    {
+      "playerId": "mohamed-tijani",
+      "no": 13
+    },
+    {
+      "playerId": "olatoundji-tessilimi",
+      "no": 14
+    },
+    {
+      "playerId": "sessi-dalmeida",
+      "no": 15
+    },
+    {
+      "playerId": "saturnin-allagbe",
+      "no": 16
+    },
+    {
+      "playerId": "rodolfo-aloko",
+      "no": 17
+    },
+    {
+      "playerId": "junior-olaitan",
+      "no": 18
+    },
+    {
+      "playerId": "junior-olugbade",
+      "no": 19
+    },
+    {
+      "playerId": "jodel-dossou",
+      "no": 20
+    },
+    {
+      "playerId": "ede-oloko",
+      "no": 21
+    },
+    {
+      "playerId": "attidjikou-samadou",
+      "no": 22
+    },
+    {
+      "playerId": "serge-obassa",
+      "no": 23
+    },
+    {
+      "playerId": "dodo-dokou",
+      "no": null
+    },
+    {
+      "playerId": "irene-glele",
+      "no": null
+    },
+    {
+      "playerId": "rachid-moumini",
+      "no": null
+    }
+  ]
+}

@@ -1,5 +1,35 @@
 [
   {
+    "id": "afg",
+    "kind": "nation",
+    "name": "Afghanistan",
+    "season": "2026",
+    "primaryColor": "#000000",
+    "secondaryColor": "#007A36",
+    "verified": true,
+    "marker": {
+      "bands": ["#000000", "#D32011", "#007A36"],
+      "orientation": "vertical"
+    }
+  },
+  {
+    "id": "aia",
+    "kind": "nation",
+    "name": "Anguilla",
+    "season": "2026",
+    "primaryColor": "#012169",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#012169"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FFFFFF"
+      }
+    }
+  },
+  {
     "id": "ala",
     "kind": "club",
     "name": "Alavés",
@@ -12,6 +42,23 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "alb",
+    "kind": "nation",
+    "name": "Albania",
+    "season": "2026",
+    "primaryColor": "#FF0000",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#FF0000"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#000000"
+      }
+    }
   },
   {
     "id": "alg",
@@ -28,6 +75,19 @@
         "shape": "disc",
         "color": "#D21034"
       }
+    }
+  },
+  {
+    "id": "and",
+    "kind": "nation",
+    "name": "Andorra",
+    "season": "2026",
+    "primaryColor": "#10069F",
+    "secondaryColor": "#D50032",
+    "verified": true,
+    "marker": {
+      "bands": ["#10069F", "#FEDD00", "#D50032"],
+      "orientation": "vertical"
     }
   },
   {
@@ -85,6 +145,20 @@
     "league": "premier-league"
   },
   {
+    "id": "aru",
+    "kind": "nation",
+    "name": "Aruba",
+    "season": "2026",
+    "primaryColor": "#418FDE",
+    "secondaryColor": "#FFD100",
+    "verified": true,
+    "marker": {
+      "bands": ["#418FDE", "#FFD100", "#418FDE", "#FFD100", "#418FDE"],
+      "orientation": "horizontal",
+      "weights": [14, 1, 1, 1, 3]
+    }
+  },
+  {
     "id": "ata",
     "kind": "club",
     "name": "Atalanta",
@@ -97,6 +171,20 @@
       "orientation": "vertical"
     },
     "league": "serie-a"
+  },
+  {
+    "id": "atg",
+    "kind": "nation",
+    "name": "Antigua and Barbuda",
+    "season": "2026",
+    "primaryColor": "#CE1126",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#CE1126", "#000000", "#0072C6", "#FFFFFF", "#CE1126"],
+      "orientation": "vertical",
+      "weights": [2, 1, 1, 1, 2]
+    }
   },
   {
     "id": "ath",
@@ -185,6 +273,19 @@
     "league": "premier-league"
   },
   {
+    "id": "aze",
+    "kind": "nation",
+    "name": "Azerbaijan",
+    "season": "2026",
+    "primaryColor": "#00B5E2",
+    "secondaryColor": "#509E2F",
+    "verified": true,
+    "marker": {
+      "bands": ["#00B5E2", "#EF3340", "#509E2F"],
+      "orientation": "horizontal"
+    }
+  },
+  {
     "id": "b04",
     "kind": "club",
     "name": "Bayer Leverkusen",
@@ -197,6 +298,23 @@
       "orientation": "vertical"
     },
     "league": "bundesliga"
+  },
+  {
+    "id": "ban",
+    "kind": "nation",
+    "name": "Bangladesh",
+    "season": "2026",
+    "primaryColor": "#006A4E",
+    "secondaryColor": "#F42A41",
+    "verified": true,
+    "marker": {
+      "bands": ["#006A4E"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#F42A41"
+      }
+    }
   },
   {
     "id": "bar",
@@ -226,6 +344,37 @@
     }
   },
   {
+    "id": "ben",
+    "kind": "nation",
+    "name": "Benin",
+    "season": "2026",
+    "primaryColor": "#008751",
+    "secondaryColor": "#FCD116",
+    "verified": true,
+    "marker": {
+      "bands": ["#008751", "#FCD116", "#E8112D"],
+      "orientation": "vertical",
+      "weights": [2, 3, 3]
+    }
+  },
+  {
+    "id": "ber",
+    "kind": "nation",
+    "name": "Bermuda",
+    "season": "2026",
+    "primaryColor": "#C8102E",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#C8102E"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FFFFFF"
+      }
+    }
+  },
+  {
     "id": "bet",
     "kind": "club",
     "name": "Real Betis",
@@ -240,6 +389,19 @@
     "league": "la-liga"
   },
   {
+    "id": "bfa",
+    "kind": "nation",
+    "name": "Burkina Faso",
+    "season": "2026",
+    "primaryColor": "#EF2B2D",
+    "secondaryColor": "#009E49",
+    "verified": true,
+    "marker": {
+      "bands": ["#EF2B2D", "#009E49"],
+      "orientation": "horizontal"
+    }
+  },
+  {
     "id": "bha",
     "kind": "club",
     "name": "Brighton & Hove Albion",
@@ -252,6 +414,62 @@
       "orientation": "vertical"
     },
     "league": "premier-league"
+  },
+  {
+    "id": "bhr",
+    "kind": "nation",
+    "name": "Bahrain",
+    "season": "2026",
+    "primaryColor": "#DA291C",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#DA291C"],
+      "orientation": "vertical",
+      "weights": [1, 2]
+    }
+  },
+  {
+    "id": "bhu",
+    "kind": "nation",
+    "name": "Bhutan",
+    "season": "2026",
+    "primaryColor": "#FFCD00",
+    "secondaryColor": "#FF671F",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFCD00", "#FFFFFF", "#FF671F"],
+      "orientation": "vertical",
+      "weights": [2, 1, 2]
+    }
+  },
+  {
+    "id": "bih",
+    "kind": "nation",
+    "name": "Bosnia and Herzegovina",
+    "season": "2026",
+    "primaryColor": "#002395",
+    "secondaryColor": "#FECB00",
+    "verified": true,
+    "marker": {
+      "bands": ["#002395", "#FECB00", "#002395"],
+      "orientation": "vertical",
+      "weights": [2, 2, 1]
+    }
+  },
+  {
+    "id": "blz",
+    "kind": "nation",
+    "name": "Belize",
+    "season": "2026",
+    "primaryColor": "#171696",
+    "secondaryColor": "#D90F19",
+    "verified": true,
+    "marker": {
+      "bands": ["#D90F19", "#171696", "#D90F19"],
+      "orientation": "horizontal",
+      "weights": [1, 8, 1]
+    }
   },
   {
     "id": "bmg",
@@ -280,6 +498,19 @@
       "orientation": "vertical"
     },
     "league": "serie-a"
+  },
+  {
+    "id": "bolivia",
+    "kind": "nation",
+    "name": "Bolivia",
+    "season": "2026",
+    "primaryColor": "#D32011",
+    "secondaryColor": "#00702D",
+    "verified": true,
+    "marker": {
+      "bands": ["#D32011", "#F0E53C", "#00702D"],
+      "orientation": "horizontal"
+    }
   },
   {
     "id": "bou",
@@ -341,6 +572,33 @@
     "league": "ligue-1"
   },
   {
+    "id": "bru",
+    "kind": "nation",
+    "name": "Brunei",
+    "season": "2026",
+    "primaryColor": "#F7E017",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#F7E017", "#FFFFFF", "#000000", "#F7E017"],
+      "orientation": "horizontal",
+      "weights": [3, 1, 1, 3]
+    }
+  },
+  {
+    "id": "bul",
+    "kind": "nation",
+    "name": "Bulgaria",
+    "season": "2026",
+    "primaryColor": "#00966E",
+    "secondaryColor": "#D62612",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#00966E", "#D62612"],
+      "orientation": "horizontal"
+    }
+  },
+  {
     "id": "bur",
     "kind": "club",
     "name": "Burnley",
@@ -383,6 +641,20 @@
     "league": "serie-a"
   },
   {
+    "id": "cam",
+    "kind": "nation",
+    "name": "Cambodia",
+    "season": "2026",
+    "primaryColor": "#032EA1",
+    "secondaryColor": "#E00025",
+    "verified": true,
+    "marker": {
+      "bands": ["#032EA1", "#E00025", "#032EA1"],
+      "orientation": "horizontal",
+      "weights": [1, 2, 1]
+    }
+  },
+  {
     "id": "can",
     "kind": "nation",
     "name": "Canada",
@@ -394,6 +666,23 @@
       "bands": ["#FF0000", "#FFFFFF", "#FF0000"],
       "orientation": "vertical",
       "weights": [1, 2, 1]
+    }
+  },
+  {
+    "id": "cay",
+    "kind": "nation",
+    "name": "Cayman Islands",
+    "season": "2026",
+    "primaryColor": "#012169",
+    "secondaryColor": "#C8102E",
+    "verified": true,
+    "marker": {
+      "bands": ["#012169"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#C8102E"
+      }
     }
   },
   {
@@ -409,6 +698,19 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "cha",
+    "kind": "nation",
+    "name": "Chad",
+    "season": "2026",
+    "primaryColor": "#002664",
+    "secondaryColor": "#C60C30",
+    "verified": true,
+    "marker": {
+      "bands": ["#002664", "#FECB00", "#C60C30"],
+      "orientation": "vertical"
+    }
   },
   {
     "id": "che",
@@ -442,6 +744,23 @@
     }
   },
   {
+    "id": "chn",
+    "kind": "nation",
+    "name": "China PR",
+    "season": "2026",
+    "primaryColor": "#EE1C25",
+    "secondaryColor": "#FFFF00",
+    "verified": true,
+    "marker": {
+      "bands": ["#EE1C25"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FFFF00"
+      }
+    }
+  },
+  {
     "id": "civ",
     "kind": "nation",
     "name": "Ivory Coast",
@@ -451,6 +770,19 @@
     "verified": true,
     "marker": {
       "bands": ["#F77F00", "#FFFFFF", "#009E60"],
+      "orientation": "vertical"
+    }
+  },
+  {
+    "id": "cmr",
+    "kind": "nation",
+    "name": "Cameroon",
+    "season": "2026",
+    "primaryColor": "#007A5E",
+    "secondaryColor": "#CE1126",
+    "verified": true,
+    "marker": {
+      "bands": ["#007A5E", "#CE1126", "#FCD116"],
       "orientation": "vertical"
     }
   },
@@ -500,6 +832,20 @@
     "league": "serie-a"
   },
   {
+    "id": "comoros",
+    "kind": "nation",
+    "name": "Comoros",
+    "season": "2026",
+    "primaryColor": "#009639",
+    "secondaryColor": "#FFD100",
+    "verified": true,
+    "marker": {
+      "bands": ["#009639", "#FFD100", "#FFFFFF", "#EF3340", "#003DA5"],
+      "orientation": "vertical",
+      "weights": [2, 1, 1, 1, 1]
+    }
+  },
+  {
     "id": "cre",
     "kind": "club",
     "name": "Cremonese",
@@ -514,6 +860,19 @@
     "league": "serie-a"
   },
   {
+    "id": "cro",
+    "kind": "nation",
+    "name": "Croatia",
+    "season": "2026",
+    "primaryColor": "#FF0000",
+    "secondaryColor": "#171796",
+    "verified": true,
+    "marker": {
+      "bands": ["#FF0000", "#FFFFFF", "#171796"],
+      "orientation": "horizontal"
+    }
+  },
+  {
     "id": "cry",
     "kind": "club",
     "name": "Crystal Palace",
@@ -526,6 +885,37 @@
       "orientation": "vertical"
     },
     "league": "premier-league"
+  },
+  {
+    "id": "cuw",
+    "kind": "nation",
+    "name": "Curaçao",
+    "season": "2026",
+    "primaryColor": "#002B7F",
+    "secondaryColor": "#F9E814",
+    "verified": true,
+    "marker": {
+      "bands": ["#002B7F", "#F9E814", "#002B7F"],
+      "orientation": "horizontal",
+      "weights": [5, 1, 2]
+    }
+  },
+  {
+    "id": "cyp",
+    "kind": "nation",
+    "name": "Cyprus",
+    "season": "2026",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#D67900",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#D67900"
+      }
+    }
   },
   {
     "id": "cze",
@@ -566,6 +956,33 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "dji",
+    "kind": "nation",
+    "name": "Djibouti",
+    "season": "2026",
+    "primaryColor": "#6AB2E7",
+    "secondaryColor": "#12AD2B",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#6AB2E7", "#12AD2B"],
+      "orientation": "vertical",
+      "weights": [1, 2, 2]
+    }
+  },
+  {
+    "id": "dom",
+    "kind": "nation",
+    "name": "Dominican Republic",
+    "season": "2026",
+    "primaryColor": "#002D62",
+    "secondaryColor": "#CE1126",
+    "verified": true,
+    "marker": {
+      "bands": ["#002D62", "#FFFFFF", "#CE1126"],
+      "orientation": "vertical"
+    }
   },
   {
     "id": "ecu",
@@ -622,6 +1039,33 @@
     }
   },
   {
+    "id": "eqg",
+    "kind": "nation",
+    "name": "Equatorial Guinea",
+    "season": "2026",
+    "primaryColor": "#3E9A00",
+    "secondaryColor": "#E32118",
+    "verified": true,
+    "marker": {
+      "bands": ["#0073CE", "#3E9A00", "#FFFFFF", "#E32118"],
+      "orientation": "vertical",
+      "weights": [1, 2, 2, 2]
+    }
+  },
+  {
+    "id": "eri",
+    "kind": "nation",
+    "name": "Eritrea",
+    "season": "2026",
+    "primaryColor": "#E4002B",
+    "secondaryColor": "#43B02A",
+    "verified": true,
+    "marker": {
+      "bands": ["#43B02A", "#E4002B", "#418FDE"],
+      "orientation": "vertical"
+    }
+  },
+  {
     "id": "esp",
     "kind": "nation",
     "name": "Spain",
@@ -633,6 +1077,19 @@
       "bands": ["#AA151B", "#F1BF00", "#AA151B"],
       "orientation": "horizontal",
       "weights": [1, 2, 1]
+    }
+  },
+  {
+    "id": "est",
+    "kind": "nation",
+    "name": "Estonia",
+    "season": "2026",
+    "primaryColor": "#0072CE",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#0072CE", "#000000", "#FFFFFF"],
+      "orientation": "horizontal"
     }
   },
   {
@@ -706,6 +1163,37 @@
     "league": "bundesliga"
   },
   {
+    "id": "fij",
+    "kind": "nation",
+    "name": "Fiji",
+    "season": "2026",
+    "primaryColor": "#62B5E5",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#62B5E5"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FFFFFF"
+      }
+    }
+  },
+  {
+    "id": "fin",
+    "kind": "nation",
+    "name": "Finland",
+    "season": "2026",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#002F6C",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#002F6C", "#FFFFFF"],
+      "orientation": "horizontal",
+      "weights": [4, 3, 4]
+    }
+  },
+  {
     "id": "fio",
     "kind": "club",
     "name": "Fiorentina",
@@ -730,6 +1218,20 @@
     "marker": {
       "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
       "orientation": "vertical"
+    }
+  },
+  {
+    "id": "fro",
+    "kind": "nation",
+    "name": "Faroe Islands",
+    "season": "2026",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#EF3340",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#015EB8", "#EF3340", "#015EB8", "#FFFFFF"],
+      "orientation": "horizontal",
+      "weights": [7, 1, 2, 1, 7]
     }
   },
   {
@@ -761,6 +1263,20 @@
     "league": "serie-a"
   },
   {
+    "id": "geo",
+    "kind": "nation",
+    "name": "Georgia",
+    "season": "2026",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#FF0000",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#FF0000", "#FFFFFF"],
+      "orientation": "vertical",
+      "weights": [2, 1, 2]
+    }
+  },
+  {
     "id": "ger",
     "kind": "nation",
     "name": "Germany",
@@ -788,6 +1304,33 @@
     "league": "la-liga"
   },
   {
+    "id": "gha",
+    "kind": "nation",
+    "name": "Ghana",
+    "season": "2026",
+    "primaryColor": "#CE1126",
+    "secondaryColor": "#006B3F",
+    "verified": true,
+    "marker": {
+      "bands": ["#CE1126", "#FCD116", "#006B3F"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "gib",
+    "kind": "nation",
+    "name": "Gibraltar",
+    "season": "2026",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#DA000C",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#DA000C"],
+      "orientation": "horizontal",
+      "weights": [2, 1]
+    }
+  },
+  {
     "id": "gre",
     "kind": "nation",
     "name": "Greece",
@@ -797,6 +1340,104 @@
     "verified": true,
     "marker": {
       "bands": ["#0D5EAF", "#FFFFFF"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "grn",
+    "kind": "nation",
+    "name": "Grenada",
+    "season": "2026",
+    "primaryColor": "#CE1126",
+    "secondaryColor": "#007A5E",
+    "verified": true,
+    "marker": {
+      "bands": ["#CE1126", "#007A5E", "#FCD116", "#007A5E", "#CE1126"],
+      "orientation": "vertical",
+      "weights": [1, 3, 2, 3, 1]
+    }
+  },
+  {
+    "id": "gua",
+    "kind": "nation",
+    "name": "Guatemala",
+    "season": "2026",
+    "primaryColor": "#4997D0",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#4997D0", "#FFFFFF", "#4997D0"],
+      "orientation": "vertical"
+    }
+  },
+  {
+    "id": "gum",
+    "kind": "nation",
+    "name": "Guam",
+    "season": "2026",
+    "primaryColor": "#00297B",
+    "secondaryColor": "#C62139",
+    "verified": true,
+    "marker": {
+      "bands": ["#C62139", "#00297B", "#C62139"],
+      "orientation": "horizontal",
+      "weights": [1, 20, 1]
+    }
+  },
+  {
+    "id": "guy",
+    "kind": "nation",
+    "name": "Guyana",
+    "season": "2026",
+    "primaryColor": "#2A936A",
+    "secondaryColor": "#FFC20E",
+    "verified": true,
+    "marker": {
+      "bands": ["#BE1E2D", "#FFC20E", "#2A936A"],
+      "orientation": "vertical",
+      "weights": [1, 1, 2]
+    }
+  },
+  {
+    "id": "hai",
+    "kind": "nation",
+    "name": "Haiti",
+    "season": "2026",
+    "primaryColor": "#00209F",
+    "secondaryColor": "#D21034",
+    "verified": true,
+    "marker": {
+      "bands": ["#00209F", "#D21034"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "hkg",
+    "kind": "nation",
+    "name": "Hong Kong",
+    "season": "2026",
+    "primaryColor": "#EE1C25",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#EE1C25"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FFFFFF"
+      }
+    }
+  },
+  {
+    "id": "hon",
+    "kind": "nation",
+    "name": "Honduras",
+    "season": "2026",
+    "primaryColor": "#00BCE4",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#00BCE4", "#FFFFFF", "#00BCE4"],
       "orientation": "horizontal"
     }
   },
@@ -815,6 +1456,32 @@
     "league": "bundesliga"
   },
   {
+    "id": "hun",
+    "kind": "nation",
+    "name": "Hungary",
+    "season": "2026",
+    "primaryColor": "#CE2939",
+    "secondaryColor": "#477050",
+    "verified": true,
+    "marker": {
+      "bands": ["#CE2939", "#FFFFFF", "#477050"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "idn",
+    "kind": "nation",
+    "name": "Indonesia",
+    "season": "2026",
+    "primaryColor": "#FF0000",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#FF0000", "#FFFFFF"],
+      "orientation": "horizontal"
+    }
+  },
+  {
     "id": "int",
     "kind": "club",
     "name": "Inter Milan",
@@ -827,6 +1494,19 @@
       "orientation": "vertical"
     },
     "league": "serie-a"
+  },
+  {
+    "id": "irl",
+    "kind": "nation",
+    "name": "Republic of Ireland",
+    "season": "2026",
+    "primaryColor": "#169B62",
+    "secondaryColor": "#FF883E",
+    "verified": true,
+    "marker": {
+      "bands": ["#169B62", "#FFFFFF", "#FF883E"],
+      "orientation": "vertical"
+    }
   },
   {
     "id": "irn",
@@ -842,6 +1522,33 @@
     }
   },
   {
+    "id": "irq",
+    "kind": "nation",
+    "name": "Iraq",
+    "season": "2026",
+    "primaryColor": "#CD1125",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#CD1125", "#FFFFFF", "#000000"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "isl",
+    "kind": "nation",
+    "name": "Iceland",
+    "season": "2026",
+    "primaryColor": "#02529C",
+    "secondaryColor": "#DC1E35",
+    "verified": true,
+    "marker": {
+      "bands": ["#02529C", "#FFFFFF", "#DC1E35", "#FFFFFF", "#02529C"],
+      "orientation": "horizontal",
+      "weights": [7, 1, 2, 1, 7]
+    }
+  },
+  {
     "id": "ita",
     "kind": "nation",
     "name": "Italy",
@@ -852,6 +1559,34 @@
     "marker": {
       "bands": ["#008C45", "#F4F5F0", "#CD212A"],
       "orientation": "vertical"
+    }
+  },
+  {
+    "id": "jam",
+    "kind": "nation",
+    "name": "Jamaica",
+    "season": "2026",
+    "primaryColor": "#FFB81C",
+    "secondaryColor": "#007749",
+    "verified": true,
+    "marker": {
+      "bands": ["#000000", "#FFB81C", "#007749", "#FFB81C", "#000000"],
+      "orientation": "vertical",
+      "weights": [2, 1, 2, 1, 2]
+    }
+  },
+  {
+    "id": "jor",
+    "kind": "nation",
+    "name": "Jordan",
+    "season": "2026",
+    "primaryColor": "#CE1126",
+    "secondaryColor": "#007A3D",
+    "verified": true,
+    "marker": {
+      "bands": ["#CE1126", "#000000", "#FFFFFF", "#007A3D"],
+      "orientation": "vertical",
+      "weights": [1, 2, 2, 2]
     }
   },
   {
@@ -886,6 +1621,23 @@
     "league": "serie-a"
   },
   {
+    "id": "kaz",
+    "kind": "nation",
+    "name": "Kazakhstan",
+    "season": "2026",
+    "primaryColor": "#00ABC2",
+    "secondaryColor": "#FFEC2D",
+    "verified": true,
+    "marker": {
+      "bands": ["#00ABC2"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FFEC2D"
+      }
+    }
+  },
+  {
     "id": "koe",
     "kind": "club",
     "name": "FC Köln",
@@ -917,6 +1669,54 @@
     }
   },
   {
+    "id": "kos",
+    "kind": "nation",
+    "name": "Kosovo",
+    "season": "2026",
+    "primaryColor": "#244AA5",
+    "secondaryColor": "#D0A650",
+    "verified": true,
+    "marker": {
+      "bands": ["#244AA5"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#D0A650"
+      }
+    }
+  },
+  {
+    "id": "ksa",
+    "kind": "nation",
+    "name": "Saudi Arabia",
+    "season": "2026",
+    "primaryColor": "#005430",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#005430"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FFFFFF"
+      }
+    }
+  },
+  {
+    "id": "lao",
+    "kind": "nation",
+    "name": "Laos",
+    "season": "2026",
+    "primaryColor": "#CE1126",
+    "secondaryColor": "#002868",
+    "verified": true,
+    "marker": {
+      "bands": ["#CE1126", "#002868", "#CE1126"],
+      "orientation": "horizontal",
+      "weights": [1, 2, 1]
+    }
+  },
+  {
     "id": "laz",
     "kind": "club",
     "name": "Lazio",
@@ -929,6 +1729,23 @@
       "orientation": "vertical"
     },
     "league": "serie-a"
+  },
+  {
+    "id": "lca",
+    "kind": "nation",
+    "name": "Saint Lucia",
+    "season": "2026",
+    "primaryColor": "#66CCFF",
+    "secondaryColor": "#FCD116",
+    "verified": true,
+    "marker": {
+      "bands": ["#66CCFF"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "diamond",
+        "color": "#000000"
+      }
+    }
   },
   {
     "id": "lec",
@@ -1001,6 +1818,20 @@
     "league": "ligue-1"
   },
   {
+    "id": "lib",
+    "kind": "nation",
+    "name": "Lebanon",
+    "season": "2026",
+    "primaryColor": "#D31624",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#D31624", "#FFFFFF", "#D31624"],
+      "orientation": "horizontal",
+      "weights": [1, 2, 1]
+    }
+  },
+  {
     "id": "lil",
     "kind": "club",
     "name": "Lille",
@@ -1043,6 +1874,46 @@
     "league": "ligue-1"
   },
   {
+    "id": "ltu",
+    "kind": "nation",
+    "name": "Lithuania",
+    "season": "2026",
+    "primaryColor": "#FDB913",
+    "secondaryColor": "#C1272D",
+    "verified": true,
+    "marker": {
+      "bands": ["#FDB913", "#006A44", "#C1272D"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "lux",
+    "kind": "nation",
+    "name": "Luxembourg",
+    "season": "2026",
+    "primaryColor": "#ED2939",
+    "secondaryColor": "#00A1DE",
+    "verified": true,
+    "marker": {
+      "bands": ["#ED2939", "#FFFFFF", "#00A1DE"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "lva",
+    "kind": "nation",
+    "name": "Latvia",
+    "season": "2026",
+    "primaryColor": "#9D2235",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#9D2235", "#FFFFFF", "#9D2235"],
+      "orientation": "horizontal",
+      "weights": [2, 1, 2]
+    }
+  },
+  {
     "id": "lyo",
     "kind": "club",
     "name": "Lyon",
@@ -1069,6 +1940,23 @@
       "orientation": "vertical"
     },
     "league": "bundesliga"
+  },
+  {
+    "id": "mac",
+    "kind": "nation",
+    "name": "Macau",
+    "season": "2026",
+    "primaryColor": "#0F7562",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#0F7562"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FFFFFF"
+      }
+    }
   },
   {
     "id": "mal",
@@ -1099,6 +1987,20 @@
     "league": "ligue-1"
   },
   {
+    "id": "mas",
+    "kind": "nation",
+    "name": "Malaysia",
+    "season": "2026",
+    "primaryColor": "#CC0000",
+    "secondaryColor": "#000066",
+    "verified": true,
+    "marker": {
+      "bands": ["#000066", "#CC0000", "#FFFFFF", "#CC0000", "#FFFFFF"],
+      "orientation": "vertical",
+      "weights": [3, 1, 1, 1, 1]
+    }
+  },
+  {
     "id": "mci",
     "kind": "club",
     "name": "Manchester City",
@@ -1111,6 +2013,19 @@
       "orientation": "vertical"
     },
     "league": "premier-league"
+  },
+  {
+    "id": "mda",
+    "kind": "nation",
+    "name": "Moldova",
+    "season": "2026",
+    "primaryColor": "#0046AE",
+    "secondaryColor": "#CC092F",
+    "verified": true,
+    "marker": {
+      "bands": ["#0046AE", "#FFD200", "#CC092F"],
+      "orientation": "vertical"
+    }
   },
   {
     "id": "met",
@@ -1154,6 +2069,66 @@
     "league": "serie-a"
   },
   {
+    "id": "mkd",
+    "kind": "nation",
+    "name": "North Macedonia",
+    "season": "2026",
+    "primaryColor": "#D82126",
+    "secondaryColor": "#F8E92E",
+    "verified": true,
+    "marker": {
+      "bands": ["#D82126"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#F8E92E"
+      }
+    }
+  },
+  {
+    "id": "mli",
+    "kind": "nation",
+    "name": "Mali",
+    "season": "2026",
+    "primaryColor": "#14B53A",
+    "secondaryColor": "#CE1126",
+    "verified": true,
+    "marker": {
+      "bands": ["#14B53A", "#FCD116", "#CE1126"],
+      "orientation": "vertical"
+    }
+  },
+  {
+    "id": "mne",
+    "kind": "nation",
+    "name": "Montenegro",
+    "season": "2026",
+    "primaryColor": "#E30000",
+    "secondaryColor": "#FFC000",
+    "verified": true,
+    "marker": {
+      "bands": ["#E30000"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FFC000"
+      }
+    }
+  },
+  {
+    "id": "mng",
+    "kind": "nation",
+    "name": "Mongolia",
+    "season": "2026",
+    "primaryColor": "#DA2031",
+    "secondaryColor": "#0066B2",
+    "verified": true,
+    "marker": {
+      "bands": ["#DA2031", "#0066B2", "#DA2031"],
+      "orientation": "vertical"
+    }
+  },
+  {
     "id": "mon",
     "kind": "club",
     "name": "Monaco",
@@ -1185,6 +2160,23 @@
     }
   },
   {
+    "id": "msr",
+    "kind": "nation",
+    "name": "Montserrat",
+    "season": "2026",
+    "primaryColor": "#012169",
+    "secondaryColor": "#00A2DD",
+    "verified": true,
+    "marker": {
+      "bands": ["#012169"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#00A2DD"
+      }
+    }
+  },
+  {
     "id": "mun",
     "kind": "club",
     "name": "Manchester United",
@@ -1197,6 +2189,19 @@
       "orientation": "vertical"
     },
     "league": "premier-league"
+  },
+  {
+    "id": "mya",
+    "kind": "nation",
+    "name": "Myanmar",
+    "season": "2026",
+    "primaryColor": "#FECB00",
+    "secondaryColor": "#EA2839",
+    "verified": true,
+    "marker": {
+      "bands": ["#FECB00", "#34B233", "#EA2839"],
+      "orientation": "horizontal"
+    }
   },
   {
     "id": "nan",
@@ -1227,6 +2232,32 @@
     "league": "serie-a"
   },
   {
+    "id": "nca",
+    "kind": "nation",
+    "name": "Nicaragua",
+    "season": "2026",
+    "primaryColor": "#0067C6",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#0067C6", "#FFFFFF", "#0067C6"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "ncl",
+    "kind": "nation",
+    "name": "New Caledonia",
+    "season": "2026",
+    "primaryColor": "#0035AD",
+    "secondaryColor": "#009543",
+    "verified": true,
+    "marker": {
+      "bands": ["#0035AD", "#ED4135", "#009543"],
+      "orientation": "horizontal"
+    }
+  },
+  {
     "id": "ned",
     "kind": "nation",
     "name": "Netherlands",
@@ -1237,6 +2268,20 @@
     "marker": {
       "bands": ["#AE1C28", "#FFFFFF", "#21468B"],
       "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "nep",
+    "kind": "nation",
+    "name": "Nepal",
+    "season": "2026",
+    "primaryColor": "#DC143C",
+    "secondaryColor": "#003893",
+    "verified": true,
+    "marker": {
+      "bands": ["#003893", "#DC143C", "#FFFFFF", "#DC143C", "#003893"],
+      "orientation": "vertical",
+      "weights": [1, 3, 1, 3, 1]
     }
   },
   {
@@ -1295,6 +2340,33 @@
     "league": "ligue-1"
   },
   {
+    "id": "nig",
+    "kind": "nation",
+    "name": "Niger",
+    "season": "2026",
+    "primaryColor": "#E05206",
+    "secondaryColor": "#0DB02B",
+    "verified": true,
+    "marker": {
+      "bands": ["#E05206", "#FFFFFF", "#0DB02B"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "nir",
+    "kind": "nation",
+    "name": "Northern Ireland",
+    "season": "2026",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#CC0000",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#CC0000", "#FFFFFF"],
+      "orientation": "vertical",
+      "weights": [2, 1, 2]
+    }
+  },
+  {
     "id": "nor",
     "kind": "nation",
     "name": "Norway",
@@ -1304,6 +2376,36 @@
     "verified": true,
     "marker": {
       "bands": ["#EF2B2D", "#FFFFFF"],
+      "orientation": "vertical"
+    }
+  },
+  {
+    "id": "nzl",
+    "kind": "nation",
+    "name": "New Zealand",
+    "season": "2026",
+    "primaryColor": "#012169",
+    "secondaryColor": "#C8102E",
+    "verified": true,
+    "marker": {
+      "bands": ["#012169"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#C8102E"
+      }
+    }
+  },
+  {
+    "id": "oma",
+    "kind": "nation",
+    "name": "Oman",
+    "season": "2026",
+    "primaryColor": "#DF1A23",
+    "secondaryColor": "#007E3C",
+    "verified": true,
+    "marker": {
+      "bands": ["#DF1A23", "#FFFFFF", "#DF1A23", "#007E3C"],
       "orientation": "vertical"
     }
   },
@@ -1320,6 +2422,20 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "pak",
+    "kind": "nation",
+    "name": "Pakistan",
+    "season": "2026",
+    "primaryColor": "#01411C",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#01411C"],
+      "orientation": "vertical",
+      "weights": [1, 3]
+    }
   },
   {
     "id": "pan",
@@ -1376,6 +2492,20 @@
     "league": "ligue-1"
   },
   {
+    "id": "phi",
+    "kind": "nation",
+    "name": "Philippines",
+    "season": "2026",
+    "primaryColor": "#0038A8",
+    "secondaryColor": "#CE1126",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#0038A8", "#CE1126"],
+      "orientation": "vertical",
+      "weights": [1, 2, 2]
+    }
+  },
+  {
     "id": "pis",
     "kind": "club",
     "name": "Pisa",
@@ -1388,6 +2518,20 @@
       "orientation": "vertical"
     },
     "league": "serie-a"
+  },
+  {
+    "id": "ple",
+    "kind": "nation",
+    "name": "Palestine",
+    "season": "2026",
+    "primaryColor": "#000000",
+    "secondaryColor": "#009639",
+    "verified": true,
+    "marker": {
+      "bands": ["#ED2E38", "#000000", "#FFFFFF", "#009639"],
+      "orientation": "vertical",
+      "weights": [1, 2, 2, 2]
+    }
   },
   {
     "id": "pol",
@@ -1417,6 +2561,20 @@
     }
   },
   {
+    "id": "prk",
+    "kind": "nation",
+    "name": "North Korea",
+    "season": "2026",
+    "primaryColor": "#EC1D25",
+    "secondaryColor": "#034DA2",
+    "verified": true,
+    "marker": {
+      "bands": ["#034DA2", "#FFFFFF", "#EC1D25", "#FFFFFF", "#034DA2"],
+      "orientation": "horizontal",
+      "weights": [6, 1, 15, 1, 6]
+    }
+  },
+  {
     "id": "pry",
     "kind": "nation",
     "name": "Paraguay",
@@ -1443,6 +2601,20 @@
       "weights": [2, 1, 2]
     },
     "league": "ligue-1"
+  },
+  {
+    "id": "qat",
+    "kind": "nation",
+    "name": "Qatar",
+    "season": "2026",
+    "primaryColor": "#8A1538",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#8A1538"],
+      "orientation": "vertical",
+      "weights": [1, 2]
+    }
   },
   {
     "id": "rac",
@@ -1528,6 +2700,33 @@
       "weights": [3, 1]
     },
     "league": "serie-a"
+  },
+  {
+    "id": "rou",
+    "kind": "nation",
+    "name": "Romania",
+    "season": "2026",
+    "primaryColor": "#002B7F",
+    "secondaryColor": "#CE1126",
+    "verified": true,
+    "marker": {
+      "bands": ["#002B7F", "#FCD116", "#CE1126"],
+      "orientation": "vertical"
+    }
+  },
+  {
+    "id": "rsa",
+    "kind": "nation",
+    "name": "South Africa",
+    "season": "2026",
+    "primaryColor": "#007749",
+    "secondaryColor": "#FFB81C",
+    "verified": true,
+    "marker": {
+      "bands": ["#E03C31", "#FFFFFF", "#007749", "#FFFFFF", "#001489"],
+      "orientation": "horizontal",
+      "weights": [3, 1, 2, 1, 3]
+    }
   },
   {
     "id": "rso",
@@ -1626,6 +2825,19 @@
     "league": "la-liga"
   },
   {
+    "id": "sey",
+    "kind": "nation",
+    "name": "Seychelles",
+    "season": "2026",
+    "primaryColor": "#002F6C",
+    "secondaryColor": "#007A33",
+    "verified": true,
+    "marker": {
+      "bands": ["#002F6C", "#FED141", "#D22730", "#FFFFFF", "#007A33"],
+      "orientation": "vertical"
+    }
+  },
+  {
     "id": "sge",
     "kind": "club",
     "name": "Eintracht Frankfurt",
@@ -1640,6 +2852,59 @@
     "league": "bundesliga"
   },
   {
+    "id": "sin",
+    "kind": "nation",
+    "name": "Singapore",
+    "season": "2026",
+    "primaryColor": "#ED2939",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#ED2939", "#FFFFFF"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "skn",
+    "kind": "nation",
+    "name": "Saint Kitts and Nevis",
+    "season": "2026",
+    "primaryColor": "#009739",
+    "secondaryColor": "#C8102E",
+    "verified": true,
+    "marker": {
+      "bands": ["#009739", "#FFCD00", "#000000", "#FFCD00", "#C8102E"],
+      "orientation": "vertical",
+      "weights": [3, 1, 2, 1, 3]
+    }
+  },
+  {
+    "id": "sle",
+    "kind": "nation",
+    "name": "Sierra Leone",
+    "season": "2026",
+    "primaryColor": "#1EB53A",
+    "secondaryColor": "#0072C6",
+    "verified": true,
+    "marker": {
+      "bands": ["#1EB53A", "#FFFFFF", "#0072C6"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "slv",
+    "kind": "nation",
+    "name": "El Salvador",
+    "season": "2026",
+    "primaryColor": "#0047AB",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#0047AB", "#FFFFFF", "#0047AB"],
+      "orientation": "horizontal"
+    }
+  },
+  {
     "id": "srb",
     "kind": "nation",
     "name": "Serbia",
@@ -1650,6 +2915,20 @@
     "marker": {
       "bands": ["#C6363C", "#0C4076", "#FFFFFF"],
       "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "sri",
+    "kind": "nation",
+    "name": "Sri Lanka",
+    "season": "2026",
+    "primaryColor": "#8D153A",
+    "secondaryColor": "#FFBE29",
+    "verified": true,
+    "marker": {
+      "bands": ["#00534E", "#EB7400", "#8D153A"],
+      "orientation": "vertical",
+      "weights": [1, 1, 4]
     }
   },
   {
@@ -1708,6 +2987,20 @@
     "league": "premier-league"
   },
   {
+    "id": "sur",
+    "kind": "nation",
+    "name": "Suriname",
+    "season": "2026",
+    "primaryColor": "#377E3F",
+    "secondaryColor": "#B40A2D",
+    "verified": true,
+    "marker": {
+      "bands": ["#377E3F", "#FFFFFF", "#B40A2D", "#FFFFFF", "#377E3F"],
+      "orientation": "horizontal",
+      "weights": [2, 1, 4, 1, 2]
+    }
+  },
+  {
     "id": "svk",
     "kind": "nation",
     "name": "Slovakia",
@@ -1761,6 +3054,107 @@
     }
   },
   {
+    "id": "swz",
+    "kind": "nation",
+    "name": "Eswatini",
+    "season": "2026",
+    "primaryColor": "#3E5EB9",
+    "secondaryColor": "#B10C0C",
+    "verified": true,
+    "marker": {
+      "bands": ["#3E5EB9", "#FFD900", "#B10C0C", "#FFD900", "#3E5EB9"],
+      "orientation": "horizontal",
+      "weights": [3, 1, 8, 1, 3]
+    }
+  },
+  {
+    "id": "tan",
+    "kind": "nation",
+    "name": "Tanzania",
+    "season": "2026",
+    "primaryColor": "#1EB53A",
+    "secondaryColor": "#00A3DD",
+    "verified": true,
+    "marker": {
+      "bands": ["#1EB53A", "#FCD116", "#000000", "#FCD116", "#00A3DD"],
+      "orientation": "vertical",
+      "weights": [3, 1, 2, 1, 3]
+    }
+  },
+  {
+    "id": "tca",
+    "kind": "nation",
+    "name": "Turks and Caicos Islands",
+    "season": "2026",
+    "primaryColor": "#002868",
+    "secondaryColor": "#FCD116",
+    "verified": true,
+    "marker": {
+      "bands": ["#002868"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FCD116"
+      }
+    }
+  },
+  {
+    "id": "tha",
+    "kind": "nation",
+    "name": "Thailand",
+    "season": "2026",
+    "primaryColor": "#2D2A4A",
+    "secondaryColor": "#A51931",
+    "verified": true,
+    "marker": {
+      "bands": ["#A51931", "#F4F5F8", "#2D2A4A", "#F4F5F8", "#A51931"],
+      "orientation": "horizontal",
+      "weights": [1, 1, 2, 1, 1]
+    }
+  },
+  {
+    "id": "tjk",
+    "kind": "nation",
+    "name": "Tajikistan",
+    "season": "2026",
+    "primaryColor": "#CC0000",
+    "secondaryColor": "#006600",
+    "verified": true,
+    "marker": {
+      "bands": ["#CC0000", "#FFFFFF", "#006600"],
+      "orientation": "horizontal",
+      "weights": [2, 3, 2]
+    }
+  },
+  {
+    "id": "tkm",
+    "kind": "nation",
+    "name": "Turkmenistan",
+    "season": "2026",
+    "primaryColor": "#00843D",
+    "secondaryColor": "#D22630",
+    "verified": true,
+    "marker": {
+      "bands": ["#00843D", "#D22630", "#00843D"],
+      "orientation": "vertical",
+      "weights": [1, 2, 6]
+    }
+  },
+  {
+    "id": "tls",
+    "kind": "nation",
+    "name": "Timor-Leste",
+    "season": "2026",
+    "primaryColor": "#DA291C",
+    "secondaryColor": "#FFC72C",
+    "verified": true,
+    "marker": {
+      "bands": ["#000000", "#FFC72C", "#DA291C"],
+      "orientation": "vertical",
+      "weights": [1, 1, 3]
+    }
+  },
+  {
     "id": "tor",
     "kind": "club",
     "name": "Torino",
@@ -1803,6 +3197,20 @@
     "league": "ligue-1"
   },
   {
+    "id": "tri",
+    "kind": "nation",
+    "name": "Trinidad and Tobago",
+    "season": "2026",
+    "primaryColor": "#DA1A35",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#DA1A35", "#FFFFFF", "#000000", "#FFFFFF", "#DA1A35"],
+      "orientation": "vertical",
+      "weights": [3, 1, 2, 1, 3]
+    }
+  },
+  {
     "id": "tsg",
     "kind": "club",
     "name": "TSG Hoffenheim",
@@ -1815,6 +3223,23 @@
       "orientation": "vertical"
     },
     "league": "bundesliga"
+  },
+  {
+    "id": "tun",
+    "kind": "nation",
+    "name": "Tunisia",
+    "season": "2026",
+    "primaryColor": "#E70013",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#E70013"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FFFFFF"
+      }
+    }
   },
   {
     "id": "tur",
@@ -1834,6 +3259,20 @@
     }
   },
   {
+    "id": "uae",
+    "kind": "nation",
+    "name": "United Arab Emirates",
+    "season": "2026",
+    "primaryColor": "#C8102E",
+    "secondaryColor": "#00843D",
+    "verified": true,
+    "marker": {
+      "bands": ["#C8102E", "#00843D", "#FFFFFF", "#000000"],
+      "orientation": "vertical",
+      "weights": [1, 3, 3, 3]
+    }
+  },
+  {
     "id": "udi",
     "kind": "club",
     "name": "Udinese",
@@ -1848,6 +3287,19 @@
     "league": "serie-a"
   },
   {
+    "id": "uga",
+    "kind": "nation",
+    "name": "Uganda",
+    "season": "2026",
+    "primaryColor": "#D90000",
+    "secondaryColor": "#FCDC04",
+    "verified": true,
+    "marker": {
+      "bands": ["#000000", "#FCDC04", "#D90000", "#000000", "#FCDC04", "#D90000"],
+      "orientation": "horizontal"
+    }
+  },
+  {
     "id": "ukr",
     "kind": "nation",
     "name": "Ukraine",
@@ -1857,6 +3309,19 @@
     "verified": true,
     "marker": {
       "bands": ["#0057B7", "#FFDD00"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "uru",
+    "kind": "nation",
+    "name": "Uruguay",
+    "season": "2026",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#0038A8",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#0038A8"],
       "orientation": "horizontal"
     }
   },
@@ -1874,6 +3339,19 @@
     }
   },
   {
+    "id": "uzb",
+    "kind": "nation",
+    "name": "Uzbekistan",
+    "season": "2026",
+    "primaryColor": "#3081F7",
+    "secondaryColor": "#308738",
+    "verified": true,
+    "marker": {
+      "bands": ["#3081F7", "#FFFFFF", "#308738"],
+      "orientation": "horizontal"
+    }
+  },
+  {
     "id": "val",
     "kind": "club",
     "name": "Valencia",
@@ -1886,6 +3364,19 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "ven",
+    "kind": "nation",
+    "name": "Venezuela",
+    "season": "2026",
+    "primaryColor": "#FFCC00",
+    "secondaryColor": "#CF142B",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFCC00", "#00247D", "#CF142B"],
+      "orientation": "horizontal"
+    }
   },
   {
     "id": "ver",
@@ -1916,6 +3407,40 @@
     "league": "bundesliga"
   },
   {
+    "id": "vgb",
+    "kind": "nation",
+    "name": "British Virgin Islands",
+    "season": "2026",
+    "primaryColor": "#012169",
+    "secondaryColor": "#006129",
+    "verified": true,
+    "marker": {
+      "bands": ["#012169"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#006129"
+      }
+    }
+  },
+  {
+    "id": "vie",
+    "kind": "nation",
+    "name": "Vietnam",
+    "season": "2026",
+    "primaryColor": "#FF0000",
+    "secondaryColor": "#FFEB00",
+    "verified": true,
+    "marker": {
+      "bands": ["#FF0000"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#FFEB00"
+      }
+    }
+  },
+  {
     "id": "vil",
     "kind": "club",
     "name": "Villarreal",
@@ -1928,6 +3453,23 @@
       "orientation": "vertical"
     },
     "league": "la-liga"
+  },
+  {
+    "id": "vir",
+    "kind": "nation",
+    "name": "United States Virgin Islands",
+    "season": "2026",
+    "primaryColor": "#FFFFFF",
+    "secondaryColor": "#162667",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF"],
+      "orientation": "vertical",
+      "overlay": {
+        "shape": "disc",
+        "color": "#F4C53D"
+      }
+    }
   },
   {
     "id": "wal",
@@ -1987,5 +3529,31 @@
       "orientation": "vertical"
     },
     "league": "premier-league"
+  },
+  {
+    "id": "yem",
+    "kind": "nation",
+    "name": "Yemen",
+    "season": "2026",
+    "primaryColor": "#CE1126",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#CE1126", "#FFFFFF", "#000000"],
+      "orientation": "horizontal"
+    }
+  },
+  {
+    "id": "zim",
+    "kind": "nation",
+    "name": "Zimbabwe",
+    "season": "2026",
+    "primaryColor": "#006400",
+    "secondaryColor": "#FFD200",
+    "verified": true,
+    "marker": {
+      "bands": ["#006400", "#FFD200", "#D40000", "#000000", "#D40000", "#FFD200", "#006400"],
+      "orientation": "horizontal"
+    }
   }
 ]

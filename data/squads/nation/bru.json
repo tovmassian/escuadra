@@ -1,0 +1,111 @@
+{
+  "id": "bru",
+  "kind": "nation",
+  "name": "Brunei",
+  "season": "2026",
+  "primaryColor": "#F7E017",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#F7E017", "#FFFFFF", "#000000", "#F7E017"],
+    "orientation": "horizontal",
+    "weights": [3, 1, 1, 3]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Brunei_national_football_team",
+  "members": [
+    {
+      "playerId": "haimie-abdullah-nyaring",
+      "no": 1
+    },
+    {
+      "playerId": "azrin-danial-yusra",
+      "no": 2
+    },
+    {
+      "playerId": "wafiq-danish-hasimulabdillah",
+      "no": 3
+    },
+    {
+      "playerId": "hanif-farhan-azman",
+      "no": 4
+    },
+    {
+      "playerId": "nurikhwan-othman",
+      "no": 5
+    },
+    {
+      "playerId": "wafi-aminuddin",
+      "no": 6
+    },
+    {
+      "playerId": "azwan-ali-rahman",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "nazirrudin-ismail",
+      "no": 8
+    },
+    {
+      "playerId": "hariz-danial-khallidden",
+      "no": 9
+    },
+    {
+      "playerId": "hakeme-yazid-said",
+      "no": 10
+    },
+    {
+      "playerId": "haziq-naqiuddin-syamra",
+      "no": 11
+    },
+    {
+      "playerId": "ali-munawwar-abdul-rahman",
+      "no": 12
+    },
+    {
+      "playerId": "azhari-danial-yusra",
+      "no": 13
+    },
+    {
+      "playerId": "haziq-kasyful-azim-hasimulabdillah",
+      "no": 14
+    },
+    {
+      "playerId": "hadif-aiman-adanan",
+      "no": 15
+    },
+    {
+      "playerId": "abdul-hariz-herman",
+      "no": 16
+    },
+    {
+      "playerId": "hanif-aiman-adanan",
+      "no": 17
+    },
+    {
+      "playerId": "ishyra-asmin-jabidi",
+      "no": 18
+    },
+    {
+      "playerId": "alinur-rashimy-jufri",
+      "no": 19
+    },
+    {
+      "playerId": "jefri-syafiq-ishak",
+      "no": 20
+    },
+    {
+      "playerId": "hanif-hamir",
+      "no": 21
+    },
+    {
+      "playerId": "nazry-aiman-azaman",
+      "no": 22
+    },
+    {
+      "playerId": "sahfiq-hidayat-sahrizam",
+      "no": 23
+    }
+  ]
+}

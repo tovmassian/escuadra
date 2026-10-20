@@ -1,0 +1,150 @@
+{
+  "id": "uzb",
+  "kind": "nation",
+  "name": "Uzbekistan",
+  "season": "2026",
+  "primaryColor": "#3081F7",
+  "secondaryColor": "#308738",
+  "verified": true,
+  "marker": {
+    "bands": ["#3081F7", "#FFFFFF", "#308738"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Uzbekistan_national_football_team",
+  "members": [
+    {
+      "playerId": "abduvohid-nematov",
+      "no": 1
+    },
+    {
+      "playerId": "abdukodir-khusanov",
+      "no": 2
+    },
+    {
+      "playerId": "khojiakbar-alijonov",
+      "no": 3
+    },
+    {
+      "playerId": "bekhruz-karimov",
+      "no": 4
+    },
+    {
+      "playerId": "jakhongir-urozov",
+      "no": 5
+    },
+    {
+      "playerId": "akmal-mozgovoy",
+      "no": 6
+    },
+    {
+      "playerId": "umarali-rakhmonaliev",
+      "no": 7
+    },
+    {
+      "playerId": "jasurbek-jaloliddinov",
+      "no": 8
+    },
+    {
+      "playerId": "odiljon-hamrobekov",
+      "no": 9
+    },
+    {
+      "playerId": "azizjon-ganiev",
+      "no": 10
+    },
+    {
+      "playerId": "aziz-kholmurodov",
+      "no": 11
+    },
+    {
+      "playerId": "vladimir-nazarov",
+      "no": 12
+    },
+    {
+      "playerId": "sherzod-nasrullaev",
+      "no": 13
+    },
+    {
+      "playerId": "eldor-shomurodov",
+      "no": 14,
+      "captain": true
+    },
+    {
+      "playerId": "mukhammadrasul-abdumajidov",
+      "no": 15
+    },
+    {
+      "playerId": "edem-nemanov",
+      "no": 16
+    },
+    {
+      "playerId": "dostonbek-khamdamov",
+      "no": 17
+    },
+    {
+      "playerId": "bekhruz-uktamov",
+      "no": 18
+    },
+    {
+      "playerId": "ruslanbek-jiyanov",
+      "no": 19
+    },
+    {
+      "playerId": "azizbek-amonov",
+      "no": 20
+    },
+    {
+      "playerId": "khusain-norchaev",
+      "no": 21
+    },
+    {
+      "playerId": "abbosbek-fayzullaev",
+      "no": 22
+    },
+    {
+      "playerId": "sherzod-esanov",
+      "no": 23
+    },
+    {
+      "playerId": "diyor-kholmatov",
+      "no": 24
+    },
+    {
+      "playerId": "makhmud-makhamadzhonov",
+      "no": 25
+    },
+    {
+      "playerId": "nurmukhammad-abduganiev",
+      "no": 26
+    },
+    {
+      "playerId": "mukhammad-khakimov",
+      "no": 27
+    },
+    {
+      "playerId": "azizbek-tulkinbekov",
+      "no": null
+    },
+    {
+      "playerId": "giyosjon-rizakulov",
+      "no": null
+    },
+    {
+      "playerId": "mukhammadali-urinboev",
+      "no": null
+    },
+    {
+      "playerId": "sadriddin-khasanov",
+      "no": null
+    },
+    {
+      "playerId": "samandar-muratbaev",
+      "no": null
+    },
+    {
+      "playerId": "sardorbek-bakhromov",
+      "no": null
+    }
+  ]
+}

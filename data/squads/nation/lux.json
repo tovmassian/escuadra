@@ -1,0 +1,130 @@
+{
+  "id": "lux",
+  "kind": "nation",
+  "name": "Luxembourg",
+  "season": "2026",
+  "primaryColor": "#ED2939",
+  "secondaryColor": "#00A1DE",
+  "verified": true,
+  "marker": {
+    "bands": ["#ED2939", "#FFFFFF", "#00A1DE"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Luxembourg_national_football_team",
+  "members": [
+    {
+      "playerId": "anthony-moris",
+      "no": 1
+    },
+    {
+      "playerId": "eldin-dzogovic",
+      "no": 2
+    },
+    {
+      "playerId": "arnold-qevani",
+      "no": 3
+    },
+    {
+      "playerId": "florian-bohnert",
+      "no": 4
+    },
+    {
+      "playerId": "vahid-selimovic",
+      "no": 5
+    },
+    {
+      "playerId": "tomas-moreira",
+      "no": 6
+    },
+    {
+      "playerId": "aiman-dardari",
+      "no": 7
+    },
+    {
+      "playerId": "enzo-duarte",
+      "no": 8
+    },
+    {
+      "playerId": "jayson-videira",
+      "no": 9
+    },
+    {
+      "playerId": "timothe-rupil",
+      "no": 10
+    },
+    {
+      "playerId": "vincent-thill",
+      "no": 11
+    },
+    {
+      "playerId": "tiago-pereira-cardoso",
+      "no": 12
+    },
+    {
+      "playerId": "dirk-carlson",
+      "no": 13
+    },
+    {
+      "playerId": "eric-veiga",
+      "no": 14
+    },
+    {
+      "playerId": "omar-natami",
+      "no": 15
+    },
+    {
+      "playerId": "tim-kips",
+      "no": 16
+    },
+    {
+      "playerId": "hamza-kadamani",
+      "no": 17
+    },
+    {
+      "playerId": "sofiane-ikene",
+      "no": 18
+    },
+    {
+      "playerId": "mathias-olesen",
+      "no": 19
+    },
+    {
+      "playerId": "miguel-goncalves",
+      "no": 20
+    },
+    {
+      "playerId": "sebastien-thill",
+      "no": 21
+    },
+    {
+      "playerId": "marvin-martins",
+      "no": 22
+    },
+    {
+      "playerId": "lucas-fox",
+      "no": 23
+    },
+    {
+      "playerId": "danel-sinani",
+      "no": null
+    },
+    {
+      "playerId": "enes-mahmutovic",
+      "no": null
+    },
+    {
+      "playerId": "laurent-jans",
+      "no": null,
+      "captain": true
+    },
+    {
+      "playerId": "leandro-barreiro",
+      "no": null
+    },
+    {
+      "playerId": "olivier-thill",
+      "no": null
+    }
+  ]
+}

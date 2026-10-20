@@ -1,0 +1,146 @@
+{
+  "id": "gum",
+  "kind": "nation",
+  "name": "Guam",
+  "season": "2026",
+  "primaryColor": "#00297B",
+  "secondaryColor": "#C62139",
+  "verified": true,
+  "marker": {
+    "bands": ["#C62139", "#00297B", "#C62139"],
+    "orientation": "horizontal",
+    "weights": [1, 20, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Guam_national_football_team",
+  "members": [
+    {
+      "playerId": "johnmichael-guidroz",
+      "no": 1
+    },
+    {
+      "playerId": "morgan-mckenna",
+      "no": 2
+    },
+    {
+      "playerId": "takumi-ito",
+      "no": 3
+    },
+    {
+      "playerId": "kyle-halehale",
+      "no": 4
+    },
+    {
+      "playerId": "leon-morimoto",
+      "no": 5
+    },
+    {
+      "playerId": "joey-ciochetto",
+      "no": 6
+    },
+    {
+      "playerId": "james-gomez",
+      "no": 7
+    },
+    {
+      "playerId": "alec-taitague",
+      "no": 8
+    },
+    {
+      "playerId": "oz-rocca",
+      "no": 9
+    },
+    {
+      "playerId": "jason-cunliffe",
+      "no": 10
+    },
+    {
+      "playerId": "nainoa-norton",
+      "no": 11
+    },
+    {
+      "playerId": "nathan-sablan",
+      "no": 12
+    },
+    {
+      "playerId": "anthony-quidachay",
+      "no": 13
+    },
+    {
+      "playerId": "jason-castro",
+      "no": 14
+    },
+    {
+      "playerId": "shane-healy",
+      "no": 15
+    },
+    {
+      "playerId": "levi-berg",
+      "no": 16
+    },
+    {
+      "playerId": "shuntaro-suzuki",
+      "no": 17
+    },
+    {
+      "playerId": "josiah-jones",
+      "no": 18
+    },
+    {
+      "playerId": "daniel-glasscock",
+      "no": 19
+    },
+    {
+      "playerId": "levi-buckwalter",
+      "no": 20
+    },
+    {
+      "playerId": "dallas-jaye",
+      "no": 21
+    },
+    {
+      "playerId": "isiah-lagutang",
+      "no": 22
+    },
+    {
+      "playerId": "jonahan-romero",
+      "no": 23
+    },
+    {
+      "playerId": "dane-agustin",
+      "no": null
+    },
+    {
+      "playerId": "eddie-na",
+      "no": null
+    },
+    {
+      "playerId": "john-matkin",
+      "no": null
+    },
+    {
+      "playerId": "jude-bischoff",
+      "no": null
+    },
+    {
+      "playerId": "kaeo-gonsalves",
+      "no": null
+    },
+    {
+      "playerId": "marcus-lopez",
+      "no": null
+    },
+    {
+      "playerId": "nate-lee",
+      "no": null
+    },
+    {
+      "playerId": "travis-nicklaw",
+      "no": null
+    },
+    {
+      "playerId": "zaine-rocca",
+      "no": null
+    }
+  ]
+}

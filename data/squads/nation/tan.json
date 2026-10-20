@@ -1,0 +1,126 @@
+{
+  "id": "tan",
+  "kind": "nation",
+  "name": "Tanzania",
+  "season": "2026",
+  "primaryColor": "#1EB53A",
+  "secondaryColor": "#00A3DD",
+  "verified": true,
+  "marker": {
+    "bands": ["#1EB53A", "#FCD116", "#000000", "#FCD116", "#00A3DD"],
+    "orientation": "vertical",
+    "weights": [3, 1, 2, 1, 3]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Tanzania_national_football_team",
+  "members": [
+    {
+      "playerId": "yonna-geoffrey",
+      "no": 1
+    },
+    {
+      "playerId": "haji-mnoga",
+      "no": 2
+    },
+    {
+      "playerId": "nickson-kibabage",
+      "no": 3
+    },
+    {
+      "playerId": "lameck-lawi",
+      "no": 4
+    },
+    {
+      "playerId": "nuru-twalib",
+      "no": 5
+    },
+    {
+      "playerId": "feisal-salum",
+      "no": 6
+    },
+    {
+      "playerId": "iddy-nado",
+      "no": 7
+    },
+    {
+      "playerId": "charles-mmombwa",
+      "no": 8
+    },
+    {
+      "playerId": "paul-peter",
+      "no": 9
+    },
+    {
+      "playerId": "kelvin-john",
+      "no": 10
+    },
+    {
+      "playerId": "tarryn-allarakhia",
+      "no": 11
+    },
+    {
+      "playerId": "morice-abraham",
+      "no": 12
+    },
+    {
+      "playerId": "zuberi-foba",
+      "no": 13
+    },
+    {
+      "playerId": "bakari-mwamnyeto",
+      "no": 14
+    },
+    {
+      "playerId": "mohamed-husseini",
+      "no": 15
+    },
+    {
+      "playerId": "kelvin-nashon",
+      "no": 16
+    },
+    {
+      "playerId": "alphonce-msanga",
+      "no": 17
+    },
+    {
+      "playerId": "aishi-manula",
+      "no": 18
+    },
+    {
+      "playerId": "selemani-mwalimu",
+      "no": 19
+    },
+    {
+      "playerId": "novatus-miroshi",
+      "no": 20
+    },
+    {
+      "playerId": "bakari-msimu",
+      "no": 22
+    },
+    {
+      "playerId": "mudathir-yahya",
+      "no": 23
+    },
+    {
+      "playerId": "mohamed-mussa",
+      "no": 24
+    },
+    {
+      "playerId": "ibrahim-hamad",
+      "no": null
+    },
+    {
+      "playerId": "simon-msuva",
+      "no": null
+    },
+    {
+      "playerId": "yona-amosi",
+      "no": null
+    },
+    {
+      "playerId": "yusuf-kagoma",
+      "no": null
+    }
+  ]
+}

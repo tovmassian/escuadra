@@ -1,0 +1,111 @@
+{
+  "id": "lao",
+  "kind": "nation",
+  "name": "Laos",
+  "season": "2026",
+  "primaryColor": "#CE1126",
+  "secondaryColor": "#002868",
+  "verified": true,
+  "marker": {
+    "bands": ["#CE1126", "#002868", "#CE1126"],
+    "orientation": "horizontal",
+    "weights": [1, 2, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Laos_national_football_team",
+  "members": [
+    {
+      "playerId": "souksamone-vethita",
+      "no": 1
+    },
+    {
+      "playerId": "phoutthavong-sangvilay",
+      "no": 2
+    },
+    {
+      "playerId": "phahatxay-keomany",
+      "no": 3
+    },
+    {
+      "playerId": "seng-athit-manilay",
+      "no": 4
+    },
+    {
+      "playerId": "alounxay-thepsouvanh",
+      "no": 5
+    },
+    {
+      "playerId": "phouluang-vinnavong",
+      "no": 6
+    },
+    {
+      "playerId": "khonesavanh-keonuchanh",
+      "no": 7
+    },
+    {
+      "playerId": "damoth-thongkhamsavath",
+      "no": 8
+    },
+    {
+      "playerId": "kydavone-souvanny",
+      "no": 9
+    },
+    {
+      "playerId": "roman-angot",
+      "no": 10
+    },
+    {
+      "playerId": "bounchay-chernvanglien",
+      "no": 11
+    },
+    {
+      "playerId": "xaysomphong-thipphavong",
+      "no": 12
+    },
+    {
+      "playerId": "sonexay-xaykhampheng",
+      "no": 13
+    },
+    {
+      "playerId": "thavisok-latsavong",
+      "no": 14
+    },
+    {
+      "playerId": "anoulak-vilaphone",
+      "no": 15
+    },
+    {
+      "playerId": "xayasith-singsavang",
+      "no": 16
+    },
+    {
+      "playerId": "bounphachan-bounkong",
+      "no": 17,
+      "captain": true
+    },
+    {
+      "playerId": "chansamone-phetsomphone",
+      "no": 18
+    },
+    {
+      "playerId": "somwang-choummaly",
+      "no": 19
+    },
+    {
+      "playerId": "sonesanith-phommachanh",
+      "no": 20
+    },
+    {
+      "playerId": "chekky-inthisone",
+      "no": 21
+    },
+    {
+      "playerId": "bounthasak-chandala",
+      "no": 22
+    },
+    {
+      "playerId": "anoulak-singsavang",
+      "no": 23
+    }
+  ]
+}

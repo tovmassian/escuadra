@@ -1,0 +1,122 @@
+{
+  "id": "nir",
+  "kind": "nation",
+  "name": "Northern Ireland",
+  "season": "2026",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#CC0000",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#CC0000", "#FFFFFF"],
+    "orientation": "vertical",
+    "weights": [2, 1, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Northern_Ireland_national_football_team",
+  "members": [
+    {
+      "playerId": "pierce-charles",
+      "no": 1
+    },
+    {
+      "playerId": "terry-devlin",
+      "no": 2
+    },
+    {
+      "playerId": "justin-devenny",
+      "no": 3
+    },
+    {
+      "playerId": "tom-atcheson",
+      "no": 4
+    },
+    {
+      "playerId": "trai-hume",
+      "no": 5
+    },
+    {
+      "playerId": "jordan-thompson",
+      "no": 6
+    },
+    {
+      "playerId": "ethan-galbraith",
+      "no": 7
+    },
+    {
+      "playerId": "callum-marshall",
+      "no": 8
+    },
+    {
+      "playerId": "ceadach-oneill",
+      "no": 9
+    },
+    {
+      "playerId": "jamie-donley",
+      "no": 10
+    },
+    {
+      "playerId": "paul-smyth",
+      "no": 11
+    },
+    {
+      "playerId": "conor-hazard",
+      "no": 12
+    },
+    {
+      "playerId": "kieran-morrison",
+      "no": 13
+    },
+    {
+      "playerId": "isaac-price",
+      "no": 14
+    },
+    {
+      "playerId": "ruairi-mcconville",
+      "no": 15
+    },
+    {
+      "playerId": "patrick-kelly",
+      "no": 16
+    },
+    {
+      "playerId": "paddy-mcnair",
+      "no": 17
+    },
+    {
+      "playerId": "eoin-toal",
+      "no": 18
+    },
+    {
+      "playerId": "shea-charles",
+      "no": 19
+    },
+    {
+      "playerId": "brodie-spencer",
+      "no": 20
+    },
+    {
+      "playerId": "josh-magennis",
+      "no": 21
+    },
+    {
+      "playerId": "ciaron-brown",
+      "no": 22
+    },
+    {
+      "playerId": "bailey-peacockfarrell",
+      "no": 23
+    },
+    {
+      "playerId": "braiden-graham",
+      "no": null
+    },
+    {
+      "playerId": "dion-charles",
+      "no": null
+    },
+    {
+      "playerId": "michael-forbes",
+      "no": null
+    }
+  ]
+}

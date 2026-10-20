@@ -1,0 +1,125 @@
+{
+  "id": "hai",
+  "kind": "nation",
+  "name": "Haiti",
+  "season": "2026",
+  "primaryColor": "#00209F",
+  "secondaryColor": "#D21034",
+  "verified": true,
+  "marker": {
+    "bands": ["#00209F", "#D21034"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Haiti_national_football_team",
+  "members": [
+    {
+      "playerId": "alexandre-pierre",
+      "no": 1
+    },
+    {
+      "playerId": "carlens-arcus",
+      "no": 2
+    },
+    {
+      "playerId": "francois-dulysse",
+      "no": 3
+    },
+    {
+      "playerId": "garven-metusala",
+      "no": 4
+    },
+    {
+      "playerId": "hannes-delcroix",
+      "no": 5
+    },
+    {
+      "playerId": "carl-sainte",
+      "no": 6
+    },
+    {
+      "playerId": "fafa-picault",
+      "no": 7
+    },
+    {
+      "playerId": "miguel-joseph",
+      "no": 8
+    },
+    {
+      "playerId": "kenny-quetant",
+      "no": 9
+    },
+    {
+      "playerId": "jeanricner-bellegarde-2",
+      "no": 10
+    },
+    {
+      "playerId": "louicius-deedson",
+      "no": 11
+    },
+    {
+      "playerId": "jonah-mednard",
+      "no": 12
+    },
+    {
+      "playerId": "duke-lacroix",
+      "no": 13
+    },
+    {
+      "playerId": "keeto-thermoncy",
+      "no": 14
+    },
+    {
+      "playerId": "ruben-providence",
+      "no": 15
+    },
+    {
+      "playerId": "lovends-delinois",
+      "no": 16
+    },
+    {
+      "playerId": "danley-jean-jacques",
+      "no": 17
+    },
+    {
+      "playerId": "wilson-isidor",
+      "no": 18
+    },
+    {
+      "playerId": "yassin-fortune",
+      "no": 19
+    },
+    {
+      "playerId": "frantzdy-pierrot",
+      "no": 20
+    },
+    {
+      "playerId": "dany-jean",
+      "no": 21
+    },
+    {
+      "playerId": "jeankevin-duverne",
+      "no": 22
+    },
+    {
+      "playerId": "josue-duverger",
+      "no": 23
+    },
+    {
+      "playerId": "dominique-simon",
+      "no": null
+    },
+    {
+      "playerId": "josue-casimir",
+      "no": null
+    },
+    {
+      "playerId": "martin-experience",
+      "no": null
+    },
+    {
+      "playerId": "woodensky-pierre",
+      "no": null
+    }
+  ]
+}

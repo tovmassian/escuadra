@@ -1,0 +1,109 @@
+{
+  "id": "dom",
+  "kind": "nation",
+  "name": "Dominican Republic",
+  "season": "2026",
+  "primaryColor": "#002D62",
+  "secondaryColor": "#CE1126",
+  "verified": true,
+  "marker": {
+    "bands": ["#002D62", "#FFFFFF", "#CE1126"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Dominican_Republic_national_football_team",
+  "members": [
+    {
+      "playerId": "xavier-valdez",
+      "no": 1
+    },
+    {
+      "playerId": "firpo",
+      "no": 3
+    },
+    {
+      "playerId": "edgar-pujol",
+      "no": 4
+    },
+    {
+      "playerId": "noah-dollenmayer",
+      "no": 5
+    },
+    {
+      "playerId": "pablo-rosario",
+      "no": 6
+    },
+    {
+      "playerId": "juanca-pineda",
+      "no": 7
+    },
+    {
+      "playerId": "heinz-morschel",
+      "no": 8
+    },
+    {
+      "playerId": "diaz",
+      "no": 9
+    },
+    {
+      "playerId": "edwin-frias",
+      "no": 12
+    },
+    {
+      "playerId": "yordy-alvarez",
+      "no": 13
+    },
+    {
+      "playerId": "jean-carlos-lopez",
+      "no": 14
+    },
+    {
+      "playerId": "daniel-flores",
+      "no": 16
+    },
+    {
+      "playerId": "dorny-romero",
+      "no": 17
+    },
+    {
+      "playerId": "peter-gonzalez",
+      "no": 19
+    },
+    {
+      "playerId": "lucas-breton",
+      "no": 20
+    },
+    {
+      "playerId": "juan-castillo",
+      "no": 21
+    },
+    {
+      "playerId": "pedro-espinal",
+      "no": 22
+    },
+    {
+      "playerId": "luiyi-de-lucas",
+      "no": 23
+    },
+    {
+      "playerId": "brian-lopez",
+      "no": null
+    },
+    {
+      "playerId": "edarlyn-reyes",
+      "no": null
+    },
+    {
+      "playerId": "edison-azcona",
+      "no": null
+    },
+    {
+      "playerId": "javier-roces",
+      "no": null
+    },
+    {
+      "playerId": "jeremy-baez",
+      "no": null
+    }
+  ]
+}

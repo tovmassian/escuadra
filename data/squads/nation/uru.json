@@ -1,0 +1,122 @@
+{
+  "id": "uru",
+  "kind": "nation",
+  "name": "Uruguay",
+  "season": "2026",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#0038A8",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#0038A8"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Uruguay_national_football_team",
+  "members": [
+    {
+      "playerId": "santiago-mele",
+      "no": 1
+    },
+    {
+      "playerId": "jose-maria-gimenez",
+      "no": 2,
+      "captain": true
+    },
+    {
+      "playerId": "sebastian-caceres",
+      "no": 3
+    },
+    {
+      "playerId": "araujo",
+      "no": 4
+    },
+    {
+      "playerId": "facundo-bernal",
+      "no": 5
+    },
+    {
+      "playerId": "rodrigo-bentancur",
+      "no": 6
+    },
+    {
+      "playerId": "rodrigo-aguirre",
+      "no": 7
+    },
+    {
+      "playerId": "nahitan-nandez",
+      "no": 8
+    },
+    {
+      "playerId": "darwin-nunez",
+      "no": 9
+    },
+    {
+      "playerId": "giorgian-de-arrascaeta",
+      "no": 10
+    },
+    {
+      "playerId": "facundo-pellistri",
+      "no": 11
+    },
+    {
+      "playerId": "thiago-cardozo",
+      "no": 12
+    },
+    {
+      "playerId": "guillermo-varela",
+      "no": 13
+    },
+    {
+      "playerId": "lucas-torreira",
+      "no": 14
+    },
+    {
+      "playerId": "emiliano-martinez",
+      "no": 15
+    },
+    {
+      "playerId": "mathias-olivera",
+      "no": 16
+    },
+    {
+      "playerId": "rodrigo-zalazar",
+      "no": 17
+    },
+    {
+      "playerId": "brian-rodriguez",
+      "no": 18
+    },
+    {
+      "playerId": "mourino",
+      "no": 19
+    },
+    {
+      "playerId": "maximiliano-araujo",
+      "no": 20
+    },
+    {
+      "playerId": "federico-vinas",
+      "no": 21
+    },
+    {
+      "playerId": "joaquin-piquerez",
+      "no": 22
+    },
+    {
+      "playerId": "cristopher-fiermarin",
+      "no": 23
+    },
+    {
+      "playerId": "juan-rodriguez",
+      "no": 24
+    },
+    {
+      "playerId": "juan-manuel-sanabria",
+      "no": 25
+    },
+    {
+      "playerId": "satriano",
+      "no": 26
+    }
+  ]
+}

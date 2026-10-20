@@ -1,0 +1,111 @@
+{
+  "id": "tha",
+  "kind": "nation",
+  "name": "Thailand",
+  "season": "2026",
+  "primaryColor": "#2D2A4A",
+  "secondaryColor": "#A51931",
+  "verified": true,
+  "marker": {
+    "bands": ["#A51931", "#F4F5F8", "#2D2A4A", "#F4F5F8", "#A51931"],
+    "orientation": "horizontal",
+    "weights": [1, 1, 2, 1, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Thailand_national_football_team",
+  "members": [
+    {
+      "playerId": "patiwat-khammai",
+      "no": 1
+    },
+    {
+      "playerId": "nattapong-sayriya",
+      "no": 2
+    },
+    {
+      "playerId": "chaiyaphon-otton",
+      "no": 3
+    },
+    {
+      "playerId": "manuel-bihr",
+      "no": 4
+    },
+    {
+      "playerId": "peerawat-akkratum",
+      "no": 5
+    },
+    {
+      "playerId": "sarach-yooyen",
+      "no": 6
+    },
+    {
+      "playerId": "kakana-khamyok",
+      "no": 7
+    },
+    {
+      "playerId": "peeradol-chamrasamee",
+      "no": 8
+    },
+    {
+      "playerId": "supachai-chaided",
+      "no": 9
+    },
+    {
+      "playerId": "supachok-sarachat",
+      "no": 10
+    },
+    {
+      "playerId": "anan-yodsangwal",
+      "no": 11
+    },
+    {
+      "playerId": "nicholas-mickelson",
+      "no": 12
+    },
+    {
+      "playerId": "waris-choolthong",
+      "no": 13
+    },
+    {
+      "playerId": "teerasak-poeiphimai",
+      "no": 14
+    },
+    {
+      "playerId": "kritsada-kaman",
+      "no": 15
+    },
+    {
+      "playerId": "iklas-sanron",
+      "no": 16
+    },
+    {
+      "playerId": "jude-soonsupbell",
+      "no": 17
+    },
+    {
+      "playerId": "chanathip-songkrasin",
+      "no": 18,
+      "captain": true
+    },
+    {
+      "playerId": "teerapat-pruetong",
+      "no": 19
+    },
+    {
+      "playerId": "saranon-anuin",
+      "no": 20
+    },
+    {
+      "playerId": "suphanan-bureerat",
+      "no": 21
+    },
+    {
+      "playerId": "seksan-ratree",
+      "no": 22
+    },
+    {
+      "playerId": "kampol-pathomakkakul",
+      "no": 23
+    }
+  ]
+}

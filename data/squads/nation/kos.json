@@ -1,0 +1,114 @@
+{
+  "id": "kos",
+  "kind": "nation",
+  "name": "Kosovo",
+  "season": "2026",
+  "primaryColor": "#244AA5",
+  "secondaryColor": "#D0A650",
+  "verified": true,
+  "marker": {
+    "bands": ["#244AA5"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#D0A650"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Kosovo_national_football_team",
+  "members": [
+    {
+      "playerId": "arijanet-muric",
+      "no": 1
+    },
+    {
+      "playerId": "ron-raci",
+      "no": 2
+    },
+    {
+      "playerId": "leard-sadriu",
+      "no": 3
+    },
+    {
+      "playerId": "ilir-krasniqi",
+      "no": 4
+    },
+    {
+      "playerId": "lumbardh-dellova",
+      "no": 5
+    },
+    {
+      "playerId": "erblin-osmani",
+      "no": 6
+    },
+    {
+      "playerId": "milot-rashica",
+      "no": 7
+    },
+    {
+      "playerId": "valmir-matoshi",
+      "no": 8
+    },
+    {
+      "playerId": "albion-rrahmani",
+      "no": 9
+    },
+    {
+      "playerId": "edon-zhegrova",
+      "no": 10
+    },
+    {
+      "playerId": "fisnik-asllani",
+      "no": 11
+    },
+    {
+      "playerId": "visar-bekaj",
+      "no": 12
+    },
+    {
+      "playerId": "dion-gallapeni",
+      "no": 13
+    },
+    {
+      "playerId": "baton-zabergja",
+      "no": 14
+    },
+    {
+      "playerId": "mergim-vojvoda",
+      "no": 15
+    },
+    {
+      "playerId": "amir-saipi",
+      "no": 16
+    },
+    {
+      "playerId": "ermal-krasniqi",
+      "no": 17
+    },
+    {
+      "playerId": "vedat-muriqi",
+      "no": 18,
+      "captain": true
+    },
+    {
+      "playerId": "vesel-demaku",
+      "no": 19
+    },
+    {
+      "playerId": "veldin-hoxha",
+      "no": 20
+    },
+    {
+      "playerId": "lindon-emerllahu",
+      "no": 21
+    },
+    {
+      "playerId": "meriton-korenica",
+      "no": 22
+    },
+    {
+      "playerId": "leon-avdullahu",
+      "no": 23
+    }
+  ]
+}

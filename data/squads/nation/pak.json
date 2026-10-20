@@ -1,0 +1,111 @@
+{
+  "id": "pak",
+  "kind": "nation",
+  "name": "Pakistan",
+  "season": "2026",
+  "primaryColor": "#01411C",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#01411C"],
+    "orientation": "vertical",
+    "weights": [1, 3]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Pakistan_national_football_team",
+  "members": [
+    {
+      "playerId": "yousuf-butt",
+      "no": 1
+    },
+    {
+      "playerId": "mohammad-fazal",
+      "no": 2
+    },
+    {
+      "playerId": "mohib-ullah",
+      "no": 3
+    },
+    {
+      "playerId": "abdullah-iqbal",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "easah-suliman",
+      "no": 5
+    },
+    {
+      "playerId": "abdullah-shah",
+      "no": 6
+    },
+    {
+      "playerId": "kaleemullah-khan",
+      "no": 7
+    },
+    {
+      "playerId": "abdul-arshad",
+      "no": 8
+    },
+    {
+      "playerId": "hayyaan-khattak",
+      "no": 9
+    },
+    {
+      "playerId": "alamgir-ghazi",
+      "no": 10
+    },
+    {
+      "playerId": "shayak-dost",
+      "no": 11
+    },
+    {
+      "playerId": "mamoon-moosa-khan",
+      "no": 12
+    },
+    {
+      "playerId": "ali-khan",
+      "no": 13
+    },
+    {
+      "playerId": "abdul-rehman",
+      "no": 14
+    },
+    {
+      "playerId": "umar-nawaz",
+      "no": 15
+    },
+    {
+      "playerId": "syed-ali-raza",
+      "no": 16
+    },
+    {
+      "playerId": "ali-agha",
+      "no": 17
+    },
+    {
+      "playerId": "abdul-samad-khan",
+      "no": 18
+    },
+    {
+      "playerId": "ali-uzair",
+      "no": 19
+    },
+    {
+      "playerId": "saqib-hanif",
+      "no": 20
+    },
+    {
+      "playerId": "haris-zeb",
+      "no": 21
+    },
+    {
+      "playerId": "hassan-ali",
+      "no": 22
+    },
+    {
+      "playerId": "ali-khan-niazi",
+      "no": 23
+    }
+  ]
+}

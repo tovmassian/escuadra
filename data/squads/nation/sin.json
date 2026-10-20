@@ -1,0 +1,110 @@
+{
+  "id": "sin",
+  "kind": "nation",
+  "name": "Singapore",
+  "season": "2026",
+  "primaryColor": "#ED2939",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#ED2939", "#FFFFFF"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Singapore_national_football_team",
+  "members": [
+    {
+      "playerId": "izwan-mahbud",
+      "no": 1
+    },
+    {
+      "playerId": "irfan-najeeb",
+      "no": 2
+    },
+    {
+      "playerId": "ryhan-stewart",
+      "no": 3
+    },
+    {
+      "playerId": "nur-adam-abdullah",
+      "no": 4
+    },
+    {
+      "playerId": "raoul-suhaimi",
+      "no": 5
+    },
+    {
+      "playerId": "kyoga-nakamura",
+      "no": 6
+    },
+    {
+      "playerId": "song-uiyoung",
+      "no": 7
+    },
+    {
+      "playerId": "shah-shahiran",
+      "no": 8
+    },
+    {
+      "playerId": "farhan-zulkifli",
+      "no": 9
+    },
+    {
+      "playerId": "faris-ramli",
+      "no": 10
+    },
+    {
+      "playerId": "glenn-kweh",
+      "no": 11
+    },
+    {
+      "playerId": "syazwan-buhari",
+      "no": 12
+    },
+    {
+      "playerId": "harhys-stewart",
+      "no": 13
+    },
+    {
+      "playerId": "hariss-harun",
+      "no": 14,
+      "captain": true
+    },
+    {
+      "playerId": "lionel-tan",
+      "no": 15
+    },
+    {
+      "playerId": "hami-syahin",
+      "no": 16
+    },
+    {
+      "playerId": "haziq-kamarudin",
+      "no": 17
+    },
+    {
+      "playerId": "jacob-mahler",
+      "no": 18
+    },
+    {
+      "playerId": "ilhan-fandi",
+      "no": 19
+    },
+    {
+      "playerId": "shawal-anuar",
+      "no": 20
+    },
+    {
+      "playerId": "safuwan-baharudin",
+      "no": 21
+    },
+    {
+      "playerId": "joel-chew",
+      "no": 22
+    },
+    {
+      "playerId": "ridhuan-barudin",
+      "no": 23
+    }
+  ]
+}

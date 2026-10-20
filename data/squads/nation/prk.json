@@ -1,0 +1,111 @@
+{
+  "id": "prk",
+  "kind": "nation",
+  "name": "North Korea",
+  "season": "2026",
+  "primaryColor": "#EC1D25",
+  "secondaryColor": "#034DA2",
+  "verified": true,
+  "marker": {
+    "bands": ["#034DA2", "#FFFFFF", "#EC1D25", "#FFFFFF", "#034DA2"],
+    "orientation": "horizontal",
+    "weights": [6, 1, 15, 1, 6]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/North_Korea_national_football_team",
+  "members": [
+    {
+      "playerId": "kang-juhyok",
+      "no": 1
+    },
+    {
+      "playerId": "kim-jinhyok",
+      "no": 2
+    },
+    {
+      "playerId": "jang-kukchol",
+      "no": 3,
+      "captain": true
+    },
+    {
+      "playerId": "ri-kumchol",
+      "no": 4
+    },
+    {
+      "playerId": "jong-hwinam",
+      "no": 5
+    },
+    {
+      "playerId": "kye-tam",
+      "no": 6
+    },
+    {
+      "playerId": "kim-kukjin",
+      "no": 7
+    },
+    {
+      "playerId": "sin-kwangnam",
+      "no": 8
+    },
+    {
+      "playerId": "ri-joguk",
+      "no": 9
+    },
+    {
+      "playerId": "ri-ilsong",
+      "no": 10
+    },
+    {
+      "playerId": "pak-kwanghun",
+      "no": 11
+    },
+    {
+      "playerId": "choe-ryongil",
+      "no": 12
+    },
+    {
+      "playerId": "choe-kuk",
+      "no": 13
+    },
+    {
+      "playerId": "ryang-kwangmyong",
+      "no": 14
+    },
+    {
+      "playerId": "ra-myongsong",
+      "no": 15
+    },
+    {
+      "playerId": "kim-yusong",
+      "no": 16
+    },
+    {
+      "playerId": "kang-kukchol",
+      "no": 17
+    },
+    {
+      "playerId": "hong-kilryong",
+      "no": 18
+    },
+    {
+      "playerId": "kim-sunghye",
+      "no": 19
+    },
+    {
+      "playerId": "paek-chungsong",
+      "no": 20
+    },
+    {
+      "playerId": "yu-kwangjun",
+      "no": 21
+    },
+    {
+      "playerId": "han-chungguk",
+      "no": 22
+    },
+    {
+      "playerId": "jong-kumsong",
+      "no": 23
+    }
+  ]
+}

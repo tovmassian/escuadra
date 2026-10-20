@@ -1,0 +1,137 @@
+{
+  "id": "aze",
+  "kind": "nation",
+  "name": "Azerbaijan",
+  "season": "2026",
+  "primaryColor": "#00B5E2",
+  "secondaryColor": "#509E2F",
+  "verified": true,
+  "marker": {
+    "bands": ["#00B5E2", "#EF3340", "#509E2F"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Azerbaijan_national_football_team",
+  "members": [
+    {
+      "playerId": "emil-balayev",
+      "no": 1
+    },
+    {
+      "playerId": "edqar-adilkhanov",
+      "no": 2
+    },
+    {
+      "playerId": "rufat-abbasov",
+      "no": 3
+    },
+    {
+      "playerId": "oruc-mammadov",
+      "no": 4
+    },
+    {
+      "playerId": "anton-kryvotsyuk",
+      "no": 5
+    },
+    {
+      "playerId": "abdulakh-khaybulayev",
+      "no": 6
+    },
+    {
+      "playerId": "toral-bayramov",
+      "no": 7
+    },
+    {
+      "playerId": "emin-mahmudov",
+      "no": 8
+    },
+    {
+      "playerId": "musa-qurbanli",
+      "no": 9
+    },
+    {
+      "playerId": "mahir-emreli",
+      "no": 10
+    },
+    {
+      "playerId": "aykhan-guseynov",
+      "no": 11
+    },
+    {
+      "playerId": "aydin-bayramov",
+      "no": 12
+    },
+    {
+      "playerId": "emil-safarov",
+      "no": 13
+    },
+    {
+      "playerId": "elvin-badalov",
+      "no": 14
+    },
+    {
+      "playerId": "murad-khachayev",
+      "no": 15
+    },
+    {
+      "playerId": "rufat-abdullazade",
+      "no": 16
+    },
+    {
+      "playerId": "vusal-isgandarli",
+      "no": 17
+    },
+    {
+      "playerId": "clal-huseynov",
+      "no": 18
+    },
+    {
+      "playerId": "tellur-mutallimov",
+      "no": 19
+    },
+    {
+      "playerId": "aleksey-isayev",
+      "no": 20
+    },
+    {
+      "playerId": "ragim-sadykhov",
+      "no": 21
+    },
+    {
+      "playerId": "anatoliy-nuriyev",
+      "no": 22
+    },
+    {
+      "playerId": "ravan-mirzammadov",
+      "no": 23
+    },
+    {
+      "playerId": "badavi-guseynov",
+      "no": null
+    },
+    {
+      "playerId": "ceyhun-nuriyev",
+      "no": null
+    },
+    {
+      "playerId": "farid-yusifli",
+      "no": null
+    },
+    {
+      "playerId": "mustafa-ahmadzada",
+      "no": null
+    },
+    {
+      "playerId": "rahil-mammadov",
+      "no": null
+    },
+    {
+      "playerId": "rahman-dashdamirov",
+      "no": null
+    },
+    {
+      "playerId": "renat-dadasov",
+      "no": null
+    }
+  ]
+}

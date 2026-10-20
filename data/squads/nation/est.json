@@ -1,0 +1,122 @@
+{
+  "id": "est",
+  "kind": "nation",
+  "name": "Estonia",
+  "season": "2026",
+  "primaryColor": "#0072CE",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#0072CE", "#000000", "#FFFFFF"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Estonia_national_football_team",
+  "members": [
+    {
+      "playerId": "evert-grunvald",
+      "no": 1
+    },
+    {
+      "playerId": "marten-kuusk",
+      "no": 2
+    },
+    {
+      "playerId": "maksim-paskotsi",
+      "no": 3
+    },
+    {
+      "playerId": "mattias-kait",
+      "no": 4
+    },
+    {
+      "playerId": "erko-jonne-tougjas",
+      "no": 5
+    },
+    {
+      "playerId": "rasmus-peetson",
+      "no": 6
+    },
+    {
+      "playerId": "robi-saarma",
+      "no": 7
+    },
+    {
+      "playerId": "markus-soomets",
+      "no": 8
+    },
+    {
+      "playerId": "karel-mustmaa",
+      "no": 9
+    },
+    {
+      "playerId": "kevor-palumets",
+      "no": 10
+    },
+    {
+      "playerId": "mihkel-ainsalu",
+      "no": 11
+    },
+    {
+      "playerId": "matvei-igonen",
+      "no": 12
+    },
+    {
+      "playerId": "joseph-saliste",
+      "no": 13
+    },
+    {
+      "playerId": "patrik-kristal",
+      "no": 14
+    },
+    {
+      "playerId": "maksimilian-skvortsov",
+      "no": 15
+    },
+    {
+      "playerId": "joonas-tamm",
+      "no": 16
+    },
+    {
+      "playerId": "mattias-mannilaan",
+      "no": 17
+    },
+    {
+      "playerId": "tanel-tammik",
+      "no": 18
+    },
+    {
+      "playerId": "michael-schjonninglarsen",
+      "no": 19
+    },
+    {
+      "playerId": "markus-poom",
+      "no": 20
+    },
+    {
+      "playerId": "alex-matthias-tamm",
+      "no": 21
+    },
+    {
+      "playerId": "karl-andre-vallner",
+      "no": 22
+    },
+    {
+      "playerId": "frank-liivak",
+      "no": 23
+    },
+    {
+      "playerId": "karol-mets",
+      "no": null,
+      "captain": true
+    },
+    {
+      "playerId": "martin-miller",
+      "no": null
+    },
+    {
+      "playerId": "sander-alamaa",
+      "no": null
+    }
+  ]
+}

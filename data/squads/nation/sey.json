@@ -1,0 +1,109 @@
+{
+  "id": "sey",
+  "kind": "nation",
+  "name": "Seychelles",
+  "season": "2026",
+  "primaryColor": "#002F6C",
+  "secondaryColor": "#007A33",
+  "verified": true,
+  "marker": {
+    "bands": ["#002F6C", "#FED141", "#D22730", "#FFFFFF", "#007A33"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Seychelles_national_football_team",
+  "members": [
+    {
+      "playerId": "carlos-simeon",
+      "no": 1
+    },
+    {
+      "playerId": "justin-riaze",
+      "no": 2
+    },
+    {
+      "playerId": "makhan-bristolcissoko",
+      "no": 3
+    },
+    {
+      "playerId": "alfie-walters",
+      "no": 4
+    },
+    {
+      "playerId": "don-fanchette",
+      "no": 5
+    },
+    {
+      "playerId": "anelka-adela",
+      "no": 6
+    },
+    {
+      "playerId": "brandon-labrosse",
+      "no": 7
+    },
+    {
+      "playerId": "lorenzo-hoareau",
+      "no": 8
+    },
+    {
+      "playerId": "jerone-joubert",
+      "no": 9
+    },
+    {
+      "playerId": "dean-mothe",
+      "no": 10
+    },
+    {
+      "playerId": "tyrone-cadeau",
+      "no": 11
+    },
+    {
+      "playerId": "warren-mellie",
+      "no": 12
+    },
+    {
+      "playerId": "samuel-okolie",
+      "no": 13
+    },
+    {
+      "playerId": "anil-dijoux",
+      "no": 14
+    },
+    {
+      "playerId": "torry-radegonde",
+      "no": 15
+    },
+    {
+      "playerId": "josip-ravignia",
+      "no": 16
+    },
+    {
+      "playerId": "ryan-henriette",
+      "no": 17
+    },
+    {
+      "playerId": "romeo-padayachy",
+      "no": 18
+    },
+    {
+      "playerId": "markus-payet",
+      "no": 19
+    },
+    {
+      "playerId": "imra-raheriniaina",
+      "no": 20
+    },
+    {
+      "playerId": "vince-fred",
+      "no": 21
+    },
+    {
+      "playerId": "ian-ahkong",
+      "no": 22
+    },
+    {
+      "playerId": "elie-sopha",
+      "no": 23
+    }
+  ]
+}

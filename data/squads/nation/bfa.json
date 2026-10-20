@@ -1,0 +1,117 @@
+{
+  "id": "bfa",
+  "kind": "nation",
+  "name": "Burkina Faso",
+  "season": "2026",
+  "primaryColor": "#EF2B2D",
+  "secondaryColor": "#009E49",
+  "verified": true,
+  "marker": {
+    "bands": ["#EF2B2D", "#009E49"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Burkina_Faso_national_football_team",
+  "members": [
+    {
+      "playerId": "farid-ouedraogo",
+      "no": 1
+    },
+    {
+      "playerId": "lassina-traore",
+      "no": 2
+    },
+    {
+      "playerId": "aboubacar-camara",
+      "no": 3
+    },
+    {
+      "playerId": "ismael-maiga",
+      "no": 4
+    },
+    {
+      "playerId": "nasser-djiga",
+      "no": 5
+    },
+    {
+      "playerId": "julien-bationo",
+      "no": 6
+    },
+    {
+      "playerId": "lohann-doucet",
+      "no": 8
+    },
+    {
+      "playerId": "issa-kabore",
+      "no": 9
+    },
+    {
+      "playerId": "ousseni-bouda",
+      "no": 11
+    },
+    {
+      "playerId": "edmond-tapsoba",
+      "no": 12
+    },
+    {
+      "playerId": "chec-bebel-doumbia",
+      "no": 13
+    },
+    {
+      "playerId": "rachide-gnanou",
+      "no": 14
+    },
+    {
+      "playerId": "abdoul-tapsoba",
+      "no": 15
+    },
+    {
+      "playerId": "herve-koffi",
+      "no": 16
+    },
+    {
+      "playerId": "elohim-kabore",
+      "no": 17
+    },
+    {
+      "playerId": "ismahila-ouedraogo",
+      "no": 18
+    },
+    {
+      "playerId": "georgi-minoungou",
+      "no": 19
+    },
+    {
+      "playerId": "rachid-kouda",
+      "no": 20
+    },
+    {
+      "playerId": "axel-taonsa",
+      "no": 21
+    },
+    {
+      "playerId": "arthur-zagre",
+      "no": 22
+    },
+    {
+      "playerId": "kilian-nikiema",
+      "no": 23
+    },
+    {
+      "playerId": "mamoutou-ouedraogo",
+      "no": 25
+    },
+    {
+      "playerId": "arsene-kouassi",
+      "no": 26
+    },
+    {
+      "playerId": "pierre-landry-kabore",
+      "no": 27
+    },
+    {
+      "playerId": "dango-ouattara",
+      "no": null
+    }
+  ]
+}

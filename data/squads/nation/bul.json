@@ -1,0 +1,109 @@
+{
+  "id": "bul",
+  "kind": "nation",
+  "name": "Bulgaria",
+  "season": "2026",
+  "primaryColor": "#00966E",
+  "secondaryColor": "#D62612",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#00966E", "#D62612"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Bulgaria_national_football_team",
+  "members": [
+    {
+      "playerId": "daniel-naumov",
+      "no": 1
+    },
+    {
+      "playerId": "yoni-stoyanov",
+      "no": 2
+    },
+    {
+      "playerId": "andrea-hristov",
+      "no": 3
+    },
+    {
+      "playerId": "ilia-gruev",
+      "no": 4
+    },
+    {
+      "playerId": "kristian-dimitrov",
+      "no": 5
+    },
+    {
+      "playerId": "emil-tsenov",
+      "no": 6
+    },
+    {
+      "playerId": "borislav-tsonev",
+      "no": 7
+    },
+    {
+      "playerId": "andrian-kraev",
+      "no": 8
+    },
+    {
+      "playerId": "atanas-iliev",
+      "no": 9
+    },
+    {
+      "playerId": "zdravko-dimitrov",
+      "no": 10
+    },
+    {
+      "playerId": "georgi-rusev",
+      "no": 11
+    },
+    {
+      "playerId": "dimitar-mitov",
+      "no": 12
+    },
+    {
+      "playerId": "stefan-velkov",
+      "no": 13
+    },
+    {
+      "playerId": "asen-chandarov",
+      "no": 14
+    },
+    {
+      "playerId": "hristiyan-petrov",
+      "no": 15
+    },
+    {
+      "playerId": "petko-panayotov",
+      "no": 16
+    },
+    {
+      "playerId": "martin-minchev",
+      "no": 17
+    },
+    {
+      "playerId": "kristiyan-balov",
+      "no": 18
+    },
+    {
+      "playerId": "ivan-turitsov",
+      "no": 19
+    },
+    {
+      "playerId": "vladimir-nikolov",
+      "no": 20
+    },
+    {
+      "playerId": "stanislav-ivanov",
+      "no": 21
+    },
+    {
+      "playerId": "kristiyan-stoyanov",
+      "no": 22
+    },
+    {
+      "playerId": "aleks-bozhev",
+      "no": 23
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "id": "hkg",
+  "kind": "nation",
+  "name": "Hong Kong",
+  "season": "2026",
+  "primaryColor": "#EE1C25",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#EE1C25"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFFFFF"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Hong_Kong_national_football_team",
+  "members": [
+    {
+      "playerId": "pong-cheuk-hei",
+      "no": 1
+    },
+    {
+      "playerId": "tsui-wang-kit",
+      "no": 2
+    },
+    {
+      "playerId": "oliver-gerbig",
+      "no": 3
+    },
+    {
+      "playerId": "vas-nunez",
+      "no": 4
+    },
+    {
+      "playerId": "dudu",
+      "no": 5
+    },
+    {
+      "playerId": "tan-chun-lok",
+      "no": 6
+    },
+    {
+      "playerId": "juninho",
+      "no": 7
+    },
+    {
+      "playerId": "ngan-cheuk-pan",
+      "no": 8
+    },
+    {
+      "playerId": "matt-orr",
+      "no": 9
+    },
+    {
+      "playerId": "sohgo-ichikawa",
+      "no": 10
+    },
+    {
+      "playerId": "everton-camargo",
+      "no": 11
+    },
+    {
+      "playerId": "wu-chun-ming",
+      "no": 12
+    },
+    {
+      "playerId": "kam-chi-kin",
+      "no": 13
+    },
+    {
+      "playerId": "poon-pui-hin",
+      "no": 14
+    },
+    {
+      "playerId": "chan-yun-tung",
+      "no": 15
+    },
+    {
+      "playerId": "chan-siu-kwan",
+      "no": 16
+    },
+    {
+      "playerId": "callum-beattie",
+      "no": 17
+    },
+    {
+      "playerId": "tse-ka-wing",
+      "no": 18
+    },
+    {
+      "playerId": "yip-ka-yu",
+      "no": 19
+    },
+    {
+      "playerId": "ng-yu-hei",
+      "no": 20
+    },
+    {
+      "playerId": "yue-tze-nam",
+      "no": 21
+    },
+    {
+      "playerId": "raphael-merkies",
+      "no": 22
+    },
+    {
+      "playerId": "sun-ming-him",
+      "no": 23
+    }
+  ]
+}

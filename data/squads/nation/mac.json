@@ -1,0 +1,110 @@
+{
+  "id": "mac",
+  "kind": "nation",
+  "name": "Macau",
+  "season": "2026",
+  "primaryColor": "#0F7562",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#0F7562"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFFFFF"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Macau_national_football_team",
+  "members": [
+    {
+      "playerId": "ho-man-fai",
+      "no": 1
+    },
+    {
+      "playerId": "marcos-cheong",
+      "no": 2
+    },
+    {
+      "playerId": "amancio",
+      "no": 3
+    },
+    {
+      "playerId": "kam-chi-hou",
+      "no": 4
+    },
+    {
+      "playerId": "xiao-rongrui",
+      "no": 5
+    },
+    {
+      "playerId": "chan-man",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "ng-wa-keng",
+      "no": 8
+    },
+    {
+      "playerId": "si-hou-in",
+      "no": 9
+    },
+    {
+      "playerId": "dion-carlos-choi",
+      "no": 10
+    },
+    {
+      "playerId": "ieong-lek-hang",
+      "no": 11
+    },
+    {
+      "playerId": "gu-hoi-sou",
+      "no": 12
+    },
+    {
+      "playerId": "sou-hin-nang",
+      "no": 13
+    },
+    {
+      "playerId": "leung-chi-seng",
+      "no": 14
+    },
+    {
+      "playerId": "cheong-hoi-san",
+      "no": 15
+    },
+    {
+      "playerId": "lam-weng-kin",
+      "no": 16
+    },
+    {
+      "playerId": "lei-cheng-lam",
+      "no": 17
+    },
+    {
+      "playerId": "nuno-jeronimo",
+      "no": 18
+    },
+    {
+      "playerId": "ng-lai-teng",
+      "no": 19
+    },
+    {
+      "playerId": "fong-chi-hang",
+      "no": 20
+    },
+    {
+      "playerId": "pang-chi-hang",
+      "no": 21
+    },
+    {
+      "playerId": "lei-wa-si",
+      "no": 22
+    },
+    {
+      "playerId": "ho-chi-fong",
+      "no": 23
+    }
+  ]
+}

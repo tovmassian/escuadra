@@ -1,0 +1,127 @@
+{
+  "id": "jor",
+  "kind": "nation",
+  "name": "Jordan",
+  "season": "2026",
+  "primaryColor": "#CE1126",
+  "secondaryColor": "#007A3D",
+  "verified": true,
+  "marker": {
+    "bands": ["#CE1126", "#000000", "#FFFFFF", "#007A3D"],
+    "orientation": "vertical",
+    "weights": [1, 2, 2, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Jordan_national_football_team",
+  "members": [
+    {
+      "playerId": "yazeed-abulaila",
+      "no": 1
+    },
+    {
+      "playerId": "anas-badawi",
+      "no": 2
+    },
+    {
+      "playerId": "abdallah-nasib",
+      "no": 3
+    },
+    {
+      "playerId": "hadi-alhourani",
+      "no": 4
+    },
+    {
+      "playerId": "yazan-alarab",
+      "no": 5
+    },
+    {
+      "playerId": "amer-jamous",
+      "no": 6
+    },
+    {
+      "playerId": "mohammad-abu-zrayq",
+      "no": 7
+    },
+    {
+      "playerId": "noor-alrawabdeh",
+      "no": 8
+    },
+    {
+      "playerId": "ali-olwan",
+      "no": 9
+    },
+    {
+      "playerId": "musa-altaamari",
+      "no": 10
+    },
+    {
+      "playerId": "odeh-alfakhouri",
+      "no": 11
+    },
+    {
+      "playerId": "ahmad-aljuaidi",
+      "no": 12
+    },
+    {
+      "playerId": "mahmoud-almardi",
+      "no": 13,
+      "captain": true
+    },
+    {
+      "playerId": "ahmad-ersan",
+      "no": 14
+    },
+    {
+      "playerId": "ibrahim-sadeh",
+      "no": 15
+    },
+    {
+      "playerId": "mohammad-abualnadi",
+      "no": 16
+    },
+    {
+      "playerId": "ahmad-assaf",
+      "no": 17
+    },
+    {
+      "playerId": "tammer-bany-odeh",
+      "no": 18
+    },
+    {
+      "playerId": "saed-alrosan",
+      "no": 19
+    },
+    {
+      "playerId": "mohannad-abu-taha",
+      "no": 20
+    },
+    {
+      "playerId": "nizar-alrashdan",
+      "no": 21
+    },
+    {
+      "playerId": "abdallah-alfakhouri",
+      "no": 22
+    },
+    {
+      "playerId": "ihsan-haddad",
+      "no": 23
+    },
+    {
+      "playerId": "ali-azaizeh",
+      "no": 24
+    },
+    {
+      "playerId": "mahmoud-shawkat",
+      "no": 25
+    },
+    {
+      "playerId": "yousef-qashi",
+      "no": 26
+    },
+    {
+      "playerId": "anas-alawadat",
+      "no": 28
+    }
+  ]
+}

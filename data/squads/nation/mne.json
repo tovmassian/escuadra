@@ -1,0 +1,134 @@
+{
+  "id": "mne",
+  "kind": "nation",
+  "name": "Montenegro",
+  "season": "2026",
+  "primaryColor": "#E30000",
+  "secondaryColor": "#FFC000",
+  "verified": true,
+  "marker": {
+    "bands": ["#E30000"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFC000"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Montenegro_national_football_team",
+  "members": [
+    {
+      "playerId": "balsa-popovic",
+      "no": 1
+    },
+    {
+      "playerId": "milan-roganovic",
+      "no": 2
+    },
+    {
+      "playerId": "risto-radunovic",
+      "no": 3
+    },
+    {
+      "playerId": "andrej-duric",
+      "no": 4
+    },
+    {
+      "playerId": "igor-vujacic",
+      "no": 5
+    },
+    {
+      "playerId": "slobodan-rubezic",
+      "no": 6
+    },
+    {
+      "playerId": "marko-vesovic",
+      "no": 7
+    },
+    {
+      "playerId": "marko-jankovic",
+      "no": 8
+    },
+    {
+      "playerId": "nikola-krstovic",
+      "no": 9
+    },
+    {
+      "playerId": "stevan-jovetic",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "marko-simun",
+      "no": 11
+    },
+    {
+      "playerId": "danijel-petkovic",
+      "no": 12
+    },
+    {
+      "playerId": "igor-nikic",
+      "no": 13
+    },
+    {
+      "playerId": "jonathan-dresaj",
+      "no": 14
+    },
+    {
+      "playerId": "stefan-savic",
+      "no": 15
+    },
+    {
+      "playerId": "ognjen-gasevic",
+      "no": 16
+    },
+    {
+      "playerId": "vasilije-adzic",
+      "no": 17
+    },
+    {
+      "playerId": "danilo-vukanic",
+      "no": 18
+    },
+    {
+      "playerId": "viktor-dukanovic",
+      "no": 19
+    },
+    {
+      "playerId": "milutin-osmajic",
+      "no": 20
+    },
+    {
+      "playerId": "andrija-bulatovic",
+      "no": 21
+    },
+    {
+      "playerId": "stefan-loncar",
+      "no": 22
+    },
+    {
+      "playerId": "dusan-vukovic",
+      "no": 23
+    },
+    {
+      "playerId": "aleksa-latkovic",
+      "no": null
+    },
+    {
+      "playerId": "bodin-tomasevic",
+      "no": null
+    },
+    {
+      "playerId": "marko-perovic",
+      "no": null
+    },
+    {
+      "playerId": "milos-brnovic",
+      "no": null
+    },
+    {
+      "playerId": "stefan-milic",
+      "no": null
+    }
+  ]
+}

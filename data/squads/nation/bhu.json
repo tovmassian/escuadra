@@ -1,0 +1,111 @@
+{
+  "id": "bhu",
+  "kind": "nation",
+  "name": "Bhutan",
+  "season": "2026",
+  "primaryColor": "#FFCD00",
+  "secondaryColor": "#FF671F",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFCD00", "#FFFFFF", "#FF671F"],
+    "orientation": "vertical",
+    "weights": [2, 1, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Bhutan_national_football_team",
+  "members": [
+    {
+      "playerId": "dendup-namgyel",
+      "no": 1
+    },
+    {
+      "playerId": "yeshi-gyeltshen",
+      "no": 2
+    },
+    {
+      "playerId": "sherub-dorji",
+      "no": 3
+    },
+    {
+      "playerId": "tenzin-norbu",
+      "no": 4
+    },
+    {
+      "playerId": "karma-chetrim",
+      "no": 5
+    },
+    {
+      "playerId": "jignam-seltob-dorji",
+      "no": 6
+    },
+    {
+      "playerId": "rinzin-dorji",
+      "no": 7
+    },
+    {
+      "playerId": "phurba-tenzin",
+      "no": 8
+    },
+    {
+      "playerId": "tenzin-dorji-2",
+      "no": 9
+    },
+    {
+      "playerId": "orgyen-tshering",
+      "no": 10
+    },
+    {
+      "playerId": "kinga-wangchuk",
+      "no": 11
+    },
+    {
+      "playerId": "pema-zangpo",
+      "no": 12
+    },
+    {
+      "playerId": "jigdrel-wangchuk",
+      "no": 13
+    },
+    {
+      "playerId": "kezang-dorji",
+      "no": 14
+    },
+    {
+      "playerId": "nima-wangdi",
+      "no": 15,
+      "captain": true
+    },
+    {
+      "playerId": "tshelthrim-namgyel",
+      "no": 16
+    },
+    {
+      "playerId": "kelzang-jigme",
+      "no": 17
+    },
+    {
+      "playerId": "kinzang-tashi-tobden",
+      "no": 18
+    },
+    {
+      "playerId": "nima-gyeltshen",
+      "no": 19
+    },
+    {
+      "playerId": "kinzang-tenzin",
+      "no": 20
+    },
+    {
+      "playerId": "tobgay",
+      "no": 21
+    },
+    {
+      "playerId": "tenzin-dorji",
+      "no": 22
+    },
+    {
+      "playerId": "bikash-pradhan",
+      "no": 23
+    }
+  ]
+}

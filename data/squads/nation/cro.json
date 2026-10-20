@@ -1,0 +1,126 @@
+{
+  "id": "cro",
+  "kind": "nation",
+  "name": "Croatia",
+  "season": "2026",
+  "primaryColor": "#FF0000",
+  "secondaryColor": "#171796",
+  "verified": true,
+  "marker": {
+    "bands": ["#FF0000", "#FFFFFF", "#171796"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Croatia_national_football_team",
+  "members": [
+    {
+      "playerId": "dominik-livakovic",
+      "no": 1
+    },
+    {
+      "playerId": "josip-stanisic",
+      "no": 2
+    },
+    {
+      "playerId": "marin-pongracic",
+      "no": 3
+    },
+    {
+      "playerId": "josko-gvardiol",
+      "no": 4
+    },
+    {
+      "playerId": "luka-vuskovic",
+      "no": 5
+    },
+    {
+      "playerId": "josip-sutalo",
+      "no": 6
+    },
+    {
+      "playerId": "dion-drena-beljo",
+      "no": 7
+    },
+    {
+      "playerId": "mateo-kovacic",
+      "no": 8
+    },
+    {
+      "playerId": "andrej-kramaric",
+      "no": 9
+    },
+    {
+      "playerId": "luka-modric",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "budimir",
+      "no": 11
+    },
+    {
+      "playerId": "ivor-pandur",
+      "no": 12
+    },
+    {
+      "playerId": "nikola-vlasic",
+      "no": 13
+    },
+    {
+      "playerId": "ivan-perisic",
+      "no": 14
+    },
+    {
+      "playerId": "mario-pasalic",
+      "no": 15
+    },
+    {
+      "playerId": "martin-baturina",
+      "no": 16
+    },
+    {
+      "playerId": "sucic",
+      "no": 17
+    },
+    {
+      "playerId": "kristijan-jakic",
+      "no": 18
+    },
+    {
+      "playerId": "marco-pasalic",
+      "no": 19
+    },
+    {
+      "playerId": "igor-matanovic",
+      "no": 20
+    },
+    {
+      "playerId": "l-sucic",
+      "no": 21
+    },
+    {
+      "playerId": "josip-misic",
+      "no": 22
+    },
+    {
+      "playerId": "dominik-kotarski",
+      "no": 23
+    },
+    {
+      "playerId": "franjo-ivanovic",
+      "no": null
+    },
+    {
+      "playerId": "ivan-smolcic",
+      "no": null
+    },
+    {
+      "playerId": "lovro-majer",
+      "no": null
+    },
+    {
+      "playerId": "petar-musa",
+      "no": null
+    }
+  ]
+}
