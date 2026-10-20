@@ -124,4 +124,13 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
       'picker.nationalTeams': (m) => m.picker.nationalTeams,
     },
   },
+  { budget: 16, texts: { 'about.licences.label': (m) => m.about.licences.label } },
+  {
+    budget: 24,
+    texts: {
+      'about.licences.countryNames': (m) => m.about.licences.countryNames,
+      'about.licences.fonts': (m) => m.about.licences.fonts,
+      'about.licences.software': (m) => m.about.licences.software,
+    },
+  },
 ];

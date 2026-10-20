@@ -17,8 +17,9 @@
     "test": "vitest run",
     "gen:squads": "node scripts/gen-squads.ts",
     "gen:flags": "node scripts/gen-flags.ts",
+    "gen:licences": "node scripts/gen-licences.ts",
     "squadctl": "node tools/squadctl/bin/dev.js",
-    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run squadctl -- registry check && npm run gen:squads && npm run gen:flags && git diff --exit-code -- lib/squads.generated.ts data/index.json assets/flags/generated.ts",
+    "check": "npm run typecheck && npm run lint && npm run format:check && npm run test && npm run squadctl -- registry check && npm run gen:squads && npm run gen:flags && npm run gen:licences && git diff --exit-code -- lib/squads.generated.ts data/index.json assets/flags/generated.ts lib/licences.generated.ts",
     "prepare": "husky",
     "format:check": "prettier --check ."
   },

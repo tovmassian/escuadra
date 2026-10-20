@@ -32,6 +32,8 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'about.version',
     // "Vibration" is the German word, and the setting's name on iOS and Android.
     'about.vibration',
+    // "Software" is the German word too.
+    'about.licences.software',
   ],
   fr: [
     // Club is the French word too, and CLUB its chip code.
@@ -45,6 +47,8 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'picker.clubs',
     // "Version {1}": French writes it the same.
     'about.version',
+    // "Licences" is the French word too.
+    'about.licences.label',
   ],
   es: [
     // Club is the Spanish word too, and CLUB its chip code.
@@ -54,6 +58,8 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'slotCodes.POS',
     // "{1}: {2}" has no words.
     'round.slotSpoken.given',
+    // "Software" is the word Spanish uses.
+    'about.licences.software',
   ],
   it: [
     // Club is the Italian word too, and CLUB its chip code.
@@ -67,6 +73,8 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'about.privacy.heading',
     // "Home", as the picker says: what Italian websites call the home page.
     'about.site.nav.home',
+    // "Software" is the word Italian uses.
+    'about.licences.software',
   ],
 };
 
@@ -82,7 +90,7 @@ it('pins the English About the translations were made from', () => {
     .filter((leaf) => leaf.path.startsWith('about.'))
     .map((leaf) => `${leaf.path}\t${leaf.text}`)
     .join('\n');
-  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('00f86a7d5df60222');
+  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('7bc46f8b3b4c8b41');
 });
 
 describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {

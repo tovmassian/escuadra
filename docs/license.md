@@ -1,7 +1,7 @@
 # Licences
 
-What every image and font Escuadra ships is licensed under, which licences the
-player photos may carry and why the others are refused, and how the rule is
+What every image, font and bundled package Escuadra ships is licensed under, which
+licences the player photos may carry and why the others are refused, and how the rule is
 enforced. Read this before you add an asset, accept a new licence, or touch the
 photo credit. It is a working guide for this project, not legal advice: when
 something here does not settle a question, stop and ask the owner — asset
@@ -73,23 +73,26 @@ you changed the work.
 
 ## What Escuadra ships
 
-| asset                          | licence                                                                   | source of truth                                                                              |
-| ------------------------------ | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Squad data                     | Wikipedia CC BY-SA; Wikidata CC0                                          | `data/squads/`, `tools/squadctl/`                                                            |
-| Player photos                  | per photo — see the next section                                          | `player.photo` in `data/players.json`                                                        |
-| National flags                 | public domain (flagpedia.net)                                             | `assets/flags/README.md`                                                                     |
-| Country names (es, fr, it, de) | Unicode License v3 (Unicode CLDR) for most; the rest written for Escuadra | `i18n/countries.ts`, `scripts/seed-country-names.ts`; the notice: `i18n/UNICODE-LICENSE.txt` |
-| Inter, IBM Plex Mono           | SIL Open Font License 1.1                                                 | `@expo-google-fonts/*` in `package.json`                                                     |
-| Archivo (three static cuts)    | SIL Open Font License 1.1                                                 | `assets/fonts/archivo/README.md`                                                             |
-| App Store / Google Play badges | Apple's and Google's artwork, under their rules                           | `CLAUDE.md`, guardrail 2                                                                     |
-| Club crests, badges, logos     | **never** — trademarks, whatever their licence                            | `CLAUDE.md`, guardrail 2                                                                     |
+| asset                           | licence                                                                   | source of truth                                                                              |
+| ------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Squad data                      | Wikipedia CC BY-SA; Wikidata CC0                                          | `data/squads/`, `tools/squadctl/`                                                            |
+| Player photos                   | per photo — see the next section                                          | `player.photo` in `data/players.json`                                                        |
+| National flags                  | public domain (flagpedia.net)                                             | `assets/flags/README.md`                                                                     |
+| Country names (es, fr, it, de)  | Unicode License v3 (Unicode CLDR) for most; the rest written for Escuadra | `i18n/countries.ts`, `scripts/seed-country-names.ts`; the notice: `i18n/UNICODE-LICENSE.txt` |
+| Inter, IBM Plex Mono            | SIL Open Font License 1.1                                                 | `@expo-google-fonts/*` in `package.json`                                                     |
+| Archivo (three static cuts)     | SIL Open Font License 1.1                                                 | `assets/fonts/archivo/README.md`                                                             |
+| Material Symbols (Android only) | Apache License 2.0                                                        | `@expo-google-fonts/material-symbols`, through `expo-router` → `expo-symbols`                |
+| Bundled JavaScript packages     | each package's own: MIT, ISC, MIT AND OFL-1.1, MIT AND Apache-2.0         | `lib/licences.generated.ts`, `scripts/gen-licences.ts`                                       |
+| Native libraries                | not yet listed (#160)                                                     | podspecs and `build.gradle` files in `node_modules`                                          |
+| App Store / Google Play badges  | Apple's and Google's artwork, under their rules                           | `CLAUDE.md`, guardrail 2                                                                     |
+| Club crests, badges, logos      | **never** — trademarks, whatever their licence                            | `CLAUDE.md`, guardrail 2                                                                     |
 
 The Unicode License asks that its copyright and permission notice appear with
 all copies of the data, or in the documentation that comes with it. In the
 repository it does: `i18n/UNICODE-LICENSE.txt` sits next to the country names
-in `i18n/countries.ts`. The app bundle does not carry it yet; #156 tracks an
-in-app licences sheet that will show it. 2.0.0 is the first build to ship these
-names, so it does not ship without #156.
+in `i18n/countries.ts`. In the app it does too: About → Licences shows the notice
+verbatim, read from that same file by `scripts/gen-licences.ts`, so the repo and the
+app cannot carry different texts.
 
 The flag set replaced an earlier set nobody could name a source for; a flag
 whose licence you cannot state is a release blocker. The OFL lets the app
@@ -112,6 +115,39 @@ their owners and imply no endorsement. This was decided by the owner on
 Squad data — names, numbers, positions, dates — is facts, not images. squadctl
 takes the facts from Wikipedia and Wikidata (Wikidata is CC0), not article
 text.
+
+### Software licences
+
+The JavaScript packages Metro bundles into the app ask, under MIT, ISC and the rest, that
+their copyright and permission notice travel with every copy. About → Licences shows each
+one's name, version, licence and copyright, with its full licence texts a tap away, and
+names the fonts, whose notice is inside each font file.
+
+The list is generated, never written: `npm run gen:licences` (`scripts/gen-licences.ts`)
+exports the iOS and Android bundles with source maps and lists every package their sources
+name, so it holds what ships and nothing the build only uses. `npm run check` regenerates
+it and fails when `lib/licences.generated.ts` changes. The list works at package level:
+a notice inside one bundled file of a package (a header comment from code it copied) is
+not listed separately, and `scripts/licence-sources.json` carries a package's extra
+notices where its repository names them, as for expo-router and React Navigation. When
+the check fails:
+
+- **A version or a text changed** (a dependency bump): run `npm run gen:licences` and
+  commit the file.
+- **A licence is not on the allowlist** (`ALLOWED_LICENCES` in `scripts/licences.ts`): a
+  new licence is the owner's decision, made the way "Changing the list" describes for
+  photos. Never widen it to make the check pass.
+- **A package ships no licence file:** find the licence in its repository and add it to
+  `scripts/licence-sources.json`. An entry gives a `reason` and its `sources`, in order,
+  each either `from` a package published from the same repository or a `file` copied
+  verbatim into `scripts/licence-texts/`, with its `url`.
+- **A licence file has no copyright line:** read it, and source the package's licence as
+  above.
+- **A sources entry is dead** (its package left the bundle or now ships its own licence
+  file): remove it.
+
+Native libraries that the iOS and Android builds link (SDWebImage, Folly, Glide and
+others) are not in the JavaScript bundle and are not listed yet: #160.
 
 ## Player photos: the licences we accept
 
@@ -230,7 +266,9 @@ results' "photo credits" list). Its Privacy section says what photo loading
 sends to Wikimedia, that photos are cached on the device, and that a credit link
 opens a third-party site. Change a licence, a source or a credit surface here
 and the About text in the same PR, and the privacy pages with it, in all five
-languages (`CLAUDE.md`, guardrail 4).
+languages (`CLAUDE.md`, guardrail 4). About → Licences, at the end of the credits,
+shows the licence notices: the Unicode notice, the fonts by name and every bundled
+package (see Software licences above).
 
 ## Changing the list
 

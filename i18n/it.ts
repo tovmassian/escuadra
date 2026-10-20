@@ -296,6 +296,13 @@ export const it: Messages = {
         },
       ],
     },
+    licences: {
+      label: 'Licenze',
+      originalLanguage: 'I testi delle licenze sono riportati così come sono, in inglese.',
+      countryNames: 'Nomi dei paesi',
+      fonts: 'Font',
+      software: 'Software',
+    },
     // "Vibrazione", the setting's name on iOS and Android in Italian.
     vibration: 'Vibrazione',
     usageStatistics: USAGE_STATISTICS,

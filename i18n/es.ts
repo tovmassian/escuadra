@@ -300,6 +300,13 @@ export const es: Messages = {
         },
       ],
     },
+    licences: {
+      label: 'Licencias',
+      originalLanguage: 'Los textos de las licencias se muestran tal cual, en inglés.',
+      countryNames: 'Nombres de países',
+      fonts: 'Tipografías',
+      software: 'Software',
+    },
     // "Vibración", the setting's name on iOS and Android in Spanish.
     vibration: 'Vibración',
     usageStatistics: USAGE_STATISTICS,

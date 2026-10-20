@@ -1,9 +1,10 @@
 import { router } from 'expo-router';
 import Constants from 'expo-constants';
 import * as Updates from 'expo-updates';
-import { Fragment } from 'react';
+import { Fragment, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { LicencesSheet } from '@/components/LicencesSheet';
 import { translationNotice } from '@/i18n/translationNotice';
 import { useLanguage, useT } from '@/i18n/useT';
 import { versionLabel } from '@/lib/aboutView';
@@ -19,6 +20,7 @@ export default function About() {
   const last = (i: number, list: readonly unknown[]) => i === list.length - 1;
   const telemetryEnabled = useProgress((s) => s.telemetryEnabled);
   const setTelemetryEnabled = useProgress((s) => s.setTelemetryEnabled);
+  const [licencesOpen, setLicencesOpen] = useState(false);
   const haptics = useProgress((s) => s.haptics);
   const setHaptics = useProgress((s) => s.setHaptics);
 
@@ -95,23 +97,24 @@ export default function About() {
 
         <View style={styles.section}>
           <Text style={styles.sectionHeading}>{t.about.credits.heading}</Text>
-          {t.about.credits.sections.map((section, s, sections) => (
+          {t.about.credits.sections.map((section) => (
             <Fragment key={section.heading}>
               <Text style={styles.subHeading}>{section.heading}</Text>
-              {section.paragraphs.map((p, i, all) => (
-                <Text
-                  key={i}
-                  style={[
-                    styles.paragraph,
-                    // Only the card's last paragraph drops its bottom margin.
-                    last(s, sections) && last(i, all) && { marginBottom: 0 },
-                  ]}
-                >
+              {section.paragraphs.map((p, i) => (
+                <Text key={i} style={styles.paragraph}>
                   {p}
                 </Text>
               ))}
             </Fragment>
           ))}
+          <Pressable
+            testID="about-licences"
+            onPress={() => setLicencesOpen(true)}
+            accessibilityRole="button"
+            hitSlop={8}
+          >
+            <Text style={[styles.subHeading, { marginBottom: 0 }]}>{t.about.licences.label} ›</Text>
+          </Pressable>
         </View>
 
         <View style={[styles.section, styles.settingRow]}>
@@ -192,6 +195,7 @@ export default function About() {
           )}
         </Text>
       </ScrollView>
+      <LicencesSheet visible={licencesOpen} onClose={() => setLicencesOpen(false)} />
     </View>
   );
 }

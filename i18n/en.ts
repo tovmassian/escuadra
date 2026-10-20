@@ -341,6 +341,17 @@ export const en = {
         },
       ],
     },
+    /** About → Licences: the sheet of licence notices. The notices stay in English. */
+    licences: {
+      /** ≤ 16 chars: the row at the end of the credits, and the sheet's title. */
+      label: 'Licences',
+      /** Above the notices, which are never translated. */
+      originalLanguage: 'Licence texts are shown as written, in English.',
+      /** ≤ 24 chars: a section of the sheet, in small capitals. */
+      countryNames: 'Country names',
+      fonts: 'Fonts',
+      software: 'Software',
+    },
     /** The setting row's label and the switch's spoken name. */
     vibration: 'Vibration',
     usageStatistics: USAGE_STATISTICS,
