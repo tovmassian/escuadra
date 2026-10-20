@@ -16,6 +16,20 @@ import { A_LA_ESCUADRA, ESCUADRA } from './names';
 
 // Three letters each: "sep", as Latin America writes it, not Spain's CLDR "sept".
 const MONTHS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const MONTHS_LONG = [
+  'enero',
+  'febrero',
+  'marzo',
+  'abril',
+  'mayo',
+  'junio',
+  'julio',
+  'agosto',
+  'septiembre',
+  'octubre',
+  'noviembre',
+  'diciembre',
+];
 
 const PHOTO_CREDITS = 'Créditos de las fotos';
 // Feminine: it is the photo that is cropped.
@@ -50,6 +64,9 @@ export const es: Messages = {
   formats: {
     /** "21 ago 2026". */
     date: ({ day, month, year }: CalendarDate) => `${day} ${MONTHS[month - 1] ?? ''} ${year}`,
+    /** "21 de agosto de 2026". */
+    longDate: ({ day, month, year }: CalendarDate) =>
+      `${day} de ${MONTHS_LONG[month - 1] ?? ''} de ${year}`,
   },
   // POR portero, DEF defensa, MED medio, DEL delantero.
   positionCodes: { GK: 'POR', DF: 'DEF', MF: 'MED', FW: 'DEL' },
@@ -310,14 +327,14 @@ export const es: Messages = {
         {
           heading: 'Estadísticas de uso anónimas',
           paragraphs: [
-            `${ESCUADRA} envía estadísticas de uso anónimas a TelemetryDeck, un servicio de analítica, salvo que desactives “${USAGE_STATISTICS}” en la pantalla “Info” de la aplicación. Cada una lleva un identificador aleatorio en forma de hash, creado para estas estadísticas (distinto del que usa la comprobación de actualizaciones de la aplicación), y un código de sesión aleatorio, nuevo cada vez que se inicia la aplicación. Como cualquier servicio en línea, TelemetryDeck también recibe la dirección IP de tu dispositivo con cada estadística, y lo que TelemetryDeck recibe se rige por su propia política de privacidad. El identificador de las estadísticas y el código de sesión son aleatorios, no se derivan de tu dispositivo y no están vinculados a ti ni a tus cuentas. Ni ${ESCUADRA} ni el desarrollador los comparten con nadie más, ni tampoco las estadísticas.`,
+            `${ESCUADRA} envía estadísticas de uso anónimas a TelemetryDeck, un servicio de analítica, salvo que desactives “${USAGE_STATISTICS}” en la pantalla “Info” de la aplicación. Cada una lleva un identificador aleatorio en forma de hash, creado para estas estadísticas (distinto del que usa la comprobación de actualizaciones de la aplicación), y un código de sesión aleatorio, nuevo cada vez que se inicia la aplicación. Como cualquier servicio en línea, TelemetryDeck también recibe la dirección IP de tu dispositivo y los detalles técnicos habituales de cada solicitud, que en iOS incluyen el número de compilación de la aplicación y la versión del sistema de tu dispositivo. Lo que TelemetryDeck recibe se rige por su propia política de privacidad. El identificador de las estadísticas y el código de sesión son aleatorios, no se derivan de tu dispositivo y no están vinculados a ti ni a tus cuentas. Ni ${ESCUADRA} ni el desarrollador los comparten con nadie más, ni tampoco las estadísticas.`,
             `Estas son las estadísticas: se abrió la aplicación, con su idioma y la indicación de si este sigue el idioma de tu teléfono o se eligió en la aplicación; empezó una ronda, con el tipo de equipo (club o selección) y el nivel de dificultad; terminó una ronda, con esos mismos dos datos, la puntuación y la indicación de si fue ${A_LA_ESCUADRA}; se abrió la pantalla “Plantilla”, con el tipo de equipo (club o selección); y se pasó un resultado al menú para compartir de tu teléfono, con el nivel, la puntuación y el formato (imagen o texto). Las estadísticas nunca incluyen nombres de equipos ni de jugadores, ni tus respuestas, ni nada de lo que escribas.`,
           ],
         },
         {
           heading: 'Actualizaciones de la aplicación',
           paragraphs: [
-            `Cuando ${ESCUADRA} se inicia, comprueba si hay una versión más reciente de la aplicación disponible en Expo, el servicio que distribuye sus actualizaciones. La comprobación envía lo necesario para entregar la actualización correcta: el sistema operativo de tu dispositivo, la versión y el proyecto de la aplicación, y un identificador aleatorio creado para esta instalación. Si la aplicación sufrió un fallo o no pudo cargar una actualización la última vez que se inició, la comprobación también envía a Expo el mensaje de error técnico correspondiente. Como cualquier servicio en línea, Expo recibe además la dirección IP de tu dispositivo con cada comprobación. El identificador no está vinculado a ti ni a nada de lo que haces en la aplicación. Si no hay conexión, la aplicación omite la comprobación y funciona con normalidad.`,
+            `Cuando ${ESCUADRA} se inicia, comprueba si hay una versión más reciente de la aplicación disponible en Expo, el servicio que distribuye sus actualizaciones. La comprobación envía lo necesario para entregar la actualización correcta: el sistema operativo de tu dispositivo, la versión y el proyecto de la aplicación, y un identificador aleatorio creado para esta instalación. ${ESCUADRA} no vincula el identificador a ti ni a nada de lo que haces en la aplicación. Si la aplicación sufrió un fallo o no pudo cargar una actualización al iniciarse, la siguiente comprobación también envía a Expo el mensaje de error técnico correspondiente. Como cualquier servicio en línea, Expo recibe además la dirección IP de tu dispositivo con cada comprobación. Si no hay conexión, la aplicación omite la comprobación y funciona con normalidad.`,
           ],
         },
         {

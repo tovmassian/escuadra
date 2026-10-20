@@ -28,6 +28,20 @@ const MONTHS = [
   'nov.',
   'déc.',
 ];
+const MONTHS_LONG = [
+  'janvier',
+  'février',
+  'mars',
+  'avril',
+  'mai',
+  'juin',
+  'juillet',
+  'août',
+  'septembre',
+  'octobre',
+  'novembre',
+  'décembre',
+];
 
 const PHOTO_CREDITS = 'Crédits photo';
 // Feminine: it is the photo that is cropped.
@@ -61,6 +75,9 @@ export const fr: Messages = {
     /** "21 août 2026", and "1er août 2026" on the first of the month. */
     date: ({ day, month, year }: CalendarDate) =>
       `${day === 1 ? '1er' : day} ${MONTHS[month - 1] ?? ''} ${year}`,
+    /** "21 octobre 2026", and "1er octobre 2026" on the first of the month. */
+    longDate: ({ day, month, year }: CalendarDate) =>
+      `${day === 1 ? '1er' : day} ${MONTHS_LONG[month - 1] ?? ''} ${year}`,
   },
   // GB gardien de but, DÉF défenseur, MIL milieu, ATT attaquant.
   positionCodes: { GK: 'GB', DF: 'DÉF', MF: 'MIL', FW: 'ATT' },
@@ -309,14 +326,14 @@ export const fr: Messages = {
         {
           heading: 'Statistiques d’utilisation anonymes',
           paragraphs: [
-            `${ESCUADRA} envoie des statistiques d’utilisation anonymes à TelemetryDeck, un service de mesure d’audience, sauf si tu désactives « ${USAGE_STATISTICS} » sur l’écran « À propos » de l’application. Chacune contient une forme hachée d’un identifiant aléatoire créé pour ces statistiques (distinct de celui qu’utilise la vérification des mises à jour de l’application) et un code de session aléatoire, renouvelé à chaque démarrage de l’application. Comme tout service en ligne, TelemetryDeck reçoit aussi l’adresse IP de ton appareil avec chaque statistique, et ce que TelemetryDeck reçoit est soumis à sa propre politique de confidentialité. L’identifiant des statistiques et le code de session sont aléatoires, ne sont pas dérivés de ton appareil et ne sont liés ni à toi ni à tes comptes. Ni ${ESCUADRA} ni le développeur ne partagent l’identifiant, le code de session ou les statistiques avec qui que ce soit d’autre.`,
+            `${ESCUADRA} envoie des statistiques d’utilisation anonymes à TelemetryDeck, un service de mesure d’audience, sauf si tu désactives « ${USAGE_STATISTICS} » sur l’écran « À propos » de l’application. Chacune contient une forme hachée d’un identifiant aléatoire créé pour ces statistiques (distinct de celui qu’utilise la vérification des mises à jour de l’application) et un code de session aléatoire, renouvelé à chaque démarrage de l’application. Comme tout service en ligne, TelemetryDeck reçoit aussi l’adresse IP de ton appareil et les détails techniques habituels de chaque requête, qui, sous iOS, comprennent le numéro de build de l’application et la version du système de ton appareil. Ce que TelemetryDeck reçoit est soumis à sa propre politique de confidentialité. L’identifiant des statistiques et le code de session sont aléatoires, ne sont pas dérivés de ton appareil et ne sont liés ni à toi ni à tes comptes. Ni ${ESCUADRA} ni le développeur ne partagent l’identifiant, le code de session ou les statistiques avec qui que ce soit d’autre.`,
             `Ces statistiques sont les suivantes : l’application a été ouverte, avec sa langue et l’indication que cette langue suit celle de ton téléphone ou a été choisie dans l’application ; une partie a commencé, avec le type d’équipe (club ou sélection) et le niveau de difficulté ; une partie s’est terminée, avec ces deux mêmes informations, le score et l’indication qu’elle a été ou non ${A_LA_ESCUADRA} ; l’écran Effectif a été ouvert, avec le type d’équipe (club ou sélection) ; et un résultat a été transmis au menu de partage de ton téléphone, avec le niveau, le score et le format (image ou texte). Elles ne contiennent jamais de noms d’équipes ni de joueurs, ni tes réponses, ni rien de ce que tu saisis.`,
           ],
         },
         {
           heading: 'Mises à jour de l’application',
           paragraphs: [
-            `Quand ${ESCUADRA} démarre, elle vérifie si une version plus récente de l’application est disponible auprès d’Expo, le service qui distribue ses mises à jour. Cette vérification envoie ce qui est nécessaire pour fournir la bonne mise à jour : le système d’exploitation de ton appareil, la version et le projet de l’application, et un identifiant aléatoire créé pour cette installation. Si l’application a planté ou n’a pas pu charger une mise à jour lors de son dernier démarrage, la vérification envoie aussi à Expo le message d’erreur technique lié à cet échec. Comme tout service en ligne, Expo reçoit également l’adresse IP de ton appareil à chaque vérification. Cet identifiant n’est lié ni à toi, ni à rien de ce que tu fais dans l’application. Sans connexion, l’application se passe de cette vérification et fonctionne normalement.`,
+            `Quand ${ESCUADRA} démarre, elle vérifie si une version plus récente de l’application est disponible auprès d’Expo, le service qui distribue ses mises à jour. Cette vérification envoie ce qui est nécessaire pour fournir la bonne mise à jour : le système d’exploitation de ton appareil, la version et le projet de l’application, et un identifiant aléatoire créé pour cette installation. ${ESCUADRA} n’associe cet identifiant ni à toi ni à rien de ce que tu fais dans l’application. Si l’application a planté ou n’a pas pu charger une mise à jour au démarrage, la vérification suivante envoie aussi à Expo le message d’erreur technique lié à cet échec. Comme tout service en ligne, Expo reçoit également l’adresse IP de ton appareil à chaque vérification. Sans connexion, l’application se passe de cette vérification et fonctionne normalement.`,
           ],
         },
         {

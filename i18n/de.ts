@@ -20,6 +20,20 @@ const MONTHS = [
   'Nov.',
   'Dez.',
 ];
+const MONTHS_LONG = [
+  'Januar',
+  'Februar',
+  'März',
+  'April',
+  'Mai',
+  'Juni',
+  'Juli',
+  'August',
+  'September',
+  'Oktober',
+  'November',
+  'Dezember',
+];
 
 const PHOTO_CREDITS = 'Bildnachweise';
 const CROPPED = 'zugeschnitten';
@@ -51,6 +65,9 @@ export const de: Messages = {
   formats: {
     /** "21. Aug. 2026". */
     date: ({ day, month, year }: CalendarDate) => `${day}. ${MONTHS[month - 1] ?? ''} ${year}`,
+    /** "21. August 2026". */
+    longDate: ({ day, month, year }: CalendarDate) =>
+      `${day}. ${MONTHS_LONG[month - 1] ?? ''} ${year}`,
   },
   // TW Torwart, ABW Abwehr ("Abw." in squad lists; a bare "AB" reads as the
   // word "ab"), MF Mittelfeld, ST Sturm.
@@ -278,14 +295,14 @@ export const de: Messages = {
         {
           heading: 'Anonyme Nutzungsstatistiken',
           paragraphs: [
-            `${ESCUADRA} sendet anonyme Nutzungsstatistiken an TelemetryDeck, einen Analysedienst, es sei denn, du schaltest „${USAGE_STATISTICS}“ in der App unter „Info“ aus. Jede davon enthält eine gehashte Form einer zufälligen Kennung, die für diese Statistiken erstellt wurde (getrennt von der Kennung, die die Update-Prüfung der App verwendet), und einen zufälligen Sitzungscode, der bei jedem Start der App neu erstellt wird. Wie jeder Onlinedienst erhält TelemetryDeck mit jeder Statistik außerdem die IP-Adresse deines Geräts, und für das, was TelemetryDeck erhält, gilt die Datenschutzerklärung von TelemetryDeck. Die Kennung der Statistiken und der Sitzungscode sind zufällig, nicht von deinem Gerät abgeleitet und weder mit dir noch mit deinen Konten verknüpft. Weder ${ESCUADRA} noch der Entwickler gibt sie oder die Statistiken an Dritte weiter.`,
+            `${ESCUADRA} sendet anonyme Nutzungsstatistiken an TelemetryDeck, einen Analysedienst, es sei denn, du schaltest „${USAGE_STATISTICS}“ in der App unter „Info“ aus. Jede davon enthält eine gehashte Form einer zufälligen Kennung, die für diese Statistiken erstellt wurde (getrennt von der Kennung, die die Update-Prüfung der App verwendet), und einen zufälligen Sitzungscode, der bei jedem Start der App neu erstellt wird. Wie jeder Onlinedienst erhält TelemetryDeck außerdem die IP-Adresse deines Geräts und die üblichen technischen Details jeder Anfrage, zu denen unter iOS die Build-Nummer der App und die Systemversion deines Geräts gehören. Für das, was TelemetryDeck erhält, gilt die Datenschutzerklärung von TelemetryDeck. Die Kennung der Statistiken und der Sitzungscode sind zufällig, nicht von deinem Gerät abgeleitet und weder mit dir noch mit deinen Konten verknüpft. Weder ${ESCUADRA} noch der Entwickler gibt sie oder die Statistiken an Dritte weiter.`,
             `Gesendet werden diese Statistiken: die App wurde geöffnet, mit ihrer Sprache und der Angabe, ob diese der Sprache deines Smartphones folgt oder in der App gewählt wurde; eine Runde wurde gestartet, mit der Angabe, ob das Team ein Verein oder ein Nationalteam ist, und dem Level; eine Runde wurde beendet, mit denselben beiden Angaben, der Punktzahl und der Angabe, ob sie ${A_LA_ESCUADRA} war; die Kaderansicht wurde geöffnet, mit der Angabe, ob das Team ein Verein oder ein Nationalteam ist; und ein Ergebnis wurde an das Teilen-Menü deines Smartphones übergeben, mit dem Level, der Punktzahl und der Angabe, ob es als Bild oder als Text übergeben wurde. Sie enthalten nie Teamnamen, Spielernamen, deine Antworten oder etwas, das du eingibst.`,
           ],
         },
         {
           heading: 'App-Updates',
           paragraphs: [
-            `Wenn ${ESCUADRA} startet, prüft die App, ob bei Expo, dem Dienst, der ihre Updates ausliefert, eine neuere Version verfügbar ist. Die Prüfung sendet das, was nötig ist, um das richtige Update auszuliefern: das Betriebssystem deines Geräts, die Version und das Projekt der App sowie eine zufällige Kennung, die für diese Installation erstellt wurde. Wenn die App beim letzten Start abgestürzt ist oder ein Update nicht laden konnte, sendet die Prüfung außerdem die zugehörige technische Fehlermeldung an Expo. Wie jeder Onlinedienst erhält Expo bei jeder Prüfung auch die IP-Adresse deines Geräts. Die Kennung ist weder mit dir noch mit irgendetwas verknüpft, das du in der App tust. Ohne Verbindung überspringt die App die Prüfung und funktioniert wie gewohnt.`,
+            `Wenn ${ESCUADRA} startet, prüft die App, ob bei Expo, dem Dienst, der ihre Updates ausliefert, eine neuere Version verfügbar ist. Die Prüfung sendet das, was nötig ist, um das richtige Update auszuliefern: das Betriebssystem deines Geräts, die Version und das Projekt der App sowie eine zufällige Kennung, die für diese Installation erstellt wurde. ${ESCUADRA} verknüpft die Kennung weder mit dir noch mit irgendetwas, das du in der App tust. Wenn die App beim Starten abgestürzt ist oder dabei ein Update nicht laden konnte, sendet die nächste Prüfung außerdem die zugehörige technische Fehlermeldung an Expo. Wie jeder Onlinedienst erhält Expo bei jeder Prüfung auch die IP-Adresse deines Geräts. Ohne Verbindung überspringt die App die Prüfung und funktioniert wie gewohnt.`,
           ],
         },
         {

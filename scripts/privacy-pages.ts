@@ -137,7 +137,7 @@ export function privacyPage(language: SupportedLanguage, updated: CalendarDate):
     '    <main class="legal-page shell">',
     `      <nav class="language-nav" aria-label="${e(site.languages)}">${languageLinks}</nav>`,
     `      <h1>${e(site.title)}</h1>`,
-    `      <p class="updated">${e(site.updated(t.formats.date(updated)))}</p>`,
+    `      <p class="updated">${e(site.updated(t.formats.longDate(updated)))}</p>`,
     `      <p class="applies">${e(site.appliesTo(POLICY_VERSION))} <a href="${ROOT}privacy.html" hreflang="en">${e(site.earlierVersions)}</a></p>`,
     '',
     `      <p><strong>${e(privacy.lead)}</strong></p>`,

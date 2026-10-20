@@ -82,7 +82,7 @@ it('pins the English About the translations were made from', () => {
     .filter((leaf) => leaf.path.startsWith('about.'))
     .map((leaf) => `${leaf.path}\t${leaf.text}`)
     .join('\n');
-  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('f0431e3e1ebd6e7d');
+  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('00f86a7d5df60222');
 });
 
 describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {
@@ -114,7 +114,9 @@ describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {
   // name must reach the screen exactly as given.
   it('prints every value it is given unchanged', () => {
     const wrong = leaves.filter((leaf) => {
-      if (!leaf.call || leaf.path === 'formats.date') return false;
+      if (!leaf.call || leaf.path === 'formats.date' || leaf.path === 'formats.longDate') {
+        return false;
+      }
       const values = Array.from({ length: leaf.arity }, (_, i) => `Qx${i}`);
       const text = leaf.call(...values);
       return values.some((value) => !text.includes(value));

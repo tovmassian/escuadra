@@ -21,6 +21,20 @@ export interface CalendarDate {
 }
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const MONTHS_LONG = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 /** "Spain's", but "Netherlands'". English only: each catalog writes its own. */
 function possessive(name: string): string {
@@ -66,6 +80,9 @@ export const en = {
   formats: {
     /** "21 Aug 2026". */
     date: ({ day, month, year }: CalendarDate) => `${day} ${MONTHS[month - 1] ?? ''} ${year}`,
+    /** "21 August 2026": the privacy pages' "Last updated" date. The app keeps the short one. */
+    longDate: ({ day, month, year }: CalendarDate) =>
+      `${day} ${MONTHS_LONG[month - 1] ?? ''} ${year}`,
   },
   /** ≤ 3 chars: a position's code on an answer tile, a slot chip, a Study filter pill and a card badge. */
   positionCodes: { GK: 'GK', DF: 'DF', MF: 'MF', FW: 'FW' },
@@ -352,14 +369,14 @@ export const en = {
         {
           heading: 'Anonymous usage statistics',
           paragraphs: [
-            `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off on the app's About screen. Each one carries a hashed form of a random identifier created for these statistics (separate from the one the app-update check uses) and a random session code that is new each time the app starts. Like any online service, TelemetryDeck also receives your device's IP address with each one, and TelemetryDeck's own privacy policy applies to what it receives. The identifier and the session code are random, not derived from your device, and not linked to you or your accounts. Neither ${ESCUADRA} nor the developer shares them or the statistics with anyone else.`,
+            `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off on the app's About screen. Each one carries a hashed form of a random identifier created for these statistics (separate from the one the app-update check uses) and a random session code that is new each time the app starts. Like any online service, TelemetryDeck also receives your device's IP address and the standard technical details of each request, which on iOS include the app's build and your device's system version. TelemetryDeck's own privacy policy applies to what it receives. The identifier and the session code are random, not derived from your device, and not linked to you or your accounts. Neither ${ESCUADRA} nor the developer shares them or the statistics with anyone else.`,
             `The statistics are: the app was opened, with its language and whether that language follows your phone's language or was chosen in the app; a round started, with whether the team is a club or a nation and the difficulty level; a round finished, with the same two details, the score, and whether it was ${A_LA_ESCUADRA}; the Study screen was opened, with whether the team is a club or a nation; and a result was passed to your phone's share menu, with the level, the score and whether it was a picture or text. They never include team names, player names, your answers or anything you type.`,
           ],
         },
         {
           heading: 'App updates',
           paragraphs: [
-            `When ${ESCUADRA} starts, it checks whether a newer version of the app is available from Expo, the service that delivers its updates. The check sends what is needed to deliver the right update: your device's operating system, the app's version and project, and a random identifier created for this installation. If the app crashed or failed to load an update as it last started, the check also sends Expo the technical error message from that failure. Like any online service, Expo also receives your device's IP address with each check. The identifier is not linked to you or to anything you do in the app. Without a connection, the app skips the check and works as usual.`,
+            `When ${ESCUADRA} starts, it checks whether a newer version of the app is available from Expo, the service that delivers its updates. The check sends what is needed to deliver the right update: your device's operating system, the app's version and project, and a random identifier created for this installation. ${ESCUADRA} does not link the identifier to you or to anything you do in the app. If the app crashed or failed to load an update while starting up, the next check also sends Expo the technical error message from that failure. Like any online service, Expo also receives your device's IP address with each check. Without a connection, the app skips the check and works as usual.`,
           ],
         },
         {

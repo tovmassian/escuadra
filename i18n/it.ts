@@ -13,6 +13,20 @@ import { en, type CalendarDate, type Messages } from './en';
 import { A_LA_ESCUADRA, ESCUADRA } from './names';
 
 const MONTHS = ['gen', 'feb', 'mar', 'apr', 'mag', 'giu', 'lug', 'ago', 'set', 'ott', 'nov', 'dic'];
+const MONTHS_LONG = [
+  'gennaio',
+  'febbraio',
+  'marzo',
+  'aprile',
+  'maggio',
+  'giugno',
+  'luglio',
+  'agosto',
+  'settembre',
+  'ottobre',
+  'novembre',
+  'dicembre',
+];
 
 const PHOTO_CREDITS = 'Crediti foto';
 // Feminine: it is the photo that is cropped.
@@ -46,6 +60,9 @@ export const it: Messages = {
   formats: {
     /** "21 ago 2026". */
     date: ({ day, month, year }: CalendarDate) => `${day} ${MONTHS[month - 1] ?? ''} ${year}`,
+    /** "21 ottobre 2026", and "1º ottobre 2026" on the first of the month. */
+    longDate: ({ day, month, year }: CalendarDate) =>
+      `${day === 1 ? '1º' : day} ${MONTHS_LONG[month - 1] ?? ''} ${year}`,
   },
   // POR portiere, DIF difensore, CEN centrocampista, ATT attaccante.
   positionCodes: { GK: 'POR', DF: 'DIF', MF: 'CEN', FW: 'ATT' },
@@ -306,14 +323,14 @@ export const it: Messages = {
         {
           heading: 'Statistiche d’uso anonime',
           paragraphs: [
-            `${ESCUADRA} invia statistiche d’uso anonime a TelemetryDeck, un servizio di analisi statistica, a meno che tu non disattivi “${USAGE_STATISTICS}” nella schermata “Info” dell’app. Ciascuna contiene un identificativo casuale sotto forma di hash, creato per queste statistiche (diverso da quello usato dal controllo degli aggiornamenti dell’app), e un codice di sessione casuale, nuovo a ogni avvio dell’app. Come qualsiasi servizio online, TelemetryDeck riceve anche l’indirizzo IP del tuo dispositivo con ogni statistica, e a ciò che TelemetryDeck riceve si applica l’informativa sulla privacy di TelemetryDeck. L’identificativo delle statistiche e il codice di sessione sono casuali, non derivati dal tuo dispositivo e non collegati a te né ai tuoi account. Né ${ESCUADRA} né lo sviluppatore condividono l’identificativo, il codice di sessione o le statistiche con nessun altro.`,
+            `${ESCUADRA} invia statistiche d’uso anonime a TelemetryDeck, un servizio di analisi statistica, a meno che tu non disattivi “${USAGE_STATISTICS}” nella schermata “Info” dell’app. Ciascuna contiene un identificativo casuale sotto forma di hash, creato per queste statistiche (diverso da quello usato dal controllo degli aggiornamenti dell’app), e un codice di sessione casuale, nuovo a ogni avvio dell’app. Come qualsiasi servizio online, TelemetryDeck riceve anche l’indirizzo IP del tuo dispositivo e i dettagli tecnici standard di ogni richiesta, che su iOS includono il numero di build dell’app e la versione di sistema del tuo dispositivo. A ciò che TelemetryDeck riceve si applica l’informativa sulla privacy di TelemetryDeck. L’identificativo delle statistiche e il codice di sessione sono casuali, non derivati dal tuo dispositivo e non collegati a te né ai tuoi account. Né ${ESCUADRA} né lo sviluppatore condividono l’identificativo, il codice di sessione o le statistiche con nessun altro.`,
             `Le statistiche sono: l’apertura dell’app, con la sua lingua e l’indicazione se questa segue la lingua del tuo telefono o è stata scelta nell’app; l’inizio di una partita, con il tipo di squadra (club o nazionale) e il livello di difficoltà; la fine di una partita, con gli stessi due dati, il punteggio e l’indicazione se è stata ${A_LA_ESCUADRA}; l’apertura della schermata “Rosa”, con il tipo di squadra (club o nazionale); e il passaggio di un risultato al menu di condivisione del tuo telefono, con il livello, il punteggio e l’indicazione se si trattava di un’immagine o di un testo. Le statistiche non includono mai i nomi delle squadre o dei giocatori, le tue risposte né nulla di ciò che scrivi.`,
           ],
         },
         {
           heading: 'Aggiornamenti dell’app',
           paragraphs: [
-            `Quando ${ESCUADRA} si avvia, controlla se su Expo, il servizio che ne distribuisce gli aggiornamenti, è disponibile una versione più recente dell’app. Il controllo invia ciò che serve per fornire l’aggiornamento giusto: il sistema operativo del tuo dispositivo, la versione e il progetto dell’app e un identificativo casuale creato per questa installazione. Se all’ultimo avvio l’app si è arrestata in modo anomalo o non è riuscita a caricare un aggiornamento, il controllo invia a Expo anche il relativo messaggio di errore tecnico. Come qualsiasi servizio online, Expo riceve inoltre l’indirizzo IP del tuo dispositivo a ogni controllo. Questo identificativo non è collegato a te né a nulla di ciò che fai nell’app. Se non c’è connessione, l’app salta il controllo e funziona normalmente.`,
+            `Quando ${ESCUADRA} si avvia, controlla se su Expo, il servizio che ne distribuisce gli aggiornamenti, è disponibile una versione più recente dell’app. Il controllo invia ciò che serve per fornire l’aggiornamento giusto: il sistema operativo del tuo dispositivo, la versione e il progetto dell’app e un identificativo casuale creato per questa installazione. ${ESCUADRA} non collega questo identificativo a te né a nulla di ciò che fai nell’app. Se durante l’avvio l’app si è arrestata in modo anomalo o non è riuscita a caricare un aggiornamento, il controllo successivo invia a Expo anche il relativo messaggio di errore tecnico. Come qualsiasi servizio online, Expo riceve inoltre l’indirizzo IP del tuo dispositivo a ogni controllo. Se non c’è connessione, l’app salta il controllo e funziona normalmente.`,
           ],
         },
         {
