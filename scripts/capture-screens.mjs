@@ -418,6 +418,8 @@ async function captureTheme(browser, colorScheme, suffix) {
 
     await capture.open('/about');
     await capture.shoot('01a-about');
+    await capture.tapId('about-licences', { wait: SHEET_MS });
+    await capture.shoot('01a-about-licences');
 
     await capture.open('/team-picker');
     await capture.shoot('02-team-picker-clubs');
