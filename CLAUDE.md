@@ -381,6 +381,10 @@ reports — is done by hand, not by a skill.
   For TelemetryDeck, `lib/telemetrySdk.test.ts` pins the request, and a failure
   there means About no longer describes it; `expo-updates` has no such test, so
   read its changelog. Never put names, free text or player data in a payload.
+- **Licence notices are generated.** `lib/licences.generated.ts` (About → Licences) is
+  written by `npm run gen:licences` from the bundle's own source maps, and `npm run check`
+  fails when it is stale. Its rules, and why widening the licence allowlist is the owner's
+  call: `docs/license.md`.
 - Zustand's `persist` defaults to `localStorage`, which does not exist here. Use
   `createJSONStorage(() => AsyncStorage)`.
 - Every animation stays under 300ms. The app is played in fast repetitive bursts

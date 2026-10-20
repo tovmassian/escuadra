@@ -1,4 +1,7 @@
+import { readFileSync } from 'node:fs';
+import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { LICENCE_TEXTS, PACKAGES, UNICODE_LICENSE } from './licences.generated';
 import { licenceParagraphs, packageKey } from './licencesView';
 
 describe('licenceParagraphs', () => {
@@ -26,4 +29,41 @@ describe('licenceParagraphs', () => {
 
 it('keys a package by name and version', () => {
   expect(packageKey({ name: '@scope/a', version: '1.2.3' })).toBe('@scope/a@1.2.3');
+});
+
+describe('lib/licences.generated.ts', () => {
+  it('resolves every text index, and gives every package a copyright and a text', () => {
+    for (const p of PACKAGES) {
+      expect(p.copyright, p.name).not.toBe('');
+      expect(p.texts.length, p.name).toBeGreaterThan(0);
+      for (const i of p.texts) expect(LICENCE_TEXTS[i], `${p.name} → ${i}`).toBeTypeOf('string');
+    }
+  });
+
+  it('lists each package once, by name then version', () => {
+    const keys = PACKAGES.map(packageKey);
+    expect(new Set(keys).size).toBe(keys.length);
+    const sorted = [...PACKAGES].sort((a, b) =>
+      a.name < b.name
+        ? -1
+        : a.name > b.name
+          ? 1
+          : a.version < b.version
+            ? -1
+            : a.version > b.version
+              ? 1
+              : 0,
+    );
+    expect(PACKAGES.map(packageKey)).toEqual(sorted.map(packageKey));
+  });
+
+  it('carries the Unicode notice from its first line on, verbatim', () => {
+    const file = readFileSync(path.resolve(__dirname, '../i18n/UNICODE-LICENSE.txt'), 'utf8');
+    expect(UNICODE_LICENSE.startsWith('UNICODE LICENSE V3')).toBe(true);
+    expect(file.trim().endsWith(UNICODE_LICENSE)).toBe(true);
+  });
+
+  it('includes react-native', () => {
+    expect(PACKAGES.some((p) => p.name === 'react-native')).toBe(true);
+  });
 });

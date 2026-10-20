@@ -1,0 +1,35 @@
+{
+  "@react-native/assets-registry": {
+    "from": "react-native",
+    "reason": "Published from the React Native repository under its LICENSE."
+  },
+  "@react-native/js-polyfills": {
+    "from": "react-native",
+    "reason": "Published from the React Native repository under its LICENSE."
+  },
+  "@react-native/normalize-colors": {
+    "from": "react-native",
+    "reason": "Published from the React Native repository under its LICENSE."
+  },
+  "@react-native/virtualized-lists": {
+    "from": "react-native",
+    "reason": "Published from the React Native repository under its LICENSE."
+  },
+  "@expo/ui": {
+    "from": "expo",
+    "reason": "Published from the Expo repository under its MIT LICENSE."
+  },
+  "expo-router": {
+    "from": "expo",
+    "reason": "Published from the Expo repository under its MIT LICENSE."
+  },
+  "expo-updates": {
+    "from": "expo",
+    "reason": "Published from the Expo repository under its MIT LICENSE."
+  },
+  "standard-navigation": {
+    "file": "scripts/licence-texts/standard-navigation.LICENSE",
+    "url": "https://github.com/react-navigation/standard-navigation/blob/main/LICENSE",
+    "reason": "Its repository carries an MIT LICENSE that the npm tarball omits."
+  }
+}

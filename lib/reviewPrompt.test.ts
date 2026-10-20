@@ -72,7 +72,8 @@ describe('expo-store-review importers', () => {
       if (statSync(full).isDirectory()) {
         return name.startsWith('.') || SKIPPED_DIRS.has(name) ? [] : sources(full);
       }
-      return /\.(ts|tsx)$/.test(name) && !/\.test\.tsx?$/.test(name) ? [full] : [];
+      // lib/licences.generated.ts names every bundled package as data; it imports none.
+      return /\.(ts|tsx)$/.test(name) && !/\.(test|generated)\.tsx?$/.test(name) ? [full] : [];
     });
   }
 
