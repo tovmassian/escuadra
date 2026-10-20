@@ -299,6 +299,13 @@ export const fr: Messages = {
         },
       ],
     },
+    licences: {
+      label: 'Licences',
+      originalLanguage: 'Les textes des licences sont affichés tels quels, en anglais.',
+      countryNames: 'Noms de pays',
+      fonts: 'Polices',
+      software: 'Logiciels',
+    },
     // The usual French name for the setting.
     vibration: 'Vibrations',
     usageStatistics: USAGE_STATISTICS,

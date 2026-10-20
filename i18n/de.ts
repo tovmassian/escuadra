@@ -269,6 +269,13 @@ export const de: Messages = {
         },
       ],
     },
+    licences: {
+      label: 'Lizenzen',
+      originalLanguage: 'Lizenztexte werden im Original angezeigt, auf Englisch.',
+      countryNames: 'Ländernamen',
+      fonts: 'Schriften',
+      software: 'Software',
+    },
     vibration: 'Vibration',
     usageStatistics: USAGE_STATISTICS,
     privacy: {
