@@ -46,12 +46,18 @@ export function orderLicenceFiles(fileNames: readonly string[]): string[] {
   return [...files.filter(isPrimaryLicenceFile), ...files.filter((f) => !isPrimaryLicenceFile(f))];
 }
 
+// A notice line is "Copyright" followed by (c), © or a digit, or a bare (c) or ©
+// followed by a digit. No year is required (Meta, Isaac Z. Schlueter), and the
+// prose lines that merely begin with the word copyright (Apache-2.0's body)
+// are not notices.
+const COPYRIGHT_NOTICE = [/^copyright\s+(\(c\)|©|\d)/i, /^(\(c\)|©)\s*\d/];
+
 /** A licence text's copyright lines, verbatim and trimmed. Template lines never count. */
 export function copyrightLines(text: string): string[] {
   return text
     .split(/\r?\n/)
     .map((line) => line.trim())
-    .filter((line) => /^(copyright\b|\(c\)|©)/i.test(line))
+    .filter((line) => COPYRIGHT_NOTICE.some((notice) => notice.test(line)))
     .filter((line) => !/\[yyyy\]|\[name of copyright owner\]/i.test(line));
 }
 
@@ -74,6 +80,8 @@ export interface LicenceData {
 }
 
 const normalise = (text: string): string => text.replace(/\r\n?/g, '\n').trim();
+const hasPrimary = (files: readonly LicenceFile[]): boolean =>
+  files.some((file) => isPrimaryLicenceFile(file.name));
 const byNameThenVersion = (a: PackageRead, b: PackageRead): number =>
   a.name < b.name
     ? -1
@@ -87,22 +95,28 @@ const byNameThenVersion = (a: PackageRead, b: PackageRead): number =>
 
 /**
  * The sheet's data. `sourced` holds the licence files scripts/licence-sources.json
- * resolves, by package name, for packages whose npm tarball ships none. Throws
- * one error listing every problem, so a run names them all at once.
+ * resolves, by package name, for packages that ship no primary licence file: they
+ * come first, before the package's own files. A name and version found in two
+ * folders keeps the copy that ships a primary licence file. Throws one error
+ * listing every problem, so a run names them all at once.
  */
 export function buildLicenceData(
   packages: readonly PackageRead[],
   sourced: Readonly<Record<string, LicenceFile[]>>,
 ): LicenceData {
-  const problems: string[] = [];
+  const problems = new Set<string>();
   const unique = new Map<string, PackageRead>();
-  for (const p of packages) unique.set(`${p.name}@${p.version}`, p);
+  for (const p of packages) {
+    const id = `${p.name}@${p.version}`;
+    const held = unique.get(id);
+    if (!held || (!hasPrimary(held.files) && hasPrimary(p.files))) unique.set(id, p);
+  }
   const sorted = [...unique.values()].sort(byNameThenVersion);
 
   const names = new Set(sorted.map((p) => p.name));
   for (const name of Object.keys(sourced).sort()) {
     if (!names.has(name)) {
-      problems.push(
+      problems.add(
         `${name}: scripts/licence-sources.json names a package the bundle no longer contains`,
       );
     }
@@ -114,20 +128,27 @@ export function buildLicenceData(
   for (const p of sorted) {
     const id = `${p.name}@${p.version}`;
     if (!p.licence || !ALLOWED_LICENCES.includes(p.licence)) {
-      problems.push(
+      problems.add(
         `${id}: licence "${p.licence ?? '(none)'}" is not on the allowlist (scripts/licences.ts)`,
       );
     }
-    const files = p.files.length > 0 ? p.files : sourced[p.name];
-    if (!files || files.length === 0) {
-      problems.push(`${id}: no licence file, and no entry in scripts/licence-sources.json`);
+    const source = sourced[p.name] ?? [];
+    const ownPrimary = hasPrimary(p.files);
+    if (ownPrimary && source.length > 0) {
+      problems.add(
+        `${p.name}: scripts/licence-sources.json has an entry, but the package ships its own licence file`,
+      );
+    }
+    const files = ownPrimary ? p.files : [...source, ...p.files];
+    if (files.length === 0) {
+      problems.add(`${id}: no licence file, and no entry in scripts/licence-sources.json`);
       continue;
     }
     const primary = files[0];
     const copyright =
       primary && isPrimaryLicenceFile(primary.name) ? copyrightLines(primary.text) : [];
     if (copyright.length === 0) {
-      problems.push(`${id}: its licence file has no copyright line`);
+      problems.add(`${id}: its licence file has no copyright line`);
       continue;
     }
     const indices = files.map(({ text }) => {
@@ -149,9 +170,10 @@ export function buildLicenceData(
     });
   }
 
-  if (problems.length > 0) {
+  if (problems.size > 0) {
+    const listed = [...problems];
     throw new Error(
-      `gen-licences: ${problems.length} problem(s)\n${problems.map((p) => `  - ${p}`).join('\n')}`,
+      `gen-licences: ${listed.length} problem(s)\n${listed.map((p) => `  - ${p}`).join('\n')}`,
     );
   }
   return { texts, packages: result };

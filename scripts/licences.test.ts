@@ -80,6 +80,27 @@ describe('copyrightLines', () => {
       ),
     ).toEqual([]);
   });
+  it('refuses Apache-2.0 body lines that begin with copyright or (c)', () => {
+    expect(
+      copyrightLines(
+        [
+          '   copyright notice that is included in or attached to the work',
+          '   copyright license to reproduce, prepare Derivative Works of, publicly display',
+          '(c) You must retain, in the Source form of any Derivative Works that You distribute,',
+          '   Copyright [yyyy] [name of copyright owner]',
+        ].join('\n'),
+      ),
+    ).toEqual([]);
+  });
+  it('keeps the copyright lines real packages ship, with or without a year', () => {
+    const lines = [
+      'Copyright (c) Meta Platforms, Inc. and affiliates.',
+      'Copyright (c) Isaac Z. Schlueter and Contributors',
+      'Copyright 2017 Andrey Sitnik <andrey@sitnik.ru>',
+      '© 2024 Someone',
+    ];
+    expect(copyrightLines(lines.join('\n'))).toEqual(lines);
+  });
 });
 
 describe('buildLicenceData', () => {
@@ -137,11 +158,46 @@ describe('buildLicenceData', () => {
     expect(buildLicenceData([pkg(), pkg()], {}).packages).toHaveLength(1);
   });
 
+  it('keeps the copy that ships a licence file when a name and version is found twice', () => {
+    const data = buildLicenceData([pkg(), pkg({ files: [] })], {});
+    expect(data.packages).toHaveLength(1);
+    expect(data.packages[0]?.copyright).toBe('Copyright (c) 2020 A');
+  });
+
   it('uses a sourced licence for a package that ships none', () => {
     const data = buildLicenceData([pkg({ name: 'expo-router', files: [] })], {
       'expo-router': [{ name: 'LICENSE', text: MIT('650 Industries') }],
     });
     expect(data.packages[0]?.copyright).toBe('Copyright (c) 2020 650 Industries');
+  });
+
+  it('puts a sourced primary licence before the package’s own non-primary files', () => {
+    const data = buildLicenceData(
+      [
+        pkg({
+          name: 'expo-font',
+          licence: 'MIT AND OFL-1.1',
+          files: [{ name: 'LICENSE_FONT', text: 'SIL OPEN FONT LICENSE' }],
+        }),
+      ],
+      { 'expo-font': [{ name: 'LICENSE', text: MIT('650 Industries') }] },
+    );
+    expect(data.packages[0]).toMatchObject({
+      copyright: 'Copyright (c) 2020 650 Industries',
+      texts: [0, 1],
+    });
+    expect(data.texts[0]).toContain('Copyright (c) 2020 650 Industries');
+    expect(data.texts[1]).toBe('SIL OPEN FONT LICENSE');
+  });
+
+  it('reports a sourced entry for a package that ships its own licence file', () => {
+    expect(() =>
+      buildLicenceData([pkg({ name: 'a' })], {
+        a: [{ name: 'LICENSE', text: MIT('G') }],
+      }),
+    ).toThrow(
+      /a: scripts\/licence-sources\.json has an entry, but the package ships its own licence file/,
+    );
   });
 
   it('reports every problem at once', () => {
