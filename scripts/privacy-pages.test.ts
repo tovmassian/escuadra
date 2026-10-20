@@ -68,6 +68,15 @@ describe.each(SUPPORTED_LANGUAGES)('the %s privacy page', (language) => {
     expect(html).toContain(`<link rel="alternate" hreflang="x-default" href="${pageUrl('en')}" />`);
   });
 
+  // The app's short date ("21 Oct 2026") is for a crowded screen; a policy
+  // page writes the month out.
+  it('gives its date in full', () => {
+    const { about, formats } = CATALOGS[language];
+    expect(html).toContain(
+      `<p class="updated">${escapeHtml(about.site.updated(formats.longDate(updated)))}</p>`,
+    );
+  });
+
   it('says under its date which versions it covers, and links the earlier policy', () => {
     const { site } = CATALOGS[language].about;
     const lines = html.split('\n').map((line) => line.trim());
@@ -109,6 +118,12 @@ describe.each(SUPPORTED_LANGUAGES)('the %s privacy page', (language) => {
     }
     expect(html).toMatch(new RegExp(`href="${PAGE_FILES[language]}"[^>]*aria-current="page"`));
   });
+});
+
+it('dates the English page "21 October 2026", not "21 Oct 2026"', () => {
+  expect(privacyPage('en', updated)).toContain(
+    '<p class="updated">Last updated: 21 October 2026</p>',
+  );
 });
 
 describe('escapeHtml', () => {

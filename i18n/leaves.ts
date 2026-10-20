@@ -20,6 +20,7 @@ const PLACEHOLDERS = ['{1}', '{2}', '{3}', '{4}', '{5}'];
 /** Functions whose argument is not a value to write into the text. */
 const SAMPLE_ARGS: Readonly<Record<string, readonly unknown[]>> = {
   'formats.date': [{ day: 21, month: 8, year: 2026 }],
+  'formats.longDate': [{ day: 21, month: 8, year: 2026 }],
 };
 
 /** What a language has not translated yet: About and privacy (#146) and the

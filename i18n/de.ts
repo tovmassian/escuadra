@@ -20,6 +20,20 @@ const MONTHS = [
   'Nov.',
   'Dez.',
 ];
+const MONTHS_LONG = [
+  'Januar',
+  'Februar',
+  'März',
+  'April',
+  'Mai',
+  'Juni',
+  'Juli',
+  'August',
+  'September',
+  'Oktober',
+  'November',
+  'Dezember',
+];
 
 const PHOTO_CREDITS = 'Bildnachweise';
 const CROPPED = 'zugeschnitten';
@@ -51,6 +65,9 @@ export const de: Messages = {
   formats: {
     /** "21. Aug. 2026". */
     date: ({ day, month, year }: CalendarDate) => `${day}. ${MONTHS[month - 1] ?? ''} ${year}`,
+    /** "21. August 2026". */
+    longDate: ({ day, month, year }: CalendarDate) =>
+      `${day}. ${MONTHS_LONG[month - 1] ?? ''} ${year}`,
   },
   // TW Torwart, ABW Abwehr ("Abw." in squad lists; a bare "AB" reads as the
   // word "ab"), MF Mittelfeld, ST Sturm.

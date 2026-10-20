@@ -21,6 +21,20 @@ export interface CalendarDate {
 }
 
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+const MONTHS_LONG = [
+  'January',
+  'February',
+  'March',
+  'April',
+  'May',
+  'June',
+  'July',
+  'August',
+  'September',
+  'October',
+  'November',
+  'December',
+];
 
 /** "Spain's", but "Netherlands'". English only: each catalog writes its own. */
 function possessive(name: string): string {
@@ -66,6 +80,9 @@ export const en = {
   formats: {
     /** "21 Aug 2026". */
     date: ({ day, month, year }: CalendarDate) => `${day} ${MONTHS[month - 1] ?? ''} ${year}`,
+    /** "21 August 2026": the privacy pages' "Last updated" date. The app keeps the short one. */
+    longDate: ({ day, month, year }: CalendarDate) =>
+      `${day} ${MONTHS_LONG[month - 1] ?? ''} ${year}`,
   },
   /** ≤ 3 chars: a position's code on an answer tile, a slot chip, a Study filter pill and a card badge. */
   positionCodes: { GK: 'GK', DF: 'DF', MF: 'MF', FW: 'FW' },

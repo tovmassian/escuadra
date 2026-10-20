@@ -13,6 +13,9 @@ import { translationNotice } from '../translationNotice';
 interface Facts {
   /** `formats.date` for 21 August 2026. */
   date: string;
+  /** `formats.longDate`, the privacy pages' date, for 21 August 2026 and for
+   *  1 October 2026: French and Italian write the 1st as an ordinal. */
+  longDate: readonly [string, string];
   /** `study.players` for 0, 1 and 2. French treats 0 as singular. */
   players: readonly [string, string, string];
   positionCodes: Readonly<Record<Position, string>>;
@@ -29,6 +32,7 @@ interface Facts {
 const FACTS: Record<Language, Facts> = {
   en: {
     date: '21 Aug 2026',
+    longDate: ['21 August 2026', '1 October 2026'],
     players: ['0 players', '1 player', '2 players'],
     positionCodes: { GK: 'GK', DF: 'DF', MF: 'MF', FW: 'FW' },
     countries: { ENG: 'England', ESP: 'Spain' },
@@ -38,6 +42,7 @@ const FACTS: Record<Language, Facts> = {
   },
   de: {
     date: '21. Aug. 2026',
+    longDate: ['21. August 2026', '1. Oktober 2026'],
     players: ['0 Spieler', '1 Spieler', '2 Spieler'],
     positionCodes: { GK: 'TW', DF: 'ABW', MF: 'MF', FW: 'ST' },
     countries: {
@@ -59,6 +64,7 @@ const FACTS: Record<Language, Facts> = {
   },
   fr: {
     date: '21 août 2026',
+    longDate: ['21 août 2026', '1er octobre 2026'],
     players: ['0 joueur', '1 joueur', '2 joueurs'],
     positionCodes: { GK: 'GB', DF: 'DÉF', MF: 'MIL', FW: 'ATT' },
     countries: {
@@ -77,6 +83,7 @@ const FACTS: Record<Language, Facts> = {
   },
   es: {
     date: '21 ago 2026',
+    longDate: ['21 de agosto de 2026', '1 de octubre de 2026'],
     players: ['0 jugadores', '1 jugador', '2 jugadores'],
     positionCodes: { GK: 'POR', DF: 'DEF', MF: 'MED', FW: 'DEL' },
     countries: {
@@ -96,6 +103,7 @@ const FACTS: Record<Language, Facts> = {
   },
   it: {
     date: '21 ago 2026',
+    longDate: ['21 agosto 2026', '1º ottobre 2026'],
     players: ['0 giocatori', '1 giocatore', '2 giocatori'],
     positionCodes: { GK: 'POR', DF: 'DIF', MF: 'CEN', FW: 'ATT' },
     countries: {
@@ -122,6 +130,13 @@ describe.each(SUPPORTED_LANGUAGES)('%s', (language) => {
 
   it('writes the date its own way', () => {
     expect(messages.formats.date({ day: 21, month: 8, year: 2026 })).toBe(facts.date);
+  });
+
+  it('writes the date in full its own way', () => {
+    expect([
+      messages.formats.longDate({ day: 21, month: 8, year: 2026 }),
+      messages.formats.longDate({ day: 1, month: 10, year: 2026 }),
+    ]).toEqual(facts.longDate);
   });
 
   it('writes its own singular and plural', () => {

@@ -13,6 +13,20 @@ import { en, type CalendarDate, type Messages } from './en';
 import { A_LA_ESCUADRA, ESCUADRA } from './names';
 
 const MONTHS = ['gen', 'feb', 'mar', 'apr', 'mag', 'giu', 'lug', 'ago', 'set', 'ott', 'nov', 'dic'];
+const MONTHS_LONG = [
+  'gennaio',
+  'febbraio',
+  'marzo',
+  'aprile',
+  'maggio',
+  'giugno',
+  'luglio',
+  'agosto',
+  'settembre',
+  'ottobre',
+  'novembre',
+  'dicembre',
+];
 
 const PHOTO_CREDITS = 'Crediti foto';
 // Feminine: it is the photo that is cropped.
@@ -46,6 +60,9 @@ export const it: Messages = {
   formats: {
     /** "21 ago 2026". */
     date: ({ day, month, year }: CalendarDate) => `${day} ${MONTHS[month - 1] ?? ''} ${year}`,
+    /** "21 ottobre 2026", and "1º ottobre 2026" on the first of the month. */
+    longDate: ({ day, month, year }: CalendarDate) =>
+      `${day === 1 ? '1º' : day} ${MONTHS_LONG[month - 1] ?? ''} ${year}`,
   },
   // POR portiere, DIF difensore, CEN centrocampista, ATT attaccante.
   positionCodes: { GK: 'POR', DF: 'DIF', MF: 'CEN', FW: 'ATT' },

@@ -16,6 +16,20 @@ import { A_LA_ESCUADRA, ESCUADRA } from './names';
 
 // Three letters each: "sep", as Latin America writes it, not Spain's CLDR "sept".
 const MONTHS = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const MONTHS_LONG = [
+  'enero',
+  'febrero',
+  'marzo',
+  'abril',
+  'mayo',
+  'junio',
+  'julio',
+  'agosto',
+  'septiembre',
+  'octubre',
+  'noviembre',
+  'diciembre',
+];
 
 const PHOTO_CREDITS = 'Créditos de las fotos';
 // Feminine: it is the photo that is cropped.
@@ -50,6 +64,9 @@ export const es: Messages = {
   formats: {
     /** "21 ago 2026". */
     date: ({ day, month, year }: CalendarDate) => `${day} ${MONTHS[month - 1] ?? ''} ${year}`,
+    /** "21 de agosto de 2026". */
+    longDate: ({ day, month, year }: CalendarDate) =>
+      `${day} de ${MONTHS_LONG[month - 1] ?? ''} de ${year}`,
   },
   // POR portero, DEF defensa, MED medio, DEL delantero.
   positionCodes: { GK: 'POR', DF: 'DEF', MF: 'MED', FW: 'DEL' },

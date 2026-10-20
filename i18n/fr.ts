@@ -28,6 +28,20 @@ const MONTHS = [
   'nov.',
   'déc.',
 ];
+const MONTHS_LONG = [
+  'janvier',
+  'février',
+  'mars',
+  'avril',
+  'mai',
+  'juin',
+  'juillet',
+  'août',
+  'septembre',
+  'octobre',
+  'novembre',
+  'décembre',
+];
 
 const PHOTO_CREDITS = 'Crédits photo';
 // Feminine: it is the photo that is cropped.
@@ -61,6 +75,9 @@ export const fr: Messages = {
     /** "21 août 2026", and "1er août 2026" on the first of the month. */
     date: ({ day, month, year }: CalendarDate) =>
       `${day === 1 ? '1er' : day} ${MONTHS[month - 1] ?? ''} ${year}`,
+    /** "21 octobre 2026", and "1er octobre 2026" on the first of the month. */
+    longDate: ({ day, month, year }: CalendarDate) =>
+      `${day === 1 ? '1er' : day} ${MONTHS_LONG[month - 1] ?? ''} ${year}`,
   },
   // GB gardien de but, DÉF défenseur, MIL milieu, ATT attaquant.
   positionCodes: { GK: 'GB', DF: 'DÉF', MF: 'MIL', FW: 'ATT' },
