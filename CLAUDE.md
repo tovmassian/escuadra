@@ -49,11 +49,13 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 store build.** The About text on `main`, in all five catalogs, covers
 TelemetryDeck, the Wikimedia photos and the language sent with the launch signal
 (#54, #146). The web policy is versioned: `privacy.html` stays the 1.x policy
-that both store listings link today, and `scripts/privacy-pages.ts` generates
-the 2.0 pages into `privacy/2/`, which #157 will publish. The order:
+that both store listings link today (with a dated correction of 20 October
+2026), and `scripts/privacy-pages.ts` generates the 2.0 pages into `privacy/2/`,
+published by #157 but not yet linked. The order:
 
 1. Every 2.0.0 issue lands on `main`.
-2. #157 is merged, so `privacy/2/` is published (nothing links it yet).
+2. Regenerate `privacy/2/` on `gh-pages` if the About text has changed since
+   #157, so the pages match the build word for word.
 3. #55's App Privacy and Data safety answers are written.
 4. `release/2.0.0` is cut and built (#116).
 5. At submission, each store's App Privacy or Data safety answers and its
