@@ -20,12 +20,12 @@ import { validateRegistry, type TeamRegistry } from '../lib/registry.ts';
 import { readDecisions, type DecisionFile } from '../lib/decisions.ts';
 import { readPlayers, writePlayers } from '../lib/players-file.ts';
 import { reconcileTeam } from '../lib/reconcile.ts';
-import { squadFiles } from '../lib/squad-files.ts';
+import { nationMemberships, squadFiles } from '../lib/squad-files.ts';
 import { formatAndWrite } from '../lib/write-json.ts';
 
 interface TeamReport {
   id: string;
-  status: 'written' | 'unchanged' | 'conflicted' | 'failed';
+  status: 'written' | 'unchanged' | 'conflicted' | 'held' | 'failed';
   verified: boolean;
   counts: { parsed: number; added: number; departed: number; newPlayers: number; noBirth: number };
   conflicts: Conflict[];
@@ -40,6 +40,7 @@ interface RunReport {
     written: number;
     unchanged: number;
     conflicted: number;
+    held: number;
     failed: number;
     orphans: number;
   };
@@ -76,6 +77,9 @@ export default class Apply extends BaseCommand<RunReport> {
     const decisions = this.loadDecisions();
 
     let players: Player[] = readPlayers(this.dataDir);
+    // Kept current as each nation squad is accepted, so a nation applied
+    // earlier in this run counts exactly as one already on disk.
+    const nationSquadOf = nationMemberships(path.join(this.dataDir, 'squads'));
 
     const teams: TeamReport[] = [];
     const squadWrites: { file: string; squad: Squad }[] = [];
@@ -106,6 +110,7 @@ export default class Apply extends BaseCommand<RunReport> {
         aliases: decisions.aliases ?? [],
         titleAliases: decisions.titleAliases ?? [],
         notInSquad: decisions.notInSquad ?? [],
+        nationSquadOf,
       });
       const verdict = assess(plan);
 
@@ -125,6 +130,24 @@ export default class Apply extends BaseCommand<RunReport> {
         continue;
       }
 
+      if (verdict.holds.length > 0) {
+        // Not written, and not a failure: the source is not playable yet.
+        // Whatever is stored stays, and so do the players — a held squad's
+        // rows are never merged, so the next sweep starts from what is here.
+        teams.push({
+          id,
+          status: 'held',
+          verified: false,
+          counts: this.counts(plan),
+          conflicts: [],
+          warnings: verdict.holds,
+        });
+        this.report(
+          `  ${id}: ${colors.yellow('held')} — ${verdict.holds.join('; ')}${stored === null ? '' : '; the stored squad stays'}`,
+        );
+        continue;
+      }
+
       const squad: Squad = {
         ...plan.squad,
         // The registry is authoritative for identity; an envelope fetched
@@ -140,6 +163,12 @@ export default class Apply extends BaseCommand<RunReport> {
       players = mergePlayers(players, plan.newPlayers, plan.updatedPlayers);
       if (hasPlayerChanges(plan.newPlayers, plan.updatedPlayers)) playersDirty = true;
       if (!fileUnchanged) squadWrites.push({ file: squadFile, squad });
+      if (squad.kind === 'nation') {
+        for (const [playerId, teamId] of nationSquadOf) {
+          if (teamId === id) nationSquadOf.delete(playerId);
+        }
+        for (const member of squad.members) nationSquadOf.set(member.playerId, id);
+      }
 
       const status = teamStatus({ conflicts: verdict.conflicts, fileUnchanged });
       if (verdict.conflicts.length > 0) exitCode = worstExit(exitCode, EXIT.conflicts);
@@ -206,13 +235,14 @@ export default class Apply extends BaseCommand<RunReport> {
         written: tally('written'),
         unchanged: tally('unchanged'),
         conflicted: tally('conflicted'),
+        held: tally('held'),
         failed: tally('failed'),
         orphans,
       },
       exitCode,
     };
 
-    const summary = `apply${dryRun ? ' (dry run)' : ''}: ${report.totals.written} written, ${report.totals.unchanged} unchanged, ${report.totals.conflicted} conflicted, ${report.totals.failed} failed, ${orphans} orphans`;
+    const summary = `apply${dryRun ? ' (dry run)' : ''}: ${report.totals.written} written, ${report.totals.unchanged} unchanged, ${report.totals.conflicted} conflicted, ${report.totals.held} held, ${report.totals.failed} failed, ${orphans} orphans`;
     // Green earns its place on exactly one line: nothing is waiting on you.
     this.report(
       report.totals.failed > 0

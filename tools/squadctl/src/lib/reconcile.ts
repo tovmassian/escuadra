@@ -111,6 +111,19 @@ export interface NotInSquad {
   reason: string;
 }
 
+/** A row given a new record beside a same-named one it provably is not:
+ *  the two carry different birth dates, or the record already plays for
+ *  another nation. Proven, so nothing waits on anyone; reported because a
+ *  second record for a name is worth seeing once. */
+export interface Namesake {
+  /** The record created for the row. */
+  id: string;
+  /** The same-named records set aside. */
+  of: string[];
+  /** What tells them apart, in words. */
+  proof: string;
+}
+
 export interface TitleMismatch {
   playerId: string;
   storedTitle: string;
@@ -138,6 +151,7 @@ export interface TeamPlan {
   /** Rows dropped because a `notInSquad` decision says they do not belong. */
   excluded: LoanedOut[];
   generatedIds: string[];
+  namesakes: Namesake[];
   parsedCount: number;
   matchedCount: number;
   /** Members the squad gained. Distinct from `newPlayers`: a player already in
@@ -173,6 +187,11 @@ export interface ReconcileInput {
   /** Rows a person has asserted do not belong in this squad, when the source
    *  itself gives no reason to drop them. */
   notInSquad?: readonly NotInSquad[];
+  /** The nation squad each player sits in, as of this point in the run. A
+   *  player plays for one nation, so a nation row never joins a record that
+   *  another nation's squad already holds, unless it links that record's own
+   *  article. */
+  nationSquadOf?: ReadonlyMap<string, string>;
   /** Defaults to today. Passed explicitly in tests. */
   today?: string;
 }
@@ -230,6 +249,7 @@ export function reconcileTeam({
   aliases = [],
   titleAliases = [],
   notInSquad = [],
+  nationSquadOf = new Map(),
   today = new Date().toISOString().slice(0, 10),
 }: ReconcileInput): TeamPlan {
   const byId = new Map(players.map((p) => [p.id, p]));
@@ -264,6 +284,44 @@ export function reconcileTeam({
     const stored = titlesOf(candidate);
     if (stored.length === 0) return 'unknown';
     return stored.some((title) => titlesEquivalent(title, rowTitle)) ? 'match' : 'clash';
+  };
+
+  /** Why `candidate` is provably not the person `row` describes, or null.
+   *
+   *  Linking the record's own article (equal once normalised) settles it the
+   *  other way, whatever else disagrees: a stray date in one source is
+   *  enrich's `birth-mismatch`, not a second person. A base-equivalent link is
+   *  NOT the record's own article. Uruguay links `Emiliano Martínez
+   *  (footballer, born 1999)`, which relates to the bare `Emiliano Martínez`
+   *  stored for Argentina's goalkeeper, born 1992 — matching merged them.
+   *
+   *  Otherwise two proofs, from data both sides already carry: different
+   *  birth dates, or — for a nation row — a record another nation's squad
+   *  already holds. Burkina Faso's unlinked "Aboubacar Camara" became a
+   *  record, and Niger's then merged into it by name. */
+  const namesakeProof = (
+    candidate: Player,
+    row: (typeof envelope.members)[number],
+  ): string | null => {
+    const rowTitle = row.title;
+    if (
+      rowTitle !== undefined &&
+      titlesOf(candidate).some((title) => normalizeName(title) === normalizeName(rowTitle))
+    ) {
+      return null;
+    }
+    if (row.birth !== undefined && candidate.birth !== null && row.birth !== candidate.birth) {
+      return `born ${row.birth}, not ${candidate.birth}`;
+    }
+    const otherNation = nationSquadOf.get(candidate.id);
+    if (
+      envelope.team.kind === 'nation' &&
+      otherNation !== undefined &&
+      otherNation !== envelope.team.id
+    ) {
+      return `already in ${otherNation}'s squad`;
+    }
+    return null;
   };
 
   const byNorm = new Map<string, Player[]>();
@@ -305,6 +363,7 @@ export function reconcileTeam({
   const loanedOut: LoanedOut[] = [];
   const excluded: LoanedOut[] = [];
   const generatedIds: string[] = [];
+  const namesakes: Namesake[] = [];
   /** Stored members already claimed by a parsed row, so one record is never
    *  matched twice and departures are computed against what is left. */
   const consumed = new Set<string>();
@@ -420,6 +479,15 @@ export function reconcileTeam({
     // squad (steps 1 and 3), so the shared accounting below never counts a
     // global match as a stored-squad one.
     let matchedInSquad = false;
+    /** Same-named records this row provably is not (`namesakeProof`), set
+     *  aside before the global steps so they are neither matched nor raised
+     *  as a clash. Reported only if the row ends up creating a record. */
+    const setAside = new Map<string, string>();
+    const isSetAside = (candidate: Player): boolean => {
+      const proof = namesakeProof(candidate, row);
+      if (proof !== null) setAside.set(candidate.id, proof);
+      return proof !== null;
+    };
 
     // 1. A stored member of THIS squad whose article title is the row's.
     //    Decisive whatever the display names say: Juventus renders
@@ -457,7 +525,9 @@ export function reconcileTeam({
     if (!player) {
       const globallyTitled = players.filter(
         (candidate) =>
-          !consumed.has(candidate.id) && titleVerdict(candidate, row.title) === 'match',
+          !consumed.has(candidate.id) &&
+          titleVerdict(candidate, row.title) === 'match' &&
+          !isSetAside(candidate),
       );
       if (globallyTitled.length === 1) {
         player = globallyTitled[0];
@@ -536,7 +606,7 @@ export function reconcileTeam({
 
     // 4. Otherwise look up players.json globally, by name.
     if (!player) {
-      const named = (byNorm.get(key) ?? []).filter((c) => !consumed.has(c.id));
+      const named = (byNorm.get(key) ?? []).filter((c) => !consumed.has(c.id) && !isSetAside(c));
       const candidates = named.filter((c) => titleVerdict(c, row.title) !== 'clash');
       if (named.length > 0 && candidates.length === 0) {
         // Same display name, different article, and no stored slot to hold —
@@ -645,6 +715,13 @@ export function reconcileTeam({
     const id = playerId(row.name, takenIds);
     takenIds.add(id);
     generatedIds.push(id);
+    if (setAside.size > 0) {
+      namesakes.push({
+        id,
+        of: [...setAside.keys()],
+        proof: [...new Set(setAside.values())].join('; '),
+      });
+    }
     const created: Player = {
       id,
       name: row.name,
@@ -701,6 +778,7 @@ export function reconcileTeam({
     loanedOut,
     excluded,
     generatedIds,
+    namesakes,
     parsedCount: rows.length,
     matchedCount,
     addedCount: members.filter((m) => !storedIds.has(m.playerId)).length,

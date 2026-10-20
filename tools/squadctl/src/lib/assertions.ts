@@ -35,6 +35,9 @@ export type Conflict =
 export interface AssertionResult {
   /** Team is not written at all. The run continues with the other teams. */
   failures: string[];
+  /** Team is not written, and nothing is wrong: the source is not playable
+   *  yet. Whatever is stored stays, and the run's exit code is unaffected. */
+  holds: string[];
   /** Team IS written, `verified: false`, reason named in the report. */
   conflicts: Conflict[];
   /** Written, `verified` stays true. */
@@ -48,9 +51,14 @@ const CLUB_MIN_MEMBERS = 14;
 const CLUB_LOW_MEMBERS = 18;
 const NATION_MIN_MEMBERS = 20;
 const NATION_MAX_MEMBERS = 30;
+/** One round's worth: `ROUND_LENGTH` in lib/scoring.ts, which this module
+ *  cannot import — Node reads `lib/` as CommonJS — so a test pins the two
+ *  together instead. */
+export const PLAYABLE_NUMBERED = 10;
 
 export function assess(plan: TeamPlan): AssertionResult {
   const failures: string[] = [];
+  const holds: string[] = [];
   const conflicts: Conflict[] = [];
   const warnings: string[] = [];
   const informational: string[] = [];
@@ -69,6 +77,16 @@ export function assess(plan: TeamPlan): AssertionResult {
   }
   if (plan.squad.primaryColor === '' || plan.squad.secondaryColor === '') {
     failures.push('no identity: a team is never given an invented colour');
+  }
+
+  // --- Holds: not written, and not a failure either. A round asks
+  // PLAYABLE_NUMBERED numbered players, and `buildRound` throws below four.
+  // Brazil's article lists its current call-up with no numbers at all:
+  // written, it would replace the numbered squad Brazil already has with one
+  // nobody can play. The next sweep writes it once the article numbers it.
+  const numbered = plan.squad.members.filter((m) => m.no !== null).length;
+  if (numbered < PLAYABLE_NUMBERED) {
+    holds.push(`${numbered} of ${count} members numbered; a round asks ${PLAYABLE_NUMBERED}`);
   }
 
   // --- Conflicts: written, but verified: false.
@@ -145,6 +163,16 @@ export function assess(plan: TeamPlan): AssertionResult {
       `${plan.departed.length} departed: ${plan.departed.map((d) => d.name).join(', ')}`,
     );
   }
+  // Proven a different person from data both sides carry, so nothing is
+  // waiting on anyone — but a new record beside a same-named one is worth
+  // seeing once.
+  if (plan.namesakes.length > 0) {
+    warnings.push(
+      `${plan.namesakes.length} namesake(s) recorded as a new player: ${plan.namesakes
+        .map((n) => `${n.id} (not ${n.of.join(', ')}: ${n.proof})`)
+        .join(', ')}`,
+    );
+  }
   if (plan.generatedIds.length > 0) {
     warnings.push(`${plan.generatedIds.length} new player id(s): ${plan.generatedIds.join(', ')}`);
   }
@@ -171,6 +199,7 @@ export function assess(plan: TeamPlan): AssertionResult {
 
   return {
     failures,
+    holds,
     conflicts,
     warnings,
     informational,

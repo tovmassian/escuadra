@@ -166,17 +166,14 @@ Dropped headings are reported.
 Two requests per team, ~200 ms apart: the section list, then that section's
 raw wikitext. No per-player article is ever fetched.
 
-**Nations with no shirt numbers.** Seven articles — Brazil, Cameroon,
-Croatia, Hungary, Russia, Uruguay and Venezuela — publish their current squad
-as a call-up list with `no=` empty on every row, and Uruguay's is a 46-man
-preliminary list. They parse cleanly and would be written faithfully, but a
-squad with fewer than four numbered members is unplayable: `buildRound`
-(`lib/questionEngine.ts`) throws rather than build a level-1 prompt with no
-number to show. They are deliberately **not** applied — `data/teams.json`
-keeps their registry entries, so a sweep still fetches them, and Brazil keeps
-the numbered squad it already had. Check the numberless count in the report
-before applying a nation sweep, and hold these back again unless the picker
-has meanwhile learned to offer such a squad as Study-only.
+**Nations with no shirt numbers.** Many nation articles publish their
+current squad as a call-up list with `no=` empty (or `-`) on every row. They
+parse cleanly, and `apply` **holds** them — see `apply` below.
+
+**A shirt number listed twice.** Some articles give two players one number,
+usually two matches' call-ups merged into one table. Every player sharing it
+is written without a number, and the fetch report names them. The next sweep
+restores the number once the article is corrected.
 
 **Cache.** The default fetches fresh and writes `.cache/wikitext/`. The cache
 exists so a _parser_ change can be re-run at zero network cost, not so stale
@@ -240,6 +237,30 @@ only thing that can join Juventus's "Nico González" to a record stored as
 only when the row or the candidate record carries no title at all. When a
 row's title instead **conflicts** with what a name match would have picked,
 that is a `title-mismatch` — see below.
+
+**A namesake is never matched.** Before the global steps, a same-named record
+is set aside when it provably is someone else:
+
+- the row and the record carry **different birth dates** — Uruguay's
+  `Emiliano Martínez (footballer, born 1999)` against Argentina's goalkeeper,
+  born 1992, stored under the bare title the row's link is base-equivalent to;
+- or, for a nation row, **another nation's squad already holds the record** —
+  a player plays for one nation. `apply` keeps this current through a run, so
+  a nation applied earlier in the run counts like one on disk.
+
+Neither applies when the row links the record's own article (equal once
+normalised): the article decides. A row whose every same-named record was set
+aside gets a new one (`aboubacar-camara-2`), reported as a warning, and the
+team stays verified — nothing is left to decide. Two players in two nation
+squads under one article title still fail `lib/dataIntegrity.test.ts`: that
+is a real dual listing, and `exclude` answers it.
+
+**A squad nobody can play is held.** A round asks ten numbered players
+(`ROUND_LENGTH`), so a squad with fewer is not written: no squad file, no
+player changes, and whatever is stored stays — a sweep never replaces
+Brazil's numbered squad with its numberless call-up list. `held` is not a
+failure and leaves the exit code alone; the next sweep writes the team once
+its article numbers it.
 
 `verified` is the assertion pass's output — `true` only when a team has zero
 conflicts. `lastUpdated` moves only when something else in the file did, so a
@@ -872,7 +893,8 @@ says which two.
 | 4    | conflicts present — files written, some `verified: false` |
 | 5    | repo write, registry, or generator error                  |
 
-Code `4` means _review needed_, not _broken_.
+Code `4` means _review needed_, not _broken_. A held team (`apply`) raises no
+code at all: nothing is wrong, the article just is not playable yet.
 
 `enrich` uses the same table: `1` when a lookup went unanswered — a batch
 failed after its retries, the reply skipped a key, or `--offline` had nothing

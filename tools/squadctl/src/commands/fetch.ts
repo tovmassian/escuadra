@@ -137,6 +137,9 @@ export default class Fetch extends BaseCommand<FetchRunReport> {
         this.report(
           `  ${entry.id}: ${envelope.members.length} members from "${section.sectionTitle}"${section.fromCache ? ' (cached)' : ''}${blankRows > 0 ? ` (${blankRows} blank row(s) skipped)` : ''}${envelope.warnings.length > 0 ? colors.yellow(` — ${envelope.warnings.length} warning(s)`) : ''}`,
         );
+        for (const warning of envelope.warnings) {
+          this.report(`      ${colors.yellow('warning:')}  ${warning}`);
+        }
       } catch (error) {
         const failure = error instanceof WikiFetchError ? error : null;
         const message = error instanceof Error ? error.message : String(error);

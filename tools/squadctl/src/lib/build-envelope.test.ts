@@ -128,15 +128,57 @@ describe('buildEnvelope — the team is not written at all', () => {
   it('fails when the section parsed no members at all', () => {
     expect(build(club, '{{fs start}}{{fs end}}').failures.join()).toContain('zero members');
   });
+});
 
-  it('fails on a duplicate shirt number, via the shared envelope contract', () => {
-    const { envelope, failures } = build(
-      club,
-      `{{Fs player|no=1|nat=ESP|pos=GK|name=[[A One]]}}
-{{Fs player|no=1|nat=ESP|pos=DF|name=[[B Two]]}}`,
+describe('buildEnvelope — a duplicated shirt number', () => {
+  // Five of the first 164 nation articles listed two players under one
+  // number — Lithuania's 17, Belize's 16 — usually two matches' call-ups
+  // merged. Failing the team kept the whole squad out over one cell; picking
+  // a winner would be a guess.
+  const { envelope, failures } = build(
+    nation,
+    `{{nat fs g player|no=17|pos=DF|name=[[Deividas Malžinskas]]|club=[[Hegelmann]]}}
+{{nat fs g player|no=17|pos=MF|name=[[Faustas Steponavičius]]|club=[[Žalgiris]]}}
+{{nat fs g player|no=9|pos=FW|name=[[Manfredas Ruzgis]]|club=[[Besa]]}}`,
+  );
+
+  it('writes every player sharing it, none of them with a number', () => {
+    expect(failures).toEqual([]);
+    expect(envelope?.members.map((m) => [m.name, m.no])).toEqual([
+      ['Deividas Malžinskas', null],
+      ['Faustas Steponavičius', null],
+      ['Manfredas Ruzgis', 9],
+    ]);
+  });
+
+  it('lists three players sharing a number as a sentence', () => {
+    const three = build(
+      nation,
+      `{{nat fs g player|no=17|pos=DF|name=[[A One]]|club=[[X]]}}
+{{nat fs g player|no=17|pos=DF|name=[[B Two]]|club=[[X]]}}
+{{nat fs g player|no=17|pos=MF|name=[[C Three]]|club=[[X]]}}`,
     );
-    expect(envelope).toBeNull();
-    expect(failures.join()).toContain('duplicate shirt number');
+    expect(three.envelope?.warnings).toEqual([
+      'shirt number 17 listed for A One, B Two and C Three — written without a number',
+    ]);
+  });
+
+  it('says which number and which players, since the source contradicts itself', () => {
+    expect(envelope?.warnings).toEqual([
+      'shirt number 17 listed for Deividas Malžinskas and Faustas Steponavičius — written without a number',
+    ]);
+  });
+});
+
+describe('buildEnvelope — a dash for a shirt number', () => {
+  // Croatia writes `no=-` for a call-up with no number yet.
+  it.each(['-', '–', '—'])('reads no=%s as no number, not as an unparseable one', (dash) => {
+    const { envelope, failures } = build(
+      nation,
+      `{{nat fs g player|no=${dash}|pos=DF|name=[[Ivan Smolčić]]|club=[[Como]]}}`,
+    );
+    expect(failures).toEqual([]);
+    expect(envelope?.members[0]?.no).toBeNull();
   });
 });
 

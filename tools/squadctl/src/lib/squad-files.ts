@@ -39,6 +39,19 @@ export function readSquad(file: string): Squad {
   return JSON.parse(readFileSync(file, 'utf8')) as Squad;
 }
 
+/** Player id -> the nation squad they sit in. A player plays for one nation,
+ *  and `apply` keeps this current through a run, so a nation row never joins
+ *  a record another nation's squad already holds. */
+export function nationMemberships(squadsDir: string): Map<string, string> {
+  const memberships = new Map<string, string>();
+  for (const file of squadFiles(squadsDir)) {
+    if (file.kind !== 'nation') continue;
+    const squad = readSquad(file.path);
+    for (const member of squad.members) memberships.set(member.playerId, squad.id);
+  }
+  return memberships;
+}
+
 /** The players a `--only` run looks up: every member of the named teams. */
 export function playersInTeams(
   players: readonly Player[],
