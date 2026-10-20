@@ -1,7 +1,8 @@
 # Flag images
 
-108 national flag PNGs, one per FIFA three-letter country code (`ARG.png`,
-`IRL.png`, `KOS.png`). 160 px wide, ~432 KB in total.
+211 national flag PNGs, one per FIFA three-letter country code (`ARG.png`,
+`IRL.png`, `KOS.png`): every FIFA member but Chinese Taipei, plus Guadeloupe
+for a player nationality. 160 px wide, ~870 KB in total.
 
 Used for nation identity on the team picker, level-3 nationality answer
 options, the `NAT` stat chip and the Study screen's cards and list rows. See
@@ -44,9 +45,13 @@ ever get a hero treatment, where `contain` with a matched box would be better.
 
 ## Adding a flag
 
-Only the flags the squad data actually needs are committed, so a new nation or
-a new player nationality may need one. `lib/flags.test.ts` fails with the
-missing name when that happens.
+Every FIFA member's flag is committed, except Chinese Taipei's: FIFA shows
+that team under the Chinese Taipei Football Association's flag, an emblem,
+which constraint #2 rules out. A player nationality outside FIFA (Guadeloupe's
+was the first) may still need one; `lib/flags.test.ts` fails with the missing
+name when that happens.
+
+Tahiti's flag is French Polynesia's (`pf`), which is the flag FIFA shows.
 
 1. Find the country's ISO 3166-1 alpha-2 code (UK home nations are `gb-eng`,
    `gb-sct`, `gb-wls`, `gb-nir`; Kosovo is `xk`).
