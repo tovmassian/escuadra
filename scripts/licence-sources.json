@@ -1,35 +1,71 @@
 {
   "@react-native/assets-registry": {
-    "from": "react-native",
-    "reason": "Published from the React Native repository under its LICENSE."
+    "reason": "Published from the React Native repository under its LICENSE.",
+    "sources": [
+      {
+        "from": "react-native"
+      }
+    ]
   },
   "@react-native/js-polyfills": {
-    "from": "react-native",
-    "reason": "Published from the React Native repository under its LICENSE."
+    "reason": "Published from the React Native repository under its LICENSE.",
+    "sources": [
+      {
+        "from": "react-native"
+      }
+    ]
   },
   "@react-native/normalize-colors": {
-    "from": "react-native",
-    "reason": "Published from the React Native repository under its LICENSE."
+    "reason": "Published from the React Native repository under its LICENSE.",
+    "sources": [
+      {
+        "from": "react-native"
+      }
+    ]
   },
   "@react-native/virtualized-lists": {
-    "from": "react-native",
-    "reason": "Published from the React Native repository under its LICENSE."
+    "reason": "Published from the React Native repository under its LICENSE.",
+    "sources": [
+      {
+        "from": "react-native"
+      }
+    ]
   },
   "@expo/ui": {
-    "from": "expo",
-    "reason": "Published from the Expo repository under its MIT LICENSE."
+    "reason": "Published from the Expo repository under its MIT LICENSE.",
+    "sources": [
+      {
+        "from": "expo"
+      }
+    ]
   },
   "expo-router": {
-    "from": "expo",
-    "reason": "Published from the Expo repository under its MIT LICENSE."
+    "reason": "Published from the Expo repository under its MIT LICENSE, and bundles its own copy of React Navigation (build/react-navigation, build/fork), whose MIT LICENSE the npm tarball omits.",
+    "sources": [
+      {
+        "from": "expo"
+      },
+      {
+        "file": "scripts/licence-texts/react-navigation.LICENSE",
+        "url": "https://github.com/react-navigation/react-navigation/blob/main/packages/core/LICENSE"
+      }
+    ]
   },
   "expo-updates": {
-    "from": "expo",
-    "reason": "Published from the Expo repository under its MIT LICENSE."
+    "reason": "Published from the Expo repository under its MIT LICENSE.",
+    "sources": [
+      {
+        "from": "expo"
+      }
+    ]
   },
   "standard-navigation": {
-    "file": "scripts/licence-texts/standard-navigation.LICENSE",
-    "url": "https://github.com/react-navigation/standard-navigation/blob/main/LICENSE",
-    "reason": "Its repository carries an MIT LICENSE that the npm tarball omits."
+    "reason": "Its repository carries an MIT LICENSE that the npm tarball omits.",
+    "sources": [
+      {
+        "file": "scripts/licence-texts/standard-navigation.LICENSE",
+        "url": "https://github.com/react-navigation/standard-navigation/blob/main/LICENSE"
+      }
+    ]
   }
 }

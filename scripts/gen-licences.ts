@@ -1,7 +1,7 @@
-// GENERATED FILE producer — run via `npm run gen:licences`. Regenerates
-// lib/licences.generated.ts: the Unicode notice and every package Metro bundles
-// into the iOS and Android apps, with their licence notices, for About →
-// Licences. See docs/superpowers/specs/2026-10-20-licences-sheet-design.md.
+// Producer of lib/licences.generated.ts — run via `npm run gen:licences`. It writes
+// that file: the Unicode notice and every package Metro bundles into the iOS and
+// Android apps, with their licence notices, for About → Licences. See
+// docs/superpowers/specs/2026-10-20-licences-sheet-design.md.
 //
 // "Bundled" is read from the bundle itself: one production export with source
 // maps, whose `sources` name every file Metro included. The lockfile would list
@@ -28,11 +28,14 @@ const UNICODE_PATH = path.join(REPO_ROOT, 'i18n', 'UNICODE-LICENSE.txt');
 const UNICODE_START = 'UNICODE LICENSE V3';
 const PLATFORMS = ['ios', 'android'] as const;
 
-interface LicenceSource {
+// One entry per package in scripts/licence-sources.json: why it needs one, and
+// where its licence files come from, in order. `from` is another package in
+// node_modules, published from the same repository; `file` is a licence copied
+// verbatim into the repo from `url`.
+type LicenceSource = { from: string } | { file: string; url: string };
+interface LicenceSourceEntry {
   reason: string;
-  from?: string;
-  file?: string;
-  url?: string;
+  sources: LicenceSource[];
 }
 
 function exportSourceMaps(outDir: string): string[] {
@@ -66,7 +69,11 @@ function exportSourceMaps(outDir: string): string[] {
 }
 
 function readLicenceFiles(folder: string): LicenceFile[] {
-  return orderLicenceFiles(readdirSync(folder)).map((name) => ({
+  // Regular files only: a folder named LICENSES is not a licence text.
+  const names = readdirSync(folder, { withFileTypes: true })
+    .filter((entry) => entry.isFile())
+    .map((entry) => entry.name);
+  return orderLicenceFiles(names).map((name) => ({
     name,
     text: readFileSync(path.join(folder, name), 'utf8'),
   }));
@@ -87,22 +94,25 @@ function readPackage(relFolder: string): PackageRead {
   };
 }
 
+function resolveSource(name: string, source: LicenceSource): LicenceFile[] {
+  if ('from' in source) return readLicenceFiles(path.join(REPO_ROOT, 'node_modules', source.from));
+  if ('file' in source)
+    return [{ name: 'LICENSE', text: readFileSync(path.join(REPO_ROOT, source.file), 'utf8') }];
+  throw new Error(
+    `gen-licences: scripts/licence-sources.json entry "${name}" has a source with neither "from" nor "file"`,
+  );
+}
+
 function resolveSources(): Record<string, LicenceFile[]> {
-  const sources = JSON.parse(readFileSync(SOURCES_PATH, 'utf8')) as Record<string, LicenceSource>;
+  const entries = JSON.parse(readFileSync(SOURCES_PATH, 'utf8')) as Record<
+    string,
+    LicenceSourceEntry
+  >;
   return Object.fromEntries(
-    Object.entries(sources).map(([name, source]) => {
-      if (source.from)
-        return [name, readLicenceFiles(path.join(REPO_ROOT, 'node_modules', source.from))];
-      if (source.file) {
-        return [
-          name,
-          [{ name: 'LICENSE', text: readFileSync(path.join(REPO_ROOT, source.file), 'utf8') }],
-        ];
-      }
-      throw new Error(
-        `gen-licences: scripts/licence-sources.json entry "${name}" has neither "from" nor "file"`,
-      );
-    }),
+    Object.entries(entries).map(([name, entry]) => [
+      name,
+      entry.sources.flatMap((source) => resolveSource(name, source)),
+    ]),
   );
 }
 

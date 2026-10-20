@@ -35,8 +35,10 @@ export function collectPackageFolders(sources: Iterable<string>): string[] {
   return [...folders].sort();
 }
 
+// LICENSE, LICENSE.md, LICENSE_FONT, LICENSE-MIT.txt, NOTICE. Not license.js (source
+// code), not LICENSE.closure-compiler, and not a LICENSES folder.
 export const isLicenceFile = (fileName: string): boolean =>
-  /^(licen[cs]e|copying|notice)/i.test(fileName);
+  /^(licen[cs]e|copying|notice)([-_][a-z0-9]+)*(\.(md|txt))?$/i.test(fileName);
 export const isPrimaryLicenceFile = (fileName: string): boolean =>
   /^(licen[cs]e|copying)(\.(md|txt))?$/i.test(fileName);
 
@@ -96,7 +98,8 @@ const byNameThenVersion = (a: PackageRead, b: PackageRead): number =>
 /**
  * The sheet's data. `sourced` holds the licence files scripts/licence-sources.json
  * resolves, by package name, for packages that ship no primary licence file: they
- * come first, before the package's own files. A name and version found in two
+ * come first, in the order the entry lists them, before the package's own files. A
+ * package's copyright lines come from all of its primary files. A name and version found in two
  * folders keeps the copy that ships a primary licence file. Throws one error
  * listing every problem, so a run names them all at once.
  */
@@ -144,9 +147,9 @@ export function buildLicenceData(
       problems.add(`${id}: no licence file, and no entry in scripts/licence-sources.json`);
       continue;
     }
-    const primary = files[0];
-    const copyright =
-      primary && isPrimaryLicenceFile(primary.name) ? copyrightLines(primary.text) : [];
+    const copyright = files
+      .filter((file) => isPrimaryLicenceFile(file.name))
+      .flatMap((file) => copyrightLines(file.text));
     if (copyright.length === 0) {
       problems.add(`${id}: its licence file has no copyright line`);
       continue;

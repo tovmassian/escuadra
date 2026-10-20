@@ -3,6 +3,7 @@ import {
   buildLicenceData,
   collectPackageFolders,
   copyrightLines,
+  isLicenceFile,
   orderLicenceFiles,
   packageFolderFromSource,
   type PackageRead,
@@ -56,6 +57,35 @@ it('orders licence files: primary first, then the rest, and drops the others', (
   expect(
     orderLicenceFiles(['README.md', 'NOTICE', 'LICENSE_FONT', 'package.json', 'LICENSE.md']),
   ).toEqual(['LICENSE.md', 'LICENSE_FONT', 'NOTICE']);
+});
+
+describe('isLicenceFile', () => {
+  it('accepts the names licence files carry', () => {
+    for (const name of [
+      'LICENSE',
+      'LICENCE',
+      'license.md',
+      'LICENSE.txt',
+      'LICENSE_FONT',
+      'LICENSE-MIT.txt',
+      'COPYING',
+      'NOTICE',
+    ]) {
+      expect(isLicenceFile(name), name).toBe(true);
+    }
+  });
+  it('refuses source files, other extensions and folders named like a licence', () => {
+    for (const name of [
+      'license.js',
+      'LICENSE.closure-compiler',
+      'LICENSES',
+      'licenser.ts',
+      'NOTICE.json',
+      'README.md',
+    ]) {
+      expect(isLicenceFile(name), name).toBe(false);
+    }
+  });
 });
 
 describe('copyrightLines', () => {
@@ -188,6 +218,31 @@ describe('buildLicenceData', () => {
     });
     expect(data.texts[0]).toContain('Copyright (c) 2020 650 Industries');
     expect(data.texts[1]).toBe('SIL OPEN FONT LICENSE');
+  });
+
+  it('takes the copyright and the text of every sourced primary file, in order', () => {
+    const data = buildLicenceData([pkg({ name: 'expo-router', files: [] })], {
+      'expo-router': [
+        { name: 'LICENSE', text: MIT('650 Industries') },
+        { name: 'LICENSE', text: MIT('React Navigation Contributors') },
+      ],
+    });
+    expect(data.packages[0]?.copyright).toBe(
+      'Copyright (c) 2020 650 Industries\nCopyright (c) 2020 React Navigation Contributors',
+    );
+    expect(data.packages[0]?.texts).toEqual([0, 1]);
+    expect(data.texts[0]).toContain('650 Industries');
+    expect(data.texts[1]).toContain('React Navigation Contributors');
+  });
+
+  it('needs a copyright line in only one of a package’s primary files', () => {
+    const data = buildLicenceData([pkg({ name: 'expo-router', files: [] })], {
+      'expo-router': [
+        { name: 'LICENSE', text: 'Permission is hereby granted.' },
+        { name: 'LICENSE', text: MIT('React Navigation Contributors') },
+      ],
+    });
+    expect(data.packages[0]?.copyright).toBe('Copyright (c) 2020 React Navigation Contributors');
   });
 
   it('reports a sourced entry for a package that ships its own licence file', () => {

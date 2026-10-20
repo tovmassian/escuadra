@@ -1,6 +1,7 @@
 import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
+import { ALLOWED_LICENCES } from '../scripts/licences';
 import { LICENCE_TEXTS, PACKAGES, UNICODE_LICENSE } from './licences.generated';
 import { licenceParagraphs, packageKey } from './licencesView';
 
@@ -37,6 +38,12 @@ describe('lib/licences.generated.ts', () => {
       expect(p.copyright, p.name).not.toBe('');
       expect(p.texts.length, p.name).toBeGreaterThan(0);
       for (const i of p.texts) expect(LICENCE_TEXTS[i], `${p.name} → ${i}`).toBeTypeOf('string');
+    }
+  });
+
+  it('allows only the licences on the allowlist', () => {
+    for (const p of PACKAGES) {
+      expect(ALLOWED_LICENCES, `${p.name} ${p.licence}`).toContain(p.licence);
     }
   });
 
