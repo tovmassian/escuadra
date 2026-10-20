@@ -94,6 +94,12 @@ assert.doesNotMatch(
   'privacy.html is the 1.x policy and says nothing about 2.0',
 );
 
+assert.match(
+  readFileSync('privacy.html', 'utf8'),
+  /<p class="correction">\s*Correction, 20 October 2026:/,
+  'privacy.html carries the dated correction paragraph',
+);
+
 // The 2.0 policy, in five languages.
 for (const { lang, file } of policyPages) {
   const page = `${policyDir}/${file}`;
