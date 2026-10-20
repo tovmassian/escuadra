@@ -15,7 +15,20 @@ const UNICODE_KEY = 'unicode';
 // since each font file carries its own notice; every bundled package follows,
 // its full text a tap away. Notices are shown in English, as written, and
 // everything is in the bundle, so the sheet works offline and sends nothing.
+//
+// The body is its own component because Sheet mounts its children only while
+// it is open: what is expanded resets at every opening, and the 77 rows are
+// built only while the sheet is shown, not on every About render.
 export function LicencesSheet({ visible, onClose }: { visible: boolean; onClose: () => void }) {
+  const t = useT();
+  return (
+    <Sheet visible={visible} onClose={onClose} title={t.about.licences.label} testID="licences">
+      <LicencesBody />
+    </Sheet>
+  );
+}
+
+function LicencesBody() {
   const colors = useThemeColors();
   const t = useT();
   const [open, setOpen] = useState<ReadonlySet<string>>(() => new Set([UNICODE_KEY]));
@@ -60,7 +73,10 @@ export function LicencesSheet({ visible, onClose }: { visible: boolean; onClose:
           accessibilityState={{ expanded }}
         >
           <Text style={styles.rowTitle}>
-            {title} {expanded ? '▾' : '▸'}
+            {title}{' '}
+            <Text accessibilityElementsHidden importantForAccessibility="no-hide-descendants">
+              {expanded ? '▾' : '▸'}
+            </Text>
           </Text>
           <Text style={styles.meta}>{meta}</Text>
         </Pressable>
@@ -70,7 +86,7 @@ export function LicencesSheet({ visible, onClose }: { visible: boolean; onClose:
   };
 
   return (
-    <Sheet visible={visible} onClose={onClose} title={t.about.licences.label} testID="licences">
+    <>
       <ScrollView
         style={styles.list}
         contentContainerStyle={styles.listContent}
@@ -86,7 +102,7 @@ export function LicencesSheet({ visible, onClose }: { visible: boolean; onClose:
         <View style={styles.section}>
           <Text style={styles.sectionName}>{t.about.licences.fonts}</Text>
           {BUNDLED_FONTS.map((font) => (
-            <View key={font.licence} style={styles.row}>
+            <View key={font.families.join()} style={styles.row}>
               <Text style={styles.rowTitle}>{font.families.join(' · ')}</Text>
               <Text style={styles.meta}>{font.licence}</Text>
             </View>
@@ -107,6 +123,6 @@ export function LicencesSheet({ visible, onClose }: { visible: boolean; onClose:
           )}
         </View>
       </ScrollView>
-    </Sheet>
+    </>
   );
 }
