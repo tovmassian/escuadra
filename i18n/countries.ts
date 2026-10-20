@@ -7,6 +7,7 @@
 // the record below is keyed by it. England, Scotland, Wales and Northern Ireland
 // are FIFA members, so they are names in their own right, not "United Kingdom".
 // i18n/__tests__/countries.test.ts checks every code has a name in every language.
+// The CLDR-derived names travel with Unicode's notice: ./UNICODE-LICENSE.txt.
 import type { FlagCode } from '@/assets/flags/generated';
 import type { SupportedLanguage } from './resolveLanguage';
 

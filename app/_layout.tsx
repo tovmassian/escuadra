@@ -7,6 +7,7 @@ import { useEffect } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-reanimated';
 
+import { launchLanguage } from '@/i18n/useT';
 import { track } from '@/lib/telemetry';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import { fontAssets } from '@/theme/fonts';
@@ -32,11 +33,12 @@ export default function RootLayout() {
 
   // The install ID can only be created once persisted state is back — before
   // that, a stored ID is indistinguishable from none. `setInstallId` is a
-  // no-op when one already exists. Then one launch signal per JS launch.
+  // no-op when one already exists. Then one launch signal per JS launch, with
+  // the language as resolved now that the preference is back.
   useEffect(() => {
     if (!hydrated) return;
     useProgress.getState().setInstallId(Crypto.randomUUID());
-    track('app.launched');
+    track('app.launched', launchLanguage());
   }, [hydrated]);
 
   if (!ready) return null;

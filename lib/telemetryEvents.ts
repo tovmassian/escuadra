@@ -6,6 +6,7 @@
 // store privacy declarations. Adding one is a disclosure review, not just a
 // code change (CLAUDE.md guardrail 4).
 
+import type { Language, LanguageSource } from '@/i18n/resolveLanguage';
 import type { ShareFormat } from '@/lib/shareResult';
 import type { Squad } from '@/types/squad';
 
@@ -13,7 +14,7 @@ type SquadKind = Squad['kind'];
 
 /** Allowed property names per event. A value's type lives in `TelemetryProps`. */
 export const TELEMETRY_EVENTS = {
-  'app.launched': [],
+  'app.launched': ['language', 'languageSource'],
   'round.started': ['kind', 'level'],
   'round.completed': ['kind', 'level', 'score', 'aLaEscuadra'],
   'study.opened': ['kind'],
@@ -23,7 +24,7 @@ export const TELEMETRY_EVENTS = {
 export type TelemetryEvent = keyof typeof TELEMETRY_EVENTS;
 
 export interface TelemetryProps {
-  'app.launched': Record<string, never>;
+  'app.launched': { language: Language; languageSource: LanguageSource };
   'round.started': { kind: SquadKind; level: number };
   'round.completed': { kind: SquadKind; level: number; score: number; aLaEscuadra: boolean };
   'study.opened': { kind: SquadKind };

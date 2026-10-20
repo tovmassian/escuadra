@@ -1,5 +1,11 @@
 import { describe, expect, it } from 'vitest';
-import { LANGUAGES, resolveLanguage, SUPPORTED_LANGUAGES, type Language } from '../resolveLanguage';
+import {
+  LANGUAGES,
+  languageSource,
+  resolveLanguage,
+  SUPPORTED_LANGUAGES,
+  type Language,
+} from '../resolveLanguage';
 
 describe('resolveLanguage', () => {
   describe('following the phone', () => {
@@ -47,5 +53,21 @@ describe('resolveLanguage', () => {
     for (const language of LANGUAGES.filter((l) => !supported.includes(l))) {
       expect(resolveLanguage('system', [`${language}-XX`], SUPPORTED_LANGUAGES)).toBe('en');
     }
+  });
+});
+
+describe('languageSource', () => {
+  it('is phone when the app follows the phone', () => {
+    expect(languageSource('system', 'de')).toBe('phone');
+    expect(languageSource('system', 'en')).toBe('phone');
+  });
+
+  it('is picked when the language picked in the app is the one in use', () => {
+    expect(languageSource('fr', 'fr')).toBe('picked');
+    expect(languageSource('en', 'en')).toBe('picked');
+  });
+
+  it('is phone when a picked language is not supported and the phone decided', () => {
+    expect(languageSource('it', 'en')).toBe('phone');
   });
 });

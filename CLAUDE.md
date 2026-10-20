@@ -45,13 +45,25 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
 - **CI calls tools directly** (`node scripts/ci/…`, `npx eas-cli …`), never through new npm
   scripts, and writes temporary files to `$RUNNER_TEMP`, never new `.gitignore` lines.
 
-⚠️ **The About text on `main` now covers TelemetryDeck and the Wikimedia photos
-(#54), but the web policy has not caught up.** `gh-pages` `privacy.html` still
-carries the old text and must be replaced with the About text word for word,
-published when the first build containing it reaches users; #55 updates the
-store declarations (both covering the photos as well as TelemetryDeck). The next
-release branch (its version still TBD) is cut from `main` only after both; then
-#60 builds it.
+⚠️ **2.0.0 changes what leaves the device, so its disclosures ship with its
+store build.** The About text on `main`, in all five catalogs, covers
+TelemetryDeck, the Wikimedia photos and the language sent with the launch signal
+(#54, #146). The web policy is versioned: `privacy.html` stays the 1.x policy
+that both store listings link today, and `scripts/privacy-pages.ts` generates
+the 2.0 pages into `privacy/2/`, which #157 will publish. The order:
+
+1. Every 2.0.0 issue lands on `main`.
+2. #157 is merged, so `privacy/2/` is published (nothing links it yet).
+3. #55's App Privacy and Data safety answers are written.
+4. `release/2.0.0` is cut and built (#116).
+5. At submission, each store's App Privacy or Data safety answers and its
+   privacy URL change together: Apple before review, Play when the build is
+   uploaded.
+
+The URL moves with the answers because both belong to the app, not to a
+version: answers for 2.0 beside a URL for the 1.x page would contradict each
+other in front of Apple's reviewer. The 2.0 page names the versions it covers
+and links the 1.x policy, so 1.x users lose nothing.
 
 ## Scope and roadmap
 
@@ -154,14 +166,14 @@ update this file in the same PR rather than leave a stale rule behind.
    features are allowed when an issue asks for them. The rule is honesty,
    not abstinence: any change that alters what leaves the device (analytics,
    crash reporting, a backend call, a new SDK) ships **together** with the
-   updated privacy policy (the published page and the About screen text,
+   updated privacy policy (the privacy pages and the About screen text,
    word for word), Apple's App Privacy answers and Google Play's Data safety
    form — in a store build, never over the air. Today the traffic is
-   `expo-updates` checking EAS Update on launch (OS, project ID, a random
-   installation token) and, from the next store version, opt-out
-   TelemetryDeck usage signals (see Telemetry under Architecture rules) and
-   player-photo thumbnails loaded from Wikimedia Commons
-   (`upload.`/`thumb.wikimedia.org`, which sees the IP address).
+   `expo-updates` checking EAS Update on launch and, from the next store
+   version, opt-out TelemetryDeck usage signals (see Telemetry under
+   Architecture rules) and player-photo thumbnails loaded from Wikimedia
+   Commons (`upload.`/`thumb.wikimedia.org`). `en.about.privacy`
+   (`i18n/en.ts`) is the complete statement of what each service receives.
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes
    from the design tokens. If a token is missing, add it to the token file
    rather than inlining a value. This governs the app's own design system —
@@ -193,8 +205,8 @@ update this file in the same PR rather than leave a stale rule behind.
    A change that could make any of that untrue is flagged in its PR, and the
    text is fixed in the same PR. When the right wording is plain, write it.
    When it needs a privacy, licensing or legal judgement, stop and discuss it
-   with the owner first. The Privacy section also reaches `privacy.html` word
-   for word (guardrail 4).
+   with the owner first. The Privacy section also reaches the privacy pages
+   that `scripts/privacy-pages.ts` renders, word for word (guardrail 4).
 
 ## Data model
 
@@ -332,11 +344,17 @@ reports — is done by hand, not by a skill.
   comments in `en.ts` are mirrored in `i18n/budgets.ts`, which
   `i18n/__tests__/budgets.test.ts` holds every catalog to; the per-language facts
   (date, plurals, position codes, hand-written country names) are
-  `i18n/__tests__/translations.test.ts`. About's words
-  are `en.about`, kept as data that #146 renders into the privacy pages. Screens read text through
-  `useT()`. `lib/` modules that build text take `messages` as their last argument
-  and stay React-free. Data stays English: squads, players, clubs and position
-  codes are translated at display time by code, never by their English string.
+  `i18n/__tests__/translations.test.ts`. About's words are each catalog's
+  `about`. `scripts/privacy-pages.ts` renders its Privacy section word for
+  word into `privacy/2/` (`index.html`, `es.html`, `fr.html`, `it.html`,
+  `de.html`); a translated page ends, as About's Privacy section does in that
+  language, with the notice from `i18n/translationNotice.ts`. A change to
+  `en.about` changes every catalog's `about` in the same PR, each re-reviewed;
+  `i18n/__tests__/catalogs.test.ts` pins a hash of the English About to catch
+  one that doesn't. Screens read text through `useT()`. `lib/` modules that
+  build text take `messages` as their last argument and stay React-free. Data
+  stays English: squads, players, clubs and position codes are translated at
+  display time by code, never by their English string.
   A nation's name and a player's nationality come from `i18n/countries.ts` (FIFA
   code → name, the codes `lib/flags.ts` maps to); every screen shows a team
   through `squadDisplayName()` in `i18n/displayNames.ts`. `lib/` functions that
@@ -350,14 +368,17 @@ reports — is done by hand, not by a skill.
   `TELEMETRY_EVENTS` in `lib/telemetryEvents.ts`, alongside the pure gate
   that keeps it inert in `__DEV__`, on web (so `npm run shots*` never sends),
   when opted out, and with no App ID (`app.json` →
-  `extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only module that
+  `extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only app module that
   imports the SDK; screens call its `track()`. The anonymous `clientUser` is
   a random `installId` persisted in `stores/progress.ts`, next to the
   About-screen opt-out. Non-`production` channels send TelemetryDeck test
   signals. **A new event or property is a disclosure review** (guardrail 4):
   the privacy policy, About text, App Privacy and Data safety answers change
-  with it, in a store build. Never put names, free text or player data in a
-  payload.
+  with it, in a store build. So is an upgrade of `@telemetrydeck/sdk` (or of
+  `expo-updates`), because About states what those SDKs put in each request.
+  For TelemetryDeck, `lib/telemetrySdk.test.ts` pins the request, and a failure
+  there means About no longer describes it; `expo-updates` has no such test, so
+  read its changelog. Never put names, free text or player data in a payload.
 - Zustand's `persist` defaults to `localStorage`, which does not exist here. Use
   `createJSONStorage(() => AsyncStorage)`.
 - Every animation stays under 300ms. The app is played in fast repetitive bursts

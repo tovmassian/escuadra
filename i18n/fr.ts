@@ -1,7 +1,7 @@
 // The Français catalog (#145), typed against ./en.ts: same keys, same order,
 // same parameters. Drafted by Claude; a native speaker reviews it before it
-// merges (#145). About and the store tagline are English until #146 and #147
-// translate them with their legal and listing copy.
+// merges (#145). The store tagline is English until #147 translates it with
+// the listing copy.
 // Escuadra and a la escuadra come from ./names and are never translated.
 // French as France speaks it and L’Équipe writes it: where Belgium, Switzerland
 // or Québec differ (Nigéria, septante, magasiner), France wins.
@@ -12,6 +12,7 @@
 // The player is "tu". A team's name sits before a colon or alone, never after
 // an article ("du Brésil", "des Pays-Bas"): the data gives no gender.
 import { en, type CalendarDate, type Messages } from './en';
+import { A_LA_ESCUADRA, ESCUADRA } from './names';
 
 const MONTHS = [
   'janv.',
@@ -27,8 +28,25 @@ const MONTHS = [
   'nov.',
   'déc.',
 ];
+const MONTHS_LONG = [
+  'janvier',
+  'février',
+  'mars',
+  'avril',
+  'mai',
+  'juin',
+  'juillet',
+  'août',
+  'septembre',
+  'octobre',
+  'novembre',
+  'décembre',
+];
 
 const PHOTO_CREDITS = 'Crédits photo';
+// Feminine: it is the photo that is cropped.
+const CROPPED = 'recadrée';
+const USAGE_STATISTICS = 'Partager des statistiques d’utilisation anonymes';
 
 export const fr: Messages = {
   common: {
@@ -57,6 +75,9 @@ export const fr: Messages = {
     /** "21 août 2026", and "1er août 2026" on the first of the month. */
     date: ({ day, month, year }: CalendarDate) =>
       `${day === 1 ? '1er' : day} ${MONTHS[month - 1] ?? ''} ${year}`,
+    /** "21 octobre 2026", and "1er octobre 2026" on the first of the month. */
+    longDate: ({ day, month, year }: CalendarDate) =>
+      `${day === 1 ? '1er' : day} ${MONTHS_LONG[month - 1] ?? ''} ${year}`,
   },
   // GB gardien de but, DÉF défenseur, MIL milieu, ATT attaquant.
   positionCodes: { GK: 'GB', DF: 'DÉF', MF: 'MIL', FW: 'ATT' },
@@ -131,8 +152,7 @@ export const fr: Messages = {
     revealsName: 'Affiche le nom',
   },
   credits: {
-    // Feminine: it is the photo that is cropped.
-    cropped: 'recadrée',
+    cropped: CROPPED,
     photo: 'Photo :',
     title: PHOTO_CREDITS,
     button: (count: number) => `${PHOTO_CREDITS} · ${count}`,
@@ -239,6 +259,126 @@ export const fr: Messages = {
   },
   // English until #147 localises the feature graphic with the store listing.
   store: en.store,
-  // English until #146 translates About with the privacy policy.
-  about: en.about,
+  about: {
+    version: (version: string) => `Version ${version}`,
+    // Feminine: it is the version that is built in.
+    builtIn: 'intégrée',
+    // "À propos", as the home screen's link to it says.
+    title: 'À propos',
+    intro: [
+      `${ESCUADRA} est une application indépendante et non officielle. Elle n’est ni affiliée ni associée à la FIFA, à l’UEFA, à une ligue, à une fédération nationale de football ou à un club, et n’est approuvée par aucun d’entre eux. Les noms des clubs et des sélections nationales sont utilisés uniquement à des fins d’identification et restent la propriété de leurs détenteurs respectifs. ${ESCUADRA} n’est pas non plus affiliée à la Wikimedia Foundation ni à un joueur figurant sur une photo, et n’est approuvée par aucun d’entre eux.`,
+      `${ESCUADRA} identifie les équipes par leur nom et leurs couleurs, et n’affiche jamais elle-même d’écussons, d’emblèmes ou de logos de club. Une photo de joueur peut tout de même en montrer un, sur un maillot ou à l’arrière-plan, car il fait partie de la photo d’origine. Ces signes appartiennent à leurs détenteurs, et leur présence ne signifie pas qu’un club, un sponsor ou une marque approuve ${ESCUADRA}.`,
+    ],
+    credits: {
+      heading: 'Crédits des données et des images',
+      sections: [
+        {
+          heading: 'Données des effectifs',
+          paragraphs: [
+            'Les données des effectifs sont compilées à partir de Wikipédia et de Wikidata et correspondent à la saison indiquée pour chaque équipe. Le contenu de Wikipédia est disponible sous licence CC BY-SA. Wikidata est disponible sous licence CC0.',
+          ],
+        },
+        {
+          heading: 'Photos des joueurs',
+          paragraphs: [
+            'Les photos des joueurs proviennent de Wikimedia Commons. Chacune relève du domaine public ou est utilisée sous la licence qui l’accompagne sur Commons : CC BY-SA, CC BY, CC0 ou la licence « Attribution » propre à Commons. Les photos sont recadrées pour remplir l’espace où elles apparaissent. Sur l’écran des questions, une photo trop petite pour remplir cet espace est alors affichée en entier, sur une copie agrandie et assombrie d’elle-même qui le remplit. Là où du texte de l’application se superpose à une photo, l’application applique un ombrage à cette partie de l’écran, et elle atténue la photo après une mauvaise réponse. Les fichiers des photos eux-mêmes ne sont pas modifiés. Tous les joueurs n’ont pas de photo.',
+            `L’auteur, la licence et le mot « ${CROPPED} » s’affichent sous la question tant qu’une photo est à l’écran, et à nouveau sous « ${PHOTO_CREDITS} » dans les résultats, pour toute la partie, et à la fin de l’écran Effectif, pour chaque joueur qui y figure. Appuie sur l’auteur pour afficher la page de la photo sur Wikimedia Commons, ou sur la licence pour en voir les conditions.`,
+          ],
+        },
+        {
+          heading: 'Drapeaux et polices',
+          paragraphs: [
+            'Les images des drapeaux proviennent de flagpedia.net et relèvent du domaine public. Les polices de caractères Inter, IBM Plex Mono et Archivo sont utilisées sous la SIL Open Font License 1.1.',
+          ],
+        },
+        {
+          heading: 'Noms de pays',
+          paragraphs: [
+            `La plupart des noms de pays dans les langues autres que l’anglais proviennent du projet Unicode CLDR et sont utilisés sous l’Unicode License v3. Les autres ont été rédigés pour ${ESCUADRA}.`,
+          ],
+        },
+      ],
+    },
+    // The usual French name for the setting.
+    vibration: 'Vibrations',
+    usageStatistics: USAGE_STATISTICS,
+    privacy: {
+      heading: 'Confidentialité',
+      lead: `${ESCUADRA} ne comporte ni compte, ni identification, ni publicité, et ne te demande jamais ton nom, ton adresse e-mail ni aucune coordonnée.`,
+      paragraphs: [
+        'Tes scores et tes réglages sont enregistrés sur ton appareil. Les seuls éléments qui le quittent sont ceux décrits ci-dessous, et aucun n’est lié à ton identité.',
+      ],
+      sections: [
+        {
+          heading: 'Photos des joueurs',
+          paragraphs: [
+            `Les photos des joueurs ne sont pas intégrées à ${ESCUADRA}. Elles sont chargées depuis Wikimedia Commons, géré par la Wikimedia Foundation : les photos d’une partie quand la partie commence, et les photos d’un effectif sur l’écran Effectif, à mesure que tu le fais défiler. Comme tout site web, Wikimedia reçoit l’adresse IP de ton appareil et les détails de chaque requête, y compris les photos demandées, et donc les joueurs de ta partie ou de ton effectif. ${ESCUADRA} n’envoie rien d’autre à Wikimedia, et ce que Wikimedia reçoit est soumis à sa propre politique de confidentialité.`,
+            'Les photos déjà chargées peuvent être conservées dans le cache de l’application sur ton appareil, afin qu’elles s’affichent plus rapidement. Sans connexion, le quiz fonctionne normalement et affiche les couleurs de l’équipe et le numéro de maillot à la place de toute photo qui ne se trouve pas déjà dans ce cache.',
+            `Appuyer sur un crédit photo ouvre la page de la photo sur Wikimedia Commons, ou sa licence sur le site de Creative Commons, dans un navigateur intégré à l’application. Ces sites ont leur propre politique de confidentialité, et ${ESCUADRA} ne peut pas voir ce que tu y fais.`,
+          ],
+        },
+        {
+          heading: 'Partage',
+          paragraphs: [
+            `Quand tu partages un résultat, une image ou un court texte est créé sur ton appareil et transmis à l’application que tu choisis dans le menu de partage de ton téléphone. ${ESCUADRA} ne voit pas, n’envoie pas et ne conserve pas ce que tu partages.`,
+          ],
+        },
+        {
+          heading: 'Statistiques d’utilisation anonymes',
+          paragraphs: [
+            `${ESCUADRA} envoie des statistiques d’utilisation anonymes à TelemetryDeck, un service de mesure d’audience, sauf si tu désactives « ${USAGE_STATISTICS} » sur l’écran « À propos » de l’application. Chacune contient une forme hachée d’un identifiant aléatoire créé pour ces statistiques (distinct de celui qu’utilise la vérification des mises à jour de l’application) et un code de session aléatoire, renouvelé à chaque démarrage de l’application. Comme tout service en ligne, TelemetryDeck reçoit aussi l’adresse IP de ton appareil et les détails techniques habituels de chaque requête, qui, sous iOS, comprennent le numéro de build de l’application et la version du système de ton appareil. Ce que TelemetryDeck reçoit est soumis à sa propre politique de confidentialité. L’identifiant des statistiques et le code de session sont aléatoires, ne sont pas dérivés de ton appareil et ne sont liés ni à toi ni à tes comptes. Ni ${ESCUADRA} ni le développeur ne partagent l’identifiant, le code de session ou les statistiques avec qui que ce soit d’autre.`,
+            `Ces statistiques sont les suivantes : l’application a été ouverte, avec sa langue et l’indication que cette langue suit celle de ton téléphone ou a été choisie dans l’application ; une partie a commencé, avec le type d’équipe (club ou sélection) et le niveau de difficulté ; une partie s’est terminée, avec ces deux mêmes informations, le score et l’indication qu’elle a été ou non ${A_LA_ESCUADRA} ; l’écran Effectif a été ouvert, avec le type d’équipe (club ou sélection) ; et un résultat a été transmis au menu de partage de ton téléphone, avec le niveau, le score et le format (image ou texte). Elles ne contiennent jamais de noms d’équipes ni de joueurs, ni tes réponses, ni rien de ce que tu saisis.`,
+          ],
+        },
+        {
+          heading: 'Mises à jour de l’application',
+          paragraphs: [
+            `Quand ${ESCUADRA} démarre, elle vérifie si une version plus récente de l’application est disponible auprès d’Expo, le service qui distribue ses mises à jour. Cette vérification envoie ce qui est nécessaire pour fournir la bonne mise à jour : le système d’exploitation de ton appareil, la version et le projet de l’application, et un identifiant aléatoire créé pour cette installation. ${ESCUADRA} n’associe cet identifiant ni à toi ni à rien de ce que tu fais dans l’application. Si l’application a planté ou n’a pas pu charger une mise à jour au démarrage, la vérification suivante envoie aussi à Expo le message d’erreur technique lié à cet échec. Comme tout service en ligne, Expo reçoit également l’adresse IP de ton appareil à chaque vérification. Sans connexion, l’application se passe de cette vérification et fonctionne normalement.`,
+          ],
+        },
+        {
+          heading: 'Ce qui est enregistré sur ton appareil',
+          paragraphs: [
+            `${ESCUADRA} enregistre huit éléments en local, sur ton appareil : ton record pour chaque équipe et chaque niveau de difficulté, dont l’application déduit les niveaux que tu as validés ; la dernière équipe et le dernier niveau joués ; ta préférence de thème, clair ou sombre ; ton choix de langue ; si les vibrations sont activées ; si l’écran Effectif affiche des cartes ou une liste ; ton choix concernant les statistiques d’utilisation ; et l’identifiant aléatoire qu’utilisent ces statistiques. La vérification des mises à jour de l’application conserve aussi son propre identifiant aléatoire sur ton appareil.`,
+            `Ces données se trouvent dans l’espace de stockage privé propre à l’application. ${ESCUADRA} elle-même n’envoie que deux de ces huit éléments hors de ton appareil, et seulement tant que les statistiques d’utilisation sont activées : l’identifiant, envoyé sous forme hachée avec chaque statistique, et ton choix de langue, inclus dans la statistique envoyée à l’ouverture de l’application. Supprimer l’application efface toutes ces données de ton appareil, ainsi que les éventuelles photos en cache. ${ESCUADRA} n’effectue aucune sauvegarde ni synchronisation de son côté, mais les sauvegardes de ton appareil (sous iOS, dans iCloud ou sur un ordinateur ; sous Android, chez Google) peuvent inclure ces données. Le développeur n’a pas accès à cet espace de stockage.`,
+          ],
+        },
+        {
+          heading: 'Rapports de plantage',
+          paragraphs: [
+            `Si tu autorises ton appareil à partager des données de diagnostic, Apple (sous iOS) ou Google (sous Android) peut partager des rapports de plantage anonymisés avec le développeur. Ce partage est géré par Apple ou Google et se contrôle dans les réglages de ton appareil. En dehors du message d’erreur que la vérification des mises à jour de l’application peut envoyer après un échec de démarrage, ${ESCUADRA} elle-même n’envoie aucun rapport de plantage.`,
+          ],
+        },
+        {
+          heading: 'Enfants',
+          paragraphs: [
+            `${ESCUADRA} ne comporte aucun compte et ne demande aucune information personnelle à qui que ce soit, y compris aux enfants. Les statistiques d’utilisation sont anonymes et peuvent être désactivées à tout moment.`,
+          ],
+        },
+      ],
+    },
+    site: {
+      title: 'Politique de confidentialité',
+      updated: (date: string) => `Dernière mise à jour : ${date}`,
+      appliesTo: (version: string) =>
+        `Cette politique s’applique à ${ESCUADRA} ${version} et aux versions ultérieures.`,
+      earlierVersions: 'Politique de confidentialité des versions antérieures',
+      home: `Page d’accueil d’${ESCUADRA}`,
+      languages: 'Langue',
+      nav: {
+        home: 'Accueil',
+        support: 'Assistance',
+        // What French sites call the header's tool links.
+        utility: 'Accès rapide',
+        footer: 'Pied de page',
+      },
+      theme: {
+        light: 'Clair',
+        dark: 'Sombre',
+        toLight: 'Passer au thème clair',
+        toDark: 'Passer au thème sombre',
+      },
+      releaseStatus: 'Désormais disponible sur l’App Store',
+    },
+  },
 };

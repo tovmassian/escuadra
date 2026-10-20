@@ -73,15 +73,23 @@ you changed the work.
 
 ## What Escuadra ships
 
-| asset                          | licence                                         | source of truth                          |
-| ------------------------------ | ----------------------------------------------- | ---------------------------------------- |
-| Squad data                     | Wikipedia CC BY-SA; Wikidata CC0                | `data/squads/`, `tools/squadctl/`        |
-| Player photos                  | per photo — see the next section                | `player.photo` in `data/players.json`    |
-| National flags                 | public domain (flagpedia.net)                   | `assets/flags/README.md`                 |
-| Inter, IBM Plex Mono           | SIL Open Font License 1.1                       | `@expo-google-fonts/*` in `package.json` |
-| Archivo (three static cuts)    | SIL Open Font License 1.1                       | `assets/fonts/archivo/README.md`         |
-| App Store / Google Play badges | Apple's and Google's artwork, under their rules | `CLAUDE.md`, guardrail 2                 |
-| Club crests, badges, logos     | **never** — trademarks, whatever their licence  | `CLAUDE.md`, guardrail 2                 |
+| asset                          | licence                                                                   | source of truth                                                                              |
+| ------------------------------ | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| Squad data                     | Wikipedia CC BY-SA; Wikidata CC0                                          | `data/squads/`, `tools/squadctl/`                                                            |
+| Player photos                  | per photo — see the next section                                          | `player.photo` in `data/players.json`                                                        |
+| National flags                 | public domain (flagpedia.net)                                             | `assets/flags/README.md`                                                                     |
+| Country names (es, fr, it, de) | Unicode License v3 (Unicode CLDR) for most; the rest written for Escuadra | `i18n/countries.ts`, `scripts/seed-country-names.ts`; the notice: `i18n/UNICODE-LICENSE.txt` |
+| Inter, IBM Plex Mono           | SIL Open Font License 1.1                                                 | `@expo-google-fonts/*` in `package.json`                                                     |
+| Archivo (three static cuts)    | SIL Open Font License 1.1                                                 | `assets/fonts/archivo/README.md`                                                             |
+| App Store / Google Play badges | Apple's and Google's artwork, under their rules                           | `CLAUDE.md`, guardrail 2                                                                     |
+| Club crests, badges, logos     | **never** — trademarks, whatever their licence                            | `CLAUDE.md`, guardrail 2                                                                     |
+
+The Unicode License asks that its copyright and permission notice appear with
+all copies of the data, or in the documentation that comes with it. In the
+repository it does: `i18n/UNICODE-LICENSE.txt` sits next to the country names
+in `i18n/countries.ts`. The app bundle does not carry it yet; #156 tracks an
+in-app licences sheet that will show it. 2.0.0 is the first build to ship these
+names, so it does not ship without #156.
 
 The flag set replaced an earlier set nobody could name a source for; a flag
 whose licence you cannot state is a release blocker. The OFL lets the app
@@ -137,11 +145,13 @@ question is on screen:
   and the licence: the TASL a phone screen has no room for, one tap away.
 - **Licence** — its exact short name, linking the licence deed, or the Commons
   page when there is no deed (public domain).
-- **cropped** — the change we make: every screen crops the photo to its frame.
-  The screens also shade it where their text sits over it, and dim it after a
-  miss, and a photo too small to fill the stage sits whole over a darkened copy
-  of itself. That is the app's presentation, drawn over the photo; the file is
-  not edited. About says all of this (`CLAUDE.md`, guardrail 7).
+- **cropped** — the change we make: every screen crops the photo to fill the
+  space it appears in. On the question screen, a photo too small to fill the
+  stage is shown whole instead, over an enlarged, darkened copy of itself
+  cropped to fill it, so its credit says "cropped" too. Where the app's text
+  sits over a photo, the app shades that part of the screen, and it dims the
+  photo after a miss. All of it is presentation; the file is not edited. About
+  says all of this (`CLAUDE.md`, guardrail 7).
 
 The **title is deliberately left out**. A Commons file name or caption names
 the player, and showing it would answer the question (`CLAUDE.md`, guardrail 1).
@@ -211,14 +221,16 @@ build with updated disclosures (`CLAUDE.md`, guardrail 4).
 ### Where the app says it
 
 The About screen is the user-facing half of this document. Its words live in
-`en.about` in `i18n/en.ts`, which `app/about.tsx` only renders. Its "Data and image credits" section names every source and licence in the
-table above — Wikipedia, Wikidata, Commons photos with the five accepted
-licences, flags, fonts — and says where the per-photo credit appears (under
-the question, and in the results' "photo credits" list). Its Privacy section
-says what photo loading sends to Wikimedia, that photos are cached on the
-device, and that a credit link opens a third-party site. Change a licence, a
-source or a credit surface here and the About text in the same PR, and the web
-privacy policy with it (`CLAUDE.md`, guardrail 4).
+each catalog's `about`: `i18n/en.ts` is the source and `i18n/{de,fr,es,it}.ts`
+translate it; `app/about.tsx` only renders them. Its "Data and image credits"
+section names every source and licence in the table above — Wikipedia, Wikidata,
+Commons photos with the five accepted licences, flags, fonts, country names —
+and says where the per-photo credit appears (under the question, and in the
+results' "photo credits" list). Its Privacy section says what photo loading
+sends to Wikimedia, that photos are cached on the device, and that a credit link
+opens a third-party site. Change a licence, a source or a credit surface here
+and the About text in the same PR, and the privacy pages with it, in all five
+languages (`CLAUDE.md`, guardrail 4).
 
 ## Changing the list
 

@@ -16,9 +16,17 @@ describe('reviewSheet', () => {
     expect(sheet).toMatch(/\| study\.players \| \{1\} players<br>1: 1 player/);
   });
 
-  it('leaves About and the store tagline to #146 and #147', () => {
-    expect(sheet).not.toContain('| about.');
-    expect(sheet).not.toContain('| store.');
+  it('leaves out what a language has not translated yet', () => {
+    expect(reviewSheet('de')).not.toContain('| store.');
+  });
+
+  it('includes About once a language has translated it', () => {
+    expect(reviewSheet('de')).toContain('| about.privacy.heading | Privacy | Datenschutz |');
+  });
+
+  it('shows the translation notice beside its English, in translated languages only', () => {
+    expect(reviewSheet('de')).toContain('| translationNotice | This is a translation.');
+    expect(sheet).not.toContain('| translationNotice |');
   });
 
   it('lists the country names', () => {

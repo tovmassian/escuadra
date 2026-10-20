@@ -11,6 +11,7 @@ import { en } from '@/i18n/en';
 import { catalogLeaves, isLater, type Leaf } from '@/i18n/leaves';
 import { LANGUAGE_NAMES } from '@/i18n/names';
 import type { SupportedLanguage } from '@/i18n/resolveLanguage';
+import { NOTICE_SOURCE, translationNotice } from '@/i18n/translationNotice';
 
 const budgetByPath = new Map<string, number>(
   LENGTH_BUDGETS.flatMap(({ budget, texts }) =>
@@ -41,13 +42,18 @@ export function reviewSheet(language: SupportedLanguage): string {
   const name = LANGUAGE_NAMES[language];
   const theirs = new Map(catalogLeaves(CATALOGS[language]).map((leaf) => [leaf.path, leaf]));
   const rows = catalogLeaves(en)
-    // A path #146/#147 translate, or one with no English text: nothing to review.
-    .filter((leaf) => !isLater(leaf.path) && leaf.text !== '')
+    // A path the language has not translated yet, or one with no English text: nothing to review.
+    .filter((leaf) => !isLater(leaf.path, language) && leaf.text !== '')
     .map((leaf) => {
       const translated = theirs.get(leaf.path);
       const limit = budgetByPath.get(leaf.path) ?? '';
       return `| ${leaf.path} | ${cell(forms(leaf))} | ${cell(translated ? forms(translated) : '')} | ${limit} |`;
     });
+  // The notice lives outside the catalogs, so it gets its own row.
+  const notice = translationNotice(language);
+  if (notice !== null) {
+    rows.push(`| translationNotice | ${cell(NOTICE_SOURCE)} | ${cell(notice)} |  |`);
+  }
   // The English table's keys are exactly the FlagCodes (countries.test.ts).
   const codes = Object.keys(COUNTRY_NAMES.en) as FlagCode[];
   const countries = codes.map(
