@@ -302,7 +302,7 @@ export const de: Messages = {
         {
           heading: 'App-Updates',
           paragraphs: [
-            `Wenn ${ESCUADRA} startet, prüft die App, ob bei Expo, dem Dienst, der ihre Updates ausliefert, eine neuere Version verfügbar ist. Die Prüfung sendet das, was nötig ist, um das richtige Update auszuliefern: das Betriebssystem deines Geräts, die Version und das Projekt der App sowie eine zufällige Kennung, die für diese Installation erstellt wurde. Wenn die App beim letzten Start abgestürzt ist oder ein Update nicht laden konnte, sendet die Prüfung außerdem die zugehörige technische Fehlermeldung an Expo. Wie jeder Onlinedienst erhält Expo bei jeder Prüfung auch die IP-Adresse deines Geräts. Die Kennung ist weder mit dir noch mit irgendetwas verknüpft, das du in der App tust. Ohne Verbindung überspringt die App die Prüfung und funktioniert wie gewohnt.`,
+            `Wenn ${ESCUADRA} startet, prüft die App, ob bei Expo, dem Dienst, der ihre Updates ausliefert, eine neuere Version verfügbar ist. Die Prüfung sendet das, was nötig ist, um das richtige Update auszuliefern: das Betriebssystem deines Geräts, die Version und das Projekt der App sowie eine zufällige Kennung, die für diese Installation erstellt wurde. ${ESCUADRA} verknüpft die Kennung weder mit dir noch mit irgendetwas, das du in der App tust. Wenn die App beim Starten abgestürzt ist oder dabei ein Update nicht laden konnte, sendet die nächste Prüfung außerdem die zugehörige technische Fehlermeldung an Expo. Wie jeder Onlinedienst erhält Expo bei jeder Prüfung auch die IP-Adresse deines Geräts. Ohne Verbindung überspringt die App die Prüfung und funktioniert wie gewohnt.`,
           ],
         },
         {

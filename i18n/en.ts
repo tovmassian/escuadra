@@ -376,7 +376,7 @@ export const en = {
         {
           heading: 'App updates',
           paragraphs: [
-            `When ${ESCUADRA} starts, it checks whether a newer version of the app is available from Expo, the service that delivers its updates. The check sends what is needed to deliver the right update: your device's operating system, the app's version and project, and a random identifier created for this installation. If the app crashed or failed to load an update as it last started, the check also sends Expo the technical error message from that failure. Like any online service, Expo also receives your device's IP address with each check. The identifier is not linked to you or to anything you do in the app. Without a connection, the app skips the check and works as usual.`,
+            `When ${ESCUADRA} starts, it checks whether a newer version of the app is available from Expo, the service that delivers its updates. The check sends what is needed to deliver the right update: your device's operating system, the app's version and project, and a random identifier created for this installation. ${ESCUADRA} does not link the identifier to you or to anything you do in the app. If the app crashed or failed to load an update while starting up, the next check also sends Expo the technical error message from that failure. Like any online service, Expo also receives your device's IP address with each check. Without a connection, the app skips the check and works as usual.`,
           ],
         },
         {
