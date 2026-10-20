@@ -374,13 +374,15 @@ unless `--offline`; writes only `data/players.json`. Design and results:
 `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.
 
 Per-player data comes in batches of 50, never one request per player — the
-same rule `fetch` keeps. Three stages, about 175 requests and under four
-minutes for the whole base at a 500 ms courtesy delay:
+same rule `fetch` keeps. Four stages — the infobox only where birth dates
+disagree — about 175 requests and under four minutes for the whole base at a
+500 ms courtesy delay:
 
 | stage     | asks for                                                                            |
 | --------- | ----------------------------------------------------------------------------------- |
 | Wikipedia | each `wikiTitle`'s free lead image and Wikidata item                                |
 | Wikidata  | each item's `instance of`, date of birth and image (P31/P569/P18)                   |
+| Infobox   | each article whose birth dates disagree: its infobox birth date and current club    |
 | Commons   | each photo's next candidate: 960 px thumbnail, original size, licence, author, page |
 
 Commons runs in passes: every photo's first candidate, then the item's own
@@ -815,8 +817,23 @@ conflict: birth date on torres ("Ferran Torres") — stored 1998-02-29, Wikidata
 
 The stored birth date and Wikidata disagree. Either can be wrong, or the
 title names a different person — a different birth date is how that shows
-up — so `enrich` writes neither date and **holds the photo** until you answer.
-Exit code `4`.
+up.
+
+**`enrich` first asks the article's infobox**, the tie-break below, made
+mechanical: one batched request per 50 disagreeing titles, cached like the
+other stages.
+
+- Infobox = stored date: Wikidata is the odd one out, and the stored date
+  stands (`confirmed`).
+- Infobox = Wikidata's date, **and** the infobox's current club is ours: the
+  stored date was a typo in the squad table, and Wikidata's is written
+  (`corrected`). Without the club the article could be a namesake's — Iraq
+  links Hussein Hassan to an Al-Zawraa player's article, and the squad says
+  Erbil.
+
+Of the first 103 on the new nations, 88 settled this way. What remains is a
+conflict: `enrich` writes neither date and **holds the photo** until you
+answer. Exit code `4`.
 
 **You decide which source is right.** Read the article's infobox: this
 project's source is Wikipedia, so it breaks the tie.

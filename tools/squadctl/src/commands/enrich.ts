@@ -11,6 +11,7 @@ import {
   describeBirthConflict,
   enrichPlayer,
   pendingFiles,
+  pendingInfoboxes,
   summarize,
   type BirthConflict,
   type EnrichSummary,
@@ -21,7 +22,14 @@ import { CREDITS, type CreditOutcome } from '../lib/photo-credit.ts';
 import { readPlayers, writePlayers } from '../lib/players-file.ts';
 import { playersInTeams, readSquad, seasonYears, squadFiles } from '../lib/squad-files.ts';
 import { WikimediaClient, type Lookup } from '../lib/wikimedia-fetch.ts';
-import { ARTICLES, PEOPLE, type ArticleInfo, type PersonInfo } from '../lib/wikimedia-parse.ts';
+import {
+  ARTICLES,
+  INFOBOXES,
+  PEOPLE,
+  type ArticleInfo,
+  type InfoboxInfo,
+  type PersonInfo,
+} from '../lib/wikimedia-parse.ts';
 
 type PlayerRow = { id: string } & Pick<
   PlayerEnrichment,
@@ -137,7 +145,8 @@ export default class Enrich extends BaseCommand<EnrichReport> {
     return playersInTeams(players, squads, ids);
   }
 
-  /** Wikipedia for each article, then Wikidata for its item, then Commons in
+  /** Wikipedia for each article, then Wikidata for its item, then the
+   *  infobox of each article whose birth dates disagree, then Commons in
    *  passes: every photo's first candidate, then the item's image only for
    *  the photos whose first one proved unusable. A key no lookup answers is
    *  recorded as failed, and its players keep what they have. */
@@ -153,6 +162,8 @@ export default class Enrich extends BaseCommand<EnrichReport> {
       failedTitles: new Set<string>(),
       failedItems: new Set<string>(),
       failedFiles: new Set<string>(),
+      infoboxes: new Map<string, InfoboxInfo>(),
+      failedInfoboxes: new Set<string>(),
     };
     const sorted = (values: Iterable<string>) => [...new Set(values)].sort();
 
@@ -165,6 +176,11 @@ export default class Enrich extends BaseCommand<EnrichReport> {
       ),
     );
     await this.stage(client, PEOPLE, ids, lookups.people, lookups.failedItems, failures);
+
+    // Only where a stored birth date and Wikidata's disagree: the article's
+    // own infobox breaks the tie before it is handed to a person.
+    const ties = pendingInfoboxes(players, lookups);
+    await this.stage(client, INFOBOXES, ties, lookups.infoboxes, lookups.failedInfoboxes, failures);
 
     // Every pass answers or fails each file it asks for, so a file is never
     // asked twice and the passes end — at the latest after one per candidate.

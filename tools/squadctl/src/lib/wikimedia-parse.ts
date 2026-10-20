@@ -225,3 +225,114 @@ export const PEOPLE: Lookup<PersonInfo | null, Entity> = {
   },
   read: readPerson,
 };
+
+/** What an article's infobox says, for breaking a birth-date tie between the
+ *  stored date and Wikidata's: this project's source is Wikipedia. */
+export interface InfoboxInfo {
+  /** `YYYY-MM-DD`, or null when the infobox gives no day-precise date. */
+  birth: string | null;
+  /** The current club as the infobox shows it, or null. */
+  club: string | null;
+}
+
+/** A lead section as cached: only the two raw infobox values read, so a rule
+ *  change re-runs offline and the cache stays small. */
+export interface InfoboxPage {
+  title: string;
+  birthDate: string | null;
+  currentClub: string | null;
+}
+
+interface RevisionPage {
+  title: string;
+  missing?: boolean;
+  revisions?: { slots?: { main?: { content?: string } } }[];
+}
+
+/** One infobox parameter's raw value: the rest of its line. */
+function infoboxValue(wikitext: string, names: readonly string[]): string | null {
+  for (const name of names) {
+    const value = new RegExp(`\\|\\s*${name}\\s*=([^\\n]*)`).exec(wikitext)?.[1]?.trim();
+    if (value !== undefined && value !== '') return value;
+  }
+  return null;
+}
+
+const MONTHS = [
+  'january',
+  'february',
+  'march',
+  'april',
+  'may',
+  'june',
+  'july',
+  'august',
+  'september',
+  'october',
+  'november',
+  'december',
+];
+
+/** The date a `{{birth date and age}}`-family template gives: its first three
+ *  positional parameters, the month as a number or a name. Null for anything
+ *  else — a bare year, prose, a date that does not exist — never a guess. */
+export function infoboxBirth(raw: string | null): string | null {
+  if (raw === null) return null;
+  const template = /\{\{\s*(?:birth[ _-]date(?:[ _-]and[ _-]age)?|bda|dob)\s*\|([^{}]*)\}\}/i.exec(
+    raw,
+  )?.[1];
+  if (template === undefined) return null;
+  const [year, month, day] = template
+    .split('|')
+    .map((part) => part.trim())
+    .filter((part) => part !== '' && !part.includes('='));
+  if (year === undefined || month === undefined || day === undefined) return null;
+  const m = /^\d{1,2}$/.test(month) ? Number(month) : MONTHS.indexOf(month.toLowerCase()) + 1;
+  if (!/^\d{4}$/.test(year) || !/^\d{1,2}$/.test(day) || m < 1) return null;
+  const date = new Date(Date.UTC(Number(year), m - 1, Number(day)));
+  const iso = date.toISOString().slice(0, 10);
+  return date.getUTCMonth() === m - 1 && date.getUTCDate() === Number(day) ? iso : null;
+}
+
+/** The current club's display name: the first link's text, else the plain
+ *  text before any note, loan or line break. */
+export function infoboxClub(raw: string | null): string | null {
+  if (raw === null) return null;
+  const link = /\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/.exec(raw);
+  const club = (link === null ? raw.split(/<|\(|\{\{/)[0] : (link[2] ?? link[1]))?.trim();
+  return club === undefined || club === '' ? null : club;
+}
+
+/** Each title's infobox birth date and current club, from the lead section's
+ *  wikitext. Asked only for the titles whose birth dates disagree. */
+export const INFOBOXES: Lookup<InfoboxInfo, InfoboxPage> = {
+  name: 'infobox',
+  endpoint: WIKIPEDIA_API,
+  params: (titles) => ({
+    action: 'query',
+    prop: 'revisions',
+    rvprop: 'content',
+    rvslots: 'main',
+    rvsection: '0',
+    redirects: '1',
+    titles: titles.join('|'),
+  }),
+  answers: (titles, replies) => {
+    const pages = pagesByTitle<RevisionPage>(titles, replies, (seen, next) => ({
+      ...seen,
+      ...next,
+      revisions: next.revisions ?? seen.revisions,
+    }));
+    const result = new Map<string, InfoboxPage>();
+    for (const [title, page] of pages) {
+      const wikitext = page.revisions?.[0]?.slots?.main?.content ?? '';
+      result.set(title, {
+        title: page.title,
+        birthDate: infoboxValue(wikitext, ['birth_date']),
+        currentClub: infoboxValue(wikitext, ['current_club', 'currentclub']),
+      });
+    }
+    return result;
+  },
+  read: (page) => ({ birth: infoboxBirth(page.birthDate), club: infoboxClub(page.currentClub) }),
+};

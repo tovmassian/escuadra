@@ -2,7 +2,14 @@ import { describe, expect, it } from 'vitest';
 import pagesResponse from './__fixtures__/wikipedia-pages.json';
 import entitiesResponse from './__fixtures__/wikidata-entities.json';
 import type { Lookup } from './wikimedia-fetch.ts';
-import { ARTICLES, PEOPLE, birthDates } from './wikimedia-parse.ts';
+import {
+  ARTICLES,
+  INFOBOXES,
+  PEOPLE,
+  birthDates,
+  infoboxBirth,
+  infoboxClub,
+} from './wikimedia-parse.ts';
 
 /** What a lookup reads for each key from a batch's replies — what the
  *  client does with each answer, cached or not. */
@@ -234,5 +241,82 @@ describe('PEOPLE answers', () => {
 
   it('answer only the ids asked for', () => {
     expect([...PEOPLE.answers(['Q8682'], [entitiesResponse]).keys()]).toEqual(['Q8682']);
+  });
+});
+
+describe('infoboxBirth', () => {
+  it.each([
+    ['{{birth date and age|1999|3|2}}', '1999-03-02'],
+    ['{{Birth date and age|df=yes|1999|03|02}}', '1999-03-02'],
+    ['{{birth date and age|2009 |January|28|df=y}}', '2009-01-28'],
+    ['{{bda|2001|11|3}}', '2001-11-03'],
+    ['{{birth date|1995|5|14}}<ref>FIFA</ref>', '1995-05-14'],
+  ])('reads %s', (raw, date) => {
+    expect(infoboxBirth(raw)).toBe(date);
+  });
+
+  it.each([null, '', '1999', '{{birth year and age|1999}}', '{{birth date and age|1999|2|30}}'])(
+    'gives nothing for %s rather than a guess',
+    (raw) => {
+      expect(infoboxBirth(raw)).toBeNull();
+    },
+  );
+});
+
+describe('infoboxClub', () => {
+  it.each([
+    [
+      '[[FC Inter Turku|Inter Turku]]<br/>(on loan from [[Strømsgodset IF|Strømsgodset]])',
+      'Inter Turku',
+    ],
+    ['[[Al-Zawraa SC]]', 'Al-Zawraa SC'],
+    ['Free agent', 'Free agent'],
+  ])('reads %s', (raw, club) => {
+    expect(infoboxClub(raw)).toBe(club);
+  });
+
+  it('gives nothing for an empty value', () => {
+    expect(infoboxClub(null)).toBeNull();
+    expect(infoboxClub('')).toBeNull();
+  });
+});
+
+describe('INFOBOXES', () => {
+  const wikitext = `{{Infobox football biography
+| name = Alie Conteh
+| birth_date = {{birth date and age|2004|10|29|df=y}}
+| currentclub = [[FC Inter Turku|Inter Turku]]
+}}
+'''Alie Conteh''' is a footballer.`;
+  const reply = {
+    query: {
+      redirects: [{ from: 'Alie Conteh (footballer)', to: 'Alie Conteh' }],
+      pages: [{ title: 'Alie Conteh', revisions: [{ slots: { main: { content: wikitext } } }] }],
+    },
+  };
+
+  it('asks for the lead section of every title in one query', () => {
+    expect(INFOBOXES.params(['A', 'B'])).toMatchObject({
+      prop: 'revisions',
+      rvsection: '0',
+      titles: 'A|B',
+    });
+  });
+
+  it('caches only the two values it reads, following redirects', () => {
+    const answers = INFOBOXES.answers(['Alie Conteh (footballer)'], [reply]);
+    expect(answers.get('Alie Conteh (footballer)')).toEqual({
+      title: 'Alie Conteh',
+      birthDate: '{{birth date and age|2004|10|29|df=y}}',
+      currentClub: '[[FC Inter Turku|Inter Turku]]',
+    });
+  });
+
+  it('reads the birth date and club from what it cached', () => {
+    const page = INFOBOXES.answers(['Alie Conteh'], [reply]).get('Alie Conteh');
+    expect(page === undefined ? null : INFOBOXES.read(page)).toEqual({
+      birth: '2004-10-29',
+      club: 'Inter Turku',
+    });
   });
 });
