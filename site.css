@@ -461,6 +461,26 @@ a:focus-visible {
   font-size: 0.9rem;
   margin-bottom: 2rem;
 }
+.legal-page .applies {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+.legal-page .correction {
+  border-left: 3px solid var(--accent);
+  padding-left: 1rem;
+  margin-bottom: 2rem;
+}
+/* The dated correction follows .updated: the pair reads as one block, with the
+   gap after the note rather than between the two. */
+.legal-page .updated:has(+ .correction) {
+  margin-bottom: 0.75rem;
+}
+/* The "applies to" line follows .updated: the two read as one block, with the
+   gap after the pair rather than between them. */
+.legal-page .updated:has(+ .applies) {
+  margin-bottom: 0.25rem;
+}
 .legal-page h2 {
   font-size: 1.15rem;
   margin-top: 2.25rem;
@@ -471,4 +491,18 @@ a:focus-visible {
 }
 .legal-page strong {
   color: var(--ink);
+}
+.legal-page .language-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+.legal-page .language-nav a {
+  color: var(--muted);
+}
+.legal-page .language-nav a[aria-current='page'] {
+  color: var(--ink);
+  text-decoration: none;
 }
