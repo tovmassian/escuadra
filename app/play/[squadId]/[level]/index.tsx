@@ -116,6 +116,9 @@ export default function Question() {
   useEffect(() => {
     if (session.phase === 'complete' && session.squadId === squadId && session.level === level) {
       const score = selectScore(session.results);
+      // Before `recordScore`, which keeps a best score for every completed
+      // round, even a 0/10: any key now means an earlier round (#57).
+      session.setEarlierRounds(Object.keys(useProgress.getState().bestScores).length > 0);
       recordScore(squadId, level, score.correct);
       if (squad) {
         track('round.completed', {

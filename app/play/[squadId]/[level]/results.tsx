@@ -20,6 +20,7 @@ import {
 } from '@/lib/resultsView';
 import { getPlayer, getRoster, getSquad } from '@/lib/squads';
 import { bannerBands, stageVeil } from '@/lib/stageView';
+import { askForReview } from '@/lib/storeReview';
 import { track } from '@/lib/telemetry';
 import { selectMissed, selectScore, useSession, type QuestionResult } from '@/stores/session';
 import { MARK_VIEWBOX, markGeometry } from '@/theme/brand';
@@ -40,8 +41,8 @@ import {
 import { useThemeColors, useThemeName } from '@/theme/useTheme';
 import type { TeamMarker } from '@/types/squad';
 import { Image } from 'expo-image';
-import { router, useLocalSearchParams } from 'expo-router';
-import { useEffect, useState } from 'react';
+import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { useCallback, useEffect, useState } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   cancelAnimation,
@@ -81,6 +82,33 @@ export default function Results() {
   // Sharing is not a next step in the study loop, so it sits in the top bar,
   // apart from the actions, and opens a sheet rather than leaving the screen.
   const [sharing, setSharing] = useState(false);
+  // The photo-credits sheet, and a credit's in-app browser opened from it.
+  const [crediting, setCrediting] = useState(false);
+
+  // After an a la escuadra round, once the celebration is over, perhaps ask
+  // for a store rating (#57). Nothing here sets state, so the screen never
+  // waits on it or re-renders for it. The wait calls the ask off if the
+  // screen is left or covered (Study is pushed over it), or if the share sheet
+  // or the photo-credits sheet opens. Coming back, or closing the sheet,
+  // starts the wait again. lib/storeReview.ts also never asks while the app is
+  // in the background.
+  const flawless =
+    tier === 'excellent' && !!squad && session.squadId === squadId && session.level === level;
+  const earlierRounds = session.earlierRounds;
+  useFocusEffect(
+    useCallback(() => {
+      if (!flawless || sharing || crediting) return;
+      let shown = true;
+      const timer = setTimeout(
+        () => askForReview({ flawless, earlierRounds }, () => shown),
+        resultsTimeline.reviewPrompt,
+      );
+      return () => {
+        shown = false;
+        clearTimeout(timer);
+      };
+    }, [flawless, earlierRounds, sharing, crediting]),
+  );
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
@@ -332,7 +360,7 @@ export default function Results() {
               actionAt(2),
             )}
           >
-            <PhotoCredits rows={photoCredits} />
+            <PhotoCredits rows={photoCredits} onOpenChange={setCrediting} />
           </Animated.View>
         </View>
       </ScrollView>
