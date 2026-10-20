@@ -126,7 +126,11 @@ names the fonts, whose notice is inside each font file.
 The list is generated, never written: `npm run gen:licences` (`scripts/gen-licences.ts`)
 exports the iOS and Android bundles with source maps and lists every package their sources
 name, so it holds what ships and nothing the build only uses. `npm run check` regenerates
-it and fails when `lib/licences.generated.ts` changes. When it does:
+it and fails when `lib/licences.generated.ts` changes. The list works at package level:
+a notice inside one bundled file of a package (a header comment from code it copied) is
+not listed separately, and `scripts/licence-sources.json` carries a package's extra
+notices where its repository names them, as for expo-router and React Navigation. When
+the check fails:
 
 - **A version or a text changed** (a dependency bump): run `npm run gen:licences` and
   commit the file.
@@ -134,8 +138,9 @@ it and fails when `lib/licences.generated.ts` changes. When it does:
   new licence is the owner's decision, made the way "Changing the list" describes for
   photos. Never widen it to make the check pass.
 - **A package ships no licence file:** find the licence in its repository and add it to
-  `scripts/licence-sources.json`, either `from` the package published from the same
-  repository or as a `file` copied verbatim into `scripts/licence-texts/`, with its URL.
+  `scripts/licence-sources.json`. An entry gives a `reason` and its `sources`, in order,
+  each either `from` a package published from the same repository or a `file` copied
+  verbatim into `scripts/licence-texts/`, with its `url`.
 - **A licence file has no copyright line:** read it, and source the package's licence as
   above.
 - **A sources entry is dead** (its package left the bundle or now ships its own licence

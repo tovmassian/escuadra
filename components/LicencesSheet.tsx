@@ -86,43 +86,45 @@ function LicencesBody() {
   };
 
   return (
-    <>
-      <ScrollView
-        style={styles.list}
-        contentContainerStyle={styles.listContent}
-        alwaysBounceVertical={false}
-      >
-        <Text style={styles.note}>{t.about.licences.originalLanguage}</Text>
+    <ScrollView
+      style={styles.list}
+      contentContainerStyle={styles.listContent}
+      alwaysBounceVertical={false}
+    >
+      <Text style={styles.note}>{t.about.licences.originalLanguage}</Text>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionName}>{t.about.licences.countryNames}</Text>
-          {row(UNICODE_KEY, UNICODE_CREDIT.source, UNICODE_CREDIT.licence, [UNICODE_LICENSE])}
-        </View>
+      <View style={styles.section}>
+        <Text style={styles.sectionName} accessibilityRole="header">
+          {t.about.licences.countryNames}
+        </Text>
+        {row(UNICODE_KEY, UNICODE_CREDIT.source, UNICODE_CREDIT.licence, [UNICODE_LICENSE])}
+      </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionName}>{t.about.licences.fonts}</Text>
-          {BUNDLED_FONTS.map((font) => (
-            <View key={font.families.join()} style={styles.row}>
-              <Text style={styles.rowTitle}>{font.families.join(' · ')}</Text>
-              <Text style={styles.meta}>{font.licence}</Text>
-            </View>
-          ))}
-        </View>
+      <View style={styles.section}>
+        <Text style={styles.sectionName} accessibilityRole="header">
+          {t.about.licences.fonts}
+        </Text>
+        {BUNDLED_FONTS.map((font) => (
+          <View key={font.families.join()} style={styles.row}>
+            <Text style={styles.rowTitle}>{font.families.join(' · ')}</Text>
+            <Text style={styles.meta}>{font.licence}</Text>
+          </View>
+        ))}
+      </View>
 
-        <View style={styles.section}>
-          <Text style={styles.sectionName}>
-            {t.about.licences.software} · {PACKAGES.length}
-          </Text>
-          {PACKAGES.map((p) =>
-            row(
-              packageKey(p),
-              `${p.name} ${p.version}`,
-              `${p.licence} · ${p.copyright.replace(/\n/g, ' ')}`,
-              p.texts.flatMap((i) => LICENCE_TEXTS[i] ?? []),
-            ),
-          )}
-        </View>
-      </ScrollView>
-    </>
+      <View style={styles.section}>
+        <Text style={styles.sectionName} accessibilityRole="header">
+          {t.about.licences.software} · {PACKAGES.length}
+        </Text>
+        {PACKAGES.map((p) =>
+          row(
+            packageKey(p),
+            `${p.name} ${p.version}`,
+            `${p.licence} · ${p.copyright.replace(/\n/g, ' ')}`,
+            p.texts.flatMap((i) => LICENCE_TEXTS[i] ?? []),
+          ),
+        )}
+      </View>
+    </ScrollView>
   );
 }
