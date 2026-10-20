@@ -896,3 +896,37 @@ describe('namesakes — a record this row provably is not', () => {
     expect(plan.squad.members.map((m) => m.playerId)).toEqual(['luis-suarez']);
   });
 });
+
+describe('clubless members', () => {
+  const nation = (members: EnvelopeMember[]) =>
+    envelope(members, {
+      id: 'asa',
+      kind: 'nation',
+      name: 'American Samoa',
+      league: undefined,
+      season: '2026',
+    });
+
+  it('lists a member whose record ends up with no club', () => {
+    const plan = reconcileTeam({
+      envelope: nation([
+        row({ name: "Ali'i Mitchell", nationality: 'American Samoa', club: undefined }),
+      ]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.clubless).toEqual(['alii-mitchell']);
+  });
+
+  it('does not list a member whose stored record carries the club the row leaves out', () => {
+    const known = player({ id: 'known', name: 'Known Player', club: 'Sevilla' });
+    const plan = reconcileTeam({
+      envelope: nation([
+        row({ name: 'Known Player', nationality: 'American Samoa', club: undefined }),
+      ]),
+      storedSquad: null,
+      players: [known],
+    });
+    expect(plan.clubless).toEqual([]);
+  });
+});

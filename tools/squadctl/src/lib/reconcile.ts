@@ -152,6 +152,8 @@ export interface TeamPlan {
   excluded: LoanedOut[];
   generatedIds: string[];
   namesakes: Namesake[];
+  /** Members whose record, after this plan, has no club. */
+  clubless: string[];
   parsedCount: number;
   matchedCount: number;
   /** Members the squad gained. Distinct from `newPlayers`: a player already in
@@ -749,6 +751,10 @@ export function reconcileTeam({
     });
   }
 
+  const resulting = new Map(byId);
+  for (const record of [...newPlayers, ...updatedPlayers]) resulting.set(record.id, record);
+  const clubless = members.filter((m) => !resulting.get(m.playerId)?.club).map((m) => m.playerId);
+
   const squad: Squad = {
     id: envelope.team.id,
     kind: envelope.team.kind,
@@ -779,6 +785,7 @@ export function reconcileTeam({
     excluded,
     generatedIds,
     namesakes,
+    clubless,
     parsedCount: rows.length,
     matchedCount,
     addedCount: members.filter((m) => !storedIds.has(m.playerId)).length,

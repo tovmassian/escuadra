@@ -258,7 +258,9 @@ is a real dual listing, and `exclude` answers it.
 **A squad nobody can play is held.** A round asks ten numbered players
 (`ROUND_LENGTH`), so a squad with fewer is not written: no squad file, no
 player changes, and whatever is stored stays — a sweep never replaces
-Brazil's numbered squad with its numberless call-up list. `held` is not a
+Brazil's numbered squad with its numberless call-up list. Level 3 asks a
+nation squad's players their club, so a nation squad with a member who has
+none (American Samoa leaves `club=` empty on five rows) is held too. `held` is not a
 failure and leaves the exit code alone; the next sweep writes the team once
 its article numbers it.
 

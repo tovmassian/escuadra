@@ -413,7 +413,7 @@ describe('regression 1: lastUpdated stability', () => {
     const clubFiller = fillers(17, 'sev-f', 2, { club: 'Sevilla', nationality: 'Spain' });
     // Nine, so Spain carries one round of numbered members with Raya and is
     // never held.
-    const nationFiller = fillers(9, 'esp-f', 20, { nationality: 'Spain', club: null });
+    const nationFiller = fillers(9, 'esp-f', 20, { nationality: 'Spain', club: 'Other FC' });
 
     const storedClub = clubSquad({
       lastUpdated: '2026-01-01',
@@ -748,8 +748,8 @@ describe('one nation per player, across a run', () => {
       squads: [],
     });
     const squadRows = (id: string, name: string) => [
-      row({ name: 'Aboubacar Camara', no: 1, position: 'FW', nationality: name }),
-      ...fillers(21, `${id}-f`, 2, {}, { nationality: name }).rows,
+      row({ name: 'Aboubacar Camara', no: 1, position: 'FW', nationality: name, club: 'Bylis' }),
+      ...fillers(21, `${id}-f`, 2, {}, { nationality: name, club: 'Bylis' }).rows,
     ];
     const team = (id: string, name: string) =>
       nationTeam({ id, name, source: `https://en.wikipedia.org/wiki/${name}` });

@@ -89,6 +89,14 @@ export function assess(plan: TeamPlan): AssertionResult {
     holds.push(`${numbered} of ${count} members numbered; a round asks ${PLAYABLE_NUMBERED}`);
   }
 
+  // Level 3 asks a nation squad's players their club. American Samoa's article
+  // leaves `club=` empty on five rows, which nothing upstream can fill in.
+  if (!isClub && plan.clubless.length > 0) {
+    holds.push(
+      `${plan.clubless.length} member(s) with no club, which level 3 asks a nation squad's players: ${plan.clubless.join(', ')}`,
+    );
+  }
+
   // --- Conflicts: written, but verified: false.
   for (const item of plan.ambiguous) {
     conflicts.push({

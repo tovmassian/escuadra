@@ -32,6 +32,7 @@ const plan = (over: Partial<TeamPlan> = {}): TeamPlan => ({
   excluded: [],
   generatedIds: [],
   namesakes: [],
+  clubless: [],
   parsedCount: 25,
   matchedCount: 25,
   addedCount: 0,
@@ -119,6 +120,20 @@ describe('assess — an unplayable squad is held', () => {
   it('holds a club squad by the same rule', () => {
     const result = assess(plan({ squad: numbering('club', 25, 4), numberlessCount: 21 }));
     expect(result.holds).toHaveLength(1);
+  });
+
+  it('holds a nation squad with a member who has no club: level 3 asks it', () => {
+    // American Samoa's article leaves `club=` empty on five rows.
+    const result = assess(
+      plan({ squad: squad('nation', 23), clubless: ['alii-mitchell', 'malachi-drago'] }),
+    );
+    expect(result.holds).toEqual([
+      "2 member(s) with no club, which level 3 asks a nation squad's players: alii-mitchell, malachi-drago",
+    ]);
+  });
+
+  it('does not hold a club squad on clubs, which it gives every member itself', () => {
+    expect(assess(plan({ clubless: ['x'] })).holds).toEqual([]);
   });
 
   it('is not a conflict: a held team is never written, so has no verified to lower', () => {
