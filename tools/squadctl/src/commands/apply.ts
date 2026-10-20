@@ -214,6 +214,10 @@ export default class Apply extends BaseCommand<RunReport> {
         (JSON.parse(readFileSync(file, 'utf8')) as Squad);
       for (const member of squad.members) referenced.add(member.playerId);
     }
+    // A new team's file is not on disk yet — or ever, in a dry run.
+    for (const write of squadWrites) {
+      for (const member of write.squad.members) referenced.add(member.playerId);
+    }
     const orphans = players.filter((p) => !referenced.has(p.id)).length;
 
     if (!dryRun && hasWritableChanges(squadWrites.length, playersDirty)) {

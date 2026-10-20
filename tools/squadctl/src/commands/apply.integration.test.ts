@@ -303,6 +303,7 @@ interface TeamReportShape {
 interface RunReportShape {
   dryRun: boolean;
   teams: TeamReportShape[];
+  totals: { orphans: number };
   exitCode: number;
 }
 
@@ -769,7 +770,9 @@ describe('one nation per player, across a run', () => {
       },
     ]);
 
-    await runApply(root, envelopesDir);
+    const report = await runApply(root, envelopesDir);
+    // Both squads are new, so no file was on disk to count their members from.
+    expect(report.totals.orphans).toBe(0);
 
     const camaraOf = (relPath: string) =>
       readSquad(dataDir, relPath).members.find((m) => m.no === 1)?.playerId;
