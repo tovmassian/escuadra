@@ -2,7 +2,7 @@
 
 211 national flag PNGs, one per FIFA three-letter country code (`ARG.png`,
 `IRL.png`, `KOS.png`): every FIFA member but Chinese Taipei, plus Guadeloupe
-for a player nationality. 160 px wide, ~870 KB in total.
+for a player nationality. 160 px wide, ~160 KB in total.
 
 Used for nation identity on the team picker, level-3 nationality answer
 options, the `NAT` stat chip and the Study screen's cards and list rows. See
