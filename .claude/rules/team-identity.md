@@ -32,7 +32,7 @@ Both `data/index.json` (the picker manifest) and each squad file carry
 `primaryColor`/`secondaryColor`/`marker`, since the picker never imports full
 squad JSON.
 
-It does **not** apply to team identity colour, which
+Guardrail 5 (never hardcode a colour) does **not** apply to team identity colour, which
 is real-world fact about a specific club or nation, not a design choice. Never invent, rotate, or arbitrarily
 assign a team's colour; it must be the team's actual real colour.
 
