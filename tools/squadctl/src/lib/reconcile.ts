@@ -705,6 +705,9 @@ export function reconcileTeam({
       if (consumed.has(m.playerId) || claimedByAnotherRow.has(m.playerId)) return false;
       const departed = byId.get(m.playerId);
       if (!looksLikeRename(departed?.name ?? '', row.name)) return false;
+      // A split rules out this pair only: the next lookalike is still asked
+      // about (Brazil's Danilo, split from Danilo Luiz, is Danilo Santos).
+      if (splitAccepted(m.playerId, row.name)) return false;
       if (
         departed !== undefined &&
         row.birth !== undefined &&
@@ -718,7 +721,7 @@ export function reconcileTeam({
       }
       return true;
     });
-    if (renamed !== undefined && !splitAccepted(renamed.playerId, row.name)) {
+    if (renamed !== undefined) {
       const storedName = byId.get(renamed.playerId)?.name ?? renamed.playerId;
       possibleRenames.push({
         departedId: renamed.playerId,

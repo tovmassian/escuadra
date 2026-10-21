@@ -1026,3 +1026,25 @@ describe('a birth date proves nothing on a record no article backs', () => {
     });
   });
 });
+
+describe('a split rules out one pair, not every lookalike', () => {
+  // Brazil, October 2026: "Danilo" arrived as both Danilo Luiz (born 1991)
+  // and Danilo Santos (born 2001, the same Botafogo player) left. With
+  // `split bra danilo-luiz "Danilo"` recorded, the rename step stopped at the
+  // first lookalike and created a duplicate of Danilo Santos.
+  it('offers the next lookalike once the first is split off', () => {
+    const luiz = player({ id: 'danilo-luiz', name: 'Danilo Luiz', birth: '1991-07-15' });
+    const santos = player({ id: 'danilo-santos', name: 'Danilo Santos', birth: '2001-04-29' });
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Danilo', birth: '2001-04-29' })]),
+      storedSquad: squad([
+        { playerId: 'danilo-luiz', no: 2 },
+        { playerId: 'danilo-santos', no: 15 },
+      ]),
+      players: [luiz, santos],
+      acceptedSplits: [{ team: 'sev', departed: 'danilo-luiz', arrived: 'Danilo' }],
+    });
+    expect(plan.newPlayers).toEqual([]);
+    expect(plan.possibleRenames.map((r) => r.departedId)).toEqual(['danilo-santos']);
+  });
+});
