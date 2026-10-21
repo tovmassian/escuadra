@@ -5,7 +5,7 @@
   "printWidth": 100,
   "overrides": [
     {
-      "files": ".claude/rules/*.md",
+      "files": ".claude/rules/**/*.md",
       "options": {
         "singleQuote": false
       }

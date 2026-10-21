@@ -51,5 +51,5 @@ matching to questions.
 The one exception is the **team picker's search field** (filtering the
 club/nation list as you type): narrowing a list is not answering a
 question, and typing a few letters is the normal way to find one team
-among ~20. Keep the exception scoped to that field — do not add free-text
+among many. Keep the exception scoped to that field — do not add free-text
 input anywhere else in the app.

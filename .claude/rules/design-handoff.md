@@ -7,6 +7,8 @@ paths:
   - "scripts/generate-play-listing-assets.mjs"
   - "assets/images/**"
   - "theme/brand.ts"
+  - "theme/tokens.ts"
+  - "components/**"
 ---
 
 # The design handoff and store assets

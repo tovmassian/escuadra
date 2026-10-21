@@ -19,14 +19,9 @@ fingerprint. On `main` that is fine; on a locked release branch it is a new vers
 ## The Expo SDK pin
 
 ⚠️ **Do not upgrade the Expo SDK without deciding to cut a new store
-build.** `package.json` is pinned to SDK 57. Expo Go is no longer the only
-way to run the app — `expo-dev-client` is installed and EAS Build produces
-development, simulator, preview and production builds — so the original
-reason for the pin (Expo Go's App Store build dictating the SDK) has been
-superseded. The pin now stands for a harder reason: the binary on TestFlight
-is SDK 57, and an SDK bump changes the native runtime, which invalidates
-every over-the-air update path and forces a new build and a new submission.
-Treat an SDK upgrade as a release decision, not a dependency bump.
+build.** `package.json` pins SDK 57. An SDK bump changes the native runtime, which
+invalidates every over-the-air update path and forces a new build and a new
+submission. Treat an SDK upgrade as a release decision, not a dependency bump.
 
 ## CI
 

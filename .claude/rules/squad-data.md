@@ -54,8 +54,7 @@ One file per squad, so a future contribution touches exactly one file.
 `League` (`types/squad.ts`) is the closed set of big-5-league folder names
 under `data/squads/club/`, plus `ucl` for a Champions League group-stage
 club with no big-5 domestic home. `SquadManifestEntry.league` carries it on
-club entries (absent on nation entries) — not consumed by any screen yet,
-but available for a future picker that groups clubs by league.
+club entries (absent on nation entries).
 
 Static squad JSON is imported directly. It does **not** belong in a store.
 
@@ -68,8 +67,7 @@ Wikipedia source — not that the source is right — and it is never set by
 hand: it is an output of whichever pipeline wrote the file. Never present
 `verified: false` data as authoritative.
 
-Squad data is created and maintained two ways, which coexist and produce the
-same `RosterEnvelope`, so their outputs can be diffed directly.
+Squad data is written by one path, `squadctl`, which produces `RosterEnvelope`s.
 
 **`squadctl`** (`tools/squadctl/`, `npm run squadctl`) is the deterministic
 path and the default one. `squadctl fetch` reads Wikipedia into envelopes and

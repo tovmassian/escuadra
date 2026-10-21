@@ -49,7 +49,7 @@ that explicitly changes one wins, and updates the guardrail here and its rule in
 PR. Code cites guardrails by number, so the numbers stay.
 
 1. **Player photos are hotlinked Wikimedia Commons thumbnails, always credited.** Nothing
-   visible names the player: never the Commons file name or caption. Each load reaches
+   shown or spoken names the player: never the Commons file name or caption. Each load reaches
    Wikimedia, so photos ship in a store build with the privacy disclosures (guardrail 4),
    never over the air. Detail: `photos`.
 2. **No club crests, badges, logos, or shield shapes. Ever.** Trademark exposure, and the
@@ -85,7 +85,7 @@ PR. Code cites guardrails by number, so the numbers stay.
 7. **The About screen stays true.** It states what leaves the device and what is stored
    on it; how photos are shown and credited; which assets are used, under which licence;
    and that Escuadra is unaffiliated. A change that could make any of that untrue is
-   flagged in its PR and fixes the text in the same PR. When the wording needs a privacy,
+   flagged in its PR and fixes the text in the same PR. When the right wording is plain, write it. When the wording needs a privacy,
    licensing or legal judgement, stop and discuss it with the owner first.
 
 ## Releases

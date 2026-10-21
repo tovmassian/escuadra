@@ -7,6 +7,8 @@ paths:
   - "scripts/privacy-pages.ts"
   - "i18n/en.ts"
   - "i18n/translationNotice.ts"
+  - "package.json"
+  - "package-lock.json"
 ---
 
 # Privacy, About and telemetry
@@ -22,7 +24,7 @@ updated privacy policy (the privacy pages and the About screen text,
 word for word), Apple's App Privacy answers and Google Play's Data safety
 form — in a store build, never over the air.
 
-Today that is `expo-updates` checking EAS Update on launch, TelemetryDeck's opt-out usage signals, and player-photo thumbnails from Wikimedia Commons (`upload.`/`thumb.wikimedia.org`). `en.about.privacy` (`i18n/en.ts`) is the complete statement of what each service receives.
+The app's traffic is `expo-updates` checking EAS Update on launch, TelemetryDeck's opt-out usage signals, and player-photo thumbnails from Wikimedia Commons (`upload.`/`thumb.wikimedia.org`). `en.about.privacy` (`i18n/en.ts`) is the complete statement of what each service receives.
 
 ## About stays true (guardrail 7)
 

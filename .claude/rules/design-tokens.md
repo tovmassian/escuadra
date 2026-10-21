@@ -41,7 +41,8 @@ Every animation stays under 300ms. The app is played in fast repetitive bursts
 and slow transitions become infuriating by question six. `durations.autoAdvance`
 (1,200 ms) is a pause, not an animation: the wait after a correct answer before
 the round moves on, which a tap skips and which never runs with a screen reader
-on. It sits outside the rule.
+on. It sits outside the rule, as does `skeleton`, a shimmer's loop period
+rather than an animation.
 
 The round-over celebration and the home lockup are the one carve-out: their timelines (`strikeTiming`, `resultsTimeline`, `homeCascade` in `theme/tokens.ts`) may run past 300 ms.
 

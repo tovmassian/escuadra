@@ -20,9 +20,9 @@ actual output.
   tests: no React Native renderer is set up, on purpose.
 - **Logic is pure, so it can be tested.** `lib/questionEngine.ts` imports no React, no
   store and does no I/O. A module that wraps a native API keeps its decisions in a pure
-  sibling the tests cover: `haptics.ts` and `hapticPlan.ts`, `share.ts` and
-  `shareResult.ts`, `storeReview.ts` and `reviewPrompt.ts`, `telemetry.ts` and
-  `telemetryEvents.ts`. A screen reads a pure `lib/*View.ts`.
+  sibling the tests cover: `lib/haptics.ts` and `lib/hapticPlan.ts`, `lib/share.ts` and
+  `lib/shareResult.ts`, `lib/storeReview.ts` and `lib/reviewPrompt.ts`, `lib/telemetry.ts` and
+  `lib/telemetryEvents.ts`. A screen reads a pure `lib/*View.ts`.
 - **Test first** for logic (superpowers:test-driven-development): see the test fail for
   the right reason before writing the code.
 - **No network, no clock.** Tests read fixtures (squadctl's recorded Wikipedia and
