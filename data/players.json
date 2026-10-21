@@ -90,6 +90,17 @@
     "wikiTitle": "Ayoze Pérez"
   },
   {
+    "id": "aamir-abdallah",
+    "name": "Aamir Abdallah",
+    "fullName": "Aamir Abdallah",
+    "birth": "1999-05-08",
+    "position": "FW",
+    "nationality": "Sudan",
+    "club": "Avondale FC",
+    "photo": null,
+    "wikiTitle": "Aamir Abdallah"
+  },
+  {
     "id": "aaron-anselmino",
     "name": "Aarón Anselmino",
     "fullName": "Aarón Anselmino",
@@ -302,6 +313,39 @@
     "wikiTitle": "Abdallah Sima"
   },
   {
+    "id": "abdel-raouf",
+    "name": "Abdel Raouf",
+    "fullName": "Abdel Raouf",
+    "birth": "1993-07-18",
+    "position": "MF",
+    "nationality": "Sudan",
+    "club": "Al-Hilal",
+    "photo": null,
+    "wikiTitle": "Abdel Raouf"
+  },
+  {
+    "id": "abdelatif-ramdane",
+    "name": "Abdelatif Ramdane",
+    "fullName": "Abdelatif Ramdane",
+    "birth": "2001-01-12",
+    "position": "GK",
+    "nationality": "Algeria",
+    "club": "MC Alger",
+    "photo": null,
+    "wikiTitle": "Abdelatif Ramdane"
+  },
+  {
+    "id": "abdelaziz-el-balouti",
+    "name": "Abdelaziz El Balouti",
+    "fullName": "Abdelaziz El Balouti",
+    "birth": "1994-01-08",
+    "position": "GK",
+    "nationality": "Egypt",
+    "club": "National Bank of Egypt",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
     "id": "abdelhadi-rashid",
     "name": "Abdelhadi Rashid",
     "fullName": "Abdelhadi Rashid",
@@ -349,6 +393,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Abdelhamid Aït Boudlal"
+  },
+  {
+    "id": "abdellah-ouazane",
+    "name": "Abdellah Ouazane",
+    "fullName": "Abdellah Ouazane",
+    "birth": "2009-01-15",
+    "position": "FW",
+    "nationality": "Morocco",
+    "club": "Ajax",
+    "photo": null,
+    "wikiTitle": "Abdellah Ouazane"
   },
   {
     "id": "abdou-harroui",
@@ -419,12 +474,34 @@
     "wikiTitle": "Abdoul Tapsoba"
   },
   {
+    "id": "abdoulaye-agneba",
+    "name": "Abdoulaye Agne-Ba",
+    "fullName": "Abdoulaye Agne-Ba",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Senegal",
+    "club": "Metz",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
     "id": "abdoulaye-ba",
     "name": "Abdoulaye Ba",
     "fullName": "Abdoulaye Ba",
     "birth": null,
     "position": "FW",
     "nationality": "Senegal",
+    "club": "Metz",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
+    "id": "abdoulaye-nassoko",
+    "name": "Abdoulaye Nassoko",
+    "fullName": "Abdoulaye Nassoko",
+    "birth": null,
+    "position": "DF",
+    "nationality": "France",
     "club": "Metz",
     "photo": null,
     "wikiTitle": null
@@ -545,6 +622,17 @@
     "club": "Saint-Éloi Lupopo",
     "photo": null,
     "wikiTitle": "Abdoul-Latif Goumey"
+  },
+  {
+    "id": "abdourahmane-mbodj",
+    "name": "Abdourahmane Mbodj",
+    "fullName": "Abdourahmane Mbodj",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Senegal",
+    "club": "Metz",
+    "photo": null,
+    "wikiTitle": "Abdourahmane Mbodj"
   },
   {
     "id": "abdourahmane-mbodji",
@@ -853,6 +941,17 @@
     "wikiTitle": null
   },
   {
+    "id": "abdullahi-umar",
+    "name": "Abdullahi Umar",
+    "fullName": "Abdullahi Umar",
+    "birth": "2007-01-16",
+    "position": "FW",
+    "nationality": "Nigeria",
+    "club": "Hradec Králové",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
     "id": "abdulquddus-atiah",
     "name": "Abdulquddus Atiah",
     "fullName": "Abdulquddus Atiah",
@@ -979,6 +1078,17 @@
     "wikiTitle": "Abner Vinícius"
   },
   {
+    "id": "abo-eisa",
+    "name": "Abo Eisa",
+    "fullName": "Abo Eisa",
+    "birth": "1996-01-05",
+    "position": "FW",
+    "nationality": "Sudan",
+    "club": "Chonburi F.C.",
+    "photo": null,
+    "wikiTitle": "Abo Eisa"
+  },
+  {
     "id": "aboubacar-ali",
     "name": "Aboubacar Ali",
     "fullName": "Aboubacar Ali",
@@ -1081,6 +1191,17 @@
     "club": "Toulouse",
     "photo": null,
     "wikiTitle": "Abu Francis"
+  },
+  {
+    "id": "abuaagla-abdalla",
+    "name": "Abuaagla Abdalla",
+    "fullName": "Abuaagla Abdalla",
+    "birth": "1993-03-11",
+    "position": "MF",
+    "nationality": "Sudan",
+    "club": "Al-Ahly Benghazi",
+    "photo": null,
+    "wikiTitle": "Abuaagla Abdalla"
   },
   {
     "id": "abubakar-moffat",
@@ -1533,6 +1654,28 @@
     "wikiTitle": "Adem Avdić"
   },
   {
+    "id": "adem-zorgane",
+    "name": "Adem Zorgane",
+    "fullName": "Adem Zorgane",
+    "birth": "2000-01-06",
+    "position": "MF",
+    "nationality": "Algeria",
+    "club": "Union Saint-Gilloise",
+    "photo": null,
+    "wikiTitle": "Adem Zorgane"
+  },
+  {
+    "id": "aderemi-adeoye",
+    "name": "Aderemi Adeoye",
+    "fullName": "Aderemi Adeoye",
+    "birth": "2007-01-29",
+    "position": "MF",
+    "nationality": "Nigeria",
+    "club": "Ikorodu City",
+    "photo": null,
+    "wikiTitle": "Aderemi Adeoye"
+  },
+  {
     "id": "adeyemi",
     "name": "Karim Adeyemi",
     "fullName": "Karim David Adeyemi",
@@ -1563,6 +1706,17 @@
     "wikiTitle": "Adhavan Rajamohan"
   },
   {
+    "id": "adil-aouchiche",
+    "name": "Adil Aouchiche",
+    "fullName": "Adil Aouchiche",
+    "birth": "2002-07-15",
+    "position": "MF",
+    "nationality": "Algeria",
+    "club": "Schalke 04",
+    "photo": null,
+    "wikiTitle": "Adil Aouchiche"
+  },
+  {
     "id": "adil-boulbina",
     "name": "Adil Boulbina",
     "fullName": "Adil Boulbina",
@@ -1580,6 +1734,28 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Adil Boulbina"
+  },
+  {
+    "id": "adil-bourabaa",
+    "name": "Adil Bourabaa",
+    "fullName": "Adil Bourabaa",
+    "birth": "2005-03-09",
+    "position": "MF",
+    "nationality": "Algeria",
+    "club": "Le Mans",
+    "photo": null,
+    "wikiTitle": "Adil Bourabaa"
+  },
+  {
+    "id": "adil-demirbag",
+    "name": "Adil Demirbağ",
+    "fullName": "Adil Demirbağ",
+    "birth": "1997-12-10",
+    "position": "DF",
+    "nationality": "Türkiye",
+    "club": "Konyaspor",
+    "photo": null,
+    "wikiTitle": "Adil Demirbağ"
   },
   {
     "id": "adin-licina",
@@ -1602,6 +1778,28 @@
     "club": "Puntarenas",
     "photo": null,
     "wikiTitle": "Adonis Pineda"
+  },
+  {
+    "id": "adri-mehmeti",
+    "name": "Adri Mehmeti",
+    "fullName": "Adri Mehmeti",
+    "birth": "2009-04-06",
+    "position": "MF",
+    "nationality": "United States",
+    "club": "New York Red Bulls",
+    "photo": null,
+    "wikiTitle": "Adri Mehmeti"
+  },
+  {
+    "id": "adrian-bajrami",
+    "name": "Adrian Bajrami",
+    "fullName": "Adrian Bajrami",
+    "birth": "2002-04-05",
+    "position": "DF",
+    "nationality": "Switzerland",
+    "club": "Braga",
+    "photo": null,
+    "wikiTitle": "Adrian Bajrami"
   },
   {
     "id": "adrian-bernabe",
@@ -1790,6 +1988,17 @@
     "wikiTitle": "Aedan Scipio"
   },
   {
+    "id": "afimico-pululu",
+    "name": "Afimico Pululu",
+    "fullName": "Afimico Pululu",
+    "birth": "1999-03-23",
+    "position": "FW",
+    "nationality": "DR Congo",
+    "club": "Al-Hazem",
+    "photo": null,
+    "wikiTitle": "Afimico Pululu"
+  },
+  {
     "id": "afonso-moreira",
     "name": "Afonso Moreira",
     "fullName": "Afonso Moreira",
@@ -1862,6 +2071,17 @@
     "club": "Universidad de Chile",
     "photo": null,
     "wikiTitle": "Agustín Arce"
+  },
+  {
+    "id": "agustin-giay",
+    "name": "Agustín Giay",
+    "fullName": "Agustín Giay",
+    "birth": "2004-01-16",
+    "position": "DF",
+    "nationality": "Argentina",
+    "club": "Palmeiras",
+    "photo": null,
+    "wikiTitle": "Agustín Giay"
   },
   {
     "id": "agustin-manzur",
@@ -2154,6 +2374,17 @@
     "wikiTitle": "Ahmed Soilihi"
   },
   {
+    "id": "ahmed-tabanja",
+    "name": "Ahmed Tabanja",
+    "fullName": "Ahmed Tabanja",
+    "birth": "2000-09-02",
+    "position": "DF",
+    "nationality": "Sudan",
+    "club": "Al-Merrikh",
+    "photo": null,
+    "wikiTitle": "Ahmed Tabanja"
+  },
+  {
     "id": "ahmed-taha",
     "name": "Ahmed Taha",
     "fullName": "Ahmed Taha",
@@ -2245,6 +2476,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Ahmet Ataýew"
+  },
+  {
+    "id": "aidan-harris",
+    "name": "Aidan Harris",
+    "fullName": "Aidan Harris",
+    "birth": null,
+    "position": "GK",
+    "nationality": "England",
+    "club": "Newcastle United",
+    "photo": null,
+    "wikiTitle": null
   },
   {
     "id": "aiden-oneill",
@@ -2694,6 +2936,17 @@
     "wikiTitle": "Alaa Al-Hejji"
   },
   {
+    "id": "alaa-bellaarouch",
+    "name": "Alaa Bellaarouch",
+    "fullName": "Alaa Bellaarouch",
+    "birth": "2002-02-01",
+    "position": "GK",
+    "nationality": "Morocco",
+    "club": "Dinamo București",
+    "photo": null,
+    "wikiTitle": "Alaa Bellaarouch"
+  },
+  {
     "id": "alaa-ghram",
     "name": "Alaa Ghram",
     "fullName": "Alaa Ghram",
@@ -2711,7 +2964,7 @@
     "birth": "1992-06-24",
     "position": "DF",
     "nationality": "Austria",
-    "club": "Unattached",
+    "club": "Udinese",
     "photo": {
       "file": "20180610 FIFA Friendly Match Austria vs. Brazil David Alaba 850 1632.jpg",
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f4/20180610_FIFA_Friendly_Match_Austria_vs._Brazil_David_Alaba_850_1632.jpg/960px-20180610_FIFA_Friendly_Match_Austria_vs._Brazil_David_Alaba_850_1632.jpg",
@@ -2774,6 +3027,17 @@
     "club": "WAPDA",
     "photo": null,
     "wikiTitle": "Alamgir Ghazi"
+  },
+  {
+    "id": "alan-benitez",
+    "name": "Alan Benítez",
+    "fullName": "Alan Benítez",
+    "birth": "1994-01-25",
+    "position": "DF",
+    "nationality": "Paraguay",
+    "club": "Libertad",
+    "photo": null,
+    "wikiTitle": "Alan Benítez"
   },
   {
     "id": "alan-browne",
@@ -3021,6 +3285,17 @@
     "wikiTitle": "Albion Rrahmani"
   },
   {
+    "id": "aldair-quintana",
+    "name": "Aldair Quintana",
+    "fullName": "Aldair Quintana",
+    "birth": null,
+    "position": "GK",
+    "nationality": "Colombia",
+    "club": "Independiente del Valle",
+    "photo": null,
+    "wikiTitle": "Aldair Quintana"
+  },
+  {
     "id": "alec-georgen",
     "name": "Alec Georgen",
     "fullName": "Alec Georgen",
@@ -3196,6 +3471,17 @@
     "club": "Varaždin",
     "photo": null,
     "wikiTitle": "Aleksa Latković"
+  },
+  {
+    "id": "aleksa-terzic",
+    "name": "Aleksa Terzić",
+    "fullName": "Aleksa Terzić",
+    "birth": "1999-08-17",
+    "position": "DF",
+    "nationality": "Serbia",
+    "club": "Frosinone",
+    "photo": null,
+    "wikiTitle": "Aleksa Terzić"
   },
   {
     "id": "aleksandar-pavlovic",
@@ -3443,7 +3729,7 @@
     "fullName": "Alessandro Romano",
     "birth": "2006-06-17",
     "position": "MF",
-    "nationality": "Switzerland",
+    "nationality": "Italy",
     "club": "Cagliari",
     "photo": null,
     "wikiTitle": "Alessandro Romano (footballer, born 2006)"
@@ -3466,6 +3752,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0/at/deed.en"
     },
     "wikiTitle": "Alessandro Schöpf"
+  },
+  {
+    "id": "alessandro-sugamele",
+    "name": "Alessandro Sugamele",
+    "fullName": "Alessandro Sugamele",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Italy",
+    "club": "Cagliari",
+    "photo": null,
+    "wikiTitle": "Alessandro Sugamele"
   },
   {
     "id": "alessandro-vogliacco",
@@ -3888,6 +4185,17 @@
     "wikiTitle": "Alex Tóth"
   },
   {
+    "id": "alex-valera",
+    "name": "Alex Valera",
+    "fullName": "Alex Valera",
+    "birth": "1996-05-16",
+    "position": "FW",
+    "nationality": "Peru",
+    "club": "Universitario",
+    "photo": null,
+    "wikiTitle": "Alex Valera"
+  },
+  {
     "id": "alex-valle",
     "name": "Álex Valle",
     "fullName": "Álex Valle",
@@ -4070,6 +4378,17 @@
     "wikiTitle": "Alexander Prass"
   },
   {
+    "id": "alexander-robertson",
+    "name": "Alexander Robertson",
+    "fullName": "Alexander Robertson",
+    "birth": "2003-04-17",
+    "position": "MF",
+    "nationality": "Australia",
+    "club": "Cardiff City",
+    "photo": null,
+    "wikiTitle": "Alexander Robertson (footballer, born 2003)"
+  },
+  {
     "id": "alexander-rossinglelesiit",
     "name": "Alexander Røssing-Lelesiit",
     "fullName": "Alexander Røssing-Lelesiit",
@@ -4212,6 +4531,17 @@
     "wikiTitle": "Alexandros Kyziridis"
   },
   {
+    "id": "alexandru-borbei",
+    "name": "Alexandru Borbei",
+    "fullName": "Alexandru Borbei",
+    "birth": null,
+    "position": "GK",
+    "nationality": "Romania",
+    "club": "Lecce",
+    "photo": null,
+    "wikiTitle": "Alexandru Borbei"
+  },
+  {
     "id": "alexandru-cicaldau",
     "name": "Alexandru Cicâldău",
     "fullName": "Alexandru Cicâldău",
@@ -4229,6 +4559,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Alexandru Cicâldău"
+  },
+  {
+    "id": "alexis-canete",
+    "name": "Alexis Cañete",
+    "fullName": "Alexis Cañete",
+    "birth": "2003-08-27",
+    "position": "DF",
+    "nationality": "Paraguay",
+    "club": "Cerro Porteño",
+    "photo": null,
+    "wikiTitle": "Alexis Cañete"
   },
   {
     "id": "alexis-claudemaurice",
@@ -4458,6 +4799,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Ali Abdi (footballer)"
+  },
+  {
+    "id": "ali-abu-eshrein",
+    "name": "Ali Abu Eshrein",
+    "fullName": "Ali Abu Eshrein",
+    "birth": "1989-12-06",
+    "position": "GK",
+    "nationality": "Sudan",
+    "club": "Al-Hilal SC",
+    "photo": null,
+    "wikiTitle": "Ali Abu Eshrein"
   },
   {
     "id": "ali-agha",
@@ -4700,6 +5052,17 @@
     "wikiTitle": "Ali Maâloul"
   },
   {
+    "id": "ali-maamar",
+    "name": "Ali Maamar",
+    "fullName": "Ali Maamar",
+    "birth": "2005-03-23",
+    "position": "DF",
+    "nationality": "Morocco",
+    "club": "Anderlecht",
+    "photo": null,
+    "wikiTitle": "Ali Maamar"
+  },
+  {
     "id": "ali-madan",
     "name": "Ali Madan",
     "fullName": "Ali Madan",
@@ -4717,6 +5080,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Ali Madan"
+  },
+  {
+    "id": "ali-mahmoud",
+    "name": "Ali Mahmoud",
+    "fullName": "Ali Mahmoud",
+    "birth": "2002-12-04",
+    "position": "MF",
+    "nationality": "Egypt",
+    "club": "Al Ahly",
+    "photo": null,
+    "wikiTitle": "Ali Mahmoud (footballer)"
   },
   {
     "id": "ali-mohamed",
@@ -4916,7 +5290,7 @@
     "birth": "2000-06-04",
     "position": "DF",
     "nationality": "Ghana",
-    "club": "Rennes",
+    "club": "Nice",
     "photo": null,
     "wikiTitle": "Alidu Seidu"
   },
@@ -5148,6 +5522,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Alistair Johnston"
+  },
+  {
+    "id": "aljezoli-nouh",
+    "name": "Al-Jezoli Nouh",
+    "fullName": "Al-Jezoli Nouh",
+    "birth": "2002-10-24",
+    "position": "FW",
+    "nationality": "Sudan",
+    "club": "Al-Ahli Tripoli",
+    "photo": null,
+    "wikiTitle": "Al-Jezoli Nouh"
   },
   {
     "id": "aljosa-matko",
@@ -5428,6 +5813,17 @@
     "wikiTitle": "Alphonso Davies"
   },
   {
+    "id": "altayeb-abdelrazeg",
+    "name": "Altayeb Abdelrazeg",
+    "fullName": "Altayeb Abdelrazeg",
+    "birth": "1991-09-06",
+    "position": "DF",
+    "nationality": "Sudan",
+    "club": "Al-Hilal",
+    "photo": null,
+    "wikiTitle": "Altayeb Abdelrazeg"
+  },
+  {
     "id": "altimira",
     "name": "Adrià Altimira",
     "fullName": "Adrià Altimira",
@@ -5467,6 +5863,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Julián Alvarez"
+  },
+  {
+    "id": "alvaro-angulo",
+    "name": "Álvaro Angulo",
+    "fullName": "Álvaro Angulo",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Colombia",
+    "club": "Pumas UNAM",
+    "photo": null,
+    "wikiTitle": "Álvaro Angulo"
   },
   {
     "id": "alvaro-montero",
@@ -5516,6 +5923,17 @@
     "club": "Spanish Town Police",
     "photo": null,
     "wikiTitle": "Alvinus Myers"
+  },
+  {
+    "id": "alvyn-sanches",
+    "name": "Alvyn Sanches",
+    "fullName": "Alvyn Sanches",
+    "birth": "2003-02-12",
+    "position": "MF",
+    "nationality": "Switzerland",
+    "club": "Young Boys",
+    "photo": null,
+    "wikiTitle": "Alvyn Sanches"
   },
   {
     "id": "alynho-haidara",
@@ -5606,6 +6024,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Amadou Haidara"
+  },
+  {
+    "id": "amadou-kone",
+    "name": "Amadou Koné",
+    "fullName": "Amadou Koné",
+    "birth": "2005-05-14",
+    "position": "MF",
+    "nationality": "Ivory Coast",
+    "club": "Neom",
+    "photo": null,
+    "wikiTitle": "Amadou Koné (footballer, born May 2005)"
   },
   {
     "id": "amadou-moutari",
@@ -5873,6 +6302,17 @@
     "wikiTitle": "Amin Cherni"
   },
   {
+    "id": "amin-chiakha",
+    "name": "Amin Chiakha",
+    "fullName": "Amin Chiakha",
+    "birth": "2006-03-12",
+    "position": "FW",
+    "nationality": "Algeria",
+    "club": "Rosenborg",
+    "photo": null,
+    "wikiTitle": "Amin Chiakha"
+  },
+  {
     "id": "amin-nabizada",
     "name": "Amin Nabizada",
     "fullName": "Amin Nabizada",
@@ -6039,6 +6479,17 @@
     "wikiTitle": "Amir Daley"
   },
   {
+    "id": "amir-hossein-mahmoudi",
+    "name": "Amir Hossein Mahmoudi",
+    "fullName": "Amir Hossein Mahmoudi",
+    "birth": "2006-07-12",
+    "position": "MF",
+    "nationality": "Iran",
+    "club": "Persepolis",
+    "photo": null,
+    "wikiTitle": "Amir Mahmoudi"
+  },
+  {
     "id": "amir-murillo",
     "name": "Amir Murillo",
     "fullName": "Amir Murillo",
@@ -6168,6 +6619,17 @@
     "club": "Al-Nahda",
     "photo": null,
     "wikiTitle": "Amjad Al-Harthi"
+  },
+  {
+    "id": "ammar-taifour",
+    "name": "Ammar Taifour",
+    "fullName": "Ammar Taifour",
+    "birth": "1997-04-12",
+    "position": "MF",
+    "nationality": "Sudan",
+    "club": "CS Sfaxien",
+    "photo": null,
+    "wikiTitle": "Ammar Taifour"
   },
   {
     "id": "amos-pieper",
@@ -6729,6 +7191,17 @@
     "wikiTitle": "Andreas Shikkis"
   },
   {
+    "id": "andreas-skov-olsen",
+    "name": "Andreas Skov Olsen",
+    "fullName": "Andreas Skov Olsen",
+    "birth": "1999-12-29",
+    "position": "FW",
+    "nationality": "Denmark",
+    "club": "Başakşehir",
+    "photo": null,
+    "wikiTitle": "Andreas Skov Olsen"
+  },
+  {
     "id": "andrei-borza",
     "name": "Andrei Borza",
     "fullName": "Andrei Borza",
@@ -7143,6 +7616,17 @@
     "wikiTitle": "Andrija Maksimović"
   },
   {
+    "id": "andrija-zivkovic",
+    "name": "Andrija Živković",
+    "fullName": "Andrija Živković",
+    "birth": "1996-07-11",
+    "position": "MF",
+    "nationality": "Serbia",
+    "club": "PAOK",
+    "photo": null,
+    "wikiTitle": "Andrija Živković"
+  },
+  {
     "id": "andrik-markgraf",
     "name": "Andrik Markgraf",
     "fullName": "Andrik Markgraf",
@@ -7544,6 +8028,17 @@
     "wikiTitle": "Anis Mehmeti"
   },
   {
+    "id": "anis-soubeir",
+    "name": "Anis Soubeir",
+    "fullName": "Anis Soubeir",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Morocco",
+    "club": "Monaco",
+    "photo": null,
+    "wikiTitle": "Anis Soubeir"
+  },
+  {
     "id": "anizo-correia",
     "name": "Anizo Correia",
     "fullName": "Anizo Correia",
@@ -7762,6 +8257,17 @@
     "wikiTitle": "Anthony Quidachay"
   },
   {
+    "id": "anthony-racioppi",
+    "name": "Anthony Racioppi",
+    "fullName": "Anthony Racioppi",
+    "birth": "1998-12-31",
+    "position": "GK",
+    "nationality": "Switzerland",
+    "club": "Sion",
+    "photo": null,
+    "wikiTitle": "Anthony Racioppi"
+  },
+  {
     "id": "anthony-ralston",
     "name": "Anthony Ralston",
     "fullName": "Anthony Ralston",
@@ -7936,6 +8442,17 @@
     "wikiTitle": "Anton Ari Einarsson"
   },
   {
+    "id": "anton-gaaei",
+    "name": "Anton Gaaei",
+    "fullName": "Anton Gaaei",
+    "birth": "2002-11-19",
+    "position": "DF",
+    "nationality": "Denmark",
+    "club": "Ajax",
+    "photo": null,
+    "wikiTitle": "Anton Gaaei"
+  },
+  {
     "id": "anton-kade",
     "name": "Anton Kade",
     "fullName": "Anton Kade",
@@ -8070,6 +8587,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Antonino Gallo"
+  },
+  {
+    "id": "antonio-arena",
+    "name": "Antonio Arena",
+    "fullName": "Antonio Arena",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Italy",
+    "club": "Roma",
+    "photo": null,
+    "wikiTitle": "Antonio Arena"
   },
   {
     "id": "antonio-caracciolo",
@@ -8222,6 +8750,17 @@
     "wikiTitle": "Anzor Mekvabishvili"
   },
   {
+    "id": "aral-simsir",
+    "name": "Aral Şimşir",
+    "fullName": "Aral Şimşir",
+    "birth": "2002-06-19",
+    "position": "FW",
+    "nationality": "Türkiye",
+    "club": "Trabzonspor",
+    "photo": null,
+    "wikiTitle": "Aral Şimşir"
+  },
+  {
     "id": "aramburu",
     "name": "Jon Aramburu",
     "fullName": "Jon Aramburu",
@@ -8269,6 +8808,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Ronald Araújo"
+  },
+  {
+    "id": "arayik-eloyan",
+    "name": "Arayik Eloyan",
+    "fullName": "Arayik Eloyan",
+    "birth": "2004-03-16",
+    "position": "FW",
+    "nationality": "Armenia",
+    "club": "Ararat-Armenia",
+    "photo": null,
+    "wikiTitle": "Arayik Eloyan"
   },
   {
     "id": "arber-hoxha",
@@ -8337,6 +8887,28 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Ardon Jashari"
+  },
+  {
+    "id": "aref-aghasi",
+    "name": "Aref Aghasi",
+    "fullName": "Aref Aghasi",
+    "birth": "1997-01-02",
+    "position": "DF",
+    "nationality": "Iran",
+    "club": "Esteghlal",
+    "photo": null,
+    "wikiTitle": "Aref Aghasi"
+  },
+  {
+    "id": "aref-haji-eydi",
+    "name": "Aref Haji Eydi",
+    "fullName": "Aref Haji Eydi",
+    "birth": "1999-04-06",
+    "position": "MF",
+    "nationality": "Iran",
+    "club": "Sepahan",
+    "photo": null,
+    "wikiTitle": "Aref Haji Eydi"
   },
   {
     "id": "areso",
@@ -8694,7 +9266,7 @@
     "birth": "1998-03-11",
     "position": "GK",
     "nationality": "Belgium",
-    "club": "Lille",
+    "club": "Le Havre",
     "photo": null,
     "wikiTitle": "Arnaud Bodart"
   },
@@ -8909,6 +9481,17 @@
     "wikiTitle": "Arsen Ashirbek"
   },
   {
+    "id": "arsen-beglaryan",
+    "name": "Arsen Beglaryan",
+    "fullName": "Arsen Beglaryan",
+    "birth": "1993-02-18",
+    "position": "GK",
+    "nationality": "Armenia",
+    "club": "Alashkert",
+    "photo": null,
+    "wikiTitle": "Arsen Beglaryan"
+  },
+  {
     "id": "arsene-kouassi",
     "name": "Arsène Kouassi",
     "fullName": "Arsène Kouassi",
@@ -9059,6 +9642,17 @@
     "wikiTitle": "Arthur Chaves"
   },
   {
+    "id": "arthur-dias",
+    "name": "Arthur Dias",
+    "fullName": "Arthur Dias",
+    "birth": "2007-04-10",
+    "position": "DF",
+    "nationality": "Brazil",
+    "club": "Athletico Paranaense",
+    "photo": null,
+    "wikiTitle": "Arthur Dias"
+  },
+  {
     "id": "arthur-masuaku",
     "name": "Arthur Masuaku",
     "fullName": "Arthur Masuaku",
@@ -9168,6 +9762,17 @@
     "wikiTitle": "Artur Gajdoš"
   },
   {
+    "id": "artur-garibyan",
+    "name": "Artur Garibyan",
+    "fullName": "Artur Garibyan",
+    "birth": "2006-07-29",
+    "position": "FW",
+    "nationality": "Armenia",
+    "club": "Rodina Moscow",
+    "photo": null,
+    "wikiTitle": "Artur Garibyan"
+  },
+  {
     "id": "artur-shushenachev",
     "name": "Artur Shushenachev",
     "fullName": "Artur Shushenachev",
@@ -9256,6 +9861,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
     },
     "wikiTitle": "Raúl Asencio (footballer, born 2003)"
+  },
+  {
+    "id": "ashley-barnes",
+    "name": "Ashley Barnes",
+    "fullName": "Ashley Barnes",
+    "birth": null,
+    "position": "FW",
+    "nationality": "England",
+    "club": "Burnley",
+    "photo": null,
+    "wikiTitle": "Ashley Barnes"
   },
   {
     "id": "ashley-boatswain",
@@ -9658,6 +10274,17 @@
     "wikiTitle": "Tigran Avanesyan"
   },
   {
+    "id": "awad-zayed",
+    "name": "Awad Zayed",
+    "fullName": "Awad Zayed",
+    "birth": "1993-01-01",
+    "position": "DF",
+    "nationality": "Sudan",
+    "club": "Al-Merrikh",
+    "photo": null,
+    "wikiTitle": "Awad Zayed"
+  },
+  {
     "id": "awed-issac",
     "name": "Awed Issac",
     "fullName": "Awed Issac",
@@ -9913,6 +10540,17 @@
     "position": "MF",
     "nationality": "France",
     "club": "Toulouse",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
+    "id": "aymen-assab",
+    "name": "Aymen Assab",
+    "fullName": "Aymen Assab",
+    "birth": null,
+    "position": "MF",
+    "nationality": "France",
+    "club": "Monaco",
     "photo": null,
     "wikiTitle": null
   },
@@ -10318,6 +10956,17 @@
     "wikiTitle": "Baba Alhassan"
   },
   {
+    "id": "bachir-belloumi",
+    "name": "Bachir Belloumi",
+    "fullName": "Bachir Belloumi",
+    "birth": "2001-06-01",
+    "position": "FW",
+    "nationality": "Algeria",
+    "club": "Hull City",
+    "photo": null,
+    "wikiTitle": "Bachir Belloumi"
+  },
+  {
     "id": "badavi-guseynov",
     "name": "Badavi Guseynov",
     "fullName": "Badavi Guseynov",
@@ -10493,6 +11142,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Bakery Jatta"
+  },
+  {
+    "id": "bakhit-khamis",
+    "name": "Bakhit Khamis",
+    "fullName": "Bakhit Khamis",
+    "birth": "1992-01-16",
+    "position": "DF",
+    "nationality": "Sudan",
+    "club": "Al-Ahli Tripoli",
+    "photo": null,
+    "wikiTitle": "Bakhit Khamis"
   },
   {
     "id": "balazs-toth",
@@ -11004,6 +11664,17 @@
     "wikiTitle": "Marc Bartra"
   },
   {
+    "id": "bartug-elmaz",
+    "name": "Bartuğ Elmaz",
+    "fullName": "Bartuğ Elmaz",
+    "birth": "2003-02-19",
+    "position": "MF",
+    "nationality": "Türkiye",
+    "club": "Fenerbahçe",
+    "photo": null,
+    "wikiTitle": "Bartuğ Elmaz"
+  },
+  {
     "id": "barzic",
     "name": "Matía Barzić",
     "fullName": "Matía Barzić Gutiérrez",
@@ -11024,6 +11695,17 @@
     "club": "Lille",
     "photo": null,
     "wikiTitle": "Başar Önal"
+  },
+  {
+    "id": "bashir-humphreys",
+    "name": "Bashir Humphreys",
+    "fullName": "Bashir Humphreys",
+    "birth": null,
+    "position": "DF",
+    "nationality": "England",
+    "club": "Burnley",
+    "photo": null,
+    "wikiTitle": "Bashir Humphreys"
   },
   {
     "id": "bassco-soyer",
@@ -11294,6 +11976,39 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Jeanuël Belocian"
+  },
+  {
+    "id": "ben-amos",
+    "name": "Ben Amos",
+    "fullName": "Ben Amos",
+    "birth": null,
+    "position": "GK",
+    "nationality": "England",
+    "club": "Burnley",
+    "photo": null,
+    "wikiTitle": "Ben Amos"
+  },
+  {
+    "id": "ben-brereton-diaz",
+    "name": "Ben Brereton Díaz",
+    "fullName": "Ben Brereton Díaz",
+    "birth": "1999-04-18",
+    "position": "FW",
+    "nationality": "Chile",
+    "club": "Sheffield United",
+    "photo": null,
+    "wikiTitle": "Ben Brereton Díaz"
+  },
+  {
+    "id": "ben-cabango",
+    "name": "Ben Cabango",
+    "fullName": "Ben Cabango",
+    "birth": "2000-05-30",
+    "position": "DF",
+    "nationality": "Wales",
+    "club": "Swansea City",
+    "photo": null,
+    "wikiTitle": "Ben Cabango"
   },
   {
     "id": "ben-chilwell",
@@ -13040,6 +13755,17 @@
     "wikiTitle": "Brandon Mechele"
   },
   {
+    "id": "brandon-ndezi",
+    "name": "Brandon Ndezi",
+    "fullName": "Brandon Ndezi",
+    "birth": "2000-01-09",
+    "position": "MF",
+    "nationality": "DR Congo",
+    "club": "Dijon",
+    "photo": null,
+    "wikiTitle": "Brandon Ndezi"
+  },
+  {
     "id": "brandon-thomasasante",
     "name": "Brandon Thomas-Asante",
     "fullName": "Brandon Thomas-Asante",
@@ -13217,6 +13943,17 @@
     "wikiTitle": "Brennan Johnson"
   },
   {
+    "id": "breno-bidon",
+    "name": "Breno Bidon",
+    "fullName": "Breno Bidon",
+    "birth": "2005-02-20",
+    "position": "MF",
+    "nationality": "Brazil",
+    "club": "Corinthians",
+    "photo": null,
+    "wikiTitle": "Breno Bidon"
+  },
+  {
     "id": "bretones",
     "name": "Abel Bretones",
     "fullName": "Abel Bretones",
@@ -13337,6 +14074,17 @@
     "wikiTitle": "Brian Rodríguez"
   },
   {
+    "id": "brian-schwake",
+    "name": "Brian Schwake",
+    "fullName": "Brian Schwake",
+    "birth": "2001-08-24",
+    "position": "GK",
+    "nationality": "United States",
+    "club": "Nashville SC",
+    "photo": null,
+    "wikiTitle": "Brian Schwake"
+  },
+  {
     "id": "brice-dahite",
     "name": "Brice Dahite",
     "fullName": "Brice Dahite",
@@ -13379,6 +14127,17 @@
     "club": "Durban City",
     "photo": null,
     "wikiTitle": "Brooklyn Poggenpoel"
+  },
+  {
+    "id": "brooklyn-raines",
+    "name": "Brooklyn Raines",
+    "fullName": "Brooklyn Raines",
+    "birth": "2005-03-11",
+    "position": "MF",
+    "nationality": "United States",
+    "club": "New England Revolution",
+    "photo": null,
+    "wikiTitle": "Brooklyn Raines"
   },
   {
     "id": "brugue",
@@ -13897,6 +14656,17 @@
     "wikiTitle": "Álex Calatrava (footballer)"
   },
   {
+    "id": "caleb-ekuban",
+    "name": "Caleb Ekuban",
+    "fullName": "Caleb Ekuban",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Ghana",
+    "club": "Hellas Verona",
+    "photo": null,
+    "wikiTitle": "Caleb Ekuban"
+  },
+  {
     "id": "caleb-mcdowall",
     "name": "Caleb McDowall",
     "fullName": "Caleb McDowall",
@@ -14249,6 +15019,17 @@
     "club": "Academy SC",
     "photo": null,
     "wikiTitle": "Cameron Gray (footballer)"
+  },
+  {
+    "id": "camilo-duran",
+    "name": "Camilo Durán",
+    "fullName": "Camilo Durán",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Colombia",
+    "club": "Celtic",
+    "photo": null,
+    "wikiTitle": "Camilo Durán"
   },
   {
     "id": "camilo-vargas",
@@ -14740,9 +15521,9 @@
     "birth": "1992-01-11",
     "position": "DF",
     "nationality": "Spain",
-    "club": "Real Madrid",
+    "club": "Getafe",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Dani Carvajal"
   },
   {
     "id": "cas-odenthal",
@@ -14850,6 +15631,17 @@
     "club": "Osasuna",
     "photo": null,
     "wikiTitle": "Alejandro Catena"
+  },
+  {
+    "id": "cavan-sullivan",
+    "name": "Cavan Sullivan",
+    "fullName": "Cavan Sullivan",
+    "birth": "2009-09-28",
+    "position": "FW",
+    "nationality": "United States",
+    "club": "Philadelphia Union",
+    "photo": null,
+    "wikiTitle": "Cavan Sullivan"
   },
   {
     "id": "ceadach-oneill",
@@ -15018,6 +15810,17 @@
     "wikiTitle": "César Huerta"
   },
   {
+    "id": "cesar-inga",
+    "name": "César Inga",
+    "fullName": "César Inga",
+    "birth": "2002-04-30",
+    "position": "DF",
+    "nationality": "Peru",
+    "club": "Universitario",
+    "photo": null,
+    "wikiTitle": "César Inga"
+  },
+  {
     "id": "cesar-montes",
     "name": "César Montes",
     "fullName": "César Montes",
@@ -15046,6 +15849,17 @@
     "club": "Fulham",
     "photo": null,
     "wikiTitle": "César Palacios (footballer, born 2004)"
+  },
+  {
+    "id": "cesar-perez",
+    "name": "César Pérez",
+    "fullName": "César Pérez",
+    "birth": "2002-11-29",
+    "position": "MF",
+    "nationality": "Chile",
+    "club": "Defensa y Justicia",
+    "photo": null,
+    "wikiTitle": "César Pérez (footballer)"
   },
   {
     "id": "cesar-samudio",
@@ -15397,6 +16211,17 @@
     "wikiTitle": "Charlie Cresswell"
   },
   {
+    "id": "charlie-savage",
+    "name": "Charlie Savage",
+    "fullName": "Charlie Savage",
+    "birth": "2003-05-02",
+    "position": "MF",
+    "nationality": "Wales",
+    "club": "Reading",
+    "photo": null,
+    "wikiTitle": "Charlie Savage (footballer)"
+  },
+  {
     "id": "charly-alcaraz",
     "name": "Charly Alcaraz",
     "fullName": "Charly Alcaraz",
@@ -15694,6 +16519,17 @@
     "wikiTitle": "Lucas Chevalier"
   },
   {
+    "id": "chibuzo-nwoko",
+    "name": "Chibuzo Nwoko",
+    "fullName": "Chibuzo Nwoko",
+    "birth": "2005-12-05",
+    "position": "MF",
+    "nationality": "Nigeria",
+    "club": "Fulham",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
     "id": "chiedozie-ogbene",
     "name": "Chiedozie Ogbene",
     "fullName": "Chiedozie Ogbene",
@@ -15730,6 +16566,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Cho Gue-sung"
+  },
+  {
+    "id": "cho-hyuntaek",
+    "name": "Cho Hyun-taek",
+    "fullName": "Cho Hyun-taek",
+    "birth": "2001-08-02",
+    "position": "DF",
+    "nationality": "South Korea",
+    "club": "Ulsan HD",
+    "photo": null,
+    "wikiTitle": "Cho Hyun-taek"
   },
   {
     "id": "cho-wije",
@@ -15771,6 +16618,17 @@
     "club": "Ryomyong",
     "photo": null,
     "wikiTitle": "Choe Ryong-il"
+  },
+  {
+    "id": "choi-jun",
+    "name": "Choi Jun",
+    "fullName": "Choi Jun",
+    "birth": "1999-04-17",
+    "position": "DF",
+    "nationality": "South Korea",
+    "club": "FC Seoul",
+    "photo": null,
+    "wikiTitle": "Choi Jun"
   },
   {
     "id": "choun-chanchav",
@@ -15950,12 +16808,12 @@
     "id": "christ-tape",
     "name": "Christ Tapé",
     "fullName": "Christ Tapé",
-    "birth": null,
+    "birth": "2006-03-02",
     "position": "DF",
     "nationality": "Ivory Coast",
     "club": "Toulouse",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Christ Tapé"
   },
   {
     "id": "christensen",
@@ -15986,6 +16844,17 @@
     "club": "Genk",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "christian-bravo",
+    "name": "Christian Bravo",
+    "fullName": "Christian Bravo",
+    "birth": "2006-07-19",
+    "position": "GK",
+    "nationality": "Chile",
+    "club": "Huachipato",
+    "photo": null,
+    "wikiTitle": "Christian Bravo (footballer, born 2006)"
   },
   {
     "id": "christian-comotto",
@@ -16225,6 +17094,17 @@
     "wikiTitle": "Christoph Baumgartner"
   },
   {
+    "id": "christoph-lang",
+    "name": "Christoph Lang",
+    "fullName": "Christoph Lang",
+    "birth": "2002-01-07",
+    "position": "FW",
+    "nationality": "Austria",
+    "club": "LASK",
+    "photo": null,
+    "wikiTitle": "Christoph Lang"
+  },
+  {
     "id": "christopher-ainsworth",
     "name": "Christopher Ainsworth",
     "fullName": "Christopher Ainsworth",
@@ -16419,6 +17299,17 @@
     "wikiTitle": "Víctor Chust"
   },
   {
+    "id": "cian-ashford",
+    "name": "Cian Ashford",
+    "fullName": "Cian Ashford",
+    "birth": "2004-09-24",
+    "position": "FW",
+    "nationality": "Wales",
+    "club": "Cardiff City",
+    "photo": null,
+    "wikiTitle": "Cian Ashford"
+  },
+  {
     "id": "ciaron-brown",
     "name": "Ciaron Brown",
     "fullName": "Ciaron Brown",
@@ -16536,6 +17427,17 @@
     "wikiTitle": "Claudio Osorio (footballer)"
   },
   {
+    "id": "claudio-pugliese",
+    "name": "Claudio Pugliese",
+    "fullName": "Claudio Pugliese",
+    "birth": null,
+    "position": "GK",
+    "nationality": "Italy",
+    "club": "Napoli",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
     "id": "cleiton",
     "name": "Cleiton",
     "fullName": "Cleiton",
@@ -16564,6 +17466,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Clément Akpa"
+  },
+  {
+    "id": "clever-ferreira",
+    "name": "Clever Ferreira",
+    "fullName": "Clever Ferreira",
+    "birth": "2003-02-20",
+    "position": "DF",
+    "nationality": "Paraguay",
+    "club": "Atlético Tucumán",
+    "photo": null,
+    "wikiTitle": "Clever Ferreira"
   },
   {
     "id": "clever-portillo",
@@ -16635,6 +17548,28 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Cody Gakpo"
+  },
+  {
+    "id": "colby-donovan",
+    "name": "Colby Donovan",
+    "fullName": "Colby Donovan",
+    "birth": "2006-09-07",
+    "position": "DF",
+    "nationality": "Scotland",
+    "club": "Celtic",
+    "photo": null,
+    "wikiTitle": "Colby Donovan"
+  },
+  {
+    "id": "cole-campbell",
+    "name": "Cole Campbell",
+    "fullName": "Cole Campbell",
+    "birth": "2006-02-20",
+    "position": "FW",
+    "nationality": "United States",
+    "club": "SV Elversberg",
+    "photo": null,
+    "wikiTitle": "Cole Campbell"
   },
   {
     "id": "cole-mrowka",
@@ -17441,6 +18376,17 @@
     "wikiTitle": "Dachi Lordkipanidze"
   },
   {
+    "id": "dagoberto-espinoza",
+    "name": "Dagoberto Espinoza",
+    "fullName": "Dagoberto Espinoza",
+    "birth": "2004-04-17",
+    "position": "DF",
+    "nationality": "Mexico",
+    "club": "América",
+    "photo": null,
+    "wikiTitle": "Dagoberto Espinoza"
+  },
+  {
     "id": "dai-wai-tsun",
     "name": "Dai Wai Tsun",
     "fullName": "Dai Wai Tsun",
@@ -17528,6 +18474,17 @@
     "wikiTitle": "Daisuke Sato (footballer)"
   },
   {
+    "id": "daivis-murillo",
+    "name": "Daivis Murillo",
+    "fullName": "Daivis Murillo",
+    "birth": "2005-12-11",
+    "position": "MF",
+    "nationality": "Panama",
+    "club": "Plaza Amador",
+    "photo": null,
+    "wikiTitle": "Daivis Murillo"
+  },
+  {
     "id": "daler-azizov",
     "name": "Daler Azizov",
     "fullName": "Daler Azizov",
@@ -17589,6 +18546,17 @@
     "club": "Always Ready",
     "photo": null,
     "wikiTitle": "Damián Medina"
+  },
+  {
+    "id": "damion-downs",
+    "name": "Damion Downs",
+    "fullName": "Damion Downs",
+    "birth": "2004-07-06",
+    "position": "FW",
+    "nationality": "United States",
+    "club": "St. Louis City SC",
+    "photo": null,
+    "wikiTitle": "Damion Downs"
   },
   {
     "id": "damion-lowe",
@@ -17845,6 +18813,17 @@
     "club": "Persepolis",
     "photo": null,
     "wikiTitle": "Danial Eiri"
+  },
+  {
+    "id": "daniel-arcila",
+    "name": "Daniel Arcila",
+    "fullName": "Daniel Arcila",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Colombia",
+    "club": "León",
+    "photo": null,
+    "wikiTitle": "Daniel Arcila"
   },
   {
     "id": "daniel-ballard",
@@ -18475,14 +19454,14 @@
   },
   {
     "id": "danilo-santos",
-    "name": "Danilo Santos",
-    "fullName": "Danilo Santos",
+    "name": "Danilo",
+    "fullName": "Danilo",
     "birth": "2001-04-29",
     "position": "MF",
     "nationality": "Brazil",
     "club": "Botafogo",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Danilo (footballer, born 2001)"
   },
   {
     "id": "danilo-veiga",
@@ -19020,6 +19999,17 @@
     "wikiTitle": "David Brooks (footballer)"
   },
   {
+    "id": "david-cornell",
+    "name": "David Cornell",
+    "fullName": "David Cornell",
+    "birth": "1991-03-28",
+    "position": "GK",
+    "nationality": "Wales",
+    "club": "Leicester City",
+    "photo": null,
+    "wikiTitle": "David Cornell"
+  },
+  {
     "id": "david-de-gea",
     "name": "David de Gea",
     "fullName": "David de Gea",
@@ -19056,6 +20046,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "David Douděra"
+  },
+  {
+    "id": "david-duris",
+    "name": "Dávid Ďuriš",
+    "fullName": "Dávid Ďuriš",
+    "birth": "1999-03-22",
+    "position": "FW",
+    "nationality": "Slovakia",
+    "club": "Rosenborg",
+    "photo": null,
+    "wikiTitle": "Dávid Ďuriš"
   },
   {
     "id": "david-furst",
@@ -19489,6 +20490,17 @@
     "wikiTitle": "Davit Kereselidze"
   },
   {
+    "id": "davit-terteryan",
+    "name": "Davit Terteryan",
+    "fullName": "Davit Terteryan",
+    "birth": "1997-12-18",
+    "position": "DF",
+    "nationality": "Armenia",
+    "club": "Alashkert",
+    "photo": null,
+    "wikiTitle": "Davit Terteryan"
+  },
+  {
     "id": "davor-taleski",
     "name": "Davor Taleski",
     "fullName": "Davor Taleski",
@@ -19745,6 +20757,17 @@
     "wikiTitle": "Deiby Flores"
   },
   {
+    "id": "deinner-ordonez",
+    "name": "Deinner Ordóñez",
+    "fullName": "Deinner Ordóñez",
+    "birth": "2009-10-29",
+    "position": "DF",
+    "nationality": "Ecuador",
+    "club": "Independiente del Valle",
+    "photo": null,
+    "wikiTitle": "Deinner Ordóñez"
+  },
+  {
     "id": "deiver-machado",
     "name": "Deiver Machado",
     "fullName": "Deiver Machado",
@@ -19792,6 +20815,17 @@
     "club": "FK Transinvest",
     "photo": null,
     "wikiTitle": "Deividas Malžinskas"
+  },
+  {
+    "id": "dejan-joveljic",
+    "name": "Dejan Joveljić",
+    "fullName": "Dejan Joveljić",
+    "birth": "1999-08-07",
+    "position": "FW",
+    "nationality": "Serbia",
+    "club": "Seattle Sounders FC",
+    "photo": null,
+    "wikiTitle": "Dejan Joveljić"
   },
   {
     "id": "dejan-kulusevski",
@@ -19865,6 +20899,17 @@
     "wikiTitle": "Delvin Alfonzo"
   },
   {
+    "id": "demba-thiam",
+    "name": "Demba Thiam",
+    "fullName": "Demba Thiam",
+    "birth": "1998-03-09",
+    "position": "GK",
+    "nationality": "Senegal",
+    "club": "Monza",
+    "photo": null,
+    "wikiTitle": "Demba Thiam (footballer, born 1998)"
+  },
+  {
     "id": "dembele",
     "name": "Ousmane Dembélé",
     "fullName": "Ousmane Dembélé",
@@ -19912,6 +20957,17 @@
     "club": "Cagliari",
     "photo": null,
     "wikiTitle": "Demi Akarakiri"
+  },
+  {
+    "id": "demir-tiknaz",
+    "name": "Demir Tıknaz",
+    "fullName": "Demir Tıknaz",
+    "birth": "2004-08-17",
+    "position": "MF",
+    "nationality": "Türkiye",
+    "club": "Braga",
+    "photo": null,
+    "wikiTitle": "Demir Ege Tıknaz"
   },
   {
     "id": "dendup-namgyel",
@@ -20208,6 +21264,17 @@
     "wikiTitle": "Denzel Jubitana"
   },
   {
+    "id": "denzell-garcia",
+    "name": "Denzell García",
+    "fullName": "Denzell García",
+    "birth": "2003-08-15",
+    "position": "MF",
+    "nationality": "Mexico",
+    "club": "Juárez",
+    "photo": null,
+    "wikiTitle": "Denzell García"
+  },
+  {
     "id": "denzil-smith",
     "name": "Denzil Smith",
     "fullName": "Denzil Smith",
@@ -20424,6 +21491,17 @@
     "wikiTitle": "Devien Bell"
   },
   {
+    "id": "devis-vasquez",
+    "name": "Devis Vásquez",
+    "fullName": "Devis Vásquez",
+    "birth": null,
+    "position": "GK",
+    "nationality": "Colombia",
+    "club": "Roma",
+    "photo": null,
+    "wikiTitle": "Devis Vásquez"
+  },
+  {
     "id": "devone-st-prix",
     "name": "Devone St. Prix",
     "fullName": "Devone St. Prix",
@@ -20607,6 +21685,17 @@
     "wikiTitle": "Diego Arroyo"
   },
   {
+    "id": "diego-campillo",
+    "name": "Diego Campillo",
+    "fullName": "Diego Campillo",
+    "birth": "2001-10-19",
+    "position": "DF",
+    "nationality": "Mexico",
+    "club": "Guadalajara",
+    "photo": null,
+    "wikiTitle": "Diego Campillo"
+  },
+  {
     "id": "diego-carlos",
     "name": "Diego Carlos",
     "fullName": "Diego Carlos",
@@ -20697,6 +21786,17 @@
     "wikiTitle": "Diego Gómez (Paraguayan footballer)"
   },
   {
+    "id": "diego-kochen",
+    "name": "Diego Kochen",
+    "fullName": "Diego Kochen",
+    "birth": "2006-03-19",
+    "position": "GK",
+    "nationality": "United States",
+    "club": "Lyngby",
+    "photo": null,
+    "wikiTitle": "Diego Kochen"
+  },
+  {
     "id": "diego-llorente",
     "name": "Diego Llorente",
     "fullName": "Diego Javier Llorente Ríos",
@@ -20785,6 +21885,17 @@
     "club": "Hamilton Parish",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "diego-romero",
+    "name": "Diego Romero",
+    "fullName": "Diego Romero",
+    "birth": "2001-08-17",
+    "position": "GK",
+    "nationality": "Peru",
+    "club": "Universitario",
+    "photo": null,
+    "wikiTitle": "Diego Romero (footballer, born 2001)"
   },
   {
     "id": "diego-ulloa",
@@ -20972,6 +22083,17 @@
     "wikiTitle": "Dimitrios Kourbelis"
   },
   {
+    "id": "dimitrios-pelkas",
+    "name": "Dimitrios Pelkas",
+    "fullName": "Dimitrios Pelkas",
+    "birth": "1993-10-26",
+    "position": "MF",
+    "nationality": "Greece",
+    "club": "PAOK",
+    "photo": null,
+    "wikiTitle": "Dimitrios Pelkas"
+  },
+  {
     "id": "dimitris-giannoulis",
     "name": "Dimitris Giannoulis",
     "fullName": "Dimitris Giannoulis",
@@ -20989,6 +22111,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Dimitris Giannoulis"
+  },
+  {
+    "id": "dimitry-bertaud",
+    "name": "Dimitry Bertaud",
+    "fullName": "Dimitry Bertaud",
+    "birth": "1998-06-06",
+    "position": "GK",
+    "nationality": "DR Congo",
+    "club": "Forge",
+    "photo": null,
+    "wikiTitle": "Dimitry Bertaud"
   },
   {
     "id": "din-alomerovikj",
@@ -21078,7 +22211,7 @@
     "nationality": "Portugal",
     "club": "Strasbourg",
     "photo": null,
-    "wikiTitle": "Diogo Sousa (footballer, born 2005)"
+    "wikiTitle": "Diogo Sousa (footballer, born 2006)"
   },
   {
     "id": "dion-carlos-choi",
@@ -21537,6 +22670,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
     },
     "wikiTitle": "Marko Dmitrović"
+  },
+  {
+    "id": "dmytro-riznyk",
+    "name": "Dmytro Riznyk",
+    "fullName": "Dmytro Riznyk",
+    "birth": null,
+    "position": "GK",
+    "nationality": "Ukraine",
+    "club": "Shakhtar Donetsk",
+    "photo": null,
+    "wikiTitle": "Dmytro Riznyk"
   },
   {
     "id": "do-hoang-hen",
@@ -22168,7 +23312,7 @@
     "nationality": "Brazil",
     "club": "Zenit Saint Petersburg",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Douglas Santos (footballer, born 1994)"
   },
   {
     "id": "dowman",
@@ -22180,6 +23324,17 @@
     "club": null,
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "dragan-rosic",
+    "name": "Dragan Rosić",
+    "fullName": "Dragan Rosić",
+    "birth": "1996-11-15",
+    "position": "GK",
+    "nationality": "Serbia",
+    "club": "Vojvodina",
+    "photo": null,
+    "wikiTitle": "Dragan Rosić"
   },
   {
     "id": "driouech",
@@ -22373,6 +23528,17 @@
     "wikiTitle": "Hugo Duro"
   },
   {
+    "id": "dusan-tadic",
+    "name": "Dušan Tadić",
+    "fullName": "Dušan Tadić",
+    "birth": "1988-11-20",
+    "position": "MF",
+    "nationality": "Serbia",
+    "club": "NEC",
+    "photo": null,
+    "wikiTitle": "Dušan Tadić"
+  },
+  {
     "id": "dusan-vukovic",
     "name": "Dušan Vuković",
     "fullName": "Dušan Vuković",
@@ -22480,6 +23646,17 @@
     "club": "Mons Calpe",
     "photo": null,
     "wikiTitle": "Dylan Borge"
+  },
+  {
+    "id": "dylan-leonard",
+    "name": "Dylan Leonard",
+    "fullName": "Dylan Leonard",
+    "birth": "2007-05-14",
+    "position": "DF",
+    "nationality": "Australia",
+    "club": "Alemannia Aachen",
+    "photo": null,
+    "wikiTitle": "Dylan Leonard"
   },
   {
     "id": "dylan-niski",
@@ -22703,6 +23880,17 @@
     "wikiTitle": "Eddie Nketiah"
   },
   {
+    "id": "eddie-roberts",
+    "name": "Eddie Roberts",
+    "fullName": "Eddie Roberts",
+    "birth": "1994-05-01",
+    "position": "GK",
+    "nationality": "Panama",
+    "club": "Estudiantes de Mérida",
+    "photo": null,
+    "wikiTitle": "Eddie Roberts (Panamanian footballer)"
+  },
+  {
     "id": "eddy-cabianca",
     "name": "Eddy Cabianca",
     "fullName": "Eddy Cabianca",
@@ -22712,6 +23900,28 @@
     "club": "Cremonese",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "eddy-doue",
+    "name": "Eddy Doué",
+    "fullName": "Eddy Doué",
+    "birth": "2005-12-11",
+    "position": "MF",
+    "nationality": "Ivory Coast",
+    "club": "Estrela da Amadora",
+    "photo": null,
+    "wikiTitle": "Eddy Doué"
+  },
+  {
+    "id": "eddy-kouadio",
+    "name": "Eddy Kouadio",
+    "fullName": "Eddy Kouadio",
+    "birth": "2006-05-07",
+    "position": "DF",
+    "nationality": "Italy",
+    "club": "Monza",
+    "photo": null,
+    "wikiTitle": "Eddy Kouadio"
   },
   {
     "id": "ede",
@@ -22837,6 +24047,17 @@
     "wikiTitle": "Edgardo Fariña"
   },
   {
+    "id": "edier-ocampo",
+    "name": "Édier Ocampo",
+    "fullName": "Édier Ocampo",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Colombia",
+    "club": "Vancouver Whitecaps",
+    "photo": null,
+    "wikiTitle": "Édier Ocampo"
+  },
+  {
     "id": "edison-azcona",
     "name": "Edison Azcona",
     "fullName": "Edison Azcona",
@@ -22933,6 +24154,17 @@
     "club": "Como",
     "photo": null,
     "wikiTitle": "Edoardo Goldaniga"
+  },
+  {
+    "id": "edoardo-iannoni",
+    "name": "Edoardo Iannoni",
+    "fullName": "Edoardo Iannoni",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Italy",
+    "club": "Hellas Verona",
+    "photo": null,
+    "wikiTitle": "Edoardo Iannoni"
   },
   {
     "id": "edoardo-motta",
@@ -23067,6 +24299,17 @@
     "club": "Polissya Zhytomyr",
     "photo": null,
     "wikiTitle": "Eduard Sarapiy"
+  },
+  {
+    "id": "eduardo-anderson",
+    "name": "Eduardo Anderson",
+    "fullName": "Eduardo Anderson",
+    "birth": "2001-01-31",
+    "position": "DF",
+    "nationality": "Panama",
+    "club": "Baltika Kaliningrad",
+    "photo": null,
+    "wikiTitle": "Eduardo Anderson (footballer)"
   },
   {
     "id": "eduards-daskevics",
@@ -23462,6 +24705,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Eldor Shomurodov"
+  },
+  {
+    "id": "eli-adams",
+    "name": "Eli Adams",
+    "fullName": "Eli Adams",
+    "birth": "2002-03-12",
+    "position": "FW",
+    "nationality": "Australia",
+    "club": "Gamba Osaka",
+    "photo": null,
+    "wikiTitle": "Eli Adams"
   },
   {
     "id": "eli-junior-kroupi",
@@ -24375,6 +25629,17 @@
     "wikiTitle": "Emirhan İlkhan"
   },
   {
+    "id": "emirhan-topcu",
+    "name": "Emirhan Topçu",
+    "fullName": "Emirhan Topçu",
+    "birth": "2000-10-11",
+    "position": "DF",
+    "nationality": "Türkiye",
+    "club": "Beşiktaş",
+    "photo": null,
+    "wikiTitle": "Emirhan Topçu"
+  },
+  {
     "id": "emmanuel-agbadou",
     "name": "Emmanuel Agbadou",
     "fullName": "Emmanuel Agbadou",
@@ -25131,6 +26396,17 @@
     "wikiTitle": "Erik Ahlstrand"
   },
   {
+    "id": "erik-botheim",
+    "name": "Erik Botheim",
+    "fullName": "Erik Botheim",
+    "birth": "2000-01-10",
+    "position": "FW",
+    "nationality": "Norway",
+    "club": "Viking",
+    "photo": null,
+    "wikiTitle": "Erik Botheim"
+  },
+  {
     "id": "erik-janza",
     "name": "Erik Janža",
     "fullName": "Erik Janža",
@@ -25167,6 +26443,28 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/3.0"
     },
     "wikiTitle": "Érik Lira"
+  },
+  {
+    "id": "erik-prekop",
+    "name": "Erik Prekop",
+    "fullName": "Erik Prekop",
+    "birth": "1997-10-08",
+    "position": "FW",
+    "nationality": "Slovakia",
+    "club": "Górnik Zabrze",
+    "photo": null,
+    "wikiTitle": "Erik Prekop"
+  },
+  {
+    "id": "erik-simonyan",
+    "name": "Erik Simonyan",
+    "fullName": "Erik Simonyan",
+    "birth": "2003-06-12",
+    "position": "DF",
+    "nationality": "Armenia",
+    "club": "Pyunik",
+    "photo": null,
+    "wikiTitle": "Erik Simonyan"
   },
   {
     "id": "eriksson",
@@ -25652,6 +26950,17 @@
     "wikiTitle": "Evann Guessand"
   },
   {
+    "id": "everardo-lopez",
+    "name": "Everardo López",
+    "fullName": "Everardo López",
+    "birth": "2005-03-23",
+    "position": "DF",
+    "nationality": "Mexico",
+    "club": "Toluca",
+    "photo": null,
+    "wikiTitle": "Everardo López"
+  },
+  {
     "id": "evert-grunvald",
     "name": "Evert Grünvald",
     "fullName": "Evert Grünvald",
@@ -25761,7 +27070,7 @@
     "fullName": "Ezechiel Banzuzi",
     "birth": "2005-02-16",
     "position": "MF",
-    "nationality": "Netherlands",
+    "nationality": "DR Congo",
     "club": "RB Leipzig",
     "photo": null,
     "wikiTitle": "Ezechiel Banzuzi"
@@ -26059,6 +27368,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Fabio Baldé"
+  },
+  {
+    "id": "fabio-cardoso",
+    "name": "Fábio Cardoso",
+    "fullName": "Fábio Cardoso",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Portugal",
+    "club": "Sevilla",
+    "photo": null,
+    "wikiTitle": "Fábio Cardoso"
   },
   {
     "id": "fabio-carvalho",
@@ -26847,6 +28167,28 @@
     "wikiTitle": "Felix Badenhorst"
   },
   {
+    "id": "felix-beijmo",
+    "name": "Felix Beijmo",
+    "fullName": "Felix Beijmo",
+    "birth": "1998-01-31",
+    "position": "DF",
+    "nationality": "Sweden",
+    "club": "Copenhagen",
+    "photo": null,
+    "wikiTitle": "Felix Beijmo"
+  },
+  {
+    "id": "felix-keidel",
+    "name": "Felix Keidel",
+    "fullName": "Felix Keidel",
+    "birth": "2003-06-14",
+    "position": "MF",
+    "nationality": "Germany",
+    "club": "SV Elversberg",
+    "photo": null,
+    "wikiTitle": "Felix Keidel"
+  },
+  {
     "id": "felix-mambimbi",
     "name": "Felix Mambimbi",
     "fullName": "Felix Mambimbi",
@@ -27231,6 +28573,17 @@
     "wikiTitle": "Filip Jörgensen"
   },
   {
+    "id": "filip-kostic",
+    "name": "Filip Kostić",
+    "fullName": "Filip Kostić",
+    "birth": "1992-11-01",
+    "position": "MF",
+    "nationality": "Serbia",
+    "club": "PSV",
+    "photo": null,
+    "wikiTitle": "Filip Kostić"
+  },
+  {
     "id": "filip-rozga",
     "name": "Filip Rózga",
     "fullName": "Filip Rózga",
@@ -27300,6 +28653,17 @@
     "club": "Borussia Dortmund",
     "photo": null,
     "wikiTitle": "Filippo Mane"
+  },
+  {
+    "id": "filippo-pittarello",
+    "name": "Filippo Pittarello",
+    "fullName": "Filippo Pittarello",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Italy",
+    "club": "Pisa",
+    "photo": null,
+    "wikiTitle": "Filippo Pittarello"
   },
   {
     "id": "filippo-terracciano",
@@ -27798,6 +29162,17 @@
     "wikiTitle": "Ángel Fortuño"
   },
   {
+    "id": "fotis-ioannidis",
+    "name": "Fotis Ioannidis",
+    "fullName": "Fotis Ioannidis",
+    "birth": "2000-01-10",
+    "position": "FW",
+    "nationality": "Greece",
+    "club": "Sporting CP",
+    "photo": null,
+    "wikiTitle": "Fotis Ioannidis"
+  },
+  {
     "id": "foulquier",
     "name": "Dimitri Foulquier",
     "fullName": "Dimitri Christophe Foulquier",
@@ -27959,6 +29334,17 @@
     "wikiTitle": "Francisco Conceição"
   },
   {
+    "id": "francisco-salinas",
+    "name": "Francisco Salinas",
+    "fullName": "Francisco Salinas",
+    "birth": "1999-12-04",
+    "position": "DF",
+    "nationality": "Chile",
+    "club": "Coquimbo Unido",
+    "photo": null,
+    "wikiTitle": "Francisco Salinas"
+  },
+  {
     "id": "francisco-sierralta",
     "name": "Francisco Sierralta",
     "fullName": "Francisco Sierralta",
@@ -28117,7 +29503,7 @@
     "nationality": "Germany",
     "club": "FC Heidenheim",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Frank Feller (footballer)"
   },
   {
     "id": "frank-liivak",
@@ -28170,6 +29556,17 @@
     "club": "Caracas",
     "photo": null,
     "wikiTitle": "Frankarlos Benítez"
+  },
+  {
+    "id": "frankie-westfield",
+    "name": "Frankie Westfield",
+    "fullName": "Frankie Westfield",
+    "birth": "2005-12-09",
+    "position": "DF",
+    "nationality": "United States",
+    "club": "Philadelphia Union",
+    "photo": null,
+    "wikiTitle": "Frankie Westfield"
   },
   {
     "id": "frantzdy-pierrot",
@@ -28349,6 +29746,17 @@
     "wikiTitle": "Fredrik Oppegård"
   },
   {
+    "id": "fredrik-sjovold",
+    "name": "Fredrik Sjøvold",
+    "fullName": "Fredrik Sjøvold",
+    "birth": "2003-08-17",
+    "position": "DF",
+    "nationality": "Norway",
+    "club": "Bodø/Glimt",
+    "photo": null,
+    "wikiTitle": "Fredrik Sjøvold"
+  },
+  {
     "id": "freeman",
     "name": "Alex Freeman",
     "fullName": "Alexander Michael Freeman",
@@ -28399,6 +29807,17 @@
     "club": "Progresso",
     "photo": null,
     "wikiTitle": "Freybin Pagoada"
+  },
+  {
+    "id": "fricio-caicedo",
+    "name": "Fricio Caicedo",
+    "fullName": "Fricio Caicedo",
+    "birth": "2008-04-17",
+    "position": "DF",
+    "nationality": "Ecuador",
+    "club": "Inter Miami",
+    "photo": null,
+    "wikiTitle": "Fricio Caicedo"
   },
   {
     "id": "fritz-fleck",
@@ -28524,6 +29943,17 @@
     "wikiTitle": "Gabriel Ávalos"
   },
   {
+    "id": "gabriel-bontempo",
+    "name": "Gabriel Bontempo",
+    "fullName": "Gabriel Bontempo",
+    "birth": "2005-01-16",
+    "position": "MF",
+    "nationality": "Brazil",
+    "club": "Santos",
+    "photo": null,
+    "wikiTitle": "Gabriel Bontempo"
+  },
+  {
     "id": "gabriel-catonehighfield",
     "name": "Gabriel Catone-Highfield",
     "fullName": "Gabriel Catone-Highfield",
@@ -28615,6 +30045,17 @@
     "club": "Pisa",
     "photo": null,
     "wikiTitle": "Gabriele Piccinini"
+  },
+  {
+    "id": "gabriele-zappa",
+    "name": "Gabriele Zappa",
+    "fullName": "Gabriele Zappa",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Italy",
+    "club": "Hellas Verona",
+    "photo": null,
+    "wikiTitle": "Gabriele Zappa"
   },
   {
     "id": "gaby-jean",
@@ -29105,6 +30546,17 @@
     "wikiTitle": null
   },
   {
+    "id": "george-campbell",
+    "name": "George Campbell",
+    "fullName": "George Campbell",
+    "birth": "2001-06-22",
+    "position": "DF",
+    "nationality": "United States",
+    "club": "West Bromwich Albion",
+    "photo": null,
+    "wikiTitle": "George Campbell (soccer)"
+  },
+  {
     "id": "george-hemmings",
     "name": "George Hemmings",
     "fullName": "George Hemmings",
@@ -29312,6 +30764,17 @@
     "wikiTitle": "Germain Hughes"
   },
   {
+    "id": "german-berterame",
+    "name": "Germán Berterame",
+    "fullName": "Germán Berterame",
+    "birth": "1998-11-13",
+    "position": "FW",
+    "nationality": "Mexico",
+    "club": "Inter Miami",
+    "photo": null,
+    "wikiTitle": "Germán Berterame"
+  },
+  {
     "id": "geronimo-govea",
     "name": "Gerónimo Govea",
     "fullName": "Gerónimo Govea",
@@ -29389,6 +30852,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Arman Ghazaryan"
+  },
+  {
+    "id": "ghianny-kodia",
+    "name": "Ghianny Kodia",
+    "fullName": "Ghianny Kodia",
+    "birth": null,
+    "position": "FW",
+    "nationality": "France",
+    "club": "Strasbourg",
+    "photo": null,
+    "wikiTitle": null
   },
   {
     "id": "ghislain-konan",
@@ -29500,6 +30974,17 @@
     "wikiTitle": "Gianluca Gaetano"
   },
   {
+    "id": "gianluca-lapadula",
+    "name": "Gianluca Lapadula",
+    "fullName": "Gianluca Lapadula",
+    "birth": "1990-02-07",
+    "position": "FW",
+    "nationality": "Peru",
+    "club": "Universitario",
+    "photo": null,
+    "wikiTitle": "Gianluca Lapadula"
+  },
+  {
     "id": "gianluca-mancini",
     "name": "Gianluca Mancini",
     "fullName": "Gianluca Mancini",
@@ -29517,6 +31002,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Gianluca Mancini"
+  },
+  {
+    "id": "gianluca-prestianni",
+    "name": "Gianluca Prestianni",
+    "fullName": "Gianluca Prestianni",
+    "birth": "2006-01-31",
+    "position": "FW",
+    "nationality": "Argentina",
+    "club": "Benfica",
+    "photo": null,
+    "wikiTitle": "Gianluca Prestianni"
   },
   {
     "id": "gianluca-scamacca",
@@ -29574,6 +31070,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
     },
     "wikiTitle": "Giannis Konstantelias"
+  },
+  {
+    "id": "giannis-michailidis",
+    "name": "Giannis Michailidis",
+    "fullName": "Giannis Michailidis",
+    "birth": "2000-02-18",
+    "position": "DF",
+    "nationality": "Greece",
+    "club": "PAOK",
+    "photo": null,
+    "wikiTitle": "Giannis Michailidis"
   },
   {
     "id": "gideon-mensah",
@@ -29905,8 +31412,8 @@
   },
   {
     "id": "giovanni-reyna",
-    "name": "Giovanni Reyna",
-    "fullName": "Giovanni Reyna",
+    "name": "Gio Reyna",
+    "fullName": "Gio Reyna",
     "birth": "2002-11-13",
     "position": "MF",
     "nationality": "United States",
@@ -29920,7 +31427,7 @@
       "licence": "CC BY-SA 4.0",
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
-    "wikiTitle": "Giovanni Reyna"
+    "wikiTitle": "Gio Reyna"
   },
   {
     "id": "giovanni-simeone",
@@ -29940,6 +31447,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
     },
     "wikiTitle": "Giovanni Simeone"
+  },
+  {
+    "id": "giovany-herbert",
+    "name": "Giovany Herbert",
+    "fullName": "Giovany Herbert",
+    "birth": "2005-03-12",
+    "position": "MF",
+    "nationality": "Panama",
+    "club": "Kryvbas Kryvyi Rih",
+    "photo": null,
+    "wikiTitle": "Giovany Herbert"
   },
   {
     "id": "gisli-thordarson",
@@ -30041,6 +31559,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Gizo Mamageishvili"
+  },
+  {
+    "id": "gjivai-zechiel",
+    "name": "Gjivai Zechiël",
+    "fullName": "Gjivai Zechiël",
+    "birth": "2004-07-01",
+    "position": "MF",
+    "nationality": "Netherlands",
+    "club": "Feyenoord",
+    "photo": null,
+    "wikiTitle": "Gjivai Zechiël"
   },
   {
     "id": "gjoko-zajkov",
@@ -30224,8 +31753,8 @@
   },
   {
     "id": "gonzalez",
-    "name": "Nicolás González",
-    "fullName": "Nicolás González",
+    "name": "Nico González",
+    "fullName": "Nico González",
     "birth": "1998-04-06",
     "position": "FW",
     "nationality": "Argentina",
@@ -30239,7 +31768,7 @@
       "licence": "CC BY-SA 4.0",
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
-    "wikiTitle": "Nicolás González (footballer, born 1998)"
+    "wikiTitle": "Nico González (footballer, born 1998)"
   },
   {
     "id": "gonzalez-de-zarate",
@@ -30338,6 +31867,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Gonzalo Valle"
+  },
+  {
+    "id": "gor-matinyan",
+    "name": "Gor Matinyan",
+    "fullName": "Gor Matinyan",
+    "birth": "2004-06-23",
+    "position": "GK",
+    "nationality": "Armenia",
+    "club": "Sardarapat",
+    "photo": null,
+    "wikiTitle": "Gor Matinyan"
   },
   {
     "id": "gordon",
@@ -30594,6 +32134,17 @@
     "club": "Chao Pak Kei",
     "photo": null,
     "wikiTitle": "Gu Hoi Sou"
+  },
+  {
+    "id": "gu-sungyun",
+    "name": "Gu Sung-yun",
+    "fullName": "Gu Sung-yun",
+    "birth": "1994-06-27",
+    "position": "GK",
+    "nationality": "South Korea",
+    "club": "FC Seoul",
+    "photo": null,
+    "wikiTitle": "Gu Sung-yun"
   },
   {
     "id": "gudelj",
@@ -31648,6 +33199,17 @@
     "club": "Al-Shabab",
     "photo": null,
     "wikiTitle": "Hammam Al-Hammami"
+  },
+  {
+    "id": "hampus-skoglund",
+    "name": "Hampus Skoglund",
+    "fullName": "Hampus Skoglund",
+    "birth": "2004-03-01",
+    "position": "DF",
+    "nationality": "Sweden",
+    "club": "Hammarby IF",
+    "photo": null,
+    "wikiTitle": "Hampus Skoglund"
   },
   {
     "id": "hamza-abdelkarim",
@@ -32713,6 +34275,17 @@
     "wikiTitle": "Tomoki Hayakawa"
   },
   {
+    "id": "hayato-araki",
+    "name": "Hayato Araki",
+    "fullName": "Hayato Araki",
+    "birth": "1996-08-07",
+    "position": "DF",
+    "nationality": "Japan",
+    "club": "Sanfrecce Hiroshima",
+    "photo": null,
+    "wikiTitle": "Hayato Araki"
+  },
+  {
     "id": "hayden-hackney",
     "name": "Hayden Hackney",
     "fullName": "Hayden Hackney",
@@ -33002,6 +34575,17 @@
     "wikiTitle": "Hennos Asmelash"
   },
   {
+    "id": "henrick-do-marcolino",
+    "name": "Henrick Do Marcolino",
+    "fullName": "Henrick Do Marcolino",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Gabon",
+    "club": "Rennes",
+    "photo": null,
+    "wikiTitle": "Henrick Do Marcolino"
+  },
+  {
     "id": "henrik-falchener",
     "name": "Henrik Falchener",
     "fullName": "Henrik Falchener",
@@ -33032,6 +34616,17 @@
     "wikiTitle": "Henrik Meister"
   },
   {
+    "id": "henrique-simeone",
+    "name": "Henrique Simeone",
+    "fullName": "Henrique Simeone",
+    "birth": "2007-06-12",
+    "position": "MF",
+    "nationality": "Mexico",
+    "club": "Tigres UANL",
+    "photo": null,
+    "wikiTitle": "Henrique Simeone"
+  },
+  {
     "id": "henry-gray",
     "name": "Henry Gray",
     "fullName": "Henry Gray",
@@ -33041,6 +34636,17 @@
     "club": "Wellington Phoenix",
     "photo": null,
     "wikiTitle": "Henry Gray (footballer)"
+  },
+  {
+    "id": "henry-heroki-mochizuki",
+    "name": "Henry Heroki Mochizuki",
+    "fullName": "Henry Heroki Mochizuki",
+    "birth": "2001-09-20",
+    "position": "MF",
+    "nationality": "Japan",
+    "club": "Machida Zelvia",
+    "photo": null,
+    "wikiTitle": "Henry Heroki Mochizuki"
   },
   {
     "id": "henry-romero",
@@ -33697,6 +35303,17 @@
     "wikiTitle": "Huang Shenghao"
   },
   {
+    "id": "hugo-benitez",
+    "name": "Hugo Benítez",
+    "fullName": "Hugo Benítez",
+    "birth": "2003-07-30",
+    "position": "FW",
+    "nationality": "Paraguay",
+    "club": "Nacional",
+    "photo": null,
+    "wikiTitle": "Hugo Benítez (footballer)"
+  },
+  {
     "id": "hugo-bolin",
     "name": "Hugo Bolin",
     "fullName": "Hugo Bolin",
@@ -33733,6 +35350,28 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Hugo Bueno (footballer, born 2002)"
+  },
+  {
+    "id": "hugo-camberos",
+    "name": "Hugo Camberos",
+    "fullName": "Hugo Camberos",
+    "birth": "2007-01-27",
+    "position": "FW",
+    "nationality": "Mexico",
+    "club": "Guadalajara",
+    "photo": null,
+    "wikiTitle": "Hugo Camberos"
+  },
+  {
+    "id": "hugo-cuenca",
+    "name": "Hugo Cuenca",
+    "fullName": "Hugo Cuenca",
+    "birth": "2005-01-08",
+    "position": "MF",
+    "nationality": "Paraguay",
+    "club": "Celta Vigo",
+    "photo": null,
+    "wikiTitle": "Hugo Cuenca (footballer)"
   },
   {
     "id": "hugo-ekitike",
@@ -33803,6 +35442,17 @@
     "wikiTitle": "Hugo Pavek"
   },
   {
+    "id": "hugo-quintana",
+    "name": "Hugo Quintana",
+    "fullName": "Hugo Quintana",
+    "birth": "2001-11-10",
+    "position": "MF",
+    "nationality": "Paraguay",
+    "club": "Independiente del Valle",
+    "photo": null,
+    "wikiTitle": "Hugo Quintana"
+  },
+  {
     "id": "hugo-sochurek",
     "name": "Hugo Sochůrek",
     "fullName": "Hugo Sochůrek",
@@ -33822,7 +35472,7 @@
     "nationality": "Brazil",
     "club": "Corinthians",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Hugo Souza"
   },
   {
     "id": "huijsen",
@@ -34066,6 +35716,17 @@
     "club": "Metz",
     "photo": null,
     "wikiTitle": "Ibou Sané"
+  },
+  {
+    "id": "ibraheem-mahfus-ajasa",
+    "name": "Ibraheem Mahfus Ajasa",
+    "fullName": "Ibraheem Mahfus Ajasa",
+    "birth": "2005-11-26",
+    "position": "FW",
+    "nationality": "Nigeria",
+    "club": "Rostov",
+    "photo": null,
+    "wikiTitle": "Ibraheem Mahfus Ajasa"
   },
   {
     "id": "ibrahim-adel",
@@ -34578,6 +36239,17 @@
     "wikiTitle": "Igor Thiago"
   },
   {
+    "id": "igor-vekic",
+    "name": "Igor Vekić",
+    "fullName": "Igor Vekić",
+    "birth": "1998-05-06",
+    "position": "GK",
+    "nationality": "Slovenia",
+    "club": "Rijeka",
+    "photo": null,
+    "wikiTitle": "Igor Vekić"
+  },
+  {
     "id": "igor-vujacic",
     "name": "Igor Vujačić",
     "fullName": "Igor Vujačić",
@@ -34595,6 +36267,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Igor Vujačić"
+  },
+  {
+    "id": "ihor-krasnopir",
+    "name": "Ihor Krasnopir",
+    "fullName": "Ihor Krasnopir",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Ukraine",
+    "club": "Polissya Zhytomyr",
+    "photo": null,
+    "wikiTitle": "Ihor Krasnopir"
   },
   {
     "id": "ihsan-haddad",
@@ -34680,6 +36363,28 @@
     "club": "Paris FC",
     "photo": null,
     "wikiTitle": "Ilan Kebbal"
+  },
+  {
+    "id": "ilane-toure",
+    "name": "Ilane Touré",
+    "fullName": "Ilane Touré",
+    "birth": null,
+    "position": "DF",
+    "nationality": "France",
+    "club": "Monaco",
+    "photo": null,
+    "wikiTitle": "Ilane Touré"
+  },
+  {
+    "id": "ilhan-fakili",
+    "name": "İlhan Fakılı",
+    "fullName": "İlhan Fakılı",
+    "birth": "2006-01-20",
+    "position": "FW",
+    "nationality": "Türkiye",
+    "club": "Beşiktaş",
+    "photo": null,
+    "wikiTitle": "İlhan Fakılı"
   },
   {
     "id": "ilhan-fandi",
@@ -34770,6 +36475,28 @@
     "club": "Robinhood",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "illjuan-manuel-rengifoes",
+    "name": "{{ill|Juan Manuel Rengifo|es}}",
+    "fullName": "{{ill|Juan Manuel Rengifo|es}}",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Colombia",
+    "club": "Atlético Nacional",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
+    "id": "illya-krupskyi",
+    "name": "Illya Krupskyi",
+    "fullName": "Illya Krupskyi",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Ukraine",
+    "club": "Kharkiv",
+    "photo": null,
+    "wikiTitle": "Illya Krupskyi"
   },
   {
     "id": "ilyas-azizi",
@@ -35018,6 +36745,17 @@
     "wikiTitle": "Isaac Hayden"
   },
   {
+    "id": "isaac-james",
+    "name": "Isaac James",
+    "fullName": "Isaac James",
+    "birth": "2004-08-28",
+    "position": "DF",
+    "nationality": "Nigeria",
+    "club": "Alverca",
+    "photo": null,
+    "wikiTitle": "Isaac James (footballer)"
+  },
+  {
     "id": "isaac-mabaya",
     "name": "Isaac Mabaya",
     "fullName": "Isaac Mabaya",
@@ -35057,6 +36795,17 @@
     "club": "Sevilla",
     "photo": null,
     "wikiTitle": "Isaac Romero"
+  },
+  {
+    "id": "isaac-schmidt",
+    "name": "Isaac Schmidt",
+    "fullName": "Isaac Schmidt",
+    "birth": "1999-12-07",
+    "position": "DF",
+    "nationality": "Switzerland",
+    "club": "Young Boys",
+    "photo": null,
+    "wikiTitle": "Isaac Schmidt"
   },
   {
     "id": "isaak-davies",
@@ -35136,6 +36885,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Isaiah Jones (footballer, born 1999)"
+  },
+  {
+    "id": "isaias-violante",
+    "name": "Isaías Violante",
+    "fullName": "Isaías Violante",
+    "birth": "2003-10-20",
+    "position": "FW",
+    "nationality": "Mexico",
+    "club": "América",
+    "photo": null,
+    "wikiTitle": "Isaías Violante"
   },
   {
     "id": "isak-hien",
@@ -35629,6 +37389,17 @@
     "wikiTitle": null
   },
   {
+    "id": "issa-doumbia",
+    "name": "Issa Doumbia",
+    "fullName": "Issa Doumbia",
+    "birth": "2003-10-16",
+    "position": "MF",
+    "nationality": "Italy",
+    "club": "Sporting CP",
+    "photo": null,
+    "wikiTitle": "Issa Doumbia (footballer)"
+  },
+  {
     "id": "issa-kabore",
     "name": "Issa Kaboré",
     "fullName": "Issa Kaboré",
@@ -35798,6 +37569,17 @@
     "wikiTitle": "Iván Cédric"
   },
   {
+    "id": "ivan-fresneda",
+    "name": "Iván Fresneda",
+    "fullName": "Iván Fresneda",
+    "birth": "2004-09-28",
+    "position": "DF",
+    "nationality": "Spain",
+    "club": "Sporting CP",
+    "photo": null,
+    "wikiTitle": "Iván Fresneda"
+  },
+  {
     "id": "ivan-ilic",
     "name": "Ivan Ilić",
     "fullName": "Ivan Ilić",
@@ -35847,6 +37629,17 @@
     "wikiTitle": "Iván Martín (footballer, born 1999)"
   },
   {
+    "id": "ivan-mesik",
+    "name": "Ivan Mesík",
+    "fullName": "Ivan Mesík",
+    "birth": "2001-06-01",
+    "position": "DF",
+    "nationality": "Slovakia",
+    "club": "Charlton Athletic",
+    "photo": null,
+    "wikiTitle": "Ivan Mesík"
+  },
+  {
     "id": "ivan-morales",
     "name": "Iván Morales",
     "fullName": "Iván Morales",
@@ -35883,6 +37676,28 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Ivan Perišić"
+  },
+  {
+    "id": "ivan-roman",
+    "name": "Iván Román",
+    "fullName": "Iván Román",
+    "birth": "2006-07-12",
+    "position": "DF",
+    "nationality": "Chile",
+    "club": "Colo-Colo",
+    "photo": null,
+    "wikiTitle": "Iván Román"
+  },
+  {
+    "id": "ivan-schranz",
+    "name": "Ivan Schranz",
+    "fullName": "Ivan Schranz",
+    "birth": "1993-09-13",
+    "position": "FW",
+    "nationality": "Slovakia",
+    "club": "Slavia Prague",
+    "photo": null,
+    "wikiTitle": "Ivan Schranz"
   },
   {
     "id": "ivan-smolcic",
@@ -35962,6 +37777,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Ivan Turitsov"
+  },
+  {
+    "id": "ivan-varfolomeyev",
+    "name": "Ivan Varfolomeyev",
+    "fullName": "Ivan Varfolomeyev",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Ukraine",
+    "club": "Lincoln City",
+    "photo": null,
+    "wikiTitle": "Ivan Varfolomeyev"
   },
   {
     "id": "ivar-jenner",
@@ -36316,6 +38142,17 @@
     "wikiTitle": "Jackson Irvine"
   },
   {
+    "id": "jackson-muleka",
+    "name": "Jackson Muleka",
+    "fullName": "Jackson Muleka",
+    "birth": "1999-10-04",
+    "position": "FW",
+    "nationality": "DR Congo",
+    "club": "Konyaspor",
+    "photo": null,
+    "wikiTitle": "Jackson Muleka"
+  },
+  {
     "id": "jackson-porozo",
     "name": "Jackson Porozo",
     "fullName": "Jackson Porozo",
@@ -36371,6 +38208,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
     },
     "wikiTitle": "Jacob Bruun Larsen"
+  },
+  {
+    "id": "jacob-chapman",
+    "name": "Jacob Chapman",
+    "fullName": "Jacob Chapman",
+    "birth": "2000-10-22",
+    "position": "GK",
+    "nationality": "Australia",
+    "club": "St Mirren",
+    "photo": null,
+    "wikiTitle": "Jacob Chapman"
   },
   {
     "id": "jacob-italiano",
@@ -36783,6 +38631,17 @@
     "wikiTitle": "Jair Cunha"
   },
   {
+    "id": "jair-modelo",
+    "name": "Jair Modelo",
+    "fullName": "Jair Modelo",
+    "birth": "2004-07-17",
+    "position": "DF",
+    "nationality": "Panama",
+    "club": "Sheriff Tiraspol",
+    "photo": null,
+    "wikiTitle": "Jair Modelo"
+  },
+  {
     "id": "jair-whyte",
     "name": "Jair Whyte",
     "fullName": "Jair Whyte",
@@ -37189,6 +39048,17 @@
     "wikiTitle": "James McConnell (footballer, born 2004)"
   },
   {
+    "id": "james-pantemis",
+    "name": "James Pantemis",
+    "fullName": "James Pantemis",
+    "birth": "1997-02-21",
+    "position": "GK",
+    "nationality": "Canada",
+    "club": "Portland Timbers",
+    "photo": null,
+    "wikiTitle": "James Pantemis"
+  },
+  {
     "id": "james-rodriguez",
     "name": "James Rodríguez",
     "fullName": "James Rodríguez",
@@ -37296,6 +39166,17 @@
     "club": "Chelsea",
     "photo": null,
     "wikiTitle": "Jamie Gittens"
+  },
+  {
+    "id": "jamie-knightlebel",
+    "name": "Jamie Knight-Lebel",
+    "fullName": "Jamie Knight-Lebel",
+    "birth": "2004-12-24",
+    "position": "DF",
+    "nationality": "Canada",
+    "club": "Motherwell",
+    "photo": null,
+    "wikiTitle": "Jamie Knight-Lebel"
   },
   {
     "id": "jamie-leweling",
@@ -37720,6 +39601,17 @@
     "wikiTitle": "Jarell Quansah"
   },
   {
+    "id": "jari-de-busser",
+    "name": "Jari De Busser",
+    "fullName": "Jari De Busser",
+    "birth": "1999-10-21",
+    "position": "GK",
+    "nationality": "Belgium",
+    "club": "AZ",
+    "photo": null,
+    "wikiTitle": "Jari De Busser"
+  },
+  {
     "id": "jari-vandeputte",
     "name": "Jari Vandeputte",
     "fullName": "Jari Vandeputte",
@@ -37773,7 +39665,7 @@
     "name": "Jarrod Bowen",
     "fullName": "Jarrod Bowen",
     "birth": "1996-12-20",
-    "position": "FW",
+    "position": "MF",
     "nationality": "England",
     "club": "West Ham United",
     "photo": {
@@ -38217,6 +40109,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Jayden Bogle"
+  },
+  {
+    "id": "jayden-danns",
+    "name": "Jayden Danns",
+    "fullName": "Jayden Danns",
+    "birth": null,
+    "position": "FW",
+    "nationality": "England",
+    "club": "Liverpool",
+    "photo": null,
+    "wikiTitle": "Jayden Danns"
   },
   {
     "id": "jayden-kruydenhof",
@@ -38920,6 +40823,17 @@
     "wikiTitle": "Jens Stage"
   },
   {
+    "id": "jeong-seungwon",
+    "name": "Jeong Seung-won",
+    "fullName": "Jeong Seung-won",
+    "birth": "1997-02-27",
+    "position": "MF",
+    "nationality": "South Korea",
+    "club": "FC Seoul",
+    "photo": null,
+    "wikiTitle": "Jeong Seung-won (footballer)"
+  },
+  {
     "id": "jeong-wooyeong",
     "name": "Jeong Woo-yeong",
     "fullName": "Jeong Woo-yeong",
@@ -38954,7 +40868,7 @@
     "name": "Jérémie Boga",
     "fullName": "Jérémie Boga",
     "birth": "1997-01-03",
-    "position": "MF",
+    "position": "FW",
     "nationality": "Ivory Coast",
     "club": "Juventus",
     "photo": {
@@ -39067,6 +40981,17 @@
     "wikiTitle": "Jérémy Jacquet"
   },
   {
+    "id": "jeremy-marquez",
+    "name": "Jeremy Márquez",
+    "fullName": "Jeremy Márquez",
+    "birth": "2000-06-21",
+    "position": "MF",
+    "nationality": "Mexico",
+    "club": "Cruz Azul",
+    "photo": null,
+    "wikiTitle": "Jeremy Márquez"
+  },
+  {
     "id": "jeremy-mbambi",
     "name": "Jeremy Mbambi",
     "fullName": "Jeremy Mbambi",
@@ -39095,6 +41020,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Jeremy Monga"
+  },
+  {
+    "id": "jeremy-sarmiento",
+    "name": "Jeremy Sarmiento",
+    "fullName": "Jeremy Sarmiento",
+    "birth": "2002-06-16",
+    "position": "MF",
+    "nationality": "Ecuador",
+    "club": "Middlesbrough",
+    "photo": null,
+    "wikiTitle": "Jeremy Sarmiento"
   },
   {
     "id": "jeriel-dorsett",
@@ -39402,6 +41338,17 @@
     "wikiTitle": "Jett Blaschka"
   },
   {
+    "id": "jetzen-lopez",
+    "name": "Jetzen Lopez",
+    "fullName": "Jetzen Lopez",
+    "birth": "2007-01-14",
+    "position": "MF",
+    "nationality": "Chile",
+    "club": "Braga U23",
+    "photo": null,
+    "wikiTitle": "Jetzen Lopez"
+  },
+  {
     "id": "jeyland-mitchell",
     "name": "Jeyland Mitchell",
     "fullName": "Jeyland Mitchell",
@@ -39495,6 +41442,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Jhon Lucumí"
+  },
+  {
+    "id": "jhon-solis",
+    "name": "Jhon Solís",
+    "fullName": "Jhon Solís",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Colombia",
+    "club": "Birmingham City",
+    "photo": null,
+    "wikiTitle": "Jhon Solís (footballer, born 2004)"
   },
   {
     "id": "jhonny-vidales",
@@ -39843,6 +41801,17 @@
     "wikiTitle": "João Mário (footballer, born 2000)"
   },
   {
+    "id": "joao-palhinha",
+    "name": "João Palhinha",
+    "fullName": "João Palhinha",
+    "birth": "1995-07-09",
+    "position": "MF",
+    "nationality": "Portugal",
+    "club": "Benfica",
+    "photo": null,
+    "wikiTitle": "João Palhinha"
+  },
+  {
     "id": "joao-pedro",
     "name": "João Pedro",
     "fullName": "João Pedro",
@@ -40083,6 +42052,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Joe Scally"
+  },
+  {
+    "id": "joe-taylor",
+    "name": "Joe Taylor",
+    "fullName": "Joe Taylor",
+    "birth": "2002-11-18",
+    "position": "FW",
+    "nationality": "Wales",
+    "club": "Huddersfield Town",
+    "photo": null,
+    "wikiTitle": "Joe Taylor (footballer, born 2002)"
   },
   {
     "id": "joe-willock",
@@ -40551,6 +42531,17 @@
     "wikiTitle": "John Egan (footballer, born 1992)"
   },
   {
+    "id": "john-mano",
+    "name": "John Mano",
+    "fullName": "John Mano",
+    "birth": "2001-12-12",
+    "position": "FW",
+    "nationality": "Sudan",
+    "club": "Al-Akhdar",
+    "photo": null,
+    "wikiTitle": "John Mano"
+  },
+  {
     "id": "john-matkin",
     "name": "John Matkin",
     "fullName": "John Matkin",
@@ -40579,6 +42570,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "John McGinn"
+  },
+  {
+    "id": "john-mercado",
+    "name": "John Mercado",
+    "fullName": "John Mercado",
+    "birth": "2002-06-03",
+    "position": "FW",
+    "nationality": "Ecuador",
+    "club": "Sparta Prague",
+    "photo": null,
+    "wikiTitle": "John Mercado"
   },
   {
     "id": "john-robertson",
@@ -40710,6 +42712,17 @@
     "club": "Hertha BSC",
     "photo": null,
     "wikiTitle": "Jón Dagur Þorsteinsson"
+  },
+  {
+    "id": "jon-mccracken",
+    "name": "Jon McCracken",
+    "fullName": "Jon McCracken",
+    "birth": "2000-05-24",
+    "position": "GK",
+    "nationality": "Scotland",
+    "club": "Bradford City",
+    "photo": null,
+    "wikiTitle": "Jon McCracken"
   },
   {
     "id": "jonah-kusiasare",
@@ -41069,6 +43082,17 @@
     "wikiTitle": "Jonathan Toro"
   },
   {
+    "id": "jonathan-villagra",
+    "name": "Jonathan Villagra",
+    "fullName": "Jonathan Villagra",
+    "birth": "2001-03-28",
+    "position": "DF",
+    "nationality": "Chile",
+    "club": "Colo-Colo",
+    "photo": null,
+    "wikiTitle": "Jonathan Villagra"
+  },
+  {
     "id": "jong-hwinam",
     "name": "Jong Hwi-nam",
     "fullName": "Jong Hwi-nam",
@@ -41395,7 +43419,7 @@
     "fullName": "Jordy Makengo",
     "birth": "2001-08-03",
     "position": "DF",
-    "nationality": "France",
+    "nationality": "DR Congo",
     "club": "SC Freiburg",
     "photo": {
       "file": "MakengoFreiburg2023.jpg",
@@ -41619,6 +43643,17 @@
     "wikiTitle": "Jorrel Hato"
   },
   {
+    "id": "jorthy-mokio",
+    "name": "Jorthy Mokio",
+    "fullName": "Jorthy Mokio",
+    "birth": "2008-02-29",
+    "position": "MF",
+    "nationality": "DR Congo",
+    "club": "Ajax",
+    "photo": null,
+    "wikiTitle": "Jorthy Mokio"
+  },
+  {
     "id": "josan",
     "name": "Josan",
     "fullName": "José Antonio Ferrández Pomares",
@@ -41737,6 +43772,17 @@
     "club": "Oriente Petrolero",
     "photo": null,
     "wikiTitle": "José Flores (Bolivian footballer)"
+  },
+  {
+    "id": "jose-hurtado",
+    "name": "José Hurtado",
+    "fullName": "José Hurtado",
+    "birth": "2001-12-23",
+    "position": "DF",
+    "nationality": "Ecuador",
+    "club": "Red Bull Bragantino",
+    "photo": null,
+    "wikiTitle": "José Hurtado (footballer)"
   },
   {
     "id": "jose-luis-rodriguez",
@@ -41906,6 +43952,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Joseph Anang"
+  },
+  {
+    "id": "joseph-jones",
+    "name": "Joseph Jones",
+    "fullName": "Joseph Jones",
+    "birth": "2005-07-30",
+    "position": "DF",
+    "nationality": "Panama",
+    "club": "Kryvbas Kryvyi Rih",
+    "photo": null,
+    "wikiTitle": "Joseph Jones (footballer, born 2005)"
   },
   {
     "id": "joseph-kalulu",
@@ -42168,6 +44225,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Josh Maja"
+  },
+  {
+    "id": "josh-mcpake",
+    "name": "Josh McPake",
+    "fullName": "Josh McPake",
+    "birth": "2001-08-31",
+    "position": "MF",
+    "nationality": "Scotland",
+    "club": "Heart of Midlothian",
+    "photo": null,
+    "wikiTitle": "Josh McPake"
   },
   {
     "id": "josh-sheehan",
@@ -42506,6 +44574,17 @@
     "wikiTitle": "Josué Duverger"
   },
   {
+    "id": "josue-vergara",
+    "name": "Josué Vergara",
+    "fullName": "Josué Vergara",
+    "birth": "2007-07-25",
+    "position": "FW",
+    "nationality": "Panama",
+    "club": "Gent",
+    "photo": null,
+    "wikiTitle": "Josué Vergara"
+  },
+  {
     "id": "jourdain-mbaynaissem",
     "name": "Jourdain Mbaynaïssem",
     "fullName": "Jourdain Mbaynaïssem",
@@ -42515,6 +44594,17 @@
     "club": "Venda",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "jovan-ivanisevic",
+    "name": "Jovan Ivanišević",
+    "fullName": "Jovan Ivanišević",
+    "birth": "2005-01-19",
+    "position": "DF",
+    "nationality": "Canada",
+    "club": "Sarajevo",
+    "photo": null,
+    "wikiTitle": "Jovan Ivanišević"
   },
   {
     "id": "jovanny-bolivar",
@@ -42638,6 +44728,17 @@
     "club": "Deportivo Táchira",
     "photo": null,
     "wikiTitle": "Juan David Sánchez"
+  },
+  {
+    "id": "juan-echilvestre",
+    "name": "Juan Echilvestre",
+    "fullName": "Juan Echilvestre",
+    "birth": "2007-04-07",
+    "position": "DF",
+    "nationality": "Mexico",
+    "club": "Santos Laguna",
+    "photo": null,
+    "wikiTitle": "Juan Echilvestre"
   },
   {
     "id": "juan-fernando-quintero",
@@ -42924,6 +45025,17 @@
     "wikiTitle": "Julián Araujo"
   },
   {
+    "id": "julian-hall",
+    "name": "Julian Hall",
+    "fullName": "Julian Hall",
+    "birth": "2008-03-24",
+    "position": "FW",
+    "nationality": "United States",
+    "club": "New York Red Bulls",
+    "photo": null,
+    "wikiTitle": "Julian Hall (soccer)"
+  },
+  {
     "id": "julian-malatini",
     "name": "Julián Malatini",
     "fullName": "Julián Malatini",
@@ -43194,6 +45306,17 @@
     "wikiTitle": "Luiz Júnior (footballer, born 2001)"
   },
   {
+    "id": "junior-adamu",
+    "name": "Junior Adamu",
+    "fullName": "Junior Adamu",
+    "birth": "2001-06-06",
+    "position": "FW",
+    "nationality": "Austria",
+    "club": "Schalke 04",
+    "photo": null,
+    "wikiTitle": "Junior Adamu"
+  },
+  {
     "id": "junior-alonso",
     "name": "Júnior Alonso",
     "fullName": "Júnior Alonso",
@@ -43229,7 +45352,7 @@
     "fullName": "Junior Kadile",
     "birth": "2002-12-16",
     "position": "FW",
-    "nationality": "France",
+    "nationality": "DR Congo",
     "club": "Lens",
     "photo": null,
     "wikiTitle": "Junior Kadile"
@@ -43350,6 +45473,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Junya Itō"
+  },
+  {
+    "id": "jure-balkovec",
+    "name": "Jure Balkovec",
+    "fullName": "Jure Balkovec",
+    "birth": "1994-09-09",
+    "position": "DF",
+    "nationality": "Slovenia",
+    "club": "Omonia",
+    "photo": null,
+    "wikiTitle": "Jure Balkovec"
   },
   {
     "id": "jurgen-ekkelenkamp",
@@ -43535,6 +45669,17 @@
     "wikiTitle": "Justin Donawa"
   },
   {
+    "id": "justin-ellis",
+    "name": "Justin Ellis",
+    "fullName": "Justin Ellis",
+    "birth": "2007-05-14",
+    "position": "FW",
+    "nationality": "United States",
+    "club": "Orlando City",
+    "photo": null,
+    "wikiTitle": "Justin Ellis (soccer)"
+  },
+  {
     "id": "justin-figaroa",
     "name": "Justin Figaroa",
     "fullName": "Justin Figaroa",
@@ -43666,6 +45811,17 @@
     "wikiTitle": null
   },
   {
+    "id": "justin-smith",
+    "name": "Justin Smith",
+    "fullName": "Justin Smith",
+    "birth": "2003-02-04",
+    "position": "MF",
+    "nationality": "Canada",
+    "club": "Eldense",
+    "photo": null,
+    "wikiTitle": "Justin Smith (soccer)"
+  },
+  {
     "id": "justing-cano",
     "name": "Justing Cano",
     "fullName": "Justing Cano",
@@ -43784,6 +45940,17 @@
     "club": "Hellas Verona",
     "photo": null,
     "wikiTitle": "Kacper Sezonienko"
+  },
+  {
+    "id": "kacper-urbanski",
+    "name": "Kacper Urbański",
+    "fullName": "Kacper Urbański",
+    "birth": "2004-09-07",
+    "position": "MF",
+    "nationality": "Poland",
+    "club": "Górnik Zabrze",
+    "photo": null,
+    "wikiTitle": "Kacper Urbański"
   },
   {
     "id": "kadeem-cole",
@@ -43915,6 +46082,17 @@
     "club": "Lyon",
     "photo": null,
     "wikiTitle": "Kaïl Boudache"
+  },
+  {
+    "id": "kaina-tanimura",
+    "name": "Kaina Tanimura",
+    "fullName": "Kaina Tanimura",
+    "birth": "1998-03-05",
+    "position": "FW",
+    "nationality": "Japan",
+    "club": "Yokohama F. Marinos",
+    "photo": null,
+    "wikiTitle": "Kaina Tanimura"
   },
   {
     "id": "kairou-amoustapha",
@@ -44315,6 +46493,28 @@
     "wikiTitle": "Karel Mustmaa"
   },
   {
+    "id": "karen-muradyan",
+    "name": "Karen Muradyan",
+    "fullName": "Karen Muradyan",
+    "birth": "1992-11-01",
+    "position": "MF",
+    "nationality": "Armenia",
+    "club": "Ararat-Armenia",
+    "photo": null,
+    "wikiTitle": "Karen Muradyan"
+  },
+  {
+    "id": "karen-nalbandyan",
+    "name": "Karen Nalbandyan",
+    "fullName": "Karen Nalbandyan",
+    "birth": "2002-04-14",
+    "position": "MF",
+    "nationality": "Armenia",
+    "club": "Alashkert",
+    "photo": null,
+    "wikiTitle": "Karen Nalbandyan"
+  },
+  {
     "id": "karim-boudiaf",
     "name": "Karim Boudiaf",
     "fullName": "Karim Boudiaf",
@@ -44514,6 +46714,17 @@
     "wikiTitle": "Karrar Nabeel"
   },
   {
+    "id": "kasey-bos",
+    "name": "Kasey Bos",
+    "fullName": "Kasey Bos",
+    "birth": "2004-05-08",
+    "position": "DF",
+    "nationality": "Australia",
+    "club": "Excelsior",
+    "photo": null,
+    "wikiTitle": "Kasey Bos"
+  },
+  {
     "id": "kasey-palmer",
     "name": "Kasey Palmer",
     "fullName": "Kasey Palmer",
@@ -44553,6 +46764,17 @@
     "club": "Aubagne",
     "photo": null,
     "wikiTitle": "Kassim M'Dahoma"
+  },
+  {
+    "id": "kassoum-ouattara",
+    "name": "Kassoum Ouattara",
+    "fullName": "Kassoum Ouattara",
+    "birth": "2004-10-14",
+    "position": "DF",
+    "nationality": "Ivory Coast",
+    "club": "Beşiktaş",
+    "photo": null,
+    "wikiTitle": "Kassoum Ouattara"
   },
   {
     "id": "kastriot-imeri",
@@ -44643,6 +46865,17 @@
     "wikiTitle": "Kayne Connor"
   },
   {
+    "id": "kealey-adamson",
+    "name": "Kealey Adamson",
+    "fullName": "Kealey Adamson",
+    "birth": "2003-02-17",
+    "position": "DF",
+    "nationality": "Australia",
+    "club": "Queens Park Rangers",
+    "photo": null,
+    "wikiTitle": "Kealey Adamson"
+  },
+  {
     "id": "keane-lewispotter",
     "name": "Keane Lewis-Potter",
     "fullName": "Keane Lewis-Potter",
@@ -44726,6 +46959,17 @@
     "club": "Werder Bremen",
     "photo": null,
     "wikiTitle": "Keke Topp"
+  },
+  {
+    "id": "kelechi-iheanacho",
+    "name": "Kelechi Iheanacho",
+    "fullName": "Kelechi Iheanacho",
+    "birth": "1996-10-03",
+    "position": "FW",
+    "nationality": "Nigeria",
+    "club": "Bursaspor",
+    "photo": null,
+    "wikiTitle": "Kelechi Iheanacho"
   },
   {
     "id": "kelsey-benjamin",
@@ -44960,6 +47204,17 @@
     "wikiTitle": "Kennet Eichhorn"
   },
   {
+    "id": "kenneth-igboke",
+    "name": "Kenneth Igboke",
+    "fullName": "Kenneth Igboke",
+    "birth": "2005-07-27",
+    "position": "DF",
+    "nationality": "Nigeria",
+    "club": "Rangers International",
+    "photo": null,
+    "wikiTitle": "Kenneth Igboke"
+  },
+  {
     "id": "kenneth-paal",
     "name": "Kenneth Paal",
     "fullName": "Kenneth Paal",
@@ -45085,6 +47340,17 @@
     "wikiTitle": "Kenny Tete"
   },
   {
+    "id": "keny-arroyo",
+    "name": "Keny Arroyo",
+    "fullName": "Keny Arroyo",
+    "birth": "2006-02-14",
+    "position": "FW",
+    "nationality": "Ecuador",
+    "club": "Cruzeiro",
+    "photo": null,
+    "wikiTitle": "Keny Arroyo"
+  },
+  {
     "id": "kenyon-smith",
     "name": "Kenyon Smith",
     "fullName": "Kenyon Smith",
@@ -45157,7 +47423,7 @@
     "name": "Kerim Alajbegović",
     "fullName": "Kerim Alajbegović",
     "birth": "2007-09-21",
-    "position": "FW",
+    "position": "MF",
     "nationality": "Bosnia and Herzegovina",
     "club": "Juventus",
     "photo": {
@@ -45200,6 +47466,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Kevin (footballer, born 2003)"
+  },
+  {
+    "id": "kevin-andrade",
+    "name": "Kevin Andrade",
+    "fullName": "Kevin Andrade",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Colombia",
+    "club": "Zenit Saint Petersburg",
+    "photo": null,
+    "wikiTitle": "Kevin Andrade"
   },
   {
     "id": "kevin-carabantes",
@@ -45357,6 +47634,17 @@
     "wikiTitle": "Kevin Lomónaco"
   },
   {
+    "id": "kevin-mier",
+    "name": "Kevin Mier",
+    "fullName": "Kevin Mier",
+    "birth": null,
+    "position": "GK",
+    "nationality": "Colombia",
+    "club": "Cruz Azul",
+    "photo": null,
+    "wikiTitle": "Kevin Mier"
+  },
+  {
     "id": "kevin-moyo",
     "name": "Kevin Moyo",
     "fullName": "Kevin Moyo",
@@ -45366,6 +47654,17 @@
     "club": "Scottland",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "kevin-pedro",
+    "name": "Kévin Pedro",
+    "fullName": "Kévin Pedro",
+    "birth": "2006-02-21",
+    "position": "DF",
+    "nationality": "DR Congo",
+    "club": "Saint-Étienne",
+    "photo": null,
+    "wikiTitle": "Kévin Pedro"
   },
   {
     "id": "kevin-ramirez",
@@ -45472,6 +47771,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Kevin Trapp"
+  },
+  {
+    "id": "kevin-viveros",
+    "name": "Kevin Viveros",
+    "fullName": "Kevin Viveros",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Colombia",
+    "club": "Athletico Paranaense",
+    "photo": null,
+    "wikiTitle": "Kevin Viveros"
   },
   {
     "id": "kevor-palumets",
@@ -45696,6 +48006,17 @@
     "club": "Nsingizini Hotspurs",
     "photo": null,
     "wikiTitle": "Khanyakwezwe Shabalala"
+  },
+  {
+    "id": "khariton-ayvazyan",
+    "name": "Khariton Ayvazyan",
+    "fullName": "Khariton Ayvazyan",
+    "birth": "2003-11-08",
+    "position": "DF",
+    "nationality": "Armenia",
+    "club": "Urartu",
+    "photo": null,
+    "wikiTitle": "Khariton Ayvazyan"
   },
   {
     "id": "khephren-thuram",
@@ -45971,7 +48292,7 @@
     "id": "kilian-belazzoug",
     "name": "Kilian Belazzoug",
     "fullName": "Kilian Belazzoug",
-    "birth": null,
+    "birth": "2006-07-18",
     "position": "GK",
     "nationality": "Algeria",
     "club": "Rennes",
@@ -46021,6 +48342,28 @@
     "club": "St Mirren",
     "photo": null,
     "wikiTitle": "Killian Phillips"
+  },
+  {
+    "id": "kim-bongsoo",
+    "name": "Kim Bong-soo",
+    "fullName": "Kim Bong-soo",
+    "birth": "1999-12-26",
+    "position": "MF",
+    "nationality": "South Korea",
+    "club": "Daejeon Hana Citizen",
+    "photo": null,
+    "wikiTitle": "Kim Bong-soo (footballer, born 1999)"
+  },
+  {
+    "id": "kim-geonhui",
+    "name": "Kim Geon-hui",
+    "fullName": "Kim Geon-hui",
+    "birth": "2002-09-16",
+    "position": "DF",
+    "nationality": "South Korea",
+    "club": "Incheon United",
+    "photo": null,
+    "wikiTitle": "Kim Geon-hui"
   },
   {
     "id": "kim-jingyu",
@@ -46094,6 +48437,17 @@
     "wikiTitle": "Kim Min-jae (footballer)"
   },
   {
+    "id": "kim-minsu",
+    "name": "Kim Min-su",
+    "fullName": "Kim Min-su",
+    "birth": "2006-01-19",
+    "position": "MF",
+    "nationality": "South Korea",
+    "club": "Rangers",
+    "photo": null,
+    "wikiTitle": "Kim Min-su (footballer, born 2006)"
+  },
+  {
     "id": "kim-moonhwan",
     "name": "Kim Moon-hwan",
     "fullName": "Kim Moon-hwan",
@@ -46163,6 +48517,17 @@
     "club": "Kashima Antlers",
     "photo": null,
     "wikiTitle": "Kim Tae-hyeon"
+  },
+  {
+    "id": "kim-taehyun",
+    "name": "Kim Tae-hyun",
+    "fullName": "Kim Tae-hyun",
+    "birth": "1996-12-19",
+    "position": "DF",
+    "nationality": "South Korea",
+    "club": "Jeonbuk Hyundai Motors",
+    "photo": null,
+    "wikiTitle": "Kim Tae-hyun (footballer)"
   },
   {
     "id": "kim-yusong",
@@ -46349,6 +48714,17 @@
     "club": "Sevilla",
     "photo": null,
     "wikiTitle": "Giorgi Kochorashvili"
+  },
+  {
+    "id": "kodai-sano",
+    "name": "Kodai Sano",
+    "fullName": "Kodai Sano",
+    "birth": "2003-09-25",
+    "position": "MF",
+    "nationality": "Japan",
+    "club": "PSV",
+    "photo": null,
+    "wikiTitle": "Kodai Sano (footballer)"
   },
   {
     "id": "kofi-amoako",
@@ -46803,6 +49179,17 @@
     "wikiTitle": "Kristers Čudars"
   },
   {
+    "id": "kristi-montgomery",
+    "name": "Kristi Montgomery",
+    "fullName": "Kristi Montgomery",
+    "birth": "2004-05-31",
+    "position": "MF",
+    "nationality": "Scotland",
+    "club": "Blackburn Rovers",
+    "photo": null,
+    "wikiTitle": "Kristi Montgomery"
+  },
+  {
     "id": "kristian-dimitrov",
     "name": "Kristian Dimitrov",
     "fullName": "Kristian Dimitrov",
@@ -47008,6 +49395,17 @@
     "club": "Rayo Vallecano",
     "photo": null,
     "wikiTitle": "Marash Kumbulla"
+  },
+  {
+    "id": "kuryu-matsuki",
+    "name": "Kuryu Matsuki",
+    "fullName": "Kuryu Matsuki",
+    "birth": "2003-04-30",
+    "position": "MF",
+    "nationality": "Japan",
+    "club": "Southampton",
+    "photo": null,
+    "wikiTitle": "Kuryu Matsuki"
   },
   {
     "id": "kushal-deuba",
@@ -47267,6 +49665,17 @@
     "wikiTitle": "Kyoga Nakamura"
   },
   {
+    "id": "kyriani-sabbe",
+    "name": "Kyriani Sabbe",
+    "fullName": "Kyriani Sabbe",
+    "birth": "2005-01-26",
+    "position": "DF",
+    "nationality": "Belgium",
+    "club": "Club Brugge",
+    "photo": null,
+    "wikiTitle": "Kyriani Sabbe"
+  },
+  {
     "id": "l-hernandez",
     "name": "Lucas Hernández",
     "fullName": "Lucas Hernández Pi",
@@ -47482,7 +49891,7 @@
     "fullName": "Lamine Sy",
     "birth": "2002-08-10",
     "position": "DF",
-    "nationality": "France",
+    "nationality": "Senegal",
     "club": "Auxerre",
     "photo": null,
     "wikiTitle": "Lamine Sy"
@@ -48059,6 +50468,17 @@
     "wikiTitle": "Leandro Barreiro"
   },
   {
+    "id": "leandro-hernandez",
+    "name": "Leandro Hernández",
+    "fullName": "Leandro Hernández",
+    "birth": "2005-06-13",
+    "position": "MF",
+    "nationality": "Chile",
+    "club": "Colo-Colo",
+    "photo": null,
+    "wikiTitle": "Leandro Hernández"
+  },
+  {
     "id": "leard-sadriu",
     "name": "Leard Sadriu",
     "fullName": "Leard Sadriu",
@@ -48362,6 +50782,17 @@
     "wikiTitle": "Leny Yoro"
   },
   {
+    "id": "leo-kokubo",
+    "name": "Leo Kokubo",
+    "fullName": "Leo Kokubo",
+    "birth": "2001-01-23",
+    "position": "GK",
+    "nationality": "Japan",
+    "club": "Sint-Truiden",
+    "photo": null,
+    "wikiTitle": "Leo Kokubo"
+  },
+  {
     "id": "leo-lovell",
     "name": "Leo Lovell",
     "fullName": "Leo Lovell",
@@ -48572,6 +51003,17 @@
     "wikiTitle": "Leonardo Loria"
   },
   {
+    "id": "leonardo-realpe",
+    "name": "Leonardo Realpe",
+    "fullName": "Leonardo Realpe",
+    "birth": "2001-02-26",
+    "position": "DF",
+    "nationality": "Ecuador",
+    "club": "Famalicão",
+    "photo": null,
+    "wikiTitle": "Leonardo Realpe"
+  },
+  {
     "id": "leonardo-shahin",
     "name": "Leonardo Shahin",
     "fullName": "Leonardo Shahin",
@@ -48619,6 +51061,17 @@
     "club": "Aurora",
     "photo": null,
     "wikiTitle": "Leonardo Viviani"
+  },
+  {
+    "id": "leonel-flores",
+    "name": "Leonel Flores",
+    "fullName": "Leonel Flores",
+    "birth": "2007-02-06",
+    "position": "FW",
+    "nationality": "Argentina",
+    "club": "Boca Juniors",
+    "photo": null,
+    "wikiTitle": "Leonel Flores"
   },
   {
     "id": "leonidas-konomis",
@@ -48987,6 +51440,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Li Yang (footballer, born 1997)"
+  },
+  {
+    "id": "liam-cullen",
+    "name": "Liam Cullen",
+    "fullName": "Liam Cullen",
+    "birth": "1999-04-23",
+    "position": "MF",
+    "nationality": "Wales",
+    "club": "Leicester City",
+    "photo": null,
+    "wikiTitle": "Liam Cullen"
   },
   {
     "id": "liam-delap",
@@ -50200,6 +52664,17 @@
     "wikiTitle": "Luca Netz"
   },
   {
+    "id": "luca-pellegrini",
+    "name": "Luca Pellegrini",
+    "fullName": "Luca Pellegrini",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Italy",
+    "club": "Lazio",
+    "photo": null,
+    "wikiTitle": "Luca Pellegrini (footballer, born 1999)"
+  },
+  {
     "id": "luca-philipp",
     "name": "Luca Philipp",
     "fullName": "Luca Philipp",
@@ -50350,7 +52825,7 @@
     "id": "lucas-da-cunha",
     "name": "Lucas Da Cunha",
     "fullName": "Lucas Da Cunha",
-    "birth": null,
+    "birth": "2001-06-09",
     "position": "MF",
     "nationality": "France",
     "club": "Como",
@@ -50539,7 +53014,7 @@
     "name": "Lucas Vázquez",
     "fullName": "Lucas Vázquez",
     "birth": "1991-07-01",
-    "position": "FW",
+    "position": "DF",
     "nationality": "Spain",
     "club": "Bayer Leverkusen",
     "photo": {
@@ -50628,6 +53103,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Ludovit Reis"
+  },
+  {
+    "id": "luis-binks",
+    "name": "Luis Binks",
+    "fullName": "Luis Binks",
+    "birth": "2001-09-02",
+    "position": "DF",
+    "nationality": "Scotland",
+    "club": "Brøndby",
+    "photo": null,
+    "wikiTitle": "Luis Binks"
   },
   {
     "id": "luis-chavez",
@@ -50922,6 +53408,17 @@
     "wikiTitle": "Luka Gugeshashvili"
   },
   {
+    "id": "luka-jovic",
+    "name": "Luka Jović",
+    "fullName": "Luka Jović",
+    "birth": "1997-12-23",
+    "position": "FW",
+    "nationality": "Serbia",
+    "club": "AEK Athens",
+    "photo": null,
+    "wikiTitle": "Luka Jović"
+  },
+  {
     "id": "luka-lijeskic",
     "name": "Luka Lijeskić",
     "fullName": "Luka Lijeskić",
@@ -51198,6 +53695,28 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
     },
     "wikiTitle": "Łukasz Skorupski"
+  },
+  {
+    "id": "luke-chambers",
+    "name": "Luke Chambers",
+    "fullName": "Luke Chambers",
+    "birth": null,
+    "position": "DF",
+    "nationality": "England",
+    "club": "Liverpool",
+    "photo": null,
+    "wikiTitle": "Luke Chambers (footballer, born 2004)"
+  },
+  {
+    "id": "luke-graham",
+    "name": "Luke Graham",
+    "fullName": "Luke Graham",
+    "birth": "2004-02-11",
+    "position": "DF",
+    "nationality": "Scotland",
+    "club": "Stoke City",
+    "photo": null,
+    "wikiTitle": "Luke Graham (footballer, born 2004)"
   },
   {
     "id": "luke-onien",
@@ -51688,7 +54207,7 @@
     "nationality": "France",
     "club": "Angers",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Maël Gernigon"
   },
   {
     "id": "maffeo",
@@ -52149,6 +54668,17 @@
     "wikiTitle": "Maksims Toņiševs"
   },
   {
+    "id": "maksym-khlan",
+    "name": "Maksym Khlan",
+    "fullName": "Maksym Khlan",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Ukraine",
+    "club": "Górnik Zabrze",
+    "photo": null,
+    "wikiTitle": "Maksym Khlan"
+  },
+  {
     "id": "malachi-gumbs",
     "name": "Malachi Gumbs",
     "fullName": "Malachi Gumbs",
@@ -52169,6 +54699,17 @@
     "club": "Nantes",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "malang-sarr",
+    "name": "Malang Sarr",
+    "fullName": "Malang Sarr",
+    "birth": "1999-01-23",
+    "position": "DF",
+    "nationality": "Senegal",
+    "club": "Neom",
+    "photo": null,
+    "wikiTitle": "Malang Sarr"
   },
   {
     "id": "malek-el-mala",
@@ -52257,7 +54798,7 @@
     "name": "Malik Tillman",
     "fullName": "Malik Tillman",
     "birth": "2002-05-28",
-    "position": "FW",
+    "position": "MF",
     "nationality": "United States",
     "club": "Bayer Leverkusen",
     "photo": {
@@ -52335,6 +54876,17 @@
     "wikiTitle": "Mamadou Coulibaly (footballer, born 2003)"
   },
   {
+    "id": "mamadou-diakhon",
+    "name": "Mamadou Diakhon",
+    "fullName": "Mamadou Diakhon",
+    "birth": "2005-09-22",
+    "position": "FW",
+    "nationality": "Senegal",
+    "club": "Club Brugge",
+    "photo": null,
+    "wikiTitle": "Mamadou Diakhon"
+  },
+  {
     "id": "mamadou-diop",
     "name": "Mamadou Diop",
     "fullName": "Mamadou Diop",
@@ -52384,7 +54936,7 @@
     "nationality": "Ivory Coast",
     "club": "Lorient",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Mamadou Koné (footballer, born 2006)"
   },
   {
     "id": "mamadou-samassa",
@@ -52486,6 +55038,17 @@
     "club": "Paro FC",
     "photo": null,
     "wikiTitle": "Mamoon Moosa Khan"
+  },
+  {
+    "id": "mamour-ndiaye",
+    "name": "Mamour Ndiaye",
+    "fullName": "Mamour Ndiaye",
+    "birth": "2005-10-22",
+    "position": "GK",
+    "nationality": "Senegal",
+    "club": "Saint-Étienne",
+    "photo": null,
+    "wikiTitle": "Mamour Ndiaye"
   },
   {
     "id": "mamoutou-ouedraogo",
@@ -52611,11 +55174,22 @@
     "wikiTitle": "Manny Ott"
   },
   {
+    "id": "manolis-saliakas",
+    "name": "Manolis Saliakas",
+    "fullName": "Manolis Saliakas",
+    "birth": "1996-09-12",
+    "position": "DF",
+    "nationality": "Greece",
+    "club": "Olympiacos",
+    "photo": null,
+    "wikiTitle": "Manolis Saliakas"
+  },
+  {
     "id": "manor-solomon",
     "name": "Manor Solomon",
     "fullName": "Manor Solomon",
     "birth": "1999-07-24",
-    "position": "FW",
+    "position": "MF",
     "nationality": "Israel",
     "club": "West Ham United",
     "photo": {
@@ -52878,6 +55452,17 @@
     "wikiTitle": "Marc Guiu"
   },
   {
+    "id": "marcandre-ter-stegen",
+    "name": "Marc-André ter Stegen",
+    "fullName": "Marc-André ter Stegen",
+    "birth": "1992-04-30",
+    "position": "GK",
+    "nationality": "Germany",
+    "club": "Ajax",
+    "photo": null,
+    "wikiTitle": "Marc-André ter Stegen"
+  },
+  {
     "id": "marcao",
     "name": "Marcão",
     "fullName": "Marcos do Nascimento Teixeira",
@@ -52938,6 +55523,17 @@
     "wikiTitle": "Marcel Ratnik"
   },
   {
+    "id": "marcel-regula",
+    "name": "Marcel Reguła",
+    "fullName": "Marcel Reguła",
+    "birth": "2006-10-26",
+    "position": "MF",
+    "nationality": "Poland",
+    "club": "Zagłębie Lubin",
+    "photo": null,
+    "wikiTitle": "Marcel Reguła"
+  },
+  {
     "id": "marcel-sabitzer",
     "name": "Marcel Sabitzer",
     "fullName": "Marcel Sabitzer",
@@ -52977,6 +55573,17 @@
     "club": "Cartaginés",
     "photo": null,
     "wikiTitle": "Marcelo Hernández"
+  },
+  {
+    "id": "marcelo-morales",
+    "name": "Marcelo Morales",
+    "fullName": "Marcelo Morales",
+    "birth": "2003-06-06",
+    "position": "DF",
+    "nationality": "Chile",
+    "club": "Universidad de Chile",
+    "photo": null,
+    "wikiTitle": "Marcelo Morales"
   },
   {
     "id": "marcelo-standardo",
@@ -53173,7 +55780,7 @@
     "birth": "2008-03-21",
     "position": "MF",
     "nationality": "Venezuela",
-    "club": "Bologna Primavera",
+    "club": "Bologna",
     "photo": null,
     "wikiTitle": "Marco Libra"
   },
@@ -53268,6 +55875,17 @@
     "wikiTitle": "Marcos Cheong"
   },
   {
+    "id": "marcos-de-leon",
+    "name": "Marcos De León",
+    "fullName": "Marcos De León",
+    "birth": "1998-01-20",
+    "position": "GK",
+    "nationality": "Panama",
+    "club": "Sporting San Miguelito",
+    "photo": null,
+    "wikiTitle": "Marcos De León"
+  },
+  {
     "id": "marcos-lopez",
     "name": "Marcos López",
     "fullName": "Marcos López",
@@ -53304,6 +55922,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
     },
     "wikiTitle": "Marcus Bettinelli"
+  },
+  {
+    "id": "marcus-caldeira",
+    "name": "Marcus Caldeira",
+    "fullName": "Marcus Caldeira",
+    "birth": "2004-10-14",
+    "position": "FW",
+    "nationality": "Canada",
+    "club": "Minnesota United",
+    "photo": null,
+    "wikiTitle": "Marcus Caldeira"
   },
   {
     "id": "marcus-edwards",
@@ -53402,6 +56031,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/3.0"
     },
     "wikiTitle": "Marcus Tavernier"
+  },
+  {
+    "id": "marcus-younis",
+    "name": "Marcus Younis",
+    "fullName": "Marcus Younis",
+    "birth": "2005-07-03",
+    "position": "FW",
+    "nationality": "Australia",
+    "club": "Brøndby",
+    "photo": null,
+    "wikiTitle": "Marcus Younis"
   },
   {
     "id": "marek-rodak",
@@ -53547,7 +56187,7 @@
     "name": "Mario Götze",
     "fullName": "Mario Götze",
     "birth": "1992-06-03",
-    "position": "FW",
+    "position": "MF",
     "nationality": "Germany",
     "club": "Eintracht Frankfurt",
     "photo": {
@@ -53777,6 +56417,17 @@
     "wikiTitle": "Mark Gillespie (footballer)"
   },
   {
+    "id": "mark-harris",
+    "name": "Mark Harris",
+    "fullName": "Mark Harris",
+    "birth": "1998-12-29",
+    "position": "FW",
+    "nationality": "Wales",
+    "club": "Oxford United",
+    "photo": null,
+    "wikiTitle": "Mark Harris (Welsh footballer)"
+  },
+  {
     "id": "mark-mckenzie",
     "name": "Mark McKenzie",
     "fullName": "Mark McKenzie",
@@ -53824,6 +56475,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Mark Travers"
+  },
+  {
+    "id": "mark-zabukovnik",
+    "name": "Mark Zabukovnik",
+    "fullName": "Mark Zabukovnik",
+    "birth": "2000-12-27",
+    "position": "MF",
+    "nationality": "Slovenia",
+    "club": "Celje",
+    "photo": null,
+    "wikiTitle": "Mark Zabukovnik"
   },
   {
     "id": "marko-arnautovic",
@@ -54285,6 +56947,17 @@
     "club": "FC Köln",
     "photo": null,
     "wikiTitle": "Martin James (French footballer)"
+  },
+  {
+    "id": "martin-krug",
+    "name": "Martín Krug",
+    "fullName": "Martín Krug",
+    "birth": "2006-07-09",
+    "position": "DF",
+    "nationality": "Panama",
+    "club": "Juventud Torremolinos",
+    "photo": null,
+    "wikiTitle": "Martín Krug"
   },
   {
     "id": "martin-mapisa",
@@ -54925,11 +57598,22 @@
     "wikiTitle": "Matheus Cunha"
   },
   {
+    "id": "matheus-martinelli",
+    "name": "Matheus Martinelli",
+    "fullName": "Matheus Martinelli",
+    "birth": "2001-10-05",
+    "position": "MF",
+    "nationality": "Brazil",
+    "club": "Fluminense",
+    "photo": null,
+    "wikiTitle": "Matheus Martinelli"
+  },
+  {
     "id": "matheus-nunes",
     "name": "Matheus Nunes",
     "fullName": "Matheus Nunes",
     "birth": "1998-08-27",
-    "position": "MF",
+    "position": "DF",
     "nationality": "Portugal",
     "club": "Manchester City",
     "photo": {
@@ -54942,6 +57626,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Matheus Nunes"
+  },
+  {
+    "id": "matheuzinho",
+    "name": "Matheuzinho",
+    "fullName": "Matheuzinho",
+    "birth": "2000-09-08",
+    "position": "DF",
+    "nationality": "Brazil",
+    "club": "Corinthians",
+    "photo": null,
+    "wikiTitle": "Matheuzinho (footballer, born 2000)"
   },
   {
     "id": "mathew-leckie",
@@ -54999,6 +57694,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Mathias Jensen"
+  },
+  {
+    "id": "mathias-kvistgaarden",
+    "name": "Mathias Kvistgaarden",
+    "fullName": "Mathias Kvistgaarden",
+    "birth": "2002-04-15",
+    "position": "FW",
+    "nationality": "Denmark",
+    "club": "Norwich City",
+    "photo": null,
+    "wikiTitle": "Mathias Kvistgaarden"
   },
   {
     "id": "mathias-olesen",
@@ -55067,6 +57773,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Mathias Rasmussen"
+  },
+  {
+    "id": "mathias-villasanti",
+    "name": "Mathías Villasanti",
+    "fullName": "Mathías Villasanti",
+    "birth": "1997-01-24",
+    "position": "MF",
+    "nationality": "Paraguay",
+    "club": "Grêmio",
+    "photo": null,
+    "wikiTitle": "Mathías Villasanti"
   },
   {
     "id": "mathieu-adoassou",
@@ -55328,6 +58045,17 @@
     "wikiTitle": "Matías Lazo"
   },
   {
+    "id": "matias-orozco",
+    "name": "Matías Orozco",
+    "fullName": "Matías Orozco",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Colombia",
+    "club": "Castellón",
+    "photo": null,
+    "wikiTitle": "Matías Orozco"
+  },
+  {
     "id": "matias-sepulveda",
     "name": "Matías Sepúlveda",
     "fullName": "Matías Sepúlveda",
@@ -55546,6 +58274,17 @@
     "wikiTitle": "Matteo Bianchetti"
   },
   {
+    "id": "matteo-bignetti",
+    "name": "Matteo Bignetti",
+    "fullName": "Matteo Bignetti",
+    "birth": "2004-05-06",
+    "position": "GK",
+    "nationality": "Austria",
+    "club": "1. FC Saarbrücken",
+    "photo": null,
+    "wikiTitle": "Matteo Bignetti"
+  },
+  {
     "id": "matteo-cancellieri",
     "name": "Matteo Cancellieri",
     "fullName": "Matteo Cancellieri",
@@ -55566,6 +58305,17 @@
     "club": "Venezia",
     "photo": null,
     "wikiTitle": "Matteo Dagasso"
+  },
+  {
+    "id": "matteo-darmian",
+    "name": "Matteo Darmian",
+    "fullName": "Matteo Darmian",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Italy",
+    "club": "Bologna",
+    "photo": null,
+    "wikiTitle": "Matteo Darmian"
   },
   {
     "id": "matteo-gabbia",
@@ -56045,6 +58795,17 @@
     "wikiTitle": "Maurits Kjærgaard"
   },
   {
+    "id": "mauro-junior",
+    "name": "Mauro Júnior",
+    "fullName": "Mauro Júnior",
+    "birth": "1999-05-06",
+    "position": "DF",
+    "nationality": "Brazil",
+    "club": "PSV",
+    "photo": null,
+    "wikiTitle": "Mauro Júnior"
+  },
+  {
     "id": "mauro-vigorito",
     "name": "Mauro Vigorito",
     "fullName": "Mauro Vigorito",
@@ -56389,7 +59150,7 @@
     "name": "Maximilian Beier",
     "fullName": "Maximilian Beier",
     "birth": "2002-10-17",
-    "position": "FW",
+    "position": "MF",
     "nationality": "Germany",
     "club": "Borussia Dortmund",
     "photo": {
@@ -56481,6 +59242,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Maximilian Mittelstädt"
+  },
+  {
+    "id": "maximilian-wober",
+    "name": "Maximilian Wöber",
+    "fullName": "Maximilian Wöber",
+    "birth": "1998-02-04",
+    "position": "DF",
+    "nationality": "Austria",
+    "club": "Schalke 04",
+    "photo": null,
+    "wikiTitle": "Maximilian Wöber"
   },
   {
     "id": "maximiliano-araujo",
@@ -56647,6 +59419,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Maziar Kouhyar"
+  },
+  {
+    "id": "mazin-mohamedein",
+    "name": "Mazin Mohamedein",
+    "fullName": "Mazin Mohamedein",
+    "birth": "2000-05-02",
+    "position": "DF",
+    "nationality": "Sudan",
+    "club": "Al Akhdar SC",
+    "photo": null,
+    "wikiTitle": "Mazin Mohamedein"
   },
   {
     "id": "mbaiossoum-samba-diallo",
@@ -56864,6 +59647,17 @@
     "wikiTitle": "Mehdi Léris"
   },
   {
+    "id": "mehdi-limouchi",
+    "name": "Mehdi Limouchi",
+    "fullName": "Mehdi Limouchi",
+    "birth": "1999-11-23",
+    "position": "MF",
+    "nationality": "Iran",
+    "club": "Sepahan",
+    "photo": null,
+    "wikiTitle": "Mehdi Limouchi"
+  },
+  {
     "id": "mehdi-taremi",
     "name": "Mehdi Taremi",
     "fullName": "Mehdi Taremi",
@@ -56933,6 +59727,17 @@
     "club": "Ravshan Kulob",
     "photo": null,
     "wikiTitle": "Mekhrubon Karimov"
+  },
+  {
+    "id": "melih-kabasakal",
+    "name": "Melih Kabasakal",
+    "fullName": "Melih Kabasakal",
+    "birth": "1996-02-18",
+    "position": "MF",
+    "nationality": "Türkiye",
+    "club": "Trabzonspor",
+    "photo": null,
+    "wikiTitle": "Melih Kabasakal"
   },
   {
     "id": "melker-ellborg",
@@ -57354,6 +60159,17 @@
     "wikiTitle": "Lionel Messi"
   },
   {
+    "id": "mexx-meerdink",
+    "name": "Mexx Meerdink",
+    "fullName": "Mexx Meerdink",
+    "birth": "2003-07-24",
+    "position": "FW",
+    "nationality": "Netherlands",
+    "club": "AZ",
+    "photo": null,
+    "wikiTitle": "Mexx Meerdink"
+  },
+  {
     "id": "meylis-diniyew",
     "name": "Meýlis Diniýew",
     "fullName": "Meýlis Diniýew",
@@ -57385,6 +60201,17 @@
     "club": "Whitecaps FC 2",
     "photo": null,
     "wikiTitle": "Micaah Garnette"
+  },
+  {
+    "id": "michael-atata",
+    "name": "Michael Atata",
+    "fullName": "Michael Atata",
+    "birth": "2005-10-23",
+    "position": "GK",
+    "nationality": "Nigeria",
+    "club": "Ikorodu City",
+    "photo": null,
+    "wikiTitle": "Michael Atata"
   },
   {
     "id": "michael-boxall",
@@ -57529,6 +60356,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
     },
     "wikiTitle": "Michael Keane (footballer, born 1993)"
+  },
+  {
+    "id": "michael-obafemi",
+    "name": "Michael Obafemi",
+    "fullName": "Michael Obafemi",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Republic of Ireland",
+    "club": "Burnley",
+    "photo": null,
+    "wikiTitle": "Michael Obafemi"
   },
   {
     "id": "michael-schjonninglarsen",
@@ -57806,6 +60644,17 @@
     "wikiTitle": "Miguel Ángel Nkogo"
   },
   {
+    "id": "miguel-araujo",
+    "name": "Miguel Araujo",
+    "fullName": "Miguel Araujo",
+    "birth": "1994-10-24",
+    "position": "DF",
+    "nationality": "Peru",
+    "club": "Sporting Cristal",
+    "photo": null,
+    "wikiTitle": "Miguel Araujo"
+  },
+  {
     "id": "miguel-freckleton",
     "name": "Miguel Freckleton",
     "fullName": "Miguel Freckleton",
@@ -57937,6 +60786,17 @@
     "wikiTitle": "Mihailo Ivanović (footballer)"
   },
   {
+    "id": "mihajlo-cvetkovic",
+    "name": "Mihajlo Cvetković",
+    "fullName": "Mihajlo Cvetković",
+    "birth": "2007-01-10",
+    "position": "FW",
+    "nationality": "Serbia",
+    "club": "Anderlecht",
+    "photo": null,
+    "wikiTitle": "Mihajlo Cvetković"
+  },
+  {
     "id": "mihkel-ainsalu",
     "name": "Mihkel Ainsalu",
     "fullName": "Mihkel Ainsalu",
@@ -57954,6 +60814,28 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Mihkel Ainsalu"
+  },
+  {
+    "id": "mijahir-jimenez",
+    "name": "Mijahir Jiménez",
+    "fullName": "Mijahir Jiménez",
+    "birth": "2007-03-28",
+    "position": "FW",
+    "nationality": "Panama",
+    "club": "New York Red Bulls",
+    "photo": null,
+    "wikiTitle": "Mijahir Jiménez"
+  },
+  {
+    "id": "mika-baur",
+    "name": "Mika Baur",
+    "fullName": "Mika Baur",
+    "birth": "2004-07-09",
+    "position": "MF",
+    "nationality": "Germany",
+    "club": "Celtic",
+    "photo": null,
+    "wikiTitle": "Mika Baur"
   },
   {
     "id": "mika-biereth",
@@ -58054,6 +60936,17 @@
     "wikiTitle": "Mike Penders"
   },
   {
+    "id": "mike-tresor",
+    "name": "Mike Trésor",
+    "fullName": "Mike Trésor",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Belgium",
+    "club": "Burnley",
+    "photo": null,
+    "wikiTitle": "Mike Trésor"
+  },
+  {
     "id": "mikel-amondarain",
     "name": "Mikel Amondarain",
     "fullName": "Mikel Amondarain",
@@ -58141,6 +61034,17 @@
     "wikiTitle": "Milad Mohammadi"
   },
   {
+    "id": "milad-sourgi",
+    "name": "Milad Sourgi",
+    "fullName": "Milad Sourgi",
+    "birth": "2002-02-11",
+    "position": "MF",
+    "nationality": "Iran",
+    "club": "Shams Azar",
+    "photo": null,
+    "wikiTitle": "Mohammad Milad Sourgi"
+  },
+  {
     "id": "milad-termanini",
     "name": "Milad Termanini",
     "fullName": "Milad Termanini",
@@ -58183,6 +61087,17 @@
     "club": "Genk",
     "photo": null,
     "wikiTitle": "Milan Roganović"
+  },
+  {
+    "id": "milan-skriniar",
+    "name": "Milan Škriniar",
+    "fullName": "Milan Škriniar",
+    "birth": "1995-02-11",
+    "position": "DF",
+    "nationality": "Slovakia",
+    "club": "Fenerbahçe",
+    "photo": null,
+    "wikiTitle": "Milan Škriniar"
   },
   {
     "id": "milan-toth",
@@ -58790,6 +61705,17 @@
     "wikiTitle": "Mohamed Ali Ben Romdhane"
   },
   {
+    "id": "mohamed-ali-zoma",
+    "name": "Mohamed Alì Zoma",
+    "fullName": "Mohamed Alì Zoma",
+    "birth": "2003-12-16",
+    "position": "FW",
+    "nationality": "Italy",
+    "club": "1. FC Nürnberg",
+    "photo": null,
+    "wikiTitle": "Mohamed Alì Zoma"
+  },
+  {
     "id": "mohamed-alromaihi",
     "name": "Mohamed Al-Romaihi",
     "fullName": "Mohamed Al-Romaihi",
@@ -58877,6 +61803,28 @@
     "wikiTitle": "Mohamed Bamba (footballer, born 2001)"
   },
   {
+    "id": "mohamed-daramy",
+    "name": "Mohamed Daramy",
+    "fullName": "Mohamed Daramy",
+    "birth": "2002-01-07",
+    "position": "FW",
+    "nationality": "Denmark",
+    "club": "Reims",
+    "photo": null,
+    "wikiTitle": "Mohamed Daramy"
+  },
+  {
+    "id": "mohamed-eisa",
+    "name": "Mohamed Eisa",
+    "fullName": "Mohamed Eisa",
+    "birth": "1994-07-12",
+    "position": "FW",
+    "nationality": "Sudan",
+    "club": "Uthai Thani F.C.",
+    "photo": null,
+    "wikiTitle": "Mohamed Eisa"
+  },
+  {
     "id": "mohamed-el-garably",
     "name": "Mohamed El Garably",
     "fullName": "Mohamed El Garably",
@@ -58905,6 +61853,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Mohamed El Shenawy"
+  },
+  {
+    "id": "mohamed-ering",
+    "name": "Mohamed Ering",
+    "fullName": "Mohamed Ering",
+    "birth": "1997-10-20",
+    "position": "DF",
+    "nationality": "Sudan",
+    "club": "Al-Hilal",
+    "photo": null,
+    "wikiTitle": "Mohamed Ering"
   },
   {
     "id": "mohamed-fofanah",
@@ -59128,7 +62087,7 @@
       "licence": "CC BY-SA 4.0",
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
-    "wikiTitle": "Mohamed Touré (soccer, born 2004)"
+    "wikiTitle": "Mohamed Touré (footballer, born 2004)"
   },
   {
     "id": "mohamed-wonkoye",
@@ -59232,6 +62191,28 @@
     "wikiTitle": null
   },
   {
+    "id": "mohammad-mehdi-mohebi",
+    "name": "Mohammad Mehdi Mohebi",
+    "fullName": "Mohammad Mehdi Mohebi",
+    "birth": "2000-02-10",
+    "position": "MF",
+    "nationality": "Iran",
+    "club": "Persepolis",
+    "photo": null,
+    "wikiTitle": "Mohammad Mehdi Mohebi"
+  },
+  {
+    "id": "mohammad-mehdi-zare",
+    "name": "Mohammad Mehdi Zare",
+    "fullName": "Mohammad Mehdi Zare",
+    "birth": "2003-01-25",
+    "position": "DF",
+    "nationality": "Iran",
+    "club": "Persepolis",
+    "photo": null,
+    "wikiTitle": "Mohammad Mehdi Zare"
+  },
+  {
     "id": "mohammad-mohebi",
     "name": "Mohammad Mohebi",
     "fullName": "Mohammad Mohebi",
@@ -59249,6 +62230,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Mohammad Mohebi"
+  },
+  {
+    "id": "mohammad-naderi",
+    "name": "Mohammad Naderi",
+    "fullName": "Mohammad Naderi",
+    "birth": "1996-10-05",
+    "position": "DF",
+    "nationality": "Iran",
+    "club": "Tractor",
+    "photo": null,
+    "wikiTitle": "Mohammad Naderi"
   },
   {
     "id": "mohammed-abdulqayoom",
@@ -59770,6 +62762,17 @@
     "club": "Taichung Futuro",
     "photo": null,
     "wikiTitle": "Mönkh-Orgil Orkhon"
+  },
+  {
+    "id": "monsef-bakrar",
+    "name": "Monsef Bakrar",
+    "fullName": "Monsef Bakrar",
+    "birth": "2001-01-13",
+    "position": "FW",
+    "nationality": "Algeria",
+    "club": "Al Ahly",
+    "photo": null,
+    "wikiTitle": "Monsef Bakrar"
   },
   {
     "id": "montassar-talbi",
@@ -60500,6 +63503,50 @@
     "wikiTitle": "Mudathir Yahya"
   },
   {
+    "id": "muhamed-abdelrahman",
+    "name": "Muhamed Abdelrahman",
+    "fullName": "Muhamed Abdelrahman",
+    "birth": "1993-07-10",
+    "position": "FW",
+    "nationality": "Sudan",
+    "club": "Al-Hilal",
+    "photo": null,
+    "wikiTitle": "Mohamed Abdelrahman (footballer, born 1993)"
+  },
+  {
+    "id": "muhamed-alnour-abouja",
+    "name": "Muhamed Alnour Abouja",
+    "fullName": "Muhamed Alnour Abouja",
+    "birth": "2000-01-01",
+    "position": "GK",
+    "nationality": "Sudan",
+    "club": "Al-Merrikh SC",
+    "photo": null,
+    "wikiTitle": "Muhamed Alnour Abouja"
+  },
+  {
+    "id": "muhamed-kesra",
+    "name": "Muhamed Kesra",
+    "fullName": "Muhamed Kesra",
+    "birth": "1996-10-25",
+    "position": "DF",
+    "nationality": "Sudan",
+    "club": "Jamus FC",
+    "photo": null,
+    "wikiTitle": "Muhamed Kesra"
+  },
+  {
+    "id": "muhamed-tia-asad",
+    "name": "Muhamed Tia Asad",
+    "fullName": "Muhamed Tia Asad",
+    "birth": "2001-02-21",
+    "position": "FW",
+    "nationality": "Sudan",
+    "club": "Al-Merrikh SC",
+    "photo": null,
+    "wikiTitle": "Muhamed Tia Asad"
+  },
+  {
     "id": "muhammed-damar",
     "name": "Muhammed Damar",
     "fullName": "Muhammed Damar",
@@ -60517,6 +63564,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Muhammed Damar"
+  },
+  {
+    "id": "muhammed-sengezer",
+    "name": "Muhammed Şengezer",
+    "fullName": "Muhammed Şengezer",
+    "birth": "1997-01-05",
+    "position": "GK",
+    "nationality": "Türkiye",
+    "club": "Başakşehir",
+    "photo": null,
+    "wikiTitle": "Muhammed Şengezer"
   },
   {
     "id": "muhammedhu-munsif",
@@ -60640,6 +63698,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Munir Mohamedi"
+  },
+  {
+    "id": "munjed-alnil",
+    "name": "Munjed Alnil",
+    "fullName": "Munjed Alnil",
+    "birth": "1996-01-01",
+    "position": "GK",
+    "nationality": "Sudan",
+    "club": "Al Merreikh FC (South Sudan)",
+    "photo": null,
+    "wikiTitle": "Munjed Alnil"
   },
   {
     "id": "munkhkhuslen-munkhsaikhan",
@@ -60842,6 +63911,28 @@
     "club": "Araz-Naxçıvan",
     "photo": null,
     "wikiTitle": "Mustafa Ahmadzada"
+  },
+  {
+    "id": "mustafa-eskihellac",
+    "name": "Mustafa Eskihellaç",
+    "fullName": "Mustafa Eskihellaç",
+    "birth": "1997-05-05",
+    "position": "DF",
+    "nationality": "Türkiye",
+    "club": "Trabzonspor",
+    "photo": null,
+    "wikiTitle": "Mustafa Eskihellaç"
+  },
+  {
+    "id": "mustafa-karshoum",
+    "name": "Mustafa Karshoum",
+    "fullName": "Mustafa Karshoum",
+    "birth": "1992-12-06",
+    "position": "DF",
+    "nationality": "Sudan",
+    "club": "Al-Hilal",
+    "photo": null,
+    "wikiTitle": "Mustafa Karshoum"
   },
   {
     "id": "mustafa-omarkheil",
@@ -61447,6 +64538,17 @@
     "wikiTitle": "Naqwan Henry"
   },
   {
+    "id": "narek-aghasaryan",
+    "name": "Narek Aghasaryan",
+    "fullName": "Narek Aghasaryan",
+    "birth": "2001-07-15",
+    "position": "MF",
+    "nationality": "Armenia",
+    "club": "Urartu",
+    "photo": null,
+    "wikiTitle": "Narek Aghasaryan"
+  },
+  {
     "id": "narek-grigoryan",
     "name": "Narek Grigoryan",
     "fullName": "Narek Grigoryan",
@@ -61745,6 +64847,17 @@
     "club": "Mansfield Town",
     "photo": null,
     "wikiTitle": "Nathan Moriah-Welsh"
+  },
+  {
+    "id": "nathan-ndibu",
+    "name": "Nathan Ndibu",
+    "fullName": "Nathan Ndibu",
+    "birth": "2004-06-09",
+    "position": "GK",
+    "nationality": "DR Congo",
+    "club": "Aigles du Congo",
+    "photo": null,
+    "wikiTitle": "Nathan Ndibu"
   },
   {
     "id": "nathan-ngoumou",
@@ -62254,6 +65367,17 @@
     "wikiTitle": "Neil El Aynaoui"
   },
   {
+    "id": "neil-pierre",
+    "name": "Neil Pierre",
+    "fullName": "Neil Pierre",
+    "birth": "2007-10-19",
+    "position": "DF",
+    "nationality": "United States",
+    "club": "Philadelphia Union",
+    "photo": null,
+    "wikiTitle": "Neil Pierre"
+  },
+  {
     "id": "neil-wahiobe",
     "name": "Neil Wahiobe",
     "fullName": "Neil Wahiobe",
@@ -62326,6 +65450,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Nélson Semedo"
+  },
+  {
+    "id": "nemanja-maksimovic",
+    "name": "Nemanja Maksimović",
+    "fullName": "Nemanja Maksimović",
+    "birth": "1995-01-26",
+    "position": "MF",
+    "nationality": "Serbia",
+    "club": "Shabab Al-Ahli",
+    "photo": null,
+    "wikiTitle": "Nemanja Maksimović"
   },
   {
     "id": "nemanja-matic",
@@ -62427,6 +65562,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Martim Neto"
+  },
+  {
+    "id": "neto-2",
+    "name": "Neto",
+    "fullName": "Neto",
+    "birth": null,
+    "position": "GK",
+    "nationality": "Brazil",
+    "club": "Juventus",
+    "photo": null,
+    "wikiTitle": "Neto (footballer, born 1989)"
   },
   {
     "id": "neveal-hackshaw",
@@ -63441,7 +66587,7 @@
     "name": "Nicolò Zaniolo",
     "fullName": "Nicolò Zaniolo",
     "birth": "1999-07-02",
-    "position": "MF",
+    "position": "FW",
     "nationality": "Italy",
     "club": "Udinese",
     "photo": {
@@ -63900,6 +67046,17 @@
     "wikiTitle": "Fer Niño"
   },
   {
+    "id": "nino-marcelli",
+    "name": "Nino Marcelli",
+    "fullName": "Nino Marcelli",
+    "birth": "2005-05-29",
+    "position": "FW",
+    "nationality": "Slovakia",
+    "club": "Slovan Bratislava",
+    "photo": null,
+    "wikiTitle": "Nino Marcelli (Slovak footballer)"
+  },
+  {
     "id": "nishan-velupillay",
     "name": "Nishan Velupillay",
     "fullName": "Nishan Velupillay",
@@ -64096,7 +67253,7 @@
     "fullName": "Noah Mbamba",
     "birth": "2005-01-05",
     "position": "MF",
-    "nationality": "Belgium",
+    "nationality": "DR Congo",
     "club": "Lorient",
     "photo": null,
     "wikiTitle": "Noah Mbamba"
@@ -64208,6 +67365,17 @@
     "wikiTitle": "Nobel Gebrezgi"
   },
   {
+    "id": "nobel-mendy",
+    "name": "Nobel Mendy",
+    "fullName": "Nobel Mendy",
+    "birth": "2004-09-03",
+    "position": "DF",
+    "nationality": "Senegal",
+    "club": "Hull City",
+    "photo": null,
+    "wikiTitle": "Nobel Mendy"
+  },
+  {
     "id": "noble-okello",
     "name": "Noble Okello",
     "fullName": "Noble Okello",
@@ -64261,6 +67429,17 @@
     "club": "Eintracht Frankfurt",
     "photo": null,
     "wikiTitle": "Noël Aséko"
+  },
+  {
+    "id": "noel-tornqvist",
+    "name": "Noel Törnqvist",
+    "fullName": "Noel Törnqvist",
+    "birth": "2002-02-01",
+    "position": "GK",
+    "nationality": "Sweden",
+    "club": "Monza",
+    "photo": null,
+    "wikiTitle": "Noel Törnqvist"
   },
   {
     "id": "noham-kamara",
@@ -64787,6 +67966,17 @@
     "wikiTitle": "Odilon Kossounou"
   },
   {
+    "id": "odin-bjortuft",
+    "name": "Odin Bjørtuft",
+    "fullName": "Odin Bjørtuft",
+    "birth": "1998-12-19",
+    "position": "DF",
+    "nationality": "Norway",
+    "club": "Bodø/Glimt",
+    "photo": null,
+    "wikiTitle": "Odin Bjørtuft"
+  },
+  {
     "id": "odmar-faero",
     "name": "Odmar Færø",
     "fullName": "Odmar Færø",
@@ -64931,6 +68121,17 @@
     "wikiTitle": "Oh Hyeon-gyu"
   },
   {
+    "id": "oh-sehun",
+    "name": "Oh Se-hun",
+    "fullName": "Oh Se-hun",
+    "birth": "1999-01-15",
+    "position": "FW",
+    "nationality": "South Korea",
+    "club": "Shimizu S-Pulse",
+    "photo": null,
+    "wikiTitle": "Oh Se-hun (footballer)"
+  },
+  {
     "id": "oier-zarraga",
     "name": "Oier Zarraga",
     "fullName": "Oier Zarraga",
@@ -64959,6 +68160,17 @@
     "club": "Kairat",
     "photo": null,
     "wikiTitle": "Oiva Jukkola"
+  },
+  {
+    "id": "okan-kocuk",
+    "name": "Okan Kocuk",
+    "fullName": "Okan Kocuk",
+    "birth": "1995-07-27",
+    "position": "GK",
+    "nationality": "Türkiye",
+    "club": "Samsunspor",
+    "photo": null,
+    "wikiTitle": "Okan Kocuk"
   },
   {
     "id": "ola-aina",
@@ -65043,6 +68255,17 @@
     "wikiTitle": "Olatoundji Tessilimi"
   },
   {
+    "id": "ole-didrik-blomberg",
+    "name": "Ole Didrik Blomberg",
+    "fullName": "Ole Didrik Blomberg",
+    "birth": "2000-06-12",
+    "position": "FW",
+    "nationality": "Norway",
+    "club": "Bodø/Glimt",
+    "photo": null,
+    "wikiTitle": "Ole Didrik Blomberg"
+  },
+  {
     "id": "ole-romeny",
     "name": "Ole Romeny",
     "fullName": "Ole Romeny",
@@ -65111,6 +68334,17 @@
     "wikiTitle": "Oleh Ocheretko"
   },
   {
+    "id": "oleksandr-drambayev",
+    "name": "Oleksandr Drambayev",
+    "fullName": "Oleksandr Drambayev",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Ukraine",
+    "club": "LNZ Cherkasy",
+    "photo": null,
+    "wikiTitle": "Oleksandr Drambayev"
+  },
+  {
     "id": "oleksandr-nazarenko",
     "name": "Oleksandr Nazarenko",
     "fullName": "Oleksandr Nazarenko",
@@ -65120,6 +68354,17 @@
     "club": "Polissya Zhytomyr",
     "photo": null,
     "wikiTitle": "Oleksandr Nazarenko"
+  },
+  {
+    "id": "oleksandr-pikhalyonok",
+    "name": "Oleksandr Pikhalyonok",
+    "fullName": "Oleksandr Pikhalyonok",
+    "birth": "1997-05-07",
+    "position": "MF",
+    "nationality": "Ukraine",
+    "club": "Dynamo Kyiv",
+    "photo": null,
+    "wikiTitle": "Oleksandr Pikhalyonok"
   },
   {
     "id": "oleksandr-romanchuk",
@@ -65158,6 +68403,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Olger Escobar"
+  },
+  {
+    "id": "oli-mcburnie",
+    "name": "Oli McBurnie",
+    "fullName": "Oli McBurnie",
+    "birth": "1996-06-04",
+    "position": "FW",
+    "nationality": "Scotland",
+    "club": "Hull City",
+    "photo": null,
+    "wikiTitle": "Oli McBurnie"
   },
   {
     "id": "olimpiu-morutan",
@@ -65533,6 +68789,17 @@
     "wikiTitle": null
   },
   {
+    "id": "omar-fayed",
+    "name": "Omar Fayed",
+    "fullName": "Omar Fayed",
+    "birth": "2003-07-04",
+    "position": "DF",
+    "nationality": "Egypt",
+    "club": "Frosinone",
+    "photo": null,
+    "wikiTitle": "Omar Fayed (footballer)"
+  },
+  {
     "id": "omar-mahamoud",
     "name": "Omar Mahamoud",
     "fullName": "Omar Mahamoud",
@@ -65607,6 +68874,17 @@
     "wikiTitle": "Omar Sissoko"
   },
   {
+    "id": "omar-valencia",
+    "name": "Omar Valencia",
+    "fullName": "Omar Valencia",
+    "birth": "2004-06-08",
+    "position": "DF",
+    "nationality": "Panama",
+    "club": "New York Red Bulls",
+    "photo": null,
+    "wikiTitle": "Omar Valencia"
+  },
+  {
     "id": "omari-glasgow",
     "name": "Omari Glasgow",
     "fullName": "Omari Glasgow",
@@ -65668,6 +68946,17 @@
     "club": "Penang",
     "photo": null,
     "wikiTitle": "Omid Musawi"
+  },
+  {
+    "id": "omid-noorafkan",
+    "name": "Omid Noorafkan",
+    "fullName": "Omid Noorafkan",
+    "birth": "1997-04-09",
+    "position": "MF",
+    "nationality": "Iran",
+    "club": "Sepahan",
+    "photo": null,
+    "wikiTitle": "Omid Noorafkan"
   },
   {
     "id": "omid-popalzay",
@@ -65945,6 +69234,17 @@
     "wikiTitle": "Osama Anbar"
   },
   {
+    "id": "osama-faisal",
+    "name": "Osama Faisal",
+    "fullName": "Osama Faisal",
+    "birth": "2001-01-01",
+    "position": "FW",
+    "nationality": "Egypt",
+    "club": "National Bank of Egypt",
+    "photo": null,
+    "wikiTitle": "Osama Faisal"
+  },
+  {
     "id": "osama-haidar",
     "name": "Osama Haidar",
     "fullName": "Osama Haidar",
@@ -66065,6 +69365,17 @@
     "wikiTitle": "Óscar Castellanos"
   },
   {
+    "id": "oscar-garcia",
+    "name": "Óscar García",
+    "fullName": "Óscar García",
+    "birth": "2003-07-02",
+    "position": "GK",
+    "nationality": "Mexico",
+    "club": "León",
+    "photo": null,
+    "wikiTitle": "Óscar García (footballer, born 2003)"
+  },
+  {
     "id": "oscar-hojlund",
     "name": "Oscar Højlund",
     "fullName": "Oscar Højlund",
@@ -66112,6 +69423,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Óscar Mingueza"
+  },
+  {
+    "id": "oscar-perea",
+    "name": "Óscar Perea",
+    "fullName": "Óscar Perea",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Colombia",
+    "club": "América",
+    "photo": null,
+    "wikiTitle": "Óscar Perea"
   },
   {
     "id": "oscar-santis",
@@ -66205,6 +69527,17 @@
     "club": "Real Sociedad",
     "photo": null,
     "wikiTitle": "Orri Óskarsson"
+  },
+  {
+    "id": "oslimg-mora",
+    "name": "Oslimg Mora",
+    "fullName": "Oslimg Mora",
+    "birth": "1999-06-02",
+    "position": "MF",
+    "nationality": "Peru",
+    "club": "Sport Boys",
+    "photo": null,
+    "wikiTitle": "Oslimg Mora"
   },
   {
     "id": "osman-kakay",
@@ -66333,6 +69666,17 @@
     "wikiTitle": "Otávio (footballer, born November 2005)"
   },
   {
+    "id": "otavio-3",
+    "name": "Otávio",
+    "fullName": "Otávio",
+    "birth": "2005-12-27",
+    "position": "GK",
+    "nationality": "Brazil",
+    "club": "Cruzeiro",
+    "photo": null,
+    "wikiTitle": "Otávio (footballer, born December 2005)"
+  },
+  {
     "id": "otgontsagaan-saikhanbayar",
     "name": "Otgontsagaan Saikhanbayar",
     "fullName": "Otgontsagaan Saikhanbayar",
@@ -66451,6 +69795,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Oumar Diakité"
+  },
+  {
+    "id": "oumar-konate",
+    "name": "Oumar Konaté",
+    "fullName": "Oumar Konaté",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Ivory Coast",
+    "club": "Monaco",
+    "photo": null,
+    "wikiTitle": null
   },
   {
     "id": "oumar-ngom",
@@ -66639,6 +69994,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Oussama El Azzouzi"
+  },
+  {
+    "id": "oussama-targhalline",
+    "name": "Oussama Targhalline",
+    "fullName": "Oussama Targhalline",
+    "birth": "2002-05-20",
+    "position": "MF",
+    "nationality": "Morocco",
+    "club": "Feyenoord",
+    "photo": null,
+    "wikiTitle": "Oussama Targhalline"
   },
   {
     "id": "ousseini-badamassi",
@@ -67304,6 +70670,17 @@
     "wikiTitle": "Paris Brunner"
   },
   {
+    "id": "paris-maghoma",
+    "name": "Paris Maghoma",
+    "fullName": "Paris Maghoma",
+    "birth": "2001-05-08",
+    "position": "MF",
+    "nationality": "DR Congo",
+    "club": "Norwich City",
+    "photo": null,
+    "wikiTitle": "Paris Maghoma"
+  },
+  {
     "id": "parish-muirhead",
     "name": "Parish Muirhead",
     "fullName": "Parish Muirhead",
@@ -67332,6 +70709,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Park Jin-seob (footballer, born 1995)"
+  },
+  {
+    "id": "park-taejun",
+    "name": "Park Tae-jun",
+    "fullName": "Park Tae-jun",
+    "birth": "1999-01-19",
+    "position": "MF",
+    "nationality": "South Korea",
+    "club": "Gimcheon Sangmu",
+    "photo": null,
+    "wikiTitle": "Park Tae-jun"
   },
   {
     "id": "parreno",
@@ -67618,6 +71006,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Patrick Wimmer"
+  },
+  {
+    "id": "patrick-yazbek",
+    "name": "Patrick Yazbek",
+    "fullName": "Patrick Yazbek",
+    "birth": "2002-04-05",
+    "position": "MF",
+    "nationality": "Australia",
+    "club": "Nashville SC",
+    "photo": null,
+    "wikiTitle": "Patrick Yazbek"
   },
   {
     "id": "patrick-zabi",
@@ -67936,6 +71335,17 @@
     "wikiTitle": "Paul Wanner"
   },
   {
+    "id": "paulo-diaz",
+    "name": "Paulo Díaz",
+    "fullName": "Paulo Díaz",
+    "birth": "1994-08-25",
+    "position": "DF",
+    "nationality": "Chile",
+    "club": "Atlanta United",
+    "photo": null,
+    "wikiTitle": "Paulo Díaz"
+  },
+  {
     "id": "paulo-gusmao",
     "name": "Paulo Gusmão",
     "fullName": "Paulo Gusmão",
@@ -67956,6 +71366,17 @@
     "club": "Kuala Lumpur City",
     "photo": null,
     "wikiTitle": "Paulo Josué"
+  },
+  {
+    "id": "paulos-abraham",
+    "name": "Paulos Abraham",
+    "fullName": "Paulos Abraham",
+    "birth": "2002-07-16",
+    "position": "FW",
+    "nationality": "Sweden",
+    "club": "Hammarby IF",
+    "photo": null,
+    "wikiTitle": "Paulos Abraham"
   },
   {
     "id": "pavao-pervan",
@@ -68019,7 +71440,7 @@
     "name": "Paweł Dawidowicz",
     "fullName": "Paweł Dawidowicz",
     "birth": "1995-05-20",
-    "position": "MF",
+    "position": "DF",
     "nationality": "Poland",
     "club": "Hellas Verona",
     "photo": {
@@ -68089,6 +71510,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Pedri"
+  },
+  {
+    "id": "pedro",
+    "name": "Pedro",
+    "fullName": "Pedro",
+    "birth": "1997-06-20",
+    "position": "FW",
+    "nationality": "Brazil",
+    "club": "Flamengo",
+    "photo": null,
+    "wikiTitle": "Pedro (footballer, born 1997)"
   },
   {
     "id": "pedro-budib",
@@ -68198,6 +71630,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Pedro Miguel (footballer)"
+  },
+  {
+    "id": "pedro-morisco",
+    "name": "Pedro Morisco",
+    "fullName": "Pedro Morisco",
+    "birth": "2004-01-10",
+    "position": "GK",
+    "nationality": "Brazil",
+    "club": "Coritiba",
+    "photo": null,
+    "wikiTitle": "Pedro Morisco"
   },
   {
     "id": "pedro-neto",
@@ -68467,6 +71910,28 @@
     "wikiTitle": "Petar Stanić"
   },
   {
+    "id": "petar-sukacev",
+    "name": "Petar Sukačev",
+    "fullName": "Petar Sukačev",
+    "birth": "2005-08-28",
+    "position": "DF",
+    "nationality": "Serbia",
+    "club": "Vojvodina",
+    "photo": null,
+    "wikiTitle": "Petar Sukačev"
+  },
+  {
+    "id": "peter-edokpolor",
+    "name": "Peter Edokpolor",
+    "fullName": "Peter Edokpolor",
+    "birth": "2006-12-24",
+    "position": "FW",
+    "nationality": "Nigeria",
+    "club": "Benfica",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
     "id": "peter-gonzalez",
     "name": "Peter González",
     "fullName": "Peter González",
@@ -68596,6 +72061,17 @@
     "club": "NSÍ",
     "photo": null,
     "wikiTitle": "Petur Knudsen"
+  },
+  {
+    "id": "peyton-miller",
+    "name": "Peyton Miller",
+    "fullName": "Peyton Miller",
+    "birth": "2007-11-08",
+    "position": "DF",
+    "nationality": "United States",
+    "club": "New England Revolution",
+    "photo": null,
+    "wikiTitle": "Peyton Miller"
   },
   {
     "id": "phahatxay-keomany",
@@ -68901,6 +72377,17 @@
     "wikiTitle": "Pierluigi Gollini"
   },
   {
+    "id": "piero-magallanes",
+    "name": "Piero Magallanes",
+    "fullName": "Piero Magallanes",
+    "birth": "2001-03-04",
+    "position": "FW",
+    "nationality": "Peru",
+    "club": "Sport Huancayo",
+    "photo": null,
+    "wikiTitle": "Piero Magallanes"
+  },
+  {
     "id": "pierre-ekwah",
     "name": "Pierre Ekwah",
     "fullName": "Pierre Ekwah",
@@ -69098,7 +72585,7 @@
   },
   {
     "id": "pio-esposito",
-    "name": "Pio Esposito",
+    "name": "Francesco Pio Esposito",
     "fullName": "Francesco Pio Esposito",
     "birth": "2005-06-28",
     "position": "FW",
@@ -69113,7 +72600,7 @@
       "licence": "CC0",
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
-    "wikiTitle": "Pio Esposito"
+    "wikiTitle": "Francesco Pio Esposito"
   },
   {
     "id": "plamen-penev",
@@ -69886,6 +73373,17 @@
     "wikiTitle": "Rafael Leão"
   },
   {
+    "id": "rafael-mosquera",
+    "name": "Rafael Mosquera",
+    "fullName": "Rafael Mosquera",
+    "birth": "2005-05-24",
+    "position": "MF",
+    "nationality": "Panama",
+    "club": "New York Red Bulls",
+    "photo": null,
+    "wikiTitle": "Rafael Mosquera"
+  },
+  {
     "id": "rafael-tejada",
     "name": "Rafael Tejada",
     "fullName": "Rafael Tejada",
@@ -70242,6 +73740,17 @@
     "club": "Atlético Ottawa",
     "photo": null,
     "wikiTitle": "Ralph Khoury"
+  },
+  {
+    "id": "ralph-priso",
+    "name": "Ralph Priso",
+    "fullName": "Ralph Priso",
+    "birth": "2002-08-02",
+    "position": "DF",
+    "nationality": "Canada",
+    "club": "Vancouver Whitecaps FC",
+    "photo": null,
+    "wikiTitle": "Ralph Priso"
   },
   {
     "id": "ramazan-karimov",
@@ -70982,7 +74491,7 @@
     "fullName": "Rayan Fofana",
     "birth": "2006-02-12",
     "position": "FW",
-    "nationality": "France",
+    "nationality": "Ivory Coast",
     "club": "Le Havre",
     "photo": null,
     "wikiTitle": "Rayan Fofana"
@@ -71254,6 +74763,28 @@
     "club": "Union Saint-Gilloise",
     "photo": null,
     "wikiTitle": "Relebohile Mofokeng"
+  },
+  {
+    "id": "relja-obric",
+    "name": "Relja Obrić",
+    "fullName": "Relja Obrić",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Slovenia",
+    "club": "Atalanta",
+    "photo": null,
+    "wikiTitle": "Relja Obrić"
+  },
+  {
+    "id": "remi-himbert",
+    "name": "Rémi Himbert",
+    "fullName": "Rémi Himbert",
+    "birth": null,
+    "position": "FW",
+    "nationality": "France",
+    "club": "Lyon",
+    "photo": null,
+    "wikiTitle": "Rémi Himbert"
   },
   {
     "id": "remi-matthews",
@@ -71692,6 +75223,17 @@
     "wikiTitle": null
   },
   {
+    "id": "richard-chukwu",
+    "name": "Richard Chukwu",
+    "fullName": "Richard Chukwu",
+    "birth": "2008-02-25",
+    "position": "DF",
+    "nationality": "Canada",
+    "club": "Toronto FC",
+    "photo": null,
+    "wikiTitle": "Richard Chukwu"
+  },
+  {
     "id": "richard-king",
     "name": "Richard King",
     "fullName": "Richard King",
@@ -71968,6 +75510,17 @@
     "club": "SC Freiburg",
     "photo": null,
     "wikiTitle": "Rihito Yamamoto"
+  },
+  {
+    "id": "riley-mcgree",
+    "name": "Riley McGree",
+    "fullName": "Riley McGree",
+    "birth": "1998-11-02",
+    "position": "MF",
+    "nationality": "Australia",
+    "club": "Middlesbrough",
+    "photo": null,
+    "wikiTitle": "Riley McGree"
   },
   {
     "id": "riley-robinson",
@@ -72265,6 +75818,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
     },
     "wikiTitle": "Robert Glatzel"
+  },
+  {
+    "id": "robert-morales",
+    "name": "Robert Morales",
+    "fullName": "Robert Morales",
+    "birth": "1999-03-17",
+    "position": "FW",
+    "nationality": "Paraguay",
+    "club": "UNAM",
+    "photo": null,
+    "wikiTitle": "Robert Morales (footballer)"
   },
   {
     "id": "robert-sanchez",
@@ -72925,7 +76489,7 @@
     "name": "Rolando Mandragora",
     "fullName": "Rolando Mandragora",
     "birth": "1997-06-29",
-    "position": "FW",
+    "position": "MF",
     "nationality": "Italy",
     "club": "Torino",
     "photo": {
@@ -73091,6 +76655,17 @@
     "club": "Asker",
     "photo": null,
     "wikiTitle": "Roman Fazi"
+  },
+  {
+    "id": "roman-vega",
+    "name": "Román Vega",
+    "fullName": "Román Vega",
+    "birth": "2004-01-01",
+    "position": "DF",
+    "nationality": "Argentina",
+    "club": "Zenit Saint Petersburg",
+    "photo": null,
+    "wikiTitle": "Román Vega"
   },
   {
     "id": "roman-yaremchuk",
@@ -73518,6 +77093,17 @@
     "wikiTitle": "Roy Revivo"
   },
   {
+    "id": "royer-caicedo",
+    "name": "Royer Caicedo",
+    "fullName": "Royer Caicedo",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Colombia",
+    "club": "Cercle Brugge",
+    "photo": null,
+    "wikiTitle": "Royer Caicedo"
+  },
+  {
     "id": "ruairi-mcconville",
     "name": "Ruairi McConville",
     "fullName": "Ruairi McConville",
@@ -73693,6 +77279,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
     },
     "wikiTitle": "Rubén Sánchez (footballer, born 2001)"
+  },
+  {
+    "id": "ruben-van-bommel",
+    "name": "Ruben van Bommel",
+    "fullName": "Ruben van Bommel",
+    "birth": "2004-08-03",
+    "position": "FW",
+    "nationality": "Netherlands",
+    "club": "PSV",
+    "photo": null,
+    "wikiTitle": "Ruben van Bommel"
   },
   {
     "id": "ruben-vargas",
@@ -74284,6 +77881,17 @@
     "wikiTitle": "Sa Ty"
   },
   {
+    "id": "saadi-radouani",
+    "name": "Saâdi Radouani",
+    "fullName": "Saâdi Radouani",
+    "birth": "1995-03-18",
+    "position": "DF",
+    "nationality": "Algeria",
+    "club": "USM Alger",
+    "photo": null,
+    "wikiTitle": "Saâdi Radouani"
+  },
+  {
     "id": "saba-goglichidze",
     "name": "Saba Goglichidze",
     "fullName": "Saba Goglichidze",
@@ -74573,6 +78181,17 @@
     "wikiTitle": "Matvey Safonov"
   },
   {
+    "id": "safouane-benzahra",
+    "name": "Safouane Benzahra",
+    "fullName": "Safouane Benzahra",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Morocco",
+    "club": "Monaco",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
     "id": "safuwan-baharudin",
     "name": "Safuwan Baharudin",
     "fullName": "Safuwan Baharudin",
@@ -74763,7 +78382,7 @@
     "name": "Bukayo Saka",
     "fullName": "Bukayo Ayoyinka Temidayo Saka",
     "birth": "2001-09-05",
-    "position": "MF",
+    "position": "FW",
     "nationality": "England",
     "club": "Arsenal",
     "photo": {
@@ -74795,6 +78414,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Salaah Al-Yahyaei"
+  },
+  {
+    "id": "salah-adel",
+    "name": "Salah Adel",
+    "fullName": "Salah Adel",
+    "birth": "1995-04-03",
+    "position": "MF",
+    "nationality": "Sudan",
+    "club": "Al-Hilal",
+    "photo": null,
+    "wikiTitle": "Salah Adel"
   },
   {
     "id": "salah-zakaria",
@@ -75026,7 +78656,7 @@
     "nationality": "Italy",
     "club": "Hellas Verona",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Salvatore Cerbone"
   },
   {
     "id": "salvatore-elia",
@@ -75117,6 +78747,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Sam Sutton (footballer)"
+  },
+  {
+    "id": "saman-fallah",
+    "name": "Saman Fallah",
+    "fullName": "Saman Fallah",
+    "birth": "2001-05-12",
+    "position": "DF",
+    "nationality": "Iran",
+    "club": "Esteghlal",
+    "photo": null,
+    "wikiTitle": "Saman Fallah"
   },
   {
     "id": "saman-ghoddos",
@@ -75345,6 +78986,39 @@
     "wikiTitle": "Samuel Chukwueze"
   },
   {
+    "id": "samuel-dahl",
+    "name": "Samuel Dahl",
+    "fullName": "Samuel Dahl",
+    "birth": "2003-03-04",
+    "position": "DF",
+    "nationality": "Sweden",
+    "club": "Benfica",
+    "photo": null,
+    "wikiTitle": "Samuel Dahl"
+  },
+  {
+    "id": "samuel-essende",
+    "name": "Samuel Essende",
+    "fullName": "Samuel Essende",
+    "birth": "1998-01-30",
+    "position": "FW",
+    "nationality": "DR Congo",
+    "club": "Young Boys",
+    "photo": null,
+    "wikiTitle": "Samuel Essende"
+  },
+  {
+    "id": "samuel-friday-james",
+    "name": "Samuel Friday James",
+    "fullName": "Samuel Friday James",
+    "birth": "2006-04-05",
+    "position": "GK",
+    "nationality": "Nigeria",
+    "club": "SJK",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
     "id": "samuel-harvey",
     "name": "Samuel Harvey",
     "fullName": "Samuel Harvey",
@@ -75365,6 +79039,17 @@
     "club": "Reims",
     "photo": null,
     "wikiTitle": "Samuel Kotto"
+  },
+  {
+    "id": "samuel-lino",
+    "name": "Samuel Lino",
+    "fullName": "Samuel Lino",
+    "birth": "1999-12-23",
+    "position": "FW",
+    "nationality": "Brazil",
+    "club": "Flamengo",
+    "photo": null,
+    "wikiTitle": "Samuel Lino"
   },
   {
     "id": "samuel-mbangula",
@@ -75417,6 +79102,28 @@
     "club": "Bishop's Stortford",
     "photo": null,
     "wikiTitle": "Samuel Okolie"
+  },
+  {
+    "id": "samuel-soares",
+    "name": "Samuel Soares",
+    "fullName": "Samuel Soares",
+    "birth": "2002-06-15",
+    "position": "GK",
+    "nationality": "Portugal",
+    "club": "Benfica",
+    "photo": null,
+    "wikiTitle": "Samuel Soares"
+  },
+  {
+    "id": "samuel-velasquez",
+    "name": "Samuel Velásquez",
+    "fullName": "Samuel Velásquez",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Colombia",
+    "club": "Atlético Nacional",
+    "photo": null,
+    "wikiTitle": "Samuel Velásquez"
   },
   {
     "id": "samuel-wiafe",
@@ -75834,6 +79541,17 @@
     "wikiTitle": "Santiago Arias"
   },
   {
+    "id": "santiago-beltran",
+    "name": "Santiago Beltrán",
+    "fullName": "Santiago Beltrán",
+    "birth": "2004-10-04",
+    "position": "GK",
+    "nationality": "Argentina",
+    "club": "River Plate",
+    "photo": null,
+    "wikiTitle": "Santiago Beltrán"
+  },
+  {
     "id": "santiago-bueno",
     "name": "Santiago Bueno",
     "fullName": "Santiago Bueno",
@@ -75951,6 +79669,39 @@
     "wikiTitle": "Santiago Pierotti"
   },
   {
+    "id": "santiago-rojas",
+    "name": "Santiago Rojas",
+    "fullName": "Santiago Rojas",
+    "birth": "1996-04-05",
+    "position": "GK",
+    "nationality": "Paraguay",
+    "club": "Nacional",
+    "photo": null,
+    "wikiTitle": "Santiago Rojas"
+  },
+  {
+    "id": "santiago-sandoval",
+    "name": "Santiago Sandoval",
+    "fullName": "Santiago Sandoval",
+    "birth": "2007-08-07",
+    "position": "FW",
+    "nationality": "Mexico",
+    "club": "Guadalajara",
+    "photo": null,
+    "wikiTitle": "Santiago Sandoval (footballer)"
+  },
+  {
+    "id": "santiago-simon",
+    "name": "Santiago Simón",
+    "fullName": "Santiago Simón",
+    "birth": "2002-06-13",
+    "position": "MF",
+    "nationality": "Argentina",
+    "club": "Toluca",
+    "photo": null,
+    "wikiTitle": "Santiago Simón"
+  },
+  {
     "id": "santigie-sesay",
     "name": "Santigie Sesay",
     "fullName": "Santigie Sesay",
@@ -76041,6 +79792,17 @@
     "wikiTitle": "Saranon Anuin"
   },
   {
+    "id": "sardar-azmoun",
+    "name": "Sardar Azmoun",
+    "fullName": "Sardar Azmoun",
+    "birth": "1995-01-01",
+    "position": "FW",
+    "nationality": "Iran",
+    "club": "Shabab Al-Ahli",
+    "photo": null,
+    "wikiTitle": "Sardar Azmoun"
+  },
+  {
     "id": "sardorbek-bakhromov",
     "name": "Sardorbek Bakhromov",
     "fullName": "Sardorbek Bakhromov",
@@ -76128,6 +79890,17 @@
     "wikiTitle": "Saša Kalajdžić"
   },
   {
+    "id": "sasa-lukic",
+    "name": "Saša Lukić",
+    "fullName": "Saša Lukić",
+    "birth": "1996-08-13",
+    "position": "MF",
+    "nationality": "Serbia",
+    "club": "Ipswich Town",
+    "photo": null,
+    "wikiTitle": "Saša Lukić"
+  },
+  {
     "id": "sascha-britschgi",
     "name": "Sascha Britschgi",
     "fullName": "Sascha Britschgi",
@@ -76148,6 +79921,17 @@
     "club": "Valencia",
     "photo": null,
     "wikiTitle": "Ryūnosuke Satō"
+  },
+  {
+    "id": "satoshi-tanaka",
+    "name": "Satoshi Tanaka",
+    "fullName": "Satoshi Tanaka",
+    "birth": "2002-08-13",
+    "position": "MF",
+    "nationality": "Japan",
+    "club": "Schalke 04",
+    "photo": null,
+    "wikiTitle": "Satoshi Tanaka"
   },
   {
     "id": "satriano",
@@ -76355,6 +80139,17 @@
     "club": "Orlando City",
     "photo": null,
     "wikiTitle": "Schuyler Selver"
+  },
+  {
+    "id": "scott-bain",
+    "name": "Scott Bain",
+    "fullName": "Scott Bain",
+    "birth": "1991-11-22",
+    "position": "GK",
+    "nationality": "Scotland",
+    "club": "Falkirk",
+    "photo": null,
+    "wikiTitle": "Scott Bain"
   },
   {
     "id": "scott-banks",
@@ -77444,6 +81239,17 @@
     "wikiTitle": "Shah Shahiran"
   },
   {
+    "id": "shahab-zahedi",
+    "name": "Shahab Zahedi",
+    "fullName": "Shahab Zahedi",
+    "birth": "1995-08-18",
+    "position": "FW",
+    "nationality": "Iran",
+    "club": "Johor Darul Ta'zim",
+    "photo": null,
+    "wikiTitle": "Shahab Zahedi"
+  },
+  {
     "id": "shahoi-dorsett",
     "name": "Shahoi Dorsett",
     "fullName": "Shahoi Dorsett",
@@ -77693,6 +81499,17 @@
     "wikiTitle": "Shea Lacey"
   },
   {
+    "id": "sheddy-barglan",
+    "name": "Sheddy Barglan",
+    "fullName": "Sheddy Barglan",
+    "birth": "2002-10-03",
+    "position": "DF",
+    "nationality": "Sudan",
+    "club": "FC Den Bosch",
+    "photo": null,
+    "wikiTitle": "Sheddy Barglan"
+  },
+  {
     "id": "shehab-ellethy",
     "name": "Shehab Ellethy",
     "fullName": "Shehab Ellethy",
@@ -77917,6 +81734,17 @@
     "wikiTitle": "Shuki Itofusa"
   },
   {
+    "id": "shunsuke-saito",
+    "name": "Shunsuke Saito",
+    "fullName": "Shunsuke Saito",
+    "birth": "2005-04-26",
+    "position": "MF",
+    "nationality": "Japan",
+    "club": "Westerlo",
+    "photo": null,
+    "wikiTitle": "Shunsuke Saito"
+  },
+  {
     "id": "shuntaro-suzuki",
     "name": "Shuntaro Suzuki",
     "fullName": "Shuntaro Suzuki",
@@ -77937,6 +81765,17 @@
     "club": "Burnley",
     "photo": null,
     "wikiTitle": "Shurandy Sambo"
+  },
+  {
+    "id": "shuto-nakano",
+    "name": "Shuto Nakano",
+    "fullName": "Shuto Nakano",
+    "birth": "2000-06-27",
+    "position": "MF",
+    "nationality": "Japan",
+    "club": "Sanfrecce Hiroshima",
+    "photo": null,
+    "wikiTitle": "Shuto Nakano"
   },
   {
     "id": "si-hou-in",
@@ -78464,6 +82303,17 @@
     "wikiTitle": "Skelly Alvero"
   },
   {
+    "id": "slawomir-abramowicz",
+    "name": "Sławomir Abramowicz",
+    "fullName": "Sławomir Abramowicz",
+    "birth": "2004-06-09",
+    "position": "GK",
+    "nationality": "Poland",
+    "club": "Jagiellonia Białystok",
+    "photo": null,
+    "wikiTitle": "Sławomir Abramowicz"
+  },
+  {
     "id": "slobodan-rubezic",
     "name": "Slobodan Rubežić",
     "fullName": "Slobodan Rubežić",
@@ -78544,6 +82394,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Sofyan Amrabat"
+  },
+  {
+    "id": "sohaib-nair",
+    "name": "Sohaib Naïr",
+    "fullName": "Sohaib Naïr",
+    "birth": "2002-04-23",
+    "position": "DF",
+    "nationality": "Algeria",
+    "club": "AS Saint-Étienne",
+    "photo": null,
+    "wikiTitle": "Sohaib Naïr"
   },
   {
     "id": "sohel-rana",
@@ -78713,6 +82574,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Song Bum-keun"
+  },
+  {
+    "id": "song-minkyu",
+    "name": "Song Min-kyu",
+    "fullName": "Song Min-kyu",
+    "birth": "1999-09-12",
+    "position": "MF",
+    "nationality": "South Korea",
+    "club": "Nacional",
+    "photo": null,
+    "wikiTitle": "Song Min-kyu (footballer)"
   },
   {
     "id": "song-uiyoung",
@@ -78898,6 +82770,17 @@
     "wikiTitle": "Sou Hin Nang"
   },
   {
+    "id": "soufiane-elfaouzi",
+    "name": "Soufiane El-Faouzi",
+    "fullName": "Soufiane El-Faouzi",
+    "birth": "2002-07-13",
+    "position": "MF",
+    "nationality": "Morocco",
+    "club": "Schalke 04",
+    "photo": null,
+    "wikiTitle": "Soufiane El-Faouzi"
+  },
+  {
     "id": "soufiane-rahimi",
     "name": "Soufiane Rahimi",
     "fullName": "Soufiane Rahimi",
@@ -79040,6 +82923,17 @@
     "wikiTitle": "Sphephelo Sithole"
   },
   {
+    "id": "srdan-babic",
+    "name": "Srđan Babić",
+    "fullName": "Srđan Babić",
+    "birth": "1996-04-22",
+    "position": "DF",
+    "nationality": "Serbia",
+    "club": "Spartak Moscow",
+    "photo": null,
+    "wikiTitle": "Srđan Babić"
+  },
+  {
     "id": "srdan-kuzmic",
     "name": "Srđan Kuzmić",
     "fullName": "Srđan Kuzmić",
@@ -79067,7 +82961,7 @@
     "fullName": "Stanis Idumbo",
     "birth": "2005-06-29",
     "position": "MF",
-    "nationality": "Belgium",
+    "nationality": "DR Congo",
     "club": "Monaco",
     "photo": null,
     "wikiTitle": "Stanis Idumbo"
@@ -79150,6 +83044,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Stanley Nsoki"
+  },
+  {
+    "id": "stanley-nwabali",
+    "name": "Stanley Nwabali",
+    "fullName": "Stanley Nwabali",
+    "birth": "1996-06-10",
+    "position": "GK",
+    "nationality": "Nigeria",
+    "club": "Chippa United",
+    "photo": null,
+    "wikiTitle": "Stanley Nwabali"
   },
   {
     "id": "starfelt",
@@ -79278,6 +83183,28 @@
     "club": "VfB Stuttgart",
     "photo": null,
     "wikiTitle": "Stefan Drljača"
+  },
+  {
+    "id": "stefan-dzodic",
+    "name": "Stefan Džodić",
+    "fullName": "Stefan Džodić",
+    "birth": "2005-03-15",
+    "position": "MF",
+    "nationality": "Serbia",
+    "club": "Almería",
+    "photo": null,
+    "wikiTitle": "Stefan Džodić"
+  },
+  {
+    "id": "stefan-gudelj",
+    "name": "Stefan Gudelj",
+    "fullName": "Stefan Gudelj",
+    "birth": "2006-05-18",
+    "position": "DF",
+    "nationality": "Serbia",
+    "club": "Red Star Belgrade",
+    "photo": null,
+    "wikiTitle": "Stefan Gudelj"
   },
   {
     "id": "stefan-loncar",
@@ -79548,6 +83475,39 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Stephen Eustáquio"
+  },
+  {
+    "id": "stephen-michael",
+    "name": "Stephen Michael",
+    "fullName": "Stephen Michael",
+    "birth": "2006-12-14",
+    "position": "MF",
+    "nationality": "Nigeria",
+    "club": "Vendsyssel",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
+    "id": "stephen-welsh",
+    "name": "Stephen Welsh",
+    "fullName": "Stephen Welsh",
+    "birth": "2000-01-19",
+    "position": "DF",
+    "nationality": "Scotland",
+    "club": "Swansea City",
+    "photo": null,
+    "wikiTitle": "Stephen Welsh"
+  },
+  {
+    "id": "stephy-mavididi",
+    "name": "Stephy Mavididi",
+    "fullName": "Stephy Mavididi",
+    "birth": "1998-05-31",
+    "position": "MF",
+    "nationality": "DR Congo",
+    "club": "Watford",
+    "photo": null,
+    "wikiTitle": "Stephy Mavididi"
   },
   {
     "id": "sterling-vasconcellos",
@@ -80455,6 +84415,17 @@
     "wikiTitle": "Taha Ali"
   },
   {
+    "id": "tahirys-dos-santos",
+    "name": "Tahirys dos Santos",
+    "fullName": "Tahirys dos Santos",
+    "birth": null,
+    "position": "DF",
+    "nationality": "France",
+    "club": "Metz",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
     "id": "tahith-chong",
     "name": "Tahith Chong",
     "fullName": "Tahith Chong",
@@ -80982,6 +84953,17 @@
     "club": "Motherwell",
     "photo": null,
     "wikiTitle": "Tawanda Maswanhise"
+  },
+  {
+    "id": "tawfik-bentayeb",
+    "name": "Tawfik Bentayeb",
+    "fullName": "Tawfik Bentayeb",
+    "birth": "2002-01-14",
+    "position": "FW",
+    "nationality": "Morocco",
+    "club": "Anderlecht",
+    "photo": null,
+    "wikiTitle": "Tawfik Bentayeb"
   },
   {
     "id": "taylor-harwoodbellis",
@@ -81576,6 +85558,17 @@
     "wikiTitle": "Théo Bongonda"
   },
   {
+    "id": "theo-corbeanu",
+    "name": "Theo Corbeanu",
+    "fullName": "Theo Corbeanu",
+    "birth": "2002-05-17",
+    "position": "MF",
+    "nationality": "Canada",
+    "club": "Toronto FC",
+    "photo": null,
+    "wikiTitle": "Theo Corbeanu"
+  },
+  {
     "id": "theo-le-bris",
     "name": "Théo Le Bris",
     "fullName": "Théo Le Bris",
@@ -81724,6 +85717,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Thom Haye"
+  },
+  {
+    "id": "thomas-coulombe",
+    "name": "Thomas Coulombe",
+    "fullName": "Thomas Coulombe",
+    "birth": "2007-07-05",
+    "position": "DF",
+    "nationality": "Chile",
+    "club": "Espanyol B",
+    "photo": null,
+    "wikiTitle": "Thomas Coulombe"
   },
   {
     "id": "thomas-dahne",
@@ -82252,6 +86256,17 @@
     "wikiTitle": "Jurriën Timber"
   },
   {
+    "id": "timi-max-elsnik",
+    "name": "Timi Max Elšnik",
+    "fullName": "Timi Max Elšnik",
+    "birth": "1998-04-29",
+    "position": "MF",
+    "nationality": "Slovenia",
+    "club": "Red Star Belgrade",
+    "photo": null,
+    "wikiTitle": "Timi Max Elšnik"
+  },
+  {
     "id": "timo-hubers",
     "name": "Timo Hübers",
     "fullName": "Timo Hübers",
@@ -82397,6 +86412,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Timothy Weah"
+  },
+  {
+    "id": "timur-tutyerov",
+    "name": "Timur Tutyerov",
+    "fullName": "Timur Tutyerov",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Ukraine",
+    "club": "Sunderland",
+    "photo": null,
+    "wikiTitle": "Timur Tutyerov"
   },
   {
     "id": "tino-kadewere",
@@ -82893,6 +86919,28 @@
     "wikiTitle": "Tomás Moreira"
   },
   {
+    "id": "tomas-palacios",
+    "name": "Tomás Palacios",
+    "fullName": "Tomás Palacios",
+    "birth": "2003-04-28",
+    "position": "DF",
+    "nationality": "Argentina",
+    "club": "Estudiantes",
+    "photo": null,
+    "wikiTitle": "Tomás Palacios (footballer)"
+  },
+  {
+    "id": "tomas-rigo",
+    "name": "Tomáš Rigo",
+    "fullName": "Tomáš Rigo",
+    "birth": "2002-07-03",
+    "position": "MF",
+    "nationality": "Slovakia",
+    "club": "Stoke City",
+    "photo": null,
+    "wikiTitle": "Tomáš Rigo"
+  },
+  {
     "id": "tomas-rodriguez",
     "name": "Tomás Rodríguez",
     "fullName": "Tomás Rodríguez",
@@ -82986,6 +87034,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Tomasz Kędziora"
+  },
+  {
+    "id": "tomi-horvat",
+    "name": "Tomi Horvat",
+    "fullName": "Tomi Horvat",
+    "birth": "1999-03-24",
+    "position": "MF",
+    "nationality": "Slovenia",
+    "club": "Bristol City",
+    "photo": null,
+    "wikiTitle": "Tomi Horvat"
   },
   {
     "id": "tomiyasu",
@@ -83454,6 +87513,17 @@
     "wikiTitle": "Trézéguet (Egyptian footballer)"
   },
   {
+    "id": "triantafyllos-tsapras",
+    "name": "Triantafyllos Tsapras",
+    "fullName": "Triantafyllos Tsapras",
+    "birth": "2001-10-22",
+    "position": "DF",
+    "nationality": "Greece",
+    "club": "Panathinaikos",
+    "photo": null,
+    "wikiTitle": "Triantafyllos Tsapras"
+  },
+  {
     "id": "trishwan-thomas",
     "name": "Trishwan Thomas",
     "fullName": "Trishwan Thomas",
@@ -83814,6 +87884,17 @@
     "wikiTitle": "Tyler Morton"
   },
   {
+    "id": "tymoteusz-puchacz",
+    "name": "Tymoteusz Puchacz",
+    "fullName": "Tymoteusz Puchacz",
+    "birth": "1999-01-23",
+    "position": "DF",
+    "nationality": "Poland",
+    "club": "Sabah",
+    "photo": null,
+    "wikiTitle": "Tymoteusz Puchacz"
+  },
+  {
     "id": "tyreece-campbell",
     "name": "Tyreece Campbell",
     "fullName": "Tyreece Campbell",
@@ -84117,6 +88198,17 @@
     "wikiTitle": "Ugo Raghouber"
   },
   {
+    "id": "ugochukwu-iwu",
+    "name": "Ugochukwu Iwu",
+    "fullName": "Ugochukwu Iwu",
+    "birth": "1999-10-28",
+    "position": "MF",
+    "nationality": "Armenia",
+    "club": "Rubin Kazan",
+    "photo": null,
+    "wikiTitle": "Ugochukwu Iwu"
+  },
+  {
     "id": "ugrinic",
     "name": "Filip Ugrinić",
     "fullName": "Filip Ugrinić",
@@ -84175,6 +88267,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Ulisses Garcia"
+  },
+  {
+    "id": "umar-abubakar",
+    "name": "Umar Abubakar",
+    "fullName": "Umar Abubakar",
+    "birth": "2006-02-15",
+    "position": "FW",
+    "nationality": "Nigeria",
+    "club": "Famalicão",
+    "photo": null,
+    "wikiTitle": "Umar Abubakar"
   },
   {
     "id": "umar-nawaz",
@@ -84807,6 +88910,17 @@
     "wikiTitle": "Vasilije Kostov"
   },
   {
+    "id": "vasilije-markovic",
+    "name": "Vasilije Markovic",
+    "fullName": "Vasilije Markovic",
+    "birth": "2008-05-12",
+    "position": "MF",
+    "nationality": "Austria",
+    "club": "Austria Wien",
+    "photo": null,
+    "wikiTitle": "Vasilije Markovic"
+  },
+  {
     "id": "vazquez",
     "name": "Jesús Vázquez",
     "fullName": "Jesús Vázquez Alcalde",
@@ -85033,6 +89147,17 @@
     "wikiTitle": "Victor Boniface"
   },
   {
+    "id": "victor-eriksson",
+    "name": "Victor Eriksson",
+    "fullName": "Victor Eriksson",
+    "birth": "2000-09-17",
+    "position": "DF",
+    "nationality": "Sweden",
+    "club": "Hammarby IF",
+    "photo": null,
+    "wikiTitle": "Victor Eriksson"
+  },
+  {
     "id": "victor-fors",
     "name": "Victor Fors",
     "fullName": "Victor Fors",
@@ -85072,6 +89197,28 @@
     "club": "Luis Ángel Firpo",
     "photo": null,
     "wikiTitle": "Víctor García (footballer, born 1995)"
+  },
+  {
+    "id": "victor-griffith",
+    "name": "Víctor Griffith",
+    "fullName": "Víctor Griffith",
+    "birth": "2000-12-12",
+    "position": "MF",
+    "nationality": "Panama",
+    "club": "Emelec",
+    "photo": null,
+    "wikiTitle": "Víctor Griffith"
+  },
+  {
+    "id": "victor-guzman",
+    "name": "Víctor Guzmán",
+    "fullName": "Víctor Guzmán",
+    "birth": "2002-03-07",
+    "position": "DF",
+    "nationality": "Mexico",
+    "club": "Monterrey",
+    "photo": null,
+    "wikiTitle": "Víctor Guzmán (footballer, born 2002)"
   },
   {
     "id": "victor-hart",
@@ -85132,6 +89279,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Víctor Muñoz (footballer, born 2003)"
+  },
+  {
+    "id": "victor-nelsson",
+    "name": "Victor Nelsson",
+    "fullName": "Victor Nelsson",
+    "birth": "1998-10-14",
+    "position": "DF",
+    "nationality": "Denmark",
+    "club": "Nordsjælland",
+    "photo": null,
+    "wikiTitle": "Victor Nelsson"
   },
   {
     "id": "victor-orakpo",
@@ -85415,6 +89573,17 @@
     "wikiTitle": null
   },
   {
+    "id": "vince-osuji",
+    "name": "Vince Osuji",
+    "fullName": "Vince Osuji",
+    "birth": "2006-04-06",
+    "position": "DF",
+    "nationality": "Nigeria",
+    "club": "Tromsø",
+    "photo": null,
+    "wikiTitle": "Vince Osuji"
+  },
+  {
     "id": "vincent-emmanuel",
     "name": "Vincent Emmanuel",
     "fullName": "Vincent Emmanuel",
@@ -85424,6 +89593,17 @@
     "club": "Sitra",
     "photo": null,
     "wikiTitle": "Vincent Emmanuel"
+  },
+  {
+    "id": "vincent-gomis",
+    "name": "Vincent Gomis",
+    "fullName": "Vincent Gomis",
+    "birth": null,
+    "position": "GK",
+    "nationality": "Senegal",
+    "club": "Metz",
+    "photo": null,
+    "wikiTitle": null
   },
   {
     "id": "vincent-marchetti",
@@ -85932,6 +90112,28 @@
     "wikiTitle": "Vladislavs Gutkovskis"
   },
   {
+    "id": "vladyslav-vanat",
+    "name": "Vladyslav Vanat",
+    "fullName": "Vladyslav Vanat",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Ukraine",
+    "club": "Girona",
+    "photo": null,
+    "wikiTitle": "Vladyslav Vanat"
+  },
+  {
+    "id": "vladyslav-veleten",
+    "name": "Vladyslav Veleten",
+    "fullName": "Vladyslav Veleten",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Ukraine",
+    "club": "Polissya Zhytomyr",
+    "photo": null,
+    "wikiTitle": "Vladyslav Veleten"
+  },
+  {
     "id": "vo-hoang-minh-khoa",
     "name": "Võ Hoàng Minh Khoa",
     "fullName": "Võ Hoàng Minh Khoa",
@@ -86148,6 +90350,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Walid Shour"
+  },
+  {
+    "id": "walieldin-khedr",
+    "name": "Walieldin Khedr",
+    "fullName": "Walieldin Khedr",
+    "birth": "1995-09-15",
+    "position": "MF",
+    "nationality": "Sudan",
+    "club": "Al-Hilal",
+    "photo": null,
+    "wikiTitle": "Walieldin Khedr"
   },
   {
     "id": "walter-benitez",
@@ -86412,6 +90625,17 @@
     "wikiTitle": "Wepsdel Saintilus"
   },
   {
+    "id": "wes-burns",
+    "name": "Wes Burns",
+    "fullName": "Wes Burns",
+    "birth": "1994-11-23",
+    "position": "MF",
+    "nationality": "Wales",
+    "club": "Leicester City",
+    "photo": null,
+    "wikiTitle": "Wes Burns"
+  },
+  {
     "id": "wesley",
     "name": "Wesley",
     "fullName": "Wesley França",
@@ -86541,6 +90765,39 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Wikelman Carmona"
+  },
+  {
+    "id": "wiktor-nowak",
+    "name": "Wiktor Nowak",
+    "fullName": "Wiktor Nowak",
+    "birth": "2004-09-20",
+    "position": "MF",
+    "nationality": "Poland",
+    "club": "Slavia Prague",
+    "photo": null,
+    "wikiTitle": "Wiktor Nowak"
+  },
+  {
+    "id": "wilder-cartagena",
+    "name": "Wilder Cartagena",
+    "fullName": "Wilder Cartagena",
+    "birth": "1994-09-23",
+    "position": "MF",
+    "nationality": "Peru",
+    "club": "Orlando City",
+    "photo": null,
+    "wikiTitle": "Wilder Cartagena"
+  },
+  {
+    "id": "wilfred-igor",
+    "name": "Wilfred Igor",
+    "fullName": "Wilfred Igor",
+    "birth": "2005-02-20",
+    "position": "MF",
+    "nationality": "Nigeria",
+    "club": "Kristiansund",
+    "photo": null,
+    "wikiTitle": null
   },
   {
     "id": "wilfred-ndidi",
@@ -86864,6 +91121,17 @@
     "wikiTitle": "Win Naing Tun"
   },
   {
+    "id": "winsley-boteli",
+    "name": "Winsley Boteli",
+    "fullName": "Winsley Boteli",
+    "birth": "2006-07-05",
+    "position": "FW",
+    "nationality": "Switzerland",
+    "club": "Sion",
+    "photo": null,
+    "wikiTitle": "Winsley Boteli"
+  },
+  {
     "id": "wladimiro-falcone",
     "name": "Wladimiro Falcone",
     "fullName": "Wladimiro Falcone",
@@ -87037,11 +91305,11 @@
     "name": "Xavier Mandza",
     "fullName": "Xavier Mandza",
     "birth": null,
-    "position": "MF",
+    "position": "DF",
     "nationality": "France",
     "club": "Nice",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Xavier Mandza"
   },
   {
     "id": "xavier-valdez",
@@ -87461,6 +91729,17 @@
     "wikiTitle": "Yang Min-hyeok"
   },
   {
+    "id": "yanik-spalt",
+    "name": "Yanik Spalt",
+    "fullName": "Yanik Spalt",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Austria",
+    "club": "VfB Stuttgart",
+    "photo": null,
+    "wikiTitle": "Yanik Spalt"
+  },
+  {
     "id": "yankuba-minteh",
     "name": "Yankuba Minteh",
     "fullName": "Yankuba Minteh",
@@ -87478,6 +91757,28 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Yankuba Minteh"
+  },
+  {
+    "id": "yann-aurel-bisseck",
+    "name": "Yann Aurel Bisseck",
+    "fullName": "Yann Aurel Bisseck",
+    "birth": "2000-11-29",
+    "position": "DF",
+    "nationality": "Germany",
+    "club": "Inter Milan",
+    "photo": null,
+    "wikiTitle": "Yann Aurel Bisseck"
+  },
+  {
+    "id": "yann-gboho",
+    "name": "Yann Gboho",
+    "fullName": "Yann Gboho",
+    "birth": "2001-01-14",
+    "position": "FW",
+    "nationality": "Ivory Coast",
+    "club": "Coventry City",
+    "photo": null,
+    "wikiTitle": "Yann Gboho"
   },
   {
     "id": "yann-lienard",
@@ -87603,6 +91904,28 @@
     "wikiTitle": "Yariel Fleming"
   },
   {
+    "id": "yaser-asprilla",
+    "name": "Yáser Asprilla",
+    "fullName": "Yáser Asprilla",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Colombia",
+    "club": "Girona",
+    "photo": null,
+    "wikiTitle": "Yáser Asprilla"
+  },
+  {
+    "id": "yaser-awad",
+    "name": "Yaser Awad",
+    "fullName": "Yaser Awad",
+    "birth": "2005-03-15",
+    "position": "DF",
+    "nationality": "Sudan",
+    "club": "Al-Hilal",
+    "photo": null,
+    "wikiTitle": "Yaser Awad"
+  },
+  {
     "id": "yaser-hamed",
     "name": "Yaser Hamed",
     "fullName": "Yaser Hamed",
@@ -87620,6 +91943,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Yaser Hamed"
+  },
+  {
+    "id": "yaser-muzmel",
+    "name": "Yaser Muzmel",
+    "fullName": "Yaser Muzmel",
+    "birth": "1992-01-01",
+    "position": "FW",
+    "nationality": "Sudan",
+    "club": "Al-Hilal",
+    "photo": null,
+    "wikiTitle": "Yaser Muzmel"
   },
   {
     "id": "yaser-safi",
@@ -87718,6 +92052,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Yassine Bounou"
+  },
+  {
+    "id": "yaya-dukuly",
+    "name": "Yaya Dukuly",
+    "fullName": "Yaya Dukuly",
+    "birth": "2003-01-17",
+    "position": "FW",
+    "nationality": "Australia",
+    "club": "Celje",
+    "photo": null,
+    "wikiTitle": "Yaya Dukuly"
   },
   {
     "id": "yazan-alarab",
@@ -88023,6 +92368,17 @@
     "wikiTitle": "Yoel Yilma"
   },
   {
+    "id": "yohan-orozco",
+    "name": "Yohan Orozco",
+    "fullName": "Yohan Orozco",
+    "birth": "2007-03-11",
+    "position": "DF",
+    "nationality": "Mexico",
+    "club": "Guadalajara",
+    "photo": null,
+    "wikiTitle": "Yohan Orozco"
+  },
+  {
     "id": "yohan-roche",
     "name": "Yohan Roche",
     "fullName": "Yohan Roche",
@@ -88195,7 +92551,7 @@
     "fullName": "Younes Ebnoutalib",
     "birth": "2003-09-13",
     "position": "FW",
-    "nationality": "Morocco",
+    "nationality": "Germany",
     "club": "Eintracht Frankfurt",
     "photo": null,
     "wikiTitle": "Younes Ebnoutalib"
@@ -88446,6 +92802,17 @@
     "wikiTitle": "Yukhym Konoplya"
   },
   {
+    "id": "yuki-soma",
+    "name": "Yūki Sōma",
+    "fullName": "Yūki Sōma",
+    "birth": "1997-02-25",
+    "position": "MF",
+    "nationality": "Japan",
+    "club": "Machida Zelvia",
+    "photo": null,
+    "wikiTitle": "Yūki Sōma"
+  },
+  {
     "id": "yunus-akgun",
     "name": "Yunus Akgün",
     "fullName": "Yunus Akgün",
@@ -88542,6 +92909,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Yusuf Abdurisag"
+  },
+  {
+    "id": "yusuf-akcicek",
+    "name": "Yusuf Akçiçek",
+    "fullName": "Yusuf Akçiçek",
+    "birth": "2006-01-25",
+    "position": "DF",
+    "nationality": "Türkiye",
+    "club": "Al-Hilal",
+    "photo": null,
+    "wikiTitle": "Yusuf Akçiçek"
   },
   {
     "id": "yusuf-kagoma",
@@ -88915,6 +93293,17 @@
     "wikiTitle": "Arsen Zakharyan"
   },
   {
+    "id": "zan-celar",
+    "name": "Žan Celar",
+    "fullName": "Žan Celar",
+    "birth": "1999-03-14",
+    "position": "FW",
+    "nationality": "Slovenia",
+    "club": "Basel",
+    "photo": null,
+    "wikiTitle": "Žan Celar"
+  },
+  {
     "id": "zan-karnicnik",
     "name": "Žan Karničnik",
     "fullName": "Žan Karničnik",
@@ -89230,6 +93619,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Zidane Iqbal"
+  },
+  {
+    "id": "zidane-yanez",
+    "name": "Zidane Yáñez",
+    "fullName": "Zidane Yáñez",
+    "birth": "2008-01-26",
+    "position": "FW",
+    "nationality": "Chile",
+    "club": "Huntsville City",
+    "photo": null,
+    "wikiTitle": "Zidane Yáñez"
   },
   {
     "id": "zidane-yousuf",

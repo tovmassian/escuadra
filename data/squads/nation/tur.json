@@ -14,11 +14,11 @@
       "color": "#FFFFFF"
     }
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Turkey_national_football_team",
   "members": [
     {
-      "playerId": "mert-gunok",
+      "playerId": "ugurcan-cakir",
       "no": 1
     },
     {
@@ -30,7 +30,7 @@
       "no": 3
     },
     {
-      "playerId": "caglar-soyuncu",
+      "playerId": "emirhan-topcu",
       "no": 4
     },
     {
@@ -38,7 +38,7 @@
       "no": 5
     },
     {
-      "playerId": "orkun-kokcu",
+      "playerId": "bartug-elmaz",
       "no": 6
     },
     {
@@ -46,7 +46,7 @@
       "no": 7
     },
     {
-      "playerId": "guler",
+      "playerId": "demir-tiknaz",
       "no": 8
     },
     {
@@ -54,12 +54,11 @@
       "no": 9
     },
     {
-      "playerId": "calhanoglu",
-      "no": 10,
-      "captain": true
+      "playerId": "irfan-can-kahveci",
+      "no": 10
     },
     {
-      "playerId": "kenan-yildiz",
+      "playerId": "ilhan-fakili",
       "no": 11
     },
     {
@@ -83,11 +82,11 @@
       "no": 16
     },
     {
-      "playerId": "irfan-can-kahveci",
+      "playerId": "melih-kabasakal",
       "no": 17
     },
     {
-      "playerId": "mert-muldur",
+      "playerId": "oguz-aydin",
       "no": 18
     },
     {
@@ -99,28 +98,44 @@
       "no": 20
     },
     {
-      "playerId": "baris-alper-yilmaz",
+      "playerId": "aral-simsir",
       "no": 21
     },
     {
-      "playerId": "kaan-ayhan",
+      "playerId": "mustafa-eskihellac",
       "no": 22
     },
     {
-      "playerId": "ugurcan-cakir",
+      "playerId": "muhammed-sengezer",
       "no": 23
     },
     {
-      "playerId": "oguz-aydin",
-      "no": 24
-    },
-    {
-      "playerId": "samet-akaydin",
-      "no": 25
+      "playerId": "adil-demirbag",
+      "no": null
     },
     {
       "playerId": "can-uzun",
-      "no": 26
+      "no": null
+    },
+    {
+      "playerId": "emirhan-ilkhan",
+      "no": null
+    },
+    {
+      "playerId": "okan-kocuk",
+      "no": null
+    },
+    {
+      "playerId": "orkun-kokcu",
+      "no": null
+    },
+    {
+      "playerId": "samet-akaydin",
+      "no": null
+    },
+    {
+      "playerId": "yusuf-akcicek",
+      "no": null
     }
   ]
 }

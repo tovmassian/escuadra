@@ -10,7 +10,7 @@
     "bands": ["#1C63B7", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/TSG_1899_Hoffenheim",
   "members": [
     {
@@ -108,10 +108,6 @@
     {
       "playerId": "vladimir-coufal",
       "no": 34
-    },
-    {
-      "playerId": "arthur-chaves",
-      "no": 35
     },
     {
       "playerId": "lukas-petersson",

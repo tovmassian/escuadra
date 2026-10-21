@@ -14,40 +14,44 @@
       "color": "#0039A6"
     }
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Chile_national_football_team",
   "members": [
     {
-      "playerId": "thomas-gillier",
+      "playerId": "christian-bravo",
       "no": 1
     },
     {
-      "playerId": "fabian-hormazabal",
+      "playerId": "felipe-faundez",
       "no": 2
     },
     {
-      "playerId": "guillermo-maripan",
+      "playerId": "marcelo-morales",
       "no": 3
     },
     {
-      "playerId": "igor-lichnovsky",
+      "playerId": "ivan-roman",
       "no": 4
+    },
+    {
+      "playerId": "paulo-diaz",
+      "no": 5
     },
     {
       "playerId": "vicente-pizarro",
       "no": 6
     },
     {
+      "playerId": "cepeda",
+      "no": 7
+    },
+    {
       "playerId": "felipe-loyola",
       "no": 8
     },
     {
-      "playerId": "ivan-morales",
+      "playerId": "maximiliano-gutierrez",
       "no": 9
-    },
-    {
-      "playerId": "cepeda",
-      "no": 10
     },
     {
       "playerId": "dario-osorio",
@@ -58,11 +62,15 @@
       "no": 12
     },
     {
-      "playerId": "felipe-mendez",
+      "playerId": "igor-lichnovsky",
       "no": 13
     },
     {
-      "playerId": "francisco-sierralta",
+      "playerId": "felipe-mendez",
+      "no": 14
+    },
+    {
+      "playerId": "cesar-perez",
       "no": 15
     },
     {
@@ -79,7 +87,7 @@
       "no": 18
     },
     {
-      "playerId": "maximiliano-gutierrez",
+      "playerId": "nils-reichmuth",
       "no": 19
     },
     {
@@ -87,11 +95,11 @@
       "no": 20
     },
     {
-      "playerId": "lautaro-millan",
+      "playerId": "agustin-arce",
       "no": 21
     },
     {
-      "playerId": "nils-reichmuth",
+      "playerId": "ben-brereton-diaz",
       "no": 22
     },
     {
@@ -99,16 +107,32 @@
       "no": 23
     },
     {
-      "playerId": "diego-ulloa",
+      "playerId": "leandro-hernandez",
       "no": 24
     },
     {
-      "playerId": "agustin-arce",
+      "playerId": "francisco-salinas",
       "no": 25
     },
     {
-      "playerId": "felipe-faundez",
+      "playerId": "diego-ulloa",
       "no": 26
+    },
+    {
+      "playerId": "jonathan-villagra",
+      "no": 27
+    },
+    {
+      "playerId": "zidane-yanez",
+      "no": 29
+    },
+    {
+      "playerId": "jetzen-lopez",
+      "no": null
+    },
+    {
+      "playerId": "thomas-coulombe",
+      "no": null
     }
   ]
 }

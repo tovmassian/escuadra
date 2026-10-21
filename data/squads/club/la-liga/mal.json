@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#103E9E"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-07",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Málaga_CF",
   "members": [
     {
@@ -125,10 +125,6 @@
     {
       "playerId": "aznou",
       "no": 39
-    },
-    {
-      "playerId": "moussa-diarra",
-      "no": null
     }
   ]
 }

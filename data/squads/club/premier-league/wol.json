@@ -10,7 +10,7 @@
     "bands": ["#FDB913", "#231F20"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Wolverhampton_Wanderers_F.C.",
   "members": [
     {
@@ -24,10 +24,6 @@
     {
       "playerId": "hugo-bueno",
       "no": 3
-    },
-    {
-      "playerId": "santiago-bueno",
-      "no": 4
     },
     {
       "playerId": "marshall-munetsi",
@@ -68,10 +64,6 @@
     {
       "playerId": "yerson-mosquera",
       "no": 15
-    },
-    {
-      "playerId": "pedro-lima",
-      "no": 17
     },
     {
       "playerId": "rafiki-said",

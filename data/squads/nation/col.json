@@ -11,11 +11,11 @@
     "orientation": "horizontal",
     "weights": [2, 1, 1]
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Colombia_national_football_team",
   "members": [
     {
-      "playerId": "david-ospina",
+      "playerId": "kevin-mier",
       "no": 1
     },
     {
@@ -27,7 +27,7 @@
       "no": 3
     },
     {
-      "playerId": "santiago-arias",
+      "playerId": "alvaro-angulo",
       "no": 4
     },
     {
@@ -39,60 +39,59 @@
       "no": 6
     },
     {
-      "playerId": "luis-diaz",
+      "playerId": "oscar-perea",
       "no": 7
     },
     {
-      "playerId": "jorge-carrascal",
+      "playerId": "gustavo-puerta",
       "no": 8
     },
     {
-      "playerId": "jhon-cordoba",
+      "playerId": "luis-suarez",
       "no": 9
     },
     {
-      "playerId": "james-rodriguez",
-      "no": 10,
-      "captain": true
+      "playerId": "jhon-arias",
+      "no": 10
     },
     {
-      "playerId": "jhon-arias",
+      "playerId": "camilo-duran",
       "no": 11
     },
     {
-      "playerId": "camilo-vargas",
+      "playerId": "aldair-quintana",
       "no": 12
     },
     {
-      "playerId": "yerry-mina",
+      "playerId": "daniel-arcila",
       "no": 13
     },
     {
-      "playerId": "gustavo-puerta",
+      "playerId": "jhon-solis",
       "no": 14
     },
     {
-      "playerId": "juan-portilla",
+      "playerId": "royer-caicedo",
       "no": 15
     },
     {
-      "playerId": "jefferson-lerma",
+      "playerId": "matias-orozco",
       "no": 16
     },
     {
-      "playerId": "mojica",
+      "playerId": "samuel-velasquez",
       "no": 17
     },
     {
-      "playerId": "willer-ditta",
+      "playerId": "edier-ocampo",
       "no": 18
     },
     {
-      "playerId": "cucho-hernandez",
+      "playerId": "illjuan-manuel-rengifoes",
       "no": 19
     },
     {
-      "playerId": "juan-fernando-quintero",
+      "playerId": "kevin-viveros",
       "no": 20
     },
     {
@@ -100,7 +99,7 @@
       "no": 21
     },
     {
-      "playerId": "deiver-machado",
+      "playerId": "yaser-asprilla",
       "no": 22
     },
     {
@@ -112,7 +111,7 @@
       "no": 24
     },
     {
-      "playerId": "luis-suarez",
+      "playerId": "kevin-andrade",
       "no": 25
     },
     {

@@ -10,7 +10,7 @@
     "bands": ["#ED2939", "#FFFFFF", "#ED2939"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Austria_national_football_team",
   "members": [
     {
@@ -38,20 +38,19 @@
       "no": 6
     },
     {
-      "playerId": "marko-arnautovic",
+      "playerId": "christoph-lang",
       "no": 7
     },
     {
-      "playerId": "alaba",
-      "no": 8,
-      "captain": true
+      "playerId": "junior-adamu",
+      "no": 8
     },
     {
-      "playerId": "marcel-sabitzer",
+      "playerId": "sasa-kalajdzic",
       "no": 9
     },
     {
-      "playerId": "florian-grillitsch",
+      "playerId": "romano-schmid",
       "no": 10
     },
     {
@@ -63,11 +62,11 @@
       "no": 12
     },
     {
-      "playerId": "patrick-pentz",
+      "playerId": "matteo-bignetti",
       "no": 13
     },
     {
-      "playerId": "sasa-kalajdzic",
+      "playerId": "maximilian-wober",
       "no": 14
     },
     {
@@ -83,11 +82,11 @@
       "no": 17
     },
     {
-      "playerId": "romano-schmid",
+      "playerId": "felix-bacher",
       "no": 18
     },
     {
-      "playerId": "dejan-ljubicic",
+      "playerId": "marco-grull",
       "no": 19
     },
     {
@@ -107,16 +106,8 @@
       "no": 23
     },
     {
-      "playerId": "paul-wanner",
-      "no": 24
-    },
-    {
-      "playerId": "michael-svoboda",
-      "no": 25
-    },
-    {
-      "playerId": "alessandro-schopf",
-      "no": 26
+      "playerId": "vasilije-markovic",
+      "no": null
     }
   ]
 }

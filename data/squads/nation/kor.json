@@ -14,7 +14,7 @@
       "color": "#CD2E3A"
     }
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/South_Korea_national_football_team",
   "members": [
     {
@@ -26,7 +26,7 @@
       "no": 2
     },
     {
-      "playerId": "lee-gihyuk",
+      "playerId": "kim-taehyun",
       "no": 3
     },
     {
@@ -47,14 +47,6 @@
       "captain": true
     },
     {
-      "playerId": "paik-seungho",
-      "no": 8
-    },
-    {
-      "playerId": "cho-guesung",
-      "no": 9
-    },
-    {
       "playerId": "lee-jaesung",
       "no": 10
     },
@@ -71,11 +63,11 @@
       "no": 13
     },
     {
-      "playerId": "cho-wije",
+      "playerId": "lee-donggyeong",
       "no": 14
     },
     {
-      "playerId": "kim-moonhwan",
+      "playerId": "choi-jun",
       "no": 15
     },
     {
@@ -83,7 +75,7 @@
       "no": 16
     },
     {
-      "playerId": "bae-junho",
+      "playerId": "song-minkyu",
       "no": 17
     },
     {
@@ -95,7 +87,7 @@
       "no": 19
     },
     {
-      "playerId": "yang-hyunjun",
+      "playerId": "oh-sehun",
       "no": 20
     },
     {
@@ -107,20 +99,36 @@
       "no": 22
     },
     {
-      "playerId": "jens-castrop",
+      "playerId": "gu-sungyun",
       "no": 23
     },
     {
-      "playerId": "kim-jingyu",
+      "playerId": "kim-bongsoo",
       "no": 24
     },
     {
-      "playerId": "eom-jisung",
+      "playerId": "kim-geonhui",
       "no": 25
     },
     {
-      "playerId": "lee-donggyeong",
+      "playerId": "cho-hyuntaek",
       "no": 26
+    },
+    {
+      "playerId": "kim-minsu",
+      "no": 27
+    },
+    {
+      "playerId": "cho-wije",
+      "no": 28
+    },
+    {
+      "playerId": "jeong-seungwon",
+      "no": 29
+    },
+    {
+      "playerId": "park-taejun",
+      "no": 30
     }
   ]
 }

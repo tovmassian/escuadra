@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [1, 2, 1]
   },
-  "lastUpdated": "2026-08-21",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Spain_national_football_team",
   "members": [
     {
@@ -19,19 +19,19 @@
       "no": 1
     },
     {
-      "playerId": "pubill",
+      "playerId": "huijsen",
       "no": 2
     },
     {
-      "playerId": "grimaldo",
+      "playerId": "le-normand",
       "no": 3
     },
     {
-      "playerId": "eric-garcia",
+      "playerId": "ivan-fresneda",
       "no": 4
     },
     {
-      "playerId": "llorente",
+      "playerId": "cubarsi",
       "no": 5
     },
     {
@@ -39,15 +39,15 @@
       "no": 6
     },
     {
-      "playerId": "torres",
+      "playerId": "victor-munoz",
       "no": 7
     },
     {
-      "playerId": "fabian-ruiz",
+      "playerId": "r-fernandez",
       "no": 8
     },
     {
-      "playerId": "gavi",
+      "playerId": "fermin",
       "no": 9
     },
     {
@@ -59,11 +59,11 @@
       "no": 11
     },
     {
-      "playerId": "porro",
+      "playerId": "pubill",
       "no": 12
     },
     {
-      "playerId": "joan-garcia",
+      "playerId": "j-martinez",
       "no": 13
     },
     {
@@ -80,7 +80,7 @@
       "captain": true
     },
     {
-      "playerId": "nico-williams",
+      "playerId": "fran-garcia-torres",
       "no": 17
     },
     {
@@ -100,7 +100,7 @@
       "no": 21
     },
     {
-      "playerId": "cubarsi",
+      "playerId": "cucurella",
       "no": 22
     },
     {
@@ -108,16 +108,8 @@
       "no": 23
     },
     {
-      "playerId": "cucurella",
-      "no": 24
-    },
-    {
-      "playerId": "victor-munoz",
-      "no": 25
-    },
-    {
-      "playerId": "borja-iglesias",
-      "no": 26
+      "playerId": "carlos-espi",
+      "no": null
     }
   ]
 }

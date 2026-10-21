@@ -10,12 +10,16 @@
     "bands": ["#FFE500", "#002F6C"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Parma_Calcio_1913",
   "members": [
     {
       "playerId": "abdoulaye-ndiaye",
       "no": 3
+    },
+    {
+      "playerId": "vincent-sierro",
+      "no": 4
     },
     {
       "playerId": "lautaro-valenti",
@@ -63,6 +67,10 @@
       "no": 20
     },
     {
+      "playerId": "simone-ghidotti",
+      "no": 22
+    },
+    {
       "playerId": "nesta-elphege",
       "no": 23
     },
@@ -85,6 +93,10 @@
     {
       "playerId": "christian-ordonez",
       "no": 32
+    },
+    {
+      "playerId": "diego-carlos",
+      "no": 34
     },
     {
       "playerId": "mariano-troilo",
@@ -113,18 +125,6 @@
     {
       "playerId": "giovanni-fabbian",
       "no": 80
-    },
-    {
-      "playerId": "diego-carlos",
-      "no": null
-    },
-    {
-      "playerId": "simone-ghidotti",
-      "no": null
-    },
-    {
-      "playerId": "vincent-sierro",
-      "no": null
     }
   ]
 }

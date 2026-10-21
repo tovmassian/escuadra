@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#FFCD00"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Leeds_United_F.C.",
   "members": [
     {
@@ -107,8 +107,8 @@
       "no": 44
     },
     {
-      "playerId": "mateo-joseph",
-      "no": null
+      "playerId": "jayden-lienou",
+      "no": 65
     }
   ]
 }

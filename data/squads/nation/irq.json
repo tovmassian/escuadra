@@ -10,7 +10,7 @@
     "bands": ["#CD1125", "#FFFFFF", "#000000"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Iraq_national_football_team",
   "members": [
     {
@@ -83,7 +83,8 @@
     },
     {
       "playerId": "aymen-hussein",
-      "no": 18
+      "no": 18,
+      "captain": true
     },
     {
       "playerId": "mohammed-qasim",

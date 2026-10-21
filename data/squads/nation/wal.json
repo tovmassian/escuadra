@@ -14,11 +14,11 @@
       "color": "#C8102E"
     }
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Wales_national_football_team",
   "members": [
     {
-      "playerId": "karl-darlow",
+      "playerId": "david-cornell",
       "no": 1
     },
     {
@@ -39,15 +39,15 @@
       "no": 5
     },
     {
-      "playerId": "joe-rodon",
+      "playerId": "ben-cabango",
       "no": 6
     },
     {
-      "playerId": "david-brooks",
+      "playerId": "cian-ashford",
       "no": 7
     },
     {
-      "playerId": "joel-colwill",
+      "playerId": "wes-burns",
       "no": 8
     },
     {
@@ -55,7 +55,7 @@
       "no": 9
     },
     {
-      "playerId": "kai-andrews",
+      "playerId": "liam-cullen",
       "no": 10
     },
     {
@@ -79,11 +79,15 @@
       "no": 15
     },
     {
-      "playerId": "ronan-kpakio",
+      "playerId": "jayden-lienou",
+      "no": 16
+    },
+    {
+      "playerId": "jordan-james",
       "no": 17
     },
     {
-      "playerId": "rhys-norringtondavies",
+      "playerId": "mark-harris",
       "no": 18
     },
     {
@@ -103,24 +107,24 @@
       "no": 22
     },
     {
-      "playerId": "nathan-broadhead",
+      "playerId": "joel-colwill",
       "no": 23
     },
     {
-      "playerId": "isaak-davies",
-      "no": 24
-    },
-    {
-      "playerId": "ollie-bostock",
-      "no": 25
-    },
-    {
       "playerId": "cameron-congreve",
-      "no": 26
+      "no": null
     },
     {
-      "playerId": "jayden-lienou",
-      "no": 27
+      "playerId": "charlie-savage",
+      "no": null
+    },
+    {
+      "playerId": "joe-taylor",
+      "no": null
+    },
+    {
+      "playerId": "rhys-norringtondavies",
+      "no": null
     }
   ]
 }

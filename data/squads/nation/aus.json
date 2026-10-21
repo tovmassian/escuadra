@@ -14,13 +14,12 @@
       "color": "#FFFFFF"
     }
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Australia_men's_national_soccer_team",
   "members": [
     {
-      "playerId": "ryan",
-      "no": 1,
-      "captain": true
+      "playerId": "jacob-chapman",
+      "no": 1
     },
     {
       "playerId": "milos-degenek",
@@ -35,7 +34,7 @@
       "no": 4
     },
     {
-      "playerId": "jordan-bos",
+      "playerId": "kasey-bos",
       "no": 5
     },
     {
@@ -43,7 +42,7 @@
       "no": 6
     },
     {
-      "playerId": "mathew-leckie",
+      "playerId": "patrick-yazbek",
       "no": 7
     },
     {
@@ -51,15 +50,11 @@
       "no": 8
     },
     {
-      "playerId": "mohamed-toure",
-      "no": 9
-    },
-    {
-      "playerId": "ajdin-hrustic",
+      "playerId": "nishan-velupillay",
       "no": 10
     },
     {
-      "playerId": "awer-mabil",
+      "playerId": "marcus-younis",
       "no": 11
     },
     {
@@ -71,11 +66,11 @@
       "no": 13
     },
     {
-      "playerId": "cammy-devlin",
+      "playerId": "riley-mcgree",
       "no": 14
     },
     {
-      "playerId": "kai-trewin",
+      "playerId": "dylan-leonard",
       "no": 15
     },
     {
@@ -95,11 +90,11 @@
       "no": 19
     },
     {
-      "playerId": "cristian-volpato",
+      "playerId": "eli-adams",
       "no": 20
     },
     {
-      "playerId": "cameron-burgess",
+      "playerId": "kealey-adamson",
       "no": 21
     },
     {
@@ -107,7 +102,7 @@
       "no": 22
     },
     {
-      "playerId": "nishan-velupillay",
+      "playerId": "yaya-dukuly",
       "no": 23
     },
     {
@@ -121,6 +116,14 @@
     {
       "playerId": "tete-yengi",
       "no": 26
+    },
+    {
+      "playerId": "alexander-robertson",
+      "no": null
+    },
+    {
+      "playerId": "mohamed-toure",
+      "no": null
     }
   ]
 }

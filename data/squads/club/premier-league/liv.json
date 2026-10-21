@@ -10,7 +10,7 @@
     "bands": ["#C8102E"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Liverpool_F.C.",
   "members": [
     {
@@ -111,6 +111,10 @@
       "no": 42
     },
     {
+      "playerId": "luke-chambers",
+      "no": 44
+    },
+    {
       "playerId": "james-mcconnell",
       "no": 53
     },
@@ -119,8 +123,16 @@
       "no": 56
     },
     {
+      "playerId": "lewis-koumas",
+      "no": 67
+    },
+    {
       "playerId": "rio-ngumoha",
       "no": 73
+    },
+    {
+      "playerId": "jayden-danns",
+      "no": 76
     },
     {
       "playerId": "harvey-davies",

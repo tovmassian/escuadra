@@ -10,7 +10,7 @@
     "bands": ["#239F40", "#FFFFFF", "#DA0000"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Iran_national_football_team",
   "members": [
     {
@@ -31,19 +31,11 @@
       "no": 4
     },
     {
-      "playerId": "milad-mohammadi",
-      "no": 5
-    },
-    {
       "playerId": "saeid-ezatolahi",
       "no": 6
     },
     {
-      "playerId": "alireza-jahanbakhsh",
-      "no": 7
-    },
-    {
-      "playerId": "mohammad-mohebi",
+      "playerId": "shahab-zahedi",
       "no": 8
     },
     {
@@ -51,11 +43,7 @@
       "no": 9
     },
     {
-      "playerId": "mehdi-ghayedi",
-      "no": 10
-    },
-    {
-      "playerId": "ali-alipour",
+      "playerId": "mehdi-limouchi",
       "no": 11
     },
     {
@@ -63,19 +51,11 @@
       "no": 12
     },
     {
-      "playerId": "hossein-kanaanizadegan",
+      "playerId": "mohammad-mehdi-zare",
       "no": 13
     },
     {
-      "playerId": "saman-ghoddos",
-      "no": 14
-    },
-    {
-      "playerId": "rouzbeh-cheshmi",
-      "no": 15
-    },
-    {
-      "playerId": "mahdi-torabi",
+      "playerId": "mohammad-ghorbani",
       "no": 16
     },
     {
@@ -83,7 +63,7 @@
       "no": 17
     },
     {
-      "playerId": "amirhossein-hosseinzadeh",
+      "playerId": "saman-fallah",
       "no": 18
     },
     {
@@ -91,11 +71,11 @@
       "no": 19
     },
     {
-      "playerId": "shahriyar-moghanlou",
+      "playerId": "sardar-azmoun",
       "no": 20
     },
     {
-      "playerId": "mohammad-ghorbani",
+      "playerId": "omid-noorafkan",
       "no": 21
     },
     {
@@ -111,12 +91,28 @@
       "no": 24
     },
     {
-      "playerId": "danial-eiri",
+      "playerId": "amir-hossein-mahmoudi",
       "no": 25
     },
     {
-      "playerId": "amirmohammad-razzaghinia",
+      "playerId": "milad-sourgi",
       "no": 26
+    },
+    {
+      "playerId": "aref-haji-eydi",
+      "no": 27
+    },
+    {
+      "playerId": "mohammad-naderi",
+      "no": 28
+    },
+    {
+      "playerId": "mohammad-mehdi-mohebi",
+      "no": 29
+    },
+    {
+      "playerId": "aref-aghasi",
+      "no": 33
     }
   ]
 }

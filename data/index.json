@@ -2798,6 +2798,20 @@
     }
   },
   {
+    "id": "sdn",
+    "kind": "nation",
+    "name": "Sudan",
+    "season": "2026",
+    "primaryColor": "#D21034",
+    "secondaryColor": "#000000",
+    "verified": true,
+    "marker": {
+      "bands": ["#007229", "#D21034", "#FFFFFF", "#000000"],
+      "orientation": "vertical",
+      "weights": [1, 2, 2, 2]
+    }
+  },
+  {
     "id": "sen",
     "kind": "nation",
     "name": "Senegal",

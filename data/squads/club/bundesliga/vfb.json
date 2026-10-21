@@ -10,7 +10,7 @@
     "bands": ["#E32219", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/VfB_Stuttgart",
   "members": [
     {
@@ -128,6 +128,10 @@
     {
       "playerId": "stefan-drljaca",
       "no": 46
+    },
+    {
+      "playerId": "yanik-spalt",
+      "no": 47
     }
   ]
 }

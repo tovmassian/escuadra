@@ -10,7 +10,7 @@
     "bands": ["#00A3E0", "#002654"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Le_Havre_AC",
   "members": [
     {
@@ -44,6 +44,10 @@
     {
       "playerId": "seko",
       "no": 15
+    },
+    {
+      "playerId": "arnaud-bodart",
+      "no": 16
     },
     {
       "playerId": "kaito-mizuta",

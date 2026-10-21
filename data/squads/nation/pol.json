@@ -10,15 +10,15 @@
     "bands": ["#FFFFFF", "#DC143C"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Poland_national_football_team",
   "members": [
     {
-      "playerId": "kamil-grabara",
+      "playerId": "marcin-bulka",
       "no": 1
     },
     {
-      "playerId": "norbert-wojtuszek",
+      "playerId": "matty-cash",
       "no": 2
     },
     {
@@ -38,17 +38,16 @@
       "no": 6
     },
     {
-      "playerId": "jakub-kaminski",
+      "playerId": "oskar-pietuszewski",
       "no": 7
     },
     {
-      "playerId": "bartosz-kapustka",
+      "playerId": "kacper-urbanski",
       "no": 8
     },
     {
-      "playerId": "lewandowski",
-      "no": 9,
-      "captain": true
+      "playerId": "mateusz-zukowski",
+      "no": 9
     },
     {
       "playerId": "zielinski",
@@ -59,11 +58,11 @@
       "no": 11
     },
     {
-      "playerId": "marcin-bulka",
+      "playerId": "mateusz-kochalski",
       "no": 12
     },
     {
-      "playerId": "mateusz-zukowski",
+      "playerId": "norbert-wojtuszek",
       "no": 13
     },
     {
@@ -71,23 +70,23 @@
       "no": 14
     },
     {
-      "playerId": "arkadiusz-pyrka",
+      "playerId": "tymoteusz-puchacz",
       "no": 15
     },
     {
-      "playerId": "jakub-piotrowski",
+      "playerId": "wiktor-nowak",
       "no": 16
     },
     {
-      "playerId": "oskar-pietuszewski",
+      "playerId": "michal-skoras",
       "no": 17
     },
     {
-      "playerId": "filip-rozga",
+      "playerId": "marcel-regula",
       "no": 18
     },
     {
-      "playerId": "michal-skoras",
+      "playerId": "przemyslaw-frankowski",
       "no": 19
     },
     {
@@ -99,24 +98,12 @@
       "no": 21
     },
     {
-      "playerId": "mateusz-kochalski",
+      "playerId": "slawomir-abramowicz",
       "no": 22
     },
     {
-      "playerId": "kacper-kozlowski",
-      "no": 23
-    },
-    {
-      "playerId": "karol-czubak",
-      "no": 24
-    },
-    {
       "playerId": "kacper-potulski",
-      "no": 25
-    },
-    {
-      "playerId": "oskar-wojcik",
-      "no": 26
+      "no": 23
     }
   ]
 }

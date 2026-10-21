@@ -10,15 +10,15 @@
     "bands": ["#006AA7", "#FECC02"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Sweden_men's_national_football_team",
   "members": [
     {
-      "playerId": "jacob-widell-zetterstrom",
+      "playerId": "noel-tornqvist",
       "no": 1
     },
     {
-      "playerId": "gustaf-lagerbielke",
+      "playerId": "felix-beijmo",
       "no": 2
     },
     {
@@ -27,16 +27,12 @@
       "captain": true
     },
     {
-      "playerId": "isak-hien",
+      "playerId": "eric-smith",
       "no": 4
     },
     {
       "playerId": "gabriel-gudmundsson",
       "no": 5
-    },
-    {
-      "playerId": "herman-johansson",
-      "no": 6
     },
     {
       "playerId": "lucas-bergvall",
@@ -47,15 +43,15 @@
       "no": 8
     },
     {
-      "playerId": "alexander-isak",
+      "playerId": "paulos-abraham",
       "no": 9
     },
     {
-      "playerId": "benjamin-nygren",
+      "playerId": "hugo-bolin",
       "no": 10
     },
     {
-      "playerId": "anthony-elanga",
+      "playerId": "swedberg",
       "no": 11
     },
     {
@@ -67,11 +63,11 @@
       "no": 13
     },
     {
-      "playerId": "hjalmar-ekdal",
+      "playerId": "hampus-skoglund",
       "no": 14
     },
     {
-      "playerId": "starfelt",
+      "playerId": "victor-eriksson",
       "no": 15
     },
     {
@@ -83,15 +79,15 @@
       "no": 17
     },
     {
-      "playerId": "yasin-ayari",
+      "playerId": "samuel-dahl",
       "no": 18
     },
     {
-      "playerId": "mattias-svanberg",
+      "playerId": "sebastian-nanasi",
       "no": 19
     },
     {
-      "playerId": "eric-smith",
+      "playerId": "hugo-larsson",
       "no": 20
     },
     {
@@ -103,20 +99,8 @@
       "no": 22
     },
     {
-      "playerId": "kristoffer-nordfeldt",
+      "playerId": "melker-ellborg",
       "no": 23
-    },
-    {
-      "playerId": "elliot-stroud",
-      "no": 24
-    },
-    {
-      "playerId": "gustaf-nilsson",
-      "no": 25
-    },
-    {
-      "playerId": "taha-ali",
-      "no": 26
     }
   ]
 }

@@ -10,17 +10,13 @@
     "bands": ["#5A2D82", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Toulouse_FC",
   "members": [
     {
       "playerId": "rasmus-nicolaisen",
       "no": 2,
       "captain": true
-    },
-    {
-      "playerId": "mark-mckenzie",
-      "no": 3
     },
     {
       "playerId": "seny-koumbassa",
@@ -101,10 +97,6 @@
     {
       "playerId": "ilyas-azizi",
       "no": 37
-    },
-    {
-      "playerId": "gaetan-bakhouche",
-      "no": 44
     },
     {
       "playerId": "aymen-amaaouch",

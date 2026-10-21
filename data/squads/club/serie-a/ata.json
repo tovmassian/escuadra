@@ -10,7 +10,7 @@
     "bands": ["#1E3888", "#000000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Atalanta_B.C.",
   "members": [
     {
@@ -77,6 +77,10 @@
     {
       "playerId": "thomas-kristensen",
       "no": 31
+    },
+    {
+      "playerId": "relja-obric",
+      "no": 40
     },
     {
       "playerId": "giorgio-scalvini",

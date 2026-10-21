@@ -10,13 +10,9 @@
     "bands": ["#00853F", "#FDEF42", "#E31B23"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Senegal_national_football_team",
   "members": [
-    {
-      "playerId": "yehvann-diouf",
-      "no": 1
-    },
     {
       "playerId": "sarr",
       "no": 2
@@ -26,7 +22,7 @@
       "no": 3
     },
     {
-      "playerId": "abdoulaye-seck",
+      "playerId": "sadibou-sane",
       "no": 4
     },
     {
@@ -34,7 +30,7 @@
       "no": 5
     },
     {
-      "playerId": "ciss",
+      "playerId": "lamine-sy",
       "no": 6
     },
     {
@@ -46,11 +42,11 @@
       "no": 8
     },
     {
-      "playerId": "bamba-dieng",
+      "playerId": "boulaye-dia",
       "no": 9
     },
     {
-      "playerId": "sadio-mane",
+      "playerId": "mamadou-diakhon",
       "no": 10
     },
     {
@@ -58,7 +54,7 @@
       "no": 11
     },
     {
-      "playerId": "cherif-ndiaye",
+      "playerId": "issa-soumare",
       "no": 12
     },
     {
@@ -66,15 +62,11 @@
       "no": 13
     },
     {
-      "playerId": "ismail-jakobs",
-      "no": 14
-    },
-    {
-      "playerId": "krepin-diatta",
+      "playerId": "sangante",
       "no": 15
     },
     {
-      "playerId": "edouard-mendy",
+      "playerId": "mamour-ndiaye",
       "no": 16
     },
     {
@@ -82,20 +74,8 @@
       "no": 17
     },
     {
-      "playerId": "ismaila-sarr",
-      "no": 18
-    },
-    {
-      "playerId": "moussa-niakhate",
-      "no": 19
-    },
-    {
       "playerId": "mbaye",
       "no": 20
-    },
-    {
-      "playerId": "habib-diarra",
-      "no": 21
     },
     {
       "playerId": "bara-sapoko-ndiaye",
@@ -106,7 +86,7 @@
       "no": 23
     },
     {
-      "playerId": "antoine-mendy",
+      "playerId": "rassoul-ndiaye",
       "no": 24
     },
     {
@@ -116,6 +96,22 @@
     {
       "playerId": "gueye",
       "no": 26
+    },
+    {
+      "playerId": "malang-sarr",
+      "no": 27
+    },
+    {
+      "playerId": "nobel-mendy",
+      "no": 28
+    },
+    {
+      "playerId": "pape-moussa-fall",
+      "no": 29
+    },
+    {
+      "playerId": "demba-thiam",
+      "no": 30
     }
   ]
 }

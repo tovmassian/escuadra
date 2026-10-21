@@ -10,7 +10,7 @@
     "bands": ["#0049AA", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Hamburger_SV",
   "members": [
     {
@@ -36,10 +36,6 @@
     {
       "playerId": "zakaria-el-ouahdi",
       "no": 7
-    },
-    {
-      "playerId": "vieira",
-      "no": 8
     },
     {
       "playerId": "terem-moffi",
@@ -72,6 +68,10 @@
     {
       "playerId": "otto-stange",
       "no": 19
+    },
+    {
+      "playerId": "vieira",
+      "no": 20
     },
     {
       "playerId": "nicolai-remberg",

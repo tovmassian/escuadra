@@ -10,7 +10,7 @@
     "bands": ["#12A0D7"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/S.S.C._Napoli",
   "members": [
     {
@@ -44,6 +44,10 @@
     {
       "playerId": "kevin-de-bruyne",
       "no": 11
+    },
+    {
+      "playerId": "claudio-pugliese",
+      "no": 12
     },
     {
       "playerId": "amir-rrahmani",

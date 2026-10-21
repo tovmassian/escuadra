@@ -10,7 +10,7 @@
     "bands": ["#BA3733", "#46714D"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/FC_Augsburg",
   "members": [
     {
@@ -67,10 +67,6 @@
       "no": 16
     },
     {
-      "playerId": "kristijan-jakic",
-      "no": 17
-    },
-    {
       "playerId": "tim-breithaupt",
       "no": 18
     },
@@ -105,10 +101,6 @@
     {
       "playerId": "fabian-rieder",
       "no": 32
-    },
-    {
-      "playerId": "nathanael-mbuku",
-      "no": 34
     },
     {
       "playerId": "juma-bah",

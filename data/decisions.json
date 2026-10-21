@@ -1,5 +1,21 @@
 {
-  "splits": [],
+  "splits": [
+    {
+      "team": "bra",
+      "departed": "danilo-luiz",
+      "arrived": "Danilo"
+    },
+    {
+      "team": "bra",
+      "departed": "martinelli",
+      "arrived": "Matheus Martinelli"
+    },
+    {
+      "team": "ren",
+      "departed": "jonathan-do-marcolino",
+      "arrived": "Henrick Do Marcolino"
+    }
+  ],
   "aliases": [
     {
       "player": "giovanni-lo-celso",
@@ -8,6 +24,10 @@
     {
       "player": "grimaldo",
       "name": "Alejandro Grimaldo"
+    },
+    {
+      "player": "pio-esposito",
+      "name": "Pio Esposito"
     }
   ],
   "titleAliases": [
@@ -20,6 +40,10 @@
       "title": "Giovanni Lo Celso"
     },
     {
+      "player": "gonzalez",
+      "title": "Nicolás González (footballer, born 1998)"
+    },
+    {
       "player": "grimaldo",
       "title": "Alejandro Grimaldo"
     },
@@ -30,6 +54,10 @@
     {
       "player": "josh-cullen",
       "title": "Josh Cullen (footballer)"
+    },
+    {
+      "player": "pio-esposito",
+      "title": "Pio Esposito"
     },
     {
       "player": "rodriguez",

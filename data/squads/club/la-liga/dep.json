@@ -10,7 +10,7 @@
     "bands": ["#0000FF", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-07",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Deportivo_de_A_Coruña",
   "members": [
     {
@@ -117,10 +117,6 @@
     {
       "playerId": "nsongo",
       "no": 32
-    },
-    {
-      "playerId": "gijselhart",
-      "no": 34
     }
   ]
 }

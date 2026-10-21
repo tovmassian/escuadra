@@ -10,15 +10,15 @@
     "bands": ["#CE1126", "#FFFFFF", "#000000"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Egypt_national_football_team",
   "members": [
     {
-      "playerId": "mohamed-el-shenawy",
+      "playerId": "mostafa-shobeir",
       "no": 1
     },
     {
-      "playerId": "yasser-ibrahim",
+      "playerId": "omar-fayed",
       "no": 2
     },
     {
@@ -38,7 +38,7 @@
       "no": 6
     },
     {
-      "playerId": "trezeguet",
+      "playerId": "osama-faisal",
       "no": 7
     },
     {
@@ -67,10 +67,6 @@
       "no": 13
     },
     {
-      "playerId": "hamdy-fathy",
-      "no": 14
-    },
-    {
       "playerId": "karim-hafez",
       "no": 15
     },
@@ -83,7 +79,7 @@
       "no": 17
     },
     {
-      "playerId": "nabil-emad",
+      "playerId": "ali-mahmoud",
       "no": 18
     },
     {
@@ -103,10 +99,6 @@
       "no": 22
     },
     {
-      "playerId": "mostafa-shobeir",
-      "no": 23
-    },
-    {
       "playerId": "tarek-alaa",
       "no": 24
     },
@@ -117,6 +109,10 @@
     {
       "playerId": "mohamed-alaa",
       "no": 26
+    },
+    {
+      "playerId": "abdelaziz-el-balouti",
+      "no": null
     }
   ]
 }

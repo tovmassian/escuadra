@@ -10,7 +10,7 @@
     "bands": ["#FF0000", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Switzerland_national_football_team",
   "members": [
     {
@@ -18,11 +18,11 @@
       "no": 1
     },
     {
-      "playerId": "miro-muheim",
+      "playerId": "sascha-britschgi",
       "no": 2
     },
     {
-      "playerId": "silvan-widmer",
+      "playerId": "adrian-bajrami",
       "no": 3
     },
     {
@@ -34,11 +34,11 @@
       "no": 5
     },
     {
-      "playerId": "denis-zakaria",
+      "playerId": "vincent-sierro",
       "no": 6
     },
     {
-      "playerId": "breel-embolo",
+      "playerId": "joel-monteiro",
       "no": 7
     },
     {
@@ -50,9 +50,8 @@
       "no": 9
     },
     {
-      "playerId": "granit-xhaka",
-      "no": 10,
-      "captain": true
+      "playerId": "zeki-amdouni",
+      "no": 10
     },
     {
       "playerId": "dan-ndoye",
@@ -75,11 +74,11 @@
       "no": 15
     },
     {
-      "playerId": "christian-fassnacht",
+      "playerId": "zachary-athekame",
       "no": 16
     },
     {
-      "playerId": "ruben-vargas",
+      "playerId": "isaac-schmidt",
       "no": 17
     },
     {
@@ -87,7 +86,7 @@
       "no": 18
     },
     {
-      "playerId": "noah-okafor",
+      "playerId": "winsley-boteli",
       "no": 19
     },
     {
@@ -103,20 +102,16 @@
       "no": 22
     },
     {
-      "playerId": "zeki-amdouni",
+      "playerId": "alvyn-sanches",
       "no": 23
     },
     {
-      "playerId": "aurele-amenda",
-      "no": 24
-    },
-    {
-      "playerId": "luca-jaquez",
-      "no": 25
+      "playerId": "anthony-racioppi",
+      "no": null
     },
     {
       "playerId": "cedric-itten",
-      "no": 26
+      "no": null
     }
   ]
 }

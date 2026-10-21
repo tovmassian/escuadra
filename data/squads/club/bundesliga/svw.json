@@ -10,7 +10,7 @@
     "bands": ["#1D9053", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/SV_Werder_Bremen",
   "members": [
     {
@@ -84,14 +84,6 @@
     {
       "playerId": "chuki",
       "no": 20
-    },
-    {
-      "playerId": "dawid-kownacki",
-      "no": 21
-    },
-    {
-      "playerId": "julian-malatini",
-      "no": 22
     },
     {
       "playerId": "dariusz-stalmach",

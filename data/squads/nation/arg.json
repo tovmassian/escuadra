@@ -10,7 +10,7 @@
     "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Argentina_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "senesi",
+      "playerId": "leonardo-balerdi",
       "no": 2
     },
     {
@@ -26,11 +26,11 @@
       "no": 3
     },
     {
-      "playerId": "montiel",
+      "playerId": "agustin-giay",
       "no": 4
     },
     {
-      "playerId": "paredes",
+      "playerId": "equi-fernandez",
       "no": 5
     },
     {
@@ -42,7 +42,7 @@
       "no": 7
     },
     {
-      "playerId": "barco",
+      "playerId": "enzo-fernandez",
       "no": 8
     },
     {
@@ -75,7 +75,7 @@
       "no": 15
     },
     {
-      "playerId": "almada",
+      "playerId": "gianluca-prestianni",
       "no": 16
     },
     {
@@ -107,7 +107,7 @@
       "no": 23
     },
     {
-      "playerId": "enzo-fernandez",
+      "playerId": "barco",
       "no": 24
     },
     {
@@ -115,8 +115,40 @@
       "no": 25
     },
     {
-      "playerId": "molina",
+      "playerId": "santiago-simon",
       "no": 26
+    },
+    {
+      "playerId": "santiago-beltran",
+      "no": 27
+    },
+    {
+      "playerId": "matias-soule",
+      "no": 28
+    },
+    {
+      "playerId": "santiago-castro",
+      "no": 29
+    },
+    {
+      "playerId": "mastantuono",
+      "no": 30
+    },
+    {
+      "playerId": "leonel-flores",
+      "no": 31
+    },
+    {
+      "playerId": "tomas-palacios",
+      "no": 32
+    },
+    {
+      "playerId": "roman-vega",
+      "no": 33
+    },
+    {
+      "playerId": "valentin-gomez",
+      "no": 34
     }
   ]
 }

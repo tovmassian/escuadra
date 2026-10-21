@@ -10,11 +10,11 @@
     "bands": ["#FFFFFF", "#DA121A"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Panama_national_football_team",
   "members": [
     {
-      "playerId": "luis-mejia",
+      "playerId": "marcos-de-leon",
       "no": 1
     },
     {
@@ -22,15 +22,11 @@
       "no": 2
     },
     {
-      "playerId": "jose-cordoba",
-      "no": 3
-    },
-    {
-      "playerId": "fidel-escobar",
+      "playerId": "martin-krug",
       "no": 4
     },
     {
-      "playerId": "edgardo-farina",
+      "playerId": "victor-griffith",
       "no": 5
     },
     {
@@ -50,15 +46,15 @@
       "no": 9
     },
     {
-      "playerId": "ismael-diaz",
+      "playerId": "rafael-mosquera",
       "no": 10
     },
     {
-      "playerId": "yoel-barcenas",
+      "playerId": "azarias-londono",
       "no": 11
     },
     {
-      "playerId": "cesar-samudio",
+      "playerId": "eddie-roberts",
       "no": 12
     },
     {
@@ -70,32 +66,27 @@
       "no": 14
     },
     {
-      "playerId": "eric-davis",
+      "playerId": "jorge-gutierrez",
       "no": 15
-    },
-    {
-      "playerId": "andres-andrade",
-      "no": 16
     },
     {
       "playerId": "jose-fajardo",
       "no": 17
     },
     {
-      "playerId": "cecilio-waterman",
+      "playerId": "josue-vergara",
       "no": 18
     },
     {
-      "playerId": "alberto-quintero",
+      "playerId": "omar-valencia",
       "no": 19
     },
     {
-      "playerId": "anibal-godoy",
-      "no": 20,
-      "captain": true
+      "playerId": "giovany-herbert",
+      "no": 20
     },
     {
-      "playerId": "cesar-yanis",
+      "playerId": "mijahir-jimenez",
       "no": 21
     },
     {
@@ -104,19 +95,24 @@
     },
     {
       "playerId": "amir-murillo",
-      "no": 23
+      "no": 23,
+      "captain": true
     },
     {
-      "playerId": "azarias-londono",
+      "playerId": "eduardo-anderson",
       "no": 24
     },
     {
-      "playerId": "roderick-miller",
+      "playerId": "joseph-jones",
       "no": 25
     },
     {
-      "playerId": "jorge-gutierrez",
+      "playerId": "daivis-murillo",
       "no": 26
+    },
+    {
+      "playerId": "jair-modelo",
+      "no": 27
     }
   ]
 }

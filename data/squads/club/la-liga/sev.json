@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#E20001"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-03",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Sevilla_FC",
   "members": [
     {
@@ -70,6 +70,10 @@
       "no": 14
     },
     {
+      "playerId": "fabio-cardoso",
+      "no": 15
+    },
+    {
       "playerId": "isaac-romero",
       "no": 16
     },
@@ -105,10 +109,6 @@
     {
       "playerId": "fofana",
       "no": 24
-    },
-    {
-      "playerId": "guillen",
-      "no": 27
     },
     {
       "playerId": "sierra",

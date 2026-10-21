@@ -10,7 +10,7 @@
     "bands": ["#003DA5", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Como_1907",
   "members": [
     {
@@ -63,10 +63,6 @@
       "no": 13
     },
     {
-      "playerId": "samuele-ricci",
-      "no": 14
-    },
-    {
       "playerId": "adrian-lahdo",
       "no": 15
     },
@@ -85,6 +81,10 @@
     {
       "playerId": "martin-baturina",
       "no": 20
+    },
+    {
+      "playerId": "samuele-ricci",
+      "no": 21
     },
     {
       "playerId": "mauro-vigorito",

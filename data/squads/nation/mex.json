@@ -10,7 +10,7 @@
     "bands": ["#006847", "#FFFFFF", "#CE1126"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Mexico_national_football_team",
   "members": [
     {
@@ -22,13 +22,12 @@
       "no": 2
     },
     {
-      "playerId": "cesar-montes",
+      "playerId": "diego-campillo",
       "no": 3
     },
     {
-      "playerId": "edson-alvarez",
-      "no": 4,
-      "captain": true
+      "playerId": "victor-guzman",
+      "no": 4
     },
     {
       "playerId": "johan-vasquez",
@@ -39,31 +38,23 @@
       "no": 6
     },
     {
-      "playerId": "luis-romo",
-      "no": 7
-    },
-    {
       "playerId": "fidalgo",
       "no": 8
     },
     {
-      "playerId": "raul-jimenez",
+      "playerId": "german-berterame",
       "no": 9
-    },
-    {
-      "playerId": "alexis-vega",
-      "no": 10
     },
     {
       "playerId": "santiago-gimenez",
       "no": 11
     },
     {
-      "playerId": "carlos-acevedo",
+      "playerId": "oscar-garcia",
       "no": 12
     },
     {
-      "playerId": "guillermo-ochoa",
+      "playerId": "dagoberto-espinoza",
       "no": 13
     },
     {
@@ -75,7 +66,7 @@
       "no": 15
     },
     {
-      "playerId": "julian-quinones",
+      "playerId": "jeremy-marquez",
       "no": 16
     },
     {
@@ -87,20 +78,12 @@
       "no": 18
     },
     {
-      "playerId": "gilberto-mora",
+      "playerId": "denzell-garcia",
       "no": 19
     },
     {
-      "playerId": "mateo-chavez",
-      "no": 20
-    },
-    {
-      "playerId": "cesar-huerta",
+      "playerId": "hugo-camberos",
       "no": 21
-    },
-    {
-      "playerId": "guillermo-martinez",
-      "no": 22
     },
     {
       "playerId": "jesus-gallardo",
@@ -115,8 +98,32 @@
       "no": 25
     },
     {
-      "playerId": "brian-gutierrez",
+      "playerId": "isaias-violante",
       "no": 26
+    },
+    {
+      "playerId": "everardo-lopez",
+      "no": 27
+    },
+    {
+      "playerId": "santiago-sandoval",
+      "no": 28
+    },
+    {
+      "playerId": "padilla",
+      "no": 29
+    },
+    {
+      "playerId": "henrique-simeone",
+      "no": null
+    },
+    {
+      "playerId": "juan-echilvestre",
+      "no": null
+    },
+    {
+      "playerId": "yohan-orozco",
+      "no": null
     }
   ]
 }

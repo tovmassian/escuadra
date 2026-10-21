@@ -10,7 +10,7 @@
     "bands": ["#6C1D45", "#99D6EA"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Burnley_F.C.",
   "members": [
     {
@@ -30,6 +30,10 @@
       "no": 5
     },
     {
+      "playerId": "bashir-humphreys",
+      "no": 6
+    },
+    {
       "playerId": "jacob-bruun-larsen",
       "no": 7
     },
@@ -42,12 +46,20 @@
       "no": 9
     },
     {
+      "playerId": "marcus-edwards",
+      "no": 10
+    },
+    {
       "playerId": "zeki-amdouni",
       "no": 11
     },
     {
       "playerId": "dastan-satpayev",
       "no": 12
+    },
+    {
+      "playerId": "ben-amos",
+      "no": 13
     },
     {
       "playerId": "connor-roberts",
@@ -68,6 +80,10 @@
     {
       "playerId": "largie-ramazani",
       "no": 19
+    },
+    {
+      "playerId": "shurandy-sambo",
+      "no": 20
     },
     {
       "playerId": "aaron-ramsey",
@@ -103,8 +119,16 @@
       "no": 30
     },
     {
+      "playerId": "mike-tresor",
+      "no": 31
+    },
+    {
       "playerId": "jaydon-banel",
       "no": 34
+    },
+    {
+      "playerId": "ashley-barnes",
+      "no": 35
     },
     {
       "playerId": "gregoire-coudert",
@@ -113,6 +137,10 @@
     {
       "playerId": "igor-julio",
       "no": 44
+    },
+    {
+      "playerId": "michael-obafemi",
+      "no": 45
     },
     {
       "playerId": "enock-agyei",

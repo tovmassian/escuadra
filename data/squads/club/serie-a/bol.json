@@ -10,7 +10,7 @@
     "bands": ["#A6192E", "#12264F"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Bologna_F.C._1909",
   "members": [
     {
@@ -70,6 +70,10 @@
       "no": 17
     },
     {
+      "playerId": "marco-libra",
+      "no": 18
+    },
+    {
       "playerId": "lewis-ferguson",
       "no": 19
     },
@@ -105,6 +109,10 @@
     {
       "playerId": "juan-miranda",
       "no": 33
+    },
+    {
+      "playerId": "matteo-darmian",
+      "no": 36
     },
     {
       "playerId": "martin-vitik",

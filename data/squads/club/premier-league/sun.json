@@ -10,7 +10,7 @@
     "bands": ["#EB172B", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Sunderland_A.F.C.",
   "members": [
     {
@@ -119,16 +119,16 @@
       "no": 39
     },
     {
-      "playerId": "aji-alese",
-      "no": 42
-    },
-    {
       "playerId": "abdoullah-ba",
       "no": 46
     },
     {
       "playerId": "juan-riquelme-angulo",
-      "no": null
+      "no": 50
+    },
+    {
+      "playerId": "timur-tutyerov",
+      "no": 57
     }
   ]
 }

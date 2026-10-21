@@ -10,15 +10,15 @@
     "bands": ["#FFFFFF", "#0B4EA2", "#EE1C25"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Slovakia_national_football_team",
   "members": [
     {
-      "playerId": "lubomir-belko",
+      "playerId": "martin-dubravka",
       "no": 1
     },
     {
-      "playerId": "peter-pekarik",
+      "playerId": "ivan-mesik",
       "no": 2
     },
     {
@@ -38,7 +38,7 @@
       "no": 6
     },
     {
-      "playerId": "tomas-suslov",
+      "playerId": "leo-sauer",
       "no": 7
     },
     {
@@ -50,19 +50,23 @@
       "no": 9
     },
     {
-      "playerId": "laszlo-benes",
+      "playerId": "tomas-suslov",
       "no": 10
     },
     {
-      "playerId": "roland-galcik",
+      "playerId": "tomas-bobcek",
       "no": 11
     },
     {
-      "playerId": "jakub-surovcik",
+      "playerId": "dominik-takac",
       "no": 12
     },
     {
-      "playerId": "mario-sauer",
+      "playerId": "adrian-kapralik",
+      "no": 13
+    },
+    {
+      "playerId": "milan-skriniar",
       "no": 14
     },
     {
@@ -70,7 +74,7 @@
       "no": 15
     },
     {
-      "playerId": "adam-obert",
+      "playerId": "hancko",
       "no": 16
     },
     {
@@ -78,51 +82,55 @@
       "no": 17
     },
     {
-      "playerId": "artur-gajdos",
+      "playerId": "ivan-schranz",
       "no": 18
     },
     {
-      "playerId": "david-krcik",
+      "playerId": "tomas-rigo",
       "no": 19
     },
     {
-      "playerId": "adrian-kapralik",
+      "playerId": "david-duris",
       "no": 20
     },
     {
-      "playerId": "matus-bero",
+      "playerId": "erik-prekop",
       "no": 21
     },
     {
-      "playerId": "peter-kovacik",
+      "playerId": "stanislav-lobotka",
       "no": 22
     },
     {
-      "playerId": "dominik-takac",
+      "playerId": "dominik-greif",
       "no": 23
     },
     {
-      "playerId": "michal-fasko",
-      "no": 24
-    },
-    {
-      "playerId": "krisztian-bari",
-      "no": 25
+      "playerId": "adam-obert",
+      "no": null
     },
     {
       "playerId": "hugo-pavek",
-      "no": 26
-    },
-    {
-      "playerId": "marek-rodak",
       "no": null
     },
     {
-      "playerId": "roman-cerepkai",
+      "playerId": "jakub-surovcik",
       "no": null
     },
     {
-      "playerId": "tomas-bobcek",
+      "playerId": "mario-sauer",
+      "no": null
+    },
+    {
+      "playerId": "matus-bero",
+      "no": null
+    },
+    {
+      "playerId": "michal-fasko",
+      "no": null
+    },
+    {
+      "playerId": "nino-marcelli",
       "no": null
     }
   ]

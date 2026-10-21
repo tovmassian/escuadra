@@ -10,7 +10,7 @@
     "bands": ["#FFD400", "#00246B"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Hellas_Verona_F.C.",
   "members": [
     {
@@ -18,12 +18,12 @@
       "no": 1
     },
     {
-      "playerId": "daniel-oyegoke",
-      "no": 2
-    },
-    {
       "playerId": "martin-frese",
       "no": 3
+    },
+    {
+      "playerId": "gabriele-zappa",
+      "no": 4
     },
     {
       "playerId": "andrias-edmundsson",
@@ -99,10 +99,6 @@
       "no": 28
     },
     {
-      "playerId": "charlys",
-      "no": 31
-    },
-    {
       "playerId": "noe-mael-tagne",
       "no": 33
     },
@@ -123,8 +119,8 @@
       "no": 38
     },
     {
-      "playerId": "arthur-borghi",
-      "no": 47
+      "playerId": "edoardo-iannoni",
+      "no": 44
     },
     {
       "playerId": "seid-korac",
@@ -143,12 +139,8 @@
       "no": 79
     },
     {
-      "playerId": "ioan-vermesan",
-      "no": 90
-    },
-    {
-      "playerId": "juan-manuel-cruz",
-      "no": null
+      "playerId": "caleb-ekuban",
+      "no": 81
     }
   ]
 }

@@ -10,7 +10,7 @@
     "bands": ["#000000", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Juventus_F.C.",
   "members": [
     {
@@ -125,6 +125,10 @@
     {
       "playerId": "juan-cabal",
       "no": 32
+    },
+    {
+      "playerId": "neto-2",
+      "no": 33
     }
   ]
 }

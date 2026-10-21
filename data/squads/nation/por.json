@@ -11,7 +11,7 @@
     "orientation": "vertical",
     "weights": [2, 3]
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Portugal_national_football_team",
   "members": [
     {
@@ -19,7 +19,7 @@
       "no": 1
     },
     {
-      "playerId": "nelson-semedo",
+      "playerId": "diogo-dalot",
       "no": 2
     },
     {
@@ -31,17 +31,16 @@
       "no": 4
     },
     {
-      "playerId": "diogo-dalot",
+      "playerId": "nuno-tavares",
       "no": 5
     },
     {
-      "playerId": "matheus-nunes",
+      "playerId": "joao-palhinha",
       "no": 6
     },
     {
-      "playerId": "cristiano-ronaldo",
-      "no": 7,
-      "captain": true
+      "playerId": "rafael-leao",
+      "no": 7
     },
     {
       "playerId": "bruno-fernandes",
@@ -60,7 +59,7 @@
       "no": 11
     },
     {
-      "playerId": "jose-sa",
+      "playerId": "rui-silva",
       "no": 12
     },
     {
@@ -68,7 +67,7 @@
       "no": 13
     },
     {
-      "playerId": "goncalo-inacio",
+      "playerId": "francisco-conceicao",
       "no": 14
     },
     {
@@ -80,15 +79,15 @@
       "no": 16
     },
     {
-      "playerId": "rafael-leao",
+      "playerId": "pedro-neto",
       "no": 17
     },
     {
-      "playerId": "pedro-neto",
+      "playerId": "fabio-silva",
       "no": 18
     },
     {
-      "playerId": "guedes",
+      "playerId": "mendes",
       "no": 19
     },
     {
@@ -100,7 +99,7 @@
       "no": 21
     },
     {
-      "playerId": "rui-silva",
+      "playerId": "samuel-soares",
       "no": 22
     },
     {
@@ -108,16 +107,8 @@
       "no": 23
     },
     {
-      "playerId": "samu-costa",
-      "no": 24
-    },
-    {
-      "playerId": "mendes",
-      "no": 25
-    },
-    {
-      "playerId": "francisco-conceicao",
-      "no": 26
+      "playerId": "goncalo-inacio",
+      "no": null
     }
   ]
 }

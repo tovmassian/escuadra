@@ -10,9 +10,13 @@
     "bands": ["#00205B", "#000000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Pisa_S.C.",
   "members": [
+    {
+      "playerId": "simone-scuffet",
+      "no": 1
+    },
     {
       "playerId": "rosen-bozhinov",
       "no": 2
@@ -35,12 +39,8 @@
       "no": 7
     },
     {
-      "playerId": "malthe-hojholt",
+      "playerId": "filippo-pittarello",
       "no": 8
-    },
-    {
-      "playerId": "henrik-meister",
-      "no": 9
     },
     {
       "playerId": "matteo-tramoni",
@@ -67,10 +67,6 @@
       "no": 17
     },
     {
-      "playerId": "nicholas-bonfanti",
-      "no": 18
-    },
-    {
       "playerId": "tomas-esteves",
       "no": 19
     },
@@ -89,10 +85,6 @@
     {
       "playerId": "francesco-coppola",
       "no": 26
-    },
-    {
-      "playerId": "jeremy-mbambi",
-      "no": 27
     },
     {
       "playerId": "omar-correia",
@@ -131,20 +123,12 @@
       "no": 72
     },
     {
+      "playerId": "elia-giani",
+      "no": 73
+    },
+    {
       "playerId": "alessandro-confente",
       "no": 98
-    },
-    {
-      "playerId": "elia-giani",
-      "no": null
-    },
-    {
-      "playerId": "emanuel-vignato",
-      "no": null
-    },
-    {
-      "playerId": "simone-scuffet",
-      "no": null
     }
   ]
 }
