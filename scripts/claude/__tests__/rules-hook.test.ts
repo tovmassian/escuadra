@@ -19,13 +19,14 @@ function project(): string {
   return root;
 }
 
-function run(root: string, stdin: string): string {
-  return execFileSync('node', [HOOK], {
-    input: stdin,
-    env: { ...process.env, CLAUDE_PROJECT_DIR: root },
-    encoding: 'utf8',
-  });
+function run(root: string | undefined, stdin: string): string {
+  const env = { ...process.env };
+  delete env.CLAUDE_PROJECT_DIR;
+  if (root) env.CLAUDE_PROJECT_DIR = root;
+  return execFileSync('node', [HOOK], { input: stdin, env, encoding: 'utf8' });
 }
+
+const VIEWS = (rule: string) => `---\npaths:\n  - "lib/*View.ts"\n---\n\n# Views\n\n${rule}\n`;
 
 const write = (filePath: string) =>
   JSON.stringify({
@@ -57,5 +58,46 @@ describe('rules-hook', () => {
     writeFileSync(join(root, '.claude/rules/broken.md'), '---\npaths:\n  - **/*.json\n---\n');
     expect(run(root, 'not json')).toBe('');
     expect(run(root, write(join(root, 'lib/newView.ts')))).toBe('');
+  });
+
+  // The fixtures above have no .git, so they exercise the CLAUDE_PROJECT_DIR fallback;
+  // the tests below give the roots a .git entry, as a real checkout has.
+  it('takes the root from the target when a session writes inside a nested worktree', () => {
+    const outer = mkdtempSync(join(tmpdir(), 'rules-hook-outer-'));
+    mkdirSync(join(outer, '.git'));
+    mkdirSync(join(outer, '.claude/rules'), { recursive: true });
+    writeFileSync(join(outer, '.claude/rules/views.md'), VIEWS('Outer views.'));
+    writeFileSync(
+      join(outer, '.claude/rules/instructions.md'),
+      '---\npaths:\n  - ".claude/**"\n---\n\n# Instructions\n\nInstructions rule.\n',
+    );
+    const tree = join(outer, '.claude/worktrees/x');
+    mkdirSync(join(tree, '.claude/rules'), { recursive: true });
+    mkdirSync(join(tree, 'lib'));
+    writeFileSync(join(tree, '.git'), 'gitdir: ../../../.git/worktrees/x\n');
+    writeFileSync(join(tree, '.claude/rules/views.md'), VIEWS('Worktree views.'));
+    const context = JSON.parse(run(outer, write(join(tree, 'lib/newView.ts')))).hookSpecificOutput
+      .additionalContext;
+    expect(context).toContain('Worktree views.');
+    expect(context).not.toContain('Outer views.');
+    expect(context).not.toContain('Instructions rule.');
+  });
+
+  it('says nothing for a target outside the root', () => {
+    const root = project();
+    mkdirSync(join(root, '.git'));
+    const other = mkdtempSync(join(tmpdir(), 'rules-hook-other-'));
+    expect(run(root, write(join(other, 'lib/newView.ts')))).toBe('');
+  });
+
+  it('falls back to input.cwd when CLAUDE_PROJECT_DIR is unset and no .git is found', () => {
+    const root = project();
+    const stdin = JSON.stringify({
+      cwd: root,
+      tool_name: 'Write',
+      tool_input: { file_path: join(root, 'lib/newView.ts'), content: '' },
+    });
+    const out = JSON.parse(run(undefined, stdin));
+    expect(out.hookSpecificOutput.additionalContext).toContain('Views are pure.');
   });
 });

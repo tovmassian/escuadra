@@ -3,8 +3,8 @@
 // a rule's frontmatter, and an unquoted glob starting with `*` breaks the YAML, after which
 // the rule loads in every session; so the parser accepts double-quoted globs and nothing
 // else (docs/superpowers/specs/2026-10-21-claude-rules-design.md).
-import { readdirSync, readFileSync } from 'node:fs';
-import { join, matchesGlob } from 'node:path';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { dirname, join, matchesGlob } from 'node:path';
 
 export interface Rule {
   /** The rule's file, relative to the repository root. */
@@ -56,4 +56,17 @@ export function readRules(root: string): Rule[] {
     .map((name) => `.claude/rules/${name.split('\\').join('/')}`)
     .sort()
     .map((file) => parseRule(file, readFileSync(join(root, file), 'utf8')));
+}
+
+/**
+ * The repository a file belongs to: the nearest ancestor holding a `.git` entry (a directory in
+ * a checkout, a file in a worktree), or null. Starts at the file's directory, which a new file
+ * may not have yet. A session in the main checkout that writes inside `.claude/worktrees/<name>/`
+ * must read that worktree's rules, not the checkout's.
+ */
+export function findRepoRoot(target: string): string | null {
+  for (let dir = dirname(target); ; dir = dirname(dir)) {
+    if (existsSync(join(dir, '.git'))) return dir;
+    if (dirname(dir) === dir) return null;
+  }
 }

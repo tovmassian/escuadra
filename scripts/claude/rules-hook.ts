@@ -6,7 +6,7 @@
 // never block a Write.
 import { existsSync, readFileSync } from 'node:fs';
 import { relative, sep } from 'node:path';
-import { contextForNewFile, readRules } from './rules.ts';
+import { contextForNewFile, findRepoRoot, readRules } from './rules.ts';
 
 interface HookInput {
   cwd?: string;
@@ -16,10 +16,11 @@ interface HookInput {
 try {
   const input = JSON.parse(readFileSync(0, 'utf8')) as HookInput;
   const target = input.tool_input?.file_path;
-  const root = process.env.CLAUDE_PROJECT_DIR ?? input.cwd;
+  const root = (target && findRepoRoot(target)) ?? process.env.CLAUDE_PROJECT_DIR ?? input.cwd;
   if (target && root && !existsSync(target)) {
     const path = relative(root, target).split(sep).join('/');
-    const context = path.startsWith('..') ? null : contextForNewFile(path, readRules(root));
+    const context =
+      path === '..' || path.startsWith('../') ? null : contextForNewFile(path, readRules(root));
     if (context) {
       process.stdout.write(
         JSON.stringify({
