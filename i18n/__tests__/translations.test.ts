@@ -116,6 +116,7 @@ const FACTS: Record<Language, Facts> = {
       MAC: 'Macao',
       MYA: 'Birmania',
       PLE: 'Palestina',
+      QAT: 'Qatar',
       TAH: 'Tahití',
       TLS: 'Timor Oriental',
     },

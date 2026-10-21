@@ -809,7 +809,7 @@ export const COUNTRY_NAMES: Record<SupportedLanguage, CountryNames> = {
     POR: 'Portugal',
     PRK: 'Corea del Norte',
     PUR: 'Puerto Rico',
-    QAT: 'Catar',
+    QAT: 'Qatar',
     ROU: 'Rumanía',
     RSA: 'Sudáfrica',
     RUS: 'Rusia',

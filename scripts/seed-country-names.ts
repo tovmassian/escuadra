@@ -249,6 +249,7 @@ const HAND_WRITTEN: Record<
     MAC: 'Macao',
     MYA: 'Birmania',
     PLE: 'Palestina',
+    QAT: 'Qatar',
     TAH: 'Tahití',
     TLS: 'Timor Oriental',
   },
