@@ -125,8 +125,9 @@ export interface Squad {
   name: string;
   season: string;
   /** The team's real identity colours (hex). Content, not a design-system
-   *  choice — see CLAUDE.md's colour rule. Never invented or rotated; the
-   *  club/nation's actual colours, sourced same as any other squad fact. */
+   *  choice — see CLAUDE.md guardrail 5 and .claude/rules/team-identity.md.
+   *  Never invented or rotated; the club/nation's actual colours, sourced
+   *  same as any other squad fact. */
   primaryColor: string;
   secondaryColor: string;
   verified: boolean; // false = not fact-checked
