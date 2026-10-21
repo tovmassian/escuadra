@@ -17,15 +17,11 @@ store build — and how to take one back. The design behind it is
 equals the fingerprint of the commit it was published from, and a locked release branch
 never changes its fingerprint.
 
-| Version    | Platform | Build          | Runtime    | Branch          | State                           |
-| ---------- | -------- | -------------- | ---------- | --------------- | ------------------------------- |
-| 1.0.0      | iOS      | 3 · `ef36adae` | `8b8b8840` | `release/1.0.0` | locked · live on the App Store  |
-| 1.0.0      | Android  | 3 · `1973200b` | `a616db89` | `release/1.0.0` | locked · Play closed test (#49) |
-| next (TBD) | both     | —              | —          | not cut yet     | in development on `main`        |
-
-Keep this table current whenever a build is cut or a store status changes. Play's
-12-tester, 14-day closed test is a one-time gate before a new app's first production
-release; later updates go straight to review.
+**Where things stand.** What each version shipped: [`CHANGELOG.md`](../CHANGELOG.md).
+Which builds are live, and on which runtime: EAS
+(`npx eas-cli build:list --platform ios --build-profile production --status finished --limit 5`)
+and the store consoles. A version in progress: its milestone and its release issue. None
+of it is written here, because a copy goes stale.
 
 ## How an update reaches a device
 
@@ -178,25 +174,33 @@ A new version from `main`:
    `main` by PR.
 2. Cut the branch: `git push origin origin/main:refs/heads/release/X.Y.Z`. Fixes found
    from here on go into it by PR and on to `main` by cherry-pick.
-3. Only if the release changes what leaves the device (guardrail 4 in `CLAUDE.md`):
+3. On `main`, write the version's section of [`CHANGELOG.md`](../CHANGELOG.md) from the
+   milestone's merged PRs (`gh pr list --state merged --search "milestone:vX.Y.Z"`), and
+   pick it to the branch.
+4. Only if the release changes what leaves the device (guardrail 4 in `CLAUDE.md`):
    - Give the version its own folder (`POLICY_VERSION` and `POLICY_DIR` in
      `scripts/privacy-pages.ts`, whose comment says what the superseded folder gets), then
      generate and publish it before the build.
    - When the builds reach the stores, update App Privacy and Data safety, and move each
-     store's privacy URL to the new folder at the same moment: Play when step 4 uploads
-     the build, Apple before step 5's Submit for Review.
+     store's privacy URL to the new folder at the same moment: Play when step 5 uploads
+     the build, Apple before step 6's Submit for Review.
    - Point the site's own Privacy nav link at the new folder once every live store
      ships the version.
-4. **Actions → store-build**: `platforms: both`, `profile: production`, `submit` on. Both
+5. **Actions → store-build**: `platforms: both`, `profile: production`, `submit` on. Both
    platforms build from one commit; each job checks the built runtime, opens the freeze
    and lists what's left.
-5. iOS: Submit for Review in App Store Connect. Android: promote the build in Play
-   Console. Close each freeze once approved, and update [Start here](#start-here).
+6. iOS: Submit for Review in App Store Connect. Android: promote the build in Play
+   Console. Close each freeze once approved.
+   Then tag the commit the build came from (its `store-build` run names it) and publish its
+   notes: `git tag vX.Y.Z <commit> && git push origin vX.Y.Z`, then
+   `gh release create vX.Y.Z --title X.Y.Z --notes-file <the version's CHANGELOG section>`.
+   No workflow runs on tags. Play's 12-tester, 14-day closed test gates only a new app's
+   first production release; later updates go straight to review.
 
 A runtime-changing fix to a released version (1.0.1):
 
 1. `git push origin origin/release/1.0.0:refs/heads/release/1.0.1`
-2. A PR into `release/1.0.1` with the fix and `app.json` at `1.0.1`.
+2. A PR into `release/1.0.1` with the fix, `app.json` at `1.0.1` and the version's `CHANGELOG.md` section.
 3. `store-build` as above, then take the fix to `main`.
 
 `store-build` refuses a production build when `app.json` doesn't match the branch, when the
