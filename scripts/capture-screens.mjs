@@ -216,8 +216,8 @@ const L3_THIRD_PART_SHOTS = [
   {
     file: '08-question-l3',
     path: `/play/esp/3?seed=${SEED}`,
-    name: 'Ferran Torres',
-    position: 'FW',
+    name: 'Robin Le Normand',
+    position: 'DF',
   },
   {
     file: '08-question-l3-nationality',
@@ -257,38 +257,38 @@ async function captureLevel3ThirdPart(capture, shot) {
 
 /** The correct answer to each question — a flawless round. */
 const ROUND_ALL_CORRECT = [
-  'Ferran Torres',
-  'Pedri',
-  'Borja Iglesias',
-  'Nico Williams',
-  'Fabián Ruiz',
+  'Robin Le Normand',
+  'Víctor Muñoz',
+  'Josep Martínez',
   'Rodri',
-  'Eric García',
-  'Álex Grimaldo',
-  'Gavi',
-  'Pedro Porro',
+  'Roberto Fernández',
+  'Mikel Merino',
+  'Aymeric Laporte',
+  'Dean Huijsen',
+  'Dani Olmo',
+  'Iván Fresneda',
 ];
 
 /** The same round with the last question deliberately missed — 9/10. */
-const ROUND_ONE_MISS = [...ROUND_ALL_CORRECT.slice(0, -1), 'Marc Pubill'];
+const ROUND_ONE_MISS = [...ROUND_ALL_CORRECT.slice(0, -1), 'Dean Huijsen'];
 
 /**
- * The first listed option of each question, which lands 2/10. This is the
+ * The first listed option of each question, which lands 1/10. This is the
  * round the failed-tier capture has always shown — it used to be produced by
  * blindly clicking the topmost option — so it stays spelled out here to keep
  * `09-results.png` from moving under an unrelated refactor.
  */
 const ROUND_FIRST_OPTION = [
-  'Ferran Torres',
-  'Gavi',
-  'Nico Williams',
-  'Mikel Oyarzabal',
-  'Rodri',
-  'Marcos Llorente',
   'Marc Cucurella',
-  'Pau Cubarsí',
-  'Gavi',
-  'Marc Pubill',
+  'Roberto Fernández',
+  'Unai Simón',
+  'Dani Olmo',
+  'Lamine Yamal',
+  'Fermín López',
+  'Robin Le Normand',
+  'Iván Fresneda',
+  'Álex Baena',
+  'Iván Fresneda',
 ];
 
 // `resultTier` splits results three ways and each way is a different screen,
