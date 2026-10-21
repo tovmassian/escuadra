@@ -132,6 +132,9 @@ commit …)` line. An admin may merge a PR into `main` past a red check; nobody 
    anything that belongs to the release only (a patch version's `app.json`), then merge. On
    a conflict it opens nothing and comments the commands instead: resolve them on `main`,
    where nothing ships.
+7. Add the change's line to its version's section of `CHANGELOG.md`, under the category
+   that fits and with the date it shipped: in the fix's own PR when the release branch has
+   `CHANGELOG.md`, otherwise in the `pick-to-main` PR on `main`.
 
 ### Release one platform first, or publish later
 
@@ -193,14 +196,18 @@ A new version from `main`:
    Console. Close each freeze once approved.
    Then tag the commit the build came from (its `store-build` run names it) and publish its
    notes: `git tag vX.Y.Z <commit> && git push origin vX.Y.Z`, then
-   `gh release create vX.Y.Z --title X.Y.Z --notes-file <the version's CHANGELOG section>`.
+   `awk '/^## \[X.Y.Z\]/{f=1;next} /^## \[/{f=0} f' CHANGELOG.md > "$RUNNER_TEMP/notes.md"`
+   (locally, any temp path) and
+   `gh release create vX.Y.Z --title X.Y.Z --notes-file "$RUNNER_TEMP/notes.md"`.
    No workflow runs on tags. Play's 12-tester, 14-day closed test gates only a new app's
    first production release; later updates go straight to review.
 
 A runtime-changing fix to a released version (1.0.1):
 
 1. `git push origin origin/release/1.0.0:refs/heads/release/1.0.1`
-2. A PR into `release/1.0.1` with the fix, `app.json` at `1.0.1` and the version's `CHANGELOG.md` section.
+2. A PR into `release/1.0.1` with the fix and `app.json` at `1.0.1`. The version's
+   `CHANGELOG.md` section goes in that PR when `release/1.0.0` has a `CHANGELOG.md`,
+   otherwise on `main` with the pick.
 3. `store-build` as above, then take the fix to `main`.
 
 `store-build` refuses a production build when `app.json` doesn't match the branch, when the

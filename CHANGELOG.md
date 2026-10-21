@@ -6,7 +6,8 @@ What each version of Escuadra shipped, newest first, in the form of
 A version's section is written when its release branch is cut, from the PRs in its
 milestone ([`docs/release.md`](docs/release.md#cut-a-release)). An over-the-air change adds
 its line to its version's section, under the category that fits and with the date it
-shipped, in the change's own PR.
+shipped, in the change's own PR, or on `main` with its pick when the release branch has no
+`CHANGELOG.md` ([`docs/release.md`](docs/release.md#ship-a-js-fix)).
 Work on `main` that no release branch holds yet is not listed: its milestone is.
 
 ## [1.0.1] - 2026-10-11
