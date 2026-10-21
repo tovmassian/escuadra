@@ -1,3 +1,6 @@
+// scripts/claude/__tests__/rules.test.ts
+// The rule parser, the glob matcher and the Write hook's context for a new file
+// (scripts/claude/rules.ts).
 import { mkdirSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';

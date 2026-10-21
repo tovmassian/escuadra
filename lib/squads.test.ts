@@ -1,14 +1,12 @@
 import { describe, expect, it } from 'vitest';
 import { getRoster, getSquad, listSquads } from './squads';
 
-// Squad data is either LLM-generated or research-backed
-// (.claude/rules/squad-data.md) — either way, shirt numbers and current
-// clubs are the fields most likely to drift or be wrong. These tests don't
-// verify real-world accuracy, only internal consistency: every reference
-// resolves and every squad has what the question engine needs from it.
-// `verified` is a per-squad editorial claim set by whoever last fact-checked
-// that squad's data, not something these tests can adjudicate — never flip it
-// to true without a real source check.
+// Shirt numbers and current clubs are the fields most likely to drift or be
+// wrong (.claude/rules/squad-data.md). These tests don't verify real-world
+// accuracy, only internal consistency: every reference resolves and every
+// squad has what the question engine needs from it. `verified` is an output of the pipeline that wrote the squad file, never set
+// by hand (.claude/rules/squad-data.md), and not something these tests can
+// adjudicate.
 describe('squad data integrity', () => {
   const squads = listSquads();
 

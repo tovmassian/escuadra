@@ -103,7 +103,8 @@ describe('citations', () => {
   const sources = FILES.filter(
     (file) =>
       /\.(ts|tsx|js|mjs|md|json|ya?ml)$/.test(file) &&
-      !file.startsWith('scripts/claude/__tests__/') &&
+      file !== 'scripts/claude/__tests__/rules.test.ts' &&
+      file !== 'scripts/claude/__tests__/rules-hook.test.ts' &&
       !file.startsWith('docs/superpowers/') &&
       !file.startsWith('.superpowers/') &&
       !file.startsWith('data/') &&
