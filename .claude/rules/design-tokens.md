@@ -33,7 +33,7 @@ both or to neither.
 preference-to-name resolver, kept React-free so Vitest (which runs in a node
 environment and cannot load `react-native`) can test it; `theme/useTheme.ts`
 exposes `useThemeName()` and `useThemeColors()`. The persisted preference
-lives in `stores/progress.ts` — it is not a third store (`CLAUDE.md`, Architecture rules).
+lives in `stores/progress.ts` — it is not a third store (`stores.md`).
 
 ## Motion
 
