@@ -18,8 +18,8 @@ function storedNationalities(): string[] {
 }
 
 describe('fifa-countries table', () => {
-  it('holds all 211 FIFA members, the four non-FIFA codes seen in club wikitext and one second code', () => {
-    expect(Object.keys(FIFA_COUNTRIES)).toHaveLength(216);
+  it('holds all 211 FIFA members, the four non-FIFA codes seen in club wikitext and five second codes', () => {
+    expect(Object.keys(FIFA_COUNTRIES)).toHaveLength(220);
     for (const code of ['GLP', 'MTQ', 'GUF', 'REU']) {
       expect(FIFA_COUNTRIES[code]).toBeTypeOf('string');
     }
@@ -30,10 +30,11 @@ describe('fifa-countries table', () => {
     expect(bad).toEqual([]);
   });
 
-  // Kosovo is the one country written two ways: most articles use KOS, while
-  // Freiburg's uses KVX, FIFA's own trigram. Both name one spelling, so
-  // nothing forks; any other pair is a copy error.
-  it('never maps two codes to the same country name, except Kosovo', () => {
+  // A second code is one Wikipedia's own flag templates accept for that
+  // country: Freiburg writes KVX (FIFA's) where most write KOS, and the
+  // October 2026 sweep found SPA, SLO, DRC and NGR (IOC-style). Each names the
+  // one spelling, so nothing forks; any other pair is a copy error.
+  it('never maps two codes to the same country name, except the known second codes', () => {
     const seen = new Map<string, string>();
     const collisions: string[] = [];
     for (const [code, country] of Object.entries(FIFA_COUNTRIES)) {
@@ -41,7 +42,13 @@ describe('fifa-countries table', () => {
       if (first !== undefined) collisions.push(`${country}: ${first} and ${code}`);
       else seen.set(country, code);
     }
-    expect(collisions).toEqual(['Kosovo: KOS and KVX']);
+    expect(collisions.sort()).toEqual([
+      'DR Congo: COD and DRC',
+      'Kosovo: KOS and KVX',
+      'Nigeria: NGA and NGR',
+      'Slovenia: SLO and SVN',
+      'Spain: ESP and SPA',
+    ]);
   });
 
   // The guard that keeps the table from forking a nationality string. If this

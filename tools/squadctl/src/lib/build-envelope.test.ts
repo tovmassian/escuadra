@@ -197,10 +197,10 @@ describe('buildEnvelope — flagged for review', () => {
     const { envelope } = build(
       club,
       `{{Fs player|no=1|nat=ESP|pos=GK|name=[[A Keeper]]}}
-{{football squad player|no=2|nat=ESP|pos=DF|name=[[B Back]]}}`,
+{{squad list player|no=2|nat=ESP|pos=DF|name=[[B Back]]}}`,
     );
     expect(envelope?.members).toHaveLength(1);
-    expect(envelope?.warnings.join()).toContain('football squad player');
+    expect(envelope?.warnings.join()).toContain('squad list player');
   });
 });
 

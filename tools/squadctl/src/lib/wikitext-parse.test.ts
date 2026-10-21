@@ -220,9 +220,21 @@ describe('parseSection — recent call-ups', () => {
 
 describe('parseSection — anomalies', () => {
   it('surfaces a player-ish template it does not recognise', () => {
-    const parsed = parseSection('{{football squad player|no=9|name=[[A B]]|pos=FW}}');
+    const parsed = parseSection('{{squad list player|no=9|name=[[A B]]|pos=FW}}');
     expect(parsed.rows).toEqual([]);
-    expect(parsed.unknownTemplates.map((t) => t.name)).toEqual(['football squad player']);
+    expect(parsed.unknownTemplates.map((t) => t.name)).toEqual(['squad list player']);
+  });
+
+  // `Fs player` is a redirect to Template:Football squad player, and
+  // Nottingham Forest's article switched to the full name in October 2026.
+  it('reads the full template name `Fs player` redirects to', () => {
+    const parsed = parseSection(
+      '{{football squad player|no=9|nat=NZL|pos=FW|name=[[Chris Wood (footballer, born 1991)|Chris Wood]]}}',
+    );
+    expect(parsed.unknownTemplates).toEqual([]);
+    expect(parsed.rows.map((r) => [r.no, r.name, r.title])).toEqual([
+      [9, 'Chris Wood', 'Chris Wood (footballer, born 1991)'],
+    ]);
   });
 
   it('ignores non-player templates without recording them', () => {

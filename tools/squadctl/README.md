@@ -784,7 +784,7 @@ npm run squadctl -- rename ederson-silva "Éderson Silva"
 ### `unknown-template`
 
 ```
-xxx: unrecognised player-ish template {{football squad player}} — parser needs teaching
+xxx: unrecognised player-ish template {{squad list player}} — parser needs teaching
 ```
 
 Not a data problem — a parser gap. The row was **not** parsed, so the squad is

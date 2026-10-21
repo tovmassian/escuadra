@@ -13,8 +13,10 @@
 // players born there are tagged with them. Guadeloupe is already in
 // `players.json`.
 //
-// Kosovo has two codes: articles write both KOS and KVX (FIFA's own), and
-// both map to the one spelling.
+// Some countries have a second code, one Wikipedia's flag templates also
+// accept: Kosovo's KVX (FIFA's own) beside KOS, and the IOC-style SPA, SLO,
+// DRC and NGR that club articles write for Spain, Slovenia, DR Congo and
+// Nigeria. Each maps to the one spelling.
 //
 // SPELLINGS ARE NOT FREE TO CHANGE. Where a country is already represented in
 // `players.json`, this table must use that exact spelling — `Ivory Coast` not
