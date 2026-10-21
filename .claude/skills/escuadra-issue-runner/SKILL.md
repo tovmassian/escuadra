@@ -1,6 +1,6 @@
 ---
 name: escuadra-issue-runner
-description: Use when asked to pick up, take, do, work on, continue or carry through an Escuadra GitHub issue by its number. Not for a question about an issue, or for opening one.
+description: Use when asked to pick up, take, do, work on, continue or carry through an Escuadra GitHub issue by its number, before running any command for it. Not for a question about an issue, or for opening one.
 ---
 
 # Escuadra issue runner
@@ -47,7 +47,7 @@ git status --short --branch
 
 `decision: ask` when any of these hold:
 
-1. The issue is closed.
+1. The issue is closed: ask whether anything is left to do, or whether to reopen it.
 2. The title carries `[TBC]`, or the issue leaves a choice to the owner ("the owner's
    decision", "decide the release route").
 3. The issue lists choices to settle before building (an "Open" section, a question to the
@@ -102,6 +102,9 @@ fill in every field the answers cannot change; only the ones they can change are
 
 ## 4. First step and execution
 
+The first row whose left column holds wins, whatever the size: an L issue with a spec starts
+with `writing-plans`, not `brainstorming`.
+
 | What exists for this issue  | first-step                                                   | execution          |
 | --------------------------- | ------------------------------------------------------------ | ------------------ |
 | a plan with work left       | the mode's skill, or `n/a` while the mode is asked           | the mode, or `ask` |
@@ -116,9 +119,10 @@ fill in every field the answers cannot change; only the ones they can change are
   `executing-plans` (`superpowers:executing-plans`).
 - **A bug** is a `fix` title or a `bug` label, and starts with systematic debugging even
   when the cause looks known.
-- **A spec exists** means writing the plan, not brainstorming the design again. A handoff is
-  not a spec or a plan, and neither is a spec section or plan written for other issues.
-- **An open PR** continues with the step its remaining work needs.
+- **A spec** is one the issue links or that covers it, even when the issue changes a section
+  of it. A handoff is not a spec or a plan, and neither is a plan written for other issues.
+- **An open PR** continues with the step its remaining work needs. On `proceed`,
+  `first-step` is always a skill, never `n/a`.
 
 ## 5. The triage block
 
@@ -139,7 +143,8 @@ first-step: <superpowers:brainstorming|writing-plans|subagent-driven-development
 ```
 
 Each line is `key: value`, the value one of the template's choices; a short note may follow
-in parentheses. For an L feature with a spec, no plan, and one open choice:
+in parentheses. `decision` follows from `questions`: `ask` when it lists one, `proceed` when
+it is `none`. For an L feature with a spec, no plan, and one open choice:
 
 ```triage
 issue: 9999

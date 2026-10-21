@@ -1,12 +1,12 @@
 {
   "number": 9006,
-  "title": "feat(picker): a clear button in the team search field",
+  "title": "feat(study): a back-to-top button on long squads",
   "state": "OPEN",
-  "body": "**Size:** S\n\nClearing the team picker's search takes a long backspace. Add a × button inside `components/SearchField.tsx` that empties the field and keeps the keyboard up. It is the picker's search field, CLAUDE.md guardrail 3's one exception, so nothing changes about answering.\n\n### Acceptance criteria\n\n- [ ] The × appears only when the field has text, and VoiceOver reads it as \"Clear search\"\n- [ ] `npm run check` passes",
+  "body": "**Size:** S\n\nGetting back to the top of a 26-player squad on Study takes several swipes. Show a small \"Back to top\" button at the bottom of `app/team/[squadId]/study.tsx` once the list has scrolled past its first screen; a tap scrolls the `FlatList` to the top, animated, and the button fades out.\n\n### Acceptance criteria\n\n- [ ] The button appears only past the first screen, in grid and list, and VoiceOver reads it as \"Back to top\"\n- [ ] Its fade stays under 300 ms\n- [ ] `npm run check` passes",
   "comments": [],
   "labels": ["enhancement"],
   "milestone": null,
   "size": "S",
-  "source": "synthetic",
+  "source": "synthetic; replaced 2026-10-21, since the main pin already has the clear button the first version asked for",
   "why": "An S feature on main with someone's uncommitted edit in the tree: a worktree keeps that edit safe."
 }

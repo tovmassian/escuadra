@@ -242,7 +242,7 @@ both arms. In substance:
 > This is a dry run in a disposable copy of the repository. Read `CLAUDE.md`
 > first: a real session would have it loaded. Do every read-only step you
 > would do. Make no change to the repository, its branches or worktrees, or
-> GitHub. If the request leads you to work on an issue, end your final message
+> GitHub. If the request leads you to work on an existing issue, end your final message
 > with the triage block, filled in; questions you would ask the owner go in
 > the block, with `decision: ask`. Otherwise answer and leave the block out.
 
