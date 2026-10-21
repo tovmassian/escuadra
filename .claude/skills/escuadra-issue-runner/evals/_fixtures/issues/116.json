@@ -1,0 +1,12 @@
+{
+  "number": 116,
+  "title": "chore(release): 2.0.0 — docs pass, store assets, version bump, release branch",
+  "state": "OPEN",
+  "body": "**Size:** M  \n**Spec:** `docs/superpowers/specs/2026-10-15-play-redesign-2-0-design.md`: §12, §14 item 6  \n**Depends on:** #111, #112, #113, #114, #115\n\nClose out 2.0.0: one consistency pass over the docs, the store assets for the 2.0 listing, the version bump and the release branch. Each earlier issue updates its own docs in its own PR; this issue checks that they agree.\n\n### Work\n\n- [ ] `CLAUDE.md`:\n  - \"Current state\" describes 2.0\n  - guardrail 1, the motion rule, Telemetry and the data model read as one consistent text\n- [ ] `design/SCREENS.md` matches the shipped screens\n- [ ] Assets for the 2.0 listing: `npm run shots`, `shots:store`, `shots:play` and `gen:play-assets`\n- [ ] Bump `app.json` to `2.0.0` on `main` by PR (`docs/release.md`, \"Cut a release\")\n- [ ] Cut `release/2.0.0` from `main`\n- [ ] Store build through the pipeline. Ask the owner before triggering it (EAS Free quota)\n- [ ] Work through `docs/superpowers/handoff/2026-10-16-2-0-redesign-handoff.md` (device checklist, its #116 notes, the owed Opus review of #114), then delete it in this issue's PR\n\n### Notes\n\n- The release order relative to the photo build (#60) is decided outside the spec. Every disclosure ships in whichever store build first contains its change (guardrail 4).\n- 2.0 adds native packages, so none of it goes over the air to 1.x.\n\n### Acceptance criteria\n\n- [ ] `release/2.0.0` exists, and its fingerprint is what the store build is built from\n- [ ] About text and `privacy.html` match word for word for the build that ships\n- [ ] App Privacy and Data safety answers match the binary\n\n\n",
+  "comments": [],
+  "labels": ["documentation", "release"],
+  "milestone": "v2.0.0",
+  "size": "M",
+  "source": "real snapshot 2026-10-16",
+  "why": "A release chore the 2.0 handoff covers; cutting a release branch needs the owner."
+}

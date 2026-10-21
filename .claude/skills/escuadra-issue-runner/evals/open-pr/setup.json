@@ -1,0 +1,39 @@
+{
+  "pins": {
+    "main": "deb2e3b9c589bf2c5619fe3a7b82866ef9415ebf",
+    "release/1.0.0": "d8f2d21bb9bb4bf3256e64d3ca06b785ad7bd20b"
+  },
+  "issues": ["issues/9008.json"],
+  "prs": [
+    {
+      "number": 9101,
+      "title": "fix(play): progress bar reaches 10 before Results (#9008)",
+      "state": "OPEN",
+      "headRefName": "fix/9008-progress-bar-last-step",
+      "baseRefName": "main",
+      "body": "Closes #9008\n\nThe bar now fills on the last verdict. Still to do: the test for level 3, and the device check."
+    }
+  ],
+  "commits": [],
+  "branches": [
+    {
+      "name": "fix/9008-progress-bar-last-step",
+      "from": "main",
+      "commits": [
+        {
+          "message": "fix(play): progress bar reaches 10 before Results (#9008)",
+          "files": [
+            {
+              "path": "lib/roundProgress.ts",
+              "content": "export function filledSteps(answered: number, total: number): number {\n  return Math.min(answered, total);\n}\n"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "checkout": {
+    "branch": "main"
+  },
+  "dirty": []
+}

@@ -489,6 +489,7 @@ format facts and `design/SCREENS.md` for what each captured file shows.
   fingerprint, release branches, rollback.
 - [`docs/license.md`](docs/license.md): licences — every shipped asset's, the
   photo licences accepted and refused, and how to change the list.
+- [`scripts/evals/README.md`](scripts/evals/README.md): evals: grading an agent's issue triage with and without the `escuadra-issue-runner` skill.
 
 `docs/mobile-dev-setup.md` was explicitly superseded by
 the setup walkthrough and should not come back. If the design and logo briefs are

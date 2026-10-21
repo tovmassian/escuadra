@@ -1,0 +1,12 @@
+{
+  "number": 9007,
+  "title": "feat(streak): streak badges on Results",
+  "state": "OPEN",
+  "body": "**Size:** L\n**Spec:** `docs/superpowers/specs/2026-10-01-streak-badges-design.md`\n**Plan:** `docs/superpowers/plans/2026-10-02-streak-badges.md`\n\nResults shows a badge for the round's longest run of right answers: 3 in a row, 5 in a row, and a la escuadra for all 10.\n\n### Work\n\n- [ ] Part 1: the badge model in `lib/streakBadges.ts`, pure, with tests\n- [ ] Part 2: the badge on Results, in `components/StreakChip.tsx`'s colours\n- [ ] Part 3: the share picture shows the badge\n\n### Acceptance criteria\n\n- [ ] Every badge is reachable on all three levels\n- [ ] `npm run check` passes",
+  "comments": [],
+  "labels": ["enhancement"],
+  "milestone": null,
+  "size": "L",
+  "source": "synthetic",
+  "why": "An L feature whose plan's part 1 is merged: progress comes from git, not the plan's checkboxes, and the execution question is asked."
+}

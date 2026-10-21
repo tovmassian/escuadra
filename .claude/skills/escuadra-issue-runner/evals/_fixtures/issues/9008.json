@@ -1,0 +1,12 @@
+{
+  "number": 9008,
+  "title": "fix(play): the progress bar skips from 9 to Results",
+  "state": "OPEN",
+  "body": "**Size:** S\n\nOn the tenth question `components/RoundProgress.tsx` still shows 9 filled steps when Results takes over, so the bar never reads 10 of 10.\n\n### Acceptance criteria\n\n- [ ] The bar shows 10 of 10 for the last question's verdict, on every level\n- [ ] `npm run check` passes",
+  "comments": [],
+  "labels": ["bug"],
+  "milestone": null,
+  "size": "S",
+  "source": "synthetic",
+  "why": "An open PR already carries the work: the skill reuses its branch and makes no second one."
+}

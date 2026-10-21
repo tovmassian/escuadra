@@ -1,0 +1,12 @@
+{
+  "number": 9000,
+  "title": "chore: sandbox smoke issue",
+  "state": "OPEN",
+  "body": "Fixture for `sandbox-smoke`: it checks the eval sandbox, not the app.",
+  "comments": [],
+  "labels": [],
+  "milestone": null,
+  "size": "XS",
+  "source": "synthetic",
+  "why": "The sandbox smoke case reads it through the fake gh."
+}

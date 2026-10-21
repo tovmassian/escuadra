@@ -1,0 +1,12 @@
+{
+  "number": 9009,
+  "title": "fix(theme): the theme toggle says Dark while it follows the system",
+  "state": "OPEN",
+  "body": "With the preference on System and the phone in dark mode, `components/ThemeToggle.tsx` labels itself \"Dark\", so it is not clear the app is following the system.\n\n### Acceptance criteria\n\n- [ ] The toggle reads System whenever the preference is System\n- [ ] `npm run check` passes",
+  "comments": [],
+  "labels": ["bug"],
+  "milestone": null,
+  "size": null,
+  "source": "synthetic",
+  "why": "No Size on the board or in the body: the skill estimates one, says so, and proceeds."
+}

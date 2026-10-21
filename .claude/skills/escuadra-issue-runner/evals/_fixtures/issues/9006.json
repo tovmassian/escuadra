@@ -1,0 +1,12 @@
+{
+  "number": 9006,
+  "title": "feat(picker): a clear button in the team search field",
+  "state": "OPEN",
+  "body": "**Size:** S\n\nClearing the team picker's search takes a long backspace. Add a × button inside `components/SearchField.tsx` that empties the field and keeps the keyboard up. It is the picker's search field, CLAUDE.md guardrail 3's one exception, so nothing changes about answering.\n\n### Acceptance criteria\n\n- [ ] The × appears only when the field has text, and VoiceOver reads it as \"Clear search\"\n- [ ] `npm run check` passes",
+  "comments": [],
+  "labels": ["enhancement"],
+  "milestone": null,
+  "size": "S",
+  "source": "synthetic",
+  "why": "An S feature on main with someone's uncommitted edit in the tree: a worktree keeps that edit safe."
+}

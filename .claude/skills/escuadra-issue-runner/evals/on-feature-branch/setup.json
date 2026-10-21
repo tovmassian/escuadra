@@ -1,0 +1,30 @@
+{
+  "pins": {
+    "main": "deb2e3b9c589bf2c5619fe3a7b82866ef9415ebf",
+    "release/1.0.0": "d8f2d21bb9bb4bf3256e64d3ca06b785ad7bd20b"
+  },
+  "issues": ["issues/9005.json"],
+  "prs": [],
+  "commits": [],
+  "branches": [
+    {
+      "name": "feat/9050-onboarding-tips",
+      "from": "main",
+      "commits": [
+        {
+          "message": "feat(home): onboarding tips, first pass (#9050)",
+          "files": [
+            {
+              "path": "lib/onboardingTips.ts",
+              "content": "export const ONBOARDING_TIPS = ['Pick a team', 'Play a round', 'Study your misses'];\n"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "checkout": {
+    "branch": "feat/9050-onboarding-tips"
+  },
+  "dirty": []
+}

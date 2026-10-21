@@ -1,0 +1,12 @@
+{
+  "number": 9002,
+  "title": "fix(progress): a best score set on the last question's auto-advance is lost on 1.0.0",
+  "state": "OPEN",
+  "body": "**Size:** S\n**Affects:** 1.0.0, live on the App Store.\n\nWhen the tenth answer is right and the round auto-advances to Results, the new best score is sometimes not saved: `stores/progress.ts` records it after the navigation, and a fast app switch drops the write.\n\n**Release route:** decided by the owner on 2026-10-14. JS-only, so it ships on `release/1.0.0` over the air, then `git cherry-pick -x` to `main`.\n\n### Work\n\n- [ ] Record the best score before Results mounts\n- [ ] A test in `stores/progress.test.ts`\n\n### Acceptance criteria\n\n- [ ] A best score set on the last question survives an immediate app switch\n- [ ] `npm run check` passes",
+  "comments": [],
+  "labels": ["bug"],
+  "milestone": null,
+  "size": "S",
+  "source": "synthetic",
+  "why": "A shipped-version fix asked for from main: its base differs from the current branch, so a worktree from release/1.0.0."
+}
