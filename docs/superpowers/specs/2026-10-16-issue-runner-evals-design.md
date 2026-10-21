@@ -1,6 +1,6 @@
 # escuadra-issue-runner and its evals
 
-**Status:** design, approved 2026-10-16. Issue:
+**Status:** approved 2026-10-16; built, with the results under Outcome. Issue:
 [#136](https://github.com/tovmassian/escuadra/issues/136). Two sub-projects,
 built in this order: the eval suite (§3–§9), then the skill written against it
 (§2, §10). The contract in §2 is the skill's specification; the evals encode
@@ -56,6 +56,75 @@ included the smoke case; it no longer does.
 The run was not kept, so the final messages behind the proceed cases' misses (a different
 decision, or a different line format) are not in the report; PR 2 starts with a `--keep`
 run of the `core` tag to read them.
+
+### GREEN (2026-10-21)
+
+Run on 2026-10-21 with Claude Code 2.1.278: `--full --runs 3 --ablation none`, a Sonnet
+agent, an Opus judge and the skill as merged, $17.66 estimated, 91 minutes. Every case
+reaches the 0.9 bar; the mean is 0.98, against the RED baseline's 0.79. 52 of the 57 runs
+pass on their own, and no run tried a GitHub write or changed git state.
+
+| Case                      | RED  | GREEN (3 runs) |
+| ------------------------- | ---- | -------------- |
+| `126-small-bug`           | 0.50 | 0.91           |
+| `129-large-spec`          | 0.72 | 1.00           |
+| `129-large-spec-subagent` | 0.61 | 1.00           |
+| `117-owner-decision`      | 0.91 | 1.00           |
+| `55-tbc`                  | 1.00 | 1.00           |
+| `59-gh-pages`             | 1.00 | 0.93           |
+| `116-release`             | 1.00 | 1.00           |
+| `115-closed`              | 0.73 | 0.93           |
+| `on-release-branch`       | 0.73 | 1.00           |
+| `shipped-fix-from-main`   | 0.53 | 0.93           |
+| `fingerprint-on-release`  | 1.00 | 1.00           |
+| `m-boundary`              | 0.73 | 1.00           |
+| `on-feature-branch`       | 0.93 | 0.93           |
+| `dirty-tree`              | 0.33 | 1.00           |
+| `plan-half-done`          | 0.83 | 1.00           |
+| `open-pr`                 | 0.60 | 1.00           |
+| `no-size`                 | 0.88 | 1.00           |
+| `neg-create-issue`        | 1.00 | 1.00           |
+| `neg-question`            | 1.00 | 1.00           |
+
+The delta is taken against the RED run above (one run, before the two suite fixes below)
+rather than a fresh without-skill arm: the owner chose the 57-session gate over the
+114-session one.
+
+**How it got there.** A kept `core` run of the stub, two single passes of the whole suite
+(12 then 16 of 19 cases passing) and the gate: about 105 Sonnet sessions, $33 estimated.
+What the traces showed, and the line in the skill that answers it:
+
+- `execution` filled with an implementation style when no plan runs, and the plan's mode
+  chosen without asking: `execution` is how a plan runs, and the mode is the owner's (gate 8).
+- Size read from the body, or from Status: `gh issue view --json projectItems` shows only
+  Status, so the skill gives the GraphQL query for the board's Size.
+- No run looked in `docs/superpowers/handoff/`: the milestone's handoff is a doc to list.
+- Questions about how to implement, how to reproduce, or whether to continue an open PR:
+  every question carries the gate it comes from (`[gate 3]`).
+- `decision: ask` with `questions: none`, written while stopping for the dry run: `decision`
+  follows from `questions`.
+- An L issue with a linked spec sent to `brainstorming`: the first-step row is chosen by what
+  exists, and a spec the issue links counts even when the issue rewrites a section of it.
+- The skill not invoked in 3 of 17 positive runs, which read `CLAUDE.md` and went straight
+  to `gh`: the description says when ("before running any command for it") and gives the
+  owner's phrasings. Quoted, since an unquoted ` #N` starts a YAML comment and cut it short; a
+  test now fails that.
+
+Two suite fixes, which apply to both arms: `#9006` asked for a clear button the main pin
+already has, so it is now a back-to-top button on Study; and the dry run's triage block is
+for an existing issue, since the baseline agent printed one for opening an issue.
+
+**Runner notes.** One judge result could not be reproduced: in the first single pass,
+`129-large-spec-subagent`'s block failed 3 of 3 votes, while six replays of the runner's
+judge prompt on the same text passed, and the case passed in every later run. The runner
+counts a vote as PASS only when the reply holds `PASS` and no `FAIL`. Run at concurrency 1
+on a claude.ai plan: at 3, a pass took 46 minutes instead of 30 and two runs timed out
+mid-turn.
+
+**Next round.** Three of the five runs that slipped in the gate wrote `decision: ask` with a
+question no gate covers ("proceed or hold?", and a Modal-or-library choice for #126). The
+counter, left out so that the skill merged is the one the gate ran: asking whether to proceed
+is never a question, since invoking the skill was the go-ahead.
 
 ## 1. Problem
 
