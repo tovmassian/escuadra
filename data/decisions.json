@@ -38,6 +38,11 @@
   ],
   "notInSquad": [
     {
+      "team": "sdn",
+      "title": "Abdelsamad Manen",
+      "reason": "owner, 2026-10-21: no article, and the row's pos=RW is no squad position"
+    },
+    {
       "team": "ver",
       "title": "Rafik Belghali",
       "reason": "transferred to Torino, who list him at #45 as of 2026-09-05; Verona's article still carries his old #7 and neither row is annotated as a loan"

@@ -203,3 +203,36 @@ describe('buildEnvelope — flagged for review', () => {
     expect(envelope?.warnings.join()).toContain('football squad player');
   });
 });
+
+describe('buildEnvelope — a row excluded by decision', () => {
+  // Sudan lists Abdelsamad Manen as pos=RW, which no squad position is, and
+  // the owner excluded him: the decision must reach the row before the
+  // position check fails the whole team.
+  const sudan = `{{nat fs g player|no=23|pos=RW|name=[[Abdelsamad Manen]]|club=[[Al-Zamala SC]]}}
+{{nat fs g player|no=1|pos=GK|name=[[A Keeper]]|club=[[Al-Hilal]]}}`;
+  const decision = { team: 'esp', title: 'Abdelsamad Manen', reason: 'no article; pos=RW' };
+
+  it('drops the row before validating it, and says why', () => {
+    const { envelope, failures } = buildEnvelope({
+      entry: nation,
+      sectionTitle: 'Current squad',
+      parsed: parseSection(sudan),
+      excluded: [decision],
+    });
+    expect(failures).toEqual([]);
+    expect(envelope?.members.map((m) => m.name)).toEqual(['A Keeper']);
+    expect(envelope?.warnings).toEqual([
+      'excluded by decision: Abdelsamad Manen (no article; pos=RW)',
+    ]);
+  });
+
+  it("ignores another team's decision", () => {
+    const { failures } = buildEnvelope({
+      entry: nation,
+      sectionTitle: 'Current squad',
+      parsed: parseSection(sudan),
+      excluded: [{ ...decision, team: 'sdn' }],
+    });
+    expect(failures.join()).toContain('not one of GK/DF/MF/FW');
+  });
+});

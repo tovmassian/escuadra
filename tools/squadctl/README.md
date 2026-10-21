@@ -338,7 +338,9 @@ npm run squadctl -- exclude <teamId> "<article title>" --reason "<why>"
 ```
 
 Records that a club's article lists a player who does not belong in that
-squad, and `apply` drops the row from then on.
+squad, and `fetch` drops the row from then on — before validating it, so a
+value in that row cannot fail the whole team (Sudan's `pos=RW`). `apply`
+honours it too, for envelopes fetched earlier.
 
 **A player belongs to exactly one club — the one they actually play for.** The
 club that owns the registration and collects the loan fee is irrelevant to the

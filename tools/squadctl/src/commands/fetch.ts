@@ -6,6 +6,7 @@ import { BaseCommand } from '../base-command.ts';
 import { colors } from '../lib/colors.ts';
 import { applyCommand, displayPath } from '../lib/hints.ts';
 import { buildEnvelope } from '../lib/build-envelope.ts';
+import { readDecisions } from '../lib/decisions.ts';
 import { validateRegistry, wikiTitleFromSource, type TeamRegistry } from '../lib/registry.ts';
 import { selectTeams } from '../lib/select.ts';
 import { WikiFetchError } from '../lib/http.ts';
@@ -67,6 +68,13 @@ export default class Fetch extends BaseCommand<FetchRunReport> {
       const title = wikiTitleFromSource(team.source);
       if (title !== null) clubNames.set(title, team.name);
     }
+    // `exclude` decisions reach the row here, before a value in it can fail
+    // the whole team.
+    const { decisions, problems } = readDecisions(this.dataDir);
+    if (problems.length > 0) {
+      this.error(`data/decisions.json is invalid:\n  ${problems.join('\n  ')}`, { exit: 5 });
+    }
+    const excluded = decisions.notInSquad ?? [];
     const { selected, missing } = selectTeams(registry, flags);
     if (missing.length > 0) this.error(`no registry entry for: ${missing.join(', ')}`, { exit: 5 });
     if (selected.length === 0) this.error('no registry entries matched those filters', { exit: 5 });
@@ -105,6 +113,7 @@ export default class Fetch extends BaseCommand<FetchRunReport> {
           sectionTitle: section.sectionTitle,
           parsed,
           clubNames,
+          excluded,
         });
 
         if (envelope === null) {

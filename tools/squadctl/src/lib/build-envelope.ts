@@ -4,11 +4,13 @@
 // The envelope shape lives in scripts/roster-envelope.ts, imported upward
 // rather than forked.
 import {
+  titlesEquivalent,
   validateEnvelope,
   type EnvelopeMember,
   type RosterEnvelope,
 } from '../../../../scripts/roster-envelope.ts';
 import { countryForCode } from './fifa-countries.ts';
+import type { NotInSquad } from './reconcile.ts';
 import type { TeamRegistryEntry } from './registry.ts';
 import type { ParsedSection } from './wikitext-parse.ts';
 import type { SectionTitle } from './wikitext-parse.ts';
@@ -50,6 +52,10 @@ export interface BuildInput {
   clubNames?: ReadonlyMap<string, string>;
   sectionTitle: SectionTitle;
   parsed: ParsedSection;
+  /** `exclude` decisions. `apply` honours them too, but a row can carry a
+   *  value that fails the whole team here first — Sudan's pos=RW — so they
+   *  reach the row before anything validates it. */
+  excluded?: readonly NotInSquad[];
 }
 
 export function buildEnvelope({
@@ -57,6 +63,7 @@ export function buildEnvelope({
   sectionTitle,
   parsed,
   clubNames,
+  excluded = [],
 }: BuildInput): EnvelopeBuild {
   const failures: string[] = [];
   const warnings: string[] = [];
@@ -75,6 +82,13 @@ export function buildEnvelope({
     // than failed — but counted, never silently dropped.
     if (row.name === '' && row.noRaw.trim() === '' && row.positionRaw.trim() === '') {
       blankRows += 1;
+      continue;
+    }
+    const decision = excluded.find(
+      (d) => d.team === entry.id && row.title !== null && titlesEquivalent(d.title, row.title),
+    );
+    if (decision !== undefined) {
+      warnings.push(`excluded by decision: ${row.name} (${decision.reason})`);
       continue;
     }
     if (row.name === '') {
