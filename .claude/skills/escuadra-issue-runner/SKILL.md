@@ -1,6 +1,6 @@
 ---
 name: escuadra-issue-runner
-description: Use when asked to pick up, take, do, work on, continue or carry through an Escuadra GitHub issue by its number ("pick up #N", "let's do issue N", "take #N and carry it through"), before running any command for it, even when the issue may be closed or done. Not for a question about an issue, or for opening one.
+description: 'Use when asked to pick up, take, do, work on, continue or carry through an Escuadra GitHub issue by its number ("pick up #N", "let''s do issue N", "take #N and carry it through"), before running any command for it, even when the issue may be closed or done. Not for a question about an issue, or for opening one.'
 ---
 
 # Escuadra issue runner
