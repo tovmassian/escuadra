@@ -2,5 +2,13 @@
   "semi": true,
   "singleQuote": true,
   "trailingComma": "all",
-  "printWidth": 100
+  "printWidth": 100,
+  "overrides": [
+    {
+      "files": ".claude/rules/*.md",
+      "options": {
+        "singleQuote": false
+      }
+    }
+  ]
 }
