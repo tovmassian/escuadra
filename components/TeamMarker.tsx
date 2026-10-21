@@ -9,7 +9,8 @@ interface TeamMarkerProps {
    *  picker size. `banner` is the in-round treatment (the question screen's
    *  header): thinner and longer, and *always* rendered as vertical bands —
    *  the squad's real orientation is ignored. This is a deliberate rule, not
-   *  a simplification: see CLAUDE.md's "in-round team marker" rule. */
+   *  a simplification: see the in-round banner in
+   *  .claude/rules/team-identity.md. */
   variant?: 'default' | 'banner';
 }
 

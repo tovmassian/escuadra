@@ -150,8 +150,8 @@ describe("a club squad's members all carry that club", () => {
 
 // Same shape as the club check above, for the other half of Squad.kind. A
 // nation squad asking a level-3 nationality question would be a non-question
-// (CLAUDE.md — every member shares it), but the field still has to agree
-// with the squad it's attached to, since Study mode and level-3 club
+// (.claude/rules/quiz.md — every member shares it), but the field still has
+// to agree with the squad it's attached to, since Study mode and level-3 club
 // distractor pools (on other nation squads) both read player.nationality.
 describe("a nation squad's members all carry that nationality", () => {
   checkFieldMatchesSquadName(

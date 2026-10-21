@@ -9,7 +9,7 @@ options, the `NAT` stat chip and the Study screen's cards and list rows. See
 `lib/flags.ts` for the name→code lookup and `assets/flags/generated.ts` for
 the Metro require map.
 
-Clubs never get an image here. CLAUDE.md hard constraint #2 bans crests,
+Clubs never get an image here. CLAUDE.md guardrail 2 bans crests,
 badges, logos and shield shapes permanently; national flags are its only
 carve-out, because the rule exists for trademark exposure and a flag carries
 none.
