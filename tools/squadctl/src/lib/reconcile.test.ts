@@ -930,3 +930,57 @@ describe('clubless members', () => {
     expect(plan.clubless).toEqual([]);
   });
 });
+
+describe('a rename needs more than a shared surname when births disagree', () => {
+  // The October sweep: Ecuador called up Fricio Caicedo as Moisés Caicedo
+  // left, and the shared surname read as a rename. Two birth dates say two
+  // people, which leaves nothing to ask.
+  const ecuador = (members: EnvelopeMember[]) =>
+    envelope(members, {
+      id: 'ecu',
+      kind: 'nation',
+      name: 'Ecuador',
+      league: undefined,
+      season: '2026',
+    });
+  const moises = player({
+    id: 'moises-caicedo',
+    name: 'Moisés Caicedo',
+    birth: '2001-11-02',
+    nationality: 'Ecuador',
+    club: 'Chelsea',
+    wikiTitle: 'Moisés Caicedo',
+  });
+  const fricio = row({
+    name: 'Fricio Caicedo',
+    title: 'Fricio Caicedo',
+    birth: '2008-04-17',
+    nationality: 'Ecuador',
+    club: 'Inter Miami',
+  });
+
+  it('creates the arrival and lets the departed player leave', () => {
+    const plan = reconcileTeam({
+      envelope: ecuador([fricio]),
+      storedSquad: squad([{ playerId: 'moises-caicedo', no: 23 }]),
+      players: [moises],
+    });
+    expect(plan.possibleRenames).toEqual([]);
+    expect(plan.newPlayers.map((p) => p.id)).toEqual(['fricio-caicedo']);
+    expect(plan.departed.map((d) => d.id)).toEqual(['moises-caicedo']);
+    expect(plan.namesakes).toEqual([
+      { id: 'fricio-caicedo', of: ['moises-caicedo'], proof: 'born 2008-04-17, not 2001-11-02' },
+    ]);
+  });
+
+  it('still asks when the dates agree or one is unknown', () => {
+    for (const birth of ['2001-11-02', undefined]) {
+      const plan = reconcileTeam({
+        envelope: ecuador([{ ...fricio, birth }]),
+        storedSquad: squad([{ playerId: 'moises-caicedo', no: 23 }]),
+        players: [moises],
+      });
+      expect(plan.possibleRenames.map((r) => r.departedId)).toEqual(['moises-caicedo']);
+    }
+  });
+});

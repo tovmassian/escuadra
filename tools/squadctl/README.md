@@ -626,6 +626,11 @@ atm: conflicted (verified: false)
 
 Wikipedia changed how it spells a player, without the squad changing at all.
 
+A shared surname is not asked about when the two birth dates differ: that is
+two people (Ecuador's Fricio Caicedo arriving as Moisés Caicedo left). The
+arrival is created and reported as a namesake. Only a nation row carries a
+birth date, so a club squad's renames are always asked.
+
 **The squad slot is HELD on the stored record and no new player is created.**
 This is the one conflict where writing first and asking afterwards is
 unrecoverable: it puts a second record for one person into `players.json`, with

@@ -690,12 +690,21 @@ export function reconcileTeam({
     //    display names without the squad changing. Creating the record first
     //    and flagging afterwards is what put five duplicate people into
     //    players.json, and no later command can undo it, so this HOLDS.
-    const renamed = storedList.find(
-      (m) =>
-        !consumed.has(m.playerId) &&
-        !claimedByAnotherRow.has(m.playerId) &&
-        looksLikeRename(byId.get(m.playerId)?.name ?? '', row.name),
-    );
+    //    A shared surname is not a rename when the birth dates differ:
+    //    Ecuador's Fricio Caicedo arrived as Moisés Caicedo left. That is the
+    //    namesake proof, and the arrival is created and reported as one.
+    const renamed = storedList.find((m) => {
+      if (consumed.has(m.playerId) || claimedByAnotherRow.has(m.playerId)) return false;
+      const departed = byId.get(m.playerId);
+      if (!looksLikeRename(departed?.name ?? '', row.name)) return false;
+      if (departed !== undefined && row.birth !== undefined && departed.birth !== null) {
+        if (row.birth !== departed.birth) {
+          setAside.set(departed.id, `born ${row.birth}, not ${departed.birth}`);
+          return false;
+        }
+      }
+      return true;
+    });
     if (renamed !== undefined && !splitAccepted(renamed.playerId, row.name)) {
       const storedName = byId.get(renamed.playerId)?.name ?? renamed.playerId;
       possibleRenames.push({
