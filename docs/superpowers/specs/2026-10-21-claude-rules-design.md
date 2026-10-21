@@ -234,4 +234,4 @@ their numbers.
 
 - What 1.0.1 shipped and when, and 1.0.0's release dates, for the backfill.
 - Approval to edit #116 as above.
-- An issue for this work, for the branch and PR names.
+- The issue: #165.
