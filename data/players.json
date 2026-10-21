@@ -4061,7 +4061,7 @@
     "id": "alex-guity",
     "name": "Alex Güity",
     "fullName": "Alex Güity",
-    "birth": "1997-09-10",
+    "birth": "1997-09-20",
     "position": "GK",
     "nationality": "Honduras",
     "club": "UPNFM",
@@ -16194,7 +16194,7 @@
     "id": "ceyhun-nuriyev",
     "name": "Ceyhun Nuriyev",
     "fullName": "Ceyhun Nuriyev",
-    "birth": "2001-12-18",
+    "birth": "2001-03-30",
     "position": "MF",
     "nationality": "Azerbaijan",
     "club": "Araz-Naxçıvan",
@@ -17284,11 +17284,19 @@
     "id": "christian-martinez",
     "name": "Christian Martínez",
     "fullName": "Christian Martínez",
-    "birth": "1994-08-12",
+    "birth": "1994-04-19",
     "position": "MF",
     "nationality": "El Salvador",
     "club": "San Carlos",
-    "photo": null,
+    "photo": {
+      "file": "Christian Martínez Saprissa.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Christian_Mart%C3%ADnez_Saprissa.jpg",
+      "width": 406,
+      "height": 801,
+      "author": "MarioLNC from San José, Costa Rica",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    },
     "wikiTitle": "Christian Martínez (footballer, born 1994)"
   },
   {
@@ -17871,7 +17879,7 @@
     "id": "cole-mrowka",
     "name": "Cole Mrowka",
     "fullName": "Cole Mrowka",
-    "birth": "2006-04-26",
+    "birth": "2006-04-06",
     "position": "MF",
     "nationality": "Philippines",
     "club": "Columbus Crew",
@@ -26116,7 +26124,7 @@
     "nationality": "Nicaragua",
     "club": "UMECIT",
     "photo": null,
-    "wikiTitle": "Emmanuel Gómez"
+    "wikiTitle": null
   },
   {
     "id": "emmanuel-jalai",
@@ -29720,12 +29728,12 @@
     "id": "francis-koroma",
     "name": "Francis Koroma",
     "fullName": "Francis Koroma",
-    "birth": null,
+    "birth": "2000-05-15",
     "position": "GK",
     "nationality": "Sierra Leone",
     "club": "Katsina United",
     "photo": null,
-    "wikiTitle": "Francis Koroma"
+    "wikiTitle": null
   },
   {
     "id": "francis-uzoho",
@@ -35415,11 +35423,19 @@
     "id": "hilary-mukundane",
     "name": "Hilary Mukundane",
     "fullName": "Hilary Mukundane",
-    "birth": "1997-12-22",
+    "birth": "2001-12-09",
     "position": "DF",
     "nationality": "Uganda",
     "club": "Vipers",
-    "photo": null,
+    "photo": {
+      "file": "Mukundane Hilary.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/Mukundane_Hilary.jpg/960px-Mukundane_Hilary.jpg",
+      "width": 2467,
+      "height": 2728,
+      "author": "Jackshots256",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
     "wikiTitle": "Hilary Mukundane"
   },
   {
@@ -36028,11 +36044,19 @@
     "id": "hussein-hassan",
     "name": "Hussein Hassan",
     "fullName": "Hussein Hassan",
-    "birth": "2002-11-15",
+    "birth": "2003-10-05",
     "position": "GK",
     "nationality": "Iraq",
     "club": "Erbil",
-    "photo": null,
+    "photo": {
+      "file": "حسين حسن لاعب المنتخب العراقي.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/46/%D8%AD%D8%B3%D9%8A%D9%86_%D8%AD%D8%B3%D9%86_%D9%84%D8%A7%D8%B9%D8%A8_%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AE%D8%A8_%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D9%82%D9%8A.jpg/960px-%D8%AD%D8%B3%D9%8A%D9%86_%D8%AD%D8%B3%D9%86_%D9%84%D8%A7%D8%B9%D8%A8_%D8%A7%D9%84%D9%85%D9%86%D8%AA%D8%AE%D8%A8_%D8%A7%D9%84%D8%B9%D8%B1%D8%A7%D9%82%D9%8A.jpg",
+      "width": 1052,
+      "height": 1280,
+      "author": "4ahmedalamen",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
     "wikiTitle": "Hussein Hassan"
   },
   {
@@ -41954,11 +41978,19 @@
     "id": "jett-blaschka",
     "name": "Jett Blaschka",
     "fullName": "Jett Blaschka",
-    "birth": "1999-12-16",
+    "birth": "1999-09-16",
     "position": "DF",
     "nationality": "United States Virgin Islands",
     "club": "Unattached",
-    "photo": null,
+    "photo": {
+      "file": "Jett Blaschka.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Jett_Blaschka.jpg/960px-Jett_Blaschka.jpg",
+      "width": 2392,
+      "height": 3588,
+      "author": "Jett Blaschka",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
+    },
     "wikiTitle": "Jett Blaschka"
   },
   {
@@ -48226,7 +48258,7 @@
     "id": "kevin-carabantes",
     "name": "Kevin Carabantes",
     "fullName": "Kevin Carabantes",
-    "birth": "1993-02-06",
+    "birth": "1995-03-20",
     "position": "GK",
     "nationality": "El Salvador",
     "club": "FAS",
@@ -54161,7 +54193,7 @@
     "id": "luis-vega",
     "name": "Luis Vega",
     "fullName": "Luis Vega",
-    "birth": "2001-02-28",
+    "birth": "2002-02-28",
     "position": "DF",
     "nationality": "Honduras",
     "club": "Motagua",
@@ -65460,11 +65492,19 @@
     "id": "nahom-netabay",
     "name": "Nahom Netabay",
     "fullName": "Nahom Netabay",
-    "birth": "1994-04-28",
+    "birth": "1994-08-28",
     "position": "MF",
     "nationality": "Eritrea",
     "club": "Degerfors",
-    "photo": null,
+    "photo": {
+      "file": "Nahom Girmai Netabay (Sirius, 2020, cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/de/Nahom_Girmai_Netabay_%28Sirius%2C_2020%2C_cropped%29.jpg/960px-Nahom_Girmai_Netabay_%28Sirius%2C_2020%2C_cropped%29.jpg",
+      "width": 1331,
+      "height": 1536,
+      "author": "Jens Backeman",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
     "wikiTitle": "Nahom Netabay"
   },
   {
@@ -68784,11 +68824,19 @@
     "id": "nuno-jeronimo",
     "name": "Nuno Jerónimo",
     "fullName": "Nuno Jerónimo",
-    "birth": "1997-11-02",
+    "birth": "1997-11-22",
     "position": "MF",
     "nationality": "Macau",
     "club": "Chao Pak Kei",
-    "photo": null,
+    "photo": {
+      "file": "Nuno Jerónimo - 53976874956.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/bd/Nuno_Jer%C3%B3nimo_-_53976874956.jpg/960px-Nuno_Jer%C3%B3nimo_-_53976874956.jpg",
+      "width": 1337,
+      "height": 2006,
+      "author": "Chin Yu Chu",
+      "licence": "CC BY-SA 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+    },
     "wikiTitle": "Nuno Pereira (footballer)"
   },
   {
@@ -73331,11 +73379,19 @@
     "id": "pham-xuan-manh",
     "name": "Phạm Xuân Mạnh",
     "fullName": "Phạm Xuân Mạnh",
-    "birth": "1996-03-27",
+    "birth": "1996-02-09",
     "position": "DF",
     "nationality": "Vietnam",
     "club": "Hanoi FC",
-    "photo": null,
+    "photo": {
+      "file": "Pham Xuan Manh.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Pham_Xuan_Manh.png",
+      "width": 401,
+      "height": 476,
+      "author": "Sông Lam Nghệ An FC",
+      "licence": "CC BY 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
     "wikiTitle": "Phạm Xuân Mạnh"
   },
   {
@@ -79983,7 +80039,7 @@
     "id": "sam-durrant",
     "name": "Sam Durrant",
     "fullName": "Sam Durrant",
-    "birth": "2002-10-25",
+    "birth": "2002-02-16",
     "position": "FW",
     "nationality": "Sri Lanka",
     "club": "Karmiotissa FC",

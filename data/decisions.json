@@ -133,5 +133,17 @@
       "player": "saleh-hardani",
       "birth": "1998-12-26"
     }
+  ],
+  "wrongLinks": [
+    {
+      "team": "nca",
+      "title": "Emmanuel Gómez",
+      "reason": "owner, 2026-10-21: the article is a Gambian defender born 1990; Nicaragua's Emmanuel Gómez was born 2000-05-17 and has no article"
+    },
+    {
+      "team": "sle",
+      "title": "Francis Koroma",
+      "reason": "owner, 2026-10-21: the article is a former player born 1975; Sierra Leone's Francis Koroma was born 2000-05-15 and has no article"
+    }
   ]
 }
