@@ -984,3 +984,45 @@ describe('a rename needs more than a shared surname when births disagree', () =>
     }
   });
 });
+
+describe('a birth date proves nothing on a record no article backs', () => {
+  // The October sweep: Brazil's Hugo Souza (born 1999-01-31) against an
+  // untitled orphan record of him, carrying a date the retired pipeline
+  // invented (1999-04-15). Only a titled record's date has been checked by
+  // enrich, so only it can tell two people apart.
+  it('reuses an untitled record whatever its birth date says', () => {
+    const orphan = player({
+      id: 'hugo-souza',
+      name: 'Hugo Souza',
+      birth: '1999-04-15',
+      position: 'GK',
+      nationality: 'Brazil',
+      club: 'Corinthians',
+      wikiTitle: null,
+    });
+    const plan = reconcileTeam({
+      envelope: envelope(
+        [
+          row({
+            name: 'Hugo Souza',
+            title: 'Hugo Souza',
+            birth: '1999-01-31',
+            position: 'GK',
+            nationality: 'Brazil',
+            club: 'Corinthians',
+          }),
+        ],
+        { id: 'bra', kind: 'nation', name: 'Brazil', league: undefined, season: '2026' },
+      ),
+      storedSquad: null,
+      players: [orphan],
+    });
+    expect(plan.newPlayers).toEqual([]);
+    expect(plan.namesakes).toEqual([]);
+    expect(plan.updatedPlayers[0]).toMatchObject({
+      id: 'hugo-souza',
+      birth: '1999-04-15',
+      wikiTitle: 'Hugo Souza',
+    });
+  });
+});

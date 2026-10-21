@@ -241,9 +241,12 @@ that is a `title-mismatch` — see below.
 **A namesake is never matched.** Before the global steps, a same-named record
 is set aside when it provably is someone else:
 
-- the row and the record carry **different birth dates** — Uruguay's
-  `Emiliano Martínez (footballer, born 1999)` against Argentina's goalkeeper,
-  born 1992, stored under the bare title the row's link is base-equivalent to;
+- the row and the record carry **different birth dates**, and the record has
+  an article title, so `enrich` has checked its date — Uruguay's `Emiliano
+Martínez (footballer, born 1999)` against Argentina's goalkeeper, born 1992,
+  stored under the bare title the row's link is base-equivalent to. An
+  untitled record's date may be one the retired pipeline invented (Brazil's
+  Hugo Souza), so it proves nothing;
 - or, for a nation row, **another nation's squad already holds the record** —
   a player plays for one nation. `apply` keeps this current through a run, so
   a nation applied earlier in the run counts like one on disk.

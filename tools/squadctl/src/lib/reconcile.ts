@@ -312,7 +312,15 @@ export function reconcileTeam({
     ) {
       return null;
     }
-    if (row.birth !== undefined && candidate.birth !== null && row.birth !== candidate.birth) {
+    // Only a record an article backs has had its date checked by enrich: an
+    // untitled one may carry a date the retired pipeline invented (Brazil's
+    // Hugo Souza), so its date proves nothing.
+    if (
+      row.birth !== undefined &&
+      candidate.birth !== null &&
+      titlesOf(candidate).length > 0 &&
+      row.birth !== candidate.birth
+    ) {
       return `born ${row.birth}, not ${candidate.birth}`;
     }
     const otherNation = nationSquadOf.get(candidate.id);
@@ -697,7 +705,12 @@ export function reconcileTeam({
       if (consumed.has(m.playerId) || claimedByAnotherRow.has(m.playerId)) return false;
       const departed = byId.get(m.playerId);
       if (!looksLikeRename(departed?.name ?? '', row.name)) return false;
-      if (departed !== undefined && row.birth !== undefined && departed.birth !== null) {
+      if (
+        departed !== undefined &&
+        row.birth !== undefined &&
+        departed.birth !== null &&
+        titlesOf(departed).length > 0
+      ) {
         if (row.birth !== departed.birth) {
           setAside.set(departed.id, `born ${row.birth}, not ${departed.birth}`);
           return false;
