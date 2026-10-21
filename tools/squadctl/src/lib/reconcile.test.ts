@@ -1048,3 +1048,71 @@ describe('a split rules out one pair, not every lookalike', () => {
     expect(plan.possibleRenames.map((r) => r.departedId)).toEqual(['danilo-santos']);
   });
 });
+
+describe('a link the decisions say names someone else', () => {
+  // Nicaragua links [[Emmanuel Gómez]], the article of a Gambian defender born
+  // 1990; their own Emmanuel Gómez, born 2000, has no article. Unlinked, the
+  // row matches by name and never hands its record that title back.
+  const nicaragua = (members: EnvelopeMember[]) =>
+    envelope(members, {
+      id: 'nca',
+      kind: 'nation',
+      name: 'Nicaragua',
+      league: undefined,
+      season: '2026',
+    });
+  const ours = player({
+    id: 'emmanuel-gomez',
+    name: 'Emmanuel Gómez',
+    birth: '2000-05-17',
+    nationality: 'Nicaragua',
+    club: 'UMECIT',
+    wikiTitle: null,
+  });
+  const gomezRow = row({
+    name: 'Emmanuel Gómez',
+    title: 'Emmanuel Gómez',
+    birth: '2000-05-17',
+    nationality: 'Nicaragua',
+    club: 'UMECIT',
+  });
+  const wrongLinks = [{ team: 'nca', title: 'Emmanuel Gómez', reason: 'a Gambian defender' }];
+
+  it('matches by name and leaves the record unlinked', () => {
+    const plan = reconcileTeam({
+      envelope: nicaragua([gomezRow]),
+      storedSquad: squad([{ playerId: 'emmanuel-gomez', no: 5 }]),
+      players: [ours],
+      wrongLinks,
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['emmanuel-gomez']);
+    expect(plan.updatedPlayers).toEqual([]);
+  });
+
+  it('never joins the record that does carry the title', () => {
+    const gambian = player({
+      id: 'emmanuel-gomez-2',
+      name: 'Emmanuel Gómez',
+      birth: '1990-12-20',
+      nationality: 'Gambia',
+      wikiTitle: 'Emmanuel Gómez',
+    });
+    const plan = reconcileTeam({
+      envelope: nicaragua([gomezRow]),
+      storedSquad: squad([{ playerId: 'emmanuel-gomez', no: 5 }]),
+      players: [ours, gambian],
+      wrongLinks,
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['emmanuel-gomez']);
+  });
+
+  it("leaves another team's identical link alone", () => {
+    const plan = reconcileTeam({
+      envelope: nicaragua([gomezRow]),
+      storedSquad: squad([{ playerId: 'emmanuel-gomez', no: 5 }]),
+      players: [ours],
+      wrongLinks: [{ ...wrongLinks[0]!, team: 'gam' }],
+    });
+    expect(plan.updatedPlayers[0]?.wikiTitle).toBe('Emmanuel Gómez');
+  });
+});

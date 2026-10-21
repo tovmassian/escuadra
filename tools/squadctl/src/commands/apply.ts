@@ -110,6 +110,7 @@ export default class Apply extends BaseCommand<RunReport> {
         aliases: decisions.aliases ?? [],
         titleAliases: decisions.titleAliases ?? [],
         notInSquad: decisions.notInSquad ?? [],
+        wrongLinks: decisions.wrongLinks ?? [],
         nationSquadOf,
       });
       const verdict = assess(plan);

@@ -2,7 +2,7 @@ import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { fileKey } from '../scripts/commons.ts';
-import { LEAGUES } from '../scripts/roster-envelope.ts';
+import { LEAGUES, titlesEquivalent } from '../scripts/roster-envelope.ts';
 import type { Player, Squad } from '@/types/squad';
 import type { DecisionFile } from '../tools/squadctl/src/lib/decisions.ts';
 import { isCalendarDate } from '../tools/squadctl/src/lib/dates.ts';
@@ -236,6 +236,26 @@ describe('data/decisions.json refers to players and teams that exist', () => {
       .filter((k) => players.get(k.player)?.birth !== k.birth)
       .map((k) => k.player);
     expect(stale).toEqual([]);
+  });
+
+  // A wrong link that came back would show someone else's photo and check
+  // the player's birth date against someone else's.
+  it('every wrongLinks[] team has a squad file, and no member there carries the title', () => {
+    const problems: string[] = [];
+    for (const link of decisions.wrongLinks ?? []) {
+      const squad = squadFiles.find((entry) => entry.id === link.team)?.squad;
+      if (squad === undefined) {
+        problems.push(`${link.team}: no squad file`);
+        continue;
+      }
+      for (const member of squad.members) {
+        const title = players.get(member.playerId)?.wikiTitle;
+        if (title != null && titlesEquivalent(title, link.title)) {
+          problems.push(`${link.team}: ${member.playerId} carries "${link.title}"`);
+        }
+      }
+    }
+    expect(problems).toEqual([]);
   });
 });
 

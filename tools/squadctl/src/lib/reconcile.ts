@@ -124,6 +124,17 @@ export interface Namesake {
   proof: string;
 }
 
+/** A link a team's article makes to an article about someone else, where the
+ *  player it lists has no article of their own: Nicaragua links its Emmanuel
+ *  Gómez (born 2000) to a Gambian defender's. The row is reconciled as if
+ *  unlinked, so it matches by name and never hands the record that title. */
+export interface WrongLink {
+  team: string;
+  title: string;
+  /** Required: this overrules the source. */
+  reason: string;
+}
+
 export interface TitleMismatch {
   playerId: string;
   storedTitle: string;
@@ -194,6 +205,8 @@ export interface ReconcileInput {
    *  another nation's squad already holds, unless it links that record's own
    *  article. */
   nationSquadOf?: ReadonlyMap<string, string>;
+  /** Links this team's article makes to someone else's article. */
+  wrongLinks?: readonly WrongLink[];
   /** Defaults to today. Passed explicitly in tests. */
   today?: string;
 }
@@ -252,6 +265,7 @@ export function reconcileTeam({
   titleAliases = [],
   notInSquad = [],
   nationSquadOf = new Map(),
+  wrongLinks = [],
   today = new Date().toISOString().slice(0, 10),
 }: ReconcileInput): TeamPlan {
   const byId = new Map(players.map((p) => [p.id, p]));
@@ -431,25 +445,37 @@ export function reconcileTeam({
   // Out-on-loan rows never reach the matcher. Dropped here rather than in the
   // fetcher so the envelope stays a faithful record of the source, and so
   // envelopes already on disk get the rule without a re-fetch.
-  const rows = envelope.members.filter((member) => {
-    if (isOutOnLoan(member.raw)) {
-      loanedOut.push({ name: member.name, note: otherAnnotation(member.raw) });
-      return false;
-    }
-    // The operator's override, for a row the source gives no reason to drop.
-    // Title-keyed, so it survives the article rewording the display name.
-    const decision = notInSquad.find(
-      (n) =>
-        n.team === envelope.team.id &&
-        member.title !== undefined &&
-        titlesEquivalent(n.title, member.title),
-    );
-    if (decision !== undefined) {
-      excluded.push({ name: member.name, note: decision.reason });
-      return false;
-    }
-    return true;
-  });
+  const rows = envelope.members
+    .map((member): (typeof envelope.members)[number] => {
+      const wrong = wrongLinks.some(
+        (w) =>
+          w.team === envelope.team.id &&
+          member.title !== undefined &&
+          titlesEquivalent(w.title, member.title),
+      );
+      if (!wrong) return member;
+      const { title: _wrong, ...unlinked } = member;
+      return unlinked;
+    })
+    .filter((member) => {
+      if (isOutOnLoan(member.raw)) {
+        loanedOut.push({ name: member.name, note: otherAnnotation(member.raw) });
+        return false;
+      }
+      // The operator's override, for a row the source gives no reason to drop.
+      // Title-keyed, so it survives the article rewording the display name.
+      const decision = notInSquad.find(
+        (n) =>
+          n.team === envelope.team.id &&
+          member.title !== undefined &&
+          titlesEquivalent(n.title, member.title),
+      );
+      if (decision !== undefined) {
+        excluded.push({ name: member.name, note: decision.reason });
+        return false;
+      }
+      return true;
+    });
 
   /** Stored members that some row in THIS section matches outright — by
    *  article title, or by a name the record already answers to.

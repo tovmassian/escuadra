@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  addWrongLink,
   EMPTY_DECISIONS,
   addAlias,
   addKeptBirth,
@@ -193,6 +194,37 @@ describe('validateDecisions with keptBirths', () => {
     ).toEqual([
       'keptBirths[0].player must be a non-empty string',
       'keptBirths[0].birth must be a real YYYY-MM-DD date',
+    ]);
+  });
+});
+
+describe('addWrongLink', () => {
+  const link = {
+    team: 'nca',
+    title: 'Emmanuel Gómez',
+    reason: 'links a Gambian defender born 1990',
+  };
+
+  it('records a link a team article makes to someone else', () => {
+    expect(addWrongLink(EMPTY_DECISIONS, link)?.wrongLinks).toEqual([link]);
+  });
+
+  it('is idempotent on team and title', () => {
+    const once = addWrongLink(EMPTY_DECISIONS, link);
+    expect(once === null ? null : addWrongLink(once, { ...link, reason: 'again' })).toBeNull();
+  });
+});
+
+describe('validateDecisions with wrongLinks', () => {
+  it('accepts a complete entry', () => {
+    expect(
+      validateDecisions({ splits: [], wrongLinks: [{ team: 'nca', title: 'X', reason: 'y' }] }),
+    ).toEqual([]);
+  });
+
+  it('requires a reason, since it overrules the source', () => {
+    expect(validateDecisions({ splits: [], wrongLinks: [{ team: 'nca', title: 'X' }] })).toEqual([
+      'wrongLinks[0].reason must be a non-empty string',
     ]);
   });
 });

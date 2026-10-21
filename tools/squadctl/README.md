@@ -50,10 +50,10 @@ never got applied.
 
 ### Commands own — you cause the write, you do not type it
 
-| file                  | written by                                              |
-| --------------------- | ------------------------------------------------------- |
-| `data/decisions.json` | `alias`, `split`, `exclude`, `birth`                    |
-| `data/players.json`   | `apply`, `rename`, `retitle`, `fork`, `birth`, `enrich` |
+| file                  | written by                                                        |
+| --------------------- | ----------------------------------------------------------------- |
+| `data/decisions.json` | `alias`, `split`, `exclude`, `unlink`, `birth`                    |
+| `data/players.json`   | `apply`, `rename`, `retitle`, `fork`, `unlink`, `birth`, `enrich` |
 
 ### Generated — never touch, never hand-review
 
@@ -365,6 +365,28 @@ one team: excluding a player from Verona leaves Torino untouched. Idempotent.
 Never fix a dual membership by editing the squad file. Those are generated,
 and `919f1f9` proved it — a player hand-removed from Arsenal was back on the
 next `apply`.
+
+### `unlink`
+
+```bash
+npm run squadctl -- unlink <teamId> "<article title>" --reason "<whose article it is>"
+```
+
+Records that a squad's article links one of its players to **someone else's
+article**, when the player has no article of their own to `retitle` to.
+Nicaragua links its Emmanuel Gómez (born 2000) to a Gambian defender's
+article, and Sierra Leone links its Francis Koroma (born 2000) to a former
+player's, born 1975.
+
+It also clears that title, and the photo that came through it, from the
+squad's members carrying it. `apply` then reconciles the row as if unlinked:
+it matches by name, never re-fills the title, and never joins the record the
+title does belong to. `enrich` sees no title, so it shows no one's photo and
+checks the birth date against no one's. Set the date with `birth` if needed.
+
+Keyed on team and title, like `exclude`, and `--reason` is required for the
+same reason: it overrules the source. `lib/dataIntegrity.test.ts` fails if a
+member of that squad carries the title again.
 
 ### `enrich`
 
@@ -856,7 +878,8 @@ project's source is Wikipedia, so it breaks the tie.
 - **Infobox agrees with the stored date**: Wikidata is the odd one out (a
   placeholder 1 January, a typo'd year). `birth <id> --keep`.
 - **The article is someone else** — another nationality, club or decade:
-  `retitle`, and `alias --title` the old link so `apply` keeps matching.
+  `retitle`, and `alias --title` the old link so `apply` keeps matching. If
+  the player has no article of their own, `unlink` the team's link instead.
 - **No majority**: leave it. The photo stays held, and nothing is guessed.
 
 **What you touch:** `birth` writes `data/players.json`, `birth --keep`
