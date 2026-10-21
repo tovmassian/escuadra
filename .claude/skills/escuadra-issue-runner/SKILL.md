@@ -1,6 +1,6 @@
 ---
 name: escuadra-issue-runner
-description: Use when asked to pick up, take, do, work on, continue or carry through an Escuadra GitHub issue by its number, before running any command for it. Not for a question about an issue, or for opening one.
+description: Use when asked to pick up, take, do, work on, continue or carry through an Escuadra GitHub issue by its number ("pick up #N", "let's do issue N", "take #N and carry it through"), before running any command for it, even when the issue may be closed or done. Not for a question about an issue, or for opening one.
 ---
 
 # Escuadra issue runner
@@ -108,7 +108,7 @@ with `writing-plans`, not `brainstorming`.
 | What exists for this issue  | first-step                                                   | execution          |
 | --------------------------- | ------------------------------------------------------------ | ------------------ |
 | a plan with work left       | the mode's skill, or `n/a` while the mode is asked           | the mode, or `ask` |
-| a spec, no plan             | `superpowers:writing-plans`                                  | the mode, or `ask` |
+| a linked spec, no plan      | `superpowers:writing-plans`                                  | the mode, or `ask` |
 | nothing, L or XL            | `superpowers:brainstorming`: spec, plan, then execute        | the mode, or `ask` |
 | nothing, M                  | `superpowers:brainstorming`: a short design, no spec or plan | `n/a`              |
 | nothing, XS or S, a bug     | `superpowers:systematic-debugging`                           | `n/a`              |
@@ -119,8 +119,11 @@ with `writing-plans`, not `brainstorming`.
   `executing-plans` (`superpowers:executing-plans`).
 - **A bug** is a `fix` title or a `bug` label, and starts with systematic debugging even
   when the cause looks known.
-- **A spec** is one the issue links or that covers it, even when the issue changes a section
-  of it. A handoff is not a spec or a plan, and neither is a plan written for other issues.
+- **A linked spec** is one the issue names (a `**Spec:**` line, a link into
+  `docs/superpowers/specs/`) or one that cites `#N`. It counts even when it predates the
+  issue, covers other issues too, or is a section the issue rewrites: the design is the spec
+  plus the issue's body, and the plan comes next. A handoff is not a spec or a plan, and
+  neither is a plan written for other issues.
 - **An open PR** continues with the step its remaining work needs. On `proceed`,
   `first-step` is always a skill, never `n/a`.
 
