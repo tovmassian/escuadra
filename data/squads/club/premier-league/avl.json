@@ -10,7 +10,7 @@
     "bands": ["#670E36", "#95BFE5"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Aston_Villa_F.C.",
   "members": [
     {
@@ -73,10 +73,6 @@
     {
       "playerId": "mbaye",
       "no": 19
-    },
-    {
-      "playerId": "jamaldeen-jimohaloba",
-      "no": 20
     },
     {
       "playerId": "ian-maatsen",

@@ -1,0 +1,126 @@
+{
+  "id": "lva",
+  "kind": "nation",
+  "name": "Latvia",
+  "season": "2026",
+  "primaryColor": "#9D2235",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#9D2235", "#FFFFFF", "#9D2235"],
+    "orientation": "horizontal",
+    "weights": [2, 1, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Latvia_national_football_team",
+  "members": [
+    {
+      "playerId": "nils-purins",
+      "no": 1
+    },
+    {
+      "playerId": "daniels-balodis",
+      "no": 2
+    },
+    {
+      "playerId": "glebs-zaleiko",
+      "no": 3
+    },
+    {
+      "playerId": "oskars-vientiess",
+      "no": 4
+    },
+    {
+      "playerId": "oskars-rubenis",
+      "no": 5
+    },
+    {
+      "playerId": "danila-patijcuks",
+      "no": 6
+    },
+    {
+      "playerId": "eduards-daskevics",
+      "no": 7
+    },
+    {
+      "playerId": "eduards-emsis",
+      "no": 8
+    },
+    {
+      "playerId": "vladislavs-gutkovskis",
+      "no": 9
+    },
+    {
+      "playerId": "lukass-vapne",
+      "no": 10
+    },
+    {
+      "playerId": "roberts-savalnieks",
+      "no": 11
+    },
+    {
+      "playerId": "frenks-orols",
+      "no": 12
+    },
+    {
+      "playerId": "raivis-jurkovskis",
+      "no": 13
+    },
+    {
+      "playerId": "andrejs-ciganiks",
+      "no": 14
+    },
+    {
+      "playerId": "dmitrijs-zelenkovs",
+      "no": 15
+    },
+    {
+      "playerId": "kristers-cudars",
+      "no": 16
+    },
+    {
+      "playerId": "markuss-strods",
+      "no": 17
+    },
+    {
+      "playerId": "alberts-aleksanjans",
+      "no": 18
+    },
+    {
+      "playerId": "maksims-tonisevs",
+      "no": 19
+    },
+    {
+      "playerId": "roberts-uldrikis",
+      "no": 20
+    },
+    {
+      "playerId": "deniss-melniks",
+      "no": 21
+    },
+    {
+      "playerId": "aleksejs-saveljevs",
+      "no": 22
+    },
+    {
+      "playerId": "rihards-matrevics",
+      "no": 23
+    },
+    {
+      "playerId": "antonijs-cernomordijs",
+      "no": null
+    },
+    {
+      "playerId": "dennis-cirkin",
+      "no": null
+    },
+    {
+      "playerId": "janis-ikaunieks",
+      "no": null
+    },
+    {
+      "playerId": "kristaps-grabovskis",
+      "no": null
+    }
+  ]
+}

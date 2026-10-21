@@ -1,0 +1,122 @@
+{
+  "id": "skn",
+  "kind": "nation",
+  "name": "Saint Kitts and Nevis",
+  "season": "2026",
+  "primaryColor": "#009739",
+  "secondaryColor": "#C8102E",
+  "verified": true,
+  "marker": {
+    "bands": ["#009739", "#FFCD00", "#000000", "#FFCD00", "#C8102E"],
+    "orientation": "vertical",
+    "weights": [3, 1, 2, 1, 3]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Saint_Kitts_and_Nevis_national_football_team",
+  "members": [
+    {
+      "playerId": "xander-parke",
+      "no": 1
+    },
+    {
+      "playerId": "malique-roberts",
+      "no": 2
+    },
+    {
+      "playerId": "rico-browne",
+      "no": 3
+    },
+    {
+      "playerId": "anwa-springer",
+      "no": 4
+    },
+    {
+      "playerId": "daron-thomas",
+      "no": 5
+    },
+    {
+      "playerId": "jordan-bowery",
+      "no": 6
+    },
+    {
+      "playerId": "tiquanny-williams",
+      "no": 7
+    },
+    {
+      "playerId": "yohannes-mitchum",
+      "no": 8
+    },
+    {
+      "playerId": "tyreece-simpson",
+      "no": 9
+    },
+    {
+      "playerId": "harry-panayiotou",
+      "no": 10
+    },
+    {
+      "playerId": "savik-morton",
+      "no": 11
+    },
+    {
+      "playerId": "micaah-garnette",
+      "no": 12
+    },
+    {
+      "playerId": "nequan-browne",
+      "no": 13
+    },
+    {
+      "playerId": "theo-wharton",
+      "no": 14
+    },
+    {
+      "playerId": "luca-crolla",
+      "no": 17
+    },
+    {
+      "playerId": "julani-archibald",
+      "no": 18
+    },
+    {
+      "playerId": "romaine-sawyers",
+      "no": 19
+    },
+    {
+      "playerId": "kyle-kelly",
+      "no": 20
+    },
+    {
+      "playerId": "gvaune-amory",
+      "no": 21
+    },
+    {
+      "playerId": "omari-sterlingjames",
+      "no": 22
+    },
+    {
+      "playerId": "victor-hart",
+      "no": 23
+    },
+    {
+      "playerId": "andre-burley",
+      "no": null
+    },
+    {
+      "playerId": "jay-williams",
+      "no": null
+    },
+    {
+      "playerId": "jayden-richardson",
+      "no": null
+    },
+    {
+      "playerId": "marley-mintus",
+      "no": null
+    },
+    {
+      "playerId": "rakealan-jeffers",
+      "no": null
+    }
+  ]
+}

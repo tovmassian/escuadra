@@ -1,0 +1,122 @@
+{
+  "id": "yem",
+  "kind": "nation",
+  "name": "Yemen",
+  "season": "2026",
+  "primaryColor": "#CE1126",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#CE1126", "#FFFFFF", "#000000"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Yemen_national_football_team",
+  "members": [
+    {
+      "playerId": "mohammed-aman",
+      "no": 1
+    },
+    {
+      "playerId": "nader-sahal",
+      "no": 2
+    },
+    {
+      "playerId": "harwan-alzubaidi",
+      "no": 3
+    },
+    {
+      "playerId": "hamza-alrimi",
+      "no": 4
+    },
+    {
+      "playerId": "emad-algodaimah",
+      "no": 5
+    },
+    {
+      "playerId": "rami-alwasmani",
+      "no": 6
+    },
+    {
+      "playerId": "nasser-algahwashi",
+      "no": 7
+    },
+    {
+      "playerId": "anes-almaari",
+      "no": 8
+    },
+    {
+      "playerId": "omar-aldahi",
+      "no": 9
+    },
+    {
+      "playerId": "mohammed-alnajjar",
+      "no": 10
+    },
+    {
+      "playerId": "abdulwasea-almatari",
+      "no": 11,
+      "captain": true
+    },
+    {
+      "playerId": "mamdooh-bin-ajaj",
+      "no": 12
+    },
+    {
+      "playerId": "saqr-aldarbi",
+      "no": 13
+    },
+    {
+      "playerId": "ali-aldugin",
+      "no": 14
+    },
+    {
+      "playerId": "osama-anbar",
+      "no": 15
+    },
+    {
+      "playerId": "omar-algolan",
+      "no": 16
+    },
+    {
+      "playerId": "abdul-majeed-sabarah",
+      "no": 17
+    },
+    {
+      "playerId": "adel-abbas-qasem",
+      "no": 18
+    },
+    {
+      "playerId": "radhawan-alhubaishi",
+      "no": 19
+    },
+    {
+      "playerId": "tareq-shihab",
+      "no": 20
+    },
+    {
+      "playerId": "ahmed-maher",
+      "no": 21
+    },
+    {
+      "playerId": "osamah-mokref",
+      "no": 22
+    },
+    {
+      "playerId": "osama-haidar",
+      "no": 23
+    },
+    {
+      "playerId": "dmani-mellor",
+      "no": 24
+    },
+    {
+      "playerId": "hamzah-alsurabi",
+      "no": 25
+    },
+    {
+      "playerId": "nawaf-abdullah",
+      "no": 26
+    }
+  ]
+}

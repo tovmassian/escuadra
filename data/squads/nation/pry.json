@@ -10,15 +10,15 @@
     "bands": ["#D52B1E", "#FFFFFF", "#0038A8"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Paraguay_national_football_team",
   "members": [
     {
-      "playerId": "gatito-fernandez",
+      "playerId": "santiago-rojas",
       "no": 1
     },
     {
-      "playerId": "gustavo-velazquez",
+      "playerId": "alan-benitez",
       "no": 2
     },
     {
@@ -30,7 +30,7 @@
       "no": 4
     },
     {
-      "playerId": "fabian-balbuena",
+      "playerId": "clever-ferreira",
       "no": 5
     },
     {
@@ -46,7 +46,7 @@
       "no": 8
     },
     {
-      "playerId": "antonio-sanabria",
+      "playerId": "hugo-benitez",
       "no": 9
     },
     {
@@ -66,16 +66,20 @@
       "no": 13
     },
     {
+      "playerId": "andres-cubas",
+      "no": 14
+    },
+    {
       "playerId": "gustavo-gomez",
       "no": 15,
       "captain": true
     },
     {
-      "playerId": "damian-bobadilla",
+      "playerId": "hugo-quintana",
       "no": 16
     },
     {
-      "playerId": "kaku",
+      "playerId": "hugo-cuenca",
       "no": 17
     },
     {
@@ -87,11 +91,11 @@
       "no": 19
     },
     {
-      "playerId": "braian-ojeda",
+      "playerId": "mathias-villasanti",
       "no": 20
     },
     {
-      "playerId": "gabriel-avalos",
+      "playerId": "robert-morales",
       "no": 21
     },
     {
@@ -107,7 +111,7 @@
       "no": 24
     },
     {
-      "playerId": "isidro-pitta",
+      "playerId": "alexis-canete",
       "no": 25
     },
     {
@@ -115,7 +119,11 @@
       "no": 26
     },
     {
-      "playerId": "andres-cubas",
+      "playerId": "antonio-sanabria",
+      "no": null
+    },
+    {
+      "playerId": "enso-gonzalez",
       "no": null
     }
   ]

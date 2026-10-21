@@ -160,11 +160,11 @@ questions, not one screen twice: `squad.kind` decides what the third part asks.
 (`NATIONALITY?`) — and only nationality options carry flag images.
 
 The three results captures are the three tiers `resultTier` distinguishes, all
-from one Spain level-1 round. `09-results.png` is a failed round, 2/10: the
-corner is two grey bars, the title reads `THESE ARE THE ONES TO LEARN` over
-"Score 8/10 to unlock level 2.", eight red segments, and `MISSED · 8 PLAYERS`
-with "Swipe for all" over a row of photo cards ("You picked Gavi"), the third
-cut off at the edge. Its main button is `RETRY THIS ROUND`, with
+from one Spain level-1 round. `09-results.png` is a failed round, 1/10: the
+corner mark is grey, the title reads `THESE ARE THE ONES TO LEARN` over
+"Score 8/10 to unlock level 2.", nine red segments and one green, and
+`MISSED · 9 PLAYERS` with "Swipe for all" over a row of photo cards ("You
+picked Marc Cucurella"), the third cut off at the edge. Its main button is `RETRY THIS ROUND`, with
 `Study this squad` beneath and no retry icon. `09-results-passed.png` is a
 cleared round that still missed one player, 9/10: the strike in `accentLine` with a
 green ball, `LEVEL 1 CLEARED`, one card, and `PLAY LEVEL 2` as the main button,

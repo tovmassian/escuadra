@@ -1,0 +1,123 @@
+{
+  "id": "sdn",
+  "kind": "nation",
+  "name": "Sudan",
+  "season": "2026",
+  "primaryColor": "#D21034",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#007229", "#D21034", "#FFFFFF", "#000000"],
+    "orientation": "vertical",
+    "weights": [1, 2, 2, 2]
+  },
+  "lastUpdated": "2026-10-21",
+  "source": "https://en.wikipedia.org/wiki/Sudan_national_football_team",
+  "members": [
+    {
+      "playerId": "ali-abu-eshrein",
+      "no": 1
+    },
+    {
+      "playerId": "abuaagla-abdalla",
+      "no": 2
+    },
+    {
+      "playerId": "mohamed-ering",
+      "no": 3
+    },
+    {
+      "playerId": "altayeb-abdelrazeg",
+      "no": 4
+    },
+    {
+      "playerId": "walieldin-khedr",
+      "no": 5
+    },
+    {
+      "playerId": "mustafa-karshoum",
+      "no": 6
+    },
+    {
+      "playerId": "yaser-awad",
+      "no": 7
+    },
+    {
+      "playerId": "abdel-raouf",
+      "no": 8
+    },
+    {
+      "playerId": "yaser-muzmel",
+      "no": 9
+    },
+    {
+      "playerId": "muhamed-abdelrahman",
+      "no": 10
+    },
+    {
+      "playerId": "john-mano",
+      "no": 11
+    },
+    {
+      "playerId": "bakhit-khamis",
+      "no": 12,
+      "captain": true
+    },
+    {
+      "playerId": "ammar-taifour",
+      "no": 13
+    },
+    {
+      "playerId": "mohamed-eisa",
+      "no": 14
+    },
+    {
+      "playerId": "salah-adel",
+      "no": 15
+    },
+    {
+      "playerId": "muhamed-alnour-abouja",
+      "no": 16
+    },
+    {
+      "playerId": "mazin-mohamedein",
+      "no": 17
+    },
+    {
+      "playerId": "awad-zayed",
+      "no": 18
+    },
+    {
+      "playerId": "ahmed-tabanja",
+      "no": 19
+    },
+    {
+      "playerId": "abo-eisa",
+      "no": 20
+    },
+    {
+      "playerId": "munjed-alnil",
+      "no": 21
+    },
+    {
+      "playerId": "aljezoli-nouh",
+      "no": 22
+    },
+    {
+      "playerId": "muhamed-kesra",
+      "no": 24
+    },
+    {
+      "playerId": "sheddy-barglan",
+      "no": 25
+    },
+    {
+      "playerId": "aamir-abdallah",
+      "no": 26
+    },
+    {
+      "playerId": "muhamed-tia-asad",
+      "no": 27
+    }
+  ]
+}

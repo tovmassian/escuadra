@@ -10,7 +10,7 @@
     "bands": ["#0D5EAF", "#FFFFFF"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Greece_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "georgios-vagiannidis",
+      "playerId": "triantafyllos-tsapras",
       "no": 2
     },
     {
@@ -39,10 +39,11 @@
     },
     {
       "playerId": "georgios-masouras",
-      "no": 7
+      "no": 7,
+      "captain": true
     },
     {
-      "playerId": "christos-mouzakitis",
+      "playerId": "fotis-ioannidis",
       "no": 8
     },
     {
@@ -50,7 +51,7 @@
       "no": 9
     },
     {
-      "playerId": "tzolis",
+      "playerId": "dimitrios-pelkas",
       "no": 10
     },
     {
@@ -70,23 +71,19 @@
       "no": 14
     },
     {
-      "playerId": "lazaros-rota",
+      "playerId": "thanasis-androutsos",
       "no": 15
     },
     {
-      "playerId": "andrews-tetteh",
-      "no": 16
-    },
-    {
-      "playerId": "pantelis-chatzidiakos",
+      "playerId": "manolis-saliakas",
       "no": 17
     },
     {
-      "playerId": "sotiris-kontouris",
+      "playerId": "giannis-michailidis",
       "no": 18
     },
     {
-      "playerId": "giorgos-kyriakopoulos",
+      "playerId": "konstantinos-karetsas",
       "no": 19
     },
     {
@@ -98,23 +95,35 @@
       "no": 21
     },
     {
-      "playerId": "nectarios-triantis",
-      "no": 23
-    },
-    {
-      "playerId": "thanasis-androutsos",
-      "no": 24
-    },
-    {
-      "playerId": "andreas-ntoi",
-      "no": 25
+      "playerId": "giorgos-kyriakopoulos",
+      "no": 22
     },
     {
       "playerId": "alexandros-kyziridis",
-      "no": 26
+      "no": null
     },
     {
-      "playerId": "dimitris-giannoulis",
+      "playerId": "andreas-ntoi",
+      "no": null
+    },
+    {
+      "playerId": "andrews-tetteh",
+      "no": null
+    },
+    {
+      "playerId": "christos-mouzakitis",
+      "no": null
+    },
+    {
+      "playerId": "georgios-vagiannidis",
+      "no": null
+    },
+    {
+      "playerId": "nectarios-triantis",
+      "no": null
+    },
+    {
+      "playerId": "tzolis",
       "no": null
     }
   ]

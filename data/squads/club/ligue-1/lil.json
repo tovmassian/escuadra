@@ -10,7 +10,7 @@
     "bands": ["#E01E13", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Lille_OSC",
   "members": [
     {
@@ -64,10 +64,6 @@
     {
       "playerId": "romain-perraud",
       "no": 15
-    },
-    {
-      "playerId": "arnaud-bodart",
-      "no": 16
     },
     {
       "playerId": "ngalayel-mukau",

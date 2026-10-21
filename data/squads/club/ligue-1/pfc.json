@@ -10,7 +10,7 @@
     "bands": ["#0033A0", "#ED1C24"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Paris_FC",
   "members": [
     {
@@ -113,10 +113,6 @@
     {
       "playerId": "jonathan-ikone",
       "no": 93
-    },
-    {
-      "playerId": "andria-kvirikadze",
-      "no": null
     }
   ]
 }

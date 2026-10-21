@@ -1,0 +1,101 @@
+{
+  "id": "vgb",
+  "kind": "nation",
+  "name": "British Virgin Islands",
+  "season": "2026",
+  "primaryColor": "#012169",
+  "secondaryColor": "#006129",
+  "verified": true,
+  "marker": {
+    "bands": ["#012169"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#006129"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/British_Virgin_Islands_national_football_team",
+  "members": [
+    {
+      "playerId": "toby-whiteside",
+      "no": 1
+    },
+    {
+      "playerId": "kristian-javier",
+      "no": 2
+    },
+    {
+      "playerId": "joshua-bertie",
+      "no": 3
+    },
+    {
+      "playerId": "tkhoi-morton",
+      "no": 4
+    },
+    {
+      "playerId": "momchil-yordanov",
+      "no": 5
+    },
+    {
+      "playerId": "tsharne-gallimore",
+      "no": 6
+    },
+    {
+      "playerId": "joel-mars",
+      "no": 7
+    },
+    {
+      "playerId": "luka-chalwell",
+      "no": 8
+    },
+    {
+      "playerId": "javaun-splatt",
+      "no": 9
+    },
+    {
+      "playerId": "rush-broderick",
+      "no": 10
+    },
+    {
+      "playerId": "johari-lacey",
+      "no": 11
+    },
+    {
+      "playerId": "william-green",
+      "no": 12
+    },
+    {
+      "playerId": "ikyjah-williams",
+      "no": 13
+    },
+    {
+      "playerId": "quelahni-nickie",
+      "no": 14
+    },
+    {
+      "playerId": "jaden-abrams",
+      "no": 15
+    },
+    {
+      "playerId": "adrian-padilla",
+      "no": 16
+    },
+    {
+      "playerId": "decoi-prince",
+      "no": 17
+    },
+    {
+      "playerId": "harry-foden",
+      "no": 18
+    },
+    {
+      "playerId": "tyler-forbes",
+      "no": 20
+    },
+    {
+      "playerId": "alejandro-santos",
+      "no": 21
+    }
+  ]
+}

@@ -10,7 +10,7 @@
     "bands": ["#D91023", "#FFFFFF", "#D91023"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Peru_national_football_team",
   "members": [
     {
@@ -18,11 +18,11 @@
       "no": 1
     },
     {
-      "playerId": "alfonso-barco",
+      "playerId": "oslimg-mora",
       "no": 2
     },
     {
-      "playerId": "fabio-gruber",
+      "playerId": "alfonso-barco",
       "no": 3
     },
     {
@@ -30,11 +30,15 @@
       "no": 4
     },
     {
+      "playerId": "miguel-araujo",
+      "no": 5
+    },
+    {
       "playerId": "jesus-pretell",
       "no": 6
     },
     {
-      "playerId": "kenji-cabrera",
+      "playerId": "adrian-ugarriza",
       "no": 7
     },
     {
@@ -42,7 +46,7 @@
       "no": 8
     },
     {
-      "playerId": "adrian-ugarriza",
+      "playerId": "gianluca-lapadula",
       "no": 9
     },
     {
@@ -50,7 +54,7 @@
       "no": 11
     },
     {
-      "playerId": "alejandro-duarte",
+      "playerId": "matias-cordova",
       "no": 12
     },
     {
@@ -58,7 +62,7 @@
       "no": 13
     },
     {
-      "playerId": "adrian-quiroz",
+      "playerId": "rodrigo-vilca",
       "no": 14
     },
     {
@@ -66,7 +70,7 @@
       "no": 15
     },
     {
-      "playerId": "matias-lazo",
+      "playerId": "wilder-cartagena",
       "no": 16
     },
     {
@@ -83,11 +87,11 @@
       "captain": true
     },
     {
-      "playerId": "maxloren-castro",
+      "playerId": "alex-valera",
       "no": 20
     },
     {
-      "playerId": "matias-cordova",
+      "playerId": "diego-romero",
       "no": 21
     },
     {
@@ -95,7 +99,7 @@
       "no": 22
     },
     {
-      "playerId": "rodrigo-vilca",
+      "playerId": "cesar-inga",
       "no": 23
     },
     {
@@ -105,6 +109,10 @@
     {
       "playerId": "matias-zegarra",
       "no": 25
+    },
+    {
+      "playerId": "piero-magallanes",
+      "no": 26
     },
     {
       "playerId": "jhonny-vidales",

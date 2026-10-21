@@ -1,0 +1,113 @@
+{
+  "id": "fij",
+  "kind": "nation",
+  "name": "Fiji",
+  "season": "2026",
+  "primaryColor": "#62B5E5",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#62B5E5"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFFFFF"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Fiji_national_football_team",
+  "members": [
+    {
+      "playerId": "aydin-mustahib",
+      "no": 1
+    },
+    {
+      "playerId": "scott-wara",
+      "no": 2
+    },
+    {
+      "playerId": "gabriele-matanisiga",
+      "no": 3
+    },
+    {
+      "playerId": "ivan-kumar",
+      "no": 4
+    },
+    {
+      "playerId": "sitiveni-cavuilagi",
+      "no": 5
+    },
+    {
+      "playerId": "thomas-dunn",
+      "no": 6
+    },
+    {
+      "playerId": "mohammed-raheem",
+      "no": 7
+    },
+    {
+      "playerId": "setareki-hughes",
+      "no": 8
+    },
+    {
+      "playerId": "roy-krishna",
+      "no": 9
+    },
+    {
+      "playerId": "nabil-begg",
+      "no": 10
+    },
+    {
+      "playerId": "brendan-mcmullen",
+      "no": 11
+    },
+    {
+      "playerId": "tevita-waranaivalu",
+      "no": 12
+    },
+    {
+      "playerId": "mosese-nabose",
+      "no": 13
+    },
+    {
+      "playerId": "sairusi-nalaubu",
+      "no": 14
+    },
+    {
+      "playerId": "etonia-dogalau",
+      "no": 15
+    },
+    {
+      "playerId": "antonio-tuivuna",
+      "no": 16
+    },
+    {
+      "playerId": "filipe-baravilala",
+      "no": 17
+    },
+    {
+      "playerId": "lekima-gonerau",
+      "no": 18
+    },
+    {
+      "playerId": "merrill-nand",
+      "no": 19
+    },
+    {
+      "playerId": "joji-vuakaca",
+      "no": 20
+    },
+    {
+      "playerId": "sterling-vasconcellos",
+      "no": 21
+    },
+    {
+      "playerId": "isikeli-sevanaia",
+      "no": 22
+    },
+    {
+      "playerId": "rusiate-matarerega",
+      "no": 23
+    }
+  ]
+}

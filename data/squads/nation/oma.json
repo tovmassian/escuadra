@@ -1,0 +1,94 @@
+{
+  "id": "oma",
+  "kind": "nation",
+  "name": "Oman",
+  "season": "2026",
+  "primaryColor": "#DF1A23",
+  "secondaryColor": "#007E3C",
+  "verified": true,
+  "marker": {
+    "bands": ["#DF1A23", "#FFFFFF", "#DF1A23", "#007E3C"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Oman_national_football_team",
+  "members": [
+    {
+      "playerId": "ibrahim-almukhaini",
+      "no": 1
+    },
+    {
+      "playerId": "ghanim-alhabashi",
+      "no": 2
+    },
+    {
+      "playerId": "thani-alrushaidi",
+      "no": 3
+    },
+    {
+      "playerId": "arshad-alalawi",
+      "no": 4
+    },
+    {
+      "playerId": "musab-alshaqsy",
+      "no": 5
+    },
+    {
+      "playerId": "ahmed-alkhamisi",
+      "no": 6
+    },
+    {
+      "playerId": "issam-alsabhi",
+      "no": 7
+    },
+    {
+      "playerId": "zahir-alaghbari",
+      "no": 8
+    },
+    {
+      "playerId": "mohammed-alghafri",
+      "no": 9
+    },
+    {
+      "playerId": "abdullah-fawaz",
+      "no": 12
+    },
+    {
+      "playerId": "amjad-alharthi",
+      "no": 13
+    },
+    {
+      "playerId": "ahed-almashaiki",
+      "no": 14
+    },
+    {
+      "playerId": "nasser-alrawahi",
+      "no": 15
+    },
+    {
+      "playerId": "ali-albusaidi",
+      "no": 17,
+      "captain": true
+    },
+    {
+      "playerId": "ibrahim-alrajhi",
+      "no": 18
+    },
+    {
+      "playerId": "mahmood-almushaifri",
+      "no": 19
+    },
+    {
+      "playerId": "salaah-alyahyaei",
+      "no": 20
+    },
+    {
+      "playerId": "ahmed-alrawahi",
+      "no": 22
+    },
+    {
+      "playerId": "harib-alsaadi",
+      "no": 23
+    }
+  ]
+}

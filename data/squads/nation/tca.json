@@ -1,0 +1,121 @@
+{
+  "id": "tca",
+  "kind": "nation",
+  "name": "Turks and Caicos Islands",
+  "season": "2026",
+  "primaryColor": "#002868",
+  "secondaryColor": "#FCD116",
+  "verified": true,
+  "marker": {
+    "bands": ["#002868"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FCD116"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Turks_and_Caicos_Islands_national_football_team",
+  "members": [
+    {
+      "playerId": "sebastian-turbyfield",
+      "no": 1
+    },
+    {
+      "playerId": "keniel-clervil",
+      "no": 2
+    },
+    {
+      "playerId": "steven-sessegnon",
+      "no": 3
+    },
+    {
+      "playerId": "anthony-stewart",
+      "no": 4
+    },
+    {
+      "playerId": "kyle-belizaire",
+      "no": 5
+    },
+    {
+      "playerId": "christopher-louisy",
+      "no": 6
+    },
+    {
+      "playerId": "billy-forbes",
+      "no": 7
+    },
+    {
+      "playerId": "mackenson-cadet",
+      "no": 8
+    },
+    {
+      "playerId": "emmanuel-martin",
+      "no": 9
+    },
+    {
+      "playerId": "dominic-hutchinson",
+      "no": 10
+    },
+    {
+      "playerId": "junior-paul",
+      "no": 11
+    },
+    {
+      "playerId": "schuyler-selver",
+      "no": 12
+    },
+    {
+      "playerId": "samuel-harvey",
+      "no": 13
+    },
+    {
+      "playerId": "anios-jean",
+      "no": 14
+    },
+    {
+      "playerId": "sean-clare",
+      "no": 15
+    },
+    {
+      "playerId": "ledson-jerome",
+      "no": 16
+    },
+    {
+      "playerId": "mykerwens-varis",
+      "no": 17
+    },
+    {
+      "playerId": "edwin-garland",
+      "no": 18
+    },
+    {
+      "playerId": "wepsdel-saintilus",
+      "no": 19
+    },
+    {
+      "playerId": "john-robertson",
+      "no": 20
+    },
+    {
+      "playerId": "herwens-guerrier",
+      "no": 21
+    },
+    {
+      "playerId": "idelin-gardiner",
+      "no": 22
+    },
+    {
+      "playerId": "callum-park",
+      "no": 23
+    },
+    {
+      "playerId": "jeff-beljour",
+      "no": null
+    },
+    {
+      "playerId": "rosmith-messieur",
+      "no": null
+    }
+  ]
+}

@@ -10,7 +10,7 @@
     "bands": ["#F77F00", "#FFFFFF", "#009E60"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Ivory_Coast_national_football_team",
   "members": [
     {
@@ -26,36 +26,35 @@
       "no": 3
     },
     {
-      "playerId": "jean-michael-seri",
+      "playerId": "christ-inao-oulai",
       "no": 4
     },
     {
-      "playerId": "wilfried-singo",
+      "playerId": "yann-gboho",
       "no": 5
     },
     {
-      "playerId": "seko-fofana",
+      "playerId": "patrick-zabi",
       "no": 6
     },
     {
-      "playerId": "odilon-kossounou",
+      "playerId": "rayan-fofana",
       "no": 7
     },
     {
       "playerId": "franck-kessie",
-      "no": 8,
-      "captain": true
+      "no": 8
     },
     {
       "playerId": "bonny",
       "no": 9
     },
     {
-      "playerId": "simon-adingra",
+      "playerId": "yan-diomande",
       "no": 10
     },
     {
-      "playerId": "yan-diomande",
+      "playerId": "amadou-kone",
       "no": 11
     },
     {
@@ -63,15 +62,15 @@
       "no": 12
     },
     {
-      "playerId": "christopher-operi",
+      "playerId": "malick-yalcouye",
       "no": 13
     },
     {
-      "playerId": "oumar-diakite",
+      "playerId": "eddy-doue",
       "no": 14
     },
     {
-      "playerId": "amad-diallo",
+      "playerId": "luck-zogbe",
       "no": 15
     },
     {
@@ -79,7 +78,7 @@
       "no": 16
     },
     {
-      "playerId": "guela-doue",
+      "playerId": "christ-tape",
       "no": 17
     },
     {
@@ -99,7 +98,7 @@
       "no": 21
     },
     {
-      "playerId": "evann-guessand",
+      "playerId": "kassoum-ouattara",
       "no": 22
     },
     {
@@ -111,12 +110,12 @@
       "no": 24
     },
     {
-      "playerId": "parfait-guiagon",
-      "no": 25
+      "playerId": "guela-doue",
+      "no": null
     },
     {
-      "playerId": "christ-inao-oulai",
-      "no": 26
+      "playerId": "odilon-kossounou",
+      "no": null
     }
   ]
 }

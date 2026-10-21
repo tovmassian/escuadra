@@ -1,0 +1,123 @@
+{
+  "id": "qat",
+  "kind": "nation",
+  "name": "Qatar",
+  "season": "2026",
+  "primaryColor": "#8A1538",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#8A1538"],
+    "orientation": "vertical",
+    "weights": [1, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Qatar_national_football_team",
+  "members": [
+    {
+      "playerId": "mahmud-abunada",
+      "no": 1
+    },
+    {
+      "playerId": "pedro-miguel",
+      "no": 2
+    },
+    {
+      "playerId": "naif-alhadhrami",
+      "no": 3
+    },
+    {
+      "playerId": "issa-laye",
+      "no": 4
+    },
+    {
+      "playerId": "tarek-salman",
+      "no": 5
+    },
+    {
+      "playerId": "abdulaziz-hatem",
+      "no": 6
+    },
+    {
+      "playerId": "ahmed-alaaeldin",
+      "no": 7
+    },
+    {
+      "playerId": "edmilson-junior",
+      "no": 8
+    },
+    {
+      "playerId": "yusuf-abdurisag",
+      "no": 9
+    },
+    {
+      "playerId": "hassan-alhaydos",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "akram-afif",
+      "no": 11
+    },
+    {
+      "playerId": "karim-boudiaf",
+      "no": 12
+    },
+    {
+      "playerId": "ayoub-aloui",
+      "no": 13
+    },
+    {
+      "playerId": "homam-ahmed",
+      "no": 14
+    },
+    {
+      "playerId": "jassem-gaber",
+      "no": 15
+    },
+    {
+      "playerId": "boualem-khoukhi",
+      "no": 16
+    },
+    {
+      "playerId": "ahmed-alganehi",
+      "no": 17
+    },
+    {
+      "playerId": "sultan-albrake",
+      "no": 18
+    },
+    {
+      "playerId": "almoez-ali",
+      "no": 19
+    },
+    {
+      "playerId": "ahmed-fathy",
+      "no": 20
+    },
+    {
+      "playerId": "salah-zakaria",
+      "no": 21
+    },
+    {
+      "playerId": "shehab-ellethy",
+      "no": 22
+    },
+    {
+      "playerId": "assim-madibo",
+      "no": 23
+    },
+    {
+      "playerId": "tahsin-jamshid",
+      "no": 24
+    },
+    {
+      "playerId": "hashim-ali",
+      "no": 25
+    },
+    {
+      "playerId": "mohamed-manai",
+      "no": 26
+    }
+  ]
+}

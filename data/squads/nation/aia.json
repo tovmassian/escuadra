@@ -1,0 +1,102 @@
+{
+  "id": "aia",
+  "kind": "nation",
+  "name": "Anguilla",
+  "season": "2026",
+  "primaryColor": "#012169",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#012169"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFFFFF"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Anguilla_national_football_team",
+  "members": [
+    {
+      "playerId": "jelanie-lawrence",
+      "no": 1
+    },
+    {
+      "playerId": "yariel-fleming",
+      "no": 2
+    },
+    {
+      "playerId": "kayne-connor",
+      "no": 4
+    },
+    {
+      "playerId": "javis-jones",
+      "no": 6
+    },
+    {
+      "playerId": "germain-hughes",
+      "no": 8,
+      "captain": true
+    },
+    {
+      "playerId": "aedan-scipio",
+      "no": 10
+    },
+    {
+      "playerId": "jayvon-lloyd",
+      "no": 11
+    },
+    {
+      "playerId": "malachi-gumbs",
+      "no": 12
+    },
+    {
+      "playerId": "nathaniel-owen",
+      "no": 13
+    },
+    {
+      "playerId": "tarique-jackson",
+      "no": 14
+    },
+    {
+      "playerId": "sedu-bradshaw",
+      "no": 15
+    },
+    {
+      "playerId": "timarqus-connor",
+      "no": 19
+    },
+    {
+      "playerId": "kieron-lakebryan",
+      "no": 20
+    },
+    {
+      "playerId": "tjivari-leveretfrancisca",
+      "no": 22
+    },
+    {
+      "playerId": "jaheim-thompson",
+      "no": 23
+    },
+    {
+      "playerId": "alexander-flemingfranco",
+      "no": null
+    },
+    {
+      "playerId": "janwillem-tesselaar",
+      "no": null
+    },
+    {
+      "playerId": "jonathan-guishard",
+      "no": null
+    },
+    {
+      "playerId": "luke-paris",
+      "no": null
+    },
+    {
+      "playerId": "orliandry-curiel",
+      "no": null
+    }
+  ]
+}

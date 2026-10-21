@@ -21,7 +21,8 @@
 // - Either conflict holds the photo with it.
 import type { PhotoCredit, Player } from '../../../../types/squad.ts';
 import type { CreditOutcome, MissingField } from './photo-credit.ts';
-import type { ArticleInfo, PersonInfo } from './wikimedia-parse.ts';
+import { normalizeName } from '../../../../scripts/roster-envelope.ts';
+import type { ArticleInfo, InfoboxInfo, PersonInfo } from './wikimedia-parse.ts';
 
 export type PhotoStatus =
   | 'ok'
@@ -36,7 +37,15 @@ export type PhotoStatus =
   | 'lookup-failed';
 
 export type BirthStatus =
-  'filled' | 'agrees' | 'kept' | 'conflict' | 'ambiguous' | 'none' | 'lookup-failed';
+  | 'filled'
+  | 'agrees'
+  | 'kept'
+  | 'confirmed'
+  | 'corrected'
+  | 'conflict'
+  | 'ambiguous'
+  | 'none'
+  | 'lookup-failed';
 
 /** Report order: shown first, then why not, most fixable last. */
 export const PHOTO_STATUSES: readonly PhotoStatus[] = [
@@ -56,6 +65,8 @@ export const BIRTH_STATUSES: readonly BirthStatus[] = [
   'filled',
   'agrees',
   'kept',
+  'confirmed',
+  'corrected',
   'none',
   'ambiguous',
   'conflict',
@@ -78,6 +89,9 @@ export interface Lookups {
   failedTitles: ReadonlySet<string>;
   failedItems: ReadonlySet<string>;
   failedFiles: ReadonlySet<string>;
+  /** Keyed by article title: asked only where the birth dates disagree. */
+  infoboxes: ReadonlyMap<string, InfoboxInfo>;
+  failedInfoboxes: ReadonlySet<string>;
 }
 
 /** What a run knows beyond the lookups. */
@@ -192,11 +206,47 @@ function resolve(player: Player, lookups: Lookups): Resolution {
   return { kind: 'person', article, person };
 }
 
+/** The same club, however each source writes it: `Inter Turku` and
+ *  `FC Inter Turku`, `Valenzuela PB–Mendiola` and `Valenzuela PB-Mendiola`. */
+function clubsAgree(infobox: string | null, ours: string | null): boolean {
+  if (infobox === null || ours === null) return false;
+  const compact = (club: string) => normalizeName(club).replace(/[^a-z0-9]/g, '');
+  const [a, b] = [compact(infobox), compact(ours)];
+  return a.length >= 3 && b.length >= 3 && (a.includes(b) || b.includes(a));
+}
+
+/** The stored date and Wikidata's disagree. The article's own infobox breaks
+ *  the tie, as the README asks a person to — this project's source is
+ *  Wikipedia:
+ *
+ *  - infobox = stored: Wikidata is the odd one out. The stored date stands.
+ *  - infobox = Wikidata, and its current club is ours: the stored date is a
+ *    typo in the squad table. Wikidata's date is written.
+ *  - otherwise no majority, or a club that says the article may be a
+ *    namesake's (Iraq's Hussein Hassan links an Al-Zawraa player's article;
+ *    the squad says Erbil). The conflict stays for a person. */
+function tieBreak(
+  player: Player & { birth: string },
+  births: readonly string[],
+  infobox: InfoboxInfo | undefined,
+): { status: BirthStatus; birth: string } | null {
+  if (infobox?.birth === player.birth) return { status: 'confirmed', birth: player.birth };
+  if (
+    infobox?.birth != null &&
+    births.includes(infobox.birth) &&
+    clubsAgree(infobox.club, player.club)
+  ) {
+    return { status: 'corrected', birth: infobox.birth };
+  }
+  return null;
+}
+
 function birthVerdict(
   player: Player,
   article: OkArticle,
   person: PersonInfo | null,
   context: EnrichContext,
+  infobox: InfoboxInfo | undefined,
 ): { status: BirthStatus; birth: string | null; conflict: BirthConflict | null } {
   const births = person?.births ?? [];
   // Births come from the item, so there is one whenever there are births.
@@ -232,6 +282,8 @@ function birthVerdict(
   if (context.kept.get(player.id) === player.birth) {
     return { status: 'kept', birth: player.birth, conflict: null };
   }
+  const settled = tieBreak({ ...player, birth: player.birth }, births, infobox);
+  if (settled !== null) return { ...settled, conflict: null };
   return {
     status: 'conflict',
     birth: player.birth,
@@ -283,7 +335,13 @@ export function enrichPlayer(
   if (resolved.kind === 'ended') return resolved.result;
   const { article, person } = resolved;
 
-  const birth = birthVerdict(player, article, person, context);
+  const birth = birthVerdict(
+    player,
+    article,
+    person,
+    context,
+    lookups.infoboxes.get(article.title),
+  );
   const withBirth: Player = { ...player, birth: birth.birth };
   if (birth.conflict !== null) {
     return outcome(
@@ -353,6 +411,24 @@ export function pendingFiles(players: readonly Player[], lookups: Lookups): stri
     if (reached.state === 'unanswered' && !lookups.failedFiles.has(reached.candidate.file)) {
       pending.add(reached.candidate.file);
     }
+  }
+  return [...pending].sort();
+}
+
+/** The article titles whose infobox a birth tie still waits on: every
+ *  record whose stored date Wikidata does not give, not yet answered or
+ *  failed. A `--keep`ed one is asked too; its answer is simply unused. */
+export function pendingInfoboxes(players: readonly Player[], lookups: Lookups): string[] {
+  const pending = new Set<string>();
+  for (const player of players) {
+    if (player.birth === null) continue;
+    const resolved = resolve(player, lookups);
+    if (resolved.kind === 'ended') continue;
+    const births = resolved.person?.births ?? [];
+    const title = resolved.article.title;
+    if (births.length === 0 || births.includes(player.birth)) continue;
+    if (lookups.infoboxes.has(title) || lookups.failedInfoboxes.has(title)) continue;
+    pending.add(title);
   }
   return [...pending].sort();
 }

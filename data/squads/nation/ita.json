@@ -10,7 +10,7 @@
     "bands": ["#008C45", "#F4F5F0", "#CD212A"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Italy_national_football_team",
   "members": [
     {
@@ -19,31 +19,31 @@
       "captain": true
     },
     {
-      "playerId": "niccolo-fortini",
+      "playerId": "michael-kayode",
       "no": 2
     },
     {
-      "playerId": "davide-bartesaghi",
+      "playerId": "matteo-ruggeri",
       "no": 3
     },
     {
-      "playerId": "fabio-chiarodia",
+      "playerId": "alessandro-romano",
       "no": 4
     },
     {
-      "playerId": "luca-lipani",
+      "playerId": "calafiori",
       "no": 5
     },
     {
-      "playerId": "filippo-mane",
+      "playerId": "bastoni",
       "no": 6
     },
     {
-      "playerId": "alessio-cacciamani",
+      "playerId": "nicolo-cambiaghi",
       "no": 7
     },
     {
-      "playerId": "francesco-camarda",
+      "playerId": "sandro-tonali",
       "no": 8
     },
     {
@@ -51,64 +51,88 @@
       "no": 9
     },
     {
-      "playerId": "cher-ndour",
+      "playerId": "nicolo-fagioli",
       "no": 10
     },
     {
-      "playerId": "luca-koleosho",
+      "playerId": "gianluca-scamacca",
       "no": 11
     },
     {
-      "playerId": "giovanni-daffara",
+      "playerId": "marco-carnesecchi",
       "no": 12
     },
     {
-      "playerId": "luca-reggiani",
+      "playerId": "guglielmo-vicario",
       "no": 13
     },
     {
-      "playerId": "tommaso-berti",
+      "playerId": "samuele-inacio",
       "no": 14
     },
     {
-      "playerId": "pietro-comuzzo",
+      "playerId": "issa-doumbia",
       "no": 15
     },
     {
-      "playerId": "giacomo-faticanti",
+      "playerId": "frattesi",
       "no": 16
     },
     {
-      "playerId": "seydou-fini",
+      "playerId": "daniel-maldini",
       "no": 17
     },
     {
-      "playerId": "jeff-ekhator",
+      "playerId": "barella",
       "no": 18
     },
     {
-      "playerId": "samuele-inacio",
+      "playerId": "giorgio-scalvini",
       "no": 19
     },
     {
-      "playerId": "matteo-dagasso",
+      "playerId": "sebastiano-esposito",
       "no": 20
     },
     {
-      "playerId": "niccolo-pisilli",
+      "playerId": "antonio-vergara",
       "no": 21
     },
     {
-      "playerId": "costantino-favasuli",
+      "playerId": "giovanni-di-lorenzo",
       "no": 22
     },
     {
-      "playerId": "lorenzo-palmisani",
+      "playerId": "gianluca-mancini",
       "no": 23
     },
     {
-      "playerId": "honest-ahanor",
-      "no": 24
+      "playerId": "daniele-ghilardi",
+      "no": null
+    },
+    {
+      "playerId": "diego-coppola",
+      "no": null
+    },
+    {
+      "playerId": "eddy-kouadio",
+      "no": null
+    },
+    {
+      "playerId": "massimo-pessina",
+      "no": null
+    },
+    {
+      "playerId": "mohamed-ali-zoma",
+      "no": null
+    },
+    {
+      "playerId": "rolando-mandragora",
+      "no": null
+    },
+    {
+      "playerId": "samuele-ricci",
+      "no": null
     }
   ]
 }

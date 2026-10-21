@@ -11,7 +11,13 @@
 import { existsSync, readFileSync } from 'node:fs';
 import path from 'node:path';
 import { isCalendarDate } from './dates.ts';
-import type { AcceptedAlias, AcceptedSplit, NotInSquad, TitleAlias } from './reconcile.ts';
+import type {
+  AcceptedAlias,
+  AcceptedSplit,
+  NotInSquad,
+  TitleAlias,
+  WrongLink,
+} from './reconcile.ts';
 
 /** A stored birth date a person has confirmed against Wikidata's: the
  *  third answer to an `enrich` birth-date conflict, after `birth <id>
@@ -45,6 +51,9 @@ export interface DecisionFile {
   /** Stored birth dates confirmed against Wikidata. Optional like the
    *  others: every file on disk predates it. */
   keptBirths?: KeptBirth[];
+  /** Links a team's article makes to someone else's article. Optional like
+   *  the others: every file on disk predates it. */
+  wrongLinks?: WrongLink[];
 }
 
 export const EMPTY_DECISIONS: DecisionFile = {
@@ -53,6 +62,7 @@ export const EMPTY_DECISIONS: DecisionFile = {
   titleAliases: [],
   notInSquad: [],
   keptBirths: [],
+  wrongLinks: [],
 };
 
 /** The one way to read `decisions.json`. Returns `EMPTY_DECISIONS` when there
@@ -88,6 +98,7 @@ export function readDecisions(dataDir: string): {
       titleAliases: loaded.titleAliases ?? [],
       notInSquad: loaded.notInSquad ?? [],
       keptBirths: loaded.keptBirths ?? [],
+      wrongLinks: loaded.wrongLinks ?? [],
     },
     problems: [],
   };
@@ -120,6 +131,21 @@ export function validateDecisions(value: unknown): string[] {
   }
   if (value.keptBirths !== undefined && !Array.isArray(value.keptBirths)) {
     return ['decisions.json "keptBirths" must be an array when present'];
+  }
+  if (value.wrongLinks !== undefined && !Array.isArray(value.wrongLinks)) {
+    return ['decisions.json "wrongLinks" must be an array when present'];
+  }
+  for (const [index, entry] of (value.wrongLinks ?? []).entries()) {
+    if (!isRecord(entry)) {
+      errors.push(`wrongLinks[${index}] must be an object`);
+      continue;
+    }
+    // `reason` is required, as for notInSquad: this overrules the source.
+    for (const field of ['team', 'title', 'reason'] as const) {
+      if (typeof entry[field] !== 'string' || entry[field] === '') {
+        errors.push(`wrongLinks[${index}].${field} must be a non-empty string`);
+      }
+    }
   }
   for (const [index, entry] of (value.keptBirths ?? []).entries()) {
     if (!isRecord(entry)) {
@@ -233,6 +259,19 @@ export function addNotInSquad(file: DecisionFile, entry: NotInSquad): DecisionFi
   return {
     ...file,
     notInSquad: [...existing, entry].sort(
+      (a, b) => a.team.localeCompare(b.team) || a.title.localeCompare(b.title),
+    ),
+  };
+}
+
+/** Idempotent on team and title, like `addNotInSquad`. Returns null when
+ *  already recorded. */
+export function addWrongLink(file: DecisionFile, entry: WrongLink): DecisionFile | null {
+  const existing = file.wrongLinks ?? [];
+  if (existing.some((w) => w.team === entry.team && w.title === entry.title)) return null;
+  return {
+    ...file,
+    wrongLinks: [...existing, entry].sort(
       (a, b) => a.team.localeCompare(b.team) || a.title.localeCompare(b.title),
     ),
   };

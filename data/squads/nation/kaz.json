@@ -1,0 +1,142 @@
+{
+  "id": "kaz",
+  "kind": "nation",
+  "name": "Kazakhstan",
+  "season": "2026",
+  "primaryColor": "#00ABC2",
+  "secondaryColor": "#FFEC2D",
+  "verified": true,
+  "marker": {
+    "bands": ["#00ABC2"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFEC2D"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Kazakhstan_national_football_team",
+  "members": [
+    {
+      "playerId": "bekkhan-shayzada",
+      "no": 1
+    },
+    {
+      "playerId": "serhiy-malyi",
+      "no": 2
+    },
+    {
+      "playerId": "nuraly-alip",
+      "no": 3,
+      "captain": true
+    },
+    {
+      "playerId": "nauryzbek-zhagorov",
+      "no": 4
+    },
+    {
+      "playerId": "damir-kasabulat",
+      "no": 5
+    },
+    {
+      "playerId": "alibek-kasym",
+      "no": 6
+    },
+    {
+      "playerId": "galymzhan-kenzhebek",
+      "no": 7
+    },
+    {
+      "playerId": "zhasulan-amir",
+      "no": 8
+    },
+    {
+      "playerId": "bauyrzhan-islamkhan",
+      "no": 9
+    },
+    {
+      "playerId": "artur-shushenachev",
+      "no": 10
+    },
+    {
+      "playerId": "yan-vorogovsky",
+      "no": 11
+    },
+    {
+      "playerId": "temirlan-anarbekov",
+      "no": 12
+    },
+    {
+      "playerId": "aleksandr-mrynskiy",
+      "no": 13
+    },
+    {
+      "playerId": "georgy-zhukov",
+      "no": 14
+    },
+    {
+      "playerId": "azamat-tuyakbaev",
+      "no": 15
+    },
+    {
+      "playerId": "aleksandr-zarutskiy",
+      "no": 16
+    },
+    {
+      "playerId": "stanislav-basmanov",
+      "no": 17
+    },
+    {
+      "playerId": "dinmukhamed-karaman",
+      "no": 18
+    },
+    {
+      "playerId": "ramazan-karimov",
+      "no": 19
+    },
+    {
+      "playerId": "ramazan-orazov",
+      "no": 20
+    },
+    {
+      "playerId": "elkhan-astanov",
+      "no": 21
+    },
+    {
+      "playerId": "yerkin-tapalov",
+      "no": 22
+    },
+    {
+      "playerId": "temirlan-yerlanov",
+      "no": 23
+    },
+    {
+      "playerId": "alexander-shirobokov",
+      "no": null
+    },
+    {
+      "playerId": "arsen-ashirbek",
+      "no": null
+    },
+    {
+      "playerId": "islam-chesnokov",
+      "no": null
+    },
+    {
+      "playerId": "islambek-kuat",
+      "no": null
+    },
+    {
+      "playerId": "ismail-bekbolat",
+      "no": null
+    },
+    {
+      "playerId": "maksim-samorodov",
+      "no": null
+    },
+    {
+      "playerId": "stas-pokatilov",
+      "no": null
+    }
+  ]
+}

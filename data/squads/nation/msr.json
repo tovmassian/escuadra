@@ -1,0 +1,114 @@
+{
+  "id": "msr",
+  "kind": "nation",
+  "name": "Montserrat",
+  "season": "2026",
+  "primaryColor": "#012169",
+  "secondaryColor": "#00A2DD",
+  "verified": true,
+  "marker": {
+    "bands": ["#012169"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#00A2DD"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Montserrat_national_football_team",
+  "members": [
+    {
+      "playerId": "trent-carterrogers",
+      "no": 1
+    },
+    {
+      "playerId": "mark-rogers",
+      "no": 2
+    },
+    {
+      "playerId": "lenni-cirino",
+      "no": 3
+    },
+    {
+      "playerId": "nico-gordon",
+      "no": 4
+    },
+    {
+      "playerId": "darion-furlong",
+      "no": 5
+    },
+    {
+      "playerId": "mackye-townsendwest",
+      "no": 6
+    },
+    {
+      "playerId": "brandon-barzey",
+      "no": 7
+    },
+    {
+      "playerId": "brandon-comley",
+      "no": 8
+    },
+    {
+      "playerId": "lyle-taylor",
+      "no": 9,
+      "captain": true
+    },
+    {
+      "playerId": "sydney-mendes",
+      "no": 10
+    },
+    {
+      "playerId": "seigel-rodney",
+      "no": 11
+    },
+    {
+      "playerId": "dominic-richmond",
+      "no": 12
+    },
+    {
+      "playerId": "ervin-liburd",
+      "no": 13
+    },
+    {
+      "playerId": "jeriel-dorsett",
+      "no": 14
+    },
+    {
+      "playerId": "princewill-madu",
+      "no": 15
+    },
+    {
+      "playerId": "jernade-meade",
+      "no": 16
+    },
+    {
+      "playerId": "ashley-boatswain",
+      "no": 17
+    },
+    {
+      "playerId": "alex-dyer",
+      "no": 18
+    },
+    {
+      "playerId": "vashirn-roache",
+      "no": 19
+    },
+    {
+      "playerId": "mylan-benjamin",
+      "no": 20
+    },
+    {
+      "playerId": "lucas-kirnon",
+      "no": 21
+    },
+    {
+      "playerId": "tyrone-baker",
+      "no": 22
+    },
+    {
+      "playerId": "josiah-persaud",
+      "no": 23
+    }
+  ]
+}

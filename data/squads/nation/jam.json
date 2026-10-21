@@ -1,0 +1,134 @@
+{
+  "id": "jam",
+  "kind": "nation",
+  "name": "Jamaica",
+  "season": "2026",
+  "primaryColor": "#FFB81C",
+  "secondaryColor": "#007749",
+  "verified": true,
+  "marker": {
+    "bands": ["#000000", "#FFB81C", "#007749", "#FFB81C", "#000000"],
+    "orientation": "vertical",
+    "weights": [2, 1, 2, 1, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Jamaica_national_football_team",
+  "members": [
+    {
+      "playerId": "andre-blake",
+      "no": 1
+    },
+    {
+      "playerId": "miguel-freckleton",
+      "no": 2
+    },
+    {
+      "playerId": "brandon-cover",
+      "no": 3
+    },
+    {
+      "playerId": "christopher-ainsworth",
+      "no": 4
+    },
+    {
+      "playerId": "courtney-clarke",
+      "no": 5
+    },
+    {
+      "playerId": "richard-king",
+      "no": 6
+    },
+    {
+      "playerId": "jamone-lyletrp",
+      "no": 7
+    },
+    {
+      "playerId": "ramone-howell",
+      "no": 8
+    },
+    {
+      "playerId": "bailey-cadamarteri",
+      "no": 9
+    },
+    {
+      "playerId": "kaheim-dixon",
+      "no": 10
+    },
+    {
+      "playerId": "tyreece-campbell",
+      "no": 11
+    },
+    {
+      "playerId": "javon-east",
+      "no": 12
+    },
+    {
+      "playerId": "amal-knight",
+      "no": 13
+    },
+    {
+      "playerId": "tajay-granttrp",
+      "no": 14
+    },
+    {
+      "playerId": "joel-latibeaudiere",
+      "no": 15
+    },
+    {
+      "playerId": "karoy-anderson",
+      "no": 16
+    },
+    {
+      "playerId": "damion-lowe",
+      "no": 17
+    },
+    {
+      "playerId": "dwayne-atkinson",
+      "no": 18
+    },
+    {
+      "playerId": "tayvon-gray",
+      "no": 19
+    },
+    {
+      "playerId": "kyle-ming",
+      "no": 20
+    },
+    {
+      "playerId": "jahmarie-nolan",
+      "no": 21
+    },
+    {
+      "playerId": "ronaldo-webster",
+      "no": 22
+    },
+    {
+      "playerId": "shaquan-davis",
+      "no": 23
+    },
+    {
+      "playerId": "andre-brooks",
+      "no": null
+    },
+    {
+      "playerId": "isaac-hayden",
+      "no": null
+    },
+    {
+      "playerId": "kasey-palmer",
+      "no": null
+    },
+    {
+      "playerId": "leon-bailey",
+      "no": null
+    },
+    {
+      "playerId": "renaldo-cephas",
+      "no": null
+    },
+    {
+      "playerId": "rumarn-burrell",
+      "no": null
+    }
+  ]
+}

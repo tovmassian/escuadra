@@ -1,0 +1,109 @@
+{
+  "id": "gha",
+  "kind": "nation",
+  "name": "Ghana",
+  "season": "2026",
+  "primaryColor": "#CE1126",
+  "secondaryColor": "#006B3F",
+  "verified": true,
+  "marker": {
+    "bands": ["#CE1126", "#FCD116", "#006B3F"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Ghana_national_football_team",
+  "members": [
+    {
+      "playerId": "lawrence-atizigi",
+      "no": 1
+    },
+    {
+      "playerId": "yeboah",
+      "no": 2
+    },
+    {
+      "playerId": "caleb-yirenkyi",
+      "no": 3
+    },
+    {
+      "playerId": "jonas-adjetey",
+      "no": 4
+    },
+    {
+      "playerId": "ronald-donkor",
+      "no": 5
+    },
+    {
+      "playerId": "rahim-ibrahim",
+      "no": 6
+    },
+    {
+      "playerId": "abdul-fatawu",
+      "no": 7
+    },
+    {
+      "playerId": "kwasi-sibo",
+      "no": 8
+    },
+    {
+      "playerId": "felix-afenagyan",
+      "no": 9
+    },
+    {
+      "playerId": "brandon-thomasasante",
+      "no": 10
+    },
+    {
+      "playerId": "benjamin-tetteh",
+      "no": 11
+    },
+    {
+      "playerId": "joseph-anang",
+      "no": 12
+    },
+    {
+      "playerId": "christopher-bonsu-baah",
+      "no": 13
+    },
+    {
+      "playerId": "gideon-mensah",
+      "no": 14
+    },
+    {
+      "playerId": "ibrahim-sulemana",
+      "no": 15
+    },
+    {
+      "playerId": "benjamin-asare",
+      "no": 16
+    },
+    {
+      "playerId": "ebenezer-annan",
+      "no": 17
+    },
+    {
+      "playerId": "jerome-opoku",
+      "no": 18
+    },
+    {
+      "playerId": "ernest-nuamah",
+      "no": 19
+    },
+    {
+      "playerId": "augustine-boakye",
+      "no": 20
+    },
+    {
+      "playerId": "kojo-peprah-oppong",
+      "no": 21
+    },
+    {
+      "playerId": "mohammed-fuseini",
+      "no": 22
+    },
+    {
+      "playerId": "alexander-djiku",
+      "no": 23
+    }
+  ]
+}

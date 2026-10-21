@@ -1,0 +1,129 @@
+{
+  "id": "mli",
+  "kind": "nation",
+  "name": "Mali",
+  "season": "2026",
+  "primaryColor": "#14B53A",
+  "secondaryColor": "#CE1126",
+  "verified": true,
+  "marker": {
+    "bands": ["#14B53A", "#FCD116", "#CE1126"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Mali_national_football_team",
+  "members": [
+    {
+      "playerId": "emile-doucoure",
+      "no": 1
+    },
+    {
+      "playerId": "hamari-traore",
+      "no": 2
+    },
+    {
+      "playerId": "amadou-dante",
+      "no": 3
+    },
+    {
+      "playerId": "amadou-haidara",
+      "no": 4
+    },
+    {
+      "playerId": "cheick-keita",
+      "no": 5
+    },
+    {
+      "playerId": "ousmane-diakite",
+      "no": 6
+    },
+    {
+      "playerId": "dorgeles-nene",
+      "no": 7
+    },
+    {
+      "playerId": "mamadou-sangare",
+      "no": 8
+    },
+    {
+      "playerId": "kamory-doumbia",
+      "no": 10
+    },
+    {
+      "playerId": "lassana-coulibaly",
+      "no": 11
+    },
+    {
+      "playerId": "ange-martial-tia",
+      "no": 12
+    },
+    {
+      "playerId": "modibo-sagnan",
+      "no": 13
+    },
+    {
+      "playerId": "nathan-gassama",
+      "no": 14
+    },
+    {
+      "playerId": "daouda-guindo",
+      "no": 15
+    },
+    {
+      "playerId": "ngolo-traore",
+      "no": 16
+    },
+    {
+      "playerId": "lassine-sinayoko",
+      "no": 17
+    },
+    {
+      "playerId": "mamadou-doumbia",
+      "no": 18
+    },
+    {
+      "playerId": "adama-camara",
+      "no": 19
+    },
+    {
+      "playerId": "sekou-koita",
+      "no": 20
+    },
+    {
+      "playerId": "gaoussou-diarra",
+      "no": 21
+    },
+    {
+      "playerId": "mamadou-samassa",
+      "no": 22
+    },
+    {
+      "playerId": "dieng",
+      "no": 23
+    },
+    {
+      "playerId": "issa-djiguiba",
+      "no": 24
+    },
+    {
+      "playerId": "ousmane-camara",
+      "no": 25
+    },
+    {
+      "playerId": "alimami-gory",
+      "no": null
+    },
+    {
+      "playerId": "djigui-diarra",
+      "no": null
+    },
+    {
+      "playerId": "el-bilal-toure",
+      "no": null
+    },
+    {
+      "playerId": "moussa-sylla",
+      "no": null
+    }
+  ]
+}

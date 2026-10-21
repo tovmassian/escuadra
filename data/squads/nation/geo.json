@@ -1,0 +1,127 @@
+{
+  "id": "geo",
+  "kind": "nation",
+  "name": "Georgia",
+  "season": "2026",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#FF0000",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#FF0000", "#FFFFFF"],
+    "orientation": "vertical",
+    "weights": [2, 1, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Georgia_national_football_team",
+  "members": [
+    {
+      "playerId": "giorgi-mamardashvili",
+      "no": 1
+    },
+    {
+      "playerId": "otar-kakabadze",
+      "no": 2
+    },
+    {
+      "playerId": "lasha-dvali",
+      "no": 3
+    },
+    {
+      "playerId": "luka-lochoshvili",
+      "no": 4
+    },
+    {
+      "playerId": "saba-goglichidze",
+      "no": 5
+    },
+    {
+      "playerId": "kochorashvili",
+      "no": 6
+    },
+    {
+      "playerId": "kvaratskhelia",
+      "no": 7,
+      "captain": true
+    },
+    {
+      "playerId": "nodar-lominadze",
+      "no": 8
+    },
+    {
+      "playerId": "zuriko-davitashvili",
+      "no": 9
+    },
+    {
+      "playerId": "giorgi-chakvetadze",
+      "no": 10
+    },
+    {
+      "playerId": "budu-zivzivadze",
+      "no": 11
+    },
+    {
+      "playerId": "saba-lobzhanidze",
+      "no": 12
+    },
+    {
+      "playerId": "davit-kereselidze",
+      "no": 13
+    },
+    {
+      "playerId": "anzor-mekvabishvili",
+      "no": 14
+    },
+    {
+      "playerId": "gizo-mamageishvili",
+      "no": 15
+    },
+    {
+      "playerId": "saba-kharebashvili",
+      "no": 16
+    },
+    {
+      "playerId": "giorgi-kvernadze",
+      "no": 17
+    },
+    {
+      "playerId": "irakli-yegoian",
+      "no": 18
+    },
+    {
+      "playerId": "tsitaishvili",
+      "no": 19
+    },
+    {
+      "playerId": "sazonov",
+      "no": 20
+    },
+    {
+      "playerId": "giorgi-gagua",
+      "no": 21
+    },
+    {
+      "playerId": "mikautadze",
+      "no": 22
+    },
+    {
+      "playerId": "luka-gugeshashvili",
+      "no": 23
+    },
+    {
+      "playerId": "giorgi-abuashvili",
+      "no": null
+    },
+    {
+      "playerId": "ilia-beriashvili",
+      "no": null
+    },
+    {
+      "playerId": "jemal-tabidze",
+      "no": null
+    },
+    {
+      "playerId": "vladimer-mamuchashvili",
+      "no": null
+    }
+  ]
+}

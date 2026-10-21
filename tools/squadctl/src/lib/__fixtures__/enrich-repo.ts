@@ -11,7 +11,7 @@ import { afterEach, beforeEach } from 'vitest';
 import type { Player, Squad } from '../../../../../types/squad.ts';
 import { CREDITS } from '../photo-credit.ts';
 import { writeAnswer, type Lookup } from '../wikimedia-fetch.ts';
-import { ARTICLES, PEOPLE } from '../wikimedia-parse.ts';
+import { ARTICLES, INFOBOXES, PEOPLE } from '../wikimedia-parse.ts';
 
 /** Registers the hooks that restore `process.exitCode` and delete every repo
  *  a test made. Call once at the top of a test file. */
@@ -95,7 +95,8 @@ export type Seed = [Lookup<unknown>, string, unknown][];
 
 /** The answer each key gets. Q1's own image is never needed: Pedri's
  *  article image is usable, so it is deliberately not cached. Q3 is an
- *  older namesake, whose date gives no playing age in 2026. */
+ *  older namesake, whose date gives no playing age in 2026. Torres's
+ *  infobox gives no date, so his tie stays for a person. */
 export const SEED: Seed = [
   [
     ARTICLES,
@@ -115,6 +116,7 @@ export const SEED: Seed = [
   [PEOPLE, 'Q1', person('Q1', '2002-11-25', 'Pedri item.jpg')],
   [PEOPLE, 'Q2', person('Q2', '2000-02-29')],
   [PEOPLE, 'Q3', person('Q3', '1950-03-02')],
+  [INFOBOXES, 'Ferran Torres', { title: 'Ferran Torres', birthDate: null, currentClub: null }],
   [CREDITS, 'Pedri.jpg', imagePage('Pedri.jpg')],
   [CREDITS, 'Torres.jpg', imagePage('Torres.jpg')],
   [CREDITS, 'Veteran.jpg', imagePage('Veteran.jpg')],

@@ -1,0 +1,114 @@
+{
+  "id": "swz",
+  "kind": "nation",
+  "name": "Eswatini",
+  "season": "2026",
+  "primaryColor": "#3E5EB9",
+  "secondaryColor": "#B10C0C",
+  "verified": true,
+  "marker": {
+    "bands": ["#3E5EB9", "#FFD900", "#B10C0C", "#FFD900", "#3E5EB9"],
+    "orientation": "horizontal",
+    "weights": [3, 1, 8, 1, 3]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Eswatini_national_football_team",
+  "members": [
+    {
+      "playerId": "xolani-gama",
+      "no": 1
+    },
+    {
+      "playerId": "siphephelo-newman-philiso",
+      "no": 2
+    },
+    {
+      "playerId": "kwakhe-thwala",
+      "no": 3
+    },
+    {
+      "playerId": "neliswa-senzo-dlamini",
+      "no": 4
+    },
+    {
+      "playerId": "thando-langa",
+      "no": 5
+    },
+    {
+      "playerId": "innocent-dlamini",
+      "no": 6
+    },
+    {
+      "playerId": "felix-badenhorst",
+      "no": 7
+    },
+    {
+      "playerId": "siyabonga-mthokozisi-gwebu",
+      "no": 8
+    },
+    {
+      "playerId": "philani-mkhontfo",
+      "no": 9
+    },
+    {
+      "playerId": "banele-sikhondze",
+      "no": 10
+    },
+    {
+      "playerId": "andy-junior-magagula",
+      "no": 11
+    },
+    {
+      "playerId": "gift-gamedze",
+      "no": 12
+    },
+    {
+      "playerId": "mpendulo-lungelo-tfomo",
+      "no": 13
+    },
+    {
+      "playerId": "mzwandile-mabelesa",
+      "no": 14
+    },
+    {
+      "playerId": "mayibongwe-mabuza",
+      "no": 15
+    },
+    {
+      "playerId": "bongiswa-dlamini",
+      "no": 16
+    },
+    {
+      "playerId": "justice-figuareido",
+      "no": 17
+    },
+    {
+      "playerId": "sambulo-simelane",
+      "no": 18
+    },
+    {
+      "playerId": "fanelo-mamba",
+      "no": 19
+    },
+    {
+      "playerId": "sabelo-ndzinisa",
+      "no": 20
+    },
+    {
+      "playerId": "khanyakwezwe-shabalala",
+      "no": 21
+    },
+    {
+      "playerId": "simanga-masangane",
+      "no": 22
+    },
+    {
+      "playerId": "njabulo-ndlovu",
+      "no": 23
+    },
+    {
+      "playerId": "mxolisi-mkhontfo",
+      "no": 24
+    }
+  ]
+}

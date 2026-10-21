@@ -14,15 +14,15 @@
       "color": "#FFDF00"
     }
   },
-  "lastUpdated": "2026-09-07",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Brazil_national_football_team",
   "members": [
     {
-      "playerId": "alisson",
+      "playerId": "hugo-souza",
       "no": 1
     },
     {
-      "playerId": "ederson-silva",
+      "playerId": "vanderson",
       "no": 2
     },
     {
@@ -35,11 +35,11 @@
       "captain": true
     },
     {
-      "playerId": "casemiro",
+      "playerId": "danilo-santos",
       "no": 5
     },
     {
-      "playerId": "alex-sandro",
+      "playerId": "douglas-santos",
       "no": 6
     },
     {
@@ -51,71 +51,67 @@
       "no": 8
     },
     {
-      "playerId": "matheus-cunha",
+      "playerId": "endrick",
       "no": 9
     },
     {
-      "playerId": "neymar",
-      "no": 10
-    },
-    {
-      "playerId": "raphinha",
+      "playerId": "estevao",
       "no": 11
     },
     {
-      "playerId": "weverton",
+      "playerId": "otavio-3",
       "no": 12
     },
     {
-      "playerId": "danilo-luiz",
+      "playerId": "matheuzinho",
       "no": 13
     },
     {
-      "playerId": "bremer",
+      "playerId": "vitor-reis",
       "no": 14
     },
     {
-      "playerId": "leo-pereira",
+      "playerId": "arthur-dias",
       "no": 15
     },
     {
-      "playerId": "douglas-santos",
+      "playerId": "mauro-junior",
       "no": 16
     },
     {
-      "playerId": "fabinho",
+      "playerId": "breno-bidon",
       "no": 17
     },
     {
-      "playerId": "danilo-santos",
+      "playerId": "douglas-luiz",
       "no": 18
     },
     {
-      "playerId": "endrick",
+      "playerId": "pedro",
       "no": 19
     },
     {
-      "playerId": "paqueta",
+      "playerId": "matheus-martinelli",
       "no": 20
     },
     {
-      "playerId": "luiz-henrique",
+      "playerId": "andrey-santos",
       "no": 21
     },
     {
-      "playerId": "martinelli",
+      "playerId": "samuel-lino",
       "no": 22
     },
     {
-      "playerId": "ederson",
+      "playerId": "pedro-morisco",
       "no": 23
     },
     {
-      "playerId": "roger-ibanez",
+      "playerId": "jair-cunha",
       "no": 24
     },
     {
-      "playerId": "igor-thiago",
+      "playerId": "gabriel-bontempo",
       "no": 25
     },
     {

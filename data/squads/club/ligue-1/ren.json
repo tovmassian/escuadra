@@ -10,7 +10,7 @@
     "bands": ["#E2001A", "#000000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Stade_Rennais_F.C.",
   "members": [
     {
@@ -87,10 +87,6 @@
       "no": 35
     },
     {
-      "playerId": "alidu-seidu",
-      "no": 36
-    },
-    {
       "playerId": "mahdi-camara",
       "no": 45
     },
@@ -103,8 +99,8 @@
       "no": 60
     },
     {
-      "playerId": "jonathan-do-marcolino",
-      "no": 64
+      "playerId": "henrick-do-marcolino",
+      "no": 65
     },
     {
       "playerId": "arnaud-nordin",

@@ -1,0 +1,101 @@
+{
+  "id": "mng",
+  "kind": "nation",
+  "name": "Mongolia",
+  "season": "2026",
+  "primaryColor": "#DA2031",
+  "secondaryColor": "#0066B2",
+  "verified": true,
+  "marker": {
+    "bands": ["#DA2031", "#0066B2", "#DA2031"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Mongolia_national_football_team",
+  "members": [
+    {
+      "playerId": "tsenguun-khandaa",
+      "no": 1
+    },
+    {
+      "playerId": "uuganbat-baterdene",
+      "no": 2
+    },
+    {
+      "playerId": "taivankhuu-khurelbaatar",
+      "no": 3
+    },
+    {
+      "playerId": "otgontsagaan-saikhanbayar",
+      "no": 4
+    },
+    {
+      "playerId": "munkhkhuslen-munkhsaikhan",
+      "no": 5
+    },
+    {
+      "playerId": "amgalanbat-batbaatar",
+      "no": 6
+    },
+    {
+      "playerId": "dolgoon-amaraa",
+      "no": 7
+    },
+    {
+      "playerId": "togoldor-monkherdengiin",
+      "no": 9
+    },
+    {
+      "playerId": "tsendayuush-khurelbaatar",
+      "no": 10
+    },
+    {
+      "playerId": "tuguldur-batsukh",
+      "no": 11
+    },
+    {
+      "playerId": "monkhorgil-orkhon",
+      "no": 12
+    },
+    {
+      "playerId": "tsogtbayar-batbayar",
+      "no": 14
+    },
+    {
+      "playerId": "ganerdene-erdenebat",
+      "no": 15
+    },
+    {
+      "playerId": "ariunbold-batsaikhan",
+      "no": 21
+    },
+    {
+      "playerId": "ganerdene-enkherdene",
+      "no": 22
+    },
+    {
+      "playerId": "enkhorgil-otgonbaatar",
+      "no": 23
+    },
+    {
+      "playerId": "togoo-monkhbaatar",
+      "no": 24
+    },
+    {
+      "playerId": "usukhireedui-baatar",
+      "no": 25
+    },
+    {
+      "playerId": "temuulen-zayaat",
+      "no": 26
+    },
+    {
+      "playerId": "sainbuyan-nergui",
+      "no": 28
+    },
+    {
+      "playerId": "filip-chinzorig",
+      "no": 30
+    }
+  ]
+}

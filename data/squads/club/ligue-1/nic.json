@@ -10,7 +10,7 @@
     "bands": ["#D2001C", "#000000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/OGC_Nice",
   "members": [
     {
@@ -44,10 +44,6 @@
     {
       "playerId": "elye-wahi",
       "no": 11
-    },
-    {
-      "playerId": "victor-orakpo",
-      "no": 14
     },
     {
       "playerId": "laurent-abergel",
@@ -90,7 +86,7 @@
       "no": 35
     },
     {
-      "playerId": "brad-mantsounga",
+      "playerId": "alidu-seidu",
       "no": 36
     },
     {

@@ -1,0 +1,106 @@
+{
+  "id": "blz",
+  "kind": "nation",
+  "name": "Belize",
+  "season": "2026",
+  "primaryColor": "#171696",
+  "secondaryColor": "#D90F19",
+  "verified": true,
+  "marker": {
+    "bands": ["#D90F19", "#171696", "#D90F19"],
+    "orientation": "horizontal",
+    "weights": [1, 8, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Belize_national_football_team",
+  "members": [
+    {
+      "playerId": "charles-tillett",
+      "no": 1
+    },
+    {
+      "playerId": "pele-martinez",
+      "no": 2
+    },
+    {
+      "playerId": "norman-anderson",
+      "no": 3
+    },
+    {
+      "playerId": "orlando-velasquez",
+      "no": 4
+    },
+    {
+      "playerId": "deshawon-nembhard",
+      "no": 5
+    },
+    {
+      "playerId": "andir-chi",
+      "no": 6
+    },
+    {
+      "playerId": "nahjib-guerra",
+      "no": 7
+    },
+    {
+      "playerId": "desmond-wade",
+      "no": 9
+    },
+    {
+      "playerId": "jordy-polanco",
+      "no": 10
+    },
+    {
+      "playerId": "darrel-myvette",
+      "no": 14
+    },
+    {
+      "playerId": "freybin-pagoada",
+      "no": 15
+    },
+    {
+      "playerId": "jaylen-lennan",
+      "no": 17
+    },
+    {
+      "playerId": "daijon-daniels",
+      "no": 19
+    },
+    {
+      "playerId": "eldon-reneau",
+      "no": 20
+    },
+    {
+      "playerId": "woodrow-west",
+      "no": 22
+    },
+    {
+      "playerId": "alence-ayala",
+      "no": null
+    },
+    {
+      "playerId": "calvin-reid",
+      "no": null
+    },
+    {
+      "playerId": "felix-martinez",
+      "no": null
+    },
+    {
+      "playerId": "jaheim-mena",
+      "no": null
+    },
+    {
+      "playerId": "jordan-casanova",
+      "no": null
+    },
+    {
+      "playerId": "kenyon-smith",
+      "no": null
+    },
+    {
+      "playerId": "marlon-meza-jr",
+      "no": null
+    }
+  ]
+}

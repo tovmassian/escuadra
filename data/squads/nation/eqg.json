@@ -1,0 +1,115 @@
+{
+  "id": "eqg",
+  "kind": "nation",
+  "name": "Equatorial Guinea",
+  "season": "2026",
+  "primaryColor": "#3E9A00",
+  "secondaryColor": "#E32118",
+  "verified": true,
+  "marker": {
+    "bands": ["#0073CE", "#3E9A00", "#FFFFFF", "#E32118"],
+    "orientation": "vertical",
+    "weights": [1, 2, 2, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Equatorial_Guinea_national_football_team",
+  "members": [
+    {
+      "playerId": "jesus-owono",
+      "no": 1
+    },
+    {
+      "playerId": "federico-nsue",
+      "no": 2
+    },
+    {
+      "playerId": "marvin-anieboh",
+      "no": 3
+    },
+    {
+      "playerId": "alex-masogo",
+      "no": 4
+    },
+    {
+      "playerId": "gael-joel-akogo",
+      "no": 5
+    },
+    {
+      "playerId": "junior-bita",
+      "no": 6
+    },
+    {
+      "playerId": "jose-machin",
+      "no": 7
+    },
+    {
+      "playerId": "jannick-buyla",
+      "no": 8
+    },
+    {
+      "playerId": "dorian-jr",
+      "no": 9
+    },
+    {
+      "playerId": "loren-zuniga",
+      "no": 10
+    },
+    {
+      "playerId": "salomon-obama",
+      "no": 11
+    },
+    {
+      "playerId": "charles-ondo",
+      "no": 12
+    },
+    {
+      "playerId": "miguel-angel-nkogo",
+      "no": 13
+    },
+    {
+      "playerId": "alex-balboa",
+      "no": 14
+    },
+    {
+      "playerId": "saul-coco",
+      "no": 16
+    },
+    {
+      "playerId": "enrique-esono",
+      "no": 17
+    },
+    {
+      "playerId": "cristian-makate",
+      "no": 18
+    },
+    {
+      "playerId": "prince-ngaah",
+      "no": 19
+    },
+    {
+      "playerId": "santiago-eneme",
+      "no": 20
+    },
+    {
+      "playerId": "esteban-obiang",
+      "no": 21
+    },
+    {
+      "playerId": "pablo-ganet",
+      "no": 22,
+      "captain": true
+    },
+    {
+      "playerId": "manuel-sapunga",
+      "no": 23
+    },
+    {
+      "playerId": "roni-mbomio",
+      "no": 24
+    },
+    {
+      "playerId": "javier-mum",
+      "no": 25
+    }
+  ]
+}

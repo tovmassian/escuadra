@@ -10,11 +10,11 @@
     "bands": ["#B31942", "#FFFFFF"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/United_States_men%27s_national_soccer_team",
   "members": [
     {
-      "playerId": "matt-turner",
+      "playerId": "matt-freese",
       "no": 1
     },
     {
@@ -27,7 +27,8 @@
     },
     {
       "playerId": "tyler-adams",
-      "no": 4
+      "no": 4,
+      "captain": true
     },
     {
       "playerId": "antonee-robinson",
@@ -42,19 +43,19 @@
       "no": 7
     },
     {
-      "playerId": "weston-mckennie",
+      "playerId": "cavan-sullivan",
       "no": 8
     },
     {
-      "playerId": "ricardo-pepi",
+      "playerId": "damion-downs",
       "no": 9
     },
     {
-      "playerId": "christian-pulisic",
+      "playerId": "yunus-musah",
       "no": 10
     },
     {
-      "playerId": "brenden-aaronson",
+      "playerId": "zavier-gozo",
       "no": 11
     },
     {
@@ -62,16 +63,15 @@
       "no": 12
     },
     {
-      "playerId": "tim-ream",
-      "no": 13,
-      "captain": true
+      "playerId": "peyton-miller",
+      "no": 13
     },
     {
       "playerId": "sebastian-berhalter",
       "no": 14
     },
     {
-      "playerId": "cristian-roldan",
+      "playerId": "brooklyn-raines",
       "no": 15
     },
     {
@@ -83,31 +83,31 @@
       "no": 17
     },
     {
-      "playerId": "max-arfsten",
+      "playerId": "george-campbell",
       "no": 18
     },
     {
-      "playerId": "haji-wright",
+      "playerId": "julian-hall",
       "no": 19
     },
     {
-      "playerId": "folarin-balogun",
+      "playerId": "neil-pierre",
       "no": 20
     },
     {
-      "playerId": "timothy-weah",
+      "playerId": "frankie-westfield",
       "no": 21
     },
     {
-      "playerId": "mark-mckenzie",
+      "playerId": "justin-ellis",
       "no": 22
     },
     {
-      "playerId": "joe-scally",
+      "playerId": "cole-campbell",
       "no": 23
     },
     {
-      "playerId": "matt-freese",
+      "playerId": "diego-kochen",
       "no": 24
     },
     {
@@ -115,8 +115,16 @@
       "no": 25
     },
     {
-      "playerId": "alejandro-zendejas",
+      "playerId": "adri-mehmeti",
       "no": 26
+    },
+    {
+      "playerId": "mathis-albert",
+      "no": 27
+    },
+    {
+      "playerId": "brian-schwake",
+      "no": 28
     }
   ]
 }

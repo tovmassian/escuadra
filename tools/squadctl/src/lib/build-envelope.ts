@@ -4,11 +4,13 @@
 // The envelope shape lives in scripts/roster-envelope.ts, imported upward
 // rather than forked.
 import {
+  titlesEquivalent,
   validateEnvelope,
   type EnvelopeMember,
   type RosterEnvelope,
 } from '../../../../scripts/roster-envelope.ts';
 import { countryForCode } from './fifa-countries.ts';
+import type { NotInSquad } from './reconcile.ts';
 import type { TeamRegistryEntry } from './registry.ts';
 import type { ParsedSection } from './wikitext-parse.ts';
 import type { SectionTitle } from './wikitext-parse.ts';
@@ -17,6 +19,19 @@ import type { SectionTitle } from './wikitext-parse.ts';
  *  write rather than a flag. This also normalises the three clubs still
  *  stranded on 2025/26. */
 export const SEASON = { club: '2026/27', nation: '2026' } as const;
+
+/** `A`, `A and B`, `A, B and C`. */
+function listOf(names: string[]): string {
+  return names.length < 2
+    ? (names[0] ?? '')
+    : `${names.slice(0, -1).join(', ')} and ${names.at(-1)}`;
+}
+
+/** `no=` left blank, or a dash: Croatia writes `no=-` for a call-up with no
+ *  number yet. Either way the row deliberately carries no number. */
+function isBlankNumber(noRaw: string): boolean {
+  return /^[-–—]?$/.test(noRaw.trim());
+}
 
 export interface EnvelopeBuild {
   /** Null when the team could not produce a valid envelope at all. */
@@ -37,6 +52,10 @@ export interface BuildInput {
   clubNames?: ReadonlyMap<string, string>;
   sectionTitle: SectionTitle;
   parsed: ParsedSection;
+  /** `exclude` decisions. `apply` honours them too, but a row can carry a
+   *  value that fails the whole team here first — Sudan's pos=RW — so they
+   *  reach the row before anything validates it. */
+  excluded?: readonly NotInSquad[];
 }
 
 export function buildEnvelope({
@@ -44,6 +63,7 @@ export function buildEnvelope({
   sectionTitle,
   parsed,
   clubNames,
+  excluded = [],
 }: BuildInput): EnvelopeBuild {
   const failures: string[] = [];
   const warnings: string[] = [];
@@ -64,6 +84,13 @@ export function buildEnvelope({
       blankRows += 1;
       continue;
     }
+    const decision = excluded.find(
+      (d) => d.team === entry.id && row.title !== null && titlesEquivalent(d.title, row.title),
+    );
+    if (decision !== undefined) {
+      warnings.push(`excluded by decision: ${row.name} (${decision.reason})`);
+      continue;
+    }
     if (row.name === '') {
       failures.push(`a row has no readable name: ${row.raw}`);
       continue;
@@ -80,7 +107,7 @@ export function buildEnvelope({
     }
     // A non-empty `no=` that did not parse is a different problem from a
     // deliberately blank one, and only the first is worth failing on.
-    if (row.no === null && row.noRaw.trim() !== '') {
+    if (row.no === null && !isBlankNumber(row.noRaw)) {
       failures.push(`${row.name}: no=${JSON.stringify(row.noRaw)} is not a shirt number`);
       continue;
     }
@@ -124,6 +151,24 @@ export function buildEnvelope({
     members.push(member);
   }
 
+  // A number the source gives two players is a contradiction in the source —
+  // usually two matches' call-ups merged into one table. Failing the team
+  // kept a whole squad out over one cell, and picking a winner is a guess, so
+  // every player sharing it is written without one. The next sweep restores
+  // the number once the article is corrected.
+  const byNumber = new Map<number, EnvelopeMember[]>();
+  for (const member of members) {
+    if (member.no === null) continue;
+    byNumber.set(member.no, [...(byNumber.get(member.no) ?? []), member]);
+  }
+  for (const [no, sharing] of byNumber) {
+    if (sharing.length < 2) continue;
+    for (const member of sharing) member.no = null;
+    warnings.push(
+      `shirt number ${no} listed for ${listOf(sharing.map((m) => m.name))} — written without a number`,
+    );
+  }
+
   for (const unknown of parsed.unknownTemplates) {
     warnings.push(`unrecognised player-ish template {{${unknown.name}}} — parser needs teaching`);
   }
@@ -158,7 +203,8 @@ export function buildEnvelope({
   };
 
   // The envelope contract is already tested and enforces duplicate shirt
-  // numbers and duplicate names; reuse it rather than restating those rules.
+  // numbers (none survive the pass above) and duplicate names; reuse it
+  // rather than restating those rules.
   const invalid = validateEnvelope(envelope);
   if (invalid.length > 0) return { envelope: null, failures: invalid, blankRows };
 

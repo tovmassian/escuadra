@@ -50,10 +50,10 @@ never got applied.
 
 ### Commands own — you cause the write, you do not type it
 
-| file                  | written by                                              |
-| --------------------- | ------------------------------------------------------- |
-| `data/decisions.json` | `alias`, `split`, `exclude`, `birth`                    |
-| `data/players.json`   | `apply`, `rename`, `retitle`, `fork`, `birth`, `enrich` |
+| file                  | written by                                                        |
+| --------------------- | ----------------------------------------------------------------- |
+| `data/decisions.json` | `alias`, `split`, `exclude`, `unlink`, `birth`                    |
+| `data/players.json`   | `apply`, `rename`, `retitle`, `fork`, `unlink`, `birth`, `enrich` |
 
 ### Generated — never touch, never hand-review
 
@@ -166,17 +166,14 @@ Dropped headings are reported.
 Two requests per team, ~200 ms apart: the section list, then that section's
 raw wikitext. No per-player article is ever fetched.
 
-**Nations with no shirt numbers.** Seven articles — Brazil, Cameroon,
-Croatia, Hungary, Russia, Uruguay and Venezuela — publish their current squad
-as a call-up list with `no=` empty on every row, and Uruguay's is a 46-man
-preliminary list. They parse cleanly and would be written faithfully, but a
-squad with fewer than four numbered members is unplayable: `buildRound`
-(`lib/questionEngine.ts`) throws rather than build a level-1 prompt with no
-number to show. They are deliberately **not** applied — `data/teams.json`
-keeps their registry entries, so a sweep still fetches them, and Brazil keeps
-the numbered squad it already had. Check the numberless count in the report
-before applying a nation sweep, and hold these back again unless the picker
-has meanwhile learned to offer such a squad as Study-only.
+**Nations with no shirt numbers.** Many nation articles publish their
+current squad as a call-up list with `no=` empty (or `-`) on every row. They
+parse cleanly, and `apply` **holds** them — see `apply` below.
+
+**A shirt number listed twice.** Some articles give two players one number,
+usually two matches' call-ups merged into one table. Every player sharing it
+is written without a number, and the fetch report names them. The next sweep
+restores the number once the article is corrected.
 
 **Cache.** The default fetches fresh and writes `.cache/wikitext/`. The cache
 exists so a _parser_ change can be re-run at zero network cost, not so stale
@@ -240,6 +237,35 @@ only thing that can join Juventus's "Nico González" to a record stored as
 only when the row or the candidate record carries no title at all. When a
 row's title instead **conflicts** with what a name match would have picked,
 that is a `title-mismatch` — see below.
+
+**A namesake is never matched.** Before the global steps, a same-named record
+is set aside when it provably is someone else:
+
+- the row and the record carry **different birth dates**, and the record has
+  an article title, so `enrich` has checked its date — Uruguay's `Emiliano
+Martínez (footballer, born 1999)` against Argentina's goalkeeper, born 1992,
+  stored under the bare title the row's link is base-equivalent to. An
+  untitled record's date may be one the retired pipeline invented (Brazil's
+  Hugo Souza), so it proves nothing;
+- or, for a nation row, **another nation's squad already holds the record** —
+  a player plays for one nation. `apply` keeps this current through a run, so
+  a nation applied earlier in the run counts like one on disk.
+
+Neither applies when the row links the record's own article (equal once
+normalised): the article decides. A row whose every same-named record was set
+aside gets a new one (`aboubacar-camara-2`), reported as a warning, and the
+team stays verified — nothing is left to decide. Two players in two nation
+squads under one article title still fail `lib/dataIntegrity.test.ts`: that
+is a real dual listing, and `exclude` answers it.
+
+**A squad nobody can play is held.** A round asks ten numbered players
+(`ROUND_LENGTH`), so a squad with fewer is not written: no squad file, no
+player changes, and whatever is stored stays — a sweep never replaces
+Brazil's numbered squad with its numberless call-up list. Level 3 asks a
+nation squad's players their club, so a nation squad with a member who has
+none (American Samoa leaves `club=` empty on five rows) is held too. `held` is not a
+failure and leaves the exit code alone; the next sweep writes the team once
+its article numbers it.
 
 `verified` is the assertion pass's output — `true` only when a team has zero
 conflicts. `lastUpdated` moves only when something else in the file did, so a
@@ -315,7 +341,9 @@ npm run squadctl -- exclude <teamId> "<article title>" --reason "<why>"
 ```
 
 Records that a club's article lists a player who does not belong in that
-squad, and `apply` drops the row from then on.
+squad, and `fetch` drops the row from then on — before validating it, so a
+value in that row cannot fail the whole team (Sudan's `pos=RW`). `apply`
+honours it too, for envelopes fetched earlier.
 
 **A player belongs to exactly one club — the one they actually play for.** The
 club that owns the registration and collects the loan fee is irrelevant to the
@@ -338,6 +366,28 @@ Never fix a dual membership by editing the squad file. Those are generated,
 and `919f1f9` proved it — a player hand-removed from Arsenal was back on the
 next `apply`.
 
+### `unlink`
+
+```bash
+npm run squadctl -- unlink <teamId> "<article title>" --reason "<whose article it is>"
+```
+
+Records that a squad's article links one of its players to **someone else's
+article**, when the player has no article of their own to `retitle` to.
+Nicaragua links its Emmanuel Gómez (born 2000) to a Gambian defender's
+article, and Sierra Leone links its Francis Koroma (born 2000) to a former
+player's, born 1975.
+
+It also clears that title, and the photo that came through it, from the
+squad's members carrying it. `apply` then reconciles the row as if unlinked:
+it matches by name, never re-fills the title, and never joins the record the
+title does belong to. `enrich` sees no title, so it shows no one's photo and
+checks the birth date against no one's. Set the date with `birth` if needed.
+
+Keyed on team and title, like `exclude`, and `--reason` is required for the
+same reason: it overrules the source. `lib/dataIntegrity.test.ts` fails if a
+member of that squad carries the title again.
+
 ### `enrich`
 
 ```bash
@@ -353,13 +403,15 @@ unless `--offline`; writes only `data/players.json`. Design and results:
 `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.
 
 Per-player data comes in batches of 50, never one request per player — the
-same rule `fetch` keeps. Three stages, about 175 requests and under four
-minutes for the whole base at a 500 ms courtesy delay:
+same rule `fetch` keeps. Four stages — the infobox only where birth dates
+disagree — about 175 requests and under four minutes for the whole base at a
+500 ms courtesy delay:
 
 | stage     | asks for                                                                            |
 | --------- | ----------------------------------------------------------------------------------- |
 | Wikipedia | each `wikiTitle`'s free lead image and Wikidata item                                |
 | Wikidata  | each item's `instance of`, date of birth and image (P31/P569/P18)                   |
+| Infobox   | each article whose birth dates disagree: its infobox birth date and current club    |
 | Commons   | each photo's next candidate: 960 px thumbnail, original size, licence, author, page |
 
 Commons runs in passes: every photo's first candidate, then the item's own
@@ -599,6 +651,11 @@ atm: conflicted (verified: false)
 
 Wikipedia changed how it spells a player, without the squad changing at all.
 
+A shared surname is not asked about when the two birth dates differ: that is
+two people (Ecuador's Fricio Caicedo arriving as Moisés Caicedo left). The
+arrival is created and reported as a namesake. Only a nation row carries a
+birth date, so a club squad's renames are always asked.
+
 **The squad slot is HELD on the stored record and no new player is created.**
 This is the one conflict where writing first and asking afterwards is
 unrecoverable: it puts a second record for one person into `players.json`, with
@@ -757,7 +814,7 @@ npm run squadctl -- rename ederson-silva "Éderson Silva"
 ### `unknown-template`
 
 ```
-xxx: unrecognised player-ish template {{football squad player}} — parser needs teaching
+xxx: unrecognised player-ish template {{squad list player}} — parser needs teaching
 ```
 
 Not a data problem — a parser gap. The row was **not** parsed, so the squad is
@@ -794,8 +851,23 @@ conflict: birth date on torres ("Ferran Torres") — stored 1998-02-29, Wikidata
 
 The stored birth date and Wikidata disagree. Either can be wrong, or the
 title names a different person — a different birth date is how that shows
-up — so `enrich` writes neither date and **holds the photo** until you answer.
-Exit code `4`.
+up.
+
+**`enrich` first asks the article's infobox**, the tie-break below, made
+mechanical: one batched request per 50 disagreeing titles, cached like the
+other stages.
+
+- Infobox = stored date: Wikidata is the odd one out, and the stored date
+  stands (`confirmed`).
+- Infobox = Wikidata's date, **and** the infobox's current club is ours: the
+  stored date was a typo in the squad table, and Wikidata's is written
+  (`corrected`). Without the club the article could be a namesake's — Iraq
+  links Hussein Hassan to an Al-Zawraa player's article, and the squad says
+  Erbil.
+
+Of the first 103 on the new nations, 88 settled this way. What remains is a
+conflict: `enrich` writes neither date and **holds the photo** until you
+answer. Exit code `4`.
 
 **You decide which source is right.** Read the article's infobox: this
 project's source is Wikipedia, so it breaks the tie.
@@ -806,7 +878,8 @@ project's source is Wikipedia, so it breaks the tie.
 - **Infobox agrees with the stored date**: Wikidata is the odd one out (a
   placeholder 1 January, a typo'd year). `birth <id> --keep`.
 - **The article is someone else** — another nationality, club or decade:
-  `retitle`, and `alias --title` the old link so `apply` keeps matching.
+  `retitle`, and `alias --title` the old link so `apply` keeps matching. If
+  the player has no article of their own, `unlink` the team's link instead.
 - **No majority**: leave it. The photo stays held, and nothing is guessed.
 
 **What you touch:** `birth` writes `data/players.json`, `birth --keep`
@@ -872,7 +945,8 @@ says which two.
 | 4    | conflicts present — files written, some `verified: false` |
 | 5    | repo write, registry, or generator error                  |
 
-Code `4` means _review needed_, not _broken_.
+Code `4` means _review needed_, not _broken_. A held team (`apply`) raises no
+code at all: nothing is wrong, the article just is not playable yet.
 
 `enrich` uses the same table: `1` when a lookup went unanswered — a batch
 failed after its retries, the reply skipped a key, or `--offline` had nothing

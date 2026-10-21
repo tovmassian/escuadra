@@ -10,7 +10,7 @@
     "bands": ["#FFE600", "#C8102E"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/U.S._Lecce",
   "members": [
     {
@@ -97,6 +97,10 @@
     {
       "playerId": "elijah-scott",
       "no": 31
+    },
+    {
+      "playerId": "alexandru-borbei",
+      "no": 32
     },
     {
       "playerId": "plamen-penev",

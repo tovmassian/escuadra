@@ -10,31 +10,27 @@
     "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-07",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/France_national_football_team",
   "members": [
     {
-      "playerId": "samba",
+      "playerId": "guillaume-restes",
       "no": 1
     },
     {
-      "playerId": "gusto",
+      "playerId": "pierre-kalulu",
       "no": 2
     },
     {
-      "playerId": "digne",
+      "playerId": "adrien-truffert",
       "no": 3
-    },
-    {
-      "playerId": "upamecano",
-      "no": 4
     },
     {
       "playerId": "kounde",
       "no": 5
     },
     {
-      "playerId": "kone",
+      "playerId": "camavinga",
       "no": 6
     },
     {
@@ -42,17 +38,12 @@
       "no": 7
     },
     {
-      "playerId": "tchouameni",
+      "playerId": "kone",
       "no": 8
     },
     {
-      "playerId": "thuram",
+      "playerId": "cherki",
       "no": 9
-    },
-    {
-      "playerId": "mbappe",
-      "no": 10,
-      "captain": true
     },
     {
       "playerId": "olise",
@@ -63,7 +54,7 @@
       "no": 12
     },
     {
-      "playerId": "kante",
+      "playerId": "diouf",
       "no": 13
     },
     {
@@ -71,7 +62,7 @@
       "no": 14
     },
     {
-      "playerId": "konate",
+      "playerId": "leny-yoro",
       "no": 15
     },
     {
@@ -79,15 +70,15 @@
       "no": 16
     },
     {
-      "playerId": "saliba",
+      "playerId": "lacroix",
       "no": 17
     },
     {
-      "playerId": "zaire-emery",
+      "playerId": "akliouche",
       "no": 18
     },
     {
-      "playerId": "t-hernandez",
+      "playerId": "esteban-lepaul",
       "no": 19
     },
     {
@@ -95,28 +86,16 @@
       "no": 20
     },
     {
-      "playerId": "l-hernandez",
+      "playerId": "lucas-da-cunha",
       "no": 21
     },
     {
-      "playerId": "mateta",
+      "playerId": "jeremy-jacquet",
       "no": 22
     },
     {
-      "playerId": "risser",
+      "playerId": "jean-butez",
       "no": 23
-    },
-    {
-      "playerId": "cherki",
-      "no": 24
-    },
-    {
-      "playerId": "akliouche",
-      "no": 25
-    },
-    {
-      "playerId": "lacroix",
-      "no": 26
     }
   ]
 }

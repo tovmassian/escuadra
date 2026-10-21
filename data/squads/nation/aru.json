@@ -1,0 +1,106 @@
+{
+  "id": "aru",
+  "kind": "nation",
+  "name": "Aruba",
+  "season": "2026",
+  "primaryColor": "#418FDE",
+  "secondaryColor": "#FFD100",
+  "verified": true,
+  "marker": {
+    "bands": ["#418FDE", "#FFD100", "#418FDE", "#FFD100", "#418FDE"],
+    "orientation": "horizontal",
+    "weights": [14, 1, 1, 1, 3]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Aruba_national_football_team",
+  "members": [
+    {
+      "playerId": "matthew-lentink",
+      "no": 1
+    },
+    {
+      "playerId": "nickenson-paul",
+      "no": 2
+    },
+    {
+      "playerId": "diederick-luydens",
+      "no": 3
+    },
+    {
+      "playerId": "bradley-martis",
+      "no": 4
+    },
+    {
+      "playerId": "kymani-nedd",
+      "no": 5
+    },
+    {
+      "playerId": "rovien-ostiana",
+      "no": 6
+    },
+    {
+      "playerId": "gello-robertha",
+      "no": 7
+    },
+    {
+      "playerId": "walter-bennett",
+      "no": 8
+    },
+    {
+      "playerId": "carlito-fermina",
+      "no": 9
+    },
+    {
+      "playerId": "jaybrien-romano",
+      "no": 10
+    },
+    {
+      "playerId": "justin-peterson",
+      "no": 12
+    },
+    {
+      "playerId": "tyrese-gijsbertha",
+      "no": 13
+    },
+    {
+      "playerId": "ezekiel-frans",
+      "no": 14
+    },
+    {
+      "playerId": "gladwin-curiel",
+      "no": 15
+    },
+    {
+      "playerId": "alljereau-mercera",
+      "no": 16
+    },
+    {
+      "playerId": "jayden-kruydenhof",
+      "no": 17
+    },
+    {
+      "playerId": "josthan-maduro",
+      "no": 18
+    },
+    {
+      "playerId": "javier-jimenez",
+      "no": 19
+    },
+    {
+      "playerId": "justin-figaroa",
+      "no": 20
+    },
+    {
+      "playerId": "mishawn-molina",
+      "no": 21
+    },
+    {
+      "playerId": "rainey-breinburg",
+      "no": 22
+    },
+    {
+      "playerId": "joey-zwaan",
+      "no": 23
+    }
+  ]
+}

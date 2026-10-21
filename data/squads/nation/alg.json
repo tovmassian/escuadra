@@ -14,7 +14,7 @@
       "color": "#D21034"
     }
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Algeria_national_football_team",
   "members": [
     {
@@ -22,7 +22,7 @@
       "no": 1
     },
     {
-      "playerId": "mandi",
+      "playerId": "samir-chergui",
       "no": 2
     },
     {
@@ -30,7 +30,7 @@
       "no": 3
     },
     {
-      "playerId": "mohamed-amine-tougai",
+      "playerId": "ahmed-touba",
       "no": 4
     },
     {
@@ -38,17 +38,12 @@
       "no": 5
     },
     {
-      "playerId": "ramiz-zerrouki",
+      "playerId": "adem-zorgane",
       "no": 6
     },
     {
-      "playerId": "riyad-mahrez",
-      "no": 7,
-      "captain": true
-    },
-    {
-      "playerId": "houssem-aouar",
-      "no": 8
+      "playerId": "anis-hadj-moussa",
+      "no": 7
     },
     {
       "playerId": "amine-gouiri",
@@ -59,11 +54,11 @@
       "no": 10
     },
     {
-      "playerId": "anis-hadj-moussa",
+      "playerId": "mohamed-amoura",
       "no": 11
     },
     {
-      "playerId": "nadhir-benbouali",
+      "playerId": "amin-chiakha",
       "no": 12
     },
     {
@@ -71,7 +66,7 @@
       "no": 13
     },
     {
-      "playerId": "hicham-boudaoui",
+      "playerId": "adil-aouchiche",
       "no": 14
     },
     {
@@ -79,23 +74,19 @@
       "no": 15
     },
     {
-      "playerId": "oussama-benbot",
-      "no": 16
-    },
-    {
-      "playerId": "rafik-belghali",
+      "playerId": "himad-abdelli",
       "no": 17
     },
     {
-      "playerId": "mohamed-amoura",
+      "playerId": "adil-boulbina",
       "no": 18
     },
     {
-      "playerId": "nabil-bentaleb",
+      "playerId": "saadi-radouani",
       "no": 19
     },
     {
-      "playerId": "adil-boulbina",
+      "playerId": "bachir-belloumi",
       "no": 20
     },
     {
@@ -103,24 +94,32 @@
       "no": 21
     },
     {
-      "playerId": "ibrahim-maza",
+      "playerId": "monsef-bakrar",
       "no": 22
     },
     {
-      "playerId": "luca-zidane",
+      "playerId": "abdelatif-ramdane",
       "no": 23
     },
     {
-      "playerId": "yacine-titraoui",
+      "playerId": "ilan-kebbal",
       "no": 24
     },
     {
-      "playerId": "fares-ghedjemis",
+      "playerId": "sohaib-nair",
       "no": 25
     },
     {
-      "playerId": "samir-chergui",
+      "playerId": "adil-bourabaa",
       "no": 26
+    },
+    {
+      "playerId": "ibrahim-maza",
+      "no": 30
+    },
+    {
+      "playerId": "kilian-belazzoug",
+      "no": null
     }
   ]
 }

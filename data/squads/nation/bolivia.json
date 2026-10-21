@@ -1,0 +1,122 @@
+{
+  "id": "bolivia",
+  "kind": "nation",
+  "name": "Bolivia",
+  "season": "2026",
+  "primaryColor": "#D32011",
+  "secondaryColor": "#00702D",
+  "verified": true,
+  "marker": {
+    "bands": ["#D32011", "#F0E53C", "#00702D"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Bolivia_national_football_team",
+  "members": [
+    {
+      "playerId": "rodrigo-banegas",
+      "no": 1
+    },
+    {
+      "playerId": "diego-arroyo",
+      "no": 2
+    },
+    {
+      "playerId": "diego-medina",
+      "no": 3
+    },
+    {
+      "playerId": "luis-haquin",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "efrain-morales",
+      "no": 5
+    },
+    {
+      "playerId": "hector-cuellar",
+      "no": 6
+    },
+    {
+      "playerId": "miguel-terceros",
+      "no": 7
+    },
+    {
+      "playerId": "rai-lima",
+      "no": 8
+    },
+    {
+      "playerId": "jose-flores",
+      "no": 9
+    },
+    {
+      "playerId": "ramiro-vaca",
+      "no": 10
+    },
+    {
+      "playerId": "jose-martines",
+      "no": 11
+    },
+    {
+      "playerId": "geronimo-govea",
+      "no": 12
+    },
+    {
+      "playerId": "leonardo-viviani",
+      "no": 13
+    },
+    {
+      "playerId": "robson-tome",
+      "no": 14
+    },
+    {
+      "playerId": "gabriel-villamil",
+      "no": 15
+    },
+    {
+      "playerId": "oscar-lopez",
+      "no": 16
+    },
+    {
+      "playerId": "roberto-fernandez",
+      "no": 17
+    },
+    {
+      "playerId": "jesus-maraude",
+      "no": 18
+    },
+    {
+      "playerId": "richet-gomez",
+      "no": 19
+    },
+    {
+      "playerId": "carlos-melgar",
+      "no": 20
+    },
+    {
+      "playerId": "yomar-rocha",
+      "no": 21
+    },
+    {
+      "playerId": "marcelo-torrez",
+      "no": 22
+    },
+    {
+      "playerId": "guillermo-viscarra",
+      "no": 23
+    },
+    {
+      "playerId": "guilmar-centella",
+      "no": 24
+    },
+    {
+      "playerId": "fernando-nava",
+      "no": 25
+    },
+    {
+      "playerId": "damian-medina",
+      "no": 26
+    }
+  ]
+}

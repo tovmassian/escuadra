@@ -1,0 +1,93 @@
+{
+  "id": "ven",
+  "kind": "nation",
+  "name": "Venezuela",
+  "season": "2026",
+  "primaryColor": "#FFCC00",
+  "secondaryColor": "#CF142B",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFCC00", "#00247D", "#CF142B"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Venezuela_national_football_team",
+  "members": [
+    {
+      "playerId": "carlos-vivas",
+      "no": 3
+    },
+    {
+      "playerId": "daniel-pereira",
+      "no": 10
+    },
+    {
+      "playerId": "jovanny-bolivar",
+      "no": 11
+    },
+    {
+      "playerId": "cristopher-varela",
+      "no": 12
+    },
+    {
+      "playerId": "delvin-alfonzo",
+      "no": 15
+    },
+    {
+      "playerId": "wikelman-carmona",
+      "no": 16
+    },
+    {
+      "playerId": "edson-tortolero",
+      "no": 17
+    },
+    {
+      "playerId": "marco-libra",
+      "no": 18
+    },
+    {
+      "playerId": "bryan-castillo",
+      "no": 20
+    },
+    {
+      "playerId": "sebastian-mendoza",
+      "no": 21
+    },
+    {
+      "playerId": "joel-graterol",
+      "no": 22
+    },
+    {
+      "playerId": "yerwin-sulbaran",
+      "no": 23
+    },
+    {
+      "playerId": "yordan-osorio",
+      "no": 24
+    },
+    {
+      "playerId": "andrusw-araujo",
+      "no": 25
+    },
+    {
+      "playerId": "juan-david-sanchez",
+      "no": 26
+    },
+    {
+      "playerId": "bianneider-tamayo",
+      "no": 27
+    },
+    {
+      "playerId": "roman-davis",
+      "no": 28
+    },
+    {
+      "playerId": "nicola-profeta",
+      "no": 30
+    },
+    {
+      "playerId": "frankarlos-benitez",
+      "no": 32
+    }
+  ]
+}

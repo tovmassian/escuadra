@@ -10,7 +10,7 @@
     "bands": ["#005EB8", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Scotland_national_football_team",
   "members": [
     {
@@ -27,15 +27,15 @@
       "captain": true
     },
     {
-      "playerId": "scott-mctominay",
+      "playerId": "luis-binks",
       "no": 4
     },
     {
-      "playerId": "grant-hanley",
+      "playerId": "stephen-welsh",
       "no": 5
     },
     {
-      "playerId": "kieran-tierney",
+      "playerId": "josh-doig",
       "no": 6
     },
     {
@@ -43,15 +43,15 @@
       "no": 7
     },
     {
-      "playerId": "tyler-fletcher",
+      "playerId": "billy-gilmour",
       "no": 8
     },
     {
-      "playerId": "lyndon-dykes",
+      "playerId": "oli-mcburnie",
       "no": 9
     },
     {
-      "playerId": "che-adams",
+      "playerId": "ure",
       "no": 10
     },
     {
@@ -67,15 +67,15 @@
       "no": 13
     },
     {
-      "playerId": "ross-stewart",
+      "playerId": "lennon-miller",
       "no": 14
     },
     {
-      "playerId": "john-souttar",
+      "playerId": "josh-mcpake",
       "no": 15
     },
     {
-      "playerId": "dominic-hyam",
+      "playerId": "findlay-curtis",
       "no": 16
     },
     {
@@ -83,7 +83,7 @@
       "no": 17
     },
     {
-      "playerId": "george-hirst",
+      "playerId": "luke-graham",
       "no": 18
     },
     {
@@ -91,11 +91,11 @@
       "no": 19
     },
     {
-      "playerId": "lawrence-shankland",
+      "playerId": "kieron-bowie",
       "no": 20
     },
     {
-      "playerId": "craig-gordon",
+      "playerId": "scott-bain",
       "no": 21
     },
     {
@@ -103,20 +103,16 @@
       "no": 22
     },
     {
-      "playerId": "kenny-mclean",
+      "playerId": "kristi-montgomery",
       "no": 23
     },
     {
-      "playerId": "anthony-ralston",
-      "no": 24
+      "playerId": "colby-donovan",
+      "no": null
     },
     {
-      "playerId": "findlay-curtis",
-      "no": 25
-    },
-    {
-      "playerId": "scott-mckenna",
-      "no": 26
+      "playerId": "jon-mccracken",
+      "no": null
     }
   ]
 }

@@ -6,12 +6,13 @@ import {
   describeBirthConflict,
   enrichPlayer,
   pendingFiles,
+  pendingInfoboxes,
   summarize,
   type EnrichContext,
   type Lookups,
 } from './enrich-plan.ts';
 import type { CreditOutcome } from './photo-credit.ts';
-import type { ArticleInfo, PersonInfo } from './wikimedia-parse.ts';
+import type { ArticleInfo, InfoboxInfo, PersonInfo } from './wikimedia-parse.ts';
 
 function player(overrides: Partial<Player> = {}): Player {
   return {
@@ -49,6 +50,7 @@ function lookups({
   failedTitles = [],
   failedItems = [],
   failedFiles = [],
+  infobox = null,
 }: {
   article?: ArticleInfo | null;
   /** null: Wikidata answered that it has no such item. */
@@ -57,6 +59,8 @@ function lookups({
   failedTitles?: string[];
   failedItems?: string[];
   failedFiles?: string[];
+  /** The article's infobox, keyed by its title; null: not asked. */
+  infobox?: InfoboxInfo | null;
 } = {}): Lookups {
   return {
     articles: new Map(article === null ? [] : [['Pedri', article]]),
@@ -65,6 +69,8 @@ function lookups({
     failedTitles: new Set(failedTitles),
     failedItems: new Set(failedItems),
     failedFiles: new Set(failedFiles),
+    infoboxes: new Map(infobox === null ? [] : [['Pedri', infobox]]),
+    failedInfoboxes: new Set(),
   };
 }
 
@@ -488,5 +494,73 @@ describe('summarize', () => {
       licences: { 'CC BY-SA 4.0': 1 },
       changed: { photos: 1, births: 1, records: 1 },
     });
+  });
+});
+
+describe('enrichPlayer — the infobox breaks a birth-date tie', () => {
+  // The README's tie-break, answered by the article itself: this project's
+  // source is Wikipedia, so its infobox decides between the stored date and
+  // Wikidata's. 88 of the first 103 conflicts on the new nations settled.
+  const stored = player({ birth: '2002-11-15', club: 'Barcelona' });
+
+  it('keeps the stored date, and shows the photo, when the infobox agrees with it', () => {
+    const result = enrichPlayer(
+      stored,
+      lookups({ infobox: { birth: '2002-11-15', club: 'Barcelona' } }),
+    );
+    expect(result.birth).toBe('confirmed');
+    expect(result.conflict).toBeNull();
+    expect(result.player.birth).toBe('2002-11-15');
+    expect(result.photo).toBe('ok');
+  });
+
+  it("takes Wikidata's date when the infobox agrees with it and names our club", () => {
+    const result = enrichPlayer(
+      stored,
+      lookups({ infobox: { birth: '2002-11-25', club: 'FC Barcelona' } }),
+    );
+    expect(result.birth).toBe('corrected');
+    expect(result.player.birth).toBe('2002-11-25');
+    expect(result.photo).toBe('ok');
+  });
+
+  it("leaves the conflict when the infobox names another club: it may be someone else's article", () => {
+    // Iraq links Hussein Hassan to an article whose infobox says Al-Zawraa;
+    // the squad says Erbil. Correcting would write a namesake's birth date.
+    const result = enrichPlayer(
+      stored,
+      lookups({ infobox: { birth: '2002-11-25', club: 'Real Madrid' } }),
+    );
+    expect(result.birth).toBe('conflict');
+    expect(result.player.birth).toBe('2002-11-15');
+  });
+
+  it('leaves the conflict when the infobox names no club', () => {
+    const result = enrichPlayer(stored, lookups({ infobox: { birth: '2002-11-25', club: null } }));
+    expect(result.birth).toBe('conflict');
+  });
+
+  it('leaves the conflict when the infobox agrees with neither', () => {
+    const result = enrichPlayer(
+      stored,
+      lookups({ infobox: { birth: '2002-12-01', club: 'Barcelona' } }),
+    );
+    expect(result.birth).toBe('conflict');
+    expect(result.photo).toBe('held');
+  });
+
+  it('leaves the conflict when there is no infobox answer', () => {
+    expect(enrichPlayer(stored, lookups()).birth).toBe('conflict');
+  });
+
+  it('asks for the infobox of a birth mismatch only', () => {
+    const agreeing = player({ id: 'agrees', birth: '2002-11-25' });
+    const unknown = player({ id: 'unknown', birth: null });
+    expect(pendingInfoboxes([stored, agreeing, unknown], lookups())).toEqual(['Pedri']);
+  });
+
+  it('asks nothing once the infobox is answered', () => {
+    const answered = lookups({ infobox: { birth: null, club: null } });
+    expect(pendingInfoboxes([stored], answered)).toEqual([]);
   });
 });

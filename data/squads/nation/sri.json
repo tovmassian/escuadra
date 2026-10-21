@@ -1,0 +1,139 @@
+{
+  "id": "sri",
+  "kind": "nation",
+  "name": "Sri Lanka",
+  "season": "2026",
+  "primaryColor": "#8D153A",
+  "secondaryColor": "#FFBE29",
+  "verified": true,
+  "marker": {
+    "bands": ["#00534E", "#EB7400", "#8D153A"],
+    "orientation": "vertical",
+    "weights": [1, 1, 4]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Sri_Lanka_national_football_team",
+  "members": [
+    {
+      "playerId": "sujan-perera",
+      "no": 1,
+      "captain": true
+    },
+    {
+      "playerId": "anujan-rajendram",
+      "no": 2
+    },
+    {
+      "playerId": "william-thomason",
+      "no": 3
+    },
+    {
+      "playerId": "garrett-kelly",
+      "no": 6
+    },
+    {
+      "playerId": "rahul-suresh",
+      "no": 7
+    },
+    {
+      "playerId": "dillon-de-silva",
+      "no": 11
+    },
+    {
+      "playerId": "leon-perera",
+      "no": 12
+    },
+    {
+      "playerId": "gavin-de-niese",
+      "no": 13
+    },
+    {
+      "playerId": "steven-sacayaradjy",
+      "no": 14
+    },
+    {
+      "playerId": "barath-suresh",
+      "no": 18
+    },
+    {
+      "playerId": "muhammedhu-munsif",
+      "no": 19
+    },
+    {
+      "playerId": "adhavan-rajamohan",
+      "no": null
+    },
+    {
+      "playerId": "ahmed-waseem-razeek",
+      "no": null
+    },
+    {
+      "playerId": "aman-faizer",
+      "no": null
+    },
+    {
+      "playerId": "ayman-zawahir",
+      "no": null
+    },
+    {
+      "playerId": "claudio-kammerknecht",
+      "no": null
+    },
+    {
+      "playerId": "geremi-perera",
+      "no": null
+    },
+    {
+      "playerId": "jason-thayaparan",
+      "no": null
+    },
+    {
+      "playerId": "kaveesh-lakpriya-fernando",
+      "no": null
+    },
+    {
+      "playerId": "mohamed-kursheeth",
+      "no": null
+    },
+    {
+      "playerId": "mohamed-mursith",
+      "no": null
+    },
+    {
+      "playerId": "mohammad-hasmeer",
+      "no": null
+    },
+    {
+      "playerId": "niloshan-senthurvasan",
+      "no": null
+    },
+    {
+      "playerId": "noah-karunaratne",
+      "no": null
+    },
+    {
+      "playerId": "oliver-kelaart",
+      "no": null
+    },
+    {
+      "playerId": "regize-canistan",
+      "no": null
+    },
+    {
+      "playerId": "sam-durrant",
+      "no": null
+    },
+    {
+      "playerId": "shafrath-nawas",
+      "no": null
+    },
+    {
+      "playerId": "wade-dekker",
+      "no": null
+    },
+    {
+      "playerId": "zahi-addis",
+      "no": null
+    }
+  ]
+}

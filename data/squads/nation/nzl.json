@@ -1,0 +1,114 @@
+{
+  "id": "nzl",
+  "kind": "nation",
+  "name": "New Zealand",
+  "season": "2026",
+  "primaryColor": "#012169",
+  "secondaryColor": "#C8102E",
+  "verified": true,
+  "marker": {
+    "bands": ["#012169"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#C8102E"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/New_Zealand_men's_national_football_team",
+  "members": [
+    {
+      "playerId": "alex-paulsen",
+      "no": 1
+    },
+    {
+      "playerId": "callan-elliot",
+      "no": 2
+    },
+    {
+      "playerId": "sam-sutton",
+      "no": 3
+    },
+    {
+      "playerId": "tyler-bindon",
+      "no": 4
+    },
+    {
+      "playerId": "michael-boxall",
+      "no": 5
+    },
+    {
+      "playerId": "lachlan-bayliss",
+      "no": 6
+    },
+    {
+      "playerId": "logan-rogerson",
+      "no": 7
+    },
+    {
+      "playerId": "marko-stamenic",
+      "no": 8
+    },
+    {
+      "playerId": "chris-wood",
+      "no": 9,
+      "captain": true
+    },
+    {
+      "playerId": "stipe-ukich",
+      "no": 10
+    },
+    {
+      "playerId": "elijah-just",
+      "no": 11
+    },
+    {
+      "playerId": "michael-woud",
+      "no": 12
+    },
+    {
+      "playerId": "dalton-wilkins",
+      "no": 13
+    },
+    {
+      "playerId": "alex-rufer",
+      "no": 14
+    },
+    {
+      "playerId": "bill-tuiloma",
+      "no": 15
+    },
+    {
+      "playerId": "george-stanger",
+      "no": 16
+    },
+    {
+      "playerId": "dane-ingham",
+      "no": 17
+    },
+    {
+      "playerId": "ben-waine",
+      "no": 18
+    },
+    {
+      "playerId": "ben-old",
+      "no": 19
+    },
+    {
+      "playerId": "jesse-randall",
+      "no": 21
+    },
+    {
+      "playerId": "henry-gray",
+      "no": 22
+    },
+    {
+      "playerId": "owen-parkerprice",
+      "no": 23
+    },
+    {
+      "playerId": "moses-dyer",
+      "no": 24
+    }
+  ]
+}

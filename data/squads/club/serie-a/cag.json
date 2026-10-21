@@ -10,7 +10,7 @@
     "bands": ["#A31E22", "#002B5C"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Cagliari_Calcio",
   "members": [
     {
@@ -99,6 +99,10 @@
       "no": 27
     },
     {
+      "playerId": "sugawara",
+      "no": 28
+    },
+    {
       "playerId": "demi-akarakiri",
       "no": 30
     },
@@ -115,6 +119,10 @@
       "no": 33
     },
     {
+      "playerId": "alessandro-sugamele",
+      "no": 35
+    },
+    {
       "playerId": "nicola-grandu",
       "no": 36
     },
@@ -129,10 +137,6 @@
     {
       "playerId": "massolin",
       "no": 79
-    },
-    {
-      "playerId": "sugawara",
-      "no": null
     }
   ]
 }

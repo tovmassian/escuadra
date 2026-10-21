@@ -10,7 +10,7 @@
     "bands": ["#AD1919", "#05232F"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Genoa_C.F.C.",
   "members": [
     {
@@ -107,20 +107,12 @@
       "no": 71
     },
     {
-      "playerId": "mamedi-doucoure",
-      "no": 74
-    },
-    {
       "playerId": "lorenzo-venturino",
       "no": 76
     },
     {
       "playerId": "mikael-egill-ellertsson",
       "no": 77
-    },
-    {
-      "playerId": "marcelo-vaz",
-      "no": 85
     },
     {
       "playerId": "stephan-el-shaarawy",

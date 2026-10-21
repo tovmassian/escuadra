@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
-import { assess, conflictCommand, describeConflict } from './assertions.ts';
+import { ROUND_LENGTH } from '../../../../lib/scoring.ts';
+import { PLAYABLE_NUMBERED, assess, conflictCommand, describeConflict } from './assertions.ts';
 import type { TeamPlan } from './reconcile.ts';
 
 const squad = (kind: 'club' | 'nation', memberCount: number): TeamPlan['squad'] => ({
@@ -30,6 +31,8 @@ const plan = (over: Partial<TeamPlan> = {}): TeamPlan => ({
   loanedOut: [],
   excluded: [],
   generatedIds: [],
+  namesakes: [],
+  clubless: [],
   parsedCount: 25,
   matchedCount: 25,
   addedCount: 0,
@@ -80,6 +83,63 @@ describe('assess — hard failures', () => {
     expect(assess(plan({ squad: bare })).failures.join()).toContain(
       'never given an invented colour',
     );
+  });
+});
+
+describe('assess — an unplayable squad is held', () => {
+  // Brazil's article lists its current call-up with no shirt numbers at all.
+  // Written, it would be a squad `buildRound` throws on the moment it is
+  // picked, and a sweep would replace the numbered squad Brazil already has.
+  const numbering = (kind: 'club' | 'nation', count: number, numbered: number) => {
+    const base = squad(kind, count);
+    return {
+      ...base,
+      members: base.members.map((m, i) => (i < numbered ? m : { ...m, no: null })),
+    };
+  };
+
+  it('asks exactly the numbered members one round of the app asks', () => {
+    expect(PLAYABLE_NUMBERED).toBe(ROUND_LENGTH);
+  });
+
+  it('holds a squad with fewer numbered members than one round asks', () => {
+    const result = assess(plan({ squad: numbering('nation', 26, 9), numberlessCount: 17 }));
+    expect(result.holds).toEqual(['9 of 26 members numbered; a round asks 10']);
+  });
+
+  it('holds a squad with no numbers at all', () => {
+    const result = assess(plan({ squad: numbering('nation', 26, 0), numberlessCount: 26 }));
+    expect(result.holds).toEqual(['0 of 26 members numbered; a round asks 10']);
+  });
+
+  it('does not hold a squad with exactly one round of numbered members', () => {
+    const result = assess(plan({ squad: numbering('nation', 26, 10), numberlessCount: 16 }));
+    expect(result.holds).toEqual([]);
+  });
+
+  it('holds a club squad by the same rule', () => {
+    const result = assess(plan({ squad: numbering('club', 25, 4), numberlessCount: 21 }));
+    expect(result.holds).toHaveLength(1);
+  });
+
+  it('holds a nation squad with a member who has no club: level 3 asks it', () => {
+    // American Samoa's article leaves `club=` empty on five rows.
+    const result = assess(
+      plan({ squad: squad('nation', 23), clubless: ['alii-mitchell', 'malachi-drago'] }),
+    );
+    expect(result.holds).toEqual([
+      "2 member(s) with no club, which level 3 asks a nation squad's players: alii-mitchell, malachi-drago",
+    ]);
+  });
+
+  it('does not hold a club squad on clubs, which it gives every member itself', () => {
+    expect(assess(plan({ clubless: ['x'] })).holds).toEqual([]);
+  });
+
+  it('is not a conflict: a held team is never written, so has no verified to lower', () => {
+    const result = assess(plan({ squad: numbering('nation', 26, 0), numberlessCount: 26 }));
+    expect(result.conflicts).toEqual([]);
+    expect(result.failures).toEqual([]);
   });
 });
 
@@ -134,6 +194,24 @@ describe('assess — a null shirt number is a warning, not a conflict', () => {
     const result = assess(plan({ numberlessCount: 1 }));
     expect(result.verified).toBe(true);
     expect(result.warnings.join()).toContain('no shirt number');
+  });
+});
+
+describe('assess — a namesake recorded as a new player', () => {
+  // Proven a different person from data both sides carry, so there is
+  // nothing to decide — but a new record is still worth seeing.
+  it('warns, names both records and the proof, and keeps verified true', () => {
+    const result = assess(
+      plan({
+        namesakes: [
+          { id: 'emiliano-martinez', of: ['e-martinez'], proof: 'born 1999-08-17, not 1992-09-02' },
+        ],
+      }),
+    );
+    expect(result.verified).toBe(true);
+    expect(result.warnings).toEqual([
+      '1 namesake(s) recorded as a new player: emiliano-martinez (not e-martinez: born 1999-08-17, not 1992-09-02)',
+    ]);
   });
 });
 

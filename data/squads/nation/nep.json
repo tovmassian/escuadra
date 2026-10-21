@@ -1,0 +1,111 @@
+{
+  "id": "nep",
+  "kind": "nation",
+  "name": "Nepal",
+  "season": "2026",
+  "primaryColor": "#DC143C",
+  "secondaryColor": "#003893",
+  "verified": true,
+  "marker": {
+    "bands": ["#003893", "#DC143C", "#FFFFFF", "#DC143C", "#003893"],
+    "orientation": "vertical",
+    "weights": [1, 3, 1, 3, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Nepal_national_football_team",
+  "members": [
+    {
+      "playerId": "bishal-sunar",
+      "no": 1
+    },
+    {
+      "playerId": "sanish-shrestha",
+      "no": 2
+    },
+    {
+      "playerId": "suman-shrestha",
+      "no": 3
+    },
+    {
+      "playerId": "ananta-tamang",
+      "no": 4
+    },
+    {
+      "playerId": "bimal-panday",
+      "no": 5
+    },
+    {
+      "playerId": "samyog-gurung",
+      "no": 6
+    },
+    {
+      "playerId": "gillespye-jung-karki",
+      "no": 7
+    },
+    {
+      "playerId": "arik-bista",
+      "no": 8
+    },
+    {
+      "playerId": "rohan-karki",
+      "no": 9
+    },
+    {
+      "playerId": "laken-limbu",
+      "no": 10
+    },
+    {
+      "playerId": "subash-bam-thakuri",
+      "no": 11
+    },
+    {
+      "playerId": "sumit-shrestha",
+      "no": 12
+    },
+    {
+      "playerId": "abhishek-limbu",
+      "no": 13
+    },
+    {
+      "playerId": "anjan-bista",
+      "no": 14
+    },
+    {
+      "playerId": "kritish-ratna-chhunju",
+      "no": 15
+    },
+    {
+      "playerId": "kiran-chemjong",
+      "no": 16,
+      "captain": true
+    },
+    {
+      "playerId": "kushal-deuba",
+      "no": 17
+    },
+    {
+      "playerId": "ayush-ghalan",
+      "no": 19
+    },
+    {
+      "playerId": "mani-kumar-lama",
+      "no": 20
+    },
+    {
+      "playerId": "manish-dangi",
+      "no": 21
+    },
+    {
+      "playerId": "deep-karki",
+      "no": 22
+    },
+    {
+      "playerId": "rohit-chand",
+      "no": 23
+    },
+    {
+      "playerId": "srijan-raj-gautam",
+      "no": 27
+    }
+  ]
+}

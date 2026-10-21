@@ -10,15 +10,15 @@
     "bands": ["#000000", "#DD0000", "#FFCE00"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Germany_national_football_team",
   "members": [
     {
-      "playerId": "manuel-neuer",
+      "playerId": "jonas-urbig",
       "no": 1
     },
     {
-      "playerId": "rudiger",
+      "playerId": "malick-thiaw",
       "no": 2
     },
     {
@@ -26,7 +26,7 @@
       "no": 3
     },
     {
-      "playerId": "jonathan-tah",
+      "playerId": "finn-jeltsch",
       "no": 4
     },
     {
@@ -34,24 +34,23 @@
       "no": 5
     },
     {
-      "playerId": "joshua-kimmich",
-      "no": 6,
-      "captain": true
+      "playerId": "yannik-engelhardt",
+      "no": 6
     },
     {
-      "playerId": "havertz",
+      "playerId": "said-el-mala",
       "no": 7
     },
     {
-      "playerId": "leon-goretzka",
+      "playerId": "tom-bischof",
       "no": 8
     },
     {
-      "playerId": "jamie-leweling",
+      "playerId": "derry-scherhant",
       "no": 9
     },
     {
-      "playerId": "jamal-musiala",
+      "playerId": "jonathan-burkardt",
       "no": 10
     },
     {
@@ -59,23 +58,23 @@
       "no": 11
     },
     {
-      "playerId": "oliver-baumann",
+      "playerId": "finn-dahmen",
       "no": 12
     },
     {
-      "playerId": "pascal-gross",
+      "playerId": "philipp-treu",
       "no": 13
     },
     {
-      "playerId": "maximilian-beier",
+      "playerId": "mika-baur",
       "no": 14
     },
     {
-      "playerId": "nico-schlotterbeck",
+      "playerId": "lennart-karl",
       "no": 15
     },
     {
-      "playerId": "angelo-stiller",
+      "playerId": "ridle-baku",
       "no": 16
     },
     {
@@ -83,19 +82,19 @@
       "no": 17
     },
     {
-      "playerId": "nathaniel-brown",
+      "playerId": "maximilian-mittelstadt",
       "no": 18
     },
     {
-      "playerId": "leroy-sane",
+      "playerId": "bambase-conte",
       "no": 19
     },
     {
-      "playerId": "nadiem-amiri",
+      "playerId": "felix-keidel",
       "no": 20
     },
     {
-      "playerId": "alexander-nubel",
+      "playerId": "noah-atubolu",
       "no": 21
     },
     {
@@ -103,20 +102,73 @@
       "no": 22
     },
     {
-      "playerId": "felix-nmecha",
+      "playerId": "vitaly-janelt",
       "no": 23
     },
     {
-      "playerId": "malick-thiaw",
-      "no": 24
+      "playerId": "adeyemi",
+      "no": null
     },
     {
-      "playerId": "assan-ouedraogo",
-      "no": 25
+      "playerId": "alexander-nubel",
+      "no": null
     },
     {
-      "playerId": "deniz-undav",
-      "no": 26
+      "playerId": "anton-stach",
+      "no": null
+    },
+    {
+      "playerId": "chris-fuhrich",
+      "no": null
+    },
+    {
+      "playerId": "felix-nmecha",
+      "no": null
+    },
+    {
+      "playerId": "hennes-behrens",
+      "no": null
+    },
+    {
+      "playerId": "jonathan-tah",
+      "no": null
+    },
+    {
+      "playerId": "josha-vagnoman",
+      "no": null
+    },
+    {
+      "playerId": "joshua-kimmich",
+      "no": null,
+      "captain": true
+    },
+    {
+      "playerId": "kevin-schade",
+      "no": null
+    },
+    {
+      "playerId": "marcandre-ter-stegen",
+      "no": null
+    },
+    {
+      "playerId": "max-rosenfelder",
+      "no": null
+    },
+    {
+      "playerId": "nadiem-amiri",
+      "no": null
+    },
+    {
+      "playerId": "nathaniel-brown",
+      "no": null
+    },
+    {
+      "playerId": "yann-aurel-bisseck",
+      "no": null
+    },
+    {
+      "playerId": "younes-ebnoutalib",
+      "no": null
     }
   ]
 }

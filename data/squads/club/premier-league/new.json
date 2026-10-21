@@ -10,7 +10,7 @@
     "bands": ["#241F20", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Newcastle_United_F.C.",
   "members": [
     {
@@ -96,6 +96,10 @@
     {
       "playerId": "mark-gillespie",
       "no": 29
+    },
+    {
+      "playerId": "aidan-harris",
+      "no": 31
     },
     {
       "playerId": "dan-burn",

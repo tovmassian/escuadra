@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#002F6C"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/AJ_Auxerre",
   "members": [
     {
@@ -22,17 +22,13 @@
       "no": 3
     },
     {
-      "playerId": "francisco-sierralta",
+      "playerId": "axel-tuanzebe",
       "no": 4
     },
     {
       "playerId": "kevin-danois",
       "no": 5,
       "captain": true
-    },
-    {
-      "playerId": "josue-casimir",
-      "no": 7
     },
     {
       "playerId": "naouirou-ahamada",
@@ -141,10 +137,6 @@
     {
       "playerId": "sekou-fofana",
       "no": 93
-    },
-    {
-      "playerId": "axel-tuanzebe",
-      "no": null
     }
   ]
 }

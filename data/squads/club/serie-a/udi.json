@@ -10,12 +10,16 @@
     "bands": ["#000000", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Udinese_Calcio",
   "members": [
     {
       "playerId": "sandi-lovric",
       "no": 4
+    },
+    {
+      "playerId": "alaba",
+      "no": 5
     },
     {
       "playerId": "oier-zarraga",

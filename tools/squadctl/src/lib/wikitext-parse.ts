@@ -102,7 +102,9 @@ export interface ParsedSection {
   unknownTemplates: RawTemplate[];
 }
 
-const PLAYER_TEMPLATE = /^(nat\s+)?fs\s+[a-z\s]*player$/i;
+// `Fs player` redirects to `Football squad player`, and an article may use
+// either name (Nottingham Forest switched in October 2026).
+const PLAYER_TEMPLATE = /^(?:(nat\s+)?fs\s+[a-z\s]*player|football\s+squad\s+player)$/i;
 const BIRTH_TEMPLATE = /^birth[\s_]date(\s+and\s+age)?$/i;
 const POSITIONS: readonly Position[] = ['GK', 'DF', 'MF', 'FW'];
 

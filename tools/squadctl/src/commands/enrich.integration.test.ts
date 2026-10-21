@@ -14,6 +14,7 @@ import {
   useThrowawayRepos,
 } from '../lib/__fixtures__/enrich-repo.ts';
 import { CREDITS } from '../lib/photo-credit.ts';
+import { INFOBOXES } from '../lib/wikimedia-parse.ts';
 import Enrich from './enrich.ts';
 
 useThrowawayRepos();
@@ -39,6 +40,30 @@ describe('enrich --offline', () => {
     expect(report.conflicts.map((c) => c.playerId)).toEqual(['torres']);
     expect(report.requests).toBe(0);
     expect(process.exitCode).toBe(4);
+  });
+
+  it("takes Wikidata's date when the article's infobox agrees with it and names our club", async () => {
+    const root = repo({
+      seed: [
+        ...SEED.filter(([lookup]) => lookup.name !== 'infobox'),
+        [
+          INFOBOXES,
+          'Ferran Torres',
+          {
+            title: 'Ferran Torres',
+            birthDate: '{{birth date and age|2000|2|29|df=y}}',
+            currentClub: '[[FC Barcelona|Barcelona]]',
+          },
+        ],
+      ],
+    });
+    const report = await Enrich.run(['--offline', '--json'], import.meta.url);
+    expect(report.conflicts).toEqual([]);
+    expect(report.summary.birth.corrected).toBe(1);
+    expect(stored(root).get('torres')).toMatchObject({
+      birth: '2000-02-29',
+      photo: { file: 'Torres.jpg' },
+    });
   });
 
   // Pedri's article image is usable, so Wikidata's own image for him is

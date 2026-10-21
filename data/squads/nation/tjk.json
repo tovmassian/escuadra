@@ -1,0 +1,131 @@
+{
+  "id": "tjk",
+  "kind": "nation",
+  "name": "Tajikistan",
+  "season": "2026",
+  "primaryColor": "#CC0000",
+  "secondaryColor": "#006600",
+  "verified": true,
+  "marker": {
+    "bands": ["#CC0000", "#FFFFFF", "#006600"],
+    "orientation": "horizontal",
+    "weights": [2, 3, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Tajikistan_national_football_team",
+  "members": [
+    {
+      "playerId": "rustam-yatimov",
+      "no": 1
+    },
+    {
+      "playerId": "zoir-dzhuraboyev",
+      "no": 2
+    },
+    {
+      "playerId": "tabrez-islomov",
+      "no": 3
+    },
+    {
+      "playerId": "sodikjon-kurbonov",
+      "no": 4
+    },
+    {
+      "playerId": "salokhiddin-irgashev",
+      "no": 5
+    },
+    {
+      "playerId": "vahdat-hanonov",
+      "no": 6
+    },
+    {
+      "playerId": "parvizdzhon-umarbayev",
+      "no": 7
+    },
+    {
+      "playerId": "amirbek-juraboev",
+      "no": 8
+    },
+    {
+      "playerId": "rustam-soirov",
+      "no": 9
+    },
+    {
+      "playerId": "alisher-dzhalilov",
+      "no": 10,
+      "captain": true
+    },
+    {
+      "playerId": "mukhammadzhon-rakhimov",
+      "no": 11
+    },
+    {
+      "playerId": "mekhrubon-karimov",
+      "no": 12
+    },
+    {
+      "playerId": "abdusamad-melikmurodov",
+      "no": 13
+    },
+    {
+      "playerId": "sheriddin-boboev",
+      "no": 14
+    },
+    {
+      "playerId": "shervoni-mabatshoev",
+      "no": 15
+    },
+    {
+      "playerId": "daler-azizov",
+      "no": 16
+    },
+    {
+      "playerId": "ehson-panjshanbe",
+      "no": 17
+    },
+    {
+      "playerId": "alisher-shukurov",
+      "no": 18
+    },
+    {
+      "playerId": "akhtam-nazarov",
+      "no": 19
+    },
+    {
+      "playerId": "alidzhon-karomatullozoda",
+      "no": 20
+    },
+    {
+      "playerId": "fatkhullo-olimzoda",
+      "no": 21
+    },
+    {
+      "playerId": "shahrom-samiev",
+      "no": 22
+    },
+    {
+      "playerId": "oleg-baklov",
+      "no": 23
+    },
+    {
+      "playerId": "muso-kakhorov",
+      "no": 24
+    },
+    {
+      "playerId": "nozim-babadjanov",
+      "no": 25
+    },
+    {
+      "playerId": "azizbek-khaitov",
+      "no": 26
+    },
+    {
+      "playerId": "furkon-rakhimzoda",
+      "no": null
+    },
+    {
+      "playerId": "rakhmatsho-rakhmatzoda",
+      "no": null
+    }
+  ]
+}

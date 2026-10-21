@@ -1,0 +1,110 @@
+{
+  "id": "cuw",
+  "kind": "nation",
+  "name": "Curaçao",
+  "season": "2026",
+  "primaryColor": "#002B7F",
+  "secondaryColor": "#F9E814",
+  "verified": true,
+  "marker": {
+    "bands": ["#002B7F", "#F9E814", "#002B7F"],
+    "orientation": "horizontal",
+    "weights": [5, 1, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Curaçao_national_football_team",
+  "members": [
+    {
+      "playerId": "eloy-room",
+      "no": 1
+    },
+    {
+      "playerId": "shurandy-sambo",
+      "no": 2
+    },
+    {
+      "playerId": "jurien-gaari",
+      "no": 3
+    },
+    {
+      "playerId": "sherel-floranus",
+      "no": 5
+    },
+    {
+      "playerId": "nicky-souren",
+      "no": 6
+    },
+    {
+      "playerId": "juninho-bacuna",
+      "no": 7
+    },
+    {
+      "playerId": "livano-comenencia",
+      "no": 8
+    },
+    {
+      "playerId": "jurgen-locadia",
+      "no": 9
+    },
+    {
+      "playerId": "leandro-bacuna",
+      "no": 10
+    },
+    {
+      "playerId": "jeremy-antonisse",
+      "no": 11
+    },
+    {
+      "playerId": "kenji-gorre",
+      "no": 14
+    },
+    {
+      "playerId": "arjany-martha",
+      "no": 15
+    },
+    {
+      "playerId": "jearl-margaritha",
+      "no": 16
+    },
+    {
+      "playerId": "tyrese-noslin",
+      "no": 17
+    },
+    {
+      "playerId": "armando-obispo",
+      "no": 18
+    },
+    {
+      "playerId": "jordi-paulina",
+      "no": 19
+    },
+    {
+      "playerId": "joshua-brenet",
+      "no": 20
+    },
+    {
+      "playerId": "tahith-chong",
+      "no": 21
+    },
+    {
+      "playerId": "jurich-carolina",
+      "no": 23
+    },
+    {
+      "playerId": "kyano-penso",
+      "no": 24
+    },
+    {
+      "playerId": "tyrick-bodak",
+      "no": 25
+    },
+    {
+      "playerId": "kiyani-zeggen",
+      "no": 26
+    },
+    {
+      "playerId": "nigel-thomas",
+      "no": null
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "id": "nca",
+  "kind": "nation",
+  "name": "Nicaragua",
+  "season": "2026",
+  "primaryColor": "#0067C6",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#0067C6", "#FFFFFF", "#0067C6"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Nicaragua_national_football_team",
+  "members": [
+    {
+      "playerId": "brandon-mayorga",
+      "no": 1
+    },
+    {
+      "playerId": "joab-gutierrez",
+      "no": 2
+    },
+    {
+      "playerId": "oscar-acevedo",
+      "no": 3
+    },
+    {
+      "playerId": "marvin-fletes",
+      "no": 4
+    },
+    {
+      "playerId": "justing-cano",
+      "no": 5
+    },
+    {
+      "playerId": "emmanuel-gomez",
+      "no": 6
+    },
+    {
+      "playerId": "jacob-montes",
+      "no": 8
+    },
+    {
+      "playerId": "jaime-moreno",
+      "no": 9
+    },
+    {
+      "playerId": "byron-bonilla",
+      "no": 10
+    },
+    {
+      "playerId": "efrain-mejia",
+      "no": 11
+    },
+    {
+      "playerId": "jason-vega",
+      "no": 12
+    },
+    {
+      "playerId": "widman-talavera",
+      "no": 13
+    },
+    {
+      "playerId": "kadeem-cole",
+      "no": 14
+    },
+    {
+      "playerId": "melvin-hernandez",
+      "no": 15
+    },
+    {
+      "playerId": "raheem-cole",
+      "no": 16
+    },
+    {
+      "playerId": "osmin-salinas",
+      "no": 17
+    },
+    {
+      "playerId": "amadeus-zamora",
+      "no": 18
+    },
+    {
+      "playerId": "juan-luis-perez",
+      "no": 19
+    },
+    {
+      "playerId": "jonathan-moncada",
+      "no": 20
+    },
+    {
+      "playerId": "christian-reyes",
+      "no": 21
+    },
+    {
+      "playerId": "adonis-pineda",
+      "no": null
+    },
+    {
+      "playerId": "bancy-hernandez",
+      "no": null
+    },
+    {
+      "playerId": "jorge-garcia",
+      "no": null
+    },
+    {
+      "playerId": "ramon-estrada",
+      "no": null
+    }
+  ]
+}

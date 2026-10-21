@@ -1,0 +1,125 @@
+{
+  "id": "ksa",
+  "kind": "nation",
+  "name": "Saudi Arabia",
+  "season": "2026",
+  "primaryColor": "#005430",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#005430"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFFFFF"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Saudi_Arabia_national_football_team",
+  "members": [
+    {
+      "playerId": "mohammed-abu-alshamat",
+      "no": 2
+    },
+    {
+      "playerId": "jehad-thakri",
+      "no": 3
+    },
+    {
+      "playerId": "abdulelah-alamri",
+      "no": 4
+    },
+    {
+      "playerId": "hassan-altambakti",
+      "no": 5
+    },
+    {
+      "playerId": "nasser-aldawsari",
+      "no": 6
+    },
+    {
+      "playerId": "saleh-abu-alshamat",
+      "no": 7
+    },
+    {
+      "playerId": "alaa-alhejji",
+      "no": 8
+    },
+    {
+      "playerId": "firas-alburaikan",
+      "no": 9
+    },
+    {
+      "playerId": "mukhtar-ali",
+      "no": 10
+    },
+    {
+      "playerId": "abdullah-alsalem",
+      "no": 11
+    },
+    {
+      "playerId": "mohammed-mahzari",
+      "no": 12
+    },
+    {
+      "playerId": "nawaf-boushal",
+      "no": 13
+    },
+    {
+      "playerId": "hassan-kadesh",
+      "no": 14
+    },
+    {
+      "playerId": "abdullah-alkhaibari",
+      "no": 15
+    },
+    {
+      "playerId": "ziyad-aljohani",
+      "no": 16
+    },
+    {
+      "playerId": "rayan-hamed",
+      "no": 17
+    },
+    {
+      "playerId": "mohammed-alqahtani",
+      "no": 18
+    },
+    {
+      "playerId": "abdullah-alhamdan",
+      "no": 19
+    },
+    {
+      "playerId": "sultan-mandash",
+      "no": 20
+    },
+    {
+      "playerId": "mohammed-alowais",
+      "no": 21
+    },
+    {
+      "playerId": "hamed-alshanqiti",
+      "no": 22
+    },
+    {
+      "playerId": "mohamed-kanno",
+      "no": 23
+    },
+    {
+      "playerId": "moteb-alharbi",
+      "no": 24
+    },
+    {
+      "playerId": "hammam-alhammami",
+      "no": 25
+    },
+    {
+      "playerId": "zakaria-hawsawi",
+      "no": 26
+    },
+    {
+      "playerId": "abdulquddus-atiah",
+      "no": 27
+    }
+  ]
+}

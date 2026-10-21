@@ -10,7 +10,7 @@
     "bands": ["#AE1C28", "#FFFFFF", "#21468B"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Netherlands_national_football_team",
   "members": [
     {
@@ -18,11 +18,11 @@
       "no": 1
     },
     {
-      "playerId": "lutsharel-geertruida",
+      "playerId": "jeremie-frimpong",
       "no": 2
     },
     {
-      "playerId": "marten-de-roon",
+      "playerId": "jorrel-hato",
       "no": 3
     },
     {
@@ -35,11 +35,11 @@
       "no": 5
     },
     {
-      "playerId": "jan-paul-van-hecke",
+      "playerId": "quinten-timber",
       "no": 6
     },
     {
-      "playerId": "justin-kluivert",
+      "playerId": "crysencio-summerville",
       "no": 7
     },
     {
@@ -47,19 +47,19 @@
       "no": 8
     },
     {
-      "playerId": "wout-weghorst",
+      "playerId": "joshua-zirkzee",
       "no": 9
     },
     {
-      "playerId": "memphis-depay",
+      "playerId": "noa-lang",
       "no": 10
     },
     {
-      "playerId": "cody-gakpo",
+      "playerId": "ruben-van-bommel",
       "no": 11
     },
     {
-      "playerId": "mats-wieffer",
+      "playerId": "timber",
       "no": 12
     },
     {
@@ -79,15 +79,15 @@
       "no": 16
     },
     {
-      "playerId": "noa-lang",
+      "playerId": "mexx-meerdink",
       "no": 17
     },
     {
-      "playerId": "donyell-malen",
+      "playerId": "joey-veerman",
       "no": 18
     },
     {
-      "playerId": "brian-brobbey",
+      "playerId": "kenneth-taylor",
       "no": 19
     },
     {
@@ -95,7 +95,7 @@
       "no": 20
     },
     {
-      "playerId": "de-jong",
+      "playerId": "gjivai-zechiel",
       "no": 21
     },
     {
@@ -105,18 +105,6 @@
     {
       "playerId": "mark-flekken",
       "no": 23
-    },
-    {
-      "playerId": "crysencio-summerville",
-      "no": 24
-    },
-    {
-      "playerId": "jorrel-hato",
-      "no": 25
-    },
-    {
-      "playerId": "quinten-timber",
-      "no": 26
     }
   ]
 }

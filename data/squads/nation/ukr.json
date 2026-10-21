@@ -10,7 +10,7 @@
     "bands": ["#0057B7", "#FFDD00"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Ukraine_national_football_team",
   "members": [
     {
@@ -18,15 +18,15 @@
       "no": 1
     },
     {
-      "playerId": "eduard-sarapiy",
+      "playerId": "illya-krupskyi",
       "no": 2
     },
     {
-      "playerId": "taras-mykhavko",
+      "playerId": "eduard-sarapiy",
       "no": 3
     },
     {
-      "playerId": "oleksandr-romanchuk",
+      "playerId": "taras-mykhavko",
       "no": 4
     },
     {
@@ -43,7 +43,7 @@
       "captain": true
     },
     {
-      "playerId": "ruslan-malinovskyi",
+      "playerId": "oleksandr-nazarenko",
       "no": 8
     },
     {
@@ -51,11 +51,11 @@
       "no": 9
     },
     {
-      "playerId": "mykola-shaparenko",
+      "playerId": "matviy-ponomarenko",
       "no": 10
     },
     {
-      "playerId": "artem-dovbyk",
+      "playerId": "vladyslav-vanat",
       "no": 11
     },
     {
@@ -67,7 +67,7 @@
       "no": 13
     },
     {
-      "playerId": "yehor-nazaryna",
+      "playerId": "oleksandr-drambayev",
       "no": 14
     },
     {
@@ -75,11 +75,11 @@
       "no": 15
     },
     {
-      "playerId": "vitalii-mykolenko",
+      "playerId": "ivan-varfolomeyev",
       "no": 16
     },
     {
-      "playerId": "heorhiy-sudakov",
+      "playerId": "oleksandr-pikhalyonok",
       "no": 17
     },
     {
@@ -87,32 +87,24 @@
       "no": 18
     },
     {
-      "playerId": "danylo-ihnatenko",
+      "playerId": "yehor-nazaryna",
       "no": 19
     },
     {
-      "playerId": "oleksandr-nazarenko",
+      "playerId": "maksym-khlan",
       "no": 20
     },
     {
-      "playerId": "matviy-ponomarenko",
+      "playerId": "vladyslav-veleten",
       "no": 21
     },
     {
-      "playerId": "mykola-matviyenko",
+      "playerId": "ihor-krasnopir",
       "no": 22
     },
     {
-      "playerId": "ruslan-neshcheret",
+      "playerId": "dmytro-riznyk",
       "no": 23
-    },
-    {
-      "playerId": "artem-bondarenko",
-      "no": 24
-    },
-    {
-      "playerId": "hennadiy-synchuk",
-      "no": 25
     }
   ]
 }

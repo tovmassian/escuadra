@@ -1,0 +1,133 @@
+{
+  "id": "chn",
+  "kind": "nation",
+  "name": "China PR",
+  "season": "2026",
+  "primaryColor": "#EE1C25",
+  "secondaryColor": "#FFFF00",
+  "verified": true,
+  "marker": {
+    "bands": ["#EE1C25"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFFF00"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/China_national_football_team",
+  "members": [
+    {
+      "playerId": "yan-junling",
+      "no": 1
+    },
+    {
+      "playerId": "tyias-browning",
+      "no": 2
+    },
+    {
+      "playerId": "wang-gengrui",
+      "no": 3
+    },
+    {
+      "playerId": "gao-zhunyi",
+      "no": 4
+    },
+    {
+      "playerId": "wei-zhen",
+      "no": 5
+    },
+    {
+      "playerId": "wang-shangyuan",
+      "no": 6
+    },
+    {
+      "playerId": "xie-wenneng",
+      "no": 7
+    },
+    {
+      "playerId": "gao-tianyi",
+      "no": 8
+    },
+    {
+      "playerId": "wang-ziming",
+      "no": 9
+    },
+    {
+      "playerId": "wei-shihao",
+      "no": 10
+    },
+    {
+      "playerId": "dai-wai-tsun",
+      "no": 11
+    },
+    {
+      "playerId": "liu-dianzuo",
+      "no": 12
+    },
+    {
+      "playerId": "huang-shenghao",
+      "no": 13
+    },
+    {
+      "playerId": "huang-jiahui",
+      "no": 14
+    },
+    {
+      "playerId": "mingyang-yang",
+      "no": 15
+    },
+    {
+      "playerId": "bunyamin-abdusalam",
+      "no": 17
+    },
+    {
+      "playerId": "han-pengfei",
+      "no": 18
+    },
+    {
+      "playerId": "liu-yang",
+      "no": 19
+    },
+    {
+      "playerId": "tao-qianglong",
+      "no": 20
+    },
+    {
+      "playerId": "chen-pu",
+      "no": 21
+    },
+    {
+      "playerId": "cheng-jin",
+      "no": 22
+    },
+    {
+      "playerId": "zhong-yihao",
+      "no": 23
+    },
+    {
+      "playerId": "zhang-aihui",
+      "no": 24
+    },
+    {
+      "playerId": "yang-mingrui",
+      "no": 25
+    },
+    {
+      "playerId": "du-yuezheng",
+      "no": 26
+    },
+    {
+      "playerId": "zhao-songyuan",
+      "no": 27
+    },
+    {
+      "playerId": "li-yang",
+      "no": 28
+    },
+    {
+      "playerId": "yan-bingliang",
+      "no": 30
+    }
+  ]
+}

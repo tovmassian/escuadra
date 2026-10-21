@@ -1,0 +1,115 @@
+{
+  "id": "isl",
+  "kind": "nation",
+  "name": "Iceland",
+  "season": "2026",
+  "primaryColor": "#02529C",
+  "secondaryColor": "#DC1E35",
+  "verified": true,
+  "marker": {
+    "bands": ["#02529C", "#FFFFFF", "#DC1E35", "#FFFFFF", "#02529C"],
+    "orientation": "horizontal",
+    "weights": [7, 1, 2, 1, 7]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Iceland_national_football_team",
+  "members": [
+    {
+      "playerId": "runar-alex-runarsson",
+      "no": 1
+    },
+    {
+      "playerId": "logi-tomasson",
+      "no": 2
+    },
+    {
+      "playerId": "daniel-leo-gretarsson",
+      "no": 3
+    },
+    {
+      "playerId": "victor-palsson",
+      "no": 4
+    },
+    {
+      "playerId": "isak-thorvaldsson",
+      "no": 5
+    },
+    {
+      "playerId": "andri-baldursson",
+      "no": 6
+    },
+    {
+      "playerId": "hakon-haraldsson",
+      "no": 7
+    },
+    {
+      "playerId": "isak-johannesson",
+      "no": 8
+    },
+    {
+      "playerId": "oskarsson",
+      "no": 9,
+      "captain": true
+    },
+    {
+      "playerId": "gylfi-sigurdsson",
+      "no": 10
+    },
+    {
+      "playerId": "albert-gudmundsson",
+      "no": 11
+    },
+    {
+      "playerId": "hakon-valdimarsson",
+      "no": 12
+    },
+    {
+      "playerId": "anton-ari-einarsson",
+      "no": 13
+    },
+    {
+      "playerId": "brynjolfur-willumsson",
+      "no": 14
+    },
+    {
+      "playerId": "kristall-mani-ingason",
+      "no": 15
+    },
+    {
+      "playerId": "stefan-teitur-thordarson",
+      "no": 16
+    },
+    {
+      "playerId": "aron-gunnarsson",
+      "no": 17
+    },
+    {
+      "playerId": "mikael-anderson",
+      "no": 18
+    },
+    {
+      "playerId": "mikael-egill-ellertsson",
+      "no": 19
+    },
+    {
+      "playerId": "jon-dagur-thorsteinsson",
+      "no": 20
+    },
+    {
+      "playerId": "arnor-sigurdsson",
+      "no": 21
+    },
+    {
+      "playerId": "andri-gudjohnsen",
+      "no": 22
+    },
+    {
+      "playerId": "hordur-bjorgvin-magnusson",
+      "no": 23
+    },
+    {
+      "playerId": "bjarki-steinn-bjarkason",
+      "no": null
+    }
+  ]
+}

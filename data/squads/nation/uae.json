@@ -1,0 +1,123 @@
+{
+  "id": "uae",
+  "kind": "nation",
+  "name": "United Arab Emirates",
+  "season": "2026",
+  "primaryColor": "#C8102E",
+  "secondaryColor": "#00843D",
+  "verified": true,
+  "marker": {
+    "bands": ["#C8102E", "#00843D", "#FFFFFF", "#000000"],
+    "orientation": "vertical",
+    "weights": [1, 3, 3, 3]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/United_Arab_Emirates_national_football_team",
+  "members": [
+    {
+      "playerId": "hamad-almeqbaali",
+      "no": 1
+    },
+    {
+      "playerId": "ruben-canedo",
+      "no": 2
+    },
+    {
+      "playerId": "lucas-pimenta",
+      "no": 3
+    },
+    {
+      "playerId": "sasa-ivkovic",
+      "no": 4
+    },
+    {
+      "playerId": "ala-zhir",
+      "no": 5
+    },
+    {
+      "playerId": "richard-akonnor",
+      "no": 6
+    },
+    {
+      "playerId": "ali-saleh",
+      "no": 7
+    },
+    {
+      "playerId": "nicolas-gimenez",
+      "no": 8
+    },
+    {
+      "playerId": "harib-abdalla",
+      "no": 9
+    },
+    {
+      "playerId": "fabio-lima",
+      "no": 10
+    },
+    {
+      "playerId": "bruno",
+      "no": 11
+    },
+    {
+      "playerId": "khalifa-al-hammadi",
+      "no": 12
+    },
+    {
+      "playerId": "erik",
+      "no": 13
+    },
+    {
+      "playerId": "abdulla-hamad",
+      "no": 14
+    },
+    {
+      "playerId": "yuri-cesar",
+      "no": 15
+    },
+    {
+      "playerId": "marcus-meloni",
+      "no": 16
+    },
+    {
+      "playerId": "khalid-eisa",
+      "no": 17,
+      "captain": true
+    },
+    {
+      "playerId": "luanzinho",
+      "no": 18
+    },
+    {
+      "playerId": "khaled-ibrahim",
+      "no": 19
+    },
+    {
+      "playerId": "guilherme-bala",
+      "no": 20
+    },
+    {
+      "playerId": "isam-faiz",
+      "no": 21
+    },
+    {
+      "playerId": "fahad-aldhanhani",
+      "no": 22
+    },
+    {
+      "playerId": "sultan-adil",
+      "no": 23
+    },
+    {
+      "playerId": "mamadou-coulibaly-2",
+      "no": 24
+    },
+    {
+      "playerId": "zayed-sultan",
+      "no": 25
+    },
+    {
+      "playerId": "ousmane-camara-2",
+      "no": 26
+    }
+  ]
+}

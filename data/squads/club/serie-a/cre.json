@@ -10,7 +10,7 @@
     "bands": ["#C8102E", "#808080"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/US_Cremonese",
   "members": [
     {
@@ -103,10 +103,6 @@
       "no": 22
     },
     {
-      "playerId": "francesco-folino",
-      "no": 23
-    },
-    {
       "playerId": "dachi-lordkipanidze",
       "no": 25
     },
@@ -119,10 +115,6 @@
       "no": 33
     },
     {
-      "playerId": "eddy-cabianca",
-      "no": 35
-    },
-    {
       "playerId": "alessandro-vogliacco",
       "no": 38
     },
@@ -133,14 +125,6 @@
     {
       "playerId": "federico-bonazzoli",
       "no": 90
-    },
-    {
-      "playerId": "alessio-brambilla",
-      "no": null
-    },
-    {
-      "playerId": "nouroudine-faye",
-      "no": null
     }
   ]
 }

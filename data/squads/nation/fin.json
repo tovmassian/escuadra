@@ -1,0 +1,111 @@
+{
+  "id": "fin",
+  "kind": "nation",
+  "name": "Finland",
+  "season": "2026",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#002F6C",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#002F6C", "#FFFFFF"],
+    "orientation": "horizontal",
+    "weights": [4, 3, 4]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Finland_national_football_team",
+  "members": [
+    {
+      "playerId": "lukas-hradecky",
+      "no": 1,
+      "captain": true
+    },
+    {
+      "playerId": "matti-peltola",
+      "no": 2
+    },
+    {
+      "playerId": "adam-stahl",
+      "no": 3
+    },
+    {
+      "playerId": "tony-miettinen",
+      "no": 4
+    },
+    {
+      "playerId": "samuli-miettinen",
+      "no": 5
+    },
+    {
+      "playerId": "doni-arifi",
+      "no": 6
+    },
+    {
+      "playerId": "santeri-vaananen",
+      "no": 7
+    },
+    {
+      "playerId": "onni-valakari",
+      "no": 8
+    },
+    {
+      "playerId": "adrian-svanback",
+      "no": 9
+    },
+    {
+      "playerId": "leo-walta",
+      "no": 10
+    },
+    {
+      "playerId": "adam-markhiyev",
+      "no": 11
+    },
+    {
+      "playerId": "viljami-sinisalo",
+      "no": 12
+    },
+    {
+      "playerId": "juho-lahteenmaki",
+      "no": 13
+    },
+    {
+      "playerId": "oiva-jukkola",
+      "no": 14
+    },
+    {
+      "playerId": "miro-tenho",
+      "no": 15
+    },
+    {
+      "playerId": "anssi-suhonen",
+      "no": 16
+    },
+    {
+      "playerId": "ryan-mahuta",
+      "no": 17
+    },
+    {
+      "playerId": "topi-keskinen",
+      "no": 18
+    },
+    {
+      "playerId": "benjamin-kallman",
+      "no": 19
+    },
+    {
+      "playerId": "joel-pohjanpalo",
+      "no": 20
+    },
+    {
+      "playerId": "leo-vaisanen",
+      "no": 21
+    },
+    {
+      "playerId": "daniel-hakans",
+      "no": 22
+    },
+    {
+      "playerId": "lucas-bergstrom",
+      "no": 23
+    }
+  ]
+}

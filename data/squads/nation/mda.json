@@ -1,0 +1,110 @@
+{
+  "id": "mda",
+  "kind": "nation",
+  "name": "Moldova",
+  "season": "2026",
+  "primaryColor": "#0046AE",
+  "secondaryColor": "#CC092F",
+  "verified": true,
+  "marker": {
+    "bands": ["#0046AE", "#FFD200", "#CC092F"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Moldova_national_football_team",
+  "members": [
+    {
+      "playerId": "emil-timbur",
+      "no": 1
+    },
+    {
+      "playerId": "oleg-reabciuk",
+      "no": 2
+    },
+    {
+      "playerId": "mihail-stefan",
+      "no": 3
+    },
+    {
+      "playerId": "vladislav-baboglo",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "catalin-cucos",
+      "no": 5
+    },
+    {
+      "playerId": "mihail-gherasimencov",
+      "no": 6
+    },
+    {
+      "playerId": "nichita-motpan",
+      "no": 7
+    },
+    {
+      "playerId": "cristian-dros",
+      "no": 8
+    },
+    {
+      "playerId": "sergiu-perciun",
+      "no": 9
+    },
+    {
+      "playerId": "dmitri-mandricenco",
+      "no": 10
+    },
+    {
+      "playerId": "victor-stina",
+      "no": 11
+    },
+    {
+      "playerId": "dumitru-celeadnic",
+      "no": 12
+    },
+    {
+      "playerId": "serafim-cojocari",
+      "no": 13
+    },
+    {
+      "playerId": "vladimir-fratea",
+      "no": 14
+    },
+    {
+      "playerId": "petru-popescu",
+      "no": 15
+    },
+    {
+      "playerId": "danila-forov",
+      "no": 16
+    },
+    {
+      "playerId": "ovidiu-david",
+      "no": 17
+    },
+    {
+      "playerId": "iurie-iovu",
+      "no": 18
+    },
+    {
+      "playerId": "daniel-dumbravanu",
+      "no": 19
+    },
+    {
+      "playerId": "nicky-clescenco",
+      "no": 20
+    },
+    {
+      "playerId": "ioancalin-revenco",
+      "no": 21
+    },
+    {
+      "playerId": "vadim-rata",
+      "no": 22
+    },
+    {
+      "playerId": "andrei-cojuhar",
+      "no": 23
+    }
+  ]
+}

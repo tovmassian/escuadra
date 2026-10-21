@@ -10,7 +10,7 @@
     "bands": ["#0060A9", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/RC_Strasbourg_Alsace",
   "members": [
     {
@@ -104,6 +104,10 @@
     {
       "playerId": "oso",
       "no": 36
+    },
+    {
+      "playerId": "ghianny-kodia",
+      "no": 37
     },
     {
       "playerId": "conrad-harder",

@@ -14,7 +14,7 @@
       "color": "#BC002D"
     }
   },
-  "lastUpdated": "2026-09-07",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Japan_national_football_team",
   "members": [
     {
@@ -22,11 +22,11 @@
       "no": 1
     },
     {
-      "playerId": "sugawara",
+      "playerId": "shuto-nakano",
       "no": 2
     },
     {
-      "playerId": "taniguchi",
+      "playerId": "seko",
       "no": 3
     },
     {
@@ -35,19 +35,15 @@
       "captain": true
     },
     {
-      "playerId": "nagatomo",
-      "no": 5
-    },
-    {
-      "playerId": "machino",
+      "playerId": "satoshi-tanaka",
       "no": 6
     },
     {
-      "playerId": "tanaka",
+      "playerId": "yuki-soma",
       "no": 7
     },
     {
-      "playerId": "kubo",
+      "playerId": "suzuki-yuito",
       "no": 8
     },
     {
@@ -63,7 +59,7 @@
       "no": 11
     },
     {
-      "playerId": "osako",
+      "playerId": "leo-kokubo",
       "no": 12
     },
     {
@@ -79,11 +75,7 @@
       "no": 15
     },
     {
-      "playerId": "watanabe",
-      "no": 16
-    },
-    {
-      "playerId": "suzuki-yuito",
+      "playerId": "tanaka",
       "no": 17
     },
     {
@@ -91,11 +83,11 @@
       "no": 18
     },
     {
-      "playerId": "ogawa",
+      "playerId": "kuryu-matsuki",
       "no": 19
     },
     {
-      "playerId": "seko",
+      "playerId": "kubo",
       "no": 20
     },
     {
@@ -103,7 +95,7 @@
       "no": 21
     },
     {
-      "playerId": "tomiyasu",
+      "playerId": "hayato-araki",
       "no": 22
     },
     {
@@ -121,6 +113,22 @@
     {
       "playerId": "shiogai",
       "no": 26
+    },
+    {
+      "playerId": "kodai-sano",
+      "no": 28
+    },
+    {
+      "playerId": "shunsuke-saito",
+      "no": 29
+    },
+    {
+      "playerId": "kaina-tanimura",
+      "no": 31
+    },
+    {
+      "playerId": "henry-heroki-mochizuki",
+      "no": 32
     }
   ]
 }

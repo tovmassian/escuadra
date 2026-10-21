@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#005DA4", "#ED1C24"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-10",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Slovenia_national_football_team",
   "members": [
     {
@@ -23,11 +23,11 @@
       "no": 2
     },
     {
-      "playerId": "jost-urbancic",
+      "playerId": "jure-balkovec",
       "no": 3
     },
     {
-      "playerId": "marcel-ratnik",
+      "playerId": "mark-zabukovnik",
       "no": 4
     },
     {
@@ -39,7 +39,7 @@
       "no": 6
     },
     {
-      "playerId": "benjamin-verbic",
+      "playerId": "jost-urbancic",
       "no": 7
     },
     {
@@ -47,15 +47,15 @@
       "no": 8
     },
     {
-      "playerId": "andraz-sporar",
+      "playerId": "tjas-begic",
       "no": 9
     },
     {
-      "playerId": "svit-seslar",
+      "playerId": "timi-max-elsnik",
       "no": 10
     },
     {
-      "playerId": "tjas-begic",
+      "playerId": "zan-celar",
       "no": 11
     },
     {
@@ -75,7 +75,7 @@
       "no": 15
     },
     {
-      "playerId": "zanluk-leban",
+      "playerId": "igor-vekic",
       "no": 16
     },
     {
@@ -87,8 +87,12 @@
       "no": 18
     },
     {
-      "playerId": "aljosa-matko",
+      "playerId": "tomi-horvat",
       "no": 19
+    },
+    {
+      "playerId": "aljosa-matko",
+      "no": 20
     },
     {
       "playerId": "drkusic",
@@ -103,16 +107,8 @@
       "no": 23
     },
     {
-      "playerId": "tian-nai-koren",
-      "no": 24
-    },
-    {
-      "playerId": "ester-sokler",
-      "no": 25
-    },
-    {
-      "playerId": "adrian-zeljkovic",
-      "no": 26
+      "playerId": "zanluk-leban",
+      "no": null
     }
   ]
 }

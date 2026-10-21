@@ -1,0 +1,122 @@
+{
+  "id": "irq",
+  "kind": "nation",
+  "name": "Iraq",
+  "season": "2026",
+  "primaryColor": "#CD1125",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#CD1125", "#FFFFFF", "#000000"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-21",
+  "source": "https://en.wikipedia.org/wiki/Iraq_national_football_team",
+  "members": [
+    {
+      "playerId": "ahmed-basil",
+      "no": 1
+    },
+    {
+      "playerId": "maitham-jabbar",
+      "no": 2
+    },
+    {
+      "playerId": "mustafa-saadoon",
+      "no": 3
+    },
+    {
+      "playerId": "zaid-tahseen",
+      "no": 4
+    },
+    {
+      "playerId": "akam-hashim",
+      "no": 5
+    },
+    {
+      "playerId": "zaid-ismail",
+      "no": 6
+    },
+    {
+      "playerId": "jussef-nasrawe",
+      "no": 7
+    },
+    {
+      "playerId": "ibrahim-bayesh",
+      "no": 8
+    },
+    {
+      "playerId": "ali-alhamadi",
+      "no": 9
+    },
+    {
+      "playerId": "hasan-abdulkareem",
+      "no": 10
+    },
+    {
+      "playerId": "ahmed-qasem",
+      "no": 11
+    },
+    {
+      "playerId": "mohammed-salih",
+      "no": 12
+    },
+    {
+      "playerId": "saif-rasheed",
+      "no": 13
+    },
+    {
+      "playerId": "zidane-iqbal",
+      "no": 14
+    },
+    {
+      "playerId": "ahmed-yahya",
+      "no": 15
+    },
+    {
+      "playerId": "amir-alammari",
+      "no": 16
+    },
+    {
+      "playerId": "ali-jasim",
+      "no": 17
+    },
+    {
+      "playerId": "aymen-hussein",
+      "no": 18,
+      "captain": true
+    },
+    {
+      "playerId": "mohammed-qasim",
+      "no": 19
+    },
+    {
+      "playerId": "karrar-nabeel",
+      "no": 20
+    },
+    {
+      "playerId": "hayder-abdulkareem",
+      "no": 21
+    },
+    {
+      "playerId": "hussein-hassan",
+      "no": 22
+    },
+    {
+      "playerId": "merchas-doski",
+      "no": 23
+    },
+    {
+      "playerId": "mohammed-dlawar",
+      "no": 24
+    },
+    {
+      "playerId": "josef-alimam",
+      "no": 25
+    },
+    {
+      "playerId": "abdulrazzaq-qasim",
+      "no": 26
+    }
+  ]
+}

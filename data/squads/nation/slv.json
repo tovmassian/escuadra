@@ -1,0 +1,118 @@
+{
+  "id": "slv",
+  "kind": "nation",
+  "name": "El Salvador",
+  "season": "2026",
+  "primaryColor": "#0047AB",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#0047AB", "#FFFFFF", "#0047AB"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/El_Salvador_national_football_team",
+  "members": [
+    {
+      "playerId": "mario-gonzalez",
+      "no": 1,
+      "captain": true
+    },
+    {
+      "playerId": "julio-sibrian",
+      "no": 2
+    },
+    {
+      "playerId": "elvis-claros",
+      "no": 3
+    },
+    {
+      "playerId": "jorge-cruz",
+      "no": 4
+    },
+    {
+      "playerId": "victor-garcia",
+      "no": 5
+    },
+    {
+      "playerId": "alejandro-henriquez",
+      "no": 6
+    },
+    {
+      "playerId": "styven-vasquez",
+      "no": 7
+    },
+    {
+      "playerId": "harold-osorio",
+      "no": 8
+    },
+    {
+      "playerId": "brayan-gil",
+      "no": 9
+    },
+    {
+      "playerId": "nathan-ordaz",
+      "no": 10
+    },
+    {
+      "playerId": "cristian-gil",
+      "no": 11
+    },
+    {
+      "playerId": "marcelo-diaz",
+      "no": 12
+    },
+    {
+      "playerId": "danis-cerros",
+      "no": 13
+    },
+    {
+      "playerId": "christian-martinez",
+      "no": 14
+    },
+    {
+      "playerId": "jefferson-valladares",
+      "no": 15
+    },
+    {
+      "playerId": "henry-romero",
+      "no": 16
+    },
+    {
+      "playerId": "jairo-henriquez",
+      "no": 17
+    },
+    {
+      "playerId": "kevin-carabantes",
+      "no": 18
+    },
+    {
+      "playerId": "rafael-tejada",
+      "no": 19
+    },
+    {
+      "playerId": "mauricio-cerritos",
+      "no": 20
+    },
+    {
+      "playerId": "mayer-gil",
+      "no": 21
+    },
+    {
+      "playerId": "benji-villalobos",
+      "no": 22
+    },
+    {
+      "playerId": "diego-ortez",
+      "no": 23
+    },
+    {
+      "playerId": "diego-flores",
+      "no": null
+    },
+    {
+      "playerId": "rudy-clavel",
+      "no": null
+    }
+  ]
+}

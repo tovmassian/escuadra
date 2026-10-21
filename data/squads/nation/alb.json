@@ -1,0 +1,114 @@
+{
+  "id": "alb",
+  "kind": "nation",
+  "name": "Albania",
+  "season": "2026",
+  "primaryColor": "#FF0000",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#FF0000"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#000000"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Albania_national_football_team",
+  "members": [
+    {
+      "playerId": "simon-simoni",
+      "no": 1
+    },
+    {
+      "playerId": "klisman-cake",
+      "no": 2
+    },
+    {
+      "playerId": "mario-mitaj",
+      "no": 3
+    },
+    {
+      "playerId": "elseid-hysaj",
+      "no": 4
+    },
+    {
+      "playerId": "luis-hasa",
+      "no": 5
+    },
+    {
+      "playerId": "berat-gjimshiti",
+      "no": 6,
+      "captain": true
+    },
+    {
+      "playerId": "rey-manaj",
+      "no": 7
+    },
+    {
+      "playerId": "asllani",
+      "no": 8
+    },
+    {
+      "playerId": "anis-mehmeti",
+      "no": 9
+    },
+    {
+      "playerId": "ernest-muci",
+      "no": 10
+    },
+    {
+      "playerId": "myrto-uzuni",
+      "no": 11
+    },
+    {
+      "playerId": "alain-taho",
+      "no": 12
+    },
+    {
+      "playerId": "naser-aliji",
+      "no": 13
+    },
+    {
+      "playerId": "cristian-shpendi",
+      "no": 14
+    },
+    {
+      "playerId": "kumbulla",
+      "no": 15
+    },
+    {
+      "playerId": "juljan-shehu",
+      "no": 16
+    },
+    {
+      "playerId": "taulant-seferi",
+      "no": 17
+    },
+    {
+      "playerId": "ardian-ismajli",
+      "no": 18
+    },
+    {
+      "playerId": "mirlind-daku",
+      "no": 19
+    },
+    {
+      "playerId": "ylber-ramadani",
+      "no": 20
+    },
+    {
+      "playerId": "arber-hoxha",
+      "no": 21
+    },
+    {
+      "playerId": "stavro-pilo",
+      "no": 22
+    },
+    {
+      "playerId": "mario-dajsinani",
+      "no": 23
+    }
+  ]
+}

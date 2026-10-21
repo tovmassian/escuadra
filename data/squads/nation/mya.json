@@ -1,0 +1,109 @@
+{
+  "id": "mya",
+  "kind": "nation",
+  "name": "Myanmar",
+  "season": "2026",
+  "primaryColor": "#FECB00",
+  "secondaryColor": "#EA2839",
+  "verified": true,
+  "marker": {
+    "bands": ["#FECB00", "#34B233", "#EA2839"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Myanmar_national_football_team",
+  "members": [
+    {
+      "playerId": "sann-satt-naing",
+      "no": 1
+    },
+    {
+      "playerId": "phyo-pyae-sone",
+      "no": 2
+    },
+    {
+      "playerId": "hein-zeyar-lin",
+      "no": 3
+    },
+    {
+      "playerId": "soe-moe-kyaw",
+      "no": 4
+    },
+    {
+      "playerId": "myat-phone-khant",
+      "no": 5
+    },
+    {
+      "playerId": "kyaw-min-oo",
+      "no": 6
+    },
+    {
+      "playerId": "lwin-moe-aung",
+      "no": 7
+    },
+    {
+      "playerId": "wai-lin-aung",
+      "no": 8
+    },
+    {
+      "playerId": "than-paing",
+      "no": 9
+    },
+    {
+      "playerId": "win-naing-tun",
+      "no": 10
+    },
+    {
+      "playerId": "kaung-khant-kyaw",
+      "no": 11
+    },
+    {
+      "playerId": "moe-swe",
+      "no": 12
+    },
+    {
+      "playerId": "khun-kyaw-zin-hein",
+      "no": 13
+    },
+    {
+      "playerId": "aung-myo-khant",
+      "no": 14
+    },
+    {
+      "playerId": "zwe-khant-min",
+      "no": 15
+    },
+    {
+      "playerId": "shine-wanna-aung",
+      "no": 16
+    },
+    {
+      "playerId": "pyae-sone-aung",
+      "no": 17
+    },
+    {
+      "playerId": "nay-lin-htet",
+      "no": 18
+    },
+    {
+      "playerId": "hein-htet-aung",
+      "no": 19
+    },
+    {
+      "playerId": "myat-kaung-khant",
+      "no": 20
+    },
+    {
+      "playerId": "ye-yint-aung",
+      "no": 21
+    },
+    {
+      "playerId": "zaw-win-thein",
+      "no": 22
+    },
+    {
+      "playerId": "zin-nyi-nyi-aung",
+      "no": 23
+    }
+  ]
+}

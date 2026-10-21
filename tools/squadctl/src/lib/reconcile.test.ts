@@ -755,3 +755,364 @@ describe('notInSquad decisions', () => {
     expect(plan.squad.members.map((m) => m.playerId)).toEqual(['rafik-belghali']);
   });
 });
+
+describe('namesakes — a record this row provably is not', () => {
+  const uruguay = (members: EnvelopeMember[]) =>
+    envelope(members, {
+      id: 'uru',
+      kind: 'nation',
+      name: 'Uruguay',
+      league: undefined,
+      season: '2026',
+      source: 'https://en.wikipedia.org/wiki/Uruguay_national_football_team',
+    });
+  const argentinasKeeper = player({
+    id: 'e-martinez',
+    name: 'Emiliano Martínez',
+    birth: '1992-09-02',
+    position: 'GK',
+    nationality: 'Argentina',
+    club: 'Chelsea',
+    wikiTitle: 'Emiliano Martínez',
+  });
+  const uruguayRow = row({
+    name: 'Emiliano Martínez',
+    title: 'Emiliano Martínez (footballer, born 1999)',
+    birth: '1999-08-17',
+    position: 'MF',
+    nationality: 'Uruguay',
+    club: 'Palmeiras',
+  });
+
+  it('creates a record when a base-equivalent title belongs to someone born on another day', () => {
+    // The live case: Uruguay links the disambiguated article, which relates
+    // to Argentina's goalkeeper stored under the bare title. Matching merged
+    // the two into one record carrying Uruguay's nationality.
+    const plan = reconcileTeam({
+      envelope: uruguay([uruguayRow]),
+      storedSquad: null,
+      players: [argentinasKeeper],
+    });
+    expect(plan.updatedPlayers).toEqual([]);
+    expect(plan.newPlayers.map((p) => [p.id, p.birth, p.wikiTitle])).toEqual([
+      ['emiliano-martinez', '1999-08-17', 'Emiliano Martínez (footballer, born 1999)'],
+    ]);
+    expect(plan.namesakes).toEqual([
+      { id: 'emiliano-martinez', of: ['e-martinez'], proof: 'born 1999-08-17, not 1992-09-02' },
+    ]);
+  });
+
+  // Two disambiguated titles that differ: a clash, not base equivalence.
+  const disambiguatedKeeper = {
+    ...argentinasKeeper,
+    wikiTitle: 'Emiliano Martínez (footballer, born 1992)',
+  };
+
+  it('creates a record instead of raising a title clash when the births differ', () => {
+    // Two articles AND two birth dates: there is nothing left to decide.
+    const plan = reconcileTeam({
+      envelope: uruguay([uruguayRow]),
+      storedSquad: null,
+      players: [disambiguatedKeeper],
+    });
+    expect(plan.titleMismatches).toEqual([]);
+    expect(plan.omitted).toEqual([]);
+    expect(plan.newPlayers).toHaveLength(1);
+  });
+
+  it('still raises the title clash when one birth date is unknown', () => {
+    const plan = reconcileTeam({
+      envelope: uruguay([{ ...uruguayRow, birth: undefined }]),
+      storedSquad: null,
+      players: [disambiguatedKeeper],
+    });
+    expect(plan.titleMismatches).toHaveLength(1);
+    expect(plan.newPlayers).toEqual([]);
+  });
+
+  it("lets the record's own article decide over a disagreeing birth date", () => {
+    // A stray date in one source is enrich's birth-mismatch, not a second person.
+    const plan = reconcileTeam({
+      envelope: uruguay([{ ...uruguayRow, title: 'Emiliano Martinez' }]),
+      storedSquad: null,
+      players: [argentinasKeeper],
+    });
+    expect(plan.newPlayers).toEqual([]);
+    expect(plan.namesakes).toEqual([]);
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['e-martinez']);
+  });
+
+  it("never joins a name-only row to another nation's player", () => {
+    // The live case: Burkina Faso's unlinked "Aboubacar Camara" became a
+    // record, and Niger's linked one then merged into it by name.
+    const camara = player({
+      id: 'aboubacar-camara',
+      name: 'Aboubacar Camara',
+      birth: null,
+      nationality: 'Burkina Faso',
+      wikiTitle: null,
+    });
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Aboubacar Camara', nationality: 'Niger', club: 'Bylis' })], {
+        id: 'nig',
+        kind: 'nation',
+        name: 'Niger',
+        league: undefined,
+        season: '2026',
+      }),
+      storedSquad: null,
+      players: [camara],
+      nationSquadOf: new Map([['aboubacar-camara', 'bfa']]),
+    });
+    expect(plan.updatedPlayers).toEqual([]);
+    expect(plan.newPlayers.map((p) => p.id)).toEqual(['aboubacar-camara-2']);
+    expect(plan.namesakes).toEqual([
+      { id: 'aboubacar-camara-2', of: ['aboubacar-camara'], proof: "already in bfa's squad" },
+    ]);
+  });
+
+  it("matches a name-only row to this nation's own player as before", () => {
+    const own = player({ id: 'luis-suarez', name: 'Luis Suárez', birth: null });
+    const plan = reconcileTeam({
+      envelope: uruguay([row({ name: 'Luis Suárez', nationality: 'Uruguay' })]),
+      storedSquad: null,
+      players: [own],
+      nationSquadOf: new Map([['luis-suarez', 'uru']]),
+    });
+    expect(plan.newPlayers).toEqual([]);
+    expect(plan.namesakes).toEqual([]);
+  });
+
+  it("leaves a club row free to match a nation's player by name", () => {
+    // Every club squad is full of internationals; the rule is one nation each.
+    const own = player({ id: 'luis-suarez', name: 'Luis Suárez', birth: null });
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Luis Suárez' })]),
+      storedSquad: null,
+      players: [own],
+      nationSquadOf: new Map([['luis-suarez', 'uru']]),
+    });
+    expect(plan.newPlayers).toEqual([]);
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['luis-suarez']);
+  });
+});
+
+describe('clubless members', () => {
+  const nation = (members: EnvelopeMember[]) =>
+    envelope(members, {
+      id: 'asa',
+      kind: 'nation',
+      name: 'American Samoa',
+      league: undefined,
+      season: '2026',
+    });
+
+  it('lists a member whose record ends up with no club', () => {
+    const plan = reconcileTeam({
+      envelope: nation([
+        row({ name: "Ali'i Mitchell", nationality: 'American Samoa', club: undefined }),
+      ]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.clubless).toEqual(['alii-mitchell']);
+  });
+
+  it('does not list a member whose stored record carries the club the row leaves out', () => {
+    const known = player({ id: 'known', name: 'Known Player', club: 'Sevilla' });
+    const plan = reconcileTeam({
+      envelope: nation([
+        row({ name: 'Known Player', nationality: 'American Samoa', club: undefined }),
+      ]),
+      storedSquad: null,
+      players: [known],
+    });
+    expect(plan.clubless).toEqual([]);
+  });
+});
+
+describe('a rename needs more than a shared surname when births disagree', () => {
+  // The October sweep: Ecuador called up Fricio Caicedo as Moisés Caicedo
+  // left, and the shared surname read as a rename. Two birth dates say two
+  // people, which leaves nothing to ask.
+  const ecuador = (members: EnvelopeMember[]) =>
+    envelope(members, {
+      id: 'ecu',
+      kind: 'nation',
+      name: 'Ecuador',
+      league: undefined,
+      season: '2026',
+    });
+  const moises = player({
+    id: 'moises-caicedo',
+    name: 'Moisés Caicedo',
+    birth: '2001-11-02',
+    nationality: 'Ecuador',
+    club: 'Chelsea',
+    wikiTitle: 'Moisés Caicedo',
+  });
+  const fricio = row({
+    name: 'Fricio Caicedo',
+    title: 'Fricio Caicedo',
+    birth: '2008-04-17',
+    nationality: 'Ecuador',
+    club: 'Inter Miami',
+  });
+
+  it('creates the arrival and lets the departed player leave', () => {
+    const plan = reconcileTeam({
+      envelope: ecuador([fricio]),
+      storedSquad: squad([{ playerId: 'moises-caicedo', no: 23 }]),
+      players: [moises],
+    });
+    expect(plan.possibleRenames).toEqual([]);
+    expect(plan.newPlayers.map((p) => p.id)).toEqual(['fricio-caicedo']);
+    expect(plan.departed.map((d) => d.id)).toEqual(['moises-caicedo']);
+    expect(plan.namesakes).toEqual([
+      { id: 'fricio-caicedo', of: ['moises-caicedo'], proof: 'born 2008-04-17, not 2001-11-02' },
+    ]);
+  });
+
+  it('still asks when the dates agree or one is unknown', () => {
+    for (const birth of ['2001-11-02', undefined]) {
+      const plan = reconcileTeam({
+        envelope: ecuador([{ ...fricio, birth }]),
+        storedSquad: squad([{ playerId: 'moises-caicedo', no: 23 }]),
+        players: [moises],
+      });
+      expect(plan.possibleRenames.map((r) => r.departedId)).toEqual(['moises-caicedo']);
+    }
+  });
+});
+
+describe('a birth date proves nothing on a record no article backs', () => {
+  // The October sweep: Brazil's Hugo Souza (born 1999-01-31) against an
+  // untitled orphan record of him, carrying a date the retired pipeline
+  // invented (1999-04-15). Only a titled record's date has been checked by
+  // enrich, so only it can tell two people apart.
+  it('reuses an untitled record whatever its birth date says', () => {
+    const orphan = player({
+      id: 'hugo-souza',
+      name: 'Hugo Souza',
+      birth: '1999-04-15',
+      position: 'GK',
+      nationality: 'Brazil',
+      club: 'Corinthians',
+      wikiTitle: null,
+    });
+    const plan = reconcileTeam({
+      envelope: envelope(
+        [
+          row({
+            name: 'Hugo Souza',
+            title: 'Hugo Souza',
+            birth: '1999-01-31',
+            position: 'GK',
+            nationality: 'Brazil',
+            club: 'Corinthians',
+          }),
+        ],
+        { id: 'bra', kind: 'nation', name: 'Brazil', league: undefined, season: '2026' },
+      ),
+      storedSquad: null,
+      players: [orphan],
+    });
+    expect(plan.newPlayers).toEqual([]);
+    expect(plan.namesakes).toEqual([]);
+    expect(plan.updatedPlayers[0]).toMatchObject({
+      id: 'hugo-souza',
+      birth: '1999-04-15',
+      wikiTitle: 'Hugo Souza',
+    });
+  });
+});
+
+describe('a split rules out one pair, not every lookalike', () => {
+  // Brazil, October 2026: "Danilo" arrived as both Danilo Luiz (born 1991)
+  // and Danilo Santos (born 2001, the same Botafogo player) left. With
+  // `split bra danilo-luiz "Danilo"` recorded, the rename step stopped at the
+  // first lookalike and created a duplicate of Danilo Santos.
+  it('offers the next lookalike once the first is split off', () => {
+    const luiz = player({ id: 'danilo-luiz', name: 'Danilo Luiz', birth: '1991-07-15' });
+    const santos = player({ id: 'danilo-santos', name: 'Danilo Santos', birth: '2001-04-29' });
+    const plan = reconcileTeam({
+      envelope: envelope([row({ name: 'Danilo', birth: '2001-04-29' })]),
+      storedSquad: squad([
+        { playerId: 'danilo-luiz', no: 2 },
+        { playerId: 'danilo-santos', no: 15 },
+      ]),
+      players: [luiz, santos],
+      acceptedSplits: [{ team: 'sev', departed: 'danilo-luiz', arrived: 'Danilo' }],
+    });
+    expect(plan.newPlayers).toEqual([]);
+    expect(plan.possibleRenames.map((r) => r.departedId)).toEqual(['danilo-santos']);
+  });
+});
+
+describe('a link the decisions say names someone else', () => {
+  // Nicaragua links [[Emmanuel Gómez]], the article of a Gambian defender born
+  // 1990; their own Emmanuel Gómez, born 2000, has no article. Unlinked, the
+  // row matches by name and never hands its record that title back.
+  const nicaragua = (members: EnvelopeMember[]) =>
+    envelope(members, {
+      id: 'nca',
+      kind: 'nation',
+      name: 'Nicaragua',
+      league: undefined,
+      season: '2026',
+    });
+  const ours = player({
+    id: 'emmanuel-gomez',
+    name: 'Emmanuel Gómez',
+    birth: '2000-05-17',
+    nationality: 'Nicaragua',
+    club: 'UMECIT',
+    wikiTitle: null,
+  });
+  const gomezRow = row({
+    name: 'Emmanuel Gómez',
+    title: 'Emmanuel Gómez',
+    birth: '2000-05-17',
+    nationality: 'Nicaragua',
+    club: 'UMECIT',
+  });
+  const wrongLinks = [{ team: 'nca', title: 'Emmanuel Gómez', reason: 'a Gambian defender' }];
+
+  it('matches by name and leaves the record unlinked', () => {
+    const plan = reconcileTeam({
+      envelope: nicaragua([gomezRow]),
+      storedSquad: squad([{ playerId: 'emmanuel-gomez', no: 5 }]),
+      players: [ours],
+      wrongLinks,
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['emmanuel-gomez']);
+    expect(plan.updatedPlayers).toEqual([]);
+  });
+
+  it('never joins the record that does carry the title', () => {
+    const gambian = player({
+      id: 'emmanuel-gomez-2',
+      name: 'Emmanuel Gómez',
+      birth: '1990-12-20',
+      nationality: 'Gambia',
+      wikiTitle: 'Emmanuel Gómez',
+    });
+    const plan = reconcileTeam({
+      envelope: nicaragua([gomezRow]),
+      storedSquad: squad([{ playerId: 'emmanuel-gomez', no: 5 }]),
+      players: [ours, gambian],
+      wrongLinks,
+    });
+    expect(plan.squad.members.map((m) => m.playerId)).toEqual(['emmanuel-gomez']);
+  });
+
+  it("leaves another team's identical link alone", () => {
+    const plan = reconcileTeam({
+      envelope: nicaragua([gomezRow]),
+      storedSquad: squad([{ playerId: 'emmanuel-gomez', no: 5 }]),
+      players: [ours],
+      wrongLinks: [{ ...wrongLinks[0]!, team: 'gam' }],
+    });
+    expect(plan.updatedPlayers[0]?.wikiTitle).toBe('Emmanuel Gómez');
+  });
+});

@@ -1,0 +1,114 @@
+{
+  "id": "vie",
+  "kind": "nation",
+  "name": "Vietnam",
+  "season": "2026",
+  "primaryColor": "#FF0000",
+  "secondaryColor": "#FFEB00",
+  "verified": true,
+  "marker": {
+    "bands": ["#FF0000"],
+    "orientation": "vertical",
+    "overlay": {
+      "shape": "disc",
+      "color": "#FFEB00"
+    }
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Vietnam_national_football_team",
+  "members": [
+    {
+      "playerId": "le-giang-patrik",
+      "no": 1
+    },
+    {
+      "playerId": "le-ngoc-bao",
+      "no": 2
+    },
+    {
+      "playerId": "cao-pendant-quang-vinh",
+      "no": 3
+    },
+    {
+      "playerId": "le-van-do",
+      "no": 4
+    },
+    {
+      "playerId": "nguyen-adou-leygley-minh",
+      "no": 5
+    },
+    {
+      "playerId": "nguyen-nhat-minh",
+      "no": 6
+    },
+    {
+      "playerId": "pham-xuan-manh",
+      "no": 7
+    },
+    {
+      "playerId": "le-pham-thanh-long",
+      "no": 8
+    },
+    {
+      "playerId": "nguyen-dinh-bac",
+      "no": 9
+    },
+    {
+      "playerId": "do-hoang-hen",
+      "no": 10
+    },
+    {
+      "playerId": "williams-minh-hoang",
+      "no": 11
+    },
+    {
+      "playerId": "nguyen-xuan-son",
+      "no": 12
+    },
+    {
+      "playerId": "nguyen-tai-loc",
+      "no": 13
+    },
+    {
+      "playerId": "nguyen-hoang-duc",
+      "no": 14,
+      "captain": true
+    },
+    {
+      "playerId": "truong-tien-anh",
+      "no": 15
+    },
+    {
+      "playerId": "ngo-dang-khoa",
+      "no": 16
+    },
+    {
+      "playerId": "pham-gia-hung",
+      "no": 17
+    },
+    {
+      "playerId": "nguyen-hai-long",
+      "no": 18
+    },
+    {
+      "playerId": "vo-hoang-minh-khoa",
+      "no": 19
+    },
+    {
+      "playerId": "bui-hoang-viet-anh",
+      "no": 20
+    },
+    {
+      "playerId": "tran-trung-kien",
+      "no": 21
+    },
+    {
+      "playerId": "phan-tuan-tai",
+      "no": 22
+    },
+    {
+      "playerId": "nguyen-van-viet",
+      "no": 23
+    }
+  ]
+}

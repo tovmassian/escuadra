@@ -10,7 +10,7 @@
     "bands": ["#00A650", "#000000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/U.S._Sassuolo_Calcio",
   "members": [
     {
@@ -39,7 +39,8 @@
     },
     {
       "playerId": "domenico-berardi",
-      "no": 10
+      "no": 10,
+      "captain": true
     },
     {
       "playerId": "daniel-boloca",
@@ -144,10 +145,6 @@
     {
       "playerId": "sebastiano-esposito",
       "no": 94
-    },
-    {
-      "playerId": "edoardo-pieragnolo",
-      "no": null
     }
   ]
 }

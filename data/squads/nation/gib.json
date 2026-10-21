@@ -1,0 +1,111 @@
+{
+  "id": "gib",
+  "kind": "nation",
+  "name": "Gibraltar",
+  "season": "2026",
+  "primaryColor": "#FFFFFF",
+  "secondaryColor": "#DA000C",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#DA000C"],
+    "orientation": "horizontal",
+    "weights": [2, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Gibraltar_national_football_team",
+  "members": [
+    {
+      "playerId": "bradley-banda",
+      "no": 1
+    },
+    {
+      "playerId": "ethan-jolley",
+      "no": 2
+    },
+    {
+      "playerId": "julian-valarino",
+      "no": 3
+    },
+    {
+      "playerId": "nicholas-pozo",
+      "no": 4
+    },
+    {
+      "playerId": "dan-bent",
+      "no": 5
+    },
+    {
+      "playerId": "bernardo-lopes",
+      "no": 6
+    },
+    {
+      "playerId": "carlos-richards",
+      "no": 7
+    },
+    {
+      "playerId": "kian-ronan",
+      "no": 8
+    },
+    {
+      "playerId": "dylan-borge",
+      "no": 9
+    },
+    {
+      "playerId": "tjay-de-barr",
+      "no": 10
+    },
+    {
+      "playerId": "james-scanlon",
+      "no": 11
+    },
+    {
+      "playerId": "jesse-gomez",
+      "no": 12
+    },
+    {
+      "playerId": "victor-huart",
+      "no": 13
+    },
+    {
+      "playerId": "jayvan-garro",
+      "no": 14
+    },
+    {
+      "playerId": "ethan-llambias",
+      "no": 15
+    },
+    {
+      "playerId": "han-stevens",
+      "no": 16
+    },
+    {
+      "playerId": "liam-jessop",
+      "no": 17
+    },
+    {
+      "playerId": "jaiden-bartolo",
+      "no": 18
+    },
+    {
+      "playerId": "leon-mason",
+      "no": 19
+    },
+    {
+      "playerId": "ethan-britto",
+      "no": 20
+    },
+    {
+      "playerId": "alain-pons",
+      "no": 21
+    },
+    {
+      "playerId": "graeme-torrilla",
+      "no": 22,
+      "captain": true
+    },
+    {
+      "playerId": "jaylan-hankins",
+      "no": 23
+    }
+  ]
+}

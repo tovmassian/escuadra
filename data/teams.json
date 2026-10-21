@@ -2129,5 +2129,2487 @@
         "orientation": "horizontal"
       }
     }
+  },
+  {
+    "id": "afg",
+    "kind": "nation",
+    "name": "Afghanistan",
+    "source": "https://en.wikipedia.org/wiki/Afghanistan_national_football_team",
+    "identity": {
+      "primaryColor": "#000000",
+      "secondaryColor": "#007A36",
+      "marker": {
+        "bands": ["#000000", "#D32011", "#007A36"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "alb",
+    "kind": "nation",
+    "name": "Albania",
+    "source": "https://en.wikipedia.org/wiki/Albania_national_football_team",
+    "identity": {
+      "primaryColor": "#FF0000",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#FF0000"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#000000"
+        }
+      }
+    }
+  },
+  {
+    "id": "asa",
+    "kind": "nation",
+    "name": "American Samoa",
+    "source": "https://en.wikipedia.org/wiki/American_Samoa_national_football_team",
+    "identity": {
+      "primaryColor": "#000066",
+      "secondaryColor": "#BD1021",
+      "marker": {
+        "bands": ["#000066", "#FFFFFF", "#BD1021"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "and",
+    "kind": "nation",
+    "name": "Andorra",
+    "source": "https://en.wikipedia.org/wiki/Andorra_national_football_team",
+    "identity": {
+      "primaryColor": "#10069F",
+      "secondaryColor": "#D50032",
+      "marker": {
+        "bands": ["#10069F", "#FEDD00", "#D50032"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "angola",
+    "kind": "nation",
+    "name": "Angola",
+    "source": "https://en.wikipedia.org/wiki/Angola_national_football_team",
+    "identity": {
+      "primaryColor": "#CC092F",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#CC092F", "#000000"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "aia",
+    "kind": "nation",
+    "name": "Anguilla",
+    "source": "https://en.wikipedia.org/wiki/Anguilla_national_football_team",
+    "identity": {
+      "primaryColor": "#012169",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#012169"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFFFF"
+        }
+      }
+    }
+  },
+  {
+    "id": "atg",
+    "kind": "nation",
+    "name": "Antigua and Barbuda",
+    "source": "https://en.wikipedia.org/wiki/Antigua_and_Barbuda_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#CE1126", "#000000", "#0072C6", "#FFFFFF", "#CE1126"],
+        "orientation": "vertical",
+        "weights": [2, 1, 1, 1, 2]
+      }
+    }
+  },
+  {
+    "id": "aru",
+    "kind": "nation",
+    "name": "Aruba",
+    "source": "https://en.wikipedia.org/wiki/Aruba_national_football_team",
+    "identity": {
+      "primaryColor": "#418FDE",
+      "secondaryColor": "#FFD100",
+      "marker": {
+        "bands": ["#418FDE", "#FFD100", "#418FDE", "#FFD100", "#418FDE"],
+        "orientation": "horizontal",
+        "weights": [14, 1, 1, 1, 3]
+      }
+    }
+  },
+  {
+    "id": "aze",
+    "kind": "nation",
+    "name": "Azerbaijan",
+    "source": "https://en.wikipedia.org/wiki/Azerbaijan_national_football_team",
+    "identity": {
+      "primaryColor": "#00B5E2",
+      "secondaryColor": "#509E2F",
+      "marker": {
+        "bands": ["#00B5E2", "#EF3340", "#509E2F"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "bah",
+    "kind": "nation",
+    "name": "Bahamas",
+    "source": "https://en.wikipedia.org/wiki/Bahamas_national_football_team",
+    "identity": {
+      "primaryColor": "#00778B",
+      "secondaryColor": "#FFC72C",
+      "marker": {
+        "bands": ["#000000", "#00778B", "#FFC72C", "#00778B"],
+        "orientation": "vertical",
+        "weights": [1, 2, 2, 2]
+      }
+    }
+  },
+  {
+    "id": "bhr",
+    "kind": "nation",
+    "name": "Bahrain",
+    "source": "https://en.wikipedia.org/wiki/Bahrain_national_football_team",
+    "identity": {
+      "primaryColor": "#DA291C",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FFFFFF", "#DA291C"],
+        "orientation": "vertical",
+        "weights": [1, 2]
+      }
+    }
+  },
+  {
+    "id": "ban",
+    "kind": "nation",
+    "name": "Bangladesh",
+    "source": "https://en.wikipedia.org/wiki/Bangladesh_national_football_team",
+    "identity": {
+      "primaryColor": "#006A4E",
+      "secondaryColor": "#F42A41",
+      "marker": {
+        "bands": ["#006A4E"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#F42A41"
+        }
+      }
+    }
+  },
+  {
+    "id": "brb",
+    "kind": "nation",
+    "name": "Barbados",
+    "source": "https://en.wikipedia.org/wiki/Barbados_national_football_team",
+    "identity": {
+      "primaryColor": "#00267F",
+      "secondaryColor": "#FFC726",
+      "marker": {
+        "bands": ["#00267F", "#FFC726", "#00267F"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "blr",
+    "kind": "nation",
+    "name": "Belarus",
+    "source": "https://en.wikipedia.org/wiki/Belarus_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1720",
+      "secondaryColor": "#007C30",
+      "marker": {
+        "bands": ["#CE1720", "#007C30"],
+        "orientation": "horizontal",
+        "weights": [2, 1]
+      }
+    }
+  },
+  {
+    "id": "blz",
+    "kind": "nation",
+    "name": "Belize",
+    "source": "https://en.wikipedia.org/wiki/Belize_national_football_team",
+    "identity": {
+      "primaryColor": "#171696",
+      "secondaryColor": "#D90F19",
+      "marker": {
+        "bands": ["#D90F19", "#171696", "#D90F19"],
+        "orientation": "horizontal",
+        "weights": [1, 8, 1]
+      }
+    }
+  },
+  {
+    "id": "ben",
+    "kind": "nation",
+    "name": "Benin",
+    "source": "https://en.wikipedia.org/wiki/Benin_national_football_team",
+    "identity": {
+      "primaryColor": "#008751",
+      "secondaryColor": "#FCD116",
+      "marker": {
+        "bands": ["#008751", "#FCD116", "#E8112D"],
+        "orientation": "vertical",
+        "weights": [2, 3, 3]
+      }
+    }
+  },
+  {
+    "id": "ber",
+    "kind": "nation",
+    "name": "Bermuda",
+    "source": "https://en.wikipedia.org/wiki/Bermuda_national_football_team",
+    "identity": {
+      "primaryColor": "#C8102E",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#C8102E"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFFFF"
+        }
+      }
+    }
+  },
+  {
+    "id": "bhu",
+    "kind": "nation",
+    "name": "Bhutan",
+    "source": "https://en.wikipedia.org/wiki/Bhutan_national_football_team",
+    "identity": {
+      "primaryColor": "#FFCD00",
+      "secondaryColor": "#FF671F",
+      "marker": {
+        "bands": ["#FFCD00", "#FFFFFF", "#FF671F"],
+        "orientation": "vertical",
+        "weights": [2, 1, 2]
+      }
+    }
+  },
+  {
+    "id": "bolivia",
+    "kind": "nation",
+    "name": "Bolivia",
+    "source": "https://en.wikipedia.org/wiki/Bolivia_national_football_team",
+    "identity": {
+      "primaryColor": "#D32011",
+      "secondaryColor": "#00702D",
+      "marker": {
+        "bands": ["#D32011", "#F0E53C", "#00702D"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "bih",
+    "kind": "nation",
+    "name": "Bosnia and Herzegovina",
+    "source": "https://en.wikipedia.org/wiki/Bosnia_and_Herzegovina_national_football_team",
+    "identity": {
+      "primaryColor": "#002395",
+      "secondaryColor": "#FECB00",
+      "marker": {
+        "bands": ["#002395", "#FECB00", "#002395"],
+        "orientation": "vertical",
+        "weights": [2, 2, 1]
+      }
+    }
+  },
+  {
+    "id": "bot",
+    "kind": "nation",
+    "name": "Botswana",
+    "source": "https://en.wikipedia.org/wiki/Botswana_national_football_team",
+    "identity": {
+      "primaryColor": "#6DA9D2",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#6DA9D2", "#FFFFFF", "#000000", "#FFFFFF", "#6DA9D2"],
+        "orientation": "horizontal",
+        "weights": [9, 1, 4, 1, 9]
+      }
+    }
+  },
+  {
+    "id": "vgb",
+    "kind": "nation",
+    "name": "British Virgin Islands",
+    "source": "https://en.wikipedia.org/wiki/British_Virgin_Islands_national_football_team",
+    "identity": {
+      "primaryColor": "#012169",
+      "secondaryColor": "#006129",
+      "marker": {
+        "bands": ["#012169"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#006129"
+        }
+      }
+    }
+  },
+  {
+    "id": "bru",
+    "kind": "nation",
+    "name": "Brunei",
+    "source": "https://en.wikipedia.org/wiki/Brunei_national_football_team",
+    "identity": {
+      "primaryColor": "#F7E017",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#F7E017", "#FFFFFF", "#000000", "#F7E017"],
+        "orientation": "horizontal",
+        "weights": [3, 1, 1, 3]
+      }
+    }
+  },
+  {
+    "id": "bul",
+    "kind": "nation",
+    "name": "Bulgaria",
+    "source": "https://en.wikipedia.org/wiki/Bulgaria_national_football_team",
+    "identity": {
+      "primaryColor": "#00966E",
+      "secondaryColor": "#D62612",
+      "marker": {
+        "bands": ["#FFFFFF", "#00966E", "#D62612"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "bfa",
+    "kind": "nation",
+    "name": "Burkina Faso",
+    "source": "https://en.wikipedia.org/wiki/Burkina_Faso_national_football_team",
+    "identity": {
+      "primaryColor": "#EF2B2D",
+      "secondaryColor": "#009E49",
+      "marker": {
+        "bands": ["#EF2B2D", "#009E49"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "bdi",
+    "kind": "nation",
+    "name": "Burundi",
+    "source": "https://en.wikipedia.org/wiki/Burundi_national_football_team",
+    "identity": {
+      "primaryColor": "#C8102E",
+      "secondaryColor": "#43B02A",
+      "marker": {
+        "bands": ["#C8102E", "#FFFFFF", "#43B02A"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "cam",
+    "kind": "nation",
+    "name": "Cambodia",
+    "source": "https://en.wikipedia.org/wiki/Cambodia_national_football_team",
+    "identity": {
+      "primaryColor": "#032EA1",
+      "secondaryColor": "#E00025",
+      "marker": {
+        "bands": ["#032EA1", "#E00025", "#032EA1"],
+        "orientation": "horizontal",
+        "weights": [1, 2, 1]
+      }
+    }
+  },
+  {
+    "id": "cmr",
+    "kind": "nation",
+    "name": "Cameroon",
+    "source": "https://en.wikipedia.org/wiki/Cameroon_national_football_team",
+    "identity": {
+      "primaryColor": "#007A5E",
+      "secondaryColor": "#CE1126",
+      "marker": {
+        "bands": ["#007A5E", "#CE1126", "#FCD116"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "cpv",
+    "kind": "nation",
+    "name": "Cape Verde",
+    "source": "https://en.wikipedia.org/wiki/Cape_Verde_national_football_team",
+    "identity": {
+      "primaryColor": "#003893",
+      "secondaryColor": "#CF2027",
+      "marker": {
+        "bands": ["#003893", "#FFFFFF", "#CF2027", "#FFFFFF", "#003893"],
+        "orientation": "horizontal",
+        "weights": [6, 1, 1, 1, 3]
+      }
+    }
+  },
+  {
+    "id": "cay",
+    "kind": "nation",
+    "name": "Cayman Islands",
+    "source": "https://en.wikipedia.org/wiki/Cayman_Islands_national_football_team",
+    "identity": {
+      "primaryColor": "#012169",
+      "secondaryColor": "#C8102E",
+      "marker": {
+        "bands": ["#012169"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#C8102E"
+        }
+      }
+    }
+  },
+  {
+    "id": "cta",
+    "kind": "nation",
+    "name": "Central African Republic",
+    "source": "https://en.wikipedia.org/wiki/Central_African_Republic_national_football_team",
+    "identity": {
+      "primaryColor": "#003082",
+      "secondaryColor": "#D21034",
+      "marker": {
+        "bands": ["#003082", "#FFFFFF", "#D21034", "#289728", "#FFCE00"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "cha",
+    "kind": "nation",
+    "name": "Chad",
+    "source": "https://en.wikipedia.org/wiki/Chad_national_football_team",
+    "identity": {
+      "primaryColor": "#002664",
+      "secondaryColor": "#C60C30",
+      "marker": {
+        "bands": ["#002664", "#FECB00", "#C60C30"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "chn",
+    "kind": "nation",
+    "name": "China PR",
+    "source": "https://en.wikipedia.org/wiki/China_national_football_team",
+    "identity": {
+      "primaryColor": "#EE1C25",
+      "secondaryColor": "#FFFF00",
+      "marker": {
+        "bands": ["#EE1C25"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFF00"
+        }
+      }
+    }
+  },
+  {
+    "id": "comoros",
+    "kind": "nation",
+    "name": "Comoros",
+    "source": "https://en.wikipedia.org/wiki/Comoros_national_football_team",
+    "identity": {
+      "primaryColor": "#009639",
+      "secondaryColor": "#FFD100",
+      "marker": {
+        "bands": ["#009639", "#FFD100", "#FFFFFF", "#EF3340", "#003DA5"],
+        "orientation": "vertical",
+        "weights": [2, 1, 1, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "cgo",
+    "kind": "nation",
+    "name": "Congo",
+    "source": "https://en.wikipedia.org/wiki/Congo_national_football_team",
+    "identity": {
+      "primaryColor": "#009543",
+      "secondaryColor": "#DC241F",
+      "marker": {
+        "bands": ["#009543", "#FBDE4A", "#DC241F"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "cok",
+    "kind": "nation",
+    "name": "Cook Islands",
+    "source": "https://en.wikipedia.org/wiki/Cook_Islands_national_football_team",
+    "identity": {
+      "primaryColor": "#012169",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#012169"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFFFF"
+        }
+      }
+    }
+  },
+  {
+    "id": "crc",
+    "kind": "nation",
+    "name": "Costa Rica",
+    "source": "https://en.wikipedia.org/wiki/Costa_Rica_national_football_team",
+    "identity": {
+      "primaryColor": "#001489",
+      "secondaryColor": "#DA291C",
+      "marker": {
+        "bands": ["#001489", "#FFFFFF", "#DA291C", "#FFFFFF", "#001489"],
+        "orientation": "horizontal",
+        "weights": [1, 1, 2, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "cro",
+    "kind": "nation",
+    "name": "Croatia",
+    "source": "https://en.wikipedia.org/wiki/Croatia_national_football_team",
+    "identity": {
+      "primaryColor": "#FF0000",
+      "secondaryColor": "#171796",
+      "marker": {
+        "bands": ["#FF0000", "#FFFFFF", "#171796"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "cub",
+    "kind": "nation",
+    "name": "Cuba",
+    "source": "https://en.wikipedia.org/wiki/Cuba_national_football_team",
+    "identity": {
+      "primaryColor": "#002A8F",
+      "secondaryColor": "#CB1515",
+      "marker": {
+        "bands": ["#CB1515", "#002A8F", "#FFFFFF", "#002A8F", "#FFFFFF", "#002A8F"],
+        "orientation": "vertical",
+        "weights": [3, 1, 1, 1, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "cuw",
+    "kind": "nation",
+    "name": "Curaçao",
+    "source": "https://en.wikipedia.org/wiki/Curaçao_national_football_team",
+    "identity": {
+      "primaryColor": "#002B7F",
+      "secondaryColor": "#F9E814",
+      "marker": {
+        "bands": ["#002B7F", "#F9E814", "#002B7F"],
+        "orientation": "horizontal",
+        "weights": [5, 1, 2]
+      }
+    }
+  },
+  {
+    "id": "cyp",
+    "kind": "nation",
+    "name": "Cyprus",
+    "source": "https://en.wikipedia.org/wiki/Cyprus_national_football_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#D67900",
+      "marker": {
+        "bands": ["#FFFFFF"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#D67900"
+        }
+      }
+    }
+  },
+  {
+    "id": "dji",
+    "kind": "nation",
+    "name": "Djibouti",
+    "source": "https://en.wikipedia.org/wiki/Djibouti_national_football_team",
+    "identity": {
+      "primaryColor": "#6AB2E7",
+      "secondaryColor": "#12AD2B",
+      "marker": {
+        "bands": ["#FFFFFF", "#6AB2E7", "#12AD2B"],
+        "orientation": "vertical",
+        "weights": [1, 2, 2]
+      }
+    }
+  },
+  {
+    "id": "dma",
+    "kind": "nation",
+    "name": "Dominica",
+    "source": "https://en.wikipedia.org/wiki/Dominica_national_football_team",
+    "identity": {
+      "primaryColor": "#046A38",
+      "secondaryColor": "#D50032",
+      "marker": {
+        "bands": ["#046A38"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#D50032"
+        }
+      }
+    }
+  },
+  {
+    "id": "dom",
+    "kind": "nation",
+    "name": "Dominican Republic",
+    "source": "https://en.wikipedia.org/wiki/Dominican_Republic_national_football_team",
+    "identity": {
+      "primaryColor": "#002D62",
+      "secondaryColor": "#CE1126",
+      "marker": {
+        "bands": ["#002D62", "#FFFFFF", "#CE1126"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "slv",
+    "kind": "nation",
+    "name": "El Salvador",
+    "source": "https://en.wikipedia.org/wiki/El_Salvador_national_football_team",
+    "identity": {
+      "primaryColor": "#0047AB",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#0047AB", "#FFFFFF", "#0047AB"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "eqg",
+    "kind": "nation",
+    "name": "Equatorial Guinea",
+    "source": "https://en.wikipedia.org/wiki/Equatorial_Guinea_national_football_team",
+    "identity": {
+      "primaryColor": "#3E9A00",
+      "secondaryColor": "#E32118",
+      "marker": {
+        "bands": ["#0073CE", "#3E9A00", "#FFFFFF", "#E32118"],
+        "orientation": "vertical",
+        "weights": [1, 2, 2, 2]
+      }
+    }
+  },
+  {
+    "id": "eri",
+    "kind": "nation",
+    "name": "Eritrea",
+    "source": "https://en.wikipedia.org/wiki/Eritrea_national_football_team",
+    "identity": {
+      "primaryColor": "#E4002B",
+      "secondaryColor": "#43B02A",
+      "marker": {
+        "bands": ["#43B02A", "#E4002B", "#418FDE"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "est",
+    "kind": "nation",
+    "name": "Estonia",
+    "source": "https://en.wikipedia.org/wiki/Estonia_national_football_team",
+    "identity": {
+      "primaryColor": "#0072CE",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#0072CE", "#000000", "#FFFFFF"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "swz",
+    "kind": "nation",
+    "name": "Eswatini",
+    "source": "https://en.wikipedia.org/wiki/Eswatini_national_football_team",
+    "identity": {
+      "primaryColor": "#3E5EB9",
+      "secondaryColor": "#B10C0C",
+      "marker": {
+        "bands": ["#3E5EB9", "#FFD900", "#B10C0C", "#FFD900", "#3E5EB9"],
+        "orientation": "horizontal",
+        "weights": [3, 1, 8, 1, 3]
+      }
+    }
+  },
+  {
+    "id": "eth",
+    "kind": "nation",
+    "name": "Ethiopia",
+    "source": "https://en.wikipedia.org/wiki/Ethiopia_national_football_team",
+    "identity": {
+      "primaryColor": "#078930",
+      "secondaryColor": "#DA121A",
+      "marker": {
+        "bands": ["#078930", "#FCDD09", "#DA121A"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "fro",
+    "kind": "nation",
+    "name": "Faroe Islands",
+    "source": "https://en.wikipedia.org/wiki/Faroe_Islands_national_football_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#EF3340",
+      "marker": {
+        "bands": ["#FFFFFF", "#015EB8", "#EF3340", "#015EB8", "#FFFFFF"],
+        "orientation": "horizontal",
+        "weights": [7, 1, 2, 1, 7]
+      }
+    }
+  },
+  {
+    "id": "fij",
+    "kind": "nation",
+    "name": "Fiji",
+    "source": "https://en.wikipedia.org/wiki/Fiji_national_football_team",
+    "identity": {
+      "primaryColor": "#62B5E5",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#62B5E5"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFFFF"
+        }
+      }
+    }
+  },
+  {
+    "id": "fin",
+    "kind": "nation",
+    "name": "Finland",
+    "source": "https://en.wikipedia.org/wiki/Finland_national_football_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#002F6C",
+      "marker": {
+        "bands": ["#FFFFFF", "#002F6C", "#FFFFFF"],
+        "orientation": "horizontal",
+        "weights": [4, 3, 4]
+      }
+    }
+  },
+  {
+    "id": "gab",
+    "kind": "nation",
+    "name": "Gabon",
+    "source": "https://en.wikipedia.org/wiki/Gabon_national_football_team",
+    "identity": {
+      "primaryColor": "#009E60",
+      "secondaryColor": "#3A75C4",
+      "marker": {
+        "bands": ["#009E60", "#FCD116", "#3A75C4"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "gam",
+    "kind": "nation",
+    "name": "Gambia",
+    "source": "https://en.wikipedia.org/wiki/Gambia_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#3A7728",
+      "marker": {
+        "bands": ["#CE1126", "#FFFFFF", "#0C1C8C", "#FFFFFF", "#3A7728"],
+        "orientation": "horizontal",
+        "weights": [6, 1, 4, 1, 6]
+      }
+    }
+  },
+  {
+    "id": "geo",
+    "kind": "nation",
+    "name": "Georgia",
+    "source": "https://en.wikipedia.org/wiki/Georgia_national_football_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#FF0000",
+      "marker": {
+        "bands": ["#FFFFFF", "#FF0000", "#FFFFFF"],
+        "orientation": "vertical",
+        "weights": [2, 1, 2]
+      }
+    }
+  },
+  {
+    "id": "gha",
+    "kind": "nation",
+    "name": "Ghana",
+    "source": "https://en.wikipedia.org/wiki/Ghana_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#006B3F",
+      "marker": {
+        "bands": ["#CE1126", "#FCD116", "#006B3F"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "gib",
+    "kind": "nation",
+    "name": "Gibraltar",
+    "source": "https://en.wikipedia.org/wiki/Gibraltar_national_football_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#DA000C",
+      "marker": {
+        "bands": ["#FFFFFF", "#DA000C"],
+        "orientation": "horizontal",
+        "weights": [2, 1]
+      }
+    }
+  },
+  {
+    "id": "grn",
+    "kind": "nation",
+    "name": "Grenada",
+    "source": "https://en.wikipedia.org/wiki/Grenada_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#007A5E",
+      "marker": {
+        "bands": ["#CE1126", "#007A5E", "#FCD116", "#007A5E", "#CE1126"],
+        "orientation": "vertical",
+        "weights": [1, 3, 2, 3, 1]
+      }
+    }
+  },
+  {
+    "id": "gum",
+    "kind": "nation",
+    "name": "Guam",
+    "source": "https://en.wikipedia.org/wiki/Guam_national_football_team",
+    "identity": {
+      "primaryColor": "#00297B",
+      "secondaryColor": "#C62139",
+      "marker": {
+        "bands": ["#C62139", "#00297B", "#C62139"],
+        "orientation": "horizontal",
+        "weights": [1, 20, 1]
+      }
+    }
+  },
+  {
+    "id": "gua",
+    "kind": "nation",
+    "name": "Guatemala",
+    "source": "https://en.wikipedia.org/wiki/Guatemala_national_football_team",
+    "identity": {
+      "primaryColor": "#4997D0",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#4997D0", "#FFFFFF", "#4997D0"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "gui",
+    "kind": "nation",
+    "name": "Guinea",
+    "source": "https://en.wikipedia.org/wiki/Guinea_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#009460",
+      "marker": {
+        "bands": ["#CE1126", "#FCD116", "#009460"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "gnb",
+    "kind": "nation",
+    "name": "Guinea-Bissau",
+    "source": "https://en.wikipedia.org/wiki/Guinea-Bissau_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#009E49",
+      "marker": {
+        "bands": ["#CE1126", "#FCD116", "#009E49"],
+        "orientation": "vertical",
+        "weights": [2, 3, 3]
+      }
+    }
+  },
+  {
+    "id": "guy",
+    "kind": "nation",
+    "name": "Guyana",
+    "source": "https://en.wikipedia.org/wiki/Guyana_national_football_team",
+    "identity": {
+      "primaryColor": "#2A936A",
+      "secondaryColor": "#FFC20E",
+      "marker": {
+        "bands": ["#BE1E2D", "#FFC20E", "#2A936A"],
+        "orientation": "vertical",
+        "weights": [1, 1, 2]
+      }
+    }
+  },
+  {
+    "id": "hai",
+    "kind": "nation",
+    "name": "Haiti",
+    "source": "https://en.wikipedia.org/wiki/Haiti_national_football_team",
+    "identity": {
+      "primaryColor": "#00209F",
+      "secondaryColor": "#D21034",
+      "marker": {
+        "bands": ["#00209F", "#D21034"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "hon",
+    "kind": "nation",
+    "name": "Honduras",
+    "source": "https://en.wikipedia.org/wiki/Honduras_national_football_team",
+    "identity": {
+      "primaryColor": "#00BCE4",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#00BCE4", "#FFFFFF", "#00BCE4"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "hkg",
+    "kind": "nation",
+    "name": "Hong Kong",
+    "source": "https://en.wikipedia.org/wiki/Hong_Kong_national_football_team",
+    "identity": {
+      "primaryColor": "#EE1C25",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#EE1C25"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFFFF"
+        }
+      }
+    }
+  },
+  {
+    "id": "hun",
+    "kind": "nation",
+    "name": "Hungary",
+    "source": "https://en.wikipedia.org/wiki/Hungary_national_football_team",
+    "identity": {
+      "primaryColor": "#CE2939",
+      "secondaryColor": "#477050",
+      "marker": {
+        "bands": ["#CE2939", "#FFFFFF", "#477050"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "isl",
+    "kind": "nation",
+    "name": "Iceland",
+    "source": "https://en.wikipedia.org/wiki/Iceland_national_football_team",
+    "identity": {
+      "primaryColor": "#02529C",
+      "secondaryColor": "#DC1E35",
+      "marker": {
+        "bands": ["#02529C", "#FFFFFF", "#DC1E35", "#FFFFFF", "#02529C"],
+        "orientation": "horizontal",
+        "weights": [7, 1, 2, 1, 7]
+      }
+    }
+  },
+  {
+    "id": "ind",
+    "kind": "nation",
+    "name": "India",
+    "source": "https://en.wikipedia.org/wiki/India_national_football_team",
+    "identity": {
+      "primaryColor": "#FF6820",
+      "secondaryColor": "#046A38",
+      "marker": {
+        "bands": ["#FF6820", "#FFFFFF", "#046A38"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "idn",
+    "kind": "nation",
+    "name": "Indonesia",
+    "source": "https://en.wikipedia.org/wiki/Indonesia_national_football_team",
+    "identity": {
+      "primaryColor": "#FF0000",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FF0000", "#FFFFFF"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "irq",
+    "kind": "nation",
+    "name": "Iraq",
+    "source": "https://en.wikipedia.org/wiki/Iraq_national_football_team",
+    "identity": {
+      "primaryColor": "#CD1125",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#CD1125", "#FFFFFF", "#000000"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "isr",
+    "kind": "nation",
+    "name": "Israel",
+    "source": "https://en.wikipedia.org/wiki/Israel_national_football_team",
+    "identity": {
+      "primaryColor": "#0038B8",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FFFFFF", "#0038B8", "#FFFFFF", "#0038B8", "#FFFFFF"],
+        "orientation": "horizontal",
+        "weights": [1, 2, 5, 2, 1]
+      }
+    }
+  },
+  {
+    "id": "jam",
+    "kind": "nation",
+    "name": "Jamaica",
+    "source": "https://en.wikipedia.org/wiki/Jamaica_national_football_team",
+    "identity": {
+      "primaryColor": "#FFB81C",
+      "secondaryColor": "#007749",
+      "marker": {
+        "bands": ["#000000", "#FFB81C", "#007749", "#FFB81C", "#000000"],
+        "orientation": "vertical",
+        "weights": [2, 1, 2, 1, 2]
+      }
+    }
+  },
+  {
+    "id": "jor",
+    "kind": "nation",
+    "name": "Jordan",
+    "source": "https://en.wikipedia.org/wiki/Jordan_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#007A3D",
+      "marker": {
+        "bands": ["#CE1126", "#000000", "#FFFFFF", "#007A3D"],
+        "orientation": "vertical",
+        "weights": [1, 2, 2, 2]
+      }
+    }
+  },
+  {
+    "id": "kaz",
+    "kind": "nation",
+    "name": "Kazakhstan",
+    "source": "https://en.wikipedia.org/wiki/Kazakhstan_national_football_team",
+    "identity": {
+      "primaryColor": "#00ABC2",
+      "secondaryColor": "#FFEC2D",
+      "marker": {
+        "bands": ["#00ABC2"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFEC2D"
+        }
+      }
+    }
+  },
+  {
+    "id": "ken",
+    "kind": "nation",
+    "name": "Kenya",
+    "source": "https://en.wikipedia.org/wiki/Kenya_national_football_team",
+    "identity": {
+      "primaryColor": "#BB0000",
+      "secondaryColor": "#006600",
+      "marker": {
+        "bands": ["#000000", "#FFFFFF", "#BB0000", "#FFFFFF", "#006600"],
+        "orientation": "horizontal",
+        "weights": [6, 1, 6, 1, 6]
+      }
+    }
+  },
+  {
+    "id": "kos",
+    "kind": "nation",
+    "name": "Kosovo",
+    "source": "https://en.wikipedia.org/wiki/Kosovo_national_football_team",
+    "identity": {
+      "primaryColor": "#244AA5",
+      "secondaryColor": "#D0A650",
+      "marker": {
+        "bands": ["#244AA5"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#D0A650"
+        }
+      }
+    }
+  },
+  {
+    "id": "kuw",
+    "kind": "nation",
+    "name": "Kuwait",
+    "source": "https://en.wikipedia.org/wiki/Kuwait_national_football_team",
+    "identity": {
+      "primaryColor": "#007A3D",
+      "secondaryColor": "#CE1126",
+      "marker": {
+        "bands": ["#000000", "#007A3D", "#FFFFFF", "#CE1126"],
+        "orientation": "vertical",
+        "weights": [1, 2, 2, 2]
+      }
+    }
+  },
+  {
+    "id": "kgz",
+    "kind": "nation",
+    "name": "Kyrgyzstan",
+    "source": "https://en.wikipedia.org/wiki/Kyrgyzstan_national_football_team",
+    "identity": {
+      "primaryColor": "#FF0000",
+      "secondaryColor": "#FFFF00",
+      "marker": {
+        "bands": ["#FF0000"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFF00"
+        }
+      }
+    }
+  },
+  {
+    "id": "lao",
+    "kind": "nation",
+    "name": "Laos",
+    "source": "https://en.wikipedia.org/wiki/Laos_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#002868",
+      "marker": {
+        "bands": ["#CE1126", "#002868", "#CE1126"],
+        "orientation": "horizontal",
+        "weights": [1, 2, 1]
+      }
+    }
+  },
+  {
+    "id": "lva",
+    "kind": "nation",
+    "name": "Latvia",
+    "source": "https://en.wikipedia.org/wiki/Latvia_national_football_team",
+    "identity": {
+      "primaryColor": "#9D2235",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#9D2235", "#FFFFFF", "#9D2235"],
+        "orientation": "horizontal",
+        "weights": [2, 1, 2]
+      }
+    }
+  },
+  {
+    "id": "lib",
+    "kind": "nation",
+    "name": "Lebanon",
+    "source": "https://en.wikipedia.org/wiki/Lebanon_national_football_team",
+    "identity": {
+      "primaryColor": "#D31624",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#D31624", "#FFFFFF", "#D31624"],
+        "orientation": "horizontal",
+        "weights": [1, 2, 1]
+      }
+    }
+  },
+  {
+    "id": "les",
+    "kind": "nation",
+    "name": "Lesotho",
+    "source": "https://en.wikipedia.org/wiki/Lesotho_national_football_team",
+    "identity": {
+      "primaryColor": "#001489",
+      "secondaryColor": "#009A44",
+      "marker": {
+        "bands": ["#001489", "#FFFFFF", "#009A44"],
+        "orientation": "horizontal",
+        "weights": [3, 4, 3]
+      }
+    }
+  },
+  {
+    "id": "lbr",
+    "kind": "nation",
+    "name": "Liberia",
+    "source": "https://en.wikipedia.org/wiki/Liberia_national_football_team",
+    "identity": {
+      "primaryColor": "#BF0A30",
+      "secondaryColor": "#002868",
+      "marker": {
+        "bands": ["#002868", "#BF0A30", "#FFFFFF", "#BF0A30", "#FFFFFF", "#BF0A30"],
+        "orientation": "vertical",
+        "weights": [3, 1, 1, 1, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "lby",
+    "kind": "nation",
+    "name": "Libya",
+    "source": "https://en.wikipedia.org/wiki/Libya_national_football_team",
+    "identity": {
+      "primaryColor": "#E70013",
+      "secondaryColor": "#239E46",
+      "marker": {
+        "bands": ["#E70013", "#000000", "#239E46"],
+        "orientation": "horizontal",
+        "weights": [1, 2, 1]
+      }
+    }
+  },
+  {
+    "id": "lie",
+    "kind": "nation",
+    "name": "Liechtenstein",
+    "source": "https://en.wikipedia.org/wiki/Liechtenstein_national_football_team",
+    "identity": {
+      "primaryColor": "#002B7F",
+      "secondaryColor": "#CE1126",
+      "marker": {
+        "bands": ["#002B7F", "#CE1126"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "ltu",
+    "kind": "nation",
+    "name": "Lithuania",
+    "source": "https://en.wikipedia.org/wiki/Lithuania_national_football_team",
+    "identity": {
+      "primaryColor": "#FDB913",
+      "secondaryColor": "#C1272D",
+      "marker": {
+        "bands": ["#FDB913", "#006A44", "#C1272D"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "lux",
+    "kind": "nation",
+    "name": "Luxembourg",
+    "source": "https://en.wikipedia.org/wiki/Luxembourg_national_football_team",
+    "identity": {
+      "primaryColor": "#ED2939",
+      "secondaryColor": "#00A1DE",
+      "marker": {
+        "bands": ["#ED2939", "#FFFFFF", "#00A1DE"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "mac",
+    "kind": "nation",
+    "name": "Macau",
+    "source": "https://en.wikipedia.org/wiki/Macau_national_football_team",
+    "identity": {
+      "primaryColor": "#0F7562",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#0F7562"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFFFF"
+        }
+      }
+    }
+  },
+  {
+    "id": "mad",
+    "kind": "nation",
+    "name": "Madagascar",
+    "source": "https://en.wikipedia.org/wiki/Madagascar_national_football_team",
+    "identity": {
+      "primaryColor": "#FC3D32",
+      "secondaryColor": "#007E3A",
+      "marker": {
+        "bands": ["#FFFFFF", "#FC3D32", "#007E3A"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mwi",
+    "kind": "nation",
+    "name": "Malawi",
+    "source": "https://en.wikipedia.org/wiki/Malawi_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#339E35",
+      "marker": {
+        "bands": ["#000000", "#CE1126", "#339E35"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "mas",
+    "kind": "nation",
+    "name": "Malaysia",
+    "source": "https://en.wikipedia.org/wiki/Malaysia_national_football_team",
+    "identity": {
+      "primaryColor": "#CC0000",
+      "secondaryColor": "#000066",
+      "marker": {
+        "bands": ["#000066", "#CC0000", "#FFFFFF", "#CC0000", "#FFFFFF"],
+        "orientation": "vertical",
+        "weights": [3, 1, 1, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "mdv",
+    "kind": "nation",
+    "name": "Maldives",
+    "source": "https://en.wikipedia.org/wiki/Maldives_national_football_team",
+    "identity": {
+      "primaryColor": "#D21034",
+      "secondaryColor": "#007E3A",
+      "marker": {
+        "bands": ["#D21034"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#007E3A"
+        }
+      }
+    }
+  },
+  {
+    "id": "mli",
+    "kind": "nation",
+    "name": "Mali",
+    "source": "https://en.wikipedia.org/wiki/Mali_national_football_team",
+    "identity": {
+      "primaryColor": "#14B53A",
+      "secondaryColor": "#CE1126",
+      "marker": {
+        "bands": ["#14B53A", "#FCD116", "#CE1126"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mlt",
+    "kind": "nation",
+    "name": "Malta",
+    "source": "https://en.wikipedia.org/wiki/Malta_national_football_team",
+    "identity": {
+      "primaryColor": "#CF142B",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FFFFFF", "#CF142B"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mtn",
+    "kind": "nation",
+    "name": "Mauritania",
+    "source": "https://en.wikipedia.org/wiki/Mauritania_national_football_team",
+    "identity": {
+      "primaryColor": "#00A95C",
+      "secondaryColor": "#D01C1F",
+      "marker": {
+        "bands": ["#D01C1F", "#00A95C", "#D01C1F"],
+        "orientation": "horizontal",
+        "weights": [1, 3, 1]
+      }
+    }
+  },
+  {
+    "id": "mri",
+    "kind": "nation",
+    "name": "Mauritius",
+    "source": "https://en.wikipedia.org/wiki/Mauritius_national_football_team",
+    "identity": {
+      "primaryColor": "#EA2839",
+      "secondaryColor": "#00A551",
+      "marker": {
+        "bands": ["#EA2839", "#1A206D", "#FFD500", "#00A551"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "mda",
+    "kind": "nation",
+    "name": "Moldova",
+    "source": "https://en.wikipedia.org/wiki/Moldova_national_football_team",
+    "identity": {
+      "primaryColor": "#0046AE",
+      "secondaryColor": "#CC092F",
+      "marker": {
+        "bands": ["#0046AE", "#FFD200", "#CC092F"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mng",
+    "kind": "nation",
+    "name": "Mongolia",
+    "source": "https://en.wikipedia.org/wiki/Mongolia_national_football_team",
+    "identity": {
+      "primaryColor": "#DA2031",
+      "secondaryColor": "#0066B2",
+      "marker": {
+        "bands": ["#DA2031", "#0066B2", "#DA2031"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mne",
+    "kind": "nation",
+    "name": "Montenegro",
+    "source": "https://en.wikipedia.org/wiki/Montenegro_national_football_team",
+    "identity": {
+      "primaryColor": "#E30000",
+      "secondaryColor": "#FFC000",
+      "marker": {
+        "bands": ["#E30000"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFC000"
+        }
+      }
+    }
+  },
+  {
+    "id": "msr",
+    "kind": "nation",
+    "name": "Montserrat",
+    "source": "https://en.wikipedia.org/wiki/Montserrat_national_football_team",
+    "identity": {
+      "primaryColor": "#012169",
+      "secondaryColor": "#00A2DD",
+      "marker": {
+        "bands": ["#012169"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#00A2DD"
+        }
+      }
+    }
+  },
+  {
+    "id": "moz",
+    "kind": "nation",
+    "name": "Mozambique",
+    "source": "https://en.wikipedia.org/wiki/Mozambique_national_football_team",
+    "identity": {
+      "primaryColor": "#007168",
+      "secondaryColor": "#FCE100",
+      "marker": {
+        "bands": ["#D21034", "#007168", "#000000", "#FCE100"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "mya",
+    "kind": "nation",
+    "name": "Myanmar",
+    "source": "https://en.wikipedia.org/wiki/Myanmar_national_football_team",
+    "identity": {
+      "primaryColor": "#FECB00",
+      "secondaryColor": "#EA2839",
+      "marker": {
+        "bands": ["#FECB00", "#34B233", "#EA2839"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "nam",
+    "kind": "nation",
+    "name": "Namibia",
+    "source": "https://en.wikipedia.org/wiki/Namibia_national_football_team",
+    "identity": {
+      "primaryColor": "#003580",
+      "secondaryColor": "#009543",
+      "marker": {
+        "bands": ["#003580", "#FFFFFF", "#D21034", "#FFFFFF", "#009543"],
+        "orientation": "vertical",
+        "weights": [3, 1, 3, 1, 3]
+      }
+    }
+  },
+  {
+    "id": "nep",
+    "kind": "nation",
+    "name": "Nepal",
+    "source": "https://en.wikipedia.org/wiki/Nepal_national_football_team",
+    "identity": {
+      "primaryColor": "#DC143C",
+      "secondaryColor": "#003893",
+      "marker": {
+        "bands": ["#003893", "#DC143C", "#FFFFFF", "#DC143C", "#003893"],
+        "orientation": "vertical",
+        "weights": [1, 3, 1, 3, 1]
+      }
+    }
+  },
+  {
+    "id": "ncl",
+    "kind": "nation",
+    "name": "New Caledonia",
+    "source": "https://en.wikipedia.org/wiki/New_Caledonia_national_football_team",
+    "identity": {
+      "primaryColor": "#0035AD",
+      "secondaryColor": "#009543",
+      "marker": {
+        "bands": ["#0035AD", "#ED4135", "#009543"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "nzl",
+    "kind": "nation",
+    "name": "New Zealand",
+    "source": "https://en.wikipedia.org/wiki/New_Zealand_men's_national_football_team",
+    "identity": {
+      "primaryColor": "#012169",
+      "secondaryColor": "#C8102E",
+      "marker": {
+        "bands": ["#012169"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#C8102E"
+        }
+      }
+    }
+  },
+  {
+    "id": "nca",
+    "kind": "nation",
+    "name": "Nicaragua",
+    "source": "https://en.wikipedia.org/wiki/Nicaragua_national_football_team",
+    "identity": {
+      "primaryColor": "#0067C6",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#0067C6", "#FFFFFF", "#0067C6"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "nig",
+    "kind": "nation",
+    "name": "Niger",
+    "source": "https://en.wikipedia.org/wiki/Niger_national_football_team",
+    "identity": {
+      "primaryColor": "#E05206",
+      "secondaryColor": "#0DB02B",
+      "marker": {
+        "bands": ["#E05206", "#FFFFFF", "#0DB02B"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "prk",
+    "kind": "nation",
+    "name": "North Korea",
+    "source": "https://en.wikipedia.org/wiki/North_Korea_national_football_team",
+    "identity": {
+      "primaryColor": "#EC1D25",
+      "secondaryColor": "#034DA2",
+      "marker": {
+        "bands": ["#034DA2", "#FFFFFF", "#EC1D25", "#FFFFFF", "#034DA2"],
+        "orientation": "horizontal",
+        "weights": [6, 1, 15, 1, 6]
+      }
+    }
+  },
+  {
+    "id": "mkd",
+    "kind": "nation",
+    "name": "North Macedonia",
+    "source": "https://en.wikipedia.org/wiki/North_Macedonia_national_football_team",
+    "identity": {
+      "primaryColor": "#D82126",
+      "secondaryColor": "#F8E92E",
+      "marker": {
+        "bands": ["#D82126"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#F8E92E"
+        }
+      }
+    }
+  },
+  {
+    "id": "nir",
+    "kind": "nation",
+    "name": "Northern Ireland",
+    "source": "https://en.wikipedia.org/wiki/Northern_Ireland_national_football_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#CC0000",
+      "marker": {
+        "bands": ["#FFFFFF", "#CC0000", "#FFFFFF"],
+        "orientation": "vertical",
+        "weights": [2, 1, 2]
+      }
+    }
+  },
+  {
+    "id": "oma",
+    "kind": "nation",
+    "name": "Oman",
+    "source": "https://en.wikipedia.org/wiki/Oman_national_football_team",
+    "identity": {
+      "primaryColor": "#DF1A23",
+      "secondaryColor": "#007E3C",
+      "marker": {
+        "bands": ["#DF1A23", "#FFFFFF", "#DF1A23", "#007E3C"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "pak",
+    "kind": "nation",
+    "name": "Pakistan",
+    "source": "https://en.wikipedia.org/wiki/Pakistan_national_football_team",
+    "identity": {
+      "primaryColor": "#01411C",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FFFFFF", "#01411C"],
+        "orientation": "vertical",
+        "weights": [1, 3]
+      }
+    }
+  },
+  {
+    "id": "ple",
+    "kind": "nation",
+    "name": "Palestine",
+    "source": "https://en.wikipedia.org/wiki/Palestine_national_football_team",
+    "identity": {
+      "primaryColor": "#000000",
+      "secondaryColor": "#009639",
+      "marker": {
+        "bands": ["#ED2E38", "#000000", "#FFFFFF", "#009639"],
+        "orientation": "vertical",
+        "weights": [1, 2, 2, 2]
+      }
+    }
+  },
+  {
+    "id": "png",
+    "kind": "nation",
+    "name": "Papua New Guinea",
+    "source": "https://en.wikipedia.org/wiki/Papua_New_Guinea_national_soccer_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#000000", "#CE1126"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "phi",
+    "kind": "nation",
+    "name": "Philippines",
+    "source": "https://en.wikipedia.org/wiki/Philippines_national_football_team",
+    "identity": {
+      "primaryColor": "#0038A8",
+      "secondaryColor": "#CE1126",
+      "marker": {
+        "bands": ["#FFFFFF", "#0038A8", "#CE1126"],
+        "orientation": "vertical",
+        "weights": [1, 2, 2]
+      }
+    }
+  },
+  {
+    "id": "pur",
+    "kind": "nation",
+    "name": "Puerto Rico",
+    "source": "https://en.wikipedia.org/wiki/Puerto_Rico_national_football_team",
+    "identity": {
+      "primaryColor": "#EE0000",
+      "secondaryColor": "#0044FF",
+      "marker": {
+        "bands": ["#0044FF", "#EE0000", "#FFFFFF", "#EE0000", "#FFFFFF", "#EE0000"],
+        "orientation": "vertical",
+        "weights": [3, 1, 1, 1, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "qat",
+    "kind": "nation",
+    "name": "Qatar",
+    "source": "https://en.wikipedia.org/wiki/Qatar_national_football_team",
+    "identity": {
+      "primaryColor": "#8A1538",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FFFFFF", "#8A1538"],
+        "orientation": "vertical",
+        "weights": [1, 2]
+      }
+    }
+  },
+  {
+    "id": "irl",
+    "kind": "nation",
+    "name": "Republic of Ireland",
+    "source": "https://en.wikipedia.org/wiki/Republic_of_Ireland_national_football_team",
+    "identity": {
+      "primaryColor": "#169B62",
+      "secondaryColor": "#FF883E",
+      "marker": {
+        "bands": ["#169B62", "#FFFFFF", "#FF883E"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "rou",
+    "kind": "nation",
+    "name": "Romania",
+    "source": "https://en.wikipedia.org/wiki/Romania_national_football_team",
+    "identity": {
+      "primaryColor": "#002B7F",
+      "secondaryColor": "#CE1126",
+      "marker": {
+        "bands": ["#002B7F", "#FCD116", "#CE1126"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "rus",
+    "kind": "nation",
+    "name": "Russia",
+    "source": "https://en.wikipedia.org/wiki/Russia_national_football_team",
+    "identity": {
+      "primaryColor": "#0039A6",
+      "secondaryColor": "#D52B1E",
+      "marker": {
+        "bands": ["#FFFFFF", "#0039A6", "#D52B1E"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "rwa",
+    "kind": "nation",
+    "name": "Rwanda",
+    "source": "https://en.wikipedia.org/wiki/Rwanda_national_football_team",
+    "identity": {
+      "primaryColor": "#00A3E0",
+      "secondaryColor": "#20603D",
+      "marker": {
+        "bands": ["#00A3E0", "#FAD201", "#20603D"],
+        "orientation": "horizontal",
+        "weights": [2, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "skn",
+    "kind": "nation",
+    "name": "Saint Kitts and Nevis",
+    "source": "https://en.wikipedia.org/wiki/Saint_Kitts_and_Nevis_national_football_team",
+    "identity": {
+      "primaryColor": "#009739",
+      "secondaryColor": "#C8102E",
+      "marker": {
+        "bands": ["#009739", "#FFCD00", "#000000", "#FFCD00", "#C8102E"],
+        "orientation": "vertical",
+        "weights": [3, 1, 2, 1, 3]
+      }
+    }
+  },
+  {
+    "id": "lca",
+    "kind": "nation",
+    "name": "Saint Lucia",
+    "source": "https://en.wikipedia.org/wiki/Saint_Lucia_national_football_team",
+    "identity": {
+      "primaryColor": "#66CCFF",
+      "secondaryColor": "#FCD116",
+      "marker": {
+        "bands": ["#66CCFF"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "diamond",
+          "color": "#000000"
+        }
+      }
+    }
+  },
+  {
+    "id": "vin",
+    "kind": "nation",
+    "name": "Saint Vincent and the Grenadines",
+    "source": "https://en.wikipedia.org/wiki/Saint_Vincent_and_the_Grenadines_national_football_team",
+    "identity": {
+      "primaryColor": "#002674",
+      "secondaryColor": "#007C2E",
+      "marker": {
+        "bands": ["#002674", "#FCD022", "#007C2E"],
+        "orientation": "vertical",
+        "weights": [1, 2, 1]
+      }
+    }
+  },
+  {
+    "id": "sam",
+    "kind": "nation",
+    "name": "Samoa",
+    "source": "https://en.wikipedia.org/wiki/Samoa_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#002B7F",
+      "marker": {
+        "bands": ["#002B7F", "#CE1126"],
+        "orientation": "vertical",
+        "weights": [1, 2]
+      }
+    }
+  },
+  {
+    "id": "smr",
+    "kind": "nation",
+    "name": "San Marino",
+    "source": "https://en.wikipedia.org/wiki/San_Marino_national_football_team",
+    "identity": {
+      "primaryColor": "#5EB6E4",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FFFFFF", "#5EB6E4"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "saotome",
+    "kind": "nation",
+    "name": "São Tomé and Príncipe",
+    "source": "https://en.wikipedia.org/wiki/São_Tomé_and_Príncipe_national_football_team",
+    "identity": {
+      "primaryColor": "#009739",
+      "secondaryColor": "#FFD100",
+      "marker": {
+        "bands": ["#EF3340", "#009739", "#FFD100", "#009739"],
+        "orientation": "vertical",
+        "weights": [1, 2, 3, 2]
+      }
+    }
+  },
+  {
+    "id": "ksa",
+    "kind": "nation",
+    "name": "Saudi Arabia",
+    "source": "https://en.wikipedia.org/wiki/Saudi_Arabia_national_football_team",
+    "identity": {
+      "primaryColor": "#005430",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#005430"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFFFF"
+        }
+      }
+    }
+  },
+  {
+    "id": "sey",
+    "kind": "nation",
+    "name": "Seychelles",
+    "source": "https://en.wikipedia.org/wiki/Seychelles_national_football_team",
+    "identity": {
+      "primaryColor": "#002F6C",
+      "secondaryColor": "#007A33",
+      "marker": {
+        "bands": ["#002F6C", "#FED141", "#D22730", "#FFFFFF", "#007A33"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "sle",
+    "kind": "nation",
+    "name": "Sierra Leone",
+    "source": "https://en.wikipedia.org/wiki/Sierra_Leone_national_football_team",
+    "identity": {
+      "primaryColor": "#1EB53A",
+      "secondaryColor": "#0072C6",
+      "marker": {
+        "bands": ["#1EB53A", "#FFFFFF", "#0072C6"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "sin",
+    "kind": "nation",
+    "name": "Singapore",
+    "source": "https://en.wikipedia.org/wiki/Singapore_national_football_team",
+    "identity": {
+      "primaryColor": "#ED2939",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#ED2939", "#FFFFFF"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "sol",
+    "kind": "nation",
+    "name": "Solomon Islands",
+    "source": "https://en.wikipedia.org/wiki/Solomon_Islands_national_football_team",
+    "identity": {
+      "primaryColor": "#0051BA",
+      "secondaryColor": "#215B33",
+      "marker": {
+        "bands": ["#0051BA", "#FCD116", "#215B33"],
+        "orientation": "vertical",
+        "weights": [3, 1, 3]
+      }
+    }
+  },
+  {
+    "id": "som",
+    "kind": "nation",
+    "name": "Somalia",
+    "source": "https://en.wikipedia.org/wiki/Somalia_national_football_team",
+    "identity": {
+      "primaryColor": "#418FDE",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#418FDE"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFFFF"
+        }
+      }
+    }
+  },
+  {
+    "id": "rsa",
+    "kind": "nation",
+    "name": "South Africa",
+    "source": "https://en.wikipedia.org/wiki/South_Africa_national_soccer_team",
+    "identity": {
+      "primaryColor": "#007749",
+      "secondaryColor": "#FFB81C",
+      "marker": {
+        "bands": ["#E03C31", "#FFFFFF", "#007749", "#FFFFFF", "#001489"],
+        "orientation": "horizontal",
+        "weights": [3, 1, 2, 1, 3]
+      }
+    }
+  },
+  {
+    "id": "ssd",
+    "kind": "nation",
+    "name": "South Sudan",
+    "source": "https://en.wikipedia.org/wiki/South_Sudan_national_football_team",
+    "identity": {
+      "primaryColor": "#00B6F2",
+      "secondaryColor": "#E22028",
+      "marker": {
+        "bands": ["#00B6F2", "#000000", "#E22028", "#00914C"],
+        "orientation": "vertical"
+      }
+    }
+  },
+  {
+    "id": "sri",
+    "kind": "nation",
+    "name": "Sri Lanka",
+    "source": "https://en.wikipedia.org/wiki/Sri_Lanka_national_football_team",
+    "identity": {
+      "primaryColor": "#8D153A",
+      "secondaryColor": "#FFBE29",
+      "marker": {
+        "bands": ["#00534E", "#EB7400", "#8D153A"],
+        "orientation": "vertical",
+        "weights": [1, 1, 4]
+      }
+    }
+  },
+  {
+    "id": "sdn",
+    "kind": "nation",
+    "name": "Sudan",
+    "source": "https://en.wikipedia.org/wiki/Sudan_national_football_team",
+    "identity": {
+      "primaryColor": "#D21034",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#007229", "#D21034", "#FFFFFF", "#000000"],
+        "orientation": "vertical",
+        "weights": [1, 2, 2, 2]
+      }
+    }
+  },
+  {
+    "id": "sur",
+    "kind": "nation",
+    "name": "Suriname",
+    "source": "https://en.wikipedia.org/wiki/Suriname_national_football_team",
+    "identity": {
+      "primaryColor": "#377E3F",
+      "secondaryColor": "#B40A2D",
+      "marker": {
+        "bands": ["#377E3F", "#FFFFFF", "#B40A2D", "#FFFFFF", "#377E3F"],
+        "orientation": "horizontal",
+        "weights": [2, 1, 4, 1, 2]
+      }
+    }
+  },
+  {
+    "id": "syr",
+    "kind": "nation",
+    "name": "Syria",
+    "source": "https://en.wikipedia.org/wiki/Syria_national_football_team",
+    "identity": {
+      "primaryColor": "#007A3D",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#007A3D", "#FFFFFF", "#000000"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "tah",
+    "kind": "nation",
+    "name": "Tahiti",
+    "source": "https://en.wikipedia.org/wiki/Tahiti_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#CE1126", "#FFFFFF", "#CE1126"],
+        "orientation": "horizontal",
+        "weights": [1, 2, 1]
+      }
+    }
+  },
+  {
+    "id": "tjk",
+    "kind": "nation",
+    "name": "Tajikistan",
+    "source": "https://en.wikipedia.org/wiki/Tajikistan_national_football_team",
+    "identity": {
+      "primaryColor": "#CC0000",
+      "secondaryColor": "#006600",
+      "marker": {
+        "bands": ["#CC0000", "#FFFFFF", "#006600"],
+        "orientation": "horizontal",
+        "weights": [2, 3, 2]
+      }
+    }
+  },
+  {
+    "id": "tan",
+    "kind": "nation",
+    "name": "Tanzania",
+    "source": "https://en.wikipedia.org/wiki/Tanzania_national_football_team",
+    "identity": {
+      "primaryColor": "#1EB53A",
+      "secondaryColor": "#00A3DD",
+      "marker": {
+        "bands": ["#1EB53A", "#FCD116", "#000000", "#FCD116", "#00A3DD"],
+        "orientation": "vertical",
+        "weights": [3, 1, 2, 1, 3]
+      }
+    }
+  },
+  {
+    "id": "tha",
+    "kind": "nation",
+    "name": "Thailand",
+    "source": "https://en.wikipedia.org/wiki/Thailand_national_football_team",
+    "identity": {
+      "primaryColor": "#2D2A4A",
+      "secondaryColor": "#A51931",
+      "marker": {
+        "bands": ["#A51931", "#F4F5F8", "#2D2A4A", "#F4F5F8", "#A51931"],
+        "orientation": "horizontal",
+        "weights": [1, 1, 2, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "tls",
+    "kind": "nation",
+    "name": "Timor-Leste",
+    "source": "https://en.wikipedia.org/wiki/Timor-Leste_national_football_team",
+    "identity": {
+      "primaryColor": "#DA291C",
+      "secondaryColor": "#FFC72C",
+      "marker": {
+        "bands": ["#000000", "#FFC72C", "#DA291C"],
+        "orientation": "vertical",
+        "weights": [1, 1, 3]
+      }
+    }
+  },
+  {
+    "id": "tog",
+    "kind": "nation",
+    "name": "Togo",
+    "source": "https://en.wikipedia.org/wiki/Togo_national_football_team",
+    "identity": {
+      "primaryColor": "#006A4E",
+      "secondaryColor": "#FFCE00",
+      "marker": {
+        "bands": ["#D21034", "#006A4E", "#FFCE00", "#006A4E"],
+        "orientation": "vertical",
+        "weights": [2, 1, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "tga",
+    "kind": "nation",
+    "name": "Tonga",
+    "source": "https://en.wikipedia.org/wiki/Tonga_national_football_team",
+    "identity": {
+      "primaryColor": "#C10000",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#FFFFFF", "#C10000"],
+        "orientation": "vertical",
+        "weights": [1, 2]
+      }
+    }
+  },
+  {
+    "id": "tri",
+    "kind": "nation",
+    "name": "Trinidad and Tobago",
+    "source": "https://en.wikipedia.org/wiki/Trinidad_and_Tobago_national_football_team",
+    "identity": {
+      "primaryColor": "#DA1A35",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#DA1A35", "#FFFFFF", "#000000", "#FFFFFF", "#DA1A35"],
+        "orientation": "vertical",
+        "weights": [3, 1, 2, 1, 3]
+      }
+    }
+  },
+  {
+    "id": "tun",
+    "kind": "nation",
+    "name": "Tunisia",
+    "source": "https://en.wikipedia.org/wiki/Tunisia_national_football_team",
+    "identity": {
+      "primaryColor": "#E70013",
+      "secondaryColor": "#FFFFFF",
+      "marker": {
+        "bands": ["#E70013"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFFFFF"
+        }
+      }
+    }
+  },
+  {
+    "id": "tkm",
+    "kind": "nation",
+    "name": "Turkmenistan",
+    "source": "https://en.wikipedia.org/wiki/Turkmenistan_national_football_team",
+    "identity": {
+      "primaryColor": "#00843D",
+      "secondaryColor": "#D22630",
+      "marker": {
+        "bands": ["#00843D", "#D22630", "#00843D"],
+        "orientation": "vertical",
+        "weights": [1, 2, 6]
+      }
+    }
+  },
+  {
+    "id": "tca",
+    "kind": "nation",
+    "name": "Turks and Caicos Islands",
+    "source": "https://en.wikipedia.org/wiki/Turks_and_Caicos_Islands_national_football_team",
+    "identity": {
+      "primaryColor": "#002868",
+      "secondaryColor": "#FCD116",
+      "marker": {
+        "bands": ["#002868"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FCD116"
+        }
+      }
+    }
+  },
+  {
+    "id": "uga",
+    "kind": "nation",
+    "name": "Uganda",
+    "source": "https://en.wikipedia.org/wiki/Uganda_national_football_team",
+    "identity": {
+      "primaryColor": "#D90000",
+      "secondaryColor": "#FCDC04",
+      "marker": {
+        "bands": ["#000000", "#FCDC04", "#D90000", "#000000", "#FCDC04", "#D90000"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "uae",
+    "kind": "nation",
+    "name": "United Arab Emirates",
+    "source": "https://en.wikipedia.org/wiki/United_Arab_Emirates_national_football_team",
+    "identity": {
+      "primaryColor": "#C8102E",
+      "secondaryColor": "#00843D",
+      "marker": {
+        "bands": ["#C8102E", "#00843D", "#FFFFFF", "#000000"],
+        "orientation": "vertical",
+        "weights": [1, 3, 3, 3]
+      }
+    }
+  },
+  {
+    "id": "vir",
+    "kind": "nation",
+    "name": "United States Virgin Islands",
+    "source": "https://en.wikipedia.org/wiki/United_States_Virgin_Islands_national_soccer_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#162667",
+      "marker": {
+        "bands": ["#FFFFFF"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#F4C53D"
+        }
+      }
+    }
+  },
+  {
+    "id": "uru",
+    "kind": "nation",
+    "name": "Uruguay",
+    "source": "https://en.wikipedia.org/wiki/Uruguay_national_football_team",
+    "identity": {
+      "primaryColor": "#FFFFFF",
+      "secondaryColor": "#0038A8",
+      "marker": {
+        "bands": ["#FFFFFF", "#0038A8"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "uzb",
+    "kind": "nation",
+    "name": "Uzbekistan",
+    "source": "https://en.wikipedia.org/wiki/Uzbekistan_national_football_team",
+    "identity": {
+      "primaryColor": "#3081F7",
+      "secondaryColor": "#308738",
+      "marker": {
+        "bands": ["#3081F7", "#FFFFFF", "#308738"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "van",
+    "kind": "nation",
+    "name": "Vanuatu",
+    "source": "https://en.wikipedia.org/wiki/Vanuatu_national_football_team",
+    "identity": {
+      "primaryColor": "#D21034",
+      "secondaryColor": "#009543",
+      "marker": {
+        "bands": ["#000000", "#FDCE12", "#D21034", "#009543"],
+        "orientation": "vertical",
+        "weights": [1, 1, 2, 2]
+      }
+    }
+  },
+  {
+    "id": "ven",
+    "kind": "nation",
+    "name": "Venezuela",
+    "source": "https://en.wikipedia.org/wiki/Venezuela_national_football_team",
+    "identity": {
+      "primaryColor": "#FFCC00",
+      "secondaryColor": "#CF142B",
+      "marker": {
+        "bands": ["#FFCC00", "#00247D", "#CF142B"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "vie",
+    "kind": "nation",
+    "name": "Vietnam",
+    "source": "https://en.wikipedia.org/wiki/Vietnam_national_football_team",
+    "identity": {
+      "primaryColor": "#FF0000",
+      "secondaryColor": "#FFEB00",
+      "marker": {
+        "bands": ["#FF0000"],
+        "orientation": "vertical",
+        "overlay": {
+          "shape": "disc",
+          "color": "#FFEB00"
+        }
+      }
+    }
+  },
+  {
+    "id": "yem",
+    "kind": "nation",
+    "name": "Yemen",
+    "source": "https://en.wikipedia.org/wiki/Yemen_national_football_team",
+    "identity": {
+      "primaryColor": "#CE1126",
+      "secondaryColor": "#000000",
+      "marker": {
+        "bands": ["#CE1126", "#FFFFFF", "#000000"],
+        "orientation": "horizontal"
+      }
+    }
+  },
+  {
+    "id": "zam",
+    "kind": "nation",
+    "name": "Zambia",
+    "source": "https://en.wikipedia.org/wiki/Zambia_national_football_team",
+    "identity": {
+      "primaryColor": "#198A00",
+      "secondaryColor": "#EF7D00",
+      "marker": {
+        "bands": ["#198A00", "#DE2010", "#000000", "#EF7D00"],
+        "orientation": "vertical",
+        "weights": [5, 1, 1, 1]
+      }
+    }
+  },
+  {
+    "id": "zim",
+    "kind": "nation",
+    "name": "Zimbabwe",
+    "source": "https://en.wikipedia.org/wiki/Zimbabwe_national_football_team",
+    "identity": {
+      "primaryColor": "#006400",
+      "secondaryColor": "#FFD200",
+      "marker": {
+        "bands": ["#006400", "#FFD200", "#D40000", "#000000", "#D40000", "#FFD200", "#006400"],
+        "orientation": "horizontal"
+      }
+    }
   }
 ]

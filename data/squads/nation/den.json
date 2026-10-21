@@ -10,7 +10,7 @@
     "bands": ["#C60C30", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Denmark_national_football_team",
   "members": [
     {
@@ -34,15 +34,15 @@
       "no": 5
     },
     {
-      "playerId": "christensen",
+      "playerId": "victor-nelsson",
       "no": 6
     },
     {
-      "playerId": "thomas-jorgensen",
+      "playerId": "victor-froholdt",
       "no": 7
     },
     {
-      "playerId": "adam-daghim",
+      "playerId": "gustav-isaksen",
       "no": 8
     },
     {
@@ -50,15 +50,15 @@
       "no": 9
     },
     {
-      "playerId": "christian-eriksen",
+      "playerId": "thomas-jorgensen",
       "no": 10
     },
     {
-      "playerId": "william-osula",
+      "playerId": "andreas-skov-olsen",
       "no": 11
     },
     {
-      "playerId": "victor-froholdt",
+      "playerId": "mads-bidstrup",
       "no": 12
     },
     {
@@ -66,23 +66,15 @@
       "no": 13
     },
     {
-      "playerId": "jens-stage",
-      "no": 14
-    },
-    {
-      "playerId": "jacob-trenskow",
-      "no": 15
-    },
-    {
       "playerId": "mads-hermansen",
       "no": 16
     },
     {
-      "playerId": "patrick-dorgu",
+      "playerId": "adam-daghim",
       "no": 17
     },
     {
-      "playerId": "alexander-bah",
+      "playerId": "anton-gaaei",
       "no": 18
     },
     {
@@ -90,11 +82,11 @@
       "no": 19
     },
     {
-      "playerId": "albert-gronbaek",
+      "playerId": "mohamed-daramy",
       "no": 20
     },
     {
-      "playerId": "victor-bak-jensen",
+      "playerId": "hjulmand",
       "no": 21
     },
     {
@@ -105,6 +97,10 @@
       "playerId": "pierreemile-hojbjerg",
       "no": 23,
       "captain": true
+    },
+    {
+      "playerId": "mathias-kvistgaarden",
+      "no": null
     }
   ]
 }

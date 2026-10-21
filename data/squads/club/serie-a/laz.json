@@ -10,12 +10,16 @@
     "bands": ["#6CACE4"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/S.S._Lazio",
   "members": [
     {
       "playerId": "diogo-leite",
       "no": 2
+    },
+    {
+      "playerId": "luca-pellegrini",
+      "no": 3
     },
     {
       "playerId": "danilho-doekhi",

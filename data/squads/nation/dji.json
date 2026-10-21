@@ -1,0 +1,110 @@
+{
+  "id": "dji",
+  "kind": "nation",
+  "name": "Djibouti",
+  "season": "2026",
+  "primaryColor": "#6AB2E7",
+  "secondaryColor": "#12AD2B",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#6AB2E7", "#12AD2B"],
+    "orientation": "vertical",
+    "weights": [1, 2, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Djibouti_national_football_team",
+  "members": [
+    {
+      "playerId": "omar-mahamoud",
+      "no": 1
+    },
+    {
+      "playerId": "aboubaker-liban-abdi",
+      "no": 2
+    },
+    {
+      "playerId": "gabriel-dadzie",
+      "no": 3
+    },
+    {
+      "playerId": "moussa-hamadou-araita",
+      "no": 4
+    },
+    {
+      "playerId": "hamza-abdi-idleh",
+      "no": 5
+    },
+    {
+      "playerId": "moustapha-abdi-osman",
+      "no": 6
+    },
+    {
+      "playerId": "maarouf-abass-abaneh",
+      "no": 7
+    },
+    {
+      "playerId": "ahemdini-ali-gohar",
+      "no": 8
+    },
+    {
+      "playerId": "moussa-amoud-wais",
+      "no": 9
+    },
+    {
+      "playerId": "warsama-hassan",
+      "no": 10
+    },
+    {
+      "playerId": "mahdi-houssein-mahabeh",
+      "no": 11
+    },
+    {
+      "playerId": "moktar-youssouf-said",
+      "no": 12
+    },
+    {
+      "playerId": "doualeh-mahamoud-elabeh",
+      "no": 13
+    },
+    {
+      "playerId": "yabe-siad",
+      "no": 14
+    },
+    {
+      "playerId": "ahmed-zakaria",
+      "no": 15
+    },
+    {
+      "playerId": "sadik-aden",
+      "no": 16
+    },
+    {
+      "playerId": "samuel-akinbinu",
+      "no": 17
+    },
+    {
+      "playerId": "ali-youssouf-farada",
+      "no": 18
+    },
+    {
+      "playerId": "mouad-amir-mahamed",
+      "no": 19
+    },
+    {
+      "playerId": "yonis-kireh",
+      "no": 20
+    },
+    {
+      "playerId": "ahmed-youssouf-omar",
+      "no": 21
+    },
+    {
+      "playerId": "sulait-luyima",
+      "no": 22
+    },
+    {
+      "playerId": "ibrahim-idriss-mohamed",
+      "no": 23
+    }
+  ]
+}

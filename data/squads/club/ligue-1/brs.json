@@ -10,7 +10,7 @@
     "bands": ["#DA291C", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Stade_Brestois_29",
   "members": [
     {
@@ -43,16 +43,16 @@
       "no": 8
     },
     {
-      "playerId": "pathe-mboup",
-      "no": 9
-    },
-    {
       "playerId": "giovani-versini",
       "no": 10
     },
     {
       "playerId": "noah-edjouma",
       "no": 11
+    },
+    {
+      "playerId": "luck-zogbe",
+      "no": 12
     },
     {
       "playerId": "joris-chotard",
@@ -73,10 +73,6 @@
     {
       "playerId": "ludovic-ajorque",
       "no": 19
-    },
-    {
-      "playerId": "luck-zogbe",
-      "no": 20
     },
     {
       "playerId": "kamory-doumbia",
@@ -103,12 +99,16 @@
       "no": 49
     },
     {
-      "playerId": "kenny-lala",
-      "no": 70
-    },
-    {
       "playerId": "raphael-le-guen",
       "no": 71
+    },
+    {
+      "playerId": "kenny-lala",
+      "no": 77
+    },
+    {
+      "playerId": "pathe-mboup",
+      "no": 99
     }
   ]
 }

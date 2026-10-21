@@ -1,0 +1,142 @@
+{
+  "id": "tri",
+  "kind": "nation",
+  "name": "Trinidad and Tobago",
+  "season": "2026",
+  "primaryColor": "#DA1A35",
+  "secondaryColor": "#000000",
+  "verified": true,
+  "marker": {
+    "bands": ["#DA1A35", "#FFFFFF", "#000000", "#FFFFFF", "#DA1A35"],
+    "orientation": "vertical",
+    "weights": [3, 1, 2, 1, 3]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Trinidad_and_Tobago_national_football_team",
+  "members": [
+    {
+      "playerId": "jabari-brice",
+      "no": 1
+    },
+    {
+      "playerId": "deron-payne",
+      "no": 2
+    },
+    {
+      "playerId": "kobi-henry",
+      "no": 3
+    },
+    {
+      "playerId": "jaheim-joseph",
+      "no": 4
+    },
+    {
+      "playerId": "neveal-hackshaw",
+      "no": 5
+    },
+    {
+      "playerId": "kaihim-thomas",
+      "no": 6
+    },
+    {
+      "playerId": "ryan-telfer",
+      "no": 7
+    },
+    {
+      "playerId": "luke-phillip",
+      "no": 8
+    },
+    {
+      "playerId": "daniel-david",
+      "no": 9
+    },
+    {
+      "playerId": "molik-khan",
+      "no": 10
+    },
+    {
+      "playerId": "levi-garcia",
+      "no": 11
+    },
+    {
+      "playerId": "shervohnez-hamilton",
+      "no": 12
+    },
+    {
+      "playerId": "reon-moore",
+      "no": 13
+    },
+    {
+      "playerId": "wayne-frederick",
+      "no": 14
+    },
+    {
+      "playerId": "dantaye-gilbert",
+      "no": 15
+    },
+    {
+      "playerId": "michel-poonangeron",
+      "no": 16
+    },
+    {
+      "playerId": "justin-garcia",
+      "no": 17
+    },
+    {
+      "playerId": "andre-rampersad",
+      "no": 18
+    },
+    {
+      "playerId": "rio-cardines",
+      "no": 19
+    },
+    {
+      "playerId": "real-gill",
+      "no": 20
+    },
+    {
+      "playerId": "jahiem-wickham",
+      "no": 21
+    },
+    {
+      "playerId": "denzil-smith",
+      "no": 22
+    },
+    {
+      "playerId": "noah-powder",
+      "no": 23
+    },
+    {
+      "playerId": "andrew-de-gannes",
+      "no": null
+    },
+    {
+      "playerId": "daniel-phillips",
+      "no": null
+    },
+    {
+      "playerId": "dante-sealy",
+      "no": null
+    },
+    {
+      "playerId": "josiah-trimmingham",
+      "no": null
+    },
+    {
+      "playerId": "kieran-ngwenya",
+      "no": null
+    },
+    {
+      "playerId": "nathaniel-james",
+      "no": null
+    },
+    {
+      "playerId": "roald-mitchell",
+      "no": null
+    },
+    {
+      "playerId": "tyrese-spicer",
+      "no": null
+    }
+  ]
+}

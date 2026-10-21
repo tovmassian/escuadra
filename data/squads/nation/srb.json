@@ -10,59 +10,67 @@
     "bands": ["#C6363C", "#0C4076", "#FFFFFF"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/Serbia_national_football_team",
   "members": [
     {
-      "playerId": "filip-stankovic",
+      "playerId": "dragan-rosic",
       "no": 1
     },
     {
-      "playerId": "ognjen-mimovic",
+      "playerId": "kosta-nedeljkovic",
       "no": 2
     },
     {
-      "playerId": "petar-petrovic",
+      "playerId": "strahinja-pavlovic",
       "no": 3
     },
     {
-      "playerId": "nikola-simic",
+      "playerId": "ognjen-mimovic",
       "no": 4
     },
     {
-      "playerId": "njegos-petrovic",
+      "playerId": "nemanja-maksimovic",
       "no": 5
     },
     {
-      "playerId": "vanja-dragojevic",
+      "playerId": "gudelj",
       "no": 6
     },
     {
-      "playerId": "veljko-birmancevic",
+      "playerId": "stankovic",
       "no": 7
     },
     {
-      "playerId": "dejan-zukic",
+      "playerId": "luka-jovic",
       "no": 8
     },
     {
-      "playerId": "stankovic",
+      "playerId": "dejan-joveljic",
+      "no": 9
+    },
+    {
+      "playerId": "dusan-tadic",
       "no": 10
     },
     {
-      "playerId": "lazar-randelovic",
+      "playerId": "filip-kostic",
       "no": 11
     },
     {
-      "playerId": "veljko-ilic",
+      "playerId": "filip-stankovic",
       "no": 12
     },
     {
-      "playerId": "mirko-milikic",
+      "playerId": "nikola-simic",
       "no": 13
     },
     {
-      "playerId": "adem-avdic",
+      "playerId": "andrija-zivkovic",
+      "no": 14
+    },
+    {
+      "playerId": "srdan-babic",
       "no": 15
     },
     {
@@ -70,44 +78,48 @@
       "no": 16
     },
     {
-      "playerId": "kosta-nedeljkovic",
+      "playerId": "aleksa-terzic",
       "no": 17
     },
     {
-      "playerId": "nikola-stulic",
+      "playerId": "mihajlo-cvetkovic",
       "no": 18
     },
     {
-      "playerId": "mihailo-ivanovic",
+      "playerId": "stefan-gudelj",
       "no": 19
     },
     {
-      "playerId": "andrija-maksimovic",
+      "playerId": "vanja-dragojevic",
       "no": 20
     },
     {
-      "playerId": "vladimir-lucic",
+      "playerId": "lazar-samardzic",
       "no": 21
     },
     {
-      "playerId": "vasilije-kostov",
+      "playerId": "sasa-lukic",
       "no": 22
     },
     {
-      "playerId": "luka-lijeskic",
+      "playerId": "vanja-milinkovicsavic",
       "no": 23
     },
     {
-      "playerId": "petar-stanic",
-      "no": 24
+      "playerId": "petar-sukacev",
+      "no": null
     },
     {
-      "playerId": "stefan-bukinac",
-      "no": 25
+      "playerId": "stefan-dzodic",
+      "no": null
     },
     {
-      "playerId": "vukasin-durdevic",
-      "no": 26
+      "playerId": "vasilije-kostov",
+      "no": null
+    },
+    {
+      "playerId": "vladimir-lucic",
+      "no": null
     }
   ]
 }

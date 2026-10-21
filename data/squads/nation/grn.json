@@ -1,0 +1,114 @@
+{
+  "id": "grn",
+  "kind": "nation",
+  "name": "Grenada",
+  "season": "2026",
+  "primaryColor": "#CE1126",
+  "secondaryColor": "#007A5E",
+  "verified": true,
+  "marker": {
+    "bands": ["#CE1126", "#007A5E", "#FCD116", "#007A5E", "#CE1126"],
+    "orientation": "vertical",
+    "weights": [1, 3, 2, 3, 1]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Grenada_national_football_team",
+  "members": [
+    {
+      "playerId": "jason-belfon",
+      "no": 1
+    },
+    {
+      "playerId": "benjamin-ettienne",
+      "no": 2
+    },
+    {
+      "playerId": "jabari-de-coteau",
+      "no": 3
+    },
+    {
+      "playerId": "dorrel-pierre",
+      "no": 4
+    },
+    {
+      "playerId": "kayden-harrack",
+      "no": 5
+    },
+    {
+      "playerId": "sawan-mark",
+      "no": 6
+    },
+    {
+      "playerId": "darius-johnson",
+      "no": 7
+    },
+    {
+      "playerId": "myles-hippolyte",
+      "no": 8
+    },
+    {
+      "playerId": "lucas-akins",
+      "no": 9
+    },
+    {
+      "playerId": "rickell-charles",
+      "no": 10
+    },
+    {
+      "playerId": "shavon-johnbrown",
+      "no": 11
+    },
+    {
+      "playerId": "chad-phillip",
+      "no": 12
+    },
+    {
+      "playerId": "greg-sandiford",
+      "no": 13
+    },
+    {
+      "playerId": "parish-muirhead",
+      "no": 14
+    },
+    {
+      "playerId": "jermaine-francis",
+      "no": 15
+    },
+    {
+      "playerId": "aj-paterson",
+      "no": 16
+    },
+    {
+      "playerId": "deon-phillip",
+      "no": 17
+    },
+    {
+      "playerId": "jamal-gittens",
+      "no": 18
+    },
+    {
+      "playerId": "joshua-isaac",
+      "no": 19
+    },
+    {
+      "playerId": "caleb-redhead",
+      "no": 20
+    },
+    {
+      "playerId": "josh-gabriel",
+      "no": 21
+    },
+    {
+      "playerId": "trishwan-thomas",
+      "no": 22
+    },
+    {
+      "playerId": "deondre-smith",
+      "no": 23
+    },
+    {
+      "playerId": "corey-edwards",
+      "no": null
+    }
+  ]
+}

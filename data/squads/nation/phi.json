@@ -1,0 +1,111 @@
+{
+  "id": "phi",
+  "kind": "nation",
+  "name": "Philippines",
+  "season": "2026",
+  "primaryColor": "#0038A8",
+  "secondaryColor": "#CE1126",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#0038A8", "#CE1126"],
+    "orientation": "vertical",
+    "weights": [1, 2, 2]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Philippines_national_football_team",
+  "members": [
+    {
+      "playerId": "kevin-ray-mendoza",
+      "no": 1
+    },
+    {
+      "playerId": "scott-woods",
+      "no": 2
+    },
+    {
+      "playerId": "paul-tabinas",
+      "no": 3
+    },
+    {
+      "playerId": "jefferson-tabinas",
+      "no": 4
+    },
+    {
+      "playerId": "jesper-nyholm",
+      "no": 5
+    },
+    {
+      "playerId": "sandro-reyes",
+      "no": 6
+    },
+    {
+      "playerId": "andre-leipold",
+      "no": 7
+    },
+    {
+      "playerId": "manny-ott",
+      "no": 8,
+      "captain": true
+    },
+    {
+      "playerId": "jarvey-gayoso",
+      "no": 9
+    },
+    {
+      "playerId": "bjorn-martin-kristensen",
+      "no": 10
+    },
+    {
+      "playerId": "randy-schneider",
+      "no": 11
+    },
+    {
+      "playerId": "amani-aguinaldo",
+      "no": 12
+    },
+    {
+      "playerId": "angelo-bruckner",
+      "no": 13
+    },
+    {
+      "playerId": "oskari-kekkonen",
+      "no": 14
+    },
+    {
+      "playerId": "michael-falkesgaard",
+      "no": 15
+    },
+    {
+      "playerId": "quincy-kammeraad",
+      "no": 16
+    },
+    {
+      "playerId": "cole-mrowka",
+      "no": 17
+    },
+    {
+      "playerId": "sebastian-rasmussen",
+      "no": 18
+    },
+    {
+      "playerId": "zico-bailey",
+      "no": 19
+    },
+    {
+      "playerId": "isaiah-alakiu",
+      "no": 20
+    },
+    {
+      "playerId": "daisuke-sato",
+      "no": 21
+    },
+    {
+      "playerId": "kenji-nishioka",
+      "no": 22
+    },
+    {
+      "playerId": "christian-rontini",
+      "no": 23
+    }
+  ]
+}

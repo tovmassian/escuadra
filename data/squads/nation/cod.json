@@ -14,31 +14,23 @@
       "color": "#F7D618"
     }
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/DR_Congo_national_football_team",
   "members": [
     {
-      "playerId": "lionel-mpasi",
+      "playerId": "nathan-ndibu",
       "no": 1
-    },
-    {
-      "playerId": "aaron-wanbissaka",
-      "no": 2
     },
     {
       "playerId": "steve-kapuadi",
       "no": 3
     },
     {
-      "playerId": "axel-tuanzebe",
-      "no": 4
-    },
-    {
-      "playerId": "dylan-batubinsika",
+      "playerId": "willy-kambwala",
       "no": 5
     },
     {
-      "playerId": "ngalayel-mukau",
+      "playerId": "ezechiel-banzuzi",
       "no": 6
     },
     {
@@ -46,11 +38,7 @@
       "no": 7
     },
     {
-      "playerId": "samuel-moutoussamy",
-      "no": 8
-    },
-    {
-      "playerId": "brian-cipenga",
+      "playerId": "samuel-essende",
       "no": 9
     },
     {
@@ -58,16 +46,8 @@
       "no": 10
     },
     {
-      "playerId": "gael-kakuta",
-      "no": 11
-    },
-    {
       "playerId": "joris-kayembe",
       "no": 12
-    },
-    {
-      "playerId": "meschak-elia",
-      "no": 13
     },
     {
       "playerId": "noah-sadiki",
@@ -78,23 +58,23 @@
       "no": 15
     },
     {
-      "playerId": "timothy-fayulu",
+      "playerId": "dimitry-bertaud",
       "no": 16
     },
     {
-      "playerId": "cedric-bakambu",
+      "playerId": "afimico-pululu",
       "no": 17
     },
     {
-      "playerId": "charles-pickel",
+      "playerId": "junior-kadile",
       "no": 18
     },
     {
-      "playerId": "fiston-mayele",
+      "playerId": "kevin-pedro",
       "no": 19
     },
     {
-      "playerId": "yoane-wissa",
+      "playerId": "stephy-mavididi",
       "no": 20
     },
     {
@@ -107,7 +87,7 @@
       "captain": true
     },
     {
-      "playerId": "simon-banza",
+      "playerId": "jackson-muleka",
       "no": 23
     },
     {
@@ -115,12 +95,32 @@
       "no": 24
     },
     {
-      "playerId": "edo-kayembe",
-      "no": 25
+      "playerId": "brandon-ndezi",
+      "no": null
     },
     {
-      "playerId": "arthur-masuaku",
-      "no": 26
+      "playerId": "dylan-batubinsika",
+      "no": null
+    },
+    {
+      "playerId": "jordy-makengo",
+      "no": null
+    },
+    {
+      "playerId": "jorthy-mokio",
+      "no": null
+    },
+    {
+      "playerId": "noah-mbamba",
+      "no": null
+    },
+    {
+      "playerId": "paris-maghoma",
+      "no": null
+    },
+    {
+      "playerId": "stanis-idumbo",
+      "no": null
     }
   ]
 }

@@ -295,7 +295,7 @@ function writeEnvelopes(
 
 interface TeamReportShape {
   id: string;
-  status: 'written' | 'unchanged' | 'conflicted' | 'failed';
+  status: 'written' | 'unchanged' | 'conflicted' | 'held' | 'failed';
   verified: boolean;
   conflicts: { kind: string }[];
 }
@@ -303,6 +303,7 @@ interface TeamReportShape {
 interface RunReportShape {
   dryRun: boolean;
   teams: TeamReportShape[];
+  totals: { orphans: number };
   exitCode: number;
 }
 
@@ -410,7 +411,9 @@ describe('regression 1: lastUpdated stability', () => {
       birth: '1995-09-15',
     });
     const clubFiller = fillers(17, 'sev-f', 2, { club: 'Sevilla', nationality: 'Spain' });
-    const nationFiller = fillers(2, 'esp-f', 20, { nationality: 'Spain', club: null });
+    // Nine, so Spain carries one round of numbered members with Raya and is
+    // never held.
+    const nationFiller = fillers(9, 'esp-f', 20, { nationality: 'Spain', club: 'Other FC' });
 
     const storedClub = clubSquad({
       lastUpdated: '2026-01-01',
@@ -697,5 +700,86 @@ describe('a conflict still writes', () => {
     const stored = readSquad(dataDir, 'club/la-liga/sev.json');
     expect(stored.verified).toBe(false);
     expect(stored.members.some((m) => m.playerId === 'new-signing')).toBe(true);
+  });
+});
+
+describe('an unplayable squad is held', () => {
+  it('writes neither the squad nor its players, keeps what is stored, and exits clean', async () => {
+    // Brazil's case: the stored squad is numbered, the article's current
+    // call-up is not. Writing it would replace a playable squad with one
+    // `buildRound` throws on.
+    const nationFiller = fillers(22, 'esp-f', 1, { nationality: 'Spain' });
+    const storedNation = nationSquad({ members: nationFiller.members });
+    const { root, dataDir } = writeFixture({
+      players: nationFiller.players,
+      squads: [{ relPath: 'nation/esp.json', squad: storedNation }],
+    });
+    const before = {
+      squad: readFileSync(path.join(dataDir, 'squads', 'nation/esp.json'), 'utf8'),
+      players: readFileSync(path.join(dataDir, 'players.json'), 'utf8'),
+    };
+    const numberless = envelope(nationTeam(), [
+      ...nationFiller.rows.map((r) => ({ ...r, no: null })),
+      row({ name: 'New Call-up', no: null, position: 'FW', nationality: 'Spain' }),
+    ]);
+    const envelopesDir = writeEnvelopes(root, [{ fileName: 'nation.json', data: numberless }]);
+
+    const report = await runApply(root, envelopesDir);
+
+    expect(findTeam(report, 'esp').status).toBe('held');
+    expect(report.exitCode).toBe(0);
+    expect(readFileSync(path.join(dataDir, 'squads', 'nation/esp.json'), 'utf8')).toBe(
+      before.squad,
+    );
+    expect(readFileSync(path.join(dataDir, 'players.json'), 'utf8')).toBe(before.players);
+  });
+});
+
+describe('one nation per player, across a run', () => {
+  it('never joins a name-only row to a record a nation applied earlier in the run created', async () => {
+    // The live case: Burkina Faso's unlinked "Aboubacar Camara" became a
+    // record, and Niger's then merged into it by name, so one record sat in
+    // two nation squads. Envelopes apply in file-name order: bfa first.
+    const nation = (id: string, name: string): TeamRegistryEntry =>
+      nationRegistryEntry({ id, name, source: `https://en.wikipedia.org/wiki/${name}` });
+    const { root, dataDir } = writeFixture({
+      teams: [nation('bfa', 'Burkina Faso'), nation('nig', 'Niger')],
+      players: [],
+      squads: [],
+    });
+    const squadRows = (id: string, name: string) => [
+      row({ name: 'Aboubacar Camara', no: 1, position: 'FW', nationality: name, club: 'Bylis' }),
+      ...fillers(21, `${id}-f`, 2, {}, { nationality: name, club: 'Bylis' }).rows,
+    ];
+    const team = (id: string, name: string) =>
+      nationTeam({ id, name, source: `https://en.wikipedia.org/wiki/${name}` });
+    // New teams: identity comes from the envelope, as `fetch` writes it.
+    const identity = {
+      primaryColor: NATION_PRIMARY,
+      secondaryColor: NATION_SECONDARY,
+      marker: NATION_MARKER,
+    };
+    const envelopesDir = writeEnvelopes(root, [
+      {
+        fileName: 'bfa.json',
+        data: envelope(team('bfa', 'Burkina Faso'), squadRows('bfa', 'Burkina Faso'), { identity }),
+      },
+      {
+        fileName: 'nig.json',
+        data: envelope(team('nig', 'Niger'), squadRows('nig', 'Niger'), { identity }),
+      },
+    ]);
+
+    const report = await runApply(root, envelopesDir);
+    // Both squads are new, so no file was on disk to count their members from.
+    expect(report.totals.orphans).toBe(0);
+
+    const camaraOf = (relPath: string) =>
+      readSquad(dataDir, relPath).members.find((m) => m.no === 1)?.playerId;
+    expect(camaraOf('nation/bfa.json')).toBe('aboubacar-camara');
+    expect(camaraOf('nation/nig.json')).toBe('aboubacar-camara-2');
+    const players = readPlayers(dataDir);
+    expect(findPlayer(players, 'aboubacar-camara').nationality).toBe('Burkina Faso');
+    expect(findPlayer(players, 'aboubacar-camara-2').nationality).toBe('Niger');
   });
 });

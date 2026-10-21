@@ -10,7 +10,7 @@
     "bands": ["#65B32E", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-10-21",
   "source": "https://en.wikipedia.org/wiki/VfL_Wolfsburg",
   "members": [
     {
@@ -58,10 +58,6 @@
       "no": 14
     },
     {
-      "playerId": "moritz-jenz",
-      "no": 15
-    },
-    {
       "playerId": "alexander-bernhardsson",
       "no": 17
     },
@@ -88,10 +84,6 @@
     {
       "playerId": "alessio-besio",
       "no": 23
-    },
-    {
-      "playerId": "christian-eriksen",
-      "no": 24
     },
     {
       "playerId": "aaron-zehnter",

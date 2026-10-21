@@ -1,0 +1,87 @@
+{
+  "id": "tkm",
+  "kind": "nation",
+  "name": "Turkmenistan",
+  "season": "2026",
+  "primaryColor": "#00843D",
+  "secondaryColor": "#D22630",
+  "verified": true,
+  "marker": {
+    "bands": ["#00843D", "#D22630", "#00843D"],
+    "orientation": "vertical",
+    "weights": [1, 2, 6]
+  },
+  "lastUpdated": "2026-10-20",
+  "source": "https://en.wikipedia.org/wiki/Turkmenistan_national_football_team",
+  "members": [
+    {
+      "playerId": "rasul-caryyew",
+      "no": 1
+    },
+    {
+      "playerId": "zafar-babajanow",
+      "no": 2
+    },
+    {
+      "playerId": "guycmyrat-annagulyyew",
+      "no": 3
+    },
+    {
+      "playerId": "mekan-saparow",
+      "no": 4,
+      "captain": true
+    },
+    {
+      "playerId": "abdy-basimow",
+      "no": 5
+    },
+    {
+      "playerId": "meylis-diniyew",
+      "no": 6
+    },
+    {
+      "playerId": "ahmet-atayew",
+      "no": 7
+    },
+    {
+      "playerId": "yazgylyc-gurbanow",
+      "no": 8
+    },
+    {
+      "playerId": "altymyrat-annadurdyyew",
+      "no": 9
+    },
+    {
+      "playerId": "didar-durdyyew",
+      "no": 11
+    },
+    {
+      "playerId": "teymur-caryyew",
+      "no": 16
+    },
+    {
+      "playerId": "rustem-ahallyyew",
+      "no": 17
+    },
+    {
+      "playerId": "mirza-beknazarow",
+      "no": 18
+    },
+    {
+      "playerId": "welmyrat-ballakow",
+      "no": 19
+    },
+    {
+      "playerId": "kakageldi-berdiyew",
+      "no": 20
+    },
+    {
+      "playerId": "arzuwguly-sapargulyyew",
+      "no": 23
+    },
+    {
+      "playerId": "begenc-akmammedow",
+      "no": null
+    }
+  ]
+}
