@@ -153,6 +153,31 @@ export function BackGlyph({ color }: { color: string }) {
   );
 }
 
+/** Play: a solid triangle pointing right, 14 units across and 16 down, drawn
+ *  from one zero-size View's borders and centred in its box. */
+export function PlayGlyph({ color }: { color: string }) {
+  const s = iconSize.play;
+  const k = s / GRID;
+  const styles = StyleSheet.create({
+    box: { width: s, height: s, alignItems: 'center', justifyContent: 'center' },
+    triangle: {
+      width: 0,
+      height: 0,
+      borderLeftWidth: 14 * k,
+      borderLeftColor: color,
+      borderTopWidth: 8 * k,
+      borderTopColor: 'transparent',
+      borderBottomWidth: 8 * k,
+      borderBottomColor: 'transparent',
+    },
+  });
+  return (
+    <View style={styles.box}>
+      <View style={styles.triangle} />
+    </View>
+  );
+}
+
 /** List: three 11-unit lines, each with a dot before it. */
 export function ListGlyph({ color }: { color: string }) {
   const s = iconSize.viewToggle;

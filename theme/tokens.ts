@@ -680,6 +680,73 @@ export const typography = {
   pillLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 14 },
   pillLabelActive: { fontFamily: 'Inter-Bold', fontSize: 14 },
   searchInput: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 16 },
+  // ---- 2.0 Difficulty (#178) ----
+  // The hero's team name.
+  heroName: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 36,
+    lineHeight: 38,
+    letterSpacing: -0.6,
+    textTransform: 'uppercase' as const,
+  },
+  // A compact rung's level number, the focused card's (`cardNumber` is a
+  // player card's) and a cleared rung's best score. Each takes the face's
+  // natural line height and a margin back, as `shirtNumber` explains: the
+  // design's boxes are 56, 96 and 32.
+  rungNumber: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 54,
+    lineHeight: 59,
+    marginVertical: -1.5,
+  },
+  ladderCardNumber: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 96,
+    lineHeight: 105,
+    marginVertical: -4.5,
+  },
+  rungTitle: { fontFamily: 'Inter-Bold', fontSize: 16 },
+  rungScore: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 30,
+    lineHeight: 33,
+    marginVertical: -0.5,
+  },
+  // The "/10" after a rung's score.
+  rungScoreTail: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 17 },
+  // The focused card's status line, title and description.
+  cardStatus: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 11,
+    letterSpacing: 0.8,
+    textTransform: 'uppercase' as const,
+  },
+  cardTitle: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 22,
+    lineHeight: 24,
+    textTransform: 'uppercase' as const,
+  },
+  cardDescription: {
+    fontFamily: 'Inter-Medium',
+    fontWeight: '500' as const,
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  // The Play and Study pills' labels.
+  ladderPlay: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 16,
+    letterSpacing: 0.5,
+    textTransform: 'uppercase' as const,
+  },
+  ladderStudy: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 15,
+    letterSpacing: 0.5,
+    textTransform: 'uppercase' as const,
+  },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -985,7 +1052,12 @@ export const sizes = {
   segment: { question: 3, results: 6 },
   // The escuadra corner beside a number: arm length, bar thickness and, on the
   // question, the ball's diameter.
-  corner: { question: { arm: 24, bar: 6, ball: 10 }, results: { arm: 40, bar: 10 } },
+  // The ladder's is the focused Difficulty card's, static.
+  corner: {
+    question: { arm: 24, bar: 6, ball: 10 },
+    results: { arm: 40, bar: 10 },
+    ladder: { arm: 20, bar: 5 },
+  },
   // Answer tile heights per grid (spec §2.3).
   answerTile: {
     names4: { normal: 58, compact: 52 }, // 2 x 2
@@ -1071,6 +1143,8 @@ export const sizes = {
   pickerTab: 44,
   searchField: 52,
   rail: { width: 44, letter: 14 },
+  // Difficulty's Play and Study pills (#178).
+  ladderPill: 56,
 } as const;
 
 // The share picture's captured size in pixels: a 9:16 story (spec §4.2).
@@ -1091,6 +1165,8 @@ export const iconSize = {
   // The locked-badge padlock scales with its badge rather than sitting at one
   // fixed size — 32 * 0.46 ≈ 15.
   lockGlyphRatio: 0.46,
+  play: 14, // the triangle on Difficulty's Play pill
+  ladderLock: 14, // a locked rung's padlock on Difficulty
 } as const;
 
 // Base unit 4. Use spacing[n], not raw numbers, in component styles.
@@ -1112,6 +1188,8 @@ export const radii = {
   lg: 16,
   card: 18, // player cards
   settingsCard: 22, // Settings' cards
+  rung: 22, // Difficulty's compact rungs and Exam mode
+  ladderCard: 26, // Difficulty's focused rung
   xl: 24,
   sheet: 28, // a bottom sheet's top corners
   bubbleTail: 6, // the text preview bubble's tail corner

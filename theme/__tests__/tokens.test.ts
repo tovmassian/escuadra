@@ -339,6 +339,9 @@ describe('Archivo display type', () => {
       scoreTail: [typography.scoreTail, 48],
       shareScore: [typography.shareScore, 160],
       shareScoreTail: [typography.shareScoreTail, 62],
+      rungNumber: [typography.rungNumber, 56],
+      ladderCardNumber: [typography.ladderCardNumber, 96],
+      rungScore: [typography.rungScore, 32],
     } as const;
     for (const [name, [style, designBox]] of Object.entries(big)) {
       expect(style.lineHeight, name).toBeGreaterThanOrEqual(style.fontSize * 1.088);
@@ -353,7 +356,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(22);
+    expect(archivo).toHaveLength(30);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }

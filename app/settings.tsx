@@ -21,6 +21,7 @@ import {
   VibrationGlyph,
 } from '@/components/SettingsGlyphs';
 import { SettingsRow, SettingsSection } from '@/components/SettingsSection';
+import { SoonChip } from '@/components/SoonChip';
 import { LANGUAGE_NAMES } from '@/i18n/names';
 import { useLanguage, useT } from '@/i18n/useT';
 import { versionLabel } from '@/lib/settingsView';
@@ -75,13 +76,6 @@ export default function Settings() {
       justifyContent: 'center',
     },
     rateLabel: { ...typography.settingsAction, color: colors.ctaText },
-    soon: {
-      paddingHorizontal: spacing.xs,
-      paddingVertical: spacing.xxs - 1,
-      borderRadius: radii.pill,
-      backgroundColor: colors.soonBg,
-    },
-    soonLabel: { ...typography.soonChip, color: colors.textSecondary },
     footer: {
       flexDirection: 'row',
       alignItems: 'center',
@@ -214,11 +208,7 @@ export default function Settings() {
               icon={<ClockGlyph color={colors.textMuted} />}
               label={t.examMode.title}
               note={t.examMode.line}
-              accessory={
-                <View style={styles.soon}>
-                  <Text style={styles.soonLabel}>{t.examMode.soon}</Text>
-                </View>
-              }
+              accessory={<SoonChip label={t.examMode.soon} />}
             />
           </View>
         </SettingsSection>

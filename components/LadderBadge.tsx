@@ -38,7 +38,11 @@ export function LadderBadge({ level, status, expanded }: LadderBadgeProps) {
     <View style={styles.column}>
       <View style={[styles.badge, styles[status]]}>
         {status === 'locked' ? (
-          <LockGlyph size={Math.round(size * iconSize.lockGlyphRatio)} />
+          <LockGlyph
+            size={Math.round(size * iconSize.lockGlyphRatio)}
+            color={colors.textMuted}
+            ground={colors.surface}
+          />
         ) : status === 'cleared' ? (
           <VerdictGlyph
             correct
