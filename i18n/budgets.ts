@@ -53,9 +53,6 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 24, texts: { 'settings.rate.title': (m) => m.settings.rate.title } },
   { budget: 48, texts: { 'settings.rate.line': (m) => m.settings.rate.line } },
   { budget: 10, texts: { 'settings.rate.button': (m) => m.settings.rate.button } },
-  { budget: 20, texts: { 'settings.examMode.title': (m) => m.settings.examMode.title } },
-  { budget: 56, texts: { 'settings.examMode.line': (m) => m.settings.examMode.line } },
-  { budget: 8, texts: { 'settings.examMode.soon': (m) => m.settings.examMode.soon } },
   {
     budget: 24,
     texts: {
@@ -64,6 +61,9 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
       'settings.licences': (m) => m.settings.licences,
     },
   },
+  { budget: 20, texts: { 'examMode.title': (m) => m.examMode.title } },
+  { budget: 56, texts: { 'examMode.line': (m) => m.examMode.line } },
+  { budget: 8, texts: { 'examMode.soon': (m) => m.examMode.soon } },
   {
     budget: 3,
     texts: {
@@ -151,6 +151,12 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
     },
   },
   { budget: 20, texts: { 'ladder.studySquad': (m) => m.ladder.studySquad } },
+  { budget: 20, texts: { 'ladder.heading': (m) => m.ladder.heading } },
+  { budget: 16, texts: { 'ladder.nationalTeam': (m) => m.ladder.nationalTeam } },
+  { budget: 14, texts: { 'ladder.cleared': (m) => m.ladder.cleared } },
+  { budget: 22, texts: { 'ladder.notPlayed': (m) => m.ladder.notPlayed } },
+  { budget: 22, texts: { 'ladder.yourBest': (m) => m.ladder.yourBest(10, 10) } },
+  { budget: 16, texts: { 'ladder.playLevel': (m) => m.ladder.playLevel(3) } },
   { budget: 12, texts: { 'ladder.best': (m) => m.ladder.best(10, 10) } },
   { budget: 6, texts: { 'picker.allLeagues': (m) => m.picker.allLeagues } },
   { budget: 22, texts: { 'picker.title': (m) => m.picker.title } },

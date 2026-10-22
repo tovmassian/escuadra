@@ -87,16 +87,16 @@ export const de: Messages = {
       line: 'So finden andere Fans die App leichter.',
       button: 'Bewerten',
     },
-    examMode: {
-      title: 'Prüfungsmodus',
-      line: 'Der ganze Kader, nur anhand der Rückennummern.',
-      soon: 'Bald',
-    },
     aboutEscuadra: `Über ${ESCUADRA}`,
     privacy: 'Datenschutz',
     licences: 'Lizenzen',
     version: (version: string) => `Version ${version}`,
     builtIn: 'integriert',
+  },
+  examMode: {
+    title: 'Prüfungsmodus',
+    line: 'Der ganze Kader, nur anhand der Rückennummern.',
+    soon: 'Bald',
   },
   formats: {
     /** "21. Aug. 2026". */
@@ -239,11 +239,23 @@ export const de: Messages = {
       3: {
         // A player's Steckbrief: name, position, club, country.
         title: 'Ganzer Steckbrief',
-        description: '6 Namen zur Wahl, dann Position, dann Verein oder Nationalität.',
+        descriptionClub: '6 Namen zur Wahl, dann Position, dann Nationalität.',
+        descriptionNation: '6 Namen zur Wahl, dann Position, dann Verein.',
       },
     },
     studySquad: 'Kader lernen',
     updated: (date: string) => `Stand: ${date} · Wikipedia`,
+    heading: 'Die Leiter',
+    nationalTeam: 'Nationalteam',
+    cleared: 'Geschafft',
+    notPlayed: 'Noch nicht gespielt',
+    yourBest: (correct: number, total: number) => `Dein Rekord · ${correct}/${total}`,
+    yourBestSpoken: (correct: number, total: number) => `Dein Rekord: ${correct} von ${total}`,
+    playLevel: (level: number) => `Level ${level} spielen`,
+    rungCleared: (title: string, correct: number, total: number) =>
+      `${title}, Rekord ${correct} von ${total}, geschafft`,
+    rungEscuadra: (title: string, correct: number, total: number) =>
+      `${title}, Rekord ${correct} von ${total}, ${A_LA_ESCUADRA}`,
     best: (correct: number, total: number) => `REKORD ${correct}/${total}`,
   },
   picker: {

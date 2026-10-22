@@ -212,11 +212,11 @@ export default function Settings() {
               last
               muted
               icon={<ClockGlyph color={colors.textMuted} />}
-              label={t.settings.examMode.title}
-              note={t.settings.examMode.line}
+              label={t.examMode.title}
+              note={t.examMode.line}
               accessory={
                 <View style={styles.soon}>
-                  <Text style={styles.soonLabel}>{t.settings.examMode.soon}</Text>
+                  <Text style={styles.soonLabel}>{t.examMode.soon}</Text>
                 </View>
               }
             />

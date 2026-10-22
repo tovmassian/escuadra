@@ -73,7 +73,13 @@ export default function Difficulty() {
                 <DifficultyCard
                   row={row}
                   title={copy.title}
-                  description={copy.description}
+                  description={
+                    'description' in copy
+                      ? copy.description
+                      : squad.kind === 'club'
+                        ? copy.descriptionClub
+                        : copy.descriptionNation
+                  }
                   onPlay={() => play(row.level)}
                 />
               ) : (

@@ -83,11 +83,6 @@ export const it: Messages = {
       line: 'Il tuo voto aiuta altri tifosi a trovare l’app.',
       button: 'Valuta',
     },
-    examMode: {
-      title: 'Modalità esame',
-      line: 'Tutta la rosa, solo con i numeri di maglia.',
-      soon: 'A breve',
-    },
     // "Info" is the About screen's short title; the row has room for the
     // usual "Informazioni su".
     aboutEscuadra: `Informazioni su ${ESCUADRA}`,
@@ -96,6 +91,11 @@ export const it: Messages = {
     version: (version: string) => `Versione ${version}`,
     // Feminine: it is the version that is built in.
     builtIn: 'integrata',
+  },
+  examMode: {
+    title: 'Modalità esame',
+    line: 'Tutta la rosa, solo con i numeri di maglia.',
+    soon: 'A breve',
   },
   formats: {
     /** "21 ago 2026". */
@@ -263,12 +263,24 @@ export const it: Messages = {
       },
       3: {
         title: 'Profilo completo',
-        description: 'Il nome tra 6 opzioni, poi il ruolo, poi il club o la nazionalità.',
+        descriptionClub: 'Il nome tra 6 opzioni, poi il ruolo, poi la nazionalità.',
+        descriptionNation: 'Il nome tra 6 opzioni, poi il ruolo, poi il club.',
       },
     },
     studySquad: 'Ripassa la rosa',
     // Not "Aggiornato il": "il 8 set" and "il 11 set" need elision.
     updated: (date: string) => `Aggiornato: ${date} · Wikipedia`,
+    heading: 'La scala',
+    nationalTeam: 'Nazionale',
+    cleared: 'Superato',
+    notPlayed: 'Non ancora giocato',
+    yourBest: (correct: number, total: number) => `Il tuo record · ${correct}/${total}`,
+    yourBestSpoken: (correct: number, total: number) => `Il tuo record: ${correct} su ${total}`,
+    playLevel: (level: number) => `Gioca livello ${level}`,
+    rungCleared: (title: string, correct: number, total: number) =>
+      `${title}, record ${correct} su ${total}, superato`,
+    rungEscuadra: (title: string, correct: number, total: number) =>
+      `${title}, record ${correct} su ${total}, ${A_LA_ESCUADRA}`,
     best: (correct: number, total: number) => `RECORD ${correct}/${total}`,
   },
   picker: {

@@ -90,17 +90,17 @@ export const es: Messages = {
       line: 'Así ayudas a otros aficionados a encontrarla.',
       button: 'Valorar',
     },
-    examMode: {
-      title: 'Modo examen',
-      line: 'Toda la plantilla, solo con los dorsales.',
-      soon: 'Pronto',
-    },
     aboutEscuadra: `Acerca de ${ESCUADRA}`,
     privacy: 'Privacidad',
     licences: 'Licencias',
     version: (version: string) => `Versión ${version}`,
     // Feminine: it is the version that is built in.
     builtIn: 'integrada',
+  },
+  examMode: {
+    title: 'Modo examen',
+    line: 'Toda la plantilla, solo con los dorsales.',
+    soon: 'Pronto',
   },
   formats: {
     /** "21 ago 2026". */
@@ -272,12 +272,25 @@ export const es: Messages = {
       },
       3: {
         title: 'Perfil completo',
-        description:
-          'Elige el nombre entre 6 opciones, luego la posición y, por último, el club o la nacionalidad.',
+        descriptionClub:
+          'Elige el nombre entre 6 opciones, luego la posición y, por último, la nacionalidad.',
+        descriptionNation:
+          'Elige el nombre entre 6 opciones, luego la posición y, por último, el club.',
       },
     },
     studySquad: 'Repasar plantilla',
     updated: (date: string) => `Actualizado el ${date} · Wikipedia`,
+    heading: 'La escalera',
+    nationalTeam: 'Selección',
+    cleared: 'Superado',
+    notPlayed: 'Aún sin jugar',
+    yourBest: (correct: number, total: number) => `Tu récord · ${correct}/${total}`,
+    yourBestSpoken: (correct: number, total: number) => `Tu récord: ${correct} de ${total}`,
+    playLevel: (level: number) => `Jugar nivel ${level}`,
+    rungCleared: (title: string, correct: number, total: number) =>
+      `${title}, récord ${correct} de ${total}, superado`,
+    rungEscuadra: (title: string, correct: number, total: number) =>
+      `${title}, récord ${correct} de ${total}, ${A_LA_ESCUADRA}`,
     best: (correct: number, total: number) => `RÉCORD ${correct}/${total}`,
   },
   picker: {

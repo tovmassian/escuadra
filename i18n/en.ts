@@ -106,14 +106,6 @@ export const en = {
       /** ≤ 10 chars: the button, in Archivo capitals. */
       button: 'Rate',
     },
-    examMode: {
-      /** ≤ 20 chars: Coming next's title. */
-      title: 'Exam mode',
-      /** ≤ 56 chars: the line under it. */
-      line: 'The whole squad, on shirt numbers alone.',
-      /** ≤ 8 chars: the chip, in IBM Plex Mono capitals. */
-      soon: 'Soon',
-    },
     /** ≤ 24 chars: a row of the About card. */
     aboutEscuadra: `About ${ESCUADRA}`,
     privacy: 'Privacy',
@@ -121,6 +113,14 @@ export const en = {
     version: (version: string) => `Version ${version}`,
     /** In brackets after the version on a build's own bundle. */
     builtIn: 'built-in',
+  },
+  examMode: {
+    /** ≤ 20 chars: Coming next's title. */
+    title: 'Exam mode',
+    /** ≤ 56 chars: the line under it. */
+    line: 'The whole squad, on shirt numbers alone.',
+    /** ≤ 8 chars: the chip, in IBM Plex Mono capitals. */
+    soon: 'Soon',
   },
   formats: {
     /** "21 Aug 2026". */
@@ -310,13 +310,36 @@ export const en = {
       },
       3: {
         title: 'Full Profile',
-        description: 'Name from 6 options, then position, then club or nationality.',
+        /** A club squad's third part is the player's nationality. */
+        descriptionClub: 'Name from 6 options, then position, then nationality.',
+        /** A nation squad's third part is the player's club. */
+        descriptionNation: 'Name from 6 options, then position, then club.',
       },
     },
     /** ≤ 20 chars: the Study button or link. */
     studySquad: 'Study This Squad',
     /** The staleness footnote; `date` from `formatLastUpdated`. */
     updated: (date: string) => `Updated ${date} · Wikipedia`,
+    /** ≤ 20 chars: the label over the rungs, in mono capitals. */
+    heading: 'The ladder',
+    /** ≤ 16 chars: a nation's hero line, before the season, in mono capitals. */
+    nationalTeam: 'National team',
+    /** ≤ 14 chars: under a compact rung's score of 8 or 9, in mono capitals. */
+    cleared: 'Cleared',
+    /** ≤ 22 chars: the focused card's status line before a first round, in mono capitals. */
+    notPlayed: 'Not played yet',
+    /** ≤ 22 chars: the focused card's status line, in mono capitals. */
+    yourBest: (correct: number, total: number) => `Your best · ${correct}/${total}`,
+    /** Spoken, so the numbers are words: no "6/10" (read as a date). */
+    yourBestSpoken: (correct: number, total: number) => `Your best, ${correct} of ${total}`,
+    /** ≤ 16 chars: the focused card's button, in display capitals. */
+    playLevel: (level: number) => `Play level ${level}`,
+    /** A cleared compact rung, spoken. */
+    rungCleared: (title: string, correct: number, total: number) =>
+      `${title}, best ${correct} of ${total}, cleared`,
+    /** A 10/10 compact rung, spoken. "a la escuadra" is never translated. */
+    rungEscuadra: (title: string, correct: number, total: number) =>
+      `${title}, best ${correct} of ${total}, ${A_LA_ESCUADRA}`,
     /** ≤ 12 chars: a rung's best-score pill, in capitals. */
     best: (correct: number, total: number) => `BEST ${correct}/${total}`,
   },

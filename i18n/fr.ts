@@ -98,17 +98,17 @@ export const fr: Messages = {
       line: 'Ta note aide d’autres fans à trouver l’appli.',
       button: 'Noter',
     },
-    examMode: {
-      title: 'Mode examen',
-      line: 'Tout l’effectif, rien qu’avec les numéros de maillot.',
-      soon: 'Bientôt',
-    },
     aboutEscuadra: `À propos d’${ESCUADRA}`,
     privacy: 'Confidentialité',
     licences: 'Licences',
     version: (version: string) => `Version ${version}`,
     // Feminine: it is the version that is built in.
     builtIn: 'intégrée',
+  },
+  examMode: {
+    title: 'Mode examen',
+    line: 'Tout l’effectif, rien qu’avec les numéros de maillot.',
+    soon: 'Bientôt',
   },
   formats: {
     /** "21 août 2026", and "1er août 2026" on the first of the month. */
@@ -273,11 +273,23 @@ export const fr: Messages = {
       },
       3: {
         title: 'Profil complet',
-        description: 'Le nom parmi 6 choix, puis le poste, puis le club ou la nationalité.',
+        descriptionClub: 'Le nom parmi 6 choix, puis le poste, puis la nationalité.',
+        descriptionNation: 'Le nom parmi 6 choix, puis le poste, puis le club.',
       },
     },
     studySquad: 'Réviser l’effectif',
     updated: (date: string) => `Mis à jour le ${date} · Wikipédia`,
+    heading: 'L’échelle',
+    nationalTeam: 'Sélection',
+    cleared: 'Validé',
+    notPlayed: 'Pas encore joué',
+    yourBest: (correct: number, total: number) => `Ton record · ${correct}/${total}`,
+    yourBestSpoken: (correct: number, total: number) => `Ton record : ${correct} sur ${total}`,
+    playLevel: (level: number) => `Jouer niveau ${level}`,
+    rungCleared: (title: string, correct: number, total: number) =>
+      `${title}, record ${correct} sur ${total}, validé`,
+    rungEscuadra: (title: string, correct: number, total: number) =>
+      `${title}, record ${correct} sur ${total}, ${A_LA_ESCUADRA}`,
     best: (correct: number, total: number) => `RECORD ${correct}/${total}`,
   },
   picker: {
