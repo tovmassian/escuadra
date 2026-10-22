@@ -40,13 +40,14 @@ genuinely confusable.
 Given a squad and a level, return questions. It's the piece most likely to
 need iteration and it must be trivially unit-testable.
 
-## Answering is a tap (guardrail 3)
+## Levels 1–3 are answered by tap
 
-**No text input in the quiz. No keyboard for answering.** Every quiz answer
-is a tap — option cards and chip selectors are the entire input vocabulary
-there. This is deliberate: typing player names on a phone is the worst
-possible version of this app. Do not add free-text answering or fuzzy name
-matching to questions.
+**No text input on levels 1–3. No keyboard for answering.** Every answer on
+these levels is a tap — option cards and chip selectors are the entire input
+vocabulary there. This is deliberate: typing player names on a phone is the
+worst possible version of these levels. Do not add free-text answering or
+fuzzy name matching to their questions. A new mode may take other input when
+its issue asks for it.
 
 The one exception is the **team picker's search field** (filtering the
 club/nation list as you type): narrowing a list is not answering a

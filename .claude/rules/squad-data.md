@@ -61,10 +61,9 @@ Static squad JSON is imported directly. It does **not** belong in a store.
 ## Verified, and how squads are made
 
 ⚠️ **Treat squad data as unfact-checked until its `verified` flag says
-otherwise.** Shirt numbers and current clubs are precisely what models
-hallucinate. `verified` asserts that a squad file faithfully reflects its
+otherwise.** `verified` asserts that a squad file faithfully reflects its
 Wikipedia source — not that the source is right — and it is never set by
-hand: it is an output of whichever pipeline wrote the file. Never present
+hand: squadctl sets it from its assertion pass (below). Never present
 `verified: false` data as authoritative.
 
 Squad data is written by one path, `squadctl`, which produces `RosterEnvelope`s.

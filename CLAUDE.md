@@ -5,7 +5,7 @@ national side, and answers a round of questions about its players: given a shirt
 and a few stats, which player is this? At higher difficulties, also their position, and
 their club or nationality.
 
-The point is **recognition under time pressure, built by repetition**. It is a study
+The point is **recognition, built by repetition**. It is a study
 tool, not a party game: someone opens it to learn a squad before a tournament or a
 season, in short repeated sessions. Every design decision follows from that: fast rounds,
 instant feedback, and a results screen that shows what you got wrong, because the misses
@@ -22,24 +22,26 @@ This file holds what every session needs. Each topic's detail is a rule in
 `.claude/rules/`, which loads when you Read a file its `paths` match; a hook gives a new
 file its rules on Write. Rules do not load for files read through Bash, so open project
 files with Read, not `cat`. Working on a topic before touching its files, in a plan, a
-triage or an answer? Read its rule first.
+triage or an answer? Read its rule first. A rule that loaded for a file you change is part
+of the change: when the change makes it untrue or incomplete (a new licence, a new photo
+surface, a new event), update the rule in the same PR, so the next session is not misled.
 
-| Rule                                                      | Covers                                              |
-| --------------------------------------------------------- | --------------------------------------------------- |
-| [`quiz`](.claude/rules/quiz.md)                           | Difficulty levels, distractors, the question engine |
-| [`stores`](.claude/rules/stores.md)                       | Persisted and ephemeral state                       |
-| [`squad-data`](.claude/rules/squad-data.md)               | The data model, `verified`, squadctl                |
-| [`team-identity`](.claude/rules/team-identity.md)         | Team colours, markers, the in-round banner, flags   |
-| [`photos`](.claude/rules/photos.md)                       | Player photos and their credits                     |
-| [`design-tokens`](.claude/rules/design-tokens.md)         | Tokens, palettes, theming, motion                   |
-| [`i18n`](.claude/rules/i18n.md)                           | Catalogs, translations, display names               |
-| [`privacy-telemetry`](.claude/rules/privacy-telemetry.md) | What leaves the device, About, telemetry            |
-| [`fingerprint`](.claude/rules/fingerprint.md)             | What moves the fingerprint, CI, the SDK pin         |
-| [`expo`](.claude/rules/expo.md)                           | Expo SDK 57                                         |
-| [`design-handoff`](.claude/rules/design-handoff.md)       | `design/`, screenshots, store assets                |
-| [`licensing`](.claude/rules/licensing.md)                 | Licence notices and asset licences                  |
-| [`testing`](.claude/rules/testing.md)                     | Testing standards                                   |
-| [`instructions`](.claude/rules/instructions.md)           | How this file, the rules and the docs are written   |
+| Rule                                                      | Covers                                                                  |
+| --------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [`quiz`](.claude/rules/quiz.md)                           | Difficulty levels, tap-only answering, distractors, the question engine |
+| [`stores`](.claude/rules/stores.md)                       | Persisted and ephemeral state                                           |
+| [`squad-data`](.claude/rules/squad-data.md)               | The data model, `verified`, squadctl                                    |
+| [`team-identity`](.claude/rules/team-identity.md)         | Team colours, markers, the in-round banner, flags                       |
+| [`photos`](.claude/rules/photos.md)                       | Player photos and their credits                                         |
+| [`design-tokens`](.claude/rules/design-tokens.md)         | Tokens, palettes, theming, motion                                       |
+| [`i18n`](.claude/rules/i18n.md)                           | Catalogs, translations, display names                                   |
+| [`privacy-telemetry`](.claude/rules/privacy-telemetry.md) | What leaves the device, About, telemetry                                |
+| [`fingerprint`](.claude/rules/fingerprint.md)             | What moves the fingerprint, CI, the SDK pin                             |
+| [`expo`](.claude/rules/expo.md)                           | Expo SDK 57                                                             |
+| [`design-handoff`](.claude/rules/design-handoff.md)       | `design/`, screenshots, store assets                                    |
+| [`licensing`](.claude/rules/licensing.md)                 | Licence notices and asset licences                                      |
+| [`testing`](.claude/rules/testing.md)                     | Testing standards                                                       |
+| [`instructions`](.claude/rules/instructions.md)           | How this file, the rules and the docs are written                       |
 
 ## Guardrails
 
@@ -47,6 +49,12 @@ Two kinds. **Legal** guardrails (2, with its asset-licensing rule) are never wor
 around: stop and ask. **Product and engineering** guardrails are the defaults: an issue
 that explicitly changes one wins, and updates the guardrail here and its rule in the same
 PR. Code cites guardrails by number, so the numbers stay.
+
+**In design work, a rule is an input, not a blocker.** When a new concept contradicts a
+product or engineering rule here or in `.claude/rules/`, or needs something the design
+system lacks, flag it and keep designing. If the concept is adopted, change the system
+to fit it (the token, the rule, this file) in the same work, unless the owner calls it a
+one-off exception. Legal guardrails never bend.
 
 1. **Player photos are hotlinked Wikimedia Commons thumbnails, always credited.** Nothing
    shown or spoken names the player: never the Commons file name or caption. Each load reaches
@@ -65,9 +73,8 @@ PR. Code cites guardrails by number, so the numbers stay.
    guidelines allow, unmodified (never recoloured, greyed out or set inside a sentence),
    only for a store where the app is live, with their credit lines in the footer.
 
-3. **No text input in the quiz. No keyboard for answering.** Every answer is a tap on an
-   option card or a chip; no free-text answering, no fuzzy name matching. The one
-   exception is the team picker's search field: do not add free-text input anywhere else.
+3. **Retired.** Answering levels 1–3 by tap only is now a quiz rule (`quiz`), and a new
+   mode may take other input. The number stays so existing citations keep their meaning.
 4. **Offline-first, and privacy disclosures always match the binary.** Core gameplay works
    with no connection, and squad data stays bundled. Network features are allowed when an
    issue asks for them, but any change to what leaves the device (analytics, crash
@@ -112,8 +119,7 @@ Scope lives in GitHub, in milestones and issues, not in this file. If the issue 
 worked on asks for something (analytics, photos, a backend call, a new mode,
 monetisation), that is the decision: build it well within the guardrails. Stop and ask
 only when a request would break a legal guardrail, or when no issue covers it and it
-changes the product's direction. Exam mode (a full-squad run on shirt numbers alone)
-belongs as a standalone feature, not a fourth difficulty level.
+changes the product's direction.
 
 ## Working conventions
 
@@ -127,7 +133,8 @@ belongs as a standalone feature, not a fourth difficulty level.
   error go away.
 - User-visible text lives in `i18n/` and is read through `useT()`; `npm run lint` fails a
   hard-coded string in `app/` or `components/`.
-- Every animation stays under 300 ms; the carve-outs are in `design-tokens`.
+- Animations stay under 300 ms by default, with the carve-outs in `design-tokens`; a
+  design that needs longer changes the rule, as Guardrails says.
 - Read the Expo docs for SDK 57 (https://docs.expo.dev/versions/v57.0.0/), never
   `latest`. An SDK upgrade is a release decision, not a dependency bump.
 

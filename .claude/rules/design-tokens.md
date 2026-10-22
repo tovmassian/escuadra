@@ -37,7 +37,8 @@ lives in `stores/progress.ts` — it is not a third store (`stores.md`).
 
 ## Motion
 
-Every animation stays under 300ms. The app is played in fast repetitive bursts
+Every animation stays under 300ms by default; a design that needs longer changes
+this rule and the tokens (`CLAUDE.md`, Guardrails). The app is played in fast repetitive bursts
 and slow transitions become infuriating by question six. `durations.autoAdvance`
 (1,200 ms) is a pause, not an animation: the wait after a correct answer before
 the round moves on, which a tap skips and which never runs with a screen reader
@@ -52,5 +53,5 @@ The round-over celebration and the home lockup are the one carve-out: their time
 to `"dark"` or `"light"` locks the app to that theme and makes
 `useColorScheme()` return the same value on every device, so the
 system-following default silently never fires — with no error to trace it by.
-`theme/userInterfaceStyle.test.ts` pins it, because a pinned theme compiles and looks right on a phone set to the same theme. Verify it on a light device, not by reading the
+`theme/__tests__/userInterfaceStyle.test.ts` pins it, because a pinned theme compiles and looks right on a phone set to the same theme. Verify it on a light device, not by reading the
 diff.

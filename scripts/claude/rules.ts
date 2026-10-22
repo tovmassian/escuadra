@@ -44,7 +44,7 @@ export function contextForNewFile(path: string, rules: Rule[]): string | null {
   const matching = rules.filter((rule) => ruleMatches(rule, path));
   if (matching.length === 0) return null;
   return [
-    `${path} is a new file, and Claude Code loads path-scoped rules on Read, not on Write. The rules for it:`,
+    `${path} is a new file, and Claude Code loads path-scoped rules on Read, not on Write. The rules for it (if your change makes one untrue or incomplete, update it in the same change):`,
     ...matching.map((rule) => `<rule file="${rule.file}">\n${rule.body}\n</rule>`),
   ].join('\n\n');
 }

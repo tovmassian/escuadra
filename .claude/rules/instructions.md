@@ -27,6 +27,10 @@ How `CLAUDE.md`, these rules and the docs are written, so they stay short and tr
   `CLAUDE.md` never says "today", "next version", a current count or a status.
 - **History** stays in git, specs and issues. A past incident survives only as the one
   line of why a rule exists.
+- **A change keeps its rules current.** The rules that loaded for the files a change
+  touches are candidates for that change: when it adds a licence, a photo surface, an
+  event or anything else a rule describes, update the rule (and `CLAUDE.md`'s summary of
+  it) in the same PR, so a new feature never leaves a stale rule for the next session.
 
 ## Writing a rule
 
