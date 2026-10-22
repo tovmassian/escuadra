@@ -1,14 +1,17 @@
-import { router } from 'expo-router';
-import Constants from 'expo-constants';
-import * as Updates from 'expo-updates';
-import { Fragment, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { router, useLocalSearchParams } from 'expo-router';
+import { Fragment, useRef, useState } from 'react';
+import {
+  type LayoutChangeEvent,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LicencesSheet } from '@/components/LicencesSheet';
 import { translationNotice } from '@/i18n/translationNotice';
 import { useLanguage, useT } from '@/i18n/useT';
-import { versionLabel } from '@/lib/settingsView';
-import { useProgress } from '@/stores/progress';
 import { radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
@@ -18,13 +21,16 @@ export default function About() {
   const t = useT();
   const notice = translationNotice(useLanguage());
   const last = (i: number, list: readonly unknown[]) => i === list.length - 1;
-  const telemetryEnabled = useProgress((s) => s.telemetryEnabled);
-  const setTelemetryEnabled = useProgress((s) => s.setTelemetryEnabled);
   const [licencesOpen, setLicencesOpen] = useState(false);
-  const haptics = useProgress((s) => s.haptics);
-  const setHaptics = useProgress((s) => s.setHaptics);
-
-  const version = Constants.expoConfig?.version ?? '—';
+  const { section } = useLocalSearchParams<{ section?: string }>();
+  const scrollRef = useRef<ScrollView>(null);
+  const scrolledTo = useRef(false);
+  // Settings' Privacy row opens About at its Privacy card (#175).
+  const onPrivacyLayout = (e: LayoutChangeEvent) => {
+    if (section !== 'privacy' || scrolledTo.current) return;
+    scrolledTo.current = true;
+    scrollRef.current?.scrollTo({ y: e.nativeEvent.layout.y, animated: false });
+  };
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
@@ -60,25 +66,12 @@ export default function About() {
       color: colors.textPrimary,
       marginBottom: spacing.sm,
     },
-    settingRow: {
-      flexDirection: 'row',
-      alignItems: 'center',
-      justifyContent: 'space-between',
-      gap: spacing.md,
-    },
-    settingLabel: { ...typography.body, color: colors.textPrimary, flex: 1 },
-    versionLine: {
-      ...typography.statMonoTiny,
-      color: colors.textMuted,
-      marginTop: spacing.xl,
-      marginBottom: spacing.xl,
-      textAlign: 'center',
-    },
   });
 
   return (
     <View style={[styles.root, { paddingTop: insets.top + spacing.md }]}>
       <ScrollView
+        ref={scrollRef}
         style={styles.scroll}
         contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}
       >
@@ -117,39 +110,7 @@ export default function About() {
           </Pressable>
         </View>
 
-        <View style={[styles.section, styles.settingRow]}>
-          <Text style={styles.settingLabel} nativeID="haptics-label">
-            {t.settings.vibration}
-          </Text>
-          <Switch
-            testID="haptics-toggle"
-            accessibilityLabelledBy="haptics-label"
-            accessibilityLabel={t.settings.vibration}
-            value={haptics}
-            onValueChange={setHaptics}
-            trackColor={{ false: colors.surfaceRaised, true: colors.accent }}
-            thumbColor={colors.thumbBg}
-            ios_backgroundColor={colors.surfaceRaised}
-          />
-        </View>
-
-        <View style={[styles.section, styles.settingRow]}>
-          <Text style={styles.settingLabel} nativeID="telemetry-label">
-            {t.settings.usageStatistics}
-          </Text>
-          <Switch
-            testID="telemetry-toggle"
-            accessibilityLabelledBy="telemetry-label"
-            accessibilityLabel={t.settings.usageStatistics}
-            value={telemetryEnabled}
-            onValueChange={setTelemetryEnabled}
-            trackColor={{ false: colors.surfaceRaised, true: colors.accent }}
-            thumbColor={colors.thumbBg}
-            ios_backgroundColor={colors.surfaceRaised}
-          />
-        </View>
-
-        <View style={styles.section}>
+        <View style={styles.section} onLayout={onPrivacyLayout}>
           <Text style={styles.sectionHeading}>{t.about.privacy.heading}</Text>
 
           <Text style={styles.paragraphEmphasis}>{t.about.privacy.lead}</Text>
@@ -180,20 +141,6 @@ export default function About() {
           ))}
           {notice && <Text style={[styles.paragraph, { marginBottom: 0 }]}>{notice}</Text>}
         </View>
-
-        <Text style={styles.versionLine}>
-          {versionLabel(
-            version,
-            {
-              isEnabled: Updates.isEnabled,
-              isEmbeddedLaunch: Updates.isEmbeddedLaunch,
-              updateId: Updates.updateId,
-              channel: Updates.channel,
-              manifest: Updates.manifest,
-            },
-            t,
-          )}
-        </Text>
       </ScrollView>
       <LicencesSheet visible={licencesOpen} onClose={() => setLicencesOpen(false)} />
     </View>

@@ -299,7 +299,7 @@ export const fr: Messages = {
   // English until #147 localises the feature graphic with the store listing.
   store: en.store,
   about: {
-    // "À propos", as the home screen's link to it says.
+    // "À propos", also Settings' About section label (settings.sections.about).
     title: 'À propos',
     intro: [
       `${ESCUADRA} est une application indépendante et non officielle. Elle n’est ni affiliée ni associée à la FIFA, à l’UEFA, à une ligue, à une fédération nationale de football ou à un club, et n’est approuvée par aucun d’entre eux. Les noms des clubs et des sélections nationales sont utilisés uniquement à des fins d’identification et restent la propriété de leurs détenteurs respectifs. ${ESCUADRA} n’est pas non plus affiliée à la Wikimedia Foundation ni à un joueur figurant sur une photo, et n’est approuvée par aucun d’entre eux.`,

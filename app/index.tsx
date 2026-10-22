@@ -3,8 +3,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, { Easing, FadeInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button } from '@/components/Button';
-import { LanguageChip } from '@/components/LanguageChip';
-import { ThemeToggle } from '@/components/ThemeToggle';
+import { GearGlyph } from '@/components/SettingsGlyphs';
 import { Wordmark } from '@/components/Wordmark';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
@@ -14,9 +13,11 @@ import { scoreKey, useProgress, useProgressHydrated } from '@/stores/progress';
 import { useSession } from '@/stores/session';
 import {
   celebrationEasingCurves,
+  borderWidths,
   celebrationRiseDuration,
   homeCascade,
   iconSize,
+  opacity,
   radii,
   sizes,
   spacing,
@@ -58,9 +59,17 @@ export default function Home() {
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.xl },
-    toggleRow: { flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center' },
-    controls: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
-    aboutLink: { ...typography.secondarySmall, color: colors.textMuted },
+    toggleRow: { flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' },
+    gear: {
+      width: sizes.settings.roundButton,
+      height: sizes.settings.roundButton,
+      borderRadius: sizes.settings.roundButton / 2,
+      backgroundColor: colors.surface,
+      borderWidth: borderWidths.hairline,
+      borderColor: colors.border,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
     brandBlock: { flex: 1, alignItems: 'center', justifyContent: 'center' },
     continueCard: {
       flexDirection: 'row',
@@ -98,13 +107,15 @@ export default function Home() {
       ]}
     >
       <View style={styles.toggleRow}>
-        <Pressable onPress={() => router.push('/about')} accessibilityRole="button" hitSlop={12}>
-          <Text style={styles.aboutLink}>{t.about.title}</Text>
+        <Pressable
+          testID="home-settings"
+          onPress={() => router.push('/settings')}
+          accessibilityRole="button"
+          accessibilityLabel={t.home.settings}
+          style={({ pressed }) => [styles.gear, pressed && { opacity: opacity.settled }]}
+        >
+          <GearGlyph color={colors.textPrimary} ground={colors.surface} />
         </Pressable>
-        <View style={styles.controls}>
-          <LanguageChip />
-          <ThemeToggle />
-        </View>
       </View>
 
       <View style={styles.brandBlock}>

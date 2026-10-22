@@ -23,9 +23,6 @@ export interface Palette {
    *  dark ground and its bright end on a light one, so this is a role, not a
    *  fixed hex. */
   mark: string;
-  /** The theme toggle's thumb and its sun/moon glyph. */
-  thumbBg: string;
-  thumbIcon: string;
   success: string;
   /** Small success-coloured text on `background`/`surface`, and on
    *  `successBg` over `surface`/`surfaceRaised`; `success` itself stays for
@@ -196,8 +193,6 @@ const darkRoles = {
   textMuted: '#868b91',
   accentOn: '#f3f5f7',
   mark: sharedRoles.brandSoft,
-  thumbBg: '#2b2f38',
-  thumbIcon: '#e7e9f5',
   success: '#61bd67',
   successText: '#61bd67',
   error: '#f05653',
@@ -244,8 +239,6 @@ const lightRoles = {
   textMuted: '#686c73',
   accentOn: '#ffffff',
   mark: sharedRoles.brandBright,
-  thumbBg: '#ffffff',
-  thumbIcon: '#b9840f',
   success: '#2f8f3e',
   successText: '#24702f',
   error: '#c23934',
@@ -941,22 +934,6 @@ export const sizes = {
   // Team-picker rows carry a progress sub-line, so they need a second line of
   // height.
   rowHeightTall: 64,
-  // The theme toggle. `inset` is the gap between track edge and thumb, so the
-  // thumb's travel is trackWidth - thumb - inset * 2.
-  themeToggle: { trackWidth: 52, trackHeight: 30, thumb: 24, inset: 2 },
-  // The toggle's glyphs. The moon is a disc with an offset disc punched out
-  // of it in the thumb's own colour — `moonCutoutTop`/`moonCutoutLeft` place
-  // that punch-out, and are what give the crescent its lean. The sun is a
-  // core disc with four rays at `sunRayOffset` from centre.
-  themeToggleGlyph: {
-    moon: 13,
-    moonCutout: 11,
-    moonCutoutTop: -3,
-    moonCutoutLeft: 3,
-    sunCore: 10,
-    sunRay: 3,
-    sunRayOffset: 6,
-  },
   // ---- 2.0 spotlight screens (spec §2, §3, §5, §8) ----
   // The question screen goes compact below this usable height (window minus
   // safe-area insets).
@@ -1020,10 +997,8 @@ export const sizes = {
   },
   // Every bottom sheet (`Sheet`): its grab handle and its close button.
   sheet: { handleWidth: 36, handleHeight: 5, close: 36 },
-  // The language chip's pill and the language sheet's radio (#143). The chip
-  // has no fixed height or width: it grows with the OS text size, and
-  // `minHeight` is the theme toggle's track so the two sit level.
-  languageChip: { minHeight: 30, radio: 20, radioDot: 10 },
+  // The language sheet's radio (#143).
+  languageChip: { radio: 20, radioDot: 10 },
   // The share sheet's own parts (spec §4.1).
   shareSheet: {
     switchHeight: 40,

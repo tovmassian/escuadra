@@ -296,8 +296,8 @@ export const it: Messages = {
   // English until #147 localises the feature graphic with the store listing.
   store: en.store,
   about: {
-    // "Info", as the home screen's link to it says. "Informazioni" is 12
-    // chars against that link's 8.
+    // "Info", also Settings' About section label (settings.sections.about). "Informazioni" is 12
+    // chars against that label's 8.
     title: 'Info',
     // Escuadra is "l’app", so feminine: "affiliata", "approvata".
     intro: [

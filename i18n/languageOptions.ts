@@ -28,8 +28,3 @@ export function languageRows(
     })),
   ];
 }
-
-/** `es` → `ES`: the chip's text. */
-export function languageChipCode(language: Language): string {
-  return language.toUpperCase();
-}
