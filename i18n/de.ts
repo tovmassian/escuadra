@@ -248,11 +248,10 @@ export const de: Messages = {
   },
   picker: {
     allLeagues: 'Alle',
-    title: 'Wähle deinen Kader',
-    // "Kader" is its own plural.
-    squadCount: (count: number) => `${count} Kader`,
+    title: 'Wähle dein Team',
+    squadCount: (count: number) => (count === 1 ? `${count} Team` : `${count} Teams`),
     clubs: 'Vereine',
-    // "Nationalteams" is over the tab's ten characters.
+    // "Nationalteams" is over the tab's twelve characters.
     nations: 'Nationen',
     allClubs: 'Alle Vereine',
     listCaption: (name: string, count: number) => `${name} · ${count}`,

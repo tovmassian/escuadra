@@ -327,7 +327,7 @@ export const en = {
     title: 'Pick your squad',
     /** ≤ 14 chars: the top bar's count of every squad, in mono capitals. */
     squadCount: (count: number) => (count === 1 ? `${count} squad` : `${count} squads`),
-    /** ≤ 10 chars each: a tab, in display capitals, beside its count. */
+    /** ≤ 12 chars each: a tab, in display capitals, beside its count. */
     clubs: 'Clubs',
     nations: 'Nations',
     /** ≤ 16 chars: the clubs list's caption with no league picked, in mono capitals. */

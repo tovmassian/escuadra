@@ -156,7 +156,7 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 22, texts: { 'picker.title': (m) => m.picker.title } },
   { budget: 14, texts: { 'picker.squadCount': (m) => m.picker.squadCount(253) } },
   {
-    budget: 10,
+    budget: 12,
     texts: {
       'picker.clubs': (m) => m.picker.clubs,
       'picker.nations': (m) => m.picker.nations,

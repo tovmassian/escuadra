@@ -274,8 +274,10 @@ export const it: Messages = {
   picker: {
     // Masculine: the campionati.
     allLeagues: 'Tutti',
-    title: 'Scegli la tua rosa',
-    squadCount: (count: number) => (count === 1 ? `${count} rosa` : `${count} rose`),
+    // "Squadra", the team chosen, as Home and Results say; "rosa" is the list
+    // of players, and "la tua rosa" reads as fantacalcio.
+    title: 'Scegli la tua squadra',
+    squadCount: (count: number) => (count === 1 ? `${count} squadra` : `${count} squadre`),
     // "Club" takes no plural in Italian.
     clubs: 'Club',
     nations: 'Nazionali',

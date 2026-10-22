@@ -283,11 +283,11 @@ export const es: Messages = {
   picker: {
     // Feminine: the leagues.
     allLeagues: 'Todas',
-    title: 'Elige tu plantilla',
-    squadCount: (count: number) => (count === 1 ? `${count} plantilla` : `${count} plantillas`),
+    title: 'Elige tu equipo',
+    squadCount: (count: number) => (count === 1 ? `${count} equipo` : `${count} equipos`),
     clubs: 'Clubes',
-    // "Selecciones" is over the tab's ten characters.
-    nations: 'Naciones',
+    // "Selecciones", the football word for national teams.
+    nations: 'Selecciones',
     allClubs: 'Todos los clubes',
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     bestSpoken: (level: number, correct: number, total: number) =>

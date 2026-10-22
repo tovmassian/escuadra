@@ -283,8 +283,8 @@ export const fr: Messages = {
   picker: {
     // Masculine: the championnats.
     allLeagues: 'Tous',
-    title: 'Choisis ton effectif',
-    squadCount: (count: number) => (count <= 1 ? `${count} effectif` : `${count} effectifs`),
+    title: 'Choisis ton équipe',
+    squadCount: (count: number) => (count <= 1 ? `${count} équipe` : `${count} équipes`),
     clubs: 'Clubs',
     nations: 'Sélections',
     allClubs: 'Tous les clubs',
