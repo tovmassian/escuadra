@@ -426,9 +426,9 @@ export const typography = {
   },
   // Filter-pill labels.
   filterLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },
-  // Difficulty-ladder badge number.
+  // The in-round banner's shirt number (Results).
   badgeNumber: { fontFamily: 'IBMPlexMono-Bold', fontSize: 18 },
-  // Difficulty-row / card descriptions — one step down from `secondary`.
+  // Small descriptions and credit lines — one step down from `secondary`.
   descriptionSmall: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 12.5 },
   eyebrow: {
     fontFamily: 'Inter-SemiBold',
@@ -715,20 +715,20 @@ export const typography = {
   // The "/10" after a rung's score.
   rungScoreTail: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 17 },
   // The focused card's status line, title and description.
-  cardStatus: {
+  ladderCardStatus: {
     fontFamily: 'IBMPlexMono-SemiBold',
     fontWeight: '600' as const,
     fontSize: 11,
     letterSpacing: 0.8,
     textTransform: 'uppercase' as const,
   },
-  cardTitle: {
+  ladderCardTitle: {
     fontFamily: 'Archivo-SemiExpandedExtraBold',
     fontSize: 22,
     lineHeight: 24,
     textTransform: 'uppercase' as const,
   },
-  cardDescription: {
+  ladderCardDescription: {
     fontFamily: 'Inter-Medium',
     fontWeight: '500' as const,
     fontSize: 14,
@@ -770,10 +770,10 @@ export const borderWidths = {
 // Named opacity stops from the interaction-state spec — never an inline
 // 0.4/0.65/etc in a component.
 export const opacity = {
-  disabled: 0.55, // locked difficulty row
+  disabled: 0.55, // ShareSheet's busy button
   dimmed: 0.65, // VerdictGlyph's incorrect variant (no screen renders one today)
   faded: 0.4, // the photo-loading shimmer under Reduce Motion (SpotlightStage)
-  settled: 0.7, // press feedback: Button, DifficultyRow, GlassCloseButton, QuestionFooter
+  settled: 0.7, // press feedback: Button, LadderRung, GlassCloseButton, QuestionFooter
   tileAfterCorrect: 0.5, // other tiles once the pick was right (spec §6)
   tileAfterMiss: 0.35, // other tiles after a miss
 } as const;
@@ -995,20 +995,7 @@ export const homeCascade = {
   actionsStep: t(40),
 };
 
-// Difficulty-ladder badge diameters. Size follows the rung's state, not its
-// level: the focused rung, expanded into a Play card, carries the large badge;
-// every other rung the compact one.
-export const ladderBadgeSize = { compact: 32, expanded: 48 } as const;
-
 export const sizes = {
-  // Width of the difficulty ladder's badge column. Both badge sizes centre
-  // inside this fixed-width slot, so the badges — and the connector segments
-  // between them — share one vertical axis. Matches the larger badge so
-  // nothing overflows it.
-  difficultyBadgeColumn: ladderBadgeSize.expanded,
-  // Height of one connector segment between two ladder rungs. Drawn only in
-  // the gap, never behind a badge — see `LadderConnector`.
-  difficultyConnectorHeight: 16,
   // The shirt-number column of a Study list row.
   studyColumn: { no: 26 },
   // Home's "Start Training" is the one 56px control; every other button
@@ -1162,9 +1149,6 @@ export const iconSize = {
   retryGlyph: 18, // the Results screen's retry icon beside Study
   back: 22, // Study's back chevron
   viewToggle: 17, // Study's list/grid toggle
-  // The locked-badge padlock scales with its badge rather than sitting at one
-  // fixed size — 32 * 0.46 ≈ 15.
-  lockGlyphRatio: 0.46,
   play: 14, // the triangle on Difficulty's Play pill
   ladderLock: 14, // a locked rung's padlock on Difficulty
 } as const;

@@ -218,15 +218,12 @@ export const de: Messages = {
       `Bild zum Teilen: ${eyebrow}. ${correct} von ${total}. ${title}.`,
   },
   ladder: {
-    play: 'Spielen',
-    playAgain: 'Noch mal',
     // "Ab 8/10": how German states a threshold.
     unlockHint: (target: string, level: number) => `Ab ${target} in L${level}`,
     rungLocked: (title: string, correct: number, total: number, level: number) =>
       `${title}, gesperrt, ab ${correct} von ${total} in Level ${level}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, Rekord ${correct} von ${total}`,
-    title: 'Schwierigkeit wählen',
     levels: {
       1: {
         title: 'Name zur Nummer',
@@ -256,7 +253,6 @@ export const de: Messages = {
       `${title}, Rekord ${correct} von ${total}, geschafft`,
     rungEscuadra: (title: string, correct: number, total: number) =>
       `${title}, Rekord ${correct} von ${total}, ${A_LA_ESCUADRA}`,
-    best: (correct: number, total: number) => `REKORD ${correct}/${total}`,
   },
   picker: {
     allLeagues: 'Alle',

@@ -253,15 +253,12 @@ export const fr: Messages = {
       `Image à partager : ${eyebrow}. ${correct} sur ${total}. ${title}.`,
   },
   ladder: {
-    play: 'Jouer',
-    playAgain: 'Rejouer',
     // No verb: "Fais 8/10 au niveau 1" wraps the rung titles beside it.
     unlockHint: (target: string, level: number) => `${target} au niveau ${level}`,
     rungLocked: (title: string, correct: number, total: number, level: number) =>
       `${title}, verrouillé, ${correct} sur ${total} au niveau ${level}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} sur ${total}`,
-    title: 'Choisis la difficulté',
     levels: {
       1: {
         title: 'Du numéro au nom',
@@ -290,7 +287,6 @@ export const fr: Messages = {
       `${title}, record ${correct} sur ${total}, validé`,
     rungEscuadra: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} sur ${total}, ${A_LA_ESCUADRA}`,
-    best: (correct: number, total: number) => `RECORD ${correct}/${total}`,
   },
   picker: {
     // Masculine: the championnats.

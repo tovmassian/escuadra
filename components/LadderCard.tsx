@@ -52,9 +52,9 @@ export function LadderCard({ row, title, description, onPlay }: LadderCardProps)
       borderColor: colors.accentLine,
     },
     text: { flex: 1, gap: spacing.xs, paddingTop: spacing.xxs },
-    status: { ...typography.cardStatus, color: colors.accentLine },
-    title: { ...typography.cardTitle, color: colors.textPrimary },
-    description: { ...typography.cardDescription, color: colors.textSecondary },
+    status: { ...typography.ladderCardStatus, color: colors.accentLine },
+    title: { ...typography.ladderCardTitle, color: colors.textPrimary },
+    description: { ...typography.ladderCardDescription, color: colors.textSecondary },
     play: {
       minHeight: sizes.ladderPill,
       borderRadius: radii.pill,

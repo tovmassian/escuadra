@@ -140,8 +140,6 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
       'share.shareText': (m) => m.share.shareText,
     },
   },
-  { budget: 14, texts: { 'ladder.play': (m) => m.ladder.play } },
-  { budget: 14, texts: { 'ladder.playAgain': (m) => m.ladder.playAgain } },
   {
     budget: 18,
     texts: {
@@ -157,7 +155,6 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 22, texts: { 'ladder.notPlayed': (m) => m.ladder.notPlayed } },
   { budget: 22, texts: { 'ladder.yourBest': (m) => m.ladder.yourBest(10, 10) } },
   { budget: 16, texts: { 'ladder.playLevel': (m) => m.ladder.playLevel(3) } },
-  { budget: 12, texts: { 'ladder.best': (m) => m.ladder.best(10, 10) } },
   { budget: 6, texts: { 'picker.allLeagues': (m) => m.picker.allLeagues } },
   { budget: 22, texts: { 'picker.title': (m) => m.picker.title } },
   { budget: 14, texts: { 'picker.squadCount': (m) => m.picker.squadCount(253) } },

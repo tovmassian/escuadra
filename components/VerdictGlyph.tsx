@@ -9,9 +9,8 @@ interface VerdictGlyphProps {
   size?: number;
   /**
    * Overrides the default success/errorTextDim colour. Needed when the mark
-   * sits on a same-hue fill (e.g. DifficultyRow's success-coloured "best"
-   * badge, where a success-coloured mark on a success-coloured background
-   * would be invisible).
+   * sits on a same-hue fill (a success-coloured mark on a success-coloured
+   * background would be invisible).
    */
   color?: string;
 }

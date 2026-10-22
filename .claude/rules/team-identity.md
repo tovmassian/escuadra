@@ -50,7 +50,9 @@ the marker always renders as thin, tall, vertical bands, using `bands` (and
 entirely: Spain reads red/yellow/red left-to-right, not stacked. This is
 `TeamMarker`'s `variant="banner"` (`components/TeamMarker.tsx`,
 `sizes.teamMarkerBanner` in `theme/tokens.ts`). `variant` is required, so the question
-screen must name it: `banner` there, `picker` in the picker.
+screen must name it: `banner` there, `picker` in the picker. The Difficulty
+hero (`LadderHero`) draws the same vertical bands, full bleed under a veil,
+through `bannerBands`.
 
 ## Flags (guardrail 2's carve-out)
 

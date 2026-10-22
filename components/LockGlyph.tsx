@@ -1,17 +1,15 @@
 import { View } from 'react-native';
 
-// Geometric padlock for the locked-difficulty badge, replacing the OS emoji
-// 🔒 previously inlined in DifficultyRow. Built from plain Views, coloured
+// Geometric padlock for a locked ladder rung, replacing the OS emoji
+// 🔒. Built from plain Views, coloured
 // from tokens, so it has no dependency on the OS emoji font (the same reason
 // nation flags are committed PNGs rather than Unicode regional-indicator
 // emoji — see types/squad.ts).
 //
 // Drawn in a 16x16 box and scaled the same way EscuadraMark scales from
 // MARK_VIEWBOX: every dimension below is derived from the box size, never a
-// hardcoded pixel value. `size` is the caller's responsibility — DifficultyRow
-// derives it from the badge it sits inside via `iconSize.lockGlyphRatio`, so
-// the glyph reads at both locked ring sizes instead of sitting fixed
-// regardless of the badge around it.
+// hardcoded pixel value. `size` is the caller's responsibility — LadderRung
+// passes `iconSize.ladderLock`.
 const GLYPH_BOX = 16;
 
 const body = { x: 4, y: 7, w: 8, h: 6, radius: 1.5 };

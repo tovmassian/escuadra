@@ -117,9 +117,8 @@ describe('text contrast', () => {
     });
   });
 
-  // The ladder's cleared BestPill sets its label on the translucent
-  // `successBg`, which deepens the ground under it: on the difficulty list's
-  // `surface` rows and on the card's `surfaceRaised`.
+  // A success label set on the translucent `successBg` has a deeper ground
+  // under it than `surface` or `surfaceRaised` alone.
   it('successText reaches 4.5:1 on successBg, on surface and surfaceRaised, in both themes', () => {
     (['dark', 'light'] as const).forEach((name) => {
       const p = palettes[name];

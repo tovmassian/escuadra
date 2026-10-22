@@ -249,8 +249,6 @@ export const es: Messages = {
       `Imagen para compartir: ${eyebrow}. ${correct} de ${total}. ${title}.`,
   },
   ladder: {
-    play: 'Jugar',
-    playAgain: 'Jugar otra vez',
     // The target first, as French does: "Nivel 1: 8/10" reads as a recorded
     // score. "8/10 en nivel 1" wraps "Nombre y posición" beside it.
     unlockHint: (target: string, level: number) => `${target} en niv. ${level}`,
@@ -258,7 +256,6 @@ export const es: Messages = {
       `${title}, bloqueado, consigue ${correct} de ${total} en el nivel ${level}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, récord ${correct} de ${total}`,
-    title: 'Elige la dificultad',
     levels: {
       1: {
         // The ladder reads Solo el nombre → Nombre y posición → Perfil
@@ -291,7 +288,6 @@ export const es: Messages = {
       `${title}, récord ${correct} de ${total}, superado`,
     rungEscuadra: (title: string, correct: number, total: number) =>
       `${title}, récord ${correct} de ${total}, ${A_LA_ESCUADRA}`,
-    best: (correct: number, total: number) => `RÉCORD ${correct}/${total}`,
   },
   picker: {
     // Feminine: the leagues.

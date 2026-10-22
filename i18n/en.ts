@@ -284,10 +284,6 @@ export const en = {
       `Share picture: ${eyebrow}. ${correct} of ${total}. ${title}.`,
   },
   ladder: {
-    /** ≤ 14 chars: the Play card's button. */
-    play: 'Play',
-    /** ≤ 14 chars: the Play card's button once the level has a score. */
-    playAgain: 'Play Again',
     /** Under a locked rung. `target` is "8/10". */
     unlockHint: (target: string, level: number) => `Score ${target} on L${level}`,
     /** Spoken, so the numbers are words: no "8/10" (read as a date) or "L2". */
@@ -295,7 +291,6 @@ export const en = {
       `${title}, locked, score ${correct} of ${total} on level ${level}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, best ${correct} of ${total}`,
-    title: 'Choose Difficulty',
     /** Titles ≤ 18 chars: a rung's title. Descriptions wrap. */
     levels: {
       1: {
@@ -340,8 +335,6 @@ export const en = {
     /** A 10/10 compact rung, spoken. "a la escuadra" is never translated. */
     rungEscuadra: (title: string, correct: number, total: number) =>
       `${title}, best ${correct} of ${total}, ${A_LA_ESCUADRA}`,
-    /** ≤ 12 chars: a rung's best-score pill, in capitals. */
-    best: (correct: number, total: number) => `BEST ${correct}/${total}`,
   },
   picker: {
     /** ≤ 6 chars: the league pill that clears the filter. */

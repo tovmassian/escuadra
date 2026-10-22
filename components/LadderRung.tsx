@@ -25,11 +25,12 @@ interface LadderRungProps {
 // A compact rung on Difficulty (#178, spec §1.3): the level number, the title,
 // and on the right the best score or, while locked, a padlock and what opens
 // it. A rung is only ever cleared or locked, since the first unlocked level is
-// the focused card; a row with no best score draws as locked.
+// the focused card; anything that is not cleared draws as locked.
 export function LadderRung({ row, title, onPress }: LadderRungProps) {
   const colors = useThemeColors();
   const t = useT();
-  const best = row.status === 'locked' ? undefined : row.best;
+  const cleared = row.status === 'cleared' && row.best !== undefined;
+  const best = cleared ? row.best : undefined;
   const escuadra = best !== undefined && rungTag(best) === 'escuadra';
   const styles = StyleSheet.create({
     row: {
