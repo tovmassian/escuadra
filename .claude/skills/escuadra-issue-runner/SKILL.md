@@ -54,7 +54,8 @@ git status --short --branch
    owner), even when it names a default. Ask, offering the default as the recommended answer.
 4. It touches a legal guardrail (`CLAUDE.md` 2: crests, asset licences, store badges), or
    About text that needs a privacy, licensing or legal judgement (7).
-5. It is a product-direction change no issue covers, or it contradicts its spec or `CLAUDE.md`.
+5. It is a product-direction change no issue covers, or it contradicts its spec, `CLAUDE.md`
+   or a rule in `.claude/rules/`.
 6. The work needs something published or built: an OTA update, a store build, a `gh-pages`
    push, a store console (App Store Connect, the Play Console), or cutting or pushing a
    `release/*` branch.
@@ -68,8 +69,8 @@ Every question ends with the gate it comes from, as `[gate 3]`. A doubt that fit
 not a question: the first step settles it, or the PR body notes it. That covers how to
 implement the fix, how to reproduce a bug, a step in the issue's Work list that looks wrong,
 whether to continue an open PR (continue it), a check on a real device (the PR body carries a
-device checklist), plain About wording such as a count, and what `CLAUDE.md`, the issue or
-its docs already settle.
+device checklist), plain About wording such as a count, and what `CLAUDE.md`, its rules, the
+issue or its docs already settle.
 
 Each question is one choice with its options, the recommended one first. When asking, still
 fill in every field the answers cannot change; only the ones they can change are `n/a`.
