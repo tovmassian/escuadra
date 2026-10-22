@@ -1,5 +1,7 @@
 // Pure team-picker row model. Kept out of the screen so it is unit-testable.
 import type { Messages } from '@/i18n/en';
+import { CONFEDERATIONS, confederationOf, type Confederation } from '@/lib/confederations';
+import { flagFor } from '@/lib/flags';
 import { PASS_RATIO, ROUND_LENGTH, scoreKey } from '@/lib/scoring';
 import type { League, SquadManifestEntry } from '@/types/squad';
 
@@ -73,6 +75,45 @@ export function leagueFilters(squads: SquadManifestEntry[]): LeagueFilter[] {
   return ['ALL', ...LEAGUE_ORDER.filter((l) => present.has(l))];
 }
 
+/** The nations tab's confederation filter (#177). `'ALL'` is the default. */
+export type ConfederationFilter = 'ALL' | Confederation;
+
+/** A nation's confederation, through the flag code of its English name; null
+ *  for a club, or a nation `lib/confederations.ts` does not map. */
+export function squadConfederation(squad: SquadManifestEntry): Confederation | null {
+  if (squad.kind !== 'nation') return null;
+  const code = flagFor(squad.name);
+  return code === null ? null : confederationOf(code);
+}
+
+/** `'ALL'` plus every confederation that has a nation in the manifest, in
+ *  `CONFEDERATIONS` order: like `leagueFilters`, no pill filters to nothing. */
+export function confederationFilters(squads: SquadManifestEntry[]): ConfederationFilter[] {
+  const present = new Set<Confederation>();
+  for (const squad of squads) {
+    const confederation = squadConfederation(squad);
+    if (confederation !== null) present.add(confederation);
+  }
+  return ['ALL', ...CONFEDERATIONS.filter((c) => present.has(c))];
+}
+
+/** A confederation pill's label: the acronym, a proper noun like a league's name. */
+export function confederationLabel(filter: ConfederationFilter, messages: Messages): string {
+  return filter === 'ALL' ? messages.picker.allConfederations : filter;
+}
+
+/** A confederation pill's spoken name: "UEFA, Europe". */
+export function confederationSpoken(filter: ConfederationFilter, messages: Messages): string {
+  return filter === 'ALL'
+    ? messages.picker.allConfederations
+    : [filter, messages.picker.regions[filter]].join(', ');
+}
+
+/** The nations list's caption, beside its first letter: "UEFA · A–Z". */
+export function nationsCaption(filter: ConfederationFilter, messages: Messages): string {
+  return messages.picker.nationsCaption(filter === 'ALL' ? messages.picker.allNations : filter);
+}
+
 /** How the picker names and orders its rows. `nameOf` is the displayed name
  *  (`squadDisplayName`), injected so this module stays language-free. */
 export interface SquadNames {
@@ -127,17 +168,20 @@ export interface NationSection {
 }
 
 /** The nations tab grouped A–Z (#176), in the app's language: the visible
- *  nations in `visibleSquads`' order, under the first letter of their displayed
- *  name. A letter the locale's order would split (a folded "Ñ" after "N") still
- *  opens once: later names join its section. */
+ *  nations in `visibleSquads`' order, narrowed to one confederation unless it
+ *  is `'ALL'` (#177), under the first letter of their displayed name. A letter
+ *  the locale's order would split (a folded "Ñ" after "N") still opens once:
+ *  later names join its section. */
 export function nationSections(
   squads: SquadManifestEntry[],
   names: SquadNames,
   query = '',
+  confederation: ConfederationFilter = 'ALL',
 ): NationSection[] {
   const sections: NationSection[] = [];
   const byLetter = new Map<string, NationSection>();
   for (const squad of visibleSquads(squads, 'nation', 'ALL', names, query)) {
+    if (confederation !== 'ALL' && squadConfederation(squad) !== confederation) continue;
     const letter = initialOf(names.nameOf(squad));
     let section = byLetter.get(letter);
     if (section === undefined) {
@@ -168,7 +212,7 @@ export function letterAt(offsets: readonly LetterOffset[], y: number): string | 
 }
 
 /** Each tab's count: the squads of that kind matching the search. The league
- *  filter does not narrow it. */
+ *  and confederation filters do not narrow it. */
 export function kindCounts(
   squads: SquadManifestEntry[],
   names: SquadNames,
