@@ -3,6 +3,7 @@ paths:
   - "lib/telemetry*.ts"
   - "lib/__tests__/telemetry*.ts"
   - "app/about.tsx"
+  - "app/settings.tsx"
   - "lib/settingsView.ts"
   - "scripts/privacy-pages.ts"
   - "i18n/en.ts"
@@ -43,7 +44,7 @@ when opted out, and with no App ID (`app.json` →
 `extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only app module that
 imports the SDK; screens call its `track()`. The anonymous `clientUser` is
 a random `installId` persisted in `stores/progress.ts`, next to the
-About-screen opt-out. Non-`production` channels send TelemetryDeck test
+Settings-screen opt-out. Non-`production` channels send TelemetryDeck test
 signals. **A new event or property is a disclosure review** (guardrail 4):
 the privacy policy, About text, App Privacy and Data safety answers change
 with it, in a store build. So is an upgrade of `@telemetrydeck/sdk` (or of

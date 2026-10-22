@@ -12,4 +12,4 @@ paths:
   only when neither does, and say why in the PR.
 - Zustand's `persist` defaults to `localStorage`, which does not exist here. Use
   `createJSONStorage(() => AsyncStorage)`.
-- `stores/progress.ts` also holds the theme preference (it is not a third store) and telemetry's random `installId`, next to the About-screen opt-out.
+- `stores/progress.ts` also holds the theme preference (it is not a third store) and telemetry's random `installId`, next to the Settings opt-out.
