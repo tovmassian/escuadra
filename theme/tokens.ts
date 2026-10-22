@@ -142,8 +142,7 @@ export interface Palette {
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
 // both grounds, which is why the design source reuses it unchanged; the
-// success wash is translucent and composites over whatever surface is behind
-// it; the brand ramp is the mark's own identity — a design token, not
+// brand ramp is the mark's own identity — a design token, not
 // team-identity content, unlike a club's real colours — and the plate's
 // gradient ends run deeper than the mark's own stops because the plate sits
 // behind it.
@@ -1129,6 +1128,8 @@ export const sizes = {
   rail: { width: 44, letter: 14 },
   // Difficulty's Play and Study pills (#178).
   ladderPill: 56,
+  // A compact rung's level-number column, so every title starts on one line.
+  rungNumberColumn: 34,
 } as const;
 
 // The share picture's captured size in pixels: a 9:16 story (spec §4.2).

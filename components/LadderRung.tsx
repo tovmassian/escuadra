@@ -9,6 +9,7 @@ import {
   iconSize,
   opacity,
   radii,
+  sizes,
   spacing,
   typography,
 } from '@/theme/tokens';
@@ -49,7 +50,7 @@ export function LadderRung({ row, title, onPress }: LadderRungProps) {
     number: {
       ...typography.rungNumber,
       color: best ? colors.textPrimary : colors.textMuted,
-      width: spacing.xxl + 2,
+      width: sizes.rungNumberColumn,
       textAlign: 'center',
     },
     title: {
@@ -61,8 +62,9 @@ export function LadderRung({ row, title, onPress }: LadderRungProps) {
     best: { ...typography.rungScore, color: escuadra ? colors.successText : colors.textPrimary },
     tail: { ...typography.rungScoreTail, color: escuadra ? colors.successText : colors.textMuted },
     tag: { ...typography.soonChip, color: colors.successText },
-    lock: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs - 2 },
-    hint: { ...typography.soonChip, color: colors.textMuted },
+    lock: { flexShrink: 1, flexDirection: 'row', alignItems: 'center', gap: spacing.xs - 2 },
+    // Shrinks, so a long translated hint wraps instead of crushing the title.
+    hint: { ...typography.soonChip, color: colors.textMuted, flexShrink: 1 },
   });
 
   return (

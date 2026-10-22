@@ -311,7 +311,7 @@ export const en = {
         descriptionNation: 'Name from 6 options, then position, then club.',
       },
     },
-    /** ≤ 20 chars: the Study button or link. */
+    /** ≤ 20 chars: the Study pill. */
     studySquad: 'Study This Squad',
     /** The staleness footnote; `date` from `formatLastUpdated`. */
     updated: (date: string) => `Updated ${date} · Wikipedia`,

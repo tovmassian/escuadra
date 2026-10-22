@@ -429,8 +429,9 @@ async function seedBestScores(capture, scores) {
 /**
  * Every screen, in one theme. The order matters in one place: the rounds run
  * last, because finishing one writes a best score to the persisted progress
- * store, which would otherwise surface as a `BEST n/10` sub-line on the team
- * picker and difficulty captures.
+ * store, which would otherwise show on the team picker (its LEVEL n score) and
+ * on Difficulty. The 04b and 04c difficulty captures seed their own scores on
+ * squads no round touches.
  */
 async function captureTheme(browser, colorScheme, suffix) {
   const capture = await openCapture(browser, { colorScheme, suffix });

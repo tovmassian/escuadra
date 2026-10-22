@@ -90,7 +90,16 @@ export function LadderHero({ squad, league, onBack }: LadderHeroProps) {
           pointerEvents="none"
         />
         <View style={styles.barRow}>
-          <RoundBackButton glass label={t.common.back} onPress={onBack} testID="difficulty-back" />
+          {/* Glass in dark theme only. In light theme the veil is the light
+              ground at its floor, so over a pale band (Real Madrid's white)
+              the glass's white chevron falls to 2.85:1, under 3:1; the ground
+              button (surface, border, textPrimary chevron) is solid. */}
+          <RoundBackButton
+            glass={theme === 'dark'}
+            label={t.common.back}
+            onPress={onBack}
+            testID="difficulty-back"
+          />
           {/* The star's slot (#179). */}
           <View style={styles.slot} />
         </View>

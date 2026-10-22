@@ -28,6 +28,14 @@ function veiled(hex: string, ink: string, alpha: number): string {
     .join('')}`;
 }
 
+/** Composites an `rgba(r,g,b,a)` string over a `#rrggbb` ground. */
+function overRgba(ground: string, rgba: string): string {
+  const m = /^rgba\((\d+),(\d+),(\d+),([\d.]+)\)$/.exec(rgba);
+  if (!m) throw new Error(`not an rgba string: ${rgba}`);
+  const [r, g, b, a] = [m[1], m[2], m[3], m[4]].map(Number) as [number, number, number, number];
+  return veiled(ground, `#${[r, g, b].map((v) => v.toString(16).padStart(2, '0')).join('')}`, a);
+}
+
 describe('bannerBands', () => {
   it("keeps a marker's bands and weights, whatever its orientation", () => {
     expect(bannerBands(squad('nation/esp.json').marker)).toEqual([
@@ -124,9 +132,19 @@ describe('heroTextAlpha', () => {
     it(`raises the veil no further than it must, ${theme}`, () => {
       const band = theme === 'dark' ? '#ffffff' : '#000000';
       const alpha = heroTextAlpha([{ color: band, weight: 1 }], theme);
-      if (alpha > ladderHero.veilFloor[theme]) expect(holds(band, alpha - 0.01)).toBe(false);
+      expect(alpha).toBeGreaterThan(ladderHero.veilFloor[theme]);
+      expect(holds(band, alpha - 0.01)).toBe(false);
     });
   }
+
+  // The hero's back button is glass in dark theme only (LadderHero): in light
+  // theme the glass chevron over a pale band falls under 3:1 (2.85:1 on Real
+  // Madrid's white), so light uses the ground button.
+  it('keeps the dark glass back button at 3:1 over a white band, at the veil floor', () => {
+    const { background, glass, onPhoto } = palettes.dark;
+    const veil = veiled('#ffffff', background, ladderHero.veilFloor.dark);
+    expect(contrastRatio(onPhoto, overRgba(veil, glass))).toBeGreaterThanOrEqual(3);
+  });
 });
 
 describe('withAlpha', () => {

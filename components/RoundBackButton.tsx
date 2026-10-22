@@ -5,7 +5,7 @@ import { useThemeColors } from '@/theme/useTheme';
 
 // The 2.0 back button: a 44 pt circle with a hairline ring. On the ground
 // (Settings, the team picker) it is `surface` with a `border` ring and the
-// chevron in `textPrimary`; over the Difficulty hero, glass, as over a photo.
+// chevron in `textPrimary`; over the Difficulty hero in dark theme, glass, as over a photo.
 export function RoundBackButton({
   onPress,
   label,
@@ -17,7 +17,8 @@ export function RoundBackButton({
   label: string;
   testID?: string;
   /** Over a team's bands: `glass` fill, `glassLine` ring, `onPhoto` chevron,
-   *  the same in both themes. */
+   *  the glass roles are shared by both themes, but
+   *  the hero uses this in dark theme only (LadderHero). */
   glass?: boolean;
 }) {
   const colors = useThemeColors();

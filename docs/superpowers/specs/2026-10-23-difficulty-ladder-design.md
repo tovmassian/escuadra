@@ -14,9 +14,10 @@ One `ScrollView`. The hero scrolls with the page.
 1. **Team hero.** The squad's marker as vertical bands (`bannerBands`, the in-round banner
    rule), full bleed from the top of the window, under the status bar, and under a veil (below).
    In it:
-   - **The top bar:** a 44 pt glass back button (`glass`, `glassLine`, chevron in `onPhoto`, the
-     same in both themes, as over a photo), and on the right an empty 44 pt slot for the star
-     (#179).
+   - **The top bar:** a 44 pt back button: glass in dark theme (`glass`, `glassLine`, chevron in
+     `onPhoto`), the ground round button in light (`surface`, `border`, chevron in
+     `textPrimary`), because glass over a pale band under the light veil falls under 3:1;
+     and on the right an empty 44 pt slot for the star (#179).
    - **The identity row:** the nation's flag image or the club's marker, at the picker's 40 × 27
      with its hairline ring, then the name in Archivo SemiExpanded ExtraBold capitals, 36 pt
      (`textPrimary`, header role). A long name wraps, and the hero grows with it.
