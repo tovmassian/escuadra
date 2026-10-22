@@ -72,7 +72,9 @@ export default function Difficulty() {
     >
       <LadderHero squad={squad} league={squadLeague(squad.id)} onBack={() => router.back()} />
       <View style={styles.content}>
-        <Text style={styles.heading}>{t.ladder.heading}</Text>
+        <Text style={styles.heading} accessibilityRole="header">
+          {t.ladder.heading}
+        </Text>
         {rows.map((row) => {
           const title = t.ladder.levels[row.level].title;
           return row.level === focused ? (

@@ -117,21 +117,6 @@ describe('text contrast', () => {
     });
   });
 
-  // A success label set on the translucent `successBg` has a deeper ground
-  // under it than `surface` or `surfaceRaised` alone.
-  it('successText reaches 4.5:1 on successBg, on surface and surfaceRaised, in both themes', () => {
-    (['dark', 'light'] as const).forEach((name) => {
-      const p = palettes[name];
-      for (const ground of ['surface', 'surfaceRaised'] as const) {
-        const under = blend(p.successBg, p[ground]);
-        expect(
-          contrastRatio(p.successText, under),
-          `${name}.successText on successBg over ${ground}`,
-        ).toBeGreaterThanOrEqual(4.5);
-      }
-    });
-  });
-
   it('error reaches 4.5:1 on background, in both themes', () => {
     (['dark', 'light'] as const).forEach((name) => {
       const p = palettes[name];

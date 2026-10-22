@@ -5,8 +5,8 @@ import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
 // Magnifying-glass geometry, as fractions of the square box
 // `iconSize.searchGlyph`, so the glyph scales with the box. Built from plain
-// Views rather than a 🔍/Unicode glyph, matching LockGlyph and VerdictGlyph —
-// icons here never depend on a font carrying the symbol.
+// Views rather than a 🔍/Unicode glyph, matching LockGlyph — icons here
+// never depend on a font carrying the symbol.
 const LENS_RATIO = 0.7; // the lens ring's outer diameter
 const HANDLE_RATIO = 0.3; // the handle's length
 

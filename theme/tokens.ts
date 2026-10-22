@@ -24,11 +24,9 @@ export interface Palette {
    *  fixed hex. */
   mark: string;
   success: string;
-  /** Small success-coloured text on `background`/`surface`, and on
-   *  `successBg` over `surface`/`surfaceRaised`; `success` itself stays for
-   *  large text and graphics. */
+  /** Small success-coloured text on `background`/`surface`; `success` itself
+   *  stays for large text and graphics. */
   successText: string;
-  successBg: string;
   error: string;
   /** Dimmed error text for an "incorrect-picked" option — visually quieter
    *  than `error` so the correct answer stays the loudest thing on screen. */
@@ -151,7 +149,6 @@ export interface Palette {
 // behind it.
 const sharedRoles = {
   accent: '#3e45a3',
-  successBg: 'rgba(97,189,103,0.14)',
   brandBright: '#5b63d6',
   brandDeep: '#2f3585',
   brandSoft: '#8f97ea',
@@ -437,7 +434,8 @@ export const typography = {
     letterSpacing: 1.2,
     textTransform: 'uppercase' as const,
   },
-  // Shared by difficulty-row status pills and the Study screen's header eyebrow.
+  // Small eyebrow labels: Study's header, Licences, photo credits, answer-tile
+  // and slot-chip tags, and Results' labels.
   captionEyebrow: {
     fontFamily: 'Inter-SemiBold',
     fontWeight: '600' as const,
@@ -771,7 +769,6 @@ export const borderWidths = {
 // 0.4/0.65/etc in a component.
 export const opacity = {
   disabled: 0.55, // ShareSheet's busy button
-  dimmed: 0.65, // VerdictGlyph's incorrect variant (no screen renders one today)
   faded: 0.4, // the photo-loading shimmer under Reduce Motion (SpotlightStage)
   settled: 0.7, // press feedback: Button, LadderRung, GlassCloseButton, QuestionFooter
   tileAfterCorrect: 0.5, // other tiles once the pick was right (spec §6)
@@ -1138,8 +1135,8 @@ export const sizes = {
 export const shareCapture = { width: 1080, height: 1920 } as const;
 
 export const iconSize = {
-  markLarge: 18, // VerdictGlyph default size; AnswerTile's correct mark
-  markSmall: 13, // VerdictGlyph's smaller size; AnswerTile's incorrect-picked mark
+  markLarge: 18, // AnswerTile's correct mark
+  markSmall: 13, // AnswerTile's incorrect-picked mark
   chevronLarge: 18, // Home's continue-card chevron
   searchGlyph: 20, // SearchField's magnifying-glass icon (spec #176 §3)
   clearGlyph: 10, // SearchField's clear (×) button, drawn from two crossed bars

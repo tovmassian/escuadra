@@ -1,10 +1,9 @@
 import { View } from 'react-native';
 
-// Geometric padlock for a locked ladder rung, replacing the OS emoji
-// 🔒. Built from plain Views, coloured
-// from tokens, so it has no dependency on the OS emoji font (the same reason
-// nation flags are committed PNGs rather than Unicode regional-indicator
-// emoji — see types/squad.ts).
+// Geometric padlock for a locked ladder rung, replacing the OS emoji 🔒.
+// Built from plain Views, coloured from tokens, so it has no dependency on
+// the OS emoji font (the same reason nation flags are committed PNGs rather
+// than Unicode regional-indicator emoji — see types/squad.ts).
 //
 // Drawn in a 16x16 box and scaled the same way EscuadraMark scales from
 // MARK_VIEWBOX: every dimension below is derived from the box size, never a
