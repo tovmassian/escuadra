@@ -11,7 +11,8 @@ export interface Band {
 }
 
 /**
- * A marker as vertical bands, under the in-round banner rule (CLAUDE.md):
+ * A marker as vertical bands, under the in-round banner rule
+ * (.claude/rules/team-identity.md):
  * - `orientation` is ignored.
  * - A sole band with an overlay (Japan's disc, Brazil's diamond) becomes
  *   edge/middle/edge in the overlay's colour, because the shape does not

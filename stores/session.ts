@@ -1,10 +1,10 @@
 // Ephemeral round state — deliberately NOT wrapped in zustand's `persist`.
-// A half-finished round must not survive an app restart (CLAUDE.md). Plain
-// in-memory zustand state already survives ordinary navigation within one JS
-// runtime (Question -> Results), which is all "resume mid-round" ever needs;
-// it's gone the moment the app is actually killed and reopened. Do not
-// "helpfully" add persistence here later — that's the bug this comment exists
-// to prevent.
+// A half-finished round must not survive an app restart
+// (.claude/rules/stores.md). Plain in-memory zustand state already survives
+// ordinary navigation within one JS runtime (Question -> Results), which is
+// all "resume mid-round" ever needs; it's gone the moment the app is actually
+// killed and reopened. Do not "helpfully" add persistence here later — that's
+// the bug this comment exists to prevent.
 import { create } from 'zustand';
 import { buildRound, isQuestionCorrect, type Level, type Question } from '@/lib/questionEngine';
 import type { RosterEntry, Squad } from '@/types/squad';

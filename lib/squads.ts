@@ -1,5 +1,6 @@
 // Static-data accessor + join layer. Squad JSON is imported directly (never
-// held in a store, per CLAUDE.md) and joined against players.json here.
+// held in a store, per .claude/rules/squad-data.md) and joined against
+// players.json here.
 //
 // SQUAD_FILES comes from lib/squads.generated.ts, produced by
 // `npm run gen:squads` from every file under data/squads/. Never hand-edit

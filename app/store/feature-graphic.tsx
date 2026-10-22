@@ -7,7 +7,7 @@ import { palettes, sizes, spacing, typography } from '@/theme/tokens';
 
 // Google Play's feature graphic (1024×500) — captured via `npm run
 // gen:play-assets`, not part of in-app navigation. Nothing like it exists
-// for iOS; see CLAUDE.md's Play store-listing guardrails.
+// for iOS; see .claude/rules/design-handoff.md.
 //
 // Deliberately not theme-reactive: a store listing image is one fixed asset,
 // not a live screen, so this always renders the dark-ground mark/text
