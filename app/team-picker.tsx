@@ -350,7 +350,12 @@ export default function TeamPicker() {
                 y is then the heading's scroll offset, which the rail jumps to. */}
             <View
               key={`${layoutKey}:${section.letter}`}
-              style={[styles.heading, i === 0 ? styles.listStart : styles.headingAfter]}
+              style={[
+                styles.heading,
+                i === 0 ? styles.listStart : styles.headingAfter,
+                // The rail starts beside the first heading, so its caption stays clear of it.
+                i === 0 && showRail && styles.gutter,
+              ]}
               onLayout={(e) => {
                 const { y } = e.nativeEvent.layout;
                 offsetsNow().set(section.letter, y);

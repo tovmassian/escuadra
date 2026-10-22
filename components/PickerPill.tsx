@@ -12,10 +12,9 @@ interface PickerPillProps {
 }
 
 // A filter pill: a league on Clubs, a confederation on Nations (#176, #177).
-// The pill is drawn at 40 pt
-// inside a transparent `minTapTarget`-tall Pressable. hitSlop would not do:
-// it never reaches past the parent's bounds, and the pills' scroll row is
-// only as tall as its children.
+// The pill is drawn at 40 pt inside a transparent `minTapTarget`-tall
+// Pressable. hitSlop would not do: it never reaches past the parent's bounds,
+// and the pills' scroll row is only as tall as its children.
 export function PickerPill({ label, active, onPress, spokenLabel, testID }: PickerPillProps) {
   const colors = useThemeColors();
   const styles = StyleSheet.create({
