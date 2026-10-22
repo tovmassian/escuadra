@@ -2,7 +2,7 @@
 // §2.6): the team-colour fallback's bands and veil, and whether a photo fills
 // the stage or is framed. No React, so it is unit-tested in node.
 import { contrastRatio, relativeLuminance } from './contrast';
-import { palettes, stage, type ThemeName } from '@/theme/tokens';
+import { ladderHero, palettes, stage, type ThemeName } from '@/theme/tokens';
 import type { PhotoCredit, TeamMarker } from '@/types/squad';
 
 export interface Band {
@@ -71,6 +71,24 @@ export function stageVeil(bands: readonly Band[], theme: ThemeName): number {
   ) {
     hundredths++;
   }
+  return hundredths / 100;
+}
+
+/**
+ * How strongly the Difficulty hero's wash of `background` covers the team's
+ * bands behind the name and the mono line: the least, in hundredths and never
+ * below `ladderHero.veilFloor`, at which `textSecondary` holds 4.5:1 and
+ * `textPrimary` 3:1 over every band.
+ */
+export function heroTextAlpha(bands: readonly Band[], theme: ThemeName): number {
+  const { background, textPrimary, textSecondary } = palettes[theme];
+  const holds = (alpha: number) =>
+    bands.every((band) => {
+      const ground = veiled(band.color, background, alpha);
+      return contrastRatio(textSecondary, ground) >= 4.5 && contrastRatio(textPrimary, ground) >= 3;
+    });
+  let hundredths = Math.round(ladderHero.veilFloor[theme] * 100);
+  while (hundredths < 100 && !holds(hundredths / 100)) hundredths++;
   return hundredths / 100;
 }
 

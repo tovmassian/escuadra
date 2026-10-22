@@ -5,12 +5,13 @@ import { contrastRatio } from '../contrast';
 import {
   bannerBands,
   FILL_MIN_WIDTH,
+  heroTextAlpha,
   photoLayout,
   servedWidth,
   stageVeil,
   withAlpha,
 } from '../stageView';
-import { palettes, stage } from '@/theme/tokens';
+import { ladderHero, palettes, stage } from '@/theme/tokens';
 import type { PhotoCredit, Squad } from '@/types/squad';
 
 const squad = (file: string) =>
@@ -92,6 +93,40 @@ describe('the hero backing', () => {
       expect(stage.heroBacking.top[theme], theme).toBeLessThan(1);
     }
   });
+});
+
+describe('heroTextAlpha', () => {
+  for (const theme of ['dark', 'light'] as const) {
+    const { background, textPrimary, textSecondary } = palettes[theme];
+    const holds = (band: string, alpha: number) => {
+      const ground = veiled(band, background, alpha);
+      return contrastRatio(textSecondary, ground) >= 4.5 && contrastRatio(textPrimary, ground) >= 3;
+    };
+
+    it(`never goes below the ${theme} floor`, () => {
+      expect(heroTextAlpha([{ color: background, weight: 1 }], theme)).toBe(
+        ladderHero.veilFloor[theme],
+      );
+    });
+
+    for (const band of ['#ffffff', '#000000', '#d90012', '#0033a0', '#f2a800']) {
+      it(`keeps the hero's text readable over ${band}, ${theme}`, () => {
+        expect(holds(band, heroTextAlpha([{ color: band, weight: 1 }], theme))).toBe(true);
+      });
+    }
+
+    it(`answers for the worst band of several, ${theme}`, () => {
+      const bands = bannerBands(squad('club/la-liga/rma.json').marker);
+      const alpha = heroTextAlpha([...bands, { color: '#000000', weight: 1 }], theme);
+      expect(holds('#000000', alpha) && holds('#ffffff', alpha)).toBe(true);
+    });
+
+    it(`raises the veil no further than it must, ${theme}`, () => {
+      const band = theme === 'dark' ? '#ffffff' : '#000000';
+      const alpha = heroTextAlpha([{ color: band, weight: 1 }], theme);
+      if (alpha > ladderHero.veilFloor[theme]) expect(holds(band, alpha - 0.01)).toBe(false);
+    });
+  }
 });
 
 describe('withAlpha', () => {

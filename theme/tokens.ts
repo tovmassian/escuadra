@@ -386,6 +386,14 @@ export const stage = {
   heroBacking: { rise: 96, top: { dark: 0.55, light: 0.6 } },
 } as const;
 
+// The Difficulty hero (#178): the squad's bands under a wash of the palette's
+// `background`. The floor is the wash behind the top bar; `heroTextAlpha` in
+// lib/stageView.ts raises it, behind the name and the mono line, until
+// `textSecondary` holds 4.5:1 and `textPrimary` 3:1 on every band.
+export const ladderHero = {
+  veilFloor: { dark: 0.4, light: 0.5 },
+} as const;
+
 export const typography = {
   screenTitle: { fontFamily: 'Inter-Bold', fontSize: 28 },
   sectionHead: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 20 },
