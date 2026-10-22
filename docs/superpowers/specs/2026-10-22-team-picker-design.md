@@ -97,7 +97,7 @@ too: a score is green only at 10/10.
 
 Changed in `picker`, each with a `≤ N chars` budget:
 
-- `title` becomes "Pick your squad" (two lines of display capitals).
+- `title` becomes "Pick your squad" (display capitals, which may wrap to two lines).
 - `squadCount(n)` replaces `count`: "253 squads", one and other plural.
 - `nationalTeams` becomes `nations`, "Nations".
 - `allClubs`, "All clubs", is the Clubs caption with no league picked.

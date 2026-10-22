@@ -23,17 +23,16 @@ import { sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { SquadManifestEntry } from '@/types/squad';
 import { router } from 'expo-router';
-import { Fragment, useEffect, useMemo, useRef, useState } from 'react';
-import {
-  type NativeScrollEvent,
-  type NativeSyntheticEvent,
-  ScrollView,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native';
-import Animated, { useAnimatedStyle, useSharedValue } from 'react-native-reanimated';
+import { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import Animated, {
+  useAnimatedRef,
+  useAnimatedScrollHandler,
+  useAnimatedStyle,
+  useSharedValue,
+} from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { scheduleOnRN } from 'react-native-worklets';
 
 // The team picker (#176; spec docs/superpowers/specs/2026-10-22-team-picker-design.md):
 // one column that scrolls as a whole. Clubs are a plain list under a caption;
@@ -49,7 +48,7 @@ export default function TeamPicker() {
   const [league, setLeague] = useState<LeagueFilter>('ALL');
   const [query, setQuery] = useState('');
   const [current, setCurrent] = useState<string | null>(null);
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useAnimatedRef<Animated.ScrollView>();
 
   const squads = listSquads();
   const names = useMemo<SquadNames>(
@@ -95,28 +94,43 @@ export default function TeamPicker() {
   // letter heading instead and rides up with the list until it reaches the
   // centre, where it stays. It holds still while a finger is on it, so the
   // letters never slide out from under the touch, and catches up on release.
+  //
+  // The rail's offset is worked out on the UI thread, from the scroll there,
+  // so it never trails the list by a frame. Positions are set, never timed.
   const [listTop, setListTop] = useState<number | null>(null);
   const [rootHeight, setRootHeight] = useState(0);
-  const shift = useSharedValue(0);
-  const scrollY = useRef(0);
-  const touching = useRef(false);
-  const railHeight = letters.length * sizes.rail.letter;
-  const railTop = insets.top + (rootHeight - insets.top - insets.bottom - railHeight) / 2;
-  const push = listTop === null ? 0 : Math.max(0, listTop - railTop);
-  // Written only on a change: past the ride-up, every scroll event would
-  // otherwise write the same 0 across to the UI thread.
+  // How far below the centre the rail starts: beside the first heading.
+  const push = useSharedValue(0);
+  const scrollY = useSharedValue(0);
+  const touching = useSharedValue(false);
+  // Where the rail was when the finger landed.
+  const frozen = useSharedValue(0);
+  // `push` is written as soon as a layout reports a new value, before the
+  // render that first shows the rail, and again as soon as a new letter count
+  // changes the rail's height, before that render is painted. The rail is
+  // never drawn at the centre while an effect catches up.
+  const measured = useRef<{ listTop: number | null; rootHeight: number }>({
+    listTop: null,
+    rootHeight: 0,
+  });
   const placeRail = () => {
-    const next = Math.max(0, push - scrollY.current);
-    if (!touching.current && next !== shift.value) shift.value = next;
+    const { listTop: top, rootHeight: height } = measured.current;
+    push.set(railPush(top, height, letters.length, insets.top, insets.bottom));
   };
-  useEffect(() => {
-    const next = Math.max(0, push - scrollY.current);
-    if (!touching.current && next !== shift.value) shift.value = next;
-  }, [push, shift]);
-  const railShift = useAnimatedStyle(() => ({ transform: [{ translateY: shift.value }] }));
+  useLayoutEffect(() => {
+    const { listTop: top, rootHeight: height } = measured.current;
+    push.set(railPush(top, height, letters.length, insets.top, insets.bottom));
+  }, [push, letters.length, insets.top, insets.bottom]);
+  const railShift = useAnimatedStyle(() => ({
+    transform: [
+      { translateY: touching.value ? frozen.value : Math.max(0, push.value - scrollY.value) },
+    ],
+  }));
+  // A touch lands and jumps in the same handler, so the rail's place is read
+  // here, before the jump's scroll can reach the UI thread and move it.
   const onRailTouch = (active: boolean) => {
-    touching.current = active;
-    placeRail();
+    if (active) frozen.set(Math.max(0, push.get() - scrollY.get()));
+    touching.set(active);
   };
 
   const onJump = (letter: string) => {
@@ -126,14 +140,11 @@ export default function TeamPicker() {
     setCurrent(letter);
   };
 
-  const onScroll = (e: NativeSyntheticEvent<NativeScrollEvent>) => {
-    const { contentOffset, contentSize, layoutMeasurement } = e.nativeEvent;
-    const y = contentOffset.y;
-    scrollY.current = y;
-    placeRail();
-    if (filter !== 'nation') return;
+  // The current letter is worked out on the JS side: the scroll handler hands
+  // each offset across.
+  const followScroll = (y: number, content: number, view: number) => {
     if (jumped.current !== null) {
-      const end = Math.max(0, contentSize.height - layoutMeasurement.height);
+      const end = Math.max(0, content - view);
       if (Math.abs(y - Math.min(jumped.current, end)) < 1) return;
       jumped.current = null;
     }
@@ -144,6 +155,20 @@ export default function TeamPicker() {
     // The top of the scroll is below the status bar, which the list scrolls under.
     setCurrent(letterAt(sorted, y + insets.top + spacing.xs));
   };
+  const followsLetters = filter === 'nation';
+  const onScroll = useAnimatedScrollHandler({
+    onScroll: (e) => {
+      scrollY.set(e.contentOffset.y);
+      if (followsLetters) {
+        scheduleOnRN(
+          followScroll,
+          e.contentOffset.y,
+          e.contentSize.height,
+          e.layoutMeasurement.height,
+        );
+      }
+    },
+  });
 
   // Switching tabs drops the league back to ALL, so tapping "Clubs" always
   // shows every club rather than silently re-applying a league picked before
@@ -219,8 +244,16 @@ export default function TeamPicker() {
   );
 
   return (
-    <View style={styles.root} onLayout={(e) => setRootHeight(e.nativeEvent.layout.height)}>
-      <ScrollView
+    <View
+      style={styles.root}
+      onLayout={(e) => {
+        const { height } = e.nativeEvent.layout;
+        measured.current.rootHeight = height;
+        placeRail();
+        setRootHeight(height);
+      }}
+    >
+      <Animated.ScrollView
         ref={scrollRef}
         testID="picker-list"
         keyboardShouldPersistTaps="handled"
@@ -290,7 +323,11 @@ export default function TeamPicker() {
               onLayout={(e) => {
                 const { y } = e.nativeEvent.layout;
                 offsetsNow().set(section.letter, y);
-                if (i === 0) setListTop(y);
+                if (i === 0) {
+                  measured.current.listTop = y;
+                  placeRail();
+                  setListTop(y);
+                }
               }}
             >
               <Text
@@ -317,7 +354,7 @@ export default function TeamPicker() {
             )}
           </View>
         )}
-      </ScrollView>
+      </Animated.ScrollView>
 
       {showRail && listTop !== null && rootHeight > 0 && (
         <Animated.View style={[styles.railFrame, railShift]}>
@@ -331,4 +368,20 @@ export default function TeamPicker() {
       )}
     </View>
   );
+}
+
+// How far below the screen's centre the rail starts, so that it sits beside
+// the first letter heading (`listTop`, in the scrolled content) rather than
+// over the search field and the tabs; 0 once that heading is below the centre.
+function railPush(
+  listTop: number | null,
+  rootHeight: number,
+  letterCount: number,
+  insetTop: number,
+  insetBottom: number,
+): number {
+  if (listTop === null) return 0;
+  const railHeight = letterCount * sizes.rail.letter;
+  const railTop = insetTop + (rootHeight - insetTop - insetBottom - railHeight) / 2;
+  return Math.max(0, listTop - railTop);
 }

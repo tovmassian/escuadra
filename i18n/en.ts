@@ -323,7 +323,7 @@ export const en = {
   picker: {
     /** ≤ 6 chars: the league pill that clears the filter. */
     allLeagues: 'All',
-    /** ≤ 22 chars: the title, in display capitals on two lines. */
+    /** ≤ 22 chars: the title, in display capitals; it may wrap to two lines. */
     title: 'Pick your squad',
     /** ≤ 14 chars: the top bar's count of every squad, in mono capitals. */
     squadCount: (count: number) => (count === 1 ? `${count} squad` : `${count} squads`),

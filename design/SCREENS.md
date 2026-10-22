@@ -137,7 +137,8 @@ The three team picker captures are a fresh install, so no row has a score: every
 ends in a chevron. `02-team-picker-clubs.png` is Clubs with All picked: the caption
 `ALL CLUBS · 96` over banded markers, A to Z by name. `03-team-picker-nations.png` is
 the Nations tab at the top: the `A` heading in the accent colour, flags at their true
-shape, and the rail beside the first heading, every letter shown and `A` accented.
+shape, and the rail beside the first heading, every letter that has a group shown and
+`A` accented.
 `03b-team-picker-nations-jump.png` is a tap on the rail's `S`, with `S` at the top and
 accented in both the heading and the rail, which has ridden up to the screen's centre.
 

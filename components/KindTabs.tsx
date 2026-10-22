@@ -1,6 +1,6 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { useT } from '@/i18n/useT';
-import { borderWidths, radii, sizes, spacing, typography } from '@/theme/tokens';
+import { borderWidths, fontScaleCap, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 export type Kind = 'club' | 'nation';
@@ -38,9 +38,11 @@ export function KindTabs({ value, counts, onChange }: KindTabsProps) {
       borderRadius: radii.pill,
     },
     tabSelected: { backgroundColor: colors.ctaBg },
-    label: { ...typography.tabLabel, color: colors.textSecondary },
+    // A label too wide for its tab gives way with an ellipsis; the count keeps
+    // its width.
+    label: { ...typography.tabLabel, color: colors.textSecondary, flexShrink: 1 },
     labelSelected: { color: colors.ctaText },
-    count: { ...typography.statMonoTiny, color: colors.textMuted },
+    count: { ...typography.statMonoTiny, color: colors.textMuted, flexShrink: 0 },
     countSelected: { color: colors.ctaMuted },
   });
   const labels: Record<Kind, string> = { club: t.picker.clubs, nation: t.picker.nations };
@@ -60,8 +62,23 @@ export function KindTabs({ value, counts, onChange }: KindTabsProps) {
             accessibilityLabel={[labels[kind], counts[kind]].join(', ')}
             style={[styles.tab, selected && styles.tabSelected]}
           >
-            <Text style={[styles.label, selected && styles.labelSelected]}>{labels[kind]}</Text>
-            <Text style={[styles.count, selected && styles.countSelected]}>{counts[kind]}</Text>
+            {/* The tab is a fixed `sizes.pickerTab` tall, so its text stays on
+                one line and grows only to the display cap: a wrapped
+                "SELECCIONES 157" would be clipped. */}
+            <Text
+              style={[styles.label, selected && styles.labelSelected]}
+              numberOfLines={1}
+              maxFontSizeMultiplier={fontScaleCap.display}
+            >
+              {labels[kind]}
+            </Text>
+            <Text
+              style={[styles.count, selected && styles.countSelected]}
+              numberOfLines={1}
+              maxFontSizeMultiplier={fontScaleCap.display}
+            >
+              {counts[kind]}
+            </Text>
           </Pressable>
         );
       })}

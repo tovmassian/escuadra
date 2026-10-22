@@ -37,7 +37,7 @@ export function TeamRow({ name, marker, flag, progress, onPress }: TeamRowProps)
     },
     name: { ...typography.teamName, color: colors.textPrimary, flex: 1, minWidth: 0 },
     score: { alignItems: 'flex-end', gap: spacing.xxs / 2 },
-    level: { ...typography.rowLevel, color: colors.textMuted, textTransform: 'uppercase' },
+    level: { ...typography.rowLevel, color: colors.textMuted },
     best: { ...typography.rowScore, color: colors.textPrimary },
     tail: { ...typography.rowScoreTail, color: colors.textMuted },
   });

@@ -42,9 +42,9 @@ assign a team's colour; it must be the team's actual real colour.
 ## The in-round banner
 
 **In-round team marker is always a vertical banner, regardless of the
-squad's real flag orientation.** The team picker (`TeamRow`, through `TeamMarker`'s `variant="picker"`) renders a
-squad's marker at its true `orientation` — Spain's flag is genuinely
-horizontal stripes there. But mid-round, on the question screen's header,
+squad's real flag orientation.** The team picker (`TeamRow`, through
+`TeamMarker`'s `variant="picker"`) renders a squad's marker at its true
+`orientation` — Spain's flag is genuinely horizontal stripes there. But mid-round, on the question screen's header,
 the marker always renders as thin, tall, vertical bands, using `bands` (and
 `weights`) as the colour sequence and ignoring `marker.orientation`
 entirely: Spain reads red/yellow/red left-to-right, not stacked. This is
