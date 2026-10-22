@@ -401,6 +401,27 @@ async function captureStudy(capture) {
   await capture.shoot('05-study-hidden');
 }
 
+/**
+ * Merge best scores into the persisted progress store, as finished rounds would, for a
+ * shot that wants a squad part way up the ladder. `scores` is keyed like the store
+ * (`${squadId}:${level}`, see `scoreKey` in lib/scoring.ts). It writes localStorage only,
+ * so the next `capture.open` reloads the page and rehydrates from it.
+ */
+async function seedBestScores(capture, scores) {
+  await capture.page.evaluate((seeded) => {
+    const key = 'escuadra-progress';
+    let stored = null;
+    try {
+      stored = JSON.parse(localStorage.getItem(key) ?? 'null');
+    } catch {
+      stored = null;
+    }
+    const next = stored ?? { state: {}, version: 0 };
+    next.state = { ...next.state, bestScores: { ...next.state.bestScores, ...seeded } };
+    localStorage.setItem(key, JSON.stringify(next));
+  }, scores);
+}
+
 // ---------------------------------------------------------------------------
 // A full pass
 // ---------------------------------------------------------------------------
@@ -476,6 +497,15 @@ async function captureTheme(browser, colorScheme, suffix) {
 
     await capture.open('/team/rma/difficulty');
     await capture.shoot('04-difficulty');
+
+    // Seeded squads no later shot uses, so the rounds and results are unaffected.
+    await seedBestScores(capture, { 'arm:1': 10, 'arm:2': 8, 'arm:3': 6 });
+    await capture.open('/team/arm/difficulty');
+    await capture.shoot('04b-difficulty-nation');
+
+    await seedBestScores(capture, { 'liv:1': 10, 'liv:2': 9, 'liv:3': 8 });
+    await capture.open('/team/liv/difficulty');
+    await capture.shoot('04c-difficulty-cleared');
 
     await captureStudy(capture);
 

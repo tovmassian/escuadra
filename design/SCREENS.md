@@ -106,33 +106,35 @@ flawless — see below). Route, file, and what it does.
 
 ## Captures
 
-| File                                       | Screen                               |
-| ------------------------------------------ | ------------------------------------ |
-| `screens/01-home.png`                      | Home                                 |
-| `screens/01a-about.png`                    | About                                |
-| `screens/01c-settings.png`                 | Settings                             |
-| `screens/01c-settings-end.png`             | Settings, scrolled to the end        |
-| `screens/01c-settings-language.png`        | Settings — language sheet            |
-| `screens/01d-licences.png`                 | Licences                             |
-| `screens/02-team-picker-clubs.png`         | Team picker, Clubs                   |
-| `screens/03-team-picker-nations.png`       | Team picker, Nations                 |
-| `screens/03b-team-picker-nations-jump.png` | Team picker, Nations, jumped to S    |
-| `screens/03c-team-picker-nations-uefa.png` | Team picker, Nations, UEFA           |
-| `screens/04-difficulty.png`                | Difficulty ladder                    |
-| `screens/05-study.png`                     | Study, cards                         |
-| `screens/05-study-list.png`                | Study, list                          |
-| `screens/05-study-hidden.png`              | Study, cards with Hide names on      |
-| `screens/06-question-l1.png`               | Question, level 1                    |
-| `screens/07-question-l2.png`               | Question, level 2                    |
-| `screens/08-question-l3.png`               | Question, level 3 — club part        |
-| `screens/08-question-l3-nationality.png`   | Question, level 3 — nationality part |
-| `screens/09-results.png`                   | Results — failed round               |
-| `screens/09-results-passed.png`            | Results — passed, 9/10               |
-| `screens/09-results-flawless.png`          | Results — a la escuadra, 10/10       |
-| `screens/09-results-share.png`             | Results — share sheet, Image         |
-| `screens/09-results-share-text.png`        | Results — share sheet, Text          |
-| `screens/09-results-share-flawless.png`    | Results — share sheet, a la escuadra |
-| `screens/09-results-credits.png`           | Results — photo credits sheet        |
+| File                                       | Screen                                        |
+| ------------------------------------------ | --------------------------------------------- |
+| `screens/01-home.png`                      | Home                                          |
+| `screens/01a-about.png`                    | About                                         |
+| `screens/01c-settings.png`                 | Settings                                      |
+| `screens/01c-settings-end.png`             | Settings, scrolled to the end                 |
+| `screens/01c-settings-language.png`        | Settings — language sheet                     |
+| `screens/01d-licences.png`                 | Licences                                      |
+| `screens/02-team-picker-clubs.png`         | Team picker, Clubs                            |
+| `screens/03-team-picker-nations.png`       | Team picker, Nations                          |
+| `screens/03b-team-picker-nations-jump.png` | Team picker, Nations, jumped to S             |
+| `screens/03c-team-picker-nations-uefa.png` | Team picker, Nations, UEFA                    |
+| `screens/04-difficulty.png`                | Difficulty ladder, a newcomer (club)          |
+| `screens/04b-difficulty-nation.png`        | Difficulty, a nation part way up (L3 focused) |
+| `screens/04c-difficulty-cleared.png`       | Difficulty, a club with every level cleared   |
+| `screens/05-study.png`                     | Study, cards                                  |
+| `screens/05-study-list.png`                | Study, list                                   |
+| `screens/05-study-hidden.png`              | Study, cards with Hide names on               |
+| `screens/06-question-l1.png`               | Question, level 1                             |
+| `screens/07-question-l2.png`               | Question, level 2                             |
+| `screens/08-question-l3.png`               | Question, level 3 — club part                 |
+| `screens/08-question-l3-nationality.png`   | Question, level 3 — nationality part          |
+| `screens/09-results.png`                   | Results — failed round                        |
+| `screens/09-results-passed.png`            | Results — passed, 9/10                        |
+| `screens/09-results-flawless.png`          | Results — a la escuadra, 10/10                |
+| `screens/09-results-share.png`             | Results — share sheet, Image                  |
+| `screens/09-results-share-text.png`        | Results — share sheet, Text                   |
+| `screens/09-results-share-flawless.png`    | Results — share sheet, a la escuadra          |
+| `screens/09-results-credits.png`           | Results — photo credits sheet                 |
 
 The four team picker captures are a fresh install, so no row has a score: every row
 ends in a chevron. `02-team-picker-clubs.png` is Clubs with All picked: the caption
