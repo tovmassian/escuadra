@@ -7,14 +7,10 @@
   "secondaryColor": "#00A2DD",
   "verified": true,
   "marker": {
-    "bands": ["#012169"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#00A2DD"
-    }
+    "bands": ["#012169", "#00A2DD", "#012169"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Montserrat_national_football_team",
   "members": [
     {

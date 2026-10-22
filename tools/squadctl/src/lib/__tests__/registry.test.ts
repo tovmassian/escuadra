@@ -91,6 +91,19 @@ describe('validateRegistry', () => {
     ).toContain('non-empty bands array');
   });
 
+  it('rejects a marker field other than bands, orientation and weights', () => {
+    // The type no longer allows a device, so it reaches the check untyped,
+    // as it would from teams.json.
+    const withDisc = { ...marker, overlay: { shape: 'disc', color: '#BC002D' } };
+    expect(
+      validateRegistry([
+        entry({
+          identity: { primaryColor: '#FFFFFF', secondaryColor: '#BC002D', marker: withDisc },
+        }),
+      ]).join(),
+    ).toContain('identity.marker.overlay');
+  });
+
   it('rejects a source that is not a Wikipedia article URL', () => {
     expect(validateRegistry([entry({ source: 'https://example.com/sevilla' })]).join()).toContain(
       'article URL',

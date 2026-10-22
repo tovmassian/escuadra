@@ -36,7 +36,7 @@ describe('bannerBands', () => {
     ]);
   });
 
-  it('turns a sole band with an overlay into edge, middle, edge', () => {
+  it("draws Japan's white, red, white from its bands", () => {
     expect(bannerBands(squad('nation/jpn.json').marker)).toEqual([
       { color: '#FFFFFF', weight: 1 },
       { color: '#BC002D', weight: 1 },

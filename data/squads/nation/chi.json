@@ -8,13 +8,9 @@
   "verified": true,
   "marker": {
     "bands": ["#FFFFFF", "#D52B1E"],
-    "orientation": "horizontal",
-    "overlay": {
-      "shape": "disc",
-      "color": "#0039A6"
-    }
+    "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Chile_national_football_team",
   "members": [
     {

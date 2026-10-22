@@ -7,14 +7,10 @@
   "secondaryColor": "#D0A650",
   "verified": true,
   "marker": {
-    "bands": ["#244AA5"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#D0A650"
-    }
+    "bands": ["#244AA5", "#D0A650", "#244AA5"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Kosovo_national_football_team",
   "members": [
     {

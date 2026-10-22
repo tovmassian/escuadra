@@ -8,13 +8,9 @@
   "verified": true,
   "marker": {
     "bands": ["#FFFFFF", "#00B140"],
-    "orientation": "horizontal",
-    "overlay": {
-      "shape": "disc",
-      "color": "#C8102E"
-    }
+    "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Wales_national_football_team",
   "members": [
     {
