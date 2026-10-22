@@ -332,6 +332,21 @@ export const en = {
     nations: 'Nations',
     /** ≤ 16 chars: the clubs list's caption with no league picked, in mono capitals. */
     allClubs: 'All clubs',
+    /** ≤ 6 chars: the confederation pill that clears the filter on Nations. */
+    allConfederations: 'All',
+    /** A confederation pill's region, spoken after its acronym: "UEFA, Europe". */
+    regions: {
+      UEFA: 'Europe',
+      CONMEBOL: 'South America',
+      CONCACAF: 'North and Central America and the Caribbean',
+      CAF: 'Africa',
+      AFC: 'Asia',
+      OFC: 'Oceania',
+    },
+    /** ≤ 22 chars: the nations list's caption with no confederation picked, in mono capitals. */
+    allNations: 'All nations',
+    /** The nations list's caption, beside the first letter: the confederation, or "All nations". */
+    nationsCaption: (name: string) => `${name} · A–Z`,
     /** The clubs list's caption: the league (or "All clubs") and how many it lists. */
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     /** A played row's score block, spoken after the team's name. */
@@ -351,7 +366,7 @@ export const en = {
     title: 'About',
     /** Affiliation, then crests. */
     intro: [
-      `${ESCUADRA} is an independent, unofficial app. It is not affiliated with, endorsed by, or associated with FIFA, UEFA, any league, any national football association, or any club. Club and national team names are used for identification only and remain the property of their respective owners. ${ESCUADRA} is also not affiliated with or endorsed by the Wikimedia Foundation, or by any player shown in a photo.`,
+      `${ESCUADRA} is an independent, unofficial app. It is not affiliated with, endorsed by, or associated with FIFA, UEFA or any other confederation, any league, any national football association, or any club. Club, national team and confederation names are used for identification only and remain the property of their respective owners. ${ESCUADRA} is also not affiliated with or endorsed by the Wikimedia Foundation, or by any player shown in a photo.`,
       `${ESCUADRA} identifies teams by their names and colours, and never shows club crests, badges or logos itself. A player photo can still show one, on a shirt or in the background, because it is part of the original photo. Those marks belong to their owners, and their appearance does not mean that any club, sponsor or brand endorses ${ESCUADRA}.`,
     ],
     credits: {

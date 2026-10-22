@@ -468,6 +468,12 @@ async function captureTheme(browser, colorScheme, suffix) {
     await capture.page.waitForTimeout(SWAP_MS);
     await capture.shoot('03b-team-picker-nations-jump');
 
+    // A confederation picked, from a fresh open so the list starts at the top.
+    await capture.open('/team-picker');
+    await capture.tapId('kind-nation', { wait: SWAP_MS });
+    await capture.tapId('confederation-UEFA', { wait: SWAP_MS });
+    await capture.shoot('03c-team-picker-nations-uefa');
+
     await capture.open('/team/rma/difficulty');
     await capture.shoot('04-difficulty');
 

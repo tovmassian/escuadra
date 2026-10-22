@@ -288,6 +288,18 @@ export const fr: Messages = {
     clubs: 'Clubs',
     nations: 'Sélections',
     allClubs: 'Tous les clubs',
+    // Feminine: the confédérations.
+    allConfederations: 'Toutes',
+    regions: {
+      UEFA: 'Europe',
+      CONMEBOL: 'Amérique du Sud',
+      CONCACAF: 'Amérique du Nord, centrale et Caraïbes',
+      CAF: 'Afrique',
+      AFC: 'Asie',
+      OFC: 'Océanie',
+    },
+    allNations: 'Toutes les sélections',
+    nationsCaption: (name: string) => `${name} · A–Z`,
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     bestSpoken: (level: number, correct: number, total: number) =>
       `Niveau ${level}, record ${correct} sur ${total}`,
@@ -302,7 +314,7 @@ export const fr: Messages = {
     // "À propos", also Settings' About section label (settings.sections.about).
     title: 'À propos',
     intro: [
-      `${ESCUADRA} est une application indépendante et non officielle. Elle n’est ni affiliée ni associée à la FIFA, à l’UEFA, à une ligue, à une fédération nationale de football ou à un club, et n’est approuvée par aucun d’entre eux. Les noms des clubs et des sélections nationales sont utilisés uniquement à des fins d’identification et restent la propriété de leurs détenteurs respectifs. ${ESCUADRA} n’est pas non plus affiliée à la Wikimedia Foundation ni à un joueur figurant sur une photo, et n’est approuvée par aucun d’entre eux.`,
+      `${ESCUADRA} est une application indépendante et non officielle. Elle n’est ni affiliée ni associée à la FIFA, à l’UEFA ou à une autre confédération, à une ligue, à une fédération nationale de football ou à un club, et n’est approuvée par aucun d’entre eux. Les noms des clubs, des sélections nationales et des confédérations sont utilisés uniquement à des fins d’identification et restent la propriété de leurs détenteurs respectifs. ${ESCUADRA} n’est pas non plus affiliée à la Wikimedia Foundation ni à un joueur figurant sur une photo, et n’est approuvée par aucun d’entre eux.`,
       `${ESCUADRA} identifie les équipes par leur nom et leurs couleurs, et n’affiche jamais elle-même d’écussons, d’emblèmes ou de logos de club. Une photo de joueur peut tout de même en montrer un, sur un maillot ou à l’arrière-plan, car il fait partie de la photo d’origine. Ces signes appartiennent à leurs détenteurs, et leur présence ne signifie pas qu’un club, un sponsor ou une marque approuve ${ESCUADRA}.`,
     ],
     credits: {

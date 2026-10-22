@@ -7,13 +7,17 @@ import { TeamRow } from '@/components/TeamRow';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
-import type { LeagueFilter, SquadNames } from '@/lib/pickerView';
+import type { ConfederationFilter, LeagueFilter, SquadNames } from '@/lib/pickerView';
 import {
+  confederationFilters,
+  confederationLabel,
+  confederationSpoken,
   kindCounts,
   leagueFilters,
   leagueLabel,
   letterAt,
   nationSections,
+  nationsCaption,
   teamProgress,
   visibleSquads,
 } from '@/lib/pickerView';
@@ -36,7 +40,8 @@ import { scheduleOnRN } from 'react-native-worklets';
 
 // The team picker (#176; spec docs/superpowers/specs/2026-10-22-team-picker-design.md):
 // one column that scrolls as a whole. Clubs are a plain list under a caption;
-// nations are grouped A–Z, with a letter rail pinned over the right edge.
+// nations are grouped A–Z, narrowed by confederation (#177), with a letter rail
+// pinned over the right edge.
 export default function TeamPicker() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
@@ -46,6 +51,7 @@ export default function TeamPicker() {
   const bestScores = useProgress((s) => s.bestScores);
   const [filter, setFilter] = useState<Kind>('club');
   const [league, setLeague] = useState<LeagueFilter>('ALL');
+  const [confederation, setConfederation] = useState<ConfederationFilter>('ALL');
   const [query, setQuery] = useState('');
   const [current, setCurrent] = useState<string | null>(null);
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
@@ -56,14 +62,15 @@ export default function TeamPicker() {
     [language],
   );
   const leagues = useMemo(() => leagueFilters(squads), [squads]);
+  const confederations = useMemo(() => confederationFilters(squads), [squads]);
   const counts = useMemo(() => kindCounts(squads, names, query), [squads, names, query]);
   const clubs = useMemo(
     () => (filter === 'club' ? visibleSquads(squads, 'club', league, names, query) : []),
     [squads, filter, league, names, query],
   );
   const sections = useMemo(
-    () => (filter === 'nation' ? nationSections(squads, names, query) : []),
-    [squads, filter, names, query],
+    () => (filter === 'nation' ? nationSections(squads, names, query, confederation) : []),
+    [squads, filter, names, query, confederation],
   );
   const letters = useMemo(() => sections.map((s) => s.letter), [sections]);
   const showRail = sections.length > 1;
@@ -72,10 +79,10 @@ export default function TeamPicker() {
   const empty = filter === 'club' ? clubs.length === 0 : sections.length === 0;
 
   // Each letter heading's y in the scrolled content, recorded on layout. The
-  // record belongs to one list: a new tab, language or search starts a new
-  // one, and the headings are keyed by it, so every heading remounts and
-  // reports its y afresh.
-  const layoutKey = `${filter}|${language}|${query}`;
+  // record belongs to one list: a new tab, language, search or confederation
+  // starts a new one, and the headings are keyed by it, so every heading
+  // remounts and reports its y afresh.
+  const layoutKey = `${filter}|${language}|${query}|${confederation}`;
   const offsets = useRef({ key: layoutKey, ys: new Map<string, number>() });
   const offsetsNow = () => {
     if (offsets.current.key !== layoutKey) {
@@ -170,14 +177,20 @@ export default function TeamPicker() {
     },
   });
 
-  // Switching tabs drops the league back to ALL, so tapping "Clubs" always
-  // shows every club rather than silently re-applying a league picked before
-  // a detour through the nations tab, while its pill row was hidden. The
-  // search query deliberately survives the switch instead — a name typed on
-  // one tab may be worth checking on the other.
+  // Switching tabs drops the league and the confederation back to ALL, so a
+  // tab always opens unfiltered rather than silently re-applying a league
+  // picked before a detour through the other tab, while its pill row was
+  // swapped out. The search query deliberately survives the switch instead —
+  // a name typed on one tab may be worth checking on the other.
   const changeKind = (kind: Kind) => {
     setFilter(kind);
     setLeague('ALL');
+    setConfederation('ALL');
+    setCurrent(null);
+    jumped.current = null;
+  };
+  const changeConfederation = (next: ConfederationFilter) => {
+    setConfederation(next);
     setCurrent(null);
     jumped.current = null;
   };
@@ -200,16 +213,23 @@ export default function TeamPicker() {
     // once the column is long enough to scroll (RN shrinks flex children by
     // default where RN-Web does not, so this never reproduces in the web
     // build). The negative margin runs the pills out to the screen's edge.
-    leagueTrack: { flexGrow: 0, flexShrink: 0, marginRight: -spacing.lg },
+    pillTrack: { flexGrow: 0, flexShrink: 0, marginRight: -spacing.lg },
     // `alignItems: 'center'` keeps each pill at its own intrinsic height. A row
     // stretches its children by default, so a squeezed track would otherwise
     // flatten the pills and clip their labels rather than overflow.
-    leagueRow: { alignItems: 'center', gap: spacing.xs, paddingRight: spacing.lg },
+    pillRow: { alignItems: 'center', gap: spacing.xs, paddingRight: spacing.lg },
     // The canvas sets the list a little further below the controls than their
     // own gap.
     listStart: { marginTop: spacing.xs },
     caption: { ...typography.monoCaption, color: colors.textMuted, paddingBottom: spacing.xxs },
-    heading: { paddingBottom: spacing.xxs },
+    heading: {
+      flexDirection: 'row',
+      alignItems: 'baseline',
+      gap: spacing.sm,
+      paddingBottom: spacing.xxs,
+    },
+    // The caption shrinks before it pushes the row wider than the screen.
+    nationsCaption: { ...typography.monoCaption, color: colors.textMuted, flexShrink: 1 },
     // Every heading but the first opens with space above its letter.
     headingAfter: { paddingTop: spacing.md + 2 },
     letter: { ...typography.letterHeading },
@@ -278,24 +298,35 @@ export default function TeamPicker() {
           </Text>
           <SearchField value={query} onChange={changeQuery} onClear={() => changeQuery('')} />
           <KindTabs value={filter} counts={counts} onChange={changeKind} />
-          {filter === 'club' && (
-            <ScrollView
-              horizontal
-              showsHorizontalScrollIndicator={false}
-              keyboardShouldPersistTaps="handled"
-              style={styles.leagueTrack}
-              contentContainerStyle={styles.leagueRow}
-            >
-              {leagues.map((l) => (
-                <PickerPill
-                  key={l}
-                  label={leagueLabel(l, t)}
-                  active={league === l}
-                  onPress={() => setLeague(l)}
-                />
-              ))}
-            </ScrollView>
-          )}
+          <ScrollView
+            key={filter}
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            keyboardShouldPersistTaps="handled"
+            style={styles.pillTrack}
+            contentContainerStyle={styles.pillRow}
+          >
+            {filter === 'club'
+              ? leagues.map((l) => (
+                  <PickerPill
+                    key={l}
+                    testID={`league-${l}`}
+                    label={leagueLabel(l, t)}
+                    active={league === l}
+                    onPress={() => setLeague(l)}
+                  />
+                ))
+              : confederations.map((c) => (
+                  <PickerPill
+                    key={c}
+                    testID={`confederation-${c}`}
+                    label={confederationLabel(c, t)}
+                    spokenLabel={confederationSpoken(c, t)}
+                    active={confederation === c}
+                    onPress={() => changeConfederation(c)}
+                  />
+                ))}
+          </ScrollView>
         </View>
 
         {/* Your squads (#179) fills this slot. */}
@@ -319,7 +350,12 @@ export default function TeamPicker() {
                 y is then the heading's scroll offset, which the rail jumps to. */}
             <View
               key={`${layoutKey}:${section.letter}`}
-              style={[styles.heading, i === 0 ? styles.listStart : styles.headingAfter]}
+              style={[
+                styles.heading,
+                i === 0 ? styles.listStart : styles.headingAfter,
+                // The rail starts beside the first heading, so its caption stays clear of it.
+                i === 0 && showRail && styles.gutter,
+              ]}
               onLayout={(e) => {
                 const { y } = e.nativeEvent.layout;
                 offsetsNow().set(section.letter, y);
@@ -341,6 +377,11 @@ export default function TeamPicker() {
               >
                 {section.letter}
               </Text>
+              {i === 0 && (
+                <Text style={styles.nationsCaption} numberOfLines={1}>
+                  {nationsCaption(confederation, t)}
+                </Text>
+              )}
             </View>
             <View style={showRail && styles.gutter}>{section.squads.map(row)}</View>
           </Fragment>

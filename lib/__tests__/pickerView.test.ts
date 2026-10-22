@@ -5,13 +5,18 @@ import { en } from '@/i18n/en';
 import { SUPPORTED_LANGUAGES } from '@/i18n/resolveLanguage';
 import { listSquads } from '@/lib/squads';
 import {
+  confederationFilters,
+  confederationLabel,
+  confederationSpoken,
   initialOf,
   kindCounts,
   leagueFilters,
   leagueLabel,
   letterAt,
   nationSections,
+  nationsCaption,
   scoreBlock,
+  squadConfederation,
   teamProgress,
   visibleSquads,
   type SquadNames,
@@ -329,5 +334,120 @@ describe('scoreBlock', () => {
     expect(scoreBlock({ level: 3, correct: 10, total: 10, cleared: true })).toMatchObject({
       flawless: true,
     });
+  });
+});
+
+// Nations under their real English names, so the flag code, and with it the
+// confederation, resolves.
+function nation(id: string, name: string): SquadManifestEntry {
+  return { id, kind: 'nation', name } as SquadManifestEntry;
+}
+const EN_NAMES: SquadNames = { nameOf: (s) => s.name, locale: 'en' };
+const NATIONS: SquadManifestEntry[] = [
+  nation('aut', 'Austria'),
+  nation('aus', 'Australia'),
+  nation('arg', 'Argentina'),
+  nation('esp', 'Spain'),
+  nation('jpn', 'Japan'),
+];
+
+describe('squadConfederation', () => {
+  it("finds a nation's confederation through its flag code", () => {
+    expect(squadConfederation(nation('aus', 'Australia'))).toBe('AFC');
+    expect(squadConfederation(nation('aut', 'Austria'))).toBe('UEFA');
+  });
+
+  it('gives a club none', () => {
+    expect(squadConfederation(entry('bar', 'club', 'la-liga'))).toBeNull();
+  });
+});
+
+describe('confederationFilters', () => {
+  it('leads with ALL, then the confederations that have a nation, in pill order', () => {
+    expect(confederationFilters(NATIONS)).toEqual(['ALL', 'UEFA', 'CONMEBOL', 'AFC']);
+  });
+
+  it('offers every confederation for the real squads', () => {
+    expect(confederationFilters(listSquads())).toEqual([
+      'ALL',
+      'UEFA',
+      'CONMEBOL',
+      'CONCACAF',
+      'CAF',
+      'AFC',
+      'OFC',
+    ]);
+  });
+
+  it('ignores clubs', () => {
+    expect(confederationFilters([entry('bar', 'club', 'la-liga')])).toEqual(['ALL']);
+  });
+});
+
+describe('confederation text', () => {
+  it('shows the acronym, and the catalog word for ALL', () => {
+    expect(confederationLabel('UEFA', en)).toBe('UEFA');
+    expect(confederationLabel('ALL', en)).toBe('All');
+  });
+
+  it('speaks the acronym, then its region', () => {
+    expect(confederationSpoken('UEFA', en)).toBe('UEFA, Europe');
+    expect(confederationSpoken('OFC', en)).toBe('OFC, Oceania');
+    expect(confederationSpoken('ALL', en)).toBe('All');
+  });
+
+  it('captions the list with the confederation, or with all nations', () => {
+    expect(nationsCaption('UEFA', en)).toBe('UEFA · A–Z');
+    expect(nationsCaption('ALL', en)).toBe('All nations · A–Z');
+  });
+});
+
+describe('nationSections with a confederation', () => {
+  const ids = (sections: ReturnType<typeof nationSections>) =>
+    sections.flatMap((s) => s.squads.map((q) => q.id));
+
+  it('shows every nation under ALL', () => {
+    expect(ids(nationSections(NATIONS, EN_NAMES))).toEqual(['arg', 'aus', 'aut', 'jpn', 'esp']);
+  });
+
+  it('shows only the picked confederation', () => {
+    expect(ids(nationSections(NATIONS, EN_NAMES, '', 'UEFA'))).toEqual(['aut', 'esp']);
+    expect(ids(nationSections(NATIONS, EN_NAMES, '', 'AFC'))).toEqual(['aus', 'jpn']);
+  });
+
+  it('composes the confederation with the search', () => {
+    expect(ids(nationSections(NATIONS, EN_NAMES, 'au'))).toEqual(['aus', 'aut']);
+    expect(ids(nationSections(NATIONS, EN_NAMES, 'au', 'UEFA'))).toEqual(['aut']);
+    expect(ids(nationSections(NATIONS, EN_NAMES, 'au', 'AFC'))).toEqual(['aus']);
+    expect(ids(nationSections(NATIONS, EN_NAMES, 'au', 'CONMEBOL'))).toEqual([]);
+  });
+
+  it('keeps only the letters the confederation has', () => {
+    expect(nationSections(NATIONS, EN_NAMES, '', 'UEFA').map((s) => s.letter)).toEqual(['A', 'S']);
+  });
+
+  it.each(['UEFA', 'CONMEBOL', 'CONCACAF', 'CAF', 'AFC', 'OFC'] as const)(
+    'shows only %s among the real squads, in every language',
+    (confederation) => {
+      for (const language of SUPPORTED_LANGUAGES) {
+        const names: SquadNames = {
+          nameOf: (s) => squadDisplayName(s, language),
+          locale: language,
+        };
+        const shown = nationSections(listSquads(), names, '', confederation).flatMap(
+          (s) => s.squads,
+        );
+        expect(shown.length).toBeGreaterThan(0);
+        expect(shown.every((s) => squadConfederation(s) === confederation)).toBe(true);
+      }
+    },
+  );
+
+  it('splits the real nations among the confederations without losing one', () => {
+    const all = nationSections(listSquads(), EN_NAMES).flatMap((s) => s.squads).length;
+    const split = (['UEFA', 'CONMEBOL', 'CONCACAF', 'CAF', 'AFC', 'OFC'] as const)
+      .map((c) => nationSections(listSquads(), EN_NAMES, '', c).flatMap((s) => s.squads).length)
+      .reduce((a, b) => a + b, 0);
+    expect(split).toBe(all);
   });
 });

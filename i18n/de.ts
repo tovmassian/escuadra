@@ -254,6 +254,17 @@ export const de: Messages = {
     // "Nationalteams" is over the tab's twelve characters.
     nations: 'Nationen',
     allClubs: 'Alle Vereine',
+    allConfederations: 'Alle',
+    regions: {
+      UEFA: 'Europa',
+      CONMEBOL: 'Südamerika',
+      CONCACAF: 'Nord- und Mittelamerika und die Karibik',
+      CAF: 'Afrika',
+      AFC: 'Asien',
+      OFC: 'Ozeanien',
+    },
+    allNations: 'Alle Nationen',
+    nationsCaption: (name: string) => `${name} · A–Z`,
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     bestSpoken: (level: number, correct: number, total: number) =>
       `Level ${level}, Rekord ${correct} von ${total}`,
@@ -268,7 +279,7 @@ export const de: Messages = {
     // "Info", also Settings' About section label (settings.sections.about).
     title: 'Info',
     intro: [
-      `${ESCUADRA} ist eine unabhängige, inoffizielle App. Sie ist weder mit der FIFA, der UEFA, einer Liga, einem nationalen Fußballverband noch mit einem Verein verbunden oder assoziiert und wird von keinem von ihnen befürwortet. Die Namen von Vereinen und Nationalteams werden nur zur Identifizierung verwendet und bleiben Eigentum ihrer jeweiligen Inhaber. ${ESCUADRA} ist außerdem weder mit der Wikimedia Foundation noch mit einem auf einem Foto gezeigten Spieler verbunden und wird von keinem von ihnen befürwortet.`,
+      `${ESCUADRA} ist eine unabhängige, inoffizielle App. Sie ist weder mit der FIFA, der UEFA, einem anderen Kontinentalverband, einer Liga, einem nationalen Fußballverband noch mit einem Verein verbunden oder assoziiert und wird von keinem von ihnen befürwortet. Die Namen von Vereinen, Nationalteams und Kontinentalverbänden werden nur zur Identifizierung verwendet und bleiben Eigentum ihrer jeweiligen Inhaber. ${ESCUADRA} ist außerdem weder mit der Wikimedia Foundation noch mit einem auf einem Foto gezeigten Spieler verbunden und wird von keinem von ihnen befürwortet.`,
       `${ESCUADRA} kennzeichnet Teams mit ihren Namen und Farben und zeigt selbst nie Vereinswappen, Embleme oder Logos. Auf einem Spielerfoto kann trotzdem eines zu sehen sein, auf einem Trikot oder im Hintergrund, weil es zum Originalfoto gehört. Diese Zeichen gehören ihren Inhabern, und dass sie zu sehen sind, bedeutet nicht, dass ein Verein, ein Sponsor oder eine Marke ${ESCUADRA} befürwortet.`,
     ],
     credits: {

@@ -4,6 +4,7 @@ paths:
   - "tools/squadctl/**"
   - "types/squad.ts"
   - "lib/squads*.ts"
+  - "lib/confederations.ts"
   - "lib/__tests__/squads*.ts"
   - "lib/__tests__/dataIntegrity.test.ts"
   - "scripts/gen-squads.ts"
@@ -56,6 +57,11 @@ One file per squad, so a future contribution touches exactly one file.
 under `data/squads/club/`, plus `ucl` for a Champions League group-stage
 club with no big-5 domestic home. `SquadManifestEntry.league` carries it on
 club entries (absent on nation entries).
+
+A nation squad's confederation (the picker's Nations filter) is
+`lib/confederations.ts`, keyed by the FIFA code `lib/flags.ts` gives its name. A new
+nation needs both: `lib/__tests__/flags.test.ts` and
+`lib/__tests__/confederations.test.ts` fail until it has them.
 
 Static squad JSON is imported directly. It does **not** belong in a store.
 
