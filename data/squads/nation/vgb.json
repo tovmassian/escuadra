@@ -7,14 +7,10 @@
   "secondaryColor": "#006129",
   "verified": true,
   "marker": {
-    "bands": ["#012169"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#006129"
-    }
+    "bands": ["#012169", "#006129", "#012169"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/British_Virgin_Islands_national_football_team",
   "members": [
     {

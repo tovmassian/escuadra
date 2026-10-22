@@ -7,14 +7,10 @@
   "secondaryColor": "#FFFFFF",
   "verified": true,
   "marker": {
-    "bands": ["#005430"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#FFFFFF"
-    }
+    "bands": ["#005430", "#FFFFFF", "#005430"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Saudi_Arabia_national_football_team",
   "members": [
     {

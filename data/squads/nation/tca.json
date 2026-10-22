@@ -7,14 +7,10 @@
   "secondaryColor": "#FCD116",
   "verified": true,
   "marker": {
-    "bands": ["#002868"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#FCD116"
-    }
+    "bands": ["#002868", "#FCD116", "#002868"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Turks_and_Caicos_Islands_national_football_team",
   "members": [
     {

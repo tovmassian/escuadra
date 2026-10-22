@@ -7,14 +7,10 @@
   "secondaryColor": "#FFFFFF",
   "verified": true,
   "marker": {
-    "bands": ["#012169"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#FFFFFF"
-    }
+    "bands": ["#012169", "#FFFFFF", "#012169"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Anguilla_national_football_team",
   "members": [
     {

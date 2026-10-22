@@ -7,14 +7,10 @@
   "secondaryColor": "#006233",
   "verified": true,
   "marker": {
-    "bands": ["#C1272D"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#006233"
-    }
+    "bands": ["#C1272D", "#006233", "#C1272D"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Morocco_national_football_team",
   "members": [
     {

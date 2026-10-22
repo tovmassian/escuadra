@@ -21,12 +21,8 @@
     "secondaryColor": "#FFFFFF",
     "verified": true,
     "marker": {
-      "bands": ["#012169"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFFFFF"
-      }
+      "bands": ["#012169", "#FFFFFF", "#012169"],
+      "orientation": "vertical"
     }
   },
   {
@@ -52,12 +48,8 @@
     "secondaryColor": "#000000",
     "verified": true,
     "marker": {
-      "bands": ["#FF0000"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#000000"
-      }
+      "bands": ["#FF0000", "#000000", "#FF0000"],
+      "orientation": "vertical"
     }
   },
   {
@@ -70,11 +62,7 @@
     "verified": true,
     "marker": {
       "bands": ["#006233", "#FFFFFF"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#D21034"
-      }
+      "orientation": "vertical"
     }
   },
   {
@@ -223,12 +211,8 @@
     "secondaryColor": "#FFFFFF",
     "verified": true,
     "marker": {
-      "bands": ["#00008B"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFFFFF"
-      }
+      "bands": ["#00008B", "#FFFFFF", "#00008B"],
+      "orientation": "vertical"
     }
   },
   {
@@ -308,12 +292,8 @@
     "secondaryColor": "#F42A41",
     "verified": true,
     "marker": {
-      "bands": ["#006A4E"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#F42A41"
-      }
+      "bands": ["#006A4E", "#F42A41", "#006A4E"],
+      "orientation": "vertical"
     }
   },
   {
@@ -366,12 +346,8 @@
     "secondaryColor": "#FFFFFF",
     "verified": true,
     "marker": {
-      "bands": ["#C8102E"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFFFFF"
-      }
+      "bands": ["#C8102E", "#FFFFFF", "#C8102E"],
+      "orientation": "vertical"
     }
   },
   {
@@ -535,12 +511,8 @@
     "secondaryColor": "#009739",
     "verified": true,
     "marker": {
-      "bands": ["#009739"],
-      "orientation": "horizontal",
-      "overlay": {
-        "shape": "diamond",
-        "color": "#FFDF00"
-      }
+      "bands": ["#009739", "#FFDF00", "#009739"],
+      "orientation": "vertical"
     }
   },
   {
@@ -677,12 +649,8 @@
     "secondaryColor": "#C8102E",
     "verified": true,
     "marker": {
-      "bands": ["#012169"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#C8102E"
-      }
+      "bands": ["#012169", "#C8102E", "#012169"],
+      "orientation": "vertical"
     }
   },
   {
@@ -736,11 +704,7 @@
     "verified": true,
     "marker": {
       "bands": ["#FFFFFF", "#D52B1E"],
-      "orientation": "horizontal",
-      "overlay": {
-        "shape": "disc",
-        "color": "#0039A6"
-      }
+      "orientation": "horizontal"
     }
   },
   {
@@ -752,12 +716,8 @@
     "secondaryColor": "#FFFF00",
     "verified": true,
     "marker": {
-      "bands": ["#EE1C25"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFFF00"
-      }
+      "bands": ["#EE1C25", "#FFFF00", "#EE1C25"],
+      "orientation": "vertical"
     }
   },
   {
@@ -795,12 +755,8 @@
     "secondaryColor": "#F7D618",
     "verified": true,
     "marker": {
-      "bands": ["#007FFF"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#F7D618"
-      }
+      "bands": ["#007FFF", "#F7D618", "#007FFF"],
+      "orientation": "vertical"
     }
   },
   {
@@ -909,12 +865,8 @@
     "secondaryColor": "#D67900",
     "verified": true,
     "marker": {
-      "bands": ["#FFFFFF"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#D67900"
-      }
+      "bands": ["#FFFFFF", "#D67900", "#FFFFFF"],
+      "orientation": "vertical"
     }
   },
   {
@@ -1171,12 +1123,8 @@
     "secondaryColor": "#FFFFFF",
     "verified": true,
     "marker": {
-      "bands": ["#62B5E5"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFFFFF"
-      }
+      "bands": ["#62B5E5", "#FFFFFF", "#62B5E5"],
+      "orientation": "vertical"
     }
   },
   {
@@ -1420,12 +1368,8 @@
     "secondaryColor": "#FFFFFF",
     "verified": true,
     "marker": {
-      "bands": ["#EE1C25"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFFFFF"
-      }
+      "bands": ["#EE1C25", "#FFFFFF", "#EE1C25"],
+      "orientation": "vertical"
     }
   },
   {
@@ -1598,12 +1542,8 @@
     "secondaryColor": "#BC002D",
     "verified": true,
     "marker": {
-      "bands": ["#FFFFFF"],
-      "orientation": "horizontal",
-      "overlay": {
-        "shape": "disc",
-        "color": "#BC002D"
-      }
+      "bands": ["#FFFFFF", "#BC002D", "#FFFFFF"],
+      "orientation": "vertical"
     }
   },
   {
@@ -1629,12 +1569,8 @@
     "secondaryColor": "#FFEC2D",
     "verified": true,
     "marker": {
-      "bands": ["#00ABC2"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFEC2D"
-      }
+      "bands": ["#00ABC2", "#FFEC2D", "#00ABC2"],
+      "orientation": "vertical"
     }
   },
   {
@@ -1660,12 +1596,8 @@
     "secondaryColor": "#CD2E3A",
     "verified": true,
     "marker": {
-      "bands": ["#FFFFFF"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#CD2E3A"
-      }
+      "bands": ["#FFFFFF", "#CD2E3A", "#FFFFFF"],
+      "orientation": "vertical"
     }
   },
   {
@@ -1677,12 +1609,8 @@
     "secondaryColor": "#D0A650",
     "verified": true,
     "marker": {
-      "bands": ["#244AA5"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#D0A650"
-      }
+      "bands": ["#244AA5", "#D0A650", "#244AA5"],
+      "orientation": "vertical"
     }
   },
   {
@@ -1694,12 +1622,8 @@
     "secondaryColor": "#FFFFFF",
     "verified": true,
     "marker": {
-      "bands": ["#005430"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFFFFF"
-      }
+      "bands": ["#005430", "#FFFFFF", "#005430"],
+      "orientation": "vertical"
     }
   },
   {
@@ -1739,12 +1663,8 @@
     "secondaryColor": "#FCD116",
     "verified": true,
     "marker": {
-      "bands": ["#66CCFF"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "diamond",
-        "color": "#000000"
-      }
+      "bands": ["#66CCFF", "#000000", "#66CCFF"],
+      "orientation": "vertical"
     }
   },
   {
@@ -1950,12 +1870,8 @@
     "secondaryColor": "#FFFFFF",
     "verified": true,
     "marker": {
-      "bands": ["#0F7562"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFFFFF"
-      }
+      "bands": ["#0F7562", "#FFFFFF", "#0F7562"],
+      "orientation": "vertical"
     }
   },
   {
@@ -2077,12 +1993,8 @@
     "secondaryColor": "#F8E92E",
     "verified": true,
     "marker": {
-      "bands": ["#D82126"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#F8E92E"
-      }
+      "bands": ["#D82126", "#F8E92E", "#D82126"],
+      "orientation": "vertical"
     }
   },
   {
@@ -2107,12 +2019,8 @@
     "secondaryColor": "#FFC000",
     "verified": true,
     "marker": {
-      "bands": ["#E30000"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFC000"
-      }
+      "bands": ["#E30000", "#FFC000", "#E30000"],
+      "orientation": "vertical"
     }
   },
   {
@@ -2151,12 +2059,8 @@
     "secondaryColor": "#006233",
     "verified": true,
     "marker": {
-      "bands": ["#C1272D"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#006233"
-      }
+      "bands": ["#C1272D", "#006233", "#C1272D"],
+      "orientation": "vertical"
     }
   },
   {
@@ -2168,12 +2072,8 @@
     "secondaryColor": "#00A2DD",
     "verified": true,
     "marker": {
-      "bands": ["#012169"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#00A2DD"
-      }
+      "bands": ["#012169", "#00A2DD", "#012169"],
+      "orientation": "vertical"
     }
   },
   {
@@ -2388,12 +2288,8 @@
     "secondaryColor": "#C8102E",
     "verified": true,
     "marker": {
-      "bands": ["#012169"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#C8102E"
-      }
+      "bands": ["#012169", "#C8102E", "#012169"],
+      "orientation": "vertical"
     }
   },
   {
@@ -3104,12 +3000,8 @@
     "secondaryColor": "#FCD116",
     "verified": true,
     "marker": {
-      "bands": ["#002868"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FCD116"
-      }
+      "bands": ["#002868", "#FCD116", "#002868"],
+      "orientation": "vertical"
     }
   },
   {
@@ -3247,12 +3139,8 @@
     "secondaryColor": "#FFFFFF",
     "verified": true,
     "marker": {
-      "bands": ["#E70013"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFFFFF"
-      }
+      "bands": ["#E70013", "#FFFFFF", "#E70013"],
+      "orientation": "vertical"
     }
   },
   {
@@ -3264,12 +3152,8 @@
     "secondaryColor": "#FFFFFF",
     "verified": true,
     "marker": {
-      "bands": ["#E30A17"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFFFFF"
-      }
+      "bands": ["#E30A17", "#FFFFFF", "#E30A17"],
+      "orientation": "vertical"
     }
   },
   {
@@ -3429,12 +3313,8 @@
     "secondaryColor": "#006129",
     "verified": true,
     "marker": {
-      "bands": ["#012169"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#006129"
-      }
+      "bands": ["#012169", "#006129", "#012169"],
+      "orientation": "vertical"
     }
   },
   {
@@ -3446,12 +3326,8 @@
     "secondaryColor": "#FFEB00",
     "verified": true,
     "marker": {
-      "bands": ["#FF0000"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#FFEB00"
-      }
+      "bands": ["#FF0000", "#FFEB00", "#FF0000"],
+      "orientation": "vertical"
     }
   },
   {
@@ -3477,12 +3353,8 @@
     "secondaryColor": "#162667",
     "verified": true,
     "marker": {
-      "bands": ["#FFFFFF"],
-      "orientation": "vertical",
-      "overlay": {
-        "shape": "disc",
-        "color": "#F4C53D"
-      }
+      "bands": ["#FFFFFF", "#F4C53D", "#FFFFFF"],
+      "orientation": "vertical"
     }
   },
   {
@@ -3495,11 +3367,7 @@
     "verified": true,
     "marker": {
       "bands": ["#FFFFFF", "#00B140"],
-      "orientation": "horizontal",
-      "overlay": {
-        "shape": "disc",
-        "color": "#C8102E"
-      }
+      "orientation": "horizontal"
     }
   },
   {

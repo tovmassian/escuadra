@@ -61,7 +61,6 @@ describe('squad data integrity', () => {
         const marker = manifest.marker;
         expect(marker.bands.length).toBeGreaterThan(0);
         for (const band of marker.bands) expect(band).toMatch(/^#[0-9a-fA-F]{6}$/);
-        if (marker.overlay) expect(marker.overlay.color).toMatch(/^#[0-9a-fA-F]{6}$/);
       });
 
       it('has band weights matching the band count, when weights are given', () => {
@@ -85,16 +84,15 @@ describe('squad data integrity', () => {
         expect(['horizontal', 'vertical']).toContain(manifest.marker.orientation);
       });
 
-      it('has an overlay shape of disc or diamond, when an overlay is given', () => {
-        const overlay = manifest.marker.overlay;
-        if (overlay) expect(['disc', 'diamond']).toContain(overlay.shape);
+      // Markers are colour bands only: no disc, diamond or other device
+      // (.claude/rules/team-identity.md).
+      it('has a marker of bands only, with no other field', () => {
+        for (const marker of [manifest.marker, getSquad(manifest.id)?.marker]) {
+          for (const key of Object.keys(marker ?? {})) {
+            expect(['bands', 'orientation', 'weights']).toContain(key);
+          }
+        }
       });
-
-      if (manifest.kind === 'club') {
-        it('never carries an overlay device — those are for national flags only', () => {
-          expect(manifest.marker.overlay).toBeUndefined();
-        });
-      }
     });
   }
 });

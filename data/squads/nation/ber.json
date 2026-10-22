@@ -7,14 +7,10 @@
   "secondaryColor": "#FFFFFF",
   "verified": true,
   "marker": {
-    "bands": ["#C8102E"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#FFFFFF"
-    }
+    "bands": ["#C8102E", "#FFFFFF", "#C8102E"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Bermuda_national_football_team",
   "members": [
     {

@@ -87,7 +87,8 @@ export interface SquadMember {
 }
 
 /** A team's visual identity as declarative geometry rather than an asset —
- *  every squad, club or nation, carries one.
+ *  every squad, club or nation, carries one. Colour bands only: never a
+ *  disc, diamond or other device.
  *
  *  For a club this is the whole story: its own colours as bands, never an
  *  emblem, per the "no crests, ever" constraint. A single-colour club
@@ -115,8 +116,6 @@ export interface TeamMarker {
   orientation: 'horizontal' | 'vertical';
   /** Relative band sizes. Omit for equal bands. Spain is [1, 2, 1]. */
   weights?: number[];
-  /** A centred device over the field — Japan's disc, Brazil's diamond. */
-  overlay?: { shape: 'disc' | 'diamond'; color: string };
 }
 
 export interface Squad {

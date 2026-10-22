@@ -878,8 +878,6 @@ export const sizes = {
   // at all, so it's larger than teamDot and rectangular rather than round.
   teamMarker: { width: 22, height: 15 },
   teamMarkerRadius: 2,
-  // Japan's disc and Brazil's diamond, as a fraction of the marker's height.
-  teamMarkerOverlayScale: 0.6,
   // The "banner" marker variant used mid-round (see TeamMarker's `variant`
   // prop): thinner and longer than the picker's marker, and always rendered
   // with vertical bands regardless of the squad's real flag orientation.

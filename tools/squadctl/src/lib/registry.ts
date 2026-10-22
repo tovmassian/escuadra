@@ -28,6 +28,11 @@ export interface TeamRegistryEntry {
 export type TeamRegistry = TeamRegistryEntry[];
 
 const HEX = /^#[0-9a-fA-F]{6}$/;
+const MARKER_FIELDS = new Set<string>([
+  'bands',
+  'orientation',
+  'weights',
+] satisfies (keyof TeamMarker)[]);
 const WIKI_ARTICLE = /^https:\/\/en\.wikipedia\.org\/wiki\/(.+)$/;
 
 /** The `<Title>` the Wikipedia API wants, read out of the entry's source URL.
@@ -113,6 +118,15 @@ export function validateRegistry(value: unknown): string[] {
       errors.push(`${at}.identity.marker must be a TeamMarker with a non-empty bands array`);
     } else if (marker.orientation !== 'horizontal' && marker.orientation !== 'vertical') {
       errors.push(`${at}.identity.marker.orientation must be "horizontal" or "vertical"`);
+    }
+    // A marker is colour bands only: a disc, diamond or other device is never
+    // drawn (.claude/rules/team-identity.md).
+    if (isRecord(marker)) {
+      for (const key of Object.keys(marker)) {
+        if (!MARKER_FIELDS.has(key)) {
+          errors.push(`${at}.identity.marker.${key} is not a marker field: a marker is bands only`);
+        }
+      }
     }
   });
 

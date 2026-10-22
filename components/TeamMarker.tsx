@@ -24,19 +24,15 @@ export function TeamMarker({ marker, variant = 'default' }: TeamMarkerProps) {
   const dimensions = isBanner ? sizes.teamMarkerBanner : sizes.teamMarker;
   const isColumn = !isBanner && marker.orientation === 'horizontal';
 
-  // The banner always draws vertical bands, and a shape overlay becomes a
-  // middle band, since a disc or diamond has no room at the banner's height.
-  // `bannerBands` (lib/stageView.ts) owns that rule; the spotlight stage's
-  // team-colour fallback (spec §2.6) draws the same bands.
+  // The banner always draws vertical bands. `bannerBands` (lib/stageView.ts)
+  // owns that rule; the spotlight stage's team-colour fallback (spec §2.6)
+  // draws the same bands.
   const banded = isBanner
     ? bannerBands(marker)
     : marker.bands.map((color, i) => ({ color, weight: marker.weights?.[i] ?? 1 }));
   const bands = banded.map((b) => b.color);
   const weights = banded.map((b) => b.weight);
   const total = weights.reduce((sum, w) => sum + w, 0);
-
-  const showShapeOverlay = !isBanner && marker.overlay;
-  const overlaySize = dimensions.height * sizes.teamMarkerOverlayScale;
 
   return (
     <View
@@ -52,19 +48,6 @@ export function TeamMarker({ marker, variant = 'default' }: TeamMarkerProps) {
           style={{ flex: (weights[i] ?? 1) / total, backgroundColor: band }}
         />
       ))}
-      {showShapeOverlay && marker.overlay && (
-        <View style={styles.overlayWrap} pointerEvents="none">
-          <View
-            style={{
-              width: overlaySize,
-              height: overlaySize,
-              backgroundColor: marker.overlay.color,
-              borderRadius: marker.overlay.shape === 'disc' ? overlaySize / 2 : 0,
-              transform: marker.overlay.shape === 'diamond' ? [{ rotate: '45deg' }] : undefined,
-            }}
-          />
-        </View>
-      )}
     </View>
   );
 }
@@ -73,10 +56,5 @@ const styles = StyleSheet.create({
   marker: {
     borderRadius: sizes.teamMarkerRadius,
     overflow: 'hidden',
-  },
-  overlayWrap: {
-    ...StyleSheet.absoluteFill,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });

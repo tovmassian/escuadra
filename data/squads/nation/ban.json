@@ -7,14 +7,10 @@
   "secondaryColor": "#F42A41",
   "verified": true,
   "marker": {
-    "bands": ["#006A4E"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#F42A41"
-    }
+    "bands": ["#006A4E", "#F42A41", "#006A4E"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Bangladesh_national_football_team",
   "members": [
     {

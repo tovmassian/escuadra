@@ -7,14 +7,10 @@
   "secondaryColor": "#FFFFFF",
   "verified": true,
   "marker": {
-    "bands": ["#EE1C25"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#FFFFFF"
-    }
+    "bands": ["#EE1C25", "#FFFFFF", "#EE1C25"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Hong_Kong_national_football_team",
   "members": [
     {

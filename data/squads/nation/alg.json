@@ -8,13 +8,9 @@
   "verified": true,
   "marker": {
     "bands": ["#006233", "#FFFFFF"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#D21034"
-    }
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Algeria_national_football_team",
   "members": [
     {

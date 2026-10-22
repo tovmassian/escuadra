@@ -7,14 +7,10 @@
   "secondaryColor": "#D67900",
   "verified": true,
   "marker": {
-    "bands": ["#FFFFFF"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#D67900"
-    }
+    "bands": ["#FFFFFF", "#D67900", "#FFFFFF"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Cyprus_national_football_team",
   "members": [
     {

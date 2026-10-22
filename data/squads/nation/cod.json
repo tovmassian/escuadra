@@ -7,14 +7,10 @@
   "secondaryColor": "#F7D618",
   "verified": true,
   "marker": {
-    "bands": ["#007FFF"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#F7D618"
-    }
+    "bands": ["#007FFF", "#F7D618", "#007FFF"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/DR_Congo_national_football_team",
   "members": [
     {

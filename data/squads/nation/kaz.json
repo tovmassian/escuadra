@@ -7,14 +7,10 @@
   "secondaryColor": "#FFEC2D",
   "verified": true,
   "marker": {
-    "bands": ["#00ABC2"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#FFEC2D"
-    }
+    "bands": ["#00ABC2", "#FFEC2D", "#00ABC2"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Kazakhstan_national_football_team",
   "members": [
     {

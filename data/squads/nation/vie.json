@@ -7,14 +7,10 @@
   "secondaryColor": "#FFEB00",
   "verified": true,
   "marker": {
-    "bands": ["#FF0000"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#FFEB00"
-    }
+    "bands": ["#FF0000", "#FFEB00", "#FF0000"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Vietnam_national_football_team",
   "members": [
     {

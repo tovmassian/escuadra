@@ -7,14 +7,10 @@
   "secondaryColor": "#FFFFFF",
   "verified": true,
   "marker": {
-    "bands": ["#E30A17"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#FFFFFF"
-    }
+    "bands": ["#E30A17", "#FFFFFF", "#E30A17"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Turkey_national_football_team",
   "members": [
     {

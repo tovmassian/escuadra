@@ -7,14 +7,10 @@
   "secondaryColor": "#FFFF00",
   "verified": true,
   "marker": {
-    "bands": ["#EE1C25"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#FFFF00"
-    }
+    "bands": ["#EE1C25", "#FFFF00", "#EE1C25"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/China_national_football_team",
   "members": [
     {

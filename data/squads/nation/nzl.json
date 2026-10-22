@@ -7,14 +7,10 @@
   "secondaryColor": "#C8102E",
   "verified": true,
   "marker": {
-    "bands": ["#012169"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#C8102E"
-    }
+    "bands": ["#012169", "#C8102E", "#012169"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/New_Zealand_men's_national_football_team",
   "members": [
     {

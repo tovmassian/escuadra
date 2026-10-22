@@ -7,14 +7,10 @@
   "secondaryColor": "#F8E92E",
   "verified": true,
   "marker": {
-    "bands": ["#D82126"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#F8E92E"
-    }
+    "bands": ["#D82126", "#F8E92E", "#D82126"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/North_Macedonia_national_football_team",
   "members": [
     {

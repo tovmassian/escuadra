@@ -7,14 +7,10 @@
   "secondaryColor": "#BC002D",
   "verified": true,
   "marker": {
-    "bands": ["#FFFFFF"],
-    "orientation": "horizontal",
-    "overlay": {
-      "shape": "disc",
-      "color": "#BC002D"
-    }
+    "bands": ["#FFFFFF", "#BC002D", "#FFFFFF"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Japan_national_football_team",
   "members": [
     {

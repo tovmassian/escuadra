@@ -7,14 +7,10 @@
   "secondaryColor": "#CD2E3A",
   "verified": true,
   "marker": {
-    "bands": ["#FFFFFF"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#CD2E3A"
-    }
+    "bands": ["#FFFFFF", "#CD2E3A", "#FFFFFF"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/South_Korea_national_football_team",
   "members": [
     {

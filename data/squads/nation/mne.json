@@ -7,14 +7,10 @@
   "secondaryColor": "#FFC000",
   "verified": true,
   "marker": {
-    "bands": ["#E30000"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#FFC000"
-    }
+    "bands": ["#E30000", "#FFC000", "#E30000"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Montenegro_national_football_team",
   "members": [
     {

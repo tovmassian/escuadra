@@ -12,21 +12,9 @@ export interface Band {
 
 /**
  * A marker as vertical bands, under the in-round banner rule
- * (.claude/rules/team-identity.md):
- * - `orientation` is ignored.
- * - A sole band with an overlay (Japan's disc, Brazil's diamond) becomes
- *   edge/middle/edge in the overlay's colour, because the shape does not
- *   survive the banner's proportions.
+ * (.claude/rules/team-identity.md): `orientation` is ignored.
  */
 export function bannerBands(marker: TeamMarker): Band[] {
-  const sole = marker.bands.length === 1 ? marker.bands[0] : undefined;
-  if (marker.overlay && sole !== undefined) {
-    return [
-      { color: sole, weight: 1 },
-      { color: marker.overlay.color, weight: 1 },
-      { color: sole, weight: 1 },
-    ];
-  }
   return marker.bands.map((color, i) => ({ color, weight: marker.weights?.[i] ?? 1 }));
 }
 

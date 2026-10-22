@@ -22,12 +22,15 @@ actual colour right; do not invent or rotate an arbitrary hue.
 identity element, and every squad carries one — a nation's still feeds the
 in-round banner, where no image fits. It's declarative band geometry, not an
 asset: `bands` (fills, in draw order), `orientation`
-(`horizontal` | `vertical`), an optional `weights` array for uneven bands, and
-an optional `overlay` (a centred `disc` or `diamond` device, e.g. Japan's
-disc or Brazil's diamond). For a club it's the club's own colours laid out as
-bands — never an emblem. A nation's is its flag as geometry, kept for the
-in-round banner only; everywhere else a nation shows its real flag image (see
-`lib/flags.ts` and `components/Flag.tsx`).
+(`horizontal` | `vertical`) and an optional `weights` array for uneven bands.
+Colour bands only, never a disc, diamond or other device: a flag's emblem
+becomes bands of its real colours (Japan is white/red/white), and
+`squadctl registry check` and `lib/__tests__/squads.test.ts` fail any other
+marker field.
+For a club it's the club's own colours laid out as bands — never an emblem. A
+nation's is its flag as bands, kept for the in-round banner only; everywhere
+else a nation shows its real flag image (see `lib/flags.ts` and
+`components/Flag.tsx`).
 Both `data/index.json` (the picker manifest) and each squad file carry
 `primaryColor`/`secondaryColor`/`marker`, since the picker never imports full
 squad JSON.
@@ -47,11 +50,7 @@ the marker always renders as thin, tall, vertical bands, using `bands` (and
 entirely: Spain reads red/yellow/red left-to-right, not stacked. This is
 `TeamMarker`'s `variant="banner"` (`components/TeamMarker.tsx`,
 `sizes.teamMarkerBanner` in `theme/tokens.ts`) — always pass it on the
-question screen, never the bare `marker` prop. A shape `overlay` (Japan's
-disc, Brazil's diamond) doesn't survive the banner's height, so the banner
-renders it as a third middle band instead of a centred shape — edge/middle/
-edge, in the overlay's colour — derived from the marker's own data, never a
-per-team special case.
+question screen, never the bare `marker` prop.
 
 ## Flags (guardrail 2's carve-out)
 

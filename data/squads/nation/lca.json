@@ -7,14 +7,10 @@
   "secondaryColor": "#FCD116",
   "verified": true,
   "marker": {
-    "bands": ["#66CCFF"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "diamond",
-      "color": "#000000"
-    }
+    "bands": ["#66CCFF", "#000000", "#66CCFF"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Saint_Lucia_national_football_team",
   "members": [
     {

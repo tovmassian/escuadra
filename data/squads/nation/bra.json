@@ -7,14 +7,10 @@
   "secondaryColor": "#009739",
   "verified": true,
   "marker": {
-    "bands": ["#009739"],
-    "orientation": "horizontal",
-    "overlay": {
-      "shape": "diamond",
-      "color": "#FFDF00"
-    }
+    "bands": ["#009739", "#FFDF00", "#009739"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/Brazil_national_football_team",
   "members": [
     {

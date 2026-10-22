@@ -7,14 +7,10 @@
   "secondaryColor": "#162667",
   "verified": true,
   "marker": {
-    "bands": ["#FFFFFF"],
-    "orientation": "vertical",
-    "overlay": {
-      "shape": "disc",
-      "color": "#F4C53D"
-    }
+    "bands": ["#FFFFFF", "#F4C53D", "#FFFFFF"],
+    "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-10-22",
   "source": "https://en.wikipedia.org/wiki/United_States_Virgin_Islands_national_soccer_team",
   "members": [
     {
