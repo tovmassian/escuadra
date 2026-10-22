@@ -84,6 +84,18 @@ describe('escuadra-issue-runner suite', () => {
     }
   });
 
+  it('gives the skill the triage template the graders read', () => {
+    const skill = readFileSync(join(EVALS, '..', 'SKILL.md'), 'utf8');
+    expect(skill).toContain(TRIAGE_TEMPLATE);
+  });
+
+  it("keeps the skill's whole description, which an unquoted ` #` would cut short", () => {
+    const skill = readFileSync(join(EVALS, '..', 'SKILL.md'), 'utf8');
+    const description = /^description: (.*)$/m.exec(skill)?.[1] ?? '';
+    // In a plain YAML scalar ` #` starts a comment, and everything after it is dropped.
+    if (!/^['"]/.test(description)) expect(description).not.toMatch(/\s#/);
+  });
+
   it('keeps a case the skill must not fire on', () => {
     expect(SUITE.cases.some((item) => item.expect.kind === 'no-triage')).toBe(true);
   });
