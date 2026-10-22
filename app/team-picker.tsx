@@ -103,11 +103,15 @@ export default function TeamPicker() {
   const railHeight = letters.length * sizes.rail.letter;
   const railTop = insets.top + (rootHeight - insets.top - insets.bottom - railHeight) / 2;
   const push = listTop === null ? 0 : Math.max(0, listTop - railTop);
+  // Written only on a change: past the ride-up, every scroll event would
+  // otherwise write the same 0 across to the UI thread.
   const placeRail = () => {
-    if (!touching.current) shift.value = Math.max(0, push - scrollY.current);
+    const next = Math.max(0, push - scrollY.current);
+    if (!touching.current && next !== shift.value) shift.value = next;
   };
   useEffect(() => {
-    if (!touching.current) shift.value = Math.max(0, push - scrollY.current);
+    const next = Math.max(0, push - scrollY.current);
+    if (!touching.current && next !== shift.value) shift.value = next;
   }, [push, shift]);
   const railShift = useAnimatedStyle(() => ({ transform: [{ translateY: shift.value }] }));
   const onRailTouch = (active: boolean) => {

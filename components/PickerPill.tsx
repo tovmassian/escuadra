@@ -1,4 +1,4 @@
-import { Pressable, StyleSheet, Text } from 'react-native';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { borderWidths, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
@@ -8,13 +8,14 @@ interface PickerPillProps {
   onPress: () => void;
 }
 
-// A league filter pill on the clubs tab (#176). Drawn at 40 pt; the slop takes
-// its tap target to `minTapTarget`.
-const SLOP = (sizes.minTapTarget - sizes.pickerPill) / 2;
-
+// A league filter pill on the clubs tab (#176). The pill is drawn at 40 pt
+// inside a transparent `minTapTarget`-tall Pressable. hitSlop would not do:
+// it never reaches past the parent's bounds, and the pills' scroll row is
+// only as tall as its children.
 export function PickerPill({ label, active, onPress }: PickerPillProps) {
   const colors = useThemeColors();
   const styles = StyleSheet.create({
+    target: { height: sizes.minTapTarget, justifyContent: 'center' },
     pill: {
       justifyContent: 'center',
       height: sizes.pickerPill,
@@ -34,10 +35,11 @@ export function PickerPill({ label, active, onPress }: PickerPillProps) {
       accessibilityRole="button"
       accessibilityState={{ selected: active }}
       aria-selected={active}
-      hitSlop={{ top: SLOP, bottom: SLOP }}
-      style={[styles.pill, active && styles.pillActive]}
+      style={styles.target}
     >
-      <Text style={[styles.label, active && styles.labelActive]}>{label}</Text>
+      <View style={[styles.pill, active && styles.pillActive]}>
+        <Text style={[styles.label, active && styles.labelActive]}>{label}</Text>
+      </View>
     </Pressable>
   );
 }

@@ -21,21 +21,17 @@ export function LetterRail({ letters, current, onJump, onTouch }: LetterRailProp
   const styles = StyleSheet.create({
     rail: { width: sizes.rail.width, alignItems: 'center' },
     letter: { ...typography.railLetter, height: sizes.rail.letter, textAlign: 'center' },
+    // The letters take no touches: see `top` below.
+    letters: { alignItems: 'center', pointerEvents: 'none' },
   });
-  const rail = useRef<View>(null);
-  // The rail's top edge in the window: `locationY` is relative to whichever
-  // letter was hit, so it can't place the finger. Measured on layout and again
-  // as a touch starts. Null until the first measure lands: on
-  // react-native-web `measureInWindow` is async, and a move mapped against a
-  // zero top would clamp to the last letter.
+  // The rail's top edge in page coordinates, fixed as a touch starts. The
+  // letters take no touches, so the rail itself is always the target and
+  // `locationY` is the finger's distance from the rail's top: `pageY -
+  // locationY` places the rail synchronously, with no measure to wait for
+  // and no transform to account for. Moves map against it for the whole
+  // gesture, even if the rail moves under the finger.
   const top = useRef<number | null>(null);
   const last = useRef<string | null>(null);
-
-  const measure = (then?: () => void) =>
-    rail.current?.measureInWindow((_x, y) => {
-      top.current = y;
-      then?.();
-    });
 
   const jumpTo = (pageY: number) => {
     if (top.current === null) return;
@@ -48,21 +44,20 @@ export function LetterRail({ letters, current, onJump, onTouch }: LetterRailProp
   };
 
   const onGrant = (e: GestureResponderEvent) => {
-    const { pageY } = e.nativeEvent;
+    const { pageY, locationY } = e.nativeEvent;
+    top.current = pageY - locationY;
     last.current = null;
     onTouch?.(true);
-    measure(() => jumpTo(pageY));
+    jumpTo(pageY);
   };
   const onEnd = () => onTouch?.(false);
 
   return (
     <View
-      ref={rail}
       testID="letter-rail"
       style={styles.rail}
       accessibilityElementsHidden
       importantForAccessibility="no-hide-descendants"
-      onLayout={() => measure()}
       onStartShouldSetResponder={() => true}
       onMoveShouldSetResponder={() => true}
       // A drag down the rail stays the rail's: the list behind it must not
@@ -73,22 +68,24 @@ export function LetterRail({ letters, current, onJump, onTouch }: LetterRailProp
       onResponderRelease={onEnd}
       onResponderTerminate={onEnd}
     >
-      {letters.map((letter) => (
-        <Text
-          key={letter}
-          testID={`rail-${letter}`}
-          selectable={false}
-          // Each letter keeps its fixed `sizes.rail.letter` pitch, which the
-          // touch mapping above relies on, so its text may grow only so far.
-          maxFontSizeMultiplier={fontScaleCap.display}
-          style={[
-            styles.letter,
-            { color: letter === current ? colors.accentLine : colors.textMuted },
-          ]}
-        >
-          {letter}
-        </Text>
-      ))}
+      <View style={styles.letters}>
+        {letters.map((letter) => (
+          <Text
+            key={letter}
+            testID={`rail-${letter}`}
+            selectable={false}
+            // Each letter keeps its fixed `sizes.rail.letter` pitch, which the
+            // touch mapping above relies on, so its text may grow only so far.
+            maxFontSizeMultiplier={fontScaleCap.rail}
+            style={[
+              styles.letter,
+              { color: letter === current ? colors.accentLine : colors.textMuted },
+            ]}
+          >
+            {letter}
+          </Text>
+        ))}
+      </View>
     </View>
   );
 }

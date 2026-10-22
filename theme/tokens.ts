@@ -416,8 +416,7 @@ export const typography = {
     fontSize: 28,
     letterSpacing: -0.56,
   },
-  // Segmented-control / filter-pill labels.
-  segmentLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 13 },
+  // Filter-pill labels.
   filterLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },
   // Difficulty-ladder badge number.
   badgeNumber: { fontFamily: 'IBMPlexMono-Bold', fontSize: 18 },
@@ -680,7 +679,10 @@ export const typography = {
 // already large, and at the largest accessibility sizes it would push the
 // answers off the screen. It keeps growing with the setting, up to this cap;
 // everything else on the screen scales freely and the screen scrolls.
-export const fontScaleCap = { display: 1.2 } as const;
+// The picker's letter rail (`LetterRail`) sets each letter in a fixed 14 pt
+// slot (`sizes.rail.letter`), which its touch mapping relies on, so its 10 pt
+// letters may grow only a little before they outgrow the slot.
+export const fontScaleCap = { display: 1.2, rail: 1.1 } as const;
 
 // 1.5px is the option-card default; 2px marks the emphasised "correct,
 // unpicked" card in the incorrect-reveal state.
