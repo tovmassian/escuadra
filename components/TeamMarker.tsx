@@ -55,10 +55,10 @@ export function TeamMarker({ marker, variant }: TeamMarkerProps) {
           the bands fill the whole 40 × 27, as a flag image does. */}
       {!isBanner && (
         <View
-          pointerEvents="none"
           style={[
             StyleSheet.absoluteFill,
             {
+              pointerEvents: 'none',
               borderRadius: radius,
               borderWidth: borderWidths.hairline,
               borderColor: colors.markerRing,

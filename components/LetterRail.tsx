@@ -9,12 +9,14 @@ interface LetterRailProps {
   /** The letter whose section is in view, or null. */
   current: string | null;
   onJump: (letter: string) => void;
+  /** True as a finger lands on the rail, false as it leaves. */
+  onTouch?: (touching: boolean) => void;
 }
 
 // The nations tab's A–Z index (#176). The whole column is the touch target: a
 // tap or a drag maps its y position to a letter. Hidden from screen readers
 // (spec decision 4): the list itself is what they read.
-export function LetterRail({ letters, current, onJump }: LetterRailProps) {
+export function LetterRail({ letters, current, onJump, onTouch }: LetterRailProps) {
   const colors = useThemeColors();
   const styles = StyleSheet.create({
     rail: { width: sizes.rail.width, alignItems: 'center' },
@@ -48,8 +50,10 @@ export function LetterRail({ letters, current, onJump }: LetterRailProps) {
   const onGrant = (e: GestureResponderEvent) => {
     const { pageY } = e.nativeEvent;
     last.current = null;
+    onTouch?.(true);
     measure(() => jumpTo(pageY));
   };
+  const onEnd = () => onTouch?.(false);
 
   return (
     <View
@@ -66,6 +70,8 @@ export function LetterRail({ letters, current, onJump }: LetterRailProps) {
       onResponderTerminationRequest={() => false}
       onResponderGrant={onGrant}
       onResponderMove={(e) => jumpTo(e.nativeEvent.pageY)}
+      onResponderRelease={onEnd}
+      onResponderTerminate={onEnd}
     >
       {letters.map((letter) => (
         <Text
