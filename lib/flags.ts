@@ -9,7 +9,7 @@
 // player nationalities would still need a table regardless. See
 // docs/superpowers/specs/2026-09-09-png-flags-design.md.
 //
-// Drift is the risk this trades for, and lib/flags.test.ts is the guard: it
+// Drift is the risk this trades for, and lib/__tests__/flags.test.ts is the guard: it
 // fails `npm run check` if any nationality in players.json or any nation
 // squad name is missing here.
 import type { FlagCode } from '@/assets/flags/generated';

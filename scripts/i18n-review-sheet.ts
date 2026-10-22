@@ -1,7 +1,7 @@
 // The sheet a native reviewer signs off (#145): every catalog text beside its
 // English and its length limit, then the country names. Written next to that
 // language's shots by `REVIEW_SHEET=de npx vitest run
-// scripts/i18n-review-sheet.test.ts` — a Vitest run, because Node alone cannot
+// scripts/__tests__/i18n-review-sheet.test.ts` — a Vitest run, because Node alone cannot
 // load the catalogs' extensionless imports.
 import type { FlagCode } from '@/assets/flags/generated';
 import { LENGTH_BUDGETS } from '@/i18n/budgets';
