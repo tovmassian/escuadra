@@ -282,6 +282,18 @@ export const it: Messages = {
     clubs: 'Club',
     nations: 'Nazionali',
     allClubs: 'Tutti i club',
+    // Feminine: the confederazioni.
+    allConfederations: 'Tutte',
+    regions: {
+      UEFA: 'Europa',
+      CONMEBOL: 'Sudamerica',
+      CONCACAF: 'Nord e Centro America e Caraibi',
+      CAF: 'Africa',
+      AFC: 'Asia',
+      OFC: 'Oceania',
+    },
+    allNations: 'Tutte le nazionali',
+    nationsCaption: (name: string) => `${name} · A–Z`,
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     bestSpoken: (level: number, correct: number, total: number) =>
       `Livello ${level}, record ${correct} su ${total}`,

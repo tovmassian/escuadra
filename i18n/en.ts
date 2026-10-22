@@ -332,6 +332,21 @@ export const en = {
     nations: 'Nations',
     /** ≤ 16 chars: the clubs list's caption with no league picked, in mono capitals. */
     allClubs: 'All clubs',
+    /** ≤ 6 chars: the confederation pill that clears the filter on Nations. */
+    allConfederations: 'All',
+    /** A confederation pill's region, spoken after its acronym: "UEFA, Europe". */
+    regions: {
+      UEFA: 'Europe',
+      CONMEBOL: 'South America',
+      CONCACAF: 'North and Central America and the Caribbean',
+      CAF: 'Africa',
+      AFC: 'Asia',
+      OFC: 'Oceania',
+    },
+    /** ≤ 22 chars: the nations list's caption with no confederation picked, in mono capitals. */
+    allNations: 'All nations',
+    /** The nations list's caption, beside the first letter: the confederation, or "All nations". */
+    nationsCaption: (name: string) => `${name} · A–Z`,
     /** The clubs list's caption: the league (or "All clubs") and how many it lists. */
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     /** A played row's score block, spoken after the team's name. */

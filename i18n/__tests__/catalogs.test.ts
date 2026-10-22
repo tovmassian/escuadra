@@ -24,9 +24,10 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'slotCodes.NAME',
     'slotCodes.POS',
     'slotCodes.NAT',
-    // "{1}: {2}" and "{1} · {2}" have no words.
+    // "{1}: {2}", "{1} · {2}" and "{1} · A–Z" have no words.
     'round.slotSpoken.given',
     'picker.listCaption',
+    'picker.nationsCaption',
     // "Text" is the German word for a share as text.
     'share.text',
     // "Version {1}": German writes it the same.
@@ -46,8 +47,11 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'share.image',
     // "Clubs" is French too.
     'picker.clubs',
-    // "{1} · {2}" has no words.
+    // "{1} · {2}" and "{1} · A–Z" have no words.
     'picker.listCaption',
+    'picker.nationsCaption',
+    // "Europe" is French too.
+    'picker.regions.UEFA',
     // "Version {1}": French writes it the same.
     'settings.version',
     // "Licences" is the French word too.
@@ -60,9 +64,12 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'slotCodes.CLUB',
     // POS for Posición.
     'slotCodes.POS',
-    // "{1}: {2}" and "{1} · {2}" have no words.
+    // "{1}: {2}", "{1} · {2}" and "{1} · A–Z" have no words.
     'round.slotSpoken.given',
     'picker.listCaption',
+    'picker.nationsCaption',
+    // "Asia" is Spanish too.
+    'picker.regions.AFC',
     // "Software" is the word Spanish uses.
     'about.licences.software',
   ],
@@ -70,9 +77,14 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     // Club is the Italian word too, and CLUB its chip code.
     'slots.CLUB',
     'slotCodes.CLUB',
-    // "{1}: {2}" and "{1} · {2}" have no words.
+    // "{1}: {2}", "{1} · {2}" and "{1} · A–Z" have no words.
     'round.slotSpoken.given',
     'picker.listCaption',
+    'picker.nationsCaption',
+    // "Africa", "Asia" and "Oceania" are Italian too.
+    'picker.regions.CAF',
+    'picker.regions.AFC',
+    'picker.regions.OFC',
     // "Privacy" is the Italian word, as in "informativa sulla privacy".
     'settings.sections.privacy',
     'settings.privacy',

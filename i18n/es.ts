@@ -289,6 +289,18 @@ export const es: Messages = {
     // "Selecciones", the football word for national teams.
     nations: 'Selecciones',
     allClubs: 'Todos los clubes',
+    // Feminine: the confederaciones.
+    allConfederations: 'Todas',
+    regions: {
+      UEFA: 'Europa',
+      CONMEBOL: 'Sudamérica',
+      CONCACAF: 'Norteamérica, Centroamérica y el Caribe',
+      CAF: 'África',
+      AFC: 'Asia',
+      OFC: 'Oceanía',
+    },
+    allNations: 'Todas las selecciones',
+    nationsCaption: (name: string) => `${name} · A–Z`,
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     bestSpoken: (level: number, correct: number, total: number) =>
       `Nivel ${level}, récord ${correct} de ${total}`,

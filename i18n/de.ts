@@ -254,6 +254,17 @@ export const de: Messages = {
     // "Nationalteams" is over the tab's twelve characters.
     nations: 'Nationen',
     allClubs: 'Alle Vereine',
+    allConfederations: 'Alle',
+    regions: {
+      UEFA: 'Europa',
+      CONMEBOL: 'Südamerika',
+      CONCACAF: 'Nord- und Mittelamerika und die Karibik',
+      CAF: 'Afrika',
+      AFC: 'Asien',
+      OFC: 'Ozeanien',
+    },
+    allNations: 'Alle Nationen',
+    nationsCaption: (name: string) => `${name} · A–Z`,
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     bestSpoken: (level: number, correct: number, total: number) =>
       `Level ${level}, Rekord ${correct} von ${total}`,
