@@ -43,7 +43,7 @@ function possessive(name: string): string {
 
 const PHOTO_CREDITS = 'Photo credits';
 const CROPPED = 'cropped';
-const USAGE_STATISTICS = 'Share anonymous usage statistics';
+const USAGE_STATISTICS = 'Usage statistics';
 
 export const en = {
   common: {
@@ -57,12 +57,8 @@ export const en = {
     scoreSpoken: (correct: number, attempted: number) => `Score: ${correct} of ${attempted}`,
   },
   home: {
-    /** ≤ 8 chars: the top-left link. */
-    aboutLink: 'About',
-    /** Spoken name of the theme switch. */
-    darkTheme: 'Dark theme',
-    /** Spoken name of the language chip, with the current language in its own name: "Language: English". */
-    languageLabel: (name: string) => `Language: ${name}`,
+    /** The gear button's spoken name. */
+    settings: 'Settings',
     /** ≤ 24 chars: the continue card's meta line, in IBM Plex Mono capitals. */
     continueMeta: (level: number, best: number | undefined, total: number) =>
       best === undefined ? `LEVEL ${level}` : `LEVEL ${level} · BEST ${best}/${total}`,
@@ -76,6 +72,55 @@ export const en = {
     title: 'Language',
     /** ≤ 28 chars: the first row, with the language the phone resolves to in its own name. */
     matchPhone: (name: string) => `Match phone · ${name}`,
+  },
+  settings: {
+    /** ≤ 16 chars: the screen's title, in Archivo capitals. */
+    title: 'Settings',
+    /** ≤ 16 chars: a section's label, in IBM Plex Mono capitals. */
+    sections: {
+      play: 'Play',
+      privacy: 'Privacy',
+      support: 'Support',
+      comingNext: 'Coming next',
+      about: 'About',
+    },
+    /** ≤ 20 chars: the Language row. */
+    language: 'Language',
+    /** The Language row, spoken, with the current language in its own name: "Language: English". */
+    languageSpoken: (name: string) => `Language: ${name}`,
+    /** ≤ 20 chars: the Appearance row, and the control's spoken name. */
+    appearance: 'Appearance',
+    /** ≤ 12 chars: an Appearance option. */
+    appearanceOptions: { system: 'Match phone', dark: 'Dark', light: 'Light' },
+    /** ≤ 20 chars: the row's label and the switch's spoken name. */
+    vibration: 'Vibration',
+    /** ≤ 24 chars: the row's label and the switch's spoken name. */
+    usageStatistics: USAGE_STATISTICS,
+    /** ≤ 56 chars: the line under Usage statistics. */
+    usageNote: 'Anonymous. About says exactly what is sent.',
+    rate: {
+      /** ≤ 24 chars: the Rate card's title. */
+      title: `Rate ${ESCUADRA}`,
+      /** ≤ 48 chars: the line under it. */
+      line: 'A rating helps other fans find it.',
+      /** ≤ 10 chars: the button, in Archivo capitals. */
+      button: 'Rate',
+    },
+    examMode: {
+      /** ≤ 20 chars: Coming next's title. */
+      title: 'Exam mode',
+      /** ≤ 56 chars: the line under it. */
+      line: 'The whole squad, on shirt numbers alone.',
+      /** ≤ 8 chars: the chip, in IBM Plex Mono capitals. */
+      soon: 'Soon',
+    },
+    /** ≤ 24 chars: a row of the About card. */
+    aboutEscuadra: `About ${ESCUADRA}`,
+    privacy: 'Privacy',
+    licences: 'Licences',
+    version: (version: string) => `Version ${version}`,
+    /** In brackets after the version on a build's own bundle. */
+    builtIn: 'built-in',
   },
   formats: {
     /** "21 Aug 2026". */
@@ -302,9 +347,6 @@ export const en = {
     tagline: 'Learn every squad',
   },
   about: {
-    version: (version: string) => `Version ${version}`,
-    /** In brackets after the version on a build's own bundle. */
-    builtIn: 'built-in',
     title: 'About',
     /** Affiliation, then crests. */
     intro: [
@@ -352,9 +394,6 @@ export const en = {
       fonts: 'Fonts',
       software: 'Software',
     },
-    /** The setting row's label and the switch's spoken name. */
-    vibration: 'Vibration',
-    usageStatistics: USAGE_STATISTICS,
     privacy: {
       heading: 'Privacy',
       /** Set in emphasis. */
@@ -380,7 +419,7 @@ export const en = {
         {
           heading: 'Anonymous usage statistics',
           paragraphs: [
-            `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off on the app's About screen. Each one carries a hashed form of a random identifier created for these statistics (separate from the one the app-update check uses) and a random session code that is new each time the app starts. Like any online service, TelemetryDeck also receives your device's IP address and the standard technical details of each request, which on iOS include the app's build and your device's system version. TelemetryDeck's own privacy policy applies to what it receives. The identifier and the session code are random, not derived from your device, and not linked to you or your accounts. Neither ${ESCUADRA} nor the developer shares them or the statistics with anyone else.`,
+            `${ESCUADRA} sends anonymous usage statistics to TelemetryDeck, an analytics service, unless you switch "${USAGE_STATISTICS}" off in the app's Settings. Each one carries a hashed form of a random identifier created for these statistics (separate from the one the app-update check uses) and a random session code that is new each time the app starts. Like any online service, TelemetryDeck also receives your device's IP address and the standard technical details of each request, which on iOS include the app's build and your device's system version. TelemetryDeck's own privacy policy applies to what it receives. The identifier and the session code are random, not derived from your device, and not linked to you or your accounts. Neither ${ESCUADRA} nor the developer shares them or the statistics with anyone else.`,
             `The statistics are: the app was opened, with its language and whether that language follows your phone's language or was chosen in the app; a round started, with whether the team is a club or a nation and the difficulty level; a round finished, with the same two details, the score, and whether it was ${A_LA_ESCUADRA}; the Study screen was opened, with whether the team is a club or a nation; and a result was passed to your phone's share menu, with the level, the score and whether it was a picture or text. They never include team names, player names, your answers or anything you type.`,
           ],
         },

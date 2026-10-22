@@ -99,7 +99,7 @@ export default function Home() {
     >
       <View style={styles.toggleRow}>
         <Pressable onPress={() => router.push('/about')} accessibilityRole="button" hitSlop={12}>
-          <Text style={styles.aboutLink}>{t.home.aboutLink}</Text>
+          <Text style={styles.aboutLink}>{t.about.title}</Text>
         </Pressable>
         <View style={styles.controls}>
           <LanguageChip />

@@ -35,9 +35,9 @@ function updateGroupFromManifest(manifest: Partial<Manifest>): string | null {
  * table of cases this implements.
  */
 export function versionLabel(version: string, update: UpdateState, messages: Messages): string {
-  const label = messages.about.version(version);
+  const label = messages.settings.version(version);
   if (!update.isEnabled) return label;
-  if (update.isEmbeddedLaunch) return `${label} (${messages.about.builtIn})`;
+  if (update.isEmbeddedLaunch) return `${label} (${messages.settings.builtIn})`;
 
   const id = updateGroupFromManifest(update.manifest) ?? update.updateId;
   if (!id) return label;

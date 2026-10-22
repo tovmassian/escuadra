@@ -35,7 +35,7 @@ export function ThemeToggle() {
       onPress={() => setThemePreference(isDark ? 'light' : 'dark')}
       accessibilityRole="switch"
       accessibilityState={{ checked: isDark }}
-      accessibilityLabel={t.home.darkTheme}
+      accessibilityLabel={t.settings.appearanceOptions.dark}
       style={[styles.track, { backgroundColor: colors.surfaceRaised, borderColor: colors.border }]}
     >
       <Animated.View style={[styles.thumb, { backgroundColor: colors.thumbBg }, thumbStyle]}>

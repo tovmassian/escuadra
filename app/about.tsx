@@ -119,12 +119,12 @@ export default function About() {
 
         <View style={[styles.section, styles.settingRow]}>
           <Text style={styles.settingLabel} nativeID="haptics-label">
-            {t.about.vibration}
+            {t.settings.vibration}
           </Text>
           <Switch
             testID="haptics-toggle"
             accessibilityLabelledBy="haptics-label"
-            accessibilityLabel={t.about.vibration}
+            accessibilityLabel={t.settings.vibration}
             value={haptics}
             onValueChange={setHaptics}
             trackColor={{ false: colors.surfaceRaised, true: colors.accent }}
@@ -135,12 +135,12 @@ export default function About() {
 
         <View style={[styles.section, styles.settingRow]}>
           <Text style={styles.settingLabel} nativeID="telemetry-label">
-            {t.about.usageStatistics}
+            {t.settings.usageStatistics}
           </Text>
           <Switch
             testID="telemetry-toggle"
             accessibilityLabelledBy="telemetry-label"
-            accessibilityLabel={t.about.usageStatistics}
+            accessibilityLabel={t.settings.usageStatistics}
             value={telemetryEnabled}
             onValueChange={setTelemetryEnabled}
             trackColor={{ false: colors.surfaceRaised, true: colors.accent }}

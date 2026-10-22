@@ -39,7 +39,7 @@ export function LanguageChip() {
         onPress={() => setOpen(true)}
         hitSlop={slop}
         accessibilityRole="button"
-        accessibilityLabel={t.home.languageLabel(LANGUAGE_NAMES[language])}
+        accessibilityLabel={t.settings.languageSpoken(LANGUAGE_NAMES[language])}
         style={styles.chip}
       >
         <Text style={styles.code}>{languageChipCode(language)}</Text>

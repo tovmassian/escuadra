@@ -18,7 +18,6 @@ const LONGEST_LANGUAGE_NAME = Object.values(LANGUAGE_NAMES).reduce((a, b) =>
 
 export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 8, texts: { 'common.back': (m) => m.common.back } },
-  { budget: 8, texts: { 'home.aboutLink': (m) => m.home.aboutLink } },
   { budget: 24, texts: { 'home.continueMeta': (m) => m.home.continueMeta(3, 10, 10) } },
   { budget: 18, texts: { 'home.startTraining': (m) => m.home.startTraining } },
   { budget: 20, texts: { 'home.browseAllTeams': (m) => m.home.browseAllTeams } },
@@ -26,6 +25,44 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   {
     budget: 28,
     texts: { 'languageSheet.matchPhone': (m) => m.languageSheet.matchPhone(LONGEST_LANGUAGE_NAME) },
+  },
+  { budget: 16, texts: { 'settings.title': (m) => m.settings.title } },
+  {
+    budget: 16,
+    texts: {
+      'settings.sections.play': (m) => m.settings.sections.play,
+      'settings.sections.privacy': (m) => m.settings.sections.privacy,
+      'settings.sections.support': (m) => m.settings.sections.support,
+      'settings.sections.comingNext': (m) => m.settings.sections.comingNext,
+      'settings.sections.about': (m) => m.settings.sections.about,
+    },
+  },
+  { budget: 20, texts: { 'settings.language': (m) => m.settings.language } },
+  { budget: 20, texts: { 'settings.appearance': (m) => m.settings.appearance } },
+  {
+    budget: 12,
+    texts: {
+      'settings.appearanceOptions.system': (m) => m.settings.appearanceOptions.system,
+      'settings.appearanceOptions.dark': (m) => m.settings.appearanceOptions.dark,
+      'settings.appearanceOptions.light': (m) => m.settings.appearanceOptions.light,
+    },
+  },
+  { budget: 20, texts: { 'settings.vibration': (m) => m.settings.vibration } },
+  { budget: 24, texts: { 'settings.usageStatistics': (m) => m.settings.usageStatistics } },
+  { budget: 56, texts: { 'settings.usageNote': (m) => m.settings.usageNote } },
+  { budget: 24, texts: { 'settings.rate.title': (m) => m.settings.rate.title } },
+  { budget: 48, texts: { 'settings.rate.line': (m) => m.settings.rate.line } },
+  { budget: 10, texts: { 'settings.rate.button': (m) => m.settings.rate.button } },
+  { budget: 20, texts: { 'settings.examMode.title': (m) => m.settings.examMode.title } },
+  { budget: 56, texts: { 'settings.examMode.line': (m) => m.settings.examMode.line } },
+  { budget: 8, texts: { 'settings.examMode.soon': (m) => m.settings.examMode.soon } },
+  {
+    budget: 24,
+    texts: {
+      'settings.aboutEscuadra': (m) => m.settings.aboutEscuadra,
+      'settings.privacy': (m) => m.settings.privacy,
+      'settings.licences': (m) => m.settings.licences,
+    },
   },
   {
     budget: 3,
