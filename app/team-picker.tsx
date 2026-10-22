@@ -130,7 +130,6 @@ export default function TeamPicker() {
           <TeamRow
             name={squadDisplayName(item, language)}
             marker={item.marker}
-            season={item.season}
             flag={item.kind === 'nation' ? flagFor(item.name) : undefined}
             progress={hydrated ? teamProgress(item.id, bestScores) : undefined}
             onPress={() =>

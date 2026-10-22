@@ -941,20 +941,17 @@ export const sizes = {
   // Plain colour dot for Home's "continue" card — a different, simpler
   // element than the team identity marker below.
   teamDot: 10,
-  // The team identity marker — a banded rectangle, shared shape for both
-  // clubs and nations. Needs more area than a small swatch to read the bands
-  // at all, so it's larger than teamDot and rectangular rather than round.
-  teamMarker: { width: 22, height: 15 },
+  // The small corner radius of a team's bands and flags (Study's banner strip,
+  // the in-round banner, a flag on an answer tile or a chip).
   teamMarkerRadius: 2,
   // The "banner" marker variant used mid-round (see TeamMarker's `variant`
   // prop): thinner and longer than the picker's marker, and always rendered
   // with vertical bands regardless of the squad's real flag orientation.
   teamMarkerBanner: { width: 100, height: 3 },
-  // Nation flag images (assets/flags/*.png). Three sizes, one per surface.
-  // `flagMarker` deliberately matches `teamMarker` above so a nation row and
-  // a club row in the picker keep identical metrics. Source images are 160 px
-  // wide (160x107 for a 3:2 flag), so `flagMarker` at @3x (66 px) leaves about
-  // 2.4x headroom — see assets/flags/README.md.
+  // Nation flag images (assets/flags/*.png), one size per surface; the
+  // picker's is `pickerMarker` below. `flagMarker` is the flag on a level-3
+  // nationality answer tile. Source images are 160 px wide (160x107 for a 3:2
+  // flag): see assets/flags/README.md for the headroom.
   flagMarker: { width: 22, height: 15 },
   flagInline: { width: 18, height: 12 },
   flagRow: { width: 20, height: 13 },
@@ -966,9 +963,6 @@ export const sizes = {
   wordmarkMarkHero: 86,
   // A 10/10's player circles.
   rosterAvatar: 54,
-  // Team-picker rows carry a progress sub-line, so they need a second line of
-  // height.
-  rowHeightTall: 64,
   // ---- 2.0 spotlight screens (spec §2, §3, §5, §8) ----
   // The question screen goes compact below this usable height (window minus
   // safe-area insets).
@@ -1074,9 +1068,8 @@ export const shareCapture = { width: 1080, height: 1920 } as const;
 export const iconSize = {
   markLarge: 18, // VerdictGlyph default size; AnswerTile's correct mark
   markSmall: 13, // VerdictGlyph's smaller size; AnswerTile's incorrect-picked mark
-  chevron: 16, // TeamRow disclosure chevron
   chevronLarge: 18, // Home's continue-card chevron
-  searchGlyph: 15, // SearchField's magnifying-glass icon
+  searchGlyph: 20, // SearchField's magnifying-glass icon (spec #176 §3)
   clearGlyph: 10, // SearchField's clear (×) button, drawn from two crossed bars
   closeGlyph: 14, // the question's close ×, two crossed bars
   flameGlyph: 12, // the streak chip's flame

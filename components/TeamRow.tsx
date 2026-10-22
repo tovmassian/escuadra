@@ -68,9 +68,8 @@ export function TeamRow({ name, marker, flag, progress, onPress }: TeamRowProps)
           <Text style={styles.level}>{t.common.level(block.level)}</Text>
           <Text style={[styles.best, block.flawless && { color: colors.successText }]}>
             {block.correct}
-            <Text style={[styles.tail, block.flawless && { color: colors.successText }]}>
-              /{block.total}
-            </Text>
+            {/* "/10" stays muted even at 10/10: only the score turns green. */}
+            <Text style={styles.tail}>/{block.total}</Text>
           </Text>
         </View>
       )}

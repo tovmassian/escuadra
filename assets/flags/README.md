@@ -33,9 +33,9 @@ licence you cannot state is a release blocker, not a detail.
 
 ## Resolution
 
-160 px wide. The largest on-screen use is `sizes.flagMarker` at 22 pt, which
-is 66 px at @3x, so there is roughly 2.4× headroom — enough for a larger
-treatment later without resourcing.
+160 px wide. The largest on-screen use is the team picker's `sizes.pickerMarker`
+at 40 pt, which is 120 px at @3x, so there is roughly 1.3× headroom. A larger
+treatment than that needs wider sources.
 
 Aspect ratios are each flag's true ratio, not normalised: most are 3:2, but
 England and Scotland are 5:3 and Northern Ireland is 2:1. `components/Flag.tsx`

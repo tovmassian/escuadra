@@ -8,7 +8,10 @@ interface PickerPillProps {
   onPress: () => void;
 }
 
-// A league filter pill on the clubs tab (#176).
+// A league filter pill on the clubs tab (#176). Drawn at 40 pt; the slop takes
+// its tap target to `minTapTarget`.
+const SLOP = (sizes.minTapTarget - sizes.pickerPill) / 2;
+
 export function PickerPill({ label, active, onPress }: PickerPillProps) {
   const colors = useThemeColors();
   const styles = StyleSheet.create({
@@ -31,6 +34,7 @@ export function PickerPill({ label, active, onPress }: PickerPillProps) {
       accessibilityRole="button"
       accessibilityState={{ selected: active }}
       aria-selected={active}
+      hitSlop={{ top: SLOP, bottom: SLOP }}
       style={[styles.pill, active && styles.pillActive]}
     >
       <Text style={[styles.label, active && styles.labelActive]}>{label}</Text>
