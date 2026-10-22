@@ -131,6 +131,13 @@ export interface Palette {
   /** The divider under each Study list row. A step quieter than `border`,
    *  which outlines controls. */
   hairline: string;
+  // ---- 2.0 Settings (#175) ----
+  /** A settings switch's thumb, in either state. */
+  switchThumb: string;
+  /** The SOON chip's fill on Coming next. Translucent. */
+  soonBg: string;
+  /** The Escuadra mark on the brand plate (Settings' Rate card). */
+  plateMark: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -172,6 +179,8 @@ const sharedRoles = {
   revealLine: 'rgba(255,255,255,0.5)',
   revealText: 'rgba(255,255,255,0.85)',
   photoChip: 'rgba(15,17,23,0.6)',
+  switchThumb: '#ffffff',
+  plateMark: '#e7e9f5',
 } as const;
 
 // The ramp sits higher than it did: the mark's trail squares, at 30% and 55%
@@ -217,6 +226,7 @@ const darkRoles = {
   nextFill: 'rgba(97,189,103,0.2)',
   link: '#8fb4ff',
   hairline: '#23272e',
+  soonBg: 'rgba(255,255,255,0.08)',
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -265,6 +275,7 @@ const lightRoles = {
   nextFill: 'rgba(47,143,62,0.14)',
   link: '#2f56c6',
   hairline: '#e3e5e9',
+  soonBg: 'rgba(20,22,26,0.06)',
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -605,6 +616,35 @@ export const typography = {
   avatarNumber: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 20 },
   // The count after a filter pill's label ("GK 3").
   filterCount: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 11.5 },
+  // ---- 2.0 Settings (#175) ----
+  settingsTitle: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 32,
+    lineHeight: 34,
+    letterSpacing: -0.4,
+    textTransform: 'uppercase' as const,
+  },
+  settingsSection: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 12,
+    letterSpacing: 1,
+    textTransform: 'uppercase' as const,
+  },
+  settingsLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 16 },
+  settingsAction: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 13,
+    letterSpacing: 0.5,
+    textTransform: 'uppercase' as const,
+  },
+  soonChip: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 10,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase' as const,
+  },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -993,6 +1033,20 @@ export const sizes = {
     square: 12, // a result square in the text preview's bubble
     squareGap: 3,
   },
+  // Settings (#175): its rows, the round buttons (Settings' back, Home's gear),
+  // the row glyphs, the Rate card's plate and button, the Appearance segments.
+  settings: {
+    row: 60,
+    linkRow: 56,
+    roundButton: 44,
+    glyph: 20,
+    chevron: 16,
+    plate: 48,
+    plateMark: 30,
+    footerMark: 18,
+    rateButton: 40,
+    segment: 40,
+  },
 } as const;
 
 // The share picture's captured size in pixels: a 9:16 story (spec §4.2).
@@ -1034,6 +1088,7 @@ export const radii = {
   md: 12,
   lg: 16,
   card: 18, // player cards
+  settingsCard: 22, // Settings' cards
   xl: 24,
   sheet: 28, // a bottom sheet's top corners
   bubbleTail: 6, // the text preview bubble's tail corner
