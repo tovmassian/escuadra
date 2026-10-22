@@ -135,6 +135,11 @@ export interface Palette {
   soonBg: string;
   /** The Escuadra mark on the brand plate (Settings' Rate card). */
   plateMark: string;
+  // ---- 2.0 team picker (#176) ----
+  /** A quiet count on `ctaBg` (the picker's selected tab). */
+  ctaMuted: string;
+  /** The ring round a 40 × 27 team marker in the picker. */
+  markerRing: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -222,6 +227,8 @@ const darkRoles = {
   link: '#8fb4ff',
   hairline: '#23272e',
   soonBg: 'rgba(255,255,255,0.08)',
+  ctaMuted: '#4b4f56',
+  markerRing: 'rgba(255,255,255,0.12)',
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -269,6 +276,8 @@ const lightRoles = {
   link: '#2f56c6',
   hairline: '#e3e5e9',
   soonBg: 'rgba(20,22,26,0.06)',
+  ctaMuted: '#b4b8bb',
+  markerRing: 'rgba(20,22,26,0.12)',
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -610,14 +619,16 @@ export const typography = {
   // The count after a filter pill's label ("GK 3").
   filterCount: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 11.5 },
   // ---- 2.0 Settings (#175) ----
-  settingsTitle: {
+  // Settings' and the team picker's screen title.
+  displayTitle: {
     fontFamily: 'Archivo-SemiExpandedExtraBold',
     fontSize: 32,
     lineHeight: 34,
     letterSpacing: -0.4,
     textTransform: 'uppercase' as const,
   },
-  settingsSection: {
+  // Settings' section labels and the picker's mono captions.
+  monoCaption: {
     fontFamily: 'IBMPlexMono-SemiBold',
     fontWeight: '600' as const,
     fontSize: 12,
@@ -638,6 +649,30 @@ export const typography = {
     letterSpacing: 0.6,
     textTransform: 'uppercase' as const,
   },
+  // ---- 2.0 team picker (#176) ----
+  teamName: { fontFamily: 'Inter-Bold', fontSize: 16 },
+  rowLevel: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 10,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase' as const,
+  },
+  // The natural line height (1.088 of the size), as `shirtNumber` explains:
+  // iOS clips this face's digits to a tighter line box.
+  rowScore: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 24, lineHeight: 26 },
+  rowScoreTail: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 15 },
+  letterHeading: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 34, lineHeight: 37 },
+  railLetter: { fontFamily: 'IBMPlexMono-Bold', fontSize: 10, lineHeight: 14 },
+  tabLabel: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 14,
+    letterSpacing: 0.4,
+    textTransform: 'uppercase' as const,
+  },
+  pillLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 14 },
+  pillLabelActive: { fontFamily: 'Inter-Bold', fontSize: 14 },
+  searchInput: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 16 },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -1008,12 +1043,10 @@ export const sizes = {
     square: 12, // a result square in the text preview's bubble
     squareGap: 3,
   },
-  // Settings (#175): its rows, the round buttons (Settings' back, Home's gear),
-  // the row glyphs, the Rate card's plate and button, the Appearance segments.
+  // Settings (#175): its rows, the row glyphs, the Rate card's plate and button, the Appearance segments.
   settings: {
     row: 60,
     linkRow: 56,
-    roundButton: 44,
     glyph: 20,
     chevron: 16,
     plate: 48,
@@ -1022,6 +1055,17 @@ export const sizes = {
     rateButton: 40,
     segment: 40,
   },
+  // The 44 pt round back button (Settings, the picker).
+  roundButton: 44,
+  // The team picker (#176): a row's marker or flag, the row, a league pill, a
+  // tab, the search field, and the letter rail (its touch column and the
+  // height of one letter).
+  pickerMarker: { width: 40, height: 27, radius: 5 },
+  pickerRow: 60,
+  pickerPill: 40,
+  pickerTab: 44,
+  searchField: 52,
+  rail: { width: 44, letter: 14 },
 } as const;
 
 // The share picture's captured size in pixels: a 9:16 story (spec §4.2).

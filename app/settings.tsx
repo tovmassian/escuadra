@@ -4,11 +4,11 @@ import * as Updates from 'expo-updates';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { BackGlyph } from '@/components/ActionGlyphs';
 import { AppearanceControl } from '@/components/AppearanceControl';
 import { BrandGradient } from '@/components/BrandGradient';
 import { EscuadraMark } from '@/components/EscuadraMark';
 import { LanguageSheet } from '@/components/LanguageSheet';
+import { RoundBackButton } from '@/components/RoundBackButton';
 import {
   BookGlyph,
   ChartGlyph,
@@ -50,17 +50,7 @@ export default function Settings() {
     root: { flex: 1, backgroundColor: colors.background },
     content: { paddingHorizontal: spacing.lg, gap: spacing.lg + 2 },
     header: { gap: spacing.md + 2 },
-    round: {
-      width: g.roundButton,
-      height: g.roundButton,
-      borderRadius: g.roundButton / 2,
-      backgroundColor: colors.surface,
-      borderWidth: borderWidths.hairline,
-      borderColor: colors.border,
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    title: { ...typography.settingsTitle, color: colors.textPrimary },
+    title: { ...typography.displayTitle, color: colors.textPrimary },
     value: { ...typography.secondary, color: colors.textSecondary },
     appearance: {
       gap: spacing.sm,
@@ -119,15 +109,11 @@ export default function Settings() {
         ]}
       >
         <View style={styles.header}>
-          <Pressable
+          <RoundBackButton
             testID="settings-back"
+            label={t.common.back}
             onPress={() => router.back()}
-            accessibilityRole="button"
-            accessibilityLabel={t.common.back}
-            style={({ pressed }) => [styles.round, pressed && { opacity: opacity.settled }]}
-          >
-            <BackGlyph color={colors.textPrimary} />
-          </Pressable>
+          />
           <Text style={styles.title} accessibilityRole="header">
             {t.settings.title}
           </Text>

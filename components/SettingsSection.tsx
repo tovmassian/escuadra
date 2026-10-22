@@ -17,7 +17,7 @@ export function SettingsSection({
   const colors = useThemeColors();
   const styles = StyleSheet.create({
     section: { gap: spacing.xs },
-    label: { ...typography.settingsSection, color: colors.textMuted },
+    label: { ...typography.monoCaption, color: colors.textMuted },
     card: dashed
       ? {
           borderRadius: radii.settingsCard,

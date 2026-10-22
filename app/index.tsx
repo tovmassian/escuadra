@@ -61,9 +61,9 @@ export default function Home() {
     root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.xl },
     toggleRow: { flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' },
     gear: {
-      width: sizes.settings.roundButton,
-      height: sizes.settings.roundButton,
-      borderRadius: sizes.settings.roundButton / 2,
+      width: sizes.roundButton,
+      height: sizes.roundButton,
+      borderRadius: sizes.roundButton / 2,
       backgroundColor: colors.surface,
       borderWidth: borderWidths.hairline,
       borderColor: colors.border,
