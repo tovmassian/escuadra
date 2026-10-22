@@ -1,4 +1,4 @@
-// Pure model for the About screen's version line. Kept out of the screen so
+// Pure model for the Settings screen's version line. Kept out of the screen so
 // the update/embedded/disabled branching is unit-testable without a device,
 // like the other lib/*View.ts modules.
 
@@ -30,7 +30,7 @@ function updateGroupFromManifest(manifest: Partial<Manifest>): string | null {
 }
 
 /**
- * The About screen's version line: see
+ * Settings' version line: see
  * docs/superpowers/specs/2026-09-24-about-update-line-design.md for the
  * table of cases this implements.
  */

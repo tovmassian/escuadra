@@ -3,7 +3,7 @@ paths:
   - "lib/telemetry*.ts"
   - "lib/__tests__/telemetry*.ts"
   - "app/about.tsx"
-  - "lib/aboutView.ts"
+  - "lib/settingsView.ts"
   - "scripts/privacy-pages.ts"
   - "i18n/en.ts"
   - "i18n/translationNotice.ts"

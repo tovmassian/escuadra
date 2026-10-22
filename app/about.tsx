@@ -7,7 +7,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { LicencesSheet } from '@/components/LicencesSheet';
 import { translationNotice } from '@/i18n/translationNotice';
 import { useLanguage, useT } from '@/i18n/useT';
-import { versionLabel } from '@/lib/aboutView';
+import { versionLabel } from '@/lib/settingsView';
 import { useProgress } from '@/stores/progress';
 import { radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';

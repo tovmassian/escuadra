@@ -5,12 +5,13 @@
 // TestFlight). Fire and forget: never awaited, never throws, and it sets no
 // React state, so the screen never waits on it or re-renders for it. Skipped
 // on web, where there is no store, so `npm run shots` never asks, and while
-// the app is in the background.
+// the app is in the background. Settings' Rate button opens the store page
+// through `openStorePage`.
 import { useProgress } from '@/stores/progress';
 import Constants from 'expo-constants';
 import * as StoreReview from 'expo-store-review';
-import { AppState, Platform } from 'react-native';
-import { shouldAskForReview } from './reviewPrompt';
+import { AppState, Linking, Platform } from 'react-native';
+import { shouldAskForReview, storePageUrl } from './reviewPrompt';
 
 /**
  * Asks the OS for its store-rating dialog if this round earns it.
@@ -43,4 +44,11 @@ export function askForReview(
       StoreReview.requestReview().catch(() => {});
     })
     .catch(() => {});
+}
+
+/** Settings' Rate button: the store's page for Escuadra. Fire and forget. */
+export function openStorePage(): void {
+  const url = storePageUrl(Platform.OS);
+  if (url === null) return;
+  Linking.openURL(url).catch(() => {});
 }

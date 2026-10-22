@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { en } from '@/i18n/en';
-import { versionLabel, type UpdateState } from '../aboutView';
+import { versionLabel, type UpdateState } from '../settingsView';
 
 function updateState(overrides: Partial<UpdateState> = {}): UpdateState {
   return {
