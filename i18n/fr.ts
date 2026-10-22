@@ -291,7 +291,7 @@ export const fr: Messages = {
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     bestSpoken: (level: number, correct: number, total: number) =>
       `Niveau ${level}, record ${correct} sur ${total}`,
-    search: 'Chercher une équipe',
+    search: 'Rechercher une équipe',
     clearSearch: 'Effacer la recherche',
     noTeams: 'Aucune équipe trouvée',
     noResults: (query: string) => `Aucun résultat pour « ${query} »`,
