@@ -23,9 +23,6 @@ export interface Palette {
    *  dark ground and its bright end on a light one, so this is a role, not a
    *  fixed hex. */
   mark: string;
-  /** The theme toggle's thumb and its sun/moon glyph. */
-  thumbBg: string;
-  thumbIcon: string;
   success: string;
   /** Small success-coloured text on `background`/`surface`, and on
    *  `successBg` over `surface`/`surfaceRaised`; `success` itself stays for
@@ -131,6 +128,13 @@ export interface Palette {
   /** The divider under each Study list row. A step quieter than `border`,
    *  which outlines controls. */
   hairline: string;
+  // ---- 2.0 Settings (#175) ----
+  /** A settings switch's thumb, in either state. */
+  switchThumb: string;
+  /** The SOON chip's fill on Coming next. Translucent. */
+  soonBg: string;
+  /** The Escuadra mark on the brand plate (Settings' Rate card). */
+  plateMark: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -172,6 +176,8 @@ const sharedRoles = {
   revealLine: 'rgba(255,255,255,0.5)',
   revealText: 'rgba(255,255,255,0.85)',
   photoChip: 'rgba(15,17,23,0.6)',
+  switchThumb: '#ffffff',
+  plateMark: '#e7e9f5',
 } as const;
 
 // The ramp sits higher than it did: the mark's trail squares, at 30% and 55%
@@ -187,8 +193,6 @@ const darkRoles = {
   textMuted: '#868b91',
   accentOn: '#f3f5f7',
   mark: sharedRoles.brandSoft,
-  thumbBg: '#2b2f38',
-  thumbIcon: '#e7e9f5',
   success: '#61bd67',
   successText: '#61bd67',
   error: '#f05653',
@@ -217,6 +221,7 @@ const darkRoles = {
   nextFill: 'rgba(97,189,103,0.2)',
   link: '#8fb4ff',
   hairline: '#23272e',
+  soonBg: 'rgba(255,255,255,0.08)',
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -234,8 +239,6 @@ const lightRoles = {
   textMuted: '#686c73',
   accentOn: '#ffffff',
   mark: sharedRoles.brandBright,
-  thumbBg: '#ffffff',
-  thumbIcon: '#b9840f',
   success: '#2f8f3e',
   successText: '#24702f',
   error: '#c23934',
@@ -265,6 +268,7 @@ const lightRoles = {
   nextFill: 'rgba(47,143,62,0.14)',
   link: '#2f56c6',
   hairline: '#e3e5e9',
+  soonBg: 'rgba(20,22,26,0.06)',
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -605,6 +609,35 @@ export const typography = {
   avatarNumber: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 20 },
   // The count after a filter pill's label ("GK 3").
   filterCount: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 11.5 },
+  // ---- 2.0 Settings (#175) ----
+  settingsTitle: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 32,
+    lineHeight: 34,
+    letterSpacing: -0.4,
+    textTransform: 'uppercase' as const,
+  },
+  settingsSection: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 12,
+    letterSpacing: 1,
+    textTransform: 'uppercase' as const,
+  },
+  settingsLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 16 },
+  settingsAction: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 13,
+    letterSpacing: 0.5,
+    textTransform: 'uppercase' as const,
+  },
+  soonChip: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 10,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase' as const,
+  },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -901,22 +934,6 @@ export const sizes = {
   // Team-picker rows carry a progress sub-line, so they need a second line of
   // height.
   rowHeightTall: 64,
-  // The theme toggle. `inset` is the gap between track edge and thumb, so the
-  // thumb's travel is trackWidth - thumb - inset * 2.
-  themeToggle: { trackWidth: 52, trackHeight: 30, thumb: 24, inset: 2 },
-  // The toggle's glyphs. The moon is a disc with an offset disc punched out
-  // of it in the thumb's own colour — `moonCutoutTop`/`moonCutoutLeft` place
-  // that punch-out, and are what give the crescent its lean. The sun is a
-  // core disc with four rays at `sunRayOffset` from centre.
-  themeToggleGlyph: {
-    moon: 13,
-    moonCutout: 11,
-    moonCutoutTop: -3,
-    moonCutoutLeft: 3,
-    sunCore: 10,
-    sunRay: 3,
-    sunRayOffset: 6,
-  },
   // ---- 2.0 spotlight screens (spec §2, §3, §5, §8) ----
   // The question screen goes compact below this usable height (window minus
   // safe-area insets).
@@ -980,10 +997,8 @@ export const sizes = {
   },
   // Every bottom sheet (`Sheet`): its grab handle and its close button.
   sheet: { handleWidth: 36, handleHeight: 5, close: 36 },
-  // The language chip's pill and the language sheet's radio (#143). The chip
-  // has no fixed height or width: it grows with the OS text size, and
-  // `minHeight` is the theme toggle's track so the two sit level.
-  languageChip: { minHeight: 30, radio: 20, radioDot: 10 },
+  // The language sheet's radio: the ring and its selected dot (#143).
+  languageSheet: { radio: 20, radioDot: 10 },
   // The share sheet's own parts (spec §4.1).
   shareSheet: {
     switchHeight: 40,
@@ -992,6 +1007,20 @@ export const sizes = {
     bubbleMaxWidth: 300,
     square: 12, // a result square in the text preview's bubble
     squareGap: 3,
+  },
+  // Settings (#175): its rows, the round buttons (Settings' back, Home's gear),
+  // the row glyphs, the Rate card's plate and button, the Appearance segments.
+  settings: {
+    row: 60,
+    linkRow: 56,
+    roundButton: 44,
+    glyph: 20,
+    chevron: 16,
+    plate: 48,
+    plateMark: 30,
+    footerMark: 18,
+    rateButton: 40,
+    segment: 40,
   },
 } as const;
 
@@ -1034,6 +1063,7 @@ export const radii = {
   md: 12,
   lg: 16,
   card: 18, // player cards
+  settingsCard: 22, // Settings' cards
   xl: 24,
   sheet: 28, // a bottom sheet's top corners
   bubbleTail: 6, // the text preview bubble's tail corner

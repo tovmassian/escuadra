@@ -31,7 +31,7 @@ const MONTHS_LONG = [
 const PHOTO_CREDITS = 'Crediti foto';
 // Feminine: it is the photo that is cropped.
 const CROPPED = 'ritagliata';
-const USAGE_STATISTICS = 'Condividi statistiche d’uso anonime';
+const USAGE_STATISTICS = 'Statistiche d’uso';
 
 export const it: Messages = {
   common: {
@@ -41,10 +41,8 @@ export const it: Messages = {
     scoreSpoken: (correct: number, attempted: number) => `Punteggio: ${correct} su ${attempted}`,
   },
   home: {
-    // "Informazioni" is 12 chars against 8.
-    aboutLink: 'Info',
-    darkTheme: 'Tema scuro',
-    languageLabel: (name: string) => `Lingua: ${name}`,
+    // "Impostazioni", as iOS and Android name the screen.
+    settings: 'Impostazioni',
     // "Record" for the best score, here, on the ladder pill and in the picker:
     // Italian says "il mio record".
     continueMeta: (level: number, best: number | undefined, total: number) =>
@@ -56,6 +54,48 @@ export const it: Messages = {
     title: 'Lingua',
     // "Lingua del telefono · Italiano" is 30 chars against 28.
     matchPhone: (name: string) => `Lingua di sistema · ${name}`,
+  },
+  settings: {
+    title: 'Impostazioni',
+    sections: {
+      play: 'Gioco',
+      privacy: 'Privacy',
+      // The section holds only the Rate card: backing the app, not a help desk
+      // ("Assistenza", as the web pages' nav says; "Supporto" reads the same).
+      support: 'Sostieni l’app',
+      comingNext: 'In arrivo',
+      // "Info", as the About screen's title says.
+      about: 'Info',
+    },
+    language: 'Lingua',
+    languageSpoken: (name: string) => `Lingua: ${name}`,
+    // "Aspetto", the iOS setting for light and dark.
+    appearance: 'Aspetto',
+    // "Sistema", as "Lingua di sistema" says for the language.
+    appearanceOptions: { system: 'Sistema', dark: 'Scuro', light: 'Chiaro' },
+    // "Vibrazione", the setting's name on iOS and Android in Italian.
+    vibration: 'Vibrazione',
+    usageStatistics: USAGE_STATISTICS,
+    // Feminine plural: the statistics.
+    usageNote: 'Anonime. In “Info” trovi esattamente cosa viene inviato.',
+    rate: {
+      title: `Valuta ${ESCUADRA}`,
+      line: 'Il tuo voto aiuta altri tifosi a trovare l’app.',
+      button: 'Valuta',
+    },
+    examMode: {
+      title: 'Modalità esame',
+      line: 'Tutta la rosa, solo con i numeri di maglia.',
+      soon: 'A breve',
+    },
+    // "Info" is the About screen's short title; the row has room for the
+    // usual "Informazioni su".
+    aboutEscuadra: `Informazioni su ${ESCUADRA}`,
+    privacy: 'Privacy',
+    licences: 'Licenze',
+    version: (version: string) => `Versione ${version}`,
+    // Feminine: it is the version that is built in.
+    builtIn: 'integrata',
   },
   formats: {
     /** "21 ago 2026". */
@@ -256,10 +296,7 @@ export const it: Messages = {
   // English until #147 localises the feature graphic with the store listing.
   store: en.store,
   about: {
-    version: (version: string) => `Versione ${version}`,
-    // Feminine: it is the version that is built in.
-    builtIn: 'integrata',
-    // "Info", as the home screen's link to it says.
+    // "Info" matches the screen's title and Settings' ABOUT label (settings.sections.about).
     title: 'Info',
     // Escuadra is "l’app", so feminine: "affiliata", "approvata".
     intro: [
@@ -303,9 +340,6 @@ export const it: Messages = {
       fonts: 'Font',
       software: 'Software',
     },
-    // "Vibrazione", the setting's name on iOS and Android in Italian.
-    vibration: 'Vibrazione',
-    usageStatistics: USAGE_STATISTICS,
     privacy: {
       heading: 'Privacy',
       lead: `${ESCUADRA} non prevede account né login, non contiene pubblicità e non ti chiede mai il tuo nome, la tua email né alcun dato di contatto.`,
@@ -330,7 +364,7 @@ export const it: Messages = {
         {
           heading: 'Statistiche d’uso anonime',
           paragraphs: [
-            `${ESCUADRA} invia statistiche d’uso anonime a TelemetryDeck, un servizio di analisi statistica, a meno che tu non disattivi “${USAGE_STATISTICS}” nella schermata “Info” dell’app. Ciascuna contiene un identificativo casuale sotto forma di hash, creato per queste statistiche (diverso da quello usato dal controllo degli aggiornamenti dell’app), e un codice di sessione casuale, nuovo a ogni avvio dell’app. Come qualsiasi servizio online, TelemetryDeck riceve anche l’indirizzo IP del tuo dispositivo e i dettagli tecnici standard di ogni richiesta, che su iOS includono il numero di build dell’app e la versione di sistema del tuo dispositivo. A ciò che TelemetryDeck riceve si applica l’informativa sulla privacy di TelemetryDeck. L’identificativo delle statistiche e il codice di sessione sono casuali, non derivati dal tuo dispositivo e non collegati a te né ai tuoi account. Né ${ESCUADRA} né lo sviluppatore condividono l’identificativo, il codice di sessione o le statistiche con nessun altro.`,
+            `${ESCUADRA} invia statistiche d’uso anonime a TelemetryDeck, un servizio di analisi statistica, a meno che tu non disattivi “${USAGE_STATISTICS}” nella schermata “Impostazioni” dell’app. Ciascuna contiene un identificativo casuale sotto forma di hash, creato per queste statistiche (diverso da quello usato dal controllo degli aggiornamenti dell’app), e un codice di sessione casuale, nuovo a ogni avvio dell’app. Come qualsiasi servizio online, TelemetryDeck riceve anche l’indirizzo IP del tuo dispositivo e i dettagli tecnici standard di ogni richiesta, che su iOS includono il numero di build dell’app e la versione di sistema del tuo dispositivo. A ciò che TelemetryDeck riceve si applica l’informativa sulla privacy di TelemetryDeck. L’identificativo delle statistiche e il codice di sessione sono casuali, non derivati dal tuo dispositivo e non collegati a te né ai tuoi account. Né ${ESCUADRA} né lo sviluppatore condividono l’identificativo, il codice di sessione o le statistiche con nessun altro.`,
             `Le statistiche sono: l’apertura dell’app, con la sua lingua e l’indicazione se questa segue la lingua del tuo telefono o è stata scelta nell’app; l’inizio di una partita, con il tipo di squadra (club o nazionale) e il livello di difficoltà; la fine di una partita, con gli stessi due dati, il punteggio e l’indicazione se è stata ${A_LA_ESCUADRA}; l’apertura della schermata “Rosa”, con il tipo di squadra (club o nazionale); e il passaggio di un risultato al menu di condivisione del tuo telefono, con il livello, il punteggio e l’indicazione se si trattava di un’immagine o di un testo. Le statistiche non includono mai i nomi delle squadre o dei giocatori, le tue risposte né nulla di ciò che scrivi.`,
           ],
         },

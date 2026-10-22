@@ -7,7 +7,7 @@ paths:
   - "lib/licences*.ts"
   - "lib/__tests__/licences*.ts"
   - "i18n/UNICODE-LICENSE.txt"
-  - "components/LicencesSheet.tsx"
+  - "app/licences.tsx"
 ---
 
 # Licences

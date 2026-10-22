@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { languageChipCode, languageRows } from '../languageOptions';
+import { languageRows } from '../languageOptions';
 import { LANGUAGE_NAMES } from '../names';
 import { LANGUAGES, SUPPORTED_LANGUAGES } from '../resolveLanguage';
 
@@ -39,12 +39,6 @@ describe('languageRows', () => {
     const [first, ...rest] = languageRows(SUPPORTED_LANGUAGES, ['en-GB']);
     expect(first?.preference).toBe('system');
     expect(rest.map((row) => row.preference).sort()).toEqual([...SUPPORTED_LANGUAGES].sort());
-  });
-});
-
-describe('languageChipCode', () => {
-  it('is the language as a two-letter capital code', () => {
-    expect(LANGUAGES.map(languageChipCode)).toEqual(['EN', 'ES', 'FR', 'IT', 'DE']);
   });
 });
 

@@ -26,6 +26,16 @@ import {
   resolveProfile,
 } from './screenshot-profiles.ts';
 
+// Mirrors LANGUAGE_NAMES in i18n/names.ts, which an .mjs cannot import: each language
+// in itself, as Settings' language row shows it.
+const LANGUAGE_NAMES = {
+  en: 'English',
+  es: 'Español',
+  fr: 'Français',
+  it: 'Italiano',
+  de: 'Deutsch',
+};
+
 const PORT = 8082;
 const BASE = `http://localhost:${PORT}`;
 const PROFILE = resolveProfile(process.argv.slice(2));
@@ -405,21 +415,44 @@ async function captureTheme(browser, colorScheme, suffix) {
   const capture = await openCapture(browser, { colorScheme, suffix });
 
   try {
-    await capture.open('/');
+    // Settings (#175): Home's gear opens it, the language lives there. The `--lang`
+    // check runs first, on Settings' language row, so a capture whose language did
+    // not take fails before any shot is written.
     if (LANGUAGE) {
-      const chip = await capture.page.getByTestId('language-chip').innerText();
-      if (chip.trim() !== LANGUAGE.toUpperCase()) {
-        throw new Error(`--lang=${LANGUAGE}: Home's language chip says "${chip}"`);
+      await capture.open('/settings');
+      const value = await capture.page.getByTestId('settings-language-value').innerText();
+      if (value.trim() !== LANGUAGE_NAMES[LANGUAGE]) {
+        throw new Error(`--lang=${LANGUAGE}: Settings' language row says "${value}"`);
       }
     }
+
+    await capture.open('/');
     await capture.shoot('01-home');
-    await capture.tapId('language-chip', { wait: SHEET_MS });
-    await capture.shoot('01b-home-language');
+
+    await capture.open('/settings');
+    await capture.shoot('01c-settings');
+    // The page's ScrollView is the one scrollable element taller than its box. Set
+    // `scrollTop`: react-native-web replaces the node's `scrollTo` with one that takes an
+    // object, so `scrollTo(0, y)` silently does nothing.
+    await capture.page.evaluate(() => {
+      for (const node of document.querySelectorAll('*')) {
+        const { overflowY } = getComputedStyle(node);
+        if (
+          (overflowY === 'auto' || overflowY === 'scroll') &&
+          node.scrollHeight > node.clientHeight
+        ) {
+          node.scrollTop = node.scrollHeight;
+        }
+      }
+    });
+    await capture.shoot('01c-settings-end');
+    await capture.tapId('settings-language', { wait: SHEET_MS });
+    await capture.shoot('01c-settings-language');
 
     await capture.open('/about');
     await capture.shoot('01a-about');
-    await capture.tapId('about-licences', { wait: SHEET_MS });
-    await capture.shoot('01a-about-licences');
+    await capture.open('/licences');
+    await capture.shoot('01d-licences');
 
     await capture.open('/team-picker');
     await capture.shoot('02-team-picker-clubs');

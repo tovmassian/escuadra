@@ -46,7 +46,7 @@ const MONTHS_LONG = [
 const PHOTO_CREDITS = 'Crédits photo';
 // Feminine: it is the photo that is cropped.
 const CROPPED = 'recadrée';
-const USAGE_STATISTICS = 'Partager des statistiques d’utilisation anonymes';
+const USAGE_STATISTICS = 'Statistiques d’utilisation';
 
 export const fr: Messages = {
   common: {
@@ -56,9 +56,8 @@ export const fr: Messages = {
     scoreSpoken: (correct: number, attempted: number) => `Score : ${correct} sur ${attempted}`,
   },
   home: {
-    aboutLink: 'À propos',
-    darkTheme: 'Thème sombre',
-    languageLabel: (name: string) => `Langue : ${name}`,
+    // "Réglages", as iOS names the screen and as this catalog says elsewhere.
+    settings: 'Réglages',
     // "Record" for the best score, here, on the ladder pill and in the picker.
     continueMeta: (level: number, best: number | undefined, total: number) =>
       best === undefined ? `NIVEAU ${level}` : `NIVEAU ${level} · RECORD ${best}/${total}`,
@@ -70,6 +69,46 @@ export const fr: Messages = {
     title: 'Langue',
     // "Langue du téléphone · Italiano" is 30 chars against 28.
     matchPhone: (name: string) => `Langue du système · ${name}`,
+  },
+  settings: {
+    title: 'Réglages',
+    sections: {
+      play: 'Jeu',
+      privacy: 'Confidentialité',
+      // The section holds only the Rate card: backing the app, not a help desk
+      // ("Assistance", as the web pages' nav says).
+      support: 'Soutien',
+      comingNext: 'À venir',
+      // "À propos", as the About screen's title says.
+      about: 'À propos',
+    },
+    language: 'Langue',
+    languageSpoken: (name: string) => `Langue : ${name}`,
+    // "Apparence", the iOS setting for light and dark.
+    appearance: 'Apparence',
+    // "Système", as "Langue du système" says for the language.
+    appearanceOptions: { system: 'Système', dark: 'Sombre', light: 'Clair' },
+    // The usual French name for the setting.
+    vibration: 'Vibrations',
+    usageStatistics: USAGE_STATISTICS,
+    // Feminine plural: the statistics.
+    usageNote: 'Anonymes. « À propos » précise ce qui est envoyé.',
+    rate: {
+      title: `Noter ${ESCUADRA}`,
+      line: 'Ta note aide d’autres fans à trouver l’appli.',
+      button: 'Noter',
+    },
+    examMode: {
+      title: 'Mode examen',
+      line: 'Tout l’effectif, rien qu’avec les numéros de maillot.',
+      soon: 'Bientôt',
+    },
+    aboutEscuadra: `À propos d’${ESCUADRA}`,
+    privacy: 'Confidentialité',
+    licences: 'Licences',
+    version: (version: string) => `Version ${version}`,
+    // Feminine: it is the version that is built in.
+    builtIn: 'intégrée',
   },
   formats: {
     /** "21 août 2026", and "1er août 2026" on the first of the month. */
@@ -260,10 +299,7 @@ export const fr: Messages = {
   // English until #147 localises the feature graphic with the store listing.
   store: en.store,
   about: {
-    version: (version: string) => `Version ${version}`,
-    // Feminine: it is the version that is built in.
-    builtIn: 'intégrée',
-    // "À propos", as the home screen's link to it says.
+    // "À propos", also Settings' About section label (settings.sections.about).
     title: 'À propos',
     intro: [
       `${ESCUADRA} est une application indépendante et non officielle. Elle n’est ni affiliée ni associée à la FIFA, à l’UEFA, à une ligue, à une fédération nationale de football ou à un club, et n’est approuvée par aucun d’entre eux. Les noms des clubs et des sélections nationales sont utilisés uniquement à des fins d’identification et restent la propriété de leurs détenteurs respectifs. ${ESCUADRA} n’est pas non plus affiliée à la Wikimedia Foundation ni à un joueur figurant sur une photo, et n’est approuvée par aucun d’entre eux.`,
@@ -306,9 +342,6 @@ export const fr: Messages = {
       fonts: 'Polices',
       software: 'Logiciels',
     },
-    // The usual French name for the setting.
-    vibration: 'Vibrations',
-    usageStatistics: USAGE_STATISTICS,
     privacy: {
       heading: 'Confidentialité',
       lead: `${ESCUADRA} ne comporte ni compte, ni identification, ni publicité, et ne te demande jamais ton nom, ton adresse e-mail ni aucune coordonnée.`,
@@ -333,7 +366,7 @@ export const fr: Messages = {
         {
           heading: 'Statistiques d’utilisation anonymes',
           paragraphs: [
-            `${ESCUADRA} envoie des statistiques d’utilisation anonymes à TelemetryDeck, un service de mesure d’audience, sauf si tu désactives « ${USAGE_STATISTICS} » sur l’écran « À propos » de l’application. Chacune contient une forme hachée d’un identifiant aléatoire créé pour ces statistiques (distinct de celui qu’utilise la vérification des mises à jour de l’application) et un code de session aléatoire, renouvelé à chaque démarrage de l’application. Comme tout service en ligne, TelemetryDeck reçoit aussi l’adresse IP de ton appareil et les détails techniques habituels de chaque requête, qui, sous iOS, comprennent le numéro de build de l’application et la version du système de ton appareil. Ce que TelemetryDeck reçoit est soumis à sa propre politique de confidentialité. L’identifiant des statistiques et le code de session sont aléatoires, ne sont pas dérivés de ton appareil et ne sont liés ni à toi ni à tes comptes. Ni ${ESCUADRA} ni le développeur ne partagent l’identifiant, le code de session ou les statistiques avec qui que ce soit d’autre.`,
+            `${ESCUADRA} envoie des statistiques d’utilisation anonymes à TelemetryDeck, un service de mesure d’audience, sauf si tu désactives « ${USAGE_STATISTICS} » sur l’écran « Réglages » de l’application. Chacune contient une forme hachée d’un identifiant aléatoire créé pour ces statistiques (distinct de celui qu’utilise la vérification des mises à jour de l’application) et un code de session aléatoire, renouvelé à chaque démarrage de l’application. Comme tout service en ligne, TelemetryDeck reçoit aussi l’adresse IP de ton appareil et les détails techniques habituels de chaque requête, qui, sous iOS, comprennent le numéro de build de l’application et la version du système de ton appareil. Ce que TelemetryDeck reçoit est soumis à sa propre politique de confidentialité. L’identifiant des statistiques et le code de session sont aléatoires, ne sont pas dérivés de ton appareil et ne sont liés ni à toi ni à tes comptes. Ni ${ESCUADRA} ni le développeur ne partagent l’identifiant, le code de session ou les statistiques avec qui que ce soit d’autre.`,
             `Ces statistiques sont les suivantes : l’application a été ouverte, avec sa langue et l’indication que cette langue suit celle de ton téléphone ou a été choisie dans l’application ; une partie a commencé, avec le type d’équipe (club ou sélection) et le niveau de difficulté ; une partie s’est terminée, avec ces deux mêmes informations, le score et l’indication qu’elle a été ou non ${A_LA_ESCUADRA} ; l’écran Effectif a été ouvert, avec le type d’équipe (club ou sélection) ; et un résultat a été transmis au menu de partage de ton téléphone, avec le niveau, le score et le format (image ou texte). Elles ne contiennent jamais de noms d’équipes ni de joueurs, ni tes réponses, ni rien de ce que tu saisis.`,
           ],
         },

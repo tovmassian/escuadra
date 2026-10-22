@@ -28,16 +28,16 @@ interface ProgressState {
   themePreference: ThemePreference;
   /** The app's language (#141): `'system'` follows the phone, an explicit
    *  language pins it. A preference like `themePreference`, so it survives
-   *  `reset()`. Set by the Home language sheet (#143). */
+   *  `reset()`. Set by Settings' language sheet (#175). */
   languagePreference: LanguagePreference;
   /** Random UUID created once per installation, the anonymous `clientUser`
    *  for telemetry. Null until the root layout creates it after hydration.
    *  Survives `reset()`; a reinstall clears storage and so gets a new one. */
   installId: string | null;
-  /** The About screen's opt-out. Off means `lib/telemetry.ts` sends nothing.
+  /** Settings' opt-out. Off means `lib/telemetry.ts` sends nothing.
    *  Survives `reset()` for the same reason as `themePreference`. */
   telemetryEnabled: boolean;
-  /** The About screen's Vibration switch (spec §7). Off means `lib/haptics.ts`
+  /** Settings' Vibration switch (spec §7, #175). Off means `lib/haptics.ts`
    *  plays nothing. On by default; survives `reset()` like the other settings. */
   haptics: boolean;
   /** Study's grid or list view (spec §5.1). A preference like `themePreference`,

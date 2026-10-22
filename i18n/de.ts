@@ -37,7 +37,7 @@ const MONTHS_LONG = [
 
 const PHOTO_CREDITS = 'Bildnachweise';
 const CROPPED = 'zugeschnitten';
-const USAGE_STATISTICS = 'Anonyme Nutzungsstatistiken teilen';
+const USAGE_STATISTICS = 'Nutzungsstatistiken';
 
 export const de: Messages = {
   common: {
@@ -49,9 +49,7 @@ export const de: Messages = {
     scoreSpoken: (correct: number, attempted: number) => `Ergebnis: ${correct} von ${attempted}`,
   },
   home: {
-    aboutLink: 'Info',
-    darkTheme: 'Dunkles Design',
-    languageLabel: (name: string) => `Sprache: ${name}`,
+    settings: 'Einstellungen',
     // "Rekord" for the best score, here, on the ladder pill and in the picker.
     continueMeta: (level: number, best: number | undefined, total: number) =>
       best === undefined ? `LEVEL ${level}` : `LEVEL ${level} · REKORD ${best}/${total}`,
@@ -61,6 +59,44 @@ export const de: Messages = {
   languageSheet: {
     title: 'Sprache',
     matchPhone: (name: string) => `Systemsprache · ${name}`,
+  },
+  settings: {
+    title: 'Einstellungen',
+    sections: {
+      play: 'Spiel',
+      privacy: 'Datenschutz',
+      // The section holds only the Rate card: backing the app, not a help desk
+      // ("Hilfe", as the web pages' nav says).
+      support: 'Unterstützen',
+      comingNext: 'Demnächst',
+      // "Info", as the About screen's title says.
+      about: 'Info',
+    },
+    language: 'Sprache',
+    languageSpoken: (name: string) => `Sprache: ${name}`,
+    // "Darstellung", the iOS setting for light and dark.
+    appearance: 'Darstellung',
+    // "System", as "Systemsprache" says for the language.
+    appearanceOptions: { system: 'System', dark: 'Dunkel', light: 'Hell' },
+    vibration: 'Vibration',
+    usageStatistics: USAGE_STATISTICS,
+    usageNote: 'Anonym. Was genau gesendet wird, steht unter „Info“.',
+    rate: {
+      title: `${ESCUADRA} bewerten`,
+      // "So": the title above says how.
+      line: 'So finden andere Fans die App leichter.',
+      button: 'Bewerten',
+    },
+    examMode: {
+      title: 'Prüfungsmodus',
+      line: 'Der ganze Kader, nur anhand der Rückennummern.',
+      soon: 'Bald',
+    },
+    aboutEscuadra: `Über ${ESCUADRA}`,
+    privacy: 'Datenschutz',
+    licences: 'Lizenzen',
+    version: (version: string) => `Version ${version}`,
+    builtIn: 'integriert',
   },
   formats: {
     /** "21. Aug. 2026". */
@@ -231,9 +267,7 @@ export const de: Messages = {
   // English until #147 localises the feature graphic with the store listing.
   store: en.store,
   about: {
-    version: (version: string) => `Version ${version}`,
-    builtIn: 'integriert',
-    // "Info", as the home screen's link to it says.
+    // "Info", also Settings' About section label (settings.sections.about).
     title: 'Info',
     intro: [
       `${ESCUADRA} ist eine unabhängige, inoffizielle App. Sie ist weder mit der FIFA, der UEFA, einer Liga, einem nationalen Fußballverband noch mit einem Verein verbunden oder assoziiert und wird von keinem von ihnen befürwortet. Die Namen von Vereinen und Nationalteams werden nur zur Identifizierung verwendet und bleiben Eigentum ihrer jeweiligen Inhaber. ${ESCUADRA} ist außerdem weder mit der Wikimedia Foundation noch mit einem auf einem Foto gezeigten Spieler verbunden und wird von keinem von ihnen befürwortet.`,
@@ -276,8 +310,6 @@ export const de: Messages = {
       fonts: 'Schriften',
       software: 'Software',
     },
-    vibration: 'Vibration',
-    usageStatistics: USAGE_STATISTICS,
     privacy: {
       heading: 'Datenschutz',
       lead: `Bei ${ESCUADRA} gibt es kein Konto, keine Anmeldung und keine Werbung, und die App fragt nie nach deinem Namen, deiner E-Mail-Adresse oder Kontaktdaten jeglicher Art.`,
@@ -302,7 +334,7 @@ export const de: Messages = {
         {
           heading: 'Anonyme Nutzungsstatistiken',
           paragraphs: [
-            `${ESCUADRA} sendet anonyme Nutzungsstatistiken an TelemetryDeck, einen Analysedienst, es sei denn, du schaltest „${USAGE_STATISTICS}“ in der App unter „Info“ aus. Jede davon enthält eine gehashte Form einer zufälligen Kennung, die für diese Statistiken erstellt wurde (getrennt von der Kennung, die die Update-Prüfung der App verwendet), und einen zufälligen Sitzungscode, der bei jedem Start der App neu erstellt wird. Wie jeder Onlinedienst erhält TelemetryDeck außerdem die IP-Adresse deines Geräts und die üblichen technischen Details jeder Anfrage, zu denen unter iOS die Build-Nummer der App und die Systemversion deines Geräts gehören. Für das, was TelemetryDeck erhält, gilt die Datenschutzerklärung von TelemetryDeck. Die Kennung der Statistiken und der Sitzungscode sind zufällig, nicht von deinem Gerät abgeleitet und weder mit dir noch mit deinen Konten verknüpft. Weder ${ESCUADRA} noch der Entwickler gibt sie oder die Statistiken an Dritte weiter.`,
+            `${ESCUADRA} sendet anonyme Nutzungsstatistiken an TelemetryDeck, einen Analysedienst, es sei denn, du schaltest „${USAGE_STATISTICS}“ in der App unter „Einstellungen“ aus. Jede davon enthält eine gehashte Form einer zufälligen Kennung, die für diese Statistiken erstellt wurde (getrennt von der Kennung, die die Update-Prüfung der App verwendet), und einen zufälligen Sitzungscode, der bei jedem Start der App neu erstellt wird. Wie jeder Onlinedienst erhält TelemetryDeck außerdem die IP-Adresse deines Geräts und die üblichen technischen Details jeder Anfrage, zu denen unter iOS die Build-Nummer der App und die Systemversion deines Geräts gehören. Für das, was TelemetryDeck erhält, gilt die Datenschutzerklärung von TelemetryDeck. Die Kennung der Statistiken und der Sitzungscode sind zufällig, nicht von deinem Gerät abgeleitet und weder mit dir noch mit deinen Konten verknüpft. Weder ${ESCUADRA} noch der Entwickler gibt sie oder die Statistiken an Dritte weiter.`,
             `Gesendet werden diese Statistiken: die App wurde geöffnet, mit ihrer Sprache und der Angabe, ob diese der Sprache deines Smartphones folgt oder in der App gewählt wurde; eine Runde wurde gestartet, mit der Angabe, ob das Team ein Verein oder ein Nationalteam ist, und dem Level; eine Runde wurde beendet, mit denselben beiden Angaben, der Punktzahl und der Angabe, ob sie ${A_LA_ESCUADRA} war; die Kaderansicht wurde geöffnet, mit der Angabe, ob das Team ein Verein oder ein Nationalteam ist; und ein Ergebnis wurde an das Teilen-Menü deines Smartphones übergeben, mit dem Level, der Punktzahl und der Angabe, ob es als Bild oder als Text übergeben wurde. Sie enthalten nie Teamnamen, Spielernamen, deine Antworten oder etwas, das du eingibst.`,
           ],
         },

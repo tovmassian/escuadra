@@ -36,7 +36,7 @@ function LanguageRows({ onClose }: { onClose: () => void }) {
     SUPPORTED_LANGUAGES,
     locales.map((locale) => locale.languageTag),
   );
-  const chip = sizes.languageChip;
+  const chip = sizes.languageSheet;
 
   const styles = StyleSheet.create({
     list: { gap: spacing.xs },

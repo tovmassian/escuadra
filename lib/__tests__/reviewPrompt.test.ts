@@ -1,7 +1,7 @@
 import { readFileSync, readdirSync, statSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
-import { shouldAskForReview, type ReviewPromptInput } from '../reviewPrompt';
+import { shouldAskForReview, storePageUrl, type ReviewPromptInput } from '../reviewPrompt';
 
 // A round that should ask: flawless, the store has a review flow, this app
 // version has not asked yet, the user had finished a round before, and the
@@ -54,6 +54,22 @@ describe('shouldAskForReview', () => {
     // A backgrounded app has no window for the dialog, and must not use up
     // this version's one ask on it.
     expect(shouldAskForReview({ ...due, appActive: false })).toBe(false);
+  });
+});
+
+describe('storePageUrl', () => {
+  it("opens the App Store's write-a-review page on iOS", () => {
+    expect(storePageUrl('ios')).toBe('https://apps.apple.com/app/id6810705505?action=write-review');
+  });
+
+  it('opens the Play listing on Android', () => {
+    expect(storePageUrl('android')).toBe(
+      'https://play.google.com/store/apps/details?id=com.tovmassian.escuadra',
+    );
+  });
+
+  it('has no store on web', () => {
+    expect(storePageUrl('web')).toBeNull();
   });
 });
 

@@ -339,9 +339,8 @@ column's call, which goes through the vibrator.
 | Reveal on Study      | `impactAsync(Light)`                                                                                | `Virtual_Key`                      | new   |
 | Fail, share, buttons | none                                                                                                | none                               | —     |
 
-A **Vibration** switch on the About screen, on by default, persists as `haptics` in
-`stores/progress.ts`. It lives on the About screen because there is no Settings screen. The
-iOS system setting and Low Power Mode still apply. Haptics never leave the device; no
+A **Vibration** switch on the Settings screen (#175), on by default, persists as `haptics` in
+`stores/progress.ts`. The iOS system setting and Low Power Mode still apply. Haptics never leave the device; no
 disclosure.
 
 ## 8. Tokens and type
