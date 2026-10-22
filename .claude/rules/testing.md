@@ -31,11 +31,9 @@ actual output.
 
 ## Layout
 
-- Tests live in a `__tests__/` folder that mirrors the code it covers, with the fakes and
-  fixtures they use, so code folders hold only code. `scripts/ci/__tests__/` is the model.
-- An area that still keeps `*.test.ts` beside its code (`lib/`, `stores/`, `theme/`,
-  `design/`, the top of `scripts/`, `tools/squadctl/`) keeps that layout until it moves
-  over whole, in a PR of its own. A new test goes where its area's tests already are.
+- Every test goes in a `__tests__/` folder that mirrors the code it covers, with the fakes
+  and fixtures it uses, so code folders hold only code. `scripts/ci/__tests__/` is the
+  model. This holds in every directory, with no exception.
 
 ## Tests that guard a promise
 
@@ -48,7 +46,7 @@ is stale. Never edit the expectation, widen an allowlist or loosen TypeScript to
   catalog's `about`, each re-reviewed.
 - `lib/dataIntegrity.test.ts`: every stored photo's licence and credit, and the squads'
   integrity (`docs/license.md`).
-- `theme/userInterfaceStyle.test.ts`: the system-following theme.
+- `theme/__tests__/userInterfaceStyle.test.ts`: the system-following theme.
 - `scripts/claude/__tests__/repo.test.ts`: `CLAUDE.md` and these rules stay true to the
   repository.
 
