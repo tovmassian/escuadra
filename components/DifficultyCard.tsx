@@ -3,7 +3,7 @@ import { BestPill } from '@/components/BestPill';
 import { Button } from '@/components/Button';
 import { LadderBadge } from '@/components/LadderBadge';
 import { useT } from '@/i18n/useT';
-import { type LadderRow, playLabel } from '@/lib/ladderView';
+import { type LadderRow, playLevelLabel } from '@/lib/ladderView';
 import { borderWidths, radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
@@ -59,7 +59,7 @@ export function DifficultyCard({ row, title, description, onPlay }: DifficultyCa
         </View>
         <Text style={styles.description}>{description}</Text>
         <View style={styles.action}>
-          <Button label={playLabel(row, t)} variant="filled" onPress={onPlay} />
+          <Button label={playLevelLabel(row.level, t)} variant="filled" onPress={onPlay} />
         </View>
       </View>
     </View>

@@ -47,9 +47,14 @@ const LEAGUE_NAMES: Record<League, string> = {
   ucl: 'UCL',
 };
 
+/** A league's name. */
+export function leagueName(league: League): string {
+  return LEAGUE_NAMES[league];
+}
+
 /** A league pill's label. */
 export function leagueLabel(filter: LeagueFilter, messages: Messages): string {
-  return filter === 'ALL' ? messages.picker.allLeagues : LEAGUE_NAMES[filter];
+  return filter === 'ALL' ? messages.picker.allLeagues : leagueName(filter);
 }
 
 /** Pill order: the big five, then UCL. Fixed rather than alphabetical so the

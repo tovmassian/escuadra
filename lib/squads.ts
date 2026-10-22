@@ -8,7 +8,7 @@
 import indexData from '@/data/index.json';
 import playersData from '@/data/players.json';
 import { SQUAD_FILES } from './squads.generated';
-import type { Player, RosterEntry, Squad, SquadManifestEntry } from '@/types/squad';
+import type { League, Player, RosterEntry, Squad, SquadManifestEntry } from '@/types/squad';
 
 export { getAge } from './age';
 
@@ -16,6 +16,11 @@ const players = new Map<string, Player>((playersData as Player[]).map((p) => [p.
 
 export function listSquads(): SquadManifestEntry[] {
   return indexData as SquadManifestEntry[];
+}
+
+/** A club's league, from the picker's manifest; undefined for a nation. */
+export function squadLeague(id: string): League | undefined {
+  return listSquads().find((s) => s.id === id)?.league;
 }
 
 export function getSquad(id: string): Squad | undefined {
