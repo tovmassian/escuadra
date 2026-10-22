@@ -266,7 +266,7 @@ results' "photo credits" list). Its Privacy section says what photo loading
 sends to Wikimedia, that photos are cached on the device, and that a credit link
 opens a third-party site. Change a licence, a source or a credit surface here
 and the About text in the same PR, and the privacy pages with it, in all five
-languages (`CLAUDE.md`, guardrail 4). About → Licences, at the end of the credits,
+languages (`CLAUDE.md`, guardrail 4). About → Licences, at the end of the credits (Settings → Licences opens the same sheet),
 shows the licence notices: the Unicode notice, the fonts by name and every bundled
 package (see Software licences above).
 

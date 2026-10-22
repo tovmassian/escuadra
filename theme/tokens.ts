@@ -997,8 +997,8 @@ export const sizes = {
   },
   // Every bottom sheet (`Sheet`): its grab handle and its close button.
   sheet: { handleWidth: 36, handleHeight: 5, close: 36 },
-  // The language sheet's radio (#143).
-  languageChip: { radio: 20, radioDot: 10 },
+  // The language sheet's radio: the ring and its selected dot (#143).
+  languageSheet: { radio: 20, radioDot: 10 },
   // The share sheet's own parts (spec §4.1).
   shareSheet: {
     switchHeight: 40,

@@ -415,18 +415,21 @@ async function captureTheme(browser, colorScheme, suffix) {
   const capture = await openCapture(browser, { colorScheme, suffix });
 
   try {
-    await capture.open('/');
-    await capture.shoot('01-home');
-
-    // Settings (#175): Home's gear opens it, the language lives there. The check
-    // runs here so a `--lang` capture that did not take fails before any shot.
-    await capture.open('/settings');
+    // Settings (#175): Home's gear opens it, the language lives there. The `--lang`
+    // check runs first, on Settings' language row, so a capture whose language did
+    // not take fails before any shot is written.
     if (LANGUAGE) {
+      await capture.open('/settings');
       const value = await capture.page.getByTestId('settings-language-value').innerText();
       if (value.trim() !== LANGUAGE_NAMES[LANGUAGE]) {
         throw new Error(`--lang=${LANGUAGE}: Settings' language row says "${value}"`);
       }
     }
+
+    await capture.open('/');
+    await capture.shoot('01-home');
+
+    await capture.open('/settings');
     await capture.shoot('01c-settings');
     // The page's ScrollView is the one scrollable element taller than its box. Set
     // `scrollTop`: react-native-web replaces the node's `scrollTo` with one that takes an
