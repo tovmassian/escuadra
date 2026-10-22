@@ -273,21 +273,16 @@ export const it: Messages = {
   },
   picker: {
     // Masculine: the campionati.
-    allLeagues: 'TUTTI',
-    // "Da giocare" needs no gender: "mai giocato" would have to agree with a
-    // club or a squadra.
-    notPlayed: (season: string) => `${season} · DA GIOCARE`,
-    played: (season: string, level: number, correct: number, total: number) =>
-      `${season} · LIVELLO ${level} · RECORD ${correct}/${total}`,
-    home: 'Home',
-    title: 'Scegli una squadra',
-    count: (count: number) =>
-      count === 1
-        ? `${count} squadra · tocca per iniziare`
-        : `${count} squadre · tocca per iniziare`,
+    allLeagues: 'Tutti',
+    title: 'Scegli la tua rosa',
+    squadCount: (count: number) => (count === 1 ? `${count} rosa` : `${count} rose`),
     // "Club" takes no plural in Italian.
     clubs: 'Club',
-    nationalTeams: 'Nazionali',
+    nations: 'Nazionali',
+    allClubs: 'Tutti i club',
+    listCaption: (name: string, count: number) => `${name} · ${count}`,
+    bestSpoken: (level: number, correct: number, total: number) =>
+      `Livello ${level}, record ${correct} su ${total}`,
     search: 'Cerca squadre',
     clearSearch: 'Cancella la ricerca',
     noTeams: 'Nessuna squadra trovata',

@@ -23,7 +23,7 @@ export default function TeamPicker() {
   const language = useLanguage();
   const segments = [
     { key: 'club', label: t.picker.clubs },
-    { key: 'nation', label: t.picker.nationalTeams },
+    { key: 'nation', label: t.picker.nations },
   ] as const;
   const hydrated = useProgressHydrated();
   const bestScores = useProgress((s) => s.bestScores);
@@ -85,10 +85,10 @@ export default function TeamPicker() {
   return (
     <View style={[styles.root, { paddingTop: insets.top + spacing.md }]}>
       <Pressable onPress={() => router.dismissTo('/')} accessibilityRole="button" hitSlop={12}>
-        <Text style={styles.back}>‹ {t.picker.home}</Text>
+        <Text style={styles.back}>‹ {t.common.back}</Text>
       </Pressable>
       <Text style={styles.title}>{t.picker.title}</Text>
-      <Text style={styles.subtitle}>{t.picker.count(filtered.length)}</Text>
+      <Text style={styles.subtitle}>{t.picker.squadCount(filtered.length)}</Text>
       <View style={styles.search}>
         <SearchField value={query} onChange={setQuery} onClear={() => setQuery('')} />
       </View>

@@ -67,7 +67,7 @@ describe('teamProgress', () => {
 
 describe('leagueLabel', () => {
   it('names leagues as they are, and the clear pill from the catalog', () => {
-    expect(leagueLabel('ALL', en)).toBe('ALL');
+    expect(leagueLabel('ALL', en)).toBe('All');
     expect(leagueLabel('la-liga', en)).toBe('La Liga');
   });
 });
