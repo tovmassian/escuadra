@@ -23,7 +23,7 @@ npm run gen:play-assets # write design/play/icon-512.png and feature-graphic.jpg
 
 `design/` is the handoff surface pushed to the Claude Design project.
 `design/tokens.ts` and `design/brand.ts` re-export from `theme/tokens.ts` and
-`theme/brand.ts` rather than copy — `design/handoff.test.ts` pins object
+`theme/brand.ts` rather than copy — `design/__tests__/handoff.test.ts` pins object
 identity so they cannot quietly drift into a duplicate. `design/screens/`
 holds PNGs captured by `npm run shots`; after any change to a screen,
 regenerate them, or the design side is working from a stale picture.

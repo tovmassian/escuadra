@@ -48,7 +48,7 @@ ever get a hero treatment, where `contain` with a matched box would be better.
 Every FIFA member's flag is committed, except Chinese Taipei's: FIFA shows
 that team under the Chinese Taipei Football Association's flag, an emblem,
 which constraint #2 rules out. A player nationality outside FIFA (Guadeloupe's
-was the first) may still need one; `lib/flags.test.ts` fails with the missing
+was the first) may still need one; `lib/__tests__/flags.test.ts` fails with the missing
 name when that happens.
 
 Tahiti's flag is French Polynesia's (`pf`), which is the flag FIFA shows.

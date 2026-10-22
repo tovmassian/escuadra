@@ -5,7 +5,7 @@
 // policy, and a published folder is never edited once its version ships, bar
 // the one regeneration described at POLICY_DIR.
 // Written into <dir>/privacy/2/ by `PRIVACY_PAGES=<dir>
-// PRIVACY_UPDATED=YYYY-MM-DD npx vitest run scripts/privacy-pages.test.ts` —
+// PRIVACY_UPDATED=YYYY-MM-DD npx vitest run scripts/__tests__/privacy-pages.test.ts` —
 // a Vitest run, because Node alone cannot load the catalogs' extensionless
 // imports.
 import { mkdirSync, writeFileSync } from 'node:fs';

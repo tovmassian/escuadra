@@ -242,7 +242,7 @@ made the way the next section describes.
   where `scripts/commons.ts` derives it from the file name — so the credit's
   link always lands. Every refused or incomplete credit is listed in the
   report, with what it lacks.
-- **`lib/dataIntegrity.test.ts`** re-checks every stored photo in
+- **`lib/__tests__/dataIntegrity.test.ts`** re-checks every stored photo in
   `npm run check`: accepted licence, a named holder under "Attribution", a name
   no longer than 120 characters, an https thumbnail on a Wikimedia host, an
   https deed. A hand edit that breaks the rule fails the build.

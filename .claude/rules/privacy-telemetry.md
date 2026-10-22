@@ -1,7 +1,7 @@
 ---
 paths:
   - "lib/telemetry*.ts"
-  - "lib/telemetrySdk.test.ts"
+  - "lib/__tests__/telemetry*.ts"
   - "app/about.tsx"
   - "lib/aboutView.ts"
   - "scripts/privacy-pages.ts"
@@ -48,6 +48,6 @@ signals. **A new event or property is a disclosure review** (guardrail 4):
 the privacy policy, About text, App Privacy and Data safety answers change
 with it, in a store build. So is an upgrade of `@telemetrydeck/sdk` (or of
 `expo-updates`), because About states what those SDKs put in each request.
-For TelemetryDeck, `lib/telemetrySdk.test.ts` pins the request, and a failure
+For TelemetryDeck, `lib/__tests__/telemetrySdk.test.ts` pins the request, and a failure
 there means About no longer describes it; `expo-updates` has no such test, so
 read its changelog. Never put names, free text or player data in a payload.

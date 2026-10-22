@@ -152,7 +152,7 @@ export interface SquadManifestEntry {
   secondaryColor: string;
   verified: boolean;
   /** Mirrors the squad file's `marker`, since the picker never imports full
-   *  squad JSON. Kept in sync by lib/squads.test.ts. */
+   *  squad JSON. Kept in sync by lib/__tests__/squads.test.ts. */
   marker: TeamMarker;
   /** Which big-5 league (or `ucl`, for a UCL group-stage club with no big-5
    *  home) a club plays in. Present for `kind: 'club'` entries, absent for

@@ -1,0 +1,230 @@
+import { describe, expect, it } from 'vitest';
+import {
+  addWrongLink,
+  EMPTY_DECISIONS,
+  addAlias,
+  addKeptBirth,
+  dropKeptBirth,
+  addSplit,
+  addTitleAlias,
+  validateDecisions,
+  type DecisionFile,
+} from '../decisions.ts';
+
+const split = { team: 'arg', departed: 'gonzalez', arrived: 'Nicolás González' };
+
+describe('addSplit', () => {
+  it('records a decision', () => {
+    expect(addSplit(EMPTY_DECISIONS, split)?.splits).toEqual([split]);
+  });
+
+  // Re-running after a failed apply must not pile up entries.
+  it('is idempotent, returning null when the decision is already recorded', () => {
+    const once = addSplit(EMPTY_DECISIONS, split);
+    expect(once).not.toBeNull();
+    expect(addSplit(once!, split)).toBeNull();
+  });
+
+  it('keeps entries sorted so the file does not churn', () => {
+    const a = addSplit(EMPTY_DECISIONS, { team: 'psg', departed: 'z', arrived: 'Z' })!;
+    const b = addSplit(a, split)!;
+    expect(b.splits.map((s) => s.team)).toEqual(['arg', 'psg']);
+  });
+
+  it('does not mutate the file it was given', () => {
+    addSplit(EMPTY_DECISIONS, split);
+    expect(EMPTY_DECISIONS.splits).toEqual([]);
+  });
+});
+
+describe('validateDecisions', () => {
+  it('accepts a well-formed file', () => {
+    expect(validateDecisions({ splits: [split] })).toEqual([]);
+  });
+
+  it('rejects a missing splits array or a malformed entry', () => {
+    expect(validateDecisions({})).toHaveLength(1);
+    expect(validateDecisions({ splits: [{ team: 'arg' }] }).join()).toContain('departed');
+  });
+});
+
+describe('addAlias', () => {
+  const alias = { player: 'grimaldo', name: 'Alejandro Grimaldo' };
+
+  // Atlético writes "Alejandro Grimaldo", Spain writes "Álex Grimaldo", and
+  // both are right. rename only moves the conflict to the other squad and
+  // split asserts something false, so this is the only truthful answer.
+  it('records a second name for one player', () => {
+    expect(addAlias(EMPTY_DECISIONS, alias)?.aliases).toEqual([alias]);
+  });
+
+  it('is idempotent', () => {
+    const once = addAlias(EMPTY_DECISIONS, alias)!;
+    expect(addAlias(once, alias)).toBeNull();
+  });
+
+  it('does not disturb recorded splits', () => {
+    const withSplit = addSplit(EMPTY_DECISIONS, split)!;
+    expect(addAlias(withSplit, alias)?.splits).toEqual([split]);
+  });
+});
+
+describe('addTitleAlias', () => {
+  const empty: DecisionFile = { splits: [], aliases: [], titleAliases: [] };
+
+  it('records an extra article title one player is known by', () => {
+    const updated = addTitleAlias(empty, { player: 'grimaldo', title: 'Alejandro Grimaldo' });
+    expect(updated?.titleAliases).toEqual([{ player: 'grimaldo', title: 'Alejandro Grimaldo' }]);
+  });
+
+  it('is idempotent, so re-running after a failed apply piles up nothing', () => {
+    const once = addTitleAlias(empty, { player: 'grimaldo', title: 'Alejandro Grimaldo' });
+    expect(addTitleAlias(once!, { player: 'grimaldo', title: 'Alejandro Grimaldo' })).toBeNull();
+  });
+
+  it('sorts, so two people editing the file do not fight over order', () => {
+    const a = addTitleAlias(empty, { player: 'zubimendi', title: 'Martín Zubimendi' })!;
+    const b = addTitleAlias(a, { player: 'grimaldo', title: 'Alejandro Grimaldo' })!;
+    expect(b.titleAliases?.map((t) => t.player)).toEqual(['grimaldo', 'zubimendi']);
+  });
+
+  it('leaves an older file that predates the field alone', () => {
+    const updated = addTitleAlias(
+      { splits: [], aliases: [] },
+      {
+        player: 'grimaldo',
+        title: 'Alejandro Grimaldo',
+      },
+    );
+    expect(updated?.titleAliases).toHaveLength(1);
+  });
+});
+
+describe('validateDecisions with titleAliases', () => {
+  it('accepts a file with no titleAliases at all', () => {
+    expect(validateDecisions({ splits: [], aliases: [] })).toEqual([]);
+  });
+
+  it('rejects a non-array titleAliases', () => {
+    expect(validateDecisions({ splits: [], titleAliases: 'nope' })).toEqual([
+      'decisions.json "titleAliases" must be an array when present',
+    ]);
+  });
+
+  it('names the offending entry and field', () => {
+    expect(validateDecisions({ splits: [], titleAliases: [{ player: 'x' }] })).toEqual([
+      'titleAliases[0].title must be a non-empty string',
+    ]);
+  });
+
+  // Tests that entry-level errors from different arrays accumulate together,
+  // not that the guard placement prevents errors being discarded (the guard
+  // returns a literal array, so placement never affects it).
+  it('accumulates entry-level errors across aliases and splits sections', () => {
+    const result = validateDecisions({
+      splits: [{ team: 'arg' }],
+      aliases: [{ player: 'x' }],
+    });
+    expect(result).toContain('aliases[0].name must be a non-empty string');
+    expect(result).toContain('splits[0].departed must be a non-empty string');
+    expect(result).toContain('splits[0].arrived must be a non-empty string');
+  });
+
+  // Same as above: confirms entry-level errors from multiple arrays accumulate.
+  // Not a regression guard for the guard move, since the move changes no
+  // observable output (the guard returns a literal array, not one that
+  // includes accumulated state).
+  it('accumulates entry-level errors across titleAliases and splits sections', () => {
+    const result = validateDecisions({
+      splits: [{ team: 'arg' }],
+      titleAliases: [{ player: 'x' }],
+    });
+    expect(result).toContain('titleAliases[0].title must be a non-empty string');
+    expect(result).toContain('splits[0].departed must be a non-empty string');
+    expect(result).toContain('splits[0].arrived must be a non-empty string');
+  });
+});
+
+describe('addKeptBirth', () => {
+  it('records that a stored birth date stands against Wikidata, idempotently', () => {
+    const once = addKeptBirth(EMPTY_DECISIONS, { player: 'galarza', birth: '2002-02-11' });
+    expect(once?.keptBirths).toEqual([{ player: 'galarza', birth: '2002-02-11' }]);
+    expect(once && addKeptBirth(once, { player: 'galarza', birth: '2002-02-11' })).toBeNull();
+  });
+
+  it('replaces an earlier decision for the same player, keeping the list sorted', () => {
+    const file = { ...EMPTY_DECISIONS, keptBirths: [{ player: 'z', birth: '2000-01-02' }] };
+    const updated = addKeptBirth(file, { player: 'a', birth: '2001-01-01' });
+    expect(updated?.keptBirths?.map((k) => k.player)).toEqual(['a', 'z']);
+    expect(addKeptBirth(file, { player: 'z', birth: '2000-01-03' })?.keptBirths).toEqual([
+      { player: 'z', birth: '2000-01-03' },
+    ]);
+  });
+});
+
+describe('dropKeptBirth', () => {
+  it("removes only that player's entry, and is a no-op without one", () => {
+    const file = {
+      ...EMPTY_DECISIONS,
+      keptBirths: [
+        { player: 'a', birth: '2001-01-01' },
+        { player: 'z', birth: '2000-01-02' },
+      ],
+    };
+    expect(dropKeptBirth(file, 'a')?.keptBirths).toEqual([{ player: 'z', birth: '2000-01-02' }]);
+    expect(dropKeptBirth(file, 'nobody')).toBeNull();
+    expect(dropKeptBirth(EMPTY_DECISIONS, 'a')).toBeNull();
+  });
+});
+
+describe('validateDecisions with keptBirths', () => {
+  it('accepts a file without them, and well-formed entries', () => {
+    expect(validateDecisions({ splits: [] })).toEqual([]);
+    expect(
+      validateDecisions({ splits: [], keptBirths: [{ player: 'a', birth: '2001-01-01' }] }),
+    ).toEqual([]);
+  });
+
+  it('refuses a non-array, a missing player, or a date that is not a real one', () => {
+    expect(validateDecisions({ splits: [], keptBirths: {} })).toEqual([
+      'decisions.json "keptBirths" must be an array when present',
+    ]);
+    expect(
+      validateDecisions({ splits: [], keptBirths: [{ player: '', birth: '1998-02-29' }] }),
+    ).toEqual([
+      'keptBirths[0].player must be a non-empty string',
+      'keptBirths[0].birth must be a real YYYY-MM-DD date',
+    ]);
+  });
+});
+
+describe('addWrongLink', () => {
+  const link = {
+    team: 'nca',
+    title: 'Emmanuel Gómez',
+    reason: 'links a Gambian defender born 1990',
+  };
+
+  it('records a link a team article makes to someone else', () => {
+    expect(addWrongLink(EMPTY_DECISIONS, link)?.wrongLinks).toEqual([link]);
+  });
+
+  it('is idempotent on team and title', () => {
+    const once = addWrongLink(EMPTY_DECISIONS, link);
+    expect(once === null ? null : addWrongLink(once, { ...link, reason: 'again' })).toBeNull();
+  });
+});
+
+describe('validateDecisions with wrongLinks', () => {
+  it('accepts a complete entry', () => {
+    expect(
+      validateDecisions({ splits: [], wrongLinks: [{ team: 'nca', title: 'X', reason: 'y' }] }),
+    ).toEqual([]);
+  });
+
+  it('requires a reason, since it overrules the source', () => {
+    expect(validateDecisions({ splits: [], wrongLinks: [{ team: 'nca', title: 'X' }] })).toEqual([
+      'wrongLinks[0].reason must be a non-empty string',
+    ]);
+  });
+});

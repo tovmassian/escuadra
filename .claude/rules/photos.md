@@ -13,6 +13,7 @@ paths:
   - "scripts/commons.ts"
   - "tools/squadctl/src/lib/photo-credit.ts"
   - "tools/squadctl/src/lib/enrich*.ts"
+  - "tools/squadctl/src/lib/__tests__/enrich*.ts"
 ---
 
 # Player photos (guardrail 1)
@@ -24,7 +25,7 @@ show.
 `player.photo` is a `PhotoCredit` written only by `squadctl enrich`, which
 refuses any photo without an accepted licence, a Wikimedia thumbnail and
 its Commons page — the asset-licensing rule (`CLAUDE.md`, guardrail 2), enforced in code and in
-`lib/dataIntegrity.test.ts` — and any with no original size, which the
+`lib/__tests__/dataIntegrity.test.ts` — and any with no original size, which the
 layout needs. Every shown photo shows its credit; never put the Commons
 file name or caption in visible text or a label, as they name the player.
 The credit sits under the question's action button for as long as the

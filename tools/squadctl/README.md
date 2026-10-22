@@ -255,7 +255,7 @@ Neither applies when the row links the record's own article (equal once
 normalised): the article decides. A row whose every same-named record was set
 aside gets a new one (`aboubacar-camara-2`), reported as a warning, and the
 team stays verified — nothing is left to decide. Two players in two nation
-squads under one article title still fail `lib/dataIntegrity.test.ts`: that
+squads under one article title still fail `lib/__tests__/dataIntegrity.test.ts`: that
 is a real dual listing, and `exclude` answers it.
 
 **A squad nobody can play is held.** A round asks ten numbered players
@@ -385,7 +385,7 @@ title does belong to. `enrich` sees no title, so it shows no one's photo and
 checks the birth date against no one's. Set the date with `birth` if needed.
 
 Keyed on team and title, like `exclude`, and `--reason` is required for the
-same reason: it overrules the source. `lib/dataIntegrity.test.ts` fails if a
+same reason: it overrules the source. `lib/__tests__/dataIntegrity.test.ts` fails if a
 member of that squad carries the title again.
 
 ### `enrich`
@@ -503,7 +503,7 @@ them inline in the main table instead, which is why `other=` has to be read.
 `isOutOnLoan` anchors at the start of the value and requires the wikilink —
 `on loan from [[Atlético Madrid]]` contains "at" and must not read as a
 departure. **An unrecognised phrasing keeps the row.** That leaves the player
-in two squads and `lib/dataIntegrity.test.ts` fails loudly, which is the safe
+in two squads and `lib/__tests__/dataIntegrity.test.ts` fails loudly, which is the safe
 direction: quietly shortening a squad on a phrasing nobody has seen yet is the
 one you cannot recover from.
 
@@ -966,6 +966,6 @@ with `--json` the error is serialised instead of rethrown, and the process
 exited `1` — which this table calls network / HTTP, so a consumer read a
 registry error as a transient failure and retried it. `BaseCommand.catch`
 (`src/base-command.ts`) now forwards `oclif.exit` to `process.exitCode`
-before delegating, and `src/commands/registry/check.integration.test.ts`
+before delegating, and `src/commands/registry/__tests__/check.integration.test.ts`
 pins it by spawning the CLI and comparing the code with and without the
 flag. The payload still carries the code at `error.oclif.exit`.

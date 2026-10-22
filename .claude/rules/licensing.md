@@ -2,8 +2,10 @@
 paths:
   - "assets/**"
   - "scripts/*licence*"
+  - "scripts/__tests__/*licence*"
   - "scripts/licence-texts/**"
   - "lib/licences*.ts"
+  - "lib/__tests__/licences*.ts"
   - "i18n/UNICODE-LICENSE.txt"
   - "components/LicencesSheet.tsx"
 ---

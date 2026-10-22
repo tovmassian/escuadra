@@ -40,11 +40,11 @@ actual output.
 A failure in one of these means what the app promises changed, not that the expectation
 is stale. Never edit the expectation, widen an allowlist or loosen TypeScript to pass it.
 
-- `lib/telemetrySdk.test.ts`: what the TelemetryDeck SDK sends. A failure is a disclosure
+- `lib/__tests__/telemetrySdk.test.ts`: what the TelemetryDeck SDK sends. A failure is a disclosure
   review (`CLAUDE.md`, guardrail 4).
 - `i18n/__tests__/catalogs.test.ts`: a hash of the English About. A change updates every
   catalog's `about`, each re-reviewed.
-- `lib/dataIntegrity.test.ts`: every stored photo's licence and credit, and the squads'
+- `lib/__tests__/dataIntegrity.test.ts`: every stored photo's licence and credit, and the squads'
   integrity (`docs/license.md`).
 - `theme/__tests__/userInterfaceStyle.test.ts`: the system-following theme.
 - `scripts/claude/__tests__/repo.test.ts`: `CLAUDE.md` and these rules stay true to the
