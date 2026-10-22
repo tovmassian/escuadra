@@ -1,4 +1,4 @@
-// What the Licences sheet (About → Licences, #156) shows, kept React-free so
+// What the Licences page (Settings or About → Licences, #156, #175) shows, kept React-free so
 // Vitest can test it. The package list itself is lib/licences.generated.ts,
 // written by scripts/gen-licences.ts from the bundle's source maps.
 

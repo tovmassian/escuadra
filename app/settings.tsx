@@ -9,7 +9,6 @@ import { AppearanceControl } from '@/components/AppearanceControl';
 import { BrandGradient } from '@/components/BrandGradient';
 import { EscuadraMark } from '@/components/EscuadraMark';
 import { LanguageSheet } from '@/components/LanguageSheet';
-import { LicencesSheet } from '@/components/LicencesSheet';
 import {
   BookGlyph,
   ChartGlyph,
@@ -43,7 +42,6 @@ export default function Settings() {
   const telemetryEnabled = useProgress((s) => s.telemetryEnabled);
   const setTelemetryEnabled = useProgress((s) => s.setTelemetryEnabled);
   const [languageOpen, setLanguageOpen] = useState(false);
-  const [licencesOpen, setLicencesOpen] = useState(false);
   const version = Constants.expoConfig?.version ?? '—';
   const glyph = colors.textSecondary;
   const g = sizes.settings;
@@ -262,7 +260,7 @@ export default function Settings() {
             minHeight={g.linkRow}
             icon={<BookGlyph color={glyph} />}
             label={t.settings.licences}
-            onPress={() => setLicencesOpen(true)}
+            onPress={() => router.push('/licences')}
             accessory={<ChevronGlyph color={colors.textMuted} />}
           />
         </SettingsSection>
@@ -287,7 +285,6 @@ export default function Settings() {
         </View>
       </ScrollView>
       <LanguageSheet visible={languageOpen} onClose={() => setLanguageOpen(false)} />
-      <LicencesSheet visible={licencesOpen} onClose={() => setLicencesOpen(false)} />
     </View>
   );
 }

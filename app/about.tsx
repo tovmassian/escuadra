@@ -1,5 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { Fragment, useRef, useState } from 'react';
+import { Fragment, useRef } from 'react';
 import {
   type LayoutChangeEvent,
   Pressable,
@@ -9,7 +9,6 @@ import {
   View,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { LicencesSheet } from '@/components/LicencesSheet';
 import { translationNotice } from '@/i18n/translationNotice';
 import { useLanguage, useT } from '@/i18n/useT';
 import { radii, spacing, typography } from '@/theme/tokens';
@@ -21,7 +20,6 @@ export default function About() {
   const t = useT();
   const notice = translationNotice(useLanguage());
   const last = (i: number, list: readonly unknown[]) => i === list.length - 1;
-  const [licencesOpen, setLicencesOpen] = useState(false);
   const { section: sectionParam } = useLocalSearchParams<{ section?: string }>();
   const scrollRef = useRef<ScrollView>(null);
   const scrolledTo = useRef(false);
@@ -102,7 +100,7 @@ export default function About() {
           ))}
           <Pressable
             testID="about-licences"
-            onPress={() => setLicencesOpen(true)}
+            onPress={() => router.push('/licences')}
             accessibilityRole="button"
             hitSlop={8}
           >
@@ -143,7 +141,6 @@ export default function About() {
           {notice && <Text style={[styles.paragraph, { marginBottom: 0 }]}>{notice}</Text>}
         </View>
       </ScrollView>
-      <LicencesSheet visible={licencesOpen} onClose={() => setLicencesOpen(false)} />
     </View>
   );
 }

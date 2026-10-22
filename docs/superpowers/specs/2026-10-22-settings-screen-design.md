@@ -20,7 +20,7 @@ gear glyph in `textPrimary`, spoken "Settings". Everything else on Home stays un
 | PRIVACY     | One card: **Usage statistics** switch, with the line "Anonymous. About says exactly what is sent."                                                                                                       |
 | SUPPORT     | One card: the app-icon plate, **Rate Escuadra** and one line, a **RATE** pill button                                                                                                                     |
 | COMING NEXT | A dashed card, not tappable: clock, **Exam mode**, one line, a **SOON** chip                                                                                                                             |
-| ABOUT       | One card of three link rows: **About Escuadra** (`/about`), **Privacy** (`/about` scrolled to its Privacy card), **Licences** (`LicencesSheet`, opened over Settings)                                    |
+| ABOUT       | One card of three link rows: **About Escuadra** (`/about`), **Privacy** (`/about` scrolled to its Privacy card), **Licences** (`/licences`, a page of its own, as About's Licences row now opens too)    |
 | Footer      | The Escuadra mark in `mark` beside the version line from `versionLabel`, centred                                                                                                                         |
 
 Section labels are IBM Plex Mono capitals in `textMuted`. Cards are `surface` with a
