@@ -100,7 +100,7 @@ They are pushed to `gh-pages` only after the PR merges, on the owner's OK (owner
 
 New, in `theme/tokens.ts`, and in both palettes where a colour:
 
-- Roles: `switchThumb` (shared), `soonBg` (the SOON chip's fill, a translucent ink per
+- Roles: `switchThumb` and `plateMark` (shared), `soonBg` (the SOON chip's fill, a translucent ink per
   theme).
 - Typography: `settingsTitle` (Archivo SemiExpanded ExtraBold 32, uppercase),
   `settingsSection` (Plex Mono SemiBold 12, tracked, uppercase), `settingsLabel` (Inter
