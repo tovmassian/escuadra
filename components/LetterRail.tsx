@@ -1,0 +1,73 @@
+import { useRef } from 'react';
+import { StyleSheet, Text, View, type GestureResponderEvent } from 'react-native';
+import { sizes, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
+
+interface LetterRailProps {
+  /** The letters to show, already in order (the screen builds the list). */
+  letters: readonly string[];
+  /** The letter whose section is in view, or null. */
+  current: string | null;
+  onJump: (letter: string) => void;
+}
+
+// The nations tab's A–Z index (#176). The whole column is the touch target: a
+// tap or a drag maps its y position to a letter. Hidden from screen readers
+// (spec decision 4): the list itself is what they read.
+export function LetterRail({ letters, current, onJump }: LetterRailProps) {
+  const colors = useThemeColors();
+  const styles = StyleSheet.create({
+    rail: { width: sizes.rail.width, alignItems: 'center' },
+    letter: { ...typography.railLetter, height: sizes.rail.letter, textAlign: 'center' },
+  });
+  const rail = useRef<View>(null);
+  // The rail's top edge in the window, measured as a touch starts. `locationY`
+  // is relative to whichever letter was hit, so it can't place the finger.
+  const top = useRef(0);
+  const last = useRef<string | null>(null);
+
+  const jumpTo = (pageY: number) => {
+    const index = Math.floor((pageY - top.current) / sizes.rail.letter);
+    const letter = letters[Math.min(letters.length - 1, Math.max(0, index))];
+    if (letter !== undefined && letter !== last.current) {
+      last.current = letter;
+      onJump(letter);
+    }
+  };
+
+  const onGrant = (e: GestureResponderEvent) => {
+    const { pageY } = e.nativeEvent;
+    last.current = null;
+    rail.current?.measureInWindow((_x, y) => {
+      top.current = y;
+      jumpTo(pageY);
+    });
+  };
+
+  return (
+    <View
+      ref={rail}
+      testID="letter-rail"
+      style={styles.rail}
+      accessibilityElementsHidden
+      importantForAccessibility="no-hide-descendants"
+      onStartShouldSetResponder={() => true}
+      onMoveShouldSetResponder={() => true}
+      onResponderGrant={onGrant}
+      onResponderMove={(e) => jumpTo(e.nativeEvent.pageY)}
+    >
+      {letters.map((letter) => (
+        <Text
+          key={letter}
+          testID={`rail-${letter}`}
+          style={[
+            styles.letter,
+            { color: letter === current ? colors.accentLine : colors.textMuted },
+          ]}
+        >
+          {letter}
+        </Text>
+      ))}
+    </View>
+  );
+}

@@ -1,5 +1,5 @@
 import { useT } from '@/i18n/useT';
-import { iconSize, radii, sizes, spacing, typography } from '@/theme/tokens';
+import { borderWidths, iconSize, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
@@ -89,15 +89,15 @@ export function SearchField({ value, onChange, onClear }: SearchFieldProps) {
     root: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: spacing.xs,
-      height: sizes.controlHeight,
-      paddingHorizontal: spacing.sm,
+      gap: spacing.sm - 2,
+      height: sizes.searchField,
+      paddingHorizontal: spacing.md + 2,
       backgroundColor: colors.surface,
-      borderWidth: 1,
+      borderWidth: borderWidths.hairline,
       borderColor: colors.border,
-      borderRadius: radii.lg,
+      borderRadius: radii.pill,
     },
-    input: { flex: 1, padding: 0, ...typography.secondary, color: colors.textPrimary },
+    input: { flex: 1, padding: 0, ...typography.searchInput, color: colors.textPrimary },
   });
 
   return (
