@@ -199,7 +199,11 @@ A new version from `main`:
    `awk '/^## \[X.Y.Z\]/{f=1;next} /^## \[/{f=0} f' CHANGELOG.md > "$RUNNER_TEMP/notes.md"`
    (locally, any temp path) and
    `gh release create vX.Y.Z --title X.Y.Z --notes-file "$RUNNER_TEMP/notes.md"`.
-   No workflow runs on tags. Play's 12-tester, 14-day closed test gates only a new app's
+   Attach the version's store assets to the same Release: from the release branch, run
+   `npm run shots:store`, `npm run shots:play -- --lang=<code>` for each language and
+   `npm run gen:play-assets`, zip `design/store/` and `design/play/`, and
+   `gh release upload vX.Y.Z <the two zips>`. They stay out of git: they are large and
+   change with every release. No workflow runs on tags. Play's 12-tester, 14-day closed test gates only a new app's
    first production release; later updates go straight to review.
 
 A runtime-changing fix to a released version (1.0.1):

@@ -32,7 +32,8 @@ A sibling `store/` profile captures the same screens at 1320×2868, Apple's
 captures them again at 1080×1920 (9:16) as JPEGs, Google Play's
 promotion-eligible phone screenshot size, via `npm run shots:play`. Both are
 gitignored rather than committed — neither is part of this handoff surface,
-just release artefacts regenerated on demand — but the same web-rendered,
+just release artefacts, regenerated for each release and attached to its GitHub
+Release (`docs/release.md`, Cut a release) — but the same web-rendered,
 not device truth caveat above applies to them too, arguably more: a store
 listing represents the real app to a prospective player more directly than a
 design handoff does.
