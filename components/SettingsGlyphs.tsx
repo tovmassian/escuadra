@@ -52,8 +52,9 @@ export function GlobeGlyph({ color }: { color: string }) {
   return (
     <Box>
       <View style={circle(12, 12, 20, color)} />
+      {/* The meridian is a stadium: its radius is half its 9-unit width. */}
       <View
-        style={[at(7.5, 2, 9, 20), { borderRadius: 10 * k, borderWidth: w, borderColor: color }]}
+        style={[at(7.5, 2, 9, 20), { borderRadius: 4.5 * k, borderWidth: w, borderColor: color }]}
       />
       <View style={[at(2, 11, 20, 2), { backgroundColor: color }]} />
     </Box>
@@ -61,7 +62,8 @@ export function GlobeGlyph({ color }: { color: string }) {
 }
 
 export function MoonGlyph({ color, ground }: { color: string; ground: string }) {
-  // A disc with an offset disc in the ground's colour punched out of it.
+  // A disc with an offset disc in the ground's colour punched out of it. The punch's
+  // coordinates are relative to the disc, which starts at grid (3,3).
   return (
     <Box>
       <View style={[circle(12, 12, 18, color, true), { overflow: 'hidden' }]}>
@@ -149,7 +151,7 @@ export function ChevronGlyph({ color }: { color: string }) {
         style={{
           width: arm,
           height: arm,
-          marginLeft: -arm / 3,
+          marginLeft: -arm / 1.5,
           borderTopWidth: stroke,
           borderRightWidth: stroke,
           borderColor: color,

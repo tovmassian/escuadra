@@ -12,6 +12,7 @@ import {
 import { useThemeColors } from '@/theme/useTheme';
 
 const OPTIONS: readonly ThemePreference[] = ['system', 'dark', 'light'];
+const segmentSlop = (sizes.minTapTarget - sizes.settings.segment) / 2;
 
 // Settings' Appearance (#175): Match phone, Dark or Light, written straight to
 // `themePreference`. A radio group, so a screen reader says which is chosen.
@@ -57,6 +58,8 @@ export function AppearanceControl() {
             accessibilityRole="radio"
             accessibilityState={{ checked }}
             aria-checked={checked}
+            // Vertical only: the segments touch, so side slop would steal taps.
+            hitSlop={{ top: segmentSlop, bottom: segmentSlop }}
             style={[styles.option, checked && { backgroundColor: colors.ctaBg }]}
           >
             <Text

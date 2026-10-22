@@ -22,12 +22,12 @@ export default function About() {
   const notice = translationNotice(useLanguage());
   const last = (i: number, list: readonly unknown[]) => i === list.length - 1;
   const [licencesOpen, setLicencesOpen] = useState(false);
-  const { section } = useLocalSearchParams<{ section?: string }>();
+  const { section: sectionParam } = useLocalSearchParams<{ section?: string }>();
   const scrollRef = useRef<ScrollView>(null);
   const scrolledTo = useRef(false);
   // Settings' Privacy row opens About at its Privacy card (#175).
   const onPrivacyLayout = (e: LayoutChangeEvent) => {
-    if (section !== 'privacy' || scrolledTo.current) return;
+    if (sectionParam !== 'privacy' || scrolledTo.current) return;
     scrolledTo.current = true;
     scrollRef.current?.scrollTo({ y: e.nativeEvent.layout.y, animated: false });
   };
@@ -110,6 +110,7 @@ export default function About() {
           </Pressable>
         </View>
 
+        {/* Must stay a direct child of the ScrollView's content: onLayout's y is the scroll offset. */}
         <View style={styles.section} onLayout={onPrivacyLayout}>
           <Text style={styles.sectionHeading}>{t.about.privacy.heading}</Text>
 

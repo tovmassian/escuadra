@@ -54,6 +54,7 @@ export function SettingsRow({
   last = false,
   minHeight = sizes.settings.row,
   muted = false,
+  textHidden = false,
 }: {
   icon: ReactNode;
   label: string;
@@ -66,6 +67,9 @@ export function SettingsRow({
   minHeight?: number;
   /** Coming next's quieter text. */
   muted?: boolean;
+  /** A switch row is one screen-reader stop, the Switch, which carries the label and
+   * the note itself: the row's own text is hidden from it. */
+  textHidden?: boolean;
 }) {
   const colors = useThemeColors();
   const styles = StyleSheet.create({
@@ -91,7 +95,11 @@ export function SettingsRow({
       <View importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
         {icon}
       </View>
-      <View style={styles.text}>
+      <View
+        style={styles.text}
+        importantForAccessibility={textHidden ? 'no-hide-descendants' : 'auto'}
+        accessibilityElementsHidden={textHidden}
+      >
         <Text style={styles.label}>{label}</Text>
         {note !== undefined && <Text style={styles.note}>{note}</Text>}
       </View>

@@ -107,6 +107,8 @@ export default function Settings() {
   const switchProps = {
     trackColor: { false: colors.surfaceRaised, true: colors.brandBright },
     thumbColor: colors.switchThumb,
+    // react-native-web uses thumbColor for the off state only; native ignores this.
+    activeThumbColor: colors.switchThumb,
     ios_backgroundColor: colors.surfaceRaised,
   };
 
@@ -162,6 +164,7 @@ export default function Settings() {
             last
             icon={<VibrationGlyph color={glyph} />}
             label={t.settings.vibration}
+            textHidden
             accessory={
               <Switch
                 testID="haptics-toggle"
@@ -180,10 +183,12 @@ export default function Settings() {
             icon={<ChartGlyph color={glyph} />}
             label={t.settings.usageStatistics}
             note={t.settings.usageNote}
+            textHidden
             accessory={
               <Switch
                 testID="telemetry-toggle"
                 accessibilityLabel={t.settings.usageStatistics}
+                accessibilityHint={t.settings.usageNote}
                 value={telemetryEnabled}
                 onValueChange={setTelemetryEnabled}
                 {...switchProps}
@@ -208,6 +213,7 @@ export default function Settings() {
                 onPress={openStorePage}
                 accessibilityRole="button"
                 accessibilityLabel={t.settings.rate.title}
+                hitSlop={(sizes.minTapTarget - g.rateButton) / 2}
                 style={({ pressed }) => [styles.rate, pressed && { opacity: opacity.settled }]}
               >
                 <Text style={styles.rateLabel}>{t.settings.rate.button}</Text>
