@@ -1,10 +1,10 @@
 import { Image } from 'expo-image';
 import { StyleSheet } from 'react-native';
 import { FLAG_SOURCES, type FlagCode } from '@/assets/flags/generated';
-import { sizes } from '@/theme/tokens';
+import { borderWidths, sizes } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
-export type FlagSize = 'marker' | 'inline' | 'row';
+export type FlagSize = 'marker' | 'inline' | 'row' | 'picker';
 
 interface FlagProps {
   /** Null when the nationality isn't in `lib/flags.ts`'s table. Renders
@@ -23,6 +23,7 @@ const DIMENSIONS: Record<FlagSize, { width: number; height: number }> = {
   marker: sizes.flagMarker,
   inline: sizes.flagInline,
   row: sizes.flagRow,
+  picker: sizes.pickerMarker,
 };
 
 // A nation's identity element. Clubs never render one — CLAUDE.md
@@ -36,11 +37,12 @@ const DIMENSIONS: Record<FlagSize, { width: number; height: number }> = {
 // white-on-light is the worse case of the two.
 export function Flag({ code, size, label, lineColor }: FlagProps) {
   const colors = useThemeColors();
+  const isPicker = size === 'picker';
   const styles = StyleSheet.create({
     flag: {
-      borderRadius: sizes.teamMarkerRadius,
-      borderWidth: 1,
-      borderColor: lineColor ?? colors.border,
+      borderRadius: isPicker ? sizes.pickerMarker.radius : sizes.teamMarkerRadius,
+      borderWidth: borderWidths.hairline,
+      borderColor: lineColor ?? (isPicker ? colors.markerRing : colors.border),
     },
   });
 

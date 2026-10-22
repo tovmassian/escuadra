@@ -135,6 +135,11 @@ export interface Palette {
   soonBg: string;
   /** The Escuadra mark on the brand plate (Settings' Rate card). */
   plateMark: string;
+  // ---- 2.0 team picker (#176) ----
+  /** A quiet count on `ctaBg` (the picker's selected tab). */
+  ctaMuted: string;
+  /** The ring round a 40 × 27 team marker in the picker. */
+  markerRing: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -222,6 +227,8 @@ const darkRoles = {
   link: '#8fb4ff',
   hairline: '#23272e',
   soonBg: 'rgba(255,255,255,0.08)',
+  ctaMuted: '#4b4f56',
+  markerRing: 'rgba(255,255,255,0.12)',
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -269,6 +276,8 @@ const lightRoles = {
   link: '#2f56c6',
   hairline: '#e3e5e9',
   soonBg: 'rgba(20,22,26,0.06)',
+  ctaMuted: '#b4b8bb',
+  markerRing: 'rgba(20,22,26,0.12)',
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -407,8 +416,7 @@ export const typography = {
     fontSize: 28,
     letterSpacing: -0.56,
   },
-  // Segmented-control / filter-pill labels.
-  segmentLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 13 },
+  // Filter-pill labels.
   filterLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },
   // Difficulty-ladder badge number.
   badgeNumber: { fontFamily: 'IBMPlexMono-Bold', fontSize: 18 },
@@ -610,14 +618,16 @@ export const typography = {
   // The count after a filter pill's label ("GK 3").
   filterCount: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 11.5 },
   // ---- 2.0 Settings (#175) ----
-  settingsTitle: {
+  // Settings' and the team picker's screen title.
+  displayTitle: {
     fontFamily: 'Archivo-SemiExpandedExtraBold',
     fontSize: 32,
     lineHeight: 34,
     letterSpacing: -0.4,
     textTransform: 'uppercase' as const,
   },
-  settingsSection: {
+  // Settings' section labels and the picker's mono captions.
+  monoCaption: {
     fontFamily: 'IBMPlexMono-SemiBold',
     fontWeight: '600' as const,
     fontSize: 12,
@@ -638,6 +648,30 @@ export const typography = {
     letterSpacing: 0.6,
     textTransform: 'uppercase' as const,
   },
+  // ---- 2.0 team picker (#176) ----
+  teamName: { fontFamily: 'Inter-Bold', fontSize: 16 },
+  rowLevel: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 10,
+    letterSpacing: 0.6,
+    textTransform: 'uppercase' as const,
+  },
+  // The natural line height (1.088 of the size), as `shirtNumber` explains:
+  // iOS clips this face's digits to a tighter line box.
+  rowScore: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 24, lineHeight: 26 },
+  rowScoreTail: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 15 },
+  letterHeading: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 34, lineHeight: 37 },
+  railLetter: { fontFamily: 'IBMPlexMono-Bold', fontSize: 10, lineHeight: 14 },
+  tabLabel: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 14,
+    letterSpacing: 0.4,
+    textTransform: 'uppercase' as const,
+  },
+  pillLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 14 },
+  pillLabelActive: { fontFamily: 'Inter-Bold', fontSize: 14 },
+  searchInput: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 16 },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -645,7 +679,10 @@ export const typography = {
 // already large, and at the largest accessibility sizes it would push the
 // answers off the screen. It keeps growing with the setting, up to this cap;
 // everything else on the screen scales freely and the screen scrolls.
-export const fontScaleCap = { display: 1.2 } as const;
+// The picker's letter rail (`LetterRail`) sets each letter in a fixed 14 pt
+// slot (`sizes.rail.letter`), which its touch mapping relies on, so its 10 pt
+// letters may grow only a little before they outgrow the slot.
+export const fontScaleCap = { display: 1.2, rail: 1.1 } as const;
 
 // 1.5px is the option-card default; 2px marks the emphasised "correct,
 // unpicked" card in the incorrect-reveal state.
@@ -906,20 +943,18 @@ export const sizes = {
   // Plain colour dot for Home's "continue" card — a different, simpler
   // element than the team identity marker below.
   teamDot: 10,
-  // The team identity marker — a banded rectangle, shared shape for both
-  // clubs and nations. Needs more area than a small swatch to read the bands
-  // at all, so it's larger than teamDot and rectangular rather than round.
-  teamMarker: { width: 22, height: 15 },
+  // The small corner radius of a team's bands and flags outside the picker
+  // (Study's banner strip, the in-round banner, and the inline flags on an
+  // answer tile, a chip, a player card and a Study row).
   teamMarkerRadius: 2,
   // The "banner" marker variant used mid-round (see TeamMarker's `variant`
   // prop): thinner and longer than the picker's marker, and always rendered
   // with vertical bands regardless of the squad's real flag orientation.
   teamMarkerBanner: { width: 100, height: 3 },
-  // Nation flag images (assets/flags/*.png). Three sizes, one per surface.
-  // `flagMarker` deliberately matches `teamMarker` above so a nation row and
-  // a club row in the picker keep identical metrics. Source images are 160 px
-  // wide (160x107 for a 3:2 flag), so `flagMarker` at @3x (66 px) leaves about
-  // 2.4x headroom — see assets/flags/README.md.
+  // Nation flag images (assets/flags/*.png), one size per surface; the
+  // picker's is `pickerMarker` below. `flagMarker` is the flag on a level-3
+  // nationality answer tile. Source images are 160 px wide (160x107 for a 3:2
+  // flag): see assets/flags/README.md for the headroom.
   flagMarker: { width: 22, height: 15 },
   flagInline: { width: 18, height: 12 },
   flagRow: { width: 20, height: 13 },
@@ -931,9 +966,6 @@ export const sizes = {
   wordmarkMarkHero: 86,
   // A 10/10's player circles.
   rosterAvatar: 54,
-  // Team-picker rows carry a progress sub-line, so they need a second line of
-  // height.
-  rowHeightTall: 64,
   // ---- 2.0 spotlight screens (spec §2, §3, §5, §8) ----
   // The question screen goes compact below this usable height (window minus
   // safe-area insets).
@@ -1008,12 +1040,10 @@ export const sizes = {
     square: 12, // a result square in the text preview's bubble
     squareGap: 3,
   },
-  // Settings (#175): its rows, the round buttons (Settings' back, Home's gear),
-  // the row glyphs, the Rate card's plate and button, the Appearance segments.
+  // Settings (#175): its rows, the row glyphs, the Rate card's plate and button, the Appearance segments.
   settings: {
     row: 60,
     linkRow: 56,
-    roundButton: 44,
     glyph: 20,
     chevron: 16,
     plate: 48,
@@ -1022,6 +1052,17 @@ export const sizes = {
     rateButton: 40,
     segment: 40,
   },
+  // The 44 pt round back button (Settings, the picker).
+  roundButton: 44,
+  // The team picker (#176): a row's marker or flag, the row, a league pill, a
+  // tab, the search field, and the letter rail (its touch column and the
+  // height of one letter).
+  pickerMarker: { width: 40, height: 27, radius: 5 },
+  pickerRow: 60,
+  pickerPill: 40,
+  pickerTab: 44,
+  searchField: 52,
+  rail: { width: 44, letter: 14 },
 } as const;
 
 // The share picture's captured size in pixels: a 9:16 story (spec §4.2).
@@ -1030,9 +1071,8 @@ export const shareCapture = { width: 1080, height: 1920 } as const;
 export const iconSize = {
   markLarge: 18, // VerdictGlyph default size; AnswerTile's correct mark
   markSmall: 13, // VerdictGlyph's smaller size; AnswerTile's incorrect-picked mark
-  chevron: 16, // TeamRow disclosure chevron
   chevronLarge: 18, // Home's continue-card chevron
-  searchGlyph: 15, // SearchField's magnifying-glass icon
+  searchGlyph: 20, // SearchField's magnifying-glass icon (spec #176 §3)
   clearGlyph: 10, // SearchField's clear (×) button, drawn from two crossed bars
   closeGlyph: 14, // the question's close ×, two crossed bars
   flameGlyph: 12, // the streak chip's flame

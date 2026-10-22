@@ -281,17 +281,17 @@ export const fr: Messages = {
     best: (correct: number, total: number) => `RECORD ${correct}/${total}`,
   },
   picker: {
-    allLeagues: 'TOUS',
-    notPlayed: (season: string) => `${season} · PAS ENCORE JOUÉ`,
-    played: (season: string, level: number, correct: number, total: number) =>
-      `${season} · NIVEAU ${level} · RECORD ${correct}/${total}`,
-    home: 'Accueil',
-    title: 'Choisis une équipe',
-    count: (count: number) =>
-      count <= 1 ? `${count} équipe · appuie pour jouer` : `${count} équipes · appuie pour jouer`,
+    // Masculine: the championnats.
+    allLeagues: 'Tous',
+    title: 'Choisis ton équipe',
+    squadCount: (count: number) => (count <= 1 ? `${count} équipe` : `${count} équipes`),
     clubs: 'Clubs',
-    nationalTeams: 'Sélections',
-    search: 'Chercher une équipe',
+    nations: 'Sélections',
+    allClubs: 'Tous les clubs',
+    listCaption: (name: string, count: number) => `${name} · ${count}`,
+    bestSpoken: (level: number, correct: number, total: number) =>
+      `Niveau ${level}, record ${correct} sur ${total}`,
+    search: 'Rechercher une équipe',
     clearSearch: 'Effacer la recherche',
     noTeams: 'Aucune équipe trouvée',
     noResults: (query: string) => `Aucun résultat pour « ${query} »`,

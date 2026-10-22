@@ -92,45 +92,55 @@ deliberate constraint is distinguishable from an accident.
 Nine routes (the results route renders two distinct states, ordinary and
 flawless — see below). Route, file, and what it does.
 
-| #   | Route                             | File                                     | Purpose                                                                                                                                                                                                                                                                                                             |
-| --- | --------------------------------- | ---------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | `/`                               | `app/index.tsx`                          | Home. Centred, stacked wordmark lockup as the headline, continue-card for the last played team, Start Training. A gear at the top right opens Settings; Home has no About link, language chip or theme toggle.                                                                                                      |
-| 2   | `/about`                          | `app/about.tsx`                          | About. Legal/attribution copy, data and image credits, with a Licences row that opens the Licences page, and the privacy section (photos, usage statistics, updates). No switches and no version line: both are on Settings.                                                                                        |
-| 3   | `/team-picker`                    | `app/team-picker.tsx`                    | Team picker, segmented into Clubs and National Teams. Each row shows a mono sub-line — `LEVEL n · BEST n/10` or `NOT PLAYED`, green once cleared.                                                                                                                                                                   |
-| 4   | `/team/[squadId]/difficulty`      | `app/team/[squadId]/difficulty.tsx`      | The difficulty ladder in level order: the focused level expanded into a card with its description and a Play button, the other levels compact (locked ones stating their unlock condition), and Study, an outline button until level 1 is cleared and a text link after.                                            |
-| 5   | `/team/[squadId]/study`           | `app/team/[squadId]/study.tsx`           | Browsable squad: back, Hide names and a cards/list toggle; the team's banner, "Squad" and a count; position filters with counts; every player in shirt-number order as photo cards or a list. Hide names covers each name. Photo credits end the list.                                                              |
-| 6   | `/play/[squadId]/[level]`         | `app/play/[squadId]/[level]/index.tsx`   | A question. The photo (or the team's colours) fills the top; the shirt number with the escuadra corner, the slot chips that spell out the player, the prompt, a grid of answers and the footer sit in the thumb zone. A right answer moves on by itself; a miss waits.                                              |
-| 7   | `/play/[squadId]/[level]/results` | `app/play/[squadId]/[level]/results.tsx` | The round's result: close (a different team), the team and level, share; the score with the escuadra corner, the tier's title and verdict, the round strip; the missed players as snapping photo cards, or a 10/10's ten in circles; the actions; the share sheet.                                                  |
-| 8   | `/settings`                       | `app/settings.tsx`                       | Settings. Back and title, then Play (Language row opening the language sheet, Appearance as Match phone / Dark / Light, Vibration), Privacy (the usage-statistics switch), Support (Rate), Coming next (Exam mode, dashed) and About (About Escuadra, Privacy, Licences: each opens a page), over the version line. |
-| 9   | `/licences`                       | `app/licences.tsx`                       | Licences, opened from Settings or from About's credits. Back and title, a note that the texts stay in English, then the country names' Unicode notice (open), the fonts, and every bundled package, each a tap from its full text.                                                                                  |
+| #   | Route                             | File                                     | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
+| --- | --------------------------------- | ---------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | `/`                               | `app/index.tsx`                          | Home. Centred, stacked wordmark lockup as the headline, continue-card for the last played team, Start Training. A gear at the top right opens Settings; Home has no About link, language chip or theme toggle.                                                                                                                                                                                                                                                          |
+| 2   | `/about`                          | `app/about.tsx`                          | About. Legal/attribution copy, data and image credits, with a Licences row that opens the Licences page, and the privacy section (photos, usage statistics, updates). No switches and no version line: both are on Settings.                                                                                                                                                                                                                                            |
+| 3   | `/team-picker`                    | `app/team-picker.tsx`                    | Team picker, one scrolling page: a round back button and the squad count, `PICK YOUR SQUAD`, a search field, Clubs / Nations tabs with their counts, and league pills on Clubs. Clubs are a plain A–Z list under a mono caption (`ALL CLUBS · 96`); Nations are grouped under big letter headings, with a letter rail on the right edge. A row is the marker, the name, and either `LEVEL n` over the best score (`7/10`, green at 10/10) or a chevron when not played. |
+| 4   | `/team/[squadId]/difficulty`      | `app/team/[squadId]/difficulty.tsx`      | The difficulty ladder in level order: the focused level expanded into a card with its description and a Play button, the other levels compact (locked ones stating their unlock condition), and Study, an outline button until level 1 is cleared and a text link after.                                                                                                                                                                                                |
+| 5   | `/team/[squadId]/study`           | `app/team/[squadId]/study.tsx`           | Browsable squad: back, Hide names and a cards/list toggle; the team's banner, "Squad" and a count; position filters with counts; every player in shirt-number order as photo cards or a list. Hide names covers each name. Photo credits end the list.                                                                                                                                                                                                                  |
+| 6   | `/play/[squadId]/[level]`         | `app/play/[squadId]/[level]/index.tsx`   | A question. The photo (or the team's colours) fills the top; the shirt number with the escuadra corner, the slot chips that spell out the player, the prompt, a grid of answers and the footer sit in the thumb zone. A right answer moves on by itself; a miss waits.                                                                                                                                                                                                  |
+| 7   | `/play/[squadId]/[level]/results` | `app/play/[squadId]/[level]/results.tsx` | The round's result: close (a different team), the team and level, share; the score with the escuadra corner, the tier's title and verdict, the round strip; the missed players as snapping photo cards, or a 10/10's ten in circles; the actions; the share sheet.                                                                                                                                                                                                      |
+| 8   | `/settings`                       | `app/settings.tsx`                       | Settings. Back and title, then Play (Language row opening the language sheet, Appearance as Match phone / Dark / Light, Vibration), Privacy (the usage-statistics switch), Support (Rate), Coming next (Exam mode, dashed) and About (About Escuadra, Privacy, Licences: each opens a page), over the version line.                                                                                                                                                     |
+| 9   | `/licences`                       | `app/licences.tsx`                       | Licences, opened from Settings or from About's credits. Back and title, a note that the texts stay in English, then the country names' Unicode notice (open), the fonts, and every bundled package, each a tap from its full text.                                                                                                                                                                                                                                      |
 
 ## Captures
 
-| File                                     | Screen                               |
-| ---------------------------------------- | ------------------------------------ |
-| `screens/01-home.png`                    | Home                                 |
-| `screens/01a-about.png`                  | About                                |
-| `screens/01c-settings.png`               | Settings                             |
-| `screens/01c-settings-end.png`           | Settings, scrolled to the end        |
-| `screens/01c-settings-language.png`      | Settings — language sheet            |
-| `screens/01d-licences.png`               | Licences                             |
-| `screens/02-team-picker-clubs.png`       | Team picker, Clubs                   |
-| `screens/03-team-picker-nations.png`     | Team picker, National Teams          |
-| `screens/04-difficulty.png`              | Difficulty ladder                    |
-| `screens/05-study.png`                   | Study, cards                         |
-| `screens/05-study-list.png`              | Study, list                          |
-| `screens/05-study-hidden.png`            | Study, cards with Hide names on      |
-| `screens/06-question-l1.png`             | Question, level 1                    |
-| `screens/07-question-l2.png`             | Question, level 2                    |
-| `screens/08-question-l3.png`             | Question, level 3 — club part        |
-| `screens/08-question-l3-nationality.png` | Question, level 3 — nationality part |
-| `screens/09-results.png`                 | Results — failed round               |
-| `screens/09-results-passed.png`          | Results — passed, 9/10               |
-| `screens/09-results-flawless.png`        | Results — a la escuadra, 10/10       |
-| `screens/09-results-share.png`           | Results — share sheet, Image         |
-| `screens/09-results-share-text.png`      | Results — share sheet, Text          |
-| `screens/09-results-share-flawless.png`  | Results — share sheet, a la escuadra |
-| `screens/09-results-credits.png`         | Results — photo credits sheet        |
+| File                                       | Screen                               |
+| ------------------------------------------ | ------------------------------------ |
+| `screens/01-home.png`                      | Home                                 |
+| `screens/01a-about.png`                    | About                                |
+| `screens/01c-settings.png`                 | Settings                             |
+| `screens/01c-settings-end.png`             | Settings, scrolled to the end        |
+| `screens/01c-settings-language.png`        | Settings — language sheet            |
+| `screens/01d-licences.png`                 | Licences                             |
+| `screens/02-team-picker-clubs.png`         | Team picker, Clubs                   |
+| `screens/03-team-picker-nations.png`       | Team picker, Nations                 |
+| `screens/03b-team-picker-nations-jump.png` | Team picker, Nations, jumped to S    |
+| `screens/04-difficulty.png`                | Difficulty ladder                    |
+| `screens/05-study.png`                     | Study, cards                         |
+| `screens/05-study-list.png`                | Study, list                          |
+| `screens/05-study-hidden.png`              | Study, cards with Hide names on      |
+| `screens/06-question-l1.png`               | Question, level 1                    |
+| `screens/07-question-l2.png`               | Question, level 2                    |
+| `screens/08-question-l3.png`               | Question, level 3 — club part        |
+| `screens/08-question-l3-nationality.png`   | Question, level 3 — nationality part |
+| `screens/09-results.png`                   | Results — failed round               |
+| `screens/09-results-passed.png`            | Results — passed, 9/10               |
+| `screens/09-results-flawless.png`          | Results — a la escuadra, 10/10       |
+| `screens/09-results-share.png`             | Results — share sheet, Image         |
+| `screens/09-results-share-text.png`        | Results — share sheet, Text          |
+| `screens/09-results-share-flawless.png`    | Results — share sheet, a la escuadra |
+| `screens/09-results-credits.png`           | Results — photo credits sheet        |
+
+The three team picker captures are a fresh install, so no row has a score: every row
+ends in a chevron. `02-team-picker-clubs.png` is Clubs with All picked: the caption
+`ALL CLUBS · 96` over banded markers, A to Z by name. `03-team-picker-nations.png` is
+the Nations tab at the top: the `A` heading in the accent colour, flags at their true
+shape, and the rail beside the first heading, every letter that has a group shown and
+`A` accented.
+`03b-team-picker-nations-jump.png` is a tap on the rail's `S`, with `S` at the top and
+accented in both the heading and the rail, which has ridden up to the screen's centre.
 
 Question captures carry real Commons photos, each credited on screen by the
 line under the footer; a capture waits for its images to load.

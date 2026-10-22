@@ -247,18 +247,16 @@ export const de: Messages = {
     best: (correct: number, total: number) => `REKORD ${correct}/${total}`,
   },
   picker: {
-    allLeagues: 'ALLE',
-    notPlayed: (season: string) => `${season} · NICHT GESPIELT`,
-    played: (season: string, level: number, correct: number, total: number) =>
-      `${season} · LEVEL ${level} · REKORD ${correct}/${total}`,
-    home: 'Start',
-    title: 'Team wählen',
-    count: (count: number) =>
-      count === 1
-        ? `${count} Team · zum Starten antippen`
-        : `${count} Teams · zum Starten antippen`,
+    allLeagues: 'Alle',
+    title: 'Wähle dein Team',
+    squadCount: (count: number) => (count === 1 ? `${count} Team` : `${count} Teams`),
     clubs: 'Vereine',
-    nationalTeams: 'Nationalteams',
+    // "Nationalteams" is over the tab's twelve characters.
+    nations: 'Nationen',
+    allClubs: 'Alle Vereine',
+    listCaption: (name: string, count: number) => `${name} · ${count}`,
+    bestSpoken: (level: number, correct: number, total: number) =>
+      `Level ${level}, Rekord ${correct} von ${total}`,
     search: 'Teams suchen',
     clearSearch: 'Suche löschen',
     noTeams: 'Keine Teams gefunden',

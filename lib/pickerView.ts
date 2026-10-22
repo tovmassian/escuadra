@@ -32,20 +32,6 @@ export function teamProgress(
   return { level: highest.level, correct: highest.correct, total: ROUND_LENGTH, cleared };
 }
 
-/** The team picker row's mono meta line: the season, plus progress once it's
- *  known. `undefined` progress (still hydrating) shows the season alone
- *  rather than a placeholder dash, since the season itself needs no store
- *  read and is available immediately. */
-export function teamMetaLine(
-  season: string,
-  progress: TeamProgress | null | undefined,
-  messages: Messages,
-): string {
-  if (progress === undefined) return season;
-  if (progress === null) return messages.picker.notPlayed(season);
-  return messages.picker.played(season, progress.level, progress.correct, progress.total);
-}
-
 /** The clubs tab's league filter. `'ALL'` is the default, unfiltered state. */
 export type LeagueFilter = 'ALL' | League;
 
@@ -126,4 +112,89 @@ export function visibleSquads(
         (q === '' || fold(names.nameOf(s)).includes(q) || fold(s.name).includes(q)),
     )
     .sort((a, b) => names.nameOf(a).localeCompare(names.nameOf(b), names.locale));
+}
+
+/** A displayed name's first letter, folded as search folds it: "Ägypten" is
+ *  filed under A, "Égypte" under E. */
+export function initialOf(name: string): string {
+  return fold(name).charAt(0).toUpperCase();
+}
+
+/** One letter of the nations tab and its nations, in the displayed order. */
+export interface NationSection {
+  letter: string;
+  squads: SquadManifestEntry[];
+}
+
+/** The nations tab grouped A–Z (#176), in the app's language: the visible
+ *  nations in `visibleSquads`' order, under the first letter of their displayed
+ *  name. A letter the locale's order would split (a folded "Ñ" after "N") still
+ *  opens once: later names join its section. */
+export function nationSections(
+  squads: SquadManifestEntry[],
+  names: SquadNames,
+  query = '',
+): NationSection[] {
+  const sections: NationSection[] = [];
+  const byLetter = new Map<string, NationSection>();
+  for (const squad of visibleSquads(squads, 'nation', 'ALL', names, query)) {
+    const letter = initialOf(names.nameOf(squad));
+    let section = byLetter.get(letter);
+    if (section === undefined) {
+      section = { letter, squads: [] };
+      byLetter.set(letter, section);
+      sections.push(section);
+    }
+    section.squads.push(squad);
+  }
+  return sections;
+}
+
+/** Where a letter's heading sits in the scrolled content. */
+export interface LetterOffset {
+  letter: string;
+  y: number;
+}
+
+/** The letter in view: the last heading at or above `y`, or the first
+ *  letter before any heading is reached. `offsets` is in scroll order. */
+export function letterAt(offsets: readonly LetterOffset[], y: number): string | null {
+  let current = offsets[0]?.letter ?? null;
+  for (const offset of offsets) {
+    if (offset.y > y) break;
+    current = offset.letter;
+  }
+  return current;
+}
+
+/** Each tab's count: the squads of that kind matching the search. The league
+ *  filter does not narrow it. */
+export function kindCounts(
+  squads: SquadManifestEntry[],
+  names: SquadNames,
+  query = '',
+): { club: number; nation: number } {
+  return {
+    club: visibleSquads(squads, 'club', 'ALL', names, query).length,
+    nation: visibleSquads(squads, 'nation', 'ALL', names, query).length,
+  };
+}
+
+/** What a row's right-hand side shows. `hydrating` shows nothing, so a row
+ *  never claims "not played" for a squad whose scores are still loading. */
+export type ScoreBlock =
+  | { kind: 'hydrating' }
+  | { kind: 'unplayed' }
+  | { kind: 'played'; level: number; correct: number; total: number; flawless: boolean };
+
+export function scoreBlock(progress: TeamProgress | null | undefined): ScoreBlock {
+  if (progress === undefined) return { kind: 'hydrating' };
+  if (progress === null) return { kind: 'unplayed' };
+  return {
+    kind: 'played',
+    level: progress.level,
+    correct: progress.correct,
+    total: progress.total,
+    flawless: progress.correct === progress.total,
+  };
 }

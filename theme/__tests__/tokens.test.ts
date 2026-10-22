@@ -353,7 +353,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(18);
+    expect(archivo).toHaveLength(22);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }

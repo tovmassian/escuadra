@@ -1,10 +1,17 @@
 import type { League, SquadManifestEntry } from '@/types/squad';
 import { describe, expect, it } from 'vitest';
+import { squadDisplayName } from '@/i18n/displayNames';
 import { en } from '@/i18n/en';
+import { SUPPORTED_LANGUAGES } from '@/i18n/resolveLanguage';
+import { listSquads } from '@/lib/squads';
 import {
+  initialOf,
+  kindCounts,
   leagueFilters,
   leagueLabel,
-  teamMetaLine,
+  letterAt,
+  nationSections,
+  scoreBlock,
   teamProgress,
   visibleSquads,
   type SquadNames,
@@ -58,28 +65,9 @@ describe('teamProgress', () => {
   });
 });
 
-describe('teamMetaLine', () => {
-  it('shows only the season while progress is still hydrating', () => {
-    expect(teamMetaLine('2025/26', undefined, en)).toBe('2025/26');
-  });
-
-  it('shows the season plus NOT PLAYED for a team with no recorded progress', () => {
-    expect(teamMetaLine('2025/26', null, en)).toBe('2025/26 · NOT PLAYED');
-  });
-
-  it('shows the season plus level and best score for a played team', () => {
-    const progress = { level: 2, correct: 7, total: 10, cleared: false };
-    expect(teamMetaLine('2025/26', progress, en)).toBe('2025/26 · LEVEL 2 · BEST 7/10');
-  });
-
-  it('uses the nation-style season string unchanged', () => {
-    expect(teamMetaLine('2026', null, en)).toBe('2026 · NOT PLAYED');
-  });
-});
-
 describe('leagueLabel', () => {
   it('names leagues as they are, and the clear pill from the catalog', () => {
-    expect(leagueLabel('ALL', en)).toBe('ALL');
+    expect(leagueLabel('ALL', en)).toBe('All');
     expect(leagueLabel('la-liga', en)).toBe('La Liga');
   });
 });
@@ -226,6 +214,120 @@ describe('visibleSquads', () => {
 
     it('does not match a name that appears in neither', () => {
       expect(show('nation', 'ALL', 'francia', es, nations)).toEqual([]);
+    });
+  });
+});
+
+const namesIn = (language: (typeof SUPPORTED_LANGUAGES)[number]): SquadNames => ({
+  nameOf: (s) => squadDisplayName(s, language),
+  locale: language,
+});
+
+describe('initialOf', () => {
+  it('folds accents and case, as search does', () => {
+    expect(initialOf('Ägypten')).toBe('A');
+    expect(initialOf('Égypte')).toBe('E');
+    expect(initialOf('Österreich')).toBe('O');
+    expect(initialOf('italia')).toBe('I');
+  });
+});
+
+describe.each(SUPPORTED_LANGUAGES)('nationSections in %s', (language) => {
+  const names = namesIn(language);
+  const squads = listSquads();
+  const sections = nationSections(squads, names);
+  const nations = squads.filter((s) => s.kind === 'nation');
+
+  it('lists every nation exactly once', () => {
+    const ids = sections.flatMap((s) => s.squads.map((q) => q.id));
+    expect(ids).toHaveLength(nations.length);
+    expect(new Set(ids).size).toBe(nations.length);
+  });
+
+  it('opens each letter once, in alphabetical order', () => {
+    const letters = sections.map((s) => s.letter);
+    expect(new Set(letters).size).toBe(letters.length);
+    expect([...letters].sort((a, b) => a.localeCompare(b, language))).toEqual(letters);
+  });
+
+  it("files each nation under its displayed name's first letter", () => {
+    for (const section of sections) {
+      for (const squad of section.squads) {
+        expect(initialOf(names.nameOf(squad))).toBe(section.letter);
+      }
+    }
+  });
+
+  it('keeps the displayed order inside a letter', () => {
+    for (const section of sections) {
+      const shown = section.squads.map((q) => names.nameOf(q));
+      expect([...shown].sort((a, b) => a.localeCompare(b, language))).toEqual(shown);
+    }
+  });
+});
+
+describe('nationSections with a search', () => {
+  it('keeps only the matching nations, still grouped', () => {
+    const sections = nationSections(listSquads(), namesIn('en'), 'spa');
+    expect(sections.map((s) => s.letter)).toEqual(['S']);
+    expect(sections[0]?.squads.map((q) => q.name)).toContain('Spain');
+  });
+
+  it('is empty when nothing matches', () => {
+    expect(nationSections(listSquads(), namesIn('en'), 'zzzz')).toEqual([]);
+  });
+});
+
+describe('letterAt', () => {
+  const offsets = [
+    { letter: 'A', y: 400 },
+    { letter: 'B', y: 900 },
+    { letter: 'C', y: 1300 },
+  ];
+  it('is the first letter above the first heading', () => {
+    expect(letterAt(offsets, 0)).toBe('A');
+  });
+  it('is the last heading at or above the offset', () => {
+    expect(letterAt(offsets, 900)).toBe('B');
+    expect(letterAt(offsets, 1299)).toBe('B');
+    expect(letterAt(offsets, 5000)).toBe('C');
+  });
+  it('is null with no headings', () => {
+    expect(letterAt([], 100)).toBeNull();
+  });
+});
+
+describe('kindCounts', () => {
+  it('counts every squad of each kind with no search', () => {
+    const squads = listSquads();
+    const counts = kindCounts(squads, namesIn('en'));
+    expect(counts.club + counts.nation).toBe(squads.length);
+  });
+  it('counts the matches on each tab with a search', () => {
+    const counts = kindCounts(listSquads(), namesIn('en'), 'spain');
+    expect(counts.nation).toBe(1);
+  });
+});
+
+describe('scoreBlock', () => {
+  it('waits while the store hydrates', () => {
+    expect(scoreBlock(undefined)).toEqual({ kind: 'hydrating' });
+  });
+  it('is unplayed for a team with no score', () => {
+    expect(scoreBlock(null)).toEqual({ kind: 'unplayed' });
+  });
+  it('shows the highest level and its best', () => {
+    expect(scoreBlock({ level: 2, correct: 7, total: 10, cleared: true })).toEqual({
+      kind: 'played',
+      level: 2,
+      correct: 7,
+      total: 10,
+      flawless: false,
+    });
+  });
+  it('marks 10/10 as flawless', () => {
+    expect(scoreBlock({ level: 3, correct: 10, total: 10, cleared: true })).toMatchObject({
+      flawless: true,
     });
   });
 });

@@ -322,20 +322,21 @@ export const en = {
   },
   picker: {
     /** ≤ 6 chars: the league pill that clears the filter. */
-    allLeagues: 'ALL',
-    /** A team row's mono meta line, never played. */
-    notPlayed: (season: string) => `${season} · NOT PLAYED`,
-    /** A team row's mono meta line, with its best score. */
-    played: (season: string, level: number, correct: number, total: number) =>
-      `${season} · LEVEL ${level} · BEST ${correct}/${total}`,
-    /** ≤ 8 chars: the back link, after "‹ ". The picker always returns Home. */
-    home: 'Home',
-    title: 'Choose a Team',
-    count: (count: number) =>
-      count === 1 ? `${count} team · tap to start` : `${count} teams · tap to start`,
-    /** ≤ 14 chars each: the segmented control. */
+    allLeagues: 'All',
+    /** ≤ 22 chars: the title, in display capitals; it may wrap to two lines. */
+    title: 'Pick your squad',
+    /** ≤ 14 chars: the top bar's count of every squad, in mono capitals. */
+    squadCount: (count: number) => (count === 1 ? `${count} squad` : `${count} squads`),
+    /** ≤ 12 chars each: a tab, in display capitals, beside its count. */
     clubs: 'Clubs',
-    nationalTeams: 'National Teams',
+    nations: 'Nations',
+    /** ≤ 16 chars: the clubs list's caption with no league picked, in mono capitals. */
+    allClubs: 'All clubs',
+    /** The clubs list's caption: the league (or "All clubs") and how many it lists. */
+    listCaption: (name: string, count: number) => `${name} · ${count}`,
+    /** A played row's score block, spoken after the team's name. */
+    bestSpoken: (level: number, correct: number, total: number) =>
+      `Level ${level}, best ${correct} of ${total}`,
     /** The search field's placeholder and spoken name. */
     search: 'Search teams',
     clearSearch: 'Clear search',

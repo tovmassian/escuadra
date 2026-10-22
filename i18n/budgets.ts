@@ -153,14 +153,16 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 20, texts: { 'ladder.studySquad': (m) => m.ladder.studySquad } },
   { budget: 12, texts: { 'ladder.best': (m) => m.ladder.best(10, 10) } },
   { budget: 6, texts: { 'picker.allLeagues': (m) => m.picker.allLeagues } },
-  { budget: 8, texts: { 'picker.home': (m) => m.picker.home } },
+  { budget: 22, texts: { 'picker.title': (m) => m.picker.title } },
+  { budget: 14, texts: { 'picker.squadCount': (m) => m.picker.squadCount(253) } },
   {
-    budget: 14,
+    budget: 12,
     texts: {
       'picker.clubs': (m) => m.picker.clubs,
-      'picker.nationalTeams': (m) => m.picker.nationalTeams,
+      'picker.nations': (m) => m.picker.nations,
     },
   },
+  { budget: 16, texts: { 'picker.allClubs': (m) => m.picker.allClubs } },
   { budget: 16, texts: { 'about.licences.label': (m) => m.about.licences.label } },
   {
     budget: 24,

@@ -24,8 +24,9 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'slotCodes.NAME',
     'slotCodes.POS',
     'slotCodes.NAT',
-    // "{1}: {2}" has no words.
+    // "{1}: {2}" and "{1} · {2}" have no words.
     'round.slotSpoken.given',
+    'picker.listCaption',
     // "Text" is the German word for a share as text.
     'share.text',
     // "Version {1}": German writes it the same.
@@ -45,6 +46,8 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'share.image',
     // "Clubs" is French too.
     'picker.clubs',
+    // "{1} · {2}" has no words.
+    'picker.listCaption',
     // "Version {1}": French writes it the same.
     'settings.version',
     // "Licences" is the French word too.
@@ -57,8 +60,9 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'slotCodes.CLUB',
     // POS for Posición.
     'slotCodes.POS',
-    // "{1}: {2}" has no words.
+    // "{1}: {2}" and "{1} · {2}" have no words.
     'round.slotSpoken.given',
+    'picker.listCaption',
     // "Software" is the word Spanish uses.
     'about.licences.software',
   ],
@@ -66,15 +70,14 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     // Club is the Italian word too, and CLUB its chip code.
     'slots.CLUB',
     'slotCodes.CLUB',
-    // "{1}: {2}" has no words.
+    // "{1}: {2}" and "{1} · {2}" have no words.
     'round.slotSpoken.given',
-    // "Home" is what Italian apps call the start screen.
-    'picker.home',
+    'picker.listCaption',
     // "Privacy" is the Italian word, as in "informativa sulla privacy".
     'settings.sections.privacy',
     'settings.privacy',
     'about.privacy.heading',
-    // "Home", as the picker says: what Italian websites call the home page.
+    // "Home" is what Italian websites call the home page.
     'about.site.nav.home',
     // "Software" is the word Italian uses.
     'about.licences.software',

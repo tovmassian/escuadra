@@ -42,15 +42,15 @@ assign a team's colour; it must be the team's actual real colour.
 ## The in-round banner
 
 **In-round team marker is always a vertical banner, regardless of the
-squad's real flag orientation.** The team picker (`TeamRow`) renders a
-squad's marker at its true `orientation` — Spain's flag is genuinely
-horizontal stripes there. But mid-round, on the question screen's header,
+squad's real flag orientation.** The team picker (`TeamRow`, through
+`TeamMarker`'s `variant="picker"`) renders a squad's marker at its true
+`orientation` — Spain's flag is genuinely horizontal stripes there. But mid-round, on the question screen's header,
 the marker always renders as thin, tall, vertical bands, using `bands` (and
 `weights`) as the colour sequence and ignoring `marker.orientation`
 entirely: Spain reads red/yellow/red left-to-right, not stacked. This is
 `TeamMarker`'s `variant="banner"` (`components/TeamMarker.tsx`,
-`sizes.teamMarkerBanner` in `theme/tokens.ts`) — always pass it on the
-question screen, never the bare `marker` prop.
+`sizes.teamMarkerBanner` in `theme/tokens.ts`). `variant` is required, so the question
+screen must name it: `banner` there, `picker` in the picker.
 
 ## Flags (guardrail 2's carve-out)
 

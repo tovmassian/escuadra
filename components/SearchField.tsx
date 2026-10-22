@@ -1,36 +1,47 @@
 import { useT } from '@/i18n/useT';
-import { iconSize, radii, sizes, spacing, typography } from '@/theme/tokens';
+import { borderWidths, iconSize, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import { Pressable, StyleSheet, TextInput, View } from 'react-native';
 
-// Magnifying-glass geometry, in a square box `iconSize.searchGlyph` wide.
-// Built from plain Views rather than a 🔍/Unicode glyph, matching LockGlyph
-// and VerdictGlyph — icons here never depend on a font carrying the symbol.
-const LENS = { size: 11, borderWidth: 1.5 };
-const HANDLE = { width: 6, height: 1.5, radius: 1 };
+// Magnifying-glass geometry, as fractions of the square box
+// `iconSize.searchGlyph`, so the glyph scales with the box. Built from plain
+// Views rather than a 🔍/Unicode glyph, matching LockGlyph and VerdictGlyph —
+// icons here never depend on a font carrying the symbol.
+const LENS_RATIO = 0.7; // the lens ring's outer diameter
+const HANDLE_RATIO = 0.3; // the handle's length
 
 function SearchGlyph() {
   const colors = useThemeColors();
   const box = iconSize.searchGlyph;
+  const stroke = borderWidths.emphasis;
+  const lens = box * LENS_RATIO;
+  const handle = box * HANDLE_RATIO;
+  // The handle leaves the ring's stroke at 45°, down and to the right. Its far
+  // end, round cap included, is how far the glyph reaches; the inset centres
+  // the whole glyph in the box.
+  const ring = (lens - stroke) / 2;
+  const reach = lens / 2 + (ring + handle + stroke / 2) * Math.SQRT1_2;
+  const inset = (box - reach) / 2;
+  const handleCentre = inset + lens / 2 + (ring + handle / 2) * Math.SQRT1_2;
   const styles = StyleSheet.create({
     root: { width: box, height: box },
     lens: {
       position: 'absolute',
-      top: 0,
-      left: 0,
-      width: LENS.size,
-      height: LENS.size,
-      borderRadius: LENS.size / 2,
-      borderWidth: LENS.borderWidth,
+      top: inset,
+      left: inset,
+      width: lens,
+      height: lens,
+      borderRadius: lens / 2,
+      borderWidth: stroke,
       borderColor: colors.textMuted,
     },
     handle: {
       position: 'absolute',
-      bottom: 0,
-      right: 0,
-      width: HANDLE.width,
-      height: HANDLE.height,
-      borderRadius: HANDLE.radius,
+      top: handleCentre - stroke / 2,
+      left: handleCentre - handle / 2,
+      width: handle,
+      height: stroke,
+      borderRadius: stroke / 2,
       backgroundColor: colors.textMuted,
       transform: [{ rotate: '45deg' }],
     },
@@ -89,15 +100,15 @@ export function SearchField({ value, onChange, onClear }: SearchFieldProps) {
     root: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: spacing.xs,
-      height: sizes.controlHeight,
-      paddingHorizontal: spacing.sm,
+      gap: spacing.sm - 2,
+      height: sizes.searchField,
+      paddingHorizontal: spacing.md + 2,
       backgroundColor: colors.surface,
-      borderWidth: 1,
+      borderWidth: borderWidths.hairline,
       borderColor: colors.border,
-      borderRadius: radii.lg,
+      borderRadius: radii.pill,
     },
-    input: { flex: 1, padding: 0, ...typography.secondary, color: colors.textPrimary },
+    input: { flex: 1, padding: 0, ...typography.searchInput, color: colors.textPrimary },
   });
 
   return (

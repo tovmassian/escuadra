@@ -282,16 +282,16 @@ export const es: Messages = {
   },
   picker: {
     // Feminine: the leagues.
-    allLeagues: 'TODAS',
-    notPlayed: (season: string) => `${season} · SIN JUGAR`,
-    played: (season: string, level: number, correct: number, total: number) =>
-      `${season} · NIVEL ${level} · RÉCORD ${correct}/${total}`,
-    home: 'Inicio',
-    title: 'Elige un equipo',
-    count: (count: number) =>
-      count === 1 ? `${count} equipo · toca para empezar` : `${count} equipos · toca para empezar`,
+    allLeagues: 'Todas',
+    title: 'Elige tu equipo',
+    squadCount: (count: number) => (count === 1 ? `${count} equipo` : `${count} equipos`),
     clubs: 'Clubes',
-    nationalTeams: 'Selecciones',
+    // "Selecciones", the football word for national teams.
+    nations: 'Selecciones',
+    allClubs: 'Todos los clubes',
+    listCaption: (name: string, count: number) => `${name} · ${count}`,
+    bestSpoken: (level: number, correct: number, total: number) =>
+      `Nivel ${level}, récord ${correct} de ${total}`,
     search: 'Buscar equipos',
     clearSearch: 'Borrar la búsqueda',
     noTeams: 'No se encontraron equipos',
