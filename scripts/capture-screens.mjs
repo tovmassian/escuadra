@@ -65,7 +65,7 @@ const SETTLE_MS = 2200;
 // well inside the 300ms budget, so this is generous rather than tuned.
 const REVEAL_MS = 500;
 // After a tap that only swaps what is already on screen, like the team
-// picker's Clubs/National Teams segment.
+// picker's Clubs/Nations tabs.
 const SWAP_MS = 400;
 // After opening the share sheet: its slide is 240 ms, and the card in it
 // needs its fonts. `SETTLE_MS` would be a long wait for a single modal.
@@ -456,9 +456,17 @@ async function captureTheme(browser, colorScheme, suffix) {
 
     await capture.open('/team-picker');
     await capture.shoot('02-team-picker-clubs');
-    // Same screen, other segment — a tap rather than a second navigation.
-    await capture.tapId('segment-nation', { wait: SWAP_MS });
+    // Same screen, other tab — a tap rather than a second navigation.
+    await capture.tapId('kind-nation', { wait: SWAP_MS });
     await capture.shoot('03-team-picker-nations');
+    // The rail's letters take no touches of their own (the rail is the target),
+    // so Playwright's hit check refuses a locator click on one. Click its centre
+    // with the mouse instead. S exists in every language's nation list.
+    const box = await capture.page.getByTestId('rail-S').boundingBox();
+    if (!box) throw new Error('the picker has no rail-S letter to jump to');
+    await capture.page.mouse.click(box.x + box.width / 2, box.y + box.height / 2);
+    await capture.page.waitForTimeout(SWAP_MS);
+    await capture.shoot('03b-team-picker-nations-jump');
 
     await capture.open('/team/rma/difficulty');
     await capture.shoot('04-difficulty');

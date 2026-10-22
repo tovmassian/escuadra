@@ -29,9 +29,11 @@ One column that scrolls as a whole, as on the canvas:
      "ALL CLUBS · 96"), then the clubs as a plain list sorted by displayed name, with no letter
      headings.
    - **Nations:** grouped A–Z. Each group opens with its letter in Archivo ExtraCondensed
-     Black, 34 pt. A **letter rail** is pinned to the right edge, centred vertically, and
-     shows the letters that have groups. Tapping or dragging over it jumps to that letter's
-     group. The current letter, of the group at the top of the scroll, is `accentLine` in
+     Black, 34 pt. A **letter rail** sits at the right edge and shows the letters that have
+     groups. It starts beside the first letter heading, never over the tabs, and rides up
+     with the list until it is centred vertically, where it stays. It holds still while a
+     finger is on it and catches up on release. Tapping or dragging over it jumps to that
+     letter's group. The current letter, of the group at the top of the scroll, is `accentLine` in
      both the rail and its heading; the others are `textMuted` in the rail and `textPrimary`
      as headings.
    - **Empty state:** unchanged ("No teams found", plus "No results for …" when searching).
@@ -69,7 +71,9 @@ too: a score is green only at 10/10.
 4. **The rail is hidden from screen readers.** Each heading is a header, so VoiceOver's
    rotor and TalkBack's heading navigation already jump by letter, and a column of 10 pt
    letters makes a poor control to swipe through. The rail's touch target is its full
-   column, 44 pt wide, and a drag maps `y` to a letter.
+   column, 44 pt wide, and a drag maps `y` to a letter. The letters take no touches, so the
+   rail is always the target and its top edge is `pageY - locationY` on grant. The letters
+   scale with the OS text size up to `fontScaleCap.rail`, 1.1, so they keep their pitch.
 5. **The tabs and pills are new components.** `KindTabs` replaces `SegmentedControl`, whose
    only user was the picker, so it is deleted. `PickerPill` sits beside `FilterPill`, which
    Study keeps with its own look.
@@ -81,6 +85,13 @@ too: a score is green only at 10/10.
    (`sizes.pickerMarker` 40 × 27 with a 5 pt radius, `sizes.pickerRow` 60, `sizes.rail` with
    its width and letter height), and `Flag` and `TeamMarker` gain the `picker` size. The flag
    PNGs are 160 px wide, so 40 pt at @3x (120 px) still has headroom.
+
+## Deviations accepted in review
+
+- "/10" stays `textMuted` even at 10/10: only the score turns `successText`.
+- Pills are 44 pt touch targets around a 40 pt drawn pill.
+- `SegmentedControl` is deleted, and so is `TeamMarker`'s `default` variant: `variant` is
+  required, `banner` or `picker`.
 
 ## Text
 

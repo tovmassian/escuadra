@@ -943,8 +943,9 @@ export const sizes = {
   // Plain colour dot for Home's "continue" card — a different, simpler
   // element than the team identity marker below.
   teamDot: 10,
-  // The small corner radius of a team's bands and flags (Study's banner strip,
-  // the in-round banner, a flag on an answer tile or a chip).
+  // The small corner radius of a team's bands and flags outside the picker
+  // (Study's banner strip, the in-round banner, and the inline flags on an
+  // answer tile, a chip, a player card and a Study row).
   teamMarkerRadius: 2,
   // The "banner" marker variant used mid-round (see TeamMarker's `variant`
   // prop): thinner and longer than the picker's marker, and always rendered
