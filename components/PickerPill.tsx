@@ -6,13 +6,17 @@ interface PickerPillProps {
   label: string;
   active: boolean;
   onPress: () => void;
+  /** What a screen reader says, when it differs from the label: "UEFA, Europe". */
+  spokenLabel?: string;
+  testID?: string;
 }
 
-// A league filter pill on the clubs tab (#176). The pill is drawn at 40 pt
+// A filter pill: a league on Clubs, a confederation on Nations (#176, #177).
+// The pill is drawn at 40 pt
 // inside a transparent `minTapTarget`-tall Pressable. hitSlop would not do:
 // it never reaches past the parent's bounds, and the pills' scroll row is
 // only as tall as its children.
-export function PickerPill({ label, active, onPress }: PickerPillProps) {
+export function PickerPill({ label, active, onPress, spokenLabel, testID }: PickerPillProps) {
   const colors = useThemeColors();
   const styles = StyleSheet.create({
     target: { height: sizes.minTapTarget, justifyContent: 'center' },
@@ -32,6 +36,8 @@ export function PickerPill({ label, active, onPress }: PickerPillProps) {
   return (
     <Pressable
       onPress={onPress}
+      testID={testID}
+      accessibilityLabel={spokenLabel}
       accessibilityRole="button"
       accessibilityState={{ selected: active }}
       aria-selected={active}
