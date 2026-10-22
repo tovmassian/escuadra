@@ -2,8 +2,7 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { Flag } from './Flag';
 import { TeamMarker } from './TeamMarker';
 import type { FlagCode } from '@/assets/flags/generated';
-import { useT } from '@/i18n/useT';
-import { teamMetaLine, type TeamProgress } from '@/lib/pickerView';
+import type { TeamProgress } from '@/lib/pickerView';
 import type { TeamMarker as TeamMarkerData } from '@/types/squad';
 import { iconSize, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -35,7 +34,6 @@ interface TeamRowProps {
 // carries none.
 export function TeamRow({ name, marker, season, flag, progress, onPress }: TeamRowProps) {
   const colors = useThemeColors();
-  const t = useT();
   const styles = StyleSheet.create({
     row: {
       flexDirection: 'row',
@@ -60,7 +58,7 @@ export function TeamRow({ name, marker, season, flag, progress, onPress }: TeamR
           {name}
         </Text>
         <Text style={[styles.meta, progress?.cleared === true && styles.metaCleared]}>
-          {teamMetaLine(season, progress, t)}
+          {season}
         </Text>
       </View>
       <Text style={styles.chevron}>›</Text>
