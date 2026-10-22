@@ -24,7 +24,8 @@ interface WordmarkProps {
   /** Mark above the word rather than beside it. */
   stacked?: boolean;
   /** Plays the mark-strike and letter-by-letter rise once, on mount. Home's
-   *  hero lockup only — see CLAUDE.md's "once-per-launch home lockup". */
+   *  hero lockup only — see the once-per-launch home lockup in
+   *  `theme/tokens.ts`. */
   animate?: boolean;
 }
 

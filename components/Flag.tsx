@@ -25,8 +25,8 @@ const DIMENSIONS: Record<FlagSize, { width: number; height: number }> = {
   row: sizes.flagRow,
 };
 
-// A nation's identity element. Clubs never render one — CLAUDE.md hard
-// constraint #2 bans crests, badges, logos and shield shapes permanently, and
+// A nation's identity element. Clubs never render one — CLAUDE.md
+// guardrail 2 bans crests, badges, logos and shield shapes permanently, and
 // national flags are its only carve-out. Mid-round the team identity is still
 // TeamMarker's geometric banner, not this: at 100x3 pt there is no image to
 // show.

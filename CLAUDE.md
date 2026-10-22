@@ -1,40 +1,108 @@
 # Escuadra
 
-A football squad memorisation trainer for mobile.
+A football squad memorisation trainer for mobile. The player picks a team, a club or a
+national side, and answers a round of questions about its players: given a shirt number
+and a few stats, which player is this? At higher difficulties, also their position, and
+their club or nationality.
 
-## What the game is
+The point is **recognition, built by repetition**. It is a study
+tool, not a party game: someone opens it to learn a squad before a tournament or a
+season, in short repeated sessions. Every design decision follows from that: fast rounds,
+instant feedback, and a results screen that shows what you got wrong, because the misses
+are what the user came for.
 
-The player picks a team — a club or a national side — and answers a round of
-questions about that squad's players. Given a shirt number and a few stats,
-which player is this? At higher difficulties, also their position, also their
-club.
+_Escuadra_ means the squad, and _a la escuadra_ means a shot into the top corner of the
+goal. A flawless round is **a la escuadra**: use that term in the UI rather than "perfect
+score". Build on the existing scaffold and tokens; do not re-scaffold, and do not add a
+second styling approach alongside the tokens.
 
-The point is **recognition under time pressure, built by repetition**. It is a
-study tool, not a party game. Someone opens it to actually learn a squad before
-a tournament or a season, in short repeated sessions. Every design decision
-follows from that: fast rounds, instant feedback, and a results screen that
-shows what you got wrong, because the misses are what the user came for.
+## How these instructions load
 
-The name carries the concept. _Escuadra_ means the squad, and _a la escuadra_
-means a shot into the top corner of the goal — the perfect strike. A flawless
-round is **a la escuadra**; use that term in the UI rather than "perfect score".
+This file holds what every session needs. Each topic's detail is a rule in
+`.claude/rules/`, which loads when you Read a file its `paths` match; a hook gives a new
+file its rules on Write. Rules do not load for files read through Bash, so open project
+files with Read, not `cat`. Working on a topic before touching its files, in a plan, a
+triage or an answer? Read its rule first. A rule that loaded for a file you change is part
+of the change: when the change makes it untrue or incomplete (a new licence, a new photo
+surface, a new event), update the rule in the same PR, so the next session is not misled.
 
-## Current state
+| Rule                                                      | Covers                                                                  |
+| --------------------------------------------------------- | ----------------------------------------------------------------------- |
+| [`quiz`](.claude/rules/quiz.md)                           | Difficulty levels, tap-only answering, distractors, the question engine |
+| [`stores`](.claude/rules/stores.md)                       | Persisted and ephemeral state                                           |
+| [`squad-data`](.claude/rules/squad-data.md)               | The data model, `verified`, squadctl                                    |
+| [`team-identity`](.claude/rules/team-identity.md)         | Team colours, markers, the in-round banner, flags                       |
+| [`photos`](.claude/rules/photos.md)                       | Player photos and their credits                                         |
+| [`design-tokens`](.claude/rules/design-tokens.md)         | Tokens, palettes, theming, motion                                       |
+| [`i18n`](.claude/rules/i18n.md)                           | Catalogs, translations, display names                                   |
+| [`privacy-telemetry`](.claude/rules/privacy-telemetry.md) | What leaves the device, About, telemetry                                |
+| [`fingerprint`](.claude/rules/fingerprint.md)             | What moves the fingerprint, CI, the SDK pin                             |
+| [`expo`](.claude/rules/expo.md)                           | Expo SDK 57                                                             |
+| [`design-handoff`](.claude/rules/design-handoff.md)       | `design/`, screenshots, store assets                                    |
+| [`licensing`](.claude/rules/licensing.md)                 | Licence notices and asset licences                                      |
+| [`testing`](.claude/rules/testing.md)                     | Testing standards                                                       |
+| [`instructions`](.claude/rules/instructions.md)           | How this file, the rules and the docs are written                       |
 
-v1.0.0 is feature-complete: 96 club and 46 national squads, team picker with
-search, three difficulty levels, 10-question rounds, results, Study screen,
-persisted best scores, light and dark themes, About screen.
+## Guardrails
 
-Build on the existing scaffold and tokens. Do not re-scaffold, and do not
-introduce a second styling approach alongside the tokens.
+Two kinds. **Legal** guardrails (2, with its asset-licensing rule) are never worked
+around: stop and ask. **Product and engineering** guardrails are the defaults: an issue
+that explicitly changes one wins, and updates the guardrail here and its rule in the same
+PR. Code cites guardrails by number, so the numbers stay.
+
+**In design work, a rule is an input, not a blocker.** When a new concept contradicts a
+product or engineering rule here or in `.claude/rules/`, or needs something the design
+system lacks, flag it and keep designing. If the concept is adopted, change the system
+to fit it (the token, the rule, this file) in the same work, unless the owner calls it a
+one-off exception. Legal guardrails never bend.
+
+1. **Player photos are hotlinked Wikimedia Commons thumbnails, always credited.** Nothing
+   shown or spoken names the player: never the Commons file name or caption. Each load reaches
+   Wikimedia, so photos ship in a store build with the privacy disclosures (guardrail 4),
+   never over the air. Detail: `photos`.
+2. **No club crests, badges, logos, or shield shapes. Ever.** Trademark exposure, and the
+   constraint outlives every version. Clubs are identified by text and a banded colour
+   marker, never an emblem. National flags are the one carve-out: committed PNGs in
+   `assets/flags/`, never Unicode flag emoji (detail: `team-identity`). A crest inside a
+   licensed player photo is part of that photo: never crop to it, enlarge it, isolate it
+   or use it to identify a team. About says so, and says the marks belong to their owners.
+
+   **Asset licensing (legal):** every shipped image has a licence someone can name, and
+   the app does what it asks: [`docs/license.md`](docs/license.md). Store badges on the
+   `gh-pages` site are licensed artwork: Apple's and Google's badges only as their
+   guidelines allow, unmodified (never recoloured, greyed out or set inside a sentence),
+   only for a store where the app is live, with their credit lines in the footer.
+
+3. **Retired.** Answering levels 1–3 by tap only is now a quiz rule (`quiz`), and a new
+   mode may take other input. The number stays so existing citations keep their meaning.
+4. **Offline-first, and privacy disclosures always match the binary.** Core gameplay works
+   with no connection, and squad data stays bundled. Network features are allowed when an
+   issue asks for them, but any change to what leaves the device (analytics, crash
+   reporting, a backend call, a new SDK) ships **together** with the privacy pages, the
+   About text word for word, Apple's App Privacy answers and Google Play's Data safety
+   form: in a store build, never over the air. `en.about.privacy` (`i18n/en.ts`) is the
+   complete statement of what leaves the device. Detail: `privacy-telemetry`.
+5. **Never hardcode a colour, spacing value, or font size.** Everything comes from the
+   design tokens, colour from the active palette through `useThemeColors()`; add a
+   missing token rather than inline a value. A team's identity colours are real-world
+   fact carried on the squad, never invented. Detail: `design-tokens`.
+6. **The product is called Escuadra.** "Squad Trainer", "Squad Game", "Squad Quiz" and the
+   like, as a product name, are stale wherever they survive: fix them on sight.
+   Descriptive store copy may use category words such as "football squad quiz".
+7. **The About screen stays true.** It states what leaves the device and what is stored
+   on it; how photos are shown and credited; which assets are used, under which licence;
+   and that Escuadra is unaffiliated. A change that could make any of that untrue is
+   flagged in its PR and fixes the text in the same PR. When the right wording is plain, write it. When the wording needs a privacy,
+   licensing or legal judgement, stop and discuss it with the owner first.
 
 ## Releases
 
-How changes reach users (OTA updates and store builds), the branch model and which
-versions are live: [`docs/release.md`](docs/release.md). The rules no session may break:
+How changes reach users, the branch model and every procedure:
+[`docs/release.md`](docs/release.md). What each version shipped:
+[`CHANGELOG.md`](CHANGELOG.md). The rules no session may break:
 
 - **Nothing is published or built from `main`.** OTA updates and store builds come only
-  from `release/X.Y.Z` branches, as `docs/release.md` describes.
+  from `release/X.Y.Z` branches.
 - **Nothing that moves the fingerprint lands on a locked release branch:** npm scripts,
   dependency changes, `.gitignore` lines, `app.json`, `eas.json`, `fingerprint.config.js`.
   A change that needs one is a new version.
@@ -42,456 +110,55 @@ versions are live: [`docs/release.md`](docs/release.md). The rules no session ma
   `git cherry-pick -x`. Docs and CI changes go the other way.
 - **`runtimeVersion` stays on the `fingerprint` policy.** `appVersion` would hand
   JavaScript to binaries that can't run it.
-- **CI calls tools directly** (`node scripts/ci/…`, `npx eas-cli …`), never through new npm
-  scripts, and writes temporary files to `$RUNNER_TEMP`, never new `.gitignore` lines.
+- **CI calls tools directly** (`node scripts/ci/…`, `npx eas-cli …`), never through new
+  npm scripts, and writes temporary files to `$RUNNER_TEMP`, never new `.gitignore` lines.
 
-⚠️ **2.0.0 changes what leaves the device, so its disclosures ship with its
-store build.** The About text on `main`, in all five catalogs, covers
-TelemetryDeck, the Wikimedia photos and the language sent with the launch signal
-(#54, #146). The web policy is versioned: `privacy.html` stays the 1.x policy
-that both store listings link today (with a dated correction of 20 October
-2026), and `scripts/privacy-pages.ts` generates the 2.0 pages into `privacy/2/`,
-published by #157 but not yet linked. The order:
+## Scope
 
-1. Every 2.0.0 issue lands on `main`.
-2. Regenerate `privacy/2/` on `gh-pages` if the About text has changed since
-   #157, so the pages match the build word for word.
-3. #55's App Privacy and Data safety answers are written.
-4. `release/2.0.0` is cut and built (#116).
-5. At submission, each store's App Privacy or Data safety answers and its
-   privacy URL change together: Apple before review, Play when the build is
-   uploaded.
-
-The URL moves with the answers because both belong to the app, not to a
-version: answers for 2.0 beside a URL for the 1.x page would contradict each
-other in front of Apple's reviewer. The 2.0 page names the versions it covers
-and links the 1.x policy, so 1.x users lose nothing.
-
-## Scope and roadmap
-
-**Scope lives in GitHub — milestones and issues — not in this file.** The
-app is growing, and this file describes how to build it, not what to build
-next. If the issue being worked on asks for something — analytics, photos,
-a backend call, a new mode, monetisation — that is the decision; build it
-well within the guardrails below. Only stop and ask when a request would
-break a **legal** guardrail (crests, unlicensed assets) or when no issue
-covers it and it is a product-direction change.
-
-One idea worth remembering: Exam mode (a full-squad run on shirt numbers
-alone) belongs as a standalone feature, not a fourth difficulty level.
-
-## Difficulty levels
-
-| Level | Prompt               | Answer                                                                |
-| ----- | -------------------- | --------------------------------------------------------------------- |
-| 1     | Shirt number + stats | Player name, 4 options                                                |
-| 2     | Shirt number + stats | Name (4 options), then position (GK / DF / MF / FW chips)             |
-| 3     | Shirt number only    | Name (6 options), then position, then club or nationality — see below |
-
-On level 3 the third part depends on `squad.kind`: a **club** squad asks the
-player's **nationality**, a **nation** squad asks their **club**. Asking a nation
-squad for nationality is a non-question, since every member shares it.
-
-**One question, up to three parts.** A round is 10 questions at every level. A
-level-2 or level-3 question is a single scored unit: it counts as correct only
-when _every_ part is answered correctly. There is no partial credit. The progress
-bar counts questions, not parts, so all three levels show 1..10.
-
-Distractor quality is what makes or breaks this. Random wrong answers make the
-game trivial; same-position and same-squad distractors make it a real test. On
-level 3 the name distractors are drawn from the **same squad**, so they are
-genuinely confusable.
-
-## Guardrails
-
-Two kinds. **Legal** guardrails (2 and the asset-licensing rule) are never
-worked around — stop and ask. **Product and engineering** guardrails are the
-defaults; an issue that explicitly changes one wins, and the change should
-update this file in the same PR rather than leave a stale rule behind.
-
-1. **Player photos are hotlinked Wikimedia Commons thumbnails, always
-   credited.** The photo fills the top of the question screen behind the shirt
-   number; with no photo, or while it loads, the team's colours and the number
-   show.
-   `player.photo` is a `PhotoCredit` written only by `squadctl enrich`, which
-   refuses any photo without an accepted licence, a Wikimedia thumbnail and
-   its Commons page — the asset-licensing rule below, enforced in code and in
-   `lib/dataIntegrity.test.ts` — and any with no original size, which the
-   layout needs. Every shown photo shows its credit; never put the Commons
-   file name or caption in visible text or a label, as they name the player.
-   The credit sits under the question's action button for as long as the
-   question is on screen, never as part of the answer reveal. On Results and
-   Study the credits sit under "Photo credits · N"; Study names each photo by
-   shirt number only, so Hide names is not spoiled. Each photo load
-   reaches Wikimedia, so photos ship in a store build with the privacy
-   disclosures (guardrail 4), never over the air:
-   `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.
-2. **No club crests, badges, logos, or shield shapes. Ever.** Trademark
-   exposure, and this constraint outlives v0. Clubs are identified by text and
-   a banded colour marker (see `TeamMarker` in the data model section) — never
-   an emblem. National flags are the one carve-out, because the rule exists
-   for trademark exposure and a flag carries none: a nation's identity element
-   is a committed PNG in `assets/flags/`, shown on the team picker, level-3
-   nationality options, the `NAT` stat chip and the Study screen's cards and
-   list rows. Never a Unicode regional-indicator emoji (🇦🇷) — that depends on an
-   OS flag-emoji font, and Windows ships none, so the Playwright capture behind
-   `npm run shots` would render "AR". Crests, badges, logos, and shield shapes
-   remain banned forever. A crest that appears in a licensed player photo, on a
-   kit or in the background, is part of that photo, not something Escuadra
-   shows: never crop to it, enlarge it, isolate it or use it to identify a team.
-   About says so, and says the marks belong to their owners.
-
-   **Asset licensing (legal):** every shipped image must have a licence
-   someone can name. What each licence asks, which ones player photos may
-   carry and why the rest are refused: [`docs/license.md`](docs/license.md).
-   `assets/flags/README.md` is the worked example — the flag set was replaced
-   wholesale for exactly this reason. Store badges on the `gh-pages` site are
-   licensed artwork too: use Apple's and Google's badges only as their
-   guidelines allow — unmodified (never recoloured, greyed out or set inside
-   a sentence), only for a store where the app is actually live, and with
-   their credit lines in the footer.
-
-3. **No text input in the quiz. No keyboard for answering.** Every quiz answer
-   is a tap — option cards and chip selectors are the entire input vocabulary
-   there. This is deliberate: typing player names on a phone is the worst
-   possible version of this app. Do not add free-text answering or fuzzy name
-   matching to questions.
-
-   The one exception is the **team picker's search field** (filtering the
-   club/nation list as you type): narrowing a list is not answering a
-   question, and typing a few letters is the normal way to find one team
-   among ~20. Keep the exception scoped to that field — do not add free-text
-   input anywhere else in the app.
-
-4. **Offline-first, and privacy disclosures always match the binary.** Core
-   gameplay must work with no connection; squad data stays bundled. Network
-   features are allowed when an issue asks for them. The rule is honesty,
-   not abstinence: any change that alters what leaves the device (analytics,
-   crash reporting, a backend call, a new SDK) ships **together** with the
-   updated privacy policy (the privacy pages and the About screen text,
-   word for word), Apple's App Privacy answers and Google Play's Data safety
-   form — in a store build, never over the air. Today the traffic is
-   `expo-updates` checking EAS Update on launch and, from the next store
-   version, opt-out TelemetryDeck usage signals (see Telemetry under
-   Architecture rules) and player-photo thumbnails loaded from Wikimedia
-   Commons (`upload.`/`thumb.wikimedia.org`). `en.about.privacy`
-   (`i18n/en.ts`) is the complete statement of what each service receives.
-5. **Never hardcode a colour, spacing value, or font size.** Everything comes
-   from the design tokens. If a token is missing, add it to the token file
-   rather than inlining a value. This governs the app's own design system —
-   backgrounds, text, spacing, semantic accent/success/error — never invented
-   or arbitrary colour. It does **not** apply to team identity colour, which
-   is real-world fact about a specific club or nation, not a design choice —
-   see the data model section below. Never invent, rotate, or arbitrarily
-   assign a team's colour; it must be the team's actual real colour.
-   Colour specifically comes from the **active palette**, via
-   `useThemeColors()` — never a module-scope capture. `StyleSheet.create` at
-   module scope is evaluated once at import, so a component built that way
-   looks correct and silently ignores the theme. The one exception is
-   `ShareCard`, the share picture, which draws in `palettes.dark` on purpose: the
-   picture looks the same whichever theme it is shared from. Both palettes in
-   `theme/tokens.ts` implement the same `Palette` interface: add a role to
-   both or to neither.
-6. **The product is called Escuadra.** "Squad Trainer", "Squad Game", "Squad
-   Quiz" and similar as a _product name_ predate it and are stale wherever
-   they survive — code comments, file headers, docs. Fix them on sight.
-   Descriptive store copy (an App Store subtitle, a Play short description)
-   may use category words like "football squad quiz"; that is ASO, not a
-   rename.
-7. **The About screen stays true.** It states:
-   - what leaves the device and what is stored on it;
-   - how photos are shown and credited;
-   - which assets are used, under which licence;
-   - that Escuadra is unaffiliated.
-
-   A change that could make any of that untrue is flagged in its PR, and the
-   text is fixed in the same PR. When the right wording is plain, write it.
-   When it needs a privacy, licensing or legal judgement, stop and discuss it
-   with the owner first. The Privacy section also reaches the privacy pages
-   that `scripts/privacy-pages.ts` renders, word for word (guardrail 4).
-
-## Data model
-
-Shirt number belongs to **squad membership, not to the player** — a player has
-different numbers for club and country. Do not denormalise it onto the player.
-
-```
-data/index.json                       squad manifest — GENERATED, see below
-data/players.json                     { id, name, fullName, birth, position, nationality, club, photo, wikiTitle }
-data/squads/nation/<id>.json          { id, kind: 'nation', name, season, verified,
-                                         primaryColor, secondaryColor, marker,
-                                         members: [{ playerId, no, captain? }] }
-data/squads/club/<league>/<id>.json   same shape, kind: 'club'. <league> is one of
-                                       la-liga, serie-a, bundesliga, ligue-1,
-                                       premier-league, ucl (see League in types/squad.ts)
-```
-
-`photo` is a `PhotoCredit` (`types/squad.ts`) or null: the Commons file, its
-thumbnail URL (960 px for an original that wide, else as Commons serves it),
-the original's width and height, the name the licence asks to credit, licence
-and deed. The Commons page is derived from the file name
-(`scripts/commons.ts`), not stored. Hotlinked, never copied.
-
-`wikiTitle` is the Wikipedia article title the record came from — the only
-field that is unique per person, since two different real people are both
-rendered "Otávio". Null when the source links no article. Never a quiz answer;
-identity only.
-
-A player has **exactly one** position, not an array. Real players are more
-flexible than that, but the quiz asks for one answer through one chip, and
-same-position distractor selection needs a single key to group on.
-
-`nationality` exists so a club squad can ask for it on level 3.
-
-`primaryColor`/`secondaryColor` are the team's **real** identity colours
-(hex), carried directly on the squad — content, not a design token. Get the
-actual colour right; do not invent or rotate an arbitrary hue.
-
-`marker` (`TeamMarker`, see `types/squad.ts`) is a club's sole visual
-identity element, and every squad carries one — a nation's still feeds the
-in-round banner, where no image fits. It's declarative band geometry, not an
-asset: `bands` (fills, in draw order), `orientation`
-(`horizontal` | `vertical`), an optional `weights` array for uneven bands, and
-an optional `overlay` (a centred `disc` or `diamond` device, e.g. Japan's
-disc or Brazil's diamond). For a club it's the club's own colours laid out as
-bands — never an emblem. A nation's is its flag as geometry, kept for the
-in-round banner only; everywhere else a nation shows its real flag image (see
-`lib/flags.ts` and `components/Flag.tsx`).
-Both `data/index.json` (the picker manifest) and each squad file carry
-`primaryColor`/`secondaryColor`/`marker`, since the picker never imports full
-squad JSON. `data/index.json` is generated from the squad files by
-`npm run gen:squads` (`scripts/gen-squads.ts`) — never hand-edit it;
-`npm run check` fails if it's out of sync with what the generator produces.
-
-**In-round team marker is always a vertical banner, regardless of the
-squad's real flag orientation.** The team picker (`TeamRow`) renders a
-squad's marker at its true `orientation` — Spain's flag is genuinely
-horizontal stripes there. But mid-round, on the question screen's header,
-the marker always renders as thin, tall, vertical bands, using `bands` (and
-`weights`) as the colour sequence and ignoring `marker.orientation`
-entirely: Spain reads red/yellow/red left-to-right, not stacked. This is
-`TeamMarker`'s `variant="banner"` (`components/TeamMarker.tsx`,
-`sizes.teamMarkerBanner` in `theme/tokens.ts`) — always pass it on the
-question screen, never the bare `marker` prop. A shape `overlay` (Japan's
-disc, Brazil's diamond) doesn't survive the banner's height, so the banner
-renders it as a third middle band instead of a centred shape — edge/middle/
-edge, in the overlay's colour — derived from the marker's own data, never a
-per-team special case.
-
-One file per squad, so a future contribution touches exactly one file.
-
-`League` (`types/squad.ts`) is the closed set of big-5-league folder names
-under `data/squads/club/`, plus `ucl` for a Champions League group-stage
-club with no big-5 domestic home. `SquadManifestEntry.league` carries it on
-club entries (absent on nation entries) — not consumed by any screen yet,
-but available for a future picker that groups clubs by league.
-
-Static squad JSON is imported directly. It does **not** belong in a store.
-
-⚠️ **Treat squad data as unfact-checked until its `verified` flag says
-otherwise.** Shirt numbers and current clubs are precisely what models
-hallucinate. `verified` asserts that a squad file faithfully reflects its
-Wikipedia source — not that the source is right — and it is never set by
-hand: it is an output of whichever pipeline wrote the file. Never present
-`verified: false` data as authoritative.
-
-Squad data is created and maintained two ways, which coexist and produce the
-same `RosterEnvelope`, so their outputs can be diffed directly.
-
-**`squadctl`** (`tools/squadctl/`, `npm run squadctl`) is the deterministic
-path and the default one. `squadctl fetch` reads Wikipedia into envelopes and
-`squadctl apply` writes them to the repo; `data/teams.json` is the single
-registry of teams it knows about. It sets `verified` from its own assertion
-pass — `true` only when a team parsed with zero conflicts.
-
-A **conflict is a handover, not a failure**: the team is still written, but
-`verified: false` and exit code `4` mean a judgement is waiting that no parser
-can make — usually that Wikipedia has changed a player's spelling. Resolve
-those with `squadctl rename <playerId> "<name>"`, which never rewrites an id,
-then re-run `apply`. `tools/squadctl/README.md` documents every conflict kind,
-what you decide, and the command that hands the answer back; the design is in
-`docs/superpowers/specs/2026-09-06-squadctl-design.md`.
-
-`squadctl enrich` runs after `apply` and writes each player's `photo` and,
-where none is stored, `birth` from Wikidata, in batches of 50. A stored birth
-date Wikidata disagrees with is a conflict it never overwrites, and holds that
-player's photo until `squadctl birth` answers it.
-
-The `squad-factory` skill set (`squad-fetcher`, `squad-writer`,
-`squad-verifier`) is retired — `squadctl` proved faster and more reliable, and
-now does that work directly. The residue that still needs judgement —
-designing a team's colours and `marker`, and triaging the conflicts squadctl
-reports — is done by hand, not by a skill.
-
-## Architecture rules
-
-- **`lib/questionEngine.ts` stays pure.** No React, no store imports, no I/O.
-  Given a squad and a level, return questions. It's the piece most likely to
-  need iteration and it must be trivially unit-testable.
-- **Persisted vs ephemeral state.** `stores/progress.ts` is persisted via
-  AsyncStorage — best scores, teams played, preferences. `stores/session.ts` is
-  ephemeral — current round state. A half-finished round must not survive an
-  app restart. Put new state in whichever of the two fits; add a third store
-  only when neither does, and say why in the PR.
-- **Theming is two palettes and a hook.** `theme/tokens.ts` holds
-  `palettes.dark` and `palettes.light`; `theme/resolveTheme.ts` is the pure
-  preference-to-name resolver, kept React-free so Vitest (which runs in a node
-  environment and cannot load `react-native`) can test it; `theme/useTheme.ts`
-  exposes `useThemeName()` and `useThemeColors()`. The persisted preference
-  lives in `stores/progress.ts` — it is not a third store.
-- **User-visible text lives in `i18n/`.** `i18n/en.ts` is the source catalog and
-  `Messages = typeof en`; every other catalog is typed `: Messages`, so a missing or
-  extra key fails the typecheck, and `i18n/__tests__/catalogs.test.ts` fails a
-  dropped parameter, a key out of order or a text left in English. The `≤ N chars`
-  comments in `en.ts` are mirrored in `i18n/budgets.ts`, which
-  `i18n/__tests__/budgets.test.ts` holds every catalog to; the per-language facts
-  (date, plurals, position codes, hand-written country names) are
-  `i18n/__tests__/translations.test.ts`. About's words are each catalog's
-  `about`. `scripts/privacy-pages.ts` renders its Privacy section word for
-  word into `privacy/2/` (`index.html`, `es.html`, `fr.html`, `it.html`,
-  `de.html`); a translated page ends, as About's Privacy section does in that
-  language, with the notice from `i18n/translationNotice.ts`. A change to
-  `en.about` changes every catalog's `about` in the same PR, each re-reviewed;
-  `i18n/__tests__/catalogs.test.ts` pins a hash of the English About to catch
-  one that doesn't. Screens read text through `useT()`. `lib/` modules that
-  build text take `messages` as their last argument and stay React-free. Data
-  stays English: squads, players, clubs and position codes are translated at
-  display time by code, never by their English string.
-  A nation's name and a player's nationality come from `i18n/countries.ts` (FIFA
-  code → name, the codes `lib/flags.ts` maps to); every screen shows a team
-  through `squadDisplayName()` in `i18n/displayNames.ts`. `lib/` functions that
-  also need a country name take `language` just before `messages`.
-  _Escuadra_ and _a la escuadra_ come from `i18n/names.ts` and are never
-  translated. `npm run lint` fails a hard-coded string in `app/` or
-  `components/` JSX; a prop that is never shown or spoken goes on
-  `SILENT_PROPS` in `eslint.config.js`.
-- **Telemetry** is TelemetryDeck, anonymous and opt-out. The event allowlist
-  — every event name and property that may leave the device — is
-  `TELEMETRY_EVENTS` in `lib/telemetryEvents.ts`, alongside the pure gate
-  that keeps it inert in `__DEV__`, on web (so `npm run shots*` never sends),
-  when opted out, and with no App ID (`app.json` →
-  `extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only app module that
-  imports the SDK; screens call its `track()`. The anonymous `clientUser` is
-  a random `installId` persisted in `stores/progress.ts`, next to the
-  About-screen opt-out. Non-`production` channels send TelemetryDeck test
-  signals. **A new event or property is a disclosure review** (guardrail 4):
-  the privacy policy, About text, App Privacy and Data safety answers change
-  with it, in a store build. So is an upgrade of `@telemetrydeck/sdk` (or of
-  `expo-updates`), because About states what those SDKs put in each request.
-  For TelemetryDeck, `lib/telemetrySdk.test.ts` pins the request, and a failure
-  there means About no longer describes it; `expo-updates` has no such test, so
-  read its changelog. Never put names, free text or player data in a payload.
-- **Licence notices are generated.** `lib/licences.generated.ts` (About → Licences) is
-  written by `npm run gen:licences` from the bundle's own source maps, and `npm run check`
-  fails when it is stale. Its rules, and why widening the licence allowlist is the owner's
-  call: `docs/license.md`.
-- Zustand's `persist` defaults to `localStorage`, which does not exist here. Use
-  `createJSONStorage(() => AsyncStorage)`.
-- Every animation stays under 300ms. The app is played in fast repetitive bursts
-  and slow transitions become infuriating by question six. `durations.autoAdvance`
-  (1,200 ms) is a pause, not an animation: the wait after a correct answer before
-  the round moves on, which a tap skips and which never runs with a screen reader
-  on. It sits outside the rule.
-
-## Environment
-
-⚠️ **Expo has changed a lot between versions.** Read the exact versioned docs
-at https://docs.expo.dev/versions/v57.0.0/ before writing any Expo code — not
-the `latest` docs, which may describe APIs from a newer SDK this project
-cannot use.
-
-⚠️ **Do not upgrade the Expo SDK without deciding to cut a new store
-build.** `package.json` is pinned to SDK 57. Expo Go is no longer the only
-way to run the app — `expo-dev-client` is installed and EAS Build produces
-development, simulator, preview and production builds — so the original
-reason for the pin (Expo Go's App Store build dictating the SDK) has been
-superseded. The pin now stands for a harder reason: the binary on TestFlight
-is SDK 57, and an SDK bump changes the native runtime, which invalidates
-every over-the-air update path and forces a new build and a new submission.
-Treat an SDK upgrade as a release decision, not a dependency bump.
-
-That 54 → 57 jump also surfaced two real breakages worth knowing about if the
-SDK moves again: `expo-router` (SDK 56+) no longer allows importing directly
-from `@react-navigation/*` in app code — import `ThemeProvider`/`DarkTheme`/
-`Theme` from `expo-router` itself instead; and RN 0.86 removed
-`StyleSheet.absoluteFillObject` in favor of `StyleSheet.absoluteFill`.
-`DefaultTheme` is exported alongside `DarkTheme` and is the light theme's base.
-
-⚠️ **`userInterfaceStyle` in `app.json` must stay `"automatic"`.** Pinning it
-to `"dark"` or `"light"` locks the app to that theme and makes
-`useColorScheme()` return the same value on every device, so the
-system-following default silently never fires — with no error to trace it by.
-This is the one theming failure that compiles, passes every test, and looks
-correct on a matching phone. Verify it on a light device, not by reading the
-diff.
-
-⚠️ **Node 24+ is required — run `nvm use` before anything else.** TypeScript
-runs through `node` directly here, with no build step, which needs Node 24's
-native type stripping. On Node 22 every `.ts` entry point dies with
-`ERR_UNKNOWN_FILE_EXTENSION`; `scripts/check-node.js` guards `check`,
-`gen:squads` and `squadctl` so the message says so.
-
-```bash
-nvm use               # .nvmrc pins 24; once per shell
-npx expo start        # dev server; scan QR with iPhone Camera → Expo Go
-npx expo start -c     # same, clearing Metro cache
-npm run typecheck
-npm run lint
-npm run check         # run before reporting any work complete
-npm run shots           # capture design/screens/ from the running web build
-npm run shots:store     # capture the 1320×2868 App Store profile to design/store/
-npm run shots:play      # capture the 1080×1920 (9:16) Google Play profile to design/play/
-npm run shots:play -- --lang=<code>   # the same, in one supported language, to design/play/<code>/
-npm run gen:play-assets # write design/play/icon-512.png and feature-graphic.jpg
-```
-
-`design/` is the handoff surface pushed to the Claude Design project.
-`design/tokens.ts` and `design/brand.ts` re-export from `theme/tokens.ts` and
-`theme/brand.ts` rather than copy — `design/handoff.test.ts` pins object
-identity so they cannot quietly drift into a duplicate. `design/screens/`
-holds PNGs captured by `npm run shots`; after any change to a screen,
-regenerate them, or the design side is working from a stale picture.
-
-`design/store/` (App Store, 1320×2868 PNG, `npm run shots:store`) and
-`design/play/` (Google Play, 1080×1920 JPEG, `npm run shots:play`) are the
-same screens re-captured at each store's listing dimensions — both
-gitignored, not part of the `design/screens/` handoff surface, regenerated on
-demand rather than committed. `npm run gen:play-assets` additionally writes
-`design/play/icon-512.png` (the shipped app icon resized to Play's required
-512×512, alpha preserved) and `design/play/feature-graphic.jpg` (1024×500,
-rendered from the dedicated `app/store/feature-graphic.tsx` capture-only
-route — nothing like it exists for iOS). **Regenerate whichever of these is
-stale whenever a store listing is being prepared, and whenever the app icon,
-brand mark, or any captured screen changes** — a task that touches
-`assets/images/icon.png`, `theme/brand.ts`, `theme/tokens.ts`'s brand roles,
-or any `app/` screen should re-run the relevant `shots*`/`gen:play-assets`
-command in the same PR, not leave the store assets stale. See
-`scripts/screenshot-profiles.ts` for every profile's exact viewport/scale/
-format facts and `design/SCREENS.md` for what each captured file shows.
+Scope lives in GitHub, in milestones and issues, not in this file. If the issue being
+worked on asks for something (analytics, photos, a backend call, a new mode,
+monetisation), that is the decision: build it well within the guardrails. Stop and ask
+only when a request would break a legal guardrail, or when no issue covers it and it
+changes the product's direction.
 
 ## Working conventions
 
+- **Node 24+: run `nvm use` first.** TypeScript runs through `node` directly, with no
+  build step; on Node 22 every `.ts` entry point dies with `ERR_UNKNOWN_FILE_EXTENSION`.
+- **Run `npm run check` and report its actual output** before claiming work is done.
 - Prefer targeted edits over rewriting whole files.
-- Flag design tradeoffs before building rather than resolving them silently.
-  Flagging is a sentence in the plan, not a blocker — unless it touches a
-  legal guardrail, keep going.
-- Run `npm run check` and report the actual output before claiming work is done.
-- TypeScript is strict, including `noUncheckedIndexedAccess`. With a quiz engine
-  full of `options[i]`, do not weaken it to make an error go away.
-- Tests live in a `__tests__/` folder that mirrors the code it covers, with the
-  fakes and fixtures they use, so code folders hold only code;
-  `scripts/ci/__tests__/` is the model. An area that still keeps `*.test.ts`
-  beside its code keeps that layout until it moves over whole, in a PR of its own.
+- Flag design tradeoffs before building: a sentence in the plan, not a blocker, unless
+  it touches a legal guardrail.
+- TypeScript is strict, including `noUncheckedIndexedAccess`; never weaken it to make an
+  error go away.
+- User-visible text lives in `i18n/` and is read through `useT()`; `npm run lint` fails a
+  hard-coded string in `app/` or `components/`.
+- Animations stay under 300 ms by default, with the carve-outs in `design-tokens`; a
+  design that needs longer changes the rule, as Guardrails says.
+- Read the Expo docs for SDK 57 (https://docs.expo.dev/versions/v57.0.0/), never
+  `latest`. An SDK upgrade is a release decision, not a dependency bump.
 
-## Reference docs
+## Commands
 
-- [`docs/release.md`](docs/release.md): releasing — OTA updates, store builds, the
-  fingerprint, release branches, rollback.
-- [`docs/license.md`](docs/license.md): licences — every shipped asset's, the
-  photo licences accepted and refused, and how to change the list.
-- [`scripts/evals/README.md`](scripts/evals/README.md): evals: grading an agent's issue triage with and without the `escuadra-issue-runner` skill.
+```bash
+nvm use               # .nvmrc pins 24; once per shell
+npx expo start        # dev server; scan the QR with the iPhone Camera → Expo Go
+npx expo start -c     # the same, clearing Metro's cache
+npm run typecheck
+npm run lint
+npm test
+npm run check         # everything CI runs; before reporting work done
+```
 
-`docs/mobile-dev-setup.md` was explicitly superseded by
-the setup walkthrough and should not come back. If the design and logo briefs are
-worth keeping in-repo, drop them at `docs/claude-design-brief.md` and
-`docs/logo-brief.md` and re-add the `@` imports here.
+## Reference
+
+- [`docs/release.md`](docs/release.md): OTA updates, store builds, the fingerprint,
+  release branches, rollback.
+- [`docs/license.md`](docs/license.md): every shipped asset's licence, the photo
+  licences accepted and refused, and how to change the list.
+- [`CHANGELOG.md`](CHANGELOG.md): what each version shipped.
+- [`tools/squadctl/README.md`](tools/squadctl/README.md): squadctl's commands, and every
+  conflict it reports with the command that answers it.
+- [`scripts/evals/README.md`](scripts/evals/README.md): grading an agent's issue triage
+  with and without the `escuadra-issue-runner` skill.
+- `docs/superpowers/specs/`: the design behind each feature; read the spec an issue names.

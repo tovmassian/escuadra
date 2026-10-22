@@ -633,15 +633,15 @@ export const opacity = {
   tileAfterMiss: 0.35, // other tiles after a miss
 } as const;
 
-// All within 300ms, per CLAUDE.md's motion rule — this is the mid-round
-// budget. Two entries are not animations and sit outside it: `skeleton` is a
-// shimmer's loop period, and `autoAdvance` is the pause after a correct
-// answer before the round moves on by itself (spec §2.4; a tap skips it, and
-// it never runs with a screen reader on). A goal chains its beats (the shot,
-// then the corner's kick and ring) to about 640 ms after the tap; each stays
-// within the budget, and the chain ends well inside `autoAdvance`. The
-// round-over celebration and the home lockup are the one carve-out from the
-// rule; see `strikeTiming`/`resultsTimeline` below.
+// All within 300ms, per the motion rule (.claude/rules/design-tokens.md) —
+// this is the mid-round budget. Two entries are not animations and sit
+// outside it: `skeleton` is a shimmer's loop period, and `autoAdvance` is the
+// pause after a correct answer before the round moves on by itself (spec
+// §2.4; a tap skips it, and it never runs with a screen reader on). A goal
+// chains its beats (the shot, then the corner's kick and ring) to about
+// 640 ms after the tap; each stays within the budget, and the chain ends well
+// inside `autoAdvance`. The round-over celebration and the home lockup are
+// the one carve-out from the rule; see `strikeTiming`/`resultsTimeline` below.
 export const durations = {
   press: 100,
   reveal: 180,

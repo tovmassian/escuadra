@@ -2,8 +2,9 @@
 // input arrives as a parameter (roster, level, seed) and every random choice
 // routes through the injected RNG, so `buildRound` is deterministic per seed
 // and trivially unit-testable. This is the piece most likely to need
-// iteration, per CLAUDE.md, and distractor quality is what makes or breaks
-// the whole game: wrong options must be genuinely confusable, not random.
+// iteration (.claude/rules/quiz.md), and distractor quality is what makes or
+// breaks the whole game: wrong options must be genuinely confusable, not
+// random.
 import { getAge } from './age';
 import { createRng, shuffle } from './prng';
 import { ROUND_LENGTH } from './scoring';

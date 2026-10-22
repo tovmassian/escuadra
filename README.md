@@ -7,18 +7,9 @@ Zustand, Reanimated. Light and dark themes, following the device setting by defa
 
 Runs in **Expo Go** for local development — no Xcode, no Apple Developer account, no native build.
 
-## App Store release
+## Releases
 
-Escuadra 1.0.0 is live on the
-[**App Store**](https://apps.apple.com/us/app/escuadra/id6810705505); Google
-Play follows once its closed test and production review finish (see
-[#41](https://github.com/tovmassian/escuadra/issues/41)). Shipping to the store
-is a separate track from the Expo Go development flow above: it needs an
-[EAS](https://docs.expo.dev/eas/) build, not Xcode, and JS-only fixes to a
-shipped version go out as over-the-air updates — see
-[`docs/release.md`](docs/release.md). The marketing site and the privacy
-and support pages for the store listings are published from the
-[`gh-pages`](https://github.com/tovmassian/escuadra/tree/gh-pages) branch.
+Escuadra is on the [**App Store**](https://apps.apple.com/us/app/escuadra/id6810705505). What each version shipped is in [`CHANGELOG.md`](CHANGELOG.md); how a change reaches users, as an over-the-air update or a store build, is [`docs/release.md`](docs/release.md). The marketing site and the privacy and support pages are published from the [`gh-pages`](https://github.com/tovmassian/escuadra/tree/gh-pages) branch.
 
 ## Setup
 
@@ -73,13 +64,14 @@ Useful keys in the Metro terminal: `r` reload · `m` dev menu · `j` DevTools ·
 
 ## Scripts
 
-| Script                 | Does                                                |
-| ---------------------- | --------------------------------------------------- |
-| `npm run check`        | typecheck + lint + format check — the pre-push gate |
-| `npm run typecheck`    | `tsc --noEmit`                                      |
-| `npm run lint`         | `expo lint`                                         |
-| `npm run format`       | Prettier, write mode                                |
-| `npm run format:check` | Prettier, verify only                               |
+| Script                 | Does                                                                                                                                    |
+| ---------------------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| `npm run check`        | typecheck, lint, format check, tests, squadctl's registry check and the generated-file diffs: everything CI runs, and the pre-push gate |
+| `npm test`             | Vitest, once                                                                                                                            |
+| `npm run typecheck`    | `tsc --noEmit`                                                                                                                          |
+| `npm run lint`         | `expo lint`                                                                                                                             |
+| `npm run format`       | Prettier, write mode                                                                                                                    |
+| `npm run format:check` | Prettier, verify only                                                                                                                   |
 
 A husky `pre-push` hook runs `npm run check`, so nothing reaches the remote with
 broken types, lint errors or unformatted code. `git push --no-verify` bypasses it
@@ -92,22 +84,20 @@ in an emergency. Hooks install themselves through the `prepare` script on
 app/          expo-router routes (files = routes)
 components/   shared UI; ui/ holds primitives
 data/         static squad JSON
-lib/          pure logic — no React, no store imports
+lib/          logic: pure modules are unit-tested; the few that wrap a native API keep their decisions in a pure sibling
+i18n/         the catalogs and translations
+scripts/      generators, CI logic and evals
+tools/        squadctl
 stores/       Zustand: progress (persisted), session (ephemeral)
 theme/        design tokens + font map
 types/        shared domain types
 ```
 
-`lib/` stays pure so the question engine and answer matching are unit-testable
-without a renderer.
+`lib/questionEngine.ts` stays pure, so the question engine is unit-testable without a renderer.
 
 ## Constraints worth knowing
 
-- **Pinned to SDK 57 on purpose.** The pin tracks whatever the App Store build
-  of Expo Go supports — currently 57 — not the newest SDK. Drifting in either
-  direction gives `Project is incompatible with this version of Expo Go`, which
-  is what forced the 54 → 57 upgrade when Expo Go moved. Escaping this coupling
-  means moving to a dev client, which is a v1 decision.
+- **Pinned to SDK 57 on purpose.** The binary in the stores is SDK 57, and an SDK upgrade changes the native runtime, which invalidates every over-the-air update path and forces a new build and submission. An SDK upgrade is a release decision.
 - **Fonts load at runtime** via `useFonts` in `app/_layout.tsx`. Expo Go cannot
   use the expo-font config plugin — that needs a prebuild.
 - **Import fonts from per-weight subpaths** (`@expo-google-fonts/inter/700Bold`),

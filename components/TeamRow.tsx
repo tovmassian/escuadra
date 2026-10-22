@@ -14,7 +14,7 @@ interface TeamRowProps {
   season: string;
   /** A nation's flag image, which replaces the geometric marker for
    *  `kind: 'nation'` rows. Absent for clubs, which never get one — see
-   *  CLAUDE.md hard constraint #2. Null means the nationality isn't in
+   *  CLAUDE.md guardrail 2. Null means the nationality isn't in
    *  lib/flags.ts's table, and the row falls back to the marker. */
   flag?: FlagCode | null;
   /** `undefined` while the persisted store is still hydrating — "not yet
