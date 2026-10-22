@@ -276,12 +276,14 @@ export const fr: Messages = {
     },
     studySquad: 'Réviser l’effectif',
     updated: (date: string) => `Mis à jour le ${date} · Wikipédia`,
-    heading: 'L’échelle',
+    heading: 'Les paliers',
     nationalTeam: 'Sélection',
     cleared: 'Validé',
     notPlayed: 'Pas encore joué',
     yourBest: (correct: number, total: number) => `Ton record · ${correct}/${total}`,
     yourBestSpoken: (correct: number, total: number) => `Ton record : ${correct} sur ${total}`,
+    // The article is dropped to fit the 16-char budget: "Jouer niveau 3", not
+    // "Jouer le niveau 3".
     playLevel: (level: number) => `Jouer niveau ${level}`,
     rungCleared: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} sur ${total}, validé`,

@@ -260,14 +260,14 @@ export const it: Messages = {
       },
       3: {
         title: 'Profilo completo',
-        descriptionClub: 'Il nome tra 6 opzioni, poi il ruolo, poi la nazionalità.',
-        descriptionNation: 'Il nome tra 6 opzioni, poi il ruolo, poi il club.',
+        descriptionClub: 'Scegli il nome tra 6 opzioni, poi il ruolo, poi la nazionalità.',
+        descriptionNation: 'Scegli il nome tra 6 opzioni, poi il ruolo, poi il club.',
       },
     },
     studySquad: 'Ripassa la rosa',
     // Not "Aggiornato il": "il 8 set" and "il 11 set" need elision.
     updated: (date: string) => `Aggiornato: ${date} · Wikipedia`,
-    heading: 'La scala',
+    heading: 'I livelli',
     nationalTeam: 'Nazionale',
     cleared: 'Superato',
     notPlayed: 'Non ancora giocato',
