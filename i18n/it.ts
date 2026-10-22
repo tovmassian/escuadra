@@ -309,7 +309,7 @@ export const it: Messages = {
     title: 'Info',
     // Escuadra is "l’app", so feminine: "affiliata", "approvata".
     intro: [
-      `${ESCUADRA} è un’app indipendente e non ufficiale. Non è affiliata né associata alla FIFA, alla UEFA, ad alcuna lega, ad alcuna federazione calcistica nazionale o ad alcun club, e non è approvata da nessuno di essi. I nomi dei club e delle nazionali sono usati solo a scopo identificativo e restano di proprietà dei rispettivi titolari. Inoltre, ${ESCUADRA} non è affiliata alla Wikimedia Foundation né ad alcun giocatore che compare in una foto, e non è approvata da nessuno di essi.`,
+      `${ESCUADRA} è un’app indipendente e non ufficiale. Non è affiliata né associata alla FIFA, alla UEFA o ad altre confederazioni, ad alcuna lega, ad alcuna federazione calcistica nazionale o ad alcun club, e non è approvata da nessuno di essi. I nomi dei club, delle nazionali e delle confederazioni sono usati solo a scopo identificativo e restano di proprietà dei rispettivi titolari. Inoltre, ${ESCUADRA} non è affiliata alla Wikimedia Foundation né ad alcun giocatore che compare in una foto, e non è approvata da nessuno di essi.`,
       `${ESCUADRA} identifica le squadre con il loro nome e i loro colori, e di per sé non mostra mai stemmi, emblemi o loghi dei club. Una foto di un giocatore può comunque mostrarne uno, su una maglia o sullo sfondo, perché fa parte della foto originale. Quei segni distintivi appartengono ai rispettivi titolari, e la loro presenza non significa che un club, uno sponsor o un marchio approvi ${ESCUADRA}.`,
     ],
     credits: {
