@@ -48,7 +48,7 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
     },
   },
   { budget: 20, texts: { 'settings.vibration': (m) => m.settings.vibration } },
-  { budget: 24, texts: { 'settings.usageStatistics': (m) => m.settings.usageStatistics } },
+  { budget: 28, texts: { 'settings.usageStatistics': (m) => m.settings.usageStatistics } },
   { budget: 56, texts: { 'settings.usageNote': (m) => m.settings.usageNote } },
   { budget: 24, texts: { 'settings.rate.title': (m) => m.settings.rate.title } },
   { budget: 48, texts: { 'settings.rate.line': (m) => m.settings.rate.line } },

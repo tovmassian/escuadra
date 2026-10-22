@@ -94,7 +94,7 @@ export const en = {
     appearanceOptions: { system: 'Match phone', dark: 'Dark', light: 'Light' },
     /** ≤ 20 chars: the row's label and the switch's spoken name. */
     vibration: 'Vibration',
-    /** ≤ 24 chars: the row's label and the switch's spoken name. */
+    /** ≤ 28 chars: the row's label and the switch's spoken name. */
     usageStatistics: USAGE_STATISTICS,
     /** ≤ 56 chars: the line under Usage statistics. */
     usageNote: 'Anonymous. About says exactly what is sent.',

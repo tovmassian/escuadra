@@ -86,7 +86,7 @@ export const it: Messages = {
     examMode: {
       title: 'Modalità esame',
       line: 'Tutta la rosa, solo con i numeri di maglia.',
-      soon: 'Presto',
+      soon: 'A breve',
     },
     // "Info" is the About screen's short title; the row has room for the
     // usual "Informazioni su".

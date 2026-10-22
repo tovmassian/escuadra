@@ -46,8 +46,7 @@ const MONTHS_LONG = [
 const PHOTO_CREDITS = 'Crédits photo';
 // Feminine: it is the photo that is cropped.
 const CROPPED = 'recadrée';
-// "Statistiques d’utilisation" is 26 chars against the switch's 24.
-const USAGE_STATISTICS = 'Statistiques d’usage';
+const USAGE_STATISTICS = 'Statistiques d’utilisation';
 
 export const fr: Messages = {
   common: {
@@ -93,7 +92,7 @@ export const fr: Messages = {
     vibration: 'Vibrations',
     usageStatistics: USAGE_STATISTICS,
     // Feminine plural: the statistics.
-    usageNote: 'Anonymes. « À propos » dit exactement ce qui est envoyé.',
+    usageNote: 'Anonymes. « À propos » précise ce qui est envoyé.',
     rate: {
       title: `Noter ${ESCUADRA}`,
       line: 'Ta note aide d’autres fans à trouver l’appli.',

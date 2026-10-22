@@ -87,7 +87,7 @@ export const es: Messages = {
     rate: {
       title: `Valora ${ESCUADRA}`,
       // "Así": the title above says how.
-      line: 'Así otros aficionados encuentran la app.',
+      line: 'Así ayudas a otros aficionados a encontrarla.',
       button: 'Valorar',
     },
     examMode: {
