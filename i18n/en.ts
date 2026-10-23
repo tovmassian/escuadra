@@ -335,6 +335,8 @@ export const en = {
     /** A 10/10 compact rung, spoken. "a la escuadra" is never translated. */
     rungEscuadra: (title: string, correct: number, total: number) =>
       `${title}, best ${correct} of ${total}, ${A_LA_ESCUADRA}`,
+    /** Spoken: Difficulty's star toggle (#179), read with its state, "on" or "off". */
+    star: 'One of your squads',
   },
   picker: {
     /** ≤ 6 chars: the league pill that clears the filter. */
@@ -373,6 +375,8 @@ export const en = {
     clearSearch: 'Clear search',
     noTeams: 'No teams found',
     noResults: (query: string) => `No results for "${query}"`,
+    /** ≤ 22 chars: the caption over the tab's starred teams (#179), in mono capitals. */
+    yourSquads: 'Your squads',
   },
   store: {
     /** The Play Store feature graphic's tagline (#147 localises the graphic). */
@@ -464,8 +468,8 @@ export const en = {
         {
           heading: 'What is stored on your device',
           paragraphs: [
-            `${ESCUADRA} saves nine things locally, on your device: your best score for each team and difficulty level, from which it works out which levels you have completed; the last team and level you played; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; which app version last asked your phone to show a rating prompt; your choice about usage statistics; and the random identifier those statistics use. The app-update check also keeps its own random identifier on your device.`,
-            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of those nine things off your device, and only while usage statistics are on: the identifier, which is sent in hashed form with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
+            `${ESCUADRA} saves ten things locally, on your device: your best score for each team and difficulty level, from which it works out which levels you have completed; the last team and level you played; the teams you have starred; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; which app version last asked your phone to show a rating prompt; your choice about usage statistics; and the random identifier those statistics use. The app-update check also keeps its own random identifier on your device.`,
+            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of those ten things off your device, and only while usage statistics are on: the identifier, which is sent in hashed form with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
           ],
         },
         {

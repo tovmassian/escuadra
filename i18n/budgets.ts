@@ -168,6 +168,7 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 16, texts: { 'picker.allClubs': (m) => m.picker.allClubs } },
   { budget: 6, texts: { 'picker.allConfederations': (m) => m.picker.allConfederations } },
   { budget: 22, texts: { 'picker.allNations': (m) => m.picker.allNations } },
+  { budget: 22, texts: { 'picker.yourSquads': (m) => m.picker.yourSquads } },
   { budget: 16, texts: { 'about.licences.label': (m) => m.about.licences.label } },
   {
     budget: 24,
