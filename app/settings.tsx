@@ -1,13 +1,17 @@
 import Constants from 'expo-constants';
+import * as Crypto from 'expo-crypto';
+import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import * as Updates from 'expo-updates';
 import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { EraserGlyph } from '@/components/ActionGlyphs';
 import { AppearanceControl } from '@/components/AppearanceControl';
 import { BrandGradient } from '@/components/BrandGradient';
 import { EscuadraMark } from '@/components/EscuadraMark';
 import { LanguageSheet } from '@/components/LanguageSheet';
+import { ResetSheet } from '@/components/ResetSheet';
 import { RoundBackButton } from '@/components/RoundBackButton';
 import {
   BookGlyph,
@@ -24,6 +28,7 @@ import { SettingsRow, SettingsSection } from '@/components/SettingsSection';
 import { SoonChip } from '@/components/SoonChip';
 import { LANGUAGE_NAMES } from '@/i18n/names';
 import { useLanguage, useT } from '@/i18n/useT';
+import { scoreSummary } from '@/lib/reset';
 import { versionLabel } from '@/lib/settingsView';
 import { openStorePage } from '@/lib/storeReview';
 import { useProgress } from '@/stores/progress';
@@ -42,7 +47,11 @@ export default function Settings() {
   const setHaptics = useProgress((s) => s.setHaptics);
   const telemetryEnabled = useProgress((s) => s.telemetryEnabled);
   const setTelemetryEnabled = useProgress((s) => s.setTelemetryEnabled);
+  const summary = scoreSummary(useProgress((s) => s.bestScores));
+  const starredCount = useProgress((s) => s.starredSquads.length);
+  const reset = useProgress((s) => s.reset);
   const [languageOpen, setLanguageOpen] = useState(false);
+  const [sheet, setSheet] = useState<'scores' | 'app' | null>(null);
   const version = Constants.expoConfig?.version ?? '—';
   const glyph = colors.textSecondary;
   const g = sizes.settings;
@@ -85,6 +94,14 @@ export default function Settings() {
     },
     version: { ...typography.statMonoTiny, color: colors.textMuted },
   });
+
+  // Reset Escuadra (#197): the photo caches, then the store, then Home. A cache
+  // that fails to clear is not worth stopping the reset for.
+  const resetApp = () => {
+    void Promise.all([Image.clearDiskCache(), Image.clearMemoryCache()]).catch(() => {});
+    useProgress.getState().factoryReset(Crypto.randomUUID());
+    router.dismissTo('/');
+  };
 
   const switchProps = {
     trackColor: { false: colors.surfaceRaised, true: colors.brandBright },
@@ -241,6 +258,30 @@ export default function Settings() {
           />
         </SettingsSection>
 
+        <SettingsSection label={t.settings.sections.yourData}>
+          <SettingsRow
+            testID="settings-clear-scores"
+            icon={<EraserGlyph color={summary.scores > 0 ? glyph : colors.textMuted} />}
+            label={t.reset.all.row}
+            note={t.reset.all.note}
+            muted={summary.scores === 0}
+            onPress={summary.scores > 0 ? () => setSheet('scores') : undefined}
+            accessory={
+              summary.scores > 0 ? <Text style={styles.value}>{summary.scores}</Text> : undefined
+            }
+            danger
+          />
+          <SettingsRow
+            last
+            testID="settings-reset"
+            icon={<EscuadraMark size={g.footerMark} color={glyph} />}
+            label={t.reset.app.row}
+            note={t.reset.app.note}
+            onPress={() => setSheet('app')}
+            danger
+          />
+        </SettingsSection>
+
         <View style={styles.footer}>
           <View importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
             <EscuadraMark size={g.footerMark} color={colors.mark} />
@@ -261,6 +302,45 @@ export default function Settings() {
         </View>
       </ScrollView>
       <LanguageSheet visible={languageOpen} onClose={() => setLanguageOpen(false)} />
+      <ResetSheet
+        visible={sheet === 'scores'}
+        onClose={() => setSheet(null)}
+        testID="clear-scores"
+        title={t.reset.all.title}
+        line={t.reset.all.line}
+        clears={[
+          {
+            label: t.reset.team.bestScores,
+            value: t.reset.all.count(summary.scores, summary.teams),
+          },
+        ]}
+        keeps={t.reset.all.keepsLine}
+        confirmLabel={t.reset.all.confirm(summary.scores)}
+        onConfirm={reset}
+      />
+      <ResetSheet
+        visible={sheet === 'app'}
+        onClose={() => setSheet(null)}
+        testID="reset-app"
+        title={t.reset.app.title}
+        line={t.reset.app.line}
+        clears={[
+          {
+            label: t.reset.app.scores,
+            value: summary.scores > 0 ? String(summary.scores) : undefined,
+          },
+          {
+            label: t.reset.app.starred,
+            value: starredCount > 0 ? String(starredCount) : undefined,
+          },
+          { label: t.reset.app.preferences },
+          { label: t.reset.app.tips },
+          { label: t.reset.app.photos },
+        ]}
+        keeps={t.reset.app.keepsLine}
+        confirmLabel={t.reset.app.row}
+        onConfirm={resetApp}
+      />
     </View>
   );
 }
