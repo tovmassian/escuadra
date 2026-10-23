@@ -464,6 +464,20 @@ export const typography = {
     fontSize: 28,
     letterSpacing: -0.56,
   },
+  // The launch intro (#182): the lockup's word at 46 / −1, the "A LA ESCUADRA"
+  // tagline under it.
+  introWordmark: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 46,
+    letterSpacing: -1,
+  },
+  introTagline: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 12,
+    letterSpacing: 3,
+    textTransform: 'uppercase' as const,
+  },
   // Filter-pill labels.
   filterLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },
   // The in-round banner's shirt number (Results).
@@ -822,7 +836,9 @@ export const typography = {
 // everything else on the screen scales freely and the screen scrolls.
 // The picker's letter rail (`LetterRail`) sets each letter in a fixed 14 pt
 // slot (`sizes.rail.letter`), which its touch mapping relies on, so its 10 pt
-// letters may grow only a little before they outgrow the slot.
+// letters may grow only a little before they outgrow the slot. The launch
+// intro's text (`LaunchIntro`) sits under a fixed 200 dp mark on one screen
+// that never scrolls, so it takes the display cap too.
 export const fontScaleCap = { display: 1.2, rail: 1.1 } as const;
 
 // 1.5px is the option-card default; 2px marks the emphasised "correct,
@@ -850,9 +866,10 @@ export const opacity = {
 // §2.4; a tap skips it, and it never runs with a screen reader on). A goal
 // chains its beats (the shot, then the corner's kick and ring) to about
 // 640 ms after the tap; each stays within the budget, and the chain ends well
-// inside `autoAdvance`. The round-over celebration is the other carve-out from
-// the rule; see `strikeTiming`/`resultsTimeline` below.
+// inside `autoAdvance`. The round-over celebration is a carve-out from the
+// rule; see `strikeTiming`/`resultsTimeline` below.
 // `numberWall.speed`, the wall's drift, is not timed and is not in `durations` (#181).
+// The launch intro (#182) is a carve-out too: see `launchIntro`.
 export const durations = {
   press: 100,
   reveal: 180,
@@ -1035,6 +1052,56 @@ export const resultsTimeline = {
   reviewPrompt: t(2000),
 } as const;
 
+// The launch intro, "the strike" (#182; the 2.0 canvas's OpenStrike artboard). ms
+// from the first frame, read off the canvas's 4 s CSS loop at 40 ms per percent.
+// Distances are in mark units (`MARK_VIEWBOX`), so the strike scales with the mark:
+// the canvas draws the mark at 200 dp, 3.125 dp a unit. A written exception
+// to the 300 ms rule (owner approved, 2026-10-22). One change from
+// the canvas: the colour comes back at 1000–1200, not 1120–1360, so the end
+// frame is whole as the tagline settles (spec, Timeline).
+export const launchIntro = {
+  // The ball pops in off-screen, bottom left, then flies to the corner: x
+  // straight, y on `curve`, so it arcs; it shrinks from `scale` to 1.
+  ballIn: { at: 280, duration: 20 },
+  flight: {
+    at: 300,
+    duration: 400,
+    curve: [0.15, 0.6, 0.35, 1],
+    from: { x: -78, y: 151 },
+    scale: 1.6,
+  },
+  // As the ball passes, each trail square shows. Indexed as `markGeometry.trail`:
+  // [0] the near one, [1] the far one, which the ball passes first.
+  trail: [
+    { at: 600, duration: 40 },
+    { at: 540, duration: 40 },
+  ],
+  // The goal: frame and ball turn `success`, a ring flashes out from the ball
+  // (scale × the ball, starting opacity, `stroke` in units: the canvas's 3 px),
+  // and the frame kicks by (+offset, −offset) mark units: right and up; `rise`
+  // and `settle` in ms.
+  flash: { at: 680, duration: 40 },
+  ring: { at: 700, duration: 300, from: 0.6, to: 2.8, opacity: 0.9, stroke: 0.96 },
+  kick: { at: 700, rise: 80, settle: 140, offset: 1.92 },
+  // The end frame: the wordmark rises `rise` dp in, the tagline fades in, the
+  // colour comes back to `mark`.
+  wordmark: { at: 800, duration: 260, rise: 16 },
+  tagline: { at: 1000, duration: 200 },
+  colourBack: { at: 1000, duration: 200 },
+  // Then the lockup docks into Home's top bar over `dock.duration` (spec,
+  // Hand-off to Home): the trail and tagline clear in `clear`, the ground
+  // fades, the mark and word glide to Home's, and Home's content rises in from
+  // `contentDelay`. The word sets off `wordDelay` after the mark and lands
+  // with it, so it rises clear of the mark's foot instead of under it. The
+  // fallbacks (no Home to dock into, Reduce Motion's end frame held until
+  // `end`, a tap) fade the whole intro over `fadeOut` instead. Measuring the
+  // two lockups gets `measureTimeout` (a few frames); past it, the intro fades
+  // rather than wait on a callback that may never come.
+  end: 1200,
+  dock: { duration: 300, clear: 100, contentDelay: 80, wordDelay: 40, measureTimeout: 100 },
+  fadeOut: 200,
+} as const;
+
 export const sizes = {
   // The shirt-number column of a Study list row.
   studyColumn: { no: 26 },
@@ -1059,6 +1126,8 @@ export const sizes = {
   wordmarkMark: 28,
   // The feature graphic's large mark (`app/store/feature-graphic.tsx`).
   wordmarkMarkHero: 86,
+  // The launch intro's mark (#182).
+  introMark: 200,
   // A 10/10's player circles.
   rosterAvatar: 54,
   // ---- 2.0 spotlight screens (spec §2, §3, §5, §8) ----

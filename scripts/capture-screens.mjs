@@ -20,6 +20,7 @@ import { killServerTree, startExpoWeb, waitForServer } from './dev-server.mjs';
 import {
   assertProfileDimensions,
   outDirFor,
+  PROFILES,
   readJpegDimensions,
   readPngDimensions,
   resolveLanguageArg,
@@ -142,10 +143,15 @@ async function openCapture(browser, { colorScheme, suffix }) {
       }
     },
 
-    /** Navigate, wait out the entry animation, and confirm the client is alive. */
+    /**
+     * Navigate, wait out the entry animation, and confirm the client is alive.
+     * Each load is a new launch that replays the launch intro (#182) over the
+     * screen, so wait until it has left the page too: no shot can catch it.
+     */
     async open(path) {
       await page.goto(`${BASE}${path}`, { waitUntil: 'networkidle' });
       await page.waitForTimeout(SETTLE_MS);
+      await page.getByTestId('launch-intro').waitFor({ state: 'detached' });
       capture.assertLive();
     },
 
@@ -491,6 +497,37 @@ async function openHomeStill(capture) {
   await capture.page.emulateMedia({ reducedMotion: 'no-preference' });
 }
 
+/**
+ * The launch intro's end frame (#182). Under emulated Reduce Motion it holds
+ * still until `launchIntro.end` (1,200 ms) after the app is ready, so shoot as
+ * soon as it shows instead of waiting out `SETTLE_MS`, which outlasts it. Not
+ * through `capture.shoot`, whose image wait and settle would also outlast it,
+ * and so not checked against a store's dimensions: a launch frame is not a
+ * listing shot, so only the design handoff takes it.
+ */
+async function shootLaunchIntro(capture) {
+  if (PROFILE !== PROFILES.design) return;
+  await capture.page.emulateMedia({ reducedMotion: 'reduce' });
+  await capture.page.goto(`${BASE}/`, { waitUntil: 'domcontentloaded' });
+  await capture.page.getByTestId('launch-intro').waitFor({ state: 'visible' });
+  capture.assertLive();
+  const file = capture.file('00-launch-intro');
+  await capture.page.screenshot({
+    path: `${OUT_DIR}/${file}`,
+    type: PROFILE.format,
+    ...(PROFILE.format === 'jpeg' ? { quality: 92 } : {}),
+  });
+  // A shot that raced into the fade would be a faded frame: fail it loudly.
+  const opacity = await capture.page
+    .getByTestId('launch-intro')
+    .evaluate((el) => getComputedStyle(el).opacity);
+  if (opacity !== '1') {
+    throw new Error(`00-launch-intro: the intro was fading (opacity ${opacity}) as it was shot`);
+  }
+  console.log(`captured ${file}`);
+  await capture.page.emulateMedia({ reducedMotion: 'no-preference' });
+}
+
 // ---------------------------------------------------------------------------
 // A full pass
 // ---------------------------------------------------------------------------
@@ -517,6 +554,7 @@ async function captureTheme(browser, colorScheme, suffix) {
       }
     }
 
+    await shootLaunchIntro(capture);
     await openHomeStill(capture);
     await capture.shoot('01-home');
 

@@ -4,6 +4,7 @@ import {
   cardGradient,
   durations,
   gradients,
+  launchIntro,
   MOTION_TIME_SCALE,
   palettes,
   resultsTimeline,
@@ -340,7 +341,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(33);
+    expect(archivo).toHaveLength(34);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }
@@ -512,5 +513,68 @@ describe('cardGradient', () => {
       expect(at).toBeLessThanOrEqual(1);
       if (i > 0) expect(at).toBeGreaterThan(cardGradient.locations[i - 1] ?? 1);
     });
+  });
+});
+
+describe('launch intro motion', () => {
+  // #182: the canvas's timeline, in ms from the first frame.
+  const {
+    ballIn,
+    flight,
+    trail,
+    flash,
+    ring,
+    kick,
+    wordmark,
+    tagline,
+    colourBack,
+    end,
+    dock,
+    fadeOut,
+  } = launchIntro;
+  const ends = [
+    ballIn.at + ballIn.duration,
+    flight.at + flight.duration,
+    ...trail.map((t) => t.at + t.duration),
+    flash.at + flash.duration,
+    ring.at + ring.duration,
+    kick.at + kick.rise + kick.settle,
+    wordmark.at + wordmark.duration,
+    tagline.at + tagline.duration,
+    colourBack.at + colourBack.duration,
+  ];
+
+  it('has every beat over by the time the intro fades', () => {
+    expect(Math.max(...ends)).toBeLessThanOrEqual(end);
+  });
+
+  it('starts the ring as the ball lands, and ends the flash before the colour comes back', () => {
+    expect(flight.at + flight.duration).toBeLessThanOrEqual(ring.at);
+    expect(flash.at + flash.duration).toBeLessThanOrEqual(colourBack.at);
+  });
+
+  it('passes the far trail square before the near one', () => {
+    const [near, far] = trail;
+    expect(far.at).toBeLessThan(near.at);
+  });
+
+  it('hands over to Home within about a second and a half', () => {
+    expect(end + dock.duration).toBeLessThanOrEqual(1500);
+    expect(end + fadeOut).toBeLessThanOrEqual(1500);
+  });
+
+  it('clears the trail and starts Home rising within the dock', () => {
+    expect(dock.clear).toBeLessThan(dock.duration);
+    expect(dock.contentDelay).toBeLessThan(dock.duration);
+  });
+
+  it('sets the word off after the mark, landing with it inside the dock', () => {
+    expect(dock.wordDelay).toBeGreaterThan(0);
+    expect(dock.wordDelay).toBeLessThan(dock.duration);
+  });
+
+  it('gives up measuring within a few frames, well before a fade would be late', () => {
+    expect(dock.measureTimeout).toBeGreaterThan(0);
+    expect(dock.measureTimeout).toBeLessThan(dock.duration);
   });
 });
