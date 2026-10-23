@@ -29,11 +29,13 @@
 ### Task 1: Tokens, palette roles and the motion exception
 
 **Files:**
+
 - Modify: `theme/tokens.ts`
 - Modify: `.claude/rules/design-tokens.md` (Motion section)
 - Create: `theme/__tests__/numberWall.test.ts`
 
 **Interfaces:**
+
 - Produces, in `theme/tokens.ts`:
   - `Palette.wallLine: string` (dark `#33353a`, light `#d7d8da`), `Palette.backgroundClear: string` (dark `rgba(18,20,26,0)`, light `rgba(247,247,249,0)`), `Palette.ctaLine: string` (dark `rgba(20,22,26,0.14)`, light `rgba(255,255,255,0.16)`)
   - `numberWall: { fontSize: 150; rowHeight: 129; baseline: 115; advance: Record<'0'|…|'9', number>; tracking: 4; gap: 25; stroke: 1.5; speed: 50 }`
@@ -84,7 +86,10 @@ function advances(file: string, chars: string): Record<string, number> {
     return 0;
   };
   return Object.fromEntries(
-    [...chars].map((ch) => [ch, b.readUInt16BE(hmtx + Math.min(glyph(ch.charCodeAt(0)), metrics - 1) * 4)]),
+    [...chars].map((ch) => [
+      ch,
+      b.readUInt16BE(hmtx + Math.min(glyph(ch.charCodeAt(0)), metrics - 1) * 4),
+    ]),
   );
 }
 
@@ -103,21 +108,21 @@ describe('numberWall', () => {
   1. Add to the `Palette` interface, after `markerRing`:
 
 ```ts
-  // ---- 2.0 Home (#181) ----
-  /** The outline of Home's drifting shirt numbers: the canvas's 14%
-   *  `textPrimary` over `background`, made opaque. */
-  wallLine: string;
-  /** `background` at no opacity: the clear end of Home's fades. A plain
-   *  `transparent` would fade through black on iOS. */
-  backgroundClear: string;
-  /** The ring round a flag or marker on `ctaBg` (Home's Continue), so a
-   *  white flag or club colour doesn't bleed into the button. */
-  ctaLine: string;
+// ---- 2.0 Home (#181) ----
+/** The outline of Home's drifting shirt numbers: the canvas's 14%
+ *  `textPrimary` over `background`, made opaque. */
+wallLine: string;
+/** `background` at no opacity: the clear end of Home's fades. A plain
+ *  `transparent` would fade through black on iOS. */
+backgroundClear: string;
+/** The ring round a flag or marker on `ctaBg` (Home's Continue), so a
+ *  white flag or club colour doesn't bleed into the button. */
+ctaLine: string;
 ```
 
-  2. Add `wallLine: '#33353a', backgroundClear: 'rgba(18,20,26,0)', ctaLine: 'rgba(20,22,26,0.14)',` at the end of `darkRoles`, and `wallLine: '#d7d8da', backgroundClear: 'rgba(247,247,249,0)', ctaLine: 'rgba(255,255,255,0.16)',` at the end of `lightRoles`.
+2. Add `wallLine: '#33353a', backgroundClear: 'rgba(18,20,26,0)', ctaLine: 'rgba(20,22,26,0.14)',` at the end of `darkRoles`, and `wallLine: '#d7d8da', backgroundClear: 'rgba(247,247,249,0)', ctaLine: 'rgba(255,255,255,0.16)',` at the end of `lightRoles`.
 
-  3. After `ladderHero`, add:
+3. After `ladderHero`, add:
 
 ```ts
 // Home's number wall (#181). Archivo ExtraCondensed Black at `fontSize`, rows
@@ -152,7 +157,7 @@ export const numberWall = {
 } as const;
 ```
 
-  4. In `typography`, after `ladderStudy`, add:
+4. In `typography`, after `ladderStudy`, add:
 
 ```ts
   // ---- 2.0 Home (#181) ----
@@ -182,7 +187,7 @@ export const numberWall = {
   homeHint: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 14 },
 ```
 
-  5. In `sizes`, after `rungNumberColumn`, add:
+5. In `sizes`, after `rungNumberColumn`, add:
 
 ```ts
   // Home (#181): Continue's least height, its flag or marker and its play
@@ -200,7 +205,7 @@ export const numberWall = {
   },
 ```
 
-  6. In `iconSize`, after `outdatedNote`, add `starHint: 16, // the star before Home's first-run hint (#181)`.
+6. In `iconSize`, after `outdatedNote`, add `starHint: 16, // the star before Home's first-run hint (#181)`.
 
 - [ ] **Step 4: Run the test and check that it passes.** Run `npx vitest run theme/__tests__/numberWall.test.ts`. Expected: PASS.
 
@@ -227,10 +232,12 @@ git commit -m "feat(home): tokens for the number wall, and its motion exception 
 ### Task 2: The wall's layout (`lib/numberWall.ts`)
 
 **Files:**
+
 - Create: `lib/numberWall.ts`
 - Test: `lib/__tests__/numberWall.test.ts`
 
 **Interfaces:**
+
 - Consumes: `numberWall` from `@/theme/tokens` (Task 1).
 - Produces:
   - `type WallFill = 'primary' | 'mark'`
@@ -331,7 +338,12 @@ describe('WALL_ROWS', () => {
   });
 
   it('fills 7 and 19 in the primary ink and 10 in the mark’s, as the canvas does', () => {
-    expect(WALL_ROWS.map((r) => r.filled)).toEqual([{ 7: 'primary' }, { 10: 'mark' }, {}, { 19: 'primary' }]);
+    expect(WALL_ROWS.map((r) => r.filled)).toEqual([
+      { 7: 'primary' },
+      { 10: 'mark' },
+      {},
+      { 19: 'primary' },
+    ]);
   });
 });
 
@@ -440,12 +452,14 @@ git commit -m "feat(home): lay out the number wall's rows and their drift (#181)
 ### Task 3: Home's view model and its text
 
 **Files:**
+
 - Create: `lib/homeView.ts`
 - Modify: `lib/starred.ts`
 - Test: `lib/__tests__/homeView.test.ts`, `lib/__tests__/starred.test.ts`
 - Modify: `i18n/en.ts`, `i18n/de.ts`, `i18n/es.ts`, `i18n/fr.ts`, `i18n/it.ts`, `i18n/budgets.ts`
 
 **Interfaces:**
+
 - Consumes: `BestScore`, `isOutdated` (`lib/bestScore.ts`); `scoreKey`, `ROUND_LENGTH` (`lib/scoring.ts`); `Messages` (`i18n/en.ts`); `SquadManifestEntry` (`types/squad.ts`).
 - Produces:
   - `starredTeams(starred: readonly string[], squads: readonly SquadManifestEntry[]): SquadManifestEntry[]` in `lib/starred.ts`
@@ -470,7 +484,7 @@ describe('starredTeams', () => {
 });
 ```
 
-  Create `lib/__tests__/homeView.test.ts`:
+Create `lib/__tests__/homeView.test.ts`:
 
 ```ts
 import { describe, expect, it } from 'vitest';
@@ -573,7 +587,7 @@ export function starredTeams(
 }
 ```
 
-  Change `starredOfKind`'s `squads` parameter to `readonly SquadManifestEntry[]` only if the typecheck needs it.
+Change `starredOfKind`'s `squads` parameter to `readonly SquadManifestEntry[]` only if the typecheck needs it.
 
 - [ ] **Step 4: Add the catalog keys.** In `i18n/en.ts` `home`, after `browseAllTeams`, add:
 
@@ -588,7 +602,7 @@ export function starredTeams(
     starHint: 'Star a team and it waits for you here.',
 ```
 
-  In `i18n/budgets.ts`, after the `home.browseAllTeams` line, add:
+In `i18n/budgets.ts`, after the `home.browseAllTeams` line, add:
 
 ```ts
   { budget: 24, texts: { 'home.headline': (m) => m.home.headline } },
@@ -597,11 +611,12 @@ export function starredTeams(
   { budget: 52, texts: { 'home.starHint': (m) => m.home.starHint } },
 ```
 
-  Add the same four keys, in the same place and order, to each catalog. These are drafts; native speakers review them after Task 6. Keep each catalog's voice: `du` in de, `tú` in es, `tu` in fr, `tu` in it:
-  - `de.ts`: `headline: 'Kenne jede Nummer.'`, `continueTeam: (team: string) => \`Weiter mit ${team}\``, `allTeams: 'Alle Teams'`, `starHint: 'Markiere ein Team, dann wartet es hier auf dich.'`
-  - `es.ts`: `headline: 'Conoce cada dorsal.'`, `continueTeam: (team: string) => \`Seguir con ${team}\``, `allTeams: 'Todos los equipos'`, `starHint: 'Marca un equipo con la estrella y te esperará aquí.'`
-  - `fr.ts`: `headline: 'Connais chaque numéro.'`, `continueTeam: (team: string) => \`Continuer : ${team}\``, `allTeams: 'Toutes les équipes'`, `starHint: 'Ajoute une équipe en favori, elle t’attendra ici.'`. In France usage the colon takes a space before it. Write it as a narrow no-break space (U+202F) if the other fr strings in the catalog do; check `fr.ts`'s existing `' : '` usages and match them.
-  - `it.ts`: `headline: 'Conosci ogni numero.'`, `continueTeam: (team: string) => \`Continua con ${team}\``, `allTeams: 'Tutte le squadre'`, `starHint: 'Metti la stella a una squadra: ti aspetta qui.'`
+Add the same four keys, in the same place and order, to each catalog. These are drafts; native speakers review them after Task 6. Keep each catalog's voice: `du` in de, `tú` in es, `tu` in fr, `tu` in it:
+
+- `de.ts`: `headline: 'Kenne jede Nummer.'`, `continueTeam: (team: string) => \`Weiter mit ${team}\``, `allTeams: 'Alle Teams'`, `starHint: 'Markiere ein Team, dann wartet es hier auf dich.'`
+- `es.ts`: `headline: 'Conoce cada dorsal.'`, `continueTeam: (team: string) => \`Seguir con ${team}\``, `allTeams: 'Todos los equipos'`, `starHint: 'Marca un equipo con la estrella y te esperará aquí.'`
+- `fr.ts`: `headline: 'Connais chaque numéro.'`, `continueTeam: (team: string) => \`Continuer : ${team}\``, `allTeams: 'Toutes les équipes'`, `starHint: 'Ajoute une équipe en favori, elle t’attendra ici.'`. In France usage the colon takes a space before it. Write it as a narrow no-break space (U+202F) if the other fr strings in the catalog do; check `fr.ts`'s existing `' : '` usages and match them.
+- `it.ts`: `headline: 'Conosci ogni numero.'`, `continueTeam: (team: string) => \`Continua con ${team}\``, `allTeams: 'Tutte le squadre'`, `starHint: 'Metti la stella a una squadra: ti aspetta qui.'`
 
 - [ ] **Step 5: Implement** `lib/homeView.ts`:
 
@@ -685,11 +700,13 @@ git commit -m "feat(home): Home's view model and its text in five languages (#18
 ### Task 4: react-native-svg and the `NumberWall` component
 
 **Files:**
+
 - Modify: `package.json`, `package-lock.json` (through `npx expo install`)
 - Create: `components/NumberWall.tsx`, `components/useAppActive.ts`
 - Modify: `lib/licences.generated.ts` (through `npm run gen:licences`)
 
 **Interfaces:**
+
 - Consumes: `WALL_ROWS`, `layoutRow`, `rowOffset` (Task 2); `numberWall`, `typography`, `Palette.wallLine` (Task 1).
 - Produces: `NumberWall({ top }: { top: number })`, which fills the screen's width from `top` down, four rows tall, absolutely positioned; and `useAppActive(): boolean`.
 
@@ -789,7 +806,10 @@ function WallRow({
     progress.value = withSequence(
       withTiming(1, { ...linear, duration: (1 - progress.value) * period }),
       withRepeat(
-        withSequence(withTiming(0, { duration: 0 }), withTiming(1, { ...linear, duration: period })),
+        withSequence(
+          withTiming(0, { duration: 0 }),
+          withTiming(1, { ...linear, duration: period }),
+        ),
         -1,
       ),
     );
@@ -829,7 +849,7 @@ const styles = StyleSheet.create({
 });
 ```
 
-  `typography.shirtNumber.fontFamily` is `'Archivo-ExtraCondensedBlack'`, the face the wall is set in. If `npm run lint` flags `fill` or `stroke` as a shown prop, add `'fill'`, `'stroke'` to `SILENT_PROPS` in `eslint.config.js`. They are paint, never shown as text. If the hook-deps lint flags `row.phase`/`row.direction` inside `useAnimatedStyle`, read them into locals first, as `loopWidth` is.
+`typography.shirtNumber.fontFamily` is `'Archivo-ExtraCondensedBlack'`, the face the wall is set in. If `npm run lint` flags `fill` or `stroke` as a shown prop, add `'fill'`, `'stroke'` to `SILENT_PROPS` in `eslint.config.js`. They are paint, never shown as text. If the hook-deps lint flags `row.phase`/`row.direction` inside `useAnimatedStyle`, read them into locals first, as `loopWidth` is.
 
 - [ ] **Step 4: Regenerate the licence notices.** Run `npm run gen:licences`. Expected: `lib/licences.generated.ts` gains react-native-svg (MIT) only when the bundle uses it. Nothing imports `NumberWall` until Task 5, so this step may change nothing. Task 5 reruns it. If the generator refuses a licence, stop and report: widening the allowlist is the owner's decision.
 
@@ -847,6 +867,7 @@ git commit -m "feat(home): the drifting number wall, drawn with react-native-svg
 ### Task 5: The new Home screen, and the old one's leftovers removed
 
 **Files:**
+
 - Modify: `app/index.tsx` (rewrite)
 - Create: `components/HomeContinue.tsx`, `components/HomeSquads.tsx`
 - Modify: `components/Flag.tsx`, `components/TeamMarker.tsx`, `components/Wordmark.tsx`
@@ -856,6 +877,7 @@ git commit -m "feat(home): the drifting number wall, drawn with react-native-svg
 - Modify: `lib/licences.generated.ts` (`npm run gen:licences`)
 
 **Interfaces:**
+
 - Consumes: everything above. Also `useProgress`, `useProgressHydrated` (`stores/progress.ts`); `useSession().startRound`; `getSquad`, `getRoster`, `listSquads` (`lib/squads.ts`); `flagFor` (`lib/flags.ts`); `squadDisplayName` (`i18n/displayNames.ts`); `StarGlyph`, `OutdatedGlyph`, `PlayGlyph` (`components/ActionGlyphs.tsx`); `GearGlyph`, `ChevronGlyph` (`components/SettingsGlyphs.tsx`).
 - Produces: `FlagSize` gains `'continue' | 'squad'`; `TeamMarker`'s `variant` gains `'continue' | 'squad'` plus an optional `ringColor?: string`; `Wordmark()` takes no props.
 
@@ -886,7 +908,11 @@ import { Flag } from './Flag';
 import { TeamMarker } from './TeamMarker';
 import { useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
-import { continueMeta, continueSpoken, type HomeContinue as HomeContinueData } from '@/lib/homeView';
+import {
+  continueMeta,
+  continueSpoken,
+  type HomeContinue as HomeContinueData,
+} from '@/lib/homeView';
 import { iconSize, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
@@ -920,7 +946,12 @@ export function HomeContinue({
     },
     text: { flex: 1, minWidth: 0, gap: spacing.xxs / 2 },
     title: { ...typography.homeButton, color: colors.ctaText },
-    metaRow: { flexDirection: 'row', flexWrap: 'wrap', alignItems: 'center', columnGap: spacing.xxs },
+    metaRow: {
+      flexDirection: 'row',
+      flexWrap: 'wrap',
+      alignItems: 'center',
+      columnGap: spacing.xxs,
+    },
     meta: { ...typography.homeMeta, color: colors.ctaMuted },
     play: {
       width: sizes.home.play,
@@ -970,7 +1001,7 @@ export function HomeContinue({
 }
 ```
 
-  The `·` is a literal with no letters, so the lint allows it; the meta line already uses ` · `. If the lint still flags it, put it in a module-scope `const SEPARATOR = '·'`.
+The `·` is a literal with no letters, so the lint allows it; the meta line already uses `·`. If the lint still flags it, put it in a module-scope `const SEPARATOR = '·'`.
 
 - [ ] **Step 4: `components/HomeSquads.tsx`:**
 
@@ -1003,7 +1034,12 @@ export function HomeSquads({
   const t = useT();
   const language = useLanguage();
   const styles = StyleSheet.create({
-    row: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs, minHeight: sizes.minTapTarget },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs,
+      minHeight: sizes.minTapTarget,
+    },
     squads: { flex: 1 },
     squadsContent: { gap: spacing.xxs + 2 },
     squad: {
@@ -1095,15 +1131,7 @@ import { homeView } from '@/lib/homeView';
 import { getRoster, getSquad, listSquads } from '@/lib/squads';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import { useSession } from '@/stores/session';
-import {
-  borderWidths,
-  iconSize,
-  opacity,
-  radii,
-  sizes,
-  spacing,
-  typography,
-} from '@/theme/tokens';
+import { borderWidths, iconSize, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 // Home (#181): the number wall drifting behind "KNOW EVERY NUMBER.", then
@@ -1258,10 +1286,11 @@ export default function Home() {
 }
 ```
 
-  Notes:
-  - `LinearGradient`'s `pointerEvents` prop may be deprecated in RN 0.86. If the typecheck or a warning complains, move it into the style (`pointerEvents: 'none'`), as `NumberWall` does.
-  - Check the gaps against the canvas: 20 pt from the headline to the button, 16 pt from the button to the row. With `gap: spacing.md` and `marginBottom: spacing.xxs` on the headline, that is 20 and 16.
-  - If a first-run player with starred teams sees "All teams ›" next to START TRAINING, that is intended: spec, decision 3.
+Notes:
+
+- `LinearGradient`'s `pointerEvents` prop may be deprecated in RN 0.86. If the typecheck or a warning complains, move it into the style (`pointerEvents: 'none'`), as `NumberWall` does.
+- Check the gaps against the canvas: 20 pt from the headline to the button, 16 pt from the button to the row. With `gap: spacing.md` and `marginBottom: spacing.xxs` on the headline, that is 20 and 16.
+- If a first-run player with starred teams sees "All teams ›" next to START TRAINING, that is intended: spec, decision 3.
 
 - [ ] **Step 6: Remove what only the old Home used.** Run:
 
@@ -1295,11 +1324,13 @@ git commit -m "feat(home): the number-wall Home with Continue and Your squads (#
 ### Task 6: Screenshots and SCREENS.md
 
 **Files:**
+
 - Modify: `scripts/capture-screens.mjs`
 - Modify: `design/SCREENS.md`
 - Regenerate: `design/screens/*.png`
 
 **Interfaces:**
+
 - Consumes: the Home's testIDs `home-continue`, `home-start`, `home-all-teams`, `home-squad-<id>`, `home-settings`.
 
 - [ ] **Step 1: Add a `seedLastPlayed` helper** beside `seedStarred` in `scripts/capture-screens.mjs`:
@@ -1345,25 +1376,25 @@ async function openHomeStill(capture) {
 }
 ```
 
-  Replace `await capture.open('/');` before `capture.shoot('01-home')` with `await openHomeStill(capture);`. `01-home` is first run, since nothing is seeded yet.
+Replace `await capture.open('/');` before `capture.shoot('01-home')` with `await openHomeStill(capture);`. `01-home` is first run, since nothing is seeded yet.
 
 - [ ] **Step 3: Add the two returning shots** after `capture.shoot('03d-team-picker-nations-starred');`. At that point the store holds Armenia's outdated scores, Liverpool's current ones, and the starred `['arm', 'esp', 'rma', 'ars']`:
 
 ```js
-    // Home (#181), returning: Liverpool to continue at level 3 (8/10, current),
-    // and the four teams starred above. Then Armenia, whose level-3 best is
-    // outdated, with nothing starred, so the row is "All teams" alone. The
-    // rounds below write their own last-played, so nothing later sees these.
-    await seedLastPlayed(capture, 'liv', 3);
-    await openHomeStill(capture);
-    await capture.shoot('01e-home-returning');
-    await seedLastPlayed(capture, 'arm', 3);
-    await seedStarred(capture, []);
-    await openHomeStill(capture);
-    await capture.shoot('01f-home-outdated');
+// Home (#181), returning: Liverpool to continue at level 3 (8/10, current),
+// and the four teams starred above. Then Armenia, whose level-3 best is
+// outdated, with nothing starred, so the row is "All teams" alone. The
+// rounds below write their own last-played, so nothing later sees these.
+await seedLastPlayed(capture, 'liv', 3);
+await openHomeStill(capture);
+await capture.shoot('01e-home-returning');
+await seedLastPlayed(capture, 'arm', 3);
+await seedStarred(capture, []);
+await openHomeStill(capture);
+await capture.shoot('01f-home-outdated');
 ```
 
-  Then rewrite the `SETTLE_MS` comment, which named Home's letter cascade as the long pole: "The Results cascade (strip, strike, card rise) is the long pole." Keep the value 2200.
+Then rewrite the `SETTLE_MS` comment, which named Home's letter cascade as the long pole: "The Results cascade (strip, strike, card rise) is the long pole." Keep the value 2200.
 
 - [ ] **Step 4: Capture.** Run `npm run shots`. Expected: it ends without errors and rewrites `design/screens/`. Read the six Home PNGs (`01-home`, `01e-home-returning`, `01f-home-outdated`, each also `-light`) with the Read tool and compare them with the canvas's Home artboard:
   - the outlined wall with 7, 10 and 19 filled, fading out above the headline;

@@ -63,7 +63,6 @@ export const fr: Messages = {
     continueMeta: (level: number, best: number | undefined, total: number) =>
       best === undefined ? `NIVEAU ${level}` : `NIVEAU ${level} · RECORD ${best}/${total}`,
     startTraining: 'S’entraîner',
-    // "Voir toutes les équipes" is 23 chars against 20.
     headline: 'Retiens chaque numéro.',
     continueTeam: (team: string) => `Continuer : ${team}`,
     allTeams: 'Toutes les équipes',

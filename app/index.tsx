@@ -105,7 +105,12 @@ export default function Home() {
       gap: spacing.xs,
       minHeight: sizes.minTapTarget,
     },
-    hintText: { ...typography.homeHint, color: colors.textMuted, flexShrink: 1 },
+    hintText: {
+      ...typography.homeHint,
+      color: colors.textMuted,
+      flexShrink: 1,
+      textAlign: 'center',
+    },
   });
 
   return (
