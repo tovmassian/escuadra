@@ -53,7 +53,9 @@ The drift is ambient: slow, linear and endless, at 50 pt a second. It is the one
 300 ms rule doesn't fit, and the owner approved an exception (2026-10-22). It is written into
 `.claude/rules/design-tokens.md`'s Motion section, beside `autoAdvance`. It stops:
 
-- under Reduce Motion, where the wall stands still (`useReducedMotion()`);
+- under Reduce Motion, where the wall stands still. It is read live (`components/useReduceMotion.ts`):
+  seeded from Reanimated, then following `AccessibilityInfo`'s `reduceMotionChanged`, because
+  Reanimated's own hook reads the setting once, at load;
 - while the app is in the background (`AppState`);
 - while Home is not the focused screen (`useIsFocused`), which the issue doesn't ask for: Home
   stays mounted under the stack, and an unseen animation only costs battery.
@@ -62,10 +64,13 @@ It resumes from where it stopped.
 
 ## How the wall is drawn
 
-React Native text has no outline, so each row is one `react-native-svg` view of `<Text>`
-elements: `stroke` for the outline, and `fill` for the three filled numbers. The view is
-translated on the UI thread by Reanimated. Text in an SVG is drawn once into its view and moved
-without redrawing.
+React Native text has no outline, so each number is its own small `react-native-svg` view of one
+`<Text>`: `stroke` for the outline, and `fill` for the three filled numbers. The views sit inside
+the row's one view, which is translated on the UI thread by Reanimated. Text in an SVG is drawn
+once into its view and moved without redrawing. Each number gets its own view because
+react-native-svg on Android caches a view as one bitmap: a 2,000 pt row would be about 7,000 px
+on a 3.5× phone, past some GPUs' 4,096 px texture limit, and no drawn layer is now wider than a
+number.
 
 - **Each row's numbers are laid out in code,** with no measuring at run time. A pure function
   (`lib/numberWall.ts`) places each number at an x from the font's digit advances (Archivo's

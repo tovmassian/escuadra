@@ -139,8 +139,8 @@ export interface Palette {
   /** The ring round a 40 × 27 team marker in the picker. */
   markerRing: string;
   // ---- 2.0 Home (#181) ----
-  /** The outline of Home's drifting shirt numbers: the canvas's about 14%
-   *  `textPrimary` over `background`, made opaque. */
+  /** The outline of Home's drifting shirt numbers: about 14% of
+   *  `textPrimary` over `background`, as the canvas draws it, made opaque. */
   wallLine: string;
   /** `background` at no opacity: the clear end of Home's fades. A plain
    *  `transparent` would fade through black on iOS. */

@@ -16,8 +16,9 @@ export interface WallRowSpec {
   phase: number;
 }
 
-// Ten numbers a row rather than the canvas's 26: a drawn row costs memory in
-// proportion to its width (spec, How the wall is drawn). Between them the rows
+// Ten numbers a row rather than the canvas's 26: how much of a row is
+// drawn costs memory in proportion to its width, one small SVG per number or
+// not (spec, How the wall is drawn). Between them the rows
 // still show every number from 1 to 26, and the filled ones and the starting
 // offsets are the canvas's.
 export const WALL_ROWS: readonly WallRowSpec[] = [

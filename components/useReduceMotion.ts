@@ -12,10 +12,15 @@ export function useReduceMotion(): boolean {
   const [reduced, setReduced] = useState(useReducedMotion());
   useEffect(() => {
     let current = true;
+    // A change that arrives first is newer than the one-off read below.
+    let heard = false;
     AccessibilityInfo.isReduceMotionEnabled().then((enabled) => {
-      if (current) setReduced(enabled);
+      if (current && !heard) setReduced(enabled);
     });
-    const sub = AccessibilityInfo.addEventListener('reduceMotionChanged', setReduced);
+    const sub = AccessibilityInfo.addEventListener('reduceMotionChanged', (enabled) => {
+      heard = true;
+      setReduced(enabled);
+    });
     return () => {
       current = false;
       sub.remove();
