@@ -59,9 +59,10 @@ interface TipsLayerProps {
 // measured in the window, against the layer's own origin, until two frames agree
 // (a pushed screen is still sliding in) or `tips.settleCap` passes; one below the
 // fold is scrolled to once. Then the scrim is cut round it, ringed, pointed at,
-// and the tip is placed by `placeTip` and fades in. A tap anywhere, or Next,
-// moves on; the last closes; Skip tips ends every screen's tips; Android's back
-// button closes. Rendered last inside the screen's root, so it covers it.
+// and the tip is placed by `placeTip` and fades in. A tap anywhere, the tip
+// included, or Next, moves on; the last closes; Skip tips ends every screen's
+// tips; Android's back button closes. Rendered last inside the screen's root,
+// so it covers it.
 
 // SVG paint and path data, not text: kept out of the JSX for the
 // hard-coded-string lint. The arrow is drawn in its 40 × 40 box
@@ -378,7 +379,47 @@ export function TipsLayer({ tips: specs, onClose, onSkip, onShown, scrollBy }: T
         </Animated.View>
       ) : null}
 
-      {/* The ring and arrow come with each tip. */}
+      {/* Takes every tap, so none reaches the screen under the tips; once a
+          tip shows, a tap anywhere moves on. Next is the accessible way. */}
+      <Pressable
+        testID="tips-catcher"
+        style={StyleSheet.absoluteFill}
+        onPress={advance}
+        focusable={false}
+        accessibilityElementsHidden
+        importantForAccessibility="no"
+      />
+
+      {/* Laid out hidden first, to learn its height, then placed and faded in.
+          The tip remounts for each step and again once placed, so its
+          `onLayout` fires on mount every time: react-native-web reports layout
+          only through a ResizeObserver, which says nothing when the next
+          step's tip is the same height. A tap on the tip, off Next, moves on
+          as the catcher's does: through the responder system, which adds
+          nothing a screen reader sees, on native and on react-native-web. */}
+      <View
+        style={styles.tipFrame}
+        pointerEvents={placed ? 'box-none' : 'none'}
+        accessibilityElementsHidden={!placed}
+        importantForAccessibility={placed ? 'auto' : 'no-hide-descendants'}
+      >
+        <Animated.View
+          key={placed ? step : -1 - step}
+          entering={placed ? fade : undefined}
+          role={DIALOG}
+          aria-modal
+          accessibilityLabel={t.tips.spoken(step + 1, n)}
+          style={[styles.tip, !placed && styles.hidden]}
+          onLayout={(e) => setTipHeight(e.nativeEvent.layout.height)}
+          onStartShouldSetResponder={() => placed}
+          onResponderRelease={advance}
+        >
+          {content}
+        </Animated.View>
+      </View>
+
+      {/* The ring and arrow come with each tip, drawn over its frame, so the
+          backing's soft edge never veils the arrow. */}
       {placement ? (
         <Animated.View
           key={step}
@@ -409,41 +450,6 @@ export function TipsLayer({ tips: specs, onClose, onSkip, onShown, scrollBy }: T
           </Svg>
         </Animated.View>
       ) : null}
-
-      {/* Takes every tap, so none reaches the screen under the tips; once a
-          tip shows, a tap anywhere moves on. Next is the accessible way. */}
-      <Pressable
-        testID="tips-catcher"
-        style={StyleSheet.absoluteFill}
-        onPress={advance}
-        focusable={false}
-        accessibilityElementsHidden
-        importantForAccessibility="no"
-      />
-
-      {/* Laid out hidden first, to learn its height, then placed and faded in.
-          The tip remounts for each step and again once placed, so its
-          `onLayout` fires on mount every time: react-native-web reports layout
-          only through a ResizeObserver, which says nothing when the next
-          step's tip is the same height. */}
-      <View
-        style={styles.tipFrame}
-        pointerEvents={placed ? 'box-none' : 'none'}
-        accessibilityElementsHidden={!placed}
-        importantForAccessibility={placed ? 'auto' : 'no-hide-descendants'}
-      >
-        <Animated.View
-          key={placed ? step : -1 - step}
-          entering={placed ? fade : undefined}
-          role={DIALOG}
-          aria-modal
-          accessibilityLabel={t.tips.spoken(step + 1, n)}
-          style={[styles.tip, !placed && styles.hidden]}
-          onLayout={(e) => setTipHeight(e.nativeEvent.layout.height)}
-        >
-          {content}
-        </Animated.View>
-      </View>
 
       {shown || placed ? (
         <Pressable
