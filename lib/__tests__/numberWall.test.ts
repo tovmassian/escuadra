@@ -84,7 +84,12 @@ describe('WALL_ROWS', () => {
   });
 
   it('fills 7 and 19 in the primary ink and 10 in the mark’s, as the canvas does', () => {
-    expect(WALL_ROWS.map((r) => r.filled)).toEqual([{ 7: 'primary' }, { 10: 'mark' }, {}, { 19: 'primary' }]);
+    expect(WALL_ROWS.map((r) => r.filled)).toEqual([
+      { 7: 'primary' },
+      { 10: 'mark' },
+      {},
+      { 19: 'primary' },
+    ]);
   });
 });
 

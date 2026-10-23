@@ -38,7 +38,10 @@ function advances(file: string, chars: string): Record<string, number> {
     return 0;
   };
   return Object.fromEntries(
-    [...chars].map((ch) => [ch, b.readUInt16BE(hmtx + Math.min(glyph(ch.charCodeAt(0)), metrics - 1) * 4)]),
+    [...chars].map((ch) => [
+      ch,
+      b.readUInt16BE(hmtx + Math.min(glyph(ch.charCodeAt(0)), metrics - 1) * 4),
+    ]),
   );
 }
 
