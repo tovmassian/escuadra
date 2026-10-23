@@ -30,7 +30,9 @@ being tested on this iteration.
 A sibling `store/` profile captures the same screens at 1320×2868, Apple's
 6.9" App Store listing size, via `npm run shots:store`. A `play/` profile
 captures them again at 1080×1920 (9:16) as JPEGs, Google Play's
-promotion-eligible phone screenshot size, via `npm run shots:play`. Both are
+promotion-eligible phone screenshot size, via `npm run shots:play`. Neither
+takes the launch intro or the How to play tips, which are not listing shots,
+and no shot in them shows a tip. Both are
 gitignored rather than committed — neither is part of this handoff surface,
 just release artefacts, regenerated for each release and attached to its GitHub
 Release (`docs/release.md`, Cut a release) — but the same web-rendered,

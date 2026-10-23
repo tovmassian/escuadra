@@ -594,11 +594,14 @@ async function captureTheme(browser, colorScheme, suffix) {
     await capture.shoot('01-home');
 
     // How to play (#183) shows once per screen on first open, so the tips are shot now,
-    // on this fresh page, before anything else visits the picker, Difficulty or Study.
-    // Then they are marked skipped, as Skip tips would, so every later shot is as before.
-    await captureTips(capture, '/team-picker', '02c-team-picker', 2);
-    await captureTips(capture, '/team/rma/difficulty', '04f-difficulty', 3);
-    await captureTips(capture, '/team/int/study', '05b-study', 2);
+    // on this fresh page, before anything else visits the picker, Difficulty or Study;
+    // only for the design handoff, as a tip is not a listing shot. Then, in every
+    // profile, they are marked skipped, as Skip tips would, so no later shot shows one.
+    if (PROFILE === PROFILES.design) {
+      await captureTips(capture, '/team-picker', '02c-team-picker', 2);
+      await captureTips(capture, '/team/rma/difficulty', '04f-difficulty', 3);
+      await captureTips(capture, '/team/int/study', '05b-study', 2);
+    }
     await seedTipsSkipped(capture);
 
     await capture.open('/settings');
