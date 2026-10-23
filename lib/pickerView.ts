@@ -1,5 +1,6 @@
 // Pure team-picker row model. Kept out of the screen so it is unit-testable.
 import type { Messages } from '@/i18n/en';
+import { isOutdated, type BestScore } from '@/lib/bestScore';
 import { CONFEDERATIONS, confederationOf, type Confederation } from '@/lib/confederations';
 import { flagFor } from '@/lib/flags';
 import { PASS_RATIO, ROUND_LENGTH, scoreKey } from '@/lib/scoring';
@@ -12,26 +13,37 @@ export interface TeamProgress {
   level: number;
   correct: number;
   total: number;
-  /** True once any level was passed — not only the highest one played. */
+  /** True once any level was passed — not only the highest one played. An
+   *  outdated pass still counts. */
   cleared: boolean;
+  /** The shown score was set before the squad was last updated (#180). */
+  outdated: boolean;
 }
 
+/** `lastUpdated` is the squad's current date. */
 export function teamProgress(
   squadId: string,
-  bestScores: Record<string, number>,
+  bestScores: Record<string, BestScore>,
+  lastUpdated: string,
 ): TeamProgress | null {
-  let highest: { level: number; correct: number } | null = null;
+  let highest: { level: number; best: BestScore } | null = null;
   let cleared = false;
 
   for (const level of LEVELS) {
-    const score = bestScores[scoreKey(squadId, level)];
-    if (score === undefined) continue;
-    if (score / ROUND_LENGTH >= PASS_RATIO) cleared = true;
-    if (highest === null || level > highest.level) highest = { level, correct: score };
+    const best = bestScores[scoreKey(squadId, level)];
+    if (best === undefined) continue;
+    if (best.score / ROUND_LENGTH >= PASS_RATIO) cleared = true;
+    if (highest === null || level > highest.level) highest = { level, best };
   }
 
   if (highest === null) return null;
-  return { level: highest.level, correct: highest.correct, total: ROUND_LENGTH, cleared };
+  return {
+    level: highest.level,
+    correct: highest.best.score,
+    total: ROUND_LENGTH,
+    cleared,
+    outdated: isOutdated(highest.best, lastUpdated),
+  };
 }
 
 /** The clubs tab's league filter. `'ALL'` is the default, unfiltered state. */
@@ -234,7 +246,14 @@ export function kindCounts(
 export type ScoreBlock =
   | { kind: 'hydrating' }
   | { kind: 'unplayed' }
-  | { kind: 'played'; level: number; correct: number; total: number; flawless: boolean };
+  | {
+      kind: 'played';
+      level: number;
+      correct: number;
+      total: number;
+      flawless: boolean;
+      outdated: boolean;
+    };
 
 export function scoreBlock(progress: TeamProgress | null | undefined): ScoreBlock {
   if (progress === undefined) return { kind: 'hydrating' };
@@ -245,5 +264,18 @@ export function scoreBlock(progress: TeamProgress | null | undefined): ScoreBloc
     correct: progress.correct,
     total: progress.total,
     flawless: progress.correct === progress.total,
+    outdated: progress.outdated,
   };
+}
+
+/** A row's spoken name: the team, then its level and best, and whether that
+ *  best is outdated. */
+export function scoreSpoken(name: string, block: ScoreBlock, messages: Messages): string {
+  if (block.kind !== 'played') return name;
+  const { level, correct, total } = block;
+  return `${name}, ${
+    block.outdated
+      ? messages.picker.bestOutdatedSpoken(level, correct, total)
+      : messages.picker.bestSpoken(level, correct, total)
+  }`;
 }

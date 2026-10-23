@@ -401,13 +401,28 @@ async function captureStudy(capture) {
   await capture.shoot('05-study-hidden');
 }
 
+/** A squad's `lastUpdated`, from the generated manifest. */
+async function squadLastUpdated(squadId) {
+  const manifest = JSON.parse(
+    await readFile(new URL('../data/index.json', import.meta.url), 'utf8'),
+  );
+  const entry = manifest.find((s) => s.id === squadId);
+  if (!entry) throw new Error(`no squad ${squadId} in data/index.json`);
+  return entry.lastUpdated;
+}
+
 /**
  * Merge best scores into the persisted progress store, as finished rounds would, for a
  * shot that wants a squad part way up the ladder. `scores` is keyed like the store
- * (`${squadId}:${level}`, see `scoreKey` in lib/scoring.ts). It writes localStorage only,
- * so the next `capture.open` reloads the page and rehydrates from it.
+ * (`${squadId}:${level}`, see `scoreKey` in lib/scoring.ts); each is set on the squad as
+ * of `squadUpdated` (#180), so a date other than the squad's own shows it outdated. It
+ * writes localStorage only, so the next `capture.open` reloads the page and rehydrates
+ * from it.
  */
-async function seedBestScores(capture, scores) {
+async function seedBestScores(capture, scores, squadUpdated) {
+  const dated = Object.fromEntries(
+    Object.entries(scores).map(([key, score]) => [key, { score, squadUpdated }]),
+  );
   await capture.page.evaluate((seeded) => {
     const key = 'escuadra-progress';
     let stored = null;
@@ -416,10 +431,11 @@ async function seedBestScores(capture, scores) {
     } catch {
       stored = null;
     }
-    const next = stored ?? { state: {}, version: 0 };
+    // Version 1 of stores/progress.ts: dated best scores.
+    const next = stored ?? { state: {}, version: 1 };
     next.state = { ...next.state, bestScores: { ...next.state.bestScores, ...seeded } };
     localStorage.setItem(key, JSON.stringify(next));
-  }, scores);
+  }, dated);
 }
 
 /**
@@ -520,11 +536,16 @@ async function captureTheme(browser, colorScheme, suffix) {
     await capture.shoot('04-difficulty');
 
     // Seeded squads no later shot uses, so the rounds and results are unaffected.
-    await seedBestScores(capture, { 'arm:1': 10, 'arm:2': 8, 'arm:3': 6 });
+    // Armenia's scores predate its squad's last update, so they show OUTDATED (#180).
+    await seedBestScores(capture, { 'arm:1': 10, 'arm:2': 8, 'arm:3': 6 }, '2026-01-01');
     await capture.open('/team/arm/difficulty');
     await capture.shoot('04b-difficulty-nation');
 
-    await seedBestScores(capture, { 'liv:1': 10, 'liv:2': 9, 'liv:3': 8 });
+    await seedBestScores(
+      capture,
+      { 'liv:1': 10, 'liv:2': 9, 'liv:3': 8 },
+      await squadLastUpdated('liv'),
+    );
     await capture.open('/team/liv/difficulty');
     await capture.shoot('04c-difficulty-cleared');
 

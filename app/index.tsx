@@ -40,7 +40,7 @@ export default function Home() {
 
   const continueSquad = hydrated && lastPlayed ? getSquad(lastPlayed.squadId) : undefined;
   const continueBest = lastPlayed
-    ? bestScores[scoreKey(lastPlayed.squadId, lastPlayed.level)]
+    ? bestScores[scoreKey(lastPlayed.squadId, lastPlayed.level)]?.score
     : undefined;
 
   const startTraining = () => {

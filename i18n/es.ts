@@ -42,6 +42,7 @@ export const es: Messages = {
     back: 'Volver',
     close: 'Cerrar',
     scoreSpoken: (correct: number, attempted: number) => `Puntuación: ${correct} de ${attempted}`,
+    outdated: 'Desfasado',
   },
   home: {
     // "Ajustes", as iOS and Spain's Android name the screen; Latin America's
@@ -289,6 +290,13 @@ export const es: Messages = {
     rungEscuadra: (title: string, correct: number, total: number) =>
       `${title}, récord ${correct} de ${total}, ${A_LA_ESCUADRA}`,
     star: 'Uno de tus equipos',
+    bestOutdated: (correct: number, total: number) => `Récord ${correct}/${total} · Desfasado`,
+    bestOutdatedSpoken: (correct: number, total: number) =>
+      `Récord: ${correct} de ${total}, desfasado`,
+    rungOutdated: (title: string, correct: number, total: number) =>
+      `${title}, récord ${correct} de ${total}, desfasado`,
+    squadUpdated: (date: string) =>
+      `Plantilla actualizada el ${date}. Los récords en gris son anteriores.`,
   },
   picker: {
     // Feminine: the leagues.
@@ -314,6 +322,8 @@ export const es: Messages = {
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     bestSpoken: (level: number, correct: number, total: number) =>
       `Nivel ${level}, récord ${correct} de ${total}`,
+    bestOutdatedSpoken: (level: number, correct: number, total: number) =>
+      `Nivel ${level}, récord ${correct} de ${total}, desfasado`,
     search: 'Buscar equipos',
     clearSearch: 'Borrar la búsqueda',
     noTeams: 'No se encontraron equipos',

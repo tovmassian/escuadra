@@ -2,6 +2,7 @@ import type { League, SquadManifestEntry } from '@/types/squad';
 import { describe, expect, it } from 'vitest';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { en } from '@/i18n/en';
+import type { BestScore } from '@/lib/bestScore';
 import { SUPPORTED_LANGUAGES } from '@/i18n/resolveLanguage';
 import { listSquads } from '@/lib/squads';
 import {
@@ -16,56 +17,82 @@ import {
   nationSections,
   nationsCaption,
   scoreBlock,
+  scoreSpoken,
   squadConfederation,
   teamProgress,
   visibleSquads,
   type SquadNames,
 } from '../pickerView';
 
+const NOW = '2026-10-21';
+const OLD = '2026-08-14';
+
+/** Best scores set on the squad as of `date`: `NOW`, the current squad, unless told. */
+function current(scores: Record<string, number>, date = NOW): Record<string, BestScore> {
+  return Object.fromEntries(
+    Object.entries(scores).map(([key, score]) => [key, { score, squadUpdated: date }]),
+  );
+}
+
 describe('teamProgress', () => {
   it('returns null for a team that has never been played', () => {
-    expect(teamProgress('bar', {})).toBeNull();
+    expect(teamProgress('bar', current({}), NOW)).toBeNull();
   });
 
   it('reports the only played level', () => {
-    expect(teamProgress('bar', { 'bar:1': 7 })).toEqual({
+    expect(teamProgress('bar', current({ 'bar:1': 7 }), NOW)).toEqual({
       level: 1,
       correct: 7,
       total: 10,
       cleared: false,
+      outdated: false,
     });
   });
 
   it('reports the highest level played, not the highest score', () => {
     // Level 3 is the meaningful progress marker even though level 1 scored higher.
-    const progress = teamProgress('bar', { 'bar:1': 10, 'bar:3': 4 });
+    const progress = teamProgress('bar', current({ 'bar:1': 10, 'bar:3': 4 }), NOW);
     expect(progress?.level).toBe(3);
     expect(progress?.correct).toBe(4);
   });
 
   it('marks a team cleared once a level is passed at 8/10', () => {
-    expect(teamProgress('bar', { 'bar:1': 8 })?.cleared).toBe(true);
+    expect(teamProgress('bar', current({ 'bar:1': 8 }), NOW)?.cleared).toBe(true);
   });
 
   it('does not mark a team cleared below the pass ratio', () => {
-    expect(teamProgress('bar', { 'bar:1': 7 })?.cleared).toBe(false);
+    expect(teamProgress('bar', current({ 'bar:1': 7 }), NOW)?.cleared).toBe(false);
   });
 
   it('marks cleared from any level, not only the highest played', () => {
     // Passed L1, then started L2 and did badly — the team is still cleared.
-    expect(teamProgress('bar', { 'bar:1': 9, 'bar:2': 2 })?.cleared).toBe(true);
+    expect(teamProgress('bar', current({ 'bar:1': 9, 'bar:2': 2 }), NOW)?.cleared).toBe(true);
+  });
+
+  it('marks the shown score outdated when it was set before the squad was updated', () => {
+    expect(teamProgress('bar', current({ 'bar:3': 6 }, OLD), NOW)?.outdated).toBe(true);
+  });
+
+  it("goes by the highest level's score alone for outdated", () => {
+    const scores = { ...current({ 'bar:1': 9 }, OLD), ...current({ 'bar:2': 4 }) };
+    expect(teamProgress('bar', scores, NOW)?.outdated).toBe(false);
+  });
+
+  it('still counts an outdated pass as cleared', () => {
+    expect(teamProgress('bar', current({ 'bar:1': 9 }, OLD), NOW)?.cleared).toBe(true);
   });
 
   it('does not leak progress between squads', () => {
-    expect(teamProgress('rma', { 'bar:1': 9 })).toBeNull();
+    expect(teamProgress('rma', current({ 'bar:1': 9 }), NOW)).toBeNull();
   });
 
   it('treats a legitimate zero score as played', () => {
-    expect(teamProgress('bar', { 'bar:1': 0 })).toEqual({
+    expect(teamProgress('bar', current({ 'bar:1': 0 }), NOW)).toEqual({
       level: 1,
       correct: 0,
       total: 10,
       cleared: false,
+      outdated: false,
     });
   });
 });
@@ -322,18 +349,43 @@ describe('scoreBlock', () => {
     expect(scoreBlock(null)).toEqual({ kind: 'unplayed' });
   });
   it('shows the highest level and its best', () => {
-    expect(scoreBlock({ level: 2, correct: 7, total: 10, cleared: true })).toEqual({
-      kind: 'played',
-      level: 2,
-      correct: 7,
-      total: 10,
-      flawless: false,
-    });
+    expect(scoreBlock({ level: 2, correct: 7, total: 10, cleared: true, outdated: false })).toEqual(
+      {
+        kind: 'played',
+        level: 2,
+        correct: 7,
+        total: 10,
+        flawless: false,
+        outdated: false,
+      },
+    );
   });
   it('marks 10/10 as flawless', () => {
-    expect(scoreBlock({ level: 3, correct: 10, total: 10, cleared: true })).toMatchObject({
-      flawless: true,
-    });
+    expect(
+      scoreBlock({ level: 3, correct: 10, total: 10, cleared: true, outdated: false }),
+    ).toMatchObject({ flawless: true });
+  });
+  it('carries outdated through', () => {
+    expect(
+      scoreBlock({ level: 3, correct: 6, total: 10, cleared: false, outdated: true }),
+    ).toMatchObject({ outdated: true });
+  });
+});
+
+describe('scoreSpoken', () => {
+  const played = { kind: 'played', level: 3, correct: 6, total: 10, flawless: false } as const;
+  it('reads the level and best after the name', () => {
+    expect(scoreSpoken('Armenia', { ...played, outdated: false }, en)).toBe(
+      'Armenia, Level 3, best 6 of 10',
+    );
+  });
+  it('adds outdated to an outdated best', () => {
+    expect(scoreSpoken('Armenia', { ...played, outdated: true }, en)).toBe(
+      'Armenia, Level 3, best 6 of 10, outdated',
+    );
+  });
+  it('is the name alone for an unplayed team', () => {
+    expect(scoreSpoken('Armenia', { kind: 'unplayed' }, en)).toBe('Armenia');
   });
 });
 

@@ -55,6 +55,9 @@ export const en = {
     close: 'Close',
     /** A score, spoken. */
     scoreSpoken: (correct: number, attempted: number) => `Score: ${correct} of ${attempted}`,
+    /** ≤ 14 chars: beside a clock, over or under a best score set before its
+     *  squad was updated (#180), in mono capitals. */
+    outdated: 'Outdated',
   },
   home: {
     /** The gear button's spoken name. */
@@ -337,6 +340,16 @@ export const en = {
       `${title}, best ${correct} of ${total}, ${A_LA_ESCUADRA}`,
     /** Spoken: Difficulty's star toggle (#179), read with its state, "on" or "off". */
     star: 'One of your squads',
+    /** ≤ 24 chars: the focused card's status line when its best is outdated (#180), in mono capitals. */
+    bestOutdated: (correct: number, total: number) => `Best ${correct}/${total} · Outdated`,
+    /** Spoken, so the numbers are words: no "6/10" (read as a date). */
+    bestOutdatedSpoken: (correct: number, total: number) => `Best ${correct} of ${total}, outdated`,
+    /** An outdated compact rung, spoken. */
+    rungOutdated: (title: string, correct: number, total: number) =>
+      `${title}, best ${correct} of ${total}, outdated`,
+    /** ≤ 80 chars: under "The ladder" when a score is outdated; `date` from
+     *  `formatLastUpdated`. It may wrap to two lines. */
+    squadUpdated: (date: string) => `Squad updated ${date}. Grey scores are from before.`,
   },
   picker: {
     /** ≤ 6 chars: the league pill that clears the filter. */
@@ -370,6 +383,9 @@ export const en = {
     /** A played row's score block, spoken after the team's name. */
     bestSpoken: (level: number, correct: number, total: number) =>
       `Level ${level}, best ${correct} of ${total}`,
+    /** The same, for a best set before the squad was updated (#180). */
+    bestOutdatedSpoken: (level: number, correct: number, total: number) =>
+      `Level ${level}, best ${correct} of ${total}, outdated`,
     /** The search field's placeholder and spoken name. */
     search: 'Search teams',
     clearSearch: 'Clear search',

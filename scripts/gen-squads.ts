@@ -129,6 +129,7 @@ function buildIndexJson(discovered: Discovered[]): string {
       secondaryColor: d.squad.secondaryColor,
       verified: d.squad.verified,
       marker: d.squad.marker,
+      lastUpdated: d.squad.lastUpdated,
     };
     if (d.kind === 'club' && d.league) entry.league = d.league;
     return entry;

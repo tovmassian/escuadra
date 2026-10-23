@@ -18,6 +18,7 @@ const LONGEST_LANGUAGE_NAME = Object.values(LANGUAGE_NAMES).reduce((a, b) =>
 
 export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 8, texts: { 'common.back': (m) => m.common.back } },
+  { budget: 14, texts: { 'common.outdated': (m) => m.common.outdated } },
   { budget: 24, texts: { 'home.continueMeta': (m) => m.home.continueMeta(3, 10, 10) } },
   { budget: 18, texts: { 'home.startTraining': (m) => m.home.startTraining } },
   { budget: 20, texts: { 'home.browseAllTeams': (m) => m.home.browseAllTeams } },
@@ -155,6 +156,14 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 22, texts: { 'ladder.notPlayed': (m) => m.ladder.notPlayed } },
   { budget: 22, texts: { 'ladder.yourBest': (m) => m.ladder.yourBest(10, 10) } },
   { budget: 16, texts: { 'ladder.playLevel': (m) => m.ladder.playLevel(3) } },
+  { budget: 24, texts: { 'ladder.bestOutdated': (m) => m.ladder.bestOutdated(10, 10) } },
+  {
+    budget: 80,
+    texts: {
+      'ladder.squadUpdated': (m) =>
+        m.ladder.squadUpdated(m.formats.date({ day: 28, month: 9, year: 2026 })),
+    },
+  },
   { budget: 6, texts: { 'picker.allLeagues': (m) => m.picker.allLeagues } },
   { budget: 22, texts: { 'picker.title': (m) => m.picker.title } },
   { budget: 14, texts: { 'picker.squadCount': (m) => m.picker.squadCount(253) } },

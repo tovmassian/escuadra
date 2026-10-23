@@ -2,6 +2,7 @@
 // are unit-testable — the project's Vitest setup has no RN renderer, so this
 // file must never import from `components/`.
 import type { Messages } from '@/i18n/en';
+import { isOutdated, type BestScore } from '@/lib/bestScore';
 import { leagueName } from '@/lib/pickerView';
 import type { Level } from '@/lib/questionEngine';
 import { PASS_RATIO, ROUND_LENGTH, scoreKey } from '@/lib/scoring';
@@ -19,30 +20,42 @@ export type DifficultyStatus = 'cleared' | 'unlocked' | 'locked';
 export interface LadderRow {
   level: Level;
   status: DifficultyStatus;
-  /** The best recorded score. Never on a locked rung. */
-  best?: { correct: number; total: number };
+  /** The best recorded score. Never on a locked rung. `outdated`: set before
+   *  the squad was last updated (#180), so drawn grey. */
+  best?: { correct: number; total: number; outdated: boolean };
 }
 
-/** Each level opens only once the one before it is open and cleared. */
-export function ladderRows(squadId: string, bestScores: Record<string, number>): LadderRow[] {
+/** Each level opens only once the one before it is open and cleared. An
+ *  outdated score still counts, so a squad update never locks a level again.
+ *  `lastUpdated` is the squad's current date. */
+export function ladderRows(
+  squadId: string,
+  bestScores: Record<string, BestScore>,
+  lastUpdated: string,
+): LadderRow[] {
   let open = true;
   return LEVELS.map((level): LadderRow => {
     if (!open) {
       return { level, status: 'locked' };
     }
-    const score = bestScores[scoreKey(squadId, level)];
-    if (score === undefined) {
+    const best = bestScores[scoreKey(squadId, level)];
+    if (best === undefined) {
       open = false;
       return { level, status: 'unlocked' };
     }
-    const cleared = score >= PASS_MARK;
+    const cleared = best.score >= PASS_MARK;
     open = cleared;
     return {
       level,
       status: cleared ? 'cleared' : 'unlocked',
-      best: { correct: score, total: ROUND_LENGTH },
+      best: { correct: best.score, total: ROUND_LENGTH, outdated: isOutdated(best, lastUpdated) },
     };
   });
+}
+
+/** Whether any shown score is outdated: Difficulty then says why some are grey. */
+export function hasOutdated(rows: LadderRow[]): boolean {
+  return rows.some((r) => r.best?.outdated === true);
 }
 
 /** The rung the ladder expands into a Play card: the first level still to
@@ -96,7 +109,13 @@ export function rungTag(best: { correct: number; total: number }): RungTag {
 /** The focused card's status line, as shown and as spoken. */
 export function statusLine(row: LadderRow, messages: Messages): { text: string; spoken: string } {
   if (!row.best) return { text: messages.ladder.notPlayed, spoken: messages.ladder.notPlayed };
-  const { correct, total } = row.best;
+  const { correct, total, outdated } = row.best;
+  if (outdated) {
+    return {
+      text: messages.ladder.bestOutdated(correct, total),
+      spoken: messages.ladder.bestOutdatedSpoken(correct, total),
+    };
+  }
   return {
     text: messages.ladder.yourBest(correct, total),
     spoken: messages.ladder.yourBestSpoken(correct, total),
@@ -113,6 +132,9 @@ export function rungAccessibilityLabel(row: LadderRow, title: string, messages: 
   if (row.status === 'locked') {
     return messages.ladder.rungLocked(title, PASS_MARK, ROUND_LENGTH, row.level - 1);
   }
+  if (row.best?.outdated) {
+    return messages.ladder.rungOutdated(title, row.best.correct, row.best.total);
+  }
   if (row.best && row.status === 'cleared') {
     const { correct, total } = row.best;
     return rungTag(row.best) === 'escuadra'
@@ -121,6 +143,11 @@ export function rungAccessibilityLabel(row: LadderRow, title: string, messages: 
   }
   if (row.best) return messages.ladder.rungBest(title, row.best.correct, row.best.total);
   return title;
+}
+
+/** The line under "The ladder" when a score is outdated (#180). */
+export function squadUpdatedLine(lastUpdated: string, messages: Messages): string {
+  return messages.ladder.squadUpdated(formatLastUpdated(lastUpdated, messages));
 }
 
 /** Formats a squad's `lastUpdated` (`YYYY-MM-DD`) for the difficulty

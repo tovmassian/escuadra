@@ -267,7 +267,7 @@ export default function TeamPicker() {
       name={squadDisplayName(item, language)}
       marker={item.marker}
       flag={item.kind === 'nation' ? flagFor(item.name) : undefined}
-      progress={hydrated ? teamProgress(item.id, bestScores) : undefined}
+      progress={hydrated ? teamProgress(item.id, bestScores, item.lastUpdated) : undefined}
       onPress={() =>
         router.push({ pathname: '/team/[squadId]/difficulty', params: { squadId: item.id } })
       }

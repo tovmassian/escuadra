@@ -3,7 +3,9 @@ import { useEffect, useState } from 'react';
 import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { LanguagePreference } from '@/i18n/resolveLanguage';
+import { migrateBestScores, nextBest, type BestScore } from '@/lib/bestScore';
 import { scoreKey } from '@/lib/scoring';
+import { listSquads } from '@/lib/squads';
 import { toggleStarred } from '@/lib/starred';
 import type { StudyView } from '@/lib/studyView';
 import type { ThemePreference } from '@/theme/tokens';
@@ -18,7 +20,9 @@ interface LastPlayed {
 }
 
 interface ProgressState {
-  bestScores: Record<string, number>; // key: `${squadId}:${level}`
+  /** Key: `${squadId}:${level}`. Each best keeps the squad's `lastUpdated`
+   *  from when it was set, so a later squad update marks it outdated (#180). */
+  bestScores: Record<string, BestScore>;
   /** Backs Home's "continue" card — the most recent team+level a round was
    *  started for, regardless of how it finished. */
   lastPlayed: LastPlayed | null;
@@ -51,7 +55,8 @@ interface ProgressState {
   /** Your squads (#179): the squad ids starred on Difficulty, newest first.
    *  A preference like `themePreference`, so it survives `reset()`. */
   starredSquads: string[];
-  recordScore: (squadId: string, level: number, score: number) => void;
+  /** `squadUpdated` is the squad's current `lastUpdated`. */
+  recordScore: (squadId: string, level: number, score: number, squadUpdated: string) => void;
   setLastPlayed: (squadId: string, level: number) => void;
   setThemePreference: (preference: ThemePreference) => void;
   setLanguagePreference: (preference: LanguagePreference) => void;
@@ -77,16 +82,14 @@ export const useProgress = create<ProgressState>()(
       studyView: 'grid',
       reviewAskedVersion: null,
       starredSquads: [],
-      recordScore: (squadId, level, score) =>
+      recordScore: (squadId, level, score, squadUpdated) =>
         set((s) => {
           const key = scoreKey(squadId, level);
           const prev = s.bestScores[key];
-          // `prev === undefined`, not `?? 0`: a first round of 0/10 is still a
-          // score the ladder and picker should show as played.
-          return {
-            bestScores:
-              prev === undefined || score > prev ? { ...s.bestScores, [key]: score } : s.bestScores,
-          };
+          // A first round of 0/10 is still kept: a score the ladder and picker
+          // should show as played.
+          const next = nextBest(prev, score, squadUpdated);
+          return { bestScores: next === prev ? s.bestScores : { ...s.bestScores, [key]: next } };
         }),
       setLastPlayed: (squadId, level) => set({ lastPlayed: { squadId, level } }),
       setThemePreference: (themePreference) => set({ themePreference }),
@@ -103,9 +106,27 @@ export const useProgress = create<ProgressState>()(
     {
       name: 'escuadra-progress',
       storage: createJSONStorage(() => AsyncStorage),
+      // 1 (#180): a best score keeps its squad's date. Version 0 kept bare
+      // numbers; `migrateBestScores` dates them as current.
+      version: 1,
+      migrate: migrateProgress,
     },
   ),
 );
+
+const lastUpdatedById = () => new Map(listSquads().map((s) => [s.id, s.lastUpdated]));
+
+/** Brings a persisted state from an older `version` up to the current shape. */
+export function migrateProgress(persisted: unknown, version: number): ProgressState {
+  const state = (persisted ?? {}) as Record<string, unknown>;
+  if (version < 1 && state.bestScores !== undefined) {
+    const dates = lastUpdatedById();
+    state.bestScores = migrateBestScores(state.bestScores as Record<string, number>, (id) =>
+      dates.get(id),
+    );
+  }
+  return state as unknown as ProgressState;
+}
 
 /**
  * `true` once the persisted state has been read back off disk. Anything that

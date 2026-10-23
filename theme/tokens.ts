@@ -1153,6 +1153,9 @@ export const iconSize = {
   ladderLock: 14, // a locked rung's padlock on Difficulty
   star: 20, // Difficulty's star toggle (#179)
   starCaption: 12, // the star beside the picker's "Your squads" caption
+  outdated: 10, // the clock beside OUTDATED on a picker row or a rung (#180)
+  outdatedCard: 11, // the same, on Difficulty's focused card
+  outdatedNote: 13, // the same, before Difficulty's "Squad updated" line
 } as const;
 
 // Base unit 4. Use spacing[n], not raw numbers, in component styles.

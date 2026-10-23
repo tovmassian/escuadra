@@ -153,6 +153,9 @@ export interface SquadManifestEntry {
   /** Mirrors the squad file's `marker`, since the picker never imports full
    *  squad JSON. Kept in sync by lib/__tests__/squads.test.ts. */
   marker: TeamMarker;
+  /** Mirrors the squad file's `lastUpdated`, so the picker can tell an
+   *  outdated best score (#180) without importing the roster. */
+  lastUpdated: string;
   /** Which big-5 league (or `ucl`, for a UCL group-stage club with no big-5
    *  home) a club plays in. Present for `kind: 'club'` entries, absent for
    *  `kind: 'nation'` entries. Derived from the squad file's folder path by
