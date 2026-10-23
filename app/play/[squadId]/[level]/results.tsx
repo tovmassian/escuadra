@@ -5,6 +5,8 @@ import { PlayerCard } from '@/components/PlayerCard';
 import { popIn, riseIn, slideIn } from '@/components/riseIn';
 import { RoundStrip } from '@/components/RoundStrip';
 import { ShareSheet } from '@/components/ShareSheet';
+import { TipsLayer, type TipSpec } from '@/components/TipsLayer';
+import { useTips } from '@/components/useTips';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
@@ -22,6 +24,7 @@ import { getPlayer, getRoster, getSquad } from '@/lib/squads';
 import { bannerBands, stageVeil } from '@/lib/stageView';
 import { askForReview } from '@/lib/storeReview';
 import { track } from '@/lib/telemetry';
+import { resultsTips } from '@/lib/tips';
 import { selectMissed, selectScore, useSession, type QuestionResult } from '@/stores/session';
 import { MARK_VIEWBOX, markGeometry } from '@/theme/brand';
 import {
@@ -42,7 +45,7 @@ import { useThemeColors, useThemeName } from '@/theme/useTheme';
 import type { TeamMarker } from '@/types/squad';
 import { Image } from 'expo-image';
 import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState, type Ref } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   cancelAnimation,
@@ -85,19 +88,41 @@ export default function Results() {
   // The photo-credits sheet, and a credit's in-app browser opened from it.
   const [crediting, setCrediting] = useState(false);
 
+  // How to play (#184): once, after the first round ever, when the
+  // celebration is over. The misses' cards, then the actions, scrolled to on a
+  // short screen. A tip with nothing to point at is left out, and with both
+  // out the layer never opens, so Results keeps its tips for next time.
+  const [celebrated, setCelebrated] = useState(false);
+  useEffect(() => {
+    const timer = setTimeout(() => setCelebrated(true), resultsTimeline.tips);
+    return () => clearTimeout(timer);
+  }, []);
+  const tips = useTips('results', celebrated);
+  const missed = selectMissed(session.results);
+  const tipKeys = resultsTips({
+    missed: missed.length,
+    passed: tier !== 'fail',
+    hasNextLevel: level < MAX_LEVEL,
+  });
+  const showTips = tips.open && tipKeys.length > 0;
+  const scrollRef = useRef<ScrollView>(null);
+  const offset = useRef(0);
+  const missedRef = useRef<View>(null);
+  const actionsRef = useRef<View>(null);
+
   // After an a la escuadra round, once the celebration is over, perhaps ask
   // for a store rating (#57). Nothing here sets state, so the screen never
   // waits on it or re-renders for it. The wait calls the ask off if the
-  // screen is left or covered (Study is pushed over it), or if the share sheet
-  // or the photo-credits sheet opens. Coming back, or closing the sheet,
-  // starts the wait again. lib/storeReview.ts also never asks while the app is
-  // in the background.
+  // screen is left or covered (Study is pushed over it), if the share sheet
+  // or the photo-credits sheet opens, or while the How to play tips show.
+  // Coming back, or closing the sheet or the tips, starts the wait again.
+  // lib/storeReview.ts also never asks while the app is in the background.
   const flawless =
     tier === 'excellent' && !!squad && session.squadId === squadId && session.level === level;
   const earlierRounds = session.earlierRounds;
   useFocusEffect(
     useCallback(() => {
-      if (!flawless || sharing || crediting) return;
+      if (!flawless || sharing || crediting || showTips) return;
       let shown = true;
       const timer = setTimeout(
         () => askForReview({ flawless, earlierRounds }, () => shown),
@@ -107,7 +132,7 @@ export default function Results() {
         shown = false;
         clearTimeout(timer);
       };
-    }, [flawless, earlierRounds, sharing, crediting]),
+    }, [flawless, earlierRounds, sharing, crediting, showTips]),
   );
 
   const styles = StyleSheet.create({
@@ -192,7 +217,6 @@ export default function Results() {
   if (!squad || session.squadId !== squadId || session.level !== level) return null;
 
   const teamName = squadDisplayName(squad, language);
-  const missed = selectMissed(session.results);
   const copy = resultCopy({ tier, level, teamName, season: squad.season }, t);
   const actions = resultActions(tier !== 'fail', level < MAX_LEVEL);
   const strip = session.results.map((r) => ({
@@ -233,10 +257,21 @@ export default function Results() {
     chooseTeam: { label: t.results.chooseTeam, onPress: chooseDifferentTeam },
   };
   const main = primary[actions.primary];
+  const tipSpecs: TipSpec[] = tipKeys.map((key) => ({
+    target: key === 'missed' ? missedRef : actionsRef,
+    radius: radii.xl,
+    ...t.tips.results[key],
+  }));
 
   return (
     <>
       <ScrollView
+        ref={scrollRef}
+        onScroll={(e) => {
+          offset.current = e.nativeEvent.contentOffset.y;
+        }}
+        scrollEventThrottle={16}
+        {...(showTips ? tips.contentA11y : {})}
         style={styles.root}
         contentContainerStyle={styles.content}
         showsVerticalScrollIndicator={false}
@@ -299,13 +334,13 @@ export default function Results() {
         </View>
 
         {missed.length > 0 ? (
-          <MissedCards missed={missed} marker={squad.marker} beat={beat} />
+          <MissedCards ref={missedRef} missed={missed} marker={squad.marker} beat={beat} />
         ) : null}
         {tier === 'excellent' ? <Roster results={session.results} marker={squad.marker} /> : null}
 
         <View style={styles.spacer} />
 
-        <View style={styles.actions}>
+        <View ref={actionsRef} collapsable={false} style={styles.actions}>
           <Animated.View
             entering={riseIn(
               reduced,
@@ -377,6 +412,18 @@ export default function Results() {
         text={{ teamName, level, outcomes: session.results.map((r) => r.correct) }}
         onShared={(format) => track('result.shared', { level, score: score.correct, format })}
       />
+      {/* Last, so the layer covers the whole screen. */}
+      {showTips && (
+        <TipsLayer
+          tips={tipSpecs}
+          onClose={tips.close}
+          onSkip={tips.skip}
+          onShown={tips.onShown}
+          scrollBy={(dy) =>
+            scrollRef.current?.scrollTo({ y: Math.max(0, offset.current + dy), animated: false })
+          }
+        />
+      )}
     </>
   );
 }
@@ -526,12 +573,15 @@ function Score({
 }
 
 // The missed players as a row of cards that snaps one card at a time. Each
-// slides in from the right at the tier's beat, `cardStagger` apart.
+// slides in from the right at the tier's beat, `cardStagger` apart. `ref` is
+// the section's, the How to play tip's target.
 function MissedCards({
+  ref,
   missed,
   marker,
   beat,
 }: {
+  ref?: Ref<View>;
   missed: QuestionResult[];
   marker: TeamMarker;
   beat: number;
@@ -556,7 +606,7 @@ function MissedCards({
   });
 
   return (
-    <View style={styles.section}>
+    <View ref={ref} collapsable={false} style={styles.section}>
       <Animated.View
         entering={riseIn(reduced, spotlightMotion.rise, resultsTimeline.rise, beat)}
         style={styles.labelRow}
