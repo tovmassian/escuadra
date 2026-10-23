@@ -1,4 +1,5 @@
-import { useEffect, useRef, useState, type RefObject } from 'react';
+import { useFocusEffect } from 'expo-router';
+import { useCallback, useEffect, useRef, useState, type RefObject } from 'react';
 import {
   AccessibilityInfo,
   BackHandler,
@@ -50,7 +51,8 @@ interface TipsLayerProps {
   onSkip: () => void;
   /** Called once, as the first tip shows: `useTips` marks the screen seen. */
   onShown: () => void;
-  /** Scrolls the screen by `dy` points, without animation, for a target below the fold. */
+  /** Scrolls the screen by `dy` points, without animation: down for a target
+   *  below the fold, up (negative) for one above the top; it stops at 0. */
   scrollBy?: (dy: number) => void;
 }
 
@@ -58,11 +60,11 @@ interface TipsLayerProps {
 // a screen's tips, one at a time, over the screen they explain. Each target is
 // measured in the window, against the layer's own origin, until two frames agree
 // (a pushed screen is still sliding in) or `tips.settleCap` passes; one below the
-// fold is scrolled to once. Then the scrim is cut round it, ringed, pointed at,
-// and the tip is placed by `placeTip` and fades in. A tap anywhere, the tip
-// included, or Next, moves on; the last closes; Skip tips ends every screen's
-// tips; Android's back button closes. Rendered last inside the screen's root,
-// so it covers it.
+// fold or above the top is scrolled to once. Then the scrim is cut round it,
+// ringed, pointed at, and the tip is placed by `placeTip` and fades in. A tap
+// anywhere, the tip included, or Next, moves on; the last closes; Skip tips ends
+// every screen's tips; Android's back button closes, while the screen is focused.
+// Rendered last inside the screen's root, so it covers it.
 
 // SVG paint and path data, not text: kept out of the JSX for the
 // hard-coded-string lint. The arrow is drawn in its 40 × 40 box
@@ -168,7 +170,7 @@ export function TipsLayer({ tips: specs, onClose, onSkip, onShown, scrollBy }: T
             { target: box, radius: spec.radius, screen, insets: safe },
             tips,
           );
-          if (delta > 0) {
+          if (delta !== 0) {
             // Once per step, so a scroll that cannot go further never loops;
             // the screen moved, so it must settle again, with a fresh cap.
             scrolled = true;
@@ -191,14 +193,17 @@ export function TipsLayer({ tips: specs, onClose, onSkip, onShown, scrollBy }: T
     // Once per step; the rest is read from `latest`.
   }, [step]);
 
-  // Android's back button closes the tips, as it closes a sheet.
-  useEffect(() => {
-    const sub = BackHandler.addEventListener('hardwareBackPress', () => {
-      latest.current.onClose();
-      return true;
-    });
-    return () => sub.remove();
-  }, []);
+  // Android's back button closes the tips, as it closes a sheet; only while
+  // the screen is focused, so a screen pushed over it keeps its own back.
+  useFocusEffect(
+    useCallback(() => {
+      const sub = BackHandler.addEventListener('hardwareBackPress', () => {
+        latest.current.onClose();
+        return true;
+      });
+      return () => sub.remove();
+    }, []),
+  );
 
   const spec = specs[step];
   const placement =

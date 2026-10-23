@@ -131,10 +131,14 @@ export function placeTip(input: PlaceInput, g: TipGeometry): TipPlacement {
   };
 }
 
-/** How far to scroll down so a target below the fold sits, ringed, above the
- *  bottom gutter; 0 when it is already on screen. */
+/** How far to scroll so the target sits, ringed, on screen: down (positive) for
+ *  one below the fold, to above the bottom gutter; up (negative) for one above
+ *  the top, as an earlier step's scroll may leave it, to just below Skip tips;
+ *  0 when it is already on screen. */
 export function scrollDelta(input: Omit<PlaceInput, 'tipHeight'>, g: TipGeometry): number {
   const { ring } = ringOf(input, g);
+  const top = input.insets.top + g.skipClear;
+  if (ring.y < top) return ring.y - top;
   const bottom = input.screen.height - input.insets.bottom - g.gutter;
   return Math.max(0, ring.y + ring.height - bottom);
 }

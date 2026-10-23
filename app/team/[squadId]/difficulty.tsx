@@ -168,7 +168,7 @@ export default function Difficulty() {
           onSkip={tips.skip}
           onShown={tips.onShown}
           scrollBy={(dy) =>
-            scrollRef.current?.scrollTo({ y: offset.current + dy, animated: false })
+            scrollRef.current?.scrollTo({ y: Math.max(0, offset.current + dy), animated: false })
           }
         />
       )}

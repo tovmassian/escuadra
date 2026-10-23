@@ -444,7 +444,9 @@ export default function TeamPicker() {
           onClose={tips.close}
           onSkip={tips.skip}
           onShown={tips.onShown}
-          scrollBy={(dy) => scrollRef.current?.scrollTo({ y: scrollY.get() + dy, animated: false })}
+          scrollBy={(dy) =>
+            scrollRef.current?.scrollTo({ y: Math.max(0, scrollY.get() + dy), animated: false })
+          }
         />
       )}
     </View>

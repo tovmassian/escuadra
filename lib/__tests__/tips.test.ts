@@ -96,7 +96,8 @@ describe('placeTip', () => {
       G,
     );
     expect(p.side).toBe('above');
-    expect(p.tipTop).toBeGreaterThanOrEqual(G.skipClear);
+    // ring top 294 - 4 - 40 - 8 - 260 = -18, clamped to the top, 0 + skipClear 100
+    expect(p.tipTop).toBe(100);
   });
 
   it('points the arrow at a narrow target centre, mirrored on the right half', () => {
@@ -138,6 +139,11 @@ describe('scrollDelta', () => {
     const target = { x: 20, y: 900, width: 350, height: 56 };
     // ring bottom 900 + 56 + 6 = 962; visible bottom 844 - 34 - 24 = 786
     expect(scrollDelta({ target, radius: 28, screen: SCREEN, insets: INSETS }, G)).toBe(176);
+  });
+  it('scrolls up to a target above the top, its ring just clearing Skip tips', () => {
+    const target = { x: 326, y: 20, width: 44, height: 44 };
+    // ring top 20 - 6 = 14; visible top 47 + 100 = 147
+    expect(scrollDelta({ target, radius: 22, screen: SCREEN, insets: INSETS }, G)).toBe(-133);
   });
 });
 
