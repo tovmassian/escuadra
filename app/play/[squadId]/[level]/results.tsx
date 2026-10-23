@@ -97,7 +97,8 @@ export default function Results() {
     const timer = setTimeout(() => setCelebrated(true), resultsTimeline.tips);
     return () => clearTimeout(timer);
   }, []);
-  const tips = useTips('results', celebrated);
+  // Not behind a sheet opened before then: the tips wait for it to close.
+  const tips = useTips('results', celebrated && !sharing && !crediting);
   const missed = selectMissed(session.results);
   const tipKeys = resultsTips({
     missed: missed.length,
@@ -180,6 +181,8 @@ export default function Results() {
     strip: { paddingHorizontal: spacing.lg, paddingTop: spacing.lg },
     spacer: { flex: 1, minHeight: spacing.lg },
     actions: { paddingHorizontal: spacing.lg, gap: spacing.sm },
+    // The main button and the Study row, without the credits: the second tip's target.
+    actionsButtons: { gap: spacing.sm },
     cta: {
       minHeight: sizes.cta.normal,
       paddingVertical: spacing.xs,
@@ -340,53 +343,55 @@ export default function Results() {
 
         <View style={styles.spacer} />
 
-        <View ref={actionsRef} collapsable={false} style={styles.actions}>
-          <Animated.View
-            entering={riseIn(
-              reduced,
-              spotlightMotion.numberRise,
-              resultsTimeline.rise,
-              actionAt(0),
-            )}
-          >
-            <Pressable
-              testID="results-primary"
-              onPress={main.onPress}
-              accessibilityRole="button"
-              style={({ pressed }) => [styles.cta, pressed && { opacity: opacity.settled }]}
+        <View style={styles.actions}>
+          <View ref={actionsRef} collapsable={false} style={styles.actionsButtons}>
+            <Animated.View
+              entering={riseIn(
+                reduced,
+                spotlightMotion.numberRise,
+                resultsTimeline.rise,
+                actionAt(0),
+              )}
             >
-              <Text style={styles.ctaText}>{main.label}</Text>
-            </Pressable>
-          </Animated.View>
-          <Animated.View
-            entering={riseIn(
-              reduced,
-              spotlightMotion.numberRise,
-              resultsTimeline.rise,
-              actionAt(1),
-            )}
-            style={styles.row}
-          >
-            <Pressable
-              testID="results-study"
-              onPress={studySquad}
-              accessibilityRole="button"
-              style={({ pressed }) => [styles.outline, pressed && { opacity: opacity.settled }]}
-            >
-              <Text style={styles.outlineText}>{t.results.studySquad}</Text>
-            </Pressable>
-            {actions.retryIcon ? (
               <Pressable
-                testID="results-retry"
-                onPress={() => retry(level)}
+                testID="results-primary"
+                onPress={main.onPress}
                 accessibilityRole="button"
-                accessibilityLabel={t.results.retry}
-                style={({ pressed }) => [styles.retry, pressed && { opacity: opacity.settled }]}
+                style={({ pressed }) => [styles.cta, pressed && { opacity: opacity.settled }]}
               >
-                <RetryGlyph color={colors.textPrimary} />
+                <Text style={styles.ctaText}>{main.label}</Text>
               </Pressable>
-            ) : null}
-          </Animated.View>
+            </Animated.View>
+            <Animated.View
+              entering={riseIn(
+                reduced,
+                spotlightMotion.numberRise,
+                resultsTimeline.rise,
+                actionAt(1),
+              )}
+              style={styles.row}
+            >
+              <Pressable
+                testID="results-study"
+                onPress={studySquad}
+                accessibilityRole="button"
+                style={({ pressed }) => [styles.outline, pressed && { opacity: opacity.settled }]}
+              >
+                <Text style={styles.outlineText}>{t.results.studySquad}</Text>
+              </Pressable>
+              {actions.retryIcon ? (
+                <Pressable
+                  testID="results-retry"
+                  onPress={() => retry(level)}
+                  accessibilityRole="button"
+                  accessibilityLabel={t.results.retry}
+                  style={({ pressed }) => [styles.retry, pressed && { opacity: opacity.settled }]}
+                >
+                  <RetryGlyph color={colors.textPrimary} />
+                </Pressable>
+              ) : null}
+            </Animated.View>
+          </View>
           <Animated.View
             entering={riseIn(
               reduced,
