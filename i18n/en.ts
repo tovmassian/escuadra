@@ -76,10 +76,6 @@ export const en = {
     /** ≤ 52 chars: first run's hint under Start Training, beside a star. */
     starHint: 'Star a team and it waits for you here.',
   },
-  launch: {
-    /** ≤ 22 chars: the launch intro's foot (#182), in mono capitals; a tap anywhere skips. */
-    tapToSkip: 'Tap to skip',
-  },
   languageSheet: {
     /** ≤ 16 chars: the sheet's title. */
     title: 'Language',

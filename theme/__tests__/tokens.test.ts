@@ -527,7 +527,6 @@ describe('launch intro motion', () => {
     kick,
     wordmark,
     tagline,
-    skipHint,
     colourBack,
     end,
     dock,
@@ -542,7 +541,6 @@ describe('launch intro motion', () => {
     kick.at + kick.rise + kick.settle,
     wordmark.at + wordmark.duration,
     tagline.at + tagline.duration,
-    skipHint.at + skipHint.duration,
     colourBack.at + colourBack.duration,
   ];
 

@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AccessibilityInfo, Platform, Pressable, StyleSheet, Text, type View } from 'react-native';
+import { AccessibilityInfo, Platform, Pressable, StyleSheet, type View } from 'react-native';
 import Animated, {
   Easing,
   interpolate,
@@ -11,13 +11,11 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scheduleOnRN } from 'react-native-worklets';
 import { measureInWindow, useLaunchReveal } from './LaunchReveal';
 import { useReduceMotion } from './useReduceMotion';
 import { useScreenReader } from './useScreenReader';
 import { A_LA_ESCUADRA, ESCUADRA_WORDMARK } from '@/i18n/names';
-import { useT } from '@/i18n/useT';
 import {
   dockTransform,
   introPlan,
@@ -41,20 +39,21 @@ import { useThemeColors } from '@/theme/useTheme';
 // The launch intro (#182), "the strike": on a cold launch the Escuadra mark is
 // drawn as a perfect shot over the root stack, then fades to whatever the stack
 // shows first. Four beats:
-//   1. Frame: the crossbar and post in `mark`, "TAP TO SKIP" at the foot.
+//   1. Frame: the crossbar and post in `mark`.
 //   2. Shot: the ball flies in from off-screen bottom left on an arc, shrinking
 //      to size; each trail square shows as the ball passes it.
 //   3. Goal: frame and ball flash `success`, a ring flashes out from the ball,
 //      the frame kicks up and right.
 //   4. A la escuadra: the colour comes back, the wordmark rises in, the tagline
-//      fades in under it, the skip hint fades out.
+//      fades in under it.
 // Then the hand-off: the mark and word dock into Home's top-bar lockup as the
 // ground fades and Home rises in (`LaunchReveal`). With no Home to dock into,
 // under Reduce Motion, or on a tap, the whole intro fades instead.
 // Every stop is in `launchIntro` (theme/tokens.ts), the canvas's timeline; the
 // mark is `markGeometry` in plain Views, as `EscuadraMark` draws it. When it
 // plays (once per JS launch, the end frame under Reduce Motion, never with a
-// screen reader) is `introPlan` (lib/launchIntro.ts). A tap anywhere skips.
+// screen reader) is `introPlan` (lib/launchIntro.ts). A tap anywhere skips,
+// unlabelled: a hint would be gone before anyone could read it.
 
 // Set when the intro first mounts: a remount in the same JS launch (Android's
 // back-out and reopen) never replays it.
@@ -93,8 +92,6 @@ const AT_REST: Move = { translateX: 0, translateY: 0, scale: 1 };
 export function LaunchIntro({ onDone }: { onDone: () => void }) {
   const colors = useThemeColors();
   const launch = useLaunchReveal();
-  const t = useT();
-  const insets = useSafeAreaInsets();
   const reduceMotion = useReduceMotion();
   const screenReader = useScreenReader();
   // Decided once, on mount, with the screen reader answer asked at load. If
@@ -137,7 +134,6 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   const kick = useSharedValue(0);
   const word = useSharedValue(still ? 1 : 0);
   const tagline = useSharedValue(still ? 1 : 0);
-  const skipHint = useSharedValue(still ? 0 : 1);
   const fade = useSharedValue(1);
   // The dock: the ground, and the trail and tagline as they clear, run 1 → 0;
   // the mark's glide and the word's run 0 → 1 along `move`, set as they start.
@@ -300,12 +296,6 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
           withTiming(1, { duration: launchIntro.tagline.duration, easing: Easing.linear }),
         ),
       );
-      skipHint.set(
-        withDelay(
-          launchIntro.skipHint.at,
-          withTiming(0, { duration: launchIntro.skipHint.duration, easing: Easing.linear }),
-        ),
-      );
     }
     return () => {
       clearTimeout(timer);
@@ -393,7 +383,6 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
     transform: [{ translateY: launchIntro.wordmark.rise * (1 - word.value) }],
   }));
   const taglineStyle = useAnimatedStyle(() => ({ opacity: tagline.value * clear.value }));
-  const skipStyle = useAnimatedStyle(() => ({ opacity: skipHint.value }));
 
   if (plan === 'none') return null;
 
@@ -404,16 +393,12 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
     height: ball.r * 2 * u,
     borderRadius: ball.r * u,
   };
-  // The canvas sets the hint 44 dp up from the foot of a frame that includes
-  // the home indicator: just over the inset, never nearer the edge than that.
-  const skipBottom = Math.max(insets.bottom + spacing.xs, spacing.xxxl);
   const themed = StyleSheet.create({
     ground: { backgroundColor: colors.background },
     ring: { borderWidth: launchIntro.ring.stroke * u, borderColor: colors.success },
     trail: { backgroundColor: colors.mark },
     word: { ...typography.introWordmark, color: colors.textPrimary },
     tagline: { ...typography.introTagline, color: colors.textMuted, marginTop: spacing.sm },
-    skip: { ...typography.introSkip, color: colors.textMuted },
   });
 
   // The ground is its own layer, so it can fade alone as the lockup docks. The
@@ -487,11 +472,6 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
         >
           {A_LA_ESCUADRA}
         </Animated.Text>
-        <Animated.View style={[styles.foot, { bottom: skipBottom }, skipStyle]}>
-          <Text style={themed.skip} maxFontSizeMultiplier={fontScaleCap.display}>
-            {t.launch.tapToSkip}
-          </Text>
-        </Animated.View>
       </Pressable>
     </Animated.View>
   );
@@ -502,5 +482,4 @@ const styles = StyleSheet.create({
   mark: { width: sizes.introMark, height: sizes.introMark },
   word: { marginTop: spacing.xxl },
   piece: { position: 'absolute' },
-  foot: { position: 'absolute', left: 0, right: 0, alignItems: 'center' },
 });

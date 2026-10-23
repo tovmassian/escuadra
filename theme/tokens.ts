@@ -465,7 +465,7 @@ export const typography = {
     letterSpacing: -0.56,
   },
   // The launch intro (#182): the lockup's word at 46 / −1, the "A LA ESCUADRA"
-  // tagline under it, and "TAP TO SKIP" at the foot.
+  // tagline under it.
   introWordmark: {
     fontFamily: 'Archivo-SemiExpandedExtraBold',
     fontSize: 46,
@@ -476,13 +476,6 @@ export const typography = {
     fontWeight: '600' as const,
     fontSize: 12,
     letterSpacing: 3,
-    textTransform: 'uppercase' as const,
-  },
-  introSkip: {
-    fontFamily: 'IBMPlexMono-SemiBold',
-    fontWeight: '600' as const,
-    fontSize: 11,
-    letterSpacing: 1,
     textTransform: 'uppercase' as const,
   },
   // Filter-pill labels.
@@ -1091,10 +1084,9 @@ export const launchIntro = {
   ring: { at: 700, duration: 300, from: 0.6, to: 2.8, opacity: 0.9, stroke: 0.96 },
   kick: { at: 700, rise: 80, settle: 140, offset: 1.92 },
   // The end frame: the wordmark rises `rise` dp in, the tagline fades in, the
-  // skip hint fades out, the colour comes back to `mark`.
+  // colour comes back to `mark`.
   wordmark: { at: 800, duration: 260, rise: 16 },
   tagline: { at: 1000, duration: 200 },
-  skipHint: { at: 1040, duration: 160 },
   colourBack: { at: 1000, duration: 200 },
   // Then the lockup docks into Home's top bar over `dock.duration` (spec,
   // Hand-off to Home): the trail and tagline clear in `clear`, the ground

@@ -9,13 +9,13 @@ binds the rest of the look.
 
 On a cold launch the Escuadra mark is drawn as a perfect strike, then Home shows:
 
-1. **Frame.** The crossbar and post, in `mark`, on `background`. "TAP TO SKIP" at the foot.
+1. **Frame.** The crossbar and post, in `mark`, on `background`.
 2. **Shot.** The ball flies in from off-screen bottom left, on an arc, shrinking from 1.6× to
    1×. The two trail squares appear behind it as it passes them, the far one first.
 3. **Goal.** It lands in the corner. Frame and ball flash `success`, a `success` ring flashes
    out from the ball, and the frame kicks up and right.
 4. **A la escuadra.** Frame and ball return to `mark`; the wordmark rises in, "A LA
-   ESCUADRA" fades in under it, "TAP TO SKIP" fades out. Then the lockup docks into Home's
+   ESCUADRA" fades in under it. Then the lockup docks into Home's
    top bar as the ground fades away (Hand-off to Home, below).
 
 Built from `markGeometry` (`theme/brand.ts`) in plain Views, like `EscuadraMark`: no video,
@@ -39,7 +39,6 @@ loop × 40 ms per percent), in a `launchIntro` token in `theme/tokens.ts`:
 | frame kick          | 700 → 920      | to (+6, −6) at 780, back to rest by 920, ease-out (frame only) |
 | wordmark            | 800 → 1060     | rises 16 dp, opacity 0 → 1, `celebrationEasingCurves.rise`     |
 | "A LA ESCUADRA"     | 1000 → 1200    | opacity 0 → 1                                                  |
-| "TAP TO SKIP"       | 1040 → 1200    | opacity 1 → 0                                                  |
 | frame + ball colour | 1000 → 1200    | `success` → `mark`                                             |
 | the hand-off        | 1200 → 1500    | the dock (Hand-off to Home); then it unmounts                  |
 
@@ -128,24 +127,28 @@ A tap anywhere skips: the intro fades out over `durations.transition` and unmoun
 overlay is one full-screen `Pressable`, hidden from screen readers (it never plays with one
 on), so it has no spoken name.
 
+**No "TAP TO SKIP" label** (owner's call, 2026-10-23, after trying it; the canvas draws one).
+It showed for about a second and faded as beat 4 arrived, too fast to read, so it was noise
+that left people wondering what they had missed. The tap still skips; it is not an
+accessibility need, since Reduce Motion shows only the end frame, a screen reader never meets
+the intro, and the whole thing is far under the 5 s after which moving content needs a
+control (WCAG 2.2.2).
+
 ## Layout and look
 
 - A centred column: the mark at `sizes.introMark` (200), the wordmark, the tagline, with the
-  canvas's gaps as spacing tokens. "TAP TO SKIP" is pinned to the foot, above the bottom
-  safe-area inset.
+  canvas's gaps as spacing tokens.
 - Colours are existing roles in both palettes: `background`, `mark`, `success`,
-  `textPrimary` (wordmark), `textMuted` (tagline, skip). The canvas is drawn dark; light uses
+  `textPrimary` (wordmark), `textMuted` (tagline). The canvas is drawn dark; light uses
   the same roles. No new role.
-- Type: three new tokens. The wordmark is `typography.wordmark`'s Archivo SemiExpanded
-  ExtraBold at 46 / −1; the tagline IBM Plex Mono SemiBold 12 / +3; "TAP TO SKIP" IBM Plex
-  Mono SemiBold 11 / +1, both uppercased by style.
+- Type: two new tokens. The wordmark is `typography.wordmark`'s Archivo SemiExpanded
+  ExtraBold at 46 / −1; the tagline IBM Plex Mono SemiBold 12 / +3, uppercased by style.
 
 ## Text
 
 - The wordmark is `ESCUADRA_WORDMARK`, and the tagline `A_LA_ESCUADRA` (`i18n/names.ts`),
   never translated.
-- **"Tap to skip"** is the one new string, `launch.tapToSkip`, with a budget, in all five
-  catalogs and reviewed by a native speaker per language.
+- No new catalog string (Skipping, above).
 
 ## Motion rule
 
