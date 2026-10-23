@@ -121,12 +121,15 @@ export function EraserGlyph({ color }: { color: string }) {
   const w = borderWidths.thick + borderWidths.hairline / 2;
   const blockW = s * 0.42;
   const blockH = s * 0.74;
+  // The turned block reaches this far above and below its centre, which sits so its lowest
+  // corner rests on the baseline's top edge.
+  const reach = ((blockW + blockH) / 2) * Math.SQRT1_2;
   const styles = StyleSheet.create({
     box: { width: s, height: s },
     block: {
       position: 'absolute',
       left: (s - blockW) / 2,
-      top: (s - blockH) / 2 - w,
+      top: s - w - reach - blockH / 2,
       width: blockW,
       height: blockH,
       borderRadius: radii.xs,
