@@ -6,6 +6,7 @@ import {
   hasOutdated,
   formatLastUpdated,
   heroLine,
+  isEscuadra,
   ladderRows,
   levelDescription,
   playLevelLabel,
@@ -323,6 +324,40 @@ describe('statusLine', () => {
       text: 'Best 6/10 · Outdated',
       spoken: 'Best 6 of 10, outdated',
     });
+  });
+  it('reads a la escuadra for a current 10/10, written and spoken', () => {
+    const row = {
+      level: 3,
+      status: 'cleared',
+      best: { correct: 10, total: 10, outdated: false },
+    } as const;
+    expect(statusLine(row, en)).toEqual({
+      text: 'a la escuadra · 10/10',
+      spoken: 'Your best, 10 of 10, a la escuadra',
+    });
+  });
+  it('reads an outdated 10/10 as outdated, not a la escuadra', () => {
+    const row = {
+      level: 3,
+      status: 'cleared',
+      best: { correct: 10, total: 10, outdated: true },
+    } as const;
+    expect(statusLine(row, en).text).toBe('Best 10/10 · Outdated');
+  });
+});
+
+describe('isEscuadra', () => {
+  it('is a current 10/10 only', () => {
+    const rows = ladderRows('bar', current({ 'bar:1': 9, 'bar:2': 8, 'bar:3': 10 }), NOW);
+    expect(isEscuadra(rows[2]!)).toBe(true);
+    expect(isEscuadra(rows[0]!)).toBe(false);
+  });
+  it('is not an outdated 10/10', () => {
+    const rows = ladderRows('bar', current({ 'bar:1': 10 }, OLD), NOW);
+    expect(isEscuadra(rows[0]!)).toBe(false);
+  });
+  it('is not an unplayed level', () => {
+    expect(isEscuadra({ level: 1, status: 'unlocked' })).toBe(false);
   });
 });
 

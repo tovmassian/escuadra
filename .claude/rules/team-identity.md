@@ -51,16 +51,19 @@ the marker always renders as thin, tall, vertical bands, using `bands` (and
 entirely: Spain reads red/yellow/red left-to-right, not stacked. This is
 `TeamMarker`'s `variant="banner"` (`components/TeamMarker.tsx`,
 `sizes.teamMarkerBanner` in `theme/tokens.ts`). `variant` is required, so the question
-screen must name it: `banner` there, `picker` in the picker. The Difficulty hero
-(`LadderHero`) draws the same vertical bands, full bleed under a veil, through
-`bannerBands`.
+screen must name it: `banner` there, `picker` in the picker. Home's two sizes
+(#181) draw at the true orientation like `picker`: `continue` (34 × 23, ringed
+with `ctaLine` on Continue's `ctaBg`) and `squad` (24 × 16, in a starred team's
+round button). The Difficulty hero (`LadderHero`) draws the same vertical bands,
+full bleed under a veil, through `bannerBands`.
 
 ## Flags (guardrail 2's carve-out)
 
 National flags are the one carve-out, because the rule exists
 for trademark exposure and a flag carries none: a nation's identity element
 is a committed PNG in `assets/flags/`, shown on the team picker, the
-Difficulty hero, level-3 nationality options, the `NAT` stat chip and the
-Study screen's cards and list rows. Never a Unicode regional-indicator emoji
+Difficulty hero, Home's Continue button and starred-team buttons, level-3
+nationality options, the `NAT` stat chip and the Study screen's cards and list
+rows. Never a Unicode regional-indicator emoji
 (🇦🇷) — that depends on an OS flag-emoji font, and Windows ships none, so the
 Playwright capture behind `npm run shots` would render "AR".

@@ -138,6 +138,16 @@ export interface Palette {
   ctaMuted: string;
   /** The ring round a 40 × 27 team marker in the picker. */
   markerRing: string;
+  // ---- 2.0 Home (#181) ----
+  /** The outline of Home's drifting shirt numbers: about 14% of
+   *  `textPrimary` over `background`, as the canvas draws it, made opaque. */
+  wallLine: string;
+  /** `background` at no opacity: the clear end of Home's fades. A plain
+   *  `transparent` would fade through black on iOS. */
+  backgroundClear: string;
+  /** The ring round a flag or marker on `ctaBg` (Home's Continue), so a
+   *  white flag or club colour doesn't bleed into the button. */
+  ctaLine: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -225,6 +235,9 @@ const darkRoles = {
   soonBg: 'rgba(255,255,255,0.08)',
   ctaMuted: '#4b4f56',
   markerRing: 'rgba(255,255,255,0.12)',
+  wallLine: '#33353a',
+  backgroundClear: 'rgba(18,20,26,0)',
+  ctaLine: 'rgba(20,22,26,0.14)',
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -274,6 +287,9 @@ const lightRoles = {
   soonBg: 'rgba(20,22,26,0.06)',
   ctaMuted: '#b4b8bb',
   markerRing: 'rgba(20,22,26,0.12)',
+  wallLine: '#d7d8da',
+  backgroundClear: 'rgba(247,247,249,0)',
+  ctaLine: 'rgba(255,255,255,0.16)',
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -390,6 +406,37 @@ export const ladderHero = {
   veilFloor: { dark: 0.4, light: 0.5 },
 } as const;
 
+// Home's number wall (#181). Archivo ExtraCondensed Black at `fontSize`, rows
+// `rowHeight` apart (the canvas's 0.86 line height); `baseline` is where a
+// number sits in its row, as CSS centres the font's 878 ascent and 210 descent
+// in that line. `advance` is each digit's width per 1,000 em, from the font's
+// hmtx table (theme/__tests__/numberWall.test.ts reads the TTF to pin it):
+// Archivo's digits are proportional. `tracking` is between a number's digits
+// and `gap` between numbers, the canvas's space plus its letter spacing. The
+// drift moves `speed` pt a second, ambient and endless: the Motion rule's
+// written exception (.claude/rules/design-tokens.md).
+export const numberWall = {
+  fontSize: 150,
+  rowHeight: 129,
+  baseline: 115,
+  advance: {
+    '0': 447,
+    '1': 375,
+    '2': 430,
+    '3': 443,
+    '4': 438,
+    '5': 440,
+    '6': 448,
+    '7': 400,
+    '8': 435,
+    '9': 448,
+  },
+  tracking: 4,
+  gap: 25,
+  stroke: 1.5,
+  speed: 50,
+} as const;
+
 export const typography = {
   screenTitle: { fontFamily: 'Inter-Bold', fontSize: 28 },
   sectionHead: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 20 },
@@ -404,17 +451,14 @@ export const typography = {
   statMonoTiny: { fontFamily: 'IBMPlexMono-SemiBold', fontWeight: '600' as const, fontSize: 12 },
   // Team-row names — one step down from `body`.
   rowTitle: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 15 },
-  // The wordmark's "escuadra" lockup. ExtraBold at -0.02em, per the 2a
-  // design source. The only place Inter 800 is used.
+  // The lockup's lowercase 'escuadra', in Archivo SemiExpanded ExtraBold, as the 2.0 canvas sets it.
   wordmark: {
-    fontFamily: 'Inter-ExtraBold',
-    fontSize: 23,
-    letterSpacing: -0.46,
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 21,
+    letterSpacing: -0.5,
   },
-  // The wordmark's stacked hero size (used with `sizes.wordmarkMarkHero`).
-  // Same -0.02em tracking ratio as `wordmark`, scaled to the larger 28px
-  // (`screenTitle`'s size) rather than reusing `wordmark`'s -0.46, which was
-  // tuned for 23px and reads too tight at hero scale.
+  // The feature graphic's large word (`app/store/feature-graphic.tsx`, used
+  // with `sizes.wordmarkMarkHero`). -0.02em tracking at 28px.
   wordmarkHero: {
     fontFamily: 'Inter-ExtraBold',
     fontSize: 28,
@@ -744,6 +788,31 @@ export const typography = {
     letterSpacing: 0.5,
     textTransform: 'uppercase' as const,
   },
+  // ---- 2.0 Home (#181) ----
+  // "KNOW EVERY NUMBER." over the buttons.
+  homeHeadline: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 34,
+    lineHeight: 34,
+    letterSpacing: -0.5,
+    textTransform: 'uppercase' as const,
+  },
+  // Continue's "CONTINUE SPAIN" and the START TRAINING pill.
+  homeButton: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 17,
+    letterSpacing: 0.4,
+    textTransform: 'uppercase' as const,
+  },
+  // Continue's "LEVEL 2 · BEST 7/10" and its OUTDATED.
+  homeMeta: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 11,
+    textTransform: 'uppercase' as const,
+  },
+  // First run's "Star a team and it waits for you here."
+  homeHint: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 14 },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -781,8 +850,9 @@ export const opacity = {
 // §2.4; a tap skips it, and it never runs with a screen reader on). A goal
 // chains its beats (the shot, then the corner's kick and ring) to about
 // 640 ms after the tap; each stays within the budget, and the chain ends well
-// inside `autoAdvance`. The round-over celebration and the home lockup are
-// the one carve-out from the rule; see `strikeTiming`/`resultsTimeline` below.
+// inside `autoAdvance`. The round-over celebration is the other carve-out from
+// the rule; see `strikeTiming`/`resultsTimeline` below.
+// `numberWall.speed`, the wall's drift, is not timed and is not in `durations` (#181).
 export const durations = {
   press: 100,
   reveal: 180,
@@ -875,8 +945,8 @@ export const spotlightCues = {
 
 // ---- Celebration motion ---------------------------------------------------
 // Budget for the results screen's round-over celebration (passed/excellent
-// tiers) and the once-per-launch home lockup — and, mid-round, the ring a goal
-// flashes as it lands in the corner (`rise`, #129). Plain bezier
+// tiers) — and, mid-round, the ring a goal flashes as it lands in the corner
+// (`rise`, #129). Plain bezier
 // control-point tuples rather than `Easing.bezier(...)` instances, so
 // this file stays free of the animation library per its own header comment;
 // construct the curve at the call site (`Easing.bezier(...curve)`).
@@ -889,9 +959,9 @@ export const celebrationEasingCurves = {
 // Preview knobs for a longer, more exaggerated take on the celebration
 // motion below, without hand-editing every value. `MOTION_TIME_SCALE` ships at
 // 1 (the spec's timing) and stretches every duration and delay in
-// `strikeTiming`, `celebrationRiseDuration`, `resultsTimeline` (bar its strip
-// fields, which are the mid-round `durations`) and `homeCascade` uniformly (so
-// the whole cascade's rhythm holds, just slower); `MOTION_DISTANCE_SCALE` ships
+// `strikeTiming` and `resultsTimeline` (bar its strip fields, which are the
+// mid-round `durations`) uniformly (so the whole cascade's rhythm holds, just
+// slower); `MOTION_DISTANCE_SCALE` ships
 // at 1.5 and is read directly by `EscuadraStrike` to exaggerate the ball's
 // travel/overshoot, the frame's recoil and the trail's catch-up distance —
 // set it to 1 to restore the base distances, nothing else needs to change.
@@ -916,9 +986,8 @@ export interface StrikeTiming {
 // The mark's crossbar/post/ball choreography, keyed by where it appears.
 // `passed` is deliberately quieter than `excellent` — no flash ring, no
 // trail — matching the design's "two-tone, quieter strike" for a level
-// clear that isn't flawless. `home` sits between the two: full trail, no
-// flash, since the launch lockup isn't a celebration.
-export const strikeTiming: Record<'excellent' | 'passed' | 'home', StrikeTiming> = {
+// clear that isn't flawless.
+export const strikeTiming: Record<'excellent' | 'passed', StrikeTiming> = {
   excellent: {
     frameDuration: t(180),
     frameStagger: t(40),
@@ -939,20 +1008,7 @@ export const strikeTiming: Record<'excellent' | 'passed' | 'home', StrikeTiming>
     flash: null,
     trail: null,
   },
-  home: {
-    frameDuration: t(180),
-    frameStagger: t(40),
-    recoilDuration: t(240),
-    recoilDelay: t(300),
-    ballDuration: t(560),
-    ballDelay: t(60),
-    flash: null,
-    trail: { duration: t(280), delay: t(320), stagger: t(60) },
-  },
 };
-
-// Home's continue card and buttons rise in over this (app/index.tsx).
-export const celebrationRiseDuration = t(220);
 
 // The Results screen's timeline (spec §6), at MOTION_TIME_SCALE 1. It is the
 // celebration carve-out, so it may run past the mid-round 300 ms budget.
@@ -979,28 +1035,11 @@ export const resultsTimeline = {
   reviewPrompt: t(2000),
 } as const;
 
-// Home's lockup: the mark strike (`strikeTiming.home`) plus the wordmark's
-// letter-by-letter rise and the continue-card/buttons beneath it. Runs once,
-// on the home screen's initial mount only — see app/index.tsx.
-export const homeCascade = {
-  letterDuration: t(300),
-  letterBase: t(400),
-  letterStep: t(28),
-  continueCardDelay: t(600),
-  actionsBase: t(660),
-  actionsStep: t(40),
-};
-
 export const sizes = {
   // The shirt-number column of a Study list row.
   studyColumn: { no: 26 },
-  // Home's "Start Training" is the one 56px control; every other button
-  // (Continue, Results actions) is 52px.
+  // The least a `Button` is tall.
   controlHeight: 52,
-  controlHeightLarge: 56,
-  // Plain colour dot for Home's "continue" card — a different, simpler
-  // element than the team identity marker below.
-  teamDot: 10,
   // The small corner radius of a team's bands and flags outside the picker
   // (Study's banner strip, the in-round banner, and the inline flags on an
   // answer tile, a chip, a player card and a Study row).
@@ -1016,11 +1055,9 @@ export const sizes = {
   flagMarker: { width: 22, height: 15 },
   flagInline: { width: 18, height: 12 },
   flagRow: { width: 20, height: 13 },
-  // Escuadra wordmark's mark, matching the 30px mark beside 23px type in the
-  // design source's lockup.
-  wordmarkMark: 30,
-  // Home's centred lockup. The mark only reads its right angle at this size,
-  // which is why the trail is shown here and nowhere else.
+  // The top bar's lockup on Home (#181): a 28 pt mark beside the 21 pt word.
+  wordmarkMark: 28,
+  // The feature graphic's large mark (`app/store/feature-graphic.tsx`).
   wordmarkMarkHero: 86,
   // A 10/10's player circles.
   rosterAvatar: 54,
@@ -1132,6 +1169,21 @@ export const sizes = {
   ladderPill: 56,
   // A compact rung's level-number column, so every title starts on one line.
   rungNumberColumn: 34,
+  // Home (#181): Continue's least height, its flag or marker and its play
+  // circle; START TRAINING's height; a starred team's flag or marker in its
+  // round button; how far the top fade reaches past the wall's top edge, and
+  // the height of the skirt that fades the wall out above the buttons; and the
+  // width of the fade at an edge of the starred row that has more to scroll to.
+  home: {
+    continue: 68,
+    continueMarker: { width: 34, height: 23, radius: 4 },
+    play: 46,
+    start: 60,
+    squadMarker: { width: 24, height: 16, radius: 3 },
+    topFade: 54,
+    skirt: 180,
+    squadsFade: 32,
+  },
 } as const;
 
 // The share picture's captured size in pixels: a 9:16 story (spec §4.2).
@@ -1140,7 +1192,6 @@ export const shareCapture = { width: 1080, height: 1920 } as const;
 export const iconSize = {
   markLarge: 18, // AnswerTile's correct mark
   markSmall: 13, // AnswerTile's incorrect-picked mark
-  chevronLarge: 18, // Home's continue-card chevron
   searchGlyph: 20, // SearchField's magnifying-glass icon (spec #176 §3)
   clearGlyph: 10, // SearchField's clear (×) button, drawn from two crossed bars
   closeGlyph: 14, // the question's close ×, two crossed bars
@@ -1156,6 +1207,7 @@ export const iconSize = {
   outdated: 10, // the clock beside OUTDATED on a picker row or a rung (#180)
   outdatedCard: 11, // the same, on Difficulty's focused card
   outdatedNote: 13, // the same, before Difficulty's "Squad updated" line
+  starHint: 16, // the star before Home's first-run hint (#181)
 } as const;
 
 // Base unit 4. Use spacing[n], not raw numbers, in component styles.

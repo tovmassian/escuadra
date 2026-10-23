@@ -19,16 +19,15 @@ import {
 } from '@/theme/tokens';
 
 // The animated counterpart to `EscuadraMark` — used only where the mark
-// plays its "a la escuadra" strike (results screen, home lockup). Everywhere
-// else (icon plates, LockGlyph, the non-hero wordmark) keeps
-// using the plain static `EscuadraMark`.
+// plays its "a la escuadra" strike (the results screen). Everywhere else
+// (icon plates, LockGlyph, the Home wordmark) keeps using the plain static
+// `EscuadraMark`.
 //
 // Motion offsets (the ball's fly-in distance, the frame's entrance offset,
 // the trail's catch-up distance) are authored in the design source at the
 // celebration mark's 120dp size and scaled here by `size / REFERENCE_SIZE`,
-// so the choreography holds proportionally at the home lockup's smaller
-// size too, rather than travelling the same fixed distance regardless of
-// mark size. That same scale also carries `MOTION_DISTANCE_SCALE` (see
+// so the choreography holds proportionally at any mark size, rather than
+// travelling the same fixed distance regardless of it. That same scale also carries `MOTION_DISTANCE_SCALE` (see
 // theme/tokens.ts) — 1 in the shipped build, so this is a no-op until that
 // preview knob is turned up.
 const REFERENCE_SIZE = 120;
@@ -132,8 +131,7 @@ export function EscuadraStrike({ size, color, ballColor = color, timing }: Escua
       trail0.value = withDelay(delay, withTiming(1, { duration, easing: riseEasing }));
       trail1.value = withDelay(delay + stagger, withTiming(1, { duration, easing: riseEasing }));
     }
-    // Plays once, on mount — a fresh strike each time the results screen or
-    // home screen mounts.
+    // Plays once, on mount — a fresh strike each time the results screen mounts.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

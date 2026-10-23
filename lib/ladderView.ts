@@ -2,6 +2,7 @@
 // are unit-testable — the project's Vitest setup has no RN renderer, so this
 // file must never import from `components/`.
 import type { Messages } from '@/i18n/en';
+import { A_LA_ESCUADRA } from '@/i18n/names';
 import { isOutdated, type BestScore } from '@/lib/bestScore';
 import { leagueName } from '@/lib/pickerView';
 import type { Level } from '@/lib/questionEngine';
@@ -106,10 +107,24 @@ export function rungTag(best: { correct: number; total: number }): RungTag {
   return best.correct === best.total ? 'escuadra' : 'cleared';
 }
 
+/** A current full-marks best. The focused card is one only when every level is
+ *  cleared and the last is a la escuadra, so it marks the squad done: Difficulty
+ *  draws it green, and Home's Continue says so (#181). An outdated 10/10 is not. */
+export function isEscuadra(row: LadderRow): boolean {
+  return row.best !== undefined && !row.best.outdated && rungTag(row.best) === 'escuadra';
+}
+
 /** The focused card's status line, as shown and as spoken. */
 export function statusLine(row: LadderRow, messages: Messages): { text: string; spoken: string } {
   if (!row.best) return { text: messages.ladder.notPlayed, spoken: messages.ladder.notPlayed };
   const { correct, total, outdated } = row.best;
+  if (isEscuadra(row)) {
+    // "a la escuadra" is never translated, so only the score joins it here.
+    return {
+      text: `${A_LA_ESCUADRA} · ${correct}/${total}`,
+      spoken: `${messages.ladder.yourBestSpoken(correct, total)}, ${A_LA_ESCUADRA}`,
+    };
+  }
   if (outdated) {
     return {
       text: messages.ladder.bestOutdated(correct, total),

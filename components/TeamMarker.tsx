@@ -11,8 +11,12 @@ interface TeamMarkerProps {
    *  orientation is ignored. This is a deliberate rule, not a simplification:
    *  see the in-round banner in .claude/rules/team-identity.md. `picker` is the
    *  team picker's row marker (#176): 40 × 27 with a hairline ring, in the
-   *  squad's own `marker.orientation`. */
-  variant: 'banner' | 'picker';
+   *  squad's own `marker.orientation`. `continue` (34 × 23) and `squad` (24 × 16)
+   *  are Home's two sizes (#181), drawn the same way as `picker`. */
+  variant: 'banner' | 'picker' | 'continue' | 'squad';
+  /** The overlay ring's colour; defaults to `markerRing`. Continue sits on
+   *  `ctaBg`, so it passes `ctaLine`. */
+  ringColor?: string;
 }
 
 // A team's only visual identity marker, per the "no crests, ever" constraint.
@@ -20,11 +24,17 @@ interface TeamMarkerProps {
 // its national flag; for a club they're its own colours — a single-entry
 // array for a single-colour club (Arsenal, Real Madrid) renders as one solid
 // field, not a split shape.
-export function TeamMarker({ marker, variant }: TeamMarkerProps) {
+export function TeamMarker({ marker, variant, ringColor }: TeamMarkerProps) {
   const colors = useThemeColors();
   const isBanner = variant === 'banner';
-  const dimensions = isBanner ? sizes.teamMarkerBanner : sizes.pickerMarker;
-  const radius = isBanner ? sizes.teamMarkerRadius : sizes.pickerMarker.radius;
+  const dimensions = isBanner
+    ? { ...sizes.teamMarkerBanner, radius: sizes.teamMarkerRadius }
+    : variant === 'continue'
+      ? sizes.home.continueMarker
+      : variant === 'squad'
+        ? sizes.home.squadMarker
+        : sizes.pickerMarker;
+  const radius = dimensions.radius;
   const isColumn = !isBanner && marker.orientation === 'horizontal';
 
   // The banner always draws vertical bands. `bannerBands` (lib/stageView.ts)
@@ -51,8 +61,8 @@ export function TeamMarker({ marker, variant }: TeamMarkerProps) {
           style={{ flex: (weights[i] ?? 1) / total, backgroundColor: band }}
         />
       ))}
-      {/* The picker's ring is drawn over the bands, not as the box's border, so
-          the bands fill the whole 40 × 27, as a flag image does. */}
+      {/* The ring is drawn over the bands, not as the box's border, so the bands
+          fill the whole box, as a flag image does. */}
       {!isBanner && (
         <View
           style={[
@@ -61,7 +71,7 @@ export function TeamMarker({ marker, variant }: TeamMarkerProps) {
               pointerEvents: 'none',
               borderRadius: radius,
               borderWidth: borderWidths.hairline,
-              borderColor: colors.markerRing,
+              borderColor: ringColor ?? colors.markerRing,
             },
           ]}
         />

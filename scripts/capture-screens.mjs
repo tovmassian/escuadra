@@ -56,10 +56,8 @@ const NATIONALITY_SEED = 20260832;
 // How long to wait after a navigation. The root layout holds the splash until
 // the persisted store has hydrated, so `networkidle` now fires before the app
 // has painted anything — this window has to cover that wait plus the entry
-// animation that follows it. Home's is the long pole: its letter cascade runs
-// well past the 300ms per-animation budget that governs mid-round motion. The
-// Results cascade (strip, strike, card rise) is the other long one, so it
-// reuses this.
+// animation that follows it. The Results cascade (strip, strike, card rise) is
+// the long pole.
 const SETTLE_MS = 2200;
 // After answering one part, which only has to outlast that part's reveal —
 // well inside the 300ms budget, so this is generous rather than tuned.
@@ -458,6 +456,41 @@ async function seedStarred(capture, squadIds) {
   }, squadIds);
 }
 
+/**
+ * Set the last team and level a round was started for, as Home's Continue
+ * reads it (#181). Like `seedBestScores`, it writes localStorage only, for the
+ * next `capture.open` to rehydrate.
+ */
+async function seedLastPlayed(capture, squadId, level) {
+  await capture.page.evaluate(
+    ([id, lvl]) => {
+      const key = 'escuadra-progress';
+      let stored = null;
+      try {
+        stored = JSON.parse(localStorage.getItem(key) ?? 'null');
+      } catch {
+        stored = null;
+      }
+      const next = stored ?? { state: {}, version: 1 };
+      next.state = { ...next.state, lastPlayed: { squadId: id, level: lvl } };
+      localStorage.setItem(key, JSON.stringify(next));
+    },
+    [squadId, level],
+  );
+}
+
+/**
+ * Open Home with Reduce Motion emulated, so the number wall (#181) stands at its
+ * starting offsets and the PNG diffs cleanly; then restore motion for the
+ * shots after it. Reanimated reads the setting as the page loads, and
+ * `capture.open` reloads the page.
+ */
+async function openHomeStill(capture) {
+  await capture.page.emulateMedia({ reducedMotion: 'reduce' });
+  await capture.open('/');
+  await capture.page.emulateMedia({ reducedMotion: 'no-preference' });
+}
+
 // ---------------------------------------------------------------------------
 // A full pass
 // ---------------------------------------------------------------------------
@@ -484,7 +517,7 @@ async function captureTheme(browser, colorScheme, suffix) {
       }
     }
 
-    await capture.open('/');
+    await openHomeStill(capture);
     await capture.shoot('01-home');
 
     await capture.open('/settings');
@@ -562,6 +595,30 @@ async function captureTheme(browser, colorScheme, suffix) {
     await capture.tapId('kind-nation', { wait: SWAP_MS });
     await capture.tapId('confederation-UEFA', { wait: SWAP_MS });
     await capture.shoot('03d-team-picker-nations-starred');
+
+    // Home (#181), returning: Liverpool to continue, every level cleared, so
+    // Continue offers level 3 again (8/10, current), with the four teams starred
+    // above. Then Armenia, whose level-3 best is outdated, with nothing starred,
+    // so the row is "All teams" alone. The rounds below write their own
+    // last-played, so nothing later sees these.
+    await seedLastPlayed(capture, 'liv', 3);
+    await openHomeStill(capture);
+    await capture.shoot('01e-home-returning');
+    await seedLastPlayed(capture, 'arm', 3);
+    await seedStarred(capture, []);
+    await openHomeStill(capture);
+    await capture.shoot('01f-home-outdated');
+
+    // Difficulty with the squad done (#181): every level cleared and level 3 a
+    // current 10/10, so the focused card is green. Arsenal's scores show on no
+    // picker shot, since those ran above.
+    await seedBestScores(
+      capture,
+      { 'ars:1': 9, 'ars:2': 8, 'ars:3': 10 },
+      await squadLastUpdated('ars'),
+    );
+    await capture.open('/team/ars/difficulty');
+    await capture.shoot('04e-difficulty-escuadra');
 
     await captureStudy(capture);
 
