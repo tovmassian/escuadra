@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { shouldShowTips, type TipScreen } from '@/lib/tips';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 
@@ -6,6 +6,8 @@ export interface Tips {
   open: boolean;
   close: () => void;
   skip: () => void;
+  /** `TipsLayer`'s `onShown`: marks the screen seen as its first tip shows. */
+  onShown: () => void;
   /** Spread on the screen's content while the tips show: Android's screen
    *  readers then reach only the tip. iOS uses the layer's own modal flag. */
   contentA11y: {
@@ -16,24 +18,21 @@ export interface Tips {
 
 // Whether a screen opens with its How to play tips (#183). Decided once, after
 // the store has hydrated, so a returning player never sees a flash of them. The
-// screen is marked seen as the first tip shows: leaving mid-way never brings
-// them back.
+// screen is marked seen as its first tip shows (the layer's `onShown`), not as
+// the tips open: leaving mid-way never brings them back, and a screen whose
+// targets never mount keeps them for next time.
 export function useTips(screen: TipScreen): Tips {
   const hydrated = useProgressHydrated();
   const seen = useProgress((s) => s.tipsSeen);
   const skipped = useProgress((s) => s.tipsSkipped);
   const [state, setState] = useState<'pending' | 'open' | 'closed'>('pending');
 
-  // Decided while rendering, once, so the tips show in the same frame as the
-  // hydrated screen; marking the screen seen then changes `seen`, but the
+  // Decided while rendering, once, so the tips open in the same frame as the
+  // hydrated screen; marking the screen seen later changes `seen`, but the
   // decision is already made.
   if (state === 'pending' && hydrated) {
     setState(shouldShowTips(screen, seen, skipped) ? 'open' : 'closed');
   }
-
-  useEffect(() => {
-    if (state === 'open') useProgress.getState().markTipsSeen(screen);
-  }, [state, screen]);
 
   const open = state === 'open';
   return {
@@ -43,6 +42,7 @@ export function useTips(screen: TipScreen): Tips {
       useProgress.getState().skipTips();
       setState('closed');
     },
+    onShown: () => useProgress.getState().markTipsSeen(screen),
     contentA11y: open
       ? { importantForAccessibility: 'no-hide-descendants', accessibilityElementsHidden: true }
       : {},

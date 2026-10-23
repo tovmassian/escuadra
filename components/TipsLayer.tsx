@@ -48,6 +48,8 @@ interface TipsLayerProps {
   tips: readonly TipSpec[];
   onClose: () => void;
   onSkip: () => void;
+  /** Called once, as the first tip shows: `useTips` marks the screen seen. */
+  onShown: () => void;
   /** Scrolls the screen by `dy` points, without animation, for a target below the fold. */
   scrollBy?: (dy: number) => void;
 }
@@ -80,25 +82,26 @@ interface Measure {
   screen: { width: number; height: number };
 }
 
-export function TipsLayer({ tips: specs, onClose, onSkip, scrollBy }: TipsLayerProps) {
+export function TipsLayer({ tips: specs, onClose, onSkip, onShown, scrollBy }: TipsLayerProps) {
   const colors = useThemeColors();
   const t = useT();
   const insets = useSafeAreaInsets();
   const windowSize = useWindowDimensions();
   const reduceMotion = useReduceMotion();
   const rootRef = useRef<View>(null);
-  const headingRef = useRef<Text>(null);
+  const kickerRef = useRef<Text>(null);
 
   const [step, setStep] = useState(0);
   const [measure, setMeasure] = useState<Measure | null>(null);
   const [tipHeight, setTipHeight] = useState<number | null>(null);
-  // Skip tips shows from the first placed tip on and stays through every step.
+  // Set on leaving the first placed tip: from then on, between steps, Skip tips
+  // stays and a plain scrim holds, so the screen never blinks through.
   const [shown, setShown] = useState(false);
 
   // The measuring loop starts once per step and reads these as they are now.
-  const latest = useRef({ specs, scrollBy, insets, onClose });
+  const latest = useRef({ specs, scrollBy, insets, onClose, onShown });
   useEffect(() => {
-    latest.current = { specs, scrollBy, insets, onClose };
+    latest.current = { specs, scrollBy, insets, onClose, onShown };
   });
 
   const n = specs.length;
@@ -176,7 +179,6 @@ export function TipsLayer({ tips: specs, onClose, onSkip, scrollBy }: TipsLayerP
           }
         }
         setMeasure({ box, screen });
-        setShown(true);
       });
     };
     frame = requestAnimationFrame(poll);
@@ -213,17 +215,29 @@ export function TipsLayer({ tips: specs, onClose, onSkip, scrollBy }: TipsLayerP
       : null;
   const placed = placement !== null;
 
-  // Each placed step moves the screen reader to its heading. Not on web, where
+  // The first placed tip tells the screen its tips have shown (`useTips` marks
+  // it seen then, not before). Each placed step moves the screen reader to its
+  // kicker, which speaks the dialog's name; not on web, where
   // react-native-web has no `sendAccessibilityEvent`.
+  const announced = useRef(false);
   useEffect(() => {
-    if (!placed || Platform.OS === 'web') return;
-    const heading = headingRef.current;
-    if (heading) AccessibilityInfo.sendAccessibilityEvent(heading, 'focus');
+    if (!placed) return;
+    if (!announced.current) {
+      announced.current = true;
+      latest.current.onShown();
+    }
+    const kicker = kickerRef.current;
+    if (kicker && Platform.OS !== 'web') AccessibilityInfo.sendAccessibilityEvent(kicker, 'focus');
   }, [placed, step]);
 
   const advance = () => {
-    if (placed) goTo(step + 1);
+    if (!placed) return;
+    setShown(true);
+    goTo(step + 1);
   };
+  // Once a tip has shown, Skip tips stays, and the scrim holds, uncut, while the
+  // next target is measured.
+  const held = shown && !placed;
 
   const screen = measure?.screen ?? windowSize;
   const fade = reduceMotion ? undefined : FadeIn.duration(durations.tipFade);
@@ -292,13 +306,17 @@ export function TipsLayer({ tips: specs, onClose, onSkip, scrollBy }: TipsLayerP
     },
     skipLabel: { ...typography.tipSkip, color: colors.textPrimary },
     paint: { ...StyleSheet.absoluteFill, pointerEvents: 'none' },
+    scrim: { flex: 1, backgroundColor: colors.tipScrim },
   });
 
   const content = spec ? (
     <>
-      <Text style={styles.kicker}>{t.tips.kicker(step + 1, n)}</Text>
+      {/* Speaks the dialog's name, first, since the dialog itself is not one
+          element on native; focus lands here on each step. */}
+      <Text ref={kickerRef} style={styles.kicker} accessibilityLabel={t.tips.spoken(step + 1, n)}>
+        {t.tips.kicker(step + 1, n)}
+      </Text>
       <Text
-        ref={headingRef}
         style={styles.heading}
         accessibilityRole="header"
         maxFontSizeMultiplier={fontScaleCap.display}
@@ -312,8 +330,8 @@ export function TipsLayer({ tips: specs, onClose, onSkip, scrollBy }: TipsLayerP
           accessibilityElementsHidden
           importantForAccessibility="no-hide-descendants"
         >
-          {specs.map((s, i) => (
-            <View key={s.heading} style={[styles.dot, i === step && styles.dotActive]} />
+          {specs.map((_, i) => (
+            <View key={i} style={[styles.dot, i === step && styles.dotActive]} />
           ))}
         </View>
         <Pressable
@@ -337,6 +355,30 @@ export function TipsLayer({ tips: specs, onClose, onSkip, scrollBy }: TipsLayerP
       // iOS's two-finger scrub, since the catcher is hidden from screen readers.
       onAccessibilityEscape={onClose}
     >
+      {/* The scrim fades in with the first tip and stays: cut round each placed
+          target, whole while the next one is measured. */}
+      {placement || held ? (
+        <Animated.View
+          entering={fade}
+          style={styles.paint}
+          accessibilityElementsHidden
+          importantForAccessibility="no-hide-descendants"
+        >
+          {placement ? (
+            <Svg width={screen.width} height={screen.height}>
+              <Path
+                d={scrimPath(screen, placement.cut)}
+                fill={colors.tipScrim}
+                fillRule={EVEN_ODD}
+              />
+            </Svg>
+          ) : (
+            <View style={styles.scrim} />
+          )}
+        </Animated.View>
+      ) : null}
+
+      {/* The ring and arrow come with each tip. */}
       {placement ? (
         <Animated.View
           key={step}
@@ -346,7 +388,6 @@ export function TipsLayer({ tips: specs, onClose, onSkip, scrollBy }: TipsLayerP
           importantForAccessibility="no-hide-descendants"
         >
           <Svg width={screen.width} height={screen.height}>
-            <Path d={scrimPath(screen, placement.cut)} fill={colors.tipScrim} fillRule={EVEN_ODD} />
             <Rect
               x={placement.ring.x}
               y={placement.ring.y}
@@ -380,27 +421,31 @@ export function TipsLayer({ tips: specs, onClose, onSkip, scrollBy }: TipsLayerP
         importantForAccessibility="no"
       />
 
-      {/* Laid out hidden first, to learn its height, then placed and faded in. */}
+      {/* Laid out hidden first, to learn its height, then placed and faded in.
+          The tip remounts for each step and again once placed, so its
+          `onLayout` fires on mount every time: react-native-web reports layout
+          only through a ResizeObserver, which says nothing when the next
+          step's tip is the same height. */}
       <View
         style={styles.tipFrame}
         pointerEvents={placed ? 'box-none' : 'none'}
         accessibilityElementsHidden={!placed}
         importantForAccessibility={placed ? 'auto' : 'no-hide-descendants'}
-        onLayout={(e) => setTipHeight(e.nativeEvent.layout.height)}
       >
         <Animated.View
-          key={placed ? step : -1}
+          key={placed ? step : -1 - step}
           entering={placed ? fade : undefined}
           role={DIALOG}
           aria-modal
           accessibilityLabel={t.tips.spoken(step + 1, n)}
           style={[styles.tip, !placed && styles.hidden]}
+          onLayout={(e) => setTipHeight(e.nativeEvent.layout.height)}
         >
           {content}
         </Animated.View>
       </View>
 
-      {shown ? (
+      {shown || placed ? (
         <Pressable
           testID="tips-skip"
           accessibilityRole="button"
