@@ -1102,9 +1102,11 @@ export const launchIntro = {
   // `contentDelay`. The word sets off `wordDelay` after the mark and lands
   // with it, so it rises clear of the mark's foot instead of under it. The
   // fallbacks (no Home to dock into, Reduce Motion's end frame held until
-  // `end`, a tap) fade the whole intro over `fadeOut` instead.
+  // `end`, a tap) fade the whole intro over `fadeOut` instead. Measuring the
+  // two lockups gets `measureTimeout` (a few frames); past it, the intro fades
+  // rather than wait on a callback that may never come.
   end: 1200,
-  dock: { duration: 300, clear: 100, contentDelay: 80, wordDelay: 40 },
+  dock: { duration: 300, clear: 100, contentDelay: 80, wordDelay: 40, measureTimeout: 100 },
   fadeOut: 200,
 } as const;
 

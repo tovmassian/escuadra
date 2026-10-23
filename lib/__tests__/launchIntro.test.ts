@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dockTransform, introPlan, isDockable } from '@/lib/launchIntro';
+import { dockTransform, introPlan, isDockable, withinTime } from '@/lib/launchIntro';
 
 const fresh = { alreadyShown: false, screenReader: false, reduceMotion: false };
 
@@ -78,5 +78,76 @@ describe('isDockable', () => {
   it('refuses a box that is not a number', () => {
     expect(isDockable({ x: Number.NaN, y: 0, width: 28, height: 28 })).toBe(false);
     expect(isDockable({ x: 0, y: 0, width: Number.POSITIVE_INFINITY, height: 28 })).toBe(false);
+  });
+});
+
+describe('withinTime', () => {
+  // A timer the test fires by hand, so nothing waits on a clock.
+  function fakeTimer() {
+    const pending = new Map<number, () => void>();
+    let next = 0;
+    return {
+      timer: {
+        set: (fire: () => void) => {
+          next += 1;
+          pending.set(next, fire);
+          return next;
+        },
+        clear: (id: number) => {
+          pending.delete(id);
+        },
+      },
+      fire: () => {
+        for (const [id, fire] of pending) {
+          pending.delete(id);
+          fire();
+        }
+      },
+      pending: () => pending.size,
+    };
+  }
+  // A promise the test settles by hand.
+  function deferred<T>() {
+    let resolve!: (value: T) => void;
+    const promise = new Promise<T>((r) => {
+      resolve = r;
+    });
+    return { promise, resolve };
+  }
+  const settled = async <T>(promise: Promise<T>) => {
+    let out: { value: T } | null = null;
+    void promise.then((value) => {
+      out = { value };
+    });
+    await new Promise((r) => setImmediate(r));
+    return out;
+  };
+
+  it('gives the work its result when it comes in time, and stops the timer', async () => {
+    const clock = fakeTimer();
+    const work = deferred<string>();
+    const { result } = withinTime(work.promise, 100, clock.timer);
+    work.resolve('measured');
+    expect(await settled(result)).toEqual({ value: 'measured' });
+    expect(clock.pending()).toBe(0);
+  });
+
+  it('gives null when the time runs out first, and ignores the work when it comes late', async () => {
+    const clock = fakeTimer();
+    const work = deferred<string>();
+    const { result } = withinTime(work.promise, 100, clock.timer);
+    clock.fire();
+    work.resolve('late');
+    expect(await settled(result)).toEqual({ value: null });
+  });
+
+  it('settles neither way once cancelled, as on unmount', async () => {
+    const clock = fakeTimer();
+    const work = deferred<string>();
+    const { result, cancel } = withinTime(work.promise, 100, clock.timer);
+    cancel();
+    expect(clock.pending()).toBe(0);
+    work.resolve('after unmount');
+    expect(await settled(result)).toBeNull();
   });
 });

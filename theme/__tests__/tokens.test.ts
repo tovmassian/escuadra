@@ -574,4 +574,9 @@ describe('launch intro motion', () => {
     expect(dock.wordDelay).toBeGreaterThan(0);
     expect(dock.wordDelay).toBeLessThan(dock.duration);
   });
+
+  it('gives up measuring within a few frames, well before a fade would be late', () => {
+    expect(dock.measureTimeout).toBeGreaterThan(0);
+    expect(dock.measureTimeout).toBeLessThan(dock.duration);
+  });
 });

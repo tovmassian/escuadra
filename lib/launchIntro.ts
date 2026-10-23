@@ -52,3 +52,43 @@ export function dockTransform(
     scale: to.width / from.width,
   };
 }
+
+/** A one-shot timer: the global one by default; tests pass their own. */
+export interface OneShotTimer<H> {
+  set: (fire: () => void, ms: number) => H;
+  clear: (handle: H) => void;
+}
+
+const globalTimer: OneShotTimer<ReturnType<typeof setTimeout>> = {
+  set: (fire, ms) => setTimeout(fire, ms),
+  clear: (handle) => clearTimeout(handle),
+};
+
+/** `work`'s result if it settles within `ms`, otherwise null: whichever comes
+ *  first wins, and the other is ignored. The intro bounds its measuring with
+ *  it, so a native callback that never fires cannot leave it on screen.
+ *  `cancel` (on unmount) stops the timer, and then neither settles. */
+export function withinTime<T, H = ReturnType<typeof setTimeout>>(
+  work: Promise<T>,
+  ms: number,
+  timer: OneShotTimer<H> = globalTimer as unknown as OneShotTimer<H>,
+): { result: Promise<T | null>; cancel: () => void } {
+  let open = true;
+  let handle: H | undefined;
+  const result = new Promise<T | null>((resolve) => {
+    const settle = (value: T | null) => {
+      if (!open) return;
+      open = false;
+      if (handle !== undefined) timer.clear(handle);
+      resolve(value);
+    };
+    handle = timer.set(() => settle(null), ms);
+    void work.then(settle, () => settle(null));
+  });
+  const cancel = () => {
+    if (!open) return;
+    open = false;
+    if (handle !== undefined) timer.clear(handle);
+  };
+  return { result, cancel };
+}

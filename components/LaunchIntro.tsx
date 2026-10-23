@@ -22,6 +22,7 @@ import {
   dockTransform,
   introPlan,
   isDockable,
+  withinTime,
   type DockRect,
   type IntroPlan,
 } from '@/lib/launchIntro';
@@ -121,6 +122,8 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   const endingRef = useRef(false);
   const markRef = useRef<View>(null);
   const wordRef = useRef<View>(null);
+  // Stops the measuring's time limit if the intro unmounts mid-measure.
+  const cancelMeasureRef = useRef<(() => void) | null>(null);
 
   // One value per layer, each run between its own stops. `still` starts every
   // one at its end-frame state.
@@ -183,7 +186,9 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   };
 
   // At `end`: when the strike played and Home's lockup is there, measure both
-  // ends now and dock; otherwise, or if any end has no size, fade.
+  // ends now and dock; otherwise, if any end has no size, or if measuring
+  // outlasts `dock.measureTimeout`, fade. A measure that comes in after that
+  // is ignored (`withinTime` settles once).
   const end = () => {
     if (endingRef.current) return;
     endingRef.current = true;
@@ -192,13 +197,23 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
       fadeOut(launchIntro.fadeOut);
       return;
     }
-    void Promise.all([
-      measureInWindow(markRef.current),
-      measureInWindow(wordRef.current),
-      measureInWindow(home.mark.current),
-      measureInWindow(home.word.current),
-    ]).then(([markBox, wordBox, homeMark, homeWord]) => {
+    const measuring = withinTime(
+      Promise.all([
+        measureInWindow(markRef.current),
+        measureInWindow(wordRef.current),
+        measureInWindow(home.mark.current),
+        measureInWindow(home.word.current),
+      ]),
+      launchIntro.dock.measureTimeout,
+    );
+    cancelMeasureRef.current = measuring.cancel;
+    void measuring.result.then((boxes) => {
       if (doneRef.current) return;
+      if (!boxes) {
+        fadeOut(launchIntro.fadeOut);
+        return;
+      }
+      const [markBox, wordBox, homeMark, homeWord] = boxes;
       if (
         isDockable(markBox) &&
         isDockable(wordBox) &&
@@ -292,7 +307,10 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
         ),
       );
     }
-    return () => clearTimeout(timer);
+    return () => {
+      clearTimeout(timer);
+      cancelMeasureRef.current?.();
+    };
     // Plays once, on mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
