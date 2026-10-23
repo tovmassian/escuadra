@@ -843,7 +843,9 @@ export const typography = {
 // everything else on the screen scales freely and the screen scrolls.
 // The picker's letter rail (`LetterRail`) sets each letter in a fixed 14 pt
 // slot (`sizes.rail.letter`), which its touch mapping relies on, so its 10 pt
-// letters may grow only a little before they outgrow the slot.
+// letters may grow only a little before they outgrow the slot. The launch
+// intro's text (`LaunchIntro`) sits under a fixed 200 dp mark on one screen
+// that never scrolls, so it takes the display cap too.
 export const fontScaleCap = { display: 1.2, rail: 1.1 } as const;
 
 // 1.5px is the option-card default; 2px marks the emphasised "correct,
@@ -871,10 +873,10 @@ export const opacity = {
 // §2.4; a tap skips it, and it never runs with a screen reader on). A goal
 // chains its beats (the shot, then the corner's kick and ring) to about
 // 640 ms after the tap; each stays within the budget, and the chain ends well
-// inside `autoAdvance`. The round-over celebration is the other carve-out from
-// the rule; see `strikeTiming`/`resultsTimeline` below.
+// inside `autoAdvance`. The round-over celebration is a carve-out from the
+// rule; see `strikeTiming`/`resultsTimeline` below.
 // `numberWall.speed`, the wall's drift, is not timed and is not in `durations` (#181).
-// The launch intro (#182) is the third carve-out: see `launchIntro`.
+// The launch intro (#182) is a carve-out too: see `launchIntro`.
 export const durations = {
   press: 100,
   reveal: 180,
@@ -1060,8 +1062,8 @@ export const resultsTimeline = {
 // The launch intro, "the strike" (#182; the 2.0 canvas's OpenStrike artboard). ms
 // from the first frame, read off the canvas's 4 s CSS loop at 40 ms per percent.
 // Distances are in mark units (`MARK_VIEWBOX`), so the strike scales with the mark:
-// the canvas draws the mark at 200 dp, 3.125 dp a unit. Its third written
-// exception to the 300 ms rule (owner approved, 2026-10-22). One change from
+// the canvas draws the mark at 200 dp, 3.125 dp a unit. A written exception
+// to the 300 ms rule (owner approved, 2026-10-22). One change from
 // the canvas: the colour comes back at 1000–1200, not 1120–1360, so the end
 // frame is whole as the tagline settles (spec, Timeline).
 export const launchIntro = {
@@ -1082,19 +1084,21 @@ export const launchIntro = {
     { at: 540, duration: 40 },
   ],
   // The goal: frame and ball turn `success`, a ring flashes out from the ball
-  // (scale × the ball, starting opacity), and the frame kicks up and right
-  // (units), back to rest after `settle`.
+  // (scale × the ball, starting opacity, `stroke` in units: the canvas's 3 px),
+  // and the frame kicks by (+offset, −offset) mark units: right and up; `rise`
+  // and `settle` in ms.
   flash: { at: 680, duration: 40 },
-  ring: { at: 700, duration: 300, from: 0.6, to: 2.8, opacity: 0.9 },
-  kick: { at: 700, rise: 80, settle: 140, x: 1.92 },
+  ring: { at: 700, duration: 300, from: 0.6, to: 2.8, opacity: 0.9, stroke: 0.96 },
+  kick: { at: 700, rise: 80, settle: 140, offset: 1.92 },
   // The end frame: the wordmark rises `rise` dp in, the tagline fades in, the
   // skip hint fades out, the colour comes back to `mark`.
   wordmark: { at: 800, duration: 260, rise: 16 },
   tagline: { at: 1000, duration: 200 },
   skipHint: { at: 1040, duration: 160 },
   colourBack: { at: 1000, duration: 200 },
-  // Then the whole intro fades over `fadeOut`, Home showing through. Under
-  // Reduce Motion the end frame holds until `end` and fades the same way.
+  // Then the whole intro fades over `fadeOut`, the screen beneath showing
+  // through. Under Reduce Motion the end frame holds until `end` and fades the
+  // same way.
   end: 1200,
   fadeOut: 200,
 } as const;

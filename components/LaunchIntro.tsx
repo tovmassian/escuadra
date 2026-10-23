@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { AccessibilityInfo, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
   interpolate,
@@ -20,9 +20,9 @@ import { useT } from '@/i18n/useT';
 import { introPlan, type IntroPlan } from '@/lib/launchIntro';
 import { MARK_VIEWBOX, markGeometry } from '@/theme/brand';
 import {
-  borderWidths,
   celebrationEasingCurves,
   durations,
+  fontScaleCap,
   launchIntro,
   sizes,
   spacing,
@@ -49,6 +49,18 @@ import { useThemeColors } from '@/theme/useTheme';
 // back-out and reopen) never replays it.
 let shown = false;
 
+// Asked as the module loads, so a screen reader that is on already is known by
+// the first mount (false while the answer is out). Not on web, where
+// react-native-web resolves `true` whatever the browser (`useScreenReader`).
+let screenReaderAtLaunch = false;
+if (Platform.OS !== 'web') {
+  AccessibilityInfo.isScreenReaderEnabled()
+    .then((enabled) => {
+      screenReaderAtLaunch = enabled;
+    })
+    .catch(() => {});
+}
+
 // The root fade runs under Reduce Motion too (the `still` plan holds its end
 // frame, then fades): left to Reanimated's default, it would end at once.
 const FADE = { reduceMotion: ReduceMotion.Never } as const;
@@ -59,10 +71,11 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   const insets = useSafeAreaInsets();
   const reduceMotion = useReduceMotion();
   const screenReader = useScreenReader();
-  // Decided once, on mount. `useScreenReader` answers later; the effect below
-  // ends the intro if it turns out one is on.
+  // Decided once, on mount, with the screen reader answer asked at load. If
+  // that answer comes later, `useScreenReader` brings it and the effect below
+  // ends the intro.
   const [plan] = useState<IntroPlan>(() =>
-    introPlan({ alreadyShown: shown, screenReader: false, reduceMotion }),
+    introPlan({ alreadyShown: shown, screenReader: screenReaderAtLaunch, reduceMotion }),
   );
   const still = plan === 'still';
 
@@ -105,7 +118,9 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
     const easeOut = Easing.out(Easing.ease);
     if (plan === 'play') {
       const { ballIn: inT, flight, trail, flash, ring, colourBack, wordmark } = launchIntro;
-      ballIn.set(withDelay(inT.at, withTiming(1, { duration: inT.duration })));
+      ballIn.set(
+        withDelay(inT.at, withTiming(1, { duration: inT.duration, easing: Easing.linear })),
+      );
       flyX.set(
         withDelay(flight.at, withTiming(1, { duration: flight.duration, easing: Easing.linear })),
       );
@@ -131,10 +146,10 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
         withDelay(
           flash.at,
           withSequence(
-            withTiming(1, { duration: flash.duration }),
+            withTiming(1, { duration: flash.duration, easing: Easing.linear }),
             withDelay(
               colourBack.at - flash.at - flash.duration,
-              withTiming(0, { duration: colourBack.duration }),
+              withTiming(0, { duration: colourBack.duration, easing: Easing.linear }),
             ),
           ),
         ),
@@ -207,8 +222,8 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   const rootStyle = useAnimatedStyle(() => ({ opacity: fade.value }));
   const frameStyle = useAnimatedStyle(() => ({
     transform: [
-      { translateX: launchIntro.kick.x * u * kick.value },
-      { translateY: -launchIntro.kick.x * u * kick.value },
+      { translateX: launchIntro.kick.offset * u * kick.value },
+      { translateY: -launchIntro.kick.offset * u * kick.value },
     ],
   }));
   const barStyle = useAnimatedStyle(() => ({
@@ -252,9 +267,12 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
     height: ball.r * 2 * u,
     borderRadius: ball.r * u,
   };
+  // The canvas sets the hint 44 dp up from the foot of a frame that includes
+  // the home indicator: just over the inset, never nearer the edge than that.
+  const skipBottom = Math.max(insets.bottom + spacing.xs, spacing.xxxl);
   const themed = StyleSheet.create({
     root: { backgroundColor: colors.background },
-    ring: { borderWidth: borderWidths.emphasis, borderColor: colors.success },
+    ring: { borderWidth: launchIntro.ring.stroke * u, borderColor: colors.success },
     trail: { backgroundColor: colors.mark },
     word: { ...typography.introWordmark, color: colors.textPrimary, marginTop: spacing.xxl },
     tagline: { ...typography.introTagline, color: colors.textMuted, marginTop: spacing.sm },
@@ -314,10 +332,22 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
           />
           <Animated.View style={[styles.piece, ballBox, ballStyle]} />
         </View>
-        <Animated.Text style={[themed.word, wordStyle]}>{ESCUADRA_WORDMARK}</Animated.Text>
-        <Animated.Text style={[themed.tagline, taglineStyle]}>{A_LA_ESCUADRA}</Animated.Text>
-        <Animated.View style={[styles.foot, { bottom: insets.bottom + spacing.huge }, skipStyle]}>
-          <Text style={themed.skip}>{t.launch.tapToSkip}</Text>
+        <Animated.Text
+          style={[themed.word, wordStyle]}
+          maxFontSizeMultiplier={fontScaleCap.display}
+        >
+          {ESCUADRA_WORDMARK}
+        </Animated.Text>
+        <Animated.Text
+          style={[themed.tagline, taglineStyle]}
+          maxFontSizeMultiplier={fontScaleCap.display}
+        >
+          {A_LA_ESCUADRA}
+        </Animated.Text>
+        <Animated.View style={[styles.foot, { bottom: skipBottom }, skipStyle]}>
+          <Text style={themed.skip} maxFontSizeMultiplier={fontScaleCap.display}>
+            {t.launch.tapToSkip}
+          </Text>
         </Animated.View>
       </Pressable>
     </Animated.View>

@@ -549,14 +549,14 @@ describe('launch intro motion', () => {
     expect(Math.max(...ends)).toBeLessThanOrEqual(end);
   });
 
-  it('lands the ball before it flashes the goal', () => {
+  it('starts the ring as the ball lands, and ends the flash before the colour comes back', () => {
     expect(flight.at + flight.duration).toBeLessThanOrEqual(ring.at);
     expect(flash.at + flash.duration).toBeLessThanOrEqual(colourBack.at);
   });
 
   it('passes the far trail square before the near one', () => {
     const [near, far] = trail;
-    expect(far!.at).toBeLessThan(near!.at);
+    expect(far.at).toBeLessThan(near.at);
   });
 
   it('hands over to Home within about a second and a half', () => {

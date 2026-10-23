@@ -54,7 +54,7 @@ The launch intro (#182), "the strike", runs about 1.2 s and fades to Home over 2
 (`launchIntro`). It is a written exception (owner approved, 2026-10-22): once per cold launch,
 a tap skips it, Reduce Motion shows its end frame, and it never plays with a screen reader on.
 
-The round-over celebration is the last carve-out: its timelines (`strikeTiming`,
+The round-over celebration is a carve-out too: its timelines (`strikeTiming`,
 `resultsTimeline` in `theme/tokens.ts`) may run past 300 ms.
 
 ## The system theme
