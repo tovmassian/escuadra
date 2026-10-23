@@ -105,16 +105,16 @@ flawless — see below). Route, file, and what it does.
 | 9   | `/licences`                       | `app/licences.tsx`                       | Licences, opened from Settings or from About's credits. Back and title, a note that the texts stay in English, then the country names' Unicode notice (open), the fonts, and every bundled package, each a tap from its full text.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
 
 The launch intro (#182) is not a route. It overlays every route on each cold
-launch: the strike, about 1.2 s, then a fade to Home; a tap skips it, and it never
-plays with a screen reader on. `00-launch-intro` is its end frame as Reduce Motion
-shows it: the mark with its trail, "escuadra" and "A LA ESCUADRA". It is captured
+launch: the strike, about 1.2 s, then a fade to the screen beneath; a tap skips
+it, and it never plays with a screen reader on. `00-launch-intro` is its end
+frame as Reduce Motion shows it: the mark with its trail, "escuadra" and "A LA ESCUADRA". It is captured
 under emulated Reduce Motion, which holds that frame still.
 
 ## Captures
 
 | File                                          | Screen                                                     |
 | --------------------------------------------- | ---------------------------------------------------------- |
-| `screens/00-launch-intro.png`                 | Launch intro, end frame (Reduce Motion), see below         |
+| `screens/00-launch-intro.png`                 | Launch intro, end frame (Reduce Motion), see above         |
 | `screens/01-home.png`                         | Home, first run                                            |
 | `screens/01e-home-returning.png`              | Home, returning: Liverpool to continue, four starred teams |
 | `screens/01f-home-outdated.png`               | Home, returning with an outdated best and nothing starred  |

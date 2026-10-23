@@ -23,9 +23,10 @@ no SVG, no new asset.
 
 ## Timeline
 
-One clock, `progress`, runs 0 → `end` ms linearly; every layer interpolates it between its
-own stops, as the canvas's CSS keyframes do. The stops are the canvas's (its 4 s loop × 40
-ms per percent), in a `launchIntro` token in `theme/tokens.ts`:
+Each layer has its own shared value, started with `withDelay` at its first stop and run over
+its own span with its own easing (linear unless the table names one, as the canvas's CSS
+keyframes are); the whole intro's fade starts at `end`. The stops are the canvas's (its 4 s
+loop × 40 ms per percent), in a `launchIntro` token in `theme/tokens.ts`:
 
 | Layer               | From → to (ms) | Change                                                         |
 | ------------------- | -------------- | -------------------------------------------------------------- |
@@ -40,11 +41,11 @@ ms per percent), in a `launchIntro` token in `theme/tokens.ts`:
 | "A LA ESCUADRA"     | 1000 → 1200    | opacity 0 → 1                                                  |
 | "TAP TO SKIP"       | 1040 → 1200    | opacity 1 → 0                                                  |
 | frame + ball colour | 1000 → 1200    | `success` → `mark`                                             |
-| the whole intro     | 1200 → 1400    | opacity 1 → 0, Home showing through; then it unmounts          |
+| the whole intro     | 1200 → 1400    | opacity 1 → 0, the screen beneath showing; then it unmounts    |
 
 The ball's start offset (−244, +473 dp at the canvas's 200 dp mark) is stored in mark units
-(÷ `200 / MARK_VIEWBOX`), as are the kick and the ring's stroke, so the strike scales with the
-mark's size.
+(÷ `200 / MARK_VIEWBOX`), as are the kick (`kick.offset`, 1.92) and the ring's stroke
+(`ring.stroke`, 0.96: the canvas's 3 px), so the strike scales with the mark's size.
 
 **Call: the colour returns at 1000 → 1200, not the canvas's 1120 → 1360,** so beat 4 is
 whole when the tagline settles and the intro ends near the timing note's "~1.1 s, then Home"
@@ -65,8 +66,9 @@ screen reader are on, and whether this JavaScript launch has already shown it, i
   `riseIn`).
 - **A screen reader on: `none`.** The intro is decoration that would take focus and then
   vanish; with VoiceOver or TalkBack the launch goes straight to Home, as `autoAdvance` never
-  runs with one on. `useScreenReader` answers asynchronously, so an intro already playing
-  when the answer arrives ends at once.
+  runs with one on. The question is asked as `LaunchIntro`'s module loads (not on web, where
+  react-native-web always answers yes), so the answer is usually in by the first mount; if
+  it comes later, `useScreenReader` brings it and an intro already playing ends at once.
 - **Every route.** It overlays whatever the stack shows first, which is Home on a phone. A web
   reload of a deep link plays it too; the screenshot build waits it out (below).
 
@@ -113,7 +115,7 @@ on), so it has no spoken name.
 
 ## Motion rule
 
-The intro is the 300 ms rule's third written exception (owner approved, 2026-10-22), beside
+The intro is a written exception to the 300 ms rule (owner approved, 2026-10-22), beside
 Home's drift and the round-over celebration: in `.claude/rules/design-tokens.md` (Motion), in
 `CLAUDE.md`'s summary of the carve-outs, and beside `durations` in `theme/tokens.ts`.
 
@@ -123,8 +125,8 @@ Home's drift and the round-over celebration: in `.claude/rules/design-tokens.md`
 - `theme/__tests__/tokens.test.ts`: the `launchIntro` stops run forwards and end by `end`,
   and `end` plus the fade stays within 1.5 s.
 - `npm run shots` captures `00-launch-intro` (beat 4, under emulated Reduce Motion, in both
-  themes); `design/SCREENS.md` describes it. Every other capture already waits 2.2 s after
-  loading, longer than the intro.
+  themes); `design/SCREENS.md` describes it. Every other capture waits, after each load,
+  until the intro has left the page (`launch-intro` detached), so no shot can catch it.
 - On a device (the PR's checklist): a cold launch, a warm resume, tap to skip, Reduce Motion,
   a slow launch, the update check, the splash. Screen-reader checks go to #187.
 
