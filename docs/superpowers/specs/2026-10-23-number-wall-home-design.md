@@ -112,10 +112,11 @@ usage) and it, then reviewed by a native speaker:
 
 - `headline`: "Know every number." (in display capitals)
 - `continueTeam(team)`: "Continue {team}" (in display capitals; may wrap)
-- `continueSpoken(team, level, best?, total, outdated)`: the button's spoken name
 - `allTeams`: "All teams"
 - `starHint`: "Star a team and it waits for you here."
 
+Continue's spoken name joins `continueTeam` to the picker's `bestSpoken` or
+`bestOutdatedSpoken` (or `common.level` before a best), so it reads as the picker's rows do.
 `home.startTraining` and `home.continueMeta` stay. `home.browseAllTeams` goes.
 
 ## Not changing
