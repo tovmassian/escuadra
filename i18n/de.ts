@@ -155,6 +155,7 @@ export const de: Messages = {
       comingNext: 'Demnächst',
       // "Info", as the About screen's title says.
       about: 'Info',
+      yourData: 'Deine Daten',
     },
     language: 'Sprache',
     languageSpoken: (name: string) => `Sprache: ${name}`,
@@ -181,6 +182,45 @@ export const de: Messages = {
     title: 'Prüfungsmodus',
     line: 'Der ganze Kader, nur anhand der Rückennummern.',
     soon: 'Bald',
+  },
+  reset: {
+    // Verbs, as the headings of the two lists: what the action does.
+    clears: 'Löscht',
+    keeps: 'Behält',
+    team: {
+      title: (team: string) => `${team} neu starten?`,
+      line: (team: string) =>
+        `${team} ist wieder ungespielt, als hättest du das Team nie geöffnet.`,
+      bestScores: 'Rekorde',
+      // L for Level, as "L2" on a locked rung says.
+      levelScore: (level: number, score: number) => `L${level} ${score}`,
+      keepsStar: 'Dein Stern, damit das Team in „Deine Teams“ bleibt.',
+      confirm: 'Neu starten',
+    },
+    all: {
+      row: 'Alle Rekorde löschen',
+      note: 'Jedes Team wieder ungespielt. Einstellungen bleiben.',
+      title: 'Alle Rekorde löschen?',
+      line: 'Jedes Team ist wieder ungespielt. Die Leitern beginnen wieder bei Level 1.',
+      count: (scores: number, teams: number) =>
+        `${scores} · ${teams} ${teams === 1 ? 'Team' : 'Teams'}`,
+      keepsLine: 'Deine markierten Teams und alle Einstellungen.',
+      confirm: (count: number) => (count === 1 ? '1 Rekord löschen' : `${count} Rekorde löschen`),
+    },
+    app: {
+      row: `${ESCUADRA} zurücksetzen`,
+      note: 'Alles wieder wie beim ersten Start.',
+      title: `${ESCUADRA} zurücksetzen?`,
+      line: `Alles, was ${ESCUADRA} auf diesem Gerät speichert, ist danach wieder wie beim ersten Start.`,
+      // "Weiter", the Continue button's word on Home.
+      scores: 'Rekorde und „Weiter“',
+      starred: 'Markierte Teams',
+      preferences: 'Sprache, Darstellung, Vibration, Kaderansicht',
+      tips: 'Spielanleitungs-Tipps, wieder sichtbar',
+      photos: 'Zwischengespeicherte Spielerfotos',
+      keepsLine:
+        'Deine Wahl bei den Nutzungsstatistiken. Ihre zufällige Kennung wird durch eine neue ersetzt.',
+    },
   },
   formats: {
     /** "21. Aug. 2026". */
@@ -345,6 +385,7 @@ export const de: Messages = {
       `${title}, Rekord ${correct} von ${total}, veraltet`,
     squadUpdated: (date: string) =>
       `Kader aktualisiert am ${date}. Graue Rekorde stammen aus der Zeit davor.`,
+    startOver: (team: string) => `${team} neu starten`,
   },
   picker: {
     allLeagues: 'Alle',

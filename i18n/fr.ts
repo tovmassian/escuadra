@@ -165,6 +165,7 @@ export const fr: Messages = {
       comingNext: 'À venir',
       // "À propos", as the About screen's title says.
       about: 'À propos',
+      yourData: 'Tes données',
     },
     language: 'Langue',
     languageSpoken: (name: string) => `Langue : ${name}`,
@@ -193,6 +194,46 @@ export const fr: Messages = {
     title: 'Mode examen',
     line: 'Tout l’effectif, rien qu’avec les numéros de maillot.',
     soon: 'Bientôt',
+  },
+  reset: {
+    // Verbs, as the headings of the two lists: what the action does.
+    clears: 'Efface',
+    keeps: 'Conserve',
+    team: {
+      title: (team: string) => `Recommencer : ${team} ?`,
+      line: (team: string) =>
+        `${team} redevient « Pas encore joué », comme si tu n’y avais jamais joué.`,
+      bestScores: 'Records',
+      // N for Niveau.
+      levelScore: (level: number, score: number) => `N${level} ${score}`,
+      keepsStar: 'Ton étoile : l’équipe reste dans « Tes équipes ».',
+      confirm: 'Recommencer',
+    },
+    all: {
+      // "Effacer tous les records" is 24 chars, but its title with " ?" is 26
+      // against 24, so both drop "tous"; the line under the row says every team.
+      row: 'Effacer les records',
+      note: 'Toutes les équipes, à zéro. Tes réglages restent.',
+      title: 'Effacer les records ?',
+      line: 'Toutes les équipes redeviennent « Pas encore joué ». Les paliers repartent du niveau 1.',
+      count: (scores: number, teams: number) =>
+        `${scores} · ${teams} ${teams <= 1 ? 'équipe' : 'équipes'}`,
+      keepsLine: 'Tes équipes étoilées et tous tes réglages.',
+      confirm: (count: number) => (count <= 1 ? 'Effacer 1 record' : `Effacer ${count} records`),
+    },
+    app: {
+      row: `Réinitialiser ${ESCUADRA}`,
+      note: 'Tout revient comme au premier lancement.',
+      title: `Réinitialiser ${ESCUADRA} ?`,
+      line: `Tout ce que ${ESCUADRA} garde sur ce téléphone revient comme au premier lancement.`,
+      scores: 'Records et « Continuer »',
+      starred: 'Équipes étoilées',
+      preferences: 'Langue, apparence, vibrations, vue Effectif',
+      tips: 'Astuces « Comment jouer », à revoir',
+      photos: 'Photos de joueurs en cache',
+      keepsLine:
+        'Ton choix sur les statistiques d’utilisation. Son identifiant aléatoire est remplacé par un nouveau.',
+    },
   },
   formats: {
     /** "21 août 2026", and "1er août 2026" on the first of the month. */
@@ -381,6 +422,7 @@ export const fr: Messages = {
       `${title}, record ${correct} sur ${total}, obsolète`,
     squadUpdated: (date: string) =>
       `Effectif mis à jour le ${date}. Les records en gris datent d’avant.`,
+    startOver: (team: string) => `Recommencer : ${team}`,
   },
   picker: {
     // Masculine: the championnats.

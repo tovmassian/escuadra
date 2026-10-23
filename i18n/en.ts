@@ -170,6 +170,7 @@ export const en = {
       support: 'Support',
       comingNext: 'Coming next',
       about: 'About',
+      yourData: 'Your data',
     },
     /** ≤ 20 chars: the Language row. */
     language: 'Language',
@@ -208,6 +209,62 @@ export const en = {
     line: 'The whole squad, on shirt numbers alone.',
     /** ≤ 8 chars: the chip, in IBM Plex Mono capitals. */
     soon: 'Soon',
+  },
+  reset: {
+    /** ≤ 16 chars: a sheet's list heading, in IBM Plex Mono capitals. */
+    clears: 'Clears',
+    /** ≤ 16 chars: a sheet's list heading, in IBM Plex Mono capitals. */
+    keeps: 'Keeps',
+    team: {
+      /** ≤ 32 chars with "Spain": the sheet's title. */
+      title: (team: string) => `Start ${team} over?`,
+      /** The line under it; wraps. */
+      line: (team: string) => `${team} goes back to unplayed, as if you had never opened it.`,
+      /** ≤ 20 chars: the Clears row's label. */
+      bestScores: 'Best scores',
+      /** ≤ 8 chars: one level's best in that row, in mono: "L1 10". */
+      levelScore: (level: number, score: number) => `L${level} ${score}`,
+      /** ≤ 56 chars: the Keeps line, when the team is starred. */
+      keepsStar: 'Your star, so the team stays in Your squads.',
+      /** ≤ 20 chars: the confirm button, in Archivo capitals. */
+      confirm: 'Start over',
+    },
+    all: {
+      /** ≤ 24 chars: the Settings row, and the sheet's title without "?". */
+      row: 'Clear all scores',
+      /** ≤ 56 chars: the line under the row. */
+      note: 'Every team back to unplayed. Settings stay.',
+      /** ≤ 24 chars: the sheet's title. */
+      title: 'Clear all scores?',
+      /** The line under it; wraps. */
+      line: 'Every team goes back to unplayed. You start the ladders again from level 1.',
+      /** ≤ 20 chars: the Clears row's count, in mono: "14 · 5 teams". */
+      count: (scores: number, teams: number) =>
+        `${scores} · ${teams} ${teams === 1 ? 'team' : 'teams'}`,
+      /** ≤ 56 chars: the Keeps line. */
+      keepsLine: 'Your starred teams and every setting.',
+      /** ≤ 22 chars with 99: the confirm button, in Archivo capitals. */
+      confirm: (count: number) => (count === 1 ? 'Clear 1 score' : `Clear ${count} scores`),
+    },
+    app: {
+      /** ≤ 24 chars: the Settings row, and the confirm button. */
+      row: `Reset ${ESCUADRA}`,
+      /** ≤ 56 chars: the line under the row. */
+      note: 'Everything back to how it was on first launch.',
+      /** ≤ 24 chars: the sheet's title. */
+      title: `Reset ${ESCUADRA}?`,
+      /** The line under it; wraps. */
+      line: `Everything ${ESCUADRA} keeps on this phone goes back to how it was on first launch.`,
+      /** ≤ 40 chars each: the Clears list, except preferences. */
+      scores: 'Scores and Continue',
+      starred: 'Starred teams',
+      /** ≤ 48 chars: the Clears list's longest row. */
+      preferences: 'Language, appearance, vibration, Study view',
+      tips: 'How to play tips, shown again',
+      photos: 'Cached player photos',
+      /** The Keeps line; wraps. */
+      keepsLine: 'Your usage statistics choice. Its random identifier is replaced with a new one.',
+    },
   },
   formats: {
     /** "21 Aug 2026". */
@@ -434,6 +491,8 @@ export const en = {
     /** ≤ 80 chars: under "The ladder" when a score is outdated; `date` from
      *  `formatLastUpdated`. It may wrap to two lines. */
     squadUpdated: (date: string) => `Squad updated ${date}. Grey scores are from before.`,
+    /** The eraser's spoken name, beside a team's star on Difficulty (#197). */
+    startOver: (team: string) => `Start ${team} over`,
   },
   picker: {
     /** ≤ 6 chars: the league pill that clears the filter. */

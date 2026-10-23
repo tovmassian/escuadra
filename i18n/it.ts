@@ -152,6 +152,7 @@ export const it: Messages = {
       comingNext: 'In arrivo',
       // "Info", as the About screen's title says.
       about: 'Info',
+      yourData: 'I tuoi dati',
     },
     language: 'Lingua',
     languageSpoken: (name: string) => `Lingua: ${name}`,
@@ -182,6 +183,44 @@ export const it: Messages = {
     title: 'Modalità esame',
     line: 'Tutta la rosa, solo con i numeri di maglia.',
     soon: 'A breve',
+  },
+  reset: {
+    clears: 'Cancella',
+    keeps: 'Conserva',
+    team: {
+      title: (team: string) => `${team}: ricominciare da zero?`,
+      line: (team: string) =>
+        `${team} torna a “Non ancora giocato”, come se non ci avessi mai giocato.`,
+      bestScores: 'Record',
+      // L for Livello.
+      levelScore: (level: number, score: number) => `L${level} ${score}`,
+      keepsStar: 'La tua stella: la squadra resta in “Le tue squadre”.',
+      confirm: 'Ricomincia da zero',
+    },
+    all: {
+      row: 'Cancella tutti i record',
+      note: 'Ogni squadra torna a zero. Le impostazioni restano.',
+      title: 'Cancella tutti i record?',
+      line: 'Ogni squadra torna a “Non ancora giocato”. I livelli ripartono dal livello 1.',
+      count: (scores: number, teams: number) =>
+        `${scores} · ${teams} ${teams === 1 ? 'squadra' : 'squadre'}`,
+      keepsLine: 'Le tue squadre con la stella e tutte le impostazioni.',
+      // "Record" takes no plural.
+      confirm: (count: number) => (count === 1 ? 'Cancella 1 record' : `Cancella ${count} record`),
+    },
+    app: {
+      row: `Ripristina ${ESCUADRA}`,
+      note: 'Tutto torna com’era al primo avvio.',
+      title: `Ripristina ${ESCUADRA}?`,
+      line: `Tutto ciò che ${ESCUADRA} conserva su questo telefono torna com’era al primo avvio.`,
+      scores: 'Record e “Continua”',
+      starred: 'Squadre con la stella',
+      preferences: 'Lingua, aspetto, vibrazione, vista della rosa',
+      tips: 'Consigli “Come si gioca”, da rivedere',
+      photos: 'Foto dei giocatori in cache',
+      keepsLine:
+        'La tua scelta sulle statistiche d’uso. Il suo identificatore casuale viene sostituito con uno nuovo.',
+    },
   },
   formats: {
     /** "21 ago 2026". */
@@ -371,6 +410,7 @@ export const it: Messages = {
     rungOutdated: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} su ${total}, obsoleto`,
     squadUpdated: (date: string) => `Rosa aggiornata: ${date}. I record in grigio sono di prima.`,
+    startOver: (team: string) => `${team}: ricomincia da zero`,
   },
   picker: {
     // Masculine: the campionati.

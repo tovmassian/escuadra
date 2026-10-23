@@ -154,6 +154,7 @@ export const es: Messages = {
       comingNext: 'Próximamente',
       // "Info", as the About screen's title says.
       about: 'Info',
+      yourData: 'Tus datos',
     },
     language: 'Idioma',
     languageSpoken: (name: string) => `Idioma: ${name}`,
@@ -184,6 +185,45 @@ export const es: Messages = {
     title: 'Modo examen',
     line: 'Toda la plantilla, solo con los dorsales.',
     soon: 'Pronto',
+  },
+  reset: {
+    clears: 'Se borra',
+    keeps: 'Se conserva',
+    team: {
+      title: (team: string) => `¿Empezar ${team} de cero?`,
+      line: (team: string) =>
+        `${team} vuelve a estar sin jugar, como si nunca hubieras abierto el equipo.`,
+      bestScores: 'Récords',
+      // N for Nivel.
+      levelScore: (level: number, score: number) => `N${level} ${score}`,
+      keepsStar: 'Tu estrella, para que siga en “Tus equipos”.',
+      confirm: 'Empezar de cero',
+    },
+    all: {
+      // "Borrar todos los récords" is 24 chars, but its title with ¿? is 26
+      // against 24, so both drop "todos"; the line under the row says every team.
+      row: 'Borrar los récords',
+      note: 'Todos los equipos, sin jugar. Los ajustes se quedan.',
+      title: '¿Borrar los récords?',
+      line: 'Todos los equipos vuelven a estar sin jugar. Las escaleras empiezan de nuevo en el nivel 1.',
+      count: (scores: number, teams: number) =>
+        `${scores} · ${teams} ${teams === 1 ? 'equipo' : 'equipos'}`,
+      keepsLine: 'Tus equipos con estrella y todos los ajustes.',
+      confirm: (count: number) => (count === 1 ? 'Borrar 1 récord' : `Borrar ${count} récords`),
+    },
+    app: {
+      row: `Restablecer ${ESCUADRA}`,
+      note: 'Todo como al abrir la app por primera vez.',
+      title: `¿Restablecer ${ESCUADRA}?`,
+      line: `Todo lo que ${ESCUADRA} guarda en este teléfono vuelve a como estaba la primera vez que la abriste.`,
+      scores: 'Récords y “Seguir con”',
+      starred: 'Equipos con estrella',
+      preferences: 'Idioma, aspecto, vibración, vista de plantilla',
+      tips: 'Consejos de “Cómo jugar”, otra vez',
+      photos: 'Fotos de jugadores en caché',
+      keepsLine:
+        'Tu elección sobre las estadísticas de uso. Su identificador aleatorio se sustituye por uno nuevo.',
+    },
   },
   formats: {
     /** "21 ago 2026". */
@@ -379,6 +419,7 @@ export const es: Messages = {
       `${title}, récord ${correct} de ${total}, desfasado`,
     squadUpdated: (date: string) =>
       `Plantilla actualizada el ${date}. Los récords en gris son anteriores.`,
+    startOver: (team: string) => `Empezar ${team} de cero`,
   },
   picker: {
     // Feminine: the leagues.
