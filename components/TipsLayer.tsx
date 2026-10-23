@@ -293,7 +293,7 @@ export function TipsLayer({
     row: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: n > 1 ? 'space-between' : 'flex-end',
       marginTop: spacing.xs,
     },
     dots: { flexDirection: 'row', alignItems: 'center', gap: tips.dotGap },

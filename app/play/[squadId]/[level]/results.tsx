@@ -44,7 +44,7 @@ import {
 import { useThemeColors, useThemeName } from '@/theme/useTheme';
 import type { TeamMarker } from '@/types/squad';
 import { Image } from 'expo-image';
-import { router, useFocusEffect, useLocalSearchParams } from 'expo-router';
+import { router, useFocusEffect, useIsFocused, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useRef, useState, type Ref } from 'react';
 import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import Animated, {
@@ -97,8 +97,10 @@ export default function Results() {
     const timer = setTimeout(() => setCelebrated(true), resultsTimeline.tips);
     return () => clearTimeout(timer);
   }, []);
-  // Not behind a sheet opened before then: the tips wait for it to close.
-  const tips = useTips('results', celebrated && !sharing && !crediting);
+  // Not behind a sheet opened before then, or Study pushed over Results: the
+  // tips wait for it to close.
+  const focused = useIsFocused();
+  const tips = useTips('results', celebrated && focused && !sharing && !crediting);
   const missed = selectMissed(session.results);
   const tipKeys = resultsTips({
     missed: missed.length,
@@ -579,7 +581,8 @@ function Score({
 
 // The missed players as a row of cards that snaps one card at a time. Each
 // slides in from the right at the tier's beat, `cardStagger` apart. `ref` is
-// the section's, the How to play tip's target.
+// the label and cards' (the How to play tip's target), inside the section's
+// top padding, so the ring stays clear of the round strip above.
 function MissedCards({
   ref,
   missed,
@@ -597,7 +600,8 @@ function MissedCards({
   const reduced = useReducedMotion();
   const card = sizes.playerCard.results;
   const styles = StyleSheet.create({
-    section: { paddingTop: spacing.xl, gap: spacing.sm },
+    section: { paddingTop: spacing.xl },
+    missedBody: { gap: spacing.sm },
     labelRow: {
       flexDirection: 'row',
       alignItems: 'baseline',
@@ -611,44 +615,46 @@ function MissedCards({
   });
 
   return (
-    <View ref={ref} collapsable={false} style={styles.section}>
-      <Animated.View
-        entering={riseIn(reduced, spotlightMotion.rise, resultsTimeline.rise, beat)}
-        style={styles.labelRow}
-      >
-        <Text style={styles.label}>{t.results.missedCount(missed.length)}</Text>
-        {missed.length > 2 ? <Text style={styles.hint}>{t.results.swipeForAll}</Text> : null}
-      </Animated.View>
-      <FlatList
-        horizontal
-        data={missed}
-        keyExtractor={(r) => r.question.playerId}
-        renderItem={({ item, index }) => (
-          <Animated.View
-            entering={slideIn(
-              reduced,
-              spotlightMotion.slide,
-              resultsTimeline.rise,
-              beat + index * resultsTimeline.cardStagger,
-            )}
-          >
-            <PlayerCard
-              width={card.width}
-              height={card.height}
-              shirtNumber={item.question.memberNo}
-              name={item.question.playerName}
-              line={missedLine(item, language, t)}
-              photo={photoFor(getPlayer(item.question.playerId))}
-              marker={marker}
-            />
-          </Animated.View>
-        )}
-        ItemSeparatorComponent={CardGap}
-        snapToInterval={card.width + spacing.sm}
-        decelerationRate="fast"
-        showsHorizontalScrollIndicator={false}
-        contentContainerStyle={styles.list}
-      />
+    <View style={styles.section}>
+      <View ref={ref} collapsable={false} style={styles.missedBody}>
+        <Animated.View
+          entering={riseIn(reduced, spotlightMotion.rise, resultsTimeline.rise, beat)}
+          style={styles.labelRow}
+        >
+          <Text style={styles.label}>{t.results.missedCount(missed.length)}</Text>
+          {missed.length > 2 ? <Text style={styles.hint}>{t.results.swipeForAll}</Text> : null}
+        </Animated.View>
+        <FlatList
+          horizontal
+          data={missed}
+          keyExtractor={(r) => r.question.playerId}
+          renderItem={({ item, index }) => (
+            <Animated.View
+              entering={slideIn(
+                reduced,
+                spotlightMotion.slide,
+                resultsTimeline.rise,
+                beat + index * resultsTimeline.cardStagger,
+              )}
+            >
+              <PlayerCard
+                width={card.width}
+                height={card.height}
+                shirtNumber={item.question.memberNo}
+                name={item.question.playerName}
+                line={missedLine(item, language, t)}
+                photo={photoFor(getPlayer(item.question.playerId))}
+                marker={marker}
+              />
+            </Animated.View>
+          )}
+          ItemSeparatorComponent={CardGap}
+          snapToInterval={card.width + spacing.sm}
+          decelerationRate="fast"
+          showsHorizontalScrollIndicator={false}
+          contentContainerStyle={styles.list}
+        />
+      </View>
     </View>
   );
 }
