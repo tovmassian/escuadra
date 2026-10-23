@@ -138,6 +138,16 @@ export interface Palette {
   ctaMuted: string;
   /** The ring round a 40 × 27 team marker in the picker. */
   markerRing: string;
+  // ---- 2.0 Home (#181) ----
+  /** The outline of Home's drifting shirt numbers: the canvas's 14%
+   *  `textPrimary` over `background`, made opaque. */
+  wallLine: string;
+  /** `background` at no opacity: the clear end of Home's fades. A plain
+   *  `transparent` would fade through black on iOS. */
+  backgroundClear: string;
+  /** The ring round a flag or marker on `ctaBg` (Home's Continue), so a
+   *  white flag or club colour doesn't bleed into the button. */
+  ctaLine: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -225,6 +235,9 @@ const darkRoles = {
   soonBg: 'rgba(255,255,255,0.08)',
   ctaMuted: '#4b4f56',
   markerRing: 'rgba(255,255,255,0.12)',
+  wallLine: '#33353a',
+  backgroundClear: 'rgba(18,20,26,0)',
+  ctaLine: 'rgba(20,22,26,0.14)',
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -274,6 +287,9 @@ const lightRoles = {
   soonBg: 'rgba(20,22,26,0.06)',
   ctaMuted: '#b4b8bb',
   markerRing: 'rgba(20,22,26,0.12)',
+  wallLine: '#d7d8da',
+  backgroundClear: 'rgba(247,247,249,0)',
+  ctaLine: 'rgba(255,255,255,0.16)',
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -388,6 +404,37 @@ export const stage = {
 // `textSecondary` holds 4.5:1 and `textPrimary` 3:1 on every band.
 export const ladderHero = {
   veilFloor: { dark: 0.4, light: 0.5 },
+} as const;
+
+// Home's number wall (#181). Archivo ExtraCondensed Black at `fontSize`, rows
+// `rowHeight` apart (the canvas's 0.86 line height); `baseline` is where a
+// number sits in its row, as CSS centres the font's 878 ascent and 210 descent
+// in that line. `advance` is each digit's width per 1,000 em, from the font's
+// hmtx table (theme/__tests__/numberWall.test.ts reads the TTF to pin it):
+// Archivo's digits are proportional. `tracking` is between a number's digits
+// and `gap` between numbers, the canvas's space plus its letter spacing. The
+// drift moves `speed` pt a second, ambient and endless: the Motion rule's
+// written exception (.claude/rules/design-tokens.md).
+export const numberWall = {
+  fontSize: 150,
+  rowHeight: 129,
+  baseline: 115,
+  advance: {
+    '0': 447,
+    '1': 375,
+    '2': 430,
+    '3': 443,
+    '4': 438,
+    '5': 440,
+    '6': 448,
+    '7': 400,
+    '8': 435,
+    '9': 448,
+  },
+  tracking: 4,
+  gap: 25,
+  stroke: 1.5,
+  speed: 50,
 } as const;
 
 export const typography = {
@@ -744,6 +791,31 @@ export const typography = {
     letterSpacing: 0.5,
     textTransform: 'uppercase' as const,
   },
+  // ---- 2.0 Home (#181) ----
+  // "KNOW EVERY NUMBER." over the buttons.
+  homeHeadline: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 34,
+    lineHeight: 34,
+    letterSpacing: -0.5,
+    textTransform: 'uppercase' as const,
+  },
+  // Continue's "CONTINUE SPAIN" and the START TRAINING pill.
+  homeButton: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 17,
+    letterSpacing: 0.4,
+    textTransform: 'uppercase' as const,
+  },
+  // Continue's "LEVEL 2 · BEST 7/10" and its OUTDATED.
+  homeMeta: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 11,
+    textTransform: 'uppercase' as const,
+  },
+  // First run's "Star a team and it waits for you here."
+  homeHint: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 14 },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -783,6 +855,7 @@ export const opacity = {
 // 640 ms after the tap; each stays within the budget, and the chain ends well
 // inside `autoAdvance`. The round-over celebration and the home lockup are
 // the one carve-out from the rule; see `strikeTiming`/`resultsTimeline` below.
+// `numberWall.speed`, the wall's drift, is not timed and is not in `durations` (#181).
 export const durations = {
   press: 100,
   reveal: 180,
@@ -1132,6 +1205,19 @@ export const sizes = {
   ladderPill: 56,
   // A compact rung's level-number column, so every title starts on one line.
   rungNumberColumn: 34,
+  // Home (#181): Continue's least height, its flag or marker and its play
+  // circle; START TRAINING's height; a starred team's flag or marker in its
+  // round button; how far the top fade reaches past the wall's top edge, and
+  // the height of the skirt that fades the wall out above the buttons.
+  home: {
+    continue: 68,
+    continueMarker: { width: 34, height: 23, radius: 4 },
+    play: 46,
+    start: 60,
+    squadMarker: { width: 24, height: 16, radius: 3 },
+    topFade: 54,
+    skirt: 180,
+  },
 } as const;
 
 // The share picture's captured size in pixels: a 9:16 story (spec §4.2).
@@ -1156,6 +1242,7 @@ export const iconSize = {
   outdated: 10, // the clock beside OUTDATED on a picker row or a rung (#180)
   outdatedCard: 11, // the same, on Difficulty's focused card
   outdatedNote: 13, // the same, before Difficulty's "Squad updated" line
+  starHint: 16, // the star before Home's first-run hint (#181)
 } as const;
 
 // Base unit 4. Use spacing[n], not raw numbers, in component styles.
