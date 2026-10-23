@@ -50,8 +50,9 @@ transition, so it is the rule's written exception (owner approved, 2026-10-22). 
 under Reduce Motion, and stops while the app is in the background or Home is not the focused
 screen. It is the only ambient loop; `skeleton` loops only while a photo loads.
 
-The launch intro (#182), "the strike", runs about 1.2 s and fades to Home over 200 ms
-(`launchIntro`). It is a written exception (owner approved, 2026-10-22): once per cold launch,
+The launch intro (#182), "the strike", runs about 1.2 s, then its lockup docks into Home's top
+bar over 300 ms as Home rises in (`launchIntro`, `components/LaunchReveal.tsx`); over any other
+screen it fades. It is a written exception (owner approved, 2026-10-22): once per cold launch,
 a tap skips it, Reduce Motion shows its end frame, and it never plays with a screen reader on.
 
 The round-over celebration is a carve-out too: its timelines (`strikeTiming`,
