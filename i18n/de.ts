@@ -64,9 +64,7 @@ export const de: Messages = {
     // "Spielanleitung", the word German games use for How to play; About's
     // stored list names the tips the same way.
     kicker: (step: number, count: number) => `Spielanleitung · ${step}/${count}`,
-    // "Spielanleitung · Level 3" is 24 chars against 22; L3, as the ladder's
-    // unlock hint writes a level.
-    kickerLevel: (level: number) => `Spielanleitung · L${level}`,
+    kickerLevel: (level: number) => `Spielanleitung · Level ${level}`,
     spoken: (step: number, count: number) => `Spielanleitung, Tipp ${step} von ${count}`,
     spokenLevel: (level: number) => `Spielanleitung, Level ${level}`,
     next: 'Weiter',

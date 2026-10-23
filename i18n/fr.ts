@@ -72,9 +72,7 @@ export const fr: Messages = {
     // "Comment jouer", as game menus say; About's stored list names the tips
     // ("astuces") the same way.
     kicker: (step: number, count: number) => `Comment jouer · ${step}/${count}`,
-    // "Comment jouer · Niveau 3" is 24 chars against 22; "niv." is the
-    // usual short form.
-    kickerLevel: (level: number) => `Comment jouer · Niv. ${level}`,
+    kickerLevel: (level: number) => `Comment jouer · Niveau ${level}`,
     spoken: (step: number, count: number) => `Comment jouer, astuce ${step} sur ${count}`,
     spokenLevel: (level: number) => `Comment jouer, niveau ${level}`,
     next: 'Suivant',

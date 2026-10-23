@@ -58,9 +58,7 @@ export const it: Messages = {
     // "Come si gioca", as game menus say; About's stored list names the tips
     // ("consigli") the same way.
     kicker: (step: number, count: number) => `Come si gioca · ${step}/${count}`,
-    // "Come si gioca · Livello 3" is 25 chars against 22; "liv.", as the
-    // ladder's unlock hint writes it.
-    kickerLevel: (level: number) => `Come si gioca · Liv. ${level}`,
+    kickerLevel: (level: number) => `Come si gioca · Livello ${level}`,
     spoken: (step: number, count: number) => `Come si gioca, consiglio ${step} di ${count}`,
     spokenLevel: (level: number) => `Come si gioca, livello ${level}`,
     next: 'Avanti',
@@ -112,7 +110,7 @@ export const it: Messages = {
       },
       answer: {
         heading: 'Tocca chi ha quel numero',
-        body: 'Con una risposta giusta si va avanti da sé. Se sbagli, vedi chi era e la partita ti aspetta.',
+        body: 'Se indovini, si va avanti in automatico. Se sbagli, vedi chi era e la partita ti aspetta.',
       },
       level2: {
         heading: 'Ora in due parti',
@@ -126,7 +124,7 @@ export const it: Messages = {
     results: {
       missed: {
         heading: 'Quelli da imparare',
-        body: 'Ogni errore, con chi era e cosa hai scelto. Scorri per vederli tutti.',
+        body: 'Ogni errore, con il giocatore giusto e la tua scelta. Scorri per vederli tutti.',
       },
       again: {
         heading: 'Rigioca o ripassa',

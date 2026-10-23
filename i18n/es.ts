@@ -111,7 +111,7 @@ export const es: Messages = {
       },
       answer: {
         heading: 'Toca a quien lo lleva',
-        body: 'Si aciertas, la ronda avanza sola. Si fallas, ves quién era y te espera.',
+        body: 'Si aciertas, la ronda avanza sola. Si fallas, ves quién era y la ronda te espera.',
       },
       level2: {
         heading: 'Ahora en dos partes',
@@ -119,13 +119,13 @@ export const es: Messages = {
       },
       level3: {
         heading: 'Tres partes',
-        body: 'Nombre, posición y luego el club. En los clubes, la nacionalidad en su lugar.',
+        body: 'Nombre, posición y luego el club. Si el equipo es un club, la nacionalidad.',
       },
     },
     results: {
       missed: {
         heading: 'Los que te faltan',
-        body: 'Cada fallo, con quién era y qué elegiste. Desliza para verlos todos.',
+        body: 'Cada fallo, con el jugador correcto y lo que elegiste. Desliza para verlos todos.',
       },
       again: {
         heading: 'Repite o repasa',

@@ -79,7 +79,7 @@ export const en = {
   tips: {
     /** ≤ 22 chars: over each tip, in mono capitals. */
     kicker: (step: number, count: number) => `How to play · ${step}/${count}`,
-    /** ≤ 22 chars: over a level's single tip, in mono capitals. */
+    /** ≤ 26 chars: over a level's single tip, in mono capitals. */
     kickerLevel: (level: number) => `How to play · Level ${level}`,
     /** A tip's spoken name, as a dialog. */
     spoken: (step: number, count: number) => `How to play, tip ${step} of ${count}`,
