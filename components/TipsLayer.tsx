@@ -54,6 +54,10 @@ interface TipsLayerProps {
   /** Scrolls the screen by `dy` points, without animation: down for a target
    *  below the fold, up (negative) for one above the top; it stops at 0. */
   scrollBy?: (dy: number) => void;
+  /** How far a pinned element covers the screen's bottom, above the safe-area
+   *  inset (Difficulty's footer). The scroll keeps a target clear of it; the
+   *  tip, drawn over everything, is placed as before. */
+  bottomClear?: number;
   /** Replace the step kicker and its spoken name: with one tip, "Step 1 of 1"
    *  would say nothing. The step dots are hidden then too. */
   kicker?: string;
@@ -96,6 +100,7 @@ export function TipsLayer({
   onSkip,
   onShown,
   scrollBy,
+  bottomClear = 0,
   kicker,
   spoken,
 }: TipsLayerProps) {
@@ -115,9 +120,9 @@ export function TipsLayer({
   const [shown, setShown] = useState(false);
 
   // The measuring loop starts once per step and reads these as they are now.
-  const latest = useRef({ specs, scrollBy, insets, onClose, onShown });
+  const latest = useRef({ specs, scrollBy, bottomClear, insets, onClose, onShown });
   useEffect(() => {
-    latest.current = { specs, scrollBy, insets, onClose, onShown };
+    latest.current = { specs, scrollBy, bottomClear, insets, onClose, onShown };
   });
 
   const n = specs.length;
@@ -179,10 +184,10 @@ export function TipsLayer({
           return;
         }
         const screen = { width: root.width, height: root.height };
-        const { scrollBy: scroll, insets: safe } = latest.current;
+        const { scrollBy: scroll, insets: safe, bottomClear: clear } = latest.current;
         if (scroll && !scrolled) {
           const delta = scrollDelta(
-            { target: box, radius: spec.radius, screen, insets: safe },
+            { target: box, radius: spec.radius, screen, insets: safe, bottomClear: clear },
             tips,
           );
           if (delta !== 0) {

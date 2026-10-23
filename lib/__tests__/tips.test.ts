@@ -178,6 +178,37 @@ describe('scrollDelta', () => {
     // ring top 20 - 6 = 14; visible top 47 + 100 = 147
     expect(scrollDelta({ target, radius: 22, screen: SCREEN, insets: INSETS }, G)).toBe(-133);
   });
+
+  describe('with a pinned footer', () => {
+    // A 100 pt footer over the bottom edge, 34 pt of it the inset: 66 pt clear.
+    const FOOTER = { bottomClear: 66 };
+    it('scrolls a target the footer covers above it, not above the inset alone', () => {
+      const target = { x: 20, y: 700, width: 350, height: 56 };
+      // ring bottom 700 + 56 + 6 = 762; visible bottom 844 - 34 - 66 - 24 = 720
+      expect(
+        scrollDelta({ target, radius: 28, screen: SCREEN, insets: INSETS, ...FOOTER }, G),
+      ).toBe(42);
+    });
+    it('leaves a target above the footer where it is', () => {
+      const target = { x: 20, y: 600, width: 350, height: 56 };
+      expect(
+        scrollDelta({ target, radius: 28, screen: SCREEN, insets: INSETS, ...FOOTER }, G),
+      ).toBe(0);
+    });
+    it('does not try to scroll a target inside the footer, which the list cannot move', () => {
+      // The footer's top is 844 - 34 - 66 = 744; Study sits in it.
+      const target = { x: 24, y: 752, width: 280, height: 56 };
+      expect(
+        scrollDelta({ target, radius: 28, screen: SCREEN, insets: INSETS, ...FOOTER }, G),
+      ).toBe(0);
+    });
+    it('changes nothing without one', () => {
+      const target = { x: 20, y: 700, width: 350, height: 56 };
+      expect(
+        scrollDelta({ target, radius: 28, screen: SCREEN, insets: INSETS, bottomClear: 0 }, G),
+      ).toBe(0);
+    });
+  });
 });
 
 describe('roundedRectPath', () => {

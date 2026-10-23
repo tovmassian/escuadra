@@ -47,6 +47,8 @@ export default function Difficulty() {
   const resetSquad = useProgress((s) => s.resetSquad);
   // Start over (#197): the sheet beside Study that sends this team back to unplayed.
   const [startOver, setStartOver] = useState(false);
+  // The pinned footer's height, so the tips scroll a target clear of it.
+  const [footerHeight, setFooterHeight] = useState(0);
   // How to play (#183): Play, the star, then Study, scrolled to on a short screen.
   const tips = useTips('difficulty');
   const scrollRef = useRef<ScrollView>(null);
@@ -97,6 +99,7 @@ export default function Difficulty() {
     studyLabel: { ...typography.ladderStudy, color: colors.textPrimary },
     updated: { ...typography.secondarySmall, color: colors.textMuted, textAlign: 'center' },
     eraser: {
+      alignSelf: 'center',
       width: sizes.ladderPill,
       height: sizes.ladderPill,
       borderRadius: sizes.ladderPill / 2,
@@ -177,7 +180,11 @@ export default function Difficulty() {
         </View>
       </ScrollView>
 
-      <View style={styles.footer}>
+      <View
+        style={styles.footer}
+        onLayout={(e) => setFooterHeight(e.nativeEvent.layout.height)}
+        {...tips.contentA11y}
+      >
         <LinearGradient
           colors={[colors.backgroundClear, colors.background]}
           style={styles.fade}
@@ -223,6 +230,8 @@ export default function Difficulty() {
           onClose={tips.close}
           onSkip={tips.skip}
           onShown={tips.onShown}
+          // The footer's padding already holds the inset, which the layer adds itself.
+          bottomClear={Math.max(0, footerHeight - insets.bottom)}
           scrollBy={(dy) =>
             scrollRef.current?.scrollTo({ y: Math.max(0, offset.current + dy), animated: false })
           }

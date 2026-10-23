@@ -156,13 +156,21 @@ export function placeTip(input: PlaceInput, g: TipGeometry): TipPlacement {
 /** How far to scroll so the target sits, ringed, on screen: down (positive) for
  *  one below the fold, to above the bottom gutter; up (negative) for one above
  *  the top, as an earlier step's scroll may leave it, to just below Skip tips;
- *  0 when it is already on screen. */
-export function scrollDelta(input: Omit<PlaceInput, 'tipHeight'>, g: TipGeometry): number {
+ *  0 when it is already on screen.
+ *
+ *  `bottomClear` is how far a pinned element covers the screen's bottom, above
+ *  the inset (Difficulty's footer): the fold moves up by it, and a target inside
+ *  that strip is the pinned element's own, which scrolling cannot move: 0. */
+export function scrollDelta(
+  input: Omit<PlaceInput, 'tipHeight'> & { bottomClear?: number },
+  g: TipGeometry,
+): number {
   const { ring } = ringOf(input, g);
   const top = input.insets.top + g.skipClear;
+  const covered = input.screen.height - input.insets.bottom - (input.bottomClear ?? 0);
+  if (input.bottomClear && input.target.y >= covered) return 0;
   if (ring.y < top) return ring.y - top;
-  const bottom = input.screen.height - input.insets.bottom - g.gutter;
-  return Math.max(0, ring.y + ring.height - bottom);
+  return Math.max(0, ring.y + ring.height - (covered - g.gutter));
 }
 
 /** An SVG path for a rounded rect, drawn clockwise, to cut out of the scrim
