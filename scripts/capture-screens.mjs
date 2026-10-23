@@ -491,6 +491,27 @@ async function openHomeStill(capture) {
   await capture.page.emulateMedia({ reducedMotion: 'no-preference' });
 }
 
+/**
+ * The launch intro's end frame (#182). Under emulated Reduce Motion it holds
+ * still until `launchIntro.end` (1,200 ms) after the app is ready, so shoot as
+ * soon as it shows instead of waiting out `SETTLE_MS`, which outlasts it. Not
+ * through `capture.shoot`, whose image wait and settle would also outlast it.
+ */
+async function shootLaunchIntro(capture) {
+  await capture.page.emulateMedia({ reducedMotion: 'reduce' });
+  await capture.page.goto(`${BASE}/`, { waitUntil: 'domcontentloaded' });
+  await capture.page.getByTestId('launch-intro').waitFor({ state: 'visible' });
+  capture.assertLive();
+  const file = capture.file('00-launch-intro');
+  await capture.page.screenshot({
+    path: `${OUT_DIR}/${file}`,
+    type: PROFILE.format,
+    ...(PROFILE.format === 'jpeg' ? { quality: 92 } : {}),
+  });
+  console.log(`captured ${file}`);
+  await capture.page.emulateMedia({ reducedMotion: 'no-preference' });
+}
+
 // ---------------------------------------------------------------------------
 // A full pass
 // ---------------------------------------------------------------------------
@@ -517,6 +538,7 @@ async function captureTheme(browser, colorScheme, suffix) {
       }
     }
 
+    await shootLaunchIntro(capture);
     await openHomeStill(capture);
     await capture.shoot('01-home');
 
