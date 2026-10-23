@@ -122,7 +122,7 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 20, texts: { 'reset.team.confirm': (m) => m.reset.team.confirm } },
   { budget: 24, texts: { 'reset.all.row': (m) => m.reset.all.row } },
   { budget: 56, texts: { 'reset.all.note': (m) => m.reset.all.note } },
-  { budget: 24, texts: { 'reset.all.title': (m) => m.reset.all.title } },
+  { budget: 28, texts: { 'reset.all.title': (m) => m.reset.all.title } },
   { budget: 20, texts: { 'reset.all.count': (m) => m.reset.all.count(99, 12) } },
   { budget: 56, texts: { 'reset.all.keepsLine': (m) => m.reset.all.keepsLine } },
   {

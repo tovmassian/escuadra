@@ -201,7 +201,7 @@ export const it: Messages = {
       row: 'Cancella tutti i record',
       note: 'Ogni squadra torna a zero. Le impostazioni restano.',
       title: 'Cancella tutti i record?',
-      line: 'Ogni squadra torna a “Non ancora giocato”. I livelli ripartono dal livello 1.',
+      line: 'Ogni squadra torna a “Non ancora giocato”. Si riparte dal livello 1.',
       count: (scores: number, teams: number) =>
         `${scores} · ${teams} ${teams === 1 ? 'squadra' : 'squadre'}`,
       keepsLine: 'Le tue squadre con la stella e tutte le impostazioni.',
@@ -219,7 +219,7 @@ export const it: Messages = {
       tips: 'Consigli “Come si gioca”, da rivedere',
       photos: 'Foto dei giocatori in cache',
       keepsLine:
-        'La tua scelta sulle statistiche d’uso. Il suo identificatore casuale viene sostituito con uno nuovo.',
+        'La tua scelta sulle statistiche d’uso. L’identificativo casuale delle statistiche viene sostituito con uno nuovo.',
     },
   },
   formats: {

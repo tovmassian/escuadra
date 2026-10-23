@@ -200,12 +200,10 @@ export const es: Messages = {
       confirm: 'Empezar de cero',
     },
     all: {
-      // "Borrar todos los récords" is 24 chars, but its title with ¿? is 26
-      // against 24, so both drop "todos"; the line under the row says every team.
-      row: 'Borrar los récords',
-      note: 'Todos los equipos, sin jugar. Los ajustes se quedan.',
-      title: '¿Borrar los récords?',
-      line: 'Todos los equipos vuelven a estar sin jugar. Las escaleras empiezan de nuevo en el nivel 1.',
+      row: 'Borrar todos los récords',
+      note: 'Todos los equipos, sin jugar. Los ajustes se mantienen.',
+      title: '¿Borrar todos los récords?',
+      line: 'Todos los equipos vuelven a estar sin jugar. Las escaleras vuelven a empezar desde el nivel 1.',
       count: (scores: number, teams: number) =>
         `${scores} · ${teams} ${teams === 1 ? 'equipo' : 'equipos'}`,
       keepsLine: 'Tus equipos con estrella y todos los ajustes.',
@@ -215,14 +213,14 @@ export const es: Messages = {
       row: `Restablecer ${ESCUADRA}`,
       note: 'Todo como al abrir la app por primera vez.',
       title: `¿Restablecer ${ESCUADRA}?`,
-      line: `Todo lo que ${ESCUADRA} guarda en este teléfono vuelve a como estaba la primera vez que la abriste.`,
+      line: `Todo lo que ${ESCUADRA} guarda en este teléfono vuelve a estar como la primera vez que la abriste.`,
       scores: 'Récords y “Seguir con”',
       starred: 'Equipos con estrella',
       preferences: 'Idioma, aspecto, vibración, vista de plantilla',
       tips: 'Consejos de “Cómo jugar”, otra vez',
       photos: 'Fotos de jugadores en caché',
       keepsLine:
-        'Tu elección sobre las estadísticas de uso. Su identificador aleatorio se sustituye por uno nuevo.',
+        'Tu elección sobre las estadísticas de uso. El identificador aleatorio que usan las estadísticas se sustituye por uno nuevo.',
     },
   },
   formats: {

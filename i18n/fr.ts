@@ -202,7 +202,7 @@ export const fr: Messages = {
     team: {
       title: (team: string) => `Recommencer : ${team} ?`,
       line: (team: string) =>
-        `${team} redevient « Pas encore joué », comme si tu n’y avais jamais joué.`,
+        `${team} redevient « Pas encore joué », comme si tu n’avais jamais ouvert cette équipe.`,
       bestScores: 'Records',
       // N for Niveau.
       levelScore: (level: number, score: number) => `N${level} ${score}`,
@@ -210,29 +210,28 @@ export const fr: Messages = {
       confirm: 'Recommencer',
     },
     all: {
-      // "Effacer tous les records" is 24 chars, but its title with " ?" is 26
-      // against 24, so both drop "tous"; the line under the row says every team.
-      row: 'Effacer les records',
+      row: 'Effacer tous les records',
       note: 'Toutes les équipes, à zéro. Tes réglages restent.',
-      title: 'Effacer les records ?',
+      title: 'Effacer tous les records ?',
       line: 'Toutes les équipes redeviennent « Pas encore joué ». Les paliers repartent du niveau 1.',
       count: (scores: number, teams: number) =>
         `${scores} · ${teams} ${teams <= 1 ? 'équipe' : 'équipes'}`,
       keepsLine: 'Tes équipes étoilées et tous tes réglages.',
-      confirm: (count: number) => (count <= 1 ? 'Effacer 1 record' : `Effacer ${count} records`),
+      confirm: (count: number) =>
+        count <= 1 ? `Effacer ${count} record` : `Effacer ${count} records`,
     },
     app: {
       row: `Réinitialiser ${ESCUADRA}`,
       note: 'Tout revient comme au premier lancement.',
       title: `Réinitialiser ${ESCUADRA} ?`,
-      line: `Tout ce que ${ESCUADRA} garde sur ce téléphone revient comme au premier lancement.`,
+      line: `Tout ce qu’${ESCUADRA} garde sur ce téléphone revient comme au premier lancement.`,
       scores: 'Records et « Continuer »',
       starred: 'Équipes étoilées',
       preferences: 'Langue, apparence, vibrations, vue Effectif',
       tips: 'Astuces « Comment jouer », à revoir',
       photos: 'Photos de joueurs en cache',
       keepsLine:
-        'Ton choix sur les statistiques d’utilisation. Son identifiant aléatoire est remplacé par un nouveau.',
+        'Ton choix sur les statistiques d’utilisation. Leur identifiant aléatoire est remplacé par un nouveau.',
     },
   },
   formats: {

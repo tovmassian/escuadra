@@ -234,7 +234,7 @@ export const en = {
       row: 'Clear all scores',
       /** ≤ 56 chars: the line under the row. */
       note: 'Every team back to unplayed. Settings stay.',
-      /** ≤ 24 chars: the sheet's title. */
+      /** ≤ 28 chars: the sheet's title. */
       title: 'Clear all scores?',
       /** The line under it; wraps. */
       line: 'Every team goes back to unplayed. You start the ladders again from level 1.',
@@ -263,7 +263,8 @@ export const en = {
       tips: 'How to play tips, shown again',
       photos: 'Cached player photos',
       /** The Keeps line; wraps. */
-      keepsLine: 'Your usage statistics choice. Its random identifier is replaced with a new one.',
+      keepsLine:
+        'Your usage statistics choice. The random identifier the statistics use is replaced with a new one.',
     },
   },
   formats: {

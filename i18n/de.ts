@@ -188,14 +188,14 @@ export const de: Messages = {
     clears: 'Löscht',
     keeps: 'Behält',
     team: {
-      title: (team: string) => `${team} neu starten?`,
+      title: (team: string) => `${team} von vorn beginnen?`,
       line: (team: string) =>
         `${team} ist wieder ungespielt, als hättest du das Team nie geöffnet.`,
       bestScores: 'Rekorde',
       // L for Level, as "L2" on a locked rung says.
       levelScore: (level: number, score: number) => `L${level} ${score}`,
       keepsStar: 'Dein Stern, damit das Team in „Deine Teams“ bleibt.',
-      confirm: 'Neu starten',
+      confirm: 'Von vorn beginnen',
     },
     all: {
       row: 'Alle Rekorde löschen',
@@ -219,7 +219,7 @@ export const de: Messages = {
       tips: 'Spielanleitungs-Tipps, wieder sichtbar',
       photos: 'Zwischengespeicherte Spielerfotos',
       keepsLine:
-        'Deine Wahl bei den Nutzungsstatistiken. Ihre zufällige Kennung wird durch eine neue ersetzt.',
+        'Deine Wahl bei den Nutzungsstatistiken. Die zufällige Kennung dafür wird durch eine neue ersetzt.',
     },
   },
   formats: {
@@ -385,7 +385,7 @@ export const de: Messages = {
       `${title}, Rekord ${correct} von ${total}, veraltet`,
     squadUpdated: (date: string) =>
       `Kader aktualisiert am ${date}. Graue Rekorde stammen aus der Zeit davor.`,
-    startOver: (team: string) => `${team} neu starten`,
+    startOver: (team: string) => `${team} von vorn beginnen`,
   },
   picker: {
     allLeagues: 'Alle',
