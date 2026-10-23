@@ -37,11 +37,11 @@ apart from the app's own eleven things.
   when the squad has at least one best score, and Study then takes the full width. It opens a
   `Sheet`.
 
-**The team sheet.** The team's flag or marker beside the title "Start {team} over?"; one line,
+**The team sheet.** The title "Start {team} over?" (the `Sheet` title is text, so no flag); one line,
 "{team} goes back to unplayed, as if you had never opened it."; a **Clears** row (best scores,
 with each level's score; Home's Continue button is not mentioned, as it follows on its own); a
 **Keeps** line (the star, shown only when the squad is starred); a destructive button "Start
-over" and a plain "Cancel". After it, Difficulty re-renders as never played, with level 1 open.
+over". After it, Difficulty re-renders as never played, with level 1 open.
 
 **Settings** gains a last section, **YOUR DATA**, after ABOUT and above the version line: one
 card of two rows, labels in `error`, notes in `textSecondary`.
@@ -82,6 +82,14 @@ intro does not replay; it stays once per cold launch.
    last Settings section, where a destructive row is hard to hit by accident.
 7. **No telemetry event.** A new event is a disclosure review (`privacy-telemetry`), and a reset
    is not something the product needs to count.
+8. **No Cancel button.** Every sheet is the shared `Sheet`, which closes from its ×, the
+   backdrop and Android's back; a Cancel under the confirm would be a fourth way.
+9. **Settings' icons.** Clear all scores uses the eraser, the same action as Start over at a
+   wider scope; Reset Escuadra uses the Escuadra mark, the app itself. No arrow, which means
+   replay.
+10. **Telemetry follows the new identifier at once.** The TelemetryDeck client is built once per
+    launch; after a reset it is pointed at the new `installId`, keeping this launch's session
+    code, as About promises one per launch.
 
 ## Store
 
