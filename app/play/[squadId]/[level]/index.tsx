@@ -9,8 +9,10 @@ import { SlotChip } from '@/components/SlotChip';
 import { SpotlightStage } from '@/components/SpotlightStage';
 import { StreakChip } from '@/components/StreakChip';
 import { TeamMarker } from '@/components/TeamMarker';
+import { TipsLayer } from '@/components/TipsLayer';
 import { useScreenReader } from '@/components/useScreenReader';
 import { useShot } from '@/components/useShot';
+import { useTips } from '@/components/useTips';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
@@ -31,6 +33,7 @@ import {
 import { getPlayer, getRoster, getSquad } from '@/lib/squads';
 import { withAlpha } from '@/lib/stageView';
 import { track } from '@/lib/telemetry';
+import type { TipScreen } from '@/lib/tips';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
 import {
@@ -165,6 +168,21 @@ export default function Question() {
 
   const { live, clock, overlayRef, cornerRef, fire } = useShot(session.currentIndex);
 
+  // How to play (#184): once per level, on this route's first question, before
+  // any part of it is answered. The catcher takes every tap, so nothing is
+  // answered behind the tips, and auto-advance only follows an answer.
+  const firstQuestion =
+    session.phase === 'playing' &&
+    session.squadId === squadId &&
+    session.level === level &&
+    session.currentIndex === 0 &&
+    session.currentPartIndex === 0 &&
+    session.results[0]?.parts.every((p) => p === null) === true;
+  const tips = useTips(`question-${level}` as TipScreen, firstQuestion);
+  const heroRef = useRef<View>(null);
+  const slotsRef = useRef<View>(null);
+  const answersRef = useRef<View>(null);
+
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     column: { flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom },
@@ -220,7 +238,9 @@ export default function Question() {
       bottom: 0,
       backgroundColor: colors.background,
     },
-    hero: { paddingHorizontal: spacing.lg, gap: spacing.sm },
+    hero: { paddingHorizontal: spacing.lg },
+    // The number and the slots, in one view for level 1's first tip to ring.
+    heroContent: { gap: spacing.sm },
     // Under the hero, the prompt, answers and footer sit on solid ground.
     ground: { backgroundColor: colors.background },
     numberWrap: {
@@ -239,6 +259,9 @@ export default function Question() {
       paddingBottom: spacing.sm,
     },
     counter: { ...typography.statMonoTiny, color: colors.onStageMuted },
+    // The grid's inset, here rather than in the grid, so level 1's second tip
+    // rings the tiles and not the screen's edges.
+    answers: { marginHorizontal: spacing.md },
   });
 
   if (
@@ -293,7 +316,7 @@ export default function Question() {
         style={StyleSheet.absoluteFill}
         pointerEvents="none"
       />
-      <View style={styles.column}>
+      <View style={styles.column} {...tips.contentA11y}>
         <RoundProgress
           outcomes={progressOutcomes(session.results, session.currentIndex)}
           currentIndex={session.currentIndex}
@@ -346,25 +369,27 @@ export default function Question() {
               exiting={heroExiting}
               style={styles.hero}
             >
-              <View style={styles.numberWrap}>
-                <Text
-                  style={styles.number}
-                  maxFontSizeMultiplier={fontScaleCap.display}
-                  accessibilityLabel={t.round.shirtNumber(question.memberNo)}
-                >
-                  {question.memberNo}
-                </Text>
-                <EscuadraCorner
-                  ref={cornerRef}
-                  question={session.currentIndex}
-                  live={live}
-                  clock={clock}
-                />
-              </View>
-              <View style={styles.slots}>
-                {slots.map((slot) => (
-                  <SlotChip key={slot.key} slot={slot} />
-                ))}
+              <View ref={heroRef} collapsable={false} style={styles.heroContent}>
+                <View style={styles.numberWrap}>
+                  <Text
+                    style={styles.number}
+                    maxFontSizeMultiplier={fontScaleCap.display}
+                    accessibilityLabel={t.round.shirtNumber(question.memberNo)}
+                  >
+                    {question.memberNo}
+                  </Text>
+                  <EscuadraCorner
+                    ref={cornerRef}
+                    question={session.currentIndex}
+                    live={live}
+                    clock={clock}
+                  />
+                </View>
+                <View ref={slotsRef} collapsable={false} style={styles.slots}>
+                  {slots.map((slot) => (
+                    <SlotChip key={slot.key} slot={slot} />
+                  ))}
+                </View>
               </View>
             </Animated.View>
           </View>
@@ -385,28 +410,30 @@ export default function Question() {
               {counter ? <Text style={styles.counter}>{counter}</Text> : null}
             </View>
 
-            <AnswerGrid
-              part={part}
-              gridKey={`${session.currentIndex}:${session.currentPartIndex}`}
-              answeredIndex={answeredIndex}
-              layout={answerLayout(part, compact)}
-              stagger={
-                session.currentPartIndex === 0 ? durations.tileStagger : durations.partStagger
-              }
-              onAnswer={(pickedIndex, tap) => {
-                const right = pickedIndex === part.correctIndex;
-                const lastPart = session.currentPartIndex === question.parts.length - 1;
-                // `answerPart` scores the part and moves to the next in one
-                // update, so this grid unmounts before any tile sees its
-                // verdict. A right part that is not the last gets its haptic
-                // here; the last part's tile plays its own.
-                if (right && !lastPart) feedback('correct');
-                // The shot only when the question is decided: the last part
-                // right (a goal), or any part wrong (a miss).
-                if (!right || lastPart) fire(right ? 'goal' : 'miss', tap);
-                session.answerPart(pickedIndex);
-              }}
-            />
+            <View ref={answersRef} collapsable={false} style={styles.answers}>
+              <AnswerGrid
+                part={part}
+                gridKey={`${session.currentIndex}:${session.currentPartIndex}`}
+                answeredIndex={answeredIndex}
+                layout={answerLayout(part, compact)}
+                stagger={
+                  session.currentPartIndex === 0 ? durations.tileStagger : durations.partStagger
+                }
+                onAnswer={(pickedIndex, tap) => {
+                  const right = pickedIndex === part.correctIndex;
+                  const lastPart = session.currentPartIndex === question.parts.length - 1;
+                  // `answerPart` scores the part and moves to the next in one
+                  // update, so this grid unmounts before any tile sees its
+                  // verdict. A right part that is not the last gets its haptic
+                  // here; the last part's tile plays its own.
+                  if (right && !lastPart) feedback('correct');
+                  // The shot only when the question is decided: the last part
+                  // right (a goal), or any part wrong (a miss).
+                  if (!right || lastPart) fire(right ? 'goal' : 'miss', tap);
+                  session.answerPart(pickedIndex);
+                }}
+              />
+            </View>
 
             <QuestionFooter
               mode={footerMode(verdict, screenReader)}
@@ -420,6 +447,39 @@ export default function Question() {
       </View>
       {/* Over everything, and never in the way of a tap. */}
       <ShotOverlay ref={overlayRef} question={session.currentIndex} live={live} clock={clock} />
+      {/* No `scrollBy`: the scroll is bottom-aligned, so the targets are on
+          screen whenever the tips can show. */}
+      {tips.open && (
+        <TipsLayer
+          tips={
+            level === 1
+              ? [
+                  {
+                    target: heroRef,
+                    radius: radii.xl,
+                    heading: t.tips.question.clues.heading,
+                    body:
+                      squad.kind === 'club'
+                        ? t.tips.question.clues.bodyClub
+                        : t.tips.question.clues.body,
+                  },
+                  { target: answersRef, radius: radii.xl, ...t.tips.question.answer },
+                ]
+              : [
+                  {
+                    target: slotsRef,
+                    radius: radii.lg,
+                    ...(level === 2 ? t.tips.question.level2 : t.tips.question.level3),
+                  },
+                ]
+          }
+          kicker={level === 1 ? undefined : t.tips.kickerLevel(level)}
+          spoken={level === 1 ? undefined : t.tips.spokenLevel(level)}
+          onClose={tips.close}
+          onSkip={tips.skip}
+          onShown={tips.onShown}
+        />
+      )}
     </View>
   );
 }
