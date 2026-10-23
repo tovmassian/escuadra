@@ -1,3 +1,4 @@
+import type { Ref } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { OutdatedGlyph } from './ActionGlyphs';
 import { Flag } from './Flag';
@@ -23,6 +24,8 @@ interface TeamRowProps {
    *  divider under the card's last row. */
   variant?: 'list' | 'card';
   last?: boolean;
+  /** The row's own view: the picker's second How to play tip rings it (#183). */
+  ref?: Ref<View>;
 }
 
 // A picker row (#176): the marker at 40 × 27, the name, and on the right the
@@ -37,6 +40,7 @@ export function TeamRow({
   onPress,
   variant = 'list',
   last = false,
+  ref,
 }: TeamRowProps) {
   const colors = useThemeColors();
   const t = useT();
@@ -67,6 +71,7 @@ export function TeamRow({
 
   return (
     <Pressable
+      ref={ref}
       onPress={onPress}
       accessibilityRole="button"
       accessibilityLabel={scoreSpoken(name, block, t)}
