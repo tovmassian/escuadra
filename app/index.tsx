@@ -11,9 +11,8 @@ import { Wordmark } from '@/components/Wordmark';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { homeView } from '@/lib/homeView';
-import { getRoster, getSquad, listSquads } from '@/lib/squads';
+import { listSquads } from '@/lib/squads';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
-import { useSession } from '@/stores/session';
 import { borderWidths, iconSize, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
@@ -30,27 +29,15 @@ export default function Home() {
   const lastPlayed = useProgress((s) => s.lastPlayed);
   const bestScores = useProgress((s) => s.bestScores);
   const starred = useProgress((s) => s.starredSquads);
-  const setLastPlayed = useProgress((s) => s.setLastPlayed);
-  const startRound = useSession((s) => s.startRound);
-
   const view = homeView({ hydrated, lastPlayed, bestScores, starred, squads: listSquads() });
   const wallTop = insets.top + sizes.roundButton;
   const topFade = wallTop + sizes.home.topFade;
 
   const openPicker = () => router.push('/team-picker');
+  // Continue and a starred team both open that team's Difficulty, which picks
+  // the level to play next.
   const openSquad = (squadId: string) =>
     router.push({ pathname: '/team/[squadId]/difficulty', params: { squadId } });
-  // Continue starts the round at the last-played level, as Start Training did.
-  const continueRound = (squadId: string, level: number) => {
-    const squad = getSquad(squadId);
-    if (squad === undefined) return;
-    startRound(squad, getRoster(squad.id), level as 1 | 2 | 3);
-    setLastPlayed(squad.id, level);
-    router.push({
-      pathname: '/play/[squadId]/[level]',
-      params: { squadId: squad.id, level: String(level) },
-    });
-  };
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
@@ -145,7 +132,7 @@ export default function Home() {
           <HomeContinue
             data={view.continue}
             name={squadDisplayName(view.continue.squad, language)}
-            onPress={() => continueRound(view.continue.squad.id, view.continue.level)}
+            onPress={() => openSquad(view.continue.squad.id)}
           />
         )}
         {view.kind === 'firstRun' && (

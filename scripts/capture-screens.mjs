@@ -596,10 +596,11 @@ async function captureTheme(browser, colorScheme, suffix) {
     await capture.tapId('confederation-UEFA', { wait: SWAP_MS });
     await capture.shoot('03d-team-picker-nations-starred');
 
-    // Home (#181), returning: Liverpool to continue at level 3 (8/10, current),
-    // and the four teams starred above. Then Armenia, whose level-3 best is
-    // outdated, with nothing starred, so the row is "All teams" alone. The
-    // rounds below write their own last-played, so nothing later sees these.
+    // Home (#181), returning: Liverpool to continue, every level cleared, so
+    // Continue offers level 3 again (8/10, current), with the four teams starred
+    // above. Then Armenia, whose level-3 best is outdated, with nothing starred,
+    // so the row is "All teams" alone. The rounds below write their own
+    // last-played, so nothing later sees these.
     await seedLastPlayed(capture, 'liv', 3);
     await openHomeStill(capture);
     await capture.shoot('01e-home-returning');
@@ -607,6 +608,17 @@ async function captureTheme(browser, colorScheme, suffix) {
     await seedStarred(capture, []);
     await openHomeStill(capture);
     await capture.shoot('01f-home-outdated');
+
+    // Difficulty with the squad done (#181): every level cleared and level 3 a
+    // current 10/10, so the focused card is green. Arsenal's scores show on no
+    // picker shot, since those ran above.
+    await seedBestScores(
+      capture,
+      { 'ars:1': 9, 'ars:2': 8, 'ars:3': 10 },
+      await squadLastUpdated('ars'),
+    );
+    await capture.open('/team/ars/difficulty');
+    await capture.shoot('04e-difficulty-escuadra');
 
     await captureStudy(capture);
 

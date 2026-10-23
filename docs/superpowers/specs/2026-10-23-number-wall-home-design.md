@@ -28,12 +28,18 @@ One fixed screen, no scroll, on `background`. Back to front:
    - **Returning** (a last-played team still in the data):
      - **Continue:** a full-width `ctaBg` pill, at least 68 pt tall. In it: the team's flag
        (34 × 23) or club marker; "CONTINUE SPAIN" in Archivo SemiExpanded ExtraBold 17 pt
-       (`ctaText`, up to two lines); under it the meta line "LEVEL 2 · BEST 7/10" in IBM Plex
-       Mono 11 pt (`ctaMuted`); when that best is outdated (#180), a clock and "OUTDATED" follow
-       it; and on the right a 46 pt circle in `ctaText` holding a play triangle in `ctaBg`. A tap
-       starts a round of that team at that level, as Start Training does today. Spoken as one
-       button: "Continue Spain, Level 2, best 7 of 10", ending "outdated" when it is, or
-       "Continue Spain, Level 2" with no best yet.
+       (`ctaText`, up to two lines); under it the meta line in IBM Plex Mono 11 pt
+       (`ctaMuted`); and on the right a 46 pt circle in `ctaText` holding a play triangle in
+       `ctaBg`. A tap opens that team's Difficulty. The meta line is the level Difficulty will
+       focus, the nearest level still to clear (else the last), not the level last played:
+       - "LEVEL 2 · BEST 6/10" with its best, and a clock and "OUTDATED" after it when that best
+         is outdated (#180);
+       - "LEVEL 2 · NOT PLAYED YET" before a first round of it;
+       - "A LA ESCUADRA" once every level is cleared and the last is a current 10/10.
+
+       Spoken as one button: "Continue Spain, Level 2, best 6 of 10" (ending "outdated" when it
+       is), "Continue Spain, Level 2, Not played yet", or "Continue Spain, a la escuadra".
+
      - **Your squads and All teams,** one 44 pt row: the starred teams, newest first, as 44 pt
        round buttons (`surface`, hairline `border`) each holding the flag or marker at 24 × 16,
        spoken by the team's name, each opening that team's Difficulty. They scroll sideways when
@@ -91,9 +97,11 @@ number.
 
 ## Decisions
 
-1. **Continue starts the round,** as the issue says and Start Training does today, so it calls
-   `startRound` and `setLastPlayed` and opens the question screen. The canvas links it to
-   Difficulty. The issue wins, and Difficulty is one tap away through Your squads or the picker.
+1. **Continue opens the team's Difficulty,** as the canvas links it (owner, in review of PR
+   #195). The level last played is often not the one a player would pick next: Difficulty
+   already focuses the nearest level still to clear, so Continue shows that level, or A LA
+   ESCUADRA once the squad is done, using the same rule (`focusedLevel`, `isEscuadra` in
+   `lib/ladderView.ts`).
 2. **A returning player with no starred teams** sees "All teams ›" alone on the right of the row.
    The hint is for first run only, where the canvas draws it. A returning player has already
    seen the star on Difficulty.
@@ -109,6 +117,12 @@ number.
 6. **The new dependency,** `react-native-svg`, is MIT-licensed, sends nothing, and ships in Expo
    Go, so the Home can be tried there. It moves the fingerprint. That is fine on `main`, since
    2.0 is a store build. `lib/licences.generated.ts` is regenerated, so About → Licences lists it.
+7. **Difficulty marks a squad done** (owner, in review of PR #195). When the focused card's level
+   is a current 10/10, which happens only once every level is cleared and the last is a la
+   escuadra, its outline and escuadra corner turn `success` and its status line reads
+   "A LA ESCUADRA · 10/10" in `successText` (spoken "Your best, 10 of 10, a la escuadra"). An
+   outdated 10/10 stays grey, as #180 draws it, and an 8 or 9 keeps the accent: there is still
+   something to chase.
 
 ## Text
 
@@ -121,15 +135,16 @@ usage) and it, then reviewed by a native speaker:
 - `starHint`: "Star a team and it waits for you here."
 
 Continue's spoken name joins `continueTeam` to the picker's `bestSpoken` or
-`bestOutdatedSpoken` (or `common.level` before a best), so it reads as the picker's rows do.
-`home.startTraining` and `home.continueMeta` stay. `home.browseAllTeams` goes.
+`bestOutdatedSpoken` (or `common.level` and `ladder.notPlayed` before a best), so it reads as the
+picker's rows do. "a la escuadra" is never translated, so Continue's and Difficulty's
+A LA ESCUADRA lines need no new key. `home.startTraining` and `home.continueMeta` stay.
+`home.browseAllTeams` goes.
 
 ## Not changing
 
-- Nothing new leaves the device: no telemetry event or property, no network call. The round
-  that Continue starts sends what Start Training's did.
-- The picker, Settings, Difficulty and the round are untouched. Language and theme are changed in
-  Settings, as since #175.
+- Nothing new leaves the device: no telemetry event or property, no network call.
+- The picker, Settings and the round are untouched, and Difficulty only gains the done state
+  (decision 7). Language and theme are changed in Settings, as since #175.
 - About is unchanged. Its licence notices regenerate on their own.
 
 ## Testing

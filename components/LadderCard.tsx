@@ -1,7 +1,7 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { OutdatedGlyph, PlayGlyph } from './ActionGlyphs';
 import { useT } from '@/i18n/useT';
-import { playLevelLabel, statusLine, type LadderRow } from '@/lib/ladderView';
+import { isEscuadra, playLevelLabel, statusLine, type LadderRow } from '@/lib/ladderView';
 import {
   borderWidths,
   fontScaleCap,
@@ -26,17 +26,20 @@ interface LadderCardProps {
 // Its number carries the escuadra corner, static here; beside it are the
 // best score so far, the title and what the level asks, and under them Play.
 // A best set before the squad was updated reads grey, after a clock (#180).
+// A current 10/10 draws the outline, the corner and the status line green.
 export function LadderCard({ row, title, description, onPlay }: LadderCardProps) {
   const colors = useThemeColors();
   const t = useT();
   const corner = sizes.corner.ladder;
   const status = statusLine(row, t);
   const outdated = row.best?.outdated === true;
+  // A current 10/10 here means the squad is done: the card turns green (#181).
+  const line = isEscuadra(row) ? colors.success : colors.accentLine;
   const styles = StyleSheet.create({
     card: {
       backgroundColor: colors.surface,
       borderWidth: borderWidths.thick,
-      borderColor: colors.accentLine,
+      borderColor: line,
       borderRadius: radii.ladderCard,
       padding: spacing.md + 2,
       gap: spacing.md + 2,
@@ -52,13 +55,13 @@ export function LadderCard({ row, title, description, onPlay }: LadderCardProps)
       height: corner.arm,
       borderTopWidth: corner.bar,
       borderRightWidth: corner.bar,
-      borderColor: colors.accentLine,
+      borderColor: line,
     },
     text: { flex: 1, gap: spacing.xs, paddingTop: spacing.xxs },
     statusRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.xxs + 1 },
     status: {
       ...typography.ladderCardStatus,
-      color: outdated ? colors.textMuted : colors.accentLine,
+      color: outdated ? colors.textMuted : isEscuadra(row) ? colors.successText : colors.accentLine,
       flexShrink: 1,
     },
     title: { ...typography.ladderCardTitle, color: colors.textPrimary },

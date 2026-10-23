@@ -13,9 +13,10 @@ import { iconSize, opacity, radii, sizes, spacing, typography } from '@/theme/to
 import { useThemeColors } from '@/theme/useTheme';
 
 // Home's Continue (#181): one ctaBg pill with the team's flag or marker,
-// "CONTINUE SPAIN", the level and best (and OUTDATED when it is, #180), and a
-// play circle. A tap starts the round; the screen passes that in. One button
-// to a screen reader, read the way a picker row is.
+// "CONTINUE SPAIN", the level Difficulty will offer next with its best (and
+// OUTDATED when it is, #180) or A LA ESCUADRA once the squad is done, and a
+// play circle. A tap opens the team's Difficulty; the screen passes that in.
+// One button to a screen reader.
 export function HomeContinue({
   data,
   name,
