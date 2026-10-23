@@ -48,9 +48,9 @@ rather than an animation.
 Home's number wall (#181) drifts, slow and endless, at `numberWall.speed`. It is ambient, not a
 transition, so it is the rule's written exception (owner approved, 2026-10-22). It stands still
 under Reduce Motion, and stops while the app is in the background or Home is not the focused
-screen. Nothing else may loop on screen.
+screen. It is the only ambient loop; `skeleton` loops only while a photo loads.
 
-The round-over celebration and the home lockup are the one carve-out: their timelines (`strikeTiming`, `resultsTimeline`, `homeCascade` in `theme/tokens.ts`) may run past 300 ms.
+The round-over celebration is the other carve-out: its timelines (`strikeTiming`, `resultsTimeline` in `theme/tokens.ts`) may run past 300 ms.
 
 ## The system theme
 

@@ -51,8 +51,8 @@ describe('brand tokens', () => {
     }
   });
 
-  it('the wordmark uses the ExtraBold family', () => {
-    expect(typography.wordmark.fontFamily).toBe('Inter-ExtraBold');
+  it('the wordmark uses Archivo SemiExpanded ExtraBold', () => {
+    expect(typography.wordmark.fontFamily).toBe('Archivo-SemiExpandedExtraBold');
   });
 });
 
@@ -340,7 +340,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(32);
+    expect(archivo).toHaveLength(33);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }

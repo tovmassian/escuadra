@@ -64,11 +64,10 @@ export const fr: Messages = {
       best === undefined ? `NIVEAU ${level}` : `NIVEAU ${level} · RECORD ${best}/${total}`,
     startTraining: 'S’entraîner',
     // "Voir toutes les équipes" is 23 chars against 20.
-    browseAllTeams: 'Toutes les équipes',
-    headline: 'Connais chaque numéro.',
+    headline: 'Retiens chaque numéro.',
     continueTeam: (team: string) => `Continuer : ${team}`,
     allTeams: 'Toutes les équipes',
-    starHint: 'Ajoute une équipe en favori, elle t’attendra ici.',
+    starHint: 'Mets une étoile à une équipe, elle t’attendra ici.',
   },
   languageSheet: {
     title: 'Langue',

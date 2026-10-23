@@ -67,8 +67,6 @@ export const en = {
       best === undefined ? `LEVEL ${level}` : `LEVEL ${level} · BEST ${best}/${total}`,
     /** ≤ 18 chars: the main button. */
     startTraining: 'Start Training',
-    /** ≤ 20 chars: the text button. */
-    browseAllTeams: 'Browse All Teams',
     /** ≤ 24 chars: the headline over the buttons, in display capitals; it may wrap. */
     headline: 'Know every number.',
     /** ≤ 24 chars with "Spain": Continue, in display capitals; it may wrap to two lines. */

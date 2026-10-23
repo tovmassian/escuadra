@@ -49,9 +49,8 @@ export const it: Messages = {
     continueMeta: (level: number, best: number | undefined, total: number) =>
       best === undefined ? `LIVELLO ${level}` : `LIVELLO ${level} · RECORD ${best}/${total}`,
     startTraining: 'Allenati',
-    browseAllTeams: 'Tutte le squadre',
     headline: 'Conosci ogni numero.',
-    continueTeam: (team: string) => `Continua con ${team}`,
+    continueTeam: (team: string) => `Continua: ${team}`,
     allTeams: 'Tutte le squadre',
     starHint: 'Metti la stella a una squadra: ti aspetta qui.',
   },

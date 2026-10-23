@@ -4,7 +4,7 @@ import { FLAG_SOURCES, type FlagCode } from '@/assets/flags/generated';
 import { borderWidths, sizes } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
-export type FlagSize = 'marker' | 'inline' | 'row' | 'picker';
+export type FlagSize = 'marker' | 'inline' | 'row' | 'picker' | 'continue' | 'squad';
 
 interface FlagProps {
   /** Null when the nationality isn't in `lib/flags.ts`'s table. Renders
@@ -24,7 +24,20 @@ const DIMENSIONS: Record<FlagSize, { width: number; height: number }> = {
   inline: sizes.flagInline,
   row: sizes.flagRow,
   picker: sizes.pickerMarker,
+  continue: sizes.home.continueMarker,
+  squad: sizes.home.squadMarker,
 };
+
+// The corner radius of each size; `Image` ignores a `radius` inside a style
+// object's dimensions, so only width and height are passed on.
+const RADII: Partial<Record<FlagSize, number>> = {
+  picker: sizes.pickerMarker.radius,
+  continue: sizes.home.continueMarker.radius,
+  squad: sizes.home.squadMarker.radius,
+};
+
+// The sizes drawn with the marker's ring, as the picker's row does.
+const RINGED: readonly FlagSize[] = ['picker', 'continue', 'squad'];
 
 // A nation's identity element. Clubs never render one — CLAUDE.md
 // guardrail 2 bans crests, badges, logos and shield shapes permanently, and
@@ -37,21 +50,21 @@ const DIMENSIONS: Record<FlagSize, { width: number; height: number }> = {
 // white-on-light is the worse case of the two.
 export function Flag({ code, size, label, lineColor }: FlagProps) {
   const colors = useThemeColors();
-  const isPicker = size === 'picker';
+  const ringed = RINGED.includes(size);
   const styles = StyleSheet.create({
     flag: {
-      borderRadius: isPicker ? sizes.pickerMarker.radius : sizes.teamMarkerRadius,
+      borderRadius: RADII[size] ?? sizes.teamMarkerRadius,
       borderWidth: borderWidths.hairline,
-      borderColor: lineColor ?? (isPicker ? colors.markerRing : colors.border),
+      borderColor: lineColor ?? (ringed ? colors.markerRing : colors.border),
     },
   });
 
   if (code === null) return null;
-  const dimensions = DIMENSIONS[size];
+  const { width, height } = DIMENSIONS[size];
   return (
     <Image
       source={FLAG_SOURCES[code]}
-      style={[styles.flag, dimensions]}
+      style={[styles.flag, { width, height }]}
       contentFit="cover"
       accessibilityRole="image"
       accessibilityLabel={label}

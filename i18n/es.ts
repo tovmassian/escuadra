@@ -53,7 +53,6 @@ export const es: Messages = {
       best === undefined ? `NIVEL ${level}` : `NIVEL ${level} · RÉCORD ${best}/${total}`,
     startTraining: 'Entrenar',
     // "Ver todos los equipos" is 21 chars against 20.
-    browseAllTeams: 'Todos los equipos',
     headline: 'Conoce cada dorsal.',
     continueTeam: (team: string) => `Seguir con ${team}`,
     allTeams: 'Todos los equipos',

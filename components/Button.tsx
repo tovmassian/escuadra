@@ -9,11 +9,9 @@ interface ButtonProps {
   variant: ButtonVariant;
   onPress: () => void;
   disabled?: boolean;
-  /** Start Training is the one 56px control; everything else is 52px. */
-  large?: boolean;
 }
 
-export function Button({ label, variant, onPress, disabled, large }: ButtonProps) {
+export function Button({ label, variant, onPress, disabled }: ButtonProps) {
   const colors = useThemeColors();
   const styles = StyleSheet.create({
     pressed: { opacity: opacity.settled },
@@ -62,7 +60,7 @@ export function Button({ label, variant, onPress, disabled, large }: ButtonProps
         style={[
           styles.control,
           // The least it is tall; it grows with the text at large sizes.
-          { minHeight: large ? sizes.controlHeightLarge : sizes.controlHeight },
+          { minHeight: sizes.controlHeight },
           variant === 'filled' && styles.filled,
           variant === 'outline' && styles.outline,
           variant === 'inert' && styles.inert,

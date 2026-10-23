@@ -1,32 +1,26 @@
+import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import Animated, { Easing, FadeInUp } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Button } from '@/components/Button';
+import { StarGlyph } from '@/components/ActionGlyphs';
+import { HomeContinue } from '@/components/HomeContinue';
+import { HomeSquads } from '@/components/HomeSquads';
+import { NumberWall } from '@/components/NumberWall';
 import { GearGlyph } from '@/components/SettingsGlyphs';
 import { Wordmark } from '@/components/Wordmark';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
-import { ROUND_LENGTH } from '@/lib/scoring';
-import { getRoster, getSquad } from '@/lib/squads';
-import { scoreKey, useProgress, useProgressHydrated } from '@/stores/progress';
+import { homeView } from '@/lib/homeView';
+import { getRoster, getSquad, listSquads } from '@/lib/squads';
+import { useProgress, useProgressHydrated } from '@/stores/progress';
 import { useSession } from '@/stores/session';
-import {
-  celebrationEasingCurves,
-  borderWidths,
-  celebrationRiseDuration,
-  homeCascade,
-  iconSize,
-  opacity,
-  radii,
-  sizes,
-  spacing,
-  typography,
-} from '@/theme/tokens';
+import { borderWidths, iconSize, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
-const riseEasing = Easing.bezier(...celebrationEasingCurves.rise);
-
+// Home (#181): the number wall drifting behind "KNOW EVERY NUMBER.", then
+// Continue and the starred squads for a returning player, or START TRAINING
+// and the star hint on first run. Spec:
+// docs/superpowers/specs/2026-10-23-number-wall-home-design.md.
 export default function Home() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
@@ -35,31 +29,47 @@ export default function Home() {
   const hydrated = useProgressHydrated();
   const lastPlayed = useProgress((s) => s.lastPlayed);
   const bestScores = useProgress((s) => s.bestScores);
+  const starred = useProgress((s) => s.starredSquads);
   const setLastPlayed = useProgress((s) => s.setLastPlayed);
   const startRound = useSession((s) => s.startRound);
 
-  const continueSquad = hydrated && lastPlayed ? getSquad(lastPlayed.squadId) : undefined;
-  const continueBest = lastPlayed
-    ? bestScores[scoreKey(lastPlayed.squadId, lastPlayed.level)]?.score
-    : undefined;
+  const view = homeView({ hydrated, lastPlayed, bestScores, starred, squads: listSquads() });
+  const wallTop = insets.top + sizes.roundButton;
+  const topFade = wallTop + sizes.home.topFade;
 
-  const startTraining = () => {
-    if (continueSquad && lastPlayed) {
-      const roster = getRoster(continueSquad.id);
-      startRound(continueSquad, roster, lastPlayed.level as 1 | 2 | 3);
-      setLastPlayed(continueSquad.id, lastPlayed.level);
-      router.push({
-        pathname: '/play/[squadId]/[level]',
-        params: { squadId: continueSquad.id, level: String(lastPlayed.level) },
-      });
-      return;
-    }
-    router.push('/team-picker');
+  const openPicker = () => router.push('/team-picker');
+  const openSquad = (squadId: string) =>
+    router.push({ pathname: '/team/[squadId]/difficulty', params: { squadId } });
+  // Continue starts the round at the last-played level, as Start Training did.
+  const continueRound = (squadId: string, level: number) => {
+    const squad = getSquad(squadId);
+    if (squad === undefined) return;
+    startRound(squad, getRoster(squad.id), level as 1 | 2 | 3);
+    setLastPlayed(squad.id, level);
+    router.push({
+      pathname: '/play/[squadId]/[level]',
+      params: { squadId: squad.id, level: String(level) },
+    });
   };
 
   const styles = StyleSheet.create({
-    root: { flex: 1, backgroundColor: colors.background, paddingHorizontal: spacing.xl },
-    toggleRow: { flexDirection: 'row', justifyContent: 'flex-end', alignItems: 'center' },
+    root: { flex: 1, backgroundColor: colors.background },
+    topFade: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      top: 0,
+      height: topFade,
+      pointerEvents: 'none',
+    },
+    topBar: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      height: sizes.roundButton,
+      marginTop: insets.top,
+      paddingHorizontal: spacing.lg,
+    },
     gear: {
       width: sizes.roundButton,
       height: sizes.roundButton,
@@ -70,43 +80,45 @@ export default function Home() {
       alignItems: 'center',
       justifyContent: 'center',
     },
-    brandBlock: { flex: 1, alignItems: 'center', justifyContent: 'center' },
-    continueCard: {
+    spacer: { flex: 1 },
+    skirt: { height: sizes.home.skirt, pointerEvents: 'none' },
+    block: {
+      backgroundColor: colors.background,
+      paddingHorizontal: spacing.lg,
+      paddingBottom: insets.bottom + spacing.xl,
+      gap: spacing.md,
+    },
+    headline: { ...typography.homeHeadline, color: colors.textPrimary, marginBottom: spacing.xxs },
+    start: {
+      minHeight: sizes.home.start,
+      borderRadius: radii.pill,
+      backgroundColor: colors.ctaBg,
+      alignItems: 'center',
+      justifyContent: 'center',
+      paddingHorizontal: spacing.lg,
+    },
+    startLabel: { ...typography.homeButton, color: colors.ctaText, textAlign: 'center' },
+    hint: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: spacing.md - 2,
-      padding: spacing.md,
-      backgroundColor: colors.surface,
-      borderWidth: 1,
-      borderColor: colors.border,
-      borderRadius: radii.xl,
-      marginBottom: spacing.xxl,
+      justifyContent: 'center',
+      gap: spacing.xs,
+      minHeight: sizes.minTapTarget,
     },
-    dot: {
-      width: sizes.teamDot,
-      height: sizes.teamDot,
-      borderRadius: sizes.teamDot,
-      flexShrink: 0,
-    },
-    continueText: { flex: 1, minWidth: 0 },
-    continueName: { ...typography.rowTitle, color: colors.textPrimary },
-    continueMeta: {
-      ...typography.statMonoTiny,
-      color: colors.textMuted,
-      marginTop: spacing.xxs - 2,
-    },
-    chevron: { fontSize: iconSize.chevronLarge, color: colors.textMuted },
-    actions: { gap: spacing.md },
+    hintText: { ...typography.homeHint, color: colors.textMuted, flexShrink: 1 },
   });
 
   return (
-    <View
-      style={[
-        styles.root,
-        { paddingTop: insets.top + spacing.xl, paddingBottom: insets.bottom + spacing.xl },
-      ]}
-    >
-      <View style={styles.toggleRow}>
+    <View style={styles.root}>
+      <NumberWall top={wallTop} />
+      <LinearGradient
+        colors={[colors.background, colors.background, colors.backgroundClear]}
+        locations={[0, insets.top / topFade, 1]}
+        style={styles.topFade}
+      />
+
+      <View style={styles.topBar}>
+        <Wordmark />
         <Pressable
           testID="home-settings"
           onPress={() => router.push('/settings')}
@@ -118,62 +130,41 @@ export default function Home() {
         </Pressable>
       </View>
 
-      <View style={styles.brandBlock}>
-        <Wordmark size={sizes.wordmarkMarkHero} stacked animate />
-      </View>
+      <View style={styles.spacer} />
 
-      {continueSquad && lastPlayed && (
-        <Animated.View
-          entering={FadeInUp.duration(celebrationRiseDuration)
-            .delay(homeCascade.continueCardDelay)
-            .easing(riseEasing)}
-        >
-          <Pressable
-            onPress={() =>
-              router.push({
-                pathname: '/team/[squadId]/difficulty',
-                params: { squadId: continueSquad.id },
-              })
-            }
-            style={styles.continueCard}
-            accessibilityRole="button"
-          >
-            <View
-              style={[
-                styles.dot,
-                { backgroundColor: continueSquad.primaryColor ?? colors.textMuted },
-              ]}
-            />
-            <View style={styles.continueText}>
-              <Text style={styles.continueName}>{squadDisplayName(continueSquad, language)}</Text>
-              <Text style={styles.continueMeta}>
-                {t.home.continueMeta(lastPlayed.level, continueBest, ROUND_LENGTH)}
-              </Text>
-            </View>
-            <Text style={styles.chevron}>›</Text>
-          </Pressable>
-        </Animated.View>
-      )}
+      <LinearGradient colors={[colors.backgroundClear, colors.background]} style={styles.skirt} />
+      <View style={styles.block}>
+        <Text style={styles.headline}>{t.home.headline}</Text>
 
-      <View style={styles.actions}>
-        <Animated.View
-          entering={FadeInUp.duration(celebrationRiseDuration)
-            .delay(homeCascade.actionsBase)
-            .easing(riseEasing)}
-        >
-          <Button label={t.home.startTraining} variant="filled" large onPress={startTraining} />
-        </Animated.View>
-        <Animated.View
-          entering={FadeInUp.duration(celebrationRiseDuration)
-            .delay(homeCascade.actionsBase + homeCascade.actionsStep)
-            .easing(riseEasing)}
-        >
-          <Button
-            label={t.home.browseAllTeams}
-            variant="text"
-            onPress={() => router.push('/team-picker')}
+        {view.kind === 'returning' && (
+          <HomeContinue
+            data={view.continue}
+            name={squadDisplayName(view.continue.squad, language)}
+            onPress={() => continueRound(view.continue.squad.id, view.continue.level)}
           />
-        </Animated.View>
+        )}
+        {view.kind === 'firstRun' && (
+          <Pressable
+            testID="home-start"
+            onPress={openPicker}
+            accessibilityRole="button"
+            accessibilityLabel={t.home.startTraining}
+            style={({ pressed }) => [styles.start, pressed && { opacity: opacity.settled }]}
+          >
+            <Text style={styles.startLabel}>{t.home.startTraining}</Text>
+          </Pressable>
+        )}
+
+        {view.kind === 'returning' || (view.kind === 'firstRun' && view.starred.length > 0) ? (
+          <HomeSquads squads={view.starred} onOpen={openSquad} onAllTeams={openPicker} />
+        ) : view.kind === 'firstRun' ? (
+          <View style={styles.hint}>
+            <View importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
+              <StarGlyph color={colors.textMuted} filled={false} size={iconSize.starHint} />
+            </View>
+            <Text style={styles.hintText}>{t.home.starHint}</Text>
+          </View>
+        ) : null}
       </View>
     </View>
   );
