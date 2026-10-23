@@ -464,6 +464,27 @@ export const typography = {
     fontSize: 28,
     letterSpacing: -0.56,
   },
+  // The launch intro (#182): the lockup's word at 46 / −1, the "A LA ESCUADRA"
+  // tagline under it, and "TAP TO SKIP" at the foot.
+  introWordmark: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 46,
+    letterSpacing: -1,
+  },
+  introTagline: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 12,
+    letterSpacing: 3,
+    textTransform: 'uppercase' as const,
+  },
+  introSkip: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 11,
+    letterSpacing: 1,
+    textTransform: 'uppercase' as const,
+  },
   // Filter-pill labels.
   filterLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },
   // The in-round banner's shirt number (Results).
@@ -853,6 +874,7 @@ export const opacity = {
 // inside `autoAdvance`. The round-over celebration is the other carve-out from
 // the rule; see `strikeTiming`/`resultsTimeline` below.
 // `numberWall.speed`, the wall's drift, is not timed and is not in `durations` (#181).
+// The launch intro (#182) is the third carve-out: see `launchIntro`.
 export const durations = {
   press: 100,
   reveal: 180,
@@ -1035,6 +1057,48 @@ export const resultsTimeline = {
   reviewPrompt: t(2000),
 } as const;
 
+// The launch intro, "the strike" (#182; the 2.0 canvas's OpenStrike artboard). ms
+// from the first frame, read off the canvas's 4 s CSS loop at 40 ms per percent.
+// Distances are in mark units (`MARK_VIEWBOX`), so the strike scales with the mark:
+// the canvas draws the mark at 200 dp, 3.125 dp a unit. Its third written
+// exception to the 300 ms rule (owner approved, 2026-10-22). One change from
+// the canvas: the colour comes back at 1000–1200, not 1120–1360, so the end
+// frame is whole as the tagline settles (spec, Timeline).
+export const launchIntro = {
+  // The ball pops in off-screen, bottom left, then flies to the corner: x
+  // straight, y on `curve`, so it arcs; it shrinks from `scale` to 1.
+  ballIn: { at: 280, duration: 20 },
+  flight: {
+    at: 300,
+    duration: 400,
+    curve: [0.15, 0.6, 0.35, 1],
+    from: { x: -78, y: 151 },
+    scale: 1.6,
+  },
+  // As the ball passes, each trail square shows. Indexed as `markGeometry.trail`:
+  // [0] the near one, [1] the far one, which the ball passes first.
+  trail: [
+    { at: 600, duration: 40 },
+    { at: 540, duration: 40 },
+  ],
+  // The goal: frame and ball turn `success`, a ring flashes out from the ball
+  // (scale × the ball, starting opacity), and the frame kicks up and right
+  // (units), back to rest after `settle`.
+  flash: { at: 680, duration: 40 },
+  ring: { at: 700, duration: 300, from: 0.6, to: 2.8, opacity: 0.9 },
+  kick: { at: 700, rise: 80, settle: 140, x: 1.92 },
+  // The end frame: the wordmark rises `rise` dp in, the tagline fades in, the
+  // skip hint fades out, the colour comes back to `mark`.
+  wordmark: { at: 800, duration: 260, rise: 16 },
+  tagline: { at: 1000, duration: 200 },
+  skipHint: { at: 1040, duration: 160 },
+  colourBack: { at: 1000, duration: 200 },
+  // Then the whole intro fades over `fadeOut`, Home showing through. Under
+  // Reduce Motion the end frame holds until `end` and fades the same way.
+  end: 1200,
+  fadeOut: 200,
+} as const;
+
 export const sizes = {
   // The shirt-number column of a Study list row.
   studyColumn: { no: 26 },
@@ -1059,6 +1123,8 @@ export const sizes = {
   wordmarkMark: 28,
   // The feature graphic's large mark (`app/store/feature-graphic.tsx`).
   wordmarkMarkHero: 86,
+  // The launch intro's mark (#182).
+  introMark: 200,
   // A 10/10's player circles.
   rosterAvatar: 54,
   // ---- 2.0 spotlight screens (spec §2, §3, §5, §8) ----

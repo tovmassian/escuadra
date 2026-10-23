@@ -4,6 +4,7 @@ import {
   cardGradient,
   durations,
   gradients,
+  launchIntro,
   MOTION_TIME_SCALE,
   palettes,
   resultsTimeline,
@@ -340,7 +341,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(33);
+    expect(archivo).toHaveLength(34);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }
@@ -512,5 +513,53 @@ describe('cardGradient', () => {
       expect(at).toBeLessThanOrEqual(1);
       if (i > 0) expect(at).toBeGreaterThan(cardGradient.locations[i - 1] ?? 1);
     });
+  });
+});
+
+describe('launch intro motion', () => {
+  // #182: the canvas's timeline, in ms from the first frame.
+  const {
+    ballIn,
+    flight,
+    trail,
+    flash,
+    ring,
+    kick,
+    wordmark,
+    tagline,
+    skipHint,
+    colourBack,
+    end,
+    fadeOut,
+  } = launchIntro;
+  const ends = [
+    ballIn.at + ballIn.duration,
+    flight.at + flight.duration,
+    ...trail.map((t) => t.at + t.duration),
+    flash.at + flash.duration,
+    ring.at + ring.duration,
+    kick.at + kick.rise + kick.settle,
+    wordmark.at + wordmark.duration,
+    tagline.at + tagline.duration,
+    skipHint.at + skipHint.duration,
+    colourBack.at + colourBack.duration,
+  ];
+
+  it('has every beat over by the time the intro fades', () => {
+    expect(Math.max(...ends)).toBeLessThanOrEqual(end);
+  });
+
+  it('lands the ball before it flashes the goal', () => {
+    expect(flight.at + flight.duration).toBeLessThanOrEqual(ring.at);
+    expect(flash.at + flash.duration).toBeLessThanOrEqual(colourBack.at);
+  });
+
+  it('passes the far trail square before the near one', () => {
+    const [near, far] = trail;
+    expect(far!.at).toBeLessThan(near!.at);
+  });
+
+  it('hands over to Home within about a second and a half', () => {
+    expect(end + fadeOut).toBeLessThanOrEqual(1500);
   });
 });

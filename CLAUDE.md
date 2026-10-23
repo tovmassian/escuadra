@@ -133,8 +133,9 @@ changes the product's direction.
   error go away.
 - User-visible text lives in `i18n/` and is read through `useT()`; `npm run lint` fails a
   hard-coded string in `app/` or `components/`.
-- Animations stay under 300 ms by default, with the carve-outs in `design-tokens`; a
-  design that needs longer changes the rule, as Guardrails says.
+- Animations stay under 300 ms by default, with the carve-outs in `design-tokens` (the
+  launch intro, Home's drift, the round-over celebration); a design that needs longer
+  changes the rule, as Guardrails says.
 - Read the Expo docs for SDK 57 (https://docs.expo.dev/versions/v57.0.0/), never
   `latest`. An SDK upgrade is a release decision, not a dependency bump.
 
