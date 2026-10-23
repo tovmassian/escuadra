@@ -42,6 +42,8 @@ is stale. Never edit the expectation, widen an allowlist or loosen TypeScript to
 
 - `lib/__tests__/telemetrySdk.test.ts`: what the TelemetryDeck SDK sends. A failure is a disclosure
   review (`CLAUDE.md`, guardrail 4).
+- `lib/__tests__/telemetryIdentifier.test.ts`: About's one session code per launch, when the
+  identifier changes (Reset Escuadra).
 - `i18n/__tests__/catalogs.test.ts`: a hash of the English About. A change updates every
   catalog's `about`, each re-reviewed.
 - `lib/__tests__/dataIntegrity.test.ts`: every stored photo's licence and credit, and the squads'

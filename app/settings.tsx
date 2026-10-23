@@ -95,8 +95,9 @@ export default function Settings() {
     version: { ...typography.statMonoTiny, color: colors.textMuted },
   });
 
-  // Reset Escuadra (#197): the photo caches, then the store, then Home. A cache
-  // that fails to clear is not worth stopping the reset for.
+  // Reset Escuadra (#197): starts clearing the photo caches without waiting, then
+  // resets the store and goes Home; a cache that fails to clear is not worth
+  // stopping for.
   const resetApp = () => {
     void Promise.all([Image.clearDiskCache(), Image.clearMemoryCache()]).catch(() => {});
     useProgress.getState().factoryReset(Crypto.randomUUID());

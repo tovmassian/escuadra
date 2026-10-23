@@ -132,7 +132,7 @@ export default function Difficulty() {
         }}
         scrollEventThrottle={16}
         {...tips.contentA11y}
-        contentContainerStyle={{ paddingBottom: spacing.lg }}
+        contentContainerStyle={{ paddingBottom: sizes.ladderFooterFade }}
       >
         <LadderHero
           squad={squad}

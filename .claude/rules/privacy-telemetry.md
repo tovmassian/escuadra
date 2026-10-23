@@ -44,7 +44,9 @@ when opted out, and with no App ID (`app.json` →
 `extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only app module that
 imports the SDK; screens call its `track()`. The anonymous `clientUser` is
 a random `installId` persisted in `stores/progress.ts`, next to the
-Settings-screen opt-out. Non-`production` channels send TelemetryDeck test
+Settings-screen opt-out. Reset Escuadra (`factoryReset`) replaces `installId`;
+`lib/telemetry.ts` points its one client at the current id, so the launch's session
+code stays (`lib/__tests__/telemetryIdentifier.test.ts` pins it). Non-`production` channels send TelemetryDeck test
 signals. **A new event or property is a disclosure review** (guardrail 4):
 the privacy policy, About text, App Privacy and Data safety answers change
 with it, in a store build. So is an upgrade of `@telemetrydeck/sdk` (or of
