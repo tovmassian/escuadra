@@ -83,7 +83,7 @@ export const es: Messages = {
       },
       star: {
         heading: 'Hazlo tuyo',
-        body: 'Marca un equipo con la estrella y te esperará en la pantalla de inicio.',
+        body: 'Marca un equipo con la estrella y te esperará en la pantalla principal de la app.',
       },
       study: {
         heading: 'O repasa antes',
@@ -461,7 +461,7 @@ export const es: Messages = {
         {
           heading: 'Qué se guarda en tu dispositivo',
           paragraphs: [
-            `${ESCUADRA} guarda once datos localmente, en tu dispositivo: tu récord en cada equipo y nivel de dificultad, a partir del cual la aplicación deduce qué niveles has superado; el último equipo y nivel que has jugado; los equipos que has marcado con una estrella; tu preferencia de tema claro u oscuro; tu elección de idioma; si la vibración está activada; si la pantalla “Plantilla” muestra tarjetas o una lista; qué consejos de “Cómo jugar” has visto y si los has omitido; qué versión de la aplicación ha pedido por última vez a tu teléfono que muestre una invitación a valorarla; tu elección sobre las estadísticas de uso; y el identificador aleatorio que usan esas estadísticas. La comprobación de actualizaciones de la aplicación también guarda su propio identificador aleatorio en tu dispositivo.`,
+            `${ESCUADRA} guarda once datos localmente, en tu dispositivo: tu récord en cada equipo y nivel de dificultad, a partir del cual la aplicación deduce qué niveles has superado; el último equipo y nivel que has jugado; los equipos que has marcado con una estrella; tu preferencia de tema claro u oscuro; tu elección de idioma; si la vibración está activada; si la pantalla “Plantilla” muestra tarjetas o una lista; qué pantallas te han mostrado ya sus consejos de “Cómo jugar” y si los has omitido; qué versión de la aplicación ha pedido por última vez a tu teléfono que muestre una invitación a valorarla; tu elección sobre las estadísticas de uso; y el identificador aleatorio que usan esas estadísticas. La comprobación de actualizaciones de la aplicación también guarda su propio identificador aleatorio en tu dispositivo.`,
             `Estos datos se guardan en el almacenamiento privado de la propia aplicación. ${ESCUADRA}, por sí misma, solo envía dos de esos once datos fuera de tu dispositivo, y solo mientras las estadísticas de uso están activadas: el identificador, que se envía en forma de hash con cada estadística, y tu elección de idioma, que se incluye en la estadística que se envía al abrir la aplicación. Al eliminar la aplicación, se borran todos ellos de tu dispositivo, junto con las fotos que haya en caché. ${ESCUADRA} no tiene copia de seguridad ni sincronización propias, pero las copias de seguridad de tu dispositivo (en iOS, en iCloud o en un ordenador; en Android, en Google) pueden incluir estos datos. El desarrollador no tiene acceso a este almacenamiento.`,
           ],
         },

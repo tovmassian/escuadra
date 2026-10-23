@@ -44,9 +44,10 @@ covers the screen. It takes the screen's tips (each a ref to its target, its cop
 corner radius) and, for Difficulty, a way to scroll.
 
 - **Scrim with a cut-out.** One `react-native-svg` path, full screen with a rounded-rect hole
-  (`fillRule="evenodd"`), in a new `tipScrim` role. The hole is the target's box outset by
-  `tips.gap` (5 pt), with the target's radius plus the gap. Drawn in SVG, not a 3000 pt box
-  shadow as the canvas does, so it is exact on iOS, Android and web.
+  (`fillRule="evenodd"`), in a new `tipScrim` role. The hole is the target itself (`cut` in
+  `TipPlacement`, with the target's own radius), not outset: the `tips.gap` (5 pt) between the
+  target and the ring stays scrim-dark, as the canvas draws it. Drawn in SVG, not a 3000 pt
+  box shadow as the canvas does, so it is exact on iOS, Android and web.
 - **Ring.** A 2 pt `accentLine` stroke on a rounded rect `tips.gap + 1` outside the target.
 - **Arrow.** A short curved stroke with an open head, in `textPrimary`, between the tip and
   the target, pointing at it. Mirrored when the target sits right of centre. Decorative.
@@ -124,7 +125,7 @@ native-speaker pass until clean:
 - each tip's `heading` (≤ 32, it may wrap) and `body` (≤ 120).
 
 **About.** "What is stored on your device" lists ten things. The tips' state is an eleventh:
-"which How to play tips you have seen, and whether you skipped them". Both counts in that
+"which screens have shown you their How to play tips, and whether you skipped them". Both counts in that
 section change, in all five catalogs, with the About hash in `catalogs.test.ts`. Nothing new
 leaves the device. The privacy pages are regenerated outside the repo and their diff goes in
 the PR; `gh-pages` is pushed after merge, on the owner's word.
