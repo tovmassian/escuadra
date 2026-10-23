@@ -20,17 +20,18 @@ actual colour right; do not invent or rotate an arbitrary hue.
 
 `marker` (`TeamMarker`, see `types/squad.ts`) is a club's sole visual
 identity element, and every squad carries one — a nation's still feeds the
-in-round banner, where no image fits. It's declarative band geometry, not an
-asset: `bands` (fills, in draw order), `orientation`
-(`horizontal` | `vertical`) and an optional `weights` array for uneven bands.
+in-round banner and the Difficulty hero's backdrop, where no image fits. It's
+declarative band geometry, not an asset: `bands` (fills, in draw order),
+`orientation` (`horizontal` | `vertical`) and an optional `weights` array for
+uneven bands.
 Colour bands only, never a disc, diamond or other device: a flag's emblem
 becomes bands of its real colours (Japan is white/red/white), and
 `squadctl registry check` and `lib/__tests__/squads.test.ts` fail any other
 marker field.
 For a club it's the club's own colours laid out as bands — never an emblem. A
-nation's is its flag as bands, kept for the in-round banner only; everywhere
-else a nation shows its real flag image (see `lib/flags.ts` and
-`components/Flag.tsx`).
+nation's is its flag as bands, kept for the in-round banner and the Difficulty
+hero's full-bleed backdrop (behind the flag image); everywhere else a nation
+shows its real flag image (see `lib/flags.ts` and `components/Flag.tsx`).
 Both `data/index.json` (the picker manifest) and each squad file carry
 `primaryColor`/`secondaryColor`/`marker`, since the picker never imports full
 squad JSON.
@@ -50,14 +51,16 @@ the marker always renders as thin, tall, vertical bands, using `bands` (and
 entirely: Spain reads red/yellow/red left-to-right, not stacked. This is
 `TeamMarker`'s `variant="banner"` (`components/TeamMarker.tsx`,
 `sizes.teamMarkerBanner` in `theme/tokens.ts`). `variant` is required, so the question
-screen must name it: `banner` there, `picker` in the picker.
+screen must name it: `banner` there, `picker` in the picker. The Difficulty hero
+(`LadderHero`) draws the same vertical bands, full bleed under a veil, through
+`bannerBands`.
 
 ## Flags (guardrail 2's carve-out)
 
 National flags are the one carve-out, because the rule exists
 for trademark exposure and a flag carries none: a nation's identity element
-is a committed PNG in `assets/flags/`, shown on the team picker, level-3
-nationality options, the `NAT` stat chip and the Study screen's cards and
-list rows. Never a Unicode regional-indicator emoji (🇦🇷) — that depends on an
-OS flag-emoji font, and Windows ships none, so the Playwright capture behind
-`npm run shots` would render "AR".
+is a committed PNG in `assets/flags/`, shown on the team picker, the
+Difficulty hero, level-3 nationality options, the `NAT` stat chip and the
+Study screen's cards and list rows. Never a Unicode regional-indicator emoji
+(🇦🇷) — that depends on an OS flag-emoji font, and Windows ships none, so the
+Playwright capture behind `npm run shots` would render "AR".

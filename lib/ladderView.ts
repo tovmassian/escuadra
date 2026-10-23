@@ -2,8 +2,10 @@
 // are unit-testable — the project's Vitest setup has no RN renderer, so this
 // file must never import from `components/`.
 import type { Messages } from '@/i18n/en';
+import { leagueName } from '@/lib/pickerView';
 import type { Level } from '@/lib/questionEngine';
 import { PASS_RATIO, ROUND_LENGTH, scoreKey } from '@/lib/scoring';
+import type { League, Squad } from '@/types/squad';
 
 const LEVELS: Level[] = [1, 2, 3];
 
@@ -58,8 +60,51 @@ export function unlockHint(level: Level, messages: Messages): string {
   return messages.ladder.unlockHint(`${PASS_MARK}/${ROUND_LENGTH}`, level - 1);
 }
 
-export function playLabel(row: LadderRow, messages: Messages): string {
-  return row.best ? messages.ladder.playAgain : messages.ladder.play;
+/** The hero's mono line: "National team · 2026 · 26 players", or the club's
+ *  league in place of "National team". Capitals come from the style. */
+export function heroLine(
+  squad: Pick<Squad, 'kind' | 'season' | 'members'>,
+  league: League | undefined,
+  messages: Messages,
+): string {
+  const lead =
+    squad.kind === 'nation' ? messages.ladder.nationalTeam : league ? leagueName(league) : null;
+  return [lead, squad.season, messages.study.players(squad.members.length)]
+    .filter((part): part is string => part !== null)
+    .join(' · ');
+}
+
+/** What a level asks. Level 3's last part is the club for a nation squad and
+ *  the nationality for a club squad. */
+export function levelDescription(level: Level, kind: Squad['kind'], messages: Messages): string {
+  if (level === 3) {
+    const l3 = messages.ladder.levels[3];
+    return kind === 'club' ? l3.descriptionClub : l3.descriptionNation;
+  }
+  return level === 1
+    ? messages.ladder.levels[1].description
+    : messages.ladder.levels[2].description;
+}
+
+/** A compact rung is always cleared or locked; a cleared one is tagged
+ *  a la escuadra at full marks. */
+export type RungTag = 'escuadra' | 'cleared';
+export function rungTag(best: { correct: number; total: number }): RungTag {
+  return best.correct === best.total ? 'escuadra' : 'cleared';
+}
+
+/** The focused card's status line, as shown and as spoken. */
+export function statusLine(row: LadderRow, messages: Messages): { text: string; spoken: string } {
+  if (!row.best) return { text: messages.ladder.notPlayed, spoken: messages.ladder.notPlayed };
+  const { correct, total } = row.best;
+  return {
+    text: messages.ladder.yourBest(correct, total),
+    spoken: messages.ladder.yourBestSpoken(correct, total),
+  };
+}
+
+export function playLevelLabel(level: Level, messages: Messages): string {
+  return messages.ladder.playLevel(level);
 }
 
 /** What a screen reader announces for a compact rung, whose status is
@@ -67,6 +112,12 @@ export function playLabel(row: LadderRow, messages: Messages): string {
 export function rungAccessibilityLabel(row: LadderRow, title: string, messages: Messages): string {
   if (row.status === 'locked') {
     return messages.ladder.rungLocked(title, PASS_MARK, ROUND_LENGTH, row.level - 1);
+  }
+  if (row.best && row.status === 'cleared') {
+    const { correct, total } = row.best;
+    return rungTag(row.best) === 'escuadra'
+      ? messages.ladder.rungEscuadra(title, correct, total)
+      : messages.ladder.rungCleared(title, correct, total);
   }
   if (row.best) return messages.ladder.rungBest(title, row.best.correct, row.best.total);
   return title;

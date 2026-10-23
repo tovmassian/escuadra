@@ -117,22 +117,6 @@ describe('text contrast', () => {
     });
   });
 
-  // The ladder's cleared BestPill sets its label on the translucent
-  // `successBg`, which deepens the ground under it: on the difficulty list's
-  // `surface` rows and on the card's `surfaceRaised`.
-  it('successText reaches 4.5:1 on successBg, on surface and surfaceRaised, in both themes', () => {
-    (['dark', 'light'] as const).forEach((name) => {
-      const p = palettes[name];
-      for (const ground of ['surface', 'surfaceRaised'] as const) {
-        const under = blend(p.successBg, p[ground]);
-        expect(
-          contrastRatio(p.successText, under),
-          `${name}.successText on successBg over ${ground}`,
-        ).toBeGreaterThanOrEqual(4.5);
-      }
-    });
-  });
-
   it('error reaches 4.5:1 on background, in both themes', () => {
     (['dark', 'light'] as const).forEach((name) => {
       const p = palettes[name];
@@ -339,6 +323,9 @@ describe('Archivo display type', () => {
       scoreTail: [typography.scoreTail, 48],
       shareScore: [typography.shareScore, 160],
       shareScoreTail: [typography.shareScoreTail, 62],
+      rungNumber: [typography.rungNumber, 56],
+      ladderCardNumber: [typography.ladderCardNumber, 96],
+      rungScore: [typography.rungScore, 32],
     } as const;
     for (const [name, [style, designBox]] of Object.entries(big)) {
       expect(style.lineHeight, name).toBeGreaterThanOrEqual(style.fontSize * 1.088);
@@ -353,7 +340,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(22);
+    expect(archivo).toHaveLength(30);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }

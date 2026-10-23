@@ -98,17 +98,17 @@ export const fr: Messages = {
       line: 'Ta note aide d’autres fans à trouver l’appli.',
       button: 'Noter',
     },
-    examMode: {
-      title: 'Mode examen',
-      line: 'Tout l’effectif, rien qu’avec les numéros de maillot.',
-      soon: 'Bientôt',
-    },
     aboutEscuadra: `À propos d’${ESCUADRA}`,
     privacy: 'Confidentialité',
     licences: 'Licences',
     version: (version: string) => `Version ${version}`,
     // Feminine: it is the version that is built in.
     builtIn: 'intégrée',
+  },
+  examMode: {
+    title: 'Mode examen',
+    line: 'Tout l’effectif, rien qu’avec les numéros de maillot.',
+    soon: 'Bientôt',
   },
   formats: {
     /** "21 août 2026", and "1er août 2026" on the first of the month. */
@@ -253,15 +253,12 @@ export const fr: Messages = {
       `Image à partager : ${eyebrow}. ${correct} sur ${total}. ${title}.`,
   },
   ladder: {
-    play: 'Jouer',
-    playAgain: 'Rejouer',
     // No verb: "Fais 8/10 au niveau 1" wraps the rung titles beside it.
     unlockHint: (target: string, level: number) => `${target} au niveau ${level}`,
     rungLocked: (title: string, correct: number, total: number, level: number) =>
       `${title}, verrouillé, ${correct} sur ${total} au niveau ${level}`,
     rungBest: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} sur ${total}`,
-    title: 'Choisis la difficulté',
     levels: {
       1: {
         title: 'Du numéro au nom',
@@ -273,12 +270,25 @@ export const fr: Messages = {
       },
       3: {
         title: 'Profil complet',
-        description: 'Le nom parmi 6 choix, puis le poste, puis le club ou la nationalité.',
+        descriptionClub: 'Le nom parmi 6 choix, puis le poste, puis la nationalité.',
+        descriptionNation: 'Le nom parmi 6 choix, puis le poste, puis le club.',
       },
     },
     studySquad: 'Réviser l’effectif',
     updated: (date: string) => `Mis à jour le ${date} · Wikipédia`,
-    best: (correct: number, total: number) => `RECORD ${correct}/${total}`,
+    heading: 'Les paliers',
+    nationalTeam: 'Sélection',
+    cleared: 'Validé',
+    notPlayed: 'Pas encore joué',
+    yourBest: (correct: number, total: number) => `Ton record · ${correct}/${total}`,
+    yourBestSpoken: (correct: number, total: number) => `Ton record : ${correct} sur ${total}`,
+    // The article is dropped to fit the 16-char budget: "Jouer niveau 3", not
+    // "Jouer le niveau 3".
+    playLevel: (level: number) => `Jouer niveau ${level}`,
+    rungCleared: (title: string, correct: number, total: number) =>
+      `${title}, record ${correct} sur ${total}, validé`,
+    rungEscuadra: (title: string, correct: number, total: number) =>
+      `${title}, record ${correct} sur ${total}, ${A_LA_ESCUADRA}`,
   },
   picker: {
     // Masculine: the championnats.

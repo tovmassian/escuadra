@@ -20,7 +20,7 @@ import {
 
 // The animated counterpart to `EscuadraMark` — used only where the mark
 // plays its "a la escuadra" strike (results screen, home lockup). Everywhere
-// else (icon plates, VerdictGlyph, LockGlyph, the non-hero wordmark) keeps
+// else (icon plates, LockGlyph, the non-hero wordmark) keeps
 // using the plain static `EscuadraMark`.
 //
 // Motion offsets (the ball's fly-in distance, the frame's entrance offset,

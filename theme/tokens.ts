@@ -24,11 +24,9 @@ export interface Palette {
    *  fixed hex. */
   mark: string;
   success: string;
-  /** Small success-coloured text on `background`/`surface`, and on
-   *  `successBg` over `surface`/`surfaceRaised`; `success` itself stays for
-   *  large text and graphics. */
+  /** Small success-coloured text on `background`/`surface`; `success` itself
+   *  stays for large text and graphics. */
   successText: string;
-  successBg: string;
   error: string;
   /** Dimmed error text for an "incorrect-picked" option — visually quieter
    *  than `error` so the correct answer stays the loudest thing on screen. */
@@ -144,14 +142,12 @@ export interface Palette {
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
 // both grounds, which is why the design source reuses it unchanged; the
-// success wash is translucent and composites over whatever surface is behind
-// it; the brand ramp is the mark's own identity — a design token, not
+// brand ramp is the mark's own identity — a design token, not
 // team-identity content, unlike a club's real colours — and the plate's
 // gradient ends run deeper than the mark's own stops because the plate sits
 // behind it.
 const sharedRoles = {
   accent: '#3e45a3',
-  successBg: 'rgba(97,189,103,0.14)',
   brandBright: '#5b63d6',
   brandDeep: '#2f3585',
   brandSoft: '#8f97ea',
@@ -386,6 +382,14 @@ export const stage = {
   heroBacking: { rise: 96, top: { dark: 0.55, light: 0.6 } },
 } as const;
 
+// The Difficulty hero (#178): the squad's bands under a wash of the palette's
+// `background`. The floor is the wash behind the top bar; `heroTextAlpha` in
+// lib/stageView.ts raises it, behind the name and the mono line, until
+// `textSecondary` holds 4.5:1 and `textPrimary` 3:1 on every band.
+export const ladderHero = {
+  veilFloor: { dark: 0.4, light: 0.5 },
+} as const;
+
 export const typography = {
   screenTitle: { fontFamily: 'Inter-Bold', fontSize: 28 },
   sectionHead: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 20 },
@@ -418,9 +422,9 @@ export const typography = {
   },
   // Filter-pill labels.
   filterLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 12 },
-  // Difficulty-ladder badge number.
+  // The in-round banner's shirt number (Results).
   badgeNumber: { fontFamily: 'IBMPlexMono-Bold', fontSize: 18 },
-  // Difficulty-row / card descriptions — one step down from `secondary`.
+  // Small descriptions and credit lines — one step down from `secondary`.
   descriptionSmall: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 12.5 },
   eyebrow: {
     fontFamily: 'Inter-SemiBold',
@@ -429,7 +433,8 @@ export const typography = {
     letterSpacing: 1.2,
     textTransform: 'uppercase' as const,
   },
-  // Shared by difficulty-row status pills and the Study screen's header eyebrow.
+  // Small eyebrow labels: Study's header, Licences, photo credits, answer-tile
+  // and slot-chip tags, and Results' labels.
   captionEyebrow: {
     fontFamily: 'Inter-SemiBold',
     fontWeight: '600' as const,
@@ -672,6 +677,73 @@ export const typography = {
   pillLabel: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 14 },
   pillLabelActive: { fontFamily: 'Inter-Bold', fontSize: 14 },
   searchInput: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 16 },
+  // ---- 2.0 Difficulty (#178) ----
+  // The hero's team name.
+  heroName: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 36,
+    lineHeight: 38,
+    letterSpacing: -0.6,
+    textTransform: 'uppercase' as const,
+  },
+  // A compact rung's level number, the focused card's (`cardNumber` is a
+  // player card's) and a cleared rung's best score. Each takes the face's
+  // natural line height and a margin back, as `shirtNumber` explains: the
+  // design's boxes are 56, 96 and 32.
+  rungNumber: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 54,
+    lineHeight: 59,
+    marginVertical: -1.5,
+  },
+  ladderCardNumber: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 96,
+    lineHeight: 105,
+    marginVertical: -4.5,
+  },
+  rungTitle: { fontFamily: 'Inter-Bold', fontSize: 16 },
+  rungScore: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 30,
+    lineHeight: 33,
+    marginVertical: -0.5,
+  },
+  // The "/10" after a rung's score.
+  rungScoreTail: { fontFamily: 'Archivo-ExtraCondensedBlack', fontSize: 17 },
+  // The focused card's status line, title and description.
+  ladderCardStatus: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 11,
+    letterSpacing: 0.8,
+    textTransform: 'uppercase' as const,
+  },
+  ladderCardTitle: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 22,
+    lineHeight: 24,
+    textTransform: 'uppercase' as const,
+  },
+  ladderCardDescription: {
+    fontFamily: 'Inter-Medium',
+    fontWeight: '500' as const,
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  // The Play and Study pills' labels.
+  ladderPlay: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 16,
+    letterSpacing: 0.5,
+    textTransform: 'uppercase' as const,
+  },
+  ladderStudy: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 15,
+    letterSpacing: 0.5,
+    textTransform: 'uppercase' as const,
+  },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -695,10 +767,9 @@ export const borderWidths = {
 // Named opacity stops from the interaction-state spec — never an inline
 // 0.4/0.65/etc in a component.
 export const opacity = {
-  disabled: 0.55, // locked difficulty row
-  dimmed: 0.65, // VerdictGlyph's incorrect variant (no screen renders one today)
+  disabled: 0.55, // ShareSheet's busy button
   faded: 0.4, // the photo-loading shimmer under Reduce Motion (SpotlightStage)
-  settled: 0.7, // press feedback: Button, DifficultyRow, GlassCloseButton, QuestionFooter
+  settled: 0.7, // press feedback: Button, LadderRung, GlassCloseButton, QuestionFooter
   tileAfterCorrect: 0.5, // other tiles once the pick was right (spec §6)
   tileAfterMiss: 0.35, // other tiles after a miss
 } as const;
@@ -920,20 +991,7 @@ export const homeCascade = {
   actionsStep: t(40),
 };
 
-// Difficulty-ladder badge diameters. Size follows the rung's state, not its
-// level: the focused rung, expanded into a Play card, carries the large badge;
-// every other rung the compact one.
-export const ladderBadgeSize = { compact: 32, expanded: 48 } as const;
-
 export const sizes = {
-  // Width of the difficulty ladder's badge column. Both badge sizes centre
-  // inside this fixed-width slot, so the badges — and the connector segments
-  // between them — share one vertical axis. Matches the larger badge so
-  // nothing overflows it.
-  difficultyBadgeColumn: ladderBadgeSize.expanded,
-  // Height of one connector segment between two ladder rungs. Drawn only in
-  // the gap, never behind a badge — see `LadderConnector`.
-  difficultyConnectorHeight: 16,
   // The shirt-number column of a Study list row.
   studyColumn: { no: 26 },
   // Home's "Start Training" is the one 56px control; every other button
@@ -977,7 +1035,12 @@ export const sizes = {
   segment: { question: 3, results: 6 },
   // The escuadra corner beside a number: arm length, bar thickness and, on the
   // question, the ball's diameter.
-  corner: { question: { arm: 24, bar: 6, ball: 10 }, results: { arm: 40, bar: 10 } },
+  // The ladder's is the focused Difficulty card's, static.
+  corner: {
+    question: { arm: 24, bar: 6, ball: 10 },
+    results: { arm: 40, bar: 10 },
+    ladder: { arm: 20, bar: 5 },
+  },
   // Answer tile heights per grid (spec §2.3).
   answerTile: {
     names4: { normal: 58, compact: 52 }, // 2 x 2
@@ -1063,14 +1126,18 @@ export const sizes = {
   pickerTab: 44,
   searchField: 52,
   rail: { width: 44, letter: 14 },
+  // Difficulty's Play and Study pills (#178).
+  ladderPill: 56,
+  // A compact rung's level-number column, so every title starts on one line.
+  rungNumberColumn: 34,
 } as const;
 
 // The share picture's captured size in pixels: a 9:16 story (spec §4.2).
 export const shareCapture = { width: 1080, height: 1920 } as const;
 
 export const iconSize = {
-  markLarge: 18, // VerdictGlyph default size; AnswerTile's correct mark
-  markSmall: 13, // VerdictGlyph's smaller size; AnswerTile's incorrect-picked mark
+  markLarge: 18, // AnswerTile's correct mark
+  markSmall: 13, // AnswerTile's incorrect-picked mark
   chevronLarge: 18, // Home's continue-card chevron
   searchGlyph: 20, // SearchField's magnifying-glass icon (spec #176 §3)
   clearGlyph: 10, // SearchField's clear (×) button, drawn from two crossed bars
@@ -1080,9 +1147,8 @@ export const iconSize = {
   retryGlyph: 18, // the Results screen's retry icon beside Study
   back: 22, // Study's back chevron
   viewToggle: 17, // Study's list/grid toggle
-  // The locked-badge padlock scales with its badge rather than sitting at one
-  // fixed size — 32 * 0.46 ≈ 15.
-  lockGlyphRatio: 0.46,
+  play: 14, // the triangle on Difficulty's Play pill
+  ladderLock: 14, // a locked rung's padlock on Difficulty
 } as const;
 
 // Base unit 4. Use spacing[n], not raw numbers, in component styles.
@@ -1104,6 +1170,8 @@ export const radii = {
   lg: 16,
   card: 18, // player cards
   settingsCard: 22, // Settings' cards
+  rung: 22, // Difficulty's compact rungs and Exam mode
+  ladderCard: 26, // Difficulty's focused rung
   xl: 24,
   sheet: 28, // a bottom sheet's top corners
   bubbleTail: 6, // the text preview bubble's tail corner
