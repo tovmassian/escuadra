@@ -11,7 +11,8 @@ vi.mock('@react-native-async-storage/async-storage', () => ({
   },
 }));
 
-const { useProgress } = await import('../progress');
+const { useProgress, migrateProgress } = await import('../progress');
+const { listSquads } = await import('@/lib/squads');
 
 beforeEach(() => {
   useProgress.setState({ starredSquads: [], bestScores: {}, lastPlayed: null });
@@ -40,9 +41,63 @@ describe('starred squads', () => {
 
   it('survives reset, like the other preferences', () => {
     useProgress.getState().toggleStar('spain');
-    useProgress.getState().recordScore('spain', 1, 8);
+    useProgress.getState().recordScore('spain', 1, 8, '2026-10-21');
     useProgress.getState().reset();
     expect(useProgress.getState().bestScores).toEqual({});
     expect(useProgress.getState().starredSquads).toEqual(['spain']);
+  });
+});
+
+describe('best scores (#180)', () => {
+  const OLD = '2026-08-14';
+  const NOW = '2026-10-21';
+
+  it('keeps the date of the squad a best was set on', () => {
+    useProgress.getState().recordScore('arm', 1, 7, NOW);
+    expect(useProgress.getState().bestScores['arm:1']).toEqual({ score: 7, squadUpdated: NOW });
+  });
+
+  it('keeps the higher score among rounds on the current squad', () => {
+    useProgress.getState().recordScore('arm', 1, 9, NOW);
+    useProgress.getState().recordScore('arm', 1, 6, NOW);
+    expect(useProgress.getState().bestScores['arm:1']?.score).toBe(9);
+  });
+
+  it('replaces an outdated best with a round on the updated squad, even a lower one', () => {
+    useProgress.getState().recordScore('arm', 1, 10, OLD);
+    useProgress.getState().recordScore('arm', 1, 4, NOW);
+    expect(useProgress.getState().bestScores['arm:1']).toEqual({ score: 4, squadUpdated: NOW });
+  });
+});
+
+describe('migration from version 0', () => {
+  const arm = listSquads().find((s) => s.id === 'arm');
+
+  it("dates version 0's bare scores with the squad's current date", () => {
+    const migrated = migrateProgress({ bestScores: { 'arm:1': 10, 'arm:2': 0 } }, 0);
+    expect(migrated.bestScores).toEqual({
+      'arm:1': { score: 10, squadUpdated: arm?.lastUpdated },
+      'arm:2': { score: 0, squadUpdated: arm?.lastUpdated },
+    });
+  });
+
+  it('leaves the other persisted fields as they were', () => {
+    const migrated = migrateProgress({ bestScores: {}, starredSquads: ['arm'], haptics: false }, 0);
+    expect(migrated.starredSquads).toEqual(['arm']);
+    expect(migrated.haptics).toBe(false);
+  });
+
+  it('rehydrates a version 0 store from disk as current scores', async () => {
+    disk.set(
+      'escuadra-progress',
+      JSON.stringify({ state: { bestScores: { 'arm:3': 6 } }, version: 0 }),
+    );
+    await useProgress.persist.rehydrate();
+    expect(useProgress.getState().bestScores['arm:3']).toEqual({
+      score: 6,
+      squadUpdated: arm?.lastUpdated,
+    });
+    const stored = JSON.parse(disk.get('escuadra-progress') ?? '{}') as { version: number };
+    expect(stored.version).toBe(1);
   });
 });

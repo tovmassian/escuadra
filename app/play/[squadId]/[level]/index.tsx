@@ -119,8 +119,8 @@ export default function Question() {
       // Before `recordScore`, which keeps a best score for every completed
       // round, even a 0/10: any key now means an earlier round (#57).
       session.setEarlierRounds(Object.keys(useProgress.getState().bestScores).length > 0);
-      recordScore(squadId, level, score.correct);
       if (squad) {
+        recordScore(squadId, level, score.correct, squad.lastUpdated);
         track('round.completed', {
           kind: squad.kind,
           level,

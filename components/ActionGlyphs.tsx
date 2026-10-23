@@ -350,3 +350,53 @@ export function StarGlyph({
     </View>
   );
 }
+
+/** Clock: the outdated-score mark (#180), a ring with its two hands at ten
+ *  past, on the board's 24-unit grid at a 2.5-unit stroke. */
+export function OutdatedGlyph({ color, size }: { color: string; size: number }) {
+  const k = size / GRID;
+  const w = 2.5 * k;
+  const styles = StyleSheet.create({
+    box: { width: size, height: size },
+    ring: {
+      position: 'absolute',
+      left: 3 * k - w / 2,
+      top: 3 * k - w / 2,
+      width: 18 * k + w,
+      height: 18 * k + w,
+      borderRadius: (18 * k + w) / 2,
+      borderWidth: w,
+      borderColor: color,
+    },
+    // Each hand starts at the centre (12, 12) and is as wide as the stroke.
+    minute: {
+      position: 'absolute',
+      left: 12 * k - w / 2,
+      top: 7 * k - w / 2,
+      width: w,
+      height: 5 * k + w,
+      borderRadius: w / 2,
+      backgroundColor: color,
+    },
+    hour: {
+      position: 'absolute',
+      left: 12 * k - w / 2,
+      top: 12 * k - w / 2,
+      width: 3.5 * k + w,
+      height: w,
+      borderRadius: w / 2,
+      backgroundColor: color,
+    },
+  });
+  return (
+    <View
+      style={styles.box}
+      accessibilityElementsHidden
+      importantForAccessibility="no-hide-descendants"
+    >
+      <View style={styles.ring} />
+      <View style={styles.minute} />
+      <View style={styles.hour} />
+    </View>
+  );
+}

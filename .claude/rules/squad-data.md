@@ -58,6 +58,9 @@ under `data/squads/club/`, plus `ucl` for a Champions League group-stage
 club with no big-5 domestic home. `SquadManifestEntry.league` carries it on
 club entries (absent on nation entries).
 
+The manifest also carries `lastUpdated`: a best score keeps the date it was set
+on, so a squad update greys it as outdated (#180, `lib/bestScore.ts`).
+
 A nation squad's confederation (the picker's Nations filter) is
 `lib/confederations.ts`, keyed by the FIFA code `lib/flags.ts` gives its name. A new
 nation needs both: `lib/__tests__/flags.test.ts` and

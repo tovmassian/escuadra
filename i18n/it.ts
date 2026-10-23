@@ -39,6 +39,7 @@ export const it: Messages = {
     back: 'Indietro',
     close: 'Chiudi',
     scoreSpoken: (correct: number, attempted: number) => `Punteggio: ${correct} su ${attempted}`,
+    outdated: 'Obsoleto',
   },
   home: {
     // "Impostazioni", as iOS and Android name the screen.
@@ -279,6 +280,12 @@ export const it: Messages = {
     rungEscuadra: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} su ${total}, ${A_LA_ESCUADRA}`,
     star: 'Una delle tue squadre',
+    bestOutdated: (correct: number, total: number) => `Record ${correct}/${total} · Obsoleto`,
+    bestOutdatedSpoken: (correct: number, total: number) =>
+      `Record: ${correct} su ${total}, obsoleto`,
+    rungOutdated: (title: string, correct: number, total: number) =>
+      `${title}, record ${correct} su ${total}, obsoleto`,
+    squadUpdated: (date: string) => `Rosa aggiornata: ${date}. I record in grigio sono di prima.`,
   },
   picker: {
     // Masculine: the campionati.
@@ -306,6 +313,8 @@ export const it: Messages = {
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     bestSpoken: (level: number, correct: number, total: number) =>
       `Livello ${level}, record ${correct} su ${total}`,
+    bestOutdatedSpoken: (level: number, correct: number, total: number) =>
+      `Livello ${level}, record ${correct} su ${total}, obsoleto`,
     search: 'Cerca squadre',
     clearSearch: 'Cancella la ricerca',
     noTeams: 'Nessuna squadra trovata',

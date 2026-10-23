@@ -72,6 +72,10 @@ describe('squad data integrity', () => {
         expect(getSquad(manifest.id)?.marker).toEqual(manifest.marker);
       });
 
+      it("carries the squad file's lastUpdated, which dates best scores (#180)", () => {
+        expect(manifest.lastUpdated).toBe(getSquad(manifest.id)?.lastUpdated);
+      });
+
       // The squad file is the source of truth for `verified` — squadctl only
       // ever writes it there — but the manifest carries its own copy so the
       // picker can show it without importing the full roster. This catches

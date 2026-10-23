@@ -47,6 +47,7 @@ export const de: Messages = {
     back: 'Zurück',
     close: 'Schließen',
     scoreSpoken: (correct: number, attempted: number) => `Ergebnis: ${correct} von ${attempted}`,
+    outdated: 'Veraltet',
   },
   home: {
     settings: 'Einstellungen',
@@ -254,6 +255,13 @@ export const de: Messages = {
     rungEscuadra: (title: string, correct: number, total: number) =>
       `${title}, Rekord ${correct} von ${total}, ${A_LA_ESCUADRA}`,
     star: 'Eines deiner Teams',
+    bestOutdated: (correct: number, total: number) => `Rekord ${correct}/${total} · Veraltet`,
+    bestOutdatedSpoken: (correct: number, total: number) =>
+      `Rekord: ${correct} von ${total}, veraltet`,
+    rungOutdated: (title: string, correct: number, total: number) =>
+      `${title}, Rekord ${correct} von ${total}, veraltet`,
+    squadUpdated: (date: string) =>
+      `Kader aktualisiert am ${date}. Graue Rekorde stammen aus der Zeit davor.`,
   },
   picker: {
     allLeagues: 'Alle',
@@ -277,6 +285,8 @@ export const de: Messages = {
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     bestSpoken: (level: number, correct: number, total: number) =>
       `Level ${level}, Rekord ${correct} von ${total}`,
+    bestOutdatedSpoken: (level: number, correct: number, total: number) =>
+      `Level ${level}, Rekord ${correct} von ${total}, veraltet`,
     search: 'Teams suchen',
     clearSearch: 'Suche löschen',
     noTeams: 'Keine Teams gefunden',

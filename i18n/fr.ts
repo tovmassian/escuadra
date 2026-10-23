@@ -54,6 +54,7 @@ export const fr: Messages = {
     back: 'Retour',
     close: 'Fermer',
     scoreSpoken: (correct: number, attempted: number) => `Score : ${correct} sur ${attempted}`,
+    outdated: 'Obsolète',
   },
   home: {
     // "Réglages", as iOS names the screen and as this catalog says elsewhere.
@@ -290,6 +291,13 @@ export const fr: Messages = {
     rungEscuadra: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} sur ${total}, ${A_LA_ESCUADRA}`,
     star: 'Une de tes équipes',
+    bestOutdated: (correct: number, total: number) => `Record ${correct}/${total} · Obsolète`,
+    bestOutdatedSpoken: (correct: number, total: number) =>
+      `Record : ${correct} sur ${total}, obsolète`,
+    rungOutdated: (title: string, correct: number, total: number) =>
+      `${title}, record ${correct} sur ${total}, obsolète`,
+    squadUpdated: (date: string) =>
+      `Effectif mis à jour le ${date}. Les records en gris datent d’avant.`,
   },
   picker: {
     // Masculine: the championnats.
@@ -314,6 +322,8 @@ export const fr: Messages = {
     listCaption: (name: string, count: number) => `${name} · ${count}`,
     bestSpoken: (level: number, correct: number, total: number) =>
       `Niveau ${level}, record ${correct} sur ${total}`,
+    bestOutdatedSpoken: (level: number, correct: number, total: number) =>
+      `Niveau ${level}, record ${correct} sur ${total}, obsolète`,
     search: 'Rechercher une équipe',
     clearSearch: 'Effacer la recherche',
     noTeams: 'Aucune équipe trouvée',
