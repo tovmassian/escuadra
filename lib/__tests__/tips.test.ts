@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest';
 import {
   placeTip,
+  resultsTips,
   roundedRectPath,
   scrollDelta,
   settled,
@@ -30,6 +31,38 @@ describe('shouldShowTips', () => {
   });
   it('shows nothing anywhere once skipped', () => {
     expect(shouldShowTips('difficulty', [], true)).toBe(false);
+  });
+});
+
+describe('resultsTips', () => {
+  it('after a fail: the misses, then again', () => {
+    expect(resultsTips({ missed: 6, passed: false, hasNextLevel: true })).toEqual([
+      'missed',
+      'again',
+    ]);
+  });
+  it('after a pass with a next level: the misses, then next', () => {
+    expect(resultsTips({ missed: 2, passed: true, hasNextLevel: true })).toEqual([
+      'missed',
+      'next',
+    ]);
+  });
+  it('leaves the misses out when nothing was missed', () => {
+    expect(resultsTips({ missed: 0, passed: true, hasNextLevel: true })).toEqual(['next']);
+  });
+  it('leaves the second out after passing the last level', () => {
+    expect(resultsTips({ missed: 1, passed: true, hasNextLevel: false })).toEqual(['missed']);
+  });
+  it('is empty for a 10/10 at the last level', () => {
+    expect(resultsTips({ missed: 0, passed: true, hasNextLevel: false })).toEqual([]);
+  });
+});
+
+describe('shouldShowTips, the round and Results', () => {
+  it('counts each level apart', () => {
+    expect(shouldShowTips('question-2', ['question-1'], false)).toBe(true);
+    expect(shouldShowTips('question-1', ['question-1'], false)).toBe(false);
+    expect(shouldShowTips('results', [], true)).toBe(false);
   });
 });
 
