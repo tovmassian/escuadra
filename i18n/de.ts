@@ -64,7 +64,11 @@ export const de: Messages = {
     // "Spielanleitung", the word German games use for How to play; About's
     // stored list names the tips the same way.
     kicker: (step: number, count: number) => `Spielanleitung · ${step}/${count}`,
+    // "Spielanleitung · Level 3" is 24 chars against 22; L3, as the ladder's
+    // unlock hint writes a level.
+    kickerLevel: (level: number) => `Spielanleitung · L${level}`,
     spoken: (step: number, count: number) => `Spielanleitung, Tipp ${step} von ${count}`,
+    spokenLevel: (level: number) => `Spielanleitung, Level ${level}`,
     next: 'Weiter',
     gotIt: 'Alles klar',
     // "Tipps überspringen" is 18 chars against 14; Weiter already moves one tip on.
@@ -101,6 +105,40 @@ export const de: Messages = {
       positions: {
         heading: 'Eine Position nach der anderen',
         body: 'Lerne erst die Torhüter, dann die Abwehr, das Mittelfeld und den Sturm.',
+      },
+    },
+    question: {
+      clues: {
+        heading: 'Eine Nummer, ein paar Hinweise',
+        body: 'Die Rückennummer ist die Frage. Position, Alter und Verein helfen dir, den Spieler zu finden.',
+        bodyClub:
+          'Die Rückennummer ist die Frage. Position, Alter und Nationalität helfen dir, den Spieler zu finden.',
+      },
+      answer: {
+        heading: 'Wähle, wer sie trägt',
+        body: 'Nach einem Treffer geht es von selbst weiter. Bei einem Fehler siehst du, wer es war, und machst selbst weiter.',
+      },
+      level2: {
+        heading: 'Jetzt in zwei Schritten',
+        body: 'Erst den Namen, dann die Position. Es zählt nur, wenn beides stimmt.',
+      },
+      level3: {
+        heading: 'Drei Schritte',
+        body: 'Name, Position, dann der Verein. Bei Vereinen stattdessen die Nationalität.',
+      },
+    },
+    results: {
+      missed: {
+        heading: 'Die solltest du dir merken',
+        body: 'Jeder Fehler mit dem richtigen Spieler und deiner Wahl. Wisch für mehr.',
+      },
+      again: {
+        heading: 'Noch mal oder lernen',
+        body: 'Mit 8/10 schaltest du das nächste Level frei. Wiederhole die Runde oder lerne erst den Kader.',
+      },
+      next: {
+        heading: 'Auf zum nächsten Level',
+        body: 'Spiel das nächste Level oder lerne erst den Kader.',
       },
     },
   },

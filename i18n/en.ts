@@ -79,8 +79,12 @@ export const en = {
   tips: {
     /** ≤ 22 chars: over each tip, in mono capitals. */
     kicker: (step: number, count: number) => `How to play · ${step}/${count}`,
+    /** ≤ 22 chars: over a level's single tip, in mono capitals. */
+    kickerLevel: (level: number) => `How to play · Level ${level}`,
     /** A tip's spoken name, as a dialog. */
     spoken: (step: number, count: number) => `How to play, tip ${step} of ${count}`,
+    /** A level's single tip's spoken name, as a dialog. */
+    spokenLevel: (level: number) => `How to play, level ${level}`,
     /** ≤ 10 chars: the button to the next tip, in display capitals. */
     next: 'Next',
     /** ≤ 12 chars: the last tip's button, in display capitals. */
@@ -116,6 +120,38 @@ export const en = {
         heading: 'One position at a time',
         body: 'Learn the keepers, then the defence, the midfield and the attack.',
       },
+    },
+    question: {
+      clues: {
+        heading: 'A number, some clues',
+        body: 'The shirt number is the question. Position, age and club help you find the player.',
+        /** A club squad's clues are position, age and nationality. */
+        bodyClub:
+          'The shirt number is the question. Position, age and nationality help you find the player.',
+      },
+      answer: {
+        heading: 'Tap who wears it',
+        body: 'A right answer moves on by itself. A miss shows who it was and waits for you.',
+      },
+      level2: {
+        heading: 'Two parts now',
+        body: 'Name first, then the position. It only counts if both are right.',
+      },
+      level3: {
+        heading: 'Three parts',
+        body: 'Name, position, then the club. In a club squad, the nationality instead.',
+      },
+    },
+    results: {
+      missed: {
+        heading: 'The ones to learn',
+        body: 'Every miss, with who it was and what you picked. Swipe for all.',
+      },
+      again: {
+        heading: 'Again, or study',
+        body: 'Score 8/10 to unlock the next level. Retry now, or study the squad first.',
+      },
+      next: { heading: 'On to the next', body: 'Play the next level, or study the squad first.' },
     },
   },
   languageSheet: {

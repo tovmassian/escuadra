@@ -58,7 +58,11 @@ export const it: Messages = {
     // "Come si gioca", as game menus say; About's stored list names the tips
     // ("consigli") the same way.
     kicker: (step: number, count: number) => `Come si gioca · ${step}/${count}`,
+    // "Come si gioca · Livello 3" is 25 chars against 22; "liv.", as the
+    // ladder's unlock hint writes it.
+    kickerLevel: (level: number) => `Come si gioca · Liv. ${level}`,
     spoken: (step: number, count: number) => `Come si gioca, consiglio ${step} di ${count}`,
+    spokenLevel: (level: number) => `Come si gioca, livello ${level}`,
     next: 'Avanti',
     // "Capito", as the round's "Capito, avanti" says.
     gotIt: 'Capito',
@@ -97,6 +101,40 @@ export const it: Messages = {
       positions: {
         heading: 'Un ruolo alla volta',
         body: 'Impara prima i portieri, poi la difesa, il centrocampo e l’attacco.',
+      },
+    },
+    question: {
+      clues: {
+        heading: 'Un numero, qualche indizio',
+        body: 'Il numero di maglia è la domanda. Ruolo, età e club ti aiutano a trovare il giocatore.',
+        bodyClub:
+          'Il numero di maglia è la domanda. Ruolo, età e nazionalità ti aiutano a trovare il giocatore.',
+      },
+      answer: {
+        heading: 'Tocca chi ha quel numero',
+        body: 'Con una risposta giusta si va avanti da sé. Se sbagli, vedi chi era e la partita ti aspetta.',
+      },
+      level2: {
+        heading: 'Ora in due parti',
+        body: 'Prima il nome, poi il ruolo. Vale solo se sono giusti entrambi.',
+      },
+      level3: {
+        heading: 'In tre parti',
+        body: 'Nome, ruolo, poi il club. Per le squadre di club, invece, la nazionalità.',
+      },
+    },
+    results: {
+      missed: {
+        heading: 'Quelli da imparare',
+        body: 'Ogni errore, con chi era e cosa hai scelto. Scorri per vederli tutti.',
+      },
+      again: {
+        heading: 'Rigioca o ripassa',
+        body: 'Fai 8/10 per sbloccare il livello successivo. Rigioca la partita o ripassa prima la rosa.',
+      },
+      next: {
+        heading: 'Al livello successivo',
+        body: 'Gioca il livello successivo o ripassa prima la rosa.',
       },
     },
   },

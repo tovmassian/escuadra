@@ -61,7 +61,9 @@ export const es: Messages = {
     // "Cómo jugar", as game menus say; About's stored list names the tips
     // ("consejos") the same way.
     kicker: (step: number, count: number) => `Cómo jugar · ${step}/${count}`,
+    kickerLevel: (level: number) => `Cómo jugar · Nivel ${level}`,
     spoken: (step: number, count: number) => `Cómo jugar, consejo ${step} de ${count}`,
+    spokenLevel: (level: number) => `Cómo jugar, nivel ${level}`,
     next: 'Siguiente',
     gotIt: 'Entendido',
     // "Omitir consejos" is 15 chars against 14; Siguiente already moves one tip on.
@@ -98,6 +100,40 @@ export const es: Messages = {
       positions: {
         heading: 'Posición a posición',
         body: 'Aprende primero los porteros y luego la defensa, el centro del campo y la delantera.',
+      },
+    },
+    question: {
+      clues: {
+        heading: 'Un dorsal y algunas pistas',
+        body: 'El dorsal es la pregunta. La posición, la edad y el club te ayudan a encontrar al jugador.',
+        bodyClub:
+          'El dorsal es la pregunta. La posición, la edad y la nacionalidad te ayudan a encontrar al jugador.',
+      },
+      answer: {
+        heading: 'Toca a quien lo lleva',
+        body: 'Si aciertas, la ronda avanza sola. Si fallas, ves quién era y te espera.',
+      },
+      level2: {
+        heading: 'Ahora en dos partes',
+        body: 'Primero el nombre y luego la posición. Solo cuenta si aciertas las dos.',
+      },
+      level3: {
+        heading: 'Tres partes',
+        body: 'Nombre, posición y luego el club. En los clubes, la nacionalidad en su lugar.',
+      },
+    },
+    results: {
+      missed: {
+        heading: 'Los que te faltan',
+        body: 'Cada fallo, con quién era y qué elegiste. Desliza para verlos todos.',
+      },
+      again: {
+        heading: 'Repite o repasa',
+        body: 'Consigue 8/10 para desbloquear el siguiente nivel. Repite la ronda ya o repasa antes la plantilla.',
+      },
+      next: {
+        heading: 'Al siguiente nivel',
+        body: 'Juega el siguiente nivel o repasa antes la plantilla.',
       },
     },
   },
