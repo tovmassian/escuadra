@@ -3,10 +3,11 @@ import { DarkTheme, DefaultTheme, Stack, ThemeProvider, type Theme } from 'expo-
 import * as SplashScreen from 'expo-splash-screen';
 import * as Crypto from 'expo-crypto';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-reanimated';
 
+import { LaunchIntro } from '@/components/LaunchIntro';
 import { launchLanguage } from '@/i18n/useT';
 import { track } from '@/lib/telemetry';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
@@ -20,11 +21,13 @@ export default function RootLayout() {
   const hydrated = useProgressHydrated();
   const themeName = useThemeName();
   const colors = useThemeColors();
+  const [introDone, setIntroDone] = useState(false);
 
   // Hold the splash until the type is ready, otherwise the first frame renders
   // in the system font and visibly reflows — and until the persisted
   // preference is back, otherwise someone pinned to light gets a dark frame
-  // that flips on every launch.
+  // that flips on every launch. The launch intro (#182) mounts with the stack,
+  // when the splash hides, so it never starts before the theme and fonts are known.
   const ready = (fontsLoaded || fontError) && hydrated;
 
   useEffect(() => {
@@ -68,6 +71,7 @@ export default function RootLayout() {
             contentStyle: { backgroundColor: colors.background },
           }}
         />
+        {!introDone && <LaunchIntro onDone={() => setIntroDone(true)} />}
         <StatusBar style={isDark ? 'light' : 'dark'} />
       </ThemeProvider>
     </SafeAreaProvider>
