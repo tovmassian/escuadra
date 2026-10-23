@@ -82,7 +82,7 @@ export const it: Messages = {
       star: {
         // Feminine: the squadra.
         heading: 'Rendila tua',
-        body: 'Metti la stella a una squadra: ti aspetta nella schermata iniziale.',
+        body: 'Metti la stella a una squadra: ti aspetta nella schermata principale dell’app.',
       },
       study: {
         heading: 'Oppure ripassa prima',

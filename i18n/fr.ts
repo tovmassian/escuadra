@@ -95,7 +95,7 @@ export const fr: Messages = {
       },
       star: {
         heading: 'Garde-la sous la main',
-        body: 'Mets une étoile à une équipe, elle t’attendra sur l’écran d’accueil.',
+        body: 'Mets une étoile à une équipe, elle t’attendra sur l’écran principal de l’appli.',
       },
       study: {
         heading: 'Ou révise d’abord',
