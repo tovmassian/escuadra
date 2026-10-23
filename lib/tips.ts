@@ -2,7 +2,29 @@
 // whether a screen opens with its tips, and where a tip's cut-out, ring, arrow
 // and text go around a measured target. Pure, so it is tested; `TipsLayer` draws it.
 
-export type TipScreen = 'picker' | 'difficulty' | 'study';
+export type TipScreen =
+  'picker' | 'difficulty' | 'study' | 'question-1' | 'question-2' | 'question-3' | 'results';
+
+/** Results' tips (#184): the misses, then what to do next. */
+export type ResultsTip = 'missed' | 'again' | 'next';
+
+/** Which of Results' tips have something to point at: no misses on a 10/10,
+ *  and no next level after passing the last one. */
+export function resultsTips({
+  missed,
+  passed,
+  hasNextLevel,
+}: {
+  missed: number;
+  passed: boolean;
+  hasNextLevel: boolean;
+}): ResultsTip[] {
+  const tips: ResultsTip[] = [];
+  if (missed > 0) tips.push('missed');
+  if (!passed) tips.push('again');
+  else if (hasNextLevel) tips.push('next');
+  return tips;
+}
 
 export interface Box {
   x: number;

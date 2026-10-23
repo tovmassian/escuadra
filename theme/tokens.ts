@@ -1091,6 +1091,9 @@ export const resultsTimeline = {
   // strike's flash fading), and a beat more lets the score be seen before the
   // OS may show its dialog. A pause, not an animation.
   reviewPrompt: t(2000),
+  // How to play's tips on a first Results (#184) wait this long, until the
+  // celebration is over (by 1,200 ms, as above). A pause, not an animation.
+  tips: t(1200),
 } as const;
 
 // The launch intro, "the strike" (#182; the 2.0 canvas's OpenStrike artboard). ms

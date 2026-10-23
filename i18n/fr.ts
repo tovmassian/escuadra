@@ -72,7 +72,9 @@ export const fr: Messages = {
     // "Comment jouer", as game menus say; About's stored list names the tips
     // ("astuces") the same way.
     kicker: (step: number, count: number) => `Comment jouer · ${step}/${count}`,
+    kickerLevel: (level: number) => `Comment jouer · Niveau ${level}`,
     spoken: (step: number, count: number) => `Comment jouer, astuce ${step} sur ${count}`,
+    spokenLevel: (level: number) => `Comment jouer, niveau ${level}`,
     next: 'Suivant',
     // "Compris", as the round's "Compris, suivant" says.
     gotIt: 'Compris',
@@ -110,6 +112,40 @@ export const fr: Messages = {
       positions: {
         heading: 'Un poste à la fois',
         body: 'Apprends d’abord les gardiens, puis la défense, le milieu et l’attaque.',
+      },
+    },
+    question: {
+      clues: {
+        heading: 'Un numéro, quelques indices',
+        body: 'Le numéro de maillot est la question. Le poste, l’âge et le club t’aident à trouver le joueur.',
+        bodyClub:
+          'Le numéro de maillot est la question. Le poste, l’âge et la nationalité t’aident à trouver le joueur.',
+      },
+      answer: {
+        heading: 'Appuie sur celui qui le porte',
+        body: 'Après une bonne réponse, la suite arrive seule. Après une erreur, tu vois qui c’était et la partie t’attend.',
+      },
+      level2: {
+        heading: 'Maintenant, en deux temps',
+        body: 'D’abord le nom, puis le poste. Ça ne compte que si les deux sont justes.',
+      },
+      level3: {
+        heading: 'En trois temps',
+        body: 'Le nom, le poste, puis le club. Pour une équipe de club, la nationalité à la place.',
+      },
+    },
+    results: {
+      missed: {
+        heading: 'Les joueurs à retenir',
+        body: 'Chaque erreur, avec le bon joueur et ton choix. Fais défiler pour tout voir.',
+      },
+      again: {
+        heading: 'Rejoue ou révise',
+        body: 'Fais 8/10 pour débloquer le niveau suivant. Rejoue la partie, ou révise d’abord l’effectif.',
+      },
+      next: {
+        heading: 'Passe au niveau suivant',
+        body: 'Joue le niveau suivant, ou révise d’abord l’effectif.',
       },
     },
   },

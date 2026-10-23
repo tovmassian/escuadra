@@ -34,7 +34,8 @@ interface TileModel {
 }
 
 // The answers, as a grid (spec §2.3): two columns for names, clubs and
-// nationalities, four for positions. Its height is fixed by `answerLayout`.
+// nationalities, four for positions. Its height is fixed by `answerLayout`. It
+// fills its parent's width: the question screen sets the inset.
 export function AnswerGrid({
   part,
   gridKey,
@@ -116,7 +117,7 @@ export function AnswerGrid({
 }
 
 const styles = StyleSheet.create({
-  grid: { paddingHorizontal: spacing.md, gap: spacing.xs },
+  grid: { gap: spacing.xs },
   row: { flexDirection: 'row', gap: spacing.xs },
   cell: { flex: 1 },
 });

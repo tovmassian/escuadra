@@ -54,6 +54,10 @@ interface TipsLayerProps {
   /** Scrolls the screen by `dy` points, without animation: down for a target
    *  below the fold, up (negative) for one above the top; it stops at 0. */
   scrollBy?: (dy: number) => void;
+  /** Replace the step kicker and its spoken name: with one tip, "Step 1 of 1"
+   *  would say nothing. The step dots are hidden then too. */
+  kicker?: string;
+  spoken?: string;
 }
 
 // How to play (#183; spec docs/superpowers/specs/2026-10-23-how-to-play-tips-design.md):
@@ -64,7 +68,8 @@ interface TipsLayerProps {
 // ringed, pointed at, and the tip is placed by `placeTip` and fades in. A tap
 // anywhere, the tip included, or Next, moves on; the last closes; Skip tips ends
 // every screen's tips; Android's back button closes, while the screen is focused.
-// Rendered last inside the screen's root, so it covers it.
+// Rendered last inside the screen's root, so it covers it. A single tip takes its
+// own `kicker` and `spoken` name and shows no dots (#184).
 
 // SVG paint and path data, not text: kept out of the JSX for the
 // hard-coded-string lint. The arrow is drawn in its 40 × 40 box
@@ -85,7 +90,15 @@ interface Measure {
   screen: { width: number; height: number };
 }
 
-export function TipsLayer({ tips: specs, onClose, onSkip, onShown, scrollBy }: TipsLayerProps) {
+export function TipsLayer({
+  tips: specs,
+  onClose,
+  onSkip,
+  onShown,
+  scrollBy,
+  kicker,
+  spoken,
+}: TipsLayerProps) {
   const colors = useThemeColors();
   const t = useT();
   const insets = useSafeAreaInsets();
@@ -109,6 +122,8 @@ export function TipsLayer({ tips: specs, onClose, onSkip, onShown, scrollBy }: T
 
   const n = specs.length;
   const last = step >= n - 1;
+  const kickerText = kicker ?? t.tips.kicker(step + 1, n);
+  const spokenText = spoken ?? t.tips.spoken(step + 1, n);
   const goTo = (next: number) => {
     if (next >= latest.current.specs.length) {
       latest.current.onClose();
@@ -278,7 +293,7 @@ export function TipsLayer({ tips: specs, onClose, onSkip, onShown, scrollBy }: T
     row: {
       flexDirection: 'row',
       alignItems: 'center',
-      justifyContent: 'space-between',
+      justifyContent: n > 1 ? 'space-between' : 'flex-end',
       marginTop: spacing.xs,
     },
     dots: { flexDirection: 'row', alignItems: 'center', gap: tips.dotGap },
@@ -319,8 +334,8 @@ export function TipsLayer({ tips: specs, onClose, onSkip, onShown, scrollBy }: T
     <>
       {/* Speaks the dialog's name, first, since the dialog itself is not one
           element on native; focus lands here on each step. */}
-      <Text ref={kickerRef} style={styles.kicker} accessibilityLabel={t.tips.spoken(step + 1, n)}>
-        {t.tips.kicker(step + 1, n)}
+      <Text ref={kickerRef} style={styles.kicker} accessibilityLabel={spokenText}>
+        {kickerText}
       </Text>
       <Text
         style={styles.heading}
@@ -331,15 +346,17 @@ export function TipsLayer({ tips: specs, onClose, onSkip, onShown, scrollBy }: T
       </Text>
       <Text style={styles.body}>{spec.body}</Text>
       <View style={styles.row}>
-        <View
-          style={styles.dots}
-          accessibilityElementsHidden
-          importantForAccessibility="no-hide-descendants"
-        >
-          {specs.map((_, i) => (
-            <View key={i} style={[styles.dot, i === step && styles.dotActive]} />
-          ))}
-        </View>
+        {n > 1 ? (
+          <View
+            style={styles.dots}
+            accessibilityElementsHidden
+            importantForAccessibility="no-hide-descendants"
+          >
+            {specs.map((_, i) => (
+              <View key={i} style={[styles.dot, i === step && styles.dotActive]} />
+            ))}
+          </View>
+        ) : null}
         <Pressable
           testID="tip-next"
           accessibilityRole="button"
@@ -413,7 +430,7 @@ export function TipsLayer({ tips: specs, onClose, onSkip, onShown, scrollBy }: T
           entering={placed ? fade : undefined}
           role={DIALOG}
           aria-modal
-          accessibilityLabel={t.tips.spoken(step + 1, n)}
+          accessibilityLabel={spokenText}
           style={[styles.tip, !placed && styles.hidden]}
           onLayout={(e) => setTipHeight(e.nativeEvent.layout.height)}
           onStartShouldSetResponder={() => placed}

@@ -17,11 +17,12 @@ export interface Tips {
 }
 
 // Whether a screen opens with its How to play tips (#183). Decided once, after
-// the store has hydrated, so a returning player never sees a flash of them. The
+// the store has hydrated (and, for the round and Results, once the screen says it
+// is ready, #184), so a returning player never sees a flash of them. The
 // screen is marked seen as its first tip shows (the layer's `onShown`), not as
 // the tips open: leaving mid-way never brings them back, and a screen whose
 // targets never mount keeps them for next time.
-export function useTips(screen: TipScreen): Tips {
+export function useTips(screen: TipScreen, ready = true): Tips {
   const hydrated = useProgressHydrated();
   const seen = useProgress((s) => s.tipsSeen);
   const skipped = useProgress((s) => s.tipsSkipped);
@@ -30,7 +31,7 @@ export function useTips(screen: TipScreen): Tips {
   // Decided while rendering, once, so the tips open in the same frame as the
   // hydrated screen; marking the screen seen later changes `seen`, but the
   // decision is already made.
-  if (state === 'pending' && hydrated) {
+  if (state === 'pending' && hydrated && ready) {
     setState(shouldShowTips(screen, seen, skipped) ? 'open' : 'closed');
   }
 

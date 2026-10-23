@@ -329,6 +329,15 @@ const RESULTS_SHOTS = [
  * next control.
  */
 async function captureResults(capture, { file, answers, then }) {
+  await playRound(capture, answers);
+  // The long pole is the round strip, the strike and the card rise.
+  await capture.page.waitForTimeout(SETTLE_MS);
+  await capture.shoot(file);
+  await then?.(capture);
+}
+
+/** Opens the level-1 round at SEED, answers every question and lands on /results. */
+async function playRound(capture, answers) {
   const path = `/play/esp/1?seed=${SEED}`;
   await capture.open(path);
 
@@ -345,10 +354,6 @@ async function captureResults(capture, { file, answers, then }) {
         `the answer labels above no longer match the round this seed builds`,
     );
   }
-  // The long pole is the round strip, the strike and the card rise.
-  await capture.page.waitForTimeout(SETTLE_MS);
-  await capture.shoot(file);
-  await then?.(capture);
 }
 
 /**
@@ -489,12 +494,78 @@ async function seedTipsSkipped(capture) {
  */
 async function captureTips(capture, path, base, steps) {
   await capture.open(path);
-  for (let step = 1; step <= steps; step += 1) {
+  await shootTipSteps(
+    capture,
+    Array.from({ length: steps }, (_, index) => `${base}-tip-${index + 1}`),
+  );
+}
+
+/**
+ * The tip layer already on screen: shoot each step under its name (a `null` name is a step
+ * only tapped past) and tap Next to the following one.
+ */
+async function shootTipSteps(capture, names) {
+  for (const [index, name] of names.entries()) {
     await capture.page.getByTestId('tips-layer').waitFor({ state: 'visible' });
     await capture.page.waitForTimeout(REVEAL_MS);
-    await capture.shoot(`${base}-tip-${step}`);
-    if (step < steps) await capture.tapId('tip-next');
+    if (name) await capture.shoot(name);
+    if (index < names.length - 1) await capture.tapId('tip-next');
   }
+}
+
+/**
+ * The How to play tips on the round and Results (#184). A question's tips show on the first
+ * question of a level's first round, before any answer, so each is a plain open. Results'
+ * show about 1.2 s after the first round ever, so the question tips are seeded seen and a
+ * round is played to reach them; the seeding is repeated so Results is unseen again for the
+ * passed round, whose first tip is only tapped past.
+ */
+async function captureRoundTips(capture) {
+  // The two rounds below write Spain's best score and last-played, which the picker, Study
+  // and Difficulty shots after this would show; the store is put back as it was when done.
+  const progress = await capture.page.evaluate(() => localStorage.getItem('escuadra-progress'));
+  await captureTips(capture, `/play/esp/1?seed=${SEED}`, '06b-question-l1', 2);
+  await capture.open(`/play/esp/2?seed=${SEED}`);
+  await shootTipSteps(capture, ['07b-question-l2-tip']);
+  await capture.open(`/play/esp/3?seed=${SEED}`);
+  await shootTipSteps(capture, ['08b-question-l3-tip']);
+
+  const seen = ['picker', 'difficulty', 'study', 'question-1', 'question-2', 'question-3'];
+  await seedTips(capture, { seen, skipped: false });
+  await playRound(capture, ROUND_FIRST_OPTION);
+  await shootTipSteps(capture, ['09b-results-tip-1', '09b-results-tip-2']);
+
+  await seedTips(capture, { seen, skipped: false });
+  await playRound(capture, ROUND_ONE_MISS);
+  await shootTipSteps(capture, [null, '09c-results-tip-pass']);
+
+  await capture.page.evaluate((stored) => {
+    if (stored === null) localStorage.removeItem('escuadra-progress');
+    else localStorage.setItem('escuadra-progress', stored);
+  }, progress);
+}
+
+/**
+ * Set which How to play tips (#183, #184) the persisted progress store holds as seen, and
+ * whether they are skipped. Like `seedStarred`, it writes localStorage only, for the next
+ * `capture.open` to rehydrate.
+ */
+async function seedTips(capture, { seen, skipped }) {
+  await capture.page.evaluate(
+    ([tipsSeen, tipsSkipped]) => {
+      const key = 'escuadra-progress';
+      let stored = null;
+      try {
+        stored = JSON.parse(localStorage.getItem(key) ?? 'null');
+      } catch {
+        stored = null;
+      }
+      const next = stored ?? { state: {}, version: 1 };
+      next.state = { ...next.state, tipsSeen, tipsSkipped };
+      localStorage.setItem(key, JSON.stringify(next));
+    },
+    [seen, skipped],
+  );
 }
 
 /**
@@ -601,6 +672,7 @@ async function captureTheme(browser, colorScheme, suffix) {
       await captureTips(capture, '/team-picker', '02c-team-picker', 2);
       await captureTips(capture, '/team/rma/difficulty', '04f-difficulty', 3);
       await captureTips(capture, '/team/int/study', '05b-study', 2);
+      await captureRoundTips(capture);
     }
     await seedTipsSkipped(capture);
 
