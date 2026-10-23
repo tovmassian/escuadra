@@ -247,3 +247,106 @@ export function GridGlyph({ color }: { color: string }) {
     </View>
   );
 }
+
+// The star's points on the 24-unit grid, as the design board draws it: five
+// tips 10.5 units from (12, 12.5), the notches between them at 5.2.
+const STAR = { cx: 12, cy: 12.5, outer: 10.5, inner: 5.2 };
+const TIP_HALF = STAR.inner * Math.sin(Math.PI / 5);
+const TIP_HEIGHT = STAR.outer - STAR.inner * Math.cos(Math.PI / 5);
+
+/** The ten corners, tip first, clockwise from the top. */
+function starPoints(): { x: number; y: number }[] {
+  return Array.from({ length: 10 }, (_, j) => {
+    const angle = -Math.PI / 2 + (j * Math.PI) / 5;
+    const radius = j % 2 === 0 ? STAR.outer : STAR.inner;
+    return { x: STAR.cx + radius * Math.cos(angle), y: STAR.cy + radius * Math.sin(angle) };
+  });
+}
+
+/** Star: Your squads' mark (#179). Filled, a disc through the notches under
+ *  five tip triangles, each a View's bottom border turned about the centre;
+ *  outlined, ten round-capped strokes, whose caps make the round joins. */
+export function StarGlyph({
+  color,
+  filled,
+  size = iconSize.star,
+}: {
+  color: string;
+  filled: boolean;
+  size?: number;
+}) {
+  const k = size / GRID;
+  const w = 2 * k;
+  const reach = STAR.outer * k;
+  const styles = StyleSheet.create({
+    box: { width: size, height: size },
+    disc: {
+      position: 'absolute',
+      left: (STAR.cx - STAR.inner) * k,
+      top: (STAR.cy - STAR.inner) * k,
+      width: 2 * STAR.inner * k,
+      height: 2 * STAR.inner * k,
+      borderRadius: STAR.inner * k,
+      backgroundColor: color,
+    },
+    // A square on the star's centre: turning it turns a tip about that centre.
+    turn: {
+      position: 'absolute',
+      left: STAR.cx * k - reach,
+      top: STAR.cy * k - reach,
+      width: 2 * reach,
+      height: 2 * reach,
+    },
+    tip: {
+      position: 'absolute',
+      left: reach - TIP_HALF * k,
+      top: 0,
+      width: 0,
+      height: 0,
+      borderLeftWidth: TIP_HALF * k,
+      borderRightWidth: TIP_HALF * k,
+      borderBottomWidth: TIP_HEIGHT * k,
+      borderLeftColor: 'transparent',
+      borderRightColor: 'transparent',
+      borderBottomColor: color,
+    },
+    stroke: { position: 'absolute', height: w, borderRadius: w / 2, backgroundColor: color },
+  });
+
+  if (filled) {
+    return (
+      <View style={styles.box}>
+        <View style={styles.disc} />
+        {[0, 1, 2, 3, 4].map((i) => (
+          <View key={i} style={[styles.turn, { transform: [{ rotate: `${i * 72}deg` }] }]}>
+            <View style={styles.tip} />
+          </View>
+        ))}
+      </View>
+    );
+  }
+
+  const points = starPoints();
+  return (
+    <View style={styles.box}>
+      {points.map((from, j) => {
+        const to = points[(j + 1) % points.length] ?? from;
+        const length = Math.hypot(to.x - from.x, to.y - from.y) * k + w;
+        return (
+          <View
+            key={j}
+            style={[
+              styles.stroke,
+              {
+                width: length,
+                left: ((from.x + to.x) / 2) * k - length / 2,
+                top: ((from.y + to.y) / 2) * k - w / 2,
+                transform: [{ rotate: `${Math.atan2(to.y - from.y, to.x - from.x)}rad` }],
+              },
+            ]}
+          />
+        );
+      })}
+    </View>
+  );
+}

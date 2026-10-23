@@ -4,6 +4,7 @@ import { PickerPill } from '@/components/PickerPill';
 import { RoundBackButton } from '@/components/RoundBackButton';
 import { SearchField } from '@/components/SearchField';
 import { TeamRow } from '@/components/TeamRow';
+import { YourSquads } from '@/components/YourSquads';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
@@ -22,6 +23,7 @@ import {
   visibleSquads,
 } from '@/lib/pickerView';
 import { listSquads } from '@/lib/squads';
+import { starredOfKind } from '@/lib/starred';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import { sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -41,7 +43,7 @@ import { scheduleOnRN } from 'react-native-worklets';
 // The team picker (#176; spec docs/superpowers/specs/2026-10-22-team-picker-design.md):
 // one column that scrolls as a whole. Clubs are a plain list under a caption;
 // nations are grouped A–Z, narrowed by confederation (#177), with a letter rail
-// pinned over the right edge.
+// pinned over the right edge. Above either list, the tab's starred teams (#179).
 export default function TeamPicker() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
@@ -49,6 +51,7 @@ export default function TeamPicker() {
   const language = useLanguage();
   const hydrated = useProgressHydrated();
   const bestScores = useProgress((s) => s.bestScores);
+  const starredSquads = useProgress((s) => s.starredSquads);
   const [filter, setFilter] = useState<Kind>('club');
   const [league, setLeague] = useState<LeagueFilter>('ALL');
   const [confederation, setConfederation] = useState<ConfederationFilter>('ALL');
@@ -71,6 +74,12 @@ export default function TeamPicker() {
   const sections = useMemo(
     () => (filter === 'nation' ? nationSections(squads, names, query, confederation) : []),
     [squads, filter, names, query, confederation],
+  );
+  // Your squads (#179): the tab's starred teams, whatever league or
+  // confederation is picked, hidden while a search is typed.
+  const starred = useMemo(
+    () => (hydrated && query.trim() === '' ? starredOfKind(starredSquads, squads, filter) : []),
+    [hydrated, query, starredSquads, squads, filter],
   );
   const letters = useMemo(() => sections.map((s) => s.letter), [sections]);
   const showRail = sections.length > 1;
@@ -250,9 +259,11 @@ export default function TeamPicker() {
     },
   });
 
-  const row = (item: SquadManifestEntry) => (
+  const row = (item: SquadManifestEntry, card?: { last: boolean }) => (
     <TeamRow
       key={item.id}
+      variant={card ? 'card' : 'list'}
+      last={card?.last}
       name={squadDisplayName(item, language)}
       marker={item.marker}
       flag={item.kind === 'nation' ? flagFor(item.name) : undefined}
@@ -329,8 +340,11 @@ export default function TeamPicker() {
           </ScrollView>
         </View>
 
-        {/* Your squads (#179) fills this slot. */}
-        <View testID="your-squads-slot" />
+        {starred.length > 0 && (
+          <YourSquads>
+            {starred.map((item, i) => row(item, { last: i === starred.length - 1 }))}
+          </YourSquads>
+        )}
 
         {filter === 'club' && clubs.length > 0 && (
           <View style={styles.listStart}>
@@ -340,7 +354,7 @@ export default function TeamPicker() {
                 clubs.length,
               )}
             </Text>
-            {clubs.map(row)}
+            {clubs.map((item) => row(item))}
           </View>
         )}
 
@@ -383,7 +397,7 @@ export default function TeamPicker() {
                 </Text>
               )}
             </View>
-            <View style={showRail && styles.gutter}>{section.squads.map(row)}</View>
+            <View style={showRail && styles.gutter}>{section.squads.map((item) => row(item))}</View>
           </Fragment>
         ))}
 

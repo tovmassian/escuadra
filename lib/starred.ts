@@ -1,0 +1,22 @@
+// Your squads (#179): the teams a player stars on Difficulty, kept in the
+// progress store newest first. Pure, so the store and the picker share it.
+import type { SquadManifestEntry } from '@/types/squad';
+
+/** Stars `squadId` at the front, or unstars it if it is already starred. */
+export function toggleStarred(starred: readonly string[], squadId: string): string[] {
+  return starred.includes(squadId) ? starred.filter((id) => id !== squadId) : [squadId, ...starred];
+}
+
+/** One tab's starred teams, newest first. A starred id that has left the data
+ *  is dropped without a word. */
+export function starredOfKind(
+  starred: readonly string[],
+  squads: readonly SquadManifestEntry[],
+  kind: 'club' | 'nation',
+): SquadManifestEntry[] {
+  const byId = new Map(squads.map((s) => [s.id, s]));
+  return starred.flatMap((id) => {
+    const squad = byId.get(id);
+    return squad !== undefined && squad.kind === kind ? [squad] : [];
+  });
+}

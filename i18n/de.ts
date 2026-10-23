@@ -253,6 +253,7 @@ export const de: Messages = {
       `${title}, Rekord ${correct} von ${total}, geschafft`,
     rungEscuadra: (title: string, correct: number, total: number) =>
       `${title}, Rekord ${correct} von ${total}, ${A_LA_ESCUADRA}`,
+    star: 'Eines deiner Teams',
   },
   picker: {
     allLeagues: 'Alle',
@@ -280,6 +281,7 @@ export const de: Messages = {
     clearSearch: 'Suche löschen',
     noTeams: 'Keine Teams gefunden',
     noResults: (query: string) => `Keine Ergebnisse für „${query}“`,
+    yourSquads: 'Deine Teams',
   },
   // English until #147 localises the feature graphic with the store listing.
   store: en.store,
@@ -364,8 +366,8 @@ export const de: Messages = {
         {
           heading: 'Was auf deinem Gerät gespeichert wird',
           paragraphs: [
-            `${ESCUADRA} speichert neun Dinge lokal auf deinem Gerät: deinen Rekord für jedes Team und jedes Level, anhand dessen die App ermittelt, welche Level du abgeschlossen hast; das letzte Team und Level, das du gespielt hast; deine Einstellung für helles oder dunkles Design; deine Sprachwahl; ob die Vibration eingeschaltet ist; ob die Kaderansicht Karten oder eine Liste zeigt; welche Version der App zuletzt dein Smartphone gebeten hat, eine Bewertungsanfrage anzuzeigen; deine Entscheidung zu den Nutzungsstatistiken; und die zufällige Kennung, die diese Statistiken verwenden. Die Update-Prüfung der App speichert außerdem eine eigene zufällige Kennung auf deinem Gerät.`,
-            `Diese Daten liegen im eigenen, privaten Speicher der App. ${ESCUADRA} selbst sendet nur zwei dieser neun Dinge von deinem Gerät aus, und nur, solange die Nutzungsstatistiken eingeschaltet sind: die Kennung, die in gehashter Form mit jeder Statistik gesendet wird, und deine Sprachwahl, die in der Statistik enthalten ist, die beim Öffnen der App gesendet wird. Wenn du die App löschst, werden all diese Daten von deinem Gerät gelöscht, ebenso alle zwischengespeicherten Fotos. ${ESCUADRA} hat kein eigenes Backup und keine eigene Synchronisierung, aber die Backups deines Geräts (unter iOS in iCloud oder auf einem Computer; unter Android bei Google) können diese Daten enthalten. Der Entwickler hat keinen Zugriff auf diesen Speicher.`,
+            `${ESCUADRA} speichert zehn Dinge lokal auf deinem Gerät: deinen Rekord für jedes Team und jedes Level, anhand dessen die App ermittelt, welche Level du abgeschlossen hast; das letzte Team und Level, das du gespielt hast; die Teams, die du mit einem Stern markiert hast; deine Einstellung für helles oder dunkles Design; deine Sprachwahl; ob die Vibration eingeschaltet ist; ob die Kaderansicht Karten oder eine Liste zeigt; welche Version der App zuletzt dein Smartphone gebeten hat, eine Bewertungsanfrage anzuzeigen; deine Entscheidung zu den Nutzungsstatistiken; und die zufällige Kennung, die diese Statistiken verwenden. Die Update-Prüfung der App speichert außerdem eine eigene zufällige Kennung auf deinem Gerät.`,
+            `Diese Daten liegen im eigenen, privaten Speicher der App. ${ESCUADRA} selbst sendet nur zwei dieser zehn Dinge von deinem Gerät aus, und nur, solange die Nutzungsstatistiken eingeschaltet sind: die Kennung, die in gehashter Form mit jeder Statistik gesendet wird, und deine Sprachwahl, die in der Statistik enthalten ist, die beim Öffnen der App gesendet wird. Wenn du die App löschst, werden all diese Daten von deinem Gerät gelöscht, ebenso alle zwischengespeicherten Fotos. ${ESCUADRA} hat kein eigenes Backup und keine eigene Synchronisierung, aber die Backups deines Geräts (unter iOS in iCloud oder auf einem Computer; unter Android bei Google) können diese Daten enthalten. Der Entwickler hat keinen Zugriff auf diesen Speicher.`,
           ],
         },
         {

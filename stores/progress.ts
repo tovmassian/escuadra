@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { LanguagePreference } from '@/i18n/resolveLanguage';
 import { scoreKey } from '@/lib/scoring';
+import { toggleStarred } from '@/lib/starred';
 import type { StudyView } from '@/lib/studyView';
 import type { ThemePreference } from '@/theme/tokens';
 
@@ -47,6 +48,9 @@ interface ProgressState {
    *  (#57), so each version asks at most once. Null until one has. Survives
    *  `reset()`: clearing scores should not earn a second ask. */
   reviewAskedVersion: string | null;
+  /** Your squads (#179): the squad ids starred on Difficulty, newest first.
+   *  A preference like `themePreference`, so it survives `reset()`. */
+  starredSquads: string[];
   recordScore: (squadId: string, level: number, score: number) => void;
   setLastPlayed: (squadId: string, level: number) => void;
   setThemePreference: (preference: ThemePreference) => void;
@@ -56,6 +60,7 @@ interface ProgressState {
   setHaptics: (enabled: boolean) => void;
   setStudyView: (view: StudyView) => void;
   setReviewAskedVersion: (version: string) => void;
+  toggleStar: (squadId: string) => void;
   reset: () => void;
 }
 
@@ -71,6 +76,7 @@ export const useProgress = create<ProgressState>()(
       haptics: true,
       studyView: 'grid',
       reviewAskedVersion: null,
+      starredSquads: [],
       recordScore: (squadId, level, score) =>
         set((s) => {
           const key = scoreKey(squadId, level);
@@ -90,6 +96,8 @@ export const useProgress = create<ProgressState>()(
       setHaptics: (haptics) => set({ haptics }),
       setStudyView: (studyView) => set({ studyView }),
       setReviewAskedVersion: (reviewAskedVersion) => set({ reviewAskedVersion }),
+      toggleStar: (squadId) =>
+        set((s) => ({ starredSquads: toggleStarred(s.starredSquads, squadId) })),
       reset: () => set({ bestScores: {}, lastPlayed: null }),
     }),
     {

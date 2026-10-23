@@ -422,6 +422,26 @@ async function seedBestScores(capture, scores) {
   }, scores);
 }
 
+/**
+ * Write the starred squads (#179) into the persisted progress store, newest
+ * first, as taps on Difficulty's star would. Like `seedBestScores`, it writes
+ * localStorage only, for the next `capture.open` to rehydrate.
+ */
+async function seedStarred(capture, squadIds) {
+  await capture.page.evaluate((starred) => {
+    const key = 'escuadra-progress';
+    let stored = null;
+    try {
+      stored = JSON.parse(localStorage.getItem(key) ?? 'null');
+    } catch {
+      stored = null;
+    }
+    const next = stored ?? { state: {}, version: 0 };
+    next.state = { ...next.state, starredSquads: starred };
+    localStorage.setItem(key, JSON.stringify(next));
+  }, squadIds);
+}
+
 // ---------------------------------------------------------------------------
 // A full pass
 // ---------------------------------------------------------------------------
@@ -507,6 +527,20 @@ async function captureTheme(browser, colorScheme, suffix) {
     await seedBestScores(capture, { 'liv:1': 10, 'liv:2': 9, 'liv:3': 8 });
     await capture.open('/team/liv/difficulty');
     await capture.shoot('04c-difficulty-cleared');
+
+    // Your squads (#179): two clubs and Spain starred by seed, Armenia by a tap
+    // on its star, so it is the newest. The picker then shows each tab's
+    // starred teams over its list, Nations with UEFA picked to show the group
+    // ignores it.
+    await seedStarred(capture, ['esp', 'rma', 'ars']);
+    await capture.open('/team/arm/difficulty');
+    await capture.tapId('difficulty-star', { wait: SWAP_MS });
+    await capture.shoot('04d-difficulty-starred');
+    await capture.open('/team-picker');
+    await capture.shoot('02b-team-picker-clubs-starred');
+    await capture.tapId('kind-nation', { wait: SWAP_MS });
+    await capture.tapId('confederation-UEFA', { wait: SWAP_MS });
+    await capture.shoot('03d-team-picker-nations-starred');
 
     await captureStudy(capture);
 

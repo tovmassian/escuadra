@@ -18,11 +18,23 @@ interface TeamRowProps {
   /** `undefined` while the store hydrates, `null` when never played. */
   progress: TeamProgress | null | undefined;
   onPress: () => void;
+  /** `'card'`: a row in Your squads' card (#179), a little taller, with no
+   *  divider under the card's last row. */
+  variant?: 'list' | 'card';
+  last?: boolean;
 }
 
 // A picker row (#176): the marker at 40 × 27, the name, and on the right the
 // best of the highest level played, or a chevron when the team is unplayed.
-export function TeamRow({ name, marker, flag, progress, onPress }: TeamRowProps) {
+export function TeamRow({
+  name,
+  marker,
+  flag,
+  progress,
+  onPress,
+  variant = 'list',
+  last = false,
+}: TeamRowProps) {
   const colors = useThemeColors();
   const t = useT();
   const block = scoreBlock(progress);
@@ -31,8 +43,8 @@ export function TeamRow({ name, marker, flag, progress, onPress }: TeamRowProps)
       flexDirection: 'row',
       alignItems: 'center',
       gap: spacing.sm + 2,
-      minHeight: sizes.pickerRow,
-      borderBottomWidth: borderWidths.hairline,
+      minHeight: variant === 'card' ? sizes.pickerCardRow : sizes.pickerRow,
+      borderBottomWidth: variant === 'card' && last ? 0 : borderWidths.hairline,
       borderBottomColor: colors.hairline,
     },
     name: { ...typography.teamName, color: colors.textPrimary, flex: 1, minWidth: 0 },

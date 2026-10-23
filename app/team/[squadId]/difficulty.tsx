@@ -17,14 +17,16 @@ import { useThemeColors } from '@/theme/useTheme';
 // Difficulty (#178): the team's bands under a veil, then the ladder: cleared
 // levels compact with their best, the focused level a Play card, locked
 // levels with what opens them; Exam mode, as a placeholder; Study; and when
-// the squad was last updated. The corner star (#179) and OUTDATED (#180) are
-// later steps.
+// the squad was last updated. The corner star keeps the team in Your squads
+// (#179). OUTDATED (#180) is a later step.
 export default function Difficulty() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
   const t = useT();
   const { squadId } = useLocalSearchParams<{ squadId: string }>();
   const bestScores = useProgress((s) => s.bestScores);
+  const starred = useProgress((s) => s.starredSquads.includes(squadId));
+  const toggleStar = useProgress((s) => s.toggleStar);
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
@@ -70,7 +72,13 @@ export default function Difficulty() {
       style={styles.root}
       contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xxl }}
     >
-      <LadderHero squad={squad} league={squadLeague(squad.id)} onBack={() => router.back()} />
+      <LadderHero
+        squad={squad}
+        league={squadLeague(squad.id)}
+        onBack={() => router.back()}
+        starred={starred}
+        onToggleStar={() => toggleStar(squad.id)}
+      />
       <View style={styles.content}>
         <Text style={styles.heading} accessibilityRole="header">
           {t.ladder.heading}

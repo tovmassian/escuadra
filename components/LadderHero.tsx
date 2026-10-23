@@ -1,8 +1,9 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { StarGlyph } from './ActionGlyphs';
 import { Flag } from './Flag';
-import { RoundBackButton } from './RoundBackButton';
+import { RoundBackButton, RoundButton, useRoundGlyphColor } from './RoundBackButton';
 import { TeamMarker } from './TeamMarker';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
@@ -18,11 +19,14 @@ interface LadderHeroProps {
   /** A club's league, for the mono line; a nation reads "National team". */
   league: League | undefined;
   onBack: () => void;
+  /** Whether the team is in Your squads (#179), and the star that toggles it. */
+  starred: boolean;
+  onToggleStar: () => void;
 }
 
 // The Difficulty hero (#178, spec §1): the squad's marker as vertical bands,
 // the in-round banner rule, full bleed from the top of the window. Over them,
-// the top bar (back, and the star's slot), then the team's flag or marker,
+// the top bar (back, and the Your squads star), then the team's flag or marker,
 // its name and the mono line.
 //
 // The veil is the palette's `background`, and it is computed, not the
@@ -32,7 +36,7 @@ interface LadderHeroProps {
 // sits behind its own row, so the guarantee holds however far a long name
 // wraps: the top bar fades from the theme's floor to that alpha, the identity
 // block from that alpha to solid ground.
-export function LadderHero({ squad, league, onBack }: LadderHeroProps) {
+export function LadderHero({ squad, league, onBack, starred, onToggleStar }: LadderHeroProps) {
   const colors = useThemeColors();
   const theme = useThemeName();
   const t = useT();
@@ -43,6 +47,12 @@ export function LadderHero({ squad, league, onBack }: LadderHeroProps) {
   // A nation shows its flag (guardrail 2's carve-out); a club, or a nation
   // with no flag in lib/flags.ts, its bands.
   const flag = squad.kind === 'nation' ? flagFor(squad.name) : null;
+  // Glass in dark theme only. In light theme the veil is the light ground at
+  // its floor, so over a pale band (Real Madrid's white) the glass's white
+  // glyph falls to 2.85:1, under 3:1; the ground button (surface, border,
+  // textPrimary glyph) is solid.
+  const glass = theme === 'dark';
+  const glyph = useRoundGlyphColor(glass);
 
   const styles = StyleSheet.create({
     hero: { overflow: 'hidden' },
@@ -56,7 +66,6 @@ export function LadderHero({ squad, league, onBack }: LadderHeroProps) {
       alignItems: 'center',
       justifyContent: 'space-between',
     },
-    slot: { width: sizes.roundButton, height: sizes.roundButton },
     identity: {
       paddingHorizontal: spacing.lg,
       paddingTop: spacing.md,
@@ -90,18 +99,26 @@ export function LadderHero({ squad, league, onBack }: LadderHeroProps) {
           pointerEvents="none"
         />
         <View style={styles.barRow}>
-          {/* Glass in dark theme only. In light theme the veil is the light
-              ground at its floor, so over a pale band (Real Madrid's white)
-              the glass's white chevron falls to 2.85:1, under 3:1; the ground
-              button (surface, border, textPrimary chevron) is solid. */}
           <RoundBackButton
-            glass={theme === 'dark'}
+            glass={glass}
             label={t.common.back}
             onPress={onBack}
             testID="difficulty-back"
           />
-          {/* The star's slot (#179). */}
-          <View style={styles.slot} />
+          {/* A constant name, so it reads "One of your squads, on" or "off".
+              aria-pressed is for react-native-web, which does not read
+              accessibilityState. */}
+          <RoundButton
+            testID="difficulty-star"
+            glass={glass}
+            onPress={onToggleStar}
+            accessibilityRole="togglebutton"
+            accessibilityLabel={t.ladder.star}
+            accessibilityState={{ checked: starred }}
+            aria-pressed={starred}
+          >
+            <StarGlyph color={glyph} filled={starred} />
+          </RoundButton>
         </View>
       </View>
       <View style={styles.identity}>
