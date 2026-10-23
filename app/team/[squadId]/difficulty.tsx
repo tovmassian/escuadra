@@ -1,16 +1,19 @@
 import { router, useLocalSearchParams } from 'expo-router';
-import { useRef } from 'react';
+import { LinearGradient } from 'expo-linear-gradient';
+import { useRef, useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { OutdatedGlyph } from '@/components/ActionGlyphs';
+import { EraserGlyph, OutdatedGlyph } from '@/components/ActionGlyphs';
 import { ExamModeRow } from '@/components/ExamModeRow';
 import { LadderCard } from '@/components/LadderCard';
 import { LadderHero } from '@/components/LadderHero';
 import { LadderRung } from '@/components/LadderRung';
+import { ResetSheet } from '@/components/ResetSheet';
 import { BookGlyph } from '@/components/SettingsGlyphs';
 import { TipsLayer } from '@/components/TipsLayer';
 import { useTips } from '@/components/useTips';
-import { useT } from '@/i18n/useT';
+import { squadDisplayName } from '@/i18n/displayNames';
+import { useLanguage, useT } from '@/i18n/useT';
 import {
   focusedLevel,
   formatLastUpdated,
@@ -20,6 +23,7 @@ import {
   squadUpdatedLine,
 } from '@/lib/ladderView';
 import type { Level } from '@/lib/questionEngine';
+import { squadScores } from '@/lib/reset';
 import { getSquad, squadLeague } from '@/lib/squads';
 import { useProgress } from '@/stores/progress';
 import { borderWidths, iconSize, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
@@ -35,10 +39,14 @@ export default function Difficulty() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
   const t = useT();
+  const language = useLanguage();
   const { squadId } = useLocalSearchParams<{ squadId: string }>();
   const bestScores = useProgress((s) => s.bestScores);
   const starred = useProgress((s) => s.starredSquads.includes(squadId));
   const toggleStar = useProgress((s) => s.toggleStar);
+  const resetSquad = useProgress((s) => s.resetSquad);
+  // Start over (#197): the sheet beside Study that sends this team back to unplayed.
+  const [startOver, setStartOver] = useState(false);
   // How to play (#183): Play, the star, then Study, scrolled to on a short screen.
   const tips = useTips('difficulty');
   const scrollRef = useRef<ScrollView>(null);
@@ -59,8 +67,24 @@ export default function Difficulty() {
     outdatedNote: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs - 2 },
     outdatedText: { ...typography.secondarySmall, color: colors.textMuted, flexShrink: 1 },
     exam: { marginTop: spacing.xxs + 2 },
+    // Study and the source line stay put while the ladder scrolls under their fade.
+    footer: {
+      paddingHorizontal: spacing.lg,
+      paddingTop: spacing.xs,
+      paddingBottom: insets.bottom + spacing.sm,
+      gap: spacing.xs,
+      backgroundColor: colors.background,
+    },
+    fade: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: '100%',
+      height: sizes.ladderFooterFade,
+    },
+    actions: { flexDirection: 'row', gap: spacing.sm },
     study: {
-      marginTop: spacing.xs,
+      flex: 1,
       minHeight: sizes.ladderPill,
       borderRadius: radii.pill,
       borderWidth: borderWidths.thick,
@@ -72,11 +96,22 @@ export default function Difficulty() {
     },
     studyLabel: { ...typography.ladderStudy, color: colors.textPrimary },
     updated: { ...typography.secondarySmall, color: colors.textMuted, textAlign: 'center' },
+    eraser: {
+      width: sizes.ladderPill,
+      height: sizes.ladderPill,
+      borderRadius: sizes.ladderPill / 2,
+      borderWidth: borderWidths.thick,
+      borderColor: colors.border,
+      alignItems: 'center',
+      justifyContent: 'center',
+    },
   });
 
   const squad = getSquad(squadId);
   if (!squad) return null;
 
+  const name = squadDisplayName(squad, language);
+  const scores = squadScores(bestScores, squad.id);
   const rows = ladderRows(squad.id, bestScores, squad.lastUpdated);
   const focused = focusedLevel(rows);
   const play = (level: Level) =>
@@ -94,7 +129,7 @@ export default function Difficulty() {
         }}
         scrollEventThrottle={16}
         {...tips.contentA11y}
-        contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xxl }}
+        contentContainerStyle={{ paddingBottom: spacing.lg }}
       >
         <LadderHero
           squad={squad}
@@ -139,6 +174,16 @@ export default function Difficulty() {
           <View style={styles.exam}>
             <ExamModeRow />
           </View>
+        </View>
+      </ScrollView>
+
+      <View style={styles.footer}>
+        <LinearGradient
+          colors={[colors.backgroundClear, colors.background]}
+          style={styles.fade}
+          pointerEvents="none"
+        />
+        <View style={styles.actions}>
           <Pressable
             ref={studyRef}
             testID="study"
@@ -151,11 +196,22 @@ export default function Difficulty() {
             <BookGlyph color={colors.textPrimary} />
             <Text style={styles.studyLabel}>{t.ladder.studySquad}</Text>
           </Pressable>
-          <Text style={styles.updated}>
-            {t.ladder.updated(formatLastUpdated(squad.lastUpdated, t))}
-          </Text>
+          {scores.length > 0 ? (
+            <Pressable
+              testID="difficulty-start-over"
+              onPress={() => setStartOver(true)}
+              accessibilityRole="button"
+              accessibilityLabel={t.ladder.startOver(name)}
+              style={({ pressed }) => [styles.eraser, pressed && { opacity: opacity.settled }]}
+            >
+              <EraserGlyph color={colors.textPrimary} />
+            </Pressable>
+          ) : null}
         </View>
-      </ScrollView>
+        <Text style={styles.updated}>
+          {t.ladder.updated(formatLastUpdated(squad.lastUpdated, t))}
+        </Text>
+      </View>
 
       {tips.open && (
         <TipsLayer
@@ -172,6 +228,23 @@ export default function Difficulty() {
           }
         />
       )}
+
+      <ResetSheet
+        visible={startOver}
+        onClose={() => setStartOver(false)}
+        testID="start-over"
+        title={t.reset.team.title(name)}
+        line={t.reset.team.line(name)}
+        clears={[
+          {
+            label: t.reset.team.bestScores,
+            value: scores.map((s) => t.reset.team.levelScore(s.level, s.score)).join(' · '),
+          },
+        ]}
+        keeps={starred ? t.reset.team.keepsStar : undefined}
+        confirmLabel={t.reset.team.confirm}
+        onConfirm={() => resetSquad(squad.id)}
+      />
     </View>
   );
 }

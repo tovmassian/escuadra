@@ -1,0 +1,119 @@
+import { Sheet } from '@/components/Sheet';
+import { useT } from '@/i18n/useT';
+import { borderWidths, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
+import { useThemeColors } from '@/theme/useTheme';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+
+export interface ResetSheetProps {
+  visible: boolean;
+  onClose: () => void;
+  /** Names the sheet `<testID>-sheet`, its close `<testID>-close`, its button `<testID>-confirm`. */
+  testID: string;
+  title: string;
+  line: string;
+  /** The Clears list: a label, and a mono value on the right when there is one. */
+  clears: readonly { label: string; value?: string }[];
+  /** The Keeps line; none when nothing worth saying is kept. */
+  keeps?: string;
+  confirmLabel: string;
+  onConfirm: () => void;
+}
+
+// The confirmation every reset shares (#197): what it clears, what it keeps,
+// and a destructive button. No Cancel: the sheet's ×, the backdrop and
+// Android's back already close it.
+export function ResetSheet({
+  visible,
+  onClose,
+  testID,
+  title,
+  line,
+  clears,
+  keeps,
+  confirmLabel,
+  onConfirm,
+}: ResetSheetProps) {
+  const colors = useThemeColors();
+  const t = useT();
+
+  const styles = StyleSheet.create({
+    line: { ...typography.secondary, color: colors.textSecondary },
+    heading: { ...typography.monoCaption, color: colors.textMuted },
+    section: { gap: spacing.xs },
+    // The rows sit a hairline apart on the sheet's own colour, which draws the divider.
+    card: {
+      borderRadius: radii.md,
+      overflow: 'hidden',
+      gap: borderWidths.hairline,
+      backgroundColor: colors.surface,
+    },
+    row: {
+      flexDirection: 'row',
+      alignItems: 'center',
+      justifyContent: 'space-between',
+      gap: spacing.sm,
+      paddingHorizontal: spacing.md,
+      paddingVertical: spacing.sm,
+      backgroundColor: colors.surfaceRaised,
+    },
+    label: { ...typography.settingsLabel, color: colors.textPrimary, flexShrink: 1 },
+    value: {
+      ...typography.statMonoTiny,
+      color: colors.textSecondary,
+      flexShrink: 1,
+      textAlign: 'right',
+    },
+    keeps: { ...typography.secondarySmall, color: colors.textSecondary },
+    confirm: {
+      minHeight: sizes.cta.normal,
+      paddingVertical: spacing.xs,
+      paddingHorizontal: spacing.md,
+      borderRadius: radii.pill,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: colors.error,
+    },
+    confirmText: { ...typography.ctaLabel, color: colors.dangerOn },
+  });
+
+  return (
+    <Sheet visible={visible} onClose={onClose} title={title} testID={testID}>
+      <Text style={styles.line}>{line}</Text>
+
+      <View style={styles.section}>
+        <Text style={styles.heading} accessibilityRole="header">
+          {t.reset.clears}
+        </Text>
+        <View style={styles.card}>
+          {clears.map((item) => (
+            <View key={item.label} style={styles.row}>
+              <Text style={styles.label}>{item.label}</Text>
+              {item.value ? <Text style={styles.value}>{item.value}</Text> : null}
+            </View>
+          ))}
+        </View>
+      </View>
+
+      {keeps ? (
+        <View style={styles.section}>
+          <Text style={styles.heading} accessibilityRole="header">
+            {t.reset.keeps}
+          </Text>
+          <Text style={styles.keeps}>{keeps}</Text>
+        </View>
+      ) : null}
+
+      <Pressable
+        testID={`${testID}-confirm`}
+        onPress={() => {
+          onConfirm();
+          onClose();
+        }}
+        accessibilityRole="button"
+        style={({ pressed }) => [styles.confirm, pressed && { opacity: opacity.settled }]}
+      >
+        <Text style={styles.confirmText}>{confirmLabel}</Text>
+      </Pressable>
+    </Sheet>
+  );
+}
