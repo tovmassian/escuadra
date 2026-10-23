@@ -530,6 +530,7 @@ describe('launch intro motion', () => {
     skipHint,
     colourBack,
     end,
+    dock,
     fadeOut,
   } = launchIntro;
   const ends = [
@@ -560,6 +561,12 @@ describe('launch intro motion', () => {
   });
 
   it('hands over to Home within about a second and a half', () => {
+    expect(end + dock.duration).toBeLessThanOrEqual(1500);
     expect(end + fadeOut).toBeLessThanOrEqual(1500);
+  });
+
+  it('clears the trail and starts Home rising within the dock', () => {
+    expect(dock.clear).toBeLessThan(dock.duration);
+    expect(dock.contentDelay).toBeLessThan(dock.duration);
   });
 });

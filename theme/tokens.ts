@@ -1096,10 +1096,13 @@ export const launchIntro = {
   tagline: { at: 1000, duration: 200 },
   skipHint: { at: 1040, duration: 160 },
   colourBack: { at: 1000, duration: 200 },
-  // Then the whole intro fades over `fadeOut`, the screen beneath showing
-  // through. Under Reduce Motion the end frame holds until `end` and fades the
-  // same way.
+  // Then the lockup docks into Home's top bar over `dock.duration` (spec,
+  // Hand-off to Home): the trail and tagline clear in `clear`, the ground
+  // fades, the mark and word glide to Home's, and Home's content rises in from
+  // `contentDelay`. The fallbacks (no Home to dock into, Reduce Motion's end
+  // frame held until `end`, a tap) fade the whole intro over `fadeOut` instead.
   end: 1200,
+  dock: { duration: 300, clear: 100, contentDelay: 80 },
   fadeOut: 200,
 } as const;
 

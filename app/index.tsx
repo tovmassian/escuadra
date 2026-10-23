@@ -1,10 +1,12 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
+import Animated, { Extrapolation, interpolate, useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StarGlyph } from '@/components/ActionGlyphs';
 import { HomeContinue } from '@/components/HomeContinue';
 import { HomeSquads } from '@/components/HomeSquads';
+import { useLaunchReveal } from '@/components/LaunchReveal';
 import { NumberWall } from '@/components/NumberWall';
 import { GearGlyph } from '@/components/SettingsGlyphs';
 import { Wordmark } from '@/components/Wordmark';
@@ -13,13 +15,25 @@ import { useLanguage, useT } from '@/i18n/useT';
 import { homeView } from '@/lib/homeView';
 import { listSquads } from '@/lib/squads';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
-import { borderWidths, iconSize, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
+import {
+  borderWidths,
+  iconSize,
+  launchIntro,
+  opacity,
+  radii,
+  sizes,
+  spacing,
+  spotlightMotion,
+  typography,
+} from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 // Home (#181): the number wall drifting behind "KNOW EVERY NUMBER.", then
 // Continue and the starred squads for a returning player, or START TRAINING
 // and the star hint on first run. Spec:
 // docs/superpowers/specs/2026-10-23-number-wall-home-design.md.
+// On a cold launch the intro's lockup docks into the top bar (#182): the gear
+// and the block rise in with the dock's last stretch; the wall is already there.
 export default function Home() {
   const insets = useSafeAreaInsets();
   const colors = useThemeColors();
@@ -32,6 +46,19 @@ export default function Home() {
   const view = homeView({ hydrated, lastPlayed, bestScores, starred, squads: listSquads() });
   const wallTop = insets.top + sizes.roundButton;
   const topFade = wallTop + sizes.home.topFade;
+
+  // At rest whenever the reveal is 1, so a launch without the intro, or any
+  // later visit, shows Home as it is.
+  const reveal = useLaunchReveal()?.reveal;
+  const arriveStyle = useAnimatedStyle(() => {
+    const t = interpolate(
+      reveal ? reveal.value : 1,
+      [launchIntro.dock.contentDelay / launchIntro.dock.duration, 1],
+      [0, 1],
+      Extrapolation.CLAMP,
+    );
+    return { opacity: t, transform: [{ translateY: spotlightMotion.rise * (1 - t) }] };
+  });
 
   const openPicker = () => router.push('/team-picker');
   // Continue and a starred team both open that team's Difficulty, which picks
@@ -73,8 +100,8 @@ export default function Home() {
       backgroundColor: colors.background,
       paddingHorizontal: spacing.lg,
       paddingBottom: insets.bottom + spacing.xl,
-      gap: spacing.md,
     },
+    blockContent: { gap: spacing.md },
     headline: { ...typography.homeHeadline, color: colors.textPrimary, marginBottom: spacing.xxs },
     start: {
       minHeight: sizes.home.start,
@@ -111,52 +138,56 @@ export default function Home() {
 
       <View style={styles.topBar}>
         <Wordmark />
-        <Pressable
-          testID="home-settings"
-          onPress={() => router.push('/settings')}
-          accessibilityRole="button"
-          accessibilityLabel={t.home.settings}
-          style={({ pressed }) => [styles.gear, pressed && { opacity: opacity.settled }]}
-        >
-          <GearGlyph color={colors.textPrimary} ground={colors.surface} />
-        </Pressable>
+        <Animated.View style={arriveStyle}>
+          <Pressable
+            testID="home-settings"
+            onPress={() => router.push('/settings')}
+            accessibilityRole="button"
+            accessibilityLabel={t.home.settings}
+            style={({ pressed }) => [styles.gear, pressed && { opacity: opacity.settled }]}
+          >
+            <GearGlyph color={colors.textPrimary} ground={colors.surface} />
+          </Pressable>
+        </Animated.View>
       </View>
 
       <View style={styles.spacer} />
 
       <LinearGradient colors={[colors.backgroundClear, colors.background]} style={styles.skirt} />
       <View style={styles.block}>
-        <Text style={styles.headline}>{t.home.headline}</Text>
+        <Animated.View style={[styles.blockContent, arriveStyle]}>
+          <Text style={styles.headline}>{t.home.headline}</Text>
 
-        {view.kind === 'returning' && (
-          <HomeContinue
-            data={view.continue}
-            name={squadDisplayName(view.continue.squad, language)}
-            onPress={() => openSquad(view.continue.squad.id)}
-          />
-        )}
-        {view.kind === 'firstRun' && (
-          <Pressable
-            testID="home-start"
-            onPress={openPicker}
-            accessibilityRole="button"
-            accessibilityLabel={t.home.startTraining}
-            style={({ pressed }) => [styles.start, pressed && { opacity: opacity.settled }]}
-          >
-            <Text style={styles.startLabel}>{t.home.startTraining}</Text>
-          </Pressable>
-        )}
+          {view.kind === 'returning' && (
+            <HomeContinue
+              data={view.continue}
+              name={squadDisplayName(view.continue.squad, language)}
+              onPress={() => openSquad(view.continue.squad.id)}
+            />
+          )}
+          {view.kind === 'firstRun' && (
+            <Pressable
+              testID="home-start"
+              onPress={openPicker}
+              accessibilityRole="button"
+              accessibilityLabel={t.home.startTraining}
+              style={({ pressed }) => [styles.start, pressed && { opacity: opacity.settled }]}
+            >
+              <Text style={styles.startLabel}>{t.home.startTraining}</Text>
+            </Pressable>
+          )}
 
-        {view.kind === 'returning' || (view.kind === 'firstRun' && view.starred.length > 0) ? (
-          <HomeSquads squads={view.starred} onOpen={openSquad} onAllTeams={openPicker} />
-        ) : view.kind === 'firstRun' ? (
-          <View style={styles.hint}>
-            <View importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
-              <StarGlyph color={colors.textMuted} filled={false} size={iconSize.starHint} />
+          {view.kind === 'returning' || (view.kind === 'firstRun' && view.starred.length > 0) ? (
+            <HomeSquads squads={view.starred} onOpen={openSquad} onAllTeams={openPicker} />
+          ) : view.kind === 'firstRun' ? (
+            <View style={styles.hint}>
+              <View importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
+                <StarGlyph color={colors.textMuted} filled={false} size={iconSize.starHint} />
+              </View>
+              <Text style={styles.hintText}>{t.home.starHint}</Text>
             </View>
-            <Text style={styles.hintText}>{t.home.starHint}</Text>
-          </View>
-        ) : null}
+          ) : null}
+        </Animated.View>
       </View>
     </View>
   );

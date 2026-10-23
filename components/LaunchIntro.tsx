@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { AccessibilityInfo, Platform, Pressable, StyleSheet, Text, View } from 'react-native';
+import { AccessibilityInfo, Platform, Pressable, StyleSheet, Text, type View } from 'react-native';
 import Animated, {
   Easing,
   interpolate,
@@ -13,11 +13,12 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scheduleOnRN } from 'react-native-worklets';
+import { measureInWindow, useLaunchReveal, type DockTarget } from './LaunchReveal';
 import { useReduceMotion } from './useReduceMotion';
 import { useScreenReader } from './useScreenReader';
 import { A_LA_ESCUADRA, ESCUADRA_WORDMARK } from '@/i18n/names';
 import { useT } from '@/i18n/useT';
-import { introPlan, type IntroPlan } from '@/lib/launchIntro';
+import { dockTransform, introPlan, type DockRect, type IntroPlan } from '@/lib/launchIntro';
 import { MARK_VIEWBOX, markGeometry } from '@/theme/brand';
 import {
   celebrationEasingCurves,
@@ -39,7 +40,10 @@ import { useThemeColors } from '@/theme/useTheme';
 //   3. Goal: frame and ball flash `success`, a ring flashes out from the ball,
 //      the frame kicks up and right.
 //   4. A la escuadra: the colour comes back, the wordmark rises in, the tagline
-//      fades in under it, the skip hint fades out. Then the whole intro fades.
+//      fades in under it, the skip hint fades out.
+// Then the hand-off: the mark and word dock into Home's top-bar lockup as the
+// ground fades and Home rises in (`LaunchReveal`). With no Home to dock into,
+// under Reduce Motion, or on a tap, the whole intro fades instead.
 // Every stop is in `launchIntro` (theme/tokens.ts), the canvas's timeline; the
 // mark is `markGeometry` in plain Views, as `EscuadraMark` draws it. When it
 // plays (once per JS launch, the end frame under Reduce Motion, never with a
@@ -61,12 +65,27 @@ if (Platform.OS !== 'web') {
     .catch(() => {});
 }
 
-// The root fade runs under Reduce Motion too (the `still` plan holds its end
-// frame, then fades): left to Reanimated's default, it would end at once.
-const FADE = { reduceMotion: ReduceMotion.Never } as const;
+/** Whether the intro will show this launch, as the root layout first renders:
+ *  if not, Home starts at rest. A screen reader that answers later is caught
+ *  on mount, which reveals Home then. */
+export function introWillShow(): boolean {
+  return (
+    introPlan({ alreadyShown: shown, screenReader: screenReaderAtLaunch, reduceMotion: false }) !==
+    'none'
+  );
+}
+
+// The timings that end the intro run under Reduce Motion too (the `still`
+// plan holds its end frame, then fades): left to Reanimated's default, they
+// would end at once.
+const ENDING = { reduceMotion: ReduceMotion.Never } as const;
+
+type Move = ReturnType<typeof dockTransform>;
+const AT_REST: Move = { translateX: 0, translateY: 0, scale: 1 };
 
 export function LaunchIntro({ onDone }: { onDone: () => void }) {
   const colors = useThemeColors();
+  const launch = useLaunchReveal();
   const t = useT();
   const insets = useSafeAreaInsets();
   const reduceMotion = useReduceMotion();
@@ -92,7 +111,10 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
     doneRef.current = true;
     onDoneRef.current();
   };
-  const skippingRef = useRef(false);
+  // It ends once, by the timeline or a tap, whichever comes first.
+  const endingRef = useRef(false);
+  const markRef = useRef<View>(null);
+  const wordRef = useRef<View>(null);
 
   // One value per layer, each run between its own stops. `still` starts every
   // one at its end-frame state.
@@ -108,6 +130,62 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   const tagline = useSharedValue(still ? 1 : 0);
   const skipHint = useSharedValue(still ? 0 : 1);
   const fade = useSharedValue(1);
+  // The dock: the ground, and the trail and tagline as they clear, run 1 → 0;
+  // the glide runs 0 → 1 along `move`, set as it starts.
+  const ground = useSharedValue(1);
+  const clear = useSharedValue(1);
+  const glide = useSharedValue(0);
+  const move = useSharedValue<{ mark: Move; word: Move }>({ mark: AT_REST, word: AT_REST });
+
+  // Fades the whole intro, with Home already at rest beneath it.
+  const fadeOut = (duration: number) => {
+    launch?.reveal.set(1);
+    fade.set(
+      withTiming(0, { duration, ...ENDING }, (finished) => {
+        if (finished) scheduleOnRN(finish);
+      }),
+    );
+  };
+
+  const dockInto = (target: DockTarget, markBox: DockRect, wordBox: DockRect) => {
+    const { duration } = launchIntro.dock;
+    const linear = { duration, easing: Easing.linear, ...ENDING };
+    move.set({
+      mark: dockTransform(markBox, target.mark),
+      word: dockTransform(wordBox, target.word),
+    });
+    clear.set(withTiming(0, { ...linear, duration: launchIntro.dock.clear }));
+    ground.set(withTiming(0, linear));
+    launch?.reveal.set(withTiming(1, linear));
+    glide.set(
+      withTiming(
+        1,
+        { duration, easing: Easing.bezier(...celebrationEasingCurves.rise), ...ENDING },
+        (finished) => {
+          if (finished) scheduleOnRN(finish);
+        },
+      ),
+    );
+  };
+
+  // At `end`: dock into Home's lockup when the strike played and Home has
+  // reported where it is; otherwise fade.
+  const end = () => {
+    if (endingRef.current) return;
+    endingRef.current = true;
+    const target = launch?.target() ?? null;
+    if (plan !== 'play' || !target) {
+      fadeOut(launchIntro.fadeOut);
+      return;
+    }
+    void Promise.all([measureInWindow(markRef.current), measureInWindow(wordRef.current)]).then(
+      ([markBox, wordBox]) => {
+        if (doneRef.current) return;
+        if (markBox && wordBox) dockInto(target, markBox, wordBox);
+        else fadeOut(launchIntro.fadeOut);
+      },
+    );
+  };
 
   useEffect(() => {
     shown = true;
@@ -115,6 +193,7 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
       finish();
       return;
     }
+    const timer = setTimeout(end, launchIntro.end);
     const easeOut = Easing.out(Easing.ease);
     if (plan === 'play') {
       const { ballIn: inT, flight, trail, flash, ring, colourBack, wordmark } = launchIntro;
@@ -186,15 +265,7 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
         ),
       );
     }
-    fade.set(
-      withDelay(
-        launchIntro.end,
-        withTiming(0, { duration: launchIntro.fadeOut, ...FADE }, (finished) => {
-          if (finished) scheduleOnRN(finish);
-        }),
-        FADE.reduceMotion,
-      ),
-    );
+    return () => clearTimeout(timer);
     // Plays once, on mount.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
@@ -205,21 +276,33 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   }, [screenReader]);
 
   const skip = () => {
-    if (skippingRef.current) return;
-    skippingRef.current = true;
-    fade.set(
-      withTiming(0, { duration: durations.transition, ...FADE }, (finished) => {
-        if (finished) scheduleOnRN(finish);
-      }),
-    );
+    if (endingRef.current) return;
+    endingRef.current = true;
+    fadeOut(durations.transition);
   };
 
   const u = sizes.introMark / MARK_VIEWBOX;
   // 200 dp is far over `MARK_SMALL_BALL_THRESHOLD`: the large ball.
-  const { crossbar, post, ball, trail } = markGeometry;
+  const { crossbar, post, ball, ballSmall, trail } = markGeometry;
   const { mark, success } = colors;
 
   const rootStyle = useAnimatedStyle(() => ({ opacity: fade.value }));
+  const groundStyle = useAnimatedStyle(() => ({ opacity: ground.value }));
+  // Each end of the glide scales about its own centre (`dockTransform`).
+  const markDockStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: move.value.mark.translateX * glide.value },
+      { translateY: move.value.mark.translateY * glide.value },
+      { scale: 1 + (move.value.mark.scale - 1) * glide.value },
+    ],
+  }));
+  const wordDockStyle = useAnimatedStyle(() => ({
+    transform: [
+      { translateX: move.value.word.translateX * glide.value },
+      { translateY: move.value.word.translateY * glide.value },
+      { scale: 1 + (move.value.word.scale - 1) * glide.value },
+    ],
+  }));
   const frameStyle = useAnimatedStyle(() => ({
     transform: [
       { translateX: launchIntro.kick.offset * u * kick.value },
@@ -229,13 +312,22 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   const barStyle = useAnimatedStyle(() => ({
     backgroundColor: interpolateColor(goal.value, [0, 1], [mark, success]),
   }));
+  // Docking, the ball becomes `ballSmall`, as Home's small mark draws it.
   const ballStyle = useAnimatedStyle(() => ({
     opacity: ballIn.value,
     backgroundColor: interpolateColor(goal.value, [0, 1], [mark, success]),
     transform: [
-      { translateX: launchIntro.flight.from.x * u * (1 - flyX.value) },
+      {
+        translateX:
+          launchIntro.flight.from.x * u * (1 - flyX.value) +
+          (ballSmall.cx - ball.cx) * u * glide.value,
+      },
       { translateY: launchIntro.flight.from.y * u * (1 - flyY.value) },
-      { scale: 1 + (launchIntro.flight.scale - 1) * (1 - flyX.value) },
+      {
+        scale:
+          (1 + (launchIntro.flight.scale - 1) * (1 - flyX.value)) *
+          (1 + (ballSmall.r / ball.r - 1) * glide.value),
+      },
     ],
   }));
   const ringStyle = useAnimatedStyle(() => ({
@@ -246,16 +338,16 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
     ],
   }));
   const trailNearStyle = useAnimatedStyle(() => ({
-    opacity: trailNear.value * markGeometry.trail[0].opacity,
+    opacity: trailNear.value * clear.value * markGeometry.trail[0].opacity,
   }));
   const trailFarStyle = useAnimatedStyle(() => ({
-    opacity: trailFar.value * markGeometry.trail[1].opacity,
+    opacity: trailFar.value * clear.value * markGeometry.trail[1].opacity,
   }));
   const wordStyle = useAnimatedStyle(() => ({
     opacity: word.value,
     transform: [{ translateY: launchIntro.wordmark.rise * (1 - word.value) }],
   }));
-  const taglineStyle = useAnimatedStyle(() => ({ opacity: tagline.value }));
+  const taglineStyle = useAnimatedStyle(() => ({ opacity: tagline.value * clear.value }));
   const skipStyle = useAnimatedStyle(() => ({ opacity: skipHint.value }));
 
   if (plan === 'none') return null;
@@ -271,24 +363,28 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   // the home indicator: just over the inset, never nearer the edge than that.
   const skipBottom = Math.max(insets.bottom + spacing.xs, spacing.xxxl);
   const themed = StyleSheet.create({
-    root: { backgroundColor: colors.background },
+    ground: { backgroundColor: colors.background },
     ring: { borderWidth: launchIntro.ring.stroke * u, borderColor: colors.success },
     trail: { backgroundColor: colors.mark },
-    word: { ...typography.introWordmark, color: colors.textPrimary, marginTop: spacing.xxl },
+    word: { ...typography.introWordmark, color: colors.textPrimary },
     tagline: { ...typography.introTagline, color: colors.textMuted, marginTop: spacing.sm },
     skip: { ...typography.introSkip, color: colors.textMuted },
   });
 
+  // The ground is its own layer, so it can fade alone as the lockup docks. The
+  // Pressable over it fills the screen and takes every tap until the intro
+  // unmounts, so Home gets none mid-dock.
   return (
     <Animated.View
       testID="launch-intro"
       accessible={false}
       importantForAccessibility="no-hide-descendants"
       accessibilityElementsHidden
-      style={[StyleSheet.absoluteFill, themed.root, rootStyle]}
+      style={[StyleSheet.absoluteFill, rootStyle]}
     >
+      <Animated.View style={[StyleSheet.absoluteFill, themed.ground, groundStyle]} />
       <Pressable style={styles.fill} onPress={skip}>
-        <View style={{ width: sizes.introMark, height: sizes.introMark }}>
+        <Animated.View ref={markRef} style={[styles.mark, markDockStyle]}>
           <Animated.View style={[StyleSheet.absoluteFill, frameStyle]}>
             <Animated.View
               style={[
@@ -331,13 +427,15 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
             style={[styles.piece, ballBox, themed.ring, ringStyle]}
           />
           <Animated.View style={[styles.piece, ballBox, ballStyle]} />
-        </View>
-        <Animated.Text
-          style={[themed.word, wordStyle]}
-          maxFontSizeMultiplier={fontScaleCap.display}
-        >
-          {ESCUADRA_WORDMARK}
-        </Animated.Text>
+        </Animated.View>
+        <Animated.View ref={wordRef} style={[styles.word, wordDockStyle]}>
+          <Animated.Text
+            style={[themed.word, wordStyle]}
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
+            {ESCUADRA_WORDMARK}
+          </Animated.Text>
+        </Animated.View>
         <Animated.Text
           style={[themed.tagline, taglineStyle]}
           maxFontSizeMultiplier={fontScaleCap.display}
@@ -356,6 +454,8 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
 
 const styles = StyleSheet.create({
   fill: { flex: 1, alignItems: 'center', justifyContent: 'center' },
+  mark: { width: sizes.introMark, height: sizes.introMark },
+  word: { marginTop: spacing.xxl },
   piece: { position: 'absolute' },
   foot: { position: 'absolute', left: 0, right: 0, alignItems: 'center' },
 });

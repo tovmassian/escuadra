@@ -7,7 +7,8 @@ import { useEffect, useState } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-reanimated';
 
-import { LaunchIntro } from '@/components/LaunchIntro';
+import { introWillShow, LaunchIntro } from '@/components/LaunchIntro';
+import { LaunchRevealProvider, useLaunchRevealState } from '@/components/LaunchReveal';
 import { launchLanguage } from '@/i18n/useT';
 import { track } from '@/lib/telemetry';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
@@ -22,6 +23,16 @@ export default function RootLayout() {
   const themeName = useThemeName();
   const colors = useThemeColors();
   const [introDone, setIntroDone] = useState(false);
+  // The intro's hand-off to Home (#182): Home rests at once when the intro
+  // will not show this launch, and waits for its dock when it will.
+  const [revealed] = useState(() => !introWillShow());
+  const launchReveal = useLaunchRevealState(revealed);
+  // However the intro ends (its dock, a fade, or at once for a screen reader),
+  // Home is at rest once it has gone.
+  const endIntro = () => {
+    launchReveal.reveal.set(1);
+    setIntroDone(true);
+  };
 
   // Hold the splash until the type is ready, otherwise the first frame renders
   // in the system font and visibly reflows — and until the persisted
@@ -65,13 +76,15 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <ThemeProvider value={navTheme}>
-        <Stack
-          screenOptions={{
-            headerShown: false,
-            contentStyle: { backgroundColor: colors.background },
-          }}
-        />
-        {!introDone && <LaunchIntro onDone={() => setIntroDone(true)} />}
+        <LaunchRevealProvider value={launchReveal}>
+          <Stack
+            screenOptions={{
+              headerShown: false,
+              contentStyle: { backgroundColor: colors.background },
+            }}
+          />
+          {!introDone && <LaunchIntro onDone={endIntro} />}
+        </LaunchRevealProvider>
         <StatusBar style={isDark ? 'light' : 'dark'} />
       </ThemeProvider>
     </SafeAreaProvider>
