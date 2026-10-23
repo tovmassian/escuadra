@@ -341,7 +341,7 @@ describe('Archivo display type', () => {
     const archivo = Object.entries(typography).filter(([, style]) =>
       style.fontFamily.startsWith('Archivo-'),
     );
-    expect(archivo).toHaveLength(34);
+    expect(archivo).toHaveLength(36);
     for (const [name, style] of archivo) {
       expect(style, name).not.toHaveProperty('fontWeight');
     }
@@ -576,5 +576,24 @@ describe('launch intro motion', () => {
   it('gives up measuring within a few frames, well before a fade would be late', () => {
     expect(dock.measureTimeout).toBeGreaterThan(0);
     expect(dock.measureTimeout).toBeLessThan(dock.duration);
+  });
+});
+
+describe('how to play tips (#183)', () => {
+  // A tip's text sits on the backing, over the scrim, over whatever the screen
+  // shows. The worst case under the scrim is the ground's opposite: white in dark,
+  // black in light.
+  const worst = { dark: '#ffffff', light: '#000000' } as const;
+
+  it.each(['dark', 'light'] as const)('%s: the tip text holds AA over its worst ground', (name) => {
+    const p = palettes[name];
+    const under = blend(p.tipBacking, blend(p.tipScrim, worst[name]));
+    for (const role of ['textPrimary', 'tipBody', 'accentLine'] as const) {
+      expect(contrastRatio(p[role], under), `${name}.${role}`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
+  it('keeps the fade under the motion rule', () => {
+    expect(durations.tipFade).toBeLessThan(300);
   });
 });

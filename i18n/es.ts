@@ -57,6 +57,50 @@ export const es: Messages = {
     allTeams: 'Todos los equipos',
     starHint: 'Marca un equipo con la estrella y te esperará aquí.',
   },
+  tips: {
+    // "Cómo jugar", as game menus say; About's stored list names the tips
+    // ("consejos") the same way.
+    kicker: (step: number, count: number) => `Cómo jugar · ${step}/${count}`,
+    spoken: (step: number, count: number) => `Cómo jugar, consejo ${step} de ${count}`,
+    next: 'Siguiente',
+    gotIt: 'Entendido',
+    // "Omitir consejos" is 15 chars against 14; Siguiente already moves one tip on.
+    skip: 'Omitir',
+    picker: {
+      switch: {
+        heading: 'Clubes o selecciones',
+        body: 'Cambia aquí y luego filtra por liga o por confederación.',
+      },
+      pick: {
+        heading: 'Elige un equipo',
+        body: 'Toca un equipo para ver sus niveles y empezar.',
+      },
+    },
+    difficulty: {
+      start: {
+        heading: 'Empieza aquí',
+        body: 'Ves un dorsal y algunas pistas, y eliges el nombre. Consigue 8/10 para desbloquear el nivel 2.',
+      },
+      star: {
+        heading: 'Hazlo tuyo',
+        body: 'Marca un equipo con la estrella y te esperará en la pantalla principal de la app.',
+      },
+      study: {
+        heading: 'O repasa antes',
+        body: 'Recorre toda la plantilla y activa “Sin nombres” para ponerte a prueba.',
+      },
+    },
+    study: {
+      hide: {
+        heading: 'Ponte a prueba',
+        body: 'Activa “Sin nombres” y toca una tarjeta para ver si lo sabías.',
+      },
+      positions: {
+        heading: 'Posición a posición',
+        body: 'Aprende primero los porteros y luego la defensa, el centro del campo y la delantera.',
+      },
+    },
+  },
   languageSheet: {
     title: 'Idioma',
     // Under the title "Idioma": follow the phone. "Idioma del teléfono ·
@@ -417,8 +461,8 @@ export const es: Messages = {
         {
           heading: 'Qué se guarda en tu dispositivo',
           paragraphs: [
-            `${ESCUADRA} guarda diez datos localmente, en tu dispositivo: tu récord en cada equipo y nivel de dificultad, a partir del cual la aplicación deduce qué niveles has superado; el último equipo y nivel que has jugado; los equipos que has marcado con una estrella; tu preferencia de tema claro u oscuro; tu elección de idioma; si la vibración está activada; si la pantalla “Plantilla” muestra tarjetas o una lista; qué versión de la aplicación ha pedido por última vez a tu teléfono que muestre una invitación a valorarla; tu elección sobre las estadísticas de uso; y el identificador aleatorio que usan esas estadísticas. La comprobación de actualizaciones de la aplicación también guarda su propio identificador aleatorio en tu dispositivo.`,
-            `Estos datos se guardan en el almacenamiento privado de la propia aplicación. ${ESCUADRA}, por sí misma, solo envía dos de esos diez datos fuera de tu dispositivo, y solo mientras las estadísticas de uso están activadas: el identificador, que se envía en forma de hash con cada estadística, y tu elección de idioma, que se incluye en la estadística que se envía al abrir la aplicación. Al eliminar la aplicación, se borran todos ellos de tu dispositivo, junto con las fotos que haya en caché. ${ESCUADRA} no tiene copia de seguridad ni sincronización propias, pero las copias de seguridad de tu dispositivo (en iOS, en iCloud o en un ordenador; en Android, en Google) pueden incluir estos datos. El desarrollador no tiene acceso a este almacenamiento.`,
+            `${ESCUADRA} guarda once datos localmente, en tu dispositivo: tu récord en cada equipo y nivel de dificultad, a partir del cual la aplicación deduce qué niveles has superado; el último equipo y nivel que has jugado; los equipos que has marcado con una estrella; tu preferencia de tema claro u oscuro; tu elección de idioma; si la vibración está activada; si la pantalla “Plantilla” muestra tarjetas o una lista; qué pantallas te han mostrado ya sus consejos de “Cómo jugar” y si los has omitido; qué versión de la aplicación ha pedido por última vez a tu teléfono que muestre una invitación a valorarla; tu elección sobre las estadísticas de uso; y el identificador aleatorio que usan esas estadísticas. La comprobación de actualizaciones de la aplicación también guarda su propio identificador aleatorio en tu dispositivo.`,
+            `Estos datos se guardan en el almacenamiento privado de la propia aplicación. ${ESCUADRA}, por sí misma, solo envía dos de esos once datos fuera de tu dispositivo, y solo mientras las estadísticas de uso están activadas: el identificador, que se envía en forma de hash con cada estadística, y tu elección de idioma, que se incluye en la estadística que se envía al abrir la aplicación. Al eliminar la aplicación, se borran todos ellos de tu dispositivo, junto con las fotos que haya en caché. ${ESCUADRA} no tiene copia de seguridad ni sincronización propias, pero las copias de seguridad de tu dispositivo (en iOS, en iCloud o en un ordenador; en Android, en Google) pueden incluir estos datos. El desarrollador no tiene acceso a este almacenamiento.`,
           ],
         },
         {

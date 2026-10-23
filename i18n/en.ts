@@ -76,6 +76,48 @@ export const en = {
     /** ≤ 52 chars: first run's hint under Start Training, beside a star. */
     starHint: 'Star a team and it waits for you here.',
   },
+  tips: {
+    /** ≤ 22 chars: over each tip, in mono capitals. */
+    kicker: (step: number, count: number) => `How to play · ${step}/${count}`,
+    /** A tip's spoken name, as a dialog. */
+    spoken: (step: number, count: number) => `How to play, tip ${step} of ${count}`,
+    /** ≤ 10 chars: the button to the next tip, in display capitals. */
+    next: 'Next',
+    /** ≤ 12 chars: the last tip's button, in display capitals. */
+    gotIt: 'Got it',
+    /** ≤ 14 chars: the pill at the top left that ends every screen's tips. */
+    skip: 'Skip tips',
+    // Each tip's heading is ≤ 32 chars, in display capitals, and may wrap to
+    // two lines; its body is ≤ 120 chars.
+    picker: {
+      switch: {
+        heading: 'Clubs or nations',
+        body: 'Switch here, then narrow it down by league or confederation.',
+      },
+      pick: { heading: 'Pick a squad', body: 'Tap any team to see its levels and start.' },
+    },
+    difficulty: {
+      start: {
+        heading: 'Start here',
+        body: 'You get a shirt number and a few clues, and pick the name. Score 8/10 to unlock level 2.',
+      },
+      star: { heading: 'Make it yours', body: 'Star a team and it waits for you on Home.' },
+      study: {
+        heading: 'Or study first',
+        body: 'Browse the whole squad. Hide the names to test yourself.',
+      },
+    },
+    study: {
+      hide: {
+        heading: 'Test yourself',
+        body: 'Hide the names, then tap a card to check yourself.',
+      },
+      positions: {
+        heading: 'One position at a time',
+        body: 'Learn the keepers, then the defence, the midfield and the attack.',
+      },
+    },
+  },
   languageSheet: {
     /** ≤ 16 chars: the sheet's title. */
     title: 'Language',
@@ -490,8 +532,8 @@ export const en = {
         {
           heading: 'What is stored on your device',
           paragraphs: [
-            `${ESCUADRA} saves ten things locally, on your device: your best score for each team and difficulty level, from which it works out which levels you have completed; the last team and level you played; the teams you have starred; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; which app version last asked your phone to show a rating prompt; your choice about usage statistics; and the random identifier those statistics use. The app-update check also keeps its own random identifier on your device.`,
-            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of those ten things off your device, and only while usage statistics are on: the identifier, which is sent in hashed form with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
+            `${ESCUADRA} saves eleven things locally, on your device: your best score for each team and difficulty level, from which it works out which levels you have completed; the last team and level you played; the teams you have starred; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; which screens have shown you their How to play tips, and whether you skipped them; which app version last asked your phone to show a rating prompt; your choice about usage statistics; and the random identifier those statistics use. The app-update check also keeps its own random identifier on your device.`,
+            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of those eleven things off your device, and only while usage statistics are on: the identifier, which is sent in hashed form with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
           ],
         },
         {

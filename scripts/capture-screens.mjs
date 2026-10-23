@@ -463,6 +463,41 @@ async function seedStarred(capture, squadIds) {
 }
 
 /**
+ * Mark the How to play tips (#183) skipped in the persisted progress store, as a tap on
+ * Skip tips would. Like `seedStarred`, it writes localStorage only, for the next
+ * `capture.open` to rehydrate.
+ */
+async function seedTipsSkipped(capture) {
+  await capture.page.evaluate(() => {
+    const key = 'escuadra-progress';
+    let stored = null;
+    try {
+      stored = JSON.parse(localStorage.getItem(key) ?? 'null');
+    } catch {
+      stored = null;
+    }
+    const next = stored ?? { state: {}, version: 1 };
+    next.state = { ...next.state, tipsSkipped: true };
+    localStorage.setItem(key, JSON.stringify(next));
+  });
+}
+
+/**
+ * One screen's How to play steps (#183): open it, then shoot each step and tap Next to the
+ * following one. The layer fades in over `REVEAL_MS`, which `shoot` also waits out, but
+ * waiting here first keeps a slow layer from being shot half-drawn.
+ */
+async function captureTips(capture, path, base, steps) {
+  await capture.open(path);
+  for (let step = 1; step <= steps; step += 1) {
+    await capture.page.getByTestId('tips-layer').waitFor({ state: 'visible' });
+    await capture.page.waitForTimeout(REVEAL_MS);
+    await capture.shoot(`${base}-tip-${step}`);
+    if (step < steps) await capture.tapId('tip-next');
+  }
+}
+
+/**
  * Set the last team and level a round was started for, as Home's Continue
  * reads it (#181). Like `seedBestScores`, it writes localStorage only, for the
  * next `capture.open` to rehydrate.
@@ -557,6 +592,17 @@ async function captureTheme(browser, colorScheme, suffix) {
     await shootLaunchIntro(capture);
     await openHomeStill(capture);
     await capture.shoot('01-home');
+
+    // How to play (#183) shows once per screen on first open, so the tips are shot now,
+    // on this fresh page, before anything else visits the picker, Difficulty or Study;
+    // only for the design handoff, as a tip is not a listing shot. Then, in every
+    // profile, they are marked skipped, as Skip tips would, so no later shot shows one.
+    if (PROFILE === PROFILES.design) {
+      await captureTips(capture, '/team-picker', '02c-team-picker', 2);
+      await captureTips(capture, '/team/rma/difficulty', '04f-difficulty', 3);
+      await captureTips(capture, '/team/int/study', '05b-study', 2);
+    }
+    await seedTipsSkipped(capture);
 
     await capture.open('/settings');
     await capture.shoot('01c-settings');

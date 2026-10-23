@@ -4,6 +4,8 @@ import { PickerPill } from '@/components/PickerPill';
 import { RoundBackButton } from '@/components/RoundBackButton';
 import { SearchField } from '@/components/SearchField';
 import { TeamRow } from '@/components/TeamRow';
+import { TipsLayer } from '@/components/TipsLayer';
+import { useTips } from '@/components/useTips';
 import { YourSquads } from '@/components/YourSquads';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
@@ -25,7 +27,7 @@ import {
 import { listSquads } from '@/lib/squads';
 import { starredOfKind } from '@/lib/starred';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
-import { sizes, spacing, typography } from '@/theme/tokens';
+import { radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { SquadManifestEntry } from '@/types/squad';
 import { router } from 'expo-router';
@@ -58,6 +60,10 @@ export default function TeamPicker() {
   const [query, setQuery] = useState('');
   const [current, setCurrent] = useState<string | null>(null);
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
+  // How to play (#183): the tabs and pills, then the first row.
+  const tips = useTips('picker');
+  const switchRef = useRef<View>(null);
+  const firstRowRef = useRef<View>(null);
 
   const squads = listSquads();
   const names = useMemo<SquadNames>(
@@ -213,6 +219,8 @@ export default function TeamPicker() {
     root: { flex: 1, backgroundColor: colors.background },
     content: { paddingHorizontal: spacing.lg },
     header: { gap: spacing.md + 2, marginBottom: spacing.md + 2 },
+    // The tabs and pills, together for the first tip, at the header's own gap.
+    switch: { gap: spacing.md + 2 },
     topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
     count: { ...typography.monoCaption, color: colors.textMuted },
     title: { ...typography.displayTitle, color: colors.textPrimary },
@@ -259,9 +267,11 @@ export default function TeamPicker() {
     },
   });
 
-  const row = (item: SquadManifestEntry, card?: { last: boolean }) => (
+  // `first`: the row the second tip rings.
+  const row = (item: SquadManifestEntry, card?: { last: boolean }, first = false) => (
     <TeamRow
       key={item.id}
+      ref={first ? firstRowRef : undefined}
       variant={card ? 'card' : 'list'}
       last={card?.last}
       name={squadDisplayName(item, language)}
@@ -287,6 +297,7 @@ export default function TeamPicker() {
       <Animated.ScrollView
         ref={scrollRef}
         testID="picker-list"
+        {...tips.contentA11y}
         keyboardShouldPersistTaps="handled"
         scrollEventThrottle={16}
         onScroll={onScroll}
@@ -308,41 +319,43 @@ export default function TeamPicker() {
             {t.picker.title}
           </Text>
           <SearchField value={query} onChange={changeQuery} onClear={() => changeQuery('')} />
-          <KindTabs value={filter} counts={counts} onChange={changeKind} />
-          <ScrollView
-            key={filter}
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            keyboardShouldPersistTaps="handled"
-            style={styles.pillTrack}
-            contentContainerStyle={styles.pillRow}
-          >
-            {filter === 'club'
-              ? leagues.map((l) => (
-                  <PickerPill
-                    key={l}
-                    testID={`league-${l}`}
-                    label={leagueLabel(l, t)}
-                    active={league === l}
-                    onPress={() => setLeague(l)}
-                  />
-                ))
-              : confederations.map((c) => (
-                  <PickerPill
-                    key={c}
-                    testID={`confederation-${c}`}
-                    label={confederationLabel(c, t)}
-                    spokenLabel={confederationSpoken(c, t)}
-                    active={confederation === c}
-                    onPress={() => changeConfederation(c)}
-                  />
-                ))}
-          </ScrollView>
+          <View ref={switchRef} collapsable={false} style={styles.switch}>
+            <KindTabs value={filter} counts={counts} onChange={changeKind} />
+            <ScrollView
+              key={filter}
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              keyboardShouldPersistTaps="handled"
+              style={styles.pillTrack}
+              contentContainerStyle={styles.pillRow}
+            >
+              {filter === 'club'
+                ? leagues.map((l) => (
+                    <PickerPill
+                      key={l}
+                      testID={`league-${l}`}
+                      label={leagueLabel(l, t)}
+                      active={league === l}
+                      onPress={() => setLeague(l)}
+                    />
+                  ))
+                : confederations.map((c) => (
+                    <PickerPill
+                      key={c}
+                      testID={`confederation-${c}`}
+                      label={confederationLabel(c, t)}
+                      spokenLabel={confederationSpoken(c, t)}
+                      active={confederation === c}
+                      onPress={() => changeConfederation(c)}
+                    />
+                  ))}
+            </ScrollView>
+          </View>
         </View>
 
         {starred.length > 0 && (
           <YourSquads>
-            {starred.map((item, i) => row(item, { last: i === starred.length - 1 }))}
+            {starred.map((item, i) => row(item, { last: i === starred.length - 1 }, i === 0))}
           </YourSquads>
         )}
 
@@ -354,7 +367,7 @@ export default function TeamPicker() {
                 clubs.length,
               )}
             </Text>
-            {clubs.map((item) => row(item))}
+            {clubs.map((item, i) => row(item, undefined, starred.length === 0 && i === 0))}
           </View>
         )}
 
@@ -412,7 +425,7 @@ export default function TeamPicker() {
       </Animated.ScrollView>
 
       {showRail && listTop !== null && rootHeight > 0 && (
-        <Animated.View style={[styles.railFrame, railShift]}>
+        <Animated.View style={[styles.railFrame, railShift]} {...tips.contentA11y}>
           <LetterRail
             letters={letters}
             current={shownLetter}
@@ -420,6 +433,21 @@ export default function TeamPicker() {
             onTouch={onRailTouch}
           />
         </Animated.View>
+      )}
+
+      {tips.open && (
+        <TipsLayer
+          tips={[
+            { target: switchRef, radius: radii.xl, ...t.tips.picker.switch },
+            { target: firstRowRef, radius: radii.lg, ...t.tips.picker.pick },
+          ]}
+          onClose={tips.close}
+          onSkip={tips.skip}
+          onShown={tips.onShown}
+          scrollBy={(dy) =>
+            scrollRef.current?.scrollTo({ y: Math.max(0, scrollY.get() + dy), animated: false })
+          }
+        />
       )}
     </View>
   );
