@@ -1300,7 +1300,9 @@ export const sizes = {
 // margin; how far below the safe area the tip stays, clear of Skip tips (Skip's
 // top margin and height, and a gap); how long the first measure may wait for a
 // pushed screen to settle; Skip's height; the step dots; and the blur and
-// spread of the backing's soft edge.
+// spread of the backing's soft edge. `stack` is the space between the tip's
+// lines, `dotGap` between its dots, and `buttonPad` Next's side padding, as the
+// canvas sets them.
 export const tips = {
   gap: 5,
   ring: 2,
@@ -1314,6 +1316,9 @@ export const tips = {
   skipHeight: 40,
   dot: 6,
   dotActive: 18,
+  dotGap: 6,
+  stack: 10,
+  buttonPad: 22,
   backingBlur: 30,
   backingSpread: 32,
 } as const;

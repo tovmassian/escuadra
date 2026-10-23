@@ -44,6 +44,14 @@ describe('placeTip', () => {
     expect(p.hole).toEqual({ x: 15, y: 375, width: 360, height: 66, radius: 33 });
   });
 
+  it('cuts the scrim at the target itself, so the gap to the ring stays dark', () => {
+    const p = placeTip(
+      { target: play, radius: 999, screen: SCREEN, insets: INSETS, tipHeight: 150 },
+      G,
+    );
+    expect(p.cut).toEqual({ x: 20, y: 380, width: 350, height: 56, radius: 28 });
+  });
+
   it('rings the hole one stroke-centre further out', () => {
     const p = placeTip(
       { target: play, radius: 999, screen: SCREEN, insets: INSETS, tipHeight: 150 },

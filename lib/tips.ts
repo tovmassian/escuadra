@@ -16,7 +16,8 @@ export interface RoundedBox extends Box {
 }
 
 export interface TipGeometry {
-  /** Between the target and the scrim's cut-out. */
+  /** Between the target and the ring: the `hole`'s outset, which the layer
+   *  leaves dark (it cuts the scrim at `cut`). */
   gap: number;
   /** The ring's stroke, drawn just outside the cut-out. */
   ring: number;
@@ -41,6 +42,9 @@ export interface PlaceInput {
 }
 
 export interface TipPlacement {
+  /** The target itself, on screen: where the scrim is cut, so the gap between
+   *  it and the ring stays dark, as the canvas draws it. */
+  cut: RoundedBox;
   hole: RoundedBox;
   ring: RoundedBox;
   side: 'below' | 'above';
@@ -76,16 +80,17 @@ function onScreen(target: Box, width: number, inset: number): Box {
 
 function ringOf(input: Omit<PlaceInput, 'tipHeight'>, g: TipGeometry) {
   const target = onScreen(input.target, input.screen.width, g.gap);
+  const cut = outset(target, 0, input.radius);
   const hole = outset(target, g.gap, input.radius);
   const ring = outset(target, g.gap + g.ring / 2, input.radius);
-  return { target, hole, ring };
+  return { target, cut, hole, ring };
 }
 
 const clamp = (v: number, min: number, max: number) => Math.min(Math.max(v, min), max);
 
 export function placeTip(input: PlaceInput, g: TipGeometry): TipPlacement {
   const { screen, insets, tipHeight } = input;
-  const { target, hole, ring } = ringOf(input, g);
+  const { target, cut, hole, ring } = ringOf(input, g);
   const top = insets.top + g.skipClear;
   const bottom = screen.height - insets.bottom - g.gutter;
 
@@ -113,6 +118,7 @@ export function placeTip(input: PlaceInput, g: TipGeometry): TipPlacement {
     : clamp(target.x + g.gutter, g.gutter, maxX);
 
   return {
+    cut,
     hole,
     ring,
     side,
