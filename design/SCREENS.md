@@ -94,7 +94,7 @@ flawless — see below). Route, file, and what it does.
 
 | #   | Route                             | File                                     | Purpose                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      |
 | --- | --------------------------------- | ---------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | `/`                               | `app/index.tsx`                          | Home. Centred, stacked wordmark lockup as the headline, continue-card for the last played team, Start Training. A gear at the top right opens Settings; Home has no About link, language chip or theme toggle.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               |
+| 1   | `/`                               | `app/index.tsx`                          | Home (#181). The number wall: four rows of outlined shirt numbers drifting in alternate directions (still under Reduce Motion), under the top bar's mark, wordmark and Settings gear. 'KNOW EVERY NUMBER.', then for a returning player Continue (flag or marker, CONTINUE {TEAM}, LEVEL n · BEST x/10 with OUTDATED when it is, a play circle; it starts the round) and a row of starred teams as round buttons with All teams ›; on first run START TRAINING to the picker and the star hint.                                                                                                                                                                                                                                              |
 | 2   | `/about`                          | `app/about.tsx`                          | About. Legal/attribution copy, data and image credits, with a Licences row that opens the Licences page, and the privacy section (photos, usage statistics, updates). No switches and no version line: both are on Settings.                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                 |
 | 3   | `/team-picker`                    | `app/team-picker.tsx`                    | Team picker, one scrolling page: a round back button and the squad count, `PICK YOUR SQUAD`, a search field, Clubs / Nations tabs with their counts, and league pills on Clubs and confederation pills on Nations. Clubs are a plain A–Z list under a mono caption (`ALL CLUBS · 96`); Nations are grouped under big letter headings, with the caption `ALL NATIONS · A–Z` beside the first letter and a letter rail on the right edge. A row is the marker, the name, and either `LEVEL n` over the best score (`7/10`, green at 10/10) or a chevron when not played. Above either list, `YOUR SQUADS`: the tab's starred teams in a card, newest first, whatever pill is picked, hidden while a search is typed.                           |
 | 4   | `/team/[squadId]/difficulty`      | `app/team/[squadId]/difficulty.tsx`      | Difficulty. The team's bands full bleed under a veil, with back and the Your squads star (outlined, filled once starred), the flag or marker, the name, and a mono line (league or NATIONAL TEAM · season · players). THE LADDER: cleared levels compact with their best (A LA ESCUADRA at 10/10, else CLEARED), the focused level a card with the escuadra corner, its best or NOT PLAYED YET, the description and PLAY LEVEL n, locked levels with SCORE 8/10 ON Ln. A best set before the squad's last update is grey with a clock and OUTDATED (BEST n/10 · OUTDATED on the card), and a line under THE LADDER reads Squad updated … Grey scores are from before. Exam mode, SOON. Study as an outline pill, then Updated … · Wikipedia. |
@@ -106,38 +106,40 @@ flawless — see below). Route, file, and what it does.
 
 ## Captures
 
-| File                                          | Screen                                       |
-| --------------------------------------------- | -------------------------------------------- |
-| `screens/01-home.png`                         | Home                                         |
-| `screens/01a-about.png`                       | About                                        |
-| `screens/01c-settings.png`                    | Settings                                     |
-| `screens/01c-settings-end.png`                | Settings, scrolled to the end                |
-| `screens/01c-settings-language.png`           | Settings — language sheet                    |
-| `screens/01d-licences.png`                    | Licences                                     |
-| `screens/02-team-picker-clubs.png`            | Team picker, Clubs                           |
-| `screens/03-team-picker-nations.png`          | Team picker, Nations                         |
-| `screens/03b-team-picker-nations-jump.png`    | Team picker, Nations, jumped to S            |
-| `screens/03c-team-picker-nations-uefa.png`    | Team picker, Nations, UEFA                   |
-| `screens/02b-team-picker-clubs-starred.png`   | Team picker, Clubs, with Your squads         |
-| `screens/03d-team-picker-nations-starred.png` | Team picker, Nations, UEFA, with Your squads |
-| `screens/04-difficulty.png`                   | Difficulty ladder, a newcomer (club)         |
-| `screens/04b-difficulty-nation.png`           | Difficulty, a nation part way up, outdated   |
-| `screens/04c-difficulty-cleared.png`          | Difficulty, a club with every level cleared  |
-| `screens/04d-difficulty-starred.png`          | Difficulty, a starred nation                 |
-| `screens/05-study.png`                        | Study, cards                                 |
-| `screens/05-study-list.png`                   | Study, list                                  |
-| `screens/05-study-hidden.png`                 | Study, cards with Hide names on              |
-| `screens/06-question-l1.png`                  | Question, level 1                            |
-| `screens/07-question-l2.png`                  | Question, level 2                            |
-| `screens/08-question-l3.png`                  | Question, level 3 — club part                |
-| `screens/08-question-l3-nationality.png`      | Question, level 3 — nationality part         |
-| `screens/09-results.png`                      | Results — failed round                       |
-| `screens/09-results-passed.png`               | Results — passed, 9/10                       |
-| `screens/09-results-flawless.png`             | Results — a la escuadra, 10/10               |
-| `screens/09-results-share.png`                | Results — share sheet, Image                 |
-| `screens/09-results-share-text.png`           | Results — share sheet, Text                  |
-| `screens/09-results-share-flawless.png`       | Results — share sheet, a la escuadra         |
-| `screens/09-results-credits.png`              | Results — photo credits sheet                |
+| File                                          | Screen                                                     |
+| --------------------------------------------- | ---------------------------------------------------------- |
+| `screens/01-home.png`                         | Home, first run                                            |
+| `screens/01e-home-returning.png`              | Home, returning: Liverpool to continue, four starred teams |
+| `screens/01f-home-outdated.png`               | Home, returning with an outdated best and nothing starred  |
+| `screens/01a-about.png`                       | About                                                      |
+| `screens/01c-settings.png`                    | Settings                                                   |
+| `screens/01c-settings-end.png`                | Settings, scrolled to the end                              |
+| `screens/01c-settings-language.png`           | Settings — language sheet                                  |
+| `screens/01d-licences.png`                    | Licences                                                   |
+| `screens/02-team-picker-clubs.png`            | Team picker, Clubs                                         |
+| `screens/03-team-picker-nations.png`          | Team picker, Nations                                       |
+| `screens/03b-team-picker-nations-jump.png`    | Team picker, Nations, jumped to S                          |
+| `screens/03c-team-picker-nations-uefa.png`    | Team picker, Nations, UEFA                                 |
+| `screens/02b-team-picker-clubs-starred.png`   | Team picker, Clubs, with Your squads                       |
+| `screens/03d-team-picker-nations-starred.png` | Team picker, Nations, UEFA, with Your squads               |
+| `screens/04-difficulty.png`                   | Difficulty ladder, a newcomer (club)                       |
+| `screens/04b-difficulty-nation.png`           | Difficulty, a nation part way up, outdated                 |
+| `screens/04c-difficulty-cleared.png`          | Difficulty, a club with every level cleared                |
+| `screens/04d-difficulty-starred.png`          | Difficulty, a starred nation                               |
+| `screens/05-study.png`                        | Study, cards                                               |
+| `screens/05-study-list.png`                   | Study, list                                                |
+| `screens/05-study-hidden.png`                 | Study, cards with Hide names on                            |
+| `screens/06-question-l1.png`                  | Question, level 1                                          |
+| `screens/07-question-l2.png`                  | Question, level 2                                          |
+| `screens/08-question-l3.png`                  | Question, level 3 — club part                              |
+| `screens/08-question-l3-nationality.png`      | Question, level 3 — nationality part                       |
+| `screens/09-results.png`                      | Results — failed round                                     |
+| `screens/09-results-passed.png`               | Results — passed, 9/10                                     |
+| `screens/09-results-flawless.png`             | Results — a la escuadra, 10/10                             |
+| `screens/09-results-share.png`                | Results — share sheet, Image                               |
+| `screens/09-results-share-text.png`           | Results — share sheet, Text                                |
+| `screens/09-results-share-flawless.png`       | Results — share sheet, a la escuadra                       |
+| `screens/09-results-credits.png`              | Results — photo credits sheet                              |
 
 The four team picker captures are a fresh install, so no row has a score: every row
 ends in a chevron. `02-team-picker-clubs.png` is Clubs with All picked: the caption
