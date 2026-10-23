@@ -1172,7 +1172,8 @@ export const sizes = {
   // Home (#181): Continue's least height, its flag or marker and its play
   // circle; START TRAINING's height; a starred team's flag or marker in its
   // round button; how far the top fade reaches past the wall's top edge, and
-  // the height of the skirt that fades the wall out above the buttons.
+  // the height of the skirt that fades the wall out above the buttons; and the
+  // width of the fade at an edge of the starred row that has more to scroll to.
   home: {
     continue: 68,
     continueMarker: { width: 34, height: 23, radius: 4 },
@@ -1181,6 +1182,7 @@ export const sizes = {
     squadMarker: { width: 24, height: 16, radius: 3 },
     topFade: 54,
     skirt: 180,
+    squadsFade: 32,
   },
 } as const;
 
