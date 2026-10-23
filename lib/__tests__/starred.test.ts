@@ -1,6 +1,6 @@
 import type { SquadManifestEntry } from '@/types/squad';
 import { describe, expect, it } from 'vitest';
-import { starredOfKind, toggleStarred } from '@/lib/starred';
+import { starredOfKind, starredTeams, toggleStarred } from '@/lib/starred';
 
 function entry(id: string, kind: 'club' | 'nation'): SquadManifestEntry {
   return { id, kind, name: id } as SquadManifestEntry;
@@ -43,5 +43,14 @@ describe('starredOfKind', () => {
 
   it('is empty with nothing starred', () => {
     expect(starredOfKind([], squads, 'club')).toEqual([]);
+  });
+});
+
+describe('starredTeams', () => {
+  it('keeps both kinds, newest first, and drops ids that have left the data', () => {
+    expect(starredTeams(['armenia', 'gone', 'arsenal'], squads).map((s) => s.id)).toEqual([
+      'armenia',
+      'arsenal',
+    ]);
   });
 });

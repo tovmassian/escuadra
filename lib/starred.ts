@@ -20,3 +20,16 @@ export function starredOfKind(
     return squad !== undefined && squad.kind === kind ? [squad] : [];
   });
 }
+
+/** Every starred team, both kinds, newest first: Home's row of round buttons
+ *  (#181). A starred id that has left the data is dropped, as above. */
+export function starredTeams(
+  starred: readonly string[],
+  squads: readonly SquadManifestEntry[],
+): SquadManifestEntry[] {
+  const byId = new Map(squads.map((s) => [s.id, s]));
+  return starred.flatMap((id) => {
+    const squad = byId.get(id);
+    return squad === undefined ? [] : [squad];
+  });
+}

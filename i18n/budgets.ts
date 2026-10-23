@@ -22,6 +22,10 @@ export const LENGTH_BUDGETS: readonly LengthBudget[] = [
   { budget: 24, texts: { 'home.continueMeta': (m) => m.home.continueMeta(3, 10, 10) } },
   { budget: 18, texts: { 'home.startTraining': (m) => m.home.startTraining } },
   { budget: 20, texts: { 'home.browseAllTeams': (m) => m.home.browseAllTeams } },
+  { budget: 24, texts: { 'home.headline': (m) => m.home.headline } },
+  { budget: 24, texts: { 'home.continueTeam': (m) => m.home.continueTeam('Spain') } },
+  { budget: 18, texts: { 'home.allTeams': (m) => m.home.allTeams } },
+  { budget: 52, texts: { 'home.starHint': (m) => m.home.starHint } },
   { budget: 16, texts: { 'languageSheet.title': (m) => m.languageSheet.title } },
   {
     budget: 28,

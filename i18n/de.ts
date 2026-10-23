@@ -56,6 +56,10 @@ export const de: Messages = {
       best === undefined ? `LEVEL ${level}` : `LEVEL ${level} · REKORD ${best}/${total}`,
     startTraining: 'Training starten',
     browseAllTeams: 'Alle Teams ansehen',
+    headline: 'Kenne jede Nummer.',
+    continueTeam: (team: string) => `Weiter mit ${team}`,
+    allTeams: 'Alle Teams',
+    starHint: 'Markiere ein Team, dann wartet es hier auf dich.',
   },
   languageSheet: {
     title: 'Sprache',

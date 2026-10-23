@@ -54,6 +54,10 @@ export const es: Messages = {
     startTraining: 'Entrenar',
     // "Ver todos los equipos" is 21 chars against 20.
     browseAllTeams: 'Todos los equipos',
+    headline: 'Conoce cada dorsal.',
+    continueTeam: (team: string) => `Seguir con ${team}`,
+    allTeams: 'Todos los equipos',
+    starHint: 'Marca un equipo con la estrella y te esperará aquí.',
   },
   languageSheet: {
     title: 'Idioma',

@@ -69,6 +69,14 @@ export const en = {
     startTraining: 'Start Training',
     /** ≤ 20 chars: the text button. */
     browseAllTeams: 'Browse All Teams',
+    /** ≤ 24 chars: the headline over the buttons, in display capitals; it may wrap. */
+    headline: 'Know every number.',
+    /** ≤ 24 chars with "Spain": Continue, in display capitals; it may wrap to two lines. */
+    continueTeam: (team: string) => `Continue ${team}`,
+    /** ≤ 18 chars: the link to the team picker, beside the starred teams. */
+    allTeams: 'All teams',
+    /** ≤ 52 chars: first run's hint under Start Training, beside a star. */
+    starHint: 'Star a team and it waits for you here.',
   },
   languageSheet: {
     /** ≤ 16 chars: the sheet's title. */
