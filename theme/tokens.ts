@@ -1122,6 +1122,8 @@ export const sizes = {
   // height of one letter).
   pickerMarker: { width: 40, height: 27, radius: 5 },
   pickerRow: 60,
+  // A row in the picker's Your squads card (#179): a little taller than the list's.
+  pickerCardRow: 66,
   pickerPill: 40,
   pickerTab: 44,
   searchField: 52,
@@ -1149,6 +1151,8 @@ export const iconSize = {
   viewToggle: 17, // Study's list/grid toggle
   play: 14, // the triangle on Difficulty's Play pill
   ladderLock: 14, // a locked rung's padlock on Difficulty
+  star: 20, // Difficulty's star toggle (#179)
+  starCaption: 12, // the star beside the picker's "Your squads" caption
 } as const;
 
 // Base unit 4. Use spacing[n], not raw numbers, in component styles.
@@ -1170,6 +1174,7 @@ export const radii = {
   lg: 16,
   card: 18, // player cards
   settingsCard: 22, // Settings' cards
+  squadsCard: 22, // the picker's Your squads card (#179)
   rung: 22, // Difficulty's compact rungs and Exam mode
   ladderCard: 26, // Difficulty's focused rung
   xl: 24,
