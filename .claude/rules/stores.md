@@ -11,6 +11,10 @@ paths:
   `stores/session.ts` is ephemeral — current round state. A half-finished round
   must not survive an app restart. Put new state in whichever of the two fits;
   add a third store only when neither does, and say why in the PR.
+- Three resets (#197): `resetSquad` drops one squad's scores, `reset()` clears every score
+  and Continue, `factoryReset` returns every field to `INITIAL` but the usage statistics
+  choice and `reviewAskedVersion`. A new field joins `INITIAL`, and
+  `stores/__tests__/progress.test.ts` fails until it does.
 - Zustand's `persist` defaults to `localStorage`, which does not exist here. Use
   `createJSONStorage(() => AsyncStorage)`.
 - `stores/progress.ts` also holds the theme preference (it is not a third store) and telemetry's random `installId`, next to the Settings opt-out.
