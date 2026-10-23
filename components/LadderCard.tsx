@@ -1,3 +1,4 @@
+import type { Ref } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import { OutdatedGlyph, PlayGlyph } from './ActionGlyphs';
 import { useT } from '@/i18n/useT';
@@ -20,6 +21,8 @@ interface LadderCardProps {
   /** What the level asks: `levelDescription`. */
   description: string;
   onPlay: () => void;
+  /** Play's own view: Difficulty's first How to play tip rings it (#183). */
+  playRef?: Ref<View>;
 }
 
 // The focused rung on Difficulty (#178, spec §1.3): the level to play next.
@@ -27,7 +30,7 @@ interface LadderCardProps {
 // best score so far, the title and what the level asks, and under them Play.
 // A best set before the squad was updated reads grey, after a clock (#180).
 // A current 10/10 draws the outline, the corner and the status line green.
-export function LadderCard({ row, title, description, onPlay }: LadderCardProps) {
+export function LadderCard({ row, title, description, onPlay, playRef }: LadderCardProps) {
   const colors = useThemeColors();
   const t = useT();
   const corner = sizes.corner.ladder;
@@ -106,6 +109,7 @@ export function LadderCard({ row, title, description, onPlay }: LadderCardProps)
         </View>
       </View>
       <Pressable
+        ref={playRef}
         testID={`play-level-${row.level}`}
         onPress={onPlay}
         accessibilityRole="button"

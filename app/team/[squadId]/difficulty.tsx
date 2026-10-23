@@ -1,4 +1,5 @@
 import { router, useLocalSearchParams } from 'expo-router';
+import { useRef } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { OutdatedGlyph } from '@/components/ActionGlyphs';
@@ -7,6 +8,8 @@ import { LadderCard } from '@/components/LadderCard';
 import { LadderHero } from '@/components/LadderHero';
 import { LadderRung } from '@/components/LadderRung';
 import { BookGlyph } from '@/components/SettingsGlyphs';
+import { TipsLayer } from '@/components/TipsLayer';
+import { useTips } from '@/components/useTips';
 import { useT } from '@/i18n/useT';
 import {
   focusedLevel,
@@ -36,6 +39,13 @@ export default function Difficulty() {
   const bestScores = useProgress((s) => s.bestScores);
   const starred = useProgress((s) => s.starredSquads.includes(squadId));
   const toggleStar = useProgress((s) => s.toggleStar);
+  // How to play (#183): Play, the star, then Study, scrolled to on a short screen.
+  const tips = useTips('difficulty');
+  const scrollRef = useRef<ScrollView>(null);
+  const offset = useRef(0);
+  const playRef = useRef<View>(null);
+  const starRef = useRef<View>(null);
+  const studyRef = useRef<View>(null);
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
@@ -76,66 +86,92 @@ export default function Difficulty() {
     });
 
   return (
-    <ScrollView
-      style={styles.root}
-      contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xxl }}
-    >
-      <LadderHero
-        squad={squad}
-        league={squadLeague(squad.id)}
-        onBack={() => router.back()}
-        starred={starred}
-        onToggleStar={() => toggleStar(squad.id)}
-      />
-      <View style={styles.content}>
-        <View style={styles.headingBlock}>
-          <Text style={styles.heading} accessibilityRole="header">
-            {t.ladder.heading}
+    <View style={styles.root}>
+      <ScrollView
+        ref={scrollRef}
+        onScroll={(e) => {
+          offset.current = e.nativeEvent.contentOffset.y;
+        }}
+        scrollEventThrottle={16}
+        {...tips.contentA11y}
+        contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xxl }}
+      >
+        <LadderHero
+          squad={squad}
+          league={squadLeague(squad.id)}
+          onBack={() => router.back()}
+          starred={starred}
+          onToggleStar={() => toggleStar(squad.id)}
+          starRef={starRef}
+        />
+        <View style={styles.content}>
+          <View style={styles.headingBlock}>
+            <Text style={styles.heading} accessibilityRole="header">
+              {t.ladder.heading}
+            </Text>
+            {hasOutdated(rows) && (
+              <View style={styles.outdatedNote}>
+                <OutdatedGlyph color={colors.textMuted} size={iconSize.outdatedNote} />
+                <Text style={styles.outdatedText}>{squadUpdatedLine(squad.lastUpdated, t)}</Text>
+              </View>
+            )}
+          </View>
+          {rows.map((row) => {
+            const title = t.ladder.levels[row.level].title;
+            return row.level === focused ? (
+              <LadderCard
+                key={row.level}
+                row={row}
+                title={title}
+                description={levelDescription(row.level, squad.kind, t)}
+                onPlay={() => play(row.level)}
+                playRef={playRef}
+              />
+            ) : (
+              <LadderRung
+                key={row.level}
+                row={row}
+                title={title}
+                onPress={row.status === 'locked' ? undefined : () => play(row.level)}
+              />
+            );
+          })}
+          <View style={styles.exam}>
+            <ExamModeRow />
+          </View>
+          <Pressable
+            ref={studyRef}
+            testID="study"
+            onPress={() =>
+              router.push({ pathname: '/team/[squadId]/study', params: { squadId: squad.id } })
+            }
+            accessibilityRole="button"
+            style={({ pressed }) => [styles.study, pressed && { opacity: opacity.settled }]}
+          >
+            <BookGlyph color={colors.textPrimary} />
+            <Text style={styles.studyLabel}>{t.ladder.studySquad}</Text>
+          </Pressable>
+          <Text style={styles.updated}>
+            {t.ladder.updated(formatLastUpdated(squad.lastUpdated, t))}
           </Text>
-          {hasOutdated(rows) && (
-            <View style={styles.outdatedNote}>
-              <OutdatedGlyph color={colors.textMuted} size={iconSize.outdatedNote} />
-              <Text style={styles.outdatedText}>{squadUpdatedLine(squad.lastUpdated, t)}</Text>
-            </View>
-          )}
         </View>
-        {rows.map((row) => {
-          const title = t.ladder.levels[row.level].title;
-          return row.level === focused ? (
-            <LadderCard
-              key={row.level}
-              row={row}
-              title={title}
-              description={levelDescription(row.level, squad.kind, t)}
-              onPlay={() => play(row.level)}
-            />
-          ) : (
-            <LadderRung
-              key={row.level}
-              row={row}
-              title={title}
-              onPress={row.status === 'locked' ? undefined : () => play(row.level)}
-            />
-          );
-        })}
-        <View style={styles.exam}>
-          <ExamModeRow />
-        </View>
-        <Pressable
-          testID="study"
-          onPress={() =>
-            router.push({ pathname: '/team/[squadId]/study', params: { squadId: squad.id } })
+      </ScrollView>
+
+      {tips.open && (
+        <TipsLayer
+          tips={[
+            { target: playRef, radius: radii.pill, ...t.tips.difficulty.start },
+            { target: starRef, radius: radii.pill, ...t.tips.difficulty.star },
+            { target: studyRef, radius: radii.pill, ...t.tips.difficulty.study },
+          ]}
+          onClose={tips.close}
+          onSkip={tips.skip}
+          onShown={tips.onShown}
+          scrollBy={(dy) =>
+            scrollRef.current?.scrollTo({ y: offset.current + dy, animated: false })
           }
-          accessibilityRole="button"
-          style={({ pressed }) => [styles.study, pressed && { opacity: opacity.settled }]}
-        >
-          <BookGlyph color={colors.textPrimary} />
-          <Text style={styles.studyLabel}>{t.ladder.studySquad}</Text>
-        </Pressable>
-        <Text style={styles.updated}>
-          {t.ladder.updated(formatLastUpdated(squad.lastUpdated, t))}
-        </Text>
-      </View>
-    </ScrollView>
+        />
+      )}
+    </View>
   );
 }

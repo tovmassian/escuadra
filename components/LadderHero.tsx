@@ -1,4 +1,5 @@
 import { LinearGradient } from 'expo-linear-gradient';
+import type { Ref } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StarGlyph } from './ActionGlyphs';
@@ -22,6 +23,8 @@ interface LadderHeroProps {
   /** Whether the team is in Your squads (#179), and the star that toggles it. */
   starred: boolean;
   onToggleStar: () => void;
+  /** The star's own view: Difficulty's second How to play tip rings it (#183). */
+  starRef?: Ref<View>;
 }
 
 // The Difficulty hero (#178, spec §1): the squad's marker as vertical bands,
@@ -36,7 +39,14 @@ interface LadderHeroProps {
 // sits behind its own row, so the guarantee holds however far a long name
 // wraps: the top bar fades from the theme's floor to that alpha, the identity
 // block from that alpha to solid ground.
-export function LadderHero({ squad, league, onBack, starred, onToggleStar }: LadderHeroProps) {
+export function LadderHero({
+  squad,
+  league,
+  onBack,
+  starred,
+  onToggleStar,
+  starRef,
+}: LadderHeroProps) {
   const colors = useThemeColors();
   const theme = useThemeName();
   const t = useT();
@@ -110,6 +120,7 @@ export function LadderHero({ squad, league, onBack, starred, onToggleStar }: Lad
               accessibilityState. */}
           <RoundButton
             testID="difficulty-star"
+            ref={starRef}
             glass={glass}
             onPress={onToggleStar}
             accessibilityRole="togglebutton"

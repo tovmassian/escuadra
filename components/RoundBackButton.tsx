@@ -1,5 +1,5 @@
-import type { ReactNode } from 'react';
-import { Pressable, StyleSheet, type PressableProps } from 'react-native';
+import type { ReactNode, Ref } from 'react';
+import { Pressable, StyleSheet, type PressableProps, type View } from 'react-native';
 import { BackGlyph } from '@/components/ActionGlyphs';
 import { borderWidths, opacity, sizes } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -18,6 +18,8 @@ export function RoundButton({
    *  the hero uses this in dark theme only (LadderHero). */
   glass?: boolean;
   children: ReactNode;
+  /** Passed to the `Pressable`: Difficulty's star is a How to play target (#183). */
+  ref?: Ref<View>;
 }) {
   const colors = useThemeColors();
   const size = sizes.roundButton;
