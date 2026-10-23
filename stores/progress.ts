@@ -8,6 +8,7 @@ import { scoreKey } from '@/lib/scoring';
 import { listSquads } from '@/lib/squads';
 import { toggleStarred } from '@/lib/starred';
 import type { StudyView } from '@/lib/studyView';
+import type { TipScreen } from '@/lib/tips';
 import type { ThemePreference } from '@/theme/tokens';
 
 // Re-exported so existing importers (e.g. `app/index.tsx`) keep working —
@@ -55,6 +56,11 @@ interface ProgressState {
   /** Your squads (#179): the squad ids starred on Difficulty, newest first.
    *  A preference like `themePreference`, so it survives `reset()`. */
   starredSquads: string[];
+  /** How to play (#183): the screens whose tips have shown, each once. A
+   *  preference like `themePreference`, so it survives `reset()`. */
+  tipsSeen: TipScreen[];
+  /** Skip tips: no screen shows its tips again. Survives `reset()`. */
+  tipsSkipped: boolean;
   /** `squadUpdated` is the squad's current `lastUpdated`. */
   recordScore: (squadId: string, level: number, score: number, squadUpdated: string) => void;
   setLastPlayed: (squadId: string, level: number) => void;
@@ -66,6 +72,8 @@ interface ProgressState {
   setStudyView: (view: StudyView) => void;
   setReviewAskedVersion: (version: string) => void;
   toggleStar: (squadId: string) => void;
+  markTipsSeen: (screen: TipScreen) => void;
+  skipTips: () => void;
   reset: () => void;
 }
 
@@ -82,6 +90,8 @@ export const useProgress = create<ProgressState>()(
       studyView: 'grid',
       reviewAskedVersion: null,
       starredSquads: [],
+      tipsSeen: [],
+      tipsSkipped: false,
       recordScore: (squadId, level, score, squadUpdated) =>
         set((s) => {
           const key = scoreKey(squadId, level);
@@ -101,6 +111,9 @@ export const useProgress = create<ProgressState>()(
       setReviewAskedVersion: (reviewAskedVersion) => set({ reviewAskedVersion }),
       toggleStar: (squadId) =>
         set((s) => ({ starredSquads: toggleStarred(s.starredSquads, squadId) })),
+      markTipsSeen: (screen) =>
+        set((s) => (s.tipsSeen.includes(screen) ? s : { tipsSeen: [...s.tipsSeen, screen] })),
+      skipTips: () => set({ tipsSkipped: true }),
       reset: () => set({ bestScores: {}, lastPlayed: null }),
     }),
     {

@@ -15,7 +15,13 @@ const { useProgress, migrateProgress } = await import('../progress');
 const { listSquads } = await import('@/lib/squads');
 
 beforeEach(() => {
-  useProgress.setState({ starredSquads: [], bestScores: {}, lastPlayed: null });
+  useProgress.setState({
+    starredSquads: [],
+    bestScores: {},
+    lastPlayed: null,
+    tipsSeen: [],
+    tipsSkipped: false,
+  });
 });
 
 describe('starred squads', () => {
@@ -99,5 +105,43 @@ describe('migration from version 0', () => {
     });
     const stored = JSON.parse(disk.get('escuadra-progress') ?? '{}') as { version: number };
     expect(stored.version).toBe(1);
+  });
+});
+
+describe('how to play tips', () => {
+  it('starts with nothing seen and nothing skipped', () => {
+    const initial = useProgress.getInitialState();
+    expect(initial.tipsSeen).toEqual([]);
+    expect(initial.tipsSkipped).toBe(false);
+  });
+
+  it('marks a screen seen once', () => {
+    useProgress.getState().markTipsSeen('picker');
+    useProgress.getState().markTipsSeen('picker');
+    useProgress.getState().markTipsSeen('study');
+    expect(useProgress.getState().tipsSeen).toEqual(['picker', 'study']);
+  });
+
+  it('skips for good', () => {
+    useProgress.getState().skipTips();
+    expect(useProgress.getState().tipsSkipped).toBe(true);
+  });
+
+  it('survives reset', () => {
+    useProgress.getState().markTipsSeen('difficulty');
+    useProgress.getState().skipTips();
+    useProgress.getState().reset();
+    expect(useProgress.getState().tipsSeen).toEqual(['difficulty']);
+    expect(useProgress.getState().tipsSkipped).toBe(true);
+  });
+
+  it('persists both', () => {
+    useProgress.getState().markTipsSeen('picker');
+    useProgress.getState().skipTips();
+    const stored = JSON.parse(disk.get('escuadra-progress') ?? '{}') as {
+      state: { tipsSeen: unknown; tipsSkipped: unknown };
+    };
+    expect(stored.state.tipsSeen).toEqual(['picker']);
+    expect(stored.state.tipsSkipped).toBe(true);
   });
 });
