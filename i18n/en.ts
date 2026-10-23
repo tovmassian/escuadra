@@ -492,7 +492,7 @@ export const en = {
     /** ≤ 80 chars: under "The ladder" when a score is outdated; `date` from
      *  `formatLastUpdated`. It may wrap to two lines. */
     squadUpdated: (date: string) => `Squad updated ${date}. Grey scores are from before.`,
-    /** The eraser's spoken name, beside a team's star on Difficulty (#197). */
+    /** The eraser's spoken name, beside Study on a team's Difficulty screen (#197). */
     startOver: (team: string) => `Start ${team} over`,
   },
   picker: {
@@ -629,7 +629,7 @@ export const en = {
           heading: 'What is stored on your device',
           paragraphs: [
             `${ESCUADRA} saves eleven things locally, on your device: your best score for each team and difficulty level, from which it works out which levels you have completed; the last team and level you played; the teams you have starred; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; which screens have shown you their How to play tips, and whether you skipped them; which app version last asked your phone to show a rating prompt; your choice about usage statistics; and the random identifier those statistics use. The app-update check also keeps its own random identifier on your device.`,
-            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of those eleven things off your device, and only while usage statistics are on: the identifier, which is sent in hashed form with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. You can also erase it in Settings, under Your data: one team's scores, all your scores, or, with Reset ${ESCUADRA}, everything listed above and any cached photos, except your choice about usage statistics, the app version that last asked your phone to show a rating prompt, and the app-update check's identifier. Reset ${ESCUADRA} gives usage statistics a new random identifier. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
+            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of those eleven things off your device, and only while usage statistics are on: the identifier, which is sent in hashed form with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. You can also erase it: one team's scores from that team's screen, or, in Settings under Your data, all your scores or, with Reset ${ESCUADRA}, everything listed above and any cached photos, except your choice about usage statistics, the app version that last asked your phone to show a rating prompt, and the app-update check's identifier. Reset ${ESCUADRA} gives usage statistics a new random identifier. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
           ],
         },
         {
