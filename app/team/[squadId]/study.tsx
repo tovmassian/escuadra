@@ -16,6 +16,8 @@ import { FilterPill } from '@/components/FilterPill';
 import { PhotoCredits } from '@/components/PhotoCredits';
 import { PlayerCard } from '@/components/PlayerCard';
 import { StudyListRow } from '@/components/StudyListRow';
+import { TipsLayer } from '@/components/TipsLayer';
+import { useTips } from '@/components/useTips';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
@@ -86,6 +88,10 @@ export default function Study() {
   const [hidden, setHidden] = useState(false);
   const [revealed, setRevealed] = useState<ReadonlySet<string>>(() => new Set());
   const listRef = useRef<FlatList<RosterEntry>>(null);
+  // How to play (#183): Hide names, then the position filters.
+  const tips = useTips('study');
+  const hideRef = useRef<View>(null);
+  const filtersRef = useRef<View>(null);
 
   const squad = getSquad(squadId);
   const roster = useMemo(() => getRoster(squadId), [squadId]);
@@ -173,11 +179,9 @@ export default function Study() {
     // A horizontal ScrollView grows to fill a column by default; this one
     // takes only its pills' height.
     filtersScroll: { flexGrow: 0, flexShrink: 0 },
-    filters: {
-      gap: spacing.xs - 2,
-      paddingHorizontal: spacing.md,
-      paddingVertical: spacing.sm,
-    },
+    filters: { paddingHorizontal: spacing.md, paddingVertical: spacing.sm },
+    // The pills, in one view for the second tip to ring.
+    filterRow: { flexDirection: 'row', gap: spacing.xs - 2 },
     list: { flex: 1 },
     listContent: { paddingHorizontal: spacing.md, paddingBottom: insets.bottom + spacing.md },
     columns: { gap: sizes.studyGridGap },
@@ -238,7 +242,7 @@ export default function Study() {
 
   return (
     <View style={styles.root}>
-      <View style={styles.topBar}>
+      <View style={styles.topBar} {...tips.contentA11y}>
         <Pressable
           testID="study-back"
           onPress={() => router.back()}
@@ -250,6 +254,7 @@ export default function Study() {
         </Pressable>
         <View style={styles.spacer} />
         <Pressable
+          ref={hideRef}
           testID="study-hide-names"
           onPress={() => {
             setHidden(!hidden);
@@ -285,7 +290,7 @@ export default function Study() {
         </Pressable>
       </View>
 
-      <View style={styles.header}>
+      <View style={styles.header} {...tips.contentA11y}>
         <View style={styles.eyebrowRow}>
           <View style={styles.banner}>
             {bands.map((band, i) => (
@@ -313,26 +318,30 @@ export default function Study() {
         showsHorizontalScrollIndicator={false}
         style={styles.filtersScroll}
         contentContainerStyle={styles.filters}
+        {...tips.contentA11y}
       >
-        {STUDY_FILTERS.map((f) => (
-          <FilterPill
-            key={f}
-            label={f === 'ALL' ? t.study.all : positionCode(f, t)}
-            count={counts[f]}
-            active={filter === f}
-            onPress={() => {
-              if (f === filter) return;
-              setFilter(f);
-              // A shorter list would otherwise clamp to its bottom. Not a re-key
-              // by filter: that would replay every card's fade.
-              listRef.current?.scrollToOffset({ offset: 0, animated: false });
-            }}
-          />
-        ))}
+        <View ref={filtersRef} collapsable={false} style={styles.filterRow}>
+          {STUDY_FILTERS.map((f) => (
+            <FilterPill
+              key={f}
+              label={f === 'ALL' ? t.study.all : positionCode(f, t)}
+              count={counts[f]}
+              active={filter === f}
+              onPress={() => {
+                if (f === filter) return;
+                setFilter(f);
+                // A shorter list would otherwise clamp to its bottom. Not a re-key
+                // by filter: that would replay every card's fade.
+                listRef.current?.scrollToOffset({ offset: 0, animated: false });
+              }}
+            />
+          ))}
+        </View>
       </ScrollView>
 
       <FlatList
         ref={listRef}
+        {...tips.contentA11y}
         // A FlatList cannot change its column count in place.
         key={view}
         style={styles.list}
@@ -352,6 +361,18 @@ export default function Study() {
         windowSize={2}
         maxToRenderPerBatch={6}
       />
+
+      {tips.open && (
+        <TipsLayer
+          tips={[
+            { target: hideRef, radius: radii.pill, ...t.tips.study.hide },
+            { target: filtersRef, radius: radii.pill, ...t.tips.study.positions },
+          ]}
+          onClose={tips.close}
+          onSkip={tips.skip}
+          onShown={tips.onShown}
+        />
+      )}
     </View>
   );
 }
