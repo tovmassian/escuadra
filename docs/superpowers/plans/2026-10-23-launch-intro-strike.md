@@ -447,6 +447,83 @@ if `waitFor` proves flaky, wait on `domcontentloaded` instead.
 
 ---
 
+### Task 5: The hand-off — the lockup docks into Home's top bar
+
+Added after the owner tried the intro (2026-10-23). The design is the spec's **Hand-off to
+Home** section: read it first; it is the contract. This task builds it.
+
+**Files:**
+
+- Modify: `lib/launchIntro.ts`, `lib/__tests__/launchIntro.test.ts` (a pure `dockTransform`)
+- Modify: `theme/tokens.ts`, `theme/__tests__/tokens.test.ts` (`launchIntro.dock`)
+- Create: one small module for the launch's shared state between the root layout, the intro
+  and Home (e.g. `components/LaunchReveal.tsx`: a React context with the reveal shared value
+  and the dock-target reporter, plus its provider hook)
+- Modify: `app/_layout.tsx`, `components/LaunchIntro.tsx`, `components/Wordmark.tsx`,
+  `app/index.tsx`
+- Modify: `.claude/rules/design-tokens.md` (the intro's Motion paragraph: it now docks into
+  Home's lockup), `design/SCREENS.md` (the intro line), `theme/tokens.ts`'s `launchIntro`
+  comment
+
+**Interfaces — produces:**
+
+- `interface DockRect { x: number; y: number; width: number; height: number }` (window
+  coordinates, as `measureInWindow` gives them)
+- `dockTransform(from: DockRect, to: DockRect): { translateX: number; translateY: number; scale: number }`
+  — centre to centre, `scale = to.width / from.width`; the transform applies about the
+  element's own centre (React Native's default transform origin).
+- `launchIntro.dock = { duration: 300, clear: 100, contentDelay: 80 }` (ms, from `end`).
+
+- [ ] **Step 1: TDD `dockTransform`.** Tests, at least: identical rects → `{0, 0, 1}`; a
+      200-wide box centred at (195, 350) onto a 28-wide box centred at (40, 44) →
+      translate (−155, −306), scale 0.14; a target to the right and below → positive
+      translates. See them fail, implement, see them pass.
+- [ ] **Step 2: Tokens.** Add `dock` to `launchIntro` with a comment; extend the
+      `launch intro motion` test so `end + dock.duration ≤ 1500`, `dock.clear` and
+      `dock.contentDelay` are under `dock.duration`. Keep the existing `fadeOut` (the
+      fallbacks use it) and its test.
+- [ ] **Step 3: The shared state.** The root layout owns a reveal shared value (0 → 1) and
+      the latest dock target (`{ mark: DockRect; word: DockRect } | null`), and provides
+      both through the context. The reveal starts at 1 when the intro will not show this
+      launch: export from `LaunchIntro.tsx` a function the layout can call at first render
+      (it knows the once flag and the module-load screen-reader answer); a still or play
+      intro starts it at 0.
+- [ ] **Step 4: Home's side.**
+  - `Wordmark` measures its mark and its word with `measureInWindow` in `onLayout` (refs on
+    the two views) and reports them through the context when a reporter is present. Its
+    opacity is 0 until the reveal reaches 1, then 1 (no fade: the intro's lockup is exactly
+    on top of it as it unmounts).
+  - `app/index.tsx`: the gear, and the block (headline, Continue or Start Training, the
+    squads row or the hint), fade in and rise `spotlightMotion.rise` as the reveal goes from
+    `contentDelay / duration` to 1. At reveal 1 they are at rest, so nothing changes for a
+    launch without the intro. The number wall is untouched.
+  - Reanimated styles only; no re-render per frame.
+- [ ] **Step 5: The intro's side** (`components/LaunchIntro.tsx`).
+  - Measure its own mark box and word with `measureInWindow`.
+  - At `end`, in the `play` plan, if a target is known: run the dock as the spec says
+    (trails and tagline out over `dock.clear`; ground to clear, linear; mark and word glide
+    via `dockTransform` on `celebrationEasingCurves.rise`; ball geometry from `ball` to
+    `ballSmall` so the hand-off is exact; the reveal 0 → 1 over `dock.duration`, linear),
+    then `onDone`. The dock runs only in `play`; still pass `ReduceMotion.Never` on the
+    timings that end in `onDone`, as the file's existing fade does.
+  - Otherwise (no target, `still`, a tap, a late screen reader): today's behaviour, with the
+    reveal set to 1 as the fade starts (or at once for the screen reader).
+  - The ground must become a separate layer from the lockup so it can fade alone; the
+    overlay's root stays the `Pressable` that skips. `pointerEvents` must let Home receive
+    no stray taps mid-dock (keep the overlay catching taps until unmount, as now).
+- [ ] **Step 6: Verify.** `npx vitest run`, `npm run typecheck`, `npm run lint`,
+      `npx prettier --check .`. On the web build, screenshot at about 1300, 1400 and 1600 ms
+      after the intro appears, dark and light: mid-dock (logo shrinking towards the top left,
+      wall showing through, content rising), and Home at rest with exactly one lockup in the
+      top bar, in the same place and size as the intro left it. Also check a web load of
+      `/settings` (fallback fade, no errors) and Reduce Motion (plain fade). Then
+      `npm run shots`; no PNG should change beyond noise (restore noise with
+      `git checkout -- <path>`).
+- [ ] **Step 7:** Commit: `feat(launch): the lockup docks into Home's top bar (#182)`, plus
+      a `docs` commit for the rule, SCREENS.md and token comment if separate.
+
+---
+
 ### Finish (controller)
 
 - Native-speaker review of the four translations (fresh subagent per language, until clean).

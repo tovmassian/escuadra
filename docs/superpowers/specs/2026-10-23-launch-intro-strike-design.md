@@ -15,8 +15,8 @@ On a cold launch the Escuadra mark is drawn as a perfect strike, then Home shows
 3. **Goal.** It lands in the corner. Frame and ball flash `success`, a `success` ring flashes
    out from the ball, and the frame kicks up and right.
 4. **A la escuadra.** Frame and ball return to `mark`; the wordmark rises in, "A LA
-   ESCUADRA" fades in under it, "TAP TO SKIP" fades out. Then the intro fades and Home is
-   there.
+   ESCUADRA" fades in under it, "TAP TO SKIP" fades out. Then the lockup docks into Home's
+   top bar as the ground fades away (Hand-off to Home, below).
 
 Built from `markGeometry` (`theme/brand.ts`) in plain Views, like `EscuadraMark`: no video,
 no SVG, no new asset.
@@ -41,7 +41,7 @@ loop × 40 ms per percent), in a `launchIntro` token in `theme/tokens.ts`:
 | "A LA ESCUADRA"     | 1000 → 1200    | opacity 0 → 1                                                  |
 | "TAP TO SKIP"       | 1040 → 1200    | opacity 1 → 0                                                  |
 | frame + ball colour | 1000 → 1200    | `success` → `mark`                                             |
-| the whole intro     | 1200 → 1400    | opacity 1 → 0, the screen beneath showing; then it unmounts    |
+| the hand-off        | 1200 → 1500    | the dock (Hand-off to Home); then it unmounts                  |
 
 The ball's start offset (−244, +473 dp at the canvas's 200 dp mark) is stored in mark units
 (÷ `200 / MARK_VIEWBOX`), as are the kick (`kick.offset`, 1.92) and the ring's stroke
@@ -49,7 +49,7 @@ The ball's start offset (−244, +473 dp at the canvas's 200 dp mark) is stored 
 
 **Call: the colour returns at 1000 → 1200, not the canvas's 1120 → 1360,** so beat 4 is
 whole when the tagline settles and the intro ends near the timing note's "~1.1 s, then Home"
-(1.2 s, plus the 200 ms fade). Everything else is the canvas's timing.
+(1.2 s, plus the 300 ms hand-off). Everything else is the canvas's timing.
 
 ## When it plays
 
@@ -81,12 +81,43 @@ beneath it, so its own first-render work runs under the intro.
 
 **Call: the intro starts when the app is ready, not before.** Starting it as the splash hides
 any earlier would draw it before the stored theme is known (a pinned-light player would get a
-dark intro) and before the wordmark's font has loaded. So the launch takes "ready + 1.4 s" at
+dark intro) and before the wordmark's font has loaded. So the launch takes "ready + 1.5 s" at
 most, and the intro adds nothing to a slow device's load beyond its own length, as the issue
 asks. The native splash and its colours are unchanged: its ground is `background` in both
 themes, so the hand-off is the splash's full mark giving way to beat 1's empty frame.
 
 `expo-updates`' launch check is native and untouched.
+
+## Hand-off to Home
+
+Added after the canvas (owner's pick, 2026-10-23): Home's top bar carries the same lockup,
+small, so the intro's lockup becomes it rather than vanishing. From `end` (1200 ms), over
+`launchIntro.dock` (300 ms):
+
+- The trail squares and "A LA ESCUADRA" fade out over the first 100 ms.
+- The ground fades from `background` to clear, linear, uncovering Home's number wall.
+- The mark and "escuadra" glide, on `celebrationEasingCurves.rise`, each from its own place
+  to the place of its counterpart in Home's `Wordmark`: centre to centre, scaled by the ratio
+  of their measured widths (so large text and safe areas need no special case). The ball
+  moves from `markGeometry.ball` to `ballSmall` on the way, as Home's 28 dp mark draws it, so
+  nothing jumps when Home's own lockup takes over. The mark keeps its colour; the word keeps
+  `textPrimary`.
+- Home arrives: its gear, headline and buttons rise `spotlightMotion.rise` and fade in,
+  starting 80 ms into the dock and ending with it. Home's own lockup stays hidden until the
+  dock ends, then shows as the intro unmounts, in the same place.
+
+Both ends are measured in window coordinates (`measureInWindow`): Home's `Wordmark` reports
+its mark and word to the root layout through a small context, and the intro measures its own.
+The context also carries one shared value, the reveal (0 → 1 over the dock), which Home's
+lockup and content read; it starts at 1 whenever the intro will not show (a screen reader,
+a second mount in the same launch), so Home never waits on it.
+
+**Fallbacks keep today's fade.** With no measured target by `end` (the first screen is not
+Home, as on a web reload of another route), under Reduce Motion (`still`), and on a tap, the
+intro fades as before, and the reveal jumps to 1 as that fade starts. A late screen reader
+unmounts it at once with the reveal at 1.
+
+The launch now takes "ready + 1.5 s" at most: 0.1 s more than the plain fade.
 
 ## Skipping
 
@@ -121,9 +152,10 @@ Home's drift and the round-over celebration: in `.claude/rules/design-tokens.md`
 
 ## Tests and checks
 
-- `lib/__tests__/launchIntro.test.ts`: the decision.
+- `lib/__tests__/launchIntro.test.ts`: the decision, and the dock's transform from a measured
+  rectangle to its target.
 - `theme/__tests__/tokens.test.ts`: the `launchIntro` stops run forwards and end by `end`,
-  and `end` plus the fade stays within 1.5 s.
+  and `end` plus the hand-off stays within 1.5 s.
 - `npm run shots` captures `00-launch-intro` (beat 4, under emulated Reduce Motion, in both
   themes); `design/SCREENS.md` describes it. Every other capture waits, after each load,
   until the intro has left the page (`launch-intro` detached), so no shot can catch it.
