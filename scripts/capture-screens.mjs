@@ -448,6 +448,25 @@ async function seedBestScores(capture, scores, squadUpdated) {
 }
 
 /**
+ * Scroll every scrollable element taller than its box to its end. The page's ScrollView is
+ * the one that is. Set `scrollTop`: react-native-web replaces the node's `scrollTo` with one
+ * that takes an object, so `scrollTo(0, y)` silently does nothing.
+ */
+async function scrollToEnd(capture) {
+  await capture.page.evaluate(() => {
+    for (const node of document.querySelectorAll('*')) {
+      const { overflowY } = getComputedStyle(node);
+      if (
+        (overflowY === 'auto' || overflowY === 'scroll') &&
+        node.scrollHeight > node.clientHeight
+      ) {
+        node.scrollTop = node.scrollHeight;
+      }
+    }
+  });
+}
+
+/**
  * Write the starred squads (#179) into the persisted progress store, newest
  * first, as taps on Difficulty's star would. Like `seedBestScores`, it writes
  * localStorage only, for the next `capture.open` to rehydrate.
@@ -678,20 +697,7 @@ async function captureTheme(browser, colorScheme, suffix) {
 
     await capture.open('/settings');
     await capture.shoot('01c-settings');
-    // The page's ScrollView is the one scrollable element taller than its box. Set
-    // `scrollTop`: react-native-web replaces the node's `scrollTo` with one that takes an
-    // object, so `scrollTo(0, y)` silently does nothing.
-    await capture.page.evaluate(() => {
-      for (const node of document.querySelectorAll('*')) {
-        const { overflowY } = getComputedStyle(node);
-        if (
-          (overflowY === 'auto' || overflowY === 'scroll') &&
-          node.scrollHeight > node.clientHeight
-        ) {
-          node.scrollTop = node.scrollHeight;
-        }
-      }
-    });
+    await scrollToEnd(capture);
     await capture.shoot('01c-settings-end');
     await capture.tapId('settings-language', { wait: SHEET_MS });
     await capture.shoot('01c-settings-language');
@@ -729,6 +735,10 @@ async function captureTheme(browser, colorScheme, suffix) {
     await seedBestScores(capture, { 'arm:1': 10, 'arm:2': 8, 'arm:3': 6 }, '2026-01-01');
     await capture.open('/team/arm/difficulty');
     await capture.shoot('04b-difficulty-nation');
+    // Start over (#197): Armenia has scores, so the eraser shows. Its sheet is only opened,
+    // never confirmed; the next open reloads the page and the scores stay.
+    await capture.tapId('difficulty-start-over', { wait: SHEET_MS });
+    await capture.shoot('04g-difficulty-start-over');
 
     await seedBestScores(
       capture,
@@ -775,6 +785,18 @@ async function captureTheme(browser, colorScheme, suffix) {
     );
     await capture.open('/team/ars/difficulty');
     await capture.shoot('04e-difficulty-escuadra');
+
+    // Your data (#197), with scores stored so Clear all scores shows a count. Each sheet is
+    // opened and shot, never confirmed: the rounds below still see the seeded scores.
+    await capture.open('/settings');
+    await scrollToEnd(capture);
+    await capture.shoot('01g-settings-your-data');
+    await capture.tapId('settings-clear-scores', { wait: SHEET_MS });
+    await capture.shoot('01h-settings-clear-scores');
+    await capture.open('/settings');
+    await scrollToEnd(capture);
+    await capture.tapId('settings-reset', { wait: SHEET_MS });
+    await capture.shoot('01i-settings-reset');
 
     await captureStudy(capture);
 
