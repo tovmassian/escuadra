@@ -144,3 +144,56 @@ side, a target at either edge, 360 × 640), `scrollDelta` and the settle check. 
 new fields and their survival of `reset()` in `stores/__tests__`. Token and palette tests for
 the new roles. On a device: the issue's **Still works** and **Test** lists, in the PR's device
 checklist; screen-reader and large-text checks go to #187.
+
+## The round and Results (#184)
+
+Design: the canvas's **Tips · First question, level 1 (2)** (`CoachPlay`), **levels 2 and 3
+(1)** (`CoachParts`) and **First results (2)** (`CoachResults`). Same layer, same rules: once
+per screen, Skip ends every screen's tips, never on Home or Settings. The copy is the issue's,
+which wins over the canvas where they differ.
+
+### Screens and when
+
+`TipScreen` gains `'question-1' | 'question-2' | 'question-3' | 'results'`: the question
+screen counts once per level, Results once. `useTips(screen, ready)` takes a second argument,
+`true` by default, and decides only once the store has hydrated **and** `ready` is true:
+
+- **Question:** ready when this route's round is playing, on question 1, part 1, with nothing
+  answered. The layer's catcher takes every tap, so nothing is answered behind it, and
+  auto-advance only follows an answer.
+- **Results:** ready once the celebration is over, `resultsTimeline.tips` (1,200 ms) after
+  Results opens: a pause, not an animation, like `reviewPrompt`.
+
+### The tips
+
+| Screen        | #   | Target                            | Heading              | Body                                                                               |
+| ------------- | --- | --------------------------------- | -------------------- | ---------------------------------------------------------------------------------- |
+| Level 1       | 1   | The shirt number and its clues    | A number, some clues | The shirt number is the question. Position, age and club help you find the player. |
+| Level 1       | 2   | The answers                       | Tap who wears it     | A right answer moves on by itself. A miss shows who it was and waits for you.      |
+| Level 2       | 1   | The parts (the slot chips)        | Two parts now        | Name first, then the position. It only counts if both are right.                   |
+| Level 3       | 1   | The parts (the slot chips)        | Three parts          | Name, position, then the club. In a club squad, the nationality instead.           |
+| Results       | 1   | The missed players' cards         | The ones to learn    | Every miss, with who it was and what you picked. Swipe for all.                    |
+| Results, fail | 2   | The actions (main button and row) | Again, or study      | Score 8/10 to unlock the next level. Retry now, or study the squad first.          |
+| Results, pass | 2   | The actions                       | On to the next       | Play the next level, or study the squad first.                                     |
+
+- **Level 1's clues follow the squad.** A club squad's clue chips are position, age and
+  nationality; a nation squad's are position, age and club. The body has a club variant, "…
+  Position, age and nationality help you find the player.", so it is never untrue.
+- **A single tip** (levels 2 and 3) carries the canvas's kicker, `HOW TO PLAY · LEVEL 2`, its
+  spoken name "How to play, level 2", Got it, and no step dots. `TipsLayer` takes an optional
+  `kicker` and `spoken` for that.
+- **Results leaves a tip out when it has nothing to point at:** the first when nothing was
+  missed (a 10/10 shows the roster instead), the second after passing the last level (no next
+  level; the main button chooses a team). With both out, the layer doesn't open and Results
+  keeps its tips for next time.
+- **Results scrolls** like Difficulty: the actions can sit below the fold on a small phone.
+
+### The store-rating prompt
+
+Results never asks the OS for its rating dialog while the tips are open; the wait
+(`resultsTimeline.reviewPrompt`) starts again when they close. A first round ever never asks
+anyway (#57), so this only matters for a player updating from 1.x.
+
+### About
+
+No change: "which screens have shown you their How to play tips" stays true.
