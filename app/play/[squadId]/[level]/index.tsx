@@ -182,6 +182,10 @@ export default function Question() {
   const heroRef = useRef<View>(null);
   const slotsRef = useRef<View>(null);
   const answersRef = useRef<View>(null);
+  // At large text sizes the scroll overflows and opens at the top, with the
+  // answers below the fold: the layer scrolls a tip's target into view.
+  const scrollRef = useRef<ScrollView>(null);
+  const offset = useRef(0);
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
@@ -239,8 +243,9 @@ export default function Question() {
       backgroundColor: colors.background,
     },
     hero: { paddingHorizontal: spacing.lg },
-    // The number and the slots, in one view for level 1's first tip to ring.
-    heroContent: { gap: spacing.sm },
+    // The number and the slots, in one view for level 1's first tip to ring;
+    // as wide as its content, so the ring hugs the chips when they fit a line.
+    heroContent: { alignSelf: 'flex-start', gap: spacing.sm },
     // Under the hero, the prompt, answers and footer sit on solid ground.
     ground: { backgroundColor: colors.background },
     numberWrap: {
@@ -345,6 +350,11 @@ export default function Question() {
         </View>
 
         <ScrollView
+          ref={scrollRef}
+          onScroll={(e) => {
+            offset.current = e.nativeEvent.contentOffset.y;
+          }}
+          scrollEventThrottle={16}
           style={styles.scroll}
           contentContainerStyle={styles.scrollContent}
           showsVerticalScrollIndicator={false}
@@ -447,8 +457,6 @@ export default function Question() {
       </View>
       {/* Over everything, and never in the way of a tap. */}
       <ShotOverlay ref={overlayRef} question={session.currentIndex} live={live} clock={clock} />
-      {/* No `scrollBy`: the scroll is bottom-aligned, so the targets are on
-          screen whenever the tips can show. */}
       {tips.open && (
         <TipsLayer
           tips={
@@ -478,6 +486,9 @@ export default function Question() {
           onClose={tips.close}
           onSkip={tips.skip}
           onShown={tips.onShown}
+          scrollBy={(dy) =>
+            scrollRef.current?.scrollTo({ y: Math.max(0, offset.current + dy), animated: false })
+          }
         />
       )}
     </View>
