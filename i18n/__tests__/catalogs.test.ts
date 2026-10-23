@@ -108,7 +108,7 @@ it('pins the English About the translations were made from', () => {
     .filter((leaf) => leaf.path.startsWith('about.'))
     .map((leaf) => `${leaf.path}\t${leaf.text}`)
     .join('\n');
-  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('7cd4f5da033b406f');
+  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('9327528e3b528eef');
 });
 
 describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {

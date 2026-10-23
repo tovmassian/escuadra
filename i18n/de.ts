@@ -60,6 +60,50 @@ export const de: Messages = {
     allTeams: 'Alle Teams',
     starHint: 'Markiere ein Team, dann wartet es hier auf dich.',
   },
+  tips: {
+    // "Spielanleitung", the word German games use for How to play; About's
+    // stored list names the tips the same way.
+    kicker: (step: number, count: number) => `Spielanleitung · ${step}/${count}`,
+    spoken: (step: number, count: number) => `Spielanleitung, Tipp ${step} von ${count}`,
+    next: 'Weiter',
+    gotIt: 'Alles klar',
+    // "Tipps überspringen" is 18 chars against 14; Weiter already moves one tip on.
+    skip: 'Überspringen',
+    picker: {
+      switch: {
+        heading: 'Vereine oder Nationen',
+        body: 'Wechsle hier und filtere dann nach Liga oder Kontinentalverband.',
+      },
+      pick: {
+        heading: 'Wähle ein Team',
+        body: 'Tippe auf ein Team, um seine Level zu sehen und loszulegen.',
+      },
+    },
+    difficulty: {
+      start: {
+        heading: 'Hier fängst du an',
+        body: 'Du siehst eine Rückennummer und ein paar Hinweise und wählst den Namen. Mit 8/10 schaltest du Level 2 frei.',
+      },
+      star: {
+        heading: 'Mach es zu deinem Team',
+        body: 'Markiere ein Team, dann wartet es auf der Startseite auf dich.',
+      },
+      study: {
+        heading: 'Oder erst lernen',
+        body: 'Sieh dir den ganzen Kader an. Mit „Ohne Namen“ testest du dich selbst.',
+      },
+    },
+    study: {
+      hide: {
+        heading: 'Teste dich selbst',
+        body: 'Schalte „Ohne Namen“ ein und tippe auf eine Karte, um nachzusehen.',
+      },
+      positions: {
+        heading: 'Eine Position nach der anderen',
+        body: 'Lerne erst die Torhüter, dann die Abwehr, das Mittelfeld und den Sturm.',
+      },
+    },
+  },
   languageSheet: {
     title: 'Sprache',
     matchPhone: (name: string) => `Systemsprache · ${name}`,
@@ -379,8 +423,8 @@ export const de: Messages = {
         {
           heading: 'Was auf deinem Gerät gespeichert wird',
           paragraphs: [
-            `${ESCUADRA} speichert zehn Dinge lokal auf deinem Gerät: deinen Rekord für jedes Team und jedes Level, anhand dessen die App ermittelt, welche Level du abgeschlossen hast; das letzte Team und Level, das du gespielt hast; die Teams, die du mit einem Stern markiert hast; deine Einstellung für helles oder dunkles Design; deine Sprachwahl; ob die Vibration eingeschaltet ist; ob die Kaderansicht Karten oder eine Liste zeigt; welche Version der App zuletzt dein Smartphone gebeten hat, eine Bewertungsanfrage anzuzeigen; deine Entscheidung zu den Nutzungsstatistiken; und die zufällige Kennung, die diese Statistiken verwenden. Die Update-Prüfung der App speichert außerdem eine eigene zufällige Kennung auf deinem Gerät.`,
-            `Diese Daten liegen im eigenen, privaten Speicher der App. ${ESCUADRA} selbst sendet nur zwei dieser zehn Dinge von deinem Gerät aus, und nur, solange die Nutzungsstatistiken eingeschaltet sind: die Kennung, die in gehashter Form mit jeder Statistik gesendet wird, und deine Sprachwahl, die in der Statistik enthalten ist, die beim Öffnen der App gesendet wird. Wenn du die App löschst, werden all diese Daten von deinem Gerät gelöscht, ebenso alle zwischengespeicherten Fotos. ${ESCUADRA} hat kein eigenes Backup und keine eigene Synchronisierung, aber die Backups deines Geräts (unter iOS in iCloud oder auf einem Computer; unter Android bei Google) können diese Daten enthalten. Der Entwickler hat keinen Zugriff auf diesen Speicher.`,
+            `${ESCUADRA} speichert elf Dinge lokal auf deinem Gerät: deinen Rekord für jedes Team und jedes Level, anhand dessen die App ermittelt, welche Level du abgeschlossen hast; das letzte Team und Level, das du gespielt hast; die Teams, die du mit einem Stern markiert hast; deine Einstellung für helles oder dunkles Design; deine Sprachwahl; ob die Vibration eingeschaltet ist; ob die Kaderansicht Karten oder eine Liste zeigt; welche Tipps der Spielanleitung du gesehen hast und ob du sie übersprungen hast; welche Version der App zuletzt dein Smartphone gebeten hat, eine Bewertungsanfrage anzuzeigen; deine Entscheidung zu den Nutzungsstatistiken; und die zufällige Kennung, die diese Statistiken verwenden. Die Update-Prüfung der App speichert außerdem eine eigene zufällige Kennung auf deinem Gerät.`,
+            `Diese Daten liegen im eigenen, privaten Speicher der App. ${ESCUADRA} selbst sendet nur zwei dieser elf Dinge von deinem Gerät aus, und nur, solange die Nutzungsstatistiken eingeschaltet sind: die Kennung, die in gehashter Form mit jeder Statistik gesendet wird, und deine Sprachwahl, die in der Statistik enthalten ist, die beim Öffnen der App gesendet wird. Wenn du die App löschst, werden all diese Daten von deinem Gerät gelöscht, ebenso alle zwischengespeicherten Fotos. ${ESCUADRA} hat kein eigenes Backup und keine eigene Synchronisierung, aber die Backups deines Geräts (unter iOS in iCloud oder auf einem Computer; unter Android bei Google) können diese Daten enthalten. Der Entwickler hat keinen Zugriff auf diesen Speicher.`,
           ],
         },
         {

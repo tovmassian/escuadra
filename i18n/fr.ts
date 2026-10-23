@@ -68,6 +68,51 @@ export const fr: Messages = {
     allTeams: 'Toutes les équipes',
     starHint: 'Mets une étoile à une équipe, elle t’attendra ici.',
   },
+  tips: {
+    // "Comment jouer", as game menus say; About's stored list names the tips
+    // ("astuces") the same way.
+    kicker: (step: number, count: number) => `Comment jouer · ${step}/${count}`,
+    spoken: (step: number, count: number) => `Comment jouer, astuce ${step} sur ${count}`,
+    next: 'Suivant',
+    // "Compris", as the round's "Compris, suivant" says.
+    gotIt: 'Compris',
+    // "Passer les astuces" is 18 chars against 14; Suivant already moves one tip on.
+    skip: 'Passer',
+    picker: {
+      switch: {
+        heading: 'Clubs ou sélections',
+        body: 'Bascule ici, puis affine par championnat ou par confédération.',
+      },
+      pick: {
+        heading: 'Choisis une équipe',
+        body: 'Appuie sur une équipe pour voir ses niveaux et commencer.',
+      },
+    },
+    difficulty: {
+      start: {
+        heading: 'Commence ici',
+        body: 'Tu vois un numéro de maillot et quelques indices, et tu choisis le nom. Fais 8/10 pour débloquer le niveau 2.',
+      },
+      star: {
+        heading: 'Garde-la sous la main',
+        body: 'Mets une étoile à une équipe, elle t’attendra sur l’écran d’accueil.',
+      },
+      study: {
+        heading: 'Ou révise d’abord',
+        body: 'Parcours tout l’effectif. Cache les noms pour te tester.',
+      },
+    },
+    study: {
+      hide: {
+        heading: 'Teste-toi',
+        body: 'Cache les noms, puis appuie sur une carte pour vérifier.',
+      },
+      positions: {
+        heading: 'Un poste à la fois',
+        body: 'Apprends d’abord les gardiens, puis la défense, le milieu et l’attaque.',
+      },
+    },
+  },
   languageSheet: {
     title: 'Langue',
     // "Langue du téléphone · Italiano" is 30 chars against 28.
@@ -415,8 +460,8 @@ export const fr: Messages = {
         {
           heading: 'Ce qui est enregistré sur ton appareil',
           paragraphs: [
-            `${ESCUADRA} enregistre dix éléments en local, sur ton appareil : ton record pour chaque équipe et chaque niveau de difficulté, dont l’application déduit les niveaux que tu as validés ; la dernière équipe et le dernier niveau joués ; les équipes que tu as marquées d’une étoile ; ta préférence de thème, clair ou sombre ; ton choix de langue ; si les vibrations sont activées ; si l’écran Effectif affiche des cartes ou une liste ; quelle version de l’application a demandé en dernier à ton téléphone d’afficher une invitation à l’évaluer ; ton choix concernant les statistiques d’utilisation ; et l’identifiant aléatoire qu’utilisent ces statistiques. La vérification des mises à jour de l’application conserve aussi son propre identifiant aléatoire sur ton appareil.`,
-            `Ces données se trouvent dans l’espace de stockage privé propre à l’application. ${ESCUADRA} elle-même n’envoie que deux de ces dix éléments hors de ton appareil, et seulement tant que les statistiques d’utilisation sont activées : l’identifiant, envoyé sous forme hachée avec chaque statistique, et ton choix de langue, inclus dans la statistique envoyée à l’ouverture de l’application. Supprimer l’application efface toutes ces données de ton appareil, ainsi que les éventuelles photos en cache. ${ESCUADRA} n’effectue aucune sauvegarde ni synchronisation de son côté, mais les sauvegardes de ton appareil (sous iOS, dans iCloud ou sur un ordinateur ; sous Android, chez Google) peuvent inclure ces données. Le développeur n’a pas accès à cet espace de stockage.`,
+            `${ESCUADRA} enregistre onze éléments en local, sur ton appareil : ton record pour chaque équipe et chaque niveau de difficulté, dont l’application déduit les niveaux que tu as validés ; la dernière équipe et le dernier niveau joués ; les équipes que tu as marquées d’une étoile ; ta préférence de thème, clair ou sombre ; ton choix de langue ; si les vibrations sont activées ; si l’écran Effectif affiche des cartes ou une liste ; quelles astuces « Comment jouer » tu as vues, et si tu les as passées ; quelle version de l’application a demandé en dernier à ton téléphone d’afficher une invitation à l’évaluer ; ton choix concernant les statistiques d’utilisation ; et l’identifiant aléatoire qu’utilisent ces statistiques. La vérification des mises à jour de l’application conserve aussi son propre identifiant aléatoire sur ton appareil.`,
+            `Ces données se trouvent dans l’espace de stockage privé propre à l’application. ${ESCUADRA} elle-même n’envoie que deux de ces onze éléments hors de ton appareil, et seulement tant que les statistiques d’utilisation sont activées : l’identifiant, envoyé sous forme hachée avec chaque statistique, et ton choix de langue, inclus dans la statistique envoyée à l’ouverture de l’application. Supprimer l’application efface toutes ces données de ton appareil, ainsi que les éventuelles photos en cache. ${ESCUADRA} n’effectue aucune sauvegarde ni synchronisation de son côté, mais les sauvegardes de ton appareil (sous iOS, dans iCloud ou sur un ordinateur ; sous Android, chez Google) peuvent inclure ces données. Le développeur n’a pas accès à cet espace de stockage.`,
           ],
         },
         {
