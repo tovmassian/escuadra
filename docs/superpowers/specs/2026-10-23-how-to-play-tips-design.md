@@ -107,8 +107,9 @@ the initial state.
 ## Theme
 
 The canvas is dark only. Dark is the canvas: scrim `rgba(8,9,12,0.82)`, backing
-`rgba(8,9,12,0.78)`, body `#dfe1e6`. Light is built from the light palette the same way: the
-light ground's own ink as the scrim and backing (`rgba(247,247,249,0.9)`, `0.85`), heading
+`rgba(8,9,12,0.94)`, body `#dfe1e6`; the canvas's backing, 0.78, let the dimmed screen ghost
+through the tip, so it is raised. Light is built from the light palette the same way: the
+light ground's own ink as the scrim and backing (`rgba(247,247,249,0.9)`, `0.95`), heading
 `textPrimary`, body `textSecondary`, ring and kicker `accentLine`, Next `ctaBg` on `ctaText`.
 New roles in both palettes: `tipScrim`, `tipBacking`, `tipBody`. Everything else is an existing
 role. A composite contrast test holds the body over the backing over the scrim to 4.5:1 in

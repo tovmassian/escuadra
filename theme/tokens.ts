@@ -153,7 +153,8 @@ export interface Palette {
    *  composite test holds the tip's text over it. */
   tipScrim: string;
   /** The soft backing behind a tip's text, so the dimmed screen never shows
-   *  through it. Translucent. */
+   *  through it. Near opaque, above the canvas's 0.78, which let the screen
+   *  ghost through; its blurred edge still blends into the scrim. */
   tipBacking: string;
   /** A tip's body line. */
   tipBody: string;
@@ -248,7 +249,7 @@ const darkRoles = {
   backgroundClear: 'rgba(18,20,26,0)',
   ctaLine: 'rgba(20,22,26,0.14)',
   tipScrim: 'rgba(8,9,12,0.82)',
-  tipBacking: 'rgba(8,9,12,0.78)',
+  tipBacking: 'rgba(8,9,12,0.94)',
   tipBody: '#dfe1e6',
 } as const;
 
@@ -303,7 +304,7 @@ const lightRoles = {
   backgroundClear: 'rgba(247,247,249,0)',
   ctaLine: 'rgba(255,255,255,0.16)',
   tipScrim: 'rgba(247,247,249,0.9)',
-  tipBacking: 'rgba(247,247,249,0.85)',
+  tipBacking: 'rgba(247,247,249,0.95)',
   tipBody: '#4b4f56',
 } as const;
 
