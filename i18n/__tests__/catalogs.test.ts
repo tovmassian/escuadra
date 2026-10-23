@@ -112,7 +112,7 @@ it('pins the English About the translations were made from', () => {
     .filter((leaf) => leaf.path.startsWith('about.'))
     .map((leaf) => `${leaf.path}\t${leaf.text}`)
     .join('\n');
-  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('e2267b118687c2c6');
+  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('3f9e2a1f800bd31d');
 });
 
 describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {

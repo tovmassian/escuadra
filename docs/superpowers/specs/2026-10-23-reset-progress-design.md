@@ -114,14 +114,15 @@ palettes: `#12141a` on dark's `#f05653` (about 5.3:1), `#ffffff` on light's `#c2
 
 ## About (guardrail 7)
 
-The owner chose to say it in About (2026-10-23). One sentence follows "Deleting the app deletes
+The owner chose to say it in About (2026-10-23) (owner, 2026-10-24: the app-update identifier
+joins the exceptions after review). One sentence follows "Deleting the app deletes
 all of it from your device, along with any cached photos." in `en.about`'s "What is stored on
 your device":
 
 > You can also erase it in Settings, under Your data: one team's scores, all your scores, or,
 > with Reset Escuadra, everything listed above and any cached photos, except your choice about
-> usage statistics and the app version that last asked for a rating. A reset gives usage
-> statistics a new random identifier.
+> usage statistics, the app version that last asked your phone to show a rating prompt, and the
+> app-update check's identifier. A reset gives usage statistics a new random identifier.
 
 That changes every catalog's `about` in the same PR. Each translation goes through the
 language-expert review, the About hash in `i18n/__tests__/catalogs.test.ts` moves, and
