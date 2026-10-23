@@ -148,6 +148,15 @@ export interface Palette {
   /** The ring round a flag or marker on `ctaBg` (Home's Continue), so a
    *  white flag or club colour doesn't bleed into the button. */
   ctaLine: string;
+  // ---- 2.0 How to play (#183) ----
+  /** The scrim around a tip's target: the ground's own ink. Translucent; a
+   *  composite test holds the tip's text over it. */
+  tipScrim: string;
+  /** The soft backing behind a tip's text, so the dimmed screen never shows
+   *  through it. Translucent. */
+  tipBacking: string;
+  /** A tip's body line. */
+  tipBody: string;
 }
 
 // Roles that do not vary by theme. `accent` is dark enough to carry against
@@ -238,6 +247,9 @@ const darkRoles = {
   wallLine: '#33353a',
   backgroundClear: 'rgba(18,20,26,0)',
   ctaLine: 'rgba(20,22,26,0.14)',
+  tipScrim: 'rgba(8,9,12,0.82)',
+  tipBacking: 'rgba(8,9,12,0.78)',
+  tipBody: '#dfe1e6',
 } as const;
 
 // `success` and `error` darken here rather than being reused: at #61bd67 and
@@ -290,6 +302,9 @@ const lightRoles = {
   wallLine: '#d7d8da',
   backgroundClear: 'rgba(247,247,249,0)',
   ctaLine: 'rgba(255,255,255,0.16)',
+  tipScrim: 'rgba(247,247,249,0.9)',
+  tipBacking: 'rgba(247,247,249,0.85)',
+  tipBody: '#4b4f56',
 } as const;
 
 export const palettes: Record<ThemeName, Palette> = {
@@ -827,6 +842,30 @@ export const typography = {
   },
   // First run's "Star a team and it waits for you here."
   homeHint: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 14 },
+  // ---- 2.0 How to play (#183) ----
+  // "HOW TO PLAY · 1/3".
+  tipKicker: {
+    fontFamily: 'IBMPlexMono-SemiBold',
+    fontWeight: '600' as const,
+    fontSize: 11,
+    letterSpacing: 1,
+    textTransform: 'uppercase' as const,
+  },
+  tipHeading: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 26,
+    lineHeight: 28,
+    textTransform: 'uppercase' as const,
+  },
+  tipBody: { fontFamily: 'Inter-Medium', fontWeight: '500' as const, fontSize: 16, lineHeight: 22 },
+  // Next and Got it.
+  tipButton: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 14,
+    letterSpacing: 0.5,
+    textTransform: 'uppercase' as const,
+  },
+  tipSkip: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 14 },
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
@@ -892,6 +931,7 @@ export const durations = {
   segmentStagger: 40, // between results-strip segments
   sheet: 240, // a bottom sheet sliding up
   scrim: 200, // a bottom sheet's backdrop fading in
+  tipFade: 200, // a How to play tip fading in (#183)
   partOut: 120, // the old part's tiles fading out
   partStagger: 20, // between tiles rising in for the next part
   tileStagger: 25, // between tiles rising in for the next question
@@ -1253,6 +1293,29 @@ export const sizes = {
     skirt: 180,
     squadsFade: 32,
   },
+} as const;
+
+// How to play (#183): the gap round a tip's target and the ring's stroke; the
+// arrow's box, its stroke and the space either side of it; the tip's side
+// margin; how far below the safe area the tip stays, clear of Skip tips (Skip's
+// top margin and height, and a gap); how long the first measure may wait for a
+// pushed screen to settle; Skip's height; the step dots; and the blur and
+// spread of the backing's soft edge.
+export const tips = {
+  gap: 5,
+  ring: 2,
+  arrow: { width: 40, height: 40 },
+  arrowStroke: 2.5,
+  arrowGap: 4,
+  tipGap: 8,
+  gutter: 24,
+  skipClear: 96,
+  settleCap: 600,
+  skipHeight: 40,
+  dot: 6,
+  dotActive: 18,
+  backingBlur: 30,
+  backingSpread: 32,
 } as const;
 
 // The share picture's captured size in pixels: a 9:16 story (spec §4.2).
