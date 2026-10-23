@@ -122,7 +122,7 @@ your device":
 > You can also erase it in Settings, under Your data: one team's scores, all your scores, or,
 > with Reset Escuadra, everything listed above and any cached photos, except your choice about
 > usage statistics, the app version that last asked your phone to show a rating prompt, and the
-> app-update check's identifier. A reset gives usage statistics a new random identifier.
+> app-update check's identifier. Reset Escuadra gives usage statistics a new random identifier.
 
 That changes every catalog's `about` in the same PR. Each translation goes through the
 language-expert review, the About hash in `i18n/__tests__/catalogs.test.ts` moves, and
