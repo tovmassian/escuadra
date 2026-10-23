@@ -13,12 +13,18 @@ import Animated, {
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scheduleOnRN } from 'react-native-worklets';
-import { measureInWindow, useLaunchReveal, type DockTarget } from './LaunchReveal';
+import { measureInWindow, useLaunchReveal } from './LaunchReveal';
 import { useReduceMotion } from './useReduceMotion';
 import { useScreenReader } from './useScreenReader';
 import { A_LA_ESCUADRA, ESCUADRA_WORDMARK } from '@/i18n/names';
 import { useT } from '@/i18n/useT';
-import { dockTransform, introPlan, type DockRect, type IntroPlan } from '@/lib/launchIntro';
+import {
+  dockTransform,
+  introPlan,
+  isDockable,
+  type DockRect,
+  type IntroPlan,
+} from '@/lib/launchIntro';
 import { MARK_VIEWBOX, markGeometry } from '@/theme/brand';
 import {
   celebrationEasingCurves,
@@ -131,10 +137,11 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   const skipHint = useSharedValue(still ? 0 : 1);
   const fade = useSharedValue(1);
   // The dock: the ground, and the trail and tagline as they clear, run 1 → 0;
-  // the glide runs 0 → 1 along `move`, set as it starts.
+  // the mark's glide and the word's run 0 → 1 along `move`, set as they start.
   const ground = useSharedValue(1);
   const clear = useSharedValue(1);
   const glide = useSharedValue(0);
+  const glideWord = useSharedValue(0);
   const move = useSharedValue<{ mark: Move; word: Move }>({ mark: AT_REST, word: AT_REST });
 
   // Fades the whole intro, with Home already at rest beneath it.
@@ -147,44 +154,62 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
     );
   };
 
-  const dockInto = (target: DockTarget, markBox: DockRect, wordBox: DockRect) => {
-    const { duration } = launchIntro.dock;
+  // `from` is the intro's mark and word, `to` Home's, all measured just now.
+  const dockInto = (from: { mark: DockRect; word: DockRect }, to: typeof from) => {
+    const { duration, wordDelay } = launchIntro.dock;
     const linear = { duration, easing: Easing.linear, ...ENDING };
+    const rise = Easing.bezier(...celebrationEasingCurves.rise);
     move.set({
-      mark: dockTransform(markBox, target.mark),
-      word: dockTransform(wordBox, target.word),
+      mark: dockTransform(from.mark, to.mark),
+      word: dockTransform(from.word, to.word),
     });
     clear.set(withTiming(0, { ...linear, duration: launchIntro.dock.clear }));
     ground.set(withTiming(0, linear));
     launch?.reveal.set(withTiming(1, linear));
-    glide.set(
-      withTiming(
-        1,
-        { duration, easing: Easing.bezier(...celebrationEasingCurves.rise), ...ENDING },
-        (finished) => {
-          if (finished) scheduleOnRN(finish);
-        },
+    // The word sets off after the mark and lands with it, so it rises clear
+    // of the mark's foot rather than under it.
+    glideWord.set(
+      withDelay(
+        wordDelay,
+        withTiming(1, { duration: duration - wordDelay, easing: rise, ...ENDING }),
+        ENDING.reduceMotion,
       ),
+    );
+    glide.set(
+      withTiming(1, { duration, easing: rise, ...ENDING }, (finished) => {
+        if (finished) scheduleOnRN(finish);
+      }),
     );
   };
 
-  // At `end`: dock into Home's lockup when the strike played and Home has
-  // reported where it is; otherwise fade.
+  // At `end`: when the strike played and Home's lockup is there, measure both
+  // ends now and dock; otherwise, or if any end has no size, fade.
   const end = () => {
     if (endingRef.current) return;
     endingRef.current = true;
-    const target = launch?.target() ?? null;
-    if (plan !== 'play' || !target) {
+    const home = launch?.lockup() ?? null;
+    if (plan !== 'play' || !home) {
       fadeOut(launchIntro.fadeOut);
       return;
     }
-    void Promise.all([measureInWindow(markRef.current), measureInWindow(wordRef.current)]).then(
-      ([markBox, wordBox]) => {
-        if (doneRef.current) return;
-        if (markBox && wordBox) dockInto(target, markBox, wordBox);
-        else fadeOut(launchIntro.fadeOut);
-      },
-    );
+    void Promise.all([
+      measureInWindow(markRef.current),
+      measureInWindow(wordRef.current),
+      measureInWindow(home.mark.current),
+      measureInWindow(home.word.current),
+    ]).then(([markBox, wordBox, homeMark, homeWord]) => {
+      if (doneRef.current) return;
+      if (
+        isDockable(markBox) &&
+        isDockable(wordBox) &&
+        isDockable(homeMark) &&
+        isDockable(homeWord)
+      ) {
+        dockInto({ mark: markBox, word: wordBox }, { mark: homeMark, word: homeWord });
+      } else {
+        fadeOut(launchIntro.fadeOut);
+      }
+    });
   };
 
   useEffect(() => {
@@ -193,6 +218,8 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
       finish();
       return;
     }
+    // A JS timer, since the dock needs JS (measuring). Safe: every UI-thread
+    // beat is over by `end`, so a stalled JS thread only holds the end frame.
     const timer = setTimeout(end, launchIntro.end);
     const easeOut = Easing.out(Easing.ease);
     if (plan === 'play') {
@@ -298,9 +325,9 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   }));
   const wordDockStyle = useAnimatedStyle(() => ({
     transform: [
-      { translateX: move.value.word.translateX * glide.value },
-      { translateY: move.value.word.translateY * glide.value },
-      { scale: 1 + (move.value.word.scale - 1) * glide.value },
+      { translateX: move.value.word.translateX * glideWord.value },
+      { translateY: move.value.word.translateY * glideWord.value },
+      { scale: 1 + (move.value.word.scale - 1) * glideWord.value },
     ],
   }));
   const frameStyle = useAnimatedStyle(() => ({

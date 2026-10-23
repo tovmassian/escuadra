@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { dockTransform, introPlan } from '@/lib/launchIntro';
+import { dockTransform, introPlan, isDockable } from '@/lib/launchIntro';
 
 const fresh = { alreadyShown: false, screenReader: false, reduceMotion: false };
 
@@ -57,5 +57,26 @@ describe('dockTransform', () => {
     const word = { x: 0, y: 0, width: 200, height: 56 };
     const target = { x: 0, y: 0, width: 100, height: 26 };
     expect(dockTransform(word, target).scale).toBeCloseTo(0.5);
+  });
+});
+
+describe('isDockable', () => {
+  it('takes a measured box with a size', () => {
+    expect(isDockable({ x: 0, y: 0, width: 28, height: 28 })).toBe(true);
+  });
+
+  it('refuses a view that was not there to measure', () => {
+    expect(isDockable(null)).toBe(false);
+  });
+
+  it('refuses a box with no size, which would scale to nothing or infinity', () => {
+    expect(isDockable({ x: 10, y: 10, width: 0, height: 22 })).toBe(false);
+    expect(isDockable({ x: 10, y: 10, width: 106, height: 0 })).toBe(false);
+    expect(isDockable({ x: 10, y: 10, width: -4, height: 22 })).toBe(false);
+  });
+
+  it('refuses a box that is not a number', () => {
+    expect(isDockable({ x: Number.NaN, y: 0, width: 28, height: 28 })).toBe(false);
+    expect(isDockable({ x: 0, y: 0, width: Number.POSITIVE_INFINITY, height: 28 })).toBe(false);
   });
 });

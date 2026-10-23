@@ -569,4 +569,9 @@ describe('launch intro motion', () => {
     expect(dock.clear).toBeLessThan(dock.duration);
     expect(dock.contentDelay).toBeLessThan(dock.duration);
   });
+
+  it('sets the word off after the mark, landing with it inside the dock', () => {
+    expect(dock.wordDelay).toBeGreaterThan(0);
+    expect(dock.wordDelay).toBeLessThan(dock.duration);
+  });
 });

@@ -3,7 +3,7 @@ import { DarkTheme, DefaultTheme, Stack, ThemeProvider, type Theme } from 'expo-
 import * as SplashScreen from 'expo-splash-screen';
 import * as Crypto from 'expo-crypto';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-reanimated';
 
@@ -22,17 +22,6 @@ export default function RootLayout() {
   const hydrated = useProgressHydrated();
   const themeName = useThemeName();
   const colors = useThemeColors();
-  const [introDone, setIntroDone] = useState(false);
-  // The intro's hand-off to Home (#182): Home rests at once when the intro
-  // will not show this launch, and waits for its dock when it will.
-  const [revealed] = useState(() => !introWillShow());
-  const launchReveal = useLaunchRevealState(revealed);
-  // However the intro ends (its dock, a fade, or at once for a screen reader),
-  // Home is at rest once it has gone.
-  const endIntro = () => {
-    launchReveal.reveal.set(1);
-    setIntroDone(true);
-  };
 
   // Hold the splash until the type is ready, otherwise the first frame renders
   // in the system font and visibly reflows — and until the persisted
@@ -76,17 +65,39 @@ export default function RootLayout() {
   return (
     <SafeAreaProvider>
       <ThemeProvider value={navTheme}>
-        <LaunchRevealProvider value={launchReveal}>
+        <Launch>
           <Stack
             screenOptions={{
               headerShown: false,
               contentStyle: { backgroundColor: colors.background },
             }}
           />
-          {!introDone && <LaunchIntro onDone={endIntro} />}
-        </LaunchRevealProvider>
+        </Launch>
         <StatusBar style={isDark ? 'light' : 'dark'} />
       </ThemeProvider>
     </SafeAreaProvider>
+  );
+}
+
+// The launch intro (#182) over the stack, and its hand-off to Home. Mounted
+// only once the app is ready, with the stack, so whether Home starts at rest
+// is decided at the same moment as the intro's plan, with the same screen
+// reader answer: at rest whenever the intro will not show.
+function Launch({ children }: { children: ReactNode }) {
+  const [introDone, setIntroDone] = useState(false);
+  const [revealed] = useState(() => !introWillShow());
+  const launchReveal = useLaunchRevealState(revealed);
+  // However the intro ends (its dock, a fade, or at once for a screen reader),
+  // Home is at rest once it has gone.
+  const endIntro = () => {
+    launchReveal.reveal.set(1);
+    setIntroDone(true);
+  };
+
+  return (
+    <LaunchRevealProvider value={launchReveal}>
+      {children}
+      {!introDone && <LaunchIntro onDone={endIntro} />}
+    </LaunchRevealProvider>
   );
 }

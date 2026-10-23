@@ -1099,10 +1099,12 @@ export const launchIntro = {
   // Then the lockup docks into Home's top bar over `dock.duration` (spec,
   // Hand-off to Home): the trail and tagline clear in `clear`, the ground
   // fades, the mark and word glide to Home's, and Home's content rises in from
-  // `contentDelay`. The fallbacks (no Home to dock into, Reduce Motion's end
-  // frame held until `end`, a tap) fade the whole intro over `fadeOut` instead.
+  // `contentDelay`. The word sets off `wordDelay` after the mark and lands
+  // with it, so it rises clear of the mark's foot instead of under it. The
+  // fallbacks (no Home to dock into, Reduce Motion's end frame held until
+  // `end`, a tap) fade the whole intro over `fadeOut` instead.
   end: 1200,
-  dock: { duration: 300, clear: 100, contentDelay: 80 },
+  dock: { duration: 300, clear: 100, contentDelay: 80, wordDelay: 40 },
   fadeOut: 200,
 } as const;
 

@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, useState } from 'react';
+import { createContext, useContext, useRef, useState, type RefObject } from 'react';
 import type { View } from 'react-native';
 import { useSharedValue, type SharedValue } from 'react-native-reanimated';
 import type { DockRect } from '@/lib/launchIntro';
@@ -7,37 +7,42 @@ import type { DockRect } from '@/lib/launchIntro';
 // lockup docks into Home's (spec, Hand-off to Home). The root layout owns it.
 // - `reveal` runs 0 → 1 over the dock; Home's lockup and content read it. It
 //   is 1 whenever the intro is not showing, so Home never waits on it.
-// - Home's `Wordmark` reports where its mark and word are; the intro reads the
-//   latest report when it ends, and docks into it, or fades if there is none.
+// - Home's `Wordmark` registers its mark and word while it is mounted. The
+//   intro measures them, and its own, as it ends: it docks into them, or fades
+//   if there are none.
 
-/** Home's lockup, in window coordinates. */
-export interface DockTarget {
-  mark: DockRect;
-  word: DockRect;
+/** Home's lockup: the views the intro docks into. */
+export interface HomeLockup {
+  mark: RefObject<View | null>;
+  word: RefObject<View | null>;
 }
 
 export interface LaunchReveal {
   reveal: SharedValue<number>;
-  reportTarget: (target: DockTarget) => void;
-  target: () => DockTarget | null;
+  /** Registers Home's lockup; returns what unregisters it. */
+  registerLockup: (lockup: HomeLockup) => () => void;
+  lockup: () => HomeLockup | null;
 }
 
 const LaunchRevealContext = createContext<LaunchReveal | null>(null);
 
 export const LaunchRevealProvider = LaunchRevealContext.Provider;
 
-/** The root layout's state for the provider. `revealed` is whether Home
- *  starts at rest: true when the intro will not show this launch. */
+/** The provider's state. `revealed`, read once, is whether Home starts at
+ *  rest: true when the intro will not show this launch. */
 export function useLaunchRevealState(revealed: boolean): LaunchReveal {
   const reveal = useSharedValue(revealed ? 1 : 0);
-  const targetRef = useRef<DockTarget | null>(null);
-  // Stable across renders, so a reporter's effect never reruns for it.
+  const lockupRef = useRef<HomeLockup | null>(null);
+  // Stable across renders, so a registering effect never reruns for it.
   const [value] = useState<LaunchReveal>(() => ({
     reveal,
-    reportTarget: (target) => {
-      targetRef.current = target;
+    registerLockup: (lockup) => {
+      lockupRef.current = lockup;
+      return () => {
+        if (lockupRef.current === lockup) lockupRef.current = null;
+      };
     },
-    target: () => targetRef.current,
+    lockup: () => lockupRef.current,
   }));
   return value;
 }
@@ -48,7 +53,8 @@ export function useLaunchReveal(): LaunchReveal | null {
 }
 
 /** Where a view is in the window, or null when it is not mounted. Both ends of
- *  the dock are measured this way, so they share one coordinate space. */
+ *  the dock are measured this way, at the same moment, so they share one
+ *  coordinate space. */
 export function measureInWindow(view: View | null): Promise<DockRect | null> {
   return new Promise((resolve) => {
     if (!view) {

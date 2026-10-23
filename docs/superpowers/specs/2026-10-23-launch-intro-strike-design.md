@@ -100,17 +100,20 @@ small, so the intro's lockup becomes it rather than vanishing. From `end` (1200 
   to the place of its counterpart in Home's `Wordmark`: centre to centre, scaled by the ratio
   of their measured widths (so large text and safe areas need no special case). The ball
   moves from `markGeometry.ball` to `ballSmall` on the way, as Home's 28 dp mark draws it, so
-  nothing jumps when Home's own lockup takes over. The mark keeps its colour; the word keeps
-  `textPrimary`.
+  nothing jumps when Home's own lockup takes over. The word sets off `dock.wordDelay` (40 ms)
+  after the mark and lands with it, so it rises clear of the mark's foot rather than under it
+  as the stack becomes a row. The mark keeps its colour; the word keeps `textPrimary`.
 - Home arrives: its gear, headline and buttons rise `spotlightMotion.rise` and fade in,
   starting 80 ms into the dock and ending with it. Home's own lockup stays hidden until the
   dock ends, then shows as the intro unmounts, in the same place.
 
-Both ends are measured in window coordinates (`measureInWindow`): Home's `Wordmark` reports
-its mark and word to the root layout through a small context, and the intro measures its own.
-The context also carries one shared value, the reveal (0 → 1 over the dock), which Home's
-lockup and content read; it starts at 1 whenever the intro will not show (a screen reader,
-a second mount in the same launch), so Home never waits on it.
+Both ends are measured together at `end`, in window coordinates (`measureInWindow`): Home's
+`Wordmark` registers its mark and word with the root layout through a small context while it is
+mounted, and the intro measures them and its own. A missing view or one with no size means no
+target. The context also carries one shared value, the reveal (0 → 1 over the dock), which
+Home's lockup and content read. It is decided when the app is ready, at the same moment as the
+intro's plan, and starts at 1 whenever the intro will not show (a screen reader, a second mount
+in the same launch), so Home never waits on it.
 
 **Fallbacks keep today's fade.** With no measured target by `end` (the first screen is not
 Home, as on a web reload of another route), under Reduce Motion (`still`), and on a tap, the

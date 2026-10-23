@@ -51,13 +51,16 @@ export default function Home() {
   // later visit, shows Home as it is.
   const reveal = useLaunchReveal()?.reveal;
   const arriveStyle = useAnimatedStyle(() => {
-    const t = interpolate(
+    const arrive = interpolate(
       reveal ? reveal.value : 1,
       [launchIntro.dock.contentDelay / launchIntro.dock.duration, 1],
       [0, 1],
       Extrapolation.CLAMP,
     );
-    return { opacity: t, transform: [{ translateY: spotlightMotion.rise * (1 - t) }] };
+    return {
+      opacity: arrive,
+      transform: [{ translateY: spotlightMotion.rise * (1 - arrive) }],
+    };
   });
 
   const openPicker = () => router.push('/team-picker');

@@ -30,6 +30,15 @@ export interface DockRect {
   height: number;
 }
 
+/** Whether a measured box can be docked from or into: there, with a real
+ *  size. A view that unmounted, or has not laid out, gives none, and the
+ *  intro fades instead (a zero width would scale to nothing or infinity). */
+export function isDockable(rect: DockRect | null): rect is DockRect {
+  if (!rect) return false;
+  const { x, y, width, height } = rect;
+  return [x, y, width, height].every(Number.isFinite) && width > 0 && height > 0;
+}
+
 /** The transform that lays `from` over `to`: centre to centre, scaled by the
  *  ratio of their widths. React Native scales about a view's own centre, so
  *  the translate is simply the distance between the two centres. */
