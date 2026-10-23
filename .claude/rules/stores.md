@@ -6,7 +6,7 @@ paths:
 # State
 
 - **Persisted vs ephemeral state.** `stores/progress.ts` is persisted via
-  AsyncStorage — best scores, teams played, preferences. `stores/session.ts` is
+  AsyncStorage — best scores, teams played, starred teams, preferences. `stores/session.ts` is
   ephemeral — current round state. A half-finished round must not survive an
   app restart. Put new state in whichever of the two fits; add a third store
   only when neither does, and say why in the PR.
