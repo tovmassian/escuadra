@@ -57,6 +57,9 @@ export const es: Messages = {
     allTeams: 'Todos los equipos',
     starHint: 'Marca un equipo con la estrella y te esperará aquí.',
   },
+  launch: {
+    tapToSkip: 'Toca para saltar',
+  },
   languageSheet: {
     title: 'Idioma',
     // Under the title "Idioma": follow the phone. "Idioma del teléfono ·

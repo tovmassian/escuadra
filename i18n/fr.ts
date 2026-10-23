@@ -68,6 +68,10 @@ export const fr: Messages = {
     allTeams: 'Toutes les équipes',
     starHint: 'Mets une étoile à une équipe, elle t’attendra ici.',
   },
+  launch: {
+    // "Appuie", as the round's skip hint: the player is "tu".
+    tapToSkip: 'Appuie pour passer',
+  },
   languageSheet: {
     title: 'Langue',
     // "Langue du téléphone · Italiano" is 30 chars against 28.

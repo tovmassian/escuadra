@@ -60,6 +60,10 @@ export const de: Messages = {
     allTeams: 'Alle Teams',
     starHint: 'Markiere ein Team, dann wartet es hier auf dich.',
   },
+  launch: {
+    // "Tippen zum Überspringen" is 23 chars against 22.
+    tapToSkip: 'Tippen: Überspringen',
+  },
   languageSheet: {
     title: 'Sprache',
     matchPhone: (name: string) => `Systemsprache · ${name}`,

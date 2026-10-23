@@ -54,6 +54,9 @@ export const it: Messages = {
     allTeams: 'Tutte le squadre',
     starHint: 'Metti la stella a una squadra: ti aspetta qui.',
   },
+  launch: {
+    tapToSkip: 'Tocca per saltare',
+  },
   languageSheet: {
     title: 'Lingua',
     // "Lingua del telefono · Italiano" is 30 chars against 28.
