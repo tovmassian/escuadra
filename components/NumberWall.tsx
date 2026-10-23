@@ -5,7 +5,6 @@ import Animated, {
   Easing,
   cancelAnimation,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withRepeat,
   withSequence,
@@ -13,7 +12,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import Svg, { Text as SvgText } from 'react-native-svg';
 import { useAppActive } from './useAppActive';
-import { WALL_ROWS, layoutRow, rowOffset, type WallRowSpec } from '@/lib/numberWall';
+import { useReduceMotion } from './useReduceMotion';
+import { WALL_ROWS, layoutRow, numberWidth, rowOffset, type WallRowSpec } from '@/lib/numberWall';
 import { numberWall, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
@@ -22,13 +22,16 @@ const NO_PAINT = 'none';
 
 // Home's number wall (#181): four rows of shirt numbers drifting in alternate
 // directions behind the headline. React Native text has no outline, so each
-// row is one SVG of outlined numbers, drawn once and moved on the UI thread.
+// number is a small SVG of outlined text, drawn once; a row's view is moved on
+// the UI thread. One SVG per number, not per row: Android caches an SVG as one
+// bitmap, and a whole row would pass some GPUs' texture limit.
 // Decorative: hidden from screen readers and from touches. The drift is the
-// Motion rule's written exception; it stands still under Reduce Motion, and
-// stops while the app is in the background or Home isn't the focused screen.
+// Motion rule's written exception; it stands still under Reduce Motion (read
+// live, so turning it on mid-session stops the drift), and stops while the app
+// is in the background or Home isn't the focused screen.
 export function NumberWall({ top }: { top: number }) {
   const { width } = useWindowDimensions();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const focused = useIsFocused();
   const active = useAppActive();
   const running = !reduced && focused && active;
@@ -89,11 +92,15 @@ function WallRow({
   const fills = { primary: colors.textPrimary, mark: colors.mark } as const;
   return (
     <Animated.View style={[{ width: layout.width, height: numberWall.rowHeight }, drift]}>
-      <Svg width={layout.width} height={numberWall.rowHeight}>
-        {layout.items.map((item) => (
+      {layout.items.map((item) => (
+        <Svg
+          key={item.x}
+          width={numberWidth(item.n) + 2 * numberWall.stroke}
+          height={numberWall.rowHeight}
+          style={[styles.number, { left: item.x }]}
+        >
           <SvgText
-            key={item.x}
-            x={item.x}
+            x={numberWall.stroke}
             y={numberWall.baseline}
             fontFamily={typography.shirtNumber.fontFamily}
             fontSize={numberWall.fontSize}
@@ -104,12 +111,13 @@ function WallRow({
           >
             {String(item.n)}
           </SvgText>
-        ))}
-      </Svg>
+        </Svg>
+      ))}
     </Animated.View>
   );
 }
 
 const styles = StyleSheet.create({
+  number: { position: 'absolute', top: 0 },
   wall: { position: 'absolute', left: 0, right: 0, overflow: 'hidden', pointerEvents: 'none' },
 });

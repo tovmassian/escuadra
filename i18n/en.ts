@@ -62,7 +62,7 @@ export const en = {
   home: {
     /** The gear button's spoken name. */
     settings: 'Settings',
-    /** ≤ 24 chars: the continue card's meta line, in IBM Plex Mono capitals. */
+    /** ≤ 24 chars: Continue's meta line, in IBM Plex Mono capitals. */
     continueMeta: (level: number, best: number | undefined, total: number) =>
       best === undefined ? `LEVEL ${level}` : `LEVEL ${level} · BEST ${best}/${total}`,
     /** ≤ 18 chars: the main button. */

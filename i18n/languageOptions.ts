@@ -1,4 +1,4 @@
-// What the Home language sheet lists and what its chip says (#143). React-free
+// What Settings' language sheet lists and what its row says (#143). React-free
 // like ./resolveLanguage.ts, so Vitest can test it.
 import { resolveLanguage, type Language, type LanguagePreference } from './resolveLanguage';
 

@@ -23,8 +23,8 @@ interface ProgressState {
   /** Key: `${squadId}:${level}`. Each best keeps the squad's `lastUpdated`
    *  from when it was set, so a later squad update marks it outdated (#180). */
   bestScores: Record<string, BestScore>;
-  /** Backs Home's "continue" card — the most recent team+level a round was
-   *  started for, regardless of how it finished. */
+  /** Backs Home's Continue button (#181) — the most recent team+level a round
+   *  was started for, regardless of how it finished. */
   lastPlayed: LastPlayed | null;
   /** Appearance preference. `'system'` follows the device setting; an explicit
    *  value pins one theme. Survives `reset()`, which clears game progress

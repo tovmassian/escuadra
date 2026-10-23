@@ -49,6 +49,7 @@ export function HomeSquads({
       alignItems: 'center',
       gap: spacing.xxs,
       minHeight: sizes.minTapTarget,
+      // Holds "All teams" to the right when no team is starred (else the ScrollView's flex does).
       marginLeft: 'auto',
     },
     allTeamsLabel: { ...typography.rowTitle, color: colors.textSecondary },

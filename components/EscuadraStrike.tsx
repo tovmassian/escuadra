@@ -131,8 +131,7 @@ export function EscuadraStrike({ size, color, ballColor = color, timing }: Escua
       trail0.value = withDelay(delay, withTiming(1, { duration, easing: riseEasing }));
       trail1.value = withDelay(delay + stagger, withTiming(1, { duration, easing: riseEasing }));
     }
-    // Plays once, on mount — a fresh strike each time the results screen or
-    // home screen mounts.
+    // Plays once, on mount — a fresh strike each time the results screen mounts.
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

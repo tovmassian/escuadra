@@ -3,7 +3,7 @@
 [![check](https://github.com/tovmassian/escuadra/actions/workflows/check.yml/badge.svg)](https://github.com/tovmassian/escuadra/actions/workflows/check.yml)
 
 Escuadra — a football squad memorisation trainer for iOS and Android. Expo SDK 57 + expo-router, TypeScript strict,
-Zustand, Reanimated. Light and dark themes, following the device setting by default, with a toggle on Home.
+Zustand, Reanimated. Light and dark themes, following the device setting by default, with a theme setting in Settings.
 
 Runs in **Expo Go** for local development — no Xcode, no Apple Developer account, no native build.
 

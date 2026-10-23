@@ -149,7 +149,8 @@ export function assertProfileDimensions(
  * nothing from i18n/, because that would make Node load a `.ts` file from a
  * package with no "type" and warn on every `npm run shots*`. A language
  * without a reviewed catalog is rejected by capture-screens.mjs instead: its
- * Home-chip assertion throws when the chip does not show the requested code.
+ * check of Settings' language row throws when the row does not show the
+ * requested language.
  */
 export function resolveLanguageArg(argv: readonly string[]): string | null {
   if (argv.includes('--lang')) {
