@@ -14,11 +14,17 @@ import {
 const GH_DIR = fileURLToPath(new URL('../../sandbox/', import.meta.url));
 
 function git(cwd: string, ...args: string[]): string {
+  return gitWithInput(cwd, undefined, ...args);
+}
+
+// Every git call strips GIT_*: a hook exports GIT_DIR, and git would then act on the hook's repo.
+function gitWithInput(cwd: string, input: string | undefined, ...args: string[]): string {
   const identity = ['-c', 'user.name=Test', '-c', 'user.email=test@example.invalid'];
   return execFileSync('git', [...identity, '-c', 'commit.gpgsign=false', ...args], {
     cwd,
     encoding: 'utf8',
     env: withoutGitVars(process.env),
+    input,
   }).trim();
 }
 
@@ -328,13 +334,9 @@ function lateSecretSource() {
   git(dir, 'commit', '--quiet', '-m', 'older');
   // A header git's own commit-tree drops: a rewrite of this commit would change its hash, so an
   // unchanged hash shows the commit was never rewritten.
-  const plain = execFileSync('git', ['cat-file', 'commit', 'HEAD'], { cwd: dir, encoding: 'utf8' });
+  const plain = git(dir, 'cat-file', 'commit', 'HEAD');
   const marked = plain.replace('\n\n', '\nx-untouched yes\n\n');
-  const older = execFileSync('git', ['hash-object', '-t', 'commit', '-w', '--stdin'], {
-    cwd: dir,
-    encoding: 'utf8',
-    input: marked,
-  }).trim();
+  const older = gitWithInput(dir, marked, 'hash-object', '-t', 'commit', '-w', '--stdin');
   git(dir, 'reset', '--quiet', '--hard', older);
   git(dir, 'branch', 'release/old');
   // A side branch that diverges before the first touching commit and carries its own commits, one
@@ -344,16 +346,9 @@ function lateSecretSource() {
   writeFileSync(join(dir, 'side.md'), 'side one\n');
   git(dir, 'add', '.');
   git(dir, 'commit', '--quiet', '-m', 'side one');
-  const sidePlain = execFileSync('git', ['cat-file', 'commit', 'HEAD'], {
-    cwd: dir,
-    encoding: 'utf8',
-  });
+  const sidePlain = git(dir, 'cat-file', 'commit', 'HEAD');
   const sideMarked = sidePlain.replace('\n\n', '\nx-untouched yes\n\n');
-  const sideMid = execFileSync('git', ['hash-object', '-t', 'commit', '-w', '--stdin'], {
-    cwd: dir,
-    encoding: 'utf8',
-    input: sideMarked,
-  }).trim();
+  const sideMid = gitWithInput(dir, sideMarked, 'hash-object', '-t', 'commit', '-w', '--stdin');
   git(dir, 'reset', '--quiet', '--hard', sideMid);
   writeFileSync(join(dir, 'side.md'), 'side two\n');
   git(dir, 'add', '.');
