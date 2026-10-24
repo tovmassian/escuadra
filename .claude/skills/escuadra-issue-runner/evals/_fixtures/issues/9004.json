@@ -2,11 +2,11 @@
   "number": 9004,
   "title": "feat(study): sort the list view by shirt number or by name",
   "state": "OPEN",
-  "body": "**Size:** M\n\nStudy's list view keeps the squad's file order. Add a two-way sort above the list: shirt number (the default) or name.\n\n### Work\n\n- [ ] The sort in `lib/studyView.ts`, pure, with tests\n- [ ] A `SegmentedControl` above the list in `app/team/[squadId]/study.tsx`\n- [ ] Persist the choice in `stores/progress.ts`, next to the grid/list choice\n- [ ] About's \"What is stored on your device\" list counts the new preference\n\n### Acceptance criteria\n\n- [ ] Both sorts work in grid and list, with Hide names on and off\n- [ ] The choice survives an app restart\n- [ ] `npm run check` passes",
+  "body": "**Size:** M\n\nStudy's list view always runs in shirt-number order (`studyRows` in `lib/studyView.ts`). Add a two-way sort above the list: shirt number (the default) or name.\n\n### Work\n\n- [ ] The sort in `lib/studyView.ts`, pure, with tests\n- [ ] A two-option control above the list in `app/team/[squadId]/study.tsx`, beside the grid/list toggle\n- [ ] Persist the choice in `stores/progress.ts`, next to `studyView`\n- [ ] About's \"What is stored on your device\" list counts the new preference\n\n### Acceptance criteria\n\n- [ ] Both sorts work in grid and list, with Hide names on and off\n- [ ] The choice survives an app restart\n- [ ] `npm run check` passes",
   "comments": [],
   "labels": ["enhancement"],
   "milestone": null,
   "size": "M",
-  "source": "synthetic",
+  "source": "synthetic; reworded 2026-10-24 for the new main pin (Study already sorts by shirt number, always; there is no SegmentedControl)",
   "why": "An M feature with no docs on clean main: it stays in place (only L and XL get a worktree) and starts with brainstorming."
 }

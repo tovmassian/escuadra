@@ -43,10 +43,12 @@ describe('escuadra-issue-runner suite', () => {
         '115-closed',
         '116-release',
         '160-route-choice',
-        '55-tbc',
+        '55-store-console',
         '59-gh-pages',
         'dirty-tree',
         'fingerprint-on-release',
+        'large-spec',
+        'large-spec-subagent',
         'm-boundary',
         'neg-create-issue',
         'neg-question',
@@ -57,6 +59,8 @@ describe('escuadra-issue-runner suite', () => {
         'plan-half-done',
         'sandbox-smoke',
         'shipped-fix-from-main',
+        'small-bug',
+        'tbc-title',
       ].sort(),
     );
   });

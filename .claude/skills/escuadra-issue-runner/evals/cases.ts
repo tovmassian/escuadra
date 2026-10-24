@@ -129,11 +129,86 @@ const LICENCES_PLAN = 'docs/superpowers/plans/2026-10-20-licences-sheet.md';
 const STUDY_PLAN = 'docs/superpowers/plans/2026-10-16-2-0-study.md';
 const STREAK_SPEC = 'docs/superpowers/specs/2026-10-01-streak-badges-design.md';
 const STREAK_PLAN = 'docs/superpowers/plans/2026-10-02-streak-badges.md';
+const FLAG_SPEC = 'docs/superpowers/specs/2026-10-20-flagged-players-design.md';
 
 const triage = (expect: Omit<Triage, 'kind'>): Triage => ({ kind: 'triage', ...expect });
 const NEGATIVE_BUDGET = { maxTurns: 15, timeoutSeconds: 300 };
 
 const CASES: EvalCase[] = [
+  {
+    name: 'small-bug',
+    why: "An S bug on clean main: in place, systematic-debugging. The board's S beats the body's M, and a device check is not a question.",
+    tags: ['core', 'workspace'],
+    prompt: 'Pick up #9010.',
+    issues: [9010],
+    expect: triage({
+      decision: 'proceed',
+      workspace: 'in-place',
+      base: 'main',
+      branch: { prefix: 'fix/9010-' },
+      firstStep: 'systematic-debugging',
+      execution: 'n/a',
+      docs: [HANDOFF],
+    }),
+  },
+  {
+    name: 'large-spec',
+    why: 'An L feature with a spec and no plan: a worktree, writing-plans, and the execution mode asked up front.',
+    tags: ['core', 'workspace', 'ask'],
+    prompt: "Let's do issue 9011.",
+    issues: [9011],
+    commits: [
+      {
+        message: 'docs(spec): flagged players (#9011)',
+        files: [{ path: FLAG_SPEC, fixture: 'docs/9011-spec.md' }],
+      },
+    ],
+    expect: triage({
+      decision: 'ask',
+      workspace: 'worktree',
+      base: 'main',
+      branch: { prefix: 'feat/9011-' },
+      firstStep: 'writing-plans',
+      execution: 'ask',
+      docs: [FLAG_SPEC],
+      questions:
+        'one asks whether to run the plan with superpowers:subagent-driven-development or superpowers:executing-plans; none asks something the issue, the spec or CLAUDE.md already answers.',
+    }),
+  },
+  {
+    name: 'large-spec-subagent',
+    why: 'The same issue with the execution mode given in the prompt: nothing is left to ask, so the skill proceeds.',
+    tags: ['workspace'],
+    prompt: 'Pick up #9011 and run the plan with subagents.',
+    issues: [9011],
+    commits: [
+      {
+        message: 'docs(spec): flagged players (#9011)',
+        files: [{ path: FLAG_SPEC, fixture: 'docs/9011-spec.md' }],
+      },
+    ],
+    expect: triage({
+      decision: 'proceed',
+      workspace: 'worktree',
+      base: 'main',
+      branch: { prefix: 'feat/9011-' },
+      firstStep: 'writing-plans',
+      execution: 'subagent-driven',
+      docs: [FLAG_SPEC],
+    }),
+  },
+  {
+    name: 'tbc-title',
+    why: '[TBC] in the title: the skill asks whether the issue is ready to work.',
+    tags: ['ask'],
+    prompt: 'Work on #9012.',
+    issues: [9012],
+    expect: triage({
+      decision: 'ask',
+      questions:
+        'one asks the owner to confirm the [TBC] issue is ready to work (its scope or its wording), because its title carries [TBC].',
+    }),
+  },
   {
     name: '160-route-choice',
     why: 'The issue asks the owner to pick between two routes and touches licence notices: the skill asks.',
@@ -148,7 +223,7 @@ const CASES: EvalCase[] = [
     }),
   },
   {
-    name: '55-tbc',
+    name: '55-store-console',
     why: 'The work happens in the store consoles, at submission of the 2.0.0 build: the skill asks.',
     tags: ['ask'],
     prompt: 'Work on #55.',
