@@ -109,10 +109,18 @@ export function buildSandbox(o: BuildOptions): void {
   // object it holds, the unpinned branches' and the hidden paths' included.
   git(o.tmpDir, ['init', '--quiet', '--bare', origin]);
   for (const [branch, sha] of Object.entries(o.setup.pins)) {
-    git(origin, ['fetch', '--quiet', '--no-tags', o.sourceRepo, `${sha}:refs/heads/${branch}`]);
+    // No FETCH_HEAD: it would name the source repository's path and an original commit.
+    git(origin, [
+      'fetch',
+      '--quiet',
+      '--no-tags',
+      '--no-write-fetch-head',
+      o.sourceRepo,
+      `${sha}:refs/heads/${branch}`,
+    ]);
   }
   git(origin, ['symbolic-ref', 'HEAD', 'refs/heads/main']);
-  if (o.setup.hidden.length > 0) hideFromHistory(origin, o.setup.hidden);
+  if (o.setup.hidden.length > 0) hideFromHistory(origin, o.setup.hidden, Object.keys(o.setup.pins));
 
   git(o.workDir, ['clone', '--quiet', origin, '.']);
   const helpers = dirname(o.realGit);
@@ -172,11 +180,13 @@ function commitFiles(o: BuildOptions, commit: SyntheticCommit): void {
  * Rewrites the history of `origin` without `paths`, then drops the original objects. The rewrite
  * keeps messages, authors and dates, so a case's `git log` reads as the real one; the hashes
  * change. It starts at the earliest commit that touches a path: older commits cannot hold one,
- * keep their hashes, and cost nothing to leave alone. A ref that ends before that commit is not
- * rewritten (filter-branch reports it unchanged). It runs without DATES, which would stamp every
+ * keep their hashes, and cost nothing to leave alone. So does every pinned branch whose whole
+ * history holds none, even one that diverged before that commit and is no ancestor of it: its
+ * `gpgsig` and other headers would be dropped by a rewrite, and its hashes are what main's
+ * `(cherry picked from commit …)` trailers cite. It runs without DATES, which would stamp every
  * rewritten commit with them.
  */
-function hideFromHistory(origin: string, paths: string[]): void {
+function hideFromHistory(origin: string, paths: string[], branches: string[]): void {
   const touching = git(origin, [
     'rev-list',
     '--reverse',
@@ -190,6 +200,10 @@ function hideFromHistory(origin: string, paths: string[]): void {
   if (first === undefined || first === '') return;
   // `first`'s parents and everything behind them stay out of the rewrite. A root has none.
   const parents = git(origin, ['rev-list', '--parents', '-n', '1', first]).split(' ').slice(1);
+  // A branch no hidden path ever touched: its history is out of the rewrite entirely.
+  const untouched = branches.filter(
+    (branch) => git(origin, ['rev-list', '-n', '1', `refs/heads/${branch}`, '--', ...paths]) === '',
+  );
   const quoted = paths.map((path) => `'${path}'`).join(' ');
   execFileSync(
     'git',
@@ -201,6 +215,7 @@ function hideFromHistory(origin: string, paths: string[]): void {
       '--',
       '--all',
       ...parents.map((parent) => `^${parent}`),
+      ...untouched.map((branch) => `^refs/heads/${branch}`),
     ],
     {
       cwd: origin,

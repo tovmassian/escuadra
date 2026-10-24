@@ -190,7 +190,8 @@ describe('buildSandbox under an inherited GIT_DIR', () => {
       branches: [],
       checkout: { branch: 'main' },
       dirty: [],
-      hidden: [],
+      // The source's second commit adds lib/x.ts, so the rewrite, the destructive step, runs.
+      hidden: ['lib'],
     };
     const saved = process.env.GIT_DIR;
     process.env.GIT_DIR = join(decoy, '.git');
@@ -210,7 +211,15 @@ describe('buildSandbox under an inherited GIT_DIR', () => {
     }
     expect(git(work, 'log', '-1', '--format=%s')).toBe('docs: a synthetic commit');
     expect(git(decoy, 'config', '--get', 'core.bare')).toBe('false');
-    expect(() => git(decoy, 'rev-parse', '--verify', 'HEAD')).toThrow();
+    expect(() =>
+      execFileSync('git', ['rev-parse', '--verify', 'HEAD'], {
+        cwd: decoy,
+        env: withoutGitVars(process.env),
+        stdio: 'pipe',
+      }),
+    ).toThrow();
+    // The rewrite ran: main holds no lib/ and its tip is not the source's.
+    expect(git(work, 'ls-tree', '-r', '--name-only', 'origin/main')).not.toContain('lib/');
   });
 });
 
@@ -328,6 +337,28 @@ function lateSecretSource() {
   }).trim();
   git(dir, 'reset', '--quiet', '--hard', older);
   git(dir, 'branch', 'release/old');
+  // A side branch that diverges before the first touching commit and carries its own commits, one
+  // with the header a rewrite drops. It is not an ancestor of that commit, yet it holds no
+  // hidden path, so its hashes must survive.
+  git(dir, 'switch', '--quiet', '-c', 'release/side');
+  writeFileSync(join(dir, 'side.md'), 'side one\n');
+  git(dir, 'add', '.');
+  git(dir, 'commit', '--quiet', '-m', 'side one');
+  const sidePlain = execFileSync('git', ['cat-file', 'commit', 'HEAD'], {
+    cwd: dir,
+    encoding: 'utf8',
+  });
+  const sideMarked = sidePlain.replace('\n\n', '\nx-untouched yes\n\n');
+  const sideMid = execFileSync('git', ['hash-object', '-t', 'commit', '-w', '--stdin'], {
+    cwd: dir,
+    encoding: 'utf8',
+    input: sideMarked,
+  }).trim();
+  git(dir, 'reset', '--quiet', '--hard', sideMid);
+  writeFileSync(join(dir, 'side.md'), 'side two\n');
+  git(dir, 'add', '.');
+  git(dir, 'commit', '--quiet', '-m', 'side two');
+  git(dir, 'switch', '--quiet', 'main');
   mkdirSync(join(dir, 'secret'));
   writeFileSync(join(dir, 'secret', 'answers.md'), 'answer one\n');
   git(dir, 'add', '.');
@@ -339,7 +370,7 @@ function lateSecretSource() {
   git(dir, 'commit', '--quiet', '-m', 'changes the secret');
   const tip = git(dir, 'rev-parse', 'HEAD');
   const secondBlob = git(dir, 'rev-parse', 'HEAD:secret/answers.md');
-  return { dir, older, tip, firstBlob, secondBlob };
+  return { dir, older, tip, firstBlob, secondBlob, sideMid };
 }
 
 describe('buildSandbox with hidden paths that first appear late', () => {
@@ -367,7 +398,7 @@ describe('buildSandbox with hidden paths that first appear late', () => {
       ghDir: GH_DIR,
       realGit: realGitBinary(),
       setup: {
-        pins: { main: source.tip, 'release/old': source.older },
+        pins: { main: source.tip, 'release/old': source.older, 'release/side': source.sideMid },
         issues: [],
         prs: [],
         commits: [],
@@ -383,6 +414,15 @@ describe('buildSandbox with hidden paths that first appear late', () => {
     expect(git(origin, 'rev-parse', 'release/old')).toBe(source.older);
     expect(git(origin, 'rev-parse', 'main~2')).toBe(source.older);
     expect(git(origin, 'rev-parse', 'main~3')).toBe(git(source.dir, 'rev-parse', 'main~3'));
+  });
+
+  it('keeps the hashes of a pinned side branch that diverges before it, pinned below its tip', () => {
+    expect(git(origin, 'rev-parse', 'release/side')).toBe(source.sideMid);
+    expect(git(origin, 'cat-file', 'commit', 'release/side')).toContain('x-untouched yes');
+  });
+
+  it('leaves no FETCH_HEAD naming the source repository', () => {
+    expect(existsSync(join(origin, 'FETCH_HEAD'))).toBe(false);
   });
 
   it('rewrites main without the path, and removes the blobs everywhere', () => {

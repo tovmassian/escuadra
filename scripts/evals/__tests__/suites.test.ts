@@ -31,6 +31,10 @@ describe('escuadra-issue-runner suite', () => {
     }
   });
 
+  it('hides the skill from the sandbox clone (#171)', () => {
+    expect(SUITE.hidden ?? []).toContain('.claude/skills/escuadra-issue-runner');
+  });
+
   it('names every case uniquely, in kebab case', () => {
     const names = SUITE.cases.map((item) => item.name);
     expect(new Set(names).size).toBe(names.length);
