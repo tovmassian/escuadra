@@ -160,7 +160,8 @@ next release branch hold only as cherry-picked copies, so walking the history wo
 reach it. With no such tag, everything is _paste_.
 
 - **A text field** is _skip_ when it equals the same field in
-  `git show <tag>:store/listing/<lang>.md`.
+  `git show <tag>:store/listing/<lang>.md`. A translation's field is also _paste_ when its
+  English changed, so a translation left behind reaches the reviewer and the sheet.
 - **What's new** belongs to a version, not to the listing: it is _paste_ for every new
   version, even if its text repeats, and _skip_ for an off-cycle edit, which has no
   version to carry it.
@@ -169,7 +170,9 @@ reach it. With no such tag, everything is _paste_.
   the catalogs in `i18n/` all equal the tag's. Any catalog change marks them _paste_, so a
   translated screen or tagline is never left stale; the cost is a recapture a version did
   not strictly need.
-- **The declarations** are _skip_ when `store/declarations.md` equals the tag's.
+- **The declarations** are _skip_ when `store/declarations.md` equals the tag's. Like the
+  images, they appear only on a `release/X.Y.Z` checkout's sheet: `main`'s file can run
+  ahead of the live binary, and the declarations must match the binary (guardrail 4).
 
 An off-cycle paste between versions shows as _paste_ again at the next version, which
 costs a repeated paste and nothing else.
