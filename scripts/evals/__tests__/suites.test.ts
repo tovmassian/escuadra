@@ -31,6 +31,10 @@ describe('escuadra-issue-runner suite', () => {
     }
   });
 
+  it('hides the skill from the sandbox clone (#171)', () => {
+    expect(SUITE.hidden ?? []).toContain('.claude/skills/escuadra-issue-runner');
+  });
+
   it('names every case uniquely, in kebab case', () => {
     const names = SUITE.cases.map((item) => item.name);
     expect(new Set(names).size).toBe(names.length);
@@ -42,14 +46,13 @@ describe('escuadra-issue-runner suite', () => {
       [
         '115-closed',
         '116-release',
-        '117-owner-decision',
-        '126-small-bug',
-        '129-large-spec',
-        '129-large-spec-subagent',
-        '55-tbc',
+        '160-route-choice',
+        '55-store-console',
         '59-gh-pages',
         'dirty-tree',
         'fingerprint-on-release',
+        'large-spec',
+        'large-spec-subagent',
         'm-boundary',
         'neg-create-issue',
         'neg-question',
@@ -60,6 +63,8 @@ describe('escuadra-issue-runner suite', () => {
         'plan-half-done',
         'sandbox-smoke',
         'shipped-fix-from-main',
+        'small-bug',
+        'tbc-title',
       ].sort(),
     );
   });

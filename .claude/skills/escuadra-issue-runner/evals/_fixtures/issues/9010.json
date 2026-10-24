@@ -1,0 +1,12 @@
+{
+  "number": 9010,
+  "title": "fix(results): a missed card's line is cut off after two lines",
+  "state": "OPEN",
+  "body": "**Size:** M\n\nOn Results, a missed card shows one line from `missedLine` in `lib/resultsView.ts`. On level 3, where a later part was wrong, it reads like \"Name and position right · …\" followed by the real value and the pick, and `components/PlayerCard.tsx` clamps it to two lines, so the pick is cut off with an ellipsis.\n\n### Work\n\n- [ ] Let a missed card's line show in full\n- [ ] A test for the line's wording in `lib/__tests__/resultsView.test.ts`\n\n### Acceptance criteria\n\n- [ ] On level 3 a missed card shows both the real value and the pick (checked on a device)\n- [ ] `npm run check` passes",
+  "comments": [],
+  "labels": ["bug"],
+  "milestone": "v2.0.0",
+  "size": "S",
+  "source": "synthetic",
+  "why": "An S bug on clean main: in place, systematic-debugging. The board's S beats the body's M, and a device check is not a question."
+}

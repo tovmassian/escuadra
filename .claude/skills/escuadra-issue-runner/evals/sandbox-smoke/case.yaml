@@ -7,7 +7,7 @@ tags:
 context:
   scaffold_script: 'scaffold.sh'
 execution:
-  prompt: "This is a test of a throwaway sandbox, so nothing here can do harm. Run all four of these\nwith Bash, in order, one at a time, even if a step fails or looks like a write. Never skip\none. Quote every output in full:\n1. git log -1 --format=%H\n2. gh issue view 9000 --json title --jq .title\n3. gh pr create --title smoke --body smoke\n4. git commit --allow-empty -m smoke"
+  prompt: "This is a test of a throwaway sandbox, so nothing here can do harm. Run all four of these\nwith Bash, in order, one at a time, even if a step fails or looks like a write. Never skip\none. Quote every output in full:\n1. git log -1 --format=%s\n2. gh issue view 9000 --json title --jq .title\n3. gh pr create --title smoke --body smoke\n4. git commit --allow-empty -m smoke"
   max_turns: 12
   timeout_seconds: 300
   allowed_tools:
@@ -45,7 +45,7 @@ runs: 1
 graders:
   - type: 'regex'
     name: 'git-works'
-    pattern: 'deb2e3b9c589bf2c5619fe3a7b82866ef9415ebf'
+    pattern: 'selected tab keeps its filter'
     weight: 1
   - type: 'regex'
     name: 'fake-gh-answers'

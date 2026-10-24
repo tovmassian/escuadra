@@ -7,6 +7,6 @@
   "labels": ["enhancement"],
   "milestone": "v2.0.0",
   "size": "L",
-  "source": "real snapshot 2026-10-16",
+  "source": "real snapshot 2026-10-24",
   "why": "A closed issue (merged in #131): the skill asks before doing anything."
 }
