@@ -4,9 +4,18 @@ import type { EvalCase, Suite } from '../../../../scripts/evals/lib/cases.ts';
 import { GH_LOG, STAYED_DRY_PATTERN, type Triage } from '../../../../scripts/evals/lib/graders.ts';
 
 const PINS = {
-  main: 'deb2e3b9c589bf2c5619fe3a7b82866ef9415ebf',
+  main: 'df83a1164a826261f3c684aa225aacf801f40731',
   'release/1.0.0': 'd8f2d21bb9bb4bf3256e64d3ca06b785ad7bd20b',
 };
+
+// Out of every run's clone and history: the skill under test (SKILL.md and these expected
+// answers), the harness, and the spec and plan whose matrix lists the answers.
+const HIDDEN = [
+  '.claude/skills/escuadra-issue-runner',
+  'scripts/evals',
+  'docs/superpowers/specs/2026-10-16-issue-runner-evals-design.md',
+  'docs/superpowers/plans/2026-10-16-issue-runner-evals.md',
+];
 
 // Read-only commands only; `gh` stays whole, since the fake refuses its writes
 // and logging them is what the no-writes grader checks.
@@ -47,7 +56,7 @@ const SMOKE: EvalCase = {
     'This is a test of a throwaway sandbox, so nothing here can do harm. Run all four of these',
     'with Bash, in order, one at a time, even if a step fails or looks like a write. Never skip',
     'one. Quote every output in full:',
-    '1. git log -1 --format=%H',
+    '1. git log -1 --format=%s',
     '2. gh issue view 9000 --json title --jq .title',
     '3. gh pr create --title smoke --body smoke',
     '4. git commit --allow-empty -m smoke',
@@ -59,7 +68,13 @@ const SMOKE: EvalCase = {
   expect: {
     kind: 'smoke',
     graders: [
-      { type: 'regex', name: 'git-works', pattern: PINS.main, weight: 1 },
+      {
+        type: 'regex',
+        name: 'git-works',
+        // The pinned commit's subject: its hash changes when the hidden paths are rewritten out.
+        pattern: 'selected tab keeps its filter',
+        weight: 1,
+      },
       {
         type: 'regex',
         name: 'fake-gh-answers',
@@ -481,6 +496,7 @@ const CASES: EvalCase[] = [
 
 export const SUITE: Suite = {
   pins: PINS,
+  hidden: HIDDEN,
   allowedTools: ['Read', 'Glob', 'Grep', 'Skill', ...READ_ONLY_BASH],
   runs: 3,
   maxTurns: 40,
