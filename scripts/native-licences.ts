@@ -10,7 +10,8 @@ import type { NativeLibrary } from '../lib/licencesView.ts';
 // in a second round on 2026-10-24 for Glide (BSD-2-Clause-Views), the
 // libjpeg-turbo inside Fresco (IJG, Zlib), the code Hermes bundles (LLVM's
 // licences, Unlicense) and the Public Suffix List inside OkHttp (MPL-2.0).
-// A third round the same day accepted the four notices left in Hermes: netlib
+// MPL-2.0 was approved for the Public Suffix List only: any other entry under
+// MPL-2.0 goes to the owner first. A third round the same day accepted the four notices left in Hermes: netlib
 // dtoa, OpenBSD's strlcpy (ISC), LLVM's ConvertUTF (Unicode, Inc.; no SPDX id
 // matches its text, so ScanCode's) and Solar Designer's public-domain MD5.
 // An entry's licence is compared as a whole string, so a library under several

@@ -123,7 +123,7 @@
   "Folly": {
     "licence": "Apache-2.0",
     "platforms": ["ios", "android"],
-    "found": "scan",
+    "found": "inventory",
     "matches": { "ios": ["RCT-Folly"] },
     "via": "react-native",
     "copyright": "Copyright (c) Meta Platforms, Inc. and affiliates.",
@@ -265,11 +265,11 @@
       "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
     },
     "via": "react-native (Hermes, through llvh)",
-    "copyright": "Copyright (c) 1992, 1993, 1994 Henry Spencer. Copyright (c) 1992, 1993, 1994 The Regents of the University of California. All rights reserved.",
+    "copyright": "Copyright (c) 1992, 1993, 1994 Henry Spencer.\nCopyright (c) 1992, 1993, 1994\nThe Regents of the University of California.  All rights reserved.",
     "files": [
       {
         "file": "scripts/licence-texts/native/spencer-regex.LICENSE",
-        "url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.25.0/text/BSD-3-Clause.txt"
+        "url": "https://github.com/facebook/hermes/blob/hermes-v260318099.0.4/external/llvh/lib/Support/regcomp.c#L4-L33"
       }
     ]
   },
@@ -299,7 +299,7 @@
       "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
     },
     "via": "react-native (Hermes)",
-    "copyright": "Kuba Podgórski (zip) and Rich Geldreich (miniz), dedicated to the public domain",
+    "copyright": "Rich Geldreich <richgel99@gmail.com>\nNo copyright notice",
     "files": [
       {
         "file": "scripts/licence-texts/native/zip.LICENSE",
@@ -316,7 +316,7 @@
       "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
     },
     "via": "react-native (Hermes)",
-    "copyright": "Copyright (c) 1991, 2000, 2001 by Lucent Technologies. Copyright (c) 1991, 1996 by Lucent Technologies.",
+    "copyright": "Copyright (c) 1991, 2000, 2001 by Lucent Technologies.\nCopyright (c) 1991, 1996 by Lucent Technologies.",
     "files": [
       {
         "file": "scripts/licence-texts/native/dtoa.LICENSE",
@@ -487,7 +487,7 @@
     "found": "inventory",
     "matches": { "android": ["com.facebook.fresco:nativeimagetranscoder"] },
     "via": "react-native (Fresco)",
-    "copyright": "Copyright (C)2009-2023 D. R. Commander. Copyright (C)2015 Viktor Szathmáry. Copyright (C) 1991-2020, Thomas G. Lane, Guido Vollbeding.",
+    "copyright": "Copyright (C)2009-2023 D. R. Commander.  All Rights Reserved.\nCopyright (C)2015 Viktor Szathmáry.  All Rights Reserved.\nThis software is copyright (C) 1991-2020, Thomas G. Lane, Guido Vollbeding.",
     "files": [
       {
         "file": "scripts/licence-texts/native/libjpeg-turbo.LICENSE",
@@ -505,7 +505,7 @@
     "found": "inventory",
     "matches": { "android": ["com.facebook.fresco:animated-gif"] },
     "via": "react-native (Fresco)",
-    "copyright": "Copyright (c) 1997 Eric S. Raymond. Copyright (c) 2008 Otto Moerbeek.",
+    "copyright": "The GIFLIB distribution is Copyright (c) 1997  Eric S. Raymond\nCopyright (c) 2008 Otto Moerbeek <otto@drijf.net>",
     "files": [
       {
         "file": "scripts/licence-texts/native/giflib.LICENSE",
@@ -603,7 +603,7 @@
     "found": "inventory",
     "matches": { "android": ["com.squareup.okhttp3:okhttp"] },
     "via": "react-native, expo-image, expo-file-system, expo-updates, expo-asset (OkHttp)",
-    "copyright": "The Public Suffix List contributors (publicsuffix.org)",
+    "copyright": "No copyright notice",
     "files": [
       {
         "file": "scripts/licence-texts/native/public-suffix-list.LICENSE",
@@ -681,11 +681,11 @@
     "found": "inventory",
     "matches": { "android": ["org.aomedia.avif.android:*", "com.facebook.fresco:webpsupport"] },
     "via": "expo-image (libavif); react-native (Fresco)",
-    "copyright": "Copyright (C) 2010 The Android Open Source Project. All rights reserved.",
+    "copyright": "Copyright (C) 2010 The Android Open Source Project\nAll rights reserved.",
     "files": [
       {
         "file": "scripts/licence-texts/native/cpufeatures.LICENSE",
-        "url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.25.0/text/BSD-2-Clause.txt"
+        "url": "https://android.googlesource.com/platform/ndk/+/c4bdd155116a9b42767534b35e93f83a91e4a06f/sources/android/cpufeatures/cpu-features.c#2"
       }
     ]
   },
@@ -903,7 +903,7 @@
     "files": [
       {
         "file": "scripts/licence-texts/native/animal-sniffer.LICENSE",
-        "url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.25.0/text/MIT.txt"
+        "url": "https://github.com/mojohaus/animal-sniffer/blob/animal-sniffer-parent-1.18/animal-sniffer-annotations/src/main/java/org/codehaus/mojo/animal_sniffer/IgnoreJRERequirement.java#L4-L24"
       }
     ]
   },
