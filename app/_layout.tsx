@@ -4,12 +4,14 @@ import * as SplashScreen from 'expo-splash-screen';
 import * as Crypto from 'expo-crypto';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState, type ReactNode } from 'react';
+import { useWindowDimensions } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-reanimated';
 
 import { introWillShow, LaunchIntro } from '@/components/LaunchIntro';
 import { LaunchRevealProvider, useLaunchRevealState } from '@/components/LaunchReveal';
 import { launchLanguage } from '@/i18n/useT';
+import { screenOrientation } from '@/lib/screenOrientation';
 import { track } from '@/lib/telemetry';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import { fontAssets } from '@/theme/fonts';
@@ -22,6 +24,7 @@ export default function RootLayout() {
   const hydrated = useProgressHydrated();
   const themeName = useThemeName();
   const colors = useThemeColors();
+  const window = useWindowDimensions();
 
   // Hold the splash until the type is ready, otherwise the first frame renders
   // in the system font and visibly reflows — and until the persisted
@@ -70,6 +73,8 @@ export default function RootLayout() {
             screenOptions={{
               headerShown: false,
               contentStyle: { backgroundColor: colors.background },
+              // Phones in portrait, large screens free to rotate (#203).
+              orientation: screenOrientation(window),
             }}
           />
         </Launch>

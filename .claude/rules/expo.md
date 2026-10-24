@@ -4,6 +4,8 @@ paths:
   - "components/**"
   - "package.json"
   - "metro.config.js"
+  - "app.json"
+  - "plugins/**"
 ---
 
 # Expo SDK 58
@@ -14,6 +16,14 @@ the `latest` docs, which may describe APIs from a newer SDK this project
 cannot use.
 
 `expo-dev-client` is installed, and EAS Build produces development, simulator, preview and production builds; an SDK upgrade is a release decision (`fingerprint.md`).
+
+## Android and Google Play
+
+`plugins/withAndroidRelease.js` keeps what Play Console asks of the build (#203): R8 on
+in release builds, and no `android:screenOrientation` in the manifest, which Android 16
+ignores on large screens. `orientation` in `app.json` stays for iOS. Phones are held in
+portrait by the root `Stack`'s `orientation` (`lib/screenOrientation.ts`), so a new
+navigator sets it too. Its edits are tested in `plugins/__tests__/`.
 
 ## Since SDK 58
 
