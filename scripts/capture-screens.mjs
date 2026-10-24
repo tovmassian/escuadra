@@ -17,6 +17,7 @@
 import { mkdir, readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { killServerTree, startExpoWeb, waitForServer } from './dev-server.mjs';
+import { seedLanguage } from './seed-language.mjs';
 import {
   assertProfileDimensions,
   outDirFor,
@@ -104,22 +105,7 @@ async function openCapture(browser, { colorScheme, suffix }) {
     pageError = error;
   });
 
-  if (LANGUAGE) {
-    // Merged into whatever the store already holds, so a best score written
-    // by an earlier round on this page survives the next navigation.
-    await page.addInitScript((language) => {
-      const key = 'escuadra-progress';
-      let stored = null;
-      try {
-        stored = JSON.parse(localStorage.getItem(key) ?? 'null');
-      } catch {
-        stored = null;
-      }
-      const next = stored ?? { state: {}, version: 0 };
-      next.state = { ...next.state, languagePreference: language };
-      localStorage.setItem(key, JSON.stringify(next));
-    }, LANGUAGE);
-  }
+  if (LANGUAGE) await seedLanguage(page, LANGUAGE);
 
   const ext = PROFILE.format === 'jpeg' ? 'jpg' : 'png';
 

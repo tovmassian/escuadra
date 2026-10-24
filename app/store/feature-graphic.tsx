@@ -2,7 +2,7 @@ import { StyleSheet, Text, View } from 'react-native';
 import { BrandGradient } from '@/components/BrandGradient';
 import { EscuadraMark } from '@/components/EscuadraMark';
 import { ESCUADRA_WORDMARK } from '@/i18n/names';
-import { useT } from '@/i18n/useT';
+import { useLanguage, useT } from '@/i18n/useT';
 import { palettes, sizes, spacing, typography } from '@/theme/tokens';
 
 // Google Play's feature graphic (1024×500) — captured via `npm run
@@ -16,9 +16,11 @@ import { palettes, sizes, spacing, typography } from '@/theme/tokens';
 // device's colour scheme.
 export default function FeatureGraphic() {
   const t = useT();
+  // Names the language it rendered in, so gen:play-assets' --lang can check the seed took.
+  const language = useLanguage();
   return (
     <BrandGradient gradient="plate" style={styles.root}>
-      <View style={styles.content}>
+      <View style={styles.content} testID={`feature-graphic-${language}`}>
         <EscuadraMark size={sizes.wordmarkMarkHero} color={palettes.dark.mark} showTrail />
         <Text style={styles.word}>{ESCUADRA_WORDMARK}</Text>
         <Text style={styles.tagline}>{t.store.tagline}</Text>

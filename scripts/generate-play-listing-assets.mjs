@@ -1,15 +1,22 @@
 // Generates the two Play Store listing assets that don't fit the
 // multi-screen capture pipeline (see capture-screens.mjs / `npm run
 // shots:play` for phone screenshots): the 512×512 app icon export and the
-// 1024×500 feature graphic. Both are release artefacts written to
+// 1024×500 feature graphic. `--lang=<code>` writes the graphic in one language to
+// design/play/<code>/. Both are release artefacts written to
 // design/play/, gitignored like design/store/ — see .gitignore.
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { killServerTree, startExpoWeb, waitForServer } from './dev-server.mjs';
+import { resolveLanguageArg } from './screenshot-profiles.ts';
+import { seedLanguage } from './seed-language.mjs';
 
 const PORT = 8083;
 const BASE = `http://localhost:${PORT}`;
 const OUT_DIR = 'design/play';
+// `--lang=de` renders the graphic's tagline in one language, into design/play/de/, beside
+// that language's shots:play captures. Without it the app follows the browser, as before.
+const LANGUAGE = resolveLanguageArg(process.argv.slice(2));
+const GRAPHIC_DIR = LANGUAGE ? `${OUT_DIR}/${LANGUAGE}` : OUT_DIR;
 
 // ---------------------------------------------------------------------------
 // App icon — resize the existing 1024×1024 source to Play's required 512×512,
@@ -51,10 +58,23 @@ async function generateFeatureGraphic(browser) {
     viewport: { width: 512, height: 250 },
     deviceScaleFactor: 2,
   });
+  if (LANGUAGE) await seedLanguage(page, LANGUAGE);
   await page.goto(`${BASE}/store/feature-graphic`, { waitUntil: 'networkidle' });
+  // The launch intro (#182) plays over every route as the app opens, the graphic's
+  // included: wait for the graphic, then for the intro to leave.
+  const graphic = page.locator('[data-testid^="feature-graphic-"]');
+  await graphic.waitFor();
+  await page.getByTestId('launch-intro').waitFor({ state: 'detached' });
+  if (LANGUAGE) {
+    const rendered = await graphic.getAttribute('data-testid');
+    if (rendered !== `feature-graphic-${LANGUAGE}`) {
+      throw new Error(`--lang=${LANGUAGE}: the graphic rendered as ${rendered}`);
+    }
+  }
   await page.waitForTimeout(500);
 
-  const outPath = `${OUT_DIR}/feature-graphic.jpg`;
+  await mkdir(GRAPHIC_DIR, { recursive: true });
+  const outPath = `${GRAPHIC_DIR}/feature-graphic.jpg`;
   await page.screenshot({ path: outPath, type: 'jpeg', quality: 92 });
   await page.close();
   console.log(`generated ${outPath}`);
