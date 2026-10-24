@@ -206,7 +206,7 @@ const CASES: EvalCase[] = [
     expect: triage({
       decision: 'ask',
       questions:
-        'at least one asks the owner to confirm that the [TBC] issue is ready to work, or what its scope should be, because its title carries [TBC].',
+        'at least one asks the owner about what the [TBC] issue should do (its scope, behaviour or placement) or whether it is ready to work, and none asks something the issue or CLAUDE.md already answers.',
     }),
   },
   {
