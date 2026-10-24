@@ -158,8 +158,8 @@ NOTICE copied verbatim into `scripts/licence-texts/native/` from the URL it reco
 conventions: a work that states no copyright holder anywhere gets `No copyright notice`,
 and a notice that lives only in a source file's header is extracted verbatim, with a
 line-range URL. The allowlist is `NATIVE_ALLOWED_LICENCES` (`scripts/native-licences.ts`),
-owner-approved on 2026-10-24 like the JavaScript one; MPL-2.0 is accepted only for the
-Public Suffix List. Google's Play libraries (In-App Review, Play services) are
+owner-approved (2026-10-24); widening it is the owner's call, as for the JavaScript one.
+MPL-2.0 is accepted only for the Public Suffix List. Google's Play libraries (In-App Review, Play services) are
 proprietary: the sheet names them with their terms and shows no text. Native rows show no
 version, since pods float within their podspec ranges.
 
@@ -167,11 +167,17 @@ version, since pods float within their podspec ranges.
 React Native's version catalog, and fails on:
 
 - **a native dependency the list does not match:** curate it, from its repository, as
-  above. A licence off the allowlist goes to the owner.
+  above.
 - **a `scan` entry nothing matches** (a dependency was dropped): remove it, or make it
   `inventory` if it still ships indirectly.
 - **a licence file in a package's native folder that no entry claims:** read it and add it
   to the right entry's `vendored`.
+- **an entry with a licence off the allowlist** (the owner's decision, never a way to make
+  the check pass), **an open licence with no text file, or no copyright line.**
+
+A dependency a scanned file names but the build never links (behind a flag the app does not
+set, or on a path it does not take) goes under `"$notLinked"` in the same file, with its
+reason; never as an entry.
 
 An entry's `found` says how it is kept honest: `scan` (the scan sees it), `inventory`
 (below) or `vendored` (its licence file sits in a package's native folder).
