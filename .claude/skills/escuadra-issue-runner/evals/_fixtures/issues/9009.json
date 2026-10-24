@@ -1,12 +1,12 @@
 {
   "number": 9009,
-  "title": "fix(settings): the Appearance options are cut off at the largest text size",
+  "title": "fix(study): the position pills grow without limit at the largest text size",
   "state": "OPEN",
-  "body": "At the largest system text size, the option labels in `components/AppearanceControl.tsx` (\"Match phone\", \"Dark\", \"Light\") are clipped, so it is not clear which one is which.\n\n### Acceptance criteria\n\n- [ ] Every Appearance option reads in full at the largest system text size, in both themes\n- [ ] `npm run check` passes",
+  "body": "At the largest system text size, the position pills on Study (All, GK, DF, MF, FW) in `components/FilterPill.tsx` scale with the text and have no cap, unlike the Hide names label and the kind tabs, which set `maxFontSizeMultiplier`. The filter row takes up too much of the screen.\n\n### Acceptance criteria\n\n- [ ] The pills stay a sensible height at the largest system text size, in both themes\n- [ ] `npm run check` passes",
   "comments": [],
   "labels": ["bug"],
   "milestone": null,
   "size": null,
-  "source": "synthetic; replaced 2026-10-24, since the main pin has no ThemeToggle (Appearance is a radio group in Settings)",
+  "source": "synthetic; replaced 2026-10-24 (twice): the main pin has no ThemeToggle, and AppearanceControl already shrinks its labels; FilterPill has no maxFontSizeMultiplier at the pin",
   "why": "No Size on the board or in the body: the skill estimates one, says so, and proceeds."
 }
