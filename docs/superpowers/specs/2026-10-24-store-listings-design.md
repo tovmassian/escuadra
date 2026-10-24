@@ -97,7 +97,8 @@ football,squad,quiz,…
 
 - Each `##` heading opens a field; its body runs to the next heading, trimmed.
 - The body is pasted as written. The consoles take plain text, so a bullet is a typed
-  character and Markdown formatting is not used.
+  character and Markdown formatting is not used. Prettier skips `store/listing/`, so a
+  reformat never changes what is pasted.
 - Limits count characters (Unicode code points). The console's own counter is the final
   word, so a field written to the brim is worth a look there.
 - The App Store name and the Play title are _Escuadra_, never translated, so they live in
@@ -135,9 +136,14 @@ Run from a checkout of the release branch after `store-build`:
    - `app-store/<locale>/01.png…` and `play/<locale>/01.jpg…`, the listed shots in order,
      plus each language's feature graphic and the icon for Play;
    - `paste-sheet.md`: store, then locale, then field, the order the consoles take them.
-     Each field is a fenced block (VS Code's preview and GitHub give each a copy button)
-     with its character count, marked _paste_ or _skip_. The images are marked the same
-     way, and the declarations follow as a checklist when they changed.
+     Each _paste_ field is a fenced block (VS Code's preview and GitHub give each a copy
+     button) with its character count; a _skip_ field is one line. Play's release notes
+     are one block for all five languages, in the `<en-US>…</en-US>` form its single box
+     takes. The images are marked the same way, and the declarations follow when they
+     changed.
+   - Images are handled only on a `release/X.Y.Z` checkout, because they must show the
+     code that ships. Run elsewhere (an off-cycle edit on `main`), the sheet holds text
+     and declarations only.
    - When the images are _paste_, it stops on a listed image that is missing for any
      language, naming the file and the command that makes it. When they are _skip_, it
      copies none.
@@ -146,13 +152,18 @@ Run from a checkout of the release branch after `store-build`:
 
 ### Changed since the last version
 
-The baseline is the highest `v*` tag below `app.json`'s version, found by name. A version
-tag sits on a commit of its release branch, which `main` and the next release branch hold
-only as cherry-picked copies, so walking the history would never reach it. With no such
-tag, everything is _paste_.
+The baseline is the highest `v*` tag at or below `app.json`'s version, found by name: the
+version whose listing is live. While X.Y.Z is prepared it is the previous version's tag;
+for an off-cycle edit on `main`, whose `app.json` still names the live version, it is that
+version's own. A version tag sits on a commit of its release branch, which `main` and the
+next release branch hold only as cherry-picked copies, so walking the history would never
+reach it. With no such tag, everything is _paste_.
 
 - **A text field** is _skip_ when it equals the same field in
   `git show <tag>:store/listing/<lang>.md`.
+- **What's new** belongs to a version, not to the listing: it is _paste_ for every new
+  version, even if its text repeats, and _skip_ for an off-cycle edit, which has no
+  version to carry it.
 - **The images** are _skip_ when `store/screenshots.json`, the listed shots in
   `design/screens/` (committed, and deterministic) and `app/store/feature-graphic.tsx`
   all equal the tag's. A catalog change that alters a listed screen only in a translation,
@@ -184,8 +195,9 @@ rather than repeating them. Two modes.
 4. Run a fresh native-language expert subagent per language until it returns "No
    findings". Wording findings are applied; meaning findings go to the owner.
 5. Write one review sheet per language (English, translation, limit; changed fields
-   only) into `dist/store-listing/review/` for the native reviewers of #145. Their
-   sign-off is the gate and is recorded in the PR body.
+   only) with `node scripts/store-bundle.ts --review`, into `dist/store-listing/review/`,
+   for the native reviewers of #145. Their sign-off is the gate and is recorded in the PR
+   body.
 6. Run `npm run check`, open the PR into `main`, and once it is merged, pick it to the
    release branch. A pick of Markdown only is docs to `release-gate`. One that also
    changes `store/screenshots.json` gets the gate's fingerprint check, which it passes:
@@ -228,13 +240,14 @@ main                           release/2.0.0                  GitHub, the stores
 ### 2.0.0, the first run
 
 1. The tooling lands on `main` before the cut: the module, CLI and test, `--lang` on
-   `gen:play-assets`, the skill, the rule and the docs. If the cut comes first, a pick
-   takes it to `release/2.0.0`; it moves no fingerprint, so a locked branch takes it too.
-2. The skill seeds the files on `main`: `en.md` from the live 1.x App Store listing (the
-   public page shows the subtitle and description; the owner pastes the keywords and
-   promotional text from App Store Connect), and `declarations.md` from #55's agreed
-   answers, the consoles' category and age rating, and the support and `privacy/2/` URLs.
-   It proposes the screenshot set, and the owner confirms it.
+   `gen:play-assets`, the skill, the rule and the docs. It also writes
+   `store/declarations.md` from #55's agreed answers, the consoles' category and age
+   rating, and the support and `privacy/2/` URLs, all already decided, and proposes
+   `store/screenshots.json`. If the cut comes first, a pick takes it to `release/2.0.0`;
+   it moves no fingerprint, so a locked branch takes it too.
+2. The skill seeds `en.md` on `main` from the live 1.x App Store listing (the public page
+   shows the subtitle and description; the owner pastes the keywords and promotional text
+   from App Store Connect), and the owner confirms or changes the screenshot set.
 3. After the cut, the draft runs against the 2.0.0 changelog. Expect a near-full rewrite;
    the #145 reviewers sign off whole files.
 4. No `v*` tag exists, so the sheet marks everything _paste_: six fields in five
@@ -267,9 +280,9 @@ version, a PR on `main` and one paste.
 - **`.claude/rules/design-handoff.md`**: per-language feature graphics, and the listing
   set handled by the bundle.
 - **Issues, on the owner's OK:** a new issue for the tooling; #147 becomes 2.0.0's first
-  run and depends on it; #55's console lists move into `declarations.md`, and #55 stays
-  open until they are entered; #116's asset line points at the bundle; a backlog issue
-  for the push.
+  run and depends on it; #55's answers move into `declarations.md` with the tooling, and
+  #55 stays open until they are entered; #116's asset line points at the bundle; a
+  backlog issue for the push.
 
 ## Later: the push
 
