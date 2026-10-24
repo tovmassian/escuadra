@@ -14,6 +14,19 @@ export interface BundledPackage {
   texts: readonly number[];
 }
 
+/** One third-party native library the iOS or Android build links (#160), as the sheet lists it. */
+export interface NativeLibrary {
+  /** The upstream project, e.g. `SDWebImage` or `AndroidX`. */
+  name: string;
+  platforms: readonly ('ios' | 'android')[];
+  /** An SPDX id, or the name of Google's terms for its proprietary Play libraries. */
+  licence: string;
+  /** Verbatim from the project's licence, NOTICE or source headers, `\n`-joined. */
+  copyright: string;
+  /** Indices into `LICENCE_TEXTS`: its licence, then its NOTICE. Empty only for Google's terms. */
+  texts: readonly number[];
+}
+
 export interface FontCredit {
   families: readonly string[];
   licence: string;
