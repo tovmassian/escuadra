@@ -122,7 +122,8 @@ graphic's tagline, `store.tagline` in `i18n/es.ts`, `fr.ts`, `it.ts` and `de.ts`
 `store: en.store` until then), drops `'store.'` from each language's deferred list in
 `i18n/leaves.ts`, and runs its translations through the same expert loop. Add each one,
 with the English, at the end of that language's review sheet
-(`dist/store-listing/review/<lang>.md`) under `## Feature graphic tagline`, so the reviewer
+(`dist/store-listing/review/<lang>.md`), after the last `--review` run, which rewrites the
+sheets, under `## Feature graphic tagline`, so the reviewer
 signs it off with the listing. It rides in the same PR and pick. Every field is new, so
 every field is drafted, translated, reviewed and entered.
 
@@ -135,14 +136,16 @@ waits for the next version, whose sheet marks it _paste_ again. Steps 3–6 run 
 review sheets compare with the live version's tag). Title the PR
 `docs(store): <the change> in the listing (#N)` and pick nothing. Once it is merged, run
 `node scripts/store-bundle.ts` on `main`: its sheet holds text only, with no images and no
-What's new, and you walk it with the owner as in ship mode, step 3.
+What's new. Walk it with the owner, who enters only Promotional text in App Store Connect
+and the Play listing fields in Play Console (Play reviews a listing edit without a release);
+every other App Store field on the sheet waits for the next version's sheet.
 
 ## Ship mode
 
 Only after `store-build` has run on the branch (step 6). Never trigger it.
 
 1. From a clean checkout of `release/X.Y.Z`: `npm ci`, then `node scripts/store-bundle.ts`.
-   Run it before the owner tags `vX.Y.Z` (step 8), once the captures are in: when the tag
+   Run it before the owner tags `vX.Y.Z` (step 8): when the tag
    exists it becomes the baseline, so a re-run marks everything _skip_ and empties
    `dist/store-listing/app-store/` and `play/`, leaving step 4 nothing to attach.
 2. If it stops, naming missing captures, capture every language and run it again:
