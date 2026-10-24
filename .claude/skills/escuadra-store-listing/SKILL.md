@@ -36,11 +36,12 @@ main                           release/X.Y.Z                  GitHub, the stores
 
 ## Which mode
 
-| The owner asks to…                                               | Mode              | Where                                                                       |
-| ---------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------------- |
-| draft the listing for X.Y.Z, write What's new, change a field    | Draft             | `main`, after the cut and the CHANGELOG section (steps 2–3; this is step 4) |
-| change the listing between versions, e.g. a tournament promotion | Draft, no version | `main`                                                                      |
-| enter, paste or submit the listing for X.Y.Z                     | Ship              | `release/X.Y.Z`, after `store-build` (step 6); this is step 7               |
+| The owner asks to…                                                                         | Mode              | Where                                                                        |
+| ------------------------------------------------------------------------------------------ | ----------------- | ---------------------------------------------------------------------------- |
+| draft the listing for X.Y.Z, write What's new, change a field                              | Draft             | `main`, after the cut and the CHANGELOG section (steps 2–3; this is step 4)  |
+| draft the What's new for a fix release X.Y.Z (a runtime-changing fix to a shipped version) | Draft             | a branch from `release/X.Y.Z`, PR into it; `pick-to-main` takes it to `main` |
+| change the listing between versions, e.g. a tournament promotion                           | Draft, no version | `main`                                                                       |
+| enter, paste or submit the listing for X.Y.Z                                               | Ship              | `release/X.Y.Z`, after `store-build` (step 6); this is step 7                |
 
 ## Draft mode
 
@@ -115,7 +116,9 @@ main                           release/X.Y.Z                  GitHub, the stores
    ```
 
    `release-gate` checks the pick's fingerprint, as it does every PR; a listing pick passes,
-   because nothing under `store/` or `i18n/` feeds the fingerprint.
+   because nothing under `store/` or `i18n/` feeds the fingerprint. For a fix release, the
+   PR goes into `release/X.Y.Z` instead, from a branch cut from it, and `pick-to-main`
+   opens its pick to `main`.
 
 ### The first run
 
@@ -145,24 +148,26 @@ review sheets compare with the live version's tag). Title the PR
 `node scripts/store-bundle.ts` on `main`: its sheet holds text and declarations, with no
 images. Walk it with the owner, who enters only Promotional text in App Store Connect and
 the Play listing fields in Play Console (Play reviews a listing edit without a release).
-If `main`'s `app.json` is already past the live version, the sheet also shows What's new:
-do not enter it. Its review sheets then hold What's new too: tell the reviewers to skip it.
+Make the change before the next version's `app.json` bump lands on `main`: after it, the
+sheet and the review sheets also show What's new and that version's edits, so the owner
+enters, and the reviewers review, only the field this change edits.
 
 ## Ship mode
 
 Only after `store-build` has run on the branch (step 6). Never trigger `store-build`
 yourself.
 
-1. From a clean checkout of `release/X.Y.Z`: `npm ci`, then `node scripts/store-bundle.ts`.
-   Run it before the owner tags `vX.Y.Z` (step 8): when the tag
-   exists it becomes the baseline, so a re-run marks everything _skip_ and empties
+1. From a checkout of `release/X.Y.Z` with no uncommitted changes: `npm ci`, then
+   `node scripts/store-bundle.ts`. Run it before the owner tags `vX.Y.Z` (step 8): when
+   the tag exists it becomes the baseline, so a re-run marks everything _skip_ and empties
    `dist/store-listing/app-store/` and `play/`, leaving this mode's step 4 nothing to
    attach.
-2. If it stops, naming missing captures, capture every language with the loop the stop
-   message prints (also in `docs/release.md`, step 7), then run it again. Look at a few
-   captures in each language (`design/store/<code>/`, `design/play/<code>/`) before going
-   on: they are web renders, so a layout that breaks only in one language shows here
-   first.
+2. If the sheet marks the images _paste_, or the bundle stops for missing captures,
+   capture every language with the loop the stop message prints (also in
+   `docs/release.md`, step 7), then run it again. The captures are gitignored, so ones
+   left from an earlier run would otherwise be handed over. Look at a few captures in
+   each language (`design/store/<code>/`, `design/play/<code>/`) before going on: they are
+   web renders, so a layout that breaks only in one language shows here first.
 3. Walk `dist/store-listing/paste-sheet.md` with the owner, one store at a time, ticking
    what they confirm entered. Apple's fields and App Privacy go in before Submit for
    Review; Play's listing, release notes and Data safety when the build is uploaded; each

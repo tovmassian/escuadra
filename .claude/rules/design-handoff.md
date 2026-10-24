@@ -16,6 +16,7 @@ paths:
 ```bash
 npm run shots           # capture design/screens/ from the running web build
 npm run shots:store     # capture the 1320×2868 App Store profile to design/store/
+npm run shots:store -- --lang=<code>   # the same, in one supported language, to design/store/<code>/
 npm run shots:play      # capture the 1080×1920 (9:16) Google Play profile to design/play/
 npm run shots:play -- --lang=<code>   # the same, in one supported language, to design/play/<code>/
 npm run gen:play-assets # write design/play/icon-512.png and feature-graphic.jpg

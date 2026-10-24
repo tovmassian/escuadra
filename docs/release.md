@@ -196,7 +196,7 @@ A new version from `main`:
    - When the builds reach the stores, enter `store/declarations.md`'s App Privacy and
      Data safety answers and move each store's privacy URL to the new folder at the same
      moment: Play when step 6 uploads the build, Apple before step 8's Submit for Review.
-     Step 7's paste sheet lists them.
+     Step 7's paste sheet says when they changed.
    - Point the site's own Privacy nav link at the new folder once every live store
      ships the version.
 6. **Actions → store-build**: `platforms: both`, `profile: production`, `submit` on. Both
@@ -204,8 +204,10 @@ A new version from `main`:
    and lists what's left.
 7. Enter the listing. From a clean checkout of the branch, `node scripts/store-bundle.ts`
    writes `dist/store-listing/paste-sheet.md`, marking each field, the images and the
-   declarations _paste_ or _skip_ against the last version's tag. When it stops for
-   missing captures, capture every language and run it again:
+   declarations _paste_ or _skip_ against the last version's tag. When the sheet marks
+   the images _paste_, or the bundle stops for missing captures, capture every language
+   and run it again (the captures are gitignored, so ones left from an earlier run would
+   be handed over):
    `for code in en es fr it de; do npm run shots:store -- --lang=$code && npm run shots:play -- --lang=$code && npm run gen:play-assets -- --lang=$code || break; done`.
    Enter what says _paste_: Apple's before Submit for Review, Play's when the build is
    uploaded.
@@ -231,9 +233,10 @@ A runtime-changing fix to a released version (1.0.1):
 2. A PR into `release/1.0.1` with the fix and `app.json` at `1.0.1`. The version's
    `CHANGELOG.md` section goes in that PR when `release/1.0.0` has a `CHANGELOG.md`,
    otherwise on `main` with the pick.
-3. Its What's new as in step 4 above, then steps 5–8 as above, and take the fix to
-   `main`. A 1.x branch predates `store/`: there skip steps 4 and 7 and enter the What's
-   new in the consoles by hand.
+3. Its What's new with the `escuadra-store-listing` skill, on a branch from the new
+   release branch and in a PR into it, which `pick-to-main` takes to `main`; then steps
+   5–8 as above, and take the fix to `main`. A 1.x branch predates `store/`: there enter
+   the What's new in the consoles by hand and skip step 7.
 
 `store-build` refuses a production build when `app.json` doesn't match the branch, when the
 platform is locked to another runtime, and on the same runtime unless `rebuild` is on,
@@ -252,9 +255,11 @@ on `main`, and it merges after the native sign-offs. From the sheet
 `node scripts/store-bundle.ts` writes on `main`, you enter Promotional text in App Store
 Connect and the listing fields in Play Console; any other App Store field changes only with
 a version, so it waits for the next version's sheet. The sheet written on `main` holds no
-images, and any What's new on it is not entered: both come only with a version. The next
-version's sheet marks the change _paste_ again, because only a version's tag records what
-is live.
+images, and any What's new on it is not entered: both come only with a version. Make such
+a change before the next version's `app.json` bump lands on `main`; after it, the sheet
+also marks that version's edits _paste_, and only the field this change edits is entered.
+The next version's sheet marks the change _paste_ again, because only a version's tag
+records what is live.
 
 ### Cut preview builds
 

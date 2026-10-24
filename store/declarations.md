@@ -4,7 +4,7 @@ What Escuadra declares in App Store Connect and Play Console: set once per app a
 only when the app changes. What each answer means is the owner's call (guardrail 7), and
 every answer agrees with `en.about.privacy` in `i18n/en.ts`, the complete statement of
 what leaves the device. A change to what leaves the device updates this file in the same
-PR. The paste sheet lists it when it changed since the last version.
+PR. The paste sheet marks it _paste_ when it changed since the last version.
 
 ## Both stores
 
@@ -22,7 +22,8 @@ PR. The paste sheet lists it when it changed since the last version.
 Entered before Submit for Review, with the privacy policy URL.
 
 - Identifiers, Device ID: not linked to the user, not used for tracking, purpose Analytics
-  (TelemetryDeck's hashed install ID and session code).
+  (TelemetryDeck's hashed form of a random identifier made for the statistics, and a
+  random session code).
 - Usage Data, Product Interaction: not linked, not tracking, purpose Analytics (the events,
   the app language among them).
 - Diagnostics, Crash Data: not linked, not tracking, purpose App Functionality (the
