@@ -20,6 +20,7 @@ import {
   autolinkedPackageFolders,
   buildLicenceData,
   collectPackageFolders,
+  isLicenceFile,
   orderLicenceFiles,
   sourceMapSources,
   type AutolinkingResolve,
@@ -28,6 +29,16 @@ import {
   type RnConfig,
   type SourceMap,
 } from './licences.ts';
+import {
+  buildNativeData,
+  catalogCoordinates,
+  gradleCoordinates,
+  matchesPattern,
+  podDependencies,
+  podspecName,
+  type NativeEntry,
+  type NativeScan,
+} from './native-licences.ts';
 
 const REPO_ROOT = path.resolve(import.meta.dirname, '..');
 const GENERATED_TS_PATH = path.join(REPO_ROOT, 'lib', 'licences.generated.ts');
@@ -35,6 +46,24 @@ const SOURCES_PATH = path.join(REPO_ROOT, 'scripts', 'licence-sources.json');
 const UNICODE_PATH = path.join(REPO_ROOT, 'i18n', 'UNICODE-LICENSE.txt');
 const UNICODE_START = 'UNICODE LICENSE V3';
 const PLATFORMS = ['ios', 'android'] as const;
+const NATIVE_PATH = path.join(REPO_ROOT, 'scripts', 'native-licences.json');
+const RN = path.join(REPO_ROOT, 'node_modules', 'react-native');
+// React Native's own copies of third-party code: scanned as dependencies, never
+// counted as first-party pods.
+const RN_THIRD_PARTY = ['third-party-podspecs', 'sdks'];
+// Pods React Native's codegen writes at `pod install`, from first-party code and
+// its templates in react-native/scripts/codegen/templates. Their podspecs exist
+// only after that, never in node_modules, so they are filtered like first-party pods.
+const GENERATED_PODS = ['ReactAppDependencyProvider', 'ReactCodegen'];
+// Published from npm packages already in PACKAGES, through their local Maven repos.
+const FIRST_PARTY_ANDROID = [
+  'com.facebook.react:react-android',
+  'com.facebook.react:react-native',
+  'host.exp.exponent:*',
+  'expo.modules.*:*',
+];
+const NATIVE_FOLDERS = ['ios', 'android', 'apple', 'cpp', 'common'];
+const SKIP_DIRS = new Set(['node_modules', 'build', '.gradle', '__tests__']);
 
 // One entry per package in scripts/licence-sources.json: why it needs one, and
 // where its licence files come from, in order. `from` is another package in
@@ -92,6 +121,55 @@ function autolinking(): { resolves: AutolinkingResolve[]; configs: RnConfig[] } 
     resolves: PLATFORMS.map((p) => run(['resolve', '-p', p]) as AutolinkingResolve),
     configs: PLATFORMS.map((p) => run(['react-native-config', '-p', p]) as RnConfig),
   };
+}
+
+function filesUnder(dir: string, keep: (name: string) => boolean): string[] {
+  let entries;
+  try {
+    entries = readdirSync(dir, { withFileTypes: true });
+  } catch {
+    return [];
+  }
+  return entries.flatMap((e) => {
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) return SKIP_DIRS.has(e.name) ? [] : filesUnder(full, keep);
+    return e.isFile() && keep(e.name) ? [full] : [];
+  });
+}
+
+// The native dependencies the autolinked packages and React Native name, read from
+// their podspecs and Gradle files, for the drift check against
+// scripts/native-licences.json.
+function scanNative(folders: readonly string[], notLinked: Record<string, string>): NativeScan {
+  const roots = folders.map((f) => path.join(REPO_ROOT, f));
+  const podspecs = [...roots, RN].flatMap((r) => filesUnder(r, (n) => n.endsWith('.podspec')));
+  const thirdParty = (file: string): boolean =>
+    file.startsWith(RN) && RN_THIRD_PARTY.some((d) => file.startsWith(path.join(RN, d)));
+  const firstPartyPods = new Set([
+    ...podspecs.filter((f) => !thirdParty(f)).map((f) => podspecName(path.basename(f))),
+    ...GENERATED_PODS,
+  ]);
+  const ios = podspecs
+    .flatMap((f) => podDependencies(readFileSync(f, 'utf8')))
+    .filter((pod) => !firstPartyPods.has(pod));
+
+  const gradles = roots.flatMap((r) =>
+    filesUnder(path.join(r, 'android'), (n) => /^build\.gradle(\.kts)?$/.test(n)),
+  );
+  const toml = readFileSync(path.join(RN, 'gradle', 'libs.versions.toml'), 'utf8');
+  const rnKts = [
+    'ReactAndroid/build.gradle.kts',
+    'ReactAndroid/hermes-engine/build.gradle.kts',
+  ].map((f) => readFileSync(path.join(RN, f), 'utf8'));
+  const android = [
+    ...gradles.flatMap((f) => gradleCoordinates(readFileSync(f, 'utf8'))),
+    ...rnKts.flatMap((kts) => catalogCoordinates(kts, toml)),
+  ].filter((c) => !FIRST_PARTY_ANDROID.some((p) => matchesPattern(c, p)));
+
+  const vendoredLicenceFiles = roots
+    .flatMap((r) => NATIVE_FOLDERS.flatMap((d) => filesUnder(path.join(r, d), isLicenceFile)))
+    .map((f) => path.relative(REPO_ROOT, f));
+  return { ios, android, vendoredLicenceFiles, notLinked };
 }
 
 function readLicenceFiles(folder: string): LicenceFile[] {
@@ -154,30 +232,45 @@ async function main(): Promise<void> {
   const outDir = mkdtempSync(path.join(process.env.RUNNER_TEMP ?? tmpdir(), 'escuadra-licences-'));
   try {
     const linked = autolinking();
+    const linkedFolders = autolinkedPackageFolders(
+      `${REPO_ROOT}/`,
+      linked.resolves,
+      linked.configs,
+    );
     const folders = [
-      ...new Set([
-        ...collectPackageFolders(exportSourceMaps(outDir)),
-        ...autolinkedPackageFolders(`${REPO_ROOT}/`, linked.resolves, linked.configs),
-      ]),
+      ...new Set([...collectPackageFolders(exportSourceMaps(outDir)), ...linkedFolders]),
     ].sort();
     const { texts, packages } = buildLicenceData(folders.map(readPackage), resolveSources());
+
+    const raw = JSON.parse(readFileSync(NATIVE_PATH, 'utf8')) as Record<string, unknown>;
+    const notLinked = (raw.$notLinked ?? {}) as Record<string, string>;
+    const entries = Object.fromEntries(
+      Object.entries(raw).filter(([key]) => key !== '$notLinked'),
+    ) as Record<string, NativeEntry>;
+    const native = buildNativeData(entries, scanNative(linkedFolders, notLinked), texts, (file) =>
+      readFileSync(path.join(REPO_ROOT, file), 'utf8'),
+    );
+
     const content = [
       '// GENERATED FILE — run `npm run gen:licences` to regenerate. Do not hand-edit.',
-      "import type { BundledPackage } from './licencesView';",
+      "import type { BundledPackage, NativeLibrary } from './licencesView';",
       '',
       '/** i18n/UNICODE-LICENSE.txt from its "UNICODE LICENSE V3" line on, verbatim. */',
       `export const UNICODE_LICENSE = ${JSON.stringify(unicodeNotice())};`,
       '',
-      '/** Every distinct licence text the bundled packages carry. */',
-      `export const LICENCE_TEXTS: readonly string[] = ${JSON.stringify(texts)};`,
+      '/** Every distinct licence text the bundled packages and native libraries carry. */',
+      `export const LICENCE_TEXTS: readonly string[] = ${JSON.stringify(native.texts)};`,
       '',
       '/** Every package Metro bundles, or Expo autolinks, into the iOS or Android app, by name then version. */',
       `export const PACKAGES: readonly BundledPackage[] = ${JSON.stringify(packages)};`,
       '',
+      '/** Every third-party native library the iOS or Android build links (#160), by name. */',
+      `export const NATIVE_LIBRARIES: readonly NativeLibrary[] = ${JSON.stringify(native.libraries)};`,
+      '',
     ].join('\n');
     await formatAndWrite(GENERATED_TS_PATH, content);
     console.log(
-      `gen-licences: wrote ${packages.length} packages (${texts.length} licence texts) to lib/licences.generated.ts`,
+      `gen-licences: wrote ${packages.length} packages, ${native.libraries.length} native libraries (${native.texts.length} licence texts) to lib/licences.generated.ts`,
     );
   } finally {
     rmSync(outDir, { recursive: true, force: true });
