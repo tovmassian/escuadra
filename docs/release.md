@@ -51,7 +51,9 @@ shipped binary. Every check in this document exists because of that.
 ## OTA or store build?
 
 The fingerprint hashes, per platform, everything that affects the native runtime.
-Measured on Expo SDK 57 and eas-cli 24; re-measure if either moves.
+Measured on Expo SDK 58 with the `strict` preset in `fingerprint.config.js`; re-measure if
+either moves. `strict` keeps `version` in the fingerprint, so each version has its own
+runtime and never receives another version's updates.
 
 | Changes the fingerprint: store build                          | Leaves it alone: OTA                                        |
 | ------------------------------------------------------------- | ----------------------------------------------------------- |
@@ -63,9 +65,9 @@ Measured on Expo SDK 57 and eas-cli 24; re-measure if either moves.
 | `fingerprint.config.js`                                       | `.github/`, `scripts/ci/`, `docs/`, `CLAUDE.md`             |
 
 - Only installed packages count, so run `npm ci` before computing a fingerprint.
-- The false positives disappear with a `fingerprint.config.js`
-  (`sourceSkips: ['PackageJsonScriptsAll', 'GitIgnore']`), which is itself a fingerprint
-  change: it lands on `main` before the next version is cut, never on a locked branch.
+- The false positives disappear with `sourceSkips: ['PackageJsonScriptsAll', 'GitIgnore']`
+  in `fingerprint.config.js`, which is itself a fingerprint change: it lands on `main`
+  before the next version is cut, never on a locked branch.
 - To see what's inside a fingerprint: `npx expo-updates fingerprint:generate --platform android --debug`.
 
 What the fingerprint can't see:
@@ -173,8 +175,8 @@ a PR into the release branch, close the freeze, merge, and take the fix to `main
 
 A new version from `main`:
 
-1. The `app.json` version bump (and, the first time, `fingerprint.config.js`) lands on
-   `main` by PR.
+1. The `app.json` version bump (and, the first time, the `sourceSkips` in
+   `fingerprint.config.js`) lands on `main` by PR.
 2. Cut the branch: `git push origin origin/main:refs/heads/release/X.Y.Z`. Fixes found
    from here on go into it by PR and on to `main` by cherry-pick.
 3. On `main`, write the version's section of [`CHANGELOG.md`](../CHANGELOG.md) from the

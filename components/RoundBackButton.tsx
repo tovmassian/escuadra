@@ -1,5 +1,5 @@
 import type { ReactNode, Ref } from 'react';
-import { Pressable, StyleSheet, type PressableProps, type View } from 'react-native';
+import { Pressable, StyleSheet, type PressableProps, type ViewInstance } from 'react-native';
 import { BackGlyph } from '@/components/ActionGlyphs';
 import { borderWidths, opacity, sizes } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -19,7 +19,7 @@ export function RoundButton({
   glass?: boolean;
   children: ReactNode;
   /** Passed to the `Pressable`: Difficulty's star is a How to play target (#183). */
-  ref?: Ref<View>;
+  ref?: Ref<ViewInstance>;
 }) {
   const colors = useThemeColors();
   const size = sizes.roundButton;

@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
+  type ViewInstance,
 } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -90,8 +91,8 @@ export default function Study() {
   const listRef = useRef<FlatList<RosterEntry>>(null);
   // How to play (#183): Hide names, then the position filters.
   const tips = useTips('study');
-  const hideRef = useRef<View>(null);
-  const filtersRef = useRef<View>(null);
+  const hideRef = useRef<ViewInstance>(null);
+  const filtersRef = useRef<ViewInstance>(null);
 
   const squad = getSquad(squadId);
   const roster = useMemo(() => getRoster(squadId), [squadId]);
@@ -351,7 +352,7 @@ export default function Study() {
         renderItem={renderItem}
         numColumns={grid ? 2 : 1}
         columnWrapperStyle={grid ? styles.columns : undefined}
-        ItemSeparatorComponent={grid ? GridRowGap : null}
+        ItemSeparatorComponent={grid ? GridRowGap : undefined}
         ListFooterComponent={
           <View style={styles.footer}>
             <PhotoCredits rows={creditRows} numbersOnly />

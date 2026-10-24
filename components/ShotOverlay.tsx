@@ -1,5 +1,5 @@
 import type { Ref } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, type ViewInstance } from 'react-native';
 import Animated, { useAnimatedStyle, type SharedValue } from 'react-native-reanimated';
 import { sampleShot, type LiveShot } from '@/lib/shot';
 import { sizes, spotlightMotion } from '@/theme/tokens';
@@ -23,7 +23,7 @@ interface ShotOverlayProps {
   live: SharedValue<LiveShot | null>;
   clock: SharedValue<number>;
   /** Measured to place the shot: everything is planned in its coordinates. */
-  ref?: Ref<View>;
+  ref?: Ref<ViewInstance>;
 }
 
 // The shot (#129, spec §6): the ball struck from the tapped tile and its

@@ -54,7 +54,14 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { router, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useRef } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  type ViewInstance,
+  type ScrollViewInstance,
+} from 'react-native';
 import Animated, { FadeOut, Keyframe, useReducedMotion } from 'react-native-reanimated';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -179,12 +186,12 @@ export default function Question() {
     session.currentPartIndex === 0 &&
     session.results[0]?.parts.every((p) => p === null) === true;
   const tips = useTips(`question-${level}` as TipScreen, firstQuestion);
-  const heroRef = useRef<View>(null);
-  const slotsRef = useRef<View>(null);
-  const answersRef = useRef<View>(null);
+  const heroRef = useRef<ViewInstance>(null);
+  const slotsRef = useRef<ViewInstance>(null);
+  const answersRef = useRef<ViewInstance>(null);
   // At large text sizes the scroll overflows and opens at the top, with the
   // answers below the fold: the layer scrolls a tip's target into view.
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<ScrollViewInstance>(null);
   const offset = useRef(0);
 
   const styles = StyleSheet.create({

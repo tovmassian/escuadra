@@ -1,5 +1,5 @@
 import { createContext, useContext, useRef, useState, type RefObject } from 'react';
-import type { View } from 'react-native';
+import type { ViewInstance } from 'react-native';
 import { useSharedValue, type SharedValue } from 'react-native-reanimated';
 import type { DockRect } from '@/lib/launchIntro';
 
@@ -13,8 +13,8 @@ import type { DockRect } from '@/lib/launchIntro';
 
 /** Home's lockup: the views the intro docks into. */
 export interface HomeLockup {
-  mark: RefObject<View | null>;
-  word: RefObject<View | null>;
+  mark: RefObject<ViewInstance | null>;
+  word: RefObject<ViewInstance | null>;
 }
 
 export interface LaunchReveal {
@@ -55,7 +55,7 @@ export function useLaunchReveal(): LaunchReveal | null {
 /** Where a view is in the window, or null when it is not mounted. Both ends of
  *  the dock are measured this way, at the same moment, so they share one
  *  coordinate space. */
-export function measureInWindow(view: View | null): Promise<DockRect | null> {
+export function measureInWindow(view: ViewInstance | null): Promise<DockRect | null> {
   return new Promise((resolve) => {
     if (!view) {
       resolve(null);

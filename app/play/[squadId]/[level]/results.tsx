@@ -46,7 +46,16 @@ import type { TeamMarker } from '@/types/squad';
 import { Image } from 'expo-image';
 import { router, useFocusEffect, useIsFocused, useLocalSearchParams } from 'expo-router';
 import { useCallback, useEffect, useRef, useState, type Ref } from 'react';
-import { FlatList, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  FlatList,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  type ViewInstance,
+  type ScrollViewInstance,
+} from 'react-native';
 import Animated, {
   cancelAnimation,
   useAnimatedStyle,
@@ -108,10 +117,10 @@ export default function Results() {
     hasNextLevel: level < MAX_LEVEL,
   });
   const showTips = tips.open && tipKeys.length > 0;
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<ScrollViewInstance>(null);
   const offset = useRef(0);
-  const missedRef = useRef<View>(null);
-  const actionsRef = useRef<View>(null);
+  const missedRef = useRef<ViewInstance>(null);
+  const actionsRef = useRef<ViewInstance>(null);
 
   // After an a la escuadra round, once the celebration is over, perhaps ask
   // for a store rating (#57). Nothing here sets state, so the screen never
@@ -589,7 +598,7 @@ function MissedCards({
   marker,
   beat,
 }: {
-  ref?: Ref<View>;
+  ref?: Ref<ViewInstance>;
   missed: QuestionResult[];
   marker: TeamMarker;
   beat: number;

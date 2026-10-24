@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View, type ViewInstance } from 'react-native';
 import Animated, {
   Easing,
   FadeIn,
@@ -109,7 +109,7 @@ export function AnswerTile({
   const shift = useSharedValue(0);
   const fade = useSharedValue(1);
   const previous = useRef(verdict);
-  const pressable = useRef<View>(null);
+  const pressable = useRef<ViewInstance>(null);
   // The latest `answered`, for `onPressOut`: Pressability delays it for a press
   // shorter than 130 ms and then calls the closure from before the verdict,
   // where `answered` is still false. A press-out after the verdict must not

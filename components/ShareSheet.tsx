@@ -24,7 +24,15 @@ import {
 import { useThemeColors } from '@/theme/useTheme';
 import type { TeamMarker } from '@/types/squad';
 import { useEffect, useRef, useState } from 'react';
-import { PixelRatio, Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  PixelRatio,
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  type ViewInstance,
+} from 'react-native';
 import Animated, {
   FadeIn,
   useAnimatedStyle,
@@ -85,7 +93,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
   const sharing = useRef(false);
   // The switch's inner width, so the pill can be half of it and slide by that.
   const [switchWidth, setSwitchWidth] = useState(0);
-  const cardRef = useRef<View>(null);
+  const cardRef = useRef<ViewInstance>(null);
   const pillX = useSharedValue(0);
 
   // The picture's last capture is released with the sheet, not right after

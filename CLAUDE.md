@@ -37,7 +37,7 @@ surface, a new event), update the rule in the same PR, so the next session is no
 | [`i18n`](.claude/rules/i18n.md)                           | Catalogs, translations, display names                                   |
 | [`privacy-telemetry`](.claude/rules/privacy-telemetry.md) | What leaves the device, About, telemetry                                |
 | [`fingerprint`](.claude/rules/fingerprint.md)             | What moves the fingerprint, CI, the SDK pin                             |
-| [`expo`](.claude/rules/expo.md)                           | Expo SDK 57                                                             |
+| [`expo`](.claude/rules/expo.md)                           | Expo SDK 58                                                             |
 | [`design-handoff`](.claude/rules/design-handoff.md)       | `design/`, screenshots, store assets                                    |
 | [`licensing`](.claude/rules/licensing.md)                 | Licence notices and asset licences                                      |
 | [`testing`](.claude/rules/testing.md)                     | Testing standards                                                       |
@@ -136,7 +136,7 @@ changes the product's direction.
 - Animations stay under 300 ms by default, with the carve-outs in `design-tokens` (the
   launch intro, Home's drift, the round-over celebration); a design that needs longer
   changes the rule, as Guardrails says.
-- Read the Expo docs for SDK 57 (https://docs.expo.dev/versions/v57.0.0/), never
+- Read the Expo docs for SDK 58 (https://docs.expo.dev/versions/v58.0.0/), never
   `latest`. An SDK upgrade is a release decision, not a dependency bump.
 
 ## Commands

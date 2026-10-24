@@ -26,6 +26,17 @@ export function packageFolderFromSource(source: string): string | null {
   return `${source.slice(0, at).replace(/^\/+/, '')}${NODE_MODULES}${name}`;
 }
 
+/** A source map as Metro writes it: flat, or (SDK 58 on) indexed into sections. */
+export interface SourceMap {
+  sources?: string[];
+  sections?: { map: SourceMap }[];
+}
+
+/** Every source a map names, through all of its sections. */
+export function sourceMapSources(map: SourceMap): string[] {
+  return [...(map.sources ?? []), ...(map.sections ?? []).flatMap((s) => sourceMapSources(s.map))];
+}
+
 export function collectPackageFolders(sources: Iterable<string>): string[] {
   const folders = new Set<string>();
   for (const source of sources) {

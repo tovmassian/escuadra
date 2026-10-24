@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import type { View } from 'react-native';
+import type { ViewInstance } from 'react-native';
 import {
   Easing,
   useReducedMotion,
@@ -24,10 +24,10 @@ import { durations, spotlightCues } from '@/theme/tokens';
 export interface ShotTap {
   pageX: number;
   pageY: number;
-  tile: View | null;
+  tile: ViewInstance | null;
 }
 
-function measure(view: View | null): Promise<Box | null> {
+function measure(view: ViewInstance | null): Promise<Box | null> {
   return new Promise((resolve) => {
     if (!view) {
       resolve(null);
@@ -52,8 +52,8 @@ export function useShot(question: number) {
   const reduced = useReducedMotion();
   const live = useSharedValue<LiveShot | null>(null);
   const clock = useSharedValue(-1);
-  const overlayRef = useRef<View>(null);
-  const cornerRef = useRef<View>(null);
+  const overlayRef = useRef<ViewInstance>(null);
+  const cornerRef = useRef<ViewInstance>(null);
   const previous = useRef<Record<ShotVerdict, ShotName | null>>({ goal: null, miss: null });
   const timer = useRef<ReturnType<typeof setTimeout> | undefined>(undefined);
   const onScreen = useRef<number | null>(question);

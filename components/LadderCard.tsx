@@ -1,5 +1,5 @@
 import type { Ref } from 'react';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, StyleSheet, Text, View, type ViewInstance } from 'react-native';
 import { OutdatedGlyph, PlayGlyph } from './ActionGlyphs';
 import { useT } from '@/i18n/useT';
 import { isEscuadra, playLevelLabel, statusLine, type LadderRow } from '@/lib/ladderView';
@@ -22,7 +22,7 @@ interface LadderCardProps {
   description: string;
   onPlay: () => void;
   /** Play's own view: Difficulty's first How to play tip rings it (#183). */
-  playRef?: Ref<View>;
+  playRef?: Ref<ViewInstance>;
 }
 
 // The focused rung on Difficulty (#178, spec §1.3): the level to play next.

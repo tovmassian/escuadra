@@ -2,7 +2,7 @@
 
 [![check](https://github.com/tovmassian/escuadra/actions/workflows/check.yml/badge.svg)](https://github.com/tovmassian/escuadra/actions/workflows/check.yml)
 
-Escuadra — a football squad memorisation trainer for iOS and Android. Expo SDK 57 + expo-router, TypeScript strict,
+Escuadra — a football squad memorisation trainer for iOS and Android. Expo SDK 58 + expo-router, TypeScript strict,
 Zustand, Reanimated. Light and dark themes, following the device setting by default, with a theme setting in Settings.
 
 Runs in **Expo Go** for local development — no Xcode, no Apple Developer account, no native build.
@@ -97,7 +97,7 @@ types/        shared domain types
 
 ## Constraints worth knowing
 
-- **Pinned to SDK 57 on purpose.** The binary in the stores is SDK 57, and an SDK upgrade changes the native runtime, which invalidates every over-the-air update path and forces a new build and submission. An SDK upgrade is a release decision.
+- **The SDK is pinned on purpose.** `package.json` pins SDK 58, and an SDK upgrade changes the native runtime, which invalidates every over-the-air update path and forces a new build and submission. An SDK upgrade is a release decision.
 - **Fonts load at runtime** via `useFonts` in `app/_layout.tsx`. Expo Go cannot
   use the expo-font config plugin — that needs a prebuild.
 - **Import fonts from per-weight subpaths** (`@expo-google-fonts/inter/700Bold`),

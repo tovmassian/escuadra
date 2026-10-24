@@ -1,7 +1,15 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRef, useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  type ViewInstance,
+  type ScrollViewInstance,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EraserGlyph, OutdatedGlyph } from '@/components/ActionGlyphs';
 import { ExamModeRow } from '@/components/ExamModeRow';
@@ -51,11 +59,11 @@ export default function Difficulty() {
   const [footerHeight, setFooterHeight] = useState(0);
   // How to play (#183): Play, the star, then Study, scrolled to on a short screen.
   const tips = useTips('difficulty');
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<ScrollViewInstance>(null);
   const offset = useRef(0);
-  const playRef = useRef<View>(null);
-  const starRef = useRef<View>(null);
-  const studyRef = useRef<View>(null);
+  const playRef = useRef<ViewInstance>(null);
+  const starRef = useRef<ViewInstance>(null);
+  const studyRef = useRef<ViewInstance>(null);
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },

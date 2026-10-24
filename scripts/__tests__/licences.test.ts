@@ -6,6 +6,7 @@ import {
   isLicenceFile,
   orderLicenceFiles,
   packageFolderFromSource,
+  sourceMapSources,
   type PackageRead,
 } from '../licences';
 
@@ -51,6 +52,26 @@ it('collects unique folders, sorted', () => {
       '/lib/q.ts',
     ]),
   ).toEqual(['node_modules/a', 'node_modules/b']);
+});
+
+describe('sourceMapSources', () => {
+  it('reads a flat map’s sources', () => {
+    expect(sourceMapSources({ sources: ['/node_modules/a/x.js', '/app/b.tsx'] })).toEqual([
+      '/node_modules/a/x.js',
+      '/app/b.tsx',
+    ]);
+  });
+  it('reads every section of an indexed map, nested ones too', () => {
+    expect(
+      sourceMapSources({
+        sections: [
+          { map: { sources: ['__prelude__'] } },
+          { map: { sections: [{ map: { sources: ['/node_modules/a/x.js'] } }] } },
+          { map: { sources: ['/node_modules/b/y.js'] } },
+        ],
+      }),
+    ).toEqual(['__prelude__', '/node_modules/a/x.js', '/node_modules/b/y.js']);
+  });
 });
 
 it('orders licence files: primary first, then the rest, and drops the others', () => {
