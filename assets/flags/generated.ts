@@ -109,11 +109,11 @@ export type FlagCode =
   | 'KSA'
   | 'KUW'
   | 'LAO'
+  | 'LBN'
   | 'LBR'
   | 'LBY'
   | 'LCA'
   | 'LES'
-  | 'LIB'
   | 'LIE'
   | 'LTU'
   | 'LUX'
@@ -168,7 +168,7 @@ export type FlagCode =
   | 'SDN'
   | 'SEN'
   | 'SEY'
-  | 'SIN'
+  | 'SGP'
   | 'SKN'
   | 'SLE'
   | 'SLV'
@@ -322,11 +322,11 @@ export const FLAG_SOURCES: Record<FlagCode, ImageRequireSource> = {
   KSA: require('./KSA.png') as ImageRequireSource,
   KUW: require('./KUW.png') as ImageRequireSource,
   LAO: require('./LAO.png') as ImageRequireSource,
+  LBN: require('./LBN.png') as ImageRequireSource,
   LBR: require('./LBR.png') as ImageRequireSource,
   LBY: require('./LBY.png') as ImageRequireSource,
   LCA: require('./LCA.png') as ImageRequireSource,
   LES: require('./LES.png') as ImageRequireSource,
-  LIB: require('./LIB.png') as ImageRequireSource,
   LIE: require('./LIE.png') as ImageRequireSource,
   LTU: require('./LTU.png') as ImageRequireSource,
   LUX: require('./LUX.png') as ImageRequireSource,
@@ -381,7 +381,7 @@ export const FLAG_SOURCES: Record<FlagCode, ImageRequireSource> = {
   SDN: require('./SDN.png') as ImageRequireSource,
   SEN: require('./SEN.png') as ImageRequireSource,
   SEY: require('./SEY.png') as ImageRequireSource,
-  SIN: require('./SIN.png') as ImageRequireSource,
+  SGP: require('./SGP.png') as ImageRequireSource,
   SKN: require('./SKN.png') as ImageRequireSource,
   SLE: require('./SLE.png') as ImageRequireSource,
   SLV: require('./SLV.png') as ImageRequireSource,

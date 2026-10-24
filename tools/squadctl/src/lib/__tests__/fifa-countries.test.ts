@@ -31,7 +31,7 @@ describe('fifa-countries table', () => {
   });
 
   // A second code is one Wikipedia's own flag templates accept for that
-  // country: Freiburg writes KVX (FIFA's) where most write KOS, and the
+  // country: Freiburg writes KVX (FIFA's former code) where most write KOS, and the
   // October 2026 sweep found SPA, SLO, DRC and NGR (IOC-style). Each names the
   // one spelling, so nothing forks; any other pair is a copy error.
   it('never maps two codes to the same country name, except the known second codes', () => {
@@ -72,6 +72,15 @@ describe('fifa-countries table', () => {
     expect(countryForCode('IRL')).toBe('Republic of Ireland');
     expect(countryForCode('USA')).toBe('United States');
     expect(countryForCode('TUR')).toBe('Türkiye');
+  });
+
+  // FIFA retired LIB and SIN for LBN and SGP. Squad wikitext writes the
+  // current code, and the retired one is not kept as a second code.
+  it("uses FIFA's current codes for Lebanon and Singapore", () => {
+    expect(countryForCode('LBN')).toBe('Lebanon');
+    expect(countryForCode('SGP')).toBe('Singapore');
+    expect(countryForCode('LIB')).toBeNull();
+    expect(countryForCode('SIN')).toBeNull();
   });
 
   it('normalises case and surrounding whitespace, and reports an unmapped code as null', () => {

@@ -43,6 +43,11 @@ describe('flagFor', () => {
     expect(flagFor('Netherlands')).toBe('NED');
   });
 
+  it("uses FIFA's current code where FIFA has changed one", () => {
+    expect(flagFor('Lebanon')).toBe('LBN');
+    expect(flagFor('Singapore')).toBe('SGP');
+  });
+
   it('returns null for an unmapped name rather than throwing', () => {
     // Call sites degrade to text-only on null; they must never crash a round.
     expect(flagFor('Atlantis')).toBeNull();
@@ -68,6 +73,16 @@ describe('FLAG_BY_NATIONALITY', () => {
       else seen.set(code, name);
     }
     expect(collisions).toEqual([]);
+  });
+
+  // squadctl reads `nat=` codes through data/fifa-countries.json, and the app
+  // keys flags, names and confederations by this table's codes: one code set.
+  it('gives each nationality the code data/fifa-countries.json gives it', () => {
+    const fifa = readJson<Record<string, string>>('data/fifa-countries.json');
+    const disagreeing = Object.entries(FLAG_BY_NATIONALITY)
+      .filter(([name, code]) => fifa[code] !== name)
+      .map(([name, code]) => `${name} -> ${code}`);
+    expect(disagreeing).toEqual([]);
   });
 
   it('covers every nationality in players.json', () => {
