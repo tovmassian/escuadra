@@ -169,11 +169,27 @@ function commitFiles(o: BuildOptions, commit: SyntheticCommit): void {
 }
 
 /**
- * Rewrites every branch of `origin` without `paths`, then drops the original objects. The
- * rewrite keeps messages, authors and dates, so a case's `git log` reads as the real one; the
- * hashes change. It runs without DATES, which would stamp every rewritten commit with them.
+ * Rewrites the history of `origin` without `paths`, then drops the original objects. The rewrite
+ * keeps messages, authors and dates, so a case's `git log` reads as the real one; the hashes
+ * change. It starts at the earliest commit that touches a path: older commits cannot hold one,
+ * keep their hashes, and cost nothing to leave alone. A ref that ends before that commit is not
+ * rewritten (filter-branch reports it unchanged). It runs without DATES, which would stamp every
+ * rewritten commit with them.
  */
 function hideFromHistory(origin: string, paths: string[]): void {
+  const touching = git(origin, [
+    'rev-list',
+    '--reverse',
+    '--topo-order',
+    '--full-history',
+    '--all',
+    '--',
+    ...paths,
+  ]);
+  const first = touching.split('\n')[0];
+  if (first === undefined || first === '') return;
+  // `first`'s parents and everything behind them stay out of the rewrite. A root has none.
+  const parents = git(origin, ['rev-list', '--parents', '-n', '1', first]).split(' ').slice(1);
   const quoted = paths.map((path) => `'${path}'`).join(' ');
   execFileSync(
     'git',
@@ -184,6 +200,7 @@ function hideFromHistory(origin: string, paths: string[]): void {
       `git rm -r -q --cached --ignore-unmatch -- ${quoted}`,
       '--',
       '--all',
+      ...parents.map((parent) => `^${parent}`),
     ],
     {
       cwd: origin,

@@ -305,3 +305,131 @@ describe('buildSandbox with hidden paths', () => {
     expect(git(origin, 'for-each-ref', '--format=%(refname)', 'refs/original')).toBe('');
   });
 });
+
+// A source repo where the hidden path first appears after the root, and a second pinned branch
+// ends before that: a rewrite from the first touching commit leaves the older history alone.
+function lateSecretSource() {
+  const dir = temp('sandbox-late-');
+  git(dir, 'init', '--quiet', '--initial-branch', 'main');
+  writeFileSync(join(dir, 'keep.md'), '# Keep\n');
+  git(dir, 'add', '.');
+  git(dir, 'commit', '--quiet', '-m', 'root');
+  writeFileSync(join(dir, 'keep.md'), '# Keep\n\nOlder.\n');
+  git(dir, 'add', '.');
+  git(dir, 'commit', '--quiet', '-m', 'older');
+  // A header git's own commit-tree drops: a rewrite of this commit would change its hash, so an
+  // unchanged hash shows the commit was never rewritten.
+  const plain = execFileSync('git', ['cat-file', 'commit', 'HEAD'], { cwd: dir, encoding: 'utf8' });
+  const marked = plain.replace('\n\n', '\nx-untouched yes\n\n');
+  const older = execFileSync('git', ['hash-object', '-t', 'commit', '-w', '--stdin'], {
+    cwd: dir,
+    encoding: 'utf8',
+    input: marked,
+  }).trim();
+  git(dir, 'reset', '--quiet', '--hard', older);
+  git(dir, 'branch', 'release/old');
+  mkdirSync(join(dir, 'secret'));
+  writeFileSync(join(dir, 'secret', 'answers.md'), 'answer one\n');
+  git(dir, 'add', '.');
+  git(dir, 'commit', '--quiet', '-m', 'adds the secret');
+  const firstBlob = git(dir, 'rev-parse', 'HEAD:secret/answers.md');
+  writeFileSync(join(dir, 'secret', 'answers.md'), 'answer two\n');
+  writeFileSync(join(dir, 'keep.md'), '# Keep\n\nNewer.\n');
+  git(dir, 'add', '.');
+  git(dir, 'commit', '--quiet', '-m', 'changes the secret');
+  const tip = git(dir, 'rev-parse', 'HEAD');
+  const secondBlob = git(dir, 'rev-parse', 'HEAD:secret/answers.md');
+  return { dir, older, tip, firstBlob, secondBlob };
+}
+
+describe('buildSandbox with hidden paths that first appear late', () => {
+  const source = lateSecretSource();
+  const work = temp('sandbox-work-');
+  let origin = '';
+
+  const hasObject = (cwd: string, sha: string): boolean => {
+    try {
+      git(cwd, 'cat-file', '-e', sha);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  beforeAll(() => {
+    const tmp = temp('sandbox-tmp-');
+    origin = join(tmp, 'origin.git');
+    buildSandbox({
+      sourceRepo: source.dir,
+      workDir: work,
+      tmpDir: tmp,
+      fixturesDir: fixtures(),
+      ghDir: GH_DIR,
+      realGit: realGitBinary(),
+      setup: {
+        pins: { main: source.tip, 'release/old': source.older },
+        issues: [],
+        prs: [],
+        commits: [],
+        branches: [],
+        checkout: { branch: 'main' },
+        dirty: [],
+        hidden: ['secret'],
+      },
+    });
+  });
+
+  it('keeps the hashes of the commits older than the first one that touches the path', () => {
+    expect(git(origin, 'rev-parse', 'release/old')).toBe(source.older);
+    expect(git(origin, 'rev-parse', 'main~2')).toBe(source.older);
+    expect(git(origin, 'rev-parse', 'main~3')).toBe(git(source.dir, 'rev-parse', 'main~3'));
+  });
+
+  it('rewrites main without the path, and removes the blobs everywhere', () => {
+    expect(git(origin, 'rev-parse', 'main')).not.toBe(source.tip);
+    expect(existsSync(join(work, 'secret'))).toBe(false);
+    expect(git(origin, 'log', '--all', '--format=%H', '--', 'secret')).toBe('');
+    for (const blob of [source.firstBlob, source.secondBlob]) {
+      expect(hasObject(origin, blob), `origin has ${blob}`).toBe(false);
+      expect(hasObject(work, blob), `clone has ${blob}`).toBe(false);
+    }
+  });
+
+  it('keeps the subjects, authors and dates', () => {
+    const log = (cwd: string, ref: string) => git(cwd, 'log', ref, '--format=%s|%aI|%an');
+    expect(log(work, 'origin/main')).toBe(log(source.dir, 'main'));
+    expect(git(work, 'show', 'origin/main:keep.md')).toContain('Newer.');
+  });
+
+  it('leaves no rewrite backup refs behind', () => {
+    expect(git(origin, 'for-each-ref', '--format=%(refname)', 'refs/original')).toBe('');
+  });
+});
+
+describe('buildSandbox with a hidden path no pinned commit touches', () => {
+  it('builds, and leaves the history as it was', () => {
+    const source = lateSecretSource();
+    const work = temp('sandbox-work-');
+    const tmp = temp('sandbox-tmp-');
+    buildSandbox({
+      sourceRepo: source.dir,
+      workDir: work,
+      tmpDir: tmp,
+      fixturesDir: fixtures(),
+      ghDir: GH_DIR,
+      realGit: realGitBinary(),
+      setup: {
+        pins: { main: source.older },
+        issues: [],
+        prs: [],
+        commits: [],
+        branches: [],
+        checkout: { branch: 'main' },
+        dirty: [],
+        hidden: ['secret'],
+      },
+    });
+    expect(git(join(tmp, 'origin.git'), 'rev-parse', 'main')).toBe(source.older);
+    expect(git(work, 'log', 'origin/main', '--format=%s')).toBe('older\nroot');
+  });
+});
