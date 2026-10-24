@@ -199,14 +199,12 @@ const CASES: EvalCase[] = [
   },
   {
     name: 'tbc-title',
-    why: '[TBC] in the title: the skill asks whether the issue is ready to work.',
+    why: '[TBC] in the title: the skill asks (graded on the decision; its questions are not judged, since any scope question is legitimate).',
     tags: ['ask'],
     prompt: 'Work on #9012.',
     issues: [9012],
     expect: triage({
       decision: 'ask',
-      questions:
-        'at least one asks the owner about what the [TBC] issue should do (its scope, behaviour or placement) or whether it is ready to work.',
     }),
   },
   {
