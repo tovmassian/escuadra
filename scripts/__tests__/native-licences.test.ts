@@ -160,6 +160,9 @@ it('allows exactly the licences, the two compound expressions and the two Google
       'BSL-1.0',
       'IJG',
       'IJG AND BSD-3-Clause AND Zlib',
+      'ISC',
+      'LicenseRef-Public-Domain',
+      'LicenseRef-scancode-unicode-mappings',
       'MIT',
       'MPL-2.0',
       'NCSA',
@@ -167,6 +170,7 @@ it('allows exactly the licences, the two compound expressions and the two Google
       'Unlicense',
       'Zlib',
       'bzip2-1.0.6',
+      'dtoa',
     ].sort(),
   );
 });

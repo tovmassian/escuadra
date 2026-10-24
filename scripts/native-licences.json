@@ -307,6 +307,74 @@
       }
     ]
   },
+  "netlib dtoa": {
+    "licence": "dtoa",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Copyright (c) 1991, 2000, 2001 by Lucent Technologies. Copyright (c) 1991, 1996 by Lucent Technologies.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/dtoa.LICENSE",
+        "url": "https://github.com/facebook/hermes/blob/hermes-v260318099.0.4/external/dtoa/dtoa.c#L3-L16"
+      }
+    ]
+  },
+  "strlcpy": {
+    "licence": "ISC",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Copyright (c) 1998 Todd C. Miller <Todd.Miller@courtesan.com>",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/strlcpy.LICENSE",
+        "url": "https://github.com/facebook/hermes/blob/hermes-v260318099.0.4/external/llvh/lib/Support/regstrlcpy.c#L4-L16"
+      }
+    ]
+  },
+  "ConvertUTF": {
+    "licence": "LicenseRef-scancode-unicode-mappings",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Copyright 2001-2004 Unicode, Inc.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/convertutf.LICENSE",
+        "url": "https://github.com/facebook/hermes/blob/hermes-v260318099.0.4/external/llvh/lib/Support/ConvertUTF.cpp#L10-L28"
+      }
+    ]
+  },
+  "MD5 (Solar Designer)": {
+    "licence": "LicenseRef-Public-Domain",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Alexander Peslyak, better known as Solar Designer",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/md5.LICENSE",
+        "url": "https://github.com/facebook/hermes/blob/hermes-v260318099.0.4/external/llvh/lib/Support/MD5.cpp#L13-L25"
+      }
+    ]
+  },
   "AndroidX": {
     "licence": "Apache-2.0",
     "platforms": ["android"],

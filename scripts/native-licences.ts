@@ -10,6 +10,9 @@ import type { NativeLibrary } from '../lib/licencesView.ts';
 // in a second round on 2026-10-24 for Glide (BSD-2-Clause-Views), the
 // libjpeg-turbo inside Fresco (IJG, Zlib), the code Hermes bundles (LLVM's
 // licences, Unlicense) and the Public Suffix List inside OkHttp (MPL-2.0).
+// A third round the same day accepted the four notices left in Hermes: netlib
+// dtoa, OpenBSD's strlcpy (ISC), LLVM's ConvertUTF (Unicode, Inc.; no SPDX id
+// matches its text, so ScanCode's) and Solar Designer's public-domain MD5.
 // An entry's licence is compared as a whole string, so a library under several
 // licences at once is listed by its full expression. Widening it is the
 // owner's decision, like ALLOWED_LICENCES.
@@ -27,6 +30,10 @@ export const NATIVE_ALLOWED_LICENCES: readonly string[] = [
   'NCSA',
   'Unlicense',
   'MPL-2.0',
+  'dtoa',
+  'ISC',
+  'LicenseRef-scancode-unicode-mappings',
+  'LicenseRef-Public-Domain',
   'IJG AND BSD-3-Clause AND Zlib',
   'Apache-2.0 WITH LLVM-exception AND NCSA',
   'Play Core Software Development Kit Terms of Service',
