@@ -23,13 +23,13 @@ To see why a run failed, add `--keep`. The run's directory is kept, and its `out
 
 - **Cases** are data in [`cases.ts`](../../.claude/skills/escuadra-issue-runner/evals/cases.ts). Edit them, then run `node scripts/evals/gen-cases.ts`. Never edit a case's `case.yaml`, `scaffold.sh` or `setup.json`: `npm run check` fails when they drift.
 - **A real issue** becomes a fixture with `node scripts/evals/capture-issue.ts <number> --why "<what it tests>"`. A snapshot records the issue as it stands at the main pin, so compare the issue's last edit and close times with the pin's commit date, and undo body edits and state changes made after it by hand, saying so in `source`.
-- **Bumping the pins** (`PINS` in [`cases.ts`](../../.claude/skills/escuadra-issue-runner/evals/cases.ts)) means re-capturing the real issues and checking every expectation still holds at the new commit. Check the synthetic issues too: each must ask for something the new pin does not already have. And [`dry-run.md`](../../.claude/skills/escuadra-issue-runner/evals/dry-run.md) must name every instruction file the pinned `main` has, since a run preloads none of them: `CLAUDE.md` before #165, and from #165 on also the `.claude/rules/` it indexes, which load only when a matching file is Read.
+- **Bumping the pins** (`PINS` in [`cases.ts`](../../.claude/skills/escuadra-issue-runner/evals/cases.ts)) means re-capturing the real issues and checking every expectation still holds at the new commit. Check the synthetic issues too: each must ask for something the new pin does not already have. [`dry-run.md`](../../.claude/skills/escuadra-issue-runner/evals/dry-run.md) must tell the agent to read `CLAUDE.md` and the rule for each topic the request touches, since a run preloads none of them (`CLAUDE_CODE_DISABLE_CLAUDE_MDS=1`). The suite also declares `hidden` paths: they are removed from the clone and its history, so the skill under test and the expected answers are not reachable; a new file that holds answers belongs in that list.
 
 ## What a run can and cannot do
 
 The runner gives each run a fresh directory and an OS sandbox (spec §11):
 
-- The agent cannot read the real repo or write outside its directory.
+- The agent cannot read the real repo or write outside its directory. The clone holds only the pinned commits, with the suite's `hidden` paths removed from every one.
 - It gets no `CLAUDE.md` preloaded, no user plugins and no project skills.
 - `gh` is a fake that answers from fixtures and refuses writes.
 - `git` is a wrapper around the real binary, because macOS's `/usr/bin/git` shim fails inside the sandbox.
