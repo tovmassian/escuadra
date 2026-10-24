@@ -1,7 +1,8 @@
 # escuadra-issue-runner and its evals
 
 **Status:** approved 2026-10-16; built, with the results under Outcome. Issue:
-[#136](https://github.com/tovmassian/escuadra/issues/136). Two sub-projects,
+[#136](https://github.com/tovmassian/escuadra/issues/136); pins moved past #165 in
+[#171](https://github.com/tovmassian/escuadra/issues/171). Two sub-projects,
 built in this order: the eval suite (§3–§9), then the skill written against it
 (§2, §10). The contract in §2 is the skill's specification; the evals encode
 it.
@@ -125,6 +126,71 @@ mid-turn.
 question no gate covers ("proceed or hold?", and a Modal-or-library choice for #126). The
 counter, left out so that the skill merged is the one the gate ran: asking whether to proceed
 is never a question, since invoking the skill was the go-ahead.
+
+### Re-pinned past #165 (2026-10-24)
+
+The pins above predate #165, so runs read a single-file `CLAUDE.md` that sessions no longer
+get. #171 moved `main` to `df83a116` (after #165 and the skill's #166) and changed what a
+run sees:
+
+- **The clone hides the skill and its answers** (§5): origin is fetched with only the pinned
+  commits, and the suite's `hidden` paths (the skill folder, `scripts/evals`, this spec and
+  its plan) are rewritten out of every commit and pruned from the object database.
+- **The dry run reads `CLAUDE.md` as an index** and the rule for each topic the request
+  touches, since a rule does not load on Read inside a run (§11, item 8).
+- **Cases.** #126, #129 and #117 are closed by work the new pin contains, so they can no longer
+  proceed. `117-owner-decision` became `160-route-choice` (real #160, two routes for the owner);
+  `126-small-bug` became the synthetic `small-bug` (#9010); the #129 pair became
+  `large-spec` and `large-spec-subagent` (#9011, an L feature with a spec and no plan, and no
+  open choice, so the subagent variant proceeds). #55 lost its `[TBC]` title, so `55-tbc`
+  became `55-store-console` and the synthetic `tbc-title` (#9012) holds the `[TBC]` gate; it is
+  graded on its decision only, as the judge rejected legitimate scope questions 3-0. #9004,
+  #9005, #9009 and #9010 were reworded to ask for what the pin lacks, and the negative cases
+  get 25 turns, since reading the rules takes more.
+
+Run on 2026-10-24 with Claude Code 2.1.278: a Sonnet agent, an Opus judge, 3 runs per case and
+both arms, $44.74 estimated over 5.8 hours. The default $15 ceiling stopped the first `--full`
+pass after 7 cases (the without arm of `fingerprint-on-release` has 2 runs); the other 13 ran
+one case per invocation. One skill change came out of the gate: in 2 of 3 runs of
+`115-closed` the agent listed only some docs and never said the issue was closed, so gate 1
+now says to fill in `docs` and `existing` first and to say in the question that it is closed.
+`115-closed` and `neg-question`, the closed-issue cases, were re-run on the changed skill;
+their rows are that run.
+
+| Case                     | Without | With (3 runs) |
+| ------------------------ | ------- | ------------- |
+| `small-bug`              | 0.56    | 1.00          |
+| `large-spec`             | 0.61    | 1.00          |
+| `large-spec-subagent`    | 0.88    | 1.00          |
+| `160-route-choice`       | 0.91    | 1.00          |
+| `55-store-console`       | 0.91    | 0.97          |
+| `tbc-title`              | 1.00    | 1.00          |
+| `59-gh-pages`            | 0.87    | 1.00          |
+| `116-release`            | 0.94    | 0.94          |
+| `115-closed`             | 0.76    | 1.00          |
+| `on-release-branch`      | 0.71    | 1.00          |
+| `shipped-fix-from-main`  | 0.80    | 1.00          |
+| `fingerprint-on-release` | 0.90    | 1.00          |
+| `m-boundary`             | 0.78    | 1.00          |
+| `on-feature-branch`      | 0.78    | 0.93          |
+| `dirty-tree`             | 0.80    | 1.00          |
+| `plan-half-done`         | 0.59    | 0.96          |
+| `open-pr`                | 0.60    | 1.00          |
+| `no-size`                | 0.85    | 0.92          |
+| `neg-create-issue`       | 0.87    | 1.00          |
+| `neg-question`           | 1.00    | 1.00          |
+
+Every case reaches the 0.9 bar with the skill. The mean is 0.99 with it and 0.81 without, a
+delta of +0.18, and no run tried a GitHub write or changed git state. The with-arm misses, one
+run each: `116-release` (`questions`), `55-store-console` (`docs`), `no-size` (`workspace`,
+`first-step`, `execution`), `on-feature-branch` (`decision`), `plan-half-done` (`workspace`).
+As in the RED baseline, the without arm fails mostly on the proceed cases (`small-bug`,
+`open-pr`, `plan-half-done`, `large-spec`, `on-release-branch`).
+
+**Runner notes.** Parallel scaffolds hit the 120 s scaffold limit while the rewrite ran over
+all 329 commits (35–40 s alone); it now starts at the first commit that touches a hidden path,
+20 commits at this pin, and a scaffold takes about 10 s. A kept run holds a clone of the repo,
+so `--keep` on a whole pass filled the disk: keep only the case being debugged.
 
 ## 1. Problem
 
@@ -309,15 +375,17 @@ remote) are out of scope for now (§12).
 both arms. In substance:
 
 > This is a dry run in a disposable copy of the repository. Read `CLAUDE.md`
-> first: a real session would have it loaded. Do every read-only step you
+> first: a real session would have it loaded. It is an index: read the rule in
+> `.claude/rules/` for each topic the request touches. Do every read-only step you
 > would do. Make no change to the repository, its branches or worktrees, or
 > GitHub. If the request leads you to work on an existing issue, end your final message
 > with the triage block, filled in; questions you would ask the owner go in
 > the block, with `decision: ask`. Otherwise answer and leave the block out.
 
 Eval runs set `CLAUDE_CODE_DISABLE_CLAUDE_MDS=1`, so `CLAUDE.md` is not
-preloaded (§11). Telling both arms to read it restores the information a real
-session has, without embedding 26 KB in every case. The instruction is
+preloaded (§11), and a rule does not load when its file is Read (§11, item 8).
+Telling both arms to read them restores the information a real session has,
+without embedding them in every case. The instruction is
 identical in both arms, so the delta measures what the skill adds to the
 decisions, not whether the agent knew the format. On a negative case (§7) the
 request does not lead to working an issue, and no block is expected.
@@ -330,21 +398,26 @@ Each generated `scaffold.sh` hands off to `scripts/evals/scaffold.ts`, which
 builds:
 
 ```
-$TMPDIR/origin.git/    bare clone of the real repo; its own `origin` removed;
-                       only the pinned branches: main → deb2e3b9,
-                       release/1.0.0 → d8f2d21b
+$TMPDIR/origin.git/    bare repo holding only the pinned commits, fetched from
+                       the real repo: main → df83a116, release/1.0.0 → d8f2d21b;
+                       the suite's hidden paths rewritten out of history
 $HOME/cwd/             clone of origin.git: the agent's working directory
   .git/sandbox/        issues/*.json, prs.json, gh.log (created empty)
   .git/sandbox/bin/    gh and git wrappers, the fake gh's code, package.json
 ```
 
 - **Pinned commits** freeze the specs, plans and handoff to match the issue
-  snapshots, and keep the skill out of the clone's reachable history (it is
-  written after `deb2e3b9`), so the without arm really is without it. A local
-  clone still carries the source repo's unreachable objects (other branches'
-  commits); fetching only the pinned commits would close that, at the cost of
-  a pack transfer the scaffold's 120 s may not allow. Bumping a pin is
-  deliberate and goes with re-capturing the snapshots.
+  snapshots. Bumping a pin is deliberate and goes with re-capturing the
+  snapshots.
+- **Hidden paths** keep the skill out of the clone, so the without arm really is
+  without it, and keep the expected answers out of both arms. Every `main` since
+  #140 carries the skill and its `evals/`, so the suite lists `hidden` paths: the
+  skill folder, `scripts/evals`, and this spec and its plan (§7 is the answer
+  key). Origin starts empty and fetches only the pinned commits (about 3 s), so no
+  other branch's objects come along; `git filter-branch` then removes the hidden
+  paths from every commit from the first one that touches them, and the originals
+  are pruned. Messages, authors and dates survive; hashes after that commit change.
+  A scaffold takes about 10 s.
 - **Project skills in the clone do not load** in eval runs, and neither do the
   owner's plugins (superpowers included): the run's config directory is
   sandboxed. Both arms see the same thing; `first-step` is graded as a name.
@@ -398,7 +471,7 @@ Four layers keep a run away from the real GitHub and the real repo:
 
 The `no-writes` grader (§8) fails any run that tried a GitHub write. The skill
 folder's `evals/`, where the expected answers live, is also out of reach: the
-runner's permissions deny reading it.
+runner's permissions deny reading it, and its copy is hidden from the clone.
 
 ## 6. Fixtures
 
@@ -424,9 +497,9 @@ runner's permissions deny reading it.
   committed, so later edits to the issue do not move the suite.
 - **A snapshot records the issue as it stands at the main pin.** An issue
   closed after the pin, by work the sandbox does not contain, is recorded open,
-  and its `source` says so: #129 closed through #135 a few hours after
-  `deb2e3b9`. Body edits made after the pin are undone too, not only state:
-  #129's boxes were ticked after it.
+  and its `source` says so; body edits made after the pin are undone too, not
+  only state. When a pin moves past the work that closed an issue, the case is
+  replaced rather than recorded open: the clone would contain the work.
 - **Synthetic issues** (`#9001`…) only for boundaries no real issue covers,
   with their docs under `_fixtures/docs/`. Their wording follows the real
   issues' style (Size line, Work checklist, Acceptance criteria).
@@ -443,43 +516,45 @@ runner's permissions deny reading it.
 
 Starting state, unless a row says otherwise: `main`, clean tree, no open PR.
 
-| Case                      | Source | Setup                                   | Decision          | Workspace · base             | First step                  |
-| ------------------------- | ------ | --------------------------------------- | ----------------- | ---------------------------- | --------------------------- |
-| `126-small-bug`           | #126   | —                                       | proceed           | in-place · main              | systematic-debugging        |
-| `129-large-spec`          | #129   | —                                       | ask: execution    | worktree · main              | writing-plans               |
-| `129-large-spec-subagent` | #129   | prompt asks for subagents               | ask: open choices | worktree · main              | writing-plans               |
-| `117-owner-decision`      | #117   | —                                       | ask               | n/a                          | n/a                         |
-| `55-tbc`                  | #55    | —                                       | ask               | n/a                          | n/a                         |
-| `59-gh-pages`             | #59    | —                                       | ask               | n/a                          | n/a                         |
-| `116-release`             | #116   | —                                       | ask               | n/a                          | n/a                         |
-| `115-closed`              | #115   | issue closed                            | ask               | n/a                          | n/a                         |
-| `on-release-branch`       | #9001  | on `release/1.0.0`                      | proceed           | in-place · release/1.0.0     | systematic-debugging        |
-| `shipped-fix-from-main`   | #9002  | —                                       | proceed           | worktree · release/1.0.0     | systematic-debugging        |
-| `fingerprint-on-release`  | #9003  | —                                       | ask               | n/a                          | n/a                         |
-| `m-boundary`              | #9004  | M, no docs                              | proceed           | in-place · main              | brainstorming               |
-| `on-feature-branch`       | #9005  | on `feat/other`                         | proceed           | worktree · main              | test-driven-development     |
-| `dirty-tree`              | #9006  | a tracked file modified                 | proceed           | worktree · main              | test-driven-development     |
-| `plan-half-done`          | #9007  | L; spec, plan, `(#9007, part 1)` merged | ask: execution    | worktree · main              | n/a (depends on the answer) |
-| `open-pr`                 | #9008  | open PR #9101 on `fix/9008-…`           | proceed           | in-place · main, that branch | —                           |
-| `no-size`                 | #9009  | no Size anywhere                        | proceed           | in-place · main              | systematic-debugging        |
-| `neg-create-issue`        | —      | "open an issue for …"                   | no triage         | —                            | —                           |
-| `neg-question`            | #117   | "what does #117 say about …?"           | no triage         | —                            | —                           |
+| Case                     | Source | Setup                                   | Decision       | Workspace · base             | First step                  |
+| ------------------------ | ------ | --------------------------------------- | -------------- | ---------------------------- | --------------------------- |
+| `small-bug`              | #9010  | —                                       | proceed        | in-place · main              | systematic-debugging        |
+| `large-spec`             | #9011  | L; spec committed, no plan              | ask: execution | worktree · main              | writing-plans               |
+| `large-spec-subagent`    | #9011  | prompt asks for subagents               | proceed        | worktree · main              | writing-plans               |
+| `160-route-choice`       | #160   | —                                       | ask            | n/a                          | n/a                         |
+| `55-store-console`       | #55    | —                                       | ask            | n/a                          | n/a                         |
+| `tbc-title`              | #9012  | `[TBC]` in the title                    | ask            | n/a                          | n/a                         |
+| `59-gh-pages`            | #59    | —                                       | ask            | n/a                          | n/a                         |
+| `116-release`            | #116   | —                                       | ask            | n/a                          | n/a                         |
+| `115-closed`             | #115   | issue closed                            | ask            | n/a                          | n/a                         |
+| `on-release-branch`      | #9001  | on `release/1.0.0`                      | proceed        | in-place · release/1.0.0     | systematic-debugging        |
+| `shipped-fix-from-main`  | #9002  | —                                       | proceed        | worktree · release/1.0.0     | systematic-debugging        |
+| `fingerprint-on-release` | #9003  | —                                       | ask            | n/a                          | n/a                         |
+| `m-boundary`             | #9004  | M, no docs                              | proceed        | in-place · main              | brainstorming               |
+| `on-feature-branch`      | #9005  | on `feat/other`                         | proceed        | worktree · main              | test-driven-development     |
+| `dirty-tree`             | #9006  | a tracked file modified                 | proceed        | worktree · main              | test-driven-development     |
+| `plan-half-done`         | #9007  | L; spec, plan, `(#9007, part 1)` merged | ask: execution | worktree · main              | n/a (depends on the answer) |
+| `open-pr`                | #9008  | open PR #9101 on `fix/9008-…`           | proceed        | in-place · main, that branch | —                           |
+| `no-size`                | #9009  | no Size anywhere                        | proceed        | in-place · main              | systematic-debugging        |
+| `neg-create-issue`       | —      | "open an issue for …"                   | no triage      | —                            | —                           |
+| `neg-question`           | #117   | "what does #117 say about …?"           | no triage      | —                            | —                           |
 
-What each real case tests: #126, an S bug in place, a size disagreement, a
-device check that is not a question; #129, L to a worktree, finding spec
-§2.4/§6/§8 and the handoff, the execution question (asked, or answered by the
-prompt), and the issue's two open choices, the ball's depth and the trail
-(asked in both cases, though the issue names defaults); #117, an issue that
-hands the owner the release route; #55, `[TBC]`; #59, pushing `gh-pages` and
-the store-badge licence rule while Play is not live; #116, the handoff as the primary doc and cutting a release branch;
-#115, a closed issue. The synthetic ones each sit on one rule of §2.3–§2.4;
-#9001 and #9002 name `release/1.0.0` as their route, as §2.3 requires;
-`fingerprint-on-release` needs a native package upgrade; `plan-half-done`
-tests resuming from git rather than checkboxes; `open-pr` tests reusing the
-branch rather than making a second; `no-size` tests `(estimated)`.
+What each real case tests: #160, an issue that lists two routes for the owner to
+pick, and touches licence notices; #55, work that happens in the store consoles
+at submission; #59, pushing `gh-pages` and the store-badge licence rule while
+Play is not live; #116, the handoff as the primary doc and cutting a release
+branch; #115, a closed issue; #117, the question in `neg-question`. The
+synthetic ones each sit on one rule of §2.2–§2.4: #9010, an S bug in place, a
+size disagreement and a device check that is not a question; #9011, L to a
+worktree, finding its spec, and the execution question (asked, or answered by
+the prompt); #9012, `[TBC]`; #9001 and #9002 name `release/1.0.0` as their
+route, as §2.3 requires; `fingerprint-on-release` needs a native package
+upgrade; `plan-half-done` tests resuming from git rather than checkboxes;
+`open-pr` tests reusing the branch rather than making a second; `no-size` tests
+`(estimated)`.
 
-Prompts are natural language and vary in wording ("Pick up #126", "Let's do
-issue 129", "Take #117 and carry it through"), never a slash command: the
+Prompts are natural language and vary in wording ("Pick up #9010", "Let's do
+issue 9011", "Take #160 and carry it through"), never a slash command: the
 without arm has no such command, and the skill's description has to trigger on
 how the owner actually asks.
 
