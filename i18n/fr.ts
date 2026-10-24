@@ -165,6 +165,7 @@ export const fr: Messages = {
       comingNext: 'À venir',
       // "À propos", as the About screen's title says.
       about: 'À propos',
+      yourData: 'Tes données',
     },
     language: 'Langue',
     languageSpoken: (name: string) => `Langue : ${name}`,
@@ -193,6 +194,45 @@ export const fr: Messages = {
     title: 'Mode examen',
     line: 'Tout l’effectif, rien qu’avec les numéros de maillot.',
     soon: 'Bientôt',
+  },
+  reset: {
+    // Verbs, as the headings of the two lists: what the action does.
+    clears: 'Efface',
+    keeps: 'Conserve',
+    team: {
+      title: (team: string) => `Recommencer : ${team} ?`,
+      line: (team: string) =>
+        `${team} redevient « Pas encore joué », comme si tu n’avais jamais ouvert cette équipe.`,
+      bestScores: 'Records',
+      // N for Niveau.
+      levelScore: (level: number, score: number) => `N${level} ${score}`,
+      keepsStar: 'Ton étoile : l’équipe reste dans « Tes équipes ».',
+      confirm: 'Recommencer',
+    },
+    all: {
+      row: 'Effacer tous les records',
+      note: 'Toutes les équipes, à zéro. Tes réglages restent.',
+      title: 'Effacer tous les records ?',
+      line: 'Toutes les équipes redeviennent « Pas encore joué ». Les paliers repartent du niveau 1.',
+      count: (scores: number, teams: number) =>
+        `${scores} · ${teams} ${teams <= 1 ? 'équipe' : 'équipes'}`,
+      keepsLine: 'Tes équipes étoilées et tous tes réglages.',
+      confirm: (count: number) =>
+        count <= 1 ? `Effacer ${count} record` : `Effacer ${count} records`,
+    },
+    app: {
+      row: `Réinitialiser ${ESCUADRA}`,
+      note: 'Tout revient comme au premier lancement.',
+      title: `Réinitialiser ${ESCUADRA} ?`,
+      line: `Tout ce qu’${ESCUADRA} garde sur ce téléphone revient comme au premier lancement.`,
+      scores: 'Records et « Continuer »',
+      starred: 'Équipes étoilées',
+      preferences: 'Langue, apparence, vibrations, vue Effectif',
+      tips: 'Astuces « Comment jouer », à revoir',
+      photos: 'Photos de joueurs en cache',
+      keepsLine:
+        'Ton choix sur les statistiques d’utilisation. Leur identifiant aléatoire est remplacé par un nouveau.',
+    },
   },
   formats: {
     /** "21 août 2026", and "1er août 2026" on the first of the month. */
@@ -381,6 +421,7 @@ export const fr: Messages = {
       `${title}, record ${correct} sur ${total}, obsolète`,
     squadUpdated: (date: string) =>
       `Effectif mis à jour le ${date}. Les records en gris datent d’avant.`,
+    startOver: (team: string) => `Recommencer : ${team}`,
   },
   picker: {
     // Masculine: the championnats.
@@ -497,7 +538,7 @@ export const fr: Messages = {
           heading: 'Ce qui est enregistré sur ton appareil',
           paragraphs: [
             `${ESCUADRA} enregistre onze éléments en local, sur ton appareil : ton record pour chaque équipe et chaque niveau de difficulté, dont l’application déduit les niveaux que tu as validés ; la dernière équipe et le dernier niveau joués ; les équipes que tu as marquées d’une étoile ; ta préférence de thème, clair ou sombre ; ton choix de langue ; si les vibrations sont activées ; si l’écran Effectif affiche des cartes ou une liste ; quels écrans t’ont déjà montré leurs astuces « Comment jouer », et si tu les as passées ; quelle version de l’application a demandé en dernier à ton téléphone d’afficher une invitation à l’évaluer ; ton choix concernant les statistiques d’utilisation ; et l’identifiant aléatoire qu’utilisent ces statistiques. La vérification des mises à jour de l’application conserve aussi son propre identifiant aléatoire sur ton appareil.`,
-            `Ces données se trouvent dans l’espace de stockage privé propre à l’application. ${ESCUADRA} elle-même n’envoie que deux de ces onze éléments hors de ton appareil, et seulement tant que les statistiques d’utilisation sont activées : l’identifiant, envoyé sous forme hachée avec chaque statistique, et ton choix de langue, inclus dans la statistique envoyée à l’ouverture de l’application. Supprimer l’application efface toutes ces données de ton appareil, ainsi que les éventuelles photos en cache. ${ESCUADRA} n’effectue aucune sauvegarde ni synchronisation de son côté, mais les sauvegardes de ton appareil (sous iOS, dans iCloud ou sur un ordinateur ; sous Android, chez Google) peuvent inclure ces données. Le développeur n’a pas accès à cet espace de stockage.`,
+            `Ces données se trouvent dans l’espace de stockage privé propre à l’application. ${ESCUADRA} elle-même n’envoie que deux de ces onze éléments hors de ton appareil, et seulement tant que les statistiques d’utilisation sont activées : l’identifiant, envoyé sous forme hachée avec chaque statistique, et ton choix de langue, inclus dans la statistique envoyée à l’ouverture de l’application. Supprimer l’application efface toutes ces données de ton appareil, ainsi que les éventuelles photos en cache. Tu peux aussi les effacer : les records d’une équipe depuis l’écran de cette équipe ou, dans « Réglages », sous « Tes données », tous tes records ou, avec « Réinitialiser ${ESCUADRA} », tout ce qui est listé ci-dessus et les éventuelles photos en cache, sauf ton choix concernant les statistiques d’utilisation, la version de l’application qui a demandé en dernier à ton téléphone d’afficher une invitation à l’évaluer et l’identifiant de la vérification des mises à jour de l’application. « Réinitialiser ${ESCUADRA} » donne aux statistiques d’utilisation un nouvel identifiant aléatoire. ${ESCUADRA} n’effectue aucune sauvegarde ni synchronisation de son côté, mais les sauvegardes de ton appareil (sous iOS, dans iCloud ou sur un ordinateur ; sous Android, chez Google) peuvent inclure ces données. Le développeur n’a pas accès à cet espace de stockage.`,
           ],
         },
         {

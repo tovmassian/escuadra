@@ -34,6 +34,11 @@ function clientFor(installId: string): TelemetryDeck {
       } as unknown as Function,
     });
   }
+  // Reset Escuadra (#197) replaces the identifier mid-run. The SDK reads
+  // `clientUser` (and re-hashes it when it changed) each time a signal is built,
+  // so pointing the one client at the current identifier keeps this launch's
+  // session code, which About says is new only when the app starts.
+  client.clientUser = installId;
   return client;
 }
 

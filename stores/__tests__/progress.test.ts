@@ -145,3 +145,103 @@ describe('how to play tips', () => {
     expect(stored.state.tipsSkipped).toBe(true);
   });
 });
+
+describe('resets (#197)', () => {
+  const at = (score: number) => ({ score, squadUpdated: '2026-10-01' });
+
+  it('resetSquad drops one squad and keeps Continue, the star and the tips', () => {
+    useProgress.setState({
+      bestScores: { 'arm:1': at(10), 'arm:2': at(8), 'esp:1': at(7) },
+      lastPlayed: { squadId: 'arm', level: 2 },
+      starredSquads: ['arm'],
+      tipsSeen: ['difficulty'],
+      tipsSkipped: true,
+    });
+    useProgress.getState().resetSquad('arm');
+    const s = useProgress.getState();
+    expect(s.bestScores).toEqual({ 'esp:1': at(7) });
+    expect(s.lastPlayed).toEqual({ squadId: 'arm', level: 2 });
+    expect(s.starredSquads).toEqual(['arm']);
+    expect(s.tipsSeen).toEqual(['difficulty']);
+    expect(s.tipsSkipped).toBe(true);
+  });
+
+  it('reset clears every score and Continue, and keeps the rest', () => {
+    useProgress.setState({
+      bestScores: { 'arm:1': at(10) },
+      lastPlayed: { squadId: 'arm', level: 1 },
+      starredSquads: ['arm'],
+      tipsSkipped: true,
+    });
+    useProgress.getState().reset();
+    const s = useProgress.getState();
+    expect(s.bestScores).toEqual({});
+    expect(s.lastPlayed).toBeNull();
+    expect(s.starredSquads).toEqual(['arm']);
+    expect(s.tipsSkipped).toBe(true);
+  });
+
+  it.each([true, false])(
+    'factoryReset returns everything to first launch but keeps usage statistics %s',
+    (telemetryEnabled) => {
+      useProgress.setState({
+        bestScores: { 'arm:1': at(10) },
+        lastPlayed: { squadId: 'arm', level: 1 },
+        themePreference: 'light',
+        languagePreference: 'fr',
+        installId: 'old-id',
+        telemetryEnabled,
+        haptics: false,
+        studyView: 'list',
+        reviewAskedVersion: '2.0.0',
+        starredSquads: ['arm', 'esp'],
+        tipsSeen: ['picker', 'results'],
+        tipsSkipped: true,
+      });
+      useProgress.getState().factoryReset('new-id');
+      const s = useProgress.getState();
+      const initial = useProgress.getInitialState();
+      expect(s.telemetryEnabled).toBe(telemetryEnabled);
+      expect(s.reviewAskedVersion).toBe('2.0.0');
+      expect(s.installId).toBe('new-id');
+      for (const key of [
+        'bestScores',
+        'lastPlayed',
+        'themePreference',
+        'languagePreference',
+        'haptics',
+        'studyView',
+        'starredSquads',
+        'tipsSeen',
+        'tipsSkipped',
+      ] as const) {
+        expect(s[key], key).toEqual(initial[key]);
+      }
+    },
+  );
+
+  it('factoryReset leaves no data field unhandled', () => {
+    // A field added to the store later must be reset or kept on purpose: this
+    // lists every data field, so a new one fails here until it is placed.
+    const data = Object.entries(useProgress.getInitialState())
+      .filter(([, value]) => typeof value !== 'function')
+      .map(([key]) => key)
+      .sort();
+    expect(data).toEqual(
+      [
+        'bestScores',
+        'haptics',
+        'installId',
+        'languagePreference',
+        'lastPlayed',
+        'reviewAskedVersion',
+        'starredSquads',
+        'studyView',
+        'telemetryEnabled',
+        'themePreference',
+        'tipsSeen',
+        'tipsSkipped',
+      ].sort(),
+    );
+  });
+});

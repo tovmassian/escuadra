@@ -36,6 +36,8 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'settings.vibration',
     // "Software" is the German word too.
     'about.licences.software',
+    // "L1 10": L for Level, as "L2" on a locked rung says; no words.
+    'reset.team.levelScore',
   ],
   fr: [
     // Club is the French word too, and CLUB its chip code.
@@ -93,6 +95,8 @@ const SAME_AS_ENGLISH: Partial<Record<Exclude<Language, 'en'>, readonly string[]
     'about.site.nav.home',
     // "Software" is the word Italian uses.
     'about.licences.software',
+    // "L1 10": L for Livello; no words.
+    'reset.team.levelScore',
   ],
 };
 
@@ -108,7 +112,7 @@ it('pins the English About the translations were made from', () => {
     .filter((leaf) => leaf.path.startsWith('about.'))
     .map((leaf) => `${leaf.path}\t${leaf.text}`)
     .join('\n');
-  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('d012d3a943ce3355');
+  expect(createHash('sha256').update(text).digest('hex').slice(0, 16)).toBe('4713723bedd6dc81');
 });
 
 describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {

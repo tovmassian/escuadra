@@ -1,5 +1,5 @@
 import { StyleSheet, View } from 'react-native';
-import { borderWidths, iconSize } from '@/theme/tokens';
+import { borderWidths, iconSize, radii } from '@/theme/tokens';
 
 // Glyphs for Results' and Study's icon buttons, drawn from Views as SearchField
 // does. No icon library: one font load and one dependency for a handful of
@@ -110,6 +110,58 @@ export function RetryGlyph({ color }: { color: string }) {
     <View style={styles.box}>
       <View style={styles.ring} />
       <View style={styles.head} />
+    </View>
+  );
+}
+
+/** Eraser (#197): Start over and Clear all scores. A block leaning 45°, its
+ *  rubber end filled, on a baseline. Not `RetryGlyph`, which means replay. */
+export function EraserGlyph({ color }: { color: string }) {
+  const s = iconSize.eraserGlyph;
+  const w = borderWidths.thick + borderWidths.hairline / 2;
+  const blockW = s * 0.42;
+  const blockH = s * 0.74;
+  // The turned block reaches this far above and below its centre, which sits so its lowest
+  // corner rests on the baseline's top edge.
+  const reach = ((blockW + blockH) / 2) * Math.SQRT1_2;
+  const styles = StyleSheet.create({
+    box: { width: s, height: s },
+    block: {
+      position: 'absolute',
+      left: (s - blockW) / 2,
+      top: s - w - reach - blockH / 2,
+      width: blockW,
+      height: blockH,
+      borderRadius: radii.xs,
+      borderWidth: w,
+      borderColor: color,
+      overflow: 'hidden',
+      transform: [{ rotate: '45deg' }],
+    },
+    rubber: {
+      position: 'absolute',
+      left: 0,
+      right: 0,
+      bottom: 0,
+      height: blockH * 0.36,
+      backgroundColor: color,
+    },
+    base: {
+      position: 'absolute',
+      left: s * 0.08,
+      right: s * 0.08,
+      bottom: 0,
+      height: w,
+      borderRadius: w / 2,
+      backgroundColor: color,
+    },
+  });
+  return (
+    <View style={styles.box}>
+      <View style={styles.block}>
+        <View style={styles.rubber} />
+      </View>
+      <View style={styles.base} />
     </View>
   );
 }

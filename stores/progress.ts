@@ -4,6 +4,7 @@ import { create } from 'zustand';
 import { createJSONStorage, persist } from 'zustand/middleware';
 import type { LanguagePreference } from '@/i18n/resolveLanguage';
 import { migrateBestScores, nextBest, type BestScore } from '@/lib/bestScore';
+import { withoutSquad } from '@/lib/reset';
 import { scoreKey } from '@/lib/scoring';
 import { listSquads } from '@/lib/squads';
 import { toggleStarred } from '@/lib/starred';
@@ -75,23 +76,42 @@ interface ProgressState {
   markTipsSeen: (screen: TipScreen) => void;
   skipTips: () => void;
   reset: () => void;
+  /** Start one team over (#197): that squad's best scores only. Continue,
+   *  the star and the tips stay, so Home offers the team again at level 1. */
+  resetSquad: (squadId: string) => void;
+  /** Reset Escuadra (#197): every field back to first launch, except the
+   *  usage statistics choice, which a reset never turns back on, and
+   *  `reviewAskedVersion`, so a reset earns no second rating prompt.
+   *  `installId` is replaced by the one given. */
+  factoryReset: (installId: string) => void;
 }
+
+type ProgressData = {
+  [
+    K in keyof ProgressState as ProgressState[K] extends (...args: never[]) => unknown ? never : K
+  ]: ProgressState[K];
+};
+
+/** First launch. `factoryReset` returns to it. */
+const INITIAL: ProgressData = {
+  bestScores: {},
+  lastPlayed: null,
+  themePreference: 'system',
+  languagePreference: 'system',
+  installId: null,
+  telemetryEnabled: true,
+  haptics: true,
+  studyView: 'grid',
+  reviewAskedVersion: null,
+  starredSquads: [],
+  tipsSeen: [],
+  tipsSkipped: false,
+};
 
 export const useProgress = create<ProgressState>()(
   persist(
     (set) => ({
-      bestScores: {},
-      lastPlayed: null,
-      themePreference: 'system',
-      languagePreference: 'system',
-      installId: null,
-      telemetryEnabled: true,
-      haptics: true,
-      studyView: 'grid',
-      reviewAskedVersion: null,
-      starredSquads: [],
-      tipsSeen: [],
-      tipsSkipped: false,
+      ...INITIAL,
       recordScore: (squadId, level, score, squadUpdated) =>
         set((s) => {
           const key = scoreKey(squadId, level);
@@ -115,6 +135,14 @@ export const useProgress = create<ProgressState>()(
         set((s) => (s.tipsSeen.includes(screen) ? s : { tipsSeen: [...s.tipsSeen, screen] })),
       skipTips: () => set({ tipsSkipped: true }),
       reset: () => set({ bestScores: {}, lastPlayed: null }),
+      resetSquad: (squadId) => set((s) => ({ bestScores: withoutSquad(s.bestScores, squadId) })),
+      factoryReset: (installId) =>
+        set((s) => ({
+          ...INITIAL,
+          installId,
+          telemetryEnabled: s.telemetryEnabled,
+          reviewAskedVersion: s.reviewAskedVersion,
+        })),
     }),
     {
       name: 'escuadra-progress',

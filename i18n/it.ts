@@ -152,6 +152,7 @@ export const it: Messages = {
       comingNext: 'In arrivo',
       // "Info", as the About screen's title says.
       about: 'Info',
+      yourData: 'I tuoi dati',
     },
     language: 'Lingua',
     languageSpoken: (name: string) => `Lingua: ${name}`,
@@ -182,6 +183,44 @@ export const it: Messages = {
     title: 'Modalità esame',
     line: 'Tutta la rosa, solo con i numeri di maglia.',
     soon: 'A breve',
+  },
+  reset: {
+    clears: 'Cancella',
+    keeps: 'Conserva',
+    team: {
+      title: (team: string) => `${team}: ricominciare da zero?`,
+      line: (team: string) =>
+        `${team} torna a “Non ancora giocato”, come se non ci avessi mai giocato.`,
+      bestScores: 'Record',
+      // L for Livello.
+      levelScore: (level: number, score: number) => `L${level} ${score}`,
+      keepsStar: 'La tua stella: la squadra resta in “Le tue squadre”.',
+      confirm: 'Ricomincia da zero',
+    },
+    all: {
+      row: 'Cancella tutti i record',
+      note: 'Ogni squadra torna a zero. Le impostazioni restano.',
+      title: 'Cancella tutti i record?',
+      line: 'Ogni squadra torna a “Non ancora giocato”. Si riparte dal livello 1.',
+      count: (scores: number, teams: number) =>
+        `${scores} · ${teams} ${teams === 1 ? 'squadra' : 'squadre'}`,
+      keepsLine: 'Le tue squadre con la stella e tutte le impostazioni.',
+      // "Record" takes no plural.
+      confirm: (count: number) => (count === 1 ? 'Cancella 1 record' : `Cancella ${count} record`),
+    },
+    app: {
+      row: `Ripristina ${ESCUADRA}`,
+      note: 'Tutto torna com’era al primo avvio.',
+      title: `Ripristina ${ESCUADRA}?`,
+      line: `Tutto ciò che ${ESCUADRA} conserva su questo telefono torna com’era al primo avvio.`,
+      scores: 'Record e “Continua”',
+      starred: 'Squadre con la stella',
+      preferences: 'Lingua, aspetto, vibrazione, vista della rosa',
+      tips: 'Consigli “Come si gioca”, da rivedere',
+      photos: 'Foto dei giocatori in cache',
+      keepsLine:
+        'La tua scelta sulle statistiche d’uso. L’identificativo casuale delle statistiche viene sostituito con uno nuovo.',
+    },
   },
   formats: {
     /** "21 ago 2026". */
@@ -371,6 +410,7 @@ export const it: Messages = {
     rungOutdated: (title: string, correct: number, total: number) =>
       `${title}, record ${correct} su ${total}, obsoleto`,
     squadUpdated: (date: string) => `Rosa aggiornata: ${date}. I record in grigio sono di prima.`,
+    startOver: (team: string) => `${team}: ricomincia da zero`,
   },
   picker: {
     // Masculine: the campionati.
@@ -491,7 +531,7 @@ export const it: Messages = {
           heading: 'Cosa viene salvato sul tuo dispositivo',
           paragraphs: [
             `${ESCUADRA} salva undici informazioni in locale, sul tuo dispositivo: il tuo record per ogni squadra e livello di difficoltà, da cui l’app ricava quali livelli hai superato; la squadra e il livello della tua ultima partita; le squadre che hai contrassegnato con una stella; la tua preferenza per il tema chiaro o scuro; la tua scelta della lingua; se la vibrazione è attiva; se la schermata “Rosa” mostra schede o un elenco; quali schermate ti hanno già mostrato i loro consigli di “Come si gioca” e se li hai saltati; quale versione dell’app ha chiesto per ultima al tuo telefono di mostrare un invito a valutarla; la tua scelta sulle statistiche d’uso; e l’identificativo casuale usato da queste statistiche. Anche il controllo degli aggiornamenti dell’app conserva un proprio identificativo casuale sul tuo dispositivo.`,
-            `Questi dati si trovano nello spazio di archiviazione privato dell’app. ${ESCUADRA} di per sé invia fuori dal tuo dispositivo solo due di queste undici informazioni, e solo mentre le statistiche d’uso sono attive: l’identificativo, che viene inviato sotto forma di hash con ogni statistica, e la tua scelta della lingua, che è inclusa nella statistica inviata all’apertura dell’app. Se elimini l’app, tutti questi dati vengono cancellati dal tuo dispositivo, insieme alle eventuali foto nella cache. ${ESCUADRA} non crea backup propri e non sincronizza i dati, ma i backup del tuo dispositivo (su iOS, su iCloud o su un computer; su Android, su Google) possono includere questi dati. Lo sviluppatore non ha accesso a questo spazio di archiviazione.`,
+            `Questi dati si trovano nello spazio di archiviazione privato dell’app. ${ESCUADRA} di per sé invia fuori dal tuo dispositivo solo due di queste undici informazioni, e solo mentre le statistiche d’uso sono attive: l’identificativo, che viene inviato sotto forma di hash con ogni statistica, e la tua scelta della lingua, che è inclusa nella statistica inviata all’apertura dell’app. Se elimini l’app, tutti questi dati vengono cancellati dal tuo dispositivo, insieme alle eventuali foto nella cache. Puoi anche cancellarli: i record di una squadra dalla schermata di quella squadra o, da “Impostazioni”, in “I tuoi dati”, tutti i tuoi record o, con “Ripristina ${ESCUADRA}”, tutto ciò che è elencato sopra e le eventuali foto nella cache, tranne la tua scelta sulle statistiche d’uso, la versione dell’app che ha chiesto per ultima al tuo telefono di mostrare un invito a valutarla e l’identificativo del controllo degli aggiornamenti dell’app. “Ripristina ${ESCUADRA}” assegna alle statistiche d’uso un nuovo identificativo casuale. ${ESCUADRA} non crea backup propri e non sincronizza i dati, ma i backup del tuo dispositivo (su iOS, su iCloud o su un computer; su Android, su Google) possono includere questi dati. Lo sviluppatore non ha accesso a questo spazio di archiviazione.`,
           ],
         },
         {

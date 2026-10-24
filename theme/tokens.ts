@@ -148,6 +148,9 @@ export interface Palette {
   /** The ring round a flag or marker on `ctaBg` (Home's Continue), so a
    *  white flag or club colour doesn't bleed into the button. */
   ctaLine: string;
+  // ---- Reset progress (#197) ----
+  /** Text on an `error` fill: a reset sheet's confirm button. */
+  dangerOn: string;
   // ---- 2.0 How to play (#183) ----
   /** The scrim around a tip's target: the ground's own ink. Translucent; a
    *  composite test holds the tip's text over it. */
@@ -248,6 +251,7 @@ const darkRoles = {
   wallLine: '#33353a',
   backgroundClear: 'rgba(18,20,26,0)',
   ctaLine: 'rgba(20,22,26,0.14)',
+  dangerOn: '#12141a',
   tipScrim: 'rgba(8,9,12,0.82)',
   tipBacking: 'rgba(8,9,12,0.94)',
   tipBody: '#dfe1e6',
@@ -303,6 +307,7 @@ const lightRoles = {
   wallLine: '#d7d8da',
   backgroundClear: 'rgba(247,247,249,0)',
   ctaLine: 'rgba(255,255,255,0.16)',
+  dangerOn: '#ffffff',
   tipScrim: 'rgba(247,247,249,0.9)',
   tipBacking: 'rgba(247,247,249,0.95)',
   tipBody: '#4b4f56',
@@ -1280,6 +1285,9 @@ export const sizes = {
   rail: { width: 44, letter: 14 },
   // Difficulty's Play and Study pills (#178).
   ladderPill: 56,
+  // The fade over Difficulty's pinned footer (#197): `spacing.xl`, which is
+  // declared below this object and so cannot be read here.
+  ladderFooterFade: 24,
   // A compact rung's level-number column, so every title starts on one line.
   rungNumberColumn: 34,
   // Home (#181): Continue's least height, its flag or marker and its play
@@ -1339,6 +1347,7 @@ export const iconSize = {
   flameGlyph: 12, // the streak chip's flame
   shareGlyph: 18, // the Results screen's share button
   retryGlyph: 18, // the Results screen's retry icon beside Study
+  eraserGlyph: 18, // Difficulty's Start over and Settings' Clear all scores (#197)
   back: 22, // Study's back chevron
   viewToggle: 17, // Study's list/grid toggle
   play: 14, // the triangle on Difficulty's Play pill

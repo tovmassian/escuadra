@@ -125,6 +125,18 @@ describe('text contrast', () => {
     });
   });
 
+  it('dangerOn reaches 4.5:1 on an error fill, in both themes (#197)', () => {
+    for (const [name, p] of Object.entries(palettes)) {
+      expect(contrastRatio(p.dangerOn, p.error), `${name}.dangerOn`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
+  it('error, as a row label, reaches 4.5:1 on surface, in both themes (#197)', () => {
+    for (const [name, p] of Object.entries(palettes)) {
+      expect(contrastRatio(p.error, p.surface), `${name}.error`).toBeGreaterThanOrEqual(4.5);
+    }
+  });
+
   // The share text's URL, drawn in `link` inside the preview's bubble, which
   // sits on `surfaceRaised`.
   it('link reaches 4.5:1 on surfaceRaised, in both themes', () => {

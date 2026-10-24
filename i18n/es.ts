@@ -154,6 +154,7 @@ export const es: Messages = {
       comingNext: 'Próximamente',
       // "Info", as the About screen's title says.
       about: 'Info',
+      yourData: 'Tus datos',
     },
     language: 'Idioma',
     languageSpoken: (name: string) => `Idioma: ${name}`,
@@ -184,6 +185,43 @@ export const es: Messages = {
     title: 'Modo examen',
     line: 'Toda la plantilla, solo con los dorsales.',
     soon: 'Pronto',
+  },
+  reset: {
+    clears: 'Se borra',
+    keeps: 'Se conserva',
+    team: {
+      title: (team: string) => `¿Empezar ${team} de cero?`,
+      line: (team: string) =>
+        `${team} vuelve a estar sin jugar, como si nunca hubieras abierto el equipo.`,
+      bestScores: 'Récords',
+      // N for Nivel.
+      levelScore: (level: number, score: number) => `N${level} ${score}`,
+      keepsStar: 'Tu estrella, para que siga en “Tus equipos”.',
+      confirm: 'Empezar de cero',
+    },
+    all: {
+      row: 'Borrar todos los récords',
+      note: 'Todos los equipos, sin jugar. Los ajustes se mantienen.',
+      title: '¿Borrar todos los récords?',
+      line: 'Todos los equipos vuelven a estar sin jugar. Las escaleras vuelven a empezar desde el nivel 1.',
+      count: (scores: number, teams: number) =>
+        `${scores} · ${teams} ${teams === 1 ? 'equipo' : 'equipos'}`,
+      keepsLine: 'Tus equipos con estrella y todos los ajustes.',
+      confirm: (count: number) => (count === 1 ? 'Borrar 1 récord' : `Borrar ${count} récords`),
+    },
+    app: {
+      row: `Restablecer ${ESCUADRA}`,
+      note: 'Todo como al abrir la app por primera vez.',
+      title: `¿Restablecer ${ESCUADRA}?`,
+      line: `Todo lo que ${ESCUADRA} guarda en este teléfono vuelve a estar como la primera vez que la abriste.`,
+      scores: 'Récords y “Seguir con”',
+      starred: 'Equipos con estrella',
+      preferences: 'Idioma, aspecto, vibración, vista de plantilla',
+      tips: 'Consejos de “Cómo jugar”, otra vez',
+      photos: 'Fotos de jugadores en caché',
+      keepsLine:
+        'Tu elección sobre las estadísticas de uso. El identificador aleatorio que usan las estadísticas se sustituye por uno nuevo.',
+    },
   },
   formats: {
     /** "21 ago 2026". */
@@ -379,6 +417,7 @@ export const es: Messages = {
       `${title}, récord ${correct} de ${total}, desfasado`,
     squadUpdated: (date: string) =>
       `Plantilla actualizada el ${date}. Los récords en gris son anteriores.`,
+    startOver: (team: string) => `Empezar ${team} de cero`,
   },
   picker: {
     // Feminine: the leagues.
@@ -498,7 +537,7 @@ export const es: Messages = {
           heading: 'Qué se guarda en tu dispositivo',
           paragraphs: [
             `${ESCUADRA} guarda once datos localmente, en tu dispositivo: tu récord en cada equipo y nivel de dificultad, a partir del cual la aplicación deduce qué niveles has superado; el último equipo y nivel que has jugado; los equipos que has marcado con una estrella; tu preferencia de tema claro u oscuro; tu elección de idioma; si la vibración está activada; si la pantalla “Plantilla” muestra tarjetas o una lista; qué pantallas te han mostrado ya sus consejos de “Cómo jugar” y si los has omitido; qué versión de la aplicación ha pedido por última vez a tu teléfono que muestre una invitación a valorarla; tu elección sobre las estadísticas de uso; y el identificador aleatorio que usan esas estadísticas. La comprobación de actualizaciones de la aplicación también guarda su propio identificador aleatorio en tu dispositivo.`,
-            `Estos datos se guardan en el almacenamiento privado de la propia aplicación. ${ESCUADRA}, por sí misma, solo envía dos de esos once datos fuera de tu dispositivo, y solo mientras las estadísticas de uso están activadas: el identificador, que se envía en forma de hash con cada estadística, y tu elección de idioma, que se incluye en la estadística que se envía al abrir la aplicación. Al eliminar la aplicación, se borran todos ellos de tu dispositivo, junto con las fotos que haya en caché. ${ESCUADRA} no tiene copia de seguridad ni sincronización propias, pero las copias de seguridad de tu dispositivo (en iOS, en iCloud o en un ordenador; en Android, en Google) pueden incluir estos datos. El desarrollador no tiene acceso a este almacenamiento.`,
+            `Estos datos se guardan en el almacenamiento privado de la propia aplicación. ${ESCUADRA}, por sí misma, solo envía dos de esos once datos fuera de tu dispositivo, y solo mientras las estadísticas de uso están activadas: el identificador, que se envía en forma de hash con cada estadística, y tu elección de idioma, que se incluye en la estadística que se envía al abrir la aplicación. Al eliminar la aplicación, se borran todos ellos de tu dispositivo, junto con las fotos que haya en caché. También puedes borrarlos: los récords de un equipo desde la pantalla de ese equipo o, en “Ajustes”, en la sección “Tus datos”, todos tus récords o, con “Restablecer ${ESCUADRA}”, todo lo indicado arriba y las fotos que haya en caché, salvo tu elección sobre las estadísticas de uso, la versión de la aplicación que ha pedido por última vez a tu teléfono que muestre una invitación a valorarla y el identificador de la comprobación de actualizaciones de la aplicación. “Restablecer ${ESCUADRA}” da a las estadísticas de uso un identificador aleatorio nuevo. ${ESCUADRA} no tiene copia de seguridad ni sincronización propias, pero las copias de seguridad de tu dispositivo (en iOS, en iCloud o en un ordenador; en Android, en Google) pueden incluir estos datos. El desarrollador no tiene acceso a este almacenamiento.`,
           ],
         },
         {

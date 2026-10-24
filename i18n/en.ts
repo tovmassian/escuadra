@@ -170,6 +170,7 @@ export const en = {
       support: 'Support',
       comingNext: 'Coming next',
       about: 'About',
+      yourData: 'Your data',
     },
     /** ≤ 20 chars: the Language row. */
     language: 'Language',
@@ -208,6 +209,63 @@ export const en = {
     line: 'The whole squad, on shirt numbers alone.',
     /** ≤ 8 chars: the chip, in IBM Plex Mono capitals. */
     soon: 'Soon',
+  },
+  reset: {
+    /** ≤ 16 chars: a sheet's list heading, in IBM Plex Mono capitals. */
+    clears: 'Clears',
+    /** ≤ 16 chars: a sheet's list heading, in IBM Plex Mono capitals. */
+    keeps: 'Keeps',
+    team: {
+      /** ≤ 32 chars with "Spain": the sheet's title. */
+      title: (team: string) => `Start ${team} over?`,
+      /** The line under it; wraps. */
+      line: (team: string) => `${team} goes back to unplayed, as if you had never opened it.`,
+      /** ≤ 20 chars: the Clears row's label. */
+      bestScores: 'Best scores',
+      /** ≤ 8 chars: one level's best in that row, in mono: "L1 10". */
+      levelScore: (level: number, score: number) => `L${level} ${score}`,
+      /** ≤ 56 chars: the Keeps line, when the team is starred. */
+      keepsStar: 'Your star, so the team stays in Your squads.',
+      /** ≤ 20 chars: the confirm button, in Archivo capitals. */
+      confirm: 'Start over',
+    },
+    all: {
+      /** ≤ 24 chars: the Settings row, and the sheet's title without "?". */
+      row: 'Clear all scores',
+      /** ≤ 56 chars: the line under the row. */
+      note: 'Every team back to unplayed. Settings stay.',
+      /** ≤ 28 chars: the sheet's title. */
+      title: 'Clear all scores?',
+      /** The line under it; wraps. */
+      line: 'Every team goes back to unplayed. You start the ladders again from level 1.',
+      /** ≤ 20 chars: the Clears row's count, in mono: "14 · 5 teams". */
+      count: (scores: number, teams: number) =>
+        `${scores} · ${teams} ${teams === 1 ? 'team' : 'teams'}`,
+      /** ≤ 56 chars: the Keeps line. */
+      keepsLine: 'Your starred teams and every setting.',
+      /** ≤ 22 chars with 99: the confirm button, in Archivo capitals. */
+      confirm: (count: number) => (count === 1 ? 'Clear 1 score' : `Clear ${count} scores`),
+    },
+    app: {
+      /** ≤ 24 chars: the Settings row, and the confirm button. */
+      row: `Reset ${ESCUADRA}`,
+      /** ≤ 56 chars: the line under the row. */
+      note: 'Everything back to how it was on first launch.',
+      /** ≤ 24 chars: the sheet's title. */
+      title: `Reset ${ESCUADRA}?`,
+      /** The line under it; wraps. */
+      line: `Everything ${ESCUADRA} keeps on this phone goes back to how it was on first launch.`,
+      /** ≤ 40 chars each: the Clears list, except preferences. */
+      scores: 'Scores and Continue',
+      starred: 'Starred teams',
+      /** ≤ 48 chars: the Clears list's longest row. */
+      preferences: 'Language, appearance, vibration, Study view',
+      tips: 'How to play tips, shown again',
+      photos: 'Cached player photos',
+      /** The Keeps line; wraps. */
+      keepsLine:
+        'Your usage statistics choice. The random identifier the statistics use is replaced with a new one.',
+    },
   },
   formats: {
     /** "21 Aug 2026". */
@@ -434,6 +492,8 @@ export const en = {
     /** ≤ 80 chars: under "The ladder" when a score is outdated; `date` from
      *  `formatLastUpdated`. It may wrap to two lines. */
     squadUpdated: (date: string) => `Squad updated ${date}. Grey scores are from before.`,
+    /** The eraser's spoken name, beside Study on a team's Difficulty screen (#197). */
+    startOver: (team: string) => `Start ${team} over`,
   },
   picker: {
     /** ≤ 6 chars: the league pill that clears the filter. */
@@ -569,7 +629,7 @@ export const en = {
           heading: 'What is stored on your device',
           paragraphs: [
             `${ESCUADRA} saves eleven things locally, on your device: your best score for each team and difficulty level, from which it works out which levels you have completed; the last team and level you played; the teams you have starred; your light or dark appearance preference; your language choice; whether vibration is on; whether the Study screen shows cards or a list; which screens have shown you their How to play tips, and whether you skipped them; which app version last asked your phone to show a rating prompt; your choice about usage statistics; and the random identifier those statistics use. The app-update check also keeps its own random identifier on your device.`,
-            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of those eleven things off your device, and only while usage statistics are on: the identifier, which is sent in hashed form with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
+            `This data lives in the app's own private storage. ${ESCUADRA} itself sends only two of those eleven things off your device, and only while usage statistics are on: the identifier, which is sent in hashed form with each statistic, and your language choice, which is included in the statistic sent when the app is opened. Deleting the app deletes all of it from your device, along with any cached photos. You can also erase it: one team's scores from that team's screen, or, in Settings under Your data, all your scores or, with Reset ${ESCUADRA}, everything listed above and any cached photos, except your choice about usage statistics, the app version that last asked your phone to show a rating prompt, and the app-update check's identifier. Reset ${ESCUADRA} gives usage statistics a new random identifier. ${ESCUADRA} keeps no backup or sync of its own, but your device's backups (on iOS, to iCloud or a computer; on Android, to Google) may include this data. The developer has no access to this storage.`,
           ],
         },
         {

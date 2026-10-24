@@ -54,6 +54,7 @@ export function SettingsRow({
   last = false,
   minHeight = sizes.settings.row,
   muted = false,
+  danger = false,
   textHidden = false,
 }: {
   icon: ReactNode;
@@ -67,6 +68,8 @@ export function SettingsRow({
   minHeight?: number;
   /** Coming next's quieter text. */
   muted?: boolean;
+  /** A destructive row (#197): its label is in the error colour, unless `muted`. */
+  danger?: boolean;
   /** A switch row is one screen-reader stop, the Switch, which carries the label and
    * the note itself: the row's own text is hidden from it. */
   textHidden?: boolean;
@@ -86,7 +89,7 @@ export function SettingsRow({
     text: { flex: 1, minWidth: 0, gap: spacing.xxs - 1 },
     label: {
       ...typography.settingsLabel,
-      color: muted ? colors.textSecondary : colors.textPrimary,
+      color: muted ? colors.textSecondary : danger ? colors.error : colors.textPrimary,
     },
     note: { ...typography.secondarySmall, color: colors.textMuted },
   });

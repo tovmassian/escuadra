@@ -155,6 +155,7 @@ export const de: Messages = {
       comingNext: 'Demnächst',
       // "Info", as the About screen's title says.
       about: 'Info',
+      yourData: 'Deine Daten',
     },
     language: 'Sprache',
     languageSpoken: (name: string) => `Sprache: ${name}`,
@@ -181,6 +182,45 @@ export const de: Messages = {
     title: 'Prüfungsmodus',
     line: 'Der ganze Kader, nur anhand der Rückennummern.',
     soon: 'Bald',
+  },
+  reset: {
+    // Verbs, as the headings of the two lists: what the action does.
+    clears: 'Löscht',
+    keeps: 'Behält',
+    team: {
+      title: (team: string) => `${team} von vorn beginnen?`,
+      line: (team: string) =>
+        `${team} ist wieder ungespielt, als hättest du das Team nie geöffnet.`,
+      bestScores: 'Rekorde',
+      // L for Level, as "L2" on a locked rung says.
+      levelScore: (level: number, score: number) => `L${level} ${score}`,
+      keepsStar: 'Dein Stern, damit das Team in „Deine Teams“ bleibt.',
+      confirm: 'Von vorn beginnen',
+    },
+    all: {
+      row: 'Alle Rekorde löschen',
+      note: 'Jedes Team wieder ungespielt. Einstellungen bleiben.',
+      title: 'Alle Rekorde löschen?',
+      line: 'Jedes Team ist wieder ungespielt. Die Leitern beginnen wieder bei Level 1.',
+      count: (scores: number, teams: number) =>
+        `${scores} · ${teams} ${teams === 1 ? 'Team' : 'Teams'}`,
+      keepsLine: 'Deine markierten Teams und alle Einstellungen.',
+      confirm: (count: number) => (count === 1 ? '1 Rekord löschen' : `${count} Rekorde löschen`),
+    },
+    app: {
+      row: `${ESCUADRA} zurücksetzen`,
+      note: 'Alles wieder wie beim ersten Start.',
+      title: `${ESCUADRA} zurücksetzen?`,
+      line: `Alles, was ${ESCUADRA} auf diesem Gerät speichert, ist danach wieder wie beim ersten Start.`,
+      // "Weiter", the Continue button's word on Home.
+      scores: 'Rekorde und „Weiter“',
+      starred: 'Markierte Teams',
+      preferences: 'Sprache, Darstellung, Vibration, Kaderansicht',
+      tips: 'Spielanleitungs-Tipps, wieder sichtbar',
+      photos: 'Zwischengespeicherte Spielerfotos',
+      keepsLine:
+        'Deine Wahl bei den Nutzungsstatistiken. Die zufällige Kennung dafür wird durch eine neue ersetzt.',
+    },
   },
   formats: {
     /** "21. Aug. 2026". */
@@ -345,6 +385,7 @@ export const de: Messages = {
       `${title}, Rekord ${correct} von ${total}, veraltet`,
     squadUpdated: (date: string) =>
       `Kader aktualisiert am ${date}. Graue Rekorde stammen aus der Zeit davor.`,
+    startOver: (team: string) => `${team} von vorn beginnen`,
   },
   picker: {
     allLeagues: 'Alle',
@@ -460,7 +501,7 @@ export const de: Messages = {
           heading: 'Was auf deinem Gerät gespeichert wird',
           paragraphs: [
             `${ESCUADRA} speichert elf Dinge lokal auf deinem Gerät: deinen Rekord für jedes Team und jedes Level, anhand dessen die App ermittelt, welche Level du abgeschlossen hast; das letzte Team und Level, das du gespielt hast; die Teams, die du mit einem Stern markiert hast; deine Einstellung für helles oder dunkles Design; deine Sprachwahl; ob die Vibration eingeschaltet ist; ob die Kaderansicht Karten oder eine Liste zeigt; welche Bildschirme dir ihre Tipps der Spielanleitung schon gezeigt haben und ob du sie übersprungen hast; welche Version der App zuletzt dein Smartphone gebeten hat, eine Bewertungsanfrage anzuzeigen; deine Entscheidung zu den Nutzungsstatistiken; und die zufällige Kennung, die diese Statistiken verwenden. Die Update-Prüfung der App speichert außerdem eine eigene zufällige Kennung auf deinem Gerät.`,
-            `Diese Daten liegen im eigenen, privaten Speicher der App. ${ESCUADRA} selbst sendet nur zwei dieser elf Dinge von deinem Gerät aus, und nur, solange die Nutzungsstatistiken eingeschaltet sind: die Kennung, die in gehashter Form mit jeder Statistik gesendet wird, und deine Sprachwahl, die in der Statistik enthalten ist, die beim Öffnen der App gesendet wird. Wenn du die App löschst, werden all diese Daten von deinem Gerät gelöscht, ebenso alle zwischengespeicherten Fotos. ${ESCUADRA} hat kein eigenes Backup und keine eigene Synchronisierung, aber die Backups deines Geräts (unter iOS in iCloud oder auf einem Computer; unter Android bei Google) können diese Daten enthalten. Der Entwickler hat keinen Zugriff auf diesen Speicher.`,
+            `Diese Daten liegen im eigenen, privaten Speicher der App. ${ESCUADRA} selbst sendet nur zwei dieser elf Dinge von deinem Gerät aus, und nur, solange die Nutzungsstatistiken eingeschaltet sind: die Kennung, die in gehashter Form mit jeder Statistik gesendet wird, und deine Sprachwahl, die in der Statistik enthalten ist, die beim Öffnen der App gesendet wird. Wenn du die App löschst, werden all diese Daten von deinem Gerät gelöscht, ebenso alle zwischengespeicherten Fotos. Du kannst diese Daten auch selbst löschen: die Rekorde eines Teams auf dem Bildschirm dieses Teams oder, in den Einstellungen unter „Deine Daten“, alle deine Rekorde oder, mit „${ESCUADRA} zurücksetzen“, alles oben Aufgeführte und alle zwischengespeicherten Fotos, außer deiner Entscheidung zu den Nutzungsstatistiken, der App-Version, die zuletzt dein Smartphone gebeten hat, eine Bewertungsanfrage anzuzeigen, und der Kennung der Update-Prüfung der App. „${ESCUADRA} zurücksetzen“ gibt den Nutzungsstatistiken eine neue zufällige Kennung. ${ESCUADRA} hat kein eigenes Backup und keine eigene Synchronisierung, aber die Backups deines Geräts (unter iOS in iCloud oder auf einem Computer; unter Android bei Google) können diese Daten enthalten. Der Entwickler hat keinen Zugriff auf diesen Speicher.`,
           ],
         },
         {
