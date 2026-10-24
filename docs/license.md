@@ -73,19 +73,19 @@ you changed the work.
 
 ## What Escuadra ships
 
-| asset                           | licence                                                                   | source of truth                                                                              |
-| ------------------------------- | ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
-| Squad data                      | Wikipedia CC BY-SA; Wikidata CC0                                          | `data/squads/`, `tools/squadctl/`                                                            |
-| Player photos                   | per photo — see the next section                                          | `player.photo` in `data/players.json`                                                        |
-| National flags                  | public domain (flagpedia.net)                                             | `assets/flags/README.md`                                                                     |
-| Country names (es, fr, it, de)  | Unicode License v3 (Unicode CLDR) for most; the rest written for Escuadra | `i18n/countries.ts`, `scripts/seed-country-names.ts`; the notice: `i18n/UNICODE-LICENSE.txt` |
-| Inter, IBM Plex Mono            | SIL Open Font License 1.1                                                 | `@expo-google-fonts/*` in `package.json`                                                     |
-| Archivo (three static cuts)     | SIL Open Font License 1.1                                                 | `assets/fonts/archivo/README.md`                                                             |
-| Material Symbols (Android only) | Apache License 2.0                                                        | `@expo-google-fonts/material-symbols`, through `expo-router` → `expo-symbols`                |
-| Bundled JavaScript packages     | each package's own: MIT, ISC, MIT AND OFL-1.1, MIT AND Apache-2.0         | `lib/licences.generated.ts`, `scripts/gen-licences.ts`                                       |
-| Native libraries                | not yet listed (#160)                                                     | podspecs and `build.gradle` files in `node_modules`                                          |
-| App Store / Google Play badges  | Apple's and Google's artwork, under their rules                           | `CLAUDE.md`, guardrail 2                                                                     |
-| Club crests, badges, logos      | **never** — trademarks, whatever their licence                            | `CLAUDE.md`, guardrail 2                                                                     |
+| asset                           | licence                                                                                                                  | source of truth                                                                              |
+| ------------------------------- | ------------------------------------------------------------------------------------------------------------------------ | -------------------------------------------------------------------------------------------- |
+| Squad data                      | Wikipedia CC BY-SA; Wikidata CC0                                                                                         | `data/squads/`, `tools/squadctl/`                                                            |
+| Player photos                   | per photo — see the next section                                                                                         | `player.photo` in `data/players.json`                                                        |
+| National flags                  | public domain (flagpedia.net)                                                                                            | `assets/flags/README.md`                                                                     |
+| Country names (es, fr, it, de)  | Unicode License v3 (Unicode CLDR) for most; the rest written for Escuadra                                                | `i18n/countries.ts`, `scripts/seed-country-names.ts`; the notice: `i18n/UNICODE-LICENSE.txt` |
+| Inter, IBM Plex Mono            | SIL Open Font License 1.1                                                                                                | `@expo-google-fonts/*` in `package.json`                                                     |
+| Archivo (three static cuts)     | SIL Open Font License 1.1                                                                                                | `assets/fonts/archivo/README.md`                                                             |
+| Material Symbols (Android only) | Apache License 2.0                                                                                                       | `@expo-google-fonts/material-symbols`, through `expo-router` → `expo-symbols`                |
+| Bundled and autolinked packages | each package's own: MIT, ISC, MIT AND OFL-1.1, MIT AND Apache-2.0                                                        | `lib/licences.generated.ts`, `scripts/gen-licences.ts`                                       |
+| Native libraries                | each library's own, under the native allowlist (`NATIVE_ALLOWED_LICENCES`); Google's Play libraries under Google's terms | `scripts/native-licences.json`, checked by `scripts/gen-licences.ts`                         |
+| App Store / Google Play badges  | Apple's and Google's artwork, under their rules                                                                          | `CLAUDE.md`, guardrail 2                                                                     |
+| Club crests, badges, logos      | **never** — trademarks, whatever their licence                                                                           | `CLAUDE.md`, guardrail 2                                                                     |
 
 The Unicode License asks that its copyright and permission notice appear with
 all copies of the data, or in the documentation that comes with it. In the
@@ -146,8 +146,45 @@ the check fails:
 - **A sources entry is dead** (its package left the bundle or now ships its own licence
   file): remove it.
 
-Native libraries that the iOS and Android builds link (SDWebImage, Folly, Glide and
-others) are not in the JavaScript bundle and are not listed yet: #160.
+The list also holds every package Expo autolinks, read with `npx expo-modules-autolinking`
+the way `expo prebuild` reads them: some ship native code and no JavaScript, so the source
+maps never name them.
+
+Native libraries that the builds link (pods, Maven artifacts, React Native's C++
+dependencies, code vendored in a package's native folders) have no `node_modules` licence,
+so they are curated in `scripts/native-licences.json`. Each entry names one upstream
+project, its licence, copyright and the npm package that pulls it in, with its licence and
+NOTICE copied verbatim into `scripts/licence-texts/native/` from the URL it records. Two
+conventions: a work that states no copyright holder anywhere gets `No copyright notice`,
+and a notice that lives only in a source file's header is extracted verbatim, with a
+line-range URL. The allowlist is `NATIVE_ALLOWED_LICENCES` (`scripts/native-licences.ts`),
+owner-approved on 2026-10-24 like the JavaScript one; MPL-2.0 is accepted only for the
+Public Suffix List. Google's Play libraries (In-App Review, Play services) are
+proprietary: the sheet names them with their terms and shows no text. Native rows show no
+version, since pods float within their podspec ranges.
+
+`gen:licences` scans the podspecs and `build.gradle` files of the autolinked packages, and
+React Native's version catalog, and fails on:
+
+- **a native dependency the list does not match:** curate it, from its repository, as
+  above. A licence off the allowlist goes to the owner.
+- **a `scan` entry nothing matches** (a dependency was dropped): remove it, or make it
+  `inventory` if it still ships indirectly.
+- **a licence file in a package's native folder that no entry claims:** read it and add it
+  to the right entry's `vendored`.
+
+An entry's `found` says how it is kept honest: `scan` (the scan sees it), `inventory`
+(below) or `vendored` (its licence file sits in a package's native folder).
+
+The scan sees direct dependencies only. Indirect ones (`found: "inventory"`) come from a
+local inventory, refreshed on every Expo SDK bump: in a scratch copy of the repo,
+`npx expo prebuild --no-install`, then `./gradlew :app:dependencies --configuration
+releaseRuntimeClasspath` in `android/`, and `pod install` in `ios/` (or, without CocoaPods,
+the podspecs' dependencies resolved on the CocoaPods trunk). Every library in that output
+must match an entry. The report cannot show code embedded inside an AAR or pod (libjpeg-turbo
+and giflib in Fresco, Hermes's bundled LLVM support, dtoa and zip code, cpufeatures, the
+Public Suffix List in OkHttp), so the refresh also means reading the native build files of
+the big AARs (Hermes, Fresco, libavif) for embedded third-party code.
 
 ## Player photos: the licences we accept
 

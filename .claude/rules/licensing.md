@@ -18,8 +18,11 @@ change either list: `docs/license.md`.
 
 - A new kind of asset names its licence and source where it lives, as
   `assets/flags/README.md` does, and joins `docs/license.md`'s table.
-- **Licence notices are generated.** `lib/licences.generated.ts` (About → Licences) is
-  written by `npm run gen:licences` from the bundle's own source maps, and `npm run check`
-  fails when it is stale. Its rules, and why widening the licence allowlist is the owner's
-  call: `docs/license.md`.
+- **Licence notices are generated and curated.** `lib/licences.generated.ts` (About →
+  Licences) is written by `npm run gen:licences`. Bundled and autolinked packages come from
+  the bundle's own source maps and Expo's autolinking (generated); native libraries are
+  curated in `scripts/native-licences.json` and drift-checked. `npm run check` fails when
+  either is stale. Their rules, and why widening a licence allowlist is the owner's call:
+  `docs/license.md`.
 - Widening `ALLOWED_LICENCES` (`scripts/licences.ts`) is the owner's decision, never a way to make the check pass.
+- Widening `NATIVE_ALLOWED_LICENCES` (`scripts/native-licences.ts`) is the owner's decision too.
