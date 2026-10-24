@@ -19,7 +19,7 @@
 - Tests live in a `__tests__/` folder beside the code they cover, run in Vitest's node environment, and touch no network.
 - Docs stay short and single-sourced: extend `docs/release.md`, add no parallel doc. A rule is at most 100 lines with a `paths:`-only frontmatter of double-quoted globs; `CLAUDE.md` stays within 200 lines (`scripts/claude/__tests__/repo.test.ts`).
 - Open project files with Read, not `cat`, so their rules load.
-- Commits are conventional, end with `(#N)` where N is the tooling issue from Task 0, and carry `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
+- Commits are conventional, end with `(#208)`, the tooling issue, and carry `Co-Authored-By: Claude Opus 5.5 <noreply@anthropic.com>`.
 - Before reporting a task done, run what its last step names; before the PR, `npm run check`, reporting its actual output.
 
 ---
@@ -162,9 +162,9 @@ gh issue edit 116 --body-file "$TMPDIR/116.md"
 The spec and this plan are already committed on `docs/store-listings-design`.
 
 ```bash
-git branch -m chore/N-store-listings
+git branch -m chore/208-store-listings
 git add docs/superpowers/plans/2026-10-24-store-listings.md
-git commit -m "docs(store): the Play facts for the declarations (#N)"
+git commit -m "docs(store): the Play facts for the declarations (#208)"
 ```
 
 ---
@@ -705,8 +705,8 @@ Entered before Submit for Review, with the privacy policy URL.
 
 ## Play Console
 
-- Category: <PLAY_CATEGORY>
-- Content rating: <PLAY_RATING>
+- Category: Education
+- Content rating: Everyone (IARC)
 
 ### Data safety
 
@@ -746,7 +746,7 @@ Expected: all PASS; no type errors.
 
 ```bash
 git add scripts/store-listing.ts scripts/__tests__/store-listing.test.ts store/ .prettierignore
-git commit -m "feat(store): the listing format and its checks (#N)"
+git commit -m "feat(store): the listing format and its checks (#208)"
 ```
 
 ---
@@ -1226,7 +1226,7 @@ Expected: all PASS, no type or lint errors. Prettier may rewrap long lines and s
 
 ```bash
 git add scripts/store-listing.ts scripts/__tests__/store-listing.test.ts
-git commit -m "feat(store): compare with the live version, and render the paste and review sheets (#N)"
+git commit -m "feat(store): compare with the live version, and render the paste and review sheets (#208)"
 ```
 
 ---
@@ -1485,7 +1485,7 @@ Expected:
 
 ```bash
 git add scripts/store-bundle.ts
-git commit -m "feat(store): the bundle writes the paste sheet, the images and the review sheets (#N)"
+git commit -m "feat(store): the bundle writes the paste sheet, the images and the review sheets (#208)"
 ```
 
 ---
@@ -1635,7 +1635,7 @@ Expected: no errors; the repo test PASSes (every path the rule cites exists by n
 
 ```bash
 git add scripts/seed-language.mjs scripts/capture-screens.mjs scripts/generate-play-listing-assets.mjs app/store/feature-graphic.tsx .claude/rules/design-handoff.md
-git commit -m "feat(store): a feature graphic per language, clear of the launch intro (#N)"
+git commit -m "feat(store): a feature graphic per language, clear of the launch intro (#208)"
 ```
 
 ---
@@ -1821,7 +1821,7 @@ Expected: the frontmatter intact (`name: escuadra-store-listing`, the single-quo
 
 ```bash
 git add .claude/skills/escuadra-store-listing/SKILL.md
-git commit -m "feat(store): the escuadra-store-listing skill, from draft to paste sheet (#N)"
+git commit -m "feat(store): the escuadra-store-listing skill, from draft to paste sheet (#208)"
 ```
 
 ---
@@ -2051,7 +2051,7 @@ Expected: typecheck, lint, Prettier, Vitest, squadctl's registry check and the g
 
 ```bash
 git add .claude/rules/store-listing.md CLAUDE.md .claude/rules/privacy-telemetry.md docs/release.md
-git commit -m "docs(store): the store-listing rule, and the listing in Cut a release (#N)"
+git commit -m "docs(store): the store-listing rule, and the listing in Cut a release (#208)"
 ```
 
 (Include any files the review in Step 6 changed.)
@@ -2060,4 +2060,4 @@ git commit -m "docs(store): the store-listing rule, and the listing in Cut a rel
 
 ## After the tasks
 
-Use superpowers:finishing-a-development-branch: push `chore/N-store-listings` and open the PR into `main` titled `chore(store): store listings as files, drafted by a skill, entered from a paste sheet (#N)`, its body summarising the six commits, the fingerprint result from Task 6 Step 5 and the expert review's rounds, ending with the PR attribution line. Pushing and opening the PR wait for the owner's OK.
+Use superpowers:finishing-a-development-branch: push `chore/208-store-listings` and open the PR into `main` titled `chore(store): store listings as files, drafted by a skill, entered from a paste sheet (#208)`, its body summarising the six commits, the fingerprint result from Task 6 Step 5 and the expert review's rounds, ending with the PR attribution line. Pushing and opening the PR wait for the owner's OK.
