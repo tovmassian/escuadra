@@ -10,5 +10,6 @@
   "checkout": {
     "branch": "main"
   },
-  "dirty": ["README.md"]
+  "dirty": ["README.md"],
+  "hidden": []
 }

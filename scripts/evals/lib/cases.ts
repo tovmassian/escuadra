@@ -33,6 +33,8 @@ export interface EvalCase {
 export interface Suite {
   /** Branch → commit, for every branch the sandbox's origin keeps. */
   pins: Record<string, string>;
+  /** Paths hidden from the sandbox's clone and its history (see `SandboxSetup.hidden`). */
+  hidden?: string[];
   allowedTools: string[];
   runs: number;
   maxTurns: number;
@@ -57,6 +59,7 @@ export function setupFor(suite: Suite, item: EvalCase): SandboxSetup {
     branches: item.branches ?? [],
     checkout: item.checkout ?? { branch: 'main' },
     dirty: item.dirty ?? [],
+    hidden: suite.hidden ?? [],
   };
 }
 

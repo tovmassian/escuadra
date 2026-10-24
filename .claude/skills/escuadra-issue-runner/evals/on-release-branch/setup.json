@@ -10,5 +10,6 @@
   "checkout": {
     "branch": "release/1.0.0"
   },
-  "dirty": []
+  "dirty": [],
+  "hidden": []
 }

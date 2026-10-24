@@ -47,5 +47,6 @@
   "checkout": {
     "branch": "main"
   },
-  "dirty": []
+  "dirty": [],
+  "hidden": []
 }

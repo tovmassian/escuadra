@@ -77,7 +77,12 @@ describe('setupFor', () => {
       branches: [],
       checkout: { branch: 'main' },
       dirty: [],
+      hidden: [],
     });
+  });
+
+  it('passes a suite hidden list through to the setup', () => {
+    expect(setupFor({ ...SUITE, hidden: ['secret'] }, TRIAGE_CASE).hidden).toEqual(['secret']);
   });
 });
 

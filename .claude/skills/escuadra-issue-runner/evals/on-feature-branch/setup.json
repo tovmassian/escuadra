@@ -26,5 +26,6 @@
   "checkout": {
     "branch": "feat/9050-onboarding-tips"
   },
-  "dirty": []
+  "dirty": [],
+  "hidden": []
 }

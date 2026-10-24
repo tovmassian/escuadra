@@ -41,6 +41,8 @@ export interface SandboxSetup {
   checkout: { branch: string; from?: string };
   /** Tracked files left with an uncommitted edit. */
   dirty: string[];
+  /** Repo-relative paths removed from every pinned commit, and from the object database. */
+  hidden: string[];
 }
 
 export interface BuildOptions {
@@ -103,14 +105,14 @@ export function realGitBinary(): string {
 
 export function buildSandbox(o: BuildOptions): void {
   const origin = join(o.tmpDir, 'origin.git');
-  git(o.tmpDir, ['clone', '--quiet', '--bare', '--no-tags', o.sourceRepo, origin]);
-  git(origin, ['remote', 'remove', 'origin']);
-  const heads = git(origin, ['for-each-ref', '--format=%(refname)', 'refs/heads']);
-  for (const ref of heads.split('\n').filter(Boolean)) git(origin, ['update-ref', '-d', ref]);
+  // Fetch only the pinned commits into an empty repo: a clone of the source would carry every
+  // object it holds, the unpinned branches' and the hidden paths' included.
+  git(o.tmpDir, ['init', '--quiet', '--bare', origin]);
   for (const [branch, sha] of Object.entries(o.setup.pins)) {
-    git(origin, ['update-ref', `refs/heads/${branch}`, sha]);
+    git(origin, ['fetch', '--quiet', '--no-tags', o.sourceRepo, `${sha}:refs/heads/${branch}`]);
   }
   git(origin, ['symbolic-ref', 'HEAD', 'refs/heads/main']);
+  if (o.setup.hidden.length > 0) hideFromHistory(origin, o.setup.hidden);
 
   git(o.workDir, ['clone', '--quiet', origin, '.']);
   const helpers = dirname(o.realGit);
@@ -164,6 +166,35 @@ function commitFiles(o: BuildOptions, commit: SyntheticCommit): void {
   }
   git(o.workDir, ['add', '--', ...commit.files.map((file) => file.path)]);
   git(o.workDir, ['commit', '--quiet', '-m', commit.message]);
+}
+
+/**
+ * Rewrites every branch of `origin` without `paths`, then drops the original objects. The
+ * rewrite keeps messages, authors and dates, so a case's `git log` reads as the real one; the
+ * hashes change. It runs without DATES, which would stamp every rewritten commit with them.
+ */
+function hideFromHistory(origin: string, paths: string[]): void {
+  const quoted = paths.map((path) => `'${path}'`).join(' ');
+  execFileSync(
+    'git',
+    [
+      'filter-branch',
+      '--force',
+      '--index-filter',
+      `git rm -r -q --cached --ignore-unmatch -- ${quoted}`,
+      '--',
+      '--all',
+    ],
+    {
+      cwd: origin,
+      env: { ...withoutGitVars(process.env), FILTER_BRANCH_SQUELCH_WARNING: '1' },
+      stdio: ['ignore', 'pipe', 'pipe'],
+    },
+  );
+  const backups = git(origin, ['for-each-ref', '--format=%(refname)', 'refs/original']);
+  for (const ref of backups.split('\n').filter(Boolean)) git(origin, ['update-ref', '-d', ref]);
+  git(origin, ['reflog', 'expire', '--expire=now', '--all']);
+  git(origin, ['gc', '--quiet', '--prune=now']);
 }
 
 function script(path: string, body: string): void {
