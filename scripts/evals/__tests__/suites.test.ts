@@ -42,10 +42,7 @@ describe('escuadra-issue-runner suite', () => {
       [
         '115-closed',
         '116-release',
-        '117-owner-decision',
-        '126-small-bug',
-        '129-large-spec',
-        '129-large-spec-subagent',
+        '160-route-choice',
         '55-tbc',
         '59-gh-pages',
         'dirty-tree',

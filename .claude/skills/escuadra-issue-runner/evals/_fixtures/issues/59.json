@@ -7,6 +7,6 @@
   "labels": ["documentation"],
   "milestone": "Google Play v1 Release",
   "size": "XS",
-  "source": "real snapshot 2026-10-16",
+  "source": "real snapshot 2026-10-24",
   "why": "XS, but it publishes gh-pages and touches the store-badge rule while Play is not live: the skill asks."
 }

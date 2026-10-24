@@ -52,7 +52,7 @@ graders:
     weight: 3
   - type: 'regex'
     name: 'docs'
-    pattern: "^docs:(?=.*(?<![\\w.-])2026-10-16-2-0-redesign-handoff\\.md)"
+    pattern: "^docs:(?=.*(?<![\\w.-])2026-10-15-play-redesign-2-0-design\\.md)(?=.*(?<![\\w.-])2026-10-16-2-0-redesign-handoff\\.md)"
     flags: 'm'
     weight: 1
   - type: 'llm'
