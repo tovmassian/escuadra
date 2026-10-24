@@ -51,10 +51,10 @@ const RN = path.join(REPO_ROOT, 'node_modules', 'react-native');
 // React Native's own copies of third-party code: scanned as dependencies, never
 // counted as first-party pods.
 const RN_THIRD_PARTY = ['third-party-podspecs', 'sdks'];
-// Pods React Native's codegen writes at `pod install`, from first-party code and
-// its templates in react-native/scripts/codegen/templates. Their podspecs exist
-// only after that, never in node_modules, so they are filtered like first-party pods.
-const GENERATED_PODS = ['ReactAppDependencyProvider', 'ReactCodegen'];
+// A pod React Native's codegen writes at `pod install`, from first-party code and
+// its templates in react-native/scripts/codegen/templates. Its podspec exists
+// only after that, never in node_modules, so it is filtered like first-party pods.
+const GENERATED_PODS = ['ReactAppDependencyProvider'];
 // Published from npm packages already in PACKAGES, through their local Maven repos.
 const FIRST_PARTY_ANDROID = [
   'com.facebook.react:react-android',

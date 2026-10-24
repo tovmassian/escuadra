@@ -15,7 +15,8 @@ import type { NativeLibrary } from '../lib/licencesView.ts';
 // dtoa, OpenBSD's strlcpy (ISC), LLVM's ConvertUTF (Unicode, Inc.; no SPDX id
 // matches its text, so ScanCode's) and Solar Designer's public-domain MD5.
 // An entry's licence is compared as a whole string, so a library under several
-// licences at once is listed by its full expression. Widening it is the
+// licences at once is listed by its full expression: IJG, Zlib, NCSA and
+// LLVM's exception appear only inside the two compounds. Widening it is the
 // owner's decision, like ALLOWED_LICENCES.
 export const NATIVE_ALLOWED_LICENCES: readonly string[] = [
   'Apache-2.0',
@@ -25,10 +26,6 @@ export const NATIVE_ALLOWED_LICENCES: readonly string[] = [
   'BSL-1.0',
   'bzip2-1.0.6',
   'BSD-2-Clause-Views',
-  'IJG',
-  'Zlib',
-  'Apache-2.0 WITH LLVM-exception',
-  'NCSA',
   'Unlicense',
   'MPL-2.0',
   'dtoa',
