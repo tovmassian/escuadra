@@ -118,8 +118,9 @@ text.
 
 ### Software licences
 
-The JavaScript packages Metro bundles into the app ask, under MIT, ISC and the rest, that
-their copyright and permission notice travel with every copy. About → Licences shows each
+The JavaScript packages Metro bundles into the app, the packages Expo autolinks and the
+native libraries described below ask, under MIT, ISC and the rest, that their copyright
+and permission notice travel with every copy. About → Licences shows each
 one's name, version, licence and copyright, with its full licence texts a tap away, and
 names the fonts, whose notice is inside each font file.
 
@@ -159,8 +160,8 @@ conventions: a work that states no copyright holder anywhere gets `No copyright 
 and a notice that lives only in a source file's header is extracted verbatim, with a
 line-range URL. The allowlist is `NATIVE_ALLOWED_LICENCES` (`scripts/native-licences.ts`),
 owner-approved (2026-10-24); widening it is the owner's call, as for the JavaScript one.
-MPL-2.0 is accepted only for the Public Suffix List. Google's Play libraries (In-App Review, Play services) are
-proprietary: the sheet names them with their terms and shows no text. Native rows show no
+MPL-2.0 is accepted only for the Public Suffix List. Google's Play libraries (In-App
+Review, Play services) are proprietary: the sheet names them with their terms and shows no text. Native rows show no
 version, since pods float within their podspec ranges.
 
 `gen:licences` scans the podspecs and `build.gradle` files of the autolinked packages, and
@@ -179,11 +180,27 @@ A dependency a scanned file names but the build never links (behind a flag the a
 set, or on a path it does not take) goes under `"$notLinked"` in the same file, with its
 reason; never as an entry.
 
+What the scan reads is narrow. In podspecs (the autolinked packages' and every React
+Native one, `third-party-podspecs/` and `sdks/hermes-engine` included) it reads quoted
+`s.dependency '…'` lines. In the autolinked packages' `build.gradle` files it reads quoted
+`implementation`/`api '…'` lines, and in React Native's ReactAndroid build files
+`implementation(libs.x)`/`api(libs.x)` through its version catalog. It does not read
+`add_dependency(…)`, variable or map notations, `releaseImplementation`, or a package's
+own `libs.` references, and it does not scan a native module outside `node_modules`. The
+inventory below is the backstop.
+
 An entry's `found` says how it is kept honest: `scan` (the scan sees it), `inventory`
-(below) or `vendored` (its licence file sits in a package's native folder).
+(below) or `vendored` (vendored code, checked only by its licence files). Only licence
+_files_ under a package's `ios/`, `android/`, `apple/`, `cpp/` and `common/` folders are
+checked, and an entry claims them in `vendored`. Vendored code whose notice lives only in
+source headers or outside those folders (bspatch, ASN1Decoder, xxhashct, cppblog, the
+Android Open Source Project) has no claim, nothing checks it, and new vendored code of
+that kind is invisible to the check.
 
 The scan sees direct dependencies only. Indirect ones (`found: "inventory"`) come from a
-local inventory, refreshed on every Expo SDK bump: in a scratch copy of the repo,
+local inventory, refreshed on every Expo SDK bump (a cadence, not a guarantee: pods and
+Maven artifacts resolve fresh on each EAS build, with no committed `Podfile.lock`, so an
+upstream release can add a transitive dependency with no change in this repository): in a scratch copy of the repo,
 `npx expo prebuild --no-install`, then `./gradlew :app:dependencies --configuration
 releaseRuntimeClasspath` in `android/`, and `pod install` in `ios/` (or, without CocoaPods,
 the podspecs' dependencies resolved on the CocoaPods trunk). Every library in that output
