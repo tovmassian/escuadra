@@ -180,6 +180,10 @@ their rows are that run.
 | `neg-create-issue`       | 0.87    | 1.00          |
 | `neg-question`           | 1.00    | 1.00          |
 
+The Without column is the RED baseline at the new pins: both arms ran together.
+
+`release/1.0.0` stays pinned at `d8f2d21b`, because its head has not moved.
+
 Every case reaches the 0.9 bar with the skill. The mean is 0.99 with it and 0.81 without, a
 delta of +0.18, and no run tried a GitHub write or changed git state. The with-arm misses, one
 run each: `116-release` (`questions`), `55-store-console` (`docs`), `no-size` (`workspace`,
@@ -416,8 +420,12 @@ $HOME/cwd/             clone of origin.git: the agent's working directory
   key). Origin starts empty and fetches only the pinned commits (about 3 s), so no
   other branch's objects come along; `git filter-branch` then removes the hidden
   paths from every commit from the first one that touches them, and the originals
-  are pruned. Messages, authors and dates survive; hashes after that commit change.
-  A scaffold takes about 10 s.
+  are pruned. Messages, authors and dates survive; hashes after that commit change,
+  except on a pinned branch that holds no hidden path (`release/1.0.0`), which is left
+  out of the rewrite whole so the `(cherry picked from commit …)` trailers in main's
+  history keep pointing at it. Commit messages survive the rewrite, so a few squash
+  messages (#140, #166) still paraphrase the skill's rules; they hold no case's
+  expected answer. A scaffold takes about 10 s.
 - **Project skills in the clone do not load** in eval runs, and neither do the
   owner's plugins (superpowers included): the run's config directory is
   sandboxed. Both arms see the same thing; `first-step` is graded as a name.
@@ -584,7 +592,7 @@ how the owner actually asks.
 - Weights follow the cost of an error: asking when the agent should have
   proceeded (or the reverse), or writing anything, is expensive; a slug in
   another style is cheap.
-- `questions` claims are checkable: "asks which release route #117 takes",
+- `questions` claims are checkable: "asks the owner to pick route A or B for #160",
   "asks nothing the issue or spec already answers". The scaffold creates
   `gh.log` empty, since a file grader needs the file to exist.
 - **Allowed tools** are a backstop, not the measurement: `Read`, `Glob`,
@@ -601,7 +609,7 @@ how the owner actually asks.
   is not gated; its scores are the RED record. `no-writes` (3) and
   `stayed-dry` (2) are points any compliant run earns, so at 0.9 any grader of
   weight 2 or more fails a run on its own, while one missed 1-point field
-  passes (`126-small-bug`: 15/16 = 0.94; a wrong decision, 13/16 = 0.81). A
+  passes (`small-bug`: 15/16 = 0.94; a wrong decision, 13/16 = 0.81). A
   case's score is the mean of its runs.
 
 ## 9. Layout and running

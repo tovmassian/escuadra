@@ -8,5 +8,5 @@
   "milestone": null,
   "size": "S",
   "source": "real snapshot 2026-10-24",
-  "why": "The issue hands the owner the release route, so the skill asks."
+  "why": "Serves neg-question: a question about the issue, answered from it, with no triage."
 }
