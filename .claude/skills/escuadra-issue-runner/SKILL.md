@@ -47,7 +47,9 @@ git status --short --branch
 
 `decision: ask` when any of these hold:
 
-1. The issue is closed: ask whether anything is left to do, or whether to reopen it.
+1. The issue is closed: ask whether anything is left to do, or whether to reopen it, and
+   say in the question that it is closed. Fill in `docs` and `existing` first, as for any
+   issue: a closed issue's work is in its docs and its commits.
 2. The title carries `[TBC]`, or the issue leaves a choice to the owner ("the owner's
    decision", "decide the release route").
 3. The issue lists choices to settle before building (an "Open" section, a question to the
