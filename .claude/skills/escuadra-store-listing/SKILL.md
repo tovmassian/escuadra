@@ -106,7 +106,8 @@ main                           release/X.Y.Z                  GitHub, the stores
    git cherry-pick -x <squash commit>
    ```
 
-   A listing-only pick is docs to `release-gate`.
+   `release-gate` checks the pick's fingerprint, as it does every PR; a listing pick passes,
+   because nothing under `store/` or `i18n/` feeds the fingerprint.
 
 ### The first run
 
@@ -122,10 +123,8 @@ graphic's tagline, `store.tagline` in `i18n/es.ts`, `fr.ts`, `it.ts` and `de.ts`
 `i18n/leaves.ts`, and runs its translations through the same expert loop. Add each one,
 with the English, at the end of that language's review sheet
 (`dist/store-listing/review/<lang>.md`) under `## Feature graphic tagline`, so the reviewer
-signs it off with the listing. It rides in the same PR and pick; that pick then changes
-catalogs too, so `release-gate` runs its fingerprint check rather than treating it as docs,
-and it passes, because catalogs are JavaScript. Every field is new, so every field is
-drafted, translated, reviewed and entered.
+signs it off with the listing. It rides in the same PR and pick. Every field is new, so
+every field is drafted, translated, reviewed and entered.
 
 ### Between versions
 

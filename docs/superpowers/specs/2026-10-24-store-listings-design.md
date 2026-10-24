@@ -200,9 +200,9 @@ rather than repeating them. Two modes.
    for the native reviewers of #145. Their sign-off is the gate and is recorded in the PR
    body.
 6. Run `npm run check`, open the PR into `main`, and once it is merged, pick it to the
-   release branch. A pick of Markdown only is docs to `release-gate`. One that also
-   changes `store/screenshots.json` gets the gate's fingerprint check, which it passes:
-   nothing under `store/` feeds the fingerprint (the tooling issue measures this).
+   release branch. `release-gate` checks the pick's fingerprint, as it does every PR; a
+   listing pick passes, because nothing under `store/` or `i18n/` feeds the fingerprint
+   (the tooling issue measures this).
 
 **Ship**, on the release branch, after `store-build`:
 
