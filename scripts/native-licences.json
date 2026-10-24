@@ -1,0 +1,1088 @@
+{
+  "$notLinked": {
+    "sqlite3": "expo-updates adds it only when expo.updates.useThirdPartySQLitePod is true, which app.json does not set",
+    "React-jsc": "expo-modules-core adds it only when USE_HERMES is 0; the app runs Hermes, React Native's default",
+    "React-Codegen": "@react-native-async-storage/async-storage names it only in its fallback for a React Native without install_modules_dependencies, which React Native 0.88 has"
+  },
+  "SDWebImage": {
+    "licence": "MIT",
+    "platforms": ["ios"],
+    "found": "scan",
+    "matches": { "ios": ["SDWebImage"] },
+    "via": "expo-image",
+    "copyright": "Copyright (c) 2009-2020 Olivier Poitrey rs@dailymotion.com",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/sdwebimage.LICENSE",
+        "url": "https://raw.githubusercontent.com/SDWebImage/SDWebImage/5.21.7/LICENSE"
+      }
+    ]
+  },
+  "SDWebImageAVIFCoder": {
+    "licence": "MIT",
+    "platforms": ["ios"],
+    "found": "scan",
+    "matches": { "ios": ["SDWebImageAVIFCoder"] },
+    "via": "expo-image",
+    "copyright": "Copyright (c) 2019 lizhuoli1126@126.com <lizhuoli1126@126.com>",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/sdwebimage-avif-coder.LICENSE",
+        "url": "https://raw.githubusercontent.com/SDWebImage/SDWebImageAVIFCoder/0.11.1/LICENSE"
+      }
+    ]
+  },
+  "SDWebImageSVGCoder": {
+    "licence": "MIT",
+    "platforms": ["ios"],
+    "found": "scan",
+    "matches": { "ios": ["SDWebImageSVGCoder"] },
+    "via": "expo-image",
+    "copyright": "Copyright (c) 2018 lizhuoli1126@126.com <lizhuoli1126@126.com>",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/sdwebimage-svg-coder.LICENSE",
+        "url": "https://raw.githubusercontent.com/SDWebImage/SDWebImageSVGCoder/1.7.0/LICENSE"
+      }
+    ]
+  },
+  "SDWebImageWebPCoder": {
+    "licence": "MIT",
+    "platforms": ["ios"],
+    "found": "scan",
+    "matches": { "ios": ["SDWebImageWebPCoder"] },
+    "via": "expo-image",
+    "copyright": "Copyright (c) 2018 Bogdan Poplauschi",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/sdwebimage-webp-coder.LICENSE",
+        "url": "https://raw.githubusercontent.com/SDWebImage/SDWebImageWebPCoder/0.14.6/LICENSE"
+      }
+    ]
+  },
+  "libavif": {
+    "licence": "BSD-2-Clause",
+    "platforms": ["ios", "android"],
+    "found": "scan",
+    "matches": { "ios": ["libavif"], "android": ["org.aomedia.avif.android:*"] },
+    "via": "expo-image",
+    "copyright": "Copyright 2019 Joe Drago. All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/libavif.LICENSE",
+        "url": "https://raw.githubusercontent.com/AOMediaCodec/libavif/v1.1.1/LICENSE"
+      }
+    ]
+  },
+  "libdav1d": {
+    "licence": "BSD-2-Clause",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": { "ios": ["libdav1d"], "android": ["org.aomedia.avif.android:*"] },
+    "via": "expo-image, through libavif",
+    "copyright": "Copyright © 2018-2019, VideoLAN and dav1d authors",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/libdav1d.LICENSE",
+        "url": "https://raw.githubusercontent.com/videolan/dav1d/1.2.0/COPYING"
+      }
+    ]
+  },
+  "libwebp": {
+    "licence": "BSD-3-Clause",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": { "ios": ["libwebp"], "android": ["com.facebook.fresco:webpsupport"] },
+    "via": "expo-image, through SDWebImageWebPCoder; react-native, through Fresco's WebP support",
+    "copyright": "Copyright (c) 2010, Google Inc. All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/libwebp.LICENSE",
+        "url": "https://raw.githubusercontent.com/webmproject/libwebp/v1.6.0/COPYING"
+      },
+      {
+        "file": "scripts/licence-texts/native/libwebp.PATENTS",
+        "url": "https://raw.githubusercontent.com/webmproject/libwebp/v1.6.0/PATENTS"
+      }
+    ]
+  },
+  "ReachabilitySwift": {
+    "licence": "MIT",
+    "platforms": ["ios"],
+    "found": "scan",
+    "matches": { "ios": ["ReachabilitySwift"] },
+    "via": "expo-updates",
+    "copyright": "Copyright (c) 2016 Ashley Mills",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/reachability-swift.LICENSE",
+        "url": "https://raw.githubusercontent.com/ashleymills/Reachability.swift/v5.2.4/LICENSE"
+      }
+    ]
+  },
+  "Folly": {
+    "licence": "Apache-2.0",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": { "ios": ["RCT-Folly"] },
+    "via": "react-native",
+    "copyright": "Copyright (c) Meta Platforms, Inc. and affiliates.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/folly.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebook/folly/v2024.11.18.00/LICENSE"
+      }
+    ]
+  },
+  "boost": {
+    "licence": "BSL-1.0",
+    "platforms": ["ios", "android"],
+    "found": "scan",
+    "matches": { "ios": ["boost"] },
+    "via": "react-native; react-native (Hermes, Boost.Context 1.86)",
+    "copyright": "(C) Copyright John maddock 1999.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/boost.LICENSE",
+        "url": "https://raw.githubusercontent.com/boostorg/boost/boost-1.84.0/LICENSE_1_0.txt"
+      }
+    ]
+  },
+  "glog": {
+    "licence": "BSD-3-Clause",
+    "platforms": ["ios", "android"],
+    "found": "scan",
+    "matches": { "ios": ["glog"] },
+    "via": "react-native",
+    "copyright": "Copyright (c) 2008, Google Inc.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/glog.LICENSE",
+        "url": "https://raw.githubusercontent.com/google/glog/v0.3.5/COPYING"
+      }
+    ]
+  },
+  "DoubleConversion": {
+    "licence": "BSD-3-Clause",
+    "platforms": ["ios", "android"],
+    "found": "scan",
+    "matches": { "ios": ["DoubleConversion"] },
+    "via": "react-native",
+    "copyright": "Copyright 2006-2011, the V8 project authors. All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/double-conversion.LICENSE",
+        "url": "https://raw.githubusercontent.com/google/double-conversion/v1.1.6/LICENSE"
+      }
+    ]
+  },
+  "fmt": {
+    "licence": "MIT",
+    "platforms": ["ios", "android"],
+    "found": "scan",
+    "matches": { "ios": ["fmt"] },
+    "via": "react-native",
+    "copyright": "Copyright (c) 2012 - present, Victor Zverovich and {fmt} contributors",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/fmt.LICENSE",
+        "url": "https://raw.githubusercontent.com/fmtlib/fmt/12.1.0/LICENSE"
+      }
+    ]
+  },
+  "fast_float": {
+    "licence": "MIT",
+    "platforms": ["ios", "android"],
+    "found": "scan",
+    "matches": { "ios": ["fast_float"] },
+    "via": "react-native; react-native (Hermes)",
+    "copyright": "Copyright (c) 2021 The fast_float authors",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/fast-float.LICENSE",
+        "url": "https://raw.githubusercontent.com/fastfloat/fast_float/v8.0.0/LICENSE-MIT"
+      }
+    ]
+  },
+  "SocketRocket": {
+    "licence": "BSD-3-Clause",
+    "platforms": ["ios"],
+    "found": "inventory",
+    "matches": { "ios": ["SocketRocket"] },
+    "via": "react-native",
+    "copyright": "Copyright (c) 2016-present, Facebook, Inc. All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/socketrocket.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebookincubator/SocketRocket/0.7.1/LICENSE"
+      },
+      {
+        "file": "scripts/licence-texts/native/socketrocket.PATENTS",
+        "url": "https://raw.githubusercontent.com/facebookincubator/SocketRocket/0.7.1/PATENTS"
+      }
+    ]
+  },
+  "Hermes": {
+    "licence": "MIT",
+    "platforms": ["ios", "android"],
+    "found": "scan",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native",
+    "copyright": "Copyright (c) Meta Platforms, Inc. and affiliates.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/hermes.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebook/hermes/hermes-v260318099.0.4/LICENSE"
+      }
+    ]
+  },
+  "LLVM Support (llvh)": {
+    "licence": "Apache-2.0 WITH LLVM-exception AND NCSA",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Copyright (c) 2003-2019 University of Illinois at Urbana-Champaign.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/llvh.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebook/hermes/hermes-v260318099.0.4/external/llvh/LICENSE.txt"
+      }
+    ]
+  },
+  "Henry Spencer's regex": {
+    "licence": "BSD-3-Clause",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes, through llvh)",
+    "copyright": "Copyright (c) 1992, 1993, 1994 Henry Spencer.\nCopyright (c) 1992, 1993, 1994\nThe Regents of the University of California.  All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/spencer-regex.LICENSE",
+        "url": "https://github.com/facebook/hermes/blob/hermes-v260318099.0.4/external/llvh/lib/Support/regcomp.c#L4-L33"
+      }
+    ]
+  },
+  "Dragonbox": {
+    "licence": "BSL-1.0",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Copyright 2020-2025 Junekey Jeon",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/dragonbox.LICENSE",
+        "url": "https://raw.githubusercontent.com/jk-jeon/dragonbox/beeeef91cf6fef89a4d4ba5e95d47ca64ccb3a44/LICENSE-Boost"
+      }
+    ]
+  },
+  "zip": {
+    "licence": "Unlicense",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Rich Geldreich <richgel99@gmail.com>\nNo copyright notice",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/zip.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebook/hermes/hermes-v260318099.0.4/external/zip/UNLICENSE"
+      }
+    ]
+  },
+  "netlib dtoa": {
+    "licence": "dtoa",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Copyright (c) 1991, 2000, 2001 by Lucent Technologies.\nCopyright (c) 1991, 1996 by Lucent Technologies.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/dtoa.LICENSE",
+        "url": "https://github.com/facebook/hermes/blob/hermes-v260318099.0.4/external/dtoa/dtoa.c#L3-L16"
+      }
+    ]
+  },
+  "strlcpy": {
+    "licence": "ISC",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Copyright (c) 1998 Todd C. Miller <Todd.Miller@courtesan.com>",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/strlcpy.LICENSE",
+        "url": "https://github.com/facebook/hermes/blob/hermes-v260318099.0.4/external/llvh/lib/Support/regstrlcpy.c#L4-L16"
+      }
+    ]
+  },
+  "ConvertUTF": {
+    "licence": "LicenseRef-scancode-unicode-mappings",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Copyright 2001-2004 Unicode, Inc.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/convertutf.LICENSE",
+        "url": "https://github.com/facebook/hermes/blob/hermes-v260318099.0.4/external/llvh/lib/Support/ConvertUTF.cpp#L10-L28"
+      }
+    ]
+  },
+  "MD5 (Solar Designer)": {
+    "licence": "LicenseRef-Public-Domain",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Alexander Peslyak, better known as Solar Designer",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/md5.LICENSE",
+        "url": "https://github.com/facebook/hermes/blob/hermes-v260318099.0.4/external/llvh/lib/Support/MD5.cpp#L13-L25"
+      }
+    ]
+  },
+  "AndroidX": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["androidx.*:*"] },
+    "via": "react-native, expo and most autolinked packages",
+    "copyright": "Copyright 2018 The Android Open Source Project",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/androidx.LICENSE",
+        "url": "https://android.googlesource.com/platform/frameworks/support/+/refs/heads/androidx-main/LICENSE.txt"
+      }
+    ]
+  },
+  "Kotlin": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["org.jetbrains.kotlin:*"] },
+    "via": "expo, react-native-gesture-handler, react-native-safe-area-context, expo-updates",
+    "copyright": "Copyright 2010-2024 JetBrains s.r.o and respective authors and developers",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/kotlin.LICENSE",
+        "url": "https://raw.githubusercontent.com/JetBrains/kotlin/v2.2.20/license/LICENSE.txt"
+      },
+      {
+        "file": "scripts/licence-texts/native/kotlin.NOTICE",
+        "url": "https://raw.githubusercontent.com/JetBrains/kotlin/v2.2.20/license/NOTICE.txt"
+      }
+    ]
+  },
+  "kotlinx.coroutines": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["org.jetbrains.kotlinx:kotlinx-coroutines-*"] },
+    "via": "expo, expo-image",
+    "copyright": "Copyright 2000-2020 JetBrains s.r.o. and Kotlin Programming Language contributors.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/kotlinx-coroutines.LICENSE",
+        "url": "https://raw.githubusercontent.com/Kotlin/kotlinx.coroutines/1.10.2/LICENSE.txt"
+      },
+      {
+        "file": "scripts/licence-texts/native/kotlinx-coroutines.NOTICE",
+        "url": "https://raw.githubusercontent.com/Kotlin/kotlinx.coroutines/1.10.2/license/NOTICE.txt"
+      }
+    ]
+  },
+  "JetBrains Java Annotations": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["org.jetbrains:annotations"] },
+    "via": "expo, through Kotlin",
+    "copyright": "Copyright 2000-2016 JetBrains s.r.o.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/jetbrains-annotations.LICENSE",
+        "url": "https://raw.githubusercontent.com/JetBrains/java-annotations/23.0.0/LICENSE.txt"
+      }
+    ]
+  },
+  "JSpecify": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["org.jspecify:*"] },
+    "via": "react-native and expo, through AndroidX",
+    "copyright": "Copyright 2018-2020 The JSpecify Authors.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/jspecify.LICENSE",
+        "url": "https://raw.githubusercontent.com/jspecify/jspecify/v1.0.0/LICENSE"
+      }
+    ]
+  },
+  "Material Components for Android": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.google.android.material:*"] },
+    "via": "expo-router, react-native-screens, @expo/log-box",
+    "copyright": "Copyright (C) 2017 The Android Open Source Project",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/material-components-android.LICENSE",
+        "url": "https://raw.githubusercontent.com/material-components/material-components-android/1.13.0/LICENSE"
+      }
+    ]
+  },
+  "Fresco": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.facebook.fresco:*"] },
+    "via": "react-native, react-native-svg",
+    "copyright": "Copyright (c) Meta Platforms, Inc. and affiliates.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/fresco.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebook/fresco/v3.7.0/LICENSE"
+      }
+    ]
+  },
+  "libjpeg-turbo": {
+    "licence": "IJG AND BSD-3-Clause AND Zlib",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["com.facebook.fresco:nativeimagetranscoder"] },
+    "via": "react-native (Fresco)",
+    "copyright": "Copyright (C)2009-2023 D. R. Commander.  All Rights Reserved.\nCopyright (C)2015 Viktor Szathmáry.  All Rights Reserved.\nThis software is copyright (C) 1991-2020, Thomas G. Lane, Guido Vollbeding.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/libjpeg-turbo.LICENSE",
+        "url": "https://raw.githubusercontent.com/libjpeg-turbo/libjpeg-turbo/2.1.5.1/LICENSE.md"
+      },
+      {
+        "file": "scripts/licence-texts/native/libjpeg-turbo.README.ijg",
+        "url": "https://raw.githubusercontent.com/libjpeg-turbo/libjpeg-turbo/2.1.5.1/README.ijg"
+      }
+    ]
+  },
+  "giflib": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["com.facebook.fresco:animated-gif"] },
+    "via": "react-native (Fresco)",
+    "copyright": "The GIFLIB distribution is Copyright (c) 1997  Eric S. Raymond\nCopyright (c) 2008 Otto Moerbeek <otto@drijf.net>",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/giflib.LICENSE",
+        "url": "https://sourceforge.net/p/giflib/code/ci/5.2.1/tree/COPYING?format=raw"
+      }
+    ]
+  },
+  "SoLoader": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.facebook.soloader:*"] },
+    "via": "react-native",
+    "copyright": "Copyright (c) Meta Platforms, Inc. and affiliates.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/soloader.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebook/soloader/v0.12.1/LICENSE"
+      }
+    ]
+  },
+  "fbjni": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.facebook.fbjni:*"] },
+    "via": "react-native",
+    "copyright": "Copyright Facebook, Inc. and its affiliates",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/fbjni.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebookincubator/fbjni/v0.7.0/LICENSE"
+      }
+    ]
+  },
+  "Infer": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.facebook.infer.annotation:*"] },
+    "via": "react-native",
+    "copyright": "Copyright (c) Facebook, Inc. and its affiliates.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/infer.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebook/infer/infer-annotation-0.18.0/LICENSE"
+      }
+    ]
+  },
+  "Yoga": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.facebook.yoga:*"] },
+    "via": "react-native",
+    "copyright": "Copyright (c) Facebook, Inc. and its affiliates.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/yoga.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebook/yoga/v1.19.0/LICENSE"
+      }
+    ]
+  },
+  "OkHttp": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.squareup.okhttp3:*"] },
+    "via": "react-native, expo-image, expo-file-system, expo-updates, expo-asset",
+    "copyright": "Copyright (C) 2012 Square, Inc.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/okhttp.LICENSE",
+        "url": "https://raw.githubusercontent.com/square/okhttp/parent-4.9.2/LICENSE.txt"
+      }
+    ]
+  },
+  "Okio": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.squareup.okio:*"] },
+    "via": "react-native, expo, expo-file-system",
+    "copyright": "Copyright (C) 2019 Square, Inc.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/okio.LICENSE",
+        "url": "https://raw.githubusercontent.com/square/okio/parent-3.16.0/LICENSE.txt"
+      }
+    ]
+  },
+  "Public Suffix List": {
+    "licence": "MPL-2.0",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["com.squareup.okhttp3:okhttp"] },
+    "via": "react-native, expo-image, expo-file-system, expo-updates, expo-asset (OkHttp)",
+    "copyright": "No copyright notice",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/public-suffix-list.LICENSE",
+        "url": "https://www.mozilla.org/media/MPL/2.0/index.txt"
+      },
+      {
+        "file": "scripts/licence-texts/native/public-suffix-list.NOTICE",
+        "url": "https://raw.githubusercontent.com/square/okhttp/parent-4.9.2/okhttp/src/main/resources/okhttp3/internal/publicsuffix/NOTICE"
+      }
+    ]
+  },
+  "zstd-kmp": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.squareup.zstd:*"] },
+    "via": "expo, expo-updates",
+    "copyright": "Copyright (C) 2025 Square, Inc.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/zstd-kmp.LICENSE",
+        "url": "https://raw.githubusercontent.com/square/zstd-kmp/parent-0.4.0/LICENSE"
+      }
+    ]
+  },
+  "Zstandard": {
+    "licence": "BSD-3-Clause",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["com.squareup.zstd:*"] },
+    "via": "expo, expo-updates, through zstd-kmp",
+    "copyright": "Copyright (c) Meta Platforms, Inc. and affiliates. All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/zstandard.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebook/zstd/1dbc2e09084e843f6c0dcc2d0791610015c50979/LICENSE"
+      }
+    ]
+  },
+  "Glide": {
+    "licence": "BSD-2-Clause-Views",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.github.bumptech.glide:*"] },
+    "via": "expo-image",
+    "copyright": "Copyright 2014 Google, Inc. All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/glide.LICENSE",
+        "url": "https://raw.githubusercontent.com/bumptech/glide/v5.0.5/LICENSE"
+      }
+    ]
+  },
+  "libyuv": {
+    "licence": "BSD-3-Clause",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["org.aomedia.avif.android:*"] },
+    "via": "expo-image, through libavif",
+    "copyright": "Copyright 2011 The LibYuv Project Authors. All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/libyuv.LICENSE",
+        "url": "https://chromium.googlesource.com/libyuv/libyuv/+/a6a2ec654b1be1166b376476a7555c89eca0c275/LICENSE"
+      },
+      {
+        "file": "scripts/licence-texts/native/libyuv.PATENTS",
+        "url": "https://chromium.googlesource.com/libyuv/libyuv/+/a6a2ec654b1be1166b376476a7555c89eca0c275/PATENTS"
+      }
+    ]
+  },
+  "cpufeatures": {
+    "licence": "BSD-2-Clause",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["org.aomedia.avif.android:*", "com.facebook.fresco:webpsupport"] },
+    "via": "expo-image (libavif); react-native (Fresco)",
+    "copyright": "Copyright (C) 2010 The Android Open Source Project\nAll rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/cpufeatures.LICENSE",
+        "url": "https://android.googlesource.com/platform/ndk/+/c4bdd155116a9b42767534b35e93f83a91e4a06f/sources/android/cpufeatures/cpu-features.c#2"
+      }
+    ]
+  },
+  "AndroidSVG": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.caverock:*"] },
+    "via": "expo-image",
+    "copyright": "Copyright 2013-2018 Cave Rock Software Ltd",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/androidsvg.LICENSE",
+        "url": "https://raw.githubusercontent.com/BigBadaboom/androidsvg/Release_1.4/LICENSE"
+      }
+    ]
+  },
+  "APNG4Android": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.github.penfeizhou.android.animation:*"] },
+    "via": "expo-image",
+    "copyright": "Copyright [2019] [Zhou Pengfei]",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/apng4android.LICENSE",
+        "url": "https://raw.githubusercontent.com/penfeizhou/APNG4Android/v3.0.5/LICENSE"
+      }
+    ]
+  },
+  "Glide Transformations": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["jp.wasabeef:*"] },
+    "via": "expo-image",
+    "copyright": "Copyright (C) 2020 Wasabeef",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/glide-transformations.LICENSE",
+        "url": "https://raw.githubusercontent.com/wasabeef/glide-transformations/4.3.0/LICENSE"
+      }
+    ]
+  },
+  "Gson": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.google.code.gson:*"] },
+    "via": "@expo/log-box",
+    "copyright": "Copyright (C) 2008 Google Inc.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/gson.LICENSE",
+        "url": "https://raw.githubusercontent.com/google/gson/gson-parent-2.8.6/LICENSE"
+      }
+    ]
+  },
+  "Guava": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["com.google.guava:*"] },
+    "via": "expo-image, through Glide's AVIF integration",
+    "copyright": "Copyright (C) 2007 The Guava Authors",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/guava.LICENSE",
+        "url": "https://raw.githubusercontent.com/google/guava/v28.1/COPYING"
+      }
+    ]
+  },
+  "Error Prone": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["com.google.errorprone:*"] },
+    "via": "expo-image and expo-router, through Guava and Material Components",
+    "copyright": "Copyright 2015 The Error Prone Authors.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/error-prone.LICENSE",
+        "url": "https://raw.githubusercontent.com/google/error-prone/v2.15.0/COPYING"
+      }
+    ]
+  },
+  "J2ObjC": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["com.google.j2objc:*"] },
+    "via": "expo-image, through Guava",
+    "copyright": "Copyright 2012 Google Inc. All Rights Reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/j2objc.LICENSE",
+        "url": "https://raw.githubusercontent.com/google/j2objc/1.3/LICENSE"
+      }
+    ]
+  },
+  "JSR 305": {
+    "licence": "BSD-3-Clause",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.google.code.findbugs:jsr305"] },
+    "via": "react-native",
+    "copyright": "Copyright (c) 2007-2009, JSR305 expert group",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/jsr-305.LICENSE",
+        "url": "https://raw.githubusercontent.com/amaembo/jsr-305/d7734b13c61492982784560ed5b4f4bd6cf9bb2c/ri/LICENSE"
+      }
+    ]
+  },
+  "javax.inject": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["javax.inject:*"] },
+    "via": "react-native",
+    "copyright": "Copyright (C) 2009 The JSR-330 Expert Group",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/javax-inject.LICENSE",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.25.0/text/Apache-2.0.txt"
+      }
+    ]
+  },
+  "Apache Commons Codec": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["commons-codec:*"] },
+    "via": "expo-file-system",
+    "copyright": "Copyright 2002-2014 The Apache Software Foundation",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/commons-codec.LICENSE",
+        "url": "https://raw.githubusercontent.com/apache/commons-codec/1.10/LICENSE.txt"
+      },
+      {
+        "file": "scripts/licence-texts/native/commons-codec.NOTICE",
+        "url": "https://raw.githubusercontent.com/apache/commons-codec/1.10/NOTICE.txt"
+      }
+    ]
+  },
+  "Apache Commons IO": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["commons-io:*"] },
+    "via": "expo-file-system",
+    "copyright": "Copyright 2001-2008 The Apache Software Foundation",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/commons-io.LICENSE",
+        "url": "https://raw.githubusercontent.com/apache/commons-io/commons-io-1.4/LICENSE.txt"
+      },
+      {
+        "file": "scripts/licence-texts/native/commons-io.NOTICE",
+        "url": "https://raw.githubusercontent.com/apache/commons-io/commons-io-1.4/NOTICE.txt"
+      }
+    ]
+  },
+  "Bouncy Castle": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["org.bouncycastle:*"] },
+    "via": "expo-updates",
+    "copyright": "Copyright (c) 2000-2024 The Legion of the Bouncy Castle Inc. (https://www.bouncycastle.org).",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/bouncy-castle.LICENSE",
+        "url": "https://raw.githubusercontent.com/bcgit/bc-java/r1rv81/LICENSE.md"
+      }
+    ]
+  },
+  "Brotli": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["org.brotli:*"] },
+    "via": "expo, expo-updates",
+    "copyright": "Copyright (c) 2009, 2010, 2013-2016 by the Brotli Authors.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/brotli.LICENSE",
+        "url": "https://raw.githubusercontent.com/google/brotli/v1.0.0/LICENSE"
+      }
+    ]
+  },
+  "Checker Framework": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["org.checkerframework:*"] },
+    "via": "expo-image, through Guava",
+    "copyright": "Michael Ernst, Werner M. Dietl",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/checker-framework.LICENSE",
+        "url": "https://raw.githubusercontent.com/typetools/checker-framework/checker-framework-2.5.5/LICENSE.txt"
+      }
+    ]
+  },
+  "Animal Sniffer": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["org.codehaus.mojo:animal-sniffer-annotations"] },
+    "via": "expo-image, through Guava",
+    "copyright": "Copyright (c) 2008 Kohsuke Kawaguchi and codehaus.org.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/animal-sniffer.LICENSE",
+        "url": "https://github.com/mojohaus/animal-sniffer/blob/animal-sniffer-parent-1.18/animal-sniffer-annotations/src/main/java/org/codehaus/mojo/animal_sniffer/IgnoreJRERequirement.java#L4-L24"
+      }
+    ]
+  },
+  "Bolts": {
+    "licence": "BSD-3-Clause",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["com.parse.bolts:*"] },
+    "via": "react-native, through Fresco",
+    "copyright": "Copyright (c) 2013-present, Facebook, Inc. All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/bolts.LICENSE",
+        "url": "https://raw.githubusercontent.com/BoltsFramework/Bolts-Android/1.4.0/LICENSE"
+      },
+      {
+        "file": "scripts/licence-texts/native/bolts.PATENTS",
+        "url": "https://raw.githubusercontent.com/BoltsFramework/Bolts-Android/1.4.0/PATENTS"
+      }
+    ]
+  },
+  "Kolibri": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["io.github.expo.kolibri:*"] },
+    "via": "expo",
+    "copyright": "Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/kolibri.LICENSE",
+        "url": "https://raw.githubusercontent.com/expo/kolibri/v0.2.3/LICENSE.txt"
+      }
+    ]
+  },
+  "Pika": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["io.github.expo.pika:*"] },
+    "via": "expo",
+    "copyright": "Copyright (c) 2026 Lukasz Kosmaty",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/pika.LICENSE",
+        "url": "https://raw.githubusercontent.com/expo/pika/v1.1.0/LICENSE.txt"
+      }
+    ]
+  },
+  "expo-modules-v2-android": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["io.github.expo:*"] },
+    "via": "expo",
+    "copyright": "Copyright (c) 2026-present 650 Industries, Inc. (aka Expo)",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/expo-modules-v2-android.LICENSE",
+        "url": "https://raw.githubusercontent.com/expo/expo-modules-v2-android/v0.2.5/LICENSE.txt"
+      }
+    ]
+  },
+  "Google Play In-App Review": {
+    "licence": "Play Core Software Development Kit Terms of Service",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.google.android.play:*"] },
+    "via": "expo-store-review",
+    "copyright": "Google LLC",
+    "files": []
+  },
+  "Google Play services": {
+    "licence": "Android Software Development Kit License",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.google.android.gms:*"] },
+    "via": "expo-store-review",
+    "copyright": "Google LLC",
+    "files": []
+  },
+  "bspatch": {
+    "licence": "BSD-2-Clause",
+    "platforms": ["ios", "android"],
+    "found": "vendored",
+    "matches": {},
+    "via": "expo-updates",
+    "copyright": "Copyright 2003-2005 Colin Percival",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/bspatch.LICENSE",
+        "url": "https://raw.githubusercontent.com/expo/expo/expo-updates%4058.0.18/packages/expo-updates/vendor/bspatch/LICENSE"
+      }
+    ]
+  },
+  "bzip2": {
+    "licence": "bzip2-1.0.6",
+    "platforms": ["android"],
+    "found": "vendored",
+    "matches": {},
+    "via": "expo-updates",
+    "copyright": "Copyright (C) 1996-2019 Julian Seward <jseward@acm.org>",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/bzip2.LICENSE",
+        "url": "https://raw.githubusercontent.com/expo/expo/expo-updates%4058.0.18/packages/expo-updates/android/src/main/cpp/third-party/bzip2/LICENSE"
+      }
+    ],
+    "vendored": ["node_modules/expo-updates/android/src/main/cpp/third-party/bzip2/LICENSE"]
+  },
+  "ASN1Decoder": {
+    "licence": "MIT",
+    "platforms": ["ios"],
+    "found": "vendored",
+    "matches": {},
+    "via": "expo-updates",
+    "copyright": "Copyright (c) 2017 Filippo",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/asn1decoder.LICENSE",
+        "url": "https://raw.githubusercontent.com/filom/ASN1Decoder/1.10.1/LICENSE"
+      }
+    ]
+  },
+  "structured-fields": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "vendored",
+    "matches": {},
+    "via": "expo-updates, through expo-structured-headers",
+    "copyright": "Julian Reschke",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/structured-fields.LICENSE",
+        "url": "https://raw.githubusercontent.com/expo/expo/expo-structured-headers%4058.0.1/packages/expo-structured-headers/android/LICENSE"
+      }
+    ],
+    "vendored": ["node_modules/expo-structured-headers/android/LICENSE"]
+  },
+  "xxhashct": {
+    "licence": "MIT",
+    "platforms": ["ios"],
+    "found": "vendored",
+    "matches": {},
+    "via": "react-native",
+    "copyright": "Copyright (c) 2015 Daniel Kirchner",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/xxhashct.LICENSE",
+        "url": "https://raw.githubusercontent.com/ekpyron/xxhashct/87a9dbcd06a36f31bbada4c0064db7e545b293df/LICENSE"
+      }
+    ]
+  },
+  "cppblog": {
+    "licence": "BSD-2-Clause",
+    "platforms": ["ios", "android"],
+    "found": "vendored",
+    "matches": {},
+    "via": "react-native-worklets",
+    "copyright": "Copyright (c) 2013 Juan Palacios juan.palacios.puyana@gmail.com",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/cppblog.LICENSE",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.25.0/text/BSD-2-Clause.txt"
+      }
+    ]
+  },
+  "Android Open Source Project": {
+    "licence": "Apache-2.0",
+    "platforms": ["android"],
+    "found": "vendored",
+    "matches": {},
+    "via": "react-native, react-native-gesture-handler",
+    "copyright": "Copyright (C) 2006 The Android Open Source Project\nCopyright (C) 2010 The Android Open Source Project",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/android-open-source-project.LICENSE",
+        "url": "https://android.googlesource.com/platform/libnativehelper/+/refs/heads/main/NOTICE"
+      }
+    ]
+  }
+}

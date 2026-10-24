@@ -46,6 +46,55 @@ export function collectPackageFolders(sources: Iterable<string>): string[] {
   return [...folders].sort();
 }
 
+/** `npx expo-modules-autolinking resolve -p <platform> --json`, the parts read here. */
+export interface AutolinkingResolve {
+  modules: {
+    packageName: string;
+    pods?: { podName: string; podspecDir: string }[];
+    projects?: { name: string; sourceDir: string }[];
+  }[];
+}
+
+/** `npx expo-modules-autolinking react-native-config -p <platform> --json`, the parts read here. */
+export interface RnConfig {
+  dependencies: Record<
+    string,
+    {
+      root: string;
+      platforms: {
+        ios?: { podspecPath?: string } | null;
+        android?: { sourceDir?: string } | null;
+      };
+    }
+  >;
+}
+
+/**
+ * The package folders whose native code Expo autolinks into either app (#160).
+ * Some ship no JavaScript, so the bundle's source maps never name them.
+ */
+export function autolinkedPackageFolders(
+  repoRoot: string,
+  resolves: readonly AutolinkingResolve[],
+  configs: readonly RnConfig[],
+): string[] {
+  const relative = (p: string): string => (p.startsWith(repoRoot) ? p.slice(repoRoot.length) : p);
+  const paths = [
+    ...resolves.flatMap((r) =>
+      r.modules.flatMap((m) => [
+        ...(m.pods ?? []).map((pod) => `${pod.podspecDir}/x`),
+        ...(m.projects ?? []).map((project) => `${project.sourceDir}/x`),
+      ]),
+    ),
+    ...configs.flatMap((c) =>
+      Object.values(c.dependencies)
+        .filter((d) => d.platforms.ios || d.platforms.android)
+        .map((d) => `${d.root}/x`),
+    ),
+  ];
+  return collectPackageFolders(paths.map(relative));
+}
+
 // LICENSE, LICENSE.md, LICENSE_FONT, LICENSE-MIT.txt, NOTICE. Not license.js (source
 // code), not LICENSE.closure-compiler, and not a LICENSES folder.
 export const isLicenceFile = (fileName: string): boolean =>

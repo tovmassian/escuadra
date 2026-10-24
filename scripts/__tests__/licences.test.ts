@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  autolinkedPackageFolders,
   buildLicenceData,
   collectPackageFolders,
   copyrightLines,
@@ -305,5 +306,69 @@ describe('buildLicenceData', () => {
     expect(() => buildLicenceData([pkg({ licence: undefined })], {})).toThrow(
       /licence "\(none\)" is not on the allowlist/,
     );
+  });
+});
+
+describe('autolinkedPackageFolders', () => {
+  const root = '/repo';
+  it('reduces Expo pods and projects and RN dependencies to package folders, nested ones kept', () => {
+    expect(
+      autolinkedPackageFolders(
+        root,
+        [
+          {
+            modules: [
+              {
+                packageName: 'expo-json-utils',
+                pods: [
+                  { podName: 'EXJSONUtils', podspecDir: '/repo/node_modules/expo-json-utils/ios' },
+                ],
+              },
+              {
+                packageName: 'expo-modules-core',
+                projects: [
+                  {
+                    name: 'expo-modules-core',
+                    sourceDir: '/repo/node_modules/expo/node_modules/expo-modules-core/android',
+                  },
+                ],
+              },
+            ],
+          },
+        ],
+        [
+          {
+            dependencies: {
+              'react-native-svg': {
+                root: '/repo/node_modules/react-native-svg',
+                platforms: { ios: {}, android: {} },
+              },
+            },
+          },
+        ],
+      ),
+    ).toEqual([
+      'node_modules/expo-json-utils',
+      'node_modules/expo/node_modules/expo-modules-core',
+      'node_modules/react-native-svg',
+    ]);
+  });
+  it('skips an RN dependency with no native side on either platform', () => {
+    expect(
+      autolinkedPackageFolders(
+        root,
+        [],
+        [
+          {
+            dependencies: {
+              'js-only': {
+                root: '/repo/node_modules/js-only',
+                platforms: { ios: null, android: null },
+              },
+            },
+          },
+        ],
+      ),
+    ).toEqual([]);
   });
 });

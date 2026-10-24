@@ -2,8 +2,9 @@ import { readFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { ALLOWED_LICENCES } from '../../scripts/licences';
-import { LICENCE_TEXTS, PACKAGES, UNICODE_LICENSE } from '../licences.generated';
-import { licenceParagraphs, packageKey } from '../licencesView';
+import { NATIVE_ALLOWED_LICENCES } from '../../scripts/native-licences';
+import { LICENCE_TEXTS, NATIVE_LIBRARIES, PACKAGES, UNICODE_LICENSE } from '../licences.generated';
+import { licenceParagraphs, packageKey, softwareRows } from '../licencesView';
 
 describe('licenceParagraphs', () => {
   it('joins hard-wrapped lines and splits on blank lines', () => {
@@ -72,5 +73,90 @@ describe('lib/licences.generated.ts', () => {
 
   it('includes react-native', () => {
     expect(PACKAGES.some((p) => p.name === 'react-native')).toBe(true);
+  });
+});
+
+describe('softwareRows', () => {
+  const pkg = {
+    name: 'expo',
+    version: '58.0.19',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 650 Industries',
+    texts: [0],
+  };
+  const native = {
+    name: 'AndroidX',
+    platforms: ['android'] as const,
+    licence: 'Apache-2.0',
+    copyright: 'Copyright (C) The Android Open Source Project',
+    texts: [1],
+  };
+  const both = {
+    name: 'fmt',
+    platforms: ['ios', 'android'] as const,
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2012 - present, Victor Zverovich\nand fmt contributors',
+    texts: [2],
+  };
+  it('merges packages and native libraries into one list, case-insensitively by name', () => {
+    expect(softwareRows([pkg], [both, native]).map((r) => r.title)).toEqual([
+      'AndroidX',
+      'expo 58.0.19',
+      'fmt',
+    ]);
+  });
+  it('shows a package with its version, a native library with its platforms', () => {
+    const [androidx, expo, fmt] = softwareRows([pkg], [native, both]);
+    expect(expo).toEqual({
+      key: 'expo@58.0.19',
+      title: 'expo 58.0.19',
+      meta: 'MIT · Copyright (c) 650 Industries',
+      texts: [0],
+    });
+    expect(androidx).toEqual({
+      key: 'native:AndroidX',
+      title: 'AndroidX',
+      meta: 'Apache-2.0 · Android · Copyright (C) The Android Open Source Project',
+      texts: [1],
+    });
+    expect(fmt?.meta).toBe(
+      'MIT · iOS, Android · Copyright (c) 2012 - present, Victor Zverovich and fmt contributors',
+    );
+  });
+});
+
+describe('NATIVE_LIBRARIES', () => {
+  it('resolves every text index, gives every library a copyright, and allows only the native allowlist', () => {
+    for (const l of NATIVE_LIBRARIES) {
+      expect(l.copyright, l.name).not.toBe('');
+      expect(NATIVE_ALLOWED_LICENCES, `${l.name} ${l.licence}`).toContain(l.licence);
+      for (const i of l.texts) expect(LICENCE_TEXTS[i], `${l.name} → ${i}`).toBeTypeOf('string');
+    }
+  });
+  it('names the libraries #160 lists', () => {
+    const names = NATIVE_LIBRARIES.map((l) => l.name);
+    for (const expected of [
+      'SDWebImage',
+      'libavif',
+      'libdav1d',
+      'ReachabilitySwift',
+      'Folly',
+      'boost',
+      'fmt',
+      'glog',
+      'DoubleConversion',
+      'Glide',
+      'OkHttp',
+      'Fresco',
+      'AndroidX',
+      'Kotlin',
+    ]) {
+      expect(names, expected).toContain(expected);
+    }
+  });
+  it('lists each library once, sorted by name', () => {
+    const names = NATIVE_LIBRARIES.map((l) => l.name);
+    expect(new Set(names).size).toBe(names.length);
+    expect(names).toEqual([...names].sort((a, b) => a.localeCompare(b, 'en')));
   });
 });
