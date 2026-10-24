@@ -169,16 +169,14 @@ yourself.
    captures are gitignored, so ones left from an earlier run would otherwise be handed
    over. Look at a few captures in each language (`design/store/<code>/`,
    `design/play/<code>/`) before going on: they are web renders, so a layout that breaks
-   only in one language shows here first. Before capturing, make sure no other dev server
-   is listening on ports 8082 or 8083 (another worktree's): the capture scripts would
-   shoot its code.
+   only in one language shows here first.
 3. Walk `dist/store-listing/paste-sheet.md` with the owner, one store at a time, noting in
    the conversation what they confirm entered. Apple's fields and App Privacy go in before
    Submit for Review; Play's listing, release notes and Data safety when the build is
-   uploaded; each store's privacy URL together with its answers. A language entered for the
-   first time also needs, in App Store Connect, its Name (_Escuadra_), Privacy Policy URL
-   and Support URL, and in Play Console its App name (_Escuadra_): take them from
-   `store/declarations.md`.
+   uploaded; each store's privacy URL (Apple's one per locale, Play's one for the app)
+   together with its answers. A language entered for the first time also needs, in App
+   Store Connect, its Name (_Escuadra_), Privacy Policy URL and Support URL, and in Play
+   Console its App name (_Escuadra_): take them from `store/declarations.md`.
 4. After the owner has tagged `vX.Y.Z` and published its GitHub Release (step 8), and
    only when the sheet marked the images _paste_, offer to attach them to its GitHub
    Release, and do it on the owner's OK:

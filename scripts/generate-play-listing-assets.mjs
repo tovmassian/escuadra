@@ -7,6 +7,7 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { killServerTree, startExpoWeb, waitForServer } from './dev-server.mjs';
+import { assertPortFree } from './port-free.ts';
 import { resolveLanguageArg } from './screenshot-profiles.ts';
 import { seedLanguage } from './seed-language.mjs';
 
@@ -84,6 +85,7 @@ async function generateFeatureGraphic(browser) {
 // Entry point
 // ---------------------------------------------------------------------------
 
+await assertPortFree(PORT);
 const server = startExpoWeb(PORT);
 
 let browser;

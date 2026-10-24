@@ -17,6 +17,7 @@
 import { mkdir, readFile } from 'node:fs/promises';
 import { chromium } from 'playwright';
 import { killServerTree, startExpoWeb, waitForServer } from './dev-server.mjs';
+import { assertPortFree } from './port-free.ts';
 import { seedLanguage } from './seed-language.mjs';
 import {
   assertProfileDimensions,
@@ -808,6 +809,7 @@ async function captureTheme(browser, colorScheme, suffix) {
 // Entry point
 // ---------------------------------------------------------------------------
 
+await assertPortFree(PORT);
 const server = startExpoWeb(PORT);
 
 let browser;
