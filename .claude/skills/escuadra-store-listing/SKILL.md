@@ -36,11 +36,11 @@ main                           release/X.Y.Z                  GitHub, the stores
 
 ## Which mode
 
-| The owner asks to…                                               | Mode              | Where                                         |
-| ---------------------------------------------------------------- | ----------------- | --------------------------------------------- |
-| draft the listing for X.Y.Z, write What's new, change a field    | Draft             | `main`, after the cut (step 4)                |
-| change the listing between versions, e.g. a tournament promotion | Draft, no version | `main`                                        |
-| enter, paste or submit the listing for X.Y.Z                     | Ship              | `release/X.Y.Z`, after `store-build` (step 7) |
+| The owner asks to…                                               | Mode              | Where                                                                       |
+| ---------------------------------------------------------------- | ----------------- | --------------------------------------------------------------------------- |
+| draft the listing for X.Y.Z, write What's new, change a field    | Draft             | `main`, after the cut and the CHANGELOG section (steps 2–3; this is step 4) |
+| change the listing between versions, e.g. a tournament promotion | Draft, no version | `main`                                                                      |
+| enter, paste or submit the listing for X.Y.Z                     | Ship              | `release/X.Y.Z`, after `store-build` (step 6); this is step 7               |
 
 ## Draft mode
 
@@ -59,15 +59,17 @@ main                           release/X.Y.Z                  GitHub, the stores
    `git diff "$t" -- i18n/en.ts` (what leaves the device), the `@telemetrydeck/sdk` and
    `expo-updates` lines of `git diff "$t" -- package.json`, and
    `git diff --stat "$t" -- design/screens/ app/store/ i18n/` for the listed shots. A
-   change there means the images are entered again: the bundle marks them _paste_ when the
-   listed shots, the feature graphic route or any catalog changed since the tag.
+   change in that last diff means the images are entered again: the bundle marks them
+   _paste_ when `store/screenshots.json`, a listed shot, `app/store/feature-graphic.tsx`
+   or anything under `i18n/` changed since the tag.
 
 2. **Ask the owner, one question at a time**, with AskUserQuestion: a draft, the
    CHANGELOG line it comes from, your recommendation first, and what each option changes.
    In this order:
    1. What's new, for a version: English, at most 500 characters, from the section's
       user-facing lines, without PR numbers.
-   2. Each other field: keep it, or an edit for a named CHANGELOG line. Most versions keep
+   2. Each other field, and on a version that changes it the feature graphic's tagline
+      (`store.tagline`): keep it, or an edit for a named CHANGELOG line. Most versions keep
       them.
    3. The screenshot set: keep it, or swap in a screen the version added
       (`design/SCREENS.md` says what each capture shows; at most 8).
@@ -94,7 +96,8 @@ main                           release/X.Y.Z                  GitHub, the stores
 
 6. **Write the review sheets:** `node scripts/store-bundle.ts --review` writes
    `dist/store-listing/review/<lang>.md`, changed fields only. The owner sends them to
-   the native reviewers (#145). The PR merges only after all four sign off.
+   the native reviewers (#145). The PR merges only after every language with a review
+   sheet is signed off.
 
 7. **Open the PR.** `npm run check`, then a PR into `main` titled
    `docs(store): the X.Y.Z listing (#N)`, N being the issue the listing work runs under,
@@ -116,15 +119,16 @@ The public App Store page (https://apps.apple.com/us/app/escuadra/id6810705505) 
 live subtitle and description; ask the owner to paste the keywords and promotional text
 from App Store Connect. Use the six headings `FIELDS` in `scripts/store-listing.ts` gives,
 under `# English`; each translation's title is its language's name in itself
-(`LANGUAGE_NAMES` in `i18n/names.ts`). Confirm or change the proposed
-`store/screenshots.json` with the owner. The first run also translates the feature
+(`LANGUAGE_NAMES` in `i18n/names.ts`). Confirm or change `store/screenshots.json` with
+the owner, and, with no baseline tag to compare, confirm `store/declarations.md` whole.
+The first run also translates the feature
 graphic's tagline, `store.tagline` in `i18n/es.ts`, `fr.ts`, `it.ts` and `de.ts` (they hold
 `store: en.store` until then), drops `'store.'` from each language's deferred list in
-`i18n/leaves.ts`, and runs its translations through the same expert loop. Add each one,
-with the English, at the end of that language's review sheet
-(`dist/store-listing/review/<lang>.md`), after the last `--review` run, which rewrites the
-sheets, under `## Feature graphic tagline`, so the reviewer
-signs it off with the listing. It rides in the same PR and pick. Every field is new, so
+`i18n/leaves.ts`, and runs its translations through the same expert loop. After the last
+`--review` run (it rewrites the sheets), append to each
+`dist/store-listing/review/<lang>.md` a `## Feature graphic tagline` section with the
+English and that language's `store.tagline`, so the reviewer signs it off with the
+listing. It rides in the same PR and pick. Every field is new, so
 every field is drafted, translated, reviewed and entered.
 
 ### Between versions
@@ -135,34 +139,39 @@ the App Store only Promotional text can change between versions; any other App S
 waits for the next version, whose sheet marks it _paste_ again. Steps 3–6 run as above (the
 review sheets compare with the live version's tag). Title the PR
 `docs(store): <the change> in the listing (#N)` and pick nothing. Once it is merged, run
-`node scripts/store-bundle.ts` on `main`: its sheet holds text only, with no images and no
-What's new. Walk it with the owner, who enters only Promotional text in App Store Connect
-and the Play listing fields in Play Console (Play reviews a listing edit without a release);
-every other App Store field on the sheet waits for the next version's sheet.
+`node scripts/store-bundle.ts` on `main`: its sheet holds text and declarations, with no
+images. Walk it with the owner, who enters only Promotional text in App Store Connect and
+the Play listing fields in Play Console (Play reviews a listing edit without a release).
+If `main`'s `app.json` is already past the live version, the sheet also shows What's new:
+do not enter it.
 
 ## Ship mode
 
-Only after `store-build` has run on the branch (step 6). Never trigger it.
+Only after `store-build` has run on the branch (step 6). Never trigger `store-build`
+yourself.
 
 1. From a clean checkout of `release/X.Y.Z`: `npm ci`, then `node scripts/store-bundle.ts`.
    Run it before the owner tags `vX.Y.Z` (step 8): when the tag
    exists it becomes the baseline, so a re-run marks everything _skip_ and empties
-   `dist/store-listing/app-store/` and `play/`, leaving step 4 nothing to attach.
+   `dist/store-listing/app-store/` and `play/`, leaving this mode's step 4 nothing to
+   attach.
 2. If it stops, naming missing captures, capture every language and run it again:
 
    ```bash
    for code in en es fr it de; do npm run shots:store -- --lang=$code && npm run shots:play -- --lang=$code && npm run gen:play-assets -- --lang=$code || break; done
    ```
 
-   Look at a few captures in each language before going on: they are web renders, so a
-   layout that breaks only in one language shows here first.
+   Look at a few captures in each language (`design/store/<code>/`, `design/play/<code>/`)
+   before going on: they are web renders, so a layout that breaks only in one language
+   shows here first.
 
 3. Walk `dist/store-listing/paste-sheet.md` with the owner, one store at a time, ticking
    what they confirm entered. Apple's fields and App Privacy go in before Submit for
    Review; Play's listing, release notes and Data safety when the build is uploaded; each
    store's privacy URL together with its answers.
-4. After the owner tags `vX.Y.Z` (step 8), and only when the sheet marked the images
-   _paste_, offer to attach them to its GitHub Release, and do it on the owner's OK:
+4. After the owner has tagged `vX.Y.Z` and published its GitHub Release (step 8), and
+   only when the sheet marked the images _paste_, offer to attach them to its GitHub
+   Release, and do it on the owner's OK:
 
    ```bash
    (cd dist/store-listing && zip -qr app-store.zip app-store && zip -qr play.zip play)

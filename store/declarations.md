@@ -46,7 +46,7 @@ Entered when the build is uploaded, with the privacy policy URL.
 - Encrypted in transit: yes.
 - Deletion requests: none offered. The statistics carry only a hashed random installation
   ID and cannot be traced to a person, and switching off "Usage statistics" in Settings
-  stops all sending.
+  stops all usage statistics.
 - Consistent with the EAS Update answer in the Android 1.0 listing.
 
 ## Not declared

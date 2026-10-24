@@ -77,8 +77,9 @@ What the fingerprint can't see:
   reporting, a new endpoint — even in pure JS — ship in a store build, together with the
   privacy policy, App Privacy and Data safety.
 - **Store reviews.** A reviewer's device receives updates for its runtime like anyone's.
-- Store listing text and screenshots, written in `store/` and entered in Play Console and
-  App Store Connect from a paste sheet ([Change the store listing](#change-the-store-listing)),
+- Store listing text and screenshots (`store/` holds the text and the screenshot list),
+  entered in Play Console and App Store Connect from a paste sheet
+  ([Change the store listing](#change-the-store-listing)),
   and the web privacy pages (`scripts/privacy-pages.ts`), published on `gh-pages`.
   The pages are versioned: `privacy.html` is the 1.x policy and
   2.0's go in `privacy/2/`. A store's privacy URL moves to a version's
@@ -206,7 +207,8 @@ A new version from `main`:
    declarations _paste_ or _skip_ against the last version's tag. When it stops for
    missing captures, capture every language and run it again:
    `for code in en es fr it de; do npm run shots:store -- --lang=$code && npm run shots:play -- --lang=$code && npm run gen:play-assets -- --lang=$code || break; done`.
-   Enter what says _paste_: Apple's before Submit for Review, Play's with the release.
+   Enter what says _paste_: Apple's before Submit for Review, Play's when the build is
+   uploaded.
 8. iOS: Submit for Review in App Store Connect. Android: promote the build in Play
    Console. Close each freeze once approved.
    Then tag the commit the build came from (its `store-build` run names it) and publish its
@@ -229,7 +231,9 @@ A runtime-changing fix to a released version (1.0.1):
 2. A PR into `release/1.0.1` with the fix and `app.json` at `1.0.1`. The version's
    `CHANGELOG.md` section goes in that PR when `release/1.0.0` has a `CHANGELOG.md`,
    otherwise on `main` with the pick.
-3. Its What's new as in step 4 above, then steps 6–8 as above, and take the fix to `main`.
+3. Its What's new as in step 4 above, then steps 5–8 as above, and take the fix to
+   `main`. A 1.x branch predates `store/`: there the What's new is written in the consoles
+   by hand.
 
 `store-build` refuses a production build when `app.json` doesn't match the branch, when the
 platform is locked to another runtime, and on the same runtime unless `rebuild` is on,
@@ -247,9 +251,9 @@ Between versions, such as promotional text for a tournament, the skill drafts th
 on `main`, and it merges after the native sign-offs. From the sheet
 `node scripts/store-bundle.ts` writes on `main`, you enter Promotional text in App Store
 Connect and the listing fields in Play Console; any other App Store field changes only with
-a version, so it waits for the next version's sheet. That sheet holds no images and no
-What's new: both come only with a version. The next version's sheet marks the change
-_paste_ again, because only a version's tag records what is live.
+a version, so it waits for the next version's sheet. The sheet written on `main` holds no
+images, and no What's new to enter: both come only with a version. The next version's sheet
+marks the change _paste_ again, because only a version's tag records what is live.
 
 ### Cut preview builds
 

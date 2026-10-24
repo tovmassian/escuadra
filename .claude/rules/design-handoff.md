@@ -33,7 +33,7 @@ regenerate them, or the design side is working from a stale picture.
 `design/play/` (Google Play, 1080×1920 JPEG, `npm run shots:play`) are the
 same screens re-captured at each store's listing dimensions — both
 gitignored and not part of the `design/screens/` handoff surface. They are
-regenerated for a store build that changes the listing's images, never committed:
+regenerated when the paste sheet marks the listing's images _paste_, never committed:
 `node scripts/store-bundle.ts` copies the listed ones (`store/screenshots.json`) into
 `dist/store-listing/` for the consoles and the GitHub Release (`docs/release.md`, Cut a
 release, step 7). `npm run gen:play-assets` additionally writes

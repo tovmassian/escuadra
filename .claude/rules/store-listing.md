@@ -22,9 +22,8 @@ walk-through the `escuadra-store-listing` skill.
 - `store/screenshots.json`: the listing's shots in order, named as in `design/screens/`;
   the same set in every language and both stores, at most 8.
 - `store/declarations.md`: English, entered once per app: the name, URLs, category, age
-  rating, and the App Privacy and Data safety answers. What they mean is the owner's
-  (guardrail 7), and they agree with `en.about.privacy`. A change to what leaves the device
-  updates the file in the same PR (`.claude/rules/privacy-telemetry.md`).
+  rating, and the App Privacy and Data safety answers
+  (`.claude/rules/privacy-telemetry.md` says when they change).
 - `STORE_LOCALES` in `scripts/store-listing.ts`: each language's locale in each console.
 - The feature graphic's tagline is `store.tagline` in the catalogs, because
   `app/store/feature-graphic.tsx` is a rendered route (`.claude/rules/design-handoff.md`).
@@ -53,6 +52,6 @@ to its limit.
 `vX.Y.Z` tag at or below `app.json`'s version, found by name, because a version's tag sits
 on its release branch. It marks each field, the images and the declarations _paste_ or
 _skip_ and writes `dist/store-listing/paste-sheet.md`; on a `release/X.Y.Z` checkout it
-also copies the images there. `--review` writes the reviewers' sheets to
-`dist/store-listing/review/`. It has no npm script, because a new one would move the
-fingerprint; nothing under `store/` feeds it.
+also copies the images to `dist/store-listing/` when they are _paste_. `--review` writes
+the reviewers' sheets to `dist/store-listing/review/`. It has no npm script, because a new
+one would move the fingerprint; nothing under `store/` feeds it.
