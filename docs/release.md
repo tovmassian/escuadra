@@ -221,9 +221,9 @@ A new version from `main`:
    `(cd dist/store-listing && zip -qr app-store.zip app-store && zip -qr play.zip play)`,
    then
    `gh release upload vX.Y.Z dist/store-listing/app-store.zip dist/store-listing/play.zip`.
-   They stay out of git: they are large and change with every release. No workflow runs
-   on tags. Play's 12-tester, 14-day closed test gates only a new app's first production
-   release; later updates go straight to review.
+   They stay out of git: they are large. No workflow runs on tags. Play's 12-tester,
+   14-day closed test gates only a new app's first production release; later updates go
+   straight to review.
 
 A runtime-changing fix to a released version (1.0.1):
 
@@ -232,8 +232,8 @@ A runtime-changing fix to a released version (1.0.1):
    `CHANGELOG.md` section goes in that PR when `release/1.0.0` has a `CHANGELOG.md`,
    otherwise on `main` with the pick.
 3. Its What's new as in step 4 above, then steps 5–8 as above, and take the fix to
-   `main`. A 1.x branch predates `store/`: there the What's new is written in the consoles
-   by hand.
+   `main`. A 1.x branch predates `store/`: there skip steps 4 and 7 and enter the What's
+   new in the consoles by hand.
 
 `store-build` refuses a production build when `app.json` doesn't match the branch, when the
 platform is locked to another runtime, and on the same runtime unless `rebuild` is on,
@@ -252,8 +252,9 @@ on `main`, and it merges after the native sign-offs. From the sheet
 `node scripts/store-bundle.ts` writes on `main`, you enter Promotional text in App Store
 Connect and the listing fields in Play Console; any other App Store field changes only with
 a version, so it waits for the next version's sheet. The sheet written on `main` holds no
-images, and no What's new to enter: both come only with a version. The next version's sheet
-marks the change _paste_ again, because only a version's tag records what is live.
+images, and any What's new on it is not entered: both come only with a version. The next
+version's sheet marks the change _paste_ again, because only a version's tag records what
+is live.
 
 ### Cut preview builds
 

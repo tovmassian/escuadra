@@ -34,8 +34,8 @@ promotion-eligible phone screenshot size, via `npm run shots:play`. Neither
 takes the launch intro or the How to play tips, which are not listing shots,
 and no shot in them shows a tip. Both are
 gitignored rather than committed — neither is part of this handoff surface,
-just release artefacts, regenerated for each release and attached to its GitHub
-Release (`docs/release.md`, Cut a release) — but the same web-rendered,
+just listing artefacts, regenerated when the paste sheet marks the images _paste_
+(`docs/release.md`, Cut a release, step 7) — but the same web-rendered,
 not device truth caveat above applies to them too, arguably more: a store
 listing represents the real app to a prospective player more directly than a
 design handoff does.

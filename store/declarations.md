@@ -44,9 +44,10 @@ Entered when the build is uploaded, with the privacy policy URL.
 - App info and performance, Crash logs: collected, not shared, purpose App functionality
   (the expo-updates error message).
 - Encrypted in transit: yes.
-- Deletion requests: none offered. The statistics carry only a hashed random installation
-  ID and cannot be traced to a person, and switching off "Usage statistics" in Settings
-  stops all usage statistics.
+- Deletion requests: none offered. The statistics carry a hashed random identifier (not
+  the update check's) and a random session code, not linked to the user, and switching off
+  "Usage statistics" in Settings stops the usage statistics; the app-update check keeps
+  running.
 - Consistent with the EAS Update answer in the Android 1.0 listing.
 
 ## Not declared
