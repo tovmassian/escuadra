@@ -3,8 +3,13 @@ import { useState } from 'react';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useT } from '@/i18n/useT';
-import { LICENCE_TEXTS, PACKAGES, UNICODE_LICENSE } from '@/lib/licences.generated';
-import { BUNDLED_FONTS, UNICODE_CREDIT, licenceParagraphs, packageKey } from '@/lib/licencesView';
+import {
+  LICENCE_TEXTS,
+  NATIVE_LIBRARIES,
+  PACKAGES,
+  UNICODE_LICENSE,
+} from '@/lib/licences.generated';
+import { BUNDLED_FONTS, UNICODE_CREDIT, licenceParagraphs, softwareRows } from '@/lib/licencesView';
 import { spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
@@ -14,7 +19,8 @@ const UNICODE_KEY = 'unicode';
 // About, as About and Privacy are): the notices other people's data and code
 // ask to travel with the app. The Unicode notice for the country names opens
 // expanded, because it is the one this page exists for; the fonts are named,
-// since each font file carries its own notice; every bundled package follows,
+// since each font file carries its own notice; every bundled or autolinked package
+// and every native library the builds link (#160) follow, in one alphabetical list,
 // its full text a tap away. Notices are shown in English, as written, and
 // everything is in the bundle, so the page works offline and sends nothing.
 // What is expanded resets each time the page opens.
@@ -45,6 +51,8 @@ export default function Licences() {
     meta: { ...typography.secondarySmall, color: colors.textMuted },
     text: { ...typography.descriptionSmall, color: colors.textSecondary, marginTop: spacing.xs },
   });
+
+  const software = softwareRows(PACKAGES, NATIVE_LIBRARIES);
 
   const body = (texts: readonly string[]) =>
     texts.flatMap((text, n) =>
@@ -114,14 +122,14 @@ export default function Licences() {
 
         <View style={styles.section}>
           <Text style={styles.sectionName} accessibilityRole="header">
-            {t.about.licences.software} · {PACKAGES.length}
+            {t.about.licences.software} · {software.length}
           </Text>
-          {PACKAGES.map((p) =>
+          {software.map((r) =>
             row(
-              packageKey(p),
-              `${p.name} ${p.version}`,
-              `${p.licence} · ${p.copyright.replace(/\n/g, ' ')}`,
-              p.texts.flatMap((i) => LICENCE_TEXTS[i] ?? []),
+              r.key,
+              r.title,
+              r.meta,
+              r.texts.flatMap((i) => LICENCE_TEXTS[i] ?? []),
             ),
           )}
         </View>

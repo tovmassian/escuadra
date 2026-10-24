@@ -65,3 +65,51 @@ export function licenceParagraphs(text: string): string[] {
 
 export const packageKey = (p: Pick<BundledPackage, 'name' | 'version'>): string =>
   `${p.name}@${p.version}`;
+
+/** One row of the Software section: a bundled package or a native library. */
+export interface SoftwareRow {
+  key: string;
+  title: string;
+  meta: string;
+  /** Indices into `LICENCE_TEXTS`. */
+  texts: readonly number[];
+}
+
+// Platform names are proper nouns, the same in every language, like package names.
+const PLATFORM_NAMES = { ios: 'iOS', android: 'Android' } as const;
+
+/**
+ * The Software section as one alphabetical list (#160), so a reader looking for
+ * SDWebImage or expo-image finds either in the same place. A package shows its
+ * version; a native library shows the platforms that link it instead, since pod
+ * versions float within their podspec ranges.
+ */
+export function softwareRows(
+  packages: readonly BundledPackage[],
+  natives: readonly NativeLibrary[],
+): SoftwareRow[] {
+  const oneLine = (copyright: string): string => copyright.replace(/\n/g, ' ');
+  const rows: { sortName: string; row: SoftwareRow }[] = [
+    ...packages.map((p) => ({
+      sortName: p.name,
+      row: {
+        key: packageKey(p),
+        title: `${p.name} ${p.version}`,
+        meta: `${p.licence} · ${oneLine(p.copyright)}`,
+        texts: p.texts,
+      },
+    })),
+    ...natives.map((n) => ({
+      sortName: n.name,
+      row: {
+        key: `native:${n.name}`,
+        title: n.name,
+        meta: `${n.licence} · ${n.platforms.map((p) => PLATFORM_NAMES[p]).join(', ')} · ${oneLine(n.copyright)}`,
+        texts: n.texts,
+      },
+    })),
+  ];
+  return rows
+    .sort((a, b) => a.sortName.localeCompare(b.sortName, 'en', { sensitivity: 'base' }))
+    .map((r) => r.row);
+}
