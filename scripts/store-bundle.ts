@@ -36,7 +36,7 @@ const OUT = path.join(ROOT, 'dist', 'store-listing');
 const read = (file: string) => readFileSync(path.join(ROOT, file), 'utf8');
 const exists = (file: string) => existsSync(path.join(ROOT, file));
 const git = (...args: string[]) =>
-  execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'ignore'] });
+  execFileSync('git', args, { cwd: ROOT, encoding: 'utf8', stdio: ['ignore', 'pipe', 'pipe'] });
 const listingFile = (language: ListingLanguage) => `store/listing/${language}.md`;
 
 /** A file as it was at `tag`; null with no tag, or when the file did not exist then. */
@@ -45,17 +45,19 @@ function atTag(tag: string | null, file: string): string | null {
   try {
     return git('show', `${tag}:${file}`);
   } catch {
+    // The tag exists (it came from `git tag --list`), so a failure here is a path absent at it.
     return null;
   }
 }
 
-/** Whether every path is the same now as at `tag`. */
+/** Whether every path matches `tag`. Exit 1 means they differ; any other failure is real. */
 function sameAsTag(tag: string, paths: readonly string[]): boolean {
   try {
     git('diff', '--quiet', tag, '--', ...paths);
     return true;
-  } catch {
-    return false;
+  } catch (error) {
+    if ((error as { status?: number }).status === 1) return false;
+    throw error;
   }
 }
 
@@ -104,11 +106,12 @@ function imageStatus(shots: readonly string[]): ImageStatus {
   if (tag === null) return 'paste';
   const before = atTag(tag, 'store/screenshots.json');
   const sameSet = before !== null && JSON.stringify(JSON.parse(before)) === JSON.stringify(shots);
-  const screens = [
+  const watched = [
     ...shots.map((shot) => `design/screens/${shot}.png`),
     'app/store/feature-graphic.tsx',
+    'i18n/',
   ];
-  return sameSet && sameAsTag(tag, screens) ? 'skip' : 'paste';
+  return sameSet && sameAsTag(tag, watched) ? 'skip' : 'paste';
 }
 
 function copyImages(shots: readonly string[]): void {

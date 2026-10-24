@@ -165,9 +165,10 @@ reach it. With no such tag, everything is _paste_.
   version, even if its text repeats, and _skip_ for an off-cycle edit, which has no
   version to carry it.
 - **The images** are _skip_ when `store/screenshots.json`, the listed shots in
-  `design/screens/` (committed, and deterministic) and `app/store/feature-graphic.tsx`
-  all equal the tag's. A catalog change that alters a listed screen only in a translation,
-  or changes `store.tagline`, is not seen; the skill asks about it.
+  `design/screens/` (committed, and deterministic), `app/store/feature-graphic.tsx` and
+  the catalogs in `i18n/` all equal the tag's. Any catalog change marks them _paste_, so a
+  translated screen or tagline is never left stale; the cost is a recapture a version did
+  not strictly need.
 - **The declarations** are _skip_ when `store/declarations.md` equals the tag's.
 
 An off-cycle paste between versions shows as _paste_ again at the next version, which
