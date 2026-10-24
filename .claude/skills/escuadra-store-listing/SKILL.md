@@ -119,14 +119,33 @@ under `# English`; each translation's title is its language's name in itself
 `store/screenshots.json` with the owner. The first run also translates the feature
 graphic's tagline, `store.tagline` in `i18n/es.ts`, `fr.ts`, `it.ts` and `de.ts` (they hold
 `store: en.store` until then), drops `'store.'` from each language's deferred list in
-`i18n/leaves.ts`, and sends it through the same expert loop and native review as the
-listing. Every field is new, so every field is drafted, translated, reviewed and entered.
+`i18n/leaves.ts`, and runs its translations through the same expert loop. Add each one,
+with the English, at the end of that language's review sheet
+(`dist/store-listing/review/<lang>.md`) under `## Feature graphic tagline`, so the reviewer
+signs it off with the listing. It rides in the same PR and pick; that pick then changes
+catalogs too, so `release-gate` runs its fingerprint check rather than treating it as docs,
+and it passes, because catalogs are JavaScript. Every field is new, so every field is
+drafted, translated, reviewed and entered.
+
+### Between versions
+
+An off-cycle change, such as promotional text for a tournament, has no version: skip step 1's
+CHANGELOG section and milestone and step 2's What's new, and ask only which fields change. On
+the App Store only Promotional text can change between versions; any other App Store field
+waits for the next version, whose sheet marks it _paste_ again. Steps 3–6 run as above (the
+review sheets compare with the live version's tag). Title the PR
+`docs(store): <the change> in the listing (#N)` and pick nothing. Once it is merged, run
+`node scripts/store-bundle.ts` on `main`: its sheet holds text only, with no images and no
+What's new, and you walk it with the owner as in ship mode, step 3.
 
 ## Ship mode
 
 Only after `store-build` has run on the branch (step 6). Never trigger it.
 
 1. From a clean checkout of `release/X.Y.Z`: `npm ci`, then `node scripts/store-bundle.ts`.
+   Run it before the owner tags `vX.Y.Z` (step 8), once the captures are in: when the tag
+   exists it becomes the baseline, so a re-run marks everything _skip_ and empties
+   `dist/store-listing/app-store/` and `play/`, leaving step 4 nothing to attach.
 2. If it stops, naming missing captures, capture every language and run it again:
 
    ```bash
