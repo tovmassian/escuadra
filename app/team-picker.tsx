@@ -196,8 +196,10 @@ export default function TeamPicker() {
   // tab always opens unfiltered rather than silently re-applying a league
   // picked before a detour through the other tab, while its pill row was
   // swapped out. The search query deliberately survives the switch instead —
-  // a name typed on one tab may be worth checking on the other.
+  // a name typed on one tab may be worth checking on the other. Tapping the
+  // tab already selected is not a switch, and keeps its filter (#190).
   const changeKind = (kind: Kind) => {
+    if (kind === filter) return;
     setFilter(kind);
     setLeague('ALL');
     setConfederation('ALL');
