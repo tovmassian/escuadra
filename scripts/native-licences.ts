@@ -6,7 +6,12 @@ import type { NativeLibrary } from '../lib/licencesView.ts';
 
 // Decided by the owner on 2026-10-24 (#160): the licences the native libraries
 // already shipping are under, and the terms of Google's proprietary Play
-// libraries, which are named in the sheet with no text. Widening it is the
+// libraries, which are named in the sheet with no text. The owner widened it
+// in a second round on 2026-10-24 for Glide (BSD-2-Clause-Views), the
+// libjpeg-turbo inside Fresco (IJG, Zlib), the code Hermes bundles (LLVM's
+// licences, Unlicense) and the Public Suffix List inside OkHttp (MPL-2.0).
+// An entry's licence is compared as a whole string, so a library under several
+// licences at once is listed by its full expression. Widening it is the
 // owner's decision, like ALLOWED_LICENCES.
 export const NATIVE_ALLOWED_LICENCES: readonly string[] = [
   'Apache-2.0',
@@ -15,6 +20,15 @@ export const NATIVE_ALLOWED_LICENCES: readonly string[] = [
   'BSD-3-Clause',
   'BSL-1.0',
   'bzip2-1.0.6',
+  'BSD-2-Clause-Views',
+  'IJG',
+  'Zlib',
+  'Apache-2.0 WITH LLVM-exception',
+  'NCSA',
+  'Unlicense',
+  'MPL-2.0',
+  'IJG AND BSD-3-Clause AND Zlib',
+  'Apache-2.0 WITH LLVM-exception AND NCSA',
   'Play Core Software Development Kit Terms of Service',
   'Android Software Development Kit License',
 ];

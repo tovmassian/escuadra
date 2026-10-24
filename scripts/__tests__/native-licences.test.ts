@@ -147,16 +147,25 @@ describe('matchesPattern', () => {
   });
 });
 
-it('allows exactly the six licences and the two Google terms the owner accepted', () => {
+it('allows exactly the licences, the two compound expressions and the two Google terms the owner accepted', () => {
   expect([...NATIVE_ALLOWED_LICENCES].sort()).toEqual(
     [
       'Android Software Development Kit License',
       'Apache-2.0',
+      'Apache-2.0 WITH LLVM-exception',
+      'Apache-2.0 WITH LLVM-exception AND NCSA',
       'BSD-2-Clause',
+      'BSD-2-Clause-Views',
       'BSD-3-Clause',
       'BSL-1.0',
+      'IJG',
+      'IJG AND BSD-3-Clause AND Zlib',
       'MIT',
+      'MPL-2.0',
+      'NCSA',
       'Play Core Software Development Kit Terms of Service',
+      'Unlicense',
+      'Zlib',
       'bzip2-1.0.6',
     ].sort(),
   );

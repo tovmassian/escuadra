@@ -139,7 +139,7 @@
     "platforms": ["ios", "android"],
     "found": "scan",
     "matches": { "ios": ["boost"] },
-    "via": "react-native",
+    "via": "react-native; react-native (Hermes, Boost.Context 1.86)",
     "copyright": "(C) Copyright John maddock 1999.",
     "files": [
       {
@@ -195,7 +195,7 @@
     "platforms": ["ios", "android"],
     "found": "scan",
     "matches": { "ios": ["fast_float"] },
-    "via": "react-native",
+    "via": "react-native; react-native (Hermes)",
     "copyright": "Copyright (c) 2021 The fast_float authors",
     "files": [
       {
@@ -236,6 +236,74 @@
       {
         "file": "scripts/licence-texts/native/hermes.LICENSE",
         "url": "https://raw.githubusercontent.com/facebook/hermes/hermes-v260318099.0.4/LICENSE"
+      }
+    ]
+  },
+  "LLVM Support (llvh)": {
+    "licence": "Apache-2.0 WITH LLVM-exception AND NCSA",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Copyright (c) 2003-2019 University of Illinois at Urbana-Champaign.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/llvh.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebook/hermes/hermes-v260318099.0.4/external/llvh/LICENSE.txt"
+      }
+    ]
+  },
+  "Henry Spencer's regex": {
+    "licence": "BSD-3-Clause",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes, through llvh)",
+    "copyright": "Copyright (c) 1992, 1993, 1994 Henry Spencer. Copyright (c) 1992, 1993, 1994 The Regents of the University of California. All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/spencer-regex.LICENSE",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.25.0/text/BSD-3-Clause.txt"
+      }
+    ]
+  },
+  "Dragonbox": {
+    "licence": "BSL-1.0",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Copyright 2020-2025 Junekey Jeon",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/dragonbox.LICENSE",
+        "url": "https://raw.githubusercontent.com/jk-jeon/dragonbox/beeeef91cf6fef89a4d4ba5e95d47ca64ccb3a44/LICENSE-Boost"
+      }
+    ]
+  },
+  "zip": {
+    "licence": "Unlicense",
+    "platforms": ["ios", "android"],
+    "found": "inventory",
+    "matches": {
+      "ios": ["hermes-engine"],
+      "android": ["com.facebook.hermes:*", "com.facebook.react:hermes-android"]
+    },
+    "via": "react-native (Hermes)",
+    "copyright": "Kuba Podgórski (zip) and Rich Geldreich (miniz), dedicated to the public domain",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/zip.LICENSE",
+        "url": "https://raw.githubusercontent.com/facebook/hermes/hermes-v260318099.0.4/external/zip/UNLICENSE"
       }
     ]
   },
@@ -345,6 +413,38 @@
       }
     ]
   },
+  "libjpeg-turbo": {
+    "licence": "IJG AND BSD-3-Clause AND Zlib",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["com.facebook.fresco:nativeimagetranscoder"] },
+    "via": "react-native (Fresco)",
+    "copyright": "Copyright (C)2009-2023 D. R. Commander. Copyright (C)2015 Viktor Szathmáry. Copyright (C) 1991-2020, Thomas G. Lane, Guido Vollbeding.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/libjpeg-turbo.LICENSE",
+        "url": "https://raw.githubusercontent.com/libjpeg-turbo/libjpeg-turbo/2.1.5.1/LICENSE.md"
+      },
+      {
+        "file": "scripts/licence-texts/native/libjpeg-turbo.README.ijg",
+        "url": "https://raw.githubusercontent.com/libjpeg-turbo/libjpeg-turbo/2.1.5.1/README.ijg"
+      }
+    ]
+  },
+  "giflib": {
+    "licence": "MIT",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["com.facebook.fresco:animated-gif"] },
+    "via": "react-native (Fresco)",
+    "copyright": "Copyright (c) 1997 Eric S. Raymond. Copyright (c) 2008 Otto Moerbeek.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/giflib.LICENSE",
+        "url": "https://sourceforge.net/p/giflib/code/ci/5.2.1/tree/COPYING?format=raw"
+      }
+    ]
+  },
   "SoLoader": {
     "licence": "Apache-2.0",
     "platforms": ["android"],
@@ -429,6 +529,24 @@
       }
     ]
   },
+  "Public Suffix List": {
+    "licence": "MPL-2.0",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["com.squareup.okhttp3:okhttp"] },
+    "via": "react-native, expo-image, expo-file-system, expo-updates, expo-asset (OkHttp)",
+    "copyright": "The Public Suffix List contributors (publicsuffix.org)",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/public-suffix-list.LICENSE",
+        "url": "https://www.mozilla.org/media/MPL/2.0/index.txt"
+      },
+      {
+        "file": "scripts/licence-texts/native/public-suffix-list.NOTICE",
+        "url": "https://raw.githubusercontent.com/square/okhttp/parent-4.9.2/okhttp/src/main/resources/okhttp3/internal/publicsuffix/NOTICE"
+      }
+    ]
+  },
   "zstd-kmp": {
     "licence": "Apache-2.0",
     "platforms": ["android"],
@@ -457,6 +575,20 @@
       }
     ]
   },
+  "Glide": {
+    "licence": "BSD-2-Clause-Views",
+    "platforms": ["android"],
+    "found": "scan",
+    "matches": { "android": ["com.github.bumptech.glide:*"] },
+    "via": "expo-image",
+    "copyright": "Copyright 2014 Google, Inc. All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/glide.LICENSE",
+        "url": "https://raw.githubusercontent.com/bumptech/glide/v5.0.5/LICENSE"
+      }
+    ]
+  },
   "libyuv": {
     "licence": "BSD-3-Clause",
     "platforms": ["android"],
@@ -472,6 +604,20 @@
       {
         "file": "scripts/licence-texts/native/libyuv.PATENTS",
         "url": "https://chromium.googlesource.com/libyuv/libyuv/+/a6a2ec654b1be1166b376476a7555c89eca0c275/PATENTS"
+      }
+    ]
+  },
+  "cpufeatures": {
+    "licence": "BSD-2-Clause",
+    "platforms": ["android"],
+    "found": "inventory",
+    "matches": { "android": ["org.aomedia.avif.android:*", "com.facebook.fresco:webpsupport"] },
+    "via": "expo-image (libavif); react-native (Fresco)",
+    "copyright": "Copyright (C) 2010 The Android Open Source Project. All rights reserved.",
+    "files": [
+      {
+        "file": "scripts/licence-texts/native/cpufeatures.LICENSE",
+        "url": "https://raw.githubusercontent.com/spdx/license-list-data/v3.25.0/text/BSD-2-Clause.txt"
       }
     ]
   },
