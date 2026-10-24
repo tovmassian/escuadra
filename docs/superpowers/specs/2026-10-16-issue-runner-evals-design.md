@@ -647,6 +647,13 @@ of it.
    dry run stayed dry. File graders resolve their path from the run's working
    directory. A smoke run runs both arms by default (about $0.07–0.09
    estimated).
+8. **A rule does not load on Read inside a run (2026-10-24, Claude Code 2.1.278).**
+   One Haiku probe in the clone pinned past #165, with
+   `CLAUDE_CODE_DISABLE_CLAUDE_MDS=1` set: the agent Read `lib/photos.ts`, which
+   `.claude/rules/photos.md` covers, and the rule's text appeared nowhere in the
+   trace (no `<system-reminder>` came with the Read result). A run therefore gets a
+   rule only when the agent opens the rule file, which `dry-run.md` tells it to do for
+   each topic the request touches. Re-check after a Claude Code upgrade.
 
 ## 12. Out of scope
 
