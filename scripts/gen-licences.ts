@@ -1,11 +1,14 @@
 // Producer of lib/licences.generated.ts — run via `npm run gen:licences`. It writes
-// that file: the Unicode notice and every package Metro bundles into the iOS and
-// Android apps, with their licence notices, for About → Licences. See
+// that file: the Unicode notice and every package Metro bundles, or Expo autolinks
+// (#160), into the iOS and Android apps, with their licence notices, for About →
+// Licences. See
 // docs/superpowers/specs/2026-10-20-licences-sheet-design.md.
 //
 // "Bundled" is read from the bundle itself: one production export with source
 // maps, whose `sources` name every file Metro included. The lockfile would list
-// some 640 packages, most of them build tools that never reach a phone.
+// some 640 packages, most of them build tools that never reach a phone. Packages
+// whose native code is autolinked but ship no JavaScript are added from Expo's
+// own autolinking resolution.
 import { execFileSync } from 'node:child_process';
 import { mkdtempSync, readFileSync, readdirSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -14,12 +17,15 @@ import path from 'node:path';
 // through identical prettier options.
 import { formatAndWrite } from '../tools/squadctl/src/lib/write-json.ts';
 import {
+  autolinkedPackageFolders,
   buildLicenceData,
   collectPackageFolders,
   orderLicenceFiles,
   sourceMapSources,
+  type AutolinkingResolve,
   type LicenceFile,
   type PackageRead,
+  type RnConfig,
   type SourceMap,
 } from './licences.ts';
 
@@ -68,6 +74,24 @@ function exportSourceMaps(outDir: string): string[] {
       sourceMapSources(JSON.parse(readFileSync(path.join(dir, m), 'utf8')) as SourceMap),
     );
   });
+}
+
+// What Expo autolinks into each app: the same resolution `expo prebuild` and
+// EAS Build use, read offline from node_modules, with no ios/ or android/ folder.
+function autolinking(): { resolves: AutolinkingResolve[]; configs: RnConfig[] } {
+  const run = (args: string[]): unknown =>
+    JSON.parse(
+      execFileSync('npx', ['expo-modules-autolinking', ...args, '--json'], {
+        cwd: REPO_ROOT,
+        encoding: 'utf8',
+        stdio: ['ignore', 'pipe', 'inherit'],
+        maxBuffer: 64 * 1024 * 1024,
+      }),
+    );
+  return {
+    resolves: PLATFORMS.map((p) => run(['resolve', '-p', p]) as AutolinkingResolve),
+    configs: PLATFORMS.map((p) => run(['react-native-config', '-p', p]) as RnConfig),
+  };
 }
 
 function readLicenceFiles(folder: string): LicenceFile[] {
@@ -129,7 +153,13 @@ function unicodeNotice(): string {
 async function main(): Promise<void> {
   const outDir = mkdtempSync(path.join(process.env.RUNNER_TEMP ?? tmpdir(), 'escuadra-licences-'));
   try {
-    const folders = collectPackageFolders(exportSourceMaps(outDir));
+    const linked = autolinking();
+    const folders = [
+      ...new Set([
+        ...collectPackageFolders(exportSourceMaps(outDir)),
+        ...autolinkedPackageFolders(`${REPO_ROOT}/`, linked.resolves, linked.configs),
+      ]),
+    ].sort();
     const { texts, packages } = buildLicenceData(folders.map(readPackage), resolveSources());
     const content = [
       '// GENERATED FILE — run `npm run gen:licences` to regenerate. Do not hand-edit.',
@@ -141,7 +171,7 @@ async function main(): Promise<void> {
       '/** Every distinct licence text the bundled packages carry. */',
       `export const LICENCE_TEXTS: readonly string[] = ${JSON.stringify(texts)};`,
       '',
-      '/** Every package Metro bundles into the iOS or Android app, by name then version. */',
+      '/** Every package Metro bundles, or Expo autolinks, into the iOS or Android app, by name then version. */',
       `export const PACKAGES: readonly BundledPackage[] = ${JSON.stringify(packages)};`,
       '',
     ].join('\n');

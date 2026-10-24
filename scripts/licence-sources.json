@@ -43,6 +43,14 @@
       }
     ]
   },
+  "expo-structured-headers": {
+    "reason": "Published from the Expo repository under its MIT LICENSE.",
+    "sources": [
+      {
+        "from": "expo"
+      }
+    ]
+  },
   "expo-updates": {
     "reason": "Published from the Expo repository under its MIT LICENSE.",
     "sources": [

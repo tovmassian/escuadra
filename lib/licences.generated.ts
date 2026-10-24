@@ -30,8 +30,8 @@ export const LICENCE_TEXTS: readonly string[] = [
   'Copyright (c) 2014 Forbes Lindesay\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in\nall copies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN\nTHE SOFTWARE.',
   'MIT License\n\nCopyright (c) 2018 Formidable Labs\nCopyright (c) 2017 Evgeny Poberezkin\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.',
   'The MIT License (MIT)\n\nCopyright (c) 2021 Software Mansion\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.',
-  'MIT License\n\nCopyright (c) 2024 Mathieu Acthernoene\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.',
   'The MIT License (MIT)\n\nCopyright (c) 2016 Software Mansion <swmansion.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.',
+  'MIT License\n\nCopyright (c) 2024 Mathieu Acthernoene\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.',
   'MIT License\n\nCopyright (c) 2019 Th3rd Wave\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.',
   'The MIT License (MIT)\n\nCopyright (c) 2018 Software Mansion <swmansion.com>\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.',
   'The MIT License (MIT)\n\nCopyright (c) [2015-2016] [Horcrux]\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.',
@@ -47,7 +47,7 @@ export const LICENCE_TEXTS: readonly string[] = [
   'MIT License\n\nCopyright (c) 2019 Paul Henschel\n\nPermission is hereby granted, free of charge, to any person obtaining a copy\nof this software and associated documentation files (the "Software"), to deal\nin the Software without restriction, including without limitation the rights\nto use, copy, modify, merge, publish, distribute, sublicense, and/or sell\ncopies of the Software, and to permit persons to whom the Software is\nfurnished to do so, subject to the following conditions:\n\nThe above copyright notice and this permission notice shall be included in all\ncopies or substantial portions of the Software.\n\nTHE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR\nIMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,\nFITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE\nAUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER\nLIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,\nOUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE\nSOFTWARE.',
 ];
 
-/** Every package Metro bundles into the iOS or Android app, by name then version. */
+/** Every package Metro bundles, or Expo autolinks, into the iOS or Android app, by name then version. */
 export const PACKAGES: readonly BundledPackage[] = [
   {
     name: '@expo-google-fonts/ibm-plex-mono',
@@ -76,6 +76,20 @@ export const PACKAGES: readonly BundledPackage[] = [
     licence: 'MIT',
     copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
     texts: [4, 5],
+  },
+  {
+    name: '@expo/dom-webview',
+    version: '58.0.2',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
+    name: '@expo/log-box',
+    version: '58.0.13',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
   },
   {
     name: '@expo/log-box-utils',
@@ -212,6 +226,48 @@ export const PACKAGES: readonly BundledPackage[] = [
     texts: [4],
   },
   {
+    name: 'expo-dev-client',
+    version: '58.0.15',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
+    name: 'expo-dev-launcher',
+    version: '58.0.15',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
+    name: 'expo-dev-menu',
+    version: '58.0.11',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
+    name: 'expo-dev-menu-interface',
+    version: '58.0.1',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
+    name: 'expo-eas-client',
+    version: '58.0.2',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
+    name: 'expo-file-system',
+    version: '58.0.11',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
     name: 'expo-font',
     version: '58.0.10',
     licence: 'MIT',
@@ -240,6 +296,20 @@ export const PACKAGES: readonly BundledPackage[] = [
     texts: [4],
   },
   {
+    name: 'expo-json-utils',
+    version: '58.0.1',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
+    name: 'expo-keep-awake',
+    version: '58.0.3',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
     name: 'expo-linear-gradient',
     version: '58.0.3',
     licence: 'MIT',
@@ -261,8 +331,22 @@ export const PACKAGES: readonly BundledPackage[] = [
     texts: [4],
   },
   {
+    name: 'expo-manifests',
+    version: '58.0.1',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
     name: 'expo-modules-core',
     version: '58.0.26',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
+    name: 'expo-modules-jsi',
+    version: '58.0.19',
     licence: 'MIT',
     copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
     texts: [4],
@@ -304,6 +388,13 @@ export const PACKAGES: readonly BundledPackage[] = [
     texts: [4],
   },
   {
+    name: 'expo-structured-headers',
+    version: '58.0.1',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
     name: 'expo-symbols',
     version: '58.0.4',
     licence: 'MIT',
@@ -311,8 +402,22 @@ export const PACKAGES: readonly BundledPackage[] = [
     texts: [4],
   },
   {
+    name: 'expo-system-ui',
+    version: '58.0.6',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
     name: 'expo-updates',
     version: '58.0.18',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
+    texts: [4],
+  },
+  {
+    name: 'expo-updates-interface',
+    version: '58.0.1',
     licence: 'MIT',
     copyright: 'Copyright (c) 2015-present 650 Industries, Inc. (aka Expo)',
     texts: [4],
@@ -416,18 +521,25 @@ export const PACKAGES: readonly BundledPackage[] = [
     texts: [9],
   },
   {
+    name: 'react-native-gesture-handler',
+    version: '3.3.0',
+    licence: 'MIT',
+    copyright: 'Copyright (c) 2016 Software Mansion <swmansion.com>',
+    texts: [23],
+  },
+  {
     name: 'react-native-is-edge-to-edge',
     version: '1.3.1',
     licence: 'MIT',
     copyright: 'Copyright (c) 2024 Mathieu Acthernoene',
-    texts: [23],
+    texts: [24],
   },
   {
     name: 'react-native-reanimated',
     version: '4.7.1',
     licence: 'MIT',
     copyright: 'Copyright (c) 2016 Software Mansion <swmansion.com>',
-    texts: [24],
+    texts: [23],
   },
   {
     name: 'react-native-safe-area-context',
