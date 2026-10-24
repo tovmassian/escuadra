@@ -54,7 +54,8 @@
         }
       ],
       "expo-status-bar",
-      "expo-web-browser"
+      "expo-web-browser",
+      "./plugins/withAndroidRelease.js"
     ],
     "experiments": {
       "typedRoutes": true,

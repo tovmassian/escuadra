@@ -9,6 +9,7 @@ import { defineConfig } from 'vitest/config';
 // parse/reconcile/assert layer is pure by design and network-free. theme/ and design/ are plain
 // data — tokens, mark geometry, handoff re-exports — and are tested for
 // internal consistency only. i18n/ resolves the language without React.
+// plugins/ holds the config plugins, whose manifest and gradle edits are pure.
 // Screens and components are verified on-device instead: no RN test renderer
 // is configured here on purpose.
 export default defineConfig({
@@ -22,6 +23,7 @@ export default defineConfig({
       'stores/**/*.test.ts',
       'theme/**/*.test.ts',
       'design/**/*.test.ts',
+      'plugins/**/*.test.ts',
     ],
   },
   resolve: {
