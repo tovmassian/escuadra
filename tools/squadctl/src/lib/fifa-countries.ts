@@ -14,7 +14,7 @@
 // `players.json`.
 //
 // Some countries have a second code, one Wikipedia's flag templates also
-// accept: Kosovo's KVX (FIFA's own) beside KOS, and the IOC-style SPA, SLO,
+// accept: Kosovo's KVX (FIFA's former code) beside KOS, and the IOC-style SPA, SLO,
 // DRC and NGR that club articles write for Spain, Slovenia, DR Congo and
 // Nigeria. Each maps to the one spelling.
 //
