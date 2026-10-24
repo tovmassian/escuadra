@@ -44,7 +44,6 @@ route — nothing like it exists for iOS). With `--lang=<code>` the graphic goes
 `design/play/<code>/feature-graphic.jpg`, its tagline in that language. **Regenerate `design/screens/` in the
 same PR whenever a captured screen, the app icon or the brand mark changes** —
 a task that touches `assets/images/icon.png`, `theme/brand.ts`,
-`theme/tokens.ts`'s brand roles or any `app/` screen re-runs `npm run shots`.
-The store and Play sets are regenerated at release, as above. See
+`theme/tokens.ts`'s brand roles or any `app/` screen re-runs `npm run shots`. See
 `scripts/screenshot-profiles.ts` for every profile's exact viewport/scale/
 format facts and `design/SCREENS.md` for what each captured file shows.
