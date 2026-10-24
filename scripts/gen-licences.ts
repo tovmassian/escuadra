@@ -17,8 +17,10 @@ import {
   buildLicenceData,
   collectPackageFolders,
   orderLicenceFiles,
+  sourceMapSources,
   type LicenceFile,
   type PackageRead,
+  type SourceMap,
 } from './licences.ts';
 
 const REPO_ROOT = path.resolve(import.meta.dirname, '..');
@@ -62,8 +64,8 @@ function exportSourceMaps(outDir: string): string[] {
     const maps = readdirSync(dir).filter((f) => f.endsWith('.map'));
     if (maps.length === 0)
       throw new Error(`gen-licences: the ${platform} export wrote no source map`);
-    return maps.flatMap(
-      (m) => (JSON.parse(readFileSync(path.join(dir, m), 'utf8')) as { sources: string[] }).sources,
+    return maps.flatMap((m) =>
+      sourceMapSources(JSON.parse(readFileSync(path.join(dir, m), 'utf8')) as SourceMap),
     );
   });
 }

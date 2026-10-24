@@ -5,7 +5,7 @@
 
 import * as Sharing from 'expo-sharing';
 import type { RefObject } from 'react';
-import { Platform, Share, type View } from 'react-native';
+import { Platform, Share, type ViewInstance } from 'react-native';
 import { captureRef, releaseCapture } from 'react-native-view-shot';
 
 // The last picture written to the cache. It is not deleted when the share menu
@@ -25,7 +25,7 @@ let lastCapture: string | null = null;
  * cannot share a file.
  */
 export async function shareImage(
-  card: RefObject<View | null>,
+  card: RefObject<ViewInstance | null>,
   dialogTitle: string,
 ): Promise<boolean> {
   if (Platform.OS === 'web' || !(await Sharing.isAvailableAsync())) return false;

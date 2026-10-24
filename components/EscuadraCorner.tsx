@@ -1,5 +1,5 @@
 import type { Ref } from 'react';
-import { StyleSheet, View } from 'react-native';
+import { StyleSheet, View, type ViewInstance } from 'react-native';
 import Animated, {
   Easing,
   Extrapolation,
@@ -37,7 +37,7 @@ interface EscuadraCornerProps {
   live: SharedValue<LiveShot | null>;
   clock: SharedValue<number>;
   /** The corner's box, which never moves: the shot measures it to aim. */
-  ref?: Ref<View>;
+  ref?: Ref<ViewInstance>;
 }
 
 // The escuadra corner at the shirt number's top right (spec §2.1, §6, #129).

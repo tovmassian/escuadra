@@ -1,5 +1,5 @@
 {
-  "@react-native/assets-registry": {
+  "@react-native/asset-utils": {
     "reason": "Published from the React Native repository under its LICENSE.",
     "sources": [
       {
@@ -31,14 +31,6 @@
       }
     ]
   },
-  "@expo/ui": {
-    "reason": "Published from the Expo repository under its MIT LICENSE.",
-    "sources": [
-      {
-        "from": "expo"
-      }
-    ]
-  },
   "expo-router": {
     "reason": "Published from the Expo repository under its MIT LICENSE, and bundles its own copy of React Navigation (build/react-navigation, build/fork), whose MIT LICENSE the npm tarball omits.",
     "sources": [
@@ -56,6 +48,15 @@
     "sources": [
       {
         "from": "expo"
+      }
+    ]
+  },
+  "metro-runtime": {
+    "reason": "Published from the Metro repository, whose MIT LICENSE the npm tarball omits.",
+    "sources": [
+      {
+        "file": "scripts/licence-texts/metro.LICENSE",
+        "url": "https://github.com/react/metro/blob/main/LICENSE"
       }
     ]
   },

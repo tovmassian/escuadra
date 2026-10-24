@@ -4,6 +4,7 @@ paths:
   - "scripts/ci/**"
   - "app.json"
   - "eas.json"
+  - "fingerprint.config.js"
   - "package.json"
   - "package-lock.json"
   - ".gitignore"
@@ -19,9 +20,14 @@ fingerprint. On `main` that is fine; on a locked release branch it is a new vers
 ## The Expo SDK pin
 
 ⚠️ **Do not upgrade the Expo SDK without deciding to cut a new store
-build.** `package.json` pins SDK 57. An SDK bump changes the native runtime, which
+build.** `package.json` pins SDK 58. An SDK bump changes the native runtime, which
 invalidates every over-the-air update path and forces a new build and a new
 submission. Treat an SDK upgrade as a release decision, not a dependency bump.
+
+`fingerprint.config.js` keeps Expo's `strict` preset. SDK 58's default, `balanced`,
+leaves `app.json`'s `version` out of the fingerprint, and every version needs a runtime of
+its own: all of them share the `production` channel. After an SDK upgrade, re-measure
+`docs/release.md`'s table.
 
 ## CI
 

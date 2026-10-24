@@ -7,6 +7,7 @@ import {
   StyleSheet,
   Text,
   View,
+  type ScrollViewInstance,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { translationNotice } from '@/i18n/translationNotice';
@@ -21,7 +22,7 @@ export default function About() {
   const notice = translationNotice(useLanguage());
   const last = (i: number, list: readonly unknown[]) => i === list.length - 1;
   const { section: sectionParam } = useLocalSearchParams<{ section?: string }>();
-  const scrollRef = useRef<ScrollView>(null);
+  const scrollRef = useRef<ScrollViewInstance>(null);
   const scrolledTo = useRef(false);
   // Settings' Privacy row opens About at its Privacy card (#175).
   const onPrivacyLayout = (e: LayoutChangeEvent) => {

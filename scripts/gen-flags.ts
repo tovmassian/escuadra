@@ -38,14 +38,14 @@ function discoverFlagCodes(): string[] {
 function buildGeneratedTs(codes: string[]): string {
   return [
     '// GENERATED FILE — run `npm run gen:flags` to regenerate. Do not hand-edit.',
-    "import type { ImageSourcePropType } from 'react-native';",
+    "import type { ImageRequireSource } from 'react-native';",
     '',
     '/** Every flag image committed to assets/flags/, by FIFA three-letter code. */',
     `export type FlagCode =`,
     ...codes.map((c, i) => `  | '${c}'${i === codes.length - 1 ? ';' : ''}`),
     '',
-    'export const FLAG_SOURCES: Record<FlagCode, ImageSourcePropType> = {',
-    ...codes.map((c) => `  ${c}: require('./${c}.png') as ImageSourcePropType,`),
+    'export const FLAG_SOURCES: Record<FlagCode, ImageRequireSource> = {',
+    ...codes.map((c) => `  ${c}: require('./${c}.png') as ImageRequireSource,`),
     '};',
     '',
   ].join('\n');

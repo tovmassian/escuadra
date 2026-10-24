@@ -6,14 +6,29 @@ paths:
   - "metro.config.js"
 ---
 
-# Expo SDK 57
+# Expo SDK 58
 
 ⚠️ **Expo has changed a lot between versions.** Read the exact versioned docs
-at https://docs.expo.dev/versions/v57.0.0/ before writing any Expo code — not
+at https://docs.expo.dev/versions/v58.0.0/ before writing any Expo code — not
 the `latest` docs, which may describe APIs from a newer SDK this project
 cannot use.
 
 `expo-dev-client` is installed, and EAS Build produces development, simulator, preview and production builds; an SDK upgrade is a release decision (`fingerprint.md`).
+
+## Since SDK 58
+
+- RN 0.88's strict TypeScript API types a ref by its instance, not its component:
+  `useRef<ViewInstance>(null)`, `Ref<ViewInstance>`, `ScrollViewInstance`, `TextInstance`,
+  all type imports from `react-native`. `FlatList` is still a class, so
+  `useRef<FlatList<T>>` stands. Deep imports from `react-native/Libraries/*` are type errors.
+- `ImageSourcePropType` now admits readonly arrays, which `expo-image` refuses; a
+  `require()`d image is `ImageRequireSource` (`scripts/gen-flags.ts`).
+- `expo-router` makes `@expo/ui` and `expo-symbols` optional peers, and `web.output`
+  defaults to `"server"`: `app.json` keeps `"static"`.
+- Metro writes indexed source maps (`sections`), which `sourceMapSources` in
+  `scripts/licences.ts` reads.
+- Upgrading: when `npx expo install expo@^N --fix` stops on `ERESOLVE` against the old
+  lockfile's pins, drop the lock entries of the packages it changed, then `npm install`.
 
 ## Since SDK 56
 

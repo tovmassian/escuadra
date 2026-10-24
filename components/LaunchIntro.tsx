@@ -1,5 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
-import { AccessibilityInfo, Platform, Pressable, StyleSheet, type View } from 'react-native';
+import {
+  AccessibilityInfo,
+  Platform,
+  Pressable,
+  StyleSheet,
+  type ViewInstance,
+} from 'react-native';
 import Animated, {
   Easing,
   interpolate,
@@ -117,8 +123,8 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   };
   // It ends once, by the timeline or a tap, whichever comes first.
   const endingRef = useRef(false);
-  const markRef = useRef<View>(null);
-  const wordRef = useRef<View>(null);
+  const markRef = useRef<ViewInstance>(null);
+  const wordRef = useRef<ViewInstance>(null);
   // Stops the measuring's time limit if the intro unmounts mid-measure.
   const cancelMeasureRef = useRef<(() => void) | null>(null);
 

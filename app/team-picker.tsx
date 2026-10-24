@@ -32,7 +32,7 @@ import { useThemeColors } from '@/theme/useTheme';
 import type { SquadManifestEntry } from '@/types/squad';
 import { router } from 'expo-router';
 import { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, type ViewInstance } from 'react-native';
 import Animated, {
   useAnimatedRef,
   useAnimatedScrollHandler,
@@ -62,8 +62,8 @@ export default function TeamPicker() {
   const scrollRef = useAnimatedRef<Animated.ScrollView>();
   // How to play (#183): the tabs and pills, then the first row.
   const tips = useTips('picker');
-  const switchRef = useRef<View>(null);
-  const firstRowRef = useRef<View>(null);
+  const switchRef = useRef<ViewInstance>(null);
+  const firstRowRef = useRef<ViewInstance>(null);
 
   const squads = listSquads();
   const names = useMemo<SquadNames>(

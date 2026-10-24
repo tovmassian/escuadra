@@ -9,6 +9,8 @@ import {
   Text,
   useWindowDimensions,
   View,
+  type ViewInstance,
+  type TextInstance,
 } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
@@ -39,7 +41,7 @@ import {
 import { useThemeColors } from '@/theme/useTheme';
 
 export interface TipSpec {
-  target: RefObject<View | null>;
+  target: RefObject<ViewInstance | null>;
   radius: number;
   heading: string;
   body: string;
@@ -109,8 +111,8 @@ export function TipsLayer({
   const insets = useSafeAreaInsets();
   const windowSize = useWindowDimensions();
   const reduceMotion = useReduceMotion();
-  const rootRef = useRef<View>(null);
-  const kickerRef = useRef<Text>(null);
+  const rootRef = useRef<ViewInstance>(null);
+  const kickerRef = useRef<TextInstance>(null);
 
   const [step, setStep] = useState(0);
   const [measure, setMeasure] = useState<Measure | null>(null);

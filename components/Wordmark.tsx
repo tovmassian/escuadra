@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, type ViewInstance } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { EscuadraMark } from './EscuadraMark';
 import { useLaunchReveal } from './LaunchReveal';
@@ -16,8 +16,8 @@ import { useThemeColors } from '@/theme/useTheme';
 export function Wordmark() {
   const colors = useThemeColors();
   const launch = useLaunchReveal();
-  const markRef = useRef<View>(null);
-  const wordRef = useRef<View>(null);
+  const markRef = useRef<ViewInstance>(null);
+  const wordRef = useRef<ViewInstance>(null);
   const styles = StyleSheet.create({
     root: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },
     word: { ...typography.wordmark, color: colors.textPrimary },

@@ -7,7 +7,7 @@ import { MARK_VIEWBOX, markGeometry } from '@/theme/brand';
 import { borderWidths, palettes, sizes, spacing, typography } from '@/theme/tokens';
 import type { TeamMarker } from '@/types/squad';
 import type { Ref } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, type ViewInstance } from 'react-native';
 
 interface ShareCardProps {
   view: ShareCardView;
@@ -15,7 +15,7 @@ interface ShareCardProps {
   marker: TeamMarker;
   /** Drawn width in pt; the height follows the card's 9:16. */
   width: number;
-  ref?: Ref<View>;
+  ref?: Ref<ViewInstance>;
 }
 
 interface Scalable {
