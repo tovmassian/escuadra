@@ -33,6 +33,18 @@ Owner, 2026-10-24:
 - **The paste baseline is found from the tags**, with no flag (see
   [Changed since the last version](#changed-since-the-last-version)).
 
+Owner, 2026-10-24, after the final review:
+
+- **The listing shots may show Commons player photos** (guardrail 2's asset licensing):
+  the proposed set stays, and `docs/license.md` records what that leaves uncovered.
+- **Each App Store locale links its own language's privacy page**; Play, which takes one
+  URL per app, links the English one.
+- **The declarations:** the EAS Update installation ID joins the Device ID answer;
+  Data safety states, per data type, whether collection is optional or required; the
+  requests' technical details are listed as not declared, with why.
+- **The capture scripts refuse a port another server holds**, so no capture shoots
+  another worktree's code.
+
 ## Files
 
 ```
@@ -119,8 +131,9 @@ football,squad,quiz,…
 - keywords repeat, or have spaces around their commas;
 - `store/screenshots.json` lists more than 8 shots (Play's cap; Apple's is 10) or repeats
   one;
-- the privacy policy URL in `declarations.md` is not `pageUrl('en')` from
-  `scripts/privacy-pages.ts`, so a new policy folder cannot leave the declared URL behind.
+- a privacy policy URL in `declarations.md` is not `pageUrl` from
+  `scripts/privacy-pages.ts` (each App Store locale its own language's page, Play the
+  English one), so a new policy folder cannot leave a declared URL behind.
 
 ## The bundle
 

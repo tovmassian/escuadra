@@ -176,9 +176,21 @@ export function screenshotProblems(shots: unknown): string[] {
   return problems;
 }
 
-/** The privacy policy URL store/declarations.md declares, or null. */
-export function declaredPrivacyUrl(declarations: string): string | null {
-  return /^- Privacy policy URL: (\S+)$/m.exec(declarations)?.[1] ?? null;
+/**
+ * The privacy policy URLs store/declarations.md declares: App Store Connect's, one per
+ * locale by language code, and Play Console's single one for the app.
+ */
+export function declaredPrivacyUrls(declarations: string): {
+  readonly appStore: Readonly<Partial<Record<ListingLanguage, string>>>;
+  readonly play: string | null;
+} {
+  const appStore: Partial<Record<ListingLanguage, string>> = {};
+  const perLocale = new RegExp(`^ {2}- (${LANGUAGES.join('|')}): (\\S+)$`, 'gm');
+  for (const [, code, url] of declarations.matchAll(perLocale)) {
+    if (code && url) appStore[code as ListingLanguage] = url;
+  }
+  const play = /^- Privacy policy URL, one for the app: (\S+)$/m.exec(declarations)?.[1] ?? null;
+  return { appStore, play };
 }
 
 export type Status = 'paste' | 'skip';

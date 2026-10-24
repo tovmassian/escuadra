@@ -8,7 +8,7 @@ import { pageUrl } from '../privacy-pages';
 import {
   baselineTag,
   charCount,
-  declaredPrivacyUrl,
+  declaredPrivacyUrls,
   fieldStatuses,
   FIELDS,
   heading,
@@ -209,12 +209,19 @@ describe('screenshotProblems', () => {
   });
 });
 
-describe('declaredPrivacyUrl', () => {
-  it('reads the privacy policy URL line', () => {
-    expect(
-      declaredPrivacyUrl('- Name: Escuadra\n- Privacy policy URL: https://x/privacy/2/\n'),
-    ).toBe('https://x/privacy/2/');
-    expect(declaredPrivacyUrl('- Name: Escuadra\n')).toBeNull();
+describe('declaredPrivacyUrls', () => {
+  it("reads each App Store locale's URL and Play's one", () => {
+    const text = [
+      "- Privacy policy URL, each locale its own language's page:",
+      '  - en: https://x/privacy/2/',
+      '  - de: https://x/privacy/2/de.html',
+      '- Privacy policy URL, one for the app: https://x/privacy/2/',
+    ].join('\n');
+    expect(declaredPrivacyUrls(text)).toEqual({
+      appStore: { en: 'https://x/privacy/2/', de: 'https://x/privacy/2/de.html' },
+      play: 'https://x/privacy/2/',
+    });
+    expect(declaredPrivacyUrls('- Name: Escuadra\n')).toEqual({ appStore: {}, play: null });
   });
 });
 
@@ -258,8 +265,12 @@ describe('the files in store/', () => {
     expect(missing).toEqual([]);
   });
 
-  it('declare the current privacy policy', () => {
-    expect(declaredPrivacyUrl(read('store/declarations.md'))).toBe(pageUrl('en'));
+  it("declare each language's current privacy page, and the English one for Play", () => {
+    const urls = declaredPrivacyUrls(read('store/declarations.md'));
+    expect(urls.appStore).toEqual(
+      Object.fromEntries(LANGUAGES.map((language) => [language, pageUrl(language)])),
+    );
+    expect(urls.play).toBe(pageUrl('en'));
   });
 });
 

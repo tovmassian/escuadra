@@ -9,47 +9,53 @@ PR. The paste sheet marks it _paste_ when it changed since the last version.
 ## Both stores
 
 - Name: Escuadra
-- Privacy policy URL: https://tovmassian.github.io/escuadra/privacy/2/
 - Support URL: https://tovmassian.github.io/escuadra/support.html
 
 ## App Store Connect
 
 - Category: Education, then Sports
 - Age rating: 4+
+- Privacy policy URL, each locale its own language's page:
+  - en: https://tovmassian.github.io/escuadra/privacy/2/
+  - es: https://tovmassian.github.io/escuadra/privacy/2/es.html
+  - fr: https://tovmassian.github.io/escuadra/privacy/2/fr.html
+  - it: https://tovmassian.github.io/escuadra/privacy/2/it.html
+  - de: https://tovmassian.github.io/escuadra/privacy/2/de.html
 
 ### App Privacy
 
-Entered before Submit for Review, with the privacy policy URL.
+Entered before Submit for Review, with the privacy policy URLs.
 
-- Identifiers, Device ID: not linked to the user, not used for tracking, purpose Analytics
-  (TelemetryDeck's hashed form of a random identifier made for the statistics, and a
-  random session code).
+- Identifiers, Device ID: not linked to the user, not used for tracking, purposes Analytics
+  and App Functionality (TelemetryDeck's hashed form of a random identifier made for the
+  statistics, and a random session code; the EAS Update check's installation ID).
 - Usage Data, Product Interaction: not linked, not tracking, purpose Analytics (the events,
   the app language among them).
 - Diagnostics, Crash Data: not linked, not tracking, purpose App Functionality (the
   expo-updates error message after a failed start).
-- The EAS Update check's installation ID, for App Functionality, as the 1.0.0 correction
-  (#61) answered it.
 
 ## Play Console
 
 - Category: Education
 - Content rating: Everyone (IARC)
+- Privacy policy URL, one for the app: https://tovmassian.github.io/escuadra/privacy/2/
 
 ### Data safety
 
 Entered when the build is uploaded, with the privacy policy URL.
 
-- App activity, App interactions: collected, not shared, purpose Analytics.
-- Device or other IDs: collected, not shared, purposes Analytics and App functionality.
-- App info and performance, Crash logs: collected, not shared, purpose App functionality
-  (the expo-updates error message).
+- App activity, App interactions: collected, not shared, optional (the "Usage statistics"
+  switch), purpose Analytics.
+- Device or other IDs: collected, not shared, required (the update check's ID is always
+  sent; the statistics ID stops with the switch), purposes Analytics and App functionality.
+- App info and performance, Crash logs: collected, not shared, required (the update check's
+  error report after a failed start), purpose App functionality (the expo-updates error
+  message).
 - Encrypted in transit: yes.
 - Deletion requests: none offered. The statistics carry a hashed random identifier (not
   the update check's) and a random session code, not linked to the user, and switching off
   "Usage statistics" in Settings stops the usage statistics; the app-update check keeps
   running.
-- Consistent with the EAS Update answer in the Android 1.0 listing.
 
 ## Not declared
 
@@ -57,3 +63,8 @@ Entered when the build is uploaded, with the privacy policy URL.
   integrated SDK: the app fetches public files from its CDN as a browser would, and
   neither the developer nor a partner can access what Wikimedia receives. About still says
   what Wikimedia receives.
+- The technical details of each request (owner, 2026-10-24): the app's build and the
+  system version TelemetryDeck receives on iOS, and the operating system and the app's
+  version and project the update check sends to Expo. They travel with each statistic or
+  update check, and TelemetryDeck's App Privacy guidance lists no separate data type for
+  them. About still states them.

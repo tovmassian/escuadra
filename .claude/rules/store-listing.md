@@ -20,7 +20,8 @@ walk-through the `escuadra-store-listing` skill.
   (`FIELDS` in `scripts/store-listing.ts`, each with its store and limit). Pasted as
   written: plain text, no Markdown formatting, which is why Prettier skips the folder.
 - `store/screenshots.json`: the listing's shots in order, named as in `design/screens/`;
-  the same set in every language and both stores, at most 8.
+  the same set in every language and both stores, at most 8. Some show Commons player
+  photos, as the owner decided (`docs/license.md`, In the store listings).
 - `store/declarations.md`: English, entered once per app: the name, URLs, category, age
   rating, and the App Privacy and Data safety answers
   (`.claude/rules/privacy-telemetry.md` says when they change).
@@ -42,8 +43,9 @@ walk-through the `escuadra-store-listing` skill.
 `scripts/__tests__/store-listing.test.ts`, in `npm run check`, checks each file's headings
 and their order, empty fields, each limit in characters, a field left in English, the
 untranslated names, other product names, keyword spacing and repeats, the screenshot set
-against `design/screens/`, and the declared privacy URL against `pageUrl('en')` in
-`scripts/privacy-pages.ts`. A console's own counter has the last word on a field written
+against `design/screens/`, and the declared privacy URLs against `pageUrl` in
+`scripts/privacy-pages.ts` (each App Store locale its own language's page, Play the
+English one). A console's own counter has the last word on a field written
 to its limit.
 
 ## The paste sheet

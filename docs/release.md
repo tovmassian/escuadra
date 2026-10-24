@@ -82,10 +82,10 @@ What the fingerprint can't see:
   ([Change the store listing](#change-the-store-listing)),
   and the web privacy pages (`scripts/privacy-pages.ts`), published on `gh-pages`.
   The pages are versioned: `privacy.html` is the 1.x policy and
-  2.0's go in `privacy/2/`. A store's privacy URL moves to a version's
-  pages when that store's App Privacy or Data safety answers are updated for
+  2.0's go in `privacy/2/`. A store's privacy URLs (Apple's, one per locale) move to a
+  version's pages when that store's App Privacy or Data safety answers are updated for
   it (before review on Apple, when the build is uploaded on Play), because the
-  answers and the URL both belong to the app, not to a version. The pages must
+  answers and the URLs both belong to the app, not to a version. The pages must
   be published first.
 
 ## Branches
@@ -194,8 +194,9 @@ A new version from `main`:
      `scripts/privacy-pages.ts`, whose comment says what the superseded folder gets), then
      generate and publish it before the build.
    - When the builds reach the stores, enter `store/declarations.md`'s App Privacy and
-     Data safety answers and move each store's privacy URL to the new folder at the same
-     moment: Play when step 6 uploads the build, Apple before step 8's Submit for Review.
+     Data safety answers and move each store's privacy URLs (Apple's, one per locale) to
+     the new folder at the same moment: Play when step 6 uploads the build, Apple before
+     step 8's Submit for Review.
      Step 7's paste sheet says when they changed.
    - Point the site's own Privacy nav link at the new folder once every live store
      ships the version.
