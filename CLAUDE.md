@@ -39,6 +39,7 @@ surface, a new event), update the rule in the same PR, so the next session is no
 | [`fingerprint`](.claude/rules/fingerprint.md)             | What moves the fingerprint, CI, the SDK pin                             |
 | [`expo`](.claude/rules/expo.md)                           | Expo SDK 58                                                             |
 | [`design-handoff`](.claude/rules/design-handoff.md)       | `design/`, screenshots, store assets                                    |
+| [`store-listing`](.claude/rules/store-listing.md)         | Store listings, their screenshots, the console declarations             |
 | [`licensing`](.claude/rules/licensing.md)                 | Licence notices and asset licences                                      |
 | [`testing`](.claude/rules/testing.md)                     | Testing standards                                                       |
 | [`instructions`](.claude/rules/instructions.md)           | How this file, the rules and the docs are written                       |
@@ -80,7 +81,7 @@ one-off exception. Legal guardrails never bend.
    issue asks for them, but any change to what leaves the device (analytics, crash
    reporting, a backend call, a new SDK) ships **together** with the privacy pages, the
    About text word for word, Apple's App Privacy answers and Google Play's Data safety
-   form: in a store build, never over the air. `en.about.privacy` (`i18n/en.ts`) is the
+   form (`store/declarations.md`): in a store build, never over the air. `en.about.privacy` (`i18n/en.ts`) is the
    complete statement of what leaves the device. Detail: `privacy-telemetry`.
 5. **Never hardcode a colour, spacing value, or font size.** Everything comes from the
    design tokens, colour from the active palette through `useThemeColors()`; add a

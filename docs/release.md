@@ -10,6 +10,7 @@ store build — and how to take one back. The design behind it is
 | ------------------------------------- | --------------------------------------------------------- |
 | Ship a JS fix to a released version   | [Ship a JS fix](#ship-a-js-fix)                           |
 | Ship a new binary                     | [Cut a release](#cut-a-release)                           |
+| Change the store listing              | [Change the store listing](#change-the-store-listing)     |
 | Undo an update                        | [Roll back](#roll-back)                                   |
 | Keep updates away from a store review | [Freeze during store review](#freeze-during-store-review) |
 
@@ -76,13 +77,15 @@ What the fingerprint can't see:
   reporting, a new endpoint — even in pure JS — ship in a store build, together with the
   privacy policy, App Privacy and Data safety.
 - **Store reviews.** A reviewer's device receives updates for its runtime like anyone's.
-- Store listing text and screenshots, and the web privacy pages
-  (`scripts/privacy-pages.ts`): those change in Play Console, App Store Connect
-  and on `gh-pages`. The pages are versioned: `privacy.html` is the 1.x policy and
-  2.0's go in `privacy/2/`. A store's privacy URL moves to a version's
-  pages when that store's App Privacy or Data safety answers are updated for
+- Store listing text and screenshots (`store/` holds the text and the screenshot list),
+  entered in Play Console and App Store Connect from a paste sheet
+  ([Change the store listing](#change-the-store-listing)),
+  and the web privacy pages (`scripts/privacy-pages.ts`), published on `gh-pages`.
+  The pages are versioned: `privacy.html` is the 1.x policy and
+  2.0's go in `privacy/2/`. A store's privacy URLs (Apple's, one per locale) move to a
+  version's pages when that store's App Privacy or Data safety answers are updated for
   it (before review on Apple, when the build is uploaded on Play), because the
-  answers and the URL both belong to the app, not to a version. The pages must
+  answers and the URLs both belong to the app, not to a version. The pages must
   be published first.
 
 ## Branches
@@ -182,31 +185,48 @@ A new version from `main`:
 3. On `main`, write the version's section of [`CHANGELOG.md`](../CHANGELOG.md) from the
    milestone's merged PRs (`gh pr list --state merged --search "milestone:vX.Y.Z"`), and
    pick it to the branch.
-4. Only if the release changes what leaves the device (guardrail 4 in `CLAUDE.md`):
+4. On `main`, draft the version's store listing with the `escuadra-store-listing` skill:
+   What's new from step 3's section, and any other field or screenshot the version
+   changes. It merges once each translation's native reviewer signs off; pick it to the
+   branch.
+5. Only if the release changes what leaves the device (guardrail 4 in `CLAUDE.md`):
    - Give the version its own folder (`POLICY_VERSION` and `POLICY_DIR` in
      `scripts/privacy-pages.ts`, whose comment says what the superseded folder gets), then
      generate and publish it before the build.
-   - When the builds reach the stores, update App Privacy and Data safety, and move each
-     store's privacy URL to the new folder at the same moment: Play when step 5 uploads
-     the build, Apple before step 6's Submit for Review.
+   - When the builds reach the stores, enter `store/declarations.md`'s App Privacy and
+     Data safety answers and move each store's privacy URLs (Apple's, one per locale) to
+     the new folder at the same moment: Play when step 6 uploads the build, Apple before
+     step 8's Submit for Review.
+     Step 7's paste sheet says when they changed.
    - Point the site's own Privacy nav link at the new folder once every live store
      ships the version.
-5. **Actions → store-build**: `platforms: both`, `profile: production`, `submit` on. Both
+6. **Actions → store-build**: `platforms: both`, `profile: production`, `submit` on. Both
    platforms build from one commit; each job checks the built runtime, opens the freeze
    and lists what's left.
-6. iOS: Submit for Review in App Store Connect. Android: promote the build in Play
+7. Enter the listing. From a clean checkout of the branch, `node scripts/store-bundle.ts`
+   writes `dist/store-listing/paste-sheet.md`, marking each field, the images and the
+   declarations _paste_ or _skip_ against the last version's tag. When the first run
+   marks the images _paste_, or stops for missing captures, capture every language once
+   and run it again; the second run copies the fresh captures (they are gitignored, so
+   ones left from an earlier run would otherwise be handed over):
+   `for code in en es fr it de; do npm run shots:store -- --lang=$code && npm run shots:play -- --lang=$code && npm run gen:play-assets -- --lang=$code || break; done`.
+   Enter what says _paste_: Apple's before Submit for Review, Play's when the build is
+   uploaded.
+8. iOS: Submit for Review in App Store Connect. Android: promote the build in Play
    Console. Close each freeze once approved.
    Then tag the commit the build came from (its `store-build` run names it) and publish its
    notes: `git tag vX.Y.Z <commit> && git push origin vX.Y.Z`, then
    `awk '/^## \[X.Y.Z\]/{f=1;next} /^## \[/{f=0} f' CHANGELOG.md > "$RUNNER_TEMP/notes.md"`
    (locally, any temp path) and
    `gh release create vX.Y.Z --title X.Y.Z --notes-file "$RUNNER_TEMP/notes.md"`.
-   Attach the version's store assets to the same Release: from the release branch, run
-   `npm run shots:store`, `npm run shots:play -- --lang=<code>` for each language and
-   `npm run gen:play-assets`, zip `design/store/` and `design/play/`, and
-   `gh release upload vX.Y.Z <the two zips>`. They stay out of git: they are large and
-   change with every release. No workflow runs on tags. Play's 12-tester, 14-day closed test gates only a new app's
-   first production release; later updates go straight to review.
+   The tag is also what the next version's paste sheet compares with. When step 7 copied
+   images, attach them to the same Release:
+   `(cd dist/store-listing && rm -f app-store.zip play.zip && zip -qr app-store.zip app-store && zip -qr play.zip play)`,
+   then
+   `gh release upload vX.Y.Z dist/store-listing/app-store.zip dist/store-listing/play.zip`.
+   They stay out of git: they are large. No workflow runs on tags. Play's 12-tester,
+   14-day closed test gates only a new app's first production release; later updates go
+   straight to review.
 
 A runtime-changing fix to a released version (1.0.1):
 
@@ -214,11 +234,34 @@ A runtime-changing fix to a released version (1.0.1):
 2. A PR into `release/1.0.1` with the fix and `app.json` at `1.0.1`. The version's
    `CHANGELOG.md` section goes in that PR when `release/1.0.0` has a `CHANGELOG.md`,
    otherwise on `main` with the pick.
-3. `store-build` as above, then take the fix to `main`.
+3. Its What's new with the `escuadra-store-listing` skill, on a branch from the new
+   release branch and in a PR into it, which `pick-to-main` takes to `main`; then steps
+   5–8 as above, and take the fix to `main`. A 1.x branch predates `store/`: there enter
+   the What's new in the consoles by hand and skip step 7.
 
 `store-build` refuses a production build when `app.json` doesn't match the branch, when the
 platform is locked to another runtime, and on the same runtime unless `rebuild` is on,
 which is only for embedding newer JS for a review.
+
+### Change the store listing
+
+The listing is `store/`: one Markdown file per language, the screenshot set and the
+console declarations (`.claude/rules/store-listing.md`). The `escuadra-store-listing`
+skill drafts a change with you, writes the reviewers' sheets
+(`node scripts/store-bundle.ts --review`) and walks you through entering it. A version's
+listing is [Cut a release](#cut-a-release), steps 4 and 7.
+
+Between versions, such as promotional text for a tournament, the skill drafts the change
+on `main`, and it merges after the native sign-offs. From the sheet
+`node scripts/store-bundle.ts` writes on `main`, you enter Promotional text in App Store
+Connect and the listing fields in Play Console; any other App Store field changes only with
+a version, so it waits for the next version's sheet. The sheet written on `main` holds no
+images and no declarations, and any What's new on it is not entered: they come only with a
+version. Make such a
+change before the next version's `app.json` bump lands on `main`; after it, the sheet also
+marks that version's edits _paste_, and only the field this change edits is entered.
+The next version's sheet marks the change _paste_ again, because only a version's tag
+records what is live.
 
 ### Cut preview builds
 

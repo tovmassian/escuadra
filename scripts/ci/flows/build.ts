@@ -105,8 +105,8 @@ export async function runStoreBuild(runner: Runner, ctx: BuildContext): Promise<
     lines.push(
       `Freeze opened: ${freezeUrl}`,
       ctx.platform === 'ios'
-        ? 'Next: Submit for Review in App Store Connect, then close the freeze once approved.'
-        : 'Next: promote the build in Play Console, then close the freeze once approved.',
+        ? 'Next: enter the listing (docs/release.md, Cut a release, step 7), then Submit for Review in App Store Connect, then close the freeze once approved.'
+        : 'Next: enter the listing (docs/release.md, Cut a release, step 7), then promote the build in Play Console, then close the freeze once approved.',
     );
   }
   if (!production)

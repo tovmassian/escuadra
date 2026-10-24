@@ -259,6 +259,19 @@ the credit reads "Wikimedia Commons" and still links the page, which names the
 author in full. CC0 and public-domain photos are credited the same way although
 nothing is owed: one consistent credit line is simpler than a special case.
 
+### In the store listings
+
+The App Store and Google Play screenshots (`store/screenshots.json`) are captures of the
+app's own screens, so some show Commons player photos, with any crest or kit those photos
+contain. The owner decided on 2026-10-24 to use them (#208). Each photo appears as the
+app shows it, and no crest in it is cropped to, enlarged, isolated or used to identify a
+team (guardrail 2). A captured question screen
+carries its photo's credit line; a captured Study or Results screen does not, because
+those screens keep their credits under "Photo credits · N", and a screenshot cannot be
+tapped. A listing is also promotional use, and a photo's licence covers its copyright,
+not the pictured player's personality or publicity rights, which Creative Commons
+licences do not grant.
+
 ## The licences we refuse, and why
 
 Anything not in the table above is refused rather than guessed at. These are

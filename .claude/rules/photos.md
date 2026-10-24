@@ -37,3 +37,6 @@ disclosures (guardrail 4), never over the air:
 `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.
 
 Licences, the credit's parts and how the rule is enforced: `docs/license.md`, Player photos.
+The store listing screenshots show photos too, as the owner decided; the Study and
+Results captures show them without a visible credit (`docs/license.md`, In the store
+listings).

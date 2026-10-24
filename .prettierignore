@@ -5,3 +5,5 @@ package-lock.json
 .husky/_/
 .superpowers/
 .cache/
+# Pasted into the store consoles as written: a reformat would change what is pasted.
+store/listing/
