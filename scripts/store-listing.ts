@@ -180,3 +180,257 @@ export function screenshotProblems(shots: unknown): string[] {
 export function declaredPrivacyUrl(declarations: string): string | null {
   return /^- Privacy policy URL: (\S+)$/m.exec(declarations)?.[1] ?? null;
 }
+
+export type Status = 'paste' | 'skip';
+/** Images are entered, unchanged, or not this checkout's to hand over. */
+export type ImageStatus = Status | 'release-only';
+
+type Version = readonly [number, number, number];
+
+function versionOf(text: string): Version | null {
+  const match = /^(\d+)\.(\d+)\.(\d+)$/.exec(text);
+  return match ? [Number(match[1]), Number(match[2]), Number(match[3])] : null;
+}
+
+function compareVersions(a: Version, b: Version): number {
+  return a[0] - b[0] || a[1] - b[1] || a[2] - b[2];
+}
+
+/**
+ * The tag of the listing that is live: the highest `vX.Y.Z` at or below app.json's
+ * version. While a version is prepared that is the previous one; between versions, the
+ * live one itself. A version's tag sits on its release branch, which later branches hold
+ * only as cherry-picked copies, so it is found by name, never by walking history.
+ */
+export function baselineTag(tags: readonly string[], version: string): string | null {
+  const ceiling = versionOf(version);
+  if (ceiling === null) throw new Error(`app.json's version "${version}" is not X.Y.Z`);
+  let best: { tag: string; version: Version } | null = null;
+  for (const tag of tags) {
+    const tagged = tag.startsWith('v') ? versionOf(tag.slice(1)) : null;
+    if (tagged === null || compareVersions(tagged, ceiling) > 0) continue;
+    if (best === null || compareVersions(tagged, best.version) > 0) best = { tag, version: tagged };
+  }
+  return best?.tag ?? null;
+}
+
+/** A listing file as it was at the baseline: null with none, or when it no longer parses. */
+export function readBaseline(markdown: string | null): Listing | null {
+  if (markdown === null) return null;
+  try {
+    return readListing(markdown);
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Which fields need entering. A field the baseline already holds is skipped. What's new
+ * belongs to a version, not to the listing: every new version enters it, and an edit
+ * between versions has no version to carry it.
+ */
+export function fieldStatuses(
+  listing: Listing,
+  baseline: Listing | null,
+  newVersion: boolean,
+): Readonly<Record<FieldId, Status>> {
+  return Object.fromEntries(
+    FIELDS.map((field) => {
+      if (field.id === 'whatsNew') return [field.id, newVersion ? 'paste' : 'skip'];
+      const same = baseline !== null && baseline[field.id] === listing[field.id];
+      return [field.id, same ? 'skip' : 'paste'];
+    }),
+  ) as Record<FieldId, Status>;
+}
+
+/** Whether a branch is a version's release branch, the only place images come from. */
+export function isReleaseBranch(branch: string): boolean {
+  return /^release\/\d+\.\d+\.\d+$/.test(branch);
+}
+
+/** Every image a release hands over: from its capture to its place in dist/store-listing/. */
+export function imageCopies(
+  shots: readonly string[],
+): { readonly from: string; readonly to: string }[] {
+  const copies = LANGUAGES.flatMap((language) => {
+    const { appStore, play } = STORE_LOCALES[language];
+    return [
+      ...shots.flatMap((shot, index) => {
+        const n = String(index + 1).padStart(2, '0');
+        return [
+          { from: `design/store/${language}/${shot}.png`, to: `app-store/${appStore}/${n}.png` },
+          { from: `design/play/${language}/${shot}.jpg`, to: `play/${play}/${n}.jpg` },
+        ];
+      }),
+      {
+        from: `design/play/${language}/feature-graphic.jpg`,
+        to: `play/${play}/feature-graphic.jpg`,
+      },
+    ];
+  });
+  return [...copies, { from: 'design/play/icon-512.png', to: 'play/icon-512.png' }];
+}
+
+export interface SheetInput {
+  readonly version: string;
+  readonly baseline: string | null;
+  readonly listings: Readonly<Record<ListingLanguage, Listing>>;
+  readonly statuses: Readonly<Record<ListingLanguage, Readonly<Record<FieldId, Status>>>>;
+  readonly images: ImageStatus;
+  readonly shotCount: number;
+  readonly declarations: Status;
+}
+
+const FENCE = '~~~~';
+
+/** Each console's own name for a field, where it differs from the listing file's. */
+const APP_STORE_LABELS: Partial<Record<FieldId, string>> = {
+  promotionalText: 'Promotional Text',
+  whatsNew: "What's New in This Version",
+};
+const PLAY_LABELS: Partial<Record<FieldId, string>> = { description: 'Full description' };
+
+function entry(label: string, status: Status, text: string, limit: number): string[] {
+  if (status === 'skip') return [`- ${label}: skip, unchanged`, ''];
+  return [
+    `#### ${label} · paste · ${charCount(text)}/${limit}`,
+    '',
+    `${FENCE}text`,
+    text,
+    FENCE,
+    '',
+  ];
+}
+
+function imagesIntro(images: ImageStatus, baseline: string | null): string {
+  switch (images) {
+    case 'paste':
+      return 'Images: **paste**, from `dist/store-listing/`.';
+    case 'skip':
+      return `Images: skip, the same as in ${baseline}.`;
+    case 'release-only':
+      return 'Images: none here. They show the code that ships, so they come only from a release branch.';
+  }
+}
+
+/** The paste sheet: store, then locale, then field, in the order the consoles take them. */
+export function pasteSheet(input: SheetInput): string {
+  const { listings, statuses, images } = input;
+  const last = String(input.shotCount).padStart(2, '0');
+  const lines: string[] = [
+    `# Paste sheet: ${input.version}`,
+    '',
+    input.baseline === null
+      ? 'No earlier version is tagged, so everything is **paste**.'
+      : `Compared with ${input.baseline}, the listing that is live: enter only what says **paste**.`,
+    '',
+    imagesIntro(images, input.baseline),
+    '',
+    '## App Store Connect',
+    '',
+  ];
+  for (const language of LANGUAGES) {
+    const locale = STORE_LOCALES[language].appStore;
+    lines.push(`### ${locale}`, '');
+    for (const field of FIELDS) {
+      if (field.store === 'Google Play') continue;
+      const label = APP_STORE_LABELS[field.id] ?? field.name;
+      lines.push(
+        ...entry(label, statuses[language][field.id], listings[language][field.id], field.limit),
+      );
+    }
+    if (images === 'paste') {
+      lines.push(`- Screenshots: \`app-store/${locale}/01.png\` to \`${last}.png\`, in order`, '');
+    }
+  }
+  lines.push('## Google Play Console', '');
+  for (const language of LANGUAGES) {
+    const locale = STORE_LOCALES[language].play;
+    lines.push(`### ${locale}`, '');
+    for (const field of FIELDS) {
+      if (field.store === 'App Store' || field.id === 'whatsNew') continue;
+      const label = PLAY_LABELS[field.id] ?? field.name;
+      lines.push(
+        ...entry(label, statuses[language][field.id], listings[language][field.id], field.limit),
+      );
+    }
+    if (images === 'paste') {
+      lines.push(
+        `- Screenshots: \`play/${locale}/01.jpg\` to \`${last}.jpg\`, in order`,
+        `- Feature graphic: \`play/${locale}/feature-graphic.jpg\``,
+        '',
+      );
+    }
+  }
+  if (images === 'paste') lines.push('- App icon: `play/icon-512.png`, in the default listing', '');
+  // Play takes every language's release notes in one box, each inside its locale's tags.
+  if (LANGUAGES.some((language) => statuses[language].whatsNew === 'paste')) {
+    const notes = LANGUAGES.flatMap((language) => {
+      const locale = STORE_LOCALES[language].play;
+      return [`<${locale}>`, listings[language].whatsNew, `</${locale}>`];
+    });
+    lines.push(
+      '### Release notes · paste, every language in one box',
+      '',
+      `${FENCE}text`,
+      ...notes,
+      FENCE,
+      '',
+    );
+  } else {
+    lines.push('### Release notes: skip, unchanged', '');
+  }
+  if (input.declarations === 'paste') {
+    lines.push(
+      '## Declarations · paste',
+      '',
+      "Enter what `store/declarations.md` says: App Privacy before Submit for Review, Data safety when the build is uploaded, and each store's privacy policy URL with its answers.",
+      '',
+    );
+  } else {
+    lines.push('## Declarations: skip, unchanged', '');
+  }
+  return `${lines.join('\n').trimEnd()}\n`;
+}
+
+/**
+ * The sheet a native reviewer signs off: each changed field's English, then its
+ * translation and count. `language` is the language's name in itself (its file's title).
+ * Null when nothing in the language changed.
+ */
+export function reviewSheet(
+  language: string,
+  listing: Listing,
+  english: Listing,
+  statuses: Readonly<Record<FieldId, Status>>,
+  baseline: string | null,
+): string | null {
+  const changed = FIELDS.filter((field) => statuses[field.id] === 'paste');
+  if (changed.length === 0) return null;
+  const quote = (text: string) => text.split('\n').map((line) => (line === '' ? '>' : `> ${line}`));
+  const lines = [
+    `# ${language}: store listing review`,
+    '',
+    'Reviewer: ______________ Signed off on: ______________',
+    '',
+    baseline === null
+      ? '- Every field is here: this is the first listing.'
+      : `- Only the fields that changed since ${baseline} are here.`,
+    '- The limit is the most characters the store takes. A text that does not fit is rewritten, never cut.',
+    '- Never translated: Escuadra, a la escuadra. Screens and buttons are named as the app names them in this language.',
+    '',
+    ...changed.flatMap((field) => [
+      `## ${heading(field)}`,
+      '',
+      'English:',
+      '',
+      ...quote(english[field.id]),
+      '',
+      `${language}, ${charCount(listing[field.id])}/${field.limit}:`,
+      '',
+      ...quote(listing[field.id]),
+      '',
+    ]),
+  ];
+  return `${lines.join('\n').trimEnd()}\n`;
+}

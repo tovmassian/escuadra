@@ -6,18 +6,29 @@ import { LANGUAGE_NAMES } from '@/i18n/names';
 import { SUPPORTED_LANGUAGES } from '@/i18n/resolveLanguage';
 import { pageUrl } from '../privacy-pages';
 import {
+  baselineTag,
   charCount,
   declaredPrivacyUrl,
+  fieldStatuses,
   FIELDS,
   heading,
+  imageCopies,
+  isReleaseBranch,
   LANGUAGES,
   listingProblems,
+  pasteSheet,
   parseListing,
+  readBaseline,
   readListing,
+  reviewSheet,
   screenshotProblems,
   STORE_LOCALES,
   translationProblems,
+  type FieldId,
   type Listing,
+  type ListingLanguage,
+  type SheetInput,
+  type Status,
 } from '../store-listing';
 
 const ROOT = new URL('../../', import.meta.url);
@@ -248,5 +259,182 @@ describe('the files in store/', () => {
 
   it('declare the current privacy policy', () => {
     expect(declaredPrivacyUrl(read('store/declarations.md'))).toBe(pageUrl('en'));
+  });
+});
+
+const ALL_PASTE = fieldStatuses(ENGLISH, null, true);
+
+describe('baselineTag', () => {
+  it('is null before any version is tagged', () => {
+    expect(baselineTag([], '2.0.0')).toBeNull();
+  });
+
+  it('is the previous version while the next one is prepared', () => {
+    expect(baselineTag(['v2.0.0', 'v2.0.1'], '2.1.0')).toBe('v2.0.1');
+  });
+
+  it('is the live version itself between versions', () => {
+    expect(baselineTag(['v2.0.0'], '2.0.0')).toBe('v2.0.0');
+  });
+
+  it('compares versions as numbers', () => {
+    expect(baselineTag(['v2.9.0', 'v2.10.0'], '3.0.0')).toBe('v2.10.0');
+  });
+
+  it('ignores later versions and other tags', () => {
+    expect(baselineTag(['v3.0.0', 'v2.0.0-rc1', 'release', 'v2.0.0'], '2.5.0')).toBe('v2.0.0');
+  });
+
+  it('throws on a version that is not X.Y.Z', () => {
+    expect(() => baselineTag([], '2.0')).toThrow(/not X\.Y\.Z/);
+  });
+});
+
+describe('readBaseline', () => {
+  it('reads a listing, and is null with none or with one that no longer parses', () => {
+    expect(readBaseline(file(ENGLISH))).toEqual(ENGLISH);
+    expect(readBaseline(null)).toBeNull();
+    expect(readBaseline('# English')).toBeNull();
+  });
+});
+
+describe('fieldStatuses', () => {
+  it('pastes everything with no baseline', () => {
+    expect(Object.values(ALL_PASTE)).toEqual(Array(6).fill('paste'));
+  });
+
+  it('skips a field the baseline already holds, and pastes a changed one', () => {
+    const statuses = fieldStatuses({ ...ENGLISH, subtitle: 'New' }, ENGLISH, true);
+    expect(statuses.subtitle).toBe('paste');
+    expect(statuses.description).toBe('skip');
+  });
+
+  it("pastes What's new for every new version, and never between versions", () => {
+    expect(fieldStatuses(ENGLISH, ENGLISH, true).whatsNew).toBe('paste');
+    expect(fieldStatuses({ ...ENGLISH, whatsNew: 'Changed' }, ENGLISH, false).whatsNew).toBe(
+      'skip',
+    );
+  });
+});
+
+describe('isReleaseBranch', () => {
+  it('is true only for release/X.Y.Z', () => {
+    expect(isReleaseBranch('release/2.0.0')).toBe(true);
+    expect(isReleaseBranch('main')).toBe(false);
+    expect(isReleaseBranch('release/2.0.0-fix')).toBe(false);
+  });
+});
+
+describe('imageCopies', () => {
+  const copies = imageCopies(['01-home', '05-study']);
+
+  it("numbers each language's shots in order, per store, with its feature graphic", () => {
+    expect(copies).toContainEqual({
+      from: 'design/store/it/05-study.png',
+      to: 'app-store/it/02.png',
+    });
+    expect(copies).toContainEqual({ from: 'design/play/es/01-home.jpg', to: 'play/es-ES/01.jpg' });
+    expect(copies).toContainEqual({
+      from: 'design/play/de/feature-graphic.jpg',
+      to: 'play/de-DE/feature-graphic.jpg',
+    });
+  });
+
+  it('hands over the icon once, last', () => {
+    expect(copies).toHaveLength(5 * (2 * 2 + 1) + 1);
+    expect(copies.at(-1)).toEqual({ from: 'design/play/icon-512.png', to: 'play/icon-512.png' });
+  });
+});
+
+describe('pasteSheet', () => {
+  const each = <T>(value: T) =>
+    Object.fromEntries(LANGUAGES.map((language) => [language, value])) as Record<
+      ListingLanguage,
+      T
+    >;
+  const input: SheetInput = {
+    version: '2.0.0',
+    baseline: null,
+    listings: each(ENGLISH),
+    statuses: each(ALL_PASTE),
+    images: 'paste',
+    shotCount: 6,
+    declarations: 'paste',
+  };
+
+  it('says what it compares with', () => {
+    const sheet = pasteSheet(input);
+    expect(sheet.startsWith('# Paste sheet: 2.0.0\n')).toBe(true);
+    expect(sheet).toContain('No earlier version is tagged, so everything is **paste**.');
+    expect(pasteSheet({ ...input, baseline: 'v1.0.0' })).toContain('Compared with v1.0.0');
+  });
+
+  it('gives each paste field a fenced block with its count, in console order', () => {
+    const sheet = pasteSheet(input);
+    expect(sheet).toContain(
+      '#### Subtitle · paste · 26/30\n\n~~~~text\nLearn every football squad\n~~~~',
+    );
+    expect(sheet.indexOf('### it\n')).toBeLessThan(sheet.indexOf('## Google Play Console'));
+    expect(sheet.indexOf('Short description')).toBeGreaterThan(
+      sheet.indexOf('## Google Play Console'),
+    );
+    expect(sheet).toContain("#### What's New in This Version · paste");
+    expect(sheet).toContain('#### Full description · paste');
+  });
+
+  it('gives a skipped field one line', () => {
+    const statuses: Record<FieldId, Status> = { ...ALL_PASTE, subtitle: 'skip' };
+    const sheet = pasteSheet({ ...input, statuses: each(statuses) });
+    expect(sheet).toContain('- Subtitle: skip, unchanged');
+    expect(sheet).not.toContain('#### Subtitle');
+  });
+
+  it("puts Play's release notes for every language in one block", () => {
+    expect(pasteSheet(input)).toContain('<it-IT>\nPhotos of every player.\n</it-IT>');
+  });
+
+  it('lists the images only when they are entered', () => {
+    const sheet = pasteSheet(input);
+    expect(sheet).toContain('`app-store/en-US/01.png` to `06.png`');
+    expect(sheet).toContain('`play/icon-512.png`');
+    const elsewhere = pasteSheet({ ...input, images: 'release-only' });
+    expect(elsewhere).toContain('come only from a release branch');
+    expect(elsewhere).not.toContain('app-store/');
+  });
+
+  it('points at the declarations when they changed', () => {
+    expect(pasteSheet(input)).toContain('`store/declarations.md`');
+    expect(pasteSheet({ ...input, declarations: 'skip' })).toContain(
+      '## Declarations: skip, unchanged',
+    );
+  });
+});
+
+describe('reviewSheet', () => {
+  const onlyWhatsNew: Record<FieldId, Status> = {
+    ...fieldStatuses(SPANISH, SPANISH, false),
+    whatsNew: 'paste',
+  };
+
+  it('is null when nothing changed', () => {
+    expect(
+      reviewSheet('Español', SPANISH, ENGLISH, fieldStatuses(SPANISH, SPANISH, false), 'v2.0.0'),
+    ).toBeNull();
+  });
+
+  it('holds only the changed fields, English first, with the count', () => {
+    const sheet = reviewSheet('Español', SPANISH, ENGLISH, onlyWhatsNew, 'v2.0.0') ?? '';
+    expect(sheet).toContain("## What's new (both, 500)");
+    expect(sheet).toContain('English:\n\n> Photos of every player.');
+    expect(sheet).toContain('Español, 22/500:\n\n> Fotos de cada jugador.');
+    expect(sheet).not.toContain('Subtitle');
+    expect(sheet).toContain('changed since v2.0.0');
+  });
+
+  it('quotes a text over several lines', () => {
+    const sheet =
+      reviewSheet('Español', SPANISH, ENGLISH, fieldStatuses(SPANISH, null, true), null) ?? '';
+    expect(sheet).toContain('> Escuadra enseña una plantilla repitiendo.\n>\n> Una ronda');
+    expect(sheet).toContain('this is the first listing');
   });
 });
