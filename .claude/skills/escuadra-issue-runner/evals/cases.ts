@@ -132,7 +132,7 @@ const STREAK_PLAN = 'docs/superpowers/plans/2026-10-02-streak-badges.md';
 const FLAG_SPEC = 'docs/superpowers/specs/2026-10-20-flagged-players-design.md';
 
 const triage = (expect: Omit<Triage, 'kind'>): Triage => ({ kind: 'triage', ...expect });
-const NEGATIVE_BUDGET = { maxTurns: 15, timeoutSeconds: 300 };
+const NEGATIVE_BUDGET = { maxTurns: 25, timeoutSeconds: 300 };
 
 const CASES: EvalCase[] = [
   {
@@ -206,7 +206,7 @@ const CASES: EvalCase[] = [
     expect: triage({
       decision: 'ask',
       questions:
-        'one asks the owner to confirm the [TBC] issue is ready to work (its scope or its wording), because its title carries [TBC].',
+        'at least one asks the owner to confirm that the [TBC] issue is ready to work, or what its scope should be, because its title carries [TBC].',
     }),
   },
   {

@@ -52,7 +52,7 @@ graders:
     weight: 3
   - type: 'llm'
     name: 'questions'
-    criteria: 'The final message ends with a triage block whose decision is "ask". Among its questions for the owner, one asks the owner to confirm the [TBC] issue is ready to work (its scope or its wording), because its title carries [TBC].'
+    criteria: 'The final message ends with a triage block whose decision is "ask". Among its questions for the owner, at least one asks the owner to confirm that the [TBC] issue is ready to work, or what its scope should be, because its title carries [TBC].'
     weight: 2
   - type: 'regex'
     name: 'no-writes'

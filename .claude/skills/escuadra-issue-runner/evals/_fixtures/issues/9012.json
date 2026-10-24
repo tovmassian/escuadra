@@ -2,7 +2,7 @@
   "number": 9012,
   "title": "feat(study): a Hide numbers switch next to Hide names [TBC]",
   "state": "OPEN",
-  "body": "**Size:** S\n\nStudy has Hide names, to test yourself on a shirt number. A Hide numbers switch would do the reverse. The scope is still to be confirmed: whether it hides the number on cards only, or on list rows too.\n\n### Work\n\n- [ ] A Hide numbers switch beside Hide names in `app/team/[squadId]/study.tsx`\n- [ ] The numbers hidden in the grid and, if confirmed, in the list",
+  "body": "**Size:** S\n\nStudy has Hide names, to test yourself on a shirt number. A Hide numbers switch would do the reverse. The scope of this feature is still to be confirmed with the owner.\n\n### Work\n\n- [ ] A Hide numbers switch beside Hide names in `app/team/[squadId]/study.tsx`\n- [ ] Tests for it",
   "comments": [],
   "labels": ["enhancement"],
   "milestone": null,
