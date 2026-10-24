@@ -93,7 +93,7 @@ function keywordProblems(keywords: string): string[] {
     problems.push('Keywords have an empty entry between commas');
   }
   const seen = new Set<string>();
-  for (const word of words.map((each) => each.trim().toLocaleLowerCase())) {
+  for (const word of words.map((each) => each.trim().toLowerCase())) {
     if (word !== '' && seen.has(word)) problems.push(`Keywords repeat "${word}"`);
     seen.add(word);
   }
@@ -184,6 +184,8 @@ export function declaredPrivacyUrl(declarations: string): string | null {
 export type Status = 'paste' | 'skip';
 /** Images are entered, unchanged, or not this checkout's to hand over. */
 export type ImageStatus = Status | 'release-only';
+/** Declarations must match the binary, so they too come only from a release branch. */
+export type DeclarationStatus = Status | 'release-only';
 
 type Version = readonly [number, number, number];
 
@@ -243,6 +245,23 @@ export function fieldStatuses(
   ) as Record<FieldId, Status>;
 }
 
+/**
+ * A translation's statuses: a field is entered when it or its English changed since the
+ * baseline, so a translation left behind by an English edit reaches the reviewer and the
+ * sheet instead of reading as unchanged.
+ */
+export function translationStatuses(
+  own: Readonly<Record<FieldId, Status>>,
+  english: Readonly<Record<FieldId, Status>>,
+): Readonly<Record<FieldId, Status>> {
+  return Object.fromEntries(
+    FIELDS.map((field) => [
+      field.id,
+      own[field.id] === 'paste' || english[field.id] === 'paste' ? 'paste' : 'skip',
+    ]),
+  ) as Record<FieldId, Status>;
+}
+
 /** Whether a branch is a version's release branch, the only place images come from. */
 export function isReleaseBranch(branch: string): boolean {
   return /^release\/\d+\.\d+\.\d+$/.test(branch);
@@ -278,7 +297,7 @@ export interface SheetInput {
   readonly statuses: Readonly<Record<ListingLanguage, Readonly<Record<FieldId, Status>>>>;
   readonly images: ImageStatus;
   readonly shotCount: number;
-  readonly declarations: Status;
+  readonly declarations: DeclarationStatus;
 }
 
 const FENCE = '~~~~';
@@ -385,6 +404,11 @@ export function pasteSheet(input: SheetInput): string {
       '## Declarations · paste',
       '',
       "Enter what `store/declarations.md` says: App Privacy before Submit for Review, Data safety when the build is uploaded, and each store's privacy policy URL with its answers.",
+      '',
+    );
+  } else if (input.declarations === 'release-only') {
+    lines.push(
+      '## Declarations: none here. They must match the binary, so they come only from a release branch.',
       '',
     );
   } else {

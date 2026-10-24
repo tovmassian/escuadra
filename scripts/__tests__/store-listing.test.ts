@@ -24,6 +24,7 @@ import {
   screenshotProblems,
   STORE_LOCALES,
   translationProblems,
+  translationStatuses,
   type FieldId,
   type Listing,
   type ListingLanguage,
@@ -317,6 +318,16 @@ describe('fieldStatuses', () => {
   });
 });
 
+describe('translationStatuses', () => {
+  it("pastes a field the English changed, though the translation's own text did not", () => {
+    const own = fieldStatuses(SPANISH, SPANISH, false);
+    const english = fieldStatuses({ ...ENGLISH, description: 'Changed' }, ENGLISH, false);
+    const statuses = translationStatuses(own, english);
+    expect(statuses.description).toBe('paste');
+    expect(statuses.subtitle).toBe('skip');
+  });
+});
+
 describe('isReleaseBranch', () => {
   it('is true only for release/X.Y.Z', () => {
     expect(isReleaseBranch('release/2.0.0')).toBe(true);
@@ -407,6 +418,13 @@ describe('pasteSheet', () => {
     expect(pasteSheet({ ...input, declarations: 'skip' })).toContain(
       '## Declarations: skip, unchanged',
     );
+  });
+
+  it('hands over no declarations off a release branch', () => {
+    const sheet = pasteSheet({ ...input, declarations: 'release-only' });
+    expect(sheet).toContain('## Declarations: none here.');
+    expect(sheet).toContain('come only from a release branch');
+    expect(sheet).not.toContain('store/declarations.md');
   });
 });
 

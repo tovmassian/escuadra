@@ -52,6 +52,7 @@ to its limit.
 `vX.Y.Z` tag at or below `app.json`'s version, found by name, because a version's tag sits
 on its release branch. It marks each field, the images and the declarations _paste_ or
 _skip_ and writes `dist/store-listing/paste-sheet.md`; on a `release/X.Y.Z` checkout it
-also copies the images to `dist/store-listing/` when they are _paste_. `--review` writes
+also copies the images to `dist/store-listing/` when they are _paste_; elsewhere the sheet
+holds no images and no declarations, which must match the binary. `--review` writes
 the reviewers' sheets to `dist/store-listing/review/`. It has no npm script, because a new
 one would move the fingerprint; nothing under `store/` or `i18n/` feeds the fingerprint.

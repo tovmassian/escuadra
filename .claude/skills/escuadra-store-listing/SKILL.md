@@ -51,7 +51,8 @@ main                           release/X.Y.Z                  GitHub, the stores
    v=$(node -p "require('./app.json').expo.version")
    awk "/^## \[$v\]/{f=1;next} /^## \[/{f=0} f" CHANGELOG.md
    gh pr list --state merged --search "milestone:v$v" --json number,title --limit 200
-   git tag --list 'v*'          # the baseline t: the highest at or below $v
+   git fetch --tags --quiet && git tag --list 'v*' --sort=-v:refname   # newest first
+   t=<the first tag at or below $v, or none>   # the baseline
    ```
 
    Read the five `store/listing/<lang>.md`, `store/screenshots.json` and
@@ -145,8 +146,8 @@ the App Store only Promotional text can change between versions; any other App S
 waits for the next version, whose sheet marks it _paste_ again. Steps 3–6 run as above (the
 review sheets compare with the live version's tag). Title the PR
 `docs(store): <the change> in the listing (#N)` and pick nothing. Once it is merged, run
-`node scripts/store-bundle.ts` on `main`: its sheet holds text and declarations, with no
-images. Walk it with the owner, who enters only Promotional text in App Store Connect and
+`node scripts/store-bundle.ts` on `main`: its sheet holds text only: no images and no
+declarations, which must match the binary and so come from a release branch. Walk it with the owner, who enters only Promotional text in App Store Connect and
 the Play listing fields in Play Console (Play reviews a listing edit without a release).
 Make the change before the next version's `app.json` bump lands on `main`: after it, the
 sheet and the review sheets also show What's new and that version's edits, so the owner
@@ -162,22 +163,28 @@ yourself.
    the tag exists it becomes the baseline, so a re-run marks everything _skip_ and empties
    `dist/store-listing/app-store/` and `play/`, leaving this mode's step 4 nothing to
    attach.
-2. If the sheet marks the images _paste_, or the bundle stops for missing captures,
-   capture every language with the loop the stop message prints (also in
-   `docs/release.md`, step 7), then run it again. The captures are gitignored, so ones
-   left from an earlier run would otherwise be handed over. Look at a few captures in
-   each language (`design/store/<code>/`, `design/play/<code>/`) before going on: they are
-   web renders, so a layout that breaks only in one language shows here first.
-3. Walk `dist/store-listing/paste-sheet.md` with the owner, one store at a time, ticking
-   what they confirm entered. Apple's fields and App Privacy go in before Submit for
-   Review; Play's listing, release notes and Data safety when the build is uploaded; each
-   store's privacy URL together with its answers.
+2. If the first run marks the images _paste_, or stops for missing captures, capture
+   every language once with the loop the stop message prints (also in `docs/release.md`,
+   step 7), then run the bundle again; the second run copies the fresh captures. The
+   captures are gitignored, so ones left from an earlier run would otherwise be handed
+   over. Look at a few captures in each language (`design/store/<code>/`,
+   `design/play/<code>/`) before going on: they are web renders, so a layout that breaks
+   only in one language shows here first. Before capturing, make sure no other dev server
+   is listening on ports 8082 or 8083 (another worktree's): the capture scripts would
+   shoot its code.
+3. Walk `dist/store-listing/paste-sheet.md` with the owner, one store at a time, noting in
+   the conversation what they confirm entered. Apple's fields and App Privacy go in before
+   Submit for Review; Play's listing, release notes and Data safety when the build is
+   uploaded; each store's privacy URL together with its answers. A language entered for the
+   first time also needs, in App Store Connect, its Name (_Escuadra_), Privacy Policy URL
+   and Support URL, and in Play Console its App name (_Escuadra_): take them from
+   `store/declarations.md`.
 4. After the owner has tagged `vX.Y.Z` and published its GitHub Release (step 8), and
    only when the sheet marked the images _paste_, offer to attach them to its GitHub
    Release, and do it on the owner's OK:
 
    ```bash
-   (cd dist/store-listing && zip -qr app-store.zip app-store && zip -qr play.zip play)
+   (cd dist/store-listing && rm -f app-store.zip play.zip && zip -qr app-store.zip app-store && zip -qr play.zip play)
    gh release upload vX.Y.Z dist/store-listing/app-store.zip dist/store-listing/play.zip
    ```
 

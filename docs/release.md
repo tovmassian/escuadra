@@ -204,10 +204,10 @@ A new version from `main`:
    and lists what's left.
 7. Enter the listing. From a clean checkout of the branch, `node scripts/store-bundle.ts`
    writes `dist/store-listing/paste-sheet.md`, marking each field, the images and the
-   declarations _paste_ or _skip_ against the last version's tag. When the sheet marks
-   the images _paste_, or the bundle stops for missing captures, capture every language
-   and run it again (the captures are gitignored, so ones left from an earlier run would
-   be handed over):
+   declarations _paste_ or _skip_ against the last version's tag. When the first run
+   marks the images _paste_, or stops for missing captures, capture every language once
+   and run it again; the second run copies the fresh captures (they are gitignored, so
+   ones left from an earlier run would otherwise be handed over):
    `for code in en es fr it de; do npm run shots:store -- --lang=$code && npm run shots:play -- --lang=$code && npm run gen:play-assets -- --lang=$code || break; done`.
    Enter what says _paste_: Apple's before Submit for Review, Play's when the build is
    uploaded.
@@ -220,7 +220,7 @@ A new version from `main`:
    `gh release create vX.Y.Z --title X.Y.Z --notes-file "$RUNNER_TEMP/notes.md"`.
    The tag is also what the next version's paste sheet compares with. When step 7 copied
    images, attach them to the same Release:
-   `(cd dist/store-listing && zip -qr app-store.zip app-store && zip -qr play.zip play)`,
+   `(cd dist/store-listing && rm -f app-store.zip play.zip && zip -qr app-store.zip app-store && zip -qr play.zip play)`,
    then
    `gh release upload vX.Y.Z dist/store-listing/app-store.zip dist/store-listing/play.zip`.
    They stay out of git: they are large. No workflow runs on tags. Play's 12-tester,
@@ -255,9 +255,10 @@ on `main`, and it merges after the native sign-offs. From the sheet
 `node scripts/store-bundle.ts` writes on `main`, you enter Promotional text in App Store
 Connect and the listing fields in Play Console; any other App Store field changes only with
 a version, so it waits for the next version's sheet. The sheet written on `main` holds no
-images, and any What's new on it is not entered: both come only with a version. Make such
-a change before the next version's `app.json` bump lands on `main`; after it, the sheet
-also marks that version's edits _paste_, and only the field this change edits is entered.
+images and no declarations, and any What's new on it is not entered: they come only with a
+version. Make such a
+change before the next version's `app.json` bump lands on `main`; after it, the sheet also
+marks that version's edits _paste_, and only the field this change edits is entered.
 The next version's sheet marks the change _paste_ again, because only a version's tag
 records what is live.
 
