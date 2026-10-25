@@ -38,19 +38,39 @@ The web policy is versioned, one folder per policy version: `docs/release.md`, C
 
 **Telemetry** is TelemetryDeck, anonymous and opt-out. The event allowlist
 — every event name and property that may leave the device — is
-`TELEMETRY_EVENTS` in `lib/telemetryEvents.ts`, alongside the pure gate
-that keeps it inert in `__DEV__`, on web (so `npm run shots*` never sends),
-when opted out, and with no App ID (`app.json` →
-`extra.telemetryDeckAppId`). `lib/telemetry.ts` is the only app module that
-imports the SDK; screens call its `track()`. The anonymous `clientUser` is
-a random `installId` persisted in `stores/progress.ts`, next to the
-Settings-screen opt-out. Reset Escuadra (`factoryReset`) replaces `installId`;
-`lib/telemetry.ts` points its one client at the current id, so the launch's session
-code stays (`lib/__tests__/telemetryIdentifier.test.ts` pins it). Non-`production` channels send TelemetryDeck test
-signals. **A new event or property is a disclosure review** (guardrail 4):
+`TELEMETRY_EVENTS` in `lib/telemetryEvents.ts`, with `TELEMETRY_CONTEXT`, the
+keys every signal carries (the app's version, build, platform, system and
+update, and the language), and the pure gate that keeps it inert in `__DEV__`,
+on web (so `npm run shots*` never sends), when opted out, and with no App ID
+(`app.json` → `extra.telemetryDeckAppId`). What each event means and answers is
+the data dictionary, `docs/superpowers/specs/2026-10-26-telemetry-2-0-design.md`.
+`lib/telemetry.ts` is the only app module that imports the SDK; screens call
+its `track()`. The anonymous `clientUser` is a random `installId` persisted in
+`stores/progress.ts`, next to the Settings-screen opt-out. Non-`production`
+channels send TelemetryDeck test signals.
+
+- **Queued, not sent at once.** `track()` queues each signal, with the time it
+  was made, in `stores/progress.ts` (`telemetryQueue`), and flushes it. A batch
+  leaves the queue only when the response says sent or refused
+  (`lib/telemetryQueue.ts`). Switching usage statistics off and Reset Escuadra
+  empty it, and a signal still being built for a replaced identifier is never
+  queued. `trackNow()` skips the queue for Reset Escuadra's own signal
+  (`lib/__tests__/telemetryQueueing.test.ts`).
+- **Sessions.** A session starts on a cold start and on each return from the
+  background (`nextAppPhase`). The client takes a new session code, and
+  `TelemetryDeck.Session.started` is sent. Reset Escuadra replaces `installId`
+  but starts no session: the one client points at the current id
+  (`lib/__tests__/telemetryIdentifier.test.ts` pins it).
+- **The contract.** From 2.0.0 on, event names, property names and value sets
+  are kept: add, never rename; a changed meaning gets a new name, so a series
+  stays comparable across versions. `lib/__tests__/telemetryEvents.test.ts` pins
+  the whole allowlist and the context.
+
+**A new event or property is a disclosure review** (guardrail 4):
 the privacy policy, About text, App Privacy and Data safety answers change
 with it, in a store build. So is an upgrade of `@telemetrydeck/sdk` (or of
 `expo-updates`), because About states what those SDKs put in each request.
-For TelemetryDeck, `lib/__tests__/telemetrySdk.test.ts` pins the request, and a failure
-there means About no longer describes it; `expo-updates` has no such test, so
-read its changelog. Never put names, free text or player data in a payload.
+For TelemetryDeck, `lib/__tests__/telemetrySdk.test.ts` pins the request, a sent
+one and a queued one, and a failure there means About no longer describes it;
+`expo-updates` has no such test, so read its changelog. Never put names, free
+text or player data in a payload; a team travels only as its squad id.

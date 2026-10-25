@@ -15,6 +15,9 @@ vi.mock('@react-native-async-storage/async-storage', () => ({
     removeItem: async (key: string) => void disk.delete(key),
   },
 }));
+// The store reads the squads only to migrate old scores. Faked, so each test's fresh
+// import doesn't load every squad, which is slow enough to time out under load.
+vi.mock('@/lib/squads', () => ({ listSquads: () => [] }));
 vi.mock('expo-constants', () => ({
   default: {
     expoConfig: { version: '2.0.0', extra: { telemetryDeckAppId: 'APP' } },
