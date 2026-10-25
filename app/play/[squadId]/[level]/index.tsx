@@ -10,6 +10,8 @@ import { SpotlightStage } from '@/components/SpotlightStage';
 import { StreakChip } from '@/components/StreakChip';
 import { TeamMarker } from '@/components/TeamMarker';
 import { TipsLayer } from '@/components/TipsLayer';
+import { useAppActive } from '@/components/useAppActive';
+import { useRoundClock } from '@/components/useRoundClock';
 import { useScreenReader } from '@/components/useScreenReader';
 import { useShot } from '@/components/useShot';
 import { useTips } from '@/components/useTips';
@@ -19,6 +21,7 @@ import { feedback } from '@/lib/haptics';
 import { photoFor, roundPhotoUrls } from '@/lib/photos';
 import type { Level } from '@/lib/questionEngine';
 import { isFlawless } from '@/lib/resultsView';
+import { leftRound, missesByPart, previousBestValue } from '@/lib/roundStats';
 import {
   answerLayout,
   footerMode,
@@ -33,7 +36,9 @@ import {
 } from '@/lib/roundView';
 import { getPlayer, getRoster, getSquad } from '@/lib/squads';
 import { withAlpha } from '@/lib/stageView';
+import { scoreKey } from '@/lib/scoring';
 import { track } from '@/lib/telemetry';
+import { roundSeconds } from '@/lib/telemetryEvents';
 import type { TipScreen } from '@/lib/tips';
 import { useProgress } from '@/stores/progress';
 import { selectScore, useSession } from '@/stores/session';
@@ -52,7 +57,7 @@ import {
 import { useThemeColors, useThemeName } from '@/theme/useTheme';
 import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
-import { router, useLocalSearchParams } from 'expo-router';
+import { router, useIsFocused, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useRef } from 'react';
 import {
@@ -65,6 +70,21 @@ import {
 } from 'react-native';
 import Animated, { FadeOut, Keyframe, useReducedMotion } from 'react-native-reanimated';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
+
+/** Usage statistics (#221): a round still in progress, about to be thrown away. */
+function trackLeftRound(): void {
+  const left = leftRound(useSession.getState());
+  const squad = left ? getSquad(left.squad) : undefined;
+  if (!left || !squad) return;
+  track('round.left', {
+    squad: left.squad,
+    kind: squad.kind,
+    level: left.level,
+    question: left.question,
+    score: left.score,
+    seconds: roundSeconds(left.activeMs),
+  });
+}
 
 // The Spotlight question screen (spec §2). Its layers, back to front:
 // - the photo stage;
@@ -111,13 +131,15 @@ export default function Question() {
   useEffect(() => {
     if (!squad) return;
     if (startsNewRound(session, squadId, level)) {
+      // A round still in progress for another squad or level is thrown away here.
+      trackLeftRound();
       session.startRound(
         squad,
         getRoster(squadId),
         level,
         Number.isFinite(seed) ? seed : undefined,
       );
-      track('round.started', { kind: squad.kind, level });
+      track('round.started', { squad: squad.id, kind: squad.kind, level, source: 'ladder' });
     }
     setLastPlayed(squadId, level);
     // Only when the route target changes: starting a round mutates `session`.
@@ -136,15 +158,24 @@ export default function Question() {
     if (session.squadId === squadId && session.level === level) {
       const score = selectScore(session.results);
       // Before `recordScore`, which keeps a best score for every completed
-      // round, even a 0/10: any key now means an earlier round (#57).
-      session.setEarlierRounds(Object.keys(useProgress.getState().bestScores).length > 0);
+      // round, even a 0/10: any key now means an earlier round (#57), and the
+      // best this round had to beat (#221).
+      const { bestScores } = useProgress.getState();
+      session.setEarlierRounds(Object.keys(bestScores).length > 0);
       if (squad) {
+        const previousBest = previousBestValue(bestScores[scoreKey(squadId, level)]);
         recordScore(squadId, level, score.correct, squad.lastUpdated);
+        // The clock stopped in this same commit: `complete` turned it off, and
+        // React runs every effect's cleanup before any effect's setup (React 17+).
         track('round.completed', {
+          squad: squad.id,
           kind: squad.kind,
           level,
           score: score.correct,
           aLaEscuadra: isFlawless(score.correct, score.attempted),
+          previousBest,
+          ...missesByPart(session.results, level),
+          seconds: roundSeconds(useSession.getState().activeMs),
         });
       }
       router.replace({
@@ -195,6 +226,18 @@ export default function Question() {
     session.currentPartIndex === 0 &&
     session.results[0]?.parts.every((p) => p === null) === true;
   const tips = useTips(`question-${level}` as TipScreen, firstQuestion);
+  // The round's active time (#221): only while this screen is the one in front,
+  // the app is active and no tip covers the question.
+  const focused = useIsFocused();
+  const appActive = useAppActive();
+  const roundClock = useRoundClock(
+    focused &&
+      appActive &&
+      !tips.open &&
+      session.phase === 'playing' &&
+      session.squadId === squadId &&
+      session.level === level,
+  );
   const heroRef = useRef<ViewInstance>(null);
   const slotsRef = useRef<ViewInstance>(null);
   const answersRef = useRef<ViewInstance>(null);
@@ -307,7 +350,10 @@ export default function Question() {
   const promptColor =
     verdict === true ? colors.success : verdict === false ? colors.error : colors.onStage;
 
+  // Leave throws the round away, unlike Back, which can resume it (#221).
   const exit = () => {
+    roundClock.stop();
+    trackLeftRound();
     session.reset();
     router.back();
   };
