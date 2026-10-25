@@ -224,6 +224,23 @@ describe('session store', () => {
     expect(useSession.getState().earlierRounds).toBe(false);
   });
 
+  // A round's active time (#221), kept here so a round resumed after Back keeps its clock.
+  it('keeps a round’s active time, for this round only', () => {
+    useSession.getState().startRound(squad, roster(), 1);
+    expect(useSession.getState().activeMs).toBe(0);
+    useSession.getState().addActiveMs(12_000);
+    useSession.getState().addActiveMs(3_000);
+    useSession.getState().addActiveMs(-50);
+    expect(useSession.getState().activeMs).toBe(15_000);
+
+    useSession.getState().startRound(squad, roster(), 2);
+    expect(useSession.getState().activeMs).toBe(0);
+
+    useSession.getState().addActiveMs(1_000);
+    useSession.getState().reset();
+    expect(useSession.getState().activeMs).toBe(0);
+  });
+
   it('produces an identical round for the same explicit seed', () => {
     useSession.getState().startRound(squad, roster(), 1, 4242);
     const first = JSON.stringify(useSession.getState().questions);

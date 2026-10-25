@@ -197,6 +197,7 @@ describe('resets (#197)', () => {
         starredSquads: ['arm', 'esp'],
         tipsSeen: ['picker', 'results'],
         tipsSkipped: true,
+        telemetryQueue: [{ type: 'round.completed', receivedAt: '2026-10-26T12:00:00.000Z' }],
       });
       useProgress.getState().factoryReset('new-id');
       const s = useProgress.getState();
@@ -214,6 +215,7 @@ describe('resets (#197)', () => {
         'starredSquads',
         'tipsSeen',
         'tipsSkipped',
+        'telemetryQueue',
       ] as const) {
         expect(s[key], key).toEqual(initial[key]);
       }
@@ -238,10 +240,65 @@ describe('resets (#197)', () => {
         'starredSquads',
         'studyView',
         'telemetryEnabled',
+        'telemetryQueue',
         'themePreference',
         'tipsSeen',
         'tipsSkipped',
       ].sort(),
     );
+  });
+});
+
+describe('the statistics waiting to be sent (#221)', () => {
+  const NOW = Date.parse('2026-10-26T12:00:00.000Z');
+  const signal = (n: number, receivedAt = '2026-10-26T11:00:00.000Z') => ({
+    type: 'round.completed',
+    n,
+    receivedAt,
+  });
+
+  beforeEach(() => {
+    useProgress.setState({ telemetryEnabled: true, telemetryQueue: [] });
+  });
+
+  it('starts with none', () => {
+    expect(useProgress.getInitialState().telemetryQueue).toEqual([]);
+  });
+
+  it('queues a signal, and trims what is too old', () => {
+    useProgress.getState().pushTelemetry(signal(1, '2026-09-01T00:00:00.000Z'), NOW);
+    useProgress.getState().pushTelemetry(signal(2), NOW);
+    expect(useProgress.getState().telemetryQueue).toEqual([signal(2)]);
+  });
+
+  it('drops exactly the signals a flush handed over', () => {
+    useProgress.getState().pushTelemetry(signal(1), NOW);
+    useProgress.getState().pushTelemetry(signal(2), NOW);
+    const [first] = useProgress.getState().telemetryQueue;
+    useProgress.getState().dropTelemetry(first ? [first] : []);
+    expect(useProgress.getState().telemetryQueue).toEqual([signal(2)]);
+  });
+
+  it('empties the queue when usage statistics are switched off, and keeps it when on', () => {
+    useProgress.getState().pushTelemetry(signal(1), NOW);
+    useProgress.getState().setTelemetryEnabled(true);
+    expect(useProgress.getState().telemetryQueue).toHaveLength(1);
+    useProgress.getState().setTelemetryEnabled(false);
+    expect(useProgress.getState().telemetryQueue).toEqual([]);
+  });
+
+  it('keeps the queue when the scores are cleared or a team starts over', () => {
+    useProgress.getState().pushTelemetry(signal(1), NOW);
+    useProgress.getState().reset();
+    useProgress.getState().resetSquad('arm');
+    expect(useProgress.getState().telemetryQueue).toHaveLength(1);
+  });
+
+  it('persists the queue, so a round played offline survives a restart', () => {
+    useProgress.getState().pushTelemetry(signal(3), NOW);
+    const stored = JSON.parse(disk.get('escuadra-progress') ?? '{}') as {
+      state: { telemetryQueue: unknown };
+    };
+    expect(stored.state.telemetryQueue).toEqual([signal(3)]);
   });
 });

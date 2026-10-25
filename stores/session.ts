@@ -38,6 +38,10 @@ interface SessionState {
    *  Results reads it for the store-rating prompt's "not on the first round
    *  ever" (#57). False until noted; a new round starts it over. */
   earlierRounds: boolean;
+  /** The round's active time so far (#221), added by the question screen's clock
+   *  stretch by stretch, so a round resumed after Back keeps it. A new round
+   *  starts it at 0. */
+  activeMs: number;
 
   startRound: (squad: Squad, roster: RosterEntry[], level: Level, seed?: number) => void;
   /** Grades the current part, advances to the next part, or finalizes the
@@ -46,6 +50,8 @@ interface SessionState {
   /** Continue button: moves to the next question, or flips phase to 'complete'. */
   advanceQuestion: () => void;
   setEarlierRounds: (earlierRounds: boolean) => void;
+  /** Adds a stretch of play; a negative one (a clock that moved back) adds nothing. */
+  addActiveMs: (ms: number) => void;
   reset: () => void;
 }
 
@@ -59,6 +65,7 @@ const initialState = {
   results: [],
   phase: 'idle' as SessionPhase,
   earlierRounds: false,
+  activeMs: 0,
 };
 
 export const useSession = create<SessionState>()((set, get) => ({
@@ -80,6 +87,7 @@ export const useSession = create<SessionState>()((set, get) => ({
       })),
       phase: 'playing',
       earlierRounds: false,
+      activeMs: 0,
     });
   },
 
@@ -126,6 +134,8 @@ export const useSession = create<SessionState>()((set, get) => ({
   },
 
   setEarlierRounds: (earlierRounds) => set({ earlierRounds }),
+
+  addActiveMs: (ms) => set((s) => ({ activeMs: s.activeMs + Math.max(0, ms) })),
 
   reset: () => set(initialState),
 }));
