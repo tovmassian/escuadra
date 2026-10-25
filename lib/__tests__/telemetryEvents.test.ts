@@ -1,5 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import {
+  SESSION_GAP_MS,
   STUDY_FROM,
   TEAM_FROM,
   TELEMETRY_CONTEXT,
@@ -233,36 +234,47 @@ describe('the buckets', () => {
 });
 
 describe('nextAppPhase', () => {
-  it('starts a session on a return from the background', () => {
-    expect(nextAppPhase('background', 'active')).toEqual({
-      phase: 'foreground',
+  const T = 1_000_000;
+  const away = { backgroundSince: T };
+  const here = { backgroundSince: null };
+
+  it('notes when the app went to the background, without starting a session', () => {
+    expect(nextAppPhase(here, 'background', T)).toEqual({ phase: away, startsSession: false });
+  });
+
+  it('keeps the first moment away when the background is reported twice', () => {
+    expect(nextAppPhase(away, 'background', T + 5_000)).toEqual({
+      phase: away,
+      startsSession: false,
+    });
+  });
+
+  it('starts a session on a return after the gap', () => {
+    expect(nextAppPhase(away, 'active', T + SESSION_GAP_MS)).toEqual({
+      phase: here,
       startsSession: true,
     });
   });
 
-  it('goes to the background without starting one', () => {
-    expect(nextAppPhase('foreground', 'background')).toEqual({
-      phase: 'background',
+  // Android reports a share chooser, a photo credit's browser tab or the review
+  // dialog as the background; a session must not split there.
+  it('keeps the session after a short trip away', () => {
+    expect(nextAppPhase(away, 'active', T + SESSION_GAP_MS - 1)).toEqual({
+      phase: here,
       startsSession: false,
     });
   });
 
   it("ignores iOS's inactive, in either phase", () => {
-    expect(nextAppPhase('background', 'inactive')).toEqual({
-      phase: 'background',
+    expect(nextAppPhase(away, 'inactive', T + SESSION_GAP_MS)).toEqual({
+      phase: away,
       startsSession: false,
     });
-    expect(nextAppPhase('foreground', 'inactive')).toEqual({
-      phase: 'foreground',
-      startsSession: false,
-    });
+    expect(nextAppPhase(here, 'inactive', T)).toEqual({ phase: here, startsSession: false });
   });
 
   it('does not start one for an active app that never left', () => {
-    expect(nextAppPhase('foreground', 'active')).toEqual({
-      phase: 'foreground',
-      startsSession: false,
-    });
+    expect(nextAppPhase(here, 'active', T)).toEqual({ phase: here, startsSession: false });
   });
 });
 

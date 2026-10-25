@@ -196,19 +196,37 @@ export function roundSeconds(ms: number): number {
 /** How long a non-empty search must find nothing before `picker.noResults`. */
 export const NO_RESULTS_AFTER_MS = 1500;
 
-export type AppPhase = 'foreground' | 'background';
+/**
+ * How long the app must stay in the background before a return starts a new
+ * session: 5 minutes, as Amplitude's mobile SDKs default to. Android reports a
+ * share chooser, a photo credit's browser tab and the review dialog as the
+ * background, where iOS stays in the app, so a session must survive a short trip
+ * away for sessions to compare across platforms.
+ */
+export const SESSION_GAP_MS = 5 * 60 * 1000;
+
+/** Since when the app has been in the background, or null while it is in front. */
+export interface AppPhase {
+  backgroundSince: number | null;
+}
 
 /**
- * A session starts again when the app returns from the background, as
- * TelemetryDeck's own SDKs do on iOS. iOS's `inactive` (Control Center, a call
- * banner) is neither.
+ * The app's phase after an `AppState` change at `now`, and whether the change
+ * starts a session: a return after `SESSION_GAP_MS` away. iOS's `inactive`
+ * (Control Center, a call banner) changes nothing.
  */
 export function nextAppPhase(
   phase: AppPhase,
   appState: string,
+  now: number,
 ): { phase: AppPhase; startsSession: boolean } {
-  if (appState === 'background') return { phase: 'background', startsSession: false };
-  if (appState === 'active') return { phase: 'foreground', startsSession: phase === 'background' };
+  if (appState === 'background') {
+    return { phase: { backgroundSince: phase.backgroundSince ?? now }, startsSession: false };
+  }
+  if (appState === 'active') {
+    const away = phase.backgroundSince === null ? 0 : now - phase.backgroundSince;
+    return { phase: { backgroundSince: null }, startsSession: away >= SESSION_GAP_MS };
+  }
   return { phase, startsSession: false };
 }
 

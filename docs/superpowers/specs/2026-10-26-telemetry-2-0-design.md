@@ -20,8 +20,11 @@ names" goes. Nothing about a player, an answer or anything typed ever leaves the
 
 **Taken on the owner's behalf, each with a cheap reversal:**
 
-- **The build number comes from `expo-constants`** (`platform.ios.buildNumber`,
-  `platform.android.versionCode`), the embedded native values. No new dependency.
+- **The build number is iOS's only** (`expo-constants`' `platform.ios.buildNumber`, the
+  embedded value). `expo-constants` leaves Android's platform constants empty, and
+  `expo-application`, which reads the version code, is a new native module: it moves the
+  fingerprint mid-device-pass (#187) and adds a licence notice. Android can fill the same key
+  later without breaking the contract. Version and update already separate Android builds.
 - **`language` moves into the context of every signal.** The root layout hands the resolved
   language to `lib/telemetry.ts` (`setTelemetryLanguage`), so the module imports no i18n.
 - **The queue lives in `stores/progress.ts`** (`telemetryQueue`). It is persisted progress
@@ -39,8 +42,16 @@ names" goes. Nothing about a player, an answer or anything typed ever leaves the
   (`activeMs`), so a round resumed after Back keeps its clock.
 - **`picker.noResults`** is sent when a non-empty search has found nothing for 1.5 s, once
   per picker visit, so letters typed on the way to a team don't count.
-- **A session starts again on a return from the background** (`background` → `active`).
-  iOS's `inactive` (Control Center, a call banner) does not count.
+- **A session starts again on a return after 5 minutes in the background**
+  (`SESSION_GAP_MS`, Amplitude's mobile default). Android reports the share chooser, a photo
+  credit's browser tab and Play's review dialog as the background, where iOS stays in the
+  app, so renewing on every return would split Android sessions at Results. iOS's `inactive`
+  (Control Center, a call banner) does not count. Switching usage statistics back on starts a
+  session too, so no signal belongs to a session without a start.
+- **A flush posts at most 100 signals** (`FLUSH_BATCH`), so one refusal never costs the
+  whole queue, and waits 30 s for an answer (`FLUSH_TIMEOUT_MS`), so a hanging connection
+  never holds the queue. Delivery is at least once: a batch the server took but never
+  answered for is sent again.
 - **`textSize`** buckets the font scale at the layout's own thresholds: `default` (≤ 1.05),
   `large` (≤ 1.35), `largest` (above, where Results' cards start to strain).
 - **Counts are bucketed** `0`, `1`, `2-5`, `6+`.
@@ -50,7 +61,7 @@ names" goes. Nothing about a player, an answer or anything typed ever leaves the
 | Key                                       | Value                                                                          |
 | ----------------------------------------- | ------------------------------------------------------------------------------ |
 | `TelemetryDeck.AppInfo.version`           | `app.json`'s version, e.g. `2.0.0`                                             |
-| `TelemetryDeck.AppInfo.buildNumber`       | the native build number                                                        |
+| `TelemetryDeck.AppInfo.buildNumber`       | the native build number (iOS only, see Decisions)                              |
 | `TelemetryDeck.Device.platform`           | `iOS` / `Android`                                                              |
 | `TelemetryDeck.Device.systemMajorVersion` | the OS's major version, e.g. `18`, `15`                                        |
 | `update`                                  | the running update's 8-character group id, as Settings shows it, or `embedded` |
@@ -66,21 +77,21 @@ Every value is an enum, a small integer or a boolean. `squad` is a squad id (`mk
 club's slug). An event's properties are typed in `TelemetryProps`, and `buildPayload` drops
 anything else.
 
-| Event                           | Properties                                                                                                                                                                                                                               | Sent when                                                                                 | Answers    |
-| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------- | ---------- |
-| `TelemetryDeck.Session.started` | —                                                                                                                                                                                                                                        | a session starts: after hydration on a cold start, and on each return from the background | Q1         |
-| `app.launched`                  | `languageSource` (`phone`/`picked`); `theme` (`system`/`light`/`dark`); `haptics` (`on`/`off`); `TelemetryDeck.Accessibility.isReduceMotionEnabled` (`true`/`false`); `textSize`; `starred`, `teams` (teams with a best score), bucketed | cold start, after hydration                                                               | Q1, Q9     |
-| `team.opened`                   | `squad`, `kind`; `from` (`continue`/`squads`/`picker`); `search` (`true`/`false`, the picker only)                                                                                                                                       | Difficulty mounts                                                                         | Q5, Q6     |
-| `round.started`                 | `squad`, `kind`, `level`; `source` (`ladder`/`retry`/`nextLevel`)                                                                                                                                                                        | a round is built: by the question screen (`ladder`) or by Results                         | Q2, Q4     |
-| `round.completed`               | `squad`, `kind`, `level`, `score`, `aLaEscuadra`; `previousBest` (`none`/`0`–`10`); `missedName`, `missedPosition`, `missedClubOrNationality` (the parts the level asks); `seconds`                                                      | the round's phase becomes `complete`                                                      | Q3, Q4, Q9 |
-| `round.left`                    | `squad`, `kind`, `level`; `question` (`1`–`10`); `score` (right so far); `seconds`                                                                                                                                                       | a round is thrown away unfinished                                                         | Q2         |
-| `study.opened`                  | `squad`, `kind`; `from` (`ladder`/`results`); `view` (`grid`/`list`)                                                                                                                                                                     | Study mounts                                                                              | Q7         |
-| `study.namesHidden`             | `squad`, `kind`                                                                                                                                                                                                                          | Hide names is switched on                                                                 | Q7         |
-| `tips.closed`                   | `screen` (a `TipScreen`); `skipped` (`true`/`false`)                                                                                                                                                                                     | a How to play layer closes                                                                | Q8         |
-| `intro.skipped`                 | —                                                                                                                                                                                                                                        | the launch strike is tapped through                                                       | Q8         |
-| `result.shared`                 | `squad`, `kind`, `level`, `score`, `format`                                                                                                                                                                                              | the share sheet hands a result on                                                         | —          |
-| `picker.noResults`              | `kind`                                                                                                                                                                                                                                   | see Decisions                                                                             | Q11        |
-| `progress.reset`                | `scope` (`team`/`scores`/`all`); `squad` (`team` only)                                                                                                                                                                                   | a reset is confirmed, before it runs                                                      | Q11        |
+| Event                           | Properties                                                                                                                                                                                                                               | Sent when                                                                                                                           | Answers    |
+| ------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------- |
+| `TelemetryDeck.Session.started` | —                                                                                                                                                                                                                                        | a session starts: after hydration on a cold start, on a return after 5 minutes away, and when usage statistics are switched back on | Q1         |
+| `app.launched`                  | `languageSource` (`phone`/`picked`); `theme` (`system`/`light`/`dark`); `haptics` (`on`/`off`); `TelemetryDeck.Accessibility.isReduceMotionEnabled` (`true`/`false`); `textSize`; `starred`, `teams` (teams with a best score), bucketed | cold start, after hydration                                                                                                         | Q1, Q9     |
+| `team.opened`                   | `squad`, `kind`; `from` (`continue`/`squads`/`picker`); `search` (`true`/`false`, the picker only)                                                                                                                                       | Difficulty mounts                                                                                                                   | Q5, Q6     |
+| `round.started`                 | `squad`, `kind`, `level`; `source` (`ladder`/`retry`/`nextLevel`)                                                                                                                                                                        | a round is built: by the question screen (`ladder`) or by Results                                                                   | Q2, Q4     |
+| `round.completed`               | `squad`, `kind`, `level`, `score`, `aLaEscuadra`; `previousBest` (`none`/`0`–`10`); `missedName`, `missedPosition`, `missedClubOrNationality` (the parts the level asks); `seconds`                                                      | the round's phase becomes `complete`                                                                                                | Q3, Q4, Q9 |
+| `round.left`                    | `squad`, `kind`, `level`; `question` (`1`–`10`); `score` (right so far); `seconds`                                                                                                                                                       | a round is thrown away unfinished                                                                                                   | Q2         |
+| `study.opened`                  | `squad`, `kind`; `from` (`ladder`/`results`); `view` (`grid`/`list`)                                                                                                                                                                     | Study mounts                                                                                                                        | Q7         |
+| `study.namesHidden`             | `squad`, `kind`                                                                                                                                                                                                                          | Hide names is switched on                                                                                                           | Q7         |
+| `tips.closed`                   | `screen` (a `TipScreen`); `skipped` (`true`/`false`)                                                                                                                                                                                     | a How to play layer closes                                                                                                          | Q8         |
+| `intro.skipped`                 | —                                                                                                                                                                                                                                        | the launch strike is tapped through                                                                                                 | Q8         |
+| `result.shared`                 | `squad`, `kind`, `level`, `score`, `format`                                                                                                                                                                                              | the share sheet hands a result on                                                                                                   | —          |
+| `picker.noResults`              | `kind`                                                                                                                                                                                                                                   | see Decisions                                                                                                                       | Q11        |
+| `progress.reset`                | `scope` (`team`/`scores`/`all`); `squad` (`team` only)                                                                                                                                                                                   | a reset is confirmed, before it runs                                                                                                | Q11        |
 
 How to read them:
 
@@ -114,7 +125,7 @@ track() ─gate─▶ client.queue(type, payload)        builds the body: hashed
                     │
                     ▼
                  flush()  single-flight; again after itself if more arrived
-                    │  client.flush(): POST every queued body, as the SDK does
+                    │  client.flush(): POST the oldest 100 bodies, as the SDK does
                     ▼
             flushOutcome(status) ──▶ sent / dropped: removed · kept: stays
 ```
@@ -124,26 +135,27 @@ track() ─gate─▶ client.queue(type, payload)        builds the body: hashed
 - A body is pushed only if usage statistics are still on and the identifier is still the
   one it was built with. So nothing built before an opt-out or a reset is queued after it.
 - The queue keeps the newest 500 bodies, none older than 30 days.
-- A flush runs after each push and at each session start. There is no timer and no retry
-  loop.
+- A flush runs after each push and at each session start. It sends batch after batch while
+  they leave, and stops at the first one kept. The only timer is its 30 s wait for an answer.
+  There is no retry loop.
 - The SDK posts to TelemetryDeck's v2 ingest, which moves a `receivedAt` more than 24 hours
-  old into the last 24 hours. Counts are exact, but days are approximate after a long
-  offline stretch.
+  old into the last 24 hours. Counts are exact up to the rare duplicate (a batch taken but
+  never answered for), but days are approximate after a long offline stretch.
 
 ## Units
 
-| Unit                          | Role                                                                                                                                   |
-| ----------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| `lib/telemetryEvents.ts`      | Pure: the allowlist, `TelemetryProps`, the context keys and `contextPayload`, the gate, the buckets, `roundSeconds`, `isSessionStart`. |
-| `lib/telemetryQueue.ts`       | Pure: `trimQueue`, `flushOutcome`, `withoutSent`.                                                                                      |
-| `lib/roundStats.ts`           | Pure: `missesByPart`, `previousBestValue`, `leftRound` (the props of a round being thrown away, or null).                              |
-| `lib/settingsView.ts`         | `updateGroupId`, extracted from `versionLabel`, shared by Settings and the context.                                                    |
-| `lib/telemetry.ts`            | The SDK's only importer: the client, the queue's store adapter, `track`, `trackNow`, `startSession`, `setTelemetryLanguage`.           |
-| `stores/progress.ts`          | `telemetryQueue`, `pushTelemetry`, `dropTelemetry`; the opt-out and `factoryReset` empty it.                                           |
-| `stores/session.ts`           | `activeMs`, `addActiveMs`; `startRound` starts it at 0.                                                                                |
-| `components/useRoundClock.ts` | Runs the round's clock while the screen is focused, the app active and no tips show.                                                   |
-| `app/_layout.tsx`             | Session starts (AppState), the language hand-off, `app.launched`'s snapshot.                                                           |
-| Screens                       | Pass `from` and `source` as route params, and call `track` where the table says.                                                       |
+| Unit                          | Role                                                                                                                                                      |
+| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lib/telemetryEvents.ts`      | Pure: the allowlist, `TelemetryProps`, the context keys and `contextPayload`, the gate, the buckets, `roundSeconds`, `nextAppPhase` and `SESSION_GAP_MS`. |
+| `lib/telemetryQueue.ts`       | Pure: `trimQueue`, `flushOutcome`, `withoutSent`, `FLUSH_BATCH`, `FLUSH_TIMEOUT_MS`.                                                                      |
+| `lib/roundStats.ts`           | Pure: `missesByPart`, `previousBestValue`, `leftRound` (the props of a round being thrown away, or null).                                                 |
+| `lib/settingsView.ts`         | `updateGroupId`, extracted from `versionLabel`, shared by Settings and the context.                                                                       |
+| `lib/telemetry.ts`            | The SDK's only importer: the client, the queue's store adapter, `track`, `trackNow`, `startSession`, `setTelemetryLanguage`.                              |
+| `stores/progress.ts`          | `telemetryQueue`, `pushTelemetry`, `dropTelemetry`; the opt-out and `factoryReset` empty it.                                                              |
+| `stores/session.ts`           | `activeMs`, `addActiveMs`; `startRound` starts it at 0.                                                                                                   |
+| `components/useRoundClock.ts` | Runs the round's clock while the screen is focused, the app active and no tips show.                                                                      |
+| `app/_layout.tsx`             | Session starts (AppState), the language hand-off, `app.launched`'s snapshot.                                                                              |
+| Screens                       | Pass `from` and `source` as route params, and call `track` where the table says.                                                                          |
 
 ## Testing
 

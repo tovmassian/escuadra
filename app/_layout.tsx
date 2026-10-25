@@ -70,12 +70,14 @@ export default function RootLayout() {
     AccessibilityInfo.isReduceMotionEnabled().then(sendLaunch, () => sendLaunch(null));
   }, [hydrated]);
 
-  // A return from the background starts a new session (#221); iOS's `inactive`
-  // (Control Center, a call banner) does not.
+  // A return after a while in the background starts a new session (#221,
+  // `SESSION_GAP_MS`); a quick trip to the share menu does not.
   useEffect(() => {
-    let phase: AppPhase = AppState.currentState === 'background' ? 'background' : 'foreground';
+    let phase: AppPhase = {
+      backgroundSince: AppState.currentState === 'background' ? Date.now() : null,
+    };
     const sub = AppState.addEventListener('change', (state) => {
-      const next = nextAppPhase(phase, state);
+      const next = nextAppPhase(phase, state, Date.now());
       phase = next.phase;
       if (next.startsSession) startSession(true);
     });

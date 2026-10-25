@@ -25,7 +25,7 @@ import {
   type TelemetryEvent,
   type TelemetryProps,
 } from './telemetryEvents';
-import { flushOutcome, type QueuedSignal } from './telemetryQueue';
+import { FLUSH_BATCH, FLUSH_TIMEOUT_MS, flushOutcome, type QueuedSignal } from './telemetryQueue';
 
 const appId = (Constants.expoConfig?.extra?.telemetryDeckAppId as string | undefined) ?? '';
 
@@ -51,7 +51,7 @@ const store = {
     if (telemetryEnabled && installId === builtFor) pushTelemetry(signal, Date.now());
   },
   values(): QueuedSignal[] {
-    handed = useProgress.getState().telemetryQueue.slice();
+    handed = useProgress.getState().telemetryQueue.slice(0, FLUSH_BATCH);
     return handed;
   },
   clear(): void {},
@@ -81,7 +81,10 @@ function clientFor(installId: string): TelemetryDeck {
 let flushing = false;
 let again = false;
 
-/** Posts the queue, one flush at a time; a signal queued meanwhile goes in another pass. */
+/**
+ * Posts the queue in batches, one flush at a time. A signal queued meanwhile
+ * goes in another pass; a batch that is kept ends the flush until the next one.
+ */
 async function flush(): Promise<void> {
   if (flushing) {
     again = true;
@@ -89,27 +92,40 @@ async function flush(): Promise<void> {
   }
   flushing = true;
   try {
-    do {
+    let more = true;
+    while (more) {
       again = false;
-      await flushOnce();
-    } while (again);
+      more = (await flushOnce()) || again;
+    }
   } finally {
     flushing = false;
   }
 }
 
-async function flushOnce(): Promise<void> {
-  if (!client || useProgress.getState().telemetryQueue.length === 0) return;
+/** One batch. True when the next should go at once: this one left and more wait. */
+async function flushOnce(): Promise<boolean> {
+  if (!client || useProgress.getState().telemetryQueue.length === 0) return false;
   // The SDK takes its batch through `store.values()` before its first await.
   const request = client.flush();
   const batch = handed;
-  let status: number | null = null;
+  if (flushOutcome(await statusOf(request)) === 'kept') return false;
+  useProgress.getState().dropTelemetry(batch);
+  return useProgress.getState().telemetryQueue.length > 0;
+}
+
+/** The response's status, or null for none: no connection, or no answer in time. */
+async function statusOf(request: Promise<Response>): Promise<number | null> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const timeout = new Promise<null>((resolve) => {
+    timer = setTimeout(() => resolve(null), FLUSH_TIMEOUT_MS);
+  });
   try {
-    status = (await request).status;
+    return await Promise.race([request.then((response) => response.status), timeout]);
   } catch {
-    // No connection: the batch waits for the next flush.
+    return null;
+  } finally {
+    clearTimeout(timer);
   }
-  if (flushOutcome(status) !== 'kept') useProgress.getState().dropTelemetry(batch);
 }
 
 type AppContext = Omit<TelemetryContextInput, 'language'>;
@@ -147,13 +163,14 @@ function read(value: () => string | null): string | null {
   }
 }
 
-/** The embedded native build number, which an update cannot change. */
+/**
+ * The embedded native build number, which an update cannot change. iOS only:
+ * `expo-constants` leaves Android's platform constants empty, and
+ * `expo-application`, which reads the version code, would be a new native module
+ * (spec, Decisions). Android can fill the same key later without a rename.
+ */
 function buildNumber(): string | null {
-  if (Platform.OS === 'ios') return Constants.platform?.ios?.buildNumber ?? null;
-  // `versionCode` is deprecated for `expo-application`, which the app does not
-  // otherwise need; it still reads the embedded value.
-  const code = Constants.platform?.android?.versionCode as number | null | undefined;
-  return code === undefined || code === null ? null : String(code);
+  return Platform.OS === 'ios' ? (Constants.platform?.ios?.buildNumber ?? null) : null;
 }
 
 /** The system's version: `18.1` on iOS; on Android its release, `15`, not the API level. */
@@ -184,11 +201,11 @@ function send<E extends TelemetryEvent>(
   });
   if (!allowed || installId === null) return;
 
-  const payload = {
-    ...contextPayload(context()),
-    ...buildPayload(event, (props ?? {}) as TelemetryProps[E]),
-  };
   try {
+    const payload = {
+      ...contextPayload(context()),
+      ...buildPayload(event, (props ?? {}) as TelemetryProps[E]),
+    };
     deliver(clientFor(installId), payload).catch(() => {});
   } catch {
     // Swallowed on purpose: telemetry can never affect gameplay.

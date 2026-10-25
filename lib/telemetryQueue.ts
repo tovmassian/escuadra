@@ -10,6 +10,14 @@ export type QueuedSignal = Record<string, unknown>;
 export const QUEUE_LIMIT = 500;
 /** The oldest a signal may be and still be sent: 30 days. */
 export const QUEUE_MAX_AGE_MS = 30 * 24 * 60 * 60 * 1000;
+/** The most signals one request carries, so one refusal never costs a whole queue. */
+export const FLUSH_BATCH = 100;
+/**
+ * How long a flush waits for an answer before keeping its batch for the next
+ * one. A request that answers later may then be sent twice: delivery is at least
+ * once, never lost to a connection that hangs.
+ */
+export const FLUSH_TIMEOUT_MS = 30_000;
 
 /** The queue, oldest first, without signals too old or past the limit. */
 export function trimQueue(queue: readonly QueuedSignal[], now: number): QueuedSignal[] {

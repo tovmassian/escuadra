@@ -33,6 +33,8 @@ vi.mock('expo-crypto', () => ({
 vi.mock('expo-updates', () => ({ channel: 'production', isEnabled: false }));
 vi.mock('react-native', () => ({ Platform: { OS: 'ios', Version: '18.1' } }));
 
+const { FLUSH_BATCH, FLUSH_TIMEOUT_MS } = await import('../telemetryQueue');
+
 const sha256 = (value: string) => createHash('sha256').update(value).digest('hex');
 
 type Body = Record<string, unknown>;
@@ -151,6 +153,94 @@ describe('the offline queue', () => {
     await tick();
     await tick();
     expect(posts).toEqual([]);
+    expect(useProgress.getState().telemetryQueue).toEqual([]);
+  });
+});
+
+describe('a flush in flight', () => {
+  /** A fetch whose first request waits for `release`; later ones answer 200 at once. */
+  function holdFirstRequest() {
+    const bodies: Body[][] = [];
+    let release: (response: Response) => void = () => {};
+    vi.stubGlobal(
+      'fetch',
+      vi.fn((_url: string, init: RequestInit) => {
+        bodies.push(JSON.parse(String(init.body)) as Body[]);
+        if (bodies.length > 1) return Promise.resolve(new Response('{}'));
+        return new Promise<Response>((resolve) => {
+          release = resolve;
+        });
+      }),
+    );
+    return { bodies, release: (response: Response) => release(response) };
+  }
+  const types = (batch: Body[] | undefined) => batch?.map((body) => body.type);
+
+  it('sends a signal queued meanwhile once, in the next request', async () => {
+    const { track, useProgress } = await load();
+    const held = holdFirstRequest();
+    track('intro.skipped');
+    await vi.waitFor(() => expect(held.bodies).toHaveLength(1));
+    track('picker.noResults', { kind: 'club' });
+    await vi.waitFor(() => expect(useProgress.getState().telemetryQueue).toHaveLength(2));
+
+    held.release(new Response('{}'));
+    await vi.waitFor(() => expect(held.bodies).toHaveLength(2));
+    await tick();
+    expect(types(held.bodies[0])).toEqual(['intro.skipped']);
+    expect(types(held.bodies[1])).toEqual(['picker.noResults']);
+    expect(useProgress.getState().telemetryQueue).toEqual([]);
+  });
+
+  it('sends both again when the open request could not deliver', async () => {
+    const { track, useProgress } = await load();
+    const held = holdFirstRequest();
+    track('intro.skipped');
+    await vi.waitFor(() => expect(held.bodies).toHaveLength(1));
+    track('picker.noResults', { kind: 'club' });
+    await vi.waitFor(() => expect(useProgress.getState().telemetryQueue).toHaveLength(2));
+
+    held.release(new Response('{}', { status: 503 }));
+    await vi.waitFor(() => expect(held.bodies).toHaveLength(2));
+    await tick();
+    expect(types(held.bodies[1])).toEqual(['intro.skipped', 'picker.noResults']);
+    expect(useProgress.getState().telemetryQueue).toEqual([]);
+  });
+
+  it('gives up on a request that never answers, keeps its batch, and flushes again later', async () => {
+    const { track, useProgress } = await load();
+    holdFirstRequest();
+    vi.useFakeTimers({ toFake: ['setTimeout', 'clearTimeout'] });
+    try {
+      track('intro.skipped');
+      await vi.waitFor(() => expect(fetch).toHaveBeenCalledTimes(1));
+      await vi.advanceTimersByTimeAsync(FLUSH_TIMEOUT_MS);
+      expect(useProgress.getState().telemetryQueue).toHaveLength(1);
+
+      track('picker.noResults', { kind: 'club' });
+      await vi.waitFor(() => expect(fetch).toHaveBeenCalledTimes(2));
+      await vi.waitFor(() => expect(useProgress.getState().telemetryQueue).toEqual([]));
+    } finally {
+      vi.useRealTimers();
+    }
+  });
+});
+
+describe('a long queue', () => {
+  it('goes out in batches, so one refusal never costs it all', async () => {
+    const { track, useProgress } = await load();
+    const made = new Date().toISOString();
+    useProgress.setState({
+      telemetryQueue: Array.from({ length: FLUSH_BATCH + 50 }, (_, n) => ({
+        type: 'intro.skipped',
+        n,
+        receivedAt: made,
+      })),
+    });
+    track('intro.skipped');
+    await vi.waitFor(() => expect(posts).toHaveLength(2));
+    await tick();
+    expect(posts.map((batch) => batch.length)).toEqual([FLUSH_BATCH, 51]);
     expect(useProgress.getState().telemetryQueue).toEqual([]);
   });
 });

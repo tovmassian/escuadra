@@ -50,15 +50,18 @@ its `track()`. The anonymous `clientUser` is a random `installId` persisted in
 channels send TelemetryDeck test signals.
 
 - **Queued, not sent at once.** `track()` queues each signal, with the time it
-  was made, in `stores/progress.ts` (`telemetryQueue`), and flushes it. A batch
-  leaves the queue only when the response says sent or refused
-  (`lib/telemetryQueue.ts`). Switching usage statistics off and Reset Escuadra
+  was made, in `stores/progress.ts` (`telemetryQueue`), and flushes it, 100 at a
+  time. A batch leaves the queue only when the response says sent or refused, and
+  one with no answer in 30 s is kept (`lib/telemetryQueue.ts`): at least once,
+  never lost to a hang. Switching usage statistics off and Reset Escuadra
   empty it, and a signal still being built for a replaced identifier is never
   queued. `trackNow()` skips the queue for Reset Escuadra's own signal
   (`lib/__tests__/telemetryQueueing.test.ts`).
-- **Sessions.** A session starts on a cold start and on each return from the
-  background (`nextAppPhase`). The client takes a new session code, and
-  `TelemetryDeck.Session.started` is sent. Reset Escuadra replaces `installId`
+- **Sessions.** A session starts on a cold start, on a return after 5 minutes in
+  the background (`nextAppPhase`, `SESSION_GAP_MS`: Android reports the share
+  menu as the background), and when usage statistics are switched back on. The
+  client takes a new session code, and `TelemetryDeck.Session.started` is sent. The
+  build number is iOS's only (spec, Decisions). Reset Escuadra replaces `installId`
   but starts no session: the one client points at the current id
   (`lib/__tests__/telemetryIdentifier.test.ts` pins it).
 - **The contract.** From 2.0.0 on, event names, property names and value sets
