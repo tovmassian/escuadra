@@ -1,12 +1,12 @@
 {
   "number": 117,
   "title": "fix(android): bold Inter and IBM Plex styles likely render in the system font",
-  "state": "OPEN",
+  "state": "CLOSED",
   "body": "**Size:** S  \n**Found by:** the final review of #111. That branch avoids this for the new Archivo styles, which carry no `fontWeight`.\n\nProbably silent today: on Android, any text style that pairs a runtime-loaded font with a `fontWeight` of 700 or more is likely drawn in the system bold font (Roboto), not its own face. Web and iOS are unaffected. Nothing errors, and the web screenshots can't show it.\n\n### Why (traced in source, not yet seen on a device)\n\n- expo-font 57's Android loader registers each runtime-loaded family under `Typeface.NORMAL` only.\n- React Native 0.86 maps any `fontWeight` ≥ 700 to the `BOLD` style. The lookup misses the registered `NORMAL` entry, looks for `fonts/<family>_bold.ttf`, finds nothing, and falls back to `Typeface.create(family, BOLD)`, the system font.\n- Weights of 600 and below map to `NORMAL` and render correctly.\n\n### Affected `theme/tokens.ts` `typography` entries\n\nEvery entry whose `fontWeight` is `'700'` or `'800'` (as of #114 part 1; 2.0 deleted `heroNumber`, `scoreHero` and `chipLabel`):\n\n- `badgeNumber` (IBM Plex Mono Bold): Results' photo-less circles use it\n- `screenTitle`, `bodyEmphasis` (Inter Bold)\n- `wordmark`, `wordmarkHero` (Inter ExtraBold)\n\n### Work\n\n- [ ] Confirm on an Android build. Compare Home's wordmark or a screen title with the web capture; Roboto is visibly wider and rounder.\n- [ ] If confirmed, drop `fontWeight` from every entry whose family is a single-weight runtime font. Each family name already selects one file. Add a test, like #111's Archivo one, that no such entry sets `fontWeight`.\n- [ ] Decide the release route. It is JS-only, so the release rules allow a fix to a shipped version on its release branch over the air. That is a release decision for the owner.\n\n### Acceptance criteria\n\n- [ ] On Android, the bold Inter and Plex styles render in Inter and Plex.\n- [ ] iOS and web are unchanged: `design/screens` diffs show no change.\n\n",
   "comments": [],
   "labels": ["bug"],
   "milestone": null,
   "size": "S",
-  "source": "real snapshot 2026-10-16",
-  "why": "The issue hands the owner the release route, so the skill asks."
+  "source": "real snapshot 2026-10-24",
+  "why": "Serves neg-question: a question about the issue, answered from it, with no triage."
 }

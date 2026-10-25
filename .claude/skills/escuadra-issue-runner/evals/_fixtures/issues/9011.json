@@ -1,0 +1,12 @@
+{
+  "number": 9011,
+  "title": "feat(study): flag players to review, and a round of just the flagged ones",
+  "state": "OPEN",
+  "body": "**Size:** L\n**Spec:** `docs/superpowers/specs/2026-10-20-flagged-players-design.md`\n\nWhile studying, flag the players you keep forgetting, then play a round of only those.\n\n### Work\n\n- [ ] `lib/flaggedPlayers.ts`, pure: toggle a flag, and pick a round's players from the flagged ones, with tests\n- [ ] A flag toggle on each Study card and list row\n- [ ] Persist the flags in `stores/progress.ts`\n- [ ] A \"Flagged\" round on the Difficulty screen when a squad has flagged players\n- [ ] About's \"What is stored on your device\" list counts the flags\n\n### Acceptance criteria\n\n- [ ] Flags survive an app restart and clear with Reset Escuadra\n- [ ] A Flagged round uses only flagged players, at every level\n- [ ] `npm run check` passes",
+  "comments": [],
+  "labels": ["enhancement"],
+  "milestone": null,
+  "size": "L",
+  "source": "synthetic",
+  "why": "An L feature with a spec and no plan: a worktree, writing-plans, and the execution mode asked up front (or answered by the prompt)."
+}

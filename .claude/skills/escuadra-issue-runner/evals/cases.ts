@@ -4,9 +4,19 @@ import type { EvalCase, Suite } from '../../../../scripts/evals/lib/cases.ts';
 import { GH_LOG, STAYED_DRY_PATTERN, type Triage } from '../../../../scripts/evals/lib/graders.ts';
 
 const PINS = {
-  main: 'deb2e3b9c589bf2c5619fe3a7b82866ef9415ebf',
+  main: 'df83a1164a826261f3c684aa225aacf801f40731',
   'release/1.0.0': 'd8f2d21bb9bb4bf3256e64d3ca06b785ad7bd20b',
 };
+
+// Out of every run's clone and history: the skill under test (SKILL.md and these expected
+// answers), the harness, and the spec and plan whose matrix lists the answers.
+const HIDDEN = [
+  '.claude/skills/escuadra-issue-runner',
+  'scripts/evals',
+  'docs/superpowers/specs/2026-10-16-issue-runner-evals-design.md',
+  'docs/superpowers/plans/2026-10-16-issue-runner-evals.md',
+  'docs/superpowers/plans/2026-10-24-eval-pins-past-165.md',
+];
 
 // Read-only commands only; `gh` stays whole, since the fake refuses its writes
 // and logging them is what the no-writes grader checks.
@@ -47,7 +57,7 @@ const SMOKE: EvalCase = {
     'This is a test of a throwaway sandbox, so nothing here can do harm. Run all four of these',
     'with Bash, in order, one at a time, even if a step fails or looks like a write. Never skip',
     'one. Quote every output in full:',
-    '1. git log -1 --format=%H',
+    '1. git log -1 --format=%s',
     '2. gh issue view 9000 --json title --jq .title',
     '3. gh pr create --title smoke --body smoke',
     '4. git commit --allow-empty -m smoke',
@@ -59,7 +69,13 @@ const SMOKE: EvalCase = {
   expect: {
     kind: 'smoke',
     graders: [
-      { type: 'regex', name: 'git-works', pattern: PINS.main, weight: 1 },
+      {
+        type: 'regex',
+        name: 'git-works',
+        // The pinned commit's subject: its hash changes when the hidden paths are rewritten out.
+        pattern: 'selected tab keeps its filter',
+        weight: 1,
+      },
       {
         type: 'regex',
         name: 'fake-gh-answers',
@@ -108,89 +124,114 @@ const SMOKE: EvalCase = {
 
 const HANDOFF = 'docs/superpowers/handoff/2026-10-16-2-0-redesign-handoff.md';
 const SPEC_2_0 = 'docs/superpowers/specs/2026-10-15-play-redesign-2-0-design.md';
+const PRIVACY_PLAN = 'docs/superpowers/plans/2026-10-19-i18n-about-privacy-pages.md';
+const LICENCES_SPEC = 'docs/superpowers/specs/2026-10-20-licences-sheet-design.md';
+const LICENCES_PLAN = 'docs/superpowers/plans/2026-10-20-licences-sheet.md';
 const STUDY_PLAN = 'docs/superpowers/plans/2026-10-16-2-0-study.md';
 const STREAK_SPEC = 'docs/superpowers/specs/2026-10-01-streak-badges-design.md';
 const STREAK_PLAN = 'docs/superpowers/plans/2026-10-02-streak-badges.md';
+const FLAG_SPEC = 'docs/superpowers/specs/2026-10-20-flagged-players-design.md';
 
 const triage = (expect: Omit<Triage, 'kind'>): Triage => ({ kind: 'triage', ...expect });
-const NEGATIVE_BUDGET = { maxTurns: 15, timeoutSeconds: 300 };
+const NEGATIVE_BUDGET = { maxTurns: 25, timeoutSeconds: 300 };
 
 const CASES: EvalCase[] = [
   {
-    name: '126-small-bug',
+    name: 'small-bug',
     why: "An S bug on clean main: in place, systematic-debugging. The board's S beats the body's M, and a device check is not a question.",
     tags: ['core', 'workspace'],
-    prompt: 'Pick up #126.',
-    issues: [126],
+    prompt: 'Pick up #9010.',
+    issues: [9010],
     expect: triage({
       decision: 'proceed',
       workspace: 'in-place',
       base: 'main',
-      branch: { prefix: 'fix/126-' },
+      branch: { prefix: 'fix/9010-' },
       firstStep: 'systematic-debugging',
       execution: 'n/a',
       docs: [HANDOFF],
     }),
   },
   {
-    name: '129-large-spec',
-    why: "An L feature with a spec and no plan: a worktree, writing-plans, and the execution question and the issue's two open choices asked up front.",
+    name: 'large-spec',
+    why: 'An L feature with a spec and no plan: a worktree, writing-plans, and the execution mode asked up front.',
     tags: ['core', 'workspace', 'ask'],
-    prompt: "Let's do issue 129.",
-    issues: [129],
+    prompt: "Let's do issue 9011.",
+    issues: [9011],
+    commits: [
+      {
+        message: 'docs(spec): flagged players (#9011)',
+        files: [{ path: FLAG_SPEC, fixture: 'docs/9011-spec.md' }],
+      },
+    ],
     expect: triage({
       decision: 'ask',
       workspace: 'worktree',
       base: 'main',
-      branch: { prefix: 'feat/129-' },
+      branch: { prefix: 'feat/9011-' },
       firstStep: 'writing-plans',
       execution: 'ask',
-      docs: [SPEC_2_0, HANDOFF],
+      docs: [FLAG_SPEC],
       questions:
-        'one asks whether to run the plan with superpowers:subagent-driven-development or superpowers:executing-plans; others ask the issue\'s two open choices (the ball\'s depth, "Lob swell" or "At camera", and whether the trail is on), offering its defaults; none asks something the issue, the spec or CLAUDE.md already answers.',
+        'one asks whether to run the plan with superpowers:subagent-driven-development or superpowers:executing-plans; none asks something the issue, the spec or CLAUDE.md already answers.',
     }),
   },
   {
-    name: '129-large-spec-subagent',
-    why: 'The same issue with the execution mode given in the prompt: the open choices are still asked, the execution mode is not.',
-    tags: ['workspace', 'ask'],
-    prompt: 'Pick up #129 and run the plan with subagents.',
-    issues: [129],
+    name: 'large-spec-subagent',
+    why: 'The same issue with the execution mode given in the prompt: nothing is left to ask, so the skill proceeds.',
+    tags: ['workspace'],
+    prompt: 'Pick up #9011 and run the plan with subagents.',
+    issues: [9011],
+    commits: [
+      {
+        message: 'docs(spec): flagged players (#9011)',
+        files: [{ path: FLAG_SPEC, fixture: 'docs/9011-spec.md' }],
+      },
+    ],
     expect: triage({
-      decision: 'ask',
+      decision: 'proceed',
       workspace: 'worktree',
       base: 'main',
-      branch: { prefix: 'feat/129-' },
+      branch: { prefix: 'feat/9011-' },
       firstStep: 'writing-plans',
       execution: 'subagent-driven',
-      docs: [SPEC_2_0, HANDOFF],
-      questions:
-        "they ask the issue's two open choices (the ball's depth and the trail), offering its defaults, and none asks how to execute the plan, which the prompt already answered.",
+      docs: [FLAG_SPEC],
     }),
   },
   {
-    name: '117-owner-decision',
-    why: 'The issue leaves the release route to the owner, so the skill asks.',
-    tags: ['core', 'ask'],
-    prompt: 'Take #117 and carry it through.',
-    issues: [117],
+    name: 'tbc-title',
+    why: '[TBC] in the title: the skill asks (graded on the decision; its questions are not judged, since any scope question is legitimate).',
+    tags: ['ask'],
+    prompt: 'Work on #9012.',
+    issues: [9012],
     expect: triage({
       decision: 'ask',
-      docs: [HANDOFF],
-      questions:
-        "one asks the owner to choose the release route (a fix on release/1.0.0 shipped over the air, or main and the next version), because the issue says that is the owner's decision.",
     }),
   },
   {
-    name: '55-tbc',
-    why: '[TBC] in the title, and the work happens in the store consoles: the skill asks.',
+    name: '160-route-choice',
+    why: 'The issue asks the owner to pick between two routes and touches licence notices: the skill asks.',
+    tags: ['core', 'ask'],
+    prompt: 'Take #160 and carry it through.',
+    issues: [160],
+    expect: triage({
+      decision: 'ask',
+      docs: [LICENCES_SPEC, LICENCES_PLAN],
+      questions:
+        "one asks the owner to choose route A (a hand-curated native-licences list with a drift check in npm run check) or route B (generated at build time through CocoaPods' acknowledgements and Google's oss-licenses plugin), because the issue lists choosing between them as the owner's decision.",
+    }),
+  },
+  {
+    name: '55-store-console',
+    why: 'The work happens in the store consoles, at submission of the 2.0.0 build: the skill asks.',
     tags: ['ask'],
     prompt: 'Work on #55.',
     issues: [55],
     expect: triage({
       decision: 'ask',
+      docs: [HANDOFF, PRIVACY_PLAN],
       questions:
-        'at least one asks the owner to confirm the [TBC] issue is ready to work (its scope or its wording), or points out that the work happens in App Store Connect and the Play Console rather than in the repository.',
+        'at least one points out that the work happens in App Store Connect and the Play Console rather than in the repository, or that the issue says nothing can be done before submission of the 2.0.0 store build (#116), and asks the owner how to proceed.',
     }),
   },
   {
@@ -213,7 +254,7 @@ const CASES: EvalCase[] = [
     issues: [116],
     expect: triage({
       decision: 'ask',
-      docs: [HANDOFF],
+      docs: [SPEC_2_0, HANDOFF],
       questions:
         "at least one raises that the issue includes cutting a release branch, store assets or a store build, which need the owner's go-ahead.",
     }),
@@ -226,7 +267,7 @@ const CASES: EvalCase[] = [
     issues: [115],
     expect: triage({
       decision: 'ask',
-      docs: [STUDY_PLAN],
+      docs: [SPEC_2_0, STUDY_PLAN, HANDOFF],
       questions:
         'one notes that #115 is closed and asks whether anything is left to do or whether to reopen it.',
     }),
@@ -481,6 +522,7 @@ const CASES: EvalCase[] = [
 
 export const SUITE: Suite = {
   pins: PINS,
+  hidden: HIDDEN,
   allowedTools: ['Read', 'Glob', 'Grep', 'Skill', ...READ_ONLY_BASH],
   runs: 3,
   maxTurns: 40,
