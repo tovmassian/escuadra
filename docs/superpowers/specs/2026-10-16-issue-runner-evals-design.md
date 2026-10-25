@@ -9,6 +9,24 @@ it.
 
 ## Outcome
 
+### Run costs
+
+Every recorded suite run, newest first. Costs are estimates at API rates from the runner's
+`result.json` (the runs draw on a claude.ai plan's usage limits, not on API billing; §9.1),
+and times are wall-clock. The sections below say what each run found. Add a row when a gate
+or a baseline runs; #214 explores keeping these as data instead.
+
+| Run                                        | Sessions  | Cost (est.) | Time      |
+| ------------------------------------------ | --------- | ----------- | --------- |
+| Re-pinned gate, 2026-10-24 (#171)          | 131       | $44.74      | 5.8 h     |
+| Re-pinned iterations, 2026-10-24 (#171)    | about 90  | about $29   | about 3 h |
+| GREEN gate, 2026-10-21 (#136)              | 57        | $17.66      | 91 min    |
+| GREEN iterations, before 2026-10-21 (#136) | about 105 | about $33   | —         |
+| RED baseline, 2026-10-16 (#136)            | 19        | $7.34       | 11 min    |
+
+All runs used a Sonnet agent and an Opus judge. Iterations are the `core` slices, the 1-run passes and the
+single-case debugging runs between gates.
+
 ### RED baseline (2026-10-16)
 
 Run on 2026-10-16 with Claude Code 2.1.278: `--full --ablation none --runs 1`, a Sonnet

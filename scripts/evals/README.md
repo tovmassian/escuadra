@@ -4,7 +4,7 @@ Grades how an agent triages an Escuadra issue, with and without a skill, using C
 
 ## Run it
 
-Every run draws on your Claude plan's usage limits. Start small:
+Every run draws on your Claude plan's usage limits. What past runs cost, in sessions, estimated dollars and time, is in the spec's [Run costs](../../docs/superpowers/specs/2026-10-16-issue-runner-evals-design.md#run-costs) table: a full gate is about 130 sessions and $45. Start small:
 
 | What                                                                 | Command                                                                    |
 | -------------------------------------------------------------------- | -------------------------------------------------------------------------- |
