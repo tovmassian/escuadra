@@ -27,6 +27,7 @@ import {
   progressOutcomes,
   promptText,
   slotStates,
+  startsNewRound,
   streak,
   streakMilestone,
 } from '@/lib/roundView';
@@ -109,7 +110,7 @@ export default function Question() {
 
   useEffect(() => {
     if (!squad) return;
-    if (session.squadId !== squadId || session.level !== level || session.phase === 'idle') {
+    if (startsNewRound(session, squadId, level)) {
       session.startRound(
         squad,
         getRoster(squadId),
@@ -123,8 +124,16 @@ export default function Question() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [squadId, level, seedParam]);
 
+  // The phase this effect last saw. A round is over when it turns `complete`
+  // while the screen is up, never on mount: opened on the last round's
+  // `complete` session, the screen starts a new round above, and this effect's
+  // first run still sees the stale phase (#222).
+  const seenPhase = useRef(session.phase);
   useEffect(() => {
-    if (session.phase === 'complete' && session.squadId === squadId && session.level === level) {
+    const previous = seenPhase.current;
+    seenPhase.current = session.phase;
+    if (previous !== 'playing' || session.phase !== 'complete') return;
+    if (session.squadId === squadId && session.level === level) {
       const score = selectScore(session.results);
       // Before `recordScore`, which keeps a best score for every completed
       // round, even a 0/10: any key now means an earlier round (#57).

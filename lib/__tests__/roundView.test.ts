@@ -14,13 +14,14 @@ import {
   slotSpoken,
   slotStates,
   slotValueText,
+  startsNewRound,
   streak,
   streakMilestone,
   tileVerdict,
 } from '../roundView';
 import { sizes } from '@/theme/tokens';
 import type { Level, Question, QuestionPart } from '@/lib/questionEngine';
-import type { QuestionResult } from '@/stores/session';
+import type { QuestionResult, SessionPhase } from '@/stores/session';
 
 // These helpers only read `.correct`, so a minimal stub keeps the tests
 // readable — building real Question objects would obscure what is asserted.
@@ -622,4 +623,34 @@ describe('slotValueText', () => {
       'Position: DEL',
     );
   });
+});
+
+describe('startsNewRound', () => {
+  // The question screen for Spain, level 2, over every session it can meet.
+  const at = (phase: SessionPhase, squadId: string | null, level: Level | null) => ({
+    phase,
+    squadId,
+    level,
+  });
+  const cases = [
+    { label: 'idle, after a reset', session: at('idle', null, null), starts: true },
+    { label: 'idle, same squad and level', session: at('idle', 'spain', 2), starts: true },
+    { label: 'idle, another squad', session: at('idle', 'france', 2), starts: true },
+    { label: 'idle, another level', session: at('idle', 'spain', 1), starts: true },
+    // Retry and next level on Results hand over a round they started; a round
+    // left mid-way by a system back resumes.
+    { label: 'playing, same squad and level', session: at('playing', 'spain', 2), starts: false },
+    { label: 'playing, another squad', session: at('playing', 'france', 2), starts: true },
+    { label: 'playing, another level', session: at('playing', 'spain', 3), starts: true },
+    // The last round's, left by a system back from Results (#222).
+    { label: 'complete, same squad and level', session: at('complete', 'spain', 2), starts: true },
+    { label: 'complete, another squad', session: at('complete', 'france', 2), starts: true },
+    { label: 'complete, another level', session: at('complete', 'spain', 1), starts: true },
+  ];
+
+  for (const c of cases) {
+    it(`${c.starts ? 'starts' : 'keeps'} the round when the session is ${c.label}`, () => {
+      expect(startsNewRound(c.session, 'spain', 2)).toBe(c.starts);
+    });
+  }
 });
