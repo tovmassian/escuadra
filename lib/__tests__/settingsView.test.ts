@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { en } from '@/i18n/en';
-import { versionLabel, type UpdateState } from '../settingsView';
+import { updateTag, versionLabel, type UpdateState } from '../settingsView';
 
 function updateState(overrides: Partial<UpdateState> = {}): UpdateState {
   return {
@@ -73,5 +73,31 @@ describe('versionLabel', () => {
       manifest: { metadata: { updateGroup: '0123456789abcdef' } },
     });
     expect(versionLabel('1.0.0', update, en)).toBe('Version 1.0.0 (01234567)');
+  });
+});
+
+// The same update, as usage statistics name it (#221): what Settings shows, without
+// the label or the channel.
+describe('updateTag', () => {
+  it('is the update group, cut to 8 characters', () => {
+    const update = updateState({
+      manifest: { metadata: { updateGroup: 'e43368a2-1111-2222-3333-444455556666' } },
+    });
+    expect(updateTag(update)).toBe('e43368a2');
+  });
+
+  it('falls back to the update id', () => {
+    expect(updateTag(updateState({ updateId: 'abcdef12-0000' }))).toBe('abcdef12');
+  });
+
+  it('is embedded for the build’s own bundle', () => {
+    expect(updateTag(updateState({ isEmbeddedLaunch: true, updateId: 'abcdef12-0000' }))).toBe(
+      'embedded',
+    );
+  });
+
+  it('is null when updates are off, or nothing names the update', () => {
+    expect(updateTag(updateState({ isEnabled: false, updateId: 'abcdef12' }))).toBeNull();
+    expect(updateTag(updateState())).toBeNull();
   });
 });
