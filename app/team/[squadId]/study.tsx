@@ -38,6 +38,7 @@ import {
   type StudyFilter,
 } from '@/lib/studyView';
 import { track } from '@/lib/telemetry';
+import { paramOf, STUDY_FROM } from '@/lib/telemetryEvents';
 import { useProgress } from '@/stores/progress';
 import {
   borderWidths,
@@ -81,7 +82,7 @@ export default function Study() {
   const colors = useThemeColors();
   const t = useT();
   const language = useLanguage();
-  const { squadId } = useLocalSearchParams<{ squadId: string }>();
+  const { squadId, from } = useLocalSearchParams<{ squadId: string; from?: string }>();
   const view = useProgress((s) => s.studyView);
   const setStudyView = useProgress((s) => s.setStudyView);
   const [filter, setFilter] = useState<StudyFilter>('ALL');
@@ -101,7 +102,11 @@ export default function Study() {
   const creditRows = useMemo(() => studyCreditRows(rows), [rows]);
   const kind = squad?.kind;
   useEffect(() => {
-    if (kind) track('study.opened', { kind });
+    // Where Study was opened from, and the view it opened in (#221).
+    if (kind)
+      track('study.opened', { squad: squadId, kind, from: paramOf(from, STUDY_FROM), view });
+    // Once per mount: switching the view later is not a new visit.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [squadId, kind]);
 
   // Every card and row gets this same press, whether or not names are hidden,
@@ -258,6 +263,7 @@ export default function Study() {
           ref={hideRef}
           testID="study-hide-names"
           onPress={() => {
+            if (!hidden && kind) track('study.namesHidden', { squad: squadId, kind });
             setHidden(!hidden);
             setRevealed(new Set());
           }}

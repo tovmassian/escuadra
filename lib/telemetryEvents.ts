@@ -193,6 +193,9 @@ export function roundSeconds(ms: number): number {
   return Math.min(600, Math.max(0, Math.round(ms / 10_000) * 10));
 }
 
+/** How long a non-empty search must find nothing before `picker.noResults`. */
+export const NO_RESULTS_AFTER_MS = 1500;
+
 export type AppPhase = 'foreground' | 'background';
 
 /**

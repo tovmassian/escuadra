@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
+import { track } from '@/lib/telemetry';
 import { shouldShowTips, type TipScreen } from '@/lib/tips';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 
@@ -35,15 +36,27 @@ export function useTips(screen: TipScreen, ready = true): Tips {
     setState(shouldShowTips(screen, seen, skipped) ? 'open' : 'closed');
   }
 
+  // Usage statistics (#221): how the layer closed, once, and only when a tip
+  // actually showed; a layer whose targets never mounted showed nothing.
+  const shown = useRef(false);
+  const closed = (skippedThem: boolean) => {
+    if (shown.current) track('tips.closed', { screen, skipped: skippedThem });
+    shown.current = false;
+    setState('closed');
+  };
+
   const open = state === 'open';
   return {
     open,
-    close: () => setState('closed'),
+    close: () => closed(false),
     skip: () => {
       useProgress.getState().skipTips();
-      setState('closed');
+      closed(true);
     },
-    onShown: () => useProgress.getState().markTipsSeen(screen),
+    onShown: () => {
+      shown.current = true;
+      useProgress.getState().markTipsSeen(screen);
+    },
     contentA11y: open
       ? { importantForAccessibility: 'no-hide-descendants', accessibilityElementsHidden: true }
       : {},
