@@ -110,3 +110,36 @@ describe('what the TelemetryDeck SDK sends', () => {
     expect(signal?.payload).toEqual(PAYLOAD);
   });
 });
+
+// `lib/telemetry.ts` queues every signal (#221), and a flush posts the queue. About
+// states what a queued statistic carries: everything above, and the time it was made.
+describe('what the TelemetryDeck SDK sends for a queued signal', () => {
+  it('carries the time it was made, and otherwise what a sent signal does', async () => {
+    const fetchStub = vi.fn(async (_url: string, _init: RequestInit) => new Response('{}'));
+    vi.stubGlobal('fetch', fetchStub);
+    const client = new TelemetryDeck({
+      appID: 'APP',
+      clientUser: INSTALL_ID,
+      subtleCrypto: globalThis.crypto.subtle as unknown as Function,
+    });
+    await client.queue('app.launched', PAYLOAD);
+    await client.flush();
+
+    expect(fetchStub).toHaveBeenCalledTimes(1);
+    const [url, init] = fetchStub.mock.calls[0] ?? [];
+    expect(url).toBe('https://nom.telemetrydeck.com/v2/');
+    const [signal] = JSON.parse(String(init?.body)) as Record<string, unknown>[];
+    expect(Object.keys(signal ?? {}).sort()).toEqual([
+      'appID',
+      'clientUser',
+      'payload',
+      'receivedAt',
+      'sessionID',
+      'telemetryClientVersion',
+      'type',
+    ]);
+    expect(Number.isNaN(Date.parse(String(signal?.receivedAt)))).toBe(false);
+    expect(signal?.clientUser).toBe(createHash('sha256').update(INSTALL_ID).digest('hex'));
+    expect(signal?.payload).toEqual(PAYLOAD);
+  });
+});

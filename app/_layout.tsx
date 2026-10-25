@@ -4,15 +4,16 @@ import * as SplashScreen from 'expo-splash-screen';
 import * as Crypto from 'expo-crypto';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState, type ReactNode } from 'react';
-import { useWindowDimensions } from 'react-native';
+import { AccessibilityInfo, AppState, PixelRatio, useWindowDimensions } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import 'react-native-reanimated';
 
 import { introWillShow, LaunchIntro } from '@/components/LaunchIntro';
 import { LaunchRevealProvider, useLaunchRevealState } from '@/components/LaunchReveal';
-import { launchLanguage } from '@/i18n/useT';
+import { launchLanguage, useLanguage } from '@/i18n/useT';
 import { screenOrientation } from '@/lib/screenOrientation';
-import { track } from '@/lib/telemetry';
+import { setTelemetryLanguage, startSession, track } from '@/lib/telemetry';
+import { launchProps, nextAppPhase, type AppPhase } from '@/lib/telemetryEvents';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import { fontAssets } from '@/theme/fonts';
 import { useThemeColors, useThemeName } from '@/theme/useTheme';
@@ -37,15 +38,49 @@ export default function RootLayout() {
     if (ready) SplashScreen.hideAsync();
   }, [ready]);
 
+  // Every usage statistic names the app's language (#221). Declared before the
+  // launch effect, so the launch's own signals already carry it.
+  const language = useLanguage();
+  useEffect(() => setTelemetryLanguage(language), [language]);
+
   // The install ID can only be created once persisted state is back — before
   // that, a stored ID is indistinguishable from none. `setInstallId` is a
-  // no-op when one already exists. Then one launch signal per JS launch, with
-  // the language as resolved now that the preference is back.
+  // no-op when one already exists. Then the cold start's session, and one
+  // launch signal per JS launch, with the settings as they are now that the
+  // preferences are back.
   useEffect(() => {
     if (!hydrated) return;
     useProgress.getState().setInstallId(Crypto.randomUUID());
-    track('app.launched', launchLanguage());
+    startSession(false);
+    const sendLaunch = (reduceMotion: boolean | null) => {
+      const s = useProgress.getState();
+      track(
+        'app.launched',
+        launchProps({
+          languageSource: launchLanguage().languageSource,
+          themePreference: s.themePreference,
+          haptics: s.haptics,
+          reduceMotion,
+          fontScale: PixelRatio.getFontScale(),
+          starredSquads: s.starredSquads,
+          bestScores: s.bestScores,
+        }),
+      );
+    };
+    AccessibilityInfo.isReduceMotionEnabled().then(sendLaunch, () => sendLaunch(null));
   }, [hydrated]);
+
+  // A return from the background starts a new session (#221); iOS's `inactive`
+  // (Control Center, a call banner) does not.
+  useEffect(() => {
+    let phase: AppPhase = AppState.currentState === 'background' ? 'background' : 'foreground';
+    const sub = AppState.addEventListener('change', (state) => {
+      const next = nextAppPhase(phase, state);
+      phase = next.phase;
+      if (next.startsSession) startSession(true);
+    });
+    return () => sub.remove();
+  }, []);
 
   if (!ready) return null;
 
