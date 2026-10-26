@@ -5,7 +5,7 @@ import { nationalityName } from '@/i18n/displayNames';
 import type { Messages } from '@/i18n/en';
 import type { SupportedLanguage } from '@/i18n/resolveLanguage';
 import type { Level, Question, QuestionPart } from '@/lib/questionEngine';
-import type { QuestionResult } from '@/stores/session';
+import type { QuestionResult, SessionPhase } from '@/stores/session';
 import type { Position, Squad } from '@/types/squad';
 import { sizes } from '@/theme/tokens';
 
@@ -24,6 +24,21 @@ export function progressOutcomes(results: QuestionResult[], currentIndex: number
     if (r.correct === false) return 'wrong';
     return i === currentIndex ? 'current' : 'future';
   });
+}
+
+/**
+ * Whether the question screen for a squad and level starts a new round when
+ * it opens: always, unless the session is already playing that squad and
+ * level. Retry and the next level on Results hand over a round they started,
+ * and a round left mid-way by a system back resumes. A `complete` session is
+ * the last round's, never kept: kept, it reopened that round's Results (#222).
+ */
+export function startsNewRound(
+  session: { phase: SessionPhase; squadId: string | null; level: Level | null },
+  squadId: string,
+  level: Level,
+): boolean {
+  return !(session.phase === 'playing' && session.squadId === squadId && session.level === level);
 }
 
 // ---- Spotlight question screen (2.0, spec §2) ------------------------------
