@@ -2,6 +2,7 @@
 paths:
   - "app/**"
   - "components/**"
+  - "hooks/**"
   - "package.json"
   - "metro.config.js"
   - "app.json"

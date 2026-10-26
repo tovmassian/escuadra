@@ -12,7 +12,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { EscuadraMark } from './EscuadraMark';
 import { Flag } from './Flag';
-import type { ShotTap } from './useShot';
+import type { ShotTap } from '@/hooks/useShot';
 import type { FlagCode } from '@/assets/flags/generated';
 import { useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';

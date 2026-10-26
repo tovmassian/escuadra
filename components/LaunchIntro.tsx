@@ -19,8 +19,8 @@ import Animated, {
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 import { measureInWindow, useLaunchReveal } from './LaunchReveal';
-import { useReduceMotion } from './useReduceMotion';
-import { useScreenReader } from './useScreenReader';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
+import { useScreenReader } from '@/hooks/useScreenReader';
 import { A_LA_ESCUADRA, ESCUADRA_WORDMARK } from '@/i18n/names';
 import { track } from '@/lib/telemetry';
 import {

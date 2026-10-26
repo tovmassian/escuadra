@@ -144,18 +144,18 @@ track() ─gate─▶ client.queue(type, payload)        builds the body: hashed
 
 ## Units
 
-| Unit                          | Role                                                                                                                                                      |
-| ----------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `lib/telemetryEvents.ts`      | Pure: the allowlist, `TelemetryProps`, the context keys and `contextPayload`, the gate, the buckets, `roundSeconds`, `nextAppPhase` and `SESSION_GAP_MS`. |
-| `lib/telemetryQueue.ts`       | Pure: `trimQueue`, `flushOutcome`, `withoutSent`, `FLUSH_BATCH`, `FLUSH_TIMEOUT_MS`.                                                                      |
-| `lib/roundStats.ts`           | Pure: `missesByPart`, `previousBestValue`, `leftRound` (the props of a round being thrown away, or null).                                                 |
-| `lib/settingsView.ts`         | `updateGroupId`, extracted from `versionLabel`, shared by Settings and the context.                                                                       |
-| `lib/telemetry.ts`            | The SDK's only importer: the client, the queue's store adapter, `track`, `trackNow`, `startSession`, `setTelemetryLanguage`.                              |
-| `stores/progress.ts`          | `telemetryQueue`, `pushTelemetry`, `dropTelemetry`; the opt-out and `factoryReset` empty it.                                                              |
-| `stores/session.ts`           | `activeMs`, `addActiveMs`; `startRound` starts it at 0.                                                                                                   |
-| `components/useRoundClock.ts` | Runs the round's clock while the screen is focused, the app active and no tips show.                                                                      |
-| `app/_layout.tsx`             | Session starts (AppState), the language hand-off, `app.launched`'s snapshot.                                                                              |
-| Screens                       | Pass `from` and `source` as route params, and call `track` where the table says.                                                                          |
+| Unit                     | Role                                                                                                                                                      |
+| ------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `lib/telemetryEvents.ts` | Pure: the allowlist, `TelemetryProps`, the context keys and `contextPayload`, the gate, the buckets, `roundSeconds`, `nextAppPhase` and `SESSION_GAP_MS`. |
+| `lib/telemetryQueue.ts`  | Pure: `trimQueue`, `flushOutcome`, `withoutSent`, `FLUSH_BATCH`, `FLUSH_TIMEOUT_MS`.                                                                      |
+| `lib/roundStats.ts`      | Pure: `missesByPart`, `previousBestValue`, `leftRound` (the props of a round being thrown away, or null).                                                 |
+| `lib/settingsView.ts`    | `updateGroupId`, extracted from `versionLabel`, shared by Settings and the context.                                                                       |
+| `lib/telemetry.ts`       | The SDK's only importer: the client, the queue's store adapter, `track`, `trackNow`, `startSession`, `setTelemetryLanguage`.                              |
+| `stores/progress.ts`     | `telemetryQueue`, `pushTelemetry`, `dropTelemetry`; the opt-out and `factoryReset` empty it.                                                              |
+| `stores/session.ts`      | `activeMs`, `addActiveMs`; `startRound` starts it at 0.                                                                                                   |
+| `hooks/useRoundClock.ts` | Runs the round's clock while the screen is focused, the app active and no tips show.                                                                      |
+| `app/_layout.tsx`        | Session starts (AppState), the language hand-off, `app.launched`'s snapshot.                                                                              |
+| Screens                  | Pass `from` and `source` as route params, and call `track` where the table says.                                                                          |
 
 ## Testing
 

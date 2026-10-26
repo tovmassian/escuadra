@@ -5,7 +5,7 @@ import { RoundBackButton } from '@/components/RoundBackButton';
 import { SearchField } from '@/components/SearchField';
 import { TeamRow } from '@/components/TeamRow';
 import { TipsLayer } from '@/components/TipsLayer';
-import { useTips } from '@/components/useTips';
+import { useTips } from '@/hooks/useTips';
 import { YourSquads } from '@/components/YourSquads';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';

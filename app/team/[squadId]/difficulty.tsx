@@ -19,7 +19,7 @@ import { LadderRung } from '@/components/LadderRung';
 import { ResetSheet } from '@/components/ResetSheet';
 import { BookGlyph } from '@/components/SettingsGlyphs';
 import { TipsLayer } from '@/components/TipsLayer';
-import { useTips } from '@/components/useTips';
+import { useTips } from '@/hooks/useTips';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import {

@@ -2,6 +2,7 @@
 paths:
   - "theme/**"
   - "components/**"
+  - "hooks/**"
   - "app/**"
 ---
 

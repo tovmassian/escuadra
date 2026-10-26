@@ -18,7 +18,7 @@ import { PhotoCredits } from '@/components/PhotoCredits';
 import { PlayerCard } from '@/components/PlayerCard';
 import { StudyListRow } from '@/components/StudyListRow';
 import { TipsLayer } from '@/components/TipsLayer';
-import { useTips } from '@/components/useTips';
+import { useTips } from '@/hooks/useTips';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';

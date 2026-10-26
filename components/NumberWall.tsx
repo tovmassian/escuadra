@@ -11,8 +11,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import Svg, { Text as SvgText } from 'react-native-svg';
-import { useAppActive } from './useAppActive';
-import { useReduceMotion } from './useReduceMotion';
+import { useAppActive } from '@/hooks/useAppActive';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 import { WALL_ROWS, layoutRow, numberWidth, rowOffset, type WallRowSpec } from '@/lib/numberWall';
 import { numberWall, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
