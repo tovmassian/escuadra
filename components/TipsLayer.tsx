@@ -16,7 +16,7 @@ import Animated, { FadeIn } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { G, Path, Rect } from 'react-native-svg';
 import { measureInWindow } from './LaunchReveal';
-import { useReduceMotion } from './useReduceMotion';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 import { useT } from '@/i18n/useT';
 import { withinTime } from '@/lib/launchIntro';
 import {

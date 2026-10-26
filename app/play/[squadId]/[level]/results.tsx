@@ -6,7 +6,7 @@ import { popIn, riseIn, slideIn } from '@/components/riseIn';
 import { RoundStrip } from '@/components/RoundStrip';
 import { ShareSheet } from '@/components/ShareSheet';
 import { TipsLayer, type TipSpec } from '@/components/TipsLayer';
-import { useTips } from '@/components/useTips';
+import { useTips } from '@/hooks/useTips';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
@@ -253,6 +253,14 @@ export default function Results() {
   const retry = (atLevel: Level) => {
     const roster = getRoster(squadId);
     useSession.getState().startRound(squad, roster, atLevel);
+    // Results builds this round, so the question screen finds it playing and
+    // sends nothing for it: the start is counted here (#221).
+    track('round.started', {
+      squad: squad.id,
+      kind: squad.kind,
+      level: atLevel,
+      source: atLevel === level ? 'retry' : 'nextLevel',
+    });
     router.replace({
       pathname: '/play/[squadId]/[level]',
       params: { squadId, level: String(atLevel) },
@@ -265,7 +273,7 @@ export default function Results() {
   };
 
   const studySquad = () => {
-    router.push({ pathname: '/team/[squadId]/study', params: { squadId } });
+    router.push({ pathname: '/team/[squadId]/study', params: { squadId, from: 'results' } });
   };
 
   const primary: Record<PrimaryAction, { label: string; onPress: () => void }> = {
@@ -432,7 +440,15 @@ export default function Results() {
           marker: squad.marker,
         }}
         text={{ teamName, level, outcomes: round.results.map((r) => r.correct) }}
-        onShared={(format) => track('result.shared', { level, score: score.correct, format })}
+        onShared={(format) =>
+          track('result.shared', {
+            squad: squad.id,
+            kind: squad.kind,
+            level,
+            score: score.correct,
+            format,
+          })
+        }
       />
       {/* Last, so the layer covers the whole screen. */}
       {showTips && (

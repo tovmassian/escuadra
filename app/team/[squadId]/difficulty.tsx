@@ -1,6 +1,6 @@
 import { router, useLocalSearchParams } from 'expo-router';
 import { LinearGradient } from 'expo-linear-gradient';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   Pressable,
   ScrollView,
@@ -19,7 +19,7 @@ import { LadderRung } from '@/components/LadderRung';
 import { ResetSheet } from '@/components/ResetSheet';
 import { BookGlyph } from '@/components/SettingsGlyphs';
 import { TipsLayer } from '@/components/TipsLayer';
-import { useTips } from '@/components/useTips';
+import { useTips } from '@/hooks/useTips';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import {
@@ -33,6 +33,8 @@ import {
 import type { Level } from '@/lib/questionEngine';
 import { squadScores } from '@/lib/reset';
 import { getSquad, squadLeague } from '@/lib/squads';
+import { track } from '@/lib/telemetry';
+import { paramOf, TEAM_FROM } from '@/lib/telemetryEvents';
 import { useProgress } from '@/stores/progress';
 import { borderWidths, iconSize, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -48,7 +50,11 @@ export default function Difficulty() {
   const colors = useThemeColors();
   const t = useT();
   const language = useLanguage();
-  const { squadId } = useLocalSearchParams<{ squadId: string }>();
+  const { squadId, from, search } = useLocalSearchParams<{
+    squadId: string;
+    from?: string;
+    search?: string;
+  }>();
   const bestScores = useProgress((s) => s.bestScores);
   const starred = useProgress((s) => s.starredSquads.includes(squadId));
   const toggleStar = useProgress((s) => s.toggleStar);
@@ -64,6 +70,22 @@ export default function Difficulty() {
   const playRef = useRef<ViewInstance>(null);
   const starRef = useRef<ViewInstance>(null);
   const studyRef = useRef<ViewInstance>(null);
+
+  // Usage statistics (#221): how the team was reached, once per visit. A screen
+  // pushed over this one and closed again does not count a second time.
+  const kind = getSquad(squadId)?.kind;
+  useEffect(() => {
+    if (!kind) return;
+    const opener = paramOf(from, TEAM_FROM);
+    track('team.opened', {
+      squad: squadId,
+      kind,
+      from: opener,
+      ...(opener === 'picker' ? { search: search === 'true' } : {}),
+    });
+    // Once per mount: the params are the route's, fixed for it.
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [squadId, kind]);
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
@@ -203,7 +225,10 @@ export default function Difficulty() {
             ref={studyRef}
             testID="study"
             onPress={() =>
-              router.push({ pathname: '/team/[squadId]/study', params: { squadId: squad.id } })
+              router.push({
+                pathname: '/team/[squadId]/study',
+                params: { squadId: squad.id, from: 'ladder' },
+              })
             }
             accessibilityRole="button"
             style={({ pressed }) => [styles.study, pressed && { opacity: opacity.settled }]}
@@ -260,7 +285,10 @@ export default function Difficulty() {
         ]}
         keeps={starred ? t.reset.team.keepsStar : undefined}
         confirmLabel={t.reset.team.confirm}
-        onConfirm={() => resetSquad(squad.id)}
+        onConfirm={() => {
+          track('progress.reset', { scope: 'team', squad: squad.id });
+          resetSquad(squad.id);
+        }}
       />
     </View>
   );

@@ -3,7 +3,7 @@ import { StyleSheet, View } from 'react-native';
 import Animated, { FadeOut, useReducedMotion } from 'react-native-reanimated';
 import { AnswerTile } from './AnswerTile';
 import { riseIn } from './riseIn';
-import type { ShotTap } from './useShot';
+import type { ShotTap } from '@/hooks/useShot';
 import type { FlagCode } from '@/assets/flags/generated';
 import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';

@@ -16,8 +16,10 @@ actual output.
 - **Vitest, in a node environment.** `vitest.config.ts`'s `include` names the folders
   that hold tests; a test anywhere else never runs, so a new folder joins `include` in the
   same change.
-- **Screens and components are verified on a device and by `npm run shots`**, not by unit
-  tests: no React Native renderer is set up, on purpose.
+- **Screens, components and hooks are verified on a device and by `npm run shots`**, not by
+  unit tests: no React Native renderer is set up, on purpose. A custom hook lives in
+  `hooks/`, one per file; a store's, the theme's (`theme/useTheme.ts`) and i18n's
+  (`i18n/useT.ts`) hooks stay with what they read, and so does a context's with its provider.
 - **Logic is pure, so it can be tested.** `lib/questionEngine.ts` imports no React, no
   store and does no I/O. A module that wraps a native API keeps its decisions in a pure
   sibling the tests cover: `lib/haptics.ts` and `lib/hapticPlan.ts`, `lib/share.ts` and
@@ -42,8 +44,13 @@ is stale. Never edit the expectation, widen an allowlist or loosen TypeScript to
 
 - `lib/__tests__/telemetrySdk.test.ts`: what the TelemetryDeck SDK sends. A failure is a disclosure
   review (`CLAUDE.md`, guardrail 4).
-- `lib/__tests__/telemetryIdentifier.test.ts`: About's one session code per launch, when the
+- `lib/__tests__/telemetryEvents.test.ts`: the whole allowlist and the context every
+  signal carries. A change is a disclosure review, and from 2.0.0 on a rename breaks the
+  contract (`privacy-telemetry.md`).
+- `lib/__tests__/telemetryIdentifier.test.ts`: About's one session code per session, when the
   identifier changes (Reset Escuadra).
+- `lib/__tests__/telemetryQueueing.test.ts`: what About says of the waiting statistics, that
+  nothing made before an opt-out or a reset is sent after it.
 - `i18n/__tests__/catalogs.test.ts`: a hash of the English About. A change updates every
   catalog's `about`, each re-reviewed.
 - `lib/__tests__/dataIntegrity.test.ts`: every stored photo's licence and credit, and the squads'

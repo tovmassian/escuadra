@@ -1,6 +1,7 @@
 import type { ReactNode, Ref } from 'react';
 import { Pressable, StyleSheet, type PressableProps, type ViewInstance } from 'react-native';
 import { BackGlyph } from '@/components/ActionGlyphs';
+import { useRoundGlyphColor } from '@/hooks/useRoundGlyphColor';
 import { borderWidths, opacity, sizes } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
@@ -43,12 +44,6 @@ export function RoundButton({
       {children}
     </Pressable>
   );
-}
-
-/** The glyph's colour on a `RoundButton`. */
-export function useRoundGlyphColor(glass: boolean): string {
-  const colors = useThemeColors();
-  return glass ? colors.onPhoto : colors.textPrimary;
 }
 
 export function RoundBackButton({

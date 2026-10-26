@@ -17,4 +17,8 @@ paths:
   `stores/__tests__/progress.test.ts` fails until it does.
 - Zustand's `persist` defaults to `localStorage`, which does not exist here. Use
   `createJSONStorage(() => AsyncStorage)`.
-- `stores/progress.ts` also holds the theme preference (it is not a third store) and telemetry's random `installId`, next to the Settings opt-out.
+- `stores/progress.ts` also holds the theme preference (it is not a third store), and
+  telemetry's random `installId` and its queue of statistics waiting to be sent
+  (`telemetryQueue`), next to the Settings opt-out. Switching usage statistics off empties
+  the queue. `stores/session.ts` holds the round's active time (`activeMs`), which a new
+  round starts at 0.

@@ -31,6 +31,7 @@ import { useLanguage, useT } from '@/i18n/useT';
 import { scoreSummary } from '@/lib/reset';
 import { versionLabel } from '@/lib/settingsView';
 import { openStorePage } from '@/lib/storeReview';
+import { startSession, track, trackNow } from '@/lib/telemetry';
 import { useProgress } from '@/stores/progress';
 import { borderWidths, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
@@ -100,8 +101,21 @@ export default function Settings() {
   // stopping for.
   const resetApp = () => {
     void Promise.all([Image.clearDiskCache(), Image.clearMemoryCache()]).catch(() => {});
+    // Sent at once, with the identifier the reset replaces, since the reset
+    // empties the queue (#221). Offline, it is lost with the rest.
+    trackNow('progress.reset', { scope: 'all' });
     useProgress.getState().factoryReset(Crypto.randomUUID());
     router.dismissTo('/');
+  };
+  const clearScores = () => {
+    track('progress.reset', { scope: 'scores' });
+    reset();
+  };
+  // Switched back on, usage statistics start a session of their own (#221), so
+  // what follows is never a session without a start.
+  const switchUsageStatistics = (on: boolean) => {
+    setTelemetryEnabled(on);
+    if (on) startSession(true);
   };
 
   const switchProps = {
@@ -186,7 +200,7 @@ export default function Settings() {
                 accessibilityLabel={t.settings.usageStatistics}
                 accessibilityHint={t.settings.usageNote}
                 value={telemetryEnabled}
-                onValueChange={setTelemetryEnabled}
+                onValueChange={switchUsageStatistics}
                 {...switchProps}
               />
             }
@@ -317,7 +331,7 @@ export default function Settings() {
         ]}
         keeps={t.reset.all.keepsLine}
         confirmLabel={t.reset.all.confirm(summary.scores)}
-        onConfirm={reset}
+        onConfirm={clearScores}
       />
       <ResetSheet
         visible={sheet === 'app'}

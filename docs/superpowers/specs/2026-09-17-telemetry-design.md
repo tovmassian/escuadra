@@ -2,6 +2,9 @@
 
 Issue: #53 · Milestone: v1.1.0 · Branch: `feat/53-telemetry` → `release-1.1.0`
 
+> Its allowlist and its "offline signals are dropped" tradeoff are superseded by
+> [`2026-10-26-telemetry-2-0-design.md`](2026-10-26-telemetry-2-0-design.md) (#221).
+
 ## Goal
 
 Measure retention (D1/D7), weekly active users and rounds per user with a

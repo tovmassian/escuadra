@@ -29,8 +29,11 @@ Entered before Submit for Review, with the privacy policy URLs.
 - Identifiers, Device ID: not linked to the user, not used for tracking, purposes Analytics
   and App Functionality (TelemetryDeck's hashed form of a random identifier made for the
   statistics, and a random session code; the EAS Update check's installation ID).
-- Usage Data, Product Interaction: not linked, not tracking, purpose Analytics (the events,
-  the app language among them).
+- Usage Data, Product Interaction: not linked, not tracking, purpose Analytics (the events
+  with their details, the appearance, vibration, Reduce Motion and text-size settings among
+  them, and the context each carries: the app's version, update and, on iOS, build, the
+  platform and the system's main version, and the app language). TelemetryDeck's App Privacy
+  guidance lists no other data type for these (#221).
 - Diagnostics, Crash Data: not linked, not tracking, purpose App Functionality (the
   expo-updates error message after a failed start).
 
@@ -45,7 +48,8 @@ Entered before Submit for Review, with the privacy policy URLs.
 Entered when the build is uploaded, with the privacy policy URL.
 
 - App activity, App interactions: collected, not shared, optional (the "Usage statistics"
-  switch), purpose Analytics.
+  switch), purpose Analytics (the events and the context each carries, as under App
+  Privacy's Product Interaction).
 - Device or other IDs: collected, not shared, required (the update check's ID is always
   sent; the statistics ID stops with the switch), purposes Analytics and App functionality.
 - App info and performance, Crash logs: collected, not shared, required (the update check's
@@ -67,4 +71,5 @@ Entered when the build is uploaded, with the privacy policy URL.
   system version TelemetryDeck receives on iOS, and the operating system and the app's
   version and project the update check sends to Expo. They travel with each statistic or
   update check, and TelemetryDeck's App Privacy guidance lists no separate data type for
-  them. About still states them.
+  them. About still states them. The version, build and system version a statistic also
+  carries in its own content are its context, declared above under Product Interaction.

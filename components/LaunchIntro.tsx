@@ -19,9 +19,10 @@ import Animated, {
 } from 'react-native-reanimated';
 import { scheduleOnRN } from 'react-native-worklets';
 import { measureInWindow, useLaunchReveal } from './LaunchReveal';
-import { useReduceMotion } from './useReduceMotion';
-import { useScreenReader } from './useScreenReader';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
+import { useScreenReader } from '@/hooks/useScreenReader';
 import { A_LA_ESCUADRA, ESCUADRA_WORDMARK } from '@/i18n/names';
+import { track } from '@/lib/telemetry';
 import {
   dockTransform,
   introPlan,
@@ -319,6 +320,8 @@ export function LaunchIntro({ onDone }: { onDone: () => void }) {
   const skip = () => {
     if (endingRef.current) return;
     endingRef.current = true;
+    // Whether the strike is welcome or tapped through (#221).
+    track('intro.skipped');
     fadeOut(durations.transition);
   };
 

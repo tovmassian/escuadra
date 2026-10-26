@@ -5,7 +5,7 @@ import { RoundBackButton } from '@/components/RoundBackButton';
 import { SearchField } from '@/components/SearchField';
 import { TeamRow } from '@/components/TeamRow';
 import { TipsLayer } from '@/components/TipsLayer';
-import { useTips } from '@/components/useTips';
+import { useTips } from '@/hooks/useTips';
 import { YourSquads } from '@/components/YourSquads';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
@@ -26,12 +26,14 @@ import {
 } from '@/lib/pickerView';
 import { listSquads } from '@/lib/squads';
 import { starredOfKind } from '@/lib/starred';
+import { track } from '@/lib/telemetry';
+import { NO_RESULTS_AFTER_MS } from '@/lib/telemetryEvents';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import { radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { SquadManifestEntry } from '@/types/squad';
 import { router } from 'expo-router';
-import { Fragment, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { ScrollView, StyleSheet, Text, View, type ViewInstance } from 'react-native';
 import Animated, {
   useAnimatedRef,
@@ -92,6 +94,20 @@ export default function TeamPicker() {
   const shownLetter =
     current !== null && letters.includes(current) ? current : (letters[0] ?? null);
   const empty = filter === 'club' ? clubs.length === 0 : sections.length === 0;
+
+  // Usage statistics (#221): a search that finds nothing, once per visit, and
+  // only once it has stayed empty a moment, so letters typed on the way to a
+  // team don't count. The words typed never leave the device.
+  const searching = query.trim() !== '';
+  const reportedEmpty = useRef(false);
+  useEffect(() => {
+    if (!searching || !empty || reportedEmpty.current) return;
+    const timer = setTimeout(() => {
+      reportedEmpty.current = true;
+      track('picker.noResults', { kind: filter });
+    }, NO_RESULTS_AFTER_MS);
+    return () => clearTimeout(timer);
+  }, [searching, empty, filter, query]);
 
   // Each letter heading's y in the scrolled content, recorded on layout. The
   // record belongs to one list: a new tab, language, search or confederation
@@ -281,7 +297,10 @@ export default function TeamPicker() {
       flag={item.kind === 'nation' ? flagFor(item.name) : undefined}
       progress={hydrated ? teamProgress(item.id, bestScores, item.lastUpdated) : undefined}
       onPress={() =>
-        router.push({ pathname: '/team/[squadId]/difficulty', params: { squadId: item.id } })
+        router.push({
+          pathname: '/team/[squadId]/difficulty',
+          params: { squadId: item.id, from: 'picker', search: String(searching) },
+        })
       }
     />
   );

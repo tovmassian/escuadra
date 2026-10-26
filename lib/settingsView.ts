@@ -36,15 +36,28 @@ function updateGroupFromManifest(manifest: Partial<Manifest>): string | null {
  */
 export function versionLabel(version: string, update: UpdateState, messages: Messages): string {
   const label = messages.settings.version(version);
-  if (!update.isEnabled) return label;
-  if (update.isEmbeddedLaunch) return `${label} (${messages.settings.builtIn})`;
+  const tag = updateTag(update);
+  if (tag === null) return label;
+  if (tag === EMBEDDED) return `${label} (${messages.settings.builtIn})`;
 
-  const id = updateGroupFromManifest(update.manifest) ?? update.updateId;
-  if (!id) return label;
-
-  const shortId = id.slice(0, GROUP_ID_LENGTH);
   const channelSuffix =
     update.channel && update.channel !== PRODUCTION_CHANNEL ? ` · ${update.channel}` : '';
 
-  return `${label} (${shortId}${channelSuffix})`;
+  return `${label} (${tag}${channelSuffix})`;
+}
+
+const EMBEDDED = 'embedded';
+
+/**
+ * The running update as Settings names it, without the label or the channel:
+ * the first 8 characters of its group id (or update id), `embedded` for the
+ * build's own bundle, and null when updates are off or nothing names it. Usage
+ * statistics carry it too (#221), so a signal can be matched to the update a
+ * player sees in Settings.
+ */
+export function updateTag(update: UpdateState): string | null {
+  if (!update.isEnabled) return null;
+  if (update.isEmbeddedLaunch) return EMBEDDED;
+  const id = updateGroupFromManifest(update.manifest ?? {}) ?? update.updateId;
+  return id ? id.slice(0, GROUP_ID_LENGTH) : null;
 }

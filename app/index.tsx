@@ -14,6 +14,7 @@ import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { homeView } from '@/lib/homeView';
 import { listSquads } from '@/lib/squads';
+import type { TeamFrom } from '@/lib/telemetryEvents';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import {
   borderWidths,
@@ -65,9 +66,9 @@ export default function Home() {
 
   const openPicker = () => router.push('/team-picker');
   // Continue and a starred team both open that team's Difficulty, which picks
-  // the level to play next.
-  const openSquad = (squadId: string) =>
-    router.push({ pathname: '/team/[squadId]/difficulty', params: { squadId } });
+  // the level to play next. `from` tells usage statistics which one (#221).
+  const openSquad = (squadId: string, from: TeamFrom) =>
+    router.push({ pathname: '/team/[squadId]/difficulty', params: { squadId, from } });
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
@@ -165,7 +166,7 @@ export default function Home() {
             <HomeContinue
               data={view.continue}
               name={squadDisplayName(view.continue.squad, language)}
-              onPress={() => openSquad(view.continue.squad.id)}
+              onPress={() => openSquad(view.continue.squad.id, 'continue')}
             />
           )}
           {view.kind === 'firstRun' && (
@@ -181,7 +182,11 @@ export default function Home() {
           )}
 
           {view.kind === 'returning' || (view.kind === 'firstRun' && view.starred.length > 0) ? (
-            <HomeSquads squads={view.starred} onOpen={openSquad} onAllTeams={openPicker} />
+            <HomeSquads
+              squads={view.starred}
+              onOpen={(squadId) => openSquad(squadId, 'squads')}
+              onAllTeams={openPicker}
+            />
           ) : view.kind === 'firstRun' ? (
             <View style={styles.hint}>
               <View importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>

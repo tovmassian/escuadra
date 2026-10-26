@@ -9,6 +9,7 @@ import { scoreKey } from '@/lib/scoring';
 import { listSquads } from '@/lib/squads';
 import { toggleStarred } from '@/lib/starred';
 import type { StudyView } from '@/lib/studyView';
+import { trimQueue, withoutSent, type QueuedSignal } from '@/lib/telemetryQueue';
 import type { TipScreen } from '@/lib/tips';
 import type { ThemePreference } from '@/theme/tokens';
 
@@ -44,6 +45,11 @@ interface ProgressState {
   /** Settings' opt-out. Off means `lib/telemetry.ts` sends nothing.
    *  Survives `reset()` for the same reason as `themePreference`. */
   telemetryEnabled: boolean;
+  /** Usage statistics waiting to be sent (#221), oldest first, as the SDK built
+   *  them, so a round played offline is counted when a connection comes back.
+   *  Switching usage statistics off empties it, and so does `factoryReset`;
+   *  `reset()` keeps it, since clearing scores says nothing about statistics. */
+  telemetryQueue: QueuedSignal[];
   /** Settings' Vibration switch (spec §7, #175). Off means `lib/haptics.ts`
    *  plays nothing. On by default; survives `reset()` like the other settings. */
   haptics: boolean;
@@ -69,6 +75,10 @@ interface ProgressState {
   setLanguagePreference: (preference: LanguagePreference) => void;
   setInstallId: (installId: string) => void;
   setTelemetryEnabled: (enabled: boolean) => void;
+  /** Queues a built signal, then trims the queue as of `now` (`trimQueue`). */
+  pushTelemetry: (signal: QueuedSignal, now: number) => void;
+  /** Removes the signals a flush handed over, by identity. */
+  dropTelemetry: (sent: readonly QueuedSignal[]) => void;
   setHaptics: (enabled: boolean) => void;
   setStudyView: (view: StudyView) => void;
   setReviewAskedVersion: (version: string) => void;
@@ -100,6 +110,7 @@ const INITIAL: ProgressData = {
   languagePreference: 'system',
   installId: null,
   telemetryEnabled: true,
+  telemetryQueue: [],
   haptics: true,
   studyView: 'grid',
   reviewAskedVersion: null,
@@ -125,7 +136,13 @@ export const useProgress = create<ProgressState>()(
       setThemePreference: (themePreference) => set({ themePreference }),
       setLanguagePreference: (languagePreference) => set({ languagePreference }),
       setInstallId: (installId) => set((s) => (s.installId === null ? { installId } : s)),
-      setTelemetryEnabled: (telemetryEnabled) => set({ telemetryEnabled }),
+      // Off empties the queue: nothing made while statistics were on is sent after.
+      setTelemetryEnabled: (telemetryEnabled) =>
+        set(telemetryEnabled ? { telemetryEnabled } : { telemetryEnabled, telemetryQueue: [] }),
+      pushTelemetry: (signal, now) =>
+        set((s) => ({ telemetryQueue: trimQueue([...s.telemetryQueue, signal], now) })),
+      dropTelemetry: (sent) =>
+        set((s) => ({ telemetryQueue: withoutSent(s.telemetryQueue, sent) })),
       setHaptics: (haptics) => set({ haptics }),
       setStudyView: (studyView) => set({ studyView }),
       setReviewAskedVersion: (reviewAskedVersion) => set({ reviewAskedVersion }),
