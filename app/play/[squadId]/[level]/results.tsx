@@ -87,9 +87,15 @@ export default function Results() {
   const reduced = useReducedMotion();
   const { squadId, level: levelParam } = useLocalSearchParams<{ squadId: string; level: string }>();
   const level = Number(levelParam) as Level;
-  const session = useSession();
+  // The finished round, read once as the screen opens. Retry, the next level
+  // and the X change the session while this screen is still up, animating
+  // out: read live, it redrew with the next round's empty strip, or nothing.
+  const [round] = useState(() => {
+    const { squadId, level, results, earlierRounds } = useSession.getState();
+    return { squadId, level, results, earlierRounds };
+  });
   const squad = getSquad(squadId);
-  const score = selectScore(session.results);
+  const score = selectScore(round.results);
   const tier = resultTier(score.correct, score.attempted);
   // Sharing is not a next step in the study loop, so it sits in the top bar,
   // apart from the actions, and opens a sheet rather than leaving the screen.
@@ -110,7 +116,7 @@ export default function Results() {
   // tips wait for it to close.
   const focused = useIsFocused();
   const tips = useTips('results', celebrated && focused && !sharing && !crediting);
-  const missed = selectMissed(session.results);
+  const missed = selectMissed(round.results);
   const tipKeys = resultsTips({
     missed: missed.length,
     passed: tier !== 'fail',
@@ -130,8 +136,8 @@ export default function Results() {
   // Coming back, or closing the sheet or the tips, starts the wait again.
   // lib/storeReview.ts also never asks while the app is in the background.
   const flawless =
-    tier === 'excellent' && !!squad && session.squadId === squadId && session.level === level;
-  const earlierRounds = session.earlierRounds;
+    tier === 'excellent' && !!squad && round.squadId === squadId && round.level === level;
+  const earlierRounds = round.earlierRounds;
   useFocusEffect(
     useCallback(() => {
       if (!flawless || sharing || crediting || showTips) return;
@@ -228,16 +234,16 @@ export default function Results() {
     },
   });
 
-  if (!squad || session.squadId !== squadId || session.level !== level) return null;
+  if (!squad || round.squadId !== squadId || round.level !== level) return null;
 
   const teamName = squadDisplayName(squad, language);
   const copy = resultCopy({ tier, level, teamName, season: squad.season }, t);
   const actions = resultActions(tier !== 'fail', level < MAX_LEVEL);
-  const strip = session.results.map((r) => ({
+  const strip = round.results.map((r) => ({
     no: r.question.memberNo,
     correct: r.correct === true,
   }));
-  const photoCredits = photoCreditRows(session.results, (id) => photoFor(getPlayer(id)));
+  const photoCredits = photoCreditRows(round.results, (id) => photoFor(getPlayer(id)));
   // The tier's beat (spec §6): a fail's title and cards come at once the strip
   // has mostly filled; a pass waits for the strip, then the strike.
   const beat = tier === 'fail' ? resultsTimeline.failBeat : resultsTimeline.passBeat;
@@ -246,7 +252,7 @@ export default function Results() {
 
   const retry = (atLevel: Level) => {
     const roster = getRoster(squadId);
-    session.startRound(squad, roster, atLevel);
+    useSession.getState().startRound(squad, roster, atLevel);
     router.replace({
       pathname: '/play/[squadId]/[level]',
       params: { squadId, level: String(atLevel) },
@@ -254,7 +260,7 @@ export default function Results() {
   };
 
   const chooseDifferentTeam = () => {
-    session.reset();
+    useSession.getState().reset();
     router.dismissTo('/team-picker');
   };
 
@@ -350,7 +356,7 @@ export default function Results() {
         {missed.length > 0 ? (
           <MissedCards ref={missedRef} missed={missed} marker={squad.marker} beat={beat} />
         ) : null}
-        {tier === 'excellent' ? <Roster results={session.results} marker={squad.marker} /> : null}
+        {tier === 'excellent' ? <Roster results={round.results} marker={squad.marker} /> : null}
 
         <View style={styles.spacer} />
 
@@ -425,7 +431,7 @@ export default function Results() {
           items: strip,
           marker: squad.marker,
         }}
-        text={{ teamName, level, outcomes: session.results.map((r) => r.correct) }}
+        text={{ teamName, level, outcomes: round.results.map((r) => r.correct) }}
         onShared={(format) => track('result.shared', { level, score: score.correct, format })}
       />
       {/* Last, so the layer covers the whole screen. */}
