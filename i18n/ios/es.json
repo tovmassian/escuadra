@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSPhotoLibraryAddUsageDescription": "Escuadra añade la imagen de tu ronda a Fotos solo cuando eliges guardarla."
+  }
+}
