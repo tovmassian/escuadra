@@ -245,7 +245,8 @@ export function AnswerTile({
         disabled={answered}
         accessibilityRole="button"
         accessibilityState={{ disabled: answered }}
-        accessibilityLabel={[label, sub, t.round.tileSpoken[verdict]].filter(Boolean).join(', ')}
+        // A position tile speaks its word alone: a screen reader spells the code out (#187).
+        accessibilityLabel={[sub ?? label, t.round.tileSpoken[verdict]].filter(Boolean).join(', ')}
         style={styles.tile}
       >
         {isPosition ? (

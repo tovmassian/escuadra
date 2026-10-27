@@ -293,6 +293,10 @@ export function streakMilestone(previous: number, current: number): boolean {
 /** A slot chip's screen-reader label. A slot still being asked carries no
  *  value, so its label cannot read out the answer. */
 export function slotSpoken(slot: Slot, language: SupportedLanguage, messages: Messages): string {
-  const value = slotValueText(slot, language, messages) ?? '';
+  // A position by its word: a screen reader spells a code out (#187).
+  const value =
+    slot.key === 'POS' && slot.value !== null && isPosition(slot.value)
+      ? positionLabel(slot.value, messages)
+      : (slotValueText(slot, language, messages) ?? '');
   return messages.round.slotSpoken[slot.state](messages.slots[slot.key], value);
 }

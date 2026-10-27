@@ -26,7 +26,7 @@ import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
 import { feedback } from '@/lib/haptics';
 import { photoFor } from '@/lib/photos';
-import { positionCode } from '@/lib/roundView';
+import { positionCode, positionLabel } from '@/lib/roundView';
 import { getRoster, getSquad } from '@/lib/squads';
 import { bannerBands } from '@/lib/stageView';
 import {
@@ -337,6 +337,7 @@ export default function Study() {
             <FilterPill
               key={f}
               label={f === 'ALL' ? t.study.all : positionCode(f, t)}
+              spokenLabel={f === 'ALL' ? undefined : positionLabel(f, t)}
               count={counts[f]}
               active={filter === f}
               onPress={() => {
