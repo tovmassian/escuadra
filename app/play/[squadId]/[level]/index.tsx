@@ -15,7 +15,7 @@ import { useRoundClock } from '@/hooks/useRoundClock';
 import { useScreenReader } from '@/hooks/useScreenReader';
 import { useShot } from '@/hooks/useShot';
 import { useTips } from '@/hooks/useTips';
-import { useTitleFocus } from '@/hooks/useTitleFocus';
+import { HIDDEN, useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
@@ -48,6 +48,7 @@ import {
   durations,
   fontScaleCap,
   radii,
+  screenReaderSettle,
   sizes,
   spacing,
   spotlightMotion,
@@ -60,7 +61,7 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useIsFocused, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   AccessibilityInfo,
   Platform,
@@ -248,19 +249,25 @@ export default function Question() {
   // The prompt is the round's title: a screen reader starts on the question.
   const promptRef = useRef<TextInstance>(null);
   const titleFocus = useTitleFocus(promptRef, !tips.open);
-  // Each new question or part moves VoiceOver to its prompt. iOS has no live
-  // regions, and the tile just answered goes with its grid, so VoiceOver would
-  // land on whatever took its place (#187). TalkBack hears the prompt's live
-  // region instead.
+  // VoiceOver starts each question and each part on its prompt (#187). It moves
+  // to the first element it can see when the screen opens, and again when the
+  // element under it goes (the tile just answered, or Next), after anything
+  // sent before. So on iOS, while the screen settles and a moment after each
+  // new question or part, the prompt is the only element in its order, and
+  // takes the focus. iOS has no live regions; TalkBack hears the prompt's.
   const asked = `${session.currentIndex}:${session.currentPartIndex}`;
-  const lastAsked = useRef(asked);
+  const [settledAsked, setSettledAsked] = useState(asked);
+  const swapping = asked !== settledAsked;
+  const quiet = titleFocus.quiet || (Platform.OS === 'ios' && swapping) ? HIDDEN : {};
   useEffect(() => {
-    if (lastAsked.current === asked) return;
-    lastAsked.current = asked;
-    if (!screenReader || Platform.OS !== 'ios' || session.phase !== 'playing') return;
+    if (!swapping) return;
     const node = promptRef.current;
-    if (node) AccessibilityInfo.sendAccessibilityEvent(node, 'focus');
-  }, [asked, screenReader, session.phase]);
+    if (node && screenReader && Platform.OS === 'ios' && session.phase === 'playing') {
+      AccessibilityInfo.sendAccessibilityEvent(node, 'focus');
+    }
+    const timer = setTimeout(() => setSettledAsked(asked), screenReaderSettle.settle);
+    return () => clearTimeout(timer);
+  }, [swapping, asked, screenReader, session.phase]);
   // At large text sizes the scroll overflows and opens at the top, with the
   // answers below the fold: the layer scrolls a tip's target into view.
   const scrollRef = useRef<ScrollViewInstance>(null);
@@ -404,11 +411,13 @@ export default function Question() {
         pointerEvents="none"
       />
       <View style={styles.column} {...tips.contentA11y}>
-        <RoundProgress
-          outcomes={progressOutcomes(session.results, session.currentIndex)}
-          currentIndex={session.currentIndex}
-        />
-        <View style={styles.topBar} {...titleFocus.chrome}>
+        <View {...quiet}>
+          <RoundProgress
+            outcomes={progressOutcomes(session.results, session.currentIndex)}
+            currentIndex={session.currentIndex}
+          />
+        </View>
+        <View style={styles.topBar} {...quiet}>
           <GlassCloseButton label={t.round.leave} onPress={exit} />
           <View style={styles.team}>
             <Text style={styles.teamName} numberOfLines={1}>
@@ -448,7 +457,7 @@ export default function Question() {
             style={styles.backingRise}
             pointerEvents="none"
           />
-          <View style={styles.heroFrame}>
+          <View style={styles.heroFrame} {...quiet}>
             <LinearGradient
               colors={[backingTop, colors.background]}
               style={styles.backingNumber}
@@ -503,7 +512,7 @@ export default function Question() {
               {counter ? <Text style={styles.counter}>{counter}</Text> : null}
             </View>
 
-            <View ref={answersRef} collapsable={false} style={styles.answers}>
+            <View ref={answersRef} collapsable={false} style={styles.answers} {...quiet}>
               <AnswerGrid
                 part={part}
                 gridKey={`${session.currentIndex}:${session.currentPartIndex}`}
@@ -528,13 +537,15 @@ export default function Question() {
               />
             </View>
 
-            <QuestionFooter
-              mode={footerMode(verdict, screenReader)}
-              compact={compact}
-              last={session.currentIndex === session.questions.length - 1}
-              onNext={next}
-              credit={photo}
-            />
+            <View {...quiet}>
+              <QuestionFooter
+                mode={footerMode(verdict, screenReader)}
+                compact={compact}
+                last={session.currentIndex === session.questions.length - 1}
+                onNext={next}
+                credit={photo}
+              />
+            </View>
           </View>
         </ScrollView>
       </View>
