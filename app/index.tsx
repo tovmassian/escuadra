@@ -50,7 +50,9 @@ export default function Home() {
   const wallTop = insets.top + sizes.roundButton;
   const topFade = wallTop + sizes.home.topFade;
   const titleRef = useRef<ViewInstance>(null);
-  useTitleFocus(titleRef);
+  // The gear is out of VoiceOver's order while Home settles: coming back from
+  // Settings, VoiceOver would return to it rather than start on the wordmark.
+  const titleFocus = useTitleFocus(titleRef);
 
   // At rest whenever the reveal is 1, so a launch without the intro, or any
   // later visit, shows Home as it is.
@@ -146,7 +148,7 @@ export default function Home() {
 
       <View style={styles.topBar}>
         <Wordmark ref={titleRef} />
-        <Animated.View style={arriveStyle}>
+        <Animated.View style={arriveStyle} {...titleFocus.chrome}>
           <Pressable
             testID="home-settings"
             onPress={() => router.push('/settings')}

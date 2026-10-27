@@ -62,6 +62,8 @@ import { router, useIsFocused, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useRef } from 'react';
 import {
+  AccessibilityInfo,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -246,6 +248,19 @@ export default function Question() {
   // The prompt is the round's title: a screen reader starts on the question.
   const promptRef = useRef<TextInstance>(null);
   const titleFocus = useTitleFocus(promptRef, !tips.open);
+  // Each new question or part moves VoiceOver to its prompt. iOS has no live
+  // regions, and the tile just answered goes with its grid, so VoiceOver would
+  // land on whatever took its place (#187). TalkBack hears the prompt's live
+  // region instead.
+  const asked = `${session.currentIndex}:${session.currentPartIndex}`;
+  const lastAsked = useRef(asked);
+  useEffect(() => {
+    if (lastAsked.current === asked) return;
+    lastAsked.current = asked;
+    if (!screenReader || Platform.OS !== 'ios' || session.phase !== 'playing') return;
+    const node = promptRef.current;
+    if (node) AccessibilityInfo.sendAccessibilityEvent(node, 'focus');
+  }, [asked, screenReader, session.phase]);
   // At large text sizes the scroll overflows and opens at the top, with the
   // answers below the fold: the layer scrolls a tip's target into view.
   const scrollRef = useRef<ScrollViewInstance>(null);
