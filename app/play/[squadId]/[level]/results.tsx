@@ -7,6 +7,7 @@ import { RoundStrip } from '@/components/RoundStrip';
 import { ShareSheet } from '@/components/ShareSheet';
 import { TipsLayer, type TipSpec } from '@/components/TipsLayer';
 import { useTips } from '@/hooks/useTips';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
@@ -53,6 +54,7 @@ import {
   StyleSheet,
   Text,
   View,
+  type TextInstance,
   type ViewInstance,
   type ScrollViewInstance,
 } from 'react-native';
@@ -127,6 +129,8 @@ export default function Results() {
   const offset = useRef(0);
   const missedRef = useRef<ViewInstance>(null);
   const actionsRef = useRef<ViewInstance>(null);
+  const titleRef = useRef<TextInstance>(null);
+  useTitleFocus(titleRef, !showTips);
 
   // After an a la escuadra round, once the celebration is over, perhaps ask
   // for a store rating (#57). Nothing here sets state, so the screen never
@@ -337,6 +341,7 @@ export default function Results() {
             tier={tier}
           />
           <Animated.Text
+            ref={titleRef}
             entering={riseIn(reduced, spotlightMotion.numberRise, resultsTimeline.rise, beat)}
             style={styles.title}
             maxFontSizeMultiplier={fontScaleCap.display}

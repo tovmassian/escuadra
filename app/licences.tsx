@@ -1,7 +1,8 @@
 import { router } from 'expo-router';
-import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useRef, useState } from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, View, type TextInstance } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { useT } from '@/i18n/useT';
 import {
   LICENCE_TEXTS,
@@ -29,6 +30,8 @@ export default function Licences() {
   const colors = useThemeColors();
   const t = useT();
   const [open, setOpen] = useState<ReadonlySet<string>>(() => new Set([UNICODE_KEY]));
+  const titleRef = useRef<TextInstance>(null);
+  useTitleFocus(titleRef);
   const toggle = (key: string) =>
     setOpen((prev) => {
       const next = new Set(prev);
@@ -95,7 +98,7 @@ export default function Licences() {
         <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
           <Text style={styles.back}>‹ {t.common.back}</Text>
         </Pressable>
-        <Text style={styles.title} accessibilityRole="header">
+        <Text ref={titleRef} style={styles.title} accessibilityRole="header">
           {t.about.licences.label}
         </Text>
 

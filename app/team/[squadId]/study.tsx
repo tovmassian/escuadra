@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
+  type TextInstance,
   type ViewInstance,
 } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
@@ -19,6 +20,7 @@ import { PlayerCard } from '@/components/PlayerCard';
 import { StudyListRow } from '@/components/StudyListRow';
 import { TipsLayer } from '@/components/TipsLayer';
 import { useTips } from '@/hooks/useTips';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
@@ -94,6 +96,8 @@ export default function Study() {
   const tips = useTips('study');
   const hideRef = useRef<ViewInstance>(null);
   const filtersRef = useRef<ViewInstance>(null);
+  const titleRef = useRef<TextInstance>(null);
+  useTitleFocus(titleRef, !tips.open);
 
   const squad = getSquad(squadId);
   const roster = useMemo(() => getRoster(squadId), [squadId]);
@@ -310,6 +314,7 @@ export default function Study() {
         </View>
         <View style={styles.titleRow}>
           <Text
+            ref={titleRef}
             style={styles.title}
             maxFontSizeMultiplier={fontScaleCap.display}
             accessibilityRole="header"

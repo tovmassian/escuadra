@@ -3,8 +3,16 @@ import * as Crypto from 'expo-crypto';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import * as Updates from 'expo-updates';
-import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { useRef, useState } from 'react';
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  View,
+  type TextInstance,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EraserGlyph } from '@/components/ActionGlyphs';
 import { AppearanceControl } from '@/components/AppearanceControl';
@@ -26,6 +34,7 @@ import {
 } from '@/components/SettingsGlyphs';
 import { SettingsRow, SettingsSection } from '@/components/SettingsSection';
 import { SoonChip } from '@/components/SoonChip';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { LANGUAGE_NAMES } from '@/i18n/names';
 import { useLanguage, useT } from '@/i18n/useT';
 import { scoreSummary } from '@/lib/reset';
@@ -54,6 +63,8 @@ export default function Settings() {
   const [languageOpen, setLanguageOpen] = useState(false);
   const [sheet, setSheet] = useState<'scores' | 'app' | null>(null);
   const version = Constants.expoConfig?.version ?? '—';
+  const titleRef = useRef<TextInstance>(null);
+  useTitleFocus(titleRef);
   const glyph = colors.textSecondary;
   const g = sizes.settings;
 
@@ -140,7 +151,7 @@ export default function Settings() {
             label={t.common.back}
             onPress={() => router.back()}
           />
-          <Text style={styles.title} accessibilityRole="header">
+          <Text ref={titleRef} style={styles.title} accessibilityRole="header">
             {t.settings.title}
           </Text>
         </View>

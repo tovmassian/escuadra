@@ -15,6 +15,7 @@ import { useRoundClock } from '@/hooks/useRoundClock';
 import { useScreenReader } from '@/hooks/useScreenReader';
 import { useShot } from '@/hooks/useShot';
 import { useTips } from '@/hooks/useTips';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
@@ -65,6 +66,7 @@ import {
   StyleSheet,
   Text,
   View,
+  type TextInstance,
   type ViewInstance,
   type ScrollViewInstance,
 } from 'react-native';
@@ -241,6 +243,9 @@ export default function Question() {
   const heroRef = useRef<ViewInstance>(null);
   const slotsRef = useRef<ViewInstance>(null);
   const answersRef = useRef<ViewInstance>(null);
+  // The prompt is the round's title: a screen reader starts on the question.
+  const promptRef = useRef<TextInstance>(null);
+  useTitleFocus(promptRef, !tips.open);
   // At large text sizes the scroll overflows and opens at the top, with the
   // answers below the fold: the layer scrolls a tip's target into view.
   const scrollRef = useRef<ScrollViewInstance>(null);
@@ -469,6 +474,7 @@ export default function Question() {
           <View style={styles.ground}>
             <View style={styles.promptRow}>
               <Text
+                ref={promptRef}
                 style={[
                   compact ? typography.promptCompact : typography.prompt,
                   { color: promptColor },

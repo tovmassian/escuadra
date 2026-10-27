@@ -6,6 +6,7 @@ import { SearchField } from '@/components/SearchField';
 import { TeamRow } from '@/components/TeamRow';
 import { TipsLayer } from '@/components/TipsLayer';
 import { useTips } from '@/hooks/useTips';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { YourSquads } from '@/components/YourSquads';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
@@ -34,7 +35,14 @@ import { useThemeColors } from '@/theme/useTheme';
 import type { SquadManifestEntry } from '@/types/squad';
 import { router } from 'expo-router';
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View, type ViewInstance } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  type TextInstance,
+  type ViewInstance,
+} from 'react-native';
 import Animated, {
   useAnimatedRef,
   useAnimatedScrollHandler,
@@ -66,6 +74,8 @@ export default function TeamPicker() {
   const tips = useTips('picker');
   const switchRef = useRef<ViewInstance>(null);
   const firstRowRef = useRef<ViewInstance>(null);
+  const titleRef = useRef<TextInstance>(null);
+  useTitleFocus(titleRef, !tips.open);
 
   const squads = listSquads();
   const names = useMemo<SquadNames>(
@@ -336,7 +346,7 @@ export default function TeamPicker() {
             />
             <Text style={styles.count}>{t.picker.squadCount(squads.length)}</Text>
           </View>
-          <Text style={styles.title} accessibilityRole="header">
+          <Text ref={titleRef} style={styles.title} accessibilityRole="header">
             {t.picker.title}
           </Text>
           <SearchField value={query} onChange={changeQuery} onClear={() => changeQuery('')} />

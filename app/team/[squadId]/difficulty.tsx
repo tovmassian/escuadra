@@ -9,6 +9,7 @@ import {
   View,
   type ViewInstance,
   type ScrollViewInstance,
+  type TextInstance,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EraserGlyph, OutdatedGlyph } from '@/components/ActionGlyphs';
@@ -20,6 +21,7 @@ import { ResetSheet } from '@/components/ResetSheet';
 import { BookGlyph } from '@/components/SettingsGlyphs';
 import { TipsLayer } from '@/components/TipsLayer';
 import { useTips } from '@/hooks/useTips';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import {
@@ -70,6 +72,8 @@ export default function Difficulty() {
   const playRef = useRef<ViewInstance>(null);
   const starRef = useRef<ViewInstance>(null);
   const studyRef = useRef<ViewInstance>(null);
+  const titleRef = useRef<TextInstance>(null);
+  const refocusTitle = useTitleFocus(titleRef, !tips.open);
 
   // Usage statistics (#221): how the team was reached, once per visit. A screen
   // pushed over this one and closed again does not count a second time.
@@ -171,6 +175,7 @@ export default function Difficulty() {
           starred={starred}
           onToggleStar={() => toggleStar(squad.id)}
           starRef={starRef}
+          titleRef={titleRef}
         />
         <View style={styles.content}>
           <View style={styles.headingBlock}>
@@ -288,6 +293,8 @@ export default function Difficulty() {
         onConfirm={() => {
           track('progress.reset', { scope: 'team', squad: squad.id });
           resetSquad(squad.id);
+          // The eraser goes with the scores, so the focus can't go back to it.
+          refocusTitle();
         }}
       />
     </View>

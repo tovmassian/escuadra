@@ -1,16 +1,20 @@
 import { CloseGlyph } from '@/components/ActionGlyphs';
+import { useScreenReader } from '@/hooks/useScreenReader';
 import { useT } from '@/i18n/useT';
 import { durations, opacity, radii, sheetDrag, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
-import { useEffect, useState, type ReactNode } from 'react';
+import { useEffect, useRef, useState, type ReactNode } from 'react';
 import {
+  AccessibilityInfo,
   Modal,
   PanResponder,
+  Platform,
   Pressable,
   StyleSheet,
   Text,
   useWindowDimensions,
   View,
+  type TextInstance,
 } from 'react-native';
 import Animated, {
   FadeIn,
@@ -138,6 +142,22 @@ function SheetFrame({ onClose, title, testID, children }: Omit<SheetProps, 'visi
   );
   const dragStyle = useAnimatedStyle(() => ({ transform: [{ translateY: dragY.value }] }));
 
+  // A screen reader starts on the title, not the × (#187), once the sheet has
+  // risen: the sheet is below the screen while it slides up.
+  const screenReader = useScreenReader();
+  const titleRef = useRef<TextInstance>(null);
+  useEffect(() => {
+    if (!screenReader || Platform.OS === 'web') return;
+    const timer = setTimeout(
+      () => {
+        const node = titleRef.current;
+        if (node) AccessibilityInfo.sendAccessibilityEvent(node, 'focus');
+      },
+      reduced ? durations.transition : SHEET_MS,
+    );
+    return () => clearTimeout(timer);
+  }, [screenReader, reduced]);
+
   const sheet = sizes.sheet;
   // The close button is drawn under the 44 pt tap target, and reaches it
   // through hitSlop.
@@ -217,7 +237,7 @@ function SheetFrame({ onClose, title, testID, children }: Omit<SheetProps, 'visi
             <View style={styles.handle} />
 
             <View style={styles.header}>
-              <Text style={styles.title} accessibilityRole="header">
+              <Text ref={titleRef} style={styles.title} accessibilityRole="header">
                 {title}
               </Text>
               <Pressable

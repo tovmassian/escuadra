@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, type Ref } from 'react';
 import { StyleSheet, Text, View, type ViewInstance } from 'react-native';
 import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { EscuadraMark } from './EscuadraMark';
@@ -12,8 +12,9 @@ import { useThemeColors } from '@/theme/useTheme';
 // ESCUADRA eyebrow predates the logo iteration. The launch intro (#182) docks
 // its own lockup onto this one: it registers its mark and word for the intro
 // to measure, and stays hidden until the dock ends, when the intro's lockup is
-// exactly on top of it and unmounts (spec, Hand-off to Home).
-export function Wordmark() {
+// exactly on top of it and unmounts (spec, Hand-off to Home). `ref` is the one
+// element a screen reader reads, Home's title.
+export function Wordmark({ ref }: { ref?: Ref<ViewInstance> }) {
   const colors = useThemeColors();
   const launch = useLaunchReveal();
   const markRef = useRef<ViewInstance>(null);
@@ -32,6 +33,7 @@ export function Wordmark() {
 
   return (
     <Animated.View
+      ref={ref}
       style={[styles.root, shownStyle]}
       // One element, so iOS reads "Escuadra, header" rather than the lowercase word.
       accessible

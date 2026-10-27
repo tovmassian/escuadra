@@ -1,6 +1,6 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import type { Ref } from 'react';
-import { StyleSheet, Text, View, type ViewInstance } from 'react-native';
+import { StyleSheet, Text, View, type TextInstance, type ViewInstance } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StarGlyph } from './ActionGlyphs';
 import { Flag } from './Flag';
@@ -26,6 +26,8 @@ interface LadderHeroProps {
   onToggleStar: () => void;
   /** The star's own view: Difficulty's second How to play tip rings it (#183). */
   starRef?: Ref<ViewInstance>;
+  /** The team's name, Difficulty's title, where a screen reader starts (#187). */
+  titleRef?: Ref<TextInstance>;
 }
 
 // The Difficulty hero (#178, spec §1): the squad's marker as vertical bands,
@@ -47,6 +49,7 @@ export function LadderHero({
   starred,
   onToggleStar,
   starRef,
+  titleRef,
 }: LadderHeroProps) {
   const colors = useThemeColors();
   const theme = useThemeName();
@@ -149,6 +152,7 @@ export function LadderHero({
             )}
           </View>
           <Text
+            ref={titleRef}
             style={styles.name}
             accessibilityRole="header"
             maxFontSizeMultiplier={fontScaleCap.display}

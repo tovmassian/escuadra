@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useRef } from 'react';
+import { Pressable, StyleSheet, Text, View, type ViewInstance } from 'react-native';
 import Animated, { Extrapolation, interpolate, useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StarGlyph } from '@/components/ActionGlyphs';
@@ -10,6 +11,7 @@ import { useLaunchReveal } from '@/components/LaunchReveal';
 import { NumberWall } from '@/components/NumberWall';
 import { GearGlyph } from '@/components/SettingsGlyphs';
 import { Wordmark } from '@/components/Wordmark';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { homeView } from '@/lib/homeView';
@@ -47,6 +49,8 @@ export default function Home() {
   const view = homeView({ hydrated, lastPlayed, bestScores, starred, squads: listSquads() });
   const wallTop = insets.top + sizes.roundButton;
   const topFade = wallTop + sizes.home.topFade;
+  const titleRef = useRef<ViewInstance>(null);
+  useTitleFocus(titleRef);
 
   // At rest whenever the reveal is 1, so a launch without the intro, or any
   // later visit, shows Home as it is.
@@ -141,7 +145,7 @@ export default function Home() {
       />
 
       <View style={styles.topBar}>
-        <Wordmark />
+        <Wordmark ref={titleRef} />
         <Animated.View style={arriveStyle}>
           <Pressable
             testID="home-settings"
