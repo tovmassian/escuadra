@@ -279,8 +279,12 @@ export function TipsLayer({
       right: tips.gutter,
       top: placement?.tipTop ?? 0,
     },
-    tip: {
-      gap: tips.stack,
+    tip: { gap: tips.stack },
+    // Its own view, under the tip's text: iOS draws a view's box shadow over that
+    // view's children wherever they reach into its rounded corners (#187).
+    backing: {
+      ...StyleSheet.absoluteFill,
+      pointerEvents: 'none',
       borderRadius: radii.lg,
       backgroundColor: colors.tipBacking,
       boxShadow: [
@@ -443,6 +447,11 @@ export function TipsLayer({
           onStartShouldSetResponder={() => placed}
           onResponderRelease={advance}
         >
+          <View
+            style={styles.backing}
+            accessibilityElementsHidden
+            importantForAccessibility="no-hide-descendants"
+          />
           {content}
         </Animated.View>
       </View>
