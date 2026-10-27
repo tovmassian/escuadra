@@ -33,6 +33,8 @@ export function Wordmark() {
   return (
     <Animated.View
       style={[styles.root, shownStyle]}
+      // One element, so iOS reads "Escuadra, header" rather than the lowercase word.
+      accessible
       accessibilityRole="header"
       accessibilityLabel={ESCUADRA}
     >

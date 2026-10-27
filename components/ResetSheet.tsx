@@ -86,7 +86,13 @@ export function ResetSheet({
         </Text>
         <View style={styles.card}>
           {clears.map((item) => (
-            <View key={item.label} style={styles.row}>
+            // One stop per row for a screen reader, its value with it (#187).
+            <View
+              key={item.label}
+              style={styles.row}
+              accessible
+              accessibilityLabel={[item.label, item.value].filter(Boolean).join(', ')}
+            >
               <Text style={styles.label}>{item.label}</Text>
               {item.value ? <Text style={styles.value}>{item.value}</Text> : null}
             </View>
