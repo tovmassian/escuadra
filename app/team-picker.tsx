@@ -25,7 +25,7 @@ import {
   visibleSquads,
 } from '@/lib/pickerView';
 import { listSquads } from '@/lib/squads';
-import { starredOfKind } from '@/lib/starred';
+import { openingTab, starredOfKind } from '@/lib/starred';
 import { track } from '@/lib/telemetry';
 import { NO_RESULTS_AFTER_MS } from '@/lib/telemetryEvents';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
@@ -56,7 +56,7 @@ export default function TeamPicker() {
   const hydrated = useProgressHydrated();
   const bestScores = useProgress((s) => s.bestScores);
   const starredSquads = useProgress((s) => s.starredSquads);
-  const [filter, setFilter] = useState<Kind>('club');
+  const [filter, setFilter] = useState<Kind>(() => openingTab(starredSquads, listSquads()));
   const [league, setLeague] = useState<LeagueFilter>('ALL');
   const [confederation, setConfederation] = useState<ConfederationFilter>('ALL');
   const [query, setQuery] = useState('');

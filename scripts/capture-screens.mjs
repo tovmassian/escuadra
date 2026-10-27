@@ -738,16 +738,16 @@ async function captureTheme(browser, colorScheme, suffix) {
     // Your squads (#179): two clubs and Spain starred by seed, Armenia by a tap
     // on its star, so it is the newest. The picker then shows each tab's
     // starred teams over its list, Nations with UEFA picked to show the group
-    // ignores it.
+    // ignores it. It opens on Nations, the newest starred team's tab (#187).
     await seedStarred(capture, ['esp', 'rma', 'ars']);
     await capture.open('/team/arm/difficulty');
     await capture.tapId('difficulty-star', { wait: SWAP_MS });
     await capture.shoot('04d-difficulty-starred');
     await capture.open('/team-picker');
-    await capture.shoot('02b-team-picker-clubs-starred');
-    await capture.tapId('kind-nation', { wait: SWAP_MS });
     await capture.tapId('confederation-UEFA', { wait: SWAP_MS });
     await capture.shoot('03d-team-picker-nations-starred');
+    await capture.tapId('kind-club', { wait: SWAP_MS });
+    await capture.shoot('02b-team-picker-clubs-starred');
 
     // Home (#181), returning: Liverpool to continue, every level cleared, so
     // Continue offers level 3 again (8/10, current), with the four teams starred
