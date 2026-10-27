@@ -2,7 +2,7 @@ import { Sheet } from '@/components/Sheet';
 import { useT } from '@/i18n/useT';
 import { borderWidths, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
 export interface ResetSheetProps {
   visible: boolean;
@@ -37,6 +37,10 @@ export function ResetSheet({
   const t = useT();
 
   const styles = StyleSheet.create({
+    // Shrinks, and scrolls, when the sheet is capped: at the largest text the
+    // confirm stays whole under it.
+    body: { flexShrink: 1 },
+    bodyContent: { gap: spacing.md },
     line: { ...typography.secondary, color: colors.textSecondary },
     heading: { ...typography.monoCaption, color: colors.textMuted },
     section: { gap: spacing.xs },
@@ -78,36 +82,43 @@ export function ResetSheet({
 
   return (
     <Sheet visible={visible} onClose={onClose} title={title} testID={testID}>
-      <Text style={styles.line}>{line}</Text>
+      <ScrollView
+        style={styles.body}
+        contentContainerStyle={styles.bodyContent}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+      >
+        <Text style={styles.line}>{line}</Text>
 
-      <View style={styles.section}>
-        <Text style={styles.heading} accessibilityRole="header">
-          {t.reset.clears}
-        </Text>
-        <View style={styles.card}>
-          {clears.map((item) => (
-            // One stop per row for a screen reader, its value with it (#187).
-            <View
-              key={item.label}
-              style={styles.row}
-              accessible
-              accessibilityLabel={[item.label, item.value].filter(Boolean).join(', ')}
-            >
-              <Text style={styles.label}>{item.label}</Text>
-              {item.value ? <Text style={styles.value}>{item.value}</Text> : null}
-            </View>
-          ))}
-        </View>
-      </View>
-
-      {keeps ? (
         <View style={styles.section}>
           <Text style={styles.heading} accessibilityRole="header">
-            {t.reset.keeps}
+            {t.reset.clears}
           </Text>
-          <Text style={styles.keeps}>{keeps}</Text>
+          <View style={styles.card}>
+            {clears.map((item) => (
+              // One stop per row for a screen reader, its value with it (#187).
+              <View
+                key={item.label}
+                style={styles.row}
+                accessible
+                accessibilityLabel={[item.label, item.value].filter(Boolean).join(', ')}
+              >
+                <Text style={styles.label}>{item.label}</Text>
+                {item.value ? <Text style={styles.value}>{item.value}</Text> : null}
+              </View>
+            ))}
+          </View>
         </View>
-      ) : null}
+
+        {keeps ? (
+          <View style={styles.section}>
+            <Text style={styles.heading} accessibilityRole="header">
+              {t.reset.keeps}
+            </Text>
+            <Text style={styles.keeps}>{keeps}</Text>
+          </View>
+        ) : null}
+      </ScrollView>
 
       <Pressable
         testID={`${testID}-confirm`}
