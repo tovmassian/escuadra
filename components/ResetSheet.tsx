@@ -77,7 +77,7 @@ export function ResetSheet({
       justifyContent: 'center',
       backgroundColor: colors.error,
     },
-    confirmText: { ...typography.ctaLabel, color: colors.dangerOn },
+    confirmText: { ...typography.ctaLabel, color: colors.dangerOn, textAlign: 'center' },
   });
 
   return (

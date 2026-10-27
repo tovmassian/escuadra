@@ -213,7 +213,7 @@ export default function Results() {
       justifyContent: 'center',
       backgroundColor: colors.ctaBg,
     },
-    ctaText: { ...typography.ctaLabel, color: colors.ctaText },
+    ctaText: { ...typography.ctaLabel, color: colors.ctaText, textAlign: 'center' },
     row: { flexDirection: 'row', gap: spacing.sm },
     outline: {
       flex: 1,
@@ -226,7 +226,7 @@ export default function Results() {
       alignItems: 'center',
       justifyContent: 'center',
     },
-    outlineText: { ...typography.ctaLabel, color: colors.textPrimary },
+    outlineText: { ...typography.ctaLabel, color: colors.textPrimary, textAlign: 'center' },
     retry: {
       width: sizes.cta.compact,
       height: sizes.cta.compact,
