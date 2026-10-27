@@ -33,18 +33,23 @@ export interface TitleFocus {
  *
  * `enabled` false holds it while How to play's tips are up, whose kicker takes
  * the focus; the title takes it once they close.
+ *
+ * `belowContent` is for a title that isn't the screen's first element (About
+ * opened at its Privacy heading). VoiceOver won't start there, so on iOS too the
+ * focus is moved, once the screen has settled and VoiceOver has made its own move.
  */
 export function useTitleFocus(
   title: RefObject<ViewInstance | TextInstance | null>,
   enabled = true,
+  belowContent = false,
 ): TitleFocus {
   const screenReader = useScreenReader();
   const { appeared, settling } = useScreenAppearance();
-  const moved = Platform.OS === 'android' ? appeared : 0;
+  const moved = Platform.OS === 'android' ? appeared : belowContent && !settling ? appeared : 0;
   const [refocused, setRefocused] = useState(0);
 
-  // On an appearance (Android), a refocus, or the tips closing, which leaves the
-  // focus nowhere on either platform.
+  // On an appearance (Android, or iOS below content), a refocus, or the tips
+  // closing, which leaves the focus nowhere on either platform.
   const wasEnabled = useRef(enabled);
   useEffect(() => {
     const tipsClosed = enabled && !wasEnabled.current;

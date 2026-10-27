@@ -26,13 +26,15 @@ export default function About() {
   const { section: sectionParam } = useLocalSearchParams<{ section?: string }>();
   const scrollRef = useRef<ScrollViewInstance>(null);
   const scrolledTo = useRef(false);
-  // Opened at Privacy, a screen reader starts there, where the screen is scrolled to.
+  // Opened at Privacy, a screen reader starts there, where the screen is scrolled
+  // to: below the title and the intro, so it is moved there on iOS too.
   const titleRef = useRef<TextInstance>(null);
   const privacyRef = useRef<TextInstance>(null);
-  const titleFocus = useTitleFocus(sectionParam === 'privacy' ? privacyRef : titleRef);
+  const atPrivacy = sectionParam === 'privacy';
+  const titleFocus = useTitleFocus(atPrivacy ? privacyRef : titleRef, true, atPrivacy);
   // Settings' Privacy row opens About at its Privacy card (#175).
   const onPrivacyLayout = (e: LayoutChangeEvent) => {
-    if (sectionParam !== 'privacy' || scrolledTo.current) return;
+    if (!atPrivacy || scrolledTo.current) return;
     scrolledTo.current = true;
     scrollRef.current?.scrollTo({ y: e.nativeEvent.layout.y, animated: false });
   };
