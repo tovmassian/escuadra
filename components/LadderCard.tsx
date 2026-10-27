@@ -77,8 +77,16 @@ export function LadderCard({ row, title, description, onPlay, playRef }: LadderC
       alignItems: 'center',
       justifyContent: 'center',
       gap: spacing.xs + 2,
+      // Room at the ends, and a label that wraps rather than runs past them at
+      // the largest text (#187, J5).
+      paddingHorizontal: spacing.md,
     },
-    playLabel: { ...typography.ladderPlay, color: colors.ctaText },
+    playLabel: {
+      ...typography.ladderPlay,
+      color: colors.ctaText,
+      flexShrink: 1,
+      textAlign: 'center',
+    },
   });
 
   return (
