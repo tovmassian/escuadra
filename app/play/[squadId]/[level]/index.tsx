@@ -521,19 +521,21 @@ export default function Question() {
       <ShotOverlay ref={overlayRef} question={session.currentIndex} live={live} clock={clock} />
       {tips.open && (
         <TipsLayer
+          // Each ring takes the corners of what it rings, the chips' and the tiles'
+          // `radii.lg`, so it clears them by the same gap all round (#187).
           tips={
             level === 1
               ? [
                   {
                     target: heroRef,
-                    radius: radii.xl,
+                    radius: radii.lg,
                     heading: t.tips.question.clues.heading,
                     body:
                       squad.kind === 'club'
                         ? t.tips.question.clues.bodyClub
                         : t.tips.question.clues.body,
                   },
-                  { target: answersRef, radius: radii.xl, ...t.tips.question.answer },
+                  { target: answersRef, radius: radii.lg, ...t.tips.question.answer },
                 ]
               : [
                   {
