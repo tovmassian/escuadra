@@ -245,7 +245,7 @@ export default function Question() {
   const answersRef = useRef<ViewInstance>(null);
   // The prompt is the round's title: a screen reader starts on the question.
   const promptRef = useRef<TextInstance>(null);
-  useTitleFocus(promptRef, !tips.open);
+  const titleFocus = useTitleFocus(promptRef, !tips.open);
   // At large text sizes the scroll overflows and opens at the top, with the
   // answers below the fold: the layer scrolls a tip's target into view.
   const scrollRef = useRef<ScrollViewInstance>(null);
@@ -393,7 +393,7 @@ export default function Question() {
           outcomes={progressOutcomes(session.results, session.currentIndex)}
           currentIndex={session.currentIndex}
         />
-        <View style={styles.topBar}>
+        <View style={styles.topBar} {...titleFocus.chrome}>
           <GlassCloseButton label={t.round.leave} onPress={exit} />
           <View style={styles.team}>
             <Text style={styles.teamName} numberOfLines={1}>

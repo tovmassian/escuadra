@@ -73,7 +73,7 @@ export default function Difficulty() {
   const starRef = useRef<ViewInstance>(null);
   const studyRef = useRef<ViewInstance>(null);
   const titleRef = useRef<TextInstance>(null);
-  const refocusTitle = useTitleFocus(titleRef, !tips.open);
+  const titleFocus = useTitleFocus(titleRef, !tips.open);
 
   // Usage statistics (#221): how the team was reached, once per visit. A screen
   // pushed over this one and closed again does not count a second time.
@@ -176,6 +176,7 @@ export default function Difficulty() {
           onToggleStar={() => toggleStar(squad.id)}
           starRef={starRef}
           titleRef={titleRef}
+          barA11y={titleFocus.chrome}
         />
         <View style={styles.content}>
           <View style={styles.headingBlock}>
@@ -294,7 +295,7 @@ export default function Difficulty() {
           track('progress.reset', { scope: 'team', squad: squad.id });
           resetSquad(squad.id);
           // The eraser goes with the scores, so the focus can't go back to it.
-          refocusTitle();
+          titleFocus.refocus();
         }}
       />
     </View>

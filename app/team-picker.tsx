@@ -75,7 +75,7 @@ export default function TeamPicker() {
   const switchRef = useRef<ViewInstance>(null);
   const firstRowRef = useRef<ViewInstance>(null);
   const titleRef = useRef<TextInstance>(null);
-  useTitleFocus(titleRef, !tips.open);
+  const titleFocus = useTitleFocus(titleRef, !tips.open);
 
   const squads = listSquads();
   const names = useMemo<SquadNames>(
@@ -338,7 +338,7 @@ export default function TeamPicker() {
         ]}
       >
         <View style={styles.header}>
-          <View style={styles.topBar}>
+          <View style={styles.topBar} {...titleFocus.chrome}>
             <RoundBackButton
               testID="picker-back"
               label={t.common.back}

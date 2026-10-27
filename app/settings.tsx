@@ -64,7 +64,7 @@ export default function Settings() {
   const [sheet, setSheet] = useState<'scores' | 'app' | null>(null);
   const version = Constants.expoConfig?.version ?? '—';
   const titleRef = useRef<TextInstance>(null);
-  useTitleFocus(titleRef);
+  const titleFocus = useTitleFocus(titleRef);
   const glyph = colors.textSecondary;
   const g = sizes.settings;
 
@@ -146,11 +146,13 @@ export default function Settings() {
         ]}
       >
         <View style={styles.header}>
-          <RoundBackButton
-            testID="settings-back"
-            label={t.common.back}
-            onPress={() => router.back()}
-          />
+          <View {...titleFocus.chrome}>
+            <RoundBackButton
+              testID="settings-back"
+              label={t.common.back}
+              onPress={() => router.back()}
+            />
+          </View>
           <Text ref={titleRef} style={styles.title} accessibilityRole="header">
             {t.settings.title}
           </Text>

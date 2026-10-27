@@ -130,7 +130,7 @@ export default function Results() {
   const missedRef = useRef<ViewInstance>(null);
   const actionsRef = useRef<ViewInstance>(null);
   const titleRef = useRef<TextInstance>(null);
-  useTitleFocus(titleRef, !showTips);
+  const titleFocus = useTitleFocus(titleRef, !showTips);
 
   // After an a la escuadra round, once the celebration is over, perhaps ask
   // for a store rating (#57). Nothing here sets state, so the screen never
@@ -309,7 +309,7 @@ export default function Results() {
         showsVerticalScrollIndicator={false}
         alwaysBounceVertical={false}
       >
-        <View style={styles.topBar}>
+        <View style={styles.topBar} {...titleFocus.chrome}>
           <Pressable
             testID="results-close"
             onPress={chooseDifferentTeam}

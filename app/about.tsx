@@ -29,7 +29,7 @@ export default function About() {
   // Opened at Privacy, a screen reader starts there, where the screen is scrolled to.
   const titleRef = useRef<TextInstance>(null);
   const privacyRef = useRef<TextInstance>(null);
-  useTitleFocus(sectionParam === 'privacy' ? privacyRef : titleRef);
+  const titleFocus = useTitleFocus(sectionParam === 'privacy' ? privacyRef : titleRef);
   // Settings' Privacy row opens About at its Privacy card (#175).
   const onPrivacyLayout = (e: LayoutChangeEvent) => {
     if (sectionParam !== 'privacy' || scrolledTo.current) return;
@@ -80,7 +80,12 @@ export default function About() {
         style={styles.scroll}
         contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}
       >
-        <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
+        <Pressable
+          onPress={() => router.back()}
+          accessibilityRole="button"
+          hitSlop={12}
+          {...titleFocus.chrome}
+        >
           <Text style={styles.back}>‹ {t.common.back}</Text>
         </Pressable>
         <Text ref={titleRef} style={styles.title} accessibilityRole="header">

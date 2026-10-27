@@ -7,6 +7,7 @@ import { Flag } from './Flag';
 import { RoundBackButton, RoundButton } from './RoundBackButton';
 import { TeamMarker } from './TeamMarker';
 import { useRoundGlyphColor } from '@/hooks/useRoundGlyphColor';
+import type { TitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
@@ -28,6 +29,8 @@ interface LadderHeroProps {
   starRef?: Ref<ViewInstance>;
   /** The team's name, Difficulty's title, where a screen reader starts (#187). */
   titleRef?: Ref<TextInstance>;
+  /** The top bar's accessibility while the screen settles (`useTitleFocus`'s `chrome`). */
+  barA11y?: TitleFocus['chrome'];
 }
 
 // The Difficulty hero (#178, spec §1): the squad's marker as vertical bands,
@@ -50,6 +53,7 @@ export function LadderHero({
   onToggleStar,
   starRef,
   titleRef,
+  barA11y,
 }: LadderHeroProps) {
   const colors = useThemeColors();
   const theme = useThemeName();
@@ -112,7 +116,7 @@ export function LadderHero({
           style={StyleSheet.absoluteFill}
           pointerEvents="none"
         />
-        <View style={styles.barRow}>
+        <View style={styles.barRow} {...barA11y}>
           <RoundBackButton
             glass={glass}
             label={t.common.back}

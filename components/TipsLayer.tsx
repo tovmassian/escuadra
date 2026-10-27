@@ -17,6 +17,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { G, Path, Rect } from 'react-native-svg';
 import { measureInWindow } from './LaunchReveal';
 import { useReduceMotion } from '@/hooks/useReduceMotion';
+import { useScreenAppearance } from '@/hooks/useScreenAppearance';
 import { useT } from '@/i18n/useT';
 import { withinTime } from '@/lib/launchIntro';
 import {
@@ -244,19 +245,38 @@ export function TipsLayer({
   const placed = placement !== null;
 
   // The first placed tip tells the screen its tips have shown (`useTips` marks
-  // it seen then, not before). Each placed step moves the screen reader to its
-  // kicker, which speaks the dialog's name; not on web, where
-  // react-native-web has no `sendAccessibilityEvent`.
+  // it seen then, not before).
   const announced = useRef(false);
   useEffect(() => {
-    if (!placed) return;
-    if (!announced.current) {
-      announced.current = true;
-      latest.current.onShown();
-    }
-    const kicker = kickerRef.current;
-    if (kicker && Platform.OS !== 'web') AccessibilityInfo.sendAccessibilityEvent(kicker, 'focus');
-  }, [placed, step]);
+    if (!placed || announced.current) return;
+    announced.current = true;
+    latest.current.onShown();
+  }, [placed]);
+
+  // Each placed step moves the screen reader to its kicker, which speaks the
+  // dialog's name: once the tip has faded in, since neither screen reader will
+  // focus what is still see-through, and on iOS once the screen has settled,
+  // since VoiceOver moves to the screen's first element itself before that
+  // (#187). Until the first move, Skip tips stays out of the order, so a
+  // screen reader never starts there. Not on web, where react-native-web has no
+  // `sendAccessibilityEvent`.
+  const { settling } = useScreenAppearance();
+  const waiting = Platform.OS === 'ios' && settling;
+  const [skipReachable, setSkipReachable] = useState(false);
+  useEffect(() => {
+    if (!placed || waiting) return;
+    const timer = setTimeout(
+      () => {
+        const kicker = kickerRef.current;
+        if (kicker && Platform.OS !== 'web') {
+          AccessibilityInfo.sendAccessibilityEvent(kicker, 'focus');
+        }
+        setSkipReachable(true);
+      },
+      reduceMotion ? 0 : durations.tipFade,
+    );
+    return () => clearTimeout(timer);
+  }, [placed, step, waiting, reduceMotion]);
 
   const advance = () => {
     if (!placed) return;
@@ -433,8 +453,8 @@ export function TipsLayer({
       <View
         style={styles.tipFrame}
         pointerEvents={placed ? 'box-none' : 'none'}
-        accessibilityElementsHidden={!placed}
-        importantForAccessibility={placed ? 'auto' : 'no-hide-descendants'}
+        accessibilityElementsHidden={!placed || waiting}
+        importantForAccessibility={placed && !waiting ? 'auto' : 'no-hide-descendants'}
       >
         <Animated.View
           key={placed ? step : -1 - step}
@@ -493,6 +513,8 @@ export function TipsLayer({
         <Pressable
           testID="tips-skip"
           accessibilityRole="button"
+          accessibilityElementsHidden={!skipReachable}
+          importantForAccessibility={skipReachable ? 'auto' : 'no-hide-descendants'}
           onPress={onSkip}
           hitSlop={skipSlop}
           style={({ pressed }) => [styles.skip, pressed && { opacity: opacity.settled }]}

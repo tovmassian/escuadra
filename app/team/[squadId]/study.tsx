@@ -97,7 +97,7 @@ export default function Study() {
   const hideRef = useRef<ViewInstance>(null);
   const filtersRef = useRef<ViewInstance>(null);
   const titleRef = useRef<TextInstance>(null);
-  useTitleFocus(titleRef, !tips.open);
+  const titleFocus = useTitleFocus(titleRef, !tips.open);
 
   const squad = getSquad(squadId);
   const roster = useMemo(() => getRoster(squadId), [squadId]);
@@ -252,7 +252,7 @@ export default function Study() {
 
   return (
     <View style={styles.root}>
-      <View style={styles.topBar} {...tips.contentA11y}>
+      <View style={styles.topBar} {...tips.contentA11y} {...titleFocus.chrome}>
         <Pressable
           testID="study-back"
           onPress={() => router.back()}

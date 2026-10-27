@@ -31,7 +31,7 @@ export default function Licences() {
   const t = useT();
   const [open, setOpen] = useState<ReadonlySet<string>>(() => new Set([UNICODE_KEY]));
   const titleRef = useRef<TextInstance>(null);
-  useTitleFocus(titleRef);
+  const titleFocus = useTitleFocus(titleRef);
   const toggle = (key: string) =>
     setOpen((prev) => {
       const next = new Set(prev);
@@ -95,7 +95,12 @@ export default function Licences() {
         style={styles.scroll}
         contentContainerStyle={[styles.listContent, { paddingBottom: insets.bottom + spacing.xl }]}
       >
-        <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
+        <Pressable
+          onPress={() => router.back()}
+          accessibilityRole="button"
+          hitSlop={12}
+          {...titleFocus.chrome}
+        >
           <Text style={styles.back}>‹ {t.common.back}</Text>
         </Pressable>
         <Text ref={titleRef} style={styles.title} accessibilityRole="header">
