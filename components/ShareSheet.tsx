@@ -36,10 +36,10 @@ import {
 import Animated, {
   FadeIn,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 interface ShareSheetProps {
   visible: boolean;
@@ -85,7 +85,7 @@ export function ShareSheet({ visible, onClose, card, text, onShared }: ShareShee
 function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | 'onClose'>) {
   const colors = useThemeColors();
   const t = useT();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const [format, setFormat] = useState<ShareFormat>('image');
   const [busy, setBusy] = useState(false);
   // The guard `submit` actually checks: state is a render behind, so two taps in

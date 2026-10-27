@@ -4,7 +4,6 @@ import Animated, {
   Easing,
   FadeIn,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withDelay,
   withSequence,
@@ -30,6 +29,7 @@ import {
   type Palette,
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 interface AnswerTileProps {
   label: string;
@@ -104,7 +104,7 @@ export function AnswerTile({
 }: AnswerTileProps) {
   const colors = useThemeColors();
   const t = useT();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const scale = useSharedValue(1);
   const shift = useSharedValue(0);
   const fade = useSharedValue(1);

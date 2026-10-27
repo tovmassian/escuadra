@@ -5,7 +5,6 @@ import Animated, {
   FadeOut,
   Keyframe,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withDelay,
   withSequence,
@@ -24,6 +23,7 @@ import {
   typography,
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 // The streak (spec §2.5): correct answers in a row, shown from 2. It pops when
 // it grows. A miss unmounts it, and its exit shrinks and fades it. Heat is
@@ -38,7 +38,7 @@ const exit = new Keyframe({
 export function StreakChip({ count }: { count: number }) {
   const colors = useThemeColors();
   const t = useT();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const scale = useSharedValue(1);
 
   useEffect(() => {

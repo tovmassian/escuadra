@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { StyleSheet, Text, View } from 'react-native';
 import Animated, {
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withDelay,
   withTiming,
@@ -18,6 +17,7 @@ import {
   typography,
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 // The round in ten segments (spec §3.1), each labelled with its shirt number.
 // They fill left to right on arrival (spec §6). Reduce Motion: they fade in
@@ -42,7 +42,7 @@ export function RoundStrip({ items }: { items: { no: number; correct: boolean }[
 
 function Segment({ index, no, correct }: { index: number; no: number; correct: boolean }) {
   const colors = useThemeColors();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const fill = useSharedValue(0);
   useEffect(() => {
     fill.value = reduced

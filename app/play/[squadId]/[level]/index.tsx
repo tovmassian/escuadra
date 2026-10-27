@@ -70,8 +70,9 @@ import {
   type ViewInstance,
   type ScrollViewInstance,
 } from 'react-native';
-import Animated, { FadeOut, Keyframe, useReducedMotion } from 'react-native-reanimated';
+import Animated, { FadeOut, Keyframe } from 'react-native-reanimated';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 /** Usage statistics (#221): a round still in progress, about to be thrown away. */
 function trackLeftRound(): void {
@@ -106,7 +107,7 @@ export default function Question() {
   const t = useT();
   const language = useLanguage();
   const themeName = useThemeName();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const screenReader = useScreenReader();
   const {
     squadId,

@@ -61,13 +61,13 @@ import {
 import Animated, {
   cancelAnimation,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withDelay,
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 const MAX_LEVEL: Level = 3;
 
@@ -86,7 +86,7 @@ export default function Results() {
   const colors = useThemeColors();
   const t = useT();
   const language = useLanguage();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const { squadId, level: levelParam } = useLocalSearchParams<{ squadId: string; level: string }>();
   const level = Number(levelParam) as Level;
   // The finished round, read once as the screen opens. Retry, the next level
@@ -488,7 +488,7 @@ function Score({
 }) {
   const colors = useThemeColors();
   const t = useT();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const passed = tier !== 'fail';
   const flawless = tier === 'excellent';
   const timing = flawless ? strikeTiming.excellent : strikeTiming.passed;
@@ -633,7 +633,7 @@ function MissedCards({
   const colors = useThemeColors();
   const t = useT();
   const language = useLanguage();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const card = sizes.playerCard.results;
   const styles = StyleSheet.create({
     section: { paddingTop: spacing.xl },
@@ -706,7 +706,7 @@ function CardGap() {
 function Roster({ results, marker }: { results: QuestionResult[]; marker: TeamMarker }) {
   const colors = useThemeColors();
   const t = useT();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const styles = StyleSheet.create({
     section: { paddingTop: spacing.xl, paddingHorizontal: spacing.lg, gap: spacing.sm },
     label: { ...typography.captionEyebrow, color: colors.successText },

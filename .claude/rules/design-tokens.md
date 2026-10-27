@@ -59,6 +59,11 @@ a tap skips it, Reduce Motion shows its end frame, and it never plays with a scr
 The round-over celebration is a carve-out too: its timelines (`strikeTiming`,
 `resultsTimeline` in `theme/tokens.ts`) may run past 300 ms.
 
+Reduce Motion is read live, through `useReduceMotion` (`hooks/useReduceMotion.ts`), and
+the root layout keeps Reanimated's own default on it (`ReducedMotionConfig`). Reanimated's
+`useReducedMotion` reads the setting once, as the app starts, so a setting changed while
+Escuadra runs went unseen (#227). Lint refuses it.
+
 ## The system theme
 
 ⚠️ **`userInterfaceStyle` in `app.json` must stay `"automatic"`.** Pinning it

@@ -6,7 +6,6 @@ import Animated, {
   interpolate,
   interpolateColor,
   useAnimatedStyle,
-  useReducedMotion,
   type SharedValue,
 } from 'react-native-reanimated';
 import { CORNER_BALL, type LiveShot } from '@/lib/shot';
@@ -18,6 +17,7 @@ import {
   spotlightMotion,
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 const { arm, bar, ball } = sizes.corner.question;
 const { cornerKick, ring, shot } = spotlightMotion;
@@ -50,7 +50,7 @@ interface EscuadraCornerProps {
 // fades in on a goal, and nothing moves.
 export function EscuadraCorner({ question, live, clock, ref }: EscuadraCornerProps) {
   const colors = useThemeColors();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const asking = colors.accentLine;
   const goal = colors.success;
   const miss = colors.error;

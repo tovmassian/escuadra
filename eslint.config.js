@@ -56,6 +56,26 @@ module.exports = defineConfig([
     },
   },
   {
+    // Reduce Motion is read live, through one hook (#227).
+    files: ['app/**/*.{ts,tsx}', 'components/**/*.{ts,tsx}', 'hooks/**/*.{ts,tsx}'],
+    ignores: ['hooks/useReduceMotion.ts'],
+    rules: {
+      'no-restricted-imports': [
+        'error',
+        {
+          paths: [
+            {
+              name: 'react-native-reanimated',
+              importNames: ['useReducedMotion'],
+              message:
+                "It reads Reduce Motion once, as the app starts: use `useReduceMotion` from '@/hooks/useReduceMotion'.",
+            },
+          ],
+        },
+      ],
+    },
+  },
+  {
     files: ['app/**/*.tsx', 'components/**/*.tsx'],
     rules: {
       'react/jsx-no-literals': [

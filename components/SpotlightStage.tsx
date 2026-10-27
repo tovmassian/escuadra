@@ -5,7 +5,6 @@ import { StyleSheet, View } from 'react-native';
 import Animated, {
   Easing,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withDelay,
   withRepeat,
@@ -15,6 +14,7 @@ import { bannerBands, photoLayout, stageVeil } from '@/lib/stageView';
 import { durations, opacity, spotlightCues, stage } from '@/theme/tokens';
 import { useThemeColors, useThemeName } from '@/theme/useTheme';
 import type { PhotoCredit, TeamMarker } from '@/types/squad';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 interface SpotlightStageProps {
   /** The stage's height: the top 68 % (72 % compact) of the window. */
@@ -37,7 +37,7 @@ interface SpotlightStageProps {
 export function SpotlightStage({ height, photo, marker, dimmed }: SpotlightStageProps) {
   const colors = useThemeColors();
   const themeName = useThemeName();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const bands = bannerBands(marker);
   const veil = stageVeil(bands, themeName);
   const url = photo?.url ?? null;

@@ -6,10 +6,11 @@ import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState, type ReactNode } from 'react';
 import { AccessibilityInfo, PixelRatio, useWindowDimensions } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import 'react-native-reanimated';
+import { ReduceMotion, ReducedMotionConfig } from 'react-native-reanimated';
 
 import { introWillShow, LaunchIntro } from '@/components/LaunchIntro';
 import { LaunchRevealProvider, useLaunchRevealState } from '@/components/LaunchReveal';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 import { launchLanguage, useLanguage } from '@/i18n/useT';
 import { screenOrientation } from '@/lib/screenOrientation';
 import { setTelemetryLanguage, startLaunch, track } from '@/lib/telemetry';
@@ -42,6 +43,11 @@ export default function RootLayout() {
   // launch effect, so the launch's own signals already carry it.
   const language = useLanguage();
   useEffect(() => setTelemetryLanguage(language), [language]);
+
+  // Reanimated reads Reduce Motion once, as JavaScript starts, for its own
+  // animations' default (`ReduceMotion.System`). This keeps that default on
+  // the live setting (#227). A development build logs that it is overridden.
+  const reduceMotion = useReduceMotion();
 
   // The install ID can only be created once persisted state is back — before
   // that, a stored ID is indistinguishable from none. `setInstallId` is a
@@ -92,6 +98,7 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
+      <ReducedMotionConfig mode={reduceMotion ? ReduceMotion.Always : ReduceMotion.Never} />
       <ThemeProvider value={navTheme}>
         <Launch>
           <Stack

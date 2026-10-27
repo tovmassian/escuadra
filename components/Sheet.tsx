@@ -19,13 +19,13 @@ import {
 import Animated, {
   FadeIn,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withTiming,
   type EntryAnimationsValues,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { scheduleOnRN } from 'react-native-worklets';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 interface SheetProps {
   visible: boolean;
@@ -96,7 +96,7 @@ function SheetFrame({ onClose, title, testID, children }: Omit<SheetProps, 'visi
   const t = useT();
   const insets = useSafeAreaInsets();
   const { height: windowHeight } = useWindowDimensions();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   // The Modal's own height. On Android it reaches under the status and
   // navigation bars, so it is taller than the window, and the cap is measured
   // against it; the window's height stands in until it is laid out.

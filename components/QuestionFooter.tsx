@@ -5,7 +5,6 @@ import Animated, {
   FadeIn,
   ReduceMotion,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
@@ -26,6 +25,7 @@ import {
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { PhotoCredit } from '@/types/squad';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 interface QuestionFooterProps {
   mode: FooterMode;
@@ -48,7 +48,7 @@ interface QuestionFooterProps {
 export function QuestionFooter({ mode, compact, last, onNext, credit }: QuestionFooterProps) {
   const colors = useThemeColors();
   const t = useT();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   // The least the button is tall; it grows with the text at large sizes.
   const minHeight = compact ? sizes.cta.compact : sizes.cta.normal;
   const styles = StyleSheet.create({
