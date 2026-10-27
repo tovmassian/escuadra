@@ -60,7 +60,10 @@ channels send TelemetryDeck test signals.
 - **Sessions.** A session starts on a cold start, on a return after 5 minutes in
   the background (`nextAppPhase`, `SESSION_GAP_MS`: Android reports the share
   menu as the background), and when usage statistics are switched back on. The
-  client takes a new session code, and `TelemetryDeck.Session.started` is sent. The
+  client takes a new session code, and `TelemetryDeck.Session.started` is sent.
+  `startLaunch` sends the cold start's session and `app.launched` once per JS start,
+  and watches `AppState` from then on: Android mounts the root again when Escuadra is
+  reopened after Back (`lib/__tests__/telemetryLaunch.test.ts`). The
   build number is iOS's only (spec, Decisions). Reset Escuadra replaces `installId`
   but starts no session: the one client points at the current id
   (`lib/__tests__/telemetryIdentifier.test.ts` pins it).

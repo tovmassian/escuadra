@@ -14,13 +14,15 @@ import TelemetryDeck, { type TelemetryDeckOptions } from '@telemetrydeck/sdk';
 import Constants from 'expo-constants';
 import * as Crypto from 'expo-crypto';
 import * as Updates from 'expo-updates';
-import { Platform } from 'react-native';
+import { AppState, Platform } from 'react-native';
 import { updateTag } from './settingsView';
 import {
   buildPayload,
   contextPayload,
   isTestMode,
+  nextAppPhase,
   telemetryGate,
+  type AppPhase,
   type TelemetryContextInput,
   type TelemetryEvent,
   type TelemetryProps,
@@ -237,4 +239,30 @@ export function trackNow<E extends TelemetryEvent>(event: E, ...[props]: Props<E
 export function startSession(renew: boolean): void {
   if (renew && client) client.sessionID = Crypto.randomUUID();
   track('TelemetryDeck.Session.started');
+}
+
+let launched = false;
+
+/**
+ * The cold start: its session, then the launch signal `launch` sends, then the
+ * watch for returns. Once per JavaScript start, however often the root mounts:
+ * Android mounts it again when Escuadra is reopened after Back, with JavaScript
+ * still running, and that is a return, judged as one (#187).
+ */
+export function startLaunch(launch: () => void): void {
+  if (launched) return;
+  launched = true;
+  startSession(false);
+  launch();
+  // A return after a while in the background starts a new session (#221,
+  // `SESSION_GAP_MS`); a quick trip to the share menu does not. Never removed:
+  // it lasts as long as JavaScript does, through a remount.
+  let phase: AppPhase = {
+    backgroundSince: AppState.currentState === 'background' ? Date.now() : null,
+  };
+  AppState.addEventListener('change', (state) => {
+    const next = nextAppPhase(phase, state, Date.now());
+    phase = next.phase;
+    if (next.startsSession) startSession(true);
+  });
 }
