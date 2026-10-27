@@ -4,8 +4,7 @@ import { AccessibilityInfo, Platform, type TextInstance, type ViewInstance } fro
 import { useScreenAppearance } from './useScreenAppearance';
 import { useScreenReader } from './useScreenReader';
 
-/** Out of the screen readers' order, as `chrome` is while a screen settles. */
-export const HIDDEN = {
+const HIDDEN = {
   accessibilityElementsHidden: true,
   importantForAccessibility: 'no-hide-descendants',
 } as const;
@@ -14,10 +13,9 @@ export interface TitleFocus {
   /** For when what held the focus is gone: a sheet's confirm that removes the
    *  button that opened it. */
   refocus: () => void;
-  /** Spread on the controls above the title, its back button or top bar. */
+  /** Spread on the controls above the title, its back button or top bar; on
+   *  the question screen, on everything but the prompt. */
   chrome: Partial<typeof HIDDEN>;
-  /** Whether `chrome` is hiding them now: on iOS, while the screen settles. */
-  quiet: boolean;
 }
 
 /**
@@ -66,6 +64,5 @@ export function useTitleFocus(
     timer.current = setTimeout(() => setRefocused((n) => n + 1), durations.sheet);
   }, []);
 
-  const quiet = Platform.OS === 'ios' && settling;
-  return { refocus, chrome: quiet ? HIDDEN : {}, quiet };
+  return { refocus, chrome: Platform.OS === 'ios' && settling ? HIDDEN : {} };
 }

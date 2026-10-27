@@ -15,7 +15,7 @@ import { useRoundClock } from '@/hooks/useRoundClock';
 import { useScreenReader } from '@/hooks/useScreenReader';
 import { useShot } from '@/hooks/useShot';
 import { useTips } from '@/hooks/useTips';
-import { HIDDEN, useTitleFocus } from '@/hooks/useTitleFocus';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
@@ -48,7 +48,6 @@ import {
   durations,
   fontScaleCap,
   radii,
-  screenReaderSettle,
   sizes,
   spacing,
   spotlightMotion,
@@ -61,10 +60,8 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useIsFocused, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import {
-  AccessibilityInfo,
-  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -248,26 +245,11 @@ export default function Question() {
   const answersRef = useRef<ViewInstance>(null);
   // The prompt is the round's title: a screen reader starts on the question.
   const promptRef = useRef<TextInstance>(null);
+  // VoiceOver moves to the first element it can see once the screen has opened.
+  // So on iOS everything but the prompt (above it and below it) is out of its
+  // order while the screen settles, and the round starts on the question
+  // (#187). A later question or part doesn't, yet: #226.
   const titleFocus = useTitleFocus(promptRef, !tips.open);
-  // VoiceOver starts each question and each part on its prompt (#187). It moves
-  // to the first element it can see when the screen opens, and again when the
-  // element under it goes (the tile just answered, or Next), after anything
-  // sent before. So on iOS, while the screen settles and a moment after each
-  // new question or part, the prompt is the only element in its order, and
-  // takes the focus. iOS has no live regions; TalkBack hears the prompt's.
-  const asked = `${session.currentIndex}:${session.currentPartIndex}`;
-  const [settledAsked, setSettledAsked] = useState(asked);
-  const swapping = asked !== settledAsked;
-  const quiet = titleFocus.quiet || (Platform.OS === 'ios' && swapping) ? HIDDEN : {};
-  useEffect(() => {
-    if (!swapping) return;
-    const node = promptRef.current;
-    if (node && screenReader && Platform.OS === 'ios' && session.phase === 'playing') {
-      AccessibilityInfo.sendAccessibilityEvent(node, 'focus');
-    }
-    const timer = setTimeout(() => setSettledAsked(asked), screenReaderSettle.settle);
-    return () => clearTimeout(timer);
-  }, [swapping, asked, screenReader, session.phase]);
   // At large text sizes the scroll overflows and opens at the top, with the
   // answers below the fold: the layer scrolls a tip's target into view.
   const scrollRef = useRef<ScrollViewInstance>(null);
@@ -412,13 +394,13 @@ export default function Question() {
         pointerEvents="none"
       />
       <View style={styles.column} {...tips.contentA11y}>
-        <View {...quiet}>
+        <View {...titleFocus.chrome}>
           <RoundProgress
             outcomes={progressOutcomes(session.results, session.currentIndex)}
             currentIndex={session.currentIndex}
           />
         </View>
-        <View style={styles.topBar} {...quiet}>
+        <View style={styles.topBar} {...titleFocus.chrome}>
           <GlassCloseButton label={t.round.leave} onPress={exit} />
           <View style={styles.team}>
             <Text style={styles.teamName} numberOfLines={1}>
@@ -458,7 +440,7 @@ export default function Question() {
             style={styles.backingRise}
             pointerEvents="none"
           />
-          <View style={styles.heroFrame} {...quiet}>
+          <View style={styles.heroFrame} {...titleFocus.chrome}>
             <LinearGradient
               colors={[backingTop, colors.background]}
               style={styles.backingNumber}
@@ -516,7 +498,12 @@ export default function Question() {
               {counter ? <Text style={styles.counter}>{counter}</Text> : null}
             </View>
 
-            <View ref={answersRef} collapsable={false} style={styles.answers} {...quiet}>
+            <View
+              ref={answersRef}
+              collapsable={false}
+              style={styles.answers}
+              {...titleFocus.chrome}
+            >
               <AnswerGrid
                 part={part}
                 gridKey={`${session.currentIndex}:${session.currentPartIndex}`}
@@ -541,7 +528,7 @@ export default function Question() {
               />
             </View>
 
-            <View {...quiet}>
+            <View {...titleFocus.chrome}>
               <QuestionFooter
                 mode={footerMode(verdict, screenReader)}
                 compact={compact}
