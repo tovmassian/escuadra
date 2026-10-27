@@ -374,6 +374,7 @@ export default function Question() {
   const slots = slotStates(question, result, session.currentPartIndex, squad.kind, level);
   const answeredIndex = result.parts[session.currentPartIndex]?.pickedIndex ?? null;
   const counter = partCounter(question, session.currentPartIndex);
+  const prompt = promptText(part, question.memberNo, verdict, t);
   const promptColor =
     verdict === true ? colors.success : verdict === false ? colors.error : colors.onStage;
 
@@ -506,8 +507,11 @@ export default function Question() {
                 maxFontSizeMultiplier={fontScaleCap.display}
                 accessibilityRole="header"
                 accessibilityLiveRegion="polite"
+                // In its own case: Android hands TalkBack the capitals the style
+                // draws, and a voice spells "WHO" out (#187).
+                accessibilityLabel={prompt}
               >
-                {promptText(part, question.memberNo, verdict, t)}
+                {prompt}
               </Text>
               {counter ? <Text style={styles.counter}>{counter}</Text> : null}
             </View>
