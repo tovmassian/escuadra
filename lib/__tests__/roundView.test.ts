@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { en, type Messages } from '@/i18n/en';
 import {
   answerLayout,
+  drawsRound,
   footerMode,
   isCompact,
   nextButtonText,
@@ -657,4 +658,42 @@ describe('startsNewRound', () => {
       expect(startsNewRound(c.session, 'spain', 2)).toBe(c.starts);
     });
   }
+});
+
+describe('drawsRound', () => {
+  // The question screen for Spain, level 2. `opened` is the round it opened
+  // on and replaces; `played` is one it plays.
+  const opened = [] as unknown as Question[];
+  const played = [] as unknown as Question[];
+  const at = (
+    phase: SessionPhase,
+    squadId: string | null,
+    level: Level | null,
+    questions: Question[] = played,
+  ) => ({ phase, squadId, level, questions });
+  const cases = [
+    { label: 'playing its squad and level', session: at('playing', 'spain', 2), draws: true },
+    // Results slides over the finished round, so the button just pressed stays
+    // under VoiceOver (#226).
+    { label: 'finishing its round', session: at('complete', 'spain', 2), draws: true },
+    { label: 'idle, after a reset', session: at('idle', null, null), draws: false },
+    { label: 'playing another squad', session: at('playing', 'france', 2), draws: false },
+    { label: 'playing another level', session: at('playing', 'spain', 3), draws: false },
+    // Opened on the last round's, which it is about to replace (#222).
+    {
+      label: 'on the finished round it opened on',
+      session: at('complete', 'spain', 2, opened),
+      draws: false,
+    },
+  ];
+
+  for (const c of cases) {
+    it(`${c.draws ? 'draws' : 'draws nothing'} when the session is ${c.label}`, () => {
+      expect(drawsRound(c.session, 'spain', 2, opened)).toBe(c.draws);
+    });
+  }
+
+  it('draws a round it plays when it opened on none to replace', () => {
+    expect(drawsRound(at('complete', 'spain', 2), 'spain', 2, null)).toBe(true);
+  });
 });

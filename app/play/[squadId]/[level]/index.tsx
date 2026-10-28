@@ -11,6 +11,7 @@ import { StreakChip } from '@/components/StreakChip';
 import { TeamMarker } from '@/components/TeamMarker';
 import { TipsLayer } from '@/components/TipsLayer';
 import { useAppActive } from '@/hooks/useAppActive';
+import { useFocusHandOff } from '@/hooks/useFocusHandOff';
 import { useRoundClock } from '@/hooks/useRoundClock';
 import { useScreenReader } from '@/hooks/useScreenReader';
 import { useShot } from '@/hooks/useShot';
@@ -25,6 +26,7 @@ import { isFlawless } from '@/lib/resultsView';
 import { leftRound, missesByPart, previousBestValue } from '@/lib/roundStats';
 import {
   answerLayout,
+  drawsRound,
   footerMode,
   isCompact,
   partCounter,
@@ -60,7 +62,7 @@ import { Image } from 'expo-image';
 import { LinearGradient } from 'expo-linear-gradient';
 import { router, useIsFocused, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import {
   ScrollView,
   StyleSheet,
@@ -130,6 +132,12 @@ export default function Question() {
   const setLastPlayed = useProgress((s) => s.setLastPlayed);
   const recordScore = useProgress((s) => s.recordScore);
   const squad = getSquad(squadId);
+  // The round this screen opened on, when it starts a new one below: never
+  // drawn (`drawsRound`).
+  const [replaced] = useState(() => {
+    const opened = useSession.getState();
+    return startsNewRound(opened, squadId, level) ? opened.questions : null;
+  });
 
   useEffect(() => {
     if (!squad) return;
@@ -249,8 +257,12 @@ export default function Question() {
   // VoiceOver moves to the first element it can see once the screen has opened.
   // So on iOS everything but the prompt (above it and below it) is out of its
   // order while the screen settles, and the round starts on the question
-  // (#187). A later question or part doesn't, yet: #226.
+  // (#187).
   const titleFocus = useTitleFocus(promptRef, !tips.open);
+  // A later question or part starts on its prompt too: Next and a part's tile
+  // go with the press, so VoiceOver is moved to the prompt before they do
+  // (#226).
+  const handOff = useFocusHandOff(promptRef, `${session.currentIndex}:${session.currentPartIndex}`);
   // At large text sizes the scroll overflows and opens at the top, with the
   // answers below the fold: the layer scrolls a tip's target into view.
   const scrollRef = useRef<ScrollViewInstance>(null);
@@ -338,13 +350,7 @@ export default function Question() {
     answers: { marginHorizontal: spacing.md },
   });
 
-  if (
-    !squad ||
-    session.phase !== 'playing' ||
-    session.squadId !== squadId ||
-    session.level !== level
-  )
-    return null;
+  if (!squad || !drawsRound(session, squadId, level, replaced)) return null;
 
   const question = session.questions[session.currentIndex];
   const result = session.results[session.currentIndex];
@@ -368,7 +374,7 @@ export default function Question() {
     session.reset();
     router.back();
   };
-  const next = () => session.advanceQuestion();
+  const next = () => handOff(() => session.advanceQuestion());
   const backingTop = withAlpha(colors.background, stage.heroBacking.top[themeName]);
 
   const heroEntering = riseIn(reduced, spotlightMotion.numberRise, durations.transition);
@@ -525,12 +531,14 @@ export default function Question() {
                   // `answerPart` scores the part and moves to the next in one
                   // update, so this grid unmounts before any tile sees its
                   // verdict. A right part that is not the last gets its haptic
-                  // here; the last part's tile plays its own.
-                  if (right && !lastPart) feedback('correct');
+                  // here, and hands VoiceOver off its tile; the last part's
+                  // tile plays its own.
+                  const movesOn = right && !lastPart;
+                  if (movesOn) feedback('correct');
                   // The shot only when the question is decided: the last part
                   // right (a goal), or any part wrong (a miss).
-                  if (!right || lastPart) fire(right ? 'goal' : 'miss', tap);
-                  session.answerPart(pickedIndex);
+                  if (!movesOn) fire(right ? 'goal' : 'miss', tap);
+                  handOff(() => session.answerPart(pickedIndex), movesOn);
                 }}
               />
             </View>
