@@ -45,18 +45,18 @@ A player has **exactly one** position, not an array. Real players are more
 flexible than that, but the quiz asks for one answer through one chip, and
 same-position distractor selection needs a single key to group on.
 
-`nationality` exists so a club squad can ask for it on level 3.
+`nationality` exists so a club squad can ask for it on level 3. `name`, `fullName` and
+`club` are display text: no Wikipedia markup, and a player with no club is `club: null`,
+never "Unattached" (`dataIntegrity.test.ts` fails on either; squadctl flags markup).
 
 `data/index.json` is generated from the squad files by
 `npm run gen:squads` (`scripts/gen-squads.ts`) — never hand-edit it;
 `npm run check` fails if it's out of sync with what the generator produces.
-
 One file per squad, so a future contribution touches exactly one file.
 
-`League` (`types/squad.ts`) is the closed set of big-5-league folder names
-under `data/squads/club/`, plus `ucl` for a Champions League group-stage
-club with no big-5 domestic home. `SquadManifestEntry.league` carries it on
-club entries (absent on nation entries).
+`League` (`types/squad.ts`) is the closed set of big-5-league folder names under
+`data/squads/club/`, plus `ucl` for a Champions League group-stage club with no big-5
+domestic home. `SquadManifestEntry.league` carries it on club entries only.
 
 The manifest also carries `lastUpdated`: a best score keeps the date it was set
 on, so a squad update greys it as outdated (#180, `lib/bestScore.ts`).

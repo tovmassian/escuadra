@@ -739,7 +739,7 @@
     "birth": "2000-08-22",
     "position": "FW",
     "nationality": "Yemen",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Abdul Majeed Sabarah"
   },
@@ -1040,7 +1040,7 @@
     "birth": "2004-05-09",
     "position": "GK",
     "nationality": "Palestine",
-    "club": "Unattached",
+    "club": null,
     "photo": null,
     "wikiTitle": "Abed Yassin"
   },
@@ -2485,7 +2485,7 @@
     "birth": "1994-09-13",
     "position": "FW",
     "nationality": "Sri Lanka",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Ahmed Waseem Razeek"
   },
@@ -7049,7 +7049,7 @@
     "birth": "1999-09-10",
     "position": "DF",
     "nationality": "Saint Kitts and Nevis",
-    "club": "Unattached",
+    "club": null,
     "photo": null,
     "wikiTitle": "Andre Burley"
   },
@@ -8001,7 +8001,7 @@
     "birth": "2003-04-29",
     "position": "DF",
     "nationality": "Philippines",
-    "club": "[[Free Agent|Unattached]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Angelo Brückner"
   },
@@ -18806,7 +18806,7 @@
     "birth": "1993-06-19",
     "position": "GK",
     "nationality": "Guam",
-    "club": "[[free agent]]",
+    "club": null,
     "photo": {
       "file": "CINvCLE 2017-05-17 - Dallas Jaye (33948649694) (cropped).jpg",
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/af/CINvCLE_2017-05-17_-_Dallas_Jaye_%2833948649694%29_%28cropped%29.jpg/960px-CINvCLE_2017-05-17_-_Dallas_Jaye_%2833948649694%29_%28cropped%29.jpg",
@@ -20554,7 +20554,7 @@
     "birth": "1988-08-31",
     "position": "GK",
     "nationality": "Colombia",
-    "club": "Unattached",
+    "club": null,
     "photo": {
       "file": "David Ospina en 2026.jpg",
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/09/David_Ospina_en_2026.jpg/960px-David_Ospina_en_2026.jpg",
@@ -21102,7 +21102,7 @@
     "birth": "1993-09-02",
     "position": "DF",
     "nationality": "Colombia",
-    "club": "Unattached",
+    "club": null,
     "photo": {
       "file": "Lens - Reims (12-05-2023) 33.jpg",
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d0/Lens_-_Reims_%2812-05-2023%29_33.jpg/960px-Lens_-_Reims_%2812-05-2023%29_33.jpg",
@@ -21323,7 +21323,7 @@
     "birth": "2004-03-11",
     "position": "DF",
     "nationality": "Bermuda",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Deniche Hill"
   },
@@ -22779,7 +22779,7 @@
     "birth": "1996-10-01",
     "position": "FW",
     "nationality": "Bermuda",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": {
       "file": "Djair Parfitt-Williams.jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/f/fe/Djair_Parfitt-Williams.jpg",
@@ -25601,7 +25601,7 @@
     "birth": "1994-02-02",
     "position": "DF",
     "nationality": "Albania",
-    "club": "[[Free agent|Unattached]]",
+    "club": null,
     "photo": {
       "file": "Elseid Hysaj, FC Salzburg versus SSC Napoli (UEFA Euroleague Achtelfinalrückspiel 14. März 2019) 08 (cropped).jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/e/e4/Elseid_Hysaj%2C_FC_Salzburg_versus_SSC_Napoli_%28UEFA_Euroleague_Achtelfinalr%C3%BCckspiel_14._M%C3%A4rz_2019%29_08_%28cropped%29.jpg",
@@ -29262,7 +29262,7 @@
     "birth": "1994-06-24",
     "position": "FW",
     "nationality": "DR Congo",
-    "club": "Unattached",
+    "club": null,
     "photo": null,
     "wikiTitle": "Fiston Mayele"
   },
@@ -32918,7 +32918,7 @@
     "birth": "1993-02-07",
     "position": "GK",
     "nationality": "Bolivia",
-    "club": "Unattached",
+    "club": null,
     "photo": {
       "file": "Guillermo Viscarra Scotland v Bolivia 6 June 2026-23 (cropped).jpg",
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Guillermo_Viscarra_Scotland_v_Bolivia_6_June_2026-23_%28cropped%29.jpg/960px-Guillermo_Viscarra_Scotland_v_Bolivia_6_June_2026-23_%28cropped%29.jpg",
@@ -37027,8 +37027,8 @@
   },
   {
     "id": "illjonathan-fonkelnljonathan-fonkelptjonathan-fonkel",
-    "name": "{{ill|Jonathan Fonkel|nl|Jonathan Fonkel|pt|Jonathan Fonkel}}",
-    "fullName": "{{ill|Jonathan Fonkel|nl|Jonathan Fonkel|pt|Jonathan Fonkel}}",
+    "name": "Jonathan Fonkel",
+    "fullName": "Jonathan Fonkel",
     "birth": "2005-04-15",
     "position": "GK",
     "nationality": "Suriname",
@@ -37038,8 +37038,8 @@
   },
   {
     "id": "illjuan-manuel-rengifoes",
-    "name": "{{ill|Juan Manuel Rengifo|es}}",
-    "fullName": "{{ill|Juan Manuel Rengifo|es}}",
+    "name": "Juan Manuel Rengifo",
+    "fullName": "Juan Manuel Rengifo",
     "birth": null,
     "position": "MF",
     "nationality": "Colombia",
@@ -39689,7 +39689,7 @@
     "birth": "1991-07-12",
     "position": "MF",
     "nationality": "Colombia",
-    "club": "Unattached",
+    "club": null,
     "photo": {
       "file": "Argentina - Colombia 2022 (28) (cropped 2).jpg",
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/Argentina_-_Colombia_2022_%2828%29_%28cropped_2%29.jpg/960px-Argentina_-_Colombia_2022_%2828%29_%28cropped_2%29.jpg",
@@ -40133,7 +40133,7 @@
     "birth": "2001-09-26",
     "position": "MF",
     "nationality": "United States Virgin Islands",
-    "club": "Unattached",
+    "club": null,
     "photo": null,
     "wikiTitle": "Jannick Liburd"
   },
@@ -40457,7 +40457,7 @@
     "birth": "1995-10-01",
     "position": "DF",
     "nationality": "Sri Lanka",
-    "club": "[[Rot-Weiß Walldorf]]",
+    "club": "Rot-Weiß Walldorf",
     "photo": null,
     "wikiTitle": "Jason Thayaparan"
   },
@@ -40569,7 +40569,7 @@
     "birth": "2001-01-24",
     "position": "DF",
     "nationality": "Equatorial Guinea",
-    "club": "Unattached",
+    "club": null,
     "photo": null,
     "wikiTitle": "Javier Mum"
   },
@@ -41981,7 +41981,7 @@
     "birth": "1999-09-16",
     "position": "DF",
     "nationality": "United States Virgin Islands",
-    "club": "Unattached",
+    "club": null,
     "photo": {
       "file": "Jett Blaschka.jpg",
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Jett_Blaschka.jpg/960px-Jett_Blaschka.jpg",
@@ -43212,7 +43212,7 @@
     "birth": "1986-04-20",
     "position": "MF",
     "nationality": "Guam",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "John Matkin"
   },
@@ -46392,7 +46392,7 @@
     "birth": "1996-06-27",
     "position": "FW",
     "nationality": "Bermuda",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Justin Donawa"
   },
@@ -46900,7 +46900,7 @@
     "birth": "1992-09-20",
     "position": "FW",
     "nationality": "Pakistan",
-    "club": "Free agent",
+    "club": null,
     "photo": {
       "file": "Kaleemullah playing for Sacramento Republic FC.jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/8/86/Kaleemullah_playing_for_Sacramento_Republic_FC.jpg",
@@ -49949,7 +49949,7 @@
     "birth": "1999-02-25",
     "position": "DF",
     "nationality": "Senegal",
-    "club": "Free agent",
+    "club": null,
     "photo": {
       "file": "Krepin Diatta France v Senegal 16 June 2026-490 (cropped).jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Krepin_Diatta_France_v_Senegal_16_June_2026-490_%28cropped%29.jpg",
@@ -61639,7 +61639,7 @@
     "birth": null,
     "position": "GK",
     "nationality": "Equatorial Guinea",
-    "club": "{{ill|CSD Ebenezer|lt=Ebenezer|es|Club Socio Deportivo Ebenezer}}",
+    "club": "Ebenezer",
     "photo": null,
     "wikiTitle": "Miguel Ángel Nkogo"
   },
@@ -62078,7 +62078,7 @@
     "birth": "2004-04-12",
     "position": "GK",
     "nationality": "Bermuda",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Milai Perott"
   },
@@ -63106,7 +63106,7 @@
     "birth": "1997-07-10",
     "position": "DF",
     "nationality": "Benin",
-    "club": "Unattached",
+    "club": null,
     "photo": null,
     "wikiTitle": "Mohamed Tijani"
   },
@@ -64922,7 +64922,7 @@
     "birth": "1993-11-12",
     "position": "DF",
     "nationality": "Palestine",
-    "club": "Unattached",
+    "club": null,
     "photo": null,
     "wikiTitle": "Musab Al-Battat"
   },
@@ -65182,7 +65182,7 @@
     "birth": "2004-09-21",
     "position": "MF",
     "nationality": "Montserrat",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Mylan Benjamin"
   },
@@ -65231,7 +65231,7 @@
     "birth": "1999-02-14",
     "position": "FW",
     "nationality": "Comoros",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": {
       "file": "Lens - Nice (23-01-2021) 35.jpg",
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ef/Lens_-_Nice_%2823-01-2021%29_35.jpg/960px-Lens_-_Nice_%2823-01-2021%29_35.jpg",
@@ -69919,7 +69919,7 @@
     "birth": "1999-12-15",
     "position": "FW",
     "nationality": "Yemen",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Omar Al-Dahi"
   },
@@ -75120,7 +75120,7 @@
     "birth": "1997-02-01",
     "position": "DF",
     "nationality": "Yemen",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Rami Al-Wasmani"
   },
@@ -75131,7 +75131,7 @@
     "birth": "1994-03-24",
     "position": "GK",
     "nationality": "Palestine",
-    "club": "Unattached",
+    "club": null,
     "photo": null,
     "wikiTitle": "Rami Hamada"
   },
@@ -77018,7 +77018,7 @@
     "birth": "1991-02-21",
     "position": "FW",
     "nationality": "Algeria",
-    "club": "Unattached",
+    "club": null,
     "photo": {
       "file": "Mahrez 2021.jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/4/45/Mahrez_2021.jpg",
@@ -77909,7 +77909,7 @@
     "birth": "1991-11-02",
     "position": "MF",
     "nationality": "Saint Kitts and Nevis",
-    "club": "Unattached",
+    "club": null,
     "photo": {
       "file": "Romaine Sawyers 2014.jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/2/20/Romaine_Sawyers_2014.jpg",
@@ -79657,7 +79657,7 @@
     "birth": "1997-09-14",
     "position": "MF",
     "nationality": "Sierra Leone",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": {
       "file": "Fofanah Sierra Leonais (cropped).jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/d/db/Fofanah_Sierra_Leonais_%28cropped%29.jpg",
@@ -80759,7 +80759,7 @@
     "birth": "2003-03-29",
     "position": "MF",
     "nationality": "Philippines",
-    "club": "[[Free Agent|Unattached]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Sandro Reyes"
   },
@@ -83607,7 +83607,7 @@
     "birth": "2004-06-12",
     "position": "FW",
     "nationality": "Bermuda",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Sincere Hall"
   },
@@ -84129,8 +84129,8 @@
   },
   {
     "id": "sortname-illawetalemsegedno",
-    "name": "{{sortname ill|Awet|Alemseged|no}}",
-    "fullName": "{{sortname ill|Awet|Alemseged|no}}",
+    "name": "Awet Alemseged",
+    "fullName": "Awet Alemseged",
     "birth": "2004-04-27",
     "position": "FW",
     "nationality": "Eritrea",
@@ -87017,7 +87017,7 @@
     "birth": "1995-11-20",
     "position": "MF",
     "nationality": "DR Congo",
-    "club": "Unattached",
+    "club": null,
     "photo": {
       "file": "Bongonda in DR Congo national football team (cropped).jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/1/12/Bongonda_in_DR_Congo_national_football_team_%28cropped%29.jpg",
@@ -88903,7 +88903,7 @@
     "birth": "1993-12-21",
     "position": "MF",
     "nationality": "Guam",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Travis Nicklaw"
   },
@@ -95055,7 +95055,7 @@
     "birth": "1994-06-04",
     "position": "MF",
     "nationality": "Bermuda",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": "Zeiko Lewis"
   },
@@ -95230,7 +95230,7 @@
     "birth": "2007-09-22",
     "position": "DF",
     "nationality": "Bangladesh",
-    "club": "Free agent",
+    "club": null,
     "photo": null,
     "wikiTitle": "Zidane Yousuf"
   },
@@ -95309,7 +95309,7 @@
     "birth": "2001-04-18",
     "position": "FW",
     "nationality": "Timor-Leste",
-    "club": "[[Free agent]]",
+    "club": null,
     "photo": null,
     "wikiTitle": null
   },

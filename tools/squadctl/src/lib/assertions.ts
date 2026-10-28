@@ -22,6 +22,7 @@ export type Conflict =
   | { kind: 'name-variant'; playerId: string; storedName: string; sourceName: string }
   | { kind: 'omitted-row'; name: string; reason: string }
   | { kind: 'unknown-template'; detail: string }
+  | { kind: 'markup'; playerId: string; field: 'name' | 'fullName' | 'club'; value: string }
   | { kind: 'blast-radius'; ratio: number }
   | { kind: 'call-ups-only'; sectionTitle: string }
   | {
@@ -87,14 +88,18 @@ export function assess(plan: TeamPlan): AssertionResult {
   const numbered = plan.squad.members.filter((m) => m.no !== null).length;
   if (numbered < PLAYABLE_NUMBERED) {
     holds.push(`${numbered} of ${count} members numbered; a round asks ${PLAYABLE_NUMBERED}`);
-  }
-
-  // Level 3 asks a nation squad's players their club. American Samoa's article
-  // leaves `club=` empty on five rows, which nothing upstream can fill in.
-  if (!isClub && plan.clubless.length > 0) {
-    holds.push(
-      `${plan.clubless.length} member(s) with no club, which level 3 asks a nation squad's players: ${plan.clubless.join(', ')}`,
-    );
+  } else if (!isClub) {
+    // Level 3 asks a nation squad's players their club, and skips one with
+    // none: a free agent, or American Samoa's five rows with `club=` empty,
+    // which nothing upstream can fill in. The squad is playable while a
+    // round's worth of numbered members can still be asked.
+    const clubless = new Set(plan.clubless);
+    const askable = plan.squad.members.filter((m) => m.no !== null && !clubless.has(m.playerId));
+    if (askable.length < PLAYABLE_NUMBERED) {
+      holds.push(
+        `${askable.length} of ${count} members numbered with a club; level 3 asks a nation squad ${PLAYABLE_NUMBERED}`,
+      );
+    }
   }
 
   // --- Conflicts: written, but verified: false.
@@ -127,6 +132,11 @@ export function assess(plan: TeamPlan): AssertionResult {
   // from the data, and merging the wrong pair is unrecoverable.
   for (const mismatch of plan.titleMismatches) {
     conflicts.push({ kind: 'title-mismatch', ...mismatch });
+  }
+  // Template source stored as display text. The parser reads the templates
+  // seen so far; a new one lands here instead of verifying clean.
+  for (const left of plan.markup) {
+    conflicts.push({ kind: 'markup', ...left });
   }
   // A row that could not be placed is a conflict in its own right: the squad
   // is short a player and no member-count guard would notice 26 -> 25.
@@ -225,6 +235,8 @@ export function describeConflict(conflict: Conflict): string {
       return `spelling disagreement on ${conflict.playerId} — stored "${conflict.storedName}", source "${conflict.sourceName}"`;
     case 'title-mismatch':
       return `identity conflict on ${conflict.playerId} — stored "${conflict.storedTitle}", source lists "${conflict.sourceTitle}"`;
+    case 'markup':
+      return `Wikipedia markup left in the ${conflict.field} of ${conflict.playerId} — "${conflict.value}"`;
     case 'omitted-row':
       return `"${conflict.name}" could not be placed and is missing from the squad — ${conflict.reason}`;
     case 'unknown-template':
@@ -263,6 +275,7 @@ export function conflictCommand(conflict: Conflict): string | null {
         `                two different people:        npm run squadctl -- fork ${conflict.playerId} ${JSON.stringify(conflict.sourceTitle)}`
       );
     case 'ambiguous-name':
+    case 'markup':
     case 'omitted-row':
     case 'unknown-template':
     case 'blast-radius':

@@ -1,0 +1,15 @@
+{{updated|1 September 2026}}
+{{nat fs g start}}
+{{nat fs g player|no=13|pos=GK|name={{ill|Jonathan Fonkel|nl|Jonathan Fonkel|pt|Jonathan Fonkel}}|age={{Birth date and age|2005|4|15|df=y}}|caps=0|goals=0|club=[[S.V. Robinhood|Robinhood]]|clubnat=SUR}}
+{{nat fs g player|no=19|pos=MF|name={{ill|Juan Manuel Rengifo|es}}|age={{bda|2005|4|2|df=y}}|caps=1|goals=0|club=[[Atlético Nacional]]|clubnat=COL}}
+{{nat fs g player|no=26|pos=FW|name={{sortname ill|Awet|Alemseged|no}}|age={{Birth date and age|2004|4|27|df=y}}|caps=0|goals=0|club=[[Grorud IL]]|clubnat=NOR}}
+{{nat fs g player|no=13|pos=GK|name=[[Miguel Ángel Nkogo]]|age=|caps=0|goals=0|club={{ill|CSD Ebenezer|lt=Ebenezer|es|Club Socio Deportivo Ebenezer}}|clubnat=EQG|latest=}}
+{{nat fs g player|no=|pos=DF|name=[[Jason Thayaparan]]|age={{Birth date and age|1995|10|01|df=y}}|caps=13|goals=0|club=''[[Rot-Weiß Walldorf]]''|clubnat=GER}}
+{{nat fs g player|no=1|pos=GK|name=[[Milai Perott]]|age={{birth date and age|df=yes|2004|4|12}}|caps=4|goals=0|club=''[[Free agent]]''}}
+{{nat fs g player|no=1|pos=GK|name=[[Abed Yassin]]|age={{birth date and age|2004|5|9|df=y}}|caps=2|goals=0|club=''[[Free agent]]''|clubnat=}}
+{{nat fs g player|no=4|pos=DF|name=[[Elseid Hysaj]]|age={{Birth date and age|1994|2|2|df=y}}|caps=103|goals=2|club=''[[Free agent|Unattached]]''|clubnat=}}
+{{nat fs g player|no=13|pos=DF|name=[[Angelo Brückner]]|age={{birth date and age|2003|4|29|df=y}}|caps=1|goals=0|club=''[[Free Agent|Unattached]]''|clubnat=}}
+{{nat fs g player|no=13|pos=DF|name=[[Mohamed Tijani]]|age={{birth date and age|1997|7|10|df=y}}|caps=24|goals=1|club=''Unattached''|clubnat=}}
+{{nat fs g player|no=5|pos=DF|name=[[Some Player]]|age={{birth date and age|1997|7|10|df=y}}|caps=24|goals=1|club=|clubnat=}}
+{{nat fs g player|no=1|pos=GK|name=[[Nicky Salapu]]|age={{birth date and age|1979|2|23|df=y}}|caps=14|goals=0|club={{flagicon|American Samoa}} [[PanSa East F.C.]]|clubnat=ASA}}
+{{nat fs g end}}

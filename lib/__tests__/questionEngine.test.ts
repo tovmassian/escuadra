@@ -170,17 +170,58 @@ describe('buildRound', () => {
     expect(() => buildRound({ squad: squad(), roster: midRoster, level: 3, seed: 1 })).toThrow();
   });
 
-  it('throws for a level-3 nation question when a player has no club', () => {
-    const roster = buildNationRoster();
-    const broken = roster.map((r, i) =>
-      i === 0 ? { ...r, player: { ...r.player, club: null } } : r,
+  // A player with no club is `club: null` (a free agent, #230). A club question
+  // about one has no answer, so level 3 on a nation squad never asks it; they
+  // still make a name distractor, and levels 1 and 2 ask them as any player.
+  describe('a nation player with no club', () => {
+    const clubless = new Set(['gk1', 'df0', 'mf0', 'fw0']);
+    const roster = buildNationRoster().map((r) =>
+      clubless.has(r.player.id) ? { ...r, player: { ...r.player, club: null } } : r,
     );
-    // Force the broken player to be a subject by shrinking the roster to
-    // just enough members, all sharing the gap.
-    const small = broken.slice(0, 6);
-    expect(() =>
-      buildRound({ squad: squad({ kind: 'nation' }), roster: small, level: 3, seed: 1, size: 6 }),
-    ).toThrow();
+    const nation = squad({ kind: 'nation' });
+    const subjects = (level: 1 | 2 | 3) =>
+      [1, 2, 3, 4, 5, 6, 7, 8].flatMap((seed) =>
+        buildRound({ squad: nation, roster, level, seed, size: 10 }).map((q) => q.playerId),
+      );
+
+    it('is never the subject of a level-3 club question', () => {
+      expect(subjects(3).filter((id) => clubless.has(id))).toEqual([]);
+    });
+
+    it('still fills a round of ten from the others', () => {
+      expect(buildRound({ squad: nation, roster, level: 3, seed: 1, size: 10 })).toHaveLength(10);
+    });
+
+    it('stays a name option on level 3', () => {
+      const names = new Set(
+        [1, 2, 3, 4, 5, 6, 7, 8].flatMap((seed) =>
+          buildRound({ squad: nation, roster, level: 3, seed, size: 10 }).flatMap(
+            (q) => q.parts[0]?.options ?? [],
+          ),
+        ),
+      );
+      expect(names.has('GK 0')).toBe(true);
+    });
+
+    it('is asked on levels 1 and 2 like any player', () => {
+      for (const level of [1, 2] as const) {
+        expect(subjects(level).some((id) => clubless.has(id))).toBe(true);
+      }
+    });
+
+    it('never puts a missing club among the options', () => {
+      const rounds = buildRound({ squad: nation, roster, level: 3, seed: 2, size: 10 });
+      for (const q of rounds) {
+        expect(q.parts[2]?.options.every((o) => o !== null && o !== '')).toBe(true);
+      }
+    });
+
+    it('throws when too few numbered players have a club to ask', () => {
+      const few = roster.map((r, i) => (i < 4 ? r : { ...r, player: { ...r.player, club: null } }));
+      expect(() => buildRound({ squad: nation, roster: few, level: 3, seed: 1 })).toThrow(
+        /with a club/,
+      );
+    });
   });
 });
 

@@ -142,6 +142,17 @@ export interface TitleMismatch {
   rowName: string;
 }
 
+/** A stored value that still holds Wikipedia markup (`{{`, `}}`, `[[`, `]]`):
+ *  display text that is really template source. */
+export interface MarkupLeft {
+  playerId: string;
+  field: 'name' | 'fullName' | 'club';
+  value: string;
+}
+
+const MARKUP = /\{\{|\}\}|\[\[|\]\]/;
+const MARKUP_FIELDS = ['name', 'fullName', 'club'] as const;
+
 export interface TeamPlan {
   teamId: string;
   /** Fully built except `verified`, which the assertion pass decides, and
@@ -165,6 +176,9 @@ export interface TeamPlan {
   namesakes: Namesake[];
   /** Members whose record, after this plan, has no club. */
   clubless: string[];
+  /** Members' records, after this plan, whose name, full name or club still
+   *  holds markup, so a parser gap can never verify clean (#230). */
+  markup: MarkupLeft[];
   parsedCount: number;
   matchedCount: number;
   /** Members the squad gained. Distinct from `newPlayers`: a player already in
@@ -805,6 +819,14 @@ export function reconcileTeam({
   const resulting = new Map(byId);
   for (const record of [...newPlayers, ...updatedPlayers]) resulting.set(record.id, record);
   const clubless = members.filter((m) => !resulting.get(m.playerId)?.club).map((m) => m.playerId);
+  const markup = members.flatMap((m) => {
+    const record = resulting.get(m.playerId);
+    if (record === undefined) return [];
+    return MARKUP_FIELDS.flatMap((field) => {
+      const value = record[field];
+      return value !== null && MARKUP.test(value) ? [{ playerId: record.id, field, value }] : [];
+    });
+  });
 
   const squad: Squad = {
     id: envelope.team.id,
@@ -837,6 +859,7 @@ export function reconcileTeam({
     generatedIds,
     namesakes,
     clubless,
+    markup,
     parsedCount: rows.length,
     matchedCount,
     addedCount: members.filter((m) => !storedIds.has(m.playerId)).length,

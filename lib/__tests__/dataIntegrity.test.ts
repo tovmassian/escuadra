@@ -194,6 +194,33 @@ describe('players.json is canonically ordered and unique', () => {
   });
 });
 
+// A name or club is display text. 25 records once stored raw wikitext, because
+// squadctl read `{{ill|…}}`, `{{sortname ill|…}}` and a linked `club=` as plain
+// text, and showed it on an answer tile (#230). squadctl now reports leftover
+// markup as a conflict; this is the check that does not depend on squadctl.
+describe('no player name or club holds Wikipedia markup', () => {
+  const MARKUP = /\{\{|\}\}|\[\[|\]\]/;
+
+  for (const field of ['name', 'fullName', 'club'] as const) {
+    it(`no ${field} holds {{, }}, [[ or ]]`, () => {
+      const bad = playersData
+        .filter((p) => MARKUP.test(p[field] ?? ''))
+        .map((p) => `${p.id}: ${p[field]}`);
+      expect(bad).toEqual([]);
+    });
+  }
+
+  // A player with no club is `club: null`, one form, which level 3 skips for a
+  // nation squad. "Unattached" is a status, not a club: as a string it would be
+  // an English-only option among club names.
+  it('stores a clubless player as null, never as a free-agent label', () => {
+    const bad = playersData
+      .filter((p) => p.club !== null && /^(free agent|unattached)$/i.test(p.club.trim()))
+      .map((p) => `${p.id}: ${p.club}`);
+    expect(bad).toEqual([]);
+  });
+});
+
 // An alias or split that names a player or team id which no longer exists is
 // silently inert: squadctl will never match it against anything, so the
 // conflict it was recorded for resurfaces every sweep with no clue why the

@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { ROUND_LENGTH } from '../scoring';
 import { getRoster, getSquad, listSquads } from '../squads';
 
 // Shirt numbers and current clubs are the fields most likely to drift or be
@@ -38,8 +39,12 @@ describe('squad data integrity', () => {
           for (const { player } of roster) expect(player.nationality.length).toBeGreaterThan(0);
         });
       } else {
-        it('every player has a club (needed for level-3 nation squads)', () => {
-          for (const { player } of roster) expect(player.club).not.toBeNull();
+        // A player with no club is `club: null` and level 3 skips them (#230),
+        // so what a round needs is ROUND_LENGTH numbered players with a club.
+        // squadctl holds a squad that falls short (assertions.ts).
+        it('has a full level-3 round of numbered players with a club', () => {
+          const askable = roster.filter((r) => r.member.no !== null && r.player.club !== null);
+          expect(askable.length).toBeGreaterThanOrEqual(ROUND_LENGTH);
         });
       }
 
