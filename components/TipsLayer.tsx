@@ -46,6 +46,9 @@ export interface TipSpec {
   radius: number;
   heading: string;
   body: string;
+  /** The target is on a pinned bar (Difficulty's footer), which scrolling cannot
+   *  move. */
+  pinned?: boolean;
 }
 
 interface TipsLayerProps {
@@ -156,6 +159,10 @@ export function TipsLayer({
     let started = Date.now();
     let previous: Box | null = null;
     let scrolled = false;
+    // Where the target was as the screen scrolled. iOS applies the scroll a frame
+    // or two later, and two measures of the old place agree as well as two of the
+    // new (#187, J5): until the target leaves it, it has not moved.
+    let before: Box | null = null;
     let stopMeasure: (() => void) | null = null;
 
     const poll = () => {
@@ -181,7 +188,7 @@ export function TipsLayer({
           width: target.width,
           height: target.height,
         };
-        if (!settled(previous, box) && !late) {
+        if ((!settled(previous, box) || settled(before, box)) && !late) {
           previous = box;
           frame = requestAnimationFrame(poll);
           return;
@@ -190,13 +197,21 @@ export function TipsLayer({
         const { scrollBy: scroll, insets: safe, bottomClear: clear } = latest.current;
         if (scroll && !scrolled) {
           const delta = scrollDelta(
-            { target: box, radius: spec.radius, screen, insets: safe, bottomClear: clear },
+            {
+              target: box,
+              radius: spec.radius,
+              screen,
+              insets: safe,
+              bottomClear: clear,
+              pinned: spec.pinned,
+            },
             tips,
           );
           if (delta !== 0) {
             // Once per step, so a scroll that cannot go further never loops;
             // the screen moved, so it must settle again, with a fresh cap.
             scrolled = true;
+            before = box;
             scroll(delta);
             previous = null;
             started = Date.now();
@@ -365,7 +380,12 @@ export function TipsLayer({
     <>
       {/* Speaks the dialog's name, first, since the dialog itself is not one
           element on native; focus lands here on each step. */}
-      <Text ref={kickerRef} style={styles.kicker} accessibilityLabel={spokenText}>
+      <Text
+        ref={kickerRef}
+        style={styles.kicker}
+        accessibilityLabel={spokenText}
+        maxFontSizeMultiplier={fontScaleCap.display}
+      >
         {kickerText}
       </Text>
       <Text
@@ -375,7 +395,9 @@ export function TipsLayer({
       >
         {spec.heading}
       </Text>
-      <Text style={styles.body}>{spec.body}</Text>
+      <Text style={styles.body} maxFontSizeMultiplier={fontScaleCap.display}>
+        {spec.body}
+      </Text>
       <View style={styles.row}>
         {n > 1 ? (
           <View

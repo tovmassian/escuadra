@@ -275,7 +275,7 @@ export default function Difficulty() {
           tips={[
             { target: playRef, radius: radii.pill, ...t.tips.difficulty.start },
             { target: starRef, radius: radii.pill, ...t.tips.difficulty.star },
-            { target: studyRef, radius: radii.pill, ...t.tips.difficulty.study },
+            { target: studyRef, radius: radii.pill, pinned: true, ...t.tips.difficulty.study },
           ]}
           onClose={tips.close}
           onSkip={tips.skip}
