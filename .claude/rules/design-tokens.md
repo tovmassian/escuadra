@@ -72,9 +72,10 @@ tip, any text with `numberOfLines`), stops at `fontScaleCap.display`; a button's
 stops at `fontScaleCap.button` (2×). The comment on `fontScaleCap` in `theme/tokens.ts`
 lists the cases. Everything else grows, so every screen scrolls once its content outgrows
 it, Home included. A pill that grows takes half its `minHeight` as its radius, not `radii.pill`, so
-it turns into a rounded rectangle rather than an oval that clips its label. A long German
-word in a title or a row may still break mid-word at the largest sizes, on both platforms:
-accepted.
+it turns into a rounded rectangle rather than an oval that clips its label. At the largest
+sizes a long German word in a title or a row may still break mid-word, on both platforms,
+and on iOS a Settings label beside its value narrows to a few letters or loses its last
+one: accepted (#187).
 
 ## The system theme
 
