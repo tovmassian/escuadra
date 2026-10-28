@@ -4,7 +4,6 @@ import Animated, {
   Easing,
   FadeIn,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withDelay,
   withSequence,
@@ -20,6 +19,7 @@ import type { TileVerdict } from '@/lib/roundView';
 import {
   borderWidths,
   durations,
+  fontScaleCap,
   iconSize,
   opacity,
   radii,
@@ -30,6 +30,7 @@ import {
   type Palette,
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 interface AnswerTileProps {
   label: string;
@@ -104,7 +105,7 @@ export function AnswerTile({
 }: AnswerTileProps) {
   const colors = useThemeColors();
   const t = useT();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const scale = useSharedValue(1);
   const shift = useSharedValue(0);
   const fade = useSharedValue(1);
@@ -245,12 +246,15 @@ export function AnswerTile({
         disabled={answered}
         accessibilityRole="button"
         accessibilityState={{ disabled: answered }}
-        accessibilityLabel={[label, sub, t.round.tileSpoken[verdict]].filter(Boolean).join(', ')}
+        // A position tile speaks its word alone: a screen reader spells the code out (#187).
+        accessibilityLabel={[sub ?? label, t.round.tileSpoken[verdict]].filter(Boolean).join(', ')}
         style={styles.tile}
       >
         {isPosition ? (
           <View style={styles.position}>
-            <Text style={styles.code}>{label}</Text>
+            <Text style={styles.code} maxFontSizeMultiplier={fontScaleCap.display}>
+              {label}
+            </Text>
             <Text style={styles.sub}>{sub}</Text>
           </View>
         ) : (
@@ -270,7 +274,11 @@ export function AnswerTile({
               {/* One line under the ANSWER tag: tag and two lines overflow a
                   48-54 pt tile. The NAME (or POS, CLUB, NAT) slot above
                   shows the right answer in full after a miss. */}
-              <Text style={styles.label} numberOfLines={verdict === 'correct-unpicked' ? 1 : 2}>
+              <Text
+                style={styles.label}
+                numberOfLines={verdict === 'correct-unpicked' ? 1 : 2}
+                maxFontSizeMultiplier={fontScaleCap.display}
+              >
                 {label}
               </Text>
             </View>

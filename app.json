@@ -11,8 +11,16 @@
       "supportsTablet": false,
       "bundleIdentifier": "com.tovmassian.escuadra",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSPhotoLibraryAddUsageDescription": "Escuadra adds the picture of your round to Photos only when you choose to save it."
       }
+    },
+    "locales": {
+      "en": "./i18n/ios/en.json",
+      "es": "./i18n/ios/es.json",
+      "fr": "./i18n/ios/fr.json",
+      "it": "./i18n/ios/it.json",
+      "de": "./i18n/ios/de.json"
     },
     "android": {
       "package": "com.tovmassian.escuadra",

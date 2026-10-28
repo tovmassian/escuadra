@@ -9,6 +9,7 @@ import {
   View,
   type ViewInstance,
   type ScrollViewInstance,
+  type TextInstance,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EraserGlyph, OutdatedGlyph } from '@/components/ActionGlyphs';
@@ -20,6 +21,7 @@ import { ResetSheet } from '@/components/ResetSheet';
 import { BookGlyph } from '@/components/SettingsGlyphs';
 import { TipsLayer } from '@/components/TipsLayer';
 import { useTips } from '@/hooks/useTips';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import {
@@ -36,7 +38,16 @@ import { getSquad, squadLeague } from '@/lib/squads';
 import { track } from '@/lib/telemetry';
 import { paramOf, TEAM_FROM } from '@/lib/telemetryEvents';
 import { useProgress } from '@/stores/progress';
-import { borderWidths, iconSize, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
+import {
+  borderWidths,
+  fontScaleCap,
+  iconSize,
+  opacity,
+  radii,
+  sizes,
+  spacing,
+  typography,
+} from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 // Difficulty (#178): the team's bands under a veil, then the ladder: cleared
@@ -70,6 +81,8 @@ export default function Difficulty() {
   const playRef = useRef<ViewInstance>(null);
   const starRef = useRef<ViewInstance>(null);
   const studyRef = useRef<ViewInstance>(null);
+  const titleRef = useRef<TextInstance>(null);
+  const titleFocus = useTitleFocus(titleRef, !tips.open);
 
   // Usage statistics (#221): how the team was reached, once per visit. A screen
   // pushed over this one and closed again does not count a second time.
@@ -171,6 +184,8 @@ export default function Difficulty() {
           starred={starred}
           onToggleStar={() => toggleStar(squad.id)}
           starRef={starRef}
+          titleRef={titleRef}
+          barA11y={titleFocus.chrome}
         />
         <View style={styles.content}>
           <View style={styles.headingBlock}>
@@ -234,7 +249,9 @@ export default function Difficulty() {
             style={({ pressed }) => [styles.study, pressed && { opacity: opacity.settled }]}
           >
             <BookGlyph color={colors.textPrimary} />
-            <Text style={styles.studyLabel}>{t.ladder.studySquad}</Text>
+            <Text style={styles.studyLabel} maxFontSizeMultiplier={fontScaleCap.display}>
+              {t.ladder.studySquad}
+            </Text>
           </Pressable>
           {scores.length > 0 ? (
             <Pressable
@@ -248,7 +265,7 @@ export default function Difficulty() {
             </Pressable>
           ) : null}
         </View>
-        <Text style={styles.updated}>
+        <Text style={styles.updated} maxFontSizeMultiplier={fontScaleCap.display}>
           {t.ladder.updated(formatLastUpdated(squad.lastUpdated, t))}
         </Text>
       </View>
@@ -258,7 +275,7 @@ export default function Difficulty() {
           tips={[
             { target: playRef, radius: radii.pill, ...t.tips.difficulty.start },
             { target: starRef, radius: radii.pill, ...t.tips.difficulty.star },
-            { target: studyRef, radius: radii.pill, ...t.tips.difficulty.study },
+            { target: studyRef, radius: radii.pill, pinned: true, ...t.tips.difficulty.study },
           ]}
           onClose={tips.close}
           onSkip={tips.skip}
@@ -288,6 +305,8 @@ export default function Difficulty() {
         onConfirm={() => {
           track('progress.reset', { scope: 'team', squad: squad.id });
           resetSquad(squad.id);
+          // The eraser goes with the scores, so the focus can't go back to it.
+          titleFocus.refocus();
         }}
       />
     </View>

@@ -158,6 +158,8 @@ npm run check         # everything CI runs; before reporting work done
   release branches, rollback.
 - [`docs/license.md`](docs/license.md): every shipped asset's licence, the photo
   licences accepted and refused, and how to change the list.
+- [`docs/device-testing.md`](docs/device-testing.md): testing on a real iPhone and Android
+  phone: the builds, driving each phone, and the owner's ground rules.
 - [`CHANGELOG.md`](CHANGELOG.md): what each version shipped.
 - [`tools/squadctl/README.md`](tools/squadctl/README.md): squadctl's commands, and every
   conflict it reports with the command that answers it.

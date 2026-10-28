@@ -14,6 +14,7 @@ import {
 import {
   durations,
   elevation,
+  fontScaleCap,
   opacity,
   radii,
   shareCapture,
@@ -36,10 +37,10 @@ import {
 import Animated, {
   FadeIn,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 interface ShareSheetProps {
   visible: boolean;
@@ -85,7 +86,7 @@ export function ShareSheet({ visible, onClose, card, text, onShared }: ShareShee
 function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | 'onClose'>) {
   const colors = useThemeColors();
   const t = useT();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const [format, setFormat] = useState<ShareFormat>('image');
   const [busy, setBusy] = useState(false);
   // The guard `submit` actually checks: state is a render behind, so two taps in
@@ -187,7 +188,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
       minHeight: sizes.cta.normal,
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radii.pill,
+      borderRadius: sizes.cta.normal / 2,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
@@ -257,6 +258,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
                       styles.segmentLabel,
                       { color: selected ? colors.ctaText : colors.textSecondary },
                     ]}
+                    maxFontSizeMultiplier={fontScaleCap.display}
                   >
                     {label}
                   </Text>
@@ -327,7 +329,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
         ]}
       >
         <ShareGlyph color={colors.ctaText} />
-        <Text style={styles.ctaText}>
+        <Text style={styles.ctaText} maxFontSizeMultiplier={fontScaleCap.button}>
           {format === 'image' ? t.share.shareImage : t.share.shareText}
         </Text>
       </Pressable>

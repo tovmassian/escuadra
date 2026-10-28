@@ -276,7 +276,8 @@ export const en = {
   },
   /** ≤ 3 chars: a position's code on an answer tile, a slot chip, a Study filter pill and a card badge. */
   positionCodes: { GK: 'GK', DF: 'DF', MF: 'MF', FW: 'FW' },
-  /** ≤ 11 chars: the word under a position tile's code, and in Study's spoken label. */
+  /** ≤ 11 chars: the word under a position tile's code, and whenever a screen reader names a
+   *  position, which it would spell out by its code. */
   positions: { GK: 'Keeper', DF: 'Defender', MF: 'Midfield', FW: 'Forward' },
   /** Slot names, spoken before a slot's value. */
   slots: { NAME: 'Name', POS: 'Position', AGE: 'Age', CLUB: 'Club', NAT: 'Nationality' },

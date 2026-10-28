@@ -1,7 +1,8 @@
 import { router } from 'expo-router';
-import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
+import { useRef, useState } from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, View, type TextInstance } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { useT } from '@/i18n/useT';
 import {
   LICENCE_TEXTS,
@@ -10,7 +11,7 @@ import {
   UNICODE_LICENSE,
 } from '@/lib/licences.generated';
 import { BUNDLED_FONTS, UNICODE_CREDIT, licenceParagraphs, softwareRows } from '@/lib/licencesView';
-import { spacing, typography } from '@/theme/tokens';
+import { fontScaleCap, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 const UNICODE_KEY = 'unicode';
@@ -29,6 +30,8 @@ export default function Licences() {
   const colors = useThemeColors();
   const t = useT();
   const [open, setOpen] = useState<ReadonlySet<string>>(() => new Set([UNICODE_KEY]));
+  const titleRef = useRef<TextInstance>(null);
+  const titleFocus = useTitleFocus(titleRef);
   const toggle = (key: string) =>
     setOpen((prev) => {
       const next = new Set(prev);
@@ -92,10 +95,20 @@ export default function Licences() {
         style={styles.scroll}
         contentContainerStyle={[styles.listContent, { paddingBottom: insets.bottom + spacing.xl }]}
       >
-        <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
+        <Pressable
+          onPress={() => router.back()}
+          accessibilityRole="button"
+          hitSlop={12}
+          {...titleFocus.chrome}
+        >
           <Text style={styles.back}>‹ {t.common.back}</Text>
         </Pressable>
-        <Text style={styles.title} accessibilityRole="header">
+        <Text
+          ref={titleRef}
+          style={styles.title}
+          accessibilityRole="header"
+          maxFontSizeMultiplier={fontScaleCap.display}
+        >
           {t.about.licences.label}
         </Text>
 

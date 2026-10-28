@@ -21,6 +21,16 @@ export function starredOfKind(
   });
 }
 
+/** The picker's first tab: the newest starred team's, so Your squads shows and
+ *  How to play's second tip rings a team of the player's own (#187); Clubs with
+ *  none. */
+export function openingTab(
+  starred: readonly string[],
+  squads: readonly SquadManifestEntry[],
+): 'club' | 'nation' {
+  return starredTeams(starred, squads)[0]?.kind ?? 'club';
+}
+
 /** Every starred team, both kinds, newest first: Home's row of round buttons
  *  (#181). A starred id that has left the data is dropped, as above. */
 export function starredTeams(

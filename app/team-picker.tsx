@@ -6,6 +6,7 @@ import { SearchField } from '@/components/SearchField';
 import { TeamRow } from '@/components/TeamRow';
 import { TipsLayer } from '@/components/TipsLayer';
 import { useTips } from '@/hooks/useTips';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { YourSquads } from '@/components/YourSquads';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
@@ -25,16 +26,23 @@ import {
   visibleSquads,
 } from '@/lib/pickerView';
 import { listSquads } from '@/lib/squads';
-import { starredOfKind } from '@/lib/starred';
+import { openingTab, starredOfKind } from '@/lib/starred';
 import { track } from '@/lib/telemetry';
 import { NO_RESULTS_AFTER_MS } from '@/lib/telemetryEvents';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
-import { radii, sizes, spacing, typography } from '@/theme/tokens';
+import { fontScaleCap, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { SquadManifestEntry } from '@/types/squad';
 import { router } from 'expo-router';
 import { Fragment, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
-import { ScrollView, StyleSheet, Text, View, type ViewInstance } from 'react-native';
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  View,
+  type TextInstance,
+  type ViewInstance,
+} from 'react-native';
 import Animated, {
   useAnimatedRef,
   useAnimatedScrollHandler,
@@ -56,7 +64,7 @@ export default function TeamPicker() {
   const hydrated = useProgressHydrated();
   const bestScores = useProgress((s) => s.bestScores);
   const starredSquads = useProgress((s) => s.starredSquads);
-  const [filter, setFilter] = useState<Kind>('club');
+  const [filter, setFilter] = useState<Kind>(() => openingTab(starredSquads, listSquads()));
   const [league, setLeague] = useState<LeagueFilter>('ALL');
   const [confederation, setConfederation] = useState<ConfederationFilter>('ALL');
   const [query, setQuery] = useState('');
@@ -66,6 +74,8 @@ export default function TeamPicker() {
   const tips = useTips('picker');
   const switchRef = useRef<ViewInstance>(null);
   const firstRowRef = useRef<ViewInstance>(null);
+  const titleRef = useRef<TextInstance>(null);
+  const titleFocus = useTitleFocus(titleRef, !tips.open);
 
   const squads = listSquads();
   const names = useMemo<SquadNames>(
@@ -328,7 +338,7 @@ export default function TeamPicker() {
         ]}
       >
         <View style={styles.header}>
-          <View style={styles.topBar}>
+          <View style={styles.topBar} {...titleFocus.chrome}>
             <RoundBackButton
               testID="picker-back"
               label={t.common.back}
@@ -336,7 +346,12 @@ export default function TeamPicker() {
             />
             <Text style={styles.count}>{t.picker.squadCount(squads.length)}</Text>
           </View>
-          <Text style={styles.title} accessibilityRole="header">
+          <Text
+            ref={titleRef}
+            style={styles.title}
+            accessibilityRole="header"
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
             {t.picker.title}
           </Text>
           <SearchField value={query} onChange={changeQuery} onClear={() => changeQuery('')} />
@@ -422,11 +437,16 @@ export default function TeamPicker() {
                   },
                 ]}
                 accessibilityRole="header"
+                maxFontSizeMultiplier={fontScaleCap.display}
               >
                 {section.letter}
               </Text>
               {i === 0 && (
-                <Text style={styles.nationsCaption} numberOfLines={1}>
+                <Text
+                  style={styles.nationsCaption}
+                  numberOfLines={1}
+                  maxFontSizeMultiplier={fontScaleCap.display}
+                >
                   {nationsCaption(confederation, t)}
                 </Text>
               )}

@@ -151,12 +151,16 @@ export function PlayerCard({
 
   const neutral = lineTone === 'neutral';
   const lineText = line ? (
-    <Text style={neutral ? styles.lineNeutral : styles.line} numberOfLines={neutral ? 1 : 2}>
+    <Text
+      style={neutral ? styles.lineNeutral : styles.line}
+      numberOfLines={neutral ? 1 : 2}
+      maxFontSizeMultiplier={fontScaleCap.display}
+    >
       {line}
     </Text>
   ) : null;
   const nameText = (
-    <Text style={styles.name} numberOfLines={2}>
+    <Text style={styles.name} numberOfLines={2} maxFontSizeMultiplier={fontScaleCap.display}>
       {name}
     </Text>
   );

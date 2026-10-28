@@ -7,6 +7,7 @@ import { RoundStrip } from '@/components/RoundStrip';
 import { ShareSheet } from '@/components/ShareSheet';
 import { TipsLayer, type TipSpec } from '@/components/TipsLayer';
 import { useTips } from '@/hooks/useTips';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
@@ -53,19 +54,20 @@ import {
   StyleSheet,
   Text,
   View,
+  type TextInstance,
   type ViewInstance,
   type ScrollViewInstance,
 } from 'react-native';
 import Animated, {
   cancelAnimation,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withDelay,
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 const MAX_LEVEL: Level = 3;
 
@@ -84,7 +86,7 @@ export default function Results() {
   const colors = useThemeColors();
   const t = useT();
   const language = useLanguage();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const { squadId, level: levelParam } = useLocalSearchParams<{ squadId: string; level: string }>();
   const level = Number(levelParam) as Level;
   // The finished round, read once as the screen opens. Retry, the next level
@@ -127,6 +129,8 @@ export default function Results() {
   const offset = useRef(0);
   const missedRef = useRef<ViewInstance>(null);
   const actionsRef = useRef<ViewInstance>(null);
+  const titleRef = useRef<TextInstance>(null);
+  const titleFocus = useTitleFocus(titleRef, !showTips);
 
   // After an a la escuadra round, once the celebration is over, perhaps ask
   // for a store rating (#57). Nothing here sets state, so the screen never
@@ -204,25 +208,25 @@ export default function Results() {
       minHeight: sizes.cta.normal,
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radii.pill,
+      borderRadius: sizes.cta.normal / 2,
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: colors.ctaBg,
     },
-    ctaText: { ...typography.ctaLabel, color: colors.ctaText },
+    ctaText: { ...typography.ctaLabel, color: colors.ctaText, textAlign: 'center' },
     row: { flexDirection: 'row', gap: spacing.sm },
     outline: {
       flex: 1,
       minHeight: sizes.cta.compact,
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radii.pill,
+      borderRadius: sizes.cta.compact / 2,
       borderWidth: borderWidths.thick,
       borderColor: colors.border,
       alignItems: 'center',
       justifyContent: 'center',
     },
-    outlineText: { ...typography.ctaLabel, color: colors.textPrimary },
+    outlineText: { ...typography.ctaLabel, color: colors.textPrimary, textAlign: 'center' },
     retry: {
       width: sizes.cta.compact,
       height: sizes.cta.compact,
@@ -305,7 +309,7 @@ export default function Results() {
         showsVerticalScrollIndicator={false}
         alwaysBounceVertical={false}
       >
-        <View style={styles.topBar}>
+        <View style={styles.topBar} {...titleFocus.chrome}>
           <Pressable
             testID="results-close"
             onPress={chooseDifferentTeam}
@@ -315,7 +319,11 @@ export default function Results() {
           >
             <CloseGlyph color={colors.textSecondary} />
           </Pressable>
-          <Text style={styles.context} numberOfLines={1}>
+          <Text
+            style={styles.context}
+            numberOfLines={1}
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
             {[teamName, t.common.level(level)].join(' · ')}
           </Text>
           <Pressable
@@ -337,6 +345,7 @@ export default function Results() {
             tier={tier}
           />
           <Animated.Text
+            ref={titleRef}
             entering={riseIn(reduced, spotlightMotion.numberRise, resultsTimeline.rise, beat)}
             style={styles.title}
             maxFontSizeMultiplier={fontScaleCap.display}
@@ -384,7 +393,9 @@ export default function Results() {
                 accessibilityRole="button"
                 style={({ pressed }) => [styles.cta, pressed && { opacity: opacity.settled }]}
               >
-                <Text style={styles.ctaText}>{main.label}</Text>
+                <Text style={styles.ctaText} maxFontSizeMultiplier={fontScaleCap.button}>
+                  {main.label}
+                </Text>
               </Pressable>
             </Animated.View>
             <Animated.View
@@ -402,7 +413,9 @@ export default function Results() {
                 accessibilityRole="button"
                 style={({ pressed }) => [styles.outline, pressed && { opacity: opacity.settled }]}
               >
-                <Text style={styles.outlineText}>{t.results.studySquad}</Text>
+                <Text style={styles.outlineText} maxFontSizeMultiplier={fontScaleCap.button}>
+                  {t.results.studySquad}
+                </Text>
               </Pressable>
               {actions.retryIcon ? (
                 <Pressable
@@ -483,7 +496,7 @@ function Score({
 }) {
   const colors = useThemeColors();
   const t = useT();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const passed = tier !== 'fail';
   const flawless = tier === 'excellent';
   const timing = flawless ? strikeTiming.excellent : strikeTiming.passed;
@@ -628,7 +641,7 @@ function MissedCards({
   const colors = useThemeColors();
   const t = useT();
   const language = useLanguage();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const card = sizes.playerCard.results;
   const styles = StyleSheet.create({
     section: { paddingTop: spacing.xl },
@@ -701,7 +714,7 @@ function CardGap() {
 function Roster({ results, marker }: { results: QuestionResult[]; marker: TeamMarker }) {
   const colors = useThemeColors();
   const t = useT();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const styles = StyleSheet.create({
     section: { paddingTop: spacing.xl, paddingHorizontal: spacing.lg, gap: spacing.sm },
     label: { ...typography.captionEyebrow, color: colors.successText },
@@ -755,7 +768,11 @@ function Roster({ results, marker }: { results: QuestionResult[]; marker: TeamMa
                     photoUrl={photoFor(getPlayer(playerId))?.url ?? null}
                     marker={marker}
                   />
-                  <Text style={styles.name} numberOfLines={1}>
+                  <Text
+                    style={styles.name}
+                    numberOfLines={1}
+                    maxFontSizeMultiplier={fontScaleCap.display}
+                  >
                     {shortName(playerName)}
                   </Text>
                 </Animated.View>

@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import type { ViewInstance } from 'react-native';
 import {
   Easing,
-  useReducedMotion,
   useSharedValue,
   withDelay,
   withSequence,
@@ -18,6 +17,7 @@ import {
   type ShotVerdict,
 } from '@/lib/shot';
 import { durations, spotlightCues } from '@/theme/tokens';
+import { useReduceMotion } from './useReduceMotion';
 
 /** Where a tile was tapped: the press's window coordinates (0, 0 when it
  *  carried none, as a screen reader's activation may) and the tile itself. */
@@ -49,7 +49,7 @@ function measure(view: ViewInstance | null): Promise<Box | null> {
 // - A shot belongs to its question. The next question ignores it, and drops
 //   one still waiting to be struck.
 export function useShot(question: number) {
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const live = useSharedValue<LiveShot | null>(null);
   const clock = useSharedValue(-1);
   const overlayRef = useRef<ViewInstance>(null);

@@ -1,6 +1,7 @@
 import { LinearGradient } from 'expo-linear-gradient';
 import { router } from 'expo-router';
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useRef } from 'react';
+import { Pressable, ScrollView, StyleSheet, Text, View, type ViewInstance } from 'react-native';
 import Animated, { Extrapolation, interpolate, useAnimatedStyle } from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { StarGlyph } from '@/components/ActionGlyphs';
@@ -10,6 +11,7 @@ import { useLaunchReveal } from '@/components/LaunchReveal';
 import { NumberWall } from '@/components/NumberWall';
 import { GearGlyph } from '@/components/SettingsGlyphs';
 import { Wordmark } from '@/components/Wordmark';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { homeView } from '@/lib/homeView';
@@ -18,10 +20,10 @@ import type { TeamFrom } from '@/lib/telemetryEvents';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import {
   borderWidths,
+  fontScaleCap,
   iconSize,
   launchIntro,
   opacity,
-  radii,
   sizes,
   spacing,
   spotlightMotion,
@@ -47,6 +49,10 @@ export default function Home() {
   const view = homeView({ hydrated, lastPlayed, bestScores, starred, squads: listSquads() });
   const wallTop = insets.top + sizes.roundButton;
   const topFade = wallTop + sizes.home.topFade;
+  const titleRef = useRef<ViewInstance>(null);
+  // The gear is out of VoiceOver's order while Home settles: coming back from
+  // Settings, VoiceOver would return to it rather than start on the wordmark.
+  const titleFocus = useTitleFocus(titleRef);
 
   // At rest whenever the reveal is 1, so a launch without the intro, or any
   // later visit, shows Home as it is.
@@ -98,6 +104,7 @@ export default function Home() {
       alignItems: 'center',
       justifyContent: 'center',
     },
+    scroll: { flexGrow: 1 },
     spacer: { flex: 1 },
     skirt: { height: sizes.home.skirt, pointerEvents: 'none' },
     block: {
@@ -109,7 +116,7 @@ export default function Home() {
     headline: { ...typography.homeHeadline, color: colors.textPrimary, marginBottom: spacing.xxs },
     start: {
       minHeight: sizes.home.start,
-      borderRadius: radii.pill,
+      borderRadius: sizes.home.start / 2,
       backgroundColor: colors.ctaBg,
       alignItems: 'center',
       justifyContent: 'center',
@@ -141,8 +148,8 @@ export default function Home() {
       />
 
       <View style={styles.topBar}>
-        <Wordmark />
-        <Animated.View style={arriveStyle}>
+        <Wordmark ref={titleRef} />
+        <Animated.View style={arriveStyle} {...titleFocus.chrome}>
           <Pressable
             testID="home-settings"
             onPress={() => router.push('/settings')}
@@ -155,48 +162,60 @@ export default function Home() {
         </Animated.View>
       </View>
 
-      <View style={styles.spacer} />
+      {/* The block sits at the foot of the screen, and scrolls when the largest
+          text makes it taller than the screen (#187, J4). */}
+      <ScrollView
+        contentContainerStyle={styles.scroll}
+        showsVerticalScrollIndicator={false}
+        bounces={false}
+      >
+        <View style={styles.spacer} />
 
-      <LinearGradient colors={[colors.backgroundClear, colors.background]} style={styles.skirt} />
-      <View style={styles.block}>
-        <Animated.View style={[styles.blockContent, arriveStyle]}>
-          <Text style={styles.headline}>{t.home.headline}</Text>
+        <LinearGradient colors={[colors.backgroundClear, colors.background]} style={styles.skirt} />
+        <View style={styles.block}>
+          <Animated.View style={[styles.blockContent, arriveStyle]}>
+            <Text style={styles.headline} maxFontSizeMultiplier={fontScaleCap.display}>
+              {t.home.headline}
+            </Text>
 
-          {view.kind === 'returning' && (
-            <HomeContinue
-              data={view.continue}
-              name={squadDisplayName(view.continue.squad, language)}
-              onPress={() => openSquad(view.continue.squad.id, 'continue')}
-            />
-          )}
-          {view.kind === 'firstRun' && (
-            <Pressable
-              testID="home-start"
-              onPress={openPicker}
-              accessibilityRole="button"
-              accessibilityLabel={t.home.startTraining}
-              style={({ pressed }) => [styles.start, pressed && { opacity: opacity.settled }]}
-            >
-              <Text style={styles.startLabel}>{t.home.startTraining}</Text>
-            </Pressable>
-          )}
+            {view.kind === 'returning' && (
+              <HomeContinue
+                data={view.continue}
+                name={squadDisplayName(view.continue.squad, language)}
+                onPress={() => openSquad(view.continue.squad.id, 'continue')}
+              />
+            )}
+            {view.kind === 'firstRun' && (
+              <Pressable
+                testID="home-start"
+                onPress={openPicker}
+                accessibilityRole="button"
+                accessibilityLabel={t.home.startTraining}
+                style={({ pressed }) => [styles.start, pressed && { opacity: opacity.settled }]}
+              >
+                <Text style={styles.startLabel} maxFontSizeMultiplier={fontScaleCap.button}>
+                  {t.home.startTraining}
+                </Text>
+              </Pressable>
+            )}
 
-          {view.kind === 'returning' || (view.kind === 'firstRun' && view.starred.length > 0) ? (
-            <HomeSquads
-              squads={view.starred}
-              onOpen={(squadId) => openSquad(squadId, 'squads')}
-              onAllTeams={openPicker}
-            />
-          ) : view.kind === 'firstRun' ? (
-            <View style={styles.hint}>
-              <View importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
-                <StarGlyph color={colors.textMuted} filled={false} size={iconSize.starHint} />
+            {view.kind === 'returning' || (view.kind === 'firstRun' && view.starred.length > 0) ? (
+              <HomeSquads
+                squads={view.starred}
+                onOpen={(squadId) => openSquad(squadId, 'squads')}
+                onAllTeams={openPicker}
+              />
+            ) : view.kind === 'firstRun' ? (
+              <View style={styles.hint}>
+                <View importantForAccessibility="no-hide-descendants" accessibilityElementsHidden>
+                  <StarGlyph color={colors.textMuted} filled={false} size={iconSize.starHint} />
+                </View>
+                <Text style={styles.hintText}>{t.home.starHint}</Text>
               </View>
-              <Text style={styles.hintText}>{t.home.starHint}</Text>
-            </View>
-          ) : null}
-        </Animated.View>
-      </View>
+            ) : null}
+          </Animated.View>
+        </View>
+      </ScrollView>
     </View>
   );
 }

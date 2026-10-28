@@ -3,8 +3,16 @@ import * as Crypto from 'expo-crypto';
 import { Image } from 'expo-image';
 import { router } from 'expo-router';
 import * as Updates from 'expo-updates';
-import { useState } from 'react';
-import { Pressable, ScrollView, StyleSheet, Switch, Text, View } from 'react-native';
+import { useRef, useState } from 'react';
+import {
+  Pressable,
+  ScrollView,
+  StyleSheet,
+  Switch,
+  Text,
+  View,
+  type TextInstance,
+} from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { EraserGlyph } from '@/components/ActionGlyphs';
 import { AppearanceControl } from '@/components/AppearanceControl';
@@ -26,6 +34,7 @@ import {
 } from '@/components/SettingsGlyphs';
 import { SettingsRow, SettingsSection } from '@/components/SettingsSection';
 import { SoonChip } from '@/components/SoonChip';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { LANGUAGE_NAMES } from '@/i18n/names';
 import { useLanguage, useT } from '@/i18n/useT';
 import { scoreSummary } from '@/lib/reset';
@@ -33,7 +42,15 @@ import { versionLabel } from '@/lib/settingsView';
 import { openStorePage } from '@/lib/storeReview';
 import { startSession, track, trackNow } from '@/lib/telemetry';
 import { useProgress } from '@/stores/progress';
-import { borderWidths, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
+import {
+  borderWidths,
+  fontScaleCap,
+  opacity,
+  radii,
+  sizes,
+  spacing,
+  typography,
+} from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 // Settings (#175; spec docs/superpowers/specs/2026-10-22-settings-screen-design.md):
@@ -54,6 +71,8 @@ export default function Settings() {
   const [languageOpen, setLanguageOpen] = useState(false);
   const [sheet, setSheet] = useState<'scores' | 'app' | null>(null);
   const version = Constants.expoConfig?.version ?? '—';
+  const titleRef = useRef<TextInstance>(null);
+  const titleFocus = useTitleFocus(titleRef);
   const glyph = colors.textSecondary;
   const g = sizes.settings;
 
@@ -62,7 +81,14 @@ export default function Settings() {
     content: { paddingHorizontal: spacing.lg, gap: spacing.lg + 2 },
     header: { gap: spacing.md + 2 },
     title: { ...typography.displayTitle, color: colors.textPrimary },
-    value: { ...typography.secondary, color: colors.textSecondary },
+    // At most half the row: the label takes what is left, so at the largest text
+    // the value wraps rather than crushing it (#187, J4).
+    value: {
+      ...typography.secondary,
+      color: colors.textSecondary,
+      flexShrink: 1,
+      maxWidth: '50%',
+    },
     appearance: {
       gap: spacing.sm,
       padding: spacing.md,
@@ -70,7 +96,7 @@ export default function Settings() {
       borderBottomColor: colors.hairline,
     },
     appearanceHead: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm + 2 },
-    appearanceLabel: { ...typography.settingsLabel, color: colors.textPrimary },
+    appearanceLabel: { ...typography.settingsLabel, color: colors.textPrimary, flexShrink: 1 },
     plate: {
       width: g.plate,
       height: g.plate,
@@ -135,12 +161,19 @@ export default function Settings() {
         ]}
       >
         <View style={styles.header}>
-          <RoundBackButton
-            testID="settings-back"
-            label={t.common.back}
-            onPress={() => router.back()}
-          />
-          <Text style={styles.title} accessibilityRole="header">
+          <View {...titleFocus.chrome}>
+            <RoundBackButton
+              testID="settings-back"
+              label={t.common.back}
+              onPress={() => router.back()}
+            />
+          </View>
+          <Text
+            ref={titleRef}
+            style={styles.title}
+            accessibilityRole="header"
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
             {t.settings.title}
           </Text>
         </View>
@@ -226,7 +259,9 @@ export default function Settings() {
                 hitSlop={(sizes.minTapTarget - g.rateButton) / 2}
                 style={({ pressed }) => [styles.rate, pressed && { opacity: opacity.settled }]}
               >
-                <Text style={styles.rateLabel}>{t.settings.rate.button}</Text>
+                <Text style={styles.rateLabel} maxFontSizeMultiplier={fontScaleCap.display}>
+                  {t.settings.rate.button}
+                </Text>
               </Pressable>
             }
           />

@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSPhotoLibraryAddUsageDescription": "Escuadra aggiunge l’immagine del tuo risultato a Foto solo quando scegli di salvarla."
+  }
+}

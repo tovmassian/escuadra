@@ -9,7 +9,7 @@ import {
   continueSpoken,
   type HomeContinue as HomeContinueData,
 } from '@/lib/homeView';
-import { iconSize, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
+import { fontScaleCap, iconSize, opacity, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 // Home's Continue (#181): one ctaBg pill with the team's flag or marker,
@@ -32,7 +32,7 @@ export function HomeContinue({
   const styles = StyleSheet.create({
     button: {
       minHeight: sizes.home.continue,
-      borderRadius: radii.pill,
+      borderRadius: sizes.home.continue / 2,
       backgroundColor: colors.ctaBg,
       flexDirection: 'row',
       alignItems: 'center',
@@ -76,7 +76,7 @@ export function HomeContinue({
         )}
       </View>
       <View style={styles.text}>
-        <Text style={styles.title} numberOfLines={2}>
+        <Text style={styles.title} numberOfLines={2} maxFontSizeMultiplier={fontScaleCap.display}>
           {t.home.continueTeam(name)}
         </Text>
         <View style={styles.metaRow}>

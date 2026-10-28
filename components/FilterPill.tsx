@@ -9,9 +9,12 @@ interface FilterPillProps {
   /** Study's players per position, drawn after the label. The team picker
    *  passes none. */
   count?: number;
+  /** What a screen reader says for `label` when it differs: a position's word
+   *  for its code, which it would spell out (#187). */
+  spokenLabel?: string;
 }
 
-export function FilterPill({ label, active, onPress, count }: FilterPillProps) {
+export function FilterPill({ label, active, onPress, count, spokenLabel }: FilterPillProps) {
   const colors = useThemeColors();
   const styles = StyleSheet.create({
     pill: {
@@ -34,6 +37,11 @@ export function FilterPill({ label, active, onPress, count }: FilterPillProps) {
       onPress={onPress}
       accessibilityRole="button"
       accessibilityState={{ selected: active }}
+      accessibilityLabel={
+        spokenLabel === undefined
+          ? undefined
+          : [spokenLabel, count].filter((part) => part !== undefined).join(', ')
+      }
       style={[
         styles.pill,
         active ? styles.pillActive : styles.pillIdle,

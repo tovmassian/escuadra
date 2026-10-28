@@ -15,6 +15,7 @@ import { useRoundClock } from '@/hooks/useRoundClock';
 import { useScreenReader } from '@/hooks/useScreenReader';
 import { useShot } from '@/hooks/useShot';
 import { useTips } from '@/hooks/useTips';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { feedback } from '@/lib/haptics';
@@ -65,11 +66,13 @@ import {
   StyleSheet,
   Text,
   View,
+  type TextInstance,
   type ViewInstance,
   type ScrollViewInstance,
 } from 'react-native';
-import Animated, { FadeOut, Keyframe, useReducedMotion } from 'react-native-reanimated';
+import Animated, { FadeOut, Keyframe } from 'react-native-reanimated';
 import { useSafeAreaFrame, useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 /** Usage statistics (#221): a round still in progress, about to be thrown away. */
 function trackLeftRound(): void {
@@ -104,7 +107,7 @@ export default function Question() {
   const t = useT();
   const language = useLanguage();
   const themeName = useThemeName();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const screenReader = useScreenReader();
   const {
     squadId,
@@ -241,6 +244,13 @@ export default function Question() {
   const heroRef = useRef<ViewInstance>(null);
   const slotsRef = useRef<ViewInstance>(null);
   const answersRef = useRef<ViewInstance>(null);
+  // The prompt is the round's title: a screen reader starts on the question.
+  const promptRef = useRef<TextInstance>(null);
+  // VoiceOver moves to the first element it can see once the screen has opened.
+  // So on iOS everything but the prompt (above it and below it) is out of its
+  // order while the screen settles, and the round starts on the question
+  // (#187). A later question or part doesn't, yet: #226.
+  const titleFocus = useTitleFocus(promptRef, !tips.open);
   // At large text sizes the scroll overflows and opens at the top, with the
   // answers below the fold: the layer scrolls a tip's target into view.
   const scrollRef = useRef<ScrollViewInstance>(null);
@@ -347,6 +357,7 @@ export default function Question() {
   const slots = slotStates(question, result, session.currentPartIndex, squad.kind, level);
   const answeredIndex = result.parts[session.currentPartIndex]?.pickedIndex ?? null;
   const counter = partCounter(question, session.currentPartIndex);
+  const prompt = promptText(part, question.memberNo, verdict, t);
   const promptColor =
     verdict === true ? colors.success : verdict === false ? colors.error : colors.onStage;
 
@@ -384,19 +395,27 @@ export default function Question() {
         pointerEvents="none"
       />
       <View style={styles.column} {...tips.contentA11y}>
-        <RoundProgress
-          outcomes={progressOutcomes(session.results, session.currentIndex)}
-          currentIndex={session.currentIndex}
-        />
-        <View style={styles.topBar}>
+        <View {...titleFocus.chrome}>
+          <RoundProgress
+            outcomes={progressOutcomes(session.results, session.currentIndex)}
+            currentIndex={session.currentIndex}
+          />
+        </View>
+        <View style={styles.topBar} {...titleFocus.chrome}>
           <GlassCloseButton label={t.round.leave} onPress={exit} />
           <View style={styles.team}>
-            <Text style={styles.teamName} numberOfLines={1}>
+            <Text
+              style={styles.teamName}
+              numberOfLines={1}
+              maxFontSizeMultiplier={fontScaleCap.display}
+            >
               {squadDisplayName(squad, language)}
             </Text>
             <View style={styles.teamSub}>
               <TeamMarker marker={squad.marker} variant="banner" />
-              <Text style={styles.level}>{t.common.level(level)}</Text>
+              <Text style={styles.level} maxFontSizeMultiplier={fontScaleCap.display}>
+                {t.common.level(level)}
+              </Text>
             </View>
           </View>
           {currentStreak >= 2 ? <StreakChip count={currentStreak} /> : null}
@@ -405,7 +424,7 @@ export default function Question() {
             accessible
             accessibilityLabel={t.common.scoreSpoken(score.correct, score.attempted)}
           >
-            <Text style={styles.score}>
+            <Text style={styles.score} maxFontSizeMultiplier={fontScaleCap.display}>
               {score.correct}/{score.attempted}
             </Text>
           </View>
@@ -428,7 +447,7 @@ export default function Question() {
             style={styles.backingRise}
             pointerEvents="none"
           />
-          <View style={styles.heroFrame}>
+          <View style={styles.heroFrame} {...titleFocus.chrome}>
             <LinearGradient
               colors={[backingTop, colors.background]}
               style={styles.backingNumber}
@@ -469,6 +488,7 @@ export default function Question() {
           <View style={styles.ground}>
             <View style={styles.promptRow}>
               <Text
+                ref={promptRef}
                 style={[
                   compact ? typography.promptCompact : typography.prompt,
                   { color: promptColor },
@@ -476,13 +496,21 @@ export default function Question() {
                 maxFontSizeMultiplier={fontScaleCap.display}
                 accessibilityRole="header"
                 accessibilityLiveRegion="polite"
+                // In its own case: Android hands TalkBack the capitals the style
+                // draws, and a voice spells "WHO" out (#187).
+                accessibilityLabel={prompt}
               >
-                {promptText(part, question.memberNo, verdict, t)}
+                {prompt}
               </Text>
               {counter ? <Text style={styles.counter}>{counter}</Text> : null}
             </View>
 
-            <View ref={answersRef} collapsable={false} style={styles.answers}>
+            <View
+              ref={answersRef}
+              collapsable={false}
+              style={styles.answers}
+              {...titleFocus.chrome}
+            >
               <AnswerGrid
                 part={part}
                 gridKey={`${session.currentIndex}:${session.currentPartIndex}`}
@@ -507,13 +535,15 @@ export default function Question() {
               />
             </View>
 
-            <QuestionFooter
-              mode={footerMode(verdict, screenReader)}
-              compact={compact}
-              last={session.currentIndex === session.questions.length - 1}
-              onNext={next}
-              credit={photo}
-            />
+            <View {...titleFocus.chrome}>
+              <QuestionFooter
+                mode={footerMode(verdict, screenReader)}
+                compact={compact}
+                last={session.currentIndex === session.questions.length - 1}
+                onNext={next}
+                credit={photo}
+              />
+            </View>
           </View>
         </ScrollView>
       </View>
@@ -521,19 +551,21 @@ export default function Question() {
       <ShotOverlay ref={overlayRef} question={session.currentIndex} live={live} clock={clock} />
       {tips.open && (
         <TipsLayer
+          // Each ring takes the corners of what it rings, the chips' and the tiles'
+          // `radii.lg`, so it clears them by the same gap all round (#187).
           tips={
             level === 1
               ? [
                   {
                     target: heroRef,
-                    radius: radii.xl,
+                    radius: radii.lg,
                     heading: t.tips.question.clues.heading,
                     body:
                       squad.kind === 'club'
                         ? t.tips.question.clues.bodyClub
                         : t.tips.question.clues.body,
                   },
-                  { target: answersRef, radius: radii.xl, ...t.tips.question.answer },
+                  { target: answersRef, radius: radii.lg, ...t.tips.question.answer },
                 ]
               : [
                   {

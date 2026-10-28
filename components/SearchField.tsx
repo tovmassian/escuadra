@@ -110,6 +110,8 @@ export function SearchField({ value, onChange, onClear }: SearchFieldProps) {
     },
     input: { flex: 1, padding: 0, ...typography.searchInput, color: colors.textPrimary },
   });
+  // The × is drawn small and reaches the 44 pt tap target through hitSlop (#187).
+  const clearSlop = (sizes.minTapTarget - iconSize.clearGlyph) / 2;
 
   return (
     <View style={styles.root}>
@@ -130,7 +132,7 @@ export function SearchField({ value, onChange, onClear }: SearchFieldProps) {
           onPress={onClear}
           accessibilityRole="button"
           accessibilityLabel={t.picker.clearSearch}
-          hitSlop={spacing.xs}
+          hitSlop={clearSlop}
         >
           <ClearGlyph />
         </Pressable>

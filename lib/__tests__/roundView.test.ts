@@ -519,7 +519,10 @@ describe('streakMilestone', () => {
 
 describe('slotSpoken', () => {
   it('names a settled slot with its value', () => {
-    expect(slotSpoken({ key: 'POS', state: 'given', value: 'FW' }, 'en', en)).toBe('Position: FW');
+    // A position by its word, not its code, which a screen reader spells (#187).
+    expect(slotSpoken({ key: 'POS', state: 'given', value: 'FW' }, 'en', en)).toBe(
+      'Position: Forward',
+    );
     expect(slotSpoken({ key: 'NAME', state: 'correct', value: 'Pedri' }, 'en', en)).toBe(
       'Name: Pedri, right',
     );
@@ -618,9 +621,10 @@ describe('slotValueText', () => {
     expect(slotValueText({ key: 'NAT', state: 'active', value: null }, 'en', en)).toBeNull();
   });
 
-  it('speaks the translated value', () => {
-    expect(slotSpoken({ key: 'POS', state: 'given', value: 'FW' }, 'en', spanishCodes)).toBe(
-      'Position: DEL',
+  it("speaks a position as the catalog's word, not its code (#187)", () => {
+    const spanish: Messages = { ...spanishCodes, positions: { ...en.positions, FW: 'Delantero' } };
+    expect(slotSpoken({ key: 'POS', state: 'given', value: 'FW' }, 'en', spanish)).toBe(
+      'Position: Delantero',
     );
   });
 });

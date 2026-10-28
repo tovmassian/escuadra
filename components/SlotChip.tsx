@@ -3,7 +3,6 @@ import { StyleSheet, Text } from 'react-native';
 import Animated, {
   FadeIn,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withSequence,
   withTiming,
@@ -15,6 +14,7 @@ import { slotSpoken, slotValueText, type Slot, type SlotState } from '@/lib/roun
 import {
   borderWidths,
   durations,
+  fontScaleCap,
   radii,
   sizes,
   spacing,
@@ -24,6 +24,7 @@ import {
   type Palette,
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 function look(colors: Palette, state: SlotState): { line: string; text: string; dashed: boolean } {
   switch (state) {
@@ -54,7 +55,7 @@ export function SlotChip({ slot }: { slot: Slot }) {
   const colors = useThemeColors();
   const t = useT();
   const language = useLanguage();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const scale = useSharedValue(1);
   const previous = useRef(slot.state);
 
@@ -111,6 +112,7 @@ export function SlotChip({ slot }: { slot: Slot }) {
         }
         style={styles.value}
         numberOfLines={1}
+        maxFontSizeMultiplier={fontScaleCap.display}
       >
         {shown}
       </Animated.Text>

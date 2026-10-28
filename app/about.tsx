@@ -8,11 +8,13 @@ import {
   Text,
   View,
   type ScrollViewInstance,
+  type TextInstance,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { translationNotice } from '@/i18n/translationNotice';
 import { useLanguage, useT } from '@/i18n/useT';
-import { radii, spacing, typography } from '@/theme/tokens';
+import { fontScaleCap, radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 export default function About() {
@@ -24,9 +26,15 @@ export default function About() {
   const { section: sectionParam } = useLocalSearchParams<{ section?: string }>();
   const scrollRef = useRef<ScrollViewInstance>(null);
   const scrolledTo = useRef(false);
+  // Opened at Privacy, a screen reader starts there, where the screen is scrolled
+  // to: below the title and the intro, so it is moved there on iOS too.
+  const titleRef = useRef<TextInstance>(null);
+  const privacyRef = useRef<TextInstance>(null);
+  const atPrivacy = sectionParam === 'privacy';
+  const titleFocus = useTitleFocus(atPrivacy ? privacyRef : titleRef, true, atPrivacy);
   // Settings' Privacy row opens About at its Privacy card (#175).
   const onPrivacyLayout = (e: LayoutChangeEvent) => {
-    if (sectionParam !== 'privacy' || scrolledTo.current) return;
+    if (!atPrivacy || scrolledTo.current) return;
     scrolledTo.current = true;
     scrollRef.current?.scrollTo({ y: e.nativeEvent.layout.y, animated: false });
   };
@@ -74,10 +82,22 @@ export default function About() {
         style={styles.scroll}
         contentContainerStyle={{ paddingBottom: insets.bottom + spacing.xl }}
       >
-        <Pressable onPress={() => router.back()} accessibilityRole="button" hitSlop={12}>
+        <Pressable
+          onPress={() => router.back()}
+          accessibilityRole="button"
+          hitSlop={12}
+          {...titleFocus.chrome}
+        >
           <Text style={styles.back}>‹ {t.common.back}</Text>
         </Pressable>
-        <Text style={styles.title}>{t.about.title}</Text>
+        <Text
+          ref={titleRef}
+          style={styles.title}
+          accessibilityRole="header"
+          maxFontSizeMultiplier={fontScaleCap.display}
+        >
+          {t.about.title}
+        </Text>
 
         <View style={styles.section}>
           {t.about.intro.map((p, i, all) => (
@@ -88,7 +108,9 @@ export default function About() {
         </View>
 
         <View style={styles.section}>
-          <Text style={styles.sectionHeading}>{t.about.credits.heading}</Text>
+          <Text style={styles.sectionHeading} accessibilityRole="header">
+            {t.about.credits.heading}
+          </Text>
           {t.about.credits.sections.map((section) => (
             <Fragment key={section.heading}>
               <Text style={styles.subHeading}>{section.heading}</Text>
@@ -111,7 +133,9 @@ export default function About() {
 
         {/* Must stay a direct child of the ScrollView's content: onLayout's y is the scroll offset. */}
         <View style={styles.section} onLayout={onPrivacyLayout}>
-          <Text style={styles.sectionHeading}>{t.about.privacy.heading}</Text>
+          <Text ref={privacyRef} style={styles.sectionHeading} accessibilityRole="header">
+            {t.about.privacy.heading}
+          </Text>
 
           <Text style={styles.paragraphEmphasis}>{t.about.privacy.lead}</Text>
 

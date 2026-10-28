@@ -1,6 +1,6 @@
 import type { SquadManifestEntry } from '@/types/squad';
 import { describe, expect, it } from 'vitest';
-import { starredOfKind, starredTeams, toggleStarred } from '@/lib/starred';
+import { openingTab, starredOfKind, starredTeams, toggleStarred } from '@/lib/starred';
 
 function entry(id: string, kind: 'club' | 'nation'): SquadManifestEntry {
   return { id, kind, name: id } as SquadManifestEntry;
@@ -52,5 +52,22 @@ describe('starredTeams', () => {
       'armenia',
       'arsenal',
     ]);
+  });
+});
+
+describe('openingTab', () => {
+  it('opens on Clubs with nothing starred', () => {
+    expect(openingTab([], squads)).toBe('club');
+  });
+
+  it('opens on the tab of the newest starred team, so Your squads shows (#187)', () => {
+    expect(openingTab(['spain'], squads)).toBe('nation');
+    expect(openingTab(['armenia', 'arsenal'], squads)).toBe('nation');
+    expect(openingTab(['arsenal', 'spain'], squads)).toBe('club');
+  });
+
+  it('passes over a starred id that is no longer in the data', () => {
+    expect(openingTab(['gone', 'spain'], squads)).toBe('nation');
+    expect(openingTab(['gone'], squads)).toBe('club');
   });
 });

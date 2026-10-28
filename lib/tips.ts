@@ -159,16 +159,17 @@ export function placeTip(input: PlaceInput, g: TipGeometry): TipPlacement {
  *  0 when it is already on screen.
  *
  *  `bottomClear` is how far a pinned element covers the screen's bottom, above
- *  the inset (Difficulty's footer): the fold moves up by it, and a target inside
- *  that strip is the pinned element's own, which scrolling cannot move: 0. */
+ *  the inset (Difficulty's footer): the fold moves up by it. A `pinned` target is
+ *  on that element, which scrolling cannot move: 0. Where a target sits says
+ *  nothing: at the largest text, Play is in the list, behind the footer (#187). */
 export function scrollDelta(
-  input: Omit<PlaceInput, 'tipHeight'> & { bottomClear?: number },
+  input: Omit<PlaceInput, 'tipHeight'> & { bottomClear?: number; pinned?: boolean },
   g: TipGeometry,
 ): number {
+  if (input.pinned) return 0;
   const { ring } = ringOf(input, g);
   const top = input.insets.top + g.skipClear;
   const covered = input.screen.height - input.insets.bottom - (input.bottomClear ?? 0);
-  if (input.bottomClear && input.target.y >= covered) return 0;
   if (ring.y < top) return ring.y - top;
   return Math.max(0, ring.y + ring.height - (covered - g.gutter));
 }

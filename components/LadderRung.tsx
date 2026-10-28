@@ -68,7 +68,15 @@ export function LadderRung({ row, title, onPress }: LadderRungProps) {
     tail: { ...typography.rungScoreTail, color: escuadra ? colors.successText : colors.textMuted },
     tag: { ...typography.soonChip, color: outdated ? colors.textMuted : colors.successText },
     outdatedTag: { flexDirection: 'row', alignItems: 'center', gap: spacing.xxs },
-    lock: { flexShrink: 1, flexDirection: 'row', alignItems: 'center', gap: spacing.xs - 2 },
+    // At most half the row: the title takes what is left, so at the largest text
+    // the hint wraps rather than crushing it (#187, J4.5).
+    lock: {
+      flexShrink: 1,
+      maxWidth: '50%',
+      flexDirection: 'row',
+      alignItems: 'center',
+      gap: spacing.xs - 2,
+    },
     // Shrinks, so a long translated hint wraps instead of crushing the title.
     hint: { ...typography.soonChip, color: colors.textMuted, flexShrink: 1 },
   });
@@ -89,7 +97,7 @@ export function LadderRung({ row, title, onPress }: LadderRungProps) {
       <Text style={styles.number} maxFontSizeMultiplier={fontScaleCap.display}>
         {row.level}
       </Text>
-      <Text style={styles.title} numberOfLines={2}>
+      <Text style={styles.title} numberOfLines={2} maxFontSizeMultiplier={fontScaleCap.display}>
         {title}
       </Text>
       {best ? (

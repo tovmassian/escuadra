@@ -71,14 +71,22 @@ export function LadderCard({ row, title, description, onPlay, playRef }: LadderC
     description: { ...typography.ladderCardDescription, color: colors.textSecondary },
     play: {
       minHeight: sizes.ladderPill,
-      borderRadius: radii.pill,
+      borderRadius: sizes.ladderPill / 2,
       backgroundColor: colors.ctaBg,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
       gap: spacing.xs + 2,
+      // Room at the ends, and a label that wraps rather than runs past them at
+      // the largest text (#187, J5).
+      paddingHorizontal: spacing.md,
     },
-    playLabel: { ...typography.ladderPlay, color: colors.ctaText },
+    playLabel: {
+      ...typography.ladderPlay,
+      color: colors.ctaText,
+      flexShrink: 1,
+      textAlign: 'center',
+    },
   });
 
   return (
@@ -102,7 +110,11 @@ export function LadderCard({ row, title, description, onPlay, playRef }: LadderC
               {status.text}
             </Text>
           </View>
-          <Text style={styles.title} accessibilityRole="header">
+          <Text
+            style={styles.title}
+            accessibilityRole="header"
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
             {title}
           </Text>
           <Text style={styles.description}>{description}</Text>
@@ -117,7 +129,9 @@ export function LadderCard({ row, title, description, onPlay, playRef }: LadderC
         style={({ pressed }) => [styles.play, pressed && { opacity: opacity.settled }]}
       >
         <PlayGlyph color={colors.ctaText} />
-        <Text style={styles.playLabel}>{playLevelLabel(row.level, t)}</Text>
+        <Text style={styles.playLabel} maxFontSizeMultiplier={fontScaleCap.button}>
+          {playLevelLabel(row.level, t)}
+        </Text>
       </Pressable>
     </View>
   );

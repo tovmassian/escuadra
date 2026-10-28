@@ -4,16 +4,17 @@ import * as SplashScreen from 'expo-splash-screen';
 import * as Crypto from 'expo-crypto';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useState, type ReactNode } from 'react';
-import { AccessibilityInfo, AppState, PixelRatio, useWindowDimensions } from 'react-native';
+import { AccessibilityInfo, PixelRatio, useWindowDimensions } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
-import 'react-native-reanimated';
+import { ReduceMotion, ReducedMotionConfig } from 'react-native-reanimated';
 
 import { introWillShow, LaunchIntro } from '@/components/LaunchIntro';
 import { LaunchRevealProvider, useLaunchRevealState } from '@/components/LaunchReveal';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 import { launchLanguage, useLanguage } from '@/i18n/useT';
 import { screenOrientation } from '@/lib/screenOrientation';
-import { setTelemetryLanguage, startSession, track } from '@/lib/telemetry';
-import { launchProps, nextAppPhase, type AppPhase } from '@/lib/telemetryEvents';
+import { setTelemetryLanguage, startLaunch, track } from '@/lib/telemetry';
+import { launchProps } from '@/lib/telemetryEvents';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
 import { fontAssets } from '@/theme/fonts';
 import { useThemeColors, useThemeName } from '@/theme/useTheme';
@@ -43,46 +44,39 @@ export default function RootLayout() {
   const language = useLanguage();
   useEffect(() => setTelemetryLanguage(language), [language]);
 
+  // Reanimated reads Reduce Motion once, as JavaScript starts, for its own
+  // animations' default (`ReduceMotion.System`). This keeps that default on
+  // the live setting (#227). A development build logs that it is overridden.
+  const reduceMotion = useReduceMotion();
+
   // The install ID can only be created once persisted state is back — before
   // that, a stored ID is indistinguishable from none. `setInstallId` is a
   // no-op when one already exists. Then the cold start's session, and one
-  // launch signal per JS launch, with the settings as they are now that the
+  // launch signal per JS launch (`startLaunch` holds it to one when Android
+  // mounts this layout again), with the settings as they are now that the
   // preferences are back.
   useEffect(() => {
     if (!hydrated) return;
     useProgress.getState().setInstallId(Crypto.randomUUID());
-    startSession(false);
-    const sendLaunch = (reduceMotion: boolean | null) => {
-      const s = useProgress.getState();
-      track(
-        'app.launched',
-        launchProps({
-          languageSource: launchLanguage().languageSource,
-          themePreference: s.themePreference,
-          haptics: s.haptics,
-          reduceMotion,
-          fontScale: PixelRatio.getFontScale(),
-          starredSquads: s.starredSquads,
-          bestScores: s.bestScores,
-        }),
-      );
-    };
-    AccessibilityInfo.isReduceMotionEnabled().then(sendLaunch, () => sendLaunch(null));
-  }, [hydrated]);
-
-  // A return after a while in the background starts a new session (#221,
-  // `SESSION_GAP_MS`); a quick trip to the share menu does not.
-  useEffect(() => {
-    let phase: AppPhase = {
-      backgroundSince: AppState.currentState === 'background' ? Date.now() : null,
-    };
-    const sub = AppState.addEventListener('change', (state) => {
-      const next = nextAppPhase(phase, state, Date.now());
-      phase = next.phase;
-      if (next.startsSession) startSession(true);
+    startLaunch(() => {
+      const sendLaunch = (reduceMotion: boolean | null) => {
+        const s = useProgress.getState();
+        track(
+          'app.launched',
+          launchProps({
+            languageSource: launchLanguage().languageSource,
+            themePreference: s.themePreference,
+            haptics: s.haptics,
+            reduceMotion,
+            fontScale: PixelRatio.getFontScale(),
+            starredSquads: s.starredSquads,
+            bestScores: s.bestScores,
+          }),
+        );
+      };
+      AccessibilityInfo.isReduceMotionEnabled().then(sendLaunch, () => sendLaunch(null));
     });
-    return () => sub.remove();
-  }, []);
+  }, [hydrated]);
 
   if (!ready) return null;
 
@@ -104,6 +98,7 @@ export default function RootLayout() {
 
   return (
     <SafeAreaProvider>
+      <ReducedMotionConfig mode={reduceMotion ? ReduceMotion.Always : ReduceMotion.Never} />
       <ThemeProvider value={navTheme}>
         <Launch>
           <Stack

@@ -195,11 +195,22 @@ describe('scrollDelta', () => {
         scrollDelta({ target, radius: 28, screen: SCREEN, insets: INSETS, ...FOOTER }, G),
       ).toBe(0);
     });
-    it('does not try to scroll a target inside the footer, which the list cannot move', () => {
-      // The footer's top is 844 - 34 - 66 = 744; Study sits in it.
-      const target = { x: 24, y: 752, width: 280, height: 56 };
+    it('scrolls a target in the list that sits behind the footer, as the largest text leaves Play', () => {
+      // The footer's top is 844 - 34 - 66 = 744; ring bottom 760 + 56 + 6 = 822; visible
+      // bottom 720 (#187, J5).
+      const target = { x: 20, y: 760, width: 350, height: 56 };
       expect(
         scrollDelta({ target, radius: 28, screen: SCREEN, insets: INSETS, ...FOOTER }, G),
+      ).toBe(102);
+    });
+    it('does not try to scroll a pinned target, which the list cannot move', () => {
+      // Study, in the footer.
+      const target = { x: 24, y: 752, width: 280, height: 56 };
+      expect(
+        scrollDelta(
+          { target, radius: 28, screen: SCREEN, insets: INSETS, ...FOOTER, pinned: true },
+          G,
+        ),
       ).toBe(0);
     });
     it('changes nothing without one', () => {

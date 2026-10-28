@@ -8,6 +8,7 @@ import {
   StyleSheet,
   Text,
   View,
+  type TextInstance,
   type ViewInstance,
 } from 'react-native';
 import Animated, { FadeIn } from 'react-native-reanimated';
@@ -19,12 +20,13 @@ import { PlayerCard } from '@/components/PlayerCard';
 import { StudyListRow } from '@/components/StudyListRow';
 import { TipsLayer } from '@/components/TipsLayer';
 import { useTips } from '@/hooks/useTips';
+import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
 import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
 import { feedback } from '@/lib/haptics';
 import { photoFor } from '@/lib/photos';
-import { positionCode } from '@/lib/roundView';
+import { positionCode, positionLabel } from '@/lib/roundView';
 import { getRoster, getSquad } from '@/lib/squads';
 import { bannerBands } from '@/lib/stageView';
 import {
@@ -94,6 +96,8 @@ export default function Study() {
   const tips = useTips('study');
   const hideRef = useRef<ViewInstance>(null);
   const filtersRef = useRef<ViewInstance>(null);
+  const titleRef = useRef<TextInstance>(null);
+  const titleFocus = useTitleFocus(titleRef, !tips.open);
 
   const squad = getSquad(squadId);
   const roster = useMemo(() => getRoster(squadId), [squadId]);
@@ -248,7 +252,7 @@ export default function Study() {
 
   return (
     <View style={styles.root}>
-      <View style={styles.topBar} {...tips.contentA11y}>
+      <View style={styles.topBar} {...tips.contentA11y} {...titleFocus.chrome}>
         <Pressable
           testID="study-back"
           onPress={() => router.back()}
@@ -304,19 +308,26 @@ export default function Study() {
               <View key={i} style={{ flex: band.weight, backgroundColor: band.color }} />
             ))}
           </View>
-          <Text style={styles.eyebrow} numberOfLines={1}>
+          <Text
+            style={styles.eyebrow}
+            numberOfLines={1}
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
             {[squadDisplayName(squad, language), squad.season].join(' · ')}
           </Text>
         </View>
         <View style={styles.titleRow}>
           <Text
+            ref={titleRef}
             style={styles.title}
             maxFontSizeMultiplier={fontScaleCap.display}
             accessibilityRole="header"
           >
             {t.study.title}
           </Text>
-          <Text style={styles.count}>{studyCount(rows.length, roster.length, filter, t)}</Text>
+          <Text style={styles.count} maxFontSizeMultiplier={fontScaleCap.display}>
+            {studyCount(rows.length, roster.length, filter, t)}
+          </Text>
         </View>
       </View>
 
@@ -332,6 +343,7 @@ export default function Study() {
             <FilterPill
               key={f}
               label={f === 'ALL' ? t.study.all : positionCode(f, t)}
+              spokenLabel={f === 'ALL' ? undefined : positionLabel(f, t)}
               count={counts[f]}
               active={filter === f}
               onPress={() => {

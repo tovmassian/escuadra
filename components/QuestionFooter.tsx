@@ -5,7 +5,6 @@ import Animated, {
   FadeIn,
   ReduceMotion,
   useAnimatedStyle,
-  useReducedMotion,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
@@ -16,8 +15,8 @@ import { nextButtonText, type FooterMode } from '@/lib/roundView';
 import {
   borderWidths,
   durations,
+  fontScaleCap,
   opacity,
-  radii,
   sizes,
   spacing,
   spotlightCues,
@@ -26,6 +25,7 @@ import {
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { PhotoCredit } from '@/types/squad';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 interface QuestionFooterProps {
   mode: FooterMode;
@@ -48,7 +48,7 @@ interface QuestionFooterProps {
 export function QuestionFooter({ mode, compact, last, onNext, credit }: QuestionFooterProps) {
   const colors = useThemeColors();
   const t = useT();
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   // The least the button is tall; it grows with the text at large sizes.
   const minHeight = compact ? sizes.cta.compact : sizes.cta.normal;
   const styles = StyleSheet.create({
@@ -64,7 +64,7 @@ export function QuestionFooter({ mode, compact, last, onNext, credit }: Question
       minHeight,
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radii.pill,
+      borderRadius: minHeight / 2,
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: colors.ctaBg,
@@ -93,7 +93,9 @@ export function QuestionFooter({ mode, compact, last, onNext, credit }: Question
             accessibilityRole="button"
             style={({ pressed }) => [styles.cta, pressed && { opacity: opacity.settled }]}
           >
-            <Text style={styles.ctaText}>{nextButtonText(mode, last, t).label}</Text>
+            <Text style={styles.ctaText} maxFontSizeMultiplier={fontScaleCap.button}>
+              {nextButtonText(mode, last, t).label}
+            </Text>
           </Pressable>
         </Animated.View>
       ) : null}
@@ -134,7 +136,7 @@ function NextBar({
       minHeight,
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radii.pill,
+      borderRadius: minHeight / 2,
       borderWidth: borderWidths.hairline,
       borderColor: colors.nextLine,
       backgroundColor: colors.nextBg,
@@ -156,7 +158,9 @@ function NextBar({
       style={styles.bar}
     >
       <Animated.View style={[styles.fill, fill]} />
-      <Text style={styles.label}>{text.label}</Text>
+      <Text style={styles.label} maxFontSizeMultiplier={fontScaleCap.button}>
+        {text.label}
+      </Text>
     </Pressable>
   );
 }

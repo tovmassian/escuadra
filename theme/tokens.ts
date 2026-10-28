@@ -875,16 +875,24 @@ export const typography = {
 } as const satisfies Record<string, { fontFamily: FontFamily; [property: string]: unknown }>;
 
 // How far the OS text-size setting may scale a style (`maxFontSizeMultiplier`).
-// The question screen's display type (the shirt number and the prompt) is
-// already large, and at the largest accessibility sizes it would push the
-// answers off the screen. It keeps growing with the setting, up to this cap;
-// everything else on the screen scales freely and the screen scrolls.
+// iOS's largest accessibility size scales text 3.6×, which only a column of
+// text that scrolls can hold (#187, J4). So `display` caps:
+// - display type, the Archivo titles and numbers from 20 pt up, already large;
+// - text in a box that does not grow with it: a pinned bar (the round's top
+//   bar, Difficulty's footer, Study's header), a fixed card, tile or
+//   fixed-height pill, a How to play tip, which must fit beside its ring on
+//   one screen, and any text with `numberOfLines`, which would otherwise be
+//   cut short (an answer's name, a photo credit).
+// A button's label, in the display face's capitals, grows to `button`, twice
+// its size (WCAG's 200%): any larger, a word of eight capitals no longer fits
+// across the screen and breaks mid-word, in every language.
+// Everything else scales freely, and its screen scrolls.
 // The picker's letter rail (`LetterRail`) sets each letter in a fixed 14 pt
 // slot (`sizes.rail.letter`), which its touch mapping relies on, so its 10 pt
 // letters may grow only a little before they outgrow the slot. The launch
 // intro's text (`LaunchIntro`) sits under a fixed 200 dp mark on one screen
 // that never scrolls, so it takes the display cap too.
-export const fontScaleCap = { display: 1.2, rail: 1.1 } as const;
+export const fontScaleCap = { display: 1.2, button: 2, rail: 1.1 } as const;
 
 // 1.5px is the option-card default; 2px marks the emphasised "correct,
 // unpicked" card in the incorrect-reveal state.
@@ -949,6 +957,13 @@ export const durations = {
 // the sheet's height, or faster than `flingVelocity` (pt per ms), and the sheet
 // closes; otherwise it settles back.
 export const sheetDrag = { slop: 10, closeFraction: 0.25, flingVelocity: 0.8 } as const;
+
+// How long a screen takes to settle for a screen reader (ms; waits, not
+// animations; #187). iOS moves VoiceOver to a screen's first element once the
+// stack's transition ends, so the controls above its title stay out of the order
+// until `settle` after that, or `max` after the screen starts to appear, however
+// the transition ends.
+export const screenReaderSettle = { settle: 300, max: 1000 } as const;
 
 // Distances (pt) and scales of the question screen's motion (spec §6).
 export const spotlightMotion = {
@@ -1385,6 +1400,9 @@ export const radii = {
   xl: 24,
   sheet: 28, // a bottom sheet's top corners
   bubbleTail: 6, // the text preview bubble's tail corner
+  // A pill of a fixed height. One that grows with the text size takes half its
+  // `minHeight` instead, so it turns into a rounded rectangle rather than an oval
+  // that clips its label at the corners (#187, J4).
   pill: 999,
 } as const;
 

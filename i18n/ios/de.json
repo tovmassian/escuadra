@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSPhotoLibraryAddUsageDescription": "Escuadra fügt das Bild deiner Runde nur dann zu Fotos hinzu, wenn du es sichern möchtest."
+  }
+}

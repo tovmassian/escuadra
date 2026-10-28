@@ -1,0 +1,5 @@
+{
+  "ios": {
+    "NSPhotoLibraryAddUsageDescription": "Escuadra ajoute l’image de ta partie à Photos uniquement quand tu choisis de l’enregistrer."
+  }
+}

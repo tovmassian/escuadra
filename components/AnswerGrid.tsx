@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react';
 import { StyleSheet, View } from 'react-native';
-import Animated, { FadeOut, useReducedMotion } from 'react-native-reanimated';
+import Animated, { FadeOut } from 'react-native-reanimated';
 import { AnswerTile } from './AnswerTile';
 import { riseIn } from './riseIn';
 import type { ShotTap } from '@/hooks/useShot';
@@ -10,6 +10,7 @@ import { flagFor } from '@/lib/flags';
 import type { QuestionPart } from '@/lib/questionEngine';
 import { optionText, positionLabel, tileVerdict, type AnswerLayout } from '@/lib/roundView';
 import { durations, spacing, spotlightMotion } from '@/theme/tokens';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 interface AnswerGridProps {
   part: QuestionPart;
@@ -44,7 +45,7 @@ export function AnswerGrid({
   stagger,
   onAnswer,
 }: AnswerGridProps) {
-  const reduced = useReducedMotion();
+  const reduced = useReduceMotion();
   const t = useT();
   const language = useLanguage();
   // The grid whose tiles may be pressed. The next part's tiles sit in the same

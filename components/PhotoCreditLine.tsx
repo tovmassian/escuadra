@@ -1,6 +1,6 @@
 import { PhotoCreditText } from '@/components/PhotoCreditText';
 import { useT } from '@/i18n/useT';
-import { spacing, typography } from '@/theme/tokens';
+import { fontScaleCap, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { PhotoCredit } from '@/types/squad';
 import { StyleSheet, Text } from 'react-native';
@@ -40,7 +40,7 @@ export function PhotoCreditLine({ credit }: { credit: PhotoCredit | null }) {
   }
 
   return (
-    <Text style={styles.line} numberOfLines={2}>
+    <Text style={styles.line} numberOfLines={2} maxFontSizeMultiplier={fontScaleCap.display}>
       {t.credits.photo} <PhotoCreditText credit={credit} linkStyle={styles.link} />
     </Text>
   );

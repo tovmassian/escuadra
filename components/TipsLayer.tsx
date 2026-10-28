@@ -17,6 +17,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { G, Path, Rect } from 'react-native-svg';
 import { measureInWindow } from './LaunchReveal';
 import { useReduceMotion } from '@/hooks/useReduceMotion';
+import { useScreenAppearance } from '@/hooks/useScreenAppearance';
 import { useT } from '@/i18n/useT';
 import { withinTime } from '@/lib/launchIntro';
 import {
@@ -45,6 +46,9 @@ export interface TipSpec {
   radius: number;
   heading: string;
   body: string;
+  /** The target is on a pinned bar (Difficulty's footer), which scrolling cannot
+   *  move. */
+  pinned?: boolean;
 }
 
 interface TipsLayerProps {
@@ -155,6 +159,10 @@ export function TipsLayer({
     let started = Date.now();
     let previous: Box | null = null;
     let scrolled = false;
+    // Where the target was as the screen scrolled. iOS applies the scroll a frame
+    // or two later, and two measures of the old place agree as well as two of the
+    // new (#187, J5): until the target leaves it, it has not moved.
+    let before: Box | null = null;
     let stopMeasure: (() => void) | null = null;
 
     const poll = () => {
@@ -180,7 +188,7 @@ export function TipsLayer({
           width: target.width,
           height: target.height,
         };
-        if (!settled(previous, box) && !late) {
+        if ((!settled(previous, box) || settled(before, box)) && !late) {
           previous = box;
           frame = requestAnimationFrame(poll);
           return;
@@ -189,13 +197,21 @@ export function TipsLayer({
         const { scrollBy: scroll, insets: safe, bottomClear: clear } = latest.current;
         if (scroll && !scrolled) {
           const delta = scrollDelta(
-            { target: box, radius: spec.radius, screen, insets: safe, bottomClear: clear },
+            {
+              target: box,
+              radius: spec.radius,
+              screen,
+              insets: safe,
+              bottomClear: clear,
+              pinned: spec.pinned,
+            },
             tips,
           );
           if (delta !== 0) {
             // Once per step, so a scroll that cannot go further never loops;
             // the screen moved, so it must settle again, with a fresh cap.
             scrolled = true;
+            before = box;
             scroll(delta);
             previous = null;
             started = Date.now();
@@ -244,19 +260,38 @@ export function TipsLayer({
   const placed = placement !== null;
 
   // The first placed tip tells the screen its tips have shown (`useTips` marks
-  // it seen then, not before). Each placed step moves the screen reader to its
-  // kicker, which speaks the dialog's name; not on web, where
-  // react-native-web has no `sendAccessibilityEvent`.
+  // it seen then, not before).
   const announced = useRef(false);
   useEffect(() => {
-    if (!placed) return;
-    if (!announced.current) {
-      announced.current = true;
-      latest.current.onShown();
-    }
-    const kicker = kickerRef.current;
-    if (kicker && Platform.OS !== 'web') AccessibilityInfo.sendAccessibilityEvent(kicker, 'focus');
-  }, [placed, step]);
+    if (!placed || announced.current) return;
+    announced.current = true;
+    latest.current.onShown();
+  }, [placed]);
+
+  // Each placed step moves the screen reader to its kicker, which speaks the
+  // dialog's name: once the tip has faded in, since neither screen reader will
+  // focus what is still see-through, and on iOS once the screen has settled,
+  // since VoiceOver moves to the screen's first element itself before that
+  // (#187). Until the first move, Skip tips stays out of the order, so a
+  // screen reader never starts there. Not on web, where react-native-web has no
+  // `sendAccessibilityEvent`.
+  const { settling } = useScreenAppearance();
+  const waiting = Platform.OS === 'ios' && settling;
+  const [skipReachable, setSkipReachable] = useState(false);
+  useEffect(() => {
+    if (!placed || waiting) return;
+    const timer = setTimeout(
+      () => {
+        const kicker = kickerRef.current;
+        if (kicker && Platform.OS !== 'web') {
+          AccessibilityInfo.sendAccessibilityEvent(kicker, 'focus');
+        }
+        setSkipReachable(true);
+      },
+      reduceMotion ? 0 : durations.tipFade,
+    );
+    return () => clearTimeout(timer);
+  }, [placed, step, waiting, reduceMotion]);
 
   const advance = () => {
     if (!placed) return;
@@ -279,8 +314,12 @@ export function TipsLayer({
       right: tips.gutter,
       top: placement?.tipTop ?? 0,
     },
-    tip: {
-      gap: tips.stack,
+    tip: { gap: tips.stack },
+    // Its own view, under the tip's text: iOS draws a view's box shadow over that
+    // view's children wherever they reach into its rounded corners (#187).
+    backing: {
+      ...StyleSheet.absoluteFill,
+      pointerEvents: 'none',
       borderRadius: radii.lg,
       backgroundColor: colors.tipBacking,
       boxShadow: [
@@ -341,7 +380,12 @@ export function TipsLayer({
     <>
       {/* Speaks the dialog's name, first, since the dialog itself is not one
           element on native; focus lands here on each step. */}
-      <Text ref={kickerRef} style={styles.kicker} accessibilityLabel={spokenText}>
+      <Text
+        ref={kickerRef}
+        style={styles.kicker}
+        accessibilityLabel={spokenText}
+        maxFontSizeMultiplier={fontScaleCap.display}
+      >
         {kickerText}
       </Text>
       <Text
@@ -351,7 +395,9 @@ export function TipsLayer({
       >
         {spec.heading}
       </Text>
-      <Text style={styles.body}>{spec.body}</Text>
+      <Text style={styles.body} maxFontSizeMultiplier={fontScaleCap.display}>
+        {spec.body}
+      </Text>
       <View style={styles.row}>
         {n > 1 ? (
           <View
@@ -370,7 +416,9 @@ export function TipsLayer({
           onPress={advance}
           style={({ pressed }) => [styles.next, pressed && { opacity: opacity.settled }]}
         >
-          <Text style={styles.nextLabel}>{last ? t.tips.gotIt : t.tips.next}</Text>
+          <Text style={styles.nextLabel} maxFontSizeMultiplier={fontScaleCap.display}>
+            {last ? t.tips.gotIt : t.tips.next}
+          </Text>
         </Pressable>
       </View>
     </>
@@ -429,8 +477,8 @@ export function TipsLayer({
       <View
         style={styles.tipFrame}
         pointerEvents={placed ? 'box-none' : 'none'}
-        accessibilityElementsHidden={!placed}
-        importantForAccessibility={placed ? 'auto' : 'no-hide-descendants'}
+        accessibilityElementsHidden={!placed || waiting}
+        importantForAccessibility={placed && !waiting ? 'auto' : 'no-hide-descendants'}
       >
         <Animated.View
           key={placed ? step : -1 - step}
@@ -443,6 +491,11 @@ export function TipsLayer({
           onStartShouldSetResponder={() => placed}
           onResponderRelease={advance}
         >
+          <View
+            style={styles.backing}
+            accessibilityElementsHidden
+            importantForAccessibility="no-hide-descendants"
+          />
           {content}
         </Animated.View>
       </View>
@@ -484,11 +537,15 @@ export function TipsLayer({
         <Pressable
           testID="tips-skip"
           accessibilityRole="button"
+          accessibilityElementsHidden={!skipReachable}
+          importantForAccessibility={skipReachable ? 'auto' : 'no-hide-descendants'}
           onPress={onSkip}
           hitSlop={skipSlop}
           style={({ pressed }) => [styles.skip, pressed && { opacity: opacity.settled }]}
         >
-          <Text style={styles.skipLabel}>{t.tips.skip}</Text>
+          <Text style={styles.skipLabel} maxFontSizeMultiplier={fontScaleCap.display}>
+            {t.tips.skip}
+          </Text>
         </Pressable>
       ) : null}
     </View>
