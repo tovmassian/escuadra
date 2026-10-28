@@ -295,6 +295,8 @@ export const fr: Messages = {
       'incorrect-other': '',
     },
     questionOf: (n: number, total: number) => `Question ${n} sur ${total}`,
+    // "Étape", not "Partie": a partie is the whole round.
+    partOf: (n: number, total: number) => `Étape ${n} sur ${total}`,
     streak: (count: number) => `Série : ${count} d’affilée`,
   },
   study: {

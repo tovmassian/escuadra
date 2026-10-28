@@ -283,6 +283,7 @@ export const es: Messages = {
       'incorrect-other': '',
     },
     questionOf: (n: number, total: number) => `Pregunta ${n} de ${total}`,
+    partOf: (n: number, total: number) => `Parte ${n} de ${total}`,
     streak: (count: number) =>
       count === 1 ? `Racha: ${count} acierto` : `Racha: ${count} aciertos seguidos`,
   },

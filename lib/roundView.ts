@@ -200,13 +200,26 @@ export function promptText(
   }
 }
 
-/** "2/3" beside the prompt on a multi-part question; null on level 1.
+export interface PartCounter {
+  /** What the prompt row shows: "2/3". */
+  label: string;
+  /** What a screen reader says: "Part 2 of 3", since it reads the slash. */
+  spoken: string;
+}
+
+/** The counter beside the prompt on a multi-part question; null on level 1.
  *  `currentPartIndex` is the part being asked. Once the question is scored it
  *  stays on the last part answered, so it is the part on screen in every
  *  state. */
-export function partCounter(question: Question, currentPartIndex: number): string | null {
+export function partCounter(
+  question: Question,
+  currentPartIndex: number,
+  messages: Messages,
+): PartCounter | null {
   const total = question.parts.length;
-  return total > 1 ? `${currentPartIndex + 1}/${total}` : null;
+  if (total < 2) return null;
+  const n = currentPartIndex + 1;
+  return { label: `${n}/${total}`, spoken: messages.round.partOf(n, total) };
 }
 
 /**

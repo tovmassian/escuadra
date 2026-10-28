@@ -278,6 +278,7 @@ export const it: Messages = {
       'incorrect-other': '',
     },
     questionOf: (n: number, total: number) => `Domanda ${n} di ${total}`,
+    partOf: (n: number, total: number) => `Parte ${n} di ${total}`,
     // "Striscia", not "Serie": in Italian football Serie is a league.
     streak: (count: number) =>
       count === 1

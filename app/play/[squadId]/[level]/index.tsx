@@ -367,7 +367,7 @@ export default function Question() {
   const photo = photoFor(getPlayer(question.playerId));
   const slots = slotStates(question, result, session.currentPartIndex, squad.kind, level);
   const answeredIndex = result.parts[session.currentPartIndex]?.pickedIndex ?? null;
-  const counter = partCounter(question, session.currentPartIndex);
+  const counter = partCounter(question, session.currentPartIndex, t);
   const prompt = promptText(part, question.memberNo, verdict, t);
   const promptColor =
     verdict === true ? colors.success : verdict === false ? colors.error : colors.onStage;
@@ -514,7 +514,11 @@ export default function Question() {
               >
                 {prompt}
               </Text>
-              {counter ? <Text style={styles.counter}>{counter}</Text> : null}
+              {counter ? (
+                <Text style={styles.counter} accessibilityLabel={counter.spoken}>
+                  {counter.label}
+                </Text>
+              ) : null}
             </View>
 
             <View
