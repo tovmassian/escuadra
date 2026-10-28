@@ -17,7 +17,8 @@ actual output.
   that hold tests; a test anywhere else never runs, so a new folder joins `include` in the
   same change.
 - **Screens, components and hooks are verified on a device and by `npm run shots`**, not by
-  unit tests: no React Native renderer is set up, on purpose. A custom hook lives in
+  unit tests: no React Native renderer is set up, on purpose. How a device check is run:
+  [`docs/device-testing.md`](../../docs/device-testing.md). A custom hook lives in
   `hooks/`, one per file; a store's, the theme's (`theme/useTheme.ts`) and i18n's
   (`i18n/useT.ts`) hooks stay with what they read, and so does a context's with its provider.
 - **Logic is pure, so it can be tested.** `lib/questionEngine.ts` imports no React, no
