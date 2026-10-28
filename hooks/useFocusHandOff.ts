@@ -5,14 +5,20 @@ import { useScreenReader } from './useScreenReader';
 
 /**
  * Runs a press that takes the pressed control away, with VoiceOver moved off
- * it first (#226): to `target`, which stays on screen, and the change a beat
- * later. Left on a control that goes, VoiceOver ignores a move sent after it
- * and, once the screen is still, starts on whatever took the control's place: a
- * slot chip, or the next part's tile. A move made while the control is still
- * there is honoured, as How to play's tips show.
+ * it first (#226): to `via`, which the press leaves as it is, and the change a
+ * beat later. Left on a control that goes, VoiceOver ignores a move sent after
+ * it and, once the screen is still, starts on whatever took the control's
+ * place: a slot chip, or the next part's tile. A move made while the control is
+ * still there is honoured, as How to play's tips show.
  *
- * Once `shown`, what `target` says, has changed after a hand-off, the target
- * takes the focus again, so VoiceOver reads its new words.
+ * Once `shown`, a key for what the screen shows, has changed after a hand-off,
+ * `target` takes the focus and VoiceOver reads its new words: a beat later,
+ * once what came in has risen in, as How to play's tips wait for theirs. A
+ * move made while it still rises is dropped, or lands next to the target, on
+ * a slot chip or the first tile. Never `target` for both moves: VoiceOver
+ * doesn't read an element it is already on again when its words change, and
+ * reads a Text through elements rebuilt with its words, so the change would
+ * take a Text from under it.
  *
  * Only on iOS with VoiceOver on: TalkBack reads the prompt's live region, and
  * sighted play never waits. `removes` false runs a press at once everywhere,
@@ -21,6 +27,7 @@ import { useScreenReader } from './useScreenReader';
  */
 export function useFocusHandOff(
   target: RefObject<ViewInstance | TextInstance | null>,
+  via: RefObject<ViewInstance | null>,
   shown: string,
 ): (change: () => void, removes?: boolean) => void {
   const screenReader = useScreenReader();
@@ -31,8 +38,11 @@ export function useFocusHandOff(
   useEffect(() => {
     if (!handedOff.current) return;
     handedOff.current = false;
-    const node = target.current;
-    if (node) AccessibilityInfo.sendAccessibilityEvent(node, 'focus');
+    pending.current = setTimeout(() => {
+      pending.current = undefined;
+      const node = target.current;
+      if (node) AccessibilityInfo.sendAccessibilityEvent(node, 'focus');
+    }, screenReaderSettle.handOff);
   }, [shown, target]);
 
   return useCallback(
@@ -42,7 +52,7 @@ export function useFocusHandOff(
         change();
         return;
       }
-      const node = target.current;
+      const node = via.current;
       if (node) AccessibilityInfo.sendAccessibilityEvent(node, 'focus');
       pending.current = setTimeout(() => {
         pending.current = undefined;
@@ -50,6 +60,6 @@ export function useFocusHandOff(
         change();
       }, screenReaderSettle.handOff);
     },
-    [screenReader, target],
+    [screenReader, via],
   );
 }

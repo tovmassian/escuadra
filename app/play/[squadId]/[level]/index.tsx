@@ -260,9 +260,14 @@ export default function Question() {
   // (#187).
   const titleFocus = useTitleFocus(promptRef, !tips.open);
   // A later question or part starts on its prompt too: Next and a part's tile
-  // go with the press, so VoiceOver is moved to the prompt before they do
-  // (#226).
-  const handOff = useFocusHandOff(promptRef, `${session.currentIndex}:${session.currentPartIndex}`);
+  // go with the press, so VoiceOver waits on the score, which stays, and moves
+  // to the prompt once the next question or part has risen in (#226).
+  const scoreRef = useRef<ViewInstance>(null);
+  const handOff = useFocusHandOff(
+    promptRef,
+    scoreRef,
+    `${session.currentIndex}:${session.currentPartIndex}`,
+  );
   // At large text sizes the scroll overflows and opens at the top, with the
   // answers below the fold: the layer scrolls a tip's target into view.
   const scrollRef = useRef<ScrollViewInstance>(null);
@@ -426,6 +431,7 @@ export default function Question() {
           </View>
           {currentStreak >= 2 ? <StreakChip count={currentStreak} /> : null}
           <View
+            ref={scoreRef}
             style={styles.scorePill}
             accessible
             accessibilityLabel={t.common.scoreSpoken(score.correct, score.attempted)}
