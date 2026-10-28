@@ -41,6 +41,34 @@ export function startsNewRound(
   return !(session.phase === 'playing' && session.squadId === squadId && session.level === level);
 }
 
+/**
+ * Whether the question screen draws the session's round: its squad and level,
+ * playing or just finished. A finished round stays on screen while Results
+ * slides over it, so the button just pressed is never taken from under
+ * VoiceOver, which would then start Results wherever that button was (#226).
+ * Never the round the screen opened on and replaces (`replaced`, its
+ * questions; null when it opened on its own round), not even for the frame
+ * before the new round takes its place (#222).
+ */
+export function drawsRound(
+  session: {
+    phase: SessionPhase;
+    squadId: string | null;
+    level: Level | null;
+    questions: readonly Question[];
+  },
+  squadId: string,
+  level: Level,
+  replaced: readonly Question[] | null,
+): boolean {
+  return (
+    session.phase !== 'idle' &&
+    session.squadId === squadId &&
+    session.level === level &&
+    session.questions !== replaced
+  );
+}
+
 // ---- Spotlight question screen (2.0, spec §2) ------------------------------
 
 export type SlotKey = 'NAME' | 'POS' | 'AGE' | 'CLUB' | 'NAT';

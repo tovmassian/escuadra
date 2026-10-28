@@ -962,8 +962,11 @@ export const sheetDrag = { slop: 10, closeFraction: 0.25, flingVelocity: 0.8 } a
 // animations; #187). iOS moves VoiceOver to a screen's first element once the
 // stack's transition ends, so the controls above its title stay out of the order
 // until `settle` after that, or `max` after the screen starts to appear, however
-// the transition ends.
-export const screenReaderSettle = { settle: 300, max: 1000 } as const;
+// the transition ends. A press that takes its own control away (Next, a part's
+// tile) moves VoiceOver to the score first, changes the question `handOff`
+// later, once VoiceOver has moved, and moves it to the prompt `handOff` after
+// that, once the new question has risen in (#226, `useFocusHandOff`).
+export const screenReaderSettle = { settle: 300, max: 1000, handOff: 300 } as const;
 
 // Distances (pt) and scales of the question screen's motion (spec §6).
 export const spotlightMotion = {
