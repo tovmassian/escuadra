@@ -1,7 +1,16 @@
 import { CloseGlyph } from '@/components/ActionGlyphs';
 import { useScreenReader } from '@/hooks/useScreenReader';
 import { useT } from '@/i18n/useT';
-import { durations, opacity, radii, sheetDrag, sizes, spacing, typography } from '@/theme/tokens';
+import {
+  durations,
+  fontScaleCap,
+  opacity,
+  radii,
+  sheetDrag,
+  sizes,
+  spacing,
+  typography,
+} from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import { useEffect, useRef, useState, type ReactNode } from 'react';
 import {
@@ -237,7 +246,12 @@ function SheetFrame({ onClose, title, testID, children }: Omit<SheetProps, 'visi
             <View style={styles.handle} />
 
             <View style={styles.header}>
-              <Text ref={titleRef} style={styles.title} accessibilityRole="header">
+              <Text
+                ref={titleRef}
+                style={styles.title}
+                accessibilityRole="header"
+                maxFontSizeMultiplier={fontScaleCap.display}
+              >
                 {title}
               </Text>
               <Pressable

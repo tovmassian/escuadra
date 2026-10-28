@@ -11,7 +11,7 @@ import {
   UNICODE_LICENSE,
 } from '@/lib/licences.generated';
 import { BUNDLED_FONTS, UNICODE_CREDIT, licenceParagraphs, softwareRows } from '@/lib/licencesView';
-import { spacing, typography } from '@/theme/tokens';
+import { fontScaleCap, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 const UNICODE_KEY = 'unicode';
@@ -103,7 +103,12 @@ export default function Licences() {
         >
           <Text style={styles.back}>‹ {t.common.back}</Text>
         </Pressable>
-        <Text ref={titleRef} style={styles.title} accessibilityRole="header">
+        <Text
+          ref={titleRef}
+          style={styles.title}
+          accessibilityRole="header"
+          maxFontSizeMultiplier={fontScaleCap.display}
+        >
           {t.about.licences.label}
         </Text>
 

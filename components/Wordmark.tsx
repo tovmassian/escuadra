@@ -4,7 +4,7 @@ import Animated, { useAnimatedStyle } from 'react-native-reanimated';
 import { EscuadraMark } from './EscuadraMark';
 import { useLaunchReveal } from './LaunchReveal';
 import { ESCUADRA, ESCUADRA_WORDMARK } from '@/i18n/names';
-import { sizes, spacing, typography } from '@/theme/tokens';
+import { fontScaleCap, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 // The top bar's lockup on Home (#181): the mark, then the name set lowercase.
@@ -44,7 +44,9 @@ export function Wordmark({ ref }: { ref?: Ref<ViewInstance> }) {
         <EscuadraMark size={sizes.wordmarkMark} color={colors.mark} />
       </View>
       <View ref={wordRef}>
-        <Text style={styles.word}>{ESCUADRA_WORDMARK}</Text>
+        <Text style={styles.word} maxFontSizeMultiplier={fontScaleCap.display}>
+          {ESCUADRA_WORDMARK}
+        </Text>
       </View>
     </Animated.View>
   );

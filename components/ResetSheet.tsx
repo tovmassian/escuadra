@@ -72,7 +72,7 @@ export function ResetSheet({
       minHeight: sizes.cta.normal,
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radii.pill,
+      borderRadius: sizes.cta.normal / 2,
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: colors.error,

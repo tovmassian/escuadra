@@ -127,7 +127,7 @@ export function StudyListRow({
   });
 
   const nameText = (
-    <Text style={styles.name} numberOfLines={1}>
+    <Text style={styles.name} numberOfLines={1} maxFontSizeMultiplier={fontScaleCap.display}>
       {name}
     </Text>
   );
@@ -181,7 +181,11 @@ export function StudyListRow({
         )}
         <View style={styles.affiliationRow}>
           <Flag code={affiliationFlag} size="inline" label={affiliation} />
-          <Text style={styles.affiliation} numberOfLines={1}>
+          <Text
+            style={styles.affiliation}
+            numberOfLines={1}
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
             {affiliation}
           </Text>
         </View>

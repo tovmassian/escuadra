@@ -38,7 +38,16 @@ import { getSquad, squadLeague } from '@/lib/squads';
 import { track } from '@/lib/telemetry';
 import { paramOf, TEAM_FROM } from '@/lib/telemetryEvents';
 import { useProgress } from '@/stores/progress';
-import { borderWidths, iconSize, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
+import {
+  borderWidths,
+  fontScaleCap,
+  iconSize,
+  opacity,
+  radii,
+  sizes,
+  spacing,
+  typography,
+} from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 // Difficulty (#178): the team's bands under a veil, then the ladder: cleared
@@ -240,7 +249,9 @@ export default function Difficulty() {
             style={({ pressed }) => [styles.study, pressed && { opacity: opacity.settled }]}
           >
             <BookGlyph color={colors.textPrimary} />
-            <Text style={styles.studyLabel}>{t.ladder.studySquad}</Text>
+            <Text style={styles.studyLabel} maxFontSizeMultiplier={fontScaleCap.display}>
+              {t.ladder.studySquad}
+            </Text>
           </Pressable>
           {scores.length > 0 ? (
             <Pressable
@@ -254,7 +265,7 @@ export default function Difficulty() {
             </Pressable>
           ) : null}
         </View>
-        <Text style={styles.updated}>
+        <Text style={styles.updated} maxFontSizeMultiplier={fontScaleCap.display}>
           {t.ladder.updated(formatLastUpdated(squad.lastUpdated, t))}
         </Text>
       </View>

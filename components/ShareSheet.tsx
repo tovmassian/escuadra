@@ -14,6 +14,7 @@ import {
 import {
   durations,
   elevation,
+  fontScaleCap,
   opacity,
   radii,
   shareCapture,
@@ -187,7 +188,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
       minHeight: sizes.cta.normal,
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radii.pill,
+      borderRadius: sizes.cta.normal / 2,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
@@ -257,6 +258,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
                       styles.segmentLabel,
                       { color: selected ? colors.ctaText : colors.textSecondary },
                     ]}
+                    maxFontSizeMultiplier={fontScaleCap.display}
                   >
                     {label}
                   </Text>

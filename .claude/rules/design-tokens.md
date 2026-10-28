@@ -64,6 +64,17 @@ the root layout keeps Reanimated's own default on it (`ReducedMotionConfig`). Re
 `useReducedMotion` reads the setting once, as the app starts, so a setting changed while
 Escuadra runs went unseen (#227). Lint refuses it.
 
+## Text size
+
+Text follows the system's text size, which on iOS reaches 3.6× (#187, J4). Display type,
+and text in a box that does not grow with it (a pinned bar, a fixed card, tile or pill, any
+text with `numberOfLines`), stops at `fontScaleCap.display`; the comment on `fontScaleCap`
+in `theme/tokens.ts` lists the cases. Everything else grows, so every screen scrolls once
+its content outgrows it, Home included. A pill that grows takes half its `minHeight` as its
+radius, not `radii.pill`, so it turns into a rounded rectangle rather than an oval that
+clips its label. Long German words still break mid-word at the largest sizes, on both
+platforms: accepted.
+
 ## The system theme
 
 ⚠️ **`userInterfaceStyle` in `app.json` must stay `"automatic"`.** Pinning it

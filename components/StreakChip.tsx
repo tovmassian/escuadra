@@ -14,6 +14,7 @@ import { useT } from '@/i18n/useT';
 import {
   borderWidths,
   durations,
+  fontScaleCap,
   iconSize,
   radii,
   sizes,
@@ -95,6 +96,7 @@ export function StreakChip({ count }: { count: number }) {
           key={count}
           entering={reduced ? undefined : FadeIn.duration(durations.reveal)}
           style={styles.count}
+          maxFontSizeMultiplier={fontScaleCap.display}
         >
           {count}
         </Animated.Text>

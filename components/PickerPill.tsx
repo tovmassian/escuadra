@@ -1,5 +1,5 @@
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import { borderWidths, radii, sizes, spacing, typography } from '@/theme/tokens';
+import { borderWidths, fontScaleCap, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 interface PickerPillProps {
@@ -43,7 +43,12 @@ export function PickerPill({ label, active, onPress, spokenLabel, testID }: Pick
       style={styles.target}
     >
       <View style={[styles.pill, active && styles.pillActive]}>
-        <Text style={[styles.label, active && styles.labelActive]}>{label}</Text>
+        <Text
+          style={[styles.label, active && styles.labelActive]}
+          maxFontSizeMultiplier={fontScaleCap.display}
+        >
+          {label}
+        </Text>
       </View>
     </Pressable>
   );

@@ -14,6 +14,7 @@ import { slotSpoken, slotValueText, type Slot, type SlotState } from '@/lib/roun
 import {
   borderWidths,
   durations,
+  fontScaleCap,
   radii,
   sizes,
   spacing,
@@ -111,6 +112,7 @@ export function SlotChip({ slot }: { slot: Slot }) {
         }
         style={styles.value}
         numberOfLines={1}
+        maxFontSizeMultiplier={fontScaleCap.display}
       >
         {shown}
       </Animated.Text>

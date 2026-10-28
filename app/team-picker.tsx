@@ -30,7 +30,7 @@ import { openingTab, starredOfKind } from '@/lib/starred';
 import { track } from '@/lib/telemetry';
 import { NO_RESULTS_AFTER_MS } from '@/lib/telemetryEvents';
 import { useProgress, useProgressHydrated } from '@/stores/progress';
-import { radii, sizes, spacing, typography } from '@/theme/tokens';
+import { fontScaleCap, radii, sizes, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import type { SquadManifestEntry } from '@/types/squad';
 import { router } from 'expo-router';
@@ -346,7 +346,12 @@ export default function TeamPicker() {
             />
             <Text style={styles.count}>{t.picker.squadCount(squads.length)}</Text>
           </View>
-          <Text ref={titleRef} style={styles.title} accessibilityRole="header">
+          <Text
+            ref={titleRef}
+            style={styles.title}
+            accessibilityRole="header"
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
             {t.picker.title}
           </Text>
           <SearchField value={query} onChange={changeQuery} onClear={() => changeQuery('')} />
@@ -432,11 +437,16 @@ export default function TeamPicker() {
                   },
                 ]}
                 accessibilityRole="header"
+                maxFontSizeMultiplier={fontScaleCap.display}
               >
                 {section.letter}
               </Text>
               {i === 0 && (
-                <Text style={styles.nationsCaption} numberOfLines={1}>
+                <Text
+                  style={styles.nationsCaption}
+                  numberOfLines={1}
+                  maxFontSizeMultiplier={fontScaleCap.display}
+                >
                   {nationsCaption(confederation, t)}
                 </Text>
               )}

@@ -19,6 +19,7 @@ import type { TileVerdict } from '@/lib/roundView';
 import {
   borderWidths,
   durations,
+  fontScaleCap,
   iconSize,
   opacity,
   radii,
@@ -251,7 +252,9 @@ export function AnswerTile({
       >
         {isPosition ? (
           <View style={styles.position}>
-            <Text style={styles.code}>{label}</Text>
+            <Text style={styles.code} maxFontSizeMultiplier={fontScaleCap.display}>
+              {label}
+            </Text>
             <Text style={styles.sub}>{sub}</Text>
           </View>
         ) : (
@@ -271,7 +274,11 @@ export function AnswerTile({
               {/* One line under the ANSWER tag: tag and two lines overflow a
                   48-54 pt tile. The NAME (or POS, CLUB, NAT) slot above
                   shows the right answer in full after a miss. */}
-              <Text style={styles.label} numberOfLines={verdict === 'correct-unpicked' ? 1 : 2}>
+              <Text
+                style={styles.label}
+                numberOfLines={verdict === 'correct-unpicked' ? 1 : 2}
+                maxFontSizeMultiplier={fontScaleCap.display}
+              >
                 {label}
               </Text>
             </View>

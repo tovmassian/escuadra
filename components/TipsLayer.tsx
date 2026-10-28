@@ -394,7 +394,9 @@ export function TipsLayer({
           onPress={advance}
           style={({ pressed }) => [styles.next, pressed && { opacity: opacity.settled }]}
         >
-          <Text style={styles.nextLabel}>{last ? t.tips.gotIt : t.tips.next}</Text>
+          <Text style={styles.nextLabel} maxFontSizeMultiplier={fontScaleCap.display}>
+            {last ? t.tips.gotIt : t.tips.next}
+          </Text>
         </Pressable>
       </View>
     </>
@@ -519,7 +521,9 @@ export function TipsLayer({
           hitSlop={skipSlop}
           style={({ pressed }) => [styles.skip, pressed && { opacity: opacity.settled }]}
         >
-          <Text style={styles.skipLabel}>{t.tips.skip}</Text>
+          <Text style={styles.skipLabel} maxFontSizeMultiplier={fontScaleCap.display}>
+            {t.tips.skip}
+          </Text>
         </Pressable>
       ) : null}
     </View>

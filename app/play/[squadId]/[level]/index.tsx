@@ -404,12 +404,18 @@ export default function Question() {
         <View style={styles.topBar} {...titleFocus.chrome}>
           <GlassCloseButton label={t.round.leave} onPress={exit} />
           <View style={styles.team}>
-            <Text style={styles.teamName} numberOfLines={1}>
+            <Text
+              style={styles.teamName}
+              numberOfLines={1}
+              maxFontSizeMultiplier={fontScaleCap.display}
+            >
               {squadDisplayName(squad, language)}
             </Text>
             <View style={styles.teamSub}>
               <TeamMarker marker={squad.marker} variant="banner" />
-              <Text style={styles.level}>{t.common.level(level)}</Text>
+              <Text style={styles.level} maxFontSizeMultiplier={fontScaleCap.display}>
+                {t.common.level(level)}
+              </Text>
             </View>
           </View>
           {currentStreak >= 2 ? <StreakChip count={currentStreak} /> : null}
@@ -418,7 +424,7 @@ export default function Question() {
             accessible
             accessibilityLabel={t.common.scoreSpoken(score.correct, score.attempted)}
           >
-            <Text style={styles.score}>
+            <Text style={styles.score} maxFontSizeMultiplier={fontScaleCap.display}>
               {score.correct}/{score.attempted}
             </Text>
           </View>

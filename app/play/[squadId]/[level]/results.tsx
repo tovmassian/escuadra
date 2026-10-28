@@ -208,7 +208,7 @@ export default function Results() {
       minHeight: sizes.cta.normal,
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radii.pill,
+      borderRadius: sizes.cta.normal / 2,
       alignItems: 'center',
       justifyContent: 'center',
       backgroundColor: colors.ctaBg,
@@ -220,7 +220,7 @@ export default function Results() {
       minHeight: sizes.cta.compact,
       paddingVertical: spacing.xs,
       paddingHorizontal: spacing.md,
-      borderRadius: radii.pill,
+      borderRadius: sizes.cta.compact / 2,
       borderWidth: borderWidths.thick,
       borderColor: colors.border,
       alignItems: 'center',
@@ -319,7 +319,11 @@ export default function Results() {
           >
             <CloseGlyph color={colors.textSecondary} />
           </Pressable>
-          <Text style={styles.context} numberOfLines={1}>
+          <Text
+            style={styles.context}
+            numberOfLines={1}
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
             {[teamName, t.common.level(level)].join(' · ')}
           </Text>
           <Pressable
@@ -760,7 +764,11 @@ function Roster({ results, marker }: { results: QuestionResult[]; marker: TeamMa
                     photoUrl={photoFor(getPlayer(playerId))?.url ?? null}
                     marker={marker}
                   />
-                  <Text style={styles.name} numberOfLines={1}>
+                  <Text
+                    style={styles.name}
+                    numberOfLines={1}
+                    maxFontSizeMultiplier={fontScaleCap.display}
+                  >
                     {shortName(playerName)}
                   </Text>
                 </Animated.View>

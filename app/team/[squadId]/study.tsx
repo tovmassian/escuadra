@@ -308,7 +308,11 @@ export default function Study() {
               <View key={i} style={{ flex: band.weight, backgroundColor: band.color }} />
             ))}
           </View>
-          <Text style={styles.eyebrow} numberOfLines={1}>
+          <Text
+            style={styles.eyebrow}
+            numberOfLines={1}
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
             {[squadDisplayName(squad, language), squad.season].join(' · ')}
           </Text>
         </View>
@@ -321,7 +325,9 @@ export default function Study() {
           >
             {t.study.title}
           </Text>
-          <Text style={styles.count}>{studyCount(rows.length, roster.length, filter, t)}</Text>
+          <Text style={styles.count} maxFontSizeMultiplier={fontScaleCap.display}>
+            {studyCount(rows.length, roster.length, filter, t)}
+          </Text>
         </View>
       </View>
 

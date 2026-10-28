@@ -8,7 +8,15 @@ import type { FlagCode } from '@/assets/flags/generated';
 import { useT } from '@/i18n/useT';
 import { scoreBlock, scoreSpoken, type TeamProgress } from '@/lib/pickerView';
 import type { TeamMarker as TeamMarkerData } from '@/types/squad';
-import { borderWidths, iconSize, opacity, sizes, spacing, typography } from '@/theme/tokens';
+import {
+  borderWidths,
+  fontScaleCap,
+  iconSize,
+  opacity,
+  sizes,
+  spacing,
+  typography,
+} from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 interface TeamRowProps {
@@ -84,7 +92,7 @@ export function TeamRow({
           <TeamMarker marker={marker} variant="picker" />
         )}
       </View>
-      <Text style={styles.name} numberOfLines={1}>
+      <Text style={styles.name} numberOfLines={1} maxFontSizeMultiplier={fontScaleCap.display}>
         {name}
       </Text>
       {block.kind === 'played' && (
@@ -97,7 +105,10 @@ export function TeamRow({
           ) : (
             <Text style={styles.level}>{t.common.level(block.level)}</Text>
           )}
-          <Text style={[styles.best, { color: bestColor }]}>
+          <Text
+            style={[styles.best, { color: bestColor }]}
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
             {block.correct}
             {/* "/10" stays muted even at 10/10: only the score turns green. */}
             <Text style={styles.tail}>/{block.total}</Text>

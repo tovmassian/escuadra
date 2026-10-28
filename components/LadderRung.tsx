@@ -97,7 +97,7 @@ export function LadderRung({ row, title, onPress }: LadderRungProps) {
       <Text style={styles.number} maxFontSizeMultiplier={fontScaleCap.display}>
         {row.level}
       </Text>
-      <Text style={styles.title} numberOfLines={2}>
+      <Text style={styles.title} numberOfLines={2} maxFontSizeMultiplier={fontScaleCap.display}>
         {title}
       </Text>
       {best ? (

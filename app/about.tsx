@@ -14,7 +14,7 @@ import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { translationNotice } from '@/i18n/translationNotice';
 import { useLanguage, useT } from '@/i18n/useT';
-import { radii, spacing, typography } from '@/theme/tokens';
+import { fontScaleCap, radii, spacing, typography } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 export default function About() {
@@ -90,7 +90,12 @@ export default function About() {
         >
           <Text style={styles.back}>‹ {t.common.back}</Text>
         </Pressable>
-        <Text ref={titleRef} style={styles.title} accessibilityRole="header">
+        <Text
+          ref={titleRef}
+          style={styles.title}
+          accessibilityRole="header"
+          maxFontSizeMultiplier={fontScaleCap.display}
+        >
           {t.about.title}
         </Text>
 

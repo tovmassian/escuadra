@@ -71,7 +71,7 @@ export function LadderCard({ row, title, description, onPlay, playRef }: LadderC
     description: { ...typography.ladderCardDescription, color: colors.textSecondary },
     play: {
       minHeight: sizes.ladderPill,
-      borderRadius: radii.pill,
+      borderRadius: sizes.ladderPill / 2,
       backgroundColor: colors.ctaBg,
       flexDirection: 'row',
       alignItems: 'center',
@@ -110,7 +110,11 @@ export function LadderCard({ row, title, description, onPlay, playRef }: LadderC
               {status.text}
             </Text>
           </View>
-          <Text style={styles.title} accessibilityRole="header">
+          <Text
+            style={styles.title}
+            accessibilityRole="header"
+            maxFontSizeMultiplier={fontScaleCap.display}
+          >
             {title}
           </Text>
           <Text style={styles.description}>{description}</Text>
