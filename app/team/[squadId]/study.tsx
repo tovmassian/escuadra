@@ -11,14 +11,16 @@ import {
   type TextInstance,
   type ViewInstance,
 } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { BackGlyph, GridGlyph, ListGlyph } from '@/components/ActionGlyphs';
 import { FilterPill } from '@/components/FilterPill';
 import { PhotoCredits } from '@/components/PhotoCredits';
 import { PlayerCard } from '@/components/PlayerCard';
+import { fadeIn } from '@/components/riseIn';
 import { StudyListRow } from '@/components/StudyListRow';
 import { TipsLayer } from '@/components/TipsLayer';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 import { useTips } from '@/hooks/useTips';
 import { useTitleFocus } from '@/hooks/useTitleFocus';
 import { squadDisplayName } from '@/i18n/displayNames';
@@ -84,6 +86,7 @@ export default function Study() {
   const colors = useThemeColors();
   const t = useT();
   const language = useLanguage();
+  const reduced = useReduceMotion();
   const { squadId, from } = useLocalSearchParams<{ squadId: string; from?: string }>();
   const view = useProgress((s) => s.studyView);
   const setStudyView = useProgress((s) => s.setStudyView);
@@ -229,7 +232,7 @@ export default function Study() {
     const lone = index === rows.length - 1 && rows.length % 2 === 1;
     return (
       <>
-        <Animated.View style={styles.cell} entering={FadeIn.duration(durations.transition)}>
+        <Animated.View style={styles.cell} entering={fadeIn(reduced, durations.transition)}>
           <PlayerCard
             height={sizes.playerCard.studyHeight}
             shirtNumber={member.no}

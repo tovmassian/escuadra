@@ -1,13 +1,13 @@
 import { useEffect, useRef } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import Animated, {
-  FadeIn,
   useAnimatedStyle,
   useSharedValue,
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
 import { Flag } from './Flag';
+import { fadeIn } from './riseIn';
 import { useLanguage, useT } from '@/i18n/useT';
 import { flagFor } from '@/lib/flags';
 import { slotSpoken, slotValueText, type Slot, type SlotState } from '@/lib/roundView';
@@ -105,11 +105,7 @@ export function SlotChip({ slot }: { slot: Slot }) {
       {flag ? <Flag code={flag} size="inline" label={valueText ?? ''} /> : null}
       <Animated.Text
         key={`${slot.state}:${shown}`}
-        entering={
-          settled
-            ? FadeIn.duration(durations.reveal).delay(reduced ? 0 : spotlightCues.slot)
-            : undefined
-        }
+        entering={settled ? fadeIn(reduced, durations.reveal, spotlightCues.slot) : undefined}
         style={styles.value}
         numberOfLines={1}
         maxFontSizeMultiplier={fontScaleCap.display}

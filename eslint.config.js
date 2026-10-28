@@ -56,7 +56,8 @@ module.exports = defineConfig([
     },
   },
   {
-    // Reduce Motion is read live, through one hook (#227).
+    // Reduce Motion is read live, through one hook (#227), and an entering fade
+    // comes from `components/riseIn.ts`, which leaves it out under it (#231).
     files: ['app/**/*.{ts,tsx}', 'components/**/*.{ts,tsx}', 'hooks/**/*.{ts,tsx}'],
     ignores: ['hooks/useReduceMotion.ts'],
     rules: {
@@ -69,6 +70,12 @@ module.exports = defineConfig([
               importNames: ['useReducedMotion'],
               message:
                 "It reads Reduce Motion once, as the app starts: use `useReduceMotion` from '@/hooks/useReduceMotion'.",
+            },
+            {
+              name: 'react-native-reanimated',
+              importNames: ['FadeIn'],
+              message:
+                "Under Reduce Motion it can leave a view at opacity 0 on Android: use `fadeIn` from '@/components/riseIn'.",
             },
           ],
         },

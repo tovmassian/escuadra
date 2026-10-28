@@ -2,7 +2,6 @@ import { useEffect, useRef } from 'react';
 import { Pressable, StyleSheet, Text, View, type ViewInstance } from 'react-native';
 import Animated, {
   Easing,
-  FadeIn,
   useAnimatedStyle,
   useSharedValue,
   withDelay,
@@ -11,6 +10,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import { EscuadraMark } from './EscuadraMark';
 import { Flag } from './Flag';
+import { fadeIn } from './riseIn';
 import type { ShotTap } from '@/hooks/useShot';
 import type { FlagCode } from '@/assets/flags/generated';
 import { useT } from '@/i18n/useT';
@@ -261,9 +261,7 @@ export function AnswerTile({
           <View style={styles.textBlock}>
             {verdict === 'correct-unpicked' ? (
               <Animated.Text
-                entering={FadeIn.duration(durations.transition).delay(
-                  reduced ? 0 : spotlightCues.missAnswer,
-                )}
+                entering={fadeIn(reduced, durations.transition, spotlightCues.missAnswer)}
                 style={styles.tag}
               >
                 {t.round.answerTag}

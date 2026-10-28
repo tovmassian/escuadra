@@ -1,12 +1,18 @@
 import { Platform } from 'react-native';
+// eslint-disable-next-line no-restricted-imports -- the one place an entering fade is built (#231)
 import { FadeIn, Keyframe } from 'react-native-reanimated';
-import { durations } from '@/theme/tokens';
 
 type Offset = { translateX: number } | { translateY: number } | { scale: number };
 
+// Every entering animation comes from here. Under Reduce Motion there is none:
+// the view mounts as it is. Reanimated would skip the animation anyway, ending
+// it on its first frame, and on Android a view that ends its entering there can
+// stay at the opacity 0 it was inserted with: answer tiles and the miss's button
+// never showed (#231).
+
 /**
  * An entering animation: fade in while moving from `from` to `to`.
- * - Reduce Motion: a plain fade over `durations.transition`, at once.
+ * - Reduce Motion: none.
  * - Web: a plain fade with the same timing. Reanimated's web layout
  *   animations pin an element that entered with a custom `Keyframe` where it
  *   entered (`position: absolute`, fixed size) once the keyframe is cleaned
@@ -15,7 +21,7 @@ type Offset = { translateX: number } | { translateY: number } | { scale: number 
  *   build, so only the movement is lost there.
  */
 function enter(reduced: boolean, from: Offset, to: Offset, duration: number, delay: number) {
-  if (reduced) return FadeIn.duration(durations.transition);
+  if (reduced) return undefined;
   if (Platform.OS === 'web') return FadeIn.duration(duration).delay(delay);
   return new Keyframe({
     0: { opacity: 0, transform: [from] },
@@ -23,6 +29,11 @@ function enter(reduced: boolean, from: Offset, to: Offset, duration: number, del
   })
     .duration(duration)
     .delay(delay);
+}
+
+/** Fade in, in place. */
+export function fadeIn(reduced: boolean, duration: number, delay = 0) {
+  return reduced ? undefined : FadeIn.duration(duration).delay(delay);
 }
 
 /** Fade in while rising `distance` into place. */
