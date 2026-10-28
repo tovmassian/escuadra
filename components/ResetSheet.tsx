@@ -1,6 +1,14 @@
 import { Sheet } from '@/components/Sheet';
 import { useT } from '@/i18n/useT';
-import { borderWidths, opacity, radii, sizes, spacing, typography } from '@/theme/tokens';
+import {
+  borderWidths,
+  fontScaleCap,
+  opacity,
+  radii,
+  sizes,
+  spacing,
+  typography,
+} from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 
@@ -129,7 +137,9 @@ export function ResetSheet({
         accessibilityRole="button"
         style={({ pressed }) => [styles.confirm, pressed && { opacity: opacity.settled }]}
       >
-        <Text style={styles.confirmText}>{confirmLabel}</Text>
+        <Text style={styles.confirmText} maxFontSizeMultiplier={fontScaleCap.button}>
+          {confirmLabel}
+        </Text>
       </Pressable>
     </Sheet>
   );

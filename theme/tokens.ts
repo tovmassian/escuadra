@@ -880,15 +880,19 @@ export const typography = {
 // - display type, the Archivo titles and numbers from 20 pt up, already large;
 // - text in a box that does not grow with it: a pinned bar (the round's top
 //   bar, Difficulty's footer, Study's header), a fixed card, tile or
-//   fixed-height pill, and any text with `numberOfLines`, which would
-//   otherwise be cut short (an answer's name, a photo credit).
+//   fixed-height pill, a How to play tip, which must fit beside its ring on
+//   one screen, and any text with `numberOfLines`, which would otherwise be
+//   cut short (an answer's name, a photo credit).
+// A button's label, in the display face's capitals, grows to `button`, twice
+// its size (WCAG's 200%): any larger, a word of eight capitals no longer fits
+// across the screen and breaks mid-word, in every language.
 // Everything else scales freely, and its screen scrolls.
 // The picker's letter rail (`LetterRail`) sets each letter in a fixed 14 pt
 // slot (`sizes.rail.letter`), which its touch mapping relies on, so its 10 pt
 // letters may grow only a little before they outgrow the slot. The launch
 // intro's text (`LaunchIntro`) sits under a fixed 200 dp mark on one screen
 // that never scrolls, so it takes the display cap too.
-export const fontScaleCap = { display: 1.2, rail: 1.1 } as const;
+export const fontScaleCap = { display: 1.2, button: 2, rail: 1.1 } as const;
 
 // 1.5px is the option-card default; 2px marks the emphasised "correct,
 // unpicked" card in the incorrect-reveal state.

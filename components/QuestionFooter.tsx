@@ -15,6 +15,7 @@ import { nextButtonText, type FooterMode } from '@/lib/roundView';
 import {
   borderWidths,
   durations,
+  fontScaleCap,
   opacity,
   sizes,
   spacing,
@@ -92,7 +93,9 @@ export function QuestionFooter({ mode, compact, last, onNext, credit }: Question
             accessibilityRole="button"
             style={({ pressed }) => [styles.cta, pressed && { opacity: opacity.settled }]}
           >
-            <Text style={styles.ctaText}>{nextButtonText(mode, last, t).label}</Text>
+            <Text style={styles.ctaText} maxFontSizeMultiplier={fontScaleCap.button}>
+              {nextButtonText(mode, last, t).label}
+            </Text>
           </Pressable>
         </Animated.View>
       ) : null}
@@ -155,7 +158,9 @@ function NextBar({
       style={styles.bar}
     >
       <Animated.View style={[styles.fill, fill]} />
-      <Text style={styles.label}>{text.label}</Text>
+      <Text style={styles.label} maxFontSizeMultiplier={fontScaleCap.button}>
+        {text.label}
+      </Text>
     </Pressable>
   );
 }

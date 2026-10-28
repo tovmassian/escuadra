@@ -329,7 +329,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
         ]}
       >
         <ShareGlyph color={colors.ctaText} />
-        <Text style={styles.ctaText}>
+        <Text style={styles.ctaText} maxFontSizeMultiplier={fontScaleCap.button}>
           {format === 'image' ? t.share.shareImage : t.share.shareText}
         </Text>
       </Pressable>

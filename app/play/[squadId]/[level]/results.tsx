@@ -393,7 +393,9 @@ export default function Results() {
                 accessibilityRole="button"
                 style={({ pressed }) => [styles.cta, pressed && { opacity: opacity.settled }]}
               >
-                <Text style={styles.ctaText}>{main.label}</Text>
+                <Text style={styles.ctaText} maxFontSizeMultiplier={fontScaleCap.button}>
+                  {main.label}
+                </Text>
               </Pressable>
             </Animated.View>
             <Animated.View
@@ -411,7 +413,9 @@ export default function Results() {
                 accessibilityRole="button"
                 style={({ pressed }) => [styles.outline, pressed && { opacity: opacity.settled }]}
               >
-                <Text style={styles.outlineText}>{t.results.studySquad}</Text>
+                <Text style={styles.outlineText} maxFontSizeMultiplier={fontScaleCap.button}>
+                  {t.results.studySquad}
+                </Text>
               </Pressable>
               {actions.retryIcon ? (
                 <Pressable

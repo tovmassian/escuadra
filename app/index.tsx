@@ -193,7 +193,9 @@ export default function Home() {
                 accessibilityLabel={t.home.startTraining}
                 style={({ pressed }) => [styles.start, pressed && { opacity: opacity.settled }]}
               >
-                <Text style={styles.startLabel}>{t.home.startTraining}</Text>
+                <Text style={styles.startLabel} maxFontSizeMultiplier={fontScaleCap.button}>
+                  {t.home.startTraining}
+                </Text>
               </Pressable>
             )}
 

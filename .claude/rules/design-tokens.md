@@ -67,13 +67,14 @@ Escuadra runs went unseen (#227). Lint refuses it.
 ## Text size
 
 Text follows the system's text size, which on iOS reaches 3.6× (#187, J4). Display type,
-and text in a box that does not grow with it (a pinned bar, a fixed card, tile or pill, any
-text with `numberOfLines`), stops at `fontScaleCap.display`; the comment on `fontScaleCap`
-in `theme/tokens.ts` lists the cases. Everything else grows, so every screen scrolls once
-its content outgrows it, Home included. A pill that grows takes half its `minHeight` as its
-radius, not `radii.pill`, so it turns into a rounded rectangle rather than an oval that
-clips its label. Long German words still break mid-word at the largest sizes, on both
-platforms: accepted.
+and text in a box that does not grow with it (a pinned bar, a fixed card, tile or pill, a
+tip, any text with `numberOfLines`), stops at `fontScaleCap.display`; a button's label
+stops at `fontScaleCap.button` (2×). The comment on `fontScaleCap` in `theme/tokens.ts`
+lists the cases. Everything else grows, so every screen scrolls once its content outgrows
+it, Home included. A pill that grows takes half its `minHeight` as its radius, not `radii.pill`, so
+it turns into a rounded rectangle rather than an oval that clips its label. A long German
+word in a title or a row may still break mid-word at the largest sizes, on both platforms:
+accepted.
 
 ## The system theme
 

@@ -129,7 +129,9 @@ export function LadderCard({ row, title, description, onPlay, playRef }: LadderC
         style={({ pressed }) => [styles.play, pressed && { opacity: opacity.settled }]}
       >
         <PlayGlyph color={colors.ctaText} />
-        <Text style={styles.playLabel}>{playLevelLabel(row.level, t)}</Text>
+        <Text style={styles.playLabel} maxFontSizeMultiplier={fontScaleCap.button}>
+          {playLevelLabel(row.level, t)}
+        </Text>
       </Pressable>
     </View>
   );
