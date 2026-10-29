@@ -2,6 +2,7 @@ import { ShareGlyph } from '@/components/ActionGlyphs';
 import { ShareCard } from '@/components/ShareCard';
 import { Sheet } from '@/components/Sheet';
 import { useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import { releaseShareImage, shareImage, shareText } from '@/lib/share';
 import {
   formatShareText,
@@ -34,12 +35,7 @@ import {
   View,
   type ViewInstance,
 } from 'react-native';
-import Animated, {
-  FadeIn,
-  useAnimatedStyle,
-  useSharedValue,
-  withTiming,
-} from 'react-native-reanimated';
+import Animated, { useAnimatedStyle, useSharedValue, withTiming } from 'react-native-reanimated';
 import { useReduceMotion } from '@/hooks/useReduceMotion';
 
 interface ShareSheetProps {
@@ -271,7 +267,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
         <View style={styles.preview}>
           <Animated.View
             key={format}
-            entering={FadeIn.duration(durations.transition)}
+            entering={fadeIn(reduced, durations.transition)}
             style={styles.previewItem}
           >
             {format === 'image' ? (

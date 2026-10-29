@@ -2,15 +2,14 @@ import { useEffect } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated, {
   Easing,
-  FadeIn,
   ReduceMotion,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
 } from 'react-native-reanimated';
 import { PhotoCreditLine } from './PhotoCreditLine';
-import { riseIn } from './riseIn';
 import { useT } from '@/i18n/useT';
+import { fadeIn, riseIn } from '@/lib/entering';
 import { nextButtonText, type FooterMode } from '@/lib/roundView';
 import {
   borderWidths,
@@ -84,7 +83,7 @@ export function QuestionFooter({ mode, compact, last, onNext, credit }: Question
           entering={
             mode === 'gotIt'
               ? riseIn(reduced, spotlightMotion.rise, durations.toggle, spotlightCues.missCta)
-              : FadeIn.duration(durations.transition)
+              : fadeIn(reduced, durations.transition)
           }
         >
           <Pressable

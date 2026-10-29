@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import { StyleSheet, View } from 'react-native';
 import Animated, {
-  FadeIn,
   FadeOut,
   Keyframe,
   useAnimatedStyle,
@@ -11,6 +10,7 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import {
   borderWidths,
   durations,
@@ -85,7 +85,7 @@ export function StreakChip({ count }: { count: number }) {
     // The layout animations sit on a wrapper that sets no style of its own, and
     // so no transform: the pop's transform lives on the inner view (#125).
     <Animated.View
-      entering={FadeIn.duration(durations.transition)}
+      entering={fadeIn(reduced, durations.transition)}
       exiting={reduced ? FadeOut.duration(durations.transition) : exit}
       accessible
       accessibilityLabel={t.round.streak(count)}
@@ -94,7 +94,7 @@ export function StreakChip({ count }: { count: number }) {
         <View style={styles.flame} />
         <Animated.Text
           key={count}
-          entering={reduced ? undefined : FadeIn.duration(durations.reveal)}
+          entering={fadeIn(reduced, durations.reveal)}
           style={styles.count}
           maxFontSizeMultiplier={fontScaleCap.display}
         >

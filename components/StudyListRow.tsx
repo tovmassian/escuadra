@@ -1,10 +1,12 @@
 import { Image } from 'expo-image';
 import { useState } from 'react';
 import { Pressable, StyleSheet, Text, View } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import type { FlagCode } from '@/assets/flags/generated';
 import { Flag } from '@/components/Flag';
+import { useReduceMotion } from '@/hooks/useReduceMotion';
 import { useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import { bannerBands, stageVeil } from '@/lib/stageView';
 import {
   borderWidths,
@@ -65,6 +67,7 @@ export function StudyListRow({
   const colors = useThemeColors();
   const t = useT();
   const themeName = useThemeName();
+  const reduced = useReduceMotion();
   // Whether this row has ever drawn the "Tap to reveal" pill. Only then does
   // a shown name fade in, as a reveal; a name that was never hidden has no
   // animation on mount. State rather than a ref, which the lint forbids
@@ -173,7 +176,7 @@ export function StudyListRow({
           // row that has been hidden gets it: a name that was never hidden
           // shows at once. The wrapper sets no style of its own, and so no
           // transform (#125).
-          <Animated.View key="name" entering={FadeIn.duration(durations.reveal)}>
+          <Animated.View key="name" entering={fadeIn(reduced, durations.reveal)}>
             {nameText}
           </Animated.View>
         ) : (

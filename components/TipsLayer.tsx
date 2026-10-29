@@ -12,13 +12,14 @@ import {
   type ViewInstance,
   type TextInstance,
 } from 'react-native';
-import Animated, { FadeIn } from 'react-native-reanimated';
+import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { G, Path, Rect } from 'react-native-svg';
 import { measureInWindow } from './LaunchReveal';
 import { useReduceMotion } from '@/hooks/useReduceMotion';
 import { useScreenAppearance } from '@/hooks/useScreenAppearance';
 import { useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import { withinTime } from '@/lib/launchIntro';
 import {
   placeTip,
@@ -303,7 +304,7 @@ export function TipsLayer({
   const held = shown && !placed;
 
   const screen = measure?.screen ?? windowSize;
-  const fade = reduceMotion ? undefined : FadeIn.duration(durations.tipFade);
+  const fade = fadeIn(reduceMotion, durations.tipFade);
   // Skip tips is drawn under the 44 pt tap target and reaches it through hitSlop.
   const skipSlop = (sizes.minTapTarget - tips.skipHeight) / 2;
 

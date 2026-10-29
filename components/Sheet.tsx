@@ -1,6 +1,7 @@
 import { CloseGlyph } from '@/components/ActionGlyphs';
 import { useScreenReader } from '@/hooks/useScreenReader';
 import { useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import {
   durations,
   fontScaleCap,
@@ -26,7 +27,6 @@ import {
   type TextInstance,
 } from 'react-native';
 import Animated, {
-  FadeIn,
   useAnimatedStyle,
   useSharedValue,
   withTiming,
@@ -209,10 +209,7 @@ function SheetFrame({ onClose, title, testID, children }: Omit<SheetProps, 'visi
 
   return (
     <View style={styles.root} onLayout={(e) => setRootHeight(e.nativeEvent.layout.height)}>
-      <Animated.View
-        entering={FadeIn.duration(reduced ? durations.transition : durations.scrim)}
-        style={styles.scrim}
-      >
+      <Animated.View entering={fadeIn(reduced, durations.scrim)} style={styles.scrim}>
         {/* A tap outside closes the sheet, but the scrim is left out of the
             screen reader's order: the × and Android's back button are the
             accessible ways out, and a second "Close" would be read twice (on
@@ -239,7 +236,7 @@ function SheetFrame({ onClose, title, testID, children }: Omit<SheetProps, 'visi
       >
         <Animated.View
           testID={`${testID}-sheet`}
-          entering={reduced ? FadeIn.duration(durations.transition) : slideUp}
+          entering={reduced ? undefined : slideUp}
           style={styles.sheet}
         >
           <View style={styles.grab} {...pan.panHandlers}>
