@@ -33,6 +33,7 @@ const plan = (over: Partial<TeamPlan> = {}): TeamPlan => ({
   generatedIds: [],
   namesakes: [],
   clubless: [],
+  markup: [],
   parsedCount: 25,
   matchedCount: 25,
   addedCount: 0,
@@ -122,14 +123,29 @@ describe('assess — an unplayable squad is held', () => {
     expect(result.holds).toHaveLength(1);
   });
 
-  it('holds a nation squad with a member who has no club: level 3 asks it', () => {
-    // American Samoa's article leaves `club=` empty on five rows.
+  // A player with no club is `club: null` and level 3 skips them (#230), so a
+  // free agent no longer keeps a squad out. What a round needs is ten numbered
+  // players who can be asked a club.
+  it('does not hold a nation squad for a member with no club, while a round is still full', () => {
     const result = assess(
-      plan({ squad: squad('nation', 23), clubless: ['alii-mitchell', 'malachi-drago'] }),
+      plan({ squad: squad('nation', 23), clubless: ['p0', 'p1', 'p2', 'p3', 'p4'] }),
     );
+    expect(result.holds).toEqual([]);
+  });
+
+  it('holds a nation squad whose clubless members leave fewer than a round to ask', () => {
+    // 23 numbered, 14 of them with no club: 9 left to ask.
+    const clubless = Array.from({ length: 14 }, (_, i) => `p${i}`);
+    const result = assess(plan({ squad: squad('nation', 23), clubless }));
     expect(result.holds).toEqual([
-      "2 member(s) with no club, which level 3 asks a nation squad's players: alii-mitchell, malachi-drago",
+      '9 of 23 members numbered with a club; level 3 asks a nation squad 10',
     ]);
+  });
+
+  it('subtracts a clubless member once, whether or not they are numbered', () => {
+    const numbered = numbering('nation', 26, 12);
+    const result = assess(plan({ squad: numbered, numberlessCount: 14, clubless: ['p0', 'p20'] }));
+    expect(result.holds).toEqual([]);
   });
 
   it('does not hold a club squad on clubs, which it gives every member itself', () => {
@@ -230,6 +246,30 @@ describe('assess — a spelling disagreement between sources', () => {
     const conflict = result.conflicts[0]!;
     expect(describeConflict(conflict)).toContain('spelling disagreement');
     expect(conflictCommand(conflict)).toBe('npm run squadctl -- rename odegaard "Martin Odegaard"');
+  });
+});
+
+// #230: 25 records stored raw wikitext, and the pass that sets `verified` never
+// looked, so every squad holding one verified clean.
+describe('assess — markup left in a stored value', () => {
+  const left = { playerId: 'juan-rengifo', field: 'name' as const, value: '{{ill|Juan|es}}' };
+
+  it('is a conflict, so the team is written but not verified', () => {
+    const result = assess(plan({ markup: [left] }));
+    expect(result.verified).toBe(false);
+    expect(result.failures).toEqual([]);
+    expect(result.conflicts).toContainEqual({ kind: 'markup', ...left });
+  });
+
+  it('names the player, the field and the value', () => {
+    expect(describeConflict({ kind: 'markup', ...left })).toBe(
+      'Wikipedia markup left in the name of juan-rengifo — "{{ill|Juan|es}}"',
+    );
+  });
+
+  // The fix is the parser or, for a stored value, a rename: no single command.
+  it('has no single command, because a person has to look first', () => {
+    expect(conflictCommand({ kind: 'markup', ...left })).toBeNull();
   });
 });
 

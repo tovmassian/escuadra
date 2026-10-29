@@ -75,7 +75,9 @@ export interface ParsedRow {
   captain: boolean;
   /** Raw `nat=` code (e.g. `ESP`), untranslated. */
   nat: string | null;
-  /** Display text of `club=`, matching the form players.json stores. */
+  /** Display text of `club=`, matching the form players.json stores. Null for
+   *  a player with no club, however the article words it (`Free agent`,
+   *  `Unattached`, an empty cell): one form, and level 3 skips them. */
   club: string | null;
   /** Article title behind `club=`. Argentina writes
    *  `[[Inter Milan|Internazionale]]` where other articles write
@@ -277,8 +279,9 @@ export function parseWikilink(value: string): Wikilink {
  *  just the two names.
  *
  *  Null when the value is not a sortname, so the caller falls back to
- *  `parseWikilink` — only `name=` is routed through here, since `club=` and
- *  `nat=` are plain wikilinks in every article seen so far. */
+ *  `parseIll`, then `parseWikilink`. Only `name=` is routed through here; `nat=`
+ *  is a plain wikilink in every article seen so far, and `club=` has its own
+ *  reader, `parseClubField`. */
 export function parseSortname(value: string): Wikilink | null {
   const template = findTemplates(value)[0];
   if (template === undefined || !/^sortname$/i.test(template.name)) return null;
@@ -300,10 +303,71 @@ export function parseSortname(value: string): Wikilink | null {
   return { title: display, display };
 }
 
-/** A player row's `name=`, which is a wikilink almost everywhere and a
- *  `{{sortname}}` on the two North American / Australian articles. */
+/** Reads `{{ill|Name|lt=Shown|es|Foreign title}}` and `{{sortname ill|First|Last|es}}`:
+ *  a link to a person or club with no English article, which points at another
+ *  language's instead. Left unread, the template source became the stored
+ *  name (25 records, #230).
+ *
+ *  `ill` shows its first parameter, unless `lt=` overrides the shown text; the
+ *  language-code and foreign-title pairs after it never reach the reader.
+ *  `sortname ill` is `sortname` with a language code in place of a link target.
+ *  The English title is a link to nothing, so `title` is null: stored as
+ *  `wikiTitle` it would name an article that does not exist.
+ *
+ *  Null when the value is neither, so the caller falls back to the wikilink. */
+export function parseIll(value: string): Wikilink | null {
+  const template = findTemplates(value)[0];
+  if (template === undefined) return null;
+  const positional = template.params
+    .filter((param) => !/^[A-Za-z0-9 _-]+=/.test(param.trim()))
+    .map((param) => stripMarkup(param));
+  let display: string;
+  if (/^ill$/i.test(template.name)) {
+    const shown = namedParams(template.params).lt;
+    display = shown !== undefined && shown !== '' ? stripMarkup(shown) : (positional[0] ?? '');
+  } else if (/^sortname\s+ill$/i.test(template.name)) {
+    display = positional
+      .slice(0, 2)
+      .filter((part) => part !== '')
+      .join(' ');
+  } else {
+    return null;
+  }
+  return display === '' ? null : { title: null, display };
+}
+
+/** A player row's `name=`, which is a wikilink almost everywhere, a
+ *  `{{sortname}}` on the two North American / Australian articles, and an
+ *  `{{ill}}` or `{{sortname ill}}` for a player with no English article. */
 export function parseNameField(value: string): Wikilink {
-  return parseSortname(value) ?? parseWikilink(value);
+  return parseSortname(value) ?? parseIll(value) ?? parseWikilink(value);
+}
+
+/** What a nation squad's `club=` says about a player with no club. Every
+ *  article words it its own way: a link, a link piped to `Unattached`, plain
+ *  text, or an empty cell. */
+const NO_CLUB = /^(free agent|unattached)$/i;
+
+/** A flag icon in front of a club is decoration rather than part of its name
+ *  (`{{flagicon|American Samoa}} [[PanSa East F.C.]]`). */
+const FLAG_ICON = /\{\{\s*flagicon\s*\|[^{}]*\}\}/gi;
+
+/** A row's `club=`: a wikilink (`[[FC Barcelona|Barcelona]]`), sometimes
+ *  italicised (`''[[Rot-Weiß Walldorf]]''`), sometimes an `{{ill}}`. A player
+ *  with no club, however the article writes it, is one form: both null. */
+export function parseClubField(value: string | undefined): {
+  club: string | null;
+  clubTitle: string | null;
+} {
+  const bare = (value ?? '')
+    .replace(FLAG_ICON, '')
+    .trim()
+    .replace(/^'{2,5}|'{2,5}$/g, '');
+  const link = parseIll(bare) ?? parseWikilink(bare);
+  if (link.display === '' || NO_CLUB.test(link.display) || NO_CLUB.test(link.title ?? '')) {
+    return { club: null, clubTitle: null };
+  }
+  return { club: link.display, clubTitle: link.title };
 }
 
 function parseBirth(value: string): string | null {
@@ -374,7 +438,7 @@ function toRow(template: RawTemplate): ParsedRow {
   const positionRaw = params.pos ?? '';
   const position = positionRaw.trim().toUpperCase();
   const nameLink = parseNameField(params.name ?? '');
-  const clubValue = params.club;
+  const clubField = parseClubField(params.club);
   const natValue = params.nat;
 
   return {
@@ -389,8 +453,8 @@ function toRow(template: RawTemplate): ParsedRow {
     // returns three captains from one squad.
     captain: /^captain$/i.test(parseWikilink(params.other ?? '').display),
     nat: natValue === undefined || natValue === '' ? null : parseWikilink(natValue).display,
-    club: clubValue === undefined || clubValue === '' ? null : parseWikilink(clubValue).display,
-    clubTitle: clubValue === undefined || clubValue === '' ? null : parseWikilink(clubValue).title,
+    club: clubField.club,
+    clubTitle: clubField.clubTitle,
     birth: parseBirth(params.age ?? ''),
     raw: template.raw,
   };

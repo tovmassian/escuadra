@@ -262,10 +262,15 @@ is a real dual listing, and `exclude` answers it.
 (`ROUND_LENGTH`), so a squad with fewer is not written: no squad file, no
 player changes, and whatever is stored stays — a sweep never replaces
 Brazil's numbered squad with its numberless call-up list. Level 3 asks a
-nation squad's players their club, so a nation squad with a member who has
-none (American Samoa leaves `club=` empty on five rows) is held too. `held` is not a
-failure and leaves the exit code alone; the next sweep writes the team once
-its article numbers it.
+nation squad's players their club and skips one with none (a free agent, or
+American Samoa's five empty `club=` cells), so a nation squad is held when fewer
+than ten numbered members have a club. `held` is not a failure and leaves the
+exit code alone; the next sweep writes the team once its article numbers it.
+
+**No club is `null`, however the article words it:** `[[Free agent]]`,
+`[[Free agent|Unattached]]`, plain `Unattached` and an empty cell all store
+`club: null`. `club=` is read as a wikilink (italics around it, a `{{flagicon}}`
+before it), or an `{{ill}}`; a new shape is the `markup` conflict below.
 
 `verified` is the assertion pass's output — `true` only when a team has zero
 conflicts. `lastUpdated` moves only when something else in the file did, so a
@@ -824,6 +829,28 @@ quietly one player short. Add the variant to `PLAYER_TEMPLATE` in
 
 **What you touch:** `PLAYER_TEMPLATE` in `src/lib/wikitext-parse.ts` — the
 parser, not a data file.
+
+### `markup`
+
+```
+xxx: Wikipedia markup left in the club of nicky-salapu — "{{flagicon|American Samoa}} [[PanSa East F.C.]]"
+```
+
+A stored name, full name or club still holds `{{`, `}}`, `[[` or `]]`: template
+source stored as display text. It is checked on every member's record after the
+plan, stored values included, so a parser gap can never verify clean. Two causes:
+
+- **The parser does not know the shape yet** (the new template in the message).
+  Teach `parseNameField` or `parseClubField` in `src/lib/wikitext-parse.ts` with a
+  fixture row, then re-run `fetch --offline`.
+- **A record was stored before the parser knew it.** `rename <id> "<name>"` for a
+  name; there is no command for a club, since `apply` never overwrites a stored
+  nation-squad club. Edit that one `club` in `data/players.json`.
+
+`lib/__tests__/dataIntegrity.test.ts` fails on the same condition, so it cannot
+land unnoticed.
+
+**What you touch:** `src/lib/wikitext-parse.ts` (the parser), or `rename`.
 
 ### `blast-radius`
 

@@ -6,6 +6,8 @@ import {
   findTemplates,
   isOutOnLoan,
   namedParams,
+  parseClubField,
+  parseIll,
   parseSection,
   parseSortname,
   parseUpdated,
@@ -113,6 +115,86 @@ describe('parseSortname', () => {
 
   it('returns null for a plain wikilink, so the caller falls back', () => {
     expect(parseSortname('[[Lamine Yamal]]')).toBeNull();
+  });
+});
+
+// `{{ill}}` links a person or club with no English article to another
+// language's. Left unread, the template source itself became the name: 25
+// records stored raw wikitext (#230).
+describe('parseIll', () => {
+  it('takes the first parameter as the display text and links no article', () => {
+    expect(parseIll('{{ill|Juan Manuel Rengifo|es}}')).toEqual({
+      title: null,
+      display: 'Juan Manuel Rengifo',
+    });
+  });
+
+  it('ignores the language-code and foreign-title pairs after the first parameter', () => {
+    expect(parseIll('{{ill|Jonathan Fonkel|nl|Jonathan Fonkel|pt|Jonathan Fonkel}}')?.display).toBe(
+      'Jonathan Fonkel',
+    );
+  });
+
+  it('shows lt= over the first parameter, wherever it sits', () => {
+    expect(parseIll('{{ill|CSD Ebenezer|lt=Ebenezer|es|Club Socio Deportivo Ebenezer}}')).toEqual({
+      title: null,
+      display: 'Ebenezer',
+    });
+  });
+
+  it('reads {{sortname ill}} as first and last name, then a language code', () => {
+    expect(parseIll('{{sortname ill|Awet|Alemseged|no}}')).toEqual({
+      title: null,
+      display: 'Awet Alemseged',
+    });
+  });
+
+  it('returns null for a wikilink and for a plain value, so the caller falls back', () => {
+    expect(parseIll('[[Lamine Yamal]]')).toBeNull();
+    expect(parseIll('Bukayo Saka')).toBeNull();
+  });
+
+  it('returns null for a template that is not an ill, even when one is nested in it', () => {
+    expect(parseIll('{{sortname|Mathew|Ryan}}')).toBeNull();
+  });
+});
+
+describe('parseClubField', () => {
+  it('reads a wikilink, keeping the article title apart from the display text', () => {
+    expect(parseClubField('[[FC Barcelona|Barcelona]]')).toEqual({
+      club: 'Barcelona',
+      clubTitle: 'FC Barcelona',
+    });
+  });
+
+  // Sri Lanka's and Palestine's articles italicise the whole cell.
+  it('sees through the italics around a link', () => {
+    expect(parseClubField("''[[Rot-Weiß Walldorf]]''")).toEqual({
+      club: 'Rot-Weiß Walldorf',
+      clubTitle: 'Rot-Weiß Walldorf',
+    });
+  });
+
+  it('reads an {{ill}} club, which has no English article to title', () => {
+    expect(parseClubField('{{ill|FC 15 de Agosto|lt=15 de Agosto|es}}')).toEqual({
+      club: '15 de Agosto',
+      clubTitle: null,
+    });
+  });
+
+  it.each([
+    "''[[Free agent]]''",
+    "''[[Free Agent|Unattached]]''",
+    '[[free agent]]',
+    "''Unattached''",
+    'Free agent',
+  ])('reads %s as no club', (value) => {
+    expect(parseClubField(value)).toEqual({ club: null, clubTitle: null });
+  });
+
+  it('reads an empty or missing value as no club', () => {
+    expect(parseClubField('')).toEqual({ club: null, clubTitle: null });
+    expect(parseClubField(undefined)).toEqual({ club: null, clubTitle: null });
   });
 });
 
@@ -255,6 +337,56 @@ describe('parseSection — anomalies', () => {
     const parsed = parseSection('{{nat fs g player|no=1|pos=GK|name={{sortname|Mathew|Ryan}}}}');
     expect(parsed.rows[0]?.name).toBe('Mathew Ryan');
     expect(parsed.rows[0]?.title).toBe('Mathew Ryan');
+  });
+
+  // Recorded rows from the Suriname, Colombia, Eritrea, Equatorial Guinea, Sri
+  // Lanka, Bermuda, Palestine, Albania, Philippines and Benin articles: the 25
+  // records of #230, one row per way a name or club was written.
+  describe('on recorded rows that once stored wikitext', () => {
+    const rows = parseSection(fixture('nation-ill-and-linked-clubs')).rows;
+    const row = (name: string) => rows.find((r) => r.name === name);
+
+    it('reads an {{ill}} name, and an {{ill}} with a language pair', () => {
+      expect(row('Jonathan Fonkel')?.club).toBe('Robinhood');
+      expect(row('Juan Manuel Rengifo')?.title).toBeNull();
+    });
+
+    it('reads a {{sortname ill}} name', () => {
+      expect(row('Awet Alemseged')?.club).toBe('Grorud IL');
+    });
+
+    it('reads an {{ill}} club and an italicised linked club', () => {
+      expect(row('Miguel Ángel Nkogo')?.club).toBe('Ebenezer');
+      expect(row('Jason Thayaparan')?.club).toBe('Rot-Weiß Walldorf');
+      expect(row('Jason Thayaparan')?.clubTitle).toBe('Rot-Weiß Walldorf');
+    });
+
+    // American Samoa's article puts a flag icon in front of one club.
+    it('skips a flag icon in front of a linked club', () => {
+      expect(row('Nicky Salapu')?.club).toBe('PanSa East F.C.');
+      expect(row('Nicky Salapu')?.clubTitle).toBe('PanSa East F.C.');
+    });
+
+    it('reads every way of writing a free agent as no club', () => {
+      for (const name of [
+        'Milai Perott',
+        'Abed Yassin',
+        'Elseid Hysaj',
+        'Angelo Brückner',
+        'Mohamed Tijani',
+        'Some Player',
+      ]) {
+        expect(row(name)?.club, name).toBeNull();
+        expect(row(name)?.clubTitle, name).toBeNull();
+      }
+    });
+
+    it('leaves no row holding a brace or a bracket', () => {
+      for (const r of rows) {
+        expect(`${r.name}${r.club ?? ''}${r.clubTitle ?? ''}`, r.name).not.toMatch(/\{\{|\[\[/);
+      }
+      expect(rows).toHaveLength(12);
+    });
   });
 
   it('accepts the nat fs g player variant', () => {

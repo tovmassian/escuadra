@@ -931,6 +931,59 @@ describe('clubless members', () => {
   });
 });
 
+describe('markup left in a stored value', () => {
+  const nation = (members: EnvelopeMember[]) =>
+    envelope(members, {
+      id: 'ber',
+      kind: 'nation',
+      name: 'Bermuda',
+      league: undefined,
+      season: '2026',
+    });
+
+  it('lists a stored club that holds wikitext, which a nation row never overwrites', () => {
+    const stored = player({ id: 'milai-perott', name: 'Milai Perott', club: '[[Free agent]]' });
+    const plan = reconcileTeam({
+      envelope: nation([row({ name: 'Milai Perott', nationality: 'Bermuda', club: null })]),
+      storedSquad: null,
+      players: [stored],
+    });
+    expect(plan.markup).toEqual([
+      { playerId: 'milai-perott', field: 'club', value: '[[Free agent]]' },
+    ]);
+  });
+
+  it('lists a new player whose name arrived as a template', () => {
+    const plan = reconcileTeam({
+      envelope: nation([row({ name: '{{ill|Juan Manuel Rengifo|es}}', nationality: 'Bermuda' })]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.markup.map((m) => m.field)).toEqual(['name', 'fullName']);
+  });
+
+  it('lists nothing for clean records', () => {
+    const plan = reconcileTeam({
+      envelope: nation([row({ name: 'Zeiko Lewis', nationality: 'Bermuda', club: null })]),
+      storedSquad: null,
+      players: [],
+    });
+    expect(plan.markup).toEqual([]);
+  });
+
+  // A dirty record in players.json that is not on this squad (a departed
+  // player) is not this team's to verify.
+  it('ignores a dirty record that is not a member of the squad', () => {
+    const departed = player({ id: 'gone', name: 'Gone Player', club: '[[Free agent]]' });
+    const plan = reconcileTeam({
+      envelope: nation([row({ name: 'Zeiko Lewis', nationality: 'Bermuda', club: null })]),
+      storedSquad: null,
+      players: [departed],
+    });
+    expect(plan.markup).toEqual([]);
+  });
+});
+
 describe('a rename needs more than a shared surname when births disagree', () => {
   // The October sweep: Ecuador called up Fricio Caicedo as Moisés Caicedo
   // left, and the shared surname read as a rename. Two birth dates say two

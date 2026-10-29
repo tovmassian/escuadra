@@ -153,7 +153,7 @@ function buildClubPart(
   const correct = subject.player.club;
   if (!correct) {
     throw new Error(
-      `buildRound: level-3 club question needs Player.club, but "${subject.player.name}" (${subject.player.id}) has none. This is a data-authoring bug — every nation-squad player must have a club.`,
+      `buildRound: level-3 club question needs Player.club, but "${subject.player.name}" (${subject.player.id}) has none. buildRound never picks such a subject, so this is a bug in the subject filter.`,
     );
   }
   const pool = roster.map((r) => r.player.club).filter((c): c is string => c !== null);
@@ -169,14 +169,18 @@ export function buildRound(opts: BuildRoundOptions): Question[] {
   // Numberless members (no assigned shirt number yet) can't be asked about —
   // the level-1 prompt has nothing to show — but still serve as name
   // distractors for other subjects below.
+  // Likewise a nation player with no club (a free agent) can't be asked the
+  // level-3 club question, which has no answer for them.
+  const asksClub = level === 3 && squad.kind === 'nation';
   const questionable = roster.filter(
-    (r): r is RosterEntry & { member: { no: number } } => r.member.no !== null,
+    (r): r is RosterEntry & { member: { no: number } } =>
+      r.member.no !== null && (!asksClub || r.player.club !== null),
   );
 
   const minRosterSize = level === 3 ? 6 : 4;
   if (questionable.length < minRosterSize) {
     throw new Error(
-      `buildRound: squad "${squad.id}" has ${questionable.length} numbered members, needs at least ${minRosterSize} for level ${level}.`,
+      `buildRound: squad "${squad.id}" has ${questionable.length} numbered members${asksClub ? ' with a club' : ''}, needs at least ${minRosterSize} for level ${level}.`,
     );
   }
 

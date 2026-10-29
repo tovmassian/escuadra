@@ -22,7 +22,9 @@ paths:
 
 On level 3 the third part depends on `squad.kind`: a **club** squad asks the
 player's **nationality**, a **nation** squad asks their **club**. Asking a nation
-squad for nationality is a non-question, since every member shares it.
+squad for nationality is a non-question, since every member shares it. A nation
+player with no club (`club: null`, a free agent) is never asked the club part: they
+stay in the roster as a name distractor, and levels 1 and 2 ask them as any player.
 
 **One question, up to three parts.** A round is 10 questions at every level. A
 level-2 or level-3 question is a single scored unit: it counts as correct only
