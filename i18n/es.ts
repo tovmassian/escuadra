@@ -452,7 +452,7 @@ export const es: Messages = {
     yourSquads: 'Tus equipos',
   },
   store: {
-    tagline: 'Aprende todas las plantillas',
+    tagline: 'Aprende las plantillas de fútbol',
   },
   about: {
     // "Info" matches the screen's title and Settings' ABOUT label (settings.sections.about).

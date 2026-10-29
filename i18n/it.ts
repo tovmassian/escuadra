@@ -447,7 +447,7 @@ export const it: Messages = {
     yourSquads: 'Le tue squadre',
   },
   store: {
-    tagline: 'Impara tutte le rose',
+    tagline: 'Impara le rose del calcio',
   },
   about: {
     // "Info" matches the screen's title and Settings' ABOUT label (settings.sections.about).
