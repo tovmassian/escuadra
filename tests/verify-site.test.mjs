@@ -16,7 +16,13 @@ const policyPaths = policyPages.map(({ file }) => `${policyDir}/${file}`);
 const pages = ['index.html', 'privacy.html', 'support.html', ...policyPaths];
 const siteUrl = 'https://tovmassian.github.io/escuadra/';
 const appStoreUrl = 'https://apps.apple.com/us/app/escuadra/id6810705505';
-const allowedExternalLinks = ['https://github.com/tovmassian/escuadra/issues', appStoreUrl, siteUrl];
+const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.tovmassian.escuadra';
+const allowedExternalLinks = [
+  'https://github.com/tovmassian/escuadra/issues',
+  appStoreUrl,
+  playStoreUrl,
+  siteUrl,
+];
 // How a page reaches the site root: '' at the root, '../../' in privacy/2/.
 const rootOf = (page) => {
   const up = relative(dirname(page), '.');
@@ -164,20 +170,49 @@ for (const { lang, file } of policyPages) {
 const home = readFileSync('index.html', 'utf8');
 assert.match(home, /<h1>Know the squad\. Cold\.<\/h1>/, 'home has the approved headline');
 assert.match(home, /Ten fast questions\. One squad you can name under pressure\./, 'home has the approved supporting copy');
-assert.match(home, />Now on the App Store</, 'home has an honest release status');
-assert.doesNotMatch(home, /Soon on|coming soon to the App Store/i, 'home no longer says iOS is coming soon');
-assert.ok(home.includes(`href="${appStoreUrl}"`), 'App Store badge links to the live listing');
-// Google's badge rules forbid recolouring or greying the badge, and it may only
-// promote an app you can get (or pre-register) on Play. Until the Play listing
-// is live (#51), no Google Play artwork appears — only plain text.
-for (const page of pages) {
-  assert.doesNotMatch(
+// privacy/2/ takes its footer from main's catalogs, so only these three are pinned here.
+for (const page of ['index.html', 'privacy.html', 'support.html']) {
+  assert.match(
     readFileSync(page, 'utf8'),
-    /google-play-badge|badge--google-play/,
-    `${page} shows no Google Play badge until Escuadra is live on Google Play`,
+    />Now on the App Store and Google Play</,
+    `${page} has an honest release status`,
   );
 }
-assert.match(home, /Coming soon to Android™ phones\./, 'home says Android is coming, in plain text');
+assert.doesNotMatch(home, /soon/i, 'home no longer says either store is coming soon');
+// Apple: with another store's badge in the layout, only the black App Store badge,
+// placed first. Google: the badge may only promote an app you can get on Play.
+const badgeLinks = [
+  ...home.matchAll(
+    /<a\s+href="([^"]+)"\s+aria-label="([^"]+)"\s*>\s*<img\s+class="badge[^"]*"\s+src="([^"]+)"\s+alt=""\s*\/>\s*<\/a>/g,
+  ),
+].map(([, href, label, src]) => ({ href, label, src }));
+assert.deepEqual(
+  badgeLinks,
+  [
+    {
+      href: appStoreUrl,
+      label: 'Download Escuadra on the App Store',
+      src: 'assets/badges/app-store-badge-black.svg',
+    },
+    {
+      href: playStoreUrl,
+      label: 'Get Escuadra on Google Play',
+      src: 'assets/badges/google-play-badge.svg',
+    },
+  ],
+  'home links both live listings, the black App Store badge first, one badge image each',
+);
+// Both stores forbid recolouring, greying or fading their badges.
+assert.doesNotMatch(
+  readFileSync('site.css', 'utf8'),
+  /\.badge[^{]*\{[^}]*\b(filter|opacity|mix-blend-mode)\s*:/,
+  'site.css leaves the store badges unmodified',
+);
+assert.match(
+  home,
+  /Google Play and the\s+Google Play logo are\s+trademarks of Google LLC\./,
+  'home credits Google Play and the Google Play logo, as the Play badge requires',
+);
 assert.match(
   home,
   /Apple and the Apple logo are trademarks of Apple Inc\., registered in\s+the U\.S\. and other countries\./,
@@ -188,7 +223,8 @@ assert.match(
   /App Store is a service mark of Apple\s+Inc\., registered in the U\.S\. and other countries\./,
   'home credits the App Store service mark',
 );
-assert.match(home, /Android is a\s+trademark of Google LLC\./, 'home attributes the Android trademark');
+// privacy.html still names Android, and the credits cover the whole site.
+assert.match(home, /Android is a trademark\s+of Google LLC\./, 'home attributes the Android trademark');
 assert.match(home, /10-question rounds/, 'home includes the round fact');
 assert.match(home, /Club &amp; national squads/, 'home includes the squad fact');
 assert.match(home, /<h2>Works offline<\/h2>/, 'home includes the offline fact');
