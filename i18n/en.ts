@@ -329,6 +329,8 @@ export const en = {
       'incorrect-other': '',
     },
     questionOf: (n: number, total: number) => `Question ${n} of ${total}`,
+    /** The "2/3" beside a multi-part question's prompt, spoken. */
+    partOf: (n: number, total: number) => `Part ${n} of ${total}`,
     streak: (count: number) => `Streak: ${count} in a row`,
   },
   study: {

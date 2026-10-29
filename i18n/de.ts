@@ -272,6 +272,7 @@ export const de: Messages = {
       'incorrect-other': '',
     },
     questionOf: (n: number, total: number) => `Frage ${n} von ${total}`,
+    partOf: (n: number, total: number) => `Teil ${n} von ${total}`,
     streak: (count: number) => `Serie: ${count} richtig in Folge`,
   },
   study: {

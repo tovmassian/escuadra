@@ -429,8 +429,14 @@ describe('promptText and partCounter', () => {
   });
 
   it('counts parts only on multi-part questions', () => {
-    expect(partCounter(spotQuestion(), 0)).toBeNull();
-    expect(partCounter(spotQuestion({ parts: L3_NATION_PARTS }), 1)).toBe('2/3');
+    expect(partCounter(spotQuestion(), 0, en)).toBeNull();
+    expect(partCounter(spotQuestion({ parts: L3_NATION_PARTS }), 1, en)?.label).toBe('2/3');
+  });
+
+  it('speaks the count in words: a screen reader reads the slash', () => {
+    expect(partCounter(spotQuestion({ parts: L3_NATION_PARTS }), 1, en)?.spoken).toBe(
+      'Part 2 of 3',
+    );
   });
 });
 
