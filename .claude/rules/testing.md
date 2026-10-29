@@ -59,6 +59,13 @@ is stale. Never edit the expectation, widen an allowlist or loosen TypeScript to
 - `theme/__tests__/userInterfaceStyle.test.ts`: the system-following theme.
 - `scripts/claude/__tests__/repo.test.ts`: `CLAUDE.md` and these rules stay true to the
   repository.
+- `scripts/__tests__/fingerprint-config.test.ts`: while `fingerprint.config.js` skips the
+  scripts, no `package.json` script but husky's `prepare` runs during a native build (an
+  npm install, prepare or dependencies hook, or an EAS Build hook); and every skip name is
+  one Expo knows. When it finds such a script, remove the script or remove
+  `PackageJsonScriptsAll` from the skips (a fingerprint change, after which that check no
+  longer runs); never widen the husky exception. An unknown name is a typo or an Expo
+  rename, fixed with the current `SourceSkips` key.
 
 ## Generated files
 
