@@ -29,6 +29,14 @@ leaves `app.json`'s `version` out of the fingerprint, and every version needs a 
 its own: all of them share the `production` channel. After an SDK upgrade, re-measure
 `docs/release.md`'s table.
 
+It also skips `package.json`'s scripts and the text of `.gitignore`, which change no native
+code here. `scripts/__tests__/fingerprint-config.test.ts` fails when a script other than
+husky's `prepare` would run during a native build (an npm install, prepare or dependencies
+hook, or an EAS Build hook), because the fingerprint would not see it, and when a skip's
+name is one Expo does not know, because Expo ignores it silently. The 1.x branches predate
+the skips: there any change to `package.json`'s scripts or to `.gitignore` still moves the
+fingerprint.
+
 ## CI
 
 The release logic lives in `scripts/ci/`, tested by `npm run check`. Workflows call `node scripts/ci/…` and `npx eas-cli …` directly, write temporary files to `$RUNNER_TEMP`, and name each action by its full commit SHA (`docs/release.md`, Pinned actions). `release-gate` treats a PR touching only Markdown, `docs/`, `.github/` and `scripts/ci/` as docs and CI (`scripts/ci/lib/pr.ts`).

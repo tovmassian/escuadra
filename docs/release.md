@@ -52,8 +52,8 @@ shipped binary. Every check in this document exists because of that.
 ## OTA or store build?
 
 The fingerprint hashes, per platform, everything that affects the native runtime.
-Measured on Expo SDK 58 with the `strict` preset in `fingerprint.config.js`; re-measure if
-either moves. `strict` keeps `version` in the fingerprint, so each version has its own
+Measured on Expo SDK 58 with `fingerprint.config.js`'s `strict` preset and source skips;
+re-measure if either moves. `strict` keeps `version` in the fingerprint, so each version has its own
 runtime and never receives another version's updates.
 
 | Changes the fingerprint: store build                          | Leaves it alone: OTA                                        |
@@ -62,13 +62,18 @@ runtime and never receives another version's updates.
 | Expo SDK or React Native upgrade                              | Squad data, the question engine, copy                       |
 | Anything in `app.json` (even `version`, `name`) or `eas.json` | Images bundled by Metro (flags)                             |
 | The app icon; the Android adaptive icon (Android only)        | A JS-only npm package added or upgraded                     |
-| A new npm script or `.gitignore` line (false positives)       | `package-lock.json`; `package.json` edits not yet installed |
-| `fingerprint.config.js`                                       | `.github/`, `scripts/ci/`, `docs/`, `CLAUDE.md`             |
+| `fingerprint.config.js`                                       | `package-lock.json`; `package.json` edits not yet installed |
+|                                                               | `package.json`'s scripts and `.gitignore` (both from 2.0.0) |
+|                                                               | `.github/`, `scripts/ci/`, `docs/`, `CLAUDE.md`             |
 
 - Only installed packages count, so run `npm ci` before computing a fingerprint.
-- The false positives disappear with `sourceSkips: ['PackageJsonScriptsAll', 'GitIgnore']`
-  in `fingerprint.config.js`, which is itself a fingerprint change: it lands on `main`
-  before the next version is cut, never on a locked branch.
+- `fingerprint.config.js` skips `package.json`'s scripts and the text of `.gitignore`,
+  which change no native code here; whether `ios/` or `android/` is ignored is still
+  checked, through git. A test fails if a script other than husky's `prepare` would run
+  during a native build (an npm install, prepare or dependencies hook, or an EAS Build
+  hook), because the fingerprint would not see it. A 1.x branch predates these skips, so
+  there any change to `package.json`'s scripts or to `.gitignore` still moves the
+  fingerprint.
 - To see what's inside a fingerprint: `npx expo-updates fingerprint:generate --platform android --debug`.
 
 What the fingerprint can't see:
@@ -178,8 +183,7 @@ a PR into the release branch, close the freeze, merge, and take the fix to `main
 
 A new version from `main`:
 
-1. The `app.json` version bump (and, the first time, the `sourceSkips` in
-   `fingerprint.config.js`) lands on `main` by PR.
+1. The `app.json` version bump lands on `main` by PR.
 2. Cut the branch: `git push origin origin/main:refs/heads/release/X.Y.Z`. Fixes found
    from here on go into it by PR and on to `main` by cherry-pick.
 3. On `main`, write the version's section of [`CHANGELOG.md`](../CHANGELOG.md) from the

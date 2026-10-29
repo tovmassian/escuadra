@@ -61,8 +61,9 @@ git status --short --branch
 6. The work needs something published or built: an OTA update, a store build, a `gh-pages`
    push, a store console (App Store Connect, the Play Console), or cutting or pushing a
    `release/*` branch.
-7. A fingerprint-moving change (a dependency, an npm script, a `.gitignore` line, `app.json`,
-   `eas.json`, `fingerprint.config.js`) would land on a release branch.
+7. A fingerprint-moving change (a dependency, `app.json`, `eas.json`,
+   `fingerprint.config.js`; on a 1.x branch also an npm script or a `.gitignore` line) would
+   land on a release branch.
 8. A plan will run (one has work left, or step 4 writes one) and the request did not say how:
    "with subagents" is `subagent-driven`, "inline" or "in this session" is `executing-plans`.
    The mode is the owner's to pick, never yours, so ask it now, before the plan exists.
@@ -97,8 +98,7 @@ fill in every field the answers cannot change; only the ones they can change are
   to the existing one. Never commit to `main` or `release/*` directly.
 - **A worktree** is `git worktree add .claude/worktrees/N-<slug> -b <branch> <base>`, then
   `EnterWorktree` with that `path`. Never `EnterWorktree` with a `name`: it names the branch
-  `worktree-<name>` and starts from `origin/main`. `.claude/worktrees/` is already ignored;
-  a `.gitignore` line would move the fingerprint.
+  `worktree-<name>` and starts from `origin/main`. `.claude/worktrees/` is already ignored.
 - **Branch** is `<type>/N-<slug>`: `<type>` is the title's conventional-commit prefix
   (`fix(about): …` → `fix`), the slug a few words of the title. An existing branch keeps its
   name, and the block names it alone.

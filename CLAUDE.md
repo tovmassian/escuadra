@@ -104,15 +104,16 @@ How changes reach users, the branch model and every procedure:
 
 - **Nothing is published or built from `main`.** OTA updates and store builds come only
   from `release/X.Y.Z` branches.
-- **Nothing that moves the fingerprint lands on a locked release branch:** npm scripts,
-  dependency changes, `.gitignore` lines, `app.json`, `eas.json`, `fingerprint.config.js`.
-  A change that needs one is a new version.
+- **Nothing that moves the fingerprint lands on a locked release branch:** dependency
+  changes, `app.json`, `eas.json`, `fingerprint.config.js`, and on a 1.x branch npm scripts
+  and `.gitignore` lines too. A change that needs one is a new version.
 - **A fix for a shipped version starts on its release branch** and reaches `main` by
   `git cherry-pick -x`. Docs and CI changes go the other way.
 - **`runtimeVersion` stays on the `fingerprint` policy.** `appVersion` would hand
   JavaScript to binaries that can't run it.
 - **CI calls tools directly** (`node scripts/ci/…`, `npx eas-cli …`), never through new
-  npm scripts, and writes temporary files to `$RUNNER_TEMP`, never new `.gitignore` lines.
+  npm scripts, and writes temporary files to `$RUNNER_TEMP`, never new `.gitignore` lines:
+  CI changes reach the 1.x branches too.
 
 ## Scope
 
