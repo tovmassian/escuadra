@@ -6,7 +6,7 @@ import { createHash } from 'node:crypto';
 import { describe, expect, it } from 'vitest';
 import { CATALOGS } from '../catalogs';
 import { en } from '../en';
-import { catalogLeaves, isLater } from '../leaves';
+import { catalogLeaves } from '../leaves';
 import { SUPPORTED_LANGUAGES, type Language } from '../resolveLanguage';
 
 // Texts that are rightly the same as in English, by language, each with a
@@ -164,7 +164,6 @@ describe.each(SUPPORTED_LANGUAGES)('the %s catalog', (language) => {
   it.skipIf(language === 'en')('translates every text it does not share on purpose', () => {
     const untranslated = leaves.filter(
       (leaf) =>
-        !isLater(leaf.path, language) &&
         leaf.text !== '' &&
         leaf.text === englishText.get(leaf.path) &&
         !allowed.includes(leaf.path),

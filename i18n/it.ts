@@ -1,7 +1,6 @@
 // The Italiano catalog (#145), typed against ./en.ts: same keys, same order,
 // same parameters. Drafted by Claude; a native speaker reviews it before it
-// merges (#145). The store tagline is English until #147 translates it with
-// the listing copy.
+// merges (#145).
 // Escuadra and a la escuadra come from ./names and are never translated.
 //
 // The player is "tu"; apostrophes are ’. A team's name sits before a colon or
@@ -9,7 +8,7 @@
 // Brasile", "dell’Inter", "dei Paesi Bassi"): the data gives no gender or
 // article. A round of ten questions is a "partita", the word Italian quiz apps
 // use for one game; "turno" reads as whose turn it is, and nobody takes turns.
-import { en, type CalendarDate, type Messages } from './en';
+import type { CalendarDate, Messages } from './en';
 import { A_LA_ESCUADRA, ESCUADRA } from './names';
 
 const MONTHS = ['gen', 'feb', 'mar', 'apr', 'mag', 'giu', 'lug', 'ago', 'set', 'ott', 'nov', 'dic'];
@@ -447,8 +446,9 @@ export const it: Messages = {
     noResults: (query: string) => `Nessun risultato per “${query}”`,
     yourSquads: 'Le tue squadre',
   },
-  // English until #147 localises the feature graphic with the store listing.
-  store: en.store,
+  store: {
+    tagline: 'Impara tutte le rose',
+  },
   about: {
     // "Info" matches the screen's title and Settings' ABOUT label (settings.sections.about).
     title: 'Info',
