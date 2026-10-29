@@ -258,12 +258,16 @@ a:focus-visible {
     var(--accent) 100%
   );
 }
+/* Both store badges share one height, so Google Play's is never smaller than
+   the App Store's (Google's rule), and each width follows from its artwork.
+   Both stores ask for clear space of a quarter of the badge's height. */
 .release-bar {
+  --badge-height: 3.6rem;
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  gap: 0.5rem;
-  padding-block: 0.75rem;
+  gap: calc(var(--badge-height) / 4);
+  padding-block: calc(var(--badge-height) / 4);
 }
 .release-bar a {
   text-decoration: none;
@@ -275,50 +279,23 @@ a:focus-visible {
 }
 
 .badge {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0.4rem 0.9rem;
-  width: 200px;
+  display: block;
+  height: var(--badge-height);
+  width: auto;
 }
 
-.badge--google-play {
-  width: 222px;
-}
-
-/* Phones and small tablets: below 38rem the label plus both badges at full size
-   no longer fit on one line (~543px of content), so the label takes its own line
-   and the badges scale with the viewport instead of being squeezed. The
-   38vw / 42.2vw pair keeps the same width ratio as 200px / 222px, so the two
-   badges stay the same height; min() caps them at their full size. */
+/* Phones and small tablets: below 38rem the label takes its own line and the
+   badges scale with the viewport instead of being squeezed, never below Apple's
+   40px minimum. */
 @media (max-width: 38rem) {
   .release-bar {
+    --badge-height: clamp(2.5rem, 12.5vw, 3.6rem);
     flex-wrap: wrap;
-    justify-content: flex-start;
-    row-gap: 0.25rem;
   }
   .release-bar span {
     flex: 1 0 100%;
     font-size: 1.15rem;
   }
-  .badge {
-    width: min(200px, 38vw);
-    padding-inline: 0;
-  }
-  .badge--google-play {
-    width: min(222px, 42.2vw);
-  }
-}
-
-.badge--dark,
-.badge--light {
-  display: none;
-}
-:root:not([data-theme='dark']) .badge--light {
-  display: inline-block;
-}
-:root[data-theme='dark'] .badge--dark {
-  display: inline-block;
 }
 
 .release-status {
