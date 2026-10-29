@@ -5,9 +5,9 @@ import { Pressable, StyleSheet, Text, View } from 'react-native';
 import Animated from 'react-native-reanimated';
 import type { FlagCode } from '@/assets/flags/generated';
 import { Flag } from '@/components/Flag';
-import { fadeIn } from '@/components/riseIn';
 import { useReduceMotion } from '@/hooks/useReduceMotion';
 import { useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import { bannerBands, stageVeil } from '@/lib/stageView';
 import {
   borderWidths,

@@ -1,14 +1,13 @@
-import { Platform } from 'react-native';
-// eslint-disable-next-line no-restricted-imports -- the one place an entering fade is built (#231)
-import { FadeIn, Keyframe } from 'react-native-reanimated';
-
-type Offset = { translateX: number } | { translateY: number } | { scale: number };
-
 // Entering animations come from here, and a custom one (`Sheet`'s slide) is left
 // out the same way. Under Reduce Motion there is none: the view mounts as it is.
 // Reanimated would skip the animation anyway, ending it on its first frame, and
 // on Android a view that ends its entering there can stay at the opacity 0 it
 // was inserted with: answer tiles and the miss's button never showed (#231).
+import { Platform } from 'react-native';
+// eslint-disable-next-line no-restricted-imports -- the one place an entering fade is built (#231)
+import { FadeIn, Keyframe } from 'react-native-reanimated';
+
+type Offset = { translateX: number } | { translateY: number } | { scale: number };
 
 /**
  * An entering animation: fade in while moving from `from` to `to`.

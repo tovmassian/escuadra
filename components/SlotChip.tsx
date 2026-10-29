@@ -7,8 +7,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { Flag } from './Flag';
-import { fadeIn } from './riseIn';
 import { useLanguage, useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import { flagFor } from '@/lib/flags';
 import { slotSpoken, slotValueText, type Slot, type SlotState } from '@/lib/roundView';
 import {

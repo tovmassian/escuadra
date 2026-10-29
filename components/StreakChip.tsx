@@ -9,8 +9,8 @@ import Animated, {
   withSequence,
   withTiming,
 } from 'react-native-reanimated';
-import { fadeIn } from './riseIn';
 import { useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import {
   borderWidths,
   durations,

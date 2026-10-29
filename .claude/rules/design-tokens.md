@@ -4,6 +4,7 @@ paths:
   - "components/**"
   - "hooks/**"
   - "app/**"
+  - "lib/entering.ts"
 ---
 
 # Design tokens and theming
@@ -65,9 +66,9 @@ the root layout keeps Reanimated's own default on it (`ReducedMotionConfig`). Re
 Escuadra runs went unseen (#227). Lint refuses it.
 
 Under Reduce Motion a view enters with no animation at all. Every entering animation comes
-from `components/riseIn.ts` (`fadeIn`, `riseIn`, `slideIn`, `popIn`), which returns none
-then, and lint refuses Reanimated's `FadeIn` elsewhere; a custom one is left out too
-(`Sheet`'s slide). Reanimated ends a reduced entering on its first frame, and on Android
+from `lib/entering.ts` (`fadeIn`, `riseIn`, `slideIn`, `popIn`), which returns none then,
+and lint refuses Reanimated's `FadeIn` elsewhere; a custom one is left out too (`Sheet`'s
+slide). Reanimated ends a reduced entering on its first frame, and on Android
 that frame can be lost, leaving the view at opacity 0: answer tiles never showed (#231).
 
 ## Text size

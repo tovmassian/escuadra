@@ -10,10 +10,10 @@ import Animated, {
 } from 'react-native-reanimated';
 import { EscuadraMark } from './EscuadraMark';
 import { Flag } from './Flag';
-import { fadeIn } from './riseIn';
 import type { ShotTap } from '@/hooks/useShot';
 import type { FlagCode } from '@/assets/flags/generated';
 import { useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import { feedback } from '@/lib/haptics';
 import type { TileVerdict } from '@/lib/roundView';
 import {

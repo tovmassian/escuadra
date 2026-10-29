@@ -8,8 +8,8 @@ import Animated, {
   withTiming,
 } from 'react-native-reanimated';
 import { PhotoCreditLine } from './PhotoCreditLine';
-import { fadeIn, riseIn } from './riseIn';
 import { useT } from '@/i18n/useT';
+import { fadeIn, riseIn } from '@/lib/entering';
 import { nextButtonText, type FooterMode } from '@/lib/roundView';
 import {
   borderWidths,

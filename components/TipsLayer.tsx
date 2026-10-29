@@ -16,10 +16,10 @@ import Animated from 'react-native-reanimated';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Svg, { G, Path, Rect } from 'react-native-svg';
 import { measureInWindow } from './LaunchReveal';
-import { fadeIn } from './riseIn';
 import { useReduceMotion } from '@/hooks/useReduceMotion';
 import { useScreenAppearance } from '@/hooks/useScreenAppearance';
 import { useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import { withinTime } from '@/lib/launchIntro';
 import {
   placeTip,

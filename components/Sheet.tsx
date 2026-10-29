@@ -1,7 +1,7 @@
 import { CloseGlyph } from '@/components/ActionGlyphs';
-import { fadeIn } from '@/components/riseIn';
 import { useScreenReader } from '@/hooks/useScreenReader';
 import { useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import {
   durations,
   fontScaleCap,

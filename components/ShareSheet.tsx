@@ -1,8 +1,8 @@
 import { ShareGlyph } from '@/components/ActionGlyphs';
-import { fadeIn } from '@/components/riseIn';
 import { ShareCard } from '@/components/ShareCard';
 import { Sheet } from '@/components/Sheet';
 import { useT } from '@/i18n/useT';
+import { fadeIn } from '@/lib/entering';
 import { releaseShareImage, shareImage, shareText } from '@/lib/share';
 import {
   formatShareText,
