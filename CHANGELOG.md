@@ -12,7 +12,8 @@ Work on `main` that no release branch holds yet is not listed: its milestone is.
 
 ## [1.0.1] - 2026-10-11
 
-Reached Google Play's closed test only, not production.
+Android only. On Google Play's closed test from 11 October 2026, and in production from
+17 October 2026 (#51).
 
 ### Fixed
 

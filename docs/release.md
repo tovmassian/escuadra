@@ -20,7 +20,7 @@ never changes its fingerprint.
 
 **Where things stand.** What each version shipped: [`CHANGELOG.md`](../CHANGELOG.md).
 Which builds are live, and on which runtime: EAS
-(`npx eas-cli build:list --platform ios --build-profile production --status finished --limit 5`)
+(`npx eas-cli build:list --build-profile production --status finished --limit 5`, both platforms)
 and the store consoles. A version in progress: its milestone and its release issue. None
 of it is written here, because a copy goes stale.
 
@@ -155,7 +155,7 @@ blocks production publishes for exactly that platform and version.
 
 - `store-build` opens one when it submits a production build.
 - Anything outside CI, such as a Play Console promotion, needs one by hand:
-  `gh issue create --label ota-freeze --title "OTA freeze: android@1.0.0" --body "Play production review (#51)"`
+  `gh issue create --label ota-freeze --title "OTA freeze: android@X.Y.Z" --body "Play production review"`
 - Close it when the review passes. A publish it blocked goes out with **Re-run failed jobs**.
 
 ### Roll back

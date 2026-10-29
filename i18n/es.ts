@@ -577,8 +577,8 @@ export const es: Messages = {
         toLight: 'Cambiar al tema claro',
         toDark: 'Cambiar al tema oscuro',
       },
-      // "el App Store", as Apple's Spanish badge says.
-      releaseStatus: 'Ya disponible en el App Store',
+      // "el App Store" and "en Google Play", as the stores' Spanish badges say.
+      releaseStatus: 'Ya disponible en el App Store y en Google Play',
     },
   },
 };

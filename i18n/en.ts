@@ -678,7 +678,7 @@ export const en = {
         toLight: 'Switch to light theme',
         toDark: 'Switch to dark theme',
       },
-      releaseStatus: 'Now on the App Store',
+      releaseStatus: 'Now on the App Store and Google Play',
     },
   },
 };
