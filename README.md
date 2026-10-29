@@ -9,7 +9,7 @@ Runs in **Expo Go** for local development — no Xcode, no Apple Developer accou
 
 ## Releases
 
-Escuadra is on the [**App Store**](https://apps.apple.com/us/app/escuadra/id6810705505). What each version shipped is in [`CHANGELOG.md`](CHANGELOG.md); how a change reaches users, as an over-the-air update or a store build, is [`docs/release.md`](docs/release.md). The marketing site and the privacy and support pages are published from the [`gh-pages`](https://github.com/tovmassian/escuadra/tree/gh-pages) branch.
+Escuadra is on the [**App Store**](https://apps.apple.com/us/app/escuadra/id6810705505) and [**Google Play**](https://play.google.com/store/apps/details?id=com.tovmassian.escuadra). What each version shipped is in [`CHANGELOG.md`](CHANGELOG.md); how a change reaches users, as an over-the-air update or a store build, is [`docs/release.md`](docs/release.md). The marketing site and the privacy and support pages are published from the [`gh-pages`](https://github.com/tovmassian/escuadra/tree/gh-pages) branch.
 
 ## Setup
 

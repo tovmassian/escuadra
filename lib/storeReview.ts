@@ -2,8 +2,9 @@
 // `askForReview` after an a la escuadra round; `shouldAskForReview`
 // (lib/reviewPrompt.ts) decides whether to ask, and the OS decides whether its
 // rating dialog actually shows (it rations them, and shows none on
-// TestFlight). Fire and forget: never awaited, never throws, and it sets no
-// React state, so the screen never waits on it or re-renders for it. Skipped
+// TestFlight or in an Android build not installed from Google Play). Fire
+// and forget: never awaited, never throws, and it sets no React state, so
+// the screen never waits on it or re-renders for it. Skipped
 // on web, where there is no store, so `npm run shots` never asks, and while
 // the app is in the background. Settings' Rate button opens the store page
 // through `openStorePage`.

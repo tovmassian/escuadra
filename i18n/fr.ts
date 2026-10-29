@@ -579,7 +579,7 @@ export const fr: Messages = {
         toLight: 'Passer au thème clair',
         toDark: 'Passer au thème sombre',
       },
-      releaseStatus: 'Désormais disponible sur l’App Store',
+      releaseStatus: 'Désormais disponible sur l’App Store et sur Google Play',
     },
   },
 };

@@ -542,7 +542,7 @@ export const de: Messages = {
         toLight: 'Zum hellen Design wechseln',
         toDark: 'Zum dunklen Design wechseln',
       },
-      releaseStatus: 'Jetzt im App Store',
+      releaseStatus: 'Jetzt im App Store und bei Google Play',
     },
   },
 };

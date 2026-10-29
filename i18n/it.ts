@@ -571,8 +571,9 @@ export const it: Messages = {
         toLight: 'Passa al tema chiaro',
         toDark: 'Passa al tema scuro',
       },
-      // "su App Store", without an article, as Apple's Italian badge says.
-      releaseStatus: 'Ora disponibile su App Store',
+      // "su App Store" and "su Google Play", without an article, as the stores'
+      // Italian badges say.
+      releaseStatus: 'Ora disponibile su App Store e Google Play',
     },
   },
 };
