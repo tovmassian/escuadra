@@ -18,6 +18,12 @@ cannot use.
 
 `expo-dev-client` is installed, and EAS Build produces development, simulator, preview and production builds; an SDK upgrade is a release decision (`fingerprint.md`).
 
+`expo-sharing` runs without its config plugin: the plugin only sets up receiving shares,
+and sending needs nothing in `app.json`. Any `npx expo install` that installs or
+updates `expo-sharing`, `--fix` included, adds `"expo-sharing"` to `plugins` in
+`app.json`; remove that entry, since without options the plugin does nothing and only
+moves the fingerprint.
+
 ## Android and Google Play
 
 `plugins/withAndroidRelease.js` keeps what Play Console asks of the build (#203): R8 on
