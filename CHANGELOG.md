@@ -52,6 +52,7 @@ national squads.
   (#176, #178, #181).
 - A new look, with Archivo as the display face (#111).
 - VoiceOver starts each new question and part on its prompt (#226).
+- VoiceOver says whether each answer was right or wrong (#247).
 - Android: on tablets and other large screens, Escuadra turns with the screen (#203).
 
 ### Removed
