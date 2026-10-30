@@ -75,12 +75,12 @@ export function ShareSheet({ visible, onClose, card, text, onShared }: ShareShee
   const t = useT();
   return (
     <Sheet visible={visible} onClose={onClose} title={t.share.title} testID="share">
-      <ShareBody card={card} text={text} onShared={onShared} />
+      <ShareBody visible={visible} card={card} text={text} onShared={onShared} />
     </Sheet>
   );
 }
 
-function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | 'onClose'>) {
+function ShareBody({ visible, card, text, onShared }: Omit<ShareSheetProps, 'onClose'>) {
   const colors = useThemeColors();
   const t = useT();
   const reduced = useReduceMotion();
@@ -96,15 +96,19 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
 
   // The picture's last capture is released with the sheet, not right after
   // it is shared: a target app can still be reading it. `open` lets a capture
-  // that finishes after the sheet closed open no share menu.
+  // that finishes after the sheet was closed open no share menu. It follows
+  // `visible`, which turns false as the sheet starts to slide out (`Sheet`).
   const open = useRef(false);
   useEffect(() => {
-    open.current = true;
-    return () => {
+    open.current = visible;
+  }, [visible]);
+  useEffect(
+    () => () => {
       open.current = false;
       releaseShareImage();
-    };
-  }, []);
+    },
+    [],
+  );
 
   const pillWidth = switchWidth / 2;
   useEffect(() => {

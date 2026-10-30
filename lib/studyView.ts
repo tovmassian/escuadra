@@ -66,8 +66,8 @@ export function studyLabel(
   return `${no ?? messages.study.noNumber}, ${name}, ${position}, ${affiliation}`;
 }
 
-/** The credits for the photos in the list, in list order. Study's credit
- *  rows name each photo by shirt number only, so they never spoil Hide names. */
+/** The credits for the photos in the list, in list order. While Hide names
+ *  is on, Study shows them by shirt number only, so they never spoil it. */
 export function studyCreditRows(rows: RosterEntry[]): PhotoCreditRow[] {
   return rows.flatMap((r) => {
     const credit = photoFor(r.player);

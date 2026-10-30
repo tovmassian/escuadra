@@ -85,7 +85,7 @@ export default function About() {
         <Pressable
           onPress={() => router.back()}
           accessibilityRole="button"
-          hitSlop={12}
+          hitSlop={spacing.sm}
           {...titleFocus.chrome}
         >
           <Text style={styles.back}>‹ {t.common.back}</Text>
@@ -125,7 +125,7 @@ export default function About() {
             testID="about-licences"
             onPress={() => router.push('/licences')}
             accessibilityRole="button"
-            hitSlop={8}
+            hitSlop={spacing.xs}
           >
             <Text style={[styles.subHeading, { marginBottom: 0 }]}>{t.about.licences.label} ›</Text>
           </Pressable>

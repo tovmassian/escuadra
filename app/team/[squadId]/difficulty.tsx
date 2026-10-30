@@ -103,15 +103,15 @@ export default function Difficulty() {
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     content: {
-      paddingTop: spacing.sm - 2,
+      paddingTop: spacing.sm - spacing.nudge,
       paddingHorizontal: spacing.lg,
       gap: spacing.sm,
     },
-    headingBlock: { gap: spacing.xs - 2, paddingBottom: spacing.xxs / 2 },
+    headingBlock: { gap: spacing.xs - spacing.nudge, paddingBottom: spacing.nudge },
     heading: { ...typography.monoCaption, color: colors.textMuted },
-    outdatedNote: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs - 2 },
+    outdatedNote: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs - spacing.nudge },
     outdatedText: { ...typography.secondarySmall, color: colors.textMuted, flexShrink: 1 },
-    exam: { marginTop: spacing.xxs + 2 },
+    exam: { marginTop: spacing.xxs + spacing.nudge },
     // Study and the source line stay put while the ladder scrolls under their fade.
     footer: {
       paddingHorizontal: spacing.lg,
@@ -137,7 +137,7 @@ export default function Difficulty() {
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: spacing.xs + 2,
+      gap: spacing.xs + spacing.nudge,
     },
     studyLabel: { ...typography.ladderStudy, color: colors.textPrimary },
     updated: { ...typography.secondarySmall, color: colors.textMuted, textAlign: 'center' },

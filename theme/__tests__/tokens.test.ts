@@ -1,7 +1,9 @@
 import { describe, expect, it } from 'vitest';
 import { contrastRatio } from '@/lib/contrast';
+import { withAlpha } from '@/lib/stageView';
 import {
   cardGradient,
+  cardNumberBacking,
   durations,
   gradients,
   launchIntro,
@@ -177,28 +179,35 @@ describe('text contrast', () => {
     });
   });
 
-  // The position chip sits at the card's top, where the gradient is only
-  // lightly dark. Its code is white on `photoChip`, so it is held to AA at the
-  // chip's bottom edge (the worst row: the gradient has faded furthest there),
-  // over a white photo, with the gradient's alpha interpolated between stops.
-  it('the position chip code reaches 4.5:1 on photoChip at its bottom edge over a white photo', () => {
-    const edge = (spacing.xs + 2 + sizes.studyChip) / sizes.playerCard.studyHeight;
-    const { colors, locations } = cardGradient;
-    const i = locations.findIndex((at, n) => at <= edge && edge <= (locations[n + 1] ?? -1));
-    const from = /rgba\((\d+),(\d+),(\d+),([\d.]+)\)/.exec(colors[i] ?? '');
-    const to = /rgba\((\d+),(\d+),(\d+),([\d.]+)\)/.exec(colors[i + 1] ?? '');
-    const a = locations[i] ?? 0;
-    const b = locations[i + 1] ?? 1;
-    expect(from && to, 'the chip edge falls between two rgba stops').toBeTruthy();
-    const t = (edge - a) / (b - a);
-    const mix = (n: number) => Number(from?.[n]) + (Number(to?.[n]) - Number(from?.[n])) * t;
-    const scrim = blend(
-      `rgba(${Math.round(mix(1))},${Math.round(mix(2))},${Math.round(mix(3))},${mix(4)})`,
-      '#ffffff',
-    );
+  // A player card's shirt number is white over the photo's top, so its backing
+  // holds it to 3:1 (large text) over the worst photo there: pure white (#247).
+  it('the card shirt number reaches 3:1 on cardNumberBacking over a white photo', () => {
     (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      const ground = blend(withAlpha(p.veilInk, cardNumberBacking.alpha), '#ffffff');
+      expect(contrastRatio(p.onPhoto, ground), `${name}.onPhoto`).toBeGreaterThanOrEqual(3);
+    });
+  });
+
+  // The backing is gone before the name's ramp starts, on the shorter card, so
+  // the face between them stays clear.
+  it("the card number's backing fades out before cardGradient's ramp starts", () => {
+    const end = spacing.xs + typography.cardNumber.lineHeight + cardNumberBacking.fade;
+    const rampStart = cardGradient.locations[1];
+    expect(end / sizes.playerCard.results.height).toBeLessThanOrEqual(rampStart);
+  });
+
+  // The position chip sits at the card's top, on the number's backing, which
+  // holds its full alpha down to the number's foot, below the chip. Its code is
+  // white on `photoChip`, so it is held to AA there over a white photo.
+  it('the position chip code reaches 4.5:1 on photoChip over the number backing over a white photo', () => {
+    const chipBottom = spacing.xs + spacing.nudge + sizes.studyChip;
+    expect(chipBottom).toBeLessThanOrEqual(spacing.xs + typography.cardNumber.lineHeight);
+    (['dark', 'light'] as const).forEach((name) => {
+      const p = palettes[name];
+      const backing = blend(withAlpha(p.veilInk, cardNumberBacking.alpha), '#ffffff');
       expect(
-        contrastRatio(palettes[name].onPhoto, blend(palettes[name].photoChip, scrim)),
+        contrastRatio(p.onPhoto, blend(p.photoChip, backing)),
         `${name}.onPhoto on photoChip`,
       ).toBeGreaterThanOrEqual(4.5);
     });
