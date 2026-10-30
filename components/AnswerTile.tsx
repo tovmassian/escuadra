@@ -193,6 +193,10 @@ export function AnswerTile({
       alignItems: 'center',
       justifyContent: isPosition ? 'center' : 'space-between',
       gap: spacing.xs,
+      // Room above and below a label grown to two lines at large text sizes.
+      // At the default size a two-line name still fits the smallest
+      // `minHeight` (48), so no grid changes height.
+      paddingVertical: spacing.nudge,
       paddingLeft: isPosition ? spacing.xs : spacing.md,
       paddingRight: isPosition ? spacing.xs : spacing.sm,
     },

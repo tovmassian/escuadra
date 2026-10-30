@@ -45,6 +45,11 @@ const wrap =
   ':matches(ConditionalExpression, LogicalExpression, TSAsExpression, TSSatisfiesExpression)';
 const host = `:matches(JSXElement, JSXFragment, ${shownProp}) > JSXExpressionContainer`;
 const useCatalog = 'User-visible text comes from the i18n catalog: `const t = useT()`.';
+// Guardrail 5 (#247): a spacing step moved by a number, or a numeric hitSlop, is
+// a hard-coded spacing value.
+const useSpacing =
+  'Spacing comes from the tokens (guardrail 5): `spacing.nudge` or `spacing.hair` for an optical offset, or a new token.';
+const spacingStep = "MemberExpression[object.name='spacing']";
 
 module.exports = defineConfig([
   expoConfig,
@@ -104,6 +109,11 @@ module.exports = defineConfig([
         {
           selector: `${host} > CallExpression[callee.property.name='join'] > MemberExpression.callee > ArrayExpression > ${wordy}`,
           message: useCatalog,
+        },
+        { selector: `BinaryExpression:has(> ${spacingStep}):has(> Literal)`, message: useSpacing },
+        {
+          selector: "JSXAttribute[name.name='hitSlop'] > JSXExpressionContainer > Literal",
+          message: useSpacing,
         },
       ],
     },

@@ -14,6 +14,7 @@ import { feedback } from '@/lib/haptics';
 import { photoCreditRows, photoFor } from '@/lib/photos';
 import type { Level } from '@/lib/questionEngine';
 import {
+  actionsAt,
   missedLine,
   missedSpoken,
   resultActions,
@@ -100,6 +101,7 @@ export default function Results() {
   const squad = getSquad(squadId);
   const score = selectScore(round.results);
   const tier = resultTier(score.correct, score.attempted);
+  const hasNextLevel = level < MAX_LEVEL;
   // Sharing is not a next step in the study loop, so it sits in the top bar,
   // apart from the actions, and opens a sheet rather than leaving the screen.
   const [sharing, setSharing] = useState(false);
@@ -123,7 +125,7 @@ export default function Results() {
   const tipKeys = resultsTips({
     missed: missed.length,
     passed: tier !== 'fail',
-    hasNextLevel: level < MAX_LEVEL,
+    hasNextLevel,
   });
   const showTips = tips.open && tipKeys.length > 0;
   const scrollRef = useRef<ScrollViewInstance>(null);
@@ -245,8 +247,8 @@ export default function Results() {
   if (!squad || round.squadId !== squadId || round.level !== level) return null;
 
   const teamName = squadDisplayName(squad, language);
-  const copy = resultCopy({ tier, level, teamName, season: squad.season }, t);
-  const actions = resultActions(tier !== 'fail', level < MAX_LEVEL);
+  const copy = resultCopy({ tier, level, hasNextLevel, teamName, season: squad.season }, t);
+  const actions = resultActions(tier !== 'fail', hasNextLevel);
   const strip = round.results.map((r) => ({
     no: r.question.memberNo,
     correct: r.correct === true,
@@ -255,8 +257,7 @@ export default function Results() {
   // The tier's beat (spec §6): a fail's title and cards come at once the strip
   // has mostly filled; a pass waits for the strip, then the strike.
   const beat = tier === 'fail' ? resultsTimeline.failBeat : resultsTimeline.passBeat;
-  const actionAt = (k: number) =>
-    beat + resultsTimeline.actionsAfter + k * resultsTimeline.actionsStagger;
+  const actionAt = (k: number) => actionsAt(tier) + k * resultsTimeline.actionsStagger;
 
   const retry = (atLevel: Level) => {
     if (leaving.current) return;

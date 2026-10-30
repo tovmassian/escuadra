@@ -78,8 +78,8 @@ export default function Settings() {
 
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
-    content: { paddingHorizontal: spacing.lg, gap: spacing.lg + 2 },
-    header: { gap: spacing.md + 2 },
+    content: { paddingHorizontal: spacing.lg, gap: spacing.lg + spacing.nudge },
+    header: { gap: spacing.md + spacing.nudge },
     title: { ...typography.displayTitle, color: colors.textPrimary },
     // At most half the row: the label takes what is left, so at the largest text
     // the value wraps rather than crushing it (#187, J4).
@@ -95,7 +95,7 @@ export default function Settings() {
       borderBottomWidth: borderWidths.hairline,
       borderBottomColor: colors.hairline,
     },
-    appearanceHead: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm + 2 },
+    appearanceHead: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm + spacing.nudge },
     appearanceLabel: { ...typography.settingsLabel, color: colors.textPrimary, flexShrink: 1 },
     plate: {
       width: g.plate,
@@ -106,7 +106,7 @@ export default function Settings() {
     },
     rate: {
       height: g.rateButton,
-      paddingHorizontal: spacing.md + 2,
+      paddingHorizontal: spacing.md + spacing.nudge,
       borderRadius: radii.pill,
       backgroundColor: colors.ctaBg,
       justifyContent: 'center',

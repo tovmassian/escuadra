@@ -1,7 +1,10 @@
 import { describe, expect, it } from 'vitest';
 import { en } from '@/i18n/en';
 import type { QuestionPart } from '@/lib/questionEngine';
+import { ROUND_LENGTH } from '@/lib/scoring';
+import { resultsTimeline } from '@/theme/tokens';
 import {
+  actionsAt,
   isFlawless,
   missedLine,
   missedSpoken,
@@ -55,7 +58,7 @@ describe('resultActions', () => {
 });
 
 describe('resultCopy', () => {
-  const base = { level: 2, teamName: 'Spain', season: '2026' };
+  const base = { level: 2, hasNextLevel: true, teamName: 'Spain', season: '2026' };
 
   it('fail: what to learn, and the score that unlocks the next level', () => {
     expect(resultCopy({ ...base, tier: 'fail' }, en)).toEqual({
@@ -66,7 +69,7 @@ describe('resultCopy', () => {
   });
 
   it('fail on level 3: the score that clears it', () => {
-    expect(resultCopy({ ...base, level: 3, tier: 'fail' }, en).verdict).toBe(
+    expect(resultCopy({ ...base, level: 3, hasNextLevel: false, tier: 'fail' }, en).verdict).toBe(
       'Score 8/10 to clear level 3.',
     );
   });
@@ -75,8 +78,14 @@ describe('resultCopy', () => {
     expect(resultCopy({ ...base, tier: 'fail' }, en).verdictSpoken).toBe(
       'Score 8 of 10 to unlock level 3.',
     );
-    expect(resultCopy({ ...base, level: 3, tier: 'fail' }, en).verdictSpoken).toBe(
-      'Score 8 of 10 to clear level 3.',
+    expect(
+      resultCopy({ ...base, level: 3, hasNextLevel: false, tier: 'fail' }, en).verdictSpoken,
+    ).toBe('Score 8 of 10 to clear level 3.');
+  });
+
+  it('takes the last level from hasNextLevel, as the actions do, not from the level number', () => {
+    expect(resultCopy({ ...base, hasNextLevel: false, tier: 'fail' }, en).verdict).toBe(
+      'Score 8/10 to clear level 2.',
     );
   });
 
@@ -92,6 +101,28 @@ describe('resultCopy', () => {
       title: 'A la escuadra',
       verdict: 'Spain · 2026, level 2. Nothing missed.',
     });
+  });
+});
+
+// Spec §6: the actions rise last.
+describe('actionsAt', () => {
+  it("rises actionsAfter past the tier's beat after a fail or a pass", () => {
+    expect(actionsAt('fail')).toBe(resultsTimeline.failBeat + resultsTimeline.actionsAfter);
+    expect(actionsAt('passed')).toBe(resultsTimeline.passBeat + resultsTimeline.actionsAfter);
+  });
+
+  it('follows the last of the ten circles after a 10/10, one actionsStagger on', () => {
+    const lastCircle =
+      resultsTimeline.passBeat + (ROUND_LENGTH - 1) * resultsTimeline.circleStagger;
+    expect(actionsAt('excellent')).toBe(lastCircle + resultsTimeline.actionsStagger);
+  });
+
+  // Results' tips ring the actions, so the three must have risen before the tips show.
+  it('has every action risen before the tips show, after any tier', () => {
+    for (const tier of ['fail', 'passed', 'excellent'] as const) {
+      const lastRisen = actionsAt(tier) + 2 * resultsTimeline.actionsStagger + resultsTimeline.rise;
+      expect(lastRisen, tier).toBeLessThanOrEqual(resultsTimeline.tips);
+    }
   });
 });
 

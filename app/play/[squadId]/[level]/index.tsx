@@ -64,6 +64,8 @@ import { router, useIsFocused, useLocalSearchParams } from 'expo-router';
 import { StatusBar } from 'expo-status-bar';
 import { useEffect, useRef, useState } from 'react';
 import {
+  AccessibilityInfo,
+  Platform,
   ScrollView,
   StyleSheet,
   Text,
@@ -208,6 +210,14 @@ export default function Question() {
   }, [session.questions]);
 
   const verdict = session.results[session.currentIndex]?.correct ?? null;
+
+  // A decided question's verdict, spoken: TalkBack reads it from the prompt's
+  // live region, but iOS has none, and VoiceOver stays on the tapped tile,
+  // whose words change silently. As Study announces a revealed name.
+  useEffect(() => {
+    if (verdict === null || !screenReader || Platform.OS !== 'ios') return;
+    AccessibilityInfo.announceForAccessibility(verdict ? t.round.correct : t.round.missed);
+  }, [verdict, screenReader, t]);
 
   // A right answer moves on after `durations.autoAdvance`; a miss waits for
   // its button; with a screen reader on nothing moves on by itself (§2.4).

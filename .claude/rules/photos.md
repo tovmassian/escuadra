@@ -32,8 +32,8 @@ A photo whose credit names the player is refused; the credit is never re-worded 
 hide the name (`creditNamesPlayer`, checked in `dataIntegrity.test.ts`).
 The credit sits under the question's action button for as long as the
 question is on screen, never as part of the answer reveal. On Results and
-Study the credits sit under "Photo credits · N"; Study names each photo by
-shirt number only, so Hide names is not spoiled. Each photo load
+Study the credits sit under "Photo credits · N"; while Hide names is on, Study names
+each photo by shirt number only, so it is not spoiled. Each photo load
 reaches Wikimedia, so photos ship in a store build with the privacy
 disclosures (guardrail 4), never over the air:
 `docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md`.

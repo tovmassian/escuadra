@@ -40,7 +40,7 @@ export function HomeSquads({
       minHeight: sizes.minTapTarget,
     },
     squads: { flex: 1 },
-    squadsContent: { gap: spacing.xxs + 2 },
+    squadsContent: { gap: spacing.xxs + spacing.nudge },
     fade: {
       position: 'absolute',
       top: 0,

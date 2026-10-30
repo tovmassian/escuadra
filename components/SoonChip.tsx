@@ -9,7 +9,7 @@ export function SoonChip({ label }: { label: string }) {
   const styles = StyleSheet.create({
     chip: {
       paddingHorizontal: spacing.xs,
-      paddingVertical: spacing.xxs - 1,
+      paddingVertical: spacing.xxs - spacing.hair,
       borderRadius: radii.pill,
       backgroundColor: colors.soonBg,
     },
