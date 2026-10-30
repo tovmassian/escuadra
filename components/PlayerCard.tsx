@@ -35,6 +35,9 @@ interface PlayerCardProps {
   /** One line beneath the name: Results' "You picked Marc Pubill", Study's
    *  club or nationality. */
   line?: string;
+  /** The line as the default label speaks it, where it differs (Results:
+   *  a position by its word). */
+  lineSpoken?: string;
   photo: PhotoCredit | null;
   marker: TeamMarker;
   /** Study: the position code, top right. */
@@ -73,6 +76,7 @@ export function PlayerCard({
   shirtNumber,
   name,
   line,
+  lineSpoken,
   photo,
   marker,
   badge,
@@ -172,7 +176,7 @@ export function PlayerCard({
     accessibilityLabel ??
     (nameHidden
       ? `${shirtNumber ?? t.study.noNumber}, ${t.study.nameHidden}`
-      : `${shirtNumber ?? t.study.noNumber}, ${name}${line ? `. ${line}` : ''}`);
+      : `${shirtNumber ?? t.study.noNumber}, ${name}${line ? `. ${lineSpoken ?? line}` : ''}`);
 
   const content = (
     <>

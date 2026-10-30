@@ -249,7 +249,7 @@ export function positionLabel(position: Position, messages: Messages): string {
 const POSITION_CODES: readonly string[] = ['GK', 'DF', 'MF', 'FW'];
 
 /** A slot's value is a string, so a position in it needs narrowing back. */
-function isPosition(value: string): value is Position {
+export function isPosition(value: string): value is Position {
   return POSITION_CODES.includes(value);
 }
 

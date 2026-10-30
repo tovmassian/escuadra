@@ -27,8 +27,10 @@ export interface LadderRow {
 }
 
 /** Each level opens only once the one before it is open and cleared. An
- *  outdated score still counts, so a squad update never locks a level again.
- *  `lastUpdated` is the squad's current date. */
+ *  outdated score still counts, so a squad update alone locks nothing; a round
+ *  on the updated squad replaces it (`nextBest`), and a lower score then locks
+ *  the levels above again, as intended (owner, 2026-10-30). `lastUpdated` is
+ *  the squad's current date. */
 export function ladderRows(
   squadId: string,
   bestScores: Record<string, BestScore>,

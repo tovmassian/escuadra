@@ -8,6 +8,7 @@ import {
   formatShareText,
   shareCardView,
   shareTextParts,
+  shareTextSpoken,
   type ShareCardInput,
   type ShareFormat,
   type ShareInput,
@@ -94,8 +95,16 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
   const pillX = useSharedValue(0);
 
   // The picture's last capture is released with the sheet, not right after
-  // it is shared: a target app can still be reading it.
-  useEffect(() => () => releaseShareImage(), []);
+  // it is shared: a target app can still be reading it. `open` lets a capture
+  // that finishes after the sheet closed open no share menu.
+  const open = useRef(false);
+  useEffect(() => {
+    open.current = true;
+    return () => {
+      open.current = false;
+      releaseShareImage();
+    };
+  }, []);
 
   const pillWidth = switchWidth / 2;
   useEffect(() => {
@@ -203,7 +212,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
     try {
       const sent =
         format === 'image'
-          ? await shareImage(cardRef, t.share.title)
+          ? await shareImage(cardRef, t.share.title, () => open.current)
           : await shareText(formatShareText(text, t));
       if (sent) onShared(format);
     } catch {
@@ -218,7 +227,7 @@ function ShareBody({ card, text, onShared }: Omit<ShareSheetProps, 'visible' | '
     { key: 'image', label: t.share.image },
     { key: 'text', label: t.share.text },
   ];
-  const bubbleLabel = `${parts.header}. ${parts.score}${parts.verdict ? `, ${parts.verdict}` : ''}. ${parts.url}`;
+  const bubbleLabel = shareTextSpoken(text, t);
 
   return (
     <>

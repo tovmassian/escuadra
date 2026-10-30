@@ -6,6 +6,7 @@ import {
   formatShareText,
   shareCardView,
   shareTextParts,
+  shareTextSpoken,
 } from '../shareResult';
 
 const G = '🟩';
@@ -94,6 +95,23 @@ describe('shareTextParts', () => {
     expect(
       shareTextParts({ teamName: 'Spain', level: 1, outcomes: Array(10).fill(true) }, en).verdict,
     ).toBe('a la escuadra');
+  });
+});
+
+// The text preview's spoken label.
+describe('shareTextSpoken', () => {
+  it('speaks the score in words, since "8/10" can be read as a date', () => {
+    const outcomes = [true, true, false, true, true, true, true, false, true, true];
+    expect(shareTextSpoken({ teamName: 'Spain', level: 2, outcomes }, en)).toBe(
+      `Escuadra · Spain · Level 2. Score: 8 of 10. ${SHARE_URL}`,
+    );
+  });
+
+  it('adds a la escuadra after a flawless round', () => {
+    const outcomes = Array<boolean>(10).fill(true);
+    expect(shareTextSpoken({ teamName: 'Spain', level: 2, outcomes }, en)).toBe(
+      `Escuadra · Spain · Level 2. Score: 10 of 10, a la escuadra. ${SHARE_URL}`,
+    );
   });
 });
 
