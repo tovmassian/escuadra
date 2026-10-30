@@ -542,7 +542,7 @@ export const en = {
     yourSquads: 'Your squads',
   },
   store: {
-    /** The Play Store feature graphic's tagline (#147 localises the graphic). */
+    /** The Play Store feature graphic's tagline. */
     tagline: 'Learn every squad',
   },
   about: {

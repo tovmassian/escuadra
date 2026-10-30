@@ -8,7 +8,7 @@ import { LENGTH_BUDGETS } from '@/i18n/budgets';
 import { CATALOGS } from '@/i18n/catalogs';
 import { COUNTRY_NAMES } from '@/i18n/countries';
 import { en } from '@/i18n/en';
-import { catalogLeaves, isLater, type Leaf } from '@/i18n/leaves';
+import { catalogLeaves, type Leaf } from '@/i18n/leaves';
 import { LANGUAGE_NAMES } from '@/i18n/names';
 import type { SupportedLanguage } from '@/i18n/resolveLanguage';
 import { NOTICE_SOURCE, translationNotice } from '@/i18n/translationNotice';
@@ -42,8 +42,8 @@ export function reviewSheet(language: SupportedLanguage): string {
   const name = LANGUAGE_NAMES[language];
   const theirs = new Map(catalogLeaves(CATALOGS[language]).map((leaf) => [leaf.path, leaf]));
   const rows = catalogLeaves(en)
-    // A path the language has not translated yet, or one with no English text: nothing to review.
-    .filter((leaf) => !isLater(leaf.path, language) && leaf.text !== '')
+    // A path with no English text: nothing to review.
+    .filter((leaf) => leaf.text !== '')
     .map((leaf) => {
       const translated = theirs.get(leaf.path);
       const limit = budgetByPath.get(leaf.path) ?? '';

@@ -1,9 +1,8 @@
 // The Deutsch catalog (#145), typed against ./en.ts: same keys, same order,
 // same parameters. Drafted by Claude; a native speaker reviews it before it
-// merges (#145). The store tagline is English until #147 translates it with
-// the listing copy.
+// merges (#145).
 // Escuadra and a la escuadra come from ./names and are never translated.
-import { en, type CalendarDate, type Messages } from './en';
+import type { CalendarDate, Messages } from './en';
 import { A_LA_ESCUADRA, ESCUADRA } from './names';
 
 const MONTHS = [
@@ -418,8 +417,9 @@ export const de: Messages = {
     noResults: (query: string) => `Keine Ergebnisse für „${query}“`,
     yourSquads: 'Deine Teams',
   },
-  // English until #147 localises the feature graphic with the store listing.
-  store: en.store,
+  store: {
+    tagline: 'Lerne jeden Kader',
+  },
   about: {
     // "Info", also Settings' About section label (settings.sections.about).
     title: 'Info',
