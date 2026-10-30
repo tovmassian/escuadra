@@ -16,8 +16,10 @@ describe('reviewSheet', () => {
     expect(sheet).toMatch(/\| study\.players \| \{1\} players<br>1: 1 player/);
   });
 
-  it('leaves out what a language has not translated yet', () => {
-    expect(reviewSheet('de')).not.toContain('| store.');
+  it('includes the store tagline', () => {
+    expect(reviewSheet('de')).toContain(
+      '| store.tagline | Learn every squad | Lerne jeden Kader |',
+    );
   });
 
   it('includes About once a language has translated it', () => {
