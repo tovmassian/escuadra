@@ -445,8 +445,13 @@ person; the credit then names Wikimedia Commons and links the file's page,
 which names the author in full. The attribution-only licence's one condition
 is crediting the holder, so a photo under it with no name — in any spelling of
 the licence — is refused (`incomplete-credit`, missing `author`). Every
-`incomplete-credit` is listed with what it lacks. No photo comes from a
-missing article, a disambiguation page, or an item that is not a person. The
+`incomplete-credit` is listed with what it lacks. A credit that names the
+player would answer the question, so its photo is refused too
+(`credit-names-player`, listed with the credit) and the next candidate is
+tried. It names them when one of its words is a word of their `name` or
+`fullName` at least four letters long, or when it holds either name run
+together, as a URL can. The author is never shortened to fit. No photo comes
+from a missing article, a disambiguation page, or an item that is not a person. The
 photo is the latest lookup's verdict and is rewritten every run. A key no
 lookup answers — its batch failed after its retries, the reply skipped it, or
 `--offline` has nothing cached for it — keeps what is stored, is listed, and

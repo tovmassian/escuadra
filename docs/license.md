@@ -251,7 +251,8 @@ question is on screen:
 
 The **title is deliberately left out**. A Commons file name or caption names
 the player, and showing it would answer the question (`CLAUDE.md`, guardrail 1).
-The link supplies it instead.
+The link supplies it instead. For the same reason, a photo whose author names
+the player is refused: the author is shown as Commons gives it, never shortened.
 
 When Commons names no one — an unknown-author template, or an author field so
 long it is a template's boilerplate rather than a name (over 120 characters) —

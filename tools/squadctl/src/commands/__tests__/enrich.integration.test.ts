@@ -7,6 +7,7 @@ import { describe, expect, it } from 'vitest';
 import {
   PLAYERS,
   SEED,
+  imagePage,
   player,
   readText,
   repo,
@@ -150,5 +151,27 @@ describe('enrich --offline', () => {
         missing: ['licence', 'thumbnail', 'commons-page', 'size'],
       }),
     ]);
+  });
+
+  // A self-upload credits the player by name, which would answer the
+  // question: the walk moves on to the item's own image.
+  it('refuses an image whose credit names the player, and takes the item’s', async () => {
+    const root = repo({
+      players: [player('pedri', { wikiTitle: 'Pedri' })],
+      seed: [
+        ...SEED.filter(([, key]) => key !== 'Pedri.jpg'),
+        [CREDITS, 'Pedri.jpg', imagePage('Pedri.jpg', '<a href="//x/User:P">Pedri</a>')],
+        [CREDITS, 'Pedri item.jpg', imagePage('Pedri item.jpg')],
+      ],
+    });
+    const report = await Enrich.run(['--offline', '--json'], import.meta.url);
+    expect(report.failures).toEqual([]);
+    expect(report.players).toEqual([
+      expect.objectContaining({ id: 'pedri', photo: 'ok', imageSource: 'wikidata' }),
+    ]);
+    expect(stored(root).get('pedri')?.photo).toMatchObject({
+      file: 'Pedri item.jpg',
+      author: 'Bryan Berlin',
+    });
   });
 });

@@ -8,6 +8,7 @@ import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'nod
 import { tmpdir } from 'node:os';
 import path from 'node:path';
 import { afterEach, beforeEach } from 'vitest';
+import { commonsFileUrl } from '../../../../../../scripts/commons.ts';
 import type { Player, Squad } from '../../../../../../types/squad.ts';
 import { CREDITS } from '../../photo-credit.ts';
 import { writeAnswer, type Lookup } from '../../wikimedia-fetch.ts';
@@ -74,16 +75,20 @@ const person = (id: string, born: string, image?: string) => ({
     ...(image === undefined ? {} : { P18: [valueClaim(image)] }),
   },
 });
-const imagePage = (file: string) => ({
+/** A Commons file with a complete, accepted credit naming `artist`. */
+export const imagePage = (
+  file: string,
+  artist = '<a href="//commons.wikimedia.org/wiki/User:B">Bryan Berlin</a>',
+) => ({
   title: `File:${file}`,
   imageinfo: [
     {
       thumburl: `https://thumb.wikimedia.org/wikipedia/commons/thumb/a/ab/${file}/960px-${file}?utm_source=x`,
       width: 1200,
       height: 1600,
-      descriptionurl: `https://commons.wikimedia.org/wiki/File:${file}`,
+      descriptionurl: commonsFileUrl(file),
       extmetadata: {
-        Artist: { value: '<a href="//commons.wikimedia.org/wiki/User:B">Bryan Berlin</a>' },
+        Artist: { value: artist },
         LicenseShortName: { value: 'CC BY-SA 4.0' },
         LicenseUrl: { value: 'https://creativecommons.org/licenses/by-sa/4.0' },
       },

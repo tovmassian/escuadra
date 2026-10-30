@@ -33,7 +33,7 @@ import {
 
 type PlayerRow = { id: string } & Pick<
   PlayerEnrichment,
-  'photo' | 'birth' | 'file' | 'licence' | 'imageSource' | 'missing'
+  'photo' | 'birth' | 'file' | 'licence' | 'imageSource' | 'missing' | 'author'
 >;
 
 interface EnrichReport {
@@ -119,15 +119,18 @@ export default class Enrich extends BaseCommand<EnrichReport> {
       summary,
       conflicts,
       failures,
-      players: results.map(({ playerId, photo, birth, file, licence, imageSource, missing }) => ({
-        id: playerId,
-        photo,
-        birth,
-        file,
-        licence,
-        imageSource,
-        missing,
-      })),
+      players: results.map(
+        ({ playerId, photo, birth, file, licence, imageSource, missing, author }) => ({
+          id: playerId,
+          photo,
+          birth,
+          file,
+          licence,
+          imageSource,
+          missing,
+          author,
+        }),
+      ),
       exitCode,
     };
   }
@@ -245,6 +248,11 @@ export default class Enrich extends BaseCommand<EnrichReport> {
     for (const r of results.filter((r) => r.photo === 'incomplete-credit')) {
       this.report(
         `  ${colors.yellow('incomplete:')} ${r.playerId} — no ${r.missing.join(', ')} (${r.file})`,
+      );
+    }
+    for (const r of results.filter((r) => r.photo === 'credit-names-player')) {
+      this.report(
+        `  ${colors.yellow('refused:')}  ${r.playerId} — the credit names the player: "${r.author ?? ''}" (${r.file})`,
       );
     }
     for (const r of results.filter((r) => r.photo === 'disambiguation')) {

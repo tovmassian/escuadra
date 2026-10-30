@@ -1,9 +1,9 @@
 // Commons credit rules for player photos: which licences are accepted, what a
-// credit must carry, and how Commons' HTML author field becomes text — and
-// the Commons lookup that asks for exactly the fields they read. Pure —
-// lib/wikimedia-fetch.ts sends the query, this decides. Ported from the photo
-// POC's rules with the fixes its reviews found (numeric entities, exact
-// "Public domain").
+// credit must carry, whether it names the player, and how Commons' HTML author
+// field becomes text — and the Commons lookup that asks for exactly the fields
+// they read. Pure — lib/wikimedia-fetch.ts sends the query, this decides.
+// Ported from the photo POC's rules with the fixes its reviews found (numeric
+// entities, exact "Public domain").
 //
 // Spec: docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md.
 import { commonsFileUrl, fileKey } from '../../../../scripts/commons.ts';
@@ -95,6 +95,48 @@ export function isAcceptedLicence(shortName: string): boolean {
  *  it gets past the named-holder rule. */
 export function isAttributionOnly(shortName: string): boolean {
   return ATTRIBUTION_ONLY.test(shortName.trim());
+}
+
+/** Accents and case dropped, so "Pekarík" and "PEKARIK" are one word. */
+function foldName(text: string): string {
+  return text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+}
+
+function letterRuns(text: string): string[] {
+  return foldName(text).match(/\p{L}+/gu) ?? [];
+}
+
+/** A name word this short ("Kim", "Lee") is too common to give a name away. */
+const MIN_NAME_WORD = 4;
+
+/** Whether a credit names the player it is shown for. The credit shows for
+ *  the whole question, and in Study with Hide names on, so a credit that
+ *  names the player answers the question (guardrail 1). It names them when
+ *  one of its words is a word of the player's `name` or `fullName` at least
+ *  four letters long, or when its letters hold either name's letters run
+ *  together, in either word order: a URL such as ".../victorpalsson.jpg".
+ *  A credit that shares only a surname or a first name with the player is
+ *  refused too: in a multiple choice of their squad mates it is a hint. The
+ *  author is never rewritten to fit; the photo is dropped instead. */
+export function creditNamesPlayer(
+  author: string | null,
+  player: { name: string; fullName: string },
+): boolean {
+  if (author === null) return false;
+  const names = [player.name, player.fullName];
+  const playerWords = new Set(
+    names.flatMap(letterRuns).filter((word) => word.length >= MIN_NAME_WORD),
+  );
+  if (letterRuns(author).some((word) => playerWords.has(word))) return true;
+
+  const letters = letterRuns(author).join('');
+  return names.some((name) => {
+    const words = letterRuns(name);
+    const [first, last] = [words[0], words.at(-1)];
+    if (first === undefined || last === undefined) return false;
+    const swapped = words.length < 2 ? words : [last, ...words.slice(1, -1), first];
+    return [words, swapped].some((order) => letters.includes(order.join('')));
+  });
 }
 
 // Wikimedia's image hosts. Scaled thumbnails come from thumb.wikimedia.org;
