@@ -305,6 +305,7 @@ export const de: Messages = {
     failTitle: 'Die hier solltest du dir merken',
     toClear: (target: string, level: number) => `Mit ${target} schaffst du Level ${level}.`,
     toUnlock: (target: string, level: number) => `Mit ${target} schaltest du Level ${level} frei.`,
+    targetSpoken: (correct: number, total: number) => `${correct} von ${total}`,
     // The words first: a long name truncates, the words must not.
     youPicked: (picked: string) => `Deine Wahl: ${picked}`,
     nameRight: 'Name richtig',

@@ -4,7 +4,8 @@
 import { A_LA_ESCUADRA_TITLE } from '@/i18n/names';
 import type { Messages } from '@/i18n/en';
 import type { SupportedLanguage } from '@/i18n/resolveLanguage';
-import { optionText } from '@/lib/roundView';
+import { isPosition, optionText, positionLabel } from '@/lib/roundView';
+import type { QuestionPart } from '@/lib/questionEngine';
 import { PASS_RATIO, ROUND_LENGTH } from '@/lib/scoring';
 import type { QuestionResult } from '@/stores/session';
 
@@ -61,6 +62,8 @@ export function resultActions(passed: boolean, hasNextLevel: boolean): ResultAct
 export interface ResultCopy {
   title: string;
   verdict: string;
+  /** The verdict spoken, where it differs from the text. */
+  verdictSpoken?: string;
 }
 
 /** The tier's title and one line of verdict (spec §3.1). */
@@ -88,10 +91,13 @@ export function resultCopy(
   if (tier === 'passed') {
     return { title: results.clearedTitle(level), verdict: results.clearedVerdict };
   }
-  const target = `${Math.ceil(PASS_RATIO * ROUND_LENGTH)}/${ROUND_LENGTH}`;
+  const passMark = Math.ceil(PASS_RATIO * ROUND_LENGTH);
+  const verdict = (target: string) =>
+    level >= 3 ? results.toClear(target, level) : results.toUnlock(target, level + 1);
   return {
     title: results.failTitle,
-    verdict: level >= 3 ? results.toClear(target, level) : results.toUnlock(target, level + 1),
+    verdict: verdict(`${passMark}/${ROUND_LENGTH}`),
+    verdictSpoken: verdict(results.targetSpoken(passMark, ROUND_LENGTH)),
   };
 }
 
@@ -106,14 +112,37 @@ export function missedLine(
   language: SupportedLanguage,
   messages: Messages,
 ): string {
+  return missedText(result, messages, (part, index) => optionText(part, index, language, messages));
+}
+
+/** The missed card's line, spoken: a position by its word, since a screen
+ *  reader spells a code out (#187). */
+export function missedSpoken(
+  result: QuestionResult,
+  language: SupportedLanguage,
+  messages: Messages,
+): string {
+  return missedText(result, messages, (part, index) => {
+    const value = part.options[index];
+    return part.kind === 'position' && value !== undefined && isPosition(value)
+      ? positionLabel(value, messages)
+      : optionText(part, index, language, messages);
+  });
+}
+
+function missedText(
+  result: QuestionResult,
+  messages: Messages,
+  text: (part: QuestionPart, index: number) => string,
+): string {
   const { results } = messages;
   for (let i = 0; i < result.parts.length; i++) {
     const answered = result.parts[i];
     const part = result.question.parts[i];
     if (!answered || !part || answered.correct) continue;
-    const picked = optionText(part, answered.pickedIndex, language, messages);
+    const picked = text(part, answered.pickedIndex);
     if (part.kind === 'name') return results.youPicked(picked);
-    const right = optionText(part, part.correctIndex, language, messages);
+    const right = text(part, part.correctIndex);
     const before = i === 1 ? results.nameRight : results.nameAndPositionRight;
     return `${before} · ${results.wrongPart[part.kind](right, picked)}`;
   }
