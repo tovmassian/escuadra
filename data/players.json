@@ -23257,7 +23257,15 @@
     "position": "FW",
     "nationality": "Montserrat",
     "club": "Squires Gate",
-    "photo": null,
+    "photo": {
+      "file": "Trafford v Atherton Collieries - 24 January 2026 - Dom Richmond.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9f/Trafford_v_Atherton_Collieries_-_24_January_2026_-_Dom_Richmond.jpg/960px-Trafford_v_Atherton_Collieries_-_24_January_2026_-_Dom_Richmond.jpg",
+      "width": 1405,
+      "height": 2735,
+      "author": "Dominic Nelson",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
     "wikiTitle": "Dominic Richmond"
   },
   {
@@ -31314,7 +31322,15 @@
     "position": "DF",
     "nationality": "Armenia",
     "club": "Urartu",
-    "photo": null,
+    "photo": {
+      "file": "Arman Ghazaryan (cropped).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/14/Arman_Ghazaryan_%28cropped%29.jpg",
+      "width": 555,
+      "height": 756,
+      "author": "Andranik Ghazaryan",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
     "wikiTitle": "Arman Ghazaryan"
   },
   {
@@ -70118,7 +70134,15 @@
     "position": "MF",
     "nationality": "Afghanistan",
     "club": "Persiraja Banda Aceh",
-    "photo": null,
+    "photo": {
+      "file": "Omid popalzay-1473457571.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/04/Omid_popalzay-1473457571.jpg",
+      "width": 361,
+      "height": 449,
+      "author": "Nawid popalzay",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
     "wikiTitle": "Omid Popalzay"
   },
   {

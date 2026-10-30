@@ -88,9 +88,7 @@ describe('creditNamesPlayer', () => {
       'Peter_Pekarík_2012.jpg : Thomas Rodenbücher; derivative work: Haltiamieli',
       named('Peter Pekarík'),
     ],
-    ['a relative sharing the surname', 'Nawid popalzay', named('Omid Popalzay')],
-    ['another person sharing the surname', 'Andranik Ghazaryan', named('Arman Ghazaryan')],
-    ['another person sharing the first name', 'Dominic Nelson', named('Dominic Richmond')],
+    ['a one-word name', 'Rodri', named('Rodri', 'Rodrigo Hernández Cascante')],
   ])('refuses %s: "%s"', (_, author, player) => {
     expect(creditNamesPlayer(author, player)).toBe(true);
   });
@@ -105,17 +103,30 @@ describe('creditNamesPlayer', () => {
     ['a name inside a longer word', 'Bryan Berlin / WikiPortraits', named('Ryan Christie')],
     ['a name inside a longer word', 'Scottish Government', named('Scott McKenna')],
     ['a name inside a username', 'KhoaNguyen1', named('Nguyễn Adou Leygley Minh')],
+    // Only the whole name answers the question; a shared word keeps the photo.
+    ['a relative sharing only the surname', 'Nawid popalzay', named('Omid Popalzay')],
+    ['another person sharing only the surname', 'Andranik Ghazaryan', named('Arman Ghazaryan')],
+    ['another person sharing only the first name', 'Dominic Nelson', named('Dominic Richmond')],
+    ['a shared short surname', 'Kim Photography', named('Kim Min-jae')],
+    ['a one-word name inside a longer word', 'Bryan Berlin', named('Ryan')],
   ])('accepts %s: "%s"', (_, author, player) => {
     expect(creditNamesPlayer(author, player)).toBe(false);
   });
 
-  it('matches the full name as well as the short one', () => {
-    expect(creditNamesPlayer('Pedro Gonzalez', named('Pedri', 'Pedro González López'))).toBe(true);
+  // Letters Unicode does not split into a base and an accent fold too.
+  it.each([
+    ['Martin Odegaard', named('Martin Ødegaard')],
+    ['Ferdi Kadioglu', named('Ferdi Kadıoğlu')],
+    ['Jakub Kiwior', named('Jakub Kiwiór')],
+    ['Lukasz Fabianski', named('Łukasz Fabiański')],
+  ])('folds "%s" to the name it spells', (author, player) => {
+    expect(creditNamesPlayer(author, player)).toBe(true);
   });
 
-  // A three-letter word is too common to be a name's give-away on its own.
-  it('ignores a name word shorter than four letters', () => {
-    expect(creditNamesPlayer('Kim Photography', named('Kim Min-jae'))).toBe(false);
+  it('matches the full name as well as the short one', () => {
+    expect(creditNamesPlayer('Pedro González López', named('Pedri', 'Pedro González López'))).toBe(
+      true,
+    );
   });
 
   it('accepts a credit with no name', () => {

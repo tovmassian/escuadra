@@ -97,44 +97,59 @@ export function isAttributionOnly(shortName: string): boolean {
   return ATTRIBUTION_ONLY.test(shortName.trim());
 }
 
-/** Accents and case dropped, so "Pekarík" and "PEKARIK" are one word. */
+// Letters Unicode does not split into a base letter and an accent, spelled
+// as an author typing without them would.
+const UNSPLIT_LETTERS: Record<string, string> = {
+  ø: 'o',
+  ł: 'l',
+  ı: 'i',
+  đ: 'd',
+  ð: 'd',
+  æ: 'ae',
+  œ: 'oe',
+  ß: 'ss',
+  þ: 'th',
+  ə: 'e',
+};
+
+/** Accents and case dropped, so "Pekarík" and "PEKARIK" are one word, and
+ *  so are "Ødegaard" and "Odegaard". */
 function foldName(text: string): string {
-  return text.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase();
+  return text
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .toLowerCase()
+    .replace(/[øłıđðæœßþə]/g, (letter) => UNSPLIT_LETTERS[letter] ?? letter);
 }
 
 function letterRuns(text: string): string[] {
   return foldName(text).match(/\p{L}+/gu) ?? [];
 }
 
-/** A name word this short ("Kim", "Lee") is too common to give a name away. */
-const MIN_NAME_WORD = 4;
-
 /** Whether a credit names the player it is shown for. The credit shows for
  *  the whole question, and in Study with Hide names on, so a credit that
  *  names the player answers the question (guardrail 1). It names them when
- *  one of its words is a word of the player's `name` or `fullName` at least
- *  four letters long, or when its letters hold either name's letters run
- *  together, in either word order: a URL such as ".../victorpalsson.jpg".
- *  A credit that shares only a surname or a first name with the player is
- *  refused too: in a multiple choice of their squad mates it is a hint. The
+ *  it holds every word of the player's `name` or `fullName`, in any order, or
+ *  a two-word-or-longer name's letters run together, in either word order: a
+ *  URL such as ".../victorpalsson.jpg". A credit that shares only a surname
+ *  or a first name with the player keeps its photo (owner, 2026-10-30): each
+ *  refusal costs a photo, and only the whole name gives the answer away. The
  *  author is never rewritten to fit; the photo is dropped instead. */
 export function creditNamesPlayer(
   author: string | null,
   player: { name: string; fullName: string },
 ): boolean {
   if (author === null) return false;
-  const names = [player.name, player.fullName];
-  const playerWords = new Set(
-    names.flatMap(letterRuns).filter((word) => word.length >= MIN_NAME_WORD),
-  );
-  if (letterRuns(author).some((word) => playerWords.has(word))) return true;
-
+  const authorWords = new Set(letterRuns(author));
   const letters = letterRuns(author).join('');
-  return names.some((name) => {
+  return [player.name, player.fullName].some((name) => {
     const words = letterRuns(name);
     const [first, last] = [words[0], words.at(-1)];
     if (first === undefined || last === undefined) return false;
-    const swapped = words.length < 2 ? words : [last, ...words.slice(1, -1), first];
+    if (words.every((word) => authorWords.has(word))) return true;
+    // A one-word name run together would match inside any longer word.
+    if (words.length < 2) return false;
+    const swapped = [last, ...words.slice(1, -1), first];
     return [words, swapped].some((order) => letters.includes(order.join('')));
   });
 }
