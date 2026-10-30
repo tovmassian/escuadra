@@ -21,12 +21,14 @@ let lastCapture: string | null = null;
  * True once the menu has closed: Expo cannot tell whether the picture was
  * sent, so that is what `result.shared` counts for an image (spec §10.3).
  * `dialogTitle` is Android's share-dialog title, in the app's language.
- * False on web, where the button does nothing (spec §4.2), or when the device
- * cannot share a file.
+ * False on web, where the button does nothing (spec §4.2), when the device
+ * cannot share a file, or when `stillWanted` says the sheet closed during the
+ * capture: the picture is then released and no menu opens.
  */
 export async function shareImage(
   card: RefObject<ViewInstance | null>,
   dialogTitle: string,
+  stillWanted: () => boolean,
 ): Promise<boolean> {
   if (Platform.OS === 'web' || !(await Sharing.isAvailableAsync())) return false;
   releaseShareImage();
@@ -35,6 +37,10 @@ export async function shareImage(
     quality: 1,
     result: 'tmpfile',
   });
+  if (!stillWanted()) {
+    releaseShareImage();
+    return false;
+  }
   await Sharing.shareAsync(lastCapture, {
     mimeType: 'image/png',
     UTI: 'public.png',

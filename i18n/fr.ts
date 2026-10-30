@@ -331,6 +331,7 @@ export const fr: Messages = {
     toClear: (target: string, level: number) => `Fais ${target} pour valider le niveau ${level}.`,
     toUnlock: (target: string, level: number) =>
       `Fais ${target} pour débloquer le niveau ${level}.`,
+    targetSpoken: (correct: number, total: number) => `${correct} sur ${total}`,
     // The words first: a long name truncates, the words must not.
     youPicked: (picked: string) => `Ton choix : ${picked}`,
     // "Trouvé", the quiz word; "Bon nom" can read as "nice name".

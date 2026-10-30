@@ -1,7 +1,14 @@
 import { describe, expect, it } from 'vitest';
 import { en } from '@/i18n/en';
 import type { QuestionPart } from '@/lib/questionEngine';
-import { isFlawless, missedLine, resultActions, resultCopy, resultTier } from '../resultsView';
+import {
+  isFlawless,
+  missedLine,
+  missedSpoken,
+  resultActions,
+  resultCopy,
+  resultTier,
+} from '../resultsView';
 import type { QuestionResult } from '@/stores/session';
 
 // Invariant 10 (SCREENS.md, spec §3.2): the main button differs by pass/fail
@@ -54,12 +61,22 @@ describe('resultCopy', () => {
     expect(resultCopy({ ...base, tier: 'fail' }, en)).toEqual({
       title: 'These are the ones to learn',
       verdict: 'Score 8/10 to unlock level 3.',
+      verdictSpoken: 'Score 8 of 10 to unlock level 3.',
     });
   });
 
   it('fail on level 3: the score that clears it', () => {
     expect(resultCopy({ ...base, level: 3, tier: 'fail' }, en).verdict).toBe(
       'Score 8/10 to clear level 3.',
+    );
+  });
+
+  it('speaks the target in words, since "8/10" can be read as a date', () => {
+    expect(resultCopy({ ...base, tier: 'fail' }, en).verdictSpoken).toBe(
+      'Score 8 of 10 to unlock level 3.',
+    );
+    expect(resultCopy({ ...base, level: 3, tier: 'fail' }, en).verdictSpoken).toBe(
+      'Score 8 of 10 to clear level 3.',
     );
   });
 
@@ -139,6 +156,22 @@ describe('missedLine', () => {
 
   it('is empty for a question with no wrong part', () => {
     expect(missedLine(missed([name], [1]), 'en', en)).toBe('');
+  });
+
+  // The card's spoken label: a screen reader spells a position code out (#187).
+  describe('missedSpoken', () => {
+    it('names a position by its word', () => {
+      expect(missedSpoken(missed([name, pos], [1, 3]), 'en', en)).toBe(
+        'Name right · position is Midfield, you said Forward',
+      );
+    });
+
+    it('reads every other part as the card shows it', () => {
+      expect(missedSpoken(missed([name], [0]), 'en', en)).toBe('You picked Marc Pubill');
+      expect(missedSpoken(missed([name, pos, club], [1, 2, 0]), 'en', en)).toBe(
+        'Name and position right · club is Barcelona, you said Arsenal',
+      );
+    });
   });
 });
 
