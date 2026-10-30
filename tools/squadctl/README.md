@@ -445,8 +445,23 @@ person; the credit then names Wikimedia Commons and links the file's page,
 which names the author in full. The attribution-only licence's one condition
 is crediting the holder, so a photo under it with no name — in any spelling of
 the licence — is refused (`incomplete-credit`, missing `author`). Every
-`incomplete-credit` is listed with what it lacks. No photo comes from a
-missing article, a disambiguation page, or an item that is not a person. The
+`incomplete-credit` is listed with what it lacks. A credit that names the
+player would answer the question, so its photo is refused too
+(`credit-names-player`, listed with the credit) and the next candidate is
+tried. A credit names the player when it holds every word of their `name` or
+`fullName`, in any order. For a name of two or more words, it also names them
+when that name's letters, run together forwards or with the first and last words
+swapped, appear anywhere in the credit's letters once everything else is
+dropped, as in a URL ("victorpalsson"); that match can start or end inside a
+word, so "Bryan Berlin" would name a Ryan Berlin. Case and accents are ignored,
+ø, ł and ı included ("Martin Odegaard" names Martin Ødegaard). In both
+matches, a word is a run of letters and anything else ends it: "Rodri_2019.jpg"
+holds "Rodri", "Wan-Bissaka" is two words, and "Ryan" is not a word of "Bryan".
+Short of either match, a credit that shares only a surname or a first name with
+the player, such as a relative's, keeps its photo; for a one-word name such as
+"Rodri", that word is the whole name. The credit is never edited
+to leave the name out: the licence asks for the attribution as given. No photo comes
+from a missing article, a disambiguation page, or an item that is not a person. The
 photo is the latest lookup's verdict and is rewritten every run. A key no
 lookup answers — its batch failed after its retries, the reply skipped it, or
 `--offline` has nothing cached for it — keeps what is stored, is listed, and
