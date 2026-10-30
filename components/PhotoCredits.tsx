@@ -12,8 +12,9 @@ import { Pressable, ScrollView, StyleSheet, Text, View } from 'react-native';
 // the results' actions, and opens the list in a sheet: as tall as the list,
 // scrolling only past the screen's height, so no credit is cut off below the
 // fold. Player names are already revealed on Results, so naming them there
-// gives nothing away. Study passes `numbersOnly`, so a row reads "16", not
-// "16 Rodri": a name there would spoil Hide names. `onOpenChange` tells the
+// gives nothing away. Study passes `numbersOnly` while Hide names is on, so a
+// row reads "16", not "16 Rodri", which would spoil it; with names shown, a
+// member with no number ("—") is matched by name. `onOpenChange` tells the
 // screen when the sheet opens and closes; a credit's in-app browser opens
 // only from the sheet, so it covers that too. Results uses it to hold off
 // the store-rating ask (#57).
@@ -55,7 +56,7 @@ export function PhotoCredits({
         testID="photo-credits"
         onPress={() => setSheet(true)}
         accessibilityRole="button"
-        hitSlop={8}
+        hitSlop={spacing.xs}
         style={styles.button}
       >
         <Text style={styles.label}>{t.credits.button(rows.length)}</Text>

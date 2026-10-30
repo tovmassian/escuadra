@@ -176,7 +176,11 @@ export default function Study() {
       borderWidth: borderWidths.thick,
       borderColor: colors.border,
     },
-    header: { paddingHorizontal: spacing.md, paddingTop: spacing.xxs, gap: spacing.xs - 2 },
+    header: {
+      paddingHorizontal: spacing.md,
+      paddingTop: spacing.xxs,
+      gap: spacing.xs - spacing.nudge,
+    },
     eyebrowRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs },
     banner: {
       width: sizes.studyBanner.width,
@@ -186,7 +190,7 @@ export default function Study() {
       overflow: 'hidden',
     },
     eyebrow: { ...typography.captionEyebrow, flexShrink: 1, color: colors.textMuted },
-    titleRow: { flexDirection: 'row', alignItems: 'baseline', gap: spacing.xs + 2 },
+    titleRow: { flexDirection: 'row', alignItems: 'baseline', gap: spacing.xs + spacing.nudge },
     title: { ...typography.titleDisplay, color: colors.textPrimary },
     count: { ...typography.statMonoSmall, color: colors.textMuted },
     // A horizontal ScrollView grows to fill a column by default; this one
@@ -194,7 +198,7 @@ export default function Study() {
     filtersScroll: { flexGrow: 0, flexShrink: 0 },
     filters: { paddingHorizontal: spacing.md, paddingVertical: spacing.sm },
     // The pills, in one view for the second tip to ring.
-    filterRow: { flexDirection: 'row', gap: spacing.xs - 2 },
+    filterRow: { flexDirection: 'row', gap: spacing.xs - spacing.nudge },
     list: { flex: 1 },
     listContent: { paddingHorizontal: spacing.md, paddingBottom: insets.bottom + spacing.md },
     columns: { gap: sizes.studyGridGap },
@@ -376,7 +380,9 @@ export default function Study() {
         ItemSeparatorComponent={grid ? GridRowGap : undefined}
         ListFooterComponent={
           <View style={styles.footer}>
-            <PhotoCredits rows={creditRows} numbersOnly />
+            {/* Names while Hide names is off, so a member with no number is
+                matched to a photo; numbers only while it is on. */}
+            <PhotoCredits rows={creditRows} numbersOnly={hidden} />
           </View>
         }
         initialNumToRender={grid ? INITIAL_ROWS.grid : INITIAL_ROWS.list}

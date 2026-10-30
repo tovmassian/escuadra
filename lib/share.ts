@@ -21,9 +21,11 @@ let lastCapture: string | null = null;
  * True once the menu has closed: Expo cannot tell whether the picture was
  * sent, so that is what `result.shared` counts for an image (spec §10.3).
  * `dialogTitle` is Android's share-dialog title, in the app's language.
- * False on web, where the button does nothing (spec §4.2), when the device
- * cannot share a file, or when `stillWanted` says the sheet closed during the
- * capture: the picture is then released and no menu opens.
+ * False on web, where the button does nothing (spec §4.2), or when
+ * `stillWanted` says the sheet closed during the capture: the picture is then
+ * released and no menu opens. `isAvailableAsync` can be false only in a
+ * browser; on iOS and Android it is always true (SDK 58), so a phone always
+ * gets its menu.
  */
 export async function shareImage(
   card: RefObject<ViewInstance | null>,

@@ -87,7 +87,7 @@ export function LadderHero({
     identity: {
       paddingHorizontal: spacing.lg,
       paddingTop: spacing.md,
-      paddingBottom: spacing.sm + 2,
+      paddingBottom: spacing.sm + spacing.nudge,
       gap: spacing.xs,
     },
     nameRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.sm },

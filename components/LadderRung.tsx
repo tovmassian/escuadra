@@ -42,8 +42,8 @@ export function LadderRung({ row, title, onPress }: LadderRungProps) {
     row: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: spacing.sm + 2,
-      paddingVertical: spacing.sm + 2,
+      gap: spacing.sm + spacing.nudge,
+      paddingVertical: spacing.sm + spacing.nudge,
       paddingHorizontal: spacing.md,
       borderRadius: radii.rung,
       borderWidth: borderWidths.hairline,
@@ -63,7 +63,7 @@ export function LadderRung({ row, title, onPress }: LadderRungProps) {
       color: best ? colors.textPrimary : colors.textMuted,
       flex: 1,
     },
-    score: { alignItems: 'flex-end', gap: spacing.xxs - 1 },
+    score: { alignItems: 'flex-end', gap: spacing.xxs - spacing.hair },
     best: { ...typography.rungScore, color: escuadra ? colors.successText : scoreColor },
     tail: { ...typography.rungScoreTail, color: escuadra ? colors.successText : colors.textMuted },
     tag: { ...typography.soonChip, color: outdated ? colors.textMuted : colors.successText },
@@ -75,7 +75,7 @@ export function LadderRung({ row, title, onPress }: LadderRungProps) {
       maxWidth: '50%',
       flexDirection: 'row',
       alignItems: 'center',
-      gap: spacing.xs - 2,
+      gap: spacing.xs - spacing.nudge,
     },
     // Shrinks, so a long translated hint wraps instead of crushing the title.
     hint: { ...typography.soonChip, color: colors.textMuted, flexShrink: 1 },

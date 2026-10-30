@@ -44,11 +44,11 @@ export function LadderCard({ row, title, description, onPlay, playRef }: LadderC
       borderWidth: borderWidths.thick,
       borderColor: line,
       borderRadius: radii.ladderCard,
-      padding: spacing.md + 2,
-      gap: spacing.md + 2,
+      padding: spacing.md + spacing.nudge,
+      gap: spacing.md + spacing.nudge,
     },
     top: { flexDirection: 'row', alignItems: 'flex-start', gap: spacing.md },
-    numberBox: { paddingRight: corner.arm + spacing.xxs / 2 },
+    numberBox: { paddingRight: corner.arm + spacing.nudge },
     number: { ...typography.ladderCardNumber, color: colors.textPrimary },
     corner: {
       position: 'absolute',
@@ -61,7 +61,7 @@ export function LadderCard({ row, title, description, onPlay, playRef }: LadderC
       borderColor: line,
     },
     text: { flex: 1, gap: spacing.xs, paddingTop: spacing.xxs },
-    statusRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.xxs + 1 },
+    statusRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.xxs + spacing.hair },
     status: {
       ...typography.ladderCardStatus,
       color: outdated ? colors.textMuted : isEscuadra(row) ? colors.successText : colors.accentLine,
@@ -76,7 +76,7 @@ export function LadderCard({ row, title, description, onPlay, playRef }: LadderC
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'center',
-      gap: spacing.xs + 2,
+      gap: spacing.xs + spacing.nudge,
       // Room at the ends, and a label that wraps rather than runs past them at
       // the largest text (#187, J5).
       paddingHorizontal: spacing.md,

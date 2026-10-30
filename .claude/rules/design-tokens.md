@@ -15,7 +15,9 @@ paths:
 from the design tokens. If a token is missing, add it to the token file
 rather than inlining a value. This governs the app's own design system —
 backgrounds, text, spacing, semantic accent/success/error — never invented
-or arbitrary colour.
+or arbitrary colour. A design between two spacing steps adds or takes
+`spacing.nudge` (2) or `spacing.hair` (1); `npm run lint` refuses a number
+added to, taken from or dividing a spacing step, and a numeric `hitSlop`.
 
 Team identity colour is content, not a token: `team-identity.md`.
 

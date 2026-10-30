@@ -18,15 +18,15 @@ export function FilterPill({ label, active, onPress, count, spokenLabel }: Filte
   const colors = useThemeColors();
   const styles = StyleSheet.create({
     pill: {
-      paddingVertical: spacing.xs - 2,
-      paddingHorizontal: spacing.sm + 2,
+      paddingVertical: spacing.xs - spacing.nudge,
+      paddingHorizontal: spacing.sm + spacing.nudge,
       borderRadius: radii.pill,
       borderWidth: 1,
     },
     pillActive: { backgroundColor: colors.accent, borderColor: colors.accent },
     pillIdle: { backgroundColor: colors.surface, borderColor: colors.border },
     // Only with a count, so a pill without one lays out as it always did.
-    pillCounted: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs - 2 },
+    pillCounted: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs - spacing.nudge },
     label: { ...typography.filterLabel },
     count: { ...typography.filterCount },
   });

@@ -8,6 +8,7 @@ import { isPosition, optionText, positionLabel } from '@/lib/roundView';
 import type { QuestionPart } from '@/lib/questionEngine';
 import { PASS_RATIO, ROUND_LENGTH } from '@/lib/scoring';
 import type { QuestionResult } from '@/stores/session';
+import { resultsTimeline } from '@/theme/tokens';
 
 /**
  * A la escuadra — the flawless round the product is named for.
@@ -59,6 +60,18 @@ export function resultActions(passed: boolean, hasNextLevel: boolean): ResultAct
   return { primary, secondary: 'study', retryIcon: primary !== 'retry' };
 }
 
+/**
+ * When the actions start to rise, in ms from Results opening. Spec §6 has them
+ * last: `actionsAfter` past the tier's beat, or, after a 10/10, one
+ * `actionsStagger` after the last of its circles, so the cascade runs on from
+ * the circles to the buttons.
+ */
+export function actionsAt(tier: ResultTier): number {
+  const { failBeat, passBeat, actionsAfter, circleStagger, actionsStagger } = resultsTimeline;
+  if (tier === 'excellent') return passBeat + (ROUND_LENGTH - 1) * circleStagger + actionsStagger;
+  return (tier === 'fail' ? failBeat : passBeat) + actionsAfter;
+}
+
 export interface ResultCopy {
   title: string;
   verdict: string;
@@ -71,11 +84,14 @@ export function resultCopy(
   {
     tier,
     level,
+    hasNextLevel,
     teamName,
     season,
   }: {
     tier: ResultTier;
     level: number;
+    /** As `resultActions` takes it: false on the last level. */
+    hasNextLevel: boolean;
     teamName: string;
     season: string;
   },
@@ -93,7 +109,7 @@ export function resultCopy(
   }
   const passMark = Math.ceil(PASS_RATIO * ROUND_LENGTH);
   const verdict = (target: string) =>
-    level >= 3 ? results.toClear(target, level) : results.toUnlock(target, level + 1);
+    hasNextLevel ? results.toUnlock(target, level + 1) : results.toClear(target, level);
   return {
     title: results.failTitle,
     verdict: verdict(`${passMark}/${ROUND_LENGTH}`),

@@ -79,14 +79,14 @@ export function SettingsRow({
     row: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: spacing.sm + 2,
+      gap: spacing.sm + spacing.nudge,
       minHeight,
       paddingHorizontal: spacing.md,
-      paddingVertical: spacing.sm + 2,
+      paddingVertical: spacing.sm + spacing.nudge,
       borderBottomWidth: last ? 0 : borderWidths.hairline,
       borderBottomColor: colors.hairline,
     },
-    text: { flex: 1, minWidth: 0, gap: spacing.xxs - 1 },
+    text: { flex: 1, minWidth: 0, gap: spacing.xxs - spacing.hair },
     label: {
       ...typography.settingsLabel,
       color: muted ? colors.textSecondary : danger ? colors.error : colors.textPrimary,

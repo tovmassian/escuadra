@@ -98,7 +98,7 @@ export default function Licences() {
         <Pressable
           onPress={() => router.back()}
           accessibilityRole="button"
-          hitSlop={12}
+          hitSlop={spacing.sm}
           {...titleFocus.chrome}
         >
           <Text style={styles.back}>‹ {t.common.back}</Text>

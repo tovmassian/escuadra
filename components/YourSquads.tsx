@@ -12,8 +12,12 @@ export function YourSquads({ children }: { children: ReactNode }) {
   const colors = useThemeColors();
   const t = useT();
   const styles = StyleSheet.create({
-    group: { gap: spacing.xs + 2, marginTop: spacing.xxs + 2, marginBottom: spacing.md + 2 },
-    caption: { flexDirection: 'row', alignItems: 'center', gap: spacing.xxs + 2 },
+    group: {
+      gap: spacing.xs + spacing.nudge,
+      marginTop: spacing.xxs + spacing.nudge,
+      marginBottom: spacing.md + spacing.nudge,
+    },
+    caption: { flexDirection: 'row', alignItems: 'center', gap: spacing.xxs + spacing.nudge },
     label: { ...typography.monoCaption, color: colors.textMuted },
     card: {
       borderRadius: radii.squadsCard,
