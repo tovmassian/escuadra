@@ -49,6 +49,14 @@ export function shareTextParts(
   };
 }
 
+/** The text preview, spoken: the score in words, since a screen reader can read
+ *  "8/10" as a date. */
+export function shareTextSpoken(input: ShareInput, messages: Messages): string {
+  const { header, verdict, squares, url } = shareTextParts(input, messages);
+  const score = messages.common.scoreSpoken(squares.filter(Boolean).length, squares.length);
+  return `${header}. ${score}${verdict ? `, ${verdict}` : ''}. ${url}`;
+}
+
 export function formatShareText(input: ShareInput, messages: Messages): string {
   const { header, score, verdict, squares, url } = shareTextParts(input, messages);
   const grid = squares.map((o) => (o ? '🟩' : '🟥')).join('');

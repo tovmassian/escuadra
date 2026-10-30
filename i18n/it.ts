@@ -317,6 +317,7 @@ export const it: Messages = {
     failTitle: 'Ecco quelli da imparare',
     toClear: (target: string, level: number) => `Fai ${target} per superare il livello ${level}.`,
     toUnlock: (target: string, level: number) => `Fai ${target} per sbloccare il livello ${level}.`,
+    targetSpoken: (correct: number, total: number) => `${correct} su ${total}`,
     // The words first: a long name truncates, the words must not.
     youPicked: (picked: string) => `La tua scelta: ${picked}`,
     nameRight: 'Nome giusto',

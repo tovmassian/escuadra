@@ -378,6 +378,8 @@ export const en = {
     /** `target` is "8/10". */
     toClear: (target: string, level: number) => `Score ${target} to clear level ${level}.`,
     toUnlock: (target: string, level: number) => `Score ${target} to unlock level ${level}.`,
+    /** `target` spoken in words: a screen reader can read "8/10" as a date. */
+    targetSpoken: (correct: number, total: number) => `${correct} of ${total}`,
     /** A missed card's line when the name was wrong. */
     youPicked: (picked: string) => `You picked ${picked}`,
     nameRight: 'Name right',

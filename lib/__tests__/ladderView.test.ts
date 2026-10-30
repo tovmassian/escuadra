@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { en } from '@/i18n/en';
-import type { BestScore } from '@/lib/bestScore';
+import { nextBest, type BestScore } from '@/lib/bestScore';
 import {
   focusedLevel,
   hasOutdated,
@@ -101,9 +101,18 @@ describe('ladderRows', () => {
     expect(rows[1]?.best).toEqual({ correct: 6, total: 10, outdated: false });
   });
 
-  it('still counts outdated scores for unlocks, so nobody is locked out again', () => {
+  it('counts an outdated score for unlocks, so a squad update alone locks nothing', () => {
     const rows = ladderRows('bar', current({ 'bar:1': 9, 'bar:2': 8 }, OLD), NOW);
     expect(rows.map((r) => r.status)).toEqual(['cleared', 'cleared', 'unlocked']);
+  });
+
+  // Intended (owner, 2026-10-30): a round on the updated squad replaces an
+  // outdated best whatever its value, so a lower score locks the levels above.
+  it('locks the levels above again when a lower score replaces an outdated clear', () => {
+    const bests = current({ 'bar:1': 10, 'bar:2': 9 }, OLD);
+    bests['bar:1'] = nextBest(bests['bar:1'], 5, NOW);
+    const rows = ladderRows('bar', bests, NOW);
+    expect(rows.map((r) => r.status)).toEqual(['unlocked', 'locked', 'locked']);
   });
 
   it('returns exactly three rows in level order', () => {

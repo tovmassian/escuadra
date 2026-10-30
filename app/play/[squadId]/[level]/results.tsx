@@ -15,6 +15,7 @@ import { photoCreditRows, photoFor } from '@/lib/photos';
 import type { Level } from '@/lib/questionEngine';
 import {
   missedLine,
+  missedSpoken,
   resultActions,
   resultCopy,
   resultTier,
@@ -131,6 +132,9 @@ export default function Results() {
   const actionsRef = useRef<ViewInstance>(null);
   const titleRef = useRef<TextInstance>(null);
   const titleFocus = useTitleFocus(titleRef, !showTips);
+  // Set once a new round starts, so a second tap before Results leaves starts
+  // no second round.
+  const leaving = useRef(false);
 
   // After an a la escuadra round, once the celebration is over, perhaps ask
   // for a store rating (#57). Nothing here sets state, so the screen never
@@ -255,6 +259,8 @@ export default function Results() {
     beat + resultsTimeline.actionsAfter + k * resultsTimeline.actionsStagger;
 
   const retry = (atLevel: Level) => {
+    if (leaving.current) return;
+    leaving.current = true;
     const roster = getRoster(squadId);
     useSession.getState().startRound(squad, roster, atLevel);
     // Results builds this round, so the question screen finds it playing and
@@ -361,6 +367,7 @@ export default function Results() {
               beat + resultsTimeline.actionsStagger,
             )}
             style={styles.verdict}
+            accessibilityLabel={copy.verdictSpoken}
           >
             {copy.verdict}
           </Animated.Text>
@@ -687,6 +694,7 @@ function MissedCards({
                 shirtNumber={item.question.memberNo}
                 name={item.question.playerName}
                 line={missedLine(item, language, t)}
+                lineSpoken={missedSpoken(item, language, t)}
                 photo={photoFor(getPlayer(item.question.playerId))}
                 marker={marker}
               />
