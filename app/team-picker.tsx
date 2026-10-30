@@ -246,9 +246,9 @@ export default function TeamPicker() {
   const styles = StyleSheet.create({
     root: { flex: 1, backgroundColor: colors.background },
     content: { paddingHorizontal: spacing.lg },
-    header: { gap: spacing.md + 2, marginBottom: spacing.md + 2 },
+    header: { gap: spacing.md + spacing.nudge, marginBottom: spacing.md + spacing.nudge },
     // The tabs and pills, together for the first tip, at the header's own gap.
-    switch: { gap: spacing.md + 2 },
+    switch: { gap: spacing.md + spacing.nudge },
     topBar: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' },
     count: { ...typography.monoCaption, color: colors.textMuted },
     title: { ...typography.displayTitle, color: colors.textPrimary },
@@ -276,7 +276,7 @@ export default function TeamPicker() {
     // The caption shrinks before it pushes the row wider than the screen.
     nationsCaption: { ...typography.monoCaption, color: colors.textMuted, flexShrink: 1 },
     // Every heading but the first opens with space above its letter.
-    headingAfter: { paddingTop: spacing.md + 2 },
+    headingAfter: { paddingTop: spacing.md + spacing.nudge },
     letter: { ...typography.letterHeading },
     // Keeps the rail clear of a row's score.
     gutter: { paddingRight: Math.max(0, sizes.rail.width - spacing.lg) },

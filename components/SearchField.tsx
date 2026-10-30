@@ -100,9 +100,9 @@ export function SearchField({ value, onChange, onClear }: SearchFieldProps) {
     root: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: spacing.sm - 2,
+      gap: spacing.sm - spacing.nudge,
       height: sizes.searchField,
-      paddingHorizontal: spacing.md + 2,
+      paddingHorizontal: spacing.md + spacing.nudge,
       backgroundColor: colors.surface,
       borderWidth: borderWidths.hairline,
       borderColor: colors.border,

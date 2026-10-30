@@ -13,7 +13,7 @@ import {
   typography,
 } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
-import { useEffect, useRef, useState, type ReactNode } from 'react';
+import { useCallback, useEffect, useRef, useState, type ReactNode } from 'react';
 import {
   AccessibilityInfo,
   Modal,
@@ -72,7 +72,11 @@ function slideUp(values: EntryAnimationsValues) {
 // both one, so they open, look and close alike. It closes from the ×, a tap on
 // the backdrop, Android's back button, or a drag down on the handle or title.
 //
-// The children mount only while the sheet is open, so state kept inside them
+// Closing, it slides back down as its backdrop fades, and only then does the
+// Modal go (#247). `visible` turns false as the slide starts, so a caller can
+// tell its work in flight that the sheet is going.
+//
+// The children mount only while the sheet is up, so state kept inside them
 // starts fresh at every opening.
 //
 // The sheet is as tall as what it holds, capped at the Modal's height less the
@@ -81,9 +85,14 @@ function slideUp(values: EntryAnimationsValues) {
 // its handle and its close button off the top, with no way to dismiss it. Under
 // the cap, the child that shrinks scrolls.
 export function Sheet({ visible, onClose, title, testID, children }: SheetProps) {
+  // Up from `visible` turning true until the sheet has slid out after it turns
+  // false. Set during the render that opens it, so it opens at once.
+  const [up, setUp] = useState(visible);
+  if (visible && !up) setUp(true);
+  const closed = useCallback(() => setUp(false), []);
   return (
     <Modal
-      visible={visible}
+      visible={up}
       transparent
       animationType="none"
       statusBarTranslucent
@@ -91,8 +100,14 @@ export function Sheet({ visible, onClose, title, testID, children }: SheetProps)
       // Android's back button.
       onRequestClose={onClose}
     >
-      {visible ? (
-        <SheetFrame onClose={onClose} title={title} testID={testID}>
+      {up ? (
+        <SheetFrame
+          closing={!visible}
+          onClosed={closed}
+          onClose={onClose}
+          title={title}
+          testID={testID}
+        >
           {children}
         </SheetFrame>
       ) : null}
@@ -100,7 +115,14 @@ export function Sheet({ visible, onClose, title, testID, children }: SheetProps)
   );
 }
 
-function SheetFrame({ onClose, title, testID, children }: Omit<SheetProps, 'visible'>) {
+function SheetFrame({
+  closing,
+  onClosed,
+  onClose,
+  title,
+  testID,
+  children,
+}: Omit<SheetProps, 'visible'> & { closing: boolean; onClosed: () => void }) {
   const colors = useThemeColors();
   const t = useT();
   const insets = useSafeAreaInsets();
@@ -150,10 +172,30 @@ function SheetFrame({ onClose, title, testID, children }: Omit<SheetProps, 'visi
     }),
   );
   const dragStyle = useAnimatedStyle(() => ({ transform: [{ translateY: dragY.value }] }));
+  const screenReader = useScreenReader();
+
+  // Closing slides the sheet down the way a drag does, as the backdrop fades.
+  // Not under Reduce Motion, after a drag (it has already slid out), or with a
+  // screen reader on: the focus hand-back after a sheet was verified with an
+  // instant close (#187), and `useTitleFocus`'s refocus is timed to it.
+  const backdrop = useSharedValue(1);
+  const backdropStyle = useAnimatedStyle(() => ({ opacity: backdrop.value }));
+  useEffect(() => {
+    if (!closing) return;
+    if (reduced || dragged || screenReader) {
+      onClosed();
+      return;
+    }
+    backdrop.set(withTiming(0, { duration: SHEET_MS }));
+    dragY.set(
+      withTiming(sheetHeight.get(), { duration: SHEET_MS }, (done) => {
+        if (done) scheduleOnRN(onClosed);
+      }),
+    );
+  }, [closing, reduced, dragged, screenReader, onClosed, backdrop, dragY, sheetHeight]);
 
   // A screen reader starts on the title, not the × (#187), once the sheet has
   // risen: the sheet is below the screen while it slides up.
-  const screenReader = useScreenReader();
   const titleRef = useRef<TextInstance>(null);
   useEffect(() => {
     if (!screenReader || Platform.OS === 'web') return;
@@ -208,19 +250,28 @@ function SheetFrame({ onClose, title, testID, children }: Omit<SheetProps, 'visi
   });
 
   return (
-    <View style={styles.root} onLayout={(e) => setRootHeight(e.nativeEvent.layout.height)}>
-      <Animated.View entering={fadeIn(reduced, durations.scrim)} style={styles.scrim}>
-        {/* A tap outside closes the sheet, but the scrim is left out of the
+    <View
+      style={styles.root}
+      onLayout={(e) => setRootHeight(e.nativeEvent.layout.height)}
+      // Nothing in a closing sheet takes a tap.
+      pointerEvents={closing ? 'none' : 'auto'}
+    >
+      {/* The fade-in on the scrim and the fade-out on this wrapper, so neither
+          animation overwrites the other's opacity. */}
+      <Animated.View style={[StyleSheet.absoluteFill, backdropStyle]}>
+        <Animated.View entering={fadeIn(reduced, durations.scrim)} style={styles.scrim}>
+          {/* A tap outside closes the sheet, but the scrim is left out of the
             screen reader's order: the × and Android's back button are the
             accessible ways out, and a second "Close" would be read twice (on
             Android `accessibilityViewIsModal` does nothing). */}
-        <Pressable
-          style={StyleSheet.absoluteFill}
-          onPress={onClose}
-          focusable={false}
-          importantForAccessibility="no"
-          accessibilityElementsHidden
-        />
+          <Pressable
+            style={StyleSheet.absoluteFill}
+            onPress={onClose}
+            focusable={false}
+            importantForAccessibility="no"
+            accessibilityElementsHidden
+          />
+        </Animated.View>
       </Animated.View>
 
       {/* The drag moves this wrapper and the slide-in moves the sheet inside

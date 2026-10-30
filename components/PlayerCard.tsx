@@ -8,10 +8,11 @@ import { Flag } from '@/components/Flag';
 import { useReduceMotion } from '@/hooks/useReduceMotion';
 import { useT } from '@/i18n/useT';
 import { fadeIn } from '@/lib/entering';
-import { bannerBands, stageVeil } from '@/lib/stageView';
+import { bannerBands, stageVeil, withAlpha } from '@/lib/stageView';
 import {
   borderWidths,
   cardGradient,
+  cardNumberBacking,
   durations,
   fontScaleCap,
   radii,
@@ -59,8 +60,8 @@ interface PlayerCardProps {
 }
 
 // A player as a card (spec §5.2), on Results and Study: the team's bands under
-// the veil, the photo over them, the shirt number top left, a gradient, and the
-// name with one line beneath. The bands are always drawn, so a photo that is
+// the veil, the photo over them, the shirt number top left on its backing, a
+// gradient, and the name with one line beneath. The bands are always drawn, so a photo that is
 // loading, failed or offline (spec §13) leaves a dark card the white number
 // and `cardLine` hold on, never the bare surface. One component, so the two
 // screens match.
@@ -97,6 +98,10 @@ export function PlayerCard({
   const [wasHidden, setWasHidden] = useState(nameHidden);
   if (nameHidden && !wasHidden) setWasHidden(true);
   const bands = bannerBands(marker);
+  // The number's backing holds to its foot, then fades (`cardNumberBacking`).
+  const numberFoot = spacing.xs + typography.cardNumber.lineHeight;
+  const backingHeight = numberFoot + cardNumberBacking.fade;
+  const backing = withAlpha(colors.veilInk, cardNumberBacking.alpha);
   const styles = StyleSheet.create({
     card: {
       width,
@@ -111,6 +116,7 @@ export function PlayerCard({
       backgroundColor: colors.veilInk,
       opacity: stageVeil(bands, themeName),
     },
+    backing: { position: 'absolute', top: 0, left: 0, right: 0, height: backingHeight },
     number: {
       ...typography.cardNumber,
       color: colors.onPhoto,
@@ -127,8 +133,8 @@ export function PlayerCard({
     },
     badge: {
       position: 'absolute',
-      top: spacing.xs + 2,
-      right: spacing.xs + 2,
+      top: spacing.xs + spacing.nudge,
+      right: spacing.xs + spacing.nudge,
       height: sizes.studyChip,
       paddingHorizontal: spacing.xs,
       alignItems: 'center',
@@ -143,7 +149,7 @@ export function PlayerCard({
       alignSelf: 'flex-start',
       justifyContent: 'center',
       height: sizes.revealPill.card,
-      paddingHorizontal: spacing.xs + 2,
+      paddingHorizontal: spacing.xs + spacing.nudge,
       borderRadius: radii.pill,
       borderWidth: borderWidths.thick,
       borderStyle: 'dashed',
@@ -153,7 +159,7 @@ export function PlayerCard({
     name: { ...typography.cardName, color: colors.onPhoto },
     line: { ...typography.cardLine, color: colors.cardLine },
     lineNeutral: { ...typography.cardAffiliation, color: colors.onPhotoMuted, flexShrink: 1 },
-    lineRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs - 2 },
+    lineRow: { flexDirection: 'row', alignItems: 'center', gap: spacing.xs - spacing.nudge },
   });
 
   const neutral = lineTone === 'neutral';
@@ -198,6 +204,12 @@ export function PlayerCard({
           cachePolicy="disk"
         />
       ) : null}
+      <LinearGradient
+        colors={[backing, backing, withAlpha(colors.veilInk, 0)]}
+        locations={[0, numberFoot / backingHeight, 1]}
+        style={styles.backing}
+        pointerEvents="none"
+      />
       <LinearGradient
         colors={cardGradient.colors}
         locations={cardGradient.locations}

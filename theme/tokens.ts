@@ -385,13 +385,19 @@ export const stageGradients: Record<ThemeName, StageGradient> = {
   },
 };
 
-// A player card's shading (spec §5.2): a light scrim behind the shirt number,
-// clear through the face, deep under the name. The same in both themes,
-// because the card is always a photo or the team's bands.
+// A player card's shading (spec §5.2): clear through the face, deep under the
+// name. The same in both themes, because the card is always a photo or the
+// team's bands. The shirt number has its own backing, `cardNumberBacking`.
 export const cardGradient: StageGradient = {
-  colors: ['rgba(10,11,15,0.35)', 'rgba(10,11,15,0)', 'rgba(10,11,15,0)', 'rgba(10,11,15,0.92)'],
-  locations: [0, 0.28, 0.4, 0.8],
+  colors: ['rgba(10,11,15,0)', 'rgba(10,11,15,0)', 'rgba(10,11,15,0.92)'],
+  locations: [0, 0.4, 0.8],
 };
+
+// The backing behind a player card's shirt number (#247), as `stage.heroBacking`
+// backs the question's: `veilInk` at `alpha` from the card's top to the
+// number's foot, then clear over `fade` pt, before the face. 0.45 is the least
+// that keeps the white number at 3:1 even over a white photo.
+export const cardNumberBacking = { alpha: 0.45, fade: 24 } as const;
 
 // The no-photo stage (spec §2.6): the squad's marker bands under a wash of
 // `veilInk` at this opacity, per theme. A floor, not the final value —
@@ -1380,6 +1386,10 @@ export const iconSize = {
 
 // Base unit 4. Use spacing[n], not raw numbers, in component styles.
 export const spacing = {
+  // Optical offsets, added to or taken from a step (`spacing.md + spacing.nudge`)
+  // where a design sits between two; lint refuses a bare number there.
+  hair: 1,
+  nudge: 2,
   xxs: 4,
   xs: 8,
   sm: 12,

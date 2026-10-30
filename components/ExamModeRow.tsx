@@ -16,14 +16,14 @@ export function ExamModeRow() {
     row: {
       flexDirection: 'row',
       alignItems: 'center',
-      gap: spacing.sm + 2,
+      gap: spacing.sm + spacing.nudge,
       padding: spacing.md,
       borderRadius: radii.rung,
       borderWidth: borderWidths.thick,
       borderStyle: 'dashed',
       borderColor: colors.border,
     },
-    text: { flex: 1, gap: spacing.xxs - 1 },
+    text: { flex: 1, gap: spacing.xxs - spacing.hair },
     title: { ...typography.settingsLabel, color: colors.textSecondary },
     line: { ...typography.secondarySmall, color: colors.textMuted },
   });
