@@ -14,7 +14,7 @@ import Svg, { Text as SvgText } from 'react-native-svg';
 import { useAppActive } from '@/hooks/useAppActive';
 import { useReduceMotion } from '@/hooks/useReduceMotion';
 import { WALL_ROWS, layoutRow, numberWidth, rowOffset, type WallRowSpec } from '@/lib/numberWall';
-import { numberWall, typography } from '@/theme/tokens';
+import { numberWall, typography, type Palette } from '@/theme/tokens';
 import { useThemeColors } from '@/theme/useTheme';
 
 // SVG paint values, not text: kept out of the JSX for the hard-coded-string lint.
@@ -29,12 +29,25 @@ const NO_PAINT = 'none';
 // Motion rule's written exception; it stands still under Reduce Motion (read
 // live, so turning it on mid-session stops the drift), and stops while the app
 // is in the background or Home isn't the focused screen.
-export function NumberWall({ top }: { top: number }) {
+// The Play feature graphic draws the same wall as one fixed picture: its own
+// rows, in `palettes.dark`, standing still.
+export function NumberWall({
+  top,
+  rows = WALL_ROWS,
+  palette,
+  still = false,
+}: {
+  top: number;
+  rows?: readonly WallRowSpec[];
+  /** Draws in this palette rather than the active theme's. */
+  palette?: Palette;
+  still?: boolean;
+}) {
   const { width } = useWindowDimensions();
   const reduced = useReduceMotion();
   const focused = useIsFocused();
   const active = useAppActive();
-  const running = !reduced && focused && active;
+  const running = !still && !reduced && focused && active;
 
   return (
     <View
@@ -43,8 +56,8 @@ export function NumberWall({ top }: { top: number }) {
       importantForAccessibility="no-hide-descendants"
       aria-hidden
     >
-      {WALL_ROWS.map((row) => (
-        <WallRow key={row.from} row={row} viewport={width} running={running} />
+      {rows.map((row) => (
+        <WallRow key={row.from} row={row} viewport={width} running={running} palette={palette} />
       ))}
     </View>
   );
@@ -54,12 +67,15 @@ function WallRow({
   row,
   viewport,
   running,
+  palette,
 }: {
   row: WallRowSpec;
   viewport: number;
   running: boolean;
+  palette: Palette | undefined;
 }) {
-  const colors = useThemeColors();
+  const themed = useThemeColors();
+  const colors = palette ?? themed;
   const layout = useMemo(() => layoutRow(row, viewport), [row, viewport]);
   const progress = useSharedValue(0);
   const { loopWidth } = layout;
