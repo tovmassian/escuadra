@@ -42,6 +42,10 @@ function credit(file: string): PhotoCredit {
 }
 
 const ok = (file: string): CreditOutcome => ({ status: 'ok', credit: credit(file) });
+const byAuthor = (file: string, author: string): CreditOutcome => ({
+  status: 'ok',
+  credit: { ...credit(file), author },
+});
 
 function lookups({
   article = { status: 'ok', title: 'Pedri', image: 'Pedri.jpg', qid: 'Q1' },
@@ -126,6 +130,44 @@ describe('enrichPlayer — photo', () => {
       photo: 'refused-licence',
       file: 'Pedri.jpg',
       licence: 'Attribution',
+    });
+    expect(result.player.photo).toBeNull();
+  });
+
+  // The credit shows for the whole question: one naming the player answers it
+  // (guardrail 1). The author is never rewritten, so the photo is dropped.
+  it('falls back to the Wikidata image when the article image’s credit names the player', () => {
+    const result = enrichPlayer(
+      player(),
+      lookups({
+        person: { human: true, births: [], image: 'Free.jpg' },
+        credits: [
+          ['Pedri.jpg', byAuthor('Pedri.jpg', 'Pedri González')],
+          ['Free.jpg', ok('Free.jpg')],
+        ],
+      }),
+    );
+    expect(result).toMatchObject({ photo: 'ok', imageSource: 'wikidata' });
+    expect(result.player.photo?.file).toBe('Free.jpg');
+  });
+
+  it('refuses every candidate whose credit names the player, and says whose credit', () => {
+    const result = enrichPlayer(
+      player(),
+      lookups({
+        person: { human: true, births: [], image: 'Item.jpg' },
+        credits: [
+          ['Pedri.jpg', byAuthor('Pedri.jpg', 'Pedri González')],
+          ['Item.jpg', byAuthor('Item.jpg', 'pedri_official')],
+        ],
+      }),
+    );
+    expect(result).toMatchObject({
+      photo: 'credit-names-player',
+      file: 'Pedri.jpg',
+      licence: 'CC BY-SA 4.0',
+      author: 'Pedri González',
+      imageSource: 'article',
     });
     expect(result.player.photo).toBeNull();
   });
@@ -449,6 +491,18 @@ describe('pendingFiles', () => {
         lookups({
           person: { human: true, births: [], image: 'Item.jpg' },
           credits: [['Pedri.jpg', { status: 'refused-licence', licence: 'GFDL' }]],
+        }),
+      ),
+    ).toEqual(['Item.jpg']);
+  });
+
+  it('asks for the item’s image once the article’s credit names the player', () => {
+    expect(
+      pendingFiles(
+        players,
+        lookups({
+          person: { human: true, births: [], image: 'Item.jpg' },
+          credits: [['Pedri.jpg', byAuthor('Pedri.jpg', 'Pedri')]],
         }),
       ),
     ).toEqual(['Item.jpg']);

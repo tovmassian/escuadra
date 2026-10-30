@@ -9,6 +9,7 @@ import { isCalendarDate } from '../../tools/squadctl/src/lib/dates.ts';
 import {
   MAX_CREDIT_NAME,
   THUMB_WIDTH,
+  creditNamesPlayer,
   isAcceptedLicence,
   isAttributionOnly,
 } from '../../tools/squadctl/src/lib/photo-credit.ts';
@@ -327,6 +328,16 @@ describe('every player photo carries a complete, accepted credit', () => {
     const bad = withPhoto
       .filter(({ photo }) => (photo?.author?.length ?? 0) > MAX_CREDIT_NAME)
       .map((p) => p.id);
+    expect(bad).toEqual([]);
+  });
+
+  // The credit shows for the whole question, and in Study with Hide names on:
+  // one that names the player answers the question (guardrail 1). A self-
+  // upload once credited "Jett Blaschka" for Jett Blaschka's photo.
+  it('never names the player in the credit', () => {
+    const bad = withPhoto
+      .filter((p) => creditNamesPlayer(p.photo?.author ?? null, p))
+      .map((p) => `${p.id}: ${p.photo?.author}`);
     expect(bad).toEqual([]);
   });
 

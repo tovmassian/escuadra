@@ -1,9 +1,9 @@
 // Commons credit rules for player photos: which licences are accepted, what a
-// credit must carry, and how Commons' HTML author field becomes text — and
-// the Commons lookup that asks for exactly the fields they read. Pure —
-// lib/wikimedia-fetch.ts sends the query, this decides. Ported from the photo
-// POC's rules with the fixes its reviews found (numeric entities, exact
-// "Public domain").
+// credit must carry, whether it names the player, and how Commons' HTML author
+// field becomes text — and the Commons lookup that asks for exactly the fields
+// they read. Pure — lib/wikimedia-fetch.ts sends the query, this decides.
+// Ported from the photo POC's rules with the fixes its reviews found (numeric
+// entities, exact "Public domain").
 //
 // Spec: docs/superpowers/specs/2026-10-13-wikimedia-photo-poc-design.md.
 import { commonsFileUrl, fileKey } from '../../../../scripts/commons.ts';
@@ -95,6 +95,63 @@ export function isAcceptedLicence(shortName: string): boolean {
  *  it gets past the named-holder rule. */
 export function isAttributionOnly(shortName: string): boolean {
   return ATTRIBUTION_ONLY.test(shortName.trim());
+}
+
+// Letters Unicode does not split into a base letter and an accent, spelled
+// as an author typing without them would.
+const UNSPLIT_LETTERS: Record<string, string> = {
+  ø: 'o',
+  ł: 'l',
+  ı: 'i',
+  đ: 'd',
+  ð: 'd',
+  æ: 'ae',
+  œ: 'oe',
+  ß: 'ss',
+  þ: 'th',
+  ə: 'e',
+};
+
+/** Accents and case dropped, so "Pekarík" and "PEKARIK" are one word, and
+ *  so are "Ødegaard" and "Odegaard". */
+function foldName(text: string): string {
+  return text
+    .normalize('NFD')
+    .replace(/\p{M}/gu, '')
+    .toLowerCase()
+    .replace(/[øłıđðæœßþə]/g, (letter) => UNSPLIT_LETTERS[letter] ?? letter);
+}
+
+function letterRuns(text: string): string[] {
+  return foldName(text).match(/\p{L}+/gu) ?? [];
+}
+
+/** Whether a credit names the player it is shown for. The credit shows for
+ *  the whole question, and in Study with Hide names on, so a credit that
+ *  names the player answers the question (guardrail 1). It names them when
+ *  it holds every word of the player's `name` or `fullName`, in any order, or
+ *  a two-word-or-longer name's letters run together, in either word order: a
+ *  URL such as ".../victorpalsson.jpg". A credit that shares only a surname
+ *  or a first name with the player keeps its photo (owner, 2026-10-30): each
+ *  refusal costs a photo, and only the whole name gives the answer away. The
+ *  author is never rewritten to fit; the photo is dropped instead. */
+export function creditNamesPlayer(
+  author: string | null,
+  player: { name: string; fullName: string },
+): boolean {
+  if (author === null) return false;
+  const authorWords = new Set(letterRuns(author));
+  const letters = letterRuns(author).join('');
+  return [player.name, player.fullName].some((name) => {
+    const words = letterRuns(name);
+    const [first, last] = [words[0], words.at(-1)];
+    if (first === undefined || last === undefined) return false;
+    if (words.every((word) => authorWords.has(word))) return true;
+    // A one-word name run together would match inside any longer word.
+    if (words.length < 2) return false;
+    const swapped = [last, ...words.slice(1, -1), first];
+    return [words, swapped].some((order) => letters.includes(order.join('')));
+  });
 }
 
 // Wikimedia's image hosts. Scaled thumbnails come from thumb.wikimedia.org;

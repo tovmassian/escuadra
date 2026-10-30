@@ -4,6 +4,7 @@ import imageInfo from './fixtures/commons-imageinfo.json';
 import {
   CREDITS,
   MAX_CREDIT_NAME,
+  creditNamesPlayer,
   isAcceptedLicence,
   isAttributionOnly,
   stripHtml,
@@ -57,6 +58,79 @@ describe('stripHtml', () => {
         '<style data-mw-deduplicate="x">.mw-parser-output .box{margin:4px 0}</style><b>Jane</b><script>alert(1)</script> Doe',
       ),
     ).toBe('Jane Doe');
+  });
+});
+
+// A credit shows for the whole question, and in Study with Hide names on: a
+// credit that names the player gives the answer away (guardrail 1). These
+// are the credits a scan of the stored photos found, with the player each
+// one credited.
+describe('creditNamesPlayer', () => {
+  const named = (name: string, fullName = name) => ({ name, fullName });
+
+  it.each([
+    ['a self-upload', 'Vanja Drkušić', named('Vanja Drkušić')],
+    ['the player’s own account, in capitals', 'IVAR JENNER OFFICIAL', named('Ivar Jenner')],
+    ['the player’s name', 'Jett Blaschka', named('Jett Blaschka')],
+    ['the name with its words reversed', 'Perciun Sergiu', named('Sergiu Perciun')],
+    [
+      'a URL with the name run together',
+      'http://www.hiberniantv.co.uk/newsletter/2505.victorpalsson.jpg',
+      named('Victor Pálsson'),
+    ],
+    [
+      'a URL with the name hyphenated',
+      'http://www.keciorengucu.org.tr/tr/futbolcular-4/samet-akaydin-485.html',
+      named('Samet Akaydin'),
+    ],
+    [
+      'the original Commons file name',
+      'Peter_Pekarík_2012.jpg : Thomas Rodenbücher; derivative work: Haltiamieli',
+      named('Peter Pekarík'),
+    ],
+    ['a one-word name', 'Rodri', named('Rodri', 'Rodrigo Hernández Cascante')],
+  ])('refuses %s: "%s"', (_, author, player) => {
+    expect(creditNamesPlayer(author, player)).toBe(true);
+  });
+
+  it.each([
+    [
+      'a name inside a longer word',
+      'Bryan Berlin / WikiPortraits',
+      named('Mathew Ryan', 'Mathew David Ryan'),
+    ],
+    ['a name inside a longer word', 'Bryan Berlin', named('Ryan Christie')],
+    ['a name inside a longer word', 'Bryan Berlin / WikiPortraits', named('Ryan Christie')],
+    ['a name inside a longer word', 'Scottish Government', named('Scott McKenna')],
+    ['a name inside a username', 'KhoaNguyen1', named('Nguyễn Adou Leygley Minh')],
+    // Only the whole name answers the question; a shared word keeps the photo.
+    ['a relative sharing only the surname', 'Nawid popalzay', named('Omid Popalzay')],
+    ['another person sharing only the surname', 'Andranik Ghazaryan', named('Arman Ghazaryan')],
+    ['another person sharing only the first name', 'Dominic Nelson', named('Dominic Richmond')],
+    ['a shared short surname', 'Kim Photography', named('Kim Min-jae')],
+    ['a one-word name inside a longer word', 'Bryan Berlin', named('Ryan')],
+  ])('accepts %s: "%s"', (_, author, player) => {
+    expect(creditNamesPlayer(author, player)).toBe(false);
+  });
+
+  // Letters Unicode does not split into a base and an accent fold too.
+  it.each([
+    ['Martin Odegaard', named('Martin Ødegaard')],
+    ['Ferdi Kadioglu', named('Ferdi Kadıoğlu')],
+    ['Jakub Kiwior', named('Jakub Kiwiór')],
+    ['Lukasz Fabianski', named('Łukasz Fabiański')],
+  ])('folds "%s" to the name it spells', (author, player) => {
+    expect(creditNamesPlayer(author, player)).toBe(true);
+  });
+
+  it('matches the full name as well as the short one', () => {
+    expect(creditNamesPlayer('Pedro González López', named('Pedri', 'Pedro González López'))).toBe(
+      true,
+    );
+  });
+
+  it('accepts a credit with no name', () => {
+    expect(creditNamesPlayer(null, named('Jett Blaschka'))).toBe(false);
   });
 });
 
