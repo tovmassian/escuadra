@@ -95,15 +95,12 @@ export interface SquadMember {
  *  (Arsenal, Real Madrid) is a one-entry `bands` array: a plain field, not a
  *  split shape.
  *
- *  For a nation it is no longer the identity element. Nations show a real
+ *  For a nation it is not the main identity element. Nations show a real
  *  flag image from `assets/flags/` (see `lib/flags.ts` and
- *  `components/Flag.tsx`) on the team picker, level-3 nationality options,
- *  the `NAT` stat chip and the Study screen — geometry could not express a
- *  flag with a coat of arms, a canton or a saltire. A nation's `marker`
- *  survives for one job: the question screen's in-round banner, which at
- *  100x3 pt has no room for an image. National emblems and coats of arms are
- *  omitted there; Spain without its arms is the civil flag, and Argentina
- *  without the sun stays unambiguous at that size.
+ *  `components/Flag.tsx`), because geometry could not express a flag with a
+ *  coat of arms, a canton or a saltire. A nation's `marker` is its flag as
+ *  bands. How a flag becomes bands, and where a nation shows its flag image
+ *  and where its bands: `.claude/rules/team-identity.md`.
  *
  *  Never a Unicode regional-indicator emoji (🇦🇷) anywhere: that depends on an
  *  OS flag-emoji font, and Windows ships none — the Playwright capture step
@@ -130,8 +127,9 @@ export interface Squad {
   primaryColor: string;
   secondaryColor: string;
   verified: boolean; // false = not fact-checked
-  /** The team's sole visual identity element — see `TeamMarker`. Present on
-   *  every squad, since crests/badges/shields are never used. */
+  /** A club's sole visual identity element, and a nation's flag as bands; a
+   *  nation's flag image is separate (`lib/flags.ts`) — see `TeamMarker`.
+   *  Present on every squad, since crests/badges/shields are never used. */
   marker: TeamMarker;
   /** ISO date this squad file was last written/synced from its source. */
   lastUpdated: string;
