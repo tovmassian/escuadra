@@ -6,8 +6,9 @@
 //
 // Rules (spec §8.2):
 // - photo is the lookup's verdict, rewritten every run: the article's free
-//   lead image, else the Wikidata item's image, when its credit is complete
-//   and its licence accepted. A failed lookup keeps the stored photo.
+//   lead image, else the Wikidata item's image, when its credit is complete,
+//   its licence accepted and its credit does not name the player. A failed
+//   lookup keeps the stored photo.
 // - birth is filled only where unknown, and only from one day-precise
 //   Wikidata date that puts the player at a playing age in their squad's
 //   season. A filled date's only source is the item it came from, so
@@ -20,7 +21,7 @@
 //   `birth <id> --keep` (recorded in decisions.json) or `retitle`.
 // - Either conflict holds the photo with it.
 import type { PhotoCredit, Player } from '../../../../types/squad.ts';
-import type { CreditOutcome, MissingField } from './photo-credit.ts';
+import { creditNamesPlayer, type CreditOutcome, type MissingField } from './photo-credit.ts';
 import { normalizeName } from '../../../../scripts/roster-envelope.ts';
 import type { ArticleInfo, InfoboxInfo, PersonInfo } from './wikimedia-parse.ts';
 
@@ -33,6 +34,7 @@ export type PhotoStatus =
   | 'no-free-image'
   | 'refused-licence'
   | 'incomplete-credit'
+  | 'credit-names-player'
   | 'held'
   | 'lookup-failed';
 
@@ -55,6 +57,7 @@ export const PHOTO_STATUSES: readonly PhotoStatus[] = [
   'missing-article',
   'refused-licence',
   'incomplete-credit',
+  'credit-names-player',
   'not-a-person',
   'disambiguation',
   'held',
@@ -133,6 +136,8 @@ export interface PlayerEnrichment {
   imageSource: 'article' | 'wikidata' | null;
   /** Why an `incomplete-credit` photo was not shown. */
   missing: MissingField[];
+  /** The credit that named the player, for a `credit-names-player` photo. */
+  author: string | null;
   conflict: BirthConflict | null;
   /** The record as it should be stored after this run. */
   player: Player;
@@ -153,6 +158,7 @@ function outcome(
     licence: null,
     imageSource: null,
     missing: [],
+    author: null,
     conflict: null,
     player: next,
     ...extra,
@@ -309,19 +315,27 @@ function photoCandidates(article: OkArticle, person: PersonInfo | null): Candida
 
 /** How far down its candidates a photo gets: to the first one Commons has
  *  not answered, else to the first usable one, else through them all. Each
- *  is tried only if the one before it was answered and is unusable. */
+ *  is tried only if the one before it was answered and is unusable. A
+ *  credit that names the player makes its photo unusable: the credit shows
+ *  for the whole question (guardrail 1), and is never rewritten to fit. */
 type Walk =
   | { state: 'unanswered'; candidate: Candidate }
   | { state: 'ok'; candidate: Candidate; credit: PhotoCredit }
   | { state: 'unusable' };
 
-function walk(candidates: readonly Candidate[], lookups: Lookups): Walk {
+function walk(
+  candidates: readonly Candidate[],
+  lookups: Lookups,
+  player: Pick<Player, 'name' | 'fullName'>,
+): Walk {
   for (const candidate of candidates) {
     const credit = lookups.credits.get(candidate.file);
     if (lookups.failedFiles.has(candidate.file) || credit === undefined) {
       return { state: 'unanswered', candidate };
     }
-    if (credit.status === 'ok') return { state: 'ok', candidate, credit: credit.credit };
+    if (credit.status === 'ok' && !creditNamesPlayer(credit.credit.author, player)) {
+      return { state: 'ok', candidate, credit: credit.credit };
+    }
   }
   return { state: 'unusable' };
 }
@@ -358,7 +372,7 @@ export function enrichPlayer(
   if (first === undefined) {
     return outcome(player, 'no-free-image', birth.status, { ...withBirth, photo: null });
   }
-  const reached = walk(candidates, lookups);
+  const reached = walk(candidates, lookups, player);
   if (reached.state === 'unanswered') {
     return outcome(player, 'lookup-failed', birth.status, withBirth, {
       file: reached.candidate.file,
@@ -378,8 +392,23 @@ export function enrichPlayer(
     );
   }
 
-  // Nothing usable: report why the first candidate was not.
+  // Nothing usable: report why the first candidate was not. A complete
+  // credit that is not usable is one that names the player.
   const firstCredit = lookups.credits.get(first.file);
+  if (firstCredit?.status === 'ok') {
+    return outcome(
+      player,
+      'credit-names-player',
+      birth.status,
+      { ...withBirth, photo: null },
+      {
+        file: first.file,
+        licence: firstCredit.credit.licence,
+        imageSource: first.source,
+        author: firstCredit.credit.author,
+      },
+    );
+  }
   const refused = firstCredit?.status === 'refused-licence';
   return outcome(
     player,
@@ -388,8 +417,7 @@ export function enrichPlayer(
     { ...withBirth, photo: null },
     {
       file: first.file,
-      licence:
-        firstCredit !== undefined && firstCredit.status !== 'ok' ? firstCredit.licence : null,
+      licence: firstCredit?.licence ?? null,
       imageSource: first.source,
       missing: firstCredit?.status === 'incomplete-credit' ? firstCredit.missing : [],
     },
@@ -407,7 +435,7 @@ export function pendingFiles(players: readonly Player[], lookups: Lookups): stri
   for (const player of players) {
     const resolved = resolve(player, lookups);
     if (resolved.kind === 'ended') continue;
-    const reached = walk(photoCandidates(resolved.article, resolved.person), lookups);
+    const reached = walk(photoCandidates(resolved.article, resolved.person), lookups, player);
     if (reached.state === 'unanswered' && !lookups.failedFiles.has(reached.candidate.file)) {
       pending.add(reached.candidate.file);
     }
