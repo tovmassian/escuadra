@@ -28,8 +28,8 @@ its Commons page — the asset-licensing rule (`CLAUDE.md`, guardrail 2), enforc
 `lib/__tests__/dataIntegrity.test.ts` — and any with no original size, which the
 layout needs. Every shown photo shows its credit; never put the Commons
 file name or caption in visible text or a label, as they name the player.
-A photo whose credit names the player is refused, never re-worded
-(`creditNamesPlayer`, checked in `dataIntegrity.test.ts`).
+A photo whose credit names the player is refused; the credit is never re-worded to
+hide the name (`creditNamesPlayer`, checked in `dataIntegrity.test.ts`).
 The credit sits under the question's action button for as long as the
 question is on screen, never as part of the answer reveal. On Results and
 Study the credits sit under "Photo credits · N"; Study names each photo by

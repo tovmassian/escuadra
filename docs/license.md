@@ -251,8 +251,10 @@ question is on screen:
 
 The **title is deliberately left out**. A Commons file name or caption names
 the player, and showing it would answer the question (`CLAUDE.md`, guardrail 1).
-The link supplies it instead. For the same reason, a photo whose author names
-the player is refused: the author is shown as Commons gives it, never shortened.
+The link supplies it instead. For the same reason, a photo is refused when the
+name its credit shows (the **Author** above) names the player. That name is never
+edited to leave the player out, nor replaced by "Wikimedia Commons": the licence
+asks for the credit the licensor gives.
 
 When Commons names no one — an unknown-author template, or an author field so
 long it is a template's boilerplate rather than a name (over 120 characters) —

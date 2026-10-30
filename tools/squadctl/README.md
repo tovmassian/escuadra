@@ -448,9 +448,11 @@ the licence — is refused (`incomplete-credit`, missing `author`). Every
 `incomplete-credit` is listed with what it lacks. A credit that names the
 player would answer the question, so its photo is refused too
 (`credit-names-player`, listed with the credit) and the next candidate is
-tried. It names them when one of its words is a word of their `name` or
-`fullName` at least four letters long, or when it holds either name run
-together, as a URL can. The author is never shortened to fit. No photo comes
+tried. A credit names the player when, ignoring case and accents, one of its
+words matches a word of four or more letters in their `name` or `fullName`, or
+when its letters hold either name run together, forwards or with the first and
+last words swapped, as a URL can ("victorpalsson"). The credit is never edited
+to leave the name out: the licence asks for the attribution as given. No photo comes
 from a missing article, a disambiguation page, or an item that is not a person. The
 photo is the latest lookup's verdict and is rewritten every run. A key no
 lookup answers — its batch failed after its retries, the reply skipped it, or
