@@ -464,6 +464,24 @@ export const numberWall = {
   speed: 50,
 } as const;
 
+// Google Play's feature graphic (`app/store/feature-graphic.tsx`), laid out in
+// its own 1,024 × 500 px: Home's wall standing still, a hero shirt number on the
+// right with the mark in its top corner, and the lockup and tagline on the left
+// over a fade (design B, "the lit number", chosen 2026-10-31). `wallTop` centres
+// the wall's four rows on the 500 px; `fade` runs left to right.
+export const featureGraphic = {
+  gutter: 64,
+  column: 540,
+  wallTop: -8,
+  fade: {
+    colors: [darkRoles.background, darkRoles.background, darkRoles.backgroundClear],
+    locations: [0, 0.34, 0.58],
+  },
+  hero: { left: 676, top: 62 },
+  heroMark: { size: 128, left: 150, top: -34 },
+  lockupMark: 40,
+} as const;
+
 export const typography = {
   screenTitle: { fontFamily: 'Inter-Bold', fontSize: 28 },
   sectionHead: { fontFamily: 'Inter-SemiBold', fontWeight: '600' as const, fontSize: 20 },
@@ -484,12 +502,24 @@ export const typography = {
     fontSize: 21,
     letterSpacing: -0.5,
   },
-  // The feature graphic's large word (`app/store/feature-graphic.tsx`, used
-  // with `sizes.wordmarkMarkHero`). -0.02em tracking at 28px.
-  wordmarkHero: {
-    fontFamily: 'Inter-ExtraBold',
-    fontSize: 28,
-    letterSpacing: -0.56,
+  // The feature graphic (`app/store/feature-graphic.tsx`): its hero shirt
+  // number, the lockup's word, and the tagline set like Home's headline.
+  featureNumber: {
+    fontFamily: 'Archivo-ExtraCondensedBlack',
+    fontSize: 470,
+    lineHeight: 376,
+    letterSpacing: -6,
+  },
+  featureWordmark: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 32,
+    letterSpacing: -0.7,
+  },
+  featureTagline: {
+    fontFamily: 'Archivo-SemiExpandedExtraBold',
+    fontSize: 58,
+    lineHeight: 57,
+    textTransform: 'uppercase' as const,
   },
   // The launch intro (#182): the lockup's word at 46 / −1, the "A LA ESCUADRA"
   // tagline under it.
@@ -1197,8 +1227,6 @@ export const sizes = {
   flagRow: { width: 20, height: 13 },
   // The top bar's lockup on Home (#181): a 28 pt mark beside the 21 pt word.
   wordmarkMark: 28,
-  // The feature graphic's large mark (`app/store/feature-graphic.tsx`).
-  wordmarkMarkHero: 86,
   // The launch intro's mark (#182).
   introMark: 200,
   // A 10/10's player circles.

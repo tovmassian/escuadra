@@ -51,13 +51,14 @@ async function generateIcon(browser) {
 // ---------------------------------------------------------------------------
 // Feature graphic — capture the dedicated /store/feature-graphic route (see
 // app/store/feature-graphic.tsx) at exactly 1024×500, as a JPEG so there is
-// no ambiguity over Play's "no alpha" requirement.
+// no ambiguity over Play's "no alpha" requirement. The viewport is the
+// graphic's own size at 1×, so the route's `featureGraphic` tokens are its pixels.
 // ---------------------------------------------------------------------------
 
 async function generateFeatureGraphic(browser) {
   const page = await browser.newPage({
-    viewport: { width: 512, height: 250 },
-    deviceScaleFactor: 2,
+    viewport: { width: 1024, height: 500 },
+    deviceScaleFactor: 1,
   });
   if (LANGUAGE) await seedLanguage(page, LANGUAGE);
   await page.goto(`${BASE}/store/feature-graphic`, { waitUntil: 'networkidle' });
