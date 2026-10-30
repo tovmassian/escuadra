@@ -6,7 +6,7 @@ Kenne deinen Kader auswendig
 
 ## Promotional text (App Store, 170)
 
-Neu in 2.0: Spielerfotos, wo vorhanden, 157 Nationalteams und fünf Sprachen. Lerne jeden Kader in kurzen Runden zu zehn Fragen und sieh genau, was du falsch hattest.
+Wer trägt die Nummer 7? Lerne die Kader aller Vereine der fünf Topligen Europas und von über 150 Nationalteams in kurzen Runden und sieh genau, bei wem du falschlagst.
 
 ## Keywords (App Store, 100)
 

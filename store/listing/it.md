@@ -6,7 +6,7 @@ La tua squadra a memoria
 
 ## Promotional text (App Store, 170)
 
-Novità della 2.0: foto dei giocatori dove disponibili, 157 nazionali e cinque lingue. Impara ogni rosa in partite brevi da dieci domande e scopri chi hai sbagliato.
+Chi ha il numero 7? Impara le rose di tutti i club dei cinque principali campionati europei e di oltre 150 nazionali in partite veloci, poi scopri chi hai sbagliato.
 
 ## Keywords (App Store, 100)
 

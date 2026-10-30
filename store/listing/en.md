@@ -6,7 +6,7 @@ Know your squad by heart
 
 ## Promotional text (App Store, 170)
 
-New in 2.0: player photos where available, 157 national squads and five languages. Learn any squad in short rounds of ten, and see exactly who you missed.
+Who wears number 7? Learn every club in Europe's top five leagues and over 150 national teams in quick rounds, then see exactly who you missed.
 
 ## Keywords (App Store, 100)
 

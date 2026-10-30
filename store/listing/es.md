@@ -6,7 +6,7 @@ Tu plantilla, de memoria
 
 ## Promotional text (App Store, 170)
 
-Novedades de la 2.0: fotos de jugadores cuando las hay, 157 selecciones y cinco idiomas. Aprende cualquier plantilla en rondas de diez y descubre quién se te escapó.
+¿Quién lleva el 7? Aprende las plantillas de los clubes de las cinco grandes ligas europeas y de más de 150 selecciones en rondas rápidas, y mira quién se te escapó.
 
 ## Keywords (App Store, 100)
 

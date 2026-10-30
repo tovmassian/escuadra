@@ -6,7 +6,7 @@ Connais ton effectif par cœur
 
 ## Promotional text (App Store, 170)
 
-Nouveau dans la 2.0 : photos des joueurs si disponibles, 157 sélections et cinq langues. Apprends un effectif en courtes parties de dix questions et vois qui tu as raté.
+Qui porte le numéro 7 ? Apprends les effectifs de tous les clubs du top 5 européen et de plus de 150 sélections en parties rapides, puis vois qui tu as raté.
 
 ## Keywords (App Store, 100)
 
