@@ -1,7 +1,6 @@
 // The Français catalog (#145), typed against ./en.ts: same keys, same order,
 // same parameters. Drafted by Claude; a native speaker reviews it before it
-// merges (#145). The store tagline is English until #147 translates it with
-// the listing copy.
+// merges (#145).
 // Escuadra and a la escuadra come from ./names and are never translated.
 // French as France speaks it and L’Équipe writes it: where Belgium, Switzerland
 // or Québec differ (Nigéria, septante, magasiner), France wins.
@@ -11,7 +10,7 @@
 // own; i18n/__tests__/translations.test.ts checks it. Apostrophes are ’.
 // The player is "tu". A team's name sits before a colon or alone, never after
 // an article ("du Brésil", "des Pays-Bas"): the data gives no gender.
-import { en, type CalendarDate, type Messages } from './en';
+import type { CalendarDate, Messages } from './en';
 import { A_LA_ESCUADRA, ESCUADRA } from './names';
 
 const MONTHS = [
@@ -456,8 +455,9 @@ export const fr: Messages = {
     noResults: (query: string) => `Aucun résultat pour « ${query} »`,
     yourSquads: 'Tes équipes',
   },
-  // English until #147 localises the feature graphic with the store listing.
-  store: en.store,
+  store: {
+    tagline: 'Apprends tous les effectifs',
+  },
   about: {
     // "À propos", also Settings' About section label (settings.sections.about).
     title: 'À propos',

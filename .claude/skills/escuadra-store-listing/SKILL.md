@@ -121,25 +121,6 @@ main                           release/X.Y.Z                  GitHub, the stores
    PR goes into `release/X.Y.Z` instead, from a branch cut from it, and `pick-to-main`
    opens its pick to `main`.
 
-### The first run
-
-When `store/listing/` does not exist yet (2.0.0, #147), seed `en.md` before drafting.
-The public App Store page (https://apps.apple.com/us/app/escuadra/id6810705505) shows the
-live subtitle and description, and the public Play page
-(https://play.google.com/store/apps/details?id=com.tovmassian.escuadra) the live full
-description; ask the owner to paste the keywords, promotional text
-and Play short description from the consoles, and draft any field a console lacks as
-in draft mode. Use the six headings `FIELDS` in `scripts/store-listing.ts` gives,
-under `# English`; each translation's title is its language's name in itself
-(`LANGUAGE_NAMES` in `i18n/names.ts`). Confirm or change `store/screenshots.json` with
-the owner, and, with no baseline tag to compare, confirm `store/declarations.md` whole.
-The first run also translates the feature
-graphic's tagline, `store.tagline` in `i18n/es.ts`, `fr.ts`, `it.ts` and `de.ts` (they hold
-`store: en.store` until then), drops `'store.'` from each language's deferred list in
-`i18n/leaves.ts`, and runs its translations through the same expert loop. It rides in the
-same PR and pick. Every field is new, so every field is drafted, translated, reviewed and
-entered.
-
 ### Between versions
 
 An off-cycle change, such as promotional text for a tournament, has no version: skip step 1's

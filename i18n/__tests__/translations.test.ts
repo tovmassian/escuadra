@@ -6,7 +6,7 @@ import type { FlagCode } from '@/assets/flags/generated';
 import type { Position } from '@/types/squad';
 import { CATALOGS } from '../catalogs';
 import { countryName } from '../displayNames';
-import { catalogLeaves, isLater } from '../leaves';
+import { catalogLeaves } from '../leaves';
 import { resolveLanguage, SUPPORTED_LANGUAGES, type Language } from '../resolveLanguage';
 import { translationNotice } from '../translationNotice';
 
@@ -196,9 +196,7 @@ describe.each(SUPPORTED_LANGUAGES)('%s', (language) => {
 
   it.runIf(facts.frenchSpacing)('puts a no-break space before ? ! : ; and inside « »', () => {
     const wrong = catalogLeaves(messages).filter(
-      (leaf) =>
-        !isLater(leaf.path, language) &&
-        (/[^\u00A0][?!:;»]/.test(leaf.text) || /«[^\u00A0]/.test(leaf.text)),
+      (leaf) => /[^\u00A0][?!:;»]/.test(leaf.text) || /«[^\u00A0]/.test(leaf.text),
     );
     expect(wrong.map((leaf) => `${leaf.path}: ${leaf.text}`)).toEqual([]);
   });
