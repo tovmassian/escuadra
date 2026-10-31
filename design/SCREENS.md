@@ -124,7 +124,7 @@ under emulated Reduce Motion, which holds that frame still.
 | --------------------------------------------- | -------------------------------------------------------------------------- |
 | `screens/00-launch-intro.png`                 | Launch intro, end frame (Reduce Motion), see above                         |
 | `screens/01-home.png`                         | Home, first run                                                            |
-| `screens/01e-home-returning.png`              | Home, returning: Liverpool to continue, four starred teams                 |
+| `screens/01e-home-returning.png`              | Home, returning: Argentina to continue, three starred nations              |
 | `screens/01f-home-outdated.png`               | Home, returning with an outdated best and nothing starred                  |
 | `screens/01a-about.png`                       | About                                                                      |
 | `screens/01c-settings.png`                    | Settings                                                                   |
@@ -187,7 +187,7 @@ accented in both the heading and the rail, which has ridden up to the screen's c
 beside the `A`, only UEFA's nations, and a rail of only their letters.
 
 `02b-team-picker-clubs-starred.png` and `03d-team-picker-nations-starred.png` come after
-Real Madrid, Arsenal, Spain and Armenia are starred, Armenia last by a tap on its star
+Real Madrid, Barcelona, Spain and Armenia are starred, Armenia last by a tap on its star
 (`04d-difficulty-starred.png`, the star filled). Each tab shows its own two under the
 starred `YOUR SQUADS` caption, in a card, newest first; on Nations UEFA is picked and
 Spain and Armenia still show, as the group ignores the pills. Armenia carries its
@@ -226,9 +226,9 @@ player must name or is told; the prompt in the display face, with a `1/2` or
 `3/3` part counter on the right from level 2 up; a two-column grid of answers;
 the footer, which reads "Tap your answer" until a pick; and the photo credit.
 
-`06-question-l1.png` is captured on arrival, unanswered. The slot chips show
-what level 1 gives for free (position, age, club) beside `NAME ?`, the active
-slot with the accent outline; the prompt is `WHO WEARS 7?` over four name
+`06-question-l1.png` is Spain's Lamine Yamal, captured on arrival, unanswered. The slot
+chips show what level 1 gives for free (position, age, club) beside `NAME ?`, the active
+slot with the accent outline; the prompt is `WHO WEARS 19?` over four name
 options and has no part counter, as there is only one part.
 
 `07-question-l2.png` is captured on arrival, unanswered, like the level-1 shot.
@@ -242,7 +242,7 @@ answers filled in, the last slot (`CLUB ?` or `NAT ?`) active, the counter at
 questions, not one screen twice: `squad.kind` decides what the third part asks.
 `08-question-l3.png` is a **nation** squad (Spain), so it asks the player's
 **club** (`WHICH CLUB?`, text options); `08-question-l3-nationality.png` is a
-**club** squad (Barcelona), so it asks their **nationality**
+**club** squad (Real Madrid, Kylian Mbappé), so it asks their **nationality**
 (`NATIONALITY?`) — and only nationality options carry flag images.
 
 The three results captures are the three tiers `resultTier` distinguishes, all
@@ -275,8 +275,9 @@ same in the `-light` capture; only the sheet around it changes.
 (the header, the score with its ten squares, the link, and "Preview" at the
 bottom right), the hint "The score grid for group chats, with a link to the
 app." and `SHARE TEXT`. On web the share button does nothing.
-`09-results-share-flawless.png` is the Image format after the flawless round: the
-picture turns green, with a green `10/10`, the strike with its ball and trail,
+`09-results-share-flawless.png` is the Image format after a flawless Barcelona
+level-1 round, whose Results are not captured: the picture turns green under
+Barcelona's bands, with a green `10/10`, the strike with its ball and trail,
 `A LA ESCUADRA` and ten green squares.
 
 `09-results-credits.png` is the passed round's Results after a tap on

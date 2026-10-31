@@ -50,11 +50,13 @@ const OUT_DIR = outDirFor(PROFILE, LANGUAGE);
 
 // Fixed so a round is reproducible and design can diff turn against turn.
 const SEED = 20260821;
-// Barcelona's own first level-3 question at SEED is a goalkeeper, and the
-// nationality shot wants a subject worth putting in front of design. This seed
-// puts Lamine Yamal (10, FW) there instead, against four different flags. Only
-// that one capture uses it, so every other screen still diffs on SEED.
-const NATIONALITY_SEED = 20260832;
+// The level-1 and nationality shots are in the store listing, and want a subject
+// worth putting in front of a newcomer. These seeds put Lamine Yamal (19, FW) first
+// in Spain's level 1, and Kylian Mbappé (10, FW) first in Real Madrid's level 3,
+// against four different flags. Only those two captures use them, so every other
+// screen still diffs on SEED.
+const LEVEL1_SEED = 20260823;
+const NATIONALITY_SEED = 20260845;
 
 // How long to wait after a navigation. The root layout holds the splash until
 // the persisted store has hydrated, so `networkidle` now fires before the app
@@ -222,8 +224,8 @@ const L3_THIRD_PART_SHOTS = [
   },
   {
     file: '08-question-l3-nationality',
-    path: `/play/bar/3?seed=${NATIONALITY_SEED}`,
-    name: 'Lamine Yamal',
+    path: `/play/rma/3?seed=${NATIONALITY_SEED}`,
+    name: 'Kylian Mbappé',
     position: 'FW',
   },
 ];
@@ -292,6 +294,20 @@ const ROUND_FIRST_OPTION = [
   'Iván Fresneda',
 ];
 
+/** The correct answer to each question of `bar` level 1 at SEED: a flawless club round. */
+const BARCELONA_ALL_CORRECT = [
+  'Wojciech Szczęsny',
+  'Frenkie de Jong',
+  'Fermín López',
+  'Anthony Gordon',
+  'Gabriel Jesus',
+  'Pedri',
+  'Jules Koundé',
+  'Brian Fariñas',
+  'Gerard Martín',
+  'Lamine Yamal',
+];
+
 // `resultTier` splits results three ways and each way is a different screen,
 // so each gets a capture: a failed round leads with the missed player cards, a
 // cleared round promotes `Play level 2` and keeps the cards, and a flawless
@@ -299,33 +315,38 @@ const ROUND_FIRST_OPTION = [
 //
 // `then` runs on the same page once the screen is shot, so a state reached from
 // the results screen is captured without playing the round a second time. The
-// failed round opens the share sheet in both formats, the passed round opens its
-// photo credits, and the flawless round opens the share sheet once more on
-// Image, for the picture's celebrating variant.
+// failed round opens the share sheet in both formats and the passed round opens
+// its photo credits. A flawless Barcelona round, whose Results are not shot,
+// opens the share sheet on Image, for the picture's celebrating variant in a
+// club's colours, as the store listing shows it.
 const RESULTS_SHOTS = [
   { file: '09-results', answers: ROUND_FIRST_OPTION, then: captureShareSheet },
   { file: '09-results-passed', answers: ROUND_ONE_MISS, then: captureCredits },
-  { file: '09-results-flawless', answers: ROUND_ALL_CORRECT, then: captureShareSheetImage },
+  { file: '09-results-flawless', answers: ROUND_ALL_CORRECT },
+  { squad: 'bar', answers: BARCELONA_ALL_CORRECT, then: captureShareSheetImage },
 ];
 
 /**
  * Plays a level-1 round to completion, then captures the results screen it
- * lands on. Results cannot be reached by URL — the session store is
- * deliberately ephemeral, so the round has to actually be played. Level 1 asks
- * a single part per question, so each question is one answer tap plus its
- * next control.
+ * lands on, when given a file. Results cannot be reached by URL — the session
+ * store is deliberately ephemeral, so the round has to actually be played.
+ * Level 1 asks a single part per question, so each question is one answer tap
+ * plus its next control.
  */
-async function captureResults(capture, { file, answers, then }) {
-  await playRound(capture, answers);
+async function captureResults(capture, { file, squad, answers, then }) {
+  await playRound(capture, answers, squad);
   // The long pole is the round strip, the strike and the card rise.
   await capture.page.waitForTimeout(SETTLE_MS);
-  await capture.shoot(file);
+  if (file) await capture.shoot(file);
   await then?.(capture);
 }
 
-/** Opens the level-1 round at SEED, answers every question and lands on /results. */
-async function playRound(capture, answers) {
-  const path = `/play/esp/1?seed=${SEED}`;
+/**
+ * Opens a squad's level-1 round at SEED (Spain's unless named), answers every
+ * question and lands on /results.
+ */
+async function playRound(capture, answers, squad = 'esp') {
+  const path = `/play/${squad}/1?seed=${SEED}`;
   await capture.open(path);
 
   for (const label of answers) {
@@ -367,7 +388,7 @@ async function captureCredits(capture) {
 /**
  * The share sheet on its Image tab after a flawless round: the picture's
  * a la escuadra variant, with the strike's ball and trail and every square
- * green.
+ * green, under the team's bands.
  */
 async function captureShareSheetImage(capture) {
   await capture.tapId('results-share', { wait: SHEET_MS });
@@ -529,7 +550,7 @@ async function shootTipSteps(capture, names) {
 async function captureRoundTips(capture) {
   // The two rounds below write Spain's best score and last-played, which the picker, Study
   // and Difficulty shots after this would show; the store is put back as it was when done.
-  const progress = await capture.page.evaluate(() => localStorage.getItem('escuadra-progress'));
+  const progress = await readProgress(capture);
   await captureTips(capture, `/play/esp/1?seed=${SEED}`, '06b-question-l1', 2);
   await capture.open(`/play/esp/2?seed=${SEED}`);
   await shootTipSteps(capture, ['07b-question-l2-tip']);
@@ -545,10 +566,23 @@ async function captureRoundTips(capture) {
   await playRound(capture, ROUND_ONE_MISS);
   await shootTipSteps(capture, [null, '09c-results-tip-pass']);
 
-  await capture.page.evaluate((stored) => {
-    if (stored === null) localStorage.removeItem('escuadra-progress');
-    else localStorage.setItem('escuadra-progress', stored);
-  }, progress);
+  await writeProgress(capture, progress);
+}
+
+/** The persisted progress store as stored (or null), for `writeProgress` to put back. */
+async function readProgress(capture) {
+  return capture.page.evaluate(() => localStorage.getItem('escuadra-progress'));
+}
+
+/**
+ * Put back what `readProgress` read. Like `seedStarred`, it writes localStorage only, for
+ * the next `capture.open` to rehydrate.
+ */
+async function writeProgress(capture, stored) {
+  await capture.page.evaluate((value) => {
+    if (value === null) localStorage.removeItem('escuadra-progress');
+    else localStorage.setItem('escuadra-progress', value);
+  }, stored);
 }
 
 /**
@@ -735,11 +769,11 @@ async function captureTheme(browser, colorScheme, suffix) {
     await capture.open('/team/liv/difficulty');
     await capture.shoot('04c-difficulty-cleared');
 
-    // Your squads (#179): two clubs and Spain starred by seed, Armenia by a tap
-    // on its star, so it is the newest. The picker then shows each tab's
+    // Your squads (#179): Real Madrid, Barcelona and Spain starred by seed, Armenia
+    // by a tap on its star, so it is the newest. The picker then shows each tab's
     // starred teams over its list, Nations with UEFA picked to show the group
     // ignores it. It opens on Nations, the newest starred team's tab (#187).
-    await seedStarred(capture, ['esp', 'rma', 'ars']);
+    await seedStarred(capture, ['esp', 'rma', 'bar']);
     await capture.open('/team/arm/difficulty');
     await capture.tapId('difficulty-star', { wait: SWAP_MS });
     await capture.shoot('04d-difficulty-starred');
@@ -749,14 +783,23 @@ async function captureTheme(browser, colorScheme, suffix) {
     await capture.tapId('kind-club', { wait: SWAP_MS });
     await capture.shoot('02b-team-picker-clubs-starred');
 
-    // Home (#181), returning: Liverpool to continue, every level cleared, so
-    // Continue offers level 3 again (8/10, current), with the four teams starred
-    // above. Then Armenia, whose level-3 best is outdated, with nothing starred,
-    // so the row is "All teams" alone. The rounds below write their own
-    // last-played, so nothing later sees these.
-    await seedLastPlayed(capture, 'liv', 3);
+    // Home (#181), returning: Argentina to continue, every level cleared, so
+    // Continue offers level 3 again (8/10, current), with England, Brazil and
+    // Italy starred above. The store is put back once it is shot, so Argentina's
+    // scores show on no later shot. Then Armenia, whose level-3 best is outdated,
+    // with nothing starred, so the row is "All teams" alone. The rounds below
+    // write their own last-played, so nothing later sees these.
+    const progress = await readProgress(capture);
+    await seedBestScores(
+      capture,
+      { 'arg:1': 10, 'arg:2': 9, 'arg:3': 8 },
+      await squadLastUpdated('arg'),
+    );
+    await seedLastPlayed(capture, 'arg', 3);
+    await seedStarred(capture, ['eng', 'bra', 'ita']);
     await openHomeStill(capture);
     await capture.shoot('01e-home-returning');
+    await writeProgress(capture, progress);
     await seedLastPlayed(capture, 'arm', 3);
     await seedStarred(capture, []);
     await openHomeStill(capture);
@@ -787,7 +830,7 @@ async function captureTheme(browser, colorScheme, suffix) {
 
     await captureStudy(capture);
 
-    await capture.open(`/play/esp/1?seed=${SEED}`);
+    await capture.open(`/play/esp/1?seed=${LEVEL1_SEED}`);
     await capture.shoot('06-question-l1');
 
     await capture.open(`/play/esp/2?seed=${SEED}`);
