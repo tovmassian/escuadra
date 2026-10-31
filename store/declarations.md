@@ -41,6 +41,16 @@ Entered before Submit for Review, with the privacy policy URLs.
 
 - Category: Education
 - Content rating: Everyone (IARC)
+- Target audience: 13–15, 16–17, and 18 and over (owner, 2026-10-31). Under-13 groups are
+  left out: with any of them in the audience, the Families Policy forbids any SDK not
+  approved for child-directed services, and TelemetryDeck does not claim that approval.
+  Because 13–15-year-olds count as children in some countries, Play still asks the app to
+  meet the Families requirements for any child who uses it: suitable content, no ads from
+  uncertified networks, and compliance with COPPA and GDPR.
+- AI asset declaration: no store image or video is labelled AI-generated (owner,
+  2026-10-31). The screenshots are captures of the app, some showing Wikimedia Commons
+  photographs; the feature graphic and the icon are vector art rendered from code,
+  designed with Claude's help but not AI-generated images.
 - Privacy policy URL, one for the app: https://tovmassian.github.io/escuadra/privacy/2/
 
 ### Data safety
@@ -55,6 +65,7 @@ Entered when the build is uploaded, with the privacy policy URL.
 - App info and performance, Crash logs: collected, not shared, required (the update check's
   error report after a failed start), purpose App functionality (the expo-updates error
   message).
+- Processed ephemerally: no, for every data type.
 - Encrypted in transit: yes.
 - Deletion requests: none offered. The statistics carry a hashed random identifier (not
   the update check's) and a random session code, not linked to the user, and switching off

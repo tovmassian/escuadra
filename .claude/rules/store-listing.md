@@ -23,7 +23,8 @@ walk-through the `escuadra-store-listing` skill.
   the same set in every language and both stores, at most 8. Some show Commons player
   photos, as the owner decided (`docs/license.md`, In the store listings).
 - `store/declarations.md`: English, entered once per app: the name, URLs, category, age
-  rating, and the App Privacy and Data safety answers
+  rating, Play's target audience and AI asset answer, and the App Privacy and Data safety
+  answers
   (`.claude/rules/privacy-telemetry.md` says when they change).
 - `STORE_LOCALES` in `scripts/store-listing.ts`: each language's locale in each console.
 - The feature graphic's tagline is `store.tagline` in the catalogs, because
