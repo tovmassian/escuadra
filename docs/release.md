@@ -158,7 +158,9 @@ A reviewer's device picks up updates for its runtime, so updates to a build unde
 must stop. An open issue labelled `ota-freeze` and titled `OTA freeze: <platform>@<version>`
 blocks production publishes for exactly that platform and version.
 
-- `store-build` opens one when it submits a production build.
+- `store-build` opens one when it submits a production build. If that freeze is closed to
+  send an update to the test installs (TestFlight, Play's internal track), reopen it
+  before that store's submission: `gh issue reopen <number>`.
 - Anything outside CI, such as a Play Console promotion, needs one by hand:
   `gh issue create --label ota-freeze --title "OTA freeze: android@X.Y.Z" --body "Play production review"`
 - Close it when the review passes. A publish it blocked goes out with **Re-run failed jobs**.
@@ -200,8 +202,11 @@ A new version from `main`:
    - When the builds reach the stores, enter `store/declarations.md`'s App Privacy and
      Data safety answers and move each store's privacy URLs (Apple's, one per locale) to
      the new folder at the same moment: Play when step 6 uploads the build, Apple before
-     step 8's Submit for Review.
-     Step 7's paste sheet says when they changed.
+     step 8's Submit for Review. Apple's data types go live on the product page as soon as
+     they are published, and review checks the build against them, so they are published
+     before the submission. Apple's privacy URLs, by contrast, take effect only with the
+     submitted version.
+     Step 7's paste sheet says when the answers changed.
    - Point the site's own Privacy nav link at the new folder once every live store
      ships the version.
 6. **Actions → store-build**: `platforms: both`, `profile: production`, `submit` on. Both
@@ -214,10 +219,18 @@ A new version from `main`:
    and run it again; the second run copies the fresh captures (they are gitignored, so
    ones left from an earlier run would otherwise be handed over):
    `for code in en es fr it de; do npm run shots:store -- --lang=$code && npm run shots:play -- --lang=$code && npm run gen:play-assets -- --lang=$code || break; done`.
-   Enter what says _paste_: Apple's before Submit for Review, Play's when the build is
-   uploaded.
-8. iOS: Submit for Review in App Store Connect. Android: promote the build in Play
-   Console. Close each freeze once approved.
+   The loop takes about an hour; check every listed shot in every language before going
+   on, and retake a language whose shots caught Metro's "Bundling…" toast or lost a player
+   photo. Enter what says _paste_: Apple's before Submit for Review, Play's when the build
+   is uploaded.
+8. Before either submission, check that both freezes are open
+   (`gh issue list --label ota-freeze`;
+   [Freeze during store review](#freeze-during-store-review) says how to reopen or create
+   one). iOS: Submit for Review in
+   App Store Connect. Android: promote the build in Play Console and
+   send the changes for review; with managed publishing, publish once approved. On Play, a
+   change sent while the review runs can push the app to the back of the queue, so a
+   listing edit waits for the approval. Close each freeze once approved.
    Then tag the commit the build came from (its `store-build` run names it) and publish its
    notes: `git tag vX.Y.Z <commit> && git push origin vX.Y.Z`, then
    `awk '/^## \[X.Y.Z\]/{f=1;next} /^## \[/{f=0} f' CHANGELOG.md > "$RUNNER_TEMP/notes.md"`

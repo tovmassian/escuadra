@@ -14,7 +14,23 @@ PR. The paste sheet marks it _paste_ when it changed since the last version.
 ## App Store Connect
 
 - Category: Education, then Sports
-- Age rating: 4+
+- Age rating: 4+, from Apple's questionnaire: every capability in its first step is No.
+  Unrestricted web access stayed No when 2.0 added the in-app browser (owner,
+  2026-10-31): a photo credit opens only that photo's Commons page or its licence page, with
+  no address bar or search. A Yes to unrestricted web access would rate the app 16+ in
+  Apple's questionnaire.
+- App Review notes: `store/app-review-notes.txt`, in App Review Information. They
+  describe how to use the app and what leaves the device, so they change with either. App
+  Store Connect carries the notes over from the last version, and the paste sheet does
+  not cover them: compare with the last version's tag
+  (`git diff <last version's tag> -- store/app-review-notes.txt`) and paste them when
+  they changed.
+- Accessibility Nutrition Labels: none declared yet (owner, 2026-10-31). Apple keeps them
+  voluntary for now. They go live on the product page as soon as they are published, so
+  a claim is published only once the version it describes is live. In the 2.0 device
+  pass (#187), VoiceOver, Reduced Motion and Dark Interface met Apple's bar that every
+  common task works with the feature on. Larger Text does not meet it, because the text
+  on the answer tiles stops scaling at 120%.
 - Privacy policy URL, each locale its own language's page:
   - en: https://tovmassian.github.io/escuadra/privacy/2/
   - es: https://tovmassian.github.io/escuadra/privacy/2/es.html
@@ -24,7 +40,10 @@ PR. The paste sheet marks it _paste_ when it changed since the last version.
 
 ### App Privacy
 
-Entered before Submit for Review, with the privacy policy URLs.
+Entered before Submit for Review, with the privacy policy URLs. The data types go live on
+the product page as soon as App Privacy's Publish button is pressed, and review checks the
+build against them, so they are published before the submission. The privacy URLs, by
+contrast, take effect only with the submitted version.
 
 - Identifiers, Device ID: not linked to the user, not used for tracking, purposes Analytics
   and App Functionality (TelemetryDeck's hashed form of a random identifier made for the
