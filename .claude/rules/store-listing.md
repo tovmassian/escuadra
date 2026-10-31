@@ -23,9 +23,13 @@ walk-through the `escuadra-store-listing` skill.
   the same set in every language and both stores, at most 8. Some show Commons player
   photos, as the owner decided (`docs/license.md`, In the store listings).
 - `store/declarations.md`: English, entered once per app: the name, URLs, category, age
-  rating, Play's target audience and AI asset answer, and the App Privacy and Data safety
-  answers
+  rating, Apple's Accessibility Nutrition Labels, Play's target audience and AI asset
+  answer, and the App Privacy and Data safety answers
   (`.claude/rules/privacy-telemetry.md` says when they change).
+- `store/app-review-notes.txt`: the notes for Apple's reviewers, pasted as written. They
+  say how to use the app and what leaves the device, so a change to either updates them in
+  the same PR. App Store Connect carries them over from version to version, and the paste
+  sheet does not mark them: compare with the last version's tag.
 - `STORE_LOCALES` in `scripts/store-listing.ts`: each language's locale in each console.
 - The feature graphic's tagline is `store.tagline` in the catalogs, because
   `app/store/feature-graphic.tsx` is a rendered route (`.claude/rules/design-handoff.md`).

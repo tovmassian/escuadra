@@ -25,7 +25,8 @@ updated privacy policy (the privacy pages and the About screen text,
 word for word), Apple's App Privacy answers and Google Play's Data safety
 form — in a store build, never over the air.
 
-The app's traffic is `expo-updates` checking EAS Update on launch, TelemetryDeck's opt-out usage signals, and player-photo thumbnails from Wikimedia Commons (`upload.`/`thumb.wikimedia.org`). Settings' Rate hands a store URL to the OS (`Linking`, `lib/storeReview.ts`); the store app loads it, so it is not app traffic and needs no disclosure. `en.about.privacy` (`i18n/en.ts`) is the complete statement of what each service receives. Apple's App Privacy and Play's Data safety answers are `store/declarations.md` (`.claude/rules/store-listing.md`): a change to what leaves the device updates it in the same PR, as it does About.
+The app's traffic is `expo-updates` checking EAS Update on launch, TelemetryDeck's opt-out usage signals, and player-photo thumbnails from Wikimedia Commons (`upload.`/`thumb.wikimedia.org`). Settings' Rate hands a store URL to the OS (`Linking`, `lib/storeReview.ts`); the store app loads it, so it is not app traffic and needs no disclosure. `en.about.privacy` (`i18n/en.ts`) is the complete statement of what each service receives. Apple's App Privacy and Play's Data safety answers are `store/declarations.md` (`.claude/rules/store-listing.md`): a change to what leaves the device updates it in the same PR, as it does About and the
+notes for Apple's reviewers (`store/app-review-notes.txt`).
 
 ## About stays true (guardrail 7)
 

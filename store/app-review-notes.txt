@@ -1,0 +1,35 @@
+App Purpose and Target Audience:
+Escuadra is a study tool for football squads. It helps football fans learn which player wears which shirt number at professional clubs and national teams, through short quiz rounds that end by showing exactly which players they missed.
+
+The target audience is a general audience of football fans.
+
+App Setup and Access to Main Features:
+Escuadra needs no account, registration or login.
+
+To use the app:
+- Launch Escuadra. On Home, tap "Start Training" (or "Continue", once a team has been played).
+- Pick a team: 96 clubs from Europe's top five leagues or 157 national teams.
+- On the team's screen, choose a level, or tap "Study This Squad" to browse the squad as cards or a list.
+- Level 1: 10 questions; identify each player from the shirt number and a few clues, choosing from four names.
+- A score of 8/10 or more on Level 1 unlocks Level 2, which also asks for the player's position. A score of 8/10 or more on Level 2 unlocks Level 3.
+- Level 3 shows only the shirt number and asks for the name, then the position, then the player's nationality (club squads) or club (national teams).
+- The "Results" screen shows the score and each player missed. A round can be shared as a picture or as text through the system share sheet.
+
+Short "How to play" tips appear the first time the main screens open, and can be skipped. Rounds can be replayed without limits. The app is available in English, Spanish, French, Italian and German.
+
+External Services:
+Escuadra has no backend of its own, and the squad data is bundled with the app. The quiz works without a connection. When online, the app uses three services:
+- Wikimedia Commons: player photos are loaded at runtime from Wikimedia's servers, each credited on screen with its author and licence. Without a connection, the team's colours and the shirt number are shown instead.
+- TelemetryDeck: anonymous usage statistics (screens opened, teams and levels played, scores and some settings). The statistics are on by default and can be switched off in Settings under "Usage statistics". They never include player names, answers or anything typed, and are not linked to the user.
+- Expo (EAS Update): on launch, the app checks whether an update is available from Expo, the service that delivers the app's updates.
+
+There is no authentication, payment, in-app purchase or advertising. The app does no tracking across other companies' apps and websites, and does not use the advertising identifier. All of this matches the App Privacy answers and is described in full in "About" (Privacy section) in the app and at https://tovmassian.github.io/escuadra/privacy/2/
+
+Data Sources and Third-Party Material:
+The squad data (player names, shirt numbers, positions, nationalities and clubs) was compiled from Wikipedia (CC BY-SA) and Wikidata (CC0) and is bundled with the app. Player photos come from Wikimedia Commons, under licences that allow commercial use, and each is credited in the app with its author and licence. Clubs are identified by name and colour bands only: the app has no club crests or logos of its own. Escuadra is an independent, unofficial study tool, not affiliated with or endorsed by any club, league, federation, player or the Wikimedia Foundation, as the app's "About" screen states. It contains no video, audio or broadcast content.
+
+Regional Differences:
+None in functionality or content.
+
+Regulatory Requirements:
+Escuadra does not operate in a regulated industry and needs no professional licences or authorizations.

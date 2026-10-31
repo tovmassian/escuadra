@@ -55,9 +55,9 @@ main                           release/X.Y.Z                  GitHub, the stores
    t=<the first tag at or below $v, or none>   # the baseline
    ```
 
-   Read the five `store/listing/<lang>.md`, `store/screenshots.json` and
-   `store/declarations.md`. With a baseline `t`, look at what moved since it:
-   `git diff "$t" -- lib/telemetryEvents.ts` and the `about` block of
+   Read the five `store/listing/<lang>.md`, `store/screenshots.json`,
+   `store/declarations.md` and `store/app-review-notes.txt`. With a baseline `t`, look at
+   what moved since it: `git diff "$t" -- lib/telemetryEvents.ts` and the `about` block of
    `git diff "$t" -- i18n/en.ts` (what leaves the device), the `@telemetrydeck/sdk` and
    `expo-updates` lines of `git diff "$t" -- package.json`, and
    `git diff --stat "$t" -- store/screenshots.json design/screens/ app/store/ i18n/`
@@ -74,11 +74,21 @@ main                           release/X.Y.Z                  GitHub, the stores
       `i18n/en.ts`): keep it, or an edit for a named CHANGELOG line. Most versions keep
       them.
    3. The screenshot set: keep it, or swap in a screen the version added
-      (`design/SCREENS.md` says what each capture shows; at most 8).
-   4. The declarations, only when step 1 shows that what leaves the device changed. The PR
-      that changed it should have updated `store/declarations.md`
-      (`.claude/rules/privacy-telemetry.md`); say so if it did not, and draft the change
-      from About's text. What an answer means is the owner's (guardrail 7).
+      (`design/SCREENS.md` says what each capture shows; at most 8). To show a different
+      team, player or state, restage the listed capture in place in
+      `scripts/capture-screens.mjs`: another seed (find one with `buildRound` in a
+      throwaway test), or other seeded progress. Then run `npm run shots`, commit only
+      the restaged PNGs (the rest move by a few pixels of noise) and update
+      `design/SCREENS.md`. Settle the set before Play's submission: a change made
+      after the submission reaches Play only as a listing edit, once the release is
+      approved.
+   4. The declarations and `store/app-review-notes.txt`, only when step 1 shows that what
+      leaves the device or how the app is used changed. The PR that changed what leaves
+      the device should have updated both (`.claude/rules/privacy-telemetry.md`); a PR
+      that changed how the app is used, which the CHANGELOG section shows, should have
+      updated the notes (`.claude/rules/store-listing.md`). Say so if the PR did not.
+      Draft a declarations change from About's text and a notes change from the
+      CHANGELOG section. What a declaration means is the owner's (guardrail 7).
 
 3. **Write the English** into `store/listing/en.md`, then
    `npx vitest run scripts/__tests__/store-listing.test.ts`.
@@ -144,23 +154,78 @@ yourself.
 1. From a checkout of `release/X.Y.Z` with no uncommitted changes: `npm ci`, then
    `node scripts/store-bundle.ts`. Run it before the owner tags `vX.Y.Z` (step 8): when
    the tag exists it becomes the baseline, so a re-run marks everything _skip_ and empties
-   `dist/store-listing/app-store/` and `play/`, leaving this mode's step 4 nothing to
+   `dist/store-listing/app-store/` and `play/`, leaving this mode's step 6 nothing to
    attach.
 2. If the first run marks the images _paste_, or stops for missing captures, capture
    every language once with the loop the stop message prints (also in `docs/release.md`,
    step 7), then run the bundle again; the second run copies the fresh captures. The
    captures are gitignored, so ones left from an earlier run would otherwise be handed
-   over. Look at a few captures in each language (`design/store/<code>/`,
-   `design/play/<code>/`) before going on: they are web renders, so a layout that breaks
-   only in one language shows here first.
-3. Walk `dist/store-listing/paste-sheet.md` with the owner, one store at a time, noting in
-   the conversation what they confirm entered. Apple's fields and App Privacy go in before
-   Submit for Review; Play's listing, release notes and Data safety when the build is
-   uploaded; each store's privacy URL (Apple's one per locale, Play's one for the app)
-   together with its answers. A language entered for the first time also needs, in App
+   over. The loop shoots every screen in both themes, about an hour for five languages:
+   run it in the background. Then look at every listed shot in every language and both
+   stores (`design/store/<code>/`, `design/play/<code>/`), with each language's shots side
+   by side on one sheet: a page of `<img>` tags, opened in Playwright and screenshotted,
+   gives one. Retake the affected language (and store), then bundle again, when a shot
+   has caught Metro's "Bundling…" toast or shows the team's colours where the other languages
+   show a player photo (usually because Wikimedia did not answer in time). The captures
+   are web renders, so a layout that breaks only in one language shows here first.
+   Captures taken from a local checkout before the PR that picks a change into
+   `release/X.Y.Z` has merged stay valid only if the merged branch holds the same files:
+   compare the output of `git rev-parse HEAD^{tree}` on that checkout with that of
+   `git rev-parse origin/release/X.Y.Z^{tree}` after the merge.
+3. Before the walk, check both freezes (`gh issue list --label ota-freeze`). `store-build`
+   opened them, but a freeze closed to send an update to the test installs must be
+   reopened (`gh issue reopen <number>`) before that store's submission, either before
+   the walk or at any later point in the walk. `docs/release.md`, Freeze during store
+   review, also has the command that creates one.
+4. Walk `dist/store-listing/paste-sheet.md` with the owner, one store at a time, noting in
+   the conversation what they confirm entered. The submit, send-for-review and publish
+   buttons are the owner's. A language entered for the first time also needs, in App
    Store Connect, its Name (_Escuadra_), Privacy Policy URL and Support URL, and in Play
    Console its App name (_Escuadra_): take them from `store/declarations.md`.
-4. After the owner has tagged `vX.Y.Z` and published its GitHub Release (step 8), and
+
+   **Play Console**, when the build is uploaded:
+   1. Each language's listing: short and full description, screenshots, feature graphic;
+      the app icon in the default listing.
+   2. App content, from `store/declarations.md`: Data safety, the privacy URL, target
+      audience, the AI asset answer.
+   3. The production release: promote the internal-track build and paste the release
+      notes, every language in one box.
+   4. Publishing overview: the owner sends the changes for review. With managed
+      publishing nothing goes live until the owner publishes after approval. A change
+      sent while the review runs can push the app to the back of the queue, so a late
+      listing change waits for the approval and goes in as a listing edit.
+
+   **App Store Connect**, before Submit for Review:
+   1. The new version (Distribution, + beside iOS App), with the build from `store-build`.
+   2. App Information, per language: Name and Subtitle.
+   3. The version page, per language: Promotional Text, Description, Keywords, What's New,
+      Support URL, and the screenshots. Apple requires the iPhone "Dynamic Island (medium)"
+      size (1206 × 2622) but scales the "large" size down to it, and the captures are the
+      large size (1320 × 2868). So in the media manager's large slot, delete the shots
+      carried over from the last version and upload the whole set (`01` onwards, at most
+      8). An uploaded shot shows a cloud icon while Apple processes it, for a few
+      minutes. The media manager's "iPhone Duo" slot, for Apple's two-display iPhone, and
+      the version page's header component are optional.
+   4. The version page, once per version (not per language): App Review Information's
+      notes, which App Store Connect carries over from the last version. Replace them with
+      `store/app-review-notes.txt` when there is no baseline tag, or when
+      `git diff "$t" -- store/app-review-notes.txt` shows a change (set `t` as in draft
+      mode's step 1); the paste sheet does not cover them. Leave "Sign-in required"
+      unticked (the app has no accounts). Version Release is the owner's pick (the
+      automatic option goes live on approval).
+   5. The age rating: Apple's questionnaire keeps its answers, so it is checked against
+      `store/declarations.md`, not refilled.
+   6. App Privacy, last before submitting: the privacy URL per language, then the data
+      types, published with the page's own Publish button before the submission
+      (`store/declarations.md` says why).
+
+   Do not publish Accessibility Nutrition Labels before the submission. If the owner
+   declares any, publish them only once the version is live, since they go live on the
+   product page as soon as they are published.
+
+5. After each approval, close that store's freeze. On Play, with managed publishing, the
+   owner then publishes, and enters any listing edit held during the review.
+6. After the owner has tagged `vX.Y.Z` and published its GitHub Release (step 8), and
    only when the sheet marked the images _paste_, offer to attach them to its GitHub
    Release, and do it on the owner's OK:
 
@@ -175,6 +240,8 @@ yourself.
   owner's call.
 - Decide what a declaration means, or merge a translation without its native reviewer's
   sign-off.
-- Enter anything in a console: the owner does, from the sheet.
+- Enter anything in a console unless the owner, watching, asks you to do that step. The
+  owner enters the rest from the sheet, and always presses submit, send for review and
+  publish.
 - Push `gh-pages`, or upload to a GitHub Release, without the owner's OK.
 - Translate _Escuadra_ or _a la escuadra_, or call the product anything else (guardrail 6).
