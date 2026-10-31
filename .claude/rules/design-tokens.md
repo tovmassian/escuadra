@@ -24,9 +24,11 @@ Team identity colour is content, not a token: `team-identity.md`.
 Colour specifically comes from the **active palette**, via
 `useThemeColors()` — never a module-scope capture. `StyleSheet.create` at
 module scope is evaluated once at import, so a component built that way
-looks correct and silently ignores the theme. The one exception is
-`ShareCard`, the share picture, which draws in `palettes.dark` on purpose: the
-picture looks the same whichever theme it is shared from. Both palettes in
+looks correct and silently ignores the theme. The two exceptions are pictures
+that draw in `palettes.dark` on purpose: `ShareCard`, the share picture, which
+looks the same whichever theme it is shared from, and Play's feature graphic
+(`app/store/feature-graphic.tsx`), one fixed listing asset, which hands the palette
+to Home's `NumberWall` through its `palette` prop. Both palettes in
 `theme/tokens.ts` implement the same `Palette` interface: add a role to
 both or to neither.
 
