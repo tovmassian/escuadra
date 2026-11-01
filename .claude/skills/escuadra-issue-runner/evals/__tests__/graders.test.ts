@@ -36,7 +36,7 @@ const proceed: Triage = {
   docs: ['docs/superpowers/handoff/2026-10-16-2-0-redesign-handoff.md'],
 };
 
-describe('gradersFor a triage', () => {
+describe('gradeIssueRunner for a triage', () => {
   it('passes a block that meets every expectation', () => {
     for (const grader of regexes(gradeIssueRunner(proceed))) {
       expect(passes(grader, BLOCK), String(grader.name)).toBe(true);
@@ -70,7 +70,7 @@ describe('gradersFor a triage', () => {
     for (const grader of regexes(gradeIssueRunner(exact))) expect(passes(grader, block)).toBe(true);
   });
 
-  it('weighs the decision and writing above the slug', () => {
+  it('weighs the decision above the slug', () => {
     const graders = gradeIssueRunner(proceed);
     const weight = (name: string) => graders.find((g) => g.name === name)?.weight;
     expect(weight('decision')).toBe(3);
@@ -104,7 +104,7 @@ describe('gradersFor a triage', () => {
   });
 });
 
-describe('gradersFor a negative case', () => {
+describe('gradeIssueRunner for a negative case', () => {
   it('expects no triage block and an answer', () => {
     const names = gradeIssueRunner({ kind: 'no-triage', answered: 'It answers.' }).map(
       (g) => g.name,
