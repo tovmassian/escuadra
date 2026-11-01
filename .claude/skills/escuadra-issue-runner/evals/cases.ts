@@ -1,7 +1,9 @@
 // The escuadra-issue-runner eval suite as data (spec §7). Edit this, then run
 // `node scripts/evals/gen-cases.ts` to regenerate each case's folder.
 import type { EvalCase, Suite } from '../../../../scripts/evals/lib/cases.ts';
-import { GH_LOG, STAYED_DRY_PATTERN, type Triage } from '../../../../scripts/evals/lib/graders.ts';
+import { GH_LOG, STAYED_DRY_PATTERN } from '../../../../scripts/evals/lib/graders.ts';
+import { gradeIssueRunner, type IssueRunnerExpectation, type Triage } from './graders.ts';
+import { TRIAGE_TEMPLATE } from './triage.ts';
 
 const PINS = {
   main: 'df83a1164a826261f3c684aa225aacf801f40731',
@@ -49,7 +51,7 @@ const READ_ONLY_BASH = [
   'pwd',
 ].map((command) => `Bash(${command}:*)`);
 
-const SMOKE: EvalCase = {
+const SMOKE: EvalCase<IssueRunnerExpectation> = {
   name: 'sandbox-smoke',
   why: 'The sandbox itself: the git wrapper, the fake gh, a logged write and a commit that lands in the throwaway repo.',
   tags: ['smoke'],
@@ -135,7 +137,7 @@ const FLAG_SPEC = 'docs/superpowers/specs/2026-10-20-flagged-players-design.md';
 const triage = (expect: Omit<Triage, 'kind'>): Triage => ({ kind: 'triage', ...expect });
 const NEGATIVE_BUDGET = { maxTurns: 25, timeoutSeconds: 300 };
 
-const CASES: EvalCase[] = [
+const CASES: EvalCase<IssueRunnerExpectation>[] = [
   {
     name: 'small-bug',
     why: "An S bug on clean main: in place, systematic-debugging. The board's S beats the body's M, and a device check is not a question.",
@@ -520,12 +522,14 @@ const CASES: EvalCase[] = [
   },
 ];
 
-export const SUITE: Suite = {
+export const SUITE: Suite<IssueRunnerExpectation> = {
   pins: PINS,
   hidden: HIDDEN,
   allowedTools: ['Read', 'Glob', 'Grep', 'Skill', ...READ_ONLY_BASH],
   runs: 3,
   maxTurns: 40,
   timeoutSeconds: 900,
+  dryRunAppendix: TRIAGE_TEMPLATE,
+  grade: gradeIssueRunner,
   cases: [SMOKE, ...CASES],
 };

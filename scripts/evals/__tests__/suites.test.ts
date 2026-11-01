@@ -7,7 +7,7 @@ import { describe, expect, it } from 'vitest';
 import { SUITE } from '../../../.claude/skills/escuadra-issue-runner/evals/cases.ts';
 import { STAYED_DRY_PATTERN } from '../lib/graders.ts';
 import { renderSuite, staleCaseDirs } from '../lib/suite.ts';
-import { TRIAGE_TEMPLATE } from '../lib/triage.ts';
+import { TRIAGE_TEMPLATE } from '../../../.claude/skills/escuadra-issue-runner/evals/triage.ts';
 
 const EVALS = fileURLToPath(
   new URL('../../../.claude/skills/escuadra-issue-runner/evals/', import.meta.url),
