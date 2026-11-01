@@ -31,8 +31,8 @@ To see why a run failed, add `--keep`. The run's directory is kept, and its `out
 1. `.claude/skills/<skill>/evals/cases.ts` exports `SUITE: Suite<E>` ([`lib/cases.ts`](lib/cases.ts)): the pins, the hidden paths, the tools, the cases, the `grade` function for the suite's own expectation type `E`, and optionally `dryRunAppendix`.
 2. `dry-run.md` beside it is every graded case's system prompt, followed by `dryRunAppendix`.
 3. Expectation types and their graders, and their tests in `evals/__tests__/`, stay in the suite: the harness adds `no-writes` and `stayed-dry` after them, and a `smoke` case carries its own graders.
-4. Hide the skill folder and anything else that holds the answers (`hidden`).
-5. `node scripts/evals/gen-cases.ts`; `npm run check` then checks the suite stays in sync.
+4. List the skill folder in `hidden`: see **Hidden paths** above.
+5. Generate the cases: see **Cases** above.
 
 ## What a run can and cannot do
 

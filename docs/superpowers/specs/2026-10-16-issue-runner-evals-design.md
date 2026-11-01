@@ -519,7 +519,8 @@ runner's permissions deny reading it, and its copy is hidden from the clone.
 ```
 
 - **Real snapshots** wherever a real issue sits on a decision; captured with
-  `node scripts/evals/capture-issue.ts <N>` (real `gh`, run by hand) and
+  `node scripts/evals/capture-issue.ts <N> --suite escuadra-issue-runner` (real
+  `gh`, run by hand) and
   committed, so later edits to the issue do not move the suite.
 - **A snapshot records the issue as it stands at the main pin.** An issue
   closed after the pin, by work the sandbox does not contain, is recorded open,
