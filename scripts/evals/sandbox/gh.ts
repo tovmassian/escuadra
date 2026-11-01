@@ -429,7 +429,7 @@ function restPr(pr: PrFixture): JsonObject {
   };
 }
 
-// gh's search syntax, reduced to what triage needs: every plain word must
+// gh's search syntax, reduced to what a run needs: every plain word must
 // appear; qualifiers such as is:open are ignored.
 function matches(search: string, text: string): boolean {
   const haystack = text.toLowerCase();

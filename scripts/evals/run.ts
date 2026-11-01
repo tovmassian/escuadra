@@ -1,4 +1,4 @@
-// Runs the eval suite (spec §9): `node scripts/evals/run.ts --tag core`,
+// Runs a skill's eval suite (spec §9): `node scripts/evals/run.ts --suite <skill> --tag core`,
 // `--case '129-*'`, or `--full`. Every run draws on the owner's usage limits.
 // Results and the HTML report go to a temporary directory, never the repo.
 import { spawnSync } from 'node:child_process';
@@ -8,11 +8,12 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { evalArgs, evalEnv, parseNumber } from './lib/run.ts';
+import { suiteNames, suitePath } from './lib/suite.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const { values } = parseArgs({
   options: {
-    suite: { type: 'string', default: '.claude/skills/escuadra-issue-runner' },
+    suite: { type: 'string' },
     tag: { type: 'string', multiple: true, default: [] },
     case: { type: 'string' },
     full: { type: 'boolean', default: false },
@@ -31,9 +32,10 @@ const ablation = values.ablation;
 if (ablation !== undefined && ablation !== 'with-without' && ablation !== 'none') {
   throw new Error(`--ablation must be with-without or none, not ${ablation}`);
 }
+const target = suitePath(values.suite, suiteNames(root));
 const outDir = mkdtempSync(join(tmpdir(), 'escuadra-evals-'));
 const args = evalArgs({
-  target: values.suite,
+  target,
   outDir,
   tags: values.tag,
   caseGlob: values.case,
