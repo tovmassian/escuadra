@@ -200,9 +200,19 @@ function hideFromHistory(origin: string, paths: string[], branches: string[]): v
   if (first === undefined || first === '') return;
   // `first`'s parents and everything behind them stay out of the rewrite. A root has none.
   const parents = git(origin, ['rev-list', '--parents', '-n', '1', first]).split(' ').slice(1);
-  // A branch no hidden path ever touched: its history is out of the rewrite entirely.
+  // A branch no hidden path ever touched: its history is out of the rewrite entirely. Without
+  // --full-history, git skips a merge's side branch that added a path and removed it again.
   const untouched = branches.filter(
-    (branch) => git(origin, ['rev-list', '-n', '1', `refs/heads/${branch}`, '--', ...paths]) === '',
+    (branch) =>
+      git(origin, [
+        'rev-list',
+        '-n',
+        '1',
+        '--full-history',
+        `refs/heads/${branch}`,
+        '--',
+        ...paths,
+      ]) === '',
   );
   const quoted = paths.map((path) => `'${path}'`).join(' ');
   execFileSync(
