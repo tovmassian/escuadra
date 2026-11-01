@@ -29,6 +29,7 @@ export function suitePath(name: string | undefined, names: string[]): string {
   return `${SKILLS_DIR}/${name}`;
 }
 
+/** A skill's `SUITE` from its `cases.ts`; the cast is where the suite's own expectation type is erased. */
 export async function loadSuite(evalsDir: string): Promise<Suite> {
   const { SUITE } = (await import(pathToFileURL(join(evalsDir, 'cases.ts')).href)) as {
     SUITE: Suite;

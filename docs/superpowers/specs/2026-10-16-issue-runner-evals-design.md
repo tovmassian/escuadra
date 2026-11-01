@@ -770,5 +770,5 @@ of it.
 - End-to-end runs that implement a fixture issue. One smoke case run by hand is
   the natural next step once the decision suite is green.
 - Running evals in CI: every run is billed to a plan and needs credentials.
-- Suites for other skills.
+- Suites for other skills (the harness takes one since #170).
 - MCP mocks: the skill under test reaches GitHub through `gh`, not MCP.

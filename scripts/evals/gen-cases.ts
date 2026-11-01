@@ -1,14 +1,16 @@
 // Writes each case's case.yaml, scaffold.sh and setup.json from a suite's cases.ts (spec §9):
-// `node scripts/evals/gen-cases.ts` for every suite, or `… gen-cases.ts <skill>` for one. Never
+// `node scripts/evals/gen-cases.ts` for every suite, or `… gen-cases.ts --suite <skill>` for one. Never
 // edit the generated files; the suite-in-sync test fails when they drift from cases.ts.
 import { mkdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join, relative, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { parseArgs } from 'node:util';
 import { renderSuite, staleCaseDirs, suiteNames, suitePath } from './lib/suite.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const names = suiteNames(root);
-const skills = process.argv[2] === undefined ? names : [process.argv[2]];
+const { values } = parseArgs({ options: { suite: { type: 'string' } } });
+const skills = values.suite === undefined ? names : [values.suite];
 
 for (const skill of skills) {
   const evalsDir = join(root, suitePath(skill, names), 'evals');

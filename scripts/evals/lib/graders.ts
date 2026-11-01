@@ -2,7 +2,7 @@
 // the stayed-dry check. A smoke case carries its own graders instead.
 import type { YamlMap } from './yaml.ts';
 
-/** A suite's own expectation for a case, told apart by its kind. */
+/** A suite's own expectation for a case, told apart by its kind; `'smoke'` is reserved for the harness's smoke case. */
 export interface Expectation {
   kind: string;
 }

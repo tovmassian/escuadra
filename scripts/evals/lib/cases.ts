@@ -41,7 +41,7 @@ export interface Suite<E extends Expectation = Expectation> {
   /** Appended to dry-run.md, after a blank line, in every graded case's system prompt. */
   dryRunAppendix?: string;
   /** A graded case's own graders; no-writes and stayed-dry follow them. */
-  grade(expect: E): YamlMap[];
+  grade: (expect: E) => YamlMap[];
   cases: EvalCase<E>[];
 }
 
