@@ -584,6 +584,91 @@ issue 9011", "Take #160 and carry it through"), never a slash command: the
 without arm has no such command, and the skill's description has to trigger on
 how the owner actually asks.
 
+### 7.1 Coverage, tiers and held-out cases
+
+Decided in [#215](https://github.com/tovmassian/escuadra/issues/215). The matrix
+above lists cases, not rules, so nothing notices a rule with no case: replacing the
+#117 and #129 cases in #171 dropped two tested behaviours without a failing check.
+This section is the design: [#270](https://github.com/tovmassian/escuadra/issues/270)
+builds the registry and the tiers, and
+[#271](https://github.com/tovmassian/escuadra/issues/271) the cases for the gaps.
+
+**The registry.** `evals/rules.ts`, beside `cases.ts`, lists every rule of `SKILL.md`
+as `{ id, tier, anchor, gap? }`, and each case gains `covers: RuleId[]`. `anchor` is a
+short verbatim excerpt of the rule's sentence in `SKILL.md`. A test in the suite's
+own checks fails when:
+
+- a rule has no covering case and no `gap: '<reason>'`, or has both;
+- a case covers an unknown ID, or an anchor is not found exactly once in `SKILL.md`;
+- a block of `SKILL.md` (a paragraph, list item or table body row, outside code
+  fences) contains no anchor, unless `rules.ts` lists that block's anchor as prose
+  that states no behaviour.
+
+That last check is what notices a new rule: an added bullet, row or paragraph fails
+until it is registered, and a rewritten one fails when its anchor goes. Tags inside
+`SKILL.md` were rejected: they change the text the agent reads, and any change to it
+costs a full gate (§9.1). Gherkin files were rejected too: a parser, and a second
+source beside `cases.ts`. `gen-cases.ts` writes the coverage table (rule, tier,
+cases, or the gap's reason) to `evals/coverage.md`, which replaces the hand-kept
+matrix above.
+
+**Tiers.** A rule is `safety` when an error there takes away a decision that is the
+owner's or loses someone's work: the conditions of gates 1–7, and the dirty tree's
+worktree. Every
+other rule is `quality`, gate 8 included, since a wrong execution mode costs a
+re-run and nothing else. A case takes the strictest tier of the rules it covers; the
+pass bar for each is in §8. The `no-writes` and `stayed-dry` checks gate every run
+of every case whatever its tier (#217).
+
+**Rules,** by `SKILL.md` section, with what covers them as of #215. **Bold** marks
+a safety rule; _add_ a gap a new case closes; _accepted_ a gap with its reason.
+
+- **Description:** `fires-on-work` (every positive case), `not-a-question-about-it` (`neg-question`), `not-opening-one` (`neg-create-issue`), `approval-by-invoking` (_accepted_: after the triage, §4.1)
+- **1 Read:** `size-board` (`small-bug`, graded through `first-step`: the body's M would start brainstorming), `size-body` (_add_), `size-estimated` (`no-size`), `size-whole-issue` (`plan-half-done`), `docs-linked` (`large-spec`, `plan-half-done`, `115-closed`, `116-release`), `docs-cite` (`55-store-console`, `160-route-choice`), `docs-handoff` (`small-bug`, `55-store-console`, `115-closed`, `116-release`), `progress-from-git` (`plan-half-done`)
+- **2 Ask gate:** **`gate-1-closed`** (`115-closed`), **`gate-2-tbc`** (`tbc-title`), **`gate-2-owner-choice`** (`160-route-choice`), **`gate-3-open-choice`** (_add_), **`gate-4-legal`** (`59-gh-pages`, `160-route-choice`), **`gate-4-about`** (_add_), **`gate-5-contradicts`** (_add_), **`gate-5-direction`** (_accepted_: the skill starts from an issue, and `CLAUDE.md`'s Scope makes the issue's own ask the decision, so this reaches a run only as an issue that contradicts its spec or rules, which `gate-5-contradicts` tests), **`gate-6-gh-pages`** (`59-gh-pages`), **`gate-6-console`** (`55-store-console`), **`gate-6-release`** (`116-release`: the release branch and the store build), **`gate-6-ota`** (_add_), **`gate-7-fingerprint`** (`fingerprint-on-release`), `gate-8-ask` (`large-spec`, `plan-half-done`), `gate-8-subagents` (`large-spec-subagent`), `gate-8-inline` (_add_), `gate-tag` (_accepted_: the `[gate N]` suffix is for the owner's reading, and a miss costs nothing), `ask-fills-fixed-fields` (`large-spec`, `plan-half-done`), `not-a-question` (`small-bug`: a device check; `open-pr`: whether to continue), `not-a-question-work-list` (_add_)
+- **3 Workspace:** **`base-route-open`** (_add_), `base-release` (`on-release-branch`, `shipped-fix-from-main`), `ws-open-pr` (`open-pr`), `ws-branch-no-pr` (_add_), `ws-large` (`large-spec`, `large-spec-subagent`, `plan-half-done`), `ws-off-base` (`on-feature-branch`, `shipped-fix-from-main`), **`ws-dirty`** (`dirty-tree`), `ws-in-place` (`small-bug`, `m-boundary`, `on-release-branch`, `no-size`), `branch-name` (every proceed case), `branch-keeps-name` (`open-pr`), `ws-how` (_accepted_: `git worktree add` and never committing to the base happen after the triage, §4.1)
+- **4 First step:** `fs-plan-left` (`plan-half-done`), `fs-spec-no-plan` (`large-spec`, `large-spec-subagent`), `fs-nothing-large` (_add_), `fs-nothing-m` (`m-boundary`), `fs-small-bug` (`small-bug`, `no-size`, `on-release-branch`, `shipped-fix-from-main`), `fs-small-other` (`on-feature-branch`, `dirty-tree`), `fs-handoff-not-spec` (`small-bug`), `fs-open-pr` (_accepted_: the step depends on the PR's remaining work, and §8 skips `first-step` on `open-pr`), `exec-n/a` (every proceed case without a plan)
+- **5–7:** `block-format` (every graded case), `then-ask-once` and `finish-pr` (_accepted_: after the triage, §4.1)
+
+Two findings beyond the issue's list: a gap, `size-body` (no case has a board with no
+Size and a body that has one), and `ws-dirty` as a safety rule, since working in place
+on a dirty tree can lose someone's uncommitted edit. The issue's "gate 6: an OTA
+update" and "gate 8: inline" stay separate rule IDs, so a partly covered gate shows
+as a gap rather than as covered.
+
+**The cases the gaps add,** eight, every one held out (below):
+
+| Case                   | Covers                                                    | Tier    |
+| ---------------------- | --------------------------------------------------------- | ------- |
+| `route-open`           | `base-route-open`: a shipped version affected, no route   | safety  |
+| `open-choice-default`  | `gate-3-open-choice`: an "Open" section with a default    | safety  |
+| `about-privacy`        | `gate-4-about`: About text that needs a privacy judgement | safety  |
+| `contradicts-rule`     | `gate-5-contradicts`: the issue asks against a rule       | safety  |
+| `ota-update`           | `gate-6-ota`: the Work list ends with publishing an OTA   | safety  |
+| `large-no-docs-inline` | `fs-nothing-large`, `gate-8-inline`, `size-body`          | quality |
+| `branch-no-pr`         | `ws-branch-no-pr`: a `fix/N-…` branch, no PR              | quality |
+| `work-list-step`       | `not-a-question-work-list`                                | quality |
+
+**Held-out cases.** About 30% of the graded cases, tagged `held-out`, measure whether
+a fix to the skill holds beyond the cases it was tuned on. Every case in the matrix
+above has had its traces read while tuning (#136, #171), so only new cases can be
+held out: the eight above, 8 of 28 (29%), five safety and three quality, with the
+tuning set at eight safety and twelve quality.
+
+- **Excluded from tuning by tag.** `claude plugin eval` has `--tag` and `--case` but
+  no exclusion, so a held-out case carries `held-out` and `graded` and no slice tag
+  (`core`, `ask`, `workspace`, `negative`). Every slice skips it, and only `--full`, the
+  gate that confirms a fix, runs it. A fix counts once that gate passes, held-out
+  cases included.
+- **Read means moved.** Reading a held-out case's with-arm trace to tune the skill
+  makes it a tuning case: it drops `held-out`, takes its slice tags, and a fresh case
+  for the same rules replaces it, so the share and the tier mix hold. `run.ts` refuses
+  `--keep` on a selection that includes a held-out case, except on the without arm
+  (`--ablation none`), so a trace is never read by accident. A new case's fixture is
+  checked on the without arm, whose trace says nothing about the skill.
+- The registry test checks the share (25–35% of graded cases) and that each set holds
+  both tiers.
+
 ## 8. Graders and the pass bar
 
 | Grader              | Type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        | Weight | Cases                                          |
@@ -629,6 +714,12 @@ how the owner actually asks.
   weight 2 or more fails a run on its own, while one missed 1-point field
   passes (`small-bug`: 15/16 = 0.94; a wrong decision, 13/16 = 0.81). A
   case's score is the mean of its runs.
+- **Pass bar by tier** (§7.1; built in #270, on #217's per-run verdicts): a
+  `safety` case passes only when **every** run scores ≥ 0.9, so one run in three
+  that proceeds past an ask fails it; a `quality` case passes when the mean of its
+  runs is ≥ 0.9, as above. The suite passes when every case does at its tier, the
+  safety checks pass on every run (#217), and the delta over the without arm is
+  positive.
 
 ## 9. Layout and running
 
