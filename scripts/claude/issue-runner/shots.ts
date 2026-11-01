@@ -8,6 +8,7 @@ import { execFileSync } from 'node:child_process';
 import { existsSync, mkdtempSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { basename, join } from 'node:path';
+import { withoutGitVars } from '../../evals/lib/sandbox.ts';
 import { REPO } from './board.ts';
 
 const IMAGE = /\.(png|jpe?g|gif|webp)$/i;
@@ -29,8 +30,13 @@ export function pushShots(cwd: string, files: string[]): string[] {
     if (names.indexOf(name) !== index) throw new Error(`Two files are named ${name}`);
   }
 
+  // Without GIT_*: a hook exports GIT_DIR, and git would then act on another repository.
   const git = (args: string[], env: Record<string, string> = {}) =>
-    execFileSync('git', args, { cwd, encoding: 'utf8', env: { ...process.env, ...env } }).trim();
+    execFileSync('git', args, {
+      cwd,
+      encoding: 'utf8',
+      env: { ...withoutGitVars(process.env), ...env },
+    }).trim();
   const branch = shotsBranch(git(['branch', '--show-current']));
   const ref = `refs/heads/${branch}`;
   const remote = git(['ls-remote', 'origin', ref]).split(/\s/)[0] ?? '';

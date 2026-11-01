@@ -1,30 +1,33 @@
 import { execFileSync } from 'node:child_process';
-import { cpSync, mkdtempSync, writeFileSync } from 'node:fs';
+import { appendFileSync, cpSync, mkdtempSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
+import { withoutGitVars } from '../../../evals/lib/sandbox.ts';
 import { pushShots, shotsBranch } from '../../issue-runner/shots.ts';
 
+// Every git call strips GIT_*: the pre-push hook exports GIT_DIR, and git would then act on
+// the hook's repository.
 const git = (cwd: string, ...args: string[]) =>
-  execFileSync('git', args, { cwd, encoding: 'utf8' }).trim();
+  execFileSync('git', args, { cwd, encoding: 'utf8', env: withoutGitVars(process.env) }).trim();
 
 let template = '';
 
-// Built once and copied per test: a dozen git spawns per test outran the 5 s timeout on a
-// loaded Mac. The relative origin URL keeps each copy pointing at its own origin.
+// Built once, in as few git spawns as it takes, and copied per test: git spawns crawl on a
+// loaded Mac, and a fixture per test outran the 5 s timeout. The relative origin URL keeps
+// each copy pointing at its own origin.
 beforeAll(() => {
   template = mkdtempSync(join(tmpdir(), 'review-shots-template-'));
   const work = join(template, 'work');
-  git(template, 'init', '--quiet', '--bare', '--initial-branch=main', 'origin.git');
-  git(template, 'clone', '--quiet', 'origin.git', 'work');
-  git(work, 'remote', 'set-url', 'origin', '../origin.git');
-  git(work, 'config', 'user.name', 'Test');
-  git(work, 'config', 'user.email', 'test@example.com');
+  git(template, 'init', '--quiet', '--bare', 'origin.git');
+  git(template, 'init', '--quiet', '--initial-branch=feat/207-shots', 'work');
+  appendFileSync(
+    join(work, '.git/config'),
+    '[user]\n\tname = Test\n\temail = test@example.com\n[remote "origin"]\n\turl = ../origin.git\n',
+  );
   writeFileSync(join(work, 'README.md'), 'escuadra\n');
   git(work, 'add', '.');
   git(work, 'commit', '--quiet', '-m', 'init');
-  git(work, 'push', '--quiet', 'origin', 'main');
-  git(work, 'switch', '--quiet', '-c', 'feat/207-shots');
 });
 
 /** A clone on a feature branch whose origin is a local bare repository. */
@@ -105,6 +108,22 @@ describe('pushShots', () => {
     const a = shot(work, 'home.png', 'a');
     expect(() => pushShots(work, [a, a])).toThrow(/home\.png/);
     expect(git(origin, 'branch', '--list', 'review-shots/*')).toBe('');
+  });
+
+  it('acts on the repository it runs in, not one an inherited GIT_DIR names', () => {
+    const { origin, work } = clone();
+    const decoy = clone();
+    git(decoy.work, 'branch', '--quiet', '-m', 'feat/1-decoy');
+    const before = git(decoy.work, 'for-each-ref');
+    process.env.GIT_DIR = join(decoy.work, '.git');
+    try {
+      pushShots(work, [shot(work, 'home.png', 'png-1')]);
+    } finally {
+      delete process.env.GIT_DIR;
+    }
+    expect(git(origin, 'ls-tree', '--name-only', 'review-shots/feat/207-shots')).toBe('home.png');
+    expect(git(decoy.work, 'for-each-ref')).toBe(before);
+    expect(git(decoy.origin, 'for-each-ref')).toBe('');
   });
 
   it('encodes a file name for its link', () => {
