@@ -129,11 +129,15 @@ function initialiseQuiz() {
       list.hidden = missed.length === 0;
       part('result-copy').textContent = perfect
         ? 'Three for three. The app plays ten a round, across 96 clubs and 157 national teams.'
-        : 'Those are the ones to go over. In the app, every miss waits for you on Results: ten questions a round, across 96 clubs and 157 national teams.';
+        : 'Those are the ones to go over. The app plays ten questions a round, across 96 clubs and 157 national teams, and every miss waits for you on Results.';
+      part('live').textContent =
+        `Your round: ${score} of ${total}. ${perfect ? 'A la escuadra' : 'Still learning'}.`;
       return;
     }
 
     const right = state.picked === question.answer;
+    const age = ageOn(question.birth, new Date());
+    const isLast = state.index === QUESTIONS.length - 1;
     if (number.firstChild.nodeValue !== String(question.number)) {
       number.firstChild.nodeValue = String(question.number);
       number.classList.remove('is-entering');
@@ -146,7 +150,7 @@ function initialiseQuiz() {
       : 'chip chip-name';
     part('name-value').textContent = state.picked ? question.answer : '?';
     part('position').textContent = question.position;
-    part('age').textContent = String(ageOn(question.birth, new Date()));
+    part('age').textContent = String(age);
     part('clue-label').textContent = question.clue.label;
     part('clue').textContent = question.clue.value;
     const flag = part('flag');
@@ -166,16 +170,25 @@ function initialiseQuiz() {
     });
     const hint = part('hint');
     hint.hidden = state.picked !== null && !right;
-    hint.textContent = state.picked === null ? 'Tap your answer' : 'Right. Next one coming…';
+    hint.textContent =
+      state.picked === null
+        ? 'Tap your answer'
+        : isLast
+          ? 'Right. Your round is next…'
+          : 'Right. Next one coming…';
     hint.classList.toggle('is-right', right);
     nextButton.hidden = state.picked === null || right;
-    nextButton.textContent = state.index === QUESTIONS.length - 1 ? 'See your round' : 'Next';
+    nextButton.textContent = isLast ? 'See your round' : 'Next';
+    // Focus lands on the first name when a question opens, so the question itself is
+    // announced; the first one is already on the page.
     part('live').textContent =
-      state.picked === null
-        ? ''
-        : right
+      state.picked !== null
+        ? right
           ? `Right: ${question.answer}.`
-          : `Not quite. Number ${question.number} is ${question.answer}.`;
+          : `Not quite. Number ${question.number} is ${question.answer}.`
+        : state.results.length > 0
+          ? `Question ${state.index + 1} of ${QUESTIONS.length}. ${question.team}. Who wears ${question.number}? ${question.position}, age ${age}, ${question.clue.value}.`
+          : '';
   }
 
   // Keeps keyboard focus in the card as the round moves on, or into its result.
