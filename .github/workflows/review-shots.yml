@@ -1,0 +1,27 @@
+# When a PR closes, deletes its review screenshots: the review-shots/<head branch> that
+# scripts/claude/issue-runner/review-shots.ts pushed. A PR without shots has no such
+# branch, and the job does nothing.
+name: review-shots
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: write
+
+jobs:
+  delete:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - run: |
+          if gh api "repos/$REPO/git/matching-refs/heads/review-shots/$HEAD_REF" --jq '.[].ref' |
+            grep -qx "refs/heads/review-shots/$HEAD_REF"; then
+            gh api -X DELETE "repos/$REPO/git/refs/heads/review-shots/$HEAD_REF"
+            echo "Deleted review-shots/$HEAD_REF"
+          fi
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          HEAD_REF: ${{ github.event.pull_request.head.ref }}

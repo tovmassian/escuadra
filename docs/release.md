@@ -305,6 +305,7 @@ keeps the fingerprint.
 | `ota-rollback`   | Manual                                    | Roll back production or preview                 | production runs in `production-<platform>`         |
 | `store-build`    | Manual                                    | Production or preview build, optional submit    | production runs in `production-<platform>`         |
 | `pick-to-main`   | A PR merged into `release/*`              | Opens its cherry-pick into `main`, runs `check` | `GITHUB_TOKEN`                                     |
+| `review-shots`   | Any PR closed                             | Deletes the PR's `review-shots/<branch>`        | `GITHUB_TOKEN`                                     |
 
 `pick-to-main` needs **Settings → Actions → General → Allow GitHub Actions to create and
 approve pull requests**. A PR opened with `GITHUB_TOKEN` starts no workflows, so the job

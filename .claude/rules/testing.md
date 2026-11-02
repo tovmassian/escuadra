@@ -31,6 +31,10 @@ actual output.
 - **No network, no clock.** Tests read fixtures (squadctl's recorded Wikipedia and
   Wikidata responses) or run a fake (`scripts/evals/sandbox/gh-cli.ts`), and randomness
   comes from a seeded generator (`lib/prng.ts`).
+- **A test that runs git strips `GIT_*` from its environment** (`withoutGitVars`,
+  `scripts/evals/lib/sandbox.ts`). The pre-push hook exports `GIT_DIR`, so a fixture's
+  `git init`, `config` or `commit` in a temp folder would rewrite the real repository's
+  shared config, index and branches instead.
 
 ## Layout
 

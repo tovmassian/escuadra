@@ -9,6 +9,7 @@ paths:
   - "theme/brand.ts"
   - "theme/tokens.ts"
   - "components/**"
+  - "scripts/claude/issue-runner/shots.ts"
 ---
 
 # The design handoff and store assets
@@ -29,6 +30,12 @@ npm run gen:play-assets -- --lang=<code>   # the feature graphic in one language
 identity so they cannot quietly drift into a duplicate. `design/screens/`
 holds PNGs captured by `npm run shots`; after any change to a screen,
 regenerate them, or the design side is working from a stale picture.
+
+Screenshots for reviewing a PR are not the handoff set. `node
+scripts/claude/issue-runner/review-shots.ts <images>` pushes them to `review-shots/<PR
+branch>`, a branch that shares no history with the PR, and prints raw links for its body;
+`.github/workflows/review-shots.yml` deletes that branch when the PR closes. Never commit
+review shots to the PR's branch: a squash merge would carry them into `main`.
 
 `design/store/` (App Store, 1320×2868 PNG, `npm run shots:store`) and
 `design/play/` (Google Play, 1080×1920 JPEG, `npm run shots:play`) are the
