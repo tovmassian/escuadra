@@ -441,6 +441,85 @@ describe('buildSandbox with hidden paths that first appear late', () => {
   });
 });
 
+// A pinned branch whose merge brings in a side branch that added the hidden path and removed it
+// again. The merge's tree matches its first parent, so git's default history simplification
+// skips the side branch: only a --full-history query sees that the branch touches the path.
+// Main goes on to add the path itself, so a rewrite runs, and would leave the merge's blob behind.
+function mergedSecretSource() {
+  const dir = temp('sandbox-merged-');
+  git(dir, 'init', '--quiet', '--initial-branch', 'main');
+  writeFileSync(join(dir, 'keep.md'), '# Keep\n');
+  git(dir, 'add', '.');
+  git(dir, 'commit', '--quiet', '-m', 'root');
+  git(dir, 'switch', '--quiet', '-c', 'side');
+  mkdirSync(join(dir, 'secret'));
+  writeFileSync(join(dir, 'secret', 'answers.md'), 'answer one\n');
+  git(dir, 'add', '.');
+  git(dir, 'commit', '--quiet', '-m', 'adds the secret');
+  const blob = git(dir, 'rev-parse', 'HEAD:secret/answers.md');
+  git(dir, 'rm', '--quiet', '-r', 'secret');
+  git(dir, 'commit', '--quiet', '-m', 'removes the secret');
+  git(dir, 'switch', '--quiet', 'main');
+  writeFileSync(join(dir, 'keep.md'), '# Keep\n\nMore.\n');
+  git(dir, 'add', '.');
+  git(dir, 'commit', '--quiet', '-m', 'mainline');
+  git(dir, 'merge', '--quiet', '--no-ff', '--no-edit', 'side');
+  const merge = git(dir, 'rev-parse', 'HEAD');
+  mkdirSync(join(dir, 'secret'));
+  writeFileSync(join(dir, 'secret', 'answers.md'), 'answer two\n');
+  git(dir, 'add', '.');
+  git(dir, 'commit', '--quiet', '-m', 'adds the secret again');
+  return { dir, merge, tip: git(dir, 'rev-parse', 'HEAD'), blob };
+}
+
+describe('buildSandbox with a hidden path only a merged side branch touched', () => {
+  const source = mergedSecretSource();
+  const work = temp('sandbox-work-');
+  let origin = '';
+
+  const hasObject = (cwd: string, sha: string): boolean => {
+    try {
+      git(cwd, 'cat-file', '-e', sha);
+      return true;
+    } catch {
+      return false;
+    }
+  };
+
+  beforeAll(() => {
+    const tmp = temp('sandbox-tmp-');
+    origin = join(tmp, 'origin.git');
+    buildSandbox({
+      sourceRepo: source.dir,
+      workDir: work,
+      tmpDir: tmp,
+      fixturesDir: fixtures(),
+      ghDir: GH_DIR,
+      realGit: realGitBinary(),
+      setup: {
+        pins: { main: source.tip, 'release/merged': source.merge },
+        issues: [],
+        prs: [],
+        commits: [],
+        branches: [],
+        checkout: { branch: 'main' },
+        dirty: [],
+        hidden: ['secret'],
+      },
+    });
+  });
+
+  it('rewrites the pinned branch, so no commit on origin touches the path', () => {
+    expect(git(origin, 'rev-parse', 'release/merged')).not.toBe(source.merge);
+    expect(git(origin, 'log', '--all', '--full-history', '--format=%H', '--', 'secret')).toBe('');
+  });
+
+  it("leaves the side branch's blob in neither origin nor the clone", () => {
+    expect(hasObject(origin, source.blob), 'origin has the blob').toBe(false);
+    expect(hasObject(work, source.blob), 'clone has the blob').toBe(false);
+  });
+});
+
 describe('buildSandbox with a hidden path no pinned commit touches', () => {
   it('builds, and leaves the history as it was', () => {
     const source = lateSecretSource();
