@@ -1,6 +1,25 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
-import { QUESTIONS, advance, ageOn, pick, startRound, summary } from '../quiz.mjs';
+import {
+  POSITION_NAMES,
+  QUESTIONS,
+  advance,
+  ageOn,
+  pick,
+  spokenQuestion,
+  startRound,
+  summary,
+} from '../quiz.mjs';
+
+test('a question is spoken in words, never in the card’s codes', () => {
+  assert.equal(
+    spokenQuestion(1, new Date(2026, 10, 2)),
+    'Question 2 of 3. Arsenal. Who wears 7? Position: Forward. Age: 25. Nationality: England.',
+  );
+  for (const question of QUESTIONS) {
+    assert.ok(POSITION_NAMES[question.position], `${question.team}'s position has a spoken name`);
+  }
+});
 
 test('counts age in whole years, as the app does', () => {
   assert.equal(ageOn('2007-07-13', new Date(2026, 6, 12)), 18);

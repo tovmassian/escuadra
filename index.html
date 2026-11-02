@@ -106,12 +106,12 @@
             <div class="badges rise">
               <a
                 href="https://apps.apple.com/us/app/escuadra/id6810705505"
-                aria-label="Download Escuadra on the App Store"
+                aria-label="Download on the App Store"
                 ><img class="badge" src="assets/badges/app-store-badge-black.svg" alt=""
               /></a>
               <a
                 href="https://play.google.com/store/apps/details?id=com.tovmassian.escuadra"
-                aria-label="Get Escuadra on Google Play"
+                aria-label="Get it on Google Play"
                 ><img class="badge" src="assets/badges/google-play-badge.svg" alt=""
               /></a>
             </div>
@@ -164,14 +164,18 @@
                     <p class="stage-team" data-quiz-team>Spain</p>
                     <p class="stage-level"><span class="stage-banner"></span>Level 1</p>
                   </div>
-                  <p class="stage-score" data-quiz-score>0/0</p>
+                  <p class="stage-score" data-quiz-score aria-hidden="true">0/0</p>
+                  <p class="sr-only" data-quiz-score-spoken>Score: 0 of 0</p>
                 </div>
               </div>
               <span class="stage-number numbers" data-quiz-number>19</span>
             </div>
 
             <div class="quiz-play" data-quiz-play>
-              <ul class="chips">
+              <p class="sr-only" data-quiz-spoken>
+                Name: being asked. Position: Forward. Age: 19. Club: Barcelona.
+              </p>
+              <ul class="chips" aria-hidden="true">
                 <li class="chip chip-name" data-quiz-name>
                   <span class="chip-key">Name</span><span data-quiz-name-value>?</span>
                 </li>
@@ -203,10 +207,11 @@
 
             <div class="quiz-result" data-quiz-result hidden>
               <p class="eyebrow"><span class="corner"></span>Your round · 3 questions</p>
-              <p class="result-score numbers">
+              <p class="result-score numbers" aria-hidden="true">
                 <span class="result-n" data-quiz-result-score>0</span
                 ><span class="result-total" data-quiz-result-total>/3</span>
               </p>
+              <p class="sr-only" data-quiz-result-spoken>0 of 3</p>
               <p class="display result-title" data-quiz-result-title>Still learning</p>
               <ul class="missed" data-quiz-missed></ul>
               <p class="result-copy" data-quiz-result-copy></p>
@@ -573,12 +578,12 @@
           <div class="badges">
             <a
               href="https://apps.apple.com/us/app/escuadra/id6810705505"
-              aria-label="Download Escuadra on the App Store"
+              aria-label="Download on the App Store"
               ><img class="badge" src="assets/badges/app-store-badge-black.svg" alt=""
             /></a>
             <a
               href="https://play.google.com/store/apps/details?id=com.tovmassian.escuadra"
-              aria-label="Get Escuadra on Google Play"
+              aria-label="Get it on Google Play"
               ><img class="badge" src="assets/badges/google-play-badge.svg" alt=""
             /></a>
           </div>

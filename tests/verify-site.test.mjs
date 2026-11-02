@@ -206,15 +206,16 @@ const badgeLinks = [
     /<a\s+href="([^"]+)"\s+aria-label="([^"]+)"\s*>\s*<img\s+class="badge[^"]*"\s+src="([^"]+)"\s+alt=""\s*\/>\s*<\/a>/g,
   ),
 ].map(([, href, label, src]) => ({ href, label, src }));
+// Each link is named with its badge's own words, so voice control finds it (label in name).
 const badgePair = [
   {
     href: appStoreUrl,
-    label: 'Download Escuadra on the App Store',
+    label: 'Download on the App Store',
     src: 'assets/badges/app-store-badge-black.svg',
   },
   {
     href: playStoreUrl,
-    label: 'Get Escuadra on Google Play',
+    label: 'Get it on Google Play',
     src: 'assets/badges/google-play-badge.svg',
   },
 ];

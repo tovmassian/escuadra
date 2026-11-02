@@ -1,6 +1,15 @@
 // site.mjs
 import { THEME_STORAGE_KEY, nextTheme, resolveTheme } from './theme.mjs';
-import { QUESTIONS, advance, ageOn, pick, startRound, summary } from './quiz.mjs';
+import {
+  QUESTIONS,
+  advance,
+  ageOn,
+  pick,
+  spokenClues,
+  spokenQuestion,
+  startRound,
+  summary,
+} from './quiz.mjs';
 
 const root = document.documentElement;
 const media = window.matchMedia('(prefers-color-scheme: dark)');
@@ -80,6 +89,8 @@ function initialiseQuiz() {
   const AUTO_ADVANCE_MS = 1200;
   let state = startRound();
   let timer = null;
+  // The first question is on the page when it loads; after Play again it is announced.
+  let restarted = false;
 
   function go(nextState) {
     clearTimeout(timer);
@@ -96,6 +107,7 @@ function initialiseQuiz() {
     stage.style.setProperty('--veil', String(question.veil));
     part('team').textContent = question.team;
     part('score').textContent = `${score}/${answered}`;
+    part('score-spoken').textContent = `Score: ${score} of ${answered}`;
     segments.forEach((segment, i) => {
       const result = state.results[i];
       segment.className = result
@@ -130,13 +142,18 @@ function initialiseQuiz() {
       part('result-copy').textContent = perfect
         ? 'Three for three. The app plays ten a round, across 96 clubs and 157 national teams.'
         : 'Those are the ones to go over. The app plays ten questions a round, across 96 clubs and 157 national teams, and every miss waits for you on Results.';
+      part('result-spoken').textContent = `${score} of ${total}`;
       part('live').textContent =
         `Your round: ${score} of ${total}. ${perfect ? 'A la escuadra' : 'Still learning'}.`;
       return;
     }
 
     const right = state.picked === question.answer;
-    const age = ageOn(question.birth, new Date());
+    const today = new Date();
+    const age = ageOn(question.birth, today);
+    part('spoken').textContent =
+      `Name: ${state.picked === null ? 'being asked' : question.answer}. ` +
+      spokenClues(question, today);
     const isLast = state.index === QUESTIONS.length - 1;
     if (number.firstChild.nodeValue !== String(question.number)) {
       number.firstChild.nodeValue = String(question.number);
@@ -180,14 +197,14 @@ function initialiseQuiz() {
     nextButton.hidden = state.picked === null || right;
     nextButton.textContent = isLast ? 'See your round' : 'Next';
     // Focus lands on the first name when a question opens, so the question itself is
-    // announced; the first one is already on the page.
+    // announced.
     part('live').textContent =
       state.picked !== null
         ? right
           ? `Right: ${question.answer}.`
           : `Not quite. Number ${question.number} is ${question.answer}.`
-        : state.results.length > 0
-          ? `Question ${state.index + 1} of ${QUESTIONS.length}. ${question.team}. Who wears ${question.number}? ${question.position}, age ${age}, ${question.clue.value}.`
+        : state.results.length > 0 || restarted
+          ? spokenQuestion(state.index, today)
           : '';
   }
 
@@ -209,6 +226,7 @@ function initialiseQuiz() {
   });
   nextButton.addEventListener('click', moveOn);
   part('restart').addEventListener('click', () => {
+    restarted = true;
     go(startRound());
     tiles[0].focus({ preventScroll: true });
   });
