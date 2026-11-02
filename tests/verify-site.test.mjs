@@ -230,6 +230,14 @@ assert.equal(
   badgeLinks.length,
   'every badge image is one of those links',
 );
+// Both badges are sized by the one .badge rule: the same height, as both stores'
+// guidelines ask. Their widths follow their own artwork, which may not be stretched.
+assert.equal(
+  (home.match(/<img\s+class="badge"/g) ?? []).length,
+  badgeLinks.length,
+  'every badge image has only the shared badge class',
+);
+assert.doesNotMatch(css, /badge[^{]*\[src|google-play-badge|app-store-badge/, 'site.css sizes no badge apart');
 // Both stores forbid recolouring, greying or fading their badges.
 assert.doesNotMatch(
   readFileSync('site.css', 'utf8'),
