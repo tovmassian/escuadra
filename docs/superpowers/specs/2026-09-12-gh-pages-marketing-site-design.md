@@ -1,5 +1,7 @@
 # Escuadra gh-pages marketing site — design
 
+> The home page and the shared look are superseded by `2026-11-02-site-2-0-design.md`.
+
 ## Purpose
 
 Replace the current utility-only gh-pages homepage with a small marketing site

@@ -31,12 +31,13 @@
     <header class="site-header shell">
       <a class="brand" href="index.html" aria-label="Escuadra home">
         <span class="brand-mark" aria-hidden="true">
-          <img src="assets/favicon.ico" />
+          <img src="assets/favicon.ico" alt="" />
         </span>
         <span>escuadra</span>
       </a>
       <nav aria-label="Utility">
-        <a href="privacy.html">Privacy</a><a href="support.html">Support</a>
+        <a href="index.html">Home</a><a href="support.html" aria-current="page">Support</a
+        ><a href="privacy/2/">Privacy</a>
       </nav>
       <button
         type="button"
@@ -48,24 +49,124 @@
         ><span data-theme-toggle-label></span>
       </button>
     </header>
-    <main class="legal-page shell">
-      <h1>Support</h1>
 
-      <p>
-        Escuadra is a football squad memorisation trainer. If you run into a
-        bug, have a question, or want to suggest a squad or feature, the best
-        place to reach the developer is
-        <a href="https://github.com/tovmassian/escuadra/issues"
-          >GitHub Issues</a
-        >
-        — open a new issue describing what happened, and it will be picked up
-        from there.
-      </p>
+    <main>
+      <section class="page-hero">
+        <span class="page-ghost numbers" aria-hidden="true">?</span>
+        <div class="shell support-grid">
+          <div>
+            <p class="eyebrow"><span class="corner"></span>Support</p>
+            <h1 class="display">Something<br />not right?</h1>
+            <p class="lead">
+              A bug, a wrong shirt number, a squad you’d like added? The best place to
+              reach the developer is GitHub Issues. Say what happened, on which phone, and
+              with which team.
+            </p>
+            <div class="cta-row">
+              <a class="pill" href="https://github.com/tovmassian/escuadra/issues"
+                >Open an issue on GitHub</a
+              >
+              <span class="cta-note">Opening an issue needs a free GitHub account.</span>
+            </div>
+          </div>
+          <div class="kinds">
+            <a class="kind" href="https://github.com/tovmassian/escuadra/issues">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5" /><circle cx="12" cy="16.4" r=".9" fill="currentColor" /></svg>
+              <span>
+                <span class="kind-title">Report a bug</span>
+                <span class="kind-sub" style="display: block">What you tapped, and what happened</span>
+              </span>
+              <svg class="kind-go" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+            <a class="kind" href="https://github.com/tovmassian/escuadra/issues">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4l-4 3 2 4 2-1v10h8V10l2 1 2-4-4-3-2 2h-4z" /></svg>
+              <span>
+                <span class="kind-title">Fix a squad</span>
+                <span class="kind-sub" style="display: block">The team, the player, the right number</span>
+              </span>
+              <svg class="kind-go" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+            <a class="kind" href="https://github.com/tovmassian/escuadra/issues">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" /></svg>
+              <span>
+                <span class="kind-title">Suggest a squad or a feature</span>
+                <span class="kind-sub" style="display: block">What would help you learn</span>
+              </span>
+              <svg class="kind-go" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="shell faq-grid" aria-labelledby="faq-title">
+        <div>
+          <p class="eyebrow"><span class="corner"></span>Questions</p>
+          <h2 id="faq-title" class="display">Before you write</h2>
+        </div>
+        <div class="faq">
+          <details open>
+            <summary>How do I unlock levels 2 and 3?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Score 8/10 on level 1 to unlock level 2, and 8/10 on level 2 to unlock level
+              3. Each team keeps its own ladder.
+            </p>
+          </details>
+          <details>
+            <summary>Why do some players have no photo?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Photos come from Wikimedia Commons, and only where Commons has one under a
+              licence Escuadra can use. Without one, or offline before a photo has loaded,
+              the question shows the team’s colours and the shirt number instead.
+            </p>
+          </details>
+          <details>
+            <summary>Does Escuadra work offline?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Yes. Every squad is stored on your phone, so the quiz works without a
+              connection. Photos load from Wikimedia Commons when you’re online.
+            </p>
+          </details>
+          <details>
+            <summary>A shirt number or a player looks wrong.<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Squads are compiled from Wikipedia and Wikidata, and each team shows when it
+              was last updated. If something is out of date, open an issue with the team
+              and the player.
+            </p>
+          </details>
+          <details>
+            <summary>How do I change the language?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Escuadra follows your phone’s language. To pick another, open
+              <b>Settings</b> and then <b>Language</b>: English, Español, Français,
+              Italiano or Deutsch.
+            </p>
+          </details>
+          <details>
+            <summary>How do I switch off usage statistics?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Open <b>Settings</b> and switch off <b>Usage statistics</b>. About, in the
+              app, lists everything that leaves your device, and so does the
+              <a href="privacy/2/">privacy policy</a>.
+            </p>
+          </details>
+          <details>
+            <summary>How do I start over?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              On a team’s screen, <b>Start over</b> sends that team back to unplayed. In
+              Settings, <b>Clear all scores</b> does it for every team, and
+              <b>Reset Escuadra</b> puts everything back to how it was on first launch.
+            </p>
+          </details>
+        </div>
+      </section>
     </main>
+
     <footer class="site-footer shell">
       <span>&copy; Escuadra</span>
       <nav aria-label="Footer">
-        <a href="index.html">Home</a><a href="privacy.html">Privacy</a>
+        <a href="index.html">Home</a><a href="privacy/2/">Privacy</a
+        ><a href="privacy.html">Privacy policy for Escuadra 1.x</a>
       </nav>
       <span class="release-status">Now on the App Store and Google Play</span>
     </footer>
