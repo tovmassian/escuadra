@@ -43,7 +43,7 @@ export const QUESTIONS = [
 ];
 
 // What a screen reader says in place of the card's codes, as the app's catalog does.
-export const POSITION_NAMES = { GK: 'Goalkeeper', DF: 'Defender', MF: 'Midfielder', FW: 'Forward' };
+export const POSITION_NAMES = { GK: 'Keeper', DF: 'Defender', MF: 'Midfield', FW: 'Forward' };
 const CLUE_NAMES = { Club: 'Club', Nat: 'Nationality' };
 
 /** The clues, spoken: "Position: Forward. Age: 19. Club: Barcelona." */

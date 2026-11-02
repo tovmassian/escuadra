@@ -27,7 +27,9 @@ function setTheme(theme, persist) {
     }
   }
   for (const toggle of document.querySelectorAll('[data-theme-toggle]')) {
-    toggle.setAttribute('aria-pressed', String(theme === 'dark'));
+    // The label already says what a press does, so a pressed state would contradict it
+    // ("Switch to light theme, pressed"). Pages generated on main still carry one.
+    toggle.removeAttribute('aria-pressed');
     // Translated pages carry their own labels in data-label-*; the others keep English.
     const labels = toggle.dataset;
     const next = nextTheme(theme);
