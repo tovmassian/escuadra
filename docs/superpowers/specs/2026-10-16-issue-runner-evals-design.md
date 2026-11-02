@@ -392,8 +392,8 @@ remote) are out of scope for now (§12).
 
 ### 4.2 The dry-run instruction
 
-`evals/dry-run.md`, followed by the triage template from
-`scripts/evals/lib/triage.ts`, is every case's `append_system_prompt`, given to
+`evals/dry-run.md`, followed by the triage template from `evals/triage.ts` (the
+suite's `dryRunAppendix`), is every case's `append_system_prompt`, given to
 both arms. In substance:
 
 > This is a dry run in a disposable copy of the repository. Read `CLAUDE.md`
@@ -519,7 +519,8 @@ runner's permissions deny reading it, and its copy is hidden from the clone.
 ```
 
 - **Real snapshots** wherever a real issue sits on a decision; captured with
-  `node scripts/evals/capture-issue.ts <N>` (real `gh`, run by hand) and
+  `node scripts/evals/capture-issue.ts <N> --suite escuadra-issue-runner` (real
+  `gh`, run by hand) and
   committed, so later edits to the issue do not move the suite.
 - **A snapshot records the issue as it stands at the main pin.** An issue
   closed after the pin, by work the sandbox does not contain, is recorded open,
@@ -639,10 +640,11 @@ scripts/evals/                        the harness: skill-agnostic
   run.ts                              entry: wraps `claude plugin eval`
   capture-issue.ts                    entry: real issue → fixture snapshot
   sandbox/gh.ts, gh-cli.ts            the fake gh, copied into each sandbox
-  lib/                                pure: triage format, YAML, graders,
-                                      cases, sandbox build, run args, capture
+  lib/                                pure: YAML, the generic graders, cases,
+                                      sandbox build, run args, capture,
+                                      suite discovery
   __tests__/                          mirrors lib/ and sandbox/, plus the
-                                      suite-in-sync test
+                                      in-sync test over every suite
   README.md                           the front door: run, budget, pins, capture
 
 .claude/skills/escuadra-issue-runner/
@@ -650,6 +652,9 @@ scripts/evals/                        the harness: skill-agnostic
   evals/
     cases.ts                          the suite as typed data: the one source
     dry-run.md
+    triage.ts                         the triage template and field patterns
+    graders.ts                        the Triage and NoTriage graders
+    __tests__/                        their tests and the suite's own checks
     _fixtures/issues/*.json, _fixtures/docs/…
     <case>/case.yaml, scaffold.sh,    GENERATED; never edited by hand
            setup.json
@@ -660,15 +665,17 @@ scripts/evals/                        the harness: skill-agnostic
   would let drift. A Vitest test fails when the generated files drift from
   `cases.ts`, the pattern `gen:squads` uses for `data/index.json`. It sits
   under `scripts/`, which `vitest.config.ts`, `tsc`, ESLint and Prettier
-  already cover, so `npm run check` runs it; importing `cases.ts` from it is
-  what brings that file under `tsc`.
+  already cover, so `npm run check` runs it. `tsconfig.json` and
+  `vitest.config.ts` reach `.claude/skills/*/evals/` by a glob of their own,
+  so each suite's `cases.ts`, graders and tests are checked too.
 - **No YAML dependency.** `lib/yaml.ts` writes the few shapes a case uses
   (block maps and lists, JSON-quoted strings), and the generator formats the
   result with Prettier, so `format:check` agrees with it.
 - **Tests never need the pinned history.** CI checks out one commit, so the
   sandbox tests build a throwaway source repo of their own.
 - **No npm scripts and no `.gitignore` lines**, since both move the
-  fingerprint. Commands run as `node scripts/evals/run.ts --tag core`
+  fingerprint. Commands run as
+  `node scripts/evals/run.ts --suite escuadra-issue-runner --tag core`
   (or `--case 129-*`, or `--full`). `run.ts` passes `--scaffold`, the models,
   `--threshold 0.9`, `--max-cost-usd` and `--no-publish`, prepends the
   relative `.git/sandbox/bin` entries (§5.1) to `PATH`, and sends
@@ -679,9 +686,11 @@ scripts/evals/                        the harness: skill-agnostic
   and `smoke` for `sandbox-smoke`. The generator adds `graded` to every case but the smoke
   case, and `--full` runs `--tag graded`: the smoke case is a Haiku check that a Sonnet run
   would fail.
-- **Skill-agnostic harness:** the sandbox and the fake `gh` know nothing of this
-  skill, so another Escuadra skill could get a suite later. Nothing is built for
-  that now.
+- **Skill-agnostic harness:** the harness knows no skill. A suite is a skill's
+  `evals/cases.ts`, which supplies its expectation graders and the text appended
+  to its dry run; `lib/` keeps `no-writes`, `stayed-dry` and the shapes they
+  share. `gen-cases.ts` and the in-sync test cover every suite, and `run.ts` and
+  `capture-issue.ts` take one by skill name (#170).
 - `CLAUDE.md`'s Reference docs gain one line linking `scripts/evals/README.md`.
 
 ### 9.1 Budget
@@ -761,5 +770,5 @@ of it.
 - End-to-end runs that implement a fixture issue. One smoke case run by hand is
   the natural next step once the decision suite is green.
 - Running evals in CI: every run is billed to a plan and needs credentials.
-- Suites for other skills.
+- Suites for other skills (the harness takes one since #170).
 - MCP mocks: the skill under test reaches GitHub through `gh`, not MCP.

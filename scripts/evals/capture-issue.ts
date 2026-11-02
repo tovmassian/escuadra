@@ -1,5 +1,5 @@
-// Captures a real issue as a fixture for the suite:
-//   node scripts/evals/capture-issue.ts 126 --why "S bug, in place"
+// Captures a real issue as a fixture for a skill's suite:
+//   node scripts/evals/capture-issue.ts 126 --suite <skill> --why "S bug, in place"
 // It uses the real gh, so run it in an ordinary shell. A snapshot records the
 // issue as it stands at the main pin (spec §6), so compare the issue's last
 // edit and close times with the pin's commit date, and undo body edits and
@@ -11,6 +11,7 @@ import { fileURLToPath } from 'node:url';
 import { parseArgs } from 'node:util';
 import { SIZE_QUERY, sizeFrom, toFixture, type GhIssue, type SizeResponse } from './lib/capture.ts';
 import { formatFor } from './lib/format.ts';
+import { suiteNames, suitePath } from './lib/suite.ts';
 
 const root = resolve(dirname(fileURLToPath(import.meta.url)), '../..');
 const { values, positionals } = parseArgs({
@@ -18,13 +19,16 @@ const { values, positionals } = parseArgs({
   options: {
     why: { type: 'string' },
     date: { type: 'string' },
-    suite: { type: 'string', default: '.claude/skills/escuadra-issue-runner' },
+    suite: { type: 'string' },
   },
 });
 const number = Number(positionals[0]);
 if (!Number.isInteger(number) || values.why === undefined) {
-  throw new Error('usage: node scripts/evals/capture-issue.ts <number> --why "<what it tests>"');
+  throw new Error(
+    'usage: node scripts/evals/capture-issue.ts <number> --suite <skill> --why "<what it tests>"',
+  );
 }
+const skill = suitePath(values.suite, suiteNames(root));
 
 const gh = (args: string[]) => execFileSync('gh', args, { encoding: 'utf8' });
 const fields = 'number,title,state,body,comments,labels,milestone';
@@ -38,7 +42,7 @@ const size = sizeFrom(
 );
 const date = values.date ?? new Date().toISOString().slice(0, 10);
 
-const file = join(root, values.suite, 'evals', '_fixtures', 'issues', `${number}.json`);
+const file = join(root, skill, 'evals', '_fixtures', 'issues', `${number}.json`);
 mkdirSync(dirname(file), { recursive: true });
 const json = `${JSON.stringify(toFixture(issue, size, values.why, date), null, 2)}\n`;
 writeFileSync(file, await formatFor(file, json));

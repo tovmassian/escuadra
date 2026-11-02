@@ -7,29 +7,38 @@ import {
   type EvalCase,
   type Suite,
 } from '../../lib/cases.ts';
-import { TRIAGE_TEMPLATE } from '../../lib/triage.ts';
+import type { Expectation } from '../../lib/graders.ts';
+import type { YamlMap } from '../../lib/yaml.ts';
 
-const SUITE: Suite = {
+// A made-up suite's expectation, to show the harness takes any.
+interface Echo extends Expectation {
+  kind: 'echo';
+  text: string;
+}
+
+const SUITE: Suite<Echo> = {
   pins: { main: 'a'.repeat(40) },
   allowedTools: ['Read', 'Bash(gh:*)'],
   runs: 3,
   maxTurns: 40,
   timeoutSeconds: 900,
+  dryRunAppendix: 'End with ECHO.',
+  grade: (expect): YamlMap[] => [{ type: 'regex', name: 'echo', pattern: expect.text }],
   cases: [],
 };
 
-const TRIAGE_CASE: EvalCase = {
+const GRADED_CASE: EvalCase<Echo> = {
   name: '126-small-bug',
   why: 'An S bug, in place.',
   tags: ['core'],
   prompt: 'Pick up #126.',
   issues: [126],
-  expect: { kind: 'triage', decision: 'proceed', workspace: 'in-place' },
+  expect: { kind: 'echo', text: 'hello' },
 };
 
 describe('caseYaml', () => {
-  it('gives a triage case the dry run and the template, with the suite defaults', () => {
-    const yaml = caseYaml(SUITE, TRIAGE_CASE, 'This is a dry run.\n');
+  it("gives a graded case the dry run and the suite's appendix, with the suite defaults", () => {
+    const yaml = caseYaml(SUITE, GRADED_CASE, 'This is a dry run.\n');
     expect(yaml).toMatchObject({
       schema_version: '1.0',
       name: '126-small-bug',
@@ -41,14 +50,26 @@ describe('caseYaml', () => {
         max_turns: 40,
         timeout_seconds: 900,
         allowed_tools: ['Read', 'Bash(gh:*)'],
-        append_system_prompt: `This is a dry run.\n\n${TRIAGE_TEMPLATE}\n`,
+        append_system_prompt: 'This is a dry run.\n\nEnd with ECHO.\n',
       },
     });
   });
 
+  it('gives a suite with no appendix the dry run alone', () => {
+    const { dryRunAppendix: _, ...bare } = SUITE;
+    const yaml = caseYaml(bare, GRADED_CASE, 'This is a dry run.\n');
+    expect(yaml.execution).toMatchObject({ append_system_prompt: 'This is a dry run.\n' });
+  });
+
+  it("grades with the suite's graders, then the shared ones", () => {
+    const yaml = caseYaml(SUITE, GRADED_CASE, 'Dry.\n');
+    const graders = yaml.graders as YamlMap[];
+    expect(graders.map((g) => g.name)).toEqual(['echo', 'no-writes', 'stayed-dry']);
+  });
+
   it('leaves the dry run out of a smoke case, and keeps its own budget', () => {
-    const smoke: EvalCase = {
-      ...TRIAGE_CASE,
+    const smoke: EvalCase<Echo> = {
+      ...GRADED_CASE,
       name: 'sandbox-smoke',
       runs: 1,
       maxTurns: 12,
@@ -60,8 +81,8 @@ describe('caseYaml', () => {
     expect(yaml.tags).not.toContain(GRADED_TAG);
   });
 
-  it('tags a triage case graded, after its own tags', () => {
-    const yaml = caseYaml(SUITE, TRIAGE_CASE, 'This is a dry run.\n');
+  it('tags a graded case graded, after its own tags', () => {
+    const yaml = caseYaml(SUITE, GRADED_CASE, 'This is a dry run.\n');
     expect(yaml.tags).toEqual(['core', 'graded']);
     expect(GRADED_TAG).toBe('graded');
   });
@@ -69,7 +90,7 @@ describe('caseYaml', () => {
 
 describe('setupFor', () => {
   it('fills the sandbox defaults: main checked out, nothing extra', () => {
-    expect(setupFor(SUITE, TRIAGE_CASE)).toEqual({
+    expect(setupFor(SUITE, GRADED_CASE)).toEqual({
       pins: SUITE.pins,
       issues: ['issues/126.json'],
       prs: [],
@@ -82,7 +103,7 @@ describe('setupFor', () => {
   });
 
   it('passes a suite hidden list through to the setup', () => {
-    expect(setupFor({ ...SUITE, hidden: ['secret'] }, TRIAGE_CASE).hidden).toEqual(['secret']);
+    expect(setupFor({ ...SUITE, hidden: ['secret'] }, GRADED_CASE).hidden).toEqual(['secret']);
   });
 });
 
@@ -90,7 +111,7 @@ describe('caseFiles', () => {
   it('writes case.yaml, a scaffold.sh that hands off to scaffold.ts, and setup.json', () => {
     const files = caseFiles(
       SUITE,
-      TRIAGE_CASE,
+      GRADED_CASE,
       'Dry.\n',
       '../../../../../scripts/evals/scaffold.ts',
     );

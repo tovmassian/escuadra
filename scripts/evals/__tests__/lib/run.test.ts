@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { evalArgs, evalEnv, parseNumber, type RunOptions } from '../../lib/run.ts';
 
 const BASE: RunOptions = {
-  target: '.claude/skills/escuadra-issue-runner',
+  target: '.claude/skills/some-skill',
   outDir: '/tmp/out',
   tags: ['core'],
   model: 'sonnet',
@@ -18,7 +18,7 @@ describe('evalArgs', () => {
     expect(evalArgs(BASE)).toEqual([
       'plugin',
       'eval',
-      '.claude/skills/escuadra-issue-runner',
+      '.claude/skills/some-skill',
       '--scaffold',
       '--trust-plugin',
       '--allow-tools',

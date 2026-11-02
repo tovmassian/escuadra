@@ -164,6 +164,6 @@ npm run check         # everything CI runs; before reporting work done
 - [`CHANGELOG.md`](CHANGELOG.md): what each version shipped.
 - [`tools/squadctl/README.md`](tools/squadctl/README.md): squadctl's commands, and every
   conflict it reports with the command that answers it.
-- [`scripts/evals/README.md`](scripts/evals/README.md): grading an agent's issue triage
-  with and without the `escuadra-issue-runner` skill.
+- [`scripts/evals/README.md`](scripts/evals/README.md): the eval harness, and grading each
+  skill's suite with and without its skill.
 - `docs/superpowers/specs/`: the design behind each feature; read the spec an issue names.

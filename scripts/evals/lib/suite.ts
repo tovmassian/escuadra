@@ -1,5 +1,5 @@
-// Loads a suite's cases.ts and dry-run.md and renders its generated files,
-// formatted. Shared by gen-cases.ts and the suite-in-sync test.
+// Finds the suites (each skill's evals/cases.ts), loads one with its dry-run.md, and renders
+// its generated files, formatted. Shared by the entry points and the suite-in-sync test.
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
@@ -8,10 +8,37 @@ import { formatFor } from './format.ts';
 
 const SCAFFOLD = fileURLToPath(new URL('../scaffold.ts', import.meta.url));
 
-export async function renderSuite(evalsDir: string): Promise<GeneratedFile[]> {
+export const SKILLS_DIR = '.claude/skills';
+
+/** The skills under `root` that have an eval suite (`evals/cases.ts`), sorted. */
+export function suiteNames(root: string): string[] {
+  const skills = join(root, SKILLS_DIR);
+  if (!existsSync(skills)) return [];
+  return readdirSync(skills, { withFileTypes: true })
+    .filter((entry) => entry.isDirectory())
+    .filter((entry) => existsSync(join(skills, entry.name, 'evals', 'cases.ts')))
+    .map((entry) => entry.name)
+    .sort();
+}
+
+/** A skill's folder relative to the repo root, or an error naming the suites there are. */
+export function suitePath(name: string | undefined, names: string[]): string {
+  const pick = `Pick a suite with --suite <skill>: ${names.join(', ')}`;
+  if (name === undefined) throw new Error(pick);
+  if (!names.includes(name)) throw new Error(`No eval suite for ${name}. ${pick}`);
+  return `${SKILLS_DIR}/${name}`;
+}
+
+/** A skill's `SUITE` from its `cases.ts`; the cast is where the suite's own expectation type is erased. */
+export async function loadSuite(evalsDir: string): Promise<Suite> {
   const { SUITE } = (await import(pathToFileURL(join(evalsDir, 'cases.ts')).href)) as {
     SUITE: Suite;
   };
+  return SUITE;
+}
+
+export async function renderSuite(evalsDir: string): Promise<GeneratedFile[]> {
+  const SUITE = await loadSuite(evalsDir);
   const dryRun = readFileSync(join(evalsDir, 'dry-run.md'), 'utf8');
   const files = SUITE.cases.flatMap((item) =>
     caseFiles(SUITE, item, dryRun, relative(join(evalsDir, item.name), SCAFFOLD)),

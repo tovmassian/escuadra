@@ -10,6 +10,7 @@ import { defineConfig } from 'vitest/config';
 // data — tokens, mark geometry, handoff re-exports — and are tested for
 // internal consistency only. i18n/ resolves the language without React.
 // plugins/ holds the config plugins, whose manifest and gradle edits are pure.
+// .claude/skills/*/evals/ holds each skill's eval suite, with the graders only it uses.
 // Screens and components are verified on-device instead: no RN test renderer
 // is configured here on purpose.
 export default defineConfig({
@@ -24,6 +25,7 @@ export default defineConfig({
       'theme/**/*.test.ts',
       'design/**/*.test.ts',
       'plugins/**/*.test.ts',
+      '.claude/skills/*/evals/**/*.test.ts',
     ],
   },
   resolve: {

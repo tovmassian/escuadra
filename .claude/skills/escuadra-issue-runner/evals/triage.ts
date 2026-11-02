@@ -1,5 +1,5 @@
 // The triage block (spec §2.6): the template a dry run ends with, and the regex
-// helpers its graders are built from. The skill's SKILL.md copies the template.
+// helpers its graders are built from. SKILL.md copies the template.
 
 export const TRIAGE_TEMPLATE = [
   '```triage',
