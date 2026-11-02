@@ -20,7 +20,9 @@ walk-through the `escuadra-store-listing` skill.
   (`FIELDS` in `scripts/store-listing.ts`, each with its store and limit). Pasted as
   written: plain text, no Markdown formatting, which is why Prettier skips the folder.
 - `store/screenshots.json`: the listing's shots in order, named as in `design/screens/`;
-  the same set in every language and both stores, at most 8. Some show Commons player
+  the same set in every language and both stores, at most 8. A name ending in `-light` is
+  the light capture, and the set alternates dark and light, so the first three, which App
+  Store search shows, carry both themes (#116). Some show Commons player
   photos, as the owner decided (`docs/license.md`, In the store listings).
 - `store/declarations.md`: English, entered once per app: the name, URLs, category, age
   rating, Apple's Accessibility Nutrition Labels, Play's target audience and AI asset
