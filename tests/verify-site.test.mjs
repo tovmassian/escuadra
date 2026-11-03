@@ -17,11 +17,18 @@ const pages = ['index.html', 'privacy.html', 'support.html', ...policyPaths];
 const siteUrl = 'https://tovmassian.github.io/escuadra/';
 const appStoreUrl = 'https://apps.apple.com/us/app/escuadra/id6810705505';
 const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.tovmassian.escuadra';
+// Player photos are Wikimedia's own thumbnails, hotlinked and credited as the app does
+// (guardrail 1): each links its Commons page and its licence deed.
+const commonsThumb = 'https://thumb.wikimedia.org/wikipedia/commons/thumb/';
+const commonsFilePage = 'https://commons.wikimedia.org/wiki/File:';
 const allowedExternalLinks = [
   'https://github.com/tovmassian/escuadra/issues',
   appStoreUrl,
   playStoreUrl,
   siteUrl,
+  commonsThumb,
+  commonsFilePage,
+  'https://creativecommons.org/licenses/',
 ];
 // How a page reaches the site root: '' at the root, '../../' in privacy/2/.
 const rootOf = (page) => {
@@ -278,5 +285,31 @@ assert.match(
   'home says Escuadra is unaffiliated',
 );
 assert.doesNotMatch(home, /assets\/marketing\//, 'home shows no 1.x screenshots');
+
+// Every photo shown is credited on the page: its Commons page, its licence, "cropped".
+// The file name only ever sits in a link, never in visible text (guardrail 1).
+const photoFiles = [...home.matchAll(/<img[^>]*\ssrc="([^"]+)"/g)]
+  .map(([, src]) => src)
+  .filter((src) => src.startsWith(commonsThumb))
+  .map((src) => decodeURIComponent(src.slice(commonsThumb.length).split('/')[2]));
+const creditedFiles = [...home.matchAll(/href="([^"]+)"/g)]
+  .map(([, href]) => href)
+  .filter((href) => href.startsWith(commonsFilePage))
+  .map((href) => decodeURIComponent(href.slice(commonsFilePage.length)));
+assert.ok(photoFiles.length > 0, 'home shows the Results cards with their photos');
+assert.deepEqual(photoFiles, creditedFiles, 'every photo is credited, once, in card order');
+for (const credit of home.match(/<li>\s*<span class="photo-credits-player">[\s\S]*?<\/li>/g) ?? []) {
+  assert.match(credit, /href="https:\/\/creativecommons\.org\/licenses\/[^"]+">CC [^<]+<\/a>\s*·\s*cropped/, 'a credit links its licence and says the photo is cropped');
+}
+assert.match(
+  home,
+  /These photos load from Wikimedia Commons, so Wikimedia receives your IP address and the\s+details of each request, as any website does\./,
+  'home says the photos reach Wikimedia',
+);
+// The file names name the players; in visible text they would read as captions.
+const visible = home.replace(/<[^>]*>/g, ' ');
+for (const file of photoFiles) {
+  assert.ok(!visible.includes(file.replace(/_/g, ' ')), `no visible text carries ${file}`);
+}
 
 console.log(`Verified ${pages.length} pages.`);

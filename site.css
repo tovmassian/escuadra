@@ -877,7 +877,38 @@ p {
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 0.14em;
+  text-align: center;
   text-transform: uppercase;
+  text-wrap: balance;
+}
+/* Results' "Photo credits · N": player, then author · licence · cropped, each linked. */
+.photo-credits {
+  margin-top: 30px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.photo-credits-title {
+  margin-bottom: 8px;
+  font-family: var(--mono);
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.photo-credits ul {
+  margin: 0 0 8px;
+  padding: 0;
+  list-style: none;
+}
+.photo-credits a {
+  color: var(--link);
+  white-space: nowrap;
+}
+.photo-credits-player {
+  margin-right: 6px;
+  color: var(--ink-2);
+  font-weight: 600;
 }
 .stack {
   position: relative;
@@ -885,21 +916,39 @@ p {
   height: 400px;
   margin: 40px 36px 0 0;
 }
-/* Results' miss cards: the team's bands, shaded deep under the name. */
+/* Results' miss cards: the player's photo over the team's bands (Real Madrid's are all
+   white, the card's colour until the photo loads, or if it never does). As in the app,
+   the number keeps a backing down to its foot, then fades; the foot's own shade sits
+   under the text, so a name that wraps stays readable. */
 .miss-card {
+  --number-foot: 128px;
   position: absolute;
   inset: 0;
   overflow: hidden;
   border-radius: 26px;
-  background: linear-gradient(90deg, #a50044 0% 50%, #004d98 50% 100%);
+  background: #ffffff;
   box-shadow: 0 30px 60px -30px rgb(0 0 0 / 70%);
   color: #ffffff;
+}
+.miss-card-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 15%;
 }
 .miss-card::before {
   content: '';
   position: absolute;
+  z-index: 1;
   inset: 0;
-  background: linear-gradient(180deg, rgb(12 13 18 / 45%) 0%, rgb(12 13 18 / 12%) 30%, rgb(10 11 15 / 0%) 42%, rgb(10 11 15 / 92%) 82%);
+  background: linear-gradient(
+    180deg,
+    rgb(12 13 18 / 45%) 0,
+    rgb(12 13 18 / 45%) var(--number-foot),
+    rgb(12 13 18 / 0%) calc(var(--number-foot) + 24px)
+  );
 }
 .miss-card:nth-child(1) {
   z-index: 3;
@@ -915,15 +964,24 @@ p {
 }
 .miss-card-number {
   position: absolute;
+  z-index: 2;
   left: 22px;
   top: 22px;
   font-size: 116px;
 }
 .miss-card-foot {
   position: absolute;
+  z-index: 2;
   left: 22px;
   right: 22px;
   bottom: 22px;
+}
+.miss-card-foot::before {
+  content: '';
+  position: absolute;
+  inset: -96px -22px -22px;
+  z-index: -1;
+  background: linear-gradient(180deg, rgb(10 11 15 / 0%), rgb(10 11 15 / 92%) 96px);
 }
 .miss-card-count {
   color: #b4b8bb;
@@ -962,12 +1020,13 @@ p {
   display: flex;
   justify-content: center;
 }
+/* No wider than the screen, so a phone never scrolls sideways to reach its edge. */
 .share-glow {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 420px;
-  height: 420px;
+  width: min(420px, 100vw);
+  aspect-ratio: 1;
   border-radius: 50%;
   background: radial-gradient(circle, rgb(97 189 103 / 22%), rgb(97 189 103 / 0%) 68%);
   transform: translate(-50%, -50%);
@@ -1883,6 +1942,12 @@ p {
   .stack {
     width: 260px;
     height: 350px;
+  }
+  .stack-label {
+    letter-spacing: 0.1em;
+  }
+  .miss-card {
+    --number-foot: 108px;
   }
   .miss-card-number {
     font-size: 96px;
