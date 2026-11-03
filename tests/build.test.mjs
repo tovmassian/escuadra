@@ -12,7 +12,7 @@ test('every generated page on disk is what the generator renders: run `node src/
 });
 
 // The languages whose text file has landed; each joins this list when its file does.
-const TRANSLATED = ['es', 'fr', 'it'];
+const TRANSLATED = ['es', 'fr', 'it', 'de'];
 
 /** Every leaf as [path, value]: home.try.steps.0 → 'Read the number…'. */
 function leaves(value, path = []) {
@@ -28,7 +28,7 @@ for (const language of TRANSLATED) {
   const file = await import(`../src/text/${language}.mjs`);
   const text = file.default;
   // A text file may name the keys that are rightly the same as English in it
-  // (German keeps "Support"): `export const SAME_AS_ENGLISH = ['layout.nav.support']`.
+  // (Italian keeps "Privacy"): `export const SAME_AS_ENGLISH = ['layout.nav.privacy']`.
   const sameAsEnglish = file.SAME_AS_ENGLISH ?? [];
 
   test(`${language} has en.mjs's shape, slots and markup`, () => {
