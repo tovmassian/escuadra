@@ -12,6 +12,8 @@ export default {
     homeLabel: 'Escuadra home',
     utilityNav: 'Utility',
     footerNav: 'Footer',
+    language: 'Language',
+    languageCurrent: 'Language: {name}',
     nav: {
       try: 'Try a question',
       how: 'How it works',
