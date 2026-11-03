@@ -492,8 +492,18 @@ p {
   letter-spacing: 0.14em;
   line-height: 1.9;
 }
+/* A photo's block, with its credits underneath: below it on a phone too, never between
+   the text and the photos. */
+.photo-col {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.photo-col .photo-credits {
+  width: 100%;
+  max-width: 440px;
+}
 .quiz {
-  justify-self: end;
   width: 100%;
   max-width: 440px;
   overflow: hidden;
@@ -512,21 +522,41 @@ p {
   background: var(--bands);
   color: #ffffff;
 }
+.stage-photo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+}
 .stage::before {
   content: '';
   position: absolute;
+  z-index: 1;
   inset: 0;
   background: rgb(12 13 18 / var(--veil));
+}
+/* With the photo loaded, a lighter wash: the shading above and below keeps the text
+   readable, as the app shades the part of a photo its text sits on. */
+.stage.has-photo::before {
+  background: rgb(12 13 18 / 12%);
+}
+.stage.has-photo::after {
+  background:
+    radial-gradient(ellipse 85% 80% at 0% 0%, rgb(10 11 15 / 72%), rgb(10 11 15 / 55%) 50%, rgb(10 11 15 / 0%) 100%),
+    radial-gradient(ellipse 85% 85% at 0% 100%, rgb(10 11 15 / 66%), rgb(10 11 15 / 50%) 50%, rgb(10 11 15 / 0%) 100%);
 }
 .stage::after {
   content: '';
   position: absolute;
+  z-index: 1;
   inset: 0;
   background: linear-gradient(180deg, rgb(10 11 15 / 45%) 0%, rgb(10 11 15 / 0%) 34%, rgb(10 11 15 / 0%) 64%, rgb(10 11 15 / 45%) 100%);
 }
 .stage-top {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   padding: 16px 18px 0;
 }
 .segments {
@@ -585,7 +615,7 @@ p {
 }
 .stage-number {
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   left: 22px;
   bottom: 18px;
   font-size: 176px;
@@ -960,7 +990,23 @@ p {
 .miss-card:nth-child(3) {
   z-index: 1;
   transform: translate(36px, -36px) scale(0.9);
-  opacity: 0.55;
+}
+/* The cards stay opaque: a dark layer, not transparency, sets the ones behind back, so
+   no photo shows through the card in front of it. */
+.miss-card::after {
+  content: '';
+  position: absolute;
+  z-index: 3;
+  inset: 0;
+  background: rgb(12 13 18);
+  opacity: 0;
+  pointer-events: none;
+}
+.miss-card:nth-child(2)::after {
+  opacity: 0.15;
+}
+.miss-card:nth-child(3)::after {
+  opacity: 0.45;
 }
 .miss-card-number {
   position: absolute;
@@ -1681,12 +1727,20 @@ p {
     animation: rise 0.45s var(--ease-out) both;
   }
   .miss-card {
-    animation: deal 9s cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+    animation:
+      deal 9s cubic-bezier(0.4, 0, 0.2, 1) infinite both,
+      layer 9s linear infinite both;
+    will-change: transform, opacity;
   }
-  .miss-card:nth-child(2) {
+  .miss-card::after {
+    animation: dim 9s cubic-bezier(0.4, 0, 0.2, 1) infinite both;
+  }
+  .miss-card:nth-child(2),
+  .miss-card:nth-child(2)::after {
     animation-delay: -6s;
   }
-  .miss-card:nth-child(3) {
+  .miss-card:nth-child(3),
+  .miss-card:nth-child(3)::after {
     animation-delay: -3s;
   }
 }
@@ -1739,41 +1793,78 @@ p {
 @keyframes deal {
   0%,
   26% {
-    z-index: 3;
     opacity: 1;
     transform: none;
   }
   33% {
-    z-index: 3;
     opacity: 0;
     transform: translate(-140%, 8%) rotate(-16deg);
   }
   34% {
-    z-index: 1;
     opacity: 0;
     transform: translate(36px, -36px) scale(0.9);
   }
   42%,
   60% {
-    z-index: 1;
-    opacity: 0.55;
+    opacity: 1;
     transform: translate(36px, -36px) scale(0.9);
   }
   66%,
   93% {
-    z-index: 2;
-    opacity: 0.85;
+    opacity: 1;
     transform: translate(18px, -18px) scale(0.95);
   }
   99% {
-    z-index: 2;
     opacity: 1;
     transform: none;
   }
   100% {
-    z-index: 3;
     opacity: 1;
     transform: none;
+  }
+}
+/* In step with deal: which card is drawn over which. Each card changes layer at one
+   instant, never while another holds the same layer, so the card coming forward from
+   the back can't flash over the one moving to the front: leaving 4, coming to the front
+   3, middle 2, back 1. */
+@keyframes layer {
+  0% {
+    z-index: 3;
+  }
+  1%,
+  33% {
+    z-index: 4;
+  }
+  33.5%,
+  60% {
+    z-index: 1;
+  }
+  60.5%,
+  92.9% {
+    z-index: 2;
+  }
+  93%,
+  100% {
+    z-index: 3;
+  }
+}
+/* In step with deal: how far back each card is set, by its dark layer. */
+@keyframes dim {
+  0%,
+  33% {
+    opacity: 0;
+  }
+  34%,
+  60% {
+    opacity: 0.45;
+  }
+  66%,
+  93% {
+    opacity: 0.15;
+  }
+  99%,
+  100% {
+    opacity: 0;
   }
 }
 
@@ -1841,9 +1932,6 @@ p {
   .faq-grid {
     gap: 40px;
     padding: 64px 0 96px;
-  }
-  .quiz {
-    justify-self: center;
   }
   .ladder,
   .stats {

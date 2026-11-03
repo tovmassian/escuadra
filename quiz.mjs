@@ -3,7 +3,14 @@
 //
 // The facts come from the app's squads (data/squads/ and data/players.json on main):
 // re-check them when the squads are refreshed. `bands` is the team's marker as the
-// in-round banner draws it, vertical bands in the team's real colours.
+// in-round banner draws it, vertical bands in the team's real colours, under `veil`;
+// they show until the photo loads, or if it never does.
+//
+// `photo` is the player's photo as the app stores it (`player.photo`): Wikimedia's
+// thumbnail, hotlinked, and its credit. `path` is the file's place under Commons'
+// thumb/ folder. `page` is its Commons page id, so the credit links the file's page
+// without its name, which would give the answer away. `focus` frames the face clear
+// of the shirt number.
 
 export const QUESTIONS = [
   {
@@ -14,6 +21,14 @@ export const QUESTIONS = [
     clue: { label: 'Club', value: 'Barcelona', flag: null },
     bands: 'linear-gradient(90deg, #AA151B 0% 25%, #F1BF00 25% 75%, #AA151B 75% 100%)',
     veil: 0.42,
+    photo: {
+      path: '1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg',
+      page: 195780204,
+      author: 'Bryan Berlin / WikiPortraits',
+      licence: 'CC BY-SA 4.0',
+      licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+      focus: '50% 18%',
+    },
     answer: 'Lamine Yamal',
     options: ['Mikel Oyarzabal', 'Lamine Yamal', 'Yéremy Pino', 'Víctor Muñoz'],
   },
@@ -25,22 +40,51 @@ export const QUESTIONS = [
     clue: { label: 'Nat', value: 'England', flag: 'assets/flags/ENG.png' },
     bands: 'linear-gradient(90deg, #EF0107 0% 100%)',
     veil: 0.42,
+    photo: {
+      path: '2/2f/Bukayo_Saka_England_v_Ghana_23_June_2026-057_%28cropped%29.jpg',
+      page: 194965322,
+      author: 'Bryan Berlin',
+      licence: 'CC BY-SA 4.0',
+      licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+      focus: '50% 18%',
+    },
     answer: 'Bukayo Saka',
     options: ['Kai Havertz', 'Noni Madueke', 'Bukayo Saka', 'Viktor Gyökeres'],
   },
   {
     team: 'Japan',
-    number: 10,
-    position: 'FW',
-    birth: '1998-06-16',
-    clue: { label: 'Club', value: 'Eintracht Frankfurt', flag: null },
+    number: 20,
+    position: 'MF',
+    birth: '2001-06-04',
+    clue: { label: 'Club', value: 'Real Sociedad', flag: null },
     bands:
       'linear-gradient(90deg, #FFFFFF 0% 33.33%, #BC002D 33.33% 66.67%, #FFFFFF 66.67% 100%)',
     veil: 0.55,
-    answer: 'Ritsu Doan',
-    options: ['Daizen Maeda', 'Ayase Ueda', 'Keito Nakamura', 'Ritsu Doan'],
+    photo: {
+      path: 'e/ea/Takefusa_Kubo.jpg',
+      page: 201066029,
+      author: 'Ali Mohammed Mahdi',
+      licence: 'CC BY-SA 4.0',
+      licenceUrl: 'https://creativecommons.org/licenses/by-sa/4.0',
+      focus: '50% 0%',
+    },
+    answer: 'Takefusa Kubo',
+    options: ['Daichi Kamada', 'Ao Tanaka', 'Junya Ito', 'Takefusa Kubo'],
   },
 ];
+
+const COMMONS_THUMB = 'https://thumb.wikimedia.org/wikipedia/commons/thumb/';
+
+/** The photo's thumbnail at Commons' 500 and 960 px steps: `src` and `srcset`. */
+export function photoSources({ path }) {
+  const at = (width) => `${COMMONS_THUMB}${path}/${width}px-${path.split('/').pop()}`;
+  return { src: at(500), srcset: `${at(500)} 500w, ${at(960)} 960w` };
+}
+
+/** The photo's Commons page, by id: the link names no player. */
+export function photoPage({ page }) {
+  return `https://commons.wikimedia.org/w/index.php?curid=${page}`;
+}
 
 // What a screen reader says in place of the card's codes, as the app's catalog does.
 export const POSITION_NAMES = { GK: 'Keeper', DF: 'Defender', MF: 'Midfield', FW: 'Forward' };
