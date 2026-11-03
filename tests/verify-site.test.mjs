@@ -1,6 +1,7 @@
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path/posix';
+import { QUESTIONS, photoPage, photoSources } from '../quiz.mjs';
 
 // privacy.html is the 1.x policy and stays as it was, for installs still on 1.x.
 // The 2.0 policy lives in privacy/2/, one page per language.
@@ -21,6 +22,7 @@ const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.tovmassi
 // (guardrail 1): each links its Commons page and its licence deed.
 const commonsThumb = 'https://thumb.wikimedia.org/wikipedia/commons/thumb/';
 const commonsFilePage = 'https://commons.wikimedia.org/wiki/File:';
+const commonsPageById = 'https://commons.wikimedia.org/w/index.php?curid=';
 const allowedExternalLinks = [
   'https://github.com/tovmassian/escuadra/issues',
   appStoreUrl,
@@ -28,6 +30,7 @@ const allowedExternalLinks = [
   siteUrl,
   commonsThumb,
   commonsFilePage,
+  commonsPageById,
   'https://creativecommons.org/licenses/',
 ];
 // How a page reaches the site root: '' at the root, '../../' in privacy/2/.
@@ -288,9 +291,12 @@ assert.doesNotMatch(home, /assets\/marketing\//, 'home shows no 1.x screenshots'
 
 // Every photo shown is credited on the page: its Commons page, its licence, "cropped".
 // The file name only ever sits in a link, never in visible text (guardrail 1).
-const photoFiles = [...home.matchAll(/<img[^>]*\ssrc="([^"]+)"/g)]
-  .map(([, src]) => src)
-  .filter((src) => src.startsWith(commonsThumb))
+const imageSources = (className) =>
+  [...home.matchAll(/<img\s[^>]*>/g)]
+    .map(([tag]) => tag)
+    .filter((tag) => tag.includes(`class="${className}"`))
+    .map((tag) => tag.match(/\ssrc="([^"]+)"/)[1]);
+const photoFiles = imageSources('miss-card-photo')
   .map((src) => decodeURIComponent(src.slice(commonsThumb.length).split('/')[2]));
 const creditedFiles = [...home.matchAll(/href="([^"]+)"/g)]
   .map(([, href]) => href)
@@ -310,6 +316,23 @@ assert.match(
 const visible = home.replace(/<[^>]*>/g, ' ');
 for (const file of photoFiles) {
   assert.ok(!visible.includes(file.replace(/_/g, ' ')), `no visible text carries ${file}`);
+}
+
+// The teaser's stage opens on its first question's photo, and site.mjs swaps the rest.
+// Each is credited under the card by its page id and its team and number, so neither
+// the credit nor its link gives an answer away.
+assert.deepEqual(imageSources('stage-photo'), [photoSources(QUESTIONS[0].photo).src], 'the stage opens on the first photo');
+const teaserCredits = home.slice(home.indexOf('data-quiz'), home.indexOf('id="how"'));
+for (const { team, number, photo, options } of QUESTIONS) {
+  assert.ok(
+    teaserCredits.includes(
+      `<span class="photo-credits-player">${team} · ${number}</span>\n                  <a href="${photoPage(photo)}">${photo.author}</a>\n                  · <a href="${photo.licenceUrl}">${photo.licence}</a> · cropped`,
+    ),
+    `${team}'s photo is credited under the teaser`,
+  );
+  for (const name of options) {
+    assert.ok(!teaserCredits.slice(teaserCredits.indexOf('photo-credits')).includes(name), `the teaser's credits never name ${name}`);
+  }
 }
 
 console.log(`Verified ${pages.length} pages.`);

@@ -4,6 +4,7 @@ import {
   QUESTIONS,
   advance,
   ageOn,
+  photoSources,
   pick,
   spokenClues,
   spokenQuestion,
@@ -83,6 +84,7 @@ function initialiseQuiz() {
   if (!card) return;
   const part = (name) => card.querySelector(`[data-quiz-${name}]`);
   const stage = part('stage');
+  const photo = part('photo');
   const number = part('number');
   const tiles = [...card.querySelectorAll('[data-quiz-option]')];
   const segments = [...card.querySelectorAll('[data-quiz-segment]')];
@@ -93,6 +95,19 @@ function initialiseQuiz() {
   let timer = null;
   // The first question is on the page when it loads; after Play again it is announced.
   let restarted = false;
+
+  // The round's photos load when it starts, as the app's do, so none waits on Next.
+  // Until one has loaded, or if it never does, the stage shows the team's bands.
+  for (const question of QUESTIONS.slice(1)) {
+    const image = new Image();
+    image.referrerPolicy = 'no-referrer';
+    image.sizes = photo.sizes;
+    Object.assign(image, photoSources(question.photo));
+  }
+  const showPhoto = () => stage.classList.toggle('has-photo', photo.naturalWidth > 0);
+  photo.addEventListener('load', showPhoto);
+  photo.addEventListener('error', showPhoto);
+  if (photo.complete) showPhoto();
 
   function go(nextState) {
     clearTimeout(timer);
@@ -107,6 +122,12 @@ function initialiseQuiz() {
     part('result').hidden = !state.done;
     stage.style.setProperty('--bands', question.bands);
     stage.style.setProperty('--veil', String(question.veil));
+    const { src, srcset } = photoSources(question.photo);
+    if (photo.getAttribute('src') !== src) {
+      stage.classList.remove('has-photo');
+      Object.assign(photo, { srcset, src });
+    }
+    photo.style.objectPosition = question.photo.focus;
     part('team').textContent = question.team;
     part('score').textContent = `${score}/${answered}`;
     part('score-spoken').textContent = `Score: ${score} of ${answered}`;

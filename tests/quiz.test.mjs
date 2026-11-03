@@ -5,6 +5,8 @@ import {
   QUESTIONS,
   advance,
   ageOn,
+  photoPage,
+  photoSources,
   pick,
   spokenQuestion,
   startRound,
@@ -49,11 +51,11 @@ test('a pick is scored once, and only advancing moves the round on', () => {
 
 test('the round ends after the last question, and the summary lists the misses', () => {
   let state = startRound();
-  for (const name of ['Lamine Yamal', 'Kai Havertz', 'Ritsu Doan']) {
+  for (const name of ['Lamine Yamal', 'Kai Havertz', 'Takefusa Kubo']) {
     state = advance(pick(state, name));
   }
   assert.equal(state.done, true);
-  assert.equal(pick(state, 'Ritsu Doan'), state, 'no pick after the end');
+  assert.equal(pick(state, 'Takefusa Kubo'), state, 'no pick after the end');
   assert.deepEqual(summary(state), {
     score: 2,
     answered: 3,
@@ -68,4 +70,24 @@ test('three right is a round a la escuadra', () => {
   for (const question of QUESTIONS) state = advance(pick(state, question.answer));
   assert.equal(summary(state).perfect, true);
   assert.deepEqual(summary(state).missed, []);
+});
+
+test('every question has its photo, as the app stores it, and a credit that names no player', () => {
+  for (const question of QUESTIONS) {
+    const { photo } = question;
+    assert.match(photo.path, /^[0-9a-f]\/[0-9a-f]{2}\/[^/]+$/, `${question.team}'s photo is a Commons file`);
+    assert.ok(photo.author && photo.licence && photo.licenceUrl, `${question.team}'s photo is credited`);
+    for (const name of question.options) {
+      const words = name.split(' ');
+      for (const text of [photo.author, photoPage(photo)]) {
+        assert.ok(!words.some((word) => text.includes(word)), `${question.team}'s credit names no option`);
+      }
+    }
+  }
+  assert.deepEqual(photoSources({ path: 'e/ea/Takefusa_Kubo.jpg' }), {
+    src: 'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Takefusa_Kubo.jpg/500px-Takefusa_Kubo.jpg',
+    srcset:
+      'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Takefusa_Kubo.jpg/500px-Takefusa_Kubo.jpg 500w, ' +
+      'https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Takefusa_Kubo.jpg/960px-Takefusa_Kubo.jpg 960w',
+  });
 });

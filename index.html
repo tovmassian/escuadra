@@ -150,74 +150,111 @@
             </ol>
           </div>
 
-          <div class="quiz" data-quiz>
-            <div class="stage" data-quiz-stage>
-              <div class="stage-top">
-                <div class="segments" aria-hidden="true">
-                  <span class="seg is-now" data-quiz-segment></span
-                  ><span class="seg" data-quiz-segment></span
-                  ><span class="seg" data-quiz-segment></span>
-                </div>
-                <div class="stage-head">
-                  <div>
-                    <p class="stage-team" data-quiz-team>Spain</p>
-                    <p class="stage-level"><span class="stage-banner"></span>Level 1</p>
+          <div class="photo-col">
+            <div class="quiz" data-quiz>
+              <div class="stage" data-quiz-stage>
+                <img
+                  class="stage-photo"
+                  src="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/500px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg"
+                  srcset="https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/500px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg 500w, https://thumb.wikimedia.org/wikipedia/commons/thumb/1/13/Lamine_Yamal_France_v_Spain_7.24.26-142.jpg/960px-Lamine_Yamal_France_v_Spain_7.24.26-142.jpg 960w"
+                  sizes="(max-width: 560px) 100vw, 440px"
+                  alt=""
+                  decoding="async"
+                  referrerpolicy="no-referrer"
+                  data-quiz-photo
+                />
+                <div class="stage-top">
+                  <div class="segments" aria-hidden="true">
+                    <span class="seg is-now" data-quiz-segment></span
+                    ><span class="seg" data-quiz-segment></span
+                    ><span class="seg" data-quiz-segment></span>
                   </div>
-                  <p class="stage-score" data-quiz-score aria-hidden="true">0/0</p>
-                  <p class="sr-only" data-quiz-score-spoken>Score: 0 of 0</p>
+                  <div class="stage-head">
+                    <div>
+                      <p class="stage-team" data-quiz-team>Spain</p>
+                      <p class="stage-level"><span class="stage-banner"></span>Level 1</p>
+                    </div>
+                    <p class="stage-score" data-quiz-score aria-hidden="true">0/0</p>
+                    <p class="sr-only" data-quiz-score-spoken>Score: 0 of 0</p>
+                  </div>
+                </div>
+                <span class="stage-number numbers" data-quiz-number>19</span>
+              </div>
+
+              <div class="quiz-play" data-quiz-play>
+                <p class="sr-only" data-quiz-spoken>
+                  Name: being asked. Position: Forward. Age: 19. Club: Barcelona.
+                </p>
+                <ul class="chips" aria-hidden="true">
+                  <li class="chip chip-name" data-quiz-name>
+                    <span class="chip-key">Name</span><span data-quiz-name-value>?</span>
+                  </li>
+                  <li class="chip">
+                    <span class="chip-key">Pos</span><span data-quiz-position>FW</span>
+                  </li>
+                  <li class="chip">
+                    <span class="chip-key">Age</span><span data-quiz-age>19</span>
+                  </li>
+                  <li class="chip">
+                    <span class="chip-key" data-quiz-clue-label>Club</span
+                    ><img class="chip-flag" src="assets/flags/ENG.png" alt="" data-quiz-flag hidden
+                    /><span data-quiz-clue>Barcelona</span>
+                  </li>
+                </ul>
+                <p class="display quiz-title" data-quiz-title>Who wears 19?</p>
+                <div class="tiles">
+                  <button type="button" class="tile" data-quiz-option>Mikel Oyarzabal</button>
+                  <button type="button" class="tile" data-quiz-option>Lamine Yamal</button>
+                  <button type="button" class="tile" data-quiz-option>Yéremy Pino</button>
+                  <button type="button" class="tile" data-quiz-option>Víctor Muñoz</button>
+                </div>
+                <div class="quiz-foot">
+                  <p class="quiz-hint" data-quiz-hint>Tap your answer</p>
+                  <button type="button" class="pill" data-quiz-next hidden>Next</button>
                 </div>
               </div>
-              <span class="stage-number numbers" data-quiz-number>19</span>
-            </div>
+              <p class="sr-only" aria-live="polite" data-quiz-live></p>
 
-            <div class="quiz-play" data-quiz-play>
-              <p class="sr-only" data-quiz-spoken>
-                Name: being asked. Position: Forward. Age: 19. Club: Barcelona.
-              </p>
-              <ul class="chips" aria-hidden="true">
-                <li class="chip chip-name" data-quiz-name>
-                  <span class="chip-key">Name</span><span data-quiz-name-value>?</span>
+              <div class="quiz-result" data-quiz-result hidden>
+                <p class="eyebrow"><span class="corner"></span>Your round · 3 questions</p>
+                <p class="result-score numbers" aria-hidden="true">
+                  <span class="result-n" data-quiz-result-score>0</span
+                  ><span class="result-total" data-quiz-result-total>/3</span>
+                </p>
+                <p class="sr-only" data-quiz-result-spoken>0 of 3</p>
+                <p class="display result-title" data-quiz-result-title>Still learning</p>
+                <ul class="missed" data-quiz-missed></ul>
+                <p class="result-copy" data-quiz-result-copy></p>
+                <div class="result-actions">
+                  <a class="pill" href="#get">Get the app</a>
+                  <button type="button" class="pill pill-ghost" data-quiz-restart>Play again</button>
+                </div>
+              </div>
+            </div>
+            <!-- The credits link each file's page by id: its name would give the answer away. -->
+            <div class="photo-credits">
+              <p class="photo-credits-title">Photo credits · 3</p>
+              <ul>
+                <li>
+                  <span class="photo-credits-player">Spain · 19</span>
+                  <a href="https://commons.wikimedia.org/w/index.php?curid=195780204">Bryan Berlin / WikiPortraits</a>
+                  · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> · cropped
                 </li>
-                <li class="chip">
-                  <span class="chip-key">Pos</span><span data-quiz-position>FW</span>
+                <li>
+                  <span class="photo-credits-player">Arsenal · 7</span>
+                  <a href="https://commons.wikimedia.org/w/index.php?curid=194965322">Bryan Berlin</a>
+                  · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> · cropped
                 </li>
-                <li class="chip">
-                  <span class="chip-key">Age</span><span data-quiz-age>19</span>
-                </li>
-                <li class="chip">
-                  <span class="chip-key" data-quiz-clue-label>Club</span
-                  ><img class="chip-flag" src="assets/flags/ENG.png" alt="" data-quiz-flag hidden
-                  /><span data-quiz-clue>Barcelona</span>
+                <li>
+                  <span class="photo-credits-player">Japan · 20</span>
+                  <a href="https://commons.wikimedia.org/w/index.php?curid=201066029">Ali Mohammed Mahdi</a>
+                  · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> · cropped
                 </li>
               </ul>
-              <p class="display quiz-title" data-quiz-title>Who wears 19?</p>
-              <div class="tiles">
-                <button type="button" class="tile" data-quiz-option>Mikel Oyarzabal</button>
-                <button type="button" class="tile" data-quiz-option>Lamine Yamal</button>
-                <button type="button" class="tile" data-quiz-option>Yéremy Pino</button>
-                <button type="button" class="tile" data-quiz-option>Víctor Muñoz</button>
-              </div>
-              <div class="quiz-foot">
-                <p class="quiz-hint" data-quiz-hint>Tap your answer</p>
-                <button type="button" class="pill" data-quiz-next hidden>Next</button>
-              </div>
-            </div>
-            <p class="sr-only" aria-live="polite" data-quiz-live></p>
-
-            <div class="quiz-result" data-quiz-result hidden>
-              <p class="eyebrow"><span class="corner"></span>Your round · 3 questions</p>
-              <p class="result-score numbers" aria-hidden="true">
-                <span class="result-n" data-quiz-result-score>0</span
-                ><span class="result-total" data-quiz-result-total>/3</span>
+              <p>
+                These photos load from Wikimedia Commons, so Wikimedia receives your IP address and the
+                details of each request, as any website does.
               </p>
-              <p class="sr-only" data-quiz-result-spoken>0 of 3</p>
-              <p class="display result-title" data-quiz-result-title>Still learning</p>
-              <ul class="missed" data-quiz-missed></ul>
-              <p class="result-copy" data-quiz-result-copy></p>
-              <div class="result-actions">
-                <a class="pill" href="#get">Get the app</a>
-                <button type="button" class="pill pill-ghost" data-quiz-restart>Play again</button>
-              </div>
             </div>
           </div>
         </div>
@@ -282,6 +319,67 @@
               Study shows the whole squad as cards or a list. Switch on Hide names and
               test yourself.
             </p>
+          </div>
+          <div class="photo-col">
+            <div class="stack-wrap" aria-hidden="true">
+              <p class="stack-label">Real Madrid · 2026/27 · Level 2 · 7/10</p>
+              <div class="stack">
+                <div class="miss-card">
+                  <img
+                    class="miss-card-photo"
+                    src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg/500px-Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg"
+                    srcset="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg/500px-Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg 500w, https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg/960px-Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg 960w"
+                    sizes="300px"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    referrerpolicy="no-referrer"
+                  />
+                  <span class="miss-card-number numbers">17</span>
+                  <div class="miss-card-foot">
+                    <p class="miss-card-count">Missed 1 of 3</p>
+                    <p class="miss-card-name">Marc Cucurella</p>
+                    <p class="miss-card-tags"><span>DF</span><span class="is-miss">Missed · name</span></p>
+                  </div>
+                </div>
+                <div class="miss-card">
+                  <img
+                    class="miss-card-photo"
+                    src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/500px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg"
+                    srcset="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/500px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg 500w, https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/960px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg 960w"
+                    sizes="300px"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    referrerpolicy="no-referrer"
+                  />
+                  <span class="miss-card-number numbers">10</span>
+                  <div class="miss-card-foot">
+                    <p class="miss-card-count">Missed 2 of 3</p>
+                    <p class="miss-card-name">Kylian Mbappé</p>
+                    <p class="miss-card-tags"><span>FW</span><span class="is-miss">Missed · name</span></p>
+                  </div>
+                </div>
+                <div class="miss-card">
+                  <img
+                    class="miss-card-photo"
+                    src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg/500px-Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg"
+                    srcset="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg/500px-Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg 500w, https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg/960px-Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg 960w"
+                    sizes="300px"
+                    alt=""
+                    loading="lazy"
+                    decoding="async"
+                    referrerpolicy="no-referrer"
+                  />
+                  <span class="miss-card-number numbers">5</span>
+                  <div class="miss-card-foot">
+                    <p class="miss-card-count">Missed 3 of 3</p>
+                    <p class="miss-card-name">Jude Bellingham</p>
+                    <p class="miss-card-tags"><span>MF</span><span class="is-miss">Missed · position</span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
             <!-- As on Results: the photos are Wikimedia's own, hotlinked and credited. -->
             <div class="photo-credits">
               <p class="photo-credits-title">Photo credits · 3</p>
@@ -306,65 +404,6 @@
                 These photos load from Wikimedia Commons, so Wikimedia receives your IP address and the
                 details of each request, as any website does.
               </p>
-            </div>
-          </div>
-          <div class="stack-wrap" aria-hidden="true">
-            <p class="stack-label">Real Madrid · 2026/27 · Level 2 · 7/10</p>
-            <div class="stack">
-              <div class="miss-card">
-                <img
-                  class="miss-card-photo"
-                  src="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg/500px-Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg"
-                  srcset="https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg/500px-Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg 500w, https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8a/Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg/960px-Marc_Cucurella_Argentina_v_Spain_19_July_2026-064_%28cropped%29.jpg 960w"
-                  sizes="300px"
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  referrerpolicy="no-referrer"
-                />
-                <span class="miss-card-number numbers">17</span>
-                <div class="miss-card-foot">
-                  <p class="miss-card-count">Missed 1 of 3</p>
-                  <p class="miss-card-name">Marc Cucurella</p>
-                  <p class="miss-card-tags"><span>DF</span><span class="is-miss">Missed · name</span></p>
-                </div>
-              </div>
-              <div class="miss-card">
-                <img
-                  class="miss-card-photo"
-                  src="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/500px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg"
-                  srcset="https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/500px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg 500w, https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg/960px-Kylian_Mbappe_France_v_Senegal_16_June_2026-391_%28cropped%29.jpg 960w"
-                  sizes="300px"
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  referrerpolicy="no-referrer"
-                />
-                <span class="miss-card-number numbers">10</span>
-                <div class="miss-card-foot">
-                  <p class="miss-card-count">Missed 2 of 3</p>
-                  <p class="miss-card-name">Kylian Mbappé</p>
-                  <p class="miss-card-tags"><span>FW</span><span class="is-miss">Missed · name</span></p>
-                </div>
-              </div>
-              <div class="miss-card">
-                <img
-                  class="miss-card-photo"
-                  src="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg/500px-Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg"
-                  srcset="https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg/500px-Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg 500w, https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg/960px-Jude_Bellingham_England_v_Ghana_23_June_2026-061_%28cropped%29.jpg 960w"
-                  sizes="300px"
-                  alt=""
-                  loading="lazy"
-                  decoding="async"
-                  referrerpolicy="no-referrer"
-                />
-                <span class="miss-card-number numbers">5</span>
-                <div class="miss-card-foot">
-                  <p class="miss-card-count">Missed 3 of 3</p>
-                  <p class="miss-card-name">Jude Bellingham</p>
-                  <p class="miss-card-tags"><span>MF</span><span class="is-miss">Missed · position</span></p>
-                </div>
-              </div>
             </div>
           </div>
         </div>
