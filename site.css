@@ -877,7 +877,9 @@ p {
   font-weight: 600;
   font-size: 12px;
   letter-spacing: 0.14em;
+  text-align: center;
   text-transform: uppercase;
+  text-wrap: balance;
 }
 .stack {
   position: relative;
@@ -885,13 +887,16 @@ p {
   height: 400px;
   margin: 40px 36px 0 0;
 }
-/* Results' miss cards: the team's bands, shaded deep under the name. */
+/* Results' miss cards: the team's bands (Real Madrid's are all white). As in the app, the
+   number keeps a backing down to its foot, then fades; the foot's own shade sits under
+   the text, so a name that wraps stays readable. */
 .miss-card {
+  --number-foot: 128px;
   position: absolute;
   inset: 0;
   overflow: hidden;
   border-radius: 26px;
-  background: linear-gradient(90deg, #a50044 0% 50%, #004d98 50% 100%);
+  background: #ffffff;
   box-shadow: 0 30px 60px -30px rgb(0 0 0 / 70%);
   color: #ffffff;
 }
@@ -899,7 +904,12 @@ p {
   content: '';
   position: absolute;
   inset: 0;
-  background: linear-gradient(180deg, rgb(12 13 18 / 45%) 0%, rgb(12 13 18 / 12%) 30%, rgb(10 11 15 / 0%) 42%, rgb(10 11 15 / 92%) 82%);
+  background: linear-gradient(
+    180deg,
+    rgb(12 13 18 / 45%) 0,
+    rgb(12 13 18 / 45%) var(--number-foot),
+    rgb(12 13 18 / 0%) calc(var(--number-foot) + 24px)
+  );
 }
 .miss-card:nth-child(1) {
   z-index: 3;
@@ -924,6 +934,13 @@ p {
   left: 22px;
   right: 22px;
   bottom: 22px;
+}
+.miss-card-foot::before {
+  content: '';
+  position: absolute;
+  inset: -96px -22px -22px;
+  z-index: -1;
+  background: linear-gradient(180deg, rgb(10 11 15 / 0%), rgb(10 11 15 / 92%) 96px);
 }
 .miss-card-count {
   color: #b4b8bb;
@@ -1883,6 +1900,12 @@ p {
   .stack {
     width: 260px;
     height: 350px;
+  }
+  .stack-label {
+    letter-spacing: 0.1em;
+  }
+  .miss-card {
+    --number-foot: 108px;
   }
   .miss-card-number {
     font-size: 96px;
