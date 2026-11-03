@@ -30,7 +30,7 @@ export default {
       home: 'Accueil',
       report: 'Signaler un problème',
     },
-    getApp: 'Télécharger l’appli',
+    getApp: 'Télécharger',
     theme: {
       light: 'Clair',
       dark: 'Sombre',
@@ -50,11 +50,11 @@ export default {
     try: {
       eyebrow: 'À toi de jouer · Niveau 1',
       title: 'Un numéro.<br />Quatre noms.',
-      body: 'Voilà comment on joue dans l’appli : un numéro de maillot et quelques indices, puis tu choisis le joueur. Trois questions ici ; dans l’appli, dix par partie, avec l’équipe de ton choix.',
+      body: 'Voilà le principe : un numéro de maillot et quelques indices, puis tu choisis le joueur. Ici, trois questions ; dans l’appli, dix par partie, avec l’équipe de ton choix.',
       steps: [
-        'Lis le numéro et les indices : poste, âge, et club ou nationalité.',
+        'Lis le numéro et les indices : poste, âge et club ou nationalité.',
         'Appuie sur un nom. Juste ou faux, tu le sais tout de suite.',
-        'À la fin, vois exactement qui tu as raté.',
+        'À la fin, retrouve exactement qui tu as raté.',
       ],
       level: 'Niveau 1',
       nameKey: 'Nom',
@@ -89,8 +89,8 @@ export default {
       eyebrow: 'Résultats et Effectif',
       title: 'C’est en ratant qu’on apprend.',
       body: [
-        'Après chaque partie, l’écran de résultats présente chaque joueur raté sur une carte. Fais-les défiler pour les revoir avant la partie suivante.',
-        'L’écran Effectif affiche toute l’équipe en cartes ou en liste. Appuie sur « Cacher noms » pour te tester.',
+        'Après chaque partie, l’écran Résultats affiche tous les joueurs ratés, un par carte. Fais-les défiler pour les revoir avant la partie suivante.',
+        'L’écran Effectif affiche tout l’effectif en cartes ou en liste. Appuie sur « Cacher noms » pour te tester.',
       ],
       stackLabel: 'Real Madrid · 2026/27 · Niveau 2 · 7/10',
       missedOf: 'Erreur {n} sur 3',
@@ -101,7 +101,7 @@ export default {
       title: 'D’Arsenal<br />à l’Arménie.',
       stats: [
         { title: 'Clubs', body: 'Tous les clubs des cinq grands championnats européens.' },
-        { title: 'Sélections', body: 'Des six confédérations.' },
+        { title: 'Sélections', body: 'Issues des six confédérations.' },
         { title: 'Langues', body: 'English, Español, Français, Italiano et Deutsch.' },
       ],
       clubsLabel: 'Quelques-uns des clubs d’Escuadra',
@@ -127,7 +127,7 @@ export default {
       items: [
         {
           title: 'Sans compte. Sans pub.',
-          body: 'Aucune inscription, rien qui te ralentit. Ouvre l’appli et joue.',
+          body: 'Aucune inscription, rien pour te ralentir. Ouvre l’appli et joue.',
         },
         {
           title: 'Joue sans connexion',
@@ -135,13 +135,13 @@ export default {
         },
         {
           title: 'Photos créditées',
-          body: 'Des photos de joueurs issues de Wikimedia Commons, quand il en existe une, chacune avec son auteur et sa licence.',
+          body: 'Une photo de Wikimedia Commons pour chaque joueur qui en a une, avec son auteur et sa licence.',
         },
         {
           title: 'Cinq langues',
           body: 'English, Español, Français, Italiano et Deutsch. L’appli suit la langue de ton téléphone, ou tu peux en choisir une dans Réglages.',
         },
-        { title: 'Clair et sombre', body: 'L’appli suit l’apparence de ton téléphone, ou tu choisis toi-même.' },
+        { title: 'Clair et sombre', body: 'L’appli suit l’apparence de ton téléphone, ou c’est toi qui choisis.' },
         {
           title: 'Statistiques anonymes, désactivables',
           body: 'Escuadra envoie des statistiques d’utilisation anonymes, sauf si tu les désactives dans Réglages. <a href="{privacy}">La politique de confidentialité</a> détaille tout ce qui quitte ton appareil.',
@@ -186,7 +186,7 @@ export default {
         a: 'Oui. Tous les effectifs sont enregistrés sur ton téléphone, donc le quiz fonctionne sans connexion. Les photos se chargent depuis Wikimedia Commons quand tu es en ligne.',
       },
       {
-        q: 'Un numéro de maillot ou un joueur semble faux.',
+        q: 'Une erreur sur un numéro de maillot ou un joueur ?',
         a: 'Les effectifs sont compilés à partir de Wikipédia et de Wikidata, et chaque équipe indique la date de sa dernière mise à jour. Si quelque chose n’est plus à jour, ouvre un ticket en précisant l’équipe et le joueur.',
       },
       {
@@ -240,7 +240,7 @@ export default {
     resultCopy: {
       perfect: 'Trois sur trois. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix.',
       learning:
-        'Voici les joueurs à retenir. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix, et chaque erreur t’attend sur l’écran de résultats.',
+        'Voici les joueurs à retenir. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix, et chaque erreur t’attend sur l’écran Résultats.',
     },
   },
 };

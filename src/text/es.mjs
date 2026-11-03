@@ -39,7 +39,7 @@ export default {
   },
   home: {
     hero: {
-      eyebrow: 'Aprende plantillas de fútbol · iPhone y Android',
+      eyebrow: 'Plantillas de fútbol, de memoria · iPhone y Android',
       title: 'Conoce cada<br />dorsal.',
       lead: '¿Quién lleva el 7? Aprende las plantillas de los clubes de las cinco grandes ligas europeas y de más de 150 selecciones en rondas rápidas, y mira quién se te escapó.',
       tryLink: 'O prueba una pregunta aquí mismo',
@@ -47,7 +47,7 @@ export default {
     try: {
       eyebrow: 'Pruébalo · Nivel 1',
       title: 'Un dorsal.<br />Tú eliges.',
-      body: 'Así se juega en la app: un dorsal y algunas pistas, y eliges al jugador. Aquí hay tres preguntas; en la app, diez por ronda, con el equipo que quieras.',
+      body: 'Así se juega: un dorsal y algunas pistas, y eliges al jugador. Aquí hay tres preguntas; en la app, diez por ronda, con el equipo que quieras.',
       steps: [
         'Mira el dorsal y las pistas: posición, edad y club o nacionalidad.',
         'Toca un nombre. Aciertes o falles, lo sabes al instante.',
@@ -101,8 +101,8 @@ export default {
         { title: 'Selecciones', body: 'De las seis confederaciones.' },
         { title: 'Idiomas', body: 'English, Español, Français, Italiano y Deutsch.' },
       ],
-      clubsLabel: 'Algunos de los clubes de Escuadra',
-      nationsLabel: 'Algunas de las selecciones de Escuadra',
+      clubsLabel: 'Algunos de los clubes que incluye Escuadra',
+      nationsLabel: 'Algunas de las selecciones que incluye Escuadra',
       refreshed:
         'Las plantillas se actualizan cada temporada: los equipos nuevos llegan sin actualizar la app.',
     },
@@ -114,7 +114,7 @@ export default {
       eyebrow: 'Diez de diez',
       title: 'Una ronda sin fallos tiene nombre.',
       body: [
-        'Como el tiro que se cuela por la escuadra de la portería. Acierta las diez y Escuadra te lo dice.',
+        'Como el tiro que se cuela por la escuadra de la portería. Acierta las diez y Escuadra lo canta.',
         'Luego comparte la ronda como imagen o como texto. Sin fotos ni nombres, para que tus amigos puedan jugar.',
       ],
     },
@@ -136,9 +136,9 @@ export default {
         },
         {
           title: 'Cinco idiomas',
-          body: 'English, Español, Français, Italiano y Deutsch. Sigue el idioma de tu teléfono, o puedes elegir uno en Ajustes.',
+          body: 'English, Español, Français, Italiano y Deutsch. Por defecto, sigue el idioma de tu teléfono, pero puedes elegir otro en Ajustes.',
         },
-        { title: 'Claro y oscuro', body: 'Sigue el aspecto de tu teléfono, o puedes elegirlo tú.' },
+        { title: 'Claro y oscuro', body: 'Por defecto, sigue el aspecto de tu teléfono, pero puedes elegirlo tú.' },
         {
           title: 'Estadísticas anónimas que puedes desactivar',
           body: 'Escuadra envía estadísticas de uso anónimas salvo que las desactives en Ajustes. <a href="{privacy}">La política de privacidad</a> detalla todo lo que sale de tu dispositivo.',
@@ -147,7 +147,7 @@ export default {
     },
     get: {
       title: 'La plantilla,<br />de carrerilla.',
-      body: 'Escuadra está en iPhone y Android.',
+      body: 'Escuadra está disponible para iPhone y Android.',
     },
     footer: {
       escuadraHeading: 'Escuadra',
@@ -159,7 +159,7 @@ export default {
   support: {
     eyebrow: 'Soporte',
     title: '¿Algo<br />no va bien?',
-    lead: '¿Un error, un dorsal equivocado, un equipo que te gustaría ver en la app? La mejor forma de contactar con el desarrollador es GitHub Issues. Cuenta qué pasó, en qué teléfono y con qué equipo.',
+    lead: '¿Un error, un dorsal equivocado, un equipo que te gustaría ver en la app? La mejor forma de contactar con el desarrollador es a través de GitHub Issues. Cuenta qué pasó, en qué teléfono y con qué equipo.',
     cta: 'Abre una incidencia en GitHub',
     ctaNote: 'Para abrir una incidencia necesitas una cuenta gratuita de GitHub.',
     kinds: [
@@ -176,7 +176,7 @@ export default {
       },
       {
         q: '¿Por qué algunos jugadores no tienen foto?',
-        a: 'Las fotos proceden de Wikimedia Commons, y solo cuando Commons tiene una con una licencia que Escuadra puede usar. Si no la hay, o sin conexión antes de que se cargue la foto, la pregunta muestra los colores del equipo y el dorsal.',
+        a: 'Las fotos proceden de Wikimedia Commons, y solo se muestran si Commons tiene una con licencia que Escuadra pueda usar. Si no hay ninguna, o si no tienes conexión y la foto aún no se ha cargado, la pregunta muestra los colores del equipo y el dorsal.',
       },
       {
         q: '¿Escuadra funciona sin conexión?',
@@ -184,7 +184,7 @@ export default {
       },
       {
         q: 'Hay un dorsal o un jugador que no cuadra.',
-        a: 'Las plantillas se recopilan de Wikipedia y Wikidata, y cada equipo indica cuándo se actualizó por última vez. Si algo está desfasado, abre una incidencia indicando el equipo y el jugador.',
+        a: 'Las plantillas se recopilan de Wikipedia y Wikidata, y cada equipo indica cuándo se actualizó por última vez. Si algo está desfasado, abre una incidencia y di qué equipo y qué jugador.',
       },
       {
         q: '¿Cómo cambio el idioma?',
@@ -192,7 +192,7 @@ export default {
       },
       {
         q: '¿Cómo desactivo las estadísticas de uso?',
-        a: 'Abre <b>Ajustes</b> y desactiva <b>Estadísticas de uso</b>. En Info, dentro de la app, se detalla todo lo que sale de tu dispositivo, y también en la <a href="{privacy}">política de privacidad</a>.',
+        a: 'Abre <b>Ajustes</b> y desactiva <b>Estadísticas de uso</b>. Todo lo que sale de tu dispositivo se detalla en Info, dentro de la app, y en la <a href="{privacy}">política de privacidad</a>.',
       },
       {
         q: '¿Cómo empiezo de cero?',
@@ -226,7 +226,7 @@ export default {
       right: '¡Acierto! Seguimos…',
       rightLast: '¡Acierto! Ahora, tu ronda…',
     },
-    next: 'Seguimos',
+    next: 'Siguiente',
     seeRound: 'Ver tu ronda',
     live: {
       right: 'Acierto: {answer}.',
@@ -235,9 +235,9 @@ export default {
     },
     titles: { perfect: 'A la escuadra', learning: 'Aprendiendo' },
     resultCopy: {
-      perfect: 'Tres de tres. En la app, cada ronda tiene diez preguntas, con 96 clubes y 157 selecciones.',
+      perfect: 'Tres de tres. En la app, eliges entre 96 clubes y 157 selecciones, y cada ronda tiene diez preguntas.',
       learning:
-        'Estos son los que te faltan. En la app, cada ronda tiene diez preguntas, con 96 clubes y 157 selecciones, y cada fallo te espera en la pantalla de resultados.',
+        'Estos son los que te faltan. En la app, eliges entre 96 clubes y 157 selecciones, cada ronda tiene diez preguntas y cada fallo te espera en la pantalla de resultados.',
     },
   },
 };

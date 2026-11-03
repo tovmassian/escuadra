@@ -42,7 +42,7 @@ export default {
   },
   home: {
     hero: {
-      eyebrow: 'Impara le rose del calcio · iPhone e Android',
+      eyebrow: 'Quiz sulle rose del calcio · iPhone e Android',
       title: 'Conosci ogni<br />numero.',
       lead: 'Chi ha il numero 7? Impara le rose di tutti i club dei cinque principali campionati europei e di oltre 150 nazionali in partite veloci, poi scopri chi hai sbagliato.',
       tryLink: 'Oppure prova una domanda qui',
@@ -50,7 +50,7 @@ export default {
     try: {
       eyebrow: 'Provane una · Livello 1',
       title: 'Un numero.<br />Quattro nomi.',
-      body: 'Nell’app si gioca così: un numero di maglia e qualche indizio, poi scegli il giocatore. Qui le domande sono tre; nell’app, dieci a partita, con la squadra che vuoi.',
+      body: 'Ecco come si gioca: un numero di maglia e qualche indizio, poi scegli il giocatore. Qui le domande sono tre; nell’app sono dieci a partita, con la squadra che vuoi.',
       steps: [
         'Leggi il numero e gli indizi: ruolo, età e club o nazionalità.',
         'Tocca un nome. Giusto o sbagliato, lo sai subito.',
@@ -89,7 +89,7 @@ export default {
       eyebrow: 'Risultati e Rosa',
       title: 'Sbagliando s’impara.',
       body: [
-        'Dopo ogni partita, la schermata dei risultati ti mostra ogni giocatore che hai sbagliato, ognuno su una scheda da scorrere, così puoi ripassarli prima della partita successiva.',
+        'Dopo ogni partita, la schermata dei risultati raccoglie in schede da scorrere tutti i giocatori che hai sbagliato, così puoi ripassarli prima della partita successiva.',
         'La schermata “Rosa” mostra tutta la rosa come schede o come elenco. Tocca “Copri i nomi” e mettiti alla prova.',
       ],
       stackLabel: 'Real Madrid · 2026/27 · Livello 2 · 7/10',
@@ -104,13 +104,13 @@ export default {
         { title: 'Nazionali', body: 'Da tutte e sei le confederazioni.' },
         { title: 'Lingue', body: 'English, Español, Français, Italiano e Deutsch.' },
       ],
-      clubsLabel: 'Alcuni dei club di Escuadra',
-      nationsLabel: 'Alcune delle nazionali di Escuadra',
+      clubsLabel: 'Alcuni dei club presenti in Escuadra',
+      nationsLabel: 'Alcune delle nazionali presenti in Escuadra',
       refreshed: 'Le rose si aggiornano ogni stagione: le nuove squadre arrivano senza aggiornare l’app.',
     },
     share: {
       pictureLabel:
-        'Immagine da condividere di Escuadra: Barcelona, 2026/27, livello 1, 10 su 10, a la escuadra. I dieci numeri di maglia e “Barcelona: conosci tutta la rosa?”',
+        'Immagine da condividere creata da Escuadra: Barcelona, 2026/27, livello 1, 10 su 10, a la escuadra. I dieci numeri di maglia e “Barcelona: conosci tutta la rosa?”',
       meta: 'Barcelona · 2026/27 · Livello 1',
       question: 'Barcelona: conosci tutta la rosa?',
       eyebrow: 'Dieci su dieci',
@@ -174,11 +174,11 @@ export default {
     faq: [
       {
         q: 'Come sblocco i livelli 2 e 3?',
-        a: 'Fai 8 su 10 al livello 1 per sbloccare il livello 2, e 8 su 10 al livello 2 per sbloccare il livello 3. Ogni squadra ha i suoi livelli.',
+        a: 'Fai 8 su 10 al livello 1 per sbloccare il livello 2, e 8 su 10 al livello 2 per sbloccare il livello 3. I livelli si sbloccano squadra per squadra.',
       },
       {
         q: 'Perché alcuni giocatori non hanno la foto?',
-        a: 'Le foto provengono da Wikimedia Commons, e solo se Commons ne ha una con una licenza che Escuadra può usare. Se non c’è, o se sei offline prima che la foto sia stata caricata, la domanda mostra invece i colori della squadra e il numero di maglia.',
+        a: 'Le foto provengono da Wikimedia Commons, e ci sono solo se Commons ne ha una con una licenza che Escuadra può usare. Se non c’è, o se sei offline e la foto non è ancora stata caricata, la domanda mostra invece i colori della squadra e il numero di maglia.',
       },
       {
         q: 'Escuadra funziona offline?',
@@ -237,9 +237,9 @@ export default {
     },
     titles: { perfect: 'A la escuadra', learning: 'Sto imparando' },
     resultCopy: {
-      perfect: 'Tre su tre. Nell’app, ogni partita ha dieci domande, con 96 club e 157 nazionali.',
+      perfect: 'Tre su tre. Nell’app ogni partita ha dieci domande, e puoi scegliere tra 96 club e 157 nazionali.',
       learning:
-        'Ecco quelli da imparare. Nell’app, ogni partita ha dieci domande, con 96 club e 157 nazionali, e ogni errore ti aspetta nella schermata dei risultati.',
+        'Ecco quelli da imparare. Nell’app ogni partita ha dieci domande, puoi scegliere tra 96 club e 157 nazionali, e ogni errore ti aspetta nella schermata dei risultati.',
     },
   },
 };

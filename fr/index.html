@@ -51,7 +51,7 @@
     />
     <link rel="stylesheet" href="../site.css" />
     <script type="module" src="../site.mjs"></script>
-    <script type="application/json" id="site-words">{"root":"../","positions":{"GK":"Gardien","DF":"Défenseur","MF":"Milieu","FW":"Attaquant"},"positionCodes":{"GK":"GB","DF":"DÉF","MF":"MIL","FW":"ATT"},"clueCodes":{"club":"Club","nat":"Nat"},"clueSpoken":{"club":"Club","nat":"Nationalité"},"spoken":{"name":"Nom : {name}.","beingAsked":"à trouver","clues":"Poste : {position}. Âge : {age}. {clueLabel} : {clue}.","question":"Question {n} sur {total}. {team}. Qui porte le {number} ? {clues}","score":"Score : {score} sur {answered}","result":"{score} sur {total}"},"whoWears":"Qui porte le {number} ?","hint":{"tap":"Choisis ta réponse","right":"Exact. La suite arrive…","rightLast":"Exact. Ton résultat arrive…"},"next":"Suivant","seeRound":"Voir ton résultat","live":{"right":"Exact : {answer}.","wrong":"Raté. Le {number}, c’est {answer}.","round":"Ta partie : {score} sur {total}. {title}."},"titles":{"perfect":"A la escuadra","learning":"En pleine révision"},"resultCopy":{"perfect":"Trois sur trois. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix.","learning":"Voici les joueurs à retenir. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix, et chaque erreur t’attend sur l’écran de résultats."},"countries":{"ESP":"Espagne","ARG":"Argentine","BRA":"Brésil","FRA":"France","ENG":"Angleterre","JPN":"Japon","GER":"Allemagne","SEN":"Sénégal","ITA":"Italie","MEX":"Mexique","POR":"Portugal","KOR":"Corée du Sud","NED":"Pays-Bas","NGA":"Nigeria","USA":"États-Unis","CRO":"Croatie","URU":"Uruguay","EGY":"Égypte","COL":"Colombie","AUS":"Australie","CAN":"Canada","GHA":"Ghana","ARM":"Arménie"}}</script>
+    <script type="application/json" id="site-words">{"root":"../","positions":{"GK":"Gardien","DF":"Défenseur","MF":"Milieu","FW":"Attaquant"},"positionCodes":{"GK":"GB","DF":"DÉF","MF":"MIL","FW":"ATT"},"clueCodes":{"club":"Club","nat":"Nat"},"clueSpoken":{"club":"Club","nat":"Nationalité"},"spoken":{"name":"Nom : {name}.","beingAsked":"à trouver","clues":"Poste : {position}. Âge : {age}. {clueLabel} : {clue}.","question":"Question {n} sur {total}. {team}. Qui porte le {number} ? {clues}","score":"Score : {score} sur {answered}","result":"{score} sur {total}"},"whoWears":"Qui porte le {number} ?","hint":{"tap":"Choisis ta réponse","right":"Exact. La suite arrive…","rightLast":"Exact. Ton résultat arrive…"},"next":"Suivant","seeRound":"Voir ton résultat","live":{"right":"Exact : {answer}.","wrong":"Raté. Le {number}, c’est {answer}.","round":"Ta partie : {score} sur {total}. {title}."},"titles":{"perfect":"A la escuadra","learning":"En pleine révision"},"resultCopy":{"perfect":"Trois sur trois. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix.","learning":"Voici les joueurs à retenir. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix, et chaque erreur t’attend sur l’écran Résultats."},"countries":{"ESP":"Espagne","ARG":"Argentine","BRA":"Brésil","FRA":"France","ENG":"Angleterre","JPN":"Japon","GER":"Allemagne","SEN":"Sénégal","ITA":"Italie","MEX":"Mexique","POR":"Portugal","KOR":"Corée du Sud","NED":"Pays-Bas","NGA":"Nigeria","USA":"États-Unis","CRO":"Croatie","URU":"Uruguay","EGY":"Égypte","COL":"Colombie","AUS":"Australie","CAN":"Canada","GHA":"Ghana","ARM":"Arménie"}}</script>
   </head>
   <body>
     <header class="site-header shell">
@@ -83,7 +83,7 @@
           <span class="theme-toggle-icon" aria-hidden="true">◐</span
           ><span data-theme-toggle-label></span>
         </button>
-        <a class="pill pill-small" href="#get">Télécharger l’appli</a>
+        <a class="pill pill-small" href="#get">Télécharger</a>
       </div>
     </header>
 
@@ -155,12 +155,12 @@
             <p class="eyebrow"><span class="corner"></span>À toi de jouer · Niveau 1</p>
             <h2 id="try-title" class="display section-title">Un numéro.<br />Quatre noms.</h2>
             <p class="body-copy">
-              Voilà comment on joue dans l’appli : un numéro de maillot et quelques indices, puis tu choisis le joueur. Trois questions ici ; dans l’appli, dix par partie, avec l’équipe de ton choix.
+              Voilà le principe : un numéro de maillot et quelques indices, puis tu choisis le joueur. Ici, trois questions ; dans l’appli, dix par partie, avec l’équipe de ton choix.
             </p>
             <ol class="steps">
-              <li><span class="step-number">01</span><span>Lis le numéro et les indices : poste, âge, et club ou nationalité.</span></li>
+              <li><span class="step-number">01</span><span>Lis le numéro et les indices : poste, âge et club ou nationalité.</span></li>
               <li><span class="step-number">02</span><span>Appuie sur un nom. Juste ou faux, tu le sais tout de suite.</span></li>
-              <li><span class="step-number">03</span><span>À la fin, vois exactement qui tu as raté.</span></li>
+              <li><span class="step-number">03</span><span>À la fin, retrouve exactement qui tu as raté.</span></li>
             </ol>
           </div>
 
@@ -240,7 +240,7 @@
                 <ul class="missed" data-quiz-missed></ul>
                 <p class="result-copy" data-quiz-result-copy></p>
                 <div class="result-actions">
-                  <a class="pill" href="#get">Télécharger l’appli</a>
+                  <a class="pill" href="#get">Télécharger</a>
                   <button type="button" class="pill pill-ghost" data-quiz-restart>Rejouer la partie</button>
                 </div>
               </div>
@@ -323,10 +323,10 @@
             <p class="eyebrow"><span class="corner"></span>Résultats et Effectif</p>
             <h2 id="misses-title" class="display section-title">C’est en ratant qu’on apprend.</h2>
             <p class="body-copy">
-              Après chaque partie, l’écran de résultats présente chaque joueur raté sur une carte. Fais-les défiler pour les revoir avant la partie suivante.
+              Après chaque partie, l’écran Résultats affiche tous les joueurs ratés, un par carte. Fais-les défiler pour les revoir avant la partie suivante.
             </p>
             <p class="body-copy">
-              L’écran Effectif affiche toute l’équipe en cartes ou en liste. Appuie sur « Cacher noms » pour te tester.
+              L’écran Effectif affiche tout l’effectif en cartes ou en liste. Appuie sur « Cacher noms » pour te tester.
             </p>
           </div>
           <div class="photo-col">
@@ -434,7 +434,7 @@
             <div class="stat" data-reveal>
               <span class="stat-number numbers">157</span>
               <h3 class="display">Sélections</h3>
-              <p>Des six confédérations.</p>
+              <p>Issues des six confédérations.</p>
             </div>
             <div class="stat" data-reveal>
               <span class="stat-number numbers">5</span>
@@ -619,7 +619,7 @@
             <article class="promise" data-reveal>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c.8-3.5 3.6-5.5 7-5.5s6.2 2 7 5.5" /><path d="M3.5 3.5l17 17" /></svg>
               <h3>Sans compte. Sans pub.</h3>
-              <p>Aucune inscription, rien qui te ralentit. Ouvre l’appli et joue.</p>
+              <p>Aucune inscription, rien pour te ralentir. Ouvre l’appli et joue.</p>
             </article>
             <article class="promise" data-reveal>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M2.5 8.8a15 15 0 0 1 4-2.6" /><path d="M10.6 4.7A15 15 0 0 1 21.5 8.8" /><path d="M5.3 12.3a10 10 0 0 1 3.2-2" /><path d="M15.4 10.4a10 10 0 0 1 3.3 1.9" /><path d="M8.6 15.7a5 5 0 0 1 6.8 0" /><circle cx="12" cy="19.2" r=".9" fill="currentColor" /><path d="M3.5 3.5l17 17" /></svg>
@@ -632,7 +632,7 @@
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" /><circle cx="9" cy="10" r="1.8" /><path d="M21 16l-5.2-5.2L7 19" /></svg>
               <h3>Photos créditées</h3>
               <p>
-                Des photos de joueurs issues de Wikimedia Commons, quand il en existe une, chacune avec son auteur et sa licence.
+                Une photo de Wikimedia Commons pour chaque joueur qui en a une, avec son auteur et sa licence.
               </p>
             </article>
             <article class="promise" data-reveal>
@@ -645,7 +645,7 @@
             <article class="promise" data-reveal>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" /></svg>
               <h3>Clair et sombre</h3>
-              <p>L’appli suit l’apparence de ton téléphone, ou tu choisis toi-même.</p>
+              <p>L’appli suit l’apparence de ton téléphone, ou c’est toi qui choisis.</p>
             </article>
             <article class="promise" data-reveal>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" /><path d="M10.5 18.5h3" /></svg>

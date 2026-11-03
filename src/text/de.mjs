@@ -8,10 +8,10 @@
 // is the "Kader", a club a "Verein", a level a "Level"; quotes „ “, dashes –.
 export default {
   meta: {
-    homeTitle: 'Escuadra — Fußballkader nach Rückennummer lernen',
+    homeTitle: 'Escuadra – Fußballkader nach Rückennummer lernen',
     homeDescription:
       'Wer trägt die Nummer 7? Lerne die Kader aller Vereine der fünf Topligen Europas und von über 150 Nationalteams in kurzen Runden und sieh genau, bei wem du falschlagst.',
-    supportTitle: 'Hilfe — Escuadra',
+    supportTitle: 'Hilfe – Escuadra',
   },
   layout: {
     homeLabel: 'Startseite von Escuadra',
@@ -80,16 +80,16 @@ export default {
         { title: 'Name und Position', body: 'Erst den Namen, dann die Position – TW, ABW, MF oder ST.' },
         {
           title: 'Ganzer Steckbrief',
-          body: '6 Namen zur Wahl, dann Position, dann Nationalität – bei einem Nationalteam der Verein.',
+          body: '6 Namen zur Wahl, dann Position, dann Nationalität – bei einem Nationalteam stattdessen der Verein.',
         },
       ],
       note: 'Jede Frage zählt einen Punkt. In Level 2 und 3 gibt es den Punkt nur, wenn alle Teile stimmen – Teilpunkte gibt es nicht.',
     },
     misses: {
-      eyebrow: 'Ergebnis und Kader',
+      eyebrow: 'Ergebnis- und Kaderansicht',
       title: 'Aus Fehlern lernt man.',
       body: [
-        'Nach jeder Runde zeigt dir die Ergebnisansicht jeden Spieler, den du falsch hattest, als Karte zum Durchwischen. So kannst du sie vor der nächsten Runde wiederholen.',
+        'Nach jeder Runde zeigt dir die Ergebnisansicht alle Spieler, die du falsch hattest, als Karten zum Durchwischen. So kannst du sie vor der nächsten Runde wiederholen.',
         'Die Kaderansicht zeigt den ganzen Kader als Karten oder als Liste. Schalte „Ohne Namen“ ein und teste dich selbst.',
       ],
       stackLabel: 'Real Madrid · 2026/27 · Level 2 · 7/10',
@@ -174,11 +174,11 @@ export default {
     faq: [
       {
         q: 'Wie schalte ich Level 2 und 3 frei?',
-        a: 'Mit 8 von 10 in Level 1 schaltest du Level 2 frei, und mit 8 von 10 in Level 2 dann Level 3. Jedes Team hat seine eigene Leiter.',
+        a: 'Level 2 schaltest du mit 8 von 10 in Level 1 frei, Level 3 mit 8 von 10 in Level 2. Jedes Team hat seine eigene Leiter.',
       },
       {
         q: 'Warum haben manche Spieler kein Foto?',
-        a: 'Die Fotos stammen von Wikimedia Commons, und zwar nur, wenn Commons eines unter einer Lizenz hat, die Escuadra verwenden darf. Ohne Foto, oder offline, bevor ein Foto geladen wurde, zeigt die Frage stattdessen die Teamfarben und die Rückennummer.',
+        a: 'Die Fotos stammen von Wikimedia Commons, und zwar nur, wenn Commons eines unter einer Lizenz hat, die Escuadra verwenden darf. Ohne Foto – oder offline, solange noch keins geladen ist – zeigt die Frage stattdessen die Teamfarben und die Rückennummer.',
       },
       {
         q: 'Funktioniert Escuadra offline?',
@@ -198,7 +198,7 @@ export default {
       },
       {
         q: 'Wie fange ich von vorn an?',
-        a: 'Auf dem Bildschirm eines Teams öffnet der Radiergummi-Button <b>Von vorn beginnen</b>: Danach ist das Team wieder ungespielt. In den Einstellungen macht <b>Alle Rekorde löschen</b> das für alle Teams, und <b>Escuadra zurücksetzen</b> stellt alles wieder so ein wie beim ersten Start.',
+        a: 'Auf dem Bildschirm eines Teams öffnet der Radiergummi <b>Von vorn beginnen</b>: Danach ist das Team wieder ungespielt. In den Einstellungen macht <b>Alle Rekorde löschen</b> das für alle Teams, und <b>Escuadra zurücksetzen</b> stellt alles wieder so ein wie beim ersten Start.',
       },
     ],
   },
