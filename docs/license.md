@@ -277,13 +277,16 @@ licences do not grant.
 
 ### On the website
 
-The site's home page (`index.html` on `gh-pages`) shows Results' miss cards with their
-players' Commons photos. The owner decided on 2026-11-03 to use them (#279). They are
-hotlinked as in the app, and credited beside the cards as Results credits them: under
-"Photo credits · N", each with its author linking the Commons page, its licence linking
-the deed, and "cropped". A line beside the credits says the photos load from Wikimedia
-Commons, so Wikimedia receives the visitor's IP address and the details of each request.
-The site's tests check that every photo shown is credited. Like a listing, the site is
+The site's home page (`index.html` on `gh-pages`) shows Commons player photos in two
+places: Results' miss cards, and the stage of its playable teaser. The owner decided on
+2026-11-03 to use them (#279, #282). They are hotlinked as in the app, and credited below
+each block as Results credits them: under "Photo credits · N", each with its author
+linking the Commons page, its licence linking the deed, and "cropped". The teaser's
+credits name the team and shirt number, not the player, and link the Commons page by its
+page id (`?curid=`), because the file name in the usual link would show the answer when a
+pointer hovers it. A line under each block says the photos load from Wikimedia Commons,
+so Wikimedia receives the visitor's IP address and the details of each request. The
+site's tests check that every photo shown is credited. Like a listing, the site is
 promotional use, and the same caveat about personality and publicity rights applies.
 
 ## The licences we refuse, and why
