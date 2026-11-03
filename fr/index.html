@@ -51,7 +51,7 @@
     />
     <link rel="stylesheet" href="../site.css" />
     <script type="module" src="../site.mjs"></script>
-    <script type="application/json" id="site-words">{"root":"../","positions":{"GK":"Gardien","DF":"Défenseur","MF":"Milieu","FW":"Attaquant"},"positionCodes":{"GK":"GB","DF":"DÉF","MF":"MIL","FW":"ATT"},"clueCodes":{"club":"Club","nat":"Nat"},"clueSpoken":{"club":"Club","nat":"Nationalité"},"spoken":{"name":"Nom : {name}.","beingAsked":"à trouver","clues":"Poste : {position}. Âge : {age}. {clueLabel} : {clue}.","question":"Question {n} sur {total}. {team}. Qui porte le {number} ? {clues}","score":"Score : {score} sur {answered}","result":"{score} sur {total}"},"whoWears":"Qui porte le {number} ?","hint":{"tap":"Choisis ta réponse","right":"Exact. La suite arrive…","rightLast":"Exact. Ton résultat arrive…"},"next":"Suivant","seeRound":"Voir ton résultat","live":{"right":"Exact : {answer}.","wrong":"Raté. Le {number}, c’est {answer}.","round":"Ta partie : {score} sur {total}. {title}."},"titles":{"perfect":"A la escuadra","learning":"En pleine révision"},"resultCopy":{"perfect":"Trois sur trois. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix.","learning":"Voici les joueurs à retenir. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix, et chaque erreur t’attend sur l’écran Résultats."},"countries":{"ESP":"Espagne","ARG":"Argentine","BRA":"Brésil","FRA":"France","ENG":"Angleterre","JPN":"Japon","GER":"Allemagne","SEN":"Sénégal","ITA":"Italie","MEX":"Mexique","POR":"Portugal","KOR":"Corée du Sud","NED":"Pays-Bas","NGA":"Nigeria","USA":"États-Unis","CRO":"Croatie","URU":"Uruguay","EGY":"Égypte","COL":"Colombie","AUS":"Australie","CAN":"Canada","GHA":"Ghana","ARM":"Arménie"}}</script>
+    <script type="application/json" id="site-words">{"root":"../","positions":{"GK":"Gardien","DF":"Défenseur","MF":"Milieu","FW":"Attaquant"},"positionCodes":{"GK":"GB","DF":"DÉF","MF":"MIL","FW":"ATT"},"clueCodes":{"club":"Club","nat":"Nat"},"clueSpoken":{"club":"Club","nat":"Nationalité"},"spoken":{"name":"Nom : {name}.","beingAsked":"à trouver","clues":"Poste : {position}. Âge : {age}. {clueLabel} : {clue}.","question":"Question {n} sur {total}. {team}. Qui porte le {number} ? {clues}","score":"Score : {score} sur {answered}","result":"{score} sur {total}"},"whoWears":"Qui porte le {number} ?","hint":{"tap":"Choisis ta réponse","right":"Exact. La suite arrive…","rightLast":"Exact. Ton résultat arrive…"},"next":"Suivant","seeRound":"Voir ton résultat","live":{"right":"Exact : {answer}.","wrong":"Raté. Le {number}, c’est {answer}.","round":"Ta partie : {score} sur {total}. {title}."},"titles":{"perfect":"A la escuadra","learning":"En pleine révision"},"resultCopy":{"perfect":"Trois sur trois. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix.","learning":"Voici les joueurs à retenir. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix, et chaque erreur t’attend sur l’écran Résultats."},"countries":{"ESP":"Espagne","ARG":"Argentine","BRA":"Brésil","FRA":"France","ENG":"Angleterre","JPN":"Japon","GER":"Allemagne","SEN":"Sénégal","ITA":"Italie","MEX":"Mexique","POR":"Portugal","KOR":"Corée du Sud","NED":"Pays-Bas","NGA":"Nigeria","USA":"États-Unis","CRO":"Croatie","URU":"Uruguay","EGY":"Égypte","COL":"Colombie","AUS":"Australie","CAN":"Canada","GHA":"Ghana","ARM":"Arménie","SVN":"Slovénie","DEN":"Danemark"}}</script>
   </head>
   <body>
     <header class="site-header shell">
@@ -111,11 +111,11 @@
         <div class="shell hero-grid">
           <div>
             <p class="eyebrow rise">
-              <span class="corner"></span>Quiz d’effectifs de foot · iPhone et Android
+              <span class="corner"></span>Quiz d’effectifs de foot
             </p>
-            <h1 id="hero-title" class="display rise">Les numéros,<br />par cœur.</h1>
+            <h1 id="hero-title" class="display rise">Qui porte le 7 ?</h1>
             <p class="lead rise">
-              Qui porte le numéro 7 ? Apprends les effectifs de tous les clubs du top 5 européen et de plus de 150 sélections en parties rapides, puis vois qui tu as raté.
+              Les numéros, par cœur. Apprends les effectifs de tous les clubs du top 5 européen et de plus de 150 sélections en parties éclair.
             </p>
             <div class="badges rise">
               <a
@@ -157,11 +157,6 @@
             <p class="body-copy">
               Voilà le principe : un numéro de maillot et quelques indices, puis tu choisis le joueur. Ici, trois questions ; dans l’appli, dix par partie, avec l’équipe de ton choix.
             </p>
-            <ol class="steps">
-              <li><span class="step-number">01</span><span>Lis le numéro et les indices : poste, âge et club ou nationalité.</span></li>
-              <li><span class="step-number">02</span><span>Appuie sur un nom. Juste ou faux, tu le sais tout de suite.</span></li>
-              <li><span class="step-number">03</span><span>À la fin, retrouve exactement qui tu as raté.</span></li>
-            </ol>
           </div>
 
           <div class="photo-col">
@@ -265,9 +260,6 @@
                   · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> · recadrée
                 </li>
               </ul>
-              <p>
-                Ces photos sont chargées depuis Wikimedia Commons. Comme tout site web, Wikimedia reçoit donc ton adresse IP et les détails de chaque requête.
-              </p>
             </div>
           </div>
         </div>
@@ -296,7 +288,7 @@
                 <span aria-hidden="true">8/10 au niveau 1</span>
               </p>
               <h3 class="display">Nom et poste</h3>
-              <p>Le nom, puis le poste : GB, DÉF, MIL ou ATT.</p>
+              <p>Le nom, puis le poste : gardien, défenseur, milieu ou attaquant.</p>
             </article>
             <article class="rung" data-reveal>
               <span class="rung-number numbers" aria-hidden="true">3</span>
@@ -312,7 +304,7 @@
             </article>
           </div>
           <p class="ladder-note" data-reveal>
-            Chaque question compte pour un point. Aux niveaux 2 et 3, tu ne marques le point que si tu réussis chaque étape : pas de point partiel.
+            Chaque question compte pour un point. Aux niveaux 2 et 3, tu ne marques le point que si tu réussis chaque étape.
           </p>
         </div>
       </section>
@@ -323,10 +315,7 @@
             <p class="eyebrow"><span class="corner"></span>Résultats et Effectif</p>
             <h2 id="misses-title" class="display section-title">C’est en ratant qu’on apprend.</h2>
             <p class="body-copy">
-              Après chaque partie, l’écran Résultats affiche tous les joueurs ratés, un par carte. Fais-les défiler pour les revoir avant la partie suivante.
-            </p>
-            <p class="body-copy">
-              L’écran Effectif affiche tous les joueurs de l’équipe, en cartes ou en liste. Appuie sur « Cacher noms » pour te tester.
+              Après chaque partie, revois les joueurs ratés ou révise tout l’effectif, puis reviens faire un sans-faute.
             </p>
           </div>
           <div class="photo-col">
@@ -409,9 +398,6 @@
                   · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> · recadrée
                 </li>
               </ul>
-              <p>
-                Ces photos sont chargées depuis Wikimedia Commons. Comme tout site web, Wikimedia reçoit donc ton adresse IP et les détails de chaque requête.
-              </p>
             </div>
           </div>
         </div>
@@ -422,7 +408,7 @@
           <div data-reveal>
             <p class="eyebrow"><span class="corner"></span>Au programme</p>
             <h2 id="squads-title" class="display section-title">
-              D’Arsenal<br />à l’Arménie.
+              De ton club<br />à ta sélection.
             </h2>
           </div>
           <div class="stats">
@@ -448,10 +434,10 @@
           <div class="marquee-track">
             <ul aria-label="Quelques-uns des clubs d’Escuadra">
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 100%)"></span>Real Madrid</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #0068a8 0% 50%, #000000 50% 100%)"></span>Inter Milan</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #a50044 0% 50%, #004d98 50% 100%)"></span>Barcelona</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ef0107 0% 100%)"></span>Arsenal</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #dc052d 0% 100%)"></span>Bayern Munich</li>
-              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #0068a8 0% 50%, #000000 50% 100%)"></span>Inter Milan</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #004170 0% 40%, #da291c 40% 60%, #004170 60% 100%)"></span>Paris Saint-Germain</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #c8102e 0% 100%)"></span>Liverpool</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #fde100 0% 50%, #000000 50% 100%)"></span>Borussia Dortmund</li>
@@ -474,10 +460,10 @@
             </ul>
             <ul aria-hidden="true">
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 100%)"></span>Real Madrid</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #0068a8 0% 50%, #000000 50% 100%)"></span>Inter Milan</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #a50044 0% 50%, #004d98 50% 100%)"></span>Barcelona</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ef0107 0% 100%)"></span>Arsenal</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #dc052d 0% 100%)"></span>Bayern Munich</li>
-              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #0068a8 0% 50%, #000000 50% 100%)"></span>Inter Milan</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #004170 0% 40%, #da291c 40% 60%, #004170 60% 100%)"></span>Paris Saint-Germain</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #c8102e 0% 100%)"></span>Liverpool</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #fde100 0% 50%, #000000 50% 100%)"></span>Borussia Dortmund</li>
@@ -503,7 +489,6 @@
         <div class="marquee is-reverse">
           <div class="marquee-track">
             <ul aria-label="Quelques-unes des sélections d’Escuadra">
-              <li class="team"><img src="../assets/flags/ESP.png" alt="" />Espagne</li>
               <li class="team"><img src="../assets/flags/ARG.png" alt="" />Argentine</li>
               <li class="team"><img src="../assets/flags/BRA.png" alt="" />Brésil</li>
               <li class="team"><img src="../assets/flags/FRA.png" alt="" />France</li>
@@ -525,10 +510,12 @@
               <li class="team"><img src="../assets/flags/AUS.png" alt="" />Australie</li>
               <li class="team"><img src="../assets/flags/CAN.png" alt="" />Canada</li>
               <li class="team"><img src="../assets/flags/GHA.png" alt="" />Ghana</li>
+              <li class="team"><img src="../assets/flags/ESP.png" alt="" />Espagne</li>
               <li class="team"><img src="../assets/flags/ARM.png" alt="" />Arménie</li>
+              <li class="team"><img src="../assets/flags/SVN.png" alt="" />Slovénie</li>
+              <li class="team"><img src="../assets/flags/DEN.png" alt="" />Danemark</li>
             </ul>
             <ul aria-hidden="true">
-              <li class="team"><img src="../assets/flags/ESP.png" alt="" />Espagne</li>
               <li class="team"><img src="../assets/flags/ARG.png" alt="" />Argentine</li>
               <li class="team"><img src="../assets/flags/BRA.png" alt="" />Brésil</li>
               <li class="team"><img src="../assets/flags/FRA.png" alt="" />France</li>
@@ -550,14 +537,16 @@
               <li class="team"><img src="../assets/flags/AUS.png" alt="" />Australie</li>
               <li class="team"><img src="../assets/flags/CAN.png" alt="" />Canada</li>
               <li class="team"><img src="../assets/flags/GHA.png" alt="" />Ghana</li>
+              <li class="team"><img src="../assets/flags/ESP.png" alt="" />Espagne</li>
               <li class="team"><img src="../assets/flags/ARM.png" alt="" />Arménie</li>
+              <li class="team"><img src="../assets/flags/SVN.png" alt="" />Slovénie</li>
+              <li class="team"><img src="../assets/flags/DEN.png" alt="" />Danemark</li>
             </ul>
           </div>
         </div>
 
         <div class="shell squads-note">
           <span class="leagues">Premier League · La Liga · Serie A · Bundesliga · Ligue 1</span>
-          <span>Les effectifs sont mis à jour chaque saison : les nouvelles équipes arrivent sans mise à jour de l’appli.</span>
         </div>
       </section>
 
@@ -601,7 +590,7 @@
               En espagnol, une frappe en pleine lucarne. Fais dix sur dix, et Escuadra te l’annonce.
             </p>
             <p class="body-copy">
-              Partage ensuite ta partie en image ou en texte. Sans photo ni nom : tes amis peuvent quand même y jouer.
+              Partage ensuite ta partie et montre à tout le monde que tu connais l’effectif les yeux fermés.
             </p>
           </div>
         </div>
@@ -610,49 +599,23 @@
       <section class="section" style="padding-top: 40px" aria-labelledby="promises-title">
         <div class="shell">
           <div data-reveal>
-            <p class="eyebrow"><span class="corner"></span>Pensé pour des sessions courtes</p>
+            <p class="eyebrow"><span class="corner"></span>Joue où tu veux</p>
             <h2 id="promises-title" class="display section-title">
-              Toi et l’effectif.<br />Rien d’autre.
+              Tous les effectifs,<br />dans ta poche.
             </h2>
           </div>
           <div class="promises">
             <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c.8-3.5 3.6-5.5 7-5.5s6.2 2 7 5.5" /><path d="M3.5 3.5l17 17" /></svg>
-              <h3>Sans compte. Sans pub.</h3>
-              <p>Aucune inscription, rien pour te ralentir. Ouvre l’appli et joue.</p>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2.5" /><path d="M6 15.5l2.5-7 2.5 7M6.9 13h3.2M13.5 8.5v7h1.5a3.5 3.5 0 0 0 0-7z" /><path d="M3.5 3.5l17 17" /></svg>
+              <h3>Sans pub</h3>
             </article>
             <article class="promise" data-reveal>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M2.5 8.8a15 15 0 0 1 4-2.6" /><path d="M10.6 4.7A15 15 0 0 1 21.5 8.8" /><path d="M5.3 12.3a10 10 0 0 1 3.2-2" /><path d="M15.4 10.4a10 10 0 0 1 3.3 1.9" /><path d="M8.6 15.7a5 5 0 0 1 6.8 0" /><circle cx="12" cy="19.2" r=".9" fill="currentColor" /><path d="M3.5 3.5l17 17" /></svg>
-              <h3>Joue sans connexion</h3>
-              <p>
-                Tous les effectifs sont enregistrés sur ton téléphone. Les photos se chargent depuis Wikimedia Commons quand tu es en ligne ; sinon, les couleurs de l’équipe les remplacent.
-              </p>
-            </article>
-            <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" /><circle cx="9" cy="10" r="1.8" /><path d="M21 16l-5.2-5.2L7 19" /></svg>
-              <h3>Photos créditées</h3>
-              <p>
-                Une photo de Wikimedia Commons pour chaque joueur qui en a une, avec son auteur et sa licence.
-              </p>
+              <h3>Jouable hors connexion</h3>
             </article>
             <article class="promise" data-reveal>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9s1.3-6.4 3.8-9z" /></svg>
-              <h3>Cinq langues</h3>
-              <p>
-                English, Español, Français, Italiano et Deutsch. L’appli suit la langue de ton téléphone, ou tu peux en choisir une dans Réglages.
-              </p>
-            </article>
-            <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" /></svg>
-              <h3>Clair et sombre</h3>
-              <p>L’appli suit l’apparence de ton téléphone, ou c’est toi qui choisis.</p>
-            </article>
-            <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" /><path d="M10.5 18.5h3" /></svg>
-              <h3>Statistiques anonymes, désactivables</h3>
-              <p>
-                Escuadra envoie des statistiques d’utilisation anonymes, sauf si tu les désactives dans Réglages. <a href="../privacy/2/fr.html">La politique de confidentialité</a> détaille tout ce qui quitte ton appareil.
-              </p>
+              <h3>Disponible en 5 langues</h3>
             </article>
           </div>
         </div>
@@ -668,7 +631,6 @@
         <div class="final-fade" aria-hidden="true"></div>
         <div class="shell final-inner" data-reveal>
           <h2 id="get-title" class="display">Ton effectif,<br />les yeux fermés.</h2>
-          <p>Escuadra est disponible sur iPhone et Android.</p>
           <div class="badges">
             <a
               href="https://apps.apple.com/app/escuadra/id6810705505"

@@ -37,20 +37,15 @@ export default {
   },
   home: {
     hero: {
-      eyebrow: 'Football squad trainer · iPhone &amp; Android',
-      title: 'Know every<br />number.',
-      lead: 'Who wears number 7? Learn every club in Europe’s top five leagues and over 150 national teams in quick rounds, then see exactly who you missed.',
+      eyebrow: 'Football squad trainer',
+      title: 'Who wears 7?',
+      lead: 'Know every number. Learn every club in Europe’s top five leagues and over 150 national teams in quick-fire rounds.',
       tryLink: 'Or try a question right here',
     },
     try: {
       eyebrow: 'Try one · Level 1',
       title: 'One number.<br />Four names.',
       body: 'This is how the app plays: a shirt number and a few clues, then you pick the player. Three questions here; ten in a round, for any squad you choose.',
-      steps: [
-        'Read the number and the clues: position, age, and club or nationality.',
-        'Tap a name. Right or wrong, you know at once.',
-        'At the end, see exactly who you missed.',
-      ],
       level: 'Level 1',
       nameKey: 'Name',
       positionKey: 'Pos',
@@ -61,8 +56,6 @@ export default {
     credits: {
       title: 'Photo credits · 3',
       cropped: 'cropped',
-      wikimedia:
-        'These photos load from Wikimedia Commons, so Wikimedia receives your IP address and the details of each request, as any website does.',
     },
     how: {
       eyebrow: 'The ladder',
@@ -72,20 +65,19 @@ export default {
       locked: 'Score 8/10 on L{level}',
       levels: [
         { title: 'Name from Number', body: 'Given a shirt number, pick the player from 4 options.' },
-        { title: 'Name + Position', body: 'Pick the name, then the position — GK, DF, MF, or FW.' },
+        { title: 'Name + Position', body: 'Pick the name, then the position — goalkeeper, defender, midfielder, or forward.' },
         {
           title: 'Full Profile',
           body: 'Name from 6 options, then position, then nationality — or club, for a national team.',
         },
       ],
-      note: 'Each question is worth one point. On levels 2 and 3, you get the point only if every part is right: no partial credit.',
+      note: 'Each question is worth one point. On levels 2 and 3, you get the point only if every part is right.',
     },
     misses: {
       eyebrow: 'Results and Study',
-      title: 'The misses are the point.',
+      title: 'Every miss is a lesson.',
       body: [
-        'After every round, Results lays out each player you got wrong as a card to swipe through, so you can go over them before the next round.',
-        'Study shows the whole squad as cards or a list. Switch on Hide names and test yourself.',
+        'After every round, go over the players you missed or study the whole squad, then come back and ace it.',
       ],
       stackLabel: 'Real Madrid · 2026/27 · Level 2 · 7/10',
       missedOf: 'Missed {n} of 3',
@@ -93,7 +85,7 @@ export default {
     },
     squads: {
       eyebrow: 'What’s inside',
-      title: 'From Arsenal<br />to Armenia.',
+      title: 'From your club<br />to your country.',
       stats: [
         { title: 'Clubs', body: 'Every club in Europe’s top five leagues.' },
         { title: 'National teams', body: 'From all six confederations.' },
@@ -101,7 +93,6 @@ export default {
       ],
       clubsLabel: 'Some of the clubs in Escuadra',
       nationsLabel: 'Some of the national teams in Escuadra',
-      refreshed: 'Squads are refreshed each season — new teams arrive without an app update.',
     },
     share: {
       pictureLabel:
@@ -112,36 +103,16 @@ export default {
       title: 'A flawless round has a name.',
       body: [
         'Spanish for a shot into the top corner of the goal. Go ten for ten and Escuadra says so.',
-        'Then share the round as a picture or as text. No player photos, no names — friends can still play it.',
+        'Then share it, and show everyone you know the squad cold.',
       ],
     },
     promises: {
-      eyebrow: 'Made for short sessions',
-      title: 'Nothing between you<br />and the squad.',
-      items: [
-        { title: 'No account. No ads.', body: 'Nothing to sign up for and nothing in the way. Open it and play.' },
-        {
-          title: 'Plays offline',
-          body: 'Every squad lives on your phone. Photos load from Wikimedia Commons when you’re online; the team’s colours stand in when you’re not.',
-        },
-        {
-          title: 'Credited photos',
-          body: 'Player photos from Wikimedia Commons where one is available, each with its author and licence.',
-        },
-        {
-          title: 'Five languages',
-          body: 'English, Español, Français, Italiano and Deutsch. It follows your phone’s language, or you can pick one in Settings.',
-        },
-        { title: 'Light and dark', body: 'It follows your phone’s appearance, or you can choose one yourself.' },
-        {
-          title: 'Anonymous statistics you can switch off',
-          body: 'Escuadra sends anonymous usage statistics unless you switch them off in Settings. <a href="{privacy}">The privacy policy</a> lists everything that leaves your device.',
-        },
-      ],
+      eyebrow: 'Play anywhere',
+      title: 'Your squad,<br />in your pocket.',
+      items: ['No ads', 'Plays offline', 'Available in 5 languages'],
     },
     get: {
       title: 'Know the squad.<br />Cold.',
-      body: 'Escuadra is on iPhone and Android.',
     },
     footer: {
       escuadraHeading: 'Escuadra',
@@ -199,7 +170,7 @@ export default {
     JPN: 'Japan', GER: 'Germany', SEN: 'Senegal', ITA: 'Italy', MEX: 'Mexico',
     POR: 'Portugal', KOR: 'South Korea', NED: 'Netherlands', NGA: 'Nigeria',
     USA: 'United States', CRO: 'Croatia', URU: 'Uruguay', EGY: 'Egypt', COL: 'Colombia',
-    AUS: 'Australia', CAN: 'Canada', GHA: 'Ghana', ARM: 'Armenia',
+    AUS: 'Australia', CAN: 'Canada', GHA: 'Ghana', ARM: 'Armenia', SVN: 'Slovenia', DEN: 'Denmark',
   },
   teaser: {
     positions: { GK: 'Keeper', DF: 'Defender', MF: 'Midfield', FW: 'Forward' },
