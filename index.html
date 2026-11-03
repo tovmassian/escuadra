@@ -4,7 +4,11 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
-    <title>Escuadra</title>
+    <title>Escuadra — learn football squads by shirt number</title>
+    <meta
+      name="description"
+      content="Who wears number 7? Learn every club in Europe’s top five leagues and over 150 national teams in quick rounds, then see exactly who you missed."
+    />
     <script>
       try {
         const saved = localStorage.getItem('escuadra-site-theme');
@@ -24,6 +28,20 @@
       }
       document.documentElement.dataset.js = 'true';
     </script>
+    <link
+      rel="preload"
+      href="assets/fonts/archivo/Archivo-SemiExpandedExtraBold.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
+    <link
+      rel="preload"
+      href="assets/fonts/archivo/Archivo-ExtraCondensedBlack.ttf"
+      as="font"
+      type="font/ttf"
+      crossorigin
+    />
     <link rel="stylesheet" href="site.css" />
     <script type="module" src="site.mjs"></script>
   </head>
@@ -31,133 +49,594 @@
     <header class="site-header shell">
       <a class="brand" href="index.html" aria-label="Escuadra home">
         <span class="brand-mark" aria-hidden="true">
-          <img src="assets/favicon.ico" />
+          <img src="assets/favicon.ico" alt="" />
         </span>
         <span>escuadra</span>
       </a>
       <nav aria-label="Utility">
-        <a href="privacy.html">Privacy</a><a href="support.html">Support</a>
+        <a href="#try">Try a question</a><a href="#how">How it works</a
+        ><a href="#squads">Squads</a><a href="support.html">Support</a
+        ><a href="privacy/2/">Privacy</a>
       </nav>
-      <button
-        type="button"
-        class="theme-toggle"
-        data-theme-toggle
-        aria-pressed="false"
-      >
-        <span class="theme-toggle-icon" aria-hidden="true">◐</span
-        ><span data-theme-toggle-label></span>
-      </button>
+      <div class="header-actions">
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+        >
+          <span class="theme-toggle-icon" aria-hidden="true">◐</span
+          ><span data-theme-toggle-label></span>
+        </button>
+        <a class="pill pill-small" href="#get">Get the app</a>
+      </div>
     </header>
+
     <main>
-      <section class="hero shell" aria-label="Know the squad. Cold.">
-        <div class="hero-copy" data-reveal>
-          <p class="eyebrow">Football, learned</p>
-          <h1>Know the squad. Cold.</h1>
-          <p>Ten fast questions. One squad you can name under pressure.</p>
-          <div class="release-bar" aria-label="Release status">
-            <span>Now on</span>
-            <a
-              href="https://apps.apple.com/us/app/escuadra/id6810705505"
-              aria-label="Download Escuadra on the App Store"
-            >
-              <img
-                class="badge"
-                src="assets/badges/app-store-badge-black.svg"
-                alt=""
-              />
-            </a>
-            <a
-              href="https://play.google.com/store/apps/details?id=com.tovmassian.escuadra"
-              aria-label="Get Escuadra on Google Play"
-            >
-              <img
-                class="badge"
-                src="assets/badges/google-play-badge.svg"
-                alt=""
-              />
-            </a>
+      <section class="hero" aria-labelledby="hero-title">
+        <div class="wall" aria-hidden="true">
+          <div class="wall-row">
+            <span>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23</span
+            ><span>1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23</span>
+          </div>
+          <div class="wall-row">
+            <span>5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27</span
+            ><span>5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27</span>
+          </div>
+          <div class="wall-row">
+            <span>16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38</span
+            ><span>16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38</span>
+          </div>
+          <div class="wall-row">
+            <span>17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39</span
+            ><span>17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39</span>
           </div>
         </div>
-        <div class="matchcard-number" data-reveal aria-label="Shirt number 07">
-          07
+        <div class="hero-fade" aria-hidden="true"></div>
+        <div class="shell hero-grid">
+          <div>
+            <p class="eyebrow rise">
+              <span class="corner"></span>Football squad trainer · iPhone &amp; Android
+            </p>
+            <h1 id="hero-title" class="display rise">Know every<br />number.</h1>
+            <p class="lead rise">
+              Who wears number 7? Learn every club in Europe’s top five leagues and over
+              150 national teams in quick rounds, then see exactly who you missed.
+            </p>
+            <div class="badges rise">
+              <a
+                href="https://apps.apple.com/us/app/escuadra/id6810705505"
+                aria-label="Download on the App Store"
+                ><img class="badge" src="assets/badges/app-store-badge-black.svg" alt=""
+              /></a>
+              <a
+                href="https://play.google.com/store/apps/details?id=com.tovmassian.escuadra"
+                aria-label="Get it on Google Play"
+                ><img class="badge" src="assets/badges/google-play-badge.svg" alt=""
+              /></a>
+            </div>
+            <a class="try-link rise" href="#try">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6" /></svg>
+              Or try a question right here
+            </a>
+          </div>
+          <div class="hero-number" aria-hidden="true">
+            <span class="lit numbers">7</span>
+            <svg class="hero-mark" viewBox="0 0 64 64">
+              <g class="mark-frame" fill="currentColor">
+                <rect x="14" y="10" width="40" height="10" />
+                <rect x="44" y="10" width="10" height="40" />
+              </g>
+              <circle class="mark-ball" cx="35" cy="31" r="9" fill="currentColor" />
+              <rect class="mark-trail" x="16" y="44" width="7" height="7" fill="currentColor" opacity="0.55" />
+              <rect class="mark-trail" x="5" y="53" width="5" height="5" fill="currentColor" opacity="0.3" />
+            </svg>
+          </div>
         </div>
-        <div class="team-band" aria-hidden="true"></div>
       </section>
 
-      <section class="proof shell" aria-label="See the app">
-        <figure class="screen-card" data-reveal>
-          <img
-            class="screen-image screen-image--dark"
-            src="assets/marketing/home-dark.png"
-            alt="Escuadra's dark home screen with the escuadra logo and a Start Training button"
-          />
-          <img
-            class="screen-image screen-image--light"
-            src="assets/marketing/home-light.png"
-            alt="Escuadra's light home screen with the escuadra logo and a Start Training button"
-          />
-          <figcaption>Pick a club or national squad</figcaption>
-        </figure>
-        <figure class="screen-card" data-reveal>
-          <img
-            class="screen-image screen-image--dark"
-            src="assets/marketing/question-dark.png"
-            alt="Escuadra's dark question screen showing shirt number 7 and four player answer choices"
-          />
-          <img
-            class="screen-image screen-image--light"
-            src="assets/marketing/question-light.png"
-            alt="Escuadra's light question screen showing shirt number 7 and four player answer choices"
-          />
-          <figcaption>Match the shirt number to the player</figcaption>
-        </figure>
-        <figure class="screen-card" data-reveal>
-          <img
-            class="screen-image screen-image--dark"
-            src="assets/marketing/results-dark.png"
-            alt="Escuadra's dark results screen showing a 9 out of 10 score and level cleared summary"
-          />
-          <img
-            class="screen-image screen-image--light"
-            src="assets/marketing/results-light.png"
-            alt="Escuadra's light results screen showing a 9 out of 10 score and level cleared summary"
-          />
-          <figcaption>See exactly who you missed</figcaption>
-        </figure>
+      <section class="section" id="try" aria-labelledby="try-title">
+        <div class="shell try-grid">
+          <div data-reveal>
+            <p class="eyebrow"><span class="corner"></span>Try one · Level 1</p>
+            <h2 id="try-title" class="display section-title">One number.<br />Four names.</h2>
+            <p class="body-copy">
+              This is how the app plays: a shirt number and a few clues, then you pick the
+              player. Three questions here; ten in a round, for any squad you choose.
+            </p>
+            <ol class="steps">
+              <li><span class="step-number">01</span><span>Read the number and the clues: position, age, and club or nationality.</span></li>
+              <li><span class="step-number">02</span><span>Tap a name. Right or wrong, you know at once.</span></li>
+              <li><span class="step-number">03</span><span>At the end, see exactly who you missed.</span></li>
+            </ol>
+          </div>
+
+          <div class="quiz" data-quiz>
+            <div class="stage" data-quiz-stage>
+              <div class="stage-top">
+                <div class="segments" aria-hidden="true">
+                  <span class="seg is-now" data-quiz-segment></span
+                  ><span class="seg" data-quiz-segment></span
+                  ><span class="seg" data-quiz-segment></span>
+                </div>
+                <div class="stage-head">
+                  <div>
+                    <p class="stage-team" data-quiz-team>Spain</p>
+                    <p class="stage-level"><span class="stage-banner"></span>Level 1</p>
+                  </div>
+                  <p class="stage-score" data-quiz-score aria-hidden="true">0/0</p>
+                  <p class="sr-only" data-quiz-score-spoken>Score: 0 of 0</p>
+                </div>
+              </div>
+              <span class="stage-number numbers" data-quiz-number>19</span>
+            </div>
+
+            <div class="quiz-play" data-quiz-play>
+              <p class="sr-only" data-quiz-spoken>
+                Name: being asked. Position: Forward. Age: 19. Club: Barcelona.
+              </p>
+              <ul class="chips" aria-hidden="true">
+                <li class="chip chip-name" data-quiz-name>
+                  <span class="chip-key">Name</span><span data-quiz-name-value>?</span>
+                </li>
+                <li class="chip">
+                  <span class="chip-key">Pos</span><span data-quiz-position>FW</span>
+                </li>
+                <li class="chip">
+                  <span class="chip-key">Age</span><span data-quiz-age>19</span>
+                </li>
+                <li class="chip">
+                  <span class="chip-key" data-quiz-clue-label>Club</span
+                  ><img class="chip-flag" src="assets/flags/ENG.png" alt="" data-quiz-flag hidden
+                  /><span data-quiz-clue>Barcelona</span>
+                </li>
+              </ul>
+              <p class="display quiz-title" data-quiz-title>Who wears 19?</p>
+              <div class="tiles">
+                <button type="button" class="tile" data-quiz-option>Mikel Oyarzabal</button>
+                <button type="button" class="tile" data-quiz-option>Lamine Yamal</button>
+                <button type="button" class="tile" data-quiz-option>Yéremy Pino</button>
+                <button type="button" class="tile" data-quiz-option>Víctor Muñoz</button>
+              </div>
+              <div class="quiz-foot">
+                <p class="quiz-hint" data-quiz-hint>Tap your answer</p>
+                <button type="button" class="pill" data-quiz-next hidden>Next</button>
+              </div>
+            </div>
+            <p class="sr-only" aria-live="polite" data-quiz-live></p>
+
+            <div class="quiz-result" data-quiz-result hidden>
+              <p class="eyebrow"><span class="corner"></span>Your round · 3 questions</p>
+              <p class="result-score numbers" aria-hidden="true">
+                <span class="result-n" data-quiz-result-score>0</span
+                ><span class="result-total" data-quiz-result-total>/3</span>
+              </p>
+              <p class="sr-only" data-quiz-result-spoken>0 of 3</p>
+              <p class="display result-title" data-quiz-result-title>Still learning</p>
+              <ul class="missed" data-quiz-missed></ul>
+              <p class="result-copy" data-quiz-result-copy></p>
+              <div class="result-actions">
+                <a class="pill" href="#get">Get the app</a>
+                <button type="button" class="pill pill-ghost" data-quiz-restart>Play again</button>
+              </div>
+            </div>
+          </div>
+        </div>
       </section>
 
-      <section class="facts shell" aria-label="How Escuadra works">
-        <article data-reveal>
-          <h2>10-question rounds</h2>
-          <p>Fast sessions built for repetition, not filler.</p>
-        </article>
-        <article data-reveal>
-          <h2>Club &amp; national squads</h2>
-          <p>Choose the team you want to know before the next match.</p>
-        </article>
-        <article data-reveal>
-          <h2>Works offline</h2>
-          <p>Every round plays without a connection, and there's no account to make.</p>
-        </article>
+      <section class="section" id="how" aria-labelledby="how-title">
+        <div class="shell">
+          <div data-reveal>
+            <p class="eyebrow"><span class="corner"></span>The ladder</p>
+            <h2 id="how-title" class="display section-title">
+              Three levels.<br />Climb them squad by squad.
+            </h2>
+          </div>
+          <div class="ladder">
+            <article class="rung is-first" data-reveal>
+              <span class="rung-number numbers" aria-hidden="true">1</span>
+              <p class="rung-tag">Start here</p>
+              <h3 class="display">Name from Number</h3>
+              <p>Given a shirt number, pick the player from 4 options.</p>
+            </article>
+            <article class="rung" data-reveal>
+              <span class="rung-number numbers" aria-hidden="true">2</span>
+              <p class="rung-tag">
+                <span class="sr-only">Locked: score 8 of 10 on level 1</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
+                <span aria-hidden="true">Score 8/10 on L1</span>
+              </p>
+              <h3 class="display">Name + Position</h3>
+              <p>Pick the name, then the position — GK, DF, MF, or FW.</p>
+            </article>
+            <article class="rung" data-reveal>
+              <span class="rung-number numbers" aria-hidden="true">3</span>
+              <p class="rung-tag">
+                <span class="sr-only">Locked: score 8 of 10 on level 2</span>
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2" /><path d="M8 11V8a4 4 0 0 1 8 0v3" /></svg>
+                <span aria-hidden="true">Score 8/10 on L2</span>
+              </p>
+              <h3 class="display">Full Profile</h3>
+              <p>
+                Name from 6 options, then position, then nationality — or club, for a
+                national team.
+              </p>
+            </article>
+          </div>
+          <p class="ladder-note" data-reveal>
+            Each question is worth one point. On levels 2 and 3, you get the point only if
+            every part is right: no partial credit.
+          </p>
+        </div>
       </section>
 
-      <section class="trust shell" aria-label="Privacy commitment">
-        <p>No ads. No account. No personal data.</p>
+      <section class="section" aria-labelledby="misses-title">
+        <div class="shell split">
+          <div data-reveal>
+            <p class="eyebrow"><span class="corner"></span>Results and Study</p>
+            <h2 id="misses-title" class="display section-title">The misses are the point.</h2>
+            <p class="body-copy">
+              After every round, Results lays out each player you got wrong as a card to
+              swipe through, so you can go over them before the next round.
+            </p>
+            <p class="body-copy">
+              Study shows the whole squad as cards or a list. Switch on Hide names and
+              test yourself.
+            </p>
+          </div>
+          <div class="stack-wrap" aria-hidden="true">
+            <p class="stack-label">Barcelona · 2026/27 · Level 2 · 7/10</p>
+            <div class="stack">
+              <div class="miss-card">
+                <span class="miss-card-number numbers">8</span>
+                <div class="miss-card-foot">
+                  <p class="miss-card-count">Missed 1 of 3</p>
+                  <p class="miss-card-name">Pedri</p>
+                  <p class="miss-card-tags"><span>MF</span><span class="is-miss">Missed · name</span></p>
+                </div>
+              </div>
+              <div class="miss-card">
+                <span class="miss-card-number numbers">6</span>
+                <div class="miss-card-foot">
+                  <p class="miss-card-count">Missed 2 of 3</p>
+                  <p class="miss-card-name">Gavi</p>
+                  <p class="miss-card-tags"><span>MF</span><span class="is-miss">Missed · position</span></p>
+                </div>
+              </div>
+              <div class="miss-card">
+                <span class="miss-card-number numbers">20</span>
+                <div class="miss-card-foot">
+                  <p class="miss-card-count">Missed 3 of 3</p>
+                  <p class="miss-card-name">Dani Olmo</p>
+                  <p class="miss-card-tags"><span>MF</span><span class="is-miss">Missed · name</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" id="squads" aria-labelledby="squads-title">
+        <div class="shell">
+          <div data-reveal>
+            <p class="eyebrow"><span class="corner"></span>What’s inside</p>
+            <h2 id="squads-title" class="display section-title">
+              From Arsenal<br />to Armenia.
+            </h2>
+          </div>
+          <div class="stats">
+            <div class="stat" data-reveal>
+              <span class="stat-number numbers">96</span>
+              <h3 class="display">Clubs</h3>
+              <p>Every club in Europe’s top five leagues.</p>
+            </div>
+            <div class="stat" data-reveal>
+              <span class="stat-number numbers">157</span>
+              <h3 class="display">National teams</h3>
+              <p>From all six confederations.</p>
+            </div>
+            <div class="stat" data-reveal>
+              <span class="stat-number numbers">5</span>
+              <h3 class="display">Languages</h3>
+              <p>English, Español, Français, Italiano and Deutsch.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="marquee">
+          <div class="marquee-track">
+            <ul aria-label="Some of the clubs in Escuadra">
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 100%)"></span>Real Madrid</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #a50044 0% 50%, #004d98 50% 100%)"></span>Barcelona</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ef0107 0% 100%)"></span>Arsenal</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #dc052d 0% 100%)"></span>Bayern Munich</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #0068a8 0% 50%, #000000 50% 100%)"></span>Inter Milan</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #004170 0% 40%, #da291c 40% 60%, #004170 60% 100%)"></span>Paris Saint-Germain</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #c8102e 0% 100%)"></span>Liverpool</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #fde100 0% 50%, #000000 50% 100%)"></span>Borussia Dortmund</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #000000 0% 50%, #ffffff 50% 100%)"></span>Juventus</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #cb3524 0% 50%, #ffffff 50% 100%)"></span>Atlético Madrid</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #6caddf 0% 100%)"></span>Manchester City</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #fb090b 0% 50%, #000000 50% 100%)"></span>AC Milan</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 50%, #009ddc 50% 100%)"></span>Marseille</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #034694 0% 100%)"></span>Chelsea</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #e32219 0% 50%, #000000 50% 100%)"></span>Bayer Leverkusen</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #12a0d7 0% 100%)"></span>Napoli</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ee2523 0% 50%, #ffffff 50% 100%)"></span>Athletic Bilbao</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #da291c 0% 100%)"></span>Manchester United</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #8e1f2f 0% 75%, #f0bc42 75% 100%)"></span>Roma</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 50%, #0033a0 50% 100%)"></span>Lyon</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 50%, #132257 50% 100%)"></span>Tottenham Hotspur</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #e2001a 0% 50%, #ffffff 50% 100%)"></span>RB Leipzig</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #670e36 0% 50%, #95bfe5 50% 100%)"></span>Aston Villa</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #e51937 0% 50%, #ffffff 50% 100%)"></span>Monaco</li>
+            </ul>
+            <ul aria-hidden="true">
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 100%)"></span>Real Madrid</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #a50044 0% 50%, #004d98 50% 100%)"></span>Barcelona</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ef0107 0% 100%)"></span>Arsenal</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #dc052d 0% 100%)"></span>Bayern Munich</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #0068a8 0% 50%, #000000 50% 100%)"></span>Inter Milan</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #004170 0% 40%, #da291c 40% 60%, #004170 60% 100%)"></span>Paris Saint-Germain</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #c8102e 0% 100%)"></span>Liverpool</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #fde100 0% 50%, #000000 50% 100%)"></span>Borussia Dortmund</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #000000 0% 50%, #ffffff 50% 100%)"></span>Juventus</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #cb3524 0% 50%, #ffffff 50% 100%)"></span>Atlético Madrid</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #6caddf 0% 100%)"></span>Manchester City</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #fb090b 0% 50%, #000000 50% 100%)"></span>AC Milan</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 50%, #009ddc 50% 100%)"></span>Marseille</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #034694 0% 100%)"></span>Chelsea</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #e32219 0% 50%, #000000 50% 100%)"></span>Bayer Leverkusen</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #12a0d7 0% 100%)"></span>Napoli</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ee2523 0% 50%, #ffffff 50% 100%)"></span>Athletic Bilbao</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #da291c 0% 100%)"></span>Manchester United</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #8e1f2f 0% 75%, #f0bc42 75% 100%)"></span>Roma</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 50%, #0033a0 50% 100%)"></span>Lyon</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 50%, #132257 50% 100%)"></span>Tottenham Hotspur</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #e2001a 0% 50%, #ffffff 50% 100%)"></span>RB Leipzig</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #670e36 0% 50%, #95bfe5 50% 100%)"></span>Aston Villa</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #e51937 0% 50%, #ffffff 50% 100%)"></span>Monaco</li>
+            </ul>
+          </div>
+        </div>
+        <div class="marquee is-reverse">
+          <div class="marquee-track">
+            <ul aria-label="Some of the national teams in Escuadra">
+              <li class="team"><img src="assets/flags/ESP.png" alt="" />Spain</li>
+              <li class="team"><img src="assets/flags/ARG.png" alt="" />Argentina</li>
+              <li class="team"><img src="assets/flags/BRA.png" alt="" />Brazil</li>
+              <li class="team"><img src="assets/flags/FRA.png" alt="" />France</li>
+              <li class="team"><img src="assets/flags/ENG.png" alt="" />England</li>
+              <li class="team"><img src="assets/flags/JPN.png" alt="" />Japan</li>
+              <li class="team"><img src="assets/flags/GER.png" alt="" />Germany</li>
+              <li class="team"><img src="assets/flags/SEN.png" alt="" />Senegal</li>
+              <li class="team"><img src="assets/flags/ITA.png" alt="" />Italy</li>
+              <li class="team"><img src="assets/flags/MEX.png" alt="" />Mexico</li>
+              <li class="team"><img src="assets/flags/POR.png" alt="" />Portugal</li>
+              <li class="team"><img src="assets/flags/KOR.png" alt="" />South Korea</li>
+              <li class="team"><img src="assets/flags/NED.png" alt="" />Netherlands</li>
+              <li class="team"><img src="assets/flags/NGA.png" alt="" />Nigeria</li>
+              <li class="team"><img src="assets/flags/USA.png" alt="" />United States</li>
+              <li class="team"><img src="assets/flags/CRO.png" alt="" />Croatia</li>
+              <li class="team"><img src="assets/flags/URU.png" alt="" />Uruguay</li>
+              <li class="team"><img src="assets/flags/EGY.png" alt="" />Egypt</li>
+              <li class="team"><img src="assets/flags/COL.png" alt="" />Colombia</li>
+              <li class="team"><img src="assets/flags/AUS.png" alt="" />Australia</li>
+              <li class="team"><img src="assets/flags/CAN.png" alt="" />Canada</li>
+              <li class="team"><img src="assets/flags/GHA.png" alt="" />Ghana</li>
+              <li class="team"><img src="assets/flags/ARM.png" alt="" />Armenia</li>
+            </ul>
+            <ul aria-hidden="true">
+              <li class="team"><img src="assets/flags/ESP.png" alt="" />Spain</li>
+              <li class="team"><img src="assets/flags/ARG.png" alt="" />Argentina</li>
+              <li class="team"><img src="assets/flags/BRA.png" alt="" />Brazil</li>
+              <li class="team"><img src="assets/flags/FRA.png" alt="" />France</li>
+              <li class="team"><img src="assets/flags/ENG.png" alt="" />England</li>
+              <li class="team"><img src="assets/flags/JPN.png" alt="" />Japan</li>
+              <li class="team"><img src="assets/flags/GER.png" alt="" />Germany</li>
+              <li class="team"><img src="assets/flags/SEN.png" alt="" />Senegal</li>
+              <li class="team"><img src="assets/flags/ITA.png" alt="" />Italy</li>
+              <li class="team"><img src="assets/flags/MEX.png" alt="" />Mexico</li>
+              <li class="team"><img src="assets/flags/POR.png" alt="" />Portugal</li>
+              <li class="team"><img src="assets/flags/KOR.png" alt="" />South Korea</li>
+              <li class="team"><img src="assets/flags/NED.png" alt="" />Netherlands</li>
+              <li class="team"><img src="assets/flags/NGA.png" alt="" />Nigeria</li>
+              <li class="team"><img src="assets/flags/USA.png" alt="" />United States</li>
+              <li class="team"><img src="assets/flags/CRO.png" alt="" />Croatia</li>
+              <li class="team"><img src="assets/flags/URU.png" alt="" />Uruguay</li>
+              <li class="team"><img src="assets/flags/EGY.png" alt="" />Egypt</li>
+              <li class="team"><img src="assets/flags/COL.png" alt="" />Colombia</li>
+              <li class="team"><img src="assets/flags/AUS.png" alt="" />Australia</li>
+              <li class="team"><img src="assets/flags/CAN.png" alt="" />Canada</li>
+              <li class="team"><img src="assets/flags/GHA.png" alt="" />Ghana</li>
+              <li class="team"><img src="assets/flags/ARM.png" alt="" />Armenia</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="shell squads-note">
+          <span class="leagues">Premier League · La Liga · Serie A · Bundesliga · Ligue 1</span>
+          <span>Squads are refreshed each season — new teams arrive without an app update.</span>
+        </div>
+      </section>
+
+      <section class="section" aria-labelledby="escuadra-title">
+        <div class="shell split">
+          <div class="share-stage">
+            <div class="share-glow" aria-hidden="true"></div>
+            <div
+              class="share"
+              role="img"
+              aria-label="Escuadra’s share picture: Barcelona, 2026/27, level 1, 10 out of 10, a la escuadra. The ten shirt numbers, and “Can you name Barcelona’s squad?”"
+            >
+              <div class="share-band"></div>
+              <div class="share-inner">
+                <p class="share-lockup">
+                  <svg width="18" height="18" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><rect x="14" y="10" width="40" height="10" /><rect x="44" y="10" width="10" height="40" /><circle cx="33.5" cy="31" r="7.5" /></svg>
+                  escuadra
+                </p>
+                <p class="share-meta">Barcelona · 2026/27 · Level 1</p>
+                <p class="share-score numbers">
+                  <span class="share-ten">10</span><span class="share-of">/10</span>
+                  <svg class="share-mark" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><rect x="14" y="10" width="40" height="10" /><rect x="44" y="10" width="10" height="40" /><circle cx="35" cy="31" r="9" /><rect x="16" y="44" width="7" height="7" opacity="0.55" /><rect x="5" y="53" width="5" height="5" opacity="0.3" /></svg>
+                </p>
+                <p class="display share-title">A la escuadra</p>
+                <p class="share-grid numbers">
+                  <span>13</span><span>21</span><span>7</span><span>17</span><span>9</span
+                  ><span>8</span><span>23</span><span>4</span><span>18</span><span>10</span>
+                </p>
+                <div class="share-foot">
+                  <p class="share-question">Can you name Barcelona’s squad?</p>
+                  <p class="share-url">tovmassian.github.io/escuadra</p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="copy-first" data-reveal>
+            <p class="eyebrow"><span class="corner"></span>Ten out of ten</p>
+            <h2 id="escuadra-title" class="display section-title">A flawless round has a name.</h2>
+            <p class="display escuadra-word">A la escuadra</p>
+            <p class="body-copy">
+              Spanish for a shot into the top corner of the goal. Go ten for ten and
+              Escuadra says so.
+            </p>
+            <p class="body-copy">
+              Then share the round as a picture or as text. No player photos, no names —
+              friends can still play it.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="section" style="padding-top: 40px" aria-labelledby="promises-title">
+        <div class="shell">
+          <div data-reveal>
+            <p class="eyebrow"><span class="corner"></span>Made for short sessions</p>
+            <h2 id="promises-title" class="display section-title">
+              Nothing between you<br />and the squad.
+            </h2>
+          </div>
+          <div class="promises">
+            <article class="promise" data-reveal>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c.8-3.5 3.6-5.5 7-5.5s6.2 2 7 5.5" /><path d="M3.5 3.5l17 17" /></svg>
+              <h3>No account. No ads.</h3>
+              <p>Nothing to sign up for and nothing in the way. Open it and play.</p>
+            </article>
+            <article class="promise" data-reveal>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M2.5 8.8a15 15 0 0 1 4-2.6" /><path d="M10.6 4.7A15 15 0 0 1 21.5 8.8" /><path d="M5.3 12.3a10 10 0 0 1 3.2-2" /><path d="M15.4 10.4a10 10 0 0 1 3.3 1.9" /><path d="M8.6 15.7a5 5 0 0 1 6.8 0" /><circle cx="12" cy="19.2" r=".9" fill="currentColor" /><path d="M3.5 3.5l17 17" /></svg>
+              <h3>Plays offline</h3>
+              <p>
+                Every squad lives on your phone. Photos load from Wikimedia Commons when
+                you’re online; the team’s colours stand in when you’re not.
+              </p>
+            </article>
+            <article class="promise" data-reveal>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" /><circle cx="9" cy="10" r="1.8" /><path d="M21 16l-5.2-5.2L7 19" /></svg>
+              <h3>Credited photos</h3>
+              <p>
+                Player photos from Wikimedia Commons where one is available, each with its
+                author and licence.
+              </p>
+            </article>
+            <article class="promise" data-reveal>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9s1.3-6.4 3.8-9z" /></svg>
+              <h3>Five languages</h3>
+              <p>
+                English, Español, Français, Italiano and Deutsch. It follows your phone’s
+                language, or you can pick one in Settings.
+              </p>
+            </article>
+            <article class="promise" data-reveal>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" /></svg>
+              <h3>Light and dark</h3>
+              <p>It follows your phone’s appearance, or you can choose one yourself.</p>
+            </article>
+            <article class="promise" data-reveal>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" /><path d="M10.5 18.5h3" /></svg>
+              <h3>Anonymous statistics you can switch off</h3>
+              <p>
+                Escuadra sends anonymous usage statistics unless you switch them off in
+                Settings. <a href="privacy/2/">The privacy policy</a> lists everything that
+                leaves your device.
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="final" id="get" aria-labelledby="get-title">
+        <div class="wall" aria-hidden="true">
+          <div class="wall-row">
+            <span>4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21</span
+            ><span>4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21</span>
+          </div>
+        </div>
+        <div class="final-fade" aria-hidden="true"></div>
+        <div class="shell final-inner" data-reveal>
+          <h2 id="get-title" class="display">Know the squad.<br />Cold.</h2>
+          <p>Escuadra is on iPhone and Android.</p>
+          <div class="badges">
+            <a
+              href="https://apps.apple.com/us/app/escuadra/id6810705505"
+              aria-label="Download on the App Store"
+              ><img class="badge" src="assets/badges/app-store-badge-black.svg" alt=""
+            /></a>
+            <a
+              href="https://play.google.com/store/apps/details?id=com.tovmassian.escuadra"
+              aria-label="Get it on Google Play"
+              ><img class="badge" src="assets/badges/google-play-badge.svg" alt=""
+            /></a>
+          </div>
+        </div>
       </section>
     </main>
+
     <footer class="site-footer shell">
-      <span>&copy; Khachatur Tovmasyan</span>
-      <nav aria-label="Footer">
-        <a href="privacy.html">Privacy</a><a href="support.html">Support</a>
-      </nav>
-      <span class="release-status">Now on the App Store and Google Play</span>
-      <p class="legal-credits">
-        Apple and the Apple logo are trademarks of Apple Inc., registered in
-        the U.S. and other countries. App Store is a service mark of Apple
-        Inc., registered in the U.S. and other countries. Google Play and the
-        Google Play logo are trademarks of Google LLC. Android is a trademark
-        of Google LLC.
-      </p>
+      <div class="footer-top">
+        <div class="footer-brand">
+          <a class="brand" href="index.html" aria-label="Escuadra home">
+            <span class="brand-mark" aria-hidden="true">
+              <img src="assets/favicon.ico" alt="" />
+            </span>
+            <span>escuadra</span>
+          </a>
+          <p class="eyebrow footer-tag">A la escuadra</p>
+        </div>
+        <nav aria-label="Escuadra">
+          <h2>Escuadra</h2>
+          <ul>
+            <li><a href="#try">Try a question</a></li>
+            <li><a href="#how">How it works</a></li>
+            <li><a href="#squads">Squads</a></li>
+          </ul>
+        </nav>
+        <nav aria-label="Footer">
+          <h2>Help</h2>
+          <ul>
+            <li><a href="support.html">Support</a></li>
+            <li><a href="privacy/2/">Privacy policy</a></li>
+            <li><a href="https://github.com/tovmassian/escuadra/issues">Report a problem</a></li>
+          </ul>
+        </nav>
+      </div>
+      <div class="footer-legal">
+        <p class="release-status">Now on the App Store and Google Play</p>
+        <p>
+          Escuadra is an independent, unofficial study tool. It is not affiliated with,
+          endorsed by, or connected to any confederation, league or competition, any
+          national football association, any club, or the Wikimedia Foundation, and no
+          player shown in a photo endorses it. Club, national team and confederation
+          names are used for identification only and remain the property of their owners,
+          as do any club marks visible in player photos.
+        </p>
+        <p class="legal-credits">
+          Apple and the Apple logo are trademarks of Apple Inc., registered in
+          the U.S. and other countries. App Store is a service mark of Apple
+          Inc., registered in the U.S. and other countries. Google Play and the
+          Google Play logo are trademarks of Google LLC. Android is a trademark
+          of Google LLC.
+        </p>
+        <p>&copy; Khachatur Tovmasyan</p>
+      </div>
     </footer>
   </body>
 </html>

@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path/posix';
 
-// privacy.html is the 1.x policy and stays as it was: both store listings link it.
+// privacy.html is the 1.x policy and stays as it was, for installs still on 1.x.
 // The 2.0 policy lives in privacy/2/, one page per language.
 const policyPages = [
   { lang: 'en', file: 'index.html', url: 'privacy/2/' },
@@ -28,25 +28,25 @@ const rootOf = (page) => {
   const up = relative(dirname(page), '.');
   return up ? `${up}/` : '';
 };
-const screenshots = [
-  'assets/marketing/home-dark.png',
-  'assets/marketing/home-light.png',
-  'assets/marketing/question-dark.png',
-  'assets/marketing/question-light.png',
-  'assets/marketing/results-dark.png',
-  'assets/marketing/results-light.png',
-];
-const expectedScreenshotFiles = screenshots.map((path) => path.slice('assets/marketing/'.length));
-
-for (const path of ['site.css', 'site.mjs', 'theme.mjs', ...screenshots]) {
+for (const path of ['site.css', 'site.mjs', 'theme.mjs', 'quiz.mjs']) {
   assert.ok(existsSync(path), `missing local asset: ${path}`);
 }
 
-assert.deepEqual(
-  readdirSync('assets/marketing').sort(),
-  expectedScreenshotFiles.slice().sort(),
-  'marketing screenshot directory contains only the expected paired captures',
-);
+// Everything site.css loads (the fonts, the mark) is served from here.
+const css = readFileSync('site.css', 'utf8');
+for (const [, target] of css.matchAll(/url\(\s*['"]?([^'")]+)['"]?\s*\)/g)) {
+  assert.ok(!/^[a-z][a-z\d+.-]*:|^\/\//i.test(target), `site.css loads nothing remote (${target})`);
+  assert.ok(existsSync(target), `site.css references missing local file: ${target}`);
+}
+// The OFL asks that the licence travel with the fonts.
+for (const face of readdirSync('assets/fonts', { withFileTypes: true }).filter((e) => e.isDirectory())) {
+  const dir = `assets/fonts/${face.name}`;
+  assert.ok(existsSync(`${dir}/OFL.txt`), `${dir} carries its OFL.txt`);
+}
+// A shipped image names its licence where it lives (main's docs/license.md).
+for (const dir of ['assets/fonts', 'assets/flags']) {
+  assert.ok(existsSync(`${dir}/README.md`), `${dir} names its source and licence`);
+}
 
 assert.deepEqual(
   readdirSync(policyDir).sort(),
@@ -59,7 +59,14 @@ for (const page of pages) {
   const root = rootOf(page);
   assert.ok(html.includes(`href="${root}site.css"`), `${page} loads shared CSS`);
   assert.ok(html.includes(`src="${root}site.mjs"`), `${page} loads shared enhancement`);
-  assert.ok(html.includes(`href="${root}privacy.html"`), `${page} links privacy`);
+  // Every live store ships 2.0, so the site's Privacy link is the 2.0 policy.
+  // privacy.html, the 1.x policy, and the policy pages themselves link their own page.
+  const policyLink = page.startsWith(`${policyDir}/`)
+    ? 'index.html'
+    : page === 'privacy.html'
+      ? 'privacy.html'
+      : `${root}privacy/2/`;
+  assert.ok(html.includes(`href="${policyLink}"`), `${page} links the privacy policy`);
   assert.ok(html.includes(`href="${root}support.html"`), `${page} links support`);
   for (const [url] of html.matchAll(/https?:\/\/[^"'\s<)]+/g)) {
     assert.ok(
@@ -83,7 +90,7 @@ for (const page of pages) {
 }
 
 for (const [page, requiredText] of [
-  // 1.x policy: both store listings still link it, so it keeps saying what 1.x does.
+  // 1.x policy: installs still on 1.x rely on it, so it keeps saying what 1.x does.
   ['privacy.html', 'Escuadra does not collect any personal data about you.'],
   ['support.html', 'GitHub Issues'],
 ]) {
@@ -168,8 +175,21 @@ for (const { lang, file } of policyPages) {
 }
 
 const home = readFileSync('index.html', 'utf8');
-assert.match(home, /<h1>Know the squad\. Cold\.<\/h1>/, 'home has the approved headline');
-assert.match(home, /Ten fast questions\. One squad you can name under pressure\./, 'home has the approved supporting copy');
+assert.equal((home.match(/<h1/g) ?? []).length, 1, 'home has exactly one h1');
+assert.match(home, /<h1[^>]*>Know every<br \/>number\.<\/h1>/, 'home has the approved headline');
+// The App Store promotional text, reviewed in store/listing/en.md.
+assert.match(
+  home,
+  /Who wears number 7\? Learn every club in Europe’s top five leagues and over\s+150 national teams in quick rounds, then see exactly who you missed\./,
+  'home has the approved supporting copy',
+);
+assert.match(home, /Know the squad\.<br \/>Cold\./, 'home keeps the earlier headline as its last call');
+assert.match(home, /data-quiz>/, 'home carries the playable teaser');
+assert.equal(
+  (home.match(/data-quiz-option>/g) ?? []).length,
+  4,
+  'the teaser offers four names, as level 1 does',
+);
 // privacy/2/ takes its footer from main's catalogs, so only these three are pinned here.
 for (const page of ['index.html', 'privacy.html', 'support.html']) {
   assert.match(
@@ -186,22 +206,38 @@ const badgeLinks = [
     /<a\s+href="([^"]+)"\s+aria-label="([^"]+)"\s*>\s*<img\s+class="badge[^"]*"\s+src="([^"]+)"\s+alt=""\s*\/>\s*<\/a>/g,
   ),
 ].map(([, href, label, src]) => ({ href, label, src }));
+// Each link is named with its badge's own words, so voice control finds it (label in name).
+const badgePair = [
+  {
+    href: appStoreUrl,
+    label: 'Download on the App Store',
+    src: 'assets/badges/app-store-badge-black.svg',
+  },
+  {
+    href: playStoreUrl,
+    label: 'Get it on Google Play',
+    src: 'assets/badges/google-play-badge.svg',
+  },
+];
+assert.ok(badgeLinks.length > 0, 'home links the store listings');
 assert.deepEqual(
   badgeLinks,
-  [
-    {
-      href: appStoreUrl,
-      label: 'Download Escuadra on the App Store',
-      src: 'assets/badges/app-store-badge-black.svg',
-    },
-    {
-      href: playStoreUrl,
-      label: 'Get Escuadra on Google Play',
-      src: 'assets/badges/google-play-badge.svg',
-    },
-  ],
-  'home links both live listings, the black App Store badge first, one badge image each',
+  badgeLinks.map((_, i) => badgePair[i % 2]),
+  'each place on home links both live listings, the black App Store badge first, one badge image each',
 );
+assert.equal(
+  (home.match(/<img\s+class="badge/g) ?? []).length,
+  badgeLinks.length,
+  'every badge image is one of those links',
+);
+// Both badges are sized by the one .badge rule: the same height, as both stores'
+// guidelines ask. Their widths follow their own artwork, which may not be stretched.
+assert.equal(
+  (home.match(/<img\s+class="badge"/g) ?? []).length,
+  badgeLinks.length,
+  'every badge image has only the shared badge class',
+);
+assert.doesNotMatch(css, /badge[^{]*\[src|google-play-badge|app-store-badge/, 'site.css sizes no badge apart');
 // Both stores forbid recolouring, greying or fading their badges.
 assert.doesNotMatch(
   readFileSync('site.css', 'utf8'),
@@ -225,16 +261,22 @@ assert.match(
 );
 // privacy.html still names Android, and the credits cover the whole site.
 assert.match(home, /Android is a trademark\s+of Google LLC\./, 'home attributes the Android trademark');
-assert.match(home, /10-question rounds/, 'home includes the round fact');
-assert.match(home, /Club &amp; national squads/, 'home includes the squad fact');
-assert.match(home, /<h2>Works offline<\/h2>/, 'home includes the offline fact');
-assert.ok(
-  home.includes("Every round plays without a connection, and there's no account to make."),
-  'home explains the offline fact',
+// 2.0 sends anonymous usage statistics, so home says so and links the policy.
+assert.match(
+  home,
+  /Escuadra sends anonymous usage statistics unless you switch them off in\s+Settings\./,
+  'home says what leaves the device',
 );
+assert.doesNotMatch(home, /No personal data|No data collected/, 'home makes no 1.x privacy claim');
 assert.doesNotMatch(home, /Fully offline/, 'home no longer promises more than offline play');
-assert.match(home, /No ads\. No account\. No personal data\./, 'home includes the trust statement');
-assert.doesNotMatch(home, /No data collected/, 'home no longer claims that nothing is collected');
-for (const path of screenshots) assert.match(home, new RegExp(path.replace('.', '\\.')), `home references ${path}`);
+// Photos cover about half the squad places, so nothing may promise one for every player.
+assert.match(home, /where one is available/, 'home qualifies the player photos');
+// The listing's affiliation line, word for word.
+assert.match(
+  home,
+  /Escuadra is an independent, unofficial study tool\. It is not affiliated with,\s+endorsed by, or connected to any confederation, league or competition/,
+  'home says Escuadra is unaffiliated',
+);
+assert.doesNotMatch(home, /assets\/marketing\//, 'home shows no 1.x screenshots');
 
-console.log(`Verified ${pages.length} pages and ${screenshots.length} local screenshots.`);
+console.log(`Verified ${pages.length} pages.`);
