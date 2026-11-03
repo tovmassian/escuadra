@@ -51,7 +51,7 @@
     />
     <link rel="stylesheet" href="../site.css" />
     <script type="module" src="../site.mjs"></script>
-    <script type="application/json" id="site-words">{"root":"../","positions":{"GK":"Torwart","DF":"Abwehr","MF":"Mittelfeld","FW":"Sturm"},"positionCodes":{"GK":"TW","DF":"ABW","MF":"MF","FW":"ST"},"clueCodes":{"club":"Verein","nat":"Nat"},"clueSpoken":{"club":"Verein","nat":"Nationalität"},"spoken":{"name":"Name: {name}.","beingAsked":"wird gefragt","clues":"Position: {position}. Alter: {age}. {clueLabel}: {clue}.","question":"Frage {n} von {total}. {team}. Wer trägt die {number}? {clues}","score":"Ergebnis: {score} von {answered}","result":"{score} von {total}"},"whoWears":"Wer trägt die {number}?","hint":{"tap":"Wähle deine Antwort","right":"Treffer. Gleich kommt die nächste …","rightLast":"Treffer. Gleich kommt dein Ergebnis …"},"next":"Weiter","seeRound":"Zum Ergebnis","live":{"right":"Treffer: {answer}.","wrong":"Daneben. Die {number} ist {answer}.","round":"Deine Runde: {score} von {total}. {title}."},"titles":{"perfect":"A la escuadra","learning":"Noch am Lernen"},"resultCopy":{"perfect":"Drei von drei. In der App hat jede Runde zehn Fragen, mit 96 Vereinen und 157 Nationalteams zur Wahl.","learning":"Die hier solltest du dir merken. In der App hat jede Runde zehn Fragen, mit 96 Vereinen und 157 Nationalteams zur Wahl, und jeder Fehler wartet in der Ergebnisansicht auf dich."},"countries":{"ESP":"Spanien","ARG":"Argentinien","BRA":"Brasilien","FRA":"Frankreich","ENG":"England","JPN":"Japan","GER":"Deutschland","SEN":"Senegal","ITA":"Italien","MEX":"Mexiko","POR":"Portugal","KOR":"Südkorea","NED":"Niederlande","NGA":"Nigeria","USA":"USA","CRO":"Kroatien","URU":"Uruguay","EGY":"Ägypten","COL":"Kolumbien","AUS":"Australien","CAN":"Kanada","GHA":"Ghana","ARM":"Armenien"}}</script>
+    <script type="application/json" id="site-words">{"root":"../","positions":{"GK":"Torwart","DF":"Abwehr","MF":"Mittelfeld","FW":"Sturm"},"positionCodes":{"GK":"TW","DF":"ABW","MF":"MF","FW":"ST"},"clueCodes":{"club":"Verein","nat":"Nat"},"clueSpoken":{"club":"Verein","nat":"Nationalität"},"spoken":{"name":"Name: {name}.","beingAsked":"wird gefragt","clues":"Position: {position}. Alter: {age}. {clueLabel}: {clue}.","question":"Frage {n} von {total}. {team}. Wer trägt die {number}? {clues}","score":"Ergebnis: {score} von {answered}","result":"{score} von {total}"},"whoWears":"Wer trägt die {number}?","hint":{"tap":"Wähle deine Antwort","right":"Treffer. Gleich kommt die nächste …","rightLast":"Treffer. Gleich kommt dein Ergebnis …"},"next":"Weiter","seeRound":"Zum Ergebnis","live":{"right":"Treffer: {answer}.","wrong":"Daneben. Die {number} ist {answer}.","round":"Deine Runde: {score} von {total}. {title}."},"titles":{"perfect":"A la escuadra","learning":"Noch am Lernen"},"resultCopy":{"perfect":"Drei von drei. In der App hat jede Runde zehn Fragen, mit 96 Vereinen und 157 Nationalteams zur Wahl.","learning":"Die hier solltest du dir merken. In der App hat jede Runde zehn Fragen, mit 96 Vereinen und 157 Nationalteams zur Wahl, und jeder Fehler wartet in der Ergebnisansicht auf dich."},"countries":{"ESP":"Spanien","ARG":"Argentinien","BRA":"Brasilien","FRA":"Frankreich","ENG":"England","JPN":"Japan","GER":"Deutschland","SEN":"Senegal","ITA":"Italien","MEX":"Mexiko","POR":"Portugal","KOR":"Südkorea","NED":"Niederlande","NGA":"Nigeria","USA":"USA","CRO":"Kroatien","URU":"Uruguay","EGY":"Ägypten","COL":"Kolumbien","AUS":"Australien","CAN":"Kanada","GHA":"Ghana","ARM":"Armenien","SVN":"Slowenien"}}</script>
   </head>
   <body>
     <header class="site-header shell">
@@ -111,11 +111,11 @@
         <div class="shell hero-grid">
           <div>
             <p class="eyebrow rise">
-              <span class="corner"></span>Fußballkader lernen · iPhone und Android
+              <span class="corner"></span>Fußballkader lernen
             </p>
-            <h1 id="hero-title" class="display rise">Kenne jede<br />Nummer.</h1>
+            <h1 id="hero-title" class="display rise">Wer trägt die 7?</h1>
             <p class="lead rise">
-              Wer trägt die Nummer 7? Lerne die Kader aller Vereine der fünf Topligen Europas und von über 150 Nationalteams in kurzen Runden und sieh genau, bei wem du falschlagst.
+              Kenne jede Nummer. Lerne die Kader aller Vereine der fünf Topligen Europas und von über 150 Nationalteams in blitzschnellen Runden.
             </p>
             <div class="badges rise">
               <a
@@ -157,11 +157,6 @@
             <p class="body-copy">
               So spielt sich die App: eine Rückennummer und ein paar Hinweise, dann wählst du den Spieler. Hier sind es drei Fragen; in der App zehn pro Runde, mit dem Team deiner Wahl.
             </p>
-            <ol class="steps">
-              <li><span class="step-number">01</span><span>Lies die Nummer und die Hinweise: Position, Alter und Verein oder Nationalität.</span></li>
-              <li><span class="step-number">02</span><span>Tippe auf einen Namen. Richtig oder falsch – du weißt es sofort.</span></li>
-              <li><span class="step-number">03</span><span>Am Ende siehst du genau, bei wem du falschlagst.</span></li>
-            </ol>
           </div>
 
           <div class="photo-col">
@@ -265,9 +260,6 @@
                   · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> · zugeschnitten
                 </li>
               </ul>
-              <p>
-                Diese Fotos werden von Wikimedia Commons geladen. Wie jede Website erhält Wikimedia dabei deine IP-Adresse und die Details jeder Anfrage.
-              </p>
             </div>
           </div>
         </div>
@@ -312,7 +304,7 @@
             </article>
           </div>
           <p class="ladder-note" data-reveal>
-            Jede Frage ist einen Punkt wert. In Level 2 und 3 gibt es den Punkt nur, wenn alle Teile stimmen – Teilpunkte gibt es nicht.
+            Jede Frage ist einen Punkt wert. In Level 2 und 3 gibt es den Punkt nur, wenn alle Teile stimmen.
           </p>
         </div>
       </section>
@@ -323,10 +315,7 @@
             <p class="eyebrow"><span class="corner"></span>Ergebnis- und Kaderansicht</p>
             <h2 id="misses-title" class="display section-title">Aus Fehlern lernt man.</h2>
             <p class="body-copy">
-              Nach jeder Runde zeigt dir die Ergebnisansicht alle Spieler, die du falsch hattest, als Karten zum Durchwischen. So kannst du sie vor der nächsten Runde wiederholen.
-            </p>
-            <p class="body-copy">
-              Die Kaderansicht zeigt den ganzen Kader als Karten oder als Liste. Schalte „Ohne Namen“ ein und teste dich selbst.
+              Geh nach jeder Runde die Spieler durch, die du falsch hattest, oder lern den ganzen Kader – und dann hol dir die volle Punktzahl.
             </p>
           </div>
           <div class="photo-col">
@@ -409,9 +398,6 @@
                   · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> · zugeschnitten
                 </li>
               </ul>
-              <p>
-                Diese Fotos werden von Wikimedia Commons geladen. Wie jede Website erhält Wikimedia dabei deine IP-Adresse und die Details jeder Anfrage.
-              </p>
             </div>
           </div>
         </div>
@@ -422,7 +408,7 @@
           <div data-reveal>
             <p class="eyebrow"><span class="corner"></span>Das steckt drin</p>
             <h2 id="squads-title" class="display section-title">
-              Von Arsenal<br />bis Armenien.
+              Dein Verein.<br />Dein Land.
             </h2>
           </div>
           <div class="stats">
@@ -503,7 +489,6 @@
         <div class="marquee is-reverse">
           <div class="marquee-track">
             <ul aria-label="Einige der Nationalteams in Escuadra">
-              <li class="team"><img src="../assets/flags/ESP.png" alt="" />Spanien</li>
               <li class="team"><img src="../assets/flags/ARG.png" alt="" />Argentinien</li>
               <li class="team"><img src="../assets/flags/BRA.png" alt="" />Brasilien</li>
               <li class="team"><img src="../assets/flags/FRA.png" alt="" />Frankreich</li>
@@ -525,10 +510,11 @@
               <li class="team"><img src="../assets/flags/AUS.png" alt="" />Australien</li>
               <li class="team"><img src="../assets/flags/CAN.png" alt="" />Kanada</li>
               <li class="team"><img src="../assets/flags/GHA.png" alt="" />Ghana</li>
+              <li class="team"><img src="../assets/flags/ESP.png" alt="" />Spanien</li>
               <li class="team"><img src="../assets/flags/ARM.png" alt="" />Armenien</li>
+              <li class="team"><img src="../assets/flags/SVN.png" alt="" />Slowenien</li>
             </ul>
             <ul aria-hidden="true">
-              <li class="team"><img src="../assets/flags/ESP.png" alt="" />Spanien</li>
               <li class="team"><img src="../assets/flags/ARG.png" alt="" />Argentinien</li>
               <li class="team"><img src="../assets/flags/BRA.png" alt="" />Brasilien</li>
               <li class="team"><img src="../assets/flags/FRA.png" alt="" />Frankreich</li>
@@ -550,14 +536,15 @@
               <li class="team"><img src="../assets/flags/AUS.png" alt="" />Australien</li>
               <li class="team"><img src="../assets/flags/CAN.png" alt="" />Kanada</li>
               <li class="team"><img src="../assets/flags/GHA.png" alt="" />Ghana</li>
+              <li class="team"><img src="../assets/flags/ESP.png" alt="" />Spanien</li>
               <li class="team"><img src="../assets/flags/ARM.png" alt="" />Armenien</li>
+              <li class="team"><img src="../assets/flags/SVN.png" alt="" />Slowenien</li>
             </ul>
           </div>
         </div>
 
         <div class="shell squads-note">
           <span class="leagues">Premier League · La Liga · Serie A · Bundesliga · Ligue 1</span>
-          <span>Die Kader werden jede Saison aktualisiert – neue Teams kommen ohne App-Update dazu.</span>
         </div>
       </section>
 
@@ -601,7 +588,7 @@
               Spanisch für einen Schuss in den Winkel. Schaffst du zehn von zehn, sagt Escuadra es dir.
             </p>
             <p class="body-copy">
-              Dann teile die Runde als Bild oder als Text. Ohne Spielerfotos, ohne Namen – so können Freunde mitraten.
+              Dann teil deine Runde und zeig allen, dass du den Kader im Schlaf kennst.
             </p>
           </div>
         </div>
@@ -610,47 +597,23 @@
       <section class="section" style="padding-top: 40px" aria-labelledby="promises-title">
         <div class="shell">
           <div data-reveal>
-            <p class="eyebrow"><span class="corner"></span>Gemacht für kurze Einheiten</p>
+            <p class="eyebrow"><span class="corner"></span>Überall spielen</p>
             <h2 id="promises-title" class="display section-title">
-              Du und der Kader.<br />Sonst nichts.
+              Dein Kader<br />in der Tasche.
             </h2>
           </div>
           <div class="promises">
             <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c.8-3.5 3.6-5.5 7-5.5s6.2 2 7 5.5" /><path d="M3.5 3.5l17 17" /></svg>
-              <h3>Kein Konto. Keine Werbung.</h3>
-              <p>Keine Anmeldung, nichts, was dich aufhält. App öffnen und loslegen.</p>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2.5" /><path d="M6 15.5l2.5-7 2.5 7M6.9 13h3.2M13.5 8.5v7h1.5a3.5 3.5 0 0 0 0-7z" /><path d="M3.5 3.5l17 17" /></svg>
+              <h3>Keine Werbung</h3>
             </article>
             <article class="promise" data-reveal>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M2.5 8.8a15 15 0 0 1 4-2.6" /><path d="M10.6 4.7A15 15 0 0 1 21.5 8.8" /><path d="M5.3 12.3a10 10 0 0 1 3.2-2" /><path d="M15.4 10.4a10 10 0 0 1 3.3 1.9" /><path d="M8.6 15.7a5 5 0 0 1 6.8 0" /><circle cx="12" cy="19.2" r=".9" fill="currentColor" /><path d="M3.5 3.5l17 17" /></svg>
               <h3>Funktioniert offline</h3>
-              <p>
-                Alle Kader sind auf deinem Smartphone gespeichert. Fotos werden von Wikimedia Commons geladen, wenn du online bist; offline springen die Teamfarben ein.
-              </p>
-            </article>
-            <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" /><circle cx="9" cy="10" r="1.8" /><path d="M21 16l-5.2-5.2L7 19" /></svg>
-              <h3>Fotos mit Bildnachweis</h3>
-              <p>Spielerfotos von Wikimedia Commons, wo vorhanden, jedes mit Urheber und Lizenz.</p>
             </article>
             <article class="promise" data-reveal>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9s1.3-6.4 3.8-9z" /></svg>
-              <h3>Fünf Sprachen</h3>
-              <p>
-                English, Español, Français, Italiano und Deutsch. Escuadra folgt der Sprache deines Smartphones, oder du wählst eine in den Einstellungen.
-              </p>
-            </article>
-            <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" /></svg>
-              <h3>Hell und Dunkel</h3>
-              <p>Escuadra folgt der Darstellung deines Smartphones, oder du wählst sie selbst.</p>
-            </article>
-            <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" /><path d="M10.5 18.5h3" /></svg>
-              <h3>Anonyme Statistiken, abschaltbar</h3>
-              <p>
-                Escuadra sendet anonyme Nutzungsstatistiken, wenn du sie nicht in den Einstellungen ausschaltest. <a href="../privacy/2/de.html">Die Datenschutzerklärung</a> nennt alles, was dein Gerät verlässt.
-              </p>
+              <h3>In 5 Sprachen verfügbar</h3>
             </article>
           </div>
         </div>
@@ -666,7 +629,6 @@
         <div class="final-fade" aria-hidden="true"></div>
         <div class="shell final-inner" data-reveal>
           <h2 id="get-title" class="display">Kenne den Kader.<br />Im Schlaf.</h2>
-          <p>Escuadra gibt es für iPhone und Android.</p>
           <div class="badges">
             <a
               href="https://apps.apple.com/app/escuadra/id6810705505"

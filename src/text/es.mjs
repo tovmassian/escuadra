@@ -39,20 +39,15 @@ export default {
   },
   home: {
     hero: {
-      eyebrow: 'Plantillas de fútbol, de memoria · iPhone y Android',
-      title: 'Conoce cada<br />dorsal.',
-      lead: '¿Quién lleva el 7? Aprende las plantillas de los clubes de las cinco grandes ligas europeas y de más de 150 selecciones en rondas rápidas, y mira quién se te escapó.',
+      eyebrow: 'Plantillas de fútbol, de memoria',
+      title: '¿Quién lleva el 7?',
+      lead: 'Conoce cada dorsal. Aprende las plantillas de los clubes de las cinco grandes ligas europeas y de más de 150 selecciones en rondas relámpago.',
       tryLink: 'O prueba una pregunta aquí mismo',
     },
     try: {
       eyebrow: 'Pruébalo · Nivel 1',
       title: 'Un dorsal.<br />Tú eliges.',
       body: 'Así se juega: un dorsal y algunas pistas, y eliges al jugador. Aquí hay tres preguntas; en la app, diez por ronda, con el equipo que quieras.',
-      steps: [
-        'Mira el dorsal y las pistas: posición, edad y club o nacionalidad.',
-        'Toca un nombre. Aciertes o falles, lo sabes al instante.',
-        'Al final, mira quién se te escapó.',
-      ],
       level: 'Nivel 1',
       nameKey: 'Nombre',
       positionKey: 'Pos',
@@ -63,8 +58,6 @@ export default {
     credits: {
       title: 'Créditos · 3',
       cropped: 'recortada',
-      wikimedia:
-        'Estas fotos se cargan desde Wikimedia Commons, así que, como cualquier sitio web, Wikimedia recibe tu dirección IP y los detalles de cada solicitud.',
     },
     how: {
       eyebrow: 'La escalera',
@@ -80,14 +73,13 @@ export default {
           body: 'Elige el nombre entre 6 opciones, luego la posición y, por último, la nacionalidad o, en una selección, el club.',
         },
       ],
-      note: 'Cada pregunta vale un punto. En los niveles 2 y 3 solo sumas el punto si aciertas todas las partes: no hay puntos parciales.',
+      note: 'Cada pregunta vale un punto. En los niveles 2 y 3 solo sumas el punto si aciertas todas las partes.',
     },
     misses: {
       eyebrow: 'Resultados y Plantilla',
       title: 'De los fallos se aprende.',
       body: [
-        'Tras cada ronda, la pantalla de resultados te muestra en tarjetas a cada jugador que fallaste. Desliza para verlos todos y repásalos antes de la siguiente ronda.',
-        'La pantalla “Plantilla” muestra el equipo entero en tarjetas o en lista. Activa “Sin nombres” y ponte a prueba.',
+        'Tras cada ronda, repasa a los jugadores que has fallado o estudia la plantilla entera. Luego vuelve a jugar y bórdalo.',
       ],
       stackLabel: 'Real Madrid · 2026/27 · Nivel 2 · 7/10',
       missedOf: 'Fallo {n} de 3',
@@ -95,7 +87,7 @@ export default {
     },
     squads: {
       eyebrow: 'Qué incluye',
-      title: 'Del Arsenal<br />a Armenia.',
+      title: 'De tu club<br />a tu selección.',
       stats: [
         { title: 'Clubes', body: 'Todos los clubes de las cinco grandes ligas europeas.' },
         { title: 'Selecciones', body: 'De las seis confederaciones.' },
@@ -103,8 +95,6 @@ export default {
       ],
       clubsLabel: 'Algunos de los clubes que incluye Escuadra',
       nationsLabel: 'Algunas de las selecciones que incluye Escuadra',
-      refreshed:
-        'Las plantillas se actualizan cada temporada: los equipos nuevos llegan sin actualizar la app.',
     },
     share: {
       pictureLabel:
@@ -115,39 +105,16 @@ export default {
       title: 'Una ronda sin fallos tiene nombre.',
       body: [
         'Como el tiro que se cuela por la escuadra de la portería. Acierta las diez y Escuadra lo canta.',
-        'Luego comparte la ronda como imagen o como texto. Sin fotos ni nombres, para que tus amigos también puedan jugarla.',
+        'Luego comparte tu ronda y demuestra que te sabes la plantilla de carrerilla.',
       ],
     },
     promises: {
-      eyebrow: 'Pensada para sesiones cortas',
-      title: 'Tú y la plantilla.<br />Nada más.',
-      items: [
-        {
-          title: 'Sin cuenta. Sin anuncios.',
-          body: 'Sin registro y sin nada que te frene. Ábrela y juega.',
-        },
-        {
-          title: 'Funciona sin conexión',
-          body: 'Todas las plantillas se guardan en tu teléfono. Las fotos se cargan desde Wikimedia Commons cuando estás conectado; sin conexión, los colores del equipo ocupan su lugar.',
-        },
-        {
-          title: 'Fotos con crédito',
-          body: 'Fotos de jugadores de Wikimedia Commons cuando las hay, cada una con su autor y su licencia.',
-        },
-        {
-          title: 'Cinco idiomas',
-          body: 'English, Español, Français, Italiano y Deutsch. Por defecto, sigue el idioma de tu teléfono, pero puedes elegir otro en Ajustes.',
-        },
-        { title: 'Claro y oscuro', body: 'Por defecto, sigue el aspecto de tu teléfono, pero puedes elegirlo tú.' },
-        {
-          title: 'Estadísticas anónimas que puedes desactivar',
-          body: 'Escuadra envía estadísticas de uso anónimas salvo que las desactives en Ajustes. <a href="{privacy}">La política de privacidad</a> detalla todo lo que sale de tu dispositivo.',
-        },
-      ],
+      eyebrow: 'Juega donde quieras',
+      title: 'Tu plantilla,<br />en el bolsillo.',
+      items: ['Sin anuncios', 'Funciona sin conexión', 'Disponible en 5 idiomas'],
     },
     get: {
       title: 'La plantilla,<br />de carrerilla.',
-      body: 'Escuadra está disponible para iPhone y Android.',
     },
     footer: {
       escuadraHeading: 'Escuadra',
@@ -205,7 +172,7 @@ export default {
     JPN: 'Japón', GER: 'Alemania', SEN: 'Senegal', ITA: 'Italia', MEX: 'México',
     POR: 'Portugal', KOR: 'Corea del Sur', NED: 'Países Bajos', NGA: 'Nigeria',
     USA: 'Estados Unidos', CRO: 'Croacia', URU: 'Uruguay', EGY: 'Egipto', COL: 'Colombia',
-    AUS: 'Australia', CAN: 'Canadá', GHA: 'Ghana', ARM: 'Armenia',
+    AUS: 'Australia', CAN: 'Canadá', GHA: 'Ghana', ARM: 'Armenia', SVN: 'Eslovenia',
   },
   teaser: {
     positions: { GK: 'Portero', DF: 'Defensa', MF: 'Medio', FW: 'Delantero' },

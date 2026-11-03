@@ -52,8 +52,8 @@ const CLUBS = [
 
 // The national teams of the second marquee, by flag file; their names are in the text.
 const NATIONS = [
-  'ESP', 'ARG', 'BRA', 'FRA', 'ENG', 'JPN', 'GER', 'SEN', 'ITA', 'MEX', 'POR', 'KOR',
-  'NED', 'NGA', 'USA', 'CRO', 'URU', 'EGY', 'COL', 'AUS', 'CAN', 'GHA', 'ARM',
+  'ARG', 'BRA', 'FRA', 'ENG', 'JPN', 'GER', 'SEN', 'ITA', 'MEX', 'POR', 'KOR',
+  'NED', 'NGA', 'USA', 'CRO', 'URU', 'EGY', 'COL', 'AUS', 'CAN', 'GHA', 'ESP', 'ARM', 'SVN',
 ];
 
 // The three players on the stack of Results cards: their photos and credits.
@@ -92,12 +92,9 @@ const LOCK_ICON =
 
 // One icon for each promise, in the order of `home.promises.items`.
 const PROMISE_ICONS = [
-  '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c.8-3.5 3.6-5.5 7-5.5s6.2 2 7 5.5" /><path d="M3.5 3.5l17 17" /></svg>',
+  '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2.5" /><path d="M6 15.5l2.5-7 2.5 7M6.9 13h3.2M13.5 8.5v7h1.5a3.5 3.5 0 0 0 0-7z" /><path d="M3.5 3.5l17 17" /></svg>',
   '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M2.5 8.8a15 15 0 0 1 4-2.6" /><path d="M10.6 4.7A15 15 0 0 1 21.5 8.8" /><path d="M5.3 12.3a10 10 0 0 1 3.2-2" /><path d="M15.4 10.4a10 10 0 0 1 3.3 1.9" /><path d="M8.6 15.7a5 5 0 0 1 6.8 0" /><circle cx="12" cy="19.2" r=".9" fill="currentColor" /><path d="M3.5 3.5l17 17" /></svg>',
-  '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" /><circle cx="9" cy="10" r="1.8" /><path d="M21 16l-5.2-5.2L7 19" /></svg>',
   '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9s1.3-6.4 3.8-9z" /></svg>',
-  '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" /></svg>',
-  '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" /><path d="M10.5 18.5h3" /></svg>',
 ];
 
 /** The two store badges in a row, the black App Store badge first, in the page's language. */
@@ -186,7 +183,6 @@ export function home(page) {
       t.credits.cropped,
     ),
   ).join('\n');
-  const wikimediaNote = block(14, '<p>', t.credits.wikimedia, '</p>');
 
   return `<!doctype html>
 <html lang="${page.language}">
@@ -298,11 +294,6 @@ ${badges(page, 12, 'badges rise')}
             <p class="body-copy">
               ${t.try.body}
             </p>
-            <ol class="steps">
-${t.try.steps
-  .map((step, i) => `              <li><span class="step-number">0${i + 1}</span><span>${step}</span></li>`)
-  .join('\n')}
-            </ol>
           </div>
 
           <div class="photo-col">
@@ -389,7 +380,6 @@ ${q.options.map((name) => `                  <button type="button" class="tile" 
               <ul>
 ${teaserCredits}
               </ul>
-${wikimediaNote}
             </div>
           </div>
         </div>
@@ -475,7 +465,6 @@ ${MISS_CARDS.map((card, i) => {
               <ul>
 ${missCredits}
               </ul>
-${wikimediaNote}
             </div>
           </div>
         </div>
@@ -521,7 +510,6 @@ ${marquee(
 
         <div class="shell squads-note">
           <span class="leagues">Premier League · La Liga · Serie A · Bundesliga · Ligue 1</span>
-          <span>${t.squads.refreshed}</span>
         </div>
       </section>
 
@@ -583,10 +571,9 @@ ${t.share.body
           <div class="promises">
 ${t.promises.items
   .map(
-    (item, i) => `            <article class="promise" data-reveal>
+    (title, i) => `            <article class="promise" data-reveal>
               ${PROMISE_ICONS[i]}
-              <h3>${item.title}</h3>
-${block(14, '<p>', fill(item.body, { privacy }), '</p>')}
+              <h3>${title}</h3>
             </article>`,
   )
   .join('\n')}
@@ -604,7 +591,6 @@ ${block(14, '<p>', fill(item.body, { privacy }), '</p>')}
         <div class="final-fade" aria-hidden="true"></div>
         <div class="shell final-inner" data-reveal>
           <h2 id="get-title" class="display">${t.get.title}</h2>
-          <p>${t.get.body}</p>
 ${badges(page, 10, 'badges')}
         </div>
       </section>

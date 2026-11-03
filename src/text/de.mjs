@@ -42,20 +42,15 @@ export default {
   },
   home: {
     hero: {
-      eyebrow: 'Fußballkader lernen · iPhone und Android',
-      title: 'Kenne jede<br />Nummer.',
-      lead: 'Wer trägt die Nummer 7? Lerne die Kader aller Vereine der fünf Topligen Europas und von über 150 Nationalteams in kurzen Runden und sieh genau, bei wem du falschlagst.',
+      eyebrow: 'Fußballkader lernen',
+      title: 'Wer trägt die 7?',
+      lead: 'Kenne jede Nummer. Lerne die Kader aller Vereine der fünf Topligen Europas und von über 150 Nationalteams in blitzschnellen Runden.',
       tryLink: 'Oder probier gleich hier eine Frage aus',
     },
     try: {
       eyebrow: 'Probier’s aus · Level 1',
       title: 'Eine Nummer.<br />Vier Namen.',
       body: 'So spielt sich die App: eine Rückennummer und ein paar Hinweise, dann wählst du den Spieler. Hier sind es drei Fragen; in der App zehn pro Runde, mit dem Team deiner Wahl.',
-      steps: [
-        'Lies die Nummer und die Hinweise: Position, Alter und Verein oder Nationalität.',
-        'Tippe auf einen Namen. Richtig oder falsch – du weißt es sofort.',
-        'Am Ende siehst du genau, bei wem du falschlagst.',
-      ],
       level: 'Level 1',
       nameKey: 'Name',
       positionKey: 'Pos',
@@ -66,8 +61,6 @@ export default {
     credits: {
       title: 'Bildnachweise · 3',
       cropped: 'zugeschnitten',
-      wikimedia:
-        'Diese Fotos werden von Wikimedia Commons geladen. Wie jede Website erhält Wikimedia dabei deine IP-Adresse und die Details jeder Anfrage.',
     },
     how: {
       eyebrow: 'Die Leiter',
@@ -83,14 +76,13 @@ export default {
           body: '6 Namen zur Wahl, dann Position, dann Nationalität – bei einem Nationalteam stattdessen der Verein.',
         },
       ],
-      note: 'Jede Frage ist einen Punkt wert. In Level 2 und 3 gibt es den Punkt nur, wenn alle Teile stimmen – Teilpunkte gibt es nicht.',
+      note: 'Jede Frage ist einen Punkt wert. In Level 2 und 3 gibt es den Punkt nur, wenn alle Teile stimmen.',
     },
     misses: {
       eyebrow: 'Ergebnis- und Kaderansicht',
       title: 'Aus Fehlern lernt man.',
       body: [
-        'Nach jeder Runde zeigt dir die Ergebnisansicht alle Spieler, die du falsch hattest, als Karten zum Durchwischen. So kannst du sie vor der nächsten Runde wiederholen.',
-        'Die Kaderansicht zeigt den ganzen Kader als Karten oder als Liste. Schalte „Ohne Namen“ ein und teste dich selbst.',
+        'Geh nach jeder Runde die Spieler durch, die du falsch hattest, oder lern den ganzen Kader – und dann hol dir die volle Punktzahl.',
       ],
       stackLabel: 'Real Madrid · 2026/27 · Level 2 · 7/10',
       missedOf: 'Fehler {n} von 3',
@@ -98,7 +90,7 @@ export default {
     },
     squads: {
       eyebrow: 'Das steckt drin',
-      title: 'Von Arsenal<br />bis Armenien.',
+      title: 'Dein Verein.<br />Dein Land.',
       stats: [
         { title: 'Vereine', body: 'Alle Vereine der fünf großen europäischen Ligen.' },
         { title: 'Nationalteams', body: 'Aus allen sechs Kontinentalverbänden.' },
@@ -106,7 +98,6 @@ export default {
       ],
       clubsLabel: 'Einige der Vereine in Escuadra',
       nationsLabel: 'Einige der Nationalteams in Escuadra',
-      refreshed: 'Die Kader werden jede Saison aktualisiert – neue Teams kommen ohne App-Update dazu.',
     },
     share: {
       pictureLabel:
@@ -117,39 +108,16 @@ export default {
       title: 'Kein Fehler? Dafür gibt’s ein Wort.',
       body: [
         'Spanisch für einen Schuss in den Winkel. Schaffst du zehn von zehn, sagt Escuadra es dir.',
-        'Dann teile die Runde als Bild oder als Text. Ohne Spielerfotos, ohne Namen – so können Freunde mitraten.',
+        'Dann teil deine Runde und zeig allen, dass du den Kader im Schlaf kennst.',
       ],
     },
     promises: {
-      eyebrow: 'Gemacht für kurze Einheiten',
-      title: 'Du und der Kader.<br />Sonst nichts.',
-      items: [
-        {
-          title: 'Kein Konto. Keine Werbung.',
-          body: 'Keine Anmeldung, nichts, was dich aufhält. App öffnen und loslegen.',
-        },
-        {
-          title: 'Funktioniert offline',
-          body: 'Alle Kader sind auf deinem Smartphone gespeichert. Fotos werden von Wikimedia Commons geladen, wenn du online bist; offline springen die Teamfarben ein.',
-        },
-        {
-          title: 'Fotos mit Bildnachweis',
-          body: 'Spielerfotos von Wikimedia Commons, wo vorhanden, jedes mit Urheber und Lizenz.',
-        },
-        {
-          title: 'Fünf Sprachen',
-          body: 'English, Español, Français, Italiano und Deutsch. Escuadra folgt der Sprache deines Smartphones, oder du wählst eine in den Einstellungen.',
-        },
-        { title: 'Hell und Dunkel', body: 'Escuadra folgt der Darstellung deines Smartphones, oder du wählst sie selbst.' },
-        {
-          title: 'Anonyme Statistiken, abschaltbar',
-          body: 'Escuadra sendet anonyme Nutzungsstatistiken, wenn du sie nicht in den Einstellungen ausschaltest. <a href="{privacy}">Die Datenschutzerklärung</a> nennt alles, was dein Gerät verlässt.',
-        },
-      ],
+      eyebrow: 'Überall spielen',
+      title: 'Dein Kader<br />in der Tasche.',
+      items: ['Keine Werbung', 'Funktioniert offline', 'In 5 Sprachen verfügbar'],
     },
     get: {
       title: 'Kenne den Kader.<br />Im Schlaf.',
-      body: 'Escuadra gibt es für iPhone und Android.',
     },
     footer: {
       escuadraHeading: 'Escuadra',
@@ -207,7 +175,7 @@ export default {
     JPN: 'Japan', GER: 'Deutschland', SEN: 'Senegal', ITA: 'Italien', MEX: 'Mexiko',
     POR: 'Portugal', KOR: 'Südkorea', NED: 'Niederlande', NGA: 'Nigeria',
     USA: 'USA', CRO: 'Kroatien', URU: 'Uruguay', EGY: 'Ägypten', COL: 'Kolumbien',
-    AUS: 'Australien', CAN: 'Kanada', GHA: 'Ghana', ARM: 'Armenien',
+    AUS: 'Australien', CAN: 'Kanada', GHA: 'Ghana', ARM: 'Armenien', SVN: 'Slowenien',
   },
   teaser: {
     positions: { GK: 'Torwart', DF: 'Abwehr', MF: 'Mittelfeld', FW: 'Sturm' },

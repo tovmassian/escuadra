@@ -42,20 +42,15 @@ export default {
   },
   home: {
     hero: {
-      eyebrow: 'Quiz d’effectifs de foot · iPhone et Android',
-      title: 'Les numéros,<br />par cœur.',
-      lead: 'Qui porte le numéro 7 ? Apprends les effectifs de tous les clubs du top 5 européen et de plus de 150 sélections en parties rapides, puis vois qui tu as raté.',
+      eyebrow: 'Quiz d’effectifs de foot',
+      title: 'Qui porte le 7 ?',
+      lead: 'Les numéros, par cœur. Apprends les effectifs de tous les clubs du top 5 européen et de plus de 150 sélections en parties éclair.',
       tryLink: 'Ou essaie une question ici même',
     },
     try: {
       eyebrow: 'À toi de jouer · Niveau 1',
       title: 'Un numéro.<br />Quatre noms.',
       body: 'Voilà le principe : un numéro de maillot et quelques indices, puis tu choisis le joueur. Ici, trois questions ; dans l’appli, dix par partie, avec l’équipe de ton choix.',
-      steps: [
-        'Lis le numéro et les indices : poste, âge et club ou nationalité.',
-        'Appuie sur un nom. Juste ou faux, tu le sais tout de suite.',
-        'À la fin, retrouve exactement qui tu as raté.',
-      ],
       level: 'Niveau 1',
       nameKey: 'Nom',
       positionKey: 'Poste',
@@ -66,8 +61,6 @@ export default {
     credits: {
       title: 'Crédits photo · 3',
       cropped: 'recadrée',
-      wikimedia:
-        'Ces photos sont chargées depuis Wikimedia Commons. Comme tout site web, Wikimedia reçoit donc ton adresse IP et les détails de chaque requête.',
     },
     how: {
       eyebrow: 'Les paliers',
@@ -83,14 +76,13 @@ export default {
           body: 'Le nom parmi 6 choix, puis le poste, puis la nationalité, ou le club pour une sélection.',
         },
       ],
-      note: 'Chaque question compte pour un point. Aux niveaux 2 et 3, tu ne marques le point que si tu réussis chaque étape : pas de point partiel.',
+      note: 'Chaque question compte pour un point. Aux niveaux 2 et 3, tu ne marques le point que si tu réussis chaque étape.',
     },
     misses: {
       eyebrow: 'Résultats et Effectif',
       title: 'C’est en ratant qu’on apprend.',
       body: [
-        'Après chaque partie, l’écran Résultats affiche tous les joueurs ratés, un par carte. Fais-les défiler pour les revoir avant la partie suivante.',
-        'L’écran Effectif affiche tous les joueurs de l’équipe, en cartes ou en liste. Appuie sur « Cacher noms » pour te tester.',
+        'Après chaque partie, revois les joueurs ratés ou révise tout l’effectif, puis reviens faire un sans-faute.',
       ],
       stackLabel: 'Real Madrid · 2026/27 · Niveau 2 · 7/10',
       missedOf: 'Erreur {n} sur 3',
@@ -98,7 +90,7 @@ export default {
     },
     squads: {
       eyebrow: 'Au programme',
-      title: 'D’Arsenal<br />à l’Arménie.',
+      title: 'De ton club<br />à ta sélection.',
       stats: [
         { title: 'Clubs', body: 'Tous les clubs des cinq grands championnats européens.' },
         { title: 'Sélections', body: 'Issues des six confédérations.' },
@@ -106,8 +98,6 @@ export default {
       ],
       clubsLabel: 'Quelques-uns des clubs d’Escuadra',
       nationsLabel: 'Quelques-unes des sélections d’Escuadra',
-      refreshed:
-        'Les effectifs sont mis à jour chaque saison : les nouvelles équipes arrivent sans mise à jour de l’appli.',
     },
     share: {
       pictureLabel:
@@ -118,39 +108,16 @@ export default {
       title: 'Le sans-faute a un nom.',
       body: [
         'En espagnol, une frappe en pleine lucarne. Fais dix sur dix, et Escuadra te l’annonce.',
-        'Partage ensuite ta partie en image ou en texte. Sans photo ni nom : tes amis peuvent quand même y jouer.',
+        'Partage ensuite ta partie et montre à tout le monde que tu connais l’effectif les yeux fermés.',
       ],
     },
     promises: {
-      eyebrow: 'Pensé pour des sessions courtes',
-      title: 'Toi et l’effectif.<br />Rien d’autre.',
-      items: [
-        {
-          title: 'Sans compte. Sans pub.',
-          body: 'Aucune inscription, rien pour te ralentir. Ouvre l’appli et joue.',
-        },
-        {
-          title: 'Joue sans connexion',
-          body: 'Tous les effectifs sont enregistrés sur ton téléphone. Les photos se chargent depuis Wikimedia Commons quand tu es en ligne ; sinon, les couleurs de l’équipe les remplacent.',
-        },
-        {
-          title: 'Photos créditées',
-          body: 'Une photo de Wikimedia Commons pour chaque joueur qui en a une, avec son auteur et sa licence.',
-        },
-        {
-          title: 'Cinq langues',
-          body: 'English, Español, Français, Italiano et Deutsch. L’appli suit la langue de ton téléphone, ou tu peux en choisir une dans Réglages.',
-        },
-        { title: 'Clair et sombre', body: 'L’appli suit l’apparence de ton téléphone, ou c’est toi qui choisis.' },
-        {
-          title: 'Statistiques anonymes, désactivables',
-          body: 'Escuadra envoie des statistiques d’utilisation anonymes, sauf si tu les désactives dans Réglages. <a href="{privacy}">La politique de confidentialité</a> détaille tout ce qui quitte ton appareil.',
-        },
-      ],
+      eyebrow: 'Joue où tu veux',
+      title: 'Tous les effectifs,<br />dans ta poche.',
+      items: ['Sans pub', 'Jouable hors connexion', 'Disponible en 5 langues'],
     },
     get: {
       title: 'Ton effectif,<br />les yeux fermés.',
-      body: 'Escuadra est disponible sur iPhone et Android.',
     },
     footer: {
       escuadraHeading: 'Escuadra',
@@ -208,7 +175,7 @@ export default {
     JPN: 'Japon', GER: 'Allemagne', SEN: 'Sénégal', ITA: 'Italie', MEX: 'Mexique',
     POR: 'Portugal', KOR: 'Corée du Sud', NED: 'Pays-Bas', NGA: 'Nigeria',
     USA: 'États-Unis', CRO: 'Croatie', URU: 'Uruguay', EGY: 'Égypte', COL: 'Colombie',
-    AUS: 'Australie', CAN: 'Canada', GHA: 'Ghana', ARM: 'Arménie',
+    AUS: 'Australie', CAN: 'Canada', GHA: 'Ghana', ARM: 'Arménie', SVN: 'Slovénie',
   },
   teaser: {
     positions: { GK: 'Gardien', DF: 'Défenseur', MF: 'Milieu', FW: 'Attaquant' },

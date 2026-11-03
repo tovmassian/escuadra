@@ -69,7 +69,7 @@
     />
     <link rel="stylesheet" href="site.css" />
     <script type="module" src="site.mjs"></script>
-    <script type="application/json" id="site-words">{"root":"","positions":{"GK":"Keeper","DF":"Defender","MF":"Midfield","FW":"Forward"},"positionCodes":{"GK":"GK","DF":"DF","MF":"MF","FW":"FW"},"clueCodes":{"club":"Club","nat":"Nat"},"clueSpoken":{"club":"Club","nat":"Nationality"},"spoken":{"name":"Name: {name}.","beingAsked":"being asked","clues":"Position: {position}. Age: {age}. {clueLabel}: {clue}.","question":"Question {n} of {total}. {team}. Who wears {number}? {clues}","score":"Score: {score} of {answered}","result":"{score} of {total}"},"whoWears":"Who wears {number}?","hint":{"tap":"Tap your answer","right":"Right. Next one coming…","rightLast":"Right. Your round is next…"},"next":"Next","seeRound":"See your round","live":{"right":"Right: {answer}.","wrong":"Not quite. Number {number} is {answer}.","round":"Your round: {score} of {total}. {title}."},"titles":{"perfect":"A la escuadra","learning":"Still learning"},"resultCopy":{"perfect":"Three for three. The app plays ten a round, across 96 clubs and 157 national teams.","learning":"Those are the ones to go over. The app plays ten questions a round, across 96 clubs and 157 national teams, and every miss waits for you on Results."},"countries":{"ESP":"Spain","ARG":"Argentina","BRA":"Brazil","FRA":"France","ENG":"England","JPN":"Japan","GER":"Germany","SEN":"Senegal","ITA":"Italy","MEX":"Mexico","POR":"Portugal","KOR":"South Korea","NED":"Netherlands","NGA":"Nigeria","USA":"United States","CRO":"Croatia","URU":"Uruguay","EGY":"Egypt","COL":"Colombia","AUS":"Australia","CAN":"Canada","GHA":"Ghana","ARM":"Armenia"}}</script>
+    <script type="application/json" id="site-words">{"root":"","positions":{"GK":"Keeper","DF":"Defender","MF":"Midfield","FW":"Forward"},"positionCodes":{"GK":"GK","DF":"DF","MF":"MF","FW":"FW"},"clueCodes":{"club":"Club","nat":"Nat"},"clueSpoken":{"club":"Club","nat":"Nationality"},"spoken":{"name":"Name: {name}.","beingAsked":"being asked","clues":"Position: {position}. Age: {age}. {clueLabel}: {clue}.","question":"Question {n} of {total}. {team}. Who wears {number}? {clues}","score":"Score: {score} of {answered}","result":"{score} of {total}"},"whoWears":"Who wears {number}?","hint":{"tap":"Tap your answer","right":"Right. Next one coming…","rightLast":"Right. Your round is next…"},"next":"Next","seeRound":"See your round","live":{"right":"Right: {answer}.","wrong":"Not quite. Number {number} is {answer}.","round":"Your round: {score} of {total}. {title}."},"titles":{"perfect":"A la escuadra","learning":"Still learning"},"resultCopy":{"perfect":"Three for three. The app plays ten a round, across 96 clubs and 157 national teams.","learning":"Those are the ones to go over. The app plays ten questions a round, across 96 clubs and 157 national teams, and every miss waits for you on Results."},"countries":{"ESP":"Spain","ARG":"Argentina","BRA":"Brazil","FRA":"France","ENG":"England","JPN":"Japan","GER":"Germany","SEN":"Senegal","ITA":"Italy","MEX":"Mexico","POR":"Portugal","KOR":"South Korea","NED":"Netherlands","NGA":"Nigeria","USA":"United States","CRO":"Croatia","URU":"Uruguay","EGY":"Egypt","COL":"Colombia","AUS":"Australia","CAN":"Canada","GHA":"Ghana","ARM":"Armenia","SVN":"Slovenia"}}</script>
   </head>
   <body>
     <header class="site-header shell">
@@ -129,11 +129,11 @@
         <div class="shell hero-grid">
           <div>
             <p class="eyebrow rise">
-              <span class="corner"></span>Football squad trainer · iPhone &amp; Android
+              <span class="corner"></span>Football squad trainer
             </p>
-            <h1 id="hero-title" class="display rise">Know every<br />number.</h1>
+            <h1 id="hero-title" class="display rise">Who wears 7?</h1>
             <p class="lead rise">
-              Who wears number 7? Learn every club in Europe’s top five leagues and over 150 national teams in quick rounds, then see exactly who you missed.
+              Know every number. Learn every club in Europe’s top five leagues and over 150 national teams in quick-fire rounds.
             </p>
             <div class="badges rise">
               <a
@@ -175,11 +175,6 @@
             <p class="body-copy">
               This is how the app plays: a shirt number and a few clues, then you pick the player. Three questions here; ten in a round, for any squad you choose.
             </p>
-            <ol class="steps">
-              <li><span class="step-number">01</span><span>Read the number and the clues: position, age, and club or nationality.</span></li>
-              <li><span class="step-number">02</span><span>Tap a name. Right or wrong, you know at once.</span></li>
-              <li><span class="step-number">03</span><span>At the end, see exactly who you missed.</span></li>
-            </ol>
           </div>
 
           <div class="photo-col">
@@ -283,9 +278,6 @@
                   · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> · cropped
                 </li>
               </ul>
-              <p>
-                These photos load from Wikimedia Commons, so Wikimedia receives your IP address and the details of each request, as any website does.
-              </p>
             </div>
           </div>
         </div>
@@ -330,7 +322,7 @@
             </article>
           </div>
           <p class="ladder-note" data-reveal>
-            Each question is worth one point. On levels 2 and 3, you get the point only if every part is right: no partial credit.
+            Each question is worth one point. On levels 2 and 3, you get the point only if every part is right.
           </p>
         </div>
       </section>
@@ -339,12 +331,9 @@
         <div class="shell split">
           <div data-reveal>
             <p class="eyebrow"><span class="corner"></span>Results and Study</p>
-            <h2 id="misses-title" class="display section-title">The misses are the point.</h2>
+            <h2 id="misses-title" class="display section-title">Every miss is a lesson.</h2>
             <p class="body-copy">
-              After every round, Results lays out each player you got wrong as a card to swipe through, so you can go over them before the next round.
-            </p>
-            <p class="body-copy">
-              Study shows the whole squad as cards or a list. Switch on Hide names and test yourself.
+              After every round, go over the players you missed or study the whole squad, then come back and ace it.
             </p>
           </div>
           <div class="photo-col">
@@ -427,9 +416,6 @@
                   · <a href="https://creativecommons.org/licenses/by-sa/4.0">CC BY-SA 4.0</a> · cropped
                 </li>
               </ul>
-              <p>
-                These photos load from Wikimedia Commons, so Wikimedia receives your IP address and the details of each request, as any website does.
-              </p>
             </div>
           </div>
         </div>
@@ -440,7 +426,7 @@
           <div data-reveal>
             <p class="eyebrow"><span class="corner"></span>What’s inside</p>
             <h2 id="squads-title" class="display section-title">
-              From Arsenal<br />to Armenia.
+              From your club<br />to your country.
             </h2>
           </div>
           <div class="stats">
@@ -521,7 +507,6 @@
         <div class="marquee is-reverse">
           <div class="marquee-track">
             <ul aria-label="Some of the national teams in Escuadra">
-              <li class="team"><img src="assets/flags/ESP.png" alt="" />Spain</li>
               <li class="team"><img src="assets/flags/ARG.png" alt="" />Argentina</li>
               <li class="team"><img src="assets/flags/BRA.png" alt="" />Brazil</li>
               <li class="team"><img src="assets/flags/FRA.png" alt="" />France</li>
@@ -543,10 +528,11 @@
               <li class="team"><img src="assets/flags/AUS.png" alt="" />Australia</li>
               <li class="team"><img src="assets/flags/CAN.png" alt="" />Canada</li>
               <li class="team"><img src="assets/flags/GHA.png" alt="" />Ghana</li>
+              <li class="team"><img src="assets/flags/ESP.png" alt="" />Spain</li>
               <li class="team"><img src="assets/flags/ARM.png" alt="" />Armenia</li>
+              <li class="team"><img src="assets/flags/SVN.png" alt="" />Slovenia</li>
             </ul>
             <ul aria-hidden="true">
-              <li class="team"><img src="assets/flags/ESP.png" alt="" />Spain</li>
               <li class="team"><img src="assets/flags/ARG.png" alt="" />Argentina</li>
               <li class="team"><img src="assets/flags/BRA.png" alt="" />Brazil</li>
               <li class="team"><img src="assets/flags/FRA.png" alt="" />France</li>
@@ -568,14 +554,15 @@
               <li class="team"><img src="assets/flags/AUS.png" alt="" />Australia</li>
               <li class="team"><img src="assets/flags/CAN.png" alt="" />Canada</li>
               <li class="team"><img src="assets/flags/GHA.png" alt="" />Ghana</li>
+              <li class="team"><img src="assets/flags/ESP.png" alt="" />Spain</li>
               <li class="team"><img src="assets/flags/ARM.png" alt="" />Armenia</li>
+              <li class="team"><img src="assets/flags/SVN.png" alt="" />Slovenia</li>
             </ul>
           </div>
         </div>
 
         <div class="shell squads-note">
           <span class="leagues">Premier League · La Liga · Serie A · Bundesliga · Ligue 1</span>
-          <span>Squads are refreshed each season — new teams arrive without an app update.</span>
         </div>
       </section>
 
@@ -619,7 +606,7 @@
               Spanish for a shot into the top corner of the goal. Go ten for ten and Escuadra says so.
             </p>
             <p class="body-copy">
-              Then share the round as a picture or as text. No player photos, no names — friends can still play it.
+              Then share it, and show everyone you know the squad cold.
             </p>
           </div>
         </div>
@@ -628,49 +615,23 @@
       <section class="section" style="padding-top: 40px" aria-labelledby="promises-title">
         <div class="shell">
           <div data-reveal>
-            <p class="eyebrow"><span class="corner"></span>Made for short sessions</p>
+            <p class="eyebrow"><span class="corner"></span>Play anywhere</p>
             <h2 id="promises-title" class="display section-title">
-              Nothing between you<br />and the squad.
+              Your squad,<br />in your pocket.
             </h2>
           </div>
           <div class="promises">
             <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="8" r="3.5" /><path d="M5 20c.8-3.5 3.6-5.5 7-5.5s6.2 2 7 5.5" /><path d="M3.5 3.5l17 17" /></svg>
-              <h3>No account. No ads.</h3>
-              <p>Nothing to sign up for and nothing in the way. Open it and play.</p>
+              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="6" width="18" height="12" rx="2.5" /><path d="M6 15.5l2.5-7 2.5 7M6.9 13h3.2M13.5 8.5v7h1.5a3.5 3.5 0 0 0 0-7z" /><path d="M3.5 3.5l17 17" /></svg>
+              <h3>No ads</h3>
             </article>
             <article class="promise" data-reveal>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M2.5 8.8a15 15 0 0 1 4-2.6" /><path d="M10.6 4.7A15 15 0 0 1 21.5 8.8" /><path d="M5.3 12.3a10 10 0 0 1 3.2-2" /><path d="M15.4 10.4a10 10 0 0 1 3.3 1.9" /><path d="M8.6 15.7a5 5 0 0 1 6.8 0" /><circle cx="12" cy="19.2" r=".9" fill="currentColor" /><path d="M3.5 3.5l17 17" /></svg>
               <h3>Plays offline</h3>
-              <p>
-                Every squad lives on your phone. Photos load from Wikimedia Commons when you’re online; the team’s colours stand in when you’re not.
-              </p>
-            </article>
-            <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2.5" /><circle cx="9" cy="10" r="1.8" /><path d="M21 16l-5.2-5.2L7 19" /></svg>
-              <h3>Credited photos</h3>
-              <p>
-                Player photos from Wikimedia Commons where one is available, each with its author and licence.
-              </p>
             </article>
             <article class="promise" data-reveal>
               <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M3 12h18" /><path d="M12 3c2.5 2.6 3.8 5.6 3.8 9s-1.3 6.4-3.8 9c-2.5-2.6-3.8-5.6-3.8-9s1.3-6.4 3.8-9z" /></svg>
-              <h3>Five languages</h3>
-              <p>
-                English, Español, Français, Italiano and Deutsch. It follows your phone’s language, or you can pick one in Settings.
-              </p>
-            </article>
-            <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" aria-hidden="true"><circle cx="12" cy="12" r="8.5" /><path d="M12 3.5a8.5 8.5 0 0 1 0 17z" fill="currentColor" /></svg>
-              <h3>Light and dark</h3>
-              <p>It follows your phone’s appearance, or you can choose one yourself.</p>
-            </article>
-            <article class="promise" data-reveal>
-              <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" /><path d="M10.5 18.5h3" /></svg>
-              <h3>Anonymous statistics you can switch off</h3>
-              <p>
-                Escuadra sends anonymous usage statistics unless you switch them off in Settings. <a href="privacy/2/">The privacy policy</a> lists everything that leaves your device.
-              </p>
+              <h3>Available in 5 languages</h3>
             </article>
           </div>
         </div>
@@ -686,7 +647,6 @@
         <div class="final-fade" aria-hidden="true"></div>
         <div class="shell final-inner" data-reveal>
           <h2 id="get-title" class="display">Know the squad.<br />Cold.</h2>
-          <p>Escuadra is on iPhone and Android.</p>
           <div class="badges">
             <a
               href="https://apps.apple.com/app/escuadra/id6810705505"

@@ -42,20 +42,15 @@ export default {
   },
   home: {
     hero: {
-      eyebrow: 'Quiz sulle rose del calcio · iPhone e Android',
-      title: 'Conosci ogni<br />numero.',
-      lead: 'Chi ha il numero 7? Impara le rose di tutti i club dei cinque principali campionati europei e di oltre 150 nazionali in partite veloci, poi scopri chi hai sbagliato.',
+      eyebrow: 'Quiz sulle rose del calcio',
+      title: 'Chi ha il numero 7?',
+      lead: 'Conosci ogni numero. Impara le rose di tutti i club dei cinque principali campionati europei e di oltre 150 nazionali in partite lampo.',
       tryLink: 'Oppure prova una domanda qui',
     },
     try: {
       eyebrow: 'Provane una · Livello 1',
       title: 'Un numero.<br />Quattro nomi.',
       body: 'Ecco come si gioca: un numero di maglia e qualche indizio, poi scegli il giocatore. Qui le domande sono tre; nell’app sono dieci a partita, con la squadra che vuoi.',
-      steps: [
-        'Leggi il numero e gli indizi: ruolo, età e club o nazionalità.',
-        'Tocca un nome. Giusto o sbagliato, lo sai subito.',
-        'Alla fine, scopri esattamente chi hai sbagliato.',
-      ],
       level: 'Livello 1',
       nameKey: 'Nome',
       positionKey: 'Ruolo',
@@ -66,8 +61,6 @@ export default {
     credits: {
       title: 'Crediti foto · 3',
       cropped: 'ritagliata',
-      wikimedia:
-        'Queste foto vengono caricate da Wikimedia Commons: come qualsiasi sito web, Wikimedia riceve il tuo indirizzo IP e i dettagli di ogni richiesta.',
     },
     how: {
       eyebrow: 'I livelli',
@@ -83,14 +76,13 @@ export default {
           body: 'Scegli il nome tra 6 opzioni, poi il ruolo, poi la nazionalità o, per una nazionale, il club.',
         },
       ],
-      note: 'Ogni domanda vale un punto. Ai livelli 2 e 3 prendi il punto solo se tutte le parti sono giuste: niente punteggi parziali.',
+      note: 'Ogni domanda vale un punto. Ai livelli 2 e 3 prendi il punto solo se tutte le parti sono giuste.',
     },
     misses: {
       eyebrow: 'Risultati e Rosa',
       title: 'Sbagliando s’impara.',
       body: [
-        'Dopo ogni partita, la schermata dei risultati raccoglie in schede da scorrere tutti i giocatori che hai sbagliato, così puoi ripassarli prima della partita successiva.',
-        'La schermata “Rosa” mostra tutta la rosa come schede o come elenco. Tocca “Copri i nomi” e mettiti alla prova.',
+        'Dopo ogni partita, ripassa i giocatori che hai sbagliato o studia tutta la rosa, poi torna e fai bottino pieno.',
       ],
       stackLabel: 'Real Madrid · 2026/27 · Livello 2 · 7/10',
       missedOf: 'Errore {n} di 3',
@@ -98,7 +90,7 @@ export default {
     },
     squads: {
       eyebrow: 'Cosa contiene',
-      title: 'Dall’Arsenal<br />all’Armenia.',
+      title: 'Dal tuo club<br />alla tua nazionale.',
       stats: [
         { title: 'Club', body: 'Tutti i club dei cinque principali campionati europei.' },
         { title: 'Nazionali', body: 'Da tutte e sei le confederazioni.' },
@@ -106,7 +98,6 @@ export default {
       ],
       clubsLabel: 'Alcuni dei club presenti in Escuadra',
       nationsLabel: 'Alcune delle nazionali presenti in Escuadra',
-      refreshed: 'Le rose si aggiornano ogni stagione: le nuove squadre arrivano senza aggiornare l’app.',
     },
     share: {
       pictureLabel:
@@ -117,39 +108,16 @@ export default {
       title: 'Una partita senza errori ha un nome.',
       body: [
         'In spagnolo, un tiro all’incrocio dei pali. Fai dieci su dieci ed Escuadra te lo dice.',
-        'Poi condividi il risultato come immagine o come testo. Senza foto né nomi, così anche i tuoi amici possono giocare.',
+        'Poi condividi il risultato e fai vedere a tutti che conosci la rosa a menadito.',
       ],
     },
     promises: {
-      eyebrow: 'Pensata per sessioni brevi',
-      title: 'Tu e la rosa.<br />Nient’altro.',
-      items: [
-        {
-          title: 'Nessun account. Nessuna pubblicità.',
-          body: 'Nessuna registrazione, niente che ti rallenti. Apri l’app e gioca.',
-        },
-        {
-          title: 'Funziona offline',
-          body: 'Tutte le rose sono salvate sul tuo telefono. Le foto si caricano da Wikimedia Commons quando sei online; offline, al loro posto compaiono i colori della squadra.',
-        },
-        {
-          title: 'Foto con i crediti',
-          body: 'Foto dei giocatori da Wikimedia Commons, dove disponibili, ognuna con il suo autore e la sua licenza.',
-        },
-        {
-          title: 'Cinque lingue',
-          body: 'English, Español, Français, Italiano e Deutsch. L’app segue la lingua del tuo telefono, oppure puoi sceglierne una in Impostazioni.',
-        },
-        { title: 'Chiaro e scuro', body: 'L’app segue l’aspetto del tuo telefono, oppure puoi sceglierlo tu.' },
-        {
-          title: 'Statistiche anonime, disattivabili',
-          body: 'Escuadra invia statistiche d’uso anonime, a meno che tu non le disattivi in Impostazioni. <a href="{privacy}">L’informativa sulla privacy</a> elenca tutto ciò che esce dal tuo dispositivo.',
-        },
-      ],
+      eyebrow: 'Gioca ovunque',
+      title: 'La tua rosa,<br />in tasca.',
+      items: ['Nessuna pubblicità', 'Funziona offline', 'Disponibile in 5 lingue'],
     },
     get: {
       title: 'Conosci la rosa<br />a menadito.',
-      body: 'Escuadra è disponibile su iPhone e Android.',
     },
     footer: {
       escuadraHeading: 'Escuadra',
@@ -207,7 +175,7 @@ export default {
     JPN: 'Giappone', GER: 'Germania', SEN: 'Senegal', ITA: 'Italia', MEX: 'Messico',
     POR: 'Portogallo', KOR: 'Corea del Sud', NED: 'Paesi Bassi', NGA: 'Nigeria',
     USA: 'Stati Uniti', CRO: 'Croazia', URU: 'Uruguay', EGY: 'Egitto', COL: 'Colombia',
-    AUS: 'Australia', CAN: 'Canada', GHA: 'Ghana', ARM: 'Armenia',
+    AUS: 'Australia', CAN: 'Canada', GHA: 'Ghana', ARM: 'Armenia', SVN: 'Slovenia',
   },
   teaser: {
     positions: { GK: 'Portiere', DF: 'Difensore', MF: 'Centrocampo', FW: 'Attaccante' },

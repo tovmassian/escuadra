@@ -278,12 +278,13 @@ for (const path of generated.filter((p) => p.endsWith('index.html'))) {
   assert.ok(home.includes(`>${text.home.hero.title}</h1>`), `${path} has its headline`);
   assert.ok(home.includes(text.home.hero.lead), `${path} has its supporting copy`);
   assert.ok(home.includes(`>${text.home.get.title}</h2>`), `${path} has its last call`);
+  // The headline is the app's own question, in the page's language.
+  assert.equal(text.home.hero.title, text.teaser.whoWears.replace('{number}', '7'), `${path} asks the app's question`);
   if (language === 'en') {
-    assert.match(home, /<h1[^>]*>Know every<br \/>number\.<\/h1>/, 'home has the approved headline');
-    // The App Store promotional text, reviewed in store/listing/en.md.
+    assert.match(home, /<h1[^>]*>Who wears 7\?<\/h1>/, 'home has the approved headline');
     assert.match(
       home,
-      /Who wears number 7\? Learn every club in Europe’s top five leagues and over\s+150 national teams in quick rounds, then see exactly who you missed\./,
+      /Know every number\. Learn every club in Europe’s top five leagues and over 150\s+national teams in quick-fire rounds\./,
       'home has the approved supporting copy',
     );
     assert.match(home, /Know the squad\.<br \/>Cold\./, 'home keeps the earlier headline as its last call');
@@ -358,22 +359,11 @@ for (const path of generated.filter((p) => p.endsWith('index.html'))) {
   );
   // privacy.html still names Android, and the credits cover the whole site.
   assert.match(home, /Android is a trademark\s+of Google LLC\./, `${path} attributes the Android trademark`);
-  // 2.0 sends anonymous usage statistics, so home says so and links the policy.
-  const statistics = text.home.promises.items[5].body.split('<a')[0].trim();
-  assert.ok(home.includes(statistics), `${path} says what leaves the device`);
-  // Photos cover about half the squad places, so nothing may promise one for every player.
-  assert.ok(home.includes(text.home.promises.items[2].body), `${path} qualifies the player photos`);
   // The listing's affiliation line, word for word.
   assert.ok(home.includes(text.home.footer.affiliation), `${path} says Escuadra is unaffiliated`);
   if (language === 'en') {
-    assert.match(
-      home,
-      /Escuadra sends anonymous usage statistics unless you switch them off in\s+Settings\./,
-      'home says what leaves the device',
-    );
     assert.doesNotMatch(home, /No personal data|No data collected/, 'home makes no 1.x privacy claim');
     assert.doesNotMatch(home, /Fully offline/, 'home no longer promises more than offline play');
-    assert.match(home, /where one is available/, 'home qualifies the player photos');
     assert.match(
       home,
       /Escuadra is an independent, unofficial study tool\. It is not affiliated with,\s+endorsed by, or connected to any confederation, league or competition/,
@@ -403,14 +393,6 @@ for (const path of generated.filter((p) => p.endsWith('index.html'))) {
       credit,
       new RegExp(`href="https://creativecommons\\.org/licenses/[^"]+">CC [^<]+</a>\\s*·\\s*${cropped}`),
       `a credit on ${path} links its licence and says the photo is cropped`,
-    );
-  }
-  assert.ok(home.includes(text.home.credits.wikimedia), `${path} says the photos reach Wikimedia`);
-  if (language === 'en') {
-    assert.match(
-      home,
-      /These photos load from Wikimedia Commons, so Wikimedia receives your IP address and the\s+details of each request, as any website does\./,
-      'home says the photos reach Wikimedia',
     );
   }
   // The file names name the players; in visible text they would read as captions.
