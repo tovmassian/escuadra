@@ -1,6 +1,15 @@
 // src/home.mjs: Home's template. Text from the page's language; facts from quiz.mjs.
-import { QUESTIONS, photoPage, photoSources } from '../quiz.mjs';
-import { block, fill, themeScript } from './layout.mjs';
+import {
+  QUESTIONS,
+  ageOn,
+  clueValue,
+  fill,
+  photoPage,
+  photoSources,
+  spokenClues,
+  teamName,
+} from '../quiz.mjs';
+import { block, themeScript, wordsScript } from './layout.mjs';
 
 const APP_STORE_URL = 'https://apps.apple.com/us/app/escuadra/id6810705505';
 const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.tovmassian.escuadra';
@@ -132,28 +141,25 @@ export function home(page) {
   const privacy = `${root}privacy/2/`;
 
   // The teaser's first question stays in the markup: it reads the same without JavaScript.
-  // The age is Yamal's on the day the page was written; the script recounts it on play.
+  // The age is the first player's on the day the page was built; the script recounts it on
+  // play, and the up-to-date test asks for a rebuild on his birthday.
   const q = QUESTIONS[0];
-  const clueKey = q.clue.label.toLowerCase();
-  const age = 19;
+  const today = new Date();
+  const age = ageOn(q.birth, today);
+  const words = { ...tz, countries: text.countries };
   const spoken =
-    `${fill(tz.spoken.name, { name: tz.spoken.beingAsked })} ` +
-    fill(tz.spoken.clues, {
-      position: tz.positions[q.position],
-      age,
-      clueLabel: tz.clueSpoken[clueKey],
-      clue: q.clue.value,
-    });
+    `${fill(tz.spoken.name, { name: tz.spoken.beingAsked })} ` + spokenClues(q, today, words);
   const photo = photoSources(q.photo);
-  const teaserCredits = QUESTIONS.map(({ team, number, photo: p }) =>
-    credit(
-      `${team} · ${number}`,
+  const teaserCredits = QUESTIONS.map((question) => {
+    const { number, photo: p } = question;
+    return credit(
+      `${teamName(question, words)} · ${number}`,
       photoPage(p),
       p.author,
       { name: p.licence, url: p.licenceUrl },
       t.credits.cropped,
-    ),
-  ).join('\n');
+    );
+  }).join('\n');
   const missCredits = MISS_CARDS.map((card) =>
     credit(
       `${card.number} ${card.name}`,
@@ -193,6 +199,7 @@ ${themeScript()}
     />
     <link rel="stylesheet" href="${root}site.css" />
     <script type="module" src="${root}site.mjs"></script>
+${wordsScript(page)}
   </head>
   <body>
     <header class="site-header shell">
@@ -307,7 +314,7 @@ ${t.try.steps
                   </div>
                   <div class="stage-head">
                     <div>
-                      <p class="stage-team" data-quiz-team>${q.team}</p>
+                      <p class="stage-team" data-quiz-team>${teamName(q, words)}</p>
                       <p class="stage-level"><span class="stage-banner"></span>${t.try.level}</p>
                     </div>
                     <p class="stage-score" data-quiz-score aria-hidden="true">0/0</p>
@@ -332,9 +339,9 @@ ${t.try.steps
                     <span class="chip-key">${t.try.ageKey}</span><span data-quiz-age>${age}</span>
                   </li>
                   <li class="chip">
-                    <span class="chip-key" data-quiz-clue-label>${tz.clueCodes[clueKey]}</span
+                    <span class="chip-key" data-quiz-clue-label>${tz.clueCodes[q.clue.kind]}</span
                     ><img class="chip-flag" src="${root}assets/flags/ENG.png" alt="" data-quiz-flag hidden
-                    /><span data-quiz-clue>${q.clue.value}</span>
+                    /><span data-quiz-clue>${clueValue(q, words)}</span>
                   </li>
                 </ul>
                 <p class="display quiz-title" data-quiz-title>${fill(tz.whoWears, { number: q.number })}</p>

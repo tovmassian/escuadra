@@ -1,5 +1,6 @@
 // src/support.mjs: Support's template. Text from the page's language.
-import { block, fill, themeScript } from './layout.mjs';
+import { fill } from '../quiz.mjs';
+import { block, themeScript } from './layout.mjs';
 
 const ISSUES = 'https://github.com/tovmassian/escuadra/issues';
 

@@ -1,10 +1,5 @@
 // src/layout.mjs: what every generated page shares.
 
-/** Fills {slots}: fill('Missed {n} of 3', { n: 2 }). Task 2 moves this into quiz.mjs. */
-export function fill(template, values) {
-  return template.replace(/\{(\w+)\}/g, (slot, key) => (key in values ? String(values[key]) : slot));
-}
-
 /**
  * One block element, on one line when it fits in 100 columns and broken over three
  * otherwise, as the pages have always been written. Whitespace around a block's text
@@ -37,4 +32,11 @@ export function themeScript() {
       }
       document.documentElement.dataset.js = 'true';
     </script>`;
+}
+
+/** The teaser's words for site.mjs, so each page carries only its own language. */
+export function wordsScript(page) {
+  const words = { root: page.root, ...page.text.teaser, countries: page.text.countries };
+  const json = JSON.stringify(words).replace(/</g, '\\u003c');
+  return `    <script type="application/json" id="site-words">${json}</script>`;
 }
