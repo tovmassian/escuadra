@@ -25,10 +25,10 @@ import {
 // Clubs are never translated: a name and the colours of its banded marker.
 const CLUBS = [
   ['Real Madrid', '#ffffff 0% 100%'],
+  ['Inter Milan', '#0068a8 0% 50%, #000000 50% 100%'],
   ['Barcelona', '#a50044 0% 50%, #004d98 50% 100%'],
   ['Arsenal', '#ef0107 0% 100%'],
   ['Bayern Munich', '#dc052d 0% 100%'],
-  ['Inter Milan', '#0068a8 0% 50%, #000000 50% 100%'],
   ['Paris Saint-Germain', '#004170 0% 40%, #da291c 40% 60%, #004170 60% 100%'],
   ['Liverpool', '#c8102e 0% 100%'],
   ['Borussia Dortmund', '#fde100 0% 50%, #000000 50% 100%'],
@@ -53,7 +53,7 @@ const CLUBS = [
 // The national teams of the second marquee, by flag file; their names are in the text.
 const NATIONS = [
   'ARG', 'BRA', 'FRA', 'ENG', 'JPN', 'GER', 'SEN', 'ITA', 'MEX', 'POR', 'KOR',
-  'NED', 'NGA', 'USA', 'CRO', 'URU', 'EGY', 'COL', 'AUS', 'CAN', 'GHA', 'ESP', 'ARM', 'SVN',
+  'NED', 'NGA', 'USA', 'CRO', 'URU', 'EGY', 'COL', 'AUS', 'CAN', 'GHA', 'ESP', 'ARM', 'SVN', 'DEN',
 ];
 
 // The three players on the stack of Results cards: their photos and credits.

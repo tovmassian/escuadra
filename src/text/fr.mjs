@@ -175,7 +175,7 @@ export default {
     JPN: 'Japon', GER: 'Allemagne', SEN: 'Sénégal', ITA: 'Italie', MEX: 'Mexique',
     POR: 'Portugal', KOR: 'Corée du Sud', NED: 'Pays-Bas', NGA: 'Nigeria',
     USA: 'États-Unis', CRO: 'Croatie', URU: 'Uruguay', EGY: 'Égypte', COL: 'Colombie',
-    AUS: 'Australie', CAN: 'Canada', GHA: 'Ghana', ARM: 'Arménie', SVN: 'Slovénie',
+    AUS: 'Australie', CAN: 'Canada', GHA: 'Ghana', ARM: 'Arménie', SVN: 'Slovénie', DEN: 'Danemark',
   },
   teaser: {
     positions: { GK: 'Gardien', DF: 'Défenseur', MF: 'Milieu', FW: 'Attaquant' },

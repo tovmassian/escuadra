@@ -51,7 +51,7 @@
     />
     <link rel="stylesheet" href="../site.css" />
     <script type="module" src="../site.mjs"></script>
-    <script type="application/json" id="site-words">{"root":"../","positions":{"GK":"Portero","DF":"Defensa","MF":"Medio","FW":"Delantero"},"positionCodes":{"GK":"POR","DF":"DEF","MF":"MED","FW":"DEL"},"clueCodes":{"club":"Club","nat":"Nac"},"clueSpoken":{"club":"Club","nat":"Nacionalidad"},"spoken":{"name":"Nombre: {name}.","beingAsked":"se pregunta ahora","clues":"Posición: {position}. Edad: {age}. {clueLabel}: {clue}.","question":"Pregunta {n} de {total}. {team}. ¿Quién lleva el {number}? {clues}","score":"Puntuación: {score} de {answered}","result":"{score} de {total}"},"whoWears":"¿Quién lleva el {number}?","hint":{"tap":"Elige tu respuesta","right":"¡Acierto! Seguimos…","rightLast":"¡Acierto! Ahora, tu ronda…"},"next":"Siguiente","seeRound":"Ver tu ronda","live":{"right":"Acierto: {answer}.","wrong":"Fallo. El {number} es {answer}.","round":"Tu ronda: {score} de {total}. {title}."},"titles":{"perfect":"A la escuadra","learning":"Aprendiendo"},"resultCopy":{"perfect":"Tres de tres. En la app, eliges entre 96 clubes y 157 selecciones, y cada ronda tiene diez preguntas.","learning":"Estos son los que te faltan. En la app, eliges entre 96 clubes y 157 selecciones, cada ronda tiene diez preguntas y cada fallo te espera en la pantalla de resultados."},"countries":{"ESP":"España","ARG":"Argentina","BRA":"Brasil","FRA":"Francia","ENG":"Inglaterra","JPN":"Japón","GER":"Alemania","SEN":"Senegal","ITA":"Italia","MEX":"México","POR":"Portugal","KOR":"Corea del Sur","NED":"Países Bajos","NGA":"Nigeria","USA":"Estados Unidos","CRO":"Croacia","URU":"Uruguay","EGY":"Egipto","COL":"Colombia","AUS":"Australia","CAN":"Canadá","GHA":"Ghana","ARM":"Armenia","SVN":"Eslovenia"}}</script>
+    <script type="application/json" id="site-words">{"root":"../","positions":{"GK":"Portero","DF":"Defensa","MF":"Medio","FW":"Delantero"},"positionCodes":{"GK":"POR","DF":"DEF","MF":"MED","FW":"DEL"},"clueCodes":{"club":"Club","nat":"Nac"},"clueSpoken":{"club":"Club","nat":"Nacionalidad"},"spoken":{"name":"Nombre: {name}.","beingAsked":"se pregunta ahora","clues":"Posición: {position}. Edad: {age}. {clueLabel}: {clue}.","question":"Pregunta {n} de {total}. {team}. ¿Quién lleva el {number}? {clues}","score":"Puntuación: {score} de {answered}","result":"{score} de {total}"},"whoWears":"¿Quién lleva el {number}?","hint":{"tap":"Elige tu respuesta","right":"¡Acierto! Seguimos…","rightLast":"¡Acierto! Ahora, tu ronda…"},"next":"Siguiente","seeRound":"Ver tu ronda","live":{"right":"Acierto: {answer}.","wrong":"Fallo. El {number} es {answer}.","round":"Tu ronda: {score} de {total}. {title}."},"titles":{"perfect":"A la escuadra","learning":"Aprendiendo"},"resultCopy":{"perfect":"Tres de tres. En la app, eliges entre 96 clubes y 157 selecciones, y cada ronda tiene diez preguntas.","learning":"Estos son los que te faltan. En la app, eliges entre 96 clubes y 157 selecciones, cada ronda tiene diez preguntas y cada fallo te espera en la pantalla de resultados."},"countries":{"ESP":"España","ARG":"Argentina","BRA":"Brasil","FRA":"Francia","ENG":"Inglaterra","JPN":"Japón","GER":"Alemania","SEN":"Senegal","ITA":"Italia","MEX":"México","POR":"Portugal","KOR":"Corea del Sur","NED":"Países Bajos","NGA":"Nigeria","USA":"Estados Unidos","CRO":"Croacia","URU":"Uruguay","EGY":"Egipto","COL":"Colombia","AUS":"Australia","CAN":"Canadá","GHA":"Ghana","ARM":"Armenia","SVN":"Eslovenia","DEN":"Dinamarca"}}</script>
   </head>
   <body>
     <header class="site-header shell">
@@ -434,10 +434,10 @@
           <div class="marquee-track">
             <ul aria-label="Algunos de los clubes que incluye Escuadra">
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 100%)"></span>Real Madrid</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #0068a8 0% 50%, #000000 50% 100%)"></span>Inter Milan</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #a50044 0% 50%, #004d98 50% 100%)"></span>Barcelona</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ef0107 0% 100%)"></span>Arsenal</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #dc052d 0% 100%)"></span>Bayern Munich</li>
-              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #0068a8 0% 50%, #000000 50% 100%)"></span>Inter Milan</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #004170 0% 40%, #da291c 40% 60%, #004170 60% 100%)"></span>Paris Saint-Germain</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #c8102e 0% 100%)"></span>Liverpool</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #fde100 0% 50%, #000000 50% 100%)"></span>Borussia Dortmund</li>
@@ -460,10 +460,10 @@
             </ul>
             <ul aria-hidden="true">
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ffffff 0% 100%)"></span>Real Madrid</li>
+              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #0068a8 0% 50%, #000000 50% 100%)"></span>Inter Milan</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #a50044 0% 50%, #004d98 50% 100%)"></span>Barcelona</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #ef0107 0% 100%)"></span>Arsenal</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #dc052d 0% 100%)"></span>Bayern Munich</li>
-              <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #0068a8 0% 50%, #000000 50% 100%)"></span>Inter Milan</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #004170 0% 40%, #da291c 40% 60%, #004170 60% 100%)"></span>Paris Saint-Germain</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #c8102e 0% 100%)"></span>Liverpool</li>
               <li class="team"><span class="team-bands" style="--bands: linear-gradient(90deg, #fde100 0% 50%, #000000 50% 100%)"></span>Borussia Dortmund</li>
@@ -513,6 +513,7 @@
               <li class="team"><img src="../assets/flags/ESP.png" alt="" />España</li>
               <li class="team"><img src="../assets/flags/ARM.png" alt="" />Armenia</li>
               <li class="team"><img src="../assets/flags/SVN.png" alt="" />Eslovenia</li>
+              <li class="team"><img src="../assets/flags/DEN.png" alt="" />Dinamarca</li>
             </ul>
             <ul aria-hidden="true">
               <li class="team"><img src="../assets/flags/ARG.png" alt="" />Argentina</li>
@@ -539,6 +540,7 @@
               <li class="team"><img src="../assets/flags/ESP.png" alt="" />España</li>
               <li class="team"><img src="../assets/flags/ARM.png" alt="" />Armenia</li>
               <li class="team"><img src="../assets/flags/SVN.png" alt="" />Eslovenia</li>
+              <li class="team"><img src="../assets/flags/DEN.png" alt="" />Dinamarca</li>
             </ul>
           </div>
         </div>
