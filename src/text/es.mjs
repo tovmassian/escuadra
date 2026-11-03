@@ -35,7 +35,7 @@ export default {
       toDark: 'Cambiar al tema oscuro',
     },
     releaseStatus: 'Ya disponible en el App Store y en Google Play',
-    badges: { appStore: 'Descárgalo en el App Store', googlePlay: 'Disponible en Google Play' },
+    badges: { appStore: 'Consíguelo en el App Store', googlePlay: 'Descargar en Google Play' },
   },
   home: {
     hero: {

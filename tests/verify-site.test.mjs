@@ -58,8 +58,32 @@ for (const face of readdirSync('assets/fonts', { withFileTypes: true }).filter((
   assert.ok(existsSync(`${dir}/OFL.txt`), `${dir} carries its OFL.txt`);
 }
 // A shipped image names its licence where it lives (main's docs/license.md).
-for (const dir of ['assets/fonts', 'assets/flags']) {
+for (const dir of ['assets/fonts', 'assets/flags', 'assets/badges']) {
   assert.ok(existsSync(`${dir}/README.md`), `${dir} names its source and licence`);
+}
+// The stores' badges, one folder per language (English at the root), as downloaded.
+const badgeDir = (language) => `assets/badges/${language === 'en' ? '' : `${language}/`}`;
+for (const language of LANGUAGES) {
+  for (const file of ['app-store-badge-black.svg', 'google-play-badge.svg']) {
+    const path = `${badgeDir(language)}${file}`;
+    assert.ok(existsSync(path), `missing badge: ${path}`);
+    // Google's artwork opens with an XML declaration; the svg element comes next.
+    assert.match(readFileSync(path, 'utf8'), /^(<\?xml[^>]*\?>\s*)?<svg[\s>]/, `${path} is an SVG`);
+  }
+}
+// A badge is downloaded artwork served as part of the site: it may carry no script and
+// load nothing from elsewhere, and nothing but SVGs and the README lives beside it.
+for (const entry of readdirSync('assets/badges', { recursive: true, withFileTypes: true })) {
+  if (entry.isDirectory()) continue;
+  const path = join(entry.parentPath, entry.name);
+  if (path === 'assets/badges/README.md') continue;
+  assert.ok(path.endsWith('.svg'), `${path} is an SVG badge or the README`);
+  const svg = readFileSync(path, 'utf8');
+  assert.doesNotMatch(svg, /<script/i, `${path} carries no script`);
+  assert.doesNotMatch(svg, /\son[a-z]+\s*=/i, `${path} carries no event handler`);
+  assert.doesNotMatch(svg, /href\s*=\s*(?!["']#)/i, `${path} links nothing outside itself`);
+  assert.doesNotMatch(svg, /@import/i, `${path} imports no stylesheet`);
+  assert.doesNotMatch(svg, /url\(\s*(?!['"]?#)/i, `${path} loads nothing by url()`);
 }
 
 assert.deepEqual(
@@ -275,12 +299,12 @@ for (const path of generated.filter((p) => p.endsWith('index.html'))) {
     {
       href: appStoreUrl,
       label: text.layout.badges.appStore,
-      src: `${root}assets/badges/app-store-badge-black.svg`,
+      src: `${root}${badgeDir(language)}app-store-badge-black.svg`,
     },
     {
       href: playStoreUrl,
       label: text.layout.badges.googlePlay,
-      src: `${root}assets/badges/google-play-badge.svg`,
+      src: `${root}${badgeDir(language)}google-play-badge.svg`,
     },
   ];
   assert.ok(badgeLinks.length > 0, `${path} links the store listings`);

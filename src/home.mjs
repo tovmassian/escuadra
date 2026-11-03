@@ -100,20 +100,21 @@ const PROMISE_ICONS = [
   '<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><rect x="6.5" y="2.5" width="11" height="19" rx="2.5" /><path d="M10.5 18.5h3" /></svg>',
 ];
 
-/** The two store badges in a row, the black App Store badge first. */
-function badges({ text, root }, indent, className) {
+/** The two store badges in a row, the black App Store badge first, in the page's language. */
+function badges({ language, text, root }, indent, className) {
   const pad = ' '.repeat(indent);
   const label = text.layout.badges;
+  const dir = `${root}assets/badges/${language === 'en' ? '' : `${language}/`}`;
   return `${pad}<div class="${className}">
 ${pad}  <a
 ${pad}    href="${APP_STORE_URL}"
 ${pad}    aria-label="${label.appStore}"
-${pad}    ><img class="badge" src="${root}assets/badges/app-store-badge-black.svg" alt=""
+${pad}    ><img class="badge" src="${dir}app-store-badge-black.svg" alt=""
 ${pad}  /></a>
 ${pad}  <a
 ${pad}    href="${PLAY_URL}"
 ${pad}    aria-label="${label.googlePlay}"
-${pad}    ><img class="badge" src="${root}assets/badges/google-play-badge.svg" alt=""
+${pad}    ><img class="badge" src="${dir}google-play-badge.svg" alt=""
 ${pad}  /></a>
 ${pad}</div>`;
 }
