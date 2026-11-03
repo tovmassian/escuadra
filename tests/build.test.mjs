@@ -12,7 +12,7 @@ test('every generated page on disk is what the generator renders: run `node src/
 });
 
 // The languages whose text file has landed; each joins this list when its file does.
-const TRANSLATED = ['es'];
+const TRANSLATED = ['es', 'fr'];
 
 /** Every leaf as [path, value]: home.try.steps.0 → 'Read the number…'. */
 function leaves(value, path = []) {
