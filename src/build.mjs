@@ -6,13 +6,16 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { home } from './home.mjs';
+import { folderOf } from './layout.mjs';
 import { support } from './support.mjs';
+import de from './text/de.mjs';
 import en from './text/en.mjs';
+import es from './text/es.mjs';
+import fr from './text/fr.mjs';
+import it from './text/it.mjs';
 
-export const TEXTS = { en };
-
-/** Where a language's pages live: English at the root, the others in their folder. */
-export const folderOf = (language) => (language === 'en' ? '' : `${language}/`);
+export { folderOf };
+export const TEXTS = { en, es, fr, it, de };
 
 export function renderSite() {
   const pages = new Map();

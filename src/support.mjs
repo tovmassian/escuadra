@@ -1,6 +1,14 @@
 // src/support.mjs: Support's template. Text from the page's language.
 import { fill } from '../quiz.mjs';
-import { block, themeScript } from './layout.mjs';
+import {
+  alternates,
+  block,
+  languageMenu,
+  privacyHref,
+  redirectScript,
+  themeScript,
+  themeToggle,
+} from './layout.mjs';
 
 const ISSUES = 'https://github.com/tovmassian/escuadra/issues';
 
@@ -18,14 +26,17 @@ export function support(page) {
   const { text, root } = page;
   const l = text.layout;
   const t = text.support;
-  const privacy = `${root}privacy/2/`;
+  const privacy = privacyHref(page);
+  // privacy.html is the 1.x policy, in English only.
+  const privacy1x = page.language === 'en' ? '' : ' hreflang="en"';
   return `<!doctype html>
 <html lang="${page.language}">
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="${root}assets/favicon.ico" />
+${page.language === 'en' ? redirectScript('support.html') + '\n' : ''}    <link rel="icon" type="image/x-icon" href="${root}assets/favicon.ico" />
     <title>${text.meta.supportTitle}</title>
+${alternates(page, 'support.html')}
 ${themeScript()}
     <link rel="stylesheet" href="${root}site.css" />
     <script type="module" src="${root}site.mjs"></script>
@@ -39,17 +50,13 @@ ${themeScript()}
         <span>escuadra</span>
       </a>
       <nav aria-label="${l.utilityNav}">
-        <a href="index.html">${l.nav.home}</a><a href="${root}support.html" aria-current="page">${l.nav.support}</a
+        <a href="index.html">${l.nav.home}</a><a href="support.html" aria-current="page">${l.nav.support}</a
         ><a href="${privacy}">${l.nav.privacy}</a>
       </nav>
-      <button
-        type="button"
-        class="theme-toggle"
-        data-theme-toggle
-      >
-        <span class="theme-toggle-icon" aria-hidden="true">◐</span
-        ><span data-theme-toggle-label></span>
-      </button>
+      <div class="header-actions">
+        ${languageMenu(page, 'support.html')}
+        ${themeToggle(page)}
+      </div>
     </header>
 
     <main>
@@ -108,7 +115,7 @@ ${block(12, '<p>', fill(item.a, { privacy }), '</p>')}
       <span>&copy; Khachatur Tovmasyan</span>
       <nav aria-label="${l.footerNav}">
         <a href="index.html">${l.nav.home}</a><a href="${privacy}">${l.nav.privacy}</a
-        ><a href="${root}privacy.html">${l.nav.privacy1x}</a>
+        ><a href="${root}privacy.html"${privacy1x}>${l.nav.privacy1x}</a>
       </nav>
       <span class="release-status">${l.releaseStatus}</span>
     </footer>

@@ -9,10 +9,18 @@ import {
   spokenClues,
   teamName,
 } from '../quiz.mjs';
-import { block, themeScript, wordsScript } from './layout.mjs';
-
-const APP_STORE_URL = 'https://apps.apple.com/us/app/escuadra/id6810705505';
-const PLAY_STORE_URL = 'https://play.google.com/store/apps/details?id=com.tovmassian.escuadra';
+import {
+  APP_STORE_URL,
+  PLAY_URL,
+  alternates,
+  block,
+  languageMenu,
+  privacyHref,
+  redirectScript,
+  themeScript,
+  themeToggle,
+  wordsScript,
+} from './layout.mjs';
 
 // Clubs are never translated: a name and the colours of its banded marker.
 const CLUBS = [
@@ -103,7 +111,7 @@ ${pad}    aria-label="${label.appStore}"
 ${pad}    ><img class="badge" src="${root}assets/badges/app-store-badge-black.svg" alt=""
 ${pad}  /></a>
 ${pad}  <a
-${pad}    href="${PLAY_STORE_URL}"
+${pad}    href="${PLAY_URL}"
 ${pad}    aria-label="${label.googlePlay}"
 ${pad}    ><img class="badge" src="${root}assets/badges/google-play-badge.svg" alt=""
 ${pad}  /></a>
@@ -138,7 +146,15 @@ export function home(page) {
   const l = text.layout;
   const t = text.home;
   const tz = text.teaser;
-  const privacy = `${root}privacy/2/`;
+  const privacy = privacyHref(page);
+  // "A la escuadra" is never translated. The French, Italian and German pages mark it as
+  // Spanish; the English page keeps the markup it has always had.
+  const escuadra =
+    page.language === 'en' || page.language === 'es'
+      ? 'A la escuadra'
+      : '<span lang="es">A la escuadra</span>';
+  // The trademark credits stay in English, as their holders publish them.
+  const credits = page.language === 'en' ? '' : ' lang="en"';
 
   // The teaser's first question stays in the markup: it reads the same without JavaScript.
   // The age is the first player's on the day the page was built; the script recounts it on
@@ -176,12 +192,13 @@ export function home(page) {
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <link rel="icon" type="image/x-icon" href="${root}assets/favicon.ico" />
+${page.language === 'en' ? redirectScript('index.html') + '\n' : ''}    <link rel="icon" type="image/x-icon" href="${root}assets/favicon.ico" />
     <title>${text.meta.homeTitle}</title>
     <meta
       name="description"
       content="${text.meta.homeDescription}"
     />
+${alternates(page, 'index.html')}
 ${themeScript()}
     <link
       rel="preload"
@@ -211,18 +228,12 @@ ${wordsScript(page)}
       </a>
       <nav aria-label="${l.utilityNav}">
         <a href="#try">${l.nav.try}</a><a href="#how">${l.nav.how}</a
-        ><a href="#squads">${l.nav.squads}</a><a href="${root}support.html">${l.nav.support}</a
+        ><a href="#squads">${l.nav.squads}</a><a href="support.html">${l.nav.support}</a
         ><a href="${privacy}">${l.nav.privacy}</a>
       </nav>
       <div class="header-actions">
-        <button
-          type="button"
-          class="theme-toggle"
-          data-theme-toggle
-        >
-          <span class="theme-toggle-icon" aria-hidden="true">◐</span
-          ><span data-theme-toggle-label></span>
-        </button>
+        ${languageMenu(page, 'index.html')}
+        ${themeToggle(page)}
         <a class="pill pill-small" href="#get">${l.getApp}</a>
       </div>
     </header>
@@ -533,7 +544,7 @@ ${marquee(
                   <span class="share-ten">10</span><span class="share-of">/10</span>
                   <svg class="share-mark" viewBox="0 0 64 64" fill="currentColor" aria-hidden="true"><rect x="14" y="10" width="40" height="10" /><rect x="44" y="10" width="10" height="40" /><circle cx="35" cy="31" r="9" /><rect x="16" y="44" width="7" height="7" opacity="0.55" /><rect x="5" y="53" width="5" height="5" opacity="0.3" /></svg>
                 </p>
-                <p class="display share-title">A la escuadra</p>
+                <p class="display share-title">${escuadra}</p>
                 <p class="share-grid numbers">
                   <span>13</span><span>21</span><span>7</span><span>17</span><span>9</span
                   ><span>8</span><span>23</span><span>4</span><span>18</span><span>10</span>
@@ -548,7 +559,7 @@ ${marquee(
           <div class="copy-first" data-reveal>
             <p class="eyebrow"><span class="corner"></span>${t.share.eyebrow}</p>
             <h2 id="escuadra-title" class="display section-title">${t.share.title}</h2>
-            <p class="display escuadra-word">A la escuadra</p>
+            <p class="display escuadra-word">${escuadra}</p>
 ${t.share.body
   .map(
     (paragraph) => `            <p class="body-copy">
@@ -607,7 +618,7 @@ ${badges(page, 10, 'badges')}
             </span>
             <span>escuadra</span>
           </a>
-          <p class="eyebrow footer-tag">A la escuadra</p>
+          <p class="eyebrow footer-tag">${escuadra}</p>
         </div>
         <nav aria-label="${t.footer.escuadraHeading}">
           <h2>${t.footer.escuadraHeading}</h2>
@@ -620,7 +631,7 @@ ${badges(page, 10, 'badges')}
         <nav aria-label="${l.footerNav}">
           <h2>${t.footer.helpHeading}</h2>
           <ul>
-            <li><a href="${root}support.html">${l.nav.support}</a></li>
+            <li><a href="support.html">${l.nav.support}</a></li>
             <li><a href="${privacy}">${l.nav.privacyPolicy}</a></li>
             <li><a href="https://github.com/tovmassian/escuadra/issues">${l.nav.report}</a></li>
           </ul>
@@ -631,7 +642,7 @@ ${badges(page, 10, 'badges')}
         <p>
           ${t.footer.affiliation}
         </p>
-        <p class="legal-credits">
+        <p class="legal-credits"${credits}>
           Apple and the Apple logo are trademarks of Apple Inc., registered in
           the U.S. and other countries. App Store is a service mark of Apple
           Inc., registered in the U.S. and other countries. Google Play and the

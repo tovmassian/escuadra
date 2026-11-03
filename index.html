@@ -3,12 +3,37 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        let saved = null;
+        try { saved = localStorage.getItem('escuadra-site-language'); } catch {}
+        const language = (function resolveSiteLanguage(saved, deviceTags) {
+  const languages = ['en', 'es', 'fr', 'it', 'de'];
+  if (languages.includes(saved)) return saved;
+  for (const tag of deviceTags) {
+    const code = String(tag).split(/[-_]/)[0].toLowerCase();
+    if (languages.includes(code)) return code;
+  }
+  return 'en';
+})(saved, navigator.languages || [navigator.language || '']);
+        if (language === 'en') return;
+        document.documentElement.style.visibility = 'hidden';
+        location.replace(language + '/' + location.search + location.hash);
+      })();
+    </script>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <title>Escuadra — learn football squads by shirt number</title>
     <meta
       name="description"
       content="Who wears number 7? Learn every club in Europe’s top five leagues and over 150 national teams in quick rounds, then see exactly who you missed."
     />
+    <link rel="canonical" href="https://tovmassian.github.io/escuadra/" />
+    <link rel="alternate" hreflang="en" href="https://tovmassian.github.io/escuadra/" />
+    <link rel="alternate" hreflang="es" href="https://tovmassian.github.io/escuadra/es/" />
+    <link rel="alternate" hreflang="fr" href="https://tovmassian.github.io/escuadra/fr/" />
+    <link rel="alternate" hreflang="it" href="https://tovmassian.github.io/escuadra/it/" />
+    <link rel="alternate" hreflang="de" href="https://tovmassian.github.io/escuadra/de/" />
+    <link rel="alternate" hreflang="x-default" href="https://tovmassian.github.io/escuadra/" />
     <script>
       try {
         const saved = localStorage.getItem('escuadra-site-theme');
@@ -60,10 +85,18 @@
         ><a href="privacy/2/">Privacy</a>
       </nav>
       <div class="header-actions">
+        <details class="language-menu" data-language-menu>
+          <summary aria-label="Language: English"><span aria-hidden="true">EN</span></summary>
+          <nav class="language-nav" aria-label="Language"><a href="index.html" hreflang="en" lang="en" data-language="en" aria-current="page">English</a><a href="es/index.html" hreflang="es" lang="es" data-language="es">Español</a><a href="fr/index.html" hreflang="fr" lang="fr" data-language="fr">Français</a><a href="it/index.html" hreflang="it" lang="it" data-language="it">Italiano</a><a href="de/index.html" hreflang="de" lang="de" data-language="de">Deutsch</a></nav>
+        </details>
         <button
           type="button"
           class="theme-toggle"
           data-theme-toggle
+          data-label-light="Light"
+          data-label-dark="Dark"
+          data-label-to-light="Switch to light theme"
+          data-label-to-dark="Switch to dark theme"
         >
           <span class="theme-toggle-icon" aria-hidden="true">◐</span
           ><span data-theme-toggle-label></span>
@@ -104,7 +137,7 @@
             </p>
             <div class="badges rise">
               <a
-                href="https://apps.apple.com/us/app/escuadra/id6810705505"
+                href="https://apps.apple.com/app/escuadra/id6810705505"
                 aria-label="Download on the App Store"
                 ><img class="badge" src="assets/badges/app-store-badge-black.svg" alt=""
               /></a>
@@ -656,7 +689,7 @@
           <p>Escuadra is on iPhone and Android.</p>
           <div class="badges">
             <a
-              href="https://apps.apple.com/us/app/escuadra/id6810705505"
+              href="https://apps.apple.com/app/escuadra/id6810705505"
               aria-label="Download on the App Store"
               ><img class="badge" src="assets/badges/app-store-badge-black.svg" alt=""
             /></a>

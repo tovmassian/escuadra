@@ -1,4 +1,5 @@
 // site.mjs
+import { LANGUAGE_STORAGE_KEY } from './language.mjs';
 import { THEME_STORAGE_KEY, nextTheme, resolveTheme } from './theme.mjs';
 import {
   QUESTIONS,
@@ -60,6 +61,29 @@ function initialiseTheme() {
   }
   media.addEventListener('change', (event) => {
     if (!hasSavedPreference) setTheme(resolveTheme(null, event.matches), false);
+  });
+}
+
+// A language picked here outlasts the browser's: the English pages read it before
+// they redirect, so picking English stops the redirect for good.
+function initialiseLanguageMenu() {
+  for (const link of document.querySelectorAll('[data-language]')) {
+    link.addEventListener('click', () => {
+      try { localStorage.setItem(LANGUAGE_STORAGE_KEY, link.dataset.language); } catch {}
+    });
+  }
+  const menus = [...document.querySelectorAll('[data-language-menu]')];
+  document.addEventListener('click', (event) => {
+    for (const menu of menus) if (!menu.contains(event.target)) menu.open = false;
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    for (const menu of menus) {
+      if (menu.open) {
+        menu.open = false;
+        menu.querySelector('summary').focus();
+      }
+    }
   });
 }
 
@@ -267,5 +291,6 @@ function initialiseQuiz() {
 }
 
 initialiseTheme();
+initialiseLanguageMenu();
 initialiseReveals();
 initialiseQuiz();

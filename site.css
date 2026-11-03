@@ -279,6 +279,46 @@ p {
   overflow: hidden;
   clip: rect(0 0 0 0);
 }
+/* The language menu: a disclosure the size of the theme toggle, its list a panel
+   of the privacy pages' language pills. */
+.language-menu {
+  position: relative;
+}
+.language-menu summary {
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  color: var(--ink);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  list-style: none;
+  cursor: pointer;
+  transition: border-color 0.15s ease;
+}
+.language-menu summary::-webkit-details-marker {
+  display: none;
+}
+.language-menu summary:hover,
+.language-menu[open] summary {
+  border-color: var(--ink-2);
+}
+.language-menu .language-nav {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  z-index: 10;
+  display: grid;
+  gap: 8px;
+  min-width: 168px;
+  padding: 12px;
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  background: var(--surface);
+}
 
 /* ---------- Buttons and store badges ---------- */
 .pill {
@@ -1538,7 +1578,7 @@ p {
   gap: 8px;
   margin-bottom: 40px;
 }
-.legal-page .language-nav a {
+.language-nav a {
   display: inline-flex;
   align-items: center;
   min-height: 40px;
@@ -1549,11 +1589,11 @@ p {
   font-size: 14px;
   font-weight: 600;
 }
-.legal-page .language-nav a:hover {
+.language-nav a:hover {
   border-color: var(--ink-2);
   color: var(--ink);
 }
-.legal-page .language-nav a[aria-current='page'] {
+.language-nav a[aria-current='page'] {
   border-color: var(--cta-bg);
   background: var(--cta-bg);
   color: var(--cta-text);
