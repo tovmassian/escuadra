@@ -71,7 +71,7 @@ export default {
     },
     how: {
       eyebrow: 'I livelli',
-      title: 'Tre livelli.<br />Da scalare squadra per squadra.',
+      title: 'Un livello alla volta,<br />squadra per squadra.',
       startHere: 'Inizia da qui',
       lockedSpoken: 'Bloccato: fai 8 su 10 al livello {level}',
       locked: '8/10 al liv. {level}',

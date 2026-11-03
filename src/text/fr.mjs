@@ -123,7 +123,7 @@ export default {
     },
     promises: {
       eyebrow: 'Pensé pour des sessions courtes',
-      title: 'Rien entre toi<br />et l’effectif.',
+      title: 'Toi et l’effectif.<br />Rien d’autre.',
       items: [
         {
           title: 'Sans compte. Sans pub.',
