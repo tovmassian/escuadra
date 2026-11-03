@@ -234,10 +234,11 @@ p {
 }
 .site-header nav {
   display: flex;
-  gap: 32px;
+  gap: 24px;
   color: var(--ink-2);
   font-size: 15px;
   font-weight: 600;
+  white-space: nowrap;
 }
 .site-header nav a:hover,
 .site-header nav a[aria-current='page'] {
@@ -1660,7 +1661,7 @@ p {
 }
 .faq-grid {
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-columns: minmax(min-content, 240px) minmax(0, 1fr);
   gap: 80px;
   padding: 88px 0 120px;
 }
@@ -1909,10 +1910,14 @@ p {
 }
 
 /* ---------- Narrower screens ---------- */
-@media (max-width: 1120px) {
+/* The longest translated nav (French) needs about 1230px beside the brand and the
+   header actions; below that it is left to the footer, as on phones. */
+@media (max-width: 1240px) {
   .site-header nav {
     display: none;
   }
+}
+@media (max-width: 1120px) {
   .hero-number {
     width: 200px;
     height: 400px;
@@ -2130,5 +2135,8 @@ p {
   }
   .cta-row .pill {
     width: 100%;
+    padding: 12px 16px;
+    text-align: center;
+    white-space: normal;
   }
 }
