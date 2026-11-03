@@ -73,6 +73,12 @@ function initialiseLanguageMenu() {
     });
   }
   const menus = [...document.querySelectorAll('[data-language-menu]')];
+  // Keyboard focus that leaves a menu closes it, as a click outside does.
+  for (const menu of menus) {
+    menu.addEventListener('focusout', (event) => {
+      if (!menu.contains(event.relatedTarget)) menu.open = false;
+    });
+  }
   document.addEventListener('click', (event) => {
     for (const menu of menus) if (!menu.contains(event.target)) menu.open = false;
   });

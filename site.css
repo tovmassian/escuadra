@@ -1910,6 +1910,9 @@ p {
 
 /* ---------- Narrower screens ---------- */
 @media (max-width: 1120px) {
+  .site-header nav {
+    display: none;
+  }
   .hero-number {
     width: 200px;
     height: 400px;
@@ -1929,9 +1932,6 @@ p {
   }
 }
 @media (max-width: 860px) {
-  .site-header nav {
-    display: none;
-  }
   .hero {
     min-height: 0;
     padding-bottom: 64px;
@@ -2010,6 +2010,9 @@ p {
   .pill-small {
     padding: 0 14px;
     font-size: 12px;
+  }
+  .site-header .pill-small {
+    display: none;
   }
   .wall-row {
     font-size: 150px;

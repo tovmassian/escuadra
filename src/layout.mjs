@@ -35,6 +35,9 @@ export function alternates(page, file) {
   ].join('\n');
 }
 
+/** Indents every line of `source` but its first, so inlined code sits inside its block. */
+const indentAfterFirstLine = (source, indent) => source.replace(/\n/g, `\n${' '.repeat(indent)}`);
+
 /**
  * English pages only, first in <head>: a browser that prefers one of the other
  * languages goes there before anything is painted, unless a language was picked on
@@ -47,7 +50,7 @@ export function redirectScript(file) {
       (function () {
         let saved = null;
         try { saved = localStorage.getItem('${LANGUAGE_STORAGE_KEY}'); } catch {}
-        const language = (${resolveSiteLanguage.toString()})(saved, navigator.languages || [navigator.language || '']);
+        const language = (${indentAfterFirstLine(resolveSiteLanguage.toString(), 8)})(saved, navigator.languages || [navigator.language || '']);
         if (language === 'en') return;
         document.documentElement.style.visibility = 'hidden';
         location.replace(language + '/${target}' + location.search + location.hash);
@@ -81,7 +84,7 @@ export function languageMenu(page, file) {
       }>${LANGUAGE_NAMES[language]}</a>`,
   ).join('');
   return `<details class="language-menu" data-language-menu>
-          <summary aria-label="${fill(layout.languageCurrent, { name: LANGUAGE_NAMES[page.language] })}"><span aria-hidden="true">${page.language.toUpperCase()}</span></summary>
+          <summary>${page.language.toUpperCase()}<span class="sr-only"> ${fill(layout.languageCurrent, { name: LANGUAGE_NAMES[page.language] })}</span></summary>
           <nav class="language-nav" aria-label="${layout.language}">${links}</nav>
         </details>`;
 }

@@ -8,14 +8,14 @@
         let saved = null;
         try { saved = localStorage.getItem('escuadra-site-language'); } catch {}
         const language = (function resolveSiteLanguage(saved, deviceTags) {
-  const languages = ['en', 'es', 'fr', 'it', 'de'];
-  if (languages.includes(saved)) return saved;
-  for (const tag of deviceTags) {
-    const code = String(tag).split(/[-_]/)[0].toLowerCase();
-    if (languages.includes(code)) return code;
-  }
-  return 'en';
-})(saved, navigator.languages || [navigator.language || '']);
+          const languages = ['en', 'es', 'fr', 'it', 'de'];
+          if (languages.includes(saved)) return saved;
+          for (const tag of deviceTags) {
+            const code = String(tag).split(/[-_]/)[0].toLowerCase();
+            if (languages.includes(code)) return code;
+          }
+          return 'en';
+        })(saved, navigator.languages || [navigator.language || '']);
         if (language === 'en') return;
         document.documentElement.style.visibility = 'hidden';
         location.replace(language + '/support.html' + location.search + location.hash);
@@ -66,7 +66,7 @@
       </nav>
       <div class="header-actions">
         <details class="language-menu" data-language-menu>
-          <summary aria-label="Language: English"><span aria-hidden="true">EN</span></summary>
+          <summary>EN<span class="sr-only"> Language: English</span></summary>
           <nav class="language-nav" aria-label="Language"><a href="support.html" hreflang="en" lang="en" data-language="en" aria-current="page">English</a><a href="es/support.html" hreflang="es" lang="es" data-language="es">Español</a><a href="fr/support.html" hreflang="fr" lang="fr" data-language="fr">Français</a><a href="it/support.html" hreflang="it" lang="it" data-language="it">Italiano</a><a href="de/support.html" hreflang="de" lang="de" data-language="de">Deutsch</a></nav>
         </details>
         <button
