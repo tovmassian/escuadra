@@ -27,8 +27,7 @@ only (never a dependency of this branch).
 - The branch is `gh-pages`, worked on in `.claude/worktrees/280-site-five-languages` on
   `docs/280-site-five-languages`. No `package.json`, no dependency, no build step at
   serve time. The check is `node --test tests/*.test.mjs`, run from the worktree root.
-- `$S` is the session's scratch folder for this issue, never committed:
-  `/private/tmp/claude-501/-Users-khachaturtovmasyan-Projects-escuadra/a3af12ab-6399-42c3-a055-bd9ac7b5fb35/scratchpad/280`.
+- `$S` is the session's scratch folder for this issue, never committed.
 - Languages and their folders: `en` at the root, `es/`, `fr/`, `it/`, `de/`. The order
   everywhere is `en, es, fr, it, de`.
 - Site URL: `https://tovmassian.github.io/escuadra/`. App Store link:
@@ -99,7 +98,7 @@ whitespace inside text may change.
 - [ ] **Step 1: Keep today's pages for comparison**
 
 ```bash
-S=/private/tmp/claude-501/-Users-khachaturtovmasyan-Projects-escuadra/a3af12ab-6399-42c3-a055-bd9ac7b5fb35/scratchpad/280
+S="<the session's scratch folder>"
 mkdir -p $S && git show HEAD:index.html > $S/index.before.html && git show HEAD:support.html > $S/support.before.html
 ```
 
@@ -839,7 +838,7 @@ Each starts with this header, in English:
 // The FRESH lines (fresh.mjs) are written afresh; the owner picks them.
 ```
 
-Sources, read on `main` with the Read tool (`/Users/khachaturtovmasyan/Projects/escuadra/…`):
+Sources, read on `main` with the Read tool (in main's checkout):
 
 | Key(s) | Source on `main` |
 | --- | --- |
@@ -1395,7 +1394,7 @@ git commit -m "docs(site): the owner's headlines in each language (#280)"
 ```js
 // Layout check for #280: every generated page at 375 and 1440 px, light and dark.
 // Playwright comes from main's node_modules; this branch has no dependencies.
-import { chromium } from '/Users/khachaturtovmasyan/Projects/escuadra/node_modules/playwright/index.mjs';
+import { chromium } from '<main's node_modules>/playwright/index.mjs';
 
 const BASE = 'http://localhost:8787/';
 const OUT = process.argv[2];

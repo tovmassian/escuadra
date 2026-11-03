@@ -42,7 +42,7 @@ const rootOf = (page) => {
   const up = relative(dirname(page), '.');
   return up ? `${up}/` : '';
 };
-for (const path of ['site.css', 'site.mjs', 'theme.mjs', 'quiz.mjs']) {
+for (const path of ['site.css', 'site.mjs', 'theme.mjs', 'quiz.mjs', 'language.mjs']) {
   assert.ok(existsSync(path), `missing local asset: ${path}`);
 }
 
@@ -240,6 +240,14 @@ for (const path of generated) {
   assert.equal((html.match(/data-language="/g) ?? []).length, LANGUAGES.length, `${path} offers every language`);
   assert.match(html, new RegExp(`data-language="${language}" aria-current="page"`), `${path} marks its own language`);
   assert.equal(html.includes('location.replace'), language === 'en', `only the English ${file} redirects`);
+  if (language === 'en') {
+    // The redirect lands on the same page in the browser's language.
+    const target = file === 'index.html' ? '' : file;
+    assert.ok(
+      html.includes(`location.replace(language + '/${target}' + location.search + location.hash);`),
+      `${path} redirects to the same page's language folder`,
+    );
+  }
   for (const label of ['light', 'dark', 'to-light', 'to-dark']) {
     assert.match(html, new RegExp(`data-label-${label}="[^"]+"`), `${path} labels its theme toggle`);
   }
@@ -282,6 +290,10 @@ for (const path of generated.filter((p) => p.endsWith('index.html'))) {
     assert.doesNotMatch(home, /soon/i, 'home no longer says either store is coming soon');
   }
   assert.match(home, /data-quiz>/, `${path} carries the playable teaser`);
+  // site.mjs builds the teaser's flag paths from the words' root.
+  const wordsJson = home.match(/<script type="application\/json" id="site-words">([^<]*)<\/script>/);
+  assert.ok(wordsJson, `${path} carries the teaser's words`);
+  assert.equal(JSON.parse(wordsJson[1]).root, root, `${path}'s teaser words reach the site root`);
   assert.equal(
     (home.match(/data-quiz-option>/g) ?? []).length,
     4,

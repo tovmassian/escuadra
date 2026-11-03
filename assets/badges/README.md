@@ -8,5 +8,9 @@ a sentence, with Apple's and Google's credit lines in each page's footer, in Eng
 
 - Apple: https://toolbox.marketingtools.apple.com (`download-on-the-app-store/black/<locale>`),
   downloaded 2026-11-03 for es-es, fr-fr, it-it, de-de.
-- Google: https://partnermarketinghub.withgoogle.com/brands/google-play/google-play/lockups-icons-badges/
-  ("Get it on Google Play" badges), downloaded 2026-11-03.
+- Google: the Partner Marketing Hub,
+  https://partnermarketinghub.withgoogle.com/brands/google-play/google-play/lockups-icons-badges/,
+  the "Get it on Google Play" badges folder (65627) › Digital › svg:
+  `GetItOnGooglePlay_Badge_Web_color_<Language>.svg` for Spanish (Spain, not LATAM),
+  French, Italian and German, downloaded 2026-11-03. The English file at this folder's
+  root is the same set's English, byte for byte.

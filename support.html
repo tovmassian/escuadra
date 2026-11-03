@@ -15,7 +15,7 @@
             if (languages.includes(code)) return code;
           }
           return 'en';
-        })(saved, navigator.languages || [navigator.language || '']);
+        })(saved, navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']);
         if (language === 'en') return;
         document.documentElement.style.visibility = 'hidden';
         location.replace(language + '/support.html' + location.search + location.hash);

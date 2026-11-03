@@ -50,7 +50,7 @@ export function redirectScript(file) {
       (function () {
         let saved = null;
         try { saved = localStorage.getItem('${LANGUAGE_STORAGE_KEY}'); } catch {}
-        const language = (${indentAfterFirstLine(resolveSiteLanguage.toString(), 8)})(saved, navigator.languages || [navigator.language || '']);
+        const language = (${indentAfterFirstLine(resolveSiteLanguage.toString(), 8)})(saved, navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']);
         if (language === 'en') return;
         document.documentElement.style.visibility = 'hidden';
         location.replace(language + '/${target}' + location.search + location.hash);

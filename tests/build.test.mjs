@@ -7,7 +7,12 @@ import { FRESH } from '../src/text/fresh.mjs';
 
 test('every generated page on disk is what the generator renders: run `node src/build.mjs`', () => {
   for (const [path, html] of renderSite()) {
-    assert.equal(readFileSync(path, 'utf8'), html, `${path} is out of date with its text file`);
+    // The teaser's first age is worked out at build time, so a new day dates a page too.
+    assert.equal(
+      readFileSync(path, 'utf8'),
+      html,
+      `${path} is out of date with its text file or with today's date: run \`node src/build.mjs\``,
+    );
   }
 });
 

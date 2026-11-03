@@ -67,16 +67,25 @@ function initialiseTheme() {
 // A language picked here outlasts the browser's: the English pages read it before
 // they redirect, so picking English stops the redirect for good.
 function initialiseLanguageMenu() {
-  for (const link of document.querySelectorAll('[data-language]')) {
-    link.addEventListener('click', () => {
-      try { localStorage.setItem(LANGUAGE_STORAGE_KEY, link.dataset.language); } catch {}
-    });
+  // The generated pages' links carry data-language; the privacy pages' carry only
+  // hreflang. A link opened in a new tab (middle click) counts as a pick too.
+  for (const link of document.querySelectorAll('[data-language], .language-nav a[hreflang]')) {
+    const remember = () => {
+      try {
+        localStorage.setItem(LANGUAGE_STORAGE_KEY, link.dataset.language ?? link.hreflang);
+      } catch {}
+    };
+    link.addEventListener('click', remember);
+    link.addEventListener('auxclick', remember);
   }
   const menus = [...document.querySelectorAll('[data-language-menu]')];
-  // Keyboard focus that leaves a menu closes it, as a click outside does.
+  // Keyboard focus that moves out of a menu closes it, as a click outside does. Focus
+  // that goes nowhere stays open: WebKit focuses the summary on a press but not a link,
+  // so a press on a language blurs the summary with no relatedTarget, and closing then
+  // would swallow the click. The document's click listener closes it on a press outside.
   for (const menu of menus) {
     menu.addEventListener('focusout', (event) => {
-      if (!menu.contains(event.relatedTarget)) menu.open = false;
+      if (event.relatedTarget && !menu.contains(event.relatedTarget)) menu.open = false;
     });
   }
   document.addEventListener('click', (event) => {
@@ -178,8 +187,12 @@ function initialiseQuiz() {
       part('result-score').classList.toggle('is-perfect', perfect);
       part('result-total').textContent = `/${total}`;
       const title = perfect ? words.titles.perfect : words.titles.learning;
-      part('result-title').textContent = title;
-      part('result-title').classList.toggle('is-perfect', perfect);
+      const resultTitle = part('result-title');
+      resultTitle.textContent = title;
+      resultTitle.classList.toggle('is-perfect', perfect);
+      // "A la escuadra" is Spanish on every page; English and Spanish read it as their own.
+      if (perfect && !['es', 'en'].includes(root.lang)) resultTitle.lang = 'es';
+      else resultTitle.removeAttribute('lang');
       const list = part('missed');
       list.replaceChildren(
         ...missed.map((miss) => {
