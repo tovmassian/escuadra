@@ -161,7 +161,7 @@ export default {
   support: {
     eyebrow: 'Assistenza',
     title: 'Qualcosa<br />non va?',
-    lead: 'Un bug, un numero di maglia sbagliato, una squadra che vorresti trovare nell’app? Il modo migliore per contattare lo sviluppatore è GitHub Issues. Racconta cosa è successo, su quale telefono e con quale squadra.',
+    lead: 'Un bug, un numero di maglia sbagliato, una squadra che vorresti trovare nell’app? Il canale migliore per contattare lo sviluppatore è GitHub Issues. Racconta cosa è successo, su quale telefono e con quale squadra.',
     cta: 'Apri una segnalazione su GitHub',
     ctaNote: 'Per aprire una segnalazione serve un account GitHub gratuito.',
     kinds: [
@@ -178,7 +178,7 @@ export default {
       },
       {
         q: 'Perché alcuni giocatori non hanno la foto?',
-        a: 'Le foto provengono da Wikimedia Commons, e ci sono solo se Commons ne ha una con una licenza che Escuadra può usare. Se non c’è, o se sei offline e la foto non è ancora stata caricata, la domanda mostra invece i colori della squadra e il numero di maglia.',
+        a: 'Le foto provengono da Wikimedia Commons: un giocatore ha la foto solo se su Commons ce n’è una con una licenza che Escuadra può usare. Se non c’è, o se sei offline e la foto non è ancora stata caricata, la domanda mostra invece i colori della squadra e il numero di maglia.',
       },
       {
         q: 'Escuadra funziona offline?',

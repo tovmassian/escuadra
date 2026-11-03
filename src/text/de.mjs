@@ -83,7 +83,7 @@ export default {
           body: '6 Namen zur Wahl, dann Position, dann Nationalität – bei einem Nationalteam stattdessen der Verein.',
         },
       ],
-      note: 'Jede Frage zählt einen Punkt. In Level 2 und 3 gibt es den Punkt nur, wenn alle Teile stimmen – Teilpunkte gibt es nicht.',
+      note: 'Jede Frage ist einen Punkt wert. In Level 2 und 3 gibt es den Punkt nur, wenn alle Teile stimmen – Teilpunkte gibt es nicht.',
     },
     misses: {
       eyebrow: 'Ergebnis- und Kaderansicht',
@@ -106,11 +106,11 @@ export default {
       ],
       clubsLabel: 'Einige der Vereine in Escuadra',
       nationsLabel: 'Einige der Nationalteams in Escuadra',
-      refreshed: 'Die Kader werden jede Saison aktualisiert – neue Teams kommen ohne App-Update.',
+      refreshed: 'Die Kader werden jede Saison aktualisiert – neue Teams kommen ohne App-Update dazu.',
     },
     share: {
       pictureLabel:
-        'Bild zum Teilen von Escuadra: Barcelona, 2026/27, Level 1, 10 von 10, a la escuadra. Die zehn Rückennummern und „Barcelona: Kennst du den ganzen Kader?“',
+        'Bild zum Teilen aus Escuadra: Barcelona, 2026/27, Level 1, 10 von 10, a la escuadra. Die zehn Rückennummern und „Barcelona: Kennst du den ganzen Kader?“',
       meta: 'Barcelona · 2026/27 · Level 1',
       question: 'Barcelona: Kennst du den ganzen Kader?',
       eyebrow: 'Zehn von zehn',

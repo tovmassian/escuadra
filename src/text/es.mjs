@@ -115,7 +115,7 @@ export default {
       title: 'Una ronda sin fallos tiene nombre.',
       body: [
         'Como el tiro que se cuela por la escuadra de la portería. Acierta las diez y Escuadra lo canta.',
-        'Luego comparte la ronda como imagen o como texto. Sin fotos ni nombres, para que tus amigos puedan jugar.',
+        'Luego comparte la ronda como imagen o como texto. Sin fotos ni nombres, para que tus amigos también puedan jugarla.',
       ],
     },
     promises: {
@@ -128,7 +128,7 @@ export default {
         },
         {
           title: 'Funciona sin conexión',
-          body: 'Todas las plantillas van guardadas en tu teléfono. Las fotos se cargan desde Wikimedia Commons cuando estás conectado; sin conexión, los colores del equipo ocupan su lugar.',
+          body: 'Todas las plantillas se guardan en tu teléfono. Las fotos se cargan desde Wikimedia Commons cuando estás conectado; sin conexión, los colores del equipo ocupan su lugar.',
         },
         {
           title: 'Fotos con crédito',
@@ -176,15 +176,15 @@ export default {
       },
       {
         q: '¿Por qué algunos jugadores no tienen foto?',
-        a: 'Las fotos proceden de Wikimedia Commons, y solo se muestran si Commons tiene una con licencia que Escuadra pueda usar. Si no hay ninguna, o si no tienes conexión y la foto aún no se ha cargado, la pregunta muestra los colores del equipo y el dorsal.',
+        a: 'Las fotos proceden de Wikimedia Commons, y solo se muestran si Commons tiene alguna con una licencia que Escuadra pueda usar. Si no hay ninguna, o si no tienes conexión y la foto aún no se ha cargado, la pregunta muestra los colores del equipo y el dorsal.',
       },
       {
-        q: '¿Escuadra funciona sin conexión?',
+        q: '¿Funciona Escuadra sin conexión?',
         a: 'Sí. Todas las plantillas se guardan en tu teléfono, así que el quiz funciona sin conexión. Las fotos se cargan desde Wikimedia Commons cuando estás conectado.',
       },
       {
         q: 'Hay un dorsal o un jugador que no cuadra.',
-        a: 'Las plantillas se recopilan de Wikipedia y Wikidata, y cada equipo indica cuándo se actualizó por última vez. Si algo está desfasado, abre una incidencia y di qué equipo y qué jugador.',
+        a: 'Las plantillas se recopilan de Wikipedia y Wikidata, y cada equipo indica cuándo se actualizó por última vez. Si algo está desfasado, abre una incidencia y di de qué equipo y de qué jugador se trata.',
       },
       {
         q: '¿Cómo cambio el idioma?',
@@ -196,7 +196,7 @@ export default {
       },
       {
         q: '¿Cómo empiezo de cero?',
-        a: 'En la pantalla de un equipo, el botón de la goma abre <b>Empezar de cero</b>, que deja ese equipo sin jugar. En Ajustes, <b>Borrar todos los récords</b> hace lo mismo con todos los equipos, y <b>Restablecer Escuadra</b> lo deja todo como al abrir la app por primera vez.',
+        a: 'En la pantalla de un equipo, el botón de la goma abre <b>Empezar de cero</b>, con el que ese equipo vuelve a estar sin jugar. En Ajustes, <b>Borrar todos los récords</b> hace lo mismo con todos los equipos, y <b>Restablecer Escuadra</b> lo deja todo como al abrir la app por primera vez.',
       },
     ],
   },

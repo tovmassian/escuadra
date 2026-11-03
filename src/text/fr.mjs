@@ -90,7 +90,7 @@ export default {
       title: 'C’est en ratant qu’on apprend.',
       body: [
         'Après chaque partie, l’écran Résultats affiche tous les joueurs ratés, un par carte. Fais-les défiler pour les revoir avant la partie suivante.',
-        'L’écran Effectif affiche tout l’effectif en cartes ou en liste. Appuie sur « Cacher noms » pour te tester.',
+        'L’écran Effectif affiche tous les joueurs de l’équipe, en cartes ou en liste. Appuie sur « Cacher noms » pour te tester.',
       ],
       stackLabel: 'Real Madrid · 2026/27 · Niveau 2 · 7/10',
       missedOf: 'Erreur {n} sur 3',
@@ -117,7 +117,7 @@ export default {
       eyebrow: 'Dix sur dix',
       title: 'Le sans-faute a un nom.',
       body: [
-        'En espagnol, une frappe en pleine lucarne. Fais dix sur dix et Escuadra te le dit.',
+        'En espagnol, une frappe en pleine lucarne. Fais dix sur dix, et Escuadra te l’annonce.',
         'Partage ensuite ta partie en image ou en texte. Sans photo ni nom : tes amis peuvent quand même y jouer.',
       ],
     },
@@ -166,7 +166,7 @@ export default {
     cta: 'Ouvrir un ticket sur GitHub',
     ctaNote: 'Pour ouvrir un ticket, il te faut un compte GitHub gratuit.',
     kinds: [
-      { title: 'Signaler un bug', sub: 'Où tu as appuyé, et ce qui s’est passé' },
+      { title: 'Signaler un bug', sub: 'Où tu as appuyé et ce qui s’est passé' },
       { title: 'Corriger un effectif', sub: 'L’équipe, le joueur, le bon numéro' },
       { title: 'Proposer une équipe ou une fonctionnalité', sub: 'Ce qui t’aiderait à apprendre' },
     ],
