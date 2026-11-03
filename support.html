@@ -3,8 +3,33 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      (function () {
+        let saved = null;
+        try { saved = localStorage.getItem('escuadra-site-language'); } catch {}
+        const language = (function resolveSiteLanguage(saved, deviceTags) {
+          const languages = ['en', 'es', 'fr', 'it', 'de'];
+          if (languages.includes(saved)) return saved;
+          for (const tag of deviceTags) {
+            const code = String(tag).split(/[-_]/)[0].toLowerCase();
+            if (languages.includes(code)) return code;
+          }
+          return 'en';
+        })(saved, navigator.languages && navigator.languages.length ? navigator.languages : [navigator.language || '']);
+        if (language === 'en') return;
+        document.documentElement.style.visibility = 'hidden';
+        location.replace(language + '/support.html' + location.search + location.hash);
+      })();
+    </script>
     <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
     <title>Support — Escuadra</title>
+    <link rel="canonical" href="https://tovmassian.github.io/escuadra/support.html" />
+    <link rel="alternate" hreflang="en" href="https://tovmassian.github.io/escuadra/support.html" />
+    <link rel="alternate" hreflang="es" href="https://tovmassian.github.io/escuadra/es/support.html" />
+    <link rel="alternate" hreflang="fr" href="https://tovmassian.github.io/escuadra/fr/support.html" />
+    <link rel="alternate" hreflang="it" href="https://tovmassian.github.io/escuadra/it/support.html" />
+    <link rel="alternate" hreflang="de" href="https://tovmassian.github.io/escuadra/de/support.html" />
+    <link rel="alternate" hreflang="x-default" href="https://tovmassian.github.io/escuadra/support.html" />
     <script>
       try {
         const saved = localStorage.getItem('escuadra-site-theme');
@@ -39,14 +64,24 @@
         <a href="index.html">Home</a><a href="support.html" aria-current="page">Support</a
         ><a href="privacy/2/">Privacy</a>
       </nav>
-      <button
-        type="button"
-        class="theme-toggle"
-        data-theme-toggle
-      >
-        <span class="theme-toggle-icon" aria-hidden="true">◐</span
-        ><span data-theme-toggle-label></span>
-      </button>
+      <div class="header-actions">
+        <details class="language-menu" data-language-menu>
+          <summary>EN<span class="sr-only"> Language: English</span></summary>
+          <nav class="language-nav" aria-label="Language"><a href="support.html" hreflang="en" lang="en" data-language="en" aria-current="page">English</a><a href="es/support.html" hreflang="es" lang="es" data-language="es">Español</a><a href="fr/support.html" hreflang="fr" lang="fr" data-language="fr">Français</a><a href="it/support.html" hreflang="it" lang="it" data-language="it">Italiano</a><a href="de/support.html" hreflang="de" lang="de" data-language="de">Deutsch</a></nav>
+        </details>
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          data-label-light="Light"
+          data-label-dark="Dark"
+          data-label-to-light="Switch to light theme"
+          data-label-to-dark="Switch to dark theme"
+        >
+          <span class="theme-toggle-icon" aria-hidden="true">◐</span
+          ><span data-theme-toggle-label></span>
+        </button>
+      </div>
     </header>
 
     <main>
@@ -57,9 +92,7 @@
             <p class="eyebrow"><span class="corner"></span>Support</p>
             <h1 class="display">Something<br />not right?</h1>
             <p class="lead">
-              A bug, a wrong shirt number, a squad you’d like added? The best place to
-              reach the developer is GitHub Issues. Say what happened, on which phone, and
-              with which team.
+              A bug, a wrong shirt number, a squad you’d like added? The best place to reach the developer is GitHub Issues. Say what happened, on which phone, and with which team.
             </p>
             <div class="cta-row">
               <a class="pill" href="https://github.com/tovmassian/escuadra/issues"
@@ -106,55 +139,43 @@
           <details open>
             <summary>How do I unlock levels 2 and 3?<span class="plus" aria-hidden="true"></span></summary>
             <p>
-              Score 8 out of 10 on level 1 to unlock level 2, and 8 out of 10 on level 2 to
-              unlock level 3. Each team keeps its own ladder.
+              Score 8 out of 10 on level 1 to unlock level 2, and 8 out of 10 on level 2 to unlock level 3. Each team keeps its own ladder.
             </p>
           </details>
           <details>
             <summary>Why do some players have no photo?<span class="plus" aria-hidden="true"></span></summary>
             <p>
-              Photos come from Wikimedia Commons, and only where Commons has one under a
-              licence Escuadra can use. Without one, or offline before a photo has loaded,
-              the question shows the team’s colours and the shirt number instead.
+              Photos come from Wikimedia Commons, and only where Commons has one under a licence Escuadra can use. Without one, or offline before a photo has loaded, the question shows the team’s colours and the shirt number instead.
             </p>
           </details>
           <details>
             <summary>Does Escuadra work offline?<span class="plus" aria-hidden="true"></span></summary>
             <p>
-              Yes. Every squad is stored on your phone, so the quiz works without a
-              connection. Photos load from Wikimedia Commons when you’re online.
+              Yes. Every squad is stored on your phone, so the quiz works without a connection. Photos load from Wikimedia Commons when you’re online.
             </p>
           </details>
           <details>
             <summary>A shirt number or a player looks wrong.<span class="plus" aria-hidden="true"></span></summary>
             <p>
-              Squads are compiled from Wikipedia and Wikidata, and each team shows when it
-              was last updated. If something is out of date, open an issue naming the team
-              and the player.
+              Squads are compiled from Wikipedia and Wikidata, and each team shows when it was last updated. If something is out of date, open an issue naming the team and the player.
             </p>
           </details>
           <details>
             <summary>How do I change the language?<span class="plus" aria-hidden="true"></span></summary>
             <p>
-              Escuadra follows your phone’s language. To pick another, open
-              <b>Settings</b> and then <b>Language</b>: English, Español, Français,
-              Italiano or Deutsch.
+              Escuadra follows your phone’s language. To pick another, open <b>Settings</b> and then <b>Language</b>: English, Español, Français, Italiano or Deutsch.
             </p>
           </details>
           <details>
             <summary>How do I switch off usage statistics?<span class="plus" aria-hidden="true"></span></summary>
             <p>
-              Open <b>Settings</b> and switch off <b>Usage statistics</b>. About, in the
-              app, lists everything that leaves your device, and so does the
-              <a href="privacy/2/">privacy policy</a>.
+              Open <b>Settings</b> and switch off <b>Usage statistics</b>. About, in the app, lists everything that leaves your device, and so does the <a href="privacy/2/">privacy policy</a>.
             </p>
           </details>
           <details>
             <summary>How do I start over?<span class="plus" aria-hidden="true"></span></summary>
             <p>
-              On a team’s screen, the eraser button opens <b>Start over</b>, which sends
-              that team back to unplayed. In Settings, <b>Clear all scores</b> does it for every team, and
-              <b>Reset Escuadra</b> puts everything back to how it was on first launch.
+              On a team’s screen, the eraser button opens <b>Start over</b>, which sends that team back to unplayed. In Settings, <b>Clear all scores</b> does it for every team, and <b>Reset Escuadra</b> puts everything back to how it was on first launch.
             </p>
           </details>
         </div>

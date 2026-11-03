@@ -1,7 +1,9 @@
 import assert from 'node:assert/strict';
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { dirname, join, relative } from 'node:path/posix';
-import { QUESTIONS, photoPage, photoSources } from '../quiz.mjs';
+import { LANGUAGES } from '../language.mjs';
+import { QUESTIONS, photoPage, photoSources, teamName } from '../quiz.mjs';
+import { TEXTS, renderSite } from '../src/build.mjs';
 
 // privacy.html is the 1.x policy and stays as it was, for installs still on 1.x.
 // The 2.0 policy lives in privacy/2/, one page per language.
@@ -14,9 +16,11 @@ const policyPages = [
 ];
 const policyDir = 'privacy/2';
 const policyPaths = policyPages.map(({ file }) => `${policyDir}/${file}`);
-const pages = ['index.html', 'privacy.html', 'support.html', ...policyPaths];
+// Home and Support in every language, from src/build.mjs.
+const generated = [...renderSite().keys()];
+const pages = [...generated, 'privacy.html', ...policyPaths];
 const siteUrl = 'https://tovmassian.github.io/escuadra/';
-const appStoreUrl = 'https://apps.apple.com/us/app/escuadra/id6810705505';
+const appStoreUrl = 'https://apps.apple.com/app/escuadra/id6810705505';
 const playStoreUrl = 'https://play.google.com/store/apps/details?id=com.tovmassian.escuadra';
 // Player photos are Wikimedia's own thumbnails, hotlinked and credited as the app does
 // (guardrail 1): each links its Commons page and its licence deed.
@@ -33,12 +37,12 @@ const allowedExternalLinks = [
   commonsPageById,
   'https://creativecommons.org/licenses/',
 ];
-// How a page reaches the site root: '' at the root, '../../' in privacy/2/.
+// How a page reaches the site root: '' at the root, '../' in es/, '../../' in privacy/2/.
 const rootOf = (page) => {
   const up = relative(dirname(page), '.');
   return up ? `${up}/` : '';
 };
-for (const path of ['site.css', 'site.mjs', 'theme.mjs', 'quiz.mjs']) {
+for (const path of ['site.css', 'site.mjs', 'theme.mjs', 'quiz.mjs', 'language.mjs']) {
   assert.ok(existsSync(path), `missing local asset: ${path}`);
 }
 
@@ -54,8 +58,32 @@ for (const face of readdirSync('assets/fonts', { withFileTypes: true }).filter((
   assert.ok(existsSync(`${dir}/OFL.txt`), `${dir} carries its OFL.txt`);
 }
 // A shipped image names its licence where it lives (main's docs/license.md).
-for (const dir of ['assets/fonts', 'assets/flags']) {
+for (const dir of ['assets/fonts', 'assets/flags', 'assets/badges']) {
   assert.ok(existsSync(`${dir}/README.md`), `${dir} names its source and licence`);
+}
+// The stores' badges, one folder per language (English at the root), as downloaded.
+const badgeDir = (language) => `assets/badges/${language === 'en' ? '' : `${language}/`}`;
+for (const language of LANGUAGES) {
+  for (const file of ['app-store-badge-black.svg', 'google-play-badge.svg']) {
+    const path = `${badgeDir(language)}${file}`;
+    assert.ok(existsSync(path), `missing badge: ${path}`);
+    // Google's artwork opens with an XML declaration; the svg element comes next.
+    assert.match(readFileSync(path, 'utf8'), /^(<\?xml[^>]*\?>\s*)?<svg[\s>]/, `${path} is an SVG`);
+  }
+}
+// A badge is downloaded artwork served as part of the site: it may carry no script and
+// load nothing from elsewhere, and nothing but SVGs and the README lives beside it.
+for (const entry of readdirSync('assets/badges', { recursive: true, withFileTypes: true })) {
+  if (entry.isDirectory()) continue;
+  const path = join(entry.parentPath, entry.name);
+  if (path === 'assets/badges/README.md') continue;
+  assert.ok(path.endsWith('.svg'), `${path} is an SVG badge or the README`);
+  const svg = readFileSync(path, 'utf8');
+  assert.doesNotMatch(svg, /<script/i, `${path} carries no script`);
+  assert.doesNotMatch(svg, /\son[a-z]+\s*=/i, `${path} carries no event handler`);
+  assert.doesNotMatch(svg, /href\s*=\s*(?!["']#)/i, `${path} links nothing outside itself`);
+  assert.doesNotMatch(svg, /@import/i, `${path} imports no stylesheet`);
+  assert.doesNotMatch(svg, /url\(\s*(?!['"]?#)/i, `${path} loads nothing by url()`);
 }
 
 assert.deepEqual(
@@ -69,15 +97,20 @@ for (const page of pages) {
   const root = rootOf(page);
   assert.ok(html.includes(`href="${root}site.css"`), `${page} loads shared CSS`);
   assert.ok(html.includes(`src="${root}site.mjs"`), `${page} loads shared enhancement`);
-  // Every live store ships 2.0, so the site's Privacy link is the 2.0 policy.
-  // privacy.html, the 1.x policy, and the policy pages themselves link their own page.
+  // Every live store ships 2.0, so the site's Privacy link is the 2.0 policy, in the
+  // page's language. privacy.html, the 1.x policy, and the policy pages themselves
+  // link their own page.
+  const isGenerated = generated.includes(page);
+  const lang = isGenerated && page.includes('/') ? page.split('/')[0] : 'en';
   const policyLink = page.startsWith(`${policyDir}/`)
     ? 'index.html'
     : page === 'privacy.html'
       ? 'privacy.html'
-      : `${root}privacy/2/`;
+      : `${root}privacy/2/${lang === 'en' ? '' : `${lang}.html`}`;
   assert.ok(html.includes(`href="${policyLink}"`), `${page} links the privacy policy`);
-  assert.ok(html.includes(`href="${root}support.html"`), `${page} links support`);
+  // A generated page links the Support page of its own language, beside it.
+  const supportLink = isGenerated ? 'support.html' : `${root}support.html`;
+  assert.ok(html.includes(`href="${supportLink}"`), `${page} links support`);
   for (const [url] of html.matchAll(/https?:\/\/[^"'\s<)]+/g)) {
     assert.ok(
       allowedExternalLinks.some((allowed) => url.startsWith(allowed)),
@@ -184,22 +217,6 @@ for (const { lang, file } of policyPages) {
   }
 }
 
-const home = readFileSync('index.html', 'utf8');
-assert.equal((home.match(/<h1/g) ?? []).length, 1, 'home has exactly one h1');
-assert.match(home, /<h1[^>]*>Know every<br \/>number\.<\/h1>/, 'home has the approved headline');
-// The App Store promotional text, reviewed in store/listing/en.md.
-assert.match(
-  home,
-  /Who wears number 7\? Learn every club in Europe’s top five leagues and over\s+150 national teams in quick rounds, then see exactly who you missed\./,
-  'home has the approved supporting copy',
-);
-assert.match(home, /Know the squad\.<br \/>Cold\./, 'home keeps the earlier headline as its last call');
-assert.match(home, /data-quiz>/, 'home carries the playable teaser');
-assert.equal(
-  (home.match(/data-quiz-option>/g) ?? []).length,
-  4,
-  'the teaser offers four names, as level 1 does',
-);
 // privacy/2/ takes its footer from main's catalogs, so only these three are pinned here.
 for (const page of ['index.html', 'privacy.html', 'support.html']) {
   assert.match(
@@ -208,130 +225,218 @@ for (const page of ['index.html', 'privacy.html', 'support.html']) {
     `${page} has an honest release status`,
   );
 }
-assert.doesNotMatch(home, /soon/i, 'home no longer says either store is coming soon');
-// Apple: with another store's badge in the layout, only the black App Store badge,
-// placed first. Google: the badge may only promote an app you can get on Play.
-const badgeLinks = [
-  ...home.matchAll(
-    /<a\s+href="([^"]+)"\s+aria-label="([^"]+)"\s*>\s*<img\s+class="badge[^"]*"\s+src="([^"]+)"\s+alt=""\s*\/>\s*<\/a>/g,
-  ),
-].map(([, href, label, src]) => ({ href, label, src }));
-// Each link is named with its badge's own words, so voice control finds it (label in name).
-const badgePair = [
-  {
-    href: appStoreUrl,
-    label: 'Download on the App Store',
-    src: 'assets/badges/app-store-badge-black.svg',
-  },
-  {
-    href: playStoreUrl,
-    label: 'Get it on Google Play',
-    src: 'assets/badges/google-play-badge.svg',
-  },
-];
-assert.ok(badgeLinks.length > 0, 'home links the store listings');
-assert.deepEqual(
-  badgeLinks,
-  badgeLinks.map((_, i) => badgePair[i % 2]),
-  'each place on home links both live listings, the black App Store badge first, one badge image each',
-);
-assert.equal(
-  (home.match(/<img\s+class="badge/g) ?? []).length,
-  badgeLinks.length,
-  'every badge image is one of those links',
-);
+
+// Home and Support in five languages: each says which it is, offers the others, and
+// declares them to search engines. Only the English pages send a browser elsewhere.
+for (const path of generated) {
+  const language = path.includes('/') ? path.split('/')[0] : 'en';
+  const file = path.split('/').pop();
+  const html = readFileSync(path, 'utf8');
+  assert.match(html, new RegExp(`<html lang="${language}"`), `${path} declares its language`);
+  for (const other of LANGUAGES) {
+    const url = `${siteUrl}${other === 'en' ? '' : `${other}/`}${file === 'index.html' ? '' : file}`;
+    assert.ok(html.includes(`hreflang="${other}" href="${url}"`), `${path} declares its ${other} alternate`);
+  }
+  assert.equal((html.match(/data-language="/g) ?? []).length, LANGUAGES.length, `${path} offers every language`);
+  assert.match(html, new RegExp(`data-language="${language}" aria-current="page"`), `${path} marks its own language`);
+  assert.equal(html.includes('location.replace'), language === 'en', `only the English ${file} redirects`);
+  if (language === 'en') {
+    // The redirect lands on the same page in the browser's language.
+    const target = file === 'index.html' ? '' : file;
+    assert.ok(
+      html.includes(`location.replace(language + '/${target}' + location.search + location.hash);`),
+      `${path} redirects to the same page's language folder`,
+    );
+  }
+  for (const label of ['light', 'dark', 'to-light', 'to-dark']) {
+    assert.match(html, new RegExp(`data-label-${label}="[^"]+"`), `${path} labels its theme toggle`);
+  }
+  assert.equal((html.match(/<main/g) ?? []).length, 1, `${path} has one main landmark`);
+  assert.equal((html.match(/<h1/g) ?? []).length, 1, `${path} has exactly one h1`);
+  assert.match(html, />[^<]*(App Store)[^<]*Google Play</, `${path} has its release status`);
+}
+
 // Both badges are sized by the one .badge rule: the same height, as both stores'
 // guidelines ask. Their widths follow their own artwork, which may not be stretched.
-assert.equal(
-  (home.match(/<img\s+class="badge"/g) ?? []).length,
-  badgeLinks.length,
-  'every badge image has only the shared badge class',
-);
 assert.doesNotMatch(css, /badge[^{]*\[src|google-play-badge|app-store-badge/, 'site.css sizes no badge apart');
 // Both stores forbid recolouring, greying or fading their badges.
 assert.doesNotMatch(
-  readFileSync('site.css', 'utf8'),
+  css,
   /\.badge[^{]*\{[^}]*\b(filter|opacity|mix-blend-mode)\s*:/,
   'site.css leaves the store badges unmodified',
 );
-assert.match(
-  home,
-  /Google Play and the\s+Google Play logo are\s+trademarks of Google LLC\./,
-  'home credits Google Play and the Google Play logo, as the Play badge requires',
-);
-assert.match(
-  home,
-  /Apple and the Apple logo are trademarks of Apple Inc\., registered in\s+the U\.S\. and other countries\./,
-  'home credits Apple and the Apple logo, as the App Store badge requires',
-);
-assert.match(
-  home,
-  /App Store is a service mark of Apple\s+Inc\., registered in the U\.S\. and other countries\./,
-  'home credits the App Store service mark',
-);
-// privacy.html still names Android, and the credits cover the whole site.
-assert.match(home, /Android is a trademark\s+of Google LLC\./, 'home attributes the Android trademark');
-// 2.0 sends anonymous usage statistics, so home says so and links the policy.
-assert.match(
-  home,
-  /Escuadra sends anonymous usage statistics unless you switch them off in\s+Settings\./,
-  'home says what leaves the device',
-);
-assert.doesNotMatch(home, /No personal data|No data collected/, 'home makes no 1.x privacy claim');
-assert.doesNotMatch(home, /Fully offline/, 'home no longer promises more than offline play');
-// Photos cover about half the squad places, so nothing may promise one for every player.
-assert.match(home, /where one is available/, 'home qualifies the player photos');
-// The listing's affiliation line, word for word.
-assert.match(
-  home,
-  /Escuadra is an independent, unofficial study tool\. It is not affiliated with,\s+endorsed by, or connected to any confederation, league or competition/,
-  'home says Escuadra is unaffiliated',
-);
-assert.doesNotMatch(home, /assets\/marketing\//, 'home shows no 1.x screenshots');
 
-// Every photo shown is credited on the page: its Commons page, its licence, "cropped".
-// The file name only ever sits in a link, never in visible text (guardrail 1).
-const imageSources = (className) =>
-  [...home.matchAll(/<img\s[^>]*>/g)]
-    .map(([tag]) => tag)
-    .filter((tag) => tag.includes(`class="${className}"`))
-    .map((tag) => tag.match(/\ssrc="([^"]+)"/)[1]);
-const photoFiles = imageSources('miss-card-photo')
-  .map((src) => decodeURIComponent(src.slice(commonsThumb.length).split('/')[2]));
-const creditedFiles = [...home.matchAll(/href="([^"]+)"/g)]
-  .map(([, href]) => href)
-  .filter((href) => href.startsWith(commonsFilePage))
-  .map((href) => decodeURIComponent(href.slice(commonsFilePage.length)));
-assert.ok(photoFiles.length > 0, 'home shows the Results cards with their photos');
-assert.deepEqual(photoFiles, creditedFiles, 'every photo is credited, once, in card order');
-for (const credit of home.match(/<li>\s*<span class="photo-credits-player">[\s\S]*?<\/li>/g) ?? []) {
-  assert.match(credit, /href="https:\/\/creativecommons\.org\/licenses\/[^"]+">CC [^<]+<\/a>\s*·\s*cropped/, 'a credit links its licence and says the photo is cropped');
-}
-assert.match(
-  home,
-  /These photos load from Wikimedia Commons, so Wikimedia receives your IP address and the\s+details of each request, as any website does\./,
-  'home says the photos reach Wikimedia',
-);
-// The file names name the players; in visible text they would read as captions.
-const visible = home.replace(/<[^>]*>/g, ' ');
-for (const file of photoFiles) {
-  assert.ok(!visible.includes(file.replace(/_/g, ' ')), `no visible text carries ${file}`);
-}
+const escapeRegExp = (value) => value.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
 
-// The teaser's stage opens on its first question's photo, and site.mjs swaps the rest.
-// Each is credited under the card by its page id and its team and number, so neither
-// the credit nor its link gives an answer away.
-assert.deepEqual(imageSources('stage-photo'), [photoSources(QUESTIONS[0].photo).src], 'the stage opens on the first photo');
-const teaserCredits = home.slice(home.indexOf('data-quiz'), home.indexOf('id="how"'));
-for (const { team, number, photo, options } of QUESTIONS) {
-  assert.ok(
-    teaserCredits.includes(
-      `<span class="photo-credits-player">${team} · ${number}</span>\n                  <a href="${photoPage(photo)}">${photo.author}</a>\n                  · <a href="${photo.licenceUrl}">${photo.licence}</a> · cropped`,
-    ),
-    `${team}'s photo is credited under the teaser`,
+for (const path of generated.filter((p) => p.endsWith('index.html'))) {
+  const language = path.includes('/') ? path.split('/')[0] : 'en';
+  const text = TEXTS[language];
+  const root = rootOf(path);
+  const home = readFileSync(path, 'utf8');
+  assert.equal((home.match(/<h1/g) ?? []).length, 1, `${path} has exactly one h1`);
+  // Each language's words for the pinned lines, from its text file.
+  assert.ok(home.includes(`>${text.home.hero.title}</h1>`), `${path} has its headline`);
+  assert.ok(home.includes(text.home.hero.lead), `${path} has its supporting copy`);
+  assert.ok(home.includes(`>${text.home.get.title}</h2>`), `${path} has its last call`);
+  if (language === 'en') {
+    assert.match(home, /<h1[^>]*>Know every<br \/>number\.<\/h1>/, 'home has the approved headline');
+    // The App Store promotional text, reviewed in store/listing/en.md.
+    assert.match(
+      home,
+      /Who wears number 7\? Learn every club in Europe’s top five leagues and over\s+150 national teams in quick rounds, then see exactly who you missed\./,
+      'home has the approved supporting copy',
+    );
+    assert.match(home, /Know the squad\.<br \/>Cold\./, 'home keeps the earlier headline as its last call');
+    assert.doesNotMatch(home, /soon/i, 'home no longer says either store is coming soon');
+  }
+  assert.match(home, /data-quiz>/, `${path} carries the playable teaser`);
+  // site.mjs builds the teaser's flag paths from the words' root.
+  const wordsJson = home.match(/<script type="application\/json" id="site-words">([^<]*)<\/script>/);
+  assert.ok(wordsJson, `${path} carries the teaser's words`);
+  assert.equal(JSON.parse(wordsJson[1]).root, root, `${path}'s teaser words reach the site root`);
+  assert.equal(
+    (home.match(/data-quiz-option>/g) ?? []).length,
+    4,
+    `${path}'s teaser offers four names, as level 1 does`,
   );
-  for (const name of options) {
-    assert.ok(!teaserCredits.slice(teaserCredits.indexOf('photo-credits')).includes(name), `the teaser's credits never name ${name}`);
+  // Apple: with another store's badge in the layout, only the black App Store badge,
+  // placed first. Google: the badge may only promote an app you can get on Play.
+  const badgeLinks = [
+    ...home.matchAll(
+      /<a\s+href="([^"]+)"\s+aria-label="([^"]+)"\s*>\s*<img\s+class="badge[^"]*"\s+src="([^"]+)"\s+alt=""\s*\/>\s*<\/a>/g,
+    ),
+  ].map(([, href, label, src]) => ({ href, label, src }));
+  // Each link is named with its badge's own words, so voice control finds it (label in name).
+  const badgePair = [
+    {
+      href: appStoreUrl,
+      label: text.layout.badges.appStore,
+      src: `${root}${badgeDir(language)}app-store-badge-black.svg`,
+    },
+    {
+      href: playStoreUrl,
+      label: text.layout.badges.googlePlay,
+      src: `${root}${badgeDir(language)}google-play-badge.svg`,
+    },
+  ];
+  assert.ok(badgeLinks.length > 0, `${path} links the store listings`);
+  assert.deepEqual(
+    badgeLinks,
+    badgeLinks.map((_, i) => badgePair[i % 2]),
+    `each place on ${path} links both live listings, the black App Store badge first, one badge image each`,
+  );
+  assert.equal(
+    (home.match(/<img\s+class="badge/g) ?? []).length,
+    badgeLinks.length,
+    `every badge image on ${path} is one of those links`,
+  );
+  assert.equal(
+    (home.match(/<img\s+class="badge"/g) ?? []).length,
+    badgeLinks.length,
+    `every badge image on ${path} has only the shared badge class`,
+  );
+  // The trademark credits stay in English, as their holders publish them.
+  assert.equal(
+    home.includes('<p class="legal-credits" lang="en">'),
+    language !== 'en',
+    `${path} marks the trademark credits as English when it is not`,
+  );
+  assert.match(
+    home,
+    /Google Play and the\s+Google Play logo are\s+trademarks of Google LLC\./,
+    `${path} credits Google Play and the Google Play logo, as the Play badge requires`,
+  );
+  assert.match(
+    home,
+    /Apple and the Apple logo are trademarks of Apple Inc\., registered in\s+the U\.S\. and other countries\./,
+    `${path} credits Apple and the Apple logo, as the App Store badge requires`,
+  );
+  assert.match(
+    home,
+    /App Store is a service mark of Apple\s+Inc\., registered in the U\.S\. and other countries\./,
+    `${path} credits the App Store service mark`,
+  );
+  // privacy.html still names Android, and the credits cover the whole site.
+  assert.match(home, /Android is a trademark\s+of Google LLC\./, `${path} attributes the Android trademark`);
+  // 2.0 sends anonymous usage statistics, so home says so and links the policy.
+  const statistics = text.home.promises.items[5].body.split('<a')[0].trim();
+  assert.ok(home.includes(statistics), `${path} says what leaves the device`);
+  // Photos cover about half the squad places, so nothing may promise one for every player.
+  assert.ok(home.includes(text.home.promises.items[2].body), `${path} qualifies the player photos`);
+  // The listing's affiliation line, word for word.
+  assert.ok(home.includes(text.home.footer.affiliation), `${path} says Escuadra is unaffiliated`);
+  if (language === 'en') {
+    assert.match(
+      home,
+      /Escuadra sends anonymous usage statistics unless you switch them off in\s+Settings\./,
+      'home says what leaves the device',
+    );
+    assert.doesNotMatch(home, /No personal data|No data collected/, 'home makes no 1.x privacy claim');
+    assert.doesNotMatch(home, /Fully offline/, 'home no longer promises more than offline play');
+    assert.match(home, /where one is available/, 'home qualifies the player photos');
+    assert.match(
+      home,
+      /Escuadra is an independent, unofficial study tool\. It is not affiliated with,\s+endorsed by, or connected to any confederation, league or competition/,
+      'home says Escuadra is unaffiliated',
+    );
+  }
+  assert.doesNotMatch(home, /assets\/marketing\//, `${path} shows no 1.x screenshots`);
+
+  // Every photo shown is credited on the page: its Commons page, its licence, "cropped".
+  // The file name only ever sits in a link, never in visible text (guardrail 1).
+  const imageSources = (className) =>
+    [...home.matchAll(/<img\s[^>]*>/g)]
+      .map(([tag]) => tag)
+      .filter((tag) => tag.includes(`class="${className}"`))
+      .map((tag) => tag.match(/\ssrc="([^"]+)"/)[1]);
+  const photoFiles = imageSources('miss-card-photo')
+    .map((src) => decodeURIComponent(src.slice(commonsThumb.length).split('/')[2]));
+  const creditedFiles = [...home.matchAll(/href="([^"]+)"/g)]
+    .map(([, href]) => href)
+    .filter((href) => href.startsWith(commonsFilePage))
+    .map((href) => decodeURIComponent(href.slice(commonsFilePage.length)));
+  assert.ok(photoFiles.length > 0, `${path} shows the Results cards with their photos`);
+  assert.deepEqual(photoFiles, creditedFiles, `every photo on ${path} is credited, once, in card order`);
+  const cropped = escapeRegExp(text.home.credits.cropped);
+  for (const credit of home.match(/<li>\s*<span class="photo-credits-player">[\s\S]*?<\/li>/g) ?? []) {
+    assert.match(
+      credit,
+      new RegExp(`href="https://creativecommons\\.org/licenses/[^"]+">CC [^<]+</a>\\s*·\\s*${cropped}`),
+      `a credit on ${path} links its licence and says the photo is cropped`,
+    );
+  }
+  assert.ok(home.includes(text.home.credits.wikimedia), `${path} says the photos reach Wikimedia`);
+  if (language === 'en') {
+    assert.match(
+      home,
+      /These photos load from Wikimedia Commons, so Wikimedia receives your IP address and the\s+details of each request, as any website does\./,
+      'home says the photos reach Wikimedia',
+    );
+  }
+  // The file names name the players; in visible text they would read as captions.
+  const visible = home.replace(/<[^>]*>/g, ' ');
+  for (const file of photoFiles) {
+    assert.ok(!visible.includes(file.replace(/_/g, ' ')), `no visible text on ${path} carries ${file}`);
+  }
+
+  // The teaser's stage opens on its first question's photo, and site.mjs swaps the rest.
+  // Each is credited under the card by its page id and its team and number, so neither
+  // the credit nor its link gives an answer away.
+  assert.deepEqual(imageSources('stage-photo'), [photoSources(QUESTIONS[0].photo).src], `${path}'s stage opens on the first photo`);
+  const words = { countries: text.countries };
+  const teaserCredits = home.slice(home.indexOf('data-quiz'), home.indexOf('id="how"'));
+  for (const question of QUESTIONS) {
+    const { number, photo, options } = question;
+    const team = teamName(question, words);
+    assert.ok(
+      teaserCredits.includes(
+        `<span class="photo-credits-player">${team} · ${number}</span>\n                  <a href="${photoPage(photo)}">${photo.author}</a>\n                  · <a href="${photo.licenceUrl}">${photo.licence}</a> · ${text.home.credits.cropped}`,
+      ),
+      `${team}'s photo is credited under ${path}'s teaser`,
+    );
+    for (const name of options) {
+      assert.ok(!teaserCredits.slice(teaserCredits.indexOf('photo-credits')).includes(name), `${path}'s teaser credits never name ${name}`);
+    }
   }
 }
 

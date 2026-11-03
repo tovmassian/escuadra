@@ -1,26 +1,41 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
+import en from '../src/text/en.mjs';
 import {
-  POSITION_NAMES,
   QUESTIONS,
   advance,
   ageOn,
+  fill,
   photoPage,
   photoSources,
   pick,
   spokenQuestion,
   startRound,
   summary,
+  teamName,
 } from '../quiz.mjs';
+
+const words = { ...en.teaser, countries: en.countries };
 
 test('a question is spoken in words, never in the card’s codes', () => {
   assert.equal(
-    spokenQuestion(1, new Date(2026, 10, 2)),
+    spokenQuestion(1, new Date(2026, 10, 2), words),
     'Question 2 of 3. Arsenal. Who wears 7? Position: Forward. Age: 25. Nationality: England.',
   );
   for (const question of QUESTIONS) {
-    assert.ok(POSITION_NAMES[question.position], `${question.team}'s position has a spoken name`);
+    assert.ok(words.positions[question.position], `${question.team}'s position has a spoken name`);
   }
+});
+
+test('fills slots, and leaves an unknown one as it is', () => {
+  assert.equal(fill('Who wears {number}?', { number: 7 }), 'Who wears 7?');
+  assert.equal(fill('{a} and {b}', { a: 1 }), '1 and {b}');
+});
+
+test('a nation is named in the page’s language, a club as it is', () => {
+  const es = { countries: { ESP: 'España' } };
+  assert.equal(teamName(QUESTIONS[0], es), 'España');
+  assert.equal(teamName(QUESTIONS[1], es), 'Arsenal');
 });
 
 test('counts age in whole years, as the app does', () => {
@@ -61,7 +76,7 @@ test('the round ends after the last question, and the summary lists the misses',
     answered: 3,
     total: 3,
     perfect: false,
-    missed: [{ number: 7, name: 'Bukayo Saka', team: 'Arsenal' }],
+    missed: [{ number: 7, name: 'Bukayo Saka', team: 'Arsenal', country: null }],
   });
 });
 

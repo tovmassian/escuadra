@@ -1,6 +1,10 @@
 // quiz.mjs: the home page's three-question teaser, played as the app plays level 1.
 // Pure: site.mjs owns the page, this module only the round.
 //
+// A team's `country` names a nation by its FIFA code, so each page shows it in its
+// language; a club has none, and its name is never translated. A clue is
+// `{ kind: 'club', value }` (the club's name) or `{ kind: 'nat', country }`.
+//
 // The facts come from the app's squads (data/squads/ and data/players.json on main):
 // re-check them when the squads are refreshed. `bands` is the team's marker as the
 // in-round banner draws it, vertical bands in the team's real colours, under `veil`;
@@ -15,10 +19,11 @@
 export const QUESTIONS = [
   {
     team: 'Spain',
+    country: 'ESP',
     number: 19,
     position: 'FW',
     birth: '2007-07-13',
-    clue: { label: 'Club', value: 'Barcelona', flag: null },
+    clue: { kind: 'club', value: 'Barcelona' },
     bands: 'linear-gradient(90deg, #AA151B 0% 25%, #F1BF00 25% 75%, #AA151B 75% 100%)',
     veil: 0.42,
     photo: {
@@ -34,10 +39,11 @@ export const QUESTIONS = [
   },
   {
     team: 'Arsenal',
+    country: null,
     number: 7,
     position: 'FW',
     birth: '2001-09-05',
-    clue: { label: 'Nat', value: 'England', flag: 'assets/flags/ENG.png' },
+    clue: { kind: 'nat', country: 'ENG' },
     bands: 'linear-gradient(90deg, #EF0107 0% 100%)',
     veil: 0.42,
     photo: {
@@ -53,10 +59,11 @@ export const QUESTIONS = [
   },
   {
     team: 'Japan',
+    country: 'JPN',
     number: 20,
     position: 'MF',
     birth: '2001-06-04',
-    clue: { label: 'Club', value: 'Real Sociedad', flag: null },
+    clue: { kind: 'club', value: 'Real Sociedad' },
     bands:
       'linear-gradient(90deg, #FFFFFF 0% 33.33%, #BC002D 33.33% 66.67%, #FFFFFF 66.67% 100%)',
     veil: 0.55,
@@ -86,25 +93,41 @@ export function photoPage({ page }) {
   return `https://commons.wikimedia.org/w/index.php?curid=${page}`;
 }
 
-// What a screen reader says in place of the card's codes, as the app's catalog does.
-export const POSITION_NAMES = { GK: 'Keeper', DF: 'Defender', MF: 'Midfield', FW: 'Forward' };
-const CLUE_NAMES = { Club: 'Club', Nat: 'Nationality' };
+/** Fills a page's {slots}: fill('Who wears {number}?', { number: 7 }). */
+export function fill(template, values) {
+  return template.replace(/\{(\w+)\}/g, (slot, key) => (key in values ? String(values[key]) : slot));
+}
+
+/** A team as the page names it: a nation in the page's language, a club as it is. */
+export function teamName({ team, country }, words) {
+  return country ? words.countries[country] : team;
+}
+
+/** The club or nationality clue, in the page's language. */
+export function clueValue({ clue }, words) {
+  return clue.kind === 'nat' ? words.countries[clue.country] : clue.value;
+}
 
 /** The clues, spoken: "Position: Forward. Age: 19. Club: Barcelona." */
-export function spokenClues(question, today) {
-  return (
-    `Position: ${POSITION_NAMES[question.position]}. Age: ${ageOn(question.birth, today)}. ` +
-    `${CLUE_NAMES[question.clue.label]}: ${question.clue.value}.`
-  );
+export function spokenClues(question, today, words) {
+  return fill(words.spoken.clues, {
+    position: words.positions[question.position],
+    age: ageOn(question.birth, today),
+    clueLabel: words.clueSpoken[question.clue.kind],
+    clue: clueValue(question, words),
+  });
 }
 
 /** A question as it opens: "Question 2 of 3. Arsenal. Who wears 7? Position: …" */
-export function spokenQuestion(index, today, questions = QUESTIONS) {
+export function spokenQuestion(index, today, words, questions = QUESTIONS) {
   const question = questions[index];
-  return (
-    `Question ${index + 1} of ${questions.length}. ${question.team}. ` +
-    `Who wears ${question.number}? ${spokenClues(question, today)}`
-  );
+  return fill(words.spoken.question, {
+    n: index + 1,
+    total: questions.length,
+    team: teamName(question, words),
+    number: question.number,
+    clues: spokenClues(question, today, words),
+  });
 }
 
 /** Whole years from `birth` (YYYY-MM-DD) to `today`, as the app's age clue counts them. */
@@ -152,6 +175,7 @@ export function summary(state, questions = QUESTIONS) {
         number: question.number,
         name: question.answer,
         team: question.team,
+        country: question.country,
       })),
   };
 }

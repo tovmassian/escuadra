@@ -1,15 +1,19 @@
 // site.mjs
+import { LANGUAGE_STORAGE_KEY } from './language.mjs';
 import { THEME_STORAGE_KEY, nextTheme, resolveTheme } from './theme.mjs';
 import {
   QUESTIONS,
   advance,
   ageOn,
+  clueValue,
+  fill,
   photoSources,
   pick,
   spokenClues,
   spokenQuestion,
   startRound,
   summary,
+  teamName,
 } from './quiz.mjs';
 
 const root = document.documentElement;
@@ -60,6 +64,44 @@ function initialiseTheme() {
   });
 }
 
+// A language picked here outlasts the browser's: the English pages read it before
+// they redirect, so picking English stops the redirect for good.
+function initialiseLanguageMenu() {
+  // The generated pages' links carry data-language; the privacy pages' carry only
+  // hreflang. A link opened in a new tab (middle click) counts as a pick too.
+  for (const link of document.querySelectorAll('[data-language], .language-nav a[hreflang]')) {
+    const remember = () => {
+      try {
+        localStorage.setItem(LANGUAGE_STORAGE_KEY, link.dataset.language ?? link.hreflang);
+      } catch {}
+    };
+    link.addEventListener('click', remember);
+    link.addEventListener('auxclick', remember);
+  }
+  const menus = [...document.querySelectorAll('[data-language-menu]')];
+  // Keyboard focus that moves out of a menu closes it, as a click outside does. Focus
+  // that goes nowhere stays open: WebKit focuses the summary on a press but not a link,
+  // so a press on a language blurs the summary with no relatedTarget, and closing then
+  // would swallow the click. The document's click listener closes it on a press outside.
+  for (const menu of menus) {
+    menu.addEventListener('focusout', (event) => {
+      if (event.relatedTarget && !menu.contains(event.relatedTarget)) menu.open = false;
+    });
+  }
+  document.addEventListener('click', (event) => {
+    for (const menu of menus) if (!menu.contains(event.target)) menu.open = false;
+  });
+  document.addEventListener('keydown', (event) => {
+    if (event.key !== 'Escape') return;
+    for (const menu of menus) {
+      if (menu.open) {
+        menu.open = false;
+        menu.querySelector('summary').focus();
+      }
+    }
+  });
+}
+
 function initialiseReveals() {
   const items = document.querySelectorAll('[data-reveal]');
   if (!('IntersectionObserver' in window) || reducedMotion.matches) {
@@ -81,7 +123,9 @@ function initialiseReveals() {
 // it reads the same without JavaScript; this makes it playable.
 function initialiseQuiz() {
   const card = document.querySelector('[data-quiz]');
-  if (!card) return;
+  const wordsBlock = document.getElementById('site-words');
+  if (!card || !wordsBlock) return;
+  const words = JSON.parse(wordsBlock.textContent);
   const part = (name) => card.querySelector(`[data-quiz-${name}]`);
   const stage = part('stage');
   const photo = part('photo');
@@ -128,9 +172,9 @@ function initialiseQuiz() {
       Object.assign(photo, { srcset, src });
     }
     photo.style.objectPosition = question.photo.focus;
-    part('team').textContent = question.team;
+    part('team').textContent = teamName(question, words);
     part('score').textContent = `${score}/${answered}`;
-    part('score-spoken').textContent = `Score: ${score} of ${answered}`;
+    part('score-spoken').textContent = fill(words.spoken.score, { score, answered });
     segments.forEach((segment, i) => {
       const result = state.results[i];
       segment.className = result
@@ -142,8 +186,13 @@ function initialiseQuiz() {
       part('result-score').textContent = String(score);
       part('result-score').classList.toggle('is-perfect', perfect);
       part('result-total').textContent = `/${total}`;
-      part('result-title').textContent = perfect ? 'A la escuadra' : 'Still learning';
-      part('result-title').classList.toggle('is-perfect', perfect);
+      const title = perfect ? words.titles.perfect : words.titles.learning;
+      const resultTitle = part('result-title');
+      resultTitle.textContent = title;
+      resultTitle.classList.toggle('is-perfect', perfect);
+      // "A la escuadra" is Spanish on every page; English and Spanish read it as their own.
+      if (perfect && !['es', 'en'].includes(root.lang)) resultTitle.lang = 'es';
+      else resultTitle.removeAttribute('lang');
       const list = part('missed');
       list.replaceChildren(
         ...missed.map((miss) => {
@@ -151,7 +200,7 @@ function initialiseQuiz() {
           for (const [className, text] of [
             ['miss-no', `#${miss.number}`],
             ['miss-name', miss.name],
-            ['miss-team', miss.team],
+            ['miss-team', teamName(miss, words)],
           ]) {
             const span = document.createElement('span');
             span.className = className;
@@ -163,11 +212,10 @@ function initialiseQuiz() {
       );
       list.hidden = missed.length === 0;
       part('result-copy').textContent = perfect
-        ? 'Three for three. The app plays ten a round, across 96 clubs and 157 national teams.'
-        : 'Those are the ones to go over. The app plays ten questions a round, across 96 clubs and 157 national teams, and every miss waits for you on Results.';
-      part('result-spoken').textContent = `${score} of ${total}`;
-      part('live').textContent =
-        `Your round: ${score} of ${total}. ${perfect ? 'A la escuadra' : 'Still learning'}.`;
+        ? words.resultCopy.perfect
+        : words.resultCopy.learning;
+      part('result-spoken').textContent = fill(words.spoken.result, { score, total });
+      part('live').textContent = fill(words.live.round, { score, total, title });
       return;
     }
 
@@ -175,8 +223,11 @@ function initialiseQuiz() {
     const today = new Date();
     const age = ageOn(question.birth, today);
     part('spoken').textContent =
-      `Name: ${state.picked === null ? 'being asked' : question.answer}. ` +
-      spokenClues(question, today);
+      fill(words.spoken.name, {
+        name: state.picked === null ? words.spoken.beingAsked : question.answer,
+      }) +
+      ' ' +
+      spokenClues(question, today, words);
     const isLast = state.index === QUESTIONS.length - 1;
     if (number.firstChild.nodeValue !== String(question.number)) {
       number.firstChild.nodeValue = String(question.number);
@@ -189,14 +240,16 @@ function initialiseQuiz() {
       ? `chip chip-name ${right ? 'is-right' : 'is-wrong'}`
       : 'chip chip-name';
     part('name-value').textContent = state.picked ? question.answer : '?';
-    part('position').textContent = question.position;
+    part('position').textContent = words.positionCodes[question.position];
     part('age').textContent = String(age);
-    part('clue-label').textContent = question.clue.label;
-    part('clue').textContent = question.clue.value;
+    part('clue-label').textContent = words.clueCodes[question.clue.kind];
+    part('clue').textContent = clueValue(question, words);
     const flag = part('flag');
-    flag.hidden = !question.clue.flag;
-    if (question.clue.flag) flag.src = question.clue.flag;
-    part('title').textContent = `Who wears ${question.number}?`;
+    const flagSrc =
+      question.clue.kind === 'nat' ? `${words.root}assets/flags/${question.clue.country}.png` : null;
+    flag.hidden = !flagSrc;
+    if (flagSrc) flag.src = flagSrc;
+    part('title').textContent = fill(words.whoWears, { number: question.number });
     question.options.forEach((option, i) => {
       const tile = tiles[i];
       tile.textContent = option;
@@ -212,22 +265,22 @@ function initialiseQuiz() {
     hint.hidden = state.picked !== null && !right;
     hint.textContent =
       state.picked === null
-        ? 'Tap your answer'
+        ? words.hint.tap
         : isLast
-          ? 'Right. Your round is next…'
-          : 'Right. Next one coming…';
+          ? words.hint.rightLast
+          : words.hint.right;
     hint.classList.toggle('is-right', right);
     nextButton.hidden = state.picked === null || right;
-    nextButton.textContent = isLast ? 'See your round' : 'Next';
+    nextButton.textContent = isLast ? words.seeRound : words.next;
     // Focus lands on the first name when a question opens, so the question itself is
     // announced.
     part('live').textContent =
       state.picked !== null
         ? right
-          ? `Right: ${question.answer}.`
-          : `Not quite. Number ${question.number} is ${question.answer}.`
+          ? fill(words.live.right, { answer: question.answer })
+          : fill(words.live.wrong, { number: question.number, answer: question.answer })
         : state.results.length > 0 || restarted
-          ? spokenQuestion(state.index, today)
+          ? spokenQuestion(state.index, today, words)
           : '';
   }
 
@@ -257,5 +310,6 @@ function initialiseQuiz() {
 }
 
 initialiseTheme();
+initialiseLanguageMenu();
 initialiseReveals();
 initialiseQuiz();

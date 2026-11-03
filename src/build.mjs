@@ -1,0 +1,35 @@
+// src/build.mjs: Home and Support in every language, from one template and one text
+// file per language (#280). `node src/build.mjs`, from the site's root, writes them;
+// tests/build.test.mjs fails when a page on disk differs from what this renders.
+// Dependency-free, like the rest of the site.
+import { mkdirSync, writeFileSync } from 'node:fs';
+import { dirname } from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { home } from './home.mjs';
+import { folderOf } from './layout.mjs';
+import { support } from './support.mjs';
+import de from './text/de.mjs';
+import en from './text/en.mjs';
+import es from './text/es.mjs';
+import fr from './text/fr.mjs';
+import it from './text/it.mjs';
+
+export { folderOf };
+export const TEXTS = { en, es, fr, it, de };
+
+export function renderSite() {
+  const pages = new Map();
+  for (const [language, text] of Object.entries(TEXTS)) {
+    const page = { language, text, root: language === 'en' ? '' : '../' };
+    pages.set(`${folderOf(language)}index.html`, home(page));
+    pages.set(`${folderOf(language)}support.html`, support(page));
+  }
+  return pages;
+}
+
+if (process.argv[1] === fileURLToPath(import.meta.url)) {
+  for (const [path, html] of renderSite()) {
+    mkdirSync(dirname(path), { recursive: true });
+    writeFileSync(path, html);
+  }
+}

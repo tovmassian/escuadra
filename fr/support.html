@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/x-icon" href="../assets/favicon.ico" />
+    <title>Assistance — Escuadra</title>
+    <link rel="canonical" href="https://tovmassian.github.io/escuadra/fr/support.html" />
+    <link rel="alternate" hreflang="en" href="https://tovmassian.github.io/escuadra/support.html" />
+    <link rel="alternate" hreflang="es" href="https://tovmassian.github.io/escuadra/es/support.html" />
+    <link rel="alternate" hreflang="fr" href="https://tovmassian.github.io/escuadra/fr/support.html" />
+    <link rel="alternate" hreflang="it" href="https://tovmassian.github.io/escuadra/it/support.html" />
+    <link rel="alternate" hreflang="de" href="https://tovmassian.github.io/escuadra/de/support.html" />
+    <link rel="alternate" hreflang="x-default" href="https://tovmassian.github.io/escuadra/support.html" />
+    <script>
+      try {
+        const saved = localStorage.getItem('escuadra-site-theme');
+        const theme =
+          saved === 'light' || saved === 'dark'
+            ? saved
+            : matchMedia('(prefers-color-scheme: dark)').matches
+              ? 'dark'
+              : 'light';
+        document.documentElement.dataset.theme = theme;
+      } catch {
+        document.documentElement.dataset.theme = matchMedia(
+          '(prefers-color-scheme: dark)',
+        ).matches
+          ? 'dark'
+          : 'light';
+      }
+      document.documentElement.dataset.js = 'true';
+    </script>
+    <link rel="stylesheet" href="../site.css" />
+    <script type="module" src="../site.mjs"></script>
+  </head>
+  <body>
+    <header class="site-header shell">
+      <a class="brand" href="index.html" aria-label="Page d’accueil d’Escuadra">
+        <span class="brand-mark" aria-hidden="true">
+          <img src="../assets/favicon.ico" alt="" />
+        </span>
+        <span>escuadra</span>
+      </a>
+      <nav aria-label="Accès rapide">
+        <a href="index.html">Accueil</a><a href="support.html" aria-current="page">Assistance</a
+        ><a href="../privacy/2/fr.html">Confidentialité</a>
+      </nav>
+      <div class="header-actions">
+        <details class="language-menu" data-language-menu>
+          <summary>FR<span class="sr-only"> Langue : Français</span></summary>
+          <nav class="language-nav" aria-label="Langue"><a href="../support.html" hreflang="en" lang="en" data-language="en">English</a><a href="../es/support.html" hreflang="es" lang="es" data-language="es">Español</a><a href="support.html" hreflang="fr" lang="fr" data-language="fr" aria-current="page">Français</a><a href="../it/support.html" hreflang="it" lang="it" data-language="it">Italiano</a><a href="../de/support.html" hreflang="de" lang="de" data-language="de">Deutsch</a></nav>
+        </details>
+        <button
+          type="button"
+          class="theme-toggle"
+          data-theme-toggle
+          data-label-light="Clair"
+          data-label-dark="Sombre"
+          data-label-to-light="Passer au thème clair"
+          data-label-to-dark="Passer au thème sombre"
+        >
+          <span class="theme-toggle-icon" aria-hidden="true">◐</span
+          ><span data-theme-toggle-label></span>
+        </button>
+      </div>
+    </header>
+
+    <main>
+      <section class="page-hero">
+        <span class="page-ghost numbers" aria-hidden="true">?</span>
+        <div class="shell support-grid">
+          <div>
+            <p class="eyebrow"><span class="corner"></span>Assistance</p>
+            <h1 class="display">Quelque chose<br />cloche ?</h1>
+            <p class="lead">
+              Un bug, un numéro de maillot erroné, une équipe que tu aimerais voir ajoutée ? Le meilleur moyen de contacter le développeur, c’est GitHub Issues. Dis ce qui s’est passé, sur quel téléphone et avec quelle équipe.
+            </p>
+            <div class="cta-row">
+              <a class="pill" href="https://github.com/tovmassian/escuadra/issues"
+                >Ouvrir un ticket sur GitHub</a
+              >
+              <span class="cta-note">Pour ouvrir un ticket, il te faut un compte GitHub gratuit.</span>
+            </div>
+          </div>
+          <div class="kinds">
+            <a class="kind" href="https://github.com/tovmassian/escuadra/issues">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="9" /><path d="M12 7.5v5.5" /><circle cx="12" cy="16.4" r=".9" fill="currentColor" /></svg>
+              <span>
+                <span class="kind-title">Signaler un bug</span>
+                <span class="kind-sub" style="display: block">Où tu as appuyé et ce qui s’est passé</span>
+              </span>
+              <svg class="kind-go" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+            <a class="kind" href="https://github.com/tovmassian/escuadra/issues">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 4l-4 3 2 4 2-1v10h8V10l2 1 2-4-4-3-2 2h-4z" /></svg>
+              <span>
+                <span class="kind-title">Corriger un effectif</span>
+                <span class="kind-sub" style="display: block">L’équipe, le joueur, le bon numéro</span>
+              </span>
+              <svg class="kind-go" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+            <a class="kind" href="https://github.com/tovmassian/escuadra/issues">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" aria-hidden="true"><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1" /></svg>
+              <span>
+                <span class="kind-title">Proposer une équipe ou une fonctionnalité</span>
+                <span class="kind-sub" style="display: block">Ce qui t’aiderait à apprendre</span>
+              </span>
+              <svg class="kind-go" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" /></svg>
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section class="shell faq-grid" aria-labelledby="faq-title">
+        <div>
+          <p class="eyebrow"><span class="corner"></span>Questions fréquentes</p>
+          <h2 id="faq-title" class="display">Avant d’écrire</h2>
+        </div>
+        <div class="faq">
+          <details open>
+            <summary>Comment débloquer les niveaux 2 et 3 ?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Fais 8/10 au niveau 1 pour débloquer le niveau 2, et 8/10 au niveau 2 pour débloquer le niveau 3. Chaque équipe a ses propres paliers.
+            </p>
+          </details>
+          <details>
+            <summary>Pourquoi certains joueurs n’ont-ils pas de photo ?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Les photos viennent de Wikimedia Commons, et seulement quand Commons en a une sous une licence qu’Escuadra peut utiliser. Sinon, ou sans connexion avant qu’une photo ait été chargée, la question affiche à la place les couleurs de l’équipe et le numéro de maillot.
+            </p>
+          </details>
+          <details>
+            <summary>Escuadra fonctionne-t-elle sans connexion ?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Oui. Tous les effectifs sont enregistrés sur ton téléphone, donc le quiz fonctionne sans connexion. Les photos se chargent depuis Wikimedia Commons quand tu es en ligne.
+            </p>
+          </details>
+          <details>
+            <summary>Une erreur sur un numéro de maillot ou un joueur ?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Les effectifs sont compilés à partir de Wikipédia et de Wikidata, et chaque équipe indique la date de sa dernière mise à jour. Si quelque chose n’est plus à jour, ouvre un ticket en précisant l’équipe et le joueur.
+            </p>
+          </details>
+          <details>
+            <summary>Comment changer de langue ?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Escuadra suit la langue de ton téléphone. Pour en choisir une autre, ouvre <b>Réglages</b>, puis <b>Langue</b> : English, Español, Français, Italiano ou Deutsch.
+            </p>
+          </details>
+          <details>
+            <summary>Comment désactiver les statistiques d’utilisation ?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Ouvre <b>Réglages</b> et désactive <b>Statistiques d’utilisation</b>. La page À propos, dans l’appli, détaille tout ce qui quitte ton appareil, tout comme la <a href="../privacy/2/fr.html">politique de confidentialité</a>.
+            </p>
+          </details>
+          <details>
+            <summary>Comment tout recommencer ?<span class="plus" aria-hidden="true"></span></summary>
+            <p>
+              Sur l’écran d’une équipe, le bouton en forme de gomme ouvre <b>Recommencer</b>, qui remet cette équipe à « Pas encore joué ». Dans Réglages, <b>Effacer tous les records</b> fait de même pour toutes les équipes, et <b>Réinitialiser Escuadra</b> remet tout comme au premier lancement.
+            </p>
+          </details>
+        </div>
+      </section>
+    </main>
+
+    <footer class="site-footer shell">
+      <span>&copy; Khachatur Tovmasyan</span>
+      <nav aria-label="Pied de page">
+        <a href="index.html">Accueil</a><a href="../privacy/2/fr.html">Confidentialité</a
+        ><a href="../privacy.html" hreflang="en">Politique de confidentialité d’Escuadra 1.x</a>
+      </nav>
+      <span class="release-status">Désormais disponible sur l’App Store et sur Google Play</span>
+    </footer>
+  </body>
+</html>
