@@ -70,7 +70,7 @@ export default {
       locked: '8/10 al liv. {level}',
       levels: [
         { title: 'Nome dal numero', body: 'Dato il numero di maglia, scegli il giocatore tra 4 opzioni.' },
-        { title: 'Nome e ruolo', body: 'Scegli il nome, poi il ruolo: POR, DIF, CEN o ATT.' },
+        { title: 'Nome e ruolo', body: 'Scegli il nome, poi il ruolo: portiere, difensore, centrocampista o attaccante.' },
         {
           title: 'Profilo completo',
           body: 'Scegli il nome tra 6 opzioni, poi il ruolo, poi la nazionalità o, per una nazionale, il club.',

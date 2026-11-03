@@ -65,7 +65,7 @@ export default {
       locked: 'Score 8/10 on L{level}',
       levels: [
         { title: 'Name from Number', body: 'Given a shirt number, pick the player from 4 options.' },
-        { title: 'Name + Position', body: 'Pick the name, then the position — GK, DF, MF, or FW.' },
+        { title: 'Name + Position', body: 'Pick the name, then the position — goalkeeper, defender, midfielder, or forward.' },
         {
           title: 'Full Profile',
           body: 'Name from 6 options, then position, then nationality — or club, for a national team.',

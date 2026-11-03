@@ -67,7 +67,7 @@ export default {
       locked: '8/10 en niv. {level}',
       levels: [
         { title: 'Solo el nombre', body: 'Con el dorsal, elige al jugador entre 4 opciones.' },
-        { title: 'Nombre y posición', body: 'Elige el nombre y luego la posición: POR, DEF, MED o DEL.' },
+        { title: 'Nombre y posición', body: 'Elige el nombre y luego la posición: portero, defensa, medio o delantero.' },
         {
           title: 'Perfil completo',
           body: 'Elige el nombre entre 6 opciones, luego la posición y, por último, la nacionalidad o, en una selección, el club.',

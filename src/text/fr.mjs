@@ -70,7 +70,7 @@ export default {
       locked: '8/10 au niveau {level}',
       levels: [
         { title: 'Du numéro au nom', body: 'Avec le numéro de maillot, trouve le joueur parmi 4 choix.' },
-        { title: 'Nom et poste', body: 'Le nom, puis le poste : GB, DÉF, MIL ou ATT.' },
+        { title: 'Nom et poste', body: 'Le nom, puis le poste : gardien, défenseur, milieu ou attaquant.' },
         {
           title: 'Profil complet',
           body: 'Le nom parmi 6 choix, puis le poste, puis la nationalité, ou le club pour une sélection.',

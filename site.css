@@ -822,10 +822,14 @@ p {
   color: var(--ink-2);
   font-size: 16px;
 }
+/* The buttons share the row; when a language's words don't fit, each takes a full row. */
 .result-actions {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
+}
+.result-actions .pill {
+  flex: 1 1 auto;
 }
 [hidden] {
   display: none !important;

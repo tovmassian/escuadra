@@ -70,7 +70,7 @@ export default {
       locked: 'Ab 8/10 in L{level}',
       levels: [
         { title: 'Name zur Nummer', body: 'Du siehst die Rückennummer und wählst den Spieler aus 4 Namen.' },
-        { title: 'Name und Position', body: 'Erst den Namen, dann die Position – TW, ABW, MF oder ST.' },
+        { title: 'Name und Position', body: 'Erst den Namen, dann die Position – Tor, Abwehr, Mittelfeld oder Sturm.' },
         {
           title: 'Ganzer Steckbrief',
           body: '6 Namen zur Wahl, dann Position, dann Nationalität – bei einem Nationalteam stattdessen der Verein.',
