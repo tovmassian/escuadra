@@ -85,6 +85,7 @@ you changed the work.
 | Bundled and autolinked packages | each package's own: MIT, ISC, MIT AND OFL-1.1, MIT AND Apache-2.0                                                        | `lib/licences.generated.ts`, `scripts/gen-licences.ts`                                       |
 | Native libraries                | each library's own, under the native allowlist (`NATIVE_ALLOWED_LICENCES`); Google's Play libraries under Google's terms | `scripts/native-licences.json`, checked by `scripts/gen-licences.ts`                         |
 | App Store / Google Play badges  | Apple's and Google's artwork, under their rules                                                                          | `CLAUDE.md`, guardrail 2                                                                     |
+| Website share cards             | Escuadra's own artwork, set in Archivo and IBM Plex Mono (OFL 1.1)                                                       | `gh-pages:assets/share/README.md`                                                            |
 | Club crests, badges, logos      | **never** — trademarks, whatever their licence                                                                           | `CLAUDE.md`, guardrail 2                                                                     |
 
 The Unicode License asks that its copyright and permission notice appear with
@@ -288,6 +289,10 @@ pointer hovers it. A line under each block says the photos load from Wikimedia C
 so Wikimedia receives the visitor's IP address and the details of each request. The
 site's tests check that every photo shown is credited. Like a listing, the site is
 promotional use, and the same caveat about personality and publicity rights applies.
+
+A link to the site shows a share card when it is shared (`gh-pages:assets/share/`),
+one per language. It is drawn from Home's hero and carries no photo, flag, crest or
+store badge, so no credit is owed; the site's tests keep it that way.
 
 ## The licences we refuse, and why
 
