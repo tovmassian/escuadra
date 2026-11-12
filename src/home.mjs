@@ -21,6 +21,7 @@ import {
   themeToggle,
   wordsScript,
 } from './layout.mjs';
+import { shareTags } from './share.mjs';
 
 // Clubs are never translated: a name and the colours of its banded marker.
 const CLUBS = [
@@ -196,6 +197,7 @@ ${page.language === 'en' ? redirectScript('index.html') + '\n' : ''}    <link re
       content="${text.meta.homeDescription}"
     />
 ${alternates(page, 'index.html')}
+${shareTags(page, 'index.html', { title: text.meta.homeTitle, description: text.meta.homeDescription })}
 ${themeScript()}
     <link
       rel="preload"

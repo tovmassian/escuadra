@@ -58,7 +58,7 @@ for (const face of readdirSync('assets/fonts', { withFileTypes: true }).filter((
   assert.ok(existsSync(`${dir}/OFL.txt`), `${dir} carries its OFL.txt`);
 }
 // A shipped image names its licence where it lives (main's docs/license.md).
-for (const dir of ['assets/fonts', 'assets/flags', 'assets/badges']) {
+for (const dir of ['assets/fonts', 'assets/flags', 'assets/badges', 'assets/share']) {
   assert.ok(existsSync(`${dir}/README.md`), `${dir} names its source and licence`);
 }
 // The stores' badges, one folder per language (English at the root), as downloaded.

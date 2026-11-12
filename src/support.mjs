@@ -9,6 +9,7 @@ import {
   themeScript,
   themeToggle,
 } from './layout.mjs';
+import { shareTags, plain } from './share.mjs';
 
 const ISSUES = 'https://github.com/tovmassian/escuadra/issues';
 
@@ -36,7 +37,12 @@ export function support(page) {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
 ${page.language === 'en' ? redirectScript('support.html') + '\n' : ''}    <link rel="icon" type="image/x-icon" href="${root}assets/favicon.ico" />
     <title>${text.meta.supportTitle}</title>
+    <meta
+      name="description"
+      content="${plain(t.lead)}"
+    />
 ${alternates(page, 'support.html')}
+${shareTags(page, 'support.html', { title: text.meta.supportTitle, description: t.lead })}
 ${themeScript()}
     <link rel="stylesheet" href="${root}site.css" />
     <script type="module" src="${root}site.mjs"></script>
