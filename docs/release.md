@@ -9,6 +9,7 @@ store build — and how to take one back. The design behind it is
 | I want to…                            | Go to                                                     |
 | ------------------------------------- | --------------------------------------------------------- |
 | Ship a JS fix to a released version   | [Ship a JS fix](#ship-a-js-fix)                           |
+| Ship the weekly squad sweep           | [Sweep squad data](#sweep-squad-data)                     |
 | Ship a new binary                     | [Cut a release](#cut-a-release)                           |
 | Change the store listing              | [Change the store listing](#change-the-store-listing)     |
 | Undo an update                        | [Roll back](#roll-back)                                   |
@@ -146,6 +147,28 @@ commit …)` line. An admin may merge a PR into `main` past a red check; nobody 
    that fits and with the date it shipped: in the fix's own PR when the release branch has
    `CHANGELOG.md`, otherwise in the `pick-to-main` PR on `main`.
 
+### Sweep squad data
+
+Every Monday, `squad-sweep` runs squadctl's `fetch`, `apply` and, for teams with new
+players, `enrich` on the branch the repository variable `SWEEP_BASE` names: the live
+version's (`gh variable get SWEEP_BASE`). It uses that branch's squadctl, so the data has the shape the
+shipped app reads. Squad data leaves the fingerprint alone, so a sweep ships as an OTA.
+
+- **A quiet week opens nothing.** A change opens one PR, `data: weekly sweep`, from
+  `data/sweep-<date>` into `SWEEP_BASE`; while it is open, each run adds a commit to it
+  and rewrites its description, the run's report. It never force-pushes.
+- **Answer every conflict** the description lists, until every team is `verified: true`:
+  on the PR's branch, run the command it names (`tools/squadctl/README.md`), commit and
+  push, then **Actions → squad-sweep → Run workflow** to re-apply. The same re-run clears
+  a blast radius (usually a new call-up) once you have read its diff.
+- **Ship it:** label `ota:android` and/or `ota:ios`. The job opened the PR with
+  `GITHUB_TOKEN`, so only your label starts `release-gate` (the job starts `check`
+  itself). A run after the label leaves the gate on an older commit: remove the label and
+  add it again. Then [Ship a JS fix](#ship-a-js-fix) from step 4.
+
+`squad-sweep` needs the same Actions setting as `pick-to-main`, below. When the next
+version ships, point it there ([Cut a release](#cut-a-release), step 8).
+
 ### Release one platform first, or publish later
 
 Label only the first platform. For the other one, or after a freeze lifts, run
@@ -230,7 +253,9 @@ A new version from `main`:
    App Store Connect. Android: promote the build in Play Console and
    send the changes for review; with managed publishing, publish once approved. On Play, a
    change sent while the review runs can push the app to the back of the queue, so a
-   listing edit waits for the approval. Close each freeze once approved.
+   listing edit waits for the approval. Close each freeze once approved. Once both stores
+   ship the version, point the squad sweep at it, after merging or closing any sweep PR
+   still open into the old branch: `gh variable set SWEEP_BASE --body release/X.Y.Z`.
    Then tag the commit the build came from (its `store-build` run names it) and publish its
    notes: `git tag vX.Y.Z <commit> && git push origin vX.Y.Z`, then
    `awk '/^## \[X.Y.Z\]/{f=1;next} /^## \[/{f=0} f' CHANGELOG.md > "$RUNNER_TEMP/notes.md"`
@@ -305,11 +330,13 @@ keeps the fingerprint.
 | `ota-rollback`   | Manual                                    | Roll back production or preview                 | production runs in `production-<platform>`         |
 | `store-build`    | Manual                                    | Production or preview build, optional submit    | production runs in `production-<platform>`         |
 | `pick-to-main`   | A PR merged into `release/*`              | Opens its cherry-pick into `main`, runs `check` | `GITHUB_TOKEN`                                     |
+| `squad-sweep`    | Mondays; manual                           | Opens or adds to the data PR into `SWEEP_BASE`  | `GITHUB_TOKEN`                                     |
 | `review-shots`   | Any PR closed                             | Deletes the PR's `review-shots/<branch>`        | `GITHUB_TOKEN`                                     |
 
-`pick-to-main` needs **Settings → Actions → General → Allow GitHub Actions to create and
-approve pull requests**. A PR opened with `GITHUB_TOKEN` starts no workflows, so the job
-dispatches `check` on it; that's why `check.yml` takes `workflow_dispatch`.
+`pick-to-main` and `squad-sweep` need **Settings → Actions → General → Allow GitHub
+Actions to create and approve pull requests**. A PR opened with `GITHUB_TOKEN` starts no
+workflows, so each job dispatches `check` on it; that's why `check.yml` takes
+`workflow_dispatch`.
 
 Both environments accept only `release/*` branches, so only a run on a release branch
 reaches the production token. The logic lives in `scripts/ci/`, tested by `npm run check`.

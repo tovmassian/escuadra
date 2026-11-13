@@ -1,0 +1,53 @@
+# Weekly, or by hand: runs squadctl over every team on the live release branch (the
+# repository variable SWEEP_BASE) and opens one data PR into it, or adds to the open one.
+# Never pushes to a release branch and never publishes: the owner's ota:* label runs
+# release-gate, and the merge ships it. See docs/release.md ("Sweep squad data").
+# Needs Settings → Actions → General → "Allow GitHub Actions to create and approve pull
+# requests", as pick-to-main does.
+name: squad-sweep
+
+on:
+  schedule:
+    - cron: '0 5 * * 1' # Mondays, 05:00 UTC
+  workflow_dispatch:
+
+concurrency:
+  group: squad-sweep
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+  pull-requests: write
+  actions: write
+
+jobs:
+  sweep:
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    env:
+      SWEEP_BASE: ${{ vars.SWEEP_BASE }}
+    steps:
+      # An empty ref would check out main: stop before that.
+      - name: SWEEP_BASE names a release branch
+        if: ${{ !startsWith(vars.SWEEP_BASE, 'release/') }}
+        run: |
+          echo "::error::Set the repository variable SWEEP_BASE to the live release branch: gh variable set SWEEP_BASE --body release/X.Y.Z"
+          exit 1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ vars.SWEEP_BASE }}
+          path: sweep-base
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version-file: sweep-base/.nvmrc
+      - run: npm ci
+        working-directory: sweep-base
+      - run: node scripts/ci/sweep.ts
+        env:
+          SWEEP_DIR: ${{ github.workspace }}/sweep-base
+          GH_TOKEN: ${{ github.token }}
+          GIT_AUTHOR_NAME: github-actions[bot]
+          GIT_AUTHOR_EMAIL: 41898283+github-actions[bot]@users.noreply.github.com
+          GIT_COMMITTER_NAME: github-actions[bot]
+          GIT_COMMITTER_EMAIL: 41898283+github-actions[bot]@users.noreply.github.com
