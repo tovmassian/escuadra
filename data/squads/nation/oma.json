@@ -10,13 +10,9 @@
     "bands": ["#DF1A23", "#FFFFFF", "#DF1A23", "#007E3C"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Oman_national_football_team",
   "members": [
-    {
-      "playerId": "ibrahim-almukhaini",
-      "no": 1
-    },
     {
       "playerId": "ghanim-alhabashi",
       "no": 2
@@ -71,20 +67,12 @@
       "captain": true
     },
     {
-      "playerId": "ibrahim-alrajhi",
-      "no": 18
-    },
-    {
       "playerId": "mahmood-almushaifri",
       "no": 19
     },
     {
       "playerId": "salaah-alyahyaei",
       "no": 20
-    },
-    {
-      "playerId": "ahmed-alrawahi",
-      "no": 22
     },
     {
       "playerId": "harib-alsaadi",

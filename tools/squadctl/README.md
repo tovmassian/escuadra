@@ -270,11 +270,15 @@ exit code alone; the next sweep writes the team once its article numbers it.
 **No club is `null`, however the article words it:** `[[Free agent]]`,
 `[[Free agent|Unattached]]`, plain `Unattached` and an empty cell all store
 `club: null`. `club=` is read as a wikilink (italics around it, a `{{flagicon}}`
-before it), or an `{{ill}}`; a new shape is the `markup` conflict below.
+before it), an `{{ill}}` or an `{{A-League team}}`; a new shape is the `markup`
+conflict below.
 
 `verified` is the assertion pass's output — `true` only when a team has zero
-conflicts. `lastUpdated` moves only when something else in the file did, so a
-no-op sweep produces an empty git diff. `players.json` is written sorted by id
+conflicts. `lastUpdated` moves only when the roster a player learns did: who is
+in it, with which number, and who captains (`isRosterUnchanged`,
+`src/lib/apply-plan.ts`). It greys best scores as outdated, so `verified`, the
+colours and an id that changed for the same person (same number, full name and
+birth date) leave it alone, and a no-op sweep produces an empty git diff. `players.json` is written sorted by id
 and `members` sorted by shirt number, nulls last.
 
 ### `rename`

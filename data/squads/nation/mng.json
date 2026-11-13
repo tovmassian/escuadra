@@ -10,7 +10,7 @@
     "bands": ["#DA2031", "#0066B2", "#DA2031"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Mongolia_national_football_team",
   "members": [
     {
@@ -94,7 +94,7 @@
       "no": 28
     },
     {
-      "playerId": "filip-chinzorig",
+      "playerId": "filip-andersen",
       "no": 30
     }
   ]

@@ -10,7 +10,7 @@
     "bands": ["#ED2939", "#FFFFFF", "#00A1DE"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Luxembourg_national_football_team",
   "members": [
     {
@@ -20,10 +20,6 @@
     {
       "playerId": "eldin-dzogovic",
       "no": 2
-    },
-    {
-      "playerId": "arnold-qevani",
-      "no": 3
     },
     {
       "playerId": "florian-bohnert",
@@ -82,10 +78,6 @@
       "no": 17
     },
     {
-      "playerId": "sofiane-ikene",
-      "no": 18
-    },
-    {
       "playerId": "mathias-olesen",
       "no": 19
     },
@@ -98,19 +90,15 @@
       "no": 21
     },
     {
-      "playerId": "marvin-martins",
-      "no": 22
-    },
-    {
       "playerId": "lucas-fox",
       "no": 23
     },
     {
-      "playerId": "danel-sinani",
+      "playerId": "enes-mahmutovic",
       "no": null
     },
     {
-      "playerId": "enes-mahmutovic",
+      "playerId": "farid-ikene",
       "no": null
     },
     {
@@ -119,11 +107,11 @@
       "captain": true
     },
     {
-      "playerId": "leandro-barreiro",
+      "playerId": "patrick-macedo",
       "no": null
     },
     {
-      "playerId": "olivier-thill",
+      "playerId": "tim-hall",
       "no": null
     }
   ]

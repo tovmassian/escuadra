@@ -11,7 +11,7 @@
     "orientation": "vertical",
     "weights": [1, 2]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Qatar_national_football_team",
   "members": [
     {
@@ -33,10 +33,6 @@
     {
       "playerId": "tarek-salman",
       "no": 5
-    },
-    {
-      "playerId": "abdulaziz-hatem",
-      "no": 6
     },
     {
       "playerId": "ahmed-alaaeldin",
@@ -118,6 +114,10 @@
     {
       "playerId": "mohamed-manai",
       "no": 26
+    },
+    {
+      "playerId": "andri-syahputra",
+      "no": null
     }
   ]
 }

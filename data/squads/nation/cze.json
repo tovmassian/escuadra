@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#D7141A"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Czech_Republic_national_football_team",
   "members": [
     {
@@ -18,15 +18,15 @@
       "no": 1
     },
     {
-      "playerId": "david-zima",
+      "playerId": "stepan-chaloupek",
       "no": 2
     },
     {
-      "playerId": "tomas-holes",
+      "playerId": "tomas-vlcek",
       "no": 3
     },
     {
-      "playerId": "robin-hranac",
+      "playerId": "adam-gabriel",
       "no": 4
     },
     {
@@ -34,28 +34,27 @@
       "no": 5
     },
     {
-      "playerId": "stepan-chaloupek",
+      "playerId": "david-zima",
       "no": 6
     },
     {
       "playerId": "ladislav-krejci",
-      "no": 7,
-      "captain": true
+      "no": 7
     },
     {
-      "playerId": "vladimir-darida",
+      "playerId": "idris-hopi",
       "no": 8
     },
     {
-      "playerId": "adam-hlozek",
+      "playerId": "ryan-naderi",
       "no": 9
     },
     {
-      "playerId": "patrik-schick",
+      "playerId": "adam-hlozek",
       "no": 10
     },
     {
-      "playerId": "jan-kuchta",
+      "playerId": "christophe-kabongo",
       "no": 11
     },
     {
@@ -63,7 +62,7 @@
       "no": 12
     },
     {
-      "playerId": "mojmir-chytil",
+      "playerId": "lukas-ambros",
       "no": 13
     },
     {
@@ -71,11 +70,11 @@
       "no": 14
     },
     {
-      "playerId": "pavel-sulc",
+      "playerId": "jiri-slama",
       "no": 15
     },
     {
-      "playerId": "jindrich-stanek",
+      "playerId": "lukas-hornicek",
       "no": 16
     },
     {
@@ -83,19 +82,19 @@
       "no": 17
     },
     {
-      "playerId": "michal-sadilek",
+      "playerId": "martin-subert",
       "no": 18
     },
     {
-      "playerId": "tomas-chory",
+      "playerId": "david-kozel",
       "no": 19
     },
     {
-      "playerId": "jaroslav-zeleny",
+      "playerId": "krystof-danek",
       "no": 20
     },
     {
-      "playerId": "david-doudera",
+      "playerId": "alex-kral",
       "no": 21
     },
     {
@@ -103,20 +102,12 @@
       "no": 22
     },
     {
-      "playerId": "lukas-hornicek",
+      "playerId": "antonin-kinsky",
       "no": 23
     },
     {
-      "playerId": "alexandr-sojka",
-      "no": 24
-    },
-    {
-      "playerId": "hugo-sochurek",
-      "no": 25
-    },
-    {
-      "playerId": "denis-visinsky",
-      "no": 26
+      "playerId": "michal-sadilek",
+      "no": null
     }
   ]
 }

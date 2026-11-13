@@ -352,14 +352,47 @@ const NO_CLUB = /^(free agent|unattached)$/i;
  *  (`{{flagicon|American Samoa}} [[PanSa East F.C.]]`). */
 const FLAG_ICON = /\{\{\s*flagicon\s*\|[^{}]*\}\}/gi;
 
+/** `{{A-League team|WP}}`, as New Zealand's article writes A-League clubs: the
+ *  abbreviation table of Template:A-League team, as the link it expands to. An
+ *  abbreviation missing here stays markup, which apply reports. */
+const A_LEAGUE_TEAMS: Record<string, string> = {
+  AIS: '[[FFA Centre of Excellence|Australian Institute of Sport]]',
+  AU: '[[Adelaide United FC|Adelaide United]]',
+  AUC: '[[Auckland FC]]',
+  BR: '[[Brisbane Roar FC|Brisbane Roar]]',
+  CCM: '[[Central Coast Mariners FC|Central Coast Mariners]]',
+  GC: '[[Gold Coast United FC|Gold Coast United]]',
+  GCU: '[[Gold Coast United FC|Gold Coast United]]',
+  MAC: '[[Macarthur FC]]',
+  MC: '[[Melbourne City FC|Melbourne City]]',
+  MH: '[[Melbourne City FC|Melbourne Heart]]',
+  MV: '[[Melbourne Victory FC|Melbourne Victory]]',
+  NJ: '[[Newcastle Jets FC|Newcastle Jets]]',
+  NQ: '[[Northern Fury FC|North Queensland Fury]]',
+  NQF: '[[Northern Fury FC|North Queensland Fury]]',
+  NQT: '[[North Queensland Thunder FC|North Queensland Thunder]]',
+  NUJ: '[[Newcastle Jets FC|Newcastle Jets]]',
+  NZK: '[[New Zealand Knights FC|New Zealand Knights]]',
+  PG: '[[Perth Glory FC|Perth Glory]]',
+  QR: '[[Brisbane Roar FC|Queensland Roar]]',
+  SFC: '[[Sydney FC]]',
+  SR: '[[Sydney Rovers FC|Sydney Rovers]]',
+  WP: '[[Wellington Phoenix FC|Wellington Phoenix]]',
+  WSW: '[[Western Sydney Wanderers FC|Western Sydney Wanderers]]',
+  WU: '[[Western United FC|Western United]]',
+};
+const A_LEAGUE_TEAM = /\{\{\s*A-League team\s*\|\s*([A-Za-z]+)\s*\}\}/gi;
+
 /** A row's `club=`: a wikilink (`[[FC Barcelona|Barcelona]]`), sometimes
- *  italicised (`''[[Rot-Weiß Walldorf]]''`), sometimes an `{{ill}}`. A player
- *  with no club, however the article writes it, is one form: both null. */
+ *  italicised (`''[[Rot-Weiß Walldorf]]''`), sometimes an `{{ill}}` or an
+ *  `{{A-League team}}`. A player with no club, however the article writes it,
+ *  is one form: both null. */
 export function parseClubField(value: string | undefined): {
   club: string | null;
   clubTitle: string | null;
 } {
   const bare = (value ?? '')
+    .replace(A_LEAGUE_TEAM, (whole, code: string) => A_LEAGUE_TEAMS[code.toUpperCase()] ?? whole)
     .replace(FLAG_ICON, '')
     .trim()
     .replace(/^'{2,5}|'{2,5}$/g, '');

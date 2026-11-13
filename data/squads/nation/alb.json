@@ -10,15 +10,15 @@
     "bands": ["#FF0000", "#000000", "#FF0000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Albania_national_football_team",
   "members": [
     {
-      "playerId": "simon-simoni",
+      "playerId": "etrit-berisha",
       "no": 1
     },
     {
-      "playerId": "klisman-cake",
+      "playerId": "stavro-pilo",
       "no": 2
     },
     {
@@ -30,7 +30,7 @@
       "no": 4
     },
     {
-      "playerId": "luis-hasa",
+      "playerId": "arlind-ajeti",
       "no": 5
     },
     {
@@ -47,7 +47,7 @@
       "no": 8
     },
     {
-      "playerId": "anis-mehmeti",
+      "playerId": "cristian-shpendi",
       "no": 9
     },
     {
@@ -59,7 +59,7 @@
       "no": 11
     },
     {
-      "playerId": "alain-taho",
+      "playerId": "alen-sherri",
       "no": 12
     },
     {
@@ -67,11 +67,11 @@
       "no": 13
     },
     {
-      "playerId": "cristian-shpendi",
+      "playerId": "qazim-laci",
       "no": 14
     },
     {
-      "playerId": "kumbulla",
+      "playerId": "klisman-cake",
       "no": 15
     },
     {
@@ -99,7 +99,7 @@
       "no": 21
     },
     {
-      "playerId": "stavro-pilo",
+      "playerId": "luis-hasa",
       "no": 22
     },
     {
