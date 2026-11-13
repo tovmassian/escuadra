@@ -8,6 +8,7 @@ import {
   hasPlayerChanges,
   hasWritableChanges,
   isFileUnchanged,
+  isRosterUnchanged,
   mergePlayers,
   squadPath,
   teamStatus,
@@ -159,9 +160,15 @@ export default class Apply extends BaseCommand<RunReport> {
         verified: verdict.verified,
       };
       const fileUnchanged = isFileUnchanged(squad, stored);
-      if (!fileUnchanged) squad.lastUpdated = new Date().toISOString().slice(0, 10);
-
       players = mergePlayers(players, plan.newPlayers, plan.updatedPlayers);
+      if (!fileUnchanged) {
+        const byId = new Map(players.map((p) => [p.id, p]));
+        // A written file keeps the stored date unless the roster itself moved.
+        if (!isRosterUnchanged(squad, stored, (playerId) => byId.get(playerId))) {
+          squad.lastUpdated = new Date().toISOString().slice(0, 10);
+        }
+      }
+
       if (hasPlayerChanges(plan.newPlayers, plan.updatedPlayers)) playersDirty = true;
       if (!fileUnchanged) squadWrites.push({ file: squadFile, squad });
       if (squad.kind === 'nation') {

@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [7, 1, 2, 1, 7]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Iceland_national_football_team",
   "members": [
     {
@@ -35,10 +35,6 @@
       "no": 5
     },
     {
-      "playerId": "andri-baldursson",
-      "no": 6
-    },
-    {
       "playerId": "hakon-haraldsson",
       "no": 7
     },
@@ -54,10 +50,6 @@
     {
       "playerId": "gylfi-sigurdsson",
       "no": 10
-    },
-    {
-      "playerId": "albert-gudmundsson",
-      "no": 11
     },
     {
       "playerId": "hakon-valdimarsson",
@@ -108,7 +100,11 @@
       "no": 23
     },
     {
-      "playerId": "bjarki-steinn-bjarkason",
+      "playerId": "kristian-hlynsson",
+      "no": null
+    },
+    {
+      "playerId": "thorir-johann-helgason",
       "no": null
     }
   ]

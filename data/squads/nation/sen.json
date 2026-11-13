@@ -10,12 +10,12 @@
     "bands": ["#00853F", "#FDEF42", "#E31B23"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Senegal_national_football_team",
   "members": [
     {
-      "playerId": "sarr",
-      "no": 2
+      "playerId": "yehvann-diouf",
+      "no": 1
     },
     {
       "playerId": "kalidou-koulibaly",
@@ -26,15 +26,11 @@
       "no": 4
     },
     {
-      "playerId": "idrissa-gueye",
-      "no": 5
-    },
-    {
       "playerId": "lamine-sy",
       "no": 6
     },
     {
-      "playerId": "assane-diao",
+      "playerId": "pathe-mboup",
       "no": 7
     },
     {
@@ -46,7 +42,7 @@
       "no": 9
     },
     {
-      "playerId": "mamadou-diakhon",
+      "playerId": "iliman-ndiaye",
       "no": 10
     },
     {
@@ -58,12 +54,8 @@
       "no": 12
     },
     {
-      "playerId": "iliman-ndiaye",
-      "no": 13
-    },
-    {
-      "playerId": "sangante",
-      "no": 15
+      "playerId": "paul-mendy",
+      "no": 14
     },
     {
       "playerId": "mamour-ndiaye",
@@ -74,11 +66,19 @@
       "no": 17
     },
     {
+      "playerId": "moussa-niakhate",
+      "no": 19
+    },
+    {
       "playerId": "mbaye",
       "no": 20
     },
     {
-      "playerId": "bara-sapoko-ndiaye",
+      "playerId": "dion-lopy",
+      "no": 21
+    },
+    {
+      "playerId": "clayton-diandy",
       "no": 22
     },
     {
@@ -86,16 +86,12 @@
       "no": 23
     },
     {
-      "playerId": "rassoul-ndiaye",
+      "playerId": "pape-demba-diop",
       "no": 24
     },
     {
       "playerId": "el-hadji-malick-diouf",
       "no": 25
-    },
-    {
-      "playerId": "gueye",
-      "no": 26
     },
     {
       "playerId": "malang-sarr",
@@ -106,12 +102,20 @@
       "no": 28
     },
     {
-      "playerId": "pape-moussa-fall",
+      "playerId": "massire-sylla",
       "no": 29
     },
     {
-      "playerId": "demba-thiam",
-      "no": 30
+      "playerId": "gueye",
+      "no": null
+    },
+    {
+      "playerId": "krepin-diatta",
+      "no": null
+    },
+    {
+      "playerId": "sarr",
+      "no": null
     }
   ]
 }

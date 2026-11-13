@@ -10,7 +10,7 @@
     "bands": ["#000000", "#009A44"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Borussia_M%C3%B6nchengladbach",
   "members": [
     {
@@ -119,6 +119,10 @@
       "no": 34
     },
     {
+      "playerId": "josiah-uwakhonye",
+      "no": 35
+    },
+    {
       "playerId": "wael-mohya",
       "no": 36
     },
@@ -133,6 +137,10 @@
     {
       "playerId": "zento-uno",
       "no": 47
+    },
+    {
+      "playerId": "lion-schweers",
+      "no": 48
     }
   ]
 }

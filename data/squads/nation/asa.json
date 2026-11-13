@@ -1,0 +1,101 @@
+{
+  "id": "asa",
+  "kind": "nation",
+  "name": "American Samoa",
+  "season": "2026",
+  "primaryColor": "#000066",
+  "secondaryColor": "#BD1021",
+  "verified": true,
+  "marker": {
+    "bands": ["#000066", "#FFFFFF", "#BD1021"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-11-13",
+  "source": "https://en.wikipedia.org/wiki/American_Samoa_national_football_team",
+  "members": [
+    {
+      "playerId": "kai-yandall",
+      "no": 1
+    },
+    {
+      "playerId": "vaha-tua",
+      "no": 2
+    },
+    {
+      "playerId": "ben-stefanon",
+      "no": 4
+    },
+    {
+      "playerId": "austin-kaleopa",
+      "no": 5
+    },
+    {
+      "playerId": "tor-lawrence-manao",
+      "no": 6
+    },
+    {
+      "playerId": "peter-lauvao",
+      "no": 7
+    },
+    {
+      "playerId": "alii-mitchell",
+      "no": 8
+    },
+    {
+      "playerId": "johnica-collins",
+      "no": 9
+    },
+    {
+      "playerId": "daniel-lee",
+      "no": 10
+    },
+    {
+      "playerId": "fiamatai-itamua",
+      "no": 11
+    },
+    {
+      "playerId": "leaga-lealuga",
+      "no": 12
+    },
+    {
+      "playerId": "billjae-vaitoelau",
+      "no": 13
+    },
+    {
+      "playerId": "kenai-mauga",
+      "no": 14
+    },
+    {
+      "playerId": "matthew-stefanon",
+      "no": 15
+    },
+    {
+      "playerId": "michael-paselio",
+      "no": 16
+    },
+    {
+      "playerId": "petu-pouli",
+      "no": 17
+    },
+    {
+      "playerId": "malachi-drago",
+      "no": 18
+    },
+    {
+      "playerId": "dylan-salapu",
+      "no": 19
+    },
+    {
+      "playerId": "nicholas-tuiasosopo",
+      "no": 20
+    },
+    {
+      "playerId": "michael-settle",
+      "no": 22
+    },
+    {
+      "playerId": "nicky-salapu",
+      "no": 23
+    }
+  ]
+}

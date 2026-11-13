@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#CD2E3A", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/South_Korea_national_football_team",
   "members": [
     {
@@ -18,11 +18,11 @@
       "no": 1
     },
     {
-      "playerId": "lee-hanbeom",
+      "playerId": "lee-myungjae",
       "no": 2
     },
     {
-      "playerId": "kim-taehyun",
+      "playerId": "lee-hanbeom",
       "no": 3
     },
     {
@@ -30,7 +30,7 @@
       "no": 4
     },
     {
-      "playerId": "kim-taehyeon",
+      "playerId": "kim-jisoo",
       "no": 5
     },
     {
@@ -41,6 +41,14 @@
       "playerId": "son-heungmin",
       "no": 7,
       "captain": true
+    },
+    {
+      "playerId": "kim-bongsoo",
+      "no": 8
+    },
+    {
+      "playerId": "oh-sehun",
+      "no": 9
     },
     {
       "playerId": "lee-jaesung",
@@ -55,7 +63,7 @@
       "no": 12
     },
     {
-      "playerId": "lee-taeseok",
+      "playerId": "jeong-wooyeong",
       "no": 13
     },
     {
@@ -83,7 +91,7 @@
       "no": 19
     },
     {
-      "playerId": "oh-sehun",
+      "playerId": "shin-minha",
       "no": 20
     },
     {
@@ -95,36 +103,20 @@
       "no": 22
     },
     {
-      "playerId": "gu-sungyun",
+      "playerId": "eom-jisung",
       "no": 23
     },
     {
-      "playerId": "kim-bongsoo",
+      "playerId": "park-taejun",
       "no": 24
     },
     {
-      "playerId": "kim-geonhui",
+      "playerId": "son-jeongbeom",
       "no": 25
     },
     {
       "playerId": "cho-hyuntaek",
       "no": 26
-    },
-    {
-      "playerId": "kim-minsu",
-      "no": 27
-    },
-    {
-      "playerId": "cho-wije",
-      "no": 28
-    },
-    {
-      "playerId": "jeong-seungwon",
-      "no": 29
-    },
-    {
-      "playerId": "park-taejun",
-      "no": 30
     }
   ]
 }

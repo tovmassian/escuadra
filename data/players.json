@@ -831,13 +831,13 @@
     "nationality": "Türkiye",
     "club": "Galatasaray",
     "photo": {
-      "file": "Abdülkerim Bardakçı - beIN-Sports-Reklam (2021) (cropped).png",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1a/Abd%C3%BClkerim_Bardak%C3%A7%C4%B1_-_beIN-Sports-Reklam_%282021%29_%28cropped%29.png",
-      "width": 599,
-      "height": 876,
-      "author": "beIN SPORTS Türkiye",
-      "licence": "CC BY 3.0",
-      "licenceUrl": "https://creativecommons.org/licenses/by/3.0"
+      "file": "Abdülkerim Bardakçı (cropped).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/19/Abd%C3%BClkerim_Bardak%C3%A7%C4%B1_%28cropped%29.jpg",
+      "width": 131,
+      "height": 128,
+      "author": "Football.ua",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
     },
     "wikiTitle": "Abdülkerim Bardakcı"
   },
@@ -860,7 +860,15 @@
     "position": "MF",
     "nationality": "United Arab Emirates",
     "club": "Al Wahda",
-    "photo": null,
+    "photo": {
+      "file": "Abdulla Hamad.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/dd/Abdulla_Hamad.jpg",
+      "width": 406,
+      "height": 508,
+      "author": "The AFC Hub",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
     "wikiTitle": "Abdulla Hamad"
   },
   {
@@ -925,6 +933,17 @@
     "club": "Mjällby",
     "photo": null,
     "wikiTitle": "Abdullah Iqbal"
+  },
+  {
+    "id": "abdullah-omar-sajib",
+    "name": "Abdullah Omar Sajib",
+    "fullName": "Abdullah Omar Sajib",
+    "birth": "2002-10-17",
+    "position": "DF",
+    "nationality": "Bangladesh",
+    "club": "Dhaka Abahani",
+    "photo": null,
+    "wikiTitle": "Abdullah Omar Sajib"
   },
   {
     "id": "abdullah-shah",
@@ -1198,6 +1217,17 @@
     "wikiTitle": "Abraham Adamou Gora"
   },
   {
+    "id": "abror-ismoilov",
+    "name": "Abror Ismoilov",
+    "fullName": "Abror Ismoilov",
+    "birth": "1998-01-08",
+    "position": "MF",
+    "nationality": "Uzbekistan",
+    "club": "Neftchi",
+    "photo": null,
+    "wikiTitle": "Abror Ismoilov"
+  },
+  {
     "id": "abu-francis",
     "name": "Abu Francis",
     "fullName": "Abu Francis",
@@ -1349,6 +1379,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Adam Dźwigała"
+  },
+  {
+    "id": "adam-gabriel",
+    "name": "Adam Gabriel",
+    "fullName": "Adam Gabriel",
+    "birth": "2001-05-28",
+    "position": "DF",
+    "nationality": "Czech Republic",
+    "club": "Viktoria Plzeň",
+    "photo": null,
+    "wikiTitle": "Adam Gabriel"
   },
   {
     "id": "adam-gnezda-cerin",
@@ -2550,6 +2591,25 @@
     "wikiTitle": "Ahmet Ataýew"
   },
   {
+    "id": "ahmetcan-kaplan",
+    "name": "Ahmetcan Kaplan",
+    "fullName": "Ahmetcan Kaplan",
+    "birth": "2003-01-16",
+    "position": "DF",
+    "nationality": "Türkiye",
+    "club": "NEC",
+    "photo": {
+      "file": "Ahmetcan Kaplan 2025.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b5/Ahmetcan_Kaplan_2025.jpg",
+      "width": 194,
+      "height": 329,
+      "author": "FCUFAN",
+      "licence": "CC BY 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
+    "wikiTitle": "Ahmetcan Kaplan"
+  },
+  {
     "id": "aidan-harris",
     "name": "Aidan Harris",
     "fullName": "Aidan Harris",
@@ -2595,7 +2655,7 @@
     "name": "Ainsley Maitland-Niles",
     "fullName": "Ainsley Maitland-Niles",
     "birth": "1997-08-29",
-    "position": "DF",
+    "position": "MF",
     "nationality": "England",
     "club": "Everton",
     "photo": {
@@ -3545,6 +3605,17 @@
     "wikiTitle": "Aleksa Latković"
   },
   {
+    "id": "aleksa-maras",
+    "name": "Aleksa Maraš",
+    "fullName": "Aleksa Maraš",
+    "birth": "2001-10-09",
+    "position": "FW",
+    "nationality": "Montenegro",
+    "club": "Košice",
+    "photo": null,
+    "wikiTitle": "Aleksa Maraš"
+  },
+  {
     "id": "aleksa-terzic",
     "name": "Aleksa Terzić",
     "fullName": "Aleksa Terzić",
@@ -4107,6 +4178,25 @@
     "wikiTitle": "Álex Jiménez (footballer, born 2005)"
   },
   {
+    "id": "alex-kral",
+    "name": "Alex Král",
+    "fullName": "Alex Král",
+    "birth": "1998-05-19",
+    "position": "MF",
+    "nationality": "Czech Republic",
+    "club": "Copenhagen",
+    "photo": {
+      "file": "SPA-ZEN 09.19 (2).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/cf/SPA-ZEN_09.19_%282%29.jpg/960px-SPA-ZEN_09.19_%282%29.jpg",
+      "width": 1104,
+      "height": 1149,
+      "author": "Анна Нэсси",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "wikiTitle": "Alex Král"
+  },
+  {
     "id": "alex-martinez",
     "name": "Àlex Martínez",
     "fullName": "Àlex Martínez",
@@ -4625,6 +4715,17 @@
     "club": "Çorum",
     "photo": null,
     "wikiTitle": "Alexandros Kyziridis"
+  },
+  {
+    "id": "alexandru-betivu",
+    "name": "Alexandru Bețivu",
+    "fullName": "Alexandru Bețivu",
+    "birth": "2007-06-21",
+    "position": "FW",
+    "nationality": "Moldova",
+    "club": "Zimbru Chișinău",
+    "photo": null,
+    "wikiTitle": "Alexandru Bețivu"
   },
   {
     "id": "alexandru-borbei",
@@ -5197,6 +5298,17 @@
     "wikiTitle": "Ali Mahmoud (footballer)"
   },
   {
+    "id": "ali-mekawir",
+    "name": "Ali Mekawir",
+    "fullName": "Ali Mekawir",
+    "birth": "2000-07-27",
+    "position": "FW",
+    "nationality": "Solomon Islands",
+    "club": "Navua",
+    "photo": null,
+    "wikiTitle": "Ali Mekawir"
+  },
+  {
     "id": "ali-mohamed",
     "name": "Ali Mohamed",
     "fullName": "Ali Mohamed",
@@ -5449,6 +5561,17 @@
     "club": "Fiorentina",
     "photo": null,
     "wikiTitle": "Alieu Njie (footballer, born 2005)"
+  },
+  {
+    "id": "alii-mitchell",
+    "name": "Ali'i Mitchell",
+    "fullName": "Ali'i Mitchell",
+    "birth": "1994-08-12",
+    "position": "MF",
+    "nationality": "American Samoa",
+    "club": null,
+    "photo": null,
+    "wikiTitle": "Ali'i Mitchell"
   },
   {
     "id": "alimami-gory",
@@ -6255,6 +6378,25 @@
     "wikiTitle": "Amâncio"
   },
   {
+    "id": "amando-moreno",
+    "name": "Amando Moreno",
+    "fullName": "Amando Moreno",
+    "birth": "1995-09-10",
+    "position": "MF",
+    "nationality": "El Salvador",
+    "club": "El Paso Locomotive",
+    "photo": {
+      "file": "Amando Moreno.JPG",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/Amando_Moreno.JPG/960px-Amando_Moreno.JPG",
+      "width": 1458,
+      "height": 2152,
+      "author": "Elomen76",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "wikiTitle": "Amando Moreno"
+  },
+  {
     "id": "amani-aguinaldo",
     "name": "Amani Aguinaldo",
     "fullName": "Amani Aguinaldo",
@@ -6416,7 +6558,7 @@
     "nationality": "Bosnia and Herzegovina",
     "club": "Eintracht Frankfurt",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Amil Šiljević"
   },
   {
     "id": "amin-cherni",
@@ -7673,6 +7815,17 @@
     "wikiTitle": "Andri Guðjohnsen"
   },
   {
+    "id": "andri-syahputra",
+    "name": "Andri Syahputra",
+    "fullName": "Andri Syahputra",
+    "birth": "1999-06-29",
+    "position": "MF",
+    "nationality": "Qatar",
+    "club": "Al-Gharafa",
+    "photo": null,
+    "wikiTitle": "Andri Syahputra"
+  },
+  {
     "id": "andria-kvirikadze",
     "name": "Andria Kvirikadze",
     "fullName": "Andria Kvirikadze",
@@ -7771,7 +7924,7 @@
     "nationality": "Germany",
     "club": "Union Berlin",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Andrik Markgraf"
   },
   {
     "id": "andriy-yarmolenko",
@@ -9101,6 +9254,17 @@
     "wikiTitle": "Iñigo Arguibide"
   },
   {
+    "id": "ari-olsen",
+    "name": "Ari Olsen",
+    "fullName": "Ari Olsen",
+    "birth": "1998-09-09",
+    "position": "DF",
+    "nationality": "Faroe Islands",
+    "club": "Vendsyssel FF",
+    "photo": null,
+    "wikiTitle": "Ari Olsen"
+  },
+  {
     "id": "ari-petersen",
     "name": "Ari Petersen",
     "fullName": "Ari Petersen",
@@ -9300,6 +9464,25 @@
     "wikiTitle": "Arkell Jude-Boyd"
   },
   {
+    "id": "arlind-ajeti",
+    "name": "Arlind Ajeti",
+    "fullName": "Arlind Ajeti",
+    "birth": "1993-09-25",
+    "position": "DF",
+    "nationality": "Albania",
+    "club": "Bodrum",
+    "photo": {
+      "file": "SwitzerlandU21 04 Arlind Ajeti 130606 Sve-Sch 3-2 183733 6601.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a5/SwitzerlandU21_04_Arlind_Ajeti_130606_Sve-Sch_3-2_183733_6601.jpg/960px-SwitzerlandU21_04_Arlind_Ajeti_130606_Sve-Sch_3-2_183733_6601.jpg",
+      "width": 1689,
+      "height": 2734,
+      "author": "Pechblaende",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "wikiTitle": "Arlind Ajeti"
+  },
+  {
     "id": "arman-nersesyan",
     "name": "Arman Nersesyan",
     "fullName": "Arman Nersesyan",
@@ -9420,6 +9603,17 @@
     "wikiTitle": "Ármin Pécsi"
   },
   {
+    "id": "arnas-voitinovicius",
+    "name": "Arnas Voitinovičius",
+    "fullName": "Arnas Voitinovičius",
+    "birth": "2006-08-30",
+    "position": "GK",
+    "nationality": "Lithuania",
+    "club": "S.L. Benfica",
+    "photo": null,
+    "wikiTitle": "Arnas Voitinovičius"
+  },
+  {
     "id": "arnaud-bodart",
     "name": "Arnaud Bodart",
     "fullName": "Arnaud Bodart",
@@ -9467,6 +9661,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Arnaud Nordin"
+  },
+  {
+    "id": "arnbjorn-svensson",
+    "name": "Arnbjørn Svensson",
+    "fullName": "Arnbjørn Svensson",
+    "birth": "1999-07-01",
+    "position": "DF",
+    "nationality": "Faroe Islands",
+    "club": "Víkingur Gøta",
+    "photo": null,
+    "wikiTitle": "Arnbjørn Svensson"
   },
   {
     "id": "arne-engels",
@@ -10273,6 +10478,17 @@
     "wikiTitle": "Atanas Iliev"
   },
   {
+    "id": "atkin-kaua",
+    "name": "Atkin Kaua",
+    "fullName": "Atkin Kaua",
+    "birth": "1996-04-04",
+    "position": "MF",
+    "nationality": "Solomon Islands",
+    "club": "Malaita Kingz",
+    "photo": null,
+    "wikiTitle": "Atkin Kaua"
+  },
+  {
     "id": "attidjikou-samadou",
     "name": "Attidjikou Samadou",
     "fullName": "Attidjikou Samadou",
@@ -10391,6 +10607,17 @@
     "club": "Coventry City",
     "photo": null,
     "wikiTitle": "Aurèle Amenda"
+  },
+  {
+    "id": "austin-kaleopa",
+    "name": "Austin Kaleopa",
+    "fullName": "Austin Kaleopa",
+    "birth": "2001-11-24",
+    "position": "DF",
+    "nationality": "American Samoa",
+    "club": "Utulei Youth",
+    "photo": null,
+    "wikiTitle": "Austin Kaleopa"
   },
   {
     "id": "auston-trusty",
@@ -10808,6 +11035,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Ayoub El Kaabi"
+  },
+  {
+    "id": "ayoub-oufkir",
+    "name": "Ayoub Oufkir",
+    "fullName": "Ayoub Oufkir",
+    "birth": "2006-01-04",
+    "position": "FW",
+    "nationality": "Morocco",
+    "club": "AZ",
+    "photo": null,
+    "wikiTitle": "Ayoub Oufkir"
   },
   {
     "id": "ayoube-amaimouni",
@@ -11900,6 +12138,25 @@
     "wikiTitle": "Bashir Humphreys"
   },
   {
+    "id": "basilio-ndong",
+    "name": "Basilio Ndong",
+    "fullName": "Basilio Ndong",
+    "birth": "1999-01-17",
+    "position": "DF",
+    "nationality": "Equatorial Guinea",
+    "club": "Tirana",
+    "photo": {
+      "file": "Dribble du joueur guinéen (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/97/Dribble_du_joueur_guin%C3%A9en_%28cropped%29.jpg/960px-Dribble_du_joueur_guin%C3%A9en_%28cropped%29.jpg",
+      "width": 1780,
+      "height": 2943,
+      "author": "Happiraphael",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Basilio Ndong"
+  },
+  {
     "id": "bassco-soyer",
     "name": "Bassco Soyer",
     "fullName": "Bassco Soyer",
@@ -12301,6 +12558,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Ben Old"
+  },
+  {
+    "id": "ben-stefanon",
+    "name": "Ben Stefanon",
+    "fullName": "Ben Stefanon",
+    "birth": "2004-11-20",
+    "position": "DF",
+    "nationality": "American Samoa",
+    "club": "Christopher Newport Captains",
+    "photo": null,
+    "wikiTitle": "Ben Stefanon"
   },
   {
     "id": "ben-voll",
@@ -12757,7 +13025,7 @@
     "nationality": "Germany",
     "club": "RB Leipzig",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Benno Kaltefleiter"
   },
   {
     "id": "benoit-badiashile",
@@ -13166,6 +13434,17 @@
     "wikiTitle": "Bill Tuiloma"
   },
   {
+    "id": "billjae-vaitoelau",
+    "name": "Billjae Vaitoelau",
+    "fullName": "Billjae Vaitoelau",
+    "birth": "2002-04-13",
+    "position": "MF",
+    "nationality": "American Samoa",
+    "club": "Royal Puma",
+    "photo": null,
+    "wikiTitle": "Billjae Vaitoelau"
+  },
+  {
     "id": "billy-forbes",
     "name": "Billy Forbes",
     "fullName": "Billy Forbes",
@@ -13235,6 +13514,25 @@
     "club": "Friends",
     "photo": null,
     "wikiTitle": "Bishal Sunar"
+  },
+  {
+    "id": "bishwanath-ghosh",
+    "name": "Bishwanath Ghosh",
+    "fullName": "Bishwanath Ghosh",
+    "birth": "1999-05-30",
+    "position": "DF",
+    "nationality": "Bangladesh",
+    "club": "Bashundhara Kings",
+    "photo": {
+      "file": "Biwshanath Gosh (cropped).png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Biwshanath_Gosh_%28cropped%29.png",
+      "width": 239,
+      "height": 303,
+      "author": "FNH004",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "wikiTitle": "Bishwanath Ghosh (footballer)"
   },
   {
     "id": "bisiwu",
@@ -13339,6 +13637,36 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Adam Boayar"
+  },
+  {
+    "id": "boban-nikolov",
+    "name": "Boban Nikolov",
+    "fullName": "Boban Nikolov",
+    "birth": "1994-07-28",
+    "position": "MF",
+    "nationality": "North Macedonia",
+    "club": "Vardar",
+    "photo": {
+      "file": "Zen-Vardar (6).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/36/Zen-Vardar_%286%29.jpg",
+      "width": 444,
+      "height": 908,
+      "author": "Кирилл Венедиктов",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "wikiTitle": "Boban Nikolov"
+  },
+  {
+    "id": "bobby-leslie",
+    "name": "Bobby Leslie",
+    "fullName": "Bobby Leslie",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Solomon Islands",
+    "club": "Central Coast",
+    "photo": null,
+    "wikiTitle": "Bobby Leslie"
   },
   {
     "id": "bodin-tomasevic",
@@ -14459,7 +14787,7 @@
     "nationality": "Finland",
     "club": "VfL Wolfsburg",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Bruno Katz"
   },
   {
     "id": "bruno-ogbus",
@@ -15062,6 +15390,25 @@
     "wikiTitle": "Callum Marshall"
   },
   {
+    "id": "callum-mccowatt",
+    "name": "Callum McCowatt",
+    "fullName": "Callum McCowatt",
+    "birth": "1999-04-30",
+    "position": "MF",
+    "nationality": "New Zealand",
+    "club": "AGF",
+    "photo": {
+      "file": "Callum McCowatt playing for New Zealand, 26 March 2023 (2) (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Callum_McCowatt_playing_for_New_Zealand%2C_26_March_2023_%282%29_%28cropped%29.jpg/960px-Callum_McCowatt_playing_for_New_Zealand%2C_26_March_2023_%282%29_%28cropped%29.jpg",
+      "width": 1291,
+      "height": 1440,
+      "author": "JaumeBG",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Callum McCowatt"
+  },
+  {
     "id": "callum-park",
     "name": "Callum Park",
     "fullName": "Callum Park",
@@ -15120,6 +15467,17 @@
     "club": "FC Augsburg",
     "photo": null,
     "wikiTitle": "Calvin Brackelmann"
+  },
+  {
+    "id": "calvin-ohasio",
+    "name": "Calvin Ohasio",
+    "fullName": "Calvin Ohasio",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Solomon Islands",
+    "club": "Malaita Kingz",
+    "photo": null,
+    "wikiTitle": "Calvin Ohasio"
   },
   {
     "id": "calvin-ramsay",
@@ -16243,6 +16601,25 @@
     "wikiTitle": "Chaiyaphon Otton"
   },
   {
+    "id": "chalana-chameera",
+    "name": "Chalana Chameera",
+    "fullName": "Chalana Chameera",
+    "birth": "1993-01-10",
+    "position": "DF",
+    "nationality": "Sri Lanka",
+    "club": "Colombo FC",
+    "photo": {
+      "file": "Chalana Chameera 2025 TC.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/cd/Chalana_Chameera_2025_TC.jpg",
+      "width": 373,
+      "height": 498,
+      "author": "ZZ47",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Chalana Chameera"
+  },
+  {
     "id": "chan-man",
     "name": "Chan Man",
     "fullName": "Chan Man",
@@ -17243,6 +17620,17 @@
     "wikiTitle": "Christian Günter"
   },
   {
+    "id": "christian-imga",
+    "name": "Christian Imga",
+    "fullName": "Christian Imga",
+    "birth": "2009-02-17",
+    "position": "FW",
+    "nationality": "Spain",
+    "club": "Athletic Bilbao",
+    "photo": null,
+    "wikiTitle": "Christian Imga"
+  },
+  {
     "id": "christian-kabasele",
     "name": "Christian Kabasele",
     "fullName": "Christian Kabasele",
@@ -17379,6 +17767,25 @@
     "wikiTitle": "Christian Rontini"
   },
   {
+    "id": "christian-zawieschitzky",
+    "name": "Christian Zawieschitzky",
+    "fullName": "Christian Zawieschitzky",
+    "birth": "2007-05-02",
+    "position": "GK",
+    "nationality": "Austria",
+    "club": "Red Bull Salzburg",
+    "photo": {
+      "file": "FC Red Bull Salzburg gegen FC Blau-Weiß Linz (2025-04-06 Österreichische Bundesliga) 01.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/FC_Red_Bull_Salzburg_gegen_FC_Blau-Wei%C3%9F_Linz_%282025-04-06_%C3%96sterreichische_Bundesliga%29_01.jpg/960px-FC_Red_Bull_Salzburg_gegen_FC_Blau-Wei%C3%9F_Linz_%282025-04-06_%C3%96sterreichische_Bundesliga%29_01.jpg",
+      "width": 3605,
+      "height": 3397,
+      "author": "Werner100359",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Christian Zawieschitzky"
+  },
+  {
     "id": "christoph-baumgartner",
     "name": "Christoph Baumgartner",
     "fullName": "Christoph Baumgartner",
@@ -17407,6 +17814,17 @@
     "club": "LASK",
     "photo": null,
     "wikiTitle": "Christoph Lang"
+  },
+  {
+    "id": "christophe-kabongo",
+    "name": "Christophe Kabongo",
+    "fullName": "Christophe Kabongo",
+    "birth": "2003-08-27",
+    "position": "FW",
+    "nationality": "Czech Republic",
+    "club": "Viktoria Plzeň",
+    "photo": null,
+    "wikiTitle": "Christophe Kabongo"
   },
   {
     "id": "christopher-ainsworth",
@@ -17739,7 +18157,18 @@
     "nationality": "Italy",
     "club": "Napoli",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Claudio Pugliese"
+  },
+  {
+    "id": "clayton-diandy",
+    "name": "Clayton Diandy",
+    "fullName": "Clayton Diandy",
+    "birth": "2006-07-29",
+    "position": "FW",
+    "nationality": "Senegal",
+    "club": "Al-Diriyah",
+    "photo": null,
+    "wikiTitle": "Clayton Diandy"
   },
   {
     "id": "cleiton",
@@ -17822,6 +18251,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Clinton Mata"
+  },
+  {
+    "id": "clivert-sam",
+    "name": "Clivert Sam",
+    "fullName": "Clivert Sam",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Solomon Islands",
+    "club": "Green Shield",
+    "photo": null,
+    "wikiTitle": "Clivert Sam"
   },
   {
     "id": "cody-drameh",
@@ -18100,6 +18540,25 @@
     "club": "Valencia",
     "photo": null,
     "wikiTitle": "José Manuel Copete"
+  },
+  {
+    "id": "corban-piper",
+    "name": "Corban Piper",
+    "fullName": "Corban Piper",
+    "birth": "2002-09-10",
+    "position": "FW",
+    "nationality": "New Zealand",
+    "club": "Wellington Phoenix",
+    "photo": {
+      "file": "Corban Piper (2026).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Corban_Piper_%282026%29.jpg/960px-Corban_Piper_%282026%29.jpg",
+      "width": 1487,
+      "height": 2254,
+      "author": "JaumeBG",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Corban Piper"
   },
   {
     "id": "corbin-mthunzi",
@@ -19078,6 +19537,17 @@
     "wikiTitle": "Danel Sinani"
   },
   {
+    "id": "danford-fiumae",
+    "name": "Danford Fiumae",
+    "fullName": "Danford Fiumae",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Solomon Islands",
+    "club": "Green Shield",
+    "photo": null,
+    "wikiTitle": "Danford Fiumae"
+  },
+  {
     "id": "dango-ouattara",
     "name": "Dango Ouattara",
     "fullName": "Dango Ouattara",
@@ -19136,6 +19606,25 @@
     "club": "León",
     "photo": null,
     "wikiTitle": "Daniel Arcila"
+  },
+  {
+    "id": "daniel-arzani",
+    "name": "Daniel Arzani",
+    "fullName": "Daniel Arzani",
+    "birth": "1999-01-04",
+    "position": "FW",
+    "nationality": "Australia",
+    "club": "Ferencváros",
+    "photo": {
+      "file": "Daniel Arzani training December 2023 (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c7/Daniel_Arzani_training_December_2023_%28cropped%29.jpg/960px-Daniel_Arzani_training_December_2023_%28cropped%29.jpg",
+      "width": 1155,
+      "height": 1913,
+      "author": "TobyMcG",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Daniel Arzani"
   },
   {
     "id": "daniel-ballard",
@@ -19354,6 +19843,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Daniel Kanu (footballer)"
+  },
+  {
+    "id": "daniel-lee",
+    "name": "Daniel Lee",
+    "fullName": "Daniel Lee",
+    "birth": "2007-02-17",
+    "position": "FW",
+    "nationality": "American Samoa",
+    "club": "Royal Puma",
+    "photo": null,
+    "wikiTitle": "Daniel Lee (footballer, born 2007)"
   },
   {
     "id": "daniel-leo-gretarsson",
@@ -20114,6 +20614,25 @@
     "wikiTitle": "Dariusz Stalmach"
   },
   {
+    "id": "darko-churlinov",
+    "name": "Darko Churlinov",
+    "fullName": "Darko Churlinov",
+    "birth": "2000-07-11",
+    "position": "FW",
+    "nationality": "North Macedonia",
+    "club": "Pogoń",
+    "photo": {
+      "file": "Czurlinow-Jagiellonia.png",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/51/Czurlinow-Jagiellonia.png/960px-Czurlinow-Jagiellonia.png",
+      "width": 1080,
+      "height": 1620,
+      "author": "Robert Stępkowski",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "wikiTitle": "Darko Churlinov"
+  },
+  {
     "id": "darlin-yongwa",
     "name": "Darlin Yongwa",
     "fullName": "Darlin Yongwa",
@@ -20156,6 +20675,25 @@
     "club": "Molynes United",
     "photo": null,
     "wikiTitle": "Darren Donaie"
+  },
+  {
+    "id": "darren-teh",
+    "name": "Darren Teh",
+    "fullName": "Darren Teh",
+    "birth": "1996-08-19",
+    "position": "DF",
+    "nationality": "Singapore",
+    "club": "Balestier Khalsa",
+    "photo": {
+      "file": "Darren Teh, 2019 (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Darren_Teh%2C_2019_%28cropped%29.jpg/960px-Darren_Teh%2C_2019_%28cropped%29.jpg",
+      "width": 1013,
+      "height": 1351,
+      "author": "Chensiyuan",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Darren Teh"
   },
   {
     "id": "darron-niles",
@@ -20218,7 +20756,7 @@
     "nationality": "Türkiye",
     "club": "Werder Bremen",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Darwin Soylu"
   },
   {
     "id": "daryl-massicot",
@@ -20270,13 +20808,13 @@
     "nationality": "Austria",
     "club": "Fulham",
     "photo": {
-      "file": "FC RB Salzburg gegen SK Sturm Graz(2023-05-21) 56.jpg",
-      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4b/FC_RB_Salzburg_gegen_SK_Sturm_Graz%282023-05-21%29_56.jpg/960px-FC_RB_Salzburg_gegen_SK_Sturm_Graz%282023-05-21%29_56.jpg",
-      "width": 2548,
-      "height": 3131,
-      "author": "Werner100359",
-      "licence": "CC BY-SA 4.0",
-      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+      "file": "David Affengruber 17102026 (1).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/c9/David_Affengruber_17102026_%281%29.jpg/960px-David_Affengruber_17102026_%281%29.jpg",
+      "width": 2523,
+      "height": 3838,
+      "author": "Timmy96",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "David Affengruber (footballer, born 2001)"
   },
@@ -20395,7 +20933,7 @@
     "nationality": "Germany",
     "club": "FC Köln",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "David Fürst"
   },
   {
     "id": "david-herold",
@@ -20424,8 +20962,27 @@
     "position": "DF",
     "nationality": "Czech Republic",
     "club": "FC Cincinnati",
-    "photo": null,
+    "photo": {
+      "file": "David Jurásek SK Slavia Praha 20261019 (2) (cropped).JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/f/fb/David_Jur%C3%A1sek_SK_Slavia_Praha_20261019_%282%29_%28cropped%29.JPG",
+      "width": 921,
+      "height": 1157,
+      "author": "User:Zafer",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
     "wikiTitle": "David Jurásek"
+  },
+  {
+    "id": "david-kozel",
+    "name": "David Kozel",
+    "fullName": "David Kozel",
+    "birth": "2001-11-28",
+    "position": "MF",
+    "nationality": "Czech Republic",
+    "club": "Mladá Boleslav",
+    "photo": null,
+    "wikiTitle": "David Kozel"
   },
   {
     "id": "david-krcik",
@@ -20666,6 +21223,17 @@
     "club": "Cremonese",
     "photo": null,
     "wikiTitle": "David Stückler"
+  },
+  {
+    "id": "david-supa",
+    "name": "David Supa",
+    "fullName": "David Supa",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Solomon Islands",
+    "club": "Ba",
+    "photo": null,
+    "wikiTitle": "David Supa"
   },
   {
     "id": "david-zec",
@@ -21145,6 +21713,17 @@
     "wikiTitle": "Deividas Malžinskas"
   },
   {
+    "id": "deividas-sesplaukis",
+    "name": "Deividas Šešplaukis",
+    "fullName": "Deividas Šešplaukis",
+    "birth": "1998-02-02",
+    "position": "DF",
+    "nationality": "Lithuania",
+    "club": "FK Žalgiris",
+    "photo": null,
+    "wikiTitle": "Deividas Šešplaukis"
+  },
+  {
     "id": "dejan-joveljic",
     "name": "Dejan Joveljić",
     "fullName": "Dejan Joveljić",
@@ -21383,6 +21962,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Denilho Cleonise"
+  },
+  {
+    "id": "denis-marandici",
+    "name": "Denis Marandici",
+    "fullName": "Denis Marandici",
+    "birth": "1996-09-18",
+    "position": "DF",
+    "nationality": "Moldova",
+    "club": "Turan Tovuz",
+    "photo": null,
+    "wikiTitle": "Denis Marandici"
   },
   {
     "id": "denis-omedi",
@@ -22264,6 +22854,17 @@
     "wikiTitle": "Aliou Dieng"
   },
   {
+    "id": "diesel-herrington",
+    "name": "Diesel Herrington",
+    "fullName": "Diesel Herrington",
+    "birth": "2004-08-04",
+    "position": "DF",
+    "nationality": "Australia",
+    "club": "Central Coast Mariners",
+    "photo": null,
+    "wikiTitle": "Diesel Herrington"
+  },
+  {
     "id": "dieudonne-gaucho-debohi",
     "name": "Dieudonné Gaucho Debohi",
     "fullName": "Dieudonné Gaucho Debohi",
@@ -22330,6 +22931,17 @@
     "club": "Oxford City",
     "photo": null,
     "wikiTitle": "Dillon De Silva"
+  },
+  {
+    "id": "dilshod-murtozoev",
+    "name": "Dilshod Murtozoev",
+    "fullName": "Dilshod Murtozoev",
+    "birth": "2006-09-03",
+    "position": "DF",
+    "nationality": "Uzbekistan",
+    "club": "Nasaf",
+    "photo": null,
+    "wikiTitle": "Dilshod Murtozoev"
   },
   {
     "id": "dimarco",
@@ -22653,6 +23265,25 @@
     "wikiTitle": "Dion Gallapeni"
   },
   {
+    "id": "dion-lopy",
+    "name": "Dion Lopy",
+    "fullName": "Dion Lopy",
+    "birth": "2002-02-02",
+    "position": "MF",
+    "nationality": "Senegal",
+    "club": "Al-Ittihad",
+    "photo": {
+      "file": "Lens - Reims (12-05-2023) 14 (cropped).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/6/64/Lens_-_Reims_%2812-05-2023%29_14_%28cropped%29.jpg",
+      "width": 773,
+      "height": 1197,
+      "author": "Supporterhéninois",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "wikiTitle": "Dion Lopy"
+  },
+  {
     "id": "dion-markx",
     "name": "Dion Markx",
     "fullName": "Dion Markx",
@@ -22893,7 +23524,7 @@
     "nationality": "France",
     "club": "Le Havre",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Djibril Ouziad"
   },
   {
     "id": "djibril-sow",
@@ -23425,6 +24056,17 @@
     "club": "La Passe",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "don-keana",
+    "name": "Don Keana",
+    "fullName": "Don Keana",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Solomon Islands",
+    "club": "Rewa",
+    "photo": null,
+    "wikiTitle": "Don Keana"
   },
   {
     "id": "donat-barany",
@@ -24057,6 +24699,17 @@
     "wikiTitle": "Dylan Ramos"
   },
   {
+    "id": "dylan-salapu",
+    "name": "Dylan Salapu",
+    "fullName": "Dylan Salapu",
+    "birth": "2008-08-31",
+    "position": "DF",
+    "nationality": "American Samoa",
+    "club": "Pierce Raiders",
+    "photo": null,
+    "wikiTitle": "Dylan Salapu"
+  },
+  {
     "id": "dzenan-pejcinovic",
     "name": "Dženan Pejčinović",
     "fullName": "Dženan Pejčinović",
@@ -24390,6 +25043,17 @@
     "wikiTitle": "Edgar Grigoryan"
   },
   {
+    "id": "edgar-piloyan",
+    "name": "Edgar Piloyan",
+    "fullName": "Edgar Piloyan",
+    "birth": "2004-07-11",
+    "position": "MF",
+    "nationality": "Armenia",
+    "club": "Alashkert",
+    "photo": null,
+    "wikiTitle": "Edgar Piloyan"
+  },
+  {
     "id": "edgar-pujol",
     "name": "Edgar Pujol",
     "fullName": "Edgar Pujol",
@@ -24399,6 +25063,25 @@
     "club": "Racing de Ferrol",
     "photo": null,
     "wikiTitle": "Edgar Pujol"
+  },
+  {
+    "id": "edgaras-dubickas",
+    "name": "Edgaras Dubickas",
+    "fullName": "Edgaras Dubickas",
+    "birth": "1998-07-09",
+    "position": "FW",
+    "nationality": "Lithuania",
+    "club": "Suwon Samsung Bluewings",
+    "photo": {
+      "file": "556764-860059-756x425 (cropped).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/74/556764-860059-756x425_%28cropped%29.jpg",
+      "width": 297,
+      "height": 408,
+      "author": "Oztriich",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Edgaras Dubickas"
   },
   {
     "id": "edgaras-utkus",
@@ -24746,7 +25429,7 @@
     "name": "Edvin Austbø",
     "fullName": "Edvin Austbø",
     "birth": "2005-05-01",
-    "position": "FW",
+    "position": "MF",
     "nationality": "Norway",
     "club": "West Ham United",
     "photo": {
@@ -25243,7 +25926,7 @@
     "nationality": "Finland",
     "club": "Hamburger SV",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Elias Lahti"
   },
   {
     "id": "elias-legendre",
@@ -25946,7 +26629,7 @@
     "name": "Emiliano Buendía",
     "fullName": "Emiliano Buendía",
     "birth": "1996-12-25",
-    "position": "MF",
+    "position": "FW",
     "nationality": "Argentina",
     "club": "Aston Villa",
     "photo": {
@@ -26624,6 +27307,17 @@
     "wikiTitle": "Eren Elmalı"
   },
   {
+    "id": "eric-calvillo",
+    "name": "Eric Calvillo",
+    "fullName": "Eric Calvillo",
+    "birth": "1998-01-02",
+    "position": "MF",
+    "nationality": "El Salvador",
+    "club": "El Paso Locomotive",
+    "photo": null,
+    "wikiTitle": "Eric Calvillo"
+  },
+  {
     "id": "eric-davis",
     "name": "Eric Davis",
     "fullName": "Eric Davis",
@@ -26647,7 +27341,7 @@
     "name": "Eric Dier",
     "fullName": "Eric Dier",
     "birth": "1994-01-15",
-    "position": "DF",
+    "position": "MF",
     "nationality": "England",
     "club": "Monaco",
     "photo": {
@@ -27022,6 +27716,25 @@
     "wikiTitle": "Eros Maddy"
   },
   {
+    "id": "ersin-destanoglu",
+    "name": "Ersin Destanoğlu",
+    "fullName": "Ersin Destanoğlu",
+    "birth": "2001-01-01",
+    "position": "GK",
+    "nationality": "Türkiye",
+    "club": "Al Jazira",
+    "photo": {
+      "file": "Ersin Destanoğlu 20231008 1 (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/96/Ersin_Destano%C4%9Flu_20231008_1_%28cropped%29.jpg/960px-Ersin_Destano%C4%9Flu_20231008_1_%28cropped%29.jpg",
+      "width": 1935,
+      "height": 2099,
+      "author": "Beşiktaş JK",
+      "licence": "CC BY 2.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
+    },
+    "wikiTitle": "Ersin Destanoğlu"
+  },
+  {
     "id": "ertugrul-yigit",
     "name": "Ertuğrul Yiğit",
     "fullName": "Ertuğrul Yiğit",
@@ -27030,7 +27743,7 @@
     "nationality": "Germany",
     "club": "VfB Stuttgart",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Ertuğrul Yiğit"
   },
   {
     "id": "ervin-liburd",
@@ -27266,6 +27979,25 @@
     "club": "Ba",
     "photo": null,
     "wikiTitle": "Etonia Dogalau"
+  },
+  {
+    "id": "etrit-berisha",
+    "name": "Etrit Berisha",
+    "fullName": "Etrit Berisha",
+    "birth": "1989-03-10",
+    "position": "GK",
+    "nationality": "Albania",
+    "club": "BK Häcken",
+    "photo": {
+      "file": "Etrit Berisha.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d1/Etrit_Berisha.png",
+      "width": 491,
+      "height": 574,
+      "author": "User:Steindy",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "wikiTitle": "Etrit Berisha"
   },
   {
     "id": "etta-eyong",
@@ -28152,6 +28884,17 @@
     "wikiTitle": "Farhan Zulkifli"
   },
   {
+    "id": "farid-ikene",
+    "name": "Farid Ikene",
+    "fullName": "Farid Ikene",
+    "birth": "2000-12-15",
+    "position": "MF",
+    "nationality": "Luxembourg",
+    "club": "Racing Luxembourg",
+    "photo": null,
+    "wikiTitle": "Farid Ikene"
+  },
+  {
     "id": "farid-ouedraogo",
     "name": "Farid Ouédraogo",
     "fullName": "Farid Ouédraogo",
@@ -28256,7 +28999,7 @@
     "nationality": "Germany",
     "club": "FC Köln",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Fayssal Harchaoui"
   },
   {
     "id": "febas",
@@ -28877,7 +29620,7 @@
     "nationality": "Germany",
     "club": "Hamburger SV",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Fernando Dickes"
   },
   {
     "id": "fernando-nava",
@@ -28897,6 +29640,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Fernando Nava"
+  },
+  {
+    "id": "fiamatai-itamua",
+    "name": "Fiamatai Itamua",
+    "fullName": "Fiamatai Itamua",
+    "birth": "2007-05-27",
+    "position": "FW",
+    "nationality": "American Samoa",
+    "club": "Pago Youth FC",
+    "photo": null,
+    "wikiTitle": "Fiamatai Itamua"
   },
   {
     "id": "fidalgo",
@@ -28965,6 +29719,17 @@
     "club": "Fortuna Düsseldorf",
     "photo": null,
     "wikiTitle": "Filimon Gerezgiher"
+  },
+  {
+    "id": "filip-andersen",
+    "name": "Filip Andersen",
+    "fullName": "Filip Andersen",
+    "birth": "2003-02-13",
+    "position": "DF",
+    "nationality": "Mongolia",
+    "club": "Negeri Sembilan",
+    "photo": null,
+    "wikiTitle": "Filip Andersen"
   },
   {
     "id": "filip-chinzorig",
@@ -29178,6 +29943,25 @@
     "club": "VfB Stuttgart",
     "photo": null,
     "wikiTitle": "Finn Jeltsch"
+  },
+  {
+    "id": "finn-surman",
+    "name": "Finn Surman",
+    "fullName": "Finn Surman",
+    "birth": "2003-09-23",
+    "position": "DF",
+    "nationality": "New Zealand",
+    "club": "Portland Timbers",
+    "photo": {
+      "file": "Finn Surman at Timbers v Dynamo 1 November 2026 04 (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/43/Finn_Surman_at_Timbers_v_Dynamo_1_November_2026_04_%28cropped%29.jpg/960px-Finn_Surman_at_Timbers_v_Dynamo_1_November_2026_04_%28cropped%29.jpg",
+      "width": 2868,
+      "height": 4108,
+      "author": "Joe Peacock",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Finn Surman"
   },
   {
     "id": "firas-alburaikan",
@@ -29624,6 +30408,25 @@
     "wikiTitle": "Dimitri Foulquier"
   },
   {
+    "id": "foysal-ahmed-fahim",
+    "name": "Foysal Ahmed Fahim",
+    "fullName": "Foysal Ahmed Fahim",
+    "birth": "2002-02-24",
+    "position": "FW",
+    "nationality": "Bangladesh",
+    "club": "Mohammedan",
+    "photo": {
+      "file": "Foysal Ahmed Fahim (cropped).png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b6/Foysal_Ahmed_Fahim_%28cropped%29.png",
+      "width": 274,
+      "height": 320,
+      "author": "FNH004",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "wikiTitle": "Foysal Ahmed Fahim"
+  },
+  {
     "id": "foyth",
     "name": "Juan Foyth",
     "fullName": "Juan Foyth",
@@ -29715,6 +30518,25 @@
     "club": "Cremonese",
     "photo": null,
     "wikiTitle": "Francesco Folino"
+  },
+  {
+    "id": "francis-de-vries",
+    "name": "Francis de Vries",
+    "fullName": "Francis de Vries",
+    "birth": "1994-11-28",
+    "position": "DF",
+    "nationality": "New Zealand",
+    "club": "Auckland FC",
+    "photo": {
+      "file": "Francis de Vries.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Francis_de_Vries.jpg/500px-Francis_de_Vries.jpg",
+      "width": 856,
+      "height": 2032,
+      "author": "JaumeBG",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Francis de Vries"
   },
   {
     "id": "francis-koroma",
@@ -29827,7 +30649,7 @@
     "name": "Franck Honorat",
     "fullName": "Franck Honorat",
     "birth": "1996-08-11",
-    "position": "MF",
+    "position": "FW",
     "nationality": "France",
     "club": "Borussia Mönchengladbach",
     "photo": {
@@ -30175,6 +30997,25 @@
     "wikiTitle": "Fredrik Aursnes"
   },
   {
+    "id": "fredrik-jensen",
+    "name": "Fredrik Jensen",
+    "fullName": "Fredrik Jensen",
+    "birth": "1997-09-09",
+    "position": "MF",
+    "nationality": "Finland",
+    "club": "Aris",
+    "photo": {
+      "file": "Fredrik jensen -1493447439.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/0/01/Fredrik_jensen_-1493447439.png",
+      "width": 176,
+      "height": 239,
+      "author": "Carina Lansink",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Fredrik Jensen (footballer, born 1997)"
+  },
+  {
     "id": "fredrik-oppegard",
     "name": "Fredrik Oppegård",
     "fullName": "Fredrik Oppegård",
@@ -30271,7 +31112,7 @@
     "id": "fritz-fleck",
     "name": "Fritz Fleck",
     "fullName": "Fritz Fleck",
-    "birth": null,
+    "birth": "2007-05-30",
     "position": "MF",
     "nationality": "Germany",
     "club": "Borussia Mönchengladbach",
@@ -31010,6 +31851,17 @@
     "wikiTitle": null
   },
   {
+    "id": "geonathan-barrera",
+    "name": "Geonathan Barrera",
+    "fullName": "Geonathan Barrera",
+    "birth": "2004-11-18",
+    "position": "GK",
+    "nationality": "El Salvador",
+    "club": "Luis Ángel Firpo",
+    "photo": null,
+    "wikiTitle": "Geonathan Barrera"
+  },
+  {
     "id": "george-campbell",
     "name": "George Campbell",
     "fullName": "George Campbell",
@@ -31539,6 +32391,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Gianluigi Donnarumma"
+  },
+  {
+    "id": "gianni-stensness",
+    "name": "Gianni Stensness",
+    "fullName": "Gianni Stensness",
+    "birth": "1999-02-07",
+    "position": "DF",
+    "nationality": "Australia",
+    "club": "Viking",
+    "photo": null,
+    "wikiTitle": "Gianni Stensness"
   },
   {
     "id": "giannis-konstantelias",
@@ -32403,6 +33266,17 @@
     "wikiTitle": "Anthony Gordon (footballer)"
   },
   {
+    "id": "gordon-iro",
+    "name": "Gordon Iro",
+    "fullName": "Gordon Iro",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Solomon Islands",
+    "club": "Green Shield",
+    "photo": null,
+    "wikiTitle": "Gordon Iro"
+  },
+  {
     "id": "gorosabel",
     "name": "Andoni Gorosabel",
     "fullName": "Andoni Gorosabel Espinosa",
@@ -32499,6 +33373,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Grant Hanley"
+  },
+  {
+    "id": "gratas-sirgedas",
+    "name": "Gratas Sirgėdas",
+    "fullName": "Gratas Sirgėdas",
+    "birth": "1994-12-17",
+    "position": "MF",
+    "nationality": "Lithuania",
+    "club": "FK Kauno Žalgiris",
+    "photo": null,
+    "wikiTitle": "Gratas Sirgėdas"
   },
   {
     "id": "greg-sandiford",
@@ -33503,8 +34388,8 @@
     "nationality": "Morocco",
     "club": "Paris Saint-Germain",
     "photo": {
-      "file": "Achraf Hakimi Morocco v Norway 7 June 2026-16.jpg",
-      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/56/Achraf_Hakimi_Morocco_v_Norway_7_June_2026-16.jpg/960px-Achraf_Hakimi_Morocco_v_Norway_7_June_2026-16.jpg",
+      "file": "Achraf Hakimi Morocco v Norway 7 June 2026-32.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/36/Achraf_Hakimi_Morocco_v_Norway_7_June_2026-32.jpg/960px-Achraf_Hakimi_Morocco_v_Norway_7_June_2026-32.jpg",
       "width": 3333,
       "height": 5000,
       "author": "Bryan Berlin",
@@ -34427,6 +35312,17 @@
     "wikiTitle": "Harry Twite"
   },
   {
+    "id": "harry-victor",
+    "name": "Harry Victor",
+    "fullName": "Harry Victor",
+    "birth": "2004-01-29",
+    "position": "GK",
+    "nationality": "Gibraltar",
+    "club": "Glacis United",
+    "photo": null,
+    "wikiTitle": "Harry Victor"
+  },
+  {
     "id": "harry-wilson",
     "name": "Harry Wilson",
     "fullName": "Harry Wilson",
@@ -35146,7 +36042,15 @@
     "position": "GK",
     "nationality": "New Zealand",
     "club": "Wellington Phoenix",
-    "photo": null,
+    "photo": {
+      "file": "Henry Gray.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/2/2d/Henry_Gray.jpg",
+      "width": 941,
+      "height": 1180,
+      "author": "JaumeBG",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
     "wikiTitle": "Henry Gray (footballer)"
   },
   {
@@ -35763,6 +36667,25 @@
     "wikiTitle": "Houssem Aouar"
   },
   {
+    "id": "hovhannes-harutyunyan",
+    "name": "Hovhannes Harutyunyan",
+    "fullName": "Hovhannes Harutyunyan",
+    "birth": "1999-05-25",
+    "position": "MF",
+    "nationality": "Armenia",
+    "club": "Pyunik",
+    "photo": {
+      "file": "Hovhannes Harutyunyan.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/79/Hovhannes_Harutyunyan.jpg/960px-Hovhannes_Harutyunyan.jpg",
+      "width": 1600,
+      "height": 1068,
+      "author": "Nik311",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Hovhannes Harutyunyan"
+  },
+  {
     "id": "hristijan-maleski",
     "name": "Hristijan Maleski",
     "fullName": "Hristijan Maleski",
@@ -35838,7 +36761,7 @@
     "name": "Hugo Bolin",
     "fullName": "Hugo Bolin",
     "birth": "2003-07-24",
-    "position": "MF",
+    "position": "FW",
     "nationality": "Sweden",
     "club": "Borussia Mönchengladbach",
     "photo": {
@@ -35892,6 +36815,25 @@
     "club": "Celta Vigo",
     "photo": null,
     "wikiTitle": "Hugo Cuenca (footballer)"
+  },
+  {
+    "id": "hugo-cuypers",
+    "name": "Hugo Cuypers",
+    "fullName": "Hugo Cuypers",
+    "birth": "1997-02-07",
+    "position": "FW",
+    "nationality": "Belgium",
+    "club": "Monterrey",
+    "photo": {
+      "file": "Hugo Cuypers Philadelphia Chicago 10.26.25-008 (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/6/60/Hugo_Cuypers_Philadelphia_Chicago_10.26.25-008_%28cropped%29.jpg/960px-Hugo_Cuypers_Philadelphia_Chicago_10.26.25-008_%28cropped%29.jpg",
+      "width": 3311,
+      "height": 4413,
+      "author": "Bryan Berlin",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Hugo Cuypers"
   },
   {
     "id": "hugo-ekitike",
@@ -36164,7 +37106,7 @@
     "id": "iaia-manco-danfa",
     "name": "Iaia Manco Danfa",
     "fullName": "Iaia Manco Danfa",
-    "birth": null,
+    "birth": "2007-04-06",
     "position": "FW",
     "nationality": "Guinea-Bissau",
     "club": "Borussia Mönchengladbach",
@@ -36536,6 +37478,17 @@
     "club": "SWA Sharks",
     "photo": null,
     "wikiTitle": "Idelin Gardiner"
+  },
+  {
+    "id": "idris-hopi",
+    "name": "Idris Hopi",
+    "fullName": "Idris Hopi",
+    "birth": "2008-05-12",
+    "position": "FW",
+    "nationality": "Czech Republic",
+    "club": "Teplice",
+    "photo": null,
+    "wikiTitle": "Idris Hopi"
   },
   {
     "id": "idris-kanu",
@@ -37139,6 +38092,17 @@
     "club": "Saint Louis Suns United",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "imran-fetai",
+    "name": "Imran Fetai",
+    "fullName": "Imran Fetai",
+    "birth": "2002-08-02",
+    "position": "DF",
+    "nationality": "North Macedonia",
+    "club": "Dinamo",
+    "photo": null,
+    "wikiTitle": "Imran Fetai"
   },
   {
     "id": "innocent-dlamini",
@@ -37845,7 +38809,7 @@
     "nationality": "France",
     "club": "Toulouse",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Ismaïl Diallo"
   },
   {
     "id": "ismail-jakobs",
@@ -39411,6 +40375,17 @@
     "wikiTitle": "Jakub Zieliński"
   },
   {
+    "id": "jakup-andreasen",
+    "name": "Jákup Andreasen",
+    "fullName": "Jákup Andreasen",
+    "birth": "1998-05-31",
+    "position": "MF",
+    "nationality": "Faroe Islands",
+    "club": "KÍ",
+    "photo": null,
+    "wikiTitle": "Jákup Andreasen"
+  },
+  {
     "id": "jalen-jones",
     "name": "Jalen Jones",
     "fullName": "Jalen Jones",
@@ -39646,6 +40621,25 @@
     "club": "Liverpool",
     "photo": null,
     "wikiTitle": "James McConnell (footballer, born 2004)"
+  },
+  {
+    "id": "james-mcgarry",
+    "name": "James McGarry",
+    "fullName": "James McGarry",
+    "birth": "1998-04-09",
+    "position": "DF",
+    "nationality": "New Zealand",
+    "club": "Wellington Phoenix",
+    "photo": {
+      "file": "James McGarry (October 2026).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/18/James_McGarry_%28October_2026%29.jpg",
+      "width": 901,
+      "height": 1457,
+      "author": "JaumeBG",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "James McGarry (footballer)"
   },
   {
     "id": "james-pantemis",
@@ -40273,7 +41267,7 @@
     "name": "Jarrod Bowen",
     "fullName": "Jarrod Bowen",
     "birth": "1996-12-20",
-    "position": "MF",
+    "position": "FW",
     "nationality": "England",
     "club": "West Ham United",
     "photo": {
@@ -40569,6 +41563,17 @@
     "wikiTitle": "Javier Roces"
   },
   {
+    "id": "javin-wae",
+    "name": "Javin Wae",
+    "fullName": "Javin Wae",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Solomon Islands",
+    "club": "Central Coast",
+    "photo": null,
+    "wikiTitle": "Javin Wae"
+  },
+  {
     "id": "javis-jones",
     "name": "Javis Jones",
     "fullName": "Javis Jones",
@@ -40843,6 +41848,17 @@
     "club": "Verdes",
     "photo": null,
     "wikiTitle": "Jaylen Lennan"
+  },
+  {
+    "id": "jayroll-patty",
+    "name": "Jayroll Patty",
+    "fullName": "Jayroll Patty",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Solomon Islands",
+    "club": "Green Shield",
+    "photo": null,
+    "wikiTitle": "Jayroll Patty"
   },
   {
     "id": "jayson-molumby",
@@ -41646,6 +42662,17 @@
     "wikiTitle": "Jeremy Monga"
   },
   {
+    "id": "jeremy-perera",
+    "name": "Jeremy Perera",
+    "fullName": "Jeremy Perera",
+    "birth": "2006-01-14",
+    "position": "MF",
+    "nationality": "Gibraltar",
+    "club": "Silsden",
+    "photo": null,
+    "wikiTitle": "Jeremy Perera"
+  },
+  {
     "id": "jeremy-sarmiento",
     "name": "Jeremy Sarmiento",
     "fullName": "Jeremy Sarmiento",
@@ -42226,6 +43253,17 @@
     "wikiTitle": "Jiovany Ramos"
   },
   {
+    "id": "jiri-slama",
+    "name": "Jiří Sláma",
+    "fullName": "Jiří Sláma",
+    "birth": "1999-01-08",
+    "position": "DF",
+    "nationality": "Czech Republic",
+    "club": "Jablonec",
+    "photo": null,
+    "wikiTitle": null
+  },
+  {
     "id": "jo-hyeonwoo",
     "name": "Jo Hyeon-woo",
     "fullName": "Jo Hyeon-woo",
@@ -42637,6 +43675,25 @@
     "wikiTitle": "Jodel Dossou"
   },
   {
+    "id": "joe-gauci",
+    "name": "Joe Gauci",
+    "fullName": "Joe Gauci",
+    "birth": "2000-07-04",
+    "position": "GK",
+    "nationality": "Australia",
+    "club": "Lincoln City",
+    "photo": {
+      "file": "Joe Gauci October 2025 (cropped).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/a/a0/Joe_Gauci_October_2025_%28cropped%29.jpg",
+      "width": 350,
+      "height": 491,
+      "author": "EchetusXe",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "wikiTitle": "Joe Gauci"
+  },
+  {
     "id": "joe-gomez",
     "name": "Joe Gomez",
     "fullName": "Joe Gomez",
@@ -42732,7 +43789,7 @@
     "nationality": "Germany",
     "club": "Hamburger SV",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Joel Agyekum"
   },
   {
     "id": "joel-bagan",
@@ -43308,6 +44365,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "John Yeboah"
+  },
+  {
+    "id": "johnica-collins",
+    "name": "Johnica Collins",
+    "fullName": "Johnica Collins",
+    "birth": "2006-01-12",
+    "position": "MF",
+    "nationality": "American Samoa",
+    "club": "Pago Youth FC",
+    "photo": null,
+    "wikiTitle": "Johnica Collins"
   },
   {
     "id": "johnmichael-guidroz",
@@ -44179,6 +45247,17 @@
     "wikiTitle": "Jorge Gutiérrez (footballer)"
   },
   {
+    "id": "jorge-mendez",
+    "name": "Jorge Méndez",
+    "fullName": "Jorge Méndez",
+    "birth": "2001-04-06",
+    "position": "FW",
+    "nationality": "El Salvador",
+    "club": "San Francisco",
+    "photo": null,
+    "wikiTitle": "Jorge Méndez"
+  },
+  {
     "id": "jorge-salinas",
     "name": "Jorge Salinas",
     "fullName": "Jorge Salinas",
@@ -44536,6 +45615,28 @@
     "wikiTitle": "José Morales (footballer, born 1996)"
   },
   {
+    "id": "jose-nabil-ondo",
+    "name": "José Nabil Ondo",
+    "fullName": "José Nabil Ondo",
+    "birth": "2005-11-23",
+    "position": "FW",
+    "nationality": "Equatorial Guinea",
+    "club": "Leiria",
+    "photo": null,
+    "wikiTitle": "José Nabil Ondo"
+  },
+  {
+    "id": "jose-portillo",
+    "name": "José Portillo",
+    "fullName": "José Portillo",
+    "birth": "1999-11-14",
+    "position": "MF",
+    "nationality": "El Salvador",
+    "club": "FAS",
+    "photo": null,
+    "wikiTitle": "José Portillo"
+  },
+  {
     "id": "jose-reyes",
     "name": "José Reyes",
     "fullName": "José Reyes",
@@ -44720,6 +45821,25 @@
     "club": "Nairobi United",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "josete-miranda",
+    "name": "Josete Miranda",
+    "fullName": "Josete Miranda",
+    "birth": "1998-07-22",
+    "position": "FW",
+    "nationality": "Equatorial Guinea",
+    "club": "Kalamata",
+    "photo": {
+      "file": "Débordement du joueur guinéen (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/D%C3%A9bordement_du_joueur_guin%C3%A9en_%28cropped%29.jpg/960px-D%C3%A9bordement_du_joueur_guin%C3%A9en_%28cropped%29.jpg",
+      "width": 1405,
+      "height": 2502,
+      "author": "Happiraphael",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Josete Miranda"
   },
   {
     "id": "josh-acheampong",
@@ -45022,6 +46142,28 @@
     "wikiTitle": "Joshua Kimmich"
   },
   {
+    "id": "joshua-pereira",
+    "name": "Joshua Pereira",
+    "fullName": "Joshua Pereira",
+    "birth": "1997-10-10",
+    "position": "DF",
+    "nationality": "Singapore",
+    "club": "Geylang International",
+    "photo": null,
+    "wikiTitle": "Joshua Pereira"
+  },
+  {
+    "id": "joshua-perez",
+    "name": "Joshua Pérez",
+    "fullName": "Joshua Pérez",
+    "birth": "1998-01-21",
+    "position": "MF",
+    "nationality": "El Salvador",
+    "club": "Odra Opole",
+    "photo": null,
+    "wikiTitle": "Joshua Pérez"
+  },
+  {
     "id": "joshua-ramos",
     "name": "Joshua Ramos",
     "fullName": "Joshua Ramos",
@@ -45094,6 +46236,17 @@
     "club": "Phoenix Chapelton Maroons",
     "photo": null,
     "wikiTitle": "Josiah Trimmingham"
+  },
+  {
+    "id": "josiah-uwakhonye",
+    "name": "Josiah Uwakhonye",
+    "fullName": "Josiah Uwakhonye",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Germany",
+    "club": "Borussia Mönchengladbach",
+    "photo": null,
+    "wikiTitle": "Josiah Kaled Uwakhonye"
   },
   {
     "id": "josip-juranovic",
@@ -45244,6 +46397,17 @@
     "club": "Cosmos Koblenz",
     "photo": null,
     "wikiTitle": "Josué Duverger"
+  },
+  {
+    "id": "josue-kongolo",
+    "name": "Josue Kongolo",
+    "fullName": "Josue Kongolo",
+    "birth": "2006-04-13",
+    "position": "DF",
+    "nationality": "Belgium",
+    "club": "Genk",
+    "photo": null,
+    "wikiTitle": "Josue Kongolo"
   },
   {
     "id": "josue-vergara",
@@ -45623,6 +46787,17 @@
     "wikiTitle": "Jude Soonsup-Bell"
   },
   {
+    "id": "jude-supan",
+    "name": "Jude Supan",
+    "fullName": "Jude Supan",
+    "birth": "1998-07-30",
+    "position": "DF",
+    "nationality": "Sri Lanka",
+    "club": "Up Country Lions",
+    "photo": null,
+    "wikiTitle": "Jude Supan"
+  },
+  {
     "id": "juho-lahteenmaki",
     "name": "Juho Lähteenmäki",
     "fullName": "Juho Lähteenmäki",
@@ -45703,6 +46878,17 @@
       "licenceUrl": null
     },
     "wikiTitle": "Julián Araujo"
+  },
+  {
+    "id": "julian-del-rio",
+    "name": "Julian Del Rio",
+    "fullName": "Julian Del Rio",
+    "birth": "2002-02-15",
+    "position": "FW",
+    "nationality": "Gibraltar",
+    "club": "FC Magpies",
+    "photo": null,
+    "wikiTitle": "Julian Del Rio"
   },
   {
     "id": "julian-hall",
@@ -45844,7 +47030,7 @@
     "nationality": "Germany",
     "club": "Union Berlin",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Julien Friedrich"
   },
   {
     "id": "julio-diaz",
@@ -46043,6 +47229,28 @@
     "wikiTitle": "Junior Bitá"
   },
   {
+    "id": "junior-david",
+    "name": "Junior David",
+    "fullName": "Junior David",
+    "birth": null,
+    "position": "DF",
+    "nationality": "Solomon Islands",
+    "club": "Central Coast",
+    "photo": null,
+    "wikiTitle": "Junior David"
+  },
+  {
+    "id": "junior-fordney",
+    "name": "Junior Fordney",
+    "fullName": "Junior Fordney",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Solomon Islands",
+    "club": "Central Coast",
+    "photo": null,
+    "wikiTitle": "Junior Fordney"
+  },
+  {
     "id": "junior-kadile",
     "name": "Junior Kadile",
     "fullName": "Junior Kadile",
@@ -46131,6 +47339,17 @@
     "club": "SWA Sharks",
     "photo": null,
     "wikiTitle": "Junior Paul (footballer)"
+  },
+  {
+    "id": "junior-petua",
+    "name": "Junior Petua",
+    "fullName": "Junior Petua",
+    "birth": null,
+    "position": "GK",
+    "nationality": "Solomon Islands",
+    "club": "Marist",
+    "photo": null,
+    "wikiTitle": "Junior Petua"
   },
   {
     "id": "junior-tchamadeu",
@@ -46613,6 +47832,25 @@
     "wikiTitle": "Kaan Ayhan"
   },
   {
+    "id": "kaan-kairinen",
+    "name": "Kaan Kairinen",
+    "fullName": "Kaan Kairinen",
+    "birth": "1998-12-22",
+    "position": "MF",
+    "nationality": "Finland",
+    "club": "AEK Athens",
+    "photo": {
+      "file": "Kaan Kairinen 2.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3a/Kaan_Kairinen_2.jpg/960px-Kaan_Kairinen_2.jpg",
+      "width": 967,
+      "height": 1452,
+      "author": "IA",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Kaan Kairinen"
+  },
+  {
     "id": "kacper-kozlowski",
     "name": "Kacper Kozłowski",
     "fullName": "Kacper Kozłowski",
@@ -46753,6 +47991,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Kai Trewin"
+  },
+  {
+    "id": "kai-yandall",
+    "name": "Kai Yandall",
+    "fullName": "Kai Yandall",
+    "birth": "2008-07-25",
+    "position": "GK",
+    "nationality": "American Samoa",
+    "club": "Nashville SC",
+    "photo": null,
+    "wikiTitle": "Kai Yandall"
   },
   {
     "id": "kaihim-thomas",
@@ -47817,6 +49066,17 @@
     "wikiTitle": "Ken Sema"
   },
   {
+    "id": "kenai-mauga",
+    "name": "Kenai Mauga",
+    "fullName": "Kenai Mauga",
+    "birth": null,
+    "position": "MF",
+    "nationality": "American Samoa",
+    "club": "Indialantic Force",
+    "photo": null,
+    "wikiTitle": "Kenai Mauga"
+  },
+  {
     "id": "kenan-toibibou",
     "name": "Kenan Toibibou",
     "fullName": "Kenan Toibibou",
@@ -48299,13 +49559,13 @@
     "nationality": "Austria",
     "club": "Sunderland",
     "photo": {
-      "file": "Kevin Danso ASSE RCL 2425.jpg",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/4/4c/Kevin_Danso_ASSE_RCL_2425.jpg",
-      "width": 860,
-      "height": 1555,
-      "author": "Paté kroute",
-      "licence": "CC0",
-      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      "file": "Kevin Danso.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Kevin_Danso.png",
+      "width": 720,
+      "height": 1059,
+      "author": "Timmy96",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Kevin Danso"
   },
@@ -48625,7 +49885,15 @@
     "position": "DF",
     "nationality": "United Arab Emirates",
     "club": "Sharjah",
-    "photo": null,
+    "photo": {
+      "file": "Khaled Ebraheim in 2022.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/7/7e/Khaled_Ebraheim_in_2022.jpg",
+      "width": 747,
+      "height": 934,
+      "author": "AD Sports",
+      "licence": "CC BY 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
     "wikiTitle": "Khaled Ibrahim"
   },
   {
@@ -49179,7 +50447,15 @@
     "position": "DF",
     "nationality": "South Korea",
     "club": "Brentford",
-    "photo": null,
+    "photo": {
+      "file": "Kim Ji-soo 18102026 (4).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e0/Kim_Ji-soo_18102026_%284%29.jpg/960px-Kim_Ji-soo_18102026_%284%29.jpg",
+      "width": 1249,
+      "height": 2278,
+      "author": "Timmy96",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
     "wikiTitle": "Kim Ji-soo (footballer)"
   },
   {
@@ -49659,7 +50935,7 @@
     "name": "Konrad Laimer",
     "fullName": "Konrad Laimer",
     "birth": "1997-05-27",
-    "position": "MF",
+    "position": "DF",
     "nationality": "Austria",
     "club": "Bayern Munich",
     "photo": {
@@ -49900,6 +51176,25 @@
     "wikiTitle": "Kōta Takai"
   },
   {
+    "id": "kouame-autonne",
+    "name": "Kouame Autonne",
+    "fullName": "Kouame Autonne",
+    "birth": "2000-09-22",
+    "position": "DF",
+    "nationality": "United Arab Emirates",
+    "club": "United",
+    "photo": {
+      "file": "Koame playing for ALAIN FC.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/74/Koame_playing_for_ALAIN_FC.jpg/960px-Koame_playing_for_ALAIN_FC.jpg",
+      "width": 1290,
+      "height": 1612,
+      "author": "AKISCOLD",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Kouame Autonne"
+  },
+  {
     "id": "kounde",
     "name": "Jules Koundé",
     "fullName": "Jules Koundé",
@@ -49925,7 +51220,7 @@
     "birth": "1999-02-25",
     "position": "DF",
     "nationality": "Senegal",
-    "club": null,
+    "club": "Watford",
     "photo": {
       "file": "Krepin Diatta France v Senegal 16 June 2026-490 (cropped).jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/8/8a/Krepin_Diatta_France_v_Senegal_16_June_2026-490_%28cropped%29.jpg",
@@ -49999,6 +51294,25 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Kristian Dimitrov"
+  },
+  {
+    "id": "kristian-hlynsson",
+    "name": "Kristian Hlynsson",
+    "fullName": "Kristian Hlynsson",
+    "birth": "2004-01-23",
+    "position": "MF",
+    "nationality": "Iceland",
+    "club": "Twente",
+    "photo": {
+      "file": "Kristian Hlynsson.JPG",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ea/Kristian_Hlynsson.JPG/960px-Kristian_Hlynsson.JPG",
+      "width": 4147,
+      "height": 4184,
+      "author": "Hans Reefman",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Kristian Hlynsson"
   },
   {
     "id": "kristian-javier",
@@ -50159,6 +51473,25 @@
     "wikiTitle": "Kritsada Kaman"
   },
   {
+    "id": "krystof-danek",
+    "name": "Kryštof Daněk",
+    "fullName": "Kryštof Daněk",
+    "birth": "2003-01-05",
+    "position": "MF",
+    "nationality": "Czech Republic",
+    "club": "LASK",
+    "photo": {
+      "file": "Kryštof Daněk.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/92/Kry%C5%A1tof_Dan%C4%9Bk.jpg/960px-Kry%C5%A1tof_Dan%C4%9Bk.jpg",
+      "width": 1170,
+      "height": 1804,
+      "author": "SonoGrazy",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Kryštof Daněk"
+  },
+  {
     "id": "kubo",
     "name": "Takefusa Kubo",
     "fullName": "Takefusa Kubo",
@@ -50217,6 +51550,25 @@
     "club": "Lalitpur City",
     "photo": null,
     "wikiTitle": "Kushal Deuba"
+  },
+  {
+    "id": "kusini-yengi",
+    "name": "Kusini Yengi",
+    "fullName": "Kusini Yengi",
+    "birth": "1999-01-15",
+    "position": "FW",
+    "nationality": "Australia",
+    "club": "Sanfrecce Hiroshima",
+    "photo": {
+      "file": "KusiniYengi1.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/83/KusiniYengi1.png",
+      "width": 920,
+      "height": 920,
+      "author": "Western Sydney Wanderers FC",
+      "licence": "CC BY 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
+    "wikiTitle": "Kusini Yengi"
   },
   {
     "id": "kvaratskhelia",
@@ -50454,13 +51806,13 @@
     "nationality": "Singapore",
     "club": "Lion City Sailors",
     "photo": {
-      "file": "Kyoga Nakamura.jpg",
-      "url": "https://upload.wikimedia.org/wikipedia/commons/0/07/Kyoga_Nakamura.jpg",
-      "width": 948,
-      "height": 1423,
-      "author": "Chin Yu Chu",
-      "licence": "CC BY-SA 2.0",
-      "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
+      "file": "Kyoganakamura.png",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b8/Kyoganakamura.png/960px-Kyoganakamura.png",
+      "width": 1667,
+      "height": 2501,
+      "author": "Sato Haruto",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Kyoga Nakamura"
   },
@@ -51230,6 +52582,17 @@
     "wikiTitle": "Lê Văn Đô"
   },
   {
+    "id": "leaga-lealuga",
+    "name": "Leaga Lealuga",
+    "fullName": "Leaga Lealuga",
+    "birth": "2005-06-27",
+    "position": "MF",
+    "nationality": "American Samoa",
+    "club": "PanSa East F.C.",
+    "photo": null,
+    "wikiTitle": "Leaga Lealuga"
+  },
+  {
     "id": "leandro-bacuna",
     "name": "Leandro Bacuna",
     "fullName": "Leandro Bacuna",
@@ -51424,6 +52787,25 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
     },
     "wikiTitle": "Lee Kang-in"
+  },
+  {
+    "id": "lee-myungjae",
+    "name": "Lee Myung-jae",
+    "fullName": "Lee Myung-jae",
+    "birth": "1993-11-04",
+    "position": "DF",
+    "nationality": "South Korea",
+    "club": "Daejeon Hana Citizen",
+    "photo": {
+      "file": "241110 FC 서울 vs 울산 (이명재).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/241110_FC_%EC%84%9C%EC%9A%B8_vs_%EC%9A%B8%EC%82%B0_%28%EC%9D%B4%EB%AA%85%EC%9E%AC%29.jpg/960px-241110_FC_%EC%84%9C%EC%9A%B8_vs_%EC%9A%B8%EC%82%B0_%28%EC%9D%B4%EB%AA%85%EC%9E%AC%29.jpg",
+      "width": 1600,
+      "height": 2000,
+      "author": "Explicit",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Lee Myung-jae"
   },
   {
     "id": "lee-taeseok",
@@ -52299,6 +53681,17 @@
     "wikiTitle": null
   },
   {
+    "id": "liam-gillion",
+    "name": "Liam Gillion",
+    "fullName": "Liam Gillion",
+    "birth": "2002-10-17",
+    "position": "FW",
+    "nationality": "New Zealand",
+    "club": "Western Sydney Wanderers",
+    "photo": null,
+    "wikiTitle": "Liam Gillion"
+  },
+  {
     "id": "liam-gordon",
     "name": "Liam Gordon",
     "fullName": "Liam Gordon",
@@ -52525,6 +53918,17 @@
     "wikiTitle": "Linus Güther"
   },
   {
+    "id": "lion-schweers",
+    "name": "Lion Schweers",
+    "fullName": "Lion Schweers",
+    "birth": "1996-04-01",
+    "position": "DF",
+    "nationality": "Germany",
+    "club": "Borussia Mönchengladbach",
+    "photo": null,
+    "wikiTitle": "Lion Schweers"
+  },
+  {
     "id": "lionel-mpasi",
     "name": "Lionel Mpasi",
     "fullName": "Lionel Mpasi",
@@ -52687,7 +54091,7 @@
     "name": "Marcos Llorente",
     "fullName": "Marcos Llorente",
     "birth": "1995-01-30",
-    "position": "MF",
+    "position": "DF",
     "nationality": "Spain",
     "club": "Atlético Madrid",
     "photo": {
@@ -53114,6 +54518,25 @@
     "wikiTitle": "Louicius Deedson"
   },
   {
+    "id": "louie-annesley",
+    "name": "Louie Annesley",
+    "fullName": "Louie Annesley",
+    "birth": "2000-05-03",
+    "position": "DF",
+    "nationality": "Gibraltar",
+    "club": "Dorking Wanderers",
+    "photo": {
+      "file": "Louie Annesley.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ee/Louie_Annesley.jpg/960px-Louie_Annesley.jpg",
+      "width": 1170,
+      "height": 1840,
+      "author": "SonoGrazy",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Louie Annesley"
+  },
+  {
     "id": "louis-buffon",
     "name": "Louis Buffon",
     "fullName": "Louis Buffon",
@@ -53376,7 +54799,7 @@
     "nationality": "Germany",
     "club": "Werder Bremen",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Luca Höcker"
   },
   {
     "id": "luca-jaquez",
@@ -53507,7 +54930,7 @@
     "nationality": "Germany",
     "club": "TSG Hoffenheim",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Luca Philipp"
   },
   {
     "id": "luca-ranieri",
@@ -53557,6 +54980,44 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/3.0"
     },
     "wikiTitle": "Luca Waldschmidt"
+  },
+  {
+    "id": "luca-weinhandl",
+    "name": "Luca Weinhandl",
+    "fullName": "Luca Weinhandl",
+    "birth": "2009-01-11",
+    "position": "MF",
+    "nationality": "Austria",
+    "club": "Sturm Graz",
+    "photo": {
+      "file": "Luca Weinhandl 39 SK Sturm Graz 20260805 (4) (cropped).JPG",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a2/Luca_Weinhandl_39_SK_Sturm_Graz_20260805_%284%29_%28cropped%29.JPG/960px-Luca_Weinhandl_39_SK_Sturm_Graz_20260805_%284%29_%28cropped%29.JPG",
+      "width": 2495,
+      "height": 3273,
+      "author": "User:Zafer",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Luca Weinhandl"
+  },
+  {
+    "id": "luca-williamsbarnett",
+    "name": "Luca Williams-Barnett",
+    "fullName": "Luca Williams-Barnett",
+    "birth": "2008-10-01",
+    "position": "MF",
+    "nationality": "England",
+    "club": "Tottenham Hotspur",
+    "photo": {
+      "file": "Luca Williams-Barnett No.1 31.10.26.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/Luca_Williams-Barnett_No.1_31.10.26.jpg/960px-Luca_Williams-Barnett_No.1_31.10.26.jpg",
+      "width": 1669,
+      "height": 1980,
+      "author": "Ecco4k",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
+    },
+    "wikiTitle": "Luca Williams-Barnett"
   },
   {
     "id": "luca-zidane",
@@ -53838,7 +55299,7 @@
     "name": "Lucas Vázquez",
     "fullName": "Lucas Vázquez",
     "birth": "1991-07-01",
-    "position": "DF",
+    "position": "FW",
     "nationality": "Spain",
     "club": "Bayer Leverkusen",
     "photo": {
@@ -54240,6 +55701,17 @@
     "wikiTitle": "Luka Gugeshashvili"
   },
   {
+    "id": "luka-hyrylainen",
+    "name": "Luka Hyryläinen",
+    "fullName": "Luka Hyryläinen",
+    "birth": "2004-08-25",
+    "position": "MF",
+    "nationality": "Finland",
+    "club": "1. FC Magdeburg",
+    "photo": null,
+    "wikiTitle": "Luka Hyryläinen"
+  },
+  {
     "id": "luka-jovic",
     "name": "Luka Jović",
     "fullName": "Luka Jović",
@@ -54338,6 +55810,25 @@
     "wikiTitle": "Luka Vušković"
   },
   {
+    "id": "lukas-ambros",
+    "name": "Lukáš Ambros",
+    "fullName": "Lukáš Ambros",
+    "birth": "2004-06-05",
+    "position": "MF",
+    "nationality": "Czech Republic",
+    "club": "Anderlecht",
+    "photo": {
+      "file": "Ambros 2026 (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/90/Ambros_2026_%28cropped%29.jpg/500px-Ambros_2026_%28cropped%29.jpg",
+      "width": 792,
+      "height": 1219,
+      "author": "KALMPSPAZ",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Lukáš Ambros"
+  },
+  {
     "id": "lukas-cerv",
     "name": "Lukáš Červ",
     "fullName": "Lukáš Červ",
@@ -54404,6 +55895,44 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Lukas Hradecky"
+  },
+  {
+    "id": "lukas-jungwirth",
+    "name": "Lukas Jungwirth",
+    "fullName": "Lukas Jungwirth",
+    "birth": "2004-04-30",
+    "position": "GK",
+    "nationality": "Austria",
+    "club": "LASK",
+    "photo": {
+      "file": "FC RB Salzburg gegen LASK (2025-08-24 Bundesliga Vierte Runde) 35 (cropped).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/dc/FC_RB_Salzburg_gegen_LASK_%282025-08-24_Bundesliga_Vierte_Runde%29_35_%28cropped%29.jpg",
+      "width": 661,
+      "height": 1020,
+      "author": "Werner100359",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Lukas Jungwirth"
+  },
+  {
+    "id": "lukas-kellyheald",
+    "name": "Lukas Kelly-Heald",
+    "fullName": "Lukas Kelly-Heald",
+    "birth": "2005-03-18",
+    "position": "DF",
+    "nationality": "New Zealand",
+    "club": "Wellington Phoenix",
+    "photo": {
+      "file": "Lukas Kelly-Heald (2026) (cropped).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/d/d6/Lukas_Kelly-Heald_%282026%29_%28cropped%29.jpg",
+      "width": 876,
+      "height": 1313,
+      "author": "JaumeBG",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Lukas Kelly-Heald"
   },
   {
     "id": "lukas-klostermann",
@@ -54625,6 +56154,17 @@
     "club": "Whitehawk",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "luke-schofield",
+    "name": "Luke Schofield",
+    "fullName": "Luke Schofield",
+    "birth": "2008-07-24",
+    "position": "MF",
+    "nationality": "Gibraltar",
+    "club": "Huddersfield Town",
+    "photo": null,
+    "wikiTitle": "Luke Schofield"
   },
   {
     "id": "luke-shaw",
@@ -55246,6 +56786,17 @@
     "wikiTitle": "Mahdi Torabi"
   },
   {
+    "id": "mahe-khan",
+    "name": "Mahe Khan",
+    "fullName": "Mahe Khan",
+    "birth": "2007-11-02",
+    "position": "FW",
+    "nationality": "Bangladesh",
+    "club": "Moulton",
+    "photo": null,
+    "wikiTitle": "Mahe Khan"
+  },
+  {
     "id": "mahir-emreli",
     "name": "Mahir Emreli",
     "fullName": "Mahir Emreli",
@@ -55535,6 +57086,17 @@
     "wikiTitle": "Maksym Khlan"
   },
   {
+    "id": "malachi-drago",
+    "name": "Malachi Drago",
+    "fullName": "Malachi Drago",
+    "birth": null,
+    "position": "DF",
+    "nationality": "American Samoa",
+    "club": null,
+    "photo": null,
+    "wikiTitle": "Malachi Drago"
+  },
+  {
     "id": "malachi-gumbs",
     "name": "Malachi Gumbs",
     "fullName": "Malachi Gumbs",
@@ -55636,6 +57198,17 @@
     "wikiTitle": "Malick Yalcouyé"
   },
   {
+    "id": "malik-abdulrahman",
+    "name": "Malik Abdulrahman",
+    "fullName": "Malik Abdulrahman",
+    "birth": "2006-02-18",
+    "position": "GK",
+    "nationality": "Eritrea",
+    "club": "Avesta AIK",
+    "photo": null,
+    "wikiTitle": "Malik Abdulrahman"
+  },
+  {
     "id": "malik-abdurahman",
     "name": "Malik Abdurahman",
     "fullName": "Malik Abdurahman",
@@ -55662,7 +57235,7 @@
     "name": "Malik Tillman",
     "fullName": "Malik Tillman",
     "birth": "2002-05-28",
-    "position": "MF",
+    "position": "FW",
     "nationality": "United States",
     "club": "Bayer Leverkusen",
     "photo": {
@@ -56069,7 +57642,7 @@
     "name": "Manor Solomon",
     "fullName": "Manor Solomon",
     "birth": "1999-07-24",
-    "position": "MF",
+    "position": "FW",
     "nationality": "Israel",
     "club": "West Ham United",
     "photo": {
@@ -56801,6 +58374,17 @@
     "wikiTitle": "Marcos López"
   },
   {
+    "id": "marcos-ondo",
+    "name": "Marcos Ondo",
+    "fullName": "Marcos Ondo",
+    "birth": "2000-08-13",
+    "position": "GK",
+    "nationality": "Equatorial Guinea",
+    "club": "Atlético Tomelloso",
+    "photo": null,
+    "wikiTitle": "Marcos Ondo"
+  },
+  {
     "id": "marcus-bettinelli",
     "name": "Marcus Bettinelli",
     "fullName": "Marcus Bettinelli",
@@ -57033,6 +58617,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Marin Pongračić"
+  },
+  {
+    "id": "marin-soticek",
+    "name": "Marin Šotiček",
+    "fullName": "Marin Šotiček",
+    "birth": "2004-09-18",
+    "position": "FW",
+    "nationality": "Croatia",
+    "club": "Hajduk Split",
+    "photo": null,
+    "wikiTitle": "Marin Šotiček"
   },
   {
     "id": "marinos-tzionis",
@@ -57419,6 +59014,17 @@
     "wikiTitle": "Marko Arnautović"
   },
   {
+    "id": "marko-gjorgjievski",
+    "name": "Marko Gjorgjievski",
+    "fullName": "Marko Gjorgjievski",
+    "birth": "2000-04-18",
+    "position": "FW",
+    "nationality": "North Macedonia",
+    "club": "Shkëndija",
+    "photo": null,
+    "wikiTitle": "Marko Gjorgjievski"
+  },
+  {
     "id": "marko-jankovic",
     "name": "Marko Janković",
     "fullName": "Marko Janković",
@@ -57703,6 +59309,17 @@
     "wikiTitle": "Märten Kuusk"
   },
   {
+    "id": "martenchris-paalberg",
+    "name": "Marten-Chris Paalberg",
+    "fullName": "Marten-Chris Paalberg",
+    "birth": "2008-10-08",
+    "position": "FW",
+    "nationality": "Estonia",
+    "club": "Saint-Étienne",
+    "photo": null,
+    "wikiTitle": "Marten-Chris Paalberg"
+  },
+  {
     "id": "martial-godo",
     "name": "Martial Godo",
     "fullName": "Martial Godo",
@@ -57930,6 +59547,17 @@
     "club": "Nice",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "martin-subert",
+    "name": "Martin Šubert",
+    "fullName": "Martin Šubert",
+    "birth": "2002-08-13",
+    "position": "FW",
+    "nationality": "Czech Republic",
+    "club": "Mladá Boleslav",
+    "photo": null,
+    "wikiTitle": "Martin Šubert"
   },
   {
     "id": "martin-terrier",
@@ -58221,6 +59849,17 @@
     "wikiTitle": "Massimo Pessina"
   },
   {
+    "id": "massire-sylla",
+    "name": "Massiré Sylla",
+    "fullName": "Massiré Sylla",
+    "birth": "2005-01-07",
+    "position": "DF",
+    "nationality": "Senegal",
+    "club": "Union SG",
+    "photo": null,
+    "wikiTitle": "Massiré Sylla"
+  },
+  {
     "id": "massolin",
     "name": "Yanis Massolin",
     "fullName": "Yanis Massolin",
@@ -58249,6 +59888,17 @@
       "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
     },
     "wikiTitle": "Franco Mastantuono"
+  },
+  {
+    "id": "matas-vareika",
+    "name": "Matas Vareika",
+    "fullName": "Matas Vareika",
+    "birth": "2000-01-27",
+    "position": "MF",
+    "nationality": "Lithuania",
+    "club": "FK Žalgiris",
+    "photo": null,
+    "wikiTitle": "Matas Vareika"
   },
   {
     "id": "matei-ilie",
@@ -58793,7 +60443,7 @@
     "id": "mathieu-nguefack",
     "name": "Mathieu Nguefack",
     "fullName": "Mathieu Nguefack",
-    "birth": null,
+    "birth": "2008-05-14",
     "position": "MF",
     "nationality": "Germany",
     "club": "Borussia Mönchengladbach",
@@ -59060,7 +60710,7 @@
     "nationality": "Germany",
     "club": "Werder Bremen",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Mats Heitmann"
   },
   {
     "id": "mats-rots",
@@ -59129,6 +60779,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Matt Freese"
+  },
+  {
+    "id": "matt-garbett",
+    "name": "Matt Garbett",
+    "fullName": "Matt Garbett",
+    "birth": "2002-04-13",
+    "position": "MF",
+    "nationality": "New Zealand",
+    "club": "Peterborough United",
+    "photo": null,
+    "wikiTitle": "Matt Garbett"
   },
   {
     "id": "matt-oriley",
@@ -59294,7 +60955,7 @@
     "fullName": "Matteo Palma",
     "birth": "2008-03-13",
     "position": "DF",
-    "nationality": "Germany",
+    "nationality": "Italy",
     "club": "Udinese",
     "photo": null,
     "wikiTitle": "Matteo Palma"
@@ -59371,6 +61032,36 @@
     "wikiTitle": "Matthew Roth"
   },
   {
+    "id": "matthew-sheridan",
+    "name": "Matthew Sheridan",
+    "fullName": "Matthew Sheridan",
+    "birth": "2004-05-09",
+    "position": "DF",
+    "nationality": "New Zealand",
+    "club": "Wellington Phoenix",
+    "photo": {
+      "file": "Matthew Sheridan (2026).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Matthew_Sheridan_%282026%29.jpg/960px-Matthew_Sheridan_%282026%29.jpg",
+      "width": 1226,
+      "height": 1708,
+      "author": "JaumeBG",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Matthew Sheridan"
+  },
+  {
+    "id": "matthew-stefanon",
+    "name": "Matthew Stefanon",
+    "fullName": "Matthew Stefanon",
+    "birth": null,
+    "position": "DF",
+    "nationality": "American Samoa",
+    "club": null,
+    "photo": null,
+    "wikiTitle": "Matthew Stefanon"
+  },
+  {
     "id": "matthias-ginter",
     "name": "Matthias Ginter",
     "fullName": "Matthias Ginter",
@@ -59398,7 +61089,7 @@
     "nationality": "Germany",
     "club": "FC Köln",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Matthias Köbbing"
   },
   {
     "id": "matthieu-epolo",
@@ -60182,7 +61873,7 @@
     "nationality": "Germany",
     "club": "Mainz 05",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Maximilian Kinzig"
   },
   {
     "id": "maximilian-mittelstadt",
@@ -60563,6 +62254,17 @@
     "wikiTitle": "Mohamed Sohel Rana (footballer, born 1996)"
   },
   {
+    "id": "md-taj-uddin",
+    "name": "Md Taj Uddin",
+    "fullName": "Md Taj Uddin",
+    "birth": "2002-04-17",
+    "position": "DF",
+    "nationality": "Bangladesh",
+    "club": "Dhaka Abahani",
+    "photo": null,
+    "wikiTitle": "Md Taj Uddin"
+  },
+  {
     "id": "medina",
     "name": "Facundo Medina",
     "fullName": "Facundo Medina",
@@ -60661,15 +62363,34 @@
     "nationality": "Bangladesh",
     "club": "Bashundhara Kings",
     "photo": {
-      "file": "Mehedi Hasan Srabon.jpg",
-      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a6/Mehedi_Hasan_Srabon.jpg/960px-Mehedi_Hasan_Srabon.jpg",
-      "width": 1200,
-      "height": 1600,
-      "author": "Havetobd",
-      "licence": "CC0",
-      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+      "file": "Mehedi Hasan Srabon (cropped).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/b/b9/Mehedi_Hasan_Srabon_%28cropped%29.jpg",
+      "width": 350,
+      "height": 365,
+      "author": "Press Information Department",
+      "licence": "Public domain",
+      "licenceUrl": null
     },
     "wikiTitle": "Mehedi Hasan Srabon"
+  },
+  {
+    "id": "meinhard-olsen",
+    "name": "Meinhard Olsen",
+    "fullName": "Meinhard Olsen",
+    "birth": "1997-04-10",
+    "position": "MF",
+    "nationality": "Faroe Islands",
+    "club": "NSÍ",
+    "photo": {
+      "file": "Meinhard Olsen 2014.JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1f/Meinhard_Olsen_2014.JPG",
+      "width": 785,
+      "height": 1168,
+      "author": "EileenSanda",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Meinhard Olsen"
   },
   {
     "id": "mekan-saparow",
@@ -60691,7 +62412,7 @@
     "nationality": "Jamaica",
     "club": "Union Berlin",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Mekhi Gray"
   },
   {
     "id": "mekhrubon-karimov",
@@ -61334,6 +63055,17 @@
     "wikiTitle": "Michael Keane (footballer, born 1993)"
   },
   {
+    "id": "michael-laulae",
+    "name": "Michael Laulae",
+    "fullName": "Michael Laulae",
+    "birth": null,
+    "position": "GK",
+    "nationality": "Solomon Islands",
+    "club": "ABM Galaxy",
+    "photo": null,
+    "wikiTitle": "Michael Laulae"
+  },
+  {
     "id": "michael-obafemi",
     "name": "Michael Obafemi",
     "fullName": "Michael Obafemi",
@@ -61345,6 +63077,17 @@
     "wikiTitle": "Michael Obafemi"
   },
   {
+    "id": "michael-paselio",
+    "name": "Michael Paselio",
+    "fullName": "Michael Paselio",
+    "birth": "2001-10-27",
+    "position": "MF",
+    "nationality": "American Samoa",
+    "club": "Temecula",
+    "photo": null,
+    "wikiTitle": "Michael Paselio"
+  },
+  {
     "id": "michael-schjonninglarsen",
     "name": "Michael Schjønning-Larsen",
     "fullName": "Michael Schjønning-Larsen",
@@ -61354,6 +63097,17 @@
     "club": "Kilmarnock",
     "photo": null,
     "wikiTitle": "Michael Schjønning-Larsen"
+  },
+  {
+    "id": "michael-settle",
+    "name": "Michael Settle",
+    "fullName": "Michael Settle",
+    "birth": "2001-12-03",
+    "position": "MF",
+    "nationality": "American Samoa",
+    "club": "Pago Youth FC",
+    "photo": null,
+    "wikiTitle": "Michael Settle"
   },
   {
     "id": "michael-svoboda",
@@ -61631,6 +63385,17 @@
     "wikiTitle": "Miguel Araujo"
   },
   {
+    "id": "miguel-eyama",
+    "name": "Miguel Eyama",
+    "fullName": "Miguel Eyama",
+    "birth": "1998-07-08",
+    "position": "GK",
+    "nationality": "Equatorial Guinea",
+    "club": "Deportivo Mongomo",
+    "photo": null,
+    "wikiTitle": "Miguel Eyama"
+  },
+  {
     "id": "miguel-freckleton",
     "name": "Miguel Freckleton",
     "fullName": "Miguel Freckleton",
@@ -61779,6 +63544,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Mihajlo Cvetković"
+  },
+  {
+    "id": "mihhail-kolobov",
+    "name": "Mihhail Kolobov",
+    "fullName": "Mihhail Kolobov",
+    "birth": "2005-03-02",
+    "position": "DF",
+    "nationality": "Estonia",
+    "club": "Flora",
+    "photo": null,
+    "wikiTitle": "Mihhail Kolobov"
   },
   {
     "id": "mihkel-ainsalu",
@@ -62128,6 +63904,17 @@
       "licenceUrl": null
     },
     "wikiTitle": "Milán Vitális"
+  },
+  {
+    "id": "milan-vukotic",
+    "name": "Milan Vukotić",
+    "fullName": "Milan Vukotić",
+    "birth": "2002-10-05",
+    "position": "MF",
+    "nationality": "Montenegro",
+    "club": "Partizan",
+    "photo": null,
+    "wikiTitle": "Milan Vukotić"
   },
   {
     "id": "mile-svilar",
@@ -63207,6 +64994,25 @@
     "wikiTitle": null
   },
   {
+    "id": "mohammad-ibrahim",
+    "name": "Mohammad Ibrahim",
+    "fullName": "Mohammad Ibrahim",
+    "birth": "1997-08-07",
+    "position": "FW",
+    "nationality": "Bangladesh",
+    "club": "Fortis",
+    "photo": {
+      "file": "Mohammad Ibrahim in 2021.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/83/Mohammad_Ibrahim_in_2021.jpg/960px-Mohammad_Ibrahim_in_2021.jpg",
+      "width": 1420,
+      "height": 1508,
+      "author": "Diptadg17",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Mohammad Ibrahim (footballer, born 1997)"
+  },
+  {
     "id": "mohammad-mehdi-mohebi",
     "name": "Mohammad Mehdi Mohebi",
     "fullName": "Mohammad Mehdi Mohebi",
@@ -63396,6 +65202,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
     },
     "wikiTitle": "Mohammed Fuseini"
+  },
+  {
+    "id": "mohammed-juma",
+    "name": "Mohammed Juma",
+    "fullName": "Mohammed Juma",
+    "birth": "2006-05-30",
+    "position": "FW",
+    "nationality": "United Arab Emirates",
+    "club": "Shabab Al Ahli",
+    "photo": null,
+    "wikiTitle": "Mohammed Juma"
   },
   {
     "id": "mohammed-kudus",
@@ -65261,6 +67078,25 @@
     "wikiTitle": "Nathan Saliba"
   },
   {
+    "id": "naatan-skytta",
+    "name": "Naatan Skyttä",
+    "fullName": "Naatan Skyttä",
+    "birth": "2002-05-07",
+    "position": "FW",
+    "nationality": "Finland",
+    "club": "1. FC Kaiserslautern",
+    "photo": {
+      "file": "UEFA Euro 2023 Qualifiers Austria vs. Finland (2022-06-03) 31 (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/a/a9/UEFA_Euro_2023_Qualifiers_Austria_vs._Finland_%282022-06-03%29_31_%28cropped%29.jpg/960px-UEFA_Euro_2023_Qualifiers_Austria_vs._Finland_%282022-06-03%29_31_%28cropped%29.jpg",
+      "width": 1180,
+      "height": 1485,
+      "author": "Werner100359",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Naatan Skyttä"
+  },
+  {
     "id": "nabil-begg",
     "name": "Nabil Begg",
     "fullName": "Nabil Begg",
@@ -65584,8 +67420,27 @@
     "position": "DF",
     "nationality": "Eritrea",
     "club": "Würzburger Kickers",
-    "photo": null,
+    "photo": {
+      "file": "2023-08-12 TSV Schott Mainz gegen Borussia Dortmund (DFB-Pokal 2023-24) by Sandro Halank–108.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/df/2023-08-12_TSV_Schott_Mainz_gegen_Borussia_Dortmund_%28DFB-Pokal_2023-24%29_by_Sandro_Halank%E2%80%93108.jpg/960px-2023-08-12_TSV_Schott_Mainz_gegen_Borussia_Dortmund_%28DFB-Pokal_2023-24%29_by_Sandro_Halank%E2%80%93108.jpg",
+      "width": 1287,
+      "height": 1890,
+      "author": "Sandro Halank, Wikimedia Commons, CC BY-SA 4.0",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
     "wikiTitle": "Namrud Embaye"
+  },
+  {
+    "id": "nando-pijnaker",
+    "name": "Nando Pijnaker",
+    "fullName": "Nando Pijnaker",
+    "birth": "1999-02-25",
+    "position": "DF",
+    "nationality": "New Zealand",
+    "club": "Auckland FC",
+    "photo": null,
+    "wikiTitle": "Nando Pijnaker"
   },
   {
     "id": "naouirou-ahamada",
@@ -65907,6 +67762,17 @@
     "wikiTitle": "Nathan Gassama"
   },
   {
+    "id": "nathan-mao",
+    "name": "Nathan Mao",
+    "fullName": "Nathan Mao",
+    "birth": "2008-03-26",
+    "position": "FW",
+    "nationality": "Singapore",
+    "club": "Young Lions",
+    "photo": null,
+    "wikiTitle": "Nathan Mao"
+  },
+  {
     "id": "nathan-mbala",
     "name": "Nathan Mbala",
     "fullName": "Nathan Mbala",
@@ -66065,6 +67931,25 @@
     "wikiTitle": "Nathan Tjoe-A-On"
   },
   {
+    "id": "nathan-walker",
+    "name": "Nathan Walker",
+    "fullName": "Nathan Walker",
+    "birth": "2006-01-30",
+    "position": "FW",
+    "nationality": "New Zealand",
+    "club": "Wellington Phoenix",
+    "photo": {
+      "file": "Nathan Walker (October 2026).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Nathan_Walker_%28October_2026%29.jpg",
+      "width": 712,
+      "height": 1072,
+      "author": "JaumeBG",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Nathan Walker (footballer)"
+  },
+  {
     "id": "nathanael-mbuku",
     "name": "Nathanaël Mbuku",
     "fullName": "Nathanaël Mbuku",
@@ -66144,7 +68029,7 @@
     "nationality": "Germany",
     "club": "TSG Hoffenheim",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Natnael Abraha"
   },
   {
     "id": "natoyoum-osee",
@@ -66508,6 +68393,17 @@
     "club": null,
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "nelson-blanco",
+    "name": "Nelson Blanco",
+    "fullName": "Nelson Blanco",
+    "birth": "1999-08-17",
+    "position": "DF",
+    "nationality": "El Salvador",
+    "club": "San Antonio",
+    "photo": null,
+    "wikiTitle": "Nelson Blanco"
   },
   {
     "id": "nelson-chadya",
@@ -67115,6 +69011,17 @@
     "wikiTitle": "Nicholas Pozo"
   },
   {
+    "id": "nicholas-tuiasosopo",
+    "name": "Nicholas Tuiasosopo",
+    "fullName": "Nicholas Tuiasosopo",
+    "birth": null,
+    "position": "GK",
+    "nationality": "American Samoa",
+    "club": null,
+    "photo": null,
+    "wikiTitle": "Nicholas Tuiasosopo"
+  },
+  {
     "id": "nick-pope",
     "name": "Nick Pope",
     "fullName": "Nick Pope",
@@ -67206,6 +69113,17 @@
     "club": "Kilmarnock",
     "photo": null,
     "wikiTitle": "Nicky Cleșcenco"
+  },
+  {
+    "id": "nicky-salapu",
+    "name": "Nicky Salapu",
+    "fullName": "Nicky Salapu",
+    "birth": "1980-09-13",
+    "position": "GK",
+    "nationality": "American Samoa",
+    "club": "PanSa East F.C.",
+    "photo": null,
+    "wikiTitle": "Nicky Salapu"
   },
   {
     "id": "nicky-souren",
@@ -67788,6 +69706,17 @@
     "wikiTitle": "Nikita Contini"
   },
   {
+    "id": "nikita-mihhailov",
+    "name": "Nikita Mihhailov",
+    "fullName": "Nikita Mihhailov",
+    "birth": "2002-06-20",
+    "position": "DF",
+    "nationality": "Estonia",
+    "club": "Zemplín Michalovce",
+    "photo": null,
+    "wikiTitle": "Nikita Mihhailov"
+  },
+  {
     "id": "niklas-beste",
     "name": "Niklas Beste",
     "fullName": "Niklas Beste",
@@ -67854,6 +69783,36 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Niklas Stark"
+  },
+  {
+    "id": "niko-galesic",
+    "name": "Niko Galešić",
+    "fullName": "Niko Galešić",
+    "birth": "2001-03-26",
+    "position": "DF",
+    "nationality": "Croatia",
+    "club": "Dinamo Zagreb",
+    "photo": {
+      "file": "Niko Galešić.png",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/c/c7/Niko_Gale%C5%A1i%C4%87.png",
+      "width": 310,
+      "height": 424,
+      "author": "PIXSELL",
+      "licence": "CC BY 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/3.0"
+    },
+    "wikiTitle": "Niko Galešić"
+  },
+  {
+    "id": "niko-ilicevic",
+    "name": "Niko Iličević",
+    "fullName": "Niko Iličević",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Germany",
+    "club": "Eintracht Frankfurt",
+    "photo": null,
+    "wikiTitle": "Niko Iličević"
   },
   {
     "id": "niko-kovac",
@@ -67960,6 +69919,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Nikola Moro"
+  },
+  {
+    "id": "nikola-serafimov",
+    "name": "Nikola Serafimov",
+    "fullName": "Nikola Serafimov",
+    "birth": "1999-08-11",
+    "position": "DF",
+    "nationality": "North Macedonia",
+    "club": "Levski",
+    "photo": null,
+    "wikiTitle": "Nikola Serafimov"
   },
   {
     "id": "nikola-simic",
@@ -68500,6 +70470,17 @@
     "club": "Torpedo Kutaisi",
     "photo": null,
     "wikiTitle": "Nodar Lominadze"
+  },
+  {
+    "id": "nodir-abdurazzokov",
+    "name": "Nodir Abdurazzokov",
+    "fullName": "Nodir Abdurazzokov",
+    "birth": "2004-05-27",
+    "position": "MF",
+    "nationality": "Uzbekistan",
+    "club": "AGMK",
+    "photo": null,
+    "wikiTitle": "Nodir Abdurazzokov"
   },
   {
     "id": "noe-mael-tagne",
@@ -69606,6 +71587,25 @@
     "wikiTitle": "Michael Olise"
   },
   {
+    "id": "oliver-antman",
+    "name": "Oliver Antman",
+    "fullName": "Oliver Antman",
+    "birth": "2001-08-15",
+    "position": "FW",
+    "nationality": "Finland",
+    "club": "Anderlecht",
+    "photo": {
+      "file": "Oliver Antman (2022-06-03).jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/1/1e/Oliver_Antman_%282022-06-03%29.jpg",
+      "width": 650,
+      "height": 992,
+      "author": "Werner100359",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Oliver Antman"
+  },
+  {
     "id": "oliver-baumann",
     "name": "Oliver Baumann",
     "fullName": "Oliver Baumann",
@@ -69680,6 +71680,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Oliver Gerbig"
+  },
+  {
+    "id": "oliver-hintsa",
+    "name": "Oliver Hintsa",
+    "fullName": "Oliver Hintsa",
+    "birth": "2001-01-01",
+    "position": "FW",
+    "nationality": "Eritrea",
+    "club": "FC Dinamo București",
+    "photo": null,
+    "wikiTitle": "Oliver Hintsa"
   },
   {
     "id": "oliver-kelaart",
@@ -72156,6 +74167,17 @@
     "wikiTitle": "Patrick Kelly (footballer, born 2004)"
   },
   {
+    "id": "patrick-macedo",
+    "name": "Patrick Macedo",
+    "fullName": "Patrick Macedo",
+    "birth": "1995-09-30",
+    "position": "FW",
+    "nationality": "Luxembourg",
+    "club": "Résidence Walferdange",
+    "photo": null,
+    "wikiTitle": "Patrick Macedo"
+  },
+  {
     "id": "patrick-mainka",
     "name": "Patrick Mainka",
     "fullName": "Patrick Mainka",
@@ -72352,7 +74374,7 @@
     "nationality": "Germany",
     "club": "Werder Bremen",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Paul Erevbenagie"
   },
   {
     "id": "paul-hennrich",
@@ -72549,6 +74571,25 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Paul Wanner"
+  },
+  {
+    "id": "paulius-golubickas",
+    "name": "Paulius Golubickas",
+    "fullName": "Paulius Golubickas",
+    "birth": "1999-08-19",
+    "position": "MF",
+    "nationality": "Lithuania",
+    "club": "FK Žalgiris",
+    "photo": {
+      "file": "Paulius Golubickas 2019.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/17/Paulius_Golubickas_2019.jpg/960px-Paulius_Golubickas_2019.jpg",
+      "width": 1342,
+      "height": 2761,
+      "author": "Respublik",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Paulius Golubickas"
   },
   {
     "id": "paulo-diaz",
@@ -73210,6 +75251,17 @@
     "wikiTitle": "Peter Kováčik"
   },
   {
+    "id": "peter-lauvao",
+    "name": "Peter Lauvao",
+    "fullName": "Peter Lauvao",
+    "birth": "2003-12-11",
+    "position": "MF",
+    "nationality": "American Samoa",
+    "club": "Vaiala Tonga SC",
+    "photo": null,
+    "wikiTitle": "Peter Lauvao"
+  },
+  {
     "id": "peter-muduhwa",
     "name": "Peter Muduhwa",
     "fullName": "Peter Muduhwa",
@@ -73298,6 +75350,17 @@
     "club": "Petrocub Hîncești",
     "photo": null,
     "wikiTitle": "Petru Popescu (footballer)"
+  },
+  {
+    "id": "petu-pouli",
+    "name": "Petu Pouli",
+    "fullName": "Petu Pouli",
+    "birth": "2005-12-18",
+    "position": "FW",
+    "nationality": "American Samoa",
+    "club": "Vaiala Tonga SC",
+    "photo": null,
+    "wikiTitle": "Petu Pouli"
   },
   {
     "id": "petur-knudsen",
@@ -73398,7 +75461,7 @@
     "nationality": "Germany",
     "club": "VfL Wolfsburg",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Pharell Hensel"
   },
   {
     "id": "phat-sokha",
@@ -73440,6 +75503,17 @@
     "club": "Manzini Sea Birds",
     "photo": null,
     "wikiTitle": "Philani Mkhontfo"
+  },
+  {
+    "id": "philip-mango",
+    "name": "Philip Mango",
+    "fullName": "Philip Mango",
+    "birth": "1995-08-28",
+    "position": "GK",
+    "nationality": "Solomon Islands",
+    "club": "Kossa",
+    "photo": null,
+    "wikiTitle": "Philip Mango"
   },
   {
     "id": "philip-otele",
@@ -74238,6 +76312,25 @@
     "wikiTitle": "Pyae Sone Aung"
   },
   {
+    "id": "qazim-laci",
+    "name": "Qazim Laçi",
+    "fullName": "Qazim Laçi",
+    "birth": "1996-01-19",
+    "position": "MF",
+    "nationality": "Albania",
+    "club": "Çaykur Rizespor",
+    "photo": {
+      "file": "RC Lens - AC Ajaccio (22-12-2018) 35.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9d/RC_Lens_-_AC_Ajaccio_%2822-12-2018%29_35.jpg/960px-RC_Lens_-_AC_Ajaccio_%2822-12-2018%29_35.jpg",
+      "width": 1961,
+      "height": 2614,
+      "author": "Supporterhéninois",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "wikiTitle": "Qazim Laçi"
+  },
+  {
     "id": "quagliata",
     "name": "Giacomo Quagliata",
     "fullName": "Giacomo Quagliata",
@@ -74255,6 +76348,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Giacomo Quagliata"
+  },
+  {
+    "id": "quazem-shah",
+    "name": "Quazem Shah",
+    "fullName": "Quazem Shah",
+    "birth": "1998-10-25",
+    "position": "MF",
+    "nationality": "Bangladesh",
+    "club": "Bashundhara Kings",
+    "photo": null,
+    "wikiTitle": "Syed Shah Quazem Kirmane"
   },
   {
     "id": "quelahni-nickie",
@@ -75428,6 +77532,17 @@
     "wikiTitle": "Raphaël Le Guen"
   },
   {
+    "id": "raphael-leai",
+    "name": "Raphael Lea'i",
+    "fullName": "Raphael Lea'i",
+    "birth": "2003-09-09",
+    "position": "FW",
+    "nationality": "Solomon Islands",
+    "club": "Central Coast",
+    "photo": null,
+    "wikiTitle": "Raphael Lea'i"
+  },
+  {
     "id": "raphael-merkies",
     "name": "Raphaël Merkies",
     "fullName": "Raphaël Merkies",
@@ -75603,6 +77718,17 @@
     "club": "Rayo Vallecano",
     "photo": null,
     "wikiTitle": "Andrei Rațiu"
+  },
+  {
+    "id": "raul-florucz",
+    "name": "Raul Florucz",
+    "fullName": "Raul Florucz",
+    "birth": "2001-06-10",
+    "position": "FW",
+    "nationality": "Austria",
+    "club": "Union Saint-Gilloise",
+    "photo": null,
+    "wikiTitle": "Raul Florucz"
   },
   {
     "id": "raul-garcia",
@@ -76111,6 +78237,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/2.0"
     },
     "wikiTitle": "Álex Remiro"
+  },
+  {
+    "id": "remiyan-muthuccumaru",
+    "name": "Remiyan Muthuccumaru",
+    "fullName": "Remiyan Muthuccumaru",
+    "birth": "2007-04-19",
+    "position": "FW",
+    "nationality": "Sri Lanka",
+    "club": "FC Emmen",
+    "photo": null,
+    "wikiTitle": "Remiyan Muthuccumaru"
   },
   {
     "id": "remo-freuler",
@@ -77116,6 +79253,25 @@
     "wikiTitle": "Robert Glatzel"
   },
   {
+    "id": "robert-ivanov",
+    "name": "Robert Ivanov",
+    "fullName": "Robert Ivanov",
+    "birth": "1994-09-19",
+    "position": "DF",
+    "nationality": "Finland",
+    "club": "Inter Turku",
+    "photo": {
+      "file": "Robert Ivanov.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3b/Robert_Ivanov.jpg/960px-Robert_Ivanov.jpg",
+      "width": 1000,
+      "height": 1000,
+      "author": "Peltimikko",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Robert Ivanov"
+  },
+  {
     "id": "robert-morales",
     "name": "Robert Morales",
     "fullName": "Robert Morales",
@@ -77313,7 +79469,7 @@
     "name": "Robin Hack",
     "fullName": "Robin Hack",
     "birth": "1998-08-27",
-    "position": "MF",
+    "position": "FW",
     "nationality": "Germany",
     "club": "Borussia Mönchengladbach",
     "photo": null,
@@ -77419,6 +79575,25 @@
     "club": "RB Leipzig",
     "photo": null,
     "wikiTitle": "Rocco Reitz"
+  },
+  {
+    "id": "rocco-robert-shein",
+    "name": "Rocco Robert Shein",
+    "fullName": "Rocco Robert Shein",
+    "birth": "2003-07-14",
+    "position": "MF",
+    "nationality": "Estonia",
+    "club": "Portsmouth",
+    "photo": {
+      "file": "Rocco Robert Shein (06-09-2022).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/4/4f/Rocco_Robert_Shein_%2806-09-2022%29.jpg/960px-Rocco_Robert_Shein_%2806-09-2022%29.jpg",
+      "width": 1382,
+      "height": 2086,
+      "author": "Niels98",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Rocco Robert Shein"
   },
   {
     "id": "rocco-vata",
@@ -78247,6 +80422,17 @@
     "wikiTitle": "Rony Jansson"
   },
   {
+    "id": "rooney-riugaemai",
+    "name": "Rooney Riugaemai",
+    "fullName": "Rooney Riugaemai",
+    "birth": null,
+    "position": "FW",
+    "nationality": "Solomon Islands",
+    "club": "Green Shield",
+    "photo": null,
+    "wikiTitle": "Rooney Riugaemai"
+  },
+  {
     "id": "rosen-bozhinov",
     "name": "Rosen Bozhinov",
     "fullName": "Rosen Bozhinov",
@@ -78334,7 +80520,7 @@
     "nationality": "Switzerland",
     "club": "SC Freiburg",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Rouven Tarnutzer"
   },
   {
     "id": "rouzbeh-cheshmi",
@@ -78365,6 +80551,17 @@
     "club": "Zwaluwen Vlaardingen",
     "photo": null,
     "wikiTitle": "Rovien Ostiana"
+  },
+  {
+    "id": "rovu-boyers",
+    "name": "Rovu Boyers",
+    "fullName": "Rovu Boyers",
+    "birth": "2003-04-19",
+    "position": "MF",
+    "nationality": "Solomon Islands",
+    "club": "Christchurch United",
+    "photo": null,
+    "wikiTitle": "Rovu Boyers"
   },
   {
     "id": "roy-krishna",
@@ -78901,6 +81098,25 @@
     "wikiTitle": "Ruslanbek Jiyanov"
   },
   {
+    "id": "rustam-ashurmatov",
+    "name": "Rustam Ashurmatov",
+    "fullName": "Rustam Ashurmatov",
+    "birth": "1996-07-07",
+    "position": "DF",
+    "nationality": "Uzbekistan",
+    "club": "Esteghlal",
+    "photo": {
+      "file": "رستم آشورماتف سال 2025 استقلال.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/%D8%B1%D8%B3%D8%AA%D9%85_%D8%A2%D8%B4%D9%88%D8%B1%D9%85%D8%A7%D8%AA%D9%81_%D8%B3%D8%A7%D9%84_2025_%D8%A7%D8%B3%D8%AA%D9%82%D9%84%D8%A7%D9%84.jpg",
+      "width": 853,
+      "height": 1280,
+      "author": null,
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "wikiTitle": "Rustam Ashurmatov"
+  },
+  {
     "id": "rustam-soirov",
     "name": "Rustam Soirov",
     "fullName": "Rustam Soirov",
@@ -79090,6 +81306,17 @@
     "club": "Manchester City",
     "photo": null,
     "wikiTitle": "Ryan McAidoo"
+  },
+  {
+    "id": "ryan-naderi",
+    "name": "Ryan Naderi",
+    "fullName": "Ryan Naderi",
+    "birth": "2003-07-10",
+    "position": "FW",
+    "nationality": "Czech Republic",
+    "club": "Rangers",
+    "photo": null,
+    "wikiTitle": "Ryan Naderi"
   },
   {
     "id": "ryan-rodin",
@@ -79655,6 +81882,17 @@
     "club": "Al-Talaba",
     "photo": null,
     "wikiTitle": "Saif Rasheed"
+  },
+  {
+    "id": "saifullah-akbar",
+    "name": "Saifullah Akbar",
+    "fullName": "Saifullah Akbar",
+    "birth": "1999-01-31",
+    "position": "MF",
+    "nationality": "Singapore",
+    "club": "Hougang United",
+    "photo": null,
+    "wikiTitle": "Saifullah Akbar"
   },
   {
     "id": "sainbuyan-nergui",
@@ -80863,6 +83101,17 @@
     "wikiTitle": "Santeri Väänänen"
   },
   {
+    "id": "santi-boriko",
+    "name": "Santi Borikó",
+    "fullName": "Santi Borikó",
+    "birth": "2003-05-19",
+    "position": "DF",
+    "nationality": "Equatorial Guinea",
+    "club": "Teruel",
+    "photo": null,
+    "wikiTitle": "Santi Borikó"
+  },
+  {
     "id": "santiago",
     "name": "Yago Santiago",
     "fullName": "Yago de Santiago Alonso",
@@ -81280,6 +83529,25 @@
     "wikiTitle": "Sascha Britschgi"
   },
   {
+    "id": "sascha-horvath",
+    "name": "Sascha Horvath",
+    "fullName": "Sascha Horvath",
+    "birth": "1996-08-22",
+    "position": "MF",
+    "nationality": "Austria",
+    "club": "LASK",
+    "photo": {
+      "file": "Austria national under-21 football team - Teamcamp November 2015 (114).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/38/Austria_national_under-21_football_team_-_Teamcamp_November_2015_%28114%29.jpg/960px-Austria_national_under-21_football_team_-_Teamcamp_November_2015_%28114%29.jpg",
+      "width": 1600,
+      "height": 2400,
+      "author": "Steindy ( talk ) 14:07, 12 November 2015 (UTC)",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "wikiTitle": "Sascha Horvath"
+  },
+  {
     "id": "sato",
     "name": "Ryūnosuke Satō",
     "fullName": "Ryūnosuke Satō",
@@ -81605,6 +83873,25 @@
     "club": "Boeung Ket",
     "photo": null,
     "wikiTitle": "Scott Woods (footballer)"
+  },
+  {
+    "id": "sead-haksabanovic",
+    "name": "Sead Hakšabanović",
+    "fullName": "Sead Hakšabanović",
+    "birth": "1999-05-04",
+    "position": "MF",
+    "nationality": "Montenegro",
+    "club": "Malmö FF",
+    "photo": {
+      "file": "Sead Hakšabanović 2021.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/3/33/Sead_Hak%C5%A1abanovi%C4%87_2021.jpg",
+      "width": 661,
+      "height": 927,
+      "author": "Антон Зайцев",
+      "licence": "CC BY-SA 3.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
+    },
+    "wikiTitle": "Sead Hakšabanović"
   },
   {
     "id": "sead-kolasinac",
@@ -82408,6 +84695,17 @@
     "wikiTitle": "Sergiu Perciun"
   },
   {
+    "id": "serhat-oztasdelen",
+    "name": "Serhat Öztaşdelen",
+    "fullName": "Serhat Öztaşdelen",
+    "birth": "2004-12-09",
+    "position": "GK",
+    "nationality": "Türkiye",
+    "club": "Kocaelispor",
+    "photo": null,
+    "wikiTitle": "Serhat Öztaşdelen"
+  },
+  {
     "id": "serhiy-malyi",
     "name": "Serhiy Malyi",
     "fullName": "Serhiy Malyi",
@@ -82571,7 +84869,7 @@
     "nationality": "Germany",
     "club": "Hamburger SV",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Shafiq Nandja"
   },
   {
     "id": "shafrath-nawas",
@@ -83066,6 +85364,25 @@
     "wikiTitle": "Shiloh 't Zand"
   },
   {
+    "id": "shin-minha",
+    "name": "Shin Min-ha",
+    "fullName": "Shin Min-ha",
+    "birth": "2005-09-15",
+    "position": "DF",
+    "nationality": "South Korea",
+    "club": "Gangwon FC",
+    "photo": {
+      "file": "250617 FC 서울 vs 강원 (신민하).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/04/250617_FC_%EC%84%9C%EC%9A%B8_vs_%EA%B0%95%EC%9B%90_%28%EC%8B%A0%EB%AF%BC%ED%95%98%29.jpg/960px-250617_FC_%EC%84%9C%EC%9A%B8_vs_%EA%B0%95%EC%9B%90_%28%EC%8B%A0%EB%AF%BC%ED%95%98%29.jpg",
+      "width": 1600,
+      "height": 2000,
+      "author": "Explicit",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Shin Min-ha"
+  },
+  {
     "id": "shine-wanna-aung",
     "name": "Shine Wanna Aung",
     "fullName": "Shine Wanna Aung",
@@ -83075,6 +85392,17 @@
     "club": "Thitsar Arman",
     "photo": null,
     "wikiTitle": "Shine Wanna Aung"
+  },
+  {
+    "id": "shio-fukuda",
+    "name": "Shiō Fukuda",
+    "fullName": "Shiō Fukuda",
+    "birth": "2004-04-08",
+    "position": "FW",
+    "nationality": "Japan",
+    "club": "Karlsruher SC",
+    "photo": null,
+    "wikiTitle": "Shiō Fukuda"
   },
   {
     "id": "shiogai",
@@ -83171,6 +85499,17 @@
     "club": "Cheng Fung",
     "photo": null,
     "wikiTitle": "Si Hou In"
+  },
+  {
+    "id": "siem-eyobabraha",
+    "name": "Siem Eyob-Abraha",
+    "fullName": "Siem Eyob-Abraha",
+    "birth": "2008-03-01",
+    "position": "FW",
+    "nationality": "Eritrea",
+    "club": "Cracovia",
+    "photo": null,
+    "wikiTitle": "Siem Eyob-Abraha"
   },
   {
     "id": "sieng-chanthea",
@@ -83534,6 +85873,17 @@
     "club": "Pisa",
     "photo": null,
     "wikiTitle": null
+  },
+  {
+    "id": "simun-hrgovic",
+    "name": "Šimun Hrgović",
+    "fullName": "Šimun Hrgović",
+    "birth": "2004-03-20",
+    "position": "DF",
+    "nationality": "Croatia",
+    "club": "Hajduk Split",
+    "photo": null,
+    "wikiTitle": "Šimun Hrgović"
   },
   {
     "id": "sin-kakada",
@@ -83908,6 +86258,25 @@
     "wikiTitle": "Son Heung-min"
   },
   {
+    "id": "son-jeongbeom",
+    "name": "Son Jeong-beom",
+    "fullName": "Son Jeong-beom",
+    "birth": "2007-09-28",
+    "position": "MF",
+    "nationality": "South Korea",
+    "club": "FC Seoul",
+    "photo": {
+      "file": "260411 FC 서울 vs 전북 (손정범) 3.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/d9/260411_FC_%EC%84%9C%EC%9A%B8_vs_%EC%A0%84%EB%B6%81_%28%EC%86%90%EC%A0%95%EB%B2%94%29_3.jpg/960px-260411_FC_%EC%84%9C%EC%9A%B8_vs_%EC%A0%84%EB%B6%81_%28%EC%86%90%EC%A0%95%EB%B2%94%29_3.jpg",
+      "width": 1600,
+      "height": 2000,
+      "author": "Explicit",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Son Jeong-beom"
+  },
+  {
     "id": "sondre-langas",
     "name": "Sondre Langås",
     "fullName": "Sondre Langås",
@@ -84168,6 +86537,25 @@
     "club": "Universidade de Macau",
     "photo": null,
     "wikiTitle": "Sou Hin Nang"
+  },
+  {
+    "id": "souffian-el-karouani",
+    "name": "Souffian El Karouani",
+    "fullName": "Souffian El Karouani",
+    "birth": "2000-10-19",
+    "position": "DF",
+    "nationality": "Morocco",
+    "club": "Benfica",
+    "photo": {
+      "file": "Souffian El Karouani against Paraguay (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b3/Souffian_El_Karouani_against_Paraguay_%28cropped%29.jpg/960px-Souffian_El_Karouani_against_Paraguay_%28cropped%29.jpg",
+      "width": 2680,
+      "height": 3475,
+      "author": "Abdelali Bentarki",
+      "licence": "CC BY 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
+    },
+    "wikiTitle": "Souffian El Karouani"
   },
   {
     "id": "soufiane-elfaouzi",
@@ -84563,6 +86951,17 @@
     "wikiTitle": "Stefan Bell"
   },
   {
+    "id": "stefan-bodisteanu",
+    "name": "Ștefan Bodișteanu",
+    "fullName": "Ștefan Bodișteanu",
+    "birth": "2003-02-01",
+    "position": "MF",
+    "nationality": "Moldova",
+    "club": "Botoșani",
+    "photo": null,
+    "wikiTitle": "Ștefan Bodișteanu"
+  },
+  {
     "id": "stefan-bukinac",
     "name": "Stefan Bukinac",
     "fullName": "Stefan Bukinac",
@@ -84580,6 +86979,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/3.0"
     },
     "wikiTitle": "Stefan Bukinac"
+  },
+  {
+    "id": "stefan-despotovski",
+    "name": "Stefan Despotovski",
+    "fullName": "Stefan Despotovski",
+    "birth": "2003-01-23",
+    "position": "DF",
+    "nationality": "North Macedonia",
+    "club": "Beograd",
+    "photo": null,
+    "wikiTitle": "Stefan Despotovski"
   },
   {
     "id": "stefan-drljaca",
@@ -84839,6 +87249,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Stephan El Shaarawy"
+  },
+  {
+    "id": "stephan-negru",
+    "name": "Stephan Negru",
+    "fullName": "Stephan Negru",
+    "birth": "2002-07-24",
+    "position": "DF",
+    "nationality": "Moldova",
+    "club": "Swindon Town",
+    "photo": null,
+    "wikiTitle": "Stephan Negru"
   },
   {
     "id": "stephan-zagadou",
@@ -85161,6 +87582,25 @@
     "club": "Johor Darul Ta'zim",
     "photo": null,
     "wikiTitle": "Stuart Wilkin"
+  },
+  {
+    "id": "styopa-mkrtchyan",
+    "name": "Styopa Mkrtchyan",
+    "fullName": "Styopa Mkrtchyan",
+    "birth": "2003-02-17",
+    "position": "DF",
+    "nationality": "Armenia",
+    "club": "1. FC Nürnberg",
+    "photo": {
+      "file": "Styopa Mkrtchyan YantsImages - Asatur Yesayants 625 (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/8/8c/Styopa_Mkrtchyan_YantsImages_-_Asatur_Yesayants_625_%28cropped%29.jpg/960px-Styopa_Mkrtchyan_YantsImages_-_Asatur_Yesayants_625_%28cropped%29.jpg",
+      "width": 1066,
+      "height": 1687,
+      "author": "YantsImages",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Styopa Mkrtchyan"
   },
   {
     "id": "styven-vasquez",
@@ -86335,6 +88775,25 @@
     "wikiTitle": "Tashreeq Matthews"
   },
   {
+    "id": "tatsuhiro-sakamoto",
+    "name": "Tatsuhiro Sakamoto",
+    "fullName": "Tatsuhiro Sakamoto",
+    "birth": "1996-10-22",
+    "position": "MF",
+    "nationality": "Japan",
+    "club": "Coventry City",
+    "photo": {
+      "file": "Tatshurio Sakamoto.png",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3d/Tatshurio_Sakamoto.png/960px-Tatshurio_Sakamoto.png",
+      "width": 968,
+      "height": 1147,
+      "author": "MilesaMFC",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "wikiTitle": "Tatsuhiro Sakamoto"
+  },
+  {
     "id": "taty-castellanos",
     "name": "Taty Castellanos",
     "fullName": "Taty Castellanos",
@@ -87328,6 +89787,25 @@
     "wikiTitle": "Thomas Robinet"
   },
   {
+    "id": "thomas-waddingham",
+    "name": "Thomas Waddingham",
+    "fullName": "Thomas Waddingham",
+    "birth": "2005-04-05",
+    "position": "FW",
+    "nationality": "Australia",
+    "club": "Portsmouth",
+    "photo": {
+      "file": "Thomas Waddingham.jpg",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/9/9d/Thomas_Waddingham.jpg",
+      "width": 587,
+      "height": 908,
+      "author": "JaumeBG",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Thomas Waddingham"
+  },
+  {
     "id": "thorgan-hazard",
     "name": "Thorgan Hazard",
     "fullName": "Thorgan Hazard",
@@ -87345,6 +89823,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Thorgan Hazard"
+  },
+  {
+    "id": "thorir-johann-helgason",
+    "name": "Þórir Jóhann Helgason",
+    "fullName": "Þórir Jóhann Helgason",
+    "birth": "2000-09-28",
+    "position": "MF",
+    "nationality": "Iceland",
+    "club": "Venezia",
+    "photo": null,
+    "wikiTitle": "Þórir Jóhann Helgason"
   },
   {
     "id": "thuram",
@@ -87544,6 +90033,17 @@
     "club": "FC Augsburg",
     "photo": null,
     "wikiTitle": "Tim Breithaupt"
+  },
+  {
+    "id": "tim-hall",
+    "name": "Tim Hall",
+    "fullName": "Tim Hall",
+    "birth": "1997-04-15",
+    "position": "DF",
+    "nationality": "Luxembourg",
+    "club": "UNA Strassen",
+    "photo": null,
+    "wikiTitle": "Tim Hall (footballer)"
   },
   {
     "id": "tim-kips",
@@ -88187,6 +90687,25 @@
     "wikiTitle": "Tom Edozie"
   },
   {
+    "id": "tom-glover",
+    "name": "Tom Glover",
+    "fullName": "Tom Glover",
+    "birth": "1997-12-24",
+    "position": "GK",
+    "nationality": "Australia",
+    "club": "RB Omiya Ardija",
+    "photo": {
+      "file": "Tom Glover 12042025 (1).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/31/Tom_Glover_12042025_%281%29.jpg/960px-Tom_Glover_12042025_%281%29.jpg",
+      "width": 1312,
+      "height": 1918,
+      "author": "Timmy96",
+      "licence": "CC0",
+      "licenceUrl": "https://creativecommons.org/publicdomain/zero/1.0/deed.en"
+    },
+    "wikiTitle": "Tom Glover (soccer)"
+  },
+  {
     "id": "tom-heaton",
     "name": "Tom Heaton",
     "fullName": "Tom Heaton",
@@ -88274,7 +90793,7 @@
     "nationality": "Germany",
     "club": "FC Augsburg",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Tom Wisbereit"
   },
   {
     "id": "tomas-araujo",
@@ -88471,6 +90990,25 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/2.0"
     },
     "wikiTitle": "Tomas Švedkauskas"
+  },
+  {
+    "id": "tomas-vlcek",
+    "name": "Tomáš Vlček",
+    "fullName": "Tomáš Vlček",
+    "birth": "2001-02-28",
+    "position": "DF",
+    "nationality": "Czech Republic",
+    "club": "Slavia Prague",
+    "photo": {
+      "file": "SK Slavia Praha 20261019 (15) (cropped).JPG",
+      "url": "https://upload.wikimedia.org/wikipedia/commons/8/84/SK_Slavia_Praha_20261019_%2815%29_%28cropped%29.JPG",
+      "width": 506,
+      "height": 678,
+      "author": "User:Zafer",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Tomáš Vlček"
   },
   {
     "id": "tomasz-kedziora",
@@ -88678,6 +91216,36 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Topi Keskinen"
+  },
+  {
+    "id": "topu-barman",
+    "name": "Topu Barman",
+    "fullName": "Topu Barman",
+    "birth": "1994-12-20",
+    "position": "DF",
+    "nationality": "Bangladesh",
+    "club": "Bashundhara Kings",
+    "photo": {
+      "file": "Topu Barman in 2021.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/9c/Topu_Barman_in_2021.jpg/960px-Topu_Barman_in_2021.jpg",
+      "width": 1552,
+      "height": 2070,
+      "author": "Diptadg17",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Topu Barman"
+  },
+  {
+    "id": "tor-lawrence-manao",
+    "name": "Tor Lawrence Mana'o",
+    "fullName": "Tor Lawrence Mana'o",
+    "birth": "1999-05-27",
+    "position": "FW",
+    "nationality": "American Samoa",
+    "club": null,
+    "photo": null,
+    "wikiTitle": "Tor Lawrence Mana'o"
   },
   {
     "id": "toral-bayramov",
@@ -88925,7 +91493,7 @@
     "nationality": "Germany",
     "club": "VfL Wolfsburg",
     "photo": null,
-    "wikiTitle": null
+    "wikiTitle": "Trevor Benedict"
   },
   {
     "id": "trey-ebanks",
@@ -89218,6 +91786,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Beñat Turrientes"
+  },
+  {
+    "id": "txus-vizcay",
+    "name": "Txus Vizcay",
+    "fullName": "Txus Vizcay",
+    "birth": "2005-08-05",
+    "position": "FW",
+    "nationality": "Spain",
+    "club": "Athletic Bilbao",
+    "photo": null,
+    "wikiTitle": "Txus Vizcay"
   },
   {
     "id": "tyias-browning",
@@ -89962,6 +92541,17 @@
     "wikiTitle": "Vadim Rață"
   },
   {
+    "id": "vaha-tua",
+    "name": "Vaha Tua",
+    "fullName": "Vaha Tua",
+    "birth": "2002-11-06",
+    "position": "DF",
+    "nationality": "American Samoa",
+    "club": "Vaiala Tonga SC",
+    "photo": null,
+    "wikiTitle": "Vaha Tua"
+  },
+  {
     "id": "vahdat-hanonov",
     "name": "Vahdat Hanonov",
     "fullName": "Vahdat Hanonov",
@@ -90608,6 +93198,17 @@
     "wikiTitle": "Victor Bak Jensen"
   },
   {
+    "id": "victor-bogaciuc",
+    "name": "Victor Bogaciuc",
+    "fullName": "Victor Bogaciuc",
+    "birth": "1999-10-17",
+    "position": "MF",
+    "nationality": "Moldova",
+    "club": "Petrocub Hîncești",
+    "photo": null,
+    "wikiTitle": "Victor Bogaciuc"
+  },
+  {
     "id": "victor-boniface",
     "name": "Victor Boniface",
     "fullName": "Victor Boniface",
@@ -91162,6 +93763,17 @@
     "wikiTitle": "Vincent Thill"
   },
   {
+    "id": "vincentas-sarkauskas",
+    "name": "Vincentas Šarkauskas",
+    "fullName": "Vincentas Šarkauskas",
+    "birth": "1999-08-11",
+    "position": "GK",
+    "nationality": "Lithuania",
+    "club": "FK Žalgiris",
+    "photo": null,
+    "wikiTitle": "Vincentas Šarkauskas"
+  },
+  {
     "id": "vincenzo-grifo",
     "name": "Vincenzo Grifo",
     "fullName": "Vincenzo Grifo",
@@ -91579,6 +94191,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by/4.0"
     },
     "wikiTitle": "Vladislav Baboglo"
+  },
+  {
+    "id": "vladislav-kreida",
+    "name": "Vladislav Kreida",
+    "fullName": "Vladislav Kreida",
+    "birth": "1999-09-25",
+    "position": "MF",
+    "nationality": "Estonia",
+    "club": "Flora",
+    "photo": null,
+    "wikiTitle": "Vladislav Kreida"
   },
   {
     "id": "vladislavs-gutkovskis",
@@ -92502,6 +95125,17 @@
     "wikiTitle": "William Robert Green"
   },
   {
+    "id": "william-komasi",
+    "name": "William Komasi",
+    "fullName": "William Komasi",
+    "birth": null,
+    "position": "MF",
+    "nationality": "Solomon Islands",
+    "club": "Navua",
+    "photo": null,
+    "wikiTitle": "William Komasi"
+  },
+  {
     "id": "william-osula",
     "name": "William Osula",
     "fullName": "William Osula",
@@ -92677,6 +95311,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Wladimiro Falcone"
+  },
+  {
+    "id": "woo-chun-wei",
+    "name": "Woo Chun Wei",
+    "fullName": "Woo Chun Wei",
+    "birth": "2004-12-07",
+    "position": "MF",
+    "nationality": "Singapore",
+    "club": "Balestier Khalsa",
+    "photo": null,
+    "wikiTitle": "Woo Chun Wei"
   },
   {
     "id": "woodensky-pierre",
@@ -93021,6 +95666,17 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Yahia Fofana"
+  },
+  {
+    "id": "yahya-alghassani",
+    "name": "Yahya Al-Ghassani",
+    "fullName": "Yahya Al-Ghassani",
+    "birth": "1998-04-18",
+    "position": "MF",
+    "nationality": "United Arab Emirates",
+    "club": "Sharjah",
+    "photo": null,
+    "wikiTitle": "Yahya Al-Ghassani"
   },
   {
     "id": "yaimar-medina",
@@ -94161,6 +96817,17 @@
     "wikiTitle": "Yousef Qashi"
   },
   {
+    "id": "yousif-almarzooqi",
+    "name": "Yousif Al-Marzooqi",
+    "fullName": "Yousif Al-Marzooqi",
+    "birth": "2005-03-07",
+    "position": "DF",
+    "nationality": "United Arab Emirates",
+    "club": "Al Jazira",
+    "photo": null,
+    "wikiTitle": "Yousif Al-Marzooqi"
+  },
+  {
     "id": "youssef-belammari",
     "name": "Youssef Belammari",
     "fullName": "Youssef Belammari",
@@ -94178,6 +96845,25 @@
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
     "wikiTitle": "Youssef Belammari"
+  },
+  {
+    "id": "youssef-ennesyri",
+    "name": "Youssef En-Nesyri",
+    "fullName": "Youssef En-Nesyri",
+    "birth": "1997-06-01",
+    "position": "FW",
+    "nationality": "Morocco",
+    "club": "Al-Ittihad",
+    "photo": {
+      "file": "Ennesyri.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/26/Ennesyri.jpg/960px-Ennesyri.jpg",
+      "width": 1534,
+      "height": 2608,
+      "author": "Nawfel Ajari",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Youssef En-Nesyri"
   },
   {
     "id": "youssef-maleh",
@@ -94472,6 +97158,25 @@
     "club": "Al-Hilal",
     "photo": null,
     "wikiTitle": "Yusuf Akçiçek"
+  },
+  {
+    "id": "yusuf-demir",
+    "name": "Yusuf Demir",
+    "fullName": "Yusuf Demir",
+    "birth": "2003-06-02",
+    "position": "MF",
+    "nationality": "Austria",
+    "club": "Rapid Wien",
+    "photo": {
+      "file": "Austria national under-17 football team - Teamcamp 20180905 (17).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/2d/Austria_national_under-17_football_team_-_Teamcamp_20180905_%2817%29.jpg/960px-Austria_national_under-17_football_team_-_Teamcamp_20180905_%2817%29.jpg",
+      "width": 2000,
+      "height": 3000,
+      "author": "Steindy ( talk ) 12:59, 6 September 2018 (UTC)",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Yusuf Demir"
   },
   {
     "id": "yusuf-kagoma",

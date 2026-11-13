@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#132257"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Tottenham_Hotspur_F.C.",
   "members": [
     {
@@ -125,6 +125,10 @@
     {
       "playerId": "brandon-austin",
       "no": 40
+    },
+    {
+      "playerId": "luca-williamsbarnett",
+      "no": 68
     }
   ]
 }

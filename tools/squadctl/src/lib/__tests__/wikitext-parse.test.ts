@@ -182,6 +182,22 @@ describe('parseClubField', () => {
     });
   });
 
+  // New Zealand's article names A-League clubs by the template's abbreviation.
+  it('reads an {{A-League team}} abbreviation as the club it links', () => {
+    expect(parseClubField('{{A-League team|WP}}')).toEqual({
+      club: 'Wellington Phoenix',
+      clubTitle: 'Wellington Phoenix FC',
+    });
+    expect(parseClubField('{{flagicon|AUS}} {{A-League team|wsw}}')).toEqual({
+      club: 'Western Sydney Wanderers',
+      clubTitle: 'Western Sydney Wanderers FC',
+    });
+  });
+
+  it('leaves an abbreviation it does not know as markup, for apply to flag', () => {
+    expect(parseClubField('{{A-League team|XYZ}}').club).toContain('{{');
+  });
+
   it.each([
     "''[[Free agent]]''",
     "''[[Free Agent|Unattached]]''",

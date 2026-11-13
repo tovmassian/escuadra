@@ -10,15 +10,15 @@
     "bands": ["#D90012", "#0033A0", "#F2A800"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Armenia_national_football_team",
   "members": [
     {
-      "playerId": "mishiev",
+      "playerId": "cancarevic",
       "no": 1
     },
     {
-      "playerId": "narek-aghasaryan",
+      "playerId": "bandikyan",
       "no": 2
     },
     {
@@ -30,7 +30,7 @@
       "no": 4
     },
     {
-      "playerId": "petrosyan",
+      "playerId": "styopa-mkrtchyan",
       "no": 5
     },
     {
@@ -38,7 +38,7 @@
       "no": 6
     },
     {
-      "playerId": "narek-hovhannisyan",
+      "playerId": "sevikyan",
       "no": 7
     },
     {
@@ -50,12 +50,11 @@
       "no": 9
     },
     {
-      "playerId": "spertsyan",
-      "no": 10,
-      "captain": true
+      "playerId": "shaghoyan",
+      "no": 10
     },
     {
-      "playerId": "narek-grigoryan",
+      "playerId": "hovhannes-harutyunyan",
       "no": 11
     },
     {
@@ -63,7 +62,7 @@
       "no": 12
     },
     {
-      "playerId": "khariton-ayvazyan",
+      "playerId": "edgar-piloyan",
       "no": 13
     },
     {
@@ -71,27 +70,27 @@
       "no": 14
     },
     {
-      "playerId": "karen-nalbandyan",
+      "playerId": "petrosyan",
       "no": 15
     },
     {
-      "playerId": "gor-matinyan",
+      "playerId": "mishiev",
       "no": 16
     },
     {
-      "playerId": "artur-garibyan",
+      "playerId": "ranos",
       "no": 17
     },
     {
-      "playerId": "miranyan",
+      "playerId": "artur-garibyan",
       "no": 18
     },
     {
-      "playerId": "karen-muradyan",
+      "playerId": "edgar-grigoryan",
       "no": 19
     },
     {
-      "playerId": "davit-terteryan",
+      "playerId": "karen-muradyan",
       "no": 20
     },
     {
@@ -99,23 +98,31 @@
       "no": 21
     },
     {
-      "playerId": "erik-simonyan",
+      "playerId": "narek-grigoryan",
       "no": 22
     },
     {
-      "playerId": "arayik-eloyan",
+      "playerId": "narek-hovhannisyan",
       "no": 23
     },
     {
-      "playerId": "cancarevic",
+      "playerId": "ghazaryan",
       "no": null
     },
     {
-      "playerId": "sevikyan",
+      "playerId": "gor-matinyan",
       "no": null
     },
     {
-      "playerId": "shaghoyan",
+      "playerId": "karen-nalbandyan",
+      "no": null
+    },
+    {
+      "playerId": "khariton-ayvazyan",
+      "no": null
+    },
+    {
+      "playerId": "miranyan",
       "no": null
     }
   ]

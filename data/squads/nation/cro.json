@@ -10,7 +10,7 @@
     "bands": ["#FF0000", "#FFFFFF", "#171796"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Croatia_national_football_team",
   "members": [
     {
@@ -22,7 +22,7 @@
       "no": 2
     },
     {
-      "playerId": "marin-pongracic",
+      "playerId": "luka-vuskovic",
       "no": 3
     },
     {
@@ -30,15 +30,15 @@
       "no": 4
     },
     {
-      "playerId": "luka-vuskovic",
+      "playerId": "duje-caletacar",
       "no": 5
     },
     {
-      "playerId": "josip-sutalo",
+      "playerId": "niko-galesic",
       "no": 6
     },
     {
-      "playerId": "dion-drena-beljo",
+      "playerId": "lovro-majer",
       "no": 7
     },
     {
@@ -46,7 +46,7 @@
       "no": 8
     },
     {
-      "playerId": "andrej-kramaric",
+      "playerId": "dion-drena-beljo",
       "no": 9
     },
     {
@@ -67,7 +67,7 @@
       "no": 13
     },
     {
-      "playerId": "ivan-perisic",
+      "playerId": "ivan-smolcic",
       "no": 14
     },
     {
@@ -83,7 +83,7 @@
       "no": 17
     },
     {
-      "playerId": "kristijan-jakic",
+      "playerId": "simun-hrgovic",
       "no": 18
     },
     {
@@ -95,7 +95,7 @@
       "no": 20
     },
     {
-      "playerId": "l-sucic",
+      "playerId": "marin-soticek",
       "no": 21
     },
     {
@@ -107,19 +107,11 @@
       "no": 23
     },
     {
-      "playerId": "franjo-ivanovic",
+      "playerId": "ivan-perisic",
       "no": null
     },
     {
-      "playerId": "ivan-smolcic",
-      "no": null
-    },
-    {
-      "playerId": "lovro-majer",
-      "no": null
-    },
-    {
-      "playerId": "petar-musa",
+      "playerId": "l-sucic",
       "no": null
     }
   ]

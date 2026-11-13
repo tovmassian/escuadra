@@ -10,7 +10,7 @@
     "bands": ["#3081F7", "#FFFFFF", "#308738"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Uzbekistan_national_football_team",
   "members": [
     {
@@ -18,20 +18,8 @@
       "no": 1
     },
     {
-      "playerId": "abdukodir-khusanov",
-      "no": 2
-    },
-    {
-      "playerId": "khojiakbar-alijonov",
-      "no": 3
-    },
-    {
       "playerId": "bekhruz-karimov",
       "no": 4
-    },
-    {
-      "playerId": "jakhongir-urozov",
-      "no": 5
     },
     {
       "playerId": "akmal-mozgovoy",
@@ -115,15 +103,15 @@
       "no": 25
     },
     {
-      "playerId": "nurmukhammad-abduganiev",
-      "no": 26
-    },
-    {
-      "playerId": "mukhammad-khakimov",
-      "no": 27
+      "playerId": "abror-ismoilov",
+      "no": null
     },
     {
       "playerId": "azizbek-tulkinbekov",
+      "no": null
+    },
+    {
+      "playerId": "dilshod-murtozoev",
       "no": null
     },
     {
@@ -131,19 +119,19 @@
       "no": null
     },
     {
-      "playerId": "mukhammadali-urinboev",
+      "playerId": "jakhongir-urozov",
       "no": null
     },
     {
-      "playerId": "sadriddin-khasanov",
+      "playerId": "nodir-abdurazzokov",
+      "no": null
+    },
+    {
+      "playerId": "rustam-ashurmatov",
       "no": null
     },
     {
       "playerId": "samandar-muratbaev",
-      "no": null
-    },
-    {
-      "playerId": "sardorbek-bakhromov",
       "no": null
     }
   ]
