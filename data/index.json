@@ -1556,7 +1556,7 @@
       "bands": ["#0068A8", "#000000"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13",
+    "lastUpdated": "2026-09-07",
     "league": "serie-a"
   },
   {
@@ -2468,7 +2468,7 @@
     "season": "2026",
     "primaryColor": "#012169",
     "secondaryColor": "#C8102E",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#012169", "#C8102E", "#012169"],
       "orientation": "vertical"

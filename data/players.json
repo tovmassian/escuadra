@@ -18548,7 +18548,7 @@
     "birth": "2002-09-10",
     "position": "FW",
     "nationality": "New Zealand",
-    "club": "{{A-League team|WP}}",
+    "club": "Wellington Phoenix",
     "photo": {
       "file": "Corban Piper (2026).jpg",
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/59/Corban_Piper_%282026%29.jpg/960px-Corban_Piper_%282026%29.jpg",
@@ -20680,11 +20680,19 @@
     "id": "darren-teh",
     "name": "Darren Teh",
     "fullName": "Darren Teh",
-    "birth": "1996-09-19",
+    "birth": "1996-08-19",
     "position": "DF",
     "nationality": "Singapore",
     "club": "Balestier Khalsa",
-    "photo": null,
+    "photo": {
+      "file": "Darren Teh, 2019 (cropped).jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/3/3c/Darren_Teh%2C_2019_%28cropped%29.jpg/960px-Darren_Teh%2C_2019_%28cropped%29.jpg",
+      "width": 1013,
+      "height": 1351,
+      "author": "Chensiyuan",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
     "wikiTitle": "Darren Teh"
   },
   {
@@ -53679,7 +53687,7 @@
     "birth": "2002-10-17",
     "position": "FW",
     "nationality": "New Zealand",
-    "club": "{{A-League team|WSW}}",
+    "club": "Western Sydney Wanderers",
     "photo": null,
     "wikiTitle": "Liam Gillion"
   },
@@ -61030,7 +61038,7 @@
     "birth": "2004-05-09",
     "position": "DF",
     "nationality": "New Zealand",
-    "club": "{{A-League team|WP}}",
+    "club": "Wellington Phoenix",
     "photo": {
       "file": "Matthew Sheridan (2026).jpg",
       "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/1/1c/Matthew_Sheridan_%282026%29.jpg/960px-Matthew_Sheridan_%282026%29.jpg",
@@ -62249,7 +62257,7 @@
     "id": "md-taj-uddin",
     "name": "Md Taj Uddin",
     "fullName": "Md Taj Uddin",
-    "birth": "2005-01-05",
+    "birth": "2002-04-17",
     "position": "DF",
     "nationality": "Bangladesh",
     "club": "Dhaka Abahani",
@@ -67929,7 +67937,7 @@
     "birth": "2006-01-30",
     "position": "FW",
     "nationality": "New Zealand",
-    "club": "{{A-League team|WP}}",
+    "club": "Wellington Phoenix",
     "photo": {
       "file": "Nathan Walker (October 2026).jpg",
       "url": "https://upload.wikimedia.org/wikipedia/commons/8/88/Nathan_Walker_%28October_2026%29.jpg",

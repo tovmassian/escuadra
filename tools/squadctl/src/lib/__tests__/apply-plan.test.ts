@@ -6,6 +6,7 @@ import {
   hasPlayerChanges,
   hasWritableChanges,
   isFileUnchanged,
+  isRosterUnchanged,
   mergePlayers,
   squadPath,
   teamStatus,
@@ -101,6 +102,68 @@ describe('isFileUnchanged', () => {
     const stored = squad({ verified: true });
     const candidate = squad({ verified: false });
     expect(isFileUnchanged(candidate, stored)).toBe(false);
+  });
+});
+
+describe('isRosterUnchanged', () => {
+  // Inter's #31 in the first weekly sweep: two records for one man, and the
+  // club's link moving to the title the other record carries.
+  const people = new Map(
+    [
+      player({ id: 'raya', name: 'David Raya' }),
+      player({ id: 'bisseck', name: 'Yann Bisseck', fullName: 'Yann Aurel Bisseck' }),
+      player({ id: 'yann-aurel-bisseck', name: 'Yann Aurel Bisseck' }),
+      player({ id: 'namesake', name: 'Yann Aurel Bisseck', birth: '2003-04-04' }),
+      player({ id: 'undated', name: 'Yann Aurel Bisseck', birth: null }),
+    ].map((p) => [p.id, p]),
+  );
+  const playerOf = (id: string) => people.get(id);
+  const members = (...list: Squad['members']) => squad({ members: list });
+
+  it('is false when there is no stored squad', () => {
+    expect(isRosterUnchanged(squad(), null, playerOf)).toBe(false);
+  });
+
+  it('ignores what a player does not learn: verified, colours, member order', () => {
+    const stored = members({ playerId: 'raya', no: 1 }, { playerId: 'bisseck', no: 31 });
+    const candidate = {
+      ...members({ playerId: 'bisseck', no: 31 }, { playerId: 'raya', no: 1 }),
+      verified: false,
+      primaryColor: '#000000',
+    };
+    expect(isRosterUnchanged(candidate, stored, playerOf)).toBe(true);
+  });
+
+  it('sees one person behind a new id: same number, full name and birth date', () => {
+    const stored = members({ playerId: 'raya', no: 1 }, { playerId: 'bisseck', no: 31 });
+    const candidate = members(
+      { playerId: 'raya', no: 1 },
+      { playerId: 'yann-aurel-bisseck', no: 31 },
+    );
+    expect(isRosterUnchanged(candidate, stored, playerOf)).toBe(true);
+  });
+
+  it('sees a different person when the birth date differs or is unknown', () => {
+    const stored = members({ playerId: 'bisseck', no: 31 });
+    expect(isRosterUnchanged(members({ playerId: 'namesake', no: 31 }), stored, playerOf)).toBe(
+      false,
+    );
+    expect(isRosterUnchanged(members({ playerId: 'undated', no: 31 }), stored, playerOf)).toBe(
+      false,
+    );
+  });
+
+  it('moves on a new number, a new member, a departure or a new captain', () => {
+    const stored = members({ playerId: 'raya', no: 1 });
+    for (const candidate of [
+      members({ playerId: 'raya', no: 13 }),
+      members({ playerId: 'raya', no: null }),
+      members({ playerId: 'raya', no: 1 }, { playerId: 'bisseck', no: 31 }),
+      members(),
+      members({ playerId: 'raya', no: 1, captain: true }),
+    ]) {
+      expect(isRosterUnchanged(candidate, stored, playerOf)).toBe(false);
+    }
   });
 });
 
