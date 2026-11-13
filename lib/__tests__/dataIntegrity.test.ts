@@ -134,6 +134,19 @@ describe('every squad member resolves to a player', () => {
   }
 });
 
+// squadctl writes a squad with an open conflict as `verified: false`, and the app
+// does not read the flag, so this is what keeps one from shipping: a sweep PR
+// (docs/release.md, Sweep squad data) stays red until every conflict is answered.
+describe('every squad is verified', () => {
+  it('has no squad with an unanswered squadctl conflict', () => {
+    const unverified = squadFiles.filter((entry) => !entry.squad.verified).map(label);
+    expect(
+      unverified,
+      'answer each conflict with the command squadctl names (tools/squadctl/README.md), then re-run apply',
+    ).toEqual([]);
+  });
+});
+
 // The bug this task exists to stop recurring: three players on the Athletic
 // Club roster carried player.club: "Athletic Bilbao" (the Wikipedia article
 // title) while a fourth carried the registry name "Athletic Club". Because
