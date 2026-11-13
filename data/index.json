@@ -238,7 +238,7 @@
     "season": "2026",
     "primaryColor": "#00008B",
     "secondaryColor": "#FFFFFF",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#00008B", "#FFFFFF", "#00008B"],
       "orientation": "vertical"
@@ -252,7 +252,7 @@
     "season": "2026",
     "primaryColor": "#ED2939",
     "secondaryColor": "#FFFFFF",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#ED2939", "#FFFFFF", "#ED2939"],
       "orientation": "horizontal"
@@ -954,7 +954,7 @@
     "season": "2026",
     "primaryColor": "#D7141A",
     "secondaryColor": "#FFFFFF",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#FFFFFF", "#D7141A"],
       "orientation": "horizontal"
@@ -1113,7 +1113,7 @@
     "season": "2026",
     "primaryColor": "#C60B1E",
     "secondaryColor": "#FFC400",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#AA151B", "#F1BF00", "#AA151B"],
       "orientation": "horizontal",
@@ -1128,7 +1128,7 @@
     "season": "2026",
     "primaryColor": "#0072CE",
     "secondaryColor": "#000000",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#0072CE", "#000000", "#FFFFFF"],
       "orientation": "horizontal"
@@ -1261,7 +1261,7 @@
     "season": "2026",
     "primaryColor": "#0055A4",
     "secondaryColor": "#EF4135",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
       "orientation": "vertical"
@@ -1335,7 +1335,7 @@
     "season": "2026",
     "primaryColor": "#000000",
     "secondaryColor": "#FFCE00",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#000000", "#DD0000", "#FFCE00"],
       "orientation": "horizontal"
@@ -1623,7 +1623,7 @@
     "season": "2026",
     "primaryColor": "#008C45",
     "secondaryColor": "#CD212A",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#008C45", "#F4F5F0", "#CD212A"],
       "orientation": "vertical"
@@ -1725,7 +1725,7 @@
     "season": "2026",
     "primaryColor": "#FFFFFF",
     "secondaryColor": "#CD2E3A",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#FFFFFF", "#CD2E3A", "#FFFFFF"],
       "orientation": "vertical"
@@ -1946,7 +1946,7 @@
     "season": "2026",
     "primaryColor": "#FDB913",
     "secondaryColor": "#C1272D",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#FDB913", "#006A44", "#C1272D"],
       "orientation": "horizontal"
@@ -2927,7 +2927,7 @@
     "season": "2026",
     "primaryColor": "#00853F",
     "secondaryColor": "#E31B23",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#00853F", "#FDEF42", "#E31B23"],
       "orientation": "vertical"
@@ -3028,7 +3028,7 @@
     "season": "2026",
     "primaryColor": "#0047AB",
     "secondaryColor": "#FFFFFF",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#0047AB", "#FFFFFF", "#0047AB"],
       "orientation": "horizontal"
@@ -3203,7 +3203,7 @@
     "season": "2026",
     "primaryColor": "#006AA7",
     "secondaryColor": "#FECC02",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#006AA7", "#FECC02"],
       "orientation": "vertical"
@@ -3410,7 +3410,7 @@
     "season": "2026",
     "primaryColor": "#E30A17",
     "secondaryColor": "#FFFFFF",
-    "verified": false,
+    "verified": true,
     "marker": {
       "bands": ["#E30A17", "#FFFFFF", "#E30A17"],
       "orientation": "vertical"
