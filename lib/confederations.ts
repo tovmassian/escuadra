@@ -167,7 +167,7 @@ export const CONFEDERATION_MEMBERS: Record<Confederation, readonly FlagCode[]> =
     'VIE',
     'YEM',
   ],
-  OFC: ['FIJ', 'NCL', 'NZL'],
+  OFC: ['ASA', 'FIJ', 'NCL', 'NZL', 'SOL'],
 };
 
 const BY_CODE = new Map<FlagCode, Confederation>(

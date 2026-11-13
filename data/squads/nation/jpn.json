@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#BC002D", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Japan_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "shuto-nakano",
+      "playerId": "sugawara",
       "no": 2
     },
     {
@@ -31,7 +31,11 @@
       "captain": true
     },
     {
-      "playerId": "satoshi-tanaka",
+      "playerId": "watanabe",
+      "no": 5
+    },
+    {
+      "playerId": "shuto-nakano",
       "no": 6
     },
     {
@@ -39,7 +43,7 @@
       "no": 7
     },
     {
-      "playerId": "suzuki-yuito",
+      "playerId": "takumi-minamino",
       "no": 8
     },
     {
@@ -71,15 +75,19 @@
       "no": 15
     },
     {
+      "playerId": "koki-machida",
+      "no": 16
+    },
+    {
       "playerId": "tanaka",
       "no": 17
     },
     {
-      "playerId": "ueda",
+      "playerId": "suzuki-yuito",
       "no": 18
     },
     {
-      "playerId": "kuryu-matsuki",
+      "playerId": "ogawa",
       "no": 19
     },
     {
@@ -91,7 +99,7 @@
       "no": 21
     },
     {
-      "playerId": "hayato-araki",
+      "playerId": "kodai-sano",
       "no": 22
     },
     {
@@ -107,24 +115,16 @@
       "no": 25
     },
     {
-      "playerId": "shiogai",
+      "playerId": "tatsuhiro-sakamoto",
       "no": 26
     },
     {
-      "playerId": "kodai-sano",
+      "playerId": "kuryu-matsuki",
+      "no": 27
+    },
+    {
+      "playerId": "shio-fukuda",
       "no": 28
-    },
-    {
-      "playerId": "shunsuke-saito",
-      "no": 29
-    },
-    {
-      "playerId": "kaina-tanimura",
-      "no": 31
-    },
-    {
-      "playerId": "henry-heroki-mochizuki",
-      "no": 32
     }
   ]
 }

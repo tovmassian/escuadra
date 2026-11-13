@@ -10,7 +10,7 @@
     "bands": ["#006A4E", "#F42A41", "#006A4E"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Bangladesh_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "md-shakil-ahad-topu",
+      "playerId": "zidane-yousuf",
       "no": 2
     },
     {
@@ -26,17 +26,12 @@
       "no": 3
     },
     {
-      "playerId": "minhazul-karim-shadin",
-      "no": 4
-    },
-    {
       "playerId": "md-ridoy",
       "no": 5
     },
     {
       "playerId": "jamal-bhuyan",
-      "no": 6,
-      "captain": true
+      "no": 6
     },
     {
       "playerId": "shekh-morsalin",
@@ -55,11 +50,11 @@
       "no": 10
     },
     {
-      "playerId": "shahriar-emon",
+      "playerId": "foysal-ahmed-fahim",
       "no": 11
     },
     {
-      "playerId": "zidane-yousuf",
+      "playerId": "bishwanath-ghosh",
       "no": 12
     },
     {
@@ -91,11 +86,11 @@
       "no": 19
     },
     {
-      "playerId": "monjurur-rahman-manik",
+      "playerId": "farhaan-ali-wahid",
       "no": 20
     },
     {
-      "playerId": "farhaan-ali-wahid",
+      "playerId": "quazem-shah",
       "no": 21
     },
     {
@@ -105,6 +100,31 @@
     {
       "playerId": "shamit-shome",
       "no": 23
+    },
+    {
+      "playerId": "abdullah-omar-sajib",
+      "no": 24
+    },
+    {
+      "playerId": "md-taj-uddin",
+      "no": 25
+    },
+    {
+      "playerId": "mohammad-ibrahim",
+      "no": 27
+    },
+    {
+      "playerId": "minhazul-karim-shadin",
+      "no": 28
+    },
+    {
+      "playerId": "mahe-khan",
+      "no": null
+    },
+    {
+      "playerId": "topu-barman",
+      "no": null,
+      "captain": true
     }
   ]
 }

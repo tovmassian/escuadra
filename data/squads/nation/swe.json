@@ -10,15 +10,15 @@
     "bands": ["#006AA7", "#FECC02"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Sweden_men's_national_football_team",
   "members": [
     {
-      "playerId": "noel-tornqvist",
+      "playerId": "jacob-widell-zetterstrom",
       "no": 1
     },
     {
-      "playerId": "felix-beijmo",
+      "playerId": "gustaf-lagerbielke",
       "no": 2
     },
     {
@@ -35,7 +35,11 @@
       "no": 5
     },
     {
-      "playerId": "lucas-bergvall",
+      "playerId": "felix-beijmo",
+      "no": 6
+    },
+    {
+      "playerId": "alexander-bernhardsson",
       "no": 7
     },
     {
@@ -43,15 +47,15 @@
       "no": 8
     },
     {
-      "playerId": "paulos-abraham",
+      "playerId": "alexander-isak",
       "no": 9
     },
     {
-      "playerId": "hugo-bolin",
+      "playerId": "benjamin-nygren",
       "no": 10
     },
     {
-      "playerId": "swedberg",
+      "playerId": "anthony-elanga",
       "no": 11
     },
     {
@@ -59,15 +63,15 @@
       "no": 12
     },
     {
-      "playerId": "ken-sema",
+      "playerId": "elliot-stroud",
       "no": 13
     },
     {
-      "playerId": "hampus-skoglund",
+      "playerId": "hjalmar-ekdal",
       "no": 14
     },
     {
-      "playerId": "victor-eriksson",
+      "playerId": "genesis-antwi",
       "no": 15
     },
     {
@@ -79,7 +83,7 @@
       "no": 17
     },
     {
-      "playerId": "samuel-dahl",
+      "playerId": "yasin-ayari",
       "no": 18
     },
     {
@@ -91,15 +95,15 @@
       "no": 20
     },
     {
-      "playerId": "alexander-bernhardsson",
+      "playerId": "dejan-kulusevski",
       "no": 21
     },
     {
-      "playerId": "besfort-zeneli",
+      "playerId": "alieu-njie",
       "no": 22
     },
     {
-      "playerId": "melker-ellborg",
+      "playerId": "noel-tornqvist",
       "no": 23
     }
   ]

@@ -10,7 +10,7 @@
     "bands": ["#012169", "#C8102E", "#012169"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/New_Zealand_men's_national_football_team",
   "members": [
     {
@@ -22,15 +22,15 @@
       "no": 2
     },
     {
-      "playerId": "sam-sutton",
+      "playerId": "francis-de-vries",
       "no": 3
     },
     {
-      "playerId": "tyler-bindon",
+      "playerId": "michael-boxall",
       "no": 4
     },
     {
-      "playerId": "michael-boxall",
+      "playerId": "finn-surman",
       "no": 5
     },
     {
@@ -42,7 +42,7 @@
       "no": 7
     },
     {
-      "playerId": "marko-stamenic",
+      "playerId": "owen-parkerprice",
       "no": 8
     },
     {
@@ -51,11 +51,11 @@
       "captain": true
     },
     {
-      "playerId": "stipe-ukich",
+      "playerId": "matt-garbett",
       "no": 10
     },
     {
-      "playerId": "elijah-just",
+      "playerId": "liam-gillion",
       "no": 11
     },
     {
@@ -63,7 +63,7 @@
       "no": 12
     },
     {
-      "playerId": "dalton-wilkins",
+      "playerId": "james-mcgarry",
       "no": 13
     },
     {
@@ -71,24 +71,28 @@
       "no": 14
     },
     {
-      "playerId": "bill-tuiloma",
+      "playerId": "nando-pijnaker",
       "no": 15
     },
     {
-      "playerId": "george-stanger",
+      "playerId": "bill-tuiloma",
       "no": 16
     },
     {
-      "playerId": "dane-ingham",
+      "playerId": "nathan-walker",
       "no": 17
     },
     {
-      "playerId": "ben-waine",
+      "playerId": "matthew-sheridan",
       "no": 18
     },
     {
-      "playerId": "ben-old",
+      "playerId": "corban-piper",
       "no": 19
+    },
+    {
+      "playerId": "callum-mccowatt",
+      "no": 20
     },
     {
       "playerId": "jesse-randall",
@@ -99,12 +103,8 @@
       "no": 22
     },
     {
-      "playerId": "owen-parkerprice",
+      "playerId": "lukas-kellyheald",
       "no": 23
-    },
-    {
-      "playerId": "moses-dyer",
-      "no": 24
     }
   ]
 }

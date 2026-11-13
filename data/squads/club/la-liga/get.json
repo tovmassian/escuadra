@@ -10,7 +10,7 @@
     "bands": ["#005999"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Getafe_CF",
   "members": [
     {
@@ -78,6 +78,10 @@
       "no": 17
     },
     {
+      "playerId": "uche",
+      "no": 18
+    },
+    {
       "playerId": "unal",
       "no": 19
     },
@@ -104,10 +108,6 @@
     {
       "playerId": "valou",
       "no": 26
-    },
-    {
-      "playerId": "uche",
-      "no": null
     }
   ]
 }

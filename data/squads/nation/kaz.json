@@ -10,11 +10,11 @@
     "bands": ["#00ABC2", "#FFEC2D", "#00ABC2"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Kazakhstan_national_football_team",
   "members": [
     {
-      "playerId": "bekkhan-shayzada",
+      "playerId": "stas-pokatilov",
       "no": 1
     },
     {
@@ -27,7 +27,7 @@
       "captain": true
     },
     {
-      "playerId": "nauryzbek-zhagorov",
+      "playerId": "arsen-ashirbek",
       "no": 4
     },
     {
@@ -37,10 +37,6 @@
     {
       "playerId": "alibek-kasym",
       "no": 6
-    },
-    {
-      "playerId": "galymzhan-kenzhebek",
-      "no": 7
     },
     {
       "playerId": "zhasulan-amir",
@@ -63,19 +59,7 @@
       "no": 12
     },
     {
-      "playerId": "aleksandr-mrynskiy",
-      "no": 13
-    },
-    {
-      "playerId": "georgy-zhukov",
-      "no": 14
-    },
-    {
-      "playerId": "azamat-tuyakbaev",
-      "no": 15
-    },
-    {
-      "playerId": "aleksandr-zarutskiy",
+      "playerId": "bekkhan-shayzada",
       "no": 16
     },
     {
@@ -91,7 +75,7 @@
       "no": 19
     },
     {
-      "playerId": "ramazan-orazov",
+      "playerId": "alexander-shirobokov",
       "no": 20
     },
     {
@@ -103,19 +87,7 @@
       "no": 22
     },
     {
-      "playerId": "temirlan-yerlanov",
-      "no": 23
-    },
-    {
-      "playerId": "alexander-shirobokov",
-      "no": null
-    },
-    {
-      "playerId": "arsen-ashirbek",
-      "no": null
-    },
-    {
-      "playerId": "islam-chesnokov",
+      "playerId": "georgy-zhukov",
       "no": null
     },
     {
@@ -131,7 +103,7 @@
       "no": null
     },
     {
-      "playerId": "stas-pokatilov",
+      "playerId": "nauryzbek-zhagorov",
       "no": null
     }
   ]

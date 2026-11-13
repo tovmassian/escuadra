@@ -10,15 +10,15 @@
     "bands": ["#00008B", "#FFFFFF", "#00008B"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Australia_men's_national_soccer_team",
   "members": [
     {
-      "playerId": "jacob-chapman",
+      "playerId": "tom-glover",
       "no": 1
     },
     {
-      "playerId": "milos-degenek",
+      "playerId": "gianni-stensness",
       "no": 2
     },
     {
@@ -38,15 +38,15 @@
       "no": 6
     },
     {
-      "playerId": "patrick-yazbek",
-      "no": 7
-    },
-    {
       "playerId": "connor-metcalfe",
       "no": 8
     },
     {
-      "playerId": "nishan-velupillay",
+      "playerId": "kusini-yengi",
+      "no": 9
+    },
+    {
+      "playerId": "nestory-irankunda",
       "no": 10
     },
     {
@@ -54,11 +54,11 @@
       "no": 11
     },
     {
-      "playerId": "paul-izzo",
+      "playerId": "joe-gauci",
       "no": 12
     },
     {
-      "playerId": "aiden-oneill",
+      "playerId": "daniel-arzani",
       "no": 13
     },
     {
@@ -66,15 +66,11 @@
       "no": 14
     },
     {
-      "playerId": "dylan-leonard",
-      "no": 15
-    },
-    {
       "playerId": "aziz-behich",
       "no": 16
     },
     {
-      "playerId": "nestory-irankunda",
+      "playerId": "diesel-herrington",
       "no": 17
     },
     {
@@ -94,11 +90,11 @@
       "no": 21
     },
     {
-      "playerId": "jackson-irvine",
+      "playerId": "thomas-waddingham",
       "no": 22
     },
     {
-      "playerId": "yaya-dukuly",
+      "playerId": "sam-klein",
       "no": 23
     },
     {
@@ -112,14 +108,6 @@
     {
       "playerId": "tete-yengi",
       "no": 26
-    },
-    {
-      "playerId": "alexander-robertson",
-      "no": null
-    },
-    {
-      "playerId": "mohamed-toure",
-      "no": null
     }
   ]
 }

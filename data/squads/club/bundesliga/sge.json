@@ -10,7 +10,7 @@
     "bands": ["#E1000F", "#000000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Eintracht_Frankfurt",
   "members": [
     {
@@ -64,6 +64,10 @@
     {
       "playerId": "timothy-chandler",
       "no": 22
+    },
+    {
+      "playerId": "niko-ilicevic",
+      "no": 23
     },
     {
       "playerId": "raphael-onyedika",

@@ -10,16 +10,12 @@
     "bands": ["#0072CE", "#000000", "#FFFFFF"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Estonia_national_football_team",
   "members": [
     {
-      "playerId": "evert-grunvald",
+      "playerId": "hein",
       "no": 1
-    },
-    {
-      "playerId": "marten-kuusk",
-      "no": 2
     },
     {
       "playerId": "maksim-paskotsi",
@@ -30,20 +26,12 @@
       "no": 4
     },
     {
-      "playerId": "erko-jonne-tougjas",
+      "playerId": "rocco-robert-shein",
       "no": 5
     },
     {
       "playerId": "rasmus-peetson",
       "no": 6
-    },
-    {
-      "playerId": "robi-saarma",
-      "no": 7
-    },
-    {
-      "playerId": "markus-soomets",
-      "no": 8
     },
     {
       "playerId": "karel-mustmaa",
@@ -74,16 +62,17 @@
       "no": 15
     },
     {
-      "playerId": "joonas-tamm",
+      "playerId": "martenchris-paalberg",
       "no": 16
     },
     {
-      "playerId": "mattias-mannilaan",
+      "playerId": "martin-miller",
       "no": 17
     },
     {
-      "playerId": "tanel-tammik",
-      "no": 18
+      "playerId": "karol-mets",
+      "no": 18,
+      "captain": true
     },
     {
       "playerId": "michael-schjonninglarsen",
@@ -94,10 +83,6 @@
       "no": 20
     },
     {
-      "playerId": "alex-matthias-tamm",
-      "no": 21
-    },
-    {
       "playerId": "karl-andre-vallner",
       "no": 22
     },
@@ -106,16 +91,27 @@
       "no": 23
     },
     {
-      "playerId": "karol-mets",
-      "no": null,
-      "captain": true
-    },
-    {
-      "playerId": "martin-miller",
+      "playerId": "erko-jonne-tougjas",
       "no": null
     },
     {
-      "playerId": "sander-alamaa",
+      "playerId": "mattias-mannilaan",
+      "no": null
+    },
+    {
+      "playerId": "mihhail-kolobov",
+      "no": null
+    },
+    {
+      "playerId": "nikita-mihhailov",
+      "no": null
+    },
+    {
+      "playerId": "tanel-tammik",
+      "no": null
+    },
+    {
+      "playerId": "vladislav-kreida",
       "no": null
     }
   ]

@@ -38,6 +38,50 @@ export function isFileUnchanged(candidate: Squad, stored: Squad | null): boolean
   );
 }
 
+/** Whether the roster a player learns is the same: who is in it, with which
+ *  number, and who captains. lastUpdated greys a best score as outdated
+ *  (lib/bestScore.ts), so it moves only when this is false; `verified`, the
+ *  colours and the member order teach nothing.
+ *
+ *  A member whose id changed is the same person when the number, full name
+ *  and birth date all match. Inter's #31 in the first weekly sweep: Bisseck
+ *  had a record per title his article had, and Inter's link moved to the
+ *  other one. Both records stay; only the id in the squad changed. */
+export function isRosterUnchanged(
+  candidate: Squad,
+  stored: Squad | null,
+  playerOf: (id: string) => Player | undefined,
+): boolean {
+  if (stored === null || candidate.members.length !== stored.members.length) return false;
+  const slot = (m: Squad['members'][number]) => `${m.no}|${m.captain === true}`;
+  const samePerson = (a: string, b: string) => {
+    const x = playerOf(a);
+    const y = playerOf(b);
+    return (
+      x !== undefined &&
+      y !== undefined &&
+      x.birth !== null &&
+      x.birth === y.birth &&
+      x.fullName === y.fullName
+    );
+  };
+  const left = [...stored.members];
+  const unmatched = candidate.members.filter((member) => {
+    const i = left.findIndex((s) => s.playerId === member.playerId && slot(s) === slot(member));
+    if (i === -1) return true;
+    left.splice(i, 1);
+    return false;
+  });
+  return unmatched.every((member) => {
+    const i = left.findIndex(
+      (s) => slot(s) === slot(member) && samePerson(s.playerId, member.playerId),
+    );
+    if (i === -1) return false;
+    left.splice(i, 1);
+    return true;
+  });
+}
+
 /** Conflicts outrank quietness: a team with an open question is never filed
  *  as `unchanged`, or the run exits 4 while the report says nothing is
  *  pending.

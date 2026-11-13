@@ -58,8 +58,8 @@ One file per squad, so a future contribution touches exactly one file.
 `data/squads/club/`, plus `ucl` for a Champions League group-stage club with no big-5
 domestic home. `SquadManifestEntry.league` carries it on club entries only.
 
-The manifest also carries `lastUpdated`: a best score keeps the date it was set
-on, so a squad update greys it as outdated (#180, `lib/bestScore.ts`).
+The manifest also carries `lastUpdated`, moved only when the members, numbers or captain
+change: a best score keeps its date, so that greys it as outdated (#180, `lib/bestScore.ts`).
 
 A nation squad's confederation (the picker's Nations filter) is
 `lib/confederations.ts`, keyed by the FIFA code `lib/flags.ts` gives its name. A new
