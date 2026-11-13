@@ -1,0 +1,98 @@
+{
+  "id": "sol",
+  "kind": "nation",
+  "name": "Solomon Islands",
+  "season": "2026",
+  "primaryColor": "#0051BA",
+  "secondaryColor": "#215B33",
+  "verified": true,
+  "marker": {
+    "bands": ["#0051BA", "#FCD116", "#215B33"],
+    "orientation": "vertical",
+    "weights": [3, 1, 3]
+  },
+  "lastUpdated": "2026-11-13",
+  "source": "https://en.wikipedia.org/wiki/Solomon_Islands_national_football_team",
+  "members": [
+    {
+      "playerId": "philip-mango",
+      "no": 1
+    },
+    {
+      "playerId": "david-supa",
+      "no": 2
+    },
+    {
+      "playerId": "gordon-iro",
+      "no": 4
+    },
+    {
+      "playerId": "javin-wae",
+      "no": 5
+    },
+    {
+      "playerId": "atkin-kaua",
+      "no": 6
+    },
+    {
+      "playerId": "raphael-leai",
+      "no": 7
+    },
+    {
+      "playerId": "clivert-sam",
+      "no": 8
+    },
+    {
+      "playerId": "bobby-leslie",
+      "no": 9
+    },
+    {
+      "playerId": "rovu-boyers",
+      "no": 10
+    },
+    {
+      "playerId": "junior-petua",
+      "no": 12
+    },
+    {
+      "playerId": "danford-fiumae",
+      "no": 13
+    },
+    {
+      "playerId": "junior-david",
+      "no": 14
+    },
+    {
+      "playerId": "william-komasi",
+      "no": 15
+    },
+    {
+      "playerId": "jayroll-patty",
+      "no": 16
+    },
+    {
+      "playerId": "don-keana",
+      "no": 17
+    },
+    {
+      "playerId": "ali-mekawir",
+      "no": 18
+    },
+    {
+      "playerId": "junior-fordney",
+      "no": 19
+    },
+    {
+      "playerId": "rooney-riugaemai",
+      "no": 20
+    },
+    {
+      "playerId": "calvin-ohasio",
+      "no": 21
+    },
+    {
+      "playerId": "michael-laulae",
+      "no": 23
+    }
+  ]
+}

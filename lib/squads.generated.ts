@@ -11,6 +11,7 @@ import squadArg from '@/data/squads/nation/arg.json';
 import squadArm from '@/data/squads/nation/arm.json';
 import squadArs from '@/data/squads/club/premier-league/ars.json';
 import squadAru from '@/data/squads/nation/aru.json';
+import squadAsa from '@/data/squads/nation/asa.json';
 import squadAta from '@/data/squads/club/serie-a/ata.json';
 import squadAtg from '@/data/squads/nation/atg.json';
 import squadAth from '@/data/squads/club/la-liga/ath.json';
@@ -207,6 +208,7 @@ import squadSin from '@/data/squads/nation/sin.json';
 import squadSkn from '@/data/squads/nation/skn.json';
 import squadSle from '@/data/squads/nation/sle.json';
 import squadSlv from '@/data/squads/nation/slv.json';
+import squadSol from '@/data/squads/nation/sol.json';
 import squadSrb from '@/data/squads/nation/srb.json';
 import squadSri from '@/data/squads/nation/sri.json';
 import squadStp from '@/data/squads/club/bundesliga/stp.json';
@@ -266,6 +268,7 @@ export const SQUAD_FILES: Record<string, Squad> = {
   arm: squadArm as Squad,
   ars: squadArs as Squad,
   aru: squadAru as Squad,
+  asa: squadAsa as Squad,
   ata: squadAta as Squad,
   atg: squadAtg as Squad,
   ath: squadAth as Squad,
@@ -462,6 +465,7 @@ export const SQUAD_FILES: Record<string, Squad> = {
   skn: squadSkn as Squad,
   sle: squadSle as Squad,
   slv: squadSlv as Squad,
+  sol: squadSol as Squad,
   srb: squadSrb as Squad,
   sri: squadSri as Squad,
   stp: squadStp as Squad,

@@ -11,15 +11,15 @@
     "orientation": "vertical",
     "weights": [1, 2, 2, 2]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Equatorial_Guinea_national_football_team",
   "members": [
     {
-      "playerId": "jesus-owono",
+      "playerId": "marcos-ondo",
       "no": 1
     },
     {
-      "playerId": "federico-nsue",
+      "playerId": "santi-boriko",
       "no": 2
     },
     {
@@ -31,7 +31,7 @@
       "no": 4
     },
     {
-      "playerId": "gael-joel-akogo",
+      "playerId": "jose-nabil-ondo",
       "no": 5
     },
     {
@@ -39,7 +39,7 @@
       "no": 6
     },
     {
-      "playerId": "jose-machin",
+      "playerId": "dorian-jr",
       "no": 7
     },
     {
@@ -47,7 +47,7 @@
       "no": 8
     },
     {
-      "playerId": "dorian-jr",
+      "playerId": "salomon-obama",
       "no": 9
     },
     {
@@ -55,7 +55,7 @@
       "no": 10
     },
     {
-      "playerId": "salomon-obama",
+      "playerId": "basilio-ndong",
       "no": 11
     },
     {
@@ -63,7 +63,7 @@
       "no": 12
     },
     {
-      "playerId": "miguel-angel-nkogo",
+      "playerId": "miguel-eyama",
       "no": 13
     },
     {
@@ -71,19 +71,23 @@
       "no": 14
     },
     {
+      "playerId": "enrique-esono",
+      "no": 15
+    },
+    {
       "playerId": "saul-coco",
       "no": 16
     },
     {
-      "playerId": "enrique-esono",
+      "playerId": "josete-miranda",
       "no": 17
     },
     {
-      "playerId": "cristian-makate",
+      "playerId": "prince-ngaah",
       "no": 18
     },
     {
-      "playerId": "prince-ngaah",
+      "playerId": "cristian-makate",
       "no": 19
     },
     {
@@ -108,7 +112,7 @@
       "no": 24
     },
     {
-      "playerId": "javier-mum",
+      "playerId": "gael-joel-akogo",
       "no": 25
     }
   ]

@@ -10,7 +10,7 @@
     "bands": ["#D82126", "#F8E92E", "#D82126"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/North_Macedonia_national_football_team",
   "members": [
     {
@@ -22,15 +22,15 @@
       "no": 2
     },
     {
-      "playerId": "din-alomerovikj",
+      "playerId": "sebastian-herrera",
       "no": 3
     },
     {
-      "playerId": "andrej-stojchevski",
+      "playerId": "nikola-serafimov",
       "no": 4
     },
     {
-      "playerId": "gjoko-zajkov",
+      "playerId": "imran-fetai",
       "no": 5
     },
     {
@@ -46,16 +46,12 @@
       "no": 8
     },
     {
-      "playerId": "bojan-miovski",
-      "no": 9
-    },
-    {
       "playerId": "enis-bardhi",
       "no": 10,
       "captain": true
     },
     {
-      "playerId": "elmin-rastoder",
+      "playerId": "darko-churlinov",
       "no": 11
     },
     {
@@ -67,7 +63,7 @@
       "no": 13
     },
     {
-      "playerId": "gjorge-djekov",
+      "playerId": "mario-mladenovski",
       "no": 14
     },
     {
@@ -75,16 +71,12 @@
       "no": 15
     },
     {
-      "playerId": "matej-gashtarov",
+      "playerId": "boban-nikolov",
       "no": 16
     },
     {
       "playerId": "azer-omeragikj",
       "no": 17
-    },
-    {
-      "playerId": "tihomir-kostadinov",
-      "no": 18
     },
     {
       "playerId": "ljupcho-doriev",
@@ -95,11 +87,11 @@
       "no": 20
     },
     {
-      "playerId": "luka-stankovski",
+      "playerId": "jani-atanasov",
       "no": 21
     },
     {
-      "playerId": "hristijan-maleski",
+      "playerId": "stefan-despotovski",
       "no": 22
     },
     {
@@ -107,15 +99,23 @@
       "no": 23
     },
     {
-      "playerId": "jani-atanasov",
+      "playerId": "elmin-rastoder",
       "no": null
     },
     {
-      "playerId": "mario-mladenovski",
+      "playerId": "hristijan-maleski",
       "no": null
     },
     {
-      "playerId": "sebastian-herrera",
+      "playerId": "luka-stankovski",
+      "no": null
+    },
+    {
+      "playerId": "marko-gjorgjievski",
+      "no": null
+    },
+    {
+      "playerId": "matej-gashtarov",
       "no": null
     }
   ]

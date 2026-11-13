@@ -5,25 +5,21 @@
   "season": "2026",
   "primaryColor": "#FDB913",
   "secondaryColor": "#C1272D",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#FDB913", "#006A44", "#C1272D"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Lithuania_national_football_team",
   "members": [
     {
-      "playerId": "edvinas-gertmonas",
+      "playerId": "arnas-voitinovicius",
       "no": 1
     },
     {
       "playerId": "artemijus-tutyskinas",
       "no": 2
-    },
-    {
-      "playerId": "edgaras-utkus",
-      "no": 3
     },
     {
       "playerId": "zygimantas-baltrunas",
@@ -32,10 +28,6 @@
     {
       "playerId": "kipras-kazukolovas",
       "no": 5
-    },
-    {
-      "playerId": "modestas-vorobjovas",
-      "no": 6
     },
     {
       "playerId": "artur-dolznikov",
@@ -78,19 +70,19 @@
       "no": 16
     },
     {
-      "playerId": "vilius-armalas",
-      "no": 18
+      "playerId": "pijus-sirvys",
+      "no": 17
     },
     {
-      "playerId": "ignas-venckus",
-      "no": 19
+      "playerId": "vilius-armalas",
+      "no": 18
     },
     {
       "playerId": "rokas-lekiatas",
       "no": 20
     },
     {
-      "playerId": "adrian-lickunas",
+      "playerId": "deividas-sesplaukis",
       "no": 21
     },
     {
@@ -98,19 +90,23 @@
       "no": 22
     },
     {
-      "playerId": "dziugas-bartkus",
+      "playerId": "vincentas-sarkauskas",
       "no": 23
     },
     {
-      "playerId": "deividas-malzinskas",
+      "playerId": "edgaras-dubickas",
       "no": null
     },
     {
-      "playerId": "faustas-steponavicius",
+      "playerId": "gratas-sirgedas",
       "no": null
     },
     {
-      "playerId": "pijus-sirvys",
+      "playerId": "matas-vareika",
+      "no": null
+    },
+    {
+      "playerId": "paulius-golubickas",
       "no": null
     }
   ]

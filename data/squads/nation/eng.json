@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#CE1124"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/England_national_football_team",
   "members": [
     {
@@ -26,11 +26,19 @@
       "no": 3
     },
     {
-      "playerId": "marc-guehi",
+      "playerId": "rice",
+      "no": 4
+    },
+    {
+      "playerId": "dan-burn",
+      "no": 5
+    },
+    {
+      "playerId": "jarell-quansah",
       "no": 6
     },
     {
-      "playerId": "saka",
+      "playerId": "morgan-gibbswhite",
       "no": 7
     },
     {
@@ -51,7 +59,7 @@
       "no": 11
     },
     {
-      "playerId": "trevoh-chalobah",
+      "playerId": "white",
       "no": 12
     },
     {
@@ -59,7 +67,7 @@
       "no": 13
     },
     {
-      "playerId": "rio-ngumoha",
+      "playerId": "james-hill",
       "no": 14
     },
     {
@@ -67,7 +75,7 @@
       "no": 15
     },
     {
-      "playerId": "lewis-skelly",
+      "playerId": "jobe-bellingham",
       "no": 16
     },
     {
@@ -83,7 +91,7 @@
       "no": 19
     },
     {
-      "playerId": "morgan-gibbswhite",
+      "playerId": "rio-ngumoha",
       "no": 20
     },
     {
@@ -91,7 +99,7 @@
       "no": 21
     },
     {
-      "playerId": "jarell-quansah",
+      "playerId": "josh-king",
       "no": 22
     },
     {
@@ -99,7 +107,15 @@
       "no": 23
     },
     {
-      "playerId": "rico-lewis",
+      "playerId": "konsa",
+      "no": null
+    },
+    {
+      "playerId": "lewis-skelly",
+      "no": null
+    },
+    {
+      "playerId": "spence",
       "no": null
     }
   ]

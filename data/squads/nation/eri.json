@@ -10,7 +10,7 @@
     "bands": ["#43B02A", "#E4002B", "#418FDE"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Eritrea_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "mussie-beraky",
+      "playerId": "jozef-misignha",
       "no": 2
     },
     {
@@ -32,10 +32,6 @@
     {
       "playerId": "nahom-tadese",
       "no": 5
-    },
-    {
-      "playerId": "filimon-gerezgiher",
-      "no": 7
     },
     {
       "playerId": "ablelom-teklezghi",
@@ -59,7 +55,11 @@
       "no": 12
     },
     {
-      "playerId": "namrud-embaye",
+      "playerId": "oliver-hintsa",
+      "no": 13
+    },
+    {
+      "playerId": "nahom-netabay",
       "no": 14
     },
     {
@@ -71,7 +71,7 @@
       "no": 16
     },
     {
-      "playerId": "fahmi-ibrahim",
+      "playerId": "siem-eyobabraha",
       "no": 17
     },
     {
@@ -83,11 +83,15 @@
       "no": 19
     },
     {
-      "playerId": "nahom-netabay",
+      "playerId": "namrud-embaye",
       "no": 20
     },
     {
-      "playerId": "malik-abdurahman",
+      "playerId": "yonatan-sebhatu",
+      "no": 21
+    },
+    {
+      "playerId": "malik-abdulrahman",
       "no": 22
     },
     {
@@ -95,31 +99,15 @@
       "no": 23
     },
     {
+      "playerId": "awed-issac",
+      "no": 24
+    },
+    {
       "playerId": "victor-fors",
-      "no": 25
-    },
-    {
-      "playerId": "sortname-illawetalemsegedno",
-      "no": 26
-    },
-    {
-      "playerId": "nobel-gebrezgi",
       "no": 29
     },
     {
-      "playerId": "awed-issac",
-      "no": 30
-    },
-    {
-      "playerId": "yonatan-sebhatu",
-      "no": 31
-    },
-    {
-      "playerId": "jozef-misignha",
-      "no": 33
-    },
-    {
-      "playerId": "joel-gerezgiher",
+      "playerId": "mussie-beraky",
       "no": null
     }
   ]

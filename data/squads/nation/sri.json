@@ -11,7 +11,7 @@
     "orientation": "vertical",
     "weights": [1, 1, 4]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Sri_Lanka_national_football_team",
   "members": [
     {
@@ -44,12 +44,12 @@
       "no": 12
     },
     {
-      "playerId": "gavin-de-niese",
-      "no": 13
-    },
-    {
       "playerId": "steven-sacayaradjy",
       "no": 14
+    },
+    {
+      "playerId": "niloshan-senthurvasan",
+      "no": 17
     },
     {
       "playerId": "barath-suresh",
@@ -76,6 +76,10 @@
       "no": null
     },
     {
+      "playerId": "chalana-chameera",
+      "no": null
+    },
+    {
       "playerId": "claudio-kammerknecht",
       "no": null
     },
@@ -88,11 +92,11 @@
       "no": null
     },
     {
-      "playerId": "kaveesh-lakpriya-fernando",
+      "playerId": "jude-supan",
       "no": null
     },
     {
-      "playerId": "mohamed-kursheeth",
+      "playerId": "kaveesh-lakpriya-fernando",
       "no": null
     },
     {
@@ -104,14 +108,6 @@
       "no": null
     },
     {
-      "playerId": "niloshan-senthurvasan",
-      "no": null
-    },
-    {
-      "playerId": "noah-karunaratne",
-      "no": null
-    },
-    {
       "playerId": "oliver-kelaart",
       "no": null
     },
@@ -120,19 +116,15 @@
       "no": null
     },
     {
+      "playerId": "remiyan-muthuccumaru",
+      "no": null
+    },
+    {
       "playerId": "sam-durrant",
       "no": null
     },
     {
-      "playerId": "shafrath-nawas",
-      "no": null
-    },
-    {
       "playerId": "wade-dekker",
-      "no": null
-    },
-    {
-      "playerId": "zahi-addis",
       "no": null
     }
   ]

@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#0055A4",
   "secondaryColor": "#EF4135",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#0055A4", "#FFFFFF", "#EF4135"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/France_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "pierre-kalulu",
+      "playerId": "gusto",
       "no": 2
     },
     {
@@ -26,7 +26,11 @@
       "no": 3
     },
     {
-      "playerId": "kounde",
+      "playerId": "upamecano",
+      "no": 4
+    },
+    {
+      "playerId": "sael-kumbedi",
       "no": 5
     },
     {
@@ -34,16 +38,21 @@
       "no": 6
     },
     {
-      "playerId": "dembele",
+      "playerId": "cherki",
       "no": 7
     },
     {
-      "playerId": "kone",
+      "playerId": "mayulu",
       "no": 8
     },
     {
-      "playerId": "cherki",
+      "playerId": "eli-junior-kroupi",
       "no": 9
+    },
+    {
+      "playerId": "mbappe",
+      "no": 10,
+      "captain": true
     },
     {
       "playerId": "olise",
@@ -62,7 +71,7 @@
       "no": 14
     },
     {
-      "playerId": "leny-yoro",
+      "playerId": "konate",
       "no": 15
     },
     {
@@ -70,15 +79,15 @@
       "no": 16
     },
     {
-      "playerId": "lacroix",
+      "playerId": "leny-yoro",
       "no": 17
     },
     {
-      "playerId": "akliouche",
+      "playerId": "zaire-emery",
       "no": 18
     },
     {
-      "playerId": "esteban-lepaul",
+      "playerId": "pablo-pagis",
       "no": 19
     },
     {
@@ -94,7 +103,7 @@
       "no": 22
     },
     {
-      "playerId": "jean-butez",
+      "playerId": "risser",
       "no": 23
     }
   ]

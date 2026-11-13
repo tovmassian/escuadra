@@ -10,7 +10,7 @@
     "bands": ["#000000", "#FDDA24", "#EF3340"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Belgium_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "zeno-debast",
+      "playerId": "kyriani-sabbe",
       "no": 2
     },
     {
@@ -34,19 +34,20 @@
       "no": 5
     },
     {
-      "playerId": "romeo-lavia",
+      "playerId": "mandela-keita",
       "no": 6
     },
     {
-      "playerId": "godts",
+      "playerId": "kevin-de-bruyne",
       "no": 7
     },
     {
-      "playerId": "mandela-keita",
-      "no": 8
+      "playerId": "youri-tielemans",
+      "no": 8,
+      "captain": true
     },
     {
-      "playerId": "romelu-lukaku",
+      "playerId": "hugo-cuypers",
       "no": 9
     },
     {
@@ -54,7 +55,7 @@
       "no": 10
     },
     {
-      "playerId": "lois-openda",
+      "playerId": "jeremy-doku",
       "no": 11
     },
     {
@@ -74,7 +75,7 @@
       "no": 15
     },
     {
-      "playerId": "kyriani-sabbe",
+      "playerId": "josue-kongolo",
       "no": 16
     },
     {
@@ -98,7 +99,7 @@
       "no": 21
     },
     {
-      "playerId": "matias-fernandezpardo",
+      "playerId": "godts",
       "no": 22
     },
     {
@@ -110,11 +111,11 @@
       "no": null
     },
     {
-      "playerId": "koni-de-winter",
+      "playerId": "romelu-lukaku",
       "no": null
     },
     {
-      "playerId": "malick-fofana",
+      "playerId": "romeo-lavia",
       "no": null
     }
   ]

@@ -5,13 +5,13 @@
   "season": "2026",
   "primaryColor": "#C60B1E",
   "secondaryColor": "#FFC400",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#AA151B", "#F1BF00", "#AA151B"],
     "orientation": "horizontal",
     "weights": [1, 2, 1]
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Spain_national_football_team",
   "members": [
     {
@@ -19,15 +19,15 @@
       "no": 1
     },
     {
-      "playerId": "huijsen",
+      "playerId": "pubill",
       "no": 2
     },
     {
-      "playerId": "le-normand",
+      "playerId": "grimaldo",
       "no": 3
     },
     {
-      "playerId": "ivan-fresneda",
+      "playerId": "huijsen",
       "no": 4
     },
     {
@@ -39,11 +39,11 @@
       "no": 6
     },
     {
-      "playerId": "victor-munoz",
+      "playerId": "torres",
       "no": 7
     },
     {
-      "playerId": "r-fernandez",
+      "playerId": "fabian-ruiz",
       "no": 8
     },
     {
@@ -51,7 +51,7 @@
       "no": 9
     },
     {
-      "playerId": "dani-olmo",
+      "playerId": "victor-munoz",
       "no": 10
     },
     {
@@ -59,15 +59,15 @@
       "no": 11
     },
     {
-      "playerId": "pubill",
+      "playerId": "porro",
       "no": 12
     },
     {
-      "playerId": "j-martinez",
+      "playerId": "joan-garcia",
       "no": 13
     },
     {
-      "playerId": "laporte",
+      "playerId": "jacobo-ramon",
       "no": 14
     },
     {
@@ -75,12 +75,11 @@
       "no": 15
     },
     {
-      "playerId": "rodri",
-      "no": 16,
-      "captain": true
+      "playerId": "barrios",
+      "no": 16
     },
     {
-      "playerId": "fran-garcia-torres",
+      "playerId": "roca",
       "no": 17
     },
     {
@@ -88,7 +87,7 @@
       "no": 18
     },
     {
-      "playerId": "yamal",
+      "playerId": "de-frutos",
       "no": 19
     },
     {
@@ -96,7 +95,7 @@
       "no": 20
     },
     {
-      "playerId": "oyarzabal",
+      "playerId": "r-fernandez",
       "no": 21
     },
     {
@@ -105,10 +104,27 @@
     },
     {
       "playerId": "unai-simon",
-      "no": 23
+      "no": 23,
+      "captain": true
     },
     {
-      "playerId": "carlos-espi",
+      "playerId": "laporte",
+      "no": null
+    },
+    {
+      "playerId": "nico-williams",
+      "no": null
+    },
+    {
+      "playerId": "oyarzabal",
+      "no": null
+    },
+    {
+      "playerId": "valles",
+      "no": null
+    },
+    {
+      "playerId": "yamal",
       "no": null
     }
   ]

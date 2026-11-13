@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#0047AB",
   "secondaryColor": "#FFFFFF",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#0047AB", "#FFFFFF", "#0047AB"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/El_Salvador_national_football_team",
   "members": [
     {
@@ -31,12 +31,8 @@
       "no": 4
     },
     {
-      "playerId": "victor-garcia",
+      "playerId": "rudy-clavel",
       "no": 5
-    },
-    {
-      "playerId": "alejandro-henriquez",
-      "no": 6
     },
     {
       "playerId": "styven-vasquez",
@@ -49,14 +45,6 @@
     {
       "playerId": "brayan-gil",
       "no": 9
-    },
-    {
-      "playerId": "nathan-ordaz",
-      "no": 10
-    },
-    {
-      "playerId": "cristian-gil",
-      "no": 11
     },
     {
       "playerId": "marcelo-diaz",
@@ -75,7 +63,7 @@
       "no": 15
     },
     {
-      "playerId": "henry-romero",
+      "playerId": "diego-flores",
       "no": 16
     },
     {
@@ -83,7 +71,7 @@
       "no": 17
     },
     {
-      "playerId": "kevin-carabantes",
+      "playerId": "geonathan-barrera",
       "no": 18
     },
     {
@@ -95,10 +83,6 @@
       "no": 20
     },
     {
-      "playerId": "mayer-gil",
-      "no": 21
-    },
-    {
       "playerId": "benji-villalobos",
       "no": 22
     },
@@ -107,11 +91,27 @@
       "no": 23
     },
     {
-      "playerId": "diego-flores",
+      "playerId": "amando-moreno",
       "no": null
     },
     {
-      "playerId": "rudy-clavel",
+      "playerId": "eric-calvillo",
+      "no": null
+    },
+    {
+      "playerId": "jorge-mendez",
+      "no": null
+    },
+    {
+      "playerId": "jose-portillo",
+      "no": null
+    },
+    {
+      "playerId": "joshua-perez",
+      "no": null
+    },
+    {
+      "playerId": "nelson-blanco",
       "no": null
     }
   ]

@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#008C45",
   "secondaryColor": "#CD212A",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#008C45", "#F4F5F0", "#CD212A"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Italy_national_football_team",
   "members": [
     {
@@ -23,11 +23,11 @@
       "no": 2
     },
     {
-      "playerId": "matteo-ruggeri",
+      "playerId": "giorgio-scalvini",
       "no": 3
     },
     {
-      "playerId": "alessandro-romano",
+      "playerId": "samuele-ricci",
       "no": 4
     },
     {
@@ -39,7 +39,7 @@
       "no": 6
     },
     {
-      "playerId": "nicolo-cambiaghi",
+      "playerId": "sebastiano-esposito",
       "no": 7
     },
     {
@@ -55,7 +55,7 @@
       "no": 10
     },
     {
-      "playerId": "gianluca-scamacca",
+      "playerId": "dimarco",
       "no": 11
     },
     {
@@ -67,7 +67,7 @@
       "no": 13
     },
     {
-      "playerId": "samuele-inacio",
+      "playerId": "marco-palestra",
       "no": 14
     },
     {
@@ -79,7 +79,7 @@
       "no": 16
     },
     {
-      "playerId": "daniel-maldini",
+      "playerId": "alessandro-romano",
       "no": 17
     },
     {
@@ -87,11 +87,11 @@
       "no": 18
     },
     {
-      "playerId": "giorgio-scalvini",
+      "playerId": "nicolo-cambiaghi",
       "no": 19
     },
     {
-      "playerId": "sebastiano-esposito",
+      "playerId": "gianluca-scamacca",
       "no": 20
     },
     {
@@ -99,39 +99,35 @@
       "no": 21
     },
     {
-      "playerId": "giovanni-di-lorenzo",
+      "playerId": "daniele-ghilardi",
       "no": 22
     },
     {
-      "playerId": "gianluca-mancini",
+      "playerId": "luca-koleosho",
       "no": 23
     },
     {
-      "playerId": "daniele-ghilardi",
+      "playerId": "alphadjo-cisse",
       "no": null
     },
     {
-      "playerId": "diego-coppola",
+      "playerId": "federico-gatti",
       "no": null
     },
     {
-      "playerId": "eddy-kouadio",
+      "playerId": "honest-ahanor",
       "no": null
     },
     {
-      "playerId": "massimo-pessina",
+      "playerId": "matteo-palma",
       "no": null
     },
     {
-      "playerId": "mohamed-ali-zoma",
+      "playerId": "mattia-liberali",
       "no": null
     },
     {
-      "playerId": "rolando-mandragora",
-      "no": null
-    },
-    {
-      "playerId": "samuele-ricci",
+      "playerId": "niccolo-pisilli",
       "no": null
     }
   ]

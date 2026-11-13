@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#ED2939",
   "secondaryColor": "#FFFFFF",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#ED2939", "#FFFFFF", "#ED2939"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Austria_national_football_team",
   "members": [
     {
@@ -62,14 +62,6 @@
       "no": 12
     },
     {
-      "playerId": "matteo-bignetti",
-      "no": 13
-    },
-    {
-      "playerId": "maximilian-wober",
-      "no": 14
-    },
-    {
       "playerId": "philipp-lienhart",
       "no": 15
     },
@@ -78,15 +70,11 @@
       "no": 16
     },
     {
-      "playerId": "carney-chukwuemeka",
-      "no": 17
-    },
-    {
       "playerId": "felix-bacher",
       "no": 18
     },
     {
-      "playerId": "marco-grull",
+      "playerId": "christoph-baumgartner",
       "no": 19
     },
     {
@@ -94,19 +82,35 @@
       "no": 20
     },
     {
-      "playerId": "patrick-wimmer",
-      "no": 21
-    },
-    {
       "playerId": "alexander-prass",
       "no": 22
     },
     {
-      "playerId": "marco-friedl",
-      "no": 23
+      "playerId": "christian-zawieschitzky",
+      "no": null
     },
     {
-      "playerId": "vasilije-markovic",
+      "playerId": "luca-weinhandl",
+      "no": null
+    },
+    {
+      "playerId": "lukas-jungwirth",
+      "no": null
+    },
+    {
+      "playerId": "michael-svoboda",
+      "no": null
+    },
+    {
+      "playerId": "raul-florucz",
+      "no": null
+    },
+    {
+      "playerId": "sascha-horvath",
+      "no": null
+    },
+    {
+      "playerId": "yusuf-demir",
       "no": null
     }
   ]

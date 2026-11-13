@@ -10,7 +10,7 @@
     "bands": ["#C1272D", "#006233", "#C1272D"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-13",
   "source": "https://en.wikipedia.org/wiki/Morocco_national_football_team",
   "members": [
     {
@@ -27,10 +27,6 @@
       "no": 3
     },
     {
-      "playerId": "marwane-saadane",
-      "no": 4
-    },
-    {
       "playerId": "nayef-aguerd",
       "no": 5
     },
@@ -39,39 +35,19 @@
       "no": 6
     },
     {
-      "playerId": "akhomach",
-      "no": 7
-    },
-    {
-      "playerId": "azzedine-ounahi",
-      "no": 8
-    },
-    {
-      "playerId": "soufiane-rahimi",
-      "no": 9
-    },
-    {
       "playerId": "brahim",
       "no": 10
-    },
-    {
-      "playerId": "ismael-saibari",
-      "no": 11
     },
     {
       "playerId": "munir-mohamedi",
       "no": 12
     },
     {
-      "playerId": "zakaria-el-ouahdi",
-      "no": 13
-    },
-    {
       "playerId": "issa-diop",
       "no": 14
     },
     {
-      "playerId": "samir-el-mourabet",
+      "playerId": "souffian-el-karouani",
       "no": 15
     },
     {
@@ -87,7 +63,7 @@
       "no": 18
     },
     {
-      "playerId": "soufiane-elfaouzi",
+      "playerId": "youssef-ennesyri",
       "no": 19
     },
     {
@@ -127,11 +103,19 @@
       "no": 28
     },
     {
-      "playerId": "tawfik-bentayeb",
-      "no": 29
+      "playerId": "alaa-bellaarouch",
+      "no": 31
     },
     {
-      "playerId": "alaa-bellaarouch",
+      "playerId": "amine-sbai",
+      "no": null
+    },
+    {
+      "playerId": "ayoub-oufkir",
+      "no": null
+    },
+    {
+      "playerId": "reda-belahyane",
       "no": null
     }
   ]
