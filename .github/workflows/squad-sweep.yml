@@ -41,8 +41,12 @@ jobs:
       - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
         with:
           node-version-file: sweep-base/.nvmrc
+      # No git hooks on the runner: the pre-push hook would run check on the swept data
+      # and refuse the push. check runs on the PR instead, where its failures are read.
       - run: npm ci
         working-directory: sweep-base
+        env:
+          HUSKY: '0'
       - run: node scripts/ci/sweep.ts
         env:
           SWEEP_DIR: ${{ github.workspace }}/sweep-base
