@@ -660,7 +660,9 @@ two different answers.
 **squadctl decides what it can prove and stops at what it cannot.** A conflict
 is not a bug and not a failure — the team still gets written. It means the file
 now carries `verified: false` and is waiting on a judgement no parser can make.
-Exit code `4` is precisely this signal: _review needed_, not _broken_.
+Exit code `4` is precisely this signal: _review needed_, not _broken_. It cannot
+ship unanswered: `lib/__tests__/dataIntegrity.test.ts` fails while any squad is
+`verified: false`, so `npm run check` stays red until every conflict is answered.
 
 Everything below is what a conflict means, what you decide, and the command
 that hands the answer back.
