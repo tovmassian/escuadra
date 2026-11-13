@@ -97,4 +97,4 @@ where none is stored, `birth` from Wikidata, in batches of 50. A stored birth
 date Wikidata disagrees with is a conflict it never overwrites, and holds that
 player's photo until `squadctl birth` answers it.
 
-Designing a team's colours and `marker`, and triaging the conflicts squadctl reports, is done by hand (see `team-identity.md` for the colours).
+`squad-sweep` runs `fetch`, `apply` and `enrich` weekly on the live release branch and opens a data PR into it (`docs/release.md`, Sweep squad data). Designing a team's colours and `marker`, and answering the conflicts squadctl reports, stay by hand (see `team-identity.md` for the colours).

@@ -484,8 +484,10 @@ three claims read (~80 MB untrimmed for the base); a rule on another property
 needs one online run.
 
 **Run it on a developer machine.** Wikimedia's APIs answered `429` to a cloud
-session's shared IP after fewer than ten requests. GitHub Actions runners are
-untested.
+session's shared IP after fewer than ten requests. The weekly sweep
+(`squad-sweep`, `docs/release.md`) tries it on a GitHub runner for the teams
+with new players; when Wikimedia refuses the runner, the sweep's PR gives the
+`enrich --only` command to run here.
 
 ### `birth`
 
