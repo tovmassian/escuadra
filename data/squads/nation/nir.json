@@ -11,7 +11,7 @@
     "orientation": "vertical",
     "weights": [2, 1, 2]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Northern_Ireland_national_football_team",
   "members": [
     {
@@ -47,7 +47,7 @@
       "no": 8
     },
     {
-      "playerId": "ceadach-oneill",
+      "playerId": "kieran-morrison",
       "no": 9
     },
     {
@@ -63,7 +63,7 @@
       "no": 12
     },
     {
-      "playerId": "kieran-morrison",
+      "playerId": "braiden-graham",
       "no": 13
     },
     {
@@ -83,7 +83,7 @@
       "no": 17
     },
     {
-      "playerId": "eoin-toal",
+      "playerId": "michael-forbes",
       "no": 18
     },
     {
@@ -103,19 +103,11 @@
       "no": 22
     },
     {
-      "playerId": "bailey-peacockfarrell",
+      "playerId": "dermot-mee",
       "no": 23
     },
     {
-      "playerId": "braiden-graham",
-      "no": null
-    },
-    {
-      "playerId": "dion-charles",
-      "no": null
-    },
-    {
-      "playerId": "michael-forbes",
+      "playerId": "eoin-kenny",
       "no": null
     }
   ]

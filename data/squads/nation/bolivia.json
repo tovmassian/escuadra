@@ -5,16 +5,16 @@
   "season": "2026",
   "primaryColor": "#D32011",
   "secondaryColor": "#00702D",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#D32011", "#F0E53C", "#00702D"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Bolivia_national_football_team",
   "members": [
     {
-      "playerId": "rodrigo-banegas",
+      "playerId": "carlos-lampe",
       "no": 1
     },
     {
@@ -22,13 +22,12 @@
       "no": 2
     },
     {
-      "playerId": "diego-medina",
+      "playerId": "fabricio-quaglio",
       "no": 3
     },
     {
-      "playerId": "luis-haquin",
-      "no": 4,
-      "captain": true
+      "playerId": "fernando-mena",
+      "no": 4
     },
     {
       "playerId": "efrain-morales",
@@ -43,7 +42,7 @@
       "no": 7
     },
     {
-      "playerId": "rai-lima",
+      "playerId": "leonardo-viviani",
       "no": 8
     },
     {
@@ -55,7 +54,7 @@
       "no": 10
     },
     {
-      "playerId": "jose-martines",
+      "playerId": "nabil-nacif",
       "no": 11
     },
     {
@@ -63,7 +62,7 @@
       "no": 12
     },
     {
-      "playerId": "leonardo-viviani",
+      "playerId": "moises-paniagua",
       "no": 13
     },
     {
@@ -71,7 +70,7 @@
       "no": 14
     },
     {
-      "playerId": "gabriel-villamil",
+      "playerId": "jorge-lovera",
       "no": 15
     },
     {
@@ -83,11 +82,11 @@
       "no": 17
     },
     {
-      "playerId": "jesus-maraude",
+      "playerId": "guilmar-centella",
       "no": 18
     },
     {
-      "playerId": "richet-gomez",
+      "playerId": "joaquin-barro",
       "no": 19
     },
     {
@@ -99,24 +98,16 @@
       "no": 21
     },
     {
-      "playerId": "marcelo-torrez",
+      "playerId": "marco-velasco",
       "no": 22
     },
     {
-      "playerId": "guillermo-viscarra",
+      "playerId": "rodrigo-banegas",
       "no": 23
     },
     {
-      "playerId": "guilmar-centella",
+      "playerId": "anderson-ayhuana",
       "no": 24
-    },
-    {
-      "playerId": "fernando-nava",
-      "no": 25
-    },
-    {
-      "playerId": "damian-medina",
-      "no": 26
     }
   ]
 }

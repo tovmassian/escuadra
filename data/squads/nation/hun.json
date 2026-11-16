@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#CE2939",
   "secondaryColor": "#477050",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#CE2939", "#FFFFFF", "#477050"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Hungary_national_football_team",
   "members": [
     {
@@ -26,7 +26,7 @@
       "no": 3
     },
     {
-      "playerId": "bence-varkonyi",
+      "playerId": "attila-szalai",
       "no": 4
     },
     {
@@ -38,7 +38,7 @@
       "no": 6
     },
     {
-      "playerId": "tamas-szucs",
+      "playerId": "milan-peto",
       "no": 7
     },
     {
@@ -46,16 +46,15 @@
       "no": 8
     },
     {
-      "playerId": "donat-barany",
+      "playerId": "akos-szendrei",
       "no": 9
     },
     {
       "playerId": "dominik-szoboszlai",
-      "no": 10,
-      "captain": true
+      "no": 10
     },
     {
-      "playerId": "jozsef-szalai",
+      "playerId": "milos-kerkez",
       "no": 11
     },
     {
@@ -75,11 +74,11 @@
       "no": 15
     },
     {
-      "playerId": "daniel-lukacs",
+      "playerId": "jozef-urblik",
       "no": 16
     },
     {
-      "playerId": "gabor-jurek",
+      "playerId": "callum-styles",
       "no": 17
     },
     {
@@ -87,15 +86,15 @@
       "no": 18
     },
     {
-      "playerId": "rajmund-toth",
+      "playerId": "barnabas-varga",
       "no": 19
     },
     {
-      "playerId": "milan-toth",
+      "playerId": "roland-sallai",
       "no": 20
     },
     {
-      "playerId": "alex-toth",
+      "playerId": "rajmund-toth",
       "no": 21
     },
     {
@@ -103,15 +102,19 @@
       "no": 22
     },
     {
-      "playerId": "aron-doktorics",
+      "playerId": "gabor-jurek",
       "no": 23
+    },
+    {
+      "playerId": "damir-redzic",
+      "no": null
     },
     {
       "playerId": "kornel-szucs",
       "no": null
     },
     {
-      "playerId": "milos-kerkez",
+      "playerId": "peter-barath",
       "no": null
     }
   ]

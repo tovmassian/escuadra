@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#CE1126",
   "secondaryColor": "#006B3F",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#CE1126", "#FCD116", "#006B3F"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Ghana_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "yeboah",
+      "playerId": "alidu-seidu",
       "no": 2
     },
     {
@@ -30,11 +30,11 @@
       "no": 4
     },
     {
-      "playerId": "ronald-donkor",
+      "playerId": "thomas-partey",
       "no": 5
     },
     {
-      "playerId": "rahim-ibrahim",
+      "playerId": "mohammed-salisu",
       "no": 6
     },
     {
@@ -42,19 +42,16 @@
       "no": 7
     },
     {
-      "playerId": "kwasi-sibo",
+      "playerId": "danielkofi-kyereh",
       "no": 8
     },
     {
-      "playerId": "felix-afenagyan",
-      "no": 9
+      "playerId": "jordan-ayew",
+      "no": 9,
+      "captain": true
     },
     {
-      "playerId": "brandon-thomasasante",
-      "no": 10
-    },
-    {
-      "playerId": "benjamin-tetteh",
+      "playerId": "rahim-ibrahim",
       "no": 11
     },
     {
@@ -62,7 +59,7 @@
       "no": 12
     },
     {
-      "playerId": "christopher-bonsu-baah",
+      "playerId": "musa-hamzata",
       "no": 13
     },
     {
@@ -78,7 +75,7 @@
       "no": 16
     },
     {
-      "playerId": "ebenezer-annan",
+      "playerId": "isaac-afful",
       "no": 17
     },
     {
@@ -86,11 +83,11 @@
       "no": 18
     },
     {
-      "playerId": "ernest-nuamah",
+      "playerId": "felix-afenagyan",
       "no": 19
     },
     {
-      "playerId": "augustine-boakye",
+      "playerId": "mohammed-kudus",
       "no": 20
     },
     {
@@ -98,12 +95,28 @@
       "no": 21
     },
     {
-      "playerId": "mohammed-fuseini",
+      "playerId": "augustine-boakye",
       "no": 22
     },
     {
-      "playerId": "alexander-djiku",
+      "playerId": "brandon-thomasasante",
       "no": 23
+    },
+    {
+      "playerId": "prince-kwabena-adu",
+      "no": 25
+    },
+    {
+      "playerId": "ibrahim-osman",
+      "no": 26
+    },
+    {
+      "playerId": "emmanuel-annor",
+      "no": null
+    },
+    {
+      "playerId": "etse-dogli",
+      "no": null
     }
   ]
 }

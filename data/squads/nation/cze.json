@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#D7141A"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Czech_Republic_national_football_team",
   "members": [
     {
@@ -104,6 +104,14 @@
     {
       "playerId": "antonin-kinsky",
       "no": 23
+    },
+    {
+      "playerId": "filip-prebsl",
+      "no": null
+    },
+    {
+      "playerId": "matej-jurasek",
+      "no": null
     },
     {
       "playerId": "michal-sadilek",

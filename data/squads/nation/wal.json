@@ -5,16 +5,16 @@
   "season": "2026",
   "primaryColor": "#00B140",
   "secondaryColor": "#FFFFFF",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#FFFFFF", "#00B140"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Wales_national_football_team",
   "members": [
     {
-      "playerId": "david-cornell",
+      "playerId": "karl-darlow",
       "no": 1
     },
     {
@@ -27,23 +27,22 @@
     },
     {
       "playerId": "ben-davies",
-      "no": 4,
-      "captain": true
+      "no": 4
     },
     {
       "playerId": "ethan-ampadu",
       "no": 5
     },
     {
-      "playerId": "ben-cabango",
+      "playerId": "joe-rodon",
       "no": 6
     },
     {
-      "playerId": "cian-ashford",
+      "playerId": "david-brooks",
       "no": 7
     },
     {
-      "playerId": "wes-burns",
+      "playerId": "harry-wilson",
       "no": 8
     },
     {
@@ -63,7 +62,7 @@
       "no": 12
     },
     {
-      "playerId": "kieffer-moore",
+      "playerId": "aaron-collins",
       "no": 13
     },
     {
@@ -79,7 +78,7 @@
       "no": 16
     },
     {
-      "playerId": "jordan-james",
+      "playerId": "rubin-colwill",
       "no": 17
     },
     {
@@ -87,7 +86,7 @@
       "no": 18
     },
     {
-      "playerId": "sorba-thomas",
+      "playerId": "cian-ashford",
       "no": 19
     },
     {
@@ -95,7 +94,7 @@
       "no": 20
     },
     {
-      "playerId": "tom-king",
+      "playerId": "joe-duncan",
       "no": 21
     },
     {
@@ -103,23 +102,19 @@
       "no": 22
     },
     {
-      "playerId": "joel-colwill",
+      "playerId": "kai-andrews",
       "no": 23
     },
     {
-      "playerId": "cameron-congreve",
+      "playerId": "ben-cabango",
       "no": null
     },
     {
-      "playerId": "charlie-savage",
+      "playerId": "joel-colwill",
       "no": null
     },
     {
-      "playerId": "joe-taylor",
-      "no": null
-    },
-    {
-      "playerId": "rhys-norringtondavies",
+      "playerId": "sorba-thomas",
       "no": null
     }
   ]

@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#CE1124"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/England_national_football_team",
   "members": [
     {
@@ -30,7 +30,7 @@
       "no": 4
     },
     {
-      "playerId": "dan-burn",
+      "playerId": "konsa",
       "no": 5
     },
     {
@@ -67,11 +67,11 @@
       "no": 13
     },
     {
-      "playerId": "james-hill",
+      "playerId": "spence",
       "no": 14
     },
     {
-      "playerId": "jarrad-branthwaite",
+      "playerId": "dan-burn",
       "no": 15
     },
     {
@@ -83,7 +83,7 @@
       "no": 17
     },
     {
-      "playerId": "james-garner",
+      "playerId": "james-hill",
       "no": 18
     },
     {
@@ -99,7 +99,7 @@
       "no": 21
     },
     {
-      "playerId": "josh-king",
+      "playerId": "lewis-skelly",
       "no": 22
     },
     {
@@ -107,15 +107,15 @@
       "no": 23
     },
     {
-      "playerId": "konsa",
+      "playerId": "james-garner",
       "no": null
     },
     {
-      "playerId": "lewis-skelly",
+      "playerId": "jarrad-branthwaite",
       "no": null
     },
     {
-      "playerId": "spence",
+      "playerId": "josh-king",
       "no": null
     }
   ]

@@ -69,6 +69,7 @@ import squadCze from '@/data/squads/nation/cze.json';
 import squadDen from '@/data/squads/nation/den.json';
 import squadDep from '@/data/squads/club/la-liga/dep.json';
 import squadDji from '@/data/squads/nation/dji.json';
+import squadDma from '@/data/squads/nation/dma.json';
 import squadDom from '@/data/squads/nation/dom.json';
 import squadEcu from '@/data/squads/nation/ecu.json';
 import squadEgy from '@/data/squads/nation/egy.json';
@@ -123,6 +124,7 @@ import squadKos from '@/data/squads/nation/kos.json';
 import squadKsa from '@/data/squads/nation/ksa.json';
 import squadLao from '@/data/squads/nation/lao.json';
 import squadLaz from '@/data/squads/club/serie-a/laz.json';
+import squadLby from '@/data/squads/nation/lby.json';
 import squadLca from '@/data/squads/nation/lca.json';
 import squadLec from '@/data/squads/club/serie-a/lec.json';
 import squadLee from '@/data/squads/club/premier-league/lee.json';
@@ -144,6 +146,7 @@ import squadMar from '@/data/squads/club/ligue-1/mar.json';
 import squadMas from '@/data/squads/nation/mas.json';
 import squadMci from '@/data/squads/club/premier-league/mci.json';
 import squadMda from '@/data/squads/nation/mda.json';
+import squadMdv from '@/data/squads/nation/mdv.json';
 import squadMet from '@/data/squads/club/ligue-1/met.json';
 import squadMex from '@/data/squads/nation/mex.json';
 import squadMil from '@/data/squads/club/serie-a/mil.json';
@@ -326,6 +329,7 @@ export const SQUAD_FILES: Record<string, Squad> = {
   den: squadDen as Squad,
   dep: squadDep as Squad,
   dji: squadDji as Squad,
+  dma: squadDma as Squad,
   dom: squadDom as Squad,
   ecu: squadEcu as Squad,
   egy: squadEgy as Squad,
@@ -380,6 +384,7 @@ export const SQUAD_FILES: Record<string, Squad> = {
   ksa: squadKsa as Squad,
   lao: squadLao as Squad,
   laz: squadLaz as Squad,
+  lby: squadLby as Squad,
   lca: squadLca as Squad,
   lec: squadLec as Squad,
   lee: squadLee as Squad,
@@ -401,6 +406,7 @@ export const SQUAD_FILES: Record<string, Squad> = {
   mas: squadMas as Squad,
   mci: squadMci as Squad,
   mda: squadMda as Squad,
+  mdv: squadMdv as Squad,
   met: squadMet as Squad,
   mex: squadMex as Squad,
   mil: squadMil as Squad,

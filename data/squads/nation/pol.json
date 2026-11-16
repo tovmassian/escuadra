@@ -5,24 +5,20 @@
   "season": "2026",
   "primaryColor": "#FFFFFF",
   "secondaryColor": "#DC143C",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#FFFFFF", "#DC143C"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Poland_national_football_team",
   "members": [
     {
-      "playerId": "marcin-bulka",
+      "playerId": "bartlomiej-dragowski",
       "no": 1
     },
     {
-      "playerId": "matty-cash",
-      "no": 2
-    },
-    {
-      "playerId": "przemyslaw-wisniewski",
+      "playerId": "kamil-piatkowski",
       "no": 3
     },
     {
@@ -30,15 +26,15 @@
       "no": 4
     },
     {
-      "playerId": "jan-bednarek",
+      "playerId": "oskar-kubiak",
       "no": 5
     },
     {
-      "playerId": "bartosz-slisz",
+      "playerId": "bartosz-mazurek",
       "no": 6
     },
     {
-      "playerId": "oskar-pietuszewski",
+      "playerId": "adrian-benedyczak",
       "no": 7
     },
     {
@@ -46,11 +42,12 @@
       "no": 8
     },
     {
-      "playerId": "mateusz-zukowski",
-      "no": 9
+      "playerId": "lewandowski",
+      "no": 9,
+      "captain": true
     },
     {
-      "playerId": "zielinski",
+      "playerId": "arkadiusz-pyrka",
       "no": 10
     },
     {
@@ -62,7 +59,7 @@
       "no": 12
     },
     {
-      "playerId": "norbert-wojtuszek",
+      "playerId": "mateusz-zukowski",
       "no": 13
     },
     {
@@ -86,7 +83,7 @@
       "no": 18
     },
     {
-      "playerId": "przemyslaw-frankowski",
+      "playerId": "lukasz-poreba",
       "no": 19
     },
     {
@@ -104,6 +101,14 @@
     {
       "playerId": "kacper-potulski",
       "no": 23
+    },
+    {
+      "playerId": "jan-bednarek",
+      "no": null
+    },
+    {
+      "playerId": "zielinski",
+      "no": null
     }
   ]
 }

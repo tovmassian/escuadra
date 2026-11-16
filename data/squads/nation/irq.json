@@ -5,28 +5,28 @@
   "season": "2026",
   "primaryColor": "#CD1125",
   "secondaryColor": "#000000",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#CD1125", "#FFFFFF", "#000000"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Iraq_national_football_team",
   "members": [
     {
-      "playerId": "ahmed-basil",
+      "playerId": "mohammed-salih",
       "no": 1
     },
     {
-      "playerId": "maitham-jabbar",
+      "playerId": "josef-alimam",
       "no": 2
     },
     {
-      "playerId": "mustafa-saadoon",
+      "playerId": "ahmed-maknzi",
       "no": 3
     },
     {
-      "playerId": "zaid-tahseen",
+      "playerId": "karrar-amer",
       "no": 4
     },
     {
@@ -46,19 +46,19 @@
       "no": 8
     },
     {
-      "playerId": "ali-alhamadi",
+      "playerId": "hussein-ali-alsaedi",
       "no": 9
     },
     {
-      "playerId": "hasan-abdulkareem",
+      "playerId": "zidane-iqbal",
       "no": 10
     },
     {
-      "playerId": "ahmed-qasem",
+      "playerId": "peter-gwargis",
       "no": 11
     },
     {
-      "playerId": "mohammed-salih",
+      "playerId": "kumel-alrekabe",
       "no": 12
     },
     {
@@ -66,7 +66,7 @@
       "no": 13
     },
     {
-      "playerId": "zidane-iqbal",
+      "playerId": "amoori-faisal",
       "no": 14
     },
     {
@@ -78,7 +78,7 @@
       "no": 16
     },
     {
-      "playerId": "ali-jasim",
+      "playerId": "hayder-abdulkareem",
       "no": 17
     },
     {
@@ -87,36 +87,40 @@
       "captain": true
     },
     {
-      "playerId": "mohammed-qasim",
+      "playerId": "hiran-ahmed",
       "no": 19
     },
     {
-      "playerId": "karrar-nabeel",
+      "playerId": "aimar-sher",
       "no": 20
     },
     {
-      "playerId": "hayder-abdulkareem",
+      "playerId": "marko-farji",
       "no": 21
     },
     {
-      "playerId": "hussein-hassan",
+      "playerId": "ahmed-basil",
       "no": 22
     },
     {
-      "playerId": "merchas-doski",
+      "playerId": "siyaband-ageed",
       "no": 23
     },
     {
-      "playerId": "mohammed-dlawar",
+      "playerId": "adam-rasheed",
       "no": 24
     },
     {
-      "playerId": "josef-alimam",
+      "playerId": "ahmed-ayed",
       "no": 25
     },
     {
-      "playerId": "abdulrazzaq-qasim",
+      "playerId": "younis-hammoud",
       "no": 26
+    },
+    {
+      "playerId": "hussein-hassan",
+      "no": null
     }
   ]
 }

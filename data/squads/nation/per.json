@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#D91023",
   "secondaryColor": "#FFFFFF",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#D91023", "#FFFFFF", "#D91023"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Peru_national_football_team",
   "members": [
     {
@@ -18,11 +18,11 @@
       "no": 1
     },
     {
-      "playerId": "oslimg-mora",
+      "playerId": "alfonso-barco",
       "no": 2
     },
     {
-      "playerId": "alfonso-barco",
+      "playerId": "fabio-gruber",
       "no": 3
     },
     {
@@ -30,16 +30,12 @@
       "no": 4
     },
     {
-      "playerId": "miguel-araujo",
+      "playerId": "oslimg-mora",
       "no": 5
     },
     {
       "playerId": "jesus-pretell",
       "no": 6
-    },
-    {
-      "playerId": "adrian-ugarriza",
-      "no": 7
     },
     {
       "playerId": "erick-noriega",
@@ -50,44 +46,23 @@
       "no": 9
     },
     {
-      "playerId": "jairo-velez",
-      "no": 11
-    },
-    {
       "playerId": "matias-cordova",
       "no": 12
     },
     {
-      "playerId": "marco-huaman",
-      "no": 13
-    },
-    {
-      "playerId": "rodrigo-vilca",
+      "playerId": "francesco-andrealli",
       "no": 14
     },
     {
-      "playerId": "renzo-garces",
+      "playerId": "matias-lazo",
       "no": 15
     },
     {
-      "playerId": "wilder-cartagena",
-      "no": 16
-    },
-    {
-      "playerId": "jairo-concha",
+      "playerId": "adrian-ugarriza",
       "no": 17
     },
     {
-      "playerId": "andre-carrillo",
-      "no": 18
-    },
-    {
-      "playerId": "yoshimar-yotun",
-      "no": 19,
-      "captain": true
-    },
-    {
-      "playerId": "alex-valera",
+      "playerId": "rodrigo-vilca",
       "no": 20
     },
     {
@@ -95,11 +70,11 @@
       "no": 21
     },
     {
-      "playerId": "oliver-sonne",
+      "playerId": "erinson-ramirez",
       "no": 22
     },
     {
-      "playerId": "cesar-inga",
+      "playerId": "piero-magallanes",
       "no": 23
     },
     {
@@ -111,12 +86,37 @@
       "no": 25
     },
     {
-      "playerId": "piero-magallanes",
+      "playerId": "maxloren-castro",
       "no": 26
     },
     {
+      "playerId": "andy-polo",
+      "no": null
+    },
+    {
+      "playerId": "jairo-velez",
+      "no": null
+    },
+    {
       "playerId": "jhonny-vidales",
-      "no": 27
+      "no": null
+    },
+    {
+      "playerId": "luis-iberico",
+      "no": null
+    },
+    {
+      "playerId": "marco-huaman",
+      "no": null
+    },
+    {
+      "playerId": "wilder-cartagena",
+      "no": null
+    },
+    {
+      "playerId": "yoshimar-yotun",
+      "no": null,
+      "captain": true
     }
   ]
 }

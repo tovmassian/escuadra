@@ -10,7 +10,7 @@
     "bands": ["#006A4E", "#F42A41", "#006A4E"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Bangladesh_national_football_team",
   "members": [
     {
@@ -24,6 +24,11 @@
     {
       "playerId": "rahmat-mia",
       "no": 3
+    },
+    {
+      "playerId": "topu-barman",
+      "no": 4,
+      "captain": true
     },
     {
       "playerId": "md-ridoy",
@@ -120,11 +125,6 @@
     {
       "playerId": "mahe-khan",
       "no": null
-    },
-    {
-      "playerId": "topu-barman",
-      "no": null,
-      "captain": true
     }
   ]
 }

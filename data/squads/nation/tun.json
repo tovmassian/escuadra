@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#E70013",
   "secondaryColor": "#FFFFFF",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#E70013", "#FFFFFF", "#E70013"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Tunisia_national_football_team",
   "members": [
     {
@@ -38,15 +38,15 @@
       "no": 6
     },
     {
-      "playerId": "elias-achouri",
+      "playerId": "elias-saad",
       "no": 7
     },
     {
-      "playerId": "hamza-rafia",
+      "playerId": "hadj-mahmoud",
       "no": 8
     },
     {
-      "playerId": "hazem-mastouri",
+      "playerId": "sadok-kadida",
       "no": 9
     },
     {
@@ -66,7 +66,7 @@
       "no": 13
     },
     {
-      "playerId": "aissa-laidouni",
+      "playerId": "anis-ben-slimane",
       "no": 14
     },
     {
@@ -78,27 +78,27 @@
       "no": 16
     },
     {
-      "playerId": "sebastian-tounekti",
+      "playerId": "mohamed-ali-ben-hammouda",
       "no": 17
     },
     {
-      "playerId": "anis-ben-slimane",
+      "playerId": "ghaith-zaalouni",
       "no": 18
     },
     {
-      "playerId": "moutaz-neffati",
+      "playerId": "firas-chaouat",
       "no": 19
     },
     {
-      "playerId": "yan-valery",
+      "playerId": "omar-rekik",
       "no": 20
     },
     {
-      "playerId": "amin-cherni",
+      "playerId": "mohamed-drager",
       "no": 21
     },
     {
-      "playerId": "rayan-elloumi",
+      "playerId": "raki-aouani",
       "no": 22
     },
     {
@@ -107,15 +107,19 @@
     },
     {
       "playerId": "alaa-ghram",
-      "no": null
+      "no": 24
     },
     {
-      "playerId": "sabri-ben-hessen",
-      "no": null
+      "playerId": "aissa-laidouni",
+      "no": 25
     },
     {
-      "playerId": "sadok-kadida",
-      "no": null
+      "playerId": "bechir-ben-said",
+      "no": 26
+    },
+    {
+      "playerId": "moataz-zemzemi",
+      "no": 27
     }
   ]
 }

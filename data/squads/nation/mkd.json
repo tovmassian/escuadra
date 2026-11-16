@@ -10,7 +10,7 @@
     "bands": ["#D82126", "#F8E92E", "#D82126"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/North_Macedonia_national_football_team",
   "members": [
     {
@@ -26,7 +26,7 @@
       "no": 3
     },
     {
-      "playerId": "nikola-serafimov",
+      "playerId": "mario-mladenovski",
       "no": 4
     },
     {
@@ -46,6 +46,10 @@
       "no": 8
     },
     {
+      "playerId": "elmin-rastoder",
+      "no": 9
+    },
+    {
       "playerId": "enis-bardhi",
       "no": 10,
       "captain": true
@@ -63,11 +67,11 @@
       "no": 13
     },
     {
-      "playerId": "mario-mladenovski",
+      "playerId": "ljupcho-doriev",
       "no": 14
     },
     {
-      "playerId": "agon-elezi",
+      "playerId": "matej-gashtarov",
       "no": 15
     },
     {
@@ -79,19 +83,23 @@
       "no": 17
     },
     {
-      "playerId": "ljupcho-doriev",
+      "playerId": "agon-elezi",
+      "no": 18
+    },
+    {
+      "playerId": "marko-gjorgjievski",
       "no": 19
     },
     {
-      "playerId": "dimitar-mitrovski",
+      "playerId": "luka-stankovski",
       "no": 20
     },
     {
-      "playerId": "jani-atanasov",
+      "playerId": "stefan-despotovski",
       "no": 21
     },
     {
-      "playerId": "stefan-despotovski",
+      "playerId": "hristijan-maleski",
       "no": 22
     },
     {
@@ -99,23 +107,15 @@
       "no": 23
     },
     {
-      "playerId": "elmin-rastoder",
+      "playerId": "dimitar-mitrovski",
       "no": null
     },
     {
-      "playerId": "hristijan-maleski",
+      "playerId": "jani-atanasov",
       "no": null
     },
     {
-      "playerId": "luka-stankovski",
-      "no": null
-    },
-    {
-      "playerId": "marko-gjorgjievski",
-      "no": null
-    },
-    {
-      "playerId": "matej-gashtarov",
+      "playerId": "nikola-serafimov",
       "no": null
     }
   ]

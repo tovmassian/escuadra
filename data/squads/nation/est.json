@@ -10,12 +10,16 @@
     "bands": ["#0072CE", "#000000", "#FFFFFF"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Estonia_national_football_team",
   "members": [
     {
       "playerId": "hein",
       "no": 1
+    },
+    {
+      "playerId": "mihhail-kolobov",
+      "no": 2
     },
     {
       "playerId": "maksim-paskotsi",
@@ -32,6 +36,14 @@
     {
       "playerId": "rasmus-peetson",
       "no": 6
+    },
+    {
+      "playerId": "mattias-mannilaan",
+      "no": 7
+    },
+    {
+      "playerId": "martenchris-paalberg",
+      "no": 8
     },
     {
       "playerId": "karel-mustmaa",
@@ -62,11 +74,11 @@
       "no": 15
     },
     {
-      "playerId": "martenchris-paalberg",
+      "playerId": "erko-jonne-tougjas",
       "no": 16
     },
     {
-      "playerId": "martin-miller",
+      "playerId": "tanel-tammik",
       "no": 17
     },
     {
@@ -83,6 +95,10 @@
       "no": 20
     },
     {
+      "playerId": "vladislav-kreida",
+      "no": 21
+    },
+    {
       "playerId": "karl-andre-vallner",
       "no": 22
     },
@@ -91,27 +107,11 @@
       "no": 23
     },
     {
-      "playerId": "erko-jonne-tougjas",
-      "no": null
-    },
-    {
-      "playerId": "mattias-mannilaan",
-      "no": null
-    },
-    {
-      "playerId": "mihhail-kolobov",
+      "playerId": "martin-miller",
       "no": null
     },
     {
       "playerId": "nikita-mihhailov",
-      "no": null
-    },
-    {
-      "playerId": "tanel-tammik",
-      "no": null
-    },
-    {
-      "playerId": "vladislav-kreida",
       "no": null
     }
   ]

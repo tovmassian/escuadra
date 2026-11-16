@@ -5,20 +5,20 @@
   "season": "2026",
   "primaryColor": "#FFDF00",
   "secondaryColor": "#009739",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#009739", "#FFDF00", "#009739"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Brazil_national_football_team",
   "members": [
     {
-      "playerId": "hugo-souza",
+      "playerId": "bento",
       "no": 1
     },
     {
-      "playerId": "vanderson",
+      "playerId": "wesley",
       "no": 2
     },
     {
@@ -26,13 +26,8 @@
       "no": 3
     },
     {
-      "playerId": "marquinhos",
-      "no": 4,
-      "captain": true
-    },
-    {
-      "playerId": "danilo-santos",
-      "no": 5
+      "playerId": "jair-cunha",
+      "no": 4
     },
     {
       "playerId": "douglas-santos",
@@ -51,15 +46,19 @@
       "no": 9
     },
     {
+      "playerId": "raphinha",
+      "no": 10
+    },
+    {
       "playerId": "estevao",
       "no": 11
     },
     {
-      "playerId": "otavio-3",
+      "playerId": "lucas-perri",
       "no": 12
     },
     {
-      "playerId": "matheuzinho",
+      "playerId": "vanderson",
       "no": 13
     },
     {
@@ -71,23 +70,23 @@
       "no": 15
     },
     {
-      "playerId": "mauro-junior",
+      "playerId": "carlos-augusto",
       "no": 16
     },
     {
-      "playerId": "breno-bidon",
+      "playerId": "andre-2",
       "no": 17
     },
     {
-      "playerId": "douglas-luiz",
+      "playerId": "joao-gomes",
       "no": 18
     },
     {
-      "playerId": "pedro",
+      "playerId": "alisson-santana",
       "no": 19
     },
     {
-      "playerId": "matheus-martinelli",
+      "playerId": "marlon-gomes",
       "no": 20
     },
     {
@@ -95,7 +94,7 @@
       "no": 21
     },
     {
-      "playerId": "samuel-lino",
+      "playerId": "allan",
       "no": 22
     },
     {
@@ -103,7 +102,7 @@
       "no": 23
     },
     {
-      "playerId": "jair-cunha",
+      "playerId": "jonathan-jesus",
       "no": 24
     },
     {

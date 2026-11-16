@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#012169",
   "secondaryColor": "#00A2DD",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#012169", "#00A2DD", "#012169"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Montserrat_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "mark-rogers",
+      "playerId": "raff-cirino",
       "no": 2
     },
     {
@@ -26,7 +26,7 @@
       "no": 3
     },
     {
-      "playerId": "nico-gordon",
+      "playerId": "josiah-persaud",
       "no": 4
     },
     {
@@ -46,12 +46,11 @@
       "no": 8
     },
     {
-      "playerId": "lyle-taylor",
-      "no": 9,
-      "captain": true
+      "playerId": "josiah-dyer",
+      "no": 9
     },
     {
-      "playerId": "sydney-mendes",
+      "playerId": "kaleem-simon",
       "no": 10
     },
     {
@@ -67,7 +66,7 @@
       "no": 13
     },
     {
-      "playerId": "jeriel-dorsett",
+      "playerId": "sam-fenton",
       "no": 14
     },
     {
@@ -84,26 +83,27 @@
     },
     {
       "playerId": "alex-dyer",
-      "no": 18
+      "no": 18,
+      "captain": true
     },
     {
       "playerId": "vashirn-roache",
       "no": 19
     },
     {
-      "playerId": "mylan-benjamin",
+      "playerId": "lucas-kirnon",
       "no": 20
     },
     {
-      "playerId": "lucas-kirnon",
+      "playerId": "tyrone-baker",
       "no": 21
     },
     {
-      "playerId": "tyrone-baker",
+      "playerId": "kymani-smithdaley",
       "no": 22
     },
     {
-      "playerId": "josiah-persaud",
+      "playerId": "kymani-nelson",
       "no": 23
     }
   ]

@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#244AA5",
   "secondaryColor": "#D0A650",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#244AA5", "#D0A650", "#244AA5"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Kosovo_national_football_team",
   "members": [
     {
@@ -18,11 +18,11 @@
       "no": 1
     },
     {
-      "playerId": "ron-raci",
+      "playerId": "lindrit-kamberi",
       "no": 2
     },
     {
-      "playerId": "leard-sadriu",
+      "playerId": "kreshnik-hajrizi",
       "no": 3
     },
     {
@@ -30,11 +30,11 @@
       "no": 4
     },
     {
-      "playerId": "lumbardh-dellova",
+      "playerId": "ron-raci",
       "no": 5
     },
     {
-      "playerId": "erblin-osmani",
+      "playerId": "elvis-rexhbecaj",
       "no": 6
     },
     {
@@ -42,16 +42,12 @@
       "no": 7
     },
     {
-      "playerId": "valmir-matoshi",
+      "playerId": "betim-fazliji",
       "no": 8
     },
     {
       "playerId": "albion-rrahmani",
       "no": 9
-    },
-    {
-      "playerId": "edon-zhegrova",
-      "no": 10
     },
     {
       "playerId": "fisnik-asllani",
@@ -78,7 +74,7 @@
       "no": 16
     },
     {
-      "playerId": "ermal-krasniqi",
+      "playerId": "bleon-kurtulus",
       "no": 17
     },
     {
@@ -87,19 +83,15 @@
       "captain": true
     },
     {
-      "playerId": "vesel-demaku",
+      "playerId": "dion-kacuri",
       "no": 19
-    },
-    {
-      "playerId": "veldin-hoxha",
-      "no": 20
     },
     {
       "playerId": "lindon-emerllahu",
       "no": 21
     },
     {
-      "playerId": "meriton-korenica",
+      "playerId": "milot-avdyli",
       "no": 22
     },
     {

@@ -5,16 +5,16 @@
   "season": "2026",
   "primaryColor": "#239F40",
   "secondaryColor": "#DA0000",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#239F40", "#FFFFFF", "#DA0000"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Iran_national_football_team",
   "members": [
     {
-      "playerId": "alireza-beiranvand",
+      "playerId": "payam-niazmand",
       "no": 1
     },
     {
@@ -22,32 +22,39 @@
       "no": 2
     },
     {
-      "playerId": "ehsan-hajsafi",
-      "no": 3,
-      "captain": true
+      "playerId": "abolfazl-razzaghpour",
+      "no": 3
     },
     {
-      "playerId": "shojae-khalilzadeh",
+      "playerId": "saman-fallah",
       "no": 4
+    },
+    {
+      "playerId": "amin-hazbavi",
+      "no": 5
     },
     {
       "playerId": "saeid-ezatolahi",
       "no": 6
     },
     {
-      "playerId": "shahab-zahedi",
+      "playerId": "mohammad-javad-hosseinnejad",
+      "no": 7
+    },
+    {
+      "playerId": "mohammad-mohebi",
       "no": 8
     },
     {
-      "playerId": "mehdi-taremi",
-      "no": 9
+      "playerId": "mohammad-mehdi-mohebi",
+      "no": 10
     },
     {
       "playerId": "mehdi-limouchi",
       "no": 11
     },
     {
-      "playerId": "payam-niazmand",
+      "playerId": "mohammad-khalifeh",
       "no": 12
     },
     {
@@ -55,15 +62,23 @@
       "no": 13
     },
     {
+      "playerId": "aria-yousefi",
+      "no": 14
+    },
+    {
+      "playerId": "amirmohammad-razzaghinia",
+      "no": 15
+    },
+    {
       "playerId": "mohammad-ghorbani",
       "no": 16
     },
     {
-      "playerId": "aria-yousefi",
+      "playerId": "esmaeil-gholizadeh",
       "no": 17
     },
     {
-      "playerId": "saman-fallah",
+      "playerId": "amirhossein-hosseinzadeh",
       "no": 18
     },
     {
@@ -72,18 +87,19 @@
     },
     {
       "playerId": "sardar-azmoun",
-      "no": 20
+      "no": 20,
+      "captain": true
     },
     {
       "playerId": "omid-noorafkan",
       "no": 21
     },
     {
-      "playerId": "hossein-hosseini",
+      "playerId": "habib-far-abbasi",
       "no": 22
     },
     {
-      "playerId": "ramin-rezaeian",
+      "playerId": "jafar-salmani",
       "no": 23
     },
     {
@@ -91,28 +107,28 @@
       "no": 24
     },
     {
-      "playerId": "amir-hossein-mahmoudi",
-      "no": 25
-    },
-    {
-      "playerId": "milad-sourgi",
+      "playerId": "afshin-sadeghi",
       "no": 26
     },
     {
-      "playerId": "aref-haji-eydi",
+      "playerId": "hossein-goudarzi",
       "no": 27
-    },
-    {
-      "playerId": "mohammad-naderi",
-      "no": 28
-    },
-    {
-      "playerId": "mohammad-mehdi-mohebi",
-      "no": 29
     },
     {
       "playerId": "aref-aghasi",
       "no": 33
+    },
+    {
+      "playerId": "adib-zarei",
+      "no": null
+    },
+    {
+      "playerId": "amirhossein-farsi",
+      "no": null
+    },
+    {
+      "playerId": "kasra-taheri",
+      "no": null
     }
   ]
 }

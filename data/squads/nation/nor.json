@@ -10,7 +10,7 @@
     "bands": ["#EF2B2D", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Norway_national_football_team",
   "members": [
     {
@@ -38,7 +38,7 @@
       "no": 6
     },
     {
-      "playerId": "fredrik-aursnes",
+      "playerId": "sorloth",
       "no": 7
     },
     {
@@ -55,7 +55,7 @@
       "captain": true
     },
     {
-      "playerId": "jorgen-strand-larsen",
+      "playerId": "erik-botheim",
       "no": 11
     },
     {
@@ -67,11 +67,11 @@
       "no": 13
     },
     {
-      "playerId": "fredrik-sjovold",
+      "playerId": "julian-ryerson",
       "no": 14
     },
     {
-      "playerId": "sondre-langas",
+      "playerId": "hugo-vetlesen",
       "no": 15
     },
     {
@@ -79,7 +79,11 @@
       "no": 16
     },
     {
-      "playerId": "kristian-thorstvedt",
+      "playerId": "torbjorn-heggem",
+      "no": 17
+    },
+    {
+      "playerId": "felix-horn-myhre",
       "no": 18
     },
     {
@@ -99,20 +103,8 @@
       "no": 22
     },
     {
-      "playerId": "erik-botheim",
+      "playerId": "eivind-helland",
       "no": 23
-    },
-    {
-      "playerId": "julian-ryerson",
-      "no": 26
-    },
-    {
-      "playerId": "ole-didrik-blomberg",
-      "no": null
-    },
-    {
-      "playerId": "torbjorn-heggem",
-      "no": null
     }
   ]
 }
