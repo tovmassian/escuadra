@@ -54,7 +54,7 @@
       "bands": ["#FF0000", "#000000", "#FF0000"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "alg",
@@ -68,7 +68,7 @@
       "bands": ["#006233", "#FFFFFF"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-22"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "and",
@@ -125,7 +125,7 @@
       "bands": ["#D90012", "#0033A0", "#F2A800"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "ars",
@@ -213,7 +213,7 @@
       "bands": ["#EE2523", "#FFFFFF"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13",
+    "lastUpdated": "2026-11-16",
     "league": "la-liga"
   },
   {
@@ -257,7 +257,7 @@
       "bands": ["#ED2939", "#FFFFFF", "#ED2939"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "aux",
@@ -330,7 +330,7 @@
       "bands": ["#006A4E", "#F42A41", "#006A4E"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "bar",
@@ -359,7 +359,7 @@
       "bands": ["#000000", "#FDDA24", "#EF3340"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "ben",
@@ -477,7 +477,7 @@
       "orientation": "vertical",
       "weights": [2, 2, 1]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "blz",
@@ -492,7 +492,7 @@
       "orientation": "horizontal",
       "weights": [1, 8, 1]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "bmg",
@@ -536,7 +536,7 @@
       "bands": ["#D32011", "#F0E53C", "#00702D"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "bou",
@@ -565,7 +565,7 @@
       "bands": ["#009739", "#FFDF00", "#009739"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-22"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "bre",
@@ -610,7 +610,7 @@
       "orientation": "horizontal",
       "weights": [3, 1, 1, 3]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "bul",
@@ -624,7 +624,7 @@
       "bands": ["#FFFFFF", "#00966E", "#D62612"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "bur",
@@ -699,7 +699,7 @@
       "orientation": "vertical",
       "weights": [1, 2, 1]
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "cay",
@@ -771,7 +771,7 @@
       "bands": ["#FFFFFF", "#D52B1E"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-22"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "chn",
@@ -842,7 +842,7 @@
       "orientation": "horizontal",
       "weights": [2, 1, 1]
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "com",
@@ -901,7 +901,7 @@
       "bands": ["#FF0000", "#FFFFFF", "#171796"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "cry",
@@ -959,7 +959,7 @@
       "bands": ["#FFFFFF", "#D7141A"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "den",
@@ -973,7 +973,7 @@
       "bands": ["#C60C30", "#FFFFFF"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "dep",
@@ -1006,6 +1006,20 @@
     "lastUpdated": "2026-10-20"
   },
   {
+    "id": "dma",
+    "kind": "nation",
+    "name": "Dominica",
+    "season": "2026",
+    "primaryColor": "#046A38",
+    "secondaryColor": "#D50032",
+    "verified": true,
+    "marker": {
+      "bands": ["#046A38", "#D50032", "#046A38"],
+      "orientation": "vertical"
+    },
+    "lastUpdated": "2026-11-16"
+  },
+  {
     "id": "dom",
     "kind": "nation",
     "name": "Dominican Republic",
@@ -1032,7 +1046,7 @@
       "orientation": "horizontal",
       "weights": [2, 1, 1]
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "egy",
@@ -1075,7 +1089,7 @@
       "bands": ["#FFFFFF", "#CE1124"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "eqg",
@@ -1119,7 +1133,7 @@
       "orientation": "horizontal",
       "weights": [1, 2, 1]
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "est",
@@ -1133,7 +1147,7 @@
       "bands": ["#0072CE", "#000000", "#FFFFFF"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "eve",
@@ -1237,7 +1251,7 @@
       "orientation": "horizontal",
       "weights": [4, 3, 4]
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "fio",
@@ -1281,7 +1295,7 @@
       "orientation": "horizontal",
       "weights": [7, 1, 2, 1, 7]
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "ful",
@@ -1326,7 +1340,7 @@
       "orientation": "vertical",
       "weights": [2, 1, 2]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "ger",
@@ -1369,7 +1383,7 @@
       "bands": ["#CE1126", "#FCD116", "#006B3F"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "gib",
@@ -1384,7 +1398,7 @@
       "orientation": "horizontal",
       "weights": [2, 1]
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "gre",
@@ -1398,7 +1412,7 @@
       "bands": ["#0D5EAF", "#FFFFFF"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "grn",
@@ -1499,7 +1513,7 @@
       "bands": ["#00BCE4", "#FFFFFF", "#00BCE4"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "hsv",
@@ -1528,7 +1542,7 @@
       "bands": ["#CE2939", "#FFFFFF", "#477050"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "idn",
@@ -1585,7 +1599,7 @@
       "bands": ["#239F40", "#FFFFFF", "#DA0000"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "irq",
@@ -1599,7 +1613,7 @@
       "bands": ["#CD1125", "#FFFFFF", "#000000"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "isl",
@@ -1628,7 +1642,7 @@
       "bands": ["#008C45", "#F4F5F0", "#CD212A"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "jam",
@@ -1672,7 +1686,7 @@
       "bands": ["#FFFFFF", "#BC002D", "#FFFFFF"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "juv",
@@ -1701,7 +1715,7 @@
       "bands": ["#00ABC2", "#FFEC2D", "#00ABC2"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "koe",
@@ -1744,7 +1758,7 @@
       "bands": ["#244AA5", "#D0A650", "#244AA5"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-22"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "ksa",
@@ -1789,6 +1803,21 @@
     },
     "lastUpdated": "2026-10-21",
     "league": "serie-a"
+  },
+  {
+    "id": "lby",
+    "kind": "nation",
+    "name": "Libya",
+    "season": "2026",
+    "primaryColor": "#E70013",
+    "secondaryColor": "#239E46",
+    "verified": true,
+    "marker": {
+      "bands": ["#E70013", "#000000", "#239E46"],
+      "orientation": "horizontal",
+      "weights": [1, 2, 1]
+    },
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "lca",
@@ -1892,7 +1921,7 @@
       "orientation": "horizontal",
       "weights": [1, 2, 1]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "lil",
@@ -2069,7 +2098,7 @@
       "orientation": "vertical",
       "weights": [3, 1, 1, 1, 1]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "mci",
@@ -2098,7 +2127,21 @@
       "bands": ["#0046AE", "#FFD200", "#CC092F"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
+  },
+  {
+    "id": "mdv",
+    "kind": "nation",
+    "name": "Maldives",
+    "season": "2026",
+    "primaryColor": "#D21034",
+    "secondaryColor": "#007E3A",
+    "verified": true,
+    "marker": {
+      "bands": ["#D21034", "#007E3A", "#D21034"],
+      "orientation": "vertical"
+    },
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "met",
@@ -2127,7 +2170,7 @@
       "bands": ["#006847", "#FFFFFF", "#CE1126"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "mil",
@@ -2156,7 +2199,7 @@
       "bands": ["#D82126", "#F8E92E", "#D82126"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "mli",
@@ -2184,7 +2227,7 @@
       "bands": ["#E30000", "#FFC000", "#E30000"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "mng",
@@ -2241,7 +2284,7 @@
       "bands": ["#012169", "#00A2DD", "#012169"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-22"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "mun",
@@ -2342,7 +2385,7 @@
       "bands": ["#AE1C28", "#FFFFFF", "#21468B"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "nep",
@@ -2401,7 +2444,7 @@
       "bands": ["#008751", "#FFFFFF", "#008751"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "nic",
@@ -2445,7 +2488,7 @@
       "orientation": "vertical",
       "weights": [2, 1, 2]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "nor",
@@ -2459,7 +2502,7 @@
       "bands": ["#EF2B2D", "#FFFFFF"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "nzl",
@@ -2560,7 +2603,7 @@
       "bands": ["#D91023", "#FFFFFF", "#D91023"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "pfc",
@@ -2620,7 +2663,7 @@
       "orientation": "vertical",
       "weights": [1, 2, 2, 2]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "pol",
@@ -2634,7 +2677,7 @@
       "bands": ["#FFFFFF", "#DC143C"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "por",
@@ -2649,7 +2692,7 @@
       "orientation": "vertical",
       "weights": [2, 3]
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "prk",
@@ -2678,7 +2721,7 @@
       "bands": ["#D52B1E", "#FFFFFF", "#0038A8"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "psg",
@@ -2829,7 +2872,7 @@
       "orientation": "horizontal",
       "weights": [3, 1, 2, 1, 3]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "rso",
@@ -2903,7 +2946,7 @@
       "bands": ["#005EB8", "#FFFFFF"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "sdn",
@@ -2990,7 +3033,7 @@
       "bands": ["#ED2939", "#FFFFFF"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "skn",
@@ -3033,7 +3076,7 @@
       "bands": ["#0047AB", "#FFFFFF", "#0047AB"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "sol",
@@ -3062,7 +3105,7 @@
       "bands": ["#C6363C", "#0C4076", "#FFFFFF"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "sri",
@@ -3179,7 +3222,7 @@
       "bands": ["#FFFFFF", "#005DA4", "#ED1C24"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "svw",
@@ -3208,7 +3251,7 @@
       "bands": ["#006AA7", "#FECC02"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "swz",
@@ -3267,7 +3310,7 @@
       "orientation": "horizontal",
       "weights": [1, 1, 2, 1, 1]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "tjk",
@@ -3282,7 +3325,7 @@
       "orientation": "horizontal",
       "weights": [2, 3, 2]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "tkm",
@@ -3401,7 +3444,7 @@
       "bands": ["#E70013", "#FFFFFF", "#E70013"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-22"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "tur",
@@ -3473,7 +3516,7 @@
       "bands": ["#0057B7", "#FFDD00"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "uru",
@@ -3487,7 +3530,7 @@
       "bands": ["#FFFFFF", "#0038A8"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-16"
   },
   {
     "id": "usa",
@@ -3501,7 +3544,7 @@
       "bands": ["#B31942", "#FFFFFF"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "uzb",
@@ -3529,7 +3572,7 @@
       "bands": ["#FFFFFF", "#000000"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-09-03",
+    "lastUpdated": "2026-11-16",
     "league": "la-liga"
   },
   {
@@ -3645,7 +3688,7 @@
       "bands": ["#FFFFFF", "#00B140"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-22"
+    "lastUpdated": "2026-11-18"
   },
   {
     "id": "whu",

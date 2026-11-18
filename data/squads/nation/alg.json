@@ -10,7 +10,7 @@
     "bands": ["#006233", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Algeria_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "samir-chergui",
+      "playerId": "mohamed-azzi",
       "no": 2
     },
     {
@@ -42,11 +42,15 @@
       "no": 7
     },
     {
+      "playerId": "fares-chaibi",
+      "no": 8
+    },
+    {
       "playerId": "amine-gouiri",
       "no": 9
     },
     {
-      "playerId": "fares-chaibi",
+      "playerId": "ibrahim-maza",
       "no": 10
     },
     {
@@ -58,19 +62,19 @@
       "no": 12
     },
     {
-      "playerId": "jaouen-hadjam",
+      "playerId": "himad-abdelli",
       "no": 13
     },
     {
-      "playerId": "adil-aouchiche",
-      "no": 14
-    },
-    {
-      "playerId": "rayan-aitnouri",
+      "playerId": "rebbach",
       "no": 15
     },
     {
-      "playerId": "himad-abdelli",
+      "playerId": "oussama-benbot",
+      "no": 16
+    },
+    {
+      "playerId": "saadi-radouani",
       "no": 17
     },
     {
@@ -78,11 +82,11 @@
       "no": 18
     },
     {
-      "playerId": "saadi-radouani",
+      "playerId": "nabil-bentaleb",
       "no": 19
     },
     {
-      "playerId": "bachir-belloumi",
+      "playerId": "fahem-benaissayahia",
       "no": 20
     },
     {
@@ -94,11 +98,11 @@
       "no": 22
     },
     {
-      "playerId": "abdelatif-ramdane",
+      "playerId": "rayane-yesli",
       "no": 23
     },
     {
-      "playerId": "ilan-kebbal",
+      "playerId": "yacine-titraoui",
       "no": 24
     },
     {
@@ -106,15 +110,11 @@
       "no": 25
     },
     {
-      "playerId": "adil-bourabaa",
+      "playerId": "fares-ghedjemis",
       "no": 26
     },
     {
-      "playerId": "ibrahim-maza",
-      "no": 30
-    },
-    {
-      "playerId": "kilian-belazzoug",
+      "playerId": "rafik-belghali",
       "no": null
     }
   ]

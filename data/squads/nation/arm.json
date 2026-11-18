@@ -10,7 +10,7 @@
     "bands": ["#D90012", "#0033A0", "#F2A800"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Armenia_national_football_team",
   "members": [
     {
@@ -38,7 +38,7 @@
       "no": 6
     },
     {
-      "playerId": "sevikyan",
+      "playerId": "artur-garibyan",
       "no": 7
     },
     {
@@ -58,20 +58,16 @@
       "no": 11
     },
     {
-      "playerId": "arsen-beglaryan",
+      "playerId": "gor-matinyan",
       "no": 12
     },
     {
-      "playerId": "edgar-piloyan",
+      "playerId": "ghazaryan",
       "no": 13
     },
     {
       "playerId": "manvelyan",
       "no": 14
-    },
-    {
-      "playerId": "petrosyan",
-      "no": 15
     },
     {
       "playerId": "mishiev",
@@ -82,7 +78,7 @@
       "no": 17
     },
     {
-      "playerId": "artur-garibyan",
+      "playerId": "miranyan",
       "no": 18
     },
     {
@@ -106,11 +102,11 @@
       "no": 23
     },
     {
-      "playerId": "ghazaryan",
+      "playerId": "arsen-beglaryan",
       "no": null
     },
     {
-      "playerId": "gor-matinyan",
+      "playerId": "edgar-piloyan",
       "no": null
     },
     {
@@ -122,7 +118,11 @@
       "no": null
     },
     {
-      "playerId": "miranyan",
+      "playerId": "petrosyan",
+      "no": null
+    },
+    {
+      "playerId": "sevikyan",
       "no": null
     }
   ]

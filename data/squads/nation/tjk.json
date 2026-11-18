@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [2, 3, 2]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Tajikistan_national_football_team",
   "members": [
     {
@@ -31,7 +31,7 @@
       "no": 4
     },
     {
-      "playerId": "salokhiddin-irgashev",
+      "playerId": "faridun-davlatov",
       "no": 5
     },
     {
@@ -47,33 +47,28 @@
       "no": 8
     },
     {
-      "playerId": "rustam-soirov",
+      "playerId": "jahongir-ergashev",
       "no": 9
     },
     {
-      "playerId": "alisher-dzhalilov",
-      "no": 10,
-      "captain": true
+      "playerId": "shervoni-mabatshoev",
+      "no": 10
     },
     {
       "playerId": "mukhammadzhon-rakhimov",
       "no": 11
     },
     {
-      "playerId": "mekhrubon-karimov",
+      "playerId": "muso-kakhorov",
       "no": 12
     },
     {
-      "playerId": "abdusamad-melikmurodov",
+      "playerId": "nuriddin-khamrokulov",
       "no": 13
     },
     {
       "playerId": "sheriddin-boboev",
       "no": 14
-    },
-    {
-      "playerId": "shervoni-mabatshoev",
-      "no": 15
     },
     {
       "playerId": "daler-azizov",
@@ -96,19 +91,15 @@
       "no": 20
     },
     {
-      "playerId": "fatkhullo-olimzoda",
+      "playerId": "mekhrubon-karimov",
       "no": 21
-    },
-    {
-      "playerId": "shahrom-samiev",
-      "no": 22
     },
     {
       "playerId": "oleg-baklov",
       "no": 23
     },
     {
-      "playerId": "muso-kakhorov",
+      "playerId": "abdullo-ibragimzoda",
       "no": 24
     },
     {
@@ -120,11 +111,7 @@
       "no": 26
     },
     {
-      "playerId": "furkon-rakhimzoda",
-      "no": null
-    },
-    {
-      "playerId": "rakhmatsho-rakhmatzoda",
+      "playerId": "salokhiddin-irgashev",
       "no": null
     }
   ]

@@ -1,0 +1,110 @@
+{
+  "id": "mdv",
+  "kind": "nation",
+  "name": "Maldives",
+  "season": "2026",
+  "primaryColor": "#D21034",
+  "secondaryColor": "#007E3A",
+  "verified": true,
+  "marker": {
+    "bands": ["#D21034", "#007E3A", "#D21034"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-11-16",
+  "source": "https://en.wikipedia.org/wiki/Maldives_national_football_team",
+  "members": [
+    {
+      "playerId": "hussain-shareef",
+      "no": 1
+    },
+    {
+      "playerId": "samooh-ali",
+      "no": 2,
+      "captain": true
+    },
+    {
+      "playerId": "hussain-sifaau",
+      "no": 4
+    },
+    {
+      "playerId": "nassah-ibrahim",
+      "no": 5
+    },
+    {
+      "playerId": "ali-hamdhaan",
+      "no": 6
+    },
+    {
+      "playerId": "ali-fasir",
+      "no": 7
+    },
+    {
+      "playerId": "ibrahim-aisam",
+      "no": 8
+    },
+    {
+      "playerId": "ethan-ibrahim-zaki",
+      "no": 9
+    },
+    {
+      "playerId": "ahmed-aiham-2",
+      "no": 10
+    },
+    {
+      "playerId": "abdulla-looth",
+      "no": 11
+    },
+    {
+      "playerId": "ahmed-aiham",
+      "no": 12
+    },
+    {
+      "playerId": "mohamed-naim",
+      "no": 13
+    },
+    {
+      "playerId": "amdhan-ali",
+      "no": 15
+    },
+    {
+      "playerId": "ahzam-rasheed",
+      "no": 16
+    },
+    {
+      "playerId": "ibrahim-mahudhee",
+      "no": 17
+    },
+    {
+      "playerId": "mohammed-ashwaan",
+      "no": 18
+    },
+    {
+      "playerId": "ahmed-maish-rasheed",
+      "no": 19
+    },
+    {
+      "playerId": "hassan-eenaaz",
+      "no": 20
+    },
+    {
+      "playerId": "ibrahim-waheed-hassan",
+      "no": 21
+    },
+    {
+      "playerId": "mohammed-shafeeu",
+      "no": 22
+    },
+    {
+      "playerId": "muzdhan-hassan",
+      "no": 23
+    },
+    {
+      "playerId": "naiz-hassan",
+      "no": 24
+    },
+    {
+      "playerId": "nisham-mohamed",
+      "no": 26
+    }
+  ]
+}

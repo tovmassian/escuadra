@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [7, 1, 2, 1, 7]
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Faroe_Islands_national_football_team",
   "members": [
     {
@@ -35,7 +35,7 @@
       "no": 5
     },
     {
-      "playerId": "meinhard-olsen",
+      "playerId": "arnbjorn-svensson",
       "no": 6
     },
     {
@@ -43,11 +43,15 @@
       "no": 7
     },
     {
-      "playerId": "ari-olsen",
+      "playerId": "ari-dam",
       "no": 8
     },
     {
       "playerId": "aki-samuelsen",
+      "no": 9
+    },
+    {
+      "playerId": "meinhard-olsen",
       "no": 10
     },
     {
@@ -59,7 +63,7 @@
       "no": 12
     },
     {
-      "playerId": "martin-agnarsson",
+      "playerId": "mattias-hellisdal",
       "no": 13
     },
     {
@@ -75,7 +79,7 @@
       "no": 16
     },
     {
-      "playerId": "arnbjorn-svensson",
+      "playerId": "adrian-justinussen",
       "no": 17
     },
     {
@@ -95,7 +99,7 @@
       "no": 21
     },
     {
-      "playerId": "mattias-hellisdal",
+      "playerId": "jakup-andreasen",
       "no": 22
     },
     {
@@ -103,11 +107,7 @@
       "no": 23
     },
     {
-      "playerId": "adrian-justinussen",
-      "no": null
-    },
-    {
-      "playerId": "jakup-andreasen",
+      "playerId": "martin-agnarsson",
       "no": null
     }
   ]

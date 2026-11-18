@@ -10,7 +10,7 @@
     "bands": ["#ED2939", "#FFFFFF", "#ED2939"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Austria_national_football_team",
   "members": [
     {
@@ -26,7 +26,7 @@
       "no": 3
     },
     {
-      "playerId": "xaver-schlager",
+      "playerId": "yanik-spalt",
       "no": 4
     },
     {
@@ -50,7 +50,7 @@
       "no": 9
     },
     {
-      "playerId": "romano-schmid",
+      "playerId": "christoph-baumgartner",
       "no": 10
     },
     {
@@ -62,6 +62,14 @@
       "no": 12
     },
     {
+      "playerId": "lukas-jungwirth",
+      "no": 13
+    },
+    {
+      "playerId": "felix-bacher",
+      "no": 14
+    },
+    {
       "playerId": "philipp-lienhart",
       "no": 15
     },
@@ -70,47 +78,44 @@
       "no": 16
     },
     {
-      "playerId": "felix-bacher",
+      "playerId": "yusuf-demir",
+      "no": 17
+    },
+    {
+      "playerId": "romano-schmid",
       "no": 18
     },
     {
-      "playerId": "christoph-baumgartner",
+      "playerId": "raul-florucz",
       "no": 19
     },
     {
       "playerId": "konrad-laimer",
-      "no": 20
+      "no": 20,
+      "captain": true
+    },
+    {
+      "playerId": "sascha-horvath",
+      "no": 21
+    },
+    {
+      "playerId": "luca-weinhandl",
+      "no": 22
+    },
+    {
+      "playerId": "michael-svoboda",
+      "no": 23
     },
     {
       "playerId": "alexander-prass",
-      "no": 22
+      "no": null
     },
     {
       "playerId": "christian-zawieschitzky",
       "no": null
     },
     {
-      "playerId": "luca-weinhandl",
-      "no": null
-    },
-    {
-      "playerId": "lukas-jungwirth",
-      "no": null
-    },
-    {
-      "playerId": "michael-svoboda",
-      "no": null
-    },
-    {
-      "playerId": "raul-florucz",
-      "no": null
-    },
-    {
-      "playerId": "sascha-horvath",
-      "no": null
-    },
-    {
-      "playerId": "yusuf-demir",
+      "playerId": "xaver-schlager",
       "no": null
     }
   ]

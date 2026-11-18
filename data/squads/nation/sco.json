@@ -10,7 +10,7 @@
     "bands": ["#005EB8", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Scotland_national_football_team",
   "members": [
     {
@@ -27,15 +27,15 @@
       "captain": true
     },
     {
-      "playerId": "luis-binks",
+      "playerId": "scott-mctominay",
       "no": 4
     },
     {
-      "playerId": "stephen-welsh",
+      "playerId": "ryan-porteous",
       "no": 5
     },
     {
-      "playerId": "josh-doig",
+      "playerId": "kieran-tierney",
       "no": 6
     },
     {
@@ -51,7 +51,7 @@
       "no": 9
     },
     {
-      "playerId": "ure",
+      "playerId": "che-adams",
       "no": 10
     },
     {
@@ -67,7 +67,7 @@
       "no": 13
     },
     {
-      "playerId": "lennon-miller",
+      "playerId": "james-penrice",
       "no": 14
     },
     {
@@ -107,11 +107,15 @@
       "no": 23
     },
     {
-      "playerId": "colby-donovan",
+      "playerId": "david-bates",
       "no": null
     },
     {
       "playerId": "jon-mccracken",
+      "no": null
+    },
+    {
+      "playerId": "ure",
       "no": null
     }
   ]

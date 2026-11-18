@@ -10,7 +10,7 @@
     "bands": ["#008C45", "#F4F5F0", "#CD212A"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Italy_national_football_team",
   "members": [
     {
@@ -27,7 +27,7 @@
       "no": 3
     },
     {
-      "playerId": "samuele-ricci",
+      "playerId": "honest-ahanor",
       "no": 4
     },
     {
@@ -39,7 +39,7 @@
       "no": 6
     },
     {
-      "playerId": "sebastiano-esposito",
+      "playerId": "alphadjo-cisse",
       "no": 7
     },
     {
@@ -75,7 +75,7 @@
       "no": 15
     },
     {
-      "playerId": "frattesi",
+      "playerId": "niccolo-pisilli",
       "no": 16
     },
     {
@@ -87,7 +87,7 @@
       "no": 18
     },
     {
-      "playerId": "nicolo-cambiaghi",
+      "playerId": "mattia-liberali",
       "no": 19
     },
     {
@@ -107,15 +107,7 @@
       "no": 23
     },
     {
-      "playerId": "alphadjo-cisse",
-      "no": null
-    },
-    {
       "playerId": "federico-gatti",
-      "no": null
-    },
-    {
-      "playerId": "honest-ahanor",
       "no": null
     },
     {
@@ -123,11 +115,11 @@
       "no": null
     },
     {
-      "playerId": "mattia-liberali",
+      "playerId": "samuele-ricci",
       "no": null
     },
     {
-      "playerId": "niccolo-pisilli",
+      "playerId": "sebastiano-esposito",
       "no": null
     }
   ]

@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [1, 8, 1]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Belize_national_football_team",
   "members": [
     {
@@ -27,11 +27,7 @@
       "no": 3
     },
     {
-      "playerId": "orlando-velasquez",
-      "no": 4
-    },
-    {
-      "playerId": "deshawon-nembhard",
+      "playerId": "jordan-casanova",
       "no": 5
     },
     {
@@ -43,20 +39,36 @@
       "no": 7
     },
     {
-      "playerId": "desmond-wade",
+      "playerId": "warren-moss",
+      "no": 8
+    },
+    {
+      "playerId": "carlos-bernardez",
       "no": 9
     },
     {
-      "playerId": "jordy-polanco",
+      "playerId": "jaheim-mena",
       "no": 10
     },
     {
-      "playerId": "darrel-myvette",
+      "playerId": "horace-avila",
+      "no": 11
+    },
+    {
+      "playerId": "keydenshaay-bowen",
+      "no": 13
+    },
+    {
+      "playerId": "darrel-myvett",
       "no": 14
     },
     {
       "playerId": "freybin-pagoada",
       "no": 15
+    },
+    {
+      "playerId": "jahryl-smith",
+      "no": 16
     },
     {
       "playerId": "jaylen-lennan",
@@ -67,39 +79,19 @@
       "no": 19
     },
     {
-      "playerId": "eldon-reneau",
-      "no": 20
-    },
-    {
       "playerId": "woodrow-west",
       "no": 22
     },
     {
-      "playerId": "alence-ayala",
+      "playerId": "harlan-casanova",
+      "no": 23
+    },
+    {
+      "playerId": "jordy-polanco",
       "no": null
     },
     {
-      "playerId": "calvin-reid",
-      "no": null
-    },
-    {
-      "playerId": "felix-martinez",
-      "no": null
-    },
-    {
-      "playerId": "jaheim-mena",
-      "no": null
-    },
-    {
-      "playerId": "jordan-casanova",
-      "no": null
-    },
-    {
-      "playerId": "kenyon-smith",
-      "no": null
-    },
-    {
-      "playerId": "marlon-meza-jr",
+      "playerId": "krisean-lopez",
       "no": null
     }
   ]

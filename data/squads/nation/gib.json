@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [2, 1]
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Gibraltar_national_football_team",
   "members": [
     {
@@ -19,7 +19,7 @@
       "no": 1
     },
     {
-      "playerId": "ethan-jolley",
+      "playerId": "paddy-mcclafferty",
       "no": 2
     },
     {
@@ -59,12 +59,20 @@
       "no": 11
     },
     {
-      "playerId": "jesse-gomez",
+      "playerId": "louie-annesley",
       "no": 12
     },
     {
-      "playerId": "jayvan-garro",
+      "playerId": "harry-victor",
+      "no": 13
+    },
+    {
+      "playerId": "luke-schofield",
       "no": 14
+    },
+    {
+      "playerId": "jesse-gomez",
+      "no": 15
     },
     {
       "playerId": "han-stevens",
@@ -75,12 +83,20 @@
       "no": 17
     },
     {
+      "playerId": "jayvan-garro",
+      "no": 18
+    },
+    {
       "playerId": "leon-mason",
       "no": 19
     },
     {
       "playerId": "ethan-britto",
       "no": 20
+    },
+    {
+      "playerId": "jeremy-perera",
+      "no": 21
     },
     {
       "playerId": "graeme-torrilla",
@@ -92,23 +108,7 @@
       "no": 23
     },
     {
-      "playerId": "harry-victor",
-      "no": null
-    },
-    {
-      "playerId": "jeremy-perera",
-      "no": null
-    },
-    {
       "playerId": "julian-del-rio",
-      "no": null
-    },
-    {
-      "playerId": "louie-annesley",
-      "no": null
-    },
-    {
-      "playerId": "luke-schofield",
       "no": null
     }
   ]

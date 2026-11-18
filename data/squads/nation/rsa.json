@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [3, 1, 2, 1, 3]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/South_Africa_national_soccer_team",
   "members": [
     {
@@ -24,16 +24,8 @@
       "no": 2
     },
     {
-      "playerId": "khulumani-ndamane",
-      "no": 3
-    },
-    {
       "playerId": "teboho-mokoena",
       "no": 4
-    },
-    {
-      "playerId": "lebone-seema",
-      "no": 5
     },
     {
       "playerId": "aubrey-modiba",
@@ -48,7 +40,7 @@
       "no": 8
     },
     {
-      "playerId": "yanela-mbuthuma",
+      "playerId": "lyle-foster",
       "no": 9
     },
     {
@@ -56,11 +48,11 @@
       "no": 10
     },
     {
-      "playerId": "themba-zwane",
+      "playerId": "puso-dithejane",
       "no": 11
     },
     {
-      "playerId": "thapelo-maseko",
+      "playerId": "iqraam-rayners",
       "no": 12
     },
     {
@@ -68,11 +60,11 @@
       "no": 13
     },
     {
-      "playerId": "fawaaz-basadien",
+      "playerId": "mbekezeli-mbokazi",
       "no": 14
     },
     {
-      "playerId": "iqraam-rayners",
+      "playerId": "bathusi-aubaas",
       "no": 15
     },
     {
@@ -88,7 +80,7 @@
       "no": 18
     },
     {
-      "playerId": "nkosinathi-sibisi",
+      "playerId": "cassius-mailula",
       "no": 19
     },
     {
@@ -104,7 +96,7 @@
       "no": 22
     },
     {
-      "playerId": "puso-dithejane",
+      "playerId": "thapelo-morena",
       "no": 23
     },
     {
@@ -112,28 +104,24 @@
       "no": 24
     },
     {
-      "playerId": "kamogelo-sebelebele",
+      "playerId": "tashreeq-matthews",
       "no": 25
     },
     {
-      "playerId": "shandre-campbell",
-      "no": 26
+      "playerId": "fawaaz-basadien",
+      "no": null
     },
     {
-      "playerId": "cassius-mailula",
-      "no": 27
+      "playerId": "lebone-seema",
+      "no": null
     },
     {
-      "playerId": "thapelo-morena",
-      "no": 28
+      "playerId": "siyanda-ndlovu",
+      "no": null
     },
     {
-      "playerId": "tashreeq-matthews",
-      "no": 29
-    },
-    {
-      "playerId": "bathusi-aubaas",
-      "no": 30
+      "playerId": "thalente-mbatha",
+      "no": null
     }
   ]
 }

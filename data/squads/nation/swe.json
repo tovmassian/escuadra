@@ -10,7 +10,7 @@
     "bands": ["#006AA7", "#FECC02"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Sweden_men's_national_football_team",
   "members": [
     {
@@ -39,7 +39,7 @@
       "no": 6
     },
     {
-      "playerId": "alexander-bernhardsson",
+      "playerId": "elliot-stroud",
       "no": 7
     },
     {
@@ -63,7 +63,7 @@
       "no": 12
     },
     {
-      "playerId": "elliot-stroud",
+      "playerId": "alexander-bernhardsson",
       "no": 13
     },
     {

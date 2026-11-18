@@ -10,7 +10,7 @@
     "bands": ["#E30000", "#FFC000", "#E30000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Montenegro_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "milan-roganovic",
+      "playerId": "bodin-tomasevic",
       "no": 2
     },
     {
@@ -38,7 +38,7 @@
       "no": 6
     },
     {
-      "playerId": "marko-vesovic",
+      "playerId": "viktor-dukanovic",
       "no": 7
     },
     {
@@ -71,7 +71,7 @@
       "no": 14
     },
     {
-      "playerId": "stefan-savic",
+      "playerId": "stefan-loncar",
       "no": 15
     },
     {
@@ -95,7 +95,7 @@
       "no": 20
     },
     {
-      "playerId": "andrija-bulatovic",
+      "playerId": "jonathan-dresaj",
       "no": 21
     },
     {
@@ -107,15 +107,19 @@
       "no": 23
     },
     {
-      "playerId": "bodin-tomasevic",
+      "playerId": "andrija-bulatovic",
       "no": null
     },
     {
-      "playerId": "stefan-loncar",
+      "playerId": "marko-vesovic",
       "no": null
     },
     {
-      "playerId": "viktor-dukanovic",
+      "playerId": "milan-roganovic",
+      "no": null
+    },
+    {
+      "playerId": "stefan-savic",
       "no": null
     }
   ]
