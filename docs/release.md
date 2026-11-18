@@ -165,6 +165,10 @@ shipped app reads. Squad data leaves the fingerprint alone, so a sweep ships as 
   `GITHUB_TOKEN`, so only your label starts `release-gate` (the job starts `check`
   itself). A run after the label leaves the gate on an older commit: remove the label and
   add it again. Then [Ship a JS fix](#ship-a-js-fix) from step 4.
+- **Its `CHANGELOG.md` line** (step 7 there) ends with the totals it shipped, as
+  `N club and M national squads in all`, counted in `data/squads/` on the release
+  branch after the merge. Copy them to `SQUADS` in the website's `quiz.mjs` on
+  `gh-pages` once the sweep ships; the store listings round them until a store version.
 
 `squad-sweep` needs the same Actions setting as `pick-to-main`, below. When the next
 version ships, point it there ([Cut a release](#cut-a-release), step 8).
