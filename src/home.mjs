@@ -1,6 +1,7 @@
 // src/home.mjs: Home's template. Text from the page's language; facts from quiz.mjs.
 import {
   QUESTIONS,
+  SQUADS,
   ageOn,
   clueValue,
   fill,
@@ -484,7 +485,7 @@ ${missCredits}
 ${t.squads.stats
   .map(
     (stat, i) => `            <div class="stat" data-reveal>
-              <span class="stat-number numbers">${[96, 157, 5][i]}</span>
+              <span class="stat-number numbers">${[SQUADS.clubs, SQUADS.nations, 5][i]}</span>
               <h3 class="display">${stat.title}</h3>
               <p>${stat.body}</p>
             </div>`,

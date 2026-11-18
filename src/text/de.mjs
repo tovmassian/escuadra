@@ -205,9 +205,9 @@ export default {
     },
     titles: { perfect: 'A la escuadra', learning: 'Noch am Lernen' },
     resultCopy: {
-      perfect: 'Drei von drei. In der App hat jede Runde zehn Fragen, mit 96 Vereinen und 157 Nationalteams zur Wahl.',
+      perfect: 'Drei von drei. In der App hat jede Runde zehn Fragen, mit {clubs} Vereinen und {nations} Nationalteams zur Wahl.',
       learning:
-        'Die hier solltest du dir merken. In der App hat jede Runde zehn Fragen, mit 96 Vereinen und 157 Nationalteams zur Wahl, und jeder Fehler wartet in der Ergebnisansicht auf dich.',
+        'Die hier solltest du dir merken. In der App hat jede Runde zehn Fragen, mit {clubs} Vereinen und {nations} Nationalteams zur Wahl, und jeder Fehler wartet in der Ergebnisansicht auf dich.',
     },
   },
 };

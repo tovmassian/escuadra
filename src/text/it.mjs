@@ -205,9 +205,9 @@ export default {
     },
     titles: { perfect: 'A la escuadra', learning: 'Sto imparando' },
     resultCopy: {
-      perfect: 'Tre su tre. Nell’app ogni partita ha dieci domande, e puoi scegliere tra 96 club e 157 nazionali.',
+      perfect: 'Tre su tre. Nell’app ogni partita ha dieci domande, e puoi scegliere tra {clubs} club e {nations} nazionali.',
       learning:
-        'Ecco quelli da imparare. Nell’app ogni partita ha dieci domande, puoi scegliere tra 96 club e 157 nazionali, e ogni errore ti aspetta nella schermata dei risultati.',
+        'Ecco quelli da imparare. Nell’app ogni partita ha dieci domande, puoi scegliere tra {clubs} club e {nations} nazionali, e ogni errore ti aspetta nella schermata dei risultati.',
     },
   },
 };

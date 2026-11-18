@@ -205,9 +205,9 @@ export default {
     },
     titles: { perfect: 'A la escuadra', learning: 'En pleine révision' },
     resultCopy: {
-      perfect: 'Trois sur trois. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix.',
+      perfect: 'Trois sur trois. Dans l’appli, une partie compte dix questions, avec {clubs} clubs et {nations} sélections au choix.',
       learning:
-        'Voici les joueurs à retenir. Dans l’appli, une partie compte dix questions, avec 96 clubs et 157 sélections au choix, et chaque erreur t’attend sur l’écran Résultats.',
+        'Voici les joueurs à retenir. Dans l’appli, une partie compte dix questions, avec {clubs} clubs et {nations} sélections au choix, et chaque erreur t’attend sur l’écran Résultats.',
     },
   },
 };

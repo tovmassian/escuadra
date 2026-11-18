@@ -3,6 +3,7 @@ import { LANGUAGE_STORAGE_KEY } from './language.mjs';
 import { THEME_STORAGE_KEY, nextTheme, resolveTheme } from './theme.mjs';
 import {
   QUESTIONS,
+  SQUADS,
   advance,
   ageOn,
   clueValue,
@@ -211,9 +212,10 @@ function initialiseQuiz() {
         }),
       );
       list.hidden = missed.length === 0;
-      part('result-copy').textContent = perfect
-        ? words.resultCopy.perfect
-        : words.resultCopy.learning;
+      part('result-copy').textContent = fill(
+        perfect ? words.resultCopy.perfect : words.resultCopy.learning,
+        SQUADS,
+      );
       part('result-spoken').textContent = fill(words.spoken.result, { score, total });
       part('live').textContent = fill(words.live.round, { score, total, title });
       return;

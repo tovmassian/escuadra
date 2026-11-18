@@ -16,6 +16,10 @@
 // without its name, which would give the answer away. `focus` frames the face clear
 // of the shirt number.
 
+// The app's squads, counted in data/squads/ on the live release branch. CHANGELOG.md
+// on main keeps the exact totals each squad sweep shipped: copy the latest here.
+export const SQUADS = { clubs: 96, nations: 162 };
+
 export const QUESTIONS = [
   {
     team: 'Spain',

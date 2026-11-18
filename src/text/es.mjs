@@ -202,9 +202,9 @@ export default {
     },
     titles: { perfect: 'A la escuadra', learning: 'Aprendiendo' },
     resultCopy: {
-      perfect: 'Tres de tres. En la app, eliges entre 96 clubes y 157 selecciones, y cada ronda tiene diez preguntas.',
+      perfect: 'Tres de tres. En la app, eliges entre {clubs} clubes y {nations} selecciones, y cada ronda tiene diez preguntas.',
       learning:
-        'Estos son los que te faltan. En la app, eliges entre 96 clubes y 157 selecciones, cada ronda tiene diez preguntas y cada fallo te espera en la pantalla de resultados.',
+        'Estos son los que te faltan. En la app, eliges entre {clubs} clubes y {nations} selecciones, cada ronda tiene diez preguntas y cada fallo te espera en la pantalla de resultados.',
     },
   },
 };
