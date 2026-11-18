@@ -200,9 +200,9 @@ export default {
     },
     titles: { perfect: 'A la escuadra', learning: 'Still learning' },
     resultCopy: {
-      perfect: 'Three for three. The app plays ten a round, across 96 clubs and 157 national teams.',
+      perfect: 'Three for three. The app plays ten a round, across {clubs} clubs and {nations} national teams.',
       learning:
-        'Those are the ones to go over. The app plays ten questions a round, across 96 clubs and 157 national teams, and every miss waits for you on Results.',
+        'Those are the ones to go over. The app plays ten questions a round, across {clubs} clubs and {nations} national teams, and every miss waits for you on Results.',
     },
   },
 };
