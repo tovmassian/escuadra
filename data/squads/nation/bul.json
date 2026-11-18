@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#00966E", "#D62612"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Bulgaria_national_football_team",
   "members": [
     {
@@ -18,11 +18,11 @@
       "no": 1
     },
     {
-      "playerId": "yoni-stoyanov",
+      "playerId": "rosen-bozhinov",
       "no": 2
     },
     {
-      "playerId": "andrea-hristov",
+      "playerId": "emil-tsenov",
       "no": 3
     },
     {
@@ -30,15 +30,15 @@
       "no": 4
     },
     {
-      "playerId": "kristian-dimitrov",
+      "playerId": "ivan-pankov",
       "no": 5
     },
     {
-      "playerId": "emil-tsenov",
+      "playerId": "hristiyan-petrov",
       "no": 6
     },
     {
-      "playerId": "borislav-tsonev",
+      "playerId": "kristiyan-balov",
       "no": 7
     },
     {
@@ -50,7 +50,7 @@
       "no": 9
     },
     {
-      "playerId": "zdravko-dimitrov",
+      "playerId": "asen-chandarov",
       "no": 10
     },
     {
@@ -58,7 +58,7 @@
       "no": 11
     },
     {
-      "playerId": "dimitar-mitov",
+      "playerId": "aleks-bozhev",
       "no": 12
     },
     {
@@ -66,23 +66,19 @@
       "no": 13
     },
     {
-      "playerId": "asen-chandarov",
-      "no": 14
-    },
-    {
-      "playerId": "hristiyan-petrov",
+      "playerId": "georgi-lazarov",
       "no": 15
     },
     {
-      "playerId": "petko-panayotov",
+      "playerId": "marin-petkov",
       "no": 16
     },
     {
-      "playerId": "martin-minchev",
+      "playerId": "svetoslav-kovachev",
       "no": 17
     },
     {
-      "playerId": "kristiyan-balov",
+      "playerId": "ivaylo-chochev",
       "no": 18
     },
     {
@@ -90,20 +86,28 @@
       "no": 19
     },
     {
-      "playerId": "vladimir-nikolov",
+      "playerId": "lukas-petkov",
       "no": 20
     },
     {
-      "playerId": "stanislav-ivanov",
+      "playerId": "dimitar-velkovski",
       "no": 21
     },
     {
-      "playerId": "kristiyan-stoyanov",
+      "playerId": "yoni-stoyanov",
       "no": 22
     },
     {
-      "playerId": "aleks-bozhev",
+      "playerId": "plamen-andreev",
       "no": 23
+    },
+    {
+      "playerId": "simeon-shishkov",
+      "no": null
+    },
+    {
+      "playerId": "valentin-antov",
+      "no": null
     }
   ]
 }

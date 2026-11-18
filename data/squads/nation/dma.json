@@ -1,0 +1,97 @@
+{
+  "id": "dma",
+  "kind": "nation",
+  "name": "Dominica",
+  "season": "2026",
+  "primaryColor": "#046A38",
+  "secondaryColor": "#D50032",
+  "verified": true,
+  "marker": {
+    "bands": ["#046A38", "#D50032", "#046A38"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-11-16",
+  "source": "https://en.wikipedia.org/wiki/Dominica_national_football_team",
+  "members": [
+    {
+      "playerId": "dwight-eloi",
+      "no": 1
+    },
+    {
+      "playerId": "titus-sandy-jr",
+      "no": 2
+    },
+    {
+      "playerId": "tobi-jno-hope",
+      "no": 3
+    },
+    {
+      "playerId": "eustace-marshall",
+      "no": 4
+    },
+    {
+      "playerId": "jaylan-jno-ville",
+      "no": 5
+    },
+    {
+      "playerId": "trivine-esprit",
+      "no": 6
+    },
+    {
+      "playerId": "malachi-sharpe",
+      "no": 7
+    },
+    {
+      "playerId": "dhamario-challenger",
+      "no": 8
+    },
+    {
+      "playerId": "javid-george",
+      "no": 9
+    },
+    {
+      "playerId": "jayden-carbon",
+      "no": 10
+    },
+    {
+      "playerId": "savio-anselm",
+      "no": 11
+    },
+    {
+      "playerId": "marcus-bredas",
+      "no": 13
+    },
+    {
+      "playerId": "reon-cuffy",
+      "no": 14
+    },
+    {
+      "playerId": "theo-jeremy",
+      "no": 15
+    },
+    {
+      "playerId": "cobin-paul",
+      "no": 16
+    },
+    {
+      "playerId": "harveyjoe-bertrand",
+      "no": 17
+    },
+    {
+      "playerId": "donte-warrington",
+      "no": 18
+    },
+    {
+      "playerId": "briel-thomas",
+      "no": 19
+    },
+    {
+      "playerId": "lyan-edwards",
+      "no": 20
+    },
+    {
+      "playerId": "shamal-george",
+      "no": 22
+    }
+  ]
+}

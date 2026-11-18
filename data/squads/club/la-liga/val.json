@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#000000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-03",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Valencia_CF",
   "members": [
     {
@@ -113,6 +113,10 @@
     {
       "playerId": "sato",
       "no": 39
+    },
+    {
+      "playerId": "sergi-canos",
+      "no": null
     }
   ]
 }

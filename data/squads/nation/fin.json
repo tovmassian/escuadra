@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [4, 3, 4]
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Finland_national_football_team",
   "members": [
     {
@@ -20,20 +20,12 @@
       "captain": true
     },
     {
-      "playerId": "tony-miettinen",
-      "no": 2
-    },
-    {
-      "playerId": "adam-stahl",
+      "playerId": "arttu-hoskonen",
       "no": 3
     },
     {
       "playerId": "robert-ivanov",
       "no": 4
-    },
-    {
-      "playerId": "miro-tenho",
-      "no": 5
     },
     {
       "playerId": "santeri-vaananen",
@@ -56,7 +48,7 @@
       "no": 10
     },
     {
-      "playerId": "adam-markhiyev",
+      "playerId": "adrian-svanback",
       "no": 11
     },
     {
@@ -68,15 +60,11 @@
       "no": 13
     },
     {
-      "playerId": "luka-hyrylainen",
-      "no": 14
-    },
-    {
       "playerId": "onni-valakari",
       "no": 15
     },
     {
-      "playerId": "anssi-suhonen",
+      "playerId": "roman-eremenko",
       "no": 16
     },
     {
@@ -106,14 +94,6 @@
     {
       "playerId": "lucas-bergstrom",
       "no": 23
-    },
-    {
-      "playerId": "adrian-svanback",
-      "no": null
-    },
-    {
-      "playerId": "kaan-kairinen",
-      "no": null
     }
   ]
 }

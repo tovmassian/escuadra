@@ -10,23 +10,23 @@
     "bands": ["#008751", "#FFFFFF", "#008751"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Nigeria_national_football_team",
   "members": [
     {
-      "playerId": "samuel-friday-james",
+      "playerId": "francis-uzoho",
       "no": 1
     },
     {
-      "playerId": "abdullahi-bewene",
+      "playerId": "ola-aina",
       "no": 2
     },
     {
-      "playerId": "isaac-james",
+      "playerId": "bruno-onyemaechi",
       "no": 3
     },
     {
-      "playerId": "aderemi-adeoye",
+      "playerId": "wilfred-ndidi",
       "no": 4
     },
     {
@@ -34,35 +34,35 @@
       "no": 5
     },
     {
-      "playerId": "emmanuel-fernandez",
+      "playerId": "semi-ajayi",
       "no": 6
     },
     {
-      "playerId": "abdullahi-umar",
-      "no": 7
-    },
-    {
-      "playerId": "stephen-michael",
+      "playerId": "samson-tijani",
       "no": 8
     },
     {
-      "playerId": "wilfred-igor",
+      "playerId": "tolu-arokodare",
+      "no": 9
+    },
+    {
+      "playerId": "fisayo-delebashiru",
       "no": 10
     },
     {
-      "playerId": "umar-abubakar",
+      "playerId": "moses-usor",
       "no": 11
     },
     {
-      "playerId": "peter-edokpolor",
+      "playerId": "bright-osayisamuel",
       "no": 12
     },
     {
-      "playerId": "kenneth-igboke",
+      "playerId": "chibuike-nwaiwu",
       "no": 13
     },
     {
-      "playerId": "kelechi-iheanacho",
+      "playerId": "alhassan-yusuf",
       "no": 14
     },
     {
@@ -70,20 +70,28 @@
       "no": 15
     },
     {
-      "playerId": "michael-atata",
+      "playerId": "arthur-okonkwo",
       "no": 16
     },
     {
-      "playerId": "chibuzo-nwoko",
+      "playerId": "alex-iwobi",
       "no": 17
     },
     {
-      "playerId": "ibraheem-mahfus-ajasa",
+      "playerId": "tochukwu-nnadi",
+      "no": 18
+    },
+    {
+      "playerId": "taiwo-awoniyi",
       "no": 19
     },
     {
-      "playerId": "vince-osuji",
+      "playerId": "abdullahi-bewene",
       "no": 20
+    },
+    {
+      "playerId": "calvin-bassey",
+      "no": 21
     },
     {
       "playerId": "akor-adams",
@@ -92,6 +100,10 @@
     {
       "playerId": "stanley-nwabali",
       "no": 23
+    },
+    {
+      "playerId": "mubarak-suleiman",
+      "no": 24
     }
   ]
 }

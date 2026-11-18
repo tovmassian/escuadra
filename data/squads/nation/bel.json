@@ -10,7 +10,7 @@
     "bands": ["#000000", "#FDDA24", "#EF3340"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Belgium_national_football_team",
   "members": [
     {
@@ -34,7 +34,7 @@
       "no": 5
     },
     {
-      "playerId": "mandela-keita",
+      "playerId": "romeo-lavia",
       "no": 6
     },
     {
@@ -47,7 +47,7 @@
       "captain": true
     },
     {
-      "playerId": "hugo-cuypers",
+      "playerId": "romelu-lukaku",
       "no": 9
     },
     {
@@ -75,7 +75,7 @@
       "no": 15
     },
     {
-      "playerId": "josue-kongolo",
+      "playerId": "hugo-cuypers",
       "no": 16
     },
     {
@@ -111,11 +111,11 @@
       "no": null
     },
     {
-      "playerId": "romelu-lukaku",
+      "playerId": "josue-kongolo",
       "no": null
     },
     {
-      "playerId": "romeo-lavia",
+      "playerId": "mandela-keita",
       "no": null
     }
   ]

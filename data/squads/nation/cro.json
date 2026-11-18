@@ -10,7 +10,7 @@
     "bands": ["#FF0000", "#FFFFFF", "#171796"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Croatia_national_football_team",
   "members": [
     {
@@ -63,11 +63,11 @@
       "no": 12
     },
     {
-      "playerId": "nikola-vlasic",
+      "playerId": "ivan-smolcic",
       "no": 13
     },
     {
-      "playerId": "ivan-smolcic",
+      "playerId": "ivan-perisic",
       "no": 14
     },
     {
@@ -107,11 +107,11 @@
       "no": 23
     },
     {
-      "playerId": "ivan-perisic",
+      "playerId": "l-sucic",
       "no": null
     },
     {
-      "playerId": "l-sucic",
+      "playerId": "nikola-vlasic",
       "no": null
     }
   ]

@@ -10,7 +10,7 @@
     "bands": ["#0057B7", "#FFDD00"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Ukraine_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "illya-krupskyi",
+      "playerId": "borys-krushynskyi",
       "no": 2
     },
     {
@@ -34,16 +34,15 @@
       "no": 5
     },
     {
-      "playerId": "volodymyr-brazhko",
+      "playerId": "yehor-yarmolyuk",
       "no": 6
     },
     {
-      "playerId": "andriy-yarmolenko",
-      "no": 7,
-      "captain": true
+      "playerId": "oleksiy-kashchuk",
+      "no": 7
     },
     {
-      "playerId": "oleksandr-nazarenko",
+      "playerId": "heorhiy-sudakov",
       "no": 8
     },
     {
@@ -51,11 +50,11 @@
       "no": 9
     },
     {
-      "playerId": "matviy-ponomarenko",
+      "playerId": "mykola-shaparenko",
       "no": 10
     },
     {
-      "playerId": "vladyslav-vanat",
+      "playerId": "artem-dovbyk",
       "no": 11
     },
     {
@@ -67,19 +66,19 @@
       "no": 13
     },
     {
-      "playerId": "oleksandr-drambayev",
+      "playerId": "danylo-sikan",
       "no": 14
     },
     {
-      "playerId": "viktor-tsyhankov",
+      "playerId": "illya-krupskyi",
       "no": 15
     },
     {
-      "playerId": "ivan-varfolomeyev",
+      "playerId": "vitalii-mykolenko",
       "no": 16
     },
     {
-      "playerId": "oleksandr-pikhalyonok",
+      "playerId": "oleksandr-nazarenko",
       "no": 17
     },
     {
@@ -91,20 +90,32 @@
       "no": 19
     },
     {
-      "playerId": "maksym-khlan",
+      "playerId": "hennadiy-synchuk",
       "no": 20
     },
     {
-      "playerId": "vladyslav-veleten",
+      "playerId": "ihor-krasnopir",
       "no": 21
     },
     {
-      "playerId": "ihor-krasnopir",
+      "playerId": "mykola-matviyenko",
       "no": 22
     },
     {
       "playerId": "dmytro-riznyk",
       "no": 23
+    },
+    {
+      "playerId": "ivan-varfolomeyev",
+      "no": null
+    },
+    {
+      "playerId": "oleksandr-andriyevskyi",
+      "no": null
+    },
+    {
+      "playerId": "vladyslav-vanat",
+      "no": null
     }
   ]
 }

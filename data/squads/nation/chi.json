@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#D52B1E"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Chile_national_football_team",
   "members": [
     {
@@ -22,7 +22,7 @@
       "no": 2
     },
     {
-      "playerId": "marcelo-morales",
+      "playerId": "guillermo-maripan",
       "no": 3
     },
     {
@@ -30,7 +30,7 @@
       "no": 4
     },
     {
-      "playerId": "paulo-diaz",
+      "playerId": "jose-movillo",
       "no": 5
     },
     {
@@ -50,6 +50,10 @@
       "no": 9
     },
     {
+      "playerId": "agustin-arce",
+      "no": 10
+    },
+    {
       "playerId": "dario-osorio",
       "no": 11
     },
@@ -58,7 +62,7 @@
       "no": 12
     },
     {
-      "playerId": "igor-lichnovsky",
+      "playerId": "thomas-coulombe",
       "no": 13
     },
     {
@@ -87,11 +91,11 @@
       "no": 19
     },
     {
-      "playerId": "matias-sepulveda",
+      "playerId": "clemente-montes",
       "no": 20
     },
     {
-      "playerId": "agustin-arce",
+      "playerId": "williams-alarcon",
       "no": 21
     },
     {
@@ -103,32 +107,12 @@
       "no": 23
     },
     {
-      "playerId": "leandro-hernandez",
-      "no": 24
-    },
-    {
-      "playerId": "francisco-salinas",
+      "playerId": "emiliano-ramos",
       "no": 25
-    },
-    {
-      "playerId": "diego-ulloa",
-      "no": 26
     },
     {
       "playerId": "jonathan-villagra",
       "no": 27
-    },
-    {
-      "playerId": "zidane-yanez",
-      "no": 29
-    },
-    {
-      "playerId": "jetzen-lopez",
-      "no": null
-    },
-    {
-      "playerId": "thomas-coulombe",
-      "no": null
     }
   ]
 }

@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#0038A8"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Uruguay_national_football_team",
   "members": [
     {
@@ -39,11 +39,11 @@
       "no": 6
     },
     {
-      "playerId": "rodrigo-aguirre",
+      "playerId": "nicolas-de-la-cruz",
       "no": 7
     },
     {
-      "playerId": "nahitan-nandez",
+      "playerId": "valverde",
       "no": 8
     },
     {
@@ -59,7 +59,7 @@
       "no": 11
     },
     {
-      "playerId": "thiago-cardozo",
+      "playerId": "ignacio-de-arruabarrena",
       "no": 12
     },
     {
@@ -71,7 +71,7 @@
       "no": 14
     },
     {
-      "playerId": "emiliano-martinez",
+      "playerId": "mourino",
       "no": 15
     },
     {
@@ -83,11 +83,11 @@
       "no": 17
     },
     {
-      "playerId": "brian-rodriguez",
+      "playerId": "rodrigo-aguirre",
       "no": 18
     },
     {
-      "playerId": "mourino",
+      "playerId": "agustin-canobbio",
       "no": 19
     },
     {
@@ -117,6 +117,14 @@
     {
       "playerId": "satriano",
       "no": 26
+    },
+    {
+      "playerId": "bruno-damiani",
+      "no": null
+    },
+    {
+      "playerId": "sebastian-jaume",
+      "no": null
     }
   ]
 }

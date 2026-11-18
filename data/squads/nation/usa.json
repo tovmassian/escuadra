@@ -10,7 +10,7 @@
     "bands": ["#B31942", "#FFFFFF"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/United_States_men%27s_national_soccer_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "sergino-dest",
+      "playerId": "reed-bakerwhiting",
       "no": 2
     },
     {
@@ -39,31 +39,31 @@
       "no": 6
     },
     {
-      "playerId": "giovanni-reyna",
+      "playerId": "jack-mcglynn",
       "no": 7
     },
     {
-      "playerId": "cavan-sullivan",
+      "playerId": "weston-mckennie",
       "no": 8
     },
     {
-      "playerId": "damion-downs",
+      "playerId": "julian-hall",
       "no": 9
     },
     {
-      "playerId": "yunus-musah",
+      "playerId": "christian-pulisic",
       "no": 10
     },
     {
-      "playerId": "zavier-gozo",
+      "playerId": "cavan-sullivan",
       "no": 11
     },
     {
-      "playerId": "miles-robinson",
+      "playerId": "neil-pierre",
       "no": 12
     },
     {
-      "playerId": "peyton-miller",
+      "playerId": "adri-mehmeti",
       "no": 13
     },
     {
@@ -71,7 +71,7 @@
       "no": 14
     },
     {
-      "playerId": "brooklyn-raines",
+      "playerId": "bryan-reynolds",
       "no": 15
     },
     {
@@ -83,48 +83,32 @@
       "no": 17
     },
     {
-      "playerId": "george-campbell",
+      "playerId": "diego-kochen",
       "no": 18
     },
     {
-      "playerId": "julian-hall",
-      "no": 19
-    },
-    {
-      "playerId": "neil-pierre",
+      "playerId": "folarin-balogun",
       "no": 20
     },
     {
-      "playerId": "frankie-westfield",
+      "playerId": "mathis-albert",
       "no": 21
     },
     {
-      "playerId": "justin-ellis",
+      "playerId": "mark-mckenzie",
       "no": 22
     },
     {
-      "playerId": "cole-campbell",
-      "no": 23
-    },
-    {
-      "playerId": "diego-kochen",
-      "no": 24
-    },
-    {
-      "playerId": "chris-brady",
-      "no": 25
-    },
-    {
-      "playerId": "adri-mehmeti",
-      "no": 26
-    },
-    {
-      "playerId": "mathis-albert",
-      "no": 27
-    },
-    {
       "playerId": "brian-schwake",
-      "no": 28
+      "no": null
+    },
+    {
+      "playerId": "justin-ellis",
+      "no": null
+    },
+    {
+      "playerId": "santiago-castaneda",
+      "no": null
     }
   ]
 }

@@ -10,7 +10,7 @@
     "bands": ["#0047AB", "#FFFFFF", "#0047AB"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/El_Salvador_national_football_team",
   "members": [
     {
@@ -31,15 +31,19 @@
       "no": 4
     },
     {
-      "playerId": "rudy-clavel",
+      "playerId": "jose-portillo",
       "no": 5
+    },
+    {
+      "playerId": "joshua-perez",
+      "no": 6
     },
     {
       "playerId": "styven-vasquez",
       "no": 7
     },
     {
-      "playerId": "harold-osorio",
+      "playerId": "amando-moreno",
       "no": 8
     },
     {
@@ -47,7 +51,15 @@
       "no": 9
     },
     {
-      "playerId": "marcelo-diaz",
+      "playerId": "harold-osorio",
+      "no": 10
+    },
+    {
+      "playerId": "rafael-tejada",
+      "no": 11
+    },
+    {
+      "playerId": "eric-calvillo",
       "no": 12
     },
     {
@@ -75,12 +87,16 @@
       "no": 18
     },
     {
-      "playerId": "rafael-tejada",
+      "playerId": "nelson-blanco",
       "no": 19
     },
     {
       "playerId": "mauricio-cerritos",
       "no": 20
+    },
+    {
+      "playerId": "jorge-mendez",
+      "no": 21
     },
     {
       "playerId": "benji-villalobos",
@@ -91,27 +107,11 @@
       "no": 23
     },
     {
-      "playerId": "amando-moreno",
+      "playerId": "marcelo-diaz",
       "no": null
     },
     {
-      "playerId": "eric-calvillo",
-      "no": null
-    },
-    {
-      "playerId": "jorge-mendez",
-      "no": null
-    },
-    {
-      "playerId": "jose-portillo",
-      "no": null
-    },
-    {
-      "playerId": "joshua-perez",
-      "no": null
-    },
-    {
-      "playerId": "nelson-blanco",
+      "playerId": "rudy-clavel",
       "no": null
     }
   ]

@@ -11,27 +11,27 @@
     "orientation": "vertical",
     "weights": [3, 1, 1, 1, 1]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Malaysia_national_football_team",
   "members": [
     {
-      "playerId": "azri-ghani",
+      "playerId": "suhaimi-husin",
       "no": 1
     },
     {
-      "playerId": "daniel-ting",
+      "playerId": "dominic-tan",
       "no": 2
     },
     {
-      "playerId": "ubaidullah-shamsul",
+      "playerId": "daniel-ting",
       "no": 3
     },
     {
-      "playerId": "manuel-hidalgo",
+      "playerId": "rodney-celvin-akwensivie",
       "no": 4
     },
     {
-      "playerId": "brad-tapp",
+      "playerId": "ubaidullah-shamsul",
       "no": 5
     },
     {
@@ -39,72 +39,112 @@
       "no": 6
     },
     {
-      "playerId": "faisal-halim",
+      "playerId": "richard-chin",
       "no": 7
     },
     {
-      "playerId": "syahir-bashah",
+      "playerId": "syafiq-ahmad",
       "no": 8
     },
     {
-      "playerId": "bergson",
+      "playerId": "g-pavithran",
       "no": 9
     },
     {
-      "playerId": "arif-aiman",
-      "no": 10
-    },
-    {
-      "playerId": "hong-wan",
+      "playerId": "fergus-tierney",
       "no": 11
     },
     {
-      "playerId": "stuart-wilkin",
-      "no": 12
-    },
-    {
-      "playerId": "fergus-tierney",
+      "playerId": "ryan-lambert",
       "no": 13
     },
     {
-      "playerId": "harith-haiqal",
+      "playerId": "endrick-2",
       "no": 14
     },
     {
-      "playerId": "nooa-laine",
+      "playerId": "safwan-mazlan",
       "no": 15
     },
     {
-      "playerId": "syihan-hazmi",
+      "playerId": "haziq-aiman",
       "no": 16
     },
     {
-      "playerId": "g-pavithran",
+      "playerId": "paulo-josue",
       "no": 17
     },
     {
-      "playerId": "syahmi-safari",
+      "playerId": "ariff-farhan",
       "no": 18
     },
     {
-      "playerId": "paulo-josue",
+      "playerId": "romel-morales",
       "no": 19
-    },
-    {
-      "playerId": "nazmi-faiz",
-      "no": 20
     },
     {
       "playerId": "dion-cools",
       "no": 21
     },
     {
-      "playerId": "lavere-corbinong",
+      "playerId": "ramadhan-saifullah",
       "no": 22
     },
     {
       "playerId": "haziq-nadzli",
       "no": 23
+    },
+    {
+      "playerId": "haziq-kutty-abba",
+      "no": 24
+    },
+    {
+      "playerId": "akhyar-rashid",
+      "no": null
+    },
+    {
+      "playerId": "aliff-haiqal",
+      "no": null
+    },
+    {
+      "playerId": "aliff-izwan",
+      "no": null
+    },
+    {
+      "playerId": "azam-azmi",
+      "no": null
+    },
+    {
+      "playerId": "danial-amier",
+      "no": null
+    },
+    {
+      "playerId": "danial-asri",
+      "no": null
+    },
+    {
+      "playerId": "darren-lok",
+      "no": null
+    },
+    {
+      "playerId": "declan-lambert",
+      "no": null
+    },
+    {
+      "playerId": "fayadh-zulkifli",
+      "no": null
+    },
+    {
+      "playerId": "haqimi-azim",
+      "no": null
+    },
+    {
+      "playerId": "luqman-hakim-shamsudin",
+      "no": null
+    },
+    {
+      "playerId": "nazmi-faiz",
+      "no": null
     }
   ]
 }

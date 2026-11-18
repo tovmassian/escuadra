@@ -11,7 +11,7 @@
     "orientation": "vertical",
     "weights": [2, 2, 1]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Bosnia_and_Herzegovina_national_football_team",
   "members": [
     {
@@ -27,19 +27,20 @@
       "no": 3
     },
     {
-      "playerId": "tarik-muharemovic",
+      "playerId": "zinedin-smajlovic",
       "no": 4
     },
     {
       "playerId": "sead-kolasinac",
-      "no": 5
+      "no": 5,
+      "captain": true
     },
     {
       "playerId": "benjamin-tahirovic",
       "no": 6
     },
     {
-      "playerId": "zinedin-smajlovic",
+      "playerId": "amar-dedic",
       "no": 7
     },
     {
@@ -79,7 +80,7 @@
       "no": 16
     },
     {
-      "playerId": "ajdin-hasic",
+      "playerId": "dzenis-burnic",
       "no": 17
     },
     {
@@ -87,11 +88,11 @@
       "no": 18
     },
     {
-      "playerId": "jovo-lukic",
+      "playerId": "kerim-alajbegovic",
       "no": 19
     },
     {
-      "playerId": "nail-omerovic",
+      "playerId": "matej-deket",
       "no": 20
     },
     {
@@ -107,11 +108,11 @@
       "no": 23
     },
     {
-      "playerId": "kerim-alajbegovic",
+      "playerId": "jovo-lukic",
       "no": null
     },
     {
-      "playerId": "luka-duric",
+      "playerId": "tarik-muharemovic",
       "no": null
     }
   ]
