@@ -11,7 +11,7 @@
     "orientation": "vertical",
     "weights": [1, 2, 2, 2]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Palestine_national_football_team",
   "members": [
     {
@@ -19,7 +19,7 @@
       "no": 1
     },
     {
-      "playerId": "wajdi-nabhan",
+      "playerId": "maher-darwich",
       "no": 2
     },
     {
@@ -35,20 +35,16 @@
       "no": 5
     },
     {
-      "playerId": "adam-ahmad",
-      "no": 6
-    },
-    {
       "playerId": "musab-albattat",
       "no": 7,
       "captain": true
     },
     {
-      "playerId": "hamed-hamdan",
+      "playerId": "samer-zbaideh",
       "no": 8
     },
     {
-      "playerId": "tamer-seyam",
+      "playerId": "assad-al-hamlawi",
       "no": 9
     },
     {
@@ -60,15 +56,15 @@
       "no": 11
     },
     {
-      "playerId": "assad-al-hamlawi",
+      "playerId": "bader-mousa",
       "no": 12
     },
     {
-      "playerId": "ayham-shhade",
+      "playerId": "annass-al-hamlawi",
       "no": 13
     },
     {
-      "playerId": "ahmed-taha",
+      "playerId": "khaled-dader",
       "no": 14
     },
     {
@@ -80,11 +76,11 @@
       "no": 16
     },
     {
-      "playerId": "emilio-saba",
+      "playerId": "ali-rabaei",
       "no": 17
     },
     {
-      "playerId": "adam-kaied",
+      "playerId": "ahmad-alqaq",
       "no": 18
     },
     {
@@ -104,23 +100,11 @@
       "no": 22
     },
     {
-      "playerId": "alaa-aldeen-hassan",
+      "playerId": "abdelhadi-rashid",
       "no": 23
     },
     {
-      "playerId": "bader-mousa",
-      "no": 24
-    },
-    {
-      "playerId": "ahmad-alqaq",
-      "no": 25
-    },
-    {
-      "playerId": "abdelhadi-rashid",
-      "no": 26
-    },
-    {
-      "playerId": "brayan-dakhil",
+      "playerId": "anas-baniouwda",
       "no": 27
     }
   ]

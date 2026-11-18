@@ -1,0 +1,130 @@
+{
+  "id": "lby",
+  "kind": "nation",
+  "name": "Libya",
+  "season": "2026",
+  "primaryColor": "#E70013",
+  "secondaryColor": "#239E46",
+  "verified": true,
+  "marker": {
+    "bands": ["#E70013", "#000000", "#239E46"],
+    "orientation": "horizontal",
+    "weights": [1, 2, 1]
+  },
+  "lastUpdated": "2026-11-16",
+  "source": "https://en.wikipedia.org/wiki/Libya_national_football_team",
+  "members": [
+    {
+      "playerId": "murad-alwuheeshi",
+      "no": 1
+    },
+    {
+      "playerId": "mohammed-alajnaf",
+      "no": 2
+    },
+    {
+      "playerId": "subhi-aldhawi",
+      "no": 3
+    },
+    {
+      "playerId": "ali-youssef",
+      "no": 4
+    },
+    {
+      "playerId": "ibrahim-bourouis",
+      "no": 5
+    },
+    {
+      "playerId": "saif-jaddour",
+      "no": 6
+    },
+    {
+      "playerId": "ismael-tajourishradi",
+      "no": 7
+    },
+    {
+      "playerId": "mahmoud-alshalwi",
+      "no": 8
+    },
+    {
+      "playerId": "ezoo-el-maremi",
+      "no": 9
+    },
+    {
+      "playerId": "hamdou-elhouni",
+      "no": 10
+    },
+    {
+      "playerId": "ahmed-huwaydi",
+      "no": 11
+    },
+    {
+      "playerId": "mohammed-khalil",
+      "no": 13
+    },
+    {
+      "playerId": "alaa-alqajdar",
+      "no": 14
+    },
+    {
+      "playerId": "amjed-algsheim",
+      "no": 15
+    },
+    {
+      "playerId": "bashir-alhibeeshi",
+      "no": 16
+    },
+    {
+      "playerId": "fadel-salama",
+      "no": 17
+    },
+    {
+      "playerId": "hussein-taktak",
+      "no": 18
+    },
+    {
+      "playerId": "mouad-eissa",
+      "no": 19
+    },
+    {
+      "playerId": "osamah-alshuraimi",
+      "no": 20
+    },
+    {
+      "playerId": "ahmed-albizi",
+      "no": 21
+    },
+    {
+      "playerId": "ayman-altihar",
+      "no": 22
+    },
+    {
+      "playerId": "muaid-ellafi",
+      "no": 23
+    },
+    {
+      "playerId": "daniel-elfadli",
+      "no": 27
+    },
+    {
+      "playerId": "abdelaziz-alsuwaei",
+      "no": null
+    },
+    {
+      "playerId": "abdullah-alorfey",
+      "no": null
+    },
+    {
+      "playerId": "ahmad-benali",
+      "no": null
+    },
+    {
+      "playerId": "hamza-almugsi",
+      "no": null
+    },
+    {
+      "playerId": "mohammed-alghannai",
+      "no": null
+    }
+  ]
+}

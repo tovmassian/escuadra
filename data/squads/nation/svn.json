@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#005DA4", "#ED1C24"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Slovenia_national_football_team",
   "members": [
     {
@@ -23,11 +23,11 @@
       "no": 2
     },
     {
-      "playerId": "jure-balkovec",
+      "playerId": "relja-obric",
       "no": 3
     },
     {
-      "playerId": "mark-zabukovnik",
+      "playerId": "zan-zaletel",
       "no": 4
     },
     {
@@ -35,11 +35,11 @@
       "no": 5
     },
     {
-      "playerId": "jaka-bijol",
+      "playerId": "adrian-zeljkovic",
       "no": 6
     },
     {
-      "playerId": "jost-urbancic",
+      "playerId": "benjamin-verbic",
       "no": 7
     },
     {
@@ -47,11 +47,11 @@
       "no": 8
     },
     {
-      "playerId": "tjas-begic",
+      "playerId": "andraz-sporar",
       "no": 9
     },
     {
-      "playerId": "timi-max-elsnik",
+      "playerId": "mark-zabukovnik",
       "no": 10
     },
     {
@@ -67,7 +67,7 @@
       "no": 13
     },
     {
-      "playerId": "tamar-svetlin",
+      "playerId": "tjas-begic",
       "no": 14
     },
     {
@@ -103,11 +103,11 @@
       "no": 22
     },
     {
-      "playerId": "david-brekalo",
+      "playerId": "jost-urbancic",
       "no": 23
     },
     {
-      "playerId": "zanluk-leban",
+      "playerId": "david-brekalo",
       "no": null
     }
   ]

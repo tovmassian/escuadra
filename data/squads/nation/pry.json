@@ -10,7 +10,7 @@
     "bands": ["#D52B1E", "#FFFFFF", "#0038A8"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Paraguay_national_football_team",
   "members": [
     {
@@ -38,7 +38,7 @@
       "no": 6
     },
     {
-      "playerId": "ramon-sosa",
+      "playerId": "eduardo-delmas",
       "no": 7
     },
     {
@@ -62,11 +62,11 @@
       "no": 12
     },
     {
-      "playerId": "jose-canale",
+      "playerId": "mateo-gamarra",
       "no": 13
     },
     {
-      "playerId": "andres-cubas",
+      "playerId": "braian-ojeda",
       "no": 14
     },
     {
@@ -75,7 +75,7 @@
       "captain": true
     },
     {
-      "playerId": "hugo-quintana",
+      "playerId": "damian-bobadilla",
       "no": 16
     },
     {
@@ -83,7 +83,7 @@
       "no": 17
     },
     {
-      "playerId": "alex-arce",
+      "playerId": "allan-wlk",
       "no": 18
     },
     {
@@ -111,7 +111,7 @@
       "no": 24
     },
     {
-      "playerId": "alexis-canete",
+      "playerId": "mauro-coronel",
       "no": 25
     },
     {
@@ -119,11 +119,7 @@
       "no": 26
     },
     {
-      "playerId": "antonio-sanabria",
-      "no": null
-    },
-    {
-      "playerId": "enso-gonzalez",
+      "playerId": "facundo-lirussi",
       "no": null
     }
   ]

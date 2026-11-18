@@ -11,7 +11,7 @@
     "orientation": "vertical",
     "weights": [1, 2, 1]
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Canada_men%27s_national_soccer_team",
   "members": [
     {
@@ -31,7 +31,7 @@
       "no": 4
     },
     {
-      "playerId": "jamie-knightlebel",
+      "playerId": "joel-waterman",
       "no": 5
     },
     {
@@ -39,8 +39,16 @@
       "no": 6
     },
     {
-      "playerId": "stephen-eustaquio",
+      "playerId": "daniel-jebbison",
       "no": 7
+    },
+    {
+      "playerId": "niko-sigur",
+      "no": 8
+    },
+    {
+      "playerId": "promise-david",
+      "no": 9
     },
     {
       "playerId": "david",
@@ -55,23 +63,35 @@
       "no": 12
     },
     {
-      "playerId": "jacob-shaffelburg",
+      "playerId": "n-saliba",
+      "no": 13
+    },
+    {
+      "playerId": "kevin-khan",
       "no": 14
     },
     {
-      "playerId": "theo-corbeanu",
+      "playerId": "richard-chukwu",
       "no": 15
     },
     {
-      "playerId": "james-pantemis",
+      "playerId": "maxime-crepeau",
       "no": 16
+    },
+    {
+      "playerId": "buchanan",
+      "no": 17
     },
     {
       "playerId": "owen-goodman",
       "no": 18
     },
     {
-      "playerId": "marcus-caldeira",
+      "playerId": "zorhan-bassong",
+      "no": 19
+    },
+    {
+      "playerId": "theo-corbeanu",
       "no": 20
     },
     {
@@ -83,28 +103,8 @@
       "no": 22
     },
     {
-      "playerId": "niko-sigur",
+      "playerId": "charlesandreas-brym",
       "no": 23
-    },
-    {
-      "playerId": "promise-david",
-      "no": 24
-    },
-    {
-      "playerId": "n-saliba",
-      "no": 25
-    },
-    {
-      "playerId": "daniel-jebbison",
-      "no": 26
-    },
-    {
-      "playerId": "richard-chukwu",
-      "no": 27
-    },
-    {
-      "playerId": "justin-smith",
-      "no": 28
     }
   ]
 }

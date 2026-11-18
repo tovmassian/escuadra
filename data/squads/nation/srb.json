@@ -10,11 +10,11 @@
     "bands": ["#C6363C", "#0C4076", "#FFFFFF"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Serbia_national_football_team",
   "members": [
     {
-      "playerId": "dragan-rosic",
+      "playerId": "dorde-petrovic",
       "no": 1
     },
     {
@@ -22,11 +22,11 @@
       "no": 2
     },
     {
-      "playerId": "strahinja-pavlovic",
+      "playerId": "stefan-bukinac",
       "no": 3
     },
     {
-      "playerId": "ognjen-mimovic",
+      "playerId": "nikola-milenkovic",
       "no": 4
     },
     {
@@ -34,11 +34,11 @@
       "no": 5
     },
     {
-      "playerId": "gudelj",
+      "playerId": "stefan-gudelj",
       "no": 6
     },
     {
-      "playerId": "stankovic",
+      "playerId": "mihajlo-cvetkovic",
       "no": 7
     },
     {
@@ -46,19 +46,20 @@
       "no": 8
     },
     {
-      "playerId": "dejan-joveljic",
-      "no": 9
+      "playerId": "aleksandar-mitrovic",
+      "no": 9,
+      "captain": true
     },
     {
       "playerId": "dusan-tadic",
       "no": 10
     },
     {
-      "playerId": "filip-kostic",
+      "playerId": "lazar-samardzic",
       "no": 11
     },
     {
-      "playerId": "filip-stankovic",
+      "playerId": "dragan-rosic",
       "no": 12
     },
     {
@@ -66,7 +67,7 @@
       "no": 13
     },
     {
-      "playerId": "andrija-zivkovic",
+      "playerId": "vasilije-kostov",
       "no": 14
     },
     {
@@ -78,23 +79,23 @@
       "no": 16
     },
     {
-      "playerId": "aleksa-terzic",
+      "playerId": "stefan-dzodic",
       "no": 17
     },
     {
-      "playerId": "mihajlo-cvetkovic",
+      "playerId": "miljan-krpic",
       "no": 18
     },
     {
-      "playerId": "stefan-gudelj",
+      "playerId": "vladimir-lucic",
       "no": 19
     },
     {
-      "playerId": "vanja-dragojevic",
+      "playerId": "sergej-milinkovicsavic",
       "no": 20
     },
     {
-      "playerId": "lazar-samardzic",
+      "playerId": "petar-sukacev",
       "no": 21
     },
     {
@@ -106,19 +107,15 @@
       "no": 23
     },
     {
-      "playerId": "petar-sukacev",
+      "playerId": "andrija-zivkovic",
       "no": null
     },
     {
-      "playerId": "stefan-dzodic",
+      "playerId": "filip-stankovic",
       "no": null
     },
     {
-      "playerId": "vasilije-kostov",
-      "no": null
-    },
-    {
-      "playerId": "vladimir-lucic",
+      "playerId": "vanja-dragojevic",
       "no": null
     }
   ]

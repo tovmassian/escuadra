@@ -10,7 +10,7 @@
     "bands": ["#00BCE4", "#FFFFFF", "#00BCE4"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-16",
   "source": "https://en.wikipedia.org/wiki/Honduras_national_football_team",
   "members": [
     {
@@ -18,27 +18,27 @@
       "no": 1
     },
     {
-      "playerId": "clinton-bennett",
+      "playerId": "denil-maldonado",
       "no": 2
     },
     {
-      "playerId": "giancarlo-sacaza",
+      "playerId": "julian-martinez",
       "no": 3
     },
     {
-      "playerId": "luis-vega",
+      "playerId": "giancarlo-sacaza",
       "no": 4
     },
     {
-      "playerId": "kervin-arriaga",
+      "playerId": "darlin-mencia",
       "no": 5
     },
     {
-      "playerId": "cristopher-melendez",
+      "playerId": "santos-martinez",
       "no": 6
     },
     {
-      "playerId": "jonathan-toro",
+      "playerId": "rigoberto-rivas",
       "no": 7
     },
     {
@@ -62,7 +62,7 @@
       "no": 12
     },
     {
-      "playerId": "clever-portillo",
+      "playerId": "diego-matute",
       "no": 13
     },
     {
@@ -70,7 +70,7 @@
       "no": 14
     },
     {
-      "playerId": "mike-arana",
+      "playerId": "alenis-vargas",
       "no": 15
     },
     {
@@ -78,11 +78,11 @@
       "no": 16
     },
     {
-      "playerId": "exon-arzu",
+      "playerId": "dereck-moncada",
       "no": 17
     },
     {
-      "playerId": "dereck-moncada",
+      "playerId": "clinton-bennett",
       "no": 18
     },
     {
@@ -94,28 +94,28 @@
       "no": 20
     },
     {
-      "playerId": "bryan-rochez",
+      "playerId": "jonathan-toro",
       "no": 21
     },
     {
-      "playerId": "luis-ortiz",
+      "playerId": "enrique-facusse",
       "no": 22
     },
     {
-      "playerId": "alenis-vargas",
-      "no": null
+      "playerId": "roberto-osorto",
+      "no": 23
     },
     {
-      "playerId": "denil-maldonado",
-      "no": null
+      "playerId": "mike-arana",
+      "no": 24
     },
     {
-      "playerId": "nixon-cruz",
-      "no": null
+      "playerId": "kevin-perez",
+      "no": 25
     },
     {
-      "playerId": "victor-vandenbroucke",
-      "no": null
+      "playerId": "kevin-gyamfi",
+      "no": 26
     }
   ]
 }

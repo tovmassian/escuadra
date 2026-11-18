@@ -11,7 +11,7 @@
     "orientation": "vertical",
     "weights": [2, 1, 2]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Georgia_national_football_team",
   "members": [
     {
@@ -39,16 +39,15 @@
       "no": 6
     },
     {
-      "playerId": "kvaratskhelia",
-      "no": 7,
-      "captain": true
+      "playerId": "zuriko-davitashvili",
+      "no": 7
     },
     {
-      "playerId": "nodar-lominadze",
+      "playerId": "giorgi-moistsrapishvili",
       "no": 8
     },
     {
-      "playerId": "zuriko-davitashvili",
+      "playerId": "giorgi-gagua",
       "no": 9
     },
     {
@@ -60,11 +59,11 @@
       "no": 11
     },
     {
-      "playerId": "saba-lobzhanidze",
+      "playerId": "giorgi-maisuradze",
       "no": 12
     },
     {
-      "playerId": "davit-kereselidze",
+      "playerId": "nodari-kalichava",
       "no": 13
     },
     {
@@ -72,11 +71,11 @@
       "no": 14
     },
     {
-      "playerId": "gizo-mamageishvili",
+      "playerId": "sazonov",
       "no": 15
     },
     {
-      "playerId": "saba-kharebashvili",
+      "playerId": "irakli-azarovi",
       "no": 16
     },
     {
@@ -88,15 +87,15 @@
       "no": 18
     },
     {
-      "playerId": "tsitaishvili",
+      "playerId": "iva-gelashvili",
       "no": 19
     },
     {
-      "playerId": "sazonov",
+      "playerId": "nika-gagnidze",
       "no": 20
     },
     {
-      "playerId": "giorgi-gagua",
+      "playerId": "jemal-tabidze",
       "no": 21
     },
     {
@@ -108,19 +107,15 @@
       "no": 23
     },
     {
-      "playerId": "giorgi-abuashvili",
+      "playerId": "guliashvili",
       "no": null
     },
     {
-      "playerId": "ilia-beriashvili",
+      "playerId": "nodar-lominadze",
       "no": null
     },
     {
-      "playerId": "jemal-tabidze",
-      "no": null
-    },
-    {
-      "playerId": "vladimer-mamuchashvili",
+      "playerId": "tsitaishvili",
       "no": null
     }
   ]

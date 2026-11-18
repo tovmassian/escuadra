@@ -10,11 +10,11 @@
     "bands": ["#FFFFFF", "#00B140"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-22",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Wales_national_football_team",
   "members": [
     {
-      "playerId": "david-cornell",
+      "playerId": "karl-darlow",
       "no": 1
     },
     {
@@ -22,28 +22,27 @@
       "no": 2
     },
     {
-      "playerId": "neco-williams",
+      "playerId": "jay-dasilva",
       "no": 3
     },
     {
       "playerId": "ben-davies",
-      "no": 4,
-      "captain": true
-    },
-    {
-      "playerId": "ethan-ampadu",
-      "no": 5
+      "no": 4
     },
     {
       "playerId": "ben-cabango",
+      "no": 5
+    },
+    {
+      "playerId": "joe-rodon",
       "no": 6
     },
     {
-      "playerId": "cian-ashford",
+      "playerId": "david-brooks",
       "no": 7
     },
     {
-      "playerId": "wes-burns",
+      "playerId": "harry-wilson",
       "no": 8
     },
     {
@@ -63,7 +62,7 @@
       "no": 12
     },
     {
-      "playerId": "kieffer-moore",
+      "playerId": "aaron-collins",
       "no": 13
     },
     {
@@ -71,7 +70,7 @@
       "no": 14
     },
     {
-      "playerId": "jay-dasilva",
+      "playerId": "cian-ashford",
       "no": 15
     },
     {
@@ -79,7 +78,7 @@
       "no": 16
     },
     {
-      "playerId": "jordan-james",
+      "playerId": "rubin-colwill",
       "no": 17
     },
     {
@@ -95,7 +94,7 @@
       "no": 20
     },
     {
-      "playerId": "tom-king",
+      "playerId": "joe-duncan",
       "no": 21
     },
     {
@@ -103,23 +102,11 @@
       "no": 22
     },
     {
-      "playerId": "joel-colwill",
+      "playerId": "kai-andrews",
       "no": 23
     },
     {
-      "playerId": "cameron-congreve",
-      "no": null
-    },
-    {
-      "playerId": "charlie-savage",
-      "no": null
-    },
-    {
-      "playerId": "joe-taylor",
-      "no": null
-    },
-    {
-      "playerId": "rhys-norringtondavies",
+      "playerId": "joel-colwill",
       "no": null
     }
   ]
