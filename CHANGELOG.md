@@ -56,7 +56,7 @@ national squads.
 - Android: on tablets and other large screens, Escuadra turns with the screen (#203).
 - Over the air, 2026-11-13: 47 squads follow the November international window, and
   American Samoa and the Solomon Islands join the nations, from the first weekly squad
-  sweep (#164, #290).
+  sweep: 96 club and 159 national squads in all (#164, #290).
 
 ### Removed
 
