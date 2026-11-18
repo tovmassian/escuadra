@@ -5,13 +5,13 @@
   "season": "2026",
   "primaryColor": "#FFFFFF",
   "secondaryColor": "#FF0000",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#FFFFFF", "#FF0000", "#FFFFFF"],
     "orientation": "vertical",
     "weights": [2, 1, 2]
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Georgia_national_football_team",
   "members": [
     {
@@ -35,7 +35,7 @@
       "no": 5
     },
     {
-      "playerId": "giorgi-moistsrapishvili",
+      "playerId": "kochorashvili",
       "no": 6
     },
     {
@@ -43,11 +43,11 @@
       "no": 7
     },
     {
-      "playerId": "nodar-lominadze",
+      "playerId": "giorgi-moistsrapishvili",
       "no": 8
     },
     {
-      "playerId": "guliashvili",
+      "playerId": "giorgi-gagua",
       "no": 9
     },
     {
@@ -87,7 +87,7 @@
       "no": 18
     },
     {
-      "playerId": "tsitaishvili",
+      "playerId": "iva-gelashvili",
       "no": 19
     },
     {
@@ -107,15 +107,15 @@
       "no": 23
     },
     {
-      "playerId": "giorgi-gagua",
+      "playerId": "guliashvili",
       "no": null
     },
     {
-      "playerId": "iva-gelashvili",
+      "playerId": "nodar-lominadze",
       "no": null
     },
     {
-      "playerId": "kochorashvili",
+      "playerId": "tsitaishvili",
       "no": null
     }
   ]

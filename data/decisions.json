@@ -1,6 +1,11 @@
 {
   "splits": [
     {
+      "team": "blz",
+      "departed": "kenyon-smith",
+      "arrived": "Jahryl Smith"
+    },
+    {
       "team": "bra",
       "departed": "danilo-luiz",
       "arrived": "Danilo"

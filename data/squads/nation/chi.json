@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#D52B1E",
   "secondaryColor": "#FFFFFF",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#FFFFFF", "#D52B1E"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Chile_national_football_team",
   "members": [
     {
@@ -62,6 +62,10 @@
       "no": 12
     },
     {
+      "playerId": "thomas-coulombe",
+      "no": 13
+    },
+    {
       "playerId": "felipe-mendez",
       "no": 14
     },
@@ -105,10 +109,6 @@
     {
       "playerId": "emiliano-ramos",
       "no": 25
-    },
-    {
-      "playerId": "diego-ulloa",
-      "no": 26
     },
     {
       "playerId": "jonathan-villagra",

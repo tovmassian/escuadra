@@ -5,17 +5,21 @@
   "season": "2026",
   "primaryColor": "#FFFFFF",
   "secondaryColor": "#DC143C",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#FFFFFF", "#DC143C"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Poland_national_football_team",
   "members": [
     {
       "playerId": "bartlomiej-dragowski",
       "no": 1
+    },
+    {
+      "playerId": "arkadiusz-pyrka",
+      "no": 2
     },
     {
       "playerId": "kamil-piatkowski",
@@ -26,7 +30,7 @@
       "no": 4
     },
     {
-      "playerId": "oskar-kubiak",
+      "playerId": "jan-bednarek",
       "no": 5
     },
     {
@@ -47,7 +51,7 @@
       "captain": true
     },
     {
-      "playerId": "arkadiusz-pyrka",
+      "playerId": "zielinski",
       "no": 10
     },
     {
@@ -63,7 +67,7 @@
       "no": 13
     },
     {
-      "playerId": "kiwior",
+      "playerId": "oskar-kubiak",
       "no": 14
     },
     {
@@ -103,11 +107,7 @@
       "no": 23
     },
     {
-      "playerId": "jan-bednarek",
-      "no": null
-    },
-    {
-      "playerId": "zielinski",
+      "playerId": "kiwior",
       "no": null
     }
   ]

@@ -5,13 +5,13 @@
   "season": "2026",
   "primaryColor": "#F7E017",
   "secondaryColor": "#000000",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#F7E017", "#FFFFFF", "#000000", "#F7E017"],
     "orientation": "horizontal",
     "weights": [3, 1, 1, 3]
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Brunei_national_football_team",
   "members": [
     {
@@ -19,7 +19,7 @@
       "no": 2
     },
     {
-      "playerId": "danial-hariz-syukrin",
+      "playerId": "danial-hariz-shukrin",
       "no": 3
     },
     {

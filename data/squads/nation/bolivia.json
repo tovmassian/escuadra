@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#D32011",
   "secondaryColor": "#00702D",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#D32011", "#F0E53C", "#00702D"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Bolivia_national_football_team",
   "members": [
     {
@@ -64,10 +64,6 @@
     {
       "playerId": "moises-paniagua",
       "no": 13
-    },
-    {
-      "playerId": "robson-tome",
-      "no": 14
     },
     {
       "playerId": "jorge-lovera",

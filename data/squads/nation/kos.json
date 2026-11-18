@@ -5,7 +5,7 @@
   "season": "2026",
   "primaryColor": "#244AA5",
   "secondaryColor": "#D0A650",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#244AA5", "#D0A650", "#244AA5"],
     "orientation": "vertical"

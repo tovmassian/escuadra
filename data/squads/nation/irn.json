@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#239F40",
   "secondaryColor": "#DA0000",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#239F40", "#FFFFFF", "#DA0000"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Iran_national_football_team",
   "members": [
     {
@@ -115,12 +115,12 @@
       "no": 27
     },
     {
-      "playerId": "aref-aghasi",
-      "no": 33
+      "playerId": "adib-zarei",
+      "no": 30
     },
     {
-      "playerId": "adib-zarei",
-      "no": null
+      "playerId": "aref-aghasi",
+      "no": 33
     },
     {
       "playerId": "amirhossein-farsi",

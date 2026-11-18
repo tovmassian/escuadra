@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#C60C30",
   "secondaryColor": "#FFFFFF",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#C60C30", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Denmark_national_football_team",
   "members": [
     {
@@ -90,7 +90,7 @@
       "no": 19
     },
     {
-      "playerId": "mads-bidstrup",
+      "playerId": "albert-gronbaek",
       "no": 20
     },
     {
@@ -98,7 +98,7 @@
       "no": 21
     },
     {
-      "playerId": "filip-jorgensen",
+      "playerId": "andreas-hansen",
       "no": 22
     },
     {
@@ -107,7 +107,7 @@
       "captain": true
     },
     {
-      "playerId": "albert-gronbaek",
+      "playerId": "mads-bidstrup",
       "no": null
     }
   ]

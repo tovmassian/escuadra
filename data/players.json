@@ -7978,6 +7978,25 @@
     "wikiTitle": "Andreas Christou (football player)"
   },
   {
+    "id": "andreas-hansen",
+    "name": "Andreas Hansen",
+    "fullName": "Andreas Hansen",
+    "birth": "1995-08-11",
+    "position": "GK",
+    "nationality": "Denmark",
+    "club": "Nordsjælland",
+    "photo": {
+      "file": "FC Red Bull Salzburg gegen FC Nordsjaelland (Testspiel 2023-07-08) Andreas Hansen.jpg",
+      "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/70/FC_Red_Bull_Salzburg_gegen_FC_Nordsjaelland_%28Testspiel_2023-07-08%29_Andreas_Hansen.jpg/960px-FC_Red_Bull_Salzburg_gegen_FC_Nordsjaelland_%28Testspiel_2023-07-08%29_Andreas_Hansen.jpg",
+      "width": 1147,
+      "height": 2174,
+      "author": "Werner100359",
+      "licence": "CC BY-SA 4.0",
+      "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
+    },
+    "wikiTitle": "Andreas Hansen (footballer)"
+  },
+  {
     "id": "andreas-hountondji",
     "name": "Andréas Hountondji",
     "fullName": "Andréas Hountondji",
@@ -9928,8 +9947,8 @@
   },
   {
     "id": "aria-yousefi",
-    "name": "Aria Yousefi",
-    "fullName": "Aria Yousefi",
+    "name": "Arya Yousefi",
+    "fullName": "Arya Yousefi",
     "birth": "2002-04-22",
     "position": "DF",
     "nationality": "Iran",
@@ -9943,7 +9962,7 @@
       "licence": "CC BY-SA 4.0",
       "licenceUrl": "https://creativecommons.org/licenses/by-sa/4.0"
     },
-    "wikiTitle": "Aria Yousefi"
+    "wikiTitle": "Arya Yousefi"
   },
   {
     "id": "arif-aiman",
@@ -20726,6 +20745,17 @@
     "club": "Persepolis",
     "photo": null,
     "wikiTitle": "Danial Eiri"
+  },
+  {
+    "id": "danial-hariz-shukrin",
+    "name": "Danial Hariz Shukrin",
+    "fullName": "Danial Hariz Shukrin",
+    "birth": "2004-03-23",
+    "position": "DF",
+    "nationality": "Brunei",
+    "club": "Indera",
+    "photo": null,
+    "wikiTitle": "Danial Hariz Shukrin"
   },
   {
     "id": "danial-hariz-syukrin",
@@ -42366,6 +42396,17 @@
     "club": "St. George's Colts",
     "photo": null,
     "wikiTitle": "Jahquil Hill"
+  },
+  {
+    "id": "jahryl-smith",
+    "name": "Jahryl Smith",
+    "fullName": "Jahryl Smith",
+    "birth": "2003-10-08",
+    "position": "DF",
+    "nationality": "Belize",
+    "club": "Verdes",
+    "photo": null,
+    "wikiTitle": "Jahryl Smith"
   },
   {
     "id": "jahyann-pandore",

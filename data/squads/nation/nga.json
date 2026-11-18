@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#008751",
   "secondaryColor": "#FFFFFF",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#008751", "#FFFFFF", "#008751"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Nigeria_national_football_team",
   "members": [
     {
@@ -36,10 +36,6 @@
     {
       "playerId": "semi-ajayi",
       "no": 6
-    },
-    {
-      "playerId": "lookman",
-      "no": 7
     },
     {
       "playerId": "samson-tijani",
@@ -107,7 +103,7 @@
     },
     {
       "playerId": "mubarak-suleiman",
-      "no": null
+      "no": 24
     }
   ]
 }

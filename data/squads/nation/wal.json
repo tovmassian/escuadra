@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#00B140",
   "secondaryColor": "#FFFFFF",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#FFFFFF", "#00B140"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Wales_national_football_team",
   "members": [
     {
@@ -22,7 +22,7 @@
       "no": 2
     },
     {
-      "playerId": "neco-williams",
+      "playerId": "jay-dasilva",
       "no": 3
     },
     {
@@ -30,7 +30,7 @@
       "no": 4
     },
     {
-      "playerId": "ethan-ampadu",
+      "playerId": "ben-cabango",
       "no": 5
     },
     {
@@ -70,7 +70,7 @@
       "no": 14
     },
     {
-      "playerId": "jay-dasilva",
+      "playerId": "cian-ashford",
       "no": 15
     },
     {
@@ -86,7 +86,7 @@
       "no": 18
     },
     {
-      "playerId": "cian-ashford",
+      "playerId": "sorba-thomas",
       "no": 19
     },
     {
@@ -106,15 +106,7 @@
       "no": 23
     },
     {
-      "playerId": "ben-cabango",
-      "no": null
-    },
-    {
       "playerId": "joel-colwill",
-      "no": null
-    },
-    {
-      "playerId": "sorba-thomas",
       "no": null
     }
   ]

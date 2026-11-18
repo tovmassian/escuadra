@@ -5,13 +5,13 @@
   "season": "2026",
   "primaryColor": "#046A38",
   "secondaryColor": "#DA020E",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#046A38", "#DA020E"],
     "orientation": "vertical",
     "weights": [2, 3]
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Portugal_national_football_team",
   "members": [
     {
@@ -23,7 +23,7 @@
       "no": 2
     },
     {
-      "playerId": "ruben-dias",
+      "playerId": "goncalo-inacio",
       "no": 3
     },
     {
@@ -35,7 +35,7 @@
       "no": 5
     },
     {
-      "playerId": "joao-palhinha",
+      "playerId": "mateus-fernandes",
       "no": 6
     },
     {
@@ -51,12 +51,11 @@
       "no": 9
     },
     {
-      "playerId": "bernardo-silva",
-      "no": 10,
-      "captain": true
+      "playerId": "joao-felix",
+      "no": 10
     },
     {
-      "playerId": "joao-felix",
+      "playerId": "geovany-quenda",
       "no": 11
     },
     {
@@ -68,7 +67,7 @@
       "no": 13
     },
     {
-      "playerId": "geovany-quenda",
+      "playerId": "alberto-costa",
       "no": 14
     },
     {
@@ -92,7 +91,7 @@
       "no": 19
     },
     {
-      "playerId": "alberto-costa",
+      "playerId": "cancelo",
       "no": 20
     },
     {
@@ -108,19 +107,7 @@
       "no": 23
     },
     {
-      "playerId": "cancelo",
-      "no": null
-    },
-    {
-      "playerId": "goncalo-inacio",
-      "no": null
-    },
-    {
       "playerId": "gustavo-varela",
-      "no": null
-    },
-    {
-      "playerId": "mateus-fernandes",
       "no": null
     }
   ]

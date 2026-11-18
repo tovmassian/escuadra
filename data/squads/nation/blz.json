@@ -5,13 +5,13 @@
   "season": "2026",
   "primaryColor": "#171696",
   "secondaryColor": "#D90F19",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#D90F19", "#171696", "#D90F19"],
     "orientation": "horizontal",
     "weights": [1, 8, 1]
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Belize_national_football_team",
   "members": [
     {
@@ -67,7 +67,7 @@
       "no": 15
     },
     {
-      "playerId": "kenyon-smith",
+      "playerId": "jahryl-smith",
       "no": 16
     },
     {

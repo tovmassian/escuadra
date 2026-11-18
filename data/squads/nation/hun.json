@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#CE2939",
   "secondaryColor": "#477050",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#CE2939", "#FFFFFF", "#477050"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Hungary_national_football_team",
   "members": [
     {
@@ -34,7 +34,7 @@
       "no": 5
     },
     {
-      "playerId": "willi-orban",
+      "playerId": "kornel-szucs",
       "no": 6
     },
     {
@@ -42,7 +42,7 @@
       "no": 7
     },
     {
-      "playerId": "milan-vitalis",
+      "playerId": "peter-barath",
       "no": 8
     },
     {
@@ -82,7 +82,7 @@
       "no": 17
     },
     {
-      "playerId": "zsolt-nagy",
+      "playerId": "gabor-jurek",
       "no": 18
     },
     {
@@ -102,19 +102,19 @@
       "no": 22
     },
     {
-      "playerId": "gabor-jurek",
+      "playerId": "damir-redzic",
       "no": 23
     },
     {
-      "playerId": "damir-redzic",
+      "playerId": "milan-vitalis",
       "no": null
     },
     {
-      "playerId": "kornel-szucs",
+      "playerId": "willi-orban",
       "no": null
     },
     {
-      "playerId": "peter-barath",
+      "playerId": "zsolt-nagy",
       "no": null
     }
   ]

@@ -5,16 +5,16 @@
   "season": "2026",
   "primaryColor": "#D52B1E",
   "secondaryColor": "#0038A8",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#D52B1E", "#FFFFFF", "#0038A8"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Paraguay_national_football_team",
   "members": [
     {
-      "playerId": "facundo-lirussi",
+      "playerId": "santiago-rojas",
       "no": 1
     },
     {
@@ -119,7 +119,7 @@
       "no": 26
     },
     {
-      "playerId": "santiago-rojas",
+      "playerId": "facundo-lirussi",
       "no": null
     }
   ]

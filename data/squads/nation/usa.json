@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#B31942",
   "secondaryColor": "#FFFFFF",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#B31942", "#FFFFFF"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/United_States_men%27s_national_soccer_team",
   "members": [
     {
@@ -47,7 +47,7 @@
       "no": 8
     },
     {
-      "playerId": "justin-ellis",
+      "playerId": "julian-hall",
       "no": 9
     },
     {
@@ -87,10 +87,6 @@
       "no": 18
     },
     {
-      "playerId": "julian-hall",
-      "no": 19
-    },
-    {
       "playerId": "folarin-balogun",
       "no": 20
     },
@@ -104,7 +100,11 @@
     },
     {
       "playerId": "brian-schwake",
-      "no": 23
+      "no": null
+    },
+    {
+      "playerId": "justin-ellis",
+      "no": null
     },
     {
       "playerId": "santiago-castaneda",

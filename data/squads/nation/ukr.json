@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#0057B7",
   "secondaryColor": "#FFDD00",
-  "verified": false,
+  "verified": true,
   "marker": {
     "bands": ["#0057B7", "#FFDD00"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-18",
   "source": "https://en.wikipedia.org/wiki/Ukraine_national_football_team",
   "members": [
     {
@@ -30,7 +30,7 @@
       "no": 4
     },
     {
-      "playerId": "illya-krupskyi",
+      "playerId": "valeriy-bondar",
       "no": 5
     },
     {
@@ -50,7 +50,7 @@
       "no": 9
     },
     {
-      "playerId": "oleksandr-andriyevskyi",
+      "playerId": "mykola-shaparenko",
       "no": 10
     },
     {
@@ -70,7 +70,7 @@
       "no": 14
     },
     {
-      "playerId": "ivan-varfolomeyev",
+      "playerId": "illya-krupskyi",
       "no": 15
     },
     {
@@ -78,7 +78,7 @@
       "no": 16
     },
     {
-      "playerId": "vladyslav-vanat",
+      "playerId": "oleksandr-nazarenko",
       "no": 17
     },
     {
@@ -106,15 +106,15 @@
       "no": 23
     },
     {
-      "playerId": "mykola-shaparenko",
+      "playerId": "ivan-varfolomeyev",
       "no": null
     },
     {
-      "playerId": "oleksandr-nazarenko",
+      "playerId": "oleksandr-andriyevskyi",
       "no": null
     },
     {
-      "playerId": "valeriy-bondar",
+      "playerId": "vladyslav-vanat",
       "no": null
     }
   ]
