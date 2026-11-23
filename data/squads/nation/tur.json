@@ -10,16 +10,12 @@
     "bands": ["#E30A17", "#FFFFFF", "#E30A17"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Turkey_national_football_team",
   "members": [
     {
-      "playerId": "ugurcan-cakir",
+      "playerId": "berke-ozer",
       "no": 1
-    },
-    {
-      "playerId": "zeki-celik",
-      "no": 2
     },
     {
       "playerId": "merih-demiral",
@@ -66,11 +62,11 @@
       "no": 13
     },
     {
-      "playerId": "ahmetcan-kaplan",
+      "playerId": "abdulkerim-bardakci",
       "no": 14
     },
     {
-      "playerId": "ozan-kabak",
+      "playerId": "ahmetcan-kaplan",
       "no": 15
     },
     {
@@ -102,19 +98,23 @@
       "no": 22
     },
     {
-      "playerId": "berke-ozer",
+      "playerId": "serhat-oztasdelen",
       "no": 23
-    },
-    {
-      "playerId": "abdulkerim-bardakci",
-      "no": null
     },
     {
       "playerId": "aral-simsir",
       "no": null
     },
     {
-      "playerId": "serhat-oztasdelen",
+      "playerId": "ozan-kabak",
+      "no": null
+    },
+    {
+      "playerId": "ugurcan-cakir",
+      "no": null
+    },
+    {
+      "playerId": "zeki-celik",
       "no": null
     }
   ]

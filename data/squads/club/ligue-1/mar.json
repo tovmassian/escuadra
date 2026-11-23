@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#009DDC"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-09-09",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Olympique_de_Marseille",
   "members": [
     {
@@ -93,6 +93,14 @@
     {
       "playerId": "keyliane-abdallah",
       "no": 48
+    },
+    {
+      "playerId": "nouhoum-kamissoko",
+      "no": 71
+    },
+    {
+      "playerId": "kelyann-bezahaf",
+      "no": 74
     },
     {
       "playerId": "amine-harit",

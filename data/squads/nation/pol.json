@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#DC143C"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-18",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Poland_national_football_team",
   "members": [
     {
@@ -105,10 +105,6 @@
     {
       "playerId": "kacper-potulski",
       "no": 23
-    },
-    {
-      "playerId": "kiwior",
-      "no": null
     }
   ]
 }

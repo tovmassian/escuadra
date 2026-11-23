@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [1, 2, 1]
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Libya_national_football_team",
   "members": [
     {
@@ -39,7 +39,7 @@
       "no": 6
     },
     {
-      "playerId": "ismael-tajourishradi",
+      "playerId": "mohamed-altubal",
       "no": 7
     },
     {
@@ -51,12 +51,16 @@
       "no": 9
     },
     {
-      "playerId": "hamdou-elhouni",
+      "playerId": "muaid-ellafi",
       "no": 10
     },
     {
-      "playerId": "ahmed-huwaydi",
+      "playerId": "abdullah-alorfey",
       "no": 11
+    },
+    {
+      "playerId": "mohammed-alghannai",
+      "no": 12
     },
     {
       "playerId": "mohammed-khalil",
@@ -99,8 +103,8 @@
       "no": 22
     },
     {
-      "playerId": "muaid-ellafi",
-      "no": 23
+      "playerId": "ismael-tajourishradi",
+      "no": 26
     },
     {
       "playerId": "daniel-elfadli",
@@ -111,19 +115,19 @@
       "no": null
     },
     {
-      "playerId": "abdullah-alorfey",
-      "no": null
-    },
-    {
       "playerId": "ahmad-benali",
       "no": null
     },
     {
-      "playerId": "hamza-almugsi",
+      "playerId": "ahmed-huwaydi",
       "no": null
     },
     {
-      "playerId": "mohammed-alghannai",
+      "playerId": "hamdou-elhouni",
+      "no": null
+    },
+    {
+      "playerId": "hamza-almugsi",
       "no": null
     }
   ]

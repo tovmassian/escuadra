@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#BC002D", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Japan_national_football_team",
   "members": [
     {
@@ -27,7 +27,8 @@
     },
     {
       "playerId": "itakura",
-      "no": 4
+      "no": 4,
+      "captain": true
     },
     {
       "playerId": "watanabe",
@@ -51,8 +52,7 @@
     },
     {
       "playerId": "doan",
-      "no": 10,
-      "captain": true
+      "no": 10
     },
     {
       "playerId": "maeda",

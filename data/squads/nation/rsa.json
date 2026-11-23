@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [3, 1, 2, 1, 3]
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/South_Africa_national_soccer_team",
   "members": [
     {
@@ -108,15 +108,15 @@
       "no": 25
     },
     {
+      "playerId": "siyanda-ndlovu",
+      "no": 27
+    },
+    {
       "playerId": "fawaaz-basadien",
       "no": null
     },
     {
       "playerId": "lebone-seema",
-      "no": null
-    },
-    {
-      "playerId": "siyanda-ndlovu",
       "no": null
     },
     {

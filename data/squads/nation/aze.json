@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#00B5E2",
   "secondaryColor": "#509E2F",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#00B5E2", "#EF3340", "#509E2F"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Azerbaijan_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "edqar-adilkhanov",
+      "playerId": "rahman-dashdamirov",
       "no": 2
     },
     {
@@ -26,11 +26,11 @@
       "no": 3
     },
     {
-      "playerId": "oruc-mammadov",
+      "playerId": "rahil-mammadov",
       "no": 4
     },
     {
-      "playerId": "anton-kryvotsyuk",
+      "playerId": "farid-yusifli",
       "no": 5
     },
     {
@@ -54,15 +54,15 @@
       "no": 10
     },
     {
-      "playerId": "aykhan-guseynov",
+      "playerId": "khayal-aliyev",
       "no": 11
     },
     {
-      "playerId": "aydin-bayramov",
+      "playerId": "shakhruddin-magomedaliyev",
       "no": 12
     },
     {
-      "playerId": "emil-safarov",
+      "playerId": "eshqin-ahmadov",
       "no": 13
     },
     {
@@ -70,23 +70,23 @@
       "no": 14
     },
     {
-      "playerId": "murad-khachayev",
+      "playerId": "badavi-guseynov",
       "no": 15
     },
     {
-      "playerId": "rufat-abdullazade",
+      "playerId": "emil-mustafayev",
       "no": 16
     },
     {
-      "playerId": "vusal-isgandarli",
+      "playerId": "tellur-mutallimov",
       "no": 17
     },
     {
-      "playerId": "clal-huseynov",
+      "playerId": "oruc-mammadov",
       "no": 18
     },
     {
-      "playerId": "tellur-mutallimov",
+      "playerId": "namiq-lsgrov",
       "no": 19
     },
     {
@@ -94,43 +94,35 @@
       "no": 20
     },
     {
-      "playerId": "ragim-sadykhov",
+      "playerId": "qismt-aliyev",
       "no": 21
     },
     {
-      "playerId": "anatoliy-nuriyev",
+      "playerId": "agadadash-salyanskiy",
       "no": 22
     },
     {
-      "playerId": "ravan-mirzammadov",
+      "playerId": "aydin-bayramov",
       "no": 23
     },
     {
-      "playerId": "badavi-guseynov",
+      "playerId": "murad-mammadov",
+      "no": 24
+    },
+    {
+      "playerId": "rufat-abdullazade",
+      "no": 25
+    },
+    {
+      "playerId": "nihad-ahmadzada",
+      "no": 26
+    },
+    {
+      "playerId": "anton-kryvotsyuk",
       "no": null
     },
     {
-      "playerId": "ceyhun-nuriyev",
-      "no": null
-    },
-    {
-      "playerId": "farid-yusifli",
-      "no": null
-    },
-    {
-      "playerId": "mustafa-ahmadzada",
-      "no": null
-    },
-    {
-      "playerId": "rahil-mammadov",
-      "no": null
-    },
-    {
-      "playerId": "rahman-dashdamirov",
-      "no": null
-    },
-    {
-      "playerId": "renat-dadasov",
+      "playerId": "lorenzo-mezzotero",
       "no": null
     }
   ]

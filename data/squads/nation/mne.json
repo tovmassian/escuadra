@@ -10,7 +10,7 @@
     "bands": ["#E30000", "#FFC000", "#E30000"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Montenegro_national_football_team",
   "members": [
     {
@@ -116,10 +116,6 @@
     },
     {
       "playerId": "milan-roganovic",
-      "no": null
-    },
-    {
-      "playerId": "stefan-savic",
       "no": null
     }
   ]

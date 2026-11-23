@@ -10,7 +10,7 @@
     "bands": ["#0D5EAF", "#FFFFFF"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Greece_national_football_team",
   "members": [
     {
@@ -91,14 +91,6 @@
       "no": 19
     },
     {
-      "playerId": "christos-zafeiris",
-      "no": 20
-    },
-    {
-      "playerId": "kostas-tsimikas",
-      "no": 21
-    },
-    {
       "playerId": "dimitris-giannoulis",
       "no": 22
     },
@@ -111,11 +103,19 @@
       "no": null
     },
     {
+      "playerId": "christos-zafeiris",
+      "no": null
+    },
+    {
       "playerId": "dimitrios-kourbelis",
       "no": null
     },
     {
       "playerId": "fotis-ioannidis",
+      "no": null
+    },
+    {
+      "playerId": "kostas-tsimikas",
       "no": null
     },
     {

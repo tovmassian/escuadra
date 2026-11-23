@@ -10,7 +10,7 @@
     "bands": ["#0047AB", "#FFFFFF", "#0047AB"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/El_Salvador_national_football_team",
   "members": [
     {
@@ -23,7 +23,7 @@
       "no": 2
     },
     {
-      "playerId": "elvis-claros",
+      "playerId": "danis-cerros",
       "no": 3
     },
     {
@@ -31,7 +31,7 @@
       "no": 4
     },
     {
-      "playerId": "jose-portillo",
+      "playerId": "rudy-clavel",
       "no": 5
     },
     {
@@ -59,11 +59,11 @@
       "no": 11
     },
     {
-      "playerId": "eric-calvillo",
+      "playerId": "marcelo-diaz",
       "no": 12
     },
     {
-      "playerId": "danis-cerros",
+      "playerId": "eric-calvillo",
       "no": 13
     },
     {
@@ -107,11 +107,11 @@
       "no": 23
     },
     {
-      "playerId": "marcelo-diaz",
+      "playerId": "elvis-claros",
       "no": null
     },
     {
-      "playerId": "rudy-clavel",
+      "playerId": "jose-portillo",
       "no": null
     }
   ]

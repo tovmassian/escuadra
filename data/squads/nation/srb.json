@@ -10,7 +10,7 @@
     "bands": ["#C6363C", "#0C4076", "#FFFFFF"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Serbia_national_football_team",
   "members": [
     {
@@ -107,15 +107,7 @@
       "no": 23
     },
     {
-      "playerId": "andrija-zivkovic",
-      "no": null
-    },
-    {
       "playerId": "filip-stankovic",
-      "no": null
-    },
-    {
-      "playerId": "vanja-dragojevic",
       "no": null
     }
   ]

@@ -5,16 +5,16 @@
   "season": "2026",
   "primaryColor": "#002B7F",
   "secondaryColor": "#CE1126",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#002B7F", "#FCD116", "#CE1126"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Romania_national_football_team",
   "members": [
     {
-      "playerId": "radu",
+      "playerId": "stefan-tarnovanu",
       "no": 1
     },
     {
@@ -22,7 +22,7 @@
       "no": 2
     },
     {
-      "playerId": "matei-ilie",
+      "playerId": "radu-dragusin",
       "no": 3
     },
     {
@@ -30,15 +30,15 @@
       "no": 4
     },
     {
-      "playerId": "lisav-eissat",
+      "playerId": "virgil-ghita",
       "no": 5
     },
     {
-      "playerId": "tudor-baluta",
+      "playerId": "vladimir-screciu",
       "no": 6
     },
     {
-      "playerId": "darius-olaru",
+      "playerId": "florinel-coman",
       "no": 7
     },
     {
@@ -46,12 +46,13 @@
       "no": 8
     },
     {
-      "playerId": "florin-tanase",
+      "playerId": "daniel-birligea",
       "no": 9
     },
     {
-      "playerId": "nicolae-stanciu",
-      "no": 10
+      "playerId": "ianis-hagi",
+      "no": 10,
+      "captain": true
     },
     {
       "playerId": "nicusor-bancu",
@@ -62,24 +63,23 @@
       "no": 12
     },
     {
-      "playerId": "valentin-mihaila",
+      "playerId": "matei-ilie",
       "no": 13
     },
     {
-      "playerId": "ianis-hagi",
-      "no": 14,
-      "captain": true
+      "playerId": "rares-ilie",
+      "no": 14
     },
     {
-      "playerId": "raul-oprut",
+      "playerId": "lisav-eissat",
       "no": 15
     },
     {
-      "playerId": "valentin-cojocaru",
+      "playerId": "laurentiu-popescu",
       "no": 16
     },
     {
-      "playerId": "vladimir-screciu",
+      "playerId": "catalin-cirjan",
       "no": 17
     },
     {
@@ -87,7 +87,7 @@
       "no": 18
     },
     {
-      "playerId": "catalin-cirjan",
+      "playerId": "marius-corbu",
       "no": 19
     },
     {
@@ -107,19 +107,7 @@
       "no": 23
     },
     {
-      "playerId": "andrei-borza",
-      "no": null
-    },
-    {
-      "playerId": "andrei-burca",
-      "no": null
-    },
-    {
-      "playerId": "bogdan-racovitan",
-      "no": null
-    },
-    {
-      "playerId": "david-matei",
+      "playerId": "ianis-stoica",
       "no": null
     }
   ]

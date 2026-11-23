@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [7, 1, 2, 1, 7]
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Iceland_national_football_team",
   "members": [
     {
@@ -52,6 +52,10 @@
       "no": 10
     },
     {
+      "playerId": "jon-dagur-thorsteinsson",
+      "no": 11
+    },
+    {
       "playerId": "hakon-valdimarsson",
       "no": 12
     },
@@ -60,7 +64,7 @@
       "no": 13
     },
     {
-      "playerId": "brynjolfur-willumsson",
+      "playerId": "aron-gunnarsson",
       "no": 14
     },
     {
@@ -68,11 +72,11 @@
       "no": 15
     },
     {
-      "playerId": "stefan-teitur-thordarson",
+      "playerId": "hjortur-hermannsson",
       "no": 16
     },
     {
-      "playerId": "aron-gunnarsson",
+      "playerId": "brynjolfur-willumsson",
       "no": 17
     },
     {
@@ -84,7 +88,7 @@
       "no": 19
     },
     {
-      "playerId": "jon-dagur-thorsteinsson",
+      "playerId": "kristian-hlynsson",
       "no": 20
     },
     {
@@ -100,7 +104,7 @@
       "no": 23
     },
     {
-      "playerId": "kristian-hlynsson",
+      "playerId": "stefan-teitur-thordarson",
       "no": null
     },
     {

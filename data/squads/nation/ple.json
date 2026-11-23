@@ -11,7 +11,7 @@
     "orientation": "vertical",
     "weights": [1, 2, 2, 2]
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Palestine_national_football_team",
   "members": [
     {
@@ -40,7 +40,7 @@
       "captain": true
     },
     {
-      "playerId": "samer-zbaideh",
+      "playerId": "samer-zubaida",
       "no": 8
     },
     {
@@ -104,7 +104,7 @@
       "no": 23
     },
     {
-      "playerId": "anas-baniouwda",
+      "playerId": "anas-bani-odeh",
       "no": 27
     }
   ]

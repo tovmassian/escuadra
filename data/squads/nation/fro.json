@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [7, 1, 2, 1, 7]
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Faroe_Islands_national_football_team",
   "members": [
     {
@@ -24,7 +24,8 @@
     },
     {
       "playerId": "viljormur-davidsen",
-      "no": 3
+      "no": 3,
+      "captain": true
     },
     {
       "playerId": "samuel-chukwudi",
@@ -43,7 +44,7 @@
       "no": 7
     },
     {
-      "playerId": "ari-dam",
+      "playerId": "asi-dam",
       "no": 8
     },
     {

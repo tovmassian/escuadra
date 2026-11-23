@@ -33,6 +33,7 @@ import squadBha from '@/data/squads/club/premier-league/bha.json';
 import squadBhr from '@/data/squads/nation/bhr.json';
 import squadBhu from '@/data/squads/nation/bhu.json';
 import squadBih from '@/data/squads/nation/bih.json';
+import squadBlr from '@/data/squads/nation/blr.json';
 import squadBlz from '@/data/squads/nation/blz.json';
 import squadBmg from '@/data/squads/club/bundesliga/bmg.json';
 import squadBol from '@/data/squads/club/serie-a/bol.json';
@@ -112,6 +113,7 @@ import squadIrl from '@/data/squads/nation/irl.json';
 import squadIrn from '@/data/squads/nation/irn.json';
 import squadIrq from '@/data/squads/nation/irq.json';
 import squadIsl from '@/data/squads/nation/isl.json';
+import squadIsr from '@/data/squads/nation/isr.json';
 import squadIta from '@/data/squads/nation/ita.json';
 import squadJam from '@/data/squads/nation/jam.json';
 import squadJor from '@/data/squads/nation/jor.json';
@@ -132,6 +134,7 @@ import squadLen from '@/data/squads/club/ligue-1/len.json';
 import squadLev from '@/data/squads/club/la-liga/lev.json';
 import squadLhv from '@/data/squads/club/ligue-1/lhv.json';
 import squadLib from '@/data/squads/nation/lib.json';
+import squadLie from '@/data/squads/nation/lie.json';
 import squadLil from '@/data/squads/club/ligue-1/lil.json';
 import squadLiv from '@/data/squads/club/premier-league/liv.json';
 import squadLor from '@/data/squads/club/ligue-1/lor.json';
@@ -152,6 +155,7 @@ import squadMex from '@/data/squads/nation/mex.json';
 import squadMil from '@/data/squads/club/serie-a/mil.json';
 import squadMkd from '@/data/squads/nation/mkd.json';
 import squadMli from '@/data/squads/nation/mli.json';
+import squadMlt from '@/data/squads/nation/mlt.json';
 import squadMne from '@/data/squads/nation/mne.json';
 import squadMng from '@/data/squads/nation/mng.json';
 import squadMon from '@/data/squads/club/ligue-1/mon.json';
@@ -198,6 +202,7 @@ import squadRom from '@/data/squads/club/serie-a/rom.json';
 import squadRou from '@/data/squads/nation/rou.json';
 import squadRsa from '@/data/squads/nation/rsa.json';
 import squadRso from '@/data/squads/club/la-liga/rso.json';
+import squadRus from '@/data/squads/nation/rus.json';
 import squadRvl from '@/data/squads/club/la-liga/rvl.json';
 import squadSas from '@/data/squads/club/serie-a/sas.json';
 import squadScf from '@/data/squads/club/bundesliga/scf.json';
@@ -293,6 +298,7 @@ export const SQUAD_FILES: Record<string, Squad> = {
   bhr: squadBhr as Squad,
   bhu: squadBhu as Squad,
   bih: squadBih as Squad,
+  blr: squadBlr as Squad,
   blz: squadBlz as Squad,
   bmg: squadBmg as Squad,
   bol: squadBol as Squad,
@@ -372,6 +378,7 @@ export const SQUAD_FILES: Record<string, Squad> = {
   irn: squadIrn as Squad,
   irq: squadIrq as Squad,
   isl: squadIsl as Squad,
+  isr: squadIsr as Squad,
   ita: squadIta as Squad,
   jam: squadJam as Squad,
   jor: squadJor as Squad,
@@ -392,6 +399,7 @@ export const SQUAD_FILES: Record<string, Squad> = {
   lev: squadLev as Squad,
   lhv: squadLhv as Squad,
   lib: squadLib as Squad,
+  lie: squadLie as Squad,
   lil: squadLil as Squad,
   liv: squadLiv as Squad,
   lor: squadLor as Squad,
@@ -412,6 +420,7 @@ export const SQUAD_FILES: Record<string, Squad> = {
   mil: squadMil as Squad,
   mkd: squadMkd as Squad,
   mli: squadMli as Squad,
+  mlt: squadMlt as Squad,
   mne: squadMne as Squad,
   mng: squadMng as Squad,
   mon: squadMon as Squad,
@@ -458,6 +467,7 @@ export const SQUAD_FILES: Record<string, Squad> = {
   rou: squadRou as Squad,
   rsa: squadRsa as Squad,
   rso: squadRso as Squad,
+  rus: squadRus as Squad,
   rvl: squadRvl as Squad,
   sas: squadSas as Squad,
   scf: squadScf as Squad,

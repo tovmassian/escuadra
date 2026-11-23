@@ -10,11 +10,11 @@
     "bands": ["#ED2939", "#FFFFFF", "#ED2939"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Austria_national_football_team",
   "members": [
     {
-      "playerId": "alexander-schlager",
+      "playerId": "lukas-jungwirth",
       "no": 1
     },
     {
@@ -62,7 +62,7 @@
       "no": 12
     },
     {
-      "playerId": "lukas-jungwirth",
+      "playerId": "christian-zawieschitzky",
       "no": 13
     },
     {
@@ -78,12 +78,8 @@
       "no": 16
     },
     {
-      "playerId": "yusuf-demir",
+      "playerId": "alexander-schlager",
       "no": 17
-    },
-    {
-      "playerId": "romano-schmid",
-      "no": 18
     },
     {
       "playerId": "raul-florucz",
@@ -108,10 +104,6 @@
     },
     {
       "playerId": "alexander-prass",
-      "no": null
-    },
-    {
-      "playerId": "christian-zawieschitzky",
       "no": null
     },
     {

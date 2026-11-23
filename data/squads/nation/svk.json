@@ -5,16 +5,16 @@
   "season": "2026",
   "primaryColor": "#0B4EA2",
   "secondaryColor": "#EE1C25",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#FFFFFF", "#0B4EA2", "#EE1C25"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Slovakia_national_football_team",
   "members": [
     {
-      "playerId": "martin-dubravka",
+      "playerId": "jakub-surovcik",
       "no": 1
     },
     {
@@ -22,11 +22,11 @@
       "no": 2
     },
     {
-      "playerId": "denis-vavro",
+      "playerId": "david-krcik",
       "no": 3
     },
     {
-      "playerId": "martin-valjent",
+      "playerId": "tobias-paliscak",
       "no": 4
     },
     {
@@ -38,11 +38,11 @@
       "no": 6
     },
     {
-      "playerId": "leo-sauer",
+      "playerId": "nino-marcelli",
       "no": 7
     },
     {
-      "playerId": "ondrej-duda",
+      "playerId": "sebastian-nebyla",
       "no": 8
     },
     {
@@ -50,23 +50,19 @@
       "no": 9
     },
     {
-      "playerId": "tomas-suslov",
-      "no": 10
-    },
-    {
       "playerId": "tomas-bobcek",
       "no": 11
     },
     {
-      "playerId": "dominik-takac",
+      "playerId": "marek-rodak",
       "no": 12
     },
     {
-      "playerId": "adrian-kapralik",
+      "playerId": "mario-sauer",
       "no": 13
     },
     {
-      "playerId": "milan-skriniar",
+      "playerId": "erik-prekop",
       "no": 14
     },
     {
@@ -74,7 +70,7 @@
       "no": 15
     },
     {
-      "playerId": "hancko",
+      "playerId": "timotej-hranica",
       "no": 16
     },
     {
@@ -82,7 +78,7 @@
       "no": 17
     },
     {
-      "playerId": "ivan-schranz",
+      "playerId": "adrian-kapralik",
       "no": 18
     },
     {
@@ -90,35 +86,39 @@
       "no": 19
     },
     {
-      "playerId": "david-duris",
+      "playerId": "artur-gajdos",
       "no": 20
     },
     {
-      "playerId": "erik-prekop",
+      "playerId": "matej-trusa",
       "no": 21
-    },
-    {
-      "playerId": "stanislav-lobotka",
-      "no": 22
-    },
-    {
-      "playerId": "dominik-greif",
-      "no": 23
     },
     {
       "playerId": "adam-obert",
       "no": null
     },
     {
-      "playerId": "hugo-pavek",
+      "playerId": "albert-rusnak",
       "no": null
     },
     {
-      "playerId": "jakub-surovcik",
+      "playerId": "dominik-greif",
       "no": null
     },
     {
-      "playerId": "mario-sauer",
+      "playerId": "dominik-takac",
+      "no": null
+    },
+    {
+      "playerId": "hancko",
+      "no": null
+    },
+    {
+      "playerId": "ludovit-reis",
+      "no": null
+    },
+    {
+      "playerId": "martin-valjent",
       "no": null
     },
     {
@@ -126,11 +126,15 @@
       "no": null
     },
     {
-      "playerId": "michal-fasko",
+      "playerId": "milan-skriniar",
       "no": null
     },
     {
-      "playerId": "nino-marcelli",
+      "playerId": "ondrej-duda",
+      "no": null
+    },
+    {
+      "playerId": "tomas-suslov",
       "no": null
     }
   ]

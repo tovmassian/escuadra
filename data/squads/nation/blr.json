@@ -1,0 +1,118 @@
+{
+  "id": "blr",
+  "kind": "nation",
+  "name": "Belarus",
+  "season": "2026",
+  "primaryColor": "#CE1720",
+  "secondaryColor": "#007C30",
+  "verified": true,
+  "marker": {
+    "bands": ["#CE1720", "#007C30"],
+    "orientation": "horizontal",
+    "weights": [2, 1]
+  },
+  "lastUpdated": "2026-11-23",
+  "source": "https://en.wikipedia.org/wiki/Belarus_national_football_team",
+  "members": [
+    {
+      "playerId": "pavel-pavlyuchenko",
+      "no": 1
+    },
+    {
+      "playerId": "kiryl-pyachenin",
+      "no": 2
+    },
+    {
+      "playerId": "ivan-tikhomirov",
+      "no": 3
+    },
+    {
+      "playerId": "anton-lukashov",
+      "no": 4
+    },
+    {
+      "playerId": "timofey-simanenka",
+      "no": 5
+    },
+    {
+      "playerId": "roman-begunov",
+      "no": 6
+    },
+    {
+      "playerId": "artyom-shumansky",
+      "no": 7
+    },
+    {
+      "playerId": "aleksandr-selyava",
+      "no": 8
+    },
+    {
+      "playerId": "max-ebong",
+      "no": 9
+    },
+    {
+      "playerId": "valery-gromyko",
+      "no": 10
+    },
+    {
+      "playerId": "german-barkovsky",
+      "no": 11
+    },
+    {
+      "playerId": "andrey-kudravets",
+      "no": 12
+    },
+    {
+      "playerId": "kirill-gomanov",
+      "no": 13
+    },
+    {
+      "playerId": "kirill-zinovich",
+      "no": 14
+    },
+    {
+      "playerId": "valery-bocherov",
+      "no": 15
+    },
+    {
+      "playerId": "anton-kovalev",
+      "no": 16
+    },
+    {
+      "playerId": "karen-vardanyan",
+      "no": 17
+    },
+    {
+      "playerId": "vladislav-morozov",
+      "no": 18
+    },
+    {
+      "playerId": "gleb-shevchenko",
+      "no": 19
+    },
+    {
+      "playerId": "zakhar-volkov",
+      "no": 20
+    },
+    {
+      "playerId": "fyodor-lapoukhov",
+      "no": 21
+    },
+    {
+      "playerId": "artem-kontsevoy",
+      "no": 22
+    },
+    {
+      "playerId": "trofim-melnichenko",
+      "no": 23
+    },
+    {
+      "playerId": "aleksandr-svirepa",
+      "no": null
+    },
+    {
+      "playerId": "vitaly-lisakovich",
+      "no": null
+    }
+  ]
+}

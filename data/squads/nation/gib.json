@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [2, 1]
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Gibraltar_national_football_team",
   "members": [
     {
@@ -51,7 +51,7 @@
       "no": 9
     },
     {
-      "playerId": "tjay-de-barr",
+      "playerId": "julian-del-rio",
       "no": 10
     },
     {
@@ -106,10 +106,6 @@
     {
       "playerId": "jaylan-hankins",
       "no": 23
-    },
-    {
-      "playerId": "julian-del-rio",
-      "no": null
     }
   ]
 }

@@ -1,0 +1,137 @@
+{
+  "id": "lie",
+  "kind": "nation",
+  "name": "Liechtenstein",
+  "season": "2026",
+  "primaryColor": "#002B7F",
+  "secondaryColor": "#CE1126",
+  "verified": true,
+  "marker": {
+    "bands": ["#002B7F", "#CE1126"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-11-23",
+  "source": "https://en.wikipedia.org/wiki/Liechtenstein_national_football_team",
+  "members": [
+    {
+      "playerId": "benjamin-buchel",
+      "no": 1
+    },
+    {
+      "playerId": "niklas-beck",
+      "no": 2
+    },
+    {
+      "playerId": "maximilian-goppel",
+      "no": 3
+    },
+    {
+      "playerId": "philipp-ospelt",
+      "no": 4
+    },
+    {
+      "playerId": "severin-schlegel",
+      "no": 5
+    },
+    {
+      "playerId": "andreas-malin",
+      "no": 6
+    },
+    {
+      "playerId": "fabio-luquenotaro",
+      "no": 7
+    },
+    {
+      "playerId": "aron-sele",
+      "no": 8
+    },
+    {
+      "playerId": "ferhat-saglam",
+      "no": 9
+    },
+    {
+      "playerId": "marcel-buchel",
+      "no": 10
+    },
+    {
+      "playerId": "alessandro-lo-russo",
+      "no": 11
+    },
+    {
+      "playerId": "justin-ospelt",
+      "no": 12
+    },
+    {
+      "playerId": "luca-beck",
+      "no": 13
+    },
+    {
+      "playerId": "livio-meier",
+      "no": 14
+    },
+    {
+      "playerId": "andrin-netzer",
+      "no": 15
+    },
+    {
+      "playerId": "bruno-poitner",
+      "no": 16
+    },
+    {
+      "playerId": "liam-kranz",
+      "no": 17
+    },
+    {
+      "playerId": "manuel-mikus",
+      "no": 18
+    },
+    {
+      "playerId": "emanuel-zund",
+      "no": 19
+    },
+    {
+      "playerId": "alessio-hasler",
+      "no": 20
+    },
+    {
+      "playerId": "gabriel-foser",
+      "no": 21
+    },
+    {
+      "playerId": "florian-allgauer",
+      "no": 22
+    },
+    {
+      "playerId": "jens-hofer",
+      "no": 23
+    },
+    {
+      "playerId": "dennis-salanovic",
+      "no": null
+    },
+    {
+      "playerId": "fabio-wolfinger",
+      "no": null
+    },
+    {
+      "playerId": "samuel-cernadas",
+      "no": null
+    },
+    {
+      "playerId": "simon-luchinger",
+      "no": null
+    },
+    {
+      "playerId": "timtiado-oehri",
+      "no": null
+    },
+    {
+      "playerId": "willy-pizzi",
+      "no": null
+    },
+    {
+      "playerId": "yonas-abidi",
+      "no": null
+    }
+  ]
+}

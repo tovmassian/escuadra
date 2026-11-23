@@ -10,7 +10,7 @@
     "bands": ["#FFFFFF", "#0038A8"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Uruguay_national_football_team",
   "members": [
     {
@@ -99,7 +99,7 @@
       "no": 21
     },
     {
-      "playerId": "joaquin-piquerez",
+      "playerId": "bruno-damiani",
       "no": 22
     },
     {
@@ -119,7 +119,7 @@
       "no": 26
     },
     {
-      "playerId": "bruno-damiani",
+      "playerId": "joaquin-piquerez",
       "no": null
     },
     {

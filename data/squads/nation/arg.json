@@ -5,12 +5,12 @@
   "season": "2026",
   "primaryColor": "#75AADB",
   "secondaryColor": "#FFFFFF",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Argentina_national_football_team",
   "members": [
     {
@@ -26,7 +26,7 @@
       "no": 3
     },
     {
-      "playerId": "agustin-giay",
+      "playerId": "montiel",
       "no": 4
     },
     {
@@ -38,7 +38,7 @@
       "no": 6
     },
     {
-      "playerId": "de-paul",
+      "playerId": "simeone",
       "no": 7
     },
     {
@@ -50,11 +50,7 @@
       "no": 9
     },
     {
-      "playerId": "messi",
-      "no": 10
-    },
-    {
-      "playerId": "giovanni-lo-celso",
+      "playerId": "almada",
       "no": 11
     },
     {
@@ -62,24 +58,15 @@
       "no": 12
     },
     {
-      "playerId": "romero",
-      "no": 13,
-      "captain": true
-    },
-    {
       "playerId": "palacios",
       "no": 14
     },
     {
-      "playerId": "gonzalez",
-      "no": 15
-    },
-    {
-      "playerId": "gianluca-prestianni",
+      "playerId": "maximo-perrone",
       "no": 16
     },
     {
-      "playerId": "simeone",
+      "playerId": "gianluca-prestianni",
       "no": 17
     },
     {
@@ -87,7 +74,7 @@
       "no": 18
     },
     {
-      "playerId": "otamendi",
+      "playerId": "agustin-giay",
       "no": 19
     },
     {
@@ -97,10 +84,6 @@
     {
       "playerId": "lopez",
       "no": 21
-    },
-    {
-      "playerId": "lautaro",
-      "no": 22
     },
     {
       "playerId": "e-martinez",
@@ -115,7 +98,7 @@
       "no": 25
     },
     {
-      "playerId": "santiago-simon",
+      "playerId": "mariano-troilo",
       "no": 26
     },
     {
@@ -135,19 +118,11 @@
       "no": 30
     },
     {
-      "playerId": "leonel-flores",
-      "no": 31
-    },
-    {
-      "playerId": "tomas-palacios",
-      "no": 32
-    },
-    {
       "playerId": "roman-vega",
       "no": 33
     },
     {
-      "playerId": "valentin-gomez",
+      "playerId": "aaron-anselmino",
       "no": 34
     }
   ]

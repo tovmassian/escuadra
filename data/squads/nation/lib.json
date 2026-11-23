@@ -11,7 +11,7 @@
     "orientation": "horizontal",
     "weights": [1, 2, 1]
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Lebanon_national_football_team",
   "members": [
     {
@@ -41,14 +41,6 @@
     {
       "playerId": "reda-khadra",
       "no": 7
-    },
-    {
-      "playerId": "jimmy-kazan",
-      "no": 8
-    },
-    {
-      "playerId": "leonardo-shahin",
-      "no": 9
     },
     {
       "playerId": "husseyn-chakroun",
