@@ -10,7 +10,7 @@
     "bands": ["#006A4E", "#F42A41", "#006A4E"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Bangladesh_national_football_team",
   "members": [
     {
@@ -115,16 +115,16 @@
       "no": 25
     },
     {
+      "playerId": "mahe-khan",
+      "no": 26
+    },
+    {
       "playerId": "mohammad-ibrahim",
       "no": 27
     },
     {
       "playerId": "minhazul-karim-shadin",
       "no": 28
-    },
-    {
-      "playerId": "mahe-khan",
-      "no": null
     }
   ]
 }

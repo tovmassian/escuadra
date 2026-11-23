@@ -1,0 +1,129 @@
+{
+  "id": "mlt",
+  "kind": "nation",
+  "name": "Malta",
+  "season": "2026",
+  "primaryColor": "#CF142B",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#CF142B"],
+    "orientation": "vertical"
+  },
+  "lastUpdated": "2026-11-23",
+  "source": "https://en.wikipedia.org/wiki/Malta_national_football_team",
+  "members": [
+    {
+      "playerId": "henry-bonello",
+      "no": 1
+    },
+    {
+      "playerId": "carlo-zammit-lonardelli",
+      "no": 2
+    },
+    {
+      "playerId": "ryan-camenzuli",
+      "no": 3
+    },
+    {
+      "playerId": "gabriel-mentz",
+      "no": 4
+    },
+    {
+      "playerId": "kurt-shaw",
+      "no": 5
+    },
+    {
+      "playerId": "matthew-guillaumier",
+      "no": 6
+    },
+    {
+      "playerId": "joseph-mbong",
+      "no": 7
+    },
+    {
+      "playerId": "paul-mbong",
+      "no": 8
+    },
+    {
+      "playerId": "brandon-paiber",
+      "no": 9
+    },
+    {
+      "playerId": "teddy-teuma",
+      "no": 10
+    },
+    {
+      "playerId": "irvin-cardona",
+      "no": 11
+    },
+    {
+      "playerId": "james-sissons",
+      "no": 12
+    },
+    {
+      "playerId": "enrico-pepe",
+      "no": 13
+    },
+    {
+      "playerId": "kevin-cannavo",
+      "no": 14
+    },
+    {
+      "playerId": "myles-beerman",
+      "no": 15
+    },
+    {
+      "playerId": "dylan-ciappara",
+      "no": 16
+    },
+    {
+      "playerId": "basil-tuma",
+      "no": 17
+    },
+    {
+      "playerId": "steve-pisani",
+      "no": 18
+    },
+    {
+      "playerId": "keyon-ewurum",
+      "no": 19
+    },
+    {
+      "playerId": "ilyas-chouaref",
+      "no": 20
+    },
+    {
+      "playerId": "juan-carlos-corbalan",
+      "no": 21
+    },
+    {
+      "playerId": "zach-muscat",
+      "no": 22
+    },
+    {
+      "playerId": "yannick-yankam",
+      "no": 23
+    },
+    {
+      "playerId": "alexander-satariano",
+      "no": null
+    },
+    {
+      "playerId": "andrea-zammit",
+      "no": null
+    },
+    {
+      "playerId": "jake-azzopardi",
+      "no": null
+    },
+    {
+      "playerId": "mattias-ellul",
+      "no": null
+    },
+    {
+      "playerId": "rashed-altumi",
+      "no": null
+    }
+  ]
+}

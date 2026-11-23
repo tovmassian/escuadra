@@ -10,7 +10,7 @@
     "bands": ["#169B62", "#FFFFFF", "#FF883E"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Republic_of_Ireland_national_football_team",
   "members": [
     {
@@ -18,7 +18,7 @@
       "no": 1
     },
     {
-      "playerId": "jimmy-dunne",
+      "playerId": "james-abankwah",
       "no": 2
     },
     {
@@ -26,7 +26,7 @@
       "no": 3
     },
     {
-      "playerId": "bosun-lawal",
+      "playerId": "dara-oshea",
       "no": 4
     },
     {
@@ -62,7 +62,7 @@
       "no": 12
     },
     {
-      "playerId": "joel-bagan",
+      "playerId": "rocco-vata",
       "no": 13
     },
     {
@@ -86,7 +86,7 @@
       "no": 18
     },
     {
-      "playerId": "owen-elding",
+      "playerId": "harvey-vale",
       "no": 19
     },
     {
@@ -94,15 +94,15 @@
       "no": 20
     },
     {
-      "playerId": "rocco-vata",
+      "playerId": "bosun-lawal",
       "no": 21
     },
     {
-      "playerId": "killian-phillips",
+      "playerId": "jimmy-dunne",
       "no": 22
     },
     {
-      "playerId": "josh-keeley",
+      "playerId": "mark-travers",
       "no": 23
     }
   ]

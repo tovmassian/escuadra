@@ -5,24 +5,49 @@
   "season": "2026",
   "primaryColor": "#FFCC00",
   "secondaryColor": "#CF142B",
-  "verified": true,
+  "verified": false,
   "marker": {
     "bands": ["#FFCC00", "#00247D", "#CF142B"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Venezuela_national_football_team",
   "members": [
     {
-      "playerId": "carlos-vivas",
+      "playerId": "jose-contreras",
+      "no": 1
+    },
+    {
+      "playerId": "nahuel-ferraresi",
+      "no": 2
+    },
+    {
+      "playerId": "yordan-osorio",
       "no": 3
     },
     {
-      "playerId": "daniel-pereira",
+      "playerId": "aramburu",
+      "no": 4
+    },
+    {
+      "playerId": "herrera",
+      "no": 6
+    },
+    {
+      "playerId": "cristian-casseres",
+      "no": 8,
+      "captain": true
+    },
+    {
+      "playerId": "jesus-ramirez",
+      "no": 9
+    },
+    {
+      "playerId": "telasco-segovia",
       "no": 10
     },
     {
-      "playerId": "jovanny-bolivar",
+      "playerId": "jefferson-savarino",
       "no": 11
     },
     {
@@ -30,15 +55,23 @@
       "no": 12
     },
     {
-      "playerId": "delvin-alfonzo",
+      "playerId": "luis-balbo",
+      "no": 13
+    },
+    {
+      "playerId": "christian-makoun",
+      "no": 14
+    },
+    {
+      "playerId": "eduard-bello",
       "no": 15
     },
     {
-      "playerId": "wikelman-carmona",
+      "playerId": "matias-lacava",
       "no": 16
     },
     {
-      "playerId": "edson-tortolero",
+      "playerId": "daniel-pereira",
       "no": 17
     },
     {
@@ -46,7 +79,11 @@
       "no": 18
     },
     {
-      "playerId": "bryan-castillo",
+      "playerId": "kevin-kelsy",
+      "no": 19
+    },
+    {
+      "playerId": "luifer-hernandez",
       "no": 20
     },
     {
@@ -54,36 +91,24 @@
       "no": 21
     },
     {
-      "playerId": "joel-graterol",
+      "playerId": "miguel-silva",
       "no": 22
     },
     {
-      "playerId": "yerwin-sulbaran",
+      "playerId": "adrian-cova",
       "no": 23
     },
     {
-      "playerId": "yordan-osorio",
+      "playerId": "adrian-palacios",
       "no": 24
     },
     {
-      "playerId": "andrusw-araujo",
+      "playerId": "jeferson-caraballo",
       "no": 25
     },
     {
-      "playerId": "juan-david-sanchez",
-      "no": 26
-    },
-    {
-      "playerId": "bianneider-tamayo",
+      "playerId": "robinson-flores",
       "no": 27
-    },
-    {
-      "playerId": "roman-davis",
-      "no": 28
-    },
-    {
-      "playerId": "nicola-profeta",
-      "no": 30
     },
     {
       "playerId": "frankarlos-benitez",

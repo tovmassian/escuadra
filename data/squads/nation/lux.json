@@ -10,7 +10,7 @@
     "bands": ["#ED2939", "#FFFFFF", "#00A1DE"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-13",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Luxembourg_national_football_team",
   "members": [
     {
@@ -20,6 +20,10 @@
     {
       "playerId": "eldin-dzogovic",
       "no": 2
+    },
+    {
+      "playerId": "enes-mahmutovic",
+      "no": 3
     },
     {
       "playerId": "florian-bohnert",
@@ -58,10 +62,6 @@
       "no": 12
     },
     {
-      "playerId": "dirk-carlson",
-      "no": 13
-    },
-    {
       "playerId": "eric-veiga",
       "no": 14
     },
@@ -70,7 +70,7 @@
       "no": 15
     },
     {
-      "playerId": "tim-kips",
+      "playerId": "miguel-goncalves",
       "no": 16
     },
     {
@@ -78,11 +78,16 @@
       "no": 17
     },
     {
+      "playerId": "laurent-jans",
+      "no": 18,
+      "captain": true
+    },
+    {
       "playerId": "mathias-olesen",
       "no": 19
     },
     {
-      "playerId": "miguel-goncalves",
+      "playerId": "patrick-macedo",
       "no": 20
     },
     {
@@ -90,11 +95,15 @@
       "no": 21
     },
     {
+      "playerId": "tim-hall",
+      "no": 22
+    },
+    {
       "playerId": "lucas-fox",
       "no": 23
     },
     {
-      "playerId": "enes-mahmutovic",
+      "playerId": "dirk-carlson",
       "no": null
     },
     {
@@ -102,16 +111,7 @@
       "no": null
     },
     {
-      "playerId": "laurent-jans",
-      "no": null,
-      "captain": true
-    },
-    {
-      "playerId": "patrick-macedo",
-      "no": null
-    },
-    {
-      "playerId": "tim-hall",
+      "playerId": "tim-kips",
       "no": null
     }
   ]

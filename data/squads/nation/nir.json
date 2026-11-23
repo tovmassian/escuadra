@@ -11,7 +11,7 @@
     "orientation": "vertical",
     "weights": [2, 1, 2]
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Northern_Ireland_national_football_team",
   "members": [
     {
@@ -51,7 +51,7 @@
       "no": 9
     },
     {
-      "playerId": "jamie-donley",
+      "playerId": "eoin-kenny",
       "no": 10
     },
     {
@@ -107,7 +107,7 @@
       "no": 23
     },
     {
-      "playerId": "eoin-kenny",
+      "playerId": "jamie-donley",
       "no": null
     }
   ]

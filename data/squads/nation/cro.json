@@ -10,7 +10,7 @@
     "bands": ["#FF0000", "#FFFFFF", "#171796"],
     "orientation": "horizontal"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Croatia_national_football_team",
   "members": [
     {
@@ -105,14 +105,6 @@
     {
       "playerId": "dominik-kotarski",
       "no": 23
-    },
-    {
-      "playerId": "l-sucic",
-      "no": null
-    },
-    {
-      "playerId": "nikola-vlasic",
-      "no": null
     }
   ]
 }

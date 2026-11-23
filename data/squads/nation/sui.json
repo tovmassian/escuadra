@@ -10,7 +10,7 @@
     "bands": ["#FF0000", "#FFFFFF"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-10-21",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Switzerland_national_football_team",
   "members": [
     {
@@ -30,15 +30,15 @@
       "no": 4
     },
     {
-      "playerId": "akanji",
+      "playerId": "roggerio-nyakossi",
       "no": 5
     },
     {
-      "playerId": "vincent-sierro",
+      "playerId": "denis-zakaria",
       "no": 6
     },
     {
-      "playerId": "joel-monteiro",
+      "playerId": "breel-embolo",
       "no": 7
     },
     {
@@ -46,7 +46,7 @@
       "no": 8
     },
     {
-      "playerId": "johan-manzambi",
+      "playerId": "samuel-ballet",
       "no": 9
     },
     {
@@ -54,7 +54,7 @@
       "no": 10
     },
     {
-      "playerId": "dan-ndoye",
+      "playerId": "winsley-boteli",
       "no": 11
     },
     {
@@ -86,7 +86,7 @@
       "no": 18
     },
     {
-      "playerId": "winsley-boteli",
+      "playerId": "cedric-itten",
       "no": 19
     },
     {
@@ -106,11 +106,23 @@
       "no": 23
     },
     {
-      "playerId": "anthony-racioppi",
+      "playerId": "akanji",
       "no": null
     },
     {
-      "playerId": "cedric-itten",
+      "playerId": "dan-ndoye",
+      "no": null
+    },
+    {
+      "playerId": "johan-manzambi",
+      "no": null
+    },
+    {
+      "playerId": "ruben-vargas",
+      "no": null
+    },
+    {
+      "playerId": "silas-huber",
       "no": null
     }
   ]

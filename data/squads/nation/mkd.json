@@ -10,7 +10,7 @@
     "bands": ["#D82126", "#F8E92E", "#D82126"],
     "orientation": "vertical"
   },
-  "lastUpdated": "2026-11-16",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/North_Macedonia_national_football_team",
   "members": [
     {
@@ -22,15 +22,15 @@
       "no": 2
     },
     {
-      "playerId": "sebastian-herrera",
+      "playerId": "stefan-despotovski",
       "no": 3
     },
     {
-      "playerId": "mario-mladenovski",
+      "playerId": "nikola-serafimov",
       "no": 4
     },
     {
-      "playerId": "imran-fetai",
+      "playerId": "mario-mladenovski",
       "no": 5
     },
     {
@@ -95,7 +95,7 @@
       "no": 20
     },
     {
-      "playerId": "stefan-despotovski",
+      "playerId": "jani-atanasov",
       "no": 21
     },
     {
@@ -111,11 +111,11 @@
       "no": null
     },
     {
-      "playerId": "jani-atanasov",
+      "playerId": "imran-fetai",
       "no": null
     },
     {
-      "playerId": "nikola-serafimov",
+      "playerId": "sebastian-herrera",
       "no": null
     }
   ]

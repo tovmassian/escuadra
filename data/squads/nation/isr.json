@@ -1,0 +1,114 @@
+{
+  "id": "isr",
+  "kind": "nation",
+  "name": "Israel",
+  "season": "2026",
+  "primaryColor": "#0038B8",
+  "secondaryColor": "#FFFFFF",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#0038B8", "#FFFFFF", "#0038B8", "#FFFFFF"],
+    "orientation": "horizontal",
+    "weights": [1, 2, 5, 2, 1]
+  },
+  "lastUpdated": "2026-11-23",
+  "source": "https://en.wikipedia.org/wiki/Israel_national_football_team",
+  "members": [
+    {
+      "playerId": "daniel-peretz",
+      "no": 1
+    },
+    {
+      "playerId": "eli-dasa",
+      "no": 2
+    },
+    {
+      "playerId": "roy-revivo",
+      "no": 3
+    },
+    {
+      "playerId": "noam-shtaifman",
+      "no": 4
+    },
+    {
+      "playerId": "idan-nachmias",
+      "no": 5
+    },
+    {
+      "playerId": "omri-gandelman",
+      "no": 6
+    },
+    {
+      "playerId": "yarden-shua",
+      "no": 7
+    },
+    {
+      "playerId": "dor-peretz",
+      "no": 8
+    },
+    {
+      "playerId": "dor-turgeman",
+      "no": 9
+    },
+    {
+      "playerId": "manor-solomon",
+      "no": 10
+    },
+    {
+      "playerId": "oscar-gloukh",
+      "no": 11
+    },
+    {
+      "playerId": "zahi-ahmed",
+      "no": 12
+    },
+    {
+      "playerId": "nikita-stoinov",
+      "no": 13
+    },
+    {
+      "playerId": "guy-mizrahi",
+      "no": 14
+    },
+    {
+      "playerId": "yarin-levi",
+      "no": 15
+    },
+    {
+      "playerId": "gabi-kanichowsky",
+      "no": 16
+    },
+    {
+      "playerId": "niv-yehoshua",
+      "no": 17
+    },
+    {
+      "playerId": "omri-glazer",
+      "no": 18
+    },
+    {
+      "playerId": "ethan-azoulay",
+      "no": 19
+    },
+    {
+      "playerId": "liel-abada",
+      "no": 20
+    },
+    {
+      "playerId": "idan-toklomati",
+      "no": 21
+    },
+    {
+      "playerId": "ilay-feingold",
+      "no": 22
+    },
+    {
+      "playerId": "assaf-tzur",
+      "no": 23
+    },
+    {
+      "playerId": "raz-shlomo",
+      "no": null
+    }
+  ]
+}

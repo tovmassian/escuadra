@@ -1,0 +1,125 @@
+{
+  "id": "rus",
+  "kind": "nation",
+  "name": "Russia",
+  "season": "2026",
+  "primaryColor": "#0039A6",
+  "secondaryColor": "#D52B1E",
+  "verified": true,
+  "marker": {
+    "bands": ["#FFFFFF", "#0039A6", "#D52B1E"],
+    "orientation": "horizontal"
+  },
+  "lastUpdated": "2026-11-23",
+  "source": "https://en.wikipedia.org/wiki/Russia_national_football_team",
+  "members": [
+    {
+      "playerId": "safonov",
+      "no": 1
+    },
+    {
+      "playerId": "ilya-vakhaniya",
+      "no": 2
+    },
+    {
+      "playerId": "kirill-danilov",
+      "no": 3
+    },
+    {
+      "playerId": "viktor-melyokhin",
+      "no": 4
+    },
+    {
+      "playerId": "andrei-langovich",
+      "no": 5
+    },
+    {
+      "playerId": "aleksei-mironov",
+      "no": 6
+    },
+    {
+      "playerId": "nikolay-komlichenko",
+      "no": 7
+    },
+    {
+      "playerId": "aleksey-batrakov",
+      "no": 8
+    },
+    {
+      "playerId": "kirill-glebov",
+      "no": 9
+    },
+    {
+      "playerId": "danil-glebov",
+      "no": 10
+    },
+    {
+      "playerId": "aleksei-miranchuk",
+      "no": 11
+    },
+    {
+      "playerId": "stanislav-agkatsev",
+      "no": 12
+    },
+    {
+      "playerId": "turpalali-ibishev",
+      "no": 14
+    },
+    {
+      "playerId": "matvey-kislyak",
+      "no": 15
+    },
+    {
+      "playerId": "maksim-borisko",
+      "no": 16
+    },
+    {
+      "playerId": "lechi-sadulayev",
+      "no": 17
+    },
+    {
+      "playerId": "konstantin-tyukavin",
+      "no": 18
+    },
+    {
+      "playerId": "artyom-karpukas",
+      "no": 19
+    },
+    {
+      "playerId": "yevgeny-morozov",
+      "no": 20
+    },
+    {
+      "playerId": "yaroslav-gladyshev",
+      "no": 21
+    },
+    {
+      "playerId": "mingiyan-beveyev",
+      "no": 22
+    },
+    {
+      "playerId": "danil-krugovoy",
+      "no": 23
+    },
+    {
+      "playerId": "aleksandr-silyanov",
+      "no": 24
+    },
+    {
+      "playerId": "danil-prutsev",
+      "no": 25
+    },
+    {
+      "playerId": "ivan-oblyakov",
+      "no": 27
+    },
+    {
+      "playerId": "maksim-osipenko",
+      "no": null
+    },
+    {
+      "playerId": "nail-umyarov",
+      "no": null
+    }
+  ]
+}

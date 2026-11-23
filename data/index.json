@@ -77,12 +77,12 @@
     "season": "2026",
     "primaryColor": "#10069F",
     "secondaryColor": "#D50032",
-    "verified": true,
+    "verified": false,
     "marker": {
       "bands": ["#10069F", "#FEDD00", "#D50032"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "ang",
@@ -106,12 +106,12 @@
     "season": "2026",
     "primaryColor": "#75AADB",
     "secondaryColor": "#FFFFFF",
-    "verified": true,
+    "verified": false,
     "marker": {
       "bands": ["#75AADB", "#FFFFFF", "#75AADB"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "arm",
@@ -208,12 +208,12 @@
     "season": "2026/27",
     "primaryColor": "#EE2523",
     "secondaryColor": "#FFFFFF",
-    "verified": true,
+    "verified": false,
     "marker": {
       "bands": ["#EE2523", "#FFFFFF"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-16",
+    "lastUpdated": "2026-11-23",
     "league": "la-liga"
   },
   {
@@ -243,7 +243,7 @@
       "bands": ["#00008B", "#FFFFFF", "#00008B"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "aut",
@@ -257,7 +257,7 @@
       "bands": ["#ED2939", "#FFFFFF", "#ED2939"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "aux",
@@ -296,12 +296,12 @@
     "season": "2026",
     "primaryColor": "#00B5E2",
     "secondaryColor": "#509E2F",
-    "verified": true,
+    "verified": false,
     "marker": {
       "bands": ["#00B5E2", "#EF3340", "#509E2F"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "b04",
@@ -330,7 +330,7 @@
       "bands": ["#006A4E", "#F42A41", "#006A4E"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "bar",
@@ -477,7 +477,22 @@
       "orientation": "vertical",
       "weights": [2, 2, 1]
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
+  },
+  {
+    "id": "blr",
+    "kind": "nation",
+    "name": "Belarus",
+    "season": "2026",
+    "primaryColor": "#CE1720",
+    "secondaryColor": "#007C30",
+    "verified": true,
+    "marker": {
+      "bands": ["#CE1720", "#007C30"],
+      "orientation": "horizontal",
+      "weights": [2, 1]
+    },
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "blz",
@@ -901,7 +916,7 @@
       "bands": ["#FF0000", "#FFFFFF", "#171796"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "cry",
@@ -1295,7 +1310,7 @@
       "orientation": "horizontal",
       "weights": [7, 1, 2, 1, 7]
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "ful",
@@ -1398,7 +1413,7 @@
       "orientation": "horizontal",
       "weights": [2, 1]
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "gre",
@@ -1412,7 +1427,7 @@
       "bands": ["#0D5EAF", "#FFFFFF"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "grn",
@@ -1585,7 +1600,7 @@
       "bands": ["#169B62", "#FFFFFF", "#FF883E"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "irn",
@@ -1628,7 +1643,22 @@
       "orientation": "horizontal",
       "weights": [7, 1, 2, 1, 7]
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-23"
+  },
+  {
+    "id": "isr",
+    "kind": "nation",
+    "name": "Israel",
+    "season": "2026",
+    "primaryColor": "#0038B8",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#0038B8", "#FFFFFF", "#0038B8", "#FFFFFF"],
+      "orientation": "horizontal",
+      "weights": [1, 2, 5, 2, 1]
+    },
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "ita",
@@ -1672,7 +1702,7 @@
       "orientation": "vertical",
       "weights": [1, 2, 2, 2]
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "jpn",
@@ -1686,7 +1716,7 @@
       "bands": ["#FFFFFF", "#BC002D", "#FFFFFF"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "juv",
@@ -1817,7 +1847,7 @@
       "orientation": "horizontal",
       "weights": [1, 2, 1]
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "lca",
@@ -1921,7 +1951,21 @@
       "orientation": "horizontal",
       "weights": [1, 2, 1]
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
+  },
+  {
+    "id": "lie",
+    "kind": "nation",
+    "name": "Liechtenstein",
+    "season": "2026",
+    "primaryColor": "#002B7F",
+    "secondaryColor": "#CE1126",
+    "verified": true,
+    "marker": {
+      "bands": ["#002B7F", "#CE1126"],
+      "orientation": "horizontal"
+    },
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "lil",
@@ -1994,7 +2038,7 @@
       "bands": ["#ED2939", "#FFFFFF", "#00A1DE"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "lva",
@@ -2082,7 +2126,7 @@
       "bands": ["#FFFFFF", "#009DDC"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-09-09",
+    "lastUpdated": "2026-11-23",
     "league": "ligue-1"
   },
   {
@@ -2136,7 +2180,7 @@
     "season": "2026",
     "primaryColor": "#D21034",
     "secondaryColor": "#007E3A",
-    "verified": true,
+    "verified": false,
     "marker": {
       "bands": ["#D21034", "#007E3A", "#D21034"],
       "orientation": "vertical"
@@ -2199,7 +2243,7 @@
       "bands": ["#D82126", "#F8E92E", "#D82126"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "mli",
@@ -2216,6 +2260,20 @@
     "lastUpdated": "2026-10-20"
   },
   {
+    "id": "mlt",
+    "kind": "nation",
+    "name": "Malta",
+    "season": "2026",
+    "primaryColor": "#CF142B",
+    "secondaryColor": "#FFFFFF",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#CF142B"],
+      "orientation": "vertical"
+    },
+    "lastUpdated": "2026-11-23"
+  },
+  {
     "id": "mne",
     "kind": "nation",
     "name": "Montenegro",
@@ -2227,7 +2285,7 @@
       "bands": ["#E30000", "#FFC000", "#E30000"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "mng",
@@ -2241,7 +2299,7 @@
       "bands": ["#DA2031", "#0066B2", "#DA2031"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "mon",
@@ -2488,7 +2546,7 @@
       "orientation": "vertical",
       "weights": [2, 1, 2]
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "nor",
@@ -2663,7 +2721,7 @@
       "orientation": "vertical",
       "weights": [1, 2, 2, 2]
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "pol",
@@ -2677,7 +2735,7 @@
       "bands": ["#FFFFFF", "#DC143C"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-18"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "por",
@@ -2852,12 +2910,12 @@
     "season": "2026",
     "primaryColor": "#002B7F",
     "secondaryColor": "#CE1126",
-    "verified": true,
+    "verified": false,
     "marker": {
       "bands": ["#002B7F", "#FCD116", "#CE1126"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "rsa",
@@ -2872,7 +2930,7 @@
       "orientation": "horizontal",
       "weights": [3, 1, 2, 1, 3]
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "rso",
@@ -2888,6 +2946,20 @@
     },
     "lastUpdated": "2026-09-02",
     "league": "la-liga"
+  },
+  {
+    "id": "rus",
+    "kind": "nation",
+    "name": "Russia",
+    "season": "2026",
+    "primaryColor": "#0039A6",
+    "secondaryColor": "#D52B1E",
+    "verified": true,
+    "marker": {
+      "bands": ["#FFFFFF", "#0039A6", "#D52B1E"],
+      "orientation": "horizontal"
+    },
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "rvl",
@@ -2975,7 +3047,7 @@
       "bands": ["#00853F", "#FDEF42", "#E31B23"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "sev",
@@ -3076,7 +3148,7 @@
       "bands": ["#0047AB", "#FFFFFF", "#0047AB"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "sol",
@@ -3105,7 +3177,7 @@
       "bands": ["#C6363C", "#0C4076", "#FFFFFF"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "sri",
@@ -3164,7 +3236,7 @@
       "bands": ["#FF0000", "#FFFFFF"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "sun",
@@ -3203,12 +3275,12 @@
     "season": "2026",
     "primaryColor": "#0B4EA2",
     "secondaryColor": "#EE1C25",
-    "verified": true,
+    "verified": false,
     "marker": {
       "bands": ["#FFFFFF", "#0B4EA2", "#EE1C25"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-21"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "svn",
@@ -3444,7 +3516,7 @@
       "bands": ["#E70013", "#FFFFFF", "#E70013"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "tur",
@@ -3458,7 +3530,7 @@
       "bands": ["#E30A17", "#FFFFFF", "#E30A17"],
       "orientation": "vertical"
     },
-    "lastUpdated": "2026-11-13"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "uae",
@@ -3530,7 +3602,7 @@
       "bands": ["#FFFFFF", "#0038A8"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-11-16"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "usa",
@@ -3582,12 +3654,12 @@
     "season": "2026",
     "primaryColor": "#FFCC00",
     "secondaryColor": "#CF142B",
-    "verified": true,
+    "verified": false,
     "marker": {
       "bands": ["#FFCC00", "#00247D", "#CF142B"],
       "orientation": "horizontal"
     },
-    "lastUpdated": "2026-10-20"
+    "lastUpdated": "2026-11-23"
   },
   {
     "id": "ver",

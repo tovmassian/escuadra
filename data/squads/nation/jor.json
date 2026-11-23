@@ -11,15 +11,15 @@
     "orientation": "vertical",
     "weights": [1, 2, 2, 2]
   },
-  "lastUpdated": "2026-10-20",
+  "lastUpdated": "2026-11-23",
   "source": "https://en.wikipedia.org/wiki/Jordan_national_football_team",
   "members": [
     {
-      "playerId": "yazeed-abulaila",
+      "playerId": "ahmad-aljuaidi",
       "no": 1
     },
     {
-      "playerId": "anas-badawi",
+      "playerId": "mohammad-abu-hashish",
       "no": 2
     },
     {
@@ -27,7 +27,7 @@
       "no": 3
     },
     {
-      "playerId": "hadi-alhourani",
+      "playerId": "ahmad-abdrabbo",
       "no": 4
     },
     {
@@ -59,7 +59,7 @@
       "no": 11
     },
     {
-      "playerId": "ahmad-aljuaidi",
+      "playerId": "murad-alfaluji",
       "no": 12
     },
     {
@@ -68,7 +68,7 @@
       "captain": true
     },
     {
-      "playerId": "ahmad-ersan",
+      "playerId": "anas-badawi",
       "no": 14
     },
     {
@@ -84,14 +84,6 @@
       "no": 17
     },
     {
-      "playerId": "tammer-bany-odeh",
-      "no": 18
-    },
-    {
-      "playerId": "saed-alrosan",
-      "no": 19
-    },
-    {
       "playerId": "mohannad-abu-taha",
       "no": 20
     },
@@ -104,7 +96,7 @@
       "no": 22
     },
     {
-      "playerId": "ihsan-haddad",
+      "playerId": "mohammad-abu-ghoush",
       "no": 23
     },
     {
@@ -112,7 +104,7 @@
       "no": 24
     },
     {
-      "playerId": "mahmoud-shawkat",
+      "playerId": "ghaith-almadadha",
       "no": 25
     },
     {
@@ -120,8 +112,8 @@
       "no": 26
     },
     {
-      "playerId": "anas-alawadat",
-      "no": 28
+      "playerId": "hadi-alhourani",
+      "no": null
     }
   ]
 }
